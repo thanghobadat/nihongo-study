@@ -33,18 +33,9 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Mock endpoint for lessons list (to be expanded with database)
-app.get('/api/lessons', (req, res) => {
-  res.json([
-    {
-      id: 'bai-1',
-      title: 'Bài 1: Hajimemashite (Rất hân hạnh được làm quen)',
-      description: 'Học cách chào hỏi cơ bản, tự giới thiệu bản thân và từ vựng cơ bản.',
-      vocabularyCount: 15,
-      grammarPoints: 3
-    }
-  ]);
-});
+// Mount Routes
+app.use('/api/user', require('./routes/user'));
+app.use('/api/admin', require('./routes/admin'));
 
 // Global Error Handler
 app.use((err, req, res, next) => {
@@ -52,6 +43,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend server is running on port ${PORT}`);
-});
+// Avoid port binding issue during tests
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Backend server is running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
