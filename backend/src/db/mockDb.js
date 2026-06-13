@@ -9659,7 +9659,8 @@ const kaiwaDialog = [
     "speaker": "ナム",
     "japanese": "はじめまして。私は ナム です。ベトナム からきました。どうぞよろしく。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Rất vui được gặp bạn. Tôi là ナム. Tôi đến từ nước ベトナム. Rất mong nhận được sự giúp đỡ."
+    "vietnamese": "Rất vui được gặp bạn. Tôi là ナム. Tôi đến từ nước ベトナム. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 2,
@@ -9667,15 +9668,17 @@ const kaiwaDialog = [
     "speaker": "ミラー",
     "japanese": "はじめまして。ミラー です。こちらこそどうぞよろしく。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Rất vui được gặp bạn. Tôi là ミラー. Chính tôi mới là người cần nhận sự giúp đỡ."
+    "vietnamese": "Rất vui được gặp bạn. Tôi là ミラー. Chính tôi mới là người cần nhận sự giúp đỡ.",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 3,
     "lesson_id": 1,
     "speaker": "ナム",
-    "japanese": "失礼 nhưng、ミラーさんは おいくつ（何歳）ですか。",
+    "japanese": "失礼ですが、ミラーさんは おいくつ（何歳）ですか。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Xin lỗi bạn ミラー mấy tuổi rồi?"
+    "vietnamese": "Xin lỗi bạn ミラー mấy tuổi rồi?",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 4,
@@ -9683,7 +9686,8 @@ const kaiwaDialog = [
     "speaker": "ミラー",
     "japanese": "私は 30歳 です。ナムさんは 学生 ですか。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Tôi 30 tuổi. Có phải bạn ナム là 学生 không?"
+    "vietnamese": "Tôi 30 tuổi. Có phải bạn ナム là 学生 không?",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 5,
@@ -9691,7 +9695,8 @@ const kaiwaDialog = [
     "speaker": "ナム",
     "japanese": "いいえ、私は 学生 じゃありません。エンジニア です。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Không, tôi không phải là 学生. Tôi là kỹ sư."
+    "vietnamese": "Không, tôi không phải là 学生. Tôi là kỹ sư.",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 6,
@@ -9699,7 +9704,8 @@ const kaiwaDialog = [
     "speaker": "ナム",
     "japanese": "あの人は どなた ですか。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Người kia là vị nào vậy?"
+    "vietnamese": "Người kia là vị nào vậy?",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 7,
@@ -9707,7 +9713,8 @@ const kaiwaDialog = [
     "speaker": "ミラー",
     "japanese": "あの人は サントスさん です。ブラジル人 です。",
     "romaji": "🙈 Đang ẩn (Tích chọn hiện)",
-    "vietnamese": "Người kia là anh Santos. Anh ấy là người Brazil."
+    "vietnamese": "Người kia là anh Santos. Anh ấy là người Brazil.",
+    "topic": "Chủ đề 1: Tự giới thiệu bản thân"
   },
   {
     "id": 8,
@@ -9732,6 +9739,186 @@ const kaiwaDialog = [
     "japanese": "ワン",
     "romaji": "",
     "vietnamese": ""
+  },
+  {
+    "id": 1001,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "ミラーさん、こちらは サントスさん です。",
+    "romaji": "Mira- san, kochira wa Santosu san desu.",
+    "vietnamese": "Anh Miller, đây là anh Santos.",
+    "topic": "Chủ đề 2: Giới thiệu người khác"
+  },
+  {
+    "id": 1002,
+    "lesson_id": 1,
+    "speaker": "ミラー",
+    "japanese": "はじめまして。ミラー です。どうぞよろしく。",
+    "romaji": "Hajimemashite. Mira- desu. Douzo yoroshiku.",
+    "vietnamese": "Rất vui được gặp anh. Tôi là Miller. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 2: Giới thiệu người khác"
+  },
+  {
+    "id": 1003,
+    "lesson_id": 1,
+    "speaker": "サントス",
+    "japanese": "はじめまして。サントス です。ブラジル からきました。どうぞよろしく。",
+    "romaji": "Hajimemashite. Santosu desu. Burajiru kara kimashita. Douzo yoroshiku.",
+    "vietnamese": "Rất vui được gặp anh. Tôi là Santos. Tôi đến từ Brazil. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 2: Giới thiệu người khác"
+  },
+  {
+    "id": 1004,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "サントスさんは FPT の エンジニア です。",
+    "romaji": "Santosu san wa FPT no enjinia desu.",
+    "vietnamese": "Anh Santos là kỹ sư của công ty FPT.",
+    "topic": "Chủ đề 2: Giới thiệu người khác"
+  },
+  {
+    "id": 1005,
+    "lesson_id": 1,
+    "speaker": "ミラー",
+    "japanese": "そうですか。どうぞよろしく。",
+    "romaji": "Sou desu ka. Douzo yoroshiku.",
+    "vietnamese": "Thế ạ. Rất vui được biết anh.",
+    "topic": "Chủ đề 2: Giới thiệu người khác"
+  },
+  {
+    "id": 1006,
+    "lesson_id": 1,
+    "speaker": "カリナ",
+    "japanese": "はじめまして。おなまえは？",
+    "romaji": "Hajimemashite. O-namae wa?",
+    "vietnamese": "Chào bạn. Tên bạn là gì?",
+    "topic": "Chủ đề 3: Hỏi thăm thông tin tại sự kiện"
+  },
+  {
+    "id": 1007,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "私は ナム です。どうぞよろしく。",
+    "romaji": "Watashi wa Namu desu. Douzo yoroshiku.",
+    "vietnamese": "Tôi là Nam. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 3: Hỏi thăm thông tin tại sự kiện"
+  },
+  {
+    "id": 1008,
+    "lesson_id": 1,
+    "speaker": "カリナ",
+    "japanese": "ナムさんは さくら大学 の 学生 ですか。",
+    "romaji": "Namu san wa Sakura daigaku no gakusei desu ka?",
+    "vietnamese": "Nam là học sinh của trường đại học Sakura phải không?",
+    "topic": "Chủ đề 3: Hỏi thăm thông tin tại sự kiện"
+  },
+  {
+    "id": 1009,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "いいえ、私は 学生 じゃありません。FPT の エンジニア です。 カリナさんは？",
+    "romaji": "Iie, watashi wa gakusei ja arimasen. FPT no enjinia desu. Karina san wa?",
+    "vietnamese": "Không, tôi không phải học sinh. Tôi là kỹ sư của FPT. Còn Karina thì sao?",
+    "topic": "Chủ đề 3: Hỏi thăm thông tin tại sự kiện"
+  },
+  {
+    "id": 1010,
+    "lesson_id": 1,
+    "speaker": "カリナ",
+    "japanese": "私は IMC の 社員 です。",
+    "romaji": "Watashi wa IMC no shain desu.",
+    "vietnamese": "Tôi là nhân viên của công ty IMC.",
+    "topic": "Chủ đề 3: Hỏi thăm thông tin tại sự kiện"
+  },
+  {
+    "id": 1011,
+    "lesson_id": 1,
+    "speaker": "ワン",
+    "japanese": "失礼ですが、お名前は？",
+    "romaji": "Shitsurei desu ga, o-namae wa?",
+    "vietnamese": "Xin lỗi, tên bạn là gì?",
+    "topic": "Chủ đề 4: Hỏi về công ty và tuổi tác"
+  },
+  {
+    "id": 1012,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "私は ナム です. どうぞよろしく。",
+    "romaji": "Watashi wa Namu desu. Douzo yoroshiku.",
+    "vietnamese": "Tôi là Nam. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 4: Hỏi về công ty và tuổi tác"
+  },
+  {
+    "id": 1013,
+    "lesson_id": 1,
+    "speaker": "ワン",
+    "japanese": "ナムさんは FPT の エンジニア ですか。",
+    "romaji": "Namu san wa FPT no enjinia desu ka?",
+    "vietnamese": "Có phải bạn Nam là kỹ sư của công ty FPT không?",
+    "topic": "Chủ đề 4: Hỏi về công ty và tuổi tác"
+  },
+  {
+    "id": 1014,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "はい、FPT の エンジニア です。ワンさんは？",
+    "romaji": "Hai, FPT no enjinia desu. Wan san wa?",
+    "vietnamese": "Vâng, tôi là kỹ sư của FPT. Còn bạn Wang thì sao?",
+    "topic": "Chủ đề 4: Hỏi về công ty và tuổi tác"
+  },
+  {
+    "id": 1015,
+    "lesson_id": 1,
+    "speaker": "ワン",
+    "japanese": "私は さくら大学 の 教師 です。",
+    "romaji": "Watashi wa Sakura daigaku no kyoushi desu.",
+    "vietnamese": "Tôi là giáo viên của trường đại học Sakura.",
+    "topic": "Chủ đề 4: Hỏi về công ty và tuổi tác"
+  },
+  {
+    "id": 1016,
+    "lesson_id": 1,
+    "speaker": "サントス",
+    "japanese": "はじめまして。サントス です. ブラジル からきました。どうぞよろしく。",
+    "romaji": "Hajimemashite. Santosu desu. Burajiru kara kimashita. Douzo yoroshiku.",
+    "vietnamese": "Rất vui được gặp bạn. Tôi là Santos. Tôi đến từ Brazil. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 5: Cuộc gặp gỡ tình cờ"
+  },
+  {
+    "id": 1017,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "はじめまして. 私は ナム です。ベトナム からきました. どうぞよろしく。",
+    "romaji": "Hajimemashite. Watashi wa Namu desu. Betonamu kara kimashita. Douzo yoroshiku.",
+    "vietnamese": "Rất vui được gặp bạn. Tôi là Nam. Tôi đến từ Việt Nam. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 5: Cuộc gặp gỡ tình cờ"
+  },
+  {
+    "id": 1018,
+    "lesson_id": 1,
+    "speaker": "サントス",
+    "japanese": "あの方は どなた ですか。",
+    "romaji": "Ano kata wa donata desu ka?",
+    "vietnamese": "Vị kia là vị nào vậy?",
+    "topic": "Chủ đề 5: Cuộc gặp gỡ tình cờ"
+  },
+  {
+    "id": 1019,
+    "lesson_id": 1,
+    "speaker": "ナム",
+    "japanese": "あの方は ミラーさん です. アメリカ からきました。英語の 先生 です。",
+    "romaji": "Ano kata wa Mira- san desu. Amerika kara kimashita. Eigo no sensei desu.",
+    "vietnamese": "Vị kia là anh Miller. Anh ấy đến từ nước Mỹ. Là giáo viên tiếng Anh.",
+    "topic": "Chủ đề 5: Cuộc gặp gỡ tình cờ"
+  },
+  {
+    "id": 1020,
+    "lesson_id": 1,
+    "speaker": "サントス",
+    "japanese": "そうですか. どうぞよろしく。",
+    "romaji": "Sou desu ka. Douzo yoroshiku.",
+    "vietnamese": "Thế ạ. Rất mong nhận được sự giúp đỡ.",
+    "topic": "Chủ đề 5: Cuộc gặp gỡ tình cờ"
   },
   {
     "id": 11,

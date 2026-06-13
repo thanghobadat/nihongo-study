@@ -78,6 +78,7 @@ export default function UserDashboard() {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [vocabItems, setVocabItems] = useState<VocabItem[]>([]);
   const [kanjiItems, setKanjiItems] = useState<KanjiItem[]>([]);
+  const [grammarItems, setGrammarItems] = useState<any[]>([]);
 
   // Mobile navigation drawer toggle
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -135,19 +136,26 @@ export default function UserDashboard() {
   const kanjiMastered = kanjiItems.filter(k => k.status === 'mastered').length;
   const kanjiPercentage = kanjiTotal ? parseFloat(((kanjiMastered / kanjiTotal) * 100).toFixed(1)) : 0;
 
+  const grammarTotal = grammarItems.length || 5;
+  const grammarMastered = grammarItems.filter(g => g.status === 'mastered').length;
+  const grammarPercentage = grammarTotal ? parseFloat(((grammarMastered / grammarTotal) * 100).toFixed(1)) : 0;
+
   // Auto-calculated targets
   const calculatedVocabTargetPerDay = Math.ceil(vocabTotal / totalDays) || 5;
   const calculatedKanjiTargetPerDay = Math.ceil(kanjiTotal / totalDays) || 2;
+  const calculatedGrammarTargetPerDay = Math.ceil(grammarTotal / totalDays) || 1;
 
   const targetVocabToday = Math.min(vocabTotal, daysElapsed * calculatedVocabTargetPerDay);
   const targetKanjiToday = Math.min(kanjiTotal, daysElapsed * calculatedKanjiTargetPerDay);
+  const targetGrammarToday = Math.min(grammarTotal, daysElapsed * calculatedGrammarTargetPerDay);
 
   const vocabBehind = Math.max(0, targetVocabToday - vocabMastered);
   const kanjiBehind = Math.max(0, targetKanjiToday - kanjiMastered);
+  const grammarBehind = Math.max(0, targetGrammarToday - grammarMastered);
 
   // Status planning: 🏃 Đang tiến hành, 🔴 Trễ hạn, 🟢 Hoàn thành
   let planStatus = '🏃 Đang tiến hành';
-  if (vocabMastered === vocabTotal && kanjiMastered === kanjiTotal) {
+  if (vocabMastered === vocabTotal && kanjiMastered === kanjiTotal && grammarMastered === grammarTotal) {
     planStatus = '🟢 Hoàn thành';
   } else if (today > endDate) {
     planStatus = '🔴 Trễ hạn';
@@ -215,8 +223,10 @@ export default function UserDashboard() {
       try {
         const vocabData = await api.get(`/api/user/lessons/${selectedLessonId}/vocabulary`);
         const kanjiData = await api.get(`/api/user/lessons/${selectedLessonId}/kanji`);
+        const grammarData = await api.get(`/api/user/lessons/${selectedLessonId}/grammar`);
         if (Array.isArray(vocabData)) setVocabItems(vocabData);
         if (Array.isArray(kanjiData)) setKanjiItems(kanjiData);
+        if (Array.isArray(grammarData)) setGrammarItems(grammarData);
       } catch (error) {
         console.error('Failed to load stats for lesson:', selectedLessonId, error);
       }
@@ -246,12 +256,23 @@ export default function UserDashboard() {
 
   // Auto-saves target plan when dates change
   const autoSavePlanDates = async (start: string, end: string) => {
+    // Only save to API if both dates are valid YYYY-MM-DD strings to prevent partial input errors
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(start) || !dateRegex.test(end)) {
+      return;
+    }
+
     const startD = parseDate(start);
     const endD = parseDate(end);
+    if (isNaN(startD.getTime()) || isNaN(endD.getTime())) {
+      return;
+    }
+
     const calculatedDays = getDaysDiff(startD, endD) + 1;
 
     const newVocabTarget = Math.ceil(vocabTotal / calculatedDays) || 5;
     const newKanjiTarget = Math.ceil(kanjiTotal / calculatedDays) || 2;
+    const newGrammarTarget = Math.ceil(grammarTotal / calculatedDays) || 1;
 
     const updatedPlans = {
       ...fullPlansJson,
@@ -262,6 +283,7 @@ export default function UserDashboard() {
           end_date: end,
           vocab_target: newVocabTarget,
           kanji_target: newKanjiTarget,
+          grammar_target: newGrammarTarget,
           evaluations: evaluations
         }
       }
@@ -273,6 +295,7 @@ export default function UserDashboard() {
         end_date: end,
         vocabulary_target: newVocabTarget,
         kanji_target: newKanjiTarget,
+        grammar_target: newGrammarTarget,
         self_evaluation: JSON.stringify(updatedPlans)
       });
       setFullPlansJson(updatedPlans);
@@ -486,7 +509,178 @@ export default function UserDashboard() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8">
 
-            {/* Row 1: Plan Configurator & Overall progress card */}
+            {/* Today's Target Status (Moved to top and made lg:col-span-12) */}
+            <div className="lg:col-span-12 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
+              <div className="flex items-center justify-between mb-5 border-b border-slate-800/60 pb-3">
+                <h2 className="text-sm sm:text-md font-bold text-slate-200 flex items-center space-x-2">
+                  <span>🎯</span>
+                  <span>TIẾN ĐỘ HÔM NAY</span>
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Vocab target today */}
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-300">Từ vựng tích lũy hôm nay</h3>
+                    <p className="text-[10px] text-slate-500">
+                      Mục tiêu hàng ngày để hoàn thành đúng lộ trình của bạn
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-6">
+                    <div className="text-center">
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
+                      <span className="text-2xl sm:text-3xl font-black text-indigo-400">{targetVocabToday}</span>
+                      <span className="text-xs text-slate-400 font-bold ml-1">từ</span>
+                    </div>
+                    <div className="h-8 w-px bg-slate-800" />
+                    <div className="text-center">
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
+                      <span className="text-2xl sm:text-3xl font-black text-emerald-400">{vocabMastered}</span>
+                      <span className="text-xs text-slate-400 font-bold ml-1">từ</span>
+                    </div>
+                    <div>
+                      {vocabBehind > 0 ? (
+                        <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">
+                          🔴 Chậm {vocabBehind} từ
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">
+                          🟢 Đạt chỉ tiêu
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+ 
+                {/* Kanji target today */}
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-300">Kanji tích lũy hôm nay</h3>
+                    <p className="text-[10px] text-slate-500">
+                      Mục tiêu chữ Hán hàng ngày để ghi nhớ mặt chữ tốt hơn
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-6">
+                    <div className="text-center">
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
+                      <span className="text-2xl sm:text-3xl font-black text-indigo-400">{targetKanjiToday}</span>
+                      <span className="text-xs text-slate-400 font-bold ml-1">chữ</span>
+                    </div>
+                    <div className="h-8 w-px bg-slate-800" />
+                    <div className="text-center">
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
+                      <span className="text-2xl sm:text-3xl font-black text-emerald-400">{kanjiMastered}</span>
+                      <span className="text-xs text-slate-400 font-bold ml-1">chữ</span>
+                    </div>
+                    <div>
+                      {kanjiBehind > 0 ? (
+                        <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">
+                          🔴 Chậm {kanjiBehind} chữ
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">
+                          🟢 Đạt chỉ tiêu
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Grammar target today */}
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-300">Ngữ pháp tích lũy hôm nay</h3>
+                    <p className="text-[10px] text-slate-500">
+                      Mục tiêu mẫu câu hàng ngày để nâng cao khả năng giao tiếp
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-6">
+                    <div className="text-center">
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
+                      <span className="text-2xl sm:text-3xl font-black text-indigo-400">{targetGrammarToday}</span>
+                      <span className="text-xs text-slate-400 font-bold ml-1">mẫu</span>
+                    </div>
+                    <div className="h-8 w-px bg-slate-800" />
+                    <div className="text-center">
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
+                      <span className="text-2xl sm:text-3xl font-black text-emerald-400">{grammarMastered}</span>
+                      <span className="text-xs text-slate-400 font-bold ml-1">mẫu</span>
+                    </div>
+                    <div>
+                      {grammarBehind > 0 ? (
+                        <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">
+                          🔴 Chậm {grammarBehind} mẫu
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">
+                          🟢 Đạt chỉ tiêu
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Bars (Vocabulary, Kanji, Grammar) */}
+            <div className="lg:col-span-12 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
+              <h2 className="text-sm sm:text-md font-bold text-slate-200 mb-5 border-b border-slate-800/60 pb-3 flex items-center space-x-2">
+                <span>📈</span>
+                <span>TIẾN ĐỘ HỌC BÀI {selectedLessonId}</span>
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Vocabulary progress row */}
+                <div>
+                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
+                    <span className="text-slate-400">TỪ VỰNG BÀI {selectedLessonId}</span>
+                    <span className="text-blue-400">
+                      {vocabMastered}/{vocabTotal} từ ({vocabPercentage}%)
+                    </span>
+                  </div>
+                  <div className="font-mono text-slate-400 text-xs sm:text-sm tracking-wide bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between gap-2">
+                    <span className="text-indigo-400 overflow-hidden text-ellipsis whitespace-nowrap">
+                      {renderProgressBar(vocabPercentage)}
+                    </span>
+                    <span className="text-[10px] text-slate-500 shrink-0">Tiến độ Từ vựng</span>
+                  </div>
+                </div>
+
+                {/* Kanji progress row */}
+                <div>
+                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
+                    <span className="text-slate-400">KANJI BÀI {selectedLessonId}</span>
+                    <span className="text-blue-400">
+                      {kanjiMastered}/{kanjiTotal} chữ ({kanjiPercentage}%)
+                    </span>
+                  </div>
+                  <div className="font-mono text-slate-400 text-xs sm:text-sm tracking-wide bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between gap-2">
+                    <span className="text-emerald-400 overflow-hidden text-ellipsis whitespace-nowrap">
+                      {renderProgressBar(kanjiPercentage)}
+                    </span>
+                    <span className="text-[10px] text-slate-500 shrink-0">Tiến độ Kanji</span>
+                  </div>
+                </div>
+
+                {/* Grammar progress row */}
+                <div>
+                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
+                    <span className="text-slate-400">NGỮ PHÁP BÀI {selectedLessonId}</span>
+                    <span className="text-blue-400">
+                      {grammarMastered}/{grammarTotal} mẫu ({grammarPercentage}%)
+                    </span>
+                  </div>
+                  <div className="font-mono text-slate-400 text-xs sm:text-sm tracking-wide bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between gap-2">
+                    <span className="text-blue-400 overflow-hidden text-ellipsis whitespace-nowrap">
+                      {renderProgressBar(grammarPercentage)}
+                    </span>
+                    <span className="text-[10px] text-slate-500 shrink-0">Tiến độ Ngữ pháp</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Row 2: Plan Configurator & Overall progress card */}
             
             {/* Plan Configurator (Chỗ chọn plan và bài đang học) */}
             <div className="lg:col-span-6 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md flex flex-col justify-between">
@@ -529,6 +723,11 @@ export default function UserDashboard() {
                         type="date"
                         value={startDateStr}
                         onChange={(e) => handleStartDateChange(e.target.value)}
+                        onClick={(e) => {
+                          if (typeof e.currentTarget.showPicker === 'function') {
+                            try { e.currentTarget.showPicker(); } catch (err) { console.error(err); }
+                          }
+                        }}
                         className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
                         required
                       />
@@ -541,6 +740,11 @@ export default function UserDashboard() {
                         type="date"
                         value={endDateStr}
                         onChange={(e) => handleEndDateChange(e.target.value)}
+                        onClick={(e) => {
+                          if (typeof e.currentTarget.showPicker === 'function') {
+                            try { e.currentTarget.showPicker(); } catch (err) { console.error(err); }
+                          }
+                        }}
                         className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
                         required
                       />
@@ -548,7 +752,7 @@ export default function UserDashboard() {
                   </div>
 
                   {/* Auto-calculated targets showing as text labels */}
-                  <div className="grid grid-cols-2 gap-4 pt-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                     <div className="p-3 bg-slate-950/60 border border-slate-800/40 rounded-xl">
                       <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                         Mục tiêu Từ vựng/ngày
@@ -563,6 +767,14 @@ export default function UserDashboard() {
                       </span>
                       <span className="text-sm font-extrabold text-emerald-400">
                         {calculatedKanjiTargetPerDay} chữ / ngày
+                      </span>
+                    </div>
+                    <div className="p-3 bg-slate-950/60 border border-slate-800/40 rounded-xl font-sans">
+                      <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                        Mục tiêu Ngữ pháp/ngày
+                      </span>
+                      <span className="text-sm font-extrabold text-blue-400">
+                        {calculatedGrammarTargetPerDay} mẫu / ngày
                       </span>
                     </div>
                   </div>
@@ -626,97 +838,7 @@ export default function UserDashboard() {
               </div>
             </div>
 
-            {/* Row 2: Today's targets status & Progress Bars */}
 
-            {/* Today's Target Status */}
-            <div className="lg:col-span-6 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
-              <h2 className="text-sm sm:text-md font-bold text-slate-200 mb-5 border-b border-slate-800/60 pb-3 flex items-center space-x-2">
-                <span>🎯</span>
-                <span>TIẾN ĐỘ HÔM NAY (BÀI {selectedLessonId})</span>
-              </h2>
-
-              <div className="space-y-4">
-                {/* Vocab target today */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex items-center justify-between gap-2">
-                  <div>
-                    <h3 className="text-xs sm:text-sm font-semibold text-slate-300">Chỉ tiêu Từ vựng tích lũy hôm nay</h3>
-                    <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5">
-                      Chỉ tiêu: <span className="text-slate-300 font-bold">{targetVocabToday} từ</span> | Thực tế: <span className="text-slate-300 font-bold">{vocabMastered} từ</span>
-                    </p>
-                  </div>
-                  {vocabBehind > 0 ? (
-                    <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] sm:text-xs font-bold text-red-400 rounded-lg shrink-0">
-                      🔴 Chậm {vocabBehind} từ
-                    </span>
-                  ) : (
-                    <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] sm:text-xs font-bold text-emerald-400 rounded-lg shrink-0">
-                      🟢 Đạt chỉ tiêu
-                    </span>
-                  )}
-                </div>
-
-                {/* Kanji target today */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex items-center justify-between gap-2">
-                  <div>
-                    <h3 className="text-xs sm:text-sm font-semibold text-slate-300">Chỉ tiêu Kanji tích lũy hôm nay</h3>
-                    <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5">
-                      Chỉ tiêu: <span className="text-slate-300 font-bold">{targetKanjiToday} chữ</span> | Thực tế: <span className="text-slate-300 font-bold">{kanjiMastered} chữ</span>
-                    </p>
-                  </div>
-                  {kanjiBehind > 0 ? (
-                    <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] sm:text-xs font-bold text-red-400 rounded-lg shrink-0">
-                      🔴 Chậm {kanjiBehind} chữ
-                    </span>
-                  ) : (
-                    <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] sm:text-xs font-bold text-emerald-400 rounded-lg shrink-0">
-                      🟢 Đạt chỉ tiêu
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Progress Bars (Vocabulary and Kanji) */}
-            <div className="lg:col-span-6 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
-              <h2 className="text-sm sm:text-md font-bold text-slate-200 mb-5 border-b border-slate-800/60 pb-3 flex items-center space-x-2">
-                <span>📈</span>
-                <span>TIẾN ĐỘ HỌC BÀI {selectedLessonId}</span>
-              </h2>
-
-              <div className="space-y-5">
-                {/* Vocabulary progress row */}
-                <div>
-                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
-                    <span className="text-slate-400">TỪ VỰNG BÀI {selectedLessonId}</span>
-                    <span className="text-blue-400">
-                      {vocabMastered}/{vocabTotal} từ ({vocabPercentage}%)
-                    </span>
-                  </div>
-                  <div className="font-mono text-slate-400 text-xs sm:text-sm tracking-wide bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between gap-2">
-                    <span className="text-indigo-400 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {renderProgressBar(vocabPercentage)}
-                    </span>
-                    <span className="text-[10px] text-slate-500 shrink-0">Tiến độ Từ vựng</span>
-                  </div>
-                </div>
-
-                {/* Kanji progress row */}
-                <div>
-                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
-                    <span className="text-slate-400">KANJI BÀI {selectedLessonId}</span>
-                    <span className="text-blue-400">
-                      {kanjiMastered}/{kanjiTotal} chữ ({kanjiPercentage}%)
-                    </span>
-                  </div>
-                  <div className="font-mono text-slate-400 text-xs sm:text-sm tracking-wide bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between gap-2">
-                    <span className="text-emerald-400 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {renderProgressBar(kanjiPercentage)}
-                    </span>
-                    <span className="text-[10px] text-slate-500 shrink-0">Tiến độ Kanji</span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Quick links to Study Tabs */}
             <div className="lg:col-span-12">

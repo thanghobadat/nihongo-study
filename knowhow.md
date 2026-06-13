@@ -155,3 +155,5 @@ Khi bạn thực hiện viết code hoặc chỉnh sửa trong dự án này:
    - Nhánh `main` là nhánh sản phẩm chính thức (production-ready).
    - Nhánh `develop` là nhánh tích hợp tính năng.
    - Khi phát triển tính năng mới, hãy tạo một nhánh từ `develop` (ví dụ: `feature/xyz`), thực hiện chỉnh sửa, sau đó tạo Pull Request về `develop` cục bộ.
+6. **Khởi động lại Backend khi sửa đổi**: Do backend Express chạy bằng Node thường (`node src/index.js`) mà không có nodemon, bất kỳ chỉnh sửa nào trong backend (bao gồm cả dữ liệu giả lập `mockDb.js`) sẽ không tự động cập nhật. AI Agent cần tắt server cũ và khởi chạy lại `npm run dev` để kiểm tra thay đổi backend.
+

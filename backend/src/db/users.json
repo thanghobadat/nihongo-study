@@ -5,5 +5,19 @@
     "password": "Thanhngo@123",
     "displayName": "ThanhNH33",
     "role": "user"
+  },
+  {
+    "id": "user-1781363897326",
+    "email": "kieuvi123@gmail.com",
+    "password": "Thanhngo@123",
+    "displayName": "ViTTK",
+    "role": "user"
+  },
+  {
+    "id": "user-1781371688560",
+    "email": "test3@gmail.com",
+    "password": "password",
+    "displayName": "test3",
+    "role": "user"
   }
 ]

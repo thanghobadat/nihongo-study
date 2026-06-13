@@ -19,10 +19,12 @@ router.get('/progress-summary', async (req, res) => {
     if (req.user.isMock) {
       const vocabList = mockDb.vocabulary;
       const kanjiList = mockDb.kanji;
+      const grammarList = mockDb.grammar;
       const progressKeys = Object.keys(mockDb.userProgress).filter(k => k.startsWith(`${userId}:`));
 
       const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
       const masteredKanji = progressKeys.filter(k => k.includes(':kanji:') && mockDb.userProgress[k] === 'mastered').length;
+      const masteredGrammar = progressKeys.filter(k => k.includes(':grammar:') && mockDb.userProgress[k] === 'mastered').length;
 
       return res.json({
         vocabulary: {
@@ -34,11 +36,16 @@ router.get('/progress-summary', async (req, res) => {
           total: kanjiList.length,
           mastered: masteredKanji,
           percentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0
+        },
+        grammar: {
+          total: grammarList.length,
+          mastered: masteredGrammar,
+          percentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0
         }
       });
     }
 
-    // Get total vocabulary and kanji counts
+    // Get total vocabulary, kanji and grammar counts
     const { count: totalVocab, error: errV } = await supabase
       .from('vocabulary')
       .select('*', { count: 'exact', head: true });
@@ -47,8 +54,12 @@ router.get('/progress-summary', async (req, res) => {
       .from('kanji')
       .select('*', { count: 'exact', head: true });
 
-    if (errV || errK) {
-      throw new Error(errV?.message || errK?.message);
+    const { count: totalGrammar, error: errG } = await supabase
+      .from('grammar')
+      .select('*', { count: 'exact', head: true });
+
+    if (errV || errK || errG) {
+      throw new Error(errV?.message || errK?.message || errG?.message);
     }
 
     // Get user's mastered counts
@@ -62,6 +73,7 @@ router.get('/progress-summary', async (req, res) => {
 
     const masteredVocab = progressData.filter(p => p.item_type === 'vocabulary').length;
     const masteredKanji = progressData.filter(p => p.item_type === 'kanji').length;
+    const masteredGrammar = progressData.filter(p => p.item_type === 'grammar').length;
 
     res.json({
       vocabulary: {
@@ -73,6 +85,11 @@ router.get('/progress-summary', async (req, res) => {
         total: totalKanji || 0,
         mastered: masteredKanji,
         percentage: totalKanji ? parseFloat(((masteredKanji / totalKanji) * 100).toFixed(1)) : 0
+      },
+      grammar: {
+        total: totalGrammar || 0,
+        mastered: masteredGrammar,
+        percentage: totalGrammar ? parseFloat(((masteredGrammar / totalGrammar) * 100).toFixed(1)) : 0
       }
     });
   } catch (error) {
@@ -305,24 +322,104 @@ router.get('/lessons/:lessonId/kanji', async (req, res) => {
 router.get('/lessons/:lessonId/grammar', async (req, res) => {
   try {
     const lessonId = req.params.lessonId;
+    const userId = req.user.id;
 
     // Return mock data for local testing
     if (req.user.isMock) {
-      const filtered = mockDb.grammar.filter(item => item.lesson_id === parseInt(lessonId));
-      return res.json(filtered);
+      const mergedList = mockDb.grammar
+        .filter(item => item.lesson_id === parseInt(lessonId))
+        .map(item => {
+          const status = mockDb.userProgress[`${userId}:grammar:${item.id}`] || 'not_learned';
+          return {
+            ...item,
+            status
+          };
+        });
+      return res.json(mergedList);
     }
 
-    const { data, error } = await supabase
+    const { data: grammarList, error: gError } = await supabase
       .from('grammar')
       .select('*')
       .eq('lesson_id', lessonId);
 
-    if (error) throw error;
+    if (gError) throw gError;
 
-    res.json(data);
+    const { data: userProgress, error: pError } = await supabase
+      .from('user_progress')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('item_type', 'grammar');
+
+    if (pError) throw pError;
+
+    const mergedList = grammarList.map(item => {
+      const progress = userProgress.find(p => p.item_id === item.id);
+      return {
+        ...item,
+        status: progress ? progress.status : 'not_learned'
+      };
+    });
+
+    res.json(mergedList);
   } catch (error) {
     console.error('Error fetching lesson grammar:', error);
     res.status(500).json({ error: 'Failed to fetch grammar points' });
+  }
+});
+
+/**
+ * GET /api/lessons/:lessonId/kaiwa
+ * Fetch speaking dialogue for a lesson, filtering out metadata rows
+ */
+router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
+  try {
+    const lessonId = req.params.lessonId;
+    const userId = req.user.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      const dialogueList = mockDb.kaiwaDialog
+        .filter(item => item.lesson_id === parseInt(lessonId))
+        .filter(item => {
+          // Filter out metadata rows
+          if (!item.japanese || item.japanese.trim() === '') return false;
+          if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại')) return false;
+          return true;
+        });
+      return res.json(dialogueList);
+    }
+
+    // In case Supabase has kaiwa_dialog table
+    const { data: dialogueList, error: gError } = await supabase
+      .from('kaiwa_dialog')
+      .select('*')
+      .eq('lesson_id', lessonId)
+      .order('id', { ascending: true });
+
+    if (gError) {
+      // Fallback to mockDb
+      console.warn('kaiwa_dialog table read error, falling back to mockDb:', gError.message);
+      const fallbackList = mockDb.kaiwaDialog
+        .filter(item => item.lesson_id === parseInt(lessonId))
+        .filter(item => {
+          if (!item.japanese || item.japanese.trim() === '') return false;
+          if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại')) return false;
+          return true;
+        });
+      return res.json(fallbackList);
+    }
+
+    const cleanedList = dialogueList.filter(item => {
+      if (!item.japanese || item.japanese.trim() === '') return false;
+      if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại')) return false;
+      return true;
+    });
+
+    res.json(cleanedList);
+  } catch (error) {
+    console.error('Error fetching lesson kaiwa:', error);
+    res.status(500).json({ error: 'Failed to fetch speaking practice dialogue' });
   }
 });
 
@@ -338,8 +435,8 @@ router.post('/progress', async (req, res) => {
       return res.status(400).json({ error: 'item_type, item_id, and status are required' });
     }
 
-    if (!['vocabulary', 'kanji'].includes(item_type)) {
-      return res.status(400).json({ error: 'item_type must be either vocabulary or kanji' });
+    if (!['vocabulary', 'kanji', 'grammar'].includes(item_type)) {
+      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji or grammar' });
     }
 
     if (!['not_learned', 'learning', 'mastered'].includes(status)) {
