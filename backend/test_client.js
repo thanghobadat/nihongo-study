@@ -61,30 +61,30 @@ const apiGroups = {
     },
     {
       method: 'GET',
-      path: '/api/user/lessons/1/vocabulary',
-      url: 'http://localhost:8080/api/user/lessons/1/vocabulary',
+      path: '/api/user/lessons/:lessonId/vocabulary',
+      url: 'http://localhost:8080/api/user/lessons/:lessonId/vocabulary',
       role: 'user',
-      desc: 'Lấy từ vựng của Bài 1, ghép kèm trạng thái học thuộc ("not_learned", "learning", "mastered") của tài khoản hiện tại.',
+      desc: 'Lấy từ vựng của bài học, ghép kèm trạng thái học thuộc ("not_learned", "learning", "mastered") của tài khoản hiện tại.',
       specInput: 'Header:\nAuthorization: Bearer <token>',
       specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "lesson_id": 1,\n    "hiragana": "わたし",\n    "romaji": "watashi",\n    "vietnamese_meaning": "tôi",\n    "status": "mastered"\n  }\n]'
     },
     {
       method: 'GET',
-      path: '/api/user/lessons/1/kanji',
-      url: 'http://localhost:8080/api/user/lessons/1/kanji',
+      path: '/api/user/lessons/:lessonId/kanji',
+      url: 'http://localhost:8080/api/user/lessons/:lessonId/kanji',
       role: 'user',
-      desc: 'Lấy danh sách chữ Hán bài 1 ghép trạng thái học của user.',
+      desc: 'Lấy danh sách chữ Hán bài học ghép trạng thái học của user.',
       specInput: 'Header:\nAuthorization: Bearer <token>',
       specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "character": "私",\n    "sino_vietnamese": "TƯ",\n    "status": "learning"\n  }\n]'
     },
     {
       method: 'GET',
-      path: '/api/user/lessons/1/grammar',
-      url: 'http://localhost:8080/api/user/lessons/1/grammar',
+      path: '/api/user/lessons/:lessonId/grammar',
+      url: 'http://localhost:8080/api/user/lessons/:lessonId/grammar',
       role: 'user',
-      desc: 'Lấy toàn bộ cấu trúc ngữ pháp thuộc Bài 1.',
+      desc: 'Lấy toàn bộ cấu trúc ngữ pháp thuộc bài học.',
       specInput: 'Header:\nAuthorization: Bearer <token>',
-      specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "title": "N1 wa N2 desu",\n    "meaning": "N1 là N2",\n    "japanese_example": "わたしはマイクです。"\n  }\n]'
+      specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "title": "N1 wa N2 desu",\n    "meaning": "N1 là N2",\n    "japanese_example": "わたしはマイクamp;middot;ミラーです。"\n  }\n]'
     },
     {
       method: 'GET',
@@ -199,6 +199,8 @@ const apiDescBanner = document.getElementById('apiDescBanner');
 
 const specInput = document.getElementById('specInput');
 const specOutput = document.getElementById('specOutput');
+const lessonIdInput = document.getElementById('lessonIdInput');
+let currentApi = null;
 
 let isFirst = true;
 
@@ -241,12 +243,16 @@ for (const [groupName, apis] of Object.entries(apiGroups)) {
 }
 
 function selectApi(api) {
+  currentApi = api;
   requestMethod.value = api.method;
-  requestUrl.value = api.url;
+  
+  const lessonId = lessonIdInput.value || '1';
+  requestUrl.value = api.url.replace(':lessonId', lessonId);
+  
   apiDescBanner.innerHTML = `<strong>Mô tả:</strong> ${api.desc} <br> <strong>Yêu cầu Auth:</strong> ${api.role === 'public' ? 'Không yêu cầu Auth (Public)' : (api.role === 'user' ? 'Quyền Học viên (User/Admin)' : 'Quyền Quản trị viên (Chỉ Admin)')}`;
   
-  specInput.innerText = api.specInput;
-  specOutput.innerText = api.specOutput;
+  specInput.innerText = api.specInput.replace(':lessonId', lessonId);
+  specOutput.innerText = api.specOutput.replace(':lessonId', lessonId);
 
   if (api.method === 'POST' || api.method === 'PUT') {
     bodyContainer.style.display = 'block';
@@ -264,6 +270,14 @@ function selectApi(api) {
     tokenSelect.value = 'Bearer mock-token-admin123-admin';
   }
 }
+
+// Update URL dynamically when Lesson ID changes
+lessonIdInput.oninput = () => {
+  if (currentApi) {
+    const lessonId = lessonIdInput.value || '1';
+    requestUrl.value = currentApi.url.replace(':lessonId', lessonId);
+  }
+};
 
 // Toggle body container on method change
 requestMethod.onchange = () => {
