@@ -5,14 +5,13 @@ const apiGroups = {
       path: '/api/auth/register',
       url: 'http://localhost:8080/api/auth/register',
       role: 'public',
-      desc: 'Đăng ký tài khoản học viên mới trên Supabase Auth.',
-      specInput: 'JSON Body:\n{\n  "email": "student@example.com",\n  "password": "securepassword123",\n  "displayName": "Học Viên A",\n  "role": "user"\n}',
+      desc: 'Đăng ký tài khoản học viên mới trên Supabase Auth (Mặc định là role user).',
+      specInput: 'JSON Body:\n{\n  "email": "student@example.com",\n  "password": "securepassword123",\n  "displayName": "Học Viên A"\n}',
       specOutput: 'JSON:\n{\n  "message": "Registration successful!...",\n  "user": { ... },\n  "session": { ... }\n}',
       defaultBody: {
         email: 'student@example.com',
         password: 'securepassword123',
-        displayName: 'Học Viên A',
-        role: 'user'
+        displayName: 'Học Viên A'
       }
     },
     {
@@ -26,6 +25,30 @@ const apiGroups = {
       defaultBody: {
         email: 'student@example.com',
         password: 'securepassword123'
+      }
+    },
+    {
+      method: 'POST',
+      path: '/api/auth/forgot-password',
+      url: 'http://localhost:8080/api/auth/forgot-password',
+      role: 'public',
+      desc: 'Yêu cầu gửi liên kết đặt lại mật khẩu đến email.',
+      specInput: 'JSON Body:\n{\n  "email": "student@example.com"\n}',
+      specOutput: 'JSON:\n{\n  "message": "Password reset link sent to your email."\n}',
+      defaultBody: {
+        email: 'student@example.com'
+      }
+    },
+    {
+      method: 'POST',
+      path: '/api/auth/reset-password',
+      url: 'http://localhost:8080/api/auth/reset-password',
+      role: 'user',
+      desc: 'Đặt lại mật khẩu mới cho tài khoản hiện tại (yêu cầu Authorization Header).',
+      specInput: 'Header: Authorization: Bearer <token>\nJSON Body:\n{\n  "password": "newsecurepassword123"\n}',
+      specOutput: 'JSON:\n{\n  "message": "Password updated successfully!"\n}',
+      defaultBody: {
+        password: 'newsecurepassword123'
       }
     }
   ],

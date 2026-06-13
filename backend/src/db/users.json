@@ -1,0 +1,16 @@
+[
+  {
+    "id": "user123",
+    "email": "user@nihongoflow.com",
+    "password": "securepassword123",
+    "displayName": "Học Viên A",
+    "role": "user"
+  },
+  {
+    "id": "admin123",
+    "email": "admin@nihongoflow.com",
+    "password": "securepassword123",
+    "displayName": "Quản Trị Viên",
+    "role": "admin"
+  }
+]

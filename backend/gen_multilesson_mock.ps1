@@ -152,11 +152,22 @@ try {
 }
 
 # Serialize arrays into JavaScript format
-$lessonsJson = $lessons | ConvertTo-Json -Depth 5
-$vocabularyJson = $vocabulary | ConvertTo-Json -Depth 5
-$kanjiJson = $kanji | ConvertTo-Json -Depth 5
-$grammarJson = $grammar | ConvertTo-Json -Depth 5
-$kaiwaJson = $kaiwaDialog | ConvertTo-Json -Depth 5
+function Serialize-AsArray($arr) {
+    if ($null -eq $arr -or $arr.Count -eq 0) {
+        return "[]"
+    }
+    $json = $arr | ConvertTo-Json -Depth 5
+    if ($arr.Count -eq 1 -and -not $json.StartsWith("[")) {
+        return "[$json]"
+    }
+    return $json
+}
+
+$lessonsJson = Serialize-AsArray $lessons
+$vocabularyJson = Serialize-AsArray $vocabulary
+$kanjiJson = Serialize-AsArray $kanji
+$grammarJson = Serialize-AsArray $grammar
+$kaiwaJson = Serialize-AsArray $kaiwaDialog
 
 $jsCode = @"
 // In-memory Mock Database generated from Excel workbooks in tai_lieu/

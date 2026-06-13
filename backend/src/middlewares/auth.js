@@ -14,13 +14,40 @@ const requireAuth = async (req, res, next) => {
     
     // Allow mock bypass for local testing if header starts with mock-token-
     if (token.startsWith('mock-token-')) {
-      const mockRole = token.includes('-admin') ? 'admin' : 'user';
-      req.user = {
-        id: token.replace('mock-token-', '').replace('-admin', ''),
-        email: mockRole === 'admin' ? 'admin@nihongoflow.com' : 'user@nihongoflow.com',
-        role: mockRole,
-        isMock: true
-      };
+      const userId = token.replace('mock-token-', '').replace('-admin', '');
+      
+      // Look up user in local JSON database
+      let localUser = null;
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const usersFile = path.join(__dirname, '../db/users.json');
+        if (fs.existsSync(usersFile)) {
+          const users = JSON.parse(fs.readFileSync(usersFile, 'utf8'));
+          localUser = users.find(u => u.id === userId || u.email === userId);
+        }
+      } catch (err) {
+        console.error('Error reading local users.json:', err);
+      }
+
+      if (localUser) {
+        req.user = {
+          id: localUser.id,
+          email: localUser.email,
+          role: localUser.role,
+          displayName: localUser.displayName,
+          isMock: true
+        };
+      } else {
+        // Fallback for default mock tokens
+        const mockRole = token.includes('-admin') ? 'admin' : 'user';
+        req.user = {
+          id: userId,
+          email: mockRole === 'admin' ? 'admin@nihongoflow.com' : 'user@nihongoflow.com',
+          role: mockRole,
+          isMock: true
+        };
+      }
       return next();
     }
 

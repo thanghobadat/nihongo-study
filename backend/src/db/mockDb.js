@@ -1,12 +1,12 @@
 ﻿// In-memory Mock Database generated from Excel workbooks in tai_lieu/
-// Generated on: 2026-06-13 13:43:26
+// Generated on: 2026-06-13 13:52:17
 // Serves as the mock database for local API Console testing.
 
-const lessons = {
+const lessons = [{
     "id":  1,
     "title":  "Bài 1: Hajimemashite",
     "description":  "Bai hoc tu dong nhap tu tep Bai1_Hajimemashite.xlsx"
-};
+}];
 
 const vocabulary = [
     {

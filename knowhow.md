@@ -134,6 +134,11 @@ Khi phát triển, các AI Agent hoặc Lập trình viên có thể sử dụng
   ```bash
   npm run test:backend
   ```
+- **Biên dịch lại Mock Database từ các tệp Excel**:
+  Nếu thêm/bớt/sửa các file bài học Excel trong thư mục `tai_lieu/` (như `Bai1_Hajimemashite.xlsx`, `Bai2_...xlsx`), hãy chạy lệnh PowerShell sau trong thư mục `website/backend` để tự động tạo/cập nhật lại cơ sở dữ liệu giả lập `mockDb.js`:
+  ```powershell
+  powershell -ExecutionPolicy Bypass -File gen_multilesson_mock.ps1
+  ```
 
 ---
 
