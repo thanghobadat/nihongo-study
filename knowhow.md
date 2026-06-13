@@ -140,11 +140,13 @@ Khi phát triển, các AI Agent hoặc Lập trình viên có thể sử dụng
 ## 4. Hướng Dẫn Phát Triển Dành Cho AI Agent
 
 Khi bạn thực hiện viết code hoặc chỉnh sửa trong dự án này:
-1. **Thiết kế Responsive**: Mọi giao diện viết ở Frontend phải hỗ trợ hiển thị tối ưu trên thiết bị di động (Mobile-First responsive sử dụng Tailwind CSS).
-2. **Bảo mật API**: 
+1. ⚠️ **Tuyệt đối không tự ý Push lên Git**: Chỉ viết code, kiểm thử và thực hiện git commit cục bộ (local). **Không** chạy lệnh `git push` lên GitHub remote trừ khi người dùng yêu cầu trực tiếp.
+2. 🧹 **Dọn dẹp tệp mở**: Sau khi hoàn thành xong tác vụ, hãy chủ động đóng toàn bộ các tệp code đang mở, chỉ giữ lại các tệp tài liệu nhật ký dạng `.md` (như `walkthrough.md`, `knowhow.md`) để tối ưu không gian hiển thị cho người dùng.
+3. **Thiết kế Responsive**: Mọi giao diện viết ở Frontend phải hỗ trợ hiển thị tối ưu trên thiết bị di động (Mobile-First responsive sử dụng Tailwind CSS).
+4. **Bảo mật API**: 
    - Tất cả các endpoint Backend phải áp dụng Middleware hạn chế tần suất gọi (rate limiter) để tránh spam.
    - Không để lộ thông tin nhạy cảm của hệ thống hoặc Database qua các phản hồi API.
-3. **Git Branching**:
+5. **Git Branching**:
    - Nhánh `main` là nhánh sản phẩm chính thức (production-ready).
    - Nhánh `develop` là nhánh tích hợp tính năng.
-   - Khi phát triển tính năng mới, hãy tạo một nhánh từ `develop` (ví dụ: `feature/xyz`), thực hiện chỉnh sửa, sau đó tạo Pull Request về `develop`.
+   - Khi phát triển tính năng mới, hãy tạo một nhánh từ `develop` (ví dụ: `feature/xyz`), thực hiện chỉnh sửa, sau đó tạo Pull Request về `develop` cục bộ.
