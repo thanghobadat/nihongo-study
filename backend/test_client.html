@@ -34,9 +34,9 @@
       overflow: hidden;
     }
 
-    /* Left pane: API Documentation */
+    /* Left pane: API List */
     .sidebar {
-      width: 40%;
+      width: 38%;
       background-color: var(--panel-dark);
       border-right: 1px solid var(--border-dark);
       display: flex;
@@ -53,9 +53,6 @@
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     .sidebar-header p {
@@ -70,35 +67,48 @@
       padding: 15px;
     }
 
+    .section-header {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 15px 5px 8px;
+      letter-spacing: 0.5px;
+    }
+
     .api-item {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border-dark);
       border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 12px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .api-item:hover {
       border-color: var(--accent);
-      background: rgba(59, 130, 246, 0.05);
+      background: rgba(59, 130, 246, 0.04);
     }
 
     .api-item.active {
       border-color: var(--accent);
       background: rgba(59, 130, 246, 0.1);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
     }
 
     .api-badge {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      padding: 3px 6px;
+      padding: 2px 5px;
       border-radius: 4px;
       text-transform: uppercase;
-      display: inline-block;
-      margin-bottom: 6px;
     }
 
     .badge-get { background-color: rgba(16, 185, 129, 0.2); color: var(--success); }
@@ -106,23 +116,26 @@
     .badge-put { background-color: rgba(59, 130, 246, 0.2); color: var(--accent); }
     .badge-delete { background-color: rgba(239, 68, 68, 0.2); color: var(--error); }
 
+    .role-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 9999px;
+    }
+    .role-public { background-color: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+    .role-user { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .role-admin { background-color: rgba(239, 68, 68, 0.15); color: #f87171; }
+
     .api-path {
       font-family: 'Fira Code', monospace;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 500;
       word-break: break-all;
     }
 
-    .api-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    /* Right pane: Interactive Test Console */
+    /* Right pane: Interactive Console */
     .console {
-      width: 60%;
+      width: 62%;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -157,7 +170,6 @@
       font-size: 0.85rem;
       font-family: 'Inter', sans-serif;
       outline: none;
-      transition: border-color 0.2s ease;
     }
 
     select:focus, input:focus, textarea:focus {
@@ -170,14 +182,14 @@
       flex-direction: column;
       padding: 20px;
       overflow-y: auto;
-      gap: 20px;
+      gap: 15px;
     }
 
     .section-title {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -192,12 +204,11 @@
     .url-row {
       display: flex;
       gap: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .method-select {
-      width: 100px;
-      text-align: center;
+      width: 90px;
       font-weight: 600;
     }
 
@@ -210,11 +221,10 @@
       background-color: var(--accent);
       color: white;
       border: none;
-      padding: 8px 20px;
+      padding: 8px 18px;
       border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s ease;
     }
 
     .send-btn:hover {
@@ -223,107 +233,133 @@
 
     .body-editor {
       width: 100%;
-      height: 120px;
+      height: 90px;
       font-family: 'Fira Code', monospace;
       resize: vertical;
+      font-size: 0.8rem;
     }
 
+    /* Response block */
     .response-view {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       background: var(--panel-dark);
       border: 1px solid var(--border-dark);
       border-radius: 8px;
       padding: 15px;
-      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
     }
 
     .status-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 10px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--border-dark);
     }
 
     .status-badge {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      padding: 4px 8px;
+      padding: 3px 6px;
       border-radius: 4px;
     }
 
     .response-json {
-      flex: 1;
-      width: 100%;
       background: rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border-dark);
       border-radius: 6px;
-      padding: 12px;
+      padding: 10px;
       font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       overflow: auto;
       white-space: pre-wrap;
       color: #38bdf8;
+      max-height: 200px;
     }
 
+    /* Spec details compare */
     .docs-section {
-      background: rgba(255, 255, 255, 0.01);
+      background: var(--panel-dark);
       border: 1px solid var(--border-dark);
       border-radius: 8px;
       padding: 15px;
     }
 
-    .docs-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.8rem;
-      margin-top: 8px;
+    .docs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 10px;
     }
 
-    .docs-table th, .docs-table td {
+    .docs-box {
+      background: rgba(0, 0, 0, 0.15);
       border: 1px solid var(--border-dark);
-      padding: 8px;
-      text-align: left;
+      border-radius: 6px;
+      padding: 10px;
     }
 
-    .docs-table th {
-      background-color: rgba(255, 255, 255, 0.03);
+    .docs-box h4 {
+      font-size: 0.75rem;
       color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 4px;
+    }
+
+    .docs-box pre {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      white-space: pre-wrap;
+      color: #cbd5e1;
+    }
+
+    .docs-desc-banner {
+      background: rgba(59, 130, 246, 0.05);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      margin-bottom: 5px;
+      border-radius: 0 4px 4px 0;
+      line-height: 1.4;
     }
   </style>
 </head>
 <body>
 
-  <!-- Left: API Info -->
+  <!-- Left Sidebar: API Endpoints Grouped -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <h1>🔊 Nihongo Flow API</h1>
-      <p>Interactive API Client & Spec Documentation</p>
+      <h1>🔊 Nihongo Flow API Console</h1>
+      <p>Chọn Endpoint bên dưới để test và so sánh specs</p>
     </div>
     <div class="api-list" id="apiList">
-      <!-- Generated dynamically -->
+      <!-- Grouped APIs Rendered Dynamically -->
     </div>
   </div>
 
-  <!-- Right: Console -->
+  <!-- Right: Request/Response & Specs Comparer -->
   <div class="console">
     <div class="console-header">
-      <h2>Interactive Console</h2>
+      <h2>API Sandbox Panel</h2>
       <div class="auth-config">
-        <label for="tokenSelect">Vai trò (Auth):</label>
+        <label for="tokenSelect">Vai Trò (Auth Header):</label>
         <select id="tokenSelect">
-          <option value="">Không có Auth (Anonymous)</option>
+          <option value="">Không có Auth (Public)</option>
           <option value="Bearer mock-token-user123">Học viên (User: mock-token-user123)</option>
-          <option value="Bearer mock-token-admin123-admin">Quản lý (Admin: mock-token-admin123-admin)</option>
+          <option value="Bearer mock-token-admin123-admin">Quản trị viên (Admin: mock-token-admin123-admin)</option>
         </select>
       </div>
     </div>
 
     <div class="console-body">
-      <!-- Request Config -->
+      <!-- API Description Banner -->
+      <div id="apiDescBanner" class="docs-desc-banner">-</div>
+
+      <!-- Request Setup -->
       <div class="request-config">
         <div class="section-title">Yêu Cầu (Request)</div>
         <div class="url-row">
@@ -334,11 +370,11 @@
             <option value="DELETE">DELETE</option>
           </select>
           <input type="text" id="requestUrl" class="url-input" value="http://localhost:8080/">
-          <button class="send-btn" id="sendBtn">SEND</button>
+          <button class="send-btn" id="sendBtn">GỬI YÊU CẦU</button>
         </div>
 
         <div id="bodyContainer" style="display: none;">
-          <div class="section-title">JSON Body</div>
+          <div class="section-title">JSON Body Gửi Đi (Input)</div>
           <textarea id="requestBody" class="body-editor" placeholder="{}"></textarea>
         </div>
       </div>
@@ -346,105 +382,187 @@
       <!-- Response View -->
       <div class="response-view">
         <div class="status-row">
-          <div class="section-title" style="margin-bottom: 0;">Phản Hồi (Response)</div>
+          <div class="section-title" style="margin-bottom: 0;">Kết Quả Trả Về (Response)</div>
           <div id="statusBadge" class="status-badge" style="display: none;"></div>
         </div>
-        <pre id="responseJson" class="response-json">Nhấp vào một API ở danh sách bên trái và nhấn SEND để thử nghiệm.</pre>
+        <pre id="responseJson" class="response-json">Hãy nhấp vào một API ở danh sách bên trái để kiểm thử.</pre>
       </div>
 
-      <!-- API Details Spec -->
+      <!-- Spec Comparison Block (Direct compare on UI) -->
       <div class="docs-section">
-        <div class="section-title">Chi Tiết API Spec</div>
-        <table class="docs-table">
-          <tr>
-            <th style="width: 25%;">Thông số</th>
-            <th>Mô tả / Giá trị</th>
-          </tr>
-          <tr>
-            <td><strong>Chức năng</strong></td>
-            <td id="specDesc">-</td>
-          </tr>
-          <tr>
-            <td><strong>Dữ liệu gửi (Input)</strong></td>
-            <td id="specInput">-</td>
-          </tr>
-          <tr>
-            <td><strong>Dữ liệu nhận (Output)</strong></td>
-            <td id="specOutput">-</td>
-          </tr>
-        </table>
+        <div class="section-title" style="margin-bottom: 2px;">Bản Đặc Tả Đối Chiếu (Input/Output Spec)</div>
+        <div class="docs-grid">
+          <div class="docs-box">
+            <h4>Đầu Vào Mong Muốn (Expected Input)</h4>
+            <pre id="specInput">-</pre>
+          </div>
+          <div class="docs-box">
+            <h4>Đầu Ra Mong Muốn (Expected Output)</h4>
+            <pre id="specOutput">-</pre>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const apis = [
-      {
-        method: 'GET',
-        path: '/',
-        url: 'http://localhost:8080/',
-        desc: 'API Chào mừng gốc. Không yêu cầu đăng nhập.',
-        specInput: 'Không có dữ liệu đầu vào.',
-        specOutput: 'JSON: { "message": "Welcome to Nihongo Flow Backend API!" }'
-      },
-      {
-        method: 'GET',
-        path: '/api/health',
-        url: 'http://localhost:8080/api/health',
-        desc: 'Kiểm tra trạng thái hoạt động của server (Health Check).',
-        specInput: 'Không có dữ liệu đầu vào.',
-        specOutput: 'JSON: { "status": "ok", "timestamp": "2026-06-13T05:22:35Z" }'
-      },
-      {
-        method: 'GET',
-        path: '/api/user/lessons',
-        url: 'http://localhost:8080/api/user/lessons',
-        desc: 'Lấy danh sách các bài học. Yêu cầu quyền học viên (User/Admin).',
-        specInput: 'Header: Authorization: Bearer <token>',
-        specOutput: 'JSON: Mảng chứa thông tin các bài học [ { "id": 1, "title": "Bài 1...", "description": "..." } ]'
-      },
-      {
-        method: 'GET',
-        path: '/api/user/progress-summary',
-        url: 'http://localhost:8080/api/user/progress-summary',
-        desc: 'Lấy tổng hợp tiến độ học thuộc từ vựng/Kanji vẽ biểu đồ Dashboard. Yêu cầu quyền học viên (User/Admin).',
-        specInput: 'Header: Authorization: Bearer <token>',
-        specOutput: 'JSON: { "vocabulary": { "total": 15, "mastered": 5, "percentage": 33.3 }, "kanji": { "total": 8, "mastered": 2, "percentage": 25.0 } }'
-      },
-      {
-        method: 'POST',
-        path: '/api/user/progress',
-        url: 'http://localhost:8080/api/user/progress',
-        desc: 'Cập nhật trạng thái học của một Từ vựng/Kanji. Yêu cầu quyền học viên (User/Admin).',
-        specInput: 'JSON Body: { "item_type": "vocabulary", "item_id": 1, "status": "mastered" }\n- item_type: "vocabulary" hoặc "kanji"\n- status: "not_learned", "learning", hoặc "mastered"',
-        specOutput: 'JSON: { "message": "Progress updated successfully", "progress": { ... } }',
-        defaultBody: {
-          item_type: 'vocabulary',
-          item_id: 1,
-          status: 'mastered'
+    const apiGroups = {
+      'Hệ Thống (Public)': [
+        {
+          method: 'GET',
+          path: '/',
+          url: 'http://localhost:8080/',
+          role: 'public',
+          desc: 'API chào mừng gốc. Dùng để kiểm tra kết nối cơ bản với máy chủ.',
+          specInput: 'Không cần tham số hoặc Header.',
+          specOutput: 'JSON:\n{\n  "message": "Welcome to Nihongo Flow Backend API!"\n}'
+        },
+        {
+          method: 'GET',
+          path: '/api/health',
+          url: 'http://localhost:8080/api/health',
+          role: 'public',
+          desc: 'API kiểm tra sức khỏe của server (Health Check).',
+          specInput: 'Không cần tham số.',
+          specOutput: 'JSON:\n{\n  "status": "ok",\n  "timestamp": "2026-06-13T05:51:04Z"\n}'
         }
-      },
-      {
-        method: 'GET',
-        path: '/api/admin/students',
-        url: 'http://localhost:8080/api/admin/students',
-        desc: 'Lấy danh sách tất cả học viên trong hệ thống. Chỉ dành cho Admin.',
-        specInput: 'Header: Authorization: Bearer <token_admin>',
-        specOutput: 'JSON: Mảng các profiles học viên [ { "id": "...", "email": "...", "display_name": "..." } ]'
-      },
-      {
-        method: 'POST',
-        path: '/api/admin/lessons',
-        url: 'http://localhost:8080/api/admin/lessons',
-        desc: 'Tạo một bài học mới. Chỉ dành cho Admin.',
-        specInput: 'JSON Body: { "title": "Bài 2: Kore wa Hon desu", "description": "Học về đồ vật..." }',
-        specOutput: 'JSON: { "message": "Lesson created successfully", "lesson": { ... } }',
-        defaultBody: {
-          title: 'Bài 2: Kore wa Hon desu',
-          description: 'Học về đồ vật xung quanh và đại từ chỉ định.'
+      ],
+      'Học Viên (User & Admin)': [
+        {
+          method: 'GET',
+          path: '/api/user/lessons',
+          url: 'http://localhost:8080/api/user/lessons',
+          role: 'user',
+          desc: 'Lấy toàn bộ danh sách bài học của khóa học.',
+          specInput: 'Header:\nAuthorization: Bearer <token>',
+          specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "title": "Bài 1: Hajimemashite",\n    "description": "Giới thiệu bản thân"\n  }\n]'
+        },
+        {
+          method: 'GET',
+          path: '/api/user/lessons/1/vocabulary',
+          url: 'http://localhost:8080/api/user/lessons/1/vocabulary',
+          role: 'user',
+          desc: 'Lấy từ vựng của Bài 1, ghép kèm trạng thái học thuộc ("not_learned", "learning", "mastered") của tài khoản hiện tại.',
+          specInput: 'Header:\nAuthorization: Bearer <token>',
+          specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "lesson_id": 1,\n    "hiragana": "わたし",\n    "romaji": "watashi",\n    "vietnamese_meaning": "tôi",\n    "status": "mastered"\n  }\n]'
+        },
+        {
+          method: 'GET',
+          path: '/api/user/lessons/1/kanji',
+          url: 'http://localhost:8080/api/user/lessons/1/kanji',
+          role: 'user',
+          desc: 'Lấy danh sách chữ Hán bài 1 ghép trạng thái học của user.',
+          specInput: 'Header:\nAuthorization: Bearer <token>',
+          specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "character": "私",\n    "sino_vietnamese": "TƯ",\n    "status": "learning"\n  }\n]'
+        },
+        {
+          method: 'GET',
+          path: '/api/user/lessons/1/grammar',
+          url: 'http://localhost:8080/api/user/lessons/1/grammar',
+          role: 'user',
+          desc: 'Lấy toàn bộ cấu trúc ngữ pháp thuộc Bài 1.',
+          specInput: 'Header:\nAuthorization: Bearer <token>',
+          specOutput: 'JSON Array:\n[\n  {\n    "id": 1,\n    "title": "N1 wa N2 desu",\n    "meaning": "N1 là N2",\n    "japanese_example": "わたしはマイクです。"\n  }\n]'
+        },
+        {
+          method: 'GET',
+          path: '/api/user/progress-summary',
+          url: 'http://localhost:8080/api/user/progress-summary',
+          role: 'user',
+          desc: 'Lấy tổng hợp tiến độ thuộc từ vựng/Kanji phục vụ thống kê ở Dashboard.',
+          specInput: 'Header:\nAuthorization: Bearer <token>',
+          specOutput: 'JSON:\n{\n  "vocabulary": { "total": 15, "mastered": 5, "percentage": 33.3 },\n  "kanji": { "total": 8, "mastered": 2, "percentage": 25.0 }\n}'
+        },
+        {
+          method: 'POST',
+          path: '/api/user/progress',
+          url: 'http://localhost:8080/api/user/progress',
+          role: 'user',
+          desc: 'Học viên cập nhật trạng thái học thuộc cho Từ vựng / Kanji.',
+          specInput: 'JSON Body:\n{\n  "item_type": "vocabulary",\n  "item_id": 1,\n  "status": "mastered"\n}',
+          specOutput: 'JSON:\n{\n  "message": "Progress updated successfully",\n  "progress": { "id": 1, "status": "mastered" }\n}',
+          defaultBody: { item_type: 'vocabulary', item_id: 1, status: 'mastered' }
+        },
+        {
+          method: 'GET',
+          path: '/api/user/target-plan',
+          url: 'http://localhost:8080/api/user/target-plan',
+          role: 'user',
+          desc: 'Lấy cấu hình kế hoạch học tập mục tiêu đã lưu trên Dashboard.',
+          specInput: 'Header:\nAuthorization: Bearer <token>',
+          specOutput: 'JSON:\n{\n  "start_date": "2026-06-13",\n  "end_date": "2026-06-20",\n  "vocabulary_target": 30,\n  "self_evaluation": "Tốt"\n}'
+        },
+        {
+          method: 'POST',
+          path: '/api/user/target-plan',
+          url: 'http://localhost:8080/api/user/target-plan',
+          role: 'user',
+          desc: 'Cập nhật/Lập kế hoạch mục tiêu tiến độ trên Dashboard.',
+          specInput: 'JSON Body:\n{\n  "start_date": "2026-06-13",\n  "end_date": "2026-06-20",\n  "vocabulary_target": 30,\n  "kanji_target": 10,\n  "self_evaluation": "Tốt"\n}',
+          specOutput: 'JSON:\n{\n  "message": "Target plan updated successfully",\n  "plan": { ... }\n}',
+          defaultBody: { start_date: '2026-06-13', end_date: '2026-06-20', vocabulary_target: 30, kanji_target: 10, self_evaluation: 'Tốt' }
         }
-      }
-    ];
+      ],
+      'Quản Trị Viên (Chỉ Admin)': [
+        {
+          method: 'GET',
+          path: '/api/admin/students',
+          url: 'http://localhost:8080/api/admin/students',
+          role: 'admin',
+          desc: 'Lấy danh sách thông tin tất cả học viên trong hệ thống.',
+          specInput: 'Header:\nAuthorization: Bearer <token_admin>',
+          specOutput: 'JSON Array:\n[\n  {\n    "id": "uuid-hoc-vien",\n    "email": "student@gmail.com",\n    "display_name": "Học viên A"\n  }\n]'
+        },
+        {
+          method: 'GET',
+          path: '/api/admin/students/uuid-hoc-vien/progress',
+          url: 'http://localhost:8080/api/admin/students/mock-student-uuid/progress',
+          role: 'admin',
+          desc: 'Theo dõi chi tiết tiến độ học tập và mục tiêu của học viên cụ thể theo ID.',
+          specInput: 'Header:\nAuthorization: Bearer <token_admin>',
+          specOutput: 'JSON:\n{\n  "student": { "email": "..." },\n  "progress": {\n    "vocabulary": { "total": 15, "mastered": 5 },\n    "kanji": { "total": 8, "mastered": 2 }\n  },\n  "targetPlan": { ... }\n}'
+        },
+        {
+          method: 'POST',
+          path: '/api/admin/lessons',
+          url: 'http://localhost:8080/api/admin/lessons',
+          role: 'admin',
+          desc: 'Tạo một bài học mới trong cơ sở dữ liệu.',
+          specInput: 'JSON Body:\n{\n  "title": "Bài 2: Kore wa Hon desu",\n  "description": "Học về đồ vật xung quanh"\n}',
+          specOutput: 'JSON:\n{\n  "message": "Lesson created successfully",\n  "lesson": { "id": 2, "title": "Bài 2..." }\n}',
+          defaultBody: { title: 'Bài 2: Kore wa Hon desu', description: 'Học về đồ vật xung quanh và đại từ chỉ định.' }
+        },
+        {
+          method: 'POST',
+          path: '/api/admin/vocabulary',
+          url: 'http://localhost:8080/api/admin/vocabulary',
+          role: 'admin',
+          desc: 'Thêm từ vựng mới vào bài học.',
+          specInput: 'JSON Body:\n{\n  "lesson_id": 1,\n  "hiragana": "ほん",\n  "romaji": "hon",\n  "vietnamese_meaning": "cuốn sách",\n  "word_type": "Danh từ"\n}',
+          specOutput: 'JSON:\n{\n  "message": "Vocabulary added successfully",\n  "vocabulary": { ... }\n}',
+          defaultBody: { lesson_id: 1, hiragana: 'ほん', romaji: 'hon', vietnamese_meaning: 'cuốn sách', word_type: 'Danh từ' }
+        },
+        {
+          method: 'PUT',
+          path: '/api/admin/vocabulary/1',
+          url: 'http://localhost:8080/api/admin/vocabulary/1',
+          role: 'admin',
+          desc: 'Cập nhật thông tin từ vựng có sẵn.',
+          specInput: 'JSON Body:\n{\n  "vietnamese_meaning": "quyển sách (cập nhật)"\n}',
+          specOutput: 'JSON:\n{\n  "message": "Vocabulary updated successfully",\n  "vocabulary": { ... }\n}',
+          defaultBody: { vietnamese_meaning: 'quyển sách (cập nhật)' }
+        },
+        {
+          method: 'DELETE',
+          path: '/api/admin/vocabulary/1',
+          url: 'http://localhost:8080/api/admin/vocabulary/1',
+          role: 'admin',
+          desc: 'Xóa từ vựng ra khỏi hệ thống học liệu.',
+          specInput: 'Header:\nAuthorization: Bearer <token_admin>',
+          specOutput: 'JSON:\n{\n  "message": "Vocabulary deleted successfully"\n}'
+        }
+      ]
+    };
 
     const apiList = document.getElementById('apiList');
     const requestMethod = document.getElementById('requestMethod');
@@ -455,44 +573,56 @@
     const responseJson = document.getElementById('responseJson');
     const statusBadge = document.getElementById('statusBadge');
     const tokenSelect = document.getElementById('tokenSelect');
+    const apiDescBanner = document.getElementById('apiDescBanner');
 
-    const specDesc = document.getElementById('specDesc');
     const specInput = document.getElementById('specInput');
     const specOutput = document.getElementById('specOutput');
 
-    let selectedApi = null;
+    let isFirst = true;
 
-    // Render API items
-    apis.forEach((api, index) => {
-      const item = document.createElement('div');
-      item.className = 'api-item';
-      if (index === 0) item.classList.add('active');
+    // Render grouped APIs
+    for (const [groupName, apis] of Object.entries(apiGroups)) {
+      const groupHeader = document.createElement('div');
+      groupHeader.className = 'section-header';
+      groupHeader.innerText = groupName;
+      apiList.appendChild(groupHeader);
 
-      const badgeClass = `badge-${api.method.toLowerCase()}`;
-      item.innerHTML = `
-        <span class="api-badge ${badgeClass}">${api.method}</span>
-        <div class="api-path">${api.path}</div>
-        <div class="api-desc">${api.desc}</div>
-      `;
+      apis.forEach((api) => {
+        const item = document.createElement('div');
+        item.className = 'api-item';
+        if (isFirst) {
+          item.classList.add('active');
+          isFirst = false;
+          selectApi(api);
+        }
 
-      item.onclick = () => {
-        document.querySelectorAll('.api-item').forEach(el => el.classList.remove('active'));
-        item.classList.add('active');
-        selectApi(api);
-      };
+        const badgeClass = `badge-${api.method.toLowerCase()}`;
+        const roleClass = `role-${api.role}`;
+        const roleLabel = api.role === 'public' ? '🔓 Public' : (api.role === 'user' ? '🔒 User' : '🛡️ Admin');
 
-      apiList.appendChild(item);
-    });
+        item.innerHTML = `
+          <div class="meta-row">
+            <span class="api-badge ${badgeClass}">${api.method}</span>
+            <span class="role-badge ${roleClass}">${roleLabel}</span>
+          </div>
+          <div class="api-path">${api.path}</div>
+        `;
 
-    // Default select
-    selectApi(apis[0]);
+        item.onclick = () => {
+          document.querySelectorAll('.api-item').forEach(el => el.classList.remove('active'));
+          item.classList.add('active');
+          selectApi(api);
+        };
+
+        apiList.appendChild(item);
+      });
+    }
 
     function selectApi(api) {
-      selectedApi = api;
       requestMethod.value = api.method;
       requestUrl.value = api.url;
+      apiDescBanner.innerHTML = `<strong>Mô tả:</strong> ${api.desc} <br> <strong>Yêu cầu Auth:</strong> ${api.role === 'public' ? 'Không yêu cầu Auth (Public)' : (api.role === 'user' ? 'Quyền Học viên (User/Admin)' : 'Quyền Quản trị viên (Chỉ Admin)')}`;
       
-      specDesc.innerText = api.desc;
       specInput.innerText = api.specInput;
       specOutput.innerText = api.specOutput;
 
@@ -501,6 +631,15 @@
         requestBody.value = JSON.stringify(api.defaultBody || {}, null, 2);
       } else {
         bodyContainer.style.display = 'none';
+      }
+
+      // Auto select matching token option in select header if appropriate
+      if (api.role === 'public') {
+        tokenSelect.value = '';
+      } else if (api.role === 'user') {
+        tokenSelect.value = 'Bearer mock-token-user123';
+      } else if (api.role === 'admin') {
+        tokenSelect.value = 'Bearer mock-token-admin123-admin';
       }
     }
 
@@ -539,7 +678,7 @@
         try {
           options.body = JSON.stringify(JSON.parse(requestBody.value));
         } catch (e) {
-          responseJson.innerText = 'Lỗi: JSON body không đúng định dạng.';
+          responseJson.innerText = 'Lỗi: JSON body gửi đi không đúng định dạng JSON.';
           return;
         }
       }
@@ -547,7 +686,7 @@
       try {
         const res = await fetch(url, options);
         statusBadge.style.display = 'inline-block';
-        statusBadge.innerText = `Status: ${res.status} ${res.statusText}`;
+        statusBadge.innerText = `HTTP ${res.status} ${res.statusText}`;
 
         if (res.status >= 200 && res.status < 300) {
           statusBadge.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
@@ -564,7 +703,7 @@
         statusBadge.innerText = 'LỖI KẾT NỐI';
         statusBadge.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
         statusBadge.style.color = 'var(--error)';
-        responseJson.innerText = `Lỗi kết nối đến Server:\n\n${error.message}\n\nHãy đảm bảo bạn đã khởi động Express Backend server trước khi chạy test!`;
+        responseJson.innerText = `Không thể kết nối đến Express Backend Server:\n\n${error.message}\n\nHãy đảm bảo bạn đã khởi động Express Backend server trước khi chạy test!`;
       }
     };
   </script>
