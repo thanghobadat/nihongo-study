@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -31,6 +32,11 @@ app.get('/', (req, res) => {
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Interactive API Test Client endpoint
+app.get('/test', (req, res) => {
+  res.sendFile(path.join(__dirname, '../test_client.html'));
 });
 
 // Mount Routes

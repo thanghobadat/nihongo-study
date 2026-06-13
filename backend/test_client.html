@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nihongo Flow - API Interactive Test Client</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --panel-dark: #1e293b;
+      --border-dark: #334155;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Left pane: API Documentation */
+    .sidebar {
+      width: 40%;
+      background-color: var(--panel-dark);
+      border-right: 1px solid var(--border-dark);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-header p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .api-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .api-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .api-item:hover {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .api-item.active {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+    }
+
+    .api-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .badge-get { background-color: rgba(16, 185, 129, 0.2); color: var(--success); }
+    .badge-post { background-color: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .badge-put { background-color: rgba(59, 130, 246, 0.2); color: var(--accent); }
+    .badge-delete { background-color: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+    .api-path {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .api-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* Right pane: Interactive Test Console */
+    .console {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background-color: var(--bg-dark);
+    }
+
+    .console-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .auth-config {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-config label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    select, input, textarea {
+      background-color: var(--panel-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      color: var(--text-main);
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .console-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .request-config {
+      background: var(--panel-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .url-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .method-select {
+      width: 100px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .url-input {
+      flex: 1;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .send-btn {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .send-btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .body-editor {
+      width: 100%;
+      height: 120px;
+      font-family: 'Fira Code', monospace;
+      resize: vertical;
+    }
+
+    .response-view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--panel-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 15px;
+      min-height: 250px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .status-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .response-json {
+      flex: 1;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      padding: 12px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      overflow: auto;
+      white-space: pre-wrap;
+      color: #38bdf8;
+    }
+
+    .docs-section {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .docs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+
+    .docs-table th, .docs-table td {
+      border: 1px solid var(--border-dark);
+      padding: 8px;
+      text-align: left;
+    }
+
+    .docs-table th {
+      background-color: rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left: API Info -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>🔊 Nihongo Flow API</h1>
+      <p>Interactive API Client & Spec Documentation</p>
+    </div>
+    <div class="api-list" id="apiList">
+      <!-- Generated dynamically -->
+    </div>
+  </div>
+
+  <!-- Right: Console -->
+  <div class="console">
+    <div class="console-header">
+      <h2>Interactive Console</h2>
+      <div class="auth-config">
+        <label for="tokenSelect">Vai trò (Auth):</label>
+        <select id="tokenSelect">
+          <option value="">Không có Auth (Anonymous)</option>
+          <option value="Bearer mock-token-user123">Học viên (User: mock-token-user123)</option>
+          <option value="Bearer mock-token-admin123-admin">Quản lý (Admin: mock-token-admin123-admin)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="console-body">
+      <!-- Request Config -->
+      <div class="request-config">
+        <div class="section-title">Yêu Cầu (Request)</div>
+        <div class="url-row">
+          <select id="requestMethod" class="method-select">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+          <input type="text" id="requestUrl" class="url-input" value="http://localhost:8080/">
+          <button class="send-btn" id="sendBtn">SEND</button>
+        </div>
+
+        <div id="bodyContainer" style="display: none;">
+          <div class="section-title">JSON Body</div>
+          <textarea id="requestBody" class="body-editor" placeholder="{}"></textarea>
+        </div>
+      </div>
+
+      <!-- Response View -->
+      <div class="response-view">
+        <div class="status-row">
+          <div class="section-title" style="margin-bottom: 0;">Phản Hồi (Response)</div>
+          <div id="statusBadge" class="status-badge" style="display: none;"></div>
+        </div>
+        <pre id="responseJson" class="response-json">Nhấp vào một API ở danh sách bên trái và nhấn SEND để thử nghiệm.</pre>
+      </div>
+
+      <!-- API Details Spec -->
+      <div class="docs-section">
+        <div class="section-title">Chi Tiết API Spec</div>
+        <table class="docs-table">
+          <tr>
+            <th style="width: 25%;">Thông số</th>
+            <th>Mô tả / Giá trị</th>
+          </tr>
+          <tr>
+            <td><strong>Chức năng</strong></td>
+            <td id="specDesc">-</td>
+          </tr>
+          <tr>
+            <td><strong>Dữ liệu gửi (Input)</strong></td>
+            <td id="specInput">-</td>
+          </tr>
+          <tr>
+            <td><strong>Dữ liệu nhận (Output)</strong></td>
+            <td id="specOutput">-</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const apis = [
+      {
+        method: 'GET',
+        path: '/',
+        url: 'http://localhost:8080/',
+        desc: 'API Chào mừng gốc. Không yêu cầu đăng nhập.',
+        specInput: 'Không có dữ liệu đầu vào.',
+        specOutput: 'JSON: { "message": "Welcome to Nihongo Flow Backend API!" }'
+      },
+      {
+        method: 'GET',
+        path: '/api/health',
+        url: 'http://localhost:8080/api/health',
+        desc: 'Kiểm tra trạng thái hoạt động của server (Health Check).',
+        specInput: 'Không có dữ liệu đầu vào.',
+        specOutput: 'JSON: { "status": "ok", "timestamp": "2026-06-13T05:22:35Z" }'
+      },
+      {
+        method: 'GET',
+        path: '/api/user/lessons',
+        url: 'http://localhost:8080/api/user/lessons',
+        desc: 'Lấy danh sách các bài học. Yêu cầu quyền học viên (User/Admin).',
+        specInput: 'Header: Authorization: Bearer <token>',
+        specOutput: 'JSON: Mảng chứa thông tin các bài học [ { "id": 1, "title": "Bài 1...", "description": "..." } ]'
+      },
+      {
+        method: 'GET',
+        path: '/api/user/progress-summary',
+        url: 'http://localhost:8080/api/user/progress-summary',
+        desc: 'Lấy tổng hợp tiến độ học thuộc từ vựng/Kanji vẽ biểu đồ Dashboard. Yêu cầu quyền học viên (User/Admin).',
+        specInput: 'Header: Authorization: Bearer <token>',
+        specOutput: 'JSON: { "vocabulary": { "total": 15, "mastered": 5, "percentage": 33.3 }, "kanji": { "total": 8, "mastered": 2, "percentage": 25.0 } }'
+      },
+      {
+        method: 'POST',
+        path: '/api/user/progress',
+        url: 'http://localhost:8080/api/user/progress',
+        desc: 'Cập nhật trạng thái học của một Từ vựng/Kanji. Yêu cầu quyền học viên (User/Admin).',
+        specInput: 'JSON Body: { "item_type": "vocabulary", "item_id": 1, "status": "mastered" }\n- item_type: "vocabulary" hoặc "kanji"\n- status: "not_learned", "learning", hoặc "mastered"',
+        specOutput: 'JSON: { "message": "Progress updated successfully", "progress": { ... } }',
+        defaultBody: {
+          item_type: 'vocabulary',
+          item_id: 1,
+          status: 'mastered'
+        }
+      },
+      {
+        method: 'GET',
+        path: '/api/admin/students',
+        url: 'http://localhost:8080/api/admin/students',
+        desc: 'Lấy danh sách tất cả học viên trong hệ thống. Chỉ dành cho Admin.',
+        specInput: 'Header: Authorization: Bearer <token_admin>',
+        specOutput: 'JSON: Mảng các profiles học viên [ { "id": "...", "email": "...", "display_name": "..." } ]'
+      },
+      {
+        method: 'POST',
+        path: '/api/admin/lessons',
+        url: 'http://localhost:8080/api/admin/lessons',
+        desc: 'Tạo một bài học mới. Chỉ dành cho Admin.',
+        specInput: 'JSON Body: { "title": "Bài 2: Kore wa Hon desu", "description": "Học về đồ vật..." }',
+        specOutput: 'JSON: { "message": "Lesson created successfully", "lesson": { ... } }',
+        defaultBody: {
+          title: 'Bài 2: Kore wa Hon desu',
+          description: 'Học về đồ vật xung quanh và đại từ chỉ định.'
+        }
+      }
+    ];
+
+    const apiList = document.getElementById('apiList');
+    const requestMethod = document.getElementById('requestMethod');
+    const requestUrl = document.getElementById('requestUrl');
+    const requestBody = document.getElementById('requestBody');
+    const bodyContainer = document.getElementById('bodyContainer');
+    const sendBtn = document.getElementById('sendBtn');
+    const responseJson = document.getElementById('responseJson');
+    const statusBadge = document.getElementById('statusBadge');
+    const tokenSelect = document.getElementById('tokenSelect');
+
+    const specDesc = document.getElementById('specDesc');
+    const specInput = document.getElementById('specInput');
+    const specOutput = document.getElementById('specOutput');
+
+    let selectedApi = null;
+
+    // Render API items
+    apis.forEach((api, index) => {
+      const item = document.createElement('div');
+      item.className = 'api-item';
+      if (index === 0) item.classList.add('active');
+
+      const badgeClass = `badge-${api.method.toLowerCase()}`;
+      item.innerHTML = `
+        <span class="api-badge ${badgeClass}">${api.method}</span>
+        <div class="api-path">${api.path}</div>
+        <div class="api-desc">${api.desc}</div>
+      `;
+
+      item.onclick = () => {
+        document.querySelectorAll('.api-item').forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+        selectApi(api);
+      };
+
+      apiList.appendChild(item);
+    });
+
+    // Default select
+    selectApi(apis[0]);
+
+    function selectApi(api) {
+      selectedApi = api;
+      requestMethod.value = api.method;
+      requestUrl.value = api.url;
+      
+      specDesc.innerText = api.desc;
+      specInput.innerText = api.specInput;
+      specOutput.innerText = api.specOutput;
+
+      if (api.method === 'POST' || api.method === 'PUT') {
+        bodyContainer.style.display = 'block';
+        requestBody.value = JSON.stringify(api.defaultBody || {}, null, 2);
+      } else {
+        bodyContainer.style.display = 'none';
+      }
+    }
+
+    // Toggle body container on method change
+    requestMethod.onchange = () => {
+      if (requestMethod.value === 'POST' || requestMethod.value === 'PUT') {
+        bodyContainer.style.display = 'block';
+      } else {
+        bodyContainer.style.display = 'none';
+      }
+    };
+
+    // Send Request
+    sendBtn.onclick = async () => {
+      responseJson.innerText = 'Đang gửi yêu cầu...';
+      statusBadge.style.display = 'none';
+
+      const method = requestMethod.value;
+      const url = requestUrl.value;
+      const token = tokenSelect.value;
+
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+
+      if (token) {
+        headers['Authorization'] = token;
+      }
+
+      const options = {
+        method,
+        headers
+      };
+
+      if (method === 'POST' || method === 'PUT') {
+        try {
+          options.body = JSON.stringify(JSON.parse(requestBody.value));
+        } catch (e) {
+          responseJson.innerText = 'Lỗi: JSON body không đúng định dạng.';
+          return;
+        }
+      }
+
+      try {
+        const res = await fetch(url, options);
+        statusBadge.style.display = 'inline-block';
+        statusBadge.innerText = `Status: ${res.status} ${res.statusText}`;
+
+        if (res.status >= 200 && res.status < 300) {
+          statusBadge.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+          statusBadge.style.color = 'var(--success)';
+        } else if (res.status >= 400) {
+          statusBadge.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
+          statusBadge.style.color = 'var(--error)';
+        }
+
+        const data = await res.json();
+        responseJson.innerText = JSON.stringify(data, null, 2);
+      } catch (error) {
+        statusBadge.style.display = 'inline-block';
+        statusBadge.innerText = 'LỖI KẾT NỐI';
+        statusBadge.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
+        statusBadge.style.color = 'var(--error)';
+        responseJson.innerText = `Lỗi kết nối đến Server:\n\n${error.message}\n\nHãy đảm bảo bạn đã khởi động Express Backend server trước khi chạy test!`;
+      }
+    };
+  </script>
+</body>
+</html>
