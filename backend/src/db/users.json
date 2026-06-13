@@ -1,16 +1,9 @@
 [
   {
-    "id": "user123",
-    "email": "user@nihongoflow.com",
-    "password": "securepassword123",
-    "displayName": "Học Viên A",
+    "id": "user-1781344343083",
+    "email": "hoangthanh01022000@gmail.com",
+    "password": "Thanhngo@123",
+    "displayName": "ThanhNH33",
     "role": "user"
-  },
-  {
-    "id": "admin123",
-    "email": "admin@nihongoflow.com",
-    "password": "securepassword123",
-    "displayName": "Quản Trị Viên",
-    "role": "admin"
   }
 ]

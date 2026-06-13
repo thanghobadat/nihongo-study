@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '../utils/api';
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,9 +25,17 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
-      await api.post('/api/auth/forgot-password', { email });
-      setSuccess('Yêu cầu đã được gửi! Vui lòng kiểm tra hộp thư email của bạn để đặt lại mật khẩu.');
-      setEmail('');
+      const response = await api.post('/api/auth/forgot-password', { email });
+      if (response && response.mockToken) {
+        setSuccess('Yêu cầu đặt lại mật khẩu thành công (Local Mock)! Đang tự động chuyển hướng...');
+        setEmail('');
+        setTimeout(() => {
+          router.push(`/reset-password?token=${response.mockToken}`);
+        }, 1500);
+      } else {
+        setSuccess('Yêu cầu đã được gửi! Vui lòng kiểm tra hộp thư email của bạn để đặt lại mật khẩu.');
+        setEmail('');
+      }
     } catch (err: any) {
       console.error(err);
       setError(err.message || 'Yêu cầu thất bại. Vui lòng thử lại sau.');

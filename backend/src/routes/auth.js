@@ -124,7 +124,11 @@ router.post('/login', async (req, res) => {
         users = JSON.parse(fs.readFileSync(usersFile, 'utf8'));
       }
 
-      const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+      const user = users.find(u => 
+        (u.email.toLowerCase() === email.toLowerCase() || 
+         (u.displayName && u.displayName.toLowerCase() === email.toLowerCase())) 
+        && u.password === password
+      );
       if (!user) {
         return res.status(400).json({ error: 'Tài khoản hoặc mật khẩu không đúng.' });
       }

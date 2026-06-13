@@ -127,11 +127,11 @@ export default function LoginPage() {
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Tài khoản</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">📧</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">👤</span>
                 <input
-                  type="email"
+                  type="text"
                   required
-                  placeholder="Nhập email của bạn..."
+                  placeholder="Nhập email hoặc tên tài khoản..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-11 pr-4 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
