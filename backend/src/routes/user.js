@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../db/supabase');
 const { requireAuth } = require('../middlewares/auth');
+const mockDb = require('../db/mockDb');
 
 // Apply auth middleware to all user routes
 router.use(requireAuth);
@@ -16,16 +17,23 @@ router.get('/progress-summary', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const vocabList = mockDb.vocabulary;
+      const kanjiList = mockDb.kanji;
+      const progressKeys = Object.keys(mockDb.userProgress).filter(k => k.startsWith(`${userId}:`));
+
+      const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
+      const masteredKanji = progressKeys.filter(k => k.includes(':kanji:') && mockDb.userProgress[k] === 'mastered').length;
+
       return res.json({
         vocabulary: {
-          total: 15,
-          mastered: 5,
-          percentage: 33.3
+          total: vocabList.length,
+          mastered: masteredVocab,
+          percentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0
         },
         kanji: {
-          total: 8,
-          mastered: 2,
-          percentage: 25.0
+          total: kanjiList.length,
+          mastered: masteredKanji,
+          percentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0
         }
       });
     }
@@ -81,14 +89,8 @@ router.get('/target-plan', async (req, res) => {
   try {
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json({
-        user_id: req.user.id,
-        start_date: '2026-06-13',
-        end_date: '2026-06-20',
-        vocabulary_target: 30,
-        kanji_target: 10,
-        self_evaluation: 'Tốt'
-      });
+      const plan = mockDb.targetPlan[req.user.id] || { message: 'No target plan configured' };
+      return res.json(plan);
     }
 
     const { data, error } = await supabase
@@ -122,17 +124,19 @@ router.post('/target-plan', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const updatedPlan = {
+        user_id: userId,
+        start_date,
+        end_date,
+        vocabulary_target: vocabulary_target || 0,
+        kanji_target: kanji_target || 0,
+        self_evaluation: self_evaluation || null,
+        updated_at: new Date().toISOString()
+      };
+      mockDb.targetPlan[userId] = updatedPlan;
       return res.json({
         message: 'Target plan updated successfully (Mock Mode)',
-        plan: {
-          user_id: userId,
-          start_date,
-          end_date,
-          vocabulary_target: vocabulary_target || 0,
-          kanji_target: kanji_target || 0,
-          self_evaluation: self_evaluation || null,
-          updated_at: new Date().toISOString()
-        }
+        plan: updatedPlan
       });
     }
 
@@ -168,13 +172,7 @@ router.get('/lessons', async (req, res) => {
   try {
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json([
-        { 
-          id: 1, 
-          title: 'Bài 1: Hajimemashite (Rất hân hạnh được làm quen)', 
-          description: 'Học cách tự giới thiệu bản thân, các câu chào hỏi căn bản và cấu trúc câu khẳng định/phủ định.' 
-        }
-      ]);
+      return res.json(mockDb.lessons);
     }
 
     const { data, error } = await supabase
@@ -202,34 +200,16 @@ router.get('/lessons/:lessonId/vocabulary', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json([
-        { 
-          id: 1, 
-          lesson_id: parseInt(lessonId), 
-          hiragana: 'わたし', 
-          romaji: 'watashi', 
-          vietnamese_meaning: 'tôi', 
-          word_type: 'Danh từ', 
-          japanese_example: 'わたしは学生です。', 
-          example_meaning: 'Tôi là học sinh.', 
-          mnemonic_tip: 'Mẹo nhớ: Vẽ hình bản thân chỉ tay vào mình.', 
-          image_url: '',
-          status: 'mastered' 
-        },
-        { 
-          id: 2, 
-          lesson_id: parseInt(lessonId), 
-          hiragana: 'あなた', 
-          romaji: 'anata', 
-          vietnamese_meaning: 'bạn, anh, chị', 
-          word_type: 'Danh từ', 
-          japanese_example: 'あなたはだれですか。', 
-          example_meaning: 'Bạn là ai?', 
-          mnemonic_tip: 'Mẹo nhớ: Vẽ hình một người chỉ tay về phía trước.', 
-          image_url: '',
-          status: 'learning' 
-        }
-      ]);
+      const mergedList = mockDb.vocabulary
+        .filter(item => item.lesson_id === parseInt(lessonId))
+        .map(item => {
+          const status = mockDb.userProgress[`${userId}:vocabulary:${item.id}`] || 'not_learned';
+          return {
+            ...item,
+            status
+          };
+        });
+      return res.json(mergedList);
     }
 
     // Fetch vocabulary
@@ -276,21 +256,16 @@ router.get('/lessons/:lessonId/kanji', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json([
-        { 
-          id: 1, 
-          lesson_id: parseInt(lessonId), 
-          character: '私', 
-          stroke_count: '7', 
-          onyomi: 'シ', 
-          kunyomi: 'watashi', 
-          sino_vietnamese: 'TƯ', 
-          vietnamese_meaning: 'tôi, cá nhân', 
-          mnemonic_tip: 'Hình một người đang giữ đống lúa thóc của riêng mình.', 
-          compounds: '私立 (しりつ - Tư lập)',
-          status: 'mastered' 
-        }
-      ]);
+      const mergedList = mockDb.kanji
+        .filter(item => item.lesson_id === parseInt(lessonId))
+        .map(item => {
+          const status = mockDb.userProgress[`${userId}:kanji:${item.id}`] || 'not_learned';
+          return {
+            ...item,
+            status
+          };
+        });
+      return res.json(mergedList);
     }
 
     const { data: kanjiList, error: kError } = await supabase
@@ -333,19 +308,8 @@ router.get('/lessons/:lessonId/grammar', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json([
-        { 
-          id: 1, 
-          lesson_id: parseInt(lessonId), 
-          title: 'N1 wa N2 desu', 
-          meaning: 'N1 là N2', 
-          structure: 'N1 + は + N2 + です', 
-          vietnamese_explanation: 'Trợ từ "は" đứng sau chủ ngữ N1 để biểu thị chủ đề của câu. "です" đứng ở cuối câu khẳng định để biểu thị thái độ lịch sự.', 
-          japanese_example: 'わたしは学生です。', 
-          example_meaning: 'Tôi là học sinh.', 
-          notes: '"は" trong vai trò trợ từ phát âm là "wa".' 
-        }
-      ]);
+      const filtered = mockDb.grammar.filter(item => item.lesson_id === parseInt(lessonId));
+      return res.json(filtered);
     }
 
     const { data, error } = await supabase
@@ -386,6 +350,8 @@ router.post('/progress', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const key = `${userId}:${item_type}:${item_id}`;
+      mockDb.userProgress[key] = status;
       return res.json({
         message: 'Progress updated successfully (Mock Mode)',
         progress: {

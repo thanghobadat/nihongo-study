@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../db/supabase');
 const { requireAuth, requireAdmin } = require('../middlewares/auth');
+const mockDb = require('../db/mockDb');
 
 // Protect all admin routes with auth and admin privilege middlewares
 router.use(requireAuth, requireAdmin);
@@ -14,14 +15,7 @@ router.get('/students', async (req, res) => {
   try {
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json([
-        { 
-          id: 'mock-student-uuid', 
-          email: 'student@gmail.com', 
-          display_name: 'Học viên A', 
-          created_at: new Date().toISOString() 
-        }
-      ]);
+      return res.json(mockDb.students);
     }
 
     const { data, error } = await supabase
@@ -49,33 +43,49 @@ router.get('/students/:studentId/progress', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const student = mockDb.students.find(s => s.id === studentId) || {
+        id: studentId,
+        email: 'user@nihongoflow.com',
+        display_name: 'Học Viên A'
+      };
+
+      const vocabList = mockDb.vocabulary;
+      const kanjiList = mockDb.kanji;
+      const progressKeys = Object.keys(mockDb.userProgress).filter(k => k.startsWith(`${studentId}:`));
+
+      const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
+      const learningVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'learning').length;
+      const notLearnedVocab = vocabList.length - masteredVocab - learningVocab;
+
+      const masteredKanji = progressKeys.filter(k => k.includes(':kanji:') && mockDb.userProgress[k] === 'mastered').length;
+      const learningKanji = progressKeys.filter(k => k.includes(':kanji:') && mockDb.userProgress[k] === 'learning').length;
+      const notLearnedKanji = kanjiList.length - masteredKanji - learningKanji;
+
+      const plan = mockDb.targetPlan[studentId] || {
+        start_date: '2026-06-13',
+        end_date: '2026-06-20',
+        vocabulary_target: 30,
+        kanji_target: 10,
+        self_evaluation: 'Tốt'
+      };
+
       return res.json({
-        student: { 
-          id: studentId, 
-          email: 'student@gmail.com', 
-          display_name: 'Học viên A' 
-        },
+        student,
         progress: {
           vocabulary: {
-            total: 15,
-            mastered: 5,
-            learning: 3,
-            not_learned: 7
+            total: vocabList.length,
+            mastered: masteredVocab,
+            learning: learningVocab,
+            not_learned: notLearnedVocab
           },
           kanji: {
-            total: 8,
-            mastered: 2,
-            learning: 1,
-            not_learned: 5
+            total: kanjiList.length,
+            mastered: masteredKanji,
+            learning: learningKanji,
+            not_learned: notLearnedKanji
           }
         },
-        targetPlan: {
-          start_date: '2026-06-13',
-          end_date: '2026-06-20',
-          vocabulary_target: 30,
-          kanji_target: 10,
-          self_evaluation: 'Tốt'
-        }
+        targetPlan: plan
       });
     }
 
@@ -157,14 +167,17 @@ router.post('/lessons', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const newId = mockDb.lessons.length ? Math.max(...mockDb.lessons.map(l => l.id)) + 1 : 1;
+      const newLesson = {
+        id: newId,
+        title,
+        description,
+        created_at: new Date().toISOString()
+      };
+      mockDb.lessons.push(newLesson);
       return res.status(201).json({
         message: 'Lesson created successfully (Mock Mode)',
-        lesson: {
-          id: 999,
-          title,
-          description,
-          created_at: new Date().toISOString()
-        }
+        lesson: newLesson
       });
     }
 
@@ -197,21 +210,24 @@ router.post('/vocabulary', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const newId = mockDb.vocabulary.length ? Math.max(...mockDb.vocabulary.map(v => v.id)) + 1 : 1;
+      const newVocab = {
+        id: newId,
+        lesson_id: parseInt(lesson_id),
+        hiragana,
+        romaji,
+        vietnamese_meaning,
+        word_type: word_type || null,
+        japanese_example: japanese_example || null,
+        example_meaning: example_meaning || null,
+        mnemonic_tip: mnemonic_tip || null,
+        image_url: image_url || null,
+        created_at: new Date().toISOString()
+      };
+      mockDb.vocabulary.push(newVocab);
       return res.status(201).json({
         message: 'Vocabulary added successfully (Mock Mode)',
-        vocabulary: {
-          id: 999,
-          lesson_id,
-          hiragana,
-          romaji,
-          vietnamese_meaning,
-          word_type: word_type || null,
-          japanese_example: japanese_example || null,
-          example_meaning: example_meaning || null,
-          mnemonic_tip: mnemonic_tip || null,
-          image_url: image_url || null,
-          created_at: new Date().toISOString()
-        }
+        vocabulary: newVocab
       });
     }
 
@@ -251,16 +267,14 @@ router.put('/vocabulary/:id', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const vocab = mockDb.vocabulary.find(v => v.id === parseInt(vocabId));
+      if (!vocab) {
+        return res.status(404).json({ error: 'Vocabulary not found (Mock Mode)' });
+      }
+      Object.assign(vocab, updates);
       return res.json({
         message: 'Vocabulary updated successfully (Mock Mode)',
-        vocabulary: {
-          id: parseInt(vocabId),
-          lesson_id: 1,
-          hiragana: 'ほん',
-          romaji: 'hon',
-          vietnamese_meaning: updates.vietnamese_meaning || 'quyển sách',
-          ...updates
-        }
+        vocabulary: vocab
       });
     }
 
@@ -290,6 +304,11 @@ router.delete('/vocabulary/:id', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const index = mockDb.vocabulary.findIndex(v => v.id === parseInt(vocabId));
+      if (index === -1) {
+        return res.status(404).json({ error: 'Vocabulary not found (Mock Mode)' });
+      }
+      mockDb.vocabulary.splice(index, 1);
       return res.json({ 
         message: `Vocabulary ID ${vocabId} deleted successfully (Mock Mode)` 
       });
@@ -323,21 +342,24 @@ router.post('/kanji', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const newId = mockDb.kanji.length ? Math.max(...mockDb.kanji.map(k => k.id)) + 1 : 1;
+      const newKanji = {
+        id: newId,
+        lesson_id: parseInt(lesson_id),
+        character,
+        stroke_count: stroke_count || null,
+        onyomi: onyomi || null,
+        kunyomi: kunyomi || null,
+        sino_vietnamese: sino_vietnamese || null,
+        vietnamese_meaning,
+        mnemonic_tip: mnemonic_tip || null,
+        compounds: compounds || null,
+        created_at: new Date().toISOString()
+      };
+      mockDb.kanji.push(newKanji);
       return res.status(201).json({
         message: 'Kanji added successfully (Mock Mode)',
-        kanji: {
-          id: 999,
-          lesson_id,
-          character,
-          stroke_count: stroke_count || null,
-          onyomi: onyomi || null,
-          kunyomi: kunyomi || null,
-          sino_vietnamese: sino_vietnamese || null,
-          vietnamese_meaning,
-          mnemonic_tip: mnemonic_tip || null,
-          compounds: compounds || null,
-          created_at: new Date().toISOString()
-        }
+        kanji: newKanji
       });
     }
 
@@ -377,15 +399,14 @@ router.put('/kanji/:id', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const item = mockDb.kanji.find(k => k.id === parseInt(kanjiId));
+      if (!item) {
+        return res.status(404).json({ error: 'Kanji not found (Mock Mode)' });
+      }
+      Object.assign(item, updates);
       return res.json({
         message: 'Kanji updated successfully (Mock Mode)',
-        kanji: {
-          id: parseInt(kanjiId),
-          lesson_id: 1,
-          character: '私',
-          vietnamese_meaning: updates.vietnamese_meaning || 'tôi',
-          ...updates
-        }
+        kanji: item
       });
     }
 
@@ -415,6 +436,11 @@ router.delete('/kanji/:id', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const index = mockDb.kanji.findIndex(k => k.id === parseInt(kanjiId));
+      if (index === -1) {
+        return res.status(404).json({ error: 'Kanji not found (Mock Mode)' });
+      }
+      mockDb.kanji.splice(index, 1);
       return res.json({ 
         message: `Kanji ID ${kanjiId} deleted successfully (Mock Mode)` 
       });
@@ -448,20 +474,23 @@ router.post('/grammar', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const newId = mockDb.grammar.length ? Math.max(...mockDb.grammar.map(g => g.id)) + 1 : 1;
+      const newGrammar = {
+        id: newId,
+        lesson_id: parseInt(lesson_id),
+        title,
+        meaning,
+        structure: structure || null,
+        vietnamese_explanation: vietnamese_explanation || null,
+        japanese_example: japanese_example || null,
+        example_meaning: example_meaning || null,
+        notes: notes || null,
+        created_at: new Date().toISOString()
+      };
+      mockDb.grammar.push(newGrammar);
       return res.status(201).json({
         message: 'Grammar point added successfully (Mock Mode)',
-        grammar: {
-          id: 999,
-          lesson_id,
-          title,
-          meaning,
-          structure: structure || null,
-          vietnamese_explanation: vietnamese_explanation || null,
-          japanese_example: japanese_example || null,
-          example_meaning: example_meaning || null,
-          notes: notes || null,
-          created_at: new Date().toISOString()
-        }
+        grammar: newGrammar
       });
     }
 
@@ -500,15 +529,14 @@ router.put('/grammar/:id', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const item = mockDb.grammar.find(g => g.id === parseInt(grammarId));
+      if (!item) {
+        return res.status(404).json({ error: 'Grammar point not found (Mock Mode)' });
+      }
+      Object.assign(item, updates);
       return res.json({
         message: 'Grammar point updated successfully (Mock Mode)',
-        grammar: {
-          id: parseInt(grammarId),
-          lesson_id: 1,
-          title: 'N1 wa N2 desu',
-          meaning: updates.meaning || 'N1 là N2',
-          ...updates
-        }
+        grammar: item
       });
     }
 
@@ -538,6 +566,11 @@ router.delete('/grammar/:id', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      const index = mockDb.grammar.findIndex(g => g.id === parseInt(grammarId));
+      if (index === -1) {
+        return res.status(404).json({ error: 'Grammar point not found (Mock Mode)' });
+      }
+      mockDb.grammar.splice(index, 1);
       return res.json({ 
         message: `Grammar point ID ${grammarId} deleted successfully (Mock Mode)` 
       });

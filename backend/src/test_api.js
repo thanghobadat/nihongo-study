@@ -95,13 +95,13 @@ async function runTests() {
     throw new Error('Test 4 failed: Did not forbid regular user from admin route.');
   }
 
-  // Test 5: Authorized Admin Middleware Check (Passes auth, hits database error)
+  // Test 5: Authorized Admin Middleware Check (Passes auth, returns mock data)
   const r5 = await makeRequest('/api/admin/students', 'GET', {
     'Authorization': 'Bearer mock-token-admin123-admin'
   });
   console.log('5. GET /api/admin/students (Admin Token) -> Status:', r5.statusCode);
-  // Status should be 500 (since Supabase is not configured and fails to fetch, but NOT 403)
-  if (r5.statusCode !== 500) {
-    throw new Error(`Test 5 failed: Expected database error (500), but got status: ${r5.statusCode}`);
+  // Status should be 200 (since mock data fallback returns the mock student list)
+  if (r5.statusCode !== 200) {
+    throw new Error(`Test 5 failed: Expected status 200, but got status: ${r5.statusCode}`);
   }
 }
