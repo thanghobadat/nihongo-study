@@ -18,7 +18,8 @@ const requireAuth = async (req, res, next) => {
       req.user = {
         id: token.replace('mock-token-', '').replace('-admin', ''),
         email: mockRole === 'admin' ? 'admin@nihongoflow.com' : 'user@nihongoflow.com',
-        role: mockRole
+        role: mockRole,
+        isMock: true
       };
       return next();
     }

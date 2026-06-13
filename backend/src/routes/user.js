@@ -14,6 +14,22 @@ router.get('/progress-summary', async (req, res) => {
   try {
     const userId = req.user.id;
 
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        vocabulary: {
+          total: 15,
+          mastered: 5,
+          percentage: 33.3
+        },
+        kanji: {
+          total: 8,
+          mastered: 2,
+          percentage: 25.0
+        }
+      });
+    }
+
     // Get total vocabulary and kanji counts
     const { count: totalVocab, error: errV } = await supabase
       .from('vocabulary')
@@ -63,6 +79,18 @@ router.get('/progress-summary', async (req, res) => {
  */
 router.get('/target-plan', async (req, res) => {
   try {
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        user_id: req.user.id,
+        start_date: '2026-06-13',
+        end_date: '2026-06-20',
+        vocabulary_target: 30,
+        kanji_target: 10,
+        self_evaluation: 'Tốt'
+      });
+    }
+
     const { data, error } = await supabase
       .from('target_plans')
       .select('*')
@@ -91,6 +119,22 @@ router.post('/target-plan', async (req, res) => {
     }
 
     const userId = req.user.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        message: 'Target plan updated successfully (Mock Mode)',
+        plan: {
+          user_id: userId,
+          start_date,
+          end_date,
+          vocabulary_target: vocabulary_target || 0,
+          kanji_target: kanji_target || 0,
+          self_evaluation: self_evaluation || null,
+          updated_at: new Date().toISOString()
+        }
+      });
+    }
 
     // Upsert target plan
     const { data, error } = await supabase
@@ -122,6 +166,17 @@ router.post('/target-plan', async (req, res) => {
  */
 router.get('/lessons', async (req, res) => {
   try {
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json([
+        { 
+          id: 1, 
+          title: 'Bài 1: Hajimemashite (Rất hân hạnh được làm quen)', 
+          description: 'Học cách tự giới thiệu bản thân, các câu chào hỏi căn bản và cấu trúc câu khẳng định/phủ định.' 
+        }
+      ]);
+    }
+
     const { data, error } = await supabase
       .from('lessons')
       .select('*')
@@ -144,6 +199,38 @@ router.get('/lessons/:lessonId/vocabulary', async (req, res) => {
   try {
     const lessonId = req.params.lessonId;
     const userId = req.user.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json([
+        { 
+          id: 1, 
+          lesson_id: parseInt(lessonId), 
+          hiragana: 'わたし', 
+          romaji: 'watashi', 
+          vietnamese_meaning: 'tôi', 
+          word_type: 'Danh từ', 
+          japanese_example: 'わたしは学生です。', 
+          example_meaning: 'Tôi là học sinh.', 
+          mnemonic_tip: 'Mẹo nhớ: Vẽ hình bản thân chỉ tay vào mình.', 
+          image_url: '',
+          status: 'mastered' 
+        },
+        { 
+          id: 2, 
+          lesson_id: parseInt(lessonId), 
+          hiragana: 'あなた', 
+          romaji: 'anata', 
+          vietnamese_meaning: 'bạn, anh, chị', 
+          word_type: 'Danh từ', 
+          japanese_example: 'あなたはだれですか。', 
+          example_meaning: 'Bạn là ai?', 
+          mnemonic_tip: 'Mẹo nhớ: Vẽ hình một người chỉ tay về phía trước.', 
+          image_url: '',
+          status: 'learning' 
+        }
+      ]);
+    }
 
     // Fetch vocabulary
     const { data: vocabList, error: vError } = await supabase
@@ -187,6 +274,25 @@ router.get('/lessons/:lessonId/kanji', async (req, res) => {
     const lessonId = req.params.lessonId;
     const userId = req.user.id;
 
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json([
+        { 
+          id: 1, 
+          lesson_id: parseInt(lessonId), 
+          character: '私', 
+          stroke_count: '7', 
+          onyomi: 'シ', 
+          kunyomi: 'watashi', 
+          sino_vietnamese: 'TƯ', 
+          vietnamese_meaning: 'tôi, cá nhân', 
+          mnemonic_tip: 'Hình một người đang giữ đống lúa thóc của riêng mình.', 
+          compounds: '私立 (しりつ - Tư lập)',
+          status: 'mastered' 
+        }
+      ]);
+    }
+
     const { data: kanjiList, error: kError } = await supabase
       .from('kanji')
       .select('*')
@@ -224,6 +330,24 @@ router.get('/lessons/:lessonId/kanji', async (req, res) => {
 router.get('/lessons/:lessonId/grammar', async (req, res) => {
   try {
     const lessonId = req.params.lessonId;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json([
+        { 
+          id: 1, 
+          lesson_id: parseInt(lessonId), 
+          title: 'N1 wa N2 desu', 
+          meaning: 'N1 là N2', 
+          structure: 'N1 + は + N2 + です', 
+          vietnamese_explanation: 'Trợ từ "は" đứng sau chủ ngữ N1 để biểu thị chủ đề của câu. "です" đứng ở cuối câu khẳng định để biểu thị thái độ lịch sự.', 
+          japanese_example: 'わたしは学生です。', 
+          example_meaning: 'Tôi là học sinh.', 
+          notes: '"は" trong vai trò trợ từ phát âm là "wa".' 
+        }
+      ]);
+    }
+
     const { data, error } = await supabase
       .from('grammar')
       .select('*')
@@ -259,6 +383,20 @@ router.post('/progress', async (req, res) => {
     }
 
     const userId = req.user.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        message: 'Progress updated successfully (Mock Mode)',
+        progress: {
+          user_id: userId,
+          item_type,
+          item_id,
+          status,
+          updated_at: new Date().toISOString()
+        }
+      });
+    }
 
     const { data, error } = await supabase
       .from('user_progress')

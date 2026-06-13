@@ -12,6 +12,18 @@ router.use(requireAuth, requireAdmin);
  */
 router.get('/students', async (req, res) => {
   try {
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json([
+        { 
+          id: 'mock-student-uuid', 
+          email: 'student@gmail.com', 
+          display_name: 'Học viên A', 
+          created_at: new Date().toISOString() 
+        }
+      ]);
+    }
+
     const { data, error } = await supabase
       .from('profiles')
       .select('id, email, display_name, created_at')
@@ -34,6 +46,38 @@ router.get('/students', async (req, res) => {
 router.get('/students/:studentId/progress', async (req, res) => {
   try {
     const studentId = req.params.studentId;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        student: { 
+          id: studentId, 
+          email: 'student@gmail.com', 
+          display_name: 'Học viên A' 
+        },
+        progress: {
+          vocabulary: {
+            total: 15,
+            mastered: 5,
+            learning: 3,
+            not_learned: 7
+          },
+          kanji: {
+            total: 8,
+            mastered: 2,
+            learning: 1,
+            not_learned: 5
+          }
+        },
+        targetPlan: {
+          start_date: '2026-06-13',
+          end_date: '2026-06-20',
+          vocabulary_target: 30,
+          kanji_target: 10,
+          self_evaluation: 'Tốt'
+        }
+      });
+    }
 
     // Verify student exists and has 'user' role
     const { data: student, error: sError } = await supabase
@@ -111,6 +155,19 @@ router.post('/lessons', async (req, res) => {
       return res.status(400).json({ error: 'title is required' });
     }
 
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.status(201).json({
+        message: 'Lesson created successfully (Mock Mode)',
+        lesson: {
+          id: 999,
+          title,
+          description,
+          created_at: new Date().toISOString()
+        }
+      });
+    }
+
     const { data, error } = await supabase
       .from('lessons')
       .insert({ title, description })
@@ -136,6 +193,26 @@ router.post('/vocabulary', async (req, res) => {
 
     if (!lesson_id || !hiragana || !romaji || !vietnamese_meaning) {
       return res.status(400).json({ error: 'lesson_id, hiragana, romaji, and vietnamese_meaning are required' });
+    }
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.status(201).json({
+        message: 'Vocabulary added successfully (Mock Mode)',
+        vocabulary: {
+          id: 999,
+          lesson_id,
+          hiragana,
+          romaji,
+          vietnamese_meaning,
+          word_type: word_type || null,
+          japanese_example: japanese_example || null,
+          example_meaning: example_meaning || null,
+          mnemonic_tip: mnemonic_tip || null,
+          image_url: image_url || null,
+          created_at: new Date().toISOString()
+        }
+      });
     }
 
     const { data, error } = await supabase
@@ -172,6 +249,21 @@ router.put('/vocabulary/:id', async (req, res) => {
     const vocabId = req.params.id;
     const updates = req.body;
 
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        message: 'Vocabulary updated successfully (Mock Mode)',
+        vocabulary: {
+          id: parseInt(vocabId),
+          lesson_id: 1,
+          hiragana: 'ほん',
+          romaji: 'hon',
+          vietnamese_meaning: updates.vietnamese_meaning || 'quyển sách',
+          ...updates
+        }
+      });
+    }
+
     const { data, error } = await supabase
       .from('vocabulary')
       .update(updates)
@@ -195,6 +287,13 @@ router.put('/vocabulary/:id', async (req, res) => {
 router.delete('/vocabulary/:id', async (req, res) => {
   try {
     const vocabId = req.params.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({ 
+        message: `Vocabulary ID ${vocabId} deleted successfully (Mock Mode)` 
+      });
+    }
 
     const { error } = await supabase
       .from('vocabulary')
@@ -220,6 +319,26 @@ router.post('/kanji', async (req, res) => {
 
     if (!lesson_id || !character || !vietnamese_meaning) {
       return res.status(400).json({ error: 'lesson_id, character, and vietnamese_meaning are required' });
+    }
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.status(201).json({
+        message: 'Kanji added successfully (Mock Mode)',
+        kanji: {
+          id: 999,
+          lesson_id,
+          character,
+          stroke_count: stroke_count || null,
+          onyomi: onyomi || null,
+          kunyomi: kunyomi || null,
+          sino_vietnamese: sino_vietnamese || null,
+          vietnamese_meaning,
+          mnemonic_tip: mnemonic_tip || null,
+          compounds: compounds || null,
+          created_at: new Date().toISOString()
+        }
+      });
     }
 
     const { data, error } = await supabase
@@ -256,6 +375,20 @@ router.put('/kanji/:id', async (req, res) => {
     const kanjiId = req.params.id;
     const updates = req.body;
 
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        message: 'Kanji updated successfully (Mock Mode)',
+        kanji: {
+          id: parseInt(kanjiId),
+          lesson_id: 1,
+          character: '私',
+          vietnamese_meaning: updates.vietnamese_meaning || 'tôi',
+          ...updates
+        }
+      });
+    }
+
     const { data, error } = await supabase
       .from('kanji')
       .update(updates)
@@ -279,6 +412,13 @@ router.put('/kanji/:id', async (req, res) => {
 router.delete('/kanji/:id', async (req, res) => {
   try {
     const kanjiId = req.params.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({ 
+        message: `Kanji ID ${kanjiId} deleted successfully (Mock Mode)` 
+      });
+    }
 
     const { error } = await supabase
       .from('kanji')
@@ -304,6 +444,25 @@ router.post('/grammar', async (req, res) => {
 
     if (!lesson_id || !title || !meaning) {
       return res.status(400).json({ error: 'lesson_id, title, and meaning are required' });
+    }
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.status(201).json({
+        message: 'Grammar point added successfully (Mock Mode)',
+        grammar: {
+          id: 999,
+          lesson_id,
+          title,
+          meaning,
+          structure: structure || null,
+          vietnamese_explanation: vietnamese_explanation || null,
+          japanese_example: japanese_example || null,
+          example_meaning: example_meaning || null,
+          notes: notes || null,
+          created_at: new Date().toISOString()
+        }
+      });
     }
 
     const { data, error } = await supabase
@@ -339,6 +498,20 @@ router.put('/grammar/:id', async (req, res) => {
     const grammarId = req.params.id;
     const updates = req.body;
 
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({
+        message: 'Grammar point updated successfully (Mock Mode)',
+        grammar: {
+          id: parseInt(grammarId),
+          lesson_id: 1,
+          title: 'N1 wa N2 desu',
+          meaning: updates.meaning || 'N1 là N2',
+          ...updates
+        }
+      });
+    }
+
     const { data, error } = await supabase
       .from('grammar')
       .update(updates)
@@ -362,6 +535,13 @@ router.put('/grammar/:id', async (req, res) => {
 router.delete('/grammar/:id', async (req, res) => {
   try {
     const grammarId = req.params.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      return res.json({ 
+        message: `Grammar point ID ${grammarId} deleted successfully (Mock Mode)` 
+      });
+    }
 
     const { error } = await supabase
       .from('grammar')
