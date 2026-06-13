@@ -38,6 +38,9 @@ app.get('/api/health', (req, res) => {
 app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, '../test_client.html'));
 });
+app.get('/test-client.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../test_client.js'));
+});
 
 // Mount Routes
 app.use('/api/user', require('./routes/user'));
