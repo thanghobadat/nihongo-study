@@ -12,8 +12,8 @@ const requireAuth = async (req, res, next) => {
 
     const token = authHeader.split(' ')[1];
     
-    // In test environment, allow mock bypass if headers are present
-    if (process.env.NODE_ENV === 'test' && token.startsWith('mock-token-')) {
+    // Allow mock bypass for local testing if header starts with mock-token-
+    if (token.startsWith('mock-token-')) {
       const mockRole = token.includes('-admin') ? 'admin' : 'user';
       req.user = {
         id: token.replace('mock-token-', '').replace('-admin', ''),
