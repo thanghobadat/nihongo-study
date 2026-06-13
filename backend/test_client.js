@@ -1,4 +1,34 @@
 const apiGroups = {
+  'Xác Thực (Auth - Public)': [
+    {
+      method: 'POST',
+      path: '/api/auth/register',
+      url: 'http://localhost:8080/api/auth/register',
+      role: 'public',
+      desc: 'Đăng ký tài khoản học viên mới trên Supabase Auth.',
+      specInput: 'JSON Body:\n{\n  "email": "student@example.com",\n  "password": "securepassword123",\n  "displayName": "Học Viên A",\n  "role": "user"\n}',
+      specOutput: 'JSON:\n{\n  "message": "Registration successful!...",\n  "user": { ... },\n  "session": { ... }\n}',
+      defaultBody: {
+        email: 'student@example.com',
+        password: 'securepassword123',
+        displayName: 'Học Viên A',
+        role: 'user'
+      }
+    },
+    {
+      method: 'POST',
+      path: '/api/auth/login',
+      url: 'http://localhost:8080/api/auth/login',
+      role: 'public',
+      desc: 'Đăng nhập bằng Email và Mật khẩu. Hộp kiểm và token header sẽ tự động gán token thực tế vừa đăng nhập cho các API khác.',
+      specInput: 'JSON Body:\n{\n  "email": "student@example.com",\n  "password": "securepassword123"\n}',
+      specOutput: 'JSON:\n{\n  "message": "Login successful!",\n  "session": { "access_token": "jwt-token-here", ... }\n}',
+      defaultBody: {
+        email: 'student@example.com',
+        password: 'securepassword123'
+      }
+    }
+  ],
   'Hệ Thống (Public)': [
     {
       method: 'GET',
@@ -290,6 +320,23 @@ sendBtn.onclick = async () => {
 
     const data = await res.json();
     responseJson.innerText = JSON.stringify(data, null, 2);
+
+    // Auto-capture Real Token on successful login
+    if (res.status === 200 && url.includes('/api/auth/login') && data.session && data.session.access_token) {
+      const realToken = `Bearer ${data.session.access_token}`;
+      
+      // Check if option already exists
+      let realOption = Array.from(tokenSelect.options).find(opt => opt.value === realToken);
+      if (!realOption) {
+        realOption = document.createElement('option');
+        realOption.value = realToken;
+        realOption.text = `Tài khoản thực tế (Vừa đăng nhập)`;
+        tokenSelect.appendChild(realOption);
+      }
+      tokenSelect.value = realToken;
+      
+      responseJson.innerText = JSON.stringify(data, null, 2) + "\n\n🔑 HỆ THỐNG ĐÃ TỰ ĐỘNG GÁN ACCESS_TOKEN THỰC TẾ NÀY VÀO AUTH HEADER CHO CÁC API TIẾP THEO!";
+    }
   } catch (error) {
     statusBadge.style.display = 'inline-block';
     statusBadge.innerText = 'LỖI KẾT NỐI';
