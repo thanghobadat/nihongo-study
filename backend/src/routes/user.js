@@ -202,7 +202,7 @@ router.get('/lessons', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching lessons:', error);
-    res.status(500).json({ error: 'Failed to fetch lessons' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
