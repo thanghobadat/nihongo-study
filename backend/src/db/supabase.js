@@ -11,11 +11,27 @@ if (!supabaseUrl || !supabaseServiceKey) {
   console.warn('WARNING: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is missing from environment variables.');
 }
 
-const supabase = createClient(supabaseUrl || '', supabaseServiceKey || '', {
+// Client for database operations (headers will never be mutated because we don't call auth methods on it)
+const dbClient = createClient(supabaseUrl || '', supabaseServiceKey || '', {
   auth: {
     persistSession: false,
     autoRefreshToken: false
   }
 });
 
-module.exports = supabase;
+// Client for auth operations (mutates headers when verifying tokens, isolating mutation from dbClient)
+const authClient = createClient(supabaseUrl || '', supabaseServiceKey || '', {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false
+  }
+});
+
+// Proxy auth property to redirect all auth calls to the authClient
+Object.defineProperty(dbClient, 'auth', {
+  get() {
+    return authClient.auth;
+  }
+});
+
+module.exports = dbClient;
