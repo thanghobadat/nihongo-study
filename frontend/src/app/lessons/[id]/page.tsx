@@ -59,7 +59,9 @@ interface DialogueItem {
   japanese: string;
   romaji: string;
   vietnamese: string;
+  topic?: string;
 }
+
 
 // Inline SVG helper to output consistent cute animal avatars
 function getAvatarSvg(userId: string) {
@@ -148,6 +150,23 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [showVietnamese, setShowVietnamese] = useState<boolean>(true);
   const [scriptMode, setScriptMode] = useState<'kanji' | 'hiragana'>('kanji');
   const [collapsedTopics, setCollapsedTopics] = useState<Record<string, boolean>>({});
+
+  // Luyện tập (Practice) States
+  const [practiceMode, setPracticeMode] = useState<'vocab' | 'kanji'>('vocab');
+  const [practiceLimit, setPracticeLimit] = useState<number>(10);
+  const [baseShuffledList, setBaseShuffledList] = useState<any[]>([]);
+  const [practiceList, setPracticeList] = useState<any[]>([]);
+  const [practiceAnswers, setPracticeAnswers] = useState<Record<number, string>>({});
+  const [isGraded, setIsGraded] = useState<boolean>(false);
+  const [visibleAnswers, setVisibleAnswers] = useState<Record<number, boolean>>({});
+  const [practiceDirection, setPracticeDirection] = useState<'vi-to-ja' | 'ja-to-vi'>('vi-to-ja');
+
+  useEffect(() => {
+    setPracticeAnswers({});
+    setIsGraded(false);
+    setVisibleAnswers({});
+  }, [practiceDirection]);
+
 
   // Play audio voice
   const playAudio = (text: string) => {
@@ -328,6 +347,74 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     return result;
   };
 
+  // Việt hóa Từ loại
+  const getWordTypeVietnamese = (type: string) => {
+    switch (type?.toLowerCase()) {
+      case 'noun': return 'Danh từ';
+      case 'verb': return 'Động từ';
+      case 'adjective': return 'Tính từ';
+      case 'adverb': return 'Trạng từ';
+      case 'pronoun': return 'Đại từ';
+      case 'particle': return 'Trợ từ';
+      case 'conjunction': return 'Liên từ';
+      case 'expression': return 'Thành ngữ';
+      default: return type || 'Từ loại';
+    }
+  };
+
+  // Tính % Đúng (Accuracy)
+  const calculateAccuracy = (input: string, correct: string) => {
+    const cleanInput = (input || '').trim().toLowerCase();
+    const cleanCorrect = (correct || '').trim().toLowerCase();
+    if (!cleanInput) return 0;
+    if (cleanInput === cleanCorrect) return 100;
+    
+    let matches = 0;
+    const minLen = Math.min(cleanInput.length, cleanCorrect.length);
+    for (let i = 0; i < minLen; i++) {
+      if (cleanInput[i] === cleanCorrect[i]) {
+        matches++;
+      }
+    }
+    const maxLen = Math.max(cleanInput.length, cleanCorrect.length);
+    return Math.round((matches / maxLen) * 100);
+  };
+
+  // Text khích lệ
+  const getEncouragementText = (pct: number) => {
+    if (pct === 100) return 'Xuất sắc! 🎉';
+    if (pct >= 80) return 'Tuyệt vời! 🌟';
+    if (pct >= 50) return 'Cố lên một chút nữa! 💪';
+    if (pct > 0) return 'Hãy cố gắng nhé! 👍';
+    return 'Chưa đúng, hãy thử lại! ✏️';
+  };
+
+  // Tráo đề (Shuffle)
+  const handleShufflePractice = () => {
+    const sourceList = practiceMode === 'vocab' ? vocabItems : kanjiItems;
+    if (sourceList.length === 0) return;
+    const shuffled = [...sourceList].sort(() => Math.random() - 0.5);
+    setBaseShuffledList(shuffled);
+    setPracticeList(shuffled.slice(0, Math.min(practiceLimit, shuffled.length)));
+    setPracticeAnswers({});
+    setIsGraded(false);
+    setVisibleAnswers({});
+    setMessage('Đã xáo trộn danh sách câu hỏi! 🔀');
+    setTimeout(() => setMessage(null), 3000);
+  };
+
+  // Thay đổi giới hạn câu hỏi
+  const handleLimitChange = (val: string) => {
+    const num = parseInt(val) || 0;
+    const sourceList = practiceMode === 'vocab' ? vocabItems : kanjiItems;
+    const maxVal = sourceList.length;
+    const cleanNum = Math.max(1, Math.min(num, maxVal));
+    setPracticeLimit(cleanNum);
+    if (baseShuffledList.length > 0) {
+      setPracticeList(baseShuffledList.slice(0, Math.min(cleanNum, baseShuffledList.length)));
+    }
+  };
+
   useEffect(() => {
     if (currentTab === 'vocab') {
       loadVocabData();
@@ -340,8 +427,32 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       loadKanjiData();
     } else if (currentTab === 'kaiwa') {
       loadDialogueData();
+    } else if (currentTab === 'practice') {
+      loadVocabData();
+      loadKanjiData();
     }
   }, [currentTab, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData]);
+
+  // Load initial practice list once vocabulary or kanji is available
+  useEffect(() => {
+    if (currentTab === 'practice') {
+      const sourceList = practiceMode === 'vocab' ? vocabItems : kanjiItems;
+      if (sourceList.length > 0 && baseShuffledList.length === 0) {
+        const shuffled = [...sourceList].sort(() => Math.random() - 0.5);
+        setBaseShuffledList(shuffled);
+        setPracticeList(shuffled.slice(0, Math.min(practiceLimit, shuffled.length)));
+      }
+    }
+  }, [currentTab, vocabItems, kanjiItems, practiceMode, practiceLimit, baseShuffledList.length]);
+
+  // Reset practice state when practice mode changes
+  useEffect(() => {
+    setBaseShuffledList([]);
+    setPracticeList([]);
+    setPracticeAnswers({});
+    setIsGraded(false);
+    setVisibleAnswers({});
+  }, [practiceMode]);
 
   const totalItemsCount = flashcardType === 'vocab' ? vocabItems.length : kanjiItems.length;
 
@@ -1960,7 +2071,372 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {!['vocab', 'kanji', 'grammar', 'flashcards', 'kaiwa'].includes(currentTab) && (
+            {currentTab === 'practice' && (
+              <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
+                {/* 1. Header Toolbar Controls */}
+                <div className="bg-slate-900/40 border border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/60 pb-3">
+                    <h2 className="text-md font-bold text-slate-200 flex items-center space-x-2">
+                      <span>✏️</span>
+                      <span>Bảng Luyện Tập & Đảo Đề Tương Tác</span>
+                    </h2>
+                    <p className="text-xs text-slate-400">
+                      Kiểm tra kiến thức từ vựng và chữ Hán bằng cách nhập câu trả lời
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    {/* Control settings */}
+                    <div className="flex flex-wrap items-center gap-4">
+                      {/* Select type: Vocab / Kanji */}
+                      <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-800 flex">
+                        <button
+                          onClick={() => setPracticeMode('vocab')}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                            practiceMode === 'vocab'
+                              ? 'bg-blue-600 text-white shadow-lg'
+                              : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          Luyện Từ Vựng
+                        </button>
+                        <button
+                          onClick={() => setPracticeMode('kanji')}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                            practiceMode === 'kanji'
+                              ? 'bg-blue-600 text-white shadow-lg'
+                              : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          Luyện Chữ Hán
+                        </button>
+                      </div>
+
+                      {/* Select direction: Việt-Nhật / Nhật-Việt */}
+                      <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-800 flex">
+                        <button
+                          onClick={() => setPracticeDirection('vi-to-ja')}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                            practiceDirection === 'vi-to-ja'
+                              ? 'bg-blue-600 text-white shadow-lg'
+                              : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          🇻🇳 ➔ 🇯🇵
+                        </button>
+                        <button
+                          onClick={() => setPracticeDirection('ja-to-vi')}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                            practiceDirection === 'ja-to-vi'
+                              ? 'bg-blue-600 text-white shadow-lg'
+                              : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          🇯🇵 ➔ 🇻🇳
+                        </button>
+                      </div>
+
+                      {/* Number of questions input */}
+                      <div className="flex items-center space-x-2 bg-slate-950/40 border border-slate-800 px-3.5 py-1.5 rounded-xl">
+                        <span className="text-xs text-slate-400 font-bold">Số câu hỏi:</span>
+                        <input
+                          type="number"
+                          value={practiceLimit}
+                          onChange={(e) => handleLimitChange(e.target.value)}
+                          className="w-12 bg-slate-900 border border-slate-700 rounded-lg text-center text-xs font-extrabold text-white py-1 focus:outline-none focus:border-blue-500"
+                        />
+                        <span className="text-xs text-slate-500 font-bold">
+                          / {practiceMode === 'vocab' ? vocabItems.length : kanjiItems.length}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Shuffle button */}
+                    <div className="flex items-center space-x-3 w-full lg:w-auto justify-end">
+                      <button
+                        onClick={handleShufflePractice}
+                        className="px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all text-xs font-bold flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
+                        title="Xáo trộn thứ tự câu hỏi"
+                      >
+                        <span>🔀</span>
+                        <span>Tráo đề</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Practice Lists */}
+                {practiceList.length === 0 ? (
+                  <div className="text-center py-20 text-slate-500 text-sm border border-dashed border-slate-800 rounded-2xl bg-slate-900/10">
+                    📭 Đang tải học liệu hoặc không tìm thấy dữ liệu luyện tập.
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {/* Desktop View Table */}
+                    <div className="hidden md:block overflow-hidden rounded-2xl border border-slate-900 bg-slate-950/20 backdrop-blur-md shadow-xl">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="bg-slate-900/60 border-b border-slate-800/80">
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-12">STT</th>
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-12">Nghe</th>
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center">Câu hỏi</th>
+                            {practiceMode === 'vocab' && (
+                              <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-28">Từ loại</th>
+                            )}
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-64">Câu trả lời của bạn</th>
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-28">Kết quả</th>
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-36">% Đúng</th>
+                            <th className="py-4 px-4 text-xs font-black text-slate-400 uppercase tracking-wider text-center w-48">Đáp án đúng</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-900">
+                          {practiceList.map((item, idx) => {
+                            const isVocab = practiceMode === 'vocab';
+                            const isViToJa = practiceDirection === 'vi-to-ja';
+
+                            // Define question text and placeholder
+                            let questionText = '';
+                            let placeholderText = '';
+                            let correctAnswer = '';
+                            
+                            if (isVocab) {
+                              questionText = isViToJa ? item.vietnamese_meaning : item.hiragana;
+                              placeholderText = isViToJa ? 'Nhập Hiragana...' : 'Nhập nghĩa tiếng Việt...';
+                              correctAnswer = isViToJa ? item.hiragana : item.vietnamese_meaning;
+                            } else {
+                              questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
+                              placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
+                              correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
+                            }
+
+                            const userAnswer = practiceAnswers[item.id] || '';
+                            const pct = calculateAccuracy(userAnswer, correctAnswer);
+                            const isVisible = visibleAnswers[item.id] || false;
+
+                            return (
+                              <tr key={item.id} className="hover:bg-slate-900/10 transition-colors">
+                                <td className="py-4 px-4 text-xs font-bold text-slate-500 text-center">{idx + 1}</td>
+                                <td className="py-4 px-4 text-center">
+                                  <button
+                                    onClick={() => playAudio(isVocab ? item.hiragana : item.character)}
+                                    className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-400 transition-all cursor-pointer"
+                                    title="Nghe câu hỏi"
+                                  >
+                                    🔊
+                                  </button>
+                                </td>
+                                <td className="py-4 px-4 text-sm font-semibold text-slate-200 font-sans">
+                                  {questionText}
+                                </td>
+                                {isVocab && (
+                                  <td className="py-4 px-4 text-center">
+                                    <span className="inline-block px-2 py-0.5 bg-slate-900/60 border border-slate-850 text-[10px] font-bold text-blue-400 rounded-md">
+                                      {getWordTypeVietnamese(item.word_type)}
+                                    </span>
+                                  </td>
+                                )}
+                                <td className="py-4 px-4">
+                                  <input
+                                    type="text"
+                                    placeholder={placeholderText}
+                                    value={userAnswer}
+                                    disabled={isGraded}
+                                    onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
+                                    className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-xs px-3.5 py-2 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
+                                  />
+                                </td>
+                                <td className="py-4 px-4 text-center">
+                                  {isGraded && (
+                                    pct === 100 ? (
+                                      <span className="inline-block px-2.5 py-0.5 bg-emerald-950/40 border border-emerald-900/60 text-[10px] font-bold text-emerald-400 rounded-md">
+                                        🟢 Đúng
+                                      </span>
+                                    ) : (
+                                      <span className="inline-block px-2.5 py-0.5 bg-red-950/40 border border-red-900/60 text-[10px] font-bold text-red-400 rounded-md">
+                                        🔴 Sai
+                                      </span>
+                                    )
+                                  )}
+                                </td>
+                                <td className="py-4 px-4 text-center">
+                                  {isGraded && (
+                                    <div className="space-y-0.5">
+                                      <span className={`text-xs font-black ${pct === 100 ? 'text-emerald-400' : pct >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                                        {pct}%
+                                      </span>
+                                      <span className="block text-[9px] text-slate-500 leading-none">{getEncouragementText(pct)}</span>
+                                    </div>
+                                  )}
+                                </td>
+                                <td className="py-4 px-4">
+                                  <div className="flex items-center space-x-2">
+                                    <button
+                                      onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.id]: !isVisible }))}
+                                      className="p-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 cursor-pointer"
+                                      title={isVisible ? 'Ẩn đáp án' : 'Hiện đáp án'}
+                                    >
+                                      {isVisible ? '👁' : '🙈'}
+                                    </button>
+                                    <span className={`text-xs break-all ${isVisible ? 'text-blue-400 font-extrabold' : 'text-slate-700 font-mono select-none blur-[4px]'}`}>
+                                      {isVisible ? correctAnswer : '••••••••'}
+                                    </span>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Mobile View Cards */}
+                    <div className="md:hidden space-y-4">
+                      {practiceList.map((item, idx) => {
+                        const isVocab = practiceMode === 'vocab';
+                        const isViToJa = practiceDirection === 'vi-to-ja';
+
+                        let questionText = '';
+                        let placeholderText = '';
+                        let correctAnswer = '';
+                        
+                        if (isVocab) {
+                          questionText = isViToJa ? item.vietnamese_meaning : item.hiragana;
+                          placeholderText = isViToJa ? 'Nhập Hiragana...' : 'Nhập nghĩa tiếng Việt...';
+                          correctAnswer = isViToJa ? item.hiragana : item.vietnamese_meaning;
+                        } else {
+                          questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
+                          placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
+                          correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
+                        }
+
+                        const userAnswer = practiceAnswers[item.id] || '';
+                        const pct = calculateAccuracy(userAnswer, correctAnswer);
+                        const isVisible = visibleAnswers[item.id] || false;
+
+                        return (
+                          <div key={item.id} className="bg-slate-900/40 border border-slate-800 p-4.5 rounded-2xl space-y-3.5 backdrop-blur-sm">
+                            {/* Card Header */}
+                            <div className="flex items-center justify-between border-b border-slate-800/40 pb-2">
+                              <span className="text-xs font-bold text-slate-500">Câu {idx + 1}</span>
+                              <div className="flex items-center space-x-2">
+                                {isVocab && (
+                                  <span className="px-2 py-0.5 bg-slate-950/80 border border-slate-900 text-[9px] font-bold uppercase rounded-md text-blue-400">
+                                    {getWordTypeVietnamese(item.word_type)}
+                                  </span>
+                                )}
+                                <button
+                                  onClick={() => playAudio(isVocab ? item.hiragana : item.character)}
+                                  className="p-1 rounded-md bg-slate-950 border border-slate-800 text-[10px] text-slate-300 hover:text-blue-400 cursor-pointer"
+                                >
+                                  🔊 Nghe
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Question */}
+                            <div className="space-y-1">
+                              <span className="block text-[9px] font-black text-slate-500 uppercase tracking-wider">Câu hỏi</span>
+                              <p className="text-sm font-semibold text-slate-200 font-sans">{questionText}</p>
+                            </div>
+
+                            {/* User Answer Input */}
+                            <div className="space-y-1">
+                              <span className="block text-[9px] font-black text-slate-500 uppercase tracking-wider">Câu trả lời</span>
+                              <input
+                                type="text"
+                                placeholder={placeholderText}
+                                value={userAnswer}
+                                disabled={isGraded}
+                                onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
+                                className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
+                              />
+                            </div>
+
+                            {/* Results under Grading */}
+                            {isGraded && (
+                              <div className="grid grid-cols-2 gap-4 bg-slate-950/40 p-3 rounded-xl border border-slate-800/50">
+                                <div>
+                                  <span className="block text-[8px] font-bold text-slate-500 uppercase mb-1">Kết quả</span>
+                                  {pct === 100 ? (
+                                    <span className="inline-block px-2 py-0.5 bg-emerald-950/30 border border-emerald-900/50 text-[9px] font-bold text-emerald-400 rounded-md">
+                                      🟢 Đúng
+                                    </span>
+                                  ) : (
+                                    <span className="inline-block px-2 py-0.5 bg-red-950/30 border border-red-900/50 text-[9px] font-bold text-red-400 rounded-md">
+                                      🔴 Sai
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="text-right">
+                                  <span className="block text-[8px] font-bold text-slate-500 uppercase mb-0.5">% Đúng</span>
+                                  <span className={`text-xs font-black ${pct === 100 ? 'text-emerald-400' : pct >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                                    {pct}%
+                                  </span>
+                                  <span className="block text-[8px] text-slate-500 mt-0.5">{getEncouragementText(pct)}</span>
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Correct Answer reveal */}
+                            <div className="pt-2 border-t border-slate-800/40 space-y-2">
+                              <div className="flex items-center justify-between">
+                                <span className="text-[9px] font-black text-slate-500 uppercase tracking-wider">Đáp án đúng</span>
+                                <button
+                                  onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.id]: !isVisible }))}
+                                  className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-slate-400 hover:text-slate-200 cursor-pointer flex items-center space-x-1"
+                                >
+                                  <span>{isVisible ? '👁️' : '🙈'}</span>
+                                  <span>{isVisible ? 'Ẩn' : 'Hiện'}</span>
+                                </button>
+                              </div>
+                              <div className="bg-slate-950/40 border border-slate-900/60 p-2.5 rounded-xl">
+                                <p className={`font-serif text-xs sm:text-sm tracking-wide break-all break-words transition-all leading-relaxed ${isVisible ? 'text-blue-400 font-bold' : 'text-slate-650 select-none blur-[4px] font-mono'}`}>
+                                  {isVisible ? correctAnswer : '••••••••'}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* 3. Action Buttons & Grading Summary */}
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-900">
+                      <div>
+                        {isGraded && (
+                          <p className="text-xs sm:text-sm font-semibold text-indigo-400">
+                            🎉 Bạn đã hoàn thành chấm điểm! Hãy rà soát lại các câu sai để ôn tập nhé.
+                          </p>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center space-x-4 self-end sm:self-auto">
+                        <button
+                          onClick={() => {
+                            setPracticeAnswers({});
+                            setIsGraded(false);
+                            setVisibleAnswers({});
+                          }}
+                          className="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-850 hover:text-slate-100 text-xs font-bold text-slate-400 transition-all duration-300 cursor-pointer active:scale-95"
+                        >
+                          Làm lại
+                        </button>
+                        <button
+                          onClick={() => setIsGraded(true)}
+                          disabled={isGraded}
+                          className={`px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black transition-all duration-300 shadow-md active:scale-95 cursor-pointer flex items-center space-x-2 ${isGraded ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                          <span>📋</span>
+                          <span>Chấm điểm</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {!['vocab', 'kanji', 'grammar', 'flashcards', 'kaiwa', 'practice'].includes(currentTab) && (
               <div className="flex flex-col items-center justify-center py-20 text-slate-400 space-y-4 border border-dashed border-slate-800 rounded-2xl">
                 <span className="text-3xl">🚧</span>
                 <div className="text-center">
