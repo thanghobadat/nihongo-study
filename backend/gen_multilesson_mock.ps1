@@ -1,7 +1,7 @@
 # Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
 # Usage in PowerShell: powershell -ExecutionPolicy Bypass -File gen_multilesson_mock.ps1
 
-$files = Get-ChildItem -Path "d:\AI\japanese_learning\tai_lieu\*.xlsx" | Sort-Object Name
+$files = Get-ChildItem -Path "d:\AI\japanese_learning\tai_lieu\*.xlsx" | Where-Object { $_.Name -notlike "~$*" } | Sort-Object { [int]($_.BaseName -replace '^Bai(\d+).*', '$1') }
 if ($files.Count -eq 0) {
     Write-Error "No Excel files found in d:\AI\japanese_learning\tai_lieu\"
     exit 1
@@ -31,10 +31,81 @@ try {
         $baseName = $file.BaseName
         $title = $baseName -replace "Bai(\d+)", "$([char]0x0042)$([char]0x00E0)i `$1" -replace "_", ": "
         
+        # Read Kaiwa validation options
+        $kaiwaSheet = $wb.Sheets.Item("Kaiwa")
+        $namesOpt = @()
+        try {
+            $val = $kaiwaSheet.Cells.Item(5, 3).Validation.Formula1
+            if (-not [string]::IsNullOrEmpty($val)) {
+                $namesOpt = $val.Split(",").ForEach({ $_.Trim() })
+            }
+        } catch {}
+        if ($namesOpt.Count -eq 0) { $namesOpt = @("ナム", "タイン", "アン", "リン", "クオン") }
+
+        $countriesOpt = @()
+        try {
+            $val = $kaiwaSheet.Cells.Item(6, 3).Validation.Formula1
+            if (-not [string]::IsNullOrEmpty($val)) {
+                $countriesOpt = $val.Split(",").ForEach({ $_.Trim() })
+            }
+        } catch {}
+        if ($countriesOpt.Count -eq 0) { $countriesOpt = @("ベトナム", "アメリカ", "日本", "イギリス", "フランス") }
+
+        $jobsOpt = @()
+        try {
+            $val = $kaiwaSheet.Cells.Item(7, 3).Validation.Formula1
+            if (-not [string]::IsNullOrEmpty($val)) {
+                $jobsOpt = $val.Split(",").ForEach({ $_.Trim() })
+            }
+        } catch {}
+        if ($jobsOpt.Count -eq 0) { $jobsOpt = @("エンジニア", "学生", "教師", "会社員", "医者") }
+
+        $orgsOpt = @()
+        try {
+            $val = $kaiwaSheet.Cells.Item(8, 3).Validation.Formula1
+            if (-not [string]::IsNullOrEmpty($val)) {
+                $orgsOpt = $val.Split(",").ForEach({ $_.Trim() })
+            }
+        } catch {}
+        if ($orgsOpt.Count -eq 0) { $orgsOpt = @("FPT", "IMC", "さくら大学", "トヨタ", "マック") }
+
+        # Scan dialogue formulas to check references to C5, C6, C7, C8
+        $refC5 = $false
+        $refC6 = $false
+        $refC7 = $false
+        $refC8 = $false
+
+        $row = 14
+        while ($true) {
+            $speaker = $kaiwaSheet.Cells.Item($row, 3).Text
+            if ([string]::IsNullOrEmpty($speaker)) { break }
+            $jaFormula = $kaiwaSheet.Cells.Item($row, 4).Formula
+            $viFormula = $kaiwaSheet.Cells.Item($row, 6).Formula
+            $combinedFormula = "$jaFormula | $viFormula"
+
+            if ($combinedFormula -match "\bC5\b") { $refC5 = $true }
+            if ($combinedFormula -match "\bC6\b") { $refC6 = $true }
+            if ($combinedFormula -match "\bC7\b") { $refC7 = $true }
+            if ($combinedFormula -match "\bC8\b") { $refC8 = $true }
+            $row++
+        }
+
+        # Build roleplay options only for referenced cells. Otherwise leave them empty/null.
+        $roleplayOptions = $null
+        if ($refC5 -or $refC6 -or $refC7 -or $refC8) {
+            $roleplayOptions = [PSCustomObject]@{
+                names = if ($refC5) { $namesOpt } else { @() }
+                countries = if ($refC6) { $countriesOpt } else { @() }
+                occupations = if ($refC7) { $jobsOpt } else { @() }
+                organizations = if ($refC8) { $orgsOpt } else { @() }
+            }
+        }
+
         $lessons += [PSCustomObject]@{
             id = $lessonId
             title = $title
             description = "Bai hoc tu dong nhap tu tep $($file.Name)"
+            roleplay_options = $roleplayOptions
         }
         
         # Read Tu_Vung
@@ -125,8 +196,9 @@ try {
         $sheet = $wb.Sheets.Item("Kaiwa")
         # Temporarily force Romaji checkbox to true to read raw Romaji values from the formulas
         $sheet.Cells.Item(10, 8) = $true
+        $sheet.Cells.Item(11, 3) = $true
         
-        $row = 13
+        $row = 14
         while ($true) {
             $speaker = $sheet.Cells.Item($row, 3).Text
             if ([string]::IsNullOrEmpty($speaker)) { break }

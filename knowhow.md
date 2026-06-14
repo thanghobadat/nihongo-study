@@ -139,6 +139,12 @@ Khi phát triển, các AI Agent hoặc Lập trình viên có thể sử dụng
   ```powershell
   powershell -ExecutionPolicy Bypass -File gen_multilesson_mock.ps1
   ```
+- **Cập nhật dữ liệu từ kết hợp (Combined Words)**:
+  Nếu từ vựng trong `mockDb.js` có thay đổi và bạn cần tạo lại danh sách 500 từ kết hợp phục vụ ôn tập bảng chữ cái, hãy chạy lệnh sau tại thư mục `website/backend`:
+  ```powershell
+  # Sử dụng Node Portable để chạy script tạo tệp dữ liệu
+  d:\AI\japanese_learning\.tools\node-v20.11.0-win-x64\node.exe scratch/generateCombinedWords.js
+  ```
 
 ---
 

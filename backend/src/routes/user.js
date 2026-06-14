@@ -384,7 +384,7 @@ router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
         .filter(item => {
           // Filter out metadata rows
           if (!item.japanese || item.japanese.trim() === '') return false;
-          if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại')) return false;
+          if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại') || item.speaker === 'Người nói' || item.speaker === 'Speaker' || item.japanese.includes('Tiếng Nhật')) return false;
           return true;
         });
       return res.json(dialogueList);
@@ -404,7 +404,7 @@ router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
         .filter(item => item.lesson_id === parseInt(lessonId))
         .filter(item => {
           if (!item.japanese || item.japanese.trim() === '') return false;
-          if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại')) return false;
+          if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại') || item.speaker === 'Người nói' || item.speaker === 'Speaker' || item.japanese.includes('Tiếng Nhật')) return false;
           return true;
         });
       return res.json(fallbackList);
@@ -412,7 +412,7 @@ router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
 
     const cleanedList = dialogueList.filter(item => {
       if (!item.japanese || item.japanese.trim() === '') return false;
-      if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại')) return false;
+      if (item.speaker.includes('KHU VỰC') || item.speaker.includes('Tên người thoại') || item.speaker === 'Người nói' || item.speaker === 'Speaker' || item.japanese.includes('Tiếng Nhật')) return false;
       return true;
     });
 
@@ -420,6 +420,50 @@ router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
   } catch (error) {
     console.error('Error fetching lesson kaiwa:', error);
     res.status(500).json({ error: 'Failed to fetch speaking practice dialogue' });
+  }
+});
+
+/**
+ * GET /api/user/progress
+ * Fetch user progress for a specific item_type ('hiragana', 'katakana', etc.)
+ */
+router.get('/progress', async (req, res) => {
+  try {
+    const { item_type } = req.query;
+    if (!item_type) {
+      return res.status(400).json({ error: 'item_type query parameter is required' });
+    }
+    const userId = req.user.id;
+
+    if (req.user.isMock) {
+      const prefix = `${userId}:${item_type}:`;
+      const progressList = Object.keys(mockDb.userProgress)
+        .filter(k => k.startsWith(prefix))
+        .map(k => {
+          const parts = k.split(':');
+          const itemId = parseInt(parts[2]);
+          return {
+            user_id: userId,
+            item_type,
+            item_id: itemId,
+            status: mockDb.userProgress[k]
+          };
+        });
+      return res.json(progressList);
+    }
+
+    const { data, error } = await supabase
+      .from('user_progress')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('item_type', item_type);
+
+    if (error) throw error;
+
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching progress:', error);
+    res.status(500).json({ error: 'Failed to fetch progress' });
   }
 });
 
@@ -435,8 +479,8 @@ router.post('/progress', async (req, res) => {
       return res.status(400).json({ error: 'item_type, item_id, and status are required' });
     }
 
-    if (!['vocabulary', 'kanji', 'grammar'].includes(item_type)) {
-      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji or grammar' });
+    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana'].includes(item_type)) {
+      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana or katakana' });
     }
 
     if (!['not_learned', 'learning', 'mastered'].includes(status)) {
@@ -447,6 +491,20 @@ router.post('/progress', async (req, res) => {
 
     // Return mock data for local testing
     if (req.user.isMock) {
+      if (Number(item_id) >= 100000) {
+        // Remove existing high scores in mock db
+        const prefix = `${userId}:${item_type}:`;
+        Object.keys(mockDb.userProgress).forEach(k => {
+          if (k.startsWith(prefix)) {
+            const parts = k.split(':');
+            const id = parseInt(parts[2], 10);
+            if (id >= 100000) {
+              delete mockDb.userProgress[k];
+            }
+          }
+        });
+      }
+
       const key = `${userId}:${item_type}:${item_id}`;
       mockDb.userProgress[key] = status;
       return res.json({
@@ -459,6 +517,18 @@ router.post('/progress', async (req, res) => {
           updated_at: new Date().toISOString()
         }
       });
+    }
+
+    // If it's a high score, clean up existing high score records >= 100000 first
+    if (Number(item_id) >= 100000) {
+      const { error: delError } = await supabase
+        .from('user_progress')
+        .delete()
+        .eq('user_id', userId)
+        .eq('item_type', item_type)
+        .gte('item_id', 100000);
+
+      if (delError) throw delError;
     }
 
     const { data, error } = await supabase

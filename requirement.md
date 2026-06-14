@@ -41,7 +41,7 @@ Frontend được xây dựng bằng **Next.js (App Router, TypeScript, Tailwind
 - **Giao diện bong bóng thoại hai bên (Chat Bubble Layout)**: Bong bóng thoại được hiển thị hai bên (học viên đóng vai nằm ở phía bên phải với nền xanh-tím gradient, đối tác hội thoại nằm ở phía bên trái với nền xám slate) giúp việc theo dõi trực quan giống như các ứng dụng nhắn tin hiện đại.
 - **Kịch bản động**: Nội dung hội thoại tự động thay đổi từ ngữ xưng hô, giới thiệu bản thân theo thông tin nhân vật đã chọn (áp dụng masking để tránh xung đột đè chuỗi tên quốc gia).
 - **Phân tách & Thu gọn chủ đề (Accordions)**:
-  - Các đoạn hội thoại được phân nhóm theo Chủ đề bài học (Ví dụ bài 1 và bài 2 gồm 5 chủ đề khác nhau).
+  - Các đoạn hội thoại được phân nhóm theo Chủ đề bài học (Ví dụ từ Bài 1 đến Bài 25).
   - Tiêu đề mỗi chủ đề hiển thị dưới dạng thanh Accordion có thể bấm để đóng/mở (thu gọn hoặc mở rộng) danh sách tin nhắn chat, hiển thị rõ ràng mũi tên trạng thái (`▲`/`▼`) để người dùng dễ theo dõi và tiết kiệm diện tích kéo trang.
 - **Tương tác hiển thị**: 
   - Nút chuyển đổi ẩn/hiện phiên âm Romaji của toàn bài hội thoại.
@@ -56,6 +56,17 @@ Frontend được xây dựng bằng **Next.js (App Router, TypeScript, Tailwind
   - Chức năng tự động kiểm tra Đúng/Sai tức thì (Green cho Đúng, Red cho Sai) ngay khi người dùng gõ xong.
   - Cơ chế ẩn đáp án: Cột đáp án chính xác chỉ được hiển thị khi ô nhập liệu có dữ liệu (không hiển thị trước).
   - Tích hợp nút phát âm giọng đọc câu hỏi.
+
+### 1.6. Phân Hệ Ôn Bảng Chữ Cái (Kana Review)
+Trang ôn bảng chữ cái (`/kana`) giúp người học làm quen và rèn luyện phản xạ nhanh với bảng Hiragana & Katakana:
+- **Bảng chữ cái tương tác (Kana Charts)**: Lưới chữ cái Hiragana/Katakana tương tác, hỗ trợ nghe phát âm, xem Mnemonics nhớ nhanh và đánh dấu từ đã thuộc đồng bộ lên đám mây.
+- **Trắc nghiệm phản xạ (Speedrun)**: Trắc nghiệm phản xạ 10 giây chọn Romaji đúng, độ khó tăng dần khi giảm thời gian suy nghĩ sau mỗi 2 câu đúng liên tiếp, lưu và đồng bộ High Score lên cơ sở dữ liệu đám mây Supabase.
+- **Trò chơi lật bài (Memory Match)**: Ghép cặp chữ Kana và phiên âm Romaji tương ứng, giao diện Glassmorphism Neon dễ thương với biểu tượng hoa anh đào `🌸` mặt sau thẻ, thẻ ghép đúng sẽ ẩn chữ cái và đổi màu xanh dương nhạt. Thêm tùy chọn giới hạn thời gian (dạng thanh trượt) và giảm 10% giờ bắt đầu của vòng chơi sau nếu chiến thắng.
+- **Tập viết nét (Canvas Writing)**: Khung canvas cảm ứng đồ nét vẽ tay theo stroke order của chữ mẫu mờ. Chấm điểm % độ tương đồng dựa trên thuật toán lưới pixel `60x60` có bán kính lân cận Precision R=2, Recall R=3 và penalty chống vẽ bừa (1.8x).
+- **Ôn chữ kết hợp (Combined Review)**:
+  - Sử dụng kho dữ liệu **500 từ Kana kết hợp** phân chia theo 3 độ khó: Dễ (3 ~ 5 ký tự), Trung bình (6 ~ 9 ký tự), Khó (10 ~ 15 ký tự).
+  - Người học nhìn từ tiếng Nhật (dạng Kana) kèm nghĩa tiếng Việt làm gợi ý và điền phiên âm Romaji để chấm điểm. So khớp tự động loại bỏ khoảng trắng (space) và chuyển về chữ thường để tránh chấm sai oan.
+  - **Tô màu chi tiết lỗi sai**: Sau khi chấm điểm, hiển thị chi tiết các ký tự viết sai của từ chưa đúng 100%: Ký tự viết đúng tô màu xanh lá, ký tự viết sai tô màu đỏ kèm gạch dưới lượn sóng (hover hiện tooltip chữ đúng), ký tự viết thiếu hiển thị màu đỏ mờ kèm gạch ngang (hover báo thiếu chữ cái).
 
 ---
 

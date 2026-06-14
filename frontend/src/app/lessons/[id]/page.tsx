@@ -9,6 +9,12 @@ interface Lesson {
   id: number;
   title: string;
   description: string;
+  roleplay_options?: {
+    names: string[];
+    countries: string[];
+    occupations: string[];
+    organizations: string[];
+  };
 }
 
 interface VocabItem {
@@ -95,6 +101,102 @@ const lesson1Romaji: Record<number, string> = {
   7: "Ano hito wa Santosu-san desu. Burajiru-jin desu."
 };
 
+const jaToVnDict: Record<string, string> = {
+  // Names
+  'ナム': 'Nam',
+  'タイン': 'Thanh',
+  'アン': 'An',
+  'リン': 'Linh',
+  'クオン': 'Cường',
+  
+  // Countries
+  'ベトナム': 'Việt Nam',
+  'アメリカ': 'Mỹ',
+  '日本': 'Nhật Bản',
+  'イギリス': 'Anh',
+  'フランス': 'Pháp',
+  'ブラジル': 'Brasil',
+  'インド': 'Ấn Độ',
+  'インドネシア': 'Indonesia',
+  '韓国': 'Hàn Quốc',
+  '中国': 'Trung Quốc',
+  'ドイツ': 'Đức',
+  'タイ': 'Thái Lan',
+  
+  // Occupations
+  'エンジニア': 'kỹ sư',
+  '学生': 'học sinh',
+  '教師': 'giáo viên',
+  '会社員': 'nhân viên công ty',
+  '医者': 'bác sĩ',
+  '研究者': 'nhà nghiên cứu',
+  '銀行員': 'nhân viên ngân hàng',
+  '公務員': 'công chức',
+  
+  // Organizations
+  'さくら大学': 'Đại học Sakura',
+  'さくら病院': 'Bệnh viện Sakura',
+  '富士大学': 'Đại học Fuji',
+  '富士病院': 'Bệnh viện Fuji',
+  '神戸病院': 'Bệnh viện Kobe',
+  'パワー電気': 'Điện lực Power',
+  'ブラジルエアー': 'Hàng không Brazil',
+  'トヨタ': 'Toyota',
+  'マック': 'Mac',
+  'FPT': 'FPT',
+  'IMC': 'IMC',
+  'AKC': 'AKC',
+  'Kobe Hospital': 'Bệnh viện Kobe'
+};
+
+const jaToRomajiDict: Record<string, string> = {
+  // Names
+  'ナム': 'Namu',
+  'タイン': 'Tain',
+  'アン': 'An',
+  'リン': 'Rin',
+  'クオン': 'Kuon',
+  
+  // Countries
+  'ベトナム': 'Betonamu',
+  'アメリカ': 'Amerika',
+  '日本': 'Nihon',
+  'イギリス': 'Igirisu',
+  'フランス': 'Furansu',
+  'ブラジル': 'Burajiru',
+  'インド': 'Indo',
+  'インドネシア': 'Indoneshia',
+  '韓国': 'Kankoku',
+  '中国': 'Chuugoku',
+  'ドイツ': 'Doitsu',
+  'タイ': 'Tai',
+  
+  // Occupations
+  'エンジニア': 'enjinia',
+  '学生': 'gakusei',
+  '教師': 'kyoushi',
+  '会社員': 'kaishain',
+  '医者': 'isha',
+  '研究者': 'kenkyuusha',
+  '銀行員': 'ginkouin',
+  '公務員': 'koumuin',
+  
+  // Organizations
+  'さくら大学': 'Sakura daigaku',
+  'さくら病院': 'Sakura byouin',
+  '富士大学': 'Fuji daigaku',
+  '富士病院': 'Fuji byouin',
+  '神戸病院': 'Kobe byouin',
+  'パワー電気': 'Pawaa denki',
+  'ブラジルエアー': 'Burajiru eaa',
+  'トヨタ': 'Toyota',
+  'マック': 'Makku',
+  'FPT': 'FPT',
+  'IMC': 'IMC',
+  'AKC': 'AKC',
+  'Kobe Hospital': 'Kobe Hospital'
+};
+
 export default function LessonDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const selectedLessonId = parseInt(id);
@@ -103,15 +205,16 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const currentTab = searchParams.get('tab') || 'vocab';
   const user = api.getUser();
 
-  // Navigation Items corresponding to the 7 Sheets
+  // Navigation Items corresponding to the 8 Sheets / Areas
   const menuItems = [
-    { name: 'Bảng điều khiển', id: 'dashboard', icon: '📊', active: false },
-    { name: 'Từ vựng (Tu_Vung)', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
+    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
+    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false },
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
-    { name: 'Ngữ pháp (Ngu_Phap)', id: 'grammar', icon: '📝', active: currentTab === 'grammar' },
-    { name: 'Thẻ nhớ (Flashcards)', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
+    { name: 'Ngữ pháp', id: 'grammar', icon: '📝', active: currentTab === 'grammar' },
+    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' },
-    { name: 'Luyện tập (Luyen_Tu_Vung)', id: 'practice', icon: '✏️', active: currentTab === 'practice' }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' }
   ];
 
   const level = selectedLessonId <= 25 ? 'N5' : 'N4';
@@ -130,6 +233,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [grammarItems, setGrammarItems] = useState<GrammarItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string | null>(null);
+
+  // Active Lesson Title & Details
+  const activeLesson = lessons.find(l => l.id === selectedLessonId);
+  const lessonTitle = activeLesson ? activeLesson.title : `Bài ${selectedLessonId}`;
 
   // Search and Filter States
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -261,43 +368,67 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   }, [selectedLessonId]);
 
   // Dynamic Dialogue Substitution Helper
+  const hasRoleplay = useMemo(() => {
+    return !!(
+      activeLesson?.roleplay_options &&
+      (
+        (activeLesson.roleplay_options.names && activeLesson.roleplay_options.names.length > 0) ||
+        (activeLesson.roleplay_options.countries && activeLesson.roleplay_options.countries.length > 0) ||
+        (activeLesson.roleplay_options.occupations && activeLesson.roleplay_options.occupations.length > 0) ||
+        (activeLesson.roleplay_options.organizations && activeLesson.roleplay_options.organizations.length > 0)
+      )
+    );
+  }, [activeLesson]);
+
   const substituteText = (text: string) => {
     if (!text) return '';
+    if (!hasRoleplay) return text;
     let result = text;
+    const opts = activeLesson?.roleplay_options;
 
-    // 1. Mask Country/Nationality to avoid 'ベトナム' -> 'ベトタイン' name substring collision
-    result = result.replace(/ベトナム/g, '__MASK_COUNTRY_JA__');
-    result = result.replace(/nước Việt Nam/g, '__MASK_COUNTRY_VN_FULL__');
-    result = result.replace(/Việt Nam/g, '__MASK_COUNTRY_VN__');
-    result = result.replace(/Betonamu/g, '__MASK_COUNTRY_ROM__');
+    // 1. Substitute Country
+    if (opts?.countries && opts.countries.length > 0) {
+      result = result.replace(/ベトナム/g, '__MASK_COUNTRY_JA__');
+      result = result.replace(/nước Việt Nam/g, '__MASK_COUNTRY_VN_FULL__');
+      result = result.replace(/Việt Nam/g, '__MASK_COUNTRY_VN__');
+      result = result.replace(/Betonamu/g, '__MASK_COUNTRY_ROM__');
+    }
 
-    // 2. Substitute Name (Replace longer Romaji 'Namu' first, then 'Nam' to avoid substring collision)
-    result = result.replace(/ナム/g, charName);
-    const romName = charName === 'ナム' ? 'Namu' : charName === 'タイン' ? 'Tain' : charName === 'アン' ? 'An' : charName === 'リン' ? 'Rin' : charName === 'クオン' ? 'Kuon' : charName;
-    result = result.replace(/Namu/g, romName);
-    const vnName = charName === 'ナム' ? 'Nam' : charName === 'タイン' ? 'Thanh' : charName === 'アン' ? 'An' : charName === 'リン' ? 'Linh' : charName === 'クオン' ? 'Cường' : charName;
-    result = result.replace(/Nam/g, vnName);
+    // 2. Substitute Name
+    if (opts?.names && opts.names.length > 0) {
+      result = result.replace(/ナム/g, charName);
+      const romName = jaToRomajiDict[charName] || charName;
+      result = result.replace(/Namu/g, romName);
+      const vnName = jaToVnDict[charName] || charName;
+      result = result.replace(/Nam/g, vnName);
+    }
 
     // 3. Substitute Occupation
-    result = result.replace(/エンジニア/g, charOccupation);
-    const vnOcc = charOccupation === 'エンジニア' ? 'kỹ sư' : charOccupation === '学生' ? 'học sinh' : charOccupation === '教師' ? 'giáo viên' : charOccupation === '会社員' ? 'nhân viên công ty' : charOccupation === '医者' ? 'bác sĩ' : charOccupation;
-    result = result.replace(/kỹ sư/g, vnOcc);
-    const romOcc = charOccupation === 'エンジニア' ? 'enjinia' : charOccupation === '学生' ? 'gakusei' : charOccupation === '教師' ? 'kyoushi' : charOccupation === '会社員' ? 'kaishain' : charOccupation === '医者' ? 'isha' : charOccupation;
-    result = result.replace(/Enjinia/g, romOcc.charAt(0).toUpperCase() + romOcc.slice(1));
-    result = result.replace(/enjinia/g, romOcc);
+    if (opts?.occupations && opts.occupations.length > 0) {
+      result = result.replace(/エンジニア/g, charOccupation);
+      const vnOcc = jaToVnDict[charOccupation] || charOccupation;
+      result = result.replace(/kỹ sư/g, vnOcc);
+      const romOcc = jaToRomajiDict[charOccupation] || charOccupation;
+      result = result.replace(/Enjinia/g, romOcc.charAt(0).toUpperCase() + romOcc.slice(1));
+      result = result.replace(/enjinia/g, romOcc);
+    }
 
     // 4. Substitute Organization
-    const romOrg = charOrganization === 'さくら大学' ? 'Sakura daigaku' : charOrganization === 'トヨタ' ? 'Toyota' : charOrganization === 'マック' ? 'Makku' : charOrganization;
-    result = result.replace(/FPT/g, romOrg);
+    if (opts?.organizations && opts.organizations.length > 0) {
+      const romOrg = jaToRomajiDict[charOrganization] || charOrganization;
+      result = result.replace(/FPT/g, romOrg);
+    }
 
     // 5. Unmask Country/Nationality with selected values
-    result = result.replace(/__MASK_COUNTRY_JA__/g, charCountry);
-    const vnCountry = charCountry === 'ベトナム' ? 'Việt Nam' : charCountry === 'アメリカ' ? 'Mỹ' : charCountry === '日本' ? 'Nhật Bản' : charCountry === 'イギリス' ? 'Anh' : charCountry === 'フランス' ? 'Pháp' : charCountry;
-    const vnCountryFull = charCountry === 'ベトナム' ? 'nước Việt Nam' : charCountry === 'アメリカ' ? 'nước Mỹ' : charCountry === '日本' ? 'nước Nhật Bản' : charCountry === 'イギリス' ? 'nước Anh' : charCountry === 'フランス' ? 'nước Pháp' : charCountry;
-    result = result.replace(/__MASK_COUNTRY_VN_FULL__/g, vnCountryFull);
-    result = result.replace(/__MASK_COUNTRY_VN__/g, vnCountry);
-    const romCountry = charCountry === 'ベトナム' ? 'Betonamu' : charCountry === 'アメリカ' ? 'Amerika' : charCountry === '日本' ? 'Nihon' : charCountry === 'イギリス' ? 'Igirisu' : charCountry === 'フランス' ? 'Furansu' : charCountry;
-    result = result.replace(/__MASK_COUNTRY_ROM__/g, romCountry);
+    if (opts?.countries && opts.countries.length > 0) {
+      result = result.replace(/__MASK_COUNTRY_JA__/g, charCountry);
+      const vnCountry = jaToVnDict[charCountry] || charCountry;
+      const vnCountryFull = jaToVnDict[charCountry] ? 'nước ' + jaToVnDict[charCountry] : charCountry;
+      result = result.replace(/__MASK_COUNTRY_VN_FULL__/g, vnCountryFull);
+      result = result.replace(/__MASK_COUNTRY_VN__/g, vnCountry);
+      const romCountry = jaToRomajiDict[charCountry] || charCountry;
+      result = result.replace(/__MASK_COUNTRY_ROM__/g, romCountry);
+    }
 
     return result;
   };
@@ -614,9 +745,23 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     return l.id >= 26 && l.id <= 50;
   });
 
-  // Active Lesson Title
-  const activeLesson = lessons.find(l => l.id === selectedLessonId);
-  const lessonTitle = activeLesson ? activeLesson.title : `Bài ${selectedLessonId}`;
+
+  // Set default roleplay options when lesson changes
+  useEffect(() => {
+    if (activeLesson && activeLesson.roleplay_options) {
+      const opts = activeLesson.roleplay_options;
+      setCharName(opts.names && opts.names.length > 0 ? opts.names[0] : 'ナム');
+      setCharCountry(opts.countries && opts.countries.length > 0 ? opts.countries[0] : 'ベトナム');
+      setCharOccupation(opts.occupations && opts.occupations.length > 0 ? opts.occupations[0] : 'エンジニア');
+      setCharOrganization(opts.organizations && opts.organizations.length > 0 ? opts.organizations[0] : 'FPT');
+    } else {
+      // Defaults if not defined
+      setCharName('ナム');
+      setCharCountry('ベトナム');
+      setCharOccupation('エンジニア');
+      setCharOrganization('FPT');
+    }
+  }, [selectedLessonId, lessons, activeLesson]);
 
   // Filtered Vocabulary items
   const processedVocab = vocabItems.filter(item => {
@@ -701,7 +846,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
           {/* Logo Title & Mobile Close button */}
           <div className="flex items-center justify-between mb-8 px-2">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Nihongo Flow
+              Minna Nihongo
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -720,6 +865,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   setIsSidebarOpen(false);
                   if (item.id === 'dashboard') {
                     router.push('/dashboard');
+                  } else if (item.id === 'kana') {
+                    router.push('/kana');
                   } else {
                     router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
                   }
@@ -1828,104 +1975,157 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
             {currentTab === 'kaiwa' && (
               <div className="space-y-6 max-w-4xl mx-auto animate-fade-in">
                 {/* 1. Character Setup Card */}
-                <div className="bg-slate-900/40 border border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/60 pb-3">
-                    <h2 className="text-md font-bold text-slate-200 flex items-center space-x-2">
-                      <span>🎭</span>
-                      <span>Thiết lập nhân vật nhập vai</span>
-                    </h2>
-                    <p className="text-xs text-slate-400">
-                      Thay đổi thông tin nhân vật để tùy chỉnh hội thoại sinh động
-                    </p>
+                {hasRoleplay ? (
+                  <div className="bg-slate-900/40 border border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/60 pb-3">
+                      <h2 className="text-md font-bold text-slate-200 flex items-center space-x-2">
+                        <span>🎭</span>
+                        <span>Thiết lập nhân vật nhập vai</span>
+                      </h2>
+                      <p className="text-xs text-slate-400">
+                        Thay đổi thông tin nhân vật để tùy chỉnh hội thoại sinh động
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                      {/* Name selector */}
+                      {activeLesson?.roleplay_options?.names && activeLesson.roleplay_options.names.length > 0 && (
+                        <div className="space-y-2">
+                          <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Tên Katakana</span>
+                          <select
+                            value={charName}
+                            onChange={(e) => setCharName(e.target.value)}
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
+                          >
+                            {activeLesson.roleplay_options.names.map(name => (
+                              <option key={name} value={name}>{name} {jaToVnDict[name] ? `(${jaToVnDict[name]})` : ''}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Country selector */}
+                      {activeLesson?.roleplay_options?.countries && activeLesson.roleplay_options.countries.length > 0 && (
+                        <div className="space-y-2">
+                          <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Quốc tịch</span>
+                          <select
+                            value={charCountry}
+                            onChange={(e) => setCharCountry(e.target.value)}
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
+                          >
+                            {activeLesson.roleplay_options.countries.map(country => (
+                              <option key={country} value={country}>{country} {jaToVnDict[country] ? `(${jaToVnDict[country]})` : ''}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Occupation selector */}
+                      {activeLesson?.roleplay_options?.occupations && activeLesson.roleplay_options.occupations.length > 0 && (
+                        <div className="space-y-2">
+                          <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Nghề nghiệp</span>
+                          <select
+                            value={charOccupation}
+                            onChange={(e) => setCharOccupation(e.target.value)}
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-205"
+                          >
+                            {activeLesson.roleplay_options.occupations.map(job => (
+                              <option key={job} value={job}>{job} {jaToVnDict[job] ? `(${jaToVnDict[job]})` : ''}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Organization selector */}
+                      {activeLesson?.roleplay_options?.organizations && activeLesson.roleplay_options.organizations.length > 0 && (
+                        <div className="space-y-2">
+                          <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Tổ chức</span>
+                          <select
+                            value={charOrganization}
+                            onChange={(e) => setCharOrganization(e.target.value)}
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
+                          >
+                            {activeLesson.roleplay_options.organizations.map(org => (
+                              <option key={org} value={org}>{org} {jaToVnDict[org] ? `(${jaToVnDict[org]})` : ''}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Switches toolbar */}
+                    <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-slate-800/40 text-xs text-slate-300">
+                      <label className="flex items-center space-x-2.5 cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={showRomaji}
+                          onChange={(e) => setShowRomaji(e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
+                        />
+                        <span className="font-medium">Hiện phiên âm Romaji</span>
+                      </label>
+
+                      <label className="flex items-center space-x-2.5 cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={showVietnamese}
+                          onChange={(e) => setShowVietnamese(e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
+                        />
+                        <span className="font-medium">Hiện bản dịch tiếng Việt</span>
+                      </label>
+
+                      <div className="flex items-center space-x-2.5">
+                        <span className="font-medium">Chế độ hiển thị:</span>
+                        <div className="bg-slate-950/60 p-0.5 rounded-lg border border-slate-800/60 flex">
+                          <button
+                            onClick={() => setScriptMode('kanji')}
+                            className={`px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-200 cursor-pointer ${
+                              scriptMode === 'kanji'
+                                ? 'bg-blue-600 text-white shadow'
+                                : 'text-slate-400 hover:text-slate-200'
+                            }`}
+                          >
+                            Chữ Kanji
+                          </button>
+                          <button
+                            onClick={() => setScriptMode('hiragana')}
+                            className={`px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-200 cursor-pointer ${
+                              scriptMode === 'hiragana'
+                                ? 'bg-blue-600 text-white shadow'
+                                : 'text-slate-400 hover:text-slate-200'
+                            }`}
+                          >
+                            Hira / Kata
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                ) : (
+                  /* Smaller toolbar when no roleplay exists */
+                  <div className="bg-slate-900/40 border border-slate-800 p-4 rounded-2xl backdrop-blur-md flex flex-wrap items-center gap-6 justify-between text-xs text-slate-300">
+                    <div className="flex flex-wrap items-center gap-6">
+                      <label className="flex items-center space-x-2.5 cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={showRomaji}
+                          onChange={(e) => setShowRomaji(e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
+                        />
+                        <span className="font-medium">Hiện phiên âm Romaji</span>
+                      </label>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    {/* Name selector */}
-                    <div className="space-y-2">
-                      <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Tên Katakana</span>
-                      <select
-                        value={charName}
-                        onChange={(e) => setCharName(e.target.value)}
-                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
-                      >
-                        <option value="ナム">ナム (Nam)</option>
-                        <option value="タイン">タイン</option>
-                        <option value="アン">アン</option>
-                        <option value="リン">リン</option>
-                        <option value="クオン">クオン</option>
-                      </select>
+                      <label className="flex items-center space-x-2.5 cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={showVietnamese}
+                          onChange={(e) => setShowVietnamese(e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
+                        />
+                        <span className="font-medium">Hiện bản dịch tiếng Việt</span>
+                      </label>
                     </div>
-
-                    {/* Country selector */}
-                    <div className="space-y-2">
-                      <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Quốc tịch</span>
-                      <select
-                        value={charCountry}
-                        onChange={(e) => setCharCountry(e.target.value)}
-                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
-                      >
-                        <option value="ベトナム">ベトナム (VN)</option>
-                        <option value="アメリカ">Mỹ</option>
-                        <option value="日本">Nhật Bản</option>
-                        <option value="イギリス">Anh</option>
-                        <option value="フランス">Pháp</option>
-                      </select>
-                    </div>
-
-                    {/* Occupation selector */}
-                    <div className="space-y-2">
-                      <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Nghề nghiệp</span>
-                      <select
-                        value={charOccupation}
-                        onChange={(e) => setCharOccupation(e.target.value)}
-                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-205"
-                      >
-                        <option value="エンジニア">Kỹ sư</option>
-                        <option value="学生">Học sinh</option>
-                        <option value="教師">Giáo viên</option>
-                        <option value="会社員">Nhân viên</option>
-                        <option value="医者">Bác sĩ</option>
-                      </select>
-                    </div>
-
-                    {/* Organization selector */}
-                    <div className="space-y-2">
-                      <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">Tổ chức</span>
-                      <select
-                        value={charOrganization}
-                        onChange={(e) => setCharOrganization(e.target.value)}
-                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
-                      >
-                        <option value="FPT">FPT</option>
-                        <option value="IMC">IMC</option>
-                        <option value="さくら大学">Sakura</option>
-                        <option value="トヨタ">Toyota</option>
-                        <option value="マック">Mac</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Switches toolbar */}
-                  <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-slate-800/40 text-xs text-slate-300">
-                    <label className="flex items-center space-x-2.5 cursor-pointer select-none">
-                      <input
-                        type="checkbox"
-                        checked={showRomaji}
-                        onChange={(e) => setShowRomaji(e.target.checked)}
-                        className="w-4 h-4 rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
-                      />
-                      <span className="font-medium">Hiện phiên âm Romaji</span>
-                    </label>
-
-                    <label className="flex items-center space-x-2.5 cursor-pointer select-none">
-                      <input
-                        type="checkbox"
-                        checked={showVietnamese}
-                        onChange={(e) => setShowVietnamese(e.target.checked)}
-                        className="w-4 h-4 rounded border-slate-800 bg-slate-950 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
-                      />
-                      <span className="font-medium">Hiện bản dịch tiếng Việt</span>
-                    </label>
 
                     <div className="flex items-center space-x-2.5">
                       <span className="font-medium">Chế độ hiển thị:</span>
@@ -1953,7 +2153,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 {/* 2. Dialogue Chat Screen */}
                 {groupedDialogues.length === 0 ? (

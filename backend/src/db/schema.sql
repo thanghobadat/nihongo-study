@@ -36,6 +36,7 @@ CREATE TABLE public.lessons (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT,
+  roleplay_options JSONB,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

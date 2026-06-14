@@ -63,13 +63,14 @@ export default function UserDashboard() {
 
   // Navigation Items corresponding to the 7 Sheets
   const menuItems = [
-    { name: 'Bảng điều khiển', id: 'dashboard', icon: '📊', active: true },
-    { name: 'Từ vựng (Tu_Vung)', id: 'vocab', icon: '📚', active: false },
+    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: true },
+    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false },
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ngữ pháp (Ngu_Phap)', id: 'grammar', icon: '📝', active: false },
-    { name: 'Thẻ nhớ (Flashcards)', id: 'flashcards', icon: '🃏', active: false },
+    { name: 'Ngữ pháp', id: 'grammar', icon: '📝', active: false },
+    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Luyện tập (Luyen_Tu_Vung)', id: 'practice', icon: '✏️', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
   ];
 
   // UI State
@@ -407,7 +408,7 @@ export default function UserDashboard() {
           {/* Logo Title & Mobile Close button */}
           <div className="flex items-center justify-between mb-8 px-2">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Nihongo Flow
+              Minna Nihongo
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -424,7 +425,9 @@ export default function UserDashboard() {
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id !== 'dashboard') {
+                  if (item.id === 'kana') {
+                    router.push('/kana');
+                  } else if (item.id !== 'dashboard') {
                     router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
                   }
                 }}
