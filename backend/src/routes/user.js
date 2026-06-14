@@ -94,7 +94,7 @@ router.get('/progress-summary', async (req, res) => {
     });
   } catch (error) {
     console.error('Error fetching progress summary:', error);
-    res.status(500).json({ error: 'Failed to fetch progress summary' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -121,7 +121,7 @@ router.get('/target-plan', async (req, res) => {
     res.json(data || { message: 'No target plan configured' });
   } catch (error) {
     console.error('Error fetching target plan:', error);
-    res.status(500).json({ error: 'Failed to fetch target plan' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -177,7 +177,7 @@ router.post('/target-plan', async (req, res) => {
     res.json({ message: 'Target plan updated successfully', plan: data });
   } catch (error) {
     console.error('Error updating target plan:', error);
-    res.status(500).json({ error: 'Failed to update target plan' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -258,7 +258,7 @@ router.get('/lessons/:lessonId/vocabulary', async (req, res) => {
     res.json(mergedList);
   } catch (error) {
     console.error('Error fetching lesson vocabulary:', error);
-    res.status(500).json({ error: 'Failed to fetch vocabulary' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -311,7 +311,7 @@ router.get('/lessons/:lessonId/kanji', async (req, res) => {
     res.json(mergedList);
   } catch (error) {
     console.error('Error fetching lesson kanji:', error);
-    res.status(500).json({ error: 'Failed to fetch kanji' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -364,7 +364,7 @@ router.get('/lessons/:lessonId/grammar', async (req, res) => {
     res.json(mergedList);
   } catch (error) {
     console.error('Error fetching lesson grammar:', error);
-    res.status(500).json({ error: 'Failed to fetch grammar points' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -419,7 +419,7 @@ router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
     res.json(cleanedList);
   } catch (error) {
     console.error('Error fetching lesson kaiwa:', error);
-    res.status(500).json({ error: 'Failed to fetch speaking practice dialogue' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -463,7 +463,7 @@ router.get('/progress', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching progress:', error);
-    res.status(500).json({ error: 'Failed to fetch progress' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -548,7 +548,7 @@ router.post('/progress', async (req, res) => {
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
     console.error('Error updating progress:', error);
-    res.status(500).json({ error: 'Failed to update progress' });
+    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
