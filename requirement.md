@@ -38,9 +38,10 @@ Frontend được xây dựng bằng **Next.js (App Router, TypeScript, Tailwind
 
 ### 1.4. Phân Hệ Kaiwa (Luyện Hội Thoại Động)
 - **Thiết lập nhân vật**: Người dùng chọn Tên Katakana, Quốc tịch, Nghề nghiệp, Tổ chức từ các menu dropdown HTML5 gọn gàng, được thiết kế responsive tối ưu hóa cho hiển thị trên màn hình di động.
+- **Giao diện bong bóng thoại hai bên (Chat Bubble Layout)**: Bong bóng thoại được hiển thị hai bên (học viên đóng vai nằm ở phía bên phải với nền xanh-tím gradient, đối tác hội thoại nằm ở phía bên trái với nền xám slate) giúp việc theo dõi trực quan giống như các ứng dụng nhắn tin hiện đại.
 - **Kịch bản động**: Nội dung hội thoại tự động thay đổi từ ngữ xưng hô, giới thiệu bản thân theo thông tin nhân vật đã chọn (áp dụng masking để tránh xung đột đè chuỗi tên quốc gia).
 - **Phân tách & Thu gọn chủ đề (Accordions)**:
-  - Các đoạn hội thoại được phân nhóm theo Chủ đề bài học (Ví dụ bài 1 gồm 5 chủ đề: *Tự giới thiệu bản thân*, *Giới thiệu người khác*, *Hỏi thăm tại sự kiện*, *Hỏi về công ty và tuổi tác*, *Cuộc gặp gỡ tình cờ*).
+  - Các đoạn hội thoại được phân nhóm theo Chủ đề bài học (Ví dụ bài 1 và bài 2 gồm 5 chủ đề khác nhau).
   - Tiêu đề mỗi chủ đề hiển thị dưới dạng thanh Accordion có thể bấm để đóng/mở (thu gọn hoặc mở rộng) danh sách tin nhắn chat, hiển thị rõ ràng mũi tên trạng thái (`▲`/`▼`) để người dùng dễ theo dõi và tiết kiệm diện tích kéo trang.
 - **Tương tác hiển thị**: 
   - Nút chuyển đổi ẩn/hiện phiên âm Romaji của toàn bài hội thoại.

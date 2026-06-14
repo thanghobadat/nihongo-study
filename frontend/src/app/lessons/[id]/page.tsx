@@ -116,6 +116,13 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const level = selectedLessonId <= 25 ? 'N5' : 'N4';
 
+  // Save selectedLessonId to localStorage to persist state across navigations
+  useEffect(() => {
+    if (selectedLessonId && !isNaN(selectedLessonId)) {
+      localStorage.setItem('selectedLessonId', selectedLessonId.toString());
+    }
+  }, [selectedLessonId]);
+
   // UI States
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [vocabItems, setVocabItems] = useState<VocabItem[]>([]);
@@ -1991,9 +1998,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   ? convertKanjiToHira(substituteText(item.japanese))
                                   : substituteText(item.japanese);
                                 const displayVietnamese = substituteText(item.vietnamese);
-                                const displayRomaji = item.lesson_id === 1 && lesson1Romaji[item.id]
-                                  ? substituteText(lesson1Romaji[item.id])
-                                  : (item.romaji && item.romaji !== "🙈 Đang ẩn (Tích chọn hiện)" ? substituteText(item.romaji) : "");
+                                const displayRomaji = item.romaji && item.romaji !== "🙈 Đang ẩn (Tích chọn hiện)"
+                                  ? substituteText(item.romaji)
+                                  : "";
 
                                 return (
                                   <div

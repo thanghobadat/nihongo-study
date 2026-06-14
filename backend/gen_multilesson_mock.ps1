@@ -123,21 +123,28 @@ try {
         
         # Read Kaiwa
         $sheet = $wb.Sheets.Item("Kaiwa")
-        for ($i = 14; $i -le 25; $i++) {
-            $speaker = $sheet.Cells.Item($i, 2).Text
-            $japanese = $sheet.Cells.Item($i, 3).Text
-            $romaji = $sheet.Cells.Item($i, 4).Text
-            $vietnamese = $sheet.Cells.Item($i, 5).Text
-            if (-not [string]::IsNullOrEmpty($speaker)) {
-                $kaiwaDialog += [PSCustomObject]@{
-                    id = $kaiwaDialog.Count + 1
-                    lesson_id = $lessonId
-                    speaker = $speaker
-                    japanese = $japanese
-                    romaji = $romaji
-                    vietnamese = $vietnamese
-                }
+        # Temporarily force Romaji checkbox to true to read raw Romaji values from the formulas
+        $sheet.Cells.Item(10, 8) = $true
+        
+        $row = 13
+        while ($true) {
+            $speaker = $sheet.Cells.Item($row, 3).Text
+            if ([string]::IsNullOrEmpty($speaker)) { break }
+            $topic = $sheet.Cells.Item($row, 2).Text
+            $japanese = $sheet.Cells.Item($row, 4).Text
+            $romaji = $sheet.Cells.Item($row, 5).Text
+            $vietnamese = $sheet.Cells.Item($row, 6).Text
+            
+            $kaiwaDialog += [PSCustomObject]@{
+                id = $kaiwaDialog.Count + 1
+                lesson_id = $lessonId
+                topic = $topic
+                speaker = $speaker
+                japanese = $japanese
+                romaji = $romaji
+                vietnamese = $vietnamese
             }
+            $row++
         }
         
         $wb.Close($false)

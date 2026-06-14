@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "node src/index.js",
-    "test": "node src/test_api.js"
+    "test": "node src/test_api.js",
+    "seed:supabase": "node src/db/seed_supabase.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.1",

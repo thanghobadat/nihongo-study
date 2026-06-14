@@ -75,6 +75,29 @@ export default function UserDashboard() {
   // UI State
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
+  const [isLoadedFromLocalStorage, setIsLoadedFromLocalStorage] = useState<boolean>(false);
+
+  // Load selectedLessonId from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('selectedLessonId');
+      if (stored) {
+        const parsed = parseInt(stored);
+        if (!isNaN(parsed)) {
+          setSelectedLessonId(parsed);
+          setLevel(parsed >= 26 ? 'N4' : 'N5');
+        }
+      }
+      setIsLoadedFromLocalStorage(true);
+    }
+  }, []);
+
+  // Save selectedLessonId to localStorage whenever it changes
+  useEffect(() => {
+    if (isLoadedFromLocalStorage && selectedLessonId) {
+      localStorage.setItem('selectedLessonId', selectedLessonId.toString());
+    }
+  }, [selectedLessonId, isLoadedFromLocalStorage]);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [vocabItems, setVocabItems] = useState<VocabItem[]>([]);
   const [kanjiItems, setKanjiItems] = useState<KanjiItem[]>([]);
@@ -174,6 +197,7 @@ export default function UserDashboard() {
 
   // Fetch initial lessons and user configurations
   const loadInitialData = useCallback(async () => {
+    if (!isLoadedFromLocalStorage) return;
     setLoading(true);
     try {
       const lessonData = await api.get('/api/user/lessons');
@@ -211,7 +235,7 @@ export default function UserDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [selectedLessonId]);
+  }, [selectedLessonId, isLoadedFromLocalStorage]);
 
   useEffect(() => {
     loadInitialData();
@@ -219,6 +243,7 @@ export default function UserDashboard() {
 
   // Load vocabulary & Kanji items when lesson selection updates
   useEffect(() => {
+    if (!isLoadedFromLocalStorage) return;
     async function loadLessonStats() {
       try {
         const vocabData = await api.get(`/api/user/lessons/${selectedLessonId}/vocabulary`);
@@ -252,7 +277,7 @@ export default function UserDashboard() {
         overall: '🔴 Chưa đạt'
       });
     }
-  }, [selectedLessonId]); // ONLY run when selectedLessonId changes, preventing locks
+  }, [selectedLessonId, isLoadedFromLocalStorage]); // ONLY run when selectedLessonId or load status changes, preventing locks
 
   // Auto-saves target plan when dates change
   const autoSavePlanDates = async (start: string, end: string) => {

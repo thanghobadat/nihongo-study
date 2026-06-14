@@ -84,7 +84,19 @@ CREATE TABLE public.grammar (
 );
 
 
--- 6. Create User Progress Table (Zebra / Checkbox Progress)
+-- 6. Create Kaiwa Dialog Table
+CREATE TABLE public.kaiwa_dialog (
+  id SERIAL PRIMARY KEY,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
+  speaker TEXT NOT NULL,
+  japanese TEXT NOT NULL,
+  romaji TEXT NOT NULL,
+  vietnamese TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+-- 7. Create User Progress Table (Zebra / Checkbox Progress)
 CREATE TABLE public.user_progress (
   id BIGSERIAL PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
@@ -114,6 +126,7 @@ ALTER TABLE public.lessons ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.vocabulary ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.kanji ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.grammar ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.kaiwa_dialog ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_progress ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.target_plans ENABLE ROW LEVEL SECURITY;
 
@@ -122,6 +135,7 @@ CREATE POLICY "Allow public read of lessons" ON public.lessons FOR SELECT USING 
 CREATE POLICY "Allow public read of vocabulary" ON public.vocabulary FOR SELECT USING (true);
 CREATE POLICY "Allow public read of kanji" ON public.kanji FOR SELECT USING (true);
 CREATE POLICY "Allow public read of grammar" ON public.grammar FOR SELECT USING (true);
+CREATE POLICY "Allow public read of kaiwa_dialog" ON public.kaiwa_dialog FOR SELECT USING (true);
 
 -- User specific Policies for user_progress
 CREATE POLICY "Allow user read own progress" ON public.user_progress FOR SELECT USING (auth.uid() = user_id);
@@ -150,3 +164,7 @@ CREATE POLICY "Admin write access kanji" ON public.kanji FOR ALL USING (
 CREATE POLICY "Admin write access grammar" ON public.grammar FOR ALL USING (
   (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
 );
+CREATE POLICY "Admin write access kaiwa_dialog" ON public.kaiwa_dialog FOR ALL USING (
+  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+);
+
