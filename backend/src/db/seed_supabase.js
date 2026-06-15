@@ -7,19 +7,15 @@ async function seedTable(tableName, dataList, matchKeys = ['id']) {
     return;
   }
 
-  console.log(`🚀 Seeding ${dataList.length} items into table: ${tableName}...`);
+  console.log(`🚀 Seeding ${dataList.length} items into table: ${tableName} (Bulk)...`);
 
-  for (const item of dataList) {
-    // Perform Upsert
-    const { data, error } = await supabase
-      .from(tableName)
-      .upsert(item, { onConflict: matchKeys.join(',') })
-      .select();
+  const { error } = await supabase
+    .from(tableName)
+    .upsert(dataList, { onConflict: matchKeys.join(',') });
 
-    if (error) {
-      console.error(`❌ Error seeding item into ${tableName}:`, error.message);
-      throw error;
-    }
+  if (error) {
+    console.error(`❌ Error seeding table ${tableName}:`, error.message);
+    throw error;
   }
 
   console.log(`✅ Completed seeding table: ${tableName}`);
