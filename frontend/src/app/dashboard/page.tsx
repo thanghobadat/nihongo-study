@@ -518,7 +518,7 @@ export default function UserDashboard() {
             <select
               value={selectedLessonId}
               onChange={(e) => setSelectedLessonId(parseInt(e.target.value))}
-              className="bg-slate-950/60 border border-slate-900 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px]"
+              className="bg-slate-950/60 border border-slate-900 rounded-xl px-3 py-2 text-base md:text-xs text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px]"
             >
               {filteredLessons.map((l) => (
                 <option key={l.id} value={l.id} className="bg-[#0b1329] text-slate-200">
@@ -732,7 +732,7 @@ export default function UserDashboard() {
                     <select
                       value={selectedLessonId}
                       onChange={(e) => setSelectedLessonId(parseInt(e.target.value))}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-200 font-semibold focus:outline-none focus:border-blue-600/50 cursor-pointer"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-base md:text-xs text-slate-200 font-semibold focus:outline-none focus:border-blue-600/50 cursor-pointer"
                     >
                       {filteredLessons.map((l) => (
                         <option key={l.id} value={l.id} className="bg-[#0b1329]">
@@ -756,7 +756,7 @@ export default function UserDashboard() {
                             try { e.currentTarget.showPicker(); } catch (err) { console.error(err); }
                           }
                         }}
-                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
+                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-base md:text-xs text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
                         required
                       />
                     </div>
@@ -773,7 +773,7 @@ export default function UserDashboard() {
                             try { e.currentTarget.showPicker(); } catch (err) { console.error(err); }
                           }
                         }}
-                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
+                        className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-base md:text-xs text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
                         required
                       />
                     </div>
