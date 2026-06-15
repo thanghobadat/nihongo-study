@@ -26,9 +26,9 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col bg-[#09111e]">
+      <body className="min-h-full flex flex-col bg-[#09111e] overflow-x-hidden max-w-full">
         <AuthGuard>{children}</AuthGuard>
       </body>
     </html>

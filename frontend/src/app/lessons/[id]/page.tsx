@@ -847,7 +847,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const grammarProgressPercent = grammarTotalCount ? Math.round((grammarMasteredCount / grammarTotalCount) * 100) : 0;
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-gradient-to-br from-[#0b1329] via-[#090d1a] to-[#050811] text-slate-100 font-sans relative">
+    <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-[#0b1329] via-[#090d1a] to-[#050811] text-slate-100 font-sans relative">
       
       {/* Mobile Hamburger toggle button */}
       <button

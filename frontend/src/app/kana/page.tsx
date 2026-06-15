@@ -825,7 +825,7 @@ export default function AlphabetReviewPage() {
   }, []);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-gradient-to-br from-[#0b1329] via-[#090d1a] to-[#050811] text-slate-100 font-sans relative">
+    <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-[#0b1329] via-[#090d1a] to-[#050811] text-slate-100 font-sans relative">
       
       {/* Mobile Sidebar Hamburger Toggle */}
       <button
