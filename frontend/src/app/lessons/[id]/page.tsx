@@ -993,7 +993,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
             <select
               value={selectedLessonId}
               onChange={(e) => handleLessonChange(parseInt(e.target.value))}
-              className="bg-slate-950/60 border border-slate-900 rounded-xl px-3 py-2 text-base md:text-xs text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px]"
+              className="bg-slate-950/60 border border-slate-900 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px]"
             >
               {filteredLessons.map((l) => (
                 <option key={l.id} value={l.id} className="bg-[#0b1329] text-slate-200">
@@ -1075,7 +1075,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
 
                   {/* Status filters */}
-                  <div className="flex bg-slate-950/80 p-1 rounded-xl border border-slate-900 w-full sm:w-auto overflow-x-auto justify-between sm:justify-start">
+                  <div className="flex bg-slate-950/80 p-1 rounded-xl border border-slate-900 w-full sm:w-auto shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
                     <button
                       onClick={() => setStatusFilter('all')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
@@ -1161,7 +1161,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <select
                                 value={item.status}
                                 onChange={(e) => handleStatusChange(item.id, e.target.value as any)}
-                                className={`bg-slate-950 border rounded-xl px-2.5 py-1 text-base md:text-xs font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
+                                className={`bg-slate-950 border rounded-xl px-2.5 py-1 text-xs font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
                                   item.status === 'mastered'
                                     ? 'border-emerald-800 text-emerald-400 bg-emerald-950/30'
                                     : item.status === 'learning'
@@ -1307,7 +1307,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
 
                   {/* Status filters */}
-                  <div className="flex bg-slate-950/80 p-1 rounded-xl border border-slate-900 w-full sm:w-auto overflow-x-auto justify-between sm:justify-start">
+                  <div className="flex bg-slate-950/80 p-1 rounded-xl border border-slate-900 w-full sm:w-auto shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
                     <button
                       onClick={() => setStatusFilter('all')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
@@ -1388,7 +1388,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <select
                                 value={item.status}
                                 onChange={(e) => handleKanjiStatusChange(item.id, e.target.value as any)}
-                                className={`bg-slate-950 border rounded-xl px-2.5 py-1 text-base md:text-xs font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
+                                className={`bg-slate-950 border rounded-xl px-2.5 py-1 text-xs font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
                                   item.status === 'mastered'
                                     ? 'border-emerald-800 text-emerald-400 bg-emerald-950/30'
                                     : item.status === 'learning'
@@ -1537,7 +1537,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
 
                   {/* Status filters */}
-                  <div className="flex bg-slate-950/80 p-1 rounded-xl border border-slate-900 w-full sm:w-auto overflow-x-auto justify-between sm:justify-start">
+                  <div className="flex bg-slate-950/80 p-1 rounded-xl border border-slate-900 w-full sm:w-auto shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
                     <button
                       onClick={() => setStatusFilter('all')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
@@ -1622,7 +1622,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 <select
                                   value={item.status}
                                   onChange={(e) => handleGrammarStatusChange(item.id, e.target.value as any)}
-                                  className={`bg-slate-950 border rounded-xl px-2.5 py-1 text-base md:text-xs font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
+                                  className={`bg-slate-950 border rounded-xl px-2.5 py-1 text-xs font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
                                     item.status === 'mastered'
                                       ? 'border-emerald-800 text-emerald-400 bg-emerald-950/30'
                                       : item.status === 'learning'
@@ -1740,7 +1740,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             setRangeStart(val);
                             if (rangeEnd < val) setRangeEnd(val);
                           }}
-                          className="bg-transparent text-base md:text-xs text-slate-200 font-bold focus:outline-none cursor-pointer pr-1"
+                          className="bg-transparent text-xs text-slate-200 font-bold focus:outline-none cursor-pointer pr-1"
                         >
                           {activeList.map((item, idx) => (
                             <option key={item.id} value={idx + 1} className="bg-[#0b1329] text-slate-200">
@@ -1753,7 +1753,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         <select
                           value={rangeEnd}
                           onChange={(e) => setRangeEnd(parseInt(e.target.value))}
-                          className="bg-transparent text-base md:text-xs text-slate-200 font-bold focus:outline-none cursor-pointer pr-1"
+                          className="bg-transparent text-xs text-slate-200 font-bold focus:outline-none cursor-pointer pr-1"
                         >
                           {activeList.map((item, idx) => (
                             <option
@@ -2024,7 +2024,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <select
                             value={charName}
                             onChange={(e) => setCharName(e.target.value)}
-                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
                           >
                             {activeLesson.roleplay_options.names.map(name => (
                               <option key={name} value={name}>{name} {jaToVnDict[name] ? `(${jaToVnDict[name]})` : ''}</option>
@@ -2040,7 +2040,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <select
                             value={charCountry}
                             onChange={(e) => setCharCountry(e.target.value)}
-                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
                           >
                             {activeLesson.roleplay_options.countries.map(country => (
                               <option key={country} value={country}>{country} {jaToVnDict[country] ? `(${jaToVnDict[country]})` : ''}</option>
@@ -2056,7 +2056,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <select
                             value={charOccupation}
                             onChange={(e) => setCharOccupation(e.target.value)}
-                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-205"
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-205"
                           >
                             {activeLesson.roleplay_options.occupations.map(job => (
                               <option key={job} value={job}>{job} {jaToVnDict[job] ? `(${jaToVnDict[job]})` : ''}</option>
@@ -2072,7 +2072,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <select
                             value={charOrganization}
                             onChange={(e) => setCharOrganization(e.target.value)}
-                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
+                            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
                           >
                             {activeLesson.roleplay_options.organizations.map(org => (
                               <option key={org} value={org}>{org} {jaToVnDict[org] ? `(${jaToVnDict[org]})` : ''}</option>
@@ -2083,7 +2083,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                     </div>
 
                     {/* Switches toolbar */}
-                    <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-slate-800/40 text-xs text-slate-300">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-6 pt-2 border-t border-slate-800/40 text-xs text-slate-300">
                       <label className="flex items-center space-x-2.5 cursor-pointer select-none">
                         <input
                           type="checkbox"
@@ -2133,8 +2133,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
                 ) : (
                   /* Smaller toolbar when no roleplay exists */
-                  <div className="bg-slate-900/40 border border-slate-800 p-4 rounded-2xl backdrop-blur-md flex flex-wrap items-center gap-6 justify-between text-xs text-slate-300">
-                    <div className="flex flex-wrap items-center gap-6">
+                  <div className="bg-slate-900/40 border border-slate-800 p-4 rounded-2xl backdrop-blur-md flex flex-wrap items-center gap-3 sm:gap-6 justify-between text-xs text-slate-300">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-6">
                       <label className="flex items-center space-x-2.5 cursor-pointer select-none">
                         <input
                           type="checkbox"

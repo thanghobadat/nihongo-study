@@ -1166,7 +1166,7 @@ export default function AlphabetReviewPage() {
                     <select
                       value={gameAlphabet}
                       onChange={(e) => setGameAlphabet(e.target.value as any)}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs text-slate-200 focus:outline-none"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none"
                     >
                       <option value="hiragana">Bảng Hiragana</option>
                       <option value="katakana">Bảng Katakana</option>
@@ -1179,7 +1179,7 @@ export default function AlphabetReviewPage() {
                     <select
                       value={gameMode}
                       onChange={(e) => setGameMode(e.target.value as any)}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs text-slate-200 focus:outline-none"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none"
                     >
                       <option value="random">Luyện tập ngẫu nhiên</option>
                       <option value="confused">Luyện chữ dễ nhầm lẫn</option>
@@ -1310,7 +1310,7 @@ export default function AlphabetReviewPage() {
                 <select
                   value={gameAlphabet}
                   onChange={(e) => setGameAlphabet(e.target.value as any)}
-                  className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-base md:text-xs text-slate-200 focus:outline-none"
+                  className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none"
                 >
                   <option value="hiragana">Bảng Hiragana</option>
                   <option value="katakana">Bảng Katakana</option>
@@ -1485,7 +1485,7 @@ export default function AlphabetReviewPage() {
                       const found = list.find(item => item.id === parseInt(e.target.value));
                       if (found) setWritingKana(found);
                     }}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-base md:text-xs text-slate-200 focus:outline-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none"
                   >
                     {(writingAlphabet === 'hiragana' ? hiraganaData : katakanaData).map(item => (
                       <option key={item.id} value={item.id}>
@@ -1604,7 +1604,7 @@ export default function AlphabetReviewPage() {
                     <select
                       value={combinedDifficulty}
                       onChange={(e) => setCombinedDifficulty(e.target.value as any)}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs text-slate-200 focus:outline-none cursor-pointer"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none cursor-pointer"
                     >
                       <option value="easy">Dễ (3 ~ 5 ký tự)</option>
                       <option value="medium">Trung bình (6 ~ 9 ký tự)</option>
@@ -1618,7 +1618,7 @@ export default function AlphabetReviewPage() {
                     <select
                       value={combinedLimit}
                       onChange={(e) => setCombinedLimit(parseInt(e.target.value))}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-base md:text-xs text-slate-200 focus:outline-none cursor-pointer"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none cursor-pointer"
                     >
                       <option value={10}>10 câu</option>
                       <option value={20}>20 câu</option>
