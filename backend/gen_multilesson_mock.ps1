@@ -1,4 +1,4 @@
-# Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
+﻿# Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
 # Usage in PowerShell: powershell -ExecutionPolicy Bypass -File gen_multilesson_mock.ps1
 
 $files = Get-ChildItem -Path "d:\AI\japanese_learning\tai_lieu\*.xlsx" | Where-Object { $_.Name -notlike "~$*" } | Sort-Object { [int]($_.BaseName -replace '^Bai(\d+).*', '$1') }
@@ -18,6 +18,13 @@ $vocabulary = @()
 $kanji = @()
 $grammar = @()
 $kaiwaDialog = @()
+
+$cachePath = "d:\AI\japanese_learning\website\backend\src\db\grammar_romaji_cache.json"
+$romajiCache = $null
+if (Test-Path $cachePath) {
+    $cacheContent = Get-Content -Raw -Path $cachePath -Encoding utf8
+    $romajiCache = ConvertFrom-Json $cacheContent
+}
 
 $lessonId = 1
 try {
@@ -178,6 +185,14 @@ try {
             $ex_meaning = $sheet.Cells.Item($row, 6).Text
             $notes = $sheet.Cells.Item($row, 7).Text
             
+            $romaji_example = ""
+            if ($romajiCache -and -not [string]::IsNullOrEmpty($example)) {
+                $prop = $romajiCache.PSObject.Properties[$example]
+                if ($prop) {
+                    $romaji_example = $prop.Value
+                }
+            }
+
             $grammar += [PSCustomObject]@{
                 id = $grammar.Count + 1
                 lesson_id = $lessonId
@@ -187,6 +202,7 @@ try {
                 vietnamese_explanation = $explanation
                 japanese_example = $example
                 example_meaning = $ex_meaning
+                romaji_example = $romaji_example
                 notes = $notes
             }
             $row++

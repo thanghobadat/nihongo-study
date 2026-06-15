@@ -84,6 +84,7 @@ async function runSeed() {
       vietnamese_explanation: g.vietnamese_explanation,
       japanese_example: g.japanese_example,
       example_meaning: g.example_meaning,
+      romaji_example: g.romaji_example,
       notes: g.notes
     }));
     await seedTable('grammar', grammarData, ['id']);

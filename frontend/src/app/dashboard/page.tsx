@@ -64,13 +64,13 @@ export default function UserDashboard() {
   // Navigation Items corresponding to the 7 Sheets
   const menuItems = [
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: true },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false },
+    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ngữ pháp', id: 'grammar', icon: '📝', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
+    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
   ];
 
   // UI State
@@ -425,7 +425,9 @@ export default function UserDashboard() {
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id === 'kana') {
+                  if (item.id === 'roadmap') {
+                    router.push('/roadmap');
+                  } else if (item.id === 'kana') {
                     router.push('/kana');
                   } else if (item.id !== 'dashboard') {
                     router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);

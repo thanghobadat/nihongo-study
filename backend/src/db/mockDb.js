@@ -1,5 +1,5 @@
 ﻿// In-memory Mock Database generated from Excel workbooks in tai_lieu/
-// Generated on: 2026-06-15 19:07:08
+// Generated on: 2026-06-15 23:57:47
 // Serves as the mock database for local API Console testing.
 
 const lessons = [
@@ -10244,6 +10244,7 @@ const grammar = [
         "vietnamese_explanation":  "Mẫu câu khẳng định cơ bản nhất, dùng 100% khi giới thiệu thông tin cá nhân.",
         "japanese_example":  "わたしは マイク・ミラー です。",
         "example_meaning":  "Tôi là Mike Miller.",
+        "romaji_example":  "Watashi wa maiku miraa desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10255,6 +10256,7 @@ const grammar = [
         "vietnamese_explanation":  "Mẫu câu phủ định cơ bản của danh từ, sử dụng liên tục trong đời sống.",
         "japanese_example":  "サントスさんは 学生 じゃありません。",
         "example_meaning":  "Anh Santos không phải là sinh viên.",
+        "romaji_example":  "Santosu-san wa gakusei ja arimasen.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10266,6 +10268,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để xác nhận thông tin của người đối diện, cấu trúc hỏi đáp sơ cấp điển hình.",
         "japanese_example":  "ミラーさんは 会社員 ですか。",
         "example_meaning":  "Anh Miller có phải là nhân viên công ty không?",
+        "romaji_example":  "Miraa-san wa kaishain desu ka.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10277,6 +10280,7 @@ const grammar = [
         "vietnamese_explanation":  "Ứng dụng rất cao khi nói về sự giống nhau giữa các đối tượng trong hội thoại nhóm.",
         "japanese_example":  "わたしも 会社員 です。",
         "example_meaning":  "Tôi cũng là nhân viên công ty.",
+        "romaji_example":  "Watashi mo kaishain desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10288,6 +10292,7 @@ const grammar = [
         "vietnamese_explanation":  "Mẫu câu nối danh từ cốt lõi, dùng khi giới thiệu công ty hoặc trường học sở tại của mình.",
         "japanese_example":  "わたしは IMCの 社員 です。",
         "example_meaning":  "Tôi là nhân viên của công ty IMC.",
+        "romaji_example":  "Watashi wa aiemushii no shain desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10299,6 +10304,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để chỉ vật dựa vào khoảng cách tới người nói và người nghe. \u0027これ\u0027 chỉ vật gần người nói, \u0027それ\u0027 chỉ vật gần người nghe, \u0027あれ\u0027 chỉ vật xa cả hai.",
         "japanese_example":  "これは私のノートです。",
         "example_meaning":  "Đây là vở của tôi.",
+        "romaji_example":  "Kore wa watashi no nouto desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10310,6 +10316,7 @@ const grammar = [
         "vietnamese_explanation":  "Chỉ định từ đi trực tiếp trước danh từ để bổ nghĩa. \u0027この\u0027 chỉ vật gần người nói, \u0027その\u0027 chỉ vật gần người nghe, \u0027あの\u0027 chỉ vật xa cả hai.",
         "japanese_example":  "この傘は私のです。",
         "example_meaning":  "Cái ô này là của tôi.",
+        "romaji_example":  "Kono kasa wa watashi no desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10321,6 +10328,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng trong câu trả lời xác nhận cho câu hỏi danh từ dạng \u0027[N1] は [N2] ですか\u0027.",
         "japanese_example":  "それは辞書ですか。はい、そうです。",
         "example_meaning":  "Đó là từ điển phải không? Vâng, đúng thế.",
+        "romaji_example":  "Sore wa jisho desu ka. Hai,-sou desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10332,6 +10340,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi người nói tiếp nhận thông tin mới từ người đối thoại, thể hiện thái độ hiểu ra vấn đề.",
         "japanese_example":  "これはベトナムのお土産です。そうですか。ありがとうございます。",
         "example_meaning":  "Đây là quà lưu niệm từ Việt Nam. Thế à. Cảm ơn bạn.",
+        "romaji_example":  "Kore wa Betonamu no odosan desu. Sou desu ka. Arigatougoza imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10343,6 +10352,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi người nói phân vân giữa hai hoặc nhiều lựa chọn, người trả lời sẽ chọn một trong các phương án chứ không trả lời hai hay không.",
         "japanese_example":  "これは「９」ですか、「７」ですか。ー「９」es。",
         "example_meaning":  "Đây là số 9 hay số 7? - Là số 9.",
+        "romaji_example":  "Koreha `9 \u0027 desu ka,`7 \u0027 desu ka. ̄ `9 \u0027 Es.",
         "notes":  "#VALUE!"
     },
     {
@@ -10354,6 +10364,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ の diễn tả mối quan hệ sở hữu (N2 thuộc về N1) hoặc chỉ nội dung, tính chất của N2 (N2 nói về nội dung gì của N1).",
         "japanese_example":  "これは日本語の教科書です。",
         "example_meaning":  "Đây là sách giáo khoa tiếng Nhật.",
+        "romaji_example":  "Kore wa nihongo no kyoukasho desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10365,6 +10376,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để chỉ địa điểm dựa vào khoảng cách tới người nói/nghe.",
         "japanese_example":  "ここは 教室 です。",
         "example_meaning":  "Đây là phòng học.",
+        "romaji_example":  "Koko wa kyoushitsu desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10376,6 +10388,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để diễn tả nơi chốn của một người, vật hoặc địa điểm cụ thể.",
         "japanese_example":  "事務所は そこ です。",
         "example_meaning":  "Văn phòng ở đó.",
+        "romaji_example":  "Jimusho wa soko desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10387,6 +10400,7 @@ const grammar = [
         "vietnamese_explanation":  "Là cách nói lịch sự (kính ngữ) của khi/đó/kia.",
         "japanese_example":  "こちらは 受付 です。",
         "example_meaning":  "Phía này là quầy tiếp tân.",
+        "romaji_example":  "Kochira wa uketsuke desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10398,6 +10412,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi vị trí của nơi chốn, người hoặc vật. どちら là kính ngữ lịch sự hơn どこ.",
         "japanese_example":  "トイレは どこ ですか。",
         "example_meaning":  "Nhà vệ sinh ở đâu vậy?",
+        "romaji_example":  "Toire wa doko desu ka.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10409,6 +10424,7 @@ const grammar = [
         "vietnamese_explanation":  "Cách hỏi lịch sự về quốc tịch, quê quán của người đối diện.",
         "japanese_example":  "お国は どちら ですか。ーベトナム です。",
         "example_meaning":  "Đất nước của bạn ở đâu? - Là Việt Nam.",
+        "romaji_example":  "O kuni wa dochira desu ka. ̄Betonamu desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10420,6 +10436,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả xuất xứ hoặc hãng sản xuất của đồ vật.",
         "japanese_example":  "これは 日本の 車 です。",
         "example_meaning":  "Đây là ô tô của Nhật Bản.",
+        "romaji_example":  "Kore wa Nihon no kuruma desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10431,6 +10448,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để diễn tả thời gian hiện tại.",
         "japanese_example":  "今 7時10分 です。",
         "example_meaning":  "Bây giờ là 7 giờ 10 phút.",
+        "romaji_example":  "Ima 7-ji 10-bu desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10442,6 +10460,7 @@ const grammar = [
         "vietnamese_explanation":  "Biểu thị một hành động sẽ xảy ra hoặc thói quen hằng ngày.",
         "japanese_example":  "私は 毎日 勉強します。",
         "example_meaning":  "Mỗi ngày tôi đều học tập.",
+        "romaji_example":  "Watashi wa mainichi benkyou sh imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10453,6 +10472,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động đã hoàn thành trong quá khứ.",
         "japanese_example":  "昨日は 働きませんでした。",
         "example_meaning":  "Hôm qua tôi đã không làm việc.",
+        "romaji_example":  "Kinou wa hatarakimasendeshita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10464,6 +10484,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động xảy ra vào một thời điểm cụ thể.",
         "japanese_example":  "毎朝 6時に 起きます。",
         "example_meaning":  "Mỗi sáng tôi thức dậy lúc 6 giờ.",
+        "romaji_example":  "Maiasa 6-ji ni ok imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10475,6 +10496,7 @@ const grammar = [
         "vietnamese_explanation":  "Biểu thị khoảng thời gian hoặc không gian từ điểm đầu đến điểm cuối.",
         "japanese_example":  "9時から 5時まで 働きます。",
         "example_meaning":  "Tôi làm việc từ 9 giờ đến 5 giờ.",
+        "romaji_example":  "9-Ji kara 5-ji made hatarak imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10486,6 +10508,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để nối hai danh từ.",
         "japanese_example":  "休みは 土曜日と 日曜日 です。",
         "example_meaning":  "Ngày nghỉ là thứ bảy và chủ nhật.",
+        "romaji_example":  "Yasumi wa doyoubi to nichiyoubi desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10497,6 +10520,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ へ biểu thị hướng di chuyển của hành động.",
         "japanese_example":  "日本へ 行きます。",
         "example_meaning":  "Tôi đi Nhật Bản.",
+        "romaji_example":  "Nihon e ik imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10508,6 +10532,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để phủ định hoàn toàn hướng di chuyển.",
         "japanese_example":  "日曜日は どこへも 行きませんでした。",
         "example_meaning":  "Chủ nhật tôi đã không đi đâu cả.",
+        "romaji_example":  "Nichiyoubi wa doko e mo ikimasendeshita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10519,6 +10544,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ で biểu thị phương tiện, cách thức di chuyển.",
         "japanese_example":  "電車で 行きます。",
         "example_meaning":  "Tôi đi bằng tàu điện.",
+        "romaji_example":  "Densha de ik imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10530,6 +10556,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ と biểu thị đối tượng cùng thực hiện hành động.",
         "japanese_example":  "家族と 日本へ 来ました。",
         "example_meaning":  "Tôi đã đến Nhật Bản cùng gia đình.",
+        "romaji_example":  "Kazoku to Nihon e ki mashita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10541,6 +10568,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi về thời gian thực hiện hành động.",
         "japanese_example":  "いつ 日本へ 行きますか。",
         "example_meaning":  "Khi nào bạn đi Nhật Bản vậy?",
+        "romaji_example":  "Itsu Nihon e ik imasu ka.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10552,6 +10580,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ を biểu thị đối tượng trực tiếp của hành động.",
         "japanese_example":  "ジュースを 飲みます。",
         "example_meaning":  "Tôi uống nước hoa quả.",
+        "romaji_example":  "Juusu o nom imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10563,6 +10592,7 @@ const grammar = [
         "vietnamese_explanation":  "Sử dụng với các danh từ chỉ hành động, thể thao, trò chơi.",
         "japanese_example":  "サッカーを します。",
         "example_meaning":  "Tôi chơi bóng đá.",
+        "romaji_example":  "Sakkaa o sh imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10574,6 +10604,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi về hành động của đối phương.",
         "japanese_example":  "ロビーで 何を しますか。ー本を 読みます。",
         "example_meaning":  "Bạn làm gì ở sảnh? - Tôi đọc sách.",
+        "romaji_example":  "Robii de nani o sh imasu ka. ̄ Hon o yom imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10585,6 +10616,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ で biểu thị nơi diễn ra hành động.",
         "japanese_example":  "スーパーで パンを 買いました。",
         "example_meaning":  "Tôi đã mua bánh mì ở siêu thị.",
+        "romaji_example":  "Suupaa de pan o kai mashita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10596,6 +10628,7 @@ const grammar = [
         "vietnamese_explanation":  "Lời mời rủ lịch sự, tôn trọng ý kiến đối phương.",
         "japanese_example":  "一緒に 神戸へ 行きませんか。",
         "example_meaning":  "Chúng ta cùng đi Kobe chơi không?",
+        "romaji_example":  "Issho ni Koube e ikimasen ka.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10607,6 +10640,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi đồng ý lời mời rủ hoặc chủ động đề xuất.",
         "japanese_example":  "ちょっと 休みましょう。",
         "example_meaning":  "Chúng ta cùng nghỉ ngơi một chút nhé.",
+        "romaji_example":  "Chotto yasumimashou.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10618,6 +10652,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ で biểu thị công cụ, phương pháp thực hiện hành động.",
         "japanese_example":  "はさみで 紙を 切ります。",
         "example_meaning":  "Tôi cắt giấy bằng kéo.",
+        "romaji_example":  "Hasami de kami o kir imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10629,6 +10664,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi cách diễn đạt của một từ/câu bằng ngôn ngữ khác.",
         "japanese_example":  "「ありがとう」は 英語で 何ですか。ー「Thank you」deす。",
         "example_meaning":  "\"Arigatou\" tiếng Anh là gì? - Là \"Thank you\".",
+        "romaji_example":  "`Arigatou\u0027 wa eigo de nan desuka. ̄ `Sankyuu\u0027 de su.",
         "notes":  "#VALUE!"
     },
     {
@@ -10640,6 +10676,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ に chỉ đối tượng tiếp nhận hành động.",
         "japanese_example":  "私は ミラーさんに 花を あげました。",
         "example_meaning":  "Tôi đã tặng hoa cho anh Miller.",
+        "romaji_example":  "Watashi wa miraa-san ni hana o age mashita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10651,6 +10688,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ に hoặc から chỉ đối tượng cung cấp đồ vật/tri thức.",
         "japanese_example":  "サントスさんに 本を 借りました。",
         "example_meaning":  "Tôi đã mượn sách từ anh Santos.",
+        "romaji_example":  "Santosu-san ni hon o kari mashita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10662,6 +10700,7 @@ const grammar = [
         "vietnamese_explanation":  "Biểu thị hành động đã hoàn tất ở thời điểm hiện tại.",
         "japanese_example":  "もう 晩ご飯を 食べましたか。ーはい、もう 食べました。",
         "example_meaning":  "Bạn đã ăn tối chưa? - Vâng, tôi ăn rồi.",
+        "romaji_example":  "Mou ban gohan o tabe mashita ka. ̄ Wa i, mou tabe mashita.",
         "notes":  "#VALUE!"
     },
     {
@@ -10673,6 +10712,7 @@ const grammar = [
         "vietnamese_explanation":  "Tính từ đuôi na khi dùng ở cuối câu sẽ bỏ [na] đi.",
         "japanese_example":  "この町は にぎやかです。ー静かじゃありません。",
         "example_meaning":  "Thị trấn này nhộn nhịp. - Không yên tĩnh đâu.",
+        "romaji_example":  "Kono machi wa nigiyaka desu. ̄ Shizuka ja arimasen.",
         "notes":  "#VALUE!"
     },
     {
@@ -10684,6 +10724,7 @@ const grammar = [
         "vietnamese_explanation":  "Phủ định tính từ đuôi i bằng cách đổi đuôi [i] thành [くない].",
         "japanese_example":  "日本のカメラは 高くないです。",
         "example_meaning":  "Máy ảnh Nhật Bản không đắt đâu.",
+        "romaji_example":  "Nihon no kamera wa takakunai desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10695,6 +10736,7 @@ const grammar = [
         "vietnamese_explanation":  "Đặt tính từ trước danh từ để làm rõ tính chất của danh từ.",
         "japanese_example":  "有名な人ですね。ー新しい車があります。",
         "example_meaning":  "Người nổi tiếng đấy nhỉ. - Tôi có xe hơi mới.",
+        "romaji_example":  "Yuumeina hito desu ne. ̄ Atarashii kuruma ga ar imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10706,6 +10748,7 @@ const grammar = [
         "vietnamese_explanation":  "Phó từ biểu thị mức độ của tính chất.",
         "japanese_example":  "この料理は とても美味しいです。あまり辛くないです。",
         "example_meaning":  "Món ăn này rất ngon. Không cay lắm.",
+        "romaji_example":  "Kono ryouri wa totemo oishii desu. Amari tsurakunai desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10717,6 +10760,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi về ấn tượng, ý kiến của đối phương về danh từ.",
         "japanese_example":  "日本の生活は どうですか。ーとても楽しいです。",
         "example_meaning":  "Cuộc sống ở Nhật thế nào? - Rất vui vẻ thoải mái.",
+        "romaji_example":  "Nihon no seikatsu wa dou desu ka. ̄ Totemo tanoshii desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10728,6 +10772,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ が được dùng để biểu thị đối tượng của năng lực hoặc sở hữu.",
         "japanese_example":  "私は パソコンが あります。日本語が 分かります。",
         "example_meaning":  "Tôi có máy tính. Tôi hiểu tiếng Nhật.",
+        "romaji_example":  "Watashi wa pasokon ga ar imasu. Nihongo ga wakar imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10739,6 +10784,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ が dùng với các tính từ chỉ sở thích hoặc năng lực.",
         "japanese_example":  "サントスさんは サッカーが 上手です。",
         "example_meaning":  "Anh Santos chơi bóng đá giỏi.",
+        "romaji_example":  "Santosu-san wa sakkaa ga jouzu desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10750,6 +10796,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi cụ thể về sở thích trong một nhóm đối tượng.",
         "japanese_example":  "どんな スポーツが 好きですか。ー野球が 好きです。",
         "example_meaning":  "Bạn thích môn thể thao nào? - Tôi thích bóng chày.",
+        "romaji_example":  "Don\u0027na supoutsu ga suki desu ka. ̄ Yakyuu ga suki desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10761,6 +10808,7 @@ const grammar = [
         "vietnamese_explanation":  "Phó từ đứng trước động từ để biểu thị tần suất/mức độ.",
         "japanese_example":  "漢字が 全然 分かりません。英語が よく 分かります。",
         "example_meaning":  "Tôi hoàn toàn không hiểu chữ Hán. Tiếng Anh thì hiểu rõ.",
+        "romaji_example":  "Kanji ga zenzen wak arimasen. Eigo ga yoku wakar imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10772,6 +10820,7 @@ const grammar = [
         "vietnamese_explanation":  "Từ nối から biểu thị lý do của hành động ở Câu 2.",
         "japanese_example":  "時間がないから、テレビを見ません。",
         "example_meaning":  "Vì không có thời gian nên tôi không xem tivi.",
+        "romaji_example":  "Jikanganai kara, terebi o mimasen.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10783,6 +10832,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả sự hiện hữu, tồn tại của vật thể hoặc sinh vật tại một vị trí.",
         "japanese_example":  "机の上に 本があります。庭に 犬がいます。",
         "example_meaning":  "Có sách trên bàn. Có con chó trong sân.",
+        "romaji_example":  "Tsukue no ue ni hon ga ar imasu. Niwa ni inu ga imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10794,6 +10844,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi N2 đã được biết đến và ta muốn nhấn mạnh nơi chốn của nó.",
         "japanese_example":  "ミラーさんは 事務所に います。本は 机の上に あります。",
         "example_meaning":  "Anh Miller ở trong văn phòng. Sách ở trên bàn học.",
+        "romaji_example":  "Miraa-san wa jimusho ni imasu. Hon wa tsukue no ue ni ar imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10805,6 +10856,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ の liên kết vật thể với danh từ chỉ phương hướng vị trí.",
         "japanese_example":  "箱の中に 猫がいます。駅の近くに スーパーがあります。",
         "example_meaning":  "Có mèo trong hộp. Có siêu thị ở gần nhà ga.",
+        "romaji_example":  "Hako no naka ni neko ga imasu. Eki no chikaku ni suupaa ga ar imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10816,6 +10868,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ や dùng để liệt kê tượng trưng một vài danh từ, など có nghĩa là \u0027vân vân\u0027.",
         "japanese_example":  "冷蔵庫の中に 肉や 野菜など があります。",
         "example_meaning":  "Trong tủ lạnh có thịt, rau, vân vân.",
+        "romaji_example":  "Reizouko no naka ni niku ya yasai nado ga ar imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10827,6 +10880,7 @@ const grammar = [
         "vietnamese_explanation":  "Khác với tiếng Việt, số lượng trong tiếng Nhật thường đặt trực tiếp trước động từ.",
         "japanese_example":  "りんごを ４つ 買いました。",
         "example_meaning":  "Tôi đã mua 4 quả táo.",
+        "romaji_example":  "Ringo o 4tsu kai mashita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10838,6 +10892,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ に ở đây biểu thị phạm vi thời gian làm cột mốc đo tần suất.",
         "japanese_example":  "1か月に 2回 映画を見ます。",
         "example_meaning":  "Tôi xem phim 2 lần một tháng.",
+        "romaji_example":  "1-Kagetsu ni 2-kai eiga o m imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10849,6 +10904,7 @@ const grammar = [
         "vietnamese_explanation":  "Để nói hành động kéo dài bao lâu, ta đặt khoảng thời gian không có trợ từ trước động từ.",
         "japanese_example":  "日本に 1年 います。",
         "example_meaning":  "Tôi ở Nhật Bản 1 năm.",
+        "romaji_example":  "Nihon ni 1-nen imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10860,6 +10916,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để nói về thời gian cần thiết để đi từ điểm xuất phát đến đích.",
         "japanese_example":  "駅から うちまで 15分 かかります。",
         "example_meaning":  "Mất 15 phút đi từ nhà ga về nhà.",
+        "romaji_example":  "Eki kara uchi made 15-bu kakar imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10871,6 +10928,7 @@ const grammar = [
         "vietnamese_explanation":  "Đứng sau lượng từ để nhấn mạnh sự ít ỏi hoặc giới hạn độc quyền.",
         "japanese_example":  "休みは 日曜日 だけ です。",
         "example_meaning":  "Ngày nghỉ chỉ có chủ nhật thôi.",
+        "romaji_example":  "Yasumi wa nichiyoubi dake desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10882,6 +10940,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ より nghĩa là \u0027so với\u0027. N2 đóng vai trò làm mốc so sánh.",
         "japanese_example":  "この車は あの車より 速いです。",
         "example_meaning":  "Chiếc xe này nhanh hơn chiếc xe kia.",
+        "romaji_example":  "Kono kuruma wa ano kuruma yori hayai desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10893,6 +10952,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để yêu cầu người nghe lựa chọn đối tượng vượt trội hơn giữa N1 và N2. Trả lời dùng \u0027N1 のほうが Adj です\u0027.",
         "japanese_example":  "日本語と 英語と どちらが 難しいですか。ー日本語のほうが 難しいです。",
         "example_meaning":  "Tiếng Nhật và tiếng Anh cái nào khó hơn? - Tiếng Nhật khó hơn.",
+        "romaji_example":  "Nihongo to eigo to dochira ga muzukashii desu ka. ̄ Nihongo no hou ga muzukashii desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10904,6 +10964,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để hỏi đối tượng vượt trội nhất trong một tập thể hoặc giới hạn địa điểm/thời gian.",
         "japanese_example":  "1年で いつが いちばん 寒いですか。ー2月が いちばん 寒いです。",
         "example_meaning":  "Trong một năm khi nào lạnh nhất? - Tháng 2 là lạnh nhất.",
+        "romaji_example":  "1-Nen de itsu ga ichiban samui desu ka. ̄ 2 Tsuki ga ichiban samui desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10915,6 +10976,7 @@ const grammar = [
         "vietnamese_explanation":  "Quá khứ của です là でした, phủ định quá khứ là じゃありませんでした.",
         "japanese_example":  "昨日の祭りは にぎやかでした。暇じゃありませんでした。",
         "example_meaning":  "Lễ hội hôm qua rất nhộn nhịp. Tôi đã không rảnh rỗi.",
+        "romaji_example":  "Kinou no matsuri wa nigiyakadeshita. Hima ja arimasendeshita.",
         "notes":  "#VALUE!"
     },
     {
@@ -10926,6 +10988,7 @@ const grammar = [
         "vietnamese_explanation":  "Biến đổi đuôi tính từ đuôi i để diễn tả trạng thái trong quá khứ.",
         "japanese_example":  "昨日の試験は 難しかったです。よくなかったです。",
         "example_meaning":  "Kỳ thi hôm qua đã rất khó. Đã không tốt lắm.",
+        "romaji_example":  "Kinou no shiken wa muzukashikatta desu. Yokunakatta desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10937,6 +11000,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả nguyện vọng muốn sở hữu đồ vật của người nói. Trợ từ đi kèm vật là が.",
         "japanese_example":  "私は カメラが 欲しいです。",
         "example_meaning":  "Tôi muốn có cái máy ảnh.",
+        "romaji_example":  "Watashi wa kamera ga hoshii desu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10948,6 +11012,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả ý muốn thực hiện hành động của người nói. Trợ từ を có thể đổi thành が.",
         "japanese_example":  "日本へ 行きたいです。お茶を/が 飲みたいです。",
         "example_meaning":  "Tôi muốn đi Nhật. Tôi muốn uống trà.",
+        "romaji_example":  "Nihon e ikitai desu. Ocha o/ ga nomitai desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -10959,6 +11024,7 @@ const grammar = [
         "vietnamese_explanation":  "Biểu thị mục đích di chuyển của chủ thể hành động.",
         "japanese_example":  "デパートへ 買い物に 行きます。日本へ 日本語を 勉強しに 来ました。",
         "example_meaning":  "Tôi đi bưu điện để mua sắm. Tôi đến Nhật để học tiếng Nhật.",
+        "romaji_example":  "Depaato e kaimono ni ik imasu. Nihon e nihongo o benkyou shi ni ki mashita.",
         "notes":  "#VALUE!"
     },
     {
@@ -10970,6 +11036,7 @@ const grammar = [
         "vietnamese_explanation":  "Trợ từ か biến từ hỏi thành đại từ bất định chỉ vật hoặc nơi chốn không xác định.",
         "japanese_example":  "おなかがすきましたから、何か 食べたいです。どこかへ 行きましたか。",
         "example_meaning":  "Vì đói bụng nên tôi muốn ăn cái gì đó. Bạn có đi đâu chơi không?",
+        "romaji_example":  "Onaka ga suki mashitakara, nanika tabetai desu. Doko ka e iki mashita ka.",
         "notes":  "#VALUE!"
     },
     {
@@ -10981,6 +11048,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để sai khiến, yêu cầu người nghe thực hiện hành động lịch sự.",
         "japanese_example":  "ここに 住所を 書いてください。",
         "example_meaning":  "Xin vui lòng viết địa chỉ vào đây.",
+        "romaji_example":  "Koko ni juusho o kaite kudasai.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -10992,6 +11060,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động đang thực hiện ngay lúc nói chuyện.",
         "japanese_example":  "今 雨が 降っています。ミラーさんは 電話をかけています。",
         "example_meaning":  "Bây giờ trời đang mưa. Anh Miller đang gọi điện thoại.",
+        "romaji_example":  "Ima ame ga futte imasu. Miraa-san wa denwa o kakete imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11003,6 +11072,7 @@ const grammar = [
         "vietnamese_explanation":  "Người nói chủ động đề xuất làm gì đó giúp người nghe.",
         "japanese_example":  "重いですね。荷物を 持ちましょうか。ーええ、お願いします。",
         "example_meaning":  "Nặng quá nhỉ. Tôi xách hành lý giúp bạn nhé? - Vâng, nhờ anh.",
+        "romaji_example":  "Omoi desu ne. Nimotsu o mochimashou ka. ̄ Ee, onegaish imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11014,6 +11084,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để cho phép hoặc xin phép đối phương làm gì đó. Nghi vấn: Vてもいいですか.",
         "japanese_example":  "写真を 撮ってもいいですか。ーええ、いいですよ。",
         "example_meaning":  "Tôi chụp ảnh có được không? - Vâng, được chứ.",
+        "romaji_example":  "Shashin o totte mo ii desu ka. ̄ Ee, ii desu yo.",
         "notes":  "#VALUE!"
     },
     {
@@ -11025,6 +11096,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi muốn cấm đoán đối phương thực hiện một hành động nào đó.",
         "japanese_example":  "ここで タバコを 吸ってはいけません。",
         "example_meaning":  "Không được phép hút thuốc lá ở đây.",
+        "romaji_example":  "Koko de tabako o sutte wa ikemasen.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11036,6 +11108,7 @@ const grammar = [
         "vietnamese_explanation":  "Khác với thì tiếp diễn ở bài 14, cấu trúc này dùng cho các động từ chỉ sự thay đổi trạng thái (kết hôn, sống ở đâu, biết cái gì đó).",
         "japanese_example":  "私は 結婚しています。ハノイに 住んでいます。",
         "example_meaning":  "Tôi đã kết hôn. Tôi đang sống ở Hà Nội.",
+        "romaji_example":  "Watashi wa kekkon shite imasu. Hanoi ni sunde imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11047,6 +11120,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để kể các hành động của chủ thể theo thứ tự trước sau rõ ràng.",
         "japanese_example":  "朝 起きて、顔を 洗って、ご飯を 食べます。",
         "example_meaning":  "Buổi sáng tôi thức dậy, rửa mặt rồi ăn cơm.",
+        "romaji_example":  "Asa okite,-gao o aratte, gohan o tabemasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11058,6 +11132,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để nối các câu tả tính chất, đặc điểm song song của đối tượng.",
         "japanese_example":  "ハノイは にぎやかで、面白い街です。この部屋は 狭くて,暗いです。",
         "example_meaning":  "Hà Nội là thành phố nhộn nhịp và thú vị. Căn phòng này chật hẹp và tối tăm.",
+        "romaji_example":  "Hanoi wa nigiyakade, omoshiroi machi desu. Kono heya wa semakute, kurai desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11069,6 +11144,7 @@ const grammar = [
         "vietnamese_explanation":  "Nhấn mạnh hành động V2 chỉ được bắt đầu sau khi hành động V1 đã hoàn thành xong.",
         "japanese_example":  "仕事が 終わってから、飲みに行きます。",
         "example_meaning":  "Sau khi làm xong việc, tôi sẽ đi uống nước.",
+        "romaji_example":  "Shigoto ga owatte kara, nomi ni ik imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11080,6 +11156,7 @@ const grammar = [
         "vietnamese_explanation":  "Yêu cầu, đề nghị lịch sự đối phương không thực hiện một hành động nào đó.",
         "japanese_example":  "危ないですから,ここに入らないでください。",
         "example_meaning":  "Vì nguy hiểm nên xin vui lòng đừng vào đây.",
+        "romaji_example":  "Abunai desukara, koko ni hairanaide kudasai.",
         "notes":  "#VALUE!"
     },
     {
@@ -11091,6 +11168,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động bắt buộc, không thể không làm (nghĩa vụ, luật lệ).",
         "japanese_example":  "毎日 薬を 飲まなければなりません。",
         "example_meaning":  "Mỗi ngày tôi đều phải uống thuốc.",
+        "romaji_example":  "Mainichi kusuri o nomanakereba n arimasen.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11102,6 +11180,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động không bắt buộc phải làm, làm hay không làm tùy ý chủ thể.",
         "japanese_example":  "明日は 休みの日にちですから,働かなくてもいいです。",
         "example_meaning":  "Ngày mai là ngày nghỉ nên không cần phải làm việc cũng được.",
+        "romaji_example":  "Ashita wa yasumi no hinichi desukara, hatarakanakute mo ii desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11113,6 +11192,7 @@ const grammar = [
         "vietnamese_explanation":  "Biến đổi động từ sang thể từ điển (động từ nguyên bản trong từ điển) đi với \u0027koto\u0027 để danh từ hóa.",
         "japanese_example":  "日本語を 話すことが できます。漢字を 読むことができます。",
         "example_meaning":  "Tôi có thể nói tiếng Nhật. Tôi có thể đọc chữ Hán.",
+        "romaji_example":  "Nihongo o hanasu koto ga dek imasu. Kanji o yomu koto ga dek imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11124,6 +11204,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để giới thiệu cụ thể về sở thích hành động của bản thân.",
         "japanese_example":  "私の 趣味は 映画を見ることです。音楽を聴くことです。",
         "example_meaning":  "Sở thích của tôi là xem phim. Là nghe nhạc.",
+        "romaji_example":  "Watashi no shumi wa eiga o miru koto desu. Ongaku o kiku koto desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11135,6 +11216,7 @@ const grammar = [
         "vietnamese_explanation":  "Xác định trình tự hành động V2 xảy ra trước hành động V1.",
         "japanese_example":  "ご飯を 食べる前に、手を 洗います。寝る前に、本を 読みます。",
         "example_meaning":  "Trước khi ăn cơm, tôi rửa tay. Trước khi đi ngủ, tôi đọc sách.",
+        "romaji_example":  "Gohan o taberu mae ni,-te o ara imasu. Nerumae ni, hon o yom imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11146,6 +11228,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để kể về trải nghiệm đã thực hiện trong quá khứ xa.",
         "japanese_example":  "富士山に 登ったことがあります。寿司を 食べたことがあります。",
         "example_meaning":  "Tôi đã từng leo núi Phú Sĩ. Tôi từng ăn sushi.",
+        "romaji_example":  "Fujisan ni nobotta koto ga ar imasu. Sushi o tabeta koto ga ar imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11157,6 +11240,7 @@ const grammar = [
         "vietnamese_explanation":  "Nêu ra một vài hành động tượng trưng trong số nhiều hành động.",
         "japanese_example":  "日曜日は 掃除したり、洗濯したり します。",
         "example_meaning":  "Chủ nhật tôi dọn dẹp phòng, giặt giũ quần áo (và làm các việc khác nữa).",
+        "romaji_example":  "Nichiyoubi wa souji shi tari, sentaku shi tari sh imasu.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11168,6 +11252,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả sự thay đổi của tính chất hoặc danh tính.",
         "japanese_example":  "寒くなります。医者に なります。きれいに なりました。",
         "example_meaning":  "Trời trở nên lạnh. Trở thành bác sĩ. Đã trở nên sạch đẹp.",
+        "romaji_example":  "Samuku nar imasu. Isha ni nar imasu. Kirei ni nari mashita.",
         "notes":  "#VALUE!"
     },
     {
@@ -11179,6 +11264,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi nói chuyện với bạn bè, người thân thiết, gia đình hoặc người dưới tuổi.",
         "japanese_example":  "ご飯 食べる？ーうん,食べる。ううん,食べない。",
         "example_meaning":  "Ăn cơm không? - Ừ, ăn chứ. Không, tớ không ăn.",
+        "romaji_example":  "Gohan taberu? ̄ Un, taberu. Uun, tabenai.",
         "notes":  "#VALUE!"
     },
     {
@@ -11190,6 +11276,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để diễn đạt suy đoán hoặc ý kiến riêng của người nói về một sự việc.",
         "japanese_example":  "明日 いい天気になると思います。日本は 物価が高いと思います。",
         "example_meaning":  "Tôi nghĩ ngày mai thời tiết sẽ đẹp. Tôi nghĩ Nhật Bản vật giá đắt đỏ.",
+        "romaji_example":  "Ashita ii tenki ni naru to omo imasu. Nihon wa bukka ga takai to omo imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11201,6 +11288,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để truyền đạt lại lời phát biểu của người khác.",
         "japanese_example":  "ミラーさんは 「明日 休む」と言いました。ナムさんは 来週 出張すると言いました。",
         "example_meaning":  "Anh Miller đã nói: \"Ngày mai tôi nghỉ\". Anh Nam đã nói tuần sau đi công tác.",
+        "romaji_example":  "Miraa-san wa `ashita yasumu\u0027 to ii mashita. Namu-san wa raishuu shutchou suru to ii mashita.",
         "notes":  "#VALUE!"
     },
     {
@@ -11212,6 +11300,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để tìm kiếm sự đồng thuận hoặc xác nhận từ người nghe về điều mình suy đoán.",
         "japanese_example":  "明日は 休みでしょう？ーええ,休みですよ。",
         "example_meaning":  "Ngày mai là ngày nghỉ đúng không? - Vâng, đúng thế đấy.",
+        "romaji_example":  "Ashita wa yasumideshou? ̄ Ee, yasumi desu yo.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11223,6 +11312,7 @@ const grammar = [
         "vietnamese_explanation":  "Trong tiếng Nhật, mệnh đề định ngữ luôn đứng trước danh từ cần bổ nghĩa. Trợ từ chỉ chủ ngữ trong mệnh đề định ngữ dùng が thay cho は.",
         "japanese_example":  "私が 住んでいるうちは 狭いです。これは 昨日の晩 買った本です。",
         "example_meaning":  "Ngôi nhà tôi đang sống rất chật hẹp. Đây là cuốn sách tôi đã mua tối hôm qua.",
+        "romaji_example":  "Watashi ga sunde iru uchi wa semai desu. Kore wa kinou no ban katta hon desu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11234,6 +11324,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả thời điểm xảy ra hành động ở mệnh đề chính.",
         "japanese_example":  "図書館で 本を 借りるとき、カードが 要ります。暇なとき,本を 読みます。",
         "example_meaning":  "Khi mượn sách ở thư viện, cần có thẻ. Khi rảnh rỗi, tôi đọc sách.",
+        "romaji_example":  "Toshokan de hon o kariru toki, kaado ga ir imasu. Himana toki, hon o yom imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11245,6 +11336,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả điều gì đó chắc chắn sẽ xảy ra như một kết quả tự nhiên hoặc chỉ dẫn kỹ thuật.",
         "japanese_example":  "ボタンを 押すと、水が 出ます。この道を まっすぐ行くと、駅があります。",
         "example_meaning":  "Nếu ấn nút này, nước sẽ chảy ra. Đi thẳng con đường này sẽ thấy nhà ga.",
+        "romaji_example":  "Botan o osu to, mizu ga demasu. Kono michi o massugu iku to,-eki ga ar imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11256,6 +11348,7 @@ const grammar = [
         "vietnamese_explanation":  "Người nói thực hiện hành động mang lại lợi ích cho người nghe hoặc người khác.",
         "japanese_example":  "私は ミラーさんに 地図を 書いてあげました。",
         "example_meaning":  "Tôi đã vẽ bản đồ giúp cho anh Miller.",
+        "romaji_example":  "Watashi wa miraa-san ni chizu o kaite age mashita.",
         "notes":  "#VALUE!"
     },
     {
@@ -11267,6 +11360,7 @@ const grammar = [
         "vietnamese_explanation":  "Chủ ngữ nhận được hành động có ích từ người khác và thể hiện lòng biết ơn.",
         "japanese_example":  "私は 友達に 日本語を 教えてもらいました。",
         "example_meaning":  "Tôi được bạn dạy cho tiếng Nhật.",
+        "romaji_example":  "Watashi wa tomodachi ni nihongo o oshiete morai mashita.",
         "notes":  "🔊 Nghe"
     },
     {
@@ -11278,6 +11372,7 @@ const grammar = [
         "vietnamese_explanation":  "Hành động có ích được người khác tự nguyện làm hướng về phía người nói.",
         "japanese_example":  "サントスさんは 私に コーヒーを 淹れてくれました。",
         "example_meaning":  "Anh Santos đã pha cà phê cho tôi.",
+        "romaji_example":  "Santosu-san wa watashi ni kouhii o irete kure mashita.",
         "notes":  "#VALUE!"
     },
     {
@@ -11289,6 +11384,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả giả định nếu một điều kiện được đáp ứng thì vế sau sẽ thực hiện, hoặc khi một việc xảy ra thì vế sau tiếp nối.",
         "japanese_example":  "雨が 降ったら、出かけません。時間があったら,テニスをします。",
         "example_meaning":  "Nếu trời mưa, tôi sẽ không ra ngoài. Nếu có thời gian, tôi sẽ chơi tennis.",
+        "romaji_example":  "Ame ga futtara, dekakemasen. Jikan ga attara, tenisu o sh imasu.",
         "notes":  "#VALUE!"
     },
     {
@@ -11300,6 +11396,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả một điều kiện nghịch cảnh: Dẫu điều kiện ở vế trước có xảy ra thì vế sau vẫn diễn ra ngược lại suy nghĩ thông thường.",
         "japanese_example":  "雨が 降っても,出かけます。安くても,買いません。",
         "example_meaning":  "Cho dù trời mưa, tôi vẫn ra ngoài. Cho dù rẻ, tôi cũng không mua.",
+        "romaji_example":  "Ame ga futte mo, dekakemasu. Yasukute mo, kaimasen.",
         "notes":  "#VALUE!"
     },
     {
@@ -11311,6 +11408,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng trong văn nói để biểu thị sự quan tâm, giải thích nguyên nhân, hoàn cảnh.",
         "japanese_example":  "頭が 痛いんです。",
         "example_meaning":  "Vì tôi bị đau đầu (giải thích lý do).",
+        "romaji_example":  "Atama ga itai n desu.",
         "notes":  "Tránh dùng quá nhiều làm câu nói nặng nề."
     },
     {
@@ -11322,6 +11420,7 @@ const grammar = [
         "vietnamese_explanation":  "Lịch sự hơn cấu trúc V-てください.",
         "japanese_example":  "日本語を 教えて いただけませんか。",
         "example_meaning":  "Anh/chị có thể dạy tiếng Nhật cho tôi được không?",
+        "romaji_example":  "Nihongo o oshiete itadakemasen ka.",
         "notes":  "Dùng với cấp trên hoặc người lạ."
     },
     {
@@ -11333,6 +11432,7 @@ const grammar = [
         "vietnamese_explanation":  "Thay trợ từ を bằng が khi chuyển sang thể khả năng.",
         "japanese_example":  "私は 日本語が 話せます。",
         "example_meaning":  "Tôi có thể nói được tiếng Nhật.",
+        "romaji_example":  "Watashi wa nihongo ga hanasemasu.",
         "notes":  "Động từ như みえます, きこえます tự bản chất là khả năng tự nhiên, không chia tiếp."
     },
     {
@@ -11344,6 +11444,7 @@ const grammar = [
         "vietnamese_explanation":  "Nhấn mạnh giới hạn duy nhất, tương tự だけ nhưng động từ đi kèm luôn ở thể phủ định.",
         "japanese_example":  "１時間しか 寝られませんでした。",
         "example_meaning":  "Tôi chỉ có thể ngủ được 1 tiếng.",
+        "romaji_example":  "1-Jikan shika ne raremasendeshita.",
         "notes":  "Thay thế cho các trợ từ が, を."
     },
     {
@@ -11355,6 +11456,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hai hành động diễn ra đồng thời do cùng một chủ thể thực hiện.",
         "japanese_example":  "音楽を 聞きながら 勉強します。",
         "example_meaning":  "Tôi vừa nghe nhạc vừa học bài.",
+        "romaji_example":  "Ongaku o kikinagara benkyou sh imasu.",
         "notes":  "Hành động chính đứng ở phía sau."
     },
     {
@@ -11366,6 +11468,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để nối các câu có cùng chung xu hướng khen hoặc chê.",
         "japanese_example":  "あの店は 安いし、おいしいし、いつも混んでいます。",
         "example_meaning":  "Cửa hàng kia vừa rẻ, lại ngon, nên lúc nào cũng đông khách.",
+        "romaji_example":  "Ano mise wa yasuishi, oishiishi, itsumo konde imasu.",
         "notes":  "Thường dùng để kết luận một kết quả."
     },
     {
@@ -11377,6 +11480,7 @@ const grammar = [
         "vietnamese_explanation":  "Trọng tâm là miêu tả trạng thái đập vào mắt người nói ngay lúc đó.",
         "japanese_example":  "窓が 割れています。",
         "example_meaning":  "Cửa sổ đang bị vỡ.",
+        "romaji_example":  "Mado ga warete imasu.",
         "notes":  "Khác với V-ています hành động đang diễn ra."
     },
     {
@@ -11388,6 +11492,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động đã hoàn tất trọn vẹn, hoặc cảm xúc tiếc nuối vì một sự việc ngoài ý muốn.",
         "japanese_example":  "パスポートを なくしてしまいました。",
         "example_meaning":  "Tôi lỡ làm mất hộ chiếu mất rồi.",
+        "romaji_example":  "Pasupouto o nakushite shimai mashita.",
         "notes":  "Trong hội thoại viết tắt thành ちゃう (chau) hoặc じゃう (jau)."
     },
     {
@@ -11399,6 +11504,7 @@ const grammar = [
         "vietnamese_explanation":  "Khác với V-ています (tự động từ), cấu trúc này ngầm ý có ai đó đã làm việc này nhằm mục đích nào đó.",
         "japanese_example":  "壁に カレンダーが 貼ってあります。",
         "example_meaning":  "Có tờ lịch đang được dán trên tường.",
+        "romaji_example":  "Kabe ni karendaa ga hatte ar imasu.",
         "notes":  "Dùng với tha động từ."
     },
     {
@@ -11410,6 +11516,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động chuẩn bị trước một việc, hoặc xử lý sau khi xong việc, hoặc giữ nguyên trạng thái hiện tại.",
         "japanese_example":  "旅行の前に 切符を買っておきます。",
         "example_meaning":  "Trước khi đi du lịch tôi sẽ mua vé sẵn.",
+        "romaji_example":  "Ryokou no mae ni kippu o katte ok imasu.",
         "notes":  "Trong hội thoại thường phát âm thành とく (toku)."
     },
     {
@@ -11421,6 +11528,7 @@ const grammar = [
         "vietnamese_explanation":  "Sử dụng khi nói chuyện với bạn bè thân thiết, hoặc tự nhủ bản thân.",
         "japanese_example":  "ちょっと 休もう。",
         "example_meaning":  "Nghỉ một chút nào.",
+        "romaji_example":  "Chotto yasumou.",
         "notes":  "Là dạng rút gọn của V-ましょう."
     },
     {
@@ -11432,6 +11540,7 @@ const grammar = [
         "vietnamese_explanation":  "Bày tỏ dự định của bản thân cho người khác nghe.",
         "japanese_example":  "日本で 働こうと 思っています。",
         "example_meaning":  "Tôi đang định sẽ làm việc ở Nhật Bản.",
+        "romaji_example":  "Nihon de hatarakou to omotte imasu.",
         "notes":  "Nếu chỉ vừa mới nghĩ ra tại thời điểm nói thì dùng と思います."
     },
     {
@@ -11443,6 +11552,7 @@ const grammar = [
         "vietnamese_explanation":  "Đưa ra lời khuyên cụ thể cho người nghe trong một tình huống nhất định.",
         "japanese_example":  "毎日 運動した ほうがいいです。",
         "example_meaning":  "Cậu nên tập thể dục mỗi ngày.",
+        "romaji_example":  "Mainichi undou shita hou ga ii desu.",
         "notes":  "Có tính chất áp đặt mạnh nên cân nhắc khi khuyên cấp trên."
     },
     {
@@ -11454,6 +11564,7 @@ const grammar = [
         "vietnamese_explanation":  "Thể hiện sự phỏng đoán của người nói dựa trên một vài thông tin cảm tính.",
         "japanese_example":  "午後は 雨が 降るかもしれません。",
         "example_meaning":  "Buổi chiều có lẽ trời sẽ mưa.",
+        "romaji_example":  "Gogo wa ame ga furu kamo shiremasen.",
         "notes":  "Độ tin cậy thấp hơn でしょう (deshou)."
     },
     {
@@ -11465,6 +11576,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng cho nam giới có vị thế cao, hoặc trong trường hợp khẩn cấp cổ vũ thể thao.",
         "japanese_example":  "早く 走れ！ 休むな！",
         "example_meaning":  "Chạy nhanh lên! Cấm nghỉ!",
+        "romaji_example":  "Hayaku hashire! Yasumu na!",
         "notes":  "Người thường không nên dùng vì rất bất lịch sự."
     },
     {
@@ -11476,6 +11588,7 @@ const grammar = [
         "vietnamese_explanation":  "Trích dẫn nội dung hiển thị hoặc giải thích nghĩa của một từ/ký hiệu lạ.",
         "japanese_example":  "あそこに 「立入禁止」 と書いてあります。",
         "example_meaning":  "Ở đằng kia có viết chữ \u0027Cấm vào\u0027.",
+        "romaji_example":  "Asoko ni `tachiirikinshi\u0027 to kaite ar imasu.",
         "notes":  "Hỏi ý nghĩa dùng どういう意味ですか."
     },
     {
@@ -11487,6 +11600,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả việc thực hiện một việc đúng theo khuôn mẫu có sẵn.",
         "japanese_example":  "説明書の とおりに 組み立てます。",
         "example_meaning":  "Lắp ráp đúng theo như sách hướng dẫn.",
+        "romaji_example":  "Setsumeisho no touri ni kumitatemasu.",
         "notes":  "Khi đi trực tiếp sau danh từ không có の thì đọc là どおり (doori)."
     },
     {
@@ -11498,6 +11612,7 @@ const grammar = [
         "vietnamese_explanation":  "Xác định rõ trình tự thời gian hành động 2 diễn ra sau hành động 1 kết thúc.",
         "japanese_example":  "仕事の あとで 飲みに行きます。",
         "example_meaning":  "Sau giờ làm việc chúng tôi đi uống bia.",
+        "romaji_example":  "Shigoto no ato de nomi ni ik imasu.",
         "notes":  "Khác với V-てから ở chỗ thời gian cách xa cũng dùng được."
     },
     {
@@ -11509,6 +11624,7 @@ const grammar = [
         "vietnamese_explanation":  "Thể hiện quan hệ giả định \u0027Nếu... thì...\u0027.",
         "japanese_example":  "雨が 降れば 行きません。",
         "example_meaning":  "Nếu trời mưa thì tôi sẽ không đi.",
+        "romaji_example":  "Ame ga fureba ikimasen.",
         "notes":  "N-なら dùng để đưa ra lời khuyên dựa trên chủ đề người nói trước đề cập."
     },
     {
@@ -11520,6 +11636,7 @@ const grammar = [
         "vietnamese_explanation":  "Hỏi xem nên làm gì trong một tình huống khó khăn, tương tự V-tara ii desu ka.",
         "japanese_example":  "どこで カメラを買えば いいですか。",
         "example_meaning":  "Tôi nên mua máy ảnh ở đâu thì tốt nhỉ?",
+        "romaji_example":  "Doko de kamera o kaeba ii desu ka.",
         "notes":  "Cách hỏi lịch sự, tìm kiếm phương án tối ưu."
     },
     {
@@ -11531,6 +11648,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả sự thay đổi trạng thái từ không thể sang có thể làm gì đó.",
         "japanese_example":  "日本語が 話せるように なりました。",
         "example_meaning":  "Tôi đã trở nên có thể nói được tiếng Nhật.",
+        "romaji_example":  "Nihongo ga hanaseru you ni nari mashita.",
         "notes":  "Dùng với động từ khả năng."
     },
     {
@@ -11542,6 +11660,7 @@ const grammar = [
         "vietnamese_explanation":  "Thể hiện nỗ lực của bản thân để duy trì một thói quen tốt hoặc đưa ra yêu cầu nhẹ nhàng.",
         "japanese_example":  "毎日 野菜を食べるように しています。",
         "example_meaning":  "Tôi đang cố gắng ăn rau mỗi ngày.",
+        "romaji_example":  "Mainichi yasai o taberu you ni shite imasu.",
         "notes":  "Yêu cầu khuyên nhủ lịch sự: ようにしてください."
     },
     {
@@ -11553,6 +11672,7 @@ const grammar = [
         "vietnamese_explanation":  "Chủ thể chịu tác động đứng trước が, tác nhân thực hiện đứng trước に.",
         "japanese_example":  "私は 先生に 褒められました。",
         "example_meaning":  "Tôi được thầy giáo khen ngợi.",
+        "romaji_example":  "Watashi wa sensei ni home rare mashita.",
         "notes":  "Dùng để diễn tả sự phiền toái hoặc được lợi ích."
     },
     {
@@ -11564,6 +11684,7 @@ const grammar = [
         "vietnamese_explanation":  "Bày tỏ cảm xúc bực bội, khó chịu khi bị người khác làm hỏng, lấy mất đồ vật thuộc sở hữu của mình.",
         "japanese_example":  "私は 泥棒に 財布を 盗まれました。",
         "example_meaning":  "Tôi bị tên trộm lấy mất ví tiền.",
+        "romaji_example":  "Watashi wa dorobou ni saifu o nusuma re mashita.",
         "notes":  "Không dùng cấu trúc này với nghĩa tích cực."
     },
     {
@@ -11575,6 +11696,7 @@ const grammar = [
         "vietnamese_explanation":  "Biến đổi hành động thành một danh từ để đánh giá tính chất.",
         "japanese_example":  "日本語を 勉強するのは 面白いです。",
         "example_meaning":  "Việc học tiếng Nhật rất thú vị.",
+        "romaji_example":  "Nihongo o benkyou suru no wa omoshiroi desu.",
         "notes":  "Sử dụng trợ từ は để làm rõ chủ đề chính."
     },
     {
@@ -11586,6 +11708,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để bổ nghĩa cho tính từ chỉ cảm xúc/khả năng, hoặc động từ quên.",
         "japanese_example":  "傘を 持って来るのを 忘れました。",
         "example_meaning":  "Tôi đã quên mang theo ô mất rồi.",
+        "romaji_example":  "Kasa o motte kuru no o wasure mashita.",
         "notes":  "Dùng の để danh từ hóa cụm hành động."
     },
     {
@@ -11597,6 +11720,7 @@ const grammar = [
         "vietnamese_explanation":  "Vế sau không dùng các cấu trúc thể hiện ý chí, mệnh lệnh, rủ rê của con người.",
         "japanese_example":  "ニュースを 聞いて、びっくりしました。",
         "example_meaning":  "Tôi đã rất ngạc nhiên khi nghe tin tức.",
+        "romaji_example":  "Nyuusu o kiite, bikkuri shi mashita.",
         "notes":  "Dùng cho cảm xúc tự nhiên, tai nạn thiên tai."
     },
     {
@@ -11608,6 +11732,7 @@ const grammar = [
         "vietnamese_explanation":  "Lịch sự và nhẹ nhàng hơn から, thường dùng khi xin phép nghỉ hoặc giải thích lý do khách quan.",
         "japanese_example":  "用事が あるので、お先に失礼します。",
         "example_meaning":  "Vì có chút việc bận nên tôi xin phép về trước.",
+        "romaji_example":  "Youji ga aru node, osakinishitsurei sh imasu.",
         "notes":  "Nói năng trang trọng trong công sở."
     },
     {
@@ -11619,6 +11744,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng khi trích dẫn một câu hỏi gián tiếp.",
         "japanese_example":  "荷物が いつ届くか 教えてください。",
         "example_meaning":  "Hãy cho tôi biết khi nào hành lý sẽ được gửi đến.",
+        "romaji_example":  "Nimotsu ga itsu todoku ka oshiete kudasai.",
         "notes":  "Dùng để hỏi thông tin."
     },
     {
@@ -11630,6 +11756,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả ý nghĩa \u0027Có hay không việc gì đó\u0027.",
         "japanese_example":  "間違いが ないかどうか 確かめます。",
         "example_meaning":  "Tôi sẽ kiểm tra xem có sai sót gì hay không.",
+        "romaji_example":  "Machigai ga nai ka dou ka tashikamemasu.",
         "notes":  "Hai vế đối lập rõ ràng."
     },
     {
@@ -11641,6 +11768,7 @@ const grammar = [
         "vietnamese_explanation":  "Thể hiện sự tôn kính cao đối với người cho.",
         "japanese_example":  "社長が 本を くださった。",
         "example_meaning":  "Giám đốc đã tặng sách cho tôi.",
+        "romaji_example":  "Shachou ga hon o kudasatta.",
         "notes":  "Khi nhận từ bề trên."
     },
     {
@@ -11652,6 +11780,7 @@ const grammar = [
         "vietnamese_explanation":  "Dùng để diễn tả việc nhận được hành động giúp đỡ từ ai đó, hoặc làm gì cho người khác một cách lịch sự, kính cẩn.",
         "japanese_example":  "先生に 日本語を教えていただきました。",
         "example_meaning":  "Tôi đã được thầy giáo dạy tiếng Nhật cho.",
+        "romaji_example":  "Sensei ni nihongo o oshiete itadaki mashita.",
         "notes":  "Biểu lộ lòng biết ơn sâu sắc."
     },
     {
@@ -11663,6 +11792,7 @@ const grammar = [
         "vietnamese_explanation":  "Chủ ngữ của hai vế phải đồng nhất và động từ vế đầu mang tính ý chí.",
         "japanese_example":  "留学の ために、日本語を 勉強しています。",
         "example_meaning":  "Tôi học tiếng Nhật để đi du học.",
+        "romaji_example":  "Ryuugaku no tame ni, nihongo o benkyou shite imasu.",
         "notes":  "Khác với ように (dùng cho động từ khả năng, trạng thái)."
     },
     {
@@ -11674,6 +11804,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả công dụng của một đồ vật hoặc đánh giá tính năng sử dụng.",
         "japanese_example":  "このハサミは 紙を 切るのに 使います。",
         "example_meaning":  "Chiếc kéo này dùng để cắt giấy.",
+        "romaji_example":  "Kono hasami wa kami o kiru no ni tsuka imasu.",
         "notes":  "Thường đi kèm các tính từ như 便利, 役に立つ."
     },
     {
@@ -11685,6 +11816,7 @@ const grammar = [
         "vietnamese_explanation":  "Phán đoán trạng thái của sự vật ngay trước mắt hoặc dự báo sắp xảy ra.",
         "japanese_example":  "雨が 降りそうです。",
         "example_meaning":  "Trông trời có vẻ sắp mưa.",
+        "romaji_example":  "Ame ga ori-sou desu.",
         "notes":  "Dạng phủ định là そうにない / そうもありません. Biệt lệ: よい -\u003e よさそうです."
     },
     {
@@ -11696,6 +11828,7 @@ const grammar = [
         "vietnamese_explanation":  "Diễn tả hành động di chuyển đến một nơi làm việc gì rồi quay lại.",
         "japanese_example":  "ちょっと タバコを買ってきます。",
         "example_meaning":  "Tôi đi mua bao thuốc một lát rồi quay lại ngay.",
+        "romaji_example":  "Chotto tabako o katte k imasu.",
         "notes":  "Địa điểm quay lại ngầm hiểu là chỗ nói chuyện."
     },
     {
@@ -11707,6 +11840,7 @@ const grammar = [
         "vietnamese_explanation":  "Biểu thị hành động hoặc tính chất vượt ngưỡng bình thường.",
         "japanese_example":  "ご飯を 食べすぎました。",
         "example_meaning":  "Tôi đã ăn quá nhiều cơm (quá no).",
+        "romaji_example":  "Gohan o tabe sugi mashita.",
         "notes":  "Thường đi kèm hệ quả xấu cho sức khỏe."
     },
     {
@@ -11718,6 +11852,7 @@ const grammar = [
         "vietnamese_explanation":  "Đánh giá tính chất khách quan hoặc chủ quan của việc thực hiện hành động.",
         "japanese_example":  "日本語は 勉強しやすいです。",
         "example_meaning":  "Tiếng Nhật rất dễ học.",
+        "romaji_example":  "Nihongo wa benkyou shi yasui desu.",
         "notes":  "Cụm từ mới tạo thành hoạt động như một tính từ đuôi i."
     },
     {
@@ -11729,6 +11864,7 @@ const grammar = [
         "vietnamese_explanation":  "Định trước cách xử lý hoặc hậu quả nếu trường hợp giả định xuất hiện.",
         "japanese_example":  "地震の 場合は、エレベーターを 使わないでください。",
         "example_meaning":  "Trong trường hợp có động đất, xin vui lòng không sử dụng thang máy.",
+        "romaji_example":  "Jishin no baai wa, erebeetaa o tsukawanaide kudasai.",
         "notes":  "Dùng cho tình huống khẩn cấp, trang trọng."
     },
     {
@@ -11740,6 +11876,7 @@ const grammar = [
         "vietnamese_explanation":  "Vế 2 trái ngược hoàn toàn với mong đợi hợp lý từ vế 1.",
         "japanese_example":  "薬を 飲んだのに、熱が 下がりません。",
         "example_meaning":  "Dù đã uống thuốc rồi thế mà cơn sốt vẫn chưa hạ.",
+        "romaji_example":  "Kusuri o nonda no ni, netsu ga sag arimasen.",
         "notes":  "Không dùng cho câu rủ rê, mệnh lệnh."
     },
     {
@@ -11751,6 +11888,7 @@ const grammar = [
         "vietnamese_explanation":  "Xác định chính xác lát cắt thời gian hành động diễn ra.",
         "japanese_example":  "今から 出かける ところです。",
         "example_meaning":  "Tôi đúng lúc chuẩn bị ra ngoài bây giờ đây.",
+        "romaji_example":  "Ima kara dekakeru tokoro desu.",
         "notes":  "V-ta tokoro thường đi kèm cụm từ たった今."
     },
     {
@@ -11762,6 +11900,7 @@ const grammar = [
         "vietnamese_explanation":  "Dù thời gian thực tế đã lâu (vài tháng/1 năm), người nói vẫn cảm thấy mới diễn ra.",
         "japanese_example":  "このカメラは 先週 買ったばかりです。",
         "example_meaning":  "Chiếc máy ảnh này tôi vừa mới mua tuần trước.",
+        "romaji_example":  "Kono kamera wa senshuu katta bakari desu.",
         "notes":  "Khác với V-ta tokoro ở chỗ tokoro chỉ thời điểm cực ngắn thực tế."
     },
     {
@@ -11773,6 +11912,7 @@ const grammar = [
         "vietnamese_explanation":  "Thường đi kèm nguồn tin `～によると` (theo như).",
         "japanese_example":  "天気予報に よると、明日は 晴れるそうです。",
         "example_meaning":  "Theo dự báo thời tiết, nghe nói ngày mai trời sẽ nắng.",
+        "romaji_example":  "Tenkeyohou ni yoru to, ashita wa hareru sou desu.",
         "notes":  "Khác với そうです phỏng đoán (không đi với nguồn tin, bỏ i/na)."
     },
     {
@@ -11784,6 +11924,7 @@ const grammar = [
         "vietnamese_explanation":  "Người nói nhìn, nghe hoặc ngửi thấy dấu hiệu rồi đưa ra phán đoán logic.",
         "japanese_example":  "誰かが 部屋に いるようです。電気がついています。",
         "example_meaning":  "Hình như có ai đó ở trong phòng. Đèn đang sáng kìa.",
+        "romaji_example":  "Darekaga heya ni iru you desu. Denki ga tsuite imasu.",
         "notes":  "Độ chắc chắn cao vì có chứng cứ rõ ràng."
     },
     {
@@ -11795,6 +11936,7 @@ const grammar = [
         "vietnamese_explanation":  "Đối với tự động từ: N(người) + を + V-sai khiến. Đối với tha động từ: N(người) + に + N(vật) + を + V-sai khiến.",
         "japanese_example":  "先生は 学生に 作文を 書かせました。",
         "example_meaning":  "Thầy giáo bắt học sinh viết văn.",
+        "romaji_example":  "Sensei wa gakusei ni sakubun o kaka se mashita.",
         "notes":  "Dùng thể hiện quyền lực chỉ đạo."
     },
     {
@@ -11806,6 +11948,7 @@ const grammar = [
         "vietnamese_explanation":  "Mẫu câu cực kỳ lịch sự dùng để xin phép cấp trên cho mình nghỉ, làm việc gì.",
         "japanese_example":  "用事が あるので、早く帰らせていただけませんか。",
         "example_meaning":  "Vì có chút việc bận, xin phép cho tôi được về sớm được không ạ?",
+        "romaji_example":  "Youji ga aru node, hayaku kaera sete itadakemasen ka.",
         "notes":  "Là kính ngữ rất phổ dụng trong công sở."
     },
     {
@@ -11817,6 +11960,7 @@ const grammar = [
         "vietnamese_explanation":  "Chỉ dùng cho hành động của người khác, tuyệt đối không dùng cho hành động của bản thân.",
         "japanese_example":  "先生は もう お帰りになりました。",
         "example_meaning":  "Thầy giáo đã về nhà rồi.",
+        "romaji_example":  "Sensei wa mou o kaeri ni nari mashita.",
         "notes":  "Động từ đặc biệt: irasshaimasu, meshiagarimasu, osshaimasu, nasaimasu, goranninarimasu."
     },
     {
@@ -11828,6 +11972,7 @@ const grammar = [
         "vietnamese_explanation":  "Lịch sự hơn cấu trúc V-てください, dùng nhiều trong dịch vụ, khách sạn.",
         "japanese_example":  "どうぞ こちらに お掛けください。",
         "example_meaning":  "Xin mời anh/chị ngồi ở bên này ạ.",
+        "romaji_example":  "Douzo kochira ni okake kudasai.",
         "notes":  "Cách nói tôn kính."
     },
     {
@@ -11839,6 +11984,7 @@ const grammar = [
         "vietnamese_explanation":  "Tuyệt đối chỉ dùng cho hành động của bản thân hoặc người thuộc nhóm mình (in-group), không dùng cho người khác.",
         "japanese_example":  "重そうな荷物ですね。私が お持ちします。",
         "example_meaning":  "Hành lý trông nặng quá nhỉ. Để tôi xách giúp anh/chị nhé.",
+        "romaji_example":  "Omo-souna nimotsu desu ne. Watashi ga o-mochi sh imasu.",
         "notes":  "Động từ đặc biệt: mairimasu, orimasu, moushimasu, itashimasu, haishaku-shimasu."
     },
     {
@@ -11850,6 +11996,7 @@ const grammar = [
         "vietnamese_explanation":  "Áp dụng cho các động từ có nguồn gốc chữ Hán ghép với します.",
         "japanese_example":  "今日のスケジュールを ご紹介いたします。",
         "example_meaning":  "Tôi xin phép được giới thiệu lịch trình của ngày hôm nay.",
+        "romaji_example":  "Kyou no sukejuuru o go shoukai itash imasu.",
         "notes":  "Dành cho đối tác, khách hàng."
     }
 ];

@@ -80,6 +80,7 @@ CREATE TABLE public.grammar (
   vietnamese_explanation TEXT,
   japanese_example TEXT,
   example_meaning TEXT,
+  romaji_example TEXT,
   notes TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
