@@ -239,9 +239,38 @@ export default function AlphabetReviewPage() {
   // TTS Speaker
   const speak = (text: string) => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isIOS) {
+        showToast('Lưu ý: Hãy tắt chế độ Im lặng (gạt nút sườn) để nghe thấy tiếng phát âm.');
+      }
+
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'ja-JP';
+      
+      const voices = window.speechSynthesis.getVoices();
+      const jaVoice = voices.find(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      if (jaVoice) {
+        utterance.voice = jaVoice;
+      }
+      
+      // GC protection for iOS
+      (window as any)._activeUtterances = (window as any)._activeUtterances || [];
+      (window as any)._activeUtterances.push(utterance);
+      utterance.onend = () => {
+        const idx = (window as any)._activeUtterances.indexOf(utterance);
+        if (idx > -1) (window as any)._activeUtterances.splice(idx, 1);
+      };
+      utterance.onerror = () => {
+        const idx = (window as any)._activeUtterances.indexOf(utterance);
+        if (idx > -1) (window as any)._activeUtterances.splice(idx, 1);
+      };
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -1719,7 +1748,7 @@ export default function AlphabetReviewPage() {
                                   value={userAnswer}
                                   disabled={combinedIsGraded}
                                   onChange={(e) => setCombinedAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
-                                  className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-500 ${combinedIsGraded ? 'opacity-80' : ''}`}
+                                  className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-base md:text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-500 ${combinedIsGraded ? 'opacity-80' : ''}`}
                                 />
                                 {combinedIsGraded && pct < 100 && (
                                   <div className="flex items-center gap-1.5 text-[11px] bg-slate-950/60 p-1.5 rounded-lg border border-slate-900/80">
@@ -1815,7 +1844,7 @@ export default function AlphabetReviewPage() {
                               value={userAnswer}
                               disabled={combinedIsGraded}
                               onChange={(e) => setCombinedAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
-                              className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-500 ${combinedIsGraded ? 'opacity-80' : ''}`}
+                              className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-base md:text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-500 ${combinedIsGraded ? 'opacity-80' : ''}`}
                             />
                             {combinedIsGraded && pct < 100 && (
                               <div className="flex items-center gap-1.5 text-[11px] bg-slate-950/60 p-1.5 rounded-lg border border-slate-900/80">

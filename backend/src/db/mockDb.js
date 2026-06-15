@@ -1,5 +1,5 @@
 ﻿// In-memory Mock Database generated from Excel workbooks in tai_lieu/
-// Generated on: 2026-06-14 18:04:27
+// Generated on: 2026-06-15 19:07:08
 // Serves as the mock database for local API Console testing.
 
 const lessons = [
@@ -680,7 +680,7 @@ const vocabulary = [
     {
         "id":  27,
         "lesson_id":  1,
-        "hiragana":  "おnaまえは",
+        "hiragana":  "おなまえは",
         "romaji":  "onamae wa",
         "vietnamese_meaning":  "Tên bạn là gì?",
         "word_type":  "greeting",
@@ -968,7 +968,7 @@ const vocabulary = [
     {
         "id":  51,
         "lesson_id":  2,
-        "hiragana":  "のーt",
+        "hiragana":  "のーと",
         "romaji":  "nōto",
         "vietnamese_meaning":  "vở, sổ tay",
         "word_type":  "noun",
@@ -1016,7 +1016,7 @@ const vocabulary = [
     {
         "id":  55,
         "lesson_id":  2,
-        "hiragana":  "えんpiつ",
+        "hiragana":  "えんぴつ",
         "romaji":  "enpitsu",
         "vietnamese_meaning":  "bút chì",
         "word_type":  "noun",
@@ -1040,7 +1040,7 @@ const vocabulary = [
     {
         "id":  57,
         "lesson_id":  2,
-        "hiragana":  "しゃーpぺんしる",
+        "hiragana":  "しゃーぷぺんしる",
         "romaji":  "shāpupenshiru",
         "vietnamese_meaning":  "bút chì kim",
         "word_type":  "noun",
@@ -1076,7 +1076,7 @@ const vocabulary = [
     {
         "id":  60,
         "lesson_id":  2,
-        "hiragana":  "かsa",
+        "hiragana":  "かさ",
         "romaji":  "kasa",
         "vietnamese_meaning":  "ô, dù",
         "word_type":  "noun",
@@ -1088,7 +1088,7 @@ const vocabulary = [
     {
         "id":  61,
         "lesson_id":  2,
-        "hiragana":  "かban",
+        "hiragana":  "かばん",
         "romaji":  "kaban",
         "vietnamese_meaning":  "cặp sách, túi xách",
         "word_type":  "noun",
@@ -1148,7 +1148,7 @@ const vocabulary = [
     {
         "id":  66,
         "lesson_id":  2,
-        "hiragana":  "こんpiゅーた",
+        "hiragana":  "こんぴゅーた",
         "romaji":  "konpyūta",
         "vietnamese_meaning":  "máy vi tính",
         "word_type":  "noun",
@@ -1160,7 +1160,7 @@ const vocabulary = [
     {
         "id":  67,
         "lesson_id":  2,
-        "hiragana":  "じどうsha",
+        "hiragana":  "じどうしゃ",
         "romaji":  "jidōsha",
         "vietnamese_meaning":  "ô tô, xe hơi",
         "word_type":  "noun",
@@ -1232,7 +1232,7 @@ const vocabulary = [
     {
         "id":  73,
         "lesson_id":  2,
-        "hiragana":  "えいgo",
+        "hiragana":  "えいご",
         "romaji":  "eigo",
         "vietnamese_meaning":  "tiếng Anh",
         "word_type":  "noun",
@@ -1244,7 +1244,7 @@ const vocabulary = [
     {
         "id":  74,
         "lesson_id":  2,
-        "hiragana":  "にhonご",
+        "hiragana":  "にほんご",
         "romaji":  "nihongo",
         "vietnamese_meaning":  "tiếng Nhật",
         "word_type":  "noun",
@@ -1376,7 +1376,7 @@ const vocabulary = [
     {
         "id":  85,
         "lesson_id":  3,
-        "hiragana":  "しょくdoう",
+        "hiragana":  "しょくどう",
         "romaji":  "shokudou",
         "vietnamese_meaning":  "nhà ăn, phòng ăn",
         "word_type":  "noun",
@@ -1532,7 +1532,7 @@ const vocabulary = [
     {
         "id":  98,
         "lesson_id":  3,
-        "hiragana":  "deんわ",
+        "hiragana":  "でんわ",
         "romaji":  "denwa",
         "vietnamese_meaning":  "điện thoại",
         "word_type":  "noun",
@@ -1844,7 +1844,7 @@ const vocabulary = [
     {
         "id":  124,
         "lesson_id":  4,
-        "hiragana":  "niちようび",
+        "hiragana":  "にちようび",
         "romaji":  "nichiyoubi",
         "vietnamese_meaning":  "chủ nhật",
         "word_type":  "noun",
@@ -2204,7 +2204,7 @@ const vocabulary = [
     {
         "id":  154,
         "lesson_id":  6,
-        "hiragana":  "toります",
+        "hiragana":  "とります",
         "romaji":  "torimasu",
         "vietnamese_meaning":  "chụp [ảnh]",
         "word_type":  "verb",
@@ -2312,7 +2312,7 @@ const vocabulary = [
     {
         "id":  163,
         "lesson_id":  6,
-        "hiragana":  "niku",
+        "hiragana":  "にく",
         "romaji":  "niku",
         "vietnamese_meaning":  "thịt",
         "word_type":  "noun",
@@ -2768,7 +2768,7 @@ const vocabulary = [
     {
         "id":  201,
         "lesson_id":  9,
-        "hiragana":  "きらい[na]",
+        "hiragana":  "きらい[な]",
         "romaji":  "kiraina",
         "vietnamese_meaning":  "ghét, không thích",
         "word_type":  "adjectivena",
@@ -2780,7 +2780,7 @@ const vocabulary = [
     {
         "id":  202,
         "lesson_id":  9,
-        "hiragana":  "じょうず[na]",
+        "hiragana":  "じょうず[な]",
         "romaji":  "jouzuna",
         "vietnamese_meaning":  "giỏi, khéo",
         "word_type":  "adjectivena",
@@ -2936,7 +2936,7 @@ const vocabulary = [
     {
         "id":  215,
         "lesson_id":  10,
-        "hiragana":  "おtokoのひと",
+        "hiragana":  "おとこのひと",
         "romaji":  "otoko no hito",
         "vietnamese_meaning":  "người đàn ông",
         "word_type":  "noun",
@@ -3380,7 +3380,7 @@ const vocabulary = [
     {
         "id":  252,
         "lesson_id":  12,
-        "hiragana":  "toい",
+        "hiragana":  "とおい",
         "romaji":  "tooi",
         "vietnamese_meaning":  "xa",
         "word_type":  "adjectivei",
@@ -4676,7 +4676,7 @@ const vocabulary = [
     {
         "id":  360,
         "lesson_id":  17,
-        "hiragana":  "ざんgyouします",
+        "hiragana":  "ざんぎょうします",
         "romaji":  "zankyoushimasu",
         "vietnamese_meaning":  "làm thêm giờ, tăng ca",
         "word_type":  "verb",

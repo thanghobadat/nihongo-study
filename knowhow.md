@@ -151,8 +151,9 @@ Khi phát triển, các AI Agent hoặc Lập trình viên có thể sử dụng
 ## 4. Hướng Dẫn Phát Triển Dành Cho AI Agent
 
 Khi bạn thực hiện viết code hoặc chỉnh sửa trong dự án này:
-1. ⚠️ **Tuyệt đối không tự ý Push lên Git**: Chỉ viết code, kiểm thử và thực hiện git commit cục bộ (local). **Không** chạy lệnh `git push` lên GitHub remote trừ khi người dùng yêu cầu trực tiếp.
-2. 🧹 **Dọn dẹp tệp mở**: Sau khi hoàn thành xong tác vụ, hãy chủ động đóng toàn bộ các tệp code đang mở, chỉ giữ lại các tệp tài liệu nhật ký dạng `.md` (như `walkthrough.md`, `knowhow.md`) để tối ưu không gian hiển thị cho người dùng.
+1. ⚠️ **Phát triển và Sửa lỗi cục bộ (Local-First)**: Tất cả các yêu cầu sửa lỗi và chỉnh sửa mã nguồn phải được thực hiện hoàn toàn ở môi trường cục bộ (local). Chỉ thực hiện `git commit` và triển khai (deploy) lên Cloud/GitHub khi được người dùng yêu cầu trực tiếp.
+2. ⚠️ **Tuyệt đối không tự ý Push lên Git**: Chỉ viết code, kiểm thử cục bộ. **Không** chạy lệnh `git push` lên GitHub remote trừ khi người dùng yêu cầu trực tiếp.
+3. 🧹 **Dọn dẹp tệp mở**: Sau khi hoàn thành xong tác vụ, hãy chủ động đóng toàn bộ các tệp code đang mở, chỉ giữ lại các tệp tài liệu nhật ký dạng `.md` (như `walkthrough.md`, `knowhow.md`) để tối ưu không gian hiển thị cho người dùng.
 3. **Thiết kế Responsive**: Mọi giao diện viết ở Frontend phải hỗ trợ hiển thị tối ưu trên thiết bị di động (Mobile-First responsive sử dụng Tailwind CSS).
 4. **Bảo mật API**: 
    - Tất cả các endpoint Backend phải áp dụng Middleware hạn chế tần suất gọi (rate limiter) để tránh spam.

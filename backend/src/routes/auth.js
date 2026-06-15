@@ -278,4 +278,54 @@ router.post('/reset-password', requireAuth, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/auth/refresh
+ * Refresh session token using refresh_token
+ */
+router.post('/refresh', async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+      return res.status(400).json({ error: 'Refresh token is required' });
+    }
+
+    const isMockMode = !process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder');
+    if (isMockMode || refreshToken.startsWith('mock-token-')) {
+      // In local mock mode, we just return the same token as success
+      return res.json({
+        session: {
+          access_token: refreshToken,
+          refresh_token: refreshToken
+        },
+        user: {
+          id: refreshToken.replace('mock-token-', '').replace('-admin', ''),
+          email: 'mock-user@nihongoflow.com',
+          user_metadata: {
+            display_name: 'Mock User',
+            role: refreshToken.endsWith('-admin') ? 'admin' : 'user'
+          }
+        }
+      });
+    }
+
+    // Call Supabase auth.refreshSession
+    const { data, error } = await supabase.auth.refreshSession({
+      refresh_token: refreshToken
+    });
+
+    if (error) {
+      return res.status(401).json({ error: error.message });
+    }
+
+    res.json({
+      message: 'Token refreshed successfully!',
+      session: data.session,
+      user: data.user
+    });
+  } catch (error) {
+    console.error('Token refresh error:', error);
+    res.status(500).json({ error: 'Failed to refresh token' });
+  }
+});
+
 module.exports = router;

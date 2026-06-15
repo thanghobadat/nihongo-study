@@ -104,4 +104,19 @@ async function runTests() {
   if (r5.statusCode !== 200) {
     throw new Error(`Test 5 failed: Expected status 200, but got status: ${r5.statusCode}`);
   }
+
+  // Test 6: Auth Refresh Token Endpoint
+  const r6_fail = await makeRequest('/api/auth/refresh', 'POST', {}, {});
+  console.log('6a. POST /api/auth/refresh (No Token) -> Status:', r6_fail.statusCode);
+  if (r6_fail.statusCode !== 400) {
+    throw new Error(`Test 6a failed: Expected status 400, but got status: ${r6_fail.statusCode}`);
+  }
+
+  const r6_success = await makeRequest('/api/auth/refresh', 'POST', {}, {
+    refreshToken: 'mock-token-user123'
+  });
+  console.log('6b. POST /api/auth/refresh (Valid Mock Token) -> Status:', r6_success.statusCode);
+  if (r6_success.statusCode !== 200 || !r6_success.body.session || !r6_success.body.session.access_token) {
+    throw new Error(`Test 6b failed: Expected status 200 and session data, but got status: ${r6_success.statusCode}`);
+  }
 }

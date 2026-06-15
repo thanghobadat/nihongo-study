@@ -285,9 +285,38 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Play audio voice
   const playAudio = (text: string) => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isIOS) {
+        showNotification('Lưu ý: Hãy tắt chế độ Im lặng (gạt nút sườn) để nghe thấy tiếng phát âm.');
+      }
+
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'ja-JP';
+      
+      const voices = window.speechSynthesis.getVoices();
+      const jaVoice = voices.find(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      if (jaVoice) {
+        utterance.voice = jaVoice;
+      }
+      
+      // GC protection for iOS
+      (window as any)._activeUtterances = (window as any)._activeUtterances || [];
+      (window as any)._activeUtterances.push(utterance);
+      utterance.onend = () => {
+        const idx = (window as any)._activeUtterances.indexOf(utterance);
+        if (idx > -1) (window as any)._activeUtterances.splice(idx, 1);
+      };
+      utterance.onerror = () => {
+        const idx = (window as any)._activeUtterances.indexOf(utterance);
+        if (idx > -1) (window as any)._activeUtterances.splice(idx, 1);
+      };
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+      
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -2449,7 +2478,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                     value={userAnswer}
                                     disabled={isGraded}
                                     onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
-                                    className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-xs px-3.5 py-2 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
+                                    className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-base md:text-xs px-3.5 py-2 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
                                   />
                                 </td>
                                 <td className="py-4 px-4 text-center">
@@ -2555,7 +2584,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 value={userAnswer}
                                 disabled={isGraded}
                                 onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
-                                className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
+                                className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-base md:text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
                               />
                             </div>
 

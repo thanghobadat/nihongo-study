@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '../utils/api';
@@ -9,6 +9,13 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [expiredMsg, setExpiredMsg] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('expired=true')) {
+      setExpiredMsg('Phiên làm việc của bạn đã hết hạn do lâu không hoạt động. Vui lòng đăng nhập lại.');
+    }
+  }, []);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -28,6 +35,9 @@ export default function LoginPage() {
       
       // Save auth state
       api.setToken(response.session.access_token);
+      if (response.session.refresh_token) {
+        api.setRefreshToken(response.session.refresh_token);
+      }
       api.setUser(response.user);
 
       // Redirect depending on user role (metadata role)
@@ -116,6 +126,12 @@ export default function LoginPage() {
             <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Đăng nhập</h1>
             <p className="mt-2 text-sm text-slate-400">Chào mừng bạn quay trở lại lớp học!</p>
           </div>
+
+          {expiredMsg && (
+            <div className="p-4 mb-6 text-sm text-amber-200 bg-amber-950/40 border border-amber-800/60 rounded-xl">
+              ⚠️ {expiredMsg}
+            </div>
+          )}
 
           {error && (
             <div className="p-4 mb-6 text-sm text-rose-200 bg-rose-950/40 border border-rose-800/60 rounded-xl">
