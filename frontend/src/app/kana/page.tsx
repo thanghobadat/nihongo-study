@@ -69,7 +69,10 @@ export default function AlphabetReviewPage() {
   // Speedrun game over & high score states
   const [hiraHighScore, setHiraHighScore] = useState<number>(0);
   const [kataHighScore, setKataHighScore] = useState<number>(0);
+  const [hiraMaxCorrect, setHiraMaxCorrect] = useState<number>(0);
+  const [kataMaxCorrect, setKataMaxCorrect] = useState<number>(0);
   const speedrunHighScore = gameAlphabet === 'hiragana' ? hiraHighScore : kataHighScore;
+  const speedrunMaxCorrect = gameAlphabet === 'hiragana' ? hiraMaxCorrect : kataMaxCorrect;
   const [speedrunGameOver, setSpeedrunGameOver] = useState<boolean>(false);
   const [speedrunCorrectCount, setSpeedrunCorrectCount] = useState<number>(0);
 
@@ -93,6 +96,12 @@ export default function AlphabetReviewPage() {
   const [memoryFlips, setMemoryFlips] = useState(0);
   const [memoryMatches, setMemoryMatches] = useState(0);
   const [memoryWin, setMemoryWin] = useState(false);
+  const [memoryScore, setMemoryScore] = useState(0);
+  const [memoryBoardCount, setMemoryBoardCount] = useState(1);
+  const [hiraMemoryHighScore, setHiraMemoryHighScore] = useState<number>(0);
+  const [kataMemoryHighScore, setKataMemoryHighScore] = useState<number>(0);
+  const [hiraMemoryMaxBoard, setHiraMemoryMaxBoard] = useState<number>(0);
+  const [kataMemoryMaxBoard, setKataMemoryMaxBoard] = useState<number>(0);
   
   // Memory Match timer options
   const [memoryUseTimer, setMemoryUseTimer] = useState(false);
@@ -136,6 +145,27 @@ export default function AlphabetReviewPage() {
     const cleanCorrect = (correct || '').trim().toLowerCase().replace(/\s+/g, '');
     if (!cleanInput) return 0;
     if (cleanInput === cleanCorrect) return 100;
+    
+    // Handle parentheses options like "techou(techō)"
+    if (cleanCorrect.includes('(')) {
+      const mainOption = cleanCorrect.split('(')[0].trim();
+      const parenOption = cleanCorrect.substring(cleanCorrect.indexOf('(') + 1, cleanCorrect.indexOf(')')).trim();
+      
+      if (cleanInput === mainOption || cleanInput === parenOption) {
+        return 100;
+      }
+      
+      // Calculate matching accuracy against the primary option
+      let matches = 0;
+      const minLen = Math.min(cleanInput.length, mainOption.length);
+      for (let i = 0; i < minLen; i++) {
+        if (cleanInput[i] === mainOption[i]) {
+          matches++;
+        }
+      }
+      const maxLen = Math.max(cleanInput.length, mainOption.length);
+      return Math.round((matches / maxLen) * 100);
+    }
     
     let matches = 0;
     const minLen = Math.min(cleanInput.length, cleanCorrect.length);
@@ -226,6 +256,7 @@ export default function AlphabetReviewPage() {
   };
 
   const menuItems = [
+    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
@@ -297,32 +328,64 @@ export default function AlphabetReviewPage() {
         
         const hMap: Record<number, string> = {};
         let maxHiraHighScore = 0;
+        let maxHiraCorrect = 0;
+        let maxHiraMemoryHighScore = 0;
+        let maxHiraMemoryMaxBoard = 0;
         if (Array.isArray(hProgress)) {
           hProgress.forEach(p => { 
-            if (p.item_id >= 100000) {
-              const score = p.item_id - 100000;
-              if (score > maxHiraHighScore) maxHiraHighScore = score;
+            const itemId = Number(p.item_id);
+            if (itemId >= 400000) {
+              const val = itemId - 400000;
+              if (val > maxHiraMemoryMaxBoard) maxHiraMemoryMaxBoard = val;
+            } else if (itemId >= 300000) {
+              const val = itemId - 300000;
+              if (val > maxHiraMemoryHighScore) maxHiraMemoryHighScore = val;
+            } else if (itemId >= 200000) {
+              const val = itemId - 200000;
+              if (val > maxHiraCorrect) maxHiraCorrect = val;
+            } else if (itemId >= 100000) {
+              const val = itemId - 100000;
+              if (val > maxHiraHighScore) maxHiraHighScore = val;
             } else {
-              hMap[p.item_id] = p.status; 
+              hMap[itemId] = p.status; 
             }
           });
         }
         setHiraHighScore(maxHiraHighScore);
+        setHiraMaxCorrect(maxHiraCorrect);
+        setHiraMemoryHighScore(maxHiraMemoryHighScore);
+        setHiraMemoryMaxBoard(maxHiraMemoryMaxBoard);
         setHiraganaProgress(hMap);
 
         const kMap: Record<number, string> = {};
         let maxKataHighScore = 0;
+        let maxKataCorrect = 0;
+        let maxKataMemoryHighScore = 0;
+        let maxKataMemoryMaxBoard = 0;
         if (Array.isArray(kProgress)) {
           kProgress.forEach(p => { 
-            if (p.item_id >= 100000) {
-              const score = p.item_id - 100000;
-              if (score > maxKataHighScore) maxKataHighScore = score;
+            const itemId = Number(p.item_id);
+            if (itemId >= 400000) {
+              const val = itemId - 400000;
+              if (val > maxKataMemoryMaxBoard) maxKataMemoryMaxBoard = val;
+            } else if (itemId >= 300000) {
+              const val = itemId - 300000;
+              if (val > maxKataMemoryHighScore) maxKataMemoryHighScore = val;
+            } else if (itemId >= 200000) {
+              const val = itemId - 200000;
+              if (val > maxKataCorrect) maxKataCorrect = val;
+            } else if (itemId >= 100000) {
+              const val = itemId - 100000;
+              if (val > maxKataHighScore) maxKataHighScore = val;
             } else {
-              kMap[p.item_id] = p.status; 
+              kMap[itemId] = p.status; 
             }
           });
         }
         setKataHighScore(maxKataHighScore);
+        setKataMaxCorrect(maxKataCorrect);
+        setKataMemoryHighScore(maxKataMemoryHighScore);
+        setKataMemoryMaxBoard(maxKataMemoryMaxBoard);
         setKatakanaProgress(kMap);
       } catch (e) {
         console.error("Failed to load progress:", e);
@@ -374,7 +437,7 @@ export default function AlphabetReviewPage() {
       } else {
         setKataHighScore(finalScore);
       }
-      showToast("🎉 Kỷ lục mới!");
+      showToast("🎉 Kỷ lục điểm số mới!");
 
       try {
         await api.post('/api/user/progress', {
@@ -385,6 +448,28 @@ export default function AlphabetReviewPage() {
       } catch (e) {
         console.error("Failed to sync high score to cloud:", e);
         showToast("Lỗi đồng bộ kỷ lục lên máy chủ!");
+      }
+    }
+
+    // Check and save Max Correct count (Cloud sync)
+    const currentMaxCorrect = gameAlphabet === 'hiragana' ? hiraMaxCorrect : kataMaxCorrect;
+    const finalCorrect = speedrunCorrectCountRef.current;
+    if (finalCorrect > currentMaxCorrect) {
+      if (gameAlphabet === 'hiragana') {
+        setHiraMaxCorrect(finalCorrect);
+      } else {
+        setKataMaxCorrect(finalCorrect);
+      }
+      showToast("🎯 Kỷ lục số câu đúng mới!");
+
+      try {
+        await api.post('/api/user/progress', {
+          item_type: gameAlphabet,
+          item_id: 200000 + finalCorrect,
+          status: 'mastered'
+        });
+      } catch (e) {
+        console.error("Failed to sync max correct count to cloud:", e);
       }
     }
   };
@@ -462,7 +547,9 @@ export default function AlphabetReviewPage() {
     if (correct) {
       const currentCount = speedrunCorrectCountRef.current;
       const maxTime = Math.max(2, 10 - Math.floor(currentCount / 2));
-      const scoreGain = 10 + Math.floor((timeLeftRef.current / maxTime) * 10);
+      const basePoints = 10 + currentCount * 5;
+      const timeBonus = Math.round((timeLeftRef.current / maxTime) * basePoints);
+      const scoreGain = basePoints + timeBonus;
       const nextScore = gameScoreRef.current + scoreGain;
       updateGameScore(nextScore);
       setGameStreak(prev => prev + 1);
@@ -486,6 +573,14 @@ export default function AlphabetReviewPage() {
     if (memoryTimerRef.current) clearInterval(memoryTimerRef.current);
 
     const isNext = typeof nextLevel === 'boolean' ? nextLevel : false;
+
+    if (!isNext) {
+      setMemoryScore(0);
+      setMemoryBoardCount(1);
+      setMemoryActiveTimeLimit(memoryTimeLimit);
+    } else {
+      setMemoryBoardCount(prev => prev + 1);
+    }
 
     const list = gameAlphabet === 'hiragana' ? hiraganaData : katakanaData;
     // Choose 8 random characters
@@ -578,6 +673,51 @@ export default function AlphabetReviewPage() {
 
             if (newMatchCount === 8) {
               if (memoryTimerRef.current) clearInterval(memoryTimerRef.current);
+              
+              // Calculate score gained for this board
+              let gain = 100;
+              if (memoryUseTimer) {
+                const basePoints = 100 * memoryBoardCount;
+                const timeBonus = Math.floor(memoryTimeLeftRef.current * 10 * memoryBoardCount);
+                gain = basePoints + timeBonus;
+              }
+
+              setMemoryScore(prevScore => {
+                const newScore = prevScore + gain;
+                
+                // Save records/highscores
+                if (memoryUseTimer) {
+                  const currentHigh = gameAlphabet === 'hiragana' ? hiraMemoryHighScore : kataMemoryHighScore;
+                  if (newScore > currentHigh) {
+                    if (gameAlphabet === 'hiragana') {
+                      setHiraMemoryHighScore(newScore);
+                    } else {
+                      setKataMemoryHighScore(newScore);
+                    }
+                    api.post('/api/user/progress', {
+                      item_type: gameAlphabet,
+                      item_id: 300000 + newScore,
+                      status: 'mastered'
+                    }).catch(e => console.error("Failed to sync memory high score:", e));
+                  }
+
+                  const currentMaxBoard = gameAlphabet === 'hiragana' ? hiraMemoryMaxBoard : kataMemoryMaxBoard;
+                  if (memoryBoardCount > currentMaxBoard) {
+                    if (gameAlphabet === 'hiragana') {
+                      setHiraMemoryMaxBoard(memoryBoardCount);
+                    } else {
+                      setKataMemoryMaxBoard(memoryBoardCount);
+                    }
+                    api.post('/api/user/progress', {
+                      item_type: gameAlphabet,
+                      item_id: 400000 + memoryBoardCount,
+                      status: 'mastered'
+                    }).catch(e => console.error("Failed to sync memory max board:", e));
+                  }
+                }
+                return newScore;
+              });
+
               setMemoryWin(true);
             }
 
@@ -849,8 +989,8 @@ export default function AlphabetReviewPage() {
       <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 md:relative md:translate-x-0 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div>
-          <div className="flex items-center justify-between mb-8 px-2">
+        <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
+          <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
               Minna Nihongo
             </span>
@@ -862,13 +1002,15 @@ export default function AlphabetReviewPage() {
             </button>
           </div>
 
-          <nav className="space-y-1.5">
+          <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id === 'dashboard') {
+                  if (item.id === 'guide') {
+                    router.push('/guide');
+                  } else if (item.id === 'dashboard') {
                     router.push('/dashboard');
                   } else if (item.id === 'roadmap') {
                     router.push('/roadmap');
@@ -891,7 +1033,7 @@ export default function AlphabetReviewPage() {
           </nav>
         </div>
 
-        <div className="pt-6 border-t border-slate-900/80 space-y-4">
+        <div className="pt-6 border-t border-slate-900/80 space-y-4 shrink-0">
           <div className="flex items-center space-x-3 px-2">
             <div
               className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700/50 flex items-center justify-center overflow-hidden"
@@ -1121,9 +1263,15 @@ export default function AlphabetReviewPage() {
                     <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Kỷ lục cá nhân</span>
                     <p className="text-2xl font-black text-blue-400">{speedrunHighScore}</p>
                   </div>
-                  <div className="col-span-2 border-t border-slate-900/50 pt-2.5 mt-1">
-                    <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Số câu đúng liên tiếp</span>
-                    <p className="text-base font-bold text-slate-200">{speedrunCorrectCount} câu</p>
+                  <div className="col-span-2 border-t border-slate-900/50 pt-2.5 mt-1 grid grid-cols-2 gap-4">
+                    <div>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Số câu đúng lượt này</span>
+                      <p className="text-lg font-bold text-slate-200">{speedrunCorrectCount} câu</p>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Kỷ lục câu đúng</span>
+                      <p className="text-lg font-bold text-blue-400">{speedrunMaxCorrect} câu</p>
+                    </div>
                   </div>
                 </div>
 
@@ -1152,10 +1300,16 @@ export default function AlphabetReviewPage() {
                   <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
                     Mỗi câu hỏi có tối đa 10 giây để trả lời. Cứ sau mỗi 2 câu đúng, thời gian suy nghĩ sẽ tự động giảm đi 1 giây để thử thách phản xạ của bạn (tối thiểu là 2 giây)!
                   </p>
-                  {speedrunHighScore > 0 && (
-                    <div className="inline-flex items-center space-x-1 px-3 py-1 bg-yellow-950/20 border border-yellow-900/40 rounded-full text-yellow-400 text-xs font-bold mt-1.5">
-                      <span>🏆 Kỷ lục:</span>
-                      <span>{speedrunHighScore} điểm</span>
+                  {(speedrunHighScore > 0 || speedrunMaxCorrect > 0) && (
+                    <div className="flex flex-col sm:flex-row justify-center gap-2 mt-1.5">
+                      <div className="inline-flex items-center space-x-1 px-3 py-1 bg-yellow-950/20 border border-yellow-900/40 rounded-full text-yellow-400 text-xs font-bold">
+                        <span>🏆 Kỷ lục:</span>
+                        <span>{speedrunHighScore} điểm</span>
+                      </div>
+                      <div className="inline-flex items-center space-x-1 px-3 py-1 bg-blue-950/20 border border-blue-900/40 rounded-full text-blue-400 text-xs font-bold">
+                        <span>🎯 Kỷ lục câu đúng:</span>
+                        <span>{speedrunMaxCorrect} câu</span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -1284,6 +1438,16 @@ export default function AlphabetReviewPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs sm:text-sm font-bold text-slate-400 border-b border-slate-900 pb-4">
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                 <span className="flex items-center space-x-1.5">
+                  <span>Màn chơi:</span>
+                  <strong className="text-pink-400">{memoryBoardCount}</strong>
+                </span>
+                {memoryUseTimer && (
+                  <span className="flex items-center space-x-1.5">
+                    <span>🏆 Điểm tích lũy:</span>
+                    <strong className="text-yellow-400">{memoryScore}</strong>
+                  </span>
+                )}
+                <span className="flex items-center space-x-1.5">
                   <span>🔄 Lượt lật:</span>
                   <strong className="text-blue-400">{memoryFlips}</strong>
                 </span>
@@ -1329,7 +1493,7 @@ export default function AlphabetReviewPage() {
                 </label>
 
                 {memoryUseTimer && (
-                  <div className="flex items-center space-x-1 bg-slate-950 border border-slate-800 rounded-xl px-2 py-1">
+                  <div className="flex items-center space-x-2 bg-slate-950 border border-slate-800 rounded-xl px-2 py-1">
                     <input
                       type="number"
                       min={10}
@@ -1340,6 +1504,10 @@ export default function AlphabetReviewPage() {
                       title="Thời gian (giây)"
                     />
                     <span className="text-[10px] text-slate-500 font-bold">s</span>
+                    <div className="flex gap-1 border-l border-slate-850 pl-2">
+                      <span className="text-yellow-500 text-[10px] font-bold" title="Kỷ lục điểm">🏆 {gameAlphabet === 'hiragana' ? hiraMemoryHighScore : kataMemoryHighScore}</span>
+                      <span className="text-pink-400 text-[10px] font-bold" title="Kỷ lục màn">🏁 M{gameAlphabet === 'hiragana' ? hiraMemoryMaxBoard : kataMemoryMaxBoard}</span>
+                    </div>
                   </div>
                 )}
 
@@ -1359,25 +1527,63 @@ export default function AlphabetReviewPage() {
                 <p className="text-xs text-slate-300">
                   Thời gian đếm ngược đã hết trước khi bạn tìm thấy tất cả các cặp thẻ. Cố gắng lên nhé!
                 </p>
+                {memoryUseTimer && (
+                  <div className="grid grid-cols-2 gap-3 p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 text-left">
+                    <div>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Màn đạt được</span>
+                      <p className="text-lg font-black text-pink-400">Màn {memoryBoardCount}</p>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Kỷ lục màn</span>
+                      <p className="text-lg font-black text-pink-500">{gameAlphabet === 'hiragana' ? hiraMemoryMaxBoard : kataMemoryMaxBoard}</p>
+                    </div>
+                    <div className="col-span-2 border-t border-slate-900/50 pt-2.5 mt-1 grid grid-cols-2 gap-4">
+                      <div>
+                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Điểm đạt được</span>
+                        <p className="text-lg font-black text-yellow-400">{memoryScore}</p>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Kỷ lục điểm</span>
+                        <p className="text-lg font-black text-blue-400">{gameAlphabet === 'hiragana' ? hiraMemoryHighScore : kataMemoryHighScore}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <button
-                  onClick={startMemoryGame}
+                  onClick={() => startMemoryGame(false)}
                   className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
-                  Thử lại ngay
+                  Chơi lại từ đầu
                 </button>
               </div>
             ) : memoryWin ? (
               <div className="p-8 bg-emerald-950/20 border border-emerald-800/60 rounded-2xl text-center space-y-4 max-w-md mx-auto animate-fade-in">
                 <span className="text-4xl">🎉</span>
-                <h3 className="text-lg font-bold text-emerald-400">XUẤT SẮC! HOÀN THÀNH BÀI GHÉP CẶP</h3>
+                <h3 className="text-lg font-bold text-emerald-400">CHIẾN THẮNG MÀN {memoryBoardCount}!</h3>
                 <p className="text-xs text-slate-300">
                   Bạn đã khớp thành công tất cả các cặp thẻ chữ cái trong <strong className="text-white">{memoryFlips}</strong> lượt lật bài!
                 </p>
+                {memoryUseTimer && (
+                  <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 text-left space-y-2 max-w-xs mx-auto">
+                    <div className="flex justify-between">
+                      <span className="text-xs text-slate-500 font-bold">Màn vừa qua:</span>
+                      <span className="text-sm font-bold text-slate-200">Màn {memoryBoardCount}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-xs text-slate-500 font-bold">Thời gian còn lại:</span>
+                      <span className="text-sm font-bold text-slate-200">{memoryTimeLeft.toFixed(1)}s</span>
+                    </div>
+                    <div className="flex justify-between border-t border-slate-900/50 pt-2 mt-1">
+                      <span className="text-xs text-slate-500 font-bold">Tổng điểm tích lũy:</span>
+                      <span className="text-sm font-black text-yellow-400">{memoryScore} điểm</span>
+                    </div>
+                  </div>
+                )}
                 <button
                   onClick={() => startMemoryGame(true)}
                   className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
-                  Luyện tập lại
+                  {memoryUseTimer ? `Tiếp tục (Màn ${memoryBoardCount + 1})` : "Luyện tập lại"}
                 </button>
               </div>
             ) : (

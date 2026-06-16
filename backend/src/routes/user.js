@@ -492,13 +492,26 @@ router.post('/progress', async (req, res) => {
     // Return mock data for local testing
     if (req.user.isMock) {
       if (Number(item_id) >= 100000) {
+        const idNum = Number(item_id);
+        let rangeStart = 100000;
+        let rangeEnd = 199999;
+        if (idNum >= 400000) {
+          rangeStart = 400000;
+          rangeEnd = 499999;
+        } else if (idNum >= 300000) {
+          rangeStart = 300000;
+          rangeEnd = 399999;
+        } else if (idNum >= 200000) {
+          rangeStart = 200000;
+          rangeEnd = 299999;
+        }
         // Remove existing high scores in mock db
         const prefix = `${userId}:${item_type}:`;
         Object.keys(mockDb.userProgress).forEach(k => {
           if (k.startsWith(prefix)) {
             const parts = k.split(':');
             const id = parseInt(parts[2], 10);
-            if (id >= 100000) {
+            if (id >= rangeStart && id <= rangeEnd) {
               delete mockDb.userProgress[k];
             }
           }
@@ -519,14 +532,28 @@ router.post('/progress', async (req, res) => {
       });
     }
 
-    // If it's a high score, clean up existing high score records >= 100000 first
+    // If it's a high score, clean up existing high score records in that specific range first
     if (Number(item_id) >= 100000) {
+      const idNum = Number(item_id);
+      let rangeStart = 100000;
+      let rangeEnd = 199999;
+      if (idNum >= 400000) {
+        rangeStart = 400000;
+        rangeEnd = 499999;
+      } else if (idNum >= 300000) {
+        rangeStart = 300000;
+        rangeEnd = 399999;
+      } else if (idNum >= 200000) {
+        rangeStart = 200000;
+        rangeEnd = 299999;
+      }
       const { error: delError } = await supabase
         .from('user_progress')
         .delete()
         .eq('user_id', userId)
         .eq('item_type', item_type)
-        .gte('item_id', 100000);
+        .gte('item_id', rangeStart)
+        .lte('item_id', rangeEnd);
 
       if (delError) throw delError;
     }

@@ -104,7 +104,7 @@ export function getGrammarVocabMapping(
   }
 
   const associatedItems = allVocab.filter(vocab => {
-    const romajiClean = vocab.romaji.toLowerCase().replace(/\s+/g, '').replace(/ō/g, 'o').replace(/ū/g, 'u');
+    const romajiClean = vocab.romaji.toLowerCase().replace(/\s+/g, '').replace(/\([^)]*\)/g, '').replace(/ō/g, 'o').replace(/ū/g, 'u');
     return mappedKeys.some(key => {
       const keyClean = key.toLowerCase().replace(/\s+/g, '').replace(/-/g, '');
       return (
@@ -128,7 +128,7 @@ export function getGrammarVocabMapping(
 
   const prevKeysClean = allPreviousKeys.map(k => k.toLowerCase().replace(/\s+/g, '').replace(/-/g, ''));
   const copiedItems = associatedItems.filter(vocab => {
-    const romajiClean = vocab.romaji.toLowerCase().replace(/\s+/g, '').replace(/ō/g, 'o').replace(/ū/g, 'u');
+    const romajiClean = vocab.romaji.toLowerCase().replace(/\s+/g, '').replace(/\([^)]*\)/g, '').replace(/ō/g, 'o').replace(/ū/g, 'u');
     return prevKeysClean.some(key => {
       return (
         romajiClean.includes(key) ||
@@ -612,12 +612,16 @@ export function getSubstitutionTemplate(
         .sort((a, b) => b.hiragana.length - a.hiragana.length);
         
       for (const v of sortedVocab) {
+        let cleanRomaji = v.romaji;
+        if (cleanRomaji.includes('(')) {
+          cleanRomaji = cleanRomaji.split('(')[0].trim();
+        }
         if (rom.includes(v.hiragana)) {
-          rom = rom.replace(new RegExp(v.hiragana, 'g'), ' ' + v.romaji + ' ');
+          rom = rom.replace(new RegExp(v.hiragana, 'g'), ' ' + cleanRomaji + ' ');
         }
         const kata = toKatakana(v.hiragana);
         if (rom.includes(kata)) {
-          rom = rom.replace(new RegExp(kata, 'g'), ' ' + v.romaji + ' ');
+          rom = rom.replace(new RegExp(kata, 'g'), ' ' + cleanRomaji + ' ');
         }
       }
       

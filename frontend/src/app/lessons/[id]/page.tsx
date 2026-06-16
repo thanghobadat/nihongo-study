@@ -213,6 +213,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   // Navigation Items corresponding to the 9 Sheets / Areas
   const menuItems = [
+    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
@@ -274,12 +275,23 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Luyện tập (Practice) States
   const [practiceMode, setPracticeMode] = useState<'vocab' | 'kanji'>('vocab');
   const [practiceLimit, setPracticeLimit] = useState<number>(10);
+  const [filterLearningMastered, setFilterLearningMastered] = useState<boolean>(false);
+  const [useRomaji, setUseRomaji] = useState<boolean>(false);
   const [baseShuffledList, setBaseShuffledList] = useState<any[]>([]);
   const [practiceList, setPracticeList] = useState<any[]>([]);
-  const [practiceAnswers, setPracticeAnswers] = useState<Record<number, string>>({});
+  const [practiceAnswers, setPracticeAnswers] = useState<Record<string, string>>({});
   const [isGraded, setIsGraded] = useState<boolean>(false);
-  const [visibleAnswers, setVisibleAnswers] = useState<Record<number, boolean>>({});
+  const [visibleAnswers, setVisibleAnswers] = useState<Record<string, boolean>>({});
   const [practiceDirection, setPracticeDirection] = useState<'vi-to-ja' | 'ja-to-vi'>('vi-to-ja');
+
+  // Memoized filtered source list based on selection
+  const currentSourceList = useMemo(() => {
+    const list = practiceMode === 'vocab' ? vocabItems : kanjiItems;
+    if (filterLearningMastered) {
+      return list.filter(item => item.status === 'learning' || item.status === 'mastered');
+    }
+    return list;
+  }, [practiceMode, vocabItems, kanjiItems, filterLearningMastered]);
 
   useEffect(() => {
     setPracticeAnswers({});
@@ -588,6 +600,27 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     if (!cleanInput) return 0;
     if (cleanInput === cleanCorrect) return 100;
     
+    // Handle parentheses options like "techou (techō)"
+    if (cleanCorrect.includes('(')) {
+      const mainOption = cleanCorrect.split('(')[0].trim();
+      const parenOption = cleanCorrect.substring(cleanCorrect.indexOf('(') + 1, cleanCorrect.indexOf(')')).trim();
+      
+      if (cleanInput === mainOption || cleanInput === parenOption) {
+        return 100;
+      }
+      
+      // Calculate matching accuracy against the primary option
+      let matches = 0;
+      const minLen = Math.min(cleanInput.length, mainOption.length);
+      for (let i = 0; i < minLen; i++) {
+        if (cleanInput[i] === mainOption[i]) {
+          matches++;
+        }
+      }
+      const maxLen = Math.max(cleanInput.length, mainOption.length);
+      return Math.round((matches / maxLen) * 100);
+    }
+    
     let matches = 0;
     const minLen = Math.min(cleanInput.length, cleanCorrect.length);
     for (let i = 0; i < minLen; i++) {
@@ -608,13 +641,31 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     return 'Chưa đúng, hãy thử lại! ✏️';
   };
 
+  // Sinh đề thi lặp lại ngẫu nhiên các từ cho đủ giới hạn câu hỏi
+  const generatePracticeList = (sourceList: any[], limit: number) => {
+    if (sourceList.length === 0) return [];
+    
+    let repeatedList: any[] = [];
+    while (repeatedList.length < limit) {
+      // Tráo ngẫu nhiên mỗi lượt lặp để phân phối từ đều đặn hơn
+      const batch = [...sourceList].sort(() => Math.random() - 0.5);
+      repeatedList = [...repeatedList, ...batch];
+    }
+    
+    const selection = repeatedList.slice(0, limit);
+    return selection.map((item, idx) => ({
+      ...item,
+      uniqueId: `${item.id}-${idx}-${Math.random().toString(36).substr(2, 9)}`
+    }));
+  };
+
   // Tráo đề (Shuffle)
   const handleShufflePractice = () => {
-    const sourceList = practiceMode === 'vocab' ? vocabItems : kanjiItems;
-    if (sourceList.length === 0) return;
-    const shuffled = [...sourceList].sort(() => Math.random() - 0.5);
-    setBaseShuffledList(shuffled);
-    setPracticeList(shuffled.slice(0, Math.min(practiceLimit, shuffled.length)));
+    if (currentSourceList.length === 0) return;
+
+    const newList = generatePracticeList(currentSourceList, practiceLimit);
+    setBaseShuffledList(newList);
+    setPracticeList(newList);
     setPracticeAnswers({});
     setIsGraded(false);
     setVisibleAnswers({});
@@ -625,12 +676,16 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Thay đổi giới hạn câu hỏi
   const handleLimitChange = (val: string) => {
     const num = parseInt(val) || 0;
-    const sourceList = practiceMode === 'vocab' ? vocabItems : kanjiItems;
-    const maxVal = sourceList.length;
+    const maxVal = practiceMode === 'vocab' ? vocabItems.length : kanjiItems.length;
     const cleanNum = Math.max(1, Math.min(num, maxVal));
     setPracticeLimit(cleanNum);
-    if (baseShuffledList.length > 0) {
-      setPracticeList(baseShuffledList.slice(0, Math.min(cleanNum, baseShuffledList.length)));
+    if (currentSourceList.length > 0) {
+      const newList = generatePracticeList(currentSourceList, cleanNum);
+      setBaseShuffledList(newList);
+      setPracticeList(newList);
+      setPracticeAnswers({});
+      setIsGraded(false);
+      setVisibleAnswers({});
     }
   };
 
@@ -657,23 +712,23 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Load initial practice list once vocabulary or kanji is available
   useEffect(() => {
     if (currentTab === 'practice') {
-      const sourceList = practiceMode === 'vocab' ? vocabItems : kanjiItems;
-      if (sourceList.length > 0 && baseShuffledList.length === 0) {
-        const shuffled = [...sourceList].sort(() => Math.random() - 0.5);
-        setBaseShuffledList(shuffled);
-        setPracticeList(shuffled.slice(0, Math.min(practiceLimit, shuffled.length)));
+      if (currentSourceList.length > 0 && baseShuffledList.length === 0) {
+        const newList = generatePracticeList(currentSourceList, practiceLimit);
+        setBaseShuffledList(newList);
+        setPracticeList(newList);
       }
     }
-  }, [currentTab, vocabItems, kanjiItems, practiceMode, practiceLimit, baseShuffledList.length]);
+  }, [currentTab, currentSourceList, practiceLimit, baseShuffledList.length]);
 
-  // Reset practice state when practice mode changes
+  // Reset practice state when practice mode or status filter changes
   useEffect(() => {
     setBaseShuffledList([]);
     setPracticeList([]);
     setPracticeAnswers({});
     setIsGraded(false);
     setVisibleAnswers({});
-  }, [practiceMode]);
+    setUseRomaji(false);
+  }, [practiceMode, filterLearningMastered]);
 
   const totalItemsCount = flashcardType === 'vocab' ? vocabItems.length : kanjiItems.length;
 
@@ -1017,9 +1072,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 md:relative md:translate-x-0 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div>
+        <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           {/* Logo Title & Mobile Close button */}
-          <div className="flex items-center justify-between mb-8 px-2">
+          <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
               Minna Nihongo
             </span>
@@ -1032,13 +1087,15 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Navigation Menu */}
-          <nav className="space-y-1.5">
+          <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id === 'dashboard') {
+                  if (item.id === 'guide') {
+                    router.push('/guide');
+                  } else if (item.id === 'dashboard') {
                     router.push('/dashboard');
                   } else if (item.id === 'roadmap') {
                     router.push('/roadmap');
@@ -1062,7 +1119,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         </div>
 
         {/* Bottom profile component */}
-        <div className="pt-6 border-t border-slate-900/80 space-y-4">
+        <div className="pt-6 border-t border-slate-900/80 space-y-4 shrink-0">
           <div className="flex items-center space-x-3 px-2">
             <div
               className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700/50 flex items-center justify-center overflow-hidden"
@@ -2821,6 +2878,17 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         </button>
                       </div>
 
+                      {/* Checkbox: Học từ Đang học & Đã học */}
+                      <label className="flex items-center space-x-2 bg-slate-950/40 border border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-350 cursor-pointer hover:text-white transition-colors">
+                        <input
+                          type="checkbox"
+                          checked={filterLearningMastered}
+                          onChange={(e) => setFilterLearningMastered(e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-blue-500 focus:ring-offset-slate-900 cursor-pointer"
+                        />
+                        <span>Học từ đang học & đã học</span>
+                      </label>
+
                       {/* Number of questions input */}
                       <div className="flex items-center space-x-2 bg-slate-950/40 border border-slate-800 px-3.5 py-1.5 rounded-xl">
                         <span className="text-xs text-slate-400 font-bold">Số câu hỏi:</span>
@@ -2831,9 +2899,22 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           className="w-12 bg-slate-900 border border-slate-700 rounded-lg text-center text-base md:text-xs font-extrabold text-white py-1 focus:outline-none focus:border-blue-500"
                         />
                         <span className="text-xs text-slate-500 font-bold">
-                          / {practiceMode === 'vocab' ? vocabItems.length : kanjiItems.length}
+                          / {currentSourceList.length}
                         </span>
                       </div>
+
+                      {/* Romaji Checkbox (Việt-Nhật Vocab only) */}
+                      {practiceMode === 'vocab' && practiceDirection === 'vi-to-ja' && (
+                        <label className="flex items-center space-x-2 bg-slate-950/40 border border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-350 cursor-pointer hover:text-white transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={useRomaji}
+                            onChange={(e) => setUseRomaji(e.target.checked)}
+                            className="w-4 h-4 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-blue-500 focus:ring-offset-slate-900 cursor-pointer"
+                          />
+                          <span>Trả lời bằng Romaji</span>
+                        </label>
+                      )}
                     </div>
 
                     {/* Shuffle button */}
@@ -2886,20 +2967,24 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             
                             if (isVocab) {
                               questionText = isViToJa ? item.vietnamese_meaning : item.hiragana;
-                              placeholderText = isViToJa ? 'Nhập Hiragana...' : 'Nhập nghĩa tiếng Việt...';
-                              correctAnswer = isViToJa ? item.hiragana : item.vietnamese_meaning;
+                              placeholderText = isViToJa 
+                                ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
+                                : 'Nhập nghĩa tiếng Việt...';
+                              correctAnswer = isViToJa 
+                                ? (useRomaji ? item.romaji : item.hiragana) 
+                                : item.vietnamese_meaning;
                             } else {
                               questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
                               placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
                               correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
                             }
 
-                            const userAnswer = practiceAnswers[item.id] || '';
+                            const userAnswer = practiceAnswers[item.uniqueId] || '';
                             const pct = calculateAccuracy(userAnswer, correctAnswer);
-                            const isVisible = visibleAnswers[item.id] || false;
+                            const isVisible = visibleAnswers[item.uniqueId] || false;
 
                             return (
-                              <tr key={item.id} className="hover:bg-slate-900/10 transition-colors">
+                              <tr key={item.uniqueId} className="hover:bg-slate-900/10 transition-colors">
                                 <td className="py-4 px-4 text-xs font-bold text-slate-500 text-center">{idx + 1}</td>
                                 <td className="py-4 px-4 text-center">
                                   <button
@@ -2926,7 +3011,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                     placeholder={placeholderText}
                                     value={userAnswer}
                                     disabled={isGraded}
-                                    onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
+                                    onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.uniqueId]: e.target.value }))}
                                     className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-base md:text-xs px-3.5 py-2 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
                                   />
                                 </td>
@@ -2956,7 +3041,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 <td className="py-4 px-4">
                                   <div className="flex items-center space-x-2">
                                     <button
-                                      onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.id]: !isVisible }))}
+                                      onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
                                       className="p-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 cursor-pointer"
                                       title={isVisible ? 'Ẩn đáp án' : 'Hiện đáp án'}
                                     >
@@ -2986,20 +3071,24 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         
                         if (isVocab) {
                           questionText = isViToJa ? item.vietnamese_meaning : item.hiragana;
-                          placeholderText = isViToJa ? 'Nhập Hiragana...' : 'Nhập nghĩa tiếng Việt...';
-                          correctAnswer = isViToJa ? item.hiragana : item.vietnamese_meaning;
+                          placeholderText = isViToJa 
+                            ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
+                            : 'Nhập nghĩa tiếng Việt...';
+                          correctAnswer = isViToJa 
+                            ? (useRomaji ? item.romaji : item.hiragana) 
+                            : item.vietnamese_meaning;
                         } else {
                           questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
                           placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
                           correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
                         }
 
-                        const userAnswer = practiceAnswers[item.id] || '';
+                        const userAnswer = practiceAnswers[item.uniqueId] || '';
                         const pct = calculateAccuracy(userAnswer, correctAnswer);
-                        const isVisible = visibleAnswers[item.id] || false;
+                        const isVisible = visibleAnswers[item.uniqueId] || false;
 
                         return (
-                          <div key={item.id} className="bg-slate-900/40 border border-slate-800 p-4.5 rounded-2xl space-y-3.5 backdrop-blur-sm">
+                          <div key={item.uniqueId} className="bg-slate-900/40 border border-slate-800 p-4.5 rounded-2xl space-y-3.5 backdrop-blur-sm">
                             {/* Card Header */}
                             <div className="flex items-center justify-between border-b border-slate-800/40 pb-2">
                               <span className="text-xs font-bold text-slate-500">Câu {idx + 1}</span>
@@ -3032,7 +3121,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 placeholder={placeholderText}
                                 value={userAnswer}
                                 disabled={isGraded}
-                                onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
+                                onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.uniqueId]: e.target.value }))}
                                 className={`w-full bg-[#FCF3CF] text-slate-900 font-extrabold text-base md:text-xs px-3.5 py-2.5 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
                               />
                             </div>
@@ -3067,7 +3156,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <div className="flex items-center justify-between">
                                 <span className="text-[9px] font-black text-slate-500 uppercase tracking-wider">Đáp án đúng</span>
                                 <button
-                                  onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.id]: !isVisible }))}
+                                  onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
                                   className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-slate-400 hover:text-slate-200 cursor-pointer flex items-center space-x-1"
                                 >
                                   <span>{isVisible ? '👁️' : '🙈'}</span>

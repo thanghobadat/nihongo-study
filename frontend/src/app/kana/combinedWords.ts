@@ -227,7 +227,7 @@ export const combinedWordsData: CombinedWord[] = [
   {
     "id": 28,
     "word": "ちょこれーと",
-    "romaji": "chokorēto",
+    "romaji": "chokoreeto (chokorēto)",
     "meaning": "sô-cô-la",
     "difficulty": "medium",
     "length": 6
@@ -235,7 +235,7 @@ export const combinedWordsData: CombinedWord[] = [
   {
     "id": 29,
     "word": "こーひー",
-    "romaji": "kōhī",
+    "romaji": "koohii (kōhī)",
     "meaning": "cà phê",
     "difficulty": "easy",
     "length": 4
@@ -2435,7 +2435,7 @@ export const combinedWordsData: CombinedWord[] = [
   {
     "id": 304,
     "word": "ぼーるぺん",
-    "romaji": "bōrupen",
+    "romaji": "boorupen (bōrupen)",
     "meaning": "bút bi",
     "difficulty": "easy",
     "length": 5
@@ -2459,7 +2459,7 @@ export const combinedWordsData: CombinedWord[] = [
   {
     "id": 307,
     "word": "てちょう",
-    "romaji": "techō",
+    "romaji": "techou (techō)",
     "meaning": "sổ tay",
     "difficulty": "easy",
     "length": 4
@@ -4007,5 +4007,2653 @@ export const combinedWordsData: CombinedWord[] = [
     "meaning": "Nhân viên văn phòng",
     "difficulty": "medium",
     "length": 7
+  },
+  {
+    "id": 501,
+    "word": "おちゃ",
+    "romaji": "ocha",
+    "meaning": "trà, chè",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 502,
+    "word": "しゃしん",
+    "romaji": "shashin",
+    "meaning": "bức ảnh",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 503,
+    "word": "じしょ",
+    "romaji": "jisho",
+    "meaning": "từ điển",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 504,
+    "word": "きょねん",
+    "romaji": "kyonen",
+    "meaning": "năm ngoái",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 505,
+    "word": "りょこう",
+    "romaji": "ryokou",
+    "meaning": "du lịch",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 506,
+    "word": "りょうり",
+    "romaji": "ryouri",
+    "meaning": "món ăn, nấu ăn",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 507,
+    "word": "びょうき",
+    "romaji": "byouki",
+    "meaning": "bị ốm, bệnh tật",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 508,
+    "word": "ひゃく",
+    "romaji": "hyaku",
+    "meaning": "một trăm",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 509,
+    "word": "しゅみ",
+    "romaji": "shumi",
+    "meaning": "sở thích",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 510,
+    "word": "かいしゃ",
+    "romaji": "kaisha",
+    "meaning": "công ty",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 511,
+    "word": "じゅぎょう",
+    "romaji": "jugyou",
+    "meaning": "giờ học, tiết học",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 512,
+    "word": "じゅんび",
+    "romaji": "junbi",
+    "meaning": "chuẩn bị",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 513,
+    "word": "しゅくだい",
+    "romaji": "shukudai",
+    "meaning": "bài tập về nhà",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 514,
+    "word": "しょくどう",
+    "romaji": "shokudou",
+    "meaning": "nhà ăn, căng tin",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 515,
+    "word": "しょくじ",
+    "romaji": "shokuji",
+    "meaning": "bữa ăn",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 516,
+    "word": "しょうゆ",
+    "romaji": "shouyu",
+    "meaning": "nước tương",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 517,
+    "word": "ぎゅうにゅう",
+    "romaji": "gyuunyuu",
+    "meaning": "sữa bò",
+    "difficulty": "easy",
+    "length": 6
+  },
+  {
+    "id": 518,
+    "word": "じゃがいも",
+    "romaji": "jagaimo",
+    "meaning": "khoai tây",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 519,
+    "word": "にゅう가く",
+    "romaji": "nyuugaku",
+    "meaning": "nhập học",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 520,
+    "word": "にゅうがく",
+    "romaji": "nyuugaku",
+    "meaning": "nhập học",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 521,
+    "word": "にゅういん",
+    "romaji": "nyuuin",
+    "meaning": "nhập viện",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 522,
+    "word": "きゅうこう",
+    "romaji": "kyuukou",
+    "meaning": "tàu tốc hành",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 523,
+    "word": "きゅうじつ",
+    "romaji": "kyuujitsu",
+    "meaning": "ngày nghỉ",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 524,
+    "word": "しょうかい",
+    "romaji": "shoukai",
+    "meaning": "giới thiệu",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 525,
+    "word": "しょうらい",
+    "romaji": "shourai",
+    "meaning": "tương lai",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 526,
+    "word": "ちゅうい",
+    "romaji": "chuui",
+    "meaning": "chú ý, cảnh báo",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 527,
+    "word": "ちゅうしゃ",
+    "romaji": "chuusha",
+    "meaning": "tiêm thuốc",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 528,
+    "word": "りゅうがく",
+    "romaji": "ryuugaku",
+    "meaning": "du học",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 529,
+    "word": "りょかん",
+    "romaji": "ryokan",
+    "meaning": "nhà trọ kiểu Nhật",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 530,
+    "word": "はっぴょう",
+    "romaji": "happyou",
+    "meaning": "phát biểu, công bố",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 531,
+    "word": "ちゅうごく",
+    "romaji": "chuugoku",
+    "meaning": "Trung Quốc",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 532,
+    "word": "じょせい",
+    "romaji": "josei",
+    "meaning": "nữ giới, phụ nữ",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 533,
+    "word": "じょゆう",
+    "romaji": "joyou",
+    "meaning": "nữ diễn viên",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 534,
+    "word": "ぎょうざ",
+    "romaji": "gyouza",
+    "meaning": "bánh sủi cảo",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 535,
+    "word": "じどうしゃ",
+    "romaji": "jidousha",
+    "meaning": "xe ô tô",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 536,
+    "word": "じてんしゃ",
+    "romaji": "jitensha",
+    "meaning": "xe đạp",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 537,
+    "word": "きゅうり",
+    "romaji": "kyuuri",
+    "meaning": "dưa chuột",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 538,
+    "word": "きょうしつ",
+    "romaji": "kyoushitsu",
+    "meaning": "lớp học",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 539,
+    "word": "きょうし",
+    "romaji": "kyoushi",
+    "meaning": "giáo viên",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 540,
+    "word": "ぎゅうにく",
+    "romaji": "gyuuniku",
+    "meaning": "thịt bò",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 541,
+    "word": "しゃちょう",
+    "romaji": "shachou",
+    "meaning": "giám đốc, sếp",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 542,
+    "word": "しゅうり",
+    "romaji": "shuuri",
+    "meaning": "sửa chữa",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 543,
+    "word": "しゅっぱつ",
+    "romaji": "shuppatsu",
+    "meaning": "xuất phát, khởi hành",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 544,
+    "word": "しゅっせき",
+    "romaji": "shusseki",
+    "meaning": "tham gia, hiện diện",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 545,
+    "word": "しょうせつ",
+    "romaji": "shousetsu",
+    "meaning": "tiểu thuyết",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 546,
+    "word": "しょうてん",
+    "romaji": "shouten",
+    "meaning": "cửa hàng, tiệm buôn",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 547,
+    "word": "しょうひん",
+    "romaji": "shouhin",
+    "meaning": "hàng hóa, sản phẩm",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 548,
+    "word": "じょうぶ",
+    "romaji": "joubu",
+    "meaning": "bền, chắc chắn",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 549,
+    "word": "じょうほう",
+    "romaji": "jouhou",
+    "meaning": "thông tin",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 550,
+    "word": "じょうし",
+    "romaji": "joushi",
+    "meaning": "cấp trên, sếp",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 551,
+    "word": "じょし",
+    "romaji": "joshi",
+    "meaning": "cô gái, nữ tử",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 552,
+    "word": "じゃぐち",
+    "romaji": "jaguchi",
+    "meaning": "vòi nước",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 553,
+    "word": "じゃま",
+    "romaji": "jama",
+    "meaning": "vướng víu, cản trở",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 554,
+    "word": "ちゃわん",
+    "romaji": "chawan",
+    "meaning": "cái bát, chén trà",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 555,
+    "word": "ちゅうもん",
+    "romaji": "chuumon",
+    "meaning": "đặt hàng, gọi món",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 556,
+    "word": "ちゅうねん",
+    "romaji": "chuunen",
+    "meaning": "trung niên",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 557,
+    "word": "ちょうじょう",
+    "romaji": "choujou",
+    "meaning": "đỉnh núi",
+    "difficulty": "easy",
+    "length": 6
+  },
+  {
+    "id": 558,
+    "word": "ちょうし",
+    "romaji": "choushi",
+    "meaning": "tình trạng, phong độ",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 559,
+    "word": "ちょうせん",
+    "romaji": "chousen",
+    "meaning": "thử thách",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 560,
+    "word": "ちょくせつ",
+    "romaji": "chokusetsu",
+    "meaning": "trực tiếp",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 561,
+    "word": "にゅうじょ",
+    "romaji": "nyuujo",
+    "meaning": "vào cổng, vào cửa",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 562,
+    "word": "にゅうりょく",
+    "romaji": "nyuuryoku",
+    "meaning": "nhập liệu, đầu vào",
+    "difficulty": "easy",
+    "length": 6
+  },
+  {
+    "id": 563,
+    "word": "ひょうか",
+    "romaji": "hyouka",
+    "meaning": "đánh giá",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 564,
+    "word": "びょういん",
+    "romaji": "byouin",
+    "meaning": "bệnh viện",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 565,
+    "word": "びょう",
+    "romaji": "byou",
+    "meaning": "giây (thời gian)",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 566,
+    "word": "みゃく",
+    "romaji": "myaku",
+    "meaning": "mạch đập",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 567,
+    "word": "みょうじ",
+    "romaji": "myouji",
+    "meaning": "họ (họ tên)",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 568,
+    "word": "りゅう",
+    "romaji": "ryuu",
+    "meaning": "con rồng",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 569,
+    "word": "りょう",
+    "romaji": "ryou",
+    "meaning": "ký túc xá",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 570,
+    "word": "りょうしん",
+    "romaji": "ryoushin",
+    "meaning": "bố mẹ",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 571,
+    "word": "りょきゃく",
+    "romaji": "ryokyaku",
+    "meaning": "lữ khách, khách đi đường",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 572,
+    "word": "きょり",
+    "romaji": "kyori",
+    "meaning": "khoảng cách",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 573,
+    "word": "きゃく",
+    "romaji": "kyaku",
+    "meaning": "khách hàng",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 574,
+    "word": "きゃんぷ",
+    "romaji": "kyanpu",
+    "meaning": "cắm trại",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 575,
+    "word": "きょく",
+    "romaji": "kyoku",
+    "meaning": "bài hát, khúc nhạc",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 576,
+    "word": "しゃかい",
+    "romaji": "shakai",
+    "meaning": "xã hội",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 577,
+    "word": "しゅじん",
+    "romaji": "shujin",
+    "meaning": "chồng (của tôi)",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 578,
+    "word": "しょるい",
+    "romaji": "shorui",
+    "meaning": "tài liệu, giấy tờ",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 579,
+    "word": "じゃず",
+    "romaji": "jazu",
+    "meaning": "nhạc jazz",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 580,
+    "word": "じゅえき",
+    "romaji": "jueki",
+    "meaning": "nhựa cây",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 581,
+    "word": "じょしゅ",
+    "romaji": "joshu",
+    "meaning": "trợ lý, phụ tá",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 582,
+    "word": "ちゃ",
+    "romaji": "cha",
+    "meaning": "trà",
+    "difficulty": "easy",
+    "length": 2
+  },
+  {
+    "id": 583,
+    "word": "ちゅうげん",
+    "romaji": "chuugen",
+    "meaning": "tết trung nguyên",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 584,
+    "word": "ちょうしん",
+    "romaji": "choushin",
+    "meaning": "nghe nhịp tim",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 585,
+    "word": "ちょきん",
+    "romaji": "chokin",
+    "meaning": "tiết kiệm tiền",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 586,
+    "word": "にゅうし",
+    "romaji": "nyuushi",
+    "meaning": "kỳ thi tuyển sinh",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 587,
+    "word": "ひゃくえん",
+    "romaji": "hyakuen",
+    "meaning": "một trăm yên",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 588,
+    "word": "ひょう",
+    "romaji": "hyou",
+    "meaning": "bảng biểu, đồ thị",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 589,
+    "word": "みょうにち",
+    "romaji": "myounichi",
+    "meaning": "ngày mai (lịch sự)",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 590,
+    "word": "りゅうい",
+    "romaji": "ryuui",
+    "meaning": "lưu ý, để tâm",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 591,
+    "word": "りょうきん",
+    "romaji": "ryoukin",
+    "meaning": "chi phí, cước phí",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 592,
+    "word": "しゃしょう",
+    "romaji": "shashou",
+    "meaning": "nhân viên bán vé tàu",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 593,
+    "word": "しゅしょう",
+    "romaji": "shushou",
+    "meaning": "thủ tướng chính phủ",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 594,
+    "word": "しょせい",
+    "romaji": "shosei",
+    "meaning": "học trò, thư sinh",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 595,
+    "word": "じゅうどう",
+    "romaji": "juudou",
+    "meaning": "võ judo, nhu đạo",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 596,
+    "word": "じゅうに",
+    "romaji": "juuni",
+    "meaning": "số mười hai",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 597,
+    "word": "じゅういち",
+    "romaji": "juuichi",
+    "meaning": "số mười một",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 598,
+    "word": "じゅうさん",
+    "romaji": "juusan",
+    "meaning": "số mười ba",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 599,
+    "word": "じゅうよん",
+    "romaji": "juuyon",
+    "meaning": "số mười bốn",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 600,
+    "word": "じゅうご",
+    "romaji": "juugo",
+    "meaning": "số mười lăm",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 601,
+    "word": "じゅうろく",
+    "romaji": "juuroku",
+    "meaning": "số mười sáu",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 602,
+    "word": "じゅうしち",
+    "romaji": "juushichi",
+    "meaning": "số mười bảy",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 603,
+    "word": "じゅうはち",
+    "romaji": "juuhachi",
+    "meaning": "số mười tám",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 604,
+    "word": "じゅうきゅう",
+    "romaji": "juukyuu",
+    "meaning": "số mười chín",
+    "difficulty": "easy",
+    "length": 6
+  },
+  {
+    "id": 605,
+    "word": "にじゅう",
+    "romaji": "nijuu",
+    "meaning": "số hai mươi",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 606,
+    "word": "さんじゅう",
+    "romaji": "sanjuu",
+    "meaning": "số ba mươi",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 607,
+    "word": "よんじゅう",
+    "romaji": "yonjuu",
+    "meaning": "số bốn mươi",
+    "difficulty": "easy",
+    "length": 5
+  },
+  {
+    "id": 608,
+    "word": "ごじゅう",
+    "romaji": "gojuu",
+    "meaning": "số năm mươi",
+    "difficulty": "easy",
+    "length": 4
+  },
+  {
+    "id": 609,
+    "word": "きゅう",
+    "romaji": "kyuu",
+    "meaning": "số chín",
+    "difficulty": "easy",
+    "length": 3
+  },
+  {
+    "id": 610,
+    "word": "おちゃをのみます",
+    "romaji": "ocha wo nomimasu",
+    "meaning": "uống trà",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 611,
+    "word": "しゃしんをみます",
+    "romaji": "shashin wo mimasu",
+    "meaning": "xem/nhìn ảnh",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 612,
+    "word": "しゃしんをかいます",
+    "romaji": "shashin wo kaimasu",
+    "meaning": "mua ảnh",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 613,
+    "word": "じしょをかいます",
+    "romaji": "jisho wo kaimasu",
+    "meaning": "mua từ điển",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 614,
+    "word": "じしょをよみます",
+    "romaji": "jisho wo yomimasu",
+    "meaning": "đọc từ điển",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 615,
+    "word": "りょこうにいきます",
+    "romaji": "ryokou ni ikimasu",
+    "meaning": "đi đến du lịch",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 616,
+    "word": "りょうりをたべます",
+    "romaji": "ryouri wo tabemasu",
+    "meaning": "ăn món ăn",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 617,
+    "word": "しゅくだいをします",
+    "romaji": "shukudai wo shimasu",
+    "meaning": "làm/thực hiện bài tập",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 618,
+    "word": "ぎょうざをたべます",
+    "romaji": "gyouza wo tabemasu",
+    "meaning": "ăn sủi cảo",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 619,
+    "word": "きょうしつのつくえ",
+    "romaji": "kyoushitsu no tsukue",
+    "meaning": "bàn học trong lớp",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 620,
+    "word": "かいしゃのしゃちょう",
+    "romaji": "kaisha no shachou",
+    "meaning": "giám đốc công ty",
+    "difficulty": "medium",
+    "length": 10
+  },
+  {
+    "id": 621,
+    "word": "りょこうのじゅんび",
+    "romaji": "ryokou no junbi",
+    "meaning": "chuẩn bị đi du lịch",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 622,
+    "word": "しゅくだいのじゅんび",
+    "romaji": "shukudai no junbi",
+    "meaning": "chuẩn bị bài tập về nhà",
+    "difficulty": "medium",
+    "length": 10
+  },
+  {
+    "id": 623,
+    "word": "おちゃのうりば",
+    "romaji": "ocha no uriba",
+    "meaning": "quầy bán trà, chè",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 624,
+    "word": "びょういんのやね",
+    "romaji": "byouin no yane",
+    "meaning": "mái nhà bệnh viện",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 625,
+    "word": "じてんしゃのキー",
+    "romaji": "jitensha no kii",
+    "meaning": "chìa khóa xe đạp",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 626,
+    "word": "じどうしゃのキー",
+    "romaji": "jidousha no kii",
+    "meaning": "chìa khóa xe ô tô",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 627,
+    "word": "しょうせつをよむ",
+    "romaji": "shousetsu wo yomu",
+    "meaning": "đọc cuốn tiểu thuyết",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 628,
+    "word": "しょくどうのいす",
+    "romaji": "shokudou no isu",
+    "meaning": "ghế của nhà ăn",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 629,
+    "word": "しゅみのスポーツ",
+    "romaji": "shumi no supootsu",
+    "meaning": "môn thể thao sở thích",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 630,
+    "word": "にほんのりょうり",
+    "romaji": "nihon no ryouri",
+    "meaning": "món ăn của Nhật Bản",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 631,
+    "word": "ぎゅうにゅうをかう",
+    "romaji": "gyuunyuu wo kau",
+    "meaning": "mua sữa bò tươi",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 632,
+    "word": "じゃがいもをかう",
+    "romaji": "jagaimo wo kau",
+    "meaning": "mua khoai tây đỏ",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 633,
+    "word": "ぎょうざをたべる",
+    "romaji": "gyouza wo taberu",
+    "meaning": "ăn bánh sủi cảo hấp",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 634,
+    "word": "しゅどうのじゃぐち",
+    "romaji": "shudou no jaguchi",
+    "meaning": "vòi nước thủ công",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 635,
+    "word": "ちょうしがいい",
+    "romaji": "choushi ga ii",
+    "meaning": "tình trạng phong độ tốt",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 636,
+    "word": "ちょうしがわるい",
+    "romaji": "choushi ga warui",
+    "meaning": "tình trạng sức khỏe kém",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 637,
+    "word": "りょうしんのいえ",
+    "romaji": "ryoushin no ie",
+    "meaning": "nhà của bố mẹ",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 638,
+    "word": "ひゃくえんのほん",
+    "romaji": "hyakuen no hon",
+    "meaning": "sách giá một trăm yên",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 639,
+    "word": "びょういんのいしゃ",
+    "romaji": "byouin no isha",
+    "meaning": "bác sĩ của bệnh viện",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 640,
+    "word": "きょうしつのなか",
+    "romaji": "kyoushitsu no naka",
+    "meaning": "bên trong phòng học",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 641,
+    "word": "きょうしつのそと",
+    "romaji": "kyoushitsu no soto",
+    "meaning": "bên ngoài phòng học",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 642,
+    "word": "じどうしゃのそと",
+    "romaji": "jidousha no soto",
+    "meaning": "bên ngoài xe ô tô",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 643,
+    "word": "じてんしゃのそと",
+    "romaji": "jitensha no soto",
+    "meaning": "bên ngoài xe đạp",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 644,
+    "word": "ちゅうしゃをする",
+    "romaji": "chuusha wo suru",
+    "meaning": "tiêm phòng bệnh",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 645,
+    "word": "にゅうがくのひ",
+    "romaji": "nyuugaku no hi",
+    "meaning": "ngày khai giảng nhập học",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 646,
+    "word": "にゅういんのひ",
+    "romaji": "nyuin no hi",
+    "meaning": "ngày nhập viện điều trị",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 647,
+    "word": "しゅうりのひ",
+    "romaji": "shuuri no hi",
+    "meaning": "ngày sửa xe, sửa đồ",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 648,
+    "word": "しゅっぱつのひ",
+    "romaji": "shuppatsu no hi",
+    "meaning": "ngày xuất phát lên đường",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 649,
+    "word": "はっぴょうのひ",
+    "romaji": "happyou no hi",
+    "meaning": "ngày phát biểu công bố",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 650,
+    "word": "りゅうがくのひ",
+    "romaji": "ryuugaku no hi",
+    "meaning": "ngày đi du học nước ngoài",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 651,
+    "word": "しょうひんのなか",
+    "romaji": "shouhin no naka",
+    "meaning": "bên trong thùng hàng hóa",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 652,
+    "word": "じょうほうをみる",
+    "romaji": "jouhou wo miru",
+    "meaning": "xem thông tin chi tiết",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 653,
+    "word": "じょうしにあう",
+    "romaji": "joushi ni au",
+    "meaning": "gặp mặt cấp trên",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 654,
+    "word": "じゃまをする",
+    "romaji": "jama wo suru",
+    "meaning": "làm cản trở, vướng chân",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 655,
+    "word": "ちゅうもんのカード",
+    "romaji": "chuumon no kaado",
+    "meaning": "thẻ gọi món ăn",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 656,
+    "word": "ちょきんをする",
+    "romaji": "chokin wo suru",
+    "meaning": "tiết kiệm tiền bỏ ống",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 657,
+    "word": "りょうきんをはらう",
+    "romaji": "ryoukin wo harau",
+    "meaning": "thanh toán cước phí",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 658,
+    "word": "ちゅうごくのほん",
+    "romaji": "chuugoku no hon",
+    "meaning": "cuốn sách Trung Quốc",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 659,
+    "word": "じょせいのにんき",
+    "romaji": "josei no ninki",
+    "meaning": "sự yêu thích của phụ nữ",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 660,
+    "word": "じょゆうのしゃしん",
+    "romaji": "joyou no shashin",
+    "meaning": "ảnh của nữ diễn viên",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 661,
+    "word": "ぎゅうにくのりょうり",
+    "romaji": "gyuuniku no ryouri",
+    "meaning": "món ăn chế biến từ thịt bò",
+    "difficulty": "medium",
+    "length": 10
+  },
+  {
+    "id": 662,
+    "word": "おちゃをつくる",
+    "romaji": "ocha wo tsukuru",
+    "meaning": "pha trà xanh mời khách",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 663,
+    "word": "おちゃをだす",
+    "romaji": "ocha wo dasu",
+    "meaning": "bưng trà mời khách",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 664,
+    "word": "しゃしんをだす",
+    "romaji": "shashin wo dasu",
+    "meaning": "nộp ảnh chân dung",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 665,
+    "word": "しゅみのにっき",
+    "romaji": "shumi no nikki",
+    "meaning": "nhật ký sở thích cá nhân",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 666,
+    "word": "しゅくだいをだす",
+    "romaji": "shukudai wo dasu",
+    "meaning": "nộp bài tập về nhà",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 667,
+    "word": "しょくじのじかん",
+    "romaji": "shokuji no jikan",
+    "meaning": "thời gian ăn uống",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 668,
+    "word": "じしょをかう",
+    "romaji": "jisho wo kau",
+    "meaning": "mua cuốn từ điển học tập",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 669,
+    "word": "じしょをだす",
+    "romaji": "jisho wo dasu",
+    "meaning": "lấy từ điển ra tra từ",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 670,
+    "word": "りょうりをだす",
+    "romaji": "ryouri wo dasu",
+    "meaning": "bưng món ăn lên bàn",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 671,
+    "word": "きょねんのなつ",
+    "romaji": "kyonen no natsu",
+    "meaning": "mùa hè năm ngoái",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 672,
+    "word": "きょねんのふゆ",
+    "romaji": "kyonen no fuyu",
+    "meaning": "mùa đông năm ngoái",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 673,
+    "word": "きょねんのはる",
+    "romaji": "kyonen no haru",
+    "meaning": "mùa xuân năm ngoái",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 674,
+    "word": "きょねんのあき",
+    "romaji": "kyonen no aki",
+    "meaning": "mùa thu năm ngoái",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 675,
+    "word": "きょねんのよる",
+    "romaji": "kyonen no yoru",
+    "meaning": "buổi tối năm ngoái",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 676,
+    "word": "りょこうをする",
+    "romaji": "ryokou wo suru",
+    "meaning": "thực hiện chuyến du lịch",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 677,
+    "word": "りょこうのほん",
+    "romaji": "ryokou no hon",
+    "meaning": "cuốn sách về du lịch",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 678,
+    "word": "ひゃくえんショップ",
+    "romaji": "hyakuen shoppu",
+    "meaning": "cửa hàng đồng giá 100 yên",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 679,
+    "word": "びょうきになる",
+    "romaji": "byouki ni naru",
+    "meaning": "bị đổ bệnh, nhiễm bệnh",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 680,
+    "word": "かいしゃのなか",
+    "romaji": "kaisha no naka",
+    "meaning": "bên trong công sở",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 681,
+    "word": "かいしゃのそと",
+    "romaji": "kaisha no soto",
+    "meaning": "bên ngoài văn phòng công ty",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 682,
+    "word": "じてんしゃをかう",
+    "romaji": "jitensha wo kau",
+    "meaning": "mua xe đạp thể thao",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 683,
+    "word": "じどうしゃをかう",
+    "romaji": "jidousha wo kau",
+    "meaning": "mua xe hơi bốn bánh",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 684,
+    "word": "しゃちょうにあう",
+    "romaji": "shachou ni au",
+    "meaning": "gặp giám đốc trao đổi",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 685,
+    "word": "しゅくだいをやる",
+    "romaji": "shukudai wo yaru",
+    "meaning": "làm bài tập thầy giao",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 686,
+    "word": "おちゃをかう",
+    "romaji": "ocha wo kau",
+    "meaning": "mua nước trà đóng chai",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 687,
+    "word": "しゃしんをみる",
+    "romaji": "shashin wo miru",
+    "meaning": "ngắm nhìn tấm ảnh cũ",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 688,
+    "word": "しゅみのかつどう",
+    "romaji": "shumi no katsudou",
+    "meaning": "hoạt động giải trí sở thích",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 689,
+    "word": "しゅみのサークル",
+    "romaji": "shumi no saakuru",
+    "meaning": "câu lạc bộ sở thích",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 690,
+    "word": "じしょをよむ",
+    "romaji": "jisho wo yomu",
+    "meaning": "đọc sách tra từ điển",
+    "difficulty": "medium",
+    "length": 6
+  },
+  {
+    "id": 691,
+    "word": "りょうりをつくる",
+    "romaji": "ryouri wo tsukurimasu",
+    "meaning": "chuẩn bị nấu ăn ngon",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 692,
+    "word": "ひゃくえんをだす",
+    "romaji": "hyakuen wo dasu",
+    "meaning": "trả tiền một trăm yên",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 693,
+    "word": "びょうきをなおす",
+    "romaji": "byouki wo naosu",
+    "meaning": "chữa khỏi bệnh tật",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 694,
+    "word": "かいしゃにいく",
+    "romaji": "kaisha ni iku",
+    "meaning": "đi làm tại công sở",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 695,
+    "word": "じゅぎょうにいく",
+    "romaji": "jugyou ni iku",
+    "meaning": "đi đến lớp học bài",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 696,
+    "word": "じゅんびをする",
+    "romaji": "junbi wo suru",
+    "meaning": "tiến hành chuẩn bị",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 697,
+    "word": "しょくどうにいく",
+    "romaji": "shokudou ni iku",
+    "meaning": "đi xuống phòng ăn tập thể",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 698,
+    "word": "しょくじをする",
+    "romaji": "shokuji wo suru",
+    "meaning": "ngồi dùng bữa ăn ngon",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 699,
+    "word": "しょうゆをかう",
+    "romaji": "shouyu wo kau",
+    "meaning": "mua nước tương đen",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 700,
+    "word": "ぎゅうにゅうをのむ",
+    "romaji": "gyuunyuu wo nomu",
+    "meaning": "uống cốc sữa tươi",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 701,
+    "word": "じゃがいもをたべる",
+    "romaji": "jagaimo wo taberu",
+    "meaning": "ăn củ khoai tây nướng",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 702,
+    "word": "にゅうがくをする",
+    "romaji": "nyuugaku wo suru",
+    "meaning": "làm lễ nhập học mới",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 703,
+    "word": "にゅういんをする",
+    "romaji": "nyuuin wo suru",
+    "meaning": "làm thủ tục nhập viện",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 704,
+    "word": "きゅうこうにのる",
+    "romaji": "kyuukou ni noru",
+    "meaning": "lên chuyến tàu nhanh",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 705,
+    "word": "きゅうじつをすごす",
+    "romaji": "kyuujitsu wo sugosu",
+    "meaning": "trải qua ngày nghỉ lễ",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 706,
+    "word": "しょうかいをする",
+    "romaji": "shoukai wo suru",
+    "meaning": "thực hiện giới thiệu sếp",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 707,
+    "word": "しょうらいのゆめ",
+    "romaji": "shourai no yume",
+    "meaning": "ước mơ của tương lai",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 708,
+    "word": "ちゅういをうける",
+    "romaji": "chuui wo ukeru",
+    "meaning": "nhận được lời cảnh báo",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 709,
+    "word": "ちゅうしゃをうける",
+    "romaji": "chuusha wo ukeru",
+    "meaning": "bị tiêm thuốc điều trị",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 710,
+    "word": "りゅうがくをする",
+    "romaji": "ryuugaku wo suru",
+    "meaning": "đi học tập ở nước ngoài",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 711,
+    "word": "りょかんにとまる",
+    "romaji": "ryokan ni tomaru",
+    "meaning": "trọ lại khách sạn Nhật",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 712,
+    "word": "はっぴょうをする",
+    "romaji": "happyou wo suru",
+    "meaning": "tiến hành phát biểu báo cáo",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 713,
+    "word": "ちゅうごくにいく",
+    "romaji": "chuugoku ni iku",
+    "meaning": "đi công tác Trung Quốc",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 714,
+    "word": "じょせいのかいしゃ",
+    "romaji": "josei no kaisha",
+    "meaning": "công ty của phụ nữ quản lý",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 715,
+    "word": "じょゆうになる",
+    "romaji": "joyou ni naru",
+    "meaning": "trở thành nữ diễn viên",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 716,
+    "word": "ぎょうざをかう",
+    "romaji": "gyouza wo kau",
+    "meaning": "mua sủi cảo làm sẵn",
+    "difficulty": "medium",
+    "length": 7
+  },
+  {
+    "id": 717,
+    "word": "じどうしゃにのる",
+    "romaji": "jidousha ni noru",
+    "meaning": "lái xe hơi lăn bánh",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 718,
+    "word": "じてんしゃにのる",
+    "romaji": "jitensha ni noru",
+    "meaning": "đạp xe đi dạo phố",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 719,
+    "word": "きゅうりをたべる",
+    "romaji": "kyuuri wo taberu",
+    "meaning": "ăn dưa chuột muối chua",
+    "difficulty": "medium",
+    "length": 8
+  },
+  {
+    "id": 720,
+    "word": "きょうしつをそうじ",
+    "romaji": "kyoushitsu wo souji",
+    "meaning": "dọn vệ sinh lớp học",
+    "difficulty": "medium",
+    "length": 9
+  },
+  {
+    "id": 721,
+    "word": "きょうしつのなかのしゃしん",
+    "romaji": "kyoushitsu no naka no shashin",
+    "meaning": "bức ảnh treo bên trong lớp học",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 722,
+    "word": "かいしゃのしゃちょうのくるま",
+    "romaji": "kaisha no shachou no kuruma",
+    "meaning": "chiếc xe hơi của giám đốc công ty",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 723,
+    "word": "りょこうのじゅんびをします",
+    "romaji": "ryokou no junbi wo shimasu",
+    "meaning": "tôi tiến hành chuẩn bị đi du lịch",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 724,
+    "word": "しゅくだいのじゅんびをします",
+    "romaji": "shukudai no junbi wo shimasu",
+    "meaning": "tôi làm công tác chuẩn bị bài tập",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 725,
+    "word": "おちゃのうりばへいきます",
+    "romaji": "ocha no uriba he ikimasu",
+    "meaning": "tôi đi đến quầy trưng bày bán chè",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 726,
+    "word": "びょういんのいしゃにあいます",
+    "romaji": "byouin no isha ni aimasu",
+    "meaning": "tôi đi gặp bác sĩ ở bệnh viện",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 727,
+    "word": "じてんしゃのキーをさがします",
+    "romaji": "jitensha no kii wo sagashimasu",
+    "meaning": "tôi tìm kiếm chìa khóa xe đạp rơi",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 728,
+    "word": "じどうしゃのキーをさがします",
+    "romaji": "jidousha no kii wo sagashimasu",
+    "meaning": "tôi tìm kiếm chìa khóa xe ô tô mất",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 729,
+    "word": "しょうせつをとしょかんでよむ",
+    "romaji": "shousetsu wo toshokan de yomu",
+    "meaning": "đọc tiểu thuyết tại phòng thư viện",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 730,
+    "word": "しょくどうのいすをかたづける",
+    "romaji": "shokudou no isu wo katadukeru",
+    "meaning": "dọn dẹp ghế trong phòng nhà ăn",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 731,
+    "word": "にほんのりょうりをつくります",
+    "romaji": "nihon no ryouri wo tsukurimasu",
+    "meaning": "tôi nấu ăn món ăn kiểu Nhật Bản",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 732,
+    "word": "ぎゅうにゅうをスーパーでかう",
+    "romaji": "gyuunyuu wo suupaa de kau",
+    "meaning": "mua sữa tươi ở siêu thị gần nhà",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 733,
+    "word": "じゃがいもをデパートでかう",
+    "romaji": "jagaimo wo depaato de kau",
+    "meaning": "mua khoai tây trong bách hóa tổng hợp",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 734,
+    "word": "ぎょうざをしょくどうでたべる",
+    "romaji": "gyouza wo shokudou de taberu",
+    "meaning": "ăn bánh sủi cảo tại căn tin trường",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 735,
+    "word": "ちょうしがいいのでうれしい",
+    "romaji": "choushi ga ii node ureshii",
+    "meaning": "vui mừng vì phong độ đang rất tốt",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 736,
+    "word": "ちょうしがわるいのでやすむ",
+    "romaji": "choushi ga warui node yasumu",
+    "meaning": "nghỉ ngơi vì tình trạng sức khỏe kém",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 737,
+    "word": "りょうしんのいえにいきます",
+    "romaji": "ryoushin no ie ni ikimasu",
+    "meaning": "tôi đi về ngôi nhà của bố mẹ ruột",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 738,
+    "word": "ひゃくえんのほんをよみます",
+    "romaji": "hyakuen no hon wo yomimasu",
+    "meaning": "tôi ngồi đọc quyển sách giá 100 yên",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 739,
+    "word": "きょうしつのなかにはいる",
+    "romaji": "kyoushitsu no naka ni hairu",
+    "meaning": "bước đi vào phía trong phòng học bài",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 740,
+    "word": "じどうしゃをしゅうりします",
+    "romaji": "jidousha wo shuurishimasu",
+    "meaning": "tôi tự tay sửa chữa xe ô tô hỏng",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 741,
+    "word": "にゅうがくしきにしゅっせき",
+    "romaji": "nyuugakushiki ni shusseki",
+    "meaning": "tham dự buổi lễ nhập học trường mới",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 742,
+    "word": "にゅういんのてつづきをします",
+    "romaji": "nyuuin no tetsuduki wo shimasu",
+    "meaning": "làm các thủ tục nhập viện điều trị",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 743,
+    "word": "しゅうりのてつづきをします",
+    "romaji": "shuuri no tetsuduki wo shimasu",
+    "meaning": "làm thủ tục đăng ký sửa xe bảo dưỡng",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 744,
+    "word": "しゅっぱつのじかんをまつ",
+    "romaji": "shuppatsu no jikan wo matsu",
+    "meaning": "chờ đợi đến giờ xuất phát lên đường",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 745,
+    "word": "はっぴょうのじゅんびをします",
+    "romaji": "happyou no junbi wo shimasu",
+    "meaning": "làm công tác chuẩn bị cho buổi báo cáo",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 746,
+    "word": "りゅうがくのじゅんびをします",
+    "romaji": "ryuugaku no junbi wo shimasu",
+    "meaning": "chuẩn bị mọi thứ để đi du học xa",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 747,
+    "word": "じょうほうをインターネットでみる",
+    "romaji": "jouhou wo intaanetto de miru",
+    "meaning": "tra cứu thông tin hữu ích trên mạng",
+    "difficulty": "hard",
+    "length": 16
+  },
+  {
+    "id": 748,
+    "word": "じょうしにおちゃをだします",
+    "romaji": "joushi ni ocha wo dashimasu",
+    "meaning": "tôi bưng trà nóng mời sếp dùng",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 749,
+    "word": "ちゅうもんのカードをだします",
+    "romaji": "chuumon no kaado wo dashimasu",
+    "meaning": "tôi đưa chiếc thẻ gọi món ăn ra",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 750,
+    "word": "ちょきんをびょういんのために",
+    "romaji": "chokin wo byouin no tame ni",
+    "meaning": "tiết kiệm tiền phòng khi đi bệnh viện",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 751,
+    "word": "りょうきんをかいしゃにはらう",
+    "romaji": "ryoukin wo kaisha ni harau",
+    "meaning": "thanh toán phí dịch vụ cho công ty",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 752,
+    "word": "ちゅうごくのりょこうにいく",
+    "romaji": "chuugoku no ryokou ni iku",
+    "meaning": "lên kế hoạch đi du lịch Trung Quốc",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 753,
+    "word": "じょせいのにんきしょうひん",
+    "romaji": "josei no ninki shouhin",
+    "meaning": "sản phẩm đang được phụ nữ ưa chuộng",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 754,
+    "word": "じょゆうのしゅみはなんですか",
+    "romaji": "joyou no shumi wa nan desu ka",
+    "meaning": "sở thích của cô diễn viên là gì",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 755,
+    "word": "ぎゅうにくのりょうりをつくる",
+    "romaji": "gyuuniku no ryouri wo tsukuru",
+    "meaning": "chế biến món ngon từ thịt bò sạch",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 756,
+    "word": "おちゃをつくっておくります",
+    "romaji": "ocha wo tsukutte okurimasu",
+    "meaning": "tôi tự tay pha trà gửi biếu ông bà",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 757,
+    "word": "しゅみのかつどうにしゅっせき",
+    "romaji": "shumi no katsudou ni shusseki",
+    "meaning": "tham dự hoạt động câu lạc bộ yêu thích",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 758,
+    "word": "しゅくだいをじむしょでやる",
+    "romaji": "shukudai wo jimusho de yaru",
+    "meaning": "làm bài tập về nhà ở phòng văn phòng",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 759,
+    "word": "しょくじのじかんをたのしむ",
+    "romaji": "shokuji no jikan wo tanoshimu",
+    "meaning": "tận hưởng thời gian dùng bữa tối vui vẻ",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 760,
+    "word": "じしょをじむしょでかいます",
+    "romaji": "jisho wo jimusho de kaimasu",
+    "meaning": "tôi mua sách từ điển tại văn phòng",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 761,
+    "word": "りょうりをしょくどうでだす",
+    "romaji": "ryouri wo shokudou de dasu",
+    "meaning": "phục vụ món ăn nóng hổi ở nhà ăn",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 762,
+    "word": "きょねんのなつにりょこうする",
+    "romaji": "kyonen no natsu ni ryokousuru",
+    "meaning": "đi du lịch nghỉ mát vào mùa hè năm ngoái",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 763,
+    "word": "ひゃくえんショップでかう",
+    "romaji": "hyakuen shoppu de kau",
+    "meaning": "mua đồ tiện ích ở cửa hàng 100 yên",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 764,
+    "word": "びょうきのためにかいしゃをやすむ",
+    "romaji": "byouki no tame ni kaisha wo yasumu",
+    "meaning": "xin nghỉ làm việc ở công ty vì bị ốm",
+    "difficulty": "hard",
+    "length": 16
+  },
+  {
+    "id": 765,
+    "word": "じてんしゃをしゅうりします",
+    "romaji": "jitensha wo shuurishimasu",
+    "meaning": "tôi tự tay sửa chiếc xe đạp bị tuột xích",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 766,
+    "word": "じどうしゃをかいしゃでかう",
+    "romaji": "jidousha wo kaisha de kaimasu",
+    "meaning": "tôi mua chiếc xe ô tô thông qua công ty",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 767,
+    "word": "しゃちょうにじむしょであう",
+    "romaji": "shachou ni jimusho ni au",
+    "meaning": "tôi vào gặp giám đốc ở văn phòng làm việc",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 768,
+    "word": "しゅくだいをおちゃをのみながら",
+    "romaji": "shukudai wo ocha wo nominagara",
+    "meaning": "vừa làm bài tập vừa nhâm nhi tách trà",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 769,
+    "word": "しゃしんをカメラでとります",
+    "romaji": "shashin wo kamera de torimasu",
+    "meaning": "chụp những bức hình đẹp bằng máy ảnh",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 770,
+    "word": "しゅみのほんをとしょかんでよむ",
+    "romaji": "shumi no hon wo toshokan de yomu",
+    "meaning": "đọc cuốn sách sở thích tại thư viện",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 771,
+    "word": "じしょをつかってべんきょう",
+    "romaji": "jisho wo tsukatte benkyou",
+    "meaning": "tra từ học bài bằng cách dùng từ điển",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 772,
+    "word": "りょうりをつくってべんきょう",
+    "romaji": "ryouri wo tsukutte benkyou",
+    "meaning": "học cách tự nấu nướng các món ăn ngon",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 773,
+    "word": "ひゃくえんをじゃぐちに落とす",
+    "romaji": "hyakuen wo jaguchi ni otosu",
+    "meaning": "lỡ làm rơi đồng một trăm yên vào vòi nước",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 774,
+    "word": "びょうきがなおってうれしい",
+    "romaji": "byouki ga naotte ureshii",
+    "meaning": "vui mừng khôn xiết vì đã chữa khỏi bệnh",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 775,
+    "word": "かいしゃにじてんしゃでいく",
+    "romaji": "kaisha ni jitensha de iku",
+    "meaning": "đi làm việc hàng ngày bằng chiếc xe đạp",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 776,
+    "word": "じゅぎょうをしゅっせきします",
+    "romaji": "jugyou wo shusseki shimasu",
+    "meaning": "tôi đi học và tham gia đầy đủ các tiết",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 777,
+    "word": "じゅんびをいっしょにしましょう",
+    "romaji": "junbi wo issho ni shimashou",
+    "meaning": "chúng ta hãy cùng nhau làm công tác chuẩn bị",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 778,
+    "word": "しょくどうでおちゃをのみます",
+    "romaji": "shokudou de ocha wo nomimasu",
+    "meaning": "tôi ngồi uống chén trà tại phòng nhà ăn",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 779,
+    "word": "しょくじをしゅちょうとする",
+    "romaji": "shokuji wo shushou to suru",
+    "meaning": "dùng bữa tiệc tối cùng với thủ tướng chính phủ",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 780,
+    "word": "しょうゆをちょうしょくにつかう",
+    "romaji": "shouyu wo choushoku ni tsukau",
+    "meaning": "dùng nước tương nêm nếm vào bữa sáng",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 781,
+    "word": "ぎゅうにゅうをちゅうもんする",
+    "romaji": "gyuunyuu wo chuumon suru",
+    "meaning": "gọi một ly sữa bò nóng từ quầy phục vụ",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 782,
+    "word": "じゃがいもをしょうゆでにつめる",
+    "romaji": "jagaimo wo shouyu de nitsumeru",
+    "meaning": "khoai tây kho đậm đà với nước tương",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 783,
+    "word": "にゅうがくきねんのしゃしん",
+    "romaji": "nyuugaku kinen no shashin",
+    "meaning": "chụp bức ảnh kỷ niệm ngày nhập học mới",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 784,
+    "word": "にゅういんちゅうのしゅくだい",
+    "romaji": "nyuuinchuu no shukudai",
+    "meaning": "tranh thủ làm bài tập trong lúc nằm viện",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 785,
+    "word": "きゅうこうでりょこうにいく",
+    "romaji": "kyuukou de ryokou ni iku",
+    "meaning": "đi du lịch bằng đoàn tàu hỏa chạy nhanh",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 786,
+    "word": "きゅうじつにしゃしんをとる",
+    "romaji": "kyuujitsu ni shashin wo toru",
+    "meaning": "đi chụp ảnh phong cảnh vào ngày nghỉ lễ",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 787,
+    "word": "しょうかいのてがみをかく",
+    "romaji": "shoukai no tegami wo kaku",
+    "meaning": "viết một bức thư giới thiệu gửi đối tác",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 788,
+    "word": "しょうらいはきょうしになる",
+    "romaji": "shourai wa kyoushi ni naru",
+    "meaning": "tương lai tôi muốn trở thành thầy giáo dạy",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 789,
+    "word": "ちゅういしながらうんてんする",
+    "romaji": "chuui shinagara untensuru",
+    "meaning": "chú ý quan sát trong khi đang lái xe ô tô",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 790,
+    "word": "ちゅうしゃのじゅんびをします",
+    "romaji": "chuusha no junbi wo shimasu",
+    "meaning": "bác sĩ chuẩn bị dụng cụ để tiêm thuốc",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 791,
+    "word": "りゅうがくのしょうがくきん",
+    "romaji": "ryuugaku no shougakukin",
+    "meaning": "nhận học bổng hỗ trợ để đi du học sinh",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 792,
+    "word": "りょかんでおいしいりょうり",
+    "romaji": "ryokan de oishii rouri",
+    "meaning": "thưởng thức món ăn ngon tại nhà trọ Nhật",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 793,
+    "word": "はっぴょうをしゅうちゅうしてきく",
+    "romaji": "happyou wo shuuchuushite kiku",
+    "meaning": "tập trung lắng nghe bài phát biểu báo cáo",
+    "difficulty": "hard",
+    "length": 16
+  },
+  {
+    "id": 794,
+    "word": "ちゅうごくのりょうりをたべる",
+    "romaji": "chuugoku no ryouri wo taberu",
+    "meaning": "thưởng thức hương vị món ăn Trung Quốc",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 795,
+    "word": "じょせいのじどうしゃうんてん",
+    "romaji": "josei no jidousha unten",
+    "meaning": "người phụ nữ tự tay lái chiếc xe ô tô",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 796,
+    "word": "じょゆうのしゃしんをあつめる",
+    "romaji": "joyou no shashin wo atsumeru",
+    "meaning": "sưu tập những hình ảnh đẹp của diễn viên",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 797,
+    "word": "ぎょうざをしょくどうでつくる",
+    "romaji": "gyouza wo shokudou de tsukuru",
+    "meaning": "tự làm bánh sủi cảo trong bếp nhà ăn",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 798,
+    "word": "じどうしゃをじてんしゃで追う",
+    "romaji": "jidousha wo jitensha de ou",
+    "meaning": "đạp xe đạp đuổi theo chiếc xe ô tô chạy",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 799,
+    "word": "じてんしゃをしょうらいかう",
+    "romaji": "jitensha wo shourai kau",
+    "meaning": "tương lai tôi sẽ mua một chiếc xe đạp mới",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 800,
+    "word": "きゅうりをしょうゆでたべる",
+    "romaji": "kyuuri wo shouyu de taberu",
+    "meaning": "ăn quả dưa chuột chấm với nước tương đậm",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 801,
+    "word": "きょうしつにじどうしゃではいる",
+    "romaji": "kyoushitsu ni jidousha de hairu",
+    "meaning": "lỡ lái chiếc xe ô tô đâm vào phòng học",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 802,
+    "word": "きょうしとしゃちょうの会談",
+    "romaji": "kyoushi to shachou no kaidan",
+    "meaning": "cuộc trò chuyện giữa thầy giáo và giám đốc",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 803,
+    "word": "ぎゅうにくのりょうりをちゅうもん",
+    "romaji": "gyuuniku no ryouri wo chuumon",
+    "meaning": "gọi món ăn chế biến từ thịt bò thượng hạng",
+    "difficulty": "hard",
+    "length": 16
+  },
+  {
+    "id": 804,
+    "word": "しゃちょうのしゃしんをみる",
+    "romaji": "shachou no shashin wo miru",
+    "meaning": "xem bức ảnh chụp chân dung của sếp giám đốc",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 805,
+    "word": "しゅうりのためにびょういんにいく",
+    "romaji": "shuuri no tame ni byouin ni iku",
+    "meaning": "đến sửa chữa hệ thống nước của bệnh viện",
+    "difficulty": "hard",
+    "length": 16
+  },
+  {
+    "id": 806,
+    "word": "しゅっぱつのじゅんびをする",
+    "romaji": "shuppatsu no junbi wo suru",
+    "meaning": "chuẩn bị hành lý sẵn sàng để xuất phát đi",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 807,
+    "word": "しゅっせきしゃのしゃしんをとる",
+    "romaji": "shussekisha no shashin wo toru",
+    "meaning": "chụp ảnh lưu niệm những người tham gia họp",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 808,
+    "word": "しょうせつをきょうしつでよむ",
+    "romaji": "shousetsu wo kyoushitsu de yomu",
+    "meaning": "ngồi đọc tiểu thuyết ngay trong lớp học bài",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 809,
+    "word": "しょうてんでおちゃをかいます",
+    "romaji": "shouten de ocha wo kaimasu",
+    "meaning": "tôi mua hộp trà xanh tại cửa tiệm tạp hóa",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 810,
+    "word": "しょうひんのしゅうりをたのむ",
+    "romaji": "shouhin no shuuri wo tanomu",
+    "meaning": "yêu cầu bảo hành sửa chữa sản phẩm bị lỗi",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 811,
+    "word": "じょうぶなじてんしゃをかう",
+    "romaji": "joubuna jitensha wo kau",
+    "meaning": "mua một chiếc xe đạp rất bền bỉ và chắc",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 812,
+    "word": "じょうほうをしゅしょうにつたえる",
+    "romaji": "jouhou wo shushou ni tsutaeru",
+    "meaning": "báo cáo thông tin khẩn cho ngài thủ tướng",
+    "difficulty": "hard",
+    "length": 16
+  },
+  {
+    "id": 813,
+    "word": "じょうしにおちゃをだすじゅんび",
+    "romaji": "joushi ni ocha wo dasu junbi",
+    "meaning": "chuẩn bị bưng trà nóng ra mời sếp giám đốc",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 814,
+    "word": "じょしがじてんしゃにのる",
+    "romaji": "joshi ga jitensha ni noru",
+    "meaning": "bạn nữ đang tập đi chiếc xe đạp leo núi",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 815,
+    "word": "じゃぐちをしゅうりします",
+    "romaji": "jaguchi wo shuurishimasu",
+    "meaning": "tôi tự tay tháo vòi nước ra để sửa chữa",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 816,
+    "word": "じゃまなのでじてんしゃを動かす",
+    "romaji": "jama nado de jitensha wo ugokasu",
+    "meaning": "dịch xe đạp đi chỗ khác vì đang chắn đường",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 817,
+    "word": "ちゃわんでおちゃをのみます",
+    "romaji": "chawan de ocha wo nomimasu",
+    "meaning": "uống nước chè xanh từ chiếc bát gốm sứ",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 818,
+    "word": "ちゅうもんのしゅうりをする",
+    "romaji": "chuumon no shuuri wo suru",
+    "meaning": "tiến hành sửa chữa hàng theo đơn đặt sếp",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 819,
+    "word": "ちゅうねんのきょうしにあう",
+    "romaji": "chuunen no kyoushi ni au",
+    "meaning": "gặp mặt thầy giáo dạy học ở độ tuổi trung niên",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 820,
+    "word": "ちょうじょうでしゃしんをとる",
+    "romaji": "choujou de shashin wo toru",
+    "meaning": "chụp một bức ảnh phong cảnh trên đỉnh núi cao",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 821,
+    "word": "ちょうしのいいじてんしゃ",
+    "romaji": "choushi no ii jitensha",
+    "meaning": "chiếc xe đạp đang hoạt động trơn tru rất tốt",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 822,
+    "word": "ちょうせんをしゅちょうとする",
+    "romaji": "chousen wo shushou to suru",
+    "meaning": "ngài thủ tướng đưa ra những thử thách lớn mới",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 823,
+    "word": "ちょくせつしゃちょうにあう",
+    "romaji": "chokusetsu shachou ni au",
+    "meaning": "tôi đến gặp trực tiếp giám đốc để trình bày",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 824,
+    "word": "にゅうじょのかいしゃにはいる",
+    "romaji": "nyuujo no kaisha ni hairu",
+    "meaning": "làm thủ tục để được đi vào bên trong công ty",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 825,
+    "word": "にゅうりょくをきょうしつでする",
+    "romaji": "nyuuryoku wo kyoushitsu de suru",
+    "meaning": "thực hiện nhập liệu thông tin ngay tại lớp",
+    "difficulty": "hard",
+    "length": 15
+  },
+  {
+    "id": 826,
+    "word": "ひょうかをじょうしにたのむ",
+    "romaji": "hyouka wo joushi ni tanomu",
+    "meaning": "yêu cầu sếp cấp trên đưa ra đánh giá năng lực",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 827,
+    "word": "びょういんにじどうしゃでいく",
+    "romaji": "byouin ni jidousha de iku",
+    "meaning": "đi đến bệnh viện khám bệnh bằng xe hơi riêng",
+    "difficulty": "hard",
+    "length": 14
+  },
+  {
+    "id": 828,
+    "word": "びょうよみをちゅうしする",
+    "romaji": "byouyomi wo chuushi suru",
+    "meaning": "quyết định dừng việc đếm ngược thời gian lại",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 829,
+    "word": "みゃくをびょういんではかる",
+    "romaji": "myaku wo byouin de hakarimasu",
+    "meaning": "bác sĩ đo nhịp mạch đập ở trong bệnh viện",
+    "difficulty": "hard",
+    "length": 13
+  },
+  {
+    "id": 830,
+    "word": "みょうじをしんぱいします",
+    "romaji": "myouji wo shinpaishimasu",
+    "meaning": "tôi lo lắng tự hỏi không biết họ của anh ấy là gì",
+    "difficulty": "hard",
+    "length": 12
+  },
+  {
+    "id": 831,
+    "word": "りゅうのりょうりをつくる",
+    "romaji": "ryuu no ryouri wo tsukuru",
+    "meaning": "chuẩn bị nấu món ăn trang trí hình con rồng",
+    "difficulty": "hard",
+    "length": 12
   }
 ];

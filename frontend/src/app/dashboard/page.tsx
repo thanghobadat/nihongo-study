@@ -63,6 +63,7 @@ export default function UserDashboard() {
 
   // Navigation Items corresponding to the 7 Sheets
   const menuItems = [
+    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: true },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
@@ -404,9 +405,9 @@ export default function UserDashboard() {
       <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 md:relative md:translate-x-0 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div>
+        <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           {/* Logo Title & Mobile Close button */}
-          <div className="flex items-center justify-between mb-8 px-2">
+          <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
               Minna Nihongo
             </span>
@@ -418,14 +419,18 @@ export default function UserDashboard() {
             </button>
           </div>
 
-          {/* 7 Category items */}
-          <nav className="space-y-1.5">
+          {/* Category items */}
+          <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id === 'roadmap') {
+                  if (item.id === 'guide') {
+                    router.push('/guide');
+                  } else if (item.id === 'dashboard') {
+                    // Stay here
+                  } else if (item.id === 'roadmap') {
                     router.push('/roadmap');
                   } else if (item.id === 'kana') {
                     router.push('/kana');
@@ -447,7 +452,7 @@ export default function UserDashboard() {
         </div>
 
         {/* Bottom profile component */}
-        <div className="pt-6 border-t border-slate-900/80 space-y-4">
+        <div className="pt-6 border-t border-slate-900/80 space-y-4 shrink-0">
           <div className="flex items-center space-x-3 px-2">
             <div
               className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700/50 flex items-center justify-center overflow-hidden"

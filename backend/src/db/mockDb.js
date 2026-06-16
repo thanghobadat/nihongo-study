@@ -969,7 +969,7 @@ const vocabulary = [
         "id":  51,
         "lesson_id":  2,
         "hiragana":  "のーと",
-        "romaji":  "nōto",
+        "romaji":  "nooto (nōto)",
         "vietnamese_meaning":  "vở, sổ tay",
         "word_type":  "noun",
         "japanese_example":  "これは私のノートです。",
@@ -981,7 +981,7 @@ const vocabulary = [
         "id":  52,
         "lesson_id":  2,
         "hiragana":  "てちょう",
-        "romaji":  "techō",
+        "romaji":  "techou (techō)",
         "vietnamese_meaning":  "sổ tay",
         "word_type":  "noun",
         "japanese_example":  "手帳に予定を書きます。",
@@ -1005,7 +1005,7 @@ const vocabulary = [
         "id":  54,
         "lesson_id":  2,
         "hiragana":  "かーど",
-        "romaji":  "kādo",
+        "romaji":  "kaado (kādo)",
         "vietnamese_meaning":  "thẻ, card",
         "word_type":  "noun",
         "japanese_example":  "これはクレジットカードです。",
@@ -1029,7 +1029,7 @@ const vocabulary = [
         "id":  56,
         "lesson_id":  2,
         "hiragana":  "ぼーるぺん",
-        "romaji":  "bōrupen",
+        "romaji":  "boorupen (bōrupen)",
         "vietnamese_meaning":  "bút bi",
         "word_type":  "noun",
         "japanese_example":  "ボールペンで書きます。",
@@ -1041,7 +1041,7 @@ const vocabulary = [
         "id":  57,
         "lesson_id":  2,
         "hiragana":  "しゃーぷぺんしる",
-        "romaji":  "shāpupenshiru",
+        "romaji":  "shaapupenshiru (shāpupenshiru)",
         "vietnamese_meaning":  "bút chì kim",
         "word_type":  "noun",
         "japanese_example":  "シャープペンシルは便利です。",
@@ -1101,7 +1101,7 @@ const vocabulary = [
         "id":  62,
         "lesson_id":  2,
         "hiragana":  "しーでぃー",
-        "romaji":  "shīdī",
+        "romaji":  "shiidii (shīdī)",
         "vietnamese_meaning":  "đĩa CD",
         "word_type":  "noun",
         "japanese_example":  "CDを聴きます。",
@@ -1149,7 +1149,7 @@ const vocabulary = [
         "id":  66,
         "lesson_id":  2,
         "hiragana":  "こんぴゅーた",
-        "romaji":  "konpyūta",
+        "romaji":  "konpyuuta (konpyūta)",
         "vietnamese_meaning":  "máy vi tính",
         "word_type":  "noun",
         "japanese_example":  "コンピュータは新しいです。",
@@ -1161,7 +1161,7 @@ const vocabulary = [
         "id":  67,
         "lesson_id":  2,
         "hiragana":  "じどうしゃ",
-        "romaji":  "jidōsha",
+        "romaji":  "jidousha (jidōsha)",
         "vietnamese_meaning":  "ô tô, xe hơi",
         "word_type":  "noun",
         "japanese_example":  "自動車を運転します。",
@@ -1197,7 +1197,7 @@ const vocabulary = [
         "id":  70,
         "lesson_id":  2,
         "hiragana":  "ちょこれーと",
-        "romaji":  "chokorēto",
+        "romaji":  "chokoreeto (chokorēto)",
         "vietnamese_meaning":  "sô-cô-la",
         "word_type":  "noun",
         "japanese_example":  "チョコレートを食べます。",
@@ -1209,7 +1209,7 @@ const vocabulary = [
         "id":  71,
         "lesson_id":  2,
         "hiragana":  "こーひー",
-        "romaji":  "kōhī",
+        "romaji":  "koohii (kōhī)",
         "vietnamese_meaning":  "cà phê",
         "word_type":  "noun",
         "japanese_example":  "毎日コーヒーを飲みます。",
@@ -7501,7 +7501,7 @@ const kanji = [
         "lesson_id":  2,
         "character":  "雑",
         "stroke_count":  "14",
-        "onyomi":  "zatsu, zō",
+        "onyomi":  "zatsu, zou (zō)",
         "kunyomi":  "(none)",
         "sino_vietnamese":  "Tạp",
         "vietnamese_meaning":  "tạp nham, pha trộn",
@@ -12008,7 +12008,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 1: Chào hỏi lần đầu gặp gỡ",
         "speaker":  "ミラー",
         "japanese":  "初めまして。ミラー です。アメリカ から来ました。こちらこそどうぞよろしく。",
-        "romaji":  "Hajimemashite. Mirā desu. Amerika kara kimashita. Kochira koso dōzo yoroshiku.",
+        "romaji":  "Hajimemashite. Miraa (Mirā) desu. Amerika kara kimashita. Kochira koso douzo (dōzo) yoroshiku.",
         "vietnamese":  "Rất vui được gặp bạn. Tôi là Miller. Tôi đến từ Mỹ. Chính tôi mới là người cần giúp đỡ."
     },
     {
@@ -12017,7 +12017,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 2: Hỏi tuổi tác",
         "speaker":  "ナム",
         "japanese":  "失礼ですが、ミラーさんは おいくつ（何歳）ですか。",
-        "romaji":  "Shitsurei desu ga, Mirā-san wa oikutsu (nansai) desu ka.",
+        "romaji":  "Shitsurei desu ga, Miraa (Mirā)-san wa oikutsu (nansai) desu ka.",
         "vietnamese":  "Xin lỗi, anh Miller bao nhiêu tuổi ạ?"
     },
     {
@@ -12062,7 +12062,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 3: Hỏi nghề nghiệp",
         "speaker":  "ミラー",
         "japanese":  "そうですか。私も 会社員 です。 IMC の社員です。",
-        "romaji":  "Sō desu ka. Watashi mo kaishain desu. IMC no shain desu.",
+        "romaji":  "Sou (Sō) desu ka. Watashi mo kaishain desu. IMC no shain desu.",
         "vietnamese":  "Thế à. Tôi cũng là nhân viên công ty. Tôi là nhân viên của IMC."
     },
     {
@@ -12116,7 +12116,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 1: Tặng quà lưu niệm (Omiyage)",
         "speaker":  "ナム",
         "japanese":  "あ、ありがとうございます。こちらは何ですか。",
-        "romaji":  "A, arigatō gozaimasu. Kore wa nan desu ka.",
+        "romaji":  "A, arigatou (arigatō) gozaimasu. Kore wa nan desu ka.",
         "vietnamese":  "A, xin cảm ơn rất nhiều. Đây là cái gì thế?"
     },
     {
@@ -12125,7 +12125,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 1: Tặng quà lưu niệm (Omiyage)",
         "speaker":  "サントス",
         "japanese":  "チョコレートです。日本語で「チョコレート」ですよ。どうぞ。",
-        "romaji":  "Chokorēto desu. Nihongo de \"Chokorēto\" desu yo. Dōzo.",
+        "romaji":  "Chokoreeto (Chokorēto) desu. Nihongo de \"Chokoreeto (Chokorēto)\" desu yo. Douzo (Dōzo).",
         "vietnamese":  "Sô-cô-la đấy. Trong tiếng Nhật gọi là \"chokore-to\" đấy. Mời anh/chị."
     },
     {
@@ -12134,7 +12134,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 1: Tặng quà lưu niệm (Omiyage)",
         "speaker":  "ナム",
         "japanese":  "そうですか。どうもありがとうございます。",
-        "romaji":  "Sō desu ka. Dōmo arigatō gozaimasu.",
+        "romaji":  "Sou (Sō) desu ka. Doumo (Dōmo) arigatou (arigatō) gozaimasu.",
         "vietnamese":  "Thế à. Xin cảm ơn rất nhiều."
     },
     {
@@ -12152,7 +12152,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 2: Hỏi về đồ vật xung quanh (Cái này/đó/kia)",
         "speaker":  "サントス",
         "japanese":  "これは雑誌です。自動車の雑誌です。",
-        "romaji":  "Kore wa zasshi desu. Jidōsha no zasshi desu.",
+        "romaji":  "Kore wa zasshi desu. Jidousha (Jidōsha) no zasshi desu.",
         "vietnamese":  "Đây là tạp chí. Tạp chí về ô tô."
     },
     {
@@ -12188,7 +12188,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 3: Hỏi về sở hữu đồ vật",
         "speaker":  "ナム",
         "japanese":  "いいえ、違います。あれはミラーさんのですよ。",
-        "romaji":  "Iie, chigaimasu. Are wa Mirā-san no desu yo.",
+        "romaji":  "Iie, chigaimasu. Are wa Miraa (Mirā)-san no desu yo.",
         "vietnamese":  "Không, không phải. Kia là của anh Miller đấy."
     },
     {
@@ -12197,7 +12197,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 4: Hỏi về sách giáo khoa tiếng Nhật",
         "speaker":  "ナム",
         "japanese":  "これは日本語ของ教科書ですか。",
-        "romaji":  "Kore wa nihongo no kyōkasho desu ka.",
+        "romaji":  "Kore wa nihongo no kyoukasho (kyōkasho) desu ka.",
         "vietnamese":  "Đây là sách giáo khoa tiếng Nhật phải không?"
     },
     {
@@ -12206,7 +12206,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 4: Hỏi về sách giáo khoa tiếng Nhật",
         "speaker":  "サントス",
         "japanese":  "いいえ、違います。英語の教科書です。",
-        "romaji":  "Iie, chigaimasu. Eigo no kyōkasho desu.",
+        "romaji":  "Iie, chigaimasu. Eigo no kyoukasho (kyōkasho) desu.",
         "vietnamese":  "Không, không phải. Đó là sách giáo khoa tiếng Anh."
     },
     {
@@ -12242,7 +12242,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 5: Xác nhận đồ vật bị bỏ quên",
         "speaker":  "サントス",
         "japanese":  "はい、私のです。どうもありがとうございました。",
-        "romaji":  "Hai, watashi no desu. Dōmo arigatō gozaimashita.",
+        "romaji":  "Hai, watashi no desu. Doumo (Dōmo) arigatou (arigatō) gozaimashita.",
         "vietnamese":  "Vâng, của tôi đấy. Xin cảm ơn bạn rất nhiều."
     },
     {
@@ -12251,7 +12251,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 5: Xác nhận đồ vật bị bỏ quên",
         "speaker":  "ナム",
         "japanese":  "いいえ、どういたしまして。",
-        "romaji":  "Iie, dōitashimashite.",
+        "romaji":  "Iie, douitashimashite (dōitashimashite).",
         "vietnamese":  "Không có gì."
     },
     {
@@ -12278,7 +12278,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 1: Hỏi phòng họp",
         "speaker":  "ナム",
         "japanese":  "あ、どうもありがとうございます。",
-        "romaji":  "A, dōmo arigatō gozaimasu.",
+        "romaji":  "A, doumo (dōmo) arigatou (arigatō) gozaimasu.",
         "vietnamese":  "A, xin cảm ơn rất nhiều."
     },
     {
@@ -12305,7 +12305,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 2: Hỏi xuất xứ đồ vật",
         "speaker":  "ミラー",
         "japanese":  "そうですか。とてもいいですね。",
-        "romaji":  "Sō desu ka. Totemo ii desu ne.",
+        "romaji":  "Sou (Sō) desu ka. Totemo ii desu ne.",
         "vietnamese":  "Thế à. Đẹp thật đấy."
     },
     {
@@ -12323,7 +12323,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 3: Hỏi thăm quê quán",
         "speaker":  "ナム",
         "japanese":  "私の国は ナム です。ミラーさんは？",
-        "romaji":  "Watashi no kuni wa Namu desu. Mirā-san wa?",
+        "romaji":  "Watashi no kuni wa Namu desu. Miraa (Mirā)-san wa?",
         "vietnamese":  "Đất nước của tôi là ナム. Còn anh Miller?"
     },
     {
@@ -12350,7 +12350,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 4: Hỏi giá tiền \u0026 Mua hàng",
         "speaker":  "ミラー",
         "japanese":  "はい,どうぞ。これは フランスの ワイン です。",
-        "romaji":  "Hai, dōzo. Kore wa Furansu no wain desu.",
+        "romaji":  "Hai, douzo (dōzo). Kore wa Furansu no wain desu.",
         "vietnamese":  "Vâng, xin mời. Đây là rượu vang của Pháp."
     },
     {
@@ -12395,7 +12395,7 @@ const kaiwaDialog = [
         "topic":  "Hội thoại 5: Đi thang máy hay thang bộ",
         "speaker":  "ミラー",
         "japanese":  "食堂は 地下1階 です。エレベーターで行くといいですよ。",
-        "romaji":  "Shokudou wa chika-ichikyū desu. Erebeetaa de iku to ii desu yo.",
+        "romaji":  "Shokudou wa chika-ichikyuu (ichikyū) desu. Erebeetaa de iku to ii desu yo.",
         "vietnamese":  "Nhà ăn ở tầng hầm 1. Đi bằng thang máy thì tiện đấy."
     },
     {
