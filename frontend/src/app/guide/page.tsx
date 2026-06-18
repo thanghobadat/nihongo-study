@@ -32,9 +32,9 @@ export default function GuidePage() {
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
   ];
 
@@ -155,7 +155,7 @@ export default function GuidePage() {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto p-6 pt-20 md:p-8 lg:p-10 space-y-8 relative">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 md:p-8 lg:p-10 space-y-8 relative">
         
         {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
@@ -283,9 +283,9 @@ export default function GuidePage() {
                 <div className="relative">
                   <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-900 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 1</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Xác định mẫu câu cần học</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Xác định mẫu câu chính</h4>
                   <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    Truy cập **Lộ trình học** để có cái nhìn tổng quan về các cấu trúc ngữ pháp chính cần chinh phục trong bài.
+                    Vào **Lộ trình học** để nắm bắt các cấu trúc ngữ pháp quan trọng và cấu trúc câu cốt lõi của bài.
                   </p>
                 </div>
 
@@ -293,9 +293,9 @@ export default function GuidePage() {
                 <div className="relative">
                   <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-900 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 2</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Học từ vựng theo mẫu câu</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Học Từ vựng & Kanji tương ứng</h4>
                   <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    Click vào nút **"Học từ vựng mới"** dưới từng mẫu câu để học riêng các từ bổ trợ trực tiếp sử dụng trong cấu trúc ngữ pháp đó. Nghe phát âm chuẩn và lưu trạng thái từ học tập.
+                    Xem danh sách chi tiết ở tab **Từ vựng** và **Chữ Hán (Kanji)** để ghi nhớ mặt chữ, ngữ nghĩa cùng cách phát âm giọng bản xứ.
                   </p>
                 </div>
 
@@ -303,9 +303,9 @@ export default function GuidePage() {
                 <div className="relative">
                   <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-900 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 3</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Ôn tập củng cố từ vựng</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Ôn tập từ vựng chuyên sâu</h4>
                   <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    Nhận diện mặt chữ nhanh qua **Flashcards**, sau đó chuyển sang tab **Ôn tập từ vựng** để gõ tự luận giúp chuyển hóa từ vựng vào trí nhớ dài hạn.
+                    Chuyển sang tab **Ôn tập từ vựng** để làm bài tự luận gõ phím, trắc nghiệm hình ảnh hoặc chơi game trắc nghiệm phản xạ Speedrun 10 giây.
                   </p>
                 </div>
 
@@ -313,9 +313,9 @@ export default function GuidePage() {
                 <div className="relative">
                   <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-900 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 4</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Áp dụng vào mẫu câu (Sub-drill)</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Rèn luyện phản xạ qua Flashcards</h4>
                   <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    Quay lại **Lộ trình học**, click nút **"Luyện tập mẫu câu"** tương ứng để thực hành thay từ vựng vào ngoặc đơn, nghe phát âm câu hoàn chỉnh để nắm vững ngữ pháp.
+                    Lật thẻ trong **Flashcards** để củng cố khả năng nhận diện mặt chữ nhanh và bảo đảm bạn đã thuộc lòng từ vựng trước khi thực hành viết câu.
                   </p>
                 </div>
 
@@ -323,9 +323,9 @@ export default function GuidePage() {
                 <div className="relative">
                   <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-900 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 5</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Luyện giao tiếp thực tế (Kaiwa)</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-200">Thế từ vào mẫu câu & Luyện Kaiwa</h4>
                   <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    Sau khi hoàn thành tất cả cấu trúc ngữ pháp và luyện tập mẫu câu, chuyển sang phân hệ **Luyện nói (Kaiwa)** để đóng vai nhân vật đối thoại thực tế và rèn luyện kỹ thuật Shadowing.
+                    Quay lại **Lộ trình học** để làm bài luyện tập thế từ mẫu câu (Sub-drill), rồi chuyển tiếp sang **Luyện nói (Kaiwa)** để nhập vai đàm thoại. Lặp lại quy trình đến khi làm chủ toàn bộ bài học!
                   </p>
                 </div>
 

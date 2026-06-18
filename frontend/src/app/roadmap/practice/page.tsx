@@ -63,9 +63,9 @@ export default function SubstitutionPracticePage() {
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
   ];
 
@@ -336,7 +336,7 @@ export default function SubstitutionPracticePage() {
       </aside>
 
       {/* 2. Main Content Area */}
-      <main className="flex-1 overflow-y-auto p-6 pt-20 md:p-8 lg:p-10 space-y-6 md:space-y-8">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 md:p-8 lg:p-10 space-y-6 md:space-y-8">
         
         {/* Header Back & Info row */}
         <div className="flex items-center justify-between border-b border-slate-900 pb-6">
