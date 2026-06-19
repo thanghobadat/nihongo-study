@@ -6,6 +6,7 @@ import { api } from '../../utils/api';
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/roadmapMapping';
 import { VOCAB_IMAGES } from '../../utils/vocabImages';
 import CourseSwitcher from '../../components/CourseSwitcher';
+import { getRadicalsString } from '../../utils/kanjiRadicals';
 
 // Defined types
 interface Lesson {
@@ -272,6 +273,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Search and Filter States
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
+  const [showRadicals, setShowRadicals] = useState<boolean>(false);
 
   // Flashcards States
   const [flashcardType, setFlashcardType] = useState<'vocab' | 'kanji'>('vocab');
@@ -2110,17 +2112,38 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 {/* 2. Search & Filters */}
-                <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-                  {/* Search box */}
-                  <div className="relative w-full sm:max-w-md">
-                    <input
-                      type="text"
-                      placeholder="Tìm chữ Hán, Hán Việt, Nghĩa, Onyomi, Kunyomi..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full bg-slate-900/60 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-base md:text-xs text-slate-200 focus:outline-none focus:border-blue-600/60"
-                    />
-                    <span className="absolute left-3.5 top-3.5 text-slate-400 text-sm">🔍</span>
+                <div className="flex flex-col xl:flex-row gap-4 items-center justify-between">
+                  <div className="flex flex-col sm:flex-row gap-3 items-center w-full xl:w-auto flex-1">
+                    {/* Search box */}
+                    <div className="relative w-full sm:max-w-md">
+                      <input
+                        type="text"
+                        placeholder="Tìm chữ Hán, Hán Việt, Nghĩa, Onyomi, Kunyomi..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-slate-900/60 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-base md:text-xs text-slate-200 focus:outline-none focus:border-blue-600/60"
+                      />
+                      <span className="absolute left-3.5 top-3.5 text-slate-400 text-sm">🔍</span>
+                    </div>
+
+                    {/* Học bộ thủ button */}
+                    <button
+                      onClick={() => router.push('/radicals')}
+                      className="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black rounded-xl border border-emerald-500/20 shadow-md active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+                    >
+                      <span>🉐</span> Ôn bộ thủ
+                    </button>
+
+                    {/* Toggle hiển thị bộ thủ */}
+                    <label className="flex items-center gap-2 text-xs font-bold text-slate-400 cursor-pointer shrink-0 select-none hover:text-slate-200 py-1 sm:py-0">
+                      <input
+                        type="checkbox"
+                        checked={showRadicals}
+                        onChange={(e) => setShowRadicals(e.target.checked)}
+                        className="w-4 h-4 rounded border-slate-800 text-blue-650 bg-slate-950 focus:ring-blue-600 cursor-pointer"
+                      />
+                      <span>Hiển thị bộ thủ</span>
+                    </label>
                   </div>
 
                   {/* Status filters */}
@@ -2354,6 +2377,19 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                             </div>
                                           </div>
 
+                                          {/* Radicals mapping display */}
+                                          {showRadicals && (
+                                            <div className="mt-3 p-2.5 rounded-lg bg-teal-950/20 border border-teal-900/35 flex items-start space-x-2">
+                                              <span className="text-xs shrink-0">🉐</span>
+                                              <div className="space-y-0.5">
+                                                <span className="block text-[8px] font-black text-teal-400 uppercase tracking-wider">Bộ thủ cấu thành</span>
+                                                <p className="text-[10px] text-slate-300 leading-relaxed">
+                                                  {getRadicalsString(item.character)}
+                                                </p>
+                                              </div>
+                                            </div>
+                                          )}
+
                                           {/* Mnemonic tip */}
                                           {item.mnemonic_tip && (
                                             <div className="mt-3 p-2.5 rounded-lg bg-slate-950/60 border border-slate-900/60 flex items-start space-x-2">
@@ -2509,6 +2545,19 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                           <span className="font-semibold text-slate-355">{item.kunyomi || '-'}</span>
                                         </div>
                                       </div>
+
+                                      {/* Radicals mapping display */}
+                                      {showRadicals && (
+                                        <div className="mt-3 p-2.5 rounded-lg bg-teal-950/20 border border-teal-900/35 flex items-start space-x-2">
+                                          <span className="text-xs shrink-0">🉐</span>
+                                          <div className="space-y-0.5">
+                                            <span className="block text-[8px] font-black text-teal-400 uppercase tracking-wider">Bộ thủ cấu thành</span>
+                                            <p className="text-[10px] text-slate-300 leading-relaxed">
+                                              {getRadicalsString(item.character)}
+                                            </p>
+                                          </div>
+                                        </div>
+                                      )}
 
                                       {/* Mnemonic tip */}
                                       {item.mnemonic_tip && (
@@ -2801,6 +2850,18 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                     <span className="font-semibold text-slate-300 font-sans">{(activeCard as KanjiItem)?.kunyomi || '-'}</span>
                                   </div>
                                 </div>
+
+                                {showRadicals && (
+                                  <div className="p-2 bg-teal-950/20 border border-teal-900/35 rounded-lg flex items-start gap-1">
+                                    <span className="text-xs shrink-0">🉐</span>
+                                    <div>
+                                      <span className="block text-[8px] text-teal-400 font-bold uppercase">Bộ thủ cấu thành:</span>
+                                      <span className="text-[10px] text-slate-200">
+                                        {getRadicalsString((activeCard as KanjiItem)?.character)}
+                                      </span>
+                                    </div>
+                                  </div>
+                                )}
 
                                 {(activeCard as KanjiItem)?.mnemonic_tip && (
                                   <p className="text-[11px] text-slate-400 leading-normal bg-slate-950/50 p-2 rounded-lg border border-slate-800/50 flex items-start gap-1">
