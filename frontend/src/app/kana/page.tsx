@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { hiraganaData, katakanaData, KanaItem } from './kanaData';
 import { combinedWordsData, CombinedWord } from './combinedWords';
+import CourseSwitcher from '../components/CourseSwitcher';
 
 // User structure
 interface User {
@@ -36,6 +37,7 @@ export default function AlphabetReviewPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
+  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'charts' | 'speedrun' | 'memory' | 'writing' | 'combined'>('charts');
   
@@ -311,10 +313,26 @@ export default function AlphabetReviewPage() {
     setTimeout(() => setToastMessage(null), 2500);
   };
 
+  // Tự động chuyển hướng về dashboard nếu chuyển sang khoá marugoto
+  useEffect(() => {
+    if (activeCourse === 'marugoto') {
+      localStorage.setItem('activeCourse', 'marugoto');
+      localStorage.setItem('selectedLessonId', '101');
+      router.push('/dashboard');
+    }
+  }, [activeCourse, router]);
+
   // Fetch initial profile & progress data
   useEffect(() => {
     const currentUser = api.getUser();
     setUser(currentUser);
+    
+    if (typeof window !== 'undefined') {
+      const storedCourse = localStorage.getItem('activeCourse') as 'minna' | 'marugoto';
+      if (storedCourse) {
+        setActiveCourse(storedCourse);
+      }
+    }
     
     const storedLessonId = localStorage.getItem('selectedLessonId');
     if (storedLessonId) {
@@ -992,7 +1010,7 @@ export default function AlphabetReviewPage() {
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Minna Nihongo
+              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -1002,8 +1020,20 @@ export default function AlphabetReviewPage() {
             </button>
           </div>
 
+          <CourseSwitcher
+            activeCourse={activeCourse}
+            onSwitch={(course) => {
+              setActiveCourse(course);
+            }}
+          />
+
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.map((item) => (
+            {menuItems.filter(item => {
+              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
+                return false;
+              }
+              return true;
+            }).map((item) => (
               <button
                 key={item.id}
                 onClick={() => {

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { api } from '../../utils/api';
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/roadmapMapping';
 import { VOCAB_IMAGES } from '../../utils/vocabImages';
+import CourseSwitcher from '../../components/CourseSwitcher';
 
 // Defined types
 interface Lesson {
@@ -212,17 +213,39 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const grammarIndex = grammarIndexParam !== null ? parseInt(grammarIndexParam) : null;
   const user = api.getUser();
 
+  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
+
+  useEffect(() => {
+    const isMarugoto = selectedLessonId >= 101;
+    setActiveCourse(isMarugoto ? 'marugoto' : 'minna');
+    localStorage.setItem('activeCourse', isMarugoto ? 'marugoto' : 'minna');
+  }, [selectedLessonId]);
+
   // Navigation Items corresponding to the 9 Sheets / Areas
+  const isMarugoto = selectedLessonId >= 101;
+  const isEvenMarugoto = isMarugoto && selectedLessonId % 2 === 0;
+
   const menuItems = [
-    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
+    ...(isMarugoto ? [] : [
+      { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false }
+    ]),
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+    ...(isMarugoto ? [
+      { name: 'Tự đánh giá (Can-do)', id: 'cando', icon: '🎯', active: currentTab === 'cando' },
+      ...(isEvenMarugoto ? [
+        { name: 'Văn hóa & Cuộc sống', id: 'culture', icon: '🗾', active: currentTab === 'culture' }
+      ] : [])
+    ] : [
+      { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
+      { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' }
+    ]),
+    ...(isMarugoto ? [] : [
+      { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+    ])
   ];
 
   const level = selectedLessonId <= 25 ? 'N5' : 'N4';
@@ -270,6 +293,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [showVietnamese, setShowVietnamese] = useState<boolean>(true);
   const [scriptMode, setScriptMode] = useState<'kanji' | 'hiragana'>('kanji');
   const [collapsedTopics, setCollapsedTopics] = useState<Record<string, boolean>>({});
+
+  // Cando & Culture States
+  const [candoChecks, setCandoChecks] = useState<any[]>([]);
+  const [cultureData, setCultureData] = useState<any[]>([]);
 
   // Flashcards Status Filter
   const [flashcardFilterStatuses, setFlashcardFilterStatuses] = useState<Record<string, boolean>>({
@@ -450,7 +477,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   useEffect(() => {
     async function loadLessons() {
       try {
-        const lessonData = await api.get('/api/user/lessons');
+        const course = selectedLessonId >= 101 ? 'marugoto' : 'minna';
+        const lessonData = await api.get(`/api/user/lessons?course=${course}`);
         if (Array.isArray(lessonData)) {
           setLessons(lessonData);
         }
@@ -459,7 +487,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       }
     }
     loadLessons();
-  }, []);
+  }, [selectedLessonId]);
 
   // Fetch vocabulary data when lesson updates
   const loadVocabData = useCallback(async () => {
@@ -520,6 +548,52 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       setLoading(false);
     }
   }, [selectedLessonId]);
+
+  // Fetch cando data when lesson updates
+  const loadCandoData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await api.get(`/api/user/lessons/${selectedLessonId}/cando`);
+      if (Array.isArray(data)) {
+        setCandoChecks(data);
+      }
+    } catch (error) {
+      console.error('Failed to load cando checks:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedLessonId]);
+
+  // Fetch culture data when lesson updates
+  const loadCultureData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await api.get(`/api/user/lessons/${selectedLessonId}/culture`);
+      if (Array.isArray(data)) {
+        setCultureData(data);
+      }
+    } catch (error) {
+      console.error('Failed to load culture content:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedLessonId]);
+
+  // Handle Can-do status changes
+  const handleCandoStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    try {
+      await api.post('/api/user/progress', {
+        item_type: 'cando',
+        item_id: itemId,
+        status: newStatus
+      });
+      setCandoChecks(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+      showNotification('Đã lưu đánh giá Can-do! 🎯');
+    } catch (error) {
+      console.error('Failed to update cando status:', error);
+      showNotification('Lỗi lưu trạng thái đánh giá.');
+    }
+  };
 
   // Dynamic Dialogue Substitution Helper
   const hasRoleplay = useMemo(() => {
@@ -767,8 +841,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     } else if (currentTab === 'practice') {
       loadVocabData();
       loadKanjiData();
+    } else if (currentTab === 'cando') {
+      loadCandoData();
+    } else if (currentTab === 'culture') {
+      loadCultureData();
     }
-  }, [currentTab, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData]);
+  }, [currentTab, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData, loadCandoData, loadCultureData]);
 
   // Load initial practice list once vocabulary or kanji is available
   useEffect(() => {
@@ -1129,6 +1207,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   // Filtered lists matching current level
   const filteredLessons = lessons.filter(l => {
+    if (isMarugoto) return true;
     if (level === 'N5') return l.id >= 1 && l.id <= 25;
     return l.id >= 26 && l.id <= 50;
   });
@@ -1326,7 +1405,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
           {/* Logo Title & Mobile Close button */}
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Minna Nihongo
+              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -1335,6 +1414,16 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               ✕
             </button>
           </div>
+
+          {/* Course Switcher */}
+          <CourseSwitcher
+            activeCourse={activeCourse}
+            onSwitch={(course) => {
+              localStorage.setItem('activeCourse', course);
+              const nextLessonId = course === 'minna' ? 1 : 101;
+              router.push(`/lessons/${nextLessonId}?tab=${currentTab}`);
+            }}
+          />
 
           {/* Navigation Menu */}
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
@@ -1413,6 +1502,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               {currentTab === 'flashcards' && 'THẺ NHỚ'}
               {currentTab === 'kaiwa' && 'LUYỆN NÓI'}
               {currentTab === 'practice' && 'LUYỆN TẬP'}
+              {currentTab === 'cando' && 'TỰ ĐÁNH GIÁ (CAN-DO)'}
+              {currentTab === 'culture' && 'VĂN HÓA & CUỘC SỐNG'}
               <span className="text-blue-400 ml-2">{lessonTitle}</span>
             </h1>
             <p className="text-xs sm:text-sm text-slate-400">
@@ -1422,28 +1513,30 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
           
           {/* Level Switcher N5/N4 & Lesson Dropdown Selector */}
           <div className="flex items-center space-x-3 self-start sm:self-auto">
-            <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-900 flex">
-              <button
-                onClick={() => handleLevelChange('N5')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                  level === 'N5'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                N5
-              </button>
-              <button
-                onClick={() => handleLevelChange('N4')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                  level === 'N4'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                N4
-              </button>
-            </div>
+            {!isMarugoto && (
+              <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-900 flex">
+                <button
+                  onClick={() => handleLevelChange('N5')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N5'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  N5
+                </button>
+                <button
+                  onClick={() => handleLevelChange('N4')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N4'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  N4
+                </button>
+              </div>
+            )}
 
             <select
               value={selectedLessonId}
@@ -3973,7 +4066,134 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {!['vocab', 'kanji', 'grammar', 'flashcards', 'kaiwa', 'practice'].includes(currentTab) && (
+            {currentTab === 'cando' && (
+              <div className="space-y-6 animate-fade-in">
+                {/* Header card */}
+                <div className="bg-slate-900/40 border border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-2">
+                  <h2 className="text-sm sm:text-md font-bold text-slate-200 flex items-center space-x-2">
+                    <span>🎯</span>
+                    <span>TỰ ĐÁNH GIÁ NĂNG LỰC (CAN-DO CHECK)</span>
+                  </h2>
+                  <p className="text-xs text-slate-400">
+                    Hãy đánh giá mức độ đạt được của bạn đối với các mục tiêu giao tiếp của bài học này theo chuẩn JF Standard.
+                  </p>
+                </div>
+
+                {/* Checklist items */}
+                <div className="space-y-4">
+                  {candoChecks.length === 0 ? (
+                    <div className="text-center py-12 text-slate-500 text-sm border border-dashed border-slate-800 rounded-2xl">
+                      📭 Chưa có danh sách mục tiêu Can-do cho bài học này.
+                    </div>
+                  ) : (
+                    candoChecks.map((item, idx) => (
+                      <div
+                        key={item.id}
+                        className="bg-slate-900/20 border border-slate-850 p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 backdrop-blur-sm"
+                      >
+                        <div className="space-y-1.5 flex-1">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-5 h-5 rounded-md bg-blue-950/60 border border-blue-900/40 text-blue-400 font-extrabold text-[10px] flex items-center justify-center shrink-0">
+                              {idx + 1}
+                            </span>
+                            <h3 className="text-sm font-bold text-slate-200">{item.text_vi}</h3>
+                          </div>
+                          <p className="text-xs text-slate-500 italic pl-7">{item.text}</p>
+                        </div>
+
+                        {/* Status controllers */}
+                        <div className="flex items-center gap-2 self-start md:self-auto pl-7 md:pl-0">
+                          <button
+                            onClick={() => handleCandoStatusChange(item.id, 'not_learned')}
+                            className={`px-3 py-1.5 rounded-xl text-[10px] font-bold border transition-all duration-200 cursor-pointer ${
+                              item.status === 'not_learned'
+                                ? 'bg-red-950/30 border-red-800/80 text-red-400 shadow-md shadow-red-900/20'
+                                : 'bg-slate-950/20 border-slate-900 text-slate-500 hover:text-slate-400 hover:border-slate-800'
+                            }`}
+                          >
+                            🔴 Chưa đạt
+                          </button>
+                          <button
+                            onClick={() => handleCandoStatusChange(item.id, 'learning')}
+                            className={`px-3 py-1.5 rounded-xl text-[10px] font-bold border transition-all duration-200 cursor-pointer ${
+                              item.status === 'learning'
+                                ? 'bg-amber-950/30 border-amber-800/80 text-amber-400 shadow-md shadow-amber-900/20'
+                                : 'bg-slate-950/20 border-slate-900 text-slate-500 hover:text-slate-400 hover:border-slate-800'
+                            }`}
+                          >
+                            🟡 Đạt một phần
+                          </button>
+                          <button
+                            onClick={() => handleCandoStatusChange(item.id, 'mastered')}
+                            className={`px-3 py-1.5 rounded-xl text-[10px] font-bold border transition-all duration-200 cursor-pointer ${
+                              item.status === 'mastered'
+                                ? 'bg-emerald-950/30 border-emerald-800/80 text-emerald-400 shadow-md shadow-emerald-900/20'
+                                : 'bg-slate-950/20 border-slate-900 text-slate-500 hover:text-slate-400 hover:border-slate-800'
+                            }`}
+                          >
+                            🟢 Đạt tốt
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+
+            {currentTab === 'culture' && (
+              <div className="space-y-6 animate-fade-in max-w-4xl mx-auto">
+                {/* Header info */}
+                <div className="bg-slate-900/40 border border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-1 text-center font-sans">
+                  <span className="text-xs font-black text-rose-500 uppercase tracking-widest block">Tìm hiểu văn hoá</span>
+                  <h2 className="text-xl font-black text-slate-100">CÂU CHUYỆN VĂN HÓA & CUỘC SỐNG NHẬT BẢN</h2>
+                </div>
+
+                {/* Culture contents */}
+                {cultureData.length === 0 ? (
+                  <div className="text-center py-12 text-slate-500 text-sm border border-dashed border-slate-800 rounded-2xl">
+                    📭 Chưa có nội dung Văn hóa & Cuộc sống cho bài học này.
+                  </div>
+                ) : (
+                  cultureData.map((item) => (
+                    <div
+                      key={item.id}
+                      className="bg-slate-900/20 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm space-y-6"
+                    >
+                      {/* Image header */}
+                      {item.image_url && (
+                        <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden group">
+                          <img
+                            src={item.image_url}
+                            alt={item.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex items-end p-6 md:p-8">
+                            <h3 className="text-xl md:text-2xl font-black text-white drop-shadow-lg leading-tight">
+                              {item.title}
+                            </h3>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Content text */}
+                      <div className="p-6 md:p-8 pt-0 space-y-4">
+                        {!item.image_url && (
+                          <h3 className="text-xl md:text-2xl font-black text-white leading-tight border-b border-slate-850 pb-4">
+                            {item.title}
+                          </h3>
+                        )}
+                        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans text-justify whitespace-pre-line">
+                          {item.content}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {!['vocab', 'kanji', 'grammar', 'flashcards', 'kaiwa', 'practice', 'cando', 'culture'].includes(currentTab) && (
               <div className="flex flex-col items-center justify-center py-20 text-slate-400 space-y-4 border border-dashed border-slate-800 rounded-2xl">
                 <span className="text-3xl">🚧</span>
                 <div className="text-center">

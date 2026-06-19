@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
+import CourseSwitcher from '../components/CourseSwitcher';
 
 // Defined types
 interface Lesson {
@@ -76,12 +77,18 @@ export default function UserDashboard() {
 
   // UI State
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
+  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [isLoadedFromLocalStorage, setIsLoadedFromLocalStorage] = useState<boolean>(false);
 
-  // Load selectedLessonId from localStorage on mount
+  // Load selectedLessonId and activeCourse from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const storedCourse = localStorage.getItem('activeCourse') as 'minna' | 'marugoto';
+      if (storedCourse) {
+        setActiveCourse(storedCourse);
+      }
+      
       const stored = localStorage.getItem('selectedLessonId');
       if (stored) {
         const parsed = parseInt(stored);
@@ -89,6 +96,8 @@ export default function UserDashboard() {
           setSelectedLessonId(parsed);
           setLevel(parsed >= 26 ? 'N4' : 'N5');
         }
+      } else if (storedCourse === 'marugoto') {
+        setSelectedLessonId(101);
       }
       setIsLoadedFromLocalStorage(true);
     }
@@ -202,7 +211,7 @@ export default function UserDashboard() {
     if (!isLoadedFromLocalStorage) return;
     setLoading(true);
     try {
-      const lessonData = await api.get('/api/user/lessons');
+      const lessonData = await api.get(`/api/user/lessons?course=${activeCourse}`);
       if (Array.isArray(lessonData)) {
         setLessons(lessonData);
       }
@@ -237,7 +246,7 @@ export default function UserDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [selectedLessonId, isLoadedFromLocalStorage]);
+  }, [selectedLessonId, activeCourse, isLoadedFromLocalStorage]);
 
   useEffect(() => {
     loadInitialData();
@@ -376,6 +385,7 @@ export default function UserDashboard() {
 
   // Filter lessons matching active Level
   const filteredLessons = lessons.filter(l => {
+    if (activeCourse === 'marugoto') return true;
     if (level === 'N5') return l.id >= 1 && l.id <= 25;
     return l.id >= 26 && l.id <= 50;
   });
@@ -409,7 +419,7 @@ export default function UserDashboard() {
           {/* Logo Title & Mobile Close button */}
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Minna Nihongo
+              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -419,9 +429,24 @@ export default function UserDashboard() {
             </button>
           </div>
 
+          {/* Course Switcher */}
+          <CourseSwitcher
+            activeCourse={activeCourse}
+            onSwitch={(course) => {
+              setActiveCourse(course);
+              localStorage.setItem('activeCourse', course);
+              setSelectedLessonId(course === 'minna' ? 1 : 101);
+            }}
+          />
+
           {/* Category items */}
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.map((item) => (
+            {menuItems.filter(item => {
+              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
+                return false;
+              }
+              return true;
+            }).map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
@@ -499,28 +524,30 @@ export default function UserDashboard() {
           
           {/* Level Switcher N5/N4 & Lesson Dropdown Selector */}
           <div className="flex items-center space-x-3 self-start sm:self-auto">
-            <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-900 flex">
-              <button
-                onClick={() => handleLevelChange('N5')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                  level === 'N5'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                N5
-              </button>
-              <button
-                onClick={() => handleLevelChange('N4')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                  level === 'N4'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                N4
-              </button>
-            </div>
+            {activeCourse === 'minna' && (
+              <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-900 flex">
+                <button
+                  onClick={() => handleLevelChange('N5')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N5'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  N5
+                </button>
+                <button
+                  onClick={() => handleLevelChange('N4')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N4'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  N4
+                </button>
+              </div>
+            )}
 
             <select
               value={selectedLessonId}
@@ -841,7 +868,7 @@ export default function UserDashboard() {
 
                 <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 mb-4 text-center">
                   <p className="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">
-                    Dự báo hoàn thành mốc {level}
+                    Dự báo hoàn thành mốc {activeCourse === 'marugoto' ? 'Marugoto A1' : level}
                   </p>
                   <p className="text-xl sm:text-2xl lg:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
                     {forecastDateString}
@@ -855,13 +882,13 @@ export default function UserDashboard() {
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-400">Đã học hoàn thành bài:</span>
                     <span className="font-bold text-slate-200">
-                      Bài {selectedLessonId} / {level === 'N5' ? '25' : '50'}
+                      Bài {activeCourse === 'marugoto' ? (selectedLessonId - 100) : selectedLessonId} / {activeCourse === 'marugoto' ? '18' : (level === 'N5' ? '25' : '50')}
                     </span>
                   </div>
                   <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden">
                     <div
                       className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500"
-                      style={{ width: `${(selectedLessonId / (level === 'N5' ? 25 : 50)) * 100}%` }}
+                      style={{ width: `${((activeCourse === 'marugoto' ? (selectedLessonId - 100) : selectedLessonId) / (activeCourse === 'marugoto' ? 18 : (level === 'N5' ? 25 : 50))) * 100}%` }}
                     />
                   </div>
 
@@ -881,7 +908,7 @@ export default function UserDashboard() {
                 <span>🔗</span>
                 <span>DANH MỤC TRUY CẬP NHANH BÀI {selectedLessonId}</span>
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+              <div className={`grid grid-cols-2 sm:grid-cols-3 ${activeCourse === 'marugoto' ? 'lg:grid-cols-4' : 'lg:grid-cols-6'} gap-3 sm:gap-4`}>
                 <button
                   onClick={() => router.push(`/lessons/${selectedLessonId}?tab=vocab`)}
                   className="p-3 sm:p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900 border border-slate-800 hover:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
@@ -903,20 +930,24 @@ export default function UserDashboard() {
                   <span className="block text-xl sm:text-2xl mb-1">📝</span>
                   <span className="text-[10px] sm:text-xs font-semibold text-slate-300">Ngữ Pháp & Ví Dụ</span>
                 </button>
-                <button
-                  onClick={() => router.push(`/lessons/${selectedLessonId}?tab=flashcards`)}
-                  className="p-3 sm:p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900 border border-slate-800 hover:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
-                >
-                  <span className="block text-xl sm:text-2xl mb-1">🃏</span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-slate-300">Thẻ Nhớ Ôn Tập</span>
-                </button>
-                <button
-                  onClick={() => router.push(`/lessons/${selectedLessonId}?tab=kaiwa`)}
-                  className="p-3 sm:p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900 border border-slate-800 hover:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
-                >
-                  <span className="block text-xl sm:text-2xl mb-1">💬</span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-slate-300">Luyện Nói (Kaiwa)</span>
-                </button>
+                {activeCourse !== 'marugoto' && (
+                  <button
+                    onClick={() => router.push(`/lessons/${selectedLessonId}?tab=flashcards`)}
+                    className="p-3 sm:p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900 border border-slate-800 hover:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
+                  >
+                    <span className="block text-xl sm:text-2xl mb-1">🃏</span>
+                    <span className="text-[10px] sm:text-xs font-semibold text-slate-300">Thẻ Nhớ Ôn Tập</span>
+                  </button>
+                )}
+                {activeCourse !== 'marugoto' && (
+                  <button
+                    onClick={() => router.push(`/lessons/${selectedLessonId}?tab=kaiwa`)}
+                    className="p-3 sm:p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900 border border-slate-800 hover:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
+                  >
+                    <span className="block text-xl sm:text-2xl mb-1">💬</span>
+                    <span className="text-[10px] sm:text-xs font-semibold text-slate-300">Luyện Nói (Kaiwa)</span>
+                  </button>
+                )}
                 <button
                   onClick={() => router.push(`/lessons/${selectedLessonId}?tab=practice`)}
                   className="p-3 sm:p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900 border border-slate-800 hover:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"

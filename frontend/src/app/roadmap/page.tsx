@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../utils/roadmapMapping';
+import CourseSwitcher from '../components/CourseSwitcher';
 
 interface Lesson {
   id: number;
@@ -73,6 +74,7 @@ export default function RoadmapPage() {
 
   // UI States
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
+  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [isLoadedFromLocalStorage, setIsLoadedFromLocalStorage] = useState<boolean>(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -119,9 +121,14 @@ export default function RoadmapPage() {
     }
   };
 
-  // Load selectedLessonId from localStorage on mount
+  // Load selectedLessonId and activeCourse from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const storedCourse = localStorage.getItem('activeCourse') as 'minna' | 'marugoto';
+      if (storedCourse) {
+        setActiveCourse(storedCourse);
+      }
+
       const stored = localStorage.getItem('selectedLessonId');
       if (stored) {
         const parsed = parseInt(stored);
@@ -129,6 +136,8 @@ export default function RoadmapPage() {
           setSelectedLessonId(parsed);
           setLevel(parsed >= 26 ? 'N4' : 'N5');
         }
+      } else if (storedCourse === 'marugoto') {
+        setSelectedLessonId(101);
       }
       setIsLoadedFromLocalStorage(true);
     }
@@ -145,7 +154,7 @@ export default function RoadmapPage() {
   useEffect(() => {
     async function loadLessons() {
       try {
-        const lessonData = await api.get('/api/user/lessons');
+        const lessonData = await api.get(`/api/user/lessons?course=${activeCourse}`);
         if (Array.isArray(lessonData)) {
           setLessons(lessonData);
         }
@@ -153,8 +162,10 @@ export default function RoadmapPage() {
         console.error('Failed to load lessons:', error);
       }
     }
-    loadLessons();
-  }, []);
+    if (isLoadedFromLocalStorage) {
+      loadLessons();
+    }
+  }, [activeCourse, isLoadedFromLocalStorage]);
 
   // Fetch data for active lesson
   const loadLessonData = useCallback(async () => {
@@ -236,6 +247,7 @@ export default function RoadmapPage() {
   };
 
   const filteredLessons = lessons.filter(l => {
+    if (activeCourse === 'marugoto') return true;
     if (level === 'N5') return l.id >= 1 && l.id <= 25;
     return l.id >= 26 && l.id <= 50;
   });
@@ -268,7 +280,7 @@ export default function RoadmapPage() {
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Minna Nihongo
+              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -278,8 +290,23 @@ export default function RoadmapPage() {
             </button>
           </div>
 
+          {/* Course Switcher */}
+          <CourseSwitcher
+            activeCourse={activeCourse}
+            onSwitch={(course) => {
+              setActiveCourse(course);
+              localStorage.setItem('activeCourse', course);
+              setSelectedLessonId(course === 'minna' ? 1 : 101);
+            }}
+          />
+
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.map((item) => (
+            {menuItems.filter(item => {
+              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
+                return false;
+              }
+              return true;
+            }).map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
@@ -347,7 +374,7 @@ export default function RoadmapPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-900 pb-6">
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white mb-1">
-              LỘ TRÌNH HỌC CHI TIẾT BÀI {selectedLessonId}
+              LỘ TRÌNH HỌC CHI TIẾT BÀI {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId}
             </h1>
             <p className="text-xs sm:text-sm text-slate-400">
               Học tập thông minh hơn bằng cách kết nối trực tiếp mẫu ngữ pháp với từ vựng & chữ Hán liên quan
@@ -356,28 +383,30 @@ export default function RoadmapPage() {
           
           {/* Level Switcher N5/N4 & Lesson Dropdown Selector */}
           <div className="flex items-center space-x-3 self-start sm:self-auto">
-            <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-900 flex">
-              <button
-                onClick={() => handleLevelChange('N5')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                  level === 'N5'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                N5
-              </button>
-              <button
-                onClick={() => handleLevelChange('N4')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                  level === 'N4'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                N4
-              </button>
-            </div>
+            {activeCourse === 'minna' && (
+              <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-900 flex">
+                <button
+                  onClick={() => handleLevelChange('N5')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N5'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  N5
+                </button>
+                <button
+                  onClick={() => handleLevelChange('N4')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N4'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  N4
+                </button>
+              </div>
+            )}
 
             <select
               value={selectedLessonId}
@@ -406,7 +435,7 @@ export default function RoadmapPage() {
               <div className="md:col-span-4 space-y-1.5">
                 <h2 className="text-sm sm:text-md font-bold text-slate-200 flex items-center space-x-2">
                   <span>📈</span>
-                  <span>Tiến độ Bài {selectedLessonId}</span>
+                  <span>Tiến độ Bài {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId}</span>
                 </h2>
                 <p className="text-xs text-slate-400">
                   Hoàn thành toàn bộ mục tiêu từ vựng, chữ Hán và ngữ pháp của bài học.
@@ -635,13 +664,15 @@ export default function RoadmapPage() {
                   GỢI Ý LỘ TRÌNH HỌC TẬP HIỆU QUẢ
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Để chinh phục Bài {selectedLessonId} tốt nhất, bạn nên thực hiện theo các bước:
+                  Để chinh phục Bài {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId} tốt nhất, bạn nên thực hiện theo các bước:
                 </p>
                 <ol className="list-decimal list-inside text-xs text-slate-400 space-y-1 pl-1">
                   <li>Xem tổng quát các mẫu ngữ pháp để hiểu ý nghĩa cấu trúc.</li>
                   <li>Nhấp chuột vào nút <strong className="text-slate-200">"Học từ vựng mới"</strong> để học các từ bổ trợ trực tiếp cho mẫu ngữ pháp đó.</li>
                   <li>Làm tương tự với chữ Hán để nắm chắc cách viết.</li>
-                  <li>Chuyển sang phân hệ <strong className="text-slate-200">Luyện nói (Kaiwa)</strong> để thực hành nói mẫu câu đã học trong hội thoại thực tế.</li>
+                  {activeCourse !== 'marugoto' && (
+                    <li>Chuyển sang phân hệ <strong className="text-slate-200">Luyện nói (Kaiwa)</strong> để thực hành nói mẫu câu đã học trong hội thoại thực tế.</li>
+                  )}
                 </ol>
               </div>
             </div>

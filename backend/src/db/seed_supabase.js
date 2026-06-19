@@ -96,6 +96,25 @@ async function runSeed() {
     }));
     await seedTable('kaiwa_dialog', kaiwaData, ['id']);
 
+    // 6. Seed cando_checks
+    const candoData = mockDb.candoChecks.map(c => ({
+      id: c.id,
+      lesson_id: c.lesson_id,
+      text: c.text,
+      text_vi: c.text_vi
+    }));
+    await seedTable('cando_checks', candoData, ['id']);
+
+    // 7. Seed culture_topics
+    const cultureData = mockDb.cultureTopics.map(cu => ({
+      id: cu.id,
+      lesson_id: cu.lesson_id,
+      title: cu.title,
+      content: cu.content,
+      image_url: cu.image_url
+    }));
+    await seedTable('culture_topics', cultureData, ['id']);
+
     console.log('\n🎉 Supabase database seeded successfully!');
   } catch (error) {
     console.error('\n❌ Seeding process failed:', error.message);

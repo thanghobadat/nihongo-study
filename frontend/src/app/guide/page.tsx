@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
+import CourseSwitcher from '../components/CourseSwitcher';
 
 // Inline SVG helper to output consistent cute animal avatars
 function getAvatarSvg(userId: string) {
@@ -39,11 +40,17 @@ export default function GuidePage() {
   ];
 
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
+  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
-  // Load selectedLessonId from localStorage on mount
+  // Load selectedLessonId and activeCourse from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const storedCourse = localStorage.getItem('activeCourse') as 'minna' | 'marugoto';
+      if (storedCourse) {
+        setActiveCourse(storedCourse);
+      }
+      
       const stored = localStorage.getItem('selectedLessonId');
       if (stored) {
         const parsed = parseInt(stored);
@@ -53,6 +60,15 @@ export default function GuidePage() {
       }
     }
   }, []);
+
+  // Tự động chuyển hướng về dashboard nếu chuyển sang khoá marugoto
+  useEffect(() => {
+    if (activeCourse === 'marugoto') {
+      localStorage.setItem('activeCourse', 'marugoto');
+      localStorage.setItem('selectedLessonId', '101');
+      router.push('/dashboard');
+    }
+  }, [activeCourse, router]);
 
   const handleLogout = () => {
     api.clearAuth();
@@ -88,7 +104,7 @@ export default function GuidePage() {
           {/* Logo Title & Mobile Close button */}
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Minna Nihongo
+              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -98,9 +114,22 @@ export default function GuidePage() {
             </button>
           </div>
 
+          {/* Course Switcher */}
+          <CourseSwitcher
+            activeCourse={activeCourse}
+            onSwitch={(course) => {
+              setActiveCourse(course);
+            }}
+          />
+
           {/* Category items */}
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-800 hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.map((item) => (
+            {menuItems.filter(item => {
+              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
+                return false;
+              }
+              return true;
+            }).map((item) => (
               <button
                 key={item.id}
                 onClick={() => {

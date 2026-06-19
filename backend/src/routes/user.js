@@ -187,15 +187,22 @@ router.post('/target-plan', async (req, res) => {
  */
 router.get('/lessons', async (req, res) => {
   try {
+    const { course } = req.query; // 'minna', 'marugoto', hoặc undefined
+
     // Return mock data for local testing
     if (req.user.isMock) {
-      return res.json(mockDb.lessons);
+      let data = mockDb.lessons;
+      if (course) {
+        data = data.filter(l => (l.course || 'minna') === course);
+      }
+      return res.json(data);
     }
 
-    const { data, error } = await supabase
-      .from('lessons')
-      .select('*')
-      .order('id', { ascending: true });
+    let query = supabase.from('lessons').select('*').order('id', { ascending: true });
+    if (course) {
+      query = query.eq('course', course);
+    }
+    const { data, error } = await query;
 
     if (error) throw error;
 
@@ -479,8 +486,8 @@ router.post('/progress', async (req, res) => {
       return res.status(400).json({ error: 'item_type, item_id, and status are required' });
     }
 
-    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana'].includes(item_type)) {
-      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana or katakana' });
+    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'cando'].includes(item_type)) {
+      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana, katakana or cando' });
     }
 
     if (!['not_learned', 'learning', 'mastered'].includes(status)) {
@@ -575,6 +582,106 @@ router.post('/progress', async (req, res) => {
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
     console.error('Error updating progress:', error);
+    res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
+/**
+ * GET /api/lessons/:lessonId/cando
+ * Fetch Can-do checklists for a lesson, joined with user progress status
+ */
+router.get('/lessons/:lessonId/cando', async (req, res) => {
+  try {
+    const lessonId = parseInt(req.params.lessonId);
+    const userId = req.user.id;
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      const list = (mockDb.candoChecks || [])
+        .filter(item => item.lesson_id === lessonId)
+        .map(item => {
+          const status = mockDb.userProgress[`${userId}:cando:${item.id}`] || 'not_learned';
+          return {
+            ...item,
+            status
+          };
+        });
+      return res.json(list);
+    }
+
+    // Fetch from Supabase
+    const { data: candoList, error: cError } = await supabase
+      .from('cando_checks')
+      .select('*')
+      .eq('lesson_id', lessonId);
+
+    if (cError) {
+      // Fallback to mockDb
+      console.warn('cando_checks table read error, falling back to mockDb:', cError.message);
+      const fallbackList = (mockDb.candoChecks || [])
+        .filter(item => item.lesson_id === lessonId)
+        .map(item => {
+          const status = mockDb.userProgress[`${userId}:cando:${item.id}`] || 'not_learned';
+          return {
+            ...item,
+            status
+          };
+        });
+      return res.json(fallbackList);
+    }
+
+    const { data: userProgress, error: pError } = await supabase
+      .from('user_progress')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('item_type', 'cando');
+
+    if (pError) throw pError;
+
+    const mergedList = candoList.map(item => {
+      const progress = userProgress.find(p => p.item_id === item.id);
+      return {
+        ...item,
+        status: progress ? progress.status : 'not_learned'
+      };
+    });
+
+    res.json(mergedList);
+  } catch (error) {
+    console.error('Error fetching cando checklist:', error);
+    res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
+/**
+ * GET /api/lessons/:lessonId/culture
+ * Fetch Culture content for a lesson
+ */
+router.get('/lessons/:lessonId/culture', async (req, res) => {
+  try {
+    const lessonId = parseInt(req.params.lessonId);
+
+    // Return mock data for local testing
+    if (req.user.isMock) {
+      const cultureData = (mockDb.cultureTopics || []).filter(item => item.lesson_id === lessonId);
+      return res.json(cultureData);
+    }
+
+    const { data, error } = await supabase
+      .from('culture_topics')
+      .select('*')
+      .eq('lesson_id', lessonId);
+
+    if (error) {
+      // Fallback to mockDb
+      console.warn('culture_topics table read error, falling back to mockDb:', error.message);
+      const fallbackData = (mockDb.cultureTopics || []).filter(item => item.lesson_id === lessonId);
+      return res.json(fallbackData);
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching culture content:', error);
     res.status(500).json({ error: error.message || error, details: error });
   }
 });

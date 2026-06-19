@@ -37,6 +37,7 @@ CREATE TABLE public.lessons (
   title TEXT NOT NULL,
   description TEXT,
   roleplay_options JSONB,
+  course TEXT DEFAULT 'minna',
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -169,4 +170,36 @@ CREATE POLICY "Admin write access grammar" ON public.grammar FOR ALL USING (
 CREATE POLICY "Admin write access kaiwa_dialog" ON public.kaiwa_dialog FOR ALL USING (
   (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
 );
+
+-- 8. Create Can-do Checks Table
+CREATE TABLE public.cando_checks (
+  id SERIAL PRIMARY KEY,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
+  text TEXT NOT NULL,
+  text_vi TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.cando_checks ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read of cando_checks" ON public.cando_checks FOR SELECT USING (true);
+CREATE POLICY "Admin write access cando_checks" ON public.cando_checks FOR ALL USING (
+  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+);
+
+-- 9. Create Culture Topics Table
+CREATE TABLE public.culture_topics (
+  id SERIAL PRIMARY KEY,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  image_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.culture_topics ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read of culture_topics" ON public.culture_topics FOR SELECT USING (true);
+CREATE POLICY "Admin write access culture_topics" ON public.culture_topics FOR ALL USING (
+  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+);
+
 
