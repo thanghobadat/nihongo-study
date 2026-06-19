@@ -1,8 +1,31 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { RADICALS_DICT, RadicalInfo } from '../utils/kanjiRadicals';
+
+// Group definitions (Move outside component to optimize render and avoid dependencies issues)
+const groupFilters = [
+  { id: 'all', name: 'Tất cả' },
+  { id: 'nature', name: 'Tự nhiên & Nguyên tố' },
+  { id: 'human', name: 'Con người & Cơ thể' },
+  { id: 'action', name: 'Hành động & Trạng thái' },
+  { id: 'tools', name: 'Nhà cửa & Đồ vật' }
+];
+
+// Map radicals to groups (Move outside component to optimize render and avoid dependencies issues)
+const getRadicalGroup = (char: string): string => {
+  const cleanChar = char.split(' ')[0]; // Handle '人 (亻)' => '人'
+  
+  const natureList = ['日', '月', '山', '川', '水', '火', '土', '木', '金', '雨', '青', '白', '赤', '黒'];
+  const humanList = ['人', '女', '子', '口', '目', '耳', '手', '足', '心', '父', '母'];
+  const actionList = ['力', '言', '行', '見', '食', '刀', '辶', '示'];
+  
+  if (natureList.includes(cleanChar)) return 'nature';
+  if (humanList.includes(cleanChar)) return 'human';
+  if (actionList.includes(cleanChar)) return 'action';
+  return 'tools';
+};
 
 export default function RadicalsPage() {
   const router = useRouter();
@@ -12,29 +35,6 @@ export default function RadicalsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGroup, setSelectedGroup] = useState<string>('all');
   const [selectedRadical, setSelectedRadical] = useState<RadicalInfo | null>(null);
-
-  // Group definitions
-  const groupFilters = [
-    { id: 'all', name: 'Tất cả' },
-    { id: 'nature', name: 'Tự nhiên & Nguyên tố' },
-    { id: 'human', name: 'Con người & Cơ thể' },
-    { id: 'action', name: 'Hành động & Trạng thái' },
-    { id: 'tools', name: 'Nhà cửa & Đồ vật' }
-  ];
-
-  // Map radicals to groups
-  const getRadicalGroup = (char: string): string => {
-    const cleanChar = char.split(' ')[0]; // Handle '人 (亻)' => '人'
-    
-    const natureList = ['日', '月', '山', '川', '水', '火', '土', '木', '金', '雨', '青', '白', '赤', '黒'];
-    const humanList = ['人', '女', '子', '口', '目', '耳', '手', '足', '心', '父', '母'];
-    const actionList = ['力', '言', '行', '見', '食', '刀', '辶', '示'];
-    
-    if (natureList.includes(cleanChar)) return 'nature';
-    if (humanList.includes(cleanChar)) return 'human';
-    if (actionList.includes(cleanChar)) return 'action';
-    return 'tools';
-  };
 
   // Convert dict to list
   const radicalsList = useMemo(() => {
@@ -64,20 +64,20 @@ export default function RadicalsPage() {
   const [quizFlipped, setQuizFlipped] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
 
-  const startNewQuiz = () => {
+  const startNewQuiz = useCallback(() => {
     // Shuffle and pick 10 random radicals
     const shuffled = [...radicalsList].sort(() => 0.5 - Math.random()).slice(0, 10);
     setQuizList(shuffled);
     setCurrentQuizIndex(0);
     setQuizFlipped(false);
     setScore({ correct: 0, total: 0 });
-  };
+  }, [radicalsList]);
 
   useEffect(() => {
     if (activeTab === 'quiz') {
       startNewQuiz();
     }
-  }, [activeTab]);
+  }, [activeTab, startNewQuiz]);
 
   const handleQuizAnswer = (known: boolean) => {
     setScore(prev => ({
