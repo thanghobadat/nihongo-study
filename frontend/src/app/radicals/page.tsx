@@ -61,6 +61,7 @@ export default function RadicalsPage() {
   // --- PRACTICE / QUIZ STATES ---
   const [quizState, setQuizState] = useState<'menu' | 'write' | 'choice' | 'speedrun' | 'finished'>('menu');
   const [practiceType, setPracticeType] = useState<'write' | 'choice' | 'speedrun'>('choice');
+  const [writeDirection, setWriteDirection] = useState<'kanji-to-sino' | 'sino-to-kanji'>('kanji-to-sino');
   const [practiceLimit, setPracticeLimit] = useState<number>(10);
   const [selectedGroupFilter, setSelectedGroupFilter] = useState<string>('all');
   const [quizList, setQuizList] = useState<RadicalInfo[]>([]);
@@ -93,7 +94,10 @@ export default function RadicalsPage() {
   const generateChoices = useCallback((correctRadical: RadicalInfo, sourcePool: RadicalInfo[]) => {
     if (!correctRadical) return;
     
-    const correctOption = `${correctRadical.sinoVietnamese} - ${correctRadical.meaning}`;
+    const formatOption = (rad: RadicalInfo) => 
+      `${rad.sinoVietnamese.toLowerCase()} (${rad.meaning.toLowerCase()})`;
+    
+    const correctOption = formatOption(correctRadical);
     
     // Distractors pool: exclude the correct radical
     let pool = sourcePool.filter(r => r.character !== correctRadical.character);
@@ -102,7 +106,7 @@ export default function RadicalsPage() {
     }
     
     const shuffledPool = [...pool].sort(() => 0.5 - Math.random());
-    const distractors = shuffledPool.slice(0, 3).map(r => `${r.sinoVietnamese} - ${r.meaning}`);
+    const distractors = shuffledPool.slice(0, 3).map(formatOption);
     
     const allOptions = [correctOption, ...distractors].sort(() => 0.5 - Math.random());
     setChoiceOptions(allOptions);
@@ -141,6 +145,12 @@ export default function RadicalsPage() {
   };
 
   const isAnswerCorrect = (input: string, radical: RadicalInfo): boolean => {
+    if (!radical) return false;
+    
+    if (writeDirection === 'sino-to-kanji') {
+      return input.trim() === radical.character.split(' ')[0].trim();
+    }
+    
     const clean = (str: string) => str.toLowerCase().trim()
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .replace(/đ/g, 'd')
@@ -175,7 +185,7 @@ export default function RadicalsPage() {
     setIsAnswerChecked(true);
     
     const correctRadical = quizList[currentQuizIndex];
-    const correctOption = `${correctRadical.sinoVietnamese} - ${correctRadical.meaning}`;
+    const correctOption = `${correctRadical.sinoVietnamese.toLowerCase()} (${correctRadical.meaning.toLowerCase()})`;
     const isCorrect = selectedOption === correctOption;
     
     setScore(prev => ({
@@ -198,7 +208,7 @@ export default function RadicalsPage() {
 
   const handleSpeedrunChoiceSelect = (selectedOption: string) => {
     const correctRadical = quizList[currentQuizIndex];
-    const correctOption = `${correctRadical.sinoVietnamese} - ${correctRadical.meaning}`;
+    const correctOption = `${correctRadical.sinoVietnamese.toLowerCase()} (${correctRadical.meaning.toLowerCase()})`;
     const isCorrect = selectedOption === correctOption;
     
     if (isCorrect) {
@@ -211,7 +221,7 @@ export default function RadicalsPage() {
       
       speakText(correctRadical.character.split(' ')[0]);
       
-      const newMaxTime = Math.max(4, 10 - Math.floor(newScore / 3) * 0.5);
+      const newMaxTime = Math.max(3, 10 - Math.floor(newScore / 2) * 0.5);
       setMaxTime(newMaxTime);
       setTimeLeft(newMaxTime);
       
@@ -429,6 +439,28 @@ export default function RadicalsPage() {
         {activeTab === 'quiz' && (
           <div className="max-w-2xl mx-auto py-2">
             
+            {/* Control Bar during Active Play */}
+            {(quizState === 'write' || quizState === 'choice' || quizState === 'speedrun') && (
+              <div className="flex items-center justify-between mb-4 bg-slate-900/10 border border-slate-850/60 p-3 rounded-2xl backdrop-blur-md">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">
+                    Chế độ: {practiceType === 'write' ? 'Tự luận' : practiceType === 'choice' ? 'Trắc nghiệm' : 'Phản xạ nhanh'}
+                  </span>
+                  {practiceType === 'write' && (
+                    <span className="text-[9px] text-teal-400 font-bold">
+                      {writeDirection === 'kanji-to-sino' ? 'Chữ Hán ➔ Âm Hán-Việt & Ý nghĩa' : 'Âm Hán-Việt & Ý nghĩa ➔ Chữ Hán'}
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={() => setQuizState('menu')}
+                  className="px-3 py-1.5 bg-slate-950 border border-slate-850 hover:border-slate-700 hover:text-slate-200 text-slate-400 text-[10px] font-bold rounded-lg transition-all cursor-pointer hover:bg-slate-900/60 active:scale-95 flex items-center gap-1 shadow-sm font-sans"
+                >
+                  ⚙️ Thay đổi chế độ
+                </button>
+              </div>
+            )}
+
             {/* 1. CONFIGURATION MENU SCREEN */}
             {quizState === 'menu' && (
               <div className="bg-slate-900/20 border border-slate-850 p-6 sm:p-8 rounded-3xl backdrop-blur-xl space-y-6 shadow-2xl animate-in fade-in duration-300">
@@ -527,6 +559,21 @@ export default function RadicalsPage() {
                   </div>
                 </div>
 
+                {/* Write Mode Direction Options */}
+                {practiceType === 'write' && (
+                  <div className="space-y-2 animate-in slide-in-from-top-1 duration-200">
+                    <label className="text-[10px] text-slate-450 uppercase font-black tracking-wider block">Chiều câu hỏi tự luận</label>
+                    <select
+                      value={writeDirection}
+                      onChange={(e) => setWriteDirection(e.target.value as 'kanji-to-sino' | 'sino-to-kanji')}
+                      className="w-full bg-slate-950 border border-slate-850 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer font-bold"
+                    >
+                      <option value="kanji-to-sino">Chữ Hán ➔ Âm Hán-Việt & Ý nghĩa</option>
+                      <option value="sino-to-kanji">Âm Hán-Việt & Ý nghĩa ➔ Chữ Hán</option>
+                    </select>
+                  </div>
+                )}
+
                 {/* Start Button */}
                 <button
                   onClick={startPractice}
@@ -555,10 +602,26 @@ export default function RadicalsPage() {
 
                 {/* Radical Display Card */}
                 <div className="bg-slate-900/30 border border-slate-800 p-8 sm:p-12 rounded-3xl backdrop-blur-xl flex flex-col items-center justify-center gap-4 text-center">
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Hãy gõ Hán Việt hoặc Nghĩa</span>
-                  <div className="w-24 h-24 bg-slate-950 border border-slate-850 rounded-3xl flex items-center justify-center text-5xl font-black text-white shadow-inner animate-pulse">
-                    {quizList[currentQuizIndex]?.character.split(' ')[0]}
-                  </div>
+                  {writeDirection === 'kanji-to-sino' ? (
+                    <>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Hãy gõ Hán Việt hoặc Nghĩa</span>
+                      <div className="w-24 h-24 bg-slate-950 border border-slate-850 rounded-3xl flex items-center justify-center text-5xl font-black text-white shadow-inner animate-pulse">
+                        {quizList[currentQuizIndex]?.character.split(' ')[0]}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Hãy gõ Chữ Hán / Bộ thủ</span>
+                      <div className="min-h-24 px-6 py-4 bg-slate-950 border border-slate-850 rounded-3xl flex flex-col items-center justify-center gap-2 shadow-inner">
+                        <div className="text-2xl font-black text-teal-400 uppercase tracking-wider">
+                          {quizList[currentQuizIndex]?.sinoVietnamese}
+                        </div>
+                        <div className="text-xs font-bold text-slate-350">
+                          ({quizList[currentQuizIndex]?.meaning})
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 {/* Input panel */}
@@ -566,7 +629,7 @@ export default function RadicalsPage() {
                   <div className="relative">
                     <input
                       type="text"
-                      placeholder="Nhập Hán Việt hoặc ý nghĩa của bộ thủ..."
+                      placeholder={writeDirection === 'sino-to-kanji' ? "Gõ chữ Hán/Bộ thủ chính xác..." : "Nhập Hán Việt hoặc ý nghĩa của bộ thủ..."}
                       value={currentAnswer}
                       onChange={(e) => setCurrentAnswer(e.target.value)}
                       onKeyDown={handleKeyDown}
@@ -595,7 +658,11 @@ export default function RadicalsPage() {
                         {isAnswerCorrect(currentAnswer, quizList[currentQuizIndex]) ? 'Chính xác! 🎉' : 'Chưa đúng! ❌'}
                       </span>
                       <p className="text-xs font-medium">
-                        Đáp án đúng: <span className="font-extrabold">{quizList[currentQuizIndex]?.sinoVietnamese}</span> ({quizList[currentQuizIndex]?.meaning})
+                        Đáp án đúng: {writeDirection === 'sino-to-kanji' ? (
+                          <span className="font-extrabold text-base bg-slate-950 border border-slate-850 px-2 py-0.5 rounded text-white">{quizList[currentQuizIndex]?.character.split(' ')[0]}</span>
+                        ) : (
+                          <span className="font-extrabold">{quizList[currentQuizIndex]?.sinoVietnamese} ({quizList[currentQuizIndex]?.meaning})</span>
+                        )}
                       </p>
                       <p className="text-[10px] text-slate-400 mt-1 italic">
                         💡 {quizList[currentQuizIndex]?.description}
@@ -651,7 +718,9 @@ export default function RadicalsPage() {
                 {/* Choice Buttons Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {choiceOptions.map(option => {
-                    const correctOption = `${quizList[currentQuizIndex]?.sinoVietnamese} - ${quizList[currentQuizIndex]?.meaning}`;
+                    const correctOption = quizList[currentQuizIndex]
+                      ? `${quizList[currentQuizIndex].sinoVietnamese.toLowerCase()} (${quizList[currentQuizIndex].meaning.toLowerCase()})`
+                      : '';
                     const isOptionCorrect = option === correctOption;
                     
                     let btnStyle = "bg-slate-950 border-slate-850 text-slate-200 hover:border-slate-700 hover:bg-slate-900/20";
