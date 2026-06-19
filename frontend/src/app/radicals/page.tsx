@@ -30,11 +30,12 @@ const getRadicalGroup = (char: string): string => {
 export default function RadicalsPage() {
   const router = useRouter();
   
-  // State variables
+  // State variables for Browse Tab
   const [activeTab, setActiveTab] = useState<'browse' | 'quiz'>('browse');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGroup, setSelectedGroup] = useState<string>('all');
   const [selectedRadical, setSelectedRadical] = useState<RadicalInfo | null>(null);
+
 
   // Convert dict to list
   const radicalsList = useMemo(() => {
@@ -57,39 +58,221 @@ export default function RadicalsPage() {
     });
   }, [radicalsList, selectedGroup, searchQuery]);
 
-
-  // --- QUIZ GAME LOGIC ---
+  // --- PRACTICE / QUIZ STATES ---
+  const [quizState, setQuizState] = useState<'menu' | 'write' | 'choice' | 'speedrun' | 'finished'>('menu');
+  const [practiceType, setPracticeType] = useState<'write' | 'choice' | 'speedrun'>('choice');
+  const [practiceLimit, setPracticeLimit] = useState<number>(10);
+  const [selectedGroupFilter, setSelectedGroupFilter] = useState<string>('all');
   const [quizList, setQuizList] = useState<RadicalInfo[]>([]);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
-  const [quizFlipped, setQuizFlipped] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
+  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [isAnswerChecked, setIsAnswerChecked] = useState(false);
+  const [choiceOptions, setChoiceOptions] = useState<string[]>([]);
+  const [timeLeft, setTimeLeft] = useState<number>(10);
+  const [maxTime, setMaxTime] = useState<number>(10);
+  const [streak, setStreak] = useState<number>(0);
+  const [highScore, setHighScore] = useState<number>(0);
 
-  const startNewQuiz = useCallback(() => {
-    // Shuffle and pick 10 random radicals
-    const shuffled = [...radicalsList].sort(() => 0.5 - Math.random()).slice(0, 10);
-    setQuizList(shuffled);
-    setCurrentQuizIndex(0);
-    setQuizFlipped(false);
-    setScore({ correct: 0, total: 0 });
-  }, [radicalsList]);
+  // Speedrun high score local storage load
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('radicals_speedrun_high_score');
+      if (saved) {
+        setHighScore(parseInt(saved) || 0);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (activeTab === 'quiz') {
-      startNewQuiz();
+      setQuizState('menu');
     }
-  }, [activeTab, startNewQuiz]);
+  }, [activeTab]);
 
-  const handleQuizAnswer = (known: boolean) => {
+  const generateChoices = useCallback((correctRadical: RadicalInfo, sourcePool: RadicalInfo[]) => {
+    if (!correctRadical) return;
+    
+    const correctOption = `${correctRadical.sinoVietnamese} - ${correctRadical.meaning}`;
+    
+    // Distractors pool: exclude the correct radical
+    let pool = sourcePool.filter(r => r.character !== correctRadical.character);
+    if (pool.length < 3) {
+      pool = radicalsList.filter(r => r.character !== correctRadical.character);
+    }
+    
+    const shuffledPool = [...pool].sort(() => 0.5 - Math.random());
+    const distractors = shuffledPool.slice(0, 3).map(r => `${r.sinoVietnamese} - ${r.meaning}`);
+    
+    const allOptions = [correctOption, ...distractors].sort(() => 0.5 - Math.random());
+    setChoiceOptions(allOptions);
+  }, [radicalsList]);
+
+  const startPractice = () => {
+    let eligible = radicalsList;
+    if (selectedGroupFilter !== 'all') {
+      eligible = radicalsList.filter(r => getRadicalGroup(r.character) === selectedGroupFilter);
+    }
+    
+    if (eligible.length === 0) {
+      eligible = radicalsList;
+    }
+
+    const limitVal = practiceLimit === 999 ? eligible.length : practiceLimit;
+    const shuffled = [...eligible].sort(() => 0.5 - Math.random()).slice(0, limitVal);
+    setQuizList(shuffled);
+    setCurrentQuizIndex(0);
+    setScore({ correct: 0, total: 0 });
+    setCurrentAnswer('');
+    setIsAnswerChecked(false);
+    
+    if (practiceType === 'write') {
+      setQuizState('write');
+    } else if (practiceType === 'choice') {
+      setQuizState('choice');
+      generateChoices(shuffled[0], eligible);
+    } else if (practiceType === 'speedrun') {
+      setQuizState('speedrun');
+      setStreak(0);
+      setTimeLeft(10);
+      setMaxTime(10);
+      generateChoices(shuffled[0], radicalsList);
+    }
+  };
+
+  const isAnswerCorrect = (input: string, radical: RadicalInfo): boolean => {
+    const clean = (str: string) => str.toLowerCase().trim()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/[^a-z0-9]/g, '');
+      
+    const cleanInput = clean(input);
+    const cleanSino = clean(radical.sinoVietnamese);
+    const cleanMeaning = clean(radical.meaning);
+    
+    return cleanInput === cleanSino || cleanInput === cleanMeaning ||
+           (cleanMeaning.includes(cleanInput) && cleanInput.length >= 2) ||
+           (cleanSino.includes(cleanInput) && cleanInput.length >= 2);
+  };
+
+  const handleWriteCheck = () => {
+    if (isAnswerChecked) return;
+    setIsAnswerChecked(true);
+    
+    const correctRadical = quizList[currentQuizIndex];
+    const isCorrect = isAnswerCorrect(currentAnswer, correctRadical);
+    
     setScore(prev => ({
-      correct: prev.correct + (known ? 1 : 0),
+      correct: prev.correct + (isCorrect ? 1 : 0),
       total: prev.total + 1
     }));
     
-    setQuizFlipped(false);
-    setTimeout(() => {
-      setCurrentQuizIndex(prev => prev + 1);
-    }, 200);
+    speakText(correctRadical.character.split(' ')[0]);
   };
+
+  const handleChoiceSelect = (selectedOption: string) => {
+    if (isAnswerChecked) return;
+    setIsAnswerChecked(true);
+    
+    const correctRadical = quizList[currentQuizIndex];
+    const correctOption = `${correctRadical.sinoVietnamese} - ${correctRadical.meaning}`;
+    const isCorrect = selectedOption === correctOption;
+    
+    setScore(prev => ({
+      correct: prev.correct + (isCorrect ? 1 : 0),
+      total: prev.total + 1
+    }));
+    
+    speakText(correctRadical.character.split(' ')[0]);
+  };
+
+  const handleSpeedrunGameOver = useCallback(() => {
+    setQuizState('finished');
+    if (score.correct > highScore) {
+      setHighScore(score.correct);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('radicals_speedrun_high_score', score.correct.toString());
+      }
+    }
+  }, [score.correct, highScore]);
+
+  const handleSpeedrunChoiceSelect = (selectedOption: string) => {
+    const correctRadical = quizList[currentQuizIndex];
+    const correctOption = `${correctRadical.sinoVietnamese} - ${correctRadical.meaning}`;
+    const isCorrect = selectedOption === correctOption;
+    
+    if (isCorrect) {
+      const newScore = score.correct + 1;
+      setScore(prev => ({
+        correct: newScore,
+        total: prev.total + 1
+      }));
+      setStreak(prev => prev + 1);
+      
+      speakText(correctRadical.character.split(' ')[0]);
+      
+      const newMaxTime = Math.max(4, 10 - Math.floor(newScore / 3) * 0.5);
+      setMaxTime(newMaxTime);
+      setTimeLeft(newMaxTime);
+      
+      const nextIdx = currentQuizIndex + 1;
+      if (nextIdx < quizList.length) {
+        setCurrentQuizIndex(nextIdx);
+        generateChoices(quizList[nextIdx], radicalsList);
+      } else {
+        setQuizState('finished');
+        if (newScore > highScore) {
+          setHighScore(newScore);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('radicals_speedrun_high_score', newScore.toString());
+          }
+        }
+      }
+    } else {
+      handleSpeedrunGameOver();
+    }
+  };
+
+  const handleNextQuestion = () => {
+    const nextIdx = currentQuizIndex + 1;
+    if (nextIdx < quizList.length) {
+      setCurrentQuizIndex(nextIdx);
+      setCurrentAnswer('');
+      setIsAnswerChecked(false);
+      
+      let eligible = radicalsList;
+      if (selectedGroupFilter !== 'all') {
+        eligible = radicalsList.filter(r => getRadicalGroup(r.character) === selectedGroupFilter);
+      }
+      if (eligible.length === 0) eligible = radicalsList;
+
+      if (practiceType === 'choice') {
+        generateChoices(quizList[nextIdx], eligible);
+      }
+    } else {
+      setQuizState('finished');
+    }
+  };
+
+  // Speedrun timer effect
+  useEffect(() => {
+    let timerId: any = null;
+    if (quizState === 'speedrun' && currentQuizIndex < quizList.length) {
+      timerId = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 0.1) {
+            clearInterval(timerId);
+            handleSpeedrunGameOver();
+            return 0;
+          }
+          return Number((prev - 0.1).toFixed(2));
+        });
+      }, 100);
+    }
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
+  }, [quizState, currentQuizIndex, quizList, handleSpeedrunGameOver]);
 
   // Speech helper
   const speakText = (text: string) => {
@@ -99,6 +282,16 @@ export default function RadicalsPage() {
       utterance.rate = 0.85;
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (!isAnswerChecked) {
+        handleWriteCheck();
+      } else {
+        handleNextQuestion();
+      }
     }
   };
 
@@ -144,7 +337,7 @@ export default function RadicalsPage() {
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            ⚡ Luyện tập phản xạ
+            ⚡ Luyện tập bộ thủ
           </button>
         </div>
       </header>
@@ -232,15 +425,124 @@ export default function RadicalsPage() {
           </div>
         )}
 
-        {/* --- TAB 2: QUIZ PRACTICE --- */}
+        {/* --- TAB 2: PRACTICE INTERFACE --- */}
         {activeTab === 'quiz' && (
-          <div className="max-w-md mx-auto py-4">
-            {currentQuizIndex < quizList.length ? (
-              <div className="space-y-6">
-                
-                {/* Score and Progress */}
+          <div className="max-w-2xl mx-auto py-2">
+            
+            {/* 1. CONFIGURATION MENU SCREEN */}
+            {quizState === 'menu' && (
+              <div className="bg-slate-900/20 border border-slate-850 p-6 sm:p-8 rounded-3xl backdrop-blur-xl space-y-6 shadow-2xl animate-in fade-in duration-300">
+                <div className="text-center space-y-2">
+                  <h2 className="text-lg sm:text-xl font-black text-white">LUYỆN TẬP BỘ THỦ KANJI</h2>
+                  <p className="text-xs text-slate-400">Chọn chế độ học tập và phạm vi kiểm tra bộ thủ</p>
+                </div>
+
+                {/* Practice Mode Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {/* Mode Choices */}
+                  <div
+                    onClick={() => setPracticeType('choice')}
+                    className={`p-4 rounded-2xl border cursor-pointer hover:scale-[1.02] transition-all flex flex-col justify-between h-36 ${
+                      practiceType === 'choice'
+                        ? 'bg-teal-950/20 border-teal-500 text-teal-400 shadow-[0_0_15px_rgba(20,184,166,0.15)]'
+                        : 'bg-slate-950/40 border-slate-850 text-slate-300 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="text-xl">🎯</div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider">Trắc nghiệm</h3>
+                      <p className="text-[9px] text-slate-400 mt-1 leading-relaxed">Chọn đáp án đúng từ 4 phương án gợi ý.</p>
+                    </div>
+                  </div>
+
+                  {/* Mode Write */}
+                  <div
+                    onClick={() => setPracticeType('write')}
+                    className={`p-4 rounded-2xl border cursor-pointer hover:scale-[1.02] transition-all flex flex-col justify-between h-36 ${
+                      practiceType === 'write'
+                        ? 'bg-teal-950/20 border-teal-500 text-teal-400 shadow-[0_0_15px_rgba(20,184,166,0.15)]'
+                        : 'bg-slate-950/40 border-slate-850 text-slate-300 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="text-xl">✍️</div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider">Tự luận</h3>
+                      <p className="text-[9px] text-slate-400 mt-1 leading-relaxed">Tự gõ âm Hán-Việt hoặc nghĩa tiếng Việt bộ thủ.</p>
+                    </div>
+                  </div>
+
+                  {/* Mode Speedrun */}
+                  <div
+                    onClick={() => setPracticeType('speedrun')}
+                    className={`p-4 rounded-2xl border cursor-pointer hover:scale-[1.02] transition-all flex flex-col justify-between h-36 ${
+                      practiceType === 'speedrun'
+                        ? 'bg-amber-950/20 border-amber-500 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
+                        : 'bg-slate-950/40 border-slate-850 text-slate-300 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="flex justify-between items-center">
+                      <span className="text-xl">⚡</span>
+                      {highScore > 0 && (
+                        <span className="text-[8px] font-black bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-full uppercase">
+                          Kỷ lục: {highScore}
+                        </span>
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider">Phản xạ nhanh</h3>
+                      <p className="text-[9px] text-slate-400 mt-1 leading-relaxed">Trả lời trắc nghiệm dưới áp lực thời gian 10s.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scope Configuration */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Select group */}
+                  <div className="space-y-2">
+                    <label className="text-[10px] text-slate-450 uppercase font-black tracking-wider block">Phạm vi bộ thủ</label>
+                    <select
+                      value={selectedGroupFilter}
+                      onChange={(e) => setSelectedGroupFilter(e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-850 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer"
+                    >
+                      {groupFilters.map(g => (
+                        <option key={g.id} value={g.id}>{g.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Question limits */}
+                  <div className="space-y-2">
+                    <label className="text-[10px] text-slate-450 uppercase font-black tracking-wider block">Số lượng câu hỏi</label>
+                    <select
+                      value={practiceLimit}
+                      onChange={(e) => setPracticeLimit(Number(e.target.value))}
+                      className="w-full bg-slate-950 border border-slate-850 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer"
+                    >
+                      <option value={10}>10 câu hỏi</option>
+                      <option value={20}>20 câu hỏi</option>
+                      <option value={30}>30 câu hỏi</option>
+                      <option value={999}>Tất cả bộ thủ khả dụng</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Start Button */}
+                <button
+                  onClick={startPractice}
+                  className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-black transition-all cursor-pointer shadow-lg active:scale-95 text-center tracking-widest uppercase"
+                >
+                  BẮT ĐẦU LUYỆN TẬP 🚀
+                </button>
+              </div>
+            )}
+
+            {/* 2. PRACTICE MODE: WRITE (TỰ LUẬN) */}
+            {quizState === 'write' && (
+              <div className="space-y-6 animate-in fade-in duration-300">
+                {/* Header score / progress */}
                 <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase">
-                  <span>Tiến trình: {currentQuizIndex + 1} / {quizList.length}</span>
+                  <span>Câu hỏi: {currentQuizIndex + 1} / {quizList.length}</span>
                   <span className="text-teal-400">Đúng: {score.correct} / {score.total}</span>
                 </div>
                 
@@ -251,119 +553,252 @@ export default function RadicalsPage() {
                   />
                 </div>
 
-                {/* Card Flip Container */}
-                <div 
-                  onClick={() => setQuizFlipped(!quizFlipped)}
-                  className="w-full h-80 relative cursor-pointer group"
-                  style={{ perspective: '1000px' }}
-                >
-                  <div 
-                    className="w-full h-full duration-500 transition-all rounded-3xl shadow-[0_0_35px_rgba(0,0,0,0.3)]"
-                    style={{ 
-                      transformStyle: 'preserve-3d', 
-                      transform: quizFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' 
-                    }}
-                  >
-                    {/* FRONT SIDE (Character display) */}
-                    <div 
-                      className="absolute inset-0 w-full h-full rounded-3xl border border-slate-800 bg-slate-900/50 backdrop-blur-xl flex flex-col justify-between items-center p-8 text-center"
-                      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                    >
-                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Mặt trước - Bộ thủ</span>
-                      <div className="text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 select-none animate-pulse">
-                        {quizList[currentQuizIndex]?.character.split(' ')[0]}
-                      </div>
-                      <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest animate-bounce">Nhấp thẻ để lật 🔄</span>
-                    </div>
-
-                    {/* BACK SIDE (Answers display) */}
-                    <div 
-                      className="absolute inset-0 w-full h-full rounded-3xl border border-teal-500/25 bg-gradient-to-b from-[#0c152a] to-[#040815] backdrop-blur-xl flex flex-col justify-between p-8 text-center"
-                      style={{ 
-                        backfaceVisibility: 'hidden', 
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)'
-                      }}
-                    >
-                      <span className="text-[10px] text-teal-500 font-bold uppercase tracking-wider">Mặt sau - Đáp án</span>
-                      
-                      <div className="space-y-2">
-                        <div className="text-4xl font-black text-white">{quizList[currentQuizIndex]?.character.split(' ')[0]}</div>
-                        <h2 className="text-2xl font-black text-teal-400 uppercase tracking-widest">{quizList[currentQuizIndex]?.sinoVietnamese}</h2>
-                        <p className="text-base font-extrabold text-slate-100">{quizList[currentQuizIndex]?.meaning}</p>
-                        <p className="text-xs text-slate-450 leading-relaxed max-h-24 overflow-y-auto px-2">{quizList[currentQuizIndex]?.description}</p>
-                      </div>
-
-                      <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Click để lật lại 🔄</span>
-                    </div>
+                {/* Radical Display Card */}
+                <div className="bg-slate-900/30 border border-slate-800 p-8 sm:p-12 rounded-3xl backdrop-blur-xl flex flex-col items-center justify-center gap-4 text-center">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Hãy gõ Hán Việt hoặc Nghĩa</span>
+                  <div className="w-24 h-24 bg-slate-950 border border-slate-850 rounded-3xl flex items-center justify-center text-5xl font-black text-white shadow-inner animate-pulse">
+                    {quizList[currentQuizIndex]?.character.split(' ')[0]}
                   </div>
                 </div>
 
-                {/* Answer Options */}
-                {quizFlipped ? (
-                  <div className="grid grid-cols-2 gap-4">
+                {/* Input panel */}
+                <div className="space-y-4">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Nhập Hán Việt hoặc ý nghĩa của bộ thủ..."
+                      value={currentAnswer}
+                      onChange={(e) => setCurrentAnswer(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      disabled={isAnswerChecked}
+                      autoFocus
+                      className="w-full bg-[#FCF3CF]/10 border border-slate-800 rounded-xl px-4 py-3 text-sm text-[#FCF3CF] focus:outline-none focus:border-teal-500 transition-colors placeholder:text-slate-600 disabled:opacity-70 font-bold"
+                    />
+                    {currentAnswer && !isAnswerChecked && (
+                      <button
+                        onClick={() => setCurrentAnswer('')}
+                        className="absolute right-3.5 top-3.5 text-slate-500 hover:text-slate-300 text-xs"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Feedback Message */}
+                  {isAnswerChecked && (
+                    <div className={`p-4 rounded-xl border flex flex-col gap-1 ${
+                      isAnswerCorrect(currentAnswer, quizList[currentQuizIndex])
+                        ? 'bg-emerald-950/20 border-emerald-900/50 text-emerald-400'
+                        : 'bg-red-950/20 border-red-900/50 text-red-400'
+                    }`}>
+                      <span className="text-xs font-black uppercase">
+                        {isAnswerCorrect(currentAnswer, quizList[currentQuizIndex]) ? 'Chính xác! 🎉' : 'Chưa đúng! ❌'}
+                      </span>
+                      <p className="text-xs font-medium">
+                        Đáp án đúng: <span className="font-extrabold">{quizList[currentQuizIndex]?.sinoVietnamese}</span> ({quizList[currentQuizIndex]?.meaning})
+                      </p>
+                      <p className="text-[10px] text-slate-400 mt-1 italic">
+                        💡 {quizList[currentQuizIndex]?.description}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Action Button */}
+                  {!isAnswerChecked ? (
                     <button
-                      onClick={() => handleQuizAnswer(false)}
-                      className="py-3 bg-red-950/20 border border-red-900/40 text-red-400 hover:bg-red-900/30 rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95"
+                      onClick={handleWriteCheck}
+                      disabled={!currentAnswer.trim()}
+                      className="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 disabled:from-slate-900 disabled:to-slate-900 disabled:text-slate-500 text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
                     >
-                      ❌ Chưa thuộc
+                      KIỂM TRA ĐÁP ÁN
                     </button>
+                  ) : (
                     <button
-                      onClick={() => handleQuizAnswer(true)}
-                      className="py-3 bg-emerald-950/20 border border-emerald-900/40 text-emerald-400 hover:bg-emerald-900/30 rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95"
+                      onClick={handleNextQuestion}
+                      className="w-full py-3 bg-slate-950 border border-slate-800 text-slate-200 hover:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
                     >
-                      🟢 Đã thuộc
+                      {currentQuizIndex + 1 < quizList.length ? 'CÂU TIẾP THEO' : 'XEM KẾT QUẢ'}
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* 3. PRACTICE MODE: CHOICE (TRẮC NGHIỆM) */}
+            {quizState === 'choice' && (
+              <div className="space-y-6 animate-in fade-in duration-300">
+                {/* Header score / progress */}
+                <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase">
+                  <span>Câu hỏi: {currentQuizIndex + 1} / {quizList.length}</span>
+                  <span className="text-teal-400">Đúng: {score.correct} / {score.total}</span>
+                </div>
+                
+                <div className="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-900">
+                  <div
+                    className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-300"
+                    style={{ width: `${((currentQuizIndex) / quizList.length) * 100}%` }}
+                  />
+                </div>
+
+                {/* Radical Display Card */}
+                <div className="bg-slate-900/30 border border-slate-800 p-8 sm:p-12 rounded-3xl backdrop-blur-xl flex flex-col items-center justify-center gap-4 text-center">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Hãy chọn Hán Việt và Nghĩa đúng</span>
+                  <div className="w-24 h-24 bg-slate-950 border border-slate-850 rounded-3xl flex items-center justify-center text-5xl font-black text-white shadow-inner animate-pulse">
+                    {quizList[currentQuizIndex]?.character.split(' ')[0]}
+                  </div>
+                </div>
+
+                {/* Choice Buttons Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {choiceOptions.map(option => {
+                    const correctOption = `${quizList[currentQuizIndex]?.sinoVietnamese} - ${quizList[currentQuizIndex]?.meaning}`;
+                    const isOptionCorrect = option === correctOption;
+                    
+                    let btnStyle = "bg-slate-950 border-slate-850 text-slate-200 hover:border-slate-700 hover:bg-slate-900/20";
+                    if (isAnswerChecked) {
+                      if (isOptionCorrect) {
+                        btnStyle = "bg-emerald-950/30 border-emerald-500 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.15)]";
+                      } else {
+                        btnStyle = "bg-slate-950 border-slate-900 text-slate-600 opacity-60";
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={option}
+                        onClick={() => handleChoiceSelect(option)}
+                        disabled={isAnswerChecked}
+                        className={`w-full py-4 px-4 rounded-xl border text-xs font-black transition-all cursor-pointer active:scale-95 text-center ${btnStyle}`}
+                      >
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Description and Next Button */}
+                {isAnswerChecked && (
+                  <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="p-4 rounded-xl border bg-slate-950/40 border-slate-850 text-slate-300">
+                      <h4 className="text-xs font-black uppercase text-teal-400 tracking-wider">
+                        💡 Giải thích: Bộ {quizList[currentQuizIndex]?.sinoVietnamese} ({quizList[currentQuizIndex]?.meaning})
+                      </h4>
+                      <p className="text-[11px] leading-relaxed mt-2 text-slate-400">
+                        {quizList[currentQuizIndex]?.description}
+                      </p>
+                    </div>
+                    
+                    <button
+                      onClick={handleNextQuestion}
+                      className="w-full py-3 bg-slate-950 border border-slate-800 text-slate-250 hover:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
+                    >
+                      {currentQuizIndex + 1 < quizList.length ? 'CÂU TIẾP THEO' : 'XEM KẾT QUẢ'}
                     </button>
                   </div>
-                ) : (
-                  <button
-                    onClick={() => setQuizFlipped(true)}
-                    className="w-full py-3 bg-slate-900 border border-slate-800 text-slate-350 hover:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 text-center block"
-                  >
-                    👀 Xem đáp án
-                  </button>
                 )}
-
               </div>
-            ) : (
-              // Quiz Finished Screen
-              <div className="bg-slate-900/20 border border-slate-850 p-8 rounded-3xl backdrop-blur-xl text-center space-y-6 shadow-2xl">
-                <div className="text-5xl">🏆</div>
+            )}
+
+            {/* 4. PRACTICE MODE: SPEEDRUN (PHẢN XẠ NHANH) */}
+            {quizState === 'speedrun' && (
+              <div className="space-y-6 animate-in fade-in duration-300">
+                {/* Header score & timer */}
+                <div className="flex items-center justify-between text-xs font-bold uppercase">
+                  <div className="flex items-center gap-2">
+                    <span className="text-slate-400">Streak:</span>
+                    <span className="text-amber-500 font-extrabold animate-bounce">🔥 {streak}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-teal-400 font-black">Điểm: {score.correct}</span>
+                    <span className="text-slate-400">Kỷ lục: {highScore}</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-900 relative">
+                  <div
+                    className="bg-gradient-to-r from-amber-500 to-red-500 h-full rounded-full transition-all duration-100 ease-linear"
+                    style={{ width: `${(timeLeft / maxTime) * 100}%` }}
+                  />
+                </div>
+
+                {/* Question screen */}
+                <div className="bg-gradient-to-b from-[#18112e] to-[#040815] border border-amber-500/20 p-8 sm:p-12 rounded-3xl flex flex-col items-center justify-center gap-4 text-center shadow-[0_0_35px_rgba(245,158,11,0.05)]">
+                  <span className="text-[10px] text-amber-500 font-bold uppercase tracking-widest block">Trả lời thật nhanh! ⚡</span>
+                  <div className="w-24 h-24 bg-slate-950 border border-slate-850 rounded-3xl flex items-center justify-center text-5xl font-black text-white shadow-inner">
+                    {quizList[currentQuizIndex]?.character.split(' ')[0]}
+                  </div>
+                </div>
+
+                {/* Choices buttons - immediate answer checking */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {choiceOptions.map(option => (
+                    <button
+                      key={option}
+                      onClick={() => handleSpeedrunChoiceSelect(option)}
+                      className="w-full py-4 px-4 bg-slate-950 border border-slate-850 hover:border-amber-500/40 text-slate-200 hover:text-white rounded-xl border text-xs font-black transition-all cursor-pointer active:scale-95 text-center font-bold"
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 5. FINISHED RESULT SCREEN */}
+            {quizState === 'finished' && (
+              <div className="bg-slate-900/20 border border-slate-850 p-8 rounded-3xl backdrop-blur-xl text-center space-y-6 shadow-2xl animate-in zoom-in-95 duration-200">
+                <div className="text-5xl animate-bounce">🏆</div>
                 <div className="space-y-1">
-                  <h2 className="text-xl font-black text-white">Kết quả luyện tập</h2>
-                  <p className="text-xs text-slate-450">Hoàn thành lượt ôn tập 10 bộ thủ ngẫu nhiên</p>
+                  <h2 className="text-xl font-black text-white">HOÀN THÀNH LUYỆN TẬP</h2>
+                  <p className="text-xs text-slate-450">Hoàn thành lượt kiểm tra bộ thủ Kanji</p>
                 </div>
 
                 <div className="py-6 border-y border-slate-850/60 flex items-center justify-around">
-                  <div>
-                    <span className="block text-2xl font-black text-teal-400">{score.correct} / 10</span>
-                    <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Đúng</span>
-                  </div>
-                  <div>
-                    <span className="block text-2xl font-black text-indigo-400">{Math.round((score.correct / 10) * 100)}%</span>
-                    <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Độ chính xác</span>
-                  </div>
+                  {practiceType === 'speedrun' ? (
+                    <>
+                      <div>
+                        <span className="block text-2xl font-black text-amber-400">{score.correct} câu</span>
+                        <span className="text-[10px] text-slate-550 uppercase font-bold tracking-wider">Đúng liên tiếp</span>
+                      </div>
+                      <div>
+                        <span className="block text-2xl font-black text-indigo-400">{highScore} câu</span>
+                        <span className="text-[10px] text-slate-550 uppercase font-bold tracking-wider">Kỷ lục của bạn</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <span className="block text-2xl font-black text-teal-400">{score.correct} / {quizList.length}</span>
+                        <span className="text-[10px] text-slate-550 uppercase font-bold tracking-wider">Số câu đúng</span>
+                      </div>
+                      <div>
+                        <span className="block text-2xl font-black text-indigo-400">{Math.round((score.correct / quizList.length) * 100)}%</span>
+                        <span className="text-[10px] text-slate-550 uppercase font-bold tracking-wider">Độ chính xác</span>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 pt-2">
                   <button
-                    onClick={() => router.back()}
-                    className="py-3 bg-slate-950 border border-slate-850 text-slate-300 hover:text-white text-xs font-black rounded-xl cursor-pointer active:scale-95 transition-all"
+                    onClick={() => setQuizState('menu')}
+                    className="py-3 bg-slate-950 border border-slate-850 text-slate-350 hover:text-white text-xs font-black rounded-xl cursor-pointer active:scale-95 transition-all"
                   >
-                    ⬅️ Quay về
+                    ⚙️ Menu chính
                   </button>
                   <button
-                    onClick={startNewQuiz}
+                    onClick={startPractice}
                     className="py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black rounded-xl cursor-pointer active:scale-95 transition-all shadow-lg"
                   >
-                    🔄 Luyện lại
+                    🔄 Luyện tập lại
                   </button>
                 </div>
               </div>
             )}
+
           </div>
         )}
-
       </main>
 
       {/* --- RADICAL DETAIL MODAL --- */}
