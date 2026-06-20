@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, use, useMemo, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { api } from '../../utils/api';
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/roadmapMapping';
-import { VOCAB_IMAGES } from '../../utils/vocabImages';
+import { getKanjiForm } from '../../utils/kanjiFormLookup';
 import CourseSwitcher from '../../components/CourseSwitcher';
 import { getRadicalsString } from '../../utils/kanjiRadicals';
 
@@ -311,7 +311,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Luyện tập (Practice) States
   const [practiceMode, setPracticeMode] = useState<'vocab' | 'kanji'>('vocab');
   const [practiceLimit, setPracticeLimit] = useState<number>(10);
-  const [practiceType, setPracticeType] = useState<'write' | 'image' | 'speedrun'>('write');
+  const [practiceType, setPracticeType] = useState<'write' | 'speedrun'>('write');
   const [useRomaji, setUseRomaji] = useState<boolean>(false);
   const [baseShuffledList, setBaseShuffledList] = useState<any[]>([]);
   const [practiceList, setPracticeList] = useState<any[]>([]);
@@ -319,6 +319,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [isGraded, setIsGraded] = useState<boolean>(false);
   const [visibleAnswers, setVisibleAnswers] = useState<Record<string, boolean>>({});
   const [practiceDirection, setPracticeDirection] = useState<'vi-to-ja' | 'ja-to-vi'>('vi-to-ja');
+  const [practiceScriptMode, setPracticeScriptMode] = useState<'hiragana' | 'kanji'>('hiragana');
+
+  useEffect(() => {
+    setPracticeScriptMode('hiragana');
+  }, [selectedLessonId]);
 
   // Practice Status Filter
   const [practiceFilterStatuses, setPracticeFilterStatuses] = useState<Record<string, boolean>>({
@@ -327,18 +332,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     mastered: false
   });
   const [practiceDropdownOpen, setPracticeDropdownOpen] = useState<boolean>(false);
-
-  // Image Practice States
-  const [imageQuizIndex, setImageQuizIndex] = useState<number>(0);
-  const [imageQuizSelectedAnswer, setImageQuizSelectedAnswer] = useState<string | null>(null);
-  const [imageQuizTypedAnswer, setImageQuizTypedAnswer] = useState<string>('');
-  const [imageQuizChecked, setImageQuizChecked] = useState<boolean>(false);
-  const [imageQuizScore, setImageQuizScore] = useState<number>(0);
-  const [imageQuizPlayed, setImageQuizPlayed] = useState<number>(0);
-  const [imageQuizList, setImageQuizList] = useState<VocabItem[]>([]);
-  const [imageQuizChoices, setImageQuizChoices] = useState<string[]>([]);
-  const [imageQuizFeedbackMsg, setImageQuizFeedbackMsg] = useState<string>('');
-  const [imagePracticeSubMode, setImagePracticeSubMode] = useState<'choices' | 'write'>('choices');
 
   // Speedrun Practice States
   const [speedrunActive, setSpeedrunActive] = useState<boolean>(false);
@@ -350,6 +343,14 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(10);
   const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
   const [speedrunDirection, setSpeedrunDirection] = useState<'ja-to-vi' | 'vi-to-ja'>('ja-to-vi');
+  
+  // Speedrun Status Filter
+  const [speedrunFilterStatuses, setSpeedrunFilterStatuses] = useState<Record<string, boolean>>({
+    not_learned: false,
+    learning: false,
+    mastered: false
+  });
+  const [speedrunDropdownOpen, setSpeedrunDropdownOpen] = useState<boolean>(false);
   
   const speedrunTimerRef = useRef<any>(null);
   const speedrunScoreRef = useRef<number>(0);
@@ -365,6 +366,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       const flashcardsEl = document.getElementById('flashcards-dropdown-container');
       if (flashcardsEl && !flashcardsEl.contains(event.target as Node)) {
         setFlashcardDropdownOpen(false);
+      }
+      const speedrunEl = document.getElementById('speedrun-dropdown-container');
+      if (speedrunEl && !speedrunEl.contains(event.target as Node)) {
+        setSpeedrunDropdownOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -1015,75 +1020,14 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     router.replace('/login');
   };
 
-  // Image Practice Handlers
-  const generateImageQuizChoices = useCallback((currentQuestion: VocabItem, allEligible: VocabItem[]) => {
-    if (!currentQuestion) return;
-    
-    const correct = currentQuestion.hiragana;
-    const distractors = allEligible
-      .filter(item => item.hiragana !== correct)
-      .map(item => item.hiragana);
-      
-    const shuffledDistractors = [...distractors].sort(() => Math.random() - 0.5).slice(0, 3);
-    const choices = [...shuffledDistractors, correct].sort(() => Math.random() - 0.5);
-    setImageQuizChoices(choices);
-  }, []);
 
-  const startImagePractice = useCallback(() => {
-    const eligible = vocabItems.filter(item => VOCAB_IMAGES[item.hiragana] || VOCAB_IMAGES[item.romaji]);
-    if (eligible.length < 4) {
-      setImageQuizList([]);
-      return;
-    }
-    
-    const shuffled = [...eligible].sort(() => Math.random() - 0.5);
-    setImageQuizList(shuffled);
-    setImageQuizIndex(0);
-    setImageQuizScore(0);
-    setImageQuizPlayed(0);
-    setImageQuizSelectedAnswer(null);
-    setImageQuizTypedAnswer('');
-    setImageQuizChecked(false);
-    setImageQuizFeedbackMsg('');
-    
-    generateImageQuizChoices(shuffled[0], eligible);
-  }, [vocabItems, generateImageQuizChoices]);
 
-  const checkImageAnswer = (answer: string) => {
-    if (imageQuizChecked) return;
-    
-    const current = imageQuizList[imageQuizIndex];
-    const isCorrect = calculateAccuracy(answer, current.hiragana) === 100 || 
-                      calculateAccuracy(answer, current.romaji) === 100;
-                      
-    setImageQuizChecked(true);
-    setImageQuizPlayed(prev => prev + 1);
-    
-    if (isCorrect) {
-      setImageQuizScore(prev => prev + 1);
-      setImageQuizFeedbackMsg('Đúng rồi! 🎉');
-      playAudio(current.hiragana);
-    } else {
-      setImageQuizFeedbackMsg(`Chưa đúng! Đáp án đúng là: ${current.hiragana} (${current.romaji})`);
-      playAudio(current.hiragana);
-    }
-  };
-
-  const nextImageQuiz = () => {
-    const nextIdx = imageQuizIndex + 1;
-    const eligible = vocabItems.filter(item => VOCAB_IMAGES[item.hiragana] || VOCAB_IMAGES[item.romaji]);
-    if (nextIdx < imageQuizList.length && nextIdx < practiceLimit) {
-      setImageQuizIndex(nextIdx);
-      setImageQuizSelectedAnswer(null);
-      setImageQuizTypedAnswer('');
-      setImageQuizChecked(false);
-      setImageQuizFeedbackMsg('');
-      generateImageQuizChoices(imageQuizList[nextIdx], eligible);
-    } else {
-      setImageQuizChecked(true);
-      setImageQuizFeedbackMsg(`Hoàn thành! Bạn đạt ${imageQuizScore}/${imageQuizPlayed} câu đúng.`);
-    }
-  };
+  // Speedrun Source List with filter
+  const speedrunSourceList = useMemo(() => {
+    const active = Object.keys(speedrunFilterStatuses).filter(k => speedrunFilterStatuses[k]);
+    if (active.length === 0) return vocabItems;
+    return vocabItems.filter(item => speedrunFilterStatuses[item.status]);
+  }, [vocabItems, speedrunFilterStatuses]);
 
   // Speedrun Practice Game Logic
   useEffect(() => {
@@ -1098,10 +1042,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   }, [selectedLessonId, speedrunDirection]);
 
   const nextSpeedrunQuestion = useCallback((currentScore: number) => {
-    const randomQuestion = vocabItems[Math.floor(Math.random() * vocabItems.length)];
+    const randomQuestion = speedrunSourceList[Math.floor(Math.random() * speedrunSourceList.length)];
     setSpeedrunQuestion(randomQuestion);
 
-    const distractors = vocabItems
+    const distractors = speedrunSourceList
       .filter(item => item.id !== randomQuestion.id)
       .map(item => speedrunDirection === 'ja-to-vi' ? item.vietnamese_meaning : item.hiragana);
     const shuffledDist = [...distractors].sort(() => Math.random() - 0.5).slice(0, 3);
@@ -1140,10 +1084,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         }
       }
     }, 50);
-  }, [vocabItems, selectedLessonId, speedrunDirection]);
+  }, [speedrunSourceList, selectedLessonId, speedrunDirection]);
 
   const startSpeedrun = () => {
-    if (vocabItems.length < 4) {
+    if (speedrunSourceList.length < 4) {
       showNotification('Không đủ từ vựng để chơi phản xạ.');
       return;
     }
@@ -1163,6 +1107,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       clearInterval(speedrunTimerRef.current);
     }
   }, []);
+
+  // Stop speedrun when status filter changes
+  useEffect(() => {
+    stopSpeedrun();
+  }, [speedrunFilterStatuses, stopSpeedrun]);
 
   const checkSpeedrunAnswer = (selected: string) => {
     if (!speedrunQuestion) return;
@@ -1384,7 +1333,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       {/* Mobile Hamburger toggle button */}
       <button
         onClick={() => setIsSidebarOpen(true)}
-        className="md:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
+        className="lg:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -1395,12 +1344,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       {isSidebarOpen && (
         <div
           onClick={() => setIsSidebarOpen(false)}
-          className="md:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
+          className="lg:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
         />
       )}
 
       {/* 1. Left Sidebar Navigation Menu */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 md:relative md:translate-x-0 ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 lg:relative lg:translate-x-0 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
@@ -1411,7 +1360,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="md:hidden text-slate-400 hover:text-slate-200 text-xl p-1 font-bold cursor-pointer"
+              className="lg:hidden text-slate-400 hover:text-slate-200 text-xl p-1 font-bold cursor-pointer"
             >
               ✕
             </button>
@@ -1484,7 +1433,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       </aside>
 
       {/* 2. Main Content Area */}
-      <main className="flex-1 overflow-y-auto p-6 pt-20 md:p-8 lg:p-10 space-y-6 md:space-y-8">
+      <main className="flex-1 overflow-y-auto p-6 pt-20 lg:p-10 space-y-6 md:space-y-8">
         
         {/* Toast Notification message */}
         {message && (
@@ -1772,7 +1721,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   📝 Không có từ vựng mới nào trong mẫu ngữ pháp này.
                                 </div>
                               ) : (
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   {group.newItems.map((item) => {
                                     let borderClass = 'border-slate-850';
                                     let statusBg = 'bg-slate-950/40';
@@ -1942,7 +1891,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
                           {/* Accordion Content */}
                           {!isCollapsedBool && (
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                               {processedVocabGroups.supplemental.map((item) => {
                                 let borderClass = 'border-slate-850';
                                 let statusBg = 'bg-slate-950/40';
@@ -3268,7 +3217,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     {/* Control settings */}
                     <div className="flex flex-wrap items-center gap-4">
-                      {/* Select practiceType: Tự luận / Luyện hình ảnh / Phản xạ nhanh */}
+                      {/* Select practiceType: Tự luận / Phản xạ nhanh */}
                       <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-800 flex">
                         <button
                           onClick={() => setPracticeType('write')}
@@ -3279,19 +3228,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           }`}
                         >
                           ✍️ Tự luận
-                        </button>
-                        <button
-                          onClick={() => {
-                            setPracticeType('image');
-                            startImagePractice();
-                          }}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                            practiceType === 'image'
-                              ? 'bg-blue-600 text-white shadow-lg'
-                              : 'text-slate-400 hover:text-slate-200'
-                          }`}
-                        >
-                          🖼️ Hình ảnh
                         </button>
                         <button
                           onClick={() => {
@@ -3461,6 +3397,32 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <span>Trả lời bằng Romaji</span>
                         </label>
                       )}
+
+                      {/* Kanji/Hiragana Toggle (Nhật-Việt Vocab only) */}
+                      {practiceType === 'write' && practiceMode === 'vocab' && practiceDirection === 'ja-to-vi' && (
+                        <div className="bg-slate-950/60 p-1 rounded-xl border border-slate-800 flex">
+                          <button
+                            onClick={() => setPracticeScriptMode('hiragana')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                              practiceScriptMode === 'hiragana'
+                                ? 'bg-indigo-600 text-white shadow-lg'
+                                : 'text-slate-400 hover:text-slate-200'
+                            }`}
+                          >
+                            📖 Hira/Kata
+                          </button>
+                          <button
+                            onClick={() => setPracticeScriptMode('kanji')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                              practiceScriptMode === 'kanji'
+                                ? 'bg-indigo-600 text-white shadow-lg'
+                                : 'text-slate-400 hover:text-slate-200'
+                            }`}
+                          >
+                            🉐 Kanji
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     {/* Shuffle button */}
@@ -3489,7 +3451,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                     ) : (
                       <div className="space-y-6">
                         {/* Desktop View Table */}
-                        <div className="hidden md:block overflow-hidden rounded-2xl border border-slate-900 bg-slate-950/20 backdrop-blur-md shadow-xl">
+                        <div className="hidden lg:block overflow-x-auto rounded-2xl border border-slate-900 bg-slate-950/20 backdrop-blur-md shadow-xl">
                           <table className="w-full text-left border-collapse">
                             <thead>
                               <tr className="bg-slate-900/60 border-b border-slate-800/80">
@@ -3516,7 +3478,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 let correctAnswer = '';
                                 
                                 if (isVocab) {
-                                  questionText = isViToJa ? item.vietnamese_meaning : item.hiragana;
+                                  questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? getKanjiForm(item.hiragana, kanjiItems) : item.hiragana);
                                   placeholderText = isViToJa 
                                     ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
                                     : 'Nhập nghĩa tiếng Việt...';
@@ -3610,7 +3572,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         </div>
 
                         {/* Mobile View Cards */}
-                        <div className="md:hidden space-y-4">
+                        <div className="lg:hidden space-y-4">
                           {practiceList.map((item, idx) => {
                             const isVocab = practiceMode === 'vocab';
                             const isViToJa = practiceDirection === 'vi-to-ja';
@@ -3620,7 +3582,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             let correctAnswer = '';
                             
                             if (isVocab) {
-                              questionText = isViToJa ? item.vietnamese_meaning : item.hiragana;
+                              questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? getKanjiForm(item.hiragana, kanjiItems) : item.hiragana);
                               placeholderText = isViToJa 
                                 ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
                                 : 'Nhập nghĩa tiếng Việt...';
@@ -3760,192 +3722,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </>
                 )}
 
-                {practiceType === 'image' && (
-                  <div className="space-y-6">
-                    {/* Sub Mode Selector & Stats */}
-                    <div className="bg-slate-900/40 border border-slate-800 p-4 rounded-2xl backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div className="flex items-center space-x-3">
-                        <span className="text-xs font-bold text-slate-400">Kiểu câu hỏi:</span>
-                        <select
-                          value={imagePracticeSubMode}
-                          onChange={(e) => {
-                            setImagePracticeSubMode(e.target.value as 'choices' | 'write');
-                            setImageQuizSelectedAnswer(null);
-                            setImageQuizTypedAnswer('');
-                            setImageQuizChecked(false);
-                            setImageQuizFeedbackMsg('');
-                          }}
-                          className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-blue-600 cursor-pointer"
-                        >
-                          <option value="choices">🎯 Trắc nghiệm (Chọn đáp án)</option>
-                          <option value="write">✍️ Tự luận (Nhập kết quả)</option>
-                        </select>
-                      </div>
-
-                      <div className="flex items-center gap-6">
-                        <span className="text-xs text-slate-400">
-                          Tiến độ: <strong className="text-blue-400">{imageQuizIndex + 1}</strong> / {Math.min(imageQuizList.length, practiceLimit)}
-                        </span>
-                        <span className="text-xs text-slate-400">
-                          Đúng: <strong className="text-emerald-400">{imageQuizScore}</strong> / {imageQuizPlayed}
-                        </span>
-                        <button
-                          onClick={startImagePractice}
-                          className="px-3 py-1 bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-350 hover:text-white rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95"
-                        >
-                          🔄 Chơi lại
-                        </button>
-                      </div>
-                    </div>
-
-                    {imageQuizList.length === 0 ? (
-                      <div className="text-center py-20 text-slate-500 text-sm border border-dashed border-slate-800 rounded-2xl bg-slate-900/10">
-                        📭 Không có từ vựng có hình ảnh trong bài học hoặc bộ lọc hiện tại. (Cần ít nhất 4 từ có ảnh).
-                      </div>
-                    ) : (
-                      <div className="max-w-2xl mx-auto bg-slate-900/40 border border-slate-850 p-6 rounded-3xl backdrop-blur-md space-y-6 shadow-2xl">
-                        {/* Image Panel */}
-                        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-850 bg-slate-950/80 flex items-center justify-center group shadow-inner">
-                          {(() => {
-                            const current = imageQuizList[imageQuizIndex];
-                            const imgUrl = current ? (VOCAB_IMAGES[current.hiragana] || VOCAB_IMAGES[current.romaji]) : '';
-                            return current && imgUrl ? (
-                              <img
-                                src={imgUrl}
-                                alt="Practice vocabulary illustration"
-                                className="object-cover max-h-full max-w-full transition-transform duration-500 group-hover:scale-105"
-                              />
-                            ) : (
-                              <span className="text-slate-500 text-xs">Không tìm thấy ảnh</span>
-                            );
-                          })()}
-                        </div>
-
-                        {/* Answer reveal when checked */}
-                        {imageQuizChecked && imageQuizList[imageQuizIndex] && (
-                          <div className="text-center bg-slate-950/40 border border-slate-850 p-4 rounded-2xl animate-fade-in space-y-1">
-                            <span className="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Từ vựng</span>
-                            <div className="flex items-center justify-center space-x-2">
-                              <h4 className="text-lg font-bold text-blue-400">
-                                {imageQuizList[imageQuizIndex].hiragana}
-                              </h4>
-                              <span className="text-xs text-slate-400 font-mono">({imageQuizList[imageQuizIndex].romaji})</span>
-                              <button
-                                onClick={() => playAudio(imageQuizList[imageQuizIndex].hiragana)}
-                                className="p-1 rounded-md bg-slate-900 border border-slate-800 text-[10px] text-slate-300 hover:text-blue-400 cursor-pointer"
-                              >
-                                🔊
-                              </button>
-                            </div>
-                            <p className="text-sm text-slate-300 font-medium">{imageQuizList[imageQuizIndex].vietnamese_meaning}</p>
-                          </div>
-                        )}
-
-                        {/* Interaction Panel */}
-                        <div className="space-y-4">
-                          {imagePracticeSubMode === 'choices' ? (
-                            /* Submode Choices: 4 buttons */
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              {imageQuizChoices.map((choice, idx) => {
-                                const current = imageQuizList[imageQuizIndex];
-                                const isSelected = imageQuizSelectedAnswer === choice;
-                                const isCorrectAnswer = current && choice === current.hiragana;
-                                
-                                let buttonClass = "bg-slate-950/60 border-slate-800 text-slate-300 hover:border-blue-600 hover:text-white";
-                                if (imageQuizChecked) {
-                                  if (isCorrectAnswer) {
-                                    buttonClass = "bg-emerald-950/60 border-emerald-500 text-emerald-400 font-extrabold shadow-[0_0_15px_rgba(16,185,129,0.15)]";
-                                  } else if (isSelected) {
-                                    buttonClass = "bg-red-950/60 border-red-500 text-red-400 font-extrabold shadow-[0_0_15px_rgba(239,68,68,0.15)]";
-                                  } else {
-                                    buttonClass = "bg-slate-950/20 border-slate-900 text-slate-500 opacity-60";
-                                  }
-                                }
-
-                                return (
-                                  <button
-                                    key={idx}
-                                    disabled={imageQuizChecked}
-                                    onClick={() => {
-                                      setImageQuizSelectedAnswer(choice);
-                                      checkImageAnswer(choice);
-                                    }}
-                                    className={`w-full py-4.5 px-4 rounded-2xl border text-sm font-bold text-center transition-all duration-300 cursor-pointer active:scale-98 ${buttonClass}`}
-                                  >
-                                    {choice}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            /* Submode Write: input box */
-                            <div className="space-y-4">
-                              <div className="flex gap-3">
-                                <input
-                                  type="text"
-                                  placeholder="Nhập Hiragana hoặc Romaji..."
-                                  value={imageQuizTypedAnswer}
-                                  disabled={imageQuizChecked}
-                                  onChange={(e) => setImageQuizTypedAnswer(e.target.value)}
-                                  onKeyDown={(e) => {
-                                    if (e.key === 'Enter' && imageQuizTypedAnswer.trim() !== '') {
-                                      checkImageAnswer(imageQuizTypedAnswer.trim());
-                                    }
-                                  }}
-                                  className={`flex-1 bg-[#FCF3CF] text-slate-900 font-extrabold text-sm px-4.5 py-3 rounded-2xl border focus:outline-none placeholder:text-slate-500 transition-all ${
-                                    imageQuizChecked && imageQuizList[imageQuizIndex]
-                                      ? (calculateAccuracy(imageQuizTypedAnswer, imageQuizList[imageQuizIndex].hiragana) === 100 || 
-                                         calculateAccuracy(imageQuizTypedAnswer, imageQuizList[imageQuizIndex].romaji) === 100)
-                                        ? 'border-emerald-500 focus:ring-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
-                                        : 'border-red-500 focus:ring-red-500 shadow-[0_0_15px_rgba(239,68,68,0.15)]'
-                                      : 'border-slate-700/60 focus:ring-2 focus:ring-blue-600'
-                                  }`}
-                                />
-                                {!imageQuizChecked && (
-                                  <button
-                                    onClick={() => checkImageAnswer(imageQuizTypedAnswer.trim())}
-                                    disabled={imageQuizTypedAnswer.trim() === ''}
-                                    className="px-6 rounded-2xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:hover:bg-blue-600 text-white text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer"
-                                  >
-                                    Kiểm tra
-                                  </button>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Feedback & Navigation */}
-                        {imageQuizFeedbackMsg && (
-                          <div className={`p-4 rounded-2xl text-center text-xs font-bold animate-fade-in border ${
-                            imageQuizFeedbackMsg.includes('Đúng')
-                              ? 'bg-emerald-950/30 border-emerald-900/50 text-emerald-400'
-                              : imageQuizFeedbackMsg.includes('Hoàn thành')
-                              ? 'bg-indigo-950/30 border-indigo-900/50 text-indigo-400'
-                              : 'bg-red-950/30 border-red-900/50 text-red-400'
-                          }`}>
-                            {imageQuizFeedbackMsg}
-                          </div>
-                        )}
-
-                        {imageQuizChecked && (
-                          <div className="flex justify-end pt-2">
-                            <button
-                              onClick={nextImageQuiz}
-                              className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs transition-all duration-300 shadow-md active:scale-95 cursor-pointer flex items-center space-x-1.5"
-                            >
-                              <span>
-                                {imageQuizIndex + 1 < imageQuizList.length && imageQuizIndex + 1 < practiceLimit
-                                  ? 'Câu tiếp theo ➔'
-                                  : 'Kết quả ôn tập ➔'}
-                              </span>
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                )}
 
                 {practiceType === 'speedrun' && (
                   <div className="space-y-6">
@@ -3958,6 +3734,81 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
                             Trắc nghiệm phản xạ từ vựng giới hạn thời gian (10 giây). Mỗi 2 câu đúng liên tục sẽ rút ngắn thời gian suy nghĩ của các câu tiếp theo!
                           </p>
+                        </div>
+                        {/* Status Filter Selection */}
+                        <div className="space-y-2">
+                          <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Bộ lọc từ vựng ({speedrunSourceList.length} từ sẵn sàng)</span>
+                          <div id="speedrun-dropdown-container" className="relative flex justify-center">
+                            <button
+                              onClick={() => setSpeedrunDropdownOpen(!speedrunDropdownOpen)}
+                              className="flex items-center space-x-2 bg-slate-950/60 border border-slate-850 px-4 py-2.5 rounded-2xl text-xs font-bold text-slate-300 cursor-pointer hover:text-white transition-colors max-w-xs w-full justify-between"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <span>🎯 Lọc:</span>
+                                <span className="text-blue-400">
+                                  {Object.values(speedrunFilterStatuses).filter(Boolean).length === 0
+                                    ? 'Học hết'
+                                    : Object.keys(speedrunFilterStatuses)
+                                        .filter((k) => speedrunFilterStatuses[k])
+                                        .map((k) =>
+                                          k === 'not_learned'
+                                            ? 'Chưa học'
+                                            : k === 'learning'
+                                            ? 'Đang học'
+                                            : 'Đã thuộc'
+                                        )
+                                        .join(', ')}
+                                </span>
+                              </div>
+                              <span className="text-[10px]">▼</span>
+                            </button>
+                            {speedrunDropdownOpen && (
+                              <div className="absolute top-full mt-2 w-48 bg-slate-900 border border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1 text-left">
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-850 rounded-lg cursor-pointer text-xs text-slate-300 hover:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={speedrunFilterStatuses.not_learned}
+                                    onChange={(e) =>
+                                      setSpeedrunFilterStatuses((prev) => ({
+                                        ...prev,
+                                        not_learned: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                  />
+                                  <span>Chưa học</span>
+                                </label>
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-850 rounded-lg cursor-pointer text-xs text-slate-300 hover:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={speedrunFilterStatuses.learning}
+                                    onChange={(e) =>
+                                      setSpeedrunFilterStatuses((prev) => ({
+                                        ...prev,
+                                        learning: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                  />
+                                  <span>Đang học</span>
+                                </label>
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-850 rounded-lg cursor-pointer text-xs text-slate-300 hover:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={speedrunFilterStatuses.mastered}
+                                    onChange={(e) =>
+                                      setSpeedrunFilterStatuses((prev) => ({
+                                        ...prev,
+                                        mastered: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                  />
+                                  <span>Đã thuộc</span>
+                                </label>
+                              </div>
+                            )}
+                          </div>
                         </div>
 
                         {/* Direction Selection */}
@@ -4046,9 +3897,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <h3 className="text-3xl font-black text-white leading-relaxed font-sans select-none">
                                 {speedrunQuestion.hiragana}
                               </h3>
-                              {speedrunQuestion.romaji && (
-                                <p className="text-xs text-slate-400 font-mono select-none">({speedrunQuestion.romaji})</p>
-                              )}
                             </div>
                           ) : (
                             <h3 className="text-xl font-black text-white leading-relaxed px-4 select-none">

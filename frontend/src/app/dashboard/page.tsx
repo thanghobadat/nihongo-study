@@ -396,7 +396,7 @@ export default function UserDashboard() {
       {/* Mobile Hamburger toggle button */}
       <button
         onClick={() => setIsSidebarOpen(true)}
-        className="md:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
+        className="lg:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -407,12 +407,12 @@ export default function UserDashboard() {
       {isSidebarOpen && (
         <div
           onClick={() => setIsSidebarOpen(false)}
-          className="md:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
+          className="lg:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
         />
       )}
 
       {/* 1. Left Sidebar Navigation Menu */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 md:relative md:translate-x-0 ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 lg:relative lg:translate-x-0 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
@@ -423,7 +423,7 @@ export default function UserDashboard() {
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="md:hidden text-slate-400 hover:text-slate-200 text-xl p-1 font-bold cursor-pointer"
+              className="lg:hidden text-slate-400 hover:text-slate-200 text-xl p-1 font-bold cursor-pointer"
             >
               ✕
             </button>
@@ -501,7 +501,7 @@ export default function UserDashboard() {
       </aside>
 
       {/* 2. Main Content Area */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 md:p-8 lg:p-10 space-y-6 md:space-y-8">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 lg:p-10 space-y-6 md:space-y-8">
         
         {/* Toast Notification message */}
         {message && (
@@ -571,121 +571,97 @@ export default function UserDashboard() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8">
 
-            {/* Today's Target Status (Moved to top and made lg:col-span-12) */}
-            <div className="lg:col-span-12 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
+            {/* Today's Target Status */}
+            <div className="md:col-span-2 lg:col-span-12 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
               <div className="flex items-center justify-between mb-5 border-b border-slate-800/60 pb-3">
                 <h2 className="text-sm sm:text-md font-bold text-slate-200 flex items-center space-x-2">
                   <span>🎯</span>
                   <span>TIẾN ĐỘ HÔM NAY</span>
                 </h2>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Vocab target today */}
-                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col justify-between gap-4">
                   <div className="space-y-1">
                     <h3 className="text-xs sm:text-sm font-bold text-slate-300">Từ vựng tích lũy hôm nay</h3>
-                    <p className="text-[10px] text-slate-500">
-                      Mục tiêu hàng ngày để hoàn thành đúng lộ trình của bạn
-                    </p>
+                    <p className="text-[10px] text-slate-500">Mục tiêu hàng ngày để hoàn thành đúng lộ trình</p>
                   </div>
-                  <div className="flex items-center space-x-6">
-                    <div className="text-center">
-                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
-                      <span className="text-2xl sm:text-3xl font-black text-indigo-400">{targetVocabToday}</span>
-                      <span className="text-xs text-slate-400 font-bold ml-1">từ</span>
+                  <div className="flex items-center justify-between w-full pt-3 border-t border-slate-800/40">
+                    <div className="flex items-center space-x-4">
+                      <div className="text-center">
+                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
+                        <span className="text-xl sm:text-2xl font-black text-indigo-400">{targetVocabToday}</span>
+                      </div>
+                      <div className="h-6 w-px bg-slate-800" />
+                      <div className="text-center">
+                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
+                        <span className="text-xl sm:text-2xl font-black text-emerald-400">{vocabMastered}</span>
+                      </div>
                     </div>
-                    <div className="h-8 w-px bg-slate-800" />
-                    <div className="text-center">
-                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
-                      <span className="text-2xl sm:text-3xl font-black text-emerald-400">{vocabMastered}</span>
-                      <span className="text-xs text-slate-400 font-bold ml-1">từ</span>
-                    </div>
-                    <div>
-                      {vocabBehind > 0 ? (
-                        <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">
-                          🔴 Chậm {vocabBehind} từ
-                        </span>
-                      ) : (
-                        <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">
-                          🟢 Đạt chỉ tiêu
-                        </span>
-                      )}
-                    </div>
+                    {vocabBehind > 0 ? (
+                      <span className="px-2 py-0.5 bg-red-950/30 border border-red-900/50 text-[9px] sm:text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">🔴 Chậm {vocabBehind}</span>
+                    ) : (
+                      <span className="px-2 py-0.5 bg-emerald-950/30 border border-emerald-900/50 text-[9px] sm:text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">🟢 Đạt chỉ tiêu</span>
+                    )}
                   </div>
                 </div>
  
                 {/* Kanji target today */}
-                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col justify-between gap-4">
                   <div className="space-y-1">
                     <h3 className="text-xs sm:text-sm font-bold text-slate-300">Kanji tích lũy hôm nay</h3>
-                    <p className="text-[10px] text-slate-500">
-                      Mục tiêu chữ Hán hàng ngày để ghi nhớ mặt chữ tốt hơn
-                    </p>
+                    <p className="text-[10px] text-slate-500">Mục tiêu chữ Hán hàng ngày để ghi nhớ mặt chữ</p>
                   </div>
-                  <div className="flex items-center space-x-6">
-                    <div className="text-center">
-                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
-                      <span className="text-2xl sm:text-3xl font-black text-indigo-400">{targetKanjiToday}</span>
-                      <span className="text-xs text-slate-400 font-bold ml-1">chữ</span>
+                  <div className="flex items-center justify-between w-full pt-3 border-t border-slate-800/40">
+                    <div className="flex items-center space-x-4">
+                      <div className="text-center">
+                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
+                        <span className="text-xl sm:text-2xl font-black text-indigo-400">{targetKanjiToday}</span>
+                      </div>
+                      <div className="h-6 w-px bg-slate-800" />
+                      <div className="text-center">
+                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
+                        <span className="text-xl sm:text-2xl font-black text-emerald-400">{kanjiMastered}</span>
+                      </div>
                     </div>
-                    <div className="h-8 w-px bg-slate-800" />
-                    <div className="text-center">
-                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
-                      <span className="text-2xl sm:text-3xl font-black text-emerald-400">{kanjiMastered}</span>
-                      <span className="text-xs text-slate-400 font-bold ml-1">chữ</span>
-                    </div>
-                    <div>
-                      {kanjiBehind > 0 ? (
-                        <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">
-                          🔴 Chậm {kanjiBehind} chữ
-                        </span>
-                      ) : (
-                        <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">
-                          🟢 Đạt chỉ tiêu
-                        </span>
-                      )}
-                    </div>
+                    {kanjiBehind > 0 ? (
+                      <span className="px-2 py-0.5 bg-red-950/30 border border-red-900/50 text-[9px] sm:text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">🔴 Chậm {kanjiBehind}</span>
+                    ) : (
+                      <span className="px-2 py-0.5 bg-emerald-950/30 border border-emerald-900/50 text-[9px] sm:text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">🟢 Đạt chỉ tiêu</span>
+                    )}
                   </div>
                 </div>
-
+ 
                 {/* Grammar target today */}
-                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/50 flex flex-col justify-between gap-4">
                   <div className="space-y-1">
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-300">Ngữ pháp tích lũy hôm nay</h3>
-                    <p className="text-[10px] text-slate-500">
-                      Mục tiêu mẫu câu hàng ngày để nâng cao khả năng giao tiếp
-                    </p>
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-300">Ngữ pháp hôm nay</h3>
+                    <p className="text-[10px] text-slate-500">Mục tiêu mẫu câu hàng ngày để nâng cao ngữ pháp</p>
                   </div>
-                  <div className="flex items-center space-x-6">
-                    <div className="text-center">
-                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
-                      <span className="text-2xl sm:text-3xl font-black text-indigo-400">{targetGrammarToday}</span>
-                      <span className="text-xs text-slate-400 font-bold ml-1">mẫu</span>
+                  <div className="flex items-center justify-between w-full pt-3 border-t border-slate-800/40">
+                    <div className="flex items-center space-x-4">
+                      <div className="text-center">
+                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
+                        <span className="text-xl sm:text-2xl font-black text-indigo-400">{targetGrammarToday}</span>
+                      </div>
+                      <div className="h-6 w-px bg-slate-800" />
+                      <div className="text-center">
+                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
+                        <span className="text-xl sm:text-2xl font-black text-emerald-400">{grammarMastered}</span>
+                      </div>
                     </div>
-                    <div className="h-8 w-px bg-slate-800" />
-                    <div className="text-center">
-                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
-                      <span className="text-2xl sm:text-3xl font-black text-emerald-400">{grammarMastered}</span>
-                      <span className="text-xs text-slate-400 font-bold ml-1">mẫu</span>
-                    </div>
-                    <div>
-                      {grammarBehind > 0 ? (
-                        <span className="px-2.5 py-1 bg-red-950/30 border border-red-900/50 text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">
-                          🔴 Chậm {grammarBehind} mẫu
-                        </span>
-                      ) : (
-                        <span className="px-2.5 py-1 bg-emerald-950/30 border border-emerald-900/50 text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">
-                          🟢 Đạt chỉ tiêu
-                        </span>
-                      )}
-                    </div>
+                    {grammarBehind > 0 ? (
+                      <span className="px-2 py-0.5 bg-red-950/30 border border-red-900/50 text-[9px] sm:text-[10px] font-bold text-red-400 rounded-lg whitespace-nowrap">🔴 Chậm {grammarBehind}</span>
+                    ) : (
+                      <span className="px-2 py-0.5 bg-emerald-950/30 border border-emerald-900/50 text-[9px] sm:text-[10px] font-bold text-emerald-400 rounded-lg whitespace-nowrap">🟢 Đạt chỉ tiêu</span>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Progress Bars (Vocabulary, Kanji, Grammar) */}
-            <div className="lg:col-span-12 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
+            <div className="md:col-span-2 lg:col-span-12 bg-slate-900/40 border border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
               <h2 className="text-sm sm:text-md font-bold text-slate-200 mb-5 border-b border-slate-800/60 pb-3 flex items-center space-x-2">
                 <span>📈</span>
                 <span>TIẾN ĐỘ HỌC BÀI {selectedLessonId}</span>
@@ -903,7 +879,7 @@ export default function UserDashboard() {
 
 
             {/* Quick links to Study Tabs */}
-            <div className="lg:col-span-12">
+            <div className="md:col-span-2 lg:col-span-12">
               <h2 className="text-sm sm:text-md font-bold text-slate-200 mb-4 flex items-center space-x-2">
                 <span>🔗</span>
                 <span>DANH MỤC TRUY CẬP NHANH BÀI {selectedLessonId}</span>

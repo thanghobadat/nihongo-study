@@ -988,7 +988,7 @@ export default function AlphabetReviewPage() {
       {/* Mobile Sidebar Hamburger Toggle */}
       <button
         onClick={() => setIsSidebarOpen(true)}
-        className="md:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
+        className="lg:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -999,12 +999,12 @@ export default function AlphabetReviewPage() {
       {isSidebarOpen && (
         <div
           onClick={() => setIsSidebarOpen(false)}
-          className="md:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
+          className="lg:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
         />
       )}
 
       {/* 1. Left Sidebar Navigation Menu */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 md:relative md:translate-x-0 ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-950/95 border-r border-slate-900 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 lg:relative lg:translate-x-0 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
@@ -1014,7 +1014,7 @@ export default function AlphabetReviewPage() {
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="md:hidden text-slate-400 hover:text-slate-200 text-xl p-1 font-bold cursor-pointer"
+              className="lg:hidden text-slate-400 hover:text-slate-200 text-xl p-1 font-bold cursor-pointer"
             >
               ✕
             </button>
@@ -1087,7 +1087,7 @@ export default function AlphabetReviewPage() {
       </aside>
 
       {/* 2. Main Content Area */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 md:p-8 lg:p-10 space-y-6 md:space-y-8">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 lg:p-10 space-y-6 md:space-y-8">
         
         {/* Toast Alerts */}
         {toastMessage && (
@@ -1218,51 +1218,98 @@ export default function AlphabetReviewPage() {
               })}
             </div>
 
-            {/* Selected character popover detail panel */}
+            {/* Selected character modal detail dialog */}
             {selectedKana && (
-              <div className="p-5 sm:p-6 bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6 animate-fade-in">
-                <div className="flex items-center space-x-6">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-center text-4xl sm:text-5xl font-black text-blue-400 shadow-inner">
-                    {selectedKana.char}
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-3">
-                      <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-slate-200">
-                        Phiên âm: {selectedKana.romaji}
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm animate-fade-in">
+                <div className="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl flex flex-col scrollbar-thin">
+                  {/* Decorative background glows */}
+                  <div className="absolute -right-16 -top-16 w-36 h-36 bg-blue-600/10 rounded-full blur-3xl"></div>
+                  <div className="absolute -left-16 -bottom-16 w-36 h-36 bg-indigo-600/10 rounded-full blur-3xl"></div>
+                  
+                  {/* Close button top right */}
+                  <button
+                    onClick={() => setSelectedKana(null)}
+                    className="absolute top-4 right-4 p-2 text-slate-500 hover:text-slate-350 transition-colors text-lg font-bold cursor-pointer z-20"
+                    title="Đóng"
+                  >
+                    ✕
+                  </button>
+
+                  {/* Character Main Row */}
+                  <div className="flex items-center space-x-5 relative z-10">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-center text-4xl sm:text-5xl font-black text-blue-400 shadow-inner">
+                      {selectedKana.char}
+                    </div>
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+                        <span>Phiên âm:</span>
+                        <span className="text-blue-400 font-mono font-black">{selectedKana.romaji}</span>
                       </h3>
                       <button
                         onClick={() => speak(selectedKana.char)}
-                        className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors text-xs"
+                        className="mt-2 px-3 py-1.5 bg-slate-950/80 hover:bg-slate-800 border border-slate-850 hover:border-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center space-x-1.5"
                         title="Nghe phát âm"
                       >
-                        🔊 Phát âm
+                        <span>🔊</span>
+                        <span>Nghe phát âm</span>
                       </button>
                     </div>
-                    <p className="text-xs sm:text-sm text-slate-400 mt-1.5 flex items-center gap-1.5">
-                      <span>💡</span>
-                      <strong className="text-indigo-300">Gợi ý nhớ nhanh:</strong>
-                      <span>{selectedKana.mnemonic}</span>
-                    </p>
                   </div>
-                </div>
 
-                <div className="flex items-center space-x-3 self-end md:self-auto">
-                  <button
-                    onClick={() => toggleProgress(selectedKana.id, selectedKanaType)}
-                    className={`px-4 py-2.5 rounded-xl border text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center space-x-2 ${
-                      (selectedKanaType === 'hiragana' ? hiraganaProgress : katakanaProgress)[selectedKana.id] === 'mastered'
-                        ? 'bg-emerald-950/30 border-emerald-800/80 text-emerald-400 hover:bg-red-950/20 hover:border-red-900/50 hover:text-red-400'
-                        : 'bg-blue-600 border-blue-500 text-white hover:bg-blue-700'
-                    }`}
-                  >
-                    <span>{(selectedKanaType === 'hiragana' ? hiraganaProgress : katakanaProgress)[selectedKana.id] === 'mastered' ? '✓ Đã thuộc' : 'Mark as Mastered'}</span>
-                  </button>
-                  <button
-                    onClick={() => setSelectedKana(null)}
-                    className="p-2.5 bg-slate-950/60 border border-slate-800 text-slate-400 hover:text-slate-200 rounded-xl text-xs"
-                  >
-                    Đóng
-                  </button>
+                  {/* Stroke Order Animation Section */}
+                  <div className="space-y-3 relative z-10 border-t border-b border-slate-800/50 py-4 flex flex-col items-center">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest self-start">✍️ Cách viết (Stroke Order)</span>
+                    <div className="w-32 h-32 rounded-2xl bg-slate-950 border border-slate-850 p-2 flex items-center justify-center shadow-inner relative overflow-hidden">
+                      <img
+                        id="stroke-order-image"
+                        src={`https://commons.wikimedia.org/wiki/Special:Redirect/file/${selectedKanaType === 'hiragana' ? 'Hiragana' : 'Katakana'}_${selectedKana.char}_stroke_order_animation.gif`}
+                        alt={`Cách viết chữ ${selectedKana.char}`}
+                        className="max-w-full max-h-full object-contain"
+                        onError={(e) => {
+                          const imgEl = e.currentTarget as HTMLImageElement;
+                          imgEl.style.display = 'none';
+                          const fallbackEl = imgEl.parentElement?.querySelector('.fallback-msg') as HTMLElement;
+                          if (fallbackEl) fallbackEl.style.display = 'block';
+                        }}
+                      />
+                      <div className="fallback-msg hidden text-center text-xs text-slate-500 p-2 font-medium">
+                        Cách viết cho chữ {selectedKana.char} đang được cập nhật
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mnemonic Memory Hint */}
+                  <div className="space-y-1.5 relative z-10 bg-indigo-950/10 border border-indigo-900/30 p-4 rounded-2xl text-xs sm:text-sm">
+                    <div className="flex items-center space-x-2 text-indigo-400 font-bold mb-1">
+                      <span>💡</span>
+                      <span>Mẹo ghi nhớ nhanh:</span>
+                    </div>
+                    <p className="text-slate-300 leading-relaxed font-sans">{selectedKana.mnemonic}</p>
+                  </div>
+
+                  {/* Modal Action Buttons */}
+                  <div className="flex items-center justify-end space-x-3 relative z-10 pt-2">
+                    <button
+                      onClick={() => toggleProgress(selectedKana.id, selectedKanaType)}
+                      className={`px-5 py-3 rounded-2xl border text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center space-x-2 ${
+                        (selectedKanaType === 'hiragana' ? hiraganaProgress : katakanaProgress)[selectedKana.id] === 'mastered'
+                          ? 'bg-emerald-950/30 border-emerald-800/80 text-emerald-400 hover:bg-red-950/20 hover:border-red-900/50 hover:text-red-400'
+                          : 'bg-blue-600 border-blue-500 text-white hover:bg-blue-700'
+                      }`}
+                    >
+                      <span>
+                        {(selectedKanaType === 'hiragana' ? hiraganaProgress : katakanaProgress)[selectedKana.id] === 'mastered'
+                          ? '✓ Đã thuộc'
+                          : 'Mark as Mastered'}
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => setSelectedKana(null)}
+                      className="px-5 py-3 bg-slate-950/60 border border-slate-850 hover:border-slate-800 text-slate-400 hover:text-white rounded-2xl text-xs font-bold transition-all cursor-pointer"
+                    >
+                      Đóng
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
