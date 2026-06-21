@@ -53,6 +53,8 @@ export default function AlphabetReviewPage() {
   // Game 1 (Speedrun) States
   const [gameAlphabet, setGameAlphabet] = useState<'hiragana' | 'katakana'>('hiragana');
   const [gameMode, setGameMode] = useState<'confused' | 'random'>('random');
+  const [speedrunStartIdx, setSpeedrunStartIdx] = useState(0);
+  const [speedrunEndIdx, setSpeedrunEndIdx] = useState(45);
   const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<KanaItem | null>(null);
   const [answerOptions, setAnswerOptions] = useState<string[]>([]);
@@ -95,6 +97,8 @@ export default function AlphabetReviewPage() {
   // Game 2 (Memory Match / Lật thẻ) States
   const [memoryCards, setMemoryCards] = useState<Array<{ id: string; val: string; matchVal: string; isFlipped: boolean; isMatched: boolean }>>([]);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
+  const [memoryStartIdx, setMemoryStartIdx] = useState(0);
+  const [memoryEndIdx, setMemoryEndIdx] = useState(45);
   const [memoryFlips, setMemoryFlips] = useState(0);
   const [memoryMatches, setMemoryMatches] = useState(0);
   const [memoryWin, setMemoryWin] = useState(false);
@@ -517,7 +521,8 @@ export default function AlphabetReviewPage() {
     const maxTime = Math.max(2, 10 - Math.floor(currentCount / 2));
     updateTimeLeft(maxTime);
 
-    const activeList = gameAlphabet === 'hiragana' ? hiraganaData : katakanaData;
+    const fullList = gameAlphabet === 'hiragana' ? hiraganaData : katakanaData;
+    const activeList = fullList.slice(speedrunStartIdx, speedrunEndIdx + 1);
     let chosen: KanaItem;
 
     if (gameMode === 'confused') {
@@ -531,9 +536,16 @@ export default function AlphabetReviewPage() {
     const options = new Set<string>();
     options.add(chosen.romaji);
 
-    while (options.size < 4) {
-      const randItem = activeList[Math.floor(Math.random() * activeList.length)];
-      options.add(randItem.romaji);
+    if (activeList.length >= 4) {
+      while (options.size < 4) {
+        const randItem = activeList[Math.floor(Math.random() * activeList.length)];
+        options.add(randItem.romaji);
+      }
+    } else {
+      while (options.size < 4) {
+        const randItem = fullList[Math.floor(Math.random() * fullList.length)];
+        options.add(randItem.romaji);
+      }
     }
 
     setCurrentQuestion(chosen);
@@ -600,13 +612,27 @@ export default function AlphabetReviewPage() {
       setMemoryBoardCount(prev => prev + 1);
     }
 
-    const list = gameAlphabet === 'hiragana' ? hiraganaData : katakanaData;
-    // Choose 8 random characters
-    const shuffled = [...list].sort(() => Math.random() - 0.5).slice(0, 8);
+    const fullList = gameAlphabet === 'hiragana' ? hiraganaData : katakanaData;
+    const activeList = fullList.slice(memoryStartIdx, memoryEndIdx + 1);
+    
+    // Choose 8 characters from activeList, repeating if activeList.length < 8
+    const selectedChars: KanaItem[] = [];
+    if (activeList.length >= 8) {
+      const shuffled = [...activeList].sort(() => Math.random() - 0.5).slice(0, 8);
+      selectedChars.push(...shuffled);
+    } else {
+      // Repeat the characters in activeList to reach exactly 8 items
+      for (let i = 0; i < 8; i++) {
+        const item = activeList[i % activeList.length];
+        selectedChars.push(item);
+      }
+      // Shuffle selectedChars so their order on board is random
+      selectedChars.sort(() => Math.random() - 0.5);
+    }
     
     // Create card pairs (one Japanese char, one Romaji)
     const cards: typeof memoryCards = [];
-    shuffled.forEach((item, index) => {
+    selectedChars.forEach((item, index) => {
       cards.push({
         id: `jp-${index}`,
         val: item.char,
@@ -982,6 +1008,13 @@ export default function AlphabetReviewPage() {
     };
   }, []);
 
+  // Restart Memory Game automatically when configurations change
+  useEffect(() => {
+    if (activeTab === 'memory') {
+      startMemoryGame();
+    }
+  }, [memoryStartIdx, memoryEndIdx, gameAlphabet, activeTab]);
+
   return (
     <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-[#0b1329] via-[#090d1a] to-[#050811] text-slate-100 font-sans relative">
       
@@ -1126,7 +1159,7 @@ export default function AlphabetReviewPage() {
               ⚡ Trắc nghiệm phản xạ
             </button>
             <button
-              onClick={() => { setActiveTab('memory'); stopSpeedrun(); startMemoryGame(); }}
+              onClick={() => { setActiveTab('memory'); stopSpeedrun(); }}
               className={`px-4 py-2 rounded-lg font-bold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                 activeTab === 'memory' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'
               }`}
@@ -1391,7 +1424,7 @@ export default function AlphabetReviewPage() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto text-left">
+                <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-left">
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                       Chọn bảng ôn tập
@@ -1399,7 +1432,7 @@ export default function AlphabetReviewPage() {
                     <select
                       value={gameAlphabet}
                       onChange={(e) => setGameAlphabet(e.target.value as any)}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none cursor-pointer"
                     >
                       <option value="hiragana">Bảng Hiragana</option>
                       <option value="katakana">Bảng Katakana</option>
@@ -1412,10 +1445,54 @@ export default function AlphabetReviewPage() {
                     <select
                       value={gameMode}
                       onChange={(e) => setGameMode(e.target.value as any)}
-                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none"
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none cursor-pointer"
                     >
                       <option value="random">Luyện tập ngẫu nhiên</option>
                       <option value="confused">Luyện chữ dễ nhầm lẫn</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                      Học từ chữ
+                    </label>
+                    <select
+                      value={speedrunStartIdx}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        setSpeedrunStartIdx(val);
+                        if (val > speedrunEndIdx) {
+                          setSpeedrunEndIdx(val);
+                        }
+                      }}
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none cursor-pointer"
+                    >
+                      {(gameAlphabet === 'hiragana' ? hiraganaData : katakanaData).map((item, idx) => (
+                        <option key={item.id} value={idx}>
+                          {item.char} ({item.romaji})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                      Đến chữ
+                    </label>
+                    <select
+                      value={speedrunEndIdx}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        setSpeedrunEndIdx(val);
+                        if (val < speedrunStartIdx) {
+                          setSpeedrunStartIdx(val);
+                        }
+                      }}
+                      className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none cursor-pointer"
+                    >
+                      {(gameAlphabet === 'hiragana' ? hiraganaData : katakanaData).map((item, idx) => (
+                        <option key={item.id} value={idx}>
+                          {item.char} ({item.romaji})
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -1553,11 +1630,50 @@ export default function AlphabetReviewPage() {
                 <select
                   value={gameAlphabet}
                   onChange={(e) => setGameAlphabet(e.target.value as any)}
-                  className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none"
+                  className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none cursor-pointer"
                 >
                   <option value="hiragana">Bảng Hiragana</option>
                   <option value="katakana">Bảng Katakana</option>
                 </select>
+
+                <div className="flex items-center space-x-2 bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase">Từ:</span>
+                  <select
+                    value={memoryStartIdx}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      setMemoryStartIdx(val);
+                      if (val > memoryEndIdx) {
+                        setMemoryEndIdx(val);
+                      }
+                    }}
+                    className="bg-transparent text-slate-200 text-xs font-bold focus:outline-none cursor-pointer"
+                  >
+                    {(gameAlphabet === 'hiragana' ? hiraganaData : katakanaData).map((item, idx) => (
+                      <option key={item.id} value={idx} className="bg-slate-900 text-slate-200">
+                        {item.char} ({item.romaji})
+                      </option>
+                    ))}
+                  </select>
+                  <span className="text-[10px] text-slate-500 font-bold uppercase pl-1 border-l border-slate-800">Đến:</span>
+                  <select
+                    value={memoryEndIdx}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      setMemoryEndIdx(val);
+                      if (val < memoryStartIdx) {
+                        setMemoryStartIdx(val);
+                      }
+                    }}
+                    className="bg-transparent text-slate-200 text-xs font-bold focus:outline-none cursor-pointer"
+                  >
+                    {(gameAlphabet === 'hiragana' ? hiraganaData : katakanaData).map((item, idx) => (
+                      <option key={item.id} value={idx} className="bg-slate-900 text-slate-200">
+                        {item.char} ({item.romaji})
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <label className="flex items-center space-x-1.5 text-xs font-semibold cursor-pointer select-none bg-slate-900/60 border border-slate-800 px-2.5 py-1.5 rounded-xl">
                   <input
