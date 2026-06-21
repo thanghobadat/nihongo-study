@@ -82,7 +82,7 @@ export default function ResetPasswordPage() {
         router.replace('/login');
       }, 3000);
     } catch (err: any) {
-      console.error(err);
+      console.warn('Reset password failure:', err);
       setError(err.message || 'Cập nhật mật khẩu thất bại. Vui lòng thử lại sau.');
     } finally {
       setLoading(false);

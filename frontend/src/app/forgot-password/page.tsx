@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
         setEmail('');
       }
     } catch (err: any) {
-      console.error(err);
+      console.warn('Forgot password failure:', err);
       setError(err.message || 'Yêu cầu thất bại. Vui lòng thử lại sau.');
     } finally {
       setLoading(false);

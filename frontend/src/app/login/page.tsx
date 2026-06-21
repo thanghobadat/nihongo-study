@@ -48,7 +48,7 @@ export default function LoginPage() {
         router.replace('/dashboard');
       }
     } catch (err: any) {
-      console.error(err);
+      console.warn('Login failure:', err);
       setError(err.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
     } finally {
       setLoading(false);

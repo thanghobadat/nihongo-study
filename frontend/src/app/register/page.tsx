@@ -82,7 +82,7 @@ export default function RegisterPage() {
         router.push('/login');
       }, 5000);
     } catch (err: any) {
-      console.error(err);
+      console.warn('Registration failure:', err);
       setError(err.message || 'Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.');
     } finally {
       setLoading(false);

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useMemo, use } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { api } from '../../utils/api';
 import { getSubstitutionTemplate, getGrammarVocabMapping, SubstitutionSlot } from '../../utils/roadmapMapping';
+import { getKanjiForm, HIRAGANA_TO_KANJI } from '../../utils/kanjiFormLookup';
 
 interface Lesson {
   id: number;
@@ -45,6 +46,193 @@ function getAvatarSvg(userId: string) {
   return svgs[index];
 }
 
+const EXTRA_KANJI_MAP: Record<string, string> = {
+  '会社員': 'かいしゃいん',
+  '銀行員': 'ぎんこういn',
+  'ぎんこういん': 'ぎんこういん',
+  '研究者': 'けんきゅうしゃ',
+  '山川さん': 'やまかわさん',
+  '山田さん': 'やまださん',
+  'ミラーさん': 'ミラーさん',
+  'サントスさん': 'サントスさん',
+  'ワットさん': 'ワットさん',
+  'ナムさん': 'ナムさん',
+  '木村さん': 'きむらさん',
+  '佐藤さん': 'さとうさん',
+  '鈴木さん': 'すずきさん',
+  '高橋さん': 'たかはしさん',
+  '田中さん': 'たなかさん',
+  '渡辺さん': 'わたなべさん',
+  '小林さん': 'こばやしさん',
+  '加藤さん': 'かとうさん',
+  '吉田さん': 'よしださん',
+  '佐々木さん': 'ささきさん',
+  '違います': 'ちがいます',
+  '面白です': 'おもしろいです',
+  '面白い': 'おもしろい',
+  '日本語': 'にほんご',
+  '英語': 'えいご',
+  '私': 'わたし',
+  'あの人': 'あのひと',
+  'あの方': 'あのかた',
+  '学生': 'がくせい',
+  '教師': 'きょうし',
+  '先生': 'せんせい',
+  '医者': 'いしゃ',
+  '本': 'ほん',
+  '辞書': 'じしょ',
+  '雑誌': 'ざっし',
+  '手帳': 'てちょう',
+  '時計': 'とけい',
+  '傘': 'かさ',
+  '自動車': 'じどうしゃ',
+  '車': 'くるま',
+  '朝ご飯': 'あさごはん',
+  '昼ご飯': 'ひるごはん',
+  '晩ご飯': 'ばんごはん',
+  'お茶': 'おちゃ',
+  '紅茶': 'こうちゃ',
+  '牛乳': 'ぎゅうにゅう',
+  '映画': 'えいが',
+  '宿題': 'しゅくだい',
+  'お花見': 'おはなみ',
+  '一緒に': 'いっしょに',
+  '時々': 'ときどき',
+  '公園': 'こうえん',
+  '庭': 'にわ',
+  '病院': 'びょういん',
+  '教室': 'きょうしつ',
+  '食堂': 'しょくどう',
+  '事務所': 'じむしょ',
+  '会議室': 'かいぎしつ',
+  '受付': 'うけつけ',
+  '部屋': 'へや',
+  'お手洗い': 'おてあらい',
+  '階段': 'かいだん',
+  'お国': 'おくに',
+  '電話': 'でんわ',
+  '靴': 'くつ',
+  '売り場': 'うりば',
+  '地下': 'ちか',
+  '何階': 'なんがい',
+  '休み': 'やすみ',
+  '昼休み': 'ひるやすみ',
+  '毎朝': 'まいあさ',
+  '毎晩': 'まいばん',
+  '毎日': 'まいにch',
+  '毎日 ': 'まいにち',
+  '番号': 'ばんごう',
+  '何番': 'なんばん',
+  '月曜日': 'げつようび',
+  '火曜日': 'かようび',
+  '水曜日': 'すいようび',
+  '木曜日': 'もくようび',
+  '金曜日': 'きんようび',
+  '土曜日': 'どようび',
+  '日曜日': 'にちようび',
+  '何曜日': 'なんようび',
+  '行きます': 'いきます',
+  '来ます': 'きます',
+  '帰ります': 'かえります',
+  '学校': 'がっこう',
+  '飛行機': 'ひこうき',
+  '電車': 'でんしゃ',
+  '地下鉄': 'ちかてつ',
+  'じてんしゃ': 'じてんしゃ',
+  '自転車': 'じてんしゃ',
+  '一人': 'ひとり',
+  '一人で': 'ひとりで',
+  '先週': 'せんしゅう',
+  '今週': 'こんしゅう',
+  'らいしゅう': 'らいしゅう',
+  '先月': 'せんげつ',
+  '今月': 'こんげつ',
+  '来月': 'らいげつ',
+  '去年': 'きょねん',
+  '今年': 'ことし',
+  '来年': 'らいねn',
+  '来年 ': 'らいねん',
+  '何月': 'なんがつ',
+  '誕生日': 'たんじょうび',
+  '何日': 'なにち',
+  '食べます': 'たべます',
+  '見ます': 'みます',
+  '聞きます': 'ききます',
+  '読みます': 'よみます',
+  '書きます': 'かきます',
+  '買います': 'かいます',
+  '撮ります': 'とります',
+  '会います': 'あいます',
+  '卵': 'たまご',
+  '肉': 'にく',
+  '魚': 'さかな',
+  '野菜': 'やさい',
+  '果物': 'くだもの',
+  '水': 'みず',
+};
+
+function convertKanjiToHira(text: string, kanjiItems: any[], vocabItems: any[]): string {
+  if (!text) return '';
+  let result = text;
+
+  const dynamicMap: Record<string, string> = {};
+  if (Array.isArray(vocabItems)) {
+    const sortedVocab = [...vocabItems].sort((a, b) => (b.hiragana?.length || 0) - (a.hiragana?.length || 0));
+    for (const vocab of sortedVocab) {
+      if (!vocab.hiragana) continue;
+      const kanji = getKanjiForm(vocab.hiragana, kanjiItems);
+      if (kanji && kanji !== vocab.hiragana) {
+        dynamicMap[kanji] = vocab.hiragana;
+      }
+    }
+  }
+
+  const baseMap: Record<string, string> = {};
+  for (const [hira, kanji] of Object.entries(HIRAGANA_TO_KANJI)) {
+    if (kanji && kanji !== hira) {
+      baseMap[kanji] = hira;
+    }
+  }
+
+  const finalMap = { ...baseMap, ...EXTRA_KANJI_MAP, ...dynamicMap };
+  const sortedKeys = Object.keys(finalMap).sort((a, b) => b.length - a.length);
+
+  for (const key of sortedKeys) {
+    if (!key) continue;
+    const regex = new RegExp(key, 'g');
+    result = result.replace(regex, finalMap[key]);
+  }
+
+  return result;
+}
+
+function getOptionDisplay(
+  option: { ja: string; vi: string; romaji: string },
+  scriptMode: 'kanji' | 'hiragana',
+  kanjiItems: any[],
+  vocabItems: any[]
+): string {
+  if (scriptMode === 'kanji') {
+    return getKanjiForm(option.ja, kanjiItems);
+  } else {
+    return convertKanjiToHira(option.ja, kanjiItems, vocabItems);
+  }
+}
+
+function adjustScriptMode(
+  text: string,
+  scriptMode: 'kanji' | 'hiragana',
+  kanjiItems: any[],
+  vocabItems: any[]
+): string {
+  if (!text) return '';
+  if (scriptMode === 'kanji') {
+    return text;
+  } else {
+    return convertKanjiToHira(text, kanjiItems, vocabItems);
+  }
+}
+
 export default function SubstitutionPracticePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -81,6 +269,8 @@ export default function SubstitutionPracticePage() {
   const [showVietnamese, setShowVietnamese] = useState<boolean>(true);
   const [showQuestionRomaji, setShowQuestionRomaji] = useState<boolean>(true);
   const [showQuestionVietnamese, setShowQuestionVietnamese] = useState<boolean>(true);
+  const [kanjiItems, setKanjiItems] = useState<any[]>([]);
+  const [scriptMode, setScriptMode] = useState<'kanji' | 'hiragana'>('kanji');
 
   // Randomize all slot selections and hide answers
   const handleRandomize = () => {
@@ -114,14 +304,16 @@ export default function SubstitutionPracticePage() {
     loadLessons();
   }, []);
 
-  // Fetch vocabulary & grammar items
+  // Fetch vocabulary, kanji & grammar items
   useEffect(() => {
     async function loadData() {
       setLoading(true);
       try {
         const vocabData = await api.get(`/api/user/lessons/${lessonId}/vocabulary`);
+        const kanjiData = await api.get(`/api/user/lessons/${lessonId}/kanji`);
         const grammarData = await api.get(`/api/user/lessons/${lessonId}/grammar`);
         if (Array.isArray(vocabData)) setVocabItems(vocabData);
+        if (Array.isArray(kanjiData)) setKanjiItems(kanjiData);
         if (Array.isArray(grammarData)) setGrammarItems(grammarData);
       } catch (error) {
         console.error('Failed to load data:', error);
@@ -408,6 +600,70 @@ export default function SubstitutionPracticePage() {
               <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
+              {/* Controls: Randomize & Toggle Visibility */}
+              <div className="flex flex-wrap items-center justify-center gap-4 py-3 border-b border-slate-800/40 w-full mb-6">
+                <button
+                  onClick={handleRandomize}
+                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-black rounded-xl border border-purple-500/20 hover:border-purple-400/30 transition-all duration-300 flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
+                >
+                  <span>🎲</span> Random từ vựng
+                </button>
+
+                {/* Script Switcher */}
+                <div className="flex items-center bg-slate-950/80 p-0.5 rounded-xl border border-slate-800/50 shadow-inner">
+                  <button
+                    onClick={() => setScriptMode('kanji')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                      scriptMode === 'kanji'
+                        ? 'bg-indigo-600/90 text-white shadow-md'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    漢字 Kanji
+                  </button>
+                  <button
+                    onClick={() => setScriptMode('hiragana')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                      scriptMode === 'hiragana'
+                        ? 'bg-indigo-600/90 text-white shadow-md'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    かな Hira/Kata
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      setShowRomaji(!showRomaji);
+                      setShowQuestionRomaji(!showRomaji);
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                      showRomaji 
+                        ? 'bg-blue-600/25 border border-blue-500/40 text-blue-400' 
+                        : 'bg-slate-950/80 border border-slate-850 text-slate-400'
+                    }`}
+                  >
+                    {showRomaji ? '👁️ Romaji: Hiện' : '🙈 Romaji: Ẩn'}
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowVietnamese(!showVietnamese);
+                      setShowQuestionVietnamese(!showVietnamese);
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                      showVietnamese 
+                        ? 'bg-emerald-600/25 border border-emerald-500/40 text-emerald-400' 
+                        : 'bg-slate-950/80 border border-slate-850 text-slate-400'
+                    }`}
+                  >
+                    {showVietnamese ? '👁️ Nghĩa: Hiện' : '🙈 Nghĩa: Ẩn'}
+                  </button>
+                </div>
+              </div>
+
               {/* Japanese Sentence Template / Q&A rendering */}
               {synthesizedSentence.questionJa ? (
                 /* CHẾ ĐỘ 1: GIAO DIỆN HỘI THOẠI HỎI - ĐÁP (Q&A DIALOGUE) */
@@ -429,7 +685,7 @@ export default function SubstitutionPracticePage() {
                         </button>
                       </div>
                       <p className="text-xl sm:text-2xl font-black text-slate-100 tracking-wide font-sans leading-relaxed">
-                        {synthesizedSentence.questionJa}
+                        {adjustScriptMode(synthesizedSentence.questionJa, scriptMode, kanjiItems, vocabItems)}
                       </p>
                       
                       {/* Q Romaji */}
@@ -486,7 +742,7 @@ export default function SubstitutionPracticePage() {
                              if (part) {
                                parts.push(
                                  <span key={`txt-${index}`} className="text-xl sm:text-2xl font-black text-slate-200 tracking-wide font-sans leading-normal">
-                                   {part}
+                                   {adjustScriptMode(part, scriptMode, kanjiItems, vocabItems)}
                                  </span>
                                );
                              }
@@ -506,7 +762,7 @@ export default function SubstitutionPracticePage() {
                                    >
                                      {slot?.options.map(o => (
                                        <option key={o.ja} value={o.ja} className="bg-[#0b1329] text-left text-xs font-bold">
-                                         {o.ja}
+                                         {getOptionDisplay(o, scriptMode, kanjiItems, vocabItems)}
                                        </option>
                                      ))}
                                    </select>
@@ -534,7 +790,7 @@ export default function SubstitutionPracticePage() {
                         if (part) {
                           parts.push(
                             <span key={`txt-${index}`} className="text-2xl sm:text-3xl font-black text-slate-200 tracking-wide font-sans">
-                              {part}
+                              {adjustScriptMode(part, scriptMode, kanjiItems, vocabItems)}
                             </span>
                           );
                         }
@@ -554,7 +810,7 @@ export default function SubstitutionPracticePage() {
                               >
                                 {slot?.options.map(o => (
                                   <option key={o.ja} value={o.ja} className="bg-[#0b1329] text-left text-sm font-bold">
-                                    {o.ja}
+                                    {getOptionDisplay(o, scriptMode, kanjiItems, vocabItems)}
                                   </option>
                                 ))}
                               </select>
@@ -577,46 +833,6 @@ export default function SubstitutionPracticePage() {
                   </button>
                 </>
               )}
-
-              {/* Controls: Randomize & Toggle Visibility */}
-              <div className="flex flex-wrap items-center justify-center gap-4 py-3 border-t border-b border-slate-800/40 w-full">
-                <button
-                  onClick={handleRandomize}
-                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-black rounded-xl border border-purple-500/20 hover:border-purple-400/30 transition-all duration-300 flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
-                >
-                  <span>🎲</span> Random từ vựng
-                </button>
-
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => {
-                      setShowRomaji(!showRomaji);
-                      setShowQuestionRomaji(!showRomaji);
-                    }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                      showRomaji 
-                        ? 'bg-blue-600/25 border border-blue-500/40 text-blue-400' 
-                        : 'bg-slate-950/80 border border-slate-850 text-slate-400'
-                    }`}
-                  >
-                    {showRomaji ? '👁️ Romaji: Hiện' : '🙈 Romaji: Ẩn'}
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setShowVietnamese(!showVietnamese);
-                      setShowQuestionVietnamese(!showVietnamese);
-                    }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                      showVietnamese 
-                        ? 'bg-emerald-600/25 border border-emerald-500/40 text-emerald-400' 
-                        : 'bg-slate-950/80 border border-slate-850 text-slate-400'
-                    }`}
-                  >
-                    {showVietnamese ? '👁️ Nghĩa: Hiện' : '🙈 Nghĩa: Ẩn'}
-                  </button>
-                </div>
-              </div>
 
               {/* Outputs: Romaji & Vietnamese (Chỉ hiển thị khi có dữ liệu) */}
               <div className="w-full space-y-4 pt-6 border-t border-slate-800/40">
