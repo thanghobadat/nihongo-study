@@ -203,3 +203,66 @@ CREATE POLICY "Admin write access culture_topics" ON public.culture_topics FOR A
 );
 
 
+-- 10. Create User Custom Vocabulary Table
+CREATE TABLE public.user_custom_vocabulary (
+  id SERIAL PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
+  hiragana TEXT NOT NULL,
+  romaji TEXT NOT NULL,
+  vietnamese_meaning TEXT NOT NULL,
+  word_type TEXT,
+  japanese_example TEXT,
+  example_meaning TEXT,
+  mnemonic_tip TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_custom_vocabulary ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow user full access to own custom vocabulary" ON public.user_custom_vocabulary
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+
+-- 11. Create User Custom Kanji Table
+CREATE TABLE public.user_custom_kanji (
+  id SERIAL PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
+  character TEXT NOT NULL,
+  stroke_count TEXT,
+  onyomi TEXT,
+  kunyomi TEXT,
+  sino_vietnamese TEXT,
+  vietnamese_meaning TEXT NOT NULL,
+  mnemonic_tip TEXT,
+  compounds TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_custom_kanji ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow user full access to own custom kanji" ON public.user_custom_kanji
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+
+-- 12. Create User Custom Grammar Table
+CREATE TABLE public.user_custom_grammar (
+  id SERIAL PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  meaning TEXT NOT NULL,
+  structure TEXT,
+  vietnamese_explanation TEXT,
+  japanese_example TEXT,
+  example_meaning TEXT,
+  romaji_example TEXT,
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_custom_grammar ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow user full access to own custom grammar" ON public.user_custom_grammar
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+
+

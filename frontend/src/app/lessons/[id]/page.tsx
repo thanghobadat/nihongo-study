@@ -233,6 +233,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     ]),
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
+    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
@@ -1389,6 +1390,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                     router.push('/roadmap');
                   } else if (item.id === 'kana') {
                     router.push('/kana');
+                  } else if (item.id === 'knowledge') {
+                    router.push('/knowledge');
                   } else {
                     router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
                   }

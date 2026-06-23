@@ -48,6 +48,7 @@ export default function UserDashboard() {
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: true },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
+    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
@@ -437,6 +438,8 @@ export default function UserDashboard() {
                     router.push('/roadmap');
                   } else if (item.id === 'kana') {
                     router.push('/kana');
+                  } else if (item.id === 'knowledge') {
+                    router.push('/knowledge');
                   } else if (item.id !== 'dashboard') {
                     router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
                   }

@@ -686,4 +686,529 @@ router.get('/lessons/:lessonId/culture', async (req, res) => {
   }
 });
 
+// --- HELPER FUNCTIONS FOR LOCAL MOCK CUSTOM ITEMS ---
+const fs = require('fs');
+const path = require('path');
+const customItemsPath = path.join(__dirname, '../db/custom_items.json');
+
+function readCustomItems() {
+  try {
+    if (fs.existsSync(customItemsPath)) {
+      return JSON.parse(fs.readFileSync(customItemsPath, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Error reading custom items:', e);
+  }
+  return { vocabulary: [], kanji: [], grammar: [] };
+}
+
+function writeCustomItems(data) {
+  try {
+    fs.writeFileSync(customItemsPath, JSON.stringify(data, null, 2));
+  } catch (e) {
+    console.error('Error writing custom items:', e);
+  }
+}
+
+// --- USER CUSTOM VOCABULARY ENDPOINTS ---
+
+router.get('/custom/vocabulary', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const lessonId = req.query.lesson_id ? parseInt(req.query.lesson_id) : null;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      let list = data.vocabulary.filter(v => v.user_id === userId);
+      if (lessonId !== null) {
+        list = list.filter(v => v.lesson_id === lessonId);
+      }
+      return res.json(list);
+    }
+
+    let query = supabase.from('user_custom_vocabulary').select('*').eq('user_id', userId);
+    if (lessonId !== null) {
+      query = query.eq('lesson_id', lessonId);
+    }
+    const { data, error } = await query;
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching custom vocabulary:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/custom/vocabulary', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { lesson_id, hiragana, romaji, vietnamese_meaning, word_type, japanese_example, example_meaning, mnemonic_tip } = req.body;
+
+    if (!hiragana || !romaji || !vietnamese_meaning) {
+      return res.status(400).json({ error: 'hiragana, romaji, and vietnamese_meaning are required' });
+    }
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const newItem = {
+        id: Date.now(),
+        user_id: userId,
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        hiragana,
+        romaji,
+        vietnamese_meaning,
+        word_type: word_type || '',
+        japanese_example: japanese_example || '',
+        example_meaning: example_meaning || '',
+        mnemonic_tip: mnemonic_tip || '',
+        created_at: new Date().toISOString()
+      };
+      data.vocabulary.push(newItem);
+      writeCustomItems(data);
+      return res.status(201).json(newItem);
+    }
+
+    const { data, error } = await supabase
+      .from('user_custom_vocabulary')
+      .insert({
+        user_id: userId,
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        hiragana,
+        romaji,
+        vietnamese_meaning,
+        word_type,
+        japanese_example,
+        example_meaning,
+        mnemonic_tip
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.status(201).json(data);
+  } catch (error) {
+    console.error('Error creating custom vocabulary:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put('/custom/vocabulary/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemId = parseInt(req.params.id);
+    const { lesson_id, hiragana, romaji, vietnamese_meaning, word_type, japanese_example, example_meaning, mnemonic_tip } = req.body;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const idx = data.vocabulary.findIndex(v => v.id === itemId && v.user_id === userId);
+      if (idx === -1) {
+        return res.status(404).json({ error: 'Item not found' });
+      }
+      data.vocabulary[idx] = {
+        ...data.vocabulary[idx],
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        hiragana: hiragana !== undefined ? hiragana : data.vocabulary[idx].hiragana,
+        romaji: romaji !== undefined ? romaji : data.vocabulary[idx].romaji,
+        vietnamese_meaning: vietnamese_meaning !== undefined ? vietnamese_meaning : data.vocabulary[idx].vietnamese_meaning,
+        word_type: word_type !== undefined ? word_type : data.vocabulary[idx].word_type,
+        japanese_example: japanese_example !== undefined ? japanese_example : data.vocabulary[idx].japanese_example,
+        example_meaning: example_meaning !== undefined ? example_meaning : data.vocabulary[idx].example_meaning,
+        mnemonic_tip: mnemonic_tip !== undefined ? mnemonic_tip : data.vocabulary[idx].mnemonic_tip
+      };
+      writeCustomItems(data);
+      return res.json(data.vocabulary[idx]);
+    }
+
+    const { data, error } = await supabase
+      .from('user_custom_vocabulary')
+      .update({
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        hiragana,
+        romaji,
+        vietnamese_meaning,
+        word_type,
+        japanese_example,
+        example_meaning,
+        mnemonic_tip
+      })
+      .eq('id', itemId)
+      .eq('user_id', userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error updating custom vocabulary:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/custom/vocabulary/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemId = parseInt(req.params.id);
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const initialLen = data.vocabulary.length;
+      data.vocabulary = data.vocabulary.filter(v => !(v.id === itemId && v.user_id === userId));
+      if (data.vocabulary.length === initialLen) {
+        return res.status(404).json({ error: 'Item not found' });
+      }
+      writeCustomItems(data);
+      return res.json({ message: 'Item deleted successfully' });
+    }
+
+    const { error } = await supabase
+      .from('user_custom_vocabulary')
+      .delete()
+      .eq('id', itemId)
+      .eq('user_id', userId);
+
+    if (error) throw error;
+    res.json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting custom vocabulary:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// --- USER CUSTOM KANJI ENDPOINTS ---
+
+router.get('/custom/kanji', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const lessonId = req.query.lesson_id ? parseInt(req.query.lesson_id) : null;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      let list = data.kanji.filter(k => k.user_id === userId);
+      if (lessonId !== null) {
+        list = list.filter(k => k.lesson_id === lessonId);
+      }
+      return res.json(list);
+    }
+
+    let query = supabase.from('user_custom_kanji').select('*').eq('user_id', userId);
+    if (lessonId !== null) {
+      query = query.eq('lesson_id', lessonId);
+    }
+    const { data, error } = await query;
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching custom kanji:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/custom/kanji', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { lesson_id, character, stroke_count, onyomi, kunyomi, sino_vietnamese, vietnamese_meaning, mnemonic_tip, compounds } = req.body;
+
+    if (!character || !vietnamese_meaning) {
+      return res.status(400).json({ error: 'character and vietnamese_meaning are required' });
+    }
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const newItem = {
+        id: Date.now(),
+        user_id: userId,
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        character,
+        stroke_count: stroke_count || '',
+        onyomi: onyomi || '',
+        kunyomi: kunyomi || '',
+        sino_vietnamese: sino_vietnamese || '',
+        vietnamese_meaning,
+        mnemonic_tip: mnemonic_tip || '',
+        compounds: compounds || '',
+        created_at: new Date().toISOString()
+      };
+      data.kanji.push(newItem);
+      writeCustomItems(data);
+      return res.status(201).json(newItem);
+    }
+
+    const { data, error } = await supabase
+      .from('user_custom_kanji')
+      .insert({
+        user_id: userId,
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        character,
+        stroke_count,
+        onyomi,
+        kunyomi,
+        sino_vietnamese,
+        vietnamese_meaning,
+        mnemonic_tip,
+        compounds
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.status(201).json(data);
+  } catch (error) {
+    console.error('Error creating custom kanji:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put('/custom/kanji/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemId = parseInt(req.params.id);
+    const { lesson_id, character, stroke_count, onyomi, kunyomi, sino_vietnamese, vietnamese_meaning, mnemonic_tip, compounds } = req.body;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const idx = data.kanji.findIndex(k => k.id === itemId && k.user_id === userId);
+      if (idx === -1) {
+        return res.status(404).json({ error: 'Item not found' });
+      }
+      data.kanji[idx] = {
+        ...data.kanji[idx],
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        character: character !== undefined ? character : data.kanji[idx].character,
+        stroke_count: stroke_count !== undefined ? stroke_count : data.kanji[idx].stroke_count,
+        onyomi: onyomi !== undefined ? onyomi : data.kanji[idx].onyomi,
+        kunyomi: kunyomi !== undefined ? kunyomi : data.kanji[idx].kunyomi,
+        sino_vietnamese: sino_vietnamese !== undefined ? sino_vietnamese : data.kanji[idx].sino_vietnamese,
+        vietnamese_meaning: vietnamese_meaning !== undefined ? vietnamese_meaning : data.kanji[idx].vietnamese_meaning,
+        mnemonic_tip: mnemonic_tip !== undefined ? mnemonic_tip : data.kanji[idx].mnemonic_tip,
+        compounds: compounds !== undefined ? compounds : data.kanji[idx].compounds
+      };
+      writeCustomItems(data);
+      return res.json(data.kanji[idx]);
+    }
+
+    const { data, error } = await supabase
+      .from('user_custom_kanji')
+      .update({
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        character,
+        stroke_count,
+        onyomi,
+        kunyomi,
+        sino_vietnamese,
+        vietnamese_meaning,
+        mnemonic_tip,
+        compounds
+      })
+      .eq('id', itemId)
+      .eq('user_id', userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error updating custom kanji:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/custom/kanji/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemId = parseInt(req.params.id);
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const initialLen = data.kanji.length;
+      data.kanji = data.kanji.filter(k => !(k.id === itemId && k.user_id === userId));
+      if (data.kanji.length === initialLen) {
+        return res.status(404).json({ error: 'Item not found' });
+      }
+      writeCustomItems(data);
+      return res.json({ message: 'Item deleted successfully' });
+    }
+
+    const { error } = await supabase
+      .from('user_custom_kanji')
+      .delete()
+      .eq('id', itemId)
+      .eq('user_id', userId);
+
+    if (error) throw error;
+    res.json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting custom kanji:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// --- USER CUSTOM GRAMMAR ENDPOINTS ---
+
+router.get('/custom/grammar', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const lessonId = req.query.lesson_id ? parseInt(req.query.lesson_id) : null;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      let list = data.grammar.filter(g => g.user_id === userId);
+      if (lessonId !== null) {
+        list = list.filter(g => g.lesson_id === lessonId);
+      }
+      return res.json(list);
+    }
+
+    let query = supabase.from('user_custom_grammar').select('*').eq('user_id', userId);
+    if (lessonId !== null) {
+      query = query.eq('lesson_id', lessonId);
+    }
+    const { data, error } = await query;
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching custom grammar:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/custom/grammar', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { lesson_id, title, meaning, structure, vietnamese_explanation, japanese_example, example_meaning, romaji_example, notes } = req.body;
+
+    if (!title || !meaning) {
+      return res.status(400).json({ error: 'title and meaning are required' });
+    }
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const newItem = {
+        id: Date.now(),
+        user_id: userId,
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        title,
+        meaning,
+        structure: structure || '',
+        vietnamese_explanation: vietnamese_explanation || '',
+        japanese_example: japanese_example || '',
+        example_meaning: example_meaning || '',
+        romaji_example: romaji_example || '',
+        notes: notes || '',
+        created_at: new Date().toISOString()
+      };
+      data.grammar.push(newItem);
+      writeCustomItems(data);
+      return res.status(201).json(newItem);
+    }
+
+    const { data, error } = await supabase
+      .from('user_custom_grammar')
+      .insert({
+        user_id: userId,
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        title,
+        meaning,
+        structure,
+        vietnamese_explanation,
+        japanese_example,
+        example_meaning,
+        romaji_example,
+        notes
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.status(201).json(data);
+  } catch (error) {
+    console.error('Error creating custom grammar:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put('/custom/grammar/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemId = parseInt(req.params.id);
+    const { lesson_id, title, meaning, structure, vietnamese_explanation, japanese_example, example_meaning, romaji_example, notes } = req.body;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const idx = data.grammar.findIndex(g => g.id === itemId && g.user_id === userId);
+      if (idx === -1) {
+        return res.status(404).json({ error: 'Item not found' });
+      }
+      data.grammar[idx] = {
+        ...data.grammar[idx],
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        title: title !== undefined ? title : data.grammar[idx].title,
+        meaning: meaning !== undefined ? meaning : data.grammar[idx].meaning,
+        structure: structure !== undefined ? structure : data.grammar[idx].structure,
+        vietnamese_explanation: vietnamese_explanation !== undefined ? vietnamese_explanation : data.grammar[idx].vietnamese_explanation,
+        japanese_example: japanese_example !== undefined ? japanese_example : data.grammar[idx].japanese_example,
+        example_meaning: example_meaning !== undefined ? example_meaning : data.grammar[idx].example_meaning,
+        romaji_example: romaji_example !== undefined ? romaji_example : data.grammar[idx].romaji_example,
+        notes: notes !== undefined ? notes : data.grammar[idx].notes
+      };
+      writeCustomItems(data);
+      return res.json(data.grammar[idx]);
+    }
+
+    const { data, error } = await supabase
+      .from('user_custom_grammar')
+      .update({
+        lesson_id: lesson_id ? parseInt(lesson_id) : null,
+        title,
+        meaning,
+        structure,
+        vietnamese_explanation,
+        japanese_example,
+        example_meaning,
+        romaji_example,
+        notes
+      })
+      .eq('id', itemId)
+      .eq('user_id', userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error updating custom grammar:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/custom/grammar/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemId = parseInt(req.params.id);
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const initialLen = data.grammar.length;
+      data.grammar = data.grammar.filter(g => !(g.id === itemId && g.user_id === userId));
+      if (data.grammar.length === initialLen) {
+        return res.status(404).json({ error: 'Item not found' });
+      }
+      writeCustomItems(data);
+      return res.json({ message: 'Item deleted successfully' });
+    }
+
+    const { error } = await supabase
+      .from('user_custom_grammar')
+      .delete()
+      .eq('id', itemId)
+      .eq('user_id', userId);
+
+    if (error) throw error;
+    res.json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting custom grammar:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
+
