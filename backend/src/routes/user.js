@@ -1322,5 +1322,118 @@ router.delete('/custom/grammar/:id', async (req, res) => {
   }
 });
 
+// --- USER KNOWLEDGE HUB ENDPOINTS (PERSONAL REVIEW ROOM) ---
+
+router.get('/knowledge-items', async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      const list = (data.knowledge_items || []).filter(item => item.user_id === userId);
+      return res.json(list);
+    }
+
+    const { data, error } = await supabase
+      .from('user_knowledge_items')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching knowledge items:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/knowledge-items/add-bulk', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { items } = req.body;
+
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ error: 'items array is required' });
+    }
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      if (!data.knowledge_items) data.knowledge_items = [];
+
+      const added = [];
+      items.forEach(item => {
+        const exists = data.knowledge_items.some(
+          k => k.user_id === userId && k.item_type === item.item_type && k.item_id === parseInt(item.item_id)
+        );
+        if (!exists) {
+          const newItem = {
+            id: Date.now() + Math.floor(Math.random() * 1000),
+            user_id: userId,
+            item_type: item.item_type,
+            item_id: parseInt(item.item_id),
+            created_at: new Date().toISOString()
+          };
+          data.knowledge_items.push(newItem);
+          added.push(newItem);
+        }
+      });
+      writeCustomItems(data);
+      return res.status(201).json({ message: `Successfully added ${added.length} items to knowledge hub.`, added });
+    }
+
+    const rows = items.map(item => ({
+      user_id: userId,
+      item_type: item.item_type,
+      item_id: parseInt(item.item_id)
+    }));
+
+    const { data, error } = await supabase
+      .from('user_knowledge_items')
+      .upsert(rows, { onConflict: 'user_id,item_type,item_id' })
+      .select();
+
+    if (error) throw error;
+    res.status(201).json({ message: `Successfully added ${rows.length} items to knowledge hub.`, data });
+  } catch (error) {
+    console.error('Error adding knowledge items bulk:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/knowledge-items/:type/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const itemType = req.params.type;
+    const itemId = parseInt(req.params.id);
+
+    if (req.user.isMock) {
+      const data = readCustomItems();
+      if (!data.knowledge_items) data.knowledge_items = [];
+      const initialLen = data.knowledge_items.length;
+      data.knowledge_items = data.knowledge_items.filter(
+        k => !(k.user_id === userId && k.item_type === itemType && k.item_id === itemId)
+      );
+      if (data.knowledge_items.length === initialLen) {
+        return res.status(404).json({ error: 'Item not found in knowledge hub' });
+      }
+      writeCustomItems(data);
+      return res.json({ message: 'Item removed from knowledge hub successfully' });
+    }
+
+    const { error } = await supabase
+      .from('user_knowledge_items')
+      .delete()
+      .eq('user_id', userId)
+      .eq('item_type', itemType)
+      .eq('item_id', itemId);
+
+    if (error) throw error;
+    res.json({ message: 'Item removed from knowledge hub successfully' });
+  } catch (error) {
+    console.error('Error removing knowledge item:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
 

@@ -12,6 +12,11 @@ const requireAuth = async (req, res, next) => {
 
     const token = authHeader.split(' ')[1];
     
+    const isMockMode = !process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder');
+    if (isMockMode && !token.startsWith('mock-token-')) {
+      return res.status(401).json({ error: 'Unauthorized: Invalid token format in local mock mode' });
+    }
+    
     // Allow mock bypass for local testing if header starts with mock-token-
     if (token.startsWith('mock-token-')) {
       const userId = token.replace('mock-token-', '').replace('-admin', '');

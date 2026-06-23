@@ -265,4 +265,20 @@ CREATE POLICY "Allow user full access to own custom grammar" ON public.user_cust
   FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 
+-- 13. Create User Knowledge Items Table (Personal Review Room)
+CREATE TABLE public.user_knowledge_items (
+  id SERIAL PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  item_type TEXT NOT NULL, -- 'vocabulary', 'kanji', 'grammar'
+  item_id INTEGER NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, item_type, item_id)
+);
+
+ALTER TABLE public.user_knowledge_items ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow user full access to own knowledge items" ON public.user_knowledge_items
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+
+
 

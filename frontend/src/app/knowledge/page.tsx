@@ -84,6 +84,8 @@ export default function KnowledgeHubPage() {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [level, setLevel] = useState<'N5' | 'N4'>('N5');
+  const [knowledgeItems, setKnowledgeItems] = useState<{ id?: number; user_id?: string; item_type: string; item_id: number }[]>([]);
 
   // Filters state for detailed tabs
   const [filterLesson, setFilterLesson] = useState<string>('all');
@@ -186,7 +188,11 @@ export default function KnowledgeHubPage() {
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await api.get(`/api/user/course-summary?course=${activeCourse}`);
+      const [res, kItems] = await Promise.all([
+        api.get(`/api/user/course-summary?course=${activeCourse}`),
+        api.get('/api/user/knowledge-items')
+      ]);
+      
       setLessons(res.lessons || []);
       setVocabList(res.vocabulary || []);
       setKanjiList(res.kanji || []);
@@ -194,6 +200,7 @@ export default function KnowledgeHubPage() {
       setCustomVocabList((res.customVocabulary || []).map((item: any) => ({ ...item, isCustom: true })));
       setCustomKanjiList((res.customKanji || []).map((item: any) => ({ ...item, isCustom: true })));
       setCustomGrammarList((res.customGrammar || []).map((item: any) => ({ ...item, isCustom: true })));
+      setKnowledgeItems(kItems || []);
 
       // Auto check all lessons for practice config
       const allIds = (res.lessons || []).map((l: any) => l.id);
@@ -213,9 +220,50 @@ export default function KnowledgeHubPage() {
     loadData();
   }, [loadData]);
 
+  // Helper lists of syllabus items currently in the knowledge hub
+  const vocabInHub = useMemo(() => {
+    return vocabList.filter(item => 
+      knowledgeItems.some(ki => ki.item_type === 'vocabulary' && ki.item_id === item.id)
+    );
+  }, [vocabList, knowledgeItems]);
+
+  const kanjiInHub = useMemo(() => {
+    return kanjiList.filter(item => 
+      knowledgeItems.some(ki => ki.item_type === 'kanji' && ki.item_id === item.id)
+    );
+  }, [kanjiList, knowledgeItems]);
+
+  const grammarInHub = useMemo(() => {
+    return grammarList.filter(item => 
+      knowledgeItems.some(ki => ki.item_type === 'grammar' && ki.item_id === item.id)
+    );
+  }, [grammarList, knowledgeItems]);
+
+  // Mastered items not yet imported to the knowledge hub
+  const masteredVocabToImport = useMemo(() => {
+    return vocabList.filter(item => 
+      item.status === 'mastered' && 
+      !knowledgeItems.some(ki => ki.item_type === 'vocabulary' && ki.item_id === item.id)
+    );
+  }, [vocabList, knowledgeItems]);
+
+  const masteredKanjiToImport = useMemo(() => {
+    return kanjiList.filter(item => 
+      item.status === 'mastered' && 
+      !knowledgeItems.some(ki => ki.item_type === 'kanji' && ki.item_id === item.id)
+    );
+  }, [kanjiList, knowledgeItems]);
+
+  const masteredGrammarToImport = useMemo(() => {
+    return grammarList.filter(item => 
+      item.status === 'mastered' && 
+      !knowledgeItems.some(ki => ki.item_type === 'grammar' && ki.item_id === item.id)
+    );
+  }, [grammarList, knowledgeItems]);
+
   // Filtered lists for tabs based on filters state
   const displayedVocab = useMemo(() => {
-    let list = [...customVocabList, ...vocabList];
+    let list = [...customVocabList, ...vocabInHub];
     if (filterLesson !== 'all') {
       const lId = parseInt(filterLesson);
       list = list.filter(v => v.lesson_id === lId);
@@ -231,10 +279,10 @@ export default function KnowledgeHubPage() {
       if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
       return a.id - b.id;
     });
-  }, [customVocabList, vocabList, filterLesson, filterStatus]);
+  }, [customVocabList, vocabInHub, filterLesson, filterStatus]);
 
   const displayedKanji = useMemo(() => {
-    let list = [...customKanjiList, ...kanjiList];
+    let list = [...customKanjiList, ...kanjiInHub];
     if (filterLesson !== 'all') {
       const lId = parseInt(filterLesson);
       list = list.filter(k => k.lesson_id === lId);
@@ -250,10 +298,10 @@ export default function KnowledgeHubPage() {
       if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
       return a.id - b.id;
     });
-  }, [customKanjiList, kanjiList, filterLesson, filterStatus]);
+  }, [customKanjiList, kanjiInHub, filterLesson, filterStatus]);
 
   const displayedGrammar = useMemo(() => {
-    let list = [...customGrammarList, ...grammarList];
+    let list = [...customGrammarList, ...grammarInHub];
     if (filterLesson !== 'all') {
       const lId = parseInt(filterLesson);
       list = list.filter(g => g.lesson_id === lId);
@@ -269,11 +317,29 @@ export default function KnowledgeHubPage() {
       if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
       return a.id - b.id;
     });
-  }, [customGrammarList, grammarList, filterLesson, filterStatus]);
+  }, [customGrammarList, grammarInHub, filterLesson, filterStatus]);
 
   const filteredLessons = useMemo(() => {
-    return lessons.filter(l => (l.course || 'minna') === activeCourse);
-  }, [lessons, activeCourse]);
+    return lessons.filter(l => {
+      if ((l.course || 'minna') !== activeCourse) return false;
+      if (activeCourse === 'marugoto') return true;
+      if (level === 'N5') return l.id >= 1 && l.id <= 25;
+      return l.id >= 26 && l.id <= 50;
+    });
+  }, [lessons, activeCourse, level]);
+
+  const lessonsInHub = useMemo(() => {
+    return filteredLessons.filter(l => {
+      const sysVocab = vocabInHub.filter(v => v.lesson_id === l.id).length;
+      const sysKanji = kanjiInHub.filter(k => k.lesson_id === l.id).length;
+      const sysGrammar = grammarInHub.filter(g => g.lesson_id === l.id).length;
+      const custVocab = customVocabList.filter(v => v.lesson_id === l.id).length;
+      const custKanji = customKanjiList.filter(k => k.lesson_id === l.id).length;
+      const custGrammar = customGrammarList.filter(g => g.lesson_id === l.id).length;
+      
+      return (sysVocab + sysKanji + sysGrammar + custVocab + custKanji + custGrammar) > 0;
+    });
+  }, [filteredLessons, vocabInHub, kanjiInHub, grammarInHub, customVocabList, customKanjiList, customGrammarList]);
 
   // Custom Item Modal actions (CRUD)
   const openVocabModal = (item?: VocabItem) => {
@@ -478,6 +544,50 @@ export default function KnowledgeHubPage() {
     const nextLessonId = course === 'minna' ? 1 : 101;
     setSelectedLessonId(nextLessonId);
     localStorage.setItem('selectedLessonId', nextLessonId.toString());
+    setFilterLesson('all');
+  };
+
+  const handleLevelChange = (selectedLevel: 'N5' | 'N4') => {
+    setLevel(selectedLevel);
+    setFilterLesson('all');
+  };
+
+  const handleImportBulk = async (itemType: 'vocabulary' | 'kanji' | 'grammar', itemsToImport: any[]) => {
+    if (itemsToImport.length === 0) return;
+    setLoading(true);
+    try {
+      const payload = {
+        items: itemsToImport.map(item => ({
+          item_type: itemType,
+          item_id: item.id
+        }))
+      };
+      await api.post('/api/user/knowledge-items/add-bulk', payload);
+      showToast(`Đã thêm ${itemsToImport.length} mục vào phòng ôn tập thành công!`);
+      const kItems = await api.get('/api/user/knowledge-items');
+      setKnowledgeItems(kItems || []);
+    } catch (err: any) {
+      console.error('Failed to import bulk:', err);
+      showToast('Có lỗi xảy ra khi nhập dữ liệu ôn tập.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemoveFromHub = async (itemType: 'vocabulary' | 'kanji' | 'grammar', itemId: number) => {
+    if (!window.confirm('Bạn có chắc chắn muốn xóa mục này khỏi phòng ôn tập không?')) return;
+    setLoading(true);
+    try {
+      await api.delete(`/api/user/knowledge-items/${itemType}/${itemId}`);
+      showToast('Đã xóa học liệu khỏi phòng ôn tập.');
+      const kItems = await api.get('/api/user/knowledge-items');
+      setKnowledgeItems(kItems || []);
+    } catch (err: any) {
+      console.error('Failed to delete item from hub:', err);
+      showToast('Có lỗi xảy ra khi xóa học liệu.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Toggle lesson checklist selection in Practice config
@@ -535,10 +645,10 @@ export default function KnowledgeHubPage() {
       let combinedKanji: KanjiItem[] = [];
       const selectedIds = practiceConfig.selectedLessons;
 
-      // Extract syllabus items from loaded local memory
+      // Extract syllabus items from loaded local memory (only those in the knowledge hub)
       if (practiceConfig.source === 'syllabus' || practiceConfig.source === 'both') {
-        combinedVocab = [...combinedVocab, ...vocabList.filter(v => selectedIds.includes(v.lesson_id))];
-        combinedKanji = [...combinedKanji, ...kanjiList.filter(k => selectedIds.includes(k.lesson_id))];
+        combinedVocab = [...combinedVocab, ...vocabInHub.filter(v => selectedIds.includes(v.lesson_id))];
+        combinedKanji = [...combinedKanji, ...kanjiInHub.filter(k => selectedIds.includes(k.lesson_id))];
       }
       // Extract custom items from loaded local memory
       if (practiceConfig.source === 'custom' || practiceConfig.source === 'both') {
@@ -824,10 +934,36 @@ export default function KnowledgeHubPage() {
           </div>
 
           <div className="flex items-center space-x-3 self-start sm:self-auto flex-wrap gap-2">
+            {/* Level Switcher N5/N4 */}
+            {activeCourse === 'minna' && (
+              <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+                <button
+                  onClick={() => handleLevelChange('N5')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N5'
+                      ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                      : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                  }`}
+                >
+                  N5
+                </button>
+                <button
+                  onClick={() => handleLevelChange('N4')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    level === 'N4'
+                      ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                      : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                  }`}
+                >
+                  N4
+                </button>
+              </div>
+            )}
+
             {/* Button Luyện tập tổng hợp */}
             <button
               onClick={() => {
-                const allLessonIds = lessons.map(l => l.id);
+                const allLessonIds = filteredLessons.map(l => l.id);
                 setPracticeConfig(prev => ({
                   ...prev,
                   selectedLessons: allLessonIds
@@ -901,85 +1037,139 @@ export default function KnowledgeHubPage() {
 
         {/* Tab 1: Overview Sheet */}
         {!loading && activeTab === 'overview' && !gameActive && (
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-6 animate-fade-in">
+            {/* Import banners panel */}
+            {(masteredVocabToImport.length > 0 || masteredKanjiToImport.length > 0 || masteredGrammarToImport.length > 0) && (
+              <div className="p-5 rounded-2xl bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/60 space-y-3.5 shadow-sm">
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg">💡</span>
+                  <h3 className="text-sm font-black text-slate-800 dark:text-slate-200">BẠN CÓ HỌC LIỆU MỚI ĐÃ THUỘC</h3>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Hệ thống ghi nhận bạn vừa hoàn thành một số học liệu từ danh sách bài học. Bạn có muốn thêm vào phòng ôn tập cá nhân này không?
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {masteredVocabToImport.length > 0 && (
+                    <button
+                      onClick={() => handleImportBulk('vocabulary', masteredVocabToImport)}
+                      className="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all active:scale-95 flex items-center space-x-1.5"
+                    >
+                      <span>📚 Thêm {masteredVocabToImport.length} từ vựng mới</span>
+                    </button>
+                  )}
+                  {masteredGrammarToImport.length > 0 && (
+                    <button
+                      onClick={() => handleImportBulk('grammar', masteredGrammarToImport)}
+                      className="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all active:scale-95 flex items-center space-x-1.5"
+                    >
+                      <span>📝 Thêm {masteredGrammarToImport.length} mẫu câu mới</span>
+                    </button>
+                  )}
+                  {masteredKanjiToImport.length > 0 && (
+                    <button
+                      onClick={() => handleImportBulk('kanji', masteredKanjiToImport)}
+                      className="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all active:scale-95 flex items-center space-x-1.5"
+                    >
+                      <span>🉐 Thêm {masteredKanjiToImport.length} chữ Hán mới</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="flex justify-between items-center pb-2">
-              <h2 className="text-sm sm:text-base font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tóm tắt tiến trình theo từng bài</h2>
+              <h2 className="text-sm sm:text-base font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tóm tắt tiến trình phòng ôn tập</h2>
             </div>
 
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 shadow-md">
-              <table className="w-full border-collapse text-left text-xs sm:text-sm">
-                <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-950/40 border-b border-slate-200 dark:border-slate-800 text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider">
-                    <th className="p-4">Bài học</th>
-                    <th className="p-4">Từ vựng (Chuẩn / Tự thêm)</th>
-                    <th className="p-4">Chữ Hán (Chuẩn / Tự thêm)</th>
-                    <th className="p-4">Ngữ pháp hệ thống</th>
-                    <th className="p-4">Mẫu câu bổ sung (Cá nhân)</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-150 dark:divide-slate-850">
-                  {filteredLessons.map((l) => {
-                    const sysVocabCount = vocabList.filter(v => v.lesson_id === l.id).length;
-                    const custVocabCount = customVocabList.filter(v => v.lesson_id === l.id).length;
-                    const sysKanjiCount = kanjiList.filter(k => k.lesson_id === l.id).length;
-                    const custKanjiCount = customKanjiList.filter(k => k.lesson_id === l.id).length;
-                    
-                    const sysGrammars = grammarList.filter(g => g.lesson_id === l.id).map(g => g.title);
-                    const custGrammars = customGrammarList.filter(g => g.lesson_id === l.id).map(g => g.title);
+            {lessonsInHub.length === 0 ? (
+              <div className="text-center py-20 text-slate-400 dark:text-slate-500 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900/10 space-y-4">
+                <span className="text-5xl block">📭</span>
+                <div className="space-y-1 max-w-md mx-auto">
+                  <h3 className="text-sm font-bold text-slate-700 dark:text-slate-350">Phòng ôn tập cá nhân hiện đang trống</h3>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+                    Học liệu từ các bài học chính khóa sẽ chỉ xuất hiện ở đây sau khi bạn học xong và chọn thêm vào để ôn tập. Bạn cũng có thể nhấn vào các tab chi tiết để tự thêm học liệu cá nhân tùy ý.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 shadow-md">
+                <table className="w-full border-collapse text-left text-xs sm:text-sm">
+                  <thead>
+                    <tr className="bg-slate-50 dark:bg-slate-950/40 border-b border-slate-200 dark:border-slate-800 text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider">
+                      <th className="p-4">Bài học</th>
+                      <th className="p-4">Từ vựng đã học</th>
+                      <th className="p-4">Chữ Hán đã học</th>
+                      <th className="p-4">Ngữ pháp đã học</th>
+                      <th className="p-4">Học liệu bổ sung (Cá nhân)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-150 dark:divide-slate-850">
+                    {lessonsInHub.map((l) => {
+                      const sysVocabCount = vocabInHub.filter(v => v.lesson_id === l.id).length;
+                      const custVocabCount = customVocabList.filter(v => v.lesson_id === l.id).length;
+                      const sysKanjiCount = kanjiInHub.filter(k => k.lesson_id === l.id).length;
+                      const custKanjiCount = customKanjiList.filter(k => k.lesson_id === l.id).length;
+                      const sysGrammarCount = grammarInHub.filter(g => g.lesson_id === l.id).length;
+                      const custGrammarCount = customGrammarList.filter(g => g.lesson_id === l.id).length;
 
-                    return (
-                      <tr key={l.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/10 transition-colors">
-                        <td className="p-4 font-black text-slate-900 dark:text-white whitespace-nowrap">
-                          {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`}: {l.title}
-                        </td>
-                        <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
-                          📚 <span className="font-bold text-blue-600 dark:text-blue-400">{sysVocabCount}</span> từ
-                          {custVocabCount > 0 && (
-                            <span className="ml-1.5 px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
-                              +{custVocabCount} custom
-                            </span>
-                          )}
-                        </td>
-                        <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
-                          🉐 <span className="font-bold text-emerald-600 dark:text-emerald-400">{sysKanjiCount}</span> chữ
-                          {custKanjiCount > 0 && (
-                            <span className="ml-1.5 px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
-                              +{custKanjiCount} custom
-                            </span>
-                          )}
-                        </td>
-                        <td className="p-4 text-slate-600 dark:text-slate-400 max-w-xs truncate" title={sysGrammars.join(', ')}>
-                          {sysGrammars.length > 0 ? (
-                            <div className="flex flex-wrap gap-1">
-                              {sysGrammars.map((title, i) => (
-                                <span key={i} className="px-1.5 py-0.5 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded font-mono font-semibold">
-                                  {title}
-                                </span>
-                              ))}
-                            </div>
-                          ) : (
-                            <span className="text-slate-400 italic text-[11px]">Không có</span>
-                          )}
-                        </td>
-                        <td className="p-4 text-slate-600 dark:text-slate-400 max-w-xs truncate" title={custGrammars.join(', ')}>
-                          {custGrammars.length > 0 ? (
-                            <div className="flex flex-wrap gap-1">
-                              {custGrammars.map((title, i) => (
-                                <span key={i} className="px-1.5 py-0.5 text-[10px] bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-900 rounded font-mono font-semibold">
-                                  {title}
-                                </span>
-                              ))}
-                            </div>
-                          ) : (
-                            <span className="text-slate-400 dark:text-slate-500 italic text-[11px]">Chưa thêm</span>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                      const hasCustom = custVocabCount > 0 || custKanjiCount > 0 || custGrammarCount > 0;
+
+                      return (
+                        <tr key={l.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/10 transition-colors">
+                          <td className="p-4 font-black text-slate-900 dark:text-white whitespace-nowrap">
+                            {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`}: {l.title}
+                          </td>
+                          <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
+                            {sysVocabCount > 0 ? (
+                              <span>📚 <span className="font-bold text-blue-600 dark:text-blue-400">{sysVocabCount}</span> từ</span>
+                            ) : (
+                              <span className="text-slate-400 dark:text-slate-500 font-normal italic">Chưa nhập</span>
+                            )}
+                          </td>
+                          <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
+                            {sysKanjiCount > 0 ? (
+                              <span>🉐 <span className="font-bold text-emerald-600 dark:text-emerald-400">{sysKanjiCount}</span> chữ</span>
+                            ) : (
+                              <span className="text-slate-400 dark:text-slate-500 font-normal italic">Chưa nhập</span>
+                            )}
+                          </td>
+                          <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
+                            {sysGrammarCount > 0 ? (
+                              <span>📝 <span className="font-bold text-indigo-600 dark:text-indigo-400">{sysGrammarCount}</span> mẫu</span>
+                            ) : (
+                              <span className="text-slate-400 dark:text-slate-500 font-normal italic">Chưa nhập</span>
+                            )}
+                          </td>
+                          <td className="p-4 whitespace-nowrap text-slate-600 dark:text-slate-400">
+                            {hasCustom ? (
+                              <div className="flex flex-wrap gap-1.5">
+                                {custVocabCount > 0 && (
+                                  <span className="px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
+                                    +{custVocabCount} từ vựng
+                                  </span>
+                                )}
+                                {custKanjiCount > 0 && (
+                                  <span className="px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
+                                    +{custKanjiCount} Kanji
+                                  </span>
+                                )}
+                                {custGrammarCount > 0 && (
+                                  <span className="px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
+                                    +{custGrammarCount} mẫu câu
+                                  </span>
+                                )}
+                              </div>
+                            ) : (
+                              <span className="text-slate-400 dark:text-slate-500 italic text-[11px]">Chưa bổ sung</span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
 
@@ -1091,24 +1281,35 @@ export default function KnowledgeHubPage() {
                     )}
                   </div>
 
-                  {v.isCustom && (
-                    <div className="absolute bottom-3 right-3 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                  <div className="absolute bottom-3 right-3 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                    {v.isCustom ? (
+                      <>
+                        <button
+                          onClick={() => openVocabModal(v)}
+                          className="p-1.5 text-[11px] font-bold text-slate-400 hover:text-blue-500 rounded bg-slate-100 dark:bg-slate-850 hover:bg-white dark:hover:bg-slate-800 cursor-pointer"
+                          title="Chỉnh sửa"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          onClick={() => deleteVocab(v.id)}
+                          className="p-1.5 text-[11px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 hover:bg-white dark:hover:bg-slate-800 cursor-pointer"
+                          title="Xóa bỏ"
+                        >
+                          🗑️
+                        </button>
+                      </>
+                    ) : (
                       <button
-                        onClick={() => openVocabModal(v)}
-                        className="p-1.5 text-[11px] font-bold text-slate-400 hover:text-blue-500 rounded bg-slate-100 dark:bg-slate-850 hover:bg-white dark:hover:bg-slate-800 cursor-pointer"
-                        title="Chỉnh sửa"
+                        onClick={() => handleRemoveFromHub('vocabulary', v.id)}
+                        className="p-1.5 text-[11px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 hover:bg-white dark:hover:bg-slate-800 cursor-pointer flex items-center space-x-1"
+                        title="Xóa khỏi ôn tập"
                       >
-                        ✏️
+                        <span>🗑️</span>
+                        <span className="text-[10px] hidden md:inline">Bỏ ôn tập</span>
                       </button>
-                      <button
-                        onClick={() => deleteVocab(v.id)}
-                        className="p-1.5 text-[11px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 hover:bg-white dark:hover:bg-slate-800 cursor-pointer"
-                        title="Xóa bỏ"
-                      >
-                        🗑️
-                      </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -1227,24 +1428,35 @@ export default function KnowledgeHubPage() {
                     )}
                   </div>
 
-                  {k.isCustom && (
-                    <div className="absolute bottom-3 right-3 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                  <div className="absolute bottom-3 right-3 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                    {k.isCustom ? (
+                      <>
+                        <button
+                          onClick={() => openKanjiModal(k)}
+                          className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-blue-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
+                          title="Sửa"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          onClick={() => deleteKanji(k.id)}
+                          className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
+                          title="Xóa"
+                        >
+                          🗑️
+                        </button>
+                      </>
+                    ) : (
                       <button
-                        onClick={() => openKanjiModal(k)}
-                        className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-blue-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
-                        title="Sửa"
+                        onClick={() => handleRemoveFromHub('kanji', k.id)}
+                        className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer flex items-center space-x-1"
+                        title="Xóa khỏi ôn tập"
                       >
-                        ✏️
+                        <span>🗑️</span>
+                        <span className="text-[9px] hidden md:inline">Bỏ ôn tập</span>
                       </button>
-                      <button
-                        onClick={() => deleteKanji(k.id)}
-                        className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
-                        title="Xóa"
-                      >
-                        🗑️
-                      </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -1369,22 +1581,33 @@ export default function KnowledgeHubPage() {
                     )}
                   </div>
 
-                  {g.isCustom && (
-                    <div className="absolute bottom-4 right-4 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                  <div className="absolute bottom-4 right-4 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                    {g.isCustom ? (
+                      <>
+                        <button
+                          onClick={() => openGrammarModal(g)}
+                          className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-blue-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
+                        >
+                          ✏️ Sửa
+                        </button>
+                        <button
+                          onClick={() => deleteGrammar(g.id)}
+                          className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
+                        >
+                          🗑️ Xóa
+                        </button>
+                      </>
+                    ) : (
                       <button
-                        onClick={() => openGrammarModal(g)}
-                        className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-blue-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
+                        onClick={() => handleRemoveFromHub('grammar', g.id)}
+                        className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer flex items-center space-x-1"
+                        title="Xóa khỏi ôn tập"
                       >
-                        ✏️ Sửa
+                        <span>🗑️</span>
+                        <span className="text-[10px] hidden md:inline">Bỏ ôn tập</span>
                       </button>
-                      <button
-                        onClick={() => deleteGrammar(g.id)}
-                        className="p-1.5 text-[10px] font-bold text-slate-400 hover:text-red-500 rounded bg-slate-100 dark:bg-slate-850 cursor-pointer"
-                      >
-                        🗑️ Xóa
-                      </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

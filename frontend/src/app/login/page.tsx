@@ -12,8 +12,11 @@ export default function LoginPage() {
   const [expiredMsg, setExpiredMsg] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.search.includes('expired=true')) {
-      setExpiredMsg('Phiên làm việc của bạn đã hết hạn do lâu không hoạt động. Vui lòng đăng nhập lại.');
+    if (typeof window !== 'undefined') {
+      api.clearAuth();
+      if (window.location.search.includes('expired=true')) {
+        setExpiredMsg('Phiên làm việc của bạn đã hết hạn do lâu không hoạt động. Vui lòng đăng nhập lại.');
+      }
     }
   }, []);
   const [showPassword, setShowPassword] = useState(false);
