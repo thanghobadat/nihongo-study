@@ -182,7 +182,119 @@ router.post('/target-plan', async (req, res) => {
 });
 
 /**
+ * GET /api/user/course-summary
+ * Fetch overall summary data for a course (syllabus items, user progress and custom items)
+ */
+router.get('/course-summary', async (req, res) => {
+  try {
+    const course = req.query.course || 'minna';
+    const userId = req.user.id;
+
+    if (req.user.isMock) {
+      const filteredLessons = mockDb.lessons.filter(l => (l.course || 'minna') === course);
+      const lessonIds = filteredLessons.map(l => l.id);
+
+      const vocabList = mockDb.vocabulary
+        .filter(v => lessonIds.includes(v.lesson_id))
+        .map(v => {
+          const status = mockDb.userProgress[`${userId}:vocabulary:${v.id}`] || 'not_learned';
+          return { ...v, status };
+        });
+
+      const kanjiList = mockDb.kanji
+        .filter(k => lessonIds.includes(k.lesson_id))
+        .map(k => {
+          const status = mockDb.userProgress[`${userId}:kanji:${k.id}`] || 'not_learned';
+          return { ...k, status };
+        });
+
+      const grammarList = mockDb.grammar
+        .filter(g => lessonIds.includes(g.lesson_id))
+        .map(g => {
+          const status = mockDb.userProgress[`${userId}:grammar:${g.id}`] || 'not_learned';
+          return { ...g, status };
+        });
+
+      const customData = readCustomItems();
+      const customVocab = (customData.vocabulary || []).filter(v => v.user_id === userId && lessonIds.includes(v.lesson_id));
+      const customKanji = (customData.kanji || []).filter(k => k.user_id === userId && lessonIds.includes(k.lesson_id));
+      const customGrammar = (customData.grammar || []).filter(g => g.user_id === userId && lessonIds.includes(g.lesson_id));
+
+      return res.json({
+        lessons: filteredLessons,
+        vocabulary: vocabList,
+        kanji: kanjiList,
+        grammar: grammarList,
+        customVocabulary: customVocab,
+        customKanji: customKanji,
+        customGrammar: customGrammar
+      });
+    }
+
+    // --- REAL DATABASE SUPABASE MODE ---
+    const { data: lessons, error: lErr } = await supabase
+      .from('lessons')
+      .select('*')
+      .eq('course', course)
+      .order('id', { ascending: true });
+    if (lErr) throw lErr;
+    const lessonIds = lessons.map(l => l.id);
+
+    const [vocabRes, kanjiRes, grammarRes] = await Promise.all([
+      supabase.from('vocabulary').select('*').in('lesson_id', lessonIds),
+      supabase.from('kanji').select('*').in('lesson_id', lessonIds),
+      supabase.from('grammar').select('*').in('lesson_id', lessonIds)
+    ]);
+    if (vocabRes.error) throw vocabRes.error;
+    if (kanjiRes.error) throw kanjiRes.error;
+    if (grammarRes.error) throw grammarRes.error;
+
+    const { data: userProgress, error: pErr } = await supabase
+      .from('user_progress')
+      .select('*')
+      .eq('user_id', userId);
+    if (pErr) throw pErr;
+
+    const vocabList = vocabRes.data.map(v => {
+      const p = userProgress.find(progress => progress.item_type === 'vocabulary' && progress.item_id === v.id);
+      return { ...v, status: p ? p.status : 'not_learned' };
+    });
+    const kanjiList = kanjiRes.data.map(k => {
+      const p = userProgress.find(progress => progress.item_type === 'kanji' && progress.item_id === k.id);
+      return { ...k, status: p ? p.status : 'not_learned' };
+    });
+    const grammarList = grammarRes.data.map(g => {
+      const p = userProgress.find(progress => progress.item_type === 'grammar' && progress.item_id === g.id);
+      return { ...g, status: p ? p.status : 'not_learned' };
+    });
+
+    const [customVocabRes, customKanjiRes, customGrammarRes] = await Promise.all([
+      supabase.from('user_custom_vocabulary').select('*').eq('user_id', userId).in('lesson_id', lessonIds),
+      supabase.from('user_custom_kanji').select('*').eq('user_id', userId).in('lesson_id', lessonIds),
+      supabase.from('user_custom_grammar').select('*').eq('user_id', userId).in('lesson_id', lessonIds)
+    ]);
+    if (customVocabRes.error) throw customVocabRes.error;
+    if (customKanjiRes.error) throw customKanjiRes.error;
+    if (customGrammarRes.error) throw customGrammarRes.error;
+
+    res.json({
+      lessons,
+      vocabulary: vocabList,
+      kanji: kanjiList,
+      grammar: grammarList,
+      customVocabulary: customVocabRes.data,
+      customKanji: customKanjiRes.data,
+      customGrammar: customGrammarRes.data
+    });
+  } catch (error) {
+    console.error('Error fetching course summary:', error);
+    res.status(500).json({ error: error.message || error });
+  }
+});
+
+/**
  * GET /api/lessons
+```,StartLine:178,TargetContent:
  * Get list of lessons
  */
 router.get('/lessons', async (req, res) => {

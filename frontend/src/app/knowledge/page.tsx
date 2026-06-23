@@ -24,6 +24,7 @@ interface VocabItem {
   example_meaning?: string;
   mnemonic_tip?: string;
   isCustom?: boolean;
+  status?: 'not_learned' | 'learning' | 'mastered';
 }
 
 interface KanjiItem {
@@ -38,6 +39,7 @@ interface KanjiItem {
   mnemonic_tip?: string;
   compounds?: string;
   isCustom?: boolean;
+  status?: 'not_learned' | 'learning' | 'mastered';
 }
 
 interface GrammarItem {
@@ -52,6 +54,7 @@ interface GrammarItem {
   romaji_example?: string;
   notes?: string;
   isCustom?: boolean;
+  status?: 'not_learned' | 'learning' | 'mastered';
 }
 
 export default function KnowledgeHubPage() {
@@ -76,10 +79,15 @@ export default function KnowledgeHubPage() {
   const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<'vocab' | 'kanji' | 'grammar' | 'quiz'>('vocab');
+  const [activeTab, setActiveTab] = useState<'overview' | 'vocab' | 'kanji' | 'grammar'>('overview');
+  const [showPracticeSetup, setShowPracticeSetup] = useState<boolean>(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Filters state for detailed tabs
+  const [filterLesson, setFilterLesson] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
 
   // Core content lists (Syllabus & Custom)
   const [vocabList, setVocabList] = useState<VocabItem[]>([]);
@@ -174,67 +182,94 @@ export default function KnowledgeHubPage() {
     }
   }, []);
 
-  // Fetch Lessons list
-  useEffect(() => {
-    const loadLessons = async () => {
-      try {
-        const res = await api.get(`/api/user/lessons?course=${activeCourse}`);
-        setLessons(res || []);
-      } catch (err) {
-        console.error('Failed to load lessons list:', err);
-      }
-    };
-    loadLessons();
-  }, [activeCourse]);
-
-  // Combined fetch for current lesson (Syllabus & Custom items)
+  // Combined fetch for course (Syllabus & Custom items for ALL lessons)
   const loadData = useCallback(async () => {
-    if (!selectedLessonId) return;
     setLoading(true);
     try {
-      // 1. Fetch Syllabus Items
-      const [vRes, kRes, gRes] = await Promise.all([
-        api.get(`/api/lessons/${selectedLessonId}/vocabulary`),
-        api.get(`/api/lessons/${selectedLessonId}/kanji`),
-        api.get(`/api/lessons/${selectedLessonId}/grammar`)
-      ]);
-      setVocabList(vRes || []);
-      setKanjiList(kRes || []);
-      setGrammarList(gRes || []);
+      const res = await api.get(`/api/user/course-summary?course=${activeCourse}`);
+      setLessons(res.lessons || []);
+      setVocabList(res.vocabulary || []);
+      setKanjiList(res.kanji || []);
+      setGrammarList(res.grammar || []);
+      setCustomVocabList((res.customVocabulary || []).map((item: any) => ({ ...item, isCustom: true })));
+      setCustomKanjiList((res.customKanji || []).map((item: any) => ({ ...item, isCustom: true })));
+      setCustomGrammarList((res.customGrammar || []).map((item: any) => ({ ...item, isCustom: true })));
 
-      // 2. Fetch Custom User Items
-      const [customV, customK, customG] = await Promise.all([
-        api.get(`/api/user/custom/vocabulary?lesson_id=${selectedLessonId}`),
-        api.get(`/api/user/custom/kanji?lesson_id=${selectedLessonId}`),
-        api.get(`/api/user/custom/grammar?lesson_id=${selectedLessonId}`)
-      ]);
-      setCustomVocabList((customV || []).map((item: any) => ({ ...item, isCustom: true })));
-      setCustomKanjiList((customK || []).map((item: any) => ({ ...item, isCustom: true })));
-      setCustomGrammarList((customG || []).map((item: any) => ({ ...item, isCustom: true })));
+      // Auto check all lessons for practice config
+      const allIds = (res.lessons || []).map((l: any) => l.id);
+      setPracticeConfig(prev => ({
+        ...prev,
+        selectedLessons: allIds
+      }));
     } catch (err) {
-      console.error('Error loading lesson contents:', err);
-      showToast('Có lỗi xảy ra khi tải dữ liệu bài học.');
+      console.error('Error loading course summary contents:', err);
+      showToast('Có lỗi xảy ra khi tải dữ liệu khóa học.');
     } finally {
       setLoading(false);
     }
-  }, [selectedLessonId]);
+  }, [activeCourse]);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
 
-  // Combine lists for rendering in the tab panel
+  // Filtered lists for tabs based on filters state
   const displayedVocab = useMemo(() => {
-    return [...customVocabList, ...vocabList];
-  }, [customVocabList, vocabList]);
+    let list = [...customVocabList, ...vocabList];
+    if (filterLesson !== 'all') {
+      const lId = parseInt(filterLesson);
+      list = list.filter(v => v.lesson_id === lId);
+    }
+    if (filterStatus !== 'all') {
+      if (filterStatus === 'custom') {
+        list = list.filter(v => v.isCustom);
+      } else {
+        list = list.filter(v => !v.isCustom && v.status === filterStatus);
+      }
+    }
+    return list.sort((a, b) => {
+      if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
+      return a.id - b.id;
+    });
+  }, [customVocabList, vocabList, filterLesson, filterStatus]);
 
   const displayedKanji = useMemo(() => {
-    return [...customKanjiList, ...kanjiList];
-  }, [customKanjiList, kanjiList]);
+    let list = [...customKanjiList, ...kanjiList];
+    if (filterLesson !== 'all') {
+      const lId = parseInt(filterLesson);
+      list = list.filter(k => k.lesson_id === lId);
+    }
+    if (filterStatus !== 'all') {
+      if (filterStatus === 'custom') {
+        list = list.filter(k => k.isCustom);
+      } else {
+        list = list.filter(k => !k.isCustom && k.status === filterStatus);
+      }
+    }
+    return list.sort((a, b) => {
+      if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
+      return a.id - b.id;
+    });
+  }, [customKanjiList, kanjiList, filterLesson, filterStatus]);
 
   const displayedGrammar = useMemo(() => {
-    return [...customGrammarList, ...grammarList];
-  }, [customGrammarList, grammarList]);
+    let list = [...customGrammarList, ...grammarList];
+    if (filterLesson !== 'all') {
+      const lId = parseInt(filterLesson);
+      list = list.filter(g => g.lesson_id === lId);
+    }
+    if (filterStatus !== 'all') {
+      if (filterStatus === 'custom') {
+        list = list.filter(g => g.isCustom);
+      } else {
+        list = list.filter(g => !g.isCustom && g.status === filterStatus);
+      }
+    }
+    return list.sort((a, b) => {
+      if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
+      return a.id - b.id;
+    });
+  }, [customGrammarList, grammarList, filterLesson, filterStatus]);
 
   const filteredLessons = useMemo(() => {
     return lessons.filter(l => (l.course || 'minna') === activeCourse);
@@ -464,6 +499,29 @@ export default function KnowledgeHubPage() {
     setPracticeConfig({ ...practiceConfig, selectedLessons: [] });
   };
 
+  // Update user progress status directly from the hub page
+  const handleItemStatusChange = async (itemId: number, itemType: 'vocabulary' | 'kanji' | 'grammar', newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    try {
+      await api.post('/api/user/progress', {
+        item_type: itemType,
+        item_id: itemId,
+        status: newStatus
+      });
+      // Update local memory state immediately
+      if (itemType === 'vocabulary') {
+        setVocabList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+      } else if (itemType === 'kanji') {
+        setKanjiList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+      } else if (itemType === 'grammar') {
+        setGrammarList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+      }
+      showToast('Cập nhật trạng thái thành công!');
+    } catch (err: any) {
+      console.error('Failed to update status:', err);
+      showToast('Lỗi cập nhật trạng thái học tập.');
+    }
+  };
+
   // Start Combined Practice Game
   const startPracticeGame = async () => {
     if (practiceConfig.selectedLessons.length === 0) {
@@ -475,30 +533,18 @@ export default function KnowledgeHubPage() {
     try {
       let combinedVocab: VocabItem[] = [];
       let combinedKanji: KanjiItem[] = [];
+      const selectedIds = practiceConfig.selectedLessons;
 
-      // Fetch vocabulary and kanji across all selected lessons
-      await Promise.all(
-        practiceConfig.selectedLessons.map(async (lessonId) => {
-          let vSys: VocabItem[] = [];
-          let kSys: KanjiItem[] = [];
-          let vCust: VocabItem[] = [];
-          let kCust: KanjiItem[] = [];
-
-          if (practiceConfig.source === 'syllabus' || practiceConfig.source === 'both') {
-            vSys = await api.get(`/api/lessons/${lessonId}/vocabulary`);
-            kSys = await api.get(`/api/lessons/${lessonId}/kanji`);
-          }
-          if (practiceConfig.source === 'custom' || practiceConfig.source === 'both') {
-            vCust = await api.get(`/api/user/custom/vocabulary?lesson_id=${lessonId}`);
-            kCust = await api.get(`/api/user/custom/kanji?lesson_id=${lessonId}`);
-            vCust = vCust.map((item: any) => ({ ...item, isCustom: true }));
-            kCust = kCust.map((item: any) => ({ ...item, isCustom: true }));
-          }
-
-          combinedVocab = [...combinedVocab, ...vSys, ...vCust];
-          combinedKanji = [...combinedKanji, ...kSys, ...kCust];
-        })
-      );
+      // Extract syllabus items from loaded local memory
+      if (practiceConfig.source === 'syllabus' || practiceConfig.source === 'both') {
+        combinedVocab = [...combinedVocab, ...vocabList.filter(v => selectedIds.includes(v.lesson_id))];
+        combinedKanji = [...combinedKanji, ...kanjiList.filter(k => selectedIds.includes(k.lesson_id))];
+      }
+      // Extract custom items from loaded local memory
+      if (practiceConfig.source === 'custom' || practiceConfig.source === 'both') {
+        combinedVocab = [...combinedVocab, ...customVocabList.filter(v => selectedIds.includes(v.lesson_id))];
+        combinedKanji = [...combinedKanji, ...customKanjiList.filter(k => selectedIds.includes(k.lesson_id))];
+      }
 
       let finalDataSet: any[] = [];
       if (practiceConfig.contentType === 'vocab') {
@@ -770,77 +816,80 @@ export default function KnowledgeHubPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-1">
-              TỔNG HỢP KIẾN THỨC CÁ NHÂN
+              TỔNG HỢP KIẾN THỨC & TỰ GHI NHỚ
             </h1>
             <p className="text-xs sm:text-sm text-slate-400 dark:text-slate-500">
-              Tổng hợp từ vựng, chữ Hán, mẫu câu đã học & tự bổ sung ghi chú riêng
+              Duyệt tổng quan bài học, quản lý từ vựng, chữ Hán, mẫu ngữ pháp đã học và tự thêm
             </p>
           </div>
 
-          {/* Lesson selection dropdown */}
-          <div className="flex items-center space-x-3 self-start sm:self-auto">
-            <label className="text-xs font-bold text-slate-400 dark:text-slate-500">Bài học:</label>
-            <select
-              value={selectedLessonId}
-              onChange={(e) => {
-                const parsed = parseInt(e.target.value);
-                setSelectedLessonId(parsed);
-                localStorage.setItem('selectedLessonId', parsed.toString());
+          <div className="flex items-center space-x-3 self-start sm:self-auto flex-wrap gap-2">
+            {/* Button Luyện tập tổng hợp */}
+            <button
+              onClick={() => {
+                const allLessonIds = lessons.map(l => l.id);
+                setPracticeConfig(prev => ({
+                  ...prev,
+                  selectedLessons: allLessonIds
+                }));
+                setShowPracticeSetup(true);
               }}
-              className="bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[150px] shadow-sm"
+              className="px-4 py-2.5 text-xs sm:text-sm font-black bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
             >
-              {filteredLessons.map((l) => (
-                <option key={l.id} value={l.id} className="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200">
-                  {l.title}
-                </option>
-              ))}
-            </select>
+              <span>🎯</span>
+              <span>Luyện tập tổng hợp</span>
+            </button>
+
+            {/* Course Switcher */}
+            <CourseSwitcher activeCourse={activeCourse} onSwitch={handleCourseSwitch} />
           </div>
         </div>
 
         {/* Navigation Tabs bar */}
-        <div className="flex border-b border-slate-200 dark:border-slate-850 p-1 bg-slate-100/65 dark:bg-slate-900/65 rounded-xl max-w-lg shadow-sm">
-          <button
-            onClick={() => { setActiveTab('vocab'); setGameActive(false); }}
-            className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
-              activeTab === 'vocab' && !gameActive
-                ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
-            }`}
-          >
-            📚 Từ vựng ({displayedVocab.length})
-          </button>
-          <button
-            onClick={() => { setActiveTab('kanji'); setGameActive(false); }}
-            className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
-              activeTab === 'kanji' && !gameActive
-                ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
-            }`}
-          >
-            🉐 Chữ Hán ({displayedKanji.length})
-          </button>
-          <button
-            onClick={() => { setActiveTab('grammar'); setGameActive(false); }}
-            className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
-              activeTab === 'grammar' && !gameActive
-                ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
-            }`}
-          >
-            📝 Mẫu câu ({displayedGrammar.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('quiz')}
-            className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
-              activeTab === 'quiz' || gameActive
-                ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
-                : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
-            }`}
-          >
-            🎯 Ôn tập tổng hợp
-          </button>
-        </div>
+        {!gameActive && (
+          <div className="flex border-b border-slate-200 dark:border-slate-850 p-1 bg-slate-100/65 dark:bg-slate-900/65 rounded-xl max-w-lg shadow-sm">
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
+                activeTab === 'overview'
+                  ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              }`}
+            >
+              📊 Tổng quan
+            </button>
+            <button
+              onClick={() => setActiveTab('vocab')}
+              className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
+                activeTab === 'vocab'
+                  ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              }`}
+            >
+              📚 Từ vựng
+            </button>
+            <button
+              onClick={() => setActiveTab('kanji')}
+              className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
+                activeTab === 'kanji'
+                  ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              }`}
+            >
+              🉐 Chữ Hán
+            </button>
+            <button
+              onClick={() => setActiveTab('grammar')}
+              className={`flex-1 text-center py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer ${
+                activeTab === 'grammar'
+                  ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              }`}
+            >
+              📝 Mẫu câu
+            </button>
+          </div>
+        )}
 
         {/* Loading Indicator */}
         {loading && (
@@ -850,20 +899,138 @@ export default function KnowledgeHubPage() {
           </div>
         )}
 
-        {/* Tab Vocabulary content */}
+        {/* Tab 1: Overview Sheet */}
+        {!loading && activeTab === 'overview' && !gameActive && (
+          <div className="space-y-4 animate-fade-in">
+            <div className="flex justify-between items-center pb-2">
+              <h2 className="text-sm sm:text-base font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tóm tắt tiến trình theo từng bài</h2>
+            </div>
+
+            <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 shadow-md">
+              <table className="w-full border-collapse text-left text-xs sm:text-sm">
+                <thead>
+                  <tr className="bg-slate-50 dark:bg-slate-950/40 border-b border-slate-200 dark:border-slate-800 text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider">
+                    <th className="p-4">Bài học</th>
+                    <th className="p-4">Từ vựng (Chuẩn / Tự thêm)</th>
+                    <th className="p-4">Chữ Hán (Chuẩn / Tự thêm)</th>
+                    <th className="p-4">Ngữ pháp hệ thống</th>
+                    <th className="p-4">Mẫu câu bổ sung (Cá nhân)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-150 dark:divide-slate-850">
+                  {filteredLessons.map((l) => {
+                    const sysVocabCount = vocabList.filter(v => v.lesson_id === l.id).length;
+                    const custVocabCount = customVocabList.filter(v => v.lesson_id === l.id).length;
+                    const sysKanjiCount = kanjiList.filter(k => k.lesson_id === l.id).length;
+                    const custKanjiCount = customKanjiList.filter(k => k.lesson_id === l.id).length;
+                    
+                    const sysGrammars = grammarList.filter(g => g.lesson_id === l.id).map(g => g.title);
+                    const custGrammars = customGrammarList.filter(g => g.lesson_id === l.id).map(g => g.title);
+
+                    return (
+                      <tr key={l.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/10 transition-colors">
+                        <td className="p-4 font-black text-slate-900 dark:text-white whitespace-nowrap">
+                          {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`}: {l.title}
+                        </td>
+                        <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
+                          📚 <span className="font-bold text-blue-600 dark:text-blue-400">{sysVocabCount}</span> từ
+                          {custVocabCount > 0 && (
+                            <span className="ml-1.5 px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
+                              +{custVocabCount} custom
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
+                          🉐 <span className="font-bold text-emerald-600 dark:text-emerald-400">{sysKanjiCount}</span> chữ
+                          {custKanjiCount > 0 && (
+                            <span className="ml-1.5 px-1.5 py-0.5 text-[10px] bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 rounded font-bold">
+                              +{custKanjiCount} custom
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-4 text-slate-600 dark:text-slate-400 max-w-xs truncate" title={sysGrammars.join(', ')}>
+                          {sysGrammars.length > 0 ? (
+                            <div className="flex flex-wrap gap-1">
+                              {sysGrammars.map((title, i) => (
+                                <span key={i} className="px-1.5 py-0.5 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded font-mono font-semibold">
+                                  {title}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <span className="text-slate-400 italic text-[11px]">Không có</span>
+                          )}
+                        </td>
+                        <td className="p-4 text-slate-600 dark:text-slate-400 max-w-xs truncate" title={custGrammars.join(', ')}>
+                          {custGrammars.length > 0 ? (
+                            <div className="flex flex-wrap gap-1">
+                              {custGrammars.map((title, i) => (
+                                <span key={i} className="px-1.5 py-0.5 text-[10px] bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-900 rounded font-mono font-semibold">
+                                  {title}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <span className="text-slate-400 dark:text-slate-500 italic text-[11px]">Chưa thêm</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 2: Vocabulary Detail */}
         {!loading && activeTab === 'vocab' && !gameActive && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-sm sm:text-base font-black text-slate-400 uppercase tracking-widest">Danh sách từ vựng</h2>
+          <div className="space-y-4 animate-fade-in">
+            {/* Filter controls */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm justify-between">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center space-x-2">
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">Bài học:</label>
+                  <select
+                    value={filterLesson}
+                    onChange={(e) => setFilterLesson(e.target.value)}
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px] shadow-sm"
+                  >
+                    <option value="all">Tất cả các bài</option>
+                    {filteredLessons.map(l => (
+                      <option key={l.id} value={l.id}>
+                        {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`} - {l.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">Trạng thái:</label>
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px] shadow-sm"
+                  >
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="not_learned">Chưa học</option>
+                    <option value="learning">Đang học</option>
+                    <option value="mastered">Đã thuộc</option>
+                    <option value="custom">Chỉ học liệu tự thêm</option>
+                  </select>
+                </div>
+              </div>
+
               <button
                 onClick={() => openVocabModal()}
-                className="px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
+                className="px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5 self-start md:self-auto"
               >
                 <span>➕</span>
                 <span>Tự thêm từ mới</span>
               </button>
             </div>
 
+            {/* List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {displayedVocab.map((v) => (
                 <div
@@ -874,15 +1041,37 @@ export default function KnowledgeHubPage() {
                       : 'bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800'
                   } shadow-md relative group`}
                 >
-                  {v.isCustom && (
-                    <span className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-md">
-                      Cá nhân
+                  <div className="absolute top-3 right-3 flex items-center space-x-2">
+                    <span className="text-[10px] px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-550 dark:text-slate-400 rounded font-bold">
+                      Bài {activeCourse === 'marugoto' ? v.lesson_id - 100 : v.lesson_id}
                     </span>
-                  )}
-                  <div className="space-y-1">
-                    <div className="flex items-baseline space-x-2">
+                    {v.isCustom ? (
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-md">
+                        Cá nhân
+                      </span>
+                    ) : (
+                      <select
+                        value={v.status || 'not_learned'}
+                        onChange={(e) => handleItemStatusChange(v.id, 'vocabulary', e.target.value as any)}
+                        className={`text-[10px] font-bold rounded px-1.5 py-0.5 border cursor-pointer focus:outline-none transition-colors ${
+                          v.status === 'mastered'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 text-emerald-600 dark:text-emerald-400'
+                            : v.status === 'learning'
+                              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 text-amber-600 dark:text-amber-400'
+                              : 'bg-slate-50 dark:bg-slate-950 border-slate-200 text-slate-500 dark:text-slate-450'
+                        }`}
+                      >
+                        <option value="not_learned">Chưa học</option>
+                        <option value="learning">Đang học</option>
+                        <option value="mastered">Đã thuộc</option>
+                      </select>
+                    )}
+                  </div>
+
+                  <div className="space-y-1 pr-14">
+                    <div className="flex items-baseline space-x-2 flex-wrap">
                       <span className="text-lg font-bold text-slate-900 dark:text-white">{v.hiragana}</span>
-                      <span className="text-xs text-slate-400 font-medium">[{v.romaji}]</span>
+                      <span className="text-xs text-slate-450 font-medium">[{v.romaji}]</span>
                       {v.word_type && (
                         <span className="text-[10px] px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded font-medium">
                           {v.word_type}
@@ -926,26 +1115,60 @@ export default function KnowledgeHubPage() {
 
             {displayedVocab.length === 0 && (
               <div className="text-center py-20 text-slate-400 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900/10">
-                📭 Không có từ vựng nào trong bài học này. Hãy thêm mới từ của bạn!
+                📭 Không tìm thấy từ vựng nào khớp với bộ lọc.
               </div>
             )}
           </div>
         )}
 
-        {/* Tab Kanji content */}
+        {/* Tab 3: Kanji Detail */}
         {!loading && activeTab === 'kanji' && !gameActive && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-sm sm:text-base font-black text-slate-400 uppercase tracking-widest">Danh sách chữ Hán</h2>
+          <div className="space-y-4 animate-fade-in">
+            {/* Filter controls */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm justify-between">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center space-x-2">
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">Bài học:</label>
+                  <select
+                    value={filterLesson}
+                    onChange={(e) => setFilterLesson(e.target.value)}
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px] shadow-sm"
+                  >
+                    <option value="all">Tất cả các bài</option>
+                    {filteredLessons.map(l => (
+                      <option key={l.id} value={l.id}>
+                        {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`} - {l.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">Trạng thái:</label>
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px] shadow-sm"
+                  >
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="not_learned">Chưa học</option>
+                    <option value="learning">Đang học</option>
+                    <option value="mastered">Đã thuộc</option>
+                    <option value="custom">Chỉ chữ Hán tự thêm</option>
+                  </select>
+                </div>
+              </div>
+
               <button
                 onClick={() => openKanjiModal()}
-                className="px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
+                className="px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5 self-start md:self-auto"
               >
                 <span>➕</span>
                 <span>Tự thêm chữ mới</span>
               </button>
             </div>
 
+            {/* List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               {displayedKanji.map((k) => (
                 <div
@@ -960,8 +1183,8 @@ export default function KnowledgeHubPage() {
                     {k.character}
                   </div>
                   
-                  <div className="flex-1 space-y-1">
-                    <div className="flex items-baseline space-x-1.5">
+                  <div className="flex-1 space-y-1 pr-10">
+                    <div className="flex items-baseline space-x-1.5 flex-wrap">
                       <span className="text-base font-bold text-slate-900 dark:text-white">
                         {k.sino_vietnamese || 'Hán Việt'}
                       </span>
@@ -972,16 +1195,37 @@ export default function KnowledgeHubPage() {
                     <p className="text-xs text-slate-700 dark:text-slate-350 font-bold">Nghĩa: {k.vietnamese_meaning}</p>
                     
                     <div className="text-[10px] text-slate-400 font-medium space-y-0.5 pt-1 border-t border-slate-100 dark:border-slate-850">
-                      {k.onyomi && <p>On: <span className="text-slate-600 dark:text-slate-400 font-semibold">{k.onyomi}</span></p>}
-                      {k.kunyomi && <p>Kun: <span className="text-slate-600 dark:text-slate-400 font-semibold">{k.kunyomi}</span></p>}
+                      {k.onyomi && <p>On: <span className="text-slate-650 dark:text-slate-400 font-semibold">{k.onyomi}</span></p>}
+                      {k.kunyomi && <p>Kun: <span className="text-slate-650 dark:text-slate-400 font-semibold">{k.kunyomi}</span></p>}
                     </div>
                   </div>
 
-                  {k.isCustom && (
-                    <span className="absolute top-3 right-3 px-2 py-0.5 text-[9px] font-bold bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded">
-                      Cá nhân
+                  <div className="absolute top-3 right-3 flex items-center space-x-2">
+                    <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500">
+                      Bài {activeCourse === 'marugoto' ? k.lesson_id - 100 : k.lesson_id}
                     </span>
-                  )}
+                    {k.isCustom ? (
+                      <span className="px-2 py-0.5 text-[9px] font-bold bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded">
+                        Cá nhân
+                      </span>
+                    ) : (
+                      <select
+                        value={k.status || 'not_learned'}
+                        onChange={(e) => handleItemStatusChange(k.id, 'kanji', e.target.value as any)}
+                        className={`text-[9px] font-bold rounded px-1.5 py-0.5 border cursor-pointer focus:outline-none transition-colors ${
+                          k.status === 'mastered'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-250 text-emerald-600 dark:text-emerald-400'
+                            : k.status === 'learning'
+                              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-250 text-amber-600 dark:text-amber-400'
+                              : 'bg-slate-50 dark:bg-slate-950 border-slate-200 text-slate-500 dark:text-slate-400'
+                        }`}
+                      >
+                        <option value="not_learned">Chưa học</option>
+                        <option value="learning">Đang học</option>
+                        <option value="mastered">Đã thuộc</option>
+                      </select>
+                    )}
+                  </div>
 
                   {k.isCustom && (
                     <div className="absolute bottom-3 right-3 flex items-center space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
@@ -1007,26 +1251,60 @@ export default function KnowledgeHubPage() {
 
             {displayedKanji.length === 0 && (
               <div className="text-center py-20 text-slate-400 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900/10">
-                📭 Không có chữ Hán nào trong bài này. Hãy thêm mới chữ của bạn!
+                📭 Không tìm thấy chữ Hán nào khớp với bộ lọc.
               </div>
             )}
           </div>
         )}
 
-        {/* Tab Grammar content */}
+        {/* Tab 4: Grammar Detail */}
         {!loading && activeTab === 'grammar' && !gameActive && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-sm sm:text-base font-black text-slate-400 uppercase tracking-widest">Danh sách mẫu câu</h2>
+          <div className="space-y-4 animate-fade-in">
+            {/* Filter controls */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm justify-between">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center space-x-2">
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">Bài học:</label>
+                  <select
+                    value={filterLesson}
+                    onChange={(e) => setFilterLesson(e.target.value)}
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px] shadow-sm"
+                  >
+                    <option value="all">Tất cả các bài</option>
+                    {filteredLessons.map(l => (
+                      <option key={l.id} value={l.id}>
+                        {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`} - {l.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <label className="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">Trạng thái:</label>
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px] shadow-sm"
+                  >
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="not_learned">Chưa học</option>
+                    <option value="learning">Đang học</option>
+                    <option value="mastered">Đã thuộc</option>
+                    <option value="custom">Chỉ ngữ pháp tự thêm</option>
+                  </select>
+                </div>
+              </div>
+
               <button
                 onClick={() => openGrammarModal()}
-                className="px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
+                className="px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5 self-start md:self-auto"
               >
                 <span>➕</span>
                 <span>Tự thêm mẫu câu mới</span>
               </button>
             </div>
 
+            {/* List */}
             <div className="space-y-4">
               {displayedGrammar.map((g) => (
                 <div
@@ -1037,31 +1315,52 @@ export default function KnowledgeHubPage() {
                       : 'bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800'
                   } shadow-md relative group`}
                 >
-                  {g.isCustom && (
-                    <span className="absolute top-4 right-4 px-2 py-0.5 text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-md">
-                      Cá nhân
+                  <div className="absolute top-4 right-4 flex items-center space-x-2">
+                    <span className="text-[10px] font-bold text-slate-450 dark:text-slate-500">
+                      Bài {activeCourse === 'marugoto' ? g.lesson_id - 100 : g.lesson_id}
                     </span>
-                  )}
+                    {g.isCustom ? (
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-md">
+                        Cá nhân
+                      </span>
+                    ) : (
+                      <select
+                        value={g.status || 'not_learned'}
+                        onChange={(e) => handleItemStatusChange(g.id, 'grammar', e.target.value as any)}
+                        className={`text-[10px] font-bold rounded px-1.5 py-0.5 border cursor-pointer focus:outline-none transition-colors ${
+                          g.status === 'mastered'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-250 text-emerald-600 dark:text-emerald-400'
+                            : g.status === 'learning'
+                              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-250 text-amber-600 dark:text-amber-400'
+                              : 'bg-slate-50 dark:bg-slate-950 border-slate-200 text-slate-500 dark:text-slate-400'
+                        }`}
+                      >
+                        <option value="not_learned">Chưa học</option>
+                        <option value="learning">Đang học</option>
+                        <option value="mastered">Đã thuộc</option>
+                      </select>
+                    )}
+                  </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 pr-14">
                     <h3 className="text-base sm:text-lg font-black text-blue-600 dark:text-blue-400">{g.title}</h3>
                     <p className="text-sm font-bold text-slate-700 dark:text-slate-200">Ý nghĩa: {g.meaning}</p>
                     
                     {g.structure && (
                       <div className="bg-slate-50 dark:bg-slate-950/80 rounded-xl p-3 border border-slate-150 dark:border-slate-850/85">
-                        <code className="text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-300">{g.structure}</code>
+                        <code className="text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-350">{g.structure}</code>
                       </div>
                     )}
 
                     {g.vietnamese_explanation && (
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{g.vietnamese_explanation}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-450">{g.vietnamese_explanation}</p>
                     )}
 
                     {g.japanese_example && (
                       <div className="mt-4 border-l-4 border-slate-250 dark:border-slate-800 pl-3 py-1 space-y-1">
                         <p className="text-sm font-bold text-slate-800 dark:text-slate-300">{g.japanese_example}</p>
                         {g.romaji_example && <p className="text-[11px] text-slate-450 dark:text-slate-500">[{g.romaji_example}]</p>}
-                        <p className="text-xs text-slate-450 dark:text-slate-400 font-semibold">{g.example_meaning}</p>
+                        <p className="text-xs text-slate-450 dark:text-slate-450 font-semibold">{g.example_meaning}</p>
                       </div>
                     )}
 
@@ -1092,147 +1391,15 @@ export default function KnowledgeHubPage() {
 
             {displayedGrammar.length === 0 && (
               <div className="text-center py-20 text-slate-400 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900/10">
-                📭 Không có mẫu câu nào trong bài này. Hãy thêm mới để tự học nhé!
+                📭 Không tìm thấy mẫu câu nào khớp với bộ lọc.
               </div>
             )}
           </div>
         )}
 
-        {/* Tab Combined Practice Configuration panel */}
-        {!loading && (activeTab === 'quiz' || gameActive) && (
+        {/* Tab Combined Practice Play Active */}
+        {!loading && gameActive && (
           <div className="space-y-6">
-            {!gameActive ? (
-              <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
-                <div>
-                  <h2 className="text-lg font-black text-slate-900 dark:text-white mb-1">🎯 THIẾT LẬP ÔN TẬP TỔNG HỢP</h2>
-                  <p className="text-xs text-slate-400 dark:text-slate-500">
-                    Lọc học liệu cá nhân & hệ thống qua nhiều bài học để luyện tập phản xạ
-                  </p>
-                </div>
-
-                {/* Scope selector */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
-                    <span className="text-sm font-bold text-slate-700 dark:text-slate-350">1. Chọn phạm vi bài học:</span>
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={selectAllPracticeLessons}
-                        className="px-2.5 py-1 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded font-bold hover:bg-slate-200 cursor-pointer"
-                      >
-                        Chọn tất cả
-                      </button>
-                      <button
-                        onClick={deselectAllPracticeLessons}
-                        className="px-2.5 py-1 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded font-bold hover:bg-slate-200 cursor-pointer"
-                      >
-                        Bỏ chọn hết
-                      </button>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 max-h-48 overflow-y-auto p-1 border border-slate-100 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-950/20 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-slate-200 dark:[&::-webkit-scrollbar-thumb]:bg-slate-850 [&::-webkit-scrollbar-thumb]:rounded-full">
-                    {filteredLessons.map(l => {
-                      const isSelected = practiceConfig.selectedLessons.includes(l.id);
-                      return (
-                        <button
-                          key={l.id}
-                          onClick={() => togglePracticeLesson(l.id)}
-                          className={`px-3 py-2 rounded-xl text-xs font-bold text-center transition-all cursor-pointer ${
-                            isSelected
-                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                              : 'bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 text-slate-600 dark:text-slate-300 dark:text-slate-200'
-                          }`}
-                        >
-                          Bài {activeCourse === 'marugoto' ? l.id - 100 : l.id}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                  {/* Sources selector */}
-                  <div className="space-y-2">
-                    <span className="text-sm font-bold text-slate-700 dark:text-slate-350 block">2. Nguồn học liệu:</span>
-                    <div className="bg-slate-50 dark:bg-slate-950/30 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col space-y-1">
-                      {[
-                        { id: 'syllabus', name: 'Chỉ học liệu hệ thống' },
-                        { id: 'custom', name: 'Chỉ học liệu cá nhân' },
-                        { id: 'both', name: 'Kết hợp cả hai nguồn' }
-                      ].map(src => (
-                        <button
-                          key={src.id}
-                          onClick={() => setPracticeConfig({ ...practiceConfig, source: src.id as any })}
-                          className={`w-full py-2 px-3 text-xs font-bold text-left rounded-xl transition-all cursor-pointer ${
-                            practiceConfig.source === src.id
-                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                          }`}
-                        >
-                          {src.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Content type selector */}
-                  <div className="space-y-2">
-                    <span className="text-sm font-bold text-slate-700 dark:text-slate-350 block">3. Nội dung ôn tập:</span>
-                    <div className="bg-slate-50 dark:bg-slate-950/30 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col space-y-1">
-                      {[
-                        { id: 'vocab', name: 'Chỉ Từ vựng' },
-                        { id: 'kanji', name: 'Chỉ Chữ Hán (Kanji)' },
-                        { id: 'both', name: 'Cả Từ vựng & Chữ Hán' }
-                      ].map(type => (
-                        <button
-                          key={type.id}
-                          onClick={() => setPracticeConfig({ ...practiceConfig, contentType: type.id as any })}
-                          className={`w-full py-2 px-3 text-xs font-bold text-left rounded-xl transition-all cursor-pointer ${
-                            practiceConfig.contentType === type.id
-                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                          }`}
-                        >
-                          {type.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Game Mode selector */}
-                  <div className="space-y-2">
-                    <span className="text-sm font-bold text-slate-700 dark:text-slate-350 block">4. Chế độ luyện tập:</span>
-                    <div className="bg-slate-50 dark:bg-slate-950/30 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col space-y-1">
-                      {[
-                        { id: 'speedrun', name: '⚡ Speedrun (Phản xạ 10s)' },
-                        { id: 'memory', name: '🃏 Memory Match (Lật bài)' },
-                        { id: 'write', name: '✏️ Tự luận (Gõ chữ)' }
-                      ].map(gm => (
-                        <button
-                          key={gm.id}
-                          onClick={() => setPracticeConfig({ ...practiceConfig, gameMode: gm.id as any })}
-                          className={`w-full py-2 px-3 text-xs font-bold text-left rounded-xl transition-all cursor-pointer ${
-                            practiceConfig.gameMode === gm.id
-                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                          }`}
-                        >
-                          {gm.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 text-center">
-                  <button
-                    onClick={startPracticeGame}
-                    className="w-full sm:w-64 py-3 text-sm font-black bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white rounded-2xl shadow-xl hover:shadow-indigo-500/20 transition-all cursor-pointer active:scale-95"
-                  >
-                    🚀 BẮT ĐẦU ÔN TẬP NGAY
-                  </button>
-                </div>
-              </div>
-            ) : (
               /* --- ACTIVE GAME PLAY WORKSPACE --- */
               <div className="bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-6 relative overflow-hidden min-h-[480px]">
                 
@@ -1424,9 +1591,8 @@ export default function KnowledgeHubPage() {
                   </>
                 )}
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
 
       </main>
 
@@ -1805,7 +1971,160 @@ export default function KnowledgeHubPage() {
           </div>
         </div>
       )}
+      {/* --- POPUP MODAL FOR COMBINED PRACTICE SETUP --- */}
+      {showPracticeSetup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full shadow-2xl p-6 animate-scale-up space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-850 pb-3">
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">🎯 THIẾT LẬP ÔN TẬP TỔNG HỢP</h3>
+                <p className="text-[11px] text-slate-400 dark:text-slate-500">Luyện phản xạ từ vựng và chữ Hán qua nhiều bài học</p>
+              </div>
+              <button
+                onClick={() => setShowPracticeSetup(false)}
+                className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-lg font-bold cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Scope selector */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-850 pb-1.5">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-350">1. Chọn phạm vi bài học:</span>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={selectAllPracticeLessons}
+                    className="px-2 py-0.5 text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded font-bold hover:bg-slate-200 cursor-pointer"
+                  >
+                    Chọn tất cả
+                  </button>
+                  <button
+                    onClick={deselectAllPracticeLessons}
+                    className="px-2 py-0.5 text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded font-bold hover:bg-slate-200 cursor-pointer"
+                  >
+                    Bỏ chọn hết
+                  </button>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-h-40 overflow-y-auto p-2.5 border border-slate-100 dark:border-slate-850 rounded-2xl bg-slate-50/50 dark:bg-slate-950/20 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-slate-250 dark:[&::-webkit-scrollbar-thumb]:bg-slate-850 [&::-webkit-scrollbar-thumb]:rounded-full">
+                {filteredLessons.map(l => {
+                  const isSelected = practiceConfig.selectedLessons.includes(l.id);
+                  return (
+                    <button
+                      key={l.id}
+                      onClick={() => togglePracticeLesson(l.id)}
+                      className={`px-2.5 py-1.5 rounded-lg text-xs font-bold text-center transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                          : 'bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 text-slate-600 dark:text-slate-300'
+                      }`}
+                    >
+                      Bài {activeCourse === 'marugoto' ? l.id - 100 : l.id}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1.5">
+              {/* Sources selector */}
+              <div className="space-y-1.5">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-350 block">2. Nguồn học liệu:</span>
+                <div className="bg-slate-50 dark:bg-slate-950/30 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col space-y-1">
+                  {[
+                    { id: 'syllabus', name: 'Học liệu hệ thống' },
+                    { id: 'custom', name: 'Học liệu cá nhân' },
+                    { id: 'both', name: 'Kết hợp cả hai' }
+                  ].map(src => (
+                    <button
+                      key={src.id}
+                      onClick={() => setPracticeConfig({ ...practiceConfig, source: src.id as any })}
+                      className={`w-full py-1.5 px-2.5 text-xs font-bold text-left rounded-xl transition-all cursor-pointer ${
+                        practiceConfig.source === src.id
+                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                      }`}
+                    >
+                      {src.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Content type selector */}
+              <div className="space-y-1.5">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-350 block">3. Nội dung ôn tập:</span>
+                <div className="bg-slate-50 dark:bg-slate-950/30 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col space-y-1">
+                  {[
+                    { id: 'vocab', name: 'Chỉ Từ vựng' },
+                    { id: 'kanji', name: 'Chỉ Chữ Hán' },
+                    { id: 'both', name: 'Từ vựng & Chữ Hán' }
+                  ].map(type => (
+                    <button
+                      key={type.id}
+                      onClick={() => setPracticeConfig({ ...practiceConfig, contentType: type.id as any })}
+                      className={`w-full py-1.5 px-2.5 text-xs font-bold text-left rounded-xl transition-all cursor-pointer ${
+                        practiceConfig.contentType === type.id
+                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                      }`}
+                    >
+                      {type.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Game Mode selector */}
+              <div className="space-y-1.5">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-350 block">4. Chế độ luyện tập:</span>
+                <div className="bg-slate-50 dark:bg-slate-950/30 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col space-y-1">
+                  {[
+                    { id: 'speedrun', name: '⚡ Speedrun' },
+                    { id: 'memory', name: '🃏 Memory Match' },
+                    { id: 'write', name: '✏️ Tự luận' }
+                  ].map(gm => (
+                    <button
+                      key={gm.id}
+                      onClick={() => setPracticeConfig({ ...practiceConfig, gameMode: gm.id as any })}
+                      className={`w-full py-1.5 px-2.5 text-xs font-bold text-left rounded-xl transition-all cursor-pointer ${
+                        practiceConfig.gameMode === gm.id
+                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                      }`}
+                    >
+                      {gm.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex space-x-3 pt-3">
+              <button
+                type="button"
+                onClick={() => setShowPracticeSetup(false)}
+                className="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold text-xs cursor-pointer"
+              >
+                Hủy bỏ
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPracticeSetup(false);
+                  startPracticeGame();
+                }}
+                className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white font-black text-xs cursor-pointer shadow-md"
+              >
+                🚀 Bắt đầu ôn tập
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
 }
+
