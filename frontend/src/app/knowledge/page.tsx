@@ -1117,7 +1117,7 @@ export default function KnowledgeHubPage() {
                       return (
                         <tr key={l.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/10 transition-colors">
                           <td className="p-4 font-black text-slate-900 dark:text-white whitespace-nowrap">
-                            {activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`}: {l.title}
+                            {l.title.toLowerCase().startsWith('bài') ? l.title : `${activeCourse === 'marugoto' ? `Bài ${l.id - 100}` : `Bài ${l.id}`}: ${l.title}`}
                           </td>
                           <td className="p-4 whitespace-nowrap font-medium text-slate-700 dark:text-slate-300">
                             {sysVocabCount > 0 ? (
