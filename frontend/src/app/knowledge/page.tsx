@@ -66,7 +66,6 @@ export default function KnowledgeHubPage() {
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: true },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
@@ -877,8 +876,6 @@ export default function KnowledgeHubPage() {
           </button>
         </div>
 
-        <CourseSwitcher activeCourse={activeCourse} onSwitch={handleCourseSwitch} />
-
         <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full px-4">
           {menuItems.filter(item => {
             if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
@@ -959,25 +956,6 @@ export default function KnowledgeHubPage() {
                 </button>
               </div>
             )}
-
-            {/* Button Luyện tập tổng hợp */}
-            <button
-              onClick={() => {
-                const allLessonIds = filteredLessons.map(l => l.id);
-                setPracticeConfig(prev => ({
-                  ...prev,
-                  selectedLessons: allLessonIds
-                }));
-                setShowPracticeSetup(true);
-              }}
-              className="px-4 py-2.5 text-xs sm:text-sm font-black bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
-            >
-              <span>🎯</span>
-              <span>Luyện tập tổng hợp</span>
-            </button>
-
-            {/* Course Switcher */}
-            <CourseSwitcher activeCourse={activeCourse} onSwitch={handleCourseSwitch} />
           </div>
         </div>
 
@@ -1617,6 +1595,24 @@ export default function KnowledgeHubPage() {
                 📭 Không tìm thấy mẫu câu nào khớp với bộ lọc.
               </div>
             )}
+
+            {/* Button Luyện tập tổng hợp */}
+            <div className="flex justify-center pt-6">
+              <button
+                onClick={() => {
+                  const allLessonIds = filteredLessons.map(l => l.id);
+                  setPracticeConfig(prev => ({
+                    ...prev,
+                    selectedLessons: allLessonIds
+                  }));
+                  setShowPracticeSetup(true);
+                }}
+                className="px-6 py-3 text-sm font-black bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white rounded-xl shadow-md transition-all active:scale-95 cursor-pointer flex items-center space-x-2"
+              >
+                <span>🎯</span>
+                <span>Luyện tập tổng hợp</span>
+              </button>
+            </div>
           </div>
         )}
 

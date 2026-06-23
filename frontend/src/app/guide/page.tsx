@@ -17,7 +17,6 @@ export default function GuidePage() {
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: true },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },

@@ -233,7 +233,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     ]),
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
@@ -1417,7 +1416,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         
         {/* Toast Notification message */}
         {message && (
-          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
+          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 dark:bg-slate-900 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
             <span>ℹ️</span>
             <span>{message}</span>
           </div>
@@ -1468,6 +1467,15 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                 </button>
               </div>
             )}
+
+            {/* Button Tổng hợp kiến thức */}
+            <button
+              onClick={() => router.push('/knowledge')}
+              className="px-3.5 py-2 text-xs font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl shadow-sm transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
+            >
+              <span>📝</span>
+              <span>Tổng hợp kiến thức</span>
+            </button>
 
             <select
               value={selectedLessonId}
@@ -1529,7 +1537,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         <span className="text-slate-400 dark:text-slate-500 uppercase">Tỷ lệ hoàn thành</span>
                         <span className="text-blue-600 dark:text-blue-400">{progressPercent}%</span>
                       </div>
-                      <div className="w-full bg-white rounded-full h-2 overflow-hidden border border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40">
+                      <div className="w-full bg-white dark:bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40">
                         <div
                           className="bg-gradient-to-r from-indigo-500 to-blue-500 h-full rounded-full transition-all duration-500"
                           style={{ width: `${progressPercent}%` }}
@@ -1619,7 +1627,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           {/* Accordion Header */}
                           <div 
                             onClick={() => toggleVocabSection(idx.toString())}
-                            className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none gap-3 group/header active:scale-[0.995]"
+                            className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none gap-3 group/header active:scale-[0.995]"
                           >
                             <div className="flex items-center gap-3 flex-1 min-w-0">
                               <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
@@ -1662,7 +1670,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
                                   {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
                                 </span>
-                                <span className="w-6 h-6 rounded-lg bg-white border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
+                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
                                   {isCollapsedBool ? '▼' : '▲'}
                                 </span>
                               </div>
@@ -1744,9 +1752,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                                   : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
                                               }`}
                                             >
-                                              <option value="not_learned" className="bg-white text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-                                              <option value="learning" className="bg-white text-amber-400">🟡 Đang học</option>
-                                              <option value="mastered" className="bg-white text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+                                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+                                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
                                             </select>
                                           </div>
 
@@ -1828,7 +1836,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           {/* Accordion Header */}
                           <div 
                             onClick={() => toggleVocabSection('supplemental')}
-                            className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none group/header active:scale-[0.995]"
+                            className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none group/header active:scale-[0.995]"
                           >
                             <div className="flex items-center gap-3">
                               <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
@@ -1837,7 +1845,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <div>
                                 <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
                                   <span className="text-slate-700 dark:text-slate-200">Từ vựng bổ sung / Khác</span>
-                                  <span className="px-1.5 py-0.2 bg-slate-100 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
+                                  <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
                                     {processedVocabGroups.supplemental.length} từ
                                   </span>
                                 </h3>
@@ -1862,7 +1870,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
                                   {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
                                 </span>
-                                <span className="w-6 h-6 rounded-lg bg-white border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
+                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
                                   {isCollapsedBool ? '▼' : '▲'}
                                 </span>
                               </div>
@@ -1914,9 +1922,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                               : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
                                           }`}
                                         >
-                                          <option value="not_learned" className="bg-white text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-                                          <option value="learning" className="bg-white text-amber-400">🟡 Đang học</option>
-                                          <option value="mastered" className="bg-white text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+                                          <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                                          <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+                                          <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
                                         </select>
                                       </div>
 
@@ -2069,7 +2077,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         type="checkbox"
                         checked={showRadicals}
                         onChange={(e) => setShowRadicals(e.target.checked)}
-                        className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 text-blue-650 bg-white focus:ring-blue-600 cursor-pointer"
+                        className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 text-blue-650 bg-white dark:bg-slate-950 focus:ring-blue-600 cursor-pointer"
                       />
                       <span>Hiển thị bộ thủ</span>
                     </label>
@@ -2142,7 +2150,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           {/* Accordion Header */}
                           <div 
                             onClick={() => toggleKanjiSection(idx.toString())}
-                            className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none gap-3 group/header active:scale-[0.995]"
+                            className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none gap-3 group/header active:scale-[0.995]"
                           >
                             <div className="flex items-center gap-3 flex-1 min-w-0">
                               <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
@@ -2185,7 +2193,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
                                   {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
                                 </span>
-                                <span className="w-6 h-6 rounded-lg bg-white border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
+                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-955 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
                                   {isCollapsedBool ? '▼' : '▲'}
                                 </span>
                               </div>
@@ -2261,9 +2269,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                                   : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
                                               }`}
                                             >
-                                              <option value="not_learned" className="bg-white text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-                                              <option value="learning" className="bg-white text-amber-400">🟡 Đang học</option>
-                                              <option value="mastered" className="bg-white text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+                                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+                                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
                                             </select>
                                           </div>
 
@@ -2361,7 +2369,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           {/* Accordion Header */}
                           <div 
                             onClick={() => toggleKanjiSection('supplemental')}
-                            className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none group/header active:scale-[0.995]"
+                            className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none group/header active:scale-[0.995]"
                           >
                             <div className="flex items-center gap-3">
                               <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
@@ -2370,7 +2378,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <div>
                                 <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
                                   <span className="text-slate-700 dark:text-slate-200">Chữ Hán bổ sung / Khác</span>
-                                  <span className="px-1.5 py-0.2 bg-slate-100 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
+                                  <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
                                     {processedKanjiGroups.supplemental.length} chữ
                                   </span>
                                 </h3>
@@ -2430,9 +2438,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                               : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
                                           }`}
                                         >
-                                          <option value="not_learned" className="bg-white text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-                                          <option value="learning" className="bg-white text-amber-400">🟡 Đang học</option>
-                                          <option value="mastered" className="bg-white text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+                                          <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                                          <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+                                          <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
                                         </select>
                                       </div>
 
@@ -2582,7 +2590,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         <span className="text-[10px]">▼</span>
                       </button>
                       {flashcardDropdownOpen && (
-                        <div className="absolute left-0 mt-2 w-48 bg-slate-100 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1">
+                        <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1">
                           <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
                             <input
                               type="checkbox"
@@ -2593,7 +2601,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   not_learned: e.target.checked,
                                 }))
                               }
-                              className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
+                              className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500"
                             />
                             <span>Chưa học</span>
                           </label>
@@ -2607,7 +2615,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   learning: e.target.checked,
                                 }))
                               }
-                              className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
+                              className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500"
                             />
                             <span>Đang học</span>
                           </label>
@@ -2621,7 +2629,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   mastered: e.target.checked,
                                 }))
                               }
-                              className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
+                              className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500"
                             />
                             <span>Đã thuộc</span>
                           </label>
@@ -2719,7 +2727,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   <h4 className="text-2xl font-black text-slate-900 dark:text-white">{(activeCard as VocabItem)?.hiragana}</h4>
                                   <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">{(activeCard as VocabItem)?.romaji}</p>
                                 </div>
-                                <span className="px-2 py-0.5 bg-white border border-slate-200 dark:border-slate-800 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase rounded">
+                                <span className="px-2 py-0.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase rounded">
                                   {(activeCard as VocabItem)?.word_type}
                                 </span>
                               </div>
@@ -2823,7 +2831,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           e.stopPropagation();
                           handlePrevCard();
                         }}
-                        className="p-3.5 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-all duration-300 cursor-pointer active:scale-90"
+                        className="p-3.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-all duration-300 cursor-pointer active:scale-90"
                         title="Thẻ trước đó"
                       >
                         ⬅️
@@ -2834,7 +2842,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           e.stopPropagation();
                           setIsFlipped(!isFlipped);
                         }}
-                        className="px-6 py-2.5 rounded-xl bg-white border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white hover:border-slate-200 dark:border-slate-800 transition-all duration-300 cursor-pointer active:scale-95 flex items-center space-x-2"
+                        className="px-6 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white hover:border-slate-200 dark:border-slate-800 transition-all duration-300 cursor-pointer active:scale-95 flex items-center space-x-2"
                       >
                         <span>🔄</span>
                         <span>Lật thẻ</span>
@@ -2846,7 +2854,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           const word = flashcardType === 'vocab' ? (activeCard as VocabItem)?.hiragana : (activeCard as KanjiItem)?.character;
                           if (word) playAudio(word);
                         }}
-                        className="p-3.5 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-all duration-300 cursor-pointer active:scale-90"
+                        className="p-3.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-all duration-300 cursor-pointer active:scale-90"
                         title="Nghe giọng đọc"
                       >
                         🔊
@@ -2857,7 +2865,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           e.stopPropagation();
                           handleNextCard();
                         }}
-                        className="p-3.5 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-all duration-300 cursor-pointer active:scale-90"
+                        className="p-3.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-all duration-300 cursor-pointer active:scale-90"
                         title="Thẻ tiếp theo"
                       >
                         ➡️
@@ -2929,7 +2937,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <select
                             value={charOccupation}
                             onChange={(e) => setCharOccupation(e.target.value)}
-                            className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-205"
+                            className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600/20 cursor-pointer transition-all duration-200"
                           >
                             {activeLesson.roleplay_options.occupations.map(job => (
                               <option key={job} value={job}>{job} {jaToVnDict[job] ? `(${jaToVnDict[job]})` : ''}</option>
@@ -3113,7 +3121,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                   >
                                     {/* Cute avatar icon */}
                                     <div
-                                      className="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 bg-slate-100 flex items-center justify-center overflow-hidden shrink-0 shadow-md select-none"
+                                      className="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden shrink-0 shadow-md select-none"
                                       dangerouslySetInnerHTML={{ __html: getAvatarSvg(isUser ? (user?.id || 'user') : item.speaker) }}
                                     />
 
@@ -3302,7 +3310,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <span className="text-[10px]">▼</span>
                             </button>
                             {practiceDropdownOpen && (
-                              <div className="absolute left-0 mt-2 w-48 bg-slate-100 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1">
+                              <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1">
                                 <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
                                   <input
                                     type="checkbox"
@@ -3372,7 +3380,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             type="checkbox"
                             checked={useRomaji}
                             onChange={(e) => setUseRomaji(e.target.checked)}
-                            className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-slate-100 text-blue-600 dark:text-blue-400 focus:ring-blue-500 focus:ring-offset-slate-900 cursor-pointer"
+                            className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 focus:ring-offset-slate-900 cursor-pointer"
                           />
                           <span>Trả lời bằng Romaji</span>
                         </label>
@@ -3476,7 +3484,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                 const isVisible = visibleAnswers[item.uniqueId] || false;
 
                                 return (
-                                  <tr key={item.uniqueId} className="hover:bg-slate-100 dark:hover:bg-slate-900/60/20 dark:bg-slate-900/20 transition-colors">
+                                  <tr key={item.uniqueId} className="hover:bg-slate-100 dark:hover:bg-slate-900/20 dark:bg-slate-900/20 transition-colors">
                                     <td className="py-4 px-4 text-xs font-bold text-slate-400 dark:text-slate-500 text-center">{idx + 1}</td>
                                     <td className="py-4 px-4 text-center">
                                       <button
@@ -3534,7 +3542,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                       <div className="flex items-center space-x-2">
                                         <button
                                           onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
-                                          className="p-1 rounded-lg bg-slate-100 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 cursor-pointer"
+                                          className="p-1 rounded-lg bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 cursor-pointer"
                                           title={isVisible ? 'Ẩn đáp án' : 'Hiện đáp án'}
                                         >
                                           {isVisible ? '👁' : '🙈'}
@@ -3743,7 +3751,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               <span className="text-[10px]">▼</span>
                             </button>
                             {speedrunDropdownOpen && (
-                              <div className="absolute top-full mt-2 w-48 bg-slate-100 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1 text-left">
+                              <div className="absolute top-full mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1 text-left">
                                 <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
                                   <input
                                     type="checkbox"
@@ -3754,7 +3762,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                         not_learned: e.target.checked,
                                       }))
                                     }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
                                   />
                                   <span>Chưa học</span>
                                 </label>
@@ -3768,7 +3776,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                         learning: e.target.checked,
                                       }))
                                     }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
                                   />
                                   <span>Đang học</span>
                                 </label>
@@ -3782,7 +3790,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                         mastered: e.target.checked,
                                       }))
                                     }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
                                   />
                                   <span>Đã thuộc</span>
                                 </label>
@@ -3891,7 +3899,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             <button
                               key={idx}
                               onClick={() => checkSpeedrunAnswer(option)}
-                              className="w-full py-4 px-4 bg-slate-50 dark:bg-slate-950/60 hover:bg-white dark:hover:bg-slate-800/80/90 dark:bg-slate-900/90 shadow-md border border-slate-200 dark:border-slate-800 hover:border-blue-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-2xl text-xs font-bold text-center transition-all duration-200 cursor-pointer active:scale-98 shadow-md"
+                              className="w-full py-4 px-4 bg-slate-50 dark:bg-slate-950/60 hover:bg-white dark:hover:bg-slate-800/80 dark:bg-slate-900/90 shadow-md border border-slate-200 dark:border-slate-800 hover:border-blue-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-2xl text-xs font-bold text-center transition-all duration-200 cursor-pointer active:scale-98 shadow-md"
                             >
                               {option}
                             </button>

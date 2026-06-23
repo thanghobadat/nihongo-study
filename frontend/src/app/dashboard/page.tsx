@@ -48,7 +48,6 @@ export default function UserDashboard() {
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: true },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
@@ -465,7 +464,7 @@ export default function UserDashboard() {
         
         {/* Toast Notification message */}
         {message && (
-          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
+          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 dark:bg-slate-900 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
             <span>ℹ️</span>
             <span>{message}</span>
           </div>
@@ -508,6 +507,15 @@ export default function UserDashboard() {
                 </button>
               </div>
             )}
+
+            {/* Button Tổng hợp kiến thức */}
+            <button
+              onClick={() => router.push('/knowledge')}
+              className="px-3.5 py-2 text-xs font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl shadow-sm transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
+            >
+              <span>📝</span>
+              <span>Tổng hợp kiến thức</span>
+            </button>
 
             <select
               value={selectedLessonId}
@@ -705,7 +713,7 @@ export default function UserDashboard() {
                       className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-semibold focus:outline-none focus:border-blue-600/50 cursor-pointer"
                     >
                       {filteredLessons.map((l) => (
-                        <option key={l.id} value={l.id} className="bg-white">
+                        <option key={l.id} value={l.id} className="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200">
                           {l.title}
                         </option>
                       ))}

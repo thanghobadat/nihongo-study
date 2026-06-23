@@ -251,7 +251,6 @@ export default function AlphabetReviewPage() {
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
@@ -1090,7 +1089,7 @@ export default function AlphabetReviewPage() {
         
         {/* Toast Alerts */}
         {toastMessage && (
-          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
+          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 dark:bg-slate-900 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
             <span>ℹ️</span>
             <span>{toastMessage}</span>
           </div>
@@ -2090,7 +2089,7 @@ export default function AlphabetReviewPage() {
                         const isVisible = combinedVisibleAnswers[item.id] || false;
 
                         return (
-                          <tr key={item.id} className="hover:bg-slate-100 dark:hover:bg-slate-900/60/20 dark:bg-slate-900/20 transition-colors">
+                          <tr key={item.id} className="hover:bg-slate-100 dark:hover:bg-slate-900/20 dark:bg-slate-900/20 transition-colors">
                             <td className="py-4 px-4 text-xs font-bold text-slate-400 dark:text-slate-500 text-center">{idx + 1}</td>
                             <td className="py-4 px-4 text-center">
                               <button

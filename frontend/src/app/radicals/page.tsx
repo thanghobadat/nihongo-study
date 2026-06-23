@@ -454,7 +454,7 @@ export default function RadicalsPage() {
                 </div>
                 <button
                   onClick={() => setQuizState('menu')}
-                  className="px-3 py-1.5 bg-white border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 text-slate-400 dark:text-slate-500 text-[10px] font-bold rounded-lg transition-all cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60/60 dark:bg-slate-900/60 active:scale-95 flex items-center gap-1 shadow-sm font-sans"
+                  className="px-3 py-1.5 bg-white border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 text-slate-400 dark:text-slate-500 text-[10px] font-bold rounded-lg transition-all cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 active:scale-95 flex items-center gap-1 shadow-sm font-sans"
                 >
                   ⚙️ Thay đổi chế độ
                 </button>

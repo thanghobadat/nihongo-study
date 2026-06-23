@@ -51,7 +51,6 @@ export default function RoadmapPage() {
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },
-    { name: 'Tổng hợp kiến thức', id: 'knowledge', icon: '📝', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
@@ -331,7 +330,7 @@ export default function RoadmapPage() {
         
         {/* Toast Notification message */}
         {message && (
-          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
+          <div className="fixed top-6 right-6 z-50 px-4 py-3 bg-slate-100 dark:bg-slate-900 border border-blue-200 dark:border-blue-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm rounded-xl shadow-2xl backdrop-blur-xl animate-fade-in flex items-center space-x-2">
             <span>ℹ️</span>
             <span>{message}</span>
           </div>
@@ -374,6 +373,15 @@ export default function RoadmapPage() {
                 </button>
               </div>
             )}
+
+            {/* Button Tổng hợp kiến thức */}
+            <button
+              onClick={() => router.push('/knowledge')}
+              className="px-3.5 py-2 text-xs font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl shadow-sm transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
+            >
+              <span>📝</span>
+              <span>Tổng hợp kiến thức</span>
+            </button>
 
             <select
               value={selectedLessonId}
@@ -492,9 +500,9 @@ export default function RoadmapPage() {
                                   : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
                               }`}
                             >
-                              <option value="not_learned" className="bg-white text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-                              <option value="learning" className="bg-white text-amber-400">🟡 Đang học</option>
-                              <option value="mastered" className="bg-white text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
                             </select>
                           </div>
                           
