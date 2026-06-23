@@ -19,7 +19,7 @@ export default function RegisterPage() {
 
   // Password strength evaluation
   const getPasswordStrength = (pwd: string) => {
-    if (!pwd) return { text: '', color: 'bg-slate-800 w-0', textColor: 'text-slate-500' };
+    if (!pwd) return { text: '', color: 'bg-slate-100 w-0', textColor: 'text-slate-400 dark:text-slate-500' };
     
     let score = 0;
     if (pwd.length >= 6) score += 1;
@@ -37,7 +37,7 @@ export default function RegisterPage() {
     if (score <= 4) {
       return { text: 'Trung bình', color: 'bg-amber-500 w-3/4', textColor: 'text-amber-400' };
     }
-    return { text: 'Mạnh', color: 'bg-emerald-500 w-full', textColor: 'text-emerald-400' };
+    return { text: 'Mạnh', color: 'bg-emerald-500 w-full', textColor: 'text-emerald-600 dark:text-emerald-400' };
   };
 
   const strength = getPasswordStrength(password);
@@ -94,7 +94,7 @@ export default function RegisterPage() {
       {/* Left Side: Visual Illustration Panel (Hidden on Mobile) */}
       <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-tr from-[#0f172a] via-[#1E293B] to-[#1F4E78] lg:flex lg:flex-col lg:justify-between lg:p-12">
         <div className="flex items-center gap-3">
-          <span className="text-xl font-bold tracking-wider text-slate-100 uppercase">Minna Nihongo</span>
+          <span className="text-xl font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase">Minna Nihongo</span>
         </div>
         
         {/* Japanese Themed SVG Artwork */}
@@ -126,24 +126,24 @@ export default function RegisterPage() {
           </svg>
         </div>
 
-        <div className="text-slate-300">
-          <h2 className="text-2xl font-semibold text-slate-100">Bắt đầu hành trình tiếng Nhật của bạn</h2>
-          <p className="mt-2 text-sm leading-relaxed text-slate-400">
+        <div className="text-slate-600 dark:text-slate-300">
+          <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Bắt đầu hành trình tiếng Nhật của bạn</h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-400 dark:text-slate-500">
             Học từ vựng, chữ Hán và ngữ pháp một cách khoa học. Theo dõi lộ trình tiến độ cá nhân thông minh và đạt mục tiêu mỗi ngày.
           </p>
         </div>
       </div>
 
       {/* Right Side: Glassmorphism Register Form */}
-      <div className="flex flex-col items-center justify-center w-full px-6 py-12 lg:w-1/2 bg-[#09111e]">
+      <div className="flex flex-col items-center justify-center w-full px-6 py-12 lg:w-1/2 bg-slate-50 dark:bg-slate-950/60">
         <div className="flex items-center gap-3 mb-8 lg:hidden">
-          <span className="text-xl font-bold tracking-wider text-slate-100 uppercase">Minna Nihongo</span>
+          <span className="text-xl font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase">Minna Nihongo</span>
         </div>
 
-        <div className="w-full max-w-md p-8 md:p-10 rounded-3xl bg-slate-900/40 border border-slate-800 backdrop-blur-xl shadow-2xl">
+        <div className="w-full max-w-md p-8 md:p-10 rounded-3xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl">
           <div className="mb-6 text-center lg:text-left">
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Đăng ký</h1>
-            <p className="mt-2 text-sm text-slate-400">Tạo tài khoản học viên của bạn ngay hôm nay</p>
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Đăng ký</h1>
+            <p className="mt-2 text-sm text-slate-400 dark:text-slate-500">Tạo tài khoản học viên của bạn ngay hôm nay</p>
           </div>
 
           {error && (
@@ -160,51 +160,51 @@ export default function RegisterPage() {
 
           <form onSubmit={handleRegister} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">Email</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">📧</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">📧</span>
                 <input
                   type="email"
                   required
                   placeholder="Nhập email của bạn..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Tài khoản (Tên hiển thị)</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">Tài khoản (Tên hiển thị)</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">👤</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">👤</span>
                 <input
                   type="text"
                   required
                   placeholder="Nhập tên tài khoản..."
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Mật khẩu</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">Mật khẩu</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">🔒</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">🔒</span>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder="Nhập mật khẩu..."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-11 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-11 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-300 transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 transition-colors"
                 >
                   {showPassword ? (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -223,10 +223,10 @@ export default function RegisterPage() {
               {password && (
                 <div className="mt-2 space-y-1">
                   <div className="flex justify-between items-center text-[10px] font-semibold tracking-wide">
-                    <span className="text-slate-400">Độ mạnh mật khẩu:</span>
+                    <span className="text-slate-400 dark:text-slate-500">Độ mạnh mật khẩu:</span>
                     <span className={strength.textColor}>{strength.text}</span>
                   </div>
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                     <div className={`h-full transition-all duration-300 ${strength.color}`} />
                   </div>
                 </div>
@@ -234,21 +234,21 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Xác nhận mật khẩu</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">Xác nhận mật khẩu</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">🛡️</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">🛡️</span>
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   required
                   placeholder="Nhập lại mật khẩu..."
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full pl-11 pr-11 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-11 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-300 transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 transition-colors"
                 >
                   {showConfirmPassword ? (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -267,7 +267,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 mt-2 bg-[#1F4E78] text-white font-semibold rounded-xl hover:bg-[#2c6596] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 shadow-[0_4px_20px_rgba(31,78,120,0.35)]"
+              className="w-full py-4 mt-2 bg-[#1F4E78] text-slate-900 dark:text-white font-semibold rounded-xl hover:bg-[#2c6596] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 shadow-[0_4px_20px_rgba(31,78,120,0.35)]"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -281,9 +281,9 @@ export default function RegisterPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-slate-400 dark:text-slate-500">
               Đã có tài khoản?{' '}
-              <Link href="/login" className="font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+              <Link href="/login" className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:text-blue-400 transition-colors">
                 Đăng nhập ngay
               </Link>
             </p>

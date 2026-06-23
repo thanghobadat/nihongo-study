@@ -60,7 +60,7 @@ export default function LoginPage() {
       {/* Left Side: Visual Illustration Panel (Hidden on Mobile) */}
       <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-tr from-[#0f172a] via-[#1E293B] to-[#1F4E78] lg:flex lg:flex-col lg:justify-between lg:p-12">
         <div className="flex items-center gap-3">
-          <span className="text-xl font-bold tracking-wider text-slate-100 uppercase">Minna Nihongo</span>
+          <span className="text-xl font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase">Minna Nihongo</span>
         </div>
         
         {/* Japanese Themed SVG Artwork */}
@@ -106,25 +106,25 @@ export default function LoginPage() {
           </svg>
         </div>
 
-        <div className="text-slate-300">
-          <h2 className="text-2xl font-semibold text-slate-100">Bắt đầu hành trình tiếng Nhật của bạn</h2>
-          <p className="mt-2 text-sm leading-relaxed text-slate-400">
+        <div className="text-slate-600 dark:text-slate-300">
+          <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Bắt đầu hành trình tiếng Nhật của bạn</h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-400 dark:text-slate-500">
             Học từ vựng, chữ Hán và ngữ pháp một cách khoa học. Theo dõi lộ trình tiến độ cá nhân thông minh và đạt mục tiêu mỗi ngày.
           </p>
         </div>
       </div>
 
       {/* Right Side: Glassmorphism Login Form */}
-      <div className="flex flex-col items-center justify-center w-full px-6 py-12 lg:w-1/2 bg-[#09111e]">
+      <div className="flex flex-col items-center justify-center w-full px-6 py-12 lg:w-1/2 bg-slate-50 dark:bg-slate-950/60">
         {/* Mobile Logo Header */}
         <div className="flex items-center gap-3 mb-10 lg:hidden">
-          <span className="text-xl font-bold tracking-wider text-slate-100 uppercase">Minna Nihongo</span>
+          <span className="text-xl font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase">Minna Nihongo</span>
         </div>
 
-        <div className="w-full max-w-md p-8 md:p-10 rounded-3xl bg-slate-900/40 border border-slate-800 backdrop-blur-xl shadow-2xl">
+        <div className="w-full max-w-md p-8 md:p-10 rounded-3xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl">
           <div className="mb-8 text-center lg:text-left">
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Đăng nhập</h1>
-            <p className="mt-2 text-sm text-slate-400">Chào mừng bạn quay trở lại lớp học!</p>
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Đăng nhập</h1>
+            <p className="mt-2 text-sm text-slate-400 dark:text-slate-500">Chào mừng bạn quay trở lại lớp học!</p>
           </div>
 
           {expiredMsg && (
@@ -141,36 +141,36 @@ export default function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Tài khoản</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Tài khoản</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">👤</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">👤</span>
                 <input
                   type="text"
                   required
                   placeholder="Nhập email hoặc tên tài khoản..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Mật khẩu</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Mật khẩu</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">🔒</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">🔒</span>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder="Nhập mật khẩu của bạn..."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-11 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-11 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-300 transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 transition-colors"
                 >
                   {showPassword ? (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -185,7 +185,7 @@ export default function LoginPage() {
                 </button>
               </div>
               <div className="mt-2 text-right">
-                <Link href="/forgot-password" className="text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors">
+                <Link href="/forgot-password" className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:text-blue-400 transition-colors">
                   Quên mật khẩu?
                 </Link>
               </div>
@@ -194,7 +194,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-[#1F4E78] text-white font-semibold rounded-xl hover:bg-[#2c6596] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 shadow-[0_4px_20px_rgba(31,78,120,0.35)]"
+              className="w-full py-4 bg-[#1F4E78] text-slate-900 dark:text-white font-semibold rounded-xl hover:bg-[#2c6596] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 shadow-[0_4px_20px_rgba(31,78,120,0.35)]"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -208,9 +208,9 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-slate-400 dark:text-slate-500">
               Chưa có tài khoản?{' '}
-              <Link href="/register" className="font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+              <Link href="/register" className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:text-blue-400 transition-colors">
                 Đăng ký ngay
               </Link>
             </p>

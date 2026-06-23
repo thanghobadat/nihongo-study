@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthGuard from "./components/AuthGuard";
+import { ThemeProvider } from "./components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,10 +28,32 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased overflow-x-hidden`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#09111e] overflow-x-hidden max-w-full">
-        <AuthGuard>{children}</AuthGuard>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-slate-50 dark:bg-[#09111e] text-slate-800 dark:text-slate-100 overflow-x-hidden max-w-full">
+        <ThemeProvider>
+          <AuthGuard>{children}</AuthGuard>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+

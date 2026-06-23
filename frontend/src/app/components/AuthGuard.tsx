@@ -67,8 +67,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center flex-1 h-screen bg-[#0d1b2a] text-slate-200">
-        <div className="w-12 h-12 border-4 border-[#1F4E78] border-t-transparent rounded-full animate-spin"></div>
+      <div className="flex flex-col items-center justify-center flex-1 h-screen bg-slate-50 dark:bg-[#0d1b2a] text-slate-800 dark:text-slate-200">
+        <div className="w-12 h-12 border-4 border-[#1F4E78] dark:border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         <p className="mt-4 text-sm font-medium tracking-wide">Đang tải...</p>
       </div>
     );

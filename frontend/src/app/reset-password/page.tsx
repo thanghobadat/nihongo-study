@@ -94,7 +94,7 @@ export default function ResetPasswordPage() {
       {/* Left Side: Visual Illustration Panel (Hidden on Mobile) */}
       <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-tr from-[#0f172a] via-[#1E293B] to-[#1F4E78] lg:flex lg:flex-col lg:justify-between lg:p-12">
         <div className="flex items-center gap-3">
-          <span className="text-xl font-bold tracking-wider text-slate-100 uppercase">Minna Nihongo</span>
+          <span className="text-xl font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase">Minna Nihongo</span>
         </div>
         
         {/* Japanese Themed SVG Artwork */}
@@ -126,24 +126,24 @@ export default function ResetPasswordPage() {
           </svg>
         </div>
 
-        <div className="text-slate-300">
-          <h2 className="text-2xl font-semibold text-slate-100">Thiết lập mật khẩu an toàn mới</h2>
-          <p className="mt-2 text-sm leading-relaxed text-slate-400">
+        <div className="text-slate-600 dark:text-slate-300">
+          <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Thiết lập mật khẩu an toàn mới</h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-400 dark:text-slate-500">
             Hãy lựa chọn mật khẩu mới có chứa chữ hoa, số và ký hiệu đặc biệt để bảo vệ tài khoản tốt nhất.
           </p>
         </div>
       </div>
 
       {/* Right Side: Reset Password Form */}
-      <div className="flex flex-col items-center justify-center w-full px-6 py-12 lg:w-1/2 bg-[#09111e]">
+      <div className="flex flex-col items-center justify-center w-full px-6 py-12 lg:w-1/2 bg-slate-50 dark:bg-slate-950/60">
         <div className="flex items-center gap-3 mb-10 lg:hidden">
-          <span className="text-xl font-bold tracking-wider text-slate-100 uppercase">Minna Nihongo</span>
+          <span className="text-xl font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase">Minna Nihongo</span>
         </div>
 
-        <div className="w-full max-w-md p-8 md:p-10 rounded-3xl bg-slate-900/40 border border-slate-800 backdrop-blur-xl shadow-2xl">
+        <div className="w-full max-w-md p-8 md:p-10 rounded-3xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl">
           <div className="mb-6 text-center lg:text-left">
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Đặt lại mật khẩu</h1>
-            <p className="mt-2 text-sm text-slate-400">Nhập mật khẩu mới cho tài khoản của bạn</p>
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Đặt lại mật khẩu</h1>
+            <p className="mt-2 text-sm text-slate-400 dark:text-slate-500">Nhập mật khẩu mới cho tài khoản của bạn</p>
           </div>
 
           {error && (
@@ -160,21 +160,21 @@ export default function ResetPasswordPage() {
 
           <form onSubmit={handleReset} className="space-y-6">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Mật khẩu mới</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Mật khẩu mới</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">🔒</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">🔒</span>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder="Nhập mật khẩu mới..."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-11 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-11 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-300 transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 transition-colors"
                 >
                   {showPassword ? (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -191,21 +191,21 @@ export default function ResetPasswordPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Xác nhận mật khẩu mới</label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Xác nhận mật khẩu mới</label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">🛡️</span>
+                <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-500">🛡️</span>
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   required
                   placeholder="Nhập lại mật khẩu mới..."
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full pl-11 pr-11 py-3.5 bg-slate-950/60 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
+                  className="w-full pl-11 pr-11 py-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#1F4E78] focus:border-transparent transition-all duration-200"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-300 transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 transition-colors"
                 >
                   {showConfirmPassword ? (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -224,7 +224,7 @@ export default function ResetPasswordPage() {
             <button
               type="submit"
               disabled={loading || !accessToken}
-              className="w-full py-4 bg-[#1F4E78] text-white font-semibold rounded-xl hover:bg-[#2c6596] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 shadow-[0_4px_20px_rgba(31,78,120,0.35)]"
+              className="w-full py-4 bg-[#1F4E78] text-slate-900 dark:text-white font-semibold rounded-xl hover:bg-[#2c6596] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none transition-all duration-200 shadow-[0_4px_20px_rgba(31,78,120,0.35)]"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -238,7 +238,7 @@ export default function ResetPasswordPage() {
           </form>
 
           <div className="mt-8 text-center">
-            <Link href="/login" className="text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+            <Link href="/login" className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:text-blue-400 transition-colors">
               Quay lại Đăng nhập
             </Link>
           </div>
