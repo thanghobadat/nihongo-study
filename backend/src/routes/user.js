@@ -1435,5 +1435,200 @@ router.delete('/knowledge-items/:type/:id', async (req, res) => {
   }
 });
 
+// ----------------------------------------------------
+// EXAM ENDPOINTS (JLPT MOCK EXAMS & HISTORY)
+// ----------------------------------------------------
+const examsFile = path.join(__dirname, '../db/exams.json');
+
+function readMockExams() {
+  try {
+    if (!fs.existsSync(examsFile)) {
+      fs.writeFileSync(examsFile, JSON.stringify({ exams: [] }, null, 2), 'utf8');
+      return { exams: [] };
+    }
+    const content = fs.readFileSync(examsFile, 'utf8');
+    return JSON.parse(content);
+  } catch (err) {
+    console.error("Error reading exams.json:", err);
+    return { exams: [] };
+  }
+}
+
+function writeMockExams(data) {
+  try {
+    fs.writeFileSync(examsFile, JSON.stringify(data, null, 2), 'utf8');
+  } catch (err) {
+    console.error("Error writing exams.json:", err);
+  }
+}
+
+/**
+ * POST /api/user/exams
+ * Save new JLPT mock exam results
+ */
+router.post('/exams', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { course, range_start, range_end, score, total_questions, time_spent, questions_data } = req.body;
+
+    if (!course || range_start === undefined || range_end === undefined || score === undefined || total_questions === undefined || time_spent === undefined || !questions_data) {
+      return res.status(400).json({ error: 'Missing required exam results fields' });
+    }
+
+    if (req.user.isMock) {
+      const data = readMockExams();
+      if (!data.exams) data.exams = [];
+      const newExam = {
+        id: require('crypto').randomUUID(),
+        user_id: userId,
+        course,
+        range_start: parseInt(range_start),
+        range_end: parseInt(range_end),
+        score: parseInt(score),
+        total_questions: parseInt(total_questions),
+        time_spent: parseInt(time_spent),
+        questions_data,
+        created_at: new Date().toISOString()
+      };
+      data.exams.push(newExam);
+      writeMockExams(data);
+      return res.json({ message: 'Exam results saved successfully (Mock)', examId: newExam.id });
+    }
+
+    const { data, error } = await supabase
+      .from('user_exam_results')
+      .insert({
+        user_id: userId,
+        course,
+        range_start: parseInt(range_start),
+        range_end: parseInt(range_end),
+        score: parseInt(score),
+        total_questions: parseInt(total_questions),
+        time_spent: parseInt(time_spent),
+        questions_data
+      })
+      .select('id')
+      .single();
+
+    if (error) throw error;
+    res.json({ message: 'Exam results saved successfully', examId: data.id });
+  } catch (error) {
+    console.error('Error saving exam result:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * GET /api/user/exams
+ * Fetch list of user's past exams
+ */
+router.get('/exams', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { course } = req.query;
+
+    if (req.user.isMock) {
+      const data = readMockExams();
+      let list = data.exams || [];
+      list = list.filter(e => e.user_id === userId);
+      if (course) {
+        list = list.filter(e => e.course === course);
+      }
+      list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      return res.json(list);
+    }
+
+    let query = supabase
+      .from('user_exam_results')
+      .select('id, course, range_start, range_end, score, total_questions, time_spent, created_at')
+      .eq('user_id', userId);
+
+    if (course) {
+      query = query.eq('course', course);
+    }
+
+    const { data, error } = await query.order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.json(data || []);
+  } catch (error) {
+    console.error('Error fetching exam history:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * GET /api/user/exams/:id
+ * Fetch detail of a specific past exam
+ */
+router.get('/exams/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const examId = req.params.id;
+
+    if (req.user.isMock) {
+      const data = readMockExams();
+      const exam = (data.exams || []).find(e => e.id === examId && e.user_id === userId);
+      if (!exam) {
+        return res.status(404).json({ error: 'Exam not found' });
+      }
+      return res.json(exam);
+    }
+
+    const { data, error } = await supabase
+      .from('user_exam_results')
+      .select('*')
+      .eq('id', examId)
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (error) throw error;
+    if (!data) {
+      return res.status(404).json({ error: 'Exam not found' });
+    }
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching exam details:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * DELETE /api/user/exams/:id
+ * Delete a specific past exam
+ */
+router.delete('/exams/:id', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const examId = req.params.id;
+
+    if (req.user.isMock) {
+      const data = readMockExams();
+      const initialLength = (data.exams || []).length;
+      data.exams = (data.exams || []).filter(e => !(e.id === examId && e.user_id === userId));
+
+      if (data.exams.length === initialLength) {
+        return res.status(404).json({ error: 'Exam not found or unauthorized' });
+      }
+
+      writeMockExams(data);
+      return res.json({ message: 'Exam deleted successfully (Mock)' });
+    }
+
+    const { error } = await supabase
+      .from('user_exam_results')
+      .delete()
+      .eq('id', examId)
+      .eq('user_id', userId);
+
+    if (error) throw error;
+    res.json({ message: 'Exam deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting exam:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
+
 

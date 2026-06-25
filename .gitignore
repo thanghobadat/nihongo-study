@@ -36,3 +36,14 @@ Thumbs.db
 EHthumbs.db
 Desktop.ini
 .DS_Store
+
+# scratch directories
+scratch/
+**/scratch/
+
+# local database files
+backend/src/db/exams.json
+backend/src/db/users.json
+backend/src/db/custom_items.json
+backend/src/db/mockDb_backup*.js
+

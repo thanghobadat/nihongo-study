@@ -47,6 +47,7 @@ CREATE TABLE public.vocabulary (
   lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
   hiragana TEXT NOT NULL,
   romaji TEXT NOT NULL,
+  kanji_word TEXT,
   vietnamese_meaning TEXT NOT NULL,
   word_type TEXT, -- e.g., 'noun', 'verb', 'adjective'
   japanese_example TEXT,
@@ -278,6 +279,26 @@ CREATE TABLE public.user_knowledge_items (
 ALTER TABLE public.user_knowledge_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow user full access to own knowledge items" ON public.user_knowledge_items
   FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+
+-- 14. Create User Exam Results Table (JLPT Mock Exams)
+CREATE TABLE public.user_exam_results (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
+  course TEXT NOT NULL, -- 'minna' or 'marugoto'
+  range_start INTEGER NOT NULL,
+  range_end INTEGER NOT NULL,
+  score INTEGER NOT NULL,
+  total_questions INTEGER NOT NULL,
+  time_spent INTEGER NOT NULL, -- in seconds
+  questions_data JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_exam_results ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow user full access to own exam results" ON public.user_exam_results
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
 
 
 

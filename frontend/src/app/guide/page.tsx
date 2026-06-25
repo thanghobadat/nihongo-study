@@ -22,6 +22,7 @@ export default function GuidePage() {
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
+    { name: 'Thi thử JLPT', id: 'mock-test', icon: '🏆', active: false },
     { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
   ];
 
@@ -125,6 +126,8 @@ export default function GuidePage() {
                     router.push('/roadmap');
                   } else if (item.id === 'kana') {
                     router.push('/kana');
+                  } else if (item.id === 'mock-test') {
+                    router.push('/mock-test');
                   } else if (item.id === 'knowledge') {
                     router.push('/knowledge');
                   } else {
