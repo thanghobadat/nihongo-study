@@ -51,7 +51,8 @@ async function runSeed() {
       japanese_example: v.japanese_example,
       example_meaning: v.example_meaning,
       mnemonic_tip: v.mnemonic_tip,
-      image_url: v.image_url || ''
+      image_url: v.image_url || '',
+      pitch_accent: v.pitch_accent || 0
     }));
     await seedTable('vocabulary', vocabData, ['id']);
 
