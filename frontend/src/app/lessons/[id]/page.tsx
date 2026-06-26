@@ -324,6 +324,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [visibleAnswers, setVisibleAnswers] = useState<Record<string, boolean>>({});
   const [practiceDirection, setPracticeDirection] = useState<'vi-to-ja' | 'ja-to-vi'>('vi-to-ja');
   const [practiceScriptMode, setPracticeScriptMode] = useState<'hiragana' | 'kanji'>('hiragana');
+  const practiceResultsRef = useRef<HTMLDivElement | null>(null);
+  const practiceTopRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setPracticeScriptMode('hiragana');
@@ -818,6 +820,35 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     setMessage('Đã xáo trộn danh sách câu hỏi! 🔀');
     setTimeout(() => setMessage(null), 3000);
   };
+
+  // Tính số câu đúng
+  const correctCount = useMemo(() => {
+    let count = 0;
+    practiceList.forEach((item) => {
+      const isVocab = practiceMode === 'vocab';
+      const isViToJa = practiceDirection === 'vi-to-ja';
+      let correctAnswer = '';
+      if (isVocab) {
+        correctAnswer = isViToJa 
+          ? (useRomaji ? item.romaji : item.hiragana) 
+          : item.vietnamese_meaning;
+      } else {
+        correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
+      }
+      const userAnswer = practiceAnswers[item.uniqueId] || '';
+      if (calculateAccuracy(userAnswer, correctAnswer) === 100) {
+        count++;
+      }
+    });
+    return count;
+  }, [practiceList, practiceMode, practiceDirection, useRomaji, practiceAnswers]);
+
+  // Tự động cuộn xuống phần kết quả khi nhấn Chấm điểm
+  useEffect(() => {
+    if (isGraded && practiceResultsRef.current) {
+      practiceResultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [isGraded]);
 
   // Thay đổi giới hạn câu hỏi
   const handleLimitChange = (val: string) => {
@@ -3455,7 +3486,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         📭 Đang tải học liệu hoặc không tìm thấy dữ liệu luyện tập.
                       </div>
                     ) : (
-                      <div className="space-y-6">
+                      <div ref={practiceTopRef} className="space-y-6">
                         {/* Desktop View Table */}
                         <div className="hidden lg:block overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/20 backdrop-blur-md shadow-xl">
                           <table className="w-full text-left border-collapse">
@@ -3693,11 +3724,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         </div>
 
                         {/* 3. Action Buttons & Grading Summary */}
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800">
+                        <div ref={practiceResultsRef} className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800">
                           <div>
                             {isGraded && (
                               <p className="text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400">
-                                🎉 Bạn đã hoàn thành chấm điểm! Hãy rà soát lại các câu sai để ôn tập nhé.
+                                🎉 Bạn đã hoàn thành chấm điểm! Kết quả: {correctCount}/{practiceList.length} câu đúng. Hãy rà soát lại các câu sai để ôn tập nhé.
                               </p>
                             )}
                           </div>
@@ -3705,9 +3736,17 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <div className="flex items-center space-x-4 self-end sm:self-auto">
                             <button
                               onClick={() => {
+                                if (currentSourceList.length > 0) {
+                                  const newList = generatePracticeList(currentSourceList, practiceLimit);
+                                  setBaseShuffledList(newList);
+                                  setPracticeList(newList);
+                                }
                                 setPracticeAnswers({});
                                 setIsGraded(false);
                                 setVisibleAnswers({});
+                                setTimeout(() => {
+                                  practiceTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 50);
                               }}
                               className="px-5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 hover:text-slate-800 dark:hover:text-slate-200 dark:text-slate-100 text-xs font-bold text-slate-400 dark:text-slate-500 transition-all duration-300 cursor-pointer active:scale-95"
                             >
