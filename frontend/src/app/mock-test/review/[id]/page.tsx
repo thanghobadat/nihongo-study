@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../../../utils/api';
 import SidebarSettings from '../../../components/SidebarSettings';
+import CourseSwitcher from '../../../components/CourseSwitcher';
 
 interface Question {
   id: number;
@@ -47,39 +48,40 @@ export default function ExamReviewPage({ params }: { params: Promise<{ id: strin
     }
   }, [user, router]);
 
+  // State for responsive sidebar
+  const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
+
   // Sidebar Menu list
   const menuItems = [
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Từ vựng học', id: 'vocab', icon: '📚', active: false },
-    { name: 'Chữ Hán học', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice-vocab', icon: '✏️', active: false },
-    { name: 'Thẻ nhớ flashcards', id: 'flashcards', icon: '🎴', active: false },
-    { name: 'Luyện hội thoại', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Thi thử JLPT', id: 'mock-test', icon: '🏆', active: true },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🌸', active: false }
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
+    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
+    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
+    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
+    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
   ];
 
-  const handleMenuClick = (id: string) => {
-    if (id === 'mock-test') {
-      router.push('/mock-test');
-      return;
+  // Load selected values from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedCourse = localStorage.getItem('activeCourse') as 'minna' | 'marugoto';
+      if (storedCourse) {
+        setActiveCourse(storedCourse);
+      }
+      const storedLesson = localStorage.getItem('selectedLessonId');
+      if (storedLesson) {
+        const parsed = parseInt(storedLesson);
+        if (!isNaN(parsed)) {
+          setSelectedLessonId(parsed);
+        }
+      }
     }
-    if (id === 'practice-vocab') {
-      router.push(`/lessons/1?tab=vocab-practice`);
-      return;
-    }
-    if (id === 'flashcards') {
-      router.push(`/lessons/1?tab=flashcards`);
-      return;
-    }
-    if (id === 'kaiwa') {
-      router.push(`/lessons/1?tab=kaiwa`);
-      return;
-    }
-    router.push(`/${id}`);
-  };
+  }, []);
 
   // State
   const [exam, setExam] = useState<ExamDetail | null>(null);
@@ -211,39 +213,100 @@ export default function ExamReviewPage({ params }: { params: Promise<{ id: strin
   const scorePercentage = Math.round((exam.score / exam.total_questions) * 100);
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-[#09111e] text-slate-800 dark:text-slate-200 transition-colors overflow-hidden">
-      {/* Sidebar Section */}
-      <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1626] hidden md:flex flex-col h-full shrink-0">
-        <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <span className="text-base font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent uppercase tracking-wider">
-            {exam.course === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
-          </span>
-        </div>
+    <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50/50 dark:from-[#0b1329] dark:via-[#090d1a] dark:to-[#050811] text-slate-800 dark:text-slate-100 font-sans relative">
+      
+      {/* Mobile Hamburger toggle button */}
+      <button
+        onClick={() => setIsSidebarOpen(true)}
+        className="lg:hidden absolute top-4 left-4 z-40 p-2.5 rounded-xl bg-white/90 dark:bg-slate-900/90 shadow-sm border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 cursor-pointer backdrop-blur-md active:scale-95"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
 
-        <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-          {menuItems.map((item) => (
+      {/* Mobile Sidebar backdrop overlay */}
+      {isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          className="lg:hidden fixed inset-0 bg-slate-900/20 z-40 backdrop-blur-sm transition-opacity duration-300"
+        />
+      )}
+
+      {/* 1. Left Sidebar Navigation Menu */}
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-white/95 dark:bg-slate-950/95 shadow-lg shadow-slate-200/40 border-r border-slate-200 dark:border-slate-800 dark:border-r-slate-900/50 flex flex-col justify-between p-6 backdrop-blur-xl shrink-0 transition-transform duration-300 lg:relative lg:translate-x-0 ${
+        isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
+          {/* Logo Title & Mobile Close button */}
+          <div className="flex items-center justify-between mb-8 px-2 shrink-0">
+            <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
+            </span>
             <button
-              key={item.id}
-              onClick={() => handleMenuClick(item.id)}
-              className={`w-full flex items-center space-x-3.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                item.active
-                  ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-md'
-                  : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/40 hover:text-slate-800 dark:hover:text-slate-200'
-              }`}
+              onClick={() => setIsSidebarOpen(false)}
+              className="lg:hidden text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-250 text-xl p-1 font-bold cursor-pointer"
             >
-              <span className="text-base">{item.icon}</span>
-              <span>{item.name}</span>
+              ✕
             </button>
-          ))}
-        </nav>
+          </div>
 
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 shrink-0">
-          <SidebarSettings />
+          {/* Course Switcher */}
+          <CourseSwitcher
+            activeCourse={activeCourse}
+            onSwitch={(course) => {
+              setActiveCourse(course);
+              localStorage.setItem('activeCourse', course);
+              router.push('/mock-test');
+            }}
+          />
+
+          {/* Category items */}
+          <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
+            {menuItems.filter(item => {
+              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
+                return false;
+              }
+              return true;
+            }).map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                  if (item.id === 'guide') {
+                    router.push('/guide');
+                  } else if (item.id === 'dashboard') {
+                    router.push('/dashboard');
+                  } else if (item.id === 'roadmap') {
+                    router.push('/roadmap');
+                  } else if (item.id === 'kana') {
+                    router.push('/kana');
+                  } else if (item.id === 'mock-test') {
+                    router.push('/mock-test');
+                  } else if (item.id === 'knowledge') {
+                    router.push('/knowledge');
+                  } else {
+                    router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
+                  }
+                }}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
+                  item.active
+                    ? 'bg-indigo-50/80 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 border border-indigo-100/50 dark:border-blue-900/40 text-indigo-600 dark:text-blue-400 shadow-sm dark:shadow-[0_0_15px_rgba(29,78,216,0.15)]'
+                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
+                }`}
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm">{item.name}</span>
+              </button>
+            ))}
+          </nav>
         </div>
+
+        <SidebarSettings />
       </aside>
 
       {/* Main Review Workspace */}
-      <main className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 lg:p-10 space-y-6 md:space-y-8 relative">
         {toast && (
           <div className="fixed top-5 right-5 z-50 px-5 py-3 rounded-2xl bg-slate-900 dark:bg-slate-850 border border-slate-850/80 text-white text-xs font-bold shadow-2xl animate-slide-in">
             🔔 {toast}

@@ -59,6 +59,11 @@ export default function SidebarSettings() {
     router.replace('/login');
   };
 
+  const handleNavigate = (path: string) => {
+    setIsOpen(false);
+    router.push(path);
+  };
+
   return (
     <div className="relative w-full pt-4 border-t border-slate-200/60 dark:border-slate-900/80 shrink-0" ref={popoverRef}>
       {/* Popover Settings panel */}
@@ -76,6 +81,26 @@ export default function SidebarSettings() {
               </p>
               <p className="text-xs text-slate-400 dark:text-slate-500 truncate">{user?.email}</p>
             </div>
+          </div>
+
+          <div className="border-t border-slate-100 dark:border-slate-900" />
+
+          {/* Navigation Shortcuts */}
+          <div className="space-y-1.5">
+            <button
+              onClick={() => handleNavigate('/mock-test')}
+              className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
+            >
+              <span className="text-sm">🏆</span>
+              <span>Thi thử JLPT</span>
+            </button>
+            <button
+              onClick={() => handleNavigate('/knowledge')}
+              className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
+            >
+              <span className="text-sm">📝</span>
+              <span>Tổng hợp kiến thức</span>
+            </button>
           </div>
 
           <div className="border-t border-slate-100 dark:border-slate-900" />

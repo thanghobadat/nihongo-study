@@ -8,6 +8,8 @@ import { getKanjiForm } from '../../utils/kanjiFormLookup';
 import CourseSwitcher from '../../components/CourseSwitcher';
 import SidebarSettings from '../../components/SidebarSettings';
 import { getRadicalsString } from '../../utils/kanjiRadicals';
+import PitchAccentDisplay from '../../components/PitchAccentDisplay';
+import { playAudioWithFallback } from '../../utils/audioHelper';
 
 // Defined types
 interface Lesson {
@@ -34,6 +36,7 @@ interface VocabItem {
   mnemonic_tip: string;
   image_url: string;
   status: 'not_learned' | 'learning' | 'mastered';
+  pitch_accent?: number;
 }
 
 interface KanjiItem {
@@ -245,7 +248,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
       { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' }
     ]),
-    { name: 'Thi thử JLPT', id: 'mock-test', icon: '🏆', active: false },
     ...(isMarugoto ? [] : [
       { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
     ])
@@ -1127,7 +1129,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       const nextScore = speedrunScoreRef.current + 1;
       speedrunScoreRef.current = nextScore;
       setSpeedrunScore(nextScore);
-      playAudio(speedrunQuestion.hiragana);
+      playAudioWithFallback(getKanjiForm(speedrunQuestion.hiragana, kanjiItems), speedrunQuestion.hiragana);
       nextSpeedrunQuestion(nextScore);
     } else {
       setSpeedrunGameOver(true);
@@ -1471,14 +1473,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* Button Tổng hợp kiến thức */}
-            <button
-              onClick={() => router.push('/knowledge')}
-              className="px-3.5 py-2 text-xs font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl shadow-sm transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
-            >
-              <span>📝</span>
-              <span>Tổng hợp kiến thức</span>
-            </button>
+
 
             <select
               value={selectedLessonId}
@@ -1693,11 +1688,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                     {group.copiedItems.map((c) => (
                                       <span 
                                         key={c.id} 
-                                        onClick={() => playAudio(c.hiragana)}
-                                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-xs rounded-lg text-slate-400 dark:text-slate-500 cursor-pointer active:scale-95 transition-all" 
+                                        onClick={() => playAudioWithFallback(getKanjiForm(c.hiragana, kanjiItems), c.hiragana)}
+                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-xs rounded-lg text-slate-400 dark:text-slate-500 cursor-pointer active:scale-95 transition-all" 
                                         title={`${c.vietnamese_meaning} - Nhấp để nghe`}
                                       >
-                                        <span>{c.hiragana}</span>
+                                        <PitchAccentDisplay kana={c.hiragana} accent={c.pitch_accent || 0} size="sm" />
                                         <span className="text-[10px] text-slate-400 dark:text-slate-500">({c.romaji})</span>
                                         <span className="text-[10px] text-blue-450">🔊</span>
                                       </span>
@@ -1763,11 +1758,13 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
                                           {/* Card Japanese Word */}
                                           <div className="flex items-center space-x-2.5 mb-3">
-                                            <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-wide">
-                                              {item.hiragana}
-                                            </h4>
+                                            <PitchAccentDisplay
+                                              kana={item.hiragana}
+                                              accent={item.pitch_accent || 0}
+                                              size="md"
+                                            />
                                             <button
-                                              onClick={() => playAudio(item.hiragana)}
+                                              onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
                                               className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90"
                                               title="Nghe phát âm"
                                             >
@@ -1933,11 +1930,13 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
                                       {/* Card Japanese Word */}
                                       <div className="flex items-center space-x-2.5 mb-3">
-                                        <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-wide">
-                                          {item.hiragana}
-                                        </h4>
+                                        <PitchAccentDisplay
+                                          kana={item.hiragana}
+                                          accent={item.pitch_accent || 0}
+                                          size="md"
+                                        />
                                         <button
-                                          onClick={() => playAudio(item.hiragana)}
+                                          onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
                                           className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90"
                                           title="Nghe phát âm"
                                         >
@@ -2727,10 +2726,26 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             <div className="h-full flex flex-col justify-between overflow-y-auto space-y-2.5 pr-1 select-none font-sans">
                               <div className="flex justify-between items-start border-b border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 pb-2">
                                 <div>
-                                  <h4 className="text-2xl font-black text-slate-900 dark:text-white">{(activeCard as VocabItem)?.hiragana}</h4>
+                                  <div className="flex items-center space-x-2.5">
+                                    <PitchAccentDisplay
+                                      kana={(activeCard as VocabItem)?.hiragana}
+                                      accent={(activeCard as VocabItem)?.pitch_accent || 0}
+                                      size="lg"
+                                    />
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        playAudioWithFallback(getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems), (activeCard as VocabItem)?.hiragana);
+                                      }}
+                                      className="p-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 transition-all cursor-pointer active:scale-90"
+                                      title="Nghe phát âm bản xứ"
+                                    >
+                                      🔊
+                                    </button>
+                                  </div>
                                   <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">{(activeCard as VocabItem)?.romaji}</p>
                                 </div>
-                                <span className="px-2 py-0.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase rounded">
+                                <span className="px-2 py-0.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase rounded text-xs">
                                   {(activeCard as VocabItem)?.word_type}
                                 </span>
                               </div>
@@ -3884,10 +3899,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         <div className="py-10 text-center bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 rounded-2xl shadow-inner space-y-2">
                           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Câu hỏi</span>
                           {speedrunDirection === 'ja-to-vi' ? (
-                            <div className="space-y-1">
-                              <h3 className="text-3xl font-black text-slate-900 dark:text-white leading-relaxed font-sans select-none">
-                                {speedrunQuestion.hiragana}
-                              </h3>
+                            <div className="space-y-1 flex flex-col items-center justify-center">
+                              <PitchAccentDisplay
+                                kana={speedrunQuestion.hiragana}
+                                accent={speedrunQuestion.pitch_accent || 0}
+                                size="lg"
+                              />
                             </div>
                           ) : (
                             <h3 className="text-xl font-black text-slate-900 dark:text-white leading-relaxed px-4 select-none">

@@ -53,7 +53,6 @@ export default function UserDashboard() {
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
     { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Thi thử JLPT', id: 'mock-test', icon: '🏆', active: false },
     { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
   ];
 
@@ -511,14 +510,7 @@ export default function UserDashboard() {
               </div>
             )}
 
-            {/* Button Tổng hợp kiến thức */}
-            <button
-              onClick={() => router.push('/knowledge')}
-              className="px-3.5 py-2 text-xs font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl shadow-sm transition-all active:scale-95 cursor-pointer flex items-center space-x-1.5"
-            >
-              <span>📝</span>
-              <span>Tổng hợp kiến thức</span>
-            </button>
+
 
             <select
               value={selectedLessonId}

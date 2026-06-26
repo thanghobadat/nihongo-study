@@ -1,4 +1,4 @@
-﻿# Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
+# Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
 # Usage in PowerShell: powershell -ExecutionPolicy Bypass -File gen_multilesson_mock.ps1
 
 $files = Get-ChildItem -Path "d:\AI\japanese_learning\tai_lieu\*.xlsx" | Where-Object { $_.Name -notlike "~$*" } | Sort-Object { [int]($_.BaseName -replace '^Bai(\d+).*', '$1') }
@@ -25,6 +25,14 @@ if (Test-Path $cachePath) {
     $cacheContent = Get-Content -Raw -Path $cachePath -Encoding utf8
     $romajiCache = ConvertFrom-Json $cacheContent
 }
+
+$pitchCachePath = "d:\AI\japanese_learning\website\backend\src\db\vocab_pitch_accent_cache.json"
+$pitchCache = $null
+if (Test-Path $pitchCachePath) {
+    $pitchContent = Get-Content -Raw -Path $pitchCachePath -Encoding utf8
+    $pitchCache = ConvertFrom-Json $pitchContent
+}
+
 
 $lessonId = 1
 try {
@@ -128,8 +136,18 @@ try {
             $ex_meaning = $sheet.Cells.Item($row, 6).Text
             $mnemonic = $sheet.Cells.Item($row, 7).Text
             
+            $vocabId = $vocabulary.Count + 1
+            $accent = 0
+            if ($pitchCache) {
+                $idStr = $vocabId.ToString()
+                $prop = $pitchCache.PSObject.Properties[$idStr]
+                if ($prop) {
+                    $accent = [int]$prop.Value
+                }
+            }
+
             $vocabulary += [PSCustomObject]@{
-                id = $vocabulary.Count + 1
+                id = $vocabId
                 lesson_id = $lessonId
                 hiragana = $hiragana
                 romaji = $romaji
@@ -139,6 +157,7 @@ try {
                 example_meaning = $ex_meaning
                 mnemonic_tip = $mnemonic
                 image_url = ""
+                pitch_accent = $accent
             }
             $row++
         }

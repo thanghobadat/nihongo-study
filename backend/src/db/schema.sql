@@ -54,6 +54,7 @@ CREATE TABLE public.vocabulary (
   example_meaning TEXT,
   mnemonic_tip TEXT,
   image_url TEXT,
+  pitch_accent INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -216,6 +217,7 @@ CREATE TABLE public.user_custom_vocabulary (
   japanese_example TEXT,
   example_meaning TEXT,
   mnemonic_tip TEXT,
+  pitch_accent INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
