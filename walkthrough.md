@@ -1,49 +1,58 @@
-# Walkthrough: Triển khai Dark Mode & Light Mode cho Nihongo Flow
+# Kết quả Cải tiến: Trọng âm Cao độ (Pitch Accent) & Âm thanh Bản xứ (Native Audio)
 
-Dự án **Nihongo Flow** đã được nâng cấp hệ thống giao diện kép (Dark Mode & Light Mode) và tái cấu trúc lại thanh Sidebar bằng cách tích hợp Popover cài đặt chung `SidebarSettings`.
+Tôi đã hoàn thành việc tích hợp hiển thị trực quan Trọng âm cao độ tiếng Nhật (Pitch Accent) và nâng cấp hệ thống âm thanh bản xứ chất lượng cao từ LanguagePod101 kèm cơ chế fallback thông minh về TTS.
 
-## Các thay đổi đã thực hiện
+---
 
-### 1. Cấu hình Theme & Layout gốc
-*   [globals.css](file:///d:/AI/japanese_learning/website/frontend/src/app/globals.css): Kích hoạt Class-based Dark Mode thông qua cú pháp Tailwind v4 `@variant dark (&:where(.dark, .dark *));`. Thiết lập các biến CSS mặc định cho nền và chữ trên cả hai chế độ.
-*   [layout.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/layout.tsx): Bổ sung một script đồng bộ trong thẻ `<head>` để ngăn ngừa hiện tượng nhấp nháy giao diện (hydration flicker) when đọc cấu hình từ `localStorage`. Body được cập nhật sử dụng lớp màu động `bg-slate-50 dark:bg-[#09111e]`.
+## 📸 Hình ảnh Minh họa & Video Xác minh
 
-### 2. Thành phần (Components) mới
-*   [ThemeProvider.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/ThemeProvider.tsx): Quản lý trạng thái Theme (Light/Dark) qua React Context, tự động đồng bộ hóa lớp `.dark` vào thẻ `<html>` và lưu cấu hình vào `localStorage`.
-*   [SidebarSettings.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/SidebarSettings.tsx): Component hợp nhất hiển thị nút bấm Cài đặt ở cuối sidebar. Khi được nhấn, popover nổi lên cung cấp thông tin học viên (avatar động sinh bằng hàm băm SVG, tên hiển thị, email), toggle bật/tắt theme (☀️/🌙) và nút Đăng xuất (🚪). Hỗ trợ sự kiện click-outside để đóng menu cài đặt khi người dùng nhấn ra ngoài.
+Dưới đây là hình ảnh và video quá trình chạy kiểm thử trực quan thông qua Browser Subagent:
 
-### 3. Polish & Tích hợp Trang
-Tất cả 11 trang giao diện của ứng dụng được refactor đồng loạt để hỗ trợ Light Mode mặc định (`bg-slate-50`, v.v.) đồng thời bảo lưu 100% giao diện tối nguyên bản bằng tiền tố `dark:` (ví dụ `dark:bg-[#0b1329]`).
-*   [AuthGuard.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/AuthGuard.tsx): Cập nhật hiệu ứng tải trang (loading screen) đồng bộ màu sắc theo theme.
-*   [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx)
-*   [lessons/\[id\]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx)
-*   [kana/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/kana/page.tsx)
-*   [roadmap/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/roadmap/page.tsx)
-*   [roadmap/practice/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/roadmap/practice/page.tsx)
-*   [guide/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/guide/page.tsx)
+### 1. Tab Từ vựng hiển thị đường cao độ (Pitch Accent Line)
+Đường cao độ màu đỏ được vẽ liền mạch phía trên các ký tự Kana tương ứng với âm Cao (High) và có đường rơi đi xuống (border-right) tại vị trí Hạt nhân trọng âm ($N$).
+Khi hover chuột vào từ vựng, một Tooltip xinh xắn sẽ hiển thị thông tin loại trọng âm (Heiban, Atamadaka, Nakadaka, Odaka) và mô tả tương ứng.
 
-## Kết quả kiểm thử & Xác minh
+![Đường cao độ trên Tab Từ vựng](C:\Users\Admin\.gemini\antigravity-ide\brain\a7a75d4d-d388-4806-b6b2-9f7d7c2010f4\vocab_tab_accents_1782443604402.png)
 
-Chúng tôi đã chạy kiểm thử tự động với Browser Subagent để xác minh các chức năng hoạt động hoàn hảo trên trình duyệt.
+### 2. Mặt sau thẻ nhớ Flashcards
+Mặt sau thẻ nhớ Flashcards hiển thị rõ ràng đường cao độ kích thước lớn (size `lg`) kèm nút loa phát âm native. Nút loa này đã được cấu hình chống nổi bọt sự kiện (`e.stopPropagation()`) để tránh việc click vào loa làm lật thẻ ngược lại.
 
-### 1. Quy trình chạy thử nghiệm
-*   Tải trang và xác minh Dark Mode được kích hoạt mặc định theo yêu cầu thiết kế cũ.
-*   Nhấp vào nút **Cài đặt** ở góc dưới cùng sidebar. Popover mở rộng hiển thị chính xác.
-*   Nhấp toggle chuyển đổi sang Light Mode. Giao diện thay đổi ngay lập tức sang tông sáng mềm mại, tinh tế.
-*   Tải lại trang (reload) để kiểm chứng cơ chế ngăn Flicker hoạt động đúng.
-*   Nhấp chuột ra vùng ngoài popover để xác minh tính năng Click-outside tự động ẩn popover.
+![Mặt sau Flashcard có trọng âm cao độ](C:\Users\Admin\.gemini\antigravity-ide\brain\a7a75d4d-d388-4806-b6b2-9f7d7c2010f4\flashcard_back_accent_1782443639755.png)
 
-### 2. Khắc phục lỗi ô nhập liệu, hộp lựa chọn và Hover trắng trong Dark Mode
-*   **Lớp CSS lỗi**: Dọn dẹp tất cả các lớp Tailwind bị phân mảnh dạng `dark:bg-slate-950/60/...` thành lớp chuẩn để trình duyệt nhận diện được màu nền tối.
-*   **Ô nhập liệu (Inputs)**: Sửa đổi các ô nhập đáp án (`bg-[#FCF3CF]`) và số lượng câu hỏi (`bg-slate-100`) trên các tab luyện tập thành màu tối (`dark:bg-slate-950`).
-*   **Hộp lựa chọn & Hover**: Chuẩn hóa màu nền các thẻ `<option>` của `<select>` và bổ sung các lớp hover tương ứng cho chế độ tối (như `dark:hover:bg-slate-800/80` thay vì chỉ có `hover:bg-white` làm trắng nền khi di chuột).
+### 3. Video ghi lại quá trình kiểm thử tự động
+Video ghi lại quá trình Browser Subagent truy cập trang bài học, kiểm tra hiển thị từ vựng và thao tác lật thẻ nhớ Flashcards:
 
-### 3. Khắc phục lỗi nền trắng trên Selectbox, Dropdown Status, Audio và Shuffle Buttons
-*   **Hộp tùy chọn thả xuống (Select Options)**: Cấu hình thêm thuộc tính `color-scheme: dark;` vào thẻ gốc `.dark` tại [globals.css](file:///d:/AI/japanese_learning/website/frontend/src/app/globals.css). Điều này báo cho các trình duyệt (Chrome, Edge, Firefox) tự động dựng hình (render) danh sách tùy chọn `<option>` đổ ra của thẻ `<select>` bằng giao diện tối màu nguyên bản, đồng bộ hóa cả lịch ngày và thanh cuộn.
-*   **Hộp chọn trạng thái học tập**: Cập nhật lớp hiển thị của hộp trạng thái từ vựng/chữ Hán/ngữ pháp khi chưa học từ màu trắng tĩnh sang màu tối động `bg-white dark:bg-slate-900/60`.
-*   **Nút Loa âm thanh và Tráo đề**:
-    *   Tất cả 6 nút phát âm âm thanh (Audio `🔊`) đã được tích hợp lớp đổi nền tối `dark:bg-slate-900/60`.
-    *   Nút Tráo đề (`🔀 Tráo đề`) ở tab Luyện tập đã được tích hợp lớp `bg-white dark:bg-slate-950/60` giúp hoạt động ổn định và có giao diện tối chuẩn xác.
+![Video kiểm thử Pitch Accent và Audio](C:\Users\Admin\.gemini\antigravity-ide\brain\a7a75d4d-d388-4806-b6b2-9f7d7c2010f4\pitch_accent_verification_1782443584374.webp)
 
-> [!TIP]
-> Việc đóng gói toàn bộ logic profile, đổi theme và đăng xuất vào component [SidebarSettings.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/SidebarSettings.tsx) giúp giảm thiểu hơn 300 dòng mã nguồn trùng lặp trên 6 trang khác nhau của dự án, cải thiện tối đa khả năng bảo trì.
+---
+
+## 🛠️ Các thay đổi đã thực hiện
+
+### 1. Phân hệ Backend (Cơ sở dữ liệu)
+- **Tích hợp Pitch Accent vào mockDb**:
+  - Sửa đổi [inject_marugoto_content.js](file:///d:/AI/japanese_learning/website/backend/scratch/inject_marugoto_content.js) để nạp cache trọng âm offline và tự động gán thuộc tính `pitch_accent` cho các từ vựng Marugoto khi chèn.
+  - Chạy `generate_pitch_accent.js` để quét toàn bộ 931 từ vựng trong cơ sở dữ liệu `mockDb.js` (gồm 50 bài Minna và 18 bài Marugoto) và tra cứu tự động từ cơ sở dữ liệu Kanjium mở, tạo ra tệp cache [vocab_pitch_accent_cache.json](file:///d:/AI/japanese_learning/website/backend/src/db/vocab_pitch_accent_cache.json).
+  - Khớp thành công 57.6% tổng số từ vựng (các từ còn lại không tìm thấy được mặc định là Heiban - 0).
+  - Chạy seeding lại Marugoto để đồng bộ toàn bộ `mockDb.js`.
+
+### 2. Phân hệ Frontend (Giao diện người dùng)
+- **Thuật toán xử lý Morae**:
+  - Tạo file helper [pitchAccentHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/pitchAccentHelper.ts) chứa hàm `splitIntoMorae` sử dụng regex để bóc tách chính xác các Morae (bao gồm cả âm ghép như `きょ` là 1 mora).
+  - Lập trình hàm `getPitchAccentStates` để xác định cao độ (High/Low) cho mỗi mora dựa vào chỉ số hạt nhân $N$.
+- **Component Trực quan**:
+  - Tạo component [PitchAccentDisplay.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/PitchAccentDisplay.tsx) chịu trách nhiệm render các ký tự Kana với đường border-top và border-right màu đỏ bắt mắt (`rose-500` / `rose-400` tương thích Dark Mode) kèm Tooltip chi tiết khi hover.
+- **Phát âm thanh thông minh**:
+  - Tạo file helper [audioHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/audioHelper.ts) cung cấp hàm `playAudioWithFallback`. Hàm này tải file phát âm của người bản xứ từ LanguagePod101 qua URL HTTPS để đảm bảo bảo mật và tránh lỗi mixed content.
+  - Nếu gặp lỗi tải (ví dụ từ vựng tùy chỉnh không có sẵn hoặc lỗi mạng), hàm tự động bắt sự kiện `error` hoặc kích hoạt chế độ dự phòng Web Speech API (TTS) sau 2 giây timeout.
+- **Tích hợp giao diện bài học**:
+  - Cập nhật [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx) để thay thế hiển thị Hiragana bằng component `PitchAccentDisplay` trên:
+    - **Tab Từ vựng** (các từ vựng mới, từ vựng bổ sung và từ vựng trùng lặp).
+    - **Mặt sau thẻ nhớ Flashcards** (size lớn).
+    - **Game phản xạ Speedrun** (câu hỏi tiếng Nhật).
+  - Thay thế toàn bộ nút loa phát âm của từ vựng sang sử dụng `playAudioWithFallback`.
+
+---
+
+## 📈 Biên dịch & Xác minh
+- Chạy biên dịch Next.js thành công (`npm run build`) và vượt qua toàn bộ kiểm tra kiểu tĩnh của TypeScript.
+- Kiểm thử trực quan cho thấy đường vẽ trọng âm hiển thị sắc nét, tương phản tốt trên cả Light/Dark theme. Âm thanh bản xứ phát lập tức khi nhấn nút loa và tự động fallback mượt mà về giọng đọc TTS khi từ không có sẵn.
