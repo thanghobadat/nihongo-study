@@ -278,6 +278,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
   const [showRadicals, setShowRadicals] = useState<boolean>(false);
+  const [showKanjiInVocab, setShowKanjiInVocab] = useState<boolean>(false);
 
   // Flashcards States
   const [flashcardType, setFlashcardType] = useState<'vocab' | 'kanji'>('vocab');
@@ -1577,9 +1578,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 {/* 2. Search & Filters */}
-                <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                   {/* Search box */}
-                  <div className="relative w-full sm:max-w-md">
+                  <div className="relative w-full md:max-w-xs lg:max-w-md">
                     <input
                       type="text"
                       placeholder="Tìm từ vựng, Romaji, Nghĩa Việt..."
@@ -1590,48 +1591,62 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                     <span className="absolute left-3.5 top-3.5 text-slate-400 dark:text-slate-500 text-sm">🔍</span>
                   </div>
 
-                  {/* Status filters */}
-                  <div className="flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 w-full sm:w-auto shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
-                    <button
-                      onClick={() => setStatusFilter('all')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                        statusFilter === 'all'
-                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                      }`}
-                    >
-                      Tất cả ({vocabTotalCount})
-                    </button>
-                    <button
-                      onClick={() => setStatusFilter('not_learned')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                        statusFilter === 'not_learned'
-                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                      }`}
-                    >
-                      Chưa học ({vocabItems.filter(v => v.status === 'not_learned').length})
-                    </button>
-                    <button
-                      onClick={() => setStatusFilter('learning')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                        statusFilter === 'learning'
-                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                      }`}
-                    >
-                      Đang học ({vocabItems.filter(v => v.status === 'learning').length})
-                    </button>
-                    <button
-                      onClick={() => setStatusFilter('mastered')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                        statusFilter === 'mastered'
-                          ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
-                          : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                      }`}
-                    >
-                      Đã thuộc ({vocabItems.filter(v => v.status === 'mastered').length})
-                    </button>
+                  {/* Filters & Actions row */}
+                  <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+                    {/* Kanji Mode Checkbox */}
+                    <label className="flex items-center space-x-2 text-xs font-bold text-slate-600 dark:text-slate-400 cursor-pointer select-none py-1.5 px-3 bg-slate-100/60 dark:bg-slate-900/40 rounded-xl border border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-200/40 dark:hover:bg-slate-800/60 transition-colors">
+                      <input
+                        type="checkbox"
+                        checked={showKanjiInVocab}
+                        onChange={(e) => setShowKanjiInVocab(e.target.checked)}
+                        className="rounded border-slate-300 dark:border-slate-800 text-blue-600 focus:ring-blue-500 cursor-pointer w-4 h-4"
+                      />
+                      <span>🇯🇵 Học bằng Kanji</span>
+                    </label>
+
+                    {/* Status filters */}
+                    <div className="flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 w-full sm:w-auto shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
+                      <button
+                        onClick={() => setStatusFilter('all')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                          statusFilter === 'all'
+                            ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                            : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                        }`}
+                      >
+                        Tất cả ({vocabTotalCount})
+                      </button>
+                      <button
+                        onClick={() => setStatusFilter('not_learned')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                          statusFilter === 'not_learned'
+                            ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                            : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                        }`}
+                      >
+                        Chưa học ({vocabItems.filter(v => v.status === 'not_learned').length})
+                      </button>
+                      <button
+                        onClick={() => setStatusFilter('learning')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                          statusFilter === 'learning'
+                            ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                            : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                        }`}
+                      >
+                        Đang học ({vocabItems.filter(v => v.status === 'learning').length})
+                      </button>
+                      <button
+                        onClick={() => setStatusFilter('mastered')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                          statusFilter === 'mastered'
+                            ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
+                            : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                        }`}
+                      >
+                        Đã thuộc ({vocabItems.filter(v => v.status === 'mastered').length})
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -1723,7 +1738,13 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                         className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-xs rounded-lg text-slate-400 dark:text-slate-500 cursor-pointer active:scale-95 transition-all" 
                                         title={`${c.vietnamese_meaning} - Nhấp để nghe`}
                                       >
-                                        <PitchAccentDisplay kana={c.hiragana} accent={c.pitch_accent || 0} size="sm" />
+                                        {showKanjiInVocab ? (
+                                          <span className="font-bold text-slate-700 dark:text-slate-200 text-xs">
+                                            {getKanjiForm(c.hiragana, kanjiItems)}
+                                          </span>
+                                        ) : (
+                                          <PitchAccentDisplay kana={c.hiragana} accent={c.pitch_accent || 0} size="sm" />
+                                        )}
                                         <span className="text-[10px] text-slate-400 dark:text-slate-500">({c.romaji})</span>
                                         <span className="text-[10px] text-blue-450">🔊</span>
                                       </span>
@@ -1788,15 +1809,26 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                           </div>
 
                                           {/* Card Japanese Word */}
-                                          <div className="flex items-center space-x-2.5 mb-3">
-                                            <PitchAccentDisplay
-                                              kana={item.hiragana}
-                                              accent={item.pitch_accent || 0}
-                                              size="md"
-                                            />
+                                          <div className="flex items-baseline flex-wrap gap-2 mb-3">
+                                            {showKanjiInVocab ? (
+                                              <>
+                                                <span className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-wide">
+                                                  {getKanjiForm(item.hiragana, kanjiItems)}
+                                                </span>
+                                                <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
+                                                  ({item.hiragana})
+                                                </span>
+                                              </>
+                                            ) : (
+                                              <PitchAccentDisplay
+                                                kana={item.hiragana}
+                                                accent={item.pitch_accent || 0}
+                                                size="md"
+                                              />
+                                            )}
                                             <button
                                               onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
-                                              className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90"
+                                              className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90 self-center"
                                               title="Nghe phát âm"
                                             >
                                               🔊
@@ -1960,15 +1992,26 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                                       </div>
 
                                       {/* Card Japanese Word */}
-                                      <div className="flex items-center space-x-2.5 mb-3">
-                                        <PitchAccentDisplay
-                                          kana={item.hiragana}
-                                          accent={item.pitch_accent || 0}
-                                          size="md"
-                                        />
+                                      <div className="flex items-baseline flex-wrap gap-2 mb-3">
+                                        {showKanjiInVocab ? (
+                                          <>
+                                            <span className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-wide">
+                                              {getKanjiForm(item.hiragana, kanjiItems)}
+                                            </span>
+                                            <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
+                                              ({item.hiragana})
+                                            </span>
+                                          </>
+                                        ) : (
+                                          <PitchAccentDisplay
+                                            kana={item.hiragana}
+                                            accent={item.pitch_accent || 0}
+                                            size="md"
+                                          />
+                                        )}
                                         <button
                                           onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
-                                          className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90"
+                                          className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90 self-center"
                                           title="Nghe phát âm"
                                         >
                                           🔊
@@ -2727,7 +2770,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           <div className="my-auto py-2">
                             {flashcardType === 'vocab' ? (
                               <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-wider select-none">
-                                {(activeCard as VocabItem)?.hiragana}
+                                {showKanjiInVocab
+                                  ? getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems)
+                                  : (activeCard as VocabItem)?.hiragana}
                               </h3>
                             ) : (
                               <h3 className="text-5xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 select-none">
@@ -2757,18 +2802,29 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             <div className="h-full flex flex-col justify-between overflow-y-auto space-y-2.5 pr-1 select-none font-sans">
                               <div className="flex justify-between items-start border-b border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 pb-2">
                                 <div>
-                                  <div className="flex items-center space-x-2.5">
-                                    <PitchAccentDisplay
-                                      kana={(activeCard as VocabItem)?.hiragana}
-                                      accent={(activeCard as VocabItem)?.pitch_accent || 0}
-                                      size="lg"
-                                    />
+                                  <div className="flex items-baseline flex-wrap gap-2">
+                                    {showKanjiInVocab ? (
+                                      <>
+                                        <span className="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-wide select-none">
+                                          {getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems)}
+                                        </span>
+                                        <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
+                                          ({(activeCard as VocabItem)?.hiragana})
+                                        </span>
+                                      </>
+                                    ) : (
+                                      <PitchAccentDisplay
+                                        kana={(activeCard as VocabItem)?.hiragana}
+                                        accent={(activeCard as VocabItem)?.pitch_accent || 0}
+                                        size="lg"
+                                      />
+                                    )}
                                     <button
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         playAudioWithFallback(getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems), (activeCard as VocabItem)?.hiragana);
                                       }}
-                                      className="p-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 transition-all cursor-pointer active:scale-90"
+                                      className="p-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 transition-all cursor-pointer active:scale-90 self-center"
                                       title="Nghe phát âm bản xứ"
                                     >
                                       🔊
