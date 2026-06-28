@@ -182,6 +182,60 @@ router.post('/target-plan', async (req, res) => {
 });
 
 /**
+ * GET /api/user/daily-report-status
+ * Get the last date the user viewed the daily progress report
+ */
+router.get('/daily-report-status', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (req.user.isMock) {
+      if (!mockDb.dailyReportStatus) mockDb.dailyReportStatus = {};
+      return res.json({ last_daily_report_date: mockDb.dailyReportStatus[userId] || null });
+    }
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('last_daily_report_date')
+      .eq('id', userId)
+      .maybeSingle();
+
+    if (error) throw error;
+    res.json({ last_daily_report_date: data?.last_daily_report_date || null });
+  } catch (error) {
+    console.error('Error fetching daily report status:', error);
+    res.status(500).json({ error: error.message || error });
+  }
+});
+
+/**
+ * POST /api/user/daily-report-ack
+ * Acknowledge viewing today's daily progress report
+ */
+router.post('/daily-report-ack', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const reportDate = req.body.date || new Date().toISOString().split('T')[0];
+
+    if (req.user.isMock) {
+      if (!mockDb.dailyReportStatus) mockDb.dailyReportStatus = {};
+      mockDb.dailyReportStatus[userId] = reportDate;
+      return res.json({ message: 'Daily report acknowledged (Mock)', last_daily_report_date: reportDate });
+    }
+
+    const { error } = await supabase
+      .from('profiles')
+      .update({ last_daily_report_date: reportDate, updated_at: new Date().toISOString() })
+      .eq('id', userId);
+
+    if (error) throw error;
+    res.json({ message: 'Daily report acknowledged', last_daily_report_date: reportDate });
+  } catch (error) {
+    console.error('Error updating daily report status:', error);
+    res.status(500).json({ error: error.message || error });
+  }
+});
+
+/**
  * GET /api/user/course-summary
  * Fetch overall summary data for a course (syllabus items, user progress and custom items)
  */

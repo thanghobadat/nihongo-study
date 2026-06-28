@@ -4,6 +4,7 @@ CREATE TABLE public.profiles (
   email TEXT UNIQUE NOT NULL,
   role TEXT NOT NULL DEFAULT 'user', -- 'admin' or 'user'
   display_name TEXT,
+  last_daily_report_date DATE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );

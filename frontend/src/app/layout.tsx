@@ -48,7 +48,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 dark:bg-[#09111e] text-slate-800 dark:text-slate-100 overflow-x-hidden max-w-full">
+      <body
+        className="min-h-full flex flex-col bg-slate-50 dark:bg-[#09111e] text-slate-800 dark:text-slate-100 overflow-x-hidden max-w-full"
+        suppressHydrationWarning
+      >
         <ThemeProvider>
           <AuthGuard>{children}</AuthGuard>
         </ThemeProvider>

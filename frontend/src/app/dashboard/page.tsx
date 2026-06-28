@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import CourseSwitcher from '../components/CourseSwitcher';
 import SidebarSettings from '../components/SidebarSettings';
+import DailyReportModal from '../components/DailyReportModal';
 
 // Defined types
 interface Lesson {
@@ -97,6 +98,7 @@ export default function UserDashboard() {
 
   // Mobile navigation drawer toggle
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isDailyReportOpen, setIsDailyReportOpen] = useState<boolean>(false);
 
   // Plan Configurator States
   const [startDateStr, setStartDateStr] = useState<string>('2026-06-13');
@@ -249,6 +251,33 @@ export default function UserDashboard() {
       }
     }
     loadLessonStats();
+
+    // Check if daily progress report should be displayed
+    async function checkDailyReport() {
+      const todayStr = new Date().toISOString().split('T')[0];
+      try {
+        const token = api.getToken();
+        if (!token) {
+          const localAck = localStorage.getItem('last_daily_report_date');
+          if (localAck !== todayStr) {
+            setIsDailyReportOpen(true);
+          }
+          return;
+        }
+
+        const statusRes = await api.get('/api/user/daily-report-status');
+        if (statusRes && statusRes.last_daily_report_date !== todayStr) {
+          setIsDailyReportOpen(true);
+        }
+      } catch (e) {
+        console.warn("API check for daily report status failed, using local fallback:", e);
+        const localAck = localStorage.getItem('last_daily_report_date');
+        if (localAck !== todayStr) {
+          setIsDailyReportOpen(true);
+        }
+      }
+    }
+    checkDailyReport();
 
     // Dynamically retrieve stored plan values for this specific lesson
     if (fullPlansJson && fullPlansJson.lesson_plans?.[selectedLessonId]) {
@@ -901,6 +930,55 @@ export default function UserDashboard() {
         )}
 
       </main>
+
+      {/* Daily Progress Report Modal */}
+      <DailyReportModal
+        isOpen={isDailyReportOpen}
+        onClose={async () => {
+          setIsDailyReportOpen(false);
+          const todayStr = new Date().toISOString().split('T')[0];
+          localStorage.setItem('last_daily_report_date', todayStr);
+          try {
+            const token = api.getToken();
+            if (token) {
+              await api.post('/api/user/daily-report-ack', { date: todayStr });
+            }
+          } catch (e) {
+            console.warn("Failed to ack daily report to server:", e);
+          }
+        }}
+        userName={user?.display_name || 'Học viên'}
+        lessonTitle={lessons.find(l => l.id === selectedLessonId)?.title || `Bài ${selectedLessonId}`}
+        lessonId={selectedLessonId}
+        vocabTotal={vocabTotal}
+        vocabMastered={vocabMastered}
+        kanjiTotal={kanjiTotal}
+        kanjiMastered={kanjiMastered}
+        grammarTotal={grammarTotal}
+        grammarMastered={grammarMastered}
+        startDateStr={startDateStr}
+        endDateStr={endDateStr}
+        totalDays={totalDays}
+        daysElapsed={daysElapsed}
+        daysRemaining={daysRemaining}
+        targetVocabToday={targetVocabToday}
+        vocabBehind={vocabBehind}
+        calculatedVocabTargetPerDay={calculatedVocabTargetPerDay}
+        onContinueStudy={async () => {
+          setIsDailyReportOpen(false);
+          const todayStr = new Date().toISOString().split('T')[0];
+          localStorage.setItem('last_daily_report_date', todayStr);
+          try {
+            const token = api.getToken();
+            if (token) {
+              await api.post('/api/user/daily-report-ack', { date: todayStr });
+            }
+          } catch (e) {
+            console.warn("Failed to ack daily report to server:", e);
+          }
+          router.push(`/lessons/${selectedLessonId}`);
+        }}
+      />
 
     </div>
   );
