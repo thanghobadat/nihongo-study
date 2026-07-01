@@ -368,7 +368,7 @@ export default function RadicalsPage() {
                   placeholder="Tìm kiếm bộ thủ, Hán Việt, ý nghĩa..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
+                  className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
                 />
                 <span className="absolute left-3.5 top-3.5 text-slate-400 dark:text-slate-500 text-xs">🔍</span>
                 {searchQuery && (
@@ -413,7 +413,7 @@ export default function RadicalsPage() {
                     className="group bg-slate-100/25 border border-slate-200 dark:border-slate-800 hover:border-teal-500/40 p-4 rounded-2xl flex flex-col items-center justify-between gap-3 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(20,184,166,0.05)] hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none"
                   >
                     {/* Big radical character */}
-                    <div className="w-14 h-14 bg-white border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-center text-3xl font-black text-slate-900 dark:text-white group-hover:text-teal-400 group-hover:border-teal-950 transition-colors shadow-inner">
+                    <div className="w-14 h-14 bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-center text-3xl font-black text-slate-900 dark:text-white group-hover:text-teal-400 group-hover:border-teal-950 transition-colors shadow-inner">
                       {rad.character.split(' ')[0]}
                     </div>
                     {/* Sino-Vietnamese & meaning */}
@@ -535,7 +535,7 @@ export default function RadicalsPage() {
                     <select
                       value={selectedGroupFilter}
                       onChange={(e) => setSelectedGroupFilter(e.target.value)}
-                      className="w-full bg-white border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer"
                     >
                       {groupFilters.map(g => (
                         <option key={g.id} value={g.id}>{g.name}</option>
@@ -549,7 +549,7 @@ export default function RadicalsPage() {
                     <select
                       value={practiceLimit}
                       onChange={(e) => setPracticeLimit(Number(e.target.value))}
-                      className="w-full bg-white border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer"
                     >
                       <option value={10}>10 câu hỏi</option>
                       <option value={20}>20 câu hỏi</option>
@@ -566,7 +566,7 @@ export default function RadicalsPage() {
                     <select
                       value={writeDirection}
                       onChange={(e) => setWriteDirection(e.target.value as 'kanji-to-sino' | 'sino-to-kanji')}
-                      className="w-full bg-white border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer font-bold"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer font-bold"
                     >
                       <option value="kanji-to-sino">Chữ Hán ➔ Âm Hán-Việt & Ý nghĩa</option>
                       <option value="sino-to-kanji">Âm Hán-Việt & Ý nghĩa ➔ Chữ Hán</option>
@@ -605,14 +605,14 @@ export default function RadicalsPage() {
                   {writeDirection === 'kanji-to-sino' ? (
                     <>
                       <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Hãy gõ Hán Việt hoặc Nghĩa</span>
-                      <div className="w-24 h-24 bg-white border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-900 dark:text-white shadow-inner animate-pulse">
+                      <div className="w-24 h-24 bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-900 dark:text-white shadow-inner animate-pulse">
                         {quizList[currentQuizIndex]?.character.split(' ')[0]}
                       </div>
                     </>
                   ) : (
                     <>
                       <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Hãy gõ Chữ Hán / Bộ thủ</span>
-                      <div className="min-h-24 px-6 py-4 bg-white border border-slate-200 dark:border-slate-800 rounded-3xl flex flex-col items-center justify-center gap-2 shadow-inner">
+                      <div className="min-h-24 px-6 py-4 bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-3xl flex flex-col items-center justify-center gap-2 shadow-inner">
                         <div className="text-2xl font-black text-teal-400 uppercase tracking-wider">
                           {quizList[currentQuizIndex]?.sinoVietnamese}
                         </div>
@@ -635,7 +635,7 @@ export default function RadicalsPage() {
                       onKeyDown={handleKeyDown}
                       disabled={isAnswerChecked}
                       autoFocus
-                      className="w-full bg-[#FCF3CF]/10 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-[#FCF3CF] focus:outline-none focus:border-teal-500 transition-colors placeholder:text-slate-600 dark:text-slate-300 disabled:opacity-70 font-bold"
+                      className="w-full bg-[#FCF3CF]/10 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:border-teal-500 transition-colors placeholder:text-slate-600 dark:text-slate-300 disabled:opacity-70 font-bold"
                     />
                     {currentAnswer && !isAnswerChecked && (
                       <button
@@ -659,7 +659,7 @@ export default function RadicalsPage() {
                       </span>
                       <p className="text-xs font-medium">
                         Đáp án đúng: {writeDirection === 'sino-to-kanji' ? (
-                          <span className="font-extrabold text-base bg-white border border-slate-200 dark:border-slate-800 px-2 py-0.5 rounded text-slate-900 dark:text-white">{quizList[currentQuizIndex]?.character.split(' ')[0]}</span>
+                          <span className="font-extrabold text-base bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 px-2 py-0.5 rounded text-slate-900 dark:text-white">{quizList[currentQuizIndex]?.character.split(' ')[0]}</span>
                         ) : (
                           <span className="font-extrabold">{quizList[currentQuizIndex]?.sinoVietnamese} ({quizList[currentQuizIndex]?.meaning})</span>
                         )}
@@ -682,7 +682,7 @@ export default function RadicalsPage() {
                   ) : (
                     <button
                       onClick={handleNextQuestion}
-                      className="w-full py-3 bg-white border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
+                      className="w-full py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
                     >
                       {currentQuizIndex + 1 < quizList.length ? 'CÂU TIẾP THEO' : 'XEM KẾT QUẢ'}
                     </button>
@@ -710,7 +710,7 @@ export default function RadicalsPage() {
                 {/* Radical Display Card */}
                 <div className="bg-slate-50 dark:bg-slate-950/30 border border-slate-200 dark:border-slate-800 p-8 sm:p-12 rounded-3xl backdrop-blur-xl flex flex-col items-center justify-center gap-4 text-center">
                   <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Hãy chọn Hán Việt và Nghĩa đúng</span>
-                  <div className="w-24 h-24 bg-white border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-900 dark:text-white shadow-inner animate-pulse">
+                  <div className="w-24 h-24 bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-900 dark:text-white shadow-inner animate-pulse">
                     {quizList[currentQuizIndex]?.character.split(' ')[0]}
                   </div>
                 </div>
@@ -728,7 +728,7 @@ export default function RadicalsPage() {
                       if (isOptionCorrect) {
                         btnStyle = "bg-emerald-950/30 border-emerald-500 text-emerald-600 dark:text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.15)]";
                       } else {
-                        btnStyle = "bg-white border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 opacity-60";
+                        btnStyle = "bg-white dark:bg-slate-950/20 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 opacity-60";
                       }
                     }
 
@@ -759,7 +759,7 @@ export default function RadicalsPage() {
                     
                     <button
                       onClick={handleNextQuestion}
-                      className="w-full py-3 bg-white border border-slate-200 dark:border-slate-800 text-slate-250 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
+                      className="w-full py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-xl text-xs font-black transition-all cursor-pointer active:scale-95 shadow-md"
                     >
                       {currentQuizIndex + 1 < quizList.length ? 'CÂU TIẾP THEO' : 'XEM KẾT QUẢ'}
                     </button>
@@ -794,7 +794,7 @@ export default function RadicalsPage() {
                 {/* Question screen */}
                 <div className="bg-gradient-to-b from-[#18112e] to-[#040815] border border-amber-500/20 p-8 sm:p-12 rounded-3xl flex flex-col items-center justify-center gap-4 text-center shadow-[0_0_35px_rgba(245,158,11,0.05)]">
                   <span className="text-[10px] text-amber-500 font-bold uppercase tracking-widest block">Trả lời thật nhanh! ⚡</span>
-                  <div className="w-24 h-24 bg-white border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-900 dark:text-white shadow-inner">
+                  <div className="w-24 h-24 bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-900 dark:text-white shadow-inner">
                     {quizList[currentQuizIndex]?.character.split(' ')[0]}
                   </div>
                 </div>
@@ -805,7 +805,7 @@ export default function RadicalsPage() {
                     <button
                       key={option}
                       onClick={() => handleSpeedrunChoiceSelect(option)}
-                      className="w-full py-4 px-4 bg-white border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-xl border text-xs font-black transition-all cursor-pointer active:scale-95 text-center font-bold"
+                      className="w-full py-4 px-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-xl border text-xs font-black transition-all cursor-pointer active:scale-95 text-center font-bold"
                     >
                       {option}
                     </button>
@@ -852,7 +852,7 @@ export default function RadicalsPage() {
                 <div className="grid grid-cols-2 gap-4 pt-2">
                   <button
                     onClick={() => setQuizState('menu')}
-                    className="py-3 bg-white border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white dark:text-white text-xs font-black rounded-xl cursor-pointer active:scale-95 transition-all"
+                    className="py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white dark:text-white text-xs font-black rounded-xl cursor-pointer active:scale-95 transition-all"
                   >
                     ⚙️ Menu chính
                   </button>
@@ -885,7 +885,7 @@ export default function RadicalsPage() {
 
             {/* Modal Head: character and main meanings */}
             <div className="flex items-center gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-              <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 dark:border-slate-800 flex items-center justify-center text-4xl font-black text-slate-900 dark:text-white shrink-0 shadow-inner">
+              <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-4xl font-black text-slate-900 dark:text-white shrink-0 shadow-inner">
                 {selectedRadical.character.split(' ')[0]}
               </div>
               <div>
@@ -919,7 +919,7 @@ export default function RadicalsPage() {
                     <div 
                       key={ex.char}
                       onClick={() => speakText(ex.char)}
-                      className="p-3 bg-white border border-slate-200 dark:border-slate-800 rounded-xl hover:border-teal-500/20 cursor-pointer active:scale-95 transition-all text-center group/ex flex sm:flex-col justify-between sm:justify-center items-center gap-1.5"
+                      className="p-3 bg-white dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-teal-500/20 cursor-pointer active:scale-95 transition-all text-center group/ex flex sm:flex-col justify-between sm:justify-center items-center gap-1.5"
                       title="Nhấp để nghe âm đọc Nhật"
                     >
                       <div className="flex items-center sm:flex-col gap-2">
@@ -943,7 +943,7 @@ export default function RadicalsPage() {
             <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex justify-end">
               <button
                 onClick={() => setSelectedRadical(null)}
-                className="px-5 py-2.5 bg-white border border-slate-200 dark:border-slate-800 hover:border-slate-750 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white text-xs font-bold rounded-xl cursor-pointer active:scale-95 transition-all"
+                className="px-5 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-750 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white text-xs font-bold rounded-xl cursor-pointer active:scale-95 transition-all"
               >
                 Đóng lại
               </button>

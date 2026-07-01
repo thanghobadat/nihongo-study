@@ -97,7 +97,7 @@ export default function AlphabetReviewPage() {
   
   // Memory Match timer options
   const [memoryUseTimer, setMemoryUseTimer] = useState(false);
-  const [memoryTimeLimit, setMemoryTimeLimit] = useState(30);
+  const [memoryTimeLimit, setMemoryTimeLimit] = useState<number | ''>(30);
   const [memoryActiveTimeLimit, setMemoryActiveTimeLimit] = useState(30);
   const [memoryTimeLeft, setMemoryTimeLeft] = useState(30);
   const memoryTimeLeftRef = useRef<number>(30);
@@ -590,7 +590,7 @@ export default function AlphabetReviewPage() {
     if (!isNext) {
       setMemoryScore(0);
       setMemoryBoardCount(1);
-      setMemoryActiveTimeLimit(memoryTimeLimit);
+      setMemoryActiveTimeLimit(memoryTimeLimit === '' ? 30 : memoryTimeLimit);
     } else {
       setMemoryBoardCount(prev => prev + 1);
     }
@@ -641,13 +641,13 @@ export default function AlphabetReviewPage() {
     setMemoryLoss(false);
 
     if (memoryUseTimer) {
-      let currentLimit = memoryTimeLimit;
+      let currentLimit = memoryTimeLimit === '' ? 30 : memoryTimeLimit;
       if (isNext) {
         currentLimit = parseFloat((memoryActiveTimeLimit * 0.9).toFixed(2));
         setMemoryActiveTimeLimit(currentLimit);
         showToast(`🎉 Thắng lợi! Thời gian vòng sau giảm 10% còn ${currentLimit.toFixed(1)}s`);
       } else {
-        setMemoryActiveTimeLimit(memoryTimeLimit);
+        setMemoryActiveTimeLimit(memoryTimeLimit === '' ? 30 : memoryTimeLimit);
       }
 
       updateMemoryTimeLeft(currentLimit);
@@ -1659,7 +1659,24 @@ export default function AlphabetReviewPage() {
                       min={10}
                       max={120}
                       value={memoryTimeLimit}
-                      onChange={(e) => setMemoryTimeLimit(Math.max(5, parseInt(e.target.value) || 30))}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (val === '') {
+                          setMemoryTimeLimit('');
+                        } else {
+                          setMemoryTimeLimit(parseInt(val) || 0);
+                        }
+                      }}
+                      onBlur={() => {
+                        let cleanVal = 30;
+                        if (memoryTimeLimit !== '') {
+                          const num = typeof memoryTimeLimit === 'number' ? memoryTimeLimit : parseInt(memoryTimeLimit);
+                          if (!isNaN(num)) {
+                            cleanVal = Math.max(10, Math.min(num, 120));
+                          }
+                        }
+                        setMemoryTimeLimit(cleanVal);
+                      }}
                       className="bg-transparent text-slate-700 dark:text-slate-200 text-base md:text-xs w-10 text-center font-bold focus:outline-none"
                       title="Thời gian (giây)"
                     />

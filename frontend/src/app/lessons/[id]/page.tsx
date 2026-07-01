@@ -287,6 +287,20 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [isShuffle, setIsShuffle] = useState<boolean>(false);
   const [shuffledIndices, setShuffledIndices] = useState<number[]>([]);
 
+  // Auto Flashcard Mode States
+  const [isAutoMode, setIsAutoMode] = useState<boolean>(false);
+  const [isAutoActive, setIsAutoActive] = useState<boolean>(false);
+  const [autoCardCount, setAutoCardCount] = useState<number | ''>(10);
+  const [autoDelaySeconds, setAutoDelaySeconds] = useState<number | ''>(5);
+  const [autoSessionList, setAutoSessionList] = useState<any[]>([]);
+  const [autoCurrentIndex, setAutoCurrentIndex] = useState<number>(0);
+  const [autoSecondsLeft, setAutoSecondsLeft] = useState<number>(5);
+  const [isAutoPaused, setIsAutoPaused] = useState<boolean>(false);
+  const [autoResults, setAutoResults] = useState<{ item: any; learned: boolean }[]>([]);
+  const [showAutoSummary, setShowAutoSummary] = useState<boolean>(false);
+  const [autoMarkOnExpiry, setAutoMarkOnExpiry] = useState<boolean>(false);
+  const [autoExpiryLearned, setAutoExpiryLearned] = useState<boolean>(false);
+
   // Mobile navigation drawer toggle
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
@@ -315,7 +329,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   // Luyện tập (Practice) States
   const [practiceMode, setPracticeMode] = useState<'vocab' | 'kanji'>('vocab');
-  const [practiceLimit, setPracticeLimit] = useState<number>(10);
+  const [practiceLimit, setPracticeLimit] = useState<number | ''>(10);
   const [practiceType, setPracticeType] = useState<'write' | 'speedrun'>('write');
   const [useRomaji, setUseRomaji] = useState<boolean>(false);
   const [baseShuffledList, setBaseShuffledList] = useState<any[]>([]);
@@ -812,7 +826,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const handleShufflePractice = () => {
     if (currentSourceList.length === 0) return;
 
-    const newList = generatePracticeList(currentSourceList, practiceLimit);
+    const newList = generatePracticeList(currentSourceList, practiceLimit === '' ? 10 : practiceLimit);
     setBaseShuffledList(newList);
     setPracticeList(newList);
     setPracticeAnswers({});
@@ -853,9 +867,38 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   // Thay đổi giới hạn câu hỏi
   const handleLimitChange = (val: string) => {
-    const num = parseInt(val) || 0;
+    if (val === '') {
+      setPracticeLimit('');
+      return;
+    }
+    const num = parseInt(val);
+    if (isNaN(num)) {
+      setPracticeLimit('');
+      return;
+    }
     const maxVal = practiceMode === 'vocab' ? vocabItems.length : kanjiItems.length;
-    const cleanNum = Math.max(1, Math.min(num, maxVal));
+    setPracticeLimit(num);
+    if (num >= 1 && num <= maxVal && currentSourceList.length > 0) {
+      const newList = generatePracticeList(currentSourceList, num);
+      setBaseShuffledList(newList);
+      setPracticeList(newList);
+      setPracticeAnswers({});
+      setIsGraded(false);
+      setVisibleAnswers({});
+    }
+  };
+
+  const handleLimitBlur = () => {
+    const maxVal = practiceMode === 'vocab' ? vocabItems.length : kanjiItems.length;
+    let cleanNum = 10; // default fallback
+    if (practiceLimit !== '') {
+      const num = typeof practiceLimit === 'number' ? practiceLimit : parseInt(practiceLimit);
+      if (!isNaN(num)) {
+        cleanNum = Math.max(1, Math.min(num, maxVal));
+      }
+    } else {
+      cleanNum = 1;
+    }
     setPracticeLimit(cleanNum);
     if (currentSourceList.length > 0) {
       const newList = generatePracticeList(currentSourceList, cleanNum);
@@ -895,7 +938,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   useEffect(() => {
     if (currentTab === 'practice') {
       if (currentSourceList.length > 0 && baseShuffledList.length === 0) {
-        const newList = generatePracticeList(currentSourceList, practiceLimit);
+        const newList = generatePracticeList(currentSourceList, practiceLimit === '' ? 10 : practiceLimit);
         setBaseShuffledList(newList);
         setPracticeList(newList);
       }
@@ -951,6 +994,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   };
 
   const getActiveCard = () => {
+    if (isAutoActive) {
+      if (autoSessionList.length === 0) return null;
+      return autoSessionList[autoCurrentIndex];
+    }
     if (rangedList.length === 0) return null;
     const index = isShuffle && shuffledIndices.length === rangedList.length
       ? shuffledIndices[currentCardIndex]
@@ -1040,6 +1087,119 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     setTimeout(() => {
       setMessage(null);
     }, 2500);
+  };
+
+  // Khi lật thẻ (thủ công hoặc tự động), reset bộ đếm ngược
+  useEffect(() => {
+    if (isAutoActive) {
+      setAutoSecondsLeft(autoDelaySeconds === '' ? 5 : autoDelaySeconds);
+    }
+  }, [isFlipped, isAutoActive, autoDelaySeconds]);
+
+  // Auto Flashcard Mode Timer Effect
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isAutoActive && !isAutoPaused && !showAutoSummary) {
+      if (!isFlipped || autoMarkOnExpiry) {
+        timer = setInterval(() => {
+          setAutoSecondsLeft((prev) => {
+            if (prev <= 1) {
+              clearInterval(timer);
+              if (!isFlipped) {
+                setIsFlipped(true); // Lật thẻ khi đếm ngược về 0 ở mặt trước
+                return 0;
+              } else {
+                // Đã ở mặt sau và hết giờ -> Tự động đánh giá trạng thái tuỳ chọn của người dùng
+                handleAutoCheck(autoExpiryLearned);
+                return 0;
+              }
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      }
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isAutoActive, isAutoPaused, isFlipped, showAutoSummary, autoMarkOnExpiry, autoExpiryLearned, autoDelaySeconds]);
+
+  // Reset auto flashcard state when changing tab or leaving flashcards
+  useEffect(() => {
+    if (currentTab !== 'flashcards') {
+      setIsAutoActive(false);
+      setIsAutoMode(false);
+      setShowAutoSummary(false);
+    }
+  }, [currentTab]);
+
+  const startAutoSession = () => {
+    if (rangedList.length === 0) {
+      showNotification('Không có thẻ nào phù hợp với bộ lọc hiện tại để học.');
+      return;
+    }
+    
+    // Construct session list with repeats if needed
+    const newList = [];
+    const limit = autoCardCount === '' ? 10 : autoCardCount;
+    for (let i = 0; i < limit; i++) {
+      newList.push(rangedList[i % rangedList.length]);
+    }
+    
+    // If shuffle is active, shuffle the list
+    if (isShuffle) {
+      for (let i = newList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newList[i], newList[j]] = [newList[j], newList[i]];
+      }
+    }
+    
+    setAutoSessionList(newList);
+    setAutoCurrentIndex(0);
+    setAutoSecondsLeft(autoDelaySeconds === '' ? 5 : autoDelaySeconds);
+    setIsAutoPaused(false);
+    setAutoResults([]);
+    setIsFlipped(false);
+    setShowAutoSummary(false);
+    setIsAutoActive(true);
+  };
+
+  const handleAutoCheck = async (learned: boolean) => {
+    const currentItem = autoSessionList[autoCurrentIndex];
+    if (!currentItem) return;
+
+    // Save result to track in summary
+    setAutoResults((prev) => [...prev, { item: currentItem, learned }]);
+
+    // Update study status in database/mock database
+    try {
+      const newStatus = learned ? 'mastered' : 'learning';
+      if (flashcardType === 'vocab') {
+        await handleStatusChange(currentItem.id, newStatus);
+      } else {
+        await handleKanjiStatusChange(currentItem.id, newStatus);
+      }
+    } catch (err) {
+      console.error('Failed to update status in auto flashcard check:', err);
+    }
+
+    // Go to next card or show summary
+    if (autoCurrentIndex < autoSessionList.length - 1) {
+      setIsFlipped(false);
+      setTimeout(() => {
+        setAutoCurrentIndex((prev) => prev + 1);
+        setAutoSecondsLeft(autoDelaySeconds === '' ? 5 : autoDelaySeconds);
+      }, 150);
+    } else {
+      setShowAutoSummary(true);
+    }
+  };
+
+  const exitAutoMode = () => {
+    setIsAutoActive(false);
+    setIsAutoMode(false);
+    setShowAutoSummary(false);
+    setIsFlipped(false);
   };
 
   const handleLevelChange = (selectedLevel: 'N5' | 'N4') => {
@@ -2617,8 +2777,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                     {/* Card Type Selector */}
                     <div className="bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex w-full sm:w-auto">
                       <button
+                        disabled={isAutoActive}
                         onClick={() => setFlashcardType('vocab')}
-                        className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center space-x-1.5 whitespace-nowrap ${
+                        className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center space-x-1.5 whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed ${
                           flashcardType === 'vocab'
                             ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
                             : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
@@ -2628,8 +2789,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                         <span>Từ vựng</span>
                       </button>
                       <button
+                        disabled={isAutoActive}
                         onClick={() => setFlashcardType('kanji')}
-                        className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center space-x-1.5 whitespace-nowrap ${
+                        className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center space-x-1.5 whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed ${
                           flashcardType === 'kanji'
                             ? 'bg-blue-600 text-slate-900 dark:text-white shadow-md'
                             : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
@@ -2643,8 +2805,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                     {/* Dropdown: Lọc trạng thái Flashcard */}
                     <div id="flashcards-dropdown-container" className="relative w-full sm:w-auto">
                       <button
+                        disabled={isAutoActive}
                         onClick={() => setFlashcardDropdownOpen(!flashcardDropdownOpen)}
-                        className="w-full sm:w-auto flex items-center justify-between sm:justify-start space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 dark:text-slate-500 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors"
+                        className="w-full sm:w-auto flex items-center justify-between sm:justify-start space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 dark:text-slate-500 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                       >
                         <div className="flex items-center space-x-2">
                           <span>🔍 Lọc:</span>
@@ -2715,11 +2878,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
                   </div>
 
-                  {/* Shuffle switch */}
+                  {/* Shuffle switch & Auto Mode switch */}
                   <div className="flex items-center space-x-3 self-end md:self-auto">
                     <button
+                      disabled={isAutoActive}
                       onClick={toggleShuffle}
-                      className={`px-4 py-2.5 rounded-xl border text-xs font-bold transition-all duration-300 flex items-center space-x-2 cursor-pointer active:scale-95 ${
+                      className={`px-4 py-2.5 rounded-xl border text-xs font-bold transition-all duration-300 flex items-center space-x-2 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${
                         isShuffle
                           ? 'bg-amber-600/20 border-amber-500 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
                           : 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
@@ -2728,15 +2892,560 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                       <span>🔀</span>
                       <span>Tráo thẻ: {isShuffle ? 'Bật' : 'Tắt'}</span>
                     </button>
+
+                    <button
+                      onClick={() => {
+                        if (isAutoActive) {
+                          exitAutoMode();
+                        } else {
+                          setIsAutoMode(!isAutoMode);
+                        }
+                      }}
+                      className={`px-4 py-2.5 rounded-xl border text-xs font-bold transition-all duration-300 flex items-center space-x-2 cursor-pointer active:scale-95 ${
+                        isAutoActive || isAutoMode
+                          ? 'bg-blue-600/20 border-blue-500 text-blue-600 dark:text-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.15)]'
+                          : 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                      }`}
+                    >
+                      <span>⚡</span>
+                      <span>{isAutoActive ? 'Dừng lật tự động' : 'Tự động lật'}</span>
+                    </button>
                   </div>
                 </div>
 
-                {/* 2. Centered Flipping Card */}
-                {rangedList.length === 0 ? (
+                {/* 2. Main Workspace */}
+                {isAutoMode && !isAutoActive ? (
+                  /* Block A: Config Panel */
+                  <div className="max-w-md mx-auto bg-white border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 p-6 rounded-2xl backdrop-blur-md space-y-6">
+                    <div className="text-center">
+                      <span className="text-4xl">⏱️</span>
+                      <h3 className="text-lg font-black text-slate-800 dark:text-white mt-2">Cấu hình Tự động lật thẻ</h3>
+                      <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                        Học từ vựng rèn phản xạ. Thẻ sẽ tự động lật sau khi đếm ngược kết thúc.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">
+                          Số lượng thẻ cần học:
+                        </label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="100"
+                          value={autoCardCount}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === '') {
+                              setAutoCardCount('');
+                            } else {
+                              setAutoCardCount(parseInt(val) || 0);
+                            }
+                          }}
+                          onBlur={() => {
+                            let cleanVal = 10;
+                            if (autoCardCount !== '') {
+                              const num = typeof autoCardCount === 'number' ? autoCardCount : parseInt(autoCardCount);
+                              if (!isNaN(num)) {
+                                cleanVal = Math.max(1, Math.min(num, 100));
+                              }
+                            } else {
+                              cleanVal = 1;
+                            }
+                            setAutoCardCount(cleanVal);
+                          }}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-white text-sm focus:ring-blue-500 font-sans"
+                        />
+                        {rangedList.length < (autoCardCount === '' ? 0 : autoCardCount) && rangedList.length > 0 && (
+                          <p className="text-[10px] text-amber-500 mt-1.5 flex items-start gap-1 font-sans">
+                            <span>⚠️</span>
+                            <span>Số từ vựng ({rangedList.length}) ít hơn số thẻ yêu cầu. Hệ thống sẽ lặp lại danh sách từ.</span>
+                          </p>
+                        )}
+                      </div>
+                      
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">
+                          Thời gian tự động lật (giây):
+                        </label>
+                        <input
+                          type="number"
+                          min="2"
+                          max="60"
+                          value={autoDelaySeconds}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === '') {
+                              setAutoDelaySeconds('');
+                            } else {
+                              setAutoDelaySeconds(parseInt(val) || 0);
+                            }
+                          }}
+                          onBlur={() => {
+                            let cleanVal = 5;
+                            if (autoDelaySeconds !== '') {
+                              const num = typeof autoDelaySeconds === 'number' ? autoDelaySeconds : parseInt(autoDelaySeconds);
+                              if (!isNaN(num)) {
+                                cleanVal = Math.max(2, Math.min(num, 60));
+                              }
+                            } else {
+                              cleanVal = 2; // Default to 2 if left empty, or fallback to a reasonable min
+                            }
+                            setAutoDelaySeconds(cleanVal);
+                          }}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-white text-sm focus:ring-blue-500 font-sans"
+                        />
+                      </div>
+
+                      {/* Tùy chọn tự động đánh giá */}
+                      <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                        <label className="flex items-center space-x-3 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-950 transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={autoMarkOnExpiry}
+                            onChange={(e) => setAutoMarkOnExpiry(e.target.checked)}
+                            className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                          />
+                          <div className="flex flex-col">
+                            <span className="text-xs font-bold text-slate-700 dark:text-slate-350">
+                              Tự động đánh giá nếu hết giờ ở mặt sau
+                            </span>
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500">
+                              Tự động chọn trạng thái khi bộ đếm ngược ở mặt sau chạy về 0
+                            </span>
+                          </div>
+                        </label>
+
+                        {autoMarkOnExpiry && (
+                          <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-xl gap-4 animate-fade-in">
+                            <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Trạng thái tự động chọn:</span>
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => setAutoExpiryLearned(false)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
+                                  !autoExpiryLearned
+                                    ? 'bg-red-50 border-red-200 text-red-600 dark:bg-red-950/30 dark:border-red-900/50 dark:text-red-400'
+                                    : 'bg-white border-slate-200 text-slate-400 hover:text-slate-600 dark:bg-slate-900 dark:border-slate-800'
+                                }`}
+                              >
+                                🔴 Chưa thuộc
+                              </button>
+                              <button
+                                onClick={() => setAutoExpiryLearned(true)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
+                                  autoExpiryLearned
+                                    ? 'bg-green-50 border-green-200 text-green-600 dark:bg-green-950/30 dark:border-green-900/50 dark:text-green-400'
+                                    : 'bg-white border-slate-200 text-slate-400 hover:text-slate-600 dark:bg-slate-900 dark:border-slate-800'
+                                }`}
+                              >
+                                🟢 Đã thuộc
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setIsAutoMode(false)}
+                        className="flex-1 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-950 cursor-pointer font-sans"
+                      >
+                        Hủy bỏ
+                      </button>
+                      <button
+                        onClick={startAutoSession}
+                        className="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-xs font-bold text-slate-900 dark:text-white cursor-pointer shadow-md font-sans"
+                      >
+                        Bắt đầu học 🚀
+                      </button>
+                    </div>
+                  </div>
+                ) : isAutoActive ? (
+                  showAutoSummary ? (
+                    /* Block C: Summary Dashboard */
+                    <div className="max-w-2xl mx-auto bg-white border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 p-6 rounded-2xl backdrop-blur-md space-y-6">
+                      <div className="text-center space-y-2">
+                        <span className="text-5xl">🏆</span>
+                        <h3 className="text-xl font-black text-slate-800 dark:text-white mt-2">Tổng Kết Phiên Học</h3>
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-400 font-sans">
+                          Đã thuộc: <span className="text-emerald-600 dark:text-emerald-400 text-lg font-black">{autoResults.filter(r => r.learned).length}</span> / {autoResults.length} từ ({Math.round((autoResults.filter(r => r.learned).length / autoResults.length) * 100)}%)
+                        </p>
+                        
+                        {/* Progress Bar */}
+                        <div className="w-full bg-slate-100 dark:bg-slate-950 rounded-full h-3 overflow-hidden border border-slate-200 dark:border-slate-800">
+                          <div 
+                            className="bg-gradient-to-r from-emerald-400 to-teal-500 h-full transition-all duration-500" 
+                            style={{ width: `${(autoResults.filter(r => r.learned).length / autoResults.length) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Vocabulary List Table */}
+                      <div className="space-y-4 max-h-[350px] overflow-y-auto pr-1">
+                        <table className="w-full border-collapse text-left text-xs font-sans">
+                          <thead>
+                            <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-400 uppercase font-black tracking-wider">
+                              <th className="py-2 px-2">Từ vựng</th>
+                              <th className="py-2 px-2">Phiên âm</th>
+                              <th className="py-2 px-2">Nghĩa Việt</th>
+                              <th className="py-2 px-2 text-right">Đánh giá</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {/* Unlearned words (Chưa thuộc) - Shown on Top */}
+                            {autoResults.filter(r => !r.learned).map((res, index) => {
+                              const isVocab = flashcardType === 'vocab';
+                              const title = isVocab 
+                                ? (showKanjiInVocab ? getKanjiForm(res.item.hiragana, kanjiItems) : res.item.hiragana)
+                                : res.item.character;
+                              const subTitle = isVocab 
+                                ? (showKanjiInVocab ? `(${res.item.hiragana})` : '')
+                                : res.item.sino_vietnamese;
+                              const reading = isVocab ? res.item.romaji : (res.item.onyomi || res.item.kunyomi || '-');
+                              const meaning = res.item.vietnamese_meaning;
+                              
+                              return (
+                                <tr key={`unlearned-${index}`} className="border-b border-slate-100 dark:border-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-900/20 text-slate-700 dark:text-slate-350">
+                                  <td className="py-2 px-2 font-bold font-serif text-sm">
+                                    <span>{title}</span>
+                                    {subTitle && <span className="text-[10px] text-slate-400 ml-1 font-normal font-sans">{subTitle}</span>}
+                                  </td>
+                                  <td className="py-2 px-2 font-mono text-[10px] text-slate-400">{reading}</td>
+                                  <td className="py-2 px-2 font-medium">{meaning}</td>
+                                  <td className="py-2 px-2 text-right">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400">
+                                      🔴 Chưa thuộc
+                                    </span>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+
+                            {/* Learned words (Đã thuộc) - Shown below */}
+                            {autoResults.filter(r => r.learned).map((res, index) => {
+                              const isVocab = flashcardType === 'vocab';
+                              const title = isVocab 
+                                ? (showKanjiInVocab ? getKanjiForm(res.item.hiragana, kanjiItems) : res.item.hiragana)
+                                : res.item.character;
+                              const subTitle = isVocab 
+                                ? (showKanjiInVocab ? `(${res.item.hiragana})` : '')
+                                : res.item.sino_vietnamese;
+                              const reading = isVocab ? res.item.romaji : (res.item.onyomi || res.item.kunyomi || '-');
+                              const meaning = res.item.vietnamese_meaning;
+                              
+                              return (
+                                <tr key={`learned-${index}`} className="border-b border-slate-100 dark:border-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-900/20 text-slate-700 dark:text-slate-355">
+                                  <td className="py-2 px-2 font-bold font-serif text-sm">
+                                    <span>{title}</span>
+                                    {subTitle && <span className="text-[10px] text-slate-400 ml-1 font-normal font-sans">{subTitle}</span>}
+                                  </td>
+                                  <td className="py-2 px-2 font-mono text-[10px] text-slate-400">{reading}</td>
+                                  <td className="py-2 px-2 font-medium">{meaning}</td>
+                                  <td className="py-2 px-2 text-right">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400">
+                                      🟢 Đã thuộc
+                                    </span>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex gap-3">
+                        <button
+                          onClick={exitAutoMode}
+                          className="flex-1 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-950 cursor-pointer font-sans"
+                        >
+                          Thoát
+                        </button>
+                        <button
+                          onClick={startAutoSession}
+                          className="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-xs font-bold text-slate-900 dark:text-white cursor-pointer shadow-md font-sans"
+                        >
+                          🔄 Học lại lượt này
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Block B: Active Learning Card */
+                    <div className="flex flex-col items-center justify-center py-6 w-full">
+                      {/* The 3D Flip Card */}
+                      <div 
+                        className="w-full max-w-xl aspect-[1.6/1] md:aspect-[1.8/1] cursor-pointer relative" 
+                        style={{ perspective: '1200px' }}
+                        onClick={() => setIsFlipped(!isFlipped)}
+                      >
+                        <div 
+                          className="relative w-full h-full duration-500 transition-transform" 
+                          style={{ 
+                            transformStyle: 'preserve-3d', 
+                            transform: isFlipped ? 'rotateY(180deg)' : 'none' 
+                          }}
+                        >
+                          {/* FRONT FACE (Clean centered word) */}
+                          <div 
+                            className="absolute inset-0 w-full h-full rounded-[32px] border border-blue-200 dark:border-blue-500/20 bg-white/95 dark:bg-gradient-to-b dark:from-[#0e162e] dark:to-[#080d1a] backdrop-blur-xl flex flex-col justify-between p-6 sm:p-8 text-center"
+                            style={{ 
+                              backfaceVisibility: 'hidden',
+                              WebkitBackfaceVisibility: 'hidden',
+                              boxShadow: '0 0 35px rgba(59, 130, 246, 0.1)'
+                            }}
+                          >
+                            <div className="flex justify-between items-center text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">
+                              <span>MẶT TRƯỚC</span>
+                              <span>{flashcardType === 'vocab' ? 'Từ vựng (Tự động)' : 'Chữ Hán (Tự động)'}</span>
+                            </div>
+
+                            <div className="my-auto py-2">
+                              {flashcardType === 'vocab' ? (
+                                <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-wider select-none">
+                                  {showKanjiInVocab
+                                    ? getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems)
+                                    : (activeCard as VocabItem)?.hiragana}
+                                </h3>
+                              ) : (
+                                <h3 className="text-5xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 select-none">
+                                  {(activeCard as KanjiItem)?.character}
+                                </h3>
+                              )}
+                            </div>
+
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold tracking-wide uppercase select-none animate-pulse">
+                              Click vào thẻ để lật xem đáp án 🔄
+                            </span>
+                          </div>
+
+                          {/* BACK FACE (All details display) */}
+                          <div 
+                            className="absolute inset-0 w-full h-full rounded-[32px] border border-emerald-200 dark:border-emerald-500/20 bg-white/95 dark:bg-gradient-to-b dark:from-[#0e162e] dark:to-[#080d1a] backdrop-blur-xl flex flex-col justify-between p-6 sm:p-8 text-left"
+                            style={{ 
+                              backfaceVisibility: 'hidden',
+                              WebkitBackfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)',
+                              boxShadow: '0 0 35px rgba(16, 185, 129, 0.1)'
+                            }}
+                          >
+                            {/* Vocab Back Face details */}
+                            {flashcardType === 'vocab' ? (
+                              <div className="h-full flex flex-col justify-between overflow-y-auto space-y-2.5 pr-1 select-none font-sans">
+                                <div className="flex justify-between items-start border-b border-slate-200 dark:border-slate-800/40 pb-2">
+                                  <div>
+                                    <div className="flex items-baseline flex-wrap gap-2">
+                                      {showKanjiInVocab ? (
+                                        <>
+                                          <span className="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-wide select-none">
+                                            {getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems)}
+                                          </span>
+                                          <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
+                                            ({(activeCard as VocabItem)?.hiragana})
+                                          </span>
+                                        </>
+                                      ) : (
+                                        <PitchAccentDisplay
+                                          kana={(activeCard as VocabItem)?.hiragana}
+                                          accent={(activeCard as VocabItem)?.pitch_accent || 0}
+                                          size="lg"
+                                        />
+                                      )}
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          playAudioWithFallback(getKanjiForm((activeCard as VocabItem)?.hiragana, kanjiItems), (activeCard as VocabItem)?.hiragana);
+                                        }}
+                                        className="p-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 transition-all cursor-pointer active:scale-90 self-center"
+                                        title="Nghe phát âm bản xứ"
+                                      >
+                                        🔊
+                                      </button>
+                                    </div>
+                                    <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">{(activeCard as VocabItem)?.romaji}</p>
+                                  </div>
+                                  <span className="px-2 py-0.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase rounded text-xs">
+                                    {(activeCard as VocabItem)?.word_type}
+                                  </span>
+                                </div>
+
+                                <div className="flex-1 space-y-2">
+                                  <p className="text-md font-bold text-slate-800 dark:text-slate-100">
+                                    <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-black mr-2">Nghĩa Việt:</span>
+                                    <span className="text-emerald-600 dark:text-emerald-400 text-lg font-black">{(activeCard as VocabItem)?.vietnamese_meaning}</span>
+                                  </p>
+                                  
+                                  {(activeCard as VocabItem)?.mnemonic_tip && (
+                                    <p className="text-[11px] text-slate-400 dark:text-slate-500 leading-normal bg-slate-50 dark:bg-slate-950/50 p-2 rounded-lg border border-slate-200 dark:border-slate-800/50 flex items-start gap-1">
+                                      <span>💡</span>
+                                      <span>{(activeCard as VocabItem)?.mnemonic_tip}</span>
+                                    </p>
+                                  )}
+
+                                  {(activeCard as VocabItem)?.japanese_example && (
+                                    <div className="text-xs pt-1 border-t border-slate-200 dark:border-slate-800/20">
+                                      <span className="text-[9px] text-slate-400 dark:text-slate-500 font-black uppercase block mb-0.5">Ví dụ:</span>
+                                      <p className="text-slate-700 dark:text-slate-200 font-serif leading-relaxed">{(activeCard as VocabItem)?.japanese_example}</p>
+                                      <p className="text-slate-400 dark:text-slate-500 italic">{(activeCard as VocabItem)?.example_meaning}</p>
+                                    </div>
+                                  )}
+                                </div>
+
+                                <div className="text-[9px] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-widest text-center mt-2">
+                                  Click để lật lại mặt trước 🔄
+                                </div>
+                              </div>
+                            ) : (
+                              /* Kanji Back Face details */
+                              <div className="h-full flex flex-col justify-between overflow-y-auto space-y-2.5 pr-1 select-none font-sans">
+                                <div className="flex justify-between items-start border-b border-slate-200 dark:border-slate-800/40 pb-2">
+                                  <div className="flex items-center gap-3">
+                                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 dark:border-slate-800 flex items-center justify-center text-2xl font-black text-slate-900 dark:text-white shrink-0">
+                                      {(activeCard as KanjiItem)?.character}
+                                    </div>
+                                    <div>
+                                      <h4 className="text-lg font-black text-emerald-600 dark:text-emerald-400 uppercase">{(activeCard as KanjiItem)?.sino_vietnamese}</h4>
+                                      <p className="text-xs text-slate-400 dark:text-slate-500 font-bold">{(activeCard as KanjiItem)?.vietnamese_meaning}</p>
+                                    </div>
+                                  </div>
+                                  <span className="px-2 py-0.5 bg-white border border-slate-200 dark:border-slate-800 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase rounded">
+                                    {(activeCard as KanjiItem)?.stroke_count} nét
+                                  </span>
+                                </div>
+
+                                <div className="flex-1 space-y-2 text-xs">
+                                  <div className="grid grid-cols-2 gap-2 p-1.5 bg-slate-50 dark:bg-slate-950/40 rounded-lg border border-slate-200 dark:border-slate-800/30">
+                                    <div>
+                                      <span className="block text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase">Onyomi:</span>
+                                      <span className="font-semibold text-slate-600 dark:text-slate-300 font-sans">{(activeCard as KanjiItem)?.onyomi || '-'}</span>
+                                    </div>
+                                    <div>
+                                      <span className="block text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase">Kunyomi:</span>
+                                      <span className="font-semibold text-slate-600 dark:text-slate-300 font-sans">{(activeCard as KanjiItem)?.kunyomi || '-'}</span>
+                                    </div>
+                                  </div>
+
+                                  {showRadicals && (
+                                    <div className="p-2 bg-teal-950/20 border border-teal-900/35 rounded-lg flex items-start gap-1">
+                                      <span className="text-xs shrink-0">🉐</span>
+                                      <div>
+                                        <span className="block text-[8px] text-teal-400 font-bold uppercase">Bộ thủ cấu thành:</span>
+                                        <span className="text-[10px] text-slate-700 dark:text-slate-200">
+                                          {getRadicalsString((activeCard as KanjiItem)?.character)}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {(activeCard as KanjiItem)?.mnemonic_tip && (
+                                    <p className="text-[11px] text-slate-400 dark:text-slate-500 leading-normal bg-slate-50 dark:bg-slate-950/50 p-2 rounded-lg border border-slate-200 dark:border-slate-800/50 flex items-start gap-1">
+                                      <span>💡</span>
+                                      <span>{(activeCard as KanjiItem)?.mnemonic_tip}</span>
+                                    </p>
+                                  )}
+
+                                  {(activeCard as KanjiItem)?.compounds && (
+                                    <div className="text-[11px] leading-relaxed">
+                                      <span className="text-[8px] text-slate-400 dark:text-slate-500 font-black uppercase block">Từ ghép:</span>
+                                      <p className="text-slate-600 dark:text-slate-300 whitespace-pre-line font-serif">{(activeCard as KanjiItem)?.compounds}</p>
+                                    </div>
+                                  )}
+                                </div>
+
+                                <div className="text-[9px] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-widest text-center mt-2">
+                                  Click để lật lại mặt trước 🔄
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Auto Mode Control Buttons */}
+                      <div className="flex flex-col items-center space-y-4 w-full max-w-xl mt-6">
+                        {!isFlipped ? (
+                          <div className="flex items-center justify-between w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-2xl">
+                            <div className="flex items-center space-x-2 text-xs font-bold text-slate-600 dark:text-slate-350">
+                              <span>⏱️ Tự động lật sau:</span>
+                              <span className="text-blue-600 dark:text-blue-400 font-mono text-sm">{autoSecondsLeft}s</span>
+                            </div>
+                            <div className="flex space-x-2">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsAutoPaused(!isAutoPaused);
+                                }}
+                                className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-950 cursor-pointer transition-colors"
+                              >
+                                {isAutoPaused ? '▶️ Tiếp tục' : '⏸️ Tạm dừng'}
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsFlipped(true);
+                                }}
+                                className="px-3.5 py-1.5 rounded-xl bg-blue-600 text-xs font-bold text-slate-900 dark:text-white hover:bg-blue-700 cursor-pointer shadow-md transition-colors"
+                              >
+                                🔄 Lật ngay
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center space-y-3 w-full animate-fade-in">
+                            {autoMarkOnExpiry && (
+                              <div className="text-xs font-bold bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl flex items-center space-x-1.5 animate-pulse">
+                                <span>⏱️ Tự động chọn </span>
+                                <span className={autoExpiryLearned ? "text-emerald-600 dark:text-emerald-400 font-extrabold" : "text-red-600 dark:text-red-400 font-extrabold"}>
+                                  {autoExpiryLearned ? "🟢 Đã thuộc" : "🔴 Chưa thuộc"}
+                                </span>
+                                <span> sau:</span>
+                                <span className="font-mono text-sm text-blue-600 dark:text-blue-400">{autoSecondsLeft}s</span>
+                              </div>
+                            )}
+                            <div className="flex gap-4 w-full">
+                              <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAutoCheck(false);
+                                }}
+                                className="flex-1 py-3 bg-red-50 hover:bg-red-100/70 border border-red-200 text-red-600 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 text-xs font-bold tracking-wider uppercase rounded-2xl shadow-sm cursor-pointer transition-all active:scale-95 flex items-center justify-center space-x-2"
+                              >
+                                <span>🔴</span>
+                                <span>Chưa thuộc</span>
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAutoCheck(true);
+                                }}
+                                className="flex-1 py-3 bg-emerald-50 hover:bg-emerald-100/70 border border-emerald-200 text-emerald-600 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400 text-xs font-bold tracking-wider uppercase rounded-2xl shadow-sm cursor-pointer transition-all active:scale-95 flex items-center justify-center space-x-2"
+                              >
+                                <span>🟢</span>
+                                <span>Đã thuộc</span>
+                              </button>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex justify-between items-center w-full text-xs font-bold text-slate-400 dark:text-slate-500 mt-2 px-1">
+                          <span>Tiến trình: Thẻ {autoCurrentIndex + 1} / {autoSessionList.length}</span>
+                          <button
+                            onClick={exitAutoMode}
+                            className="text-slate-400 hover:text-red-500 transition-colors cursor-pointer"
+                          >
+                            🚪 Thoát học tự động
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                ) : rangedList.length === 0 ? (
                   <div className="text-center py-20 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
                     📭 Không có thẻ nào phù hợp với bộ lọc hiện tại. Vui lòng chọn lại bộ lọc trạng thái.
                   </div>
                 ) : (
+                  // Block D: Normal Flashcard UI
                   <div className="flex flex-col items-center justify-center py-6">
                     {/* The 3D Flip Card */}
                     <div 
@@ -2947,7 +3656,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           e.stopPropagation();
                           setIsFlipped(!isFlipped);
                         }}
-                        className="px-6 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white hover:border-slate-200 dark:border-slate-800 transition-all duration-300 cursor-pointer active:scale-95 flex items-center space-x-2"
+                        className="px-6 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:white dark:text-white hover:border-slate-200 dark:border-slate-800 transition-all duration-300 cursor-pointer active:scale-95 flex items-center space-x-2"
                       >
                         <span>🔄</span>
                         <span>Lật thẻ</span>
@@ -3469,6 +4178,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               type="number"
                               value={practiceLimit}
                               onChange={(e) => handleLimitChange(e.target.value)}
+                              onBlur={handleLimitBlur}
                               className="w-12 bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-base md:text-xs font-extrabold text-slate-900 dark:text-white py-1 focus:outline-none focus:border-blue-500"
                             />
                             <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">
@@ -3793,7 +4503,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                             <button
                               onClick={() => {
                                 if (currentSourceList.length > 0) {
-                                  const newList = generatePracticeList(currentSourceList, practiceLimit);
+                                  const newList = generatePracticeList(currentSourceList, practiceLimit === '' ? 10 : practiceLimit);
                                   setBaseShuffledList(newList);
                                   setPracticeList(newList);
                                 }
