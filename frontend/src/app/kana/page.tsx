@@ -25,7 +25,7 @@ export default function AlphabetReviewPage() {
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'charts' | 'speedrun' | 'memory' | 'writing' | 'combined'>('charts');
+  const [activeTab, setActiveTab] = useState<'charts' | 'speedrun' | 'reaction' | 'writing' | 'combined'>('charts');
   
   // States for interactive popover details
   const [selectedKana, setSelectedKana] = useState<KanaItem | null>(null);
@@ -80,33 +80,24 @@ export default function AlphabetReviewPage() {
     setSpeedrunCorrectCount(count);
   };
 
-  // Game 2 (Memory Match / Lật thẻ) States
-  const [memoryCards, setMemoryCards] = useState<Array<{ id: string; val: string; matchVal: string; isFlipped: boolean; isMatched: boolean }>>([]);
-  const [selectedCards, setSelectedCards] = useState<number[]>([]);
-  const [memoryStartIdx, setMemoryStartIdx] = useState(0);
-  const [memoryEndIdx, setMemoryEndIdx] = useState(45);
-  const [memoryFlips, setMemoryFlips] = useState(0);
-  const [memoryMatches, setMemoryMatches] = useState(0);
-  const [memoryWin, setMemoryWin] = useState(false);
-  const [memoryScore, setMemoryScore] = useState(0);
-  const [memoryBoardCount, setMemoryBoardCount] = useState(1);
-  const [hiraMemoryHighScore, setHiraMemoryHighScore] = useState<number>(0);
-  const [kataMemoryHighScore, setKataMemoryHighScore] = useState<number>(0);
-  const [hiraMemoryMaxBoard, setHiraMemoryMaxBoard] = useState<number>(0);
-  const [kataMemoryMaxBoard, setKataMemoryMaxBoard] = useState<number>(0);
+  // Game 2 (Reaction Training / Luyện phản xạ) States
+  const [reactionTimeLimit, setReactionTimeLimit] = useState<number | ''>(3);
+  const [reactionResultLimit, setReactionResultLimit] = useState<number | ''>(2);
+  const [reactionLimit, setReactionLimit] = useState<number | ''>(10);
+  const [reactionDifficulty, setReactionDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
+  const [reactionStarted, setReactionStarted] = useState(false);
+  const [reactionCurrentWord, setReactionCurrentWord] = useState<CombinedWord | null>(null);
+  const [reactionStatus, setReactionStatus] = useState<'reading' | 'result' | 'finished'>('reading');
+  const [reactionCurrentIndex, setReactionCurrentIndex] = useState(0);
+  const [reactionList, setReactionList] = useState<CombinedWord[]>([]);
   
-  // Memory Match timer options
-  const [memoryUseTimer, setMemoryUseTimer] = useState(false);
-  const [memoryTimeLimit, setMemoryTimeLimit] = useState<number | ''>(30);
-  const [memoryActiveTimeLimit, setMemoryActiveTimeLimit] = useState(30);
-  const [memoryTimeLeft, setMemoryTimeLeft] = useState(30);
-  const memoryTimeLeftRef = useRef<number>(30);
-  const [memoryLoss, setMemoryLoss] = useState(false);
-  const memoryTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [reactionTimeLeft, setReactionTimeLeft] = useState(3);
+  const reactionTimeLeftRef = useRef<number>(3);
+  const reactionTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const updateMemoryTimeLeft = (time: number) => {
-    memoryTimeLeftRef.current = time;
-    setMemoryTimeLeft(time);
+  const updateReactionTimeLeft = (time: number) => {
+    reactionTimeLeftRef.current = time;
+    setReactionTimeLeft(time);
   };
 
   // Canvas Luyện viết states
@@ -337,18 +328,10 @@ export default function AlphabetReviewPage() {
         const hMap: Record<number, string> = {};
         let maxHiraHighScore = 0;
         let maxHiraCorrect = 0;
-        let maxHiraMemoryHighScore = 0;
-        let maxHiraMemoryMaxBoard = 0;
         if (Array.isArray(hProgress)) {
           hProgress.forEach(p => { 
             const itemId = Number(p.item_id);
-            if (itemId >= 400000) {
-              const val = itemId - 400000;
-              if (val > maxHiraMemoryMaxBoard) maxHiraMemoryMaxBoard = val;
-            } else if (itemId >= 300000) {
-              const val = itemId - 300000;
-              if (val > maxHiraMemoryHighScore) maxHiraMemoryHighScore = val;
-            } else if (itemId >= 200000) {
+            if (itemId >= 200000) {
               const val = itemId - 200000;
               if (val > maxHiraCorrect) maxHiraCorrect = val;
             } else if (itemId >= 100000) {
@@ -361,25 +344,15 @@ export default function AlphabetReviewPage() {
         }
         setHiraHighScore(maxHiraHighScore);
         setHiraMaxCorrect(maxHiraCorrect);
-        setHiraMemoryHighScore(maxHiraMemoryHighScore);
-        setHiraMemoryMaxBoard(maxHiraMemoryMaxBoard);
         setHiraganaProgress(hMap);
 
         const kMap: Record<number, string> = {};
         let maxKataHighScore = 0;
         let maxKataCorrect = 0;
-        let maxKataMemoryHighScore = 0;
-        let maxKataMemoryMaxBoard = 0;
         if (Array.isArray(kProgress)) {
           kProgress.forEach(p => { 
             const itemId = Number(p.item_id);
-            if (itemId >= 400000) {
-              const val = itemId - 400000;
-              if (val > maxKataMemoryMaxBoard) maxKataMemoryMaxBoard = val;
-            } else if (itemId >= 300000) {
-              const val = itemId - 300000;
-              if (val > maxKataMemoryHighScore) maxKataMemoryHighScore = val;
-            } else if (itemId >= 200000) {
+            if (itemId >= 200000) {
               const val = itemId - 200000;
               if (val > maxKataCorrect) maxKataCorrect = val;
             } else if (itemId >= 100000) {
@@ -392,8 +365,6 @@ export default function AlphabetReviewPage() {
         }
         setKataHighScore(maxKataHighScore);
         setKataMaxCorrect(maxKataCorrect);
-        setKataMemoryHighScore(maxKataMemoryHighScore);
-        setKataMemoryMaxBoard(maxKataMemoryMaxBoard);
         setKatakanaProgress(kMap);
       } catch (e) {
         console.error("Failed to load progress:", e);
@@ -581,187 +552,86 @@ export default function AlphabetReviewPage() {
     }
   };
 
-  // 3. MEMORY GAME LOGIC
-  const startMemoryGame = (nextLevel?: boolean | React.MouseEvent) => {
-    if (memoryTimerRef.current) clearInterval(memoryTimerRef.current);
+  // 3. REACTION TRAINING GAME LOGIC
+  const startReactionGame = () => {
+    if (reactionTimerRef.current) clearInterval(reactionTimerRef.current);
 
-    const isNext = typeof nextLevel === 'boolean' ? nextLevel : false;
-
-    if (!isNext) {
-      setMemoryScore(0);
-      setMemoryBoardCount(1);
-      setMemoryActiveTimeLimit(memoryTimeLimit === '' ? 30 : memoryTimeLimit);
-    } else {
-      setMemoryBoardCount(prev => prev + 1);
+    const filtered = combinedWordsData.filter(w => w.difficulty === reactionDifficulty);
+    if (filtered.length === 0) {
+      showToast("Không tìm thấy dữ liệu từ phù hợp!");
+      return;
     }
+    const limitNum = reactionLimit === '' ? 10 : Number(reactionLimit);
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5).slice(0, limitNum);
 
-    const fullList = gameAlphabet === 'hiragana' ? hiraganaData : katakanaData;
-    const activeList = fullList.slice(memoryStartIdx, memoryEndIdx + 1);
-    
-    // Choose 8 characters from activeList, repeating if activeList.length < 8
-    const selectedChars: KanaItem[] = [];
-    if (activeList.length >= 8) {
-      const shuffled = [...activeList].sort(() => Math.random() - 0.5).slice(0, 8);
-      selectedChars.push(...shuffled);
+    setReactionList(shuffled);
+    setReactionCurrentIndex(0);
+    setReactionStarted(true);
+    setReactionStatus('reading');
+    setReactionCurrentWord(shuffled[0]);
+
+    const limit = reactionTimeLimit === '' ? 3 : Number(reactionTimeLimit);
+    updateReactionTimeLeft(limit);
+
+    startReactionTimer(shuffled, 0, 'reading', limit);
+  };
+
+  const stopReactionGame = () => {
+    setReactionStarted(false);
+    if (reactionTimerRef.current) clearInterval(reactionTimerRef.current);
+  };
+
+  const nextReactionQuestion = () => {
+    if (reactionTimerRef.current) clearInterval(reactionTimerRef.current);
+
+    const nextIndex = reactionCurrentIndex + 1;
+    if (nextIndex < reactionList.length) {
+      setReactionCurrentIndex(nextIndex);
+      setReactionCurrentWord(reactionList[nextIndex]);
+      setReactionStatus('reading');
+      const readLimit = reactionTimeLimit === '' ? 3 : Number(reactionTimeLimit);
+      startReactionTimer(reactionList, nextIndex, 'reading', readLimit);
     } else {
-      // Repeat the characters in activeList to reach exactly 8 items
-      for (let i = 0; i < 8; i++) {
-        const item = activeList[i % activeList.length];
-        selectedChars.push(item);
-      }
-      // Shuffle selectedChars so their order on board is random
-      selectedChars.sort(() => Math.random() - 0.5);
-    }
-    
-    // Create card pairs (one Japanese char, one Romaji)
-    const cards: typeof memoryCards = [];
-    selectedChars.forEach((item, index) => {
-      cards.push({
-        id: `jp-${index}`,
-        val: item.char,
-        matchVal: item.romaji,
-        isFlipped: false,
-        isMatched: false
-      });
-      cards.push({
-        id: `rom-${index}`,
-        val: item.romaji,
-        matchVal: item.char,
-        isFlipped: false,
-        isMatched: false
-      });
-    });
-
-    // Shuffle the final cards list
-    setMemoryCards(cards.sort(() => Math.random() - 0.5));
-    setSelectedCards([]);
-    setMemoryFlips(0);
-    setMemoryMatches(0);
-    setMemoryWin(false);
-    setMemoryLoss(false);
-
-    if (memoryUseTimer) {
-      let currentLimit = memoryTimeLimit === '' ? 30 : memoryTimeLimit;
-      if (isNext) {
-        currentLimit = parseFloat((memoryActiveTimeLimit * 0.9).toFixed(2));
-        setMemoryActiveTimeLimit(currentLimit);
-        showToast(`🎉 Thắng lợi! Thời gian vòng sau giảm 10% còn ${currentLimit.toFixed(1)}s`);
-      } else {
-        setMemoryActiveTimeLimit(memoryTimeLimit === '' ? 30 : memoryTimeLimit);
-      }
-
-      updateMemoryTimeLeft(currentLimit);
-      
-      memoryTimerRef.current = setInterval(() => {
-        const prev = memoryTimeLeftRef.current;
-        if (prev <= 0.1) {
-          if (memoryTimerRef.current) clearInterval(memoryTimerRef.current);
-          setMemoryLoss(true);
-          updateMemoryTimeLeft(0);
-        } else {
-          updateMemoryTimeLeft(parseFloat((prev - 0.1).toFixed(2)));
-        }
-      }, 100);
+      setReactionStatus('finished');
+      setReactionStarted(false);
     }
   };
 
-  const handleCardClick = (idx: number) => {
-    if (selectedCards.length >= 2 || memoryCards[idx].isFlipped || memoryCards[idx].isMatched || memoryLoss || memoryWin) return;
+  const startReactionTimer = (list: CombinedWord[], index: number, status: 'reading' | 'result', initialTime: number) => {
+    if (reactionTimerRef.current) clearInterval(reactionTimerRef.current);
 
-    // Flip card
-    const updated = [...memoryCards];
-    updated[idx].isFlipped = true;
-    setMemoryCards(updated);
+    updateReactionTimeLeft(initialTime);
 
-    const newSelected = [...selectedCards, idx];
-    setSelectedCards(newSelected);
+    reactionTimerRef.current = setInterval(() => {
+      const prev = reactionTimeLeftRef.current;
+      if (prev <= 0.1) {
+        if (reactionTimerRef.current) clearInterval(reactionTimerRef.current);
+        updateReactionTimeLeft(0);
 
-    if (newSelected.length === 2) {
-      setMemoryFlips(prev => prev + 1);
-      const card1 = updated[newSelected[0]];
-      const card2 = updated[newSelected[1]];
+        if (status === 'reading') {
+          setReactionStatus('result');
+          const currentWord = list[index];
+          if (currentWord) speak(currentWord.word);
 
-      // Match check
-      if (card1.val === card2.matchVal || card1.matchVal === card2.val) {
-        // Matched!
-        setTimeout(() => {
-          const matchUpdated = [...memoryCards];
-          matchUpdated[newSelected[0]].isMatched = true;
-          matchUpdated[newSelected[1]].isMatched = true;
-          setMemoryCards(matchUpdated);
-          setSelectedCards([]);
-          
-          // TTS Speak the matched letter
-          const letterToSpeak = card1.id.startsWith('jp-') ? card1.val : card2.val;
-          speak(letterToSpeak);
-
-          setMemoryMatches(prev => {
-            const newMatchCount = prev + 1;
-
-            if (newMatchCount === 8) {
-              if (memoryTimerRef.current) clearInterval(memoryTimerRef.current);
-              
-              // Calculate score gained for this board
-              let gain = 100;
-              if (memoryUseTimer) {
-                const basePoints = 100 * memoryBoardCount;
-                const timeBonus = Math.floor(memoryTimeLeftRef.current * 10 * memoryBoardCount);
-                gain = basePoints + timeBonus;
-              }
-
-              setMemoryScore(prevScore => {
-                const newScore = prevScore + gain;
-                
-                // Save records/highscores
-                if (memoryUseTimer) {
-                  const currentHigh = gameAlphabet === 'hiragana' ? hiraMemoryHighScore : kataMemoryHighScore;
-                  if (newScore > currentHigh) {
-                    if (gameAlphabet === 'hiragana') {
-                      setHiraMemoryHighScore(newScore);
-                    } else {
-                      setKataMemoryHighScore(newScore);
-                    }
-                    api.post('/api/user/progress', {
-                      item_type: gameAlphabet,
-                      item_id: 300000 + newScore,
-                      status: 'mastered'
-                    }).catch(e => console.error("Failed to sync memory high score:", e));
-                  }
-
-                  const currentMaxBoard = gameAlphabet === 'hiragana' ? hiraMemoryMaxBoard : kataMemoryMaxBoard;
-                  if (memoryBoardCount > currentMaxBoard) {
-                    if (gameAlphabet === 'hiragana') {
-                      setHiraMemoryMaxBoard(memoryBoardCount);
-                    } else {
-                      setKataMemoryMaxBoard(memoryBoardCount);
-                    }
-                    api.post('/api/user/progress', {
-                      item_type: gameAlphabet,
-                      item_id: 400000 + memoryBoardCount,
-                      status: 'mastered'
-                    }).catch(e => console.error("Failed to sync memory max board:", e));
-                  }
-                }
-                return newScore;
-              });
-
-              setMemoryWin(true);
-            }
-
-            return newMatchCount;
-          });
-        }, 600);
+          const resultLimit = reactionResultLimit === '' ? 2 : Number(reactionResultLimit);
+          startReactionTimer(list, index, 'result', resultLimit);
+        } else {
+          const nextIndex = index + 1;
+          if (nextIndex < list.length) {
+            setReactionCurrentIndex(nextIndex);
+            setReactionCurrentWord(list[nextIndex]);
+            setReactionStatus('reading');
+            const readLimit = reactionTimeLimit === '' ? 3 : Number(reactionTimeLimit);
+            startReactionTimer(list, nextIndex, 'reading', readLimit);
+          } else {
+            setReactionStatus('finished');
+            setReactionStarted(false);
+          }
+        }
       } else {
-        // Failed match, flip back
-        setTimeout(() => {
-          const flipBackUpdated = [...memoryCards];
-          flipBackUpdated[newSelected[0]].isFlipped = false;
-          flipBackUpdated[newSelected[1]].isFlipped = false;
-          setMemoryCards(flipBackUpdated);
-          setSelectedCards([]);
-        }, 1200);
+        updateReactionTimeLeft(parseFloat((prev - 0.1).toFixed(2)));
       }
-    }
+    }, 100);
   };
 
   // 4. CANVAS DRAWING LOGIC
@@ -987,16 +857,9 @@ export default function AlphabetReviewPage() {
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
-      if (memoryTimerRef.current) clearInterval(memoryTimerRef.current);
+      if (reactionTimerRef.current) clearInterval(reactionTimerRef.current);
     };
   }, []);
-
-  // Restart Memory Game automatically when configurations change
-  useEffect(() => {
-    if (activeTab === 'memory') {
-      startMemoryGame();
-    }
-  }, [memoryStartIdx, memoryEndIdx, gameAlphabet, activeTab]);
 
   return (
     <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50/50 dark:from-[#0b1329] dark:via-[#090d1a] dark:to-[#050811] text-slate-800 dark:text-slate-100 font-sans relative">
@@ -1110,7 +973,7 @@ export default function AlphabetReviewPage() {
 
           <div className="flex bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs sm:text-sm shrink-0 self-start lg:self-auto overflow-x-auto max-w-full">
             <button
-              onClick={() => { setActiveTab('charts'); stopSpeedrun(); }}
+              onClick={() => { setActiveTab('charts'); stopSpeedrun(); stopReactionGame(); }}
               className={`px-4 py-2 rounded-lg font-bold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                 activeTab === 'charts' ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
               }`}
@@ -1118,7 +981,7 @@ export default function AlphabetReviewPage() {
               📊 Bảng chữ cái
             </button>
             <button
-              onClick={() => { setActiveTab('speedrun'); stopSpeedrun(); }}
+              onClick={() => { setActiveTab('speedrun'); stopSpeedrun(); stopReactionGame(); }}
               className={`px-4 py-2 rounded-lg font-bold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                 activeTab === 'speedrun' ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
               }`}
@@ -1126,15 +989,15 @@ export default function AlphabetReviewPage() {
               ⚡ Trắc nghiệm phản xạ
             </button>
             <button
-              onClick={() => { setActiveTab('memory'); stopSpeedrun(); }}
+              onClick={() => { setActiveTab('reaction'); stopSpeedrun(); stopReactionGame(); }}
               className={`px-4 py-2 rounded-lg font-bold transition-all duration-200 whitespace-nowrap cursor-pointer ${
-                activeTab === 'memory' ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                activeTab === 'reaction' ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
               }`}
             >
-              🃏 Trò chơi lật bài
+              ⏱️ Phản xạ chữ ghép
             </button>
             <button
-              onClick={() => { setActiveTab('writing'); stopSpeedrun(); }}
+              onClick={() => { setActiveTab('writing'); stopSpeedrun(); stopReactionGame(); }}
               className={`px-4 py-2 rounded-lg font-bold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                 activeTab === 'writing' ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
               }`}
@@ -1142,7 +1005,7 @@ export default function AlphabetReviewPage() {
               ✍️ Tập viết nét
             </button>
             <button
-              onClick={() => { setActiveTab('combined'); stopSpeedrun(); }}
+              onClick={() => { setActiveTab('combined'); stopSpeedrun(); stopReactionGame(); }}
               className={`px-4 py-2 rounded-lg font-bold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                 activeTab === 'combined' ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
               }`}
@@ -1553,272 +1416,203 @@ export default function AlphabetReviewPage() {
           </div>
         )}
 
-        {/* TAB 3: FLIP CARD MEMORY GAME */}
-        {activeTab === 'memory' && (
-          <div className="space-y-6 max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs sm:text-sm font-bold text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-4">
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                <span className="flex items-center space-x-1.5">
-                  <span>Màn chơi:</span>
-                  <strong className="text-pink-400">{memoryBoardCount}</strong>
-                </span>
-                {memoryUseTimer && (
-                  <span className="flex items-center space-x-1.5">
-                    <span>🏆 Điểm tích lũy:</span>
-                    <strong className="text-yellow-400">{memoryScore}</strong>
-                  </span>
-                )}
-                <span className="flex items-center space-x-1.5">
-                  <span>🔄 Lượt lật:</span>
-                  <strong className="text-blue-600 dark:text-blue-400">{memoryFlips}</strong>
-                </span>
-                <span className="flex items-center space-x-1.5">
-                  <span>⭐ Cặp khớp:</span>
-                  <strong className="text-emerald-600 dark:text-emerald-400">{memoryMatches}/8</strong>
-                </span>
-                {memoryUseTimer && (
-                  <div className="flex items-center space-x-2 w-48 sm:w-60">
-                    <span className="shrink-0 text-slate-400 dark:text-slate-500 text-xs">⏳</span>
-                    <div className="w-full h-2 bg-white rounded-full overflow-hidden border border-slate-200 dark:border-slate-800 shadow-inner">
-                      <div 
-                        className={`h-full bg-gradient-to-r transition-all duration-1000 ease-linear ${
-                          memoryTimeLeft <= Math.max(3, memoryActiveTimeLimit * 0.25)
-                            ? 'from-red-500 to-rose-500 animate-pulse'
-                            : 'from-pink-500 to-purple-500'
-                        }`}
-                        style={{ width: `${(memoryTimeLeft / memoryActiveTimeLimit) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex flex-wrap items-center gap-3">
-                <select
-                  value={gameAlphabet}
-                  onChange={(e) => setGameAlphabet(e.target.value as any)}
-                  className="bg-white border border-slate-200 dark:border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
-                >
-                  <option value="hiragana">Bảng Hiragana</option>
-                  <option value="katakana">Bảng Katakana</option>
-                </select>
-
-                <div className="flex items-center space-x-2 bg-white border border-slate-200 dark:border-slate-800 rounded-xl px-2.5 py-1">
-                  <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase">Từ:</span>
-                  <select
-                    value={memoryStartIdx}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      setMemoryStartIdx(val);
-                      if (val > memoryEndIdx) {
-                        setMemoryEndIdx(val);
-                      }
-                    }}
-                    className="bg-transparent text-slate-700 dark:text-slate-200 text-xs font-bold focus:outline-none cursor-pointer"
-                  >
-                    {(gameAlphabet === 'hiragana' ? hiraganaData : katakanaData).map((item, idx) => (
-                      <option key={item.id} value={idx} className="bg-slate-100 text-slate-700 dark:text-slate-200">
-                        {item.char} ({item.romaji})
-                      </option>
-                    ))}
-                  </select>
-                  <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase pl-1 border-l border-slate-200 dark:border-slate-800">Đến:</span>
-                  <select
-                    value={memoryEndIdx}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      setMemoryEndIdx(val);
-                      if (val < memoryStartIdx) {
-                        setMemoryStartIdx(val);
-                      }
-                    }}
-                    className="bg-transparent text-slate-700 dark:text-slate-200 text-xs font-bold focus:outline-none cursor-pointer"
-                  >
-                    {(gameAlphabet === 'hiragana' ? hiraganaData : katakanaData).map((item, idx) => (
-                      <option key={item.id} value={idx} className="bg-slate-100 text-slate-700 dark:text-slate-200">
-                        {item.char} ({item.romaji})
-                      </option>
-                    ))}
-                  </select>
+        {/* TAB 3: REACTION TRAINING GAME */}
+        {activeTab === 'reaction' && (
+          <div className="space-y-6 max-w-2xl mx-auto animate-fade-in">
+            {!reactionStarted && (
+              <div className="p-6 sm:p-8 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none rounded-2xl text-center space-y-6">
+                <div className="w-16 h-16 mx-auto rounded-full bg-indigo-950/50 border border-indigo-800 flex items-center justify-center text-3xl">
+                  ⏱️
+                </div>
+                <div className="space-y-2">
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200">LUYỆN PHẢN XẠ CHỮ GHÉP</h2>
+                  <p className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 max-w-md mx-auto leading-relaxed">
+                    Trò chơi rèn luyện phản xạ đọc nhanh các từ kết hợp. Chữ Nhật sẽ xuất hiện trên màn hình, bạn tự đọc to thành tiếng. Hệ thống sẽ tự động phát âm và hiện nghĩa sau một khoảng thời gian, rồi tự động chuyển câu.
+                  </p>
                 </div>
 
-                <label className="flex items-center space-x-1.5 text-xs font-semibold cursor-pointer select-none bg-slate-100/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 px-2.5 py-1.5 rounded-xl">
-                  <input
-                    type="checkbox"
-                    checked={memoryUseTimer}
-                    onChange={(e) => setMemoryUseTimer(e.target.checked)}
-                    className="accent-pink-500 h-3.5 w-3.5 cursor-pointer"
-                  />
-                  <span>⏳ Giới hạn giờ</span>
-                </label>
-
-                {memoryUseTimer && (
-                  <div className="flex items-center space-x-2 bg-white border border-slate-200 dark:border-slate-800 rounded-xl px-2 py-1">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-lg mx-auto text-left">
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
+                      Độ khó (Độ dài từ)
+                    </label>
+                    <select
+                      value={reactionDifficulty}
+                      onChange={(e) => setReactionDifficulty(e.target.value as any)}
+                      className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
+                    >
+                      <option value="easy">Dễ (3 ~ 5 ký tự)</option>
+                      <option value="medium">Trung bình (6 ~ 9 ký tự)</option>
+                      <option value="hard">Khó (10 ~ 15 ký tự)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
+                      Số lượng câu hỏi
+                    </label>
                     <input
                       type="number"
-                      min={10}
-                      max={120}
-                      value={memoryTimeLimit}
+                      min={5}
+                      max={100}
+                      value={reactionLimit}
                       onChange={(e) => {
                         const val = e.target.value;
-                        if (val === '') {
-                          setMemoryTimeLimit('');
-                        } else {
-                          setMemoryTimeLimit(parseInt(val) || 0);
-                        }
+                        setReactionLimit(val === '' ? '' : parseInt(val));
                       }}
                       onBlur={() => {
-                        let cleanVal = 30;
-                        if (memoryTimeLimit !== '') {
-                          const num = typeof memoryTimeLimit === 'number' ? memoryTimeLimit : parseInt(memoryTimeLimit);
-                          if (!isNaN(num)) {
-                            cleanVal = Math.max(10, Math.min(num, 120));
-                          }
+                        if (reactionLimit === '' || isNaN(Number(reactionLimit))) {
+                          setReactionLimit(10);
+                        } else {
+                          setReactionLimit(Math.max(5, Math.min(Number(reactionLimit), 100)));
                         }
-                        setMemoryTimeLimit(cleanVal);
                       }}
-                      className="bg-transparent text-slate-700 dark:text-slate-200 text-base md:text-xs w-10 text-center font-bold focus:outline-none"
-                      title="Thời gian (giây)"
+                      className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none text-center font-bold"
                     />
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold">s</span>
-                    <div className="flex gap-1 border-l border-slate-200 dark:border-slate-800 pl-2">
-                      <span className="text-yellow-500 text-[10px] font-bold" title="Kỷ lục điểm">🏆 {gameAlphabet === 'hiragana' ? hiraMemoryHighScore : kataMemoryHighScore}</span>
-                      <span className="text-pink-400 text-[10px] font-bold" title="Kỷ lục màn">🏁 M{gameAlphabet === 'hiragana' ? hiraMemoryMaxBoard : kataMemoryMaxBoard}</span>
-                    </div>
                   </div>
-                )}
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
+                      T.gian đọc (giây)
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={15}
+                      value={reactionTimeLimit}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setReactionTimeLimit(val === '' ? '' : parseInt(val));
+                      }}
+                      onBlur={() => {
+                        if (reactionTimeLimit === '' || isNaN(Number(reactionTimeLimit))) {
+                          setReactionTimeLimit(3);
+                        } else {
+                          setReactionTimeLimit(Math.max(1, Math.min(Number(reactionTimeLimit), 15)));
+                        }
+                      }}
+                      className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none text-center font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
+                      T.gian hiện đáp án (giây)
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={10}
+                      value={reactionResultLimit}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setReactionResultLimit(val === '' ? '' : parseInt(val));
+                      }}
+                      onBlur={() => {
+                        if (reactionResultLimit === '' || isNaN(Number(reactionResultLimit))) {
+                          setReactionResultLimit(2);
+                        } else {
+                          setReactionResultLimit(Math.max(1, Math.min(Number(reactionResultLimit), 10)));
+                        }
+                      }}
+                      className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none text-center font-bold"
+                    />
+                  </div>
+                </div>
 
                 <button
-                  onClick={startMemoryGame}
-                  className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-slate-900 dark:text-white font-bold rounded-xl text-xs sm:text-sm active:scale-95 transition-all shadow-md cursor-pointer"
+                  onClick={startReactionGame}
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-95 text-slate-900 dark:text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-blue-900/30 cursor-pointer"
                 >
-                  Chơi ván mới
+                  Bắt đầu Luyện tập
                 </button>
               </div>
-            </div>
+            )}
 
-            {memoryLoss ? (
-              <div className="p-8 bg-red-950/20 border border-red-200 dark:border-red-800 rounded-2xl text-center space-y-4 max-w-md mx-auto animate-fade-in">
-                <span className="text-4xl">⏰</span>
-                <h3 className="text-lg font-bold text-red-600 dark:text-red-400">HẾT GIỜ MẤT RỒI!</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300">
-                  Thời gian đếm ngược đã hết trước khi bạn tìm thấy tất cả các cặp thẻ. Cố gắng lên nhé!
-                </p>
-                {memoryUseTimer && (
-                  <div className="grid grid-cols-2 gap-3 p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 text-left">
-                    <div>
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Màn đạt được</span>
-                      <p className="text-lg font-black text-pink-400">Màn {memoryBoardCount}</p>
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Kỷ lục màn</span>
-                      <p className="text-lg font-black text-pink-500">{gameAlphabet === 'hiragana' ? hiraMemoryMaxBoard : kataMemoryMaxBoard}</p>
-                    </div>
-                    <div className="col-span-2 border-t border-slate-200 dark:border-slate-800/50 pt-2.5 mt-1 grid grid-cols-2 gap-4">
-                      <div>
-                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Điểm đạt được</span>
-                        <p className="text-lg font-black text-yellow-400">{memoryScore}</p>
-                      </div>
-                      <div>
-                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Kỷ lục điểm</span>
-                        <p className="text-lg font-black text-blue-600 dark:text-blue-400">{gameAlphabet === 'hiragana' ? hiraMemoryHighScore : kataMemoryHighScore}</p>
-                      </div>
-                    </div>
+            {reactionStarted && reactionCurrentWord && (
+              <div className="p-6 sm:p-8 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none rounded-2xl space-y-6 relative overflow-hidden text-center animate-fade-in">
+                {/* Game Header Progress */}
+                <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 pb-3">
+                  <div className="flex items-center space-x-1.5">
+                    <span>📝 Tiến trình:</span>
+                    <span><strong className="text-indigo-600 dark:text-indigo-400">{reactionCurrentIndex + 1}</strong> / {reactionList.length} từ</span>
                   </div>
-                )}
-                <button
-                  onClick={() => startMemoryGame(false)}
-                  className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-slate-900 dark:text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
-                >
-                  Chơi lại từ đầu
-                </button>
-              </div>
-            ) : memoryWin ? (
-              <div className="p-8 bg-emerald-950/20 border border-emerald-800/60 rounded-2xl text-center space-y-4 max-w-md mx-auto animate-fade-in">
-                <span className="text-4xl">🎉</span>
-                <h3 className="text-lg font-bold text-emerald-600 dark:text-emerald-400">CHIẾN THẮNG MÀN {memoryBoardCount}!</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300">
-                  Bạn đã khớp thành công tất cả các cặp thẻ chữ cái trong <strong className="text-slate-900 dark:text-white">{memoryFlips}</strong> lượt lật bài!
-                </p>
-                {memoryUseTimer && (
-                  <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 text-left space-y-2 max-w-xs mx-auto">
-                    <div className="flex justify-between">
-                      <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">Màn vừa qua:</span>
-                      <span className="text-sm font-bold text-slate-700 dark:text-slate-200">Màn {memoryBoardCount}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">Thời gian còn lại:</span>
-                      <span className="text-sm font-bold text-slate-700 dark:text-slate-200">{memoryTimeLeft.toFixed(1)}s</span>
-                    </div>
-                    <div className="flex justify-between border-t border-slate-200 dark:border-slate-800/50 pt-2 mt-1">
-                      <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">Tổng điểm tích lũy:</span>
-                      <span className="text-sm font-black text-yellow-400">{memoryScore} điểm</span>
-                    </div>
+                  <div className="flex items-center space-x-1.5">
+                    <span>
+                      {reactionStatus === 'reading' ? '⏳ Thời gian đọc:' : '👁️ Hiển thị đáp án:'}
+                    </span>
+                    <strong className={reactionStatus === 'reading' ? 'text-orange-400' : 'text-emerald-500'}>
+                      {reactionTimeLeft.toFixed(1)}s
+                    </strong>
                   </div>
-                )}
-                <button
-                  onClick={() => startMemoryGame(true)}
-                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-slate-900 dark:text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
-                >
-                  {memoryUseTimer ? `Tiếp tục (Màn ${memoryBoardCount + 1})` : "Luyện tập lại"}
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-4 gap-4 max-w-lg mx-auto">
-                {memoryCards.map((card, idx) => {
-                  const isFlipped = card.isFlipped || card.isMatched;
-                  
-                  return (
-                    <div
-                      key={card.id}
-                      onClick={() => handleCardClick(idx)}
-                      className="h-24 sm:h-28 w-full cursor-pointer select-none active:scale-95 transition-transform duration-200"
-                      style={{ perspective: '1000px' }}
-                    >
-                      <div
-                        className="relative w-full h-full transition-transform duration-500"
-                        style={{
-                          transformStyle: 'preserve-3d',
-                          transform: isFlipped ? 'rotateY(180deg)' : 'none'
-                        }}
-                      >
-                        {/* FRONT FACE (displays character when flipped) */}
-                        <div
-                          className={`absolute inset-0 w-full h-full rounded-2xl border flex flex-col items-center justify-center ${
-                            card.isMatched
-                              ? 'bg-sky-950/20 border-sky-400/30 text-transparent shadow-none pointer-events-none'
-                              : 'bg-gradient-to-br from-indigo-950/80 to-purple-950/80 border-indigo-500/40 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.15)]'
-                          }`}
-                          style={{
-                            backfaceVisibility: 'hidden',
-                            WebkitBackfaceVisibility: 'hidden',
-                            transform: 'rotateY(180deg)'
-                          }}
+                </div>
+
+                {/* Progress countdown bar */}
+                <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-950 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full transition-all duration-100 ease-linear ${
+                      reactionStatus === 'reading' ? 'bg-gradient-to-r from-orange-500 to-amber-400' : 'bg-gradient-to-r from-emerald-500 to-teal-400'
+                    }`}
+                    style={{ 
+                      width: `${(reactionTimeLeft / (reactionStatus === 'reading' ? (reactionTimeLimit || 3) : (reactionResultLimit || 2))) * 100}%` 
+                    }}
+                  />
+                </div>
+
+                {/* Word Display Area */}
+                <div className="py-8 flex flex-col items-center justify-center space-y-6">
+                  <div className="min-h-[140px] flex items-center justify-center">
+                    <span className="text-4xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-wide leading-relaxed block px-4 py-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/50 rounded-2xl shadow-inner">
+                      {reactionCurrentWord.word}
+                    </span>
+                  </div>
+
+                  {reactionStatus === 'reading' ? (
+                    <div className="space-y-1 animate-pulse">
+                      <p className="text-xs sm:text-sm font-bold text-orange-600 dark:text-orange-400">
+                        🔔 HÃY ĐỌC TO THÀNH TIẾNG!
+                      </p>
+                      <p className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                        Đáp án và âm thanh sẽ xuất hiện khi hết thời gian đếm ngược.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4 animate-fade-in w-full max-w-md mx-auto p-4 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                      <div className="flex items-center justify-center space-x-2.5">
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Phiên âm:</span>
+                        <strong className="text-xl font-mono font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">
+                          {reactionCurrentWord.romaji}
+                        </strong>
+                        <button
+                          onClick={() => speak(reactionCurrentWord.word)}
+                          className="p-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 rounded-lg text-slate-500 dark:text-slate-300 text-xs active:scale-95 cursor-pointer shadow-sm animate-fade-in"
+                          title="Phát lại âm thanh"
                         >
-                          <span className="text-2xl sm:text-3xl font-black select-none">
-                            {card.val}
-                          </span>
-                        </div>
-
-                        {/* BACK FACE (displays cute pattern when face down) */}
-                        <div
-                          className="absolute inset-0 w-full h-full rounded-2xl border bg-gradient-to-br from-pink-500/10 via-fuchsia-500/5 to-purple-600/15 border-pink-500/30 hover:border-pink-500/60 shadow-[0_4px_12px_rgba(244,63,94,0.1)] flex flex-col items-center justify-center transition-all duration-300"
-                          style={{
-                            backfaceVisibility: 'hidden',
-                            WebkitBackfaceVisibility: 'hidden'
-                          }}
-                        >
-                          <div className="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center border border-pink-500/20 shadow-inner hover:scale-110 transition-transform duration-300">
-                            <span className="text-xl animate-pulse">🌸</span>
-                          </div>
-                          <span className="text-[10px] text-pink-400 font-bold uppercase tracking-widest mt-1.5 font-sans">
-                            Kana
-                          </span>
-                        </div>
+                          🔊
+                        </button>
+                      </div>
+                      <div className="border-t border-slate-200 dark:border-slate-800/50 pt-2.5">
+                        <span className="block text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider mb-0.5">Ý nghĩa:</span>
+                        <span className="text-sm font-bold text-slate-700 dark:text-slate-200">
+                          {reactionCurrentWord.meaning}
+                        </span>
                       </div>
                     </div>
-                  );
-                })}
+                  )}
+                </div>
+
+                {/* Control Action Buttons */}
+                <div className="flex justify-center space-x-3 pt-2">
+                  <button
+                    onClick={stopReactionGame}
+                    className="px-4 py-2.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-red-200 dark:border-red-800 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:text-red-400 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                  >
+                    ⏹️ Dừng / Thoát game
+                  </button>
+                  <button
+                    onClick={nextReactionQuestion}
+                    className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-slate-900 dark:text-white font-bold rounded-xl text-xs transition-all shadow-md cursor-pointer flex items-center space-x-1.5"
+                  >
+                    <span>⏭️ Bỏ qua / Câu tiếp</span>
+                  </button>
+                </div>
               </div>
             )}
           </div>
