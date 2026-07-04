@@ -218,6 +218,27 @@ const jaToRomajiDict: Record<string, string> = {
   'Kobe Hospital': 'Kobe Hospital'
 };
 
+const MARUGOTO_TOPIC_KEYWORDS: Record<number, string[]> = {
+  101: ['tôi', 'bản thân', 'chào', 'tên', 'nước', 'quốc tịch', 'nghề nghiệp', 'người', 'nhật', 'việt'],
+  102: ['bàn', 'ghế', 'bút', 'sách', 'vở', 'thước', 'tẩy', 'lớp', 'học', 'phòng', 'bảng', 'giáo viên', 'học sinh'],
+  103: ['ăn', 'uống', 'ngon', 'thích', 'ghét', 'món', 'cơm', 'nước', 'trà', 'sữa', 'thịt', 'cá', 'rau', 'quả', 'bánh'],
+  104: ['bố', 'mẹ', 'anh', 'chị', 'em', 'gia đình', 'người', 'nhà', 'vợ', 'chồng', 'con', 'ông', 'bà', 'ba mẹ'],
+  105: ['giờ', 'phút', 'ngày', 'tháng', 'năm', 'thứ', 'sáng', 'chiều', 'tối', 'trưa', 'lúc', 'khi', 'mấy'],
+  106: ['nhà', 'phòng', 'bếp', 'tắm', 'vườn', 'nhà vệ sinh', 'cửa', 'cửa sổ', 'ở', 'đâu', 'trong', 'ngoài', 'trên', 'dưới'],
+  107: ['dậy', 'ngủ', 'làm', 'chơi', 'học', 'nghỉ', 'đi', 'đến', 'về', 'gặp', 'mua', 'bán', 'viết', 'đọc', 'nghe', 'nói'],
+  108: ['thích', 'sở thích', 'chơi', 'xem', 'nghe', 'nhạc', 'phim', 'sách', 'thể thao', 'bóng', 'đá', 'bơi', 'đàn', 'hát'],
+  109: ['đi', 'đến', 'về', 'tàu', 'xe', 'máy', 'bay', 'bộ', 'ga', 'sân bay', 'đường', 'giao thông'],
+  110: ['mua', 'bán', 'tiền', 'giá', 'bao nhiêu', 'đắt', 'rẻ', 'cửa hàng', 'siêu thị', 'chợ', 'áo', 'quần', 'giày', 'dép'],
+  111: ['mệt', 'khỏe', 'vui', 'buồn', 'nóng', 'lạnh', 'ấm', 'mát', 'đau', 'ốm', 'bệnh', 'thuốc'],
+  112: ['việc', 'công ty', 'văn phòng', 'báo cáo', 'họp', 'gặp', 'khách', 'điện thoại', 'máy tính'],
+  113: ['thời tiết', 'mưa', 'nắng', 'gió', 'tuyết', 'mây', 'mùa', 'xuân', 'hạ', 'thu', 'đông', 'trời'],
+  114: ['du lịch', 'đi', 'chơi', 'đền', 'chùa', 'núi', 'biển', 'sông', 'hồ', 'khách sạn', 'phong cảnh'],
+  115: ['cao', 'thấp', 'to', 'nhỏ', 'dài', 'ngắn', 'đẹp', 'xấu', 'mới', 'cũ', 'trẻ', 'già'],
+  116: ['xin lỗi', 'cảm ơn', 'chúc mừng', 'hẹn', 'gặp', 'nói', 'chuyện', 'bạn', 'thầy', 'cô'],
+  117: ['biết', 'hiểu', 'thể', 'được', 'làm', 'nói', 'viết', 'đọc', 'tiếng', 'nhật', 'anh'],
+  118: ['học', 'tập', 'thi', 'kiểm tra', 'kết quả', 'tốt', 'kém', 'hiểu', 'nhớ']
+};
+
 export default function LessonDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const selectedLessonId = parseInt(id);
@@ -281,6 +302,16 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [message, setMessage] = useState<string | null>(null);
   const [activeGame, setActiveGame] = useState<'listening' | 'matching' | 'fill' | 'dialogue'>('listening');
   const [activeExampleIndices, setActiveExampleIndices] = useState<Record<number, number>>({});
+  const [activeSentenceForms, setActiveSentenceForms] = useState<Record<number, 'affirmative' | 'negative' | 'interrogative'>>({});
+  const [grammarPracticeMode, setGrammarPracticeMode] = useState<'particles' | 'transformation'>('particles');
+  const [transformQuestions, setTransformQuestions] = useState<any[]>([]);
+  const [transformIndex, setTransformIndex] = useState<number>(0);
+  const [transformScore, setTransformScore] = useState<number>(0);
+  const [transformSelectedOption, setTransformSelectedOption] = useState<string | null>(null);
+  const [transformIsAnswered, setTransformIsAnswered] = useState<boolean>(false);
+  const [transformFinished, setTransformFinished] = useState<boolean>(false);
+  const [expandedGrammarId, setExpandedGrammarId] = useState<number | null>(null);
+  const [grammarDetailTab, setGrammarDetailTab] = useState<Record<number, 'structure' | 'examples'>>({});
 
   // Active Lesson Title & Details
   const activeLesson = lessons.find(l => l.id === selectedLessonId);
@@ -773,12 +804,88 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     setWritingScore(null);
   }, [grammarItems]);
 
-  useEffect(() => {
+  const generateTransformQuestions = useCallback(() => {
+    const questions: any[] = [];
+    
+    grammarItems.forEach(g => {
+      let examples: any[] = [];
+      try {
+        examples = typeof g.examples_json === 'string'
+          ? JSON.parse(g.examples_json)
+          : (g.examples_json || []);
+      } catch (e) {
+        examples = [];
+      }
+
+      if (examples.length === 0) return;
+
+      const affEx = examples.find(e => (e.type || 'affirmative') === 'affirmative');
+      if (!affEx) return;
+
+      const negEx = examples.find(e => e.type === 'negative');
+      const intEx = examples.find(e => e.type === 'interrogative');
+
+      if (negEx) {
+        const wrongOption1 = intEx ? intEx.japanese : 'いいえ、ちがいます。';
+        const wrongOption2 = affEx.japanese;
+        const wrongOption3 = 'わたしは　...です。';
+        const options = [negEx.japanese, wrongOption1, wrongOption2, wrongOption3]
+          .filter((v, i, a) => a.indexOf(v) === i)
+          .sort(() => Math.random() - 0.5);
+
+        questions.push({
+          originalSentence: affEx.japanese,
+          originalRomaji: affEx.romaji,
+          originalMeaning: affEx.vietnamese,
+          targetForm: 'negative',
+          targetFormVi: 'Phủ định',
+          correctAnswer: negEx.japanese,
+          correctRomaji: negEx.romaji,
+          correctMeaning: negEx.vietnamese,
+          options
+        });
+      }
+
+      if (intEx) {
+        const wrongOption1 = negEx ? negEx.japanese : 'いいえ、ちがいます。';
+        const wrongOption2 = affEx.japanese;
+        const wrongOption3 = 'わたしは　...です。';
+        const options = [intEx.japanese, wrongOption1, wrongOption2, wrongOption3]
+          .filter((v, i, a) => a.indexOf(v) === i)
+          .sort(() => Math.random() - 0.5);
+
+        questions.push({
+          originalSentence: affEx.japanese,
+          originalRomaji: affEx.romaji,
+          originalMeaning: affEx.vietnamese,
+          targetForm: 'interrogative',
+          targetFormVi: 'Nghi vấn',
+          correctAnswer: intEx.japanese,
+          correctRomaji: intEx.romaji,
+          correctMeaning: intEx.vietnamese,
+          options
+        });
+      }
+    });
+
+    const shuffled = questions.sort(() => Math.random() - 0.5).slice(0, 8);
+    setTransformQuestions(shuffled);
+    setTransformIndex(0);
+    setTransformScore(0);
+    setTransformSelectedOption(null);
+    setTransformIsAnswered(false);
+    setTransformFinished(false);
+  }, [grammarItems]);
+
+
+
+    useEffect(() => {
     if (isMarugoto && grammarItems.length > 0) {
       generateParticleQuestions();
       generateWritingQuestions();
+      generateTransformQuestions();
     }
-  }, [isMarugoto, grammarItems, generateParticleQuestions, generateWritingQuestions]);
+  }, [isMarugoto, grammarItems, generateParticleQuestions, generateWritingQuestions, generateTransformQuestions]);
 
   // Handle Can-do status changes
   const handleCandoStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
@@ -1750,7 +1857,123 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const grammarLearningCount = grammarItems.filter(g => g.status === 'learning').length;
   const grammarProgressPercent = grammarTotalCount ? Math.round((grammarMasteredCount / grammarTotalCount) * 100) : 0;
 
-  const renderInteractivePractice = () => {
+    const getVisualStructureForForm = (baseStructure: string, formType: 'affirmative' | 'negative' | 'interrogative') => {
+    if (!baseStructure) return '';
+    let struct = baseStructure;
+    if (formType === 'negative') {
+      if (struct.includes('です')) {
+        struct = struct.replace('です', 'じゃないです');
+      } else if (struct.includes('ます')) {
+        struct = struct.replace('ます', 'ません');
+      } else if (struct.includes('できます')) {
+        struct = struct.replace('できます', 'できません');
+      } else if (struct.includes('います')) {
+        struct = struct.replace('います', 'いません');
+      } else if (struct.includes('あります')) {
+        struct = struct.replace('あります', 'ありません');
+      }
+    } else if (formType === 'interrogative') {
+      if (!struct.includes('か') && !struct.includes('ですか') && !struct.includes('ますか') && !struct.includes('ですか。') && !struct.includes('か。')) {
+        struct = struct + ' + か';
+      }
+    }
+    return struct;
+  };
+
+  const translateSymbolToVi = (symbol: string) => {
+    let s = symbol;
+    s = s.replace(/N\s*\(Place\)/gi, 'Danh từ (Địa điểm)');
+    s = s.replace(/N\s*\(Language\)/gi, 'Danh từ (Ngôn ngữ)');
+    s = s.replace(/N\s*\(Person\)/gi, 'Danh từ (Người)');
+    s = s.replace(/N\s*\(Time\)/gi, 'Danh từ (Thời gian)');
+    s = s.replace(/N\s*\(Item\)/gi, 'Danh từ (Đồ vật)');
+    s = s.replace(/N\s*\(Food\)/gi, 'Danh từ (Món ăn)');
+    s = s.replace(/N\s*\(Drink\)/gi, 'Danh từ (Đồ uống)');
+    s = s.replace(/\bN1\b/g, 'Danh từ 1');
+    s = s.replace(/\bN2\b/g, 'Danh từ 2');
+    s = s.replace(/\bN3\b/g, 'Danh từ 3');
+    s = s.replace(/\bN4\b/g, 'Danh từ 4');
+    s = s.replace(/\bN\b/g, 'Danh từ');
+    s = s.replace(/\bV\b/g, 'Động từ');
+    s = s.replace(/\bA\b/g, 'Tính từ');
+    s = s.replace(/A-adj/gi, 'Tính từ đuôi な/い');
+    s = s.replace(/I-adj/gi, 'Tính từ đuôi い');
+    s = s.replace(/Na-adj/gi, 'Tính từ đuôi な');
+    return s;
+  };
+
+  const renderVisualStructure = (structure: string) => {
+    if (!structure) return null;
+    
+    // Split by '|' to render multiple rows/tables if there are alternative formats or question parts
+    const lines = structure.split('|').map(l => l.trim());
+    
+    return (
+      <div className="space-y-4 mt-1">
+        {lines.map((line, lineIdx) => {
+          const parts = line.split('+').map(p => p.trim());
+          if (parts.length <= 1) {
+            return (
+              <div 
+                key={lineIdx} 
+                className="text-sm font-bold text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl"
+              >
+                {translateSymbolToVi(line)}
+              </div>
+            );
+          }
+
+          return (
+            <div key={lineIdx} className="overflow-x-auto pb-1">
+              <div className="inline-flex items-stretch border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-xl overflow-hidden min-w-[280px]">
+                {parts.map((part, index) => {
+                  const isParticle = ['は', 'g', 'に', 'を', 'も', 'と', 'de', 'で', 'へ', 'の', 'k'].includes(part) || part.length <= 2;
+                  const isEnding = ['es', 'es。', 'じゃないes', 'じゃないes。', 'ですか', 'ですか。', 'います', 'あります', 'ありません'].some(end => part.includes(end));
+                  
+                  let borderClass = "";
+                  if (index > 0) {
+                    if (isParticle || isEnding) {
+                      borderClass = "border-l border-dashed border-slate-200 dark:border-slate-700/80";
+                    } else {
+                      borderClass = "border-l border-slate-200 dark:border-slate-800";
+                    }
+                  }
+
+                  const options = part.split('/').map(opt => opt.trim());
+
+                  return (
+                    <div 
+                      key={index}
+                      className={"px-4 py-3 flex flex-col justify-center items-center text-center " + borderClass + " bg-slate-50/20 dark:bg-slate-900/10 min-w-[60px]"}
+                    >
+                      {options.length > 1 ? (
+                        <div className="flex flex-col space-y-1 items-center justify-center">
+                          {options.map((opt: string, oIdx: number) => (
+                            <span 
+                              key={oIdx}
+                              className="text-xs sm:text-sm font-bold text-slate-850 dark:text-slate-200 flex items-center gap-1.5"
+                            >
+                              {translateSymbolToVi(opt)}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-xs sm:text-sm font-black text-slate-850 dark:text-slate-100">
+                          {translateSymbolToVi(part)}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+const renderInteractivePractice = () => {
     return (
       <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
                 {/* 1. Header Toolbar Controls */}
@@ -3371,22 +3594,22 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
             {currentTab === 'grammar' && (
               isMarugoto ? (
-                /* ==================== GIAO DIỆN NGỮ PHÁP MARUGOTO ==================== */
+                /* ==================== GIAO DIỆN NGỮ PHÁP MARUGOTO RÚT GỌN CHUẨN ==================== */
                 <div className="space-y-8 max-w-4xl mx-auto animate-fade-in pb-12">
                   {/* 1. Header Progress Card */}
-                  <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none p-6 rounded-3xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="bg-white border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:shadow-none p-6 rounded-3xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="space-y-1">
                       <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
                         <span>📖</span>
                         <span>{lessonTitle} - NGỮ PHÁP</span>
                       </h2>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
-                        Học cấu trúc ngữ pháp mẫu câu và làm bài tập điền trợ từ tương tác.
+                      <p className="text-sm text-slate-600 dark:text-slate-200">
+                        Học cấu trúc và luyện tập phản xạ chuyển đổi 3 thể câu trực quan. Click vào từng mẫu để xem chi tiết.
                       </p>
                     </div>
                     <div className="flex items-center gap-4 shrink-0">
                       <div className="text-right">
-                        <span className="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase">Học liệu</span>
+                        <span className="block text-xs font-bold text-slate-500 dark:text-slate-300 uppercase">Học liệu</span>
                         <span className="text-sm font-extrabold text-slate-700 dark:text-slate-200">
                           {grammarItems.length} Mẫu câu
                         </span>
@@ -3398,30 +3621,33 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-sm">
                     <button
                       onClick={() => setGrammarSubTab('learn')}
-                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                      className={"flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer " + (
                         grammarSubTab === 'learn'
                           ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
-                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
-                      }`}
+                          : 'text-slate-600 dark:text-slate-200 hover:text-slate-705'
+                      )}
                     >
                       📖 Học ngữ pháp
                     </button>
                     <button
                       onClick={() => setGrammarSubTab('practice')}
-                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                      className={"flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer " + (
                         grammarSubTab === 'practice'
                           ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
-                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
-                      }`}
+                          : 'text-slate-600 dark:text-slate-200 hover:text-slate-755'
+                      )}
                     >
-                      ⚡ Bài tập trợ từ
+                      ⚡ Luyện tập ngữ pháp
                     </button>
                   </div>
 
                   {grammarSubTab === 'learn' ? (
-                    /* CHẾ ĐỘ HỌC NGỮ PHÁP */
-                    <div className="space-y-6">
+                    /* CHẾ ĐỘ HỌC NGỮ PHÁP ACCORDION */
+                    <div className="space-y-4">
                       {grammarItems.map((g) => {
+                        const isExpanded = expandedGrammarId === g.id;
+                        const activeTab = grammarDetailTab[g.id] || 'structure';
+
                         let examples: any[] = [];
                         if (g.examples_json) {
                           try {
@@ -3433,193 +3659,504 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                           }
                         }
 
-                        const currentExIdx = activeExampleIndices[g.id] || 0;
-                        const hasMultipleExamples = examples.length > 1;
+                        // Filter examples into categories
+                        const affExs = examples.filter(ex => (ex.type || 'affirmative') === 'affirmative');
+                        const negExs = examples.filter(ex => ex.type === 'negative');
+                        const intExs = examples.filter(ex => ex.type === 'interrogative');
 
-                        let currentExample: any = null;
-                        if (examples.length > 0) {
-                          currentExample = examples[currentExIdx] || examples[0];
-                        } else if (g.japanese_example) {
-                          currentExample = {
-                            japanese: g.japanese_example,
-                            romaji: g.romaji_example || '',
-                            vietnamese: g.example_meaning
-                          };
-                        }
+                        const toggleExpand = () => {
+                          setExpandedGrammarId(isExpanded ? null : g.id);
+                        };
 
-                        const handleRotateExample = () => {
-                          if (!hasMultipleExamples) return;
-                          let nextIdx;
-                          do {
-                            nextIdx = Math.floor(Math.random() * examples.length);
-                          } while (nextIdx === currentExIdx && examples.length > 1);
-                          
-                          setActiveExampleIndices(prev => ({
+                        const setDetailTab = (tab: 'structure' | 'examples') => {
+                          setGrammarDetailTab(prev => ({
                             ...prev,
-                            [g.id]: nextIdx
+                            [g.id]: tab
                           }));
+                        };
+
+                        const highlightEnding = (text: string) => {
+                          if (!text) return '';
+                          const replaced = text
+                            .replace(/(じゃないです|じゃありません|ではないです|いません|ありません|しません)/g, '<span class="text-rose-500 font-extrabold">$1</span>')
+                            .replace(/(ですか|ますか|でしょうか)/g, '<span class="text-amber-500 font-extrabold">$1</span>')
+                            .replace(/(es|です|ます|ています|あります|います|します)/g, '<span class="text-[#b5179e] font-extrabold">$1</span>');
+                          return <span dangerouslySetInnerHTML={{ __html: replaced }} />;
                         };
 
                         return (
                           <div 
                             key={g.id}
-                            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 hover:shadow-sm transition-all space-y-4"
+                            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200"
                           >
-                            <div>
-                              <span className="inline-block text-[10px] font-extrabold px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/60 uppercase tracking-wider mb-2">Cấu trúc</span>
-                              <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">
-                                {g.title}
-                              </h4>
-                              <p className="text-sm font-semibold text-[#b5179e] mt-1">{g.meaning}</p>
-                            </div>
-
-                            {g.vietnamese_explanation && (
-                              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-950/40 p-4 rounded-xl border border-slate-200/50 dark:border-slate-800/40">
-                                {g.vietnamese_explanation}
-                              </p>
-                            )}
-
-                            {currentExample && (
-                              <div className="p-5 bg-emerald-50/20 dark:bg-emerald-950/10 border border-emerald-100 dark:border-emerald-950/60 rounded-2xl space-y-2.5">
-                                <div className="flex items-center justify-between">
-                                  <span className="text-[10px] font-extrabold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-emerald-500 uppercase tracking-wider">Mẫu Ví dụ</span>
-                                  <div className="flex items-center gap-3">
-                                    {hasMultipleExamples && (
-                                      <button
-                                        onClick={handleRotateExample}
-                                        className="text-xs text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold transition-all"
-                                      >
-                                        🔀 Đổi ví dụ
-                                      </button>
-                                    )}
-                                    <button
-                                      onClick={() => playAudioWithFallback(currentExample!.japanese, currentExample!.japanese)}
-                                      className="text-xs text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 font-bold flex items-center gap-1 transition-all"
-                                    >
-                                      🔊 Phát âm
-                                    </button>
-                                  </div>
-                                </div>
-                                <p className="text-base font-bold text-slate-800 dark:text-slate-100 tracking-wide">
-                                  {currentExample.japanese}
-                                </p>
-                                <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 tracking-wider">
-                                  {currentExample.romaji}
-                                </p>
-                                <p className="text-sm text-slate-600 dark:text-slate-400 font-medium border-t border-emerald-100/30 dark:border-emerald-900/30 pt-2 mt-1">
-                                  {currentExample.vietnamese}
+                            {/* Title Bar (Click to Expand) */}
+                            <button
+                              onClick={toggleExpand}
+                              className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-slate-50/55 dark:hover:bg-slate-800/20 transition-all cursor-pointer"
+                            >
+                              <div className="space-y-1">
+                                <span className="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-pink-50 dark:bg-pink-955/30 text-[#b5179e] dark:text-pink-400 border border-pink-100/50 dark:border-pink-900/40 uppercase tracking-wider">
+                                  Mẫu #{g.id - 150}
+                                </span>
+                                <h3 className="text-base font-extrabold text-slate-800 dark:text-slate-100">
+                                  {g.title}
+                                </h3>
+                                <p className="text-xs font-bold text-[#b5179e] dark:text-pink-300">
+                                  {g.meaning}
                                 </p>
                               </div>
-                            )}
+                              <span className="text-slate-500 dark:text-slate-300 text-lg transition-transform duration-200">
+                                {isExpanded ? '▲' : '▼'}
+                              </span>
+                            </button>
 
-                            {g.notes && (
-                              <p className="text-xs text-slate-400 dark:text-slate-500">
-                                📌 <strong>Chú thích:</strong> {g.notes}
-                              </p>
+                            {/* Detail Panel */}
+                            {isExpanded && (
+                              <div className="border-t border-slate-100 dark:border-slate-855 p-6 bg-slate-50/20 dark:bg-slate-900/10 space-y-6">
+                                {/* Tab Selector */}
+                                <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-xs">
+                                  <button
+                                    onClick={() => setDetailTab('structure')}
+                                    className={"flex-1 py-1.5 text-center text-xs font-extrabold rounded-lg transition-all cursor-pointer " + (
+                                      activeTab === 'structure'
+                                        ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                                        : 'text-slate-600 dark:text-slate-200'
+                                    )}
+                                  >
+                                    📋 Bảng cấu trúc
+                                  </button>
+                                  <button
+                                    onClick={() => setDetailTab('examples')}
+                                    className={"flex-1 py-1.5 text-center text-xs font-extrabold rounded-lg transition-all cursor-pointer " + (
+                                      activeTab === 'examples'
+                                        ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                                        : 'text-slate-600 dark:text-slate-200'
+                                    )}
+                                  >
+                                    💬 Câu ví dụ
+                                  </button>
+                                </div>
+
+                                {activeTab === 'structure' ? (
+                                  /* TAB MẪU CÂU (BẢNG MẪU CÂU) */
+                                  <div className="space-y-6">
+                                    {/* 1. Khẳng định Structure */}
+                                    {affExs.length > 0 && (
+                                      <div className="space-y-2">
+                                        <span className="text-xs font-extrabold text-emerald-500 flex items-center gap-1.5 uppercase tracking-wider">
+                                          🟢 Khẳng định
+                                        </span>
+                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'affirmative'))}
+                                      </div>
+                                    )}
+
+                                    {/* 2. Phủ định Structure */}
+                                    {negExs.length > 0 && (
+                                      <div className="space-y-2">
+                                        <span className="text-xs font-extrabold text-rose-500 flex items-center gap-1.5 uppercase tracking-wider">
+                                          🔴 Phủ định
+                                        </span>
+                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'negative'))}
+                                      </div>
+                                    )}
+
+                                    {/* 3. Nghi vấn Structure */}
+                                    {intExs.length > 0 && (
+                                      <div className="space-y-2">
+                                        <span className="text-xs font-extrabold text-amber-500 flex items-center gap-1.5 uppercase tracking-wider">
+                                          🟡 Nghi vấn
+                                        </span>
+                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'interrogative'))}
+                                      </div>
+                                    )}
+
+                                    {/* Banner Giải thích ý nghĩa và cách dùng bằng tiếng Việt */}
+                                    <div className="p-5 bg-indigo-50/40 dark:bg-indigo-950/20 border border-indigo-100/50 dark:border-indigo-900/30 rounded-2xl space-y-3 mt-6 shadow-sm">
+                                      <div className="space-y-1">
+                                        <span className="text-xs font-extrabold text-[#b5179e] dark:text-pink-300 flex items-center gap-1.5 uppercase tracking-wider">
+                                          💡 Ý nghĩa
+                                        </span>
+                                        <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 leading-relaxed">
+                                          {g.meaning}
+                                        </p>
+                                      </div>
+                                      
+                                      {g.vietnamese_explanation && (
+                                        <div className="space-y-1 pt-2 border-t border-slate-200/50 dark:border-slate-800/40">
+                                          <span className="text-xs font-extrabold text-[#b5179e] dark:text-pink-300 flex items-center gap-1.5 uppercase tracking-wider">
+                                            🎯 Dùng khi nào
+                                          </span>
+                                          <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 leading-relaxed italic">
+                                            {g.vietnamese_explanation}
+                                          </p>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  /* TAB VÍ DỤ */
+                                  <div className="space-y-6">
+                                    {/* 1. Khẳng định Examples */}
+                                    {affExs.length > 0 && (
+                                      <div className="space-y-3">
+                                        <span className="text-xs font-extrabold text-emerald-500 flex items-center gap-1.5 uppercase tracking-wider">
+                                          🟢 Khẳng định ({affExs.length} ví dụ)
+                                        </span>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                          {affExs.map((ex: any, exIdx: number) => (
+                                            <div 
+                                              key={exIdx}
+                                              className="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl space-y-2 relative hover:border-[#b5179e]/30 transition-all"
+                                            >
+                                              <div className="flex items-center justify-between">
+                                                <span className="text-[9px] font-extrabold text-emerald-500 uppercase tracking-wider bg-emerald-505/10 px-1.5 py-0.5 rounded border border-emerald-505/20">
+                                                  Ví dụ #{exIdx + 1}
+                                                </span>
+                                                <button
+                                                  onClick={() => playAudioWithFallback(ex.japanese, ex.japanese)}
+                                                  className="w-7 h-7 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200/50 dark:border-slate-700 text-[#b5179e] dark:text-pink-300 hover:text-slate-707 dark:hover:text-slate-200 text-xs transition-all active:scale-90"
+                                                  title="Phát âm"
+                                                >
+                                                  🔊
+                                                </button>
+                                              </div>
+                                              <p className="text-sm font-extrabold text-slate-800 dark:text-slate-100 tracking-wide">
+                                                {highlightEnding(ex.japanese)}
+                                              </p>
+                                              <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-200 tracking-wider">
+                                                {ex.romaji}
+                                              </p>
+                                              <p className="text-xs text-slate-700 dark:text-slate-200 font-medium border-t border-slate-100/60 dark:border-slate-800/40 pt-1.5">
+                                                {ex.vietnamese}
+                                              </p>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {/* 2. Phủ định Examples */}
+                                    {negExs.length > 0 && (
+                                      <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-855/60">
+                                        <span className="text-xs font-extrabold text-rose-500 flex items-center gap-1.5 uppercase tracking-wider">
+                                          🔴 Phủ định ({negExs.length} ví dụ)
+                                        </span>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                          {negExs.map((ex: any, exIdx: number) => (
+                                            <div 
+                                              key={exIdx}
+                                              className="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl space-y-2 relative hover:border-[#b5179e]/30 transition-all"
+                                            >
+                                              <div className="flex items-center justify-between">
+                                                <span className="text-[9px] font-extrabold text-rose-500 uppercase tracking-wider bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20">
+                                                  Ví dụ #{exIdx + 1}
+                                                </span>
+                                                <button
+                                                  onClick={() => playAudioWithFallback(ex.japanese, ex.japanese)}
+                                                  className="w-7 h-7 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200/50 dark:border-slate-700 text-[#b5179e] dark:text-pink-300 hover:text-slate-707 dark:hover:text-slate-200 text-xs transition-all active:scale-90"
+                                                  title="Phát âm"
+                                                >
+                                                  🔊
+                                                </button>
+                                              </div>
+                                              <p className="text-sm font-extrabold text-slate-800 dark:text-slate-100 tracking-wide">
+                                                {highlightEnding(ex.japanese)}
+                                              </p>
+                                              <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-200 tracking-wider">
+                                                {ex.romaji}
+                                              </p>
+                                              <p className="text-xs text-slate-700 dark:text-slate-200 font-medium border-t border-slate-100/60 dark:border-slate-800/40 pt-1.5">
+                                                {ex.vietnamese}
+                                              </p>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {/* 3. Nghi vấn Examples */}
+                                    {intExs.length > 0 && (
+                                      <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-855/60">
+                                        <span className="text-xs font-extrabold text-amber-500 flex items-center gap-1.5 uppercase tracking-wider">
+                                          🟡 Nghi vấn ({intExs.length} ví dụ)
+                                        </span>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                          {intExs.map((ex: any, exIdx: number) => (
+                                            <div 
+                                              key={exIdx}
+                                              className="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl space-y-2 relative hover:border-[#b5179e]/30 transition-all"
+                                            >
+                                              <div className="flex items-center justify-between">
+                                                <span className="text-[9px] font-extrabold text-amber-500 uppercase tracking-wider bg-amber-505/10 px-1.5 py-0.5 rounded border border-amber-505/20">
+                                                  Ví dụ #{exIdx + 1}
+                                                </span>
+                                                <button
+                                                  onClick={() => playAudioWithFallback(ex.japanese, ex.japanese)}
+                                                  className="w-7 h-7 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200/50 dark:border-slate-700 text-[#b5179e] dark:text-pink-300 hover:text-slate-707 dark:hover:text-slate-200 text-xs transition-all active:scale-90"
+                                                  title="Phát âm"
+                                                >
+                                                  🔊
+                                                </button>
+                                              </div>
+                                              <p className="text-sm font-extrabold text-slate-800 dark:text-slate-100 tracking-wide">
+                                                {highlightEnding(ex.japanese)}
+                                              </p>
+                                              <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-200 tracking-wider">
+                                                {ex.romaji}
+                                              </p>
+                                              <p className="text-xs text-slate-700 dark:text-slate-200 font-medium border-t border-slate-100/60 dark:border-slate-800/40 pt-1.5">
+                                                {ex.vietnamese}
+                                              </p>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
                             )}
                           </div>
                         );
                       })}
                     </div>
                   ) : (
-                    /* CHẾ ĐỘ LUYỆN BÀI TẬP TRỢ TỪ */
-                    <div className="w-full max-w-xl mx-auto p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
-                      {particleQuestions.length === 0 ? (
-                        <p className="text-center text-slate-500 dark:text-slate-400">Bài học này không đủ ví dụ câu để tạo bài tập trợ từ.</p>
-                      ) : particleFinished ? (
-                        <div className="text-center p-6 space-y-4">
-                          <div className="text-4xl">🌟</div>
-                          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">Hoàn thành bài tập trợ từ!</h3>
-                          <p className="text-slate-500 dark:text-slate-450">Điểm số: <span className="text-[#b5179e] font-extrabold text-lg">{particleScore}</span> / {particleQuestions.length * 10}</p>
-                          <button
-                            onClick={generateParticleQuestions}
-                            className="px-6 py-2.5 bg-[#b5179e] hover:bg-[#7209b7] text-white font-bold rounded-xl active:scale-[0.98] transition-all"
-                          >
-                            🔄 Làm lại
-                          </button>
-                        </div>
-                      ) : (
-                        <div className="space-y-6">
-                          <div className="flex justify-between items-center text-xs text-slate-450 font-bold">
-                            <span>Câu hỏi {particleIndex + 1} / {particleQuestions.length}</span>
-                            <span className="text-indigo-500">Điểm: {particleScore}</span>
-                          </div>
-                          <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-gradient-to-r from-[#b5179e] to-[#7209b7] transition-all duration-300"
-                              style={{ width: `${((particleIndex + 1) / particleQuestions.length) * 100}%` }}
-                            />
-                          </div>
+                    /* CHẾ ĐỘ LUYỆN TẬP NGỮ PHÁP MARUGOTO */
+                    <div className="space-y-6 max-w-xl mx-auto">
+                      <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-sm mx-auto">
+                        <button
+                          onClick={() => setGrammarPracticeMode('particles')}
+                          className={"flex-1 py-1.5 text-center text-xs font-bold rounded-lg transition-all cursor-pointer " + (
+                            grammarPracticeMode === 'particles'
+                              ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                              : 'text-slate-600 dark:text-slate-200 hover:text-slate-705'
+                          )}
+                        >
+                          ⚡ Bài tập trợ từ
+                        </button>
+                        <button
+                          onClick={() => setGrammarPracticeMode('transformation')}
+                          className={"flex-1 py-1.5 text-center text-xs font-bold rounded-lg transition-all cursor-pointer " + (
+                            grammarPracticeMode === 'transformation'
+                              ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                              : 'text-slate-600 dark:text-slate-200 hover:text-slate-705'
+                          )}
+                        >
+                          🔄 Biến đổi thể câu
+                        </button>
+                      </div>
 
-                          <div className="p-5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 rounded-2xl text-center space-y-3">
-                            <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-relaxed">
-                              {particleQuestions[particleIndex].sentenceWithBlank}
-                            </h4>
-                            <p className="text-xs text-slate-400">{particleQuestions[particleIndex].romaji}</p>
-                            <p className="text-sm text-slate-500 font-medium">{particleQuestions[particleIndex].meaning}</p>
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-3">
-                            {particleQuestions[particleIndex].options.map((option, idx) => {
-                              let btnClass = "p-4 text-center border rounded-xl font-bold transition-all duration-150 ";
-                              if (!particleIsAnswered) {
-                                btnClass += "border-slate-200 dark:border-slate-800 hover:border-[#b5179e] hover:bg-[#b5179e]/10 text-slate-700 dark:text-slate-200 active:scale-[0.97]";
-                              } else {
-                                if (option === particleQuestions[particleIndex].correctAnswer) {
-                                  btnClass += "border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400";
-                                } else if (selectedParticleOption === option) {
-                                  btnClass += "border-rose-500 bg-rose-50/40 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400";
-                                } else {
-                                  btnClass += "border-slate-100 dark:border-slate-800 text-slate-350 dark:text-slate-755 opacity-50";
-                                }
-                              }
-
-                              return (
-                                <button
-                                  key={idx}
-                                  disabled={particleIsAnswered}
-                                  onClick={() => {
-                                    setSelectedParticleOption(option);
-                                    setParticleIsAnswered(true);
-                                    if (option === particleQuestions[particleIndex].correctAnswer) {
-                                      setParticleScore(prev => prev + 10);
-                                      playAudioWithFallback(particleQuestions[particleIndex].originalSentence, particleQuestions[particleIndex].originalSentence);
-                                    }
-                                  }}
-                                  className={btnClass}
-                                >
-                                  {option}
-                                </button>
-                              );
-                            })}
-                          </div>
-
-                          {particleIsAnswered && (
-                            <div className="flex gap-4">
+                      <div className="w-full p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
+                        {grammarPracticeMode === 'particles' ? (
+                          particleQuestions.length === 0 ? (
+                            <p className="text-center text-slate-505 dark:text-slate-405">Bài học này không đủ ví dụ câu để tạo bài tập trợ từ.</p>
+                          ) : particleFinished ? (
+                            <div className="text-center p-6 space-y-4">
+                              <div className="text-4xl">🌟</div>
+                              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">Hoàn thành bài tập trợ từ!</h3>
+                              <p className="text-slate-505 dark:text-slate-450">Điểm số: <span className="text-[#b5179e] font-extrabold text-lg">{particleScore}</span> / {particleQuestions.length * 10}</p>
                               <button
-                                onClick={() => playAudioWithFallback(particleQuestions[particleIndex].originalSentence, particleQuestions[particleIndex].originalSentence)}
-                                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl transition-all"
+                                onClick={generateParticleQuestions}
+                                className="px-6 py-2.5 bg-[#b5179e] hover:bg-[#7209b7] text-white font-bold rounded-xl active:scale-[0.98] transition-all cursor-pointer shadow-md"
                               >
-                                🔊 Nghe câu
-                              </button>
-                              <button
-                                onClick={() => {
-                                  if (particleIndex + 1 < particleQuestions.length) {
-                                    setParticleIndex(prev => prev + 1);
-                                    setSelectedParticleOption(null);
-                                    setParticleIsAnswered(false);
-                                  } else {
-                                    setParticleFinished(true);
-                                  }
-                                }}
-                                className="flex-1 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold rounded-xl transition-all"
-                              >
-                                {particleIndex + 1 < particleQuestions.length ? 'Câu tiếp theo ➔' : 'Xem kết quả ➔'}
+                                🔄 Làm lại
                               </button>
                             </div>
-                          )}
-                        </div>
-                      )}
+                          ) : (
+                            <div className="space-y-6">
+                              <div className="flex justify-between items-center text-xs text-slate-455 font-bold">
+                                <span>Câu hỏi {particleIndex + 1} / {particleQuestions.length}</span>
+                                <span className="text-indigo-500">Điểm: {particleScore}</span>
+                              </div>
+                              <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                                <div 
+                                  className="h-full bg-gradient-to-r from-[#b5179e] to-[#7209b7] transition-all duration-300"
+                                  style={{ width: (((particleIndex + 1) / particleQuestions.length) * 100) + '%' }}
+                                />
+                              </div>
+
+                              <div className="p-5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 rounded-2xl text-center space-y-3">
+                                <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-relaxed">
+                                  {particleQuestions[particleIndex].sentenceWithBlank}
+                                </h4>
+                                <p className="text-xs text-slate-400">{particleQuestions[particleIndex].romaji}</p>
+                                <p className="text-sm text-slate-550 font-medium">{particleQuestions[particleIndex].meaning}</p>
+                              </div>
+
+                              <div className="grid grid-cols-2 gap-3">
+                                {particleQuestions[particleIndex].options.map((option: string, idx: number) => {
+                                  let btnClass = "p-4 text-center border rounded-xl font-bold transition-all duration-150 cursor-pointer ";
+                                  if (!particleIsAnswered) {
+                                    btnClass += "border-slate-200 dark:border-slate-850 hover:border-[#b5179e] hover:bg-[#b5179e]/10 text-slate-700 dark:text-slate-200 active:scale-[0.97]";
+                                  } else {
+                                    if (option === particleQuestions[particleIndex].correctAnswer) {
+                                      btnClass += "border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400";
+                                    } else if (selectedParticleOption === option) {
+                                      btnClass += "border-rose-500 bg-rose-50/40 dark:bg-rose-950/30 text-rose-600 dark:text-rose-450";
+                                    } else {
+                                      btnClass += "border-slate-100 dark:border-slate-855 text-slate-350 dark:text-slate-755 opacity-50";
+                                    }
+                                  }
+
+                                  return (
+                                    <button
+                                      key={idx}
+                                      disabled={particleIsAnswered}
+                                      onClick={() => {
+                                        setSelectedParticleOption(option);
+                                        setParticleIsAnswered(true);
+                                        if (option === particleQuestions[particleIndex].correctAnswer) {
+                                          setParticleScore(prev => prev + 10);
+                                          playAudioWithFallback(particleQuestions[particleIndex].originalSentence, particleQuestions[particleIndex].originalSentence);
+                                        }
+                                      }}
+                                      className={btnClass}
+                                    >
+                                      {option}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+
+                              {particleIsAnswered && (
+                                <div className="flex gap-4">
+                                  <button
+                                    onClick={() => playAudioWithFallback(particleQuestions[particleIndex].originalSentence, particleQuestions[particleIndex].originalSentence)}
+                                    className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl transition-all cursor-pointer"
+                                  >
+                                    🔊 Nghe câu
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      if (particleIndex + 1 < particleQuestions.length) {
+                                        setParticleIndex(prev => prev + 1);
+                                        setSelectedParticleOption(null);
+                                        setParticleIsAnswered(false);
+                                      } else {
+                                        setParticleFinished(true);
+                                      }
+                                    }}
+                                    className="flex-1 py-3 bg-slate-900 hover:bg-slate-805 dark:bg-slate-105 dark:hover:bg-slate-202 text-white dark:text-slate-900 font-bold rounded-xl transition-all cursor-pointer"
+                                  >
+                                    {particleIndex + 1 < particleQuestions.length ? 'Câu tiếp theo ➔' : 'Xem kết quả ➔'}
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          )
+                        ) : (
+                          /* TRÒ CHƠI BIẾN ĐỔI THỂ CÂU */
+                          transformQuestions.length === 0 ? (
+                            <p className="text-center text-slate-555 dark:text-slate-405 py-6">
+                              Bài học này không đủ ví dụ câu để tạo bài tập biến đổi thể.
+                            </p>
+                          ) : transformFinished ? (
+                            <div className="text-center p-6 space-y-4">
+                              <div className="text-4xl">🏆</div>
+                              <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">
+                                Hoàn thành bài tập biến đổi thể!
+                              </h3>
+                              <p className="text-slate-500 dark:text-slate-455">
+                                Điểm số: <span className="text-[#b5179e] font-extrabold text-lg">{transformScore}</span> / {transformQuestions.length * 10}
+                              </p>
+                              <button
+                                onClick={generateTransformQuestions}
+                                className="px-6 py-2.5 bg-[#b5179e] hover:bg-[#7209b7] text-white font-bold rounded-xl active:scale-[0.98] transition-all cursor-pointer shadow-md"
+                              >
+                                🔄 Luyện lại
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="space-y-6">
+                              <div className="flex justify-between items-center text-xs text-slate-455 font-bold">
+                                <span>Câu hỏi {transformIndex + 1} / {transformQuestions.length}</span>
+                                <span className="text-indigo-500">Điểm: {transformScore}</span>
+                              </div>
+                              <div className="w-full h-2 bg-slate-100 dark:bg-slate-850 rounded-full overflow-hidden">
+                                <div 
+                                  className="h-full bg-gradient-to-r from-[#b5179e] to-[#7209b7] transition-all duration-300"
+                                  style={{ width: (((transformIndex + 1) / transformQuestions.length) * 100) + '%' }}
+                                />
+                              </div>
+
+                              <div className="p-5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 rounded-2xl text-center space-y-4">
+                                <div className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Câu gốc (Khẳng định)</div>
+                                <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-relaxed">
+                                  {transformQuestions[transformIndex].originalSentence}
+                                </h4>
+                                <p className="text-xs text-slate-400 font-medium">{transformQuestions[transformIndex].originalRomaji}</p>
+                                <p className="text-sm text-slate-505 font-bold">{transformQuestions[transformIndex].originalMeaning}</p>
+                                
+                                <div className="pt-3 border-t border-slate-200/40 dark:border-slate-800/40">
+                                  <span className="px-3 py-1 bg-pink-100 dark:bg-pink-955/40 border border-pink-200 dark:border-pink-900 text-xs font-black text-[#b5179e] dark:text-pink-400 rounded-lg">
+                                    Yêu cầu: Chuyển sang thể {transformQuestions[transformIndex].targetFormVi}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-1 gap-3">
+                                {transformQuestions[transformIndex].options.map((option: string, idx: number) => {
+                                  const isCorrect = option === transformQuestions[transformIndex].correctAnswer;
+                                  const isSelected = transformSelectedOption === option;
+                                  
+                                  let btnClass = "p-4 text-left border rounded-xl font-bold transition-all duration-150 flex justify-between items-center cursor-pointer ";
+                                  if (!transformIsAnswered) {
+                                    btnClass += "border-slate-200 dark:border-slate-855 hover:border-[#b5179e] hover:bg-[#b5179e]/5 text-slate-700 dark:text-slate-200 active:scale-[0.98]";
+                                  } else {
+                                    if (isCorrect) {
+                                      btnClass += "border-emerald-500 bg-emerald-505/10 text-emerald-600 dark:text-emerald-400";
+                                    } else if (isSelected) {
+                                      btnClass += "border-rose-500 bg-rose-50/40 dark:bg-rose-955/30 text-rose-600 dark:text-rose-400";
+                                    } else {
+                                      btnClass += "border-slate-105 dark:border-slate-855 text-slate-400 dark:text-slate-655 opacity-55";
+                                    }
+                                  }
+
+                                  return (
+                                    <button
+                                      key={idx}
+                                      disabled={transformIsAnswered}
+                                      onClick={() => {
+                                        setTransformSelectedOption(option);
+                                        setTransformIsAnswered(true);
+                                        if (isCorrect) {
+                                          setTransformScore(prev => prev + 10);
+                                          playAudioWithFallback(option, option);
+                                        }
+                                      }}
+                                      className={btnClass}
+                                    >
+                                      <span className="text-sm font-black">{option}</span>
+                                      {transformIsAnswered && (
+                                        <span>
+                                          {isCorrect ? '✅' : isSelected ? '❌' : ''}
+                                        </span>
+                                      )}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+
+                              {transformIsAnswered && (
+                                <button
+                                  onClick={() => {
+                                    if (transformIndex + 1 < transformQuestions.length) {
+                                      setTransformIndex(prev => prev + 1);
+                                      setTransformSelectedOption(null);
+                                      setTransformIsAnswered(false);
+                                    } else {
+                                      setTransformFinished(true);
+                                    }
+                                  }}
+                                  className="w-full py-3 bg-slate-900 hover:bg-slate-805 dark:bg-slate-105 dark:hover:bg-slate-202 text-white dark:text-slate-900 font-bold rounded-xl active:scale-[0.98] transition-all cursor-pointer text-center text-sm shadow-md"
+                                >
+                                  {transformIndex + 1 < transformQuestions.length ? 'Câu tiếp theo ➡️' : 'Xem kết quả 🏆'}
+                                </button>
+                              )}
+                            </div>
+                          )
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
