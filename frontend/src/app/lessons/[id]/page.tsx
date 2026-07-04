@@ -1165,14 +1165,15 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   // Load initial practice list once vocabulary or kanji is available
   useEffect(() => {
-    if (currentTab === 'practice') {
+    const isPracticeActive = currentTab === 'practice' || (isMarugoto && currentTab === 'vocab' && vocabSubTab === 'practice');
+    if (isPracticeActive) {
       if (currentSourceList.length > 0 && baseShuffledList.length === 0) {
         const newList = generatePracticeList(currentSourceList, practiceLimit === '' ? 10 : practiceLimit);
         setBaseShuffledList(newList);
         setPracticeList(newList);
       }
     }
-  }, [currentTab, currentSourceList, practiceLimit, baseShuffledList.length]);
+  }, [currentTab, vocabSubTab, isMarugoto, currentSourceList, practiceLimit, baseShuffledList.length]);
 
   // Reset practice state when practice mode or status filter changes
   useEffect(() => {
@@ -1749,6 +1750,798 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const grammarLearningCount = grammarItems.filter(g => g.status === 'learning').length;
   const grammarProgressPercent = grammarTotalCount ? Math.round((grammarMasteredCount / grammarTotalCount) * 100) : 0;
 
+  const renderInteractivePractice = () => {
+    return (
+      <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
+                {/* 1. Header Toolbar Controls */}
+                <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
+                    <h2 className="text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
+                      <span>✏️</span>
+                      <span>Bảng Luyện Tập & Đảo Đề Tương Tác</span>
+                    </h2>
+                    <p className="text-xs text-slate-400 dark:text-slate-500">
+                      Kiểm tra kiến thức từ vựng {!isMarugoto && 'và chữ Hán'} bằng cách nhập câu trả lời
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    {/* Control settings */}
+                    <div className="flex flex-wrap items-center gap-4">
+                      {/* Select practiceType: Tự luận / Phản xạ nhanh */}
+                      <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+                        <button
+                          onClick={() => setPracticeType('write')}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                            practiceType === 'write'
+                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                          }`}
+                        >
+                          ✍️ Tự luận
+                        </button>
+                        <button
+                          onClick={() => {
+                            setPracticeType('speedrun');
+                            stopSpeedrun();
+                          }}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                            practiceType === 'speedrun'
+                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                          }`}
+                        >
+                          ⚡ Phản xạ nhanh
+                        </button>
+                      </div>
+
+                      {practiceType === 'write' && (
+                        <>
+                          {!isMarugoto && (
+                      <React.Fragment>
+                        /* Select type: Vocab / Kanji */
+                          <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+                            <button
+                              onClick={() => setPracticeMode('vocab')}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                                practiceMode === 'vocab'
+                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                              }`}
+                            >
+                              Luyện Từ Vựng
+                            </button>
+                            <button
+                              onClick={() => setPracticeMode('kanji')}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                                practiceMode === 'kanji'
+                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                              }`}
+                            >
+                              Luyện Chữ Hán
+                            </button>
+                          </div>
+                      </React.Fragment>
+                    )}
+
+                          {/* Select direction: Việt-Nhật / Nhật-Việt */}
+                          <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+                            <button
+                              onClick={() => setPracticeDirection('vi-to-ja')}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                                practiceDirection === 'vi-to-ja'
+                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                              }`}
+                            >
+                              🇻🇳 ➔ 🇯🇵
+                            </button>
+                            <button
+                              onClick={() => setPracticeDirection('ja-to-vi')}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                                practiceDirection === 'ja-to-vi'
+                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                              }`}
+                            >
+                              🇯🇵 ➔ 🇻🇳
+                            </button>
+                          </div>
+                        </>
+                      )}
+
+                      {practiceType !== 'speedrun' && (
+                        <>
+                          {/* Dropdown: Lọc trạng thái ôn tập */}
+                          <div id="practice-dropdown-container" className="relative">
+                            <button
+                              onClick={() => setPracticeDropdownOpen(!practiceDropdownOpen)}
+                              className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 dark:text-slate-500 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors"
+                            >
+                              <span>🔍 Lọc:</span>
+                              <span className="text-blue-600 dark:text-blue-400">
+                                {Object.values(practiceFilterStatuses).filter(Boolean).length === 0
+                                  ? 'Học hết'
+                                  : Object.keys(practiceFilterStatuses)
+                                      .filter((k) => practiceFilterStatuses[k])
+                                      .map((k) =>
+                                        k === 'not_learned'
+                                          ? 'Chưa học'
+                                          : k === 'learning'
+                                          ? 'Đang học'
+                                          : 'Đã thuộc'
+                                      )
+                                      .join(', ')}
+                              </span>
+                              <span className="text-[10px]">▼</span>
+                            </button>
+                            {practiceDropdownOpen && (
+                              <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1">
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={practiceFilterStatuses.not_learned}
+                                    onChange={(e) =>
+                                      setPracticeFilterStatuses((prev) => ({
+                                        ...prev,
+                                        not_learned: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
+                                  />
+                                  <span>Chưa học</span>
+                                </label>
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={practiceFilterStatuses.learning}
+                                    onChange={(e) =>
+                                      setPracticeFilterStatuses((prev) => ({
+                                        ...prev,
+                                        learning: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
+                                  />
+                                  <span>Đang học</span>
+                                </label>
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={practiceFilterStatuses.mastered}
+                                    onChange={(e) =>
+                                      setPracticeFilterStatuses((prev) => ({
+                                        ...prev,
+                                        mastered: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
+                                  />
+                                  <span>Đã thuộc</span>
+                                </label>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Number of questions input */}
+                          <div className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl">
+                            <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">Số câu:</span>
+                            <input
+                              type="number"
+                              value={practiceLimit}
+                              onChange={(e) => handleLimitChange(e.target.value)}
+                              onBlur={handleLimitBlur}
+                              className="w-12 bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-base md:text-xs font-extrabold text-slate-900 dark:text-white py-1 focus:outline-none focus:border-blue-500"
+                            />
+                            <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">
+                              / {currentSourceList.length}
+                            </span>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Romaji Checkbox (Việt-Nhật Vocab only) */}
+                      {practiceType === 'write' && practiceMode === 'vocab' && practiceDirection === 'vi-to-ja' && (
+                        <label className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 dark:text-slate-500 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={useRomaji}
+                            onChange={(e) => setUseRomaji(e.target.checked)}
+                            className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 focus:ring-offset-slate-900 cursor-pointer"
+                          />
+                          <span>Trả lời bằng Romaji</span>
+                        </label>
+                      )}
+
+                      {/* Kanji/Hiragana Toggle (Nhật-Việt Vocab only) */}
+                      {practiceType === 'write' && practiceMode === 'vocab' && practiceDirection === 'ja-to-vi' && (
+                        <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+                          <button
+                            onClick={() => setPracticeScriptMode('hiragana')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                              practiceScriptMode === 'hiragana'
+                                ? 'bg-indigo-600 text-slate-900 dark:text-white shadow-lg'
+                                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                            }`}
+                          >
+                            📖 Hira/Kata
+                          </button>
+                          <button
+                            onClick={() => setPracticeScriptMode('kanji')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                              practiceScriptMode === 'kanji'
+                                ? 'bg-indigo-600 text-slate-900 dark:text-white shadow-lg'
+                                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                            }`}
+                          >
+                            🉐 Kanji
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Shuffle button */}
+                    {practiceType === 'write' && (
+                      <div className="flex items-center space-x-3 w-full lg:w-auto justify-end">
+                        <button
+                          onClick={handleShufflePractice}
+                          className="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-all text-xs font-bold flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
+                          title="Xáo trộn thứ tự câu hỏi"
+                        >
+                          <span>🔀</span>
+                          <span>Tráo đề</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* 2. Practice Modes Conditional Content */}
+                {practiceType === 'write' && (
+                  <>
+                    {practiceList.length === 0 ? (
+                      <div className="text-center py-20 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
+                        📭 Đang tải học liệu hoặc không tìm thấy dữ liệu luyện tập.
+                      </div>
+                    ) : (
+                      <div ref={practiceTopRef} className="space-y-6">
+                        {/* Desktop View Table */}
+                        <div className="hidden lg:block overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/20 backdrop-blur-md shadow-xl">
+                          <table className="w-full text-left border-collapse">
+                            <thead>
+                              <tr className="bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80">
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-12">STT</th>
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-12">Nghe</th>
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center">Câu hỏi</th>
+                                {practiceMode === 'vocab' && (
+                                  <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-28">Từ loại</th>
+                                )}
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-64">Câu trả lời của bạn</th>
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-28">Kết quả</th>
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-36">% Đúng</th>
+                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-48">Đáp án đúng</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-900">
+                              {practiceList.map((item, idx) => {
+                                const isVocab = practiceMode === 'vocab';
+                                const isViToJa = practiceDirection === 'vi-to-ja';
+
+                                // Define question text and placeholder
+                                let questionText = '';
+                                let placeholderText = '';
+                                let correctAnswer = '';
+                                
+                                if (isVocab) {
+                                  questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (item.kanji_word || item.hiragana) : item.hiragana);
+                                  placeholderText = isViToJa 
+                                    ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
+                                    : 'Nhập nghĩa tiếng Việt...';
+                                  correctAnswer = isViToJa 
+                                    ? (useRomaji ? item.romaji : item.hiragana) 
+                                    : item.vietnamese_meaning;
+                                } else {
+                                  questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
+                                  placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
+                                  correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
+                                }
+
+                                const userAnswer = practiceAnswers[item.uniqueId] || '';
+                                const pct = calculateAccuracy(userAnswer, correctAnswer);
+                                const isVisible = visibleAnswers[item.uniqueId] || false;
+
+                                return (
+                                  <tr key={item.uniqueId} className="hover:bg-slate-100 dark:hover:bg-slate-900/20 dark:bg-slate-900/20 transition-colors">
+                                    <td className="py-4 px-4 text-xs font-bold text-slate-400 dark:text-slate-500 text-center">{idx + 1}</td>
+                                    <td className="py-4 px-4 text-center">
+                                      <button
+                                        onClick={() => playAudio(isVocab ? item.hiragana : item.character)}
+                                        className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 transition-all cursor-pointer"
+                                        title="Nghe câu hỏi"
+                                      >
+                                        🔊
+                                      </button>
+                                    </td>
+                                    <td className="py-4 px-4 text-sm font-semibold text-slate-700 dark:text-slate-200 font-sans">
+                                      {questionText}
+                                    </td>
+                                    {isVocab && (
+                                      <td className="py-4 px-4 text-center">
+                                        <span className="inline-block px-2 py-0.5 bg-slate-100/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-blue-600 dark:text-blue-400 rounded-md">
+                                          {getWordTypeVietnamese(item.word_type)}
+                                        </span>
+                                      </td>
+                                    )}
+                                    <td className="py-4 px-4">
+                                      <input
+                                        type="text"
+                                        placeholder={placeholderText}
+                                        value={userAnswer}
+                                        disabled={isGraded}
+                                        onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.uniqueId]: e.target.value }))}
+                                        className={`w-full bg-[#FCF3CF] dark:bg-slate-950 text-slate-900 dark:text-white font-extrabold text-base md:text-xs px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-400 dark:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
+                                      />
+                                    </td>
+                                    <td className="py-4 px-4 text-center">
+                                      {isGraded && (
+                                        pct === 100 ? (
+                                          <span className="inline-block px-2.5 py-0.5 bg-emerald-950/40 border border-emerald-900/60 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-md">
+                                            🟢 Đúng
+                                          </span>
+                                        ) : (
+                                          <span className="inline-block px-2.5 py-0.5 bg-red-950/40 border border-red-900/60 text-[10px] font-bold text-red-600 dark:text-red-400 rounded-md">
+                                            🔴 Sai
+                                          </span>
+                                        )
+                                      )}
+                                    </td>
+                                    <td className="py-4 px-4 text-center">
+                                      {isGraded && (
+                                        <div className="space-y-0.5">
+                                          <span className={`text-xs font-black ${pct === 100 ? 'text-emerald-600 dark:text-emerald-400' : pct >= 50 ? 'text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
+                                            {pct}%
+                                          </span>
+                                          <span className="block text-[9px] text-slate-400 dark:text-slate-500 leading-none">{getEncouragementText(pct)}</span>
+                                        </div>
+                                      )}
+                                    </td>
+                                    <td className="py-4 px-4">
+                                      <div className="flex items-center space-x-2">
+                                        <button
+                                          onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
+                                          className="p-1 rounded-lg bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 cursor-pointer"
+                                          title={isVisible ? 'Ẩn đáp án' : 'Hiện đáp án'}
+                                        >
+                                          {isVisible ? '👁' : '🙈'}
+                                        </button>
+                                        <span className={`text-xs break-all ${isVisible ? 'text-blue-600 dark:text-blue-400 font-extrabold' : 'text-slate-700 dark:text-slate-200 font-mono select-none blur-[4px]'}`}>
+                                          {isVisible ? correctAnswer : '••••••••'}
+                                        </span>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* Mobile View Cards */}
+                        <div className="lg:hidden space-y-4">
+                          {practiceList.map((item, idx) => {
+                            const isVocab = practiceMode === 'vocab';
+                            const isViToJa = practiceDirection === 'vi-to-ja';
+
+                            let questionText = '';
+                            let placeholderText = '';
+                            let correctAnswer = '';
+                            
+                            if (isVocab) {
+                              questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (item.kanji_word || item.hiragana) : item.hiragana);
+                              placeholderText = isViToJa 
+                                ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
+                                : 'Nhập nghĩa tiếng Việt...';
+                              correctAnswer = isViToJa 
+                                ? (useRomaji ? item.romaji : item.hiragana) 
+                                : item.vietnamese_meaning;
+                            } else {
+                              questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
+                              placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
+                              correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
+                            }
+
+                            const userAnswer = practiceAnswers[item.uniqueId] || '';
+                            const pct = calculateAccuracy(userAnswer, correctAnswer);
+                            const isVisible = visibleAnswers[item.uniqueId] || false;
+
+                            return (
+                              <div key={item.uniqueId} className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-4.5 rounded-2xl space-y-3.5 backdrop-blur-sm">
+                                {/* Card Header */}
+                                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 pb-2">
+                                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">Câu {idx + 1}</span>
+                                  <div className="flex items-center space-x-2">
+                                    {isVocab && (
+                                      <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[9px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
+                                        {getWordTypeVietnamese(item.word_type)}
+                                      </span>
+                                    )}
+                                    <button
+                                      onClick={() => playAudio(isVocab ? item.hiragana : item.character)}
+                                      className="p-1 rounded-md bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 cursor-pointer"
+                                    >
+                                      🔊 Nghe
+                                    </button>
+                                  </div>
+                                </div>
+
+                                {/* Question */}
+                                <div className="space-y-1">
+                                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Câu hỏi</span>
+                                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 font-sans">{questionText}</p>
+                                </div>
+
+                                {/* User Answer Input */}
+                                <div className="space-y-1">
+                                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Câu trả lời</span>
+                                  <input
+                                    type="text"
+                                    placeholder={placeholderText}
+                                    value={userAnswer}
+                                    disabled={isGraded}
+                                    onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.uniqueId]: e.target.value }))}
+                                    className={`w-full bg-[#FCF3CF] dark:bg-slate-950 text-slate-900 dark:text-white font-extrabold text-base md:text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-400 dark:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
+                                  />
+                                </div>
+
+                                {/* Results under Grading */}
+                                {isGraded && (
+                                  <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-950/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50">
+                                    <div>
+                                      <span className="block text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase mb-1">Kết quả</span>
+                                      {pct === 100 ? (
+                                        <span className="inline-block px-2 py-0.5 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[9px] font-bold text-emerald-600 dark:text-emerald-400 rounded-md">
+                                          🟢 Đúng
+                                        </span>
+                                      ) : (
+                                        <span className="inline-block px-2 py-0.5 bg-red-950/30 border border-red-200 dark:border-red-800 text-[9px] font-bold text-red-600 dark:text-red-400 rounded-md">
+                                          🔴 Sai
+                                        </span>
+                                      )}
+                                    </div>
+                                    <div className="text-right">
+                                      <span className="block text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase mb-0.5">% Đúng</span>
+                                      <span className={`text-xs font-black ${pct === 100 ? 'text-emerald-600 dark:text-emerald-400' : pct >= 50 ? 'text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
+                                        {pct}%
+                                      </span>
+                                      <span className="block text-[8px] text-slate-400 dark:text-slate-500 mt-0.5">{getEncouragementText(pct)}</span>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Correct Answer reveal */}
+                                <div className="pt-2 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 space-y-2">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Đáp án đúng</span>
+                                    <button
+                                      onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
+                                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 cursor-pointer flex items-center space-x-1"
+                                    >
+                                      <span>{isVisible ? '👁️' : '🙈'}</span>
+                                      <span>{isVisible ? 'Ẩn' : 'Hiện'}</span>
+                                    </button>
+                                  </div>
+                                  <div className="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 p-2.5 rounded-xl">
+                                    <p className={`font-serif text-xs sm:text-sm tracking-wide break-all break-words transition-all leading-relaxed ${isVisible ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-slate-650 select-none blur-[4px] font-mono'}`}>
+                                      {isVisible ? correctAnswer : '••••••••'}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* 3. Action Buttons & Grading Summary */}
+                        <div ref={practiceResultsRef} className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800">
+                          <div>
+                            {isGraded && (
+                              <p className="text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                                🎉 Bạn đã hoàn thành chấm điểm! Kết quả: {correctCount}/{practiceList.length} câu đúng. Hãy rà soát lại các câu sai để ôn tập nhé.
+                              </p>
+                            )}
+                          </div>
+                          
+                          <div className="flex items-center space-x-4 self-end sm:self-auto">
+                            <button
+                              onClick={() => {
+                                if (currentSourceList.length > 0) {
+                                  const newList = generatePracticeList(currentSourceList, practiceLimit === '' ? 10 : practiceLimit);
+                                  setBaseShuffledList(newList);
+                                  setPracticeList(newList);
+                                }
+                                setPracticeAnswers({});
+                                setIsGraded(false);
+                                setVisibleAnswers({});
+                                setTimeout(() => {
+                                  practiceTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 50);
+                              }}
+                              className="px-5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 hover:text-slate-800 dark:hover:text-slate-200 dark:text-slate-100 text-xs font-bold text-slate-400 dark:text-slate-500 transition-all duration-300 cursor-pointer active:scale-95"
+                            >
+                              Làm lại
+                            </button>
+                            <button
+                              onClick={() => setIsGraded(true)}
+                              disabled={isGraded}
+                              className={`px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white text-xs font-black transition-all duration-300 shadow-md active:scale-95 cursor-pointer flex items-center space-x-2 ${isGraded ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                              <span>📋</span>
+                              <span>Chấm điểm</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+
+                {practiceType === 'speedrun' && (
+                  <div className="space-y-6">
+                    {/* 1. Preparation Screen */}
+                    {!speedrunActive && !speedrunGameOver && (
+                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
+                        <div className="space-y-2">
+                          <span className="text-5xl block animate-bounce">⚡</span>
+                          <h3 className="text-xl font-black text-slate-700 dark:text-slate-200">Trò chơi Phản Xạ Nhanh</h3>
+                          <p className="text-xs text-slate-400 dark:text-slate-500 max-w-sm mx-auto leading-relaxed">
+                            Trắc nghiệm phản xạ từ vựng giới hạn thời gian (10 giây). Mỗi 2 câu đúng liên tục sẽ rút ngắn thời gian suy nghĩ của các câu tiếp theo!
+                          </p>
+                        </div>
+                        {/* Status Filter Selection */}
+                        <div className="space-y-2">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Bộ lọc từ vựng ({speedrunSourceList.length} từ sẵn sàng)</span>
+                          <div id="speedrun-dropdown-container" className="relative flex justify-center">
+                            <button
+                              onClick={() => setSpeedrunDropdownOpen(!speedrunDropdownOpen)}
+                              className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-2xl text-xs font-bold text-slate-600 dark:text-slate-300 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors max-w-xs w-full justify-between"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <span>🎯 Lọc:</span>
+                                <span className="text-blue-600 dark:text-blue-400">
+                                  {Object.values(speedrunFilterStatuses).filter(Boolean).length === 0
+                                    ? 'Học hết'
+                                    : Object.keys(speedrunFilterStatuses)
+                                        .filter((k) => speedrunFilterStatuses[k])
+                                        .map((k) =>
+                                          k === 'not_learned'
+                                            ? 'Chưa học'
+                                            : k === 'learning'
+                                            ? 'Đang học'
+                                            : 'Đã thuộc'
+                                        )
+                                        .join(', ')}
+                                </span>
+                              </div>
+                              <span className="text-[10px]">▼</span>
+                            </button>
+                            {speedrunDropdownOpen && (
+                              <div className="absolute top-full mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1 text-left">
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={speedrunFilterStatuses.not_learned}
+                                    onChange={(e) =>
+                                      setSpeedrunFilterStatuses((prev) => ({
+                                        ...prev,
+                                        not_learned: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                                  />
+                                  <span>Chưa học</span>
+                                </label>
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={speedrunFilterStatuses.learning}
+                                    onChange={(e) =>
+                                      setSpeedrunFilterStatuses((prev) => ({
+                                        ...prev,
+                                        learning: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                                  />
+                                  <span>Đang học</span>
+                                </label>
+                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
+                                  <input
+                                    type="checkbox"
+                                    checked={speedrunFilterStatuses.mastered}
+                                    onChange={(e) =>
+                                      setSpeedrunFilterStatuses((prev) => ({
+                                        ...prev,
+                                        mastered: e.target.checked,
+                                      }))
+                                    }
+                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
+                                  />
+                                  <span>Đã thuộc</span>
+                                </label>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Direction Selection */}
+                        <div className="space-y-2">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Chọn hướng dịch câu hỏi</span>
+                          <div className="bg-slate-50 dark:bg-slate-950/60 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex max-w-xs mx-auto">
+                            <button
+                              onClick={() => setSpeedrunDirection('ja-to-vi')}
+                              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+                                speedrunDirection === 'ja-to-vi'
+                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                              }`}
+                            >
+                              🇯🇵 Nhật ➔ 🇻🇳 Việt
+                            </button>
+                            <button
+                              onClick={() => setSpeedrunDirection('vi-to-ja')}
+                              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+                                speedrunDirection === 'vi-to-ja'
+                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                              }`}
+                            >
+                              🇻🇳 Việt ➔ 🇯🇵 Nhật
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 p-4 rounded-2xl space-y-1 inline-block min-w-[200px]">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Kỷ lục hiện tại</span>
+                          <span className="text-3xl font-black text-blue-600 dark:text-blue-400">{speedrunHighScore} điểm</span>
+                        </div>
+
+                        <div>
+                          <button
+                            onClick={startSpeedrun}
+                            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95 cursor-pointer"
+                          >
+                            Bắt đầu chơi ngay 🚀
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 2. Playing Screen */}
+                    {speedrunActive && speedrunQuestion && (
+                      <div className="max-w-xl mx-auto bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-6 rounded-3xl backdrop-blur-md space-y-6 shadow-2xl animate-fade-in">
+                        {/* Game Header */}
+                        <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-4">
+                          <div className="flex flex-col">
+                            <span className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Điểm số</span>
+                            <span className="text-xl font-black text-blue-600 dark:text-blue-400">{speedrunScore}</span>
+                          </div>
+                          <div className="flex flex-col text-right">
+                            <span className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Kỷ lục</span>
+                            <span className="text-xs font-bold text-slate-600 dark:text-slate-300">{speedrunHighScore} điểm</span>
+                          </div>
+                        </div>
+
+                        {/* Timer Progress Bar */}
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 font-bold">
+                            <span>Thời gian còn lại</span>
+                            <span className={speedrunTimeLeft <= 3 ? 'text-red-600 dark:text-red-400 font-black animate-pulse' : ''}>
+                              {speedrunTimeLeft.toFixed(1)}s
+                            </span>
+                          </div>
+                          <div className="w-full h-2 bg-white rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+                            <div
+                              className={`h-full transition-all duration-100 ${
+                                speedrunTimeLeft <= 3
+                                  ? 'bg-gradient-to-r from-red-500 to-rose-600'
+                                  : 'bg-gradient-to-r from-blue-500 to-indigo-600'
+                              }`}
+                              style={{ width: `${(speedrunTimeLeft / speedrunMaxTime) * 100}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Question Panel */}
+                        <div className="py-10 text-center bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 rounded-2xl shadow-inner space-y-2">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Câu hỏi</span>
+                          {speedrunDirection === 'ja-to-vi' ? (
+                            <div className="space-y-1 flex flex-col items-center justify-center">
+                              <PitchAccentDisplay
+                                kana={speedrunQuestion.hiragana}
+                                accent={speedrunQuestion.pitch_accent || 0}
+                                size="lg"
+                              />
+                            </div>
+                          ) : (
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white leading-relaxed px-4 select-none">
+                              {speedrunQuestion.vietnamese_meaning}
+                            </h3>
+                          )}
+                        </div>
+
+                        {/* Options Buttons */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {speedrunOptions.map((option, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => checkSpeedrunAnswer(option)}
+                              className="w-full py-4 px-4 bg-slate-50 dark:bg-slate-950/60 hover:bg-white dark:hover:bg-slate-800/80 dark:bg-slate-900/90 shadow-md border border-slate-200 dark:border-slate-800 hover:border-blue-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-2xl text-xs font-bold text-center transition-all duration-200 cursor-pointer active:scale-98 shadow-md"
+                            >
+                              {option}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Cancel Button */}
+                        <div className="text-center pt-2">
+                          <button
+                            onClick={stopSpeedrun}
+                            className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95"
+                          >
+                            Dừng trò chơi
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 3. Game Over Screen */}
+                    {!speedrunActive && speedrunGameOver && (
+                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
+                        <div className="space-y-2">
+                          <span className="text-5xl block animate-bounce">🏁</span>
+                          <h3 className="text-xl font-black text-red-600 dark:text-red-400">Trò chơi kết thúc!</h3>
+                          <p className="text-xs text-slate-400 dark:text-slate-500">
+                            Bạn đã trả lời chưa chính xác hoặc hết thời gian. Hãy thử lại để vượt qua kỷ lục của chính mình!
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-950/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60">
+                          <div>
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block mb-1">Điểm đạt được</span>
+                            <span className="text-2xl font-black text-slate-900 dark:text-white">{speedrunScore}</span>
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block mb-1">Kỷ lục hiện tại</span>
+                            <span className="text-2xl font-black text-blue-600 dark:text-blue-400">{speedrunHighScore}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                          <button
+                            onClick={() => {
+                              setSpeedrunGameOver(false);
+                            }}
+                            className="px-6 py-3 rounded-xl bg-slate-100 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 hover:text-slate-900 dark:hover:text-white dark:text-white text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95"
+                          >
+                            Quay lại màn hình chuẩn bị
+                          </button>
+                          <button
+                            onClick={startSpeedrun}
+                            className="px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white font-black text-xs transition-all duration-300 shadow-md active:scale-95 cursor-pointer"
+                          >
+                            Chơi lại ngay ⚡
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+    );
+  };
+
   return (
     <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50/50 dark:from-[#0b1329] dark:via-[#090d1a] dark:to-[#050811] text-slate-800 dark:text-slate-100 font-sans relative">
       
@@ -2025,40 +2818,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                       </div>
                     </div>
                   ) : (
-                    /* CHẾ ĐỘ LUYỆN TẬP TỪ VỰNG */
-                    <div className="space-y-6">
-                      <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 max-w-md gap-2">
-                        <button
-                          onClick={() => setVocabActiveGame('matching')}
-                          className={`flex-1 py-2 text-center text-xs font-bold rounded-xl transition-all cursor-pointer ${
-                            vocabActiveGame === 'matching'
-                              ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
-                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
-                          }`}
-                        >
-                          🃏 Ghép thẻ từ vựng
-                        </button>
-                        <button
-                          onClick={() => setVocabActiveGame('listening')}
-                          className={`flex-1 py-2 text-center text-xs font-bold rounded-xl transition-all cursor-pointer ${
-                            vocabActiveGame === 'listening'
-                              ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
-                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
-                          }`}
-                        >
-                          🔊 Trắc nghiệm nghe
-                        </button>
-                      </div>
-
-                      <div className="mt-4">
-                        {vocabActiveGame === 'matching' && (
-                          <MatchingGame vocabItems={vocabItems} />
-                        )}
-                        {vocabActiveGame === 'listening' && (
-                          <ListeningQuiz vocabItems={vocabItems} grammarItems={[]} />
-                        )}
-                      </div>
-                    </div>
+renderInteractivePractice()
                   )}
                 </div>
               ) : (
@@ -4893,793 +5653,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
                 </div>
               ) : (
-                <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
-                {/* 1. Header Toolbar Controls */}
-                <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
-                    <h2 className="text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
-                      <span>✏️</span>
-                      <span>Bảng Luyện Tập & Đảo Đề Tương Tác</span>
-                    </h2>
-                    <p className="text-xs text-slate-400 dark:text-slate-500">
-                      Kiểm tra kiến thức từ vựng và chữ Hán bằng cách nhập câu trả lời
-                    </p>
-                  </div>
+                renderInteractivePractice()
+              )
+            )}
 
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                    {/* Control settings */}
-                    <div className="flex flex-wrap items-center gap-4">
-                      {/* Select practiceType: Tự luận / Phản xạ nhanh */}
-                      <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
-                        <button
-                          onClick={() => setPracticeType('write')}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                            practiceType === 'write'
-                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                          }`}
-                        >
-                          ✍️ Tự luận
-                        </button>
-                        <button
-                          onClick={() => {
-                            setPracticeType('speedrun');
-                            stopSpeedrun();
-                          }}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                            practiceType === 'speedrun'
-                              ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                          }`}
-                        >
-                          ⚡ Phản xạ nhanh
-                        </button>
-                      </div>
-
-                      {practiceType === 'write' && (
-                        <>
-                          {/* Select type: Vocab / Kanji */}
-                          <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
-                            <button
-                              onClick={() => setPracticeMode('vocab')}
-                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                                practiceMode === 'vocab'
-                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                              }`}
-                            >
-                              Luyện Từ Vựng
-                            </button>
-                            <button
-                              onClick={() => setPracticeMode('kanji')}
-                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                                practiceMode === 'kanji'
-                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                              }`}
-                            >
-                              Luyện Chữ Hán
-                            </button>
-                          </div>
-
-                          {/* Select direction: Việt-Nhật / Nhật-Việt */}
-                          <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
-                            <button
-                              onClick={() => setPracticeDirection('vi-to-ja')}
-                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                                practiceDirection === 'vi-to-ja'
-                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                              }`}
-                            >
-                              🇻🇳 ➔ 🇯🇵
-                            </button>
-                            <button
-                              onClick={() => setPracticeDirection('ja-to-vi')}
-                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                                practiceDirection === 'ja-to-vi'
-                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                              }`}
-                            >
-                              🇯🇵 ➔ 🇻🇳
-                            </button>
-                          </div>
-                        </>
-                      )}
-
-                      {practiceType !== 'speedrun' && (
-                        <>
-                          {/* Dropdown: Lọc trạng thái ôn tập */}
-                          <div id="practice-dropdown-container" className="relative">
-                            <button
-                              onClick={() => setPracticeDropdownOpen(!practiceDropdownOpen)}
-                              className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 dark:text-slate-500 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors"
-                            >
-                              <span>🔍 Lọc:</span>
-                              <span className="text-blue-600 dark:text-blue-400">
-                                {Object.values(practiceFilterStatuses).filter(Boolean).length === 0
-                                  ? 'Học hết'
-                                  : Object.keys(practiceFilterStatuses)
-                                      .filter((k) => practiceFilterStatuses[k])
-                                      .map((k) =>
-                                        k === 'not_learned'
-                                          ? 'Chưa học'
-                                          : k === 'learning'
-                                          ? 'Đang học'
-                                          : 'Đã thuộc'
-                                      )
-                                      .join(', ')}
-                              </span>
-                              <span className="text-[10px]">▼</span>
-                            </button>
-                            {practiceDropdownOpen && (
-                              <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1">
-                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                                  <input
-                                    type="checkbox"
-                                    checked={practiceFilterStatuses.not_learned}
-                                    onChange={(e) =>
-                                      setPracticeFilterStatuses((prev) => ({
-                                        ...prev,
-                                        not_learned: e.target.checked,
-                                      }))
-                                    }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
-                                  />
-                                  <span>Chưa học</span>
-                                </label>
-                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                                  <input
-                                    type="checkbox"
-                                    checked={practiceFilterStatuses.learning}
-                                    onChange={(e) =>
-                                      setPracticeFilterStatuses((prev) => ({
-                                        ...prev,
-                                        learning: e.target.checked,
-                                      }))
-                                    }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
-                                  />
-                                  <span>Đang học</span>
-                                </label>
-                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                                  <input
-                                    type="checkbox"
-                                    checked={practiceFilterStatuses.mastered}
-                                    onChange={(e) =>
-                                      setPracticeFilterStatuses((prev) => ({
-                                        ...prev,
-                                        mastered: e.target.checked,
-                                      }))
-                                    }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white text-blue-600 dark:text-blue-400 focus:ring-blue-500"
-                                  />
-                                  <span>Đã thuộc</span>
-                                </label>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Number of questions input */}
-                          <div className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl">
-                            <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">Số câu:</span>
-                            <input
-                              type="number"
-                              value={practiceLimit}
-                              onChange={(e) => handleLimitChange(e.target.value)}
-                              onBlur={handleLimitBlur}
-                              className="w-12 bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-base md:text-xs font-extrabold text-slate-900 dark:text-white py-1 focus:outline-none focus:border-blue-500"
-                            />
-                            <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">
-                              / {currentSourceList.length}
-                            </span>
-                          </div>
-                        </>
-                      )}
-
-                      {/* Romaji Checkbox (Việt-Nhật Vocab only) */}
-                      {practiceType === 'write' && practiceMode === 'vocab' && practiceDirection === 'vi-to-ja' && (
-                        <label className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 dark:text-slate-500 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                          <input
-                            type="checkbox"
-                            checked={useRomaji}
-                            onChange={(e) => setUseRomaji(e.target.checked)}
-                            className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 focus:ring-offset-slate-900 cursor-pointer"
-                          />
-                          <span>Trả lời bằng Romaji</span>
-                        </label>
-                      )}
-
-                      {/* Kanji/Hiragana Toggle (Nhật-Việt Vocab only) */}
-                      {practiceType === 'write' && practiceMode === 'vocab' && practiceDirection === 'ja-to-vi' && (
-                        <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
-                          <button
-                            onClick={() => setPracticeScriptMode('hiragana')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                              practiceScriptMode === 'hiragana'
-                                ? 'bg-indigo-600 text-slate-900 dark:text-white shadow-lg'
-                                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                            }`}
-                          >
-                            📖 Hira/Kata
-                          </button>
-                          <button
-                            onClick={() => setPracticeScriptMode('kanji')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                              practiceScriptMode === 'kanji'
-                                ? 'bg-indigo-600 text-slate-900 dark:text-white shadow-lg'
-                                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                            }`}
-                          >
-                            🉐 Kanji
-                          </button>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Shuffle button */}
-                    {practiceType === 'write' && (
-                      <div className="flex items-center space-x-3 w-full lg:w-auto justify-end">
-                        <button
-                          onClick={handleShufflePractice}
-                          className="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-all text-xs font-bold flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
-                          title="Xáo trộn thứ tự câu hỏi"
-                        >
-                          <span>🔀</span>
-                          <span>Tráo đề</span>
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* 2. Practice Modes Conditional Content */}
-                {practiceType === 'write' && (
-                  <>
-                    {practiceList.length === 0 ? (
-                      <div className="text-center py-20 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
-                        📭 Đang tải học liệu hoặc không tìm thấy dữ liệu luyện tập.
-                      </div>
-                    ) : (
-                      <div ref={practiceTopRef} className="space-y-6">
-                        {/* Desktop View Table */}
-                        <div className="hidden lg:block overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/20 backdrop-blur-md shadow-xl">
-                          <table className="w-full text-left border-collapse">
-                            <thead>
-                              <tr className="bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80">
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-12">STT</th>
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-12">Nghe</th>
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center">Câu hỏi</th>
-                                {practiceMode === 'vocab' && (
-                                  <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-28">Từ loại</th>
-                                )}
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-64">Câu trả lời của bạn</th>
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-28">Kết quả</th>
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-36">% Đúng</th>
-                                <th className="py-4 px-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center w-48">Đáp án đúng</th>
-                              </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-900">
-                              {practiceList.map((item, idx) => {
-                                const isVocab = practiceMode === 'vocab';
-                                const isViToJa = practiceDirection === 'vi-to-ja';
-
-                                // Define question text and placeholder
-                                let questionText = '';
-                                let placeholderText = '';
-                                let correctAnswer = '';
-                                
-                                if (isVocab) {
-                                  questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? getKanjiForm(item.hiragana, kanjiItems) : item.hiragana);
-                                  placeholderText = isViToJa 
-                                    ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
-                                    : 'Nhập nghĩa tiếng Việt...';
-                                  correctAnswer = isViToJa 
-                                    ? (useRomaji ? item.romaji : item.hiragana) 
-                                    : item.vietnamese_meaning;
-                                } else {
-                                  questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
-                                  placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
-                                  correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
-                                }
-
-                                const userAnswer = practiceAnswers[item.uniqueId] || '';
-                                const pct = calculateAccuracy(userAnswer, correctAnswer);
-                                const isVisible = visibleAnswers[item.uniqueId] || false;
-
-                                return (
-                                  <tr key={item.uniqueId} className="hover:bg-slate-100 dark:hover:bg-slate-900/20 dark:bg-slate-900/20 transition-colors">
-                                    <td className="py-4 px-4 text-xs font-bold text-slate-400 dark:text-slate-500 text-center">{idx + 1}</td>
-                                    <td className="py-4 px-4 text-center">
-                                      <button
-                                        onClick={() => playAudio(isVocab ? item.hiragana : item.character)}
-                                        className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 transition-all cursor-pointer"
-                                        title="Nghe câu hỏi"
-                                      >
-                                        🔊
-                                      </button>
-                                    </td>
-                                    <td className="py-4 px-4 text-sm font-semibold text-slate-700 dark:text-slate-200 font-sans">
-                                      {questionText}
-                                    </td>
-                                    {isVocab && (
-                                      <td className="py-4 px-4 text-center">
-                                        <span className="inline-block px-2 py-0.5 bg-slate-100/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-blue-600 dark:text-blue-400 rounded-md">
-                                          {getWordTypeVietnamese(item.word_type)}
-                                        </span>
-                                      </td>
-                                    )}
-                                    <td className="py-4 px-4">
-                                      <input
-                                        type="text"
-                                        placeholder={placeholderText}
-                                        value={userAnswer}
-                                        disabled={isGraded}
-                                        onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.uniqueId]: e.target.value }))}
-                                        className={`w-full bg-[#FCF3CF] dark:bg-slate-950 text-slate-900 dark:text-white font-extrabold text-base md:text-xs px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-slate-400 dark:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
-                                      />
-                                    </td>
-                                    <td className="py-4 px-4 text-center">
-                                      {isGraded && (
-                                        pct === 100 ? (
-                                          <span className="inline-block px-2.5 py-0.5 bg-emerald-950/40 border border-emerald-900/60 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-md">
-                                            🟢 Đúng
-                                          </span>
-                                        ) : (
-                                          <span className="inline-block px-2.5 py-0.5 bg-red-950/40 border border-red-900/60 text-[10px] font-bold text-red-600 dark:text-red-400 rounded-md">
-                                            🔴 Sai
-                                          </span>
-                                        )
-                                      )}
-                                    </td>
-                                    <td className="py-4 px-4 text-center">
-                                      {isGraded && (
-                                        <div className="space-y-0.5">
-                                          <span className={`text-xs font-black ${pct === 100 ? 'text-emerald-600 dark:text-emerald-400' : pct >= 50 ? 'text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
-                                            {pct}%
-                                          </span>
-                                          <span className="block text-[9px] text-slate-400 dark:text-slate-500 leading-none">{getEncouragementText(pct)}</span>
-                                        </div>
-                                      )}
-                                    </td>
-                                    <td className="py-4 px-4">
-                                      <div className="flex items-center space-x-2">
-                                        <button
-                                          onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
-                                          className="p-1 rounded-lg bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 cursor-pointer"
-                                          title={isVisible ? 'Ẩn đáp án' : 'Hiện đáp án'}
-                                        >
-                                          {isVisible ? '👁' : '🙈'}
-                                        </button>
-                                        <span className={`text-xs break-all ${isVisible ? 'text-blue-600 dark:text-blue-400 font-extrabold' : 'text-slate-700 dark:text-slate-200 font-mono select-none blur-[4px]'}`}>
-                                          {isVisible ? correctAnswer : '••••••••'}
-                                        </span>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                );
-                              })}
-                            </tbody>
-                          </table>
-                        </div>
-
-                        {/* Mobile View Cards */}
-                        <div className="lg:hidden space-y-4">
-                          {practiceList.map((item, idx) => {
-                            const isVocab = practiceMode === 'vocab';
-                            const isViToJa = practiceDirection === 'vi-to-ja';
-
-                            let questionText = '';
-                            let placeholderText = '';
-                            let correctAnswer = '';
-                            
-                            if (isVocab) {
-                              questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? getKanjiForm(item.hiragana, kanjiItems) : item.hiragana);
-                              placeholderText = isViToJa 
-                                ? (useRomaji ? 'Nhập Romaji...' : 'Nhập Hiragana...') 
-                                : 'Nhập nghĩa tiếng Việt...';
-                              correctAnswer = isViToJa 
-                                ? (useRomaji ? item.romaji : item.hiragana) 
-                                : item.vietnamese_meaning;
-                            } else {
-                              questionText = isViToJa ? `${item.sino_vietnamese} (${item.vietnamese_meaning})` : item.character;
-                              placeholderText = isViToJa ? 'Nhập chữ Hán...' : 'Nhập âm Hán Việt...';
-                              correctAnswer = isViToJa ? item.character : item.sino_vietnamese;
-                            }
-
-                            const userAnswer = practiceAnswers[item.uniqueId] || '';
-                            const pct = calculateAccuracy(userAnswer, correctAnswer);
-                            const isVisible = visibleAnswers[item.uniqueId] || false;
-
-                            return (
-                              <div key={item.uniqueId} className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-4.5 rounded-2xl space-y-3.5 backdrop-blur-sm">
-                                {/* Card Header */}
-                                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 pb-2">
-                                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">Câu {idx + 1}</span>
-                                  <div className="flex items-center space-x-2">
-                                    {isVocab && (
-                                      <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[9px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
-                                        {getWordTypeVietnamese(item.word_type)}
-                                      </span>
-                                    )}
-                                    <button
-                                      onClick={() => playAudio(isVocab ? item.hiragana : item.character)}
-                                      className="p-1 rounded-md bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:text-blue-400 cursor-pointer"
-                                    >
-                                      🔊 Nghe
-                                    </button>
-                                  </div>
-                                </div>
-
-                                {/* Question */}
-                                <div className="space-y-1">
-                                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Câu hỏi</span>
-                                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 font-sans">{questionText}</p>
-                                </div>
-
-                                {/* User Answer Input */}
-                                <div className="space-y-1">
-                                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Câu trả lời</span>
-                                  <input
-                                    type="text"
-                                    placeholder={placeholderText}
-                                    value={userAnswer}
-                                    disabled={isGraded}
-                                    onChange={(e) => setPracticeAnswers(prev => ({ ...prev, [item.uniqueId]: e.target.value }))}
-                                    className={`w-full bg-[#FCF3CF] dark:bg-slate-950 text-slate-900 dark:text-white font-extrabold text-base md:text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-400 dark:text-slate-500 ${isGraded ? 'opacity-80' : ''}`}
-                                  />
-                                </div>
-
-                                {/* Results under Grading */}
-                                {isGraded && (
-                                  <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-950/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50">
-                                    <div>
-                                      <span className="block text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase mb-1">Kết quả</span>
-                                      {pct === 100 ? (
-                                        <span className="inline-block px-2 py-0.5 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[9px] font-bold text-emerald-600 dark:text-emerald-400 rounded-md">
-                                          🟢 Đúng
-                                        </span>
-                                      ) : (
-                                        <span className="inline-block px-2 py-0.5 bg-red-950/30 border border-red-200 dark:border-red-800 text-[9px] font-bold text-red-600 dark:text-red-400 rounded-md">
-                                          🔴 Sai
-                                        </span>
-                                      )}
-                                    </div>
-                                    <div className="text-right">
-                                      <span className="block text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase mb-0.5">% Đúng</span>
-                                      <span className={`text-xs font-black ${pct === 100 ? 'text-emerald-600 dark:text-emerald-400' : pct >= 50 ? 'text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
-                                        {pct}%
-                                      </span>
-                                      <span className="block text-[8px] text-slate-400 dark:text-slate-500 mt-0.5">{getEncouragementText(pct)}</span>
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Correct Answer reveal */}
-                                <div className="pt-2 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 space-y-2">
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Đáp án đúng</span>
-                                    <button
-                                      onClick={() => setVisibleAnswers(prev => ({ ...prev, [item.uniqueId]: !isVisible }))}
-                                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 cursor-pointer flex items-center space-x-1"
-                                    >
-                                      <span>{isVisible ? '👁️' : '🙈'}</span>
-                                      <span>{isVisible ? 'Ẩn' : 'Hiện'}</span>
-                                    </button>
-                                  </div>
-                                  <div className="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 p-2.5 rounded-xl">
-                                    <p className={`font-serif text-xs sm:text-sm tracking-wide break-all break-words transition-all leading-relaxed ${isVisible ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-slate-650 select-none blur-[4px] font-mono'}`}>
-                                      {isVisible ? correctAnswer : '••••••••'}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-
-                        {/* 3. Action Buttons & Grading Summary */}
-                        <div ref={practiceResultsRef} className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800">
-                          <div>
-                            {isGraded && (
-                              <p className="text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400">
-                                🎉 Bạn đã hoàn thành chấm điểm! Kết quả: {correctCount}/{practiceList.length} câu đúng. Hãy rà soát lại các câu sai để ôn tập nhé.
-                              </p>
-                            )}
-                          </div>
-                          
-                          <div className="flex items-center space-x-4 self-end sm:self-auto">
-                            <button
-                              onClick={() => {
-                                if (currentSourceList.length > 0) {
-                                  const newList = generatePracticeList(currentSourceList, practiceLimit === '' ? 10 : practiceLimit);
-                                  setBaseShuffledList(newList);
-                                  setPracticeList(newList);
-                                }
-                                setPracticeAnswers({});
-                                setIsGraded(false);
-                                setVisibleAnswers({});
-                                setTimeout(() => {
-                                  practiceTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }, 50);
-                              }}
-                              className="px-5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 hover:text-slate-800 dark:hover:text-slate-200 dark:text-slate-100 text-xs font-bold text-slate-400 dark:text-slate-500 transition-all duration-300 cursor-pointer active:scale-95"
-                            >
-                              Làm lại
-                            </button>
-                            <button
-                              onClick={() => setIsGraded(true)}
-                              disabled={isGraded}
-                              className={`px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white text-xs font-black transition-all duration-300 shadow-md active:scale-95 cursor-pointer flex items-center space-x-2 ${isGraded ? 'opacity-50 cursor-not-allowed' : ''}`}
-                            >
-                              <span>📋</span>
-                              <span>Chấm điểm</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-
-
-                {practiceType === 'speedrun' && (
-                  <div className="space-y-6">
-                    {/* 1. Preparation Screen */}
-                    {!speedrunActive && !speedrunGameOver && (
-                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
-                        <div className="space-y-2">
-                          <span className="text-5xl block animate-bounce">⚡</span>
-                          <h3 className="text-xl font-black text-slate-700 dark:text-slate-200">Trò chơi Phản Xạ Nhanh</h3>
-                          <p className="text-xs text-slate-400 dark:text-slate-500 max-w-sm mx-auto leading-relaxed">
-                            Trắc nghiệm phản xạ từ vựng giới hạn thời gian (10 giây). Mỗi 2 câu đúng liên tục sẽ rút ngắn thời gian suy nghĩ của các câu tiếp theo!
-                          </p>
-                        </div>
-                        {/* Status Filter Selection */}
-                        <div className="space-y-2">
-                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Bộ lọc từ vựng ({speedrunSourceList.length} từ sẵn sàng)</span>
-                          <div id="speedrun-dropdown-container" className="relative flex justify-center">
-                            <button
-                              onClick={() => setSpeedrunDropdownOpen(!speedrunDropdownOpen)}
-                              className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-2xl text-xs font-bold text-slate-600 dark:text-slate-300 cursor-pointer hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors max-w-xs w-full justify-between"
-                            >
-                              <div className="flex items-center space-x-2">
-                                <span>🎯 Lọc:</span>
-                                <span className="text-blue-600 dark:text-blue-400">
-                                  {Object.values(speedrunFilterStatuses).filter(Boolean).length === 0
-                                    ? 'Học hết'
-                                    : Object.keys(speedrunFilterStatuses)
-                                        .filter((k) => speedrunFilterStatuses[k])
-                                        .map((k) =>
-                                          k === 'not_learned'
-                                            ? 'Chưa học'
-                                            : k === 'learning'
-                                            ? 'Đang học'
-                                            : 'Đã thuộc'
-                                        )
-                                        .join(', ')}
-                                </span>
-                              </div>
-                              <span className="text-[10px]">▼</span>
-                            </button>
-                            {speedrunDropdownOpen && (
-                              <div className="absolute top-full mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1 text-left">
-                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                                  <input
-                                    type="checkbox"
-                                    checked={speedrunFilterStatuses.not_learned}
-                                    onChange={(e) =>
-                                      setSpeedrunFilterStatuses((prev) => ({
-                                        ...prev,
-                                        not_learned: e.target.checked,
-                                      }))
-                                    }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
-                                  />
-                                  <span>Chưa học</span>
-                                </label>
-                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                                  <input
-                                    type="checkbox"
-                                    checked={speedrunFilterStatuses.learning}
-                                    onChange={(e) =>
-                                      setSpeedrunFilterStatuses((prev) => ({
-                                        ...prev,
-                                        learning: e.target.checked,
-                                      }))
-                                    }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
-                                  />
-                                  <span>Đang học</span>
-                                </label>
-                                <label className="flex items-center space-x-2 px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 rounded-lg cursor-pointer text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white transition-colors">
-                                  <input
-                                    type="checkbox"
-                                    checked={speedrunFilterStatuses.mastered}
-                                    onChange={(e) =>
-                                      setSpeedrunFilterStatuses((prev) => ({
-                                        ...prev,
-                                        mastered: e.target.checked,
-                                      }))
-                                    }
-                                    className="w-4 h-4 rounded border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-955 text-blue-600 dark:text-blue-400 focus:ring-blue-500 cursor-pointer"
-                                  />
-                                  <span>Đã thuộc</span>
-                                </label>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Direction Selection */}
-                        <div className="space-y-2">
-                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Chọn hướng dịch câu hỏi</span>
-                          <div className="bg-slate-50 dark:bg-slate-950/60 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex max-w-xs mx-auto">
-                            <button
-                              onClick={() => setSpeedrunDirection('ja-to-vi')}
-                              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
-                                speedrunDirection === 'ja-to-vi'
-                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                              }`}
-                            >
-                              🇯🇵 Nhật ➔ 🇻🇳 Việt
-                            </button>
-                            <button
-                              onClick={() => setSpeedrunDirection('vi-to-ja')}
-                              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
-                                speedrunDirection === 'vi-to-ja'
-                                  ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                              }`}
-                            >
-                              🇻🇳 Việt ➔ 🇯🇵 Nhật
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 p-4 rounded-2xl space-y-1 inline-block min-w-[200px]">
-                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Kỷ lục hiện tại</span>
-                          <span className="text-3xl font-black text-blue-600 dark:text-blue-400">{speedrunHighScore} điểm</span>
-                        </div>
-
-                        <div>
-                          <button
-                            onClick={startSpeedrun}
-                            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95 cursor-pointer"
-                          >
-                            Bắt đầu chơi ngay 🚀
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* 2. Playing Screen */}
-                    {speedrunActive && speedrunQuestion && (
-                      <div className="max-w-xl mx-auto bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-6 rounded-3xl backdrop-blur-md space-y-6 shadow-2xl animate-fade-in">
-                        {/* Game Header */}
-                        <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-4">
-                          <div className="flex flex-col">
-                            <span className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Điểm số</span>
-                            <span className="text-xl font-black text-blue-600 dark:text-blue-400">{speedrunScore}</span>
-                          </div>
-                          <div className="flex flex-col text-right">
-                            <span className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Kỷ lục</span>
-                            <span className="text-xs font-bold text-slate-600 dark:text-slate-300">{speedrunHighScore} điểm</span>
-                          </div>
-                        </div>
-
-                        {/* Timer Progress Bar */}
-                        <div className="space-y-1.5">
-                          <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 font-bold">
-                            <span>Thời gian còn lại</span>
-                            <span className={speedrunTimeLeft <= 3 ? 'text-red-600 dark:text-red-400 font-black animate-pulse' : ''}>
-                              {speedrunTimeLeft.toFixed(1)}s
-                            </span>
-                          </div>
-                          <div className="w-full h-2 bg-white rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
-                            <div
-                              className={`h-full transition-all duration-100 ${
-                                speedrunTimeLeft <= 3
-                                  ? 'bg-gradient-to-r from-red-500 to-rose-600'
-                                  : 'bg-gradient-to-r from-blue-500 to-indigo-600'
-                              }`}
-                              style={{ width: `${(speedrunTimeLeft / speedrunMaxTime) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Question Panel */}
-                        <div className="py-10 text-center bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 rounded-2xl shadow-inner space-y-2">
-                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Câu hỏi</span>
-                          {speedrunDirection === 'ja-to-vi' ? (
-                            <div className="space-y-1 flex flex-col items-center justify-center">
-                              <PitchAccentDisplay
-                                kana={speedrunQuestion.hiragana}
-                                accent={speedrunQuestion.pitch_accent || 0}
-                                size="lg"
-                              />
-                            </div>
-                          ) : (
-                            <h3 className="text-xl font-black text-slate-900 dark:text-white leading-relaxed px-4 select-none">
-                              {speedrunQuestion.vietnamese_meaning}
-                            </h3>
-                          )}
-                        </div>
-
-                        {/* Options Buttons */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {speedrunOptions.map((option, idx) => (
-                            <button
-                              key={idx}
-                              onClick={() => checkSpeedrunAnswer(option)}
-                              className="w-full py-4 px-4 bg-slate-50 dark:bg-slate-950/60 hover:bg-white dark:hover:bg-slate-800/80 dark:bg-slate-900/90 shadow-md border border-slate-200 dark:border-slate-800 hover:border-blue-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-2xl text-xs font-bold text-center transition-all duration-200 cursor-pointer active:scale-98 shadow-md"
-                            >
-                              {option}
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Cancel Button */}
-                        <div className="text-center pt-2">
-                          <button
-                            onClick={stopSpeedrun}
-                            className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95"
-                          >
-                            Dừng trò chơi
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* 3. Game Over Screen */}
-                    {!speedrunActive && speedrunGameOver && (
-                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
-                        <div className="space-y-2">
-                          <span className="text-5xl block animate-bounce">🏁</span>
-                          <h3 className="text-xl font-black text-red-600 dark:text-red-400">Trò chơi kết thúc!</h3>
-                          <p className="text-xs text-slate-400 dark:text-slate-500">
-                            Bạn đã trả lời chưa chính xác hoặc hết thời gian. Hãy thử lại để vượt qua kỷ lục của chính mình!
-                          </p>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-950/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60">
-                          <div>
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block mb-1">Điểm đạt được</span>
-                            <span className="text-2xl font-black text-slate-900 dark:text-white">{speedrunScore}</span>
-                          </div>
-                          <div>
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block mb-1">Kỷ lục hiện tại</span>
-                            <span className="text-2xl font-black text-blue-600 dark:text-blue-400">{speedrunHighScore}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                          <button
-                            onClick={() => {
-                              setSpeedrunGameOver(false);
-                            }}
-                            className="px-6 py-3 rounded-xl bg-slate-100 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/60 hover:text-slate-900 dark:hover:text-white dark:text-white text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95"
-                          >
-                            Quay lại màn hình chuẩn bị
-                          </button>
-                          <button
-                            onClick={startSpeedrun}
-                            className="px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white font-black text-xs transition-all duration-300 shadow-md active:scale-95 cursor-pointer"
-                          >
-                            Chơi lại ngay ⚡
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            )
-          )}
-
-            {currentTab === 'cando' && (
+                      {currentTab === 'cando' && (
               <div className="space-y-6 animate-fade-in">
                 {/* Header card */}
                 <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-2">
