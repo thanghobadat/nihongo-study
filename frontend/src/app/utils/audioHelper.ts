@@ -23,12 +23,13 @@ export function speakTTS(text: string) {
 
 /**
  * Attempts to play native speaker audio for a word from LanguagePod101.
- * Automatically falls back to browser TTS if download fails, times out, or errors out.
+ * Automatically falls back to browser TTS if download fails, times out, errors out,
+ * or returns the standard 52KB error audio file.
  * 
  * @param kanji The Kanji form of the word (if any).
  * @param kana The Hiragana/Katakana reading.
  */
-export function playAudioWithFallback(kanji: string, kana: string) {
+export async function playAudioWithFallback(kanji: string, kana: string) {
   if (typeof window === 'undefined') return;
 
   const cleanKanji = (kanji || '').trim();
@@ -36,39 +37,57 @@ export function playAudioWithFallback(kanji: string, kana: string) {
   
   if (!cleanKana) return;
 
-  // Use kanji if available and different from kana; otherwise, use kana for both fields
+  // 1. Detect if it's a long sentence or contains Japanese punctuation/spaces
+  const isSentence = cleanKana.length > 15 || 
+                    /[\u3001\u3002\uff0c\uff0e\uff1f\uff01\?\!（）\(\)]/.test(cleanKana) || 
+                    cleanKana.includes(' ') || 
+                    cleanKana.includes('　');
+
+  if (isSentence) {
+    console.log(`[AudioHelper] Detected sentence. Using Browser TTS directly: ${cleanKana}`);
+    speakTTS(cleanKana);
+    return;
+  }
+
+  // 2. For single words, fetch and check content size to detect LanguagePod151 error audio (52288 bytes)
   const queryKanji = cleanKanji && cleanKanji !== cleanKana ? cleanKanji : cleanKana;
   const audioUrl = `https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=${encodeURIComponent(queryKanji)}&kana=${encodeURIComponent(cleanKana)}`;
   
-  console.log(`[AudioHelper] Attempting native audio: ${queryKanji} (${cleanKana})`);
+  console.log(`[AudioHelper] Fetching native audio: ${queryKanji} (${cleanKana})`);
   
-  const audio = new Audio(audioUrl);
-  let isFallbackTriggered = false;
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2500); // 2.5s timeout
+    
+    const response = await fetch(audioUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
 
-  const triggerFallback = (reason: string) => {
-    if (isFallbackTriggered) return;
-    isFallbackTriggered = true;
-    console.warn(`[AudioHelper] Native audio fallback triggered: ${reason}. Using TTS for: ${cleanKana}`);
+    if (!response.ok) {
+      throw new Error('Network error or 404');
+    }
+
+    const blob = await response.blob();
+    
+    // Check if it's the standard LanguagePod101 English error voice file (exactly 52288 bytes)
+    if (blob.size === 52288) {
+      console.warn(`[AudioHelper] Error audio file detected (52288 bytes). Falling back to TTS for: ${cleanKana}`);
+      speakTTS(cleanKana);
+      return;
+    }
+
+    // Check if the file is too small (meaningless or empty audio)
+    if (blob.size < 500) {
+      console.warn(`[AudioHelper] Audio file too small (${blob.size} bytes). Falling back to TTS.`);
+      speakTTS(cleanKana);
+      return;
+    }
+
+    // Play the valid native speaker audio
+    const objectUrl = URL.createObjectURL(blob);
+    const audio = new Audio(objectUrl);
+    await audio.play();
+  } catch (error: any) {
+    console.warn(`[AudioHelper] Native audio failed, falling back to TTS:`, error?.message || error);
     speakTTS(cleanKana);
-  };
-
-  // 2-second timeout fallback trigger
-  const timeoutId = setTimeout(() => {
-    triggerFallback('load_timeout');
-  }, 2000);
-
-  audio.addEventListener('playing', () => {
-    clearTimeout(timeoutId);
-    console.log('[AudioHelper] Native audio playing successfully.');
-  });
-
-  audio.addEventListener('error', () => {
-    clearTimeout(timeoutId);
-    triggerFallback('network_or_404_error');
-  });
-
-  audio.play().catch((err) => {
-    clearTimeout(timeoutId);
-    triggerFallback(err?.message || 'autoplay_blocked');
-  });
+  }
 }
