@@ -2,7 +2,7 @@
   {
     "id": "user-1781344343083",
     "email": "hoangthanh01022000@gmail.com",
-    "password": "Thanhngo@123",
+    "password": "Password123!",
     "displayName": "ThanhNH33",
     "role": "user"
   },
@@ -18,6 +18,20 @@
     "email": "test3@gmail.com",
     "password": "password",
     "displayName": "test3",
+    "role": "user"
+  },
+  {
+    "id": "user-1783079423422",
+    "email": "test1@example.com",
+    "password": "Password123!",
+    "displayName": "testuser1",
+    "role": "user"
+  },
+  {
+    "id": "user-1783079741373",
+    "email": "test2@example.com",
+    "password": "123456",
+    "displayName": "testuser2",
     "role": "user"
   }
 ]

@@ -10,6 +10,10 @@ import SidebarSettings from '../../components/SidebarSettings';
 import { getRadicalsString } from '../../utils/kanjiRadicals';
 import PitchAccentDisplay from '../../components/PitchAccentDisplay';
 import { playAudioWithFallback } from '../../utils/audioHelper';
+import ListeningQuiz from './components/ListeningQuiz';
+import MatchingGame from './components/MatchingGame';
+import FillInBlanks from './components/FillInBlanks';
+import DialogueReading from './components/DialogueReading';
 
 // Defined types
 interface Lesson {
@@ -29,6 +33,7 @@ interface VocabItem {
   lesson_id: number;
   hiragana: string;
   romaji: string;
+  kanji_word?: string;
   vietnamese_meaning: string;
   word_type: string;
   japanese_example: string;
@@ -53,6 +58,12 @@ interface KanjiItem {
   status: 'not_learned' | 'learning' | 'mastered';
 }
 
+interface GrammarExample {
+  japanese: string;
+  romaji: string;
+  vietnamese: string;
+}
+
 interface GrammarItem {
   id: number;
   lesson_id: number;
@@ -62,6 +73,8 @@ interface GrammarItem {
   vietnamese_explanation: string;
   japanese_example: string;
   example_meaning: string;
+  romaji_example?: string;
+  examples_json?: any;
   notes: string;
   status: 'not_learned' | 'learning' | 'mastered';
 }
@@ -231,24 +244,21 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const isEvenMarugoto = isMarugoto && selectedLessonId % 2 === 0;
 
   const menuItems = [
-    ...(isMarugoto ? [] : [
-      { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false }
-    ]),
-    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
-    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
-    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
     ...(isMarugoto ? [
+      { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
+      { name: 'Ngữ pháp', id: 'grammar', icon: '📖', active: currentTab === 'grammar' },
+      { name: 'Luyện tập 4 kỹ năng', id: 'practice', icon: '⚡', active: currentTab === 'practice' },
       { name: 'Tự đánh giá (Can-do)', id: 'cando', icon: '🎯', active: currentTab === 'cando' },
-      ...(isEvenMarugoto ? [
-        { name: 'Văn hóa & Cuộc sống', id: 'culture', icon: '🗾', active: currentTab === 'culture' }
-      ] : [])
+      ...(isEvenMarugoto ? [{ name: 'Văn hóa & Cuộc sống', id: 'culture', icon: '🗾', active: currentTab === 'culture' }] : [])
     ] : [
+      { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
+      { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
+      { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
+      { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
+      { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
+      { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
       { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
-      { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' }
-    ]),
-    ...(isMarugoto ? [] : [
+      { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' },
       { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
     ])
   ];
@@ -269,6 +279,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [grammarItems, setGrammarItems] = useState<GrammarItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string | null>(null);
+  const [activeGame, setActiveGame] = useState<'listening' | 'matching' | 'fill' | 'dialogue'>('listening');
+  const [activeExampleIndices, setActiveExampleIndices] = useState<Record<number, number>>({});
 
   // Active Lesson Title & Details
   const activeLesson = lessons.find(l => l.id === selectedLessonId);
@@ -341,6 +353,35 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [practiceScriptMode, setPracticeScriptMode] = useState<'hiragana' | 'kanji'>('hiragana');
   const practiceResultsRef = useRef<HTMLDivElement | null>(null);
   const practiceTopRef = useRef<HTMLDivElement | null>(null);
+
+  // Marugoto Custom states
+  const [vocabSubTab, setVocabSubTab] = useState<'learn' | 'practice'>('learn');
+  const [vocabActiveGame, setVocabActiveGame] = useState<'matching' | 'listening'>('matching');
+  const [grammarSubTab, setGrammarSubTab] = useState<'learn' | 'practice'>('learn');
+  const [practiceSkill, setPracticeSkill] = useState<'listening' | 'speaking' | 'reading' | 'writing'>('listening');
+  const [spokenSentences, setSpokenSentences] = useState<Record<string, boolean>>({});
+  
+  // Marugoto Writing Game states
+  const [writingQuestions, setWritingQuestions] = useState<{ japanese: string; romaji: string; vietnamese: string }[]>([]);
+  const [writingIndex, setWritingIndex] = useState<number>(0);
+  const [writingAnswer, setWritingAnswer] = useState<string>('');
+  const [writingIsGraded, setWritingIsGraded] = useState<boolean>(false);
+  const [writingScore, setWritingScore] = useState<number | null>(null);
+
+  // Marugoto Grammar Particle Game states
+  const [particleQuestions, setParticleQuestions] = useState<{
+    sentenceWithBlank: string;
+    originalSentence: string;
+    romaji: string;
+    meaning: string;
+    correctAnswer: string;
+    options: string[];
+  }[]>([]);
+  const [particleIndex, setParticleIndex] = useState<number>(0);
+  const [selectedParticleOption, setSelectedParticleOption] = useState<string | null>(null);
+  const [particleIsAnswered, setParticleIsAnswered] = useState<boolean>(false);
+  const [particleScore, setParticleScore] = useState<number>(0);
+  const [particleFinished, setParticleFinished] = useState<boolean>(false);
 
   useEffect(() => {
     setPracticeScriptMode('hiragana');
@@ -607,6 +648,138 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     }
   }, [selectedLessonId]);
 
+  // Sinh câu hỏi điền trợ từ cho ngữ pháp Marugoto
+  const generateParticleQuestions = useCallback(() => {
+    const list: any[] = [];
+    const sentences: { japanese: string; romaji: string; vietnamese: string }[] = [];
+    
+    grammarItems.forEach(g => {
+      let examples: any[] = [];
+      if (g.examples_json) {
+        try {
+          examples = typeof g.examples_json === 'string'
+            ? JSON.parse(g.examples_json)
+            : g.examples_json;
+        } catch (e) {
+          examples = [];
+        }
+      }
+      
+      if (examples.length > 0) {
+        sentences.push(...examples);
+      } else if (g.japanese_example) {
+        sentences.push({
+          japanese: g.japanese_example,
+          romaji: g.romaji_example || '',
+          vietnamese: g.example_meaning
+        });
+      }
+    });
+
+    if (sentences.length === 0) return;
+
+    const particles = ['は', 'が', 'に', 'を', 'de', 'で', 'と', 'も', 'へ', 'の', 'か'];
+
+    sentences.forEach(s => {
+      let foundParticle = '';
+      let particleIndexInSentence = -1;
+      
+      for (const p of particles) {
+        const idx = s.japanese.indexOf(p);
+        if (idx !== -1 && idx > 0 && idx < s.japanese.length - 1) {
+          foundParticle = p;
+          particleIndexInSentence = idx;
+          break;
+        }
+      }
+
+      if (foundParticle) {
+        const sentenceWithBlank = s.japanese.substring(0, particleIndexInSentence) + " 【 ___ 】 " + s.japanese.substring(particleIndexInSentence + 1);
+        const otherParticles = particles.filter(p => p !== foundParticle);
+        const shuffledOthers = [...otherParticles].sort(() => Math.random() - 0.5).slice(0, 3);
+        const options = [...shuffledOthers, foundParticle].sort(() => Math.random() - 0.5);
+
+        list.push({
+          sentenceWithBlank,
+          originalSentence: s.japanese,
+          romaji: s.romaji,
+          meaning: s.vietnamese,
+          correctAnswer: foundParticle,
+          options
+        });
+      } else {
+        const mid = Math.floor(s.japanese.length / 2);
+        const char = s.japanese[mid];
+        if (char && char !== '。' && char !== '、' && char !== '?' && char !== '？' && char !== ' ' && char !== '　') {
+          const sentenceWithBlank = s.japanese.substring(0, mid) + " 【 ___ 】 " + s.japanese.substring(mid + 1);
+          const options = [char, 'は', 'が', 'に'].sort(() => Math.random() - 0.5);
+          list.push({
+            sentenceWithBlank,
+            originalSentence: s.japanese,
+            romaji: s.romaji,
+            meaning: s.vietnamese,
+            correctAnswer: char,
+            options
+          });
+        }
+      }
+    });
+
+    if (list.length === 0) return;
+
+    const shuffled = list.sort(() => Math.random() - 0.5).slice(0, Math.min(10, list.length));
+    setParticleQuestions(shuffled);
+    setParticleIndex(0);
+    setSelectedParticleOption(null);
+    setParticleIsAnswered(false);
+    setParticleScore(0);
+    setParticleFinished(false);
+  }, [grammarItems]);
+
+  // Sinh câu hỏi dịch câu viết cho Marugoto Writing
+  const generateWritingQuestions = useCallback(() => {
+    const list: any[] = [];
+    
+    grammarItems.forEach(g => {
+      let examples: any[] = [];
+      if (g.examples_json) {
+        try {
+          examples = typeof g.examples_json === 'string'
+            ? JSON.parse(g.examples_json)
+            : g.examples_json;
+        } catch (e) {
+          examples = [];
+        }
+      }
+      
+      if (examples.length > 0) {
+        list.push(...examples);
+      } else if (g.japanese_example) {
+        list.push({
+          japanese: g.japanese_example,
+          romaji: g.romaji_example || '',
+          vietnamese: g.example_meaning
+        });
+      }
+    });
+
+    if (list.length === 0) return;
+
+    const shuffled = list.sort(() => Math.random() - 0.5).slice(0, Math.min(5, list.length));
+    setWritingQuestions(shuffled);
+    setWritingIndex(0);
+    setWritingAnswer('');
+    setWritingIsGraded(false);
+    setWritingScore(null);
+  }, [grammarItems]);
+
+  useEffect(() => {
+    if (isMarugoto && grammarItems.length > 0) {
+      generateParticleQuestions();
+      generateWritingQuestions();
+    }
+  }, [isMarugoto, grammarItems, generateParticleQuestions, generateWritingQuestions]);
+
   // Handle Can-do status changes
   const handleCandoStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
     try {
@@ -795,6 +968,46 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     return Math.round((matches / maxLen) * 100);
   };
 
+  const renderDiff = (input: string, correct: string) => {
+    const cleanInput = (input || '').trim().toLowerCase().replace(/\s+/g, '');
+    const cleanCorrect = (correct || '').trim().toLowerCase().replace(/\s+/g, '');
+    
+    if (!cleanInput) {
+      return <span className="text-red-600 dark:text-red-400 font-bold">{cleanCorrect}</span>;
+    }
+    
+    const result: React.ReactNode[] = [];
+    const maxLen = Math.max(cleanInput.length, cleanCorrect.length);
+    
+    for (let i = 0; i < maxLen; i++) {
+      const userChar = cleanInput[i];
+      const correctChar = cleanCorrect[i];
+      
+      if (userChar === correctChar) {
+        result.push(
+          <span key={i} className="text-emerald-600 dark:text-emerald-400 font-bold">
+            {userChar}
+          </span>
+        );
+      } else {
+        if (userChar !== undefined) {
+          result.push(
+            <span key={i} className="text-red-600 dark:text-red-400 font-bold underline decoration-wavy" title={`Đúng ra là: ${correctChar || 'khoảng trống'}`}>
+              {userChar}
+            </span>
+          );
+        } else {
+          result.push(
+            <span key={i} className="text-red-500/60 font-bold line-through" title={`Thiếu ký tự: ${correctChar}`}>
+              {correctChar}
+            </span>
+          );
+        }
+      }
+    }
+    return <span className="inline-flex items-center gap-0.5">{result}</span>;
+  };
+
   // Text khích lệ
   const getEncouragementText = (pct: number) => {
     if (pct === 100) return 'Xuất sắc! 🎉';
@@ -911,28 +1124,44 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   };
 
   useEffect(() => {
-    if (currentTab === 'vocab') {
-      loadVocabData();
-      loadGrammarData();
-    } else if (currentTab === 'kanji') {
-      loadKanjiData();
-      loadGrammarData();
-    } else if (currentTab === 'grammar') {
-      loadGrammarData();
-    } else if (currentTab === 'flashcards') {
-      loadVocabData();
-      loadKanjiData();
-    } else if (currentTab === 'kaiwa') {
-      loadDialogueData();
-    } else if (currentTab === 'practice') {
-      loadVocabData();
-      loadKanjiData();
-    } else if (currentTab === 'cando') {
-      loadCandoData();
-    } else if (currentTab === 'culture') {
-      loadCultureData();
+    if (isMarugoto) {
+      if (currentTab === 'vocab') {
+        loadVocabData();
+      } else if (currentTab === 'grammar') {
+        loadGrammarData();
+      } else if (currentTab === 'practice') {
+        loadVocabData();
+        loadGrammarData();
+        loadDialogueData();
+      } else if (currentTab === 'cando') {
+        loadCandoData();
+      } else if (currentTab === 'culture') {
+        loadCultureData();
+      }
+    } else {
+      if (currentTab === 'vocab') {
+        loadVocabData();
+        loadGrammarData();
+      } else if (currentTab === 'kanji') {
+        loadKanjiData();
+        loadGrammarData();
+      } else if (currentTab === 'grammar') {
+        loadGrammarData();
+      } else if (currentTab === 'flashcards') {
+        loadVocabData();
+        loadKanjiData();
+      } else if (currentTab === 'kaiwa') {
+        loadDialogueData();
+      } else if (currentTab === 'practice') {
+        loadVocabData();
+        loadKanjiData();
+      } else if (currentTab === 'cando') {
+        loadCandoData();
+      } else if (currentTab === 'culture') {
+        loadCultureData();
+      }
     }
-  }, [currentTab, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData, loadCandoData, loadCultureData]);
+  }, [currentTab, isMarugoto, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData, loadCandoData, loadCultureData]);
 
   // Load initial practice list once vocabulary or kanji is available
   useEffect(() => {
@@ -1690,7 +1919,150 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         ) : (
           <div>
             {currentTab === 'vocab' && (
-              <div className="space-y-6">
+              isMarugoto ? (
+                /* ==================== GIAO DIỆN LÝ THUYẾT MARUGOTO ==================== */
+                <div className="space-y-8 max-w-4xl mx-auto animate-fade-in pb-12">
+                  {/* 1. Header Progress Card */}
+                  <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none p-6 rounded-3xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-1">
+                      <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                        <span>📚</span>
+                        <span>{lessonTitle} - TỪ VỰNG</span>
+                      </h2>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        Học từ vựng bài học, xem mẹo nhớ và chơi game ghép thẻ phản xạ.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-4 shrink-0">
+                      <div className="text-right">
+                        <span className="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase">Học liệu</span>
+                        <span className="text-sm font-extrabold text-slate-700 dark:text-slate-200">
+                          {vocabItems.length} Từ vựng
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. Sub-tab Switcher cho Từ vựng */}
+                  <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-sm">
+                    <button
+                      onClick={() => setVocabSubTab('learn')}
+                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                        vocabSubTab === 'learn'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                      }`}
+                    >
+                      📖 Học từ vựng
+                    </button>
+                    <button
+                      onClick={() => setVocabSubTab('practice')}
+                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                        vocabSubTab === 'practice'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                      }`}
+                    >
+                      ⚡ Luyện tập từ vựng
+                    </button>
+                  </div>
+
+                  {vocabSubTab === 'learn' ? (
+                    /* CHẾ ĐỘ HỌC TỪ VỰNG */
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {vocabItems.map(item => (
+                          <div 
+                            key={item.id}
+                            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl flex items-start justify-between hover:shadow-sm transition-all"
+                          >
+                            <div className="space-y-2 flex-1">
+                              <div className="flex items-baseline gap-2">
+                                <span className="text-lg font-bold text-slate-800 dark:text-slate-100">
+                                  {item.kanji_word || item.hiragana}
+                                </span>
+                                {item.kanji_word && (
+                                  <span className="text-xs text-slate-400 dark:text-slate-500">
+                                    ({item.hiragana})
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs font-bold text-[#b5179e] tracking-wider select-all">{item.romaji}</p>
+                              <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">{item.vietnamese_meaning}</p>
+                              
+                              {item.mnemonic_tip && (
+                                <p className="text-[11px] text-slate-400 dark:text-slate-500 italic mt-1">
+                                  💡 {item.mnemonic_tip}
+                                </p>
+                              )}
+                            </div>
+
+                            <div className="flex flex-col items-end gap-3 justify-between h-full">
+                              <button
+                                onClick={() => playAudioWithFallback(item.kanji_word || item.hiragana, item.hiragana)}
+                                className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 text-xs transition-all active:scale-90"
+                                title="Nghe phát âm"
+                              >
+                                🔊
+                              </button>
+
+                              {/* Status Selector */}
+                              <select
+                                value={item.status}
+                                onChange={(e) => {
+                                  const newStatus = e.target.value as 'not_learned' | 'learning' | 'mastered';
+                                  handleStatusChange(item.id, newStatus);
+                                }}
+                                className="text-[10px] font-bold py-1 px-2 border rounded-lg bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-350 cursor-pointer"
+                              >
+                                <option value="not_learned">Chưa học</option>
+                                <option value="learning">Đang học</option>
+                                <option value="mastered">Đã thuộc</option>
+                              </select>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    /* CHẾ ĐỘ LUYỆN TẬP TỪ VỰNG */
+                    <div className="space-y-6">
+                      <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 max-w-md gap-2">
+                        <button
+                          onClick={() => setVocabActiveGame('matching')}
+                          className={`flex-1 py-2 text-center text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                            vocabActiveGame === 'matching'
+                              ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                          }`}
+                        >
+                          🃏 Ghép thẻ từ vựng
+                        </button>
+                        <button
+                          onClick={() => setVocabActiveGame('listening')}
+                          className={`flex-1 py-2 text-center text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                            vocabActiveGame === 'listening'
+                              ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                          }`}
+                        >
+                          🔊 Trắc nghiệm nghe
+                        </button>
+                      </div>
+
+                      <div className="mt-4">
+                        {vocabActiveGame === 'matching' && (
+                          <MatchingGame vocabItems={vocabItems} />
+                        )}
+                        {vocabActiveGame === 'listening' && (
+                          <ListeningQuiz vocabItems={vocabItems} grammarItems={[]} />
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-6">
                 
                 {/* 1. Vocabulary Progress Card */}
                 <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
@@ -2234,6 +2606,269 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
                 )}
               </div>
+            )
+          )}
+
+            {currentTab === 'grammar' && (
+              isMarugoto ? (
+                /* ==================== GIAO DIỆN NGỮ PHÁP MARUGOTO ==================== */
+                <div className="space-y-8 max-w-4xl mx-auto animate-fade-in pb-12">
+                  {/* 1. Header Progress Card */}
+                  <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none p-6 rounded-3xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-1">
+                      <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                        <span>📖</span>
+                        <span>{lessonTitle} - NGỮ PHÁP</span>
+                      </h2>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        Học cấu trúc ngữ pháp mẫu câu và làm bài tập điền trợ từ tương tác.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-4 shrink-0">
+                      <div className="text-right">
+                        <span className="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase">Học liệu</span>
+                        <span className="text-sm font-extrabold text-slate-700 dark:text-slate-200">
+                          {grammarItems.length} Mẫu câu
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. Sub-tab Switcher cho Ngữ pháp */}
+                  <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-sm">
+                    <button
+                      onClick={() => setGrammarSubTab('learn')}
+                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                        grammarSubTab === 'learn'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                      }`}
+                    >
+                      📖 Học ngữ pháp
+                    </button>
+                    <button
+                      onClick={() => setGrammarSubTab('practice')}
+                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                        grammarSubTab === 'practice'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                      }`}
+                    >
+                      ⚡ Bài tập trợ từ
+                    </button>
+                  </div>
+
+                  {grammarSubTab === 'learn' ? (
+                    /* CHẾ ĐỘ HỌC NGỮ PHÁP */
+                    <div className="space-y-6">
+                      {grammarItems.map((g) => {
+                        let examples: any[] = [];
+                        if (g.examples_json) {
+                          try {
+                            examples = typeof g.examples_json === 'string'
+                              ? JSON.parse(g.examples_json)
+                              : g.examples_json;
+                          } catch (e) {
+                            examples = [];
+                          }
+                        }
+
+                        const currentExIdx = activeExampleIndices[g.id] || 0;
+                        const hasMultipleExamples = examples.length > 1;
+
+                        let currentExample: any = null;
+                        if (examples.length > 0) {
+                          currentExample = examples[currentExIdx] || examples[0];
+                        } else if (g.japanese_example) {
+                          currentExample = {
+                            japanese: g.japanese_example,
+                            romaji: g.romaji_example || '',
+                            vietnamese: g.example_meaning
+                          };
+                        }
+
+                        const handleRotateExample = () => {
+                          if (!hasMultipleExamples) return;
+                          let nextIdx;
+                          do {
+                            nextIdx = Math.floor(Math.random() * examples.length);
+                          } while (nextIdx === currentExIdx && examples.length > 1);
+                          
+                          setActiveExampleIndices(prev => ({
+                            ...prev,
+                            [g.id]: nextIdx
+                          }));
+                        };
+
+                        return (
+                          <div 
+                            key={g.id}
+                            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 hover:shadow-sm transition-all space-y-4"
+                          >
+                            <div>
+                              <span className="inline-block text-[10px] font-extrabold px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/60 uppercase tracking-wider mb-2">Cấu trúc</span>
+                              <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">
+                                {g.title}
+                              </h4>
+                              <p className="text-sm font-semibold text-[#b5179e] mt-1">{g.meaning}</p>
+                            </div>
+
+                            {g.vietnamese_explanation && (
+                              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-950/40 p-4 rounded-xl border border-slate-200/50 dark:border-slate-800/40">
+                                {g.vietnamese_explanation}
+                              </p>
+                            )}
+
+                            {currentExample && (
+                              <div className="p-5 bg-emerald-50/20 dark:bg-emerald-950/10 border border-emerald-100 dark:border-emerald-950/60 rounded-2xl space-y-2.5">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-[10px] font-extrabold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-emerald-500 uppercase tracking-wider">Mẫu Ví dụ</span>
+                                  <div className="flex items-center gap-3">
+                                    {hasMultipleExamples && (
+                                      <button
+                                        onClick={handleRotateExample}
+                                        className="text-xs text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold transition-all"
+                                      >
+                                        🔀 Đổi ví dụ
+                                      </button>
+                                    )}
+                                    <button
+                                      onClick={() => playAudioWithFallback(currentExample!.japanese, currentExample!.japanese)}
+                                      className="text-xs text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 font-bold flex items-center gap-1 transition-all"
+                                    >
+                                      🔊 Phát âm
+                                    </button>
+                                  </div>
+                                </div>
+                                <p className="text-base font-bold text-slate-800 dark:text-slate-100 tracking-wide">
+                                  {currentExample.japanese}
+                                </p>
+                                <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 tracking-wider">
+                                  {currentExample.romaji}
+                                </p>
+                                <p className="text-sm text-slate-600 dark:text-slate-400 font-medium border-t border-emerald-100/30 dark:border-emerald-900/30 pt-2 mt-1">
+                                  {currentExample.vietnamese}
+                                </p>
+                              </div>
+                            )}
+
+                            {g.notes && (
+                              <p className="text-xs text-slate-400 dark:text-slate-500">
+                                📌 <strong>Chú thích:</strong> {g.notes}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    /* CHẾ ĐỘ LUYỆN BÀI TẬP TRỢ TỪ */
+                    <div className="w-full max-w-xl mx-auto p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
+                      {particleQuestions.length === 0 ? (
+                        <p className="text-center text-slate-500 dark:text-slate-400">Bài học này không đủ ví dụ câu để tạo bài tập trợ từ.</p>
+                      ) : particleFinished ? (
+                        <div className="text-center p-6 space-y-4">
+                          <div className="text-4xl">🌟</div>
+                          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">Hoàn thành bài tập trợ từ!</h3>
+                          <p className="text-slate-500 dark:text-slate-450">Điểm số: <span className="text-[#b5179e] font-extrabold text-lg">{particleScore}</span> / {particleQuestions.length * 10}</p>
+                          <button
+                            onClick={generateParticleQuestions}
+                            className="px-6 py-2.5 bg-[#b5179e] hover:bg-[#7209b7] text-white font-bold rounded-xl active:scale-[0.98] transition-all"
+                          >
+                            🔄 Làm lại
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="space-y-6">
+                          <div className="flex justify-between items-center text-xs text-slate-450 font-bold">
+                            <span>Câu hỏi {particleIndex + 1} / {particleQuestions.length}</span>
+                            <span className="text-indigo-500">Điểm: {particleScore}</span>
+                          </div>
+                          <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div 
+                              className="h-full bg-gradient-to-r from-[#b5179e] to-[#7209b7] transition-all duration-300"
+                              style={{ width: `${((particleIndex + 1) / particleQuestions.length) * 100}%` }}
+                            />
+                          </div>
+
+                          <div className="p-5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 rounded-2xl text-center space-y-3">
+                            <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-relaxed">
+                              {particleQuestions[particleIndex].sentenceWithBlank}
+                            </h4>
+                            <p className="text-xs text-slate-400">{particleQuestions[particleIndex].romaji}</p>
+                            <p className="text-sm text-slate-500 font-medium">{particleQuestions[particleIndex].meaning}</p>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-3">
+                            {particleQuestions[particleIndex].options.map((option, idx) => {
+                              let btnClass = "p-4 text-center border rounded-xl font-bold transition-all duration-150 ";
+                              if (!particleIsAnswered) {
+                                btnClass += "border-slate-200 dark:border-slate-800 hover:border-[#b5179e] hover:bg-[#b5179e]/10 text-slate-700 dark:text-slate-200 active:scale-[0.97]";
+                              } else {
+                                if (option === particleQuestions[particleIndex].correctAnswer) {
+                                  btnClass += "border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400";
+                                } else if (selectedParticleOption === option) {
+                                  btnClass += "border-rose-500 bg-rose-50/40 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400";
+                                } else {
+                                  btnClass += "border-slate-100 dark:border-slate-800 text-slate-350 dark:text-slate-755 opacity-50";
+                                }
+                              }
+
+                              return (
+                                <button
+                                  key={idx}
+                                  disabled={particleIsAnswered}
+                                  onClick={() => {
+                                    setSelectedParticleOption(option);
+                                    setParticleIsAnswered(true);
+                                    if (option === particleQuestions[particleIndex].correctAnswer) {
+                                      setParticleScore(prev => prev + 10);
+                                      playAudioWithFallback(particleQuestions[particleIndex].originalSentence, particleQuestions[particleIndex].originalSentence);
+                                    }
+                                  }}
+                                  className={btnClass}
+                                >
+                                  {option}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {particleIsAnswered && (
+                            <div className="flex gap-4">
+                              <button
+                                onClick={() => playAudioWithFallback(particleQuestions[particleIndex].originalSentence, particleQuestions[particleIndex].originalSentence)}
+                                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl transition-all"
+                              >
+                                🔊 Nghe câu
+                              </button>
+                              <button
+                                onClick={() => {
+                                  if (particleIndex + 1 < particleQuestions.length) {
+                                    setParticleIndex(prev => prev + 1);
+                                    setSelectedParticleOption(null);
+                                    setParticleIsAnswered(false);
+                                  } else {
+                                    setParticleFinished(true);
+                                  }
+                                }}
+                                className="flex-1 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold rounded-xl transition-all"
+                              >
+                                {particleIndex + 1 < particleQuestions.length ? 'Câu tiếp theo ➔' : 'Xem kết quả ➔'}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* NGỮ PHÁP MINNA HẬU BỊ */
+                <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
+                  <p className="text-center text-slate-500">Mở lộ trình học hoặc từ vựng của Minna no Nihongo để xem ngữ pháp lồng ghép.</p>
+                </div>
+              )
             )}
 
             {currentTab === 'kanji' && (
@@ -4003,7 +4638,262 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
             )}
 
             {currentTab === 'practice' && (
-              <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
+              isMarugoto ? (
+                /* ==================== GIAO DIỆN LUYỆN TẬP MARUGOTO CUSTOM ==================== */
+                <div className="space-y-6 max-w-4xl mx-auto animate-fade-in pb-12">
+                  {/* 1. Kế hoạch Luyện tập & Header */}
+                  <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none p-6 rounded-3xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-1">
+                      <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                        <span>⚡</span>
+                        <span>{lessonTitle} - LUYỆN TẬP 4 KỸ NĂNG</span>
+                      </h2>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        Phát triển trọn vẹn 4 kỹ năng Nghe - Nói - Đọc - Viết cho bài học.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 2. Switcher chọn Kỹ năng */}
+                  <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 overflow-x-auto justify-between sm:justify-start gap-2">
+                    <button
+                      onClick={() => setPracticeSkill('listening')}
+                      className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                        practiceSkill === 'listening'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-350'
+                      }`}
+                    >
+                      <span>🔊</span> NGHE (Listening)
+                    </button>
+                    <button
+                      onClick={() => setPracticeSkill('speaking')}
+                      className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                        practiceSkill === 'speaking'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-350'
+                      }`}
+                    >
+                      <span>💬</span> NÓI (Speaking)
+                    </button>
+                    <button
+                      onClick={() => setPracticeSkill('reading')}
+                      className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                        practiceSkill === 'reading'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-350'
+                      }`}
+                    >
+                      <span>📖</span> ĐỌC (Reading)
+                    </button>
+                    <button
+                      onClick={() => setPracticeSkill('writing')}
+                      className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                        practiceSkill === 'writing'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-350'
+                      }`}
+                    >
+                      <span>✍️</span> VIẾT (Writing)
+                    </button>
+                  </div>
+
+                  {/* 3. Render Panel Kỹ Năng */}
+                  <div className="mt-4">
+                    {/* NGHE (Listening) */}
+                    {practiceSkill === 'listening' && (
+                      <ListeningQuiz vocabItems={vocabItems} grammarItems={grammarItems} />
+                    )}
+
+                    {/* NÓI (Speaking) */}
+                    {practiceSkill === 'speaking' && (
+                      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 shadow-sm">
+                        <div className="space-y-1">
+                          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Luyện Nói Shadowing</h3>
+                          <p className="text-xs text-slate-500">Nghe giọng đọc bản xứ và lặp lại to rõ ràng để cải thiện phát âm.</p>
+                        </div>
+                        
+                        <div className="space-y-4">
+                          {(() => {
+                            const sentences: { japanese: string; romaji: string; vietnamese: string }[] = [];
+                            grammarItems.forEach(g => {
+                              let examples = [];
+                              if (g.examples_json) {
+                                try {
+                                  examples = typeof g.examples_json === 'string' ? JSON.parse(g.examples_json) : g.examples_json;
+                                } catch (e) {}
+                              }
+                              if (examples && examples.length > 0) {
+                                sentences.push(...examples);
+                              } else if (g.japanese_example) {
+                                sentences.push({
+                                  japanese: g.japanese_example,
+                                  romaji: g.romaji_example || '',
+                                  vietnamese: g.example_meaning
+                                });
+                              }
+                            });
+
+                            if (sentences.length === 0) {
+                              return <p className="text-sm text-slate-500 text-center py-4">Chưa có câu mẫu để luyện nói.</p>;
+                            }
+
+                            return sentences.map((s, idx) => {
+                              const isSpoken = spokenSentences[s.japanese] || false;
+                              return (
+                                <div 
+                                  key={idx}
+                                  className="p-4 bg-slate-50 dark:bg-slate-950/40 border border-slate-200/50 dark:border-slate-800 rounded-2xl flex items-center justify-between gap-4"
+                                >
+                                  <div className="space-y-1.5 flex-1">
+                                    <p className="text-base font-bold text-slate-800 dark:text-slate-100">{s.japanese}</p>
+                                    <p className="text-xs text-slate-400 font-semibold">{s.romaji}</p>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400">{s.vietnamese}</p>
+                                  </div>
+                                  <div className="flex items-center gap-2.5">
+                                    <button
+                                      onClick={() => playAudioWithFallback(s.japanese, s.japanese)}
+                                      className="w-10 h-10 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 rounded-full flex items-center justify-center text-sm transition-all cursor-pointer active:scale-95 shadow-sm"
+                                      title="Nghe phát âm"
+                                    >
+                                      🔊
+                                    </button>
+                                    <button
+                                      onClick={() => setSpokenSentences(prev => ({
+                                        ...prev,
+                                        [s.japanese]: !isSpoken
+                                      }))}
+                                      className={`px-3 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1 ${
+                                        isSpoken
+                                          ? 'bg-emerald-50 border-emerald-200 text-emerald-600 dark:bg-emerald-950/20 dark:border-emerald-900/60 dark:text-emerald-400'
+                                          : 'bg-white border-slate-200 text-slate-500 hover:text-slate-700 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-400'
+                                      }`}
+                                    >
+                                      {isSpoken ? '✓ Đã nói' : '🎙️ Luyện nói'}
+                                    </button>
+                                  </div>
+                                </div>
+                              );
+                            });
+                          })()}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ĐỌC (Reading) */}
+                    {practiceSkill === 'reading' && (
+                      <div className="bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-3xl p-6">
+                        {dialogueItems.length > 0 ? (
+                          <DialogueReading dialogueItems={dialogueItems} />
+                        ) : (
+                          <p className="text-center text-slate-500 py-4">Bài học này chưa có hội thoại Kaiwa.</p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* VIẾT (Writing) */}
+                    {practiceSkill === 'writing' && (
+                      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 shadow-sm max-w-xl mx-auto">
+                        <div className="space-y-1">
+                          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Dịch câu tự luận</h3>
+                          <p className="text-xs text-slate-500">Dịch câu tiếng Việt sang tiếng Nhật. Hệ thống sẽ so khớp chính xác và phát hiện lỗi sai.</p>
+                        </div>
+
+                        {writingQuestions.length === 0 ? (
+                          <p className="text-center text-slate-500 py-4">Chưa có câu ví dụ để luyện viết.</p>
+                        ) : (
+                          <div className="space-y-6">
+                            <div className="flex justify-between items-center text-xs text-slate-400">
+                              <span>Câu {writingIndex + 1} / {writingQuestions.length}</span>
+                              {writingScore !== null && (
+                                <span className="font-bold text-indigo-500">Độ chính xác: {writingScore}%</span>
+                              )}
+                            </div>
+
+                            <div className="p-5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 rounded-2xl space-y-3">
+                              <span className="text-[10px] font-extrabold bg-[#b5179e]/10 border border-[#b5179e]/20 px-2 py-0.5 rounded text-[#b5179e] uppercase tracking-wider">Đề bài tiếng Việt</span>
+                              <p className="text-base font-bold text-slate-800 dark:text-slate-150">{writingQuestions[writingIndex].vietnamese}</p>
+                            </div>
+
+                            <div className="space-y-3">
+                              <label className="block text-xs font-bold text-slate-400 uppercase">Câu trả lời (Nhập Hiragana hoặc Romaji)</label>
+                              <input
+                                type="text"
+                                value={writingAnswer}
+                                onChange={(e) => setWritingAnswer(e.target.value)}
+                                disabled={writingIsGraded}
+                                placeholder="Gõ câu trả lời của bạn..."
+                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-[#FCF3CF] text-slate-900 font-bold focus:ring-[#b5179e] focus:border-[#b5179e] outline-none placeholder-slate-400 text-base"
+                              />
+                            </div>
+
+                            {writingIsGraded && (
+                              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200/60 dark:border-slate-850 space-y-3 text-sm">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs font-bold text-slate-400 uppercase">Phân tích lỗi sai:</span>
+                                  <span className="text-xs font-bold text-[#b5179e]">{getEncouragementText(writingScore || 0)}</span>
+                                </div>
+                                <div className="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl font-mono text-base tracking-wide leading-relaxed text-center">
+                                  {renderDiff(writingAnswer, writingQuestions[writingIndex].japanese)}
+                                </div>
+                                <div className="text-xs text-slate-450 space-y-1 mt-1">
+                                  <p>• Đáp án đúng: <span className="font-bold text-slate-700 dark:text-slate-350">{writingQuestions[writingIndex].japanese}</span></p>
+                                  <p>• Phiên âm Romaji: <span className="font-semibold">{writingQuestions[writingIndex].romaji}</span></p>
+                                </div>
+                              </div>
+                            )}
+
+                            <div className="flex gap-4">
+                              {!writingIsGraded ? (
+                                <button
+                                  onClick={() => {
+                                    if (!writingAnswer.trim()) return;
+                                    const acc = calculateAccuracy(writingAnswer, writingQuestions[writingIndex].japanese);
+                                    setWritingScore(acc);
+                                    setWritingIsGraded(true);
+                                    if (acc === 100) {
+                                      playAudioWithFallback(writingQuestions[writingIndex].japanese, writingQuestions[writingIndex].japanese);
+                                    }
+                                  }}
+                                  disabled={!writingAnswer.trim()}
+                                  className="w-full py-3.5 bg-[#b5179e] hover:bg-[#7209b7] text-white font-bold rounded-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                  🔍 Chấm điểm
+                                </button>
+                              ) : (
+                                <>
+                                  <button
+                                    onClick={() => playAudioWithFallback(writingQuestions[writingIndex].japanese, writingQuestions[writingIndex].japanese)}
+                                    className="flex-1 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-2xl active:scale-[0.98] transition-all"
+                                  >
+                                    🔊 Nghe đọc câu
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      if (writingIndex + 1 < writingQuestions.length) {
+                                        setWritingIndex(prev => prev + 1);
+                                        setWritingAnswer('');
+                                        setWritingIsGraded(false);
+                                        setWritingScore(null);
+                                      } else {
+                                        generateWritingQuestions();
+                                      }
+                                    }}
+                                    className="flex-1 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold rounded-2xl active:scale-[0.98] transition-all"
+                                  >
+                                    {writingIndex + 1 < writingQuestions.length ? 'Câu tiếp theo ➔' : '🔄 Làm đề mới'}
+                                  </button>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
                 {/* 1. Header Toolbar Controls */}
                 <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
@@ -4786,7 +5676,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                   </div>
                 )}
               </div>
-            )}
+            )
+          )}
 
             {currentTab === 'cando' && (
               <div className="space-y-6 animate-fade-in">
