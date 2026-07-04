@@ -1798,7 +1798,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                       {practiceType === 'write' && (
                         <>
                           {!isMarugoto && (
-                      <React.Fragment>
+                      <>
                         /* Select type: Vocab / Kanji */
                           <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
                             <button
@@ -1822,7 +1822,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                               Luyện Chữ Hán
                             </button>
                           </div>
-                      </React.Fragment>
+                      </>
                     )}
 
                           {/* Select direction: Việt-Nhật / Nhật-Việt */}
