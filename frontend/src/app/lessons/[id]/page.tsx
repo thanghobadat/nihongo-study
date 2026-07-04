@@ -2818,7 +2818,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
                       </div>
                     </div>
                   ) : (
-renderInteractivePractice()
+<>{renderInteractivePractice()}</>
                   )}
                 </div>
               ) : (
@@ -5653,7 +5653,7 @@ renderInteractivePractice()
                   </div>
                 </div>
               ) : (
-                renderInteractivePractice()
+                <>{renderInteractivePractice()}</>
               )
             )}
 
