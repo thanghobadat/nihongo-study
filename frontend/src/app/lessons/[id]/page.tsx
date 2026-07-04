@@ -224,7 +224,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const router = useRouter();
   const searchParams = useSearchParams();
   let currentTab = searchParams.get('tab') || 'vocab';
-  if (currentTab === 'grammar') {
+  if (currentTab === 'grammar' && selectedLessonId < 101) {
     currentTab = 'vocab';
   }
   const grammarIndexParam = searchParams.get('grammarIndex');
