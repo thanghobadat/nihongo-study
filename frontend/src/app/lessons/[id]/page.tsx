@@ -3323,7 +3323,7 @@ const renderInteractivePractice = () => {
                                       const newStatus = e.target.value as 'not_learned' | 'learning' | 'mastered';
                                       handleStatusChange(item.id, newStatus);
                                     }}
-                                    className="text-[10px] font-bold py-1 px-2 border rounded-lg bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-350 cursor-pointer"
+                                    className={getStatusSelectClass(item.status)}
                                   >
                                     <option value="not_learned">Chưa học</option>
                                     <option value="learning">Đang học</option>
@@ -7290,4 +7290,16 @@ const getExtendedExamplesForGrammar = (grammarId: number, baseExamples: any[]) =
   }
 
   return exs;
+};
+
+// Helper class CSS động cho trạng thái học tập từ vựng & Kanji
+const getStatusSelectClass = (status: 'not_learned' | 'learning' | 'mastered' | string) => {
+  const base = "text-[10px] font-extrabold py-1 px-1.5 border rounded-lg cursor-pointer transition-all duration-200 focus:outline-none";
+  if (status === 'mastered') {
+    return `${base} bg-emerald-50 dark:bg-emerald-950/20 border-emerald-250 dark:border-emerald-900/50 text-emerald-600 dark:text-emerald-400`;
+  }
+  if (status === 'learning') {
+    return `${base} bg-amber-50 dark:bg-amber-950/20 border-amber-250 dark:border-amber-900/50 text-amber-600 dark:text-amber-400`;
+  }
+  return `${base} bg-rose-50 dark:bg-rose-950/20 border-rose-250 dark:border-rose-900/50 text-rose-600 dark:text-rose-400`;
 };
