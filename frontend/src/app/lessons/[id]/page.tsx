@@ -386,8 +386,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const practiceTopRef = useRef<HTMLDivElement | null>(null);
 
   // Marugoto Custom states
-  const [vocabSubTab, setVocabSubTab] = useState<'learn' | 'practice'>('learn');
+  const [vocabSubTab, setVocabSubTab] = useState<'learn' | 'practice' | 'listening'>('learn');
   const [vocabActiveGame, setVocabActiveGame] = useState<'matching' | 'listening'>('matching');
+  const [listeningStatusFilter, setListeningStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
   const [grammarSubTab, setGrammarSubTab] = useState<'learn' | 'practice'>('learn');
   const [practiceSkill, setPracticeSkill] = useState<'listening' | 'speaking' | 'reading' | 'writing'>('listening');
   const [spokenSentences, setSpokenSentences] = useState<Record<string, boolean>>({});
@@ -1902,6 +1903,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const vocabLearningCount = vocabItems.filter(v => v.status === 'learning').length;
   const progressPercent = vocabTotalCount ? Math.round((vocabMasteredCount / vocabTotalCount) * 100) : 0;
 
+  // Filter vocabulary for listening quiz by status
+  const filteredListeningVocab = useMemo(() => {
+    if (listeningStatusFilter === 'all') return vocabItems;
+    return vocabItems.filter(item => item.status === listeningStatusFilter);
+  }, [vocabItems, listeningStatusFilter]);
+
   // Kanji progress calculated dynamically
   const kanjiTotalCount = kanjiItems.length;
   const kanjiMasteredCount = kanjiItems.filter(k => k.status === 'mastered').length;
@@ -3172,7 +3179,7 @@ const renderInteractivePractice = () => {
                   </div>
 
                   {/* 2. Sub-tab Switcher cho Từ vựng */}
-                  <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-sm">
+                  <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 max-w-lg">
                     <button
                       onClick={() => setVocabSubTab('learn')}
                       className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
@@ -3184,6 +3191,16 @@ const renderInteractivePractice = () => {
                       📖 Học từ vựng
                     </button>
                     <button
+                      onClick={() => setVocabSubTab('listening')}
+                      className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                        vocabSubTab === 'listening'
+                          ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                      }`}
+                    >
+                      🎧 Nghe từ vựng
+                    </button>
+                    <button
                       onClick={() => setVocabSubTab('practice')}
                       className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
                         vocabSubTab === 'practice'
@@ -3191,11 +3208,73 @@ const renderInteractivePractice = () => {
                           : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
                       }`}
                     >
-                      ⚡ Luyện tập từ vựng
+                      ✍️ Luyện tập
                     </button>
                   </div>
 
-                  {vocabSubTab === 'learn' ? (
+                  {vocabSubTab === 'listening' && (
+                    /* CHẾ ĐỘ NGHE TỪ VỰNG */
+                    <div className="space-y-6 max-w-xl mx-auto animate-fade-in">
+                      {/* Thanh bộ lọc trạng thái học tập */}
+                      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+                        <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Chọn từ vựng để ôn tập nghe:</span>
+                        <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 overflow-x-auto justify-between sm:justify-start w-full sm:w-auto shrink-0">
+                          <button
+                            onClick={() => setListeningStatusFilter('all')}
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              listeningStatusFilter === 'all'
+                                ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                            }`}
+                          >
+                            Tất cả ({vocabItems.length})
+                          </button>
+                          <button
+                            onClick={() => setListeningStatusFilter('not_learned')}
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              listeningStatusFilter === 'not_learned'
+                                ? 'bg-white dark:bg-slate-900 text-red-500 shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-red-500'
+                            }`}
+                          >
+                            Chưa học ({vocabItems.filter(v => v.status === 'not_learned').length})
+                          </button>
+                          <button
+                            onClick={() => setListeningStatusFilter('learning')}
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              listeningStatusFilter === 'learning'
+                                ? 'bg-white dark:bg-slate-900 text-amber-500 shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-amber-500'
+                            }`}
+                          >
+                            Đang học ({vocabItems.filter(v => v.status === 'learning').length})
+                          </button>
+                          <button
+                            onClick={() => setListeningStatusFilter('mastered')}
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              listeningStatusFilter === 'mastered'
+                                ? 'bg-white dark:bg-slate-900 text-emerald-500 shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-emerald-500'
+                            }`}
+                          >
+                            Đã thuộc ({vocabItems.filter(v => v.status === 'mastered').length})
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Hiển thị game quiz hoặc thông báo nếu không có từ vựng nào */}
+                      {filteredListeningVocab.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl text-center">
+                          <p className="text-slate-500 dark:text-slate-400">Không có từ vựng nào thuộc trạng thái này để ôn luyện nghe.</p>
+                          <span className="text-xs text-slate-400 mt-2">Vui lòng thay đổi bộ lọc ở trên hoặc bắt đầu học từ mới!</span>
+                        </div>
+                      ) : (
+                        <ListeningQuiz key={listeningStatusFilter} vocabItems={filteredListeningVocab} grammarItems={[]} />
+                      )}
+                    </div>
+                  )}
+
+                  {vocabSubTab === 'learn' && (
                     /* CHẾ ĐỘ HỌC TỪ VỰNG */
                     <div className="space-y-4">
                       {/* Search & Filters cho Marugoto */}
@@ -3336,7 +3415,9 @@ const renderInteractivePractice = () => {
                         );
                       })()}
                     </div>
-                  ) : (
+                  )}
+
+                  {vocabSubTab === 'practice' && (
                     <>{renderInteractivePractice()}</>
                   )}
                 </div>
