@@ -434,9 +434,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       "\u5375": "\u305f\u307e\u3054", // 卵 -> たまご
       "\u5ead": "\u306b\u308f", // 庭 -> にわ
       "\u4f4f\u3093\u3067": "\u3059\u3093\u3067", // 住んで -> すんで
-      "\u5e83\u3044": "\u3072\u308d\u3044", // 広い
-      "\u5e83\u304f\u306a\u3044": "\u3072\u308d\u304f\u306a\u3044", // 広くない
-      "\u592b": "\u304a\u3063\u3068"
+      "広い": "ひろい", // 広い
+      "広くない": "ひろくない" // 広くない
     };
 
     for (const [kanji, hira] of Object.entries(map)) {
@@ -3943,7 +3942,7 @@ const renderInteractivePractice = () => {
                     <div className="space-y-4">
                       {grammarItems.map((g) => {
                         const isExpanded = expandedGrammarId === g.id;
-                        let structureExplain = {};
+                        let structureExplain: any = {};
                         if (g.notes && g.notes.startsWith('{')) {
                           try {
                             structureExplain = JSON.parse(g.notes);
@@ -3980,7 +3979,7 @@ const renderInteractivePractice = () => {
                           }));
                         };
 
-                        const highlightEnding = (text: string) => {
+                        const highlightEnding = (text: string, type: 'affirmative' | 'negative' | 'interrogative' = 'affirmative') => {
                           if (!text) return '';
                           const replaced = text
                             .replace(/(じゃないです|じゃありません|ではないです|いません|ありません|しません)/g, '<span class="text-rose-500 font-extrabold">$1</span>')
@@ -6696,7 +6695,7 @@ const GrammarDetailModal = ({ grammar, initialFormType, onClose }: { grammar: an
     initialFormType || 'affirmative'
   );
 
-  let structureExplain = {};
+  let structureExplain: any = {};
   if (grammar.notes && grammar.notes.startsWith('{')) {
     try {
       structureExplain = JSON.parse(grammar.notes);
@@ -6750,7 +6749,7 @@ const GrammarDetailModal = ({ grammar, initialFormType, onClose }: { grammar: an
     }
   };
 
-  const highlightEnding = (text: string) => {
+  const highlightEnding = (text: string, type: 'affirmative' | 'negative' | 'interrogative' = 'affirmative') => {
     if (!text) return '';
     const replaced = text
       .replace(/(じゃないes|じゃありません|ではないです|いません|ありません|しません)/g, '<span class="text-rose-500 font-extrabold">$1</span>')
@@ -7214,9 +7213,8 @@ const cleanAndHiraganizeExample = (text: string, romaji: string) => {
     "\u5375": "\u305f\u307e\u3054", // 卵 -> たまご
     "\u5ead": "\u306b\u308f", // 庭 -> にわ
     "\u4f4f\u3093\u3067": "\u3059\u3093\u3067", // 住んで -> すんで
-    "\u5e83\u3044": "\u3072\u308d\u3044", // 広い
-    "\u5e83\u304f\u306a\u3044": "\u3072\u308d\u304f\u306a\u3044", // 広くない
-    "\u592b": "\u304a\u3063\u3068"
+    "広い": "ひろい", // 広い
+      "広くない": "ひろくない" // 広くない
   };
 
   for (const [kanji, hira] of Object.entries(map)) {
