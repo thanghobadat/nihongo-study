@@ -391,6 +391,76 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [grammarSubTab, setGrammarSubTab] = useState<'learn' | 'practice'>('learn');
   const [practiceSkill, setPracticeSkill] = useState<'listening' | 'speaking' | 'reading' | 'writing'>('listening');
   const [spokenSentences, setSpokenSentences] = useState<Record<string, boolean>>({});
+  const [selectedPopupGrammar, setSelectedPopupGrammar] = useState<{ grammar: any, selectedFormType: 'affirmative' | 'negative' | 'interrogative' } | null>(null);
+
+  // Helper chuyển đổi Kanji ví dụ sang Hiragana và sửa lỗi font hiển thị quả trám 
+  const cleanAndHiraganizeExample = (text: string, romaji: string) => {
+    if (!text) return '';
+    let s = text;
+    
+    // Sửa lỗi font quả trám đôi 
+    s = s.replace(/\uFFFD\uFFFD/g, '\u3072\u308d'); 
+    s = s.replace(/\uFFFD/g, '\u3072\u308d');
+
+    const map = {
+      "\u90e8\u5c4b": "\u3078\u3084", // 部屋 -> へや
+      "\u6559\u5ba4": "\u304d\u3087\u3046\u3057\u3064", // 教室 -> きょうしつ
+      "\u5b66\u751f": "\u304c\u304f\u305b\u3044", // 学生 -> がくせい
+      "\u79c1": "\u305f\u3057", // 私 -> わたし
+      "\u592b": "\u304a\u3063\u3068", // 夫 -> おっと
+      "\u5bb6\u65cf": "\u304b\u305e\u304f", // 家族 -> かぞく (hoặc かぞく)
+      "\u4e00\u4eba": "\u3072\u3068\u308a", // 一人 -> ひとり
+      "\u672c": "\u307b\u3093", // 本 -> ほん
+      "\u68da": "\u305f\u306a", // 棚 -> taな
+      "\u4e0a": "\u3046\u3048", // 上 -> うえ
+      "\u304a\u98a8\u5442": "\u304a\u3075\u308d", // お風呂 -> おふろ
+      "\u524d": "\u307e\u3048", // 前 -> まえ
+      "\u8a66\u9a13": "\u3057\u3051\u3093", // 試験 -> しけん
+      "\u91d1\u66dc\u65e5": "\u304d\u3093\u3088\u3046\u3073", // 金曜日 -> きんようび
+      "\u65e5\u66dc\u65e5": "\u306b\u3061\u3088\u3046\u3073", // 日曜日 -> にちようび
+      "\u4f55\u6642": "\u306a\u3093\u3058", // 何時 -> なんじ
+      "\u671d": "\u3042\u3055", // 朝 -> あas
+      "\u4eca": "\u3044\u307e", // 今 -> いま
+      "\u592b\u5a66": "\u3075\u3046\u3075", // 夫婦 -> ふうふ
+      "\u592b\u5a66\u3067": "\u3075\u3046\u3075\u3067", // 夫婦で
+      "\u592b\u3068": "\u304a\u3063\u3068\u3068", // 夫と
+      "\u5bb6\u65cf\u3068": "\u304b\u305e\u304f\u3068", // 家族と
+      "\u4e00\u4eba\u3067": "\u3072\u3068\u308a\u3067", // 一人で
+      "\u75c5\u9662": "\u3073\u3087\u3046\u3044\u3093", // 病院 -> びょういん
+      "\u85ac": "\u304f\u3059\u308a", // 薬 -> くすり
+      "\u8eca": "\u304f\u308b\u307e", // 車 -> くるま
+      "\u81ea\u8ee2\u8eca": "\u3058\u3066\u3093\u3057\u3083", // 自転車 -> じてんしゃ
+      "\u51b7\u8535\u5eab": "\u308c\u3044\u305e\u3046\u3053", // 冷蔵庫 -> れいぞうこ
+      "\u5375": "\u305f\u307e\u3054", // 卵 -> たまご
+      "\u5ead": "\u306b\u308f", // 庭 -> にわ
+      "\u4f4f\u3093\u3067": "\u3059\u3093\u3067", // 住んで -> すんで
+      "\u5e83\u3044": "\u3072\u308d\u3044", // 広い
+      "\u5e83\u304f\u306a\u3044": "\u3072\u308d\u304f\u306a\u3044", // 広くない
+      "\u592b": "\u304a\u3063\u3068"
+    };
+
+    for (const [kanji, hira] of Object.entries(map)) {
+      s = s.split(kanji).join(hira);
+    }
+
+    s = s.replace(/\u5b66/g, '\u304c\u304f'); // 学 -> がく
+    s = s.replace(/\u751f/g, '\u305b\u3044'); // 生 -> せい
+    s = s.replace(/\u5ba5/g, '\u3057\u3064'); // 室 -> しつ
+    s = s.replace(/\u8a9e/g, '\u3054'); // 語 -> ご
+    s = s.replace(/\u4f4f/g, '\u3059'); // 住 -> す
+    s = s.replace(/\u66dc\u65e5/g, '\u3088\u3046\u3073'); // 曜日 -> ようび
+    s = s.replace(/\u4f55/g, '\u306a\u3093'); // 何 -> なん
+    s = s.replace(/\u6642/g, '\u3058'); // 時 -> じ
+    s = s.replace(/\u5206/g, '\u3075\u3093'); // 分 -> fuん
+    s = s.replace(/\u5e83/g, '\u3072\u308d'); // 広 -> ひろ
+    s = s.replace(/\u5925/g, '\u304a\u304a'); // 大 -> おお
+    s = s.replace(/\u5c0f/g, '\u3061\u3044'); // 小 -> ちい
+    s = s.replace(/\u65b0/g, '\u3042\u305f\u3089'); // 新 -> あたら
+    s = s.replace(/\u53e4/g, '\u3075\u308b'); // 古 -> ふる
+    s = s.replace(/\u9ad8/g, '\u305f\u304b'); // 高 -> たか
+    s = s.replace(/\u5b89/g, '\u3085'); // 安 -> やす
+    return s;
+  };
   
   // Marugoto Writing Game states
   const [writingQuestions, setWritingQuestions] = useState<{ japanese: string; romaji: string; vietnamese: string }[]>([]);
@@ -1857,48 +1927,191 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const grammarLearningCount = grammarItems.filter(g => g.status === 'learning').length;
   const grammarProgressPercent = grammarTotalCount ? Math.round((grammarMasteredCount / grammarTotalCount) * 100) : 0;
 
-    const getVisualStructureForForm = (baseStructure: string, formType: 'affirmative' | 'negative' | 'interrogative') => {
+    const getVisualStructureForForm = (baseStructure: string, formType: 'affirmative' | 'negative' | 'interrogative', grammarId?: number) => {
+    if (grammarId === 158) {
+      if (formType === 'affirmative') return 'N (Object) + を + V + ます';
+      if (formType === 'negative') return 'N (Object) + を + V + ません | なに + を + V + ませんか';
+      if (formType === 'interrogative') return 'N (Object) + を + V + ますか | なに + を + V + ますか';
+    }
     if (!baseStructure) return '';
-    let struct = baseStructure;
-    if (formType === 'negative') {
-      if (struct.includes('です')) {
-        struct = struct.replace('です', 'じゃないです');
-      } else if (struct.includes('ます')) {
-        struct = struct.replace('ます', 'ません');
-      } else if (struct.includes('できます')) {
-        struct = struct.replace('できます', 'できません');
-      } else if (struct.includes('います')) {
-        struct = struct.replace('います', 'いません');
-      } else if (struct.includes('あります')) {
-        struct = struct.replace('あります', 'ありません');
+
+    const getNegativeOf = (word: string) => {
+      const w = word.toLowerCase();
+      if (w.includes('です') || w.includes('es') || w.includes('us') || w.includes('đúng') || w.includes('đây')) {
+        return 'じゃないです';
       }
-    } else if (formType === 'interrogative') {
-      if (!struct.includes('か') && !struct.includes('ですか') && !struct.includes('ますか') && !struct.includes('ですか。') && !struct.includes('か。')) {
-        struct = struct + ' + か';
+      if (w.includes('ます')) return word.replace('ます', 'ません');
+      if (w.includes('できます')) return word.replace('できます', 'できません');
+      if (w.includes('います')) return word.replace('います', 'いません');
+      if (w.includes('あります')) return word.replace('あります', 'ありません');
+      return word + ' + じゃないです';
+    };
+
+    const subStructures = baseStructure.split('|').map(s => s.trim());
+    const resultStructures = [];
+
+    for (const sub of subStructures) {
+      const cleanSub = sub.replace(/。$/, '').trim();
+      const parts = cleanSub.split('+').map(p => p.trim());
+      if (parts.length === 0) continue;
+
+      const hasNegativePart = parts.some(p => p.includes('ない') || p.includes('ません') || p.includes('じゃない'));
+      const hasInterrogativePart = parts.some(p => p.includes('か') || p.includes('ka') || p.includes('なん'));
+
+      if (formType === 'negative') {
+        if (hasNegativePart) {
+          const negativeParts = [];
+          for (const p of parts) {
+            if (p.includes('か') || p.includes('ka') || p.includes('なん')) {
+              continue;
+            }
+            if ((p.includes('es') || p.includes('です')) && !p.includes('ない') && !p.includes('じゃない')) {
+              continue;
+            }
+            negativeParts.push(p);
+          }
+          resultStructures.push(negativeParts.join(' + '));
+        } else {
+          const lastIndex = parts.length - 1;
+          const lastPart = parts[lastIndex];
+          const negativeLastPart = getNegativeOf(lastPart);
+          const newParts = [...parts.slice(0, -1), negativeLastPart];
+          resultStructures.push(newParts.join(' + '));
+        }
+      } else if (formType === 'interrogative') {
+        if (hasInterrogativePart) {
+          const interrogativeParts = [];
+          for (const p of parts) {
+            if (p.includes('ない') || p.includes('ません') || p.includes('じゃない')) {
+              continue;
+            }
+            if ((p.includes('es') || p.includes('です')) && !p.includes('か') && parts.some(x => x.includes('か'))) {
+              continue;
+            }
+            interrogativeParts.push(p);
+          }
+          resultStructures.push(interrogativeParts.join(' + '));
+        } else {
+          const lastIndex = parts.length - 1;
+          const lastPart = parts[lastIndex];
+          let interrogativeLastPart = lastPart;
+          if (lastPart.includes('đáp') || lastPart.includes('đâu') || lastPart.includes('どこ') || lastPart.includes('だれ')) {
+            interrogativeLastPart = lastPart;
+          } else if (lastPart.includes('です') || lastPart.includes('es') || lastPart.includes('us')) {
+            interrogativeLastPart = lastPart.replace(/です|es|us/g, 'ですか');
+          } else if (lastPart.includes('ます')) {
+            interrogativeLastPart = lastPart.replace('ます', 'ますか');
+          } else {
+            interrogativeLastPart = lastPart + ' + か';
+          }
+          const newParts = [...parts.slice(0, -1), interrogativeLastPart];
+          resultStructures.push(newParts.join(' + '));
+        }
+      } else {
+        // Thể Khẳng định: loại bỏ vế phủ định và nghi vấn, ngắt khi câu kết thúc bằng dấu chấm
+        const affirmativeParts = [];
+        for (const p of parts) {
+          if (p.includes('ない') || p.includes('ません') || p.includes('じゃない')) {
+            continue;
+          }
+          if (p.includes('か') || p.includes('ka') || p.includes('なん')) {
+            continue;
+          }
+          affirmativeParts.push(p.replace(/。$/, ''));
+          // Ngắt ngay lập tức khi vế kết thúc bằng dấu chấm tròn câu khẳng định
+          if (p.includes('。') || p.includes('.')) {
+            break;
+          }
+        }
+        resultStructures.push(affirmativeParts.join(' + '));
       }
     }
-    return struct;
+
+    let finalStr = resultStructures.join(' | ');
+    // Chuẩn hóa hiển thị đuôi câu
+    finalStr = finalStr.replace(/じゃない\s*es/gi, 'じゃないです');
+    finalStr = finalStr.replace(/じゃないes/gi, 'base'); 
+    finalStr = finalStr.replace(/じゃないđây/gi, 'base');
+    finalStr = finalStr.replace(/じゃないđó/gi, 'base');
+    finalStr = finalStr.replace(/じゃないđúng/gi, 'base');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないです');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないes');
+    finalStr = finalStr.replace(/じゃないです/gi, 'じゃないです');
+    finalStr = finalStr.replace(/ない\s*es/gi, 'ないes'); 
+    finalStr = finalStr.replace(/ないes/gi, 'ないes'); 
+    finalStr = finalStr.replace(/ないes/gi, 'ないです');
+    finalStr = finalStr.replace(/\bes\b/gi, 'es'); 
+    finalStr = finalStr.replace(/\bus\b/gi, 'es');
+    finalStr = finalStr.replace(/\bđây\b/gi, 'es'); 
+    finalStr = finalStr.replace(/\bđó\b/gi, 'es'); 
+    finalStr = finalStr.replace(/\bđúng\b/gi, 'es');
+    finalStr = finalStr.replace(/es。/gi, 'es');
+    finalStr = finalStr.replace(/es/gi, 'es');
+    finalStr = finalStr.replace(/us/gi, 'es');
+    finalStr = finalStr.replace(/đúng/gi, 'es');
+    finalStr = finalStr.replace(/đây/gi, 'es');
+    finalStr = finalStr.replace(/đó/gi, 'es');
+    finalStr = finalStr.replace(/es/gi, 'đúng'); // Telex fix
+    finalStr = finalStr.replace(/es/gi, 'です');
+    finalStr = finalStr.replace(/us/gi, 'です');
+    finalStr = finalStr.replace(/base/gi, 'じゃないes');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないes');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないです');
+    return finalStr;
   };
 
   const translateSymbolToVi = (symbol: string) => {
     let s = symbol;
-    s = s.replace(/N\s*\(Place\)/gi, 'Danh từ (Địa điểm)');
-    s = s.replace(/N\s*\(Language\)/gi, 'Danh từ (Ngôn ngữ)');
-    s = s.replace(/N\s*\(Person\)/gi, 'Danh từ (Người)');
-    s = s.replace(/N\s*\(Time\)/gi, 'Danh từ (Thời gian)');
-    s = s.replace(/N\s*\(Item\)/gi, 'Danh từ (Đồ vật)');
-    s = s.replace(/N\s*\(Food\)/gi, 'Danh từ (Món ăn)');
-    s = s.replace(/N\s*\(Drink\)/gi, 'Danh từ (Đồ uống)');
-    s = s.replace(/\bN1\b/g, 'Danh từ 1');
-    s = s.replace(/\bN2\b/g, 'Danh từ 2');
-    s = s.replace(/\bN3\b/g, 'Danh từ 3');
-    s = s.replace(/\bN4\b/g, 'Danh từ 4');
-    s = s.replace(/\bN\b/g, 'Danh từ');
-    s = s.replace(/\bV\b/g, 'Động từ');
-    s = s.replace(/\bA\b/g, 'Tính từ');
-    s = s.replace(/A-adj/gi, 'Tính từ đuôi な/い');
-    s = s.replace(/I-adj/gi, 'Tính từ đuôi い');
-    s = s.replace(/Na-adj/gi, 'Tính từ đuôi な');
+    // Chuẩn hóa hiển thị đuôi câu Nhật Bản (es, us, じゃないes...)
+    s = s.replace(/じゃない\s*es/g, 'じゃないes'); 
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないđây/g, 'じゃないes');
+    s = s.replace(/じゃないđó/g, 'base'); 
+    s = s.replace(/じゃないđúng/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/ない\s*es/g, 'ないです');
+    s = s.replace(/ないes/g, 'ないes'); 
+    s = s.replace(/ないes/g, 'ないes'); 
+    s = s.replace(/ないes/g, 'ないes'); 
+    s = s.replace(/ないes/g, 'ないです');
+    s = s.replace(/\bes\b/g, 'es'); 
+    s = s.replace(/\bus\b/g, 'es');
+    s = s.replace(/\bđây\b/g, 'es');
+    s = s.replace(/\bđó\b/g, 'es');
+    s = s.replace(/\bđúng\b/g, 'es');
+    s = s.replace(/es。/g, 'es');
+    s = s.replace(/es/g, 'es');
+    s = s.replace(/us/g, 'es');
+    s = s.replace(/đúng/g, 'es');
+    s = s.replace(/đây/g, 'es');
+    s = s.replace(/đó/g, 'es');
+    s = s.replace(/es/g, 'です');
+    s = s.replace(/んじゃないです/g, 'んじゃないです');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes'); 
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないです');
+    s = s.replace(/base/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'base');
+    s = s.replace(/base/g, 'じゃないes');
+    s = s.replace(/base/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないです');
+
+    // Dịch chuẩn hóa ký hiệu tính từ Marugoto (イA, ナA)
+    s = s.replace(/イ\s*A\s*－\s*い/gi, 'T\u00ednh từ đuôi い'); // Tính từ đuôi い
+    s = s.replace(/イ\s*A\s*－?\s*い?/gi, 'T\u00ednh từ đuôi い');
+    s = s.replace(/ナ\s*A\s*－\s*な/gi, 'T\u00ednh từ đuôi な'); // Tính từ đuôi な
+    s = s.replace(/ナ\s*A\s*－?\s*na?/gi, 'T\u00ednh từ đuôi な');
+    s = s.replace(/ナ\s*A\s*－?\s*な?/gi, 'T\u00ednh từ đuôi な');
+    
+    // Một số từ rác khác
+    s = s.replace(/T\u00ednh t\u1eeb\s*\u0111u\u00f4i\s*\u3044\s*\u304f/gi, 'T\u00ednh từ đuôi い'); // Sửa 'Tính từ đuôi いく' thành 'Tính từ đuôi い'
+    s = s.replace(/\u304f$/g, ''); 
     return s;
   };
 
@@ -1928,7 +2141,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               <div className="inline-flex items-stretch border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-xl overflow-hidden min-w-[280px]">
                 {parts.map((part, index) => {
                   const isParticle = ['は', 'g', 'に', 'を', 'も', 'と', 'de', 'で', 'へ', 'の', 'k'].includes(part) || part.length <= 2;
-                  const isEnding = ['es', 'es。', 'じゃないes', 'じゃないes。', 'ですか', 'ですか。', 'います', 'あります', 'ありません'].some(end => part.includes(end));
+                  const isEnding = ['es', 'es。', 'じゃないes', 'じゃないes。', 'đúng', 'đúng。', 'じゃないđúng', 'じゃないđúng。', 'ですか', 'ですか。', 'います', 'あります', 'ありません', 'です', 'じゃないです', 'じゃないです。'].some(end => part.includes(end));
                   
                   let borderClass = "";
                   if (index > 0) {
@@ -2986,62 +3199,146 @@ const renderInteractivePractice = () => {
                   {vocabSubTab === 'learn' ? (
                     /* CHẾ ĐỘ HỌC TỪ VỰNG */
                     <div className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {vocabItems.map(item => (
-                          <div 
-                            key={item.id}
-                            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl flex items-start justify-between hover:shadow-sm transition-all"
+                      {/* Search & Filters cho Marugoto */}
+                      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-4 rounded-2xl shadow-sm">
+                        {/* Search box */}
+                        <div className="relative w-full md:max-w-xs lg:max-w-md">
+                          <input
+                            type="text"
+                            placeholder="Tìm từ vựng, Romaji, Nghĩa Việt..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-[#b5179e]/60 focus:ring-1 focus:ring-[#b5179e]/60 transition-all"
+                          />
+                          <span className="absolute left-3.5 top-2.5 text-slate-400 dark:text-slate-500 text-sm">🔍</span>
+                        </div>
+
+                        {/* Status filters */}
+                        <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/50 dark:border-slate-800/60 w-full sm:w-auto shrink-0 overflow-x-auto justify-between sm:justify-start">
+                          <button
+                            onClick={() => setStatusFilter('all')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              statusFilter === 'all'
+                                ? 'bg-white dark:bg-slate-900 text-[#b5179e] shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                            }`}
                           >
-                            <div className="space-y-2 flex-1">
-                              <div className="flex items-baseline gap-2">
-                                <span className="text-lg font-bold text-slate-800 dark:text-slate-100">
-                                  {item.kanji_word || item.hiragana}
-                                </span>
-                                {item.kanji_word && (
-                                  <span className="text-xs text-slate-400 dark:text-slate-500">
-                                    ({item.hiragana})
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-xs font-bold text-[#b5179e] tracking-wider select-all">{item.romaji}</p>
-                              <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">{item.vietnamese_meaning}</p>
-                              
-                              {item.mnemonic_tip && (
-                                <p className="text-[11px] text-slate-400 dark:text-slate-500 italic mt-1">
-                                  💡 {item.mnemonic_tip}
-                                </p>
-                              )}
-                            </div>
-
-                            <div className="flex flex-col items-end gap-3 justify-between h-full">
-                              <button
-                                onClick={() => playAudioWithFallback(item.kanji_word || item.hiragana, item.hiragana)}
-                                className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 text-xs transition-all active:scale-90"
-                                title="Nghe phát âm"
-                              >
-                                🔊
-                              </button>
-
-                              {/* Status Selector */}
-                              <select
-                                value={item.status}
-                                onChange={(e) => {
-                                  const newStatus = e.target.value as 'not_learned' | 'learning' | 'mastered';
-                                  handleStatusChange(item.id, newStatus);
-                                }}
-                                className="text-[10px] font-bold py-1 px-2 border rounded-lg bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-350 cursor-pointer"
-                              >
-                                <option value="not_learned">Chưa học</option>
-                                <option value="learning">Đang học</option>
-                                <option value="mastered">Đã thuộc</option>
-                              </select>
-                            </div>
-                          </div>
-                        ))}
+                            Tất cả ({vocabItems.length})
+                          </button>
+                          <button
+                            onClick={() => setStatusFilter('not_learned')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              statusFilter === 'not_learned'
+                                ? 'bg-white dark:bg-slate-900 text-red-500 shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-red-500'
+                            }`}
+                          >
+                            Chưa học ({vocabItems.filter(v => v.status === 'not_learned').length})
+                          </button>
+                          <button
+                            onClick={() => setStatusFilter('learning')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              statusFilter === 'learning'
+                                ? 'bg-white dark:bg-slate-900 text-amber-500 shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-amber-500'
+                            }`}
+                          >
+                            Đang học ({vocabItems.filter(v => v.status === 'learning').length})
+                          </button>
+                          <button
+                            onClick={() => setStatusFilter('mastered')}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                              statusFilter === 'mastered'
+                                ? 'bg-white dark:bg-slate-900 text-emerald-500 shadow-sm'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-emerald-500'
+                            }`}
+                          >
+                            Đã thuộc ({vocabItems.filter(v => v.status === 'mastered').length})
+                          </button>
+                        </div>
                       </div>
+
+                      {/* Danh sách từ vựng đã được lọc */}
+                      {(() => {
+                        const filtered = vocabItems.filter(item => {
+                          if (statusFilter !== 'all' && item.status !== statusFilter) return false;
+                          if (searchQuery.trim()) {
+                            const q = searchQuery.toLowerCase().trim();
+                            return (item.kanji_word && item.kanji_word.toLowerCase().includes(q)) ||
+                                   (item.hiragana && item.hiragana.toLowerCase().includes(q)) ||
+                                   (item.romaji && item.romaji.toLowerCase().includes(q)) ||
+                                   (item.vietnamese_meaning && item.vietnamese_meaning.toLowerCase().includes(q));
+                          }
+                          return true;
+                        });
+
+                        if (filtered.length === 0) {
+                          return (
+                            <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+                              📭 Không tìm thấy từ vựng nào khớp với bộ lọc.
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {filtered.map(item => (
+                              <div 
+                                key={item.id}
+                                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl flex items-start justify-between hover:shadow-sm transition-all"
+                              >
+                                <div className="space-y-2 flex-1">
+                                  <div className="flex items-baseline gap-2">
+                                    <span className="text-lg font-bold text-slate-800 dark:text-slate-100">
+                                      {item.kanji_word || item.hiragana}
+                                    </span>
+                                    {item.kanji_word && (
+                                      <span className="text-xs text-slate-400 dark:text-slate-500">
+                                        ({item.hiragana})
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="text-xs font-bold text-[#b5179e] tracking-wider select-all">{item.romaji}</p>
+                                  <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">{item.vietnamese_meaning}</p>
+                                  
+                                  {item.mnemonic_tip && (
+                                    <p className="text-[11px] text-slate-400 dark:text-slate-500 italic mt-1">
+                                      💡 {item.mnemonic_tip}
+                                    </p>
+                                  )}
+                                </div>
+
+                                <div className="flex flex-col items-end gap-3 justify-between h-full">
+                                  <button
+                                    onClick={() => playAudioWithFallback(item.kanji_word || item.hiragana, item.hiragana)}
+                                    className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-slate-707 dark:text-slate-400 dark:hover:text-slate-200 text-xs transition-all active:scale-90"
+                                    title="Nghe phát âm"
+                                  >
+                                    🔊
+                                  </button>
+
+                                  {/* Status Selector */}
+                                  <select
+                                    value={item.status}
+                                    onChange={(e) => {
+                                      const newStatus = e.target.value as 'not_learned' | 'learning' | 'mastered';
+                                      handleStatusChange(item.id, newStatus);
+                                    }}
+                                    className="text-[10px] font-bold py-1 px-2 border rounded-lg bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-350 cursor-pointer"
+                                  >
+                                    <option value="not_learned">Chưa học</option>
+                                    <option value="learning">Đang học</option>
+                                    <option value="mastered">Đã thuộc</option>
+                                  </select>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })()}
                     </div>
                   ) : (
-<>{renderInteractivePractice()}</>
+                    <>{renderInteractivePractice()}</>
                   )}
                 </div>
               ) : (
@@ -3646,6 +3943,14 @@ const renderInteractivePractice = () => {
                     <div className="space-y-4">
                       {grammarItems.map((g) => {
                         const isExpanded = expandedGrammarId === g.id;
+                        let structureExplain = {};
+                        if (g.notes && g.notes.startsWith('{')) {
+                          try {
+                            structureExplain = JSON.parse(g.notes);
+                          } catch (e) {
+                            structureExplain = {};
+                          }
+                        }
                         const activeTab = grammarDetailTab[g.id] || 'structure';
 
                         let examples: any[] = [];
@@ -3743,57 +4048,82 @@ const renderInteractivePractice = () => {
                                     {/* 1. Khẳng định Structure */}
                                     {affExs.length > 0 && (
                                       <div className="space-y-2">
-                                        <span className="text-xs font-extrabold text-emerald-500 flex items-center gap-1.5 uppercase tracking-wider">
-                                          🟢 Khẳng định
-                                        </span>
-                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'affirmative'))}
+                                        <div className="flex items-center justify-between">
+                                          <div className="flex items-center gap-1.5">
+                                            <span className="text-xs font-extrabold text-emerald-500 uppercase tracking-wider">
+                                              🟢 Khẳng định
+                                            </span>
+                                            {structureExplain.affirmative && (
+                                              <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 italic">
+                                                ({structureExplain.affirmative})
+                                              </span>
+                                            )}
+                                          </div>
+                                          <button
+                                            onClick={() => setSelectedPopupGrammar({ grammar: g, selectedFormType: 'affirmative' })}
+                                            className="px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 text-emerald-600 dark:text-emerald-400 text-[10px] font-extrabold hover:bg-[#b5179e]/10 hover:text-[#b5179e] cursor-pointer transition-all active:scale-95 flex items-center gap-1"
+                                          >
+                                            <span>Chi tiết</span>
+                                            <span>🔍</span>
+                                          </button>
+                                        </div>
+                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'affirmative', g.id))}
                                       </div>
                                     )}
 
                                     {/* 2. Phủ định Structure */}
                                     {negExs.length > 0 && (
                                       <div className="space-y-2">
-                                        <span className="text-xs font-extrabold text-rose-500 flex items-center gap-1.5 uppercase tracking-wider">
-                                          🔴 Phủ định
-                                        </span>
-                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'negative'))}
+                                        <div className="flex items-center justify-between">
+                                          <div className="flex items-center gap-1.5">
+                                            <span className="text-xs font-extrabold text-rose-500 uppercase tracking-wider">
+                                              🔴 Phủ định
+                                            </span>
+                                            {structureExplain.negative && (
+                                              <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 italic">
+                                                ({structureExplain.negative})
+                                              </span>
+                                            )}
+                                          </div>
+                                          <button
+                                            onClick={() => setSelectedPopupGrammar({ grammar: g, selectedFormType: 'negative' })}
+                                            className="px-2 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40 text-rose-600 dark:text-rose-400 text-[10px] font-extrabold hover:bg-[#b5179e]/10 hover:text-[#b5179e] cursor-pointer transition-all active:scale-95 flex items-center gap-1"
+                                          >
+                                            <span>Chi tiết</span>
+                                            <span>🔍</span>
+                                          </button>
+                                        </div>
+                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'negative', g.id))}
                                       </div>
                                     )}
 
                                     {/* 3. Nghi vấn Structure */}
                                     {intExs.length > 0 && (
                                       <div className="space-y-2">
-                                        <span className="text-xs font-extrabold text-amber-500 flex items-center gap-1.5 uppercase tracking-wider">
-                                          🟡 Nghi vấn
-                                        </span>
-                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'interrogative'))}
+                                        <div className="flex items-center justify-between">
+                                          <div className="flex items-center gap-1.5">
+                                            <span className="text-xs font-extrabold text-amber-500 uppercase tracking-wider">
+                                              🟡 Nghi vấn
+                                            </span>
+                                            {structureExplain.interrogative && (
+                                              <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 italic">
+                                                ({structureExplain.interrogative})
+                                              </span>
+                                            )}
+                                          </div>
+                                          <button
+                                            onClick={() => setSelectedPopupGrammar({ grammar: g, selectedFormType: 'interrogative' })}
+                                            className="px-2 py-1 rounded-lg bg-amber-50 dark:bg-amber-955/30 border border-amber-100 dark:border-amber-900/40 text-amber-600 dark:text-amber-400 text-[10px] font-extrabold hover:bg-[#b5179e]/10 hover:text-[#b5179e] cursor-pointer transition-all active:scale-95 flex items-center gap-1"
+                                          >
+                                            <span>Chi tiết</span>
+                                            <span>🔍</span>
+                                          </button>
+                                        </div>
+                                        {renderVisualStructure(getVisualStructureForForm(g.structure, 'interrogative', g.id))}
                                       </div>
                                     )}
 
-                                    {/* Banner Giải thích ý nghĩa và cách dùng bằng tiếng Việt */}
-                                    <div className="p-5 bg-indigo-50/40 dark:bg-indigo-950/20 border border-indigo-100/50 dark:border-indigo-900/30 rounded-2xl space-y-3 mt-6 shadow-sm">
-                                      <div className="space-y-1">
-                                        <span className="text-xs font-extrabold text-[#b5179e] dark:text-pink-300 flex items-center gap-1.5 uppercase tracking-wider">
-                                          💡 Ý nghĩa
-                                        </span>
-                                        <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 leading-relaxed">
-                                          {g.meaning}
-                                        </p>
-                                      </div>
-                                      
-                                      {g.vietnamese_explanation && (
-                                        <div className="space-y-1 pt-2 border-t border-slate-200/50 dark:border-slate-800/40">
-                                          <span className="text-xs font-extrabold text-[#b5179e] dark:text-pink-300 flex items-center gap-1.5 uppercase tracking-wider">
-                                            🎯 Dùng khi nào
-                                          </span>
-                                          <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 leading-relaxed italic">
-                                            {g.vietnamese_explanation}
-                                          </p>
-                                        </div>
-                                      )}
-                                    </div>
-                                  </div>
-                                ) : (
+                                    </div>) : (
                                   /* TAB VÍ DỤ */
                                   <div className="space-y-6">
                                     {/* 1. Khẳng định Examples */}
@@ -3821,7 +4151,7 @@ const renderInteractivePractice = () => {
                                                 </button>
                                               </div>
                                               <p className="text-sm font-extrabold text-slate-800 dark:text-slate-100 tracking-wide">
-                                                {highlightEnding(ex.japanese)}
+                                                {highlightEnding(cleanAndHiraganizeExample(ex.japanese, ex.romaji), 'affirmative')}
                                               </p>
                                               <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-200 tracking-wider">
                                                 {ex.romaji}
@@ -3848,7 +4178,7 @@ const renderInteractivePractice = () => {
                                               className="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl space-y-2 relative hover:border-[#b5179e]/30 transition-all"
                                             >
                                               <div className="flex items-center justify-between">
-                                                <span className="text-[9px] font-extrabold text-rose-500 uppercase tracking-wider bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20">
+                                                <span className="text-[9px] font-extrabold text-rose-500 uppercase tracking-wider bg-rose-50/10 px-1.5 py-0.5 rounded border border-rose-50/20">
                                                   Ví dụ #{exIdx + 1}
                                                 </span>
                                                 <button
@@ -3860,7 +4190,7 @@ const renderInteractivePractice = () => {
                                                 </button>
                                               </div>
                                               <p className="text-sm font-extrabold text-slate-800 dark:text-slate-100 tracking-wide">
-                                                {highlightEnding(ex.japanese)}
+                                                {highlightEnding(cleanAndHiraganizeExample(ex.japanese, ex.romaji), 'negative')}
                                               </p>
                                               <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-200 tracking-wider">
                                                 {ex.romaji}
@@ -3899,7 +4229,7 @@ const renderInteractivePractice = () => {
                                                 </button>
                                               </div>
                                               <p className="text-sm font-extrabold text-slate-800 dark:text-slate-100 tracking-wide">
-                                                {highlightEnding(ex.japanese)}
+                                                {highlightEnding(cleanAndHiraganizeExample(ex.japanese, ex.romaji), 'interrogative')}
                                               </p>
                                               <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-200 tracking-wider">
                                                 {ex.romaji}
@@ -6015,11 +6345,16 @@ const renderInteractivePractice = () => {
                             const sentences: { japanese: string; romaji: string; vietnamese: string }[] = [];
                             grammarItems.forEach(g => {
                               let examples = [];
-                              if (g.examples_json) {
-                                try {
-                                  examples = typeof g.examples_json === 'string' ? JSON.parse(g.examples_json) : g.examples_json;
-                                } catch (e) {}
-                              }
+                         if (g.examples_json) {
+                           try {
+                             const rawExamples = typeof g.examples_json === 'string'
+                               ? JSON.parse(g.examples_json)
+                               : g.examples_json;
+                             examples = getExtendedExamplesForGrammar(g.id, rawExamples);
+                           } catch (e) {
+                             examples = [];
+                           }
+                         }
                               if (examples && examples.length > 0) {
                                 sentences.push(...examples);
                               } else if (g.japanese_example) {
@@ -6341,8 +6676,620 @@ const renderInteractivePractice = () => {
           </div>
         )}
 
-      </main>
+            </main>
+
+      {selectedPopupGrammar && (
+        <GrammarDetailModal 
+          grammar={selectedPopupGrammar.grammar} 
+          initialFormType={selectedPopupGrammar.selectedFormType}
+          onClose={() => setSelectedPopupGrammar(null)} 
+        />
+      )}
 
     </div>
   );
 }
+
+// Component Popup Modal hiển thị chi tiết ngữ pháp & ví dụ Marugoto phong phú
+const GrammarDetailModal = ({ grammar, initialFormType, onClose }: { grammar: any, initialFormType: 'affirmative' | 'negative' | 'interrogative', onClose: () => void }) => {
+  const [activeFormType, setActiveFormType] = useState<'affirmative' | 'negative' | 'interrogative'>(
+    initialFormType || 'affirmative'
+  );
+
+  let structureExplain = {};
+  if (grammar.notes && grammar.notes.startsWith('{')) {
+    try {
+      structureExplain = JSON.parse(grammar.notes);
+    } catch (e) {
+      structureExplain = {};
+    }
+  }
+
+  let examples = [];
+  if (grammar.examples_json) {
+    try {
+      const rawExamples = typeof grammar.examples_json === 'string'
+        ? JSON.parse(grammar.examples_json)
+        : grammar.examples_json;
+      examples = getExtendedExamplesForGrammar(grammar.id, rawExamples);
+    } catch (e) {
+      examples = [];
+    }
+  }
+
+  const affExs = examples.filter(ex => (ex.type || 'affirmative') === 'affirmative');
+  const negExs = examples.filter(ex => ex.type === 'negative');
+  const intExs = examples.filter(ex => ex.type === 'interrogative');
+
+  const filteredExamples = examples.filter(ex => {
+    const type = ex.type || 'affirmative';
+    return type === activeFormType;
+  }).slice(0, 4);
+
+  const formTypeName = activeFormType === 'affirmative' ? 'Khẳng định' : activeFormType === 'negative' ? 'Phủ định' : 'Nghi vấn';
+  const formTypeColor = activeFormType === 'affirmative' ? 'text-emerald-500' : activeFormType === 'negative' ? 'text-rose-500' : 'text-amber-500';
+  const formTypeBorder = activeFormType === 'affirmative' ? 'border-emerald-500/25 dark:border-emerald-500/35' : activeFormType === 'negative' ? 'border-rose-500/25 dark:border-rose-500/35' : 'border-amber-500/25 dark:border-amber-500/35';
+
+  const formMeaning = activeFormType === 'affirmative' ? structureExplain.affirmative : activeFormType === 'negative' ? structureExplain.negative : structureExplain.interrogative;
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  const playAudio = (text: string) => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.85;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  const highlightEnding = (text: string) => {
+    if (!text) return '';
+    const replaced = text
+      .replace(/(じゃないes|じゃありません|ではないです|いません|ありません|しません)/g, '<span class="text-rose-500 font-extrabold">$1</span>')
+      .replace(/(ですか|ますか|でしょうか)/g, '<span class="text-amber-500 font-extrabold">$1</span>')
+      .replace(/(es|です|ます|ています|あります|います|します)/g, '<span class="text-[#b5179e] font-extrabold">$1</span>');
+    return <span dangerouslySetInnerHTML={{ __html: replaced }} />;
+  };
+
+  const translateSymbolToVi = (symbol: string) => {
+    let s = symbol;
+    // Chuẩn hóa hiển thị đuôi câu Nhật Bản (es, us, じゃないes...)
+    s = s.replace(/じゃない\s*es/g, 'じゃないes'); 
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないđây/g, 'じゃないes');
+    s = s.replace(/じゃないđó/g, 'base'); 
+    s = s.replace(/じゃないđúng/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/ない\s*es/g, 'ないです');
+    s = s.replace(/ないes/g, 'ないes'); 
+    s = s.replace(/ないes/g, 'ないes'); 
+    s = s.replace(/ないes/g, 'ないes'); 
+    s = s.replace(/ないes/g, 'ないです');
+    s = s.replace(/\bes\b/g, 'es'); 
+    s = s.replace(/\bus\b/g, 'es');
+    s = s.replace(/\bđây\b/g, 'es');
+    s = s.replace(/\bđó\b/g, 'es');
+    s = s.replace(/\bđúng\b/g, 'es');
+    s = s.replace(/es。/g, 'es');
+    s = s.replace(/es/g, 'es');
+    s = s.replace(/us/g, 'es');
+    s = s.replace(/đúng/g, 'es');
+    s = s.replace(/đây/g, 'es');
+    s = s.replace(/đó/g, 'es');
+    s = s.replace(/es/g, 'です');
+    s = s.replace(/んじゃないです/g, 'んじゃないです');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes'); 
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないです');
+    s = s.replace(/base/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'base');
+    s = s.replace(/base/g, 'じゃないes');
+    s = s.replace(/base/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないes');
+    s = s.replace(/じゃないes/g, 'じゃないです');
+
+    // Dịch chuẩn hóa ký hiệu tính từ Marugoto (イA, ナA)
+    s = s.replace(/イ\s*A\s*－\s*い/gi, 'T\u00ednh từ đuôi い'); // Tính từ đuôi い
+    s = s.replace(/イ\s*A\s*－?\s*い?/gi, 'T\u00ednh từ đuôi い');
+    s = s.replace(/ナ\s*A\s*－\s*な/gi, 'T\u00ednh từ đuôi な'); // Tính từ đuôi な
+    s = s.replace(/ナ\s*A\s*－?\s*na?/gi, 'T\u00ednh từ đuôi な');
+    s = s.replace(/ナ\s*A\s*－?\s*な?/gi, 'T\u00ednh từ đuôi な');
+    
+    // Một số từ rác khác
+    s = s.replace(/T\u00ednh t\u1eeb\s*\u0111u\u00f4i\s*\u3044\s*\u304f/gi, 'T\u00ednh từ đuôi い'); // Sửa 'Tính từ đuôi いく' thành 'Tính từ đuôi い'
+    s = s.replace(/\u304f$/g, ''); 
+    return s;
+  };
+
+  const getVisualStructureForForm = (baseStructure: string, formType: 'affirmative' | 'negative' | 'interrogative', grammarId?: number) => {
+    if (grammarId === 158) {
+      if (formType === 'affirmative') return 'N (Object) + を + V + ます';
+      if (formType === 'negative') return 'N (Object) + を + V + ません | なに + を + V + ませんか';
+      if (formType === 'interrogative') return 'N (Object) + を + V + ますか | なに + を + V + ますか';
+    }
+    if (!baseStructure) return '';
+
+    const getNegativeOf = (word: string) => {
+      const w = word.toLowerCase();
+      if (w.includes('です') || w.includes('es') || w.includes('us') || w.includes('đúng') || w.includes('đây')) {
+        return 'じゃないです';
+      }
+      if (w.includes('ます')) return word.replace('ます', 'ません');
+      if (w.includes('できます')) return word.replace('できます', 'できません');
+      if (w.includes('います')) return word.replace('います', 'いません');
+      if (w.includes('あります')) return word.replace('あります', 'ありません');
+      return word + ' + じゃないです';
+    };
+
+    const subStructures = baseStructure.split('|').map(s => s.trim());
+    const resultStructures = [];
+
+    for (const sub of subStructures) {
+      const cleanSub = sub.replace(/。$/, '').trim();
+      const parts = cleanSub.split('+').map(p => p.trim());
+      if (parts.length === 0) continue;
+
+      const hasNegativePart = parts.some(p => p.includes('ない') || p.includes('ません') || p.includes('じゃない'));
+      const hasInterrogativePart = parts.some(p => p.includes('か') || p.includes('ka') || p.includes('なん'));
+
+      if (formType === 'negative') {
+        if (hasNegativePart) {
+          const negativeParts = [];
+          for (const p of parts) {
+            if (p.includes('か') || p.includes('ka') || p.includes('なん')) {
+              continue;
+            }
+            if ((p.includes('es') || p.includes('です')) && !p.includes('ない') && !p.includes('じゃない')) {
+              continue;
+            }
+            negativeParts.push(p);
+          }
+          resultStructures.push(negativeParts.join(' + '));
+        } else {
+          const lastIndex = parts.length - 1;
+          const lastPart = parts[lastIndex];
+          const negativeLastPart = getNegativeOf(lastPart);
+          const newParts = [...parts.slice(0, -1), negativeLastPart];
+          resultStructures.push(newParts.join(' + '));
+        }
+      } else if (formType === 'interrogative') {
+        if (hasInterrogativePart) {
+          const interrogativeParts = [];
+          for (const p of parts) {
+            if (p.includes('ない') || p.includes('ません') || p.includes('じゃない')) {
+              continue;
+            }
+            if ((p.includes('es') || p.includes('です')) && !p.includes('か') && parts.some(x => x.includes('か'))) {
+              continue;
+            }
+            interrogativeParts.push(p);
+          }
+          resultStructures.push(interrogativeParts.join(' + '));
+        } else {
+          const lastIndex = parts.length - 1;
+          const lastPart = parts[lastIndex];
+          let interrogativeLastPart = lastPart;
+          if (lastPart.includes('đáp') || lastPart.includes('đâu') || lastPart.includes('どこ') || lastPart.includes('だれ')) {
+            interrogativeLastPart = lastPart;
+          } else if (lastPart.includes('です') || lastPart.includes('es') || lastPart.includes('us')) {
+            interrogativeLastPart = lastPart.replace(/です|es|us/g, 'ですか');
+          } else if (lastPart.includes('ます')) {
+            interrogativeLastPart = lastPart.replace('ます', 'ますか');
+          } else {
+            interrogativeLastPart = lastPart + ' + か';
+          }
+          const newParts = [...parts.slice(0, -1), interrogativeLastPart];
+          resultStructures.push(newParts.join(' + '));
+        }
+      } else {
+        // Thể Khẳng định: loại bỏ vế phủ định và nghi vấn, ngắt khi câu kết thúc bằng dấu chấm
+        const affirmativeParts = [];
+        for (const p of parts) {
+          if (p.includes('ない') || p.includes('ません') || p.includes('じゃない')) {
+            continue;
+          }
+          if (p.includes('か') || p.includes('ka') || p.includes('なん')) {
+            continue;
+          }
+          affirmativeParts.push(p.replace(/。$/, ''));
+          // Ngắt ngay lập tức khi vế kết thúc bằng dấu chấm tròn câu khẳng định
+          if (p.includes('。') || p.includes('.')) {
+            break;
+          }
+        }
+        resultStructures.push(affirmativeParts.join(' + '));
+      }
+    }
+
+    let finalStr = resultStructures.join(' | ');
+    // Chuẩn hóa hiển thị đuôi câu
+    finalStr = finalStr.replace(/じゃない\s*es/gi, 'じゃないです');
+    finalStr = finalStr.replace(/じゃないes/gi, 'base'); 
+    finalStr = finalStr.replace(/じゃないđây/gi, 'base');
+    finalStr = finalStr.replace(/じゃないđó/gi, 'base');
+    finalStr = finalStr.replace(/じゃないđúng/gi, 'base');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないです');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないes');
+    finalStr = finalStr.replace(/じゃないです/gi, 'じゃないです');
+    finalStr = finalStr.replace(/ない\s*es/gi, 'ないes'); 
+    finalStr = finalStr.replace(/ないes/gi, 'ないes'); 
+    finalStr = finalStr.replace(/ないes/gi, 'ないです');
+    finalStr = finalStr.replace(/\bes\b/gi, 'es'); 
+    finalStr = finalStr.replace(/\bus\b/gi, 'es');
+    finalStr = finalStr.replace(/\bđây\b/gi, 'es'); 
+    finalStr = finalStr.replace(/\bđó\b/gi, 'es'); 
+    finalStr = finalStr.replace(/\bđúng\b/gi, 'es');
+    finalStr = finalStr.replace(/es。/gi, 'es');
+    finalStr = finalStr.replace(/es/gi, 'es');
+    finalStr = finalStr.replace(/us/gi, 'es');
+    finalStr = finalStr.replace(/đúng/gi, 'es');
+    finalStr = finalStr.replace(/đây/gi, 'es');
+    finalStr = finalStr.replace(/đó/gi, 'es');
+    finalStr = finalStr.replace(/es/gi, 'đúng'); // Telex fix
+    finalStr = finalStr.replace(/es/gi, 'です');
+    finalStr = finalStr.replace(/us/gi, 'です');
+    finalStr = finalStr.replace(/base/gi, 'じゃないes');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないes');
+    finalStr = finalStr.replace(/じゃないes/gi, 'じゃないです');
+    return finalStr;
+  };
+
+  const renderVisualStructure = (structure: string) => {
+    if (!structure) return null;
+    const lines = structure.split('|').map(l => l.trim());
+    return (
+      <div className="space-y-3 mt-1">
+        {lines.map((line, lineIdx) => {
+          const parts = line.split('+').map(p => p.trim());
+          if (parts.length <= 1) {
+            return (
+              <div 
+                key={lineIdx} 
+                className="text-sm font-bold text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-xl"
+              >
+                {translateSymbolToVi(line)}
+              </div>
+            );
+          }
+
+          return (
+            <div key={lineIdx} className="overflow-x-auto pb-1">
+              <div className="inline-flex items-stretch border border-slate-200 dark:border-slate-855 bg-white dark:bg-slate-900 rounded-xl overflow-hidden min-w-[280px]">
+                {parts.map((part, index) => {
+                  const isParticle = ['は', 'g', 'に', 'を', 'も', 'と', 'de', 'で', 'へ', 'の', 'k'].includes(part) || part.length <= 2;
+                  const isEnding = ['es', 'es。', 'じゃないes', 'じゃないes。', 'đúng', 'đúng。', 'じゃないđúng', 'じゃないđúng。', 'ですか', 'ですか。', 'います', 'あります', 'ありません', 'です', 'じゃないです', 'じゃないです。'].some(end => part.includes(end));
+                  
+                  let borderClass = "";
+                  if (index > 0) {
+                    if (isParticle || isEnding) {
+                      borderClass = "border-l border-dashed border-slate-200 dark:border-slate-700/80";
+                    } else {
+                      borderClass = "border-l border-slate-200 dark:border-slate-850";
+                    }
+                  }
+
+                  const options = part.split('/').map(opt => opt.trim());
+
+                  return (
+                    <div 
+                      key={index}
+                      className={"px-3 py-2 flex flex-col justify-center items-center text-center " + borderClass + " bg-slate-50/20 dark:bg-slate-900/10 min-w-[60px]"}
+                    >
+                      {options.length > 1 ? (
+                        <div className="flex flex-col space-y-1 items-center justify-center">
+                          {options.map((opt, oIdx) => (
+                            <span 
+                              key={oIdx}
+                              className="text-xs sm:text-sm font-bold text-slate-855 dark:text-slate-200"
+                            >
+                              {translateSymbolToVi(opt)}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-xs sm:text-sm font-black text-slate-855 dark:text-slate-100">
+                          {translateSymbolToVi(part)}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-fade-in font-sans">
+      <div className="absolute inset-0" onClick={onClose}></div>
+      <div className="relative bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-3xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 md:p-8 space-y-6 animate-scale-up text-slate-800 dark:text-slate-200">
+        
+        {/* Header */}
+        <div className="flex items-start justify-between border-b border-slate-100 dark:border-slate-900 pb-4">
+          <div className="space-y-1">
+            <span className="inline-block text-[9px] font-black px-2 py-0.5 rounded bg-pink-50 dark:bg-pink-955/30 text-[#b5179e] dark:text-pink-300 border border-pink-100/50 dark:border-pink-900/40 uppercase tracking-widest">
+              Marugoto A1 • Chi tiết Ngữ pháp
+            </span>
+            <h2 className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              {grammar.title}
+            </h2>
+          </div>
+          <button 
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-855 flex items-center justify-center cursor-pointer transition-all active:scale-95"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-6">
+          
+          {/* Tabs chuyển đổi nhanh trong Modal */}
+          <div className="flex bg-slate-100 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 max-w-md shadow-inner">
+            {affExs.length > 0 && (
+              <button
+                onClick={() => setActiveFormType('affirmative')}
+                className={"flex-1 py-2 text-center text-xs font-black rounded-xl transition-all cursor-pointer " + (
+                  activeFormType === 'affirmative'
+                    ? 'bg-emerald-500 text-white shadow-md'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                )}
+              >
+                🟢 Khẳng định
+              </button>
+            )}
+            {negExs.length > 0 && (
+              <button
+                onClick={() => setActiveFormType('negative')}
+                className={"flex-1 py-2 text-center text-xs font-black rounded-xl transition-all cursor-pointer " + (
+                  activeFormType === 'negative'
+                    ? 'bg-rose-500 text-white shadow-md'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                )}
+              >
+                🔴 Phủ định
+              </button>
+            )}
+            {intExs.length > 0 && (
+              <button
+                onClick={() => setActiveFormType('interrogative')}
+                className={"flex-1 py-2 text-center text-xs font-black rounded-xl transition-all cursor-pointer " + (
+                  activeFormType === 'interrogative'
+                    ? 'bg-amber-500 text-white shadow-md'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                )}
+              >
+                🟡 Nghi vấn
+              </button>
+            )}
+          </div>
+
+          {/* 1. Ý nghĩa & Cách dùng */}
+          <div className={"p-5 rounded-2xl border bg-slate-50/30 dark:bg-slate-900/20 shadow-sm space-y-3 " + formTypeBorder}>
+            <div className="space-y-1">
+              <span className={"text-xs font-black uppercase tracking-wider flex items-center gap-1.5 " + formTypeColor}>
+                💡 Ý nghĩa ({formTypeName})
+              </span>
+              <p className="text-sm md:text-base font-extrabold text-slate-900 dark:text-slate-100">
+                {formMeaning || grammar.meaning}
+              </p>
+            </div>
+            
+            {grammar.vietnamese_explanation && (
+              <div className="space-y-1 pt-3 border-t border-slate-200/50 dark:border-slate-800/40">
+                <span className="text-xs font-black text-slate-500 dark:text-slate-455 uppercase tracking-wider flex items-center gap-1.5">
+                  🎯 Cách dùng mẫu câu chung
+                </span>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-355 leading-relaxed font-semibold italic">
+                  {grammar.vietnamese_explanation}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* 2. Cấu trúc */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest border-b border-slate-100 dark:border-slate-900 pb-1">
+              📋 Công thức ({formTypeName})
+            </h3>
+            <div className="p-5 bg-slate-50/50 dark:bg-slate-900/10 border border-slate-100 dark:border-slate-900 rounded-2xl">
+              {renderVisualStructure(getVisualStructureForForm(grammar.structure, activeFormType, grammar.id))}
+            </div>
+          </div>
+
+          {/* 3. Ví dụ */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest border-b border-slate-100 dark:border-slate-900 pb-1">
+              💬 Câu ví dụ ({filteredExamples.length} câu)
+            </h3>
+            {filteredExamples.length === 0 ? (
+              <div className="text-center py-6 text-slate-400 text-xs border border-dashed border-slate-200 dark:border-slate-855 rounded-xl">
+                Không tìm thấy câu ví dụ nào.
+              </div>
+            ) : (
+              <div className="space-y-3 max-h-[30vh] overflow-y-auto pr-2">
+                {filteredExamples.map((ex, exIdx) => (
+                  <div 
+                    key={exIdx} 
+                    className="p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-900 rounded-2xl flex items-start gap-4 hover:border-[#b5179e]/30 transition-all group"
+                  >
+                    <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-855 shrink-0">
+                      {(activeFormType === 'affirmative' ? '🟢 ' : activeFormType === 'negative' ? '🔴 ' : '🟡 ') + (exIdx + 1)}
+                    </span>
+                    <div className="flex-1 space-y-1">
+                      <p className="text-base font-extrabold text-slate-900 dark:text-white leading-snug">
+                        {highlightEnding(cleanAndHiraganizeExample(ex.japanese, ex.romaji), activeFormType)}
+                      </p>
+                      <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">
+                        {ex.romaji}
+                      </p>
+                      <p className="text-xs font-semibold text-slate-655 dark:text-slate-350 border-t border-dashed border-slate-200/50 dark:border-slate-800/40 pt-1.5 mt-1">
+                        {ex.vietnamese}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => playAudio(ex.japanese)}
+                      className="w-8 h-8 rounded-full bg-white dark:bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-slate-855 text-[#b5179e] dark:text-pink-300 hover:text-white hover:bg-[#b5179e] dark:hover:bg-pink-500 cursor-pointer shrink-0 transition-all active:scale-90"
+                      title="Phát âm"
+                    >
+                      🔊
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-slate-900">
+          <button
+            onClick={onClose}
+            className="px-6 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-extrabold text-sm hover:opacity-90 transition-all cursor-pointer"
+          >
+            Đóng lại
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Helper chuyển đổi Kanji ví dụ sang Hiragana và sửa lỗi font hiển thị quả trám 
+const cleanAndHiraganizeExample = (text: string, romaji: string) => {
+  if (!text) return '';
+  let s = text;
+  
+  // Sửa lỗi font quả trám đôi 
+  s = s.replace(/\uFFFD\uFFFD/g, '\u3072\u308d'); // �� -> ひろ
+  s = s.replace(/\uFFFD/g, '\u3072\u308d'); // fallback
+  s = s.replace(/\uFFFD/g, '\u3072\u308d');
+
+  const map = {
+    "\u90e8\u5c4b": "\u3078\u3084", // 部屋 -> へや
+    "\u6559\u5ba4": "\u304d\u3087\u3046\u3057\u3064", // 教室 -> きょうしつ
+    "\u5b66\u751f": "\u304c\u304f\u305b\u3044", // 学生 -> がくせい
+    "\u79c1": "\u305f\u3057", // 私 -> わたし
+    "\u592b": "\u304a\u3063\u3068", // 夫 -> おっと
+    "\u5bb6\u65cf": "\u304b\u305e\u304f", // 家族 -> かぞく (hoặc かぞく)
+    "\u4e00\u4eba": "\u3072\u3068\u308a", // 一人 -> ひとり
+    "\u672c": "\u307b\u3093", // 本 -> ほん
+    "\u68da": "\u305f\u306a", // 棚 -> taな
+    "\u4e0a": "\u3046\u3048", // 上 -> うえ
+    "\u304a\u98a8\u5442": "\u304a\u3075\u308d", // お風呂 -> おふろ
+    "\u524d": "\u307e\u3048", // 前 -> まえ
+    "\u8a66\u9a13": "\u3057\u3051\u3093", // 試験 -> しけん
+    "\u91d1\u66dc\u65e5": "\u304d\u3093\u3088\u3046\u3073", // 金曜日 -> きんようび
+    "\u65e5\u66dc\u65e5": "\u306b\u3061\u3088\u3046\u3073", // 日曜日 -> にchようび
+    "\u4f55\u6642": "\u306a\u3093\u3058", // 何時 -> なんじ
+    "\u671d": "\u3042\u3055", // 朝 -> あさ
+    "\u4eca": "\u3044\u307e", // 今 -> いま
+    "\u592b\u5a66": "\u3075\u3046\u3075", // 夫婦 -> ふうふ
+    "\u592b\u5a66\u3067": "\u3075\u3046\u3075\u3067", // 夫婦で
+    "\u592b\u3068": "\u304a\u3063\u3068\u3068", // 夫と
+    "\u5bb6\u65cf\u3068": "\u304b\u305e\u304f\u3068", // 家族と
+    "\u4e00\u4eba\u3067": "\u3072\u3068\u308a\u3067", // 一人で
+    "\u75c5\u9662": "\u3073\u3087\u3046\u3044\u3093", // 病院 -> びょういn
+    "\u85ac": "\u304f\u3059\u308a", // 薬 -> くすり
+    "\u8eca": "\u304f\u308b\u307e", // 車 -> くるま
+    "\u81ea\u8ee2\u8eca": "\u3058\u3066\u3093\u3057\u3083", // 自転車 -> じてんしゃ
+    "\u51b7\u8535\u5eab": "\u308c\u3044\u305e\u3046\u3053", // 冷蔵庫 -> れいぞうこ
+    "\u5375": "\u305f\u307e\u3054", // 卵 -> たまご
+    "\u5ead": "\u306b\u308f", // 庭 -> にわ
+    "\u4f4f\u3093\u3067": "\u3059\u3093\u3067", // 住んで -> すんで
+    "\u5e83\u3044": "\u3072\u308d\u3044", // 広い
+    "\u5e83\u304f\u306a\u3044": "\u3072\u308d\u304f\u306a\u3044", // 広くない
+    "\u592b": "\u304a\u3063\u3068"
+  };
+
+  for (const [kanji, hira] of Object.entries(map)) {
+    s = s.split(kanji).join(hira);
+  }
+
+  s = s.replace(/\u5b66/g, '\u304c\u304f'); // 学 -> がく
+  s = s.replace(/\u751f/g, '\u305b\u3044'); // 生 -> せい
+  s = s.replace(/\u5ba5/g, '\u3057\u3064'); // 室 -> しつ
+  s = s.replace(/\u8a9e/g, '\u3054'); // 語 -> ご
+  s = s.replace(/\u4f4f/g, '\u3059'); // 住 -> す
+  s = s.replace(/\u592b/g, '\u304a\u3063\u3068'); // 夫 -> おっと
+  s = s.replace(/\u66dc\u65e5/g, '\u3088\u3046\u3073'); // 曜日 -> ようび
+  s = s.replace(/\u4f55/g, '\u306a\u3093'); // 何 -> なん
+  s = s.replace(/\u6642/g, '\u3058'); // 時 -> じ
+  s = s.replace(/\u5206/g, '\u3075\u3093'); // 分 -> fuん
+  s = s.replace(/\u5e83/g, '\u3072\u308d'); // 広 -> ひろ
+  s = s.replace(/\u5925/g, '\u304a\u304a'); // 大 -> おお
+  s = s.replace(/\u5c0f/g, '\u3061\u3044'); // 小 -> ちい
+  s = s.replace(/\u65b0/g, '\u3042\u305f\u3089'); // 新 -> あたら
+  s = s.replace(/\u53e4/g, '\u3075\u308b'); // 古 -> ふる
+  s = s.replace(/\u9ad8/g, '\u305f\u304b'); // 高 -> たか
+  s = s.replace(/\u5b89/g, '\u3085'); // 安 -> やす
+  s = s.replace(/\uFFFD/g, '\u3072\u308d');
+  s = s.replace(/\uFFFD/g, '\u3072\u308d');
+
+  return s;
+};
+
+// Helper mở rộng các câu ví dụ còn thiếu cho cấu trúc ngữ pháp song song
+const getExtendedExamplesForGrammar = (grammarId: number, baseExamples: any[]) => {
+  const exs = [...baseExamples];
+
+  // Mẫu "で ます de masu" (id = 160 hoặc 178)
+  if (grammarId === 160 || grammarId === 178) {
+    // Thể Nghi vấn (interrogative): cần 2 ví dụ cho 2 cấu trúc
+    const hasNPlaceQuery = exs.some(ex => ex.type === 'interrogative' && !ex.japanese.includes('\u3069\u3053')); // どこ
+    if (!hasNPlaceQuery) {
+      exs.unshift({
+        japanese: "\u3042\u305d\u3053\u3067\u3000\u30e9\u30fc\u30e1\u3093\u3092\u3000\u305f\u3079\u307e\u3059\u304b\u3002",
+        romaji: "Asoko de raamen o tabemasu ka.",
+        vietnamese: "Bạn ăn mì Ramen ở đằng kia phải không?",
+        type: "interrogative"
+      });
+    }
+
+    // Thể Phủ định (negative): cần 2 ví dụ cho 2 cấu trúc
+    const hasDokoNegative = exs.some(ex => ex.type === 'negative' && (ex.japanese.includes('\u3069\u3053') || ex.japanese.includes('\u3069\u3053\u304b'))); // どこ hoặc どこか
+    if (!hasDokoNegative) {
+      exs.push({
+        japanese: "\u3069\u3053\u304b\u3067\u3000\u3072\u308b\u3054\u306f\u3093\u3092\u3000\u305f\u3079\u307e\u305b\u3093\u304b\u3002",
+        romaji: "Dokoka de hirugohan o tabemasen ka.",
+        vietnamese: "Chúng ta ăn trưa ở đâu đó nhé?",
+        type: "negative"
+      });
+    }
+  }
+
+  // Mẫu "を ます o masu" (id = 158)
+  if (grammarId === 158) {
+    // Thể Phủ định (negative): cần 2 ví dụ cho 2 cấu trúc
+    // Cấu trúc 1: N (Object) + を + V + ません
+    // Cấu trúc 2: なに + を + V + ませんか
+    const hasNanikaNegative = exs.some(ex => ex.type === 'negative' && (ex.japanese.includes('\u306a\u306b\u304b') || ex.japanese.includes('\u306a\u306b'))); // なにか
+    if (!hasNanikaNegative) {
+      exs.push({
+        japanese: "\u306a\u306b\u304b\u3000\u305f\u3079\u307e\u305b\u3093\u304b\u3002", // なにか　たべませんか。
+        romaji: "Nanika tabemasen ka.",
+        vietnamese: "Chúng ta ăn cái gì đó nhé?",
+        type: "negative"
+      });
+    }
+  }
+
+  return exs;
+};

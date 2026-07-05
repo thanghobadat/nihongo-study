@@ -1,5 +1,5 @@
 // In-memory Mock Database generated from Excel workbooks & Gemini API
-// Updated on: 2026-07-04 13:35:53 (Deduplicated Marugoto)
+// Updated on: 2026-07-05 00:26:41 (Deduplicated Marugoto & Rich Grammar Details)
 
 const lessons = [
     {
@@ -2017,7 +2017,7 @@ const vocabulary = [
         "romaji": "ima",
         "vietnamese_meaning": "bây giờ",
         "word_type": "noun",
-        "japanese_example": "今 何時ですか。",
+        "japanese_example": "いま なんじですか。",
         "example_meaning": "Bây giờ là mấy giờ?",
         "mnemonic_tip": "Mẹo nhớ: 'Y mà' - bây giờ y như cũ mà.",
         "image_url": "",
@@ -2147,7 +2147,7 @@ const vocabulary = [
         "romaji": "nanji",
         "vietnamese_meaning": "mấy giờ",
         "word_type": "pronoun",
-        "japanese_example": "今 何時ですか。",
+        "japanese_example": "いま なんじですか。",
         "example_meaning": "Bây giờ là mấy giờ?",
         "mnemonic_tip": "Hỏi mấy giờ hoài nản ghê.",
         "image_url": "",
@@ -2316,7 +2316,7 @@ const vocabulary = [
         "romaji": "kazoku",
         "vietnamese_meaning": "gia đình",
         "word_type": "noun",
-        "japanese_example": "家族と 来ました。",
+        "japanese_example": "かぞくと 来ました。",
         "example_meaning": "Tôi đã đến cùng gia đình.",
         "mnemonic_tip": "Mẹo nhớ: 'Cà dốc' - cả gia đình leo lên con dốc trồng cà.",
         "image_url": "",
@@ -2329,7 +2329,7 @@ const vocabulary = [
         "romaji": "hitoride",
         "vietnamese_meaning": "một mình",
         "word_type": "adverb",
-        "japanese_example": "一人で 行きます。",
+        "japanese_example": "ひとりで 行きます。",
         "example_meaning": "Tôi đi một mình.",
         "mnemonic_tip": "Mẹo nhớ: 'Hí tớ đi đê' - rủ một mình tớ đi đê.",
         "image_url": "",
@@ -3408,7 +3408,7 @@ const vocabulary = [
         "romaji": "reizouko",
         "vietnamese_meaning": "tủ lạnh",
         "word_type": "noun",
-        "japanese_example": "冷蔵庫に ビールがあります。",
+        "japanese_example": "れいぞうこに ビールがあります。",
         "example_meaning": "Trong tủ lạnh có bia.",
         "mnemonic_tip": "Lãnh tàng khố.",
         "image_url": "",
@@ -3694,7 +3694,7 @@ const vocabulary = [
         "romaji": "hitori",
         "vietnamese_meaning": "một người",
         "word_type": "noun",
-        "japanese_example": "一人で 旅行します。",
+        "japanese_example": "ひとりで 旅行します。",
         "example_meaning": "Đi du lịch một mình.",
         "mnemonic_tip": "Mẹo nhớ: 'Hí tớ đi' - một mình tớ đi chơi.",
         "image_url": "",
@@ -3720,7 +3720,7 @@ const vocabulary = [
         "romaji": "nannin",
         "vietnamese_meaning": "mấy người, bao nhiêu người",
         "word_type": "pronoun",
-        "japanese_example": "学生が 何人 いますか。",
+        "japanese_example": "がくせいが 何人 いますか。",
         "example_meaning": "Có bao nhiêu học sinh?",
         "mnemonic_tip": "Hỏi bao nhiêu người nản ghê.",
         "image_url": "",
@@ -4643,7 +4643,7 @@ const vocabulary = [
         "romaji": "sumimasu",
         "vietnamese_meaning": "sống, cư trú [ở đâu]",
         "word_type": "verb",
-        "japanese_example": "ハノイに 住んでいます。",
+        "japanese_example": "ハノイに すんでいます。",
         "example_meaning": "Tôi đang sống ở Hà Nội.",
         "mnemonic_tip": "Mẹo nhớ: 'Sư mị máy' - nhà sư sống chung với máy tính.",
         "image_url": "",
@@ -23975,7 +23975,7 @@ const grammar = [
         "meaning": "Làm gì cùng với ai",
         "structure": "N (người/động vật) + と + Động từ",
         "vietnamese_explanation": "Trợ từ と biểu thị đối tượng cùng thực hiện hành động.",
-        "japanese_example": "家族と 日本へ 来ました。",
+        "japanese_example": "かぞくと 日本へ 来ました。",
         "example_meaning": "Tôi đã đến Nhật Bản cùng gia đình.",
         "romaji_example": "Kazoku to Nihon e ki mashita.",
         "notes": "🔊 Nghe"
@@ -24251,7 +24251,7 @@ const grammar = [
         "meaning": "Có vật/người N2 ở địa điểm N1",
         "structure": "N1 + に + N2 + が + あります (vật) / います (người/động vật)",
         "vietnamese_explanation": "Diễn tả sự hiện hữu, tồn tại của vật thể hoặc sinh vật tại một vị trí.",
-        "japanese_example": "机の上に 本があります。庭に 犬がいます。",
+        "japanese_example": "机の上に 本があります。にわに 犬がいます。",
         "example_meaning": "Có sách trên bàn. Có con chó trong sân.",
         "romaji_example": "Tsukue no ue ni hon ga ar imasu. Niwa ni inu ga imasu.",
         "notes": "🔊 Nghe"
@@ -24527,7 +24527,7 @@ const grammar = [
         "meaning": "Diễn tả một trạng thái kéo dài là kết quả của hành động",
         "structure": "Động từ thể て + います",
         "vietnamese_explanation": "Khác với thì tiếp diễn ở bài 14, cấu trúc này dùng cho các động từ chỉ sự thay đổi trạng thái (kết hôn, sống ở đâu, biết cái gì đó).",
-        "japanese_example": "私は 結婚しています。ハノイに 住んでいます。",
+        "japanese_example": "私は 結婚しています。ハノイに すんでいます。",
         "example_meaning": "Tôi đã kết hôn. Tôi đang sống ở Hà Nội.",
         "romaji_example": "Watashi wa kekkon shite imasu. Hanoi ni sunde imasu.",
         "notes": "#VALUE!"
@@ -25426,46 +25426,28 @@ const grammar = [
         "title": "は です wa desu",
         "meaning": "Tôi là Carla. / N là...",
         "structure": "N1 + は + N2 + です。 じゃないです。 ですか。 | N1 + は + なん + ですか。",
-        "vietnamese_explanation": "Dùng để giới thiệu tên, quốc tịch hoặc nghề nghiệp của bản thân hoặc người khác.",
+        "vietnamese_explanation": "Dùng để giới thiệu bản thân hoặc mô tả sự vật, sự việc, trạng thái của danh từ.",
         "japanese_example": "わたしは がくせいです。",
         "example_meaning": "Tôi là học sinh.",
         "romaji_example": "Watashi wa gakusee desu.",
-        "notes": "A. 「Nです」 is affirmative. 「Nじゃないです」 is negative. 「Nですか」 is interrogative. B. The 「は」 in 「N1は」 is pronounced \"wa\". C. In cases when it is understood what N1 is,「N1 は」 is sometimes omitted. (⑤⑥⑦)",
+        "notes": "{\"affirmative\":\"N1 là N2\",\"interrogative\":\"N1 là N2 phải không?\",\"negative\":\"N1 không phải là N2\"}",
         "examples_json": [
             {
-                "japanese": "わたしは がくせいです。",
-                "romaji": "Watashi wa gakusee desu.",
-                "vietnamese": "Tôi là học sinh.",
+                "japanese": "わたしはカルラです。",
+                "romaji": "Watashi wa Karura desu.",
+                "vietnamese": "Tôi là Carla.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしは キムです。",
-                "romaji": "Watashi wa Kimu desu.",
-                "vietnamese": "I’m Kim.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "わたしは かいしゃいんじゃないです。",
-                "romaji": "Watashi wa kaishain janai desu.",
-                "vietnamese": "I’m not an office worker.",
+                "japanese": "わたしは学生じゃありません。",
+                "romaji": "Watashi wa gakusei ja arimasen.",
+                "vietnamese": "Tôi không phải là sinh viên.",
                 "type": "negative"
             },
             {
-                "japanese": "B: いいえ、がくせいじゃないです。かいしゃいんです。",
-                "romaji": "B: Iie gakusee janai desu. Kaishain desu.",
-                "vietnamese": "B: いいえ、がくせいじゃないです。かいしゃいんです。",
-                "type": "negative"
-            },
-            {
-                "japanese": "A: キムさんは かんこくじんですか。",
-                "romaji": "A: Kimu-san wa Kankoku jin desu ka.",
-                "vietnamese": "A: Kim-san, bạn là người Hàn Quốc phải không??",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A: きむらさんは がくせいですか。",
-                "romaji": "A: Kimura-san wa gakusee desu ka.",
-                "vietnamese": "A: Kimura-san, bạn là học sinh phải không??",
+                "japanese": "おなまえはなんですか。",
+                "romaji": "O-namae wa nan desu ka.",
+                "vietnamese": "Tên bạn là gì?",
                 "type": "interrogative"
             }
         ]
@@ -25476,47 +25458,29 @@ const grammar = [
         "title": "が できます ga dekimasu",
         "meaning": "Tôi có thể nói tiếng Nhật.",
         "structure": "N1 (Person) + は + N2 (Language) + が + できます。 できません。 できますか。",
-        "vietnamese_explanation": "Dùng để nói về khả năng sử dụng các ngôn ngữ khác nhau.",
+        "vietnamese_explanation": "Cấu trúc dùng để diễn đạt khả năng ngôn ngữ: biết hoặc có thể nói một ngôn ngữ nào đó.",
         "japanese_example": "わたしは ちゅうごくごが できます。",
         "example_meaning": "わたしは ちゅうごくごが できます。",
         "romaji_example": "Watashi wa Chuugokugo ga dekimasu.",
-        "notes": "A. 「できます」is affirmative.「できません」is negative. 「できますか」is interrogative. B. In cases when it is understood what N1 and N2 are,「Ｎ1は」or「Ｎ2が」may be omitted. (②③)",
+        "notes": "{\"affirmative\":\"N1 có thể nói tiếng N2\",\"interrogative\":\"N1 có thể nói tiếng N2 không?\",\"negative\":\"N1 không thể nói tiếng N2\"}",
         "examples_json": [
             {
-                "japanese": "わたしは ちゅうごくごが できます。",
-                "romaji": "Watashi wa Chuugokugo ga dekimasu.",
-                "vietnamese": "わたしは ちゅうごくごが できます。",
+                "japanese": "私は 日本語が できます。",
+                "romaji": "Watashi wa nihongo ga dekimasu.",
+                "vietnamese": "Tôi có thể nói tiếng Nhật.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：はい、すこし できます。べんきょうちゅうです。",
-                "romaji": "B: Hai, sukoshi dekimasu. Benkyoo-chuu desu.",
-                "vietnamese": "B：はい、すこし できます。べんきょうちゅうです。",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：いいえ、できません。",
-                "romaji": "B: Iie, dekimasen.",
-                "vietnamese": "B: Không, tôi không biết.",
-                "type": "negative"
-            },
-            {
-                "japanese": "わたしは フランスごが できません。",
-                "romaji": "Watashi wa Furansugo ga dekimasen.",
-                "vietnamese": "Tôi không biết tiếng Pháp.",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：のださんは フランスごが できますか。",
-                "romaji": "A: Noda-san wa Furansugo ga dekimasu ka.",
-                "vietnamese": "A：のださんは フランスごが できますか。",
+                "japanese": "スペイン語が できますか。",
+                "romaji": "Supeingo ga dekimasu ka.",
+                "vietnamese": "Bạn có biết nói tiếng Tây Ban Nha không?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：カーラさんは にほんごが できますか。",
-                "romaji": "A: Kaara-san wa Nihongo ga dekimasu ka.",
-                "vietnamese": "A：カーラさんは にほんごが できますか。",
-                "type": "interrogative"
+                "japanese": "いいえ、できません。",
+                "romaji": "Iie, dekimasen.",
+                "vietnamese": "Không, tôi không biết.",
+                "type": "negative"
             }
         ]
     },
@@ -25526,47 +25490,23 @@ const grammar = [
         "title": "も mo",
         "meaning": "Tôi cũng vậy. / Cũng...",
         "structure": "わたし + も + N + です。 | わたし + は + N (Language) + も + できます。",
-        "vietnamese_explanation": "Trợ từ 'も' dùng để biểu thị sự tương đồng (cũng vậy, cũng...) giống như đối tượng đã được nhắc đến trước đó.",
+        "vietnamese_explanation": "Dùng để diễn tả sự đồng tình, sự tương đồng hoặc chỉ ra rằng một đối tượng/hành động nào đó cũng giống với cái đã nêu trước đó.",
         "japanese_example": "シンさんは がくせいです。わたしも がくせいです。",
         "example_meaning": "Tôi là học sinh.",
         "romaji_example": "Shin-san wa gakusee desu. Watashi mo gakusee desu.",
-        "notes": "A. 「Nは」or「Nが」is replaced by「Nも」.",
+        "notes": "{\"affirmative\":\"Tôi cũng là/cũng có thể làm N.\",\"interrogative\":\"Bạn cũng là/cũng có thể làm N phải không?\",\"negative\":\"Tôi cũng không phải là/không thể làm N.\"}",
         "examples_json": [
             {
-                "japanese": "シンさんは がくせいです。わたしも がくせいです。",
-                "romaji": "Shin-san wa gakusee desu. Watashi mo gakusee desu.",
-                "vietnamese": "Tôi là học sinh.",
+                "japanese": "わたしも学生です。",
+                "romaji": "Watashi mo gakusei desu.",
+                "vietnamese": "Tôi cũng là học sinh.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしは えいごが できます。フランスごも できます。",
-                "romaji": "Watashi wa Eego ga dekimasu. Furansugo mo dekimasu.",
-                "vietnamese": "わたしは えいごが できます。フランスごも できます。",
+                "japanese": "わたしも日本語ができます。",
+                "romaji": "Watashi mo nihongo ga dekimasu.",
+                "vietnamese": "Tôi cũng biết tiếng Nhật.",
                 "type": "affirmative"
-            },
-            {
-                "japanese": "わたしも かいしゃいんじゃないです。",
-                "romaji": "Watashi mo kaishain janai desu.",
-                "vietnamese": "Tôi cũng không phải là nhân viên văn phòng.",
-                "type": "negative"
-            },
-            {
-                "japanese": "たなかさんも がくせいじゃないです。",
-                "romaji": "Tanaka-san mo gakusee janai desu.",
-                "vietnamese": "Anh Tanaka cũng không phải là học sinh.",
-                "type": "negative"
-            },
-            {
-                "japanese": "あなたも エンジニアですか。",
-                "romaji": "Anata mo enjinia desu ka.",
-                "vietnamese": "Bạn cũng là kỹ sư phải không?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "ヤンさんも にほんごが できますか。",
-                "romaji": "Yan-san mo Nihongo ga dekimasu ka.",
-                "vietnamese": "Anh Yan cũng biết tiếng Nhật phải không?",
-                "type": "interrogative"
             }
         ]
     },
@@ -25576,47 +25516,23 @@ const grammar = [
         "title": "と to",
         "meaning": "Gia đình tôi gồm bố, mẹ và tôi.",
         "structure": "N1 + と + N2",
-        "vietnamese_explanation": "Dùng để giới thiệu các thành viên trong gia đình mình.",
+        "vietnamese_explanation": "Dùng để liệt kê các danh từ (thường là người hoặc vật) trong cùng một nhóm.",
         "japanese_example": "わたしの かぞくは ふたりです。つまと わたしです。",
         "example_meaning": "わたしの かぞくは ふたりです。つまと わたしです。",
         "romaji_example": "Watashi no kazoku wa futari desu. Tsuma to watashi desu.",
-        "notes": "A. Nouns combined with「と」 can be used as a single noun in the sentence.",
+        "notes": "{\"affirmative\":\"N1 và N2\",\"interrogative\":\"N1 và N2 phải không?\",\"negative\":\"Không phải là N1 và N2\"}",
         "examples_json": [
             {
-                "japanese": "わたしの かぞくは ふたりです。つまと わたしです。",
-                "romaji": "Watashi no kazoku wa futari desu. Tsuma to watashi desu.",
-                "vietnamese": "わたしの かぞくは ふたりです。つまと わたしです。",
+                "japanese": "家族は父と母と私です。",
+                "romaji": "Kazoku wa chichi to haha to watashi desu.",
+                "vietnamese": "Gia đình tôi gồm bố, mẹ và tôi.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしの かぞくは ４にんです。おっとと わたしと こども ふたりです。",
-                "romaji": "Watashi no kazoku wa yo-nin desu. Otto to watashi to kodomo futari desu.",
-                "vietnamese": "わたしの かぞくは ４にんです。おっとと わたしと こども ふたりです。",
+                "japanese": "りんごとバナナとみかん。",
+                "romaji": "Ringo to banana to mikan.",
+                "vietnamese": "Táo, chuối và quýt.",
                 "type": "affirmative"
-            },
-            {
-                "japanese": "わたしの かぞくは ふたりじゃないです。つまと わたしじゃないです。。",
-                "romaji": "Watashi no kazoku wa futari desu. Tsuma to watashi desu. (Negative)",
-                "vietnamese": "わたしの かぞくは ふたりです。つまと わたしです。 (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "キムさんの かぞくは ふたりじゃないes。つまと キムさんじゃないes。。",
-                "romaji": "Kimu-san no kazoku wa futari desu. Tsuma to watashi desu. (Negative)",
-                "vietnamese": "わたしの かぞくは ふたりです。つまと わたしです。 (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "わたしの かぞくは ふたりですつまと わたしですか。",
-                "romaji": "Watashi no kazoku wa futari desu. Tsuma to watashi desu. ka.",
-                "vietnamese": "わたしの かぞくは ふたりです。つまと わたしです。 phải không?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "あなたの かぞくは ふたりですつまと あなたですか。",
-                "romaji": "Anata no kazoku wa futari desu. Tsuma to watashi desu. ka.",
-                "vietnamese": "わたしの かぞくは ふたりです。つまと わたしです。 phải không?",
-                "type": "interrogative"
             }
         ]
     },
@@ -25626,47 +25542,29 @@ const grammar = [
         "title": "に すんで います ni sunde imasu",
         "meaning": "Chị gái tôi sống ở Osaka.",
         "structure": "N1 (Person) + は + N2 (Place) + に + すんで います。 | どこ + に + すんで いますか。",
-        "vietnamese_explanation": "Dùng để nói về nơi sinh sống hoặc làm việc của bản thân hoặc thành viên gia đình.",
+        "vietnamese_explanation": "Dùng để diễn tả địa điểm sinh sống của một người nào đó.",
         "japanese_example": "あには ほっかいどうに すんで います。",
         "example_meaning": "あには ほっかいどうに すんで います。",
         "romaji_example": "Ani wa Hokkaidoo ni sunde imasu.",
-        "notes": "A. 「すんでいます」is used with「に」 to show that N2 is the place where someone lives.",
+        "notes": "{\"affirmative\":\"N1 sống ở N2\",\"interrogative\":\"N1 sống ở đâu?\",\"negative\":\"N1 không sống ở N2\"}",
         "examples_json": [
             {
-                "japanese": "あには ほっかいどうに すんで います。",
-                "romaji": "Ani wa Hokkaidoo ni sunde imasu.",
-                "vietnamese": "あには ほっかいどうに すんで います。",
+                "japanese": "姉は大阪にすんでいます。",
+                "romaji": "Ane wa Osaka ni sunde imasu.",
+                "vietnamese": "Chị gái tôi sống ở Osaka.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：とうきょうに すんで います。",
-                "romaji": "B: Tookyoo ni sunde imasu.",
-                "vietnamese": "B：とうきょうに すんで います。",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "あには ほっかいどうに すんで いません。。",
-                "romaji": "Ani wa Hokkaidoo ni sunde imasu. (Negative)",
-                "vietnamese": "あには ほっかいどうに すんで います。 (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "あには ほっかいどうに すんで いません。。",
-                "romaji": "Ani wa Hokkaidoo ni sunde imasu. (Negative)",
-                "vietnamese": "あには ほっかいどうに すんで います。 (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：どこに すんで いますか。",
-                "romaji": "A: Doko ni sunde imasu ka.",
-                "vietnamese": "A：どこに すんで いますか。",
+                "japanese": "どこにすんでいますか。",
+                "romaji": "Doko ni sunde imasu ka.",
+                "vietnamese": "Bạn sống ở đâu?",
                 "type": "interrogative"
             },
             {
-                "japanese": "あには ほっかいどうに すんで いますか。",
-                "romaji": "Ani wa Hokkaidoo ni sunde imasu. ka.",
-                "vietnamese": "あには ほっかいどうに すんで います。 phải không?",
-                "type": "interrogative"
+                "japanese": "私は大阪に住んでいません。",
+                "romaji": "Watashi wa Osaka ni sunde imasen.",
+                "vietnamese": "Tôi không sống ở Osaka.",
+                "type": "negative"
             }
         ]
     },
@@ -25676,47 +25574,35 @@ const grammar = [
         "title": "の no",
         "meaning": "Chị tôi là nhân viên văn phòng.",
         "structure": "N1 + の + N2",
-        "vietnamese_explanation": "Dùng để nói về nghề nghiệp của các thành viên trong gia đình.",
+        "vietnamese_explanation": "Cấu trúc dùng để diễn tả mối quan hệ sở hữu hoặc bổ nghĩa, trong đó N1 làm rõ thông tin hoặc thuộc tính cho N2.",
         "japanese_example": "わたしの かぞくは ４にんです。",
         "example_meaning": "わたしの かぞくは ４にんです。",
         "romaji_example": "Watashi no kazoku wa yo-nin desu.",
-        "notes": "A. 「N1の」modifies N2.",
+        "notes": "{\"affirmative\":\"N1 của N2 (hoặc N2 thuộc về N1)\",\"interrogative\":\"N1 của N2 phải không?\",\"negative\":\"Không phải N1 của N2\"}",
         "examples_json": [
             {
-                "japanese": "わたしの かぞくは ４にんです。",
-                "romaji": "Watashi no kazoku wa yo-nin desu.",
-                "vietnamese": "わたしの かぞくは ４にんです。",
+                "japanese": "姉は会社員です。",
+                "romaji": "Ane wa kaishain desu.",
+                "vietnamese": "Chị tôi là nhân viên văn phòng.",
                 "type": "affirmative"
             },
             {
-                "japanese": "あにの こどもは ３さいです。",
-                "romaji": "Ani no kodomo wa san-sai desu.",
-                "vietnamese": "あにの こどもは ３さいです。",
+                "japanese": "これは私の本です。",
+                "romaji": "Kore wa watashi no hon desu.",
+                "vietnamese": "Đây là sách của tôi.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしの かぞくは ４にんじゃないです。。",
-                "romaji": "Watashi no kazoku wa yo-nin desu. (Negative)",
-                "vietnamese": "わたしの かぞくは ４にんです。 (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "キムさんの かぞくは ４にんじゃないes。。",
-                "romaji": "Kimu-san no kazoku wa yo-nin desu. (Negative)",
-                "vietnamese": "わたしの かぞくは ４にんです。 (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：この ひとは だれですか。",
-                "romaji": "A: Kono hito wa dare desu ka.",
-                "vietnamese": "A：この ひとは だれですか。",
+                "japanese": "それは田中さんの傘ですか。",
+                "romaji": "Sore wa Tanaka-san no kasa desu ka.",
+                "vietnamese": "Đó có phải là chiếc ô của anh Tanaka không?",
                 "type": "interrogative"
             },
             {
-                "japanese": "わたしの かぞくは ４にんですか。",
-                "romaji": "Watashi no kazoku wa yo-nin desu. ka.",
-                "vietnamese": "わたしの かぞくは ４にんです。 phải không?",
-                "type": "interrogative"
+                "japanese": "あれは私の鍵ではありません。",
+                "romaji": "Are wa watashi no kagi dewa arimasen.",
+                "vietnamese": "Đó không phải là chìa khóa của tôi.",
+                "type": "negative"
             }
         ]
     },
@@ -25726,46 +25612,34 @@ const grammar = [
         "title": "が すきです ga suki desu",
         "meaning": "Tôi ăn thịt.",
         "structure": "N(Food/Drink) + が + です。 + は + すき + じゃないです。 + が + ですか。 | なに + が + すき + ですか。",
-        "vietnamese_explanation": "Dùng để nói về thói quen ăn uống hoặc những món ăn mình thường dùng.",
+        "vietnamese_explanation": "Mẫu câu dùng để bày tỏ sở thích hoặc ý kiến cá nhân đối với các loại đồ ăn, thức uống.",
         "japanese_example": "わたしは くだものが すきです。",
         "example_meaning": "I like fruit.",
         "romaji_example": "Watashi wa kudamono ga suki desu.",
-        "notes": "A. 「すきです」is affirmative. 「すきじゃないです」is negative. 「すきですか」is interrogative. B. In cases when it is understood what N is,「Nは/が」is sometimes omitted. (③④)",
+        "notes": "{\"affirmative\":\"Thích cái gì đó.\",\"interrogative\":\"Bạn có thích cái gì đó không? / Cái gì mà bạn thích?\",\"negative\":\"Không thích cái gì đó.\"}",
         "examples_json": [
             {
-                "japanese": "わたしは くだものが すきです。",
-                "romaji": "Watashi wa kudamono ga suki desu.",
-                "vietnamese": "I like fruit.",
+                "japanese": "わたしは　にくと　さかなが　すきです。",
+                "romaji": "Watashi wa niku to sakana ga suki desu.",
+                "vietnamese": "Tôi thích thịt và cá.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：はい、すきです。",
-                "romaji": "B: Hai, suki desu.",
-                "vietnamese": "B: Yes, I do.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "ビールは すきじゃないです。",
-                "romaji": "Biiru wa sukijanai desu.",
-                "vietnamese": "I don't like beer.",
+                "japanese": "わたしは　やさいが　すきじゃないです。",
+                "romaji": "Watashi wa yasai ga suki ja nai desu.",
+                "vietnamese": "Tôi không thích rau.",
                 "type": "negative"
             },
             {
-                "japanese": "B：いいえ、すきじゃないです。",
-                "romaji": "B: Iie, sukijanai desu.",
-                "vietnamese": "B: No, I don't.",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：たなかさんは 魚が すきですか。",
-                "romaji": "A: Tanaka-san wa sakana ga suki desu ka.",
-                "vietnamese": "A: Mr. Tanaka, do you like fish?",
+                "japanese": "なにが　すきですか。",
+                "romaji": "Nani ga suki desu ka.",
+                "vietnamese": "Bạn thích cái gì?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：コーヒーが すきですか。",
-                "romaji": "A: Koohii ga suki desu ka.",
-                "vietnamese": "A: Do you like coffee?",
+                "japanese": "くだものが　すきですか。",
+                "romaji": "Kudamono ga suki desu ka.",
+                "vietnamese": "Bạn có thích trái cây không?",
                 "type": "interrogative"
             }
         ]
@@ -25776,46 +25650,34 @@ const grammar = [
         "title": "を ます o masu",
         "meaning": "Bạn ăn sáng lúc mấy giờ?",
         "structure": "を + ます。 + N + は + V + ません。 + を + ますか。 | なに + を + V + ますか。",
-        "vietnamese_explanation": "Dùng để hỏi và trả lời về thời gian thực hiện một hành động ăn uống.",
+        "vietnamese_explanation": "Cấu trúc dùng để diễn đạt hành động tác động lên đối tượng cụ thể (trợ từ を) hoặc đặt câu hỏi về hành động đối với đối tượng nào.",
         "japanese_example": "わたしは あさごはんを たべます。",
         "example_meaning": "I eat breakfast.",
         "romaji_example": "Watashi wa asa-gohan o tabemasu.",
-        "notes": "A. 「Vます」is affirmative. 「Vません」is negative. 「Vますか」is interrogative. B. 「を」indicates that N is the object of the action.",
+        "notes": "{\"affirmative\":\"Thực hiện hành động lên đối tượng (N + を + V-masu)\",\"interrogative\":\"Hỏi về hành động thực hiện lên đối tượng nào (N + を + V-masu ka / Nani + o + V-masu ka)\",\"negative\":\"Không thực hiện hành động lên đối tượng (N + を + V-masen)\"}",
         "examples_json": [
             {
-                "japanese": "わたしは あさごはんを たべます。",
-                "romaji": "Watashi wa asa-gohan o tabemasu.",
-                "vietnamese": "I eat breakfast.",
+                "japanese": "���ごはんを食べます。",
+                "romaji": "Asagohan o tabemasu.",
+                "vietnamese": "Tôi ăn sáng.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：ラーメンと たまごを たべます。",
-                "romaji": "B: Raamen to tamago o tabemasu.",
-                "vietnamese": "B: I eat ramen noodles and eggs.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "わたしは コーヒーは のみません。",
-                "romaji": "Watashi wa koohii wa nomimasen.",
-                "vietnamese": "I don't drink coffee.",
+                "japanese": "朝ごはんを食べません。",
+                "romaji": "Asagohan o tabemasen.",
+                "vietnamese": "Tôi không ăn sáng.",
                 "type": "negative"
             },
             {
-                "japanese": "B：いいえ、たべません。",
-                "romaji": "B: Iie, tabemasen.",
-                "vietnamese": "B: No, I don't.",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：なにを たべますか。",
-                "romaji": "A: Nani o tabemasu ka.",
-                "vietnamese": "A: What do you eat?",
+                "japanese": "朝ごはんを食べますか。",
+                "romaji": "Asagohan o tabemasu ka.",
+                "vietnamese": "Bạn có ăn sáng không?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：なにを のみますか。",
-                "romaji": "A: Nani o nomimasu ka.",
-                "vietnamese": "A: What do you drink?",
+                "japanese": "なにを食べますか。",
+                "romaji": "Nani o tabemasu ka.",
+                "vietnamese": "Bạn ăn cái gì?",
                 "type": "interrogative"
             }
         ]
@@ -25826,46 +25688,28 @@ const grammar = [
         "title": "よく ます yoku masu",
         "meaning": "Tôi uống cà phê hoặc trà.",
         "structure": "よく + V + ます。 + あまり + ません。",
-        "vietnamese_explanation": "Trợ từ 'や' dùng để liệt kê danh từ một cách không đầy đủ (và, hay là...).",
+        "vietnamese_explanation": "Dùng để diễn tả mức độ tần suất của hành động: 'thường hay làm gì' (よく) và 'không hay làm gì/ít khi làm gì' (あまり...ません).",
         "japanese_example": "ホセさんは コーヒーを よく のみます。",
         "example_meaning": "Jose often drinks coffee.",
         "romaji_example": "Hose-san wa koohii o yoku nomimasu.",
-        "notes": "A. 「よくVます」indicates a high frequency. 「あまりVません」indicates that an action is not done frequently.",
+        "notes": "{\"affirmative\":\"Thường hay làm gì\",\"negative\":\"Không hay làm gì / Ít khi làm gì\"}",
         "examples_json": [
             {
-                "japanese": "ホセさんは コーヒーを よく のみます。",
-                "romaji": "Hose-san wa koohii o yoku nomimasu.",
-                "vietnamese": "Jose often drinks coffee.",
+                "japanese": "よく コーヒーを 飲みます。",
+                "romaji": "Yoku koohii o nomimasu.",
+                "vietnamese": "Tôi thường uống cà phê.",
                 "type": "affirmative"
             },
             {
-                "japanese": "ホセさんは コーヒーを よく のみます。",
-                "romaji": "Hose-san wa koohii o yoku nomimasu.",
-                "vietnamese": "Jose often drinks coffee.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "シンさんは こうちゃは あまり のみません。",
-                "romaji": "Shin-san wa koocha wa amari nomimasen.",
-                "vietnamese": "Mr. Shin doesn't drink tea very often.",
+                "japanese": "あまり お酒を ��みません。",
+                "romaji": "Amari osake o nomimasen.",
+                "vietnamese": "Tôi không hay uống rượu.",
                 "type": "negative"
             },
             {
-                "japanese": "B：いいえ、肉は あまり たべません。",
-                "romaji": "B: Iie, niku wa amari tabemasen.",
-                "vietnamese": "B: No, I don't eat it very often.",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：よく 肉を たべますか。",
-                "romaji": "A: Yoku niku o tabemasu ka.",
-                "vietnamese": "A: Do you often eat meat?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "ホセさんは コーヒーを よく のみますか。",
-                "romaji": "Hose-san wa koohii o yoku nomimasu. ka.",
-                "vietnamese": "Jose often drinks coffee. phải không?",
+                "japanese": "よく 本を 読みますか。",
+                "romaji": "Yoku hon o yomimasu ka.",
+                "vietnamese": "Bạn có thường đọc sách không?",
                 "type": "interrogative"
             }
         ]
@@ -25876,47 +25720,29 @@ const grammar = [
         "title": "で ます de masu",
         "meaning": "Có một tiệm mì Ramen ở đằng kia.",
         "structure": "N (Place) + で + V + ます。 | どこ + で + V + ますか。",
-        "vietnamese_explanation": "Mẫu câu dùng để giới thiệu hoặc chỉ dẫn về sự tồn tại của một địa điểm, cửa hàng.",
+        "vietnamese_explanation": "Dùng để chỉ địa điểm xảy ra một hành động, sự việc nào đó.",
         "japanese_example": "コーヒーショップで サンドイッチを 食べます。",
         "example_meaning": "I eat sandwiches at a coffee shop.",
         "romaji_example": "Koohii-shoppu de sandoicchi o tabemasu.",
-        "notes": "A. 「で」indicates that N is where the action takes place.",
+        "notes": "{\"affirmative\":\"Thực hiện hành động tại địa điểm N\",\"interrogative\":\"Hành động thực hiện ở đâu?\",\"negative\":\"Không thực hiện hành động tại địa điểm N\"}",
         "examples_json": [
             {
-                "japanese": "コーヒーショップで サンドイッチを 食べます。",
-                "romaji": "Koohii-shoppu de sandoicchi o tabemasu.",
-                "vietnamese": "I eat sandwiches at a coffee shop.",
+                "japanese": "あそこで　ラーメンを　たべます。",
+                "romaji": "Asoko de raamen o tabemasu.",
+                "vietnamese": "Tôi ăn mì Ramen ở đằng kia.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：あの みせで 食べます。",
-                "romaji": "B: Ano mise de tabemasu.",
-                "vietnamese": "B: I'll eat lunch at that shop.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "コーヒーショップで サンドイッチを 食べません。。",
-                "romaji": "Koohii-shoppu de sandoicchi o tabemasu. (Negative)",
-                "vietnamese": "I eat sandwiches at a coffee shop. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "コーヒーショップで サンドイッチを 食べません。。",
-                "romaji": "Koohii-shoppu de sandoicchi o tabemasu. (Negative)",
-                "vietnamese": "I eat sandwiches at a coffee shop. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：きょう どこで ひるごはんを 食べますか。",
-                "romaji": "A: Kyoo doko de hiru-gohan o tabemasu ka.",
-                "vietnamese": "A: Where will you eat lunch today?",
+                "japanese": "どこで　ひるごはんを　たべますか。",
+                "romaji": "Doko de hirugohan o tabemasu ka.",
+                "vietnamese": "Bạn ăn trưa ở đâu?",
                 "type": "interrogative"
             },
             {
-                "japanese": "コーヒーショップで サンドイッチを 食べますか。",
-                "romaji": "Koohii-shoppu de sandoicchi o tabemasu. ka.",
-                "vietnamese": "I eat sandwiches at a coffee shop. phải không?",
-                "type": "interrogative"
+                "japanese": "ここでは　たべません。",
+                "romaji": "Koko de wa tabemasen.",
+                "vietnamese": "Tôi không ăn ở đây.",
+                "type": "negative"
             }
         ]
     },
@@ -25926,46 +25752,28 @@ const grammar = [
         "title": "は いです wa i desu",
         "meaning": "Bên trong căn phòng có một cái bàn.",
         "structure": "N + は + イA－い + です。 + イA－く + ないです。",
-        "vietnamese_explanation": "Dùng để miêu tả vị trí của đồ vật hoặc nơi chốn của sự vật.",
+        "vietnamese_explanation": "Dùng để miêu tả tính chất hoặc trạng thái của sự vật, sự việc bằng tính từ đuôi i.",
         "japanese_example": "「ふじや」は やすいです。",
         "example_meaning": "\"Fujiya\" is cheap.",
         "romaji_example": "\"Fujiya\" wa yasui desu.",
-        "notes": "A. 「イA-いです」is affirmative.「イA-くないです」is negative. B. When it is understood in context what N is,「Nは」may be omitted. (②)",
+        "notes": "{\"affirmative\":\"N thì [tính từ đuôi i]\",\"interrogative\":\"N thì [tính từ đuôi i] phải không?\",\"negative\":\"N thì không [tính từ đuôi i]\"}",
         "examples_json": [
             {
-                "japanese": "「ふじや」は やすいです。",
-                "romaji": "\"Fujiya\" wa yasui desu.",
-                "vietnamese": "\"Fujiya\" is cheap.",
+                "japanese": "このへやはひろいです。",
+                "romaji": "Kono heya wa hiroi desu.",
+                "vietnamese": "Căn phòng này rộng.",
                 "type": "affirmative"
             },
             {
-                "japanese": "あの おすしやさんは たかくないです。",
-                "romaji": "Ano osushiya-san wa takakunai desu.",
-                "vietnamese": "That sushi shop is not expensive.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "「ふじや」は やすいじゃないです。。",
-                "romaji": "\"Fujiya\" wa yasui desu. (Negative)",
-                "vietnamese": "\"Fujiya\" is cheap. (Thể phủ định)",
+                "japanese": "この部屋は��くないです。",
+                "romaji": "Kono heya wa hirokunai desu.",
+                "vietnamese": "Căn phòng này không rộng.",
                 "type": "negative"
             },
             {
-                "japanese": "「ふじや」は やすいじゃないes。。",
-                "romaji": "\"Fujiya\" wa yasui desu. (Negative)",
-                "vietnamese": "\"Fujiya\" is cheap. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：あの ラーメンやさんは どうですか。",
-                "romaji": "A: Ano raamen'ya-san wa doo desu ka.",
-                "vietnamese": "A: How about that ramen shop?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "「ふじや」は やすいですか。",
-                "romaji": "\"Fujiya\" wa yasui desu. ka.",
-                "vietnamese": "\"Fujiya\" is cheap. phải không?",
+                "japanese": "このへやはひろいですし、ひろいですか。",
+                "romaji": "Kono heya wa hiroi desu ka.",
+                "vietnamese": "Căn phòng này có rộng không?",
                 "type": "interrogative"
             }
         ]
@@ -25976,47 +25784,29 @@ const grammar = [
         "title": "に が あります ni ga arimasu",
         "meaning": "に が あります ni ga arimasu",
         "structure": "N1 (Place) + に + N2 (Inanimateobject) + が + あります。 + は + ありません。 | N (Place) + に + なに + が + ありますか。",
-        "vietnamese_explanation": "Used when asking or explaining the location of inanimate things.",
+        "vietnamese_explanation": "Dùng để diễn tả sự tồn tại của đồ vật tại một địa điểm nào đó hoặc hỏi về sự tồn tại đó.",
         "japanese_example": "わたしの へやに ソファが あります。",
         "example_meaning": "There is a sofa in my room.",
         "romaji_example": "Watashi no heya ni sofa ga arimasu.",
-        "notes": "A. 「あります」indicates the existence of inanimate things. B. Used with「に」and verbs that express existence such as「あります」, N1 indicates the place where N2 is located. C. In cases when it is understood what N1 is,「N1に」is sometimes omitted. (③④)",
+        "notes": "{\"affirmative\":\"Tại địa điểm N1 có vật N2.\",\"interrogative\":\"Tại địa điểm N có cái gì?\",\"negative\":\"Tại địa điểm N1 không có vật N2.\"}",
         "examples_json": [
             {
-                "japanese": "わたしの へやに ソファが あります。",
-                "romaji": "Watashi no heya ni sofa ga arimasu.",
-                "vietnamese": "There is a sofa in my room.",
+                "japanese": "あそこに コンビニが あります。",
+                "romaji": "Asoko ni konbini ga arimasu.",
+                "vietnamese": "Ở đằng kia có cửa hàng tiện lợi.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：テーブルと ベッドが あります。",
-                "romaji": "B: Teeburu to beddo ga arimasu.",
-                "vietnamese": "B: There is a table and a bed.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "よしださんの いえに でんわは ありません。",
-                "romaji": "Yoshida-san no ie ni denwa wa arimasen.",
-                "vietnamese": "There isn't a telephone in Mr. Yoshida's house.",
-                "type": "negative"
-            },
-            {
-                "japanese": "B：いいえ、ありません。",
-                "romaji": "B: Iie, arimasen.",
-                "vietnamese": "B: No, there isn't.",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：やまださんの いえに テレビが ありますか。",
-                "romaji": "A: Yamada-san no ie ni terebi ga arimasu ka.",
-                "vietnamese": "A: Is there a television in your house, Mr. Yamada?",
+                "japanese": "つくえのうえに なにが ありますか。",
+                "romaji": "Tsukue no ue ni nani ga arimasu ka.",
+                "vietnamese": "Trên bàn có cái gì?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：あの へやに なにが ありますか。",
-                "romaji": "A: Ano heya ni nani ga arimasu ka.",
-                "vietnamese": "A: What is in that room?",
-                "type": "interrogative"
+                "japanese": "いえに パソコンが ありません。",
+                "romaji": "Ie ni pasokon ga arimasen.",
+                "vietnamese": "Ở nhà không có máy tính.",
+                "type": "negative"
             }
         ]
     },
@@ -26026,47 +25816,29 @@ const grammar = [
         "title": "に が います ni ga imasu",
         "meaning": "に が います ni ga imasu",
         "structure": "N1 (Place) + に + N2 (Living creature) + が + います。 + は + いません。 | N (Place) + に + だれ (Person) + が + いますか。",
-        "vietnamese_explanation": "Used when asking/explaining who (or what) is in a certain place.",
+        "vietnamese_explanation": "Dùng để diễn tả sự tồn tại của người hoặc động vật tại một địa điểm cụ thể.",
         "japanese_example": "わたしの いえに いぬが います。",
         "example_meaning": "There is a dog in my house.",
         "romaji_example": "Watashi no ie ni inu ga imasu.",
-        "notes": "A. 「います」indicates the existence of living creatures. B. Used with「に」and verbs that express existence such as「います」, N1 indicates the place where N2 is located. C. In cases when it is understood what N1 is,「N1に」is sometimes omitted. (③④)",
+        "notes": "{\"affirmative\":\"Tại [địa điểm] có [người/động vật].\",\"interrogative\":\"Tại [địa điểm] có [ai/cái gì] không?\",\"negative\":\"Tại [địa điểm] không có [người/động vật].\"}",
         "examples_json": [
             {
-                "japanese": "わたしの いえに いぬが います。",
-                "romaji": "Watashi no ie ni inu ga imasu.",
-                "vietnamese": "There is a dog in my house.",
+                "japanese": "きょうしつにがくせいがいます。",
+                "romaji": "Kyoushitsu ni gakusei ga imasu.",
+                "vietnamese": "Trong lớp học có học sinh.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：おとこの がくせいが います。",
-                "romaji": "B: Otoko no gakusee ga imasu.",
-                "vietnamese": "B: There is a male student there.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "あの へやに がくせいは いません。",
-                "romaji": "Ano heya ni gakusee wa imasen.",
-                "vietnamese": "There isn't a student in that room. (There aren't any students in that room.)",
-                "type": "negative"
-            },
-            {
-                "japanese": "B：いいえ、いません。",
-                "romaji": "B: Iie, imasen.",
-                "vietnamese": "B: No, there isn't. (No, I don't.)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：せんせいの うちに ねこが いますか。",
-                "romaji": "A: Sensee no uchi ni neko ga imasu ka.",
-                "vietnamese": "A: Is there a cat in the teacher's house? (Teacher, do you have a cat at home?)",
+                "japanese": "きょうしつにだれがいますか。",
+                "romaji": "Kyoushitsu ni dare ga imasu ka.",
+                "vietnamese": "Trong lớp học có ai vậy?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：３０１の へやに だれが いますか。",
-                "romaji": "A: San-zero-ichi no heya ni dare ga imasu ka.",
-                "vietnamese": "A: Who is in room 301?",
-                "type": "interrogative"
+                "japanese": "きょうしつにだれもいません。",
+                "romaji": "Kyoushitsu ni dare mo imasen.",
+                "vietnamese": "Trong lớp học không có ai cả.",
+                "type": "negative"
             }
         ]
     },
@@ -26076,47 +25848,29 @@ const grammar = [
         "title": "が あります ga arimasu",
         "meaning": "が あります ga arimasu",
         "structure": "N1 (Place) + に + N2 (Inanimateobject) + が + Number＋Counter + あります。 + いくつ + ありますか。 | N1 (Place) + に + N2 (Livingcreature) + が + Number＋Counter + います。 + なんにん + いますか。 | 1 + ひとつ + ひとり + 2 + ふたつ + ふたり + 3 + みっつ + さんにん + 4 + よっつ + よにん + 5 + いつつ + ごにん + 6 + むっつ + ろくにん + 7 + ななつ + しちにん ななにん + 8 + やっつ + はちにん + 9 + ここのつ + きゅうにん + 10 + とお + じゅうにん + ? + いくつ + なんにん",
-        "vietnamese_explanation": "Used when saying how many of something exists.",
+        "vietnamese_explanation": "Dùng để diễn tả sự tồn tại của đồ vật hoặc con người tại một địa điểm cụ thể. 'Arimasu' dùng cho vật vô tri, 'imasu' dùng cho người hoặc động vật.",
         "japanese_example": "たなかさんの いえに いすが ２つ あります。",
         "example_meaning": "There are two chairs in Mr. Tanaka's house.",
         "romaji_example": "Tanaka-san no ie ni isu ga futatsu arimasu.",
-        "notes": "A. 「number＋counters」 indicates quantity. B. 「～つ」is used when counting things and「～にん」when counting people.",
+        "notes": "{\"affirmative\":\"Tại [địa điểm] có [vật/người] với số lượng [số đếm].\",\"interrogative\":\"Tại [địa điểm] có bao nhiêu [vật/người]?\",\"negative\":\"Tại [địa điểm] không có [vật/người] nào cả.\"}",
         "examples_json": [
             {
-                "japanese": "たなかさんの いえに いすが ２つ あります。",
-                "romaji": "Tanaka-san no ie ni isu ga futatsu arimasu.",
-                "vietnamese": "There are two chairs in Mr. Tanaka's house.",
+                "japanese": "れいぞうこにたまごがみっつあります。",
+                "romaji": "Reizouko ni tamago ga mittsu arimasu.",
+                "vietnamese": "Trong tủ lạnh có 3 quả trứng.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：３つ あります。",
-                "romaji": "B: Mittsu arimasu.",
-                "vietnamese": "B: There are three.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "たなかさんの いえに いすが ２つ ありません。。",
-                "romaji": "Tanaka-san no ie ni isu ga futatsu arimasu. (Negative)",
-                "vietnamese": "There are two chairs in Mr. Tanaka's house. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "たなかさんの いえに いすが ２つ ありません。。",
-                "romaji": "Tanaka-san no ie ni isu ga futatsu arimasu. (Negative)",
-                "vietnamese": "There are two chairs in Mr. Tanaka's house. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：いえに へやが いくつ ありますか。",
-                "romaji": "A: Ie ni heya ga ikutsu arimasu ka.",
-                "vietnamese": "A: How many rooms are there in your home?",
+                "japanese": "きょうしつにがくせいがなんにんいますか。",
+                "romaji": "Kyoushitsu ni gakusei ga nannin imasu ka.",
+                "vietnamese": "Trong lớp học có bao nhiêu học sinh?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：１０４の へやに がくせいが なんにん いますか。",
-                "romaji": "A: Ichi-zero-yon no heya ni gakusee ga nan-nin imasu ka.",
-                "vietnamese": "A: How many students are there in room 104?",
-                "type": "interrogative"
+                "japanese": "にわにだれもいません。",
+                "romaji": "Niwa ni daremo imasen.",
+                "vietnamese": "Trong vườn không có ai cả.",
+                "type": "negative"
             }
         ]
     },
@@ -26126,46 +25880,28 @@ const grammar = [
         "title": "は いです wa i desu",
         "meaning": "は いです wa i desu",
         "structure": "N + は + イA－い + です。 + イA－く + ないです。 | N + は + イA－い + ですか。 | はい、 + イA－い + です。 + いいえ、 + イA－く + ないです。 + イA－い + です。",
-        "vietnamese_explanation": "Used when describing the nature or characteristics (colour, shape, size, etc) and the condition of an object.",
+        "vietnamese_explanation": "Dùng để diễn tả tính chất hoặc đặc điểm của một sự vật, sự việc bằng tính từ đuôi 'i' trong tiếng Nhật.",
         "japanese_example": "わたしの いえは ふるいです。",
         "example_meaning": "My house is old.",
         "romaji_example": "Watashi no ie wa furui desu.",
-        "notes": "A. When it is understood from the context what N is,「Nは」can be omitted. (②③)",
+        "notes": "{\"affirmative\":\"N thì [tính từ đuôi i]\",\"interrogative\":\"N thì [tính từ đuôi i] phải không?\",\"negative\":\"N thì không [tính từ đuôi i]\"}",
         "examples_json": [
             {
-                "japanese": "わたしの いえは ふるいです。",
-                "romaji": "Watashi no ie wa furui desu.",
-                "vietnamese": "My house is old.",
+                "japanese": "このかばんはおおきいです。",
+                "romaji": "Kono kaban wa ookii desu.",
+                "vietnamese": "Chiếc túi này thì to.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：はい、あたらしいです。",
-                "romaji": "B: Hai, atarashii desu.",
-                "vietnamese": "B: Yes, it is.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "わたしの いえは ふるいじゃないです。。",
-                "romaji": "Watashi no ie wa furui desu. (Negative)",
-                "vietnamese": "My house is old. (Thể phủ định)",
+                "japanese": "このかばんはおおきくないです。",
+                "romaji": "Kono kaban wa ookikunai desu.",
+                "vietnamese": "Chiếc túi này thì không to.",
                 "type": "negative"
             },
             {
-                "japanese": "キムさんの いえは ふるいじゃないes。。",
-                "romaji": "Kimu-san no ie wa furui desu. (Negative)",
-                "vietnamese": "My house is old. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：たなかさんの いえは あたらしいですか。",
-                "romaji": "A: Tanaka-san no ie wa atarashii desu ka.",
-                "vietnamese": "A: Mr. Tanaka, is your house new?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A：シンさんの いえは おおきいですか。",
-                "romaji": "A: Shin-san no ie wa ookii desu ka.",
-                "vietnamese": "A: Mr. Shin, is your house big?",
+                "japanese": "このかばんはおおきいですか。",
+                "romaji": "Kono kaban wa ookii desu ka.",
+                "vietnamese": "Chiếc túi này có to không?",
                 "type": "interrogative"
             }
         ]
@@ -26176,46 +25912,28 @@ const grammar = [
         "title": "と すんで います to sunde imasu",
         "meaning": "と すんで います to sunde imasu",
         "structure": "N1 (Person) + は + N2 (Person) + と + すんで います。 + ひとりで | N1 (Person) + は + だれと + すんで いますか。",
-        "vietnamese_explanation": "Used to explain with whom someone lives.",
+        "vietnamese_explanation": "Dùng để diễn tả việc ai đó đang sống cùng với ai (hoặc sống một mình).",
         "japanese_example": "わたしは おっとと すんで います。",
         "example_meaning": "I live with my husband.",
         "romaji_example": "Watashi wa otto to sunde imasu.",
-        "notes": "A. If someone lives by himself/herself,「ひとりで」(alone) is used. (②)",
+        "notes": "{\"affirmative\":\"Người A sống cùng với người B (hoặc sống một mình).\",\"interrogative\":\"Người A đang sống cùng với ai?\",\"negative\":\"Người A không sống cùng với ai (hoặc dùng để trả lời câu hỏi phủ định).\"}",
         "examples_json": [
             {
-                "japanese": "わたしは おっとと すんで います。",
-                "romaji": "Watashi wa otto to sunde imasu.",
-                "vietnamese": "I live with my husband.",
+                "japanese": "わたしは かぞくと すんで います。",
+                "romaji": "Watashi wa kazoku to sunde imasu.",
+                "vietnamese": "Tôi s��ng cùng với gia đình.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしの いもうとは ひとりで すんで います。",
-                "romaji": "Watashi no imooto wa hitori de sunde imasu.",
-                "vietnamese": "My sister lives alone.",
+                "japanese": "わたしは ひとりで すんで います。",
+                "romaji": "Watashi wa hitori de sunde imasu.",
+                "vietnamese": "Tôi sống một mình.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしは おっとと すんで いません。。",
-                "romaji": "Watashi wa otto to sunde imasu. (Negative)",
-                "vietnamese": "I live with my husband. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "キムさんは おっとと すんで いません。。",
-                "romaji": "Kimu-san wa otto to sunde imasu. (Negative)",
-                "vietnamese": "I live with my husband. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：だれと すんで いますか。",
-                "romaji": "A: Dare to sunde imasu ka.",
-                "vietnamese": "A: Who do you live with?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "わたしは おっとと すんで いますか。",
-                "romaji": "Watashi wa otto to sunde imasu. ka.",
-                "vietnamese": "I live with my husband. phải không?",
+                "japanese": "だれと すんで いますか。",
+                "romaji": "Dare to sunde imasu ka.",
+                "vietnamese": "Bạn sống cùng với ai?",
                 "type": "interrogative"
             }
         ]
@@ -26276,46 +25994,28 @@ const grammar = [
         "title": "から までです kara made desu",
         "meaning": "から までです kara made desu",
         "structure": "N1 (Starting time) + から + N2 (End time) + まで + です。",
-        "vietnamese_explanation": "Used when talking about the starting and ending time of something.",
+        "vietnamese_explanation": "Cấu trúc này được dùng để diễn tả khoảng thời gian bắt đầu (N1) và thời gian kết thúc (N2) của một hành động, sự kiện hoặc trạng thái.",
         "japanese_example": "わたしの かいしゃは ９時から ５時半までです。",
         "example_meaning": "My company's working hours are from nine o'clock to half-past five.",
         "romaji_example": "Watashi no kaisha wa ku-ji kara go-ji-han made desu.",
-        "notes": "A. 「から」indicates that N1 is the starting point if N1 is a word that expresses time. B. 「まで」indicates that N2 is the ending point if N2 is a word that expresses time.",
+        "notes": "{\"affirmative\":\"Từ N1 đến N2\",\"interrogative\":\"Từ N1 đến N2 phải không?\",\"negative\":\"Không phải từ N1 đến N2\"}",
         "examples_json": [
             {
-                "japanese": "わたしの かいしゃは ９時から ５時半までです。",
-                "romaji": "Watashi no kaisha wa ku-ji kara go-ji-han made desu.",
-                "vietnamese": "My company's working hours are from nine o'clock to half-past five.",
+                "japanese": "しけんは９じから１１じまでです。",
+                "romaji": "Shiken wa kuji kara ichijiu ji made desu.",
+                "vietnamese": "Kỳ thi bắt đầu từ 9 giờ đến 11 giờ.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしは 月よう日から 金よう日まで かいしゃに いきます。",
-                "romaji": "Watashi wa getsuyoobi kara kin'yoobi made kaisha ni ikimasu.",
-                "vietnamese": "I go to work from Monday to Friday.",
+                "japanese": "やすみはきんようびからにちようびまでです。",
+                "romaji": "Yasumi wa kinyoubi kara nichiyoubi made desu.",
+                "vietnamese": "Kỳ nghỉ là từ thứ Sáu đến Chủ Nhật.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしの かいしゃは ９時から ５時半までじゃないです。。",
-                "romaji": "Watashi no kaisha wa ku-ji kara go-ji-han made desu. (Negative)",
-                "vietnamese": "My company's working hours are from nine o'clock to half-past five. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "キムさんの かいしゃは ９時から ５時半までじゃないes。。",
-                "romaji": "Kimu-san no kaisha wa ku-ji kara go-ji-han made desu. (Negative)",
-                "vietnamese": "My company's working hours are from nine o'clock to half-past five. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：がっこうは なんじから なんじまでですか。",
-                "romaji": "A: Gakkoo wa nan-ji kara nan-ji made desu ka.",
-                "vietnamese": "A: What time is school from and until?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "わたしの かいしゃは ９時から ５時半までですか。",
-                "romaji": "Watashi no kaisha wa ku-ji kara go-ji-han made desu. ka.",
-                "vietnamese": "My company's working hours are from nine o'clock to half-past five. phải không?",
+                "japanese": "ぱーてぃーはなんじからなんじまでですか。",
+                "romaji": "Paati wa nanji kara nanji made desu ka.",
+                "vietnamese": "Tiệc bắt đầu từ mấy giờ đến mấy giờ?",
                 "type": "interrogative"
             }
         ]
@@ -26326,47 +26026,29 @@ const grammar = [
         "title": "が いいです ga ii desu",
         "meaning": "が いいです ga ii desu",
         "structure": "いつ + が + いいですか。 + なんじ | N (Word denoting time) + が + いいです。 + は + だめです。 | N (Word denoting time) + は + どうですか。",
-        "vietnamese_explanation": "Used when saying a suitable day, time or date.",
+        "vietnamese_explanation": "Dùng để hỏi hoặc đưa ra gợi ý, lựa chọn thời gian phù hợp, thuận tiện cho việc thực hiện một hành động nào đó.",
         "japanese_example": "B：土よう日が いいです。",
         "example_meaning": "B: Saturday is good.",
         "romaji_example": "B: Doyoobi ga ii desu.",
-        "notes": "",
+        "notes": "{\"affirmative\":\"Thời gian + が いいです: Thời gian đó thì tốt/được.\",\"interrogative\":\"いつが いいですか: Khi nào thì tốt/được vậy?\",\"negative\":\"Thời gian + は だめです: Thời gian đó thì không được.\"}",
         "examples_json": [
             {
-                "japanese": "B：土よう日が いいです。",
-                "romaji": "B: Doyoobi ga ii desu.",
-                "vietnamese": "B: Saturday is good.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：火よう日が いいです。",
-                "romaji": "B: Kayoobi ga ii desu.",
-                "vietnamese": "B: Tuesday would be best.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "A：すみません。火よう日は だめです。ははと コンサートに いきます。",
-                "romaji": "A: Sumimasen. Kayoobi wa dame desu. Haha to konsaato ni ikimasu.",
-                "vietnamese": "A: I'm sorry. Tuesday's no good. I'm going to a concert with my mother.",
-                "type": "negative"
-            },
-            {
-                "japanese": "B：土よう日が いいじゃないです。。",
-                "romaji": "B: Doyoobi ga ii desu. (Negative)",
-                "vietnamese": "B: Saturday is good. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：いつが いいですか。",
-                "romaji": "A: Itsu ga ii desu ka.",
-                "vietnamese": "A: When is good?",
+                "japanese": "いつが いいですか。",
+                "romaji": "Itsu ga ii desu ka.",
+                "vietnamese": "Khi nào thì được vậy?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：らいしゅうの しょくじは いつが いいですか。",
-                "romaji": "A: Raishuu no shokuji wa itsu ga ii desu ka.",
-                "vietnamese": "A: When would be best for the meal next week?",
-                "type": "interrogative"
+                "japanese": "１０じがいいです。",
+                "romaji": "Jūji ga ii desu.",
+                "vietnamese": "10 giờ thì được.",
+                "type": "affirmative"
+            },
+            {
+                "japanese": "１０じはだめです。",
+                "romaji": "Jūji wa dame desu.",
+                "vietnamese": "10 giờ thì không được.",
+                "type": "negative"
             }
         ]
     },
@@ -26389,7 +26071,7 @@ const grammar = [
                 "type": "affirmative"
             },
             {
-                "japanese": "ニューヨークは あさ ７時です。",
+                "japanese": "にゅーよーくはあさ７じです。",
                 "romaji": "Nyuuyooku wa asa shichi-ji desu.",
                 "vietnamese": "It's seven a.m. in New York.",
                 "type": "affirmative"
@@ -26413,7 +26095,7 @@ const grammar = [
                 "type": "interrogative"
             },
             {
-                "japanese": "A：インドは いま なんじですか。",
+                "japanese": "A：いんどはいまなんじですか。",
                 "romaji": "A: Indo wa ima nan-ji desu ka.",
                 "vietnamese": "A: What time is it now in India?",
                 "type": "interrogative"
@@ -26476,47 +26158,35 @@ const grammar = [
         "title": "が すきです ga suki desu",
         "meaning": "が すきです ga suki desu",
         "structure": "が + すきです。 + N + が + だいすきです。 + は + すきじゃないです。 | どんな + N + が + すきですか。",
-        "vietnamese_explanation": "Used when talking about one's hobby or something one likes.",
+        "vietnamese_explanation": "Dùng để diễn tả sở thích cá nhân đối với người, vật hoặc sự việc. 'Suki' nghĩa là thích, 'Daisuki' nghĩa là rất thích, 'Suki janai' nghĩa là không thích.",
         "japanese_example": "わたしは マンガが だいすきです。",
         "example_meaning": "I like comics very much.",
         "romaji_example": "Watashi wa manga ga daisuki desu.",
-        "notes": "A. 「どんな～」is used when asking the type of thing someone likes from a given category. (③)",
+        "notes": "{\"affirmative\":\"N + が + すき/だいすきです (Tôi thích/rất thích N)\",\"interrogative\":\"どんな + N + が + すきですか (Bạn thích N loại nào/như thế nào?)\",\"negative\":\"N + が + すきじゃないです (Tôi không thích N)\"}",
         "examples_json": [
             {
-                "japanese": "わたしは マンガが だいすきです。",
-                "romaji": "Watashi wa manga ga daisuki desu.",
-                "vietnamese": "I like comics very much.",
+                "japanese": "おんがくが すきです。",
+                "romaji": "Ongaku ga suki desu.",
+                "vietnamese": "Tôi thích âm nhạc.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：ホラーが すきです。",
-                "romaji": "B: Horaa ga suki desu.",
-                "vietnamese": "B: I like horror.",
+                "japanese": "すしが だいすきです。",
+                "romaji": "Sushi ga daisuki desu.",
+                "vietnamese": "Tôi rất thích sushi.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：いいえ、すきじゃないです。",
-                "romaji": "B: Iie, sukijanai desu.",
-                "vietnamese": "B: No, I don't.",
-                "type": "negative"
-            },
-            {
-                "japanese": "B：コメディは すきじゃないです。",
-                "romaji": "B: komedhi wa sukijanai desu.",
-                "vietnamese": "B: I don't like comedies.",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：きむらさんは どくしょが すきですか。",
-                "romaji": "A: Kimura-san wa dokusho ga suki desu ka.",
-                "vietnamese": "A: Mr. Kimura, do you like reading books?",
+                "japanese": "どんな スポーツが すきですか。",
+                "romaji": "Donna supootsu ga suki desu ka.",
+                "vietnamese": "Bạn thích môn thể thao nào?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：どんな えいがが すきですか。",
-                "romaji": "A: Donna eega ga suki desu ka.",
-                "vietnamese": "A: What kind of movies do you like?",
-                "type": "interrogative"
+                "japanese": "さかなが すきじゃないです。",
+                "romaji": "Sakana ga suki janai desu.",
+                "vietnamese": "Tôi không thích cá.",
+                "type": "negative"
             }
         ]
     },
@@ -26526,47 +26196,29 @@ const grammar = [
         "title": "が できます ga dekimasu",
         "meaning": "が できます ga dekimasu",
         "structure": "N + が + できます。 + は + できません。",
-        "vietnamese_explanation": "Used when talking about the sports/musical instruments one can play, or the languages one can speak.",
+        "vietnamese_explanation": "Dùng để diễn tả khả năng có thể làm được hoặc không thể làm được một việc gì đó, hoặc sự tồn tại của một sự vật, dịch vụ.",
         "japanese_example": "わたしは テニスが できます。",
         "example_meaning": "I can play tennis.",
         "romaji_example": "Watashi wa tenisu ga dekimasu.",
-        "notes": "",
+        "notes": "{\"affirmative\":\"N + が + できます: Có thể làm N / Có N\",\"interrogative\":\"N + が + できますか: Có thể làm N không? / Có N không?\",\"negative\":\"N + が + できません: Không thể làm N / Không có N\"}",
         "examples_json": [
             {
-                "japanese": "わたしは テニスが できます。",
-                "romaji": "Watashi wa tenisu ga dekimasu.",
-                "vietnamese": "I can play tennis.",
+                "japanese": "日本語ができます。",
+                "romaji": "Nihongo ga dekimasu.",
+                "vietnamese": "Tôi có thể nói tiếng Nhật.",
                 "type": "affirmative"
             },
             {
-                "japanese": "かんこくごが すこし できます。",
-                "romaji": "Kankokugo ga sukoshi dekimasu.",
-                "vietnamese": "I can speak a little Korean.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：いいえ、ギターは できません。",
-                "romaji": "B: Iie, gitaa wa dekimasen.",
-                "vietnamese": "B: Không, tôi không biết play the guitar.",
-                "type": "negative"
-            },
-            {
-                "japanese": "わたしは テニスが できません。。",
-                "romaji": "Watashi wa tenisu ga dekimasu. (Negative)",
-                "vietnamese": "I can play tennis. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：アリさんは ピアノが できますか。",
-                "romaji": "A: Ari-san wa piano ga dekimasu ka.",
-                "vietnamese": "A: Ari, can you play the piano?",
+                "japanese": "カードができますか。",
+                "romaji": "Kaado ga dekimasu ka.",
+                "vietnamese": "Bạn có thể thanh toán bằng thẻ không?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：ギターも できますか。",
-                "romaji": "A: Gitaa mo dekimasu ka.",
-                "vietnamese": "A: Can you also play the guitar?",
-                "type": "interrogative"
+                "japanese": "ここではインターネットができません。",
+                "romaji": "Koko de wa intaanetto ga dekimasen.",
+                "vietnamese": "Ở đây không thể sử dụng internet.",
+                "type": "negative"
             }
         ]
     },
@@ -26576,47 +26228,35 @@ const grammar = [
         "title": "で ます de masu",
         "meaning": "で ます de masu",
         "structure": "N (Place) + で + V + ます。",
-        "vietnamese_explanation": "Used when saying what one does (or will do) and where.",
+        "vietnamese_explanation": "Dùng để diễn tả một hành động xảy ra tại một địa điểm cụ thể.",
         "japanese_example": "うちで ほんを 読みます。",
         "example_meaning": "I read books at home.",
         "romaji_example": "Uchi de hon o yomimasu.",
-        "notes": "A. 「で」indicates that N is where the action takes place.",
+        "notes": "{\"affirmative\":\"Thực hiện hành động tại địa điểm N\",\"interrogative\":\"Có thực hiện hành động tại địa điểm N không?\",\"negative\":\"Không thực hiện hành động tại địa điểm N\"}",
         "examples_json": [
             {
-                "japanese": "うちで ほんを 読みます。",
-                "romaji": "Uchi de hon o yomimasu.",
-                "vietnamese": "I read books at home.",
+                "japanese": "図書館で勉強します。",
+                "romaji": "Toshokan de benkyou shimasu.",
+                "vietnamese": "Tôi học bài ở thư viện.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：へやで おんがくを 聞きます。",
-                "romaji": "B: Heya de ongaku o kikimasu.",
-                "vietnamese": "B: I listen to music in my room.",
+                "japanese": "うちでテレビを見ます。",
+                "romaji": "Uchi de terebi o mimasu.",
+                "vietnamese": "Tôi xem tivi ở nhà.",
                 "type": "affirmative"
             },
             {
-                "japanese": "うちで ほんを 読みません。。",
-                "romaji": "Uchi de hon o yomimasu. (Negative)",
-                "vietnamese": "I read books at home. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "うちで ほんを 読みません。。",
-                "romaji": "Uchi de hon o yomimasu. (Negative)",
-                "vietnamese": "I read books at home. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：どこで おんがくを 聞きますか。",
-                "romaji": "A: Doko de ongaku o kikimasu ka.",
-                "vietnamese": "A: Where do you listen to music?",
+                "japanese": "どこで昼ごはんを食べますか。",
+                "romaji": "Doko de hirugohan o tabemasu ka.",
+                "vietnamese": "Bạn ăn trưa ở đâu?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：どこで しゃしんを とりますか。",
-                "romaji": "A: Doko de shashin o torimasu ka.",
-                "vietnamese": "A: Where will you take pictures?",
-                "type": "interrogative"
+                "japanese": "ここでは本を読みません。",
+                "romaji": "Koko de wa hon o yomimasen.",
+                "vietnamese": "Tôi không đọc sách ở đây.",
+                "type": "negative"
             }
         ]
     },
@@ -26626,46 +26266,34 @@ const grammar = [
         "title": "に ます ni masu",
         "meaning": "に ます ni masu",
         "structure": "～がつ + に + V + ます。 + ～にち + ～ようび + ～じ | きょう + に× + V + ます。 + らいしゅう + らいげつ + らいねん | いつ + V + ますか。",
-        "vietnamese_explanation": "Used when saying what one does (or will do) and when.",
+        "vietnamese_explanation": "Dùng để diễn tả thời điểm hành động xảy ra. Trợ từ 'ni' đặt sau thời gian cụ thể (ngày, giờ, thứ). Lưu ý: Không dùng 'ni' sau các danh từ chỉ thời gian tương đối như 'kyou' (hôm nay), 'raishuu' (tuần sau).",
         "japanese_example": "日よう日に パーティーに いきます。",
         "example_meaning": "I'll go to the party on Sunday.",
         "romaji_example": "Nichiyoobi ni paathii ni ikimasu.",
-        "notes": "A. 「に」indicates that N is the time an event takes place. B. 「に」cannot be preceded by words like「今(いま)」「きのう」「きょう」「あした」or the interrogative「いつ」. (③)",
+        "notes": "{\"affirmative\":\"Thực hiện hành động vào thời điểm [thời gian] + ni + V-masu\",\"interrogative\":\"Thực hiện hành động vào khi nào (itsu) + V-masu ka\",\"negative\":\"Không thực hiện hành động vào thời điểm [thời gian] + ni + V-masen\"}",
         "examples_json": [
             {
-                "japanese": "日よう日に パーティーに いきます。",
-                "romaji": "Nichiyoobi ni paathii ni ikimasu.",
-                "vietnamese": "I'll go to the party on Sunday.",
+                "japanese": "しちじに　おきます。",
+                "romaji": "Shichiji ni okimasu.",
+                "vietnamese": "Tôi thức dậy vào lúc 7 giờ.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：３月に いきます。",
-                "romaji": "B: San-gatsu ni ikimasu.",
-                "vietnamese": "B: I'll go there in March.",
+                "japanese": "げつように　にほんへ　いきます。",
+                "romaji": "Getsuyou ni nihon e ikimasu.",
+                "vietnamese": "Tôi đi Nhật vào thứ Hai.",
                 "type": "affirmative"
             },
             {
-                "japanese": "日よう日に パーティーに いきません。。",
-                "romaji": "Nichiyoobi ni paathii ni ikimasu. (Negative)",
-                "vietnamese": "I'll go to the party on Sunday. (Thể phủ định)",
-                "type": "negative"
+                "japanese": "きょう　ねます。",
+                "romaji": "Kyou nemasu.",
+                "vietnamese": "Hôm nay tôi sẽ ngủ.",
+                "type": "affirmative"
             },
             {
-                "japanese": "日よう日に パーティーに いきません。。",
-                "romaji": "Nichiyoobi ni paathii ni ikimasu. (Negative)",
-                "vietnamese": "I'll go to the party on Sunday. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：いつ とうきょうに いきますか。",
-                "romaji": "A: Itsu Tookyoo ni ikimasu ka.",
-                "vietnamese": "A: When will you go to Tokyo?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A：いつ えいがを 見ますか。",
-                "romaji": "A: Itsu eega o mimasu ka.",
-                "vietnamese": "A: When will you watch the movie?",
+                "japanese": "いつ　にほんへ　いきますか。",
+                "romaji": "Itsu nihon e ikimasu ka.",
+                "vietnamese": "Khi nào bạn đi Nhật?",
                 "type": "interrogative"
             }
         ]
@@ -26676,47 +26304,29 @@ const grammar = [
         "title": "に が あります ni ga arimasu",
         "meaning": "に が あります ni ga arimasu",
         "structure": "N + が + あります。 | ～がつ + に + N + が + あります。 + ～にち + ～ようび + ～じ | きょう + に× + N + が + あります。 + らいしゅう + らいげつ + らいねん | なに + が + ありますか。 + いつ + N",
-        "vietnamese_explanation": "Used when saying when an event or happening will take place.",
+        "vietnamese_explanation": "Dùng để diễn tả sự tồn tại của vật (vô tri) ở một địa điểm hoặc vào một thời điểm nào đó.",
         "japanese_example": "はなびたいかいが あります。",
         "example_meaning": "There is a fireworks display.",
         "romaji_example": "Hanabi-taikai ga arimasu.",
-        "notes": "A. 「Nがあります」indicates that an event or happening will take place. B. 「に」indicates that N is the time an event takes place. C. 「に」cannot be preceded by words like「今(いま)」「きのう」「きょう」「あした」or the interrogative「いつ」. (④)",
+        "notes": "{\"affirmative\":\"Có N (ở địa điểm/thời gian).\",\"interrogative\":\"Có N (ở địa điểm/thời gian) không?\",\"negative\":\"Không có N (ở địa điểm/thời gian).\"}",
         "examples_json": [
             {
-                "japanese": "はなびたいかいが あります。",
-                "romaji": "Hanabi-taikai ga arimasu.",
-                "vietnamese": "There is a fireworks display.",
+                "japanese": "１０がつに　テストが　あります。",
+                "romaji": "Juugatsu ni tesuto ga arimasu.",
+                "vietnamese": "Tháng 10 có bài kiểm tra.",
                 "type": "affirmative"
             },
             {
-                "japanese": "日よう日に パーティーが あります。",
-                "romaji": "Nichiyoobi ni paathii ga arimasu.",
-                "vietnamese": "There is a party on Sunday.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "はなびたいかいが ありません。。",
-                "romaji": "Hanabi-taikai ga arimasu. (Negative)",
-                "vietnamese": "There is a fireworks display. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "はなびたいかいが ありません。。",
-                "romaji": "Hanabi-taikai ga arimasu. (Negative)",
-                "vietnamese": "There is a fireworks display. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：いつ たいこコンサートが ありますか。",
-                "romaji": "A: Itsu taiko-konsaato ga arimasu ka.",
-                "vietnamese": "A: When is the taiko drum concert?",
+                "japanese": "らいしゅう、　にほんごの　じゅぎょうが　ありますか。",
+                "romaji": "Raishuu, nihongo no jugyou ga arimasuka.",
+                "vietnamese": "Tuần sau có tiết học tiếng Nhật không?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：パーティーは いつ ありますか。",
-                "romaji": "A: Paathii wa itsu arimasu ka.",
-                "vietnamese": "A: When is the party?",
-                "type": "interrogative"
+                "japanese": "きょうは　テストが　ありません。",
+                "romaji": "Kyou wa tesuto ga arimasen.",
+                "vietnamese": "Hôm nay không có bài kiểm tra.",
+                "type": "negative"
             }
         ]
     },
@@ -26726,47 +26336,29 @@ const grammar = [
         "title": "で が あります de ga arimasu",
         "meaning": "で が あります de ga arimasu",
         "structure": "N1 (Place) + で + N2 (Happening/ Event) + が + あります。 | どこ + で + N2 (Happening/ Event) + が + ありますか。",
-        "vietnamese_explanation": "Used when saying where an event or happening takes (will take) place.",
+        "vietnamese_explanation": "Dùng để diễn tả một sự kiện, hoạt động hoặc lễ hội nào đó diễn ra tại một địa điểm cụ thể.",
         "japanese_example": "ＪＦスポーツセンターで けんどうが あります。",
         "example_meaning": "There's kendo at the JF sports center.",
         "romaji_example": "JF-Supootsu-Sentaa de kendoo ga arimasu.",
-        "notes": "A. 「Nがあります」indicates that an event or happening takes place. In this case,「で」is used to indicate the place the event took place, rather than「に」.",
+        "notes": "{\"affirmative\":\"Tại N1 có tổ chức N2\",\"interrogative\":\"Tại đâu có tổ chức N2?\",\"negative\":\"Tại N1 không có tổ chức N2\"}",
         "examples_json": [
             {
-                "japanese": "ＪＦスポーツセンターで けんどうが あります。",
-                "romaji": "JF-Supootsu-Sentaa de kendoo ga arimasu.",
-                "vietnamese": "There's kendo at the JF sports center.",
+                "japanese": "明日、公園でお祭りがあります。",
+                "romaji": "Ashita, kouen de omatsuri ga arimasu.",
+                "vietnamese": "Ngày mai, ở công viên có lễ hội.",
                 "type": "affirmative"
             },
             {
-                "japanese": "みなとまちで ゴールデンウィークに いろいろな イベントが あります。",
-                "romaji": "Minato-Machi de Gooruden-Uiiku ni iroirona ibento ga arimasu.",
-                "vietnamese": "There are various events held in Minato-Machi during Golden Week.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "ＪＦスポーツセンターで けんどうが ありません。。",
-                "romaji": "JF-Supootsu-Sentaa de kendoo ga arimasu. (Negative)",
-                "vietnamese": "There's kendo at the JF sports center. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "ＪＦスポーツセンターで けんどうが ありません。。",
-                "romaji": "JF-Supootsu-Sentaa de kendoo ga arimasu. (Negative)",
-                "vietnamese": "There's kendo at the JF sports center. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：どこで たいこコンサートが ありますか。",
-                "romaji": "A: Doko de taiko-konsaato ga arimasu ka.",
-                "vietnamese": "A: Where is there a taiko drum concert?",
+                "japanese": "どこでお祭りがありますか。",
+                "romaji": "Doko de omatsuri ga arimasu ka.",
+                "vietnamese": "Lễ hội được tổ chức ở đâu vậy?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：いつ ありますか。",
-                "romaji": "A: Itsu arimasu ka.",
-                "vietnamese": "A: When is it?",
-                "type": "interrogative"
+                "japanese": "昨日、学校でコンサートがありませんでした。",
+                "romaji": "Kinou, gakkou de konsaato ga arimasen deshita.",
+                "vietnamese": "Hôm qua, ở trường không có buổi hòa nhạc.",
+                "type": "negative"
             }
         ]
     },
@@ -26776,47 +26368,35 @@ const grammar = [
         "title": "を に いきます o ni ikimasu",
         "meaning": "を に いきます o ni ikimasu",
         "structure": "V + に + いきます。",
-        "vietnamese_explanation": "Used when saying what one goes (will go) to do.",
+        "vietnamese_explanation": "Dùng để diễn tả mục đích của việc di chuyển: đi đâu đó để làm gì.",
         "japanese_example": "わたしは ぼんさいコンテストを 見に いきます。",
         "example_meaning": "I'll go to watch a bonsai contest.",
         "romaji_example": "Watashi wa bonsai-kontesuto o mi ni ikimasu.",
-        "notes": "A. V1 can be made by removing「ます」from「Vます」, as in「行(い)きます → 行(い)き」. B. 「に」 indicates that V is the purpose of the movement one makes.",
+        "notes": "{\"affirmative\":\"Đi đến nơi nào đó để làm việc gì đó.\",\"interrogative\":\"Đi đến nơi nào đó để làm việc gì đó phải không?\",\"negative\":\"Không đi đến nơi nào đó để làm việc gì đó.\"}",
         "examples_json": [
             {
-                "japanese": "わたしは ぼんさいコンテストを 見に いきます。",
-                "romaji": "Watashi wa bonsai-kontesuto o mi ni ikimasu.",
-                "vietnamese": "I'll go to watch a bonsai contest.",
+                "japanese": "町へ買い物に行きます。",
+                "romaji": "Machi e kaimono ni ikimasu.",
+                "vietnamese": "Tôi đi vào thị trấn để mua sắm.",
                 "type": "affirmative"
             },
             {
-                "japanese": "こうえんに しゃしんを とりに いきます。",
-                "romaji": "Kooen ni shashin o tori ni ikimasu.",
-                "vietnamese": "I go to the park to take pictures.",
+                "japanese": "プールへ泳ぎに行きます。",
+                "romaji": "Puuru e oyogi ni ikimasu.",
+                "vietnamese": "Tôi đi đến hồ bơi để bơi.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしは ぼんさいコンテストを 見に いきません。。",
-                "romaji": "Watashi wa bonsai-kontesuto o mi ni ikimasu. (Negative)",
-                "vietnamese": "I'll go to watch a bonsai contest. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "キムさんは ぼんさいコンテストを 見に いきません。。",
-                "romaji": "Kimu-san wa bonsai-kontesuto o mi ni ikimasu. (Negative)",
-                "vietnamese": "I'll go to watch a bonsai contest. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：らいしゅうの やすみに なにを しますか。",
-                "romaji": "A: Raishuu no yasumi ni nani o shimasu ka.",
-                "vietnamese": "A: What are you going to do on your next day off?",
+                "japanese": "週末、どこへ行きますか。",
+                "romaji": "Shuumatsu, doko e ikimasu ka.",
+                "vietnamese": "Cuối tuần bạn đi đâu?",
                 "type": "interrogative"
             },
             {
-                "japanese": "わたしは ぼんさいコンテストを 見に いきますか。",
-                "romaji": "Watashi wa bonsai-kontesuto o mi ni ikimasu. ka.",
-                "vietnamese": "I'll go to watch a bonsai contest. phải không?",
-                "type": "interrogative"
+                "japanese": "映画館へは行きません。",
+                "romaji": "Eigakan e wa ikimasen.",
+                "vietnamese": "Tôi không đi đến rạp chiếu phim.",
+                "type": "negative"
             }
         ]
     },
@@ -26826,47 +26406,23 @@ const grammar = [
         "title": "ませんか / ましょう masen ka mashoo",
         "meaning": "ませんか / ましょう masen ka mashoo",
         "structure": "いっしょに + V + ませんか。 + V + ましょう。",
-        "vietnamese_explanation": "「～ませんか」 is used when inviting someone to do something. 「～ましょう」 is used as a response when accepting an invitation.",
+        "vietnamese_explanation": "Dùng để rủ rê, mời mọc người khác cùng thực hiện một hành động nào đó. V-masen ka là cách mời lịch sự, còn V-mashoo là cách rủ rê thân mật hoặc khẳng định sự đồng ý thực hiện hành động cùng nhau.",
         "japanese_example": "B：いいですね。いきましょう。",
         "example_meaning": "B: That's a good idea. Let's go.",
         "romaji_example": "B: Ii desu ne. Ikimashoo.",
-        "notes": "A. V can be made by removing 「ます」 from 「V ます」, as in 「行(い)きます → 行(い)き」. B. When declining an invitation, the following response is often used:「～はちょっと・・・。すみません。」「～はだめです。すみません。」（③） Note: ちょっと = a bit (That's a bit inconvenient for me.)",
+        "notes": "{\"affirmative\":\"Cùng làm V nhé (rủ rê)\",\"interrogative\":\"Cùng làm V nhé? (mời mọc/đề nghị)\",\"negative\":\"Không có dạng phủ định trực tiếp trong mẫu câu này\"}",
         "examples_json": [
             {
-                "japanese": "B：いいですね。いきましょう。",
-                "romaji": "B: Ii desu ne. Ikimashoo.",
-                "vietnamese": "B: That's a good idea. Let's go.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：いいですね。見に いきましょう。",
-                "romaji": "B: Ii desu ne. Mi ni ikimashoo.",
-                "vietnamese": "B: Yes. Let's go watch.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：土よう日は ちょっと・・・。すみません。",
-                "romaji": "B: Doyoobi wa chotto…. Sumimasen.",
-                "vietnamese": "B: Sorry, I'm a little busy on Saturday.",
-                "type": "negative"
-            },
-            {
-                "japanese": "B：いいじゃないですね。いきましょう。。",
-                "romaji": "B: Ii desu ne. Ikimashoo. (Negative)",
-                "vietnamese": "B: That's a good idea. Let's go. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：あした いっしょに こうえんに いきませんか。",
-                "romaji": "A: Ashita issho ni kooen ni ikimasen ka.",
-                "vietnamese": "A: Do you want to go to the park with me tomorrow?",
+                "japanese": "いっしょに 映画を 見ませんか。",
+                "romaji": "Isshoni eiga o mimasenka.",
+                "vietnamese": "Chúng ta cùng đi xem phim nhé?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：らいしゅう まつりが ありますよ。いっしょに 見に いきませんか。",
-                "romaji": "A: Raishuu matsuri ga arimasu yo. Issho ni mi ni ikimasen ka.",
-                "vietnamese": "A: There is a festival next week. Do you want to go and watch it together?",
-                "type": "interrogative"
+                "japanese": "ええ、見ましょう。",
+                "romaji": "Ee, mimashoo.",
+                "vietnamese": "Vâng, cùng đi xem thôi.",
+                "type": "affirmative"
             }
         ]
     },
@@ -26876,47 +26432,35 @@ const grammar = [
         "title": "から まで で ます kara made de masu",
         "meaning": "から まで で ます kara made de masu",
         "structure": "N (Place) + から／まで + いきます。 | N (Vehicle) + で + いきます。 + あるいて | どうやって + いきますか。",
-        "vietnamese_explanation": "Used when saying how one gets from somewhere to another place.",
+        "vietnamese_explanation": "Dùng để diễn tả điểm xuất phát, điểm đến, phương tiện di chuyển hoặc cách thức di chuyển bằng cách đi bộ.",
         "japanese_example": "さくらえきから ふじえきまで ちかてつで いきます。",
         "example_meaning": "I take the subway from Sakura Station to Fuji Station.",
         "romaji_example": "Sakura-eki kara Fuji-eki made chikatetsu de ikimasu.",
-        "notes": "A. 「から」indicates that N is the beginning of the range if N is a word that expresses location. B. 「まで」indicates that N is the end of the range if N is a word that expresses location. C. 「で」indicates a form of transport.",
+        "notes": "{\"affirmative\":\"N1 từ N2 đến N3 bằng phương tiện N4\",\"interrogative\":\"Đi đến N bằng cách nào/phương tiện gì?\",\"negative\":\"Không đi bằng phương tiện đó hoặc không từ đâu đến đâu\"}",
         "examples_json": [
             {
-                "japanese": "さくらえきから ふじえきまで ちかてつで いきます。",
-                "romaji": "Sakura-eki kara Fuji-eki made chikatetsu de ikimasu.",
-                "vietnamese": "I take the subway from Sakura Station to Fuji Station.",
+                "japanese": "うちから だいがくまで あるいて いきます。",
+                "romaji": "Uchi kara daigaku made aruite ikimasu.",
+                "vietnamese": "Tôi đi bộ từ nhà đến trường đại học.",
                 "type": "affirmative"
             },
             {
-                "japanese": "がっこうまで じてんしゃで いきます。",
-                "romaji": "Gakkoo made jitensha de ikimasu.",
-                "vietnamese": "I go to school by bicycle.",
+                "japanese": "でんしゃで いきます。",
+                "romaji": "Densha de ikimasu.",
+                "vietnamese": "Tôi đi bằng tàu điện.",
                 "type": "affirmative"
             },
             {
-                "japanese": "さくらえきから ふじえきまで ちかてつで いきません。。",
-                "romaji": "Sakura-eki kara Fuji-eki made chikatetsu de ikimasu. (Negative)",
-                "vietnamese": "I take the subway from Sakura Station to Fuji Station. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "さくらえきから ふじえきまで ちかてつで いきません。。",
-                "romaji": "Sakura-eki kara Fuji-eki made chikatetsu de ikimasu. (Negative)",
-                "vietnamese": "I take the subway from Sakura Station to Fuji Station. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：ふじえきから どうやって いきますか。",
-                "romaji": "A: Fuji-eki kara doo yatte ikimasu ka.",
-                "vietnamese": "A: How do you get there from Fuji Station?",
+                "japanese": "どうやって いきますか。",
+                "romaji": "Dou yatte ikimasu ka.",
+                "vietnamese": "Bạn đi bằng cách nào?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：ここから とうきょうえきまで いくらですか。",
-                "romaji": "A: Koko kara Tookyoo-eki made ikura desu ka.",
-                "vietnamese": "A: How much does it cost to go from here to Tokyo Station?",
-                "type": "interrogative"
+                "japanese": "タクシーでは いきません。",
+                "romaji": "Takushii de wa ikimasen.",
+                "vietnamese": "Tôi không đi bằng taxi.",
+                "type": "negative"
             }
         ]
     },
@@ -26926,47 +26470,29 @@ const grammar = [
         "title": "で に のります de ni norimasu",
         "meaning": "で に のります de ni norimasu",
         "structure": "N1 (Place) + で + N2 (Vehicle) + に + のります。 + を + おります。",
-        "vietnamese_explanation": "Used when saying where one gets on or gets off a vehicle/mode of transport.",
+        "vietnamese_explanation": "Dùng để diễn tả phương tiện giao thông (N2) được sử dụng tại một địa điểm (N1) để di chuyển, và hành động lên hoặc xuống phương tiện đó.",
         "japanese_example": "わたしは みどりえきで ちかてつに のります。",
         "example_meaning": "I get on the subway at Midori Station.",
         "romaji_example": "Watashi wa Midori-eki de chikatetsu ni norimasu.",
-        "notes": "A. In「N2に のります」, N2 indicates the mode of transport one gets on. B. In「N2を おります」, N2 indicates the mode of transport one gets off/alights.",
+        "notes": "{\"affirmative\":\"N1 tại đó, lên/xuống xe N2.\",\"interrogative\":\"Bạn lên/xuống xe N2 tại N1 phải không?\",\"negative\":\"Tôi không lên/xuống xe N2 tại N1.\"}",
         "examples_json": [
             {
-                "japanese": "わたしは みどりえきで ちかてつに のります。",
-                "romaji": "Watashi wa Midori-eki de chikatetsu ni norimasu.",
-                "vietnamese": "I get on the subway at Midori Station.",
+                "japanese": "えきで　バスに　のります。",
+                "romaji": "Eki de basu ni norimasu.",
+                "vietnamese": "Tôi lên xe buýt tại nhà ga.",
                 "type": "affirmative"
             },
             {
-                "japanese": "こうべで ふねを おります。",
-                "romaji": "Koobe de fune o orimasu.",
-                "vietnamese": "I get off the ship at Kobe.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "わたしは みどりえきで ちかてつに のりません。。",
-                "romaji": "Watashi wa Midori-eki de chikatetsu ni norimasu. (Negative)",
-                "vietnamese": "I get on the subway at Midori Station. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "キムさんは みどりえきで ちかてつに のりません。。",
-                "romaji": "Kimu-san wa Midori-eki de chikatetsu ni norimasu. (Negative)",
-                "vietnamese": "I get on the subway at Midori Station. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：どこで でんしゃに のりますか。",
-                "romaji": "A: Doko de densha ni norimasu ka.",
-                "vietnamese": "A: Where do you get on the train?",
+                "japanese": "どこで　でんしゃを　おりますか。",
+                "romaji": "Doko de densha o orimasu ka.",
+                "vietnamese": "Bạn xuống tàu điện ở đâu?",
                 "type": "interrogative"
             },
             {
-                "japanese": "A：どこで バスを おりますか。",
-                "romaji": "A: Doko de basu o orimasu ka.",
-                "vietnamese": "A: Where do you get off the bus?",
-                "type": "interrogative"
+                "japanese": "あそこで　タクシーに　のりません。",
+                "romaji": "Asoko de takushii ni norimasen.",
+                "vietnamese": "Tôi không bắt taxi ở đằng kia.",
+                "type": "negative"
             }
         ]
     },
@@ -26976,46 +26502,22 @@ const grammar = [
         "title": "は が いいです wa ga ii desu",
         "meaning": "は が いいです wa ga ii desu",
         "structure": "N1 (Place) + は + N2 (Vehicle) + が + いいです。",
-        "vietnamese_explanation": "Used when giving advice on the best mode of transport to use.",
+        "vietnamese_explanation": "Dùng để diễn tả phương tiện giao thông nào là thuận tiện hoặc tốt nhất để đi đến một địa điểm cụ thể.",
         "japanese_example": "B：くうこうは バスが いいですよ。",
         "example_meaning": "B: It's best to take the bus to the airport.",
         "romaji_example": "B: Kuukoo wa basu ga ii desu yo.",
-        "notes": "",
+        "notes": "{\"affirmative\":\"N1 (Địa điểm) đi bằng N2 (Phương tiện) thì tốt/thuận tiện.\",\"interrogative\":\"N1 (Địa điểm) đi bằng N2 (Phương tiện) có thuận tiện không?\",\"negative\":\"N1 (Địa điểm) đi bằng N2 (Phương tiện) không thuận tiện.\"}",
         "examples_json": [
             {
-                "japanese": "B：くうこうは バスが いいですよ。",
-                "romaji": "B: Kuukoo wa basu ga ii desu yo.",
-                "vietnamese": "B: It's best to take the bus to the airport.",
+                "japanese": "A：どこでいきますか。 B：バスがいいです。",
+                "romaji": "A: Doko de ikimasu ka. B: Basu ga ii desu.",
+                "vietnamese": "A: Bạn đi bằng gì? B: Đi bằng xe buýt thì tốt/thuận tiện.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：くうこうは バスが いいですよ。",
-                "romaji": "B: Kuukoo wa basu ga ii desu yo.",
-                "vietnamese": "B: It's best to take the bus to the airport.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：くうこうは バスが いいじゃないですよ。。",
-                "romaji": "B: Kuukoo wa basu ga ii desu yo. (Negative)",
-                "vietnamese": "B: It's best to take the bus to the airport. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "B：くうこうは バスが いいじゃないesよ。。",
-                "romaji": "B: Kuukoo wa basu ga ii desu yo. (Negative)",
-                "vietnamese": "B: It's best to take the bus to the airport. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：ここから くうこうまで どうやって いきますか。",
-                "romaji": "A: Koko kara kuukoo made doo yatte ikimasu ka.",
-                "vietnamese": "A: How do you get from here to the airport?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "B：くうこうは バスが いいですよか。",
-                "romaji": "B: Kuukoo wa basu ga ii desu yo. ka.",
-                "vietnamese": "B: It's best to take the bus to the airport. phải không?",
+                "japanese": "A：電車がいいですか。 B：いいえ、タクシーがいいです。",
+                "romaji": "A: Densha ga ii desu ka. B: Iie, takushii ga ii desu.",
+                "vietnamese": "A: Đi bằng tàu điện tốt phải không? B: Không, đi bằng taxi thì tốt hơn.",
                 "type": "interrogative"
             }
         ]
@@ -27026,47 +26528,29 @@ const grammar = [
         "title": "から kara",
         "meaning": "から kara",
         "structure": "イA + です + から。 + ナA",
-        "vietnamese_explanation": "Used when giving reasons.",
+        "vietnamese_explanation": "Dùng để nêu lý do, nguyên nhân dẫn đến một kết quả hoặc hành động phía sau.",
         "japanese_example": "わたしは がくせいです。",
         "example_meaning": "Tôi là học sinh.",
         "romaji_example": "Watashi wa gakusei desu.",
-        "notes": "",
+        "notes": "{\"affirmative\":\"Vì là (tính từ), nên...\",\"interrogative\":\"Vì là (tính từ) phải không?\",\"negative\":\"Vì không phải là (tính từ), nên...\"}",
         "examples_json": [
             {
-                "japanese": "わたしは がくせいです。",
-                "romaji": "Watashi wa gakusei desu.",
-                "vietnamese": "Tôi là học sinh.",
+                "japanese": "おいしいですから、食べてください。",
+                "romaji": "Oishii desu kara, tabete kudasai.",
+                "vietnamese": "Vì ngon nên hãy ăn đi.",
                 "type": "affirmative"
             },
             {
-                "japanese": "ヤンさんは エンジニアです。",
-                "romaji": "Yan-san wa gakusei desu.",
-                "vietnamese": "Anh Yan là kỹ sư.",
+                "japanese": "ひまですから、映画を見ます。",
+                "romaji": "Hima desu kara, eiga o mimasu.",
+                "vietnamese": "Vì rảnh rỗi nên tôi sẽ xem phim.",
                 "type": "affirmative"
             },
             {
-                "japanese": "わたしは がくせいじゃないです。。",
-                "romaji": "Watashi wa gakusei desu. (Negative)",
-                "vietnamese": "Tôi là học sinh. (Thể phủ định)",
+                "japanese": "安くないですから、買いません。",
+                "romaji": "Yasukunai desu kara, kaimasen.",
+                "vietnamese": "Vì không rẻ nên tôi không mua.",
                 "type": "negative"
-            },
-            {
-                "japanese": "キムさんは がくせいじゃないes。。",
-                "romaji": "Kimu-san wa gakusei desu. (Negative)",
-                "vietnamese": "Chị Kim là học sinh. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：ここから くうこうまで どうやって いきますか。",
-                "romaji": "A: Koko kara kuukoo made doo yatte ikimasu ka.",
-                "vietnamese": "A: How do you get from here to the airport?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "B：くうこうは バスが いいですよ。やすいですから。",
-                "romaji": "B: Kuukoo wa basu ga ii desu yo. Yasui desu kara.",
-                "vietnamese": "B: It's best to take the bus to the airport. That's because it's cheap.",
-                "type": "interrogative"
             }
         ]
     },
@@ -27076,47 +26560,29 @@ const grammar = [
         "title": "に が あります ni ga arimasu",
         "meaning": "に が あります ni ga arimasu",
         "structure": "が + あります。 + N1 (Place) + に + N2 (Inanimateobject) + は + ありません。 + が + ありますか。 | N1 (Place) + に + なに + が + ありますか。",
-        "vietnamese_explanation": "Used when explaining or asking about the things found in a certain place.",
+        "vietnamese_explanation": "Dùng để diễn tả sự tồn tại của đồ vật, sự việc tại một địa điểm cụ thể.",
         "japanese_example": "さいたまに ゆうめいな はくぶつかんが あります。",
         "example_meaning": "There is a famous museum in Saitama.",
         "romaji_example": "Saitama ni yuumeena hakubutsukan ga arimasu.",
-        "notes": "",
+        "notes": "{\"affirmative\":\"Tại N1 có N2\",\"interrogative\":\"Tại N1 có gì/có N2 không?\",\"negative\":\"Tại N1 không có N2\"}",
         "examples_json": [
             {
-                "japanese": "さいたまに ゆうめいな はくぶつかんが あります。",
-                "romaji": "Saitama ni yuumeena hakubutsukan ga arimasu.",
-                "vietnamese": "There is a famous museum in Saitama.",
+                "japanese": "きょうしつに つくえが あります。",
+                "romaji": "Kyoushitsu ni tsukue ga arimasu.",
+                "vietnamese": "Trong phòng học có cái bàn.",
                 "type": "affirmative"
             },
             {
-                "japanese": "こうえんの なかに びじゅつかんが あります。",
-                "romaji": "Kooen no naka ni bijutsukan ga arimasu.",
-                "vietnamese": "There is an art gallery in the park.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "ふじまちに にぎやかな とおりは ありません。",
-                "romaji": "Fuji-Machi ni nigiyakana toori wa arimasen.",
-                "vietnamese": "There aren't any busy roads in Fuji-Machi.",
-                "type": "negative"
-            },
-            {
-                "japanese": "さいたまに ゆうめいな はくぶつかんが ありません。。",
-                "romaji": "Saitama ni yuumeena hakubutsukan ga arimasu. (Negative)",
-                "vietnamese": "There is a famous museum in Saitama. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：ふじまちに なにが ありますか。",
-                "romaji": "A: Fuji-Machi ni nani ga arimasu ka.",
-                "vietnamese": "A: What is there in Fuji-Machi?",
+                "japanese": "きょうしつに なにが あります��。",
+                "romaji": "Kyoushitsu ni nani ga arimasu ka.",
+                "vietnamese": "Trong phòng học có cái gì?",
                 "type": "interrogative"
             },
             {
-                "japanese": "さいたまに ゆうめいな はくぶつかんが ありますか。",
-                "romaji": "Saitama ni yuumeena hakubutsukan ga arimasu. ka.",
-                "vietnamese": "There is a famous museum in Saitama. phải không?",
-                "type": "interrogative"
+                "japanese": "つくえのうえに なにも ありません。",
+                "romaji": "Tsukue no ue ni nani mo arimasen.",
+                "vietnamese": "Trên bàn không có gì cả.",
+                "type": "negative"
             }
         ]
     },
@@ -27126,47 +26592,35 @@ const grammar = [
         "title": "の no",
         "meaning": "の no",
         "structure": "まえ + うしろ + N2 + の + なか + となり + ちかく",
-        "vietnamese_explanation": "Used when talking about locations.",
+        "vietnamese_explanation": "Dùng để biểu thị vị trí của vật hoặc người (trước, sau, trong, cạnh, gần) so với một vật hoặc địa điểm khác.",
         "japanese_example": "ぎんこうは コンビニの となりです。",
         "example_meaning": "The bank is next to the convenience store.",
         "romaji_example": "Ginkoo wa konbini no tonari desu.",
-        "notes": "A. 「N2の～」indicates the location.",
+        "notes": "{\"affirmative\":\"N1 ở vị trí [trước/sau/trong/cạnh/gần] N2.\",\"interrogative\":\"N1 có ở vị trí [trước/sau/trong/cạnh/gần] N2 không?\",\"negative\":\"N1 không ở vị trí [trước/sau/trong/cạnh/gần] N2.\"}",
         "examples_json": [
             {
-                "japanese": "ぎんこうは コンビニの となりです。",
-                "romaji": "Ginkoo wa konbini no tonari desu.",
-                "vietnamese": "The bank is next to the convenience store.",
+                "japanese": "コンビニはえきまえです。",
+                "romaji": "Konbini wa ekimae desu.",
+                "vietnamese": "Cửa hàng tiện lợi ở phía trước nhà ga.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：えきの まえです。",
-                "romaji": "B: Eki no mae desu.",
-                "vietnamese": "B: I'm in front of the station.",
+                "japanese": "トイレはかばんのなかです。",
+                "romaji": "Toire wa kaban no naka desu.",
+                "vietnamese": "Nhà vệ sinh ở trong cặp.",
                 "type": "affirmative"
             },
             {
-                "japanese": "ぎんこうは コンビニの となりじゃないです。。",
-                "romaji": "Ginkoo wa konbini no tonari desu. (Negative)",
-                "vietnamese": "The bank is next to the convenience store. (Thể phủ định)",
-                "type": "negative"
+                "japanese": "びょういんはぎんこうのとなりです。",
+                "romaji": "Byouin wa ginkou no tonari desu.",
+                "vietnamese": "Bệnh viện ở cạnh ngân hàng.",
+                "type": "affirmative"
             },
             {
-                "japanese": "ぎんこうは コンビニの となりじゃないes。。",
-                "romaji": "Ginkoo wa konbini no tonari desu. (Negative)",
-                "vietnamese": "The bank is next to the convenience store. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：いま どこですか。",
-                "romaji": "A: Ima doko desu ka.",
-                "vietnamese": "A: Where are you now?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "ぎんこうは コンビニの となりですか。",
-                "romaji": "Ginkoo wa konbini no tonari desu. ka.",
-                "vietnamese": "The bank is next to the convenience store. phải không?",
-                "type": "interrogative"
+                "japanese": "わたしのうちはえきのちかくです。",
+                "romaji": "Watashi no uchi wa eki no chikaku desu.",
+                "vietnamese": "Nhà của tôi ở gần nhà ga.",
+                "type": "affirmative"
             }
         ]
     },
@@ -27326,49 +26780,12 @@ const grammar = [
         "title": "に を もらいます ni o moraimasu",
         "meaning": "に を もらいます ni o moraimasu",
         "structure": "N1 (Person) + は + N2 (Person) + に + N3 + を + もらいます。",
-        "vietnamese_explanation": "Used when talking about what was received from someone.",
+        "vietnamese_explanation": "Dùng để diễn tả việc nhận một món đồ, sự vật từ ai đó.",
         "japanese_example": "カーラさんは おとうさんに ビデオカメラを もらいました。",
         "example_meaning": "Carla got a video camera from her father.",
         "romaji_example": "Kaara-san wa otoosan ni bideo-kamera o moraimashita.",
-        "notes": "A. N2 can never be the speaker. B. In cases when N1 is the speaker, or it is understood who N1 and N2 are,「N1は」and/or「N2に」are sometimes omitted. (②③)",
-        "examples_json": [
-            {
-                "japanese": "カーラさんは おとうさんに ビデオカメラを もらいました。",
-                "romaji": "Kaara-san wa otoosan ni bideo-kamera o moraimashita.",
-                "vietnamese": "Carla got a video camera from her father.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：ははに もらいました。",
-                "romaji": "B: Haha ni moraimashita.",
-                "vietnamese": "B: I was given it by my mother.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "カーラさんは おとうさんに ビデオカメラを もらいました。。",
-                "romaji": "Kaara-san wa otoosan ni bideo-kamera o moraimashita. (Negative)",
-                "vietnamese": "Carla got a video camera from her father. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "カーラさんは おとうさんに ビデオカメラを もらいました。。",
-                "romaji": "Kaara-san wa otoosan ni bideo-kamera o moraimashita. (Negative)",
-                "vietnamese": "Carla got a video camera from her father. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：だれに とけいを もらいましたか。",
-                "romaji": "A: Dare ni tokee o moraimashita ka.",
-                "vietnamese": "A: From whom did you get that watch?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A：たんじょうびに なにを もらいましたか。",
-                "romaji": "A: Tanjoobi ni nani o moraimashita ka.",
-                "vietnamese": "A: What were you given for your birthday?",
-                "type": "interrogative"
-            }
-        ]
+        "notes": "{\"affirmative\":\"N1 nhận N3 từ N2\",\"interrogative\":\"N1 có nhận N3 từ N2 không?\",\"negative\":\"N1 không nhận N3 từ N2\"}",
+        "examples_json": []
     },
     {
         "id": 190,
@@ -27376,46 +26793,28 @@ const grammar = [
         "title": "ました mashita",
         "meaning": "ました mashita",
         "structure": "V + ました。 + ませんでした。",
-        "vietnamese_explanation": "Used when talking about a past action.",
+        "vietnamese_explanation": "Dùng để diễn tả một hành động đã xảy ra trong quá khứ.",
         "japanese_example": "きょねん にほんで かわいい ふくを かいました。",
         "example_meaning": "I bought cute clothes in Japan last year.",
         "romaji_example": "Kyonen Nihon de kawaii fuku o kaimashita.",
-        "notes": "A. 「Vました」is past affirmative. 「Vませんでした」is past negative.",
+        "notes": "{\"affirmative\":\"Đã làm gì đó\",\"interrogative\":\"Đã làm gì đó phải không?\",\"negative\":\"Chưa làm/Đã không làm gì đó\"}",
         "examples_json": [
             {
-                "japanese": "きょねん にほんで かわいい ふくを かいました。",
-                "romaji": "Kyonen Nihon de kawaii fuku o kaimashita.",
-                "vietnamese": "I bought cute clothes in Japan last year.",
+                "japanese": "昨日、日本語を勉強しました。",
+                "romaji": "Kinou, nihongo o benkyou shimashita.",
+                "vietnamese": "Hôm qua tôi đã học tiếng Nhật.",
                 "type": "affirmative"
             },
             {
-                "japanese": "きょねんの たんじょうびに ははに ぼうしを あげました。",
-                "romaji": "Kyonen no tanjoobi ni haha ni booshi o agemashita.",
-                "vietnamese": "I gave my mother a hat for her birthday last year.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：いいえ、くつは かいませんでした。",
-                "romaji": "B: Iie, kutsu wa kaimasendeshita.",
-                "vietnamese": "B: No, I didn't.",
+                "japanese": "朝ごはんを食べませんで��た。",
+                "romaji": "Asa gohan o tabemasen deshita.",
+                "vietnamese": "Tôi đã không ăn sáng.",
                 "type": "negative"
             },
             {
-                "japanese": "きょねん にほんで かわいい ふくを かいました。。",
-                "romaji": "Kyonen Nihon de kawaii fuku o kaimashita. (Negative)",
-                "vietnamese": "I bought cute clothes in Japan last year. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：くつを かいましたか。",
-                "romaji": "A: Kutsu o kaimashita ka.",
-                "vietnamese": "A: Did you buy shoes?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "きょねん にほんで かわいい ふくを かいましたか。",
-                "romaji": "Kyonen Nihon de kawaii fuku o kaimashita. ka.",
-                "vietnamese": "I bought cute clothes in Japan last year. phải không?",
+                "japanese": "昨日の晩、テレビを見ましたか。",
+                "romaji": "Kinou no ban, terebi o mimashita ka.",
+                "vietnamese": "Tối qua bạn có xem tivi không?",
                 "type": "interrogative"
             }
         ]
@@ -27426,46 +26825,28 @@ const grammar = [
         "title": "ました mashita",
         "meaning": "ました mashita",
         "structure": "V + ました。 + ませんでした。",
-        "vietnamese_explanation": "Used when talking about a past action.",
+        "vietnamese_explanation": "Dùng để diễn tả một hành động đã xảy ra trong quá khứ hoặc một trạng thái đã hoàn thành.",
         "japanese_example": "新しい デパートに いきました。",
         "example_meaning": "I went to the new department store.",
         "romaji_example": "Atarashii depaato ni ikimashita.",
-        "notes": "A. 「Vました」is past affirmative.「Vませんでした」is past negative.",
+        "notes": "{\"affirmative\":\"Đã làm gì đó\",\"interrogative\":\"Đã làm gì đó phải không?\",\"negative\":\"Đã không làm gì đó\"}",
         "examples_json": [
             {
-                "japanese": "新しい デパートに いきました。",
-                "romaji": "Atarashii depaato ni ikimashita.",
-                "vietnamese": "I went to the new department store.",
+                "japanese": "昨日、日本語を勉強しました。",
+                "romaji": "Kinou, nihongo o benkyou shimashita.",
+                "vietnamese": "Hôm qua tôi đã học tiếng Nhật.",
                 "type": "affirmative"
             },
             {
-                "japanese": "B：デパートで 買いものを しました。",
-                "romaji": "B: Depaato de kaimono o shimashita.",
-                "vietnamese": "B: I went shopping at a department store.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：いいえ、いきませんでした。",
-                "romaji": "B: Iie, ikimasendeshita.",
-                "vietnamese": "B: No, I didn't.",
+                "japanese": "���ととい、テニスをしませんでした。",
+                "romaji": "Ototoi, tenisu o shimasen deshita.",
+                "vietnamese": "Hôm kia tôi đã không chơi quần vợt.",
                 "type": "negative"
             },
             {
-                "japanese": "新しい デパートに いきました。。",
-                "romaji": "Atarashii depaato ni ikimashita. (Negative)",
-                "vietnamese": "I went to the new department store. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：きのう パーティーに いきましたか。",
-                "romaji": "A: Kinoo paathii ni ikimashita ka.",
-                "vietnamese": "A: Did you go to the party yesterday?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A：やすみの 日に なにを しましたか。",
-                "romaji": "A: Yasumi no hi ni nani o shimashita ka.",
-                "vietnamese": "A: What did you do on your day off?",
+                "japanese": "昨日、映画を見ましたか。",
+                "romaji": "Kinou, eiga o mimashita ka?",
+                "vietnamese": "Hôm qua bạn đã xem phim phải không?",
                 "type": "interrogative"
             }
         ]
@@ -27476,47 +26857,41 @@ const grammar = [
         "title": "かったです/ でした katta desu deshita",
         "meaning": "かったです/ でした katta desu deshita",
         "structure": "N + は + イA-かった + です。 + イA-くなかった | N + は + どう + でしたか。 | N + は + ナA + でした。 + じゃなかったです。 | N + は + どう + でしたか。",
-        "vietnamese_explanation": "Used when talking about the condition/state of things in the past, or when stating the speaker's opinion or impression about an event or an incident in the past.",
+        "vietnamese_explanation": "Dùng để diễn tả trạng thái, tính chất của sự vật, sự việc ở thì quá khứ (đã xảy ra).",
         "japanese_example": "まちは にぎやかでした。",
         "example_meaning": "The town was busy.",
         "romaji_example": "Machi wa nigiyaka deshita.",
-        "notes": "A. The conjugation of the I-adjective「いい」is exceptional. 「よくないです」is negative, 「よかったです」is past affirmative. 「よくなかったです」is past negative.",
+        "notes": "{\"affirmative\":\"N thì đã...\",\"interrogative\":\"N thì đã như thế nào?\",\"negative\":\"N thì đã không...\"}",
         "examples_json": [
             {
-                "japanese": "まちは にぎやかでした。",
-                "romaji": "Machi wa nigiyaka deshita.",
-                "vietnamese": "The town was busy.",
+                "japanese": "昨日の天気はよかったです。",
+                "romaji": "Kinou no tenki wa yokatta desu.",
+                "vietnamese": "Thời tiết ngày hôm qua rất đẹp.",
                 "type": "affirmative"
             },
             {
-                "japanese": "ホテルの へやは あまり しずかじゃなかったです。",
-                "romaji": "Hoteru no heya wa amari shizukajanakatta desu.",
-                "vietnamese": "The hotel room wasn't very quiet.",
+                "japanese": "昨日は暑くなか���たです。",
+                "romaji": "Kinou wa atsukunakatta desu.",
+                "vietnamese": "Ngày hôm qua trời không nóng.",
+                "type": "negative"
+            },
+            {
+                "japanese": "旅行はどうでしたか。",
+                "romaji": "Ryokou wa dou deshita ka.",
+                "vietnamese": "Chuyến du lịch thế nào?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "昨日の映画は静かでした。",
+                "romaji": "Kinou no eiga wa shizuka deshita.",
+                "vietnamese": "Bộ phim hôm qua thật yên tĩnh.",
                 "type": "affirmative"
             },
             {
-                "japanese": "まちは にぎやかでした。。",
-                "romaji": "Machi wa nigiyaka deshita. (Negative)",
-                "vietnamese": "The town was busy. (Thể phủ định)",
+                "japanese": "昨日のパーティーはにぎやかじゃなかったです。",
+                "romaji": "Kinou no paatii wa nigiyaka janakatta desu.",
+                "vietnamese": "Bữa tiệc ngày hôm qua không náo nhiệt.",
                 "type": "negative"
-            },
-            {
-                "japanese": "まちは にぎやかでした。。",
-                "romaji": "Machi wa nigiyaka deshita. (Negative)",
-                "vietnamese": "The town was busy. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：デパートは どうでしたか。",
-                "romaji": "A: Depaato wa doo deshita ka.",
-                "vietnamese": "A: How was the department store?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A：せんしゅうの やすみは どうでしたか。",
-                "romaji": "A: Senshuu no yasumi wa doo deshita ka.",
-                "vietnamese": "A: How was your day off last week?",
-                "type": "interrogative"
             }
         ]
     },
@@ -27526,47 +26901,23 @@ const grammar = [
         "title": "どこにも ません/なにも ません doko ni mo masen nani mo masen",
         "meaning": "どこにも ません/なにも ません doko ni mo masen nani mo masen",
         "structure": "どこにも + V + ません。 + なにも + ませんでした。",
-        "vietnamese_explanation": "Used when saying one didn't do anything special or go out anywhere.",
+        "vietnamese_explanation": "Dùng để diễn tả sự phủ định hoàn toàn đối với địa điểm (どこにも) hoặc sự vật/hành động (なにも) đi kèm với động từ chia ở thể phủ định (ません/ませんでした).",
         "japanese_example": "わたしは がくせいです。",
         "example_meaning": "Tôi là học sinh.",
         "romaji_example": "Watashi wa gakusei desu.",
-        "notes": "",
+        "notes": "{\"affirmative\":\"Không tồn tại thể khẳng định cho cấu trúc này.\",\"interrogative\":\"Không tồn tại thể nghi vấn cho cấu trúc này.\",\"negative\":\"どこにも/なにも + V(phủ định): Không đi đâu cả / Không làm gì cả.\"}",
         "examples_json": [
             {
-                "japanese": "わたしは がくせいです。",
-                "romaji": "Watashi wa gakusei desu.",
-                "vietnamese": "Tôi là học sinh.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "ヤンさんは エンジニアです。",
-                "romaji": "Yan-san wa gakusei desu.",
-                "vietnamese": "Anh Yan là kỹ sư.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "B：どこにも いきませんでした。",
-                "romaji": "B: Doko ni mo ikimasendeshita.",
-                "vietnamese": "B: I didn't go anywhere.",
+                "japanese": "どこ���も行きませんでした。",
+                "romaji": "Doko ni mo ikimasen deshita.",
+                "vietnamese": "Tôi đã không đi đâu cả.",
                 "type": "negative"
             },
             {
-                "japanese": "わたしは がくせいじゃないです。。",
-                "romaji": "Watashi wa gakusei desu. (Negative)",
-                "vietnamese": "Tôi là học sinh. (Thể phủ định)",
+                "japanese": "なにも食べませんでした。",
+                "romaji": "Nani mo tabemasen deshita.",
+                "vietnamese": "Tôi đã không ăn gì cả.",
                 "type": "negative"
-            },
-            {
-                "japanese": "A：やすみに どこに いきましたか。",
-                "romaji": "A: Yasumi ni doko ni ikimashita ka.",
-                "vietnamese": "A: Where did you go during your holidays?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "A：そうですか。わたしも なにも しませんでした。",
-                "romaji": "B: Soo desu ka. Watashi mo nani mo shimasendeshita.",
-                "vietnamese": "B: Is that so? I didn't do anything either.",
-                "type": "interrogative"
             }
         ]
     },
@@ -27576,47 +26927,23 @@ const grammar = [
         "title": "ます。 それから、 ます。 masu. sorekara, masu.",
         "meaning": "ます。 それから、 ます。 masu. sorekara, masu.",
         "structure": "S1。 + それから、 + S2。",
-        "vietnamese_explanation": "Used when talking about several actions in chronological order.",
+        "vietnamese_explanation": "Dùng để nối hai hoặc nhiều hành động theo trình tự thời gian, nghĩa là 'sau đó' hoặc 'tiếp theo là'.",
         "japanese_example": "ゆうめいな おてらを 見ました。それから、おみやげを 買いました。",
         "example_meaning": "I saw the famous temple. Then, I bought a souvenir.",
         "romaji_example": "Yuumeena otera o mimashita. Sorekara, omiyage o kaimashita.",
-        "notes": "A. Shows that S2 occurs following S1.",
+        "notes": "{\"affirmative\":\"S1, sau đó là S2\",\"negative\":\"S1 không làm, sau đó không làm S2 (hoặc phủ định vế 2 tùy ngữ cảnh liên kết trước đó), ít dùng phủ định trực tiếp trong cấu trúc này\"}",
         "examples_json": [
             {
-                "japanese": "ゆうめいな おてらを 見ました。それから、おみやげを 買いました。",
-                "romaji": "Yuumeena otera o mimashita. Sorekara, omiyage o kaimashita.",
-                "vietnamese": "I saw the famous temple. Then, I bought a souvenir.",
+                "japanese": "朝、コーヒーを飲みます。それから、出勤します。",
+                "romaji": "Asa, koohii o nomimasu. Sorekara, shukkin shimasu.",
+                "vietnamese": "Buổi sáng, tôi uống cà phê. Sau đó, tôi đi làm.",
                 "type": "affirmative"
             },
             {
-                "japanese": "ホテルで あさごはんを 食べました。それから、 でんしゃで あさくさに 行きました。",
-                "romaji": "Hoteru de asa-gohan o tabemashita. Sorekara, densha de Asakusa ni ikimashita.",
-                "vietnamese": "I had breakfast at the hotel. Then, I went to Asakusa on the train.",
+                "japanese": "勉強します。それから、テレビを見ます。",
+                "romaji": "Benkyou shimasu. Sorekara, terebi o mimasu.",
+                "vietnamese": "Tôi học bài. Sau đó, tôi xem tivi.",
                 "type": "affirmative"
-            },
-            {
-                "japanese": "ゆうめいな おてらを 見ました。それから、おみやげを 買いました。。",
-                "romaji": "Yuumeena otera o mimashita. Sorekara, omiyage o kaimashita. (Negative)",
-                "vietnamese": "I saw the famous temple. Then, I bought a souvenir. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "ゆうめいな おてらを 見ました。それから、おみやげを 買いました。。",
-                "romaji": "Yuumeena otera o mimashita. Sorekara, omiyage o kaimashita. (Negative)",
-                "vietnamese": "I saw the famous temple. Then, I bought a souvenir. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "ゆうめいな おてらを 見ましたそれから、おみやげを 買いましたか。",
-                "romaji": "Yuumeena otera o mimashita. Sorekara, omiyage o kaimashita. ka.",
-                "vietnamese": "I saw the famous temple. Then, I bought a souvenir. phải không?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "ゆうめいな おてらを 見ましたそれから、おみやげを 買いましたか。",
-                "romaji": "Yuumeena otera o mimashita. Sorekara, omiyage o kaimashita. ka.",
-                "vietnamese": "I saw the famous temple. Then, I bought a souvenir. phải không?",
-                "type": "interrogative"
             }
         ]
     },
@@ -27626,47 +26953,23 @@ const grammar = [
         "title": "です。でも、 です。/ です。そして、 です。 desu. Demo, desu. desu. Soshite, desu.",
         "meaning": "です。でも、 です。/ です。そして、 です。 desu. Demo, desu. desu. Soshite, desu.",
         "structure": "S1。 + でも、 + S2。 | S1。 + そして、 + S2。",
-        "vietnamese_explanation": "「でも」 is used when adding a comment that goes against a particular state of affairs. 「そして」 is used when adding a comment in line with a particular state of affairs.",
+        "vietnamese_explanation": "Dùng 'でも' (demo) để nối hai câu có ý nghĩa tương phản (nhưng). Dùng 'そして' (soshite) để nối hai câu có ý nghĩa bổ sung, liệt kê (và/sau đó).",
         "japanese_example": "アイスクリームを 食べました。おいしかったです。でも、 小さかったです。",
         "example_meaning": "I ate an ice cream. It was delicious, but it was small.",
         "romaji_example": "Aisu-kuriimu o tabemashita. Oishikatta desu. Demo, chiisakatta desu.",
-        "notes": "A. 「でも」 shows that the speaker is adding a negative comment to a previous positive comment (①②), or vice-versa (③).（＋／＋） B. 「そして」 shows that the speaker is adding a positive comment to a previous positive comment (④), or a negative comment to a previous negative comment (⑤).（＋／＋）",
+        "notes": "{\"affirmative\":\"S1. [Liên từ], S2.\",\"interrogative\":\"Câu nghi vấn có thể nằm ở S1 hoặc S2.\",\"negative\":\"Câu phủ định có thể nằm ở S1 hoặc S2.\"}",
         "examples_json": [
             {
-                "japanese": "アイスクリームを 食べました。おいしかったです。でも、 小さかったです。",
-                "romaji": "Aisu-kuriimu o tabemashita. Oishikatta desu. Demo, chiisakatta desu.",
-                "vietnamese": "I ate an ice cream. It was delicious, but it was small.",
+                "japanese": "和食はおいしいです。でも、高いです。",
+                "romaji": "Washoku wa oishii desu. Demo, takai desu.",
+                "vietnamese": "Đồ ăn Nhật rất ngon. Nhưng mà, nó đắt.",
                 "type": "affirmative"
             },
             {
-                "japanese": "そばを 食べました。たいへんでした。でも、 おいしかったです。",
-                "romaji": "Soba o tabemashita. Taihen deshita. Demo, oishikatta desu.",
-                "vietnamese": "I ate soba noodles. It was hard, but they were tasty.",
+                "japanese": "この店は安いです。そして、おいしいです。",
+                "romaji": "Kono mise wa yasui desu. Soshite, oishii desu.",
+                "vietnamese": "Cửa hàng này rẻ. Và, nó cũng ngon nữa.",
                 "type": "affirmative"
-            },
-            {
-                "japanese": "とうきょうタワーを 見ました。でも、ふじさんは 見ませんでした。",
-                "romaji": "Tookyoo-Tawaa o mimashita. Demo, Fujisan wa mimasendeshita.",
-                "vietnamese": "I saw Tokyo Tower. However, I didn't see Mt. Fuji.",
-                "type": "negative"
-            },
-            {
-                "japanese": "アイスクリームを 食べました。おいしかったじゃないです。でも、 小さかったじゃないです。。",
-                "romaji": "Aisu-kuriimu o tabemashita. Oishikatta desu. Demo, chiisakatta desu. (Negative)",
-                "vietnamese": "I ate an ice cream. It was delicious, but it was small. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "アイスクリームを 食べましたおいしかったですでも、 小さかったですか。",
-                "romaji": "Aisu-kuriimu o tabemashita. Oishikatta desu. Demo, chiisakatta desu. ka.",
-                "vietnamese": "I ate an ice cream. It was delicious, but it was small. phải không?",
-                "type": "interrogative"
-            },
-            {
-                "japanese": "アイスクリームを 食べましたおいしかったですでも、 小さかったですか。",
-                "romaji": "Aisu-kuriimu o tabemashita. Oishikatta desu. Demo, chiisakatta desu. ka.",
-                "vietnamese": "I ate an ice cream. It was delicious, but it was small. phải không?",
-                "type": "interrogative"
             }
         ]
     },
@@ -27676,47 +26979,29 @@ const grammar = [
         "title": "たいです tai desu",
         "meaning": "たいです tai desu",
         "structure": "V + たいです。 + たくないです。",
-        "vietnamese_explanation": "Used by the speaker when talking about their hopes or demands.",
+        "vietnamese_explanation": "Dùng để diễn tả nguyện vọng, mong muốn thực hiện một hành động nào đó của bản thân.",
         "japanese_example": "おきなわに 行きたいです。",
         "example_meaning": "I want to go to Okinawa.",
         "romaji_example": "Okinawa ni ikitai desu.",
-        "notes": "A. V can be made by removing 「ます」from「Vます」as in「行(い)きます → 行(い)き」. B. 「たい」is conjugated in the same way as I-adjectives.",
+        "notes": "{\"affirmative\":\"Muốn làm gì đó\",\"interrogative\":\"Có muốn làm gì đó không?\",\"negative\":\"Không muốn làm gì đó\"}",
         "examples_json": [
             {
-                "japanese": "おきなわに 行きたいです。",
-                "romaji": "Okinawa ni ikitai desu.",
-                "vietnamese": "I want to go to Okinawa.",
+                "japanese": "日本料理を食べたいです。",
+                "romaji": "Nihon ryouri o tabetai desu.",
+                "vietnamese": "Tôi muốn ăn món Nhật.",
                 "type": "affirmative"
             },
             {
-                "japanese": "つぎは しんかんせんに のりたいです。",
-                "romaji": "Tsugi wa shinkansen ni noritai desu.",
-                "vietnamese": "I want to ride the bullet train next time.",
-                "type": "affirmative"
-            },
-            {
-                "japanese": "おきなわに 行きたいじゃないです。。",
-                "romaji": "Okinawa ni ikitai desu. (Negative)",
-                "vietnamese": "I want to go to Okinawa. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "おきなわに 行きたいじゃないes。。",
-                "romaji": "Okinawa ni ikitai desu. (Negative)",
-                "vietnamese": "I want to go to Okinawa. (Thể phủ định)",
-                "type": "negative"
-            },
-            {
-                "japanese": "A：つぎは なにを したいですか。",
-                "romaji": "A: Tsugi wa nani o shitai desu ka.",
-                "vietnamese": "A: What do you want to do next?",
+                "japanese": "何をしたいですか。",
+                "romaji": "Nani o shitai desu ka.",
+                "vietnamese": "Bạn muốn làm gì?",
                 "type": "interrogative"
             },
             {
-                "japanese": "おきなわに 行きたいですか。",
-                "romaji": "Okinawa ni ikitai desu. ka.",
-                "vietnamese": "I want to go to Okinawa. phải không?",
-                "type": "interrogative"
+                "japanese": "今日は出かけたくないです。",
+                "romaji": "Kyou wa dekaketakunai desu.",
+                "vietnamese": "Hôm nay tôi không muốn ra ngoài.",
+                "type": "negative"
             }
         ]
     }
@@ -28142,7 +27427,7 @@ const kaiwaDialog = [
         "lesson_id": 4,
         "topic": "Hội thoại 1: Hỏi giờ làm việc bưu điện",
         "speaker": "ナム",
-        "japanese": "すみません。郵便局は 何時から 何時まで ですか。",
+        "japanese": "すみません。郵便局は なんじから 何時まで ですか。",
         "romaji": "Sumimasen. Yuubinkyoku wa nan-ji kara nan-ji made desu ka.",
         "vietnamese": "Xin lỗi, bưu điện làm việc từ mấy giờ đến mấy giờ vậy?"
     },
@@ -28178,7 +27463,7 @@ const kaiwaDialog = [
         "lesson_id": 4,
         "topic": "Hội thoại 2: Hỏi giờ mở cửa bảo tàng mỹ thuật",
         "speaker": "ナム",
-        "japanese": "美術館は 何時からですか。",
+        "japanese": "美術館は なんじからですか。",
         "romaji": "Bijutsukan wa nan-ji kara desu ka.",
         "vietnamese": "Bảo tàng mỹ thuật mở cửa từ mấy giờ vậy?"
     },
@@ -28214,7 +27499,7 @@ const kaiwaDialog = [
         "lesson_id": 4,
         "topic": "Hội thoại 3: Hỏi giờ cuộc họp",
         "speaker": "ナム",
-        "japanese": "今日の 会議は 何時からですか。",
+        "japanese": "今日の 会議は なんじからですか。",
         "romaji": "Kyou no kaigi wa nan-ji kara desu ka.",
         "vietnamese": "Cuộc họp hôm nay bắt đầu từ mấy giờ vậy?"
     },
