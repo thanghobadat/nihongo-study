@@ -61,6 +61,14 @@ export default function SidebarSettings() {
 
   const handleNavigate = (path: string) => {
     setIsOpen(false);
+    if (path === '/knowledge') {
+      const activeCourse = localStorage.getItem('activeCourse');
+      if (activeCourse === 'marugoto') {
+        const storedLesson = localStorage.getItem('selectedLessonId') || '101';
+        router.push(`/lessons/${storedLesson}?tab=summary`);
+        return;
+      }
+    }
     router.push(path);
   };
 
