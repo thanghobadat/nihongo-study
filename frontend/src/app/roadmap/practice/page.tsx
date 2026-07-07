@@ -231,8 +231,13 @@ export default function SubstitutionPracticePage() {
   const initialGrammarIndex = grammarIndexParam ? parseInt(grammarIndexParam) : 0;
   const from = searchParams.get('from') || 'roadmap';
 
-  // Sidebar Menu list (all active = false since we are in a practice page)
-  const menuItems = [
+  const isMarugoto = lessonId >= 101;
+  const menuItems = isMarugoto ? [
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
+    { name: 'Ngữ pháp', id: 'grammar', icon: '📖', active: false },
+    { name: 'Luyện tập 4 kỹ năng', id: 'practice', icon: '⚡', active: false },
+    { name: 'Tổng hợp kiến thức', id: 'summary', icon: '📝', active: false }
+  ] : [
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },

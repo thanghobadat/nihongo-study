@@ -47,17 +47,7 @@ export default function RoadmapPage() {
   const router = useRouter();
   const user = api.getUser();
 
-  const menuItems = [
-    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
-    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
-    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },
-    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
-    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
-  ];
+
 
   // UI States
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
@@ -230,6 +220,23 @@ export default function RoadmapPage() {
 
 
 
+  const menuItems = activeCourse === 'marugoto' ? [
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
+    { name: 'Ngữ pháp', id: 'grammar', icon: '📖', active: false },
+    { name: 'Luyện tập 4 kỹ năng', id: 'practice', icon: '⚡', active: false },
+    { name: 'Tổng hợp kiến thức', id: 'summary', icon: '📝', active: false }
+  ] : [
+    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
+    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
+    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
+    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
+    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
+    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
+    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+  ];
+
   const filteredLessons = lessons.filter(l => {
     if (activeCourse === 'marugoto') return true;
     if (level === 'N5') return l.id >= 1 && l.id <= 25;
@@ -285,12 +292,7 @@ export default function RoadmapPage() {
           />
 
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.filter(item => {
-              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
-                return false;
-              }
-              return true;
-            }).map((item) => (
+            {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {

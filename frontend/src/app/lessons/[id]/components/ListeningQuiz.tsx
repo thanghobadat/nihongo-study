@@ -31,6 +31,7 @@ interface GrammarItem {
 interface ListeningQuizProps {
   vocabItems: VocabItem[];
   grammarItems: GrammarItem[];
+  onStartGame?: () => void;
 }
 
 interface Question {
@@ -40,7 +41,7 @@ interface Question {
   options: string[];
 }
 
-export default function ListeningQuiz({ vocabItems, grammarItems }: ListeningQuizProps) {
+export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }: ListeningQuizProps) {
   const params = useParams();
   const lessonId = params ? (params.id as string) : 'unknown';
 
@@ -225,6 +226,9 @@ export default function ListeningQuiz({ vocabItems, grammarItems }: ListeningQui
   }, [lessonId]);
 
   const startGame = () => {
+    if (onStartGame) {
+      onStartGame();
+    }
     setGameStarted(true);
     setQuizFinished(false);
     setScore(0);
@@ -255,7 +259,7 @@ export default function ListeningQuiz({ vocabItems, grammarItems }: ListeningQui
       const nextStreak = streak + 1;
       setStreak(nextStreak);
 
-      playAudioWithFallback(q.audioText, q.audioText);
+      // Bỏ đọc lại câu khi chọn đáp án xong theo yêu cầu của người dùng
 
       // Giảm 10% thời gian hiện tại sau mỗi 3 câu đúng liên tiếp
       let nextMaxTime = maxTime;
@@ -272,12 +276,12 @@ export default function ListeningQuiz({ vocabItems, grammarItems }: ListeningQui
         } else {
           handleGameOver();
         }
-      }, 1000);
+      }, 1200);
     } else {
       setStreak(0);
       setTimeout(() => {
         handleGameOver();
-      }, 1000);
+      }, 1200);
     }
   };
 
@@ -475,13 +479,13 @@ export default function ListeningQuiz({ vocabItems, grammarItems }: ListeningQui
           if (!isAnswered) {
             btnClass += "border-slate-200 dark:border-slate-800 hover:border-blue-500 hover:bg-blue-50/10 dark:hover:bg-blue-950/10 dark:hover:border-blue-800 text-slate-700 dark:text-slate-200 active:scale-[0.99] cursor-pointer";
           } else {
-            // Đúng/Sai styles
+            // Đúng/Sai styles với màu nền đặc rực rỡ và rõ nét
             if (option === currentQuestion.correctAnswer) {
-              btnClass += "border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 font-bold";
+              btnClass += "bg-emerald-500 border-emerald-600 text-white font-extrabold shadow-md scale-[1.01] dark:bg-emerald-600 dark:border-emerald-700";
             } else if (selectedOption === option) {
-              btnClass += "border-rose-500 bg-rose-50/40 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400";
+              btnClass += "bg-rose-500 border-rose-600 text-white font-bold shadow-md dark:bg-rose-600 dark:border-rose-700";
             } else {
-              btnClass += "border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-600 opacity-60";
+              btnClass += "border-slate-100 dark:border-slate-850 text-slate-300 dark:text-slate-700 opacity-25";
             }
           }
 

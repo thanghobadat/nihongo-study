@@ -27004,6 +27004,120 @@ const grammar = [
                 "type": "negative"
             }
         ]
+    },
+    {
+        "id": 197,
+        "lesson_id": 104,
+        "title": "だれですか dare desuka",
+        "meaning": "Hỏi người đó là ai",
+        "structure": "Noun + は + だれですか。",
+        "vietnamese_explanation": "Dùng để hỏi một người nào đó là ai. Phiên bản lịch sự hơn là 'どなたですか (donata desu ka)'.",
+        "japanese_example": "あの方は だれですか。",
+        "example_meaning": "Người kia là ai thế?",
+        "romaji_example": "Ano kata wa dare desu ka.",
+        "notes": "{\"affirmative\":\"Người kia là N.\",\"interrogative\":\"Người kia là ai?\",\"negative\":\"Người kia không phải là N.\"}",
+        "examples_json": [
+            {
+                "japanese": "あの方はだれですか。",
+                "romaji": "Ano kata wa dare desu ka.",
+                "vietnamese": "Người kia là ai thế?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "あの人はだれですか。",
+                "romaji": "Ano hito wa dare desu ka.",
+                "vietnamese": "Người đó là ai thế?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "あの方はサントスさんです。",
+                "romaji": "Ano kata wa Santosu-san desu.",
+                "vietnamese": "Người kia là anh Santos.",
+                "type": "affirmative"
+            },
+            {
+                "japanese": "あの方はサントスさんじゃありません。",
+                "romaji": "Ano kata wa Santosu-san ja arimasen.",
+                "vietnamese": "Người kia không phải là anh Santos.",
+                "type": "negative"
+            }
+        ]
+    },
+    {
+        "id": 198,
+        "lesson_id": 104,
+        "title": "おいくつですか oikutsu desuka",
+        "meaning": "Hỏi bao nhiêu tuổi",
+        "structure": "Noun + は + おいくつですか。 | Noun + は + なんさいですか。",
+        "vietnamese_explanation": "Dùng để hỏi tuổi của người khác. 'おいくつですか' lịch sự hơn 'なんさいですか'.",
+        "japanese_example": "サントスさんは おいくつですか。",
+        "example_meaning": "Anh Santos bao nhiêu tuổi?",
+        "romaji_example": "Santosu-san wa oikutsu desu ka.",
+        "notes": "{\"affirmative\":\"Tôi N tuổi.\",\"interrogative\":\"Bạn bao nhiêu tuổi?\",\"negative\":\"Tôi không phải N tuổi.\"}",
+        "examples_json": [
+            {
+                "japanese": "おいくつですか。",
+                "romaji": "Oikutsu desu ka.",
+                "vietnamese": "Bạn bao nhiêu tuổi?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "サントスさんはおいくつですか。",
+                "romaji": "Santosu-san wa oikutsu desu ka.",
+                "vietnamese": "Anh Santos bao nhiêu tuổi?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "私は３０歳です。",
+                "romaji": "Watashi wa 30-sai desu.",
+                "vietnamese": "Tôi 30 tuổi.",
+                "type": "affirmative"
+            },
+            {
+                "japanese": "私は３０歳じゃありません。",
+                "romaji": "Watashi wa 30-sai ja arimasen.",
+                "vietnamese": "Tôi không phải 30 tuổi.",
+                "type": "negative"
+            }
+        ]
+    },
+    {
+        "id": 199,
+        "lesson_id": 104,
+        "title": "お仕事は oishigoto wa",
+        "meaning": "Hỏi nghề nghiệp",
+        "structure": "Noun + の + お仕事は + なんですか。 | お仕事は。",
+        "vietnamese_explanation": "Dùng để hỏi nghề nghiệp của một người nào đó một cách lịch sự.",
+        "japanese_example": "お仕事は なんですか。",
+        "example_meaning": "Công việc của bạn là gì?",
+        "romaji_example": "Oishigoto wa nan desu ka.",
+        "notes": "{\"affirmative\":\"Tôi là N (nghề nghiệp).\",\"interrogative\":\"Công việc của bạn là gì?\",\"negative\":\"Tôi không phải là N (nghề nghiệp).\"}",
+        "examples_json": [
+            {
+                "japanese": "お仕事はなんですか。",
+                "romaji": "Oishigoto wa nan desu ka.",
+                "vietnamese": "Công việc của bạn là gì?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "お仕事は。",
+                "romaji": "Oishigoto wa.",
+                "vietnamese": "Công việc của bạn thì sao?",
+                "type": "interrogative"
+            },
+            {
+                "japanese": "私はエンジニアです。",
+                "romaji": "Watashi wa enjinia desu.",
+                "vietnamese": "Tôi là kỹ sư.",
+                "type": "affirmative"
+            },
+            {
+                "japanese": "私はエンジニアじゃありません。",
+                "romaji": "Watashi wa enjinia ja arimasen.",
+                "vietnamese": "Tôi không phải là kỹ sư.",
+                "type": "negative"
+            }
+        ]
     }
 ];
 

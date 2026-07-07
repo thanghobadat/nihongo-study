@@ -12,18 +12,7 @@ export default function GuidePage() {
   const router = useRouter();
   const user = api.getUser();
 
-  // Navigation Items with "Cẩm nang học" at the very top (above "Tiến độ học")
-  const menuItems = [
-    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: true },
-    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
-    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
-    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
-    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
-  ];
+
 
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
@@ -57,6 +46,24 @@ export default function GuidePage() {
   }, [activeCourse, router]);
 
 
+
+  // Navigation Items with "Cẩm nang học" at the very top (above "Tiến độ học")
+  const menuItems = activeCourse === 'marugoto' ? [
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
+    { name: 'Ngữ pháp', id: 'grammar', icon: '📖', active: false },
+    { name: 'Luyện tập 4 kỹ năng', id: 'practice', icon: '⚡', active: false },
+    { name: 'Tổng hợp kiến thức', id: 'summary', icon: '📝', active: false }
+  ] : [
+    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: true },
+    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
+    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
+    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
+    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
+    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
+    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+  ];
 
   return (
     <div className="flex h-screen w-full max-w-full overflow-hidden bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50/50 dark:from-[#0b1329] dark:via-[#090d1a] dark:to-[#050811] text-slate-800 dark:text-slate-100 font-sans relative">
@@ -107,12 +114,7 @@ export default function GuidePage() {
 
           {/* Category items */}
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.filter(item => {
-              if (activeCourse === 'marugoto' && (item.id === 'flashcards' || item.id === 'kaiwa' || item.id === 'guide' || item.id === 'kana')) {
-                return false;
-              }
-              return true;
-            }).map((item) => (
+            {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
