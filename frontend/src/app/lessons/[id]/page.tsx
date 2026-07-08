@@ -1025,6 +1025,18 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Search and Filter States
 
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [localSearchQuery, setLocalSearchQuery] = useState<string>('');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(localSearchQuery);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [localSearchQuery]);
+
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery);
+  }, [searchQuery]);
 
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
 
@@ -1107,6 +1119,18 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [summaryFilterLesson, setSummaryFilterLesson] = useState<string>('all');
   const [summaryFilterStatus, setSummaryFilterStatus] = useState<string>('all');
   const [summarySearchQuery, setSummarySearchQuery] = useState<string>('');
+  const [localSummarySearchQuery, setLocalSummarySearchQuery] = useState<string>('');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSummarySearchQuery(localSummarySearchQuery);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [localSummarySearchQuery]);
+
+  useEffect(() => {
+    setLocalSummarySearchQuery(summarySearchQuery);
+  }, [summarySearchQuery]);
 
   // Derived state maps for summary tab
   const computedLessonStatus = useMemo(() => {
@@ -6639,9 +6663,8 @@ const renderInteractivePractice = () => {
 
                             placeholder="Tìm từ vựng, Romaji, Nghĩa Việt..."
 
-                            value={searchQuery}
-
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            value={localSearchQuery}
+                            onChange={(e) => setLocalSearchQuery(e.target.value)}
 
                             className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-[#b5179e]/60 focus:ring-1 focus:ring-[#b5179e]/60 transition-all"
 
@@ -6999,9 +7022,8 @@ const renderInteractivePractice = () => {
 
                       placeholder="Tìm từ vựng, Romaji, Nghĩa Việt..."
 
-                      value={searchQuery}
-
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      value={localSearchQuery}
+                            onChange={(e) => setLocalSearchQuery(e.target.value)}
 
                       className="w-full bg-slate-100/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-base md:text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600/60"
 
@@ -8946,9 +8968,8 @@ const renderInteractivePractice = () => {
 
                         placeholder="Tìm chữ Hán, Hán Việt, Nghĩa, Onyomi, Kunyomi..."
 
-                        value={searchQuery}
-
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        value={localSearchQuery}
+                            onChange={(e) => setLocalSearchQuery(e.target.value)}
 
                         className="w-full bg-slate-100/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-base md:text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600/60"
 
@@ -13042,9 +13063,8 @@ const renderInteractivePractice = () => {
 
                         placeholder="Tìm kiếm..."
 
-                        value={summarySearchQuery}
-
-                        onChange={(e) => setSummarySearchQuery(e.target.value)}
+                        value={localSummarySearchQuery}
+                      onChange={(e) => setLocalSummarySearchQuery(e.target.value)}
 
                         className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none transition-all placeholder-slate-400 w-[150px] sm:w-[200px]"
 
