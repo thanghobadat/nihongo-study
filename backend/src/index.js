@@ -73,6 +73,16 @@ app.use((err, req, res, next) => {
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`Backend server is running on port ${PORT}`);
+    
+    // Tự động đồng bộ hóa dữ liệu lên Supabase khi khởi chạy
+    try {
+      const { runSeed } = require('./db/seed_supabase');
+      runSeed().catch(err => {
+        console.warn('⚠️ Supabase auto-seed warning:', err.message || err);
+      });
+    } catch (seedErr) {
+      console.warn('⚠️ Failed to load auto-seed script:', seedErr.message || seedErr);
+    }
   });
 }
 

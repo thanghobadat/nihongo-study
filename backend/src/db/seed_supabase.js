@@ -119,8 +119,15 @@ async function runSeed() {
     console.log('\n🎉 Supabase database seeded successfully!');
   } catch (error) {
     console.error('\n❌ Seeding process failed:', error.message);
-    process.exit(1);
+    throw error;
   }
 }
 
-runSeed();
+if (require.main === module) {
+  runSeed().catch(error => {
+    console.error('\n❌ Script execution failed:', error.message);
+    process.exit(1);
+  });
+}
+
+module.exports = { runSeed };
