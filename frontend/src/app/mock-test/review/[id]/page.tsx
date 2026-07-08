@@ -67,8 +67,7 @@ export default function ExamReviewPage({ params }: { params: Promise<{ id: strin
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
   ];
 
   // Load selected values from localStorage

@@ -25420,30 +25420,78 @@ const grammar = [
         "romaji_example": "Kyou no sukejuuru o go shoukai itash imasu.",
         "notes": "Dành cho đối tác, khách hàng."
     },
-    {
+        {
         "id": 151,
         "lesson_id": 103,
-        "title": "は です wa desu",
-        "meaning": "Tôi là Carla. / N là...",
-        "structure": "N1 + は + N2 + です。 じゃないです。 ですか。 | N1 + は + なん + ですか。",
-        "vietnamese_explanation": "Dùng để giới thiệu bản thân hoặc mô tả sự vật, sự việc, trạng thái của danh từ.",
-        "japanese_example": "わたしは がくせいです。",
-        "example_meaning": "Tôi là học sinh.",
-        "romaji_example": "Watashi wa gakusee desu.",
-        "notes": "{\"affirmative\":\"N1 là N2\",\"interrogative\":\"N1 là N2 phải không?\",\"negative\":\"N1 không phải là N2\"}",
+        "title": "N1 は N2 です wa desu",
+        "meaning": "N1 là N2",
+        "structure": "N1 + は + N2 + です",
+        "vietnamese_explanation": "Dùng để khẳng định thông tin hoặc giới thiệu bản thân. Trợ từ 'wa' dùng để đánh dấu chủ ngữ.",
+        "japanese_example": "わたしはカルラです。",
+        "example_meaning": "Tôi là Carla.",
+        "romaji_example": "Watashi wa Karura desu.",
+        "notes": "{\"affirmative\":\"N1 là N2\"}",
         "examples_json": [
             {
                 "japanese": "わたしはカルラです。",
                 "romaji": "Watashi wa Karura desu.",
                 "vietnamese": "Tôi là Carla.",
                 "type": "affirmative"
-            },
+            }
+        ]
+    },
+    {
+        "id": 152,
+        "lesson_id": 103,
+        "title": "N1 は N2 じゃありません wa ja arimasen",
+        "meaning": "N1 không phải là N2",
+        "structure": "N1 + は + N2 + じゃありません / 否定",
+        "vietnamese_explanation": "Dùng để phủ định thông tin của danh từ. 'ja arimasen' là thể phủ định của 'desu'.",
+        "japanese_example": "わたしは学生じゃありません。",
+        "example_meaning": "Tôi không phải là sinh viên.",
+        "romaji_example": "Watashi wa gakusei ja arimasen.",
+        "notes": "{\"negative\":\"N1 không phải là N2\"}",
+        "examples_json": [
             {
                 "japanese": "わたしは学生じゃありません。",
                 "romaji": "Watashi wa gakusei ja arimasen.",
                 "vietnamese": "Tôi không phải là sinh viên.",
                 "type": "negative"
-            },
+            }
+        ]
+    },
+    {
+        "id": 153,
+        "lesson_id": 103,
+        "title": "N ですか desu ka",
+        "meaning": "Có phải là N không?",
+        "structure": "N + ですか",
+        "vietnamese_explanation": "Thêm trợ từ nghi vấn 'ka' vào cuối câu khẳng định để hỏi xác nhận thông tin.",
+        "japanese_example": "お名前は田中さんですか。",
+        "example_meaning": "Tên bạn là anh Tanaka phải không?",
+        "romaji_example": "O-namae wa Tanaka-san desu ka.",
+        "notes": "{\"interrogative\":\"Có phải N không?\"}",
+        "examples_json": [
+            {
+                "japanese": "お名前は田中さんですか。",
+                "romaji": "O-namae wa Tanaka-san desu ka.",
+                "vietnamese": "Tên bạn là anh Tanaka phải không?",
+                "type": "interrogative"
+            }
+        ]
+    },
+    {
+        "id": 201,
+        "lesson_id": 103,
+        "title": "N は なんですか wa nan desu ka",
+        "meaning": "N là cái gì?",
+        "structure": "N + は + なん + ですか",
+        "vietnamese_explanation": "Dùng để hỏi thông tin chi tiết bằng nghi vấn từ 'nan' (cái gì) như tên tuổi, nghề nghiệp.",
+        "japanese_example": "おなまえはなんですか。",
+        "example_meaning": "Tên bạn là gì?",
+        "romaji_example": "O-namae wa nan desu ka.",
+        "notes": "{\"interrogative\":\"N là gì?\"}",
+        "examples_json": [
             {
                 "japanese": "おなまえはなんですか。",
                 "romaji": "O-namae wa nan desu ka.",
@@ -25453,55 +25501,97 @@ const grammar = [
         ]
     },
     {
-        "id": 152,
+        "id": 202,
         "lesson_id": 103,
-        "title": "が できます ga dekimasu",
-        "meaning": "Tôi có thể nói tiếng Nhật.",
-        "structure": "N1 (Person) + は + N2 (Language) + が + できます。 できません。 できますか。",
-        "vietnamese_explanation": "Cấu trúc dùng để diễn đạt khả năng ngôn ngữ: biết hoặc có thể nói một ngôn ngữ nào đó.",
-        "japanese_example": "わたしは ちゅうごくごが できます。",
-        "example_meaning": "わたしは ちゅうごくごが できます。",
-        "romaji_example": "Watashi wa Chuugokugo ga dekimasu.",
-        "notes": "{\"affirmative\":\"N1 có thể nói tiếng N2\",\"interrogative\":\"N1 có thể nói tiếng N2 không?\",\"negative\":\"N1 không thể nói tiếng N2\"}",
+        "title": "N1 は N2 が できます wa ... ga dekimasu",
+        "meaning": "N1 có thể nói/làm N2",
+        "structure": "N1 + は + N2 + が + できます",
+        "vietnamese_explanation": "Diễn đạt khả năng ngôn ngữ: biết hoặc có thể nói một ngôn ngữ nào đó.",
+        "japanese_example": "私は日本語ができます。",
+        "example_meaning": "Tôi có thể nói tiếng Nhật.",
+        "romaji_example": "Watashi wa nihongo ga dekimasu.",
+        "notes": "{\"affirmative\":\"N1 có thể nói tiếng N2\"}",
         "examples_json": [
             {
-                "japanese": "私は 日本語が できます。",
+                "japanese": "Tôi có thể nói tiếng Nhật.",
                 "romaji": "Watashi wa nihongo ga dekimasu.",
                 "vietnamese": "Tôi có thể nói tiếng Nhật.",
                 "type": "affirmative"
-            },
-            {
-                "japanese": "スペイン語が できますか。",
-                "romaji": "Supeingo ga dekimasu ka.",
-                "vietnamese": "Bạn có biết nói tiếng Tây Ban Nha không?",
-                "type": "interrogative"
-            },
+            }
+        ]
+    },
+    {
+        "id": 203,
+        "lesson_id": 103,
+        "title": "N1 は N2 が できません wa ... ga dekimasen",
+        "meaning": "N1 không thể nói/làm N2",
+        "structure": "N1 + は + N2 + が + できません",
+        "vietnamese_explanation": "Dùng để phủ định khả năng ngôn ngữ của bản thân.",
+        "japanese_example": "いいえ、できません。",
+        "example_meaning": "Không, tôi không thể.",
+        "romaji_example": "Iie, dekimasen.",
+        "notes": "{\"negative\":\"N1 không thể nói tiếng N2\"}",
+        "examples_json": [
             {
                 "japanese": "いいえ、できません。",
                 "romaji": "Iie, dekimasen.",
-                "vietnamese": "Không, tôi không biết.",
+                "vietnamese": "Không, tôi không thể.",
                 "type": "negative"
             }
         ]
     },
     {
-        "id": 153,
+        "id": 204,
         "lesson_id": 103,
-        "title": "も mo",
-        "meaning": "Tôi cũng vậy. / Cũng...",
-        "structure": "わたし + も + N + です。 | わたし + は + N (Language) + も + できます。",
-        "vietnamese_explanation": "Dùng để diễn tả sự đồng tình, sự tương đồng hoặc chỉ ra rằng một đối tượng/hành động nào đó cũng giống với cái đã nêu trước đó.",
-        "japanese_example": "シンさんは がくせいです。わたしも がくせいです。",
-        "example_meaning": "Tôi là học sinh.",
-        "romaji_example": "Shin-san wa gakusee desu. Watashi mo gakusee desu.",
-        "notes": "{\"affirmative\":\"Tôi cũng là/cũng có thể làm N.\",\"interrogative\":\"Bạn cũng là/cũng có thể làm N phải không?\",\"negative\":\"Tôi cũng không phải là/không thể làm N.\"}",
+        "title": "N1 は N2 が できますか wa ... ga dekimasu ka",
+        "meaning": "N1 có thể nói N2 không?",
+        "structure": "N1 + は + N2 + が + できますか",
+        "vietnamese_explanation": "Dùng để hỏi xem đối phương có thể sử dụng một ngôn ngữ nào đó không.",
+        "japanese_example": "スペイン語ができますか。",
+        "example_meaning": "Bạn có biết nói tiếng Tây Ban Nha không?",
+        "romaji_example": "Supeingo ga dekimasu ka.",
+        "notes": "{\"interrogative\":\"N1 có thể nói tiếng N2 không?\"}",
+        "examples_json": [
+            {
+                "japanese": "スペイン語ができますか。",
+                "romaji": "Supeingo ga dekimasu ka.",
+                "vietnamese": "Bạn có biết nói tiếng Tây Ban Nha không?",
+                "type": "interrogative"
+            }
+        ]
+    },
+    {
+        "id": 205,
+        "lesson_id": 103,
+        "title": "N1 も N2 です mo desu",
+        "meaning": "N1 cũng là N2",
+        "structure": "N1 + も + N2 + です",
+        "vietnamese_explanation": "Trợ từ 'mo' thay thế cho 'wa' để biểu thị tính chất, danh từ tương đồng với đối tượng được nêu trước đó.",
+        "japanese_example": "わたしも学生です。",
+        "example_meaning": "Tôi cũng là học sinh.",
+        "romaji_example": "Watashi mo gakusei desu.",
+        "notes": "{\"affirmative\":\"Tôi cũng là N\"}",
         "examples_json": [
             {
                 "japanese": "わたしも学生です。",
                 "romaji": "Watashi mo gakusei desu.",
                 "vietnamese": "Tôi cũng là học sinh.",
                 "type": "affirmative"
-            },
+            }
+        ]
+    },
+    {
+        "id": 206,
+        "lesson_id": 103,
+        "title": "N1 も N2 が できます mo ... ga dekimasu",
+        "meaning": "N1 cũng có thể làm N2",
+        "structure": "N1 + も + N2 + が + できます",
+        "vietnamese_explanation": "Dùng để diễn tả sự tương đồng về năng lực hay khả năng ngôn ngữ với người đã nói trước.",
+        "japanese_example": "わたしも日本語ができます。",
+        "example_meaning": "Tôi cũng biết tiếng Nhật.",
+        "romaji_example": "Watashi mo nihongo ga dekimasu.",
+        "notes": "{\"affirmative\":\"Tôi cũng có thể làm N\"}",
+        "examples_json": [
             {
                 "japanese": "わたしも日本語ができます。",
                 "romaji": "Watashi mo nihongo ga dekimasu.",
@@ -25510,7 +25600,7 @@ const grammar = [
             }
         ]
     },
-    {
+{
         "id": 154,
         "lesson_id": 104,
         "title": "と to",

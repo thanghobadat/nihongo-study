@@ -886,9 +886,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: currentTab === 'flashcards' },
 
-      { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' },
-
-      { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+      { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: currentTab === 'kaiwa' }
 
     ])
 
@@ -3792,9 +3790,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     
 
     const groups = grammarItems.map((grammar, idx) => {
-
-      const mapping = getGrammarVocabMapping(selectedLessonId, idx, vocabItems);
-
+      const mapping = getGrammarVocabMapping(selectedLessonId, idx, vocabItems, grammarItems.length);
       return {
 
         grammarIndex: idx,

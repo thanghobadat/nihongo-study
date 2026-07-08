@@ -74,7 +74,8 @@ const LESSON_1_KANJI_GROUPS = [
 export function getGrammarVocabMapping(
   lessonId: number,
   grammarIndex: number,
-  allVocab: any[]
+  allVocab: any[],
+  totalGrammarCount?: number
 ): GrammarMappingResult {
   let mappedKeys: string[] = [];
 
@@ -84,7 +85,7 @@ export function getGrammarVocabMapping(
     mappedKeys = LESSON_2_VOCAB_GROUPS[grammarIndex];
   } else {
     // Fallback: divide vocabulary list across available grammar patterns with overlap
-    const totalGrammar = Math.max(3, allVocab.length > 0 ? 5 : 1);
+    const totalGrammar = totalGrammarCount || Math.max(3, allVocab.length > 0 ? 5 : 1);
     const segmentSize = Math.max(5, Math.ceil(allVocab.length / 2));
     const start = Math.max(0, Math.floor((grammarIndex / totalGrammar) * allVocab.length) - 3);
     const end = Math.min(allVocab.length, start + segmentSize);
@@ -258,7 +259,7 @@ export function getSubstitutionTemplate(
     } else {
       const associatedIds = new Set<number>();
       for (let idx = 0; idx < grammarItemsCount; idx++) {
-        const mapping = getGrammarVocabMapping(lessonId, idx, lessonVocab);
+        const mapping = getGrammarVocabMapping(lessonId, idx, lessonVocab, grammarItemsCount);
         mapping.associatedItems.forEach(item => associatedIds.add(item.id));
       }
       const supplementalItems = lessonVocab.filter(item => !associatedIds.has(item.id));

@@ -191,10 +191,9 @@ export default function RoadmapPage() {
     return Math.round(sum / 3);
   }, [vocabTotal, vocabPercent, kanjiTotal, kanjiPercent, grammarTotal, grammarPercent]);
 
-  // Generate pattern breakdown mapping for each grammar item
   const grammarBreakdowns = useMemo(() => {
     return grammarItems.map((g, idx) => {
-      const vocabRes = getGrammarVocabMapping(selectedLessonId, idx, vocabItems);
+      const vocabRes = getGrammarVocabMapping(selectedLessonId, idx, vocabItems, grammarItems.length);
       const kanjiRes = getGrammarKanjiMapping(selectedLessonId, idx, kanjiItems);
       
       const vocabMasteredCount = vocabRes.associatedItems.filter(v => v.status === 'mastered').length;
@@ -233,8 +232,7 @@ export default function RoadmapPage() {
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: false }
+    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
   ];
 
   const filteredLessons = lessons.filter(l => {

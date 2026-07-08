@@ -284,14 +284,7 @@ export default function AlphabetReviewPage() {
     setTimeout(() => setToastMessage(null), 2500);
   };
 
-  // Tự động chuyển hướng về dashboard nếu chuyển sang khoá marugoto
-  useEffect(() => {
-    if (activeCourse === 'marugoto') {
-      localStorage.setItem('activeCourse', 'marugoto');
-      localStorage.setItem('selectedLessonId', '101');
-      router.push('/dashboard');
-    }
-  }, [activeCourse, router]);
+
 
   // Fetch initial profile & progress data
   useEffect(() => {
@@ -864,8 +857,7 @@ export default function AlphabetReviewPage() {
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
     { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false },
-    { name: 'Ôn bảng chữ cái', id: 'kana', icon: '🔤', active: true }
+    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
   ];
 
   return (
