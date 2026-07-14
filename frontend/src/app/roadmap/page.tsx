@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
-import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../utils/roadmapMapping';
 import CourseSwitcher from '../components/CourseSwitcher';
 import SidebarSettings from '../components/SidebarSettings';
 
@@ -11,21 +10,6 @@ interface Lesson {
   id: number;
   title: string;
   description: string;
-}
-
-interface VocabItem {
-  id: number;
-  lesson_id: number;
-  status: 'not_learned' | 'learning' | 'mastered';
-  romaji: string;
-  hiragana: string;
-}
-
-interface KanjiItem {
-  id: number;
-  lesson_id: number;
-  status: 'not_learned' | 'learning' | 'mastered';
-  character: string;
 }
 
 interface GrammarItem {
@@ -41,13 +25,8 @@ interface GrammarItem {
   notes?: string;
 }
 
-
-
 export default function RoadmapPage() {
   const router = useRouter();
-  const user = api.getUser();
-
-
 
   // UI States
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
@@ -55,8 +34,6 @@ export default function RoadmapPage() {
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [isLoadedFromLocalStorage, setIsLoadedFromLocalStorage] = useState<boolean>(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [vocabItems, setVocabItems] = useState<VocabItem[]>([]);
-  const [kanjiItems, setKanjiItems] = useState<KanjiItem[]>([]);
   const [grammarItems, setGrammarItems] = useState<GrammarItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -149,11 +126,7 @@ export default function RoadmapPage() {
     if (!isLoadedFromLocalStorage) return;
     setLoading(true);
     try {
-      const vocabData = await api.get(`/api/user/lessons/${selectedLessonId}/vocabulary`);
-      const kanjiData = await api.get(`/api/user/lessons/${selectedLessonId}/kanji`);
       const grammarData = await api.get(`/api/user/lessons/${selectedLessonId}/grammar`);
-      if (Array.isArray(vocabData)) setVocabItems(vocabData);
-      if (Array.isArray(kanjiData)) setKanjiItems(kanjiData);
       if (Array.isArray(grammarData)) setGrammarItems(grammarData);
     } catch (error) {
       console.error('Failed to load lesson details:', error);
@@ -165,52 +138,6 @@ export default function RoadmapPage() {
   useEffect(() => {
     loadLessonData();
   }, [loadLessonData]);
-
-  // Calculated Progress Stats
-  const vocabTotal = vocabItems.length;
-  const vocabMastered = vocabItems.filter(v => v.status === 'mastered').length;
-  const vocabPercent = vocabTotal ? Math.round((vocabMastered / vocabTotal) * 100) : 0;
-
-  const kanjiTotal = kanjiItems.length;
-  const kanjiMastered = kanjiItems.filter(k => k.status === 'mastered').length;
-  const kanjiPercent = kanjiTotal ? Math.round((kanjiMastered / kanjiTotal) * 100) : 0;
-
-  const grammarTotal = grammarItems.length;
-  const grammarMastered = grammarItems.filter(g => g.status === 'mastered').length;
-  const grammarPercent = grammarTotal ? Math.round((grammarMastered / grammarTotal) * 100) : 0;
-
-  const totalPercent = useMemo(() => {
-    const weights = [
-      vocabTotal ? vocabPercent : 100,
-      kanjiTotal ? kanjiPercent : 100,
-      grammarTotal ? grammarPercent : 100
-    ];
-    const activeWeights = [vocabTotal, kanjiTotal, grammarTotal].filter(t => t > 0).length;
-    if (activeWeights === 0) return 0;
-    const sum = weights.reduce((a, b) => a + b, 0);
-    return Math.round(sum / 3);
-  }, [vocabTotal, vocabPercent, kanjiTotal, kanjiPercent, grammarTotal, grammarPercent]);
-
-  const grammarBreakdowns = useMemo(() => {
-    return grammarItems.map((g, idx) => {
-      const vocabRes = getGrammarVocabMapping(selectedLessonId, idx, vocabItems, grammarItems.length);
-      const kanjiRes = getGrammarKanjiMapping(selectedLessonId, idx, kanjiItems);
-      
-      const vocabMasteredCount = vocabRes.associatedItems.filter(v => v.status === 'mastered').length;
-      const kanjiMasteredCount = kanjiRes.associatedItems.filter(k => k.status === 'mastered').length;
-
-      return {
-        vocabNewCount: vocabRes.newItems.length,
-        vocabCopiedCount: vocabRes.copiedItems.length,
-        vocabTotalCount: vocabRes.associatedItems.length,
-        vocabMasteredCount,
-        kanjiNewCount: kanjiRes.newItems.length,
-        kanjiCopiedCount: kanjiRes.copiedItems.length,
-        kanjiTotalCount: kanjiRes.associatedItems.length,
-        kanjiMasteredCount,
-      };
-    });
-  }, [selectedLessonId, grammarItems, vocabItems, kanjiItems]);
 
   const handleLevelChange = (selectedLevel: 'N5' | 'N4') => {
     setLevel(selectedLevel);
@@ -227,10 +154,11 @@ export default function RoadmapPage() {
   ] : [
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
-    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },
+    { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: true },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
+    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: false }
   ];
 
   const filteredLessons = lessons.filter(l => {
@@ -340,10 +268,10 @@ export default function RoadmapPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-1">
-              LỘ TRÌNH HỌC CHI TIẾT BÀI {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId}
+              NGỮ PHÁP CHI TIẾT BÀI {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId}
             </h1>
             <p className="text-xs sm:text-sm text-slate-400 dark:text-slate-500">
-              Học tập thông minh hơn bằng cách kết nối trực tiếp mẫu ngữ pháp với từ vựng & chữ Hán liên quan
+              Tra cứu các cấu trúc ngữ pháp mẫu câu, giải nghĩa và câu ví dụ mẫu sinh động.
             </p>
           </div>
           
@@ -393,52 +321,16 @@ export default function RoadmapPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500 space-y-3">
             <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-xs">Đang tải dữ liệu lộ trình...</p>
+            <p className="text-xs">Đang tải dữ liệu ngữ pháp...</p>
           </div>
         ) : (
           <div className="space-y-6 sm:space-y-8">
             
-            {/* 1. Overall Completion Progress Card */}
-            <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-4 space-y-1.5">
-                <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
-                  <span>📈</span>
-                  <span>Tiến độ Bài {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId}</span>
-                </h2>
-                <p className="text-xs text-slate-400 dark:text-slate-500">
-                  Hoàn thành toàn bộ mục tiêu từ vựng, chữ Hán và ngữ pháp của bài học.
-                </p>
-              </div>
-
-              <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-4 gap-4">
-                <div className="p-3 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 rounded-xl text-center">
-                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Từ vựng</span>
-                  <span className="text-md sm:text-lg font-black text-indigo-600 dark:text-indigo-400">{vocabMastered}/{vocabTotal} từ</span>
-                  <span className="block text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">({vocabPercent}%)</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 rounded-xl text-center">
-                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Chữ Hán</span>
-                  <span className="text-md sm:text-lg font-black text-emerald-600 dark:text-emerald-400">{kanjiMastered}/{kanjiTotal} chữ</span>
-                  <span className="block text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">({kanjiPercent}%)</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 rounded-xl text-center">
-                  <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Ngữ pháp</span>
-                  <span className="text-md sm:text-lg font-black text-blue-600 dark:text-blue-400">{grammarMastered}/{grammarTotal} mẫu</span>
-                  <span className="block text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">({grammarPercent}%)</span>
-                </div>
-
-                <div className="p-3 bg-slate-50 dark:bg-slate-950/80 border border-blue-100 rounded-xl text-center flex flex-col justify-center">
-                  <span className="block text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-1">Hoàn thành bài</span>
-                  <span className="text-xl font-extrabold text-slate-900 dark:text-white">{totalPercent}%</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 2. Roadmap Grammar Lists */}
+            {/* Roadmap Grammar Lists */}
             <div className="space-y-4">
               <h2 className="text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
-                <span>🗺️</span>
-                <span>BẢN ĐỒ NGỮ PHÁP & HỌC LIỆU LIÊN QUAN</span>
+                <span>📚</span>
+                <span>DANH SÁCH CẤU TRÚC NGỮ PHÁP</span>
               </h2>
 
               {grammarItems.length === 0 ? (
@@ -448,199 +340,85 @@ export default function RoadmapPage() {
               ) : (
                 <div className="space-y-6">
                   {grammarItems.map((item, idx) => {
-                    const breakdown = grammarBreakdowns[idx] || {
-                      vocabNewCount: 0,
-                      vocabCopiedCount: 0,
-                      vocabTotalCount: 0,
-                      vocabMasteredCount: 0,
-                      kanjiNewCount: 0,
-                      kanjiCopiedCount: 0,
-                      kanjiTotalCount: 0,
-                      kanjiMasteredCount: 0
-                    };
-
-                    const vocabPercentMapped = breakdown.vocabTotalCount 
-                      ? Math.round((breakdown.vocabMasteredCount / breakdown.vocabTotalCount) * 100) 
-                      : 0;
-                    
-                    const kanjiPercentMapped = breakdown.kanjiTotalCount
-                      ? Math.round((breakdown.kanjiMasteredCount / breakdown.kanjiTotalCount) * 100)
-                      : 0;
-
                     return (
                       <div 
                         key={item.id}
-                        className="bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 p-5 sm:p-6 rounded-2xl backdrop-blur-md hover:border-slate-200 dark:border-slate-800 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"
+                        className="bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800/80 p-5 sm:p-6 rounded-2xl backdrop-blur-md hover:border-slate-200 dark:border-slate-800 transition-all duration-300 space-y-3"
                       >
-                        {/* Grammar Info Column */}
-                        <div className="lg:col-span-5 space-y-3">
-                          <div className="flex items-center gap-3">
-                            <span className="w-7 h-7 rounded-lg bg-blue-950/60 border border-blue-900/40 text-blue-600 dark:text-blue-400 font-extrabold text-xs flex items-center justify-center shrink-0">
-                              {idx + 1}
-                            </span>
-                            <h3 className="text-md font-black text-slate-900 dark:text-white leading-tight flex-1">
-                              {item.title}
-                            </h3>
-                            
-                            <select
-                              value={item.status}
-                              onChange={(e) => handleGrammarStatusChange(item.id, e.target.value as any)}
-                              className={`bg-white dark:bg-slate-900/60 border rounded-xl px-2 py-0.5 text-[10px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 shrink-0 ${
-                                item.status === 'mastered'
-                                  ? 'border-emerald-800 text-emerald-600 dark:text-emerald-400 bg-emerald-950/30'
-                                  : item.status === 'learning'
-                                  ? 'border-amber-800 text-amber-400 bg-amber-950/30'
-                                  : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
-                              }`}
-                            >
-                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
-                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
-                            </select>
-                          </div>
+                        <div className="flex items-center gap-3">
+                          <span className="w-7 h-7 rounded-lg bg-blue-950/60 border border-blue-900/40 text-blue-600 dark:text-blue-400 font-extrabold text-xs flex items-center justify-center shrink-0">
+                            {idx + 1}
+                          </span>
+                          <h3 className="text-md font-black text-slate-900 dark:text-white leading-tight flex-1">
+                            {item.title}
+                          </h3>
                           
-                          <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1">
-                            <span className="text-slate-400 dark:text-slate-500 uppercase">Ý nghĩa:</span>
-                            <span className="px-2 py-0.5 bg-blue-950/40 border border-blue-100 text-blue-600 dark:text-blue-400 rounded-lg">{item.meaning}</span>
-                          </div>
+                          <select
+                            value={item.status}
+                            onChange={(e) => handleGrammarStatusChange(item.id, e.target.value as any)}
+                            className={`bg-white dark:bg-slate-900/60 border rounded-xl px-2 py-0.5 text-[10px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 shrink-0 ${
+                              item.status === 'mastered'
+                                ? 'border-emerald-800 text-emerald-600 dark:text-emerald-400 bg-emerald-950/30'
+                                : item.status === 'learning'
+                                ? 'border-amber-800 text-amber-400 bg-amber-950/30'
+                                : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
+                            }`}
+                          >
+                            <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                            <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+                            <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+                          </select>
+                        </div>
+                        
+                        <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1">
+                          <span className="text-slate-400 dark:text-slate-500 uppercase">Ý nghĩa:</span>
+                          <span className="px-2 py-0.5 bg-blue-950/40 border border-blue-100 text-blue-600 dark:text-blue-400 rounded-lg">{item.meaning}</span>
+                        </div>
 
-                          <div className="bg-slate-50 dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-600 dark:text-slate-300">
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block mb-1">Cấu trúc:</span>
-                            {item.structure}
-                          </div>
+                        <div className="bg-slate-50 dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-600 dark:text-slate-300">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block mb-1">Cấu trúc:</span>
+                          {item.structure}
+                        </div>
 
-                          <div className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block mb-0.5 font-sans">Giải nghĩa:</span>
-                            <p className="text-slate-700 dark:text-slate-200 font-medium">{item.vietnamese_explanation}</p>
-                          </div>
+                        <div className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block mb-0.5 font-sans">Giải nghĩa:</span>
+                          <p className="text-slate-700 dark:text-slate-200 font-medium">{item.vietnamese_explanation}</p>
+                        </div>
 
-                          {item.japanese_example && (
-                            <div className="pt-3 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 space-y-2">
-                              <div className="flex items-center space-x-2">
-                                <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 px-1.5 py-0.2 rounded uppercase tracking-wider">Ví dụ mẫu</span>
-                                <button
-                                  onClick={() => playAudio(item.japanese_example!)}
-                                  className="text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 cursor-pointer flex items-center space-x-1 hover:underline active:scale-95"
-                                  title="Nghe câu ví dụ"
-                                >
+                        {item.japanese_example && (
+                          <div className="pt-3 border-t border-slate-200 dark:border-slate-800/40 space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 px-1.5 py-0.2 rounded uppercase tracking-wider">Ví dụ mẫu</span>
+                              <button
+                                onClick={() => playAudio(item.japanese_example!)}
+                                className="text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 cursor-pointer flex items-center space-x-1 hover:underline active:scale-95"
+                                title="Nghe câu ví dụ"
+                              >
                                   <span>🔊</span>
                                   <span>Nghe ví dụ</span>
-                                </button>
-                              </div>
-                              <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-bold font-serif leading-relaxed tracking-wide pl-2 border-l-2 border-emerald-500/50">
-                                {item.japanese_example}
-                              </p>
-                              <p className="text-[11px] text-slate-400 dark:text-slate-500 italic pl-2 leading-relaxed">
-                                {item.example_meaning}
-                              </p>
+                              </button>
                             </div>
-                          )}
-
-                          {item.notes && !item.notes.includes('🔊') && (
-                            <div className="text-[10px] text-slate-400 dark:text-slate-500 italic flex items-start space-x-1 pt-1.5 border-t border-slate-200 dark:border-slate-800/20">
-                              <span>⚠️</span>
-                              <span className="leading-normal">{item.notes}</span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Associated Study Items Mapped Column */}
-                        <div className="lg:col-span-4 space-y-4 bg-slate-50 dark:bg-slate-950/40 p-4 rounded-xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60">
-                          <h4 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-1.5">
-                            📊 Học liệu tương quan trong mẫu này
-                          </h4>
-                          
-                          {/* Vocab details */}
-                          <div className="space-y-1.5">
-                            <div className="flex justify-between text-xs">
-                              <span className="text-slate-400 dark:text-slate-500 font-bold">Từ vựng mẫu:</span>
-                              <span className="text-indigo-600 dark:text-indigo-400 font-black">{breakdown.vocabMasteredCount}/{breakdown.vocabTotalCount} đã thuộc</span>
-                            </div>
-                            <div className="flex items-center justify-between gap-3 text-[10px] text-slate-400 dark:text-slate-500">
-                              <span>Mới giới thiệu: <strong className="text-indigo-600 dark:text-indigo-400">{breakdown.vocabNewCount} từ</strong></span>
-                              <span>Trùng mẫu trước: <strong>{breakdown.vocabCopiedCount} từ</strong></span>
-                            </div>
-                            <div className="w-full bg-slate-100 rounded-full h-1 overflow-hidden">
-                              <div className="bg-indigo-500 h-full rounded-full" style={{ width: `${vocabPercentMapped}%` }} />
-                            </div>
+                            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-bold font-serif leading-relaxed tracking-wide pl-2 border-l-2 border-emerald-500/50">
+                              {item.japanese_example}
+                            </p>
+                            <p className="text-[11px] text-slate-400 dark:text-slate-500 italic pl-2 leading-relaxed">
+                              {item.example_meaning}
+                            </p>
                           </div>
+                        )}
 
-                          {/* Kanji details */}
-                          {breakdown.kanjiTotalCount > 0 && (
-                            <div className="space-y-1.5 pt-2 border-t border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60">
-                              <div className="flex justify-between text-xs">
-                                <span className="text-slate-400 dark:text-slate-500 font-bold">Chữ Hán mẫu:</span>
-                                <span className="text-emerald-600 dark:text-emerald-400 font-black">{breakdown.kanjiMasteredCount}/{breakdown.kanjiTotalCount} đã thuộc</span>
-                              </div>
-                              <div className="flex items-center justify-between gap-3 text-[10px] text-slate-400 dark:text-slate-500">
-                                <span>Mới giới thiệu: <strong className="text-emerald-600 dark:text-emerald-400">{breakdown.kanjiNewCount} chữ</strong></span>
-                                <span>Trùng mẫu trước: <strong>{breakdown.kanjiCopiedCount} chữ</strong></span>
-                              </div>
-                              <div className="w-full bg-slate-100 rounded-full h-1 overflow-hidden">
-                                <div className="bg-emerald-500 h-full rounded-full" style={{ width: `${kanjiPercentMapped}%` }} />
-                              </div>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Action buttons redirects to tab with indexes */}
-                        <div className="lg:col-span-3 flex flex-col gap-2.5 h-full justify-center pt-2 lg:pt-8">
-                          <button
-                            onClick={() => router.push(`/lessons/${selectedLessonId}?tab=vocab&grammarIndex=${idx}`)}
-                            className="w-full flex items-center justify-center space-x-2 py-2.5 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/80 hover:border-indigo-300/60 text-indigo-600 hover:text-indigo-800 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 dark:hover:from-blue-900/40 dark:border-blue-900/40 dark:hover:border-blue-700/60 dark:text-slate-200 dark:hover:text-white dark:text-white rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95 shadow-sm"
-                          >
-                            <span>📚</span>
-                            <span>Học từ vựng mới ({breakdown.vocabNewCount})</span>
-                          </button>
-
-                          {breakdown.kanjiTotalCount > 0 ? (
-                            <button
-                              onClick={() => router.push(`/lessons/${selectedLessonId}?tab=kanji&grammarIndex=${idx}`)}
-                              className="w-full flex items-center justify-center space-x-2 py-2.5 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 hover:border-emerald-300/60 text-emerald-600 hover:text-emerald-800 dark:bg-gradient-to-r dark:from-emerald-950/40 dark:to-slate-900 dark:hover:from-emerald-900/40 dark:border-emerald-900/40 dark:hover:border-emerald-700/60 dark:text-slate-200 dark:hover:text-white dark:text-white rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95 shadow-sm"
-                            >
-                              <span>🉐</span>
-                              <span>Học chữ Hán mới ({breakdown.kanjiNewCount})</span>
-                            </button>
-                          ) : (
-                            <div className="text-center text-[10px] text-slate-400 dark:text-slate-500 italic py-2">
-                              (Mẫu này không dùng Kanji mới)
-                            </div>
-                          )}
-
-                          <button
-                            onClick={() => router.push(`/roadmap/practice?lessonId=${selectedLessonId}&grammarIndex=${idx}&from=roadmap`)}
-                            className="w-full flex items-center justify-center space-x-2 py-2.5 bg-violet-50 hover:bg-violet-100 border border-violet-200/80 hover:border-violet-300/60 text-violet-650 hover:text-violet-850 dark:bg-gradient-to-r dark:from-violet-950/40 dark:to-slate-900 dark:hover:from-violet-900/40 dark:border-violet-900/40 dark:hover:border-violet-700/60 dark:text-slate-200 dark:hover:text-white dark:text-white rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95 shadow-sm"
-                          >
-                            <span>⚡</span>
-                            <span>Luyện tập mẫu câu</span>
-                          </button>
-                        </div>
-
+                        {item.notes && !item.notes.includes('🔊') && (
+                          <div className="text-[10px] text-slate-400 dark:text-slate-500 italic flex items-start space-x-1 pt-1.5 border-t border-slate-200 dark:border-slate-800/20">
+                            <span>⚠️</span>
+                            <span className="leading-normal">{item.notes}</span>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
                 </div>
               )}
 
-            </div>
-
-            {/* 3. Steps suggestion box */}
-            <div className="p-5 sm:p-6 bg-blue-950/15 border border-blue-100 rounded-2xl flex items-start space-x-4">
-              <span className="text-2xl mt-0.5">💡</span>
-              <div className="space-y-1.5">
-                <h3 className="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
-                  GỢI Ý LỘ TRÌNH HỌC TẬP HIỆU QUẢ
-                </h3>
-                <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-                  Để chinh phục Bài {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId} tốt nhất, bạn nên thực hiện theo các bước:
-                </p>
-                <ol className="list-decimal list-inside text-xs text-slate-400 dark:text-slate-500 space-y-1 pl-1">
-                  <li>Xem tổng quát các mẫu ngữ pháp để hiểu ý nghĩa cấu trúc.</li>
-                  <li>Nhấp chuột vào nút <strong className="text-slate-700 dark:text-slate-200">"Học từ vựng mới"</strong> để học các từ bổ trợ trực tiếp cho mẫu ngữ pháp đó.</li>
-                  <li>Làm tương tự với chữ Hán để nắm chắc cách viết.</li>
-
-                </ol>
-              </div>
             </div>
 
           </div>

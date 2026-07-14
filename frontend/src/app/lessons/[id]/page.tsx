@@ -876,7 +876,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
 
-      { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
+      { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: false },
 
       { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
 
@@ -3813,7 +3813,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       }
 
-      playAudioWithFallback(getKanjiForm(speedrunQuestion.hiragana, kanjiItems), speedrunQuestion.hiragana);
+      if (speedrunDirection !== 'listen-to-select') {
+
+        playAudioWithFallback(getKanjiForm(speedrunQuestion.hiragana, kanjiItems), speedrunQuestion.hiragana);
+
+      }
 
       nextSpeedrunQuestion(nextScore, newMaxTime);
 
@@ -7348,25 +7352,7 @@ const renderInteractivePractice = () => {
 
                             <div className="flex items-center gap-3 shrink-0 justify-between md:justify-end">
 
-                              {/* Luyện tập button */}
 
-                              <button
-
-                                onClick={(e) => {
-
-                                  e.stopPropagation();
-
-                                  router.push(`/roadmap/practice?lessonId=${selectedLessonId}&grammarIndex=${idx}&from=lessons`);
-
-                                }}
-
-                                className="px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white text-xs font-black rounded-lg border border-blue-500/20 hover:border-blue-400/30 transition-all duration-300 flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
-
-                              >
-
-                                <span>⚡</span> Luyện thế câu
-
-                              </button>
 
                               <div className="flex items-center gap-2">
 
@@ -7768,23 +7754,7 @@ const renderInteractivePractice = () => {
 
                             <div className="flex items-center gap-3 shrink-0 justify-between md:justify-end">
 
-                              <button
 
-                                onClick={(e) => {
-
-                                  e.stopPropagation();
-
-                                  router.push(`/roadmap/practice?lessonId=${selectedLessonId}&grammarIndex=${grammarItems.length}&from=lessons`);
-
-                                }}
-
-                                className="px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white text-xs font-black rounded-lg border border-blue-500/20 hover:border-blue-400/30 transition-all duration-300 flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
-
-                              >
-
-                                <span>⚡</span> Luyện thế câu
-
-                              </button>
 
                               <div className="flex items-center gap-2">
 
@@ -9304,25 +9274,7 @@ const renderInteractivePractice = () => {
 
                             <div className="flex items-center gap-3 shrink-0 justify-between md:justify-end">
 
-                              {/* Luyện tập button */}
 
-                              <button
-
-                                onClick={(e) => {
-
-                                  e.stopPropagation();
-
-                                  router.push(`/roadmap/practice?lessonId=${selectedLessonId}&grammarIndex=${idx}&from=lessons`);
-
-                                }}
-
-                                className="px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white text-xs font-black rounded-lg border border-blue-500/20 hover:border-blue-400/30 transition-all duration-300 flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
-
-                              >
-
-                                <span>⚡</span> Luyện thế câu
-
-                              </button>
 
                               <div className="flex items-center gap-2">
 

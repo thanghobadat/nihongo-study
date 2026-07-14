@@ -221,10 +221,11 @@ export default function MockTestPage() {
   ] : [
     { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
-    { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
+    { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
+    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: false }
   ];
 
   return (
