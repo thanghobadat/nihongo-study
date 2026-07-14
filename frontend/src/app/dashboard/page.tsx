@@ -391,9 +391,7 @@ export default function UserDashboard() {
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
   ];
 
   // Filter lessons matching active Level
@@ -562,193 +560,203 @@ export default function UserDashboard() {
             <p className="text-xs">Đang tải dữ liệu học tập...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
 
-            {/* Today's Target Status */}
-            <div className="md:col-span-2 lg:col-span-12 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
-              <div className="flex items-center justify-between mb-5 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
-                <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
-                  <span>🎯</span>
-                  <span>TIẾN ĐỘ HÔM NAY</span>
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Vocab target today */}
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 flex flex-col justify-between gap-4">
-                  <div className="space-y-1">
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300">Từ vựng tích lũy hôm nay</h3>
-                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Mục tiêu hàng ngày để hoàn thành đúng lộ trình</p>
-                  </div>
-                  <div className="flex items-center justify-between w-full pt-3 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40">
-                    <div className="flex items-center space-x-4">
-                      <div className="text-center">
-                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
-                        <span className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">{targetVocabToday}</span>
-                      </div>
-                      <div className="h-6 w-px bg-slate-100" />
-                      <div className="text-center">
-                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
-                        <span className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">{vocabMastered}</span>
-                      </div>
-                    </div>
-                    {vocabBehind > 0 ? (
-                      <span className="px-2 py-0.5 bg-red-950/30 border border-red-200 dark:border-red-800 text-[9px] sm:text-[10px] font-bold text-red-600 dark:text-red-400 rounded-lg whitespace-nowrap">🔴 Chậm {vocabBehind}</span>
-                    ) : (
-                      <span className="px-2 py-0.5 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[9px] sm:text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-lg whitespace-nowrap">🟢 Đạt chỉ tiêu</span>
-                    )}
-                  </div>
-                </div>
- 
-                {/* Kanji target today */}
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 flex flex-col justify-between gap-4">
-                  <div className="space-y-1">
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300">Kanji tích lũy hôm nay</h3>
-                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Mục tiêu chữ Hán hàng ngày để ghi nhớ mặt chữ</p>
-                  </div>
-                  <div className="flex items-center justify-between w-full pt-3 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40">
-                    <div className="flex items-center space-x-4">
-                      <div className="text-center">
-                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
-                        <span className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">{targetKanjiToday}</span>
-                      </div>
-                      <div className="h-6 w-px bg-slate-100" />
-                      <div className="text-center">
-                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
-                        <span className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">{kanjiMastered}</span>
-                      </div>
-                    </div>
-                    {kanjiBehind > 0 ? (
-                      <span className="px-2 py-0.5 bg-red-950/30 border border-red-200 dark:border-red-800 text-[9px] sm:text-[10px] font-bold text-red-600 dark:text-red-400 rounded-lg whitespace-nowrap">🔴 Chậm {kanjiBehind}</span>
-                    ) : (
-                      <span className="px-2 py-0.5 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[9px] sm:text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-lg whitespace-nowrap">🟢 Đạt chỉ tiêu</span>
-                    )}
-                  </div>
-                </div>
- 
-                {/* Grammar target today */}
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 flex flex-col justify-between gap-4">
-                  <div className="space-y-1">
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300">Ngữ pháp hôm nay</h3>
-                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Mục tiêu mẫu câu hàng ngày để nâng cao ngữ pháp</p>
-                  </div>
-                  <div className="flex items-center justify-between w-full pt-3 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40">
-                    <div className="flex items-center space-x-4">
-                      <div className="text-center">
-                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Chỉ tiêu</span>
-                        <span className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">{targetGrammarToday}</span>
-                      </div>
-                      <div className="h-6 w-px bg-slate-100" />
-                      <div className="text-center">
-                        <span className="block text-[8px] sm:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Thực tế</span>
-                        <span className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">{grammarMastered}</span>
-                      </div>
-                    </div>
-                    {grammarBehind > 0 ? (
-                      <span className="px-2 py-0.5 bg-red-950/30 border border-red-200 dark:border-red-800 text-[9px] sm:text-[10px] font-bold text-red-600 dark:text-red-400 rounded-lg whitespace-nowrap">🔴 Chậm {grammarBehind}</span>
-                    ) : (
-                      <span className="px-2 py-0.5 bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[9px] sm:text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-lg whitespace-nowrap">🟢 Đạt chỉ tiêu</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Progress Bars (Vocabulary, Kanji, Grammar) */}
-            <div className="md:col-span-2 lg:col-span-12 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
-              <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 mb-5 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3 flex items-center space-x-2">
-                <span>📈</span>
-                <span>TIẾN ĐỘ HỌC BÀI {selectedLessonId}</span>
+            {/* 1. KHỐI TIẾN ĐỘ & CHỈ TIÊU HÀNG NGÀY (DAILY PROGRESS & TARGETS) */}
+            <div className="lg:col-span-12 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
+              <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 mb-5 border-b border-slate-200 dark:border-slate-800/60 pb-3 flex items-center space-x-2">
+                <span>🎯</span>
+                <span>TIẾN ĐỘ & CHỈ TIÊU HỌC TẬP HÔM NAY</span>
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Vocabulary progress row */}
-                <div>
-                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
-                    <span className="text-slate-400 dark:text-slate-500">TỪ VỰNG BÀI {selectedLessonId}</span>
-                    <span className="text-blue-600 dark:text-blue-400">
-                      {vocabMastered}/{vocabTotal} từ ({vocabPercentage}%)
-                    </span>
+                {/* Từ vựng Card */}
+                <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/50 flex flex-col justify-between gap-4 transition-all duration-300 hover:shadow-md">
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 flex items-center space-x-1.5">
+                        <span>📚</span>
+                        <span>Từ vựng</span>
+                      </h3>
+                      {vocabBehind > 0 ? (
+                        <span className="px-2 py-0.5 bg-red-500/10 border border-red-500/20 text-[9px] sm:text-[10px] font-bold text-red-650 dark:text-red-400 rounded-lg">🔴 Chậm {vocabBehind}</span>
+                      ) : (
+                        <span className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-[9px] sm:text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-lg">🟢 Đạt chỉ tiêu</span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Tiến trình học từ vựng bài {selectedLessonId}</p>
                   </div>
-                  <div className="font-mono text-slate-400 dark:text-slate-500 text-xs sm:text-sm tracking-wide bg-slate-50 dark:bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                    <span className="text-indigo-600 dark:text-indigo-400 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {renderProgressBar(vocabPercentage)}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 shrink-0">Tiến độ Từ vựng</span>
+
+                  <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/40">
+                    <div className="flex justify-between items-end text-xs">
+                      <div>
+                        <span className="text-[10px] block text-slate-400 dark:text-slate-500">Hôm nay cần học</span>
+                        <span className="text-lg font-black text-slate-800 dark:text-slate-200">{calculatedVocabTargetPerDay} từ</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] block text-slate-400 dark:text-slate-500">Đã thuộc</span>
+                        <span className="font-bold text-slate-700 dark:text-slate-300">
+                          {vocabMastered}/{vocabTotal} ({vocabPercentage}%)
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="w-full bg-slate-200/60 dark:bg-slate-950/80 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-indigo-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${vocabPercentage}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Kanji progress row */}
-                <div>
-                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
-                    <span className="text-slate-400 dark:text-slate-500">KANJI BÀI {selectedLessonId}</span>
-                    <span className="text-blue-600 dark:text-blue-400">
-                      {kanjiMastered}/{kanjiTotal} chữ ({kanjiPercentage}%)
-                    </span>
+                {/* Chữ Hán Card */}
+                <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/50 flex flex-col justify-between gap-4 transition-all duration-300 hover:shadow-md">
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1.5">
+                        <span>🉐</span>
+                        <span>Chữ Hán (Kanji)</span>
+                      </h3>
+                      {kanjiBehind > 0 ? (
+                        <span className="px-2 py-0.5 bg-red-500/10 border border-red-500/20 text-[9px] sm:text-[10px] font-bold text-red-650 dark:text-red-400 rounded-lg">🔴 Chậm {kanjiBehind}</span>
+                      ) : (
+                        <span className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-[9px] sm:text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-lg">🟢 Đạt chỉ tiêu</span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Tiến trình học Kanji bài {selectedLessonId}</p>
                   </div>
-                  <div className="font-mono text-slate-400 dark:text-slate-500 text-xs sm:text-sm tracking-wide bg-slate-50 dark:bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                    <span className="text-emerald-600 dark:text-emerald-400 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {renderProgressBar(kanjiPercentage)}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 shrink-0">Tiến độ Kanji</span>
+
+                  <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/40">
+                    <div className="flex justify-between items-end text-xs">
+                      <div>
+                        <span className="text-[10px] block text-slate-400 dark:text-slate-500">Hôm nay cần học</span>
+                        <span className="text-lg font-black text-slate-800 dark:text-slate-200">{calculatedKanjiTargetPerDay} chữ</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] block text-slate-400 dark:text-slate-500">Đã thuộc</span>
+                        <span className="font-bold text-slate-700 dark:text-slate-300">
+                          {kanjiMastered}/{kanjiTotal} ({kanjiPercentage}%)
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="w-full bg-slate-200/60 dark:bg-slate-950/80 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${kanjiPercentage}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Grammar progress row */}
-                <div>
-                  <div className="flex justify-between items-center text-[10px] sm:text-xs font-bold mb-1.5">
-                    <span className="text-slate-400 dark:text-slate-500">NGỮ PHÁP BÀI {selectedLessonId}</span>
-                    <span className="text-blue-600 dark:text-blue-400">
-                      {grammarMastered}/{grammarTotal} mẫu ({grammarPercentage}%)
-                    </span>
+                {/* Ngữ pháp Card */}
+                <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/50 flex flex-col justify-between gap-4 transition-all duration-300 hover:shadow-md">
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xs sm:text-sm font-bold text-sky-600 dark:text-sky-400 flex items-center space-x-1.5">
+                        <span>📖</span>
+                        <span>Ngữ pháp</span>
+                      </h3>
+                      {grammarBehind > 0 ? (
+                        <span className="px-2 py-0.5 bg-red-500/10 border border-red-500/20 text-[9px] sm:text-[10px] font-bold text-red-650 dark:text-red-400 rounded-lg">🔴 Chậm {grammarBehind}</span>
+                      ) : (
+                        <span className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-[9px] sm:text-[10px] font-bold text-emerald-600 dark:text-emerald-400 rounded-lg">🟢 Đạt chỉ tiêu</span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Tiến trình học Ngữ pháp bài {selectedLessonId}</p>
                   </div>
-                  <div className="font-mono text-slate-400 dark:text-slate-500 text-xs sm:text-sm tracking-wide bg-slate-50 dark:bg-slate-950/80 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                    <span className="text-blue-600 dark:text-blue-400 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {renderProgressBar(grammarPercentage)}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 shrink-0">Tiến độ Ngữ pháp</span>
+
+                  <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/40">
+                    <div className="flex justify-between items-end text-xs">
+                      <div>
+                        <span className="text-[10px] block text-slate-400 dark:text-slate-500">Hôm nay cần học</span>
+                        <span className="text-lg font-black text-slate-800 dark:text-slate-200">{calculatedGrammarTargetPerDay} mẫu</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] block text-slate-400 dark:text-slate-500">Đã thuộc</span>
+                        <span className="font-bold text-slate-700 dark:text-slate-300">
+                          {grammarMastered}/{grammarTotal} ({grammarPercentage}%)
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="w-full bg-slate-200/60 dark:bg-slate-950/80 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-sky-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${grammarPercentage}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Row 2: Plan Configurator & Overall progress card */}
-            
-            {/* Plan Configurator (Chỗ chọn plan và bài đang học) */}
-            <div className="lg:col-span-6 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-5 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
-                  <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
-                    <span>📅</span>
-                    <span>MỤC TIÊU & KẾ HOẠCH HỌC TẬP - BÀI {selectedLessonId}</span>
-                  </h2>
-                  <span className="px-2.5 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] sm:text-xs font-semibold rounded-full text-blue-600 dark:text-blue-400 shrink-0">
-                    {planStatus}
+            {/* 2. KHỐI KẾ HOẠCH & THỜI GIAN HOÀN THÀNH (PLANNING & FORECAST) */}
+            <div className="lg:col-span-12 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md">
+              <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 mb-5 border-b border-slate-200 dark:border-slate-800/60 pb-3 flex items-center space-x-2">
+                <span>📅</span>
+                <span>DỰ BÁO TIẾN ĐỘ & KẾ HOẠCH THỜI GIAN - BÀI {selectedLessonId}</span>
+              </h2>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                {/* Bên trái: Thời gian hoàn thành */}
+                <div className="lg:col-span-7 p-5 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50/50 dark:from-slate-950/40 dark:to-slate-900/40 border border-blue-100/50 dark:border-blue-900/30 flex flex-col justify-center gap-3">
+                  <span className="text-[10px] sm:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                    Dự báo hoàn thành bài học hiện tại
                   </span>
+                  
+                  {vocabMastered === vocabTotal && kanjiMastered === kanjiTotal && grammarMastered === grammarTotal ? (
+                    <div className="space-y-1">
+                      <p className="text-2xl sm:text-3xl font-black text-emerald-650 dark:text-emerald-400 flex items-center space-x-2">
+                        <span>🎉</span>
+                        <span>Đã học xong bài này!</span>
+                      </p>
+                      <p className="text-xs text-slate-400 dark:text-slate-500">Chúc mừng bạn đã thuộc 100% học liệu của Bài {selectedLessonId}. Hãy chuyển sang bài mới nhé!</p>
+                    </div>
+                  ) : today > endDate ? (
+                    <div className="space-y-1">
+                      <p className="text-2xl sm:text-3xl font-black text-red-600 dark:text-red-400">
+                        🔴 Quá hạn {getDaysDiff(endDate, today)} ngày
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Kế hoạch kết thúc vào ngày: <span className="font-bold text-slate-700 dark:text-slate-350">{startDateStr.split('-').reverse().join('/')} - {endDateStr.split('-').reverse().join('/')}</span>. Hãy tập trung học bù nhé!
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <p className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">
+                        ⏳ Còn {daysRemaining} ngày để học xong
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Hạn chót hoàn thành: <span className="font-semibold text-indigo-650 dark:text-indigo-400">{endDateStr.split('-').reverse().join('/')}</span> (Kế hoạch {totalDays} ngày).
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Tiến độ tổng thể của bài hiện tại */}
+                  <div className="pt-2">
+                    <div className="flex justify-between items-center text-xs mb-1">
+                      <span className="font-medium text-slate-500 dark:text-slate-400">Tiến độ bài học chung:</span>
+                      <span className="font-bold text-slate-700 dark:text-slate-200">
+                        {Math.round((vocabPercentage + kanjiPercentage + grammarPercentage) / 3)}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-slate-200/50 dark:bg-slate-950/80 rounded-full h-1.5 overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${Math.round((vocabPercentage + kanjiPercentage + grammarPercentage) / 3)}%` }}
+                      />
+                    </div>
+                  </div>
                 </div>
 
-                <div className="space-y-4">
-                  {/* Selector bài đang học trong phần Kế hoạch */}
-                  <div>
-                    <label className="block text-[10px] sm:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
-                      Bài đang học
-                    </label>
-                    <select
-                      value={selectedLessonId}
-                      onChange={(e) => setSelectedLessonId(parseInt(e.target.value))}
-                      className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-semibold focus:outline-none focus:border-blue-600/50 cursor-pointer"
-                    >
-                      {filteredLessons.map((l) => (
-                        <option key={l.id} value={l.id} className="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200">
-                          {l.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
+                {/* Bên phải: Thiết lập ngày */}
+                <div className="lg:col-span-5 space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] sm:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
-                        Ngày bắt đầu học
+                      <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
+                        Ngày bắt đầu
                       </label>
                       <input
                         type="date"
@@ -759,13 +767,13 @@ export default function UserDashboard() {
                             try { e.currentTarget.showPicker(); } catch (err) { console.error(err); }
                           }
                         }}
-                        className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] sm:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
-                        Ngày mong muốn hoàn thành
+                      <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5">
+                        Ngày hoàn thành
                       </label>
                       <input
                         type="date"
@@ -776,98 +784,56 @@ export default function UserDashboard() {
                             try { e.currentTarget.showPicker(); } catch (err) { console.error(err); }
                           }
                         }}
-                        className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-600/50 cursor-pointer"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Auto-calculated targets showing as text labels */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                    <div className="p-3 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 rounded-xl">
-                      <span className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
-                        Mục tiêu Từ vựng/ngày
-                      </span>
-                      <span className="text-sm font-extrabold text-indigo-600 dark:text-indigo-400">
-                        {calculatedVocabTargetPerDay} từ / ngày
-                      </span>
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/30 border border-slate-200 dark:border-slate-800/40 text-xs text-slate-400 dark:text-slate-500 space-y-1.5">
+                    <div className="flex justify-between">
+                      <span>📆 Kế hoạch học tập:</span>
+                      <span className="font-semibold text-slate-700 dark:text-slate-300">{totalDays} ngày</span>
                     </div>
-                    <div className="p-3 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 rounded-xl">
-                      <span className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
-                        Mục tiêu Kanji/ngày
-                      </span>
-                      <span className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">
-                        {calculatedKanjiTargetPerDay} chữ / ngày
-                      </span>
-                    </div>
-                    <div className="p-3 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 rounded-xl font-sans">
-                      <span className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
-                        Mục tiêu Ngữ pháp/ngày
-                      </span>
-                      <span className="text-sm font-extrabold text-blue-600 dark:text-blue-400">
-                        {calculatedGrammarTargetPerDay} mẫu / ngày
-                      </span>
+                    <div className="flex justify-between">
+                      <span>🏃 Số ngày đã trôi qua:</span>
+                      <span className="font-semibold text-slate-700 dark:text-slate-300">{daysElapsed} ngày</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Dynamic calculations details list */}
-              <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/40 dark:border-slate-800/40 text-[10px] sm:text-xs text-slate-400 dark:text-slate-500">
-                <div>
-                  <p>🗓️ Tổng số ngày học: <span className="text-slate-700 dark:text-slate-200 font-bold">{totalDays} ngày</span></p>
-                  <p>⏳ Thời gian còn lại: <span className="text-slate-700 dark:text-slate-200 font-bold">{daysRemaining} ngày</span></p>
+              {/* Dự báo Level N5/N4 (Widget nhỏ thu gọn) */}
+              <details className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/40 group">
+                <summary className="text-[10px] sm:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider cursor-pointer list-none flex items-center justify-between select-none">
+                  <span>📈 Dự báo tiến độ cả cấp độ ({activeCourse === 'marugoto' ? 'Marugoto A1' : level})</span>
+                  <span className="transition-transform group-open:rotate-180">▼</span>
+                </summary>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3 pt-3 bg-slate-50 dark:bg-slate-950/20 p-4 rounded-xl border border-slate-200 dark:border-slate-800/30 text-xs">
+                  <div className="space-y-2">
+                    <p className="font-semibold text-slate-600 dark:text-slate-400">Dự báo ngày hoàn thành cấp độ:</p>
+                    <p className="text-2xl font-black text-emerald-600 dark:text-emerald-400">{forecastDateString}</p>
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">(Dựa trên tốc độ trung bình {daysPerLesson} ngày/bài)</p>
+                  </div>
+                  <div className="space-y-2 flex flex-col justify-between">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400 dark:text-slate-500">Đã học xong:</span>
+                      <span className="font-bold text-slate-700 dark:text-slate-200">
+                        Bài {activeCourse === 'marugoto' ? (selectedLessonId - 100) : selectedLessonId} / {activeCourse === 'marugoto' ? '18' : (level === 'N5' ? '25' : '50')}
+                      </span>
+                    </div>
+                    <div className="w-full bg-slate-200 dark:bg-slate-950/80 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${((activeCourse === 'marugoto' ? (selectedLessonId - 100) : selectedLessonId) / (activeCourse === 'marugoto' ? 18 : (level === 'N5' ? 25 : 50))) * 100}%` }}
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500">Cần thêm {totalDaysToCompleteLevel} ngày cho {remainingLessons + 1} bài còn lại.</p>
+                  </div>
                 </div>
-                <div>
-                  <p>🏃 Số ngày đã trôi qua: <span className="text-slate-700 dark:text-slate-200 font-bold">{daysElapsed} ngày</span></p>
-                  <p>📈 Trạng thái: <span className="text-slate-700 dark:text-slate-200 font-bold">{planStatus}</span></p>
-                </div>
-              </div>
+              </details>
             </div>
 
-            {/* Overall Progress & Forecast Date Card */}
-            <div className="lg:col-span-6 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 sm:p-6 rounded-2xl backdrop-blur-md flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-5 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
-                  <h2 className="text-sm sm:text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
-                    <span>⚡</span>
-                    <span>TỔNG HỢP TIẾN ĐỘ & DỰ BÁO</span>
-                  </h2>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/55 dark:border-slate-800/50 mb-4 text-center">
-                  <p className="text-slate-400 dark:text-slate-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">
-                    Dự báo hoàn thành mốc {activeCourse === 'marugoto' ? 'Marugoto A1' : level}
-                  </p>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
-                    {forecastDateString}
-                  </p>
-                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
-                    (Dựa trên kế hoạch trung bình {daysPerLesson} ngày/bài)
-                  </p>
-                </div>
-
-                <div className="space-y-3.5">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-slate-400 dark:text-slate-500">Đã học hoàn thành bài:</span>
-                    <span className="font-bold text-slate-700 dark:text-slate-200">
-                      Bài {activeCourse === 'marugoto' ? (selectedLessonId - 100) : selectedLessonId} / {activeCourse === 'marugoto' ? '18' : (level === 'N5' ? '25' : '50')}
-                    </span>
-                  </div>
-                  <div className="w-full bg-white rounded-full h-2 overflow-hidden">
-                    <div
-                      className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500"
-                      style={{ width: `${((activeCourse === 'marugoto' ? (selectedLessonId - 100) : selectedLessonId) / (activeCourse === 'marugoto' ? 18 : (level === 'N5' ? 25 : 50))) * 100}%` }}
-                    />
-                  </div>
-
-                  <div className="pt-2 text-xs text-slate-400 dark:text-slate-500 space-y-1.5">
-                    <p>🎯 <span className="text-slate-600 dark:text-slate-300 font-semibold">Tốc độ hiện tại:</span> 1 bài trong khoảng {totalDays} ngày.</p>
-                    <p>⏳ <span className="text-slate-600 dark:text-slate-300 font-semibold">Ước tính level {level}:</span> Cần thêm {totalDaysToCompleteLevel} ngày để hoàn thành {remainingLessons + 1} bài còn lại.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
 
@@ -877,7 +843,7 @@ export default function UserDashboard() {
                 <span>🔗</span>
                 <span>DANH MỤC TRUY CẬP NHANH BÀI {selectedLessonId}</span>
               </h2>
-              <div className={`grid grid-cols-2 sm:grid-cols-3 ${activeCourse === 'marugoto' ? 'lg:grid-cols-4' : 'lg:grid-cols-6'} gap-3 sm:gap-4`}>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                 <button
                   onClick={() => router.push(`/lessons/${selectedLessonId}?tab=vocab`)}
                   className="p-3 sm:p-4 rounded-xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none hover:bg-slate-100 dark:hover:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
@@ -899,24 +865,6 @@ export default function UserDashboard() {
                   <span className="block text-xl sm:text-2xl mb-1">📝</span>
                   <span className="text-[10px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300">Ngữ Pháp & Ví Dụ</span>
                 </button>
-                {activeCourse !== 'marugoto' && (
-                  <button
-                    onClick={() => router.push(`/lessons/${selectedLessonId}?tab=flashcards`)}
-                    className="p-3 sm:p-4 rounded-xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none hover:bg-slate-100 dark:hover:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
-                  >
-                    <span className="block text-xl sm:text-2xl mb-1">🃏</span>
-                    <span className="text-[10px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300">Thẻ Nhớ Ôn Tập</span>
-                  </button>
-                )}
-                {activeCourse !== 'marugoto' && (
-                  <button
-                    onClick={() => router.push(`/lessons/${selectedLessonId}?tab=kaiwa`)}
-                    className="p-3 sm:p-4 rounded-xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none hover:bg-slate-100 dark:hover:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"
-                  >
-                    <span className="block text-xl sm:text-2xl mb-1">💬</span>
-                    <span className="text-[10px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300">Luyện Nói (Kaiwa)</span>
-                  </button>
-                )}
                 <button
                   onClick={() => router.push(`/lessons/${selectedLessonId}?tab=practice`)}
                   className="p-3 sm:p-4 rounded-xl bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none hover:bg-slate-100 dark:hover:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 text-center transition-all duration-300 cursor-pointer active:scale-[0.98]"

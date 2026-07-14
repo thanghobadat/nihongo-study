@@ -59,9 +59,7 @@ export default function GuidePage() {
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
   ];
 
   return (
@@ -221,16 +219,6 @@ export default function GuidePage() {
 
                 <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 hover:border-blue-900/60 transition-all duration-300 group">
                   <div className="flex items-center space-x-3 mb-2">
-                    <span className="text-2xl group-hover:scale-110 transition-transform">🃏</span>
-                    <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200">Flashcards</h3>
-                  </div>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-                    Học phản xạ nhận diện nhanh qua thẻ lật hai mặt. Hỗ trợ đảo thẻ ngẫu nhiên để rèn luyện trí nhớ hiệu quả nhất.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 hover:border-blue-900/60 transition-all duration-300 group">
-                  <div className="flex items-center space-x-3 mb-2">
                     <span className="text-2xl group-hover:scale-110 transition-transform">✏️</span>
                     <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200">Ôn tập từ vựng</h3>
                   </div>
@@ -241,21 +229,11 @@ export default function GuidePage() {
 
                 <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 hover:border-blue-900/60 transition-all duration-300 group">
                   <div className="flex items-center space-x-3 mb-2">
-                    <span className="text-2xl group-hover:scale-110 transition-transform">💬</span>
-                    <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200">Luyện nói (Kaiwa)</h3>
-                  </div>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-                    Thực hành đóng vai nhân vật hội thoại trong các ngữ cảnh đời thường thực tế, hỗ trợ luyện Shadowing giúp tăng phản xạ nói.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 hover:border-blue-900/60 transition-all duration-300 group sm:col-span-2">
-                  <div className="flex items-center space-x-3 mb-2">
                     <span className="text-2xl group-hover:scale-110 transition-transform">🔤</span>
                     <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200">Ôn bảng chữ cái</h3>
                   </div>
                   <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-                    Nền tảng vững chắc cho người mới học. Rèn luyện phản xạ ghi nhớ Hiragana/Katakana qua trò chơi phản xạ Speedrun và Lật bài Memory Match thú vị.
+                    Học bảng chữ Hiragana và Katakana cho người mới bắt đầu qua flashcards và các bài test viết/nghe tương tác.
                   </p>
                 </div>
 
@@ -309,19 +287,9 @@ export default function GuidePage() {
                 <div className="relative">
                   <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-200 dark:border-slate-800 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 4</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200">Rèn luyện phản xạ qua Flashcards</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200">Luyện tập thế từ vào mẫu câu</h4>
                   <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 leading-relaxed">
-                    Lật thẻ trong **Flashcards** để củng cố khả năng nhận diện mặt chữ nhanh và bảo đảm bạn đã thuộc lòng từ vựng trước khi thực hành viết câu.
-                  </p>
-                </div>
-
-                {/* Step 5 */}
-                <div className="relative">
-                  <div className="absolute -left-[27px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-200 dark:border-slate-800 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                  <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest block mb-0.5">Bước 5</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200">Thế từ vào mẫu câu & Luyện Kaiwa</h4>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 leading-relaxed">
-                    Quay lại **Lộ trình học** để làm bài luyện tập thế từ mẫu câu (Sub-drill), rồi chuyển tiếp sang **Luyện nói (Kaiwa)** để nhập vai đàm thoại. Lặp lại quy trình đến khi làm chủ toàn bộ bài học!
+                    Quay lại **Lộ trình học** để làm bài luyện tập thế từ mẫu câu (Sub-drill) giúp củng cố kiến thức và khả năng đặt câu linh hoạt.
                   </p>
                 </div>
 

@@ -230,9 +230,7 @@ export default function RoadmapPage() {
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: true },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
   ];
 
   const filteredLessons = lessons.filter(l => {
@@ -640,9 +638,7 @@ export default function RoadmapPage() {
                   <li>Xem tổng quát các mẫu ngữ pháp để hiểu ý nghĩa cấu trúc.</li>
                   <li>Nhấp chuột vào nút <strong className="text-slate-700 dark:text-slate-200">"Học từ vựng mới"</strong> để học các từ bổ trợ trực tiếp cho mẫu ngữ pháp đó.</li>
                   <li>Làm tương tự với chữ Hán để nắm chắc cách viết.</li>
-                  {activeCourse !== 'marugoto' && (
-                    <li>Chuyển sang phân hệ <strong className="text-slate-700 dark:text-slate-200">Luyện nói (Kaiwa)</strong> để thực hành nói mẫu câu đã học trong hội thoại thực tế.</li>
-                  )}
+
                 </ol>
               </div>
             </div>

@@ -839,9 +839,7 @@ export default function KnowledgeHubPage() {
     { name: 'Lộ trình học', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
-    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Flashcards', id: 'flashcards', icon: '🃏', active: false },
-    { name: 'Luyện nói (Kaiwa)', id: 'kaiwa', icon: '💬', active: false }
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false }
   ];
 
   return (
