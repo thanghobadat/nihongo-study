@@ -303,6 +303,25 @@ CREATE POLICY "Allow user full access to own exam results" ON public.user_exam_r
   FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 
+-- 15. Create Lesson Reviews Table (Comprehensive Review Exercises)
+CREATE TABLE public.lesson_reviews (
+  id SERIAL PRIMARY KEY,
+  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE UNIQUE,
+  translations JSONB NOT NULL DEFAULT '[]'::jsonb,
+  dialogues JSONB NOT NULL DEFAULT '[]'::jsonb,
+  listenings JSONB NOT NULL DEFAULT '[]'::jsonb,
+  dictations JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.lesson_reviews ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read of lesson_reviews" ON public.lesson_reviews FOR SELECT USING (true);
+CREATE POLICY "Admin write access lesson_reviews" ON public.lesson_reviews FOR ALL USING (
+  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+);
+
+
+
 
 
 

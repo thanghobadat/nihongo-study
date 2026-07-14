@@ -852,6 +852,75 @@ router.get('/lessons/:lessonId/culture', async (req, res) => {
   }
 });
 
+/**
+ * GET /api/user/lessons/:lessonId/review
+ * Fetch shuffle review questions for a lesson
+ */
+router.get('/lessons/:lessonId/review', async (req, res) => {
+  try {
+    const lessonId = parseInt(req.params.lessonId);
+    let reviewData = null;
+
+    // Local Mode
+    if (req.user.isMock) {
+      reviewData = (mockDb.lessonReviews || []).find(item => item.lesson_id === lessonId);
+    } else {
+      // Cloud Supabase Mode
+      const { data, error } = await supabase
+        .from('lesson_reviews')
+        .select('*')
+        .eq('lesson_id', lessonId)
+        .maybeSingle();
+
+      if (error) {
+        console.warn('lesson_reviews read error, falling back to mockDb:', error.message);
+      }
+      reviewData = data || (mockDb.lessonReviews || []).find(item => item.lesson_id === lessonId);
+    }
+
+    if (!reviewData) {
+      return res.status(404).json({ error: 'Không tìm thấy dữ liệu ôn tập cho bài này.' });
+    }
+
+    // Thực hiện thuật toán Fisher-Yates shuffle (tráo ngẫu nhiên tuyệt đối) động ở backend
+    const shuffleArray = (arr) => {
+      if (!Array.isArray(arr)) return [];
+      const newArr = [...arr];
+      for (let i = newArr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+      }
+      return newArr;
+    };
+
+    // Dạng 1: Dịch câu hai chiều (Trả về toàn bộ 80 câu đã tráo ngẫu nhiên)
+    const translationsPool = reviewData.translations || [];
+    const jaToVi = shuffleArray(translationsPool.filter(t => t.direction === 'ja-to-vi'));
+    const viToJa = shuffleArray(translationsPool.filter(t => t.direction === 'vi-to-ja'));
+    const selectedTranslations = shuffleArray([...jaToVi, ...viToJa]);
+
+    // Dạng 2: Hoàn thiện hội thoại (Trả về toàn bộ 40 đoạn đã tráo ngẫu nhiên)
+    const selectedDialogues = shuffleArray(reviewData.dialogues || []);
+
+    // Dạng 3: Nghe hiểu đoạn văn/đối thoại dài (Trả về toàn bộ 40 bài nghe đã tráo ngẫu nhiên)
+    const selectedListenings = shuffleArray(reviewData.listenings || []);
+
+    // Dạng 4: Nghe viết chính tả (Trả về toàn bộ 40 câu đã tráo ngẫu nhiên)
+    const selectedDictations = shuffleArray(reviewData.dictations || []);
+
+    res.json({
+      lesson_id: lessonId,
+      translations: selectedTranslations,
+      dialogues: selectedDialogues,
+      listenings: selectedListenings,
+      dictations: selectedDictations
+    });
+  } catch (error) {
+    console.error('Error fetching lesson reviews:', error);
+    res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
 // --- HELPER FUNCTIONS FOR LOCAL MOCK CUSTOM ITEMS ---
 const fs = require('fs');
 const path = require('path');
