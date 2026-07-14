@@ -4702,7 +4702,7 @@ const renderInteractivePractice = () => {
 
                 {/* 1. Header Toolbar Controls */}
 
-                <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
+                <div className="relative z-20 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
 
@@ -4841,7 +4841,7 @@ const renderInteractivePractice = () => {
 
                           {/* Dropdown: Lọc trạng thái ôn tập */}
 
-                          <div id="practice-dropdown-container" className="relative">
+                          <div id="practice-dropdown-container" className="relative z-30">
 
                             <button
 
@@ -5677,7 +5677,7 @@ const renderInteractivePractice = () => {
 
                     {!speedrunActive && !speedrunGameOver && (
 
-                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
+                      <div className="relative z-20 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
 
                         <div className="space-y-2">
 
@@ -5699,7 +5699,7 @@ const renderInteractivePractice = () => {
 
                           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider block">Bộ lọc từ vựng ({speedrunSourceList.length} từ sẵn sàng)</span>
 
-                          <div id="speedrun-dropdown-container" className="relative flex justify-center">
+                          <div id="speedrun-dropdown-container" className="relative flex justify-center z-30">
 
                             <button
 
