@@ -116,6 +116,16 @@ async function runSeed() {
     }));
     await seedTable('culture_topics', cultureData, ['id']);
 
+    // 8. Seed lesson_reviews
+    const reviewData = mockDb.lessonReviews.map(r => ({
+      lesson_id: r.lesson_id,
+      translations: r.translations || [],
+      dialogues: r.dialogues || [],
+      listenings: r.listenings || [],
+      dictations: r.dictations || []
+    }));
+    await seedTable('lesson_reviews', reviewData, ['lesson_id']);
+
     console.log('\n🎉 Supabase database seeded successfully!');
   } catch (error) {
     console.error('\n❌ Seeding process failed:', error.message);

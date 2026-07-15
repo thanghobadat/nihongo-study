@@ -11106,9 +11106,101 @@ const renderInteractivePractice = () => {
                                       : (reviewGraded[key1] || reviewGraded[key2] ? '⚠️ Đúng một phần.' : '❌ Chưa chính xác.')}
                                   </span>
                                 </div>
-                                <span className="text-xs font-normal text-slate-300 mt-1">
+                                <span className="text-xs font-normal text-slate-350 mt-1">
                                   {reviewFeedback[`diag_${current.id}`]}
                                 </span>
+                              </div>
+
+                              {/* Bảng thông tin chi tiết giải thích cho đoạn hội thoại */}
+                              <div className="bg-slate-950/80 p-5 rounded-xl border border-slate-850 space-y-4 animate-fade-in text-sm text-slate-200">
+                                {/* 1. Dịch nghĩa & Phiên âm đoạn hội thoại */}
+                                <div className="space-y-2">
+                                  <h4 className="text-sky-400 font-bold flex items-center gap-1.5 text-xs uppercase tracking-wider">
+                                    💬 Phiên âm & Dịch nghĩa hội thoại
+                                  </h4>
+                                  <div className="space-y-3 pl-2.5 border-l-2 border-slate-800">
+                                    {current.lines.map((line: any, idx: number) => {
+                                      const textToFill = reviewShowKanji ? line.text_output : line.text_kana;
+                                      const b1Val = current.blanks.blank1.correct;
+                                      const b2Val = current.blanks.blank2.correct;
+                                      const filledText = textToFill
+                                        .replace('[blank1]', b1Val)
+                                        .replace('[blank2]', b2Val);
+
+                                      return (
+                                        <div key={idx} className="space-y-0.5">
+                                          <div className="font-semibold text-slate-100 flex items-center gap-2">
+                                            <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300 font-mono">{line.speaker}</span>
+                                            <span>{filledText}</span>
+                                          </div>
+                                          {line.romaji && (
+                                            <div className="text-xs text-slate-400 italic pl-6">{line.romaji}</div>
+                                          )}
+                                          {line.translation && (
+                                            <div className="text-xs text-slate-300 pl-6">{line.translation}</div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+
+                                {/* 2. Giải nghĩa các đáp án và giải thích */}
+                                <div className="space-y-3 border-t border-slate-900 pt-3">
+                                  <h4 className="text-sky-400 font-bold flex items-center gap-1.5 text-xs uppercase tracking-wider">
+                                    🔍 Giải nghĩa & Giải thích đáp án
+                                  </h4>
+                                  
+                                  {/* Vị trí (1) */}
+                                  <div className="space-y-1.5 pl-2.5 border-l-2 border-indigo-500/30">
+                                    <div className="text-xs font-bold text-indigo-400">Vị trí (1):</div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                                      {current.blanks.blank1.options.map((opt: string, oIdx: number) => {
+                                        const label = ['A', 'B', 'C', 'D'][oIdx];
+                                        const meaning = current.blanks.blank1.options_translations?.[opt] || 'Chưa có bản dịch';
+                                        const isCorrect = current.blanks.blank1.correct === opt;
+                                        return (
+                                          <div key={oIdx} className={`flex items-center gap-1.5 py-0.5 ${isCorrect ? 'text-emerald-400 font-semibold' : 'text-slate-400'}`}>
+                                            <span className="font-bold">{label}. {opt}</span>
+                                            <span className="text-slate-500">→</span>
+                                            <span>{meaning}</span>
+                                            {isCorrect && <span>(Đúng)</span>}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                    {current.blanks.blank1.explanation && (
+                                      <div className="text-xs text-slate-400 italic mt-1 bg-slate-900/40 p-2 rounded border border-slate-900/80">
+                                        💡 {current.blanks.blank1.explanation}
+                                      </div>
+                                    )}
+                                  </div>
+
+                                  {/* Vị trí (2) */}
+                                  <div className="space-y-1.5 pl-2.5 border-l-2 border-purple-500/30 border-t border-slate-900/50 pt-2">
+                                    <div className="text-xs font-bold text-purple-400">Vị trí (2):</div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                                      {current.blanks.blank2.options.map((opt: string, oIdx: number) => {
+                                        const label = ['A', 'B', 'C', 'D'][oIdx];
+                                        const meaning = current.blanks.blank2.options_translations?.[opt] || 'Chưa có bản dịch';
+                                        const isCorrect = current.blanks.blank2.correct === opt;
+                                        return (
+                                          <div key={oIdx} className={`flex items-center gap-1.5 py-0.5 ${isCorrect ? 'text-emerald-400 font-semibold' : 'text-slate-400'}`}>
+                                            <span className="font-bold">{label}. {opt}</span>
+                                            <span className="text-slate-500">→</span>
+                                            <span>{meaning}</span>
+                                            {isCorrect && <span>(Đúng)</span>}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                    {current.blanks.blank2.explanation && (
+                                      <div className="text-xs text-slate-400 italic mt-1 bg-slate-900/40 p-2 rounded border border-slate-900/80">
+                                        💡 {current.blanks.blank2.explanation}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
 
                               <button

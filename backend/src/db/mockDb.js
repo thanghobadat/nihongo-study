@@ -31625,23 +31625,35 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。"
+                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。"
+                        "text_output": "ミラーです。どうぞ [blank2]。",
+                        "romaji": "Miraa desu. Douzo [blank2].",
+                        "translation": "Tôi là Miller. Rất mong được [blank2]."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "なん(何)",
+                        "correct": "なん",
                         "options": [
                             "なん",
                             "だれ",
                             "どなた",
                             "どこ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "なん": "cái gì / gì",
+                            "だれ": "ai",
+                            "どなた": "ai (lịch sự)",
+                            "đâu": "đâu (tiếng Việt)",
+                            "どこ": "どこ (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
                     },
                     "blank2": {
                         "correct": "よろしく",
@@ -31650,7 +31662,14 @@ const lessonReviews = [
                             "おねがい",
                             "きました",
                             "こちら"
-                        ]
+                        ],
+                        "options_translations": {
+                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                            "おねがい": "yêu cầu / nhờ vả",
+                            "きました": "đã đến",
+                            "こちら": "đây / phía này"
+                        },
+                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
                     }
                 }
             },
@@ -31661,32 +31680,52 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。"
+                        "text_output": "カリナさんは ブラジルから [blank1]。",
+                        "romaji": "Karina san wa Burajiru kara [blank1]?",
+                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。"
+                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "きましたか(来ましたか)",
+                        "correct": "きましたか",
                         "options": [
                             "きましたか",
                             "きました",
                             "ですか",
                             "でした"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                            "きました": "đã đến (quá khứ)",
+                            "ですか": "là phải không? (nghi vấn hiện tại)",
+                            "でした": "đã là (quá khứ của です)"
+                        },
+                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
                     },
                     "blank2": {
-                        "correct": "きませんでした(来ませんでした)",
+                        "correct": "きませんでした",
                         "options": [
                             "きませんでした",
                             "きました",
                             "じゃありません",
                             "です"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きませんでした": "đã không đến (phủ định quá khứ)",
+                            "きました": "đã đến (khẳng định quá khứ)",
+                            "chưa": "chưa (tiếng Việt)",
+                            "đến": "đến (tiếng Việt)",
+                            "じゃありません": "じゃありません (tiếng Việt)",
+                            "です": "です (tiếng Việt)"
+                        },
+                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
                     }
                 }
             },
@@ -31697,12 +31736,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。"
+                        "text_output": "山田さん、[blank1] は ワンさんです。",
+                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                        "translation": "Anh Yamada, [blank1] là anh Wang."
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。"
+                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
                     }
                 ],
                 "blanks": {
@@ -31713,7 +31756,16 @@ const lessonReviews = [
                             "わたし",
                             "あなた",
                             "あのかた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "こちら": "đây / vị này (lịch sự)",
+                            "わたし": "tôi",
+                            "cậu": "cậu (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "あなた": "あなた (tiếng Việt)",
+                            "あのかた": "あのかた (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
                     },
                     "blank2": {
                         "correct": "から",
@@ -31722,7 +31774,17 @@ const lessonReviews = [
                             "の",
                             "は",
                             "も"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "của": "của (tiếng Việt)",
+                            "thì": "thì (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "も": "も (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
                     }
                 }
             },
@@ -31733,12 +31795,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。"
+                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。"
+                        "text_output": "太郎は 9 [blank2] です。",
+                        "romaji": "Tarou wa kyuu [blank2] desu.",
+                        "translation": "Taro thì 9 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -31749,16 +31815,36 @@ const lessonReviews = [
                             "の",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "đâu": "đâu (tiếng Việt)",
+                            "đó": "đó (tiếng Việt)",
+                            "được": "được (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "も": "も (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "せんせい",
                             "しゃいん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "cháu": "cháu (tiếng Việt)",
+                            "học": "học (tiếng Việt)",
+                            "sinh": "sinh (tiếng Việt)",
+                            "じん": "じん (tiếng Việt)",
+                            "せんせい": "せんせい (tiếng Việt)",
+                            "しゃいん": "しゃいん (tiếng Việt)"
+                        },
+                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
                     }
                 }
             },
@@ -31769,12 +31855,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。"
+                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。"
+                        "text_output": "はい、サントスさん [blank2] 会社員です。",
+                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -31785,7 +31875,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "cũng": "cũng (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "và": "và (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
                     },
                     "blank2": {
                         "correct": "も",
@@ -31794,7 +31894,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "công": "công (tiếng Việt)",
+                            "ty": "ty (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
                     }
                 }
             },
@@ -31805,12 +31915,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。"
+                        "text_output": "アリさんは 学生 ですか。",
+                        "romaji": "Ari san wa gakusei desu ka?",
+                        "translation": "Anh Ali là học sinh phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。"
+                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -31821,7 +31935,14 @@ const lessonReviews = [
                             "です",
                             "も",
                             "の"
-                        ]
+                        ],
+                        "options_translations": {
+                            "じゃありません": "không phải là (phủ định)",
+                            "です": "là",
+                            "も": "cũng",
+                            "の": "của"
+                        },
+                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
                     },
                     "blank2": {
                         "correct": "です",
@@ -31830,7 +31951,14 @@ const lessonReviews = [
                             "も",
                             "じゃありません",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "です": "là",
+                            "も": "cũng",
+                            "じゃありません": "không phải là (phủ định)",
+                            "から": "từ"
+                        },
+                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
                     }
                 }
             },
@@ -31841,12 +31969,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。"
+                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。"
+                        "text_output": "はい、パワー電気の [blank2] です。",
+                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
                     }
                 ],
                 "blanks": {
@@ -31857,16 +31989,30 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
                     },
                     "blank2": {
-                        "correct": "しゃいん(社員)",
+                        "correct": "しゃいん",
                         "options": [
                             "しゃいん",
                             "がくせい",
                             "せんせい",
                             "いしゃ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "しゃいん": "nhân viên công ty",
+                            "がくせい": "học sinh / sinh viên",
+                            "せんせい": "giáo viên",
+                            "いしゃ": "bác sĩ"
+                        },
+                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
                     }
                 }
             },
@@ -31877,12 +32023,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。"
+                        "text_output": "ミラーさんは 何歳 [blank1]。",
+                        "romaji": "Miraa san wa nansai [blank1]?",
+                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。"
+                        "text_output": "私は 28 [blank2] です。",
+                        "romaji": "Watashi wa 28 [blank2] desu.",
+                        "translation": "Tôi 28 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -31893,16 +32043,30 @@ const lessonReviews = [
                             "も",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "も": "cũng",
+                            "の": "của",
+                            "から": "từ"
+                        },
+                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "さい",
                             "年"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "じん": "người (quốc tịch)",
+                            "年": "năm",
+                            "歳": "tuổi"
+                        },
+                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
                     }
                 }
             },
@@ -31913,12 +32077,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。"
+                        "text_output": "あの人は [blank1] ですか。",
+                        "romaji": "Ano hito wa [blank1] desu ka?",
+                        "translation": "Người kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。"
+                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
                     }
                 ],
                 "blanks": {
@@ -31929,7 +32097,14 @@ const lessonReviews = [
                             "なん",
                             "おいくつ",
                             "どなた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "だれ": "ai",
+                            "なん": "gì / cái gì",
+                            "おいくつ": "bao nhiêu tuổi",
+                            "どなた": "ai (lịch sự)"
+                        },
+                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
                     },
                     "blank2": {
                         "correct": "から",
@@ -31938,7 +32113,14 @@ const lessonReviews = [
                             "の",
                             "も",
                             "きました"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "の": "của",
+                            "も": "cũng",
+                            "きました": "đã đến"
+                        },
+                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
                     }
                 }
             },
@@ -31949,12 +32131,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。"
+                        "text_output": "あの方は [blank1] ですか。",
+                        "romaji": "Ano kata wa [blank1] desu ka?",
+                        "translation": "Vị kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。"
+                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
                     }
                 ],
                 "blanks": {
@@ -31965,7 +32151,15 @@ const lessonReviews = [
                             "だれ",
                             "なんさい",
                             "なにじん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "どなた": "vị nào / ai (lịch sự)",
+                            "だれ": "ai",
+                            "nam": "Nam",
+                            "なにじん": "người nước nào",
+                            "なんさい": "なんさい (tiếng Việt)"
+                        },
+                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
                     },
                     "blank2": {
                         "correct": "の",
@@ -31974,7 +32168,14 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
                     }
                 }
             },
@@ -31985,23 +32186,35 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。"
+                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。"
+                        "text_output": "ミラーです。どうぞ [blank2]。",
+                        "romaji": "Miraa desu. Douzo [blank2].",
+                        "translation": "Tôi là Miller. Rất mong được [blank2]."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "なん(何)",
+                        "correct": "なん",
                         "options": [
                             "なん",
                             "だれ",
                             "どなた",
                             "どこ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "なん": "cái gì / gì",
+                            "だれ": "ai",
+                            "どなた": "ai (lịch sự)",
+                            "đâu": "đâu (tiếng Việt)",
+                            "どこ": "どこ (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
                     },
                     "blank2": {
                         "correct": "よろしく",
@@ -32010,7 +32223,14 @@ const lessonReviews = [
                             "おねがい",
                             "きました",
                             "こちら"
-                        ]
+                        ],
+                        "options_translations": {
+                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                            "おねがい": "yêu cầu / nhờ vả",
+                            "きました": "đã đến",
+                            "こちら": "đây / phía này"
+                        },
+                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
                     }
                 }
             },
@@ -32021,32 +32241,52 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。"
+                        "text_output": "カリナさんは ブラジルから [blank1]。",
+                        "romaji": "Karina san wa Burajiru kara [blank1]?",
+                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。"
+                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "きましたか(来ましたか)",
+                        "correct": "きましたか",
                         "options": [
                             "きましたか",
                             "きました",
                             "ですか",
                             "でした"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                            "きました": "đã đến (quá khứ)",
+                            "ですか": "là phải không? (nghi vấn hiện tại)",
+                            "でした": "đã là (quá khứ của です)"
+                        },
+                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
                     },
                     "blank2": {
-                        "correct": "きませんでした(来ませんでした)",
+                        "correct": "きませんでした",
                         "options": [
                             "きませんでした",
                             "きました",
                             "じゃありません",
                             "です"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きませんでした": "đã không đến (phủ định quá khứ)",
+                            "きました": "đã đến (khẳng định quá khứ)",
+                            "chưa": "chưa (tiếng Việt)",
+                            "đến": "đến (tiếng Việt)",
+                            "じゃありません": "じゃありません (tiếng Việt)",
+                            "です": "です (tiếng Việt)"
+                        },
+                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
                     }
                 }
             },
@@ -32057,12 +32297,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。"
+                        "text_output": "山田さん、[blank1] は ワンさんです。",
+                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                        "translation": "Anh Yamada, [blank1] là anh Wang."
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。"
+                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
                     }
                 ],
                 "blanks": {
@@ -32073,7 +32317,16 @@ const lessonReviews = [
                             "わたし",
                             "あなた",
                             "あのかた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "こちら": "đây / vị này (lịch sự)",
+                            "わたし": "tôi",
+                            "cậu": "cậu (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "あなた": "あなた (tiếng Việt)",
+                            "あのかた": "あのかた (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
                     },
                     "blank2": {
                         "correct": "から",
@@ -32082,7 +32335,17 @@ const lessonReviews = [
                             "の",
                             "は",
                             "も"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "của": "của (tiếng Việt)",
+                            "thì": "thì (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "も": "も (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
                     }
                 }
             },
@@ -32093,12 +32356,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。"
+                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。"
+                        "text_output": "太郎は 9 [blank2] です。",
+                        "romaji": "Tarou wa kyuu [blank2] desu.",
+                        "translation": "Taro thì 9 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -32109,16 +32376,36 @@ const lessonReviews = [
                             "の",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "đâu": "đâu (tiếng Việt)",
+                            "đó": "đó (tiếng Việt)",
+                            "được": "được (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "も": "も (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "せんせい",
                             "しゃいん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "cháu": "cháu (tiếng Việt)",
+                            "học": "học (tiếng Việt)",
+                            "sinh": "sinh (tiếng Việt)",
+                            "じん": "じん (tiếng Việt)",
+                            "せんせい": "せんせい (tiếng Việt)",
+                            "しゃいん": "しゃいん (tiếng Việt)"
+                        },
+                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
                     }
                 }
             },
@@ -32129,12 +32416,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。"
+                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。"
+                        "text_output": "はい、サントスさん [blank2] 会社員です。",
+                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -32145,7 +32436,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "cũng": "cũng (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "và": "và (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
                     },
                     "blank2": {
                         "correct": "も",
@@ -32154,7 +32455,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "công": "công (tiếng Việt)",
+                            "ty": "ty (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
                     }
                 }
             },
@@ -32165,12 +32476,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。"
+                        "text_output": "アリさんは 学生 ですか。",
+                        "romaji": "Ari san wa gakusei desu ka?",
+                        "translation": "Anh Ali là học sinh phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。"
+                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -32181,7 +32496,14 @@ const lessonReviews = [
                             "です",
                             "も",
                             "の"
-                        ]
+                        ],
+                        "options_translations": {
+                            "じゃありません": "không phải là (phủ định)",
+                            "です": "là",
+                            "も": "cũng",
+                            "の": "của"
+                        },
+                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
                     },
                     "blank2": {
                         "correct": "です",
@@ -32190,7 +32512,14 @@ const lessonReviews = [
                             "も",
                             "じゃありません",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "です": "là",
+                            "も": "cũng",
+                            "じゃありません": "không phải là (phủ định)",
+                            "から": "từ"
+                        },
+                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
                     }
                 }
             },
@@ -32201,12 +32530,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。"
+                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。"
+                        "text_output": "はい、パワー電気の [blank2] です。",
+                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
                     }
                 ],
                 "blanks": {
@@ -32217,16 +32550,30 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
                     },
                     "blank2": {
-                        "correct": "しゃいん(社員)",
+                        "correct": "しゃいん",
                         "options": [
                             "しゃいん",
                             "がくせい",
                             "せんせい",
                             "いしゃ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "しゃいん": "nhân viên công ty",
+                            "がくせい": "học sinh / sinh viên",
+                            "せんせい": "giáo viên",
+                            "いしゃ": "bác sĩ"
+                        },
+                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
                     }
                 }
             },
@@ -32237,12 +32584,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。"
+                        "text_output": "ミラーさんは 何歳 [blank1]。",
+                        "romaji": "Miraa san wa nansai [blank1]?",
+                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。"
+                        "text_output": "私は 28 [blank2] です。",
+                        "romaji": "Watashi wa 28 [blank2] desu.",
+                        "translation": "Tôi 28 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -32253,16 +32604,30 @@ const lessonReviews = [
                             "も",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "も": "cũng",
+                            "の": "của",
+                            "から": "từ"
+                        },
+                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "さい",
                             "年"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "じん": "người (quốc tịch)",
+                            "年": "năm",
+                            "歳": "tuổi"
+                        },
+                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
                     }
                 }
             },
@@ -32273,12 +32638,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。"
+                        "text_output": "あの人は [blank1] ですか。",
+                        "romaji": "Ano hito wa [blank1] desu ka?",
+                        "translation": "Người kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。"
+                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
                     }
                 ],
                 "blanks": {
@@ -32289,7 +32658,14 @@ const lessonReviews = [
                             "なん",
                             "おいくつ",
                             "どなた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "だれ": "ai",
+                            "なん": "gì / cái gì",
+                            "おいくつ": "bao nhiêu tuổi",
+                            "どなた": "ai (lịch sự)"
+                        },
+                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
                     },
                     "blank2": {
                         "correct": "から",
@@ -32298,7 +32674,14 @@ const lessonReviews = [
                             "の",
                             "も",
                             "きました"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "の": "của",
+                            "も": "cũng",
+                            "きました": "đã đến"
+                        },
+                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
                     }
                 }
             },
@@ -32309,12 +32692,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。"
+                        "text_output": "あの方は [blank1] ですか。",
+                        "romaji": "Ano kata wa [blank1] desu ka?",
+                        "translation": "Vị kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。"
+                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
                     }
                 ],
                 "blanks": {
@@ -32325,7 +32712,15 @@ const lessonReviews = [
                             "だれ",
                             "なんさい",
                             "なにじん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "どなた": "vị nào / ai (lịch sự)",
+                            "だれ": "ai",
+                            "nam": "Nam",
+                            "なにじん": "người nước nào",
+                            "なんさい": "なんさい (tiếng Việt)"
+                        },
+                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
                     },
                     "blank2": {
                         "correct": "の",
@@ -32334,7 +32729,14 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
                     }
                 }
             },
@@ -32345,23 +32747,35 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。"
+                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。"
+                        "text_output": "ミラーです。どうぞ [blank2]。",
+                        "romaji": "Miraa desu. Douzo [blank2].",
+                        "translation": "Tôi là Miller. Rất mong được [blank2]."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "なん(何)",
+                        "correct": "なん",
                         "options": [
                             "なん",
                             "だれ",
                             "どなた",
                             "どこ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "なん": "cái gì / gì",
+                            "だれ": "ai",
+                            "どなた": "ai (lịch sự)",
+                            "đâu": "đâu (tiếng Việt)",
+                            "どこ": "どこ (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
                     },
                     "blank2": {
                         "correct": "よろしく",
@@ -32370,7 +32784,14 @@ const lessonReviews = [
                             "おねがい",
                             "きました",
                             "こちら"
-                        ]
+                        ],
+                        "options_translations": {
+                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                            "おねがい": "yêu cầu / nhờ vả",
+                            "きました": "đã đến",
+                            "こちら": "đây / phía này"
+                        },
+                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
                     }
                 }
             },
@@ -32381,32 +32802,52 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。"
+                        "text_output": "カリナさんは ブラジルから [blank1]。",
+                        "romaji": "Karina san wa Burajiru kara [blank1]?",
+                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。"
+                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "きましたか(来ましたか)",
+                        "correct": "きましたか",
                         "options": [
                             "きましたか",
                             "きました",
                             "ですか",
                             "でした"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                            "きました": "đã đến (quá khứ)",
+                            "ですか": "là phải không? (nghi vấn hiện tại)",
+                            "でした": "đã là (quá khứ của です)"
+                        },
+                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
                     },
                     "blank2": {
-                        "correct": "きませんでした(来ませんでした)",
+                        "correct": "きませんでした",
                         "options": [
                             "きませんでした",
                             "きました",
                             "じゃありません",
                             "です"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きませんでした": "đã không đến (phủ định quá khứ)",
+                            "きました": "đã đến (khẳng định quá khứ)",
+                            "chưa": "chưa (tiếng Việt)",
+                            "đến": "đến (tiếng Việt)",
+                            "じゃありません": "じゃありません (tiếng Việt)",
+                            "です": "です (tiếng Việt)"
+                        },
+                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
                     }
                 }
             },
@@ -32417,12 +32858,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。"
+                        "text_output": "山田さん、[blank1] は ワンさんです。",
+                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                        "translation": "Anh Yamada, [blank1] là anh Wang."
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。"
+                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
                     }
                 ],
                 "blanks": {
@@ -32433,7 +32878,16 @@ const lessonReviews = [
                             "わたし",
                             "あなた",
                             "あのかた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "こちら": "đây / vị này (lịch sự)",
+                            "わたし": "tôi",
+                            "cậu": "cậu (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "あなた": "あなた (tiếng Việt)",
+                            "あのかた": "あのかた (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
                     },
                     "blank2": {
                         "correct": "から",
@@ -32442,7 +32896,17 @@ const lessonReviews = [
                             "の",
                             "は",
                             "も"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "của": "của (tiếng Việt)",
+                            "thì": "thì (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "も": "も (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
                     }
                 }
             },
@@ -32453,12 +32917,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。"
+                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。"
+                        "text_output": "太郎は 9 [blank2] です。",
+                        "romaji": "Tarou wa kyuu [blank2] desu.",
+                        "translation": "Taro thì 9 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -32469,16 +32937,36 @@ const lessonReviews = [
                             "の",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "đâu": "đâu (tiếng Việt)",
+                            "đó": "đó (tiếng Việt)",
+                            "được": "được (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "も": "も (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "せんせい",
                             "しゃいん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "cháu": "cháu (tiếng Việt)",
+                            "học": "học (tiếng Việt)",
+                            "sinh": "sinh (tiếng Việt)",
+                            "じん": "じん (tiếng Việt)",
+                            "せんせい": "せんせい (tiếng Việt)",
+                            "しゃいん": "しゃいん (tiếng Việt)"
+                        },
+                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
                     }
                 }
             },
@@ -32489,12 +32977,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。"
+                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。"
+                        "text_output": "はい、サントスさん [blank2] 会社員です。",
+                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -32505,7 +32997,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "cũng": "cũng (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "và": "và (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
                     },
                     "blank2": {
                         "correct": "も",
@@ -32514,7 +33016,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "công": "công (tiếng Việt)",
+                            "ty": "ty (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
                     }
                 }
             },
@@ -32525,12 +33037,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。"
+                        "text_output": "アリさんは 学生 ですか。",
+                        "romaji": "Ari san wa gakusei desu ka?",
+                        "translation": "Anh Ali là học sinh phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。"
+                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -32541,7 +33057,14 @@ const lessonReviews = [
                             "です",
                             "も",
                             "の"
-                        ]
+                        ],
+                        "options_translations": {
+                            "じゃありません": "không phải là (phủ định)",
+                            "です": "là",
+                            "も": "cũng",
+                            "の": "của"
+                        },
+                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
                     },
                     "blank2": {
                         "correct": "です",
@@ -32550,7 +33073,14 @@ const lessonReviews = [
                             "も",
                             "じゃありません",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "です": "là",
+                            "も": "cũng",
+                            "じゃありません": "không phải là (phủ định)",
+                            "から": "từ"
+                        },
+                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
                     }
                 }
             },
@@ -32561,12 +33091,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。"
+                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。"
+                        "text_output": "はい、パワー電気の [blank2] です。",
+                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
                     }
                 ],
                 "blanks": {
@@ -32577,16 +33111,30 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
                     },
                     "blank2": {
-                        "correct": "しゃいん(社員)",
+                        "correct": "しゃいん",
                         "options": [
                             "しゃいん",
                             "がくせい",
                             "せんせい",
                             "いしゃ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "しゃいん": "nhân viên công ty",
+                            "がくせい": "học sinh / sinh viên",
+                            "せんせい": "giáo viên",
+                            "いしゃ": "bác sĩ"
+                        },
+                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
                     }
                 }
             },
@@ -32597,12 +33145,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。"
+                        "text_output": "ミラーさんは 何歳 [blank1]。",
+                        "romaji": "Miraa san wa nansai [blank1]?",
+                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。"
+                        "text_output": "私は 28 [blank2] です。",
+                        "romaji": "Watashi wa 28 [blank2] desu.",
+                        "translation": "Tôi 28 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -32613,16 +33165,30 @@ const lessonReviews = [
                             "も",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "も": "cũng",
+                            "の": "của",
+                            "から": "từ"
+                        },
+                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "さい",
                             "年"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "じん": "người (quốc tịch)",
+                            "年": "năm",
+                            "歳": "tuổi"
+                        },
+                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
                     }
                 }
             },
@@ -32633,12 +33199,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。"
+                        "text_output": "あの人は [blank1] ですか。",
+                        "romaji": "Ano hito wa [blank1] desu ka?",
+                        "translation": "Người kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。"
+                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
                     }
                 ],
                 "blanks": {
@@ -32649,7 +33219,14 @@ const lessonReviews = [
                             "なん",
                             "おいくつ",
                             "どなた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "だれ": "ai",
+                            "なん": "gì / cái gì",
+                            "おいくつ": "bao nhiêu tuổi",
+                            "どなた": "ai (lịch sự)"
+                        },
+                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
                     },
                     "blank2": {
                         "correct": "から",
@@ -32658,7 +33235,14 @@ const lessonReviews = [
                             "の",
                             "も",
                             "きました"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "の": "của",
+                            "も": "cũng",
+                            "きました": "đã đến"
+                        },
+                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
                     }
                 }
             },
@@ -32669,12 +33253,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。"
+                        "text_output": "あの方は [blank1] ですか。",
+                        "romaji": "Ano kata wa [blank1] desu ka?",
+                        "translation": "Vị kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。"
+                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
                     }
                 ],
                 "blanks": {
@@ -32685,7 +33273,15 @@ const lessonReviews = [
                             "だれ",
                             "なんさい",
                             "なにじん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "どなた": "vị nào / ai (lịch sự)",
+                            "だれ": "ai",
+                            "nam": "Nam",
+                            "なにじん": "người nước nào",
+                            "なんさい": "なんさい (tiếng Việt)"
+                        },
+                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
                     },
                     "blank2": {
                         "correct": "の",
@@ -32694,7 +33290,14 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
                     }
                 }
             },
@@ -32705,23 +33308,35 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。"
+                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。"
+                        "text_output": "ミラーです。どうぞ [blank2]。",
+                        "romaji": "Miraa desu. Douzo [blank2].",
+                        "translation": "Tôi là Miller. Rất mong được [blank2]."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "なん(何)",
+                        "correct": "なん",
                         "options": [
                             "なん",
                             "だれ",
                             "どなた",
                             "どこ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "なん": "cái gì / gì",
+                            "だれ": "ai",
+                            "どなた": "ai (lịch sự)",
+                            "đâu": "đâu (tiếng Việt)",
+                            "どこ": "どこ (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
                     },
                     "blank2": {
                         "correct": "よろしく",
@@ -32730,7 +33345,14 @@ const lessonReviews = [
                             "おねがい",
                             "きました",
                             "こちら"
-                        ]
+                        ],
+                        "options_translations": {
+                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                            "おねがい": "yêu cầu / nhờ vả",
+                            "きました": "đã đến",
+                            "こちら": "đây / phía này"
+                        },
+                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
                     }
                 }
             },
@@ -32741,32 +33363,52 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。"
+                        "text_output": "カリナさんは ブラジルから [blank1]。",
+                        "romaji": "Karina san wa Burajiru kara [blank1]?",
+                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。"
+                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
                     }
                 ],
                 "blanks": {
                     "blank1": {
-                        "correct": "きましたか(来ましたか)",
+                        "correct": "きましたか",
                         "options": [
                             "きましたか",
                             "きました",
                             "ですか",
                             "でした"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                            "きました": "đã đến (quá khứ)",
+                            "ですか": "là phải không? (nghi vấn hiện tại)",
+                            "でした": "đã là (quá khứ của です)"
+                        },
+                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
                     },
                     "blank2": {
-                        "correct": "きませんでした(来ませんでした)",
+                        "correct": "きませんでした",
                         "options": [
                             "きませんでした",
                             "きました",
                             "じゃありません",
                             "です"
-                        ]
+                        ],
+                        "options_translations": {
+                            "きませんでした": "đã không đến (phủ định quá khứ)",
+                            "きました": "đã đến (khẳng định quá khứ)",
+                            "chưa": "chưa (tiếng Việt)",
+                            "đến": "đến (tiếng Việt)",
+                            "じゃありません": "じゃありません (tiếng Việt)",
+                            "です": "です (tiếng Việt)"
+                        },
+                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
                     }
                 }
             },
@@ -32777,12 +33419,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。"
+                        "text_output": "山田さん、[blank1] は ワンさんです。",
+                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                        "translation": "Anh Yamada, [blank1] là anh Wang."
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。"
+                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
                     }
                 ],
                 "blanks": {
@@ -32793,7 +33439,16 @@ const lessonReviews = [
                             "わたし",
                             "あなた",
                             "あのかた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "こちら": "đây / vị này (lịch sự)",
+                            "わたし": "tôi",
+                            "cậu": "cậu (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "あなた": "あなた (tiếng Việt)",
+                            "あのかた": "あのかた (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
                     },
                     "blank2": {
                         "correct": "から",
@@ -32802,7 +33457,17 @@ const lessonReviews = [
                             "の",
                             "は",
                             "も"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "của": "của (tiếng Việt)",
+                            "thì": "thì (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "も": "も (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
                     }
                 }
             },
@@ -32813,12 +33478,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。"
+                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。"
+                        "text_output": "太郎は 9 [blank2] です。",
+                        "romaji": "Tarou wa kyuu [blank2] desu.",
+                        "translation": "Taro thì 9 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -32829,16 +33498,36 @@ const lessonReviews = [
                             "の",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "đâu": "đâu (tiếng Việt)",
+                            "đó": "đó (tiếng Việt)",
+                            "được": "được (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "も": "も (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "せんせい",
                             "しゃいん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "cháu": "cháu (tiếng Việt)",
+                            "học": "học (tiếng Việt)",
+                            "sinh": "sinh (tiếng Việt)",
+                            "じん": "じん (tiếng Việt)",
+                            "せんせい": "せんせい (tiếng Việt)",
+                            "しゃいん": "しゃいん (tiếng Việt)"
+                        },
+                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
                     }
                 }
             },
@@ -32849,12 +33538,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。"
+                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。"
+                        "text_output": "はい、サントスさん [blank2] 会社員です。",
+                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -32865,7 +33558,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "cũng": "cũng (tiếng Việt)",
+                            "là": "là (tiếng Việt)",
+                            "và": "và (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
                     },
                     "blank2": {
                         "correct": "も",
@@ -32874,7 +33577,17 @@ const lessonReviews = [
                             "は",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "も": "cũng",
+                            "công": "công (tiếng Việt)",
+                            "ty": "ty (tiếng Việt)",
+                            "mình": "mình (tiếng Việt)",
+                            "は": "は (tiếng Việt)",
+                            "の": "の (tiếng Việt)",
+                            "から": "から (tiếng Việt)"
+                        },
+                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
                     }
                 }
             },
@@ -32885,12 +33598,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。"
+                        "text_output": "アリさんは 学生 ですか。",
+                        "romaji": "Ari san wa gakusei desu ka?",
+                        "translation": "Anh Ali là học sinh phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。"
+                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
                     }
                 ],
                 "blanks": {
@@ -32901,7 +33618,14 @@ const lessonReviews = [
                             "です",
                             "も",
                             "の"
-                        ]
+                        ],
+                        "options_translations": {
+                            "じゃありません": "không phải là (phủ định)",
+                            "です": "là",
+                            "も": "cũng",
+                            "の": "của"
+                        },
+                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
                     },
                     "blank2": {
                         "correct": "です",
@@ -32910,7 +33634,14 @@ const lessonReviews = [
                             "も",
                             "じゃありません",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "です": "là",
+                            "も": "cũng",
+                            "じゃありません": "không phải là (phủ định)",
+                            "から": "từ"
+                        },
+                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
                     }
                 }
             },
@@ -32921,12 +33652,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。"
+                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。"
+                        "text_output": "はい、パワー電気の [blank2] です。",
+                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
                     }
                 ],
                 "blanks": {
@@ -32937,16 +33672,30 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
                     },
                     "blank2": {
-                        "correct": "しゃいん(社員)",
+                        "correct": "しゃいん",
                         "options": [
                             "しゃいん",
                             "がくせい",
                             "せんせい",
                             "いしゃ"
-                        ]
+                        ],
+                        "options_translations": {
+                            "しゃいん": "nhân viên công ty",
+                            "がくせい": "học sinh / sinh viên",
+                            "せんせい": "giáo viên",
+                            "いしゃ": "bác sĩ"
+                        },
+                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
                     }
                 }
             },
@@ -32957,12 +33706,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。"
+                        "text_output": "ミラーさんは 何歳 [blank1]。",
+                        "romaji": "Miraa san wa nansai [blank1]?",
+                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。"
+                        "text_output": "私は 28 [blank2] です。",
+                        "romaji": "Watashi wa 28 [blank2] desu.",
+                        "translation": "Tôi 28 [blank2]."
                     }
                 ],
                 "blanks": {
@@ -32973,16 +33726,30 @@ const lessonReviews = [
                             "も",
                             "の",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "ですか": "phải không? / là không?",
+                            "も": "cũng",
+                            "の": "của",
+                            "から": "từ"
+                        },
+                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
                     },
                     "blank2": {
-                        "correct": "さい(歳)",
+                        "correct": "さい",
                         "options": [
                             "さい",
                             "じん",
                             "さい",
                             "年"
-                        ]
+                        ],
+                        "options_translations": {
+                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                            "じん": "người (quốc tịch)",
+                            "年": "năm",
+                            "歳": "tuổi"
+                        },
+                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
                     }
                 }
             },
@@ -32993,12 +33760,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。"
+                        "text_output": "あの人は [blank1] ですか。",
+                        "romaji": "Ano hito wa [blank1] desu ka?",
+                        "translation": "Người kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。"
+                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
                     }
                 ],
                 "blanks": {
@@ -33009,7 +33780,14 @@ const lessonReviews = [
                             "なん",
                             "おいくつ",
                             "どなた"
-                        ]
+                        ],
+                        "options_translations": {
+                            "だれ": "ai",
+                            "なん": "gì / cái gì",
+                            "おいくつ": "bao nhiêu tuổi",
+                            "どなた": "ai (lịch sự)"
+                        },
+                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
                     },
                     "blank2": {
                         "correct": "から",
@@ -33018,7 +33796,14 @@ const lessonReviews = [
                             "の",
                             "も",
                             "きました"
-                        ]
+                        ],
+                        "options_translations": {
+                            "から": "từ",
+                            "の": "của",
+                            "も": "cũng",
+                            "きました": "đã đến"
+                        },
+                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
                     }
                 }
             },
@@ -33029,12 +33814,16 @@ const lessonReviews = [
                     {
                         "speaker": "A",
                         "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。"
+                        "text_output": "あの方は [blank1] ですか。",
+                        "romaji": "Ano kata wa [blank1] desu ka?",
+                        "translation": "Vị kia là [blank1] phải không?"
                     },
                     {
                         "speaker": "B",
                         "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。"
+                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
                     }
                 ],
                 "blanks": {
@@ -33045,7 +33834,15 @@ const lessonReviews = [
                             "だれ",
                             "なんさい",
                             "なにじん"
-                        ]
+                        ],
+                        "options_translations": {
+                            "どなた": "vị nào / ai (lịch sự)",
+                            "だれ": "ai",
+                            "nam": "Nam",
+                            "なにじん": "người nước nào",
+                            "なんさい": "なんさい (tiếng Việt)"
+                        },
+                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
                     },
                     "blank2": {
                         "correct": "の",
@@ -33054,7 +33851,14 @@ const lessonReviews = [
                             "は",
                             "も",
                             "から"
-                        ]
+                        ],
+                        "options_translations": {
+                            "の": "của",
+                            "は": "thì / là",
+                            "も": "cũng",
+                            "から": "từ"
+                        },
+                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
                     }
                 }
             }
