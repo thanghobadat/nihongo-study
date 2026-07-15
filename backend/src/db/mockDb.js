@@ -30875,4801 +30875,5205 @@ const cultureTopics = [
 
 
 const lessonReviews = [
-    {
-        "lesson_id": 1,
-        "translations": [
-            {
-                "id": 1,
-                "direction": "ja-to-vi",
-                "question_kana": "わたしは ミラー です。",
-                "question_kanji": "私は ミラー です。",
-                "answers": [
-                    "Tôi là Miller",
-                    "Tớ là Miller",
-                    "Mình là Miller"
-                ]
-            },
-            {
-                "id": 2,
-                "direction": "ja-to-vi",
-                "question_kana": "サントスさんは がくせい じゃありません。",
-                "question_kanji": "サントスさんは 学生 じゃありません。",
-                "answers": [
-                    "Anh Santos không phải là học sinh",
-                    "Anh Santos không phải là sinh viên",
-                    "Cậu Santos không phải là học sinh"
-                ]
-            },
-            {
-                "id": 3,
-                "direction": "ja-to-vi",
-                "question_kana": "あのひとは だれ ですか。",
-                "question_kanji": "あの人は だれ ですか。",
-                "answers": [
-                    "Người kia là ai vậy",
-                    "Người đó là ai thế",
-                    "Vị kia là ai"
-                ]
-            },
-            {
-                "id": 4,
-                "direction": "ja-to-vi",
-                "question_kana": "ワンさんは せんせい ですか。",
-                "question_kanji": "ワンさんは 先生 ですか。",
-                "answers": [
-                    "Ông Wang là giáo viên phải không",
-                    "Anh Wang là thầy giáo hả"
-                ]
-            },
-            {
-                "id": 5,
-                "direction": "ja-to-vi",
-                "question_kana": "タワポンさんは FPTの しゃいん です。",
-                "question_kanji": "タワポンさんは FPTの 社員 です。",
-                "answers": [
-                    "Anh Thawaphon là nhân viên công ty FPT",
-                    "Anh Thawaphon là nhân viên của FPT"
-                ]
-            },
-            {
-                "id": 6,
-                "direction": "ja-to-vi",
-                "question_kana": "イーさんは ぎんこういん です。",
-                "question_kanji": "イーさんは 銀行員 です。",
-                "answers": [
-                    "Chị Lee là nhân viên ngân hàng"
-                ]
-            },
-            {
-                "id": 7,
-                "direction": "ja-to-vi",
-                "question_kana": "あのかたは どなた ですか。",
-                "question_kanji": "あの方は どなた ですか。",
-                "answers": [
-                    "Vị kia là vị nào vậy",
-                    "Vị đó là ai thế (lịch sự)"
-                ]
-            },
-            {
-                "id": 8,
-                "direction": "ja-to-vi",
-                "question_kana": "おなまえは なん ですか。",
-                "question_kanji": "お名前は 何 ですか。",
-                "answers": [
-                    "Tên của bạn là gì",
-                    "Tên bạn là gì vậy"
-                ]
-            },
-            {
-                "id": 9,
-                "direction": "ja-to-vi",
-                "question_kana": "ミラーさんは アメリカから きました。",
-                "question_kanji": "ミラーさんは アメリカから 来ました。",
-                "answers": [
-                    "Anh Miller đến từ nước Mỹ",
-                    "Anh Miller đến từ Mỹ"
-                ]
-            },
-            {
-                "id": 10,
-                "direction": "ja-to-vi",
-                "question_kana": "ナムさんも かいしゃいん です。",
-                "question_kanji": "ナムさんも 会社員 です。",
-                "answers": [
-                    "Anh Nam cũng là nhân viên công ty"
-                ]
-            },
-            {
-                "id": 11,
-                "direction": "ja-to-vi",
-                "question_kana": "カリナさんは けんきゅうしゃ じゃありません。",
-                "question_kanji": "カリナさんは 研究者 じゃありません。",
-                "answers": [
-                    "Chị Karina không phải là nhà nghiên cứu"
-                ]
-            },
-            {
-                "id": 12,
-                "direction": "ja-to-vi",
-                "question_kana": "やまださんは さくらだいがくの せんせい です。",
-                "question_kanji": "山田さんは さくら大学の 先生 です。",
-                "answers": [
-                    "Ông Yamada là giáo viên của trường đại học Sakura"
-                ]
-            },
-            {
-                "id": 13,
-                "direction": "ja-to-vi",
-                "question_kana": "あのひときは ベトナムじん ですか。",
-                "question_kanji": "あの人は ベトナム人 ですか。",
-                "answers": [
-                    "Người kia là người Việt Nam phải không"
-                ]
-            },
-            {
-                "id": 14,
-                "direction": "ja-to-vi",
-                "question_kana": "シュミットさんは ドイツじん です。",
-                "question_kanji": "シュミットさんは ドイツ人 です。",
-                "answers": [
-                    "Anh Schmidt là người Đức"
-                ]
-            },
-            {
-                "id": 15,
-                "direction": "ja-to-vi",
-                "question_kana": "ワンさんも いしゃ です。",
-                "question_kanji": "ワンさんも 医者 です。",
-                "answers": [
-                    "Ông Wang cũng là bác sĩ"
-                ]
-            },
-            {
-                "id": 16,
-                "direction": "ja-to-vi",
-                "question_kana": "おいくつ ですか。",
-                "question_kanji": "おいくつ ですか。",
-                "answers": [
-                    "Bạn bao nhiêu tuổi",
-                    "Anh bao nhiêu tuổi vậy (lịch sự)"
-                ]
-            },
-            {
-                "id": 17,
-                "direction": "ja-to-vi",
-                "question_kana": "ミラーさんは 28さい です。",
-                "question_kanji": "ミラーさんは 28歳 です。",
-                "answers": [
-                    "Anh Miller 28 tuổi"
-                ]
-            },
-            {
-                "id": 18,
-                "direction": "ja-to-vi",
-                "question_kana": "タワポンさんは IMCの しゃいん じゃありません。",
-                "question_kanji": "タワポンさんは IMCの 社員 じゃありません。",
-                "answers": [
-                    "Anh Thawaphon không phải là nhân viên công ty IMC"
-                ]
-            },
-            {
-                "id": 19,
-                "direction": "ja-to-vi",
-                "question_kana": "シュミットさんも パワーでんきの しゃいん です。",
-                "question_kanji": "シュミットさんも パワー電気の 社員 です。",
-                "answers": [
-                    "Anh Schmidt cũng là nhân viên của công ty điện lực Power"
-                ]
-            },
-            {
-                "id": 20,
-                "direction": "ja-to-vi",
-                "question_kana": "なんさい ですか。",
-                "question_kanji": "何歳 ですか。",
-                "answers": [
-                    "Mấy tuổi rồi",
-                    "Bao nhiêu tuổi vậy"
-                ]
-            },
-            {
-                "id": 21,
-                "direction": "ja-to-vi",
-                "question_kana": "ナムさんは かいしゃいん じゃありません。",
-                "question_kanji": "ナムさんは 会社員 じゃありません。",
-                "answers": [
-                    "Anh Nam không phải là nhân viên công ty"
-                ]
-            },
-            {
-                "id": 22,
-                "direction": "ja-to-vi",
-                "question_kana": "ワンさんも かいしゃいん じゃありません。",
-                "question_kanji": "ワンさんも 会社員 じゃありません。",
-                "answers": [
-                    "Ông Wang cũng không phải là nhân viên công ty"
-                ]
-            },
-            {
-                "id": 23,
-                "direction": "ja-to-vi",
-                "question_kana": "あのひとは アメリカじん ですか。",
-                "question_kanji": "あの人は アメリカ人 ですか。",
-                "answers": [
-                    "Người kia là người Mỹ phải không"
-                ]
-            },
-            {
-                "id": 24,
-                "direction": "ja-to-vi",
-                "question_kana": "カリナさんは 20さい です。",
-                "question_kanji": "カリナさんは 20歳 です。",
-                "answers": [
-                    "Chị Karina 20 tuổi"
-                ]
-            },
-            {
-                "id": 25,
-                "direction": "ja-to-vi",
-                "question_kana": "タワポンさんは タイじん です。",
-                "question_kanji": "タワポンさんは タイ人 です。",
-                "answers": [
-                    "Anh Thawaphon là người Thái Lan"
-                ]
-            },
-            {
-                "id": 26,
-                "direction": "ja-to-vi",
-                "question_kana": "ミラーさんも パワーでんきの しゃいん じゃありません。",
-                "question_kanji": "ミラーさんも パワー電気の 社員 じゃありません。",
-                "answers": [
-                    "Anh Miller cũng không phải là nhân viên công ty điện lực Power"
-                ]
-            },
-            {
-                "id": 27,
-                "direction": "ja-to-vi",
-                "question_kana": "わたしは けんきゅうしゃ です。",
-                "question_kanji": "私は 研究者 です。",
-                "answers": [
-                    "Tôi là nhà nghiên cứu"
-                ]
-            },
-            {
-                "id": 28,
-                "direction": "ja-to-vi",
-                "question_kana": "あのかたは いしゃ です。",
-                "question_kanji": "あの方は 医者 です。",
-                "answers": [
-                    "Vị kia là bác sĩ"
-                ]
-            },
-            {
-                "id": 29,
-                "direction": "ja-to-vi",
-                "question_kana": "やまださんも せんせい です。",
-                "question_kanji": "山田さんも 先生 です。",
-                "answers": [
-                    "Ông Yamada cũng là giáo viên"
-                ]
-            },
-            {
-                "id": 30,
-                "direction": "ja-to-vi",
-                "question_kana": "あのひとは さくらだいがくの がくせいです。",
-                "question_kanji": "あの人は さくら大学の 学生 です。",
-                "answers": [
-                    "Người kia là sinh viên đại học Sakura"
-                ]
-            },
-            {
-                "id": 31,
-                "direction": "ja-to-vi",
-                "question_kana": "カリナさんも インドネシアじん です。",
-                "question_kanji": "カリナさんも インドネシア人 です。",
-                "answers": [
-                    "Chị Karina cũng là người Indonesia"
-                ]
-            },
-            {
-                "id": 32,
-                "direction": "ja-to-vi",
-                "question_kana": "おなまえは イーさんですか。",
-                "question_kanji": "お名前は イーさんですか。",
-                "answers": [
-                    "Tên chị là Lee phải không"
-                ]
-            },
-            {
-                "id": 33,
-                "direction": "ja-to-vi",
-                "question_kana": "サントスさんは 30さい です。",
-                "question_kanji": "サントスさんは 30歳 です。",
-                "answers": [
-                    "Anh Santos 30 tuổi"
-                ]
-            },
-            {
-                "id": 34,
-                "direction": "ja-to-vi",
-                "question_kana": "タワポンさんも がくsei じゃありません。",
-                "question_kanji": "タワポンさんも 学生 じゃありません。",
-                "answers": [
-                    "Anh Thawaphon cũng không phải là học sinh"
-                ]
-            },
-            {
-                "id": 35,
-                "direction": "ja-to-vi",
-                "question_kana": "あのかたは だれですか。",
-                "question_kanji": "あの方は だれですか。",
-                "answers": [
-                    "Vị kia là ai vậy"
-                ]
-            },
-            {
-                "id": 36,
-                "direction": "ja-to-vi",
-                "question_kana": "ミラーさんは かいしゃいん です。",
-                "question_kanji": "ミラーさんは 会社員 です。",
-                "answers": [
-                    "Anh Miller là nhân viên công ty"
-                ]
-            },
-            {
-                "id": 37,
-                "direction": "ja-to-vi",
-                "question_kana": "あのひとは ドイツじん じゃありません。",
-                "question_kanji": "あの人は ドイツ人 じゃありません。",
-                "answers": [
-                    "Người kia không phải là người Đức"
-                ]
-            },
-            {
-                "id": 38,
-                "direction": "ja-to-vi",
-                "question_kana": "ワンさんも せんせい じゃありません。",
-                "question_kanji": "ワンさんも 先生 じゃありません。",
-                "answers": [
-                    "Ông Wang cũng không phải là giáo viên"
-                ]
-            },
-            {
-                "id": 39,
-                "direction": "ja-to-vi",
-                "question_kana": "やまださんは IMCの しゃいん です。",
-                "question_kanji": "山田さんは IMCの 社員 です。",
-                "answers": [
-                    "Ông Yamada là nhân viên công ty IMC"
-                ]
-            },
-            {
-                "id": 40,
-                "direction": "ja-to-vi",
-                "question_kana": "わたしも かいしゃいん です。",
-                "question_kanji": "私も 会社員 です。",
-                "answers": [
-                    "Tôi cũng là nhân viên công ty"
-                ]
-            },
-            {
-                "id": 41,
-                "direction": "vi-to-ja",
-                "question": "Tôi là học sinh.",
-                "answers": [
-                    "わたしは がくせいです",
-                    "watashi wa gakusei desu"
-                ]
-            },
-            {
-                "id": 42,
-                "direction": "vi-to-ja",
-                "question": "Anh Santos không phải là người Nhật.",
-                "answers": [
-                    "サントスさんは にほんじんじゃありません",
-                    "santosu san wa nihonjin ja arimasen"
-                ]
-            },
-            {
-                "id": 43,
-                "direction": "vi-to-ja",
-                "question": "Vị kia là thầy giáo Watt phải không?",
-                "answers": [
-                    "あのかたは ワットせんせいですか",
-                    "ano kata wa watto sensei desu ka"
-                ]
-            },
-            {
-                "id": 44,
-                "direction": "vi-to-ja",
-                "question": "Tôi cũng là kỹ sư.",
-                "answers": [
-                    "わたしも エンジニアです",
-                    "watashi mo enjinia desu"
-                ]
-            },
-            {
-                "id": 45,
-                "direction": "vi-to-ja",
-                "question": "Chị Lee là nhân viên công ty FPT.",
-                "answers": [
-                    "イーさんは FPTの しゃいんです",
-                    "ii san wa FPT no shain desu"
-                ]
-            },
-            {
-                "id": 46,
-                "direction": "vi-to-ja",
-                "question": "Bạn bao nhiêu tuổi vậy?",
-                "answers": [
-                    "なんさいですか",
-                    "nan sai desu ka",
-                    "おいくつですか",
-                    "oikutsu desu ka"
-                ]
-            },
-            {
-                "id": 47,
-                "direction": "vi-to-ja",
-                "question": "Tôi đến từ Việt Nam.",
-                "answers": [
-                    "ベトナムから きました",
-                    "betonamu kara kimashita"
-                ]
-            },
-            {
-                "id": 48,
-                "direction": "vi-to-ja",
-                "question": "Anh Miller là người nước nào?",
-                "answers": [
-                    "ミラーさんは なにじんですか",
-                    "miraa san wa nanijin desu ka"
-                ]
-            },
-            {
-                "id": 49,
-                "direction": "vi-to-ja",
-                "question": "Người kia là ai thế?",
-                "answers": [
-                    "あのひとは だれですか",
-                    "ano hito wa dare desu ka"
-                ]
-            },
-            {
-                "id": 50,
-                "direction": "vi-to-ja",
-                "question": "Chị Karina cũng là sinh viên đại học Sakura.",
-                "answers": [
-                    "カリナさんも さくらだいがくの がくせいです",
-                    "karina san mo sakura daigaku no gakusei desu"
-                ]
-            },
-            {
-                "id": 51,
-                "direction": "vi-to-ja",
-                "question": "Tôi không phải là nhân viên công ty.",
-                "answers": [
-                    "わたしは かいしゃいんじゃありません",
-                    "watashi wa kaishain ja arimasen"
-                ]
-            },
-            {
-                "id": 52,
-                "direction": "vi-to-ja",
-                "question": "Anh Schmidt là người Đức phải không?",
-                "answers": [
-                    "シュミットさんは ドイツじんですか",
-                    "shumitto san wa doitsujin desu ka"
-                ]
-            },
-            {
-                "id": 53,
-                "direction": "vi-to-ja",
-                "question": "Bác sĩ Wang là người Trung Quốc.",
-                "answers": [
-                    "ワンいしゃは ちゅうごくじんです",
-                    "wan isha wa chuugokujin desu"
-                ]
-            },
-            {
-                "id": 54,
-                "direction": "vi-to-ja",
-                "question": "Đây là anh Nam.",
-                "answers": [
-                    "こちらは ナムさんです",
-                    "kochira wa namu san desu"
-                ]
-            },
-            {
-                "id": 55,
-                "direction": "vi-to-ja",
-                "question": "Rất vui được gặp bạn.",
-                "answers": [
-                    "はじめまして",
-                    "hajimemashite"
-                ]
-            },
-            {
-                "id": 56,
-                "direction": "vi-to-ja",
-                "question": "Tôi cũng 25 tuổi.",
-                "answers": [
-                    "わたしも 25さいです",
-                    "watashi mo 25 sai desu"
-                ]
-            },
-            {
-                "id": 57,
-                "direction": "vi-to-ja",
-                "question": "Ông Yamada không phải là bác sĩ.",
-                "answers": [
-                    "やまださんは いしゃじゃありません",
-                    "yamada san wa isha ja arimasen"
-                ]
-            },
-            {
-                "id": 58,
-                "direction": "vi-to-ja",
-                "question": "Rất mong nhận được sự giúp đỡ.",
-                "answers": [
-                    "どうぞ よろしく おねがいします",
-                    "douzo yoroku onegaishimasu"
-                ]
-            },
-            {
-                "id": 59,
-                "direction": "vi-to-ja",
-                "question": "Anh Santos là nhân viên của công ty IMC phải không?",
-                "answers": [
-                    "サントスさんは IMCの しゃいんですか",
-                    "santosu san wa IMC no shain desu ka"
-                ]
-            },
-            {
-                "id": 60,
-                "direction": "vi-to-ja",
-                "question": "Tên bạn là gì?",
-                "answers": [
-                    "おなまえは なんですか",
-                    "onamae wa nan desu ka"
-                ]
-            },
-            {
-                "id": 61,
-                "direction": "vi-to-ja",
-                "question": "Chị Karina cũng là sinh viên phải không?",
-                "answers": [
-                    "カリナさんも がくseiですか",
-                    "カリナさんも がくせいですか",
-                    "karina san mo gakusei desu ka"
-                ]
-            },
-            {
-                "id": 62,
-                "direction": "vi-to-ja",
-                "question": "Tôi không phải là người Đức.",
-                "answers": [
-                    "わたしは ドイツじんじゃありません",
-                    "watashi wa doitsujin ja arimasen"
-                ]
-            },
-            {
-                "id": 63,
-                "direction": "vi-to-ja",
-                "question": "Vị kia là bác sĩ Wang phải không?",
-                "answers": [
-                    "あのかたは ワンいしゃですか",
-                    "ano kata wa wan isha desu ka"
-                ]
-            },
-            {
-                "id": 64,
-                "direction": "vi-to-ja",
-                "question": "Anh Santos là người Brazil.",
-                "answers": [
-                    "サントスさんは ブラジルじんです",
-                    "santosu san wa burajirujin desu"
-                ]
-            },
-            {
-                "id": 65,
-                "direction": "vi-to-ja",
-                "question": "Anh Nam cũng là nhân viên của IMC.",
-                "answers": [
-                    "ナムさんも IMCの しゃいんです",
-                    "namu san mo IMC no shain desu"
-                ]
-            },
-            {
-                "id": 66,
-                "direction": "vi-to-ja",
-                "question": "Tôi 25 tuổi.",
-                "answers": [
-                    "わたしは 25さいです",
-                    "watashi wa 25 sai desu"
-                ]
-            },
-            {
-                "id": 67,
-                "direction": "vi-to-ja",
-                "question": "Anh Miller cũng không phải là nhà nghiên cứu.",
-                "answers": [
-                    "ミラーさんも けんきゅうしゃじゃありません",
-                    "miraa san mo kenkyuusha ja arimasen"
-                ]
-            },
-            {
-                "id": 68,
-                "direction": "vi-to-ja",
-                "question": "Người kia đến từ nước Mỹ.",
-                "answers": [
-                    "あのひとは アメリカから きました",
-                    "ano hito wa amerika kara kimashita"
-                ]
-            },
-            {
-                "id": 69,
-                "direction": "vi-to-ja",
-                "question": "Tên của bạn là gì vậy?",
-                "answers": [
-                    "おなまえは なんですか",
-                    "onamae wa nan desu ka"
-                ]
-            },
-            {
-                "id": 70,
-                "direction": "vi-to-ja",
-                "question": "Bác sĩ Wang cũng 35 tuổi.",
-                "answers": [
-                    "ワンいしゃも 35さいes",
-                    "ワンいしゃも 35さいです",
-                    "wan isha mo 35 sai desu"
-                ]
-            },
-            {
-                "id": 71,
-                "direction": "vi-to-ja",
-                "question": "Chị Lee là nhân viên công ty.",
-                "answers": [
-                    "イーさんは かいしゃいんです",
-                    "ii san wa kaishain desu"
-                ]
-            },
-            {
-                "id": 72,
-                "direction": "vi-to-ja",
-                "question": "Anh Santos không phải là giáo viên.",
-                "answers": [
-                    "サントスさんは せんせいじゃありません",
-                    "santosu san wa sensei ja arimasen"
-                ]
-            },
-            {
-                "id": 73,
-                "direction": "vi-to-ja",
-                "question": "Tôi cũng đến từ Việt Nam.",
-                "answers": [
-                    "わたしも ベトナムから きました",
-                    "watashi mo betonamu kara kimashita"
-                ]
-            },
-            {
-                "id": 74,
-                "direction": "vi-to-ja",
-                "question": "Người kia là sinh viên đại học Sakura phải không?",
-                "answers": [
-                    "あのひとは さくらだいがくの がくせいですか",
-                    "ano hito wa sakura daigaku no gakusei desu ka"
-                ]
-            },
-            {
-                "id": 75,
-                "direction": "vi-to-ja",
-                "question": "Vị kia là ai thế?",
-                "answers": [
-                    "あのかたha どなたですか",
-                    "あのかたは どなたですか",
-                    "ano kata wa donata desu ka"
-                ]
-            },
-            {
-                "id": 76,
-                "direction": "vi-to-ja",
-                "question": "Ông Yamada là người Nhật.",
-                "answers": [
-                    "やまださんは にほんじんです",
-                    "yamada san wa nihonjin desu"
-                ]
-            },
-            {
-                "id": 77,
-                "direction": "vi-to-ja",
-                "question": "Chị Karina không phải là nhân viên ngân hàng.",
-                "answers": [
-                    "カリナさんは ぎんこういんじゃありません",
-                    "karina san wa ginkouin ja arimasen"
-                ]
-            },
-            {
-                "id": 78,
-                "direction": "vi-to-ja",
-                "question": "Anh Schmidt cũng là người Đức.",
-                "answers": [
-                    "シュミットさんも ドイツじんです",
-                    "shumitto san mo doitsujin desu"
-                ]
-            },
-            {
-                "id": 79,
-                "direction": "vi-to-ja",
-                "question": "Bạn bao nhiêu tuổi vậy?",
-                "answers": [
-                    "なんさいですか",
-                    "nan sai desu ka"
-                ]
-            },
-            {
-                "id": 80,
-                "direction": "vi-to-ja",
-                "question": "Tôi là nhân viên của công ty điện lực Power.",
-                "answers": [
-                    "わたしは パワーでんきの しゃいんです",
-                    "watashi wa pawaa denki no shain desu"
-                ]
-            }
-        ],
-        "dialogues": [
-            {
-                "id": 1,
-                "context": "Chào hỏi - Đoạn 1",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
-                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
-                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。",
-                        "romaji": "Miraa desu. Douzo [blank2].",
-                        "translation": "Tôi là Miller. Rất mong được [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "なん",
-                        "options": [
-                            "なん",
-                            "だれ",
-                            "どなた",
-                            "どこ"
-                        ],
-                        "options_translations": {
-                            "なん": "cái gì / gì",
-                            "だれ": "ai",
-                            "どなた": "ai (lịch sự)",
-                            "đâu": "đâu (tiếng Việt)",
-                            "どこ": "どこ (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
-                    },
-                    "blank2": {
-                        "correct": "よろしく",
-                        "options": [
-                            "よろしく",
-                            "おねがい",
-                            "きました",
-                            "こちら"
-                        ],
-                        "options_translations": {
-                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
-                            "おねがい": "yêu cầu / nhờ vả",
-                            "きました": "đã đến",
-                            "こちら": "đây / phía này"
-                        },
-                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
-                    }
+{
+    "lesson_id": 1,
+    "translations": [
+        {
+            "id": 1,
+            "direction": "ja-to-vi",
+            "question_kana": "わたしは ミラー です。",
+            "question_kanji": "私は ミラー です。",
+            "answers": [
+                "Tôi là Miller",
+                "Tớ là Miller",
+                "Mình là Miller"
+            ]
+        },
+        {
+            "id": 2,
+            "direction": "ja-to-vi",
+            "question_kana": "サントスさんは がくせい じゃありません。",
+            "question_kanji": "サントスさんは 学生 じゃありません。",
+            "answers": [
+                "Anh Santos không phải là học sinh",
+                "Anh Santos không phải là sinh viên",
+                "Cậu Santos không phải là học sinh"
+            ]
+        },
+        {
+            "id": 3,
+            "direction": "ja-to-vi",
+            "question_kana": "あのひとは だれ ですか。",
+            "question_kanji": "あの人は だれ ですか。",
+            "answers": [
+                "Người kia là ai vậy",
+                "Người đó là ai thế",
+                "Vị kia là ai"
+            ]
+        },
+        {
+            "id": 4,
+            "direction": "ja-to-vi",
+            "question_kana": "ワンさんは せんせい ですか。",
+            "question_kanji": "ワンさんは 先生 ですか。",
+            "answers": [
+                "Ông Wang là giáo viên phải không",
+                "Anh Wang là thầy giáo hả"
+            ]
+        },
+        {
+            "id": 5,
+            "direction": "ja-to-vi",
+            "question_kana": "タワポンさんは FPTの しゃいん です。",
+            "question_kanji": "タワポンさんは FPTの 社員 です。",
+            "answers": [
+                "Anh Thawaphon là nhân viên công ty FPT",
+                "Anh Thawaphon là nhân viên của FPT"
+            ]
+        },
+        {
+            "id": 6,
+            "direction": "ja-to-vi",
+            "question_kana": "イーさんは ぎんこういん です。",
+            "question_kanji": "イーさんは 銀行員 です。",
+            "answers": [
+                "Chị Lee là nhân viên ngân hàng"
+            ]
+        },
+        {
+            "id": 7,
+            "direction": "ja-to-vi",
+            "question_kana": "あのかたは どなた ですか。",
+            "question_kanji": "あの方は どなた ですか。",
+            "answers": [
+                "Vị kia là vị nào vậy",
+                "Vị đó là ai thế (lịch sự)"
+            ]
+        },
+        {
+            "id": 8,
+            "direction": "ja-to-vi",
+            "question_kana": "おなまえは なん ですか。",
+            "question_kanji": "お名前は 何 ですか。",
+            "answers": [
+                "Tên của bạn là gì",
+                "Tên bạn là gì vậy"
+            ]
+        },
+        {
+            "id": 9,
+            "direction": "ja-to-vi",
+            "question_kana": "ミラーさんは アメリカから きました。",
+            "question_kanji": "ミラーさんは アメリカから 来ました。",
+            "answers": [
+                "Anh Miller đến từ nước Mỹ",
+                "Anh Miller đến từ Mỹ"
+            ]
+        },
+        {
+            "id": 10,
+            "direction": "ja-to-vi",
+            "question_kana": "ナムさんも かいしゃいん です。",
+            "question_kanji": "ナムさんも 会社員 です。",
+            "answers": [
+                "Anh Nam cũng là nhân viên công ty"
+            ]
+        },
+        {
+            "id": 11,
+            "direction": "ja-to-vi",
+            "question_kana": "カリナさんは けんきゅうしゃ じゃありません。",
+            "question_kanji": "カリナさんは 研究者 じゃありません。",
+            "answers": [
+                "Chị Karina không phải là nhà nghiên cứu"
+            ]
+        },
+        {
+            "id": 12,
+            "direction": "ja-to-vi",
+            "question_kana": "やまださんは さくらだいがくの せんせい です。",
+            "question_kanji": "山田さんは さくら大学の 先生 です。",
+            "answers": [
+                "Ông Yamada là giáo viên của trường đại học Sakura"
+            ]
+        },
+        {
+            "id": 13,
+            "direction": "ja-to-vi",
+            "question_kana": "あのひときは ベトナムじん ですか。",
+            "question_kanji": "あの人は ベトナム人 ですか。",
+            "answers": [
+                "Người kia là người Việt Nam phải không"
+            ]
+        },
+        {
+            "id": 14,
+            "direction": "ja-to-vi",
+            "question_kana": "シュミットさんは ドイツじん です。",
+            "question_kanji": "シュミットさんは ドイツ人 です。",
+            "answers": [
+                "Anh Schmidt là người Đức"
+            ]
+        },
+        {
+            "id": 15,
+            "direction": "ja-to-vi",
+            "question_kana": "ワンさんも いしゃ です。",
+            "question_kanji": "ワンさんも 医者 です。",
+            "answers": [
+                "Ông Wang cũng là bác sĩ"
+            ]
+        },
+        {
+            "id": 16,
+            "direction": "ja-to-vi",
+            "question_kana": "おいくつ ですか。",
+            "question_kanji": "おいくつ ですか。",
+            "answers": [
+                "Bạn bao nhiêu tuổi",
+                "Anh bao nhiêu tuổi vậy (lịch sự)"
+            ]
+        },
+        {
+            "id": 17,
+            "direction": "ja-to-vi",
+            "question_kana": "ミラーさんは 28さい です。",
+            "question_kanji": "ミラーさんは 28歳 です。",
+            "answers": [
+                "Anh Miller 28 tuổi"
+            ]
+        },
+        {
+            "id": 18,
+            "direction": "ja-to-vi",
+            "question_kana": "タワポンさんは IMCの しゃいん じゃありません。",
+            "question_kanji": "タワポンさんは IMCの 社員 じゃありません。",
+            "answers": [
+                "Anh Thawaphon không phải là nhân viên công ty IMC"
+            ]
+        },
+        {
+            "id": 19,
+            "direction": "ja-to-vi",
+            "question_kana": "シュミットさんも パワーでんきの しゃいん です。",
+            "question_kanji": "シュミットさんも パワー電気の 社員 です。",
+            "answers": [
+                "Anh Schmidt cũng là nhân viên của công ty điện lực Power"
+            ]
+        },
+        {
+            "id": 20,
+            "direction": "ja-to-vi",
+            "question_kana": "なんさい ですか。",
+            "question_kanji": "何歳 ですか。",
+            "answers": [
+                "Mấy tuổi rồi",
+                "Bao nhiêu tuổi vậy"
+            ]
+        },
+        {
+            "id": 21,
+            "direction": "ja-to-vi",
+            "question_kana": "ナムさんは かいしゃいん じゃありません。",
+            "question_kanji": "ナムさんは 会社員 じゃありません。",
+            "answers": [
+                "Anh Nam không phải là nhân viên công ty"
+            ]
+        },
+        {
+            "id": 22,
+            "direction": "ja-to-vi",
+            "question_kana": "ワンさんも かいしゃいん じゃありません。",
+            "question_kanji": "ワンさんも 会社員 じゃありません。",
+            "answers": [
+                "Ông Wang cũng không phải là nhân viên công ty"
+            ]
+        },
+        {
+            "id": 23,
+            "direction": "ja-to-vi",
+            "question_kana": "あのひとは アメリカじん ですか。",
+            "question_kanji": "あの人は アメリカ人 ですか。",
+            "answers": [
+                "Người kia là người Mỹ phải không"
+            ]
+        },
+        {
+            "id": 24,
+            "direction": "ja-to-vi",
+            "question_kana": "カリナさんは 20さい です。",
+            "question_kanji": "カリナさんは 20歳 です。",
+            "answers": [
+                "Chị Karina 20 tuổi"
+            ]
+        },
+        {
+            "id": 25,
+            "direction": "ja-to-vi",
+            "question_kana": "タワポンさんは タイじん です。",
+            "question_kanji": "タワポンさんは タイ人 です。",
+            "answers": [
+                "Anh Thawaphon là người Thái Lan"
+            ]
+        },
+        {
+            "id": 26,
+            "direction": "ja-to-vi",
+            "question_kana": "ミラーさんも パワーでんきの しゃいん じゃありません。",
+            "question_kanji": "ミラーさんも パワー電気の 社員 じゃありません。",
+            "answers": [
+                "Anh Miller cũng không phải là nhân viên công ty điện lực Power"
+            ]
+        },
+        {
+            "id": 27,
+            "direction": "ja-to-vi",
+            "question_kana": "わたしは けんきゅうしゃ です。",
+            "question_kanji": "私は 研究者 です。",
+            "answers": [
+                "Tôi là nhà nghiên cứu"
+            ]
+        },
+        {
+            "id": 28,
+            "direction": "ja-to-vi",
+            "question_kana": "あのかたは いしゃ です。",
+            "question_kanji": "あの方は 医者 です。",
+            "answers": [
+                "Vị kia là bác sĩ"
+            ]
+        },
+        {
+            "id": 29,
+            "direction": "ja-to-vi",
+            "question_kana": "やまださんも せんせい です。",
+            "question_kanji": "山田さんも 先生 です。",
+            "answers": [
+                "Ông Yamada cũng là giáo viên"
+            ]
+        },
+        {
+            "id": 30,
+            "direction": "ja-to-vi",
+            "question_kana": "あのひとは さくらだいがくの がくせいです。",
+            "question_kanji": "あの人は さくら大学の 学生 です。",
+            "answers": [
+                "Người kia là sinh viên đại học Sakura"
+            ]
+        },
+        {
+            "id": 31,
+            "direction": "ja-to-vi",
+            "question_kana": "カリナさんも インドネシアじん です。",
+            "question_kanji": "カリナさんも インドネシア人 です。",
+            "answers": [
+                "Chị Karina cũng là người Indonesia"
+            ]
+        },
+        {
+            "id": 32,
+            "direction": "ja-to-vi",
+            "question_kana": "おなまえは イーさんですか。",
+            "question_kanji": "お名前は イーさんですか。",
+            "answers": [
+                "Tên chị là Lee phải không"
+            ]
+        },
+        {
+            "id": 33,
+            "direction": "ja-to-vi",
+            "question_kana": "サントスさんは 30さい です。",
+            "question_kanji": "サントスさんは 30歳 です。",
+            "answers": [
+                "Anh Santos 30 tuổi"
+            ]
+        },
+        {
+            "id": 34,
+            "direction": "ja-to-vi",
+            "question_kana": "タワポンさんも がくsei じゃありません。",
+            "question_kanji": "タワポンさんも 学生 じゃありません。",
+            "answers": [
+                "Anh Thawaphon cũng không phải là học sinh"
+            ]
+        },
+        {
+            "id": 35,
+            "direction": "ja-to-vi",
+            "question_kana": "あのかたは だれですか。",
+            "question_kanji": "あの方は だれですか。",
+            "answers": [
+                "Vị kia là ai vậy"
+            ]
+        },
+        {
+            "id": 36,
+            "direction": "ja-to-vi",
+            "question_kana": "ミラーさんは かいしゃいん です。",
+            "question_kanji": "ミラーさんは 会社員 です。",
+            "answers": [
+                "Anh Miller là nhân viên công ty"
+            ]
+        },
+        {
+            "id": 37,
+            "direction": "ja-to-vi",
+            "question_kana": "あのひとは ドイツじん じゃありません。",
+            "question_kanji": "あの人は ドイツ人 じゃありません。",
+            "answers": [
+                "Người kia không phải là người Đức"
+            ]
+        },
+        {
+            "id": 38,
+            "direction": "ja-to-vi",
+            "question_kana": "ワンさんも せんせい じゃありません。",
+            "question_kanji": "ワンさんも 先生 じゃありません。",
+            "answers": [
+                "Ông Wang cũng không phải là giáo viên"
+            ]
+        },
+        {
+            "id": 39,
+            "direction": "ja-to-vi",
+            "question_kana": "やまださんは IMCの しゃいん です。",
+            "question_kanji": "山田さんは IMCの 社員 です。",
+            "answers": [
+                "Ông Yamada là nhân viên công ty IMC"
+            ]
+        },
+        {
+            "id": 40,
+            "direction": "ja-to-vi",
+            "question_kana": "わたしも かいしゃいん です。",
+            "question_kanji": "私も 会社員 です。",
+            "answers": [
+                "Tôi cũng là nhân viên công ty"
+            ]
+        },
+        {
+            "id": 41,
+            "direction": "vi-to-ja",
+            "question": "Tôi là học sinh.",
+            "answers": [
+                "わたしは がくせいです",
+                "watashi wa gakusei desu"
+            ]
+        },
+        {
+            "id": 42,
+            "direction": "vi-to-ja",
+            "question": "Anh Santos không phải là người Nhật.",
+            "answers": [
+                "サントスさんは にほんじんじゃありません",
+                "santosu san wa nihonjin ja arimasen"
+            ]
+        },
+        {
+            "id": 43,
+            "direction": "vi-to-ja",
+            "question": "Vị kia là thầy giáo Watt phải không?",
+            "answers": [
+                "あのかたは ワットせんせいですか",
+                "ano kata wa watto sensei desu ka"
+            ]
+        },
+        {
+            "id": 44,
+            "direction": "vi-to-ja",
+            "question": "Tôi cũng là kỹ sư.",
+            "answers": [
+                "わたしも エンジニアです",
+                "watashi mo enjinia desu"
+            ]
+        },
+        {
+            "id": 45,
+            "direction": "vi-to-ja",
+            "question": "Chị Lee là nhân viên công ty FPT.",
+            "answers": [
+                "イーさんは FPTの しゃいんです",
+                "ii san wa FPT no shain desu"
+            ]
+        },
+        {
+            "id": 46,
+            "direction": "vi-to-ja",
+            "question": "Bạn bao nhiêu tuổi vậy?",
+            "answers": [
+                "なんさいですか",
+                "nan sai desu ka",
+                "おいくつですか",
+                "oikutsu desu ka"
+            ]
+        },
+        {
+            "id": 47,
+            "direction": "vi-to-ja",
+            "question": "Tôi đến từ Việt Nam.",
+            "answers": [
+                "ベトナムから きました",
+                "betonamu kara kimashita"
+            ]
+        },
+        {
+            "id": 48,
+            "direction": "vi-to-ja",
+            "question": "Anh Miller là người nước nào?",
+            "answers": [
+                "ミラーさんは なにじんですか",
+                "miraa san wa nanijin desu ka"
+            ]
+        },
+        {
+            "id": 49,
+            "direction": "vi-to-ja",
+            "question": "Người kia là ai thế?",
+            "answers": [
+                "あのひとは だれですか",
+                "ano hito wa dare desu ka"
+            ]
+        },
+        {
+            "id": 50,
+            "direction": "vi-to-ja",
+            "question": "Chị Karina cũng là sinh viên đại học Sakura.",
+            "answers": [
+                "カリナさんも さくらだいがくの がくせいです",
+                "karina san mo sakura daigaku no gakusei desu"
+            ]
+        },
+        {
+            "id": 51,
+            "direction": "vi-to-ja",
+            "question": "Tôi không phải là nhân viên công ty.",
+            "answers": [
+                "わたしは かいしゃいんじゃありません",
+                "watashi wa kaishain ja arimasen"
+            ]
+        },
+        {
+            "id": 52,
+            "direction": "vi-to-ja",
+            "question": "Anh Schmidt là người Đức phải không?",
+            "answers": [
+                "シュミットさんは ドイツじんですか",
+                "shumitto san wa doitsujin desu ka"
+            ]
+        },
+        {
+            "id": 53,
+            "direction": "vi-to-ja",
+            "question": "Bác sĩ Wang là người Trung Quốc.",
+            "answers": [
+                "ワンいしゃは ちゅうごくじんです",
+                "wan isha wa chuugokujin desu"
+            ]
+        },
+        {
+            "id": 54,
+            "direction": "vi-to-ja",
+            "question": "Đây là anh Nam.",
+            "answers": [
+                "こちらは ナムさんです",
+                "kochira wa namu san desu"
+            ]
+        },
+        {
+            "id": 55,
+            "direction": "vi-to-ja",
+            "question": "Rất vui được gặp bạn.",
+            "answers": [
+                "はじめまして",
+                "hajimemashite"
+            ]
+        },
+        {
+            "id": 56,
+            "direction": "vi-to-ja",
+            "question": "Tôi cũng 25 tuổi.",
+            "answers": [
+                "わたしも 25さいです",
+                "watashi mo 25 sai desu"
+            ]
+        },
+        {
+            "id": 57,
+            "direction": "vi-to-ja",
+            "question": "Ông Yamada không phải là bác sĩ.",
+            "answers": [
+                "やまださんは いしゃじゃありません",
+                "yamada san wa isha ja arimasen"
+            ]
+        },
+        {
+            "id": 58,
+            "direction": "vi-to-ja",
+            "question": "Rất mong nhận được sự giúp đỡ.",
+            "answers": [
+                "どうぞ よろしく おねがいします",
+                "douzo yoroku onegaishimasu"
+            ]
+        },
+        {
+            "id": 59,
+            "direction": "vi-to-ja",
+            "question": "Anh Santos là nhân viên của công ty IMC phải không?",
+            "answers": [
+                "サントスさんは IMCの しゃいんですか",
+                "santosu san wa IMC no shain desu ka"
+            ]
+        },
+        {
+            "id": 60,
+            "direction": "vi-to-ja",
+            "question": "Tên bạn là gì?",
+            "answers": [
+                "おなまえは なんですか",
+                "onamae wa nan desu ka"
+            ]
+        },
+        {
+            "id": 61,
+            "direction": "vi-to-ja",
+            "question": "Chị Karina cũng là sinh viên phải không?",
+            "answers": [
+                "カリナさんも がくseiですか",
+                "カリナさんも がくせいですか",
+                "karina san mo gakusei desu ka"
+            ]
+        },
+        {
+            "id": 62,
+            "direction": "vi-to-ja",
+            "question": "Tôi không phải là người Đức.",
+            "answers": [
+                "わたしは ドイツじんじゃありません",
+                "watashi wa doitsujin ja arimasen"
+            ]
+        },
+        {
+            "id": 63,
+            "direction": "vi-to-ja",
+            "question": "Vị kia là bác sĩ Wang phải không?",
+            "answers": [
+                "あのかたは ワンいしゃですか",
+                "ano kata wa wan isha desu ka"
+            ]
+        },
+        {
+            "id": 64,
+            "direction": "vi-to-ja",
+            "question": "Anh Santos là người Brazil.",
+            "answers": [
+                "サントスさんは ブラジルじんです",
+                "santosu san wa burajirujin desu"
+            ]
+        },
+        {
+            "id": 65,
+            "direction": "vi-to-ja",
+            "question": "Anh Nam cũng là nhân viên của IMC.",
+            "answers": [
+                "ナムさんも IMCの しゃいんです",
+                "namu san mo IMC no shain desu"
+            ]
+        },
+        {
+            "id": 66,
+            "direction": "vi-to-ja",
+            "question": "Tôi 25 tuổi.",
+            "answers": [
+                "わたしは 25さいです",
+                "watashi wa 25 sai desu"
+            ]
+        },
+        {
+            "id": 67,
+            "direction": "vi-to-ja",
+            "question": "Anh Miller cũng không phải là nhà nghiên cứu.",
+            "answers": [
+                "ミラーさんも けんきゅうしゃじゃありません",
+                "miraa san mo kenkyuusha ja arimasen"
+            ]
+        },
+        {
+            "id": 68,
+            "direction": "vi-to-ja",
+            "question": "Người kia đến từ nước Mỹ.",
+            "answers": [
+                "あのひとは アメリカから きました",
+                "ano hito wa amerika kara kimashita"
+            ]
+        },
+        {
+            "id": 69,
+            "direction": "vi-to-ja",
+            "question": "Tên của bạn là gì vậy?",
+            "answers": [
+                "おなまえは なんですか",
+                "onamae wa nan desu ka"
+            ]
+        },
+        {
+            "id": 70,
+            "direction": "vi-to-ja",
+            "question": "Bác sĩ Wang cũng 35 tuổi.",
+            "answers": [
+                "ワンいしゃも 35さいes",
+                "ワンいしゃも 35さいです",
+                "wan isha mo 35 sai desu"
+            ]
+        },
+        {
+            "id": 71,
+            "direction": "vi-to-ja",
+            "question": "Chị Lee là nhân viên công ty.",
+            "answers": [
+                "イーさんは かいしゃいんです",
+                "ii san wa kaishain desu"
+            ]
+        },
+        {
+            "id": 72,
+            "direction": "vi-to-ja",
+            "question": "Anh Santos không phải là giáo viên.",
+            "answers": [
+                "サントスさんは せんせいじゃありません",
+                "santosu san wa sensei ja arimasen"
+            ]
+        },
+        {
+            "id": 73,
+            "direction": "vi-to-ja",
+            "question": "Tôi cũng đến từ Việt Nam.",
+            "answers": [
+                "わたしも ベトナムから きました",
+                "watashi mo betonamu kara kimashita"
+            ]
+        },
+        {
+            "id": 74,
+            "direction": "vi-to-ja",
+            "question": "Người kia là sinh viên đại học Sakura phải không?",
+            "answers": [
+                "あのひとは さくらだいがくの がくせいですか",
+                "ano hito wa sakura daigaku no gakusei desu ka"
+            ]
+        },
+        {
+            "id": 75,
+            "direction": "vi-to-ja",
+            "question": "Vị kia là ai thế?",
+            "answers": [
+                "あのかたha どなたですか",
+                "あのかたは どなたですか",
+                "ano kata wa donata desu ka"
+            ]
+        },
+        {
+            "id": 76,
+            "direction": "vi-to-ja",
+            "question": "Ông Yamada là người Nhật.",
+            "answers": [
+                "やまださんは にほんじんです",
+                "yamada san wa nihonjin desu"
+            ]
+        },
+        {
+            "id": 77,
+            "direction": "vi-to-ja",
+            "question": "Chị Karina không phải là nhân viên ngân hàng.",
+            "answers": [
+                "カリナさんは ぎんこういんじゃありません",
+                "karina san wa ginkouin ja arimasen"
+            ]
+        },
+        {
+            "id": 78,
+            "direction": "vi-to-ja",
+            "question": "Anh Schmidt cũng là người Đức.",
+            "answers": [
+                "シュミットさんも ドイツじんです",
+                "shumitto san mo doitsujin desu"
+            ]
+        },
+        {
+            "id": 79,
+            "direction": "vi-to-ja",
+            "question": "Bạn bao nhiêu tuổi vậy?",
+            "answers": [
+                "なんさいですか",
+                "nan sai desu ka"
+            ]
+        },
+        {
+            "id": 80,
+            "direction": "vi-to-ja",
+            "question": "Tôi là nhân viên của công ty điện lực Power.",
+            "answers": [
+                "わたしは パワーでんきの しゃいんです",
+                "watashi wa pawaa denki no shain desu"
+            ]
+        }
+    ],
+    "dialogues": [
+        {
+            "id": 1,
+            "context": "Chào hỏi - Đoạn 1",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
+                    "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                    "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                    "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ミラーです。どうぞ [blank2]。",
+                    "text_output": "ミラーです。どうぞ [blank2]。",
+                    "romaji": "Miraa desu. Douzo [blank2].",
+                    "translation": "Tôi là Miller. Rất mong được [blank2]."
                 }
-            },
-            {
-                "id": 2,
-                "context": "Hỏi quốc tịch - Đoạn 2",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。",
-                        "romaji": "Karina san wa Burajiru kara [blank1]?",
-                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
-                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "きましたか",
-                        "options": [
-                            "きましたか",
-                            "きました",
-                            "ですか",
-                            "でした"
-                        ],
-                        "options_translations": {
-                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
-                            "きました": "đã đến (quá khứ)",
-                            "ですか": "là phải không? (nghi vấn hiện tại)",
-                            "でした": "đã là (quá khứ của です)"
-                        },
-                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
-                    },
-                    "blank2": {
-                        "correct": "きませんでした",
-                        "options": [
-                            "きませんでした",
-                            "きました",
-                            "じゃありません",
-                            "です"
-                        ],
-                        "options_translations": {
-                            "きませんでした": "đã không đến (phủ định quá khứ)",
-                            "きました": "đã đến (khẳng định quá khứ)",
-                            "chưa": "chưa (tiếng Việt)",
-                            "đến": "đến (tiếng Việt)",
-                            "じゃありません": "じゃありません (tiếng Việt)",
-                            "です": "です (tiếng Việt)"
-                        },
-                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
-                    }
-                }
-            },
-            {
-                "id": 3,
-                "context": "Giới thiệu người thứ ba - Đoạn 3",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。",
-                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
-                        "translation": "Anh Yamada, [blank1] là anh Wang."
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
-                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
-                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "こちら",
-                        "options": [
-                            "こちら",
-                            "わたし",
-                            "あなた",
-                            "あのかた"
-                        ],
-                        "options_translations": {
-                            "こちら": "đây / vị này (lịch sự)",
-                            "わたし": "tôi",
-                            "cậu": "cậu (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "あなた": "あなた (tiếng Việt)",
-                            "あのかた": "あのかた (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "は",
-                            "も"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "của": "của (tiếng Việt)",
-                            "thì": "thì (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "も": "も (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
-                    }
-                }
-            },
-            {
-                "id": 4,
-                "context": "Hỏi tuổi tác - Đoạn 4",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
-                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
-                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。",
-                        "romaji": "Tarou wa kyuu [blank2] desu.",
-                        "translation": "Taro thì 9 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "の",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "đâu": "đâu (tiếng Việt)",
-                            "đó": "đó (tiếng Việt)",
-                            "được": "được (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "も": "も (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "せんせい",
-                            "しゃいん"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "cháu": "cháu (tiếng Việt)",
-                            "học": "học (tiếng Việt)",
-                            "sinh": "sinh (tiếng Việt)",
-                            "じん": "じん (tiếng Việt)",
-                            "せんせい": "せんせい (tiếng Việt)",
-                            "しゃいん": "しゃいん (tiếng Việt)"
-                        },
-                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
-                    }
-                }
-            },
-            {
-                "id": 5,
-                "context": "Đồng nhất thông tin - Đoạn 5",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
-                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
-                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。",
-                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
-                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "cũng": "cũng (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "và": "và (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
-                    },
-                    "blank2": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "công": "công (tiếng Việt)",
-                            "ty": "ty (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
-                    }
-                }
-            },
-            {
-                "id": 6,
-                "context": "Hỏi nghề nghiệp - Đoạn 6",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。",
-                        "romaji": "Ari san wa gakusei desu ka?",
-                        "translation": "Anh Ali là học sinh phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
-                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
-                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "じゃありません",
-                        "options": [
-                            "じゃありません",
-                            "です",
-                            "も",
-                            "の"
-                        ],
-                        "options_translations": {
-                            "じゃありません": "không phải là (phủ định)",
-                            "です": "là",
-                            "も": "cũng",
-                            "の": "của"
-                        },
-                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
-                    },
-                    "blank2": {
-                        "correct": "です",
-                        "options": [
-                            "です",
-                            "も",
-                            "じゃありません",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "です": "là",
-                            "も": "cũng",
-                            "じゃありません": "không phải là (phủ định)",
-                            "から": "từ"
-                        },
-                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
-                    }
-                }
-            },
-            {
-                "id": 7,
-                "context": "Xác nhận cơ quan - Đoạn 7",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
-                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
-                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。",
-                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
-                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
-                    },
-                    "blank2": {
-                        "correct": "しゃいん",
-                        "options": [
-                            "しゃいん",
-                            "がくせい",
-                            "せんせい",
-                            "いしゃ"
-                        ],
-                        "options_translations": {
-                            "しゃいん": "nhân viên công ty",
-                            "がくせい": "học sinh / sinh viên",
-                            "せんせい": "giáo viên",
-                            "いしゃ": "bác sĩ"
-                        },
-                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
-                    }
-                }
-            },
-            {
-                "id": 8,
-                "context": "Chào hỏi xã giao tuổi tác - Đoạn 8",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。",
-                        "romaji": "Miraa san wa nansai [blank1]?",
-                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。",
-                        "romaji": "Watashi wa 28 [blank2] desu.",
-                        "translation": "Tôi 28 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "も",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "も": "cũng",
-                            "の": "của",
-                            "から": "từ"
-                        },
-                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "さい",
-                            "年"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "じん": "người (quốc tịch)",
-                            "年": "năm",
-                            "歳": "tuổi"
-                        },
-                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
-                    }
-                }
-            },
-            {
-                "id": 9,
-                "context": "Xác minh danh tính người kia - Đoạn 9",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。",
-                        "romaji": "Ano hito wa [blank1] desu ka?",
-                        "translation": "Người kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
-                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
-                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "だれ",
-                        "options": [
-                            "だれ",
-                            "なん",
-                            "おいくつ",
-                            "どなた"
-                        ],
-                        "options_translations": {
-                            "だれ": "ai",
-                            "なん": "gì / cái gì",
-                            "おいくつ": "bao nhiêu tuổi",
-                            "どなた": "ai (lịch sự)"
-                        },
-                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "も",
-                            "きました"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "の": "của",
-                            "も": "cũng",
-                            "きました": "đã đến"
-                        },
-                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
-                    }
-                }
-            },
-            {
-                "id": 10,
-                "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 10",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。",
-                        "romaji": "Ano kata wa [blank1] desu ka?",
-                        "translation": "Vị kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
-                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
-                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "どなた",
-                        "options": [
-                            "どなた",
-                            "だれ",
-                            "なんさい",
-                            "なにじん"
-                        ],
-                        "options_translations": {
-                            "どなた": "vị nào / ai (lịch sự)",
-                            "だれ": "ai",
-                            "nam": "Nam",
-                            "なにじん": "người nước nào",
-                            "なんさい": "なんさい (tiếng Việt)"
-                        },
-                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
-                    },
-                    "blank2": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
-                    }
-                }
-            },
-            {
-                "id": 11,
-                "context": "Chào hỏi - Đoạn 11",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
-                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
-                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。",
-                        "romaji": "Miraa desu. Douzo [blank2].",
-                        "translation": "Tôi là Miller. Rất mong được [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "なん",
-                        "options": [
-                            "なん",
-                            "だれ",
-                            "どなた",
-                            "どこ"
-                        ],
-                        "options_translations": {
-                            "なん": "cái gì / gì",
-                            "だれ": "ai",
-                            "どなた": "ai (lịch sự)",
-                            "đâu": "đâu (tiếng Việt)",
-                            "どこ": "どこ (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
-                    },
-                    "blank2": {
-                        "correct": "よろしく",
-                        "options": [
-                            "よろしく",
-                            "おねがい",
-                            "きました",
-                            "こちら"
-                        ],
-                        "options_translations": {
-                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
-                            "おねがい": "yêu cầu / nhờ vả",
-                            "きました": "đã đến",
-                            "こちら": "đây / phía này"
-                        },
-                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
-                    }
-                }
-            },
-            {
-                "id": 12,
-                "context": "Hỏi quốc tịch - Đoạn 12",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。",
-                        "romaji": "Karina san wa Burajiru kara [blank1]?",
-                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
-                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "きましたか",
-                        "options": [
-                            "きましたか",
-                            "きました",
-                            "ですか",
-                            "でした"
-                        ],
-                        "options_translations": {
-                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
-                            "きました": "đã đến (quá khứ)",
-                            "ですか": "là phải không? (nghi vấn hiện tại)",
-                            "でした": "đã là (quá khứ của です)"
-                        },
-                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
-                    },
-                    "blank2": {
-                        "correct": "きませんでした",
-                        "options": [
-                            "きませんでした",
-                            "きました",
-                            "じゃありません",
-                            "です"
-                        ],
-                        "options_translations": {
-                            "きませんでした": "đã không đến (phủ định quá khứ)",
-                            "きました": "đã đến (khẳng định quá khứ)",
-                            "chưa": "chưa (tiếng Việt)",
-                            "đến": "đến (tiếng Việt)",
-                            "じゃありません": "じゃありません (tiếng Việt)",
-                            "です": "です (tiếng Việt)"
-                        },
-                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
-                    }
-                }
-            },
-            {
-                "id": 13,
-                "context": "Giới thiệu người thứ ba - Đoạn 13",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。",
-                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
-                        "translation": "Anh Yamada, [blank1] là anh Wang."
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
-                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
-                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "こちら",
-                        "options": [
-                            "こちら",
-                            "わたし",
-                            "あなた",
-                            "あのかた"
-                        ],
-                        "options_translations": {
-                            "こちら": "đây / vị này (lịch sự)",
-                            "わたし": "tôi",
-                            "cậu": "cậu (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "あなた": "あなた (tiếng Việt)",
-                            "あのかた": "あのかた (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "は",
-                            "も"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "của": "của (tiếng Việt)",
-                            "thì": "thì (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "も": "も (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
-                    }
-                }
-            },
-            {
-                "id": 14,
-                "context": "Hỏi tuổi tác - Đoạn 14",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
-                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
-                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。",
-                        "romaji": "Tarou wa kyuu [blank2] desu.",
-                        "translation": "Taro thì 9 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "の",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "đâu": "đâu (tiếng Việt)",
-                            "đó": "đó (tiếng Việt)",
-                            "được": "được (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "も": "も (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "せんせい",
-                            "しゃいん"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "cháu": "cháu (tiếng Việt)",
-                            "học": "học (tiếng Việt)",
-                            "sinh": "sinh (tiếng Việt)",
-                            "じん": "じん (tiếng Việt)",
-                            "せんせい": "せんせい (tiếng Việt)",
-                            "しゃいん": "しゃいん (tiếng Việt)"
-                        },
-                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
-                    }
-                }
-            },
-            {
-                "id": 15,
-                "context": "Đồng nhất thông tin - Đoạn 15",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
-                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
-                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。",
-                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
-                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "cũng": "cũng (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "và": "và (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
-                    },
-                    "blank2": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "công": "công (tiếng Việt)",
-                            "ty": "ty (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
-                    }
-                }
-            },
-            {
-                "id": 16,
-                "context": "Hỏi nghề nghiệp - Đoạn 16",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。",
-                        "romaji": "Ari san wa gakusei desu ka?",
-                        "translation": "Anh Ali là học sinh phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
-                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
-                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "じゃありません",
-                        "options": [
-                            "じゃありません",
-                            "です",
-                            "も",
-                            "の"
-                        ],
-                        "options_translations": {
-                            "じゃありません": "không phải là (phủ định)",
-                            "です": "là",
-                            "も": "cũng",
-                            "の": "của"
-                        },
-                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
-                    },
-                    "blank2": {
-                        "correct": "です",
-                        "options": [
-                            "です",
-                            "も",
-                            "じゃありません",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "です": "là",
-                            "も": "cũng",
-                            "じゃありません": "không phải là (phủ định)",
-                            "から": "từ"
-                        },
-                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
-                    }
-                }
-            },
-            {
-                "id": 17,
-                "context": "Xác nhận cơ quan - Đoạn 17",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
-                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
-                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。",
-                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
-                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
-                    },
-                    "blank2": {
-                        "correct": "しゃいん",
-                        "options": [
-                            "しゃいん",
-                            "がくせい",
-                            "せんせい",
-                            "いしゃ"
-                        ],
-                        "options_translations": {
-                            "しゃいん": "nhân viên công ty",
-                            "がくせい": "học sinh / sinh viên",
-                            "せんせい": "giáo viên",
-                            "いしゃ": "bác sĩ"
-                        },
-                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
-                    }
-                }
-            },
-            {
-                "id": 18,
-                "context": "Chào hỏi xã giao tuổi tác - Đoạn 18",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。",
-                        "romaji": "Miraa san wa nansai [blank1]?",
-                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。",
-                        "romaji": "Watashi wa 28 [blank2] desu.",
-                        "translation": "Tôi 28 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "も",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "も": "cũng",
-                            "の": "của",
-                            "から": "từ"
-                        },
-                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "さい",
-                            "年"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "じん": "người (quốc tịch)",
-                            "年": "năm",
-                            "歳": "tuổi"
-                        },
-                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
-                    }
-                }
-            },
-            {
-                "id": 19,
-                "context": "Xác minh danh tính người kia - Đoạn 19",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。",
-                        "romaji": "Ano hito wa [blank1] desu ka?",
-                        "translation": "Người kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
-                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
-                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "だれ",
-                        "options": [
-                            "だれ",
-                            "なん",
-                            "おいくつ",
-                            "どなた"
-                        ],
-                        "options_translations": {
-                            "だれ": "ai",
-                            "なん": "gì / cái gì",
-                            "おいくつ": "bao nhiêu tuổi",
-                            "どなた": "ai (lịch sự)"
-                        },
-                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "も",
-                            "きました"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "の": "của",
-                            "も": "cũng",
-                            "きました": "đã đến"
-                        },
-                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
-                    }
-                }
-            },
-            {
-                "id": 20,
-                "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 20",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。",
-                        "romaji": "Ano kata wa [blank1] desu ka?",
-                        "translation": "Vị kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
-                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
-                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "どなた",
-                        "options": [
-                            "どなた",
-                            "だれ",
-                            "なんさい",
-                            "なにじん"
-                        ],
-                        "options_translations": {
-                            "どなた": "vị nào / ai (lịch sự)",
-                            "だれ": "ai",
-                            "nam": "Nam",
-                            "なにじん": "người nước nào",
-                            "なんさい": "なんさい (tiếng Việt)"
-                        },
-                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
-                    },
-                    "blank2": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
-                    }
-                }
-            },
-            {
-                "id": 21,
-                "context": "Chào hỏi - Đoạn 21",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
-                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
-                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。",
-                        "romaji": "Miraa desu. Douzo [blank2].",
-                        "translation": "Tôi là Miller. Rất mong được [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "なん",
-                        "options": [
-                            "なん",
-                            "だれ",
-                            "どなた",
-                            "どこ"
-                        ],
-                        "options_translations": {
-                            "なん": "cái gì / gì",
-                            "だれ": "ai",
-                            "どなた": "ai (lịch sự)",
-                            "đâu": "đâu (tiếng Việt)",
-                            "どこ": "どこ (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
-                    },
-                    "blank2": {
-                        "correct": "よろしく",
-                        "options": [
-                            "よろしく",
-                            "おねがい",
-                            "きました",
-                            "こちら"
-                        ],
-                        "options_translations": {
-                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
-                            "おねがい": "yêu cầu / nhờ vả",
-                            "きました": "đã đến",
-                            "こちら": "đây / phía này"
-                        },
-                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
-                    }
-                }
-            },
-            {
-                "id": 22,
-                "context": "Hỏi quốc tịch - Đoạn 22",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。",
-                        "romaji": "Karina san wa Burajiru kara [blank1]?",
-                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
-                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "きましたか",
-                        "options": [
-                            "きましたか",
-                            "きました",
-                            "ですか",
-                            "でした"
-                        ],
-                        "options_translations": {
-                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
-                            "きました": "đã đến (quá khứ)",
-                            "ですか": "là phải không? (nghi vấn hiện tại)",
-                            "でした": "đã là (quá khứ của です)"
-                        },
-                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
-                    },
-                    "blank2": {
-                        "correct": "きませんでした",
-                        "options": [
-                            "きませんでした",
-                            "きました",
-                            "じゃありません",
-                            "です"
-                        ],
-                        "options_translations": {
-                            "きませんでした": "đã không đến (phủ định quá khứ)",
-                            "きました": "đã đến (khẳng định quá khứ)",
-                            "chưa": "chưa (tiếng Việt)",
-                            "đến": "đến (tiếng Việt)",
-                            "じゃありません": "じゃありません (tiếng Việt)",
-                            "です": "です (tiếng Việt)"
-                        },
-                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
-                    }
-                }
-            },
-            {
-                "id": 23,
-                "context": "Giới thiệu người thứ ba - Đoạn 23",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。",
-                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
-                        "translation": "Anh Yamada, [blank1] là anh Wang."
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
-                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
-                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "こちら",
-                        "options": [
-                            "こちら",
-                            "わたし",
-                            "あなた",
-                            "あのかた"
-                        ],
-                        "options_translations": {
-                            "こちら": "đây / vị này (lịch sự)",
-                            "わたし": "tôi",
-                            "cậu": "cậu (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "あなた": "あなた (tiếng Việt)",
-                            "あのかた": "あのかた (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "は",
-                            "も"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "của": "của (tiếng Việt)",
-                            "thì": "thì (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "も": "も (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
-                    }
-                }
-            },
-            {
-                "id": 24,
-                "context": "Hỏi tuổi tác - Đoạn 24",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
-                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
-                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。",
-                        "romaji": "Tarou wa kyuu [blank2] desu.",
-                        "translation": "Taro thì 9 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "の",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "đâu": "đâu (tiếng Việt)",
-                            "đó": "đó (tiếng Việt)",
-                            "được": "được (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "も": "も (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "せんせい",
-                            "しゃいん"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "cháu": "cháu (tiếng Việt)",
-                            "học": "học (tiếng Việt)",
-                            "sinh": "sinh (tiếng Việt)",
-                            "じん": "じん (tiếng Việt)",
-                            "せんせい": "せんせい (tiếng Việt)",
-                            "しゃいん": "しゃいん (tiếng Việt)"
-                        },
-                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
-                    }
-                }
-            },
-            {
-                "id": 25,
-                "context": "Đồng nhất thông tin - Đoạn 25",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
-                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
-                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。",
-                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
-                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "cũng": "cũng (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "và": "và (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
-                    },
-                    "blank2": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "công": "công (tiếng Việt)",
-                            "ty": "ty (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
-                    }
-                }
-            },
-            {
-                "id": 26,
-                "context": "Hỏi nghề nghiệp - Đoạn 26",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。",
-                        "romaji": "Ari san wa gakusei desu ka?",
-                        "translation": "Anh Ali là học sinh phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
-                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
-                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "じゃありません",
-                        "options": [
-                            "じゃありません",
-                            "です",
-                            "も",
-                            "の"
-                        ],
-                        "options_translations": {
-                            "じゃありません": "không phải là (phủ định)",
-                            "です": "là",
-                            "も": "cũng",
-                            "の": "của"
-                        },
-                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
-                    },
-                    "blank2": {
-                        "correct": "です",
-                        "options": [
-                            "です",
-                            "も",
-                            "じゃありません",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "です": "là",
-                            "も": "cũng",
-                            "じゃありません": "không phải là (phủ định)",
-                            "から": "từ"
-                        },
-                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
-                    }
-                }
-            },
-            {
-                "id": 27,
-                "context": "Xác nhận cơ quan - Đoạn 27",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
-                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
-                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。",
-                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
-                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
-                    },
-                    "blank2": {
-                        "correct": "しゃいん",
-                        "options": [
-                            "しゃいん",
-                            "がくせい",
-                            "せんせい",
-                            "いしゃ"
-                        ],
-                        "options_translations": {
-                            "しゃいん": "nhân viên công ty",
-                            "がくせい": "học sinh / sinh viên",
-                            "せんせい": "giáo viên",
-                            "いしゃ": "bác sĩ"
-                        },
-                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
-                    }
-                }
-            },
-            {
-                "id": 28,
-                "context": "Chào hỏi xã giao tuổi tác - Đoạn 28",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。",
-                        "romaji": "Miraa san wa nansai [blank1]?",
-                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。",
-                        "romaji": "Watashi wa 28 [blank2] desu.",
-                        "translation": "Tôi 28 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "も",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "も": "cũng",
-                            "の": "của",
-                            "から": "từ"
-                        },
-                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "さい",
-                            "年"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "じん": "người (quốc tịch)",
-                            "年": "năm",
-                            "歳": "tuổi"
-                        },
-                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
-                    }
-                }
-            },
-            {
-                "id": 29,
-                "context": "Xác minh danh tính người kia - Đoạn 29",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。",
-                        "romaji": "Ano hito wa [blank1] desu ka?",
-                        "translation": "Người kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
-                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
-                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "だれ",
-                        "options": [
-                            "だれ",
-                            "なん",
-                            "おいくつ",
-                            "どなた"
-                        ],
-                        "options_translations": {
-                            "だれ": "ai",
-                            "なん": "gì / cái gì",
-                            "おいくつ": "bao nhiêu tuổi",
-                            "どなた": "ai (lịch sự)"
-                        },
-                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "も",
-                            "きました"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "の": "của",
-                            "も": "cũng",
-                            "きました": "đã đến"
-                        },
-                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
-                    }
-                }
-            },
-            {
-                "id": 30,
-                "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 30",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。",
-                        "romaji": "Ano kata wa [blank1] desu ka?",
-                        "translation": "Vị kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
-                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
-                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "どなた",
-                        "options": [
-                            "どなた",
-                            "だれ",
-                            "なんさい",
-                            "なにじん"
-                        ],
-                        "options_translations": {
-                            "どなた": "vị nào / ai (lịch sự)",
-                            "だれ": "ai",
-                            "nam": "Nam",
-                            "なにじん": "người nước nào",
-                            "なんさい": "なんさい (tiếng Việt)"
-                        },
-                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
-                    },
-                    "blank2": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
-                    }
-                }
-            },
-            {
-                "id": 31,
-                "context": "Chào hỏi - Đoạn 31",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
-                        "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
-                        "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
-                        "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ミラーです。どうぞ [blank2]。",
-                        "text_output": "ミラーです。どうぞ [blank2]。",
-                        "romaji": "Miraa desu. Douzo [blank2].",
-                        "translation": "Tôi là Miller. Rất mong được [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "なん",
-                        "options": [
-                            "なん",
-                            "だれ",
-                            "どなた",
-                            "どこ"
-                        ],
-                        "options_translations": {
-                            "なん": "cái gì / gì",
-                            "だれ": "ai",
-                            "どなた": "ai (lịch sự)",
-                            "đâu": "đâu (tiếng Việt)",
-                            "どこ": "どこ (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
-                    },
-                    "blank2": {
-                        "correct": "よろしく",
-                        "options": [
-                            "よろしく",
-                            "おねがい",
-                            "きました",
-                            "こちら"
-                        ],
-                        "options_translations": {
-                            "よろしく": "xin hãy giúp đỡ / tốt đẹp",
-                            "おねがい": "yêu cầu / nhờ vả",
-                            "きました": "đã đến",
-                            "こちら": "đây / phía này"
-                        },
-                        "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
-                    }
-                }
-            },
-            {
-                "id": 32,
-                "context": "Hỏi quốc tịch - Đoạn 32",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "カリナさんは ブラジルから [blank1]。",
-                        "text_output": "カリナさんは ブラジルから [blank1]。",
-                        "romaji": "Karina san wa Burajiru kara [blank1]?",
-                        "translation": "Chị Karina [blank1] từ Brazil phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
-                        "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
-                        "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "きましたか",
-                        "options": [
-                            "きましたか",
-                            "きました",
-                            "ですか",
-                            "でした"
-                        ],
-                        "options_translations": {
-                            "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
-                            "きました": "đã đến (quá khứ)",
-                            "ですか": "là phải không? (nghi vấn hiện tại)",
-                            "でした": "đã là (quá khứ của です)"
-                        },
-                        "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
-                    },
-                    "blank2": {
-                        "correct": "きませんでした",
-                        "options": [
-                            "きませんでした",
-                            "きました",
-                            "じゃありません",
-                            "です"
-                        ],
-                        "options_translations": {
-                            "きませんでした": "đã không đến (phủ định quá khứ)",
-                            "きました": "đã đến (khẳng định quá khứ)",
-                            "chưa": "chưa (tiếng Việt)",
-                            "đến": "đến (tiếng Việt)",
-                            "じゃありません": "じゃありません (tiếng Việt)",
-                            "です": "です (tiếng Việt)"
-                        },
-                        "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
-                    }
-                }
-            },
-            {
-                "id": 33,
-                "context": "Giới thiệu người thứ ba - Đoạn 33",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "やまださん、[blank1] は ワンさんです。",
-                        "text_output": "山田さん、[blank1] は ワンさんです。",
-                        "romaji": "Yamada san, [blank1] wa Wan san desu.",
-                        "translation": "Anh Yamada, [blank1] là anh Wang."
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
-                        "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
-                        "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
-                        "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "こちら",
-                        "options": [
-                            "こちら",
-                            "わたし",
-                            "あなた",
-                            "あのかた"
-                        ],
-                        "options_translations": {
-                            "こちら": "đây / vị này (lịch sự)",
-                            "わたし": "tôi",
-                            "cậu": "cậu (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "あなた": "あなた (tiếng Việt)",
-                            "あのかた": "あのかた (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "は",
-                            "も"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "của": "của (tiếng Việt)",
-                            "thì": "thì (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "も": "も (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
-                    }
-                }
-            },
-            {
-                "id": 34,
-                "context": "Hỏi tuổi tác - Đoạn 34",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
-                        "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
-                        "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
-                        "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "たろうは 9 [blank2] です。",
-                        "text_output": "太郎は 9 [blank2] です。",
-                        "romaji": "Tarou wa kyuu [blank2] desu.",
-                        "translation": "Taro thì 9 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "の",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "đâu": "đâu (tiếng Việt)",
-                            "đó": "đó (tiếng Việt)",
-                            "được": "được (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "も": "も (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "せんせい",
-                            "しゃいん"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "cháu": "cháu (tiếng Việt)",
-                            "học": "học (tiếng Việt)",
-                            "sinh": "sinh (tiếng Việt)",
-                            "じん": "じん (tiếng Việt)",
-                            "せんせい": "せんせい (tiếng Việt)",
-                            "しゃいん": "しゃいん (tiếng Việt)"
-                        },
-                        "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
-                    }
-                }
-            },
-            {
-                "id": 35,
-                "context": "Đồng nhất thông tin - Đoạn 35",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
-                        "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
-                        "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
-                        "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
-                        "text_output": "はい、サントスさん [blank2] 会社員です。",
-                        "romaji": "Hai, Santosu san [blank2] kaishain desu.",
-                        "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "cũng": "cũng (tiếng Việt)",
-                            "là": "là (tiếng Việt)",
-                            "và": "và (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
-                    },
-                    "blank2": {
-                        "correct": "も",
-                        "options": [
-                            "も",
-                            "は",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "も": "cũng",
-                            "công": "công (tiếng Việt)",
-                            "ty": "ty (tiếng Việt)",
-                            "mình": "mình (tiếng Việt)",
-                            "は": "は (tiếng Việt)",
-                            "の": "の (tiếng Việt)",
-                            "から": "から (tiếng Việt)"
-                        },
-                        "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
-                    }
-                }
-            },
-            {
-                "id": 36,
-                "context": "Hỏi nghề nghiệp - Đoạn 36",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "アリさんは がくせい ですか。",
-                        "text_output": "アリさんは 学生 ですか。",
-                        "romaji": "Ari san wa gakusei desu ka?",
-                        "translation": "Anh Ali là học sinh phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
-                        "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
-                        "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
-                        "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "じゃありません",
-                        "options": [
-                            "じゃありません",
-                            "です",
-                            "も",
-                            "の"
-                        ],
-                        "options_translations": {
-                            "じゃありません": "không phải là (phủ định)",
-                            "です": "là",
-                            "も": "cũng",
-                            "の": "của"
-                        },
-                        "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
-                    },
-                    "blank2": {
-                        "correct": "です",
-                        "options": [
-                            "です",
-                            "も",
-                            "じゃありません",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "です": "là",
-                            "も": "cũng",
-                            "じゃありません": "không phải là (phủ định)",
-                            "から": "từ"
-                        },
-                        "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
-                    }
-                }
-            },
-            {
-                "id": 37,
-                "context": "Xác nhận cơ quan - Đoạn 37",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
-                        "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
-                        "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
-                        "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "はい、パワーでんきの [blank2] です。",
-                        "text_output": "はい、パワー電気の [blank2] です。",
-                        "romaji": "Hai, Pawaa Denki no [blank2] desu.",
-                        "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
-                    },
-                    "blank2": {
-                        "correct": "しゃいん",
-                        "options": [
-                            "しゃいん",
-                            "がくせい",
-                            "せんせい",
-                            "いしゃ"
-                        ],
-                        "options_translations": {
-                            "しゃいん": "nhân viên công ty",
-                            "がくせい": "học sinh / sinh viên",
-                            "せんせい": "giáo viên",
-                            "いしゃ": "bác sĩ"
-                        },
-                        "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
-                    }
-                }
-            },
-            {
-                "id": 38,
-                "context": "Chào hỏi xã giao tuổi tác - Đoạn 38",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "ミラーさんは なんさい [blank1]。",
-                        "text_output": "ミラーさんは 何歳 [blank1]。",
-                        "romaji": "Miraa san wa nansai [blank1]?",
-                        "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "わたしは 28 [blank2] です。",
-                        "text_output": "私は 28 [blank2] です。",
-                        "romaji": "Watashi wa 28 [blank2] desu.",
-                        "translation": "Tôi 28 [blank2]."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "ですか",
-                        "options": [
-                            "ですか",
-                            "も",
-                            "の",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "ですか": "phải không? / là không?",
-                            "も": "cũng",
-                            "の": "của",
-                            "から": "từ"
-                        },
-                        "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
-                    },
-                    "blank2": {
-                        "correct": "さい",
-                        "options": [
-                            "さい",
-                            "じん",
-                            "さい",
-                            "年"
-                        ],
-                        "options_translations": {
-                            "さい": "tuổi (đơn vị đếm tuổi Nhật)",
-                            "じん": "người (quốc tịch)",
-                            "年": "năm",
-                            "歳": "tuổi"
-                        },
-                        "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
-                    }
-                }
-            },
-            {
-                "id": 39,
-                "context": "Xác minh danh tính người kia - Đoạn 39",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのひとは [blank1] ですか。",
-                        "text_output": "あの人は [blank1] ですか。",
-                        "romaji": "Ano hito wa [blank1] desu ka?",
-                        "translation": "Người kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "ワットさんです。イギリス [blank2] きました。",
-                        "text_output": "ワットさんです。イギリス [blank2] 来ました。",
-                        "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
-                        "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "だれ",
-                        "options": [
-                            "だれ",
-                            "なん",
-                            "おいくつ",
-                            "どなた"
-                        ],
-                        "options_translations": {
-                            "だれ": "ai",
-                            "なん": "gì / cái gì",
-                            "おいくつ": "bao nhiêu tuổi",
-                            "どなた": "ai (lịch sự)"
-                        },
-                        "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
-                    },
-                    "blank2": {
-                        "correct": "から",
-                        "options": [
-                            "から",
-                            "の",
-                            "も",
-                            "きました"
-                        ],
-                        "options_translations": {
-                            "から": "từ",
-                            "の": "của",
-                            "も": "cũng",
-                            "きました": "đã đến"
-                        },
-                        "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
-                    }
-                }
-            },
-            {
-                "id": 40,
-                "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 40",
-                "lines": [
-                    {
-                        "speaker": "A",
-                        "text_kana": "あのかたは [blank1] ですか。",
-                        "text_output": "あの方は [blank1] ですか。",
-                        "romaji": "Ano kata wa [blank1] desu ka?",
-                        "translation": "Vị kia là [blank1] phải không?"
-                    },
-                    {
-                        "speaker": "B",
-                        "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
-                        "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
-                        "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
-                        "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
-                    }
-                ],
-                "blanks": {
-                    "blank1": {
-                        "correct": "どなた",
-                        "options": [
-                            "どなた",
-                            "だれ",
-                            "なんさい",
-                            "なにじん"
-                        ],
-                        "options_translations": {
-                            "どなた": "vị nào / ai (lịch sự)",
-                            "だれ": "ai",
-                            "nam": "Nam",
-                            "なにじん": "người nước nào",
-                            "なんさい": "なんさい (tiếng Việt)"
-                        },
-                        "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
-                    },
-                    "blank2": {
-                        "correct": "の",
-                        "options": [
-                            "の",
-                            "は",
-                            "も",
-                            "から"
-                        ],
-                        "options_translations": {
-                            "の": "của",
-                            "は": "thì / là",
-                            "も": "cũng",
-                            "から": "từ"
-                        },
-                        "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
-                    }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "なん",
+                    "options": [
+                        "なん",
+                        "だれ",
+                        "どなた",
+                        "どこ"
+                    ],
+                    "options_translations": {
+                        "なん": "cái gì / gì",
+                        "だれ": "ai",
+                        "どなた": "ai (lịch sự)",
+                        "đâu": "đâu (tiếng Việt)",
+                        "どこ": "どこ (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
+                },
+                "blank2": {
+                    "correct": "よろしく",
+                    "options": [
+                        "よろしく",
+                        "おねがい",
+                        "きました",
+                        "こちら"
+                    ],
+                    "options_translations": {
+                        "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                        "おねがい": "yêu cầu / nhờ vả",
+                        "きました": "đã đến",
+                        "こちら": "đây / phía này"
+                    },
+                    "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
                 }
             }
-        ],
-        "listenings": [
-            {
-                "id": 1,
-                "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
-                "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
-                "questions": [
-                    {
-                        "q": "Nam là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Việt Nam",
-                            "Indonesia"
-                        ],
-                        "corr": "Việt Nam"
-                    },
-                    {
-                        "q": "Karina làm nghề gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Sinh viên",
-                            "Nhân viên công ty",
-                            "Kỹ sư"
-                        ],
-                        "corr": "Sinh viên"
-                    },
-                    {
-                        "q": "Karina bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "25 tuổi",
-                            "30 tuổi",
-                            "18 tuổi"
-                        ],
-                        "corr": "20 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
-                "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
-                "questions": [
-                    {
-                        "q": "Miller làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "B&C",
-                            "Sakura",
-                            "FPT"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Santos là người nước nào?",
-                        "opts": [
-                            "Mỹ",
-                            "Nhật",
-                            "Brazil",
-                            "Đức"
-                        ],
-                        "corr": "Brazil"
-                    },
-                    {
-                        "q": "Nghề nghiệp của Santos là gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Bác sĩ"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
-                "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
-                "questions": [
-                    {
-                        "q": "Thầy giáo Watt đến từ nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Anh",
-                            "Mỹ",
-                            "Pháp"
-                        ],
-                        "corr": "Anh"
-                    },
-                    {
-                        "q": "Thầy giáo Watt bao nhiêu tuổi?",
-                        "opts": [
-                            "40 tuổi",
-                            "45 tuổi",
-                            "50 tuổi",
-                            "35 tuổi"
-                        ],
-                        "corr": "45 tuổi"
-                    },
-                    {
-                        "q": "Thầy giáo Watt dạy ở đâu?",
-                        "opts": [
-                            "Đại học FPT",
-                            "Công ty IMC",
-                            "Đại học Sakura",
-                            "Bệnh viện"
-                        ],
-                        "corr": "Đại học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 4,
-                "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
-                "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Lee đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Trung Quốc",
-                            "Hàn Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Hàn Quốc"
-                    },
-                    {
-                        "q": "Lee làm nghề gì?",
-                        "opts": [
-                            "Nhân viên ngân hàng",
-                            "Nhân viên công ty",
-                            "Bác sĩ",
-                            "Học sinh"
-                        ],
-                        "corr": "Nhân viên ngân hàng"
-                    },
-                    {
-                        "q": "Lee bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "32 tuổi",
-                            "35 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "32 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 5,
-                "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
-                "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
-                "questions": [
-                    {
-                        "q": "Taro bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "9 tuổi"
-                    },
-                    {
-                        "q": "Hanako bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "8 tuổi"
-                    },
-                    {
-                        "q": "Hai bé là học sinh trường nào?",
-                        "opts": [
-                            "Đại học Sakura",
-                            "Tiểu học Sakura",
-                            "Công ty IMC",
-                            "FPT"
-                        ],
-                        "corr": "Tiểu học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 6,
-                "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
-                "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
-                "questions": [
-                    {
-                        "q": "Thawaphon đến từ đâu?",
-                        "opts": [
-                            "Thái Lan",
-                            "Việt Nam",
-                            "Mỹ",
-                            "Hàn Quốc"
-                        ],
-                        "corr": "Thái Lan"
-                    },
-                    {
-                        "q": "Anh ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "25 tuổi",
-                            "30 tuổi",
-                            "28 tuổi",
-                            "20 tuổi"
-                        ],
-                        "corr": "28 tuổi"
-                    },
-                    {
-                        "q": "Công ty của anh ấy tên là gì?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Sakura",
-                            "Power Electric"
-                        ],
-                        "corr": "FPT"
-                    }
-                ]
-            },
-            {
-                "id": 7,
-                "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
-                "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
-                "questions": [
-                    {
-                        "q": "Schmidt là người nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Mỹ",
-                            "Nhật",
-                            "Anh"
-                        ],
-                        "corr": "Mỹ"
-                    },
-                    {
-                        "q": "Anh ấy làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Đại học Sakura"
-                        ],
-                        "corr": "Power Electric"
-                    },
-                    {
-                        "q": "Chức vụ của anh ấy là gì?",
-                        "opts": [
-                            "Bác sĩ",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Giáo viên"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 8,
-                "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
-                "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
-                "questions": [
-                    {
-                        "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
-                        "opts": [
-                            "Kobe",
-                            "Sakura",
-                            "Tokyo",
-                            "FPT"
-                        ],
-                        "corr": "Kobe"
-                    },
-                    {
-                        "q": "Ông ấy đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Hàn Quốc",
-                            "Trung Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Trung Quốc"
-                    },
-                    {
-                        "q": "Ông ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "38 tuổi",
-                            "40 tuổi"
-                        ],
-                        "corr": "38 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 9,
-                "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
-                "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Alisa là sinh viên trường nào?",
-                        "opts": [
-                            "IMC",
-                            "Đại học Sakura",
-                            "FPT",
-                            "Kobe"
-                        ],
-                        "corr": "Đại học Sakura"
-                    },
-                    {
-                        "q": "Cô ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "21 tuổi",
-                            "22 tuổi",
-                            "19 tuổi"
-                        ],
-                        "corr": "21 tuổi"
-                    },
-                    {
-                        "q": "Quốc tịch của cô ấy là gì?",
-                        "opts": [
-                            "Mỹ",
-                            "Đức",
-                            "Anh",
-                            "Pháp"
-                        ],
-                        "corr": "Mỹ"
-                    }
-                ]
-            },
-            {
-                "id": 10,
-                "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
-                "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
-                "questions": [
-                    {
-                        "q": "Yamada làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Bệnh viện Kobe"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Yamada bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "40 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "35 tuổi"
-                    },
-                    {
-                        "q": "Yamada là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Đức",
-                            "Trung Quốc"
-                        ],
-                        "corr": "Nhật Bản"
-                    }
-                ]
-            },
-            {
-                "id": 11,
-                "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
-                "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
-                "questions": [
-                    {
-                        "q": "Nam là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Việt Nam",
-                            "Indonesia"
-                        ],
-                        "corr": "Việt Nam"
-                    },
-                    {
-                        "q": "Karina làm nghề gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Sinh viên",
-                            "Nhân viên công ty",
-                            "Kỹ sư"
-                        ],
-                        "corr": "Sinh viên"
-                    },
-                    {
-                        "q": "Karina bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "25 tuổi",
-                            "30 tuổi",
-                            "18 tuổi"
-                        ],
-                        "corr": "20 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 12,
-                "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
-                "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
-                "questions": [
-                    {
-                        "q": "Miller làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "B&C",
-                            "Sakura",
-                            "FPT"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Santos là người nước nào?",
-                        "opts": [
-                            "Mỹ",
-                            "Nhật",
-                            "Brazil",
-                            "Đức"
-                        ],
-                        "corr": "Brazil"
-                    },
-                    {
-                        "q": "Nghề nghiệp của Santos là gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Bác sĩ"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 13,
-                "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
-                "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
-                "questions": [
-                    {
-                        "q": "Thầy giáo Watt đến từ nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Anh",
-                            "Mỹ",
-                            "Pháp"
-                        ],
-                        "corr": "Anh"
-                    },
-                    {
-                        "q": "Thầy giáo Watt bao nhiêu tuổi?",
-                        "opts": [
-                            "40 tuổi",
-                            "45 tuổi",
-                            "50 tuổi",
-                            "35 tuổi"
-                        ],
-                        "corr": "45 tuổi"
-                    },
-                    {
-                        "q": "Thầy giáo Watt dạy ở đâu?",
-                        "opts": [
-                            "Đại học FPT",
-                            "Công ty IMC",
-                            "Đại học Sakura",
-                            "Bệnh viện"
-                        ],
-                        "corr": "Đại học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 14,
-                "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
-                "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Lee đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Trung Quốc",
-                            "Hàn Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Hàn Quốc"
-                    },
-                    {
-                        "q": "Lee làm nghề gì?",
-                        "opts": [
-                            "Nhân viên ngân hàng",
-                            "Nhân viên công ty",
-                            "Bác sĩ",
-                            "Học sinh"
-                        ],
-                        "corr": "Nhân viên ngân hàng"
-                    },
-                    {
-                        "q": "Lee bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "32 tuổi",
-                            "35 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "32 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 15,
-                "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
-                "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
-                "questions": [
-                    {
-                        "q": "Taro bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "9 tuổi"
-                    },
-                    {
-                        "q": "Hanako bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "8 tuổi"
-                    },
-                    {
-                        "q": "Hai bé là học sinh trường nào?",
-                        "opts": [
-                            "Đại học Sakura",
-                            "Tiểu học Sakura",
-                            "Công ty IMC",
-                            "FPT"
-                        ],
-                        "corr": "Tiểu học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 16,
-                "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
-                "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
-                "questions": [
-                    {
-                        "q": "Thawaphon đến từ đâu?",
-                        "opts": [
-                            "Thái Lan",
-                            "Việt Nam",
-                            "Mỹ",
-                            "Hàn Quốc"
-                        ],
-                        "corr": "Thái Lan"
-                    },
-                    {
-                        "q": "Anh ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "25 tuổi",
-                            "30 tuổi",
-                            "28 tuổi",
-                            "20 tuổi"
-                        ],
-                        "corr": "28 tuổi"
-                    },
-                    {
-                        "q": "Công ty của anh ấy tên là gì?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Sakura",
-                            "Power Electric"
-                        ],
-                        "corr": "FPT"
-                    }
-                ]
-            },
-            {
-                "id": 17,
-                "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
-                "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
-                "questions": [
-                    {
-                        "q": "Schmidt là người nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Mỹ",
-                            "Nhật",
-                            "Anh"
-                        ],
-                        "corr": "Mỹ"
-                    },
-                    {
-                        "q": "Anh ấy làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Đại học Sakura"
-                        ],
-                        "corr": "Power Electric"
-                    },
-                    {
-                        "q": "Chức vụ của anh ấy là gì?",
-                        "opts": [
-                            "Bác sĩ",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Giáo viên"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 18,
-                "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
-                "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
-                "questions": [
-                    {
-                        "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
-                        "opts": [
-                            "Kobe",
-                            "Sakura",
-                            "Tokyo",
-                            "FPT"
-                        ],
-                        "corr": "Kobe"
-                    },
-                    {
-                        "q": "Ông ấy đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Hàn Quốc",
-                            "Trung Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Trung Quốc"
-                    },
-                    {
-                        "q": "Ông ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "38 tuổi",
-                            "40 tuổi"
-                        ],
-                        "corr": "38 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 19,
-                "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
-                "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Alisa là sinh viên trường nào?",
-                        "opts": [
-                            "IMC",
-                            "Đại học Sakura",
-                            "FPT",
-                            "Kobe"
-                        ],
-                        "corr": "Đại học Sakura"
-                    },
-                    {
-                        "q": "Cô ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "21 tuổi",
-                            "22 tuổi",
-                            "19 tuổi"
-                        ],
-                        "corr": "21 tuổi"
-                    },
-                    {
-                        "q": "Quốc tịch của cô ấy là gì?",
-                        "opts": [
-                            "Mỹ",
-                            "Đức",
-                            "Anh",
-                            "Pháp"
-                        ],
-                        "corr": "Mỹ"
-                    }
-                ]
-            },
-            {
-                "id": 20,
-                "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
-                "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
-                "questions": [
-                    {
-                        "q": "Yamada làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Bệnh viện Kobe"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Yamada bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "40 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "35 tuổi"
-                    },
-                    {
-                        "q": "Yamada là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Đức",
-                            "Trung Quốc"
-                        ],
-                        "corr": "Nhật Bản"
-                    }
-                ]
-            },
-            {
-                "id": 21,
-                "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
-                "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
-                "questions": [
-                    {
-                        "q": "Nam là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Việt Nam",
-                            "Indonesia"
-                        ],
-                        "corr": "Việt Nam"
-                    },
-                    {
-                        "q": "Karina làm nghề gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Sinh viên",
-                            "Nhân viên công ty",
-                            "Kỹ sư"
-                        ],
-                        "corr": "Sinh viên"
-                    },
-                    {
-                        "q": "Karina bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "25 tuổi",
-                            "30 tuổi",
-                            "18 tuổi"
-                        ],
-                        "corr": "20 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 22,
-                "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
-                "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
-                "questions": [
-                    {
-                        "q": "Miller làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "B&C",
-                            "Sakura",
-                            "FPT"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Santos là người nước nào?",
-                        "opts": [
-                            "Mỹ",
-                            "Nhật",
-                            "Brazil",
-                            "Đức"
-                        ],
-                        "corr": "Brazil"
-                    },
-                    {
-                        "q": "Nghề nghiệp của Santos là gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Bác sĩ"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 23,
-                "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
-                "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
-                "questions": [
-                    {
-                        "q": "Thầy giáo Watt đến từ nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Anh",
-                            "Mỹ",
-                            "Pháp"
-                        ],
-                        "corr": "Anh"
-                    },
-                    {
-                        "q": "Thầy giáo Watt bao nhiêu tuổi?",
-                        "opts": [
-                            "40 tuổi",
-                            "45 tuổi",
-                            "50 tuổi",
-                            "35 tuổi"
-                        ],
-                        "corr": "45 tuổi"
-                    },
-                    {
-                        "q": "Thầy giáo Watt dạy ở đâu?",
-                        "opts": [
-                            "Đại học FPT",
-                            "Công ty IMC",
-                            "Đại học Sakura",
-                            "Bệnh viện"
-                        ],
-                        "corr": "Đại học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 24,
-                "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
-                "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Lee đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Trung Quốc",
-                            "Hàn Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Hàn Quốc"
-                    },
-                    {
-                        "q": "Lee làm nghề gì?",
-                        "opts": [
-                            "Nhân viên ngân hàng",
-                            "Nhân viên công ty",
-                            "Bác sĩ",
-                            "Học sinh"
-                        ],
-                        "corr": "Nhân viên ngân hàng"
-                    },
-                    {
-                        "q": "Lee bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "32 tuổi",
-                            "35 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "32 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 25,
-                "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
-                "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
-                "questions": [
-                    {
-                        "q": "Taro bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "9 tuổi"
-                    },
-                    {
-                        "q": "Hanako bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "8 tuổi"
-                    },
-                    {
-                        "q": "Hai bé là học sinh trường nào?",
-                        "opts": [
-                            "Đại học Sakura",
-                            "Tiểu học Sakura",
-                            "Công ty IMC",
-                            "FPT"
-                        ],
-                        "corr": "Tiểu học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 26,
-                "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
-                "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
-                "questions": [
-                    {
-                        "q": "Thawaphon đến từ đâu?",
-                        "opts": [
-                            "Thái Lan",
-                            "Việt Nam",
-                            "Mỹ",
-                            "Hàn Quốc"
-                        ],
-                        "corr": "Thái Lan"
-                    },
-                    {
-                        "q": "Anh ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "25 tuổi",
-                            "30 tuổi",
-                            "28 tuổi",
-                            "20 tuổi"
-                        ],
-                        "corr": "28 tuổi"
-                    },
-                    {
-                        "q": "Công ty của anh ấy tên là gì?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Sakura",
-                            "Power Electric"
-                        ],
-                        "corr": "FPT"
-                    }
-                ]
-            },
-            {
-                "id": 27,
-                "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
-                "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
-                "questions": [
-                    {
-                        "q": "Schmidt là người nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Mỹ",
-                            "Nhật",
-                            "Anh"
-                        ],
-                        "corr": "Mỹ"
-                    },
-                    {
-                        "q": "Anh ấy làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Đại học Sakura"
-                        ],
-                        "corr": "Power Electric"
-                    },
-                    {
-                        "q": "Chức vụ của anh ấy là gì?",
-                        "opts": [
-                            "Bác sĩ",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Giáo viên"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 28,
-                "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
-                "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
-                "questions": [
-                    {
-                        "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
-                        "opts": [
-                            "Kobe",
-                            "Sakura",
-                            "Tokyo",
-                            "FPT"
-                        ],
-                        "corr": "Kobe"
-                    },
-                    {
-                        "q": "Ông ấy đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Hàn Quốc",
-                            "Trung Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Trung Quốc"
-                    },
-                    {
-                        "q": "Ông ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "38 tuổi",
-                            "40 tuổi"
-                        ],
-                        "corr": "38 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 29,
-                "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
-                "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Alisa là sinh viên trường nào?",
-                        "opts": [
-                            "IMC",
-                            "Đại học Sakura",
-                            "FPT",
-                            "Kobe"
-                        ],
-                        "corr": "Đại học Sakura"
-                    },
-                    {
-                        "q": "Cô ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "21 tuổi",
-                            "22 tuổi",
-                            "19 tuổi"
-                        ],
-                        "corr": "21 tuổi"
-                    },
-                    {
-                        "q": "Quốc tịch của cô ấy là gì?",
-                        "opts": [
-                            "Mỹ",
-                            "Đức",
-                            "Anh",
-                            "Pháp"
-                        ],
-                        "corr": "Mỹ"
-                    }
-                ]
-            },
-            {
-                "id": 30,
-                "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
-                "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
-                "questions": [
-                    {
-                        "q": "Yamada làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Bệnh viện Kobe"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Yamada bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "40 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "35 tuổi"
-                    },
-                    {
-                        "q": "Yamada là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Đức",
-                            "Trung Quốc"
-                        ],
-                        "corr": "Nhật Bản"
-                    }
-                ]
-            },
-            {
-                "id": 31,
-                "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
-                "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
-                "questions": [
-                    {
-                        "q": "Nam là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Việt Nam",
-                            "Indonesia"
-                        ],
-                        "corr": "Việt Nam"
-                    },
-                    {
-                        "q": "Karina làm nghề gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Sinh viên",
-                            "Nhân viên công ty",
-                            "Kỹ sư"
-                        ],
-                        "corr": "Sinh viên"
-                    },
-                    {
-                        "q": "Karina bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "25 tuổi",
-                            "30 tuổi",
-                            "18 tuổi"
-                        ],
-                        "corr": "20 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 32,
-                "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
-                "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
-                "questions": [
-                    {
-                        "q": "Miller làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "B&C",
-                            "Sakura",
-                            "FPT"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Santos là người nước nào?",
-                        "opts": [
-                            "Mỹ",
-                            "Nhật",
-                            "Brazil",
-                            "Đức"
-                        ],
-                        "corr": "Brazil"
-                    },
-                    {
-                        "q": "Nghề nghiệp của Santos là gì?",
-                        "opts": [
-                            "Giáo viên",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Bác sĩ"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 33,
-                "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
-                "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
-                "questions": [
-                    {
-                        "q": "Thầy giáo Watt đến từ nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Anh",
-                            "Mỹ",
-                            "Pháp"
-                        ],
-                        "corr": "Anh"
-                    },
-                    {
-                        "q": "Thầy giáo Watt bao nhiêu tuổi?",
-                        "opts": [
-                            "40 tuổi",
-                            "45 tuổi",
-                            "50 tuổi",
-                            "35 tuổi"
-                        ],
-                        "corr": "45 tuổi"
-                    },
-                    {
-                        "q": "Thầy giáo Watt dạy ở đâu?",
-                        "opts": [
-                            "Đại học FPT",
-                            "Công ty IMC",
-                            "Đại học Sakura",
-                            "Bệnh viện"
-                        ],
-                        "corr": "Đại học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 34,
-                "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
-                "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Lee đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Trung Quốc",
-                            "Hàn Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Hàn Quốc"
-                    },
-                    {
-                        "q": "Lee làm nghề gì?",
-                        "opts": [
-                            "Nhân viên ngân hàng",
-                            "Nhân viên công ty",
-                            "Bác sĩ",
-                            "Học sinh"
-                        ],
-                        "corr": "Nhân viên ngân hàng"
-                    },
-                    {
-                        "q": "Lee bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "32 tuổi",
-                            "35 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "32 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 35,
-                "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
-                "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
-                "questions": [
-                    {
-                        "q": "Taro bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "9 tuổi"
-                    },
-                    {
-                        "q": "Hanako bao nhiêu tuổi?",
-                        "opts": [
-                            "8 tuổi",
-                            "9 tuổi",
-                            "10 tuổi",
-                            "7 tuổi"
-                        ],
-                        "corr": "8 tuổi"
-                    },
-                    {
-                        "q": "Hai bé là học sinh trường nào?",
-                        "opts": [
-                            "Đại học Sakura",
-                            "Tiểu học Sakura",
-                            "Công ty IMC",
-                            "FPT"
-                        ],
-                        "corr": "Tiểu học Sakura"
-                    }
-                ]
-            },
-            {
-                "id": 36,
-                "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
-                "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
-                "questions": [
-                    {
-                        "q": "Thawaphon đến từ đâu?",
-                        "opts": [
-                            "Thái Lan",
-                            "Việt Nam",
-                            "Mỹ",
-                            "Hàn Quốc"
-                        ],
-                        "corr": "Thái Lan"
-                    },
-                    {
-                        "q": "Anh ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "25 tuổi",
-                            "30 tuổi",
-                            "28 tuổi",
-                            "20 tuổi"
-                        ],
-                        "corr": "28 tuổi"
-                    },
-                    {
-                        "q": "Công ty của anh ấy tên là gì?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Sakura",
-                            "Power Electric"
-                        ],
-                        "corr": "FPT"
-                    }
-                ]
-            },
-            {
-                "id": 37,
-                "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
-                "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
-                "questions": [
-                    {
-                        "q": "Schmidt là người nước nào?",
-                        "opts": [
-                            "Đức",
-                            "Mỹ",
-                            "Nhật",
-                            "Anh"
-                        ],
-                        "corr": "Mỹ"
-                    },
-                    {
-                        "q": "Anh ấy làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Đại học Sakura"
-                        ],
-                        "corr": "Power Electric"
-                    },
-                    {
-                        "q": "Chức vụ của anh ấy là gì?",
-                        "opts": [
-                            "Bác sĩ",
-                            "Học sinh",
-                            "Nhà nghiên cứu",
-                            "Giáo viên"
-                        ],
-                        "corr": "Nhà nghiên cứu"
-                    }
-                ]
-            },
-            {
-                "id": 38,
-                "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
-                "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
-                "questions": [
-                    {
-                        "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
-                        "opts": [
-                            "Kobe",
-                            "Sakura",
-                            "Tokyo",
-                            "FPT"
-                        ],
-                        "corr": "Kobe"
-                    },
-                    {
-                        "q": "Ông ấy đến từ nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Hàn Quốc",
-                            "Trung Quốc",
-                            "Mỹ"
-                        ],
-                        "corr": "Trung Quốc"
-                    },
-                    {
-                        "q": "Ông ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "38 tuổi",
-                            "40 tuổi"
-                        ],
-                        "corr": "38 tuổi"
-                    }
-                ]
-            },
-            {
-                "id": 39,
-                "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
-                "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
-                "questions": [
-                    {
-                        "q": "Alisa là sinh viên trường nào?",
-                        "opts": [
-                            "IMC",
-                            "Đại học Sakura",
-                            "FPT",
-                            "Kobe"
-                        ],
-                        "corr": "Đại học Sakura"
-                    },
-                    {
-                        "q": "Cô ấy bao nhiêu tuổi?",
-                        "opts": [
-                            "20 tuổi",
-                            "21 tuổi",
-                            "22 tuổi",
-                            "19 tuổi"
-                        ],
-                        "corr": "21 tuổi"
-                    },
-                    {
-                        "q": "Quốc tịch của cô ấy là gì?",
-                        "opts": [
-                            "Mỹ",
-                            "Đức",
-                            "Anh",
-                            "Pháp"
-                        ],
-                        "corr": "Mỹ"
-                    }
-                ]
-            },
-            {
-                "id": 40,
-                "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
-                "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
-                "questions": [
-                    {
-                        "q": "Yamada làm việc ở đâu?",
-                        "opts": [
-                            "IMC",
-                            "FPT",
-                            "Power Electric",
-                            "Bệnh viện Kobe"
-                        ],
-                        "corr": "IMC"
-                    },
-                    {
-                        "q": "Yamada bao nhiêu tuổi?",
-                        "opts": [
-                            "30 tuổi",
-                            "35 tuổi",
-                            "40 tuổi",
-                            "28 tuổi"
-                        ],
-                        "corr": "35 tuổi"
-                    },
-                    {
-                        "q": "Yamada là người nước nào?",
-                        "opts": [
-                            "Nhật Bản",
-                            "Mỹ",
-                            "Đức",
-                            "Trung Quốc"
-                        ],
-                        "corr": "Nhật Bản"
-                    }
-                ]
+        },
+        {
+            "id": 2,
+            "context": "Hỏi quốc tịch - Đoạn 2",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "カリナさんは ブラジルから [blank1]。",
+                    "text_output": "カリナさんは ブラジルから [blank1]。",
+                    "romaji": "Karina san wa Burajiru kara [blank1]?",
+                    "translation": "Chị Karina [blank1] từ Brazil phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                    "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "きましたか",
+                    "options": [
+                        "きましたか",
+                        "きました",
+                        "ですか",
+                        "でした"
+                    ],
+                    "options_translations": {
+                        "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                        "きました": "đã đến (quá khứ)",
+                        "ですか": "là phải không? (nghi vấn hiện tại)",
+                        "でした": "đã là (quá khứ của です)"
+                    },
+                    "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
+                },
+                "blank2": {
+                    "correct": "きませんでした",
+                    "options": [
+                        "きませんでした",
+                        "きました",
+                        "じゃありません",
+                        "です"
+                    ],
+                    "options_translations": {
+                        "きませんでした": "đã không đến (phủ định quá khứ)",
+                        "きました": "đã đến (khẳng định quá khứ)",
+                        "chưa": "chưa (tiếng Việt)",
+                        "đến": "đến (tiếng Việt)",
+                        "じゃありません": "じゃありません (tiếng Việt)",
+                        "です": "です (tiếng Việt)"
+                    },
+                    "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
+                }
             }
-        ],
-        "dictations": [
-            {
-                "id": 1,
-                "question_audio": "わたしは ミラー です。",
-                "correct_answers": [
-                    "わたしは ミラー です",
-                    "watashiwa miraa desu"
-                ]
-            },
-            {
-                "id": 2,
-                "question_audio": "サントスさんは がくせいじゃありません。",
-                "correct_answers": [
-                    "サントスさんは がくせいじゃありません",
-                    "santosu sanwa gakuseija arimasen"
-                ]
-            },
-            {
-                "id": 3,
-                "question_audio": "あのひとは だれですか。",
-                "correct_answers": [
-                    "あのひとは だれですか",
-                    "ano hitowa daredesuか"
-                ]
-            },
-            {
-                "id": 4,
-                "question_audio": "あのかたは どなたですか。",
-                "correct_answers": [
-                    "あのかたは どなたですか",
-                    "あのかたwa どなたdesuか"
-                ]
-            },
-            {
-                "id": 5,
-                "question_audio": "ワンさんは いしゃです。",
-                "correct_answers": [
-                    "ワンさんは いしゃです",
-                    "ワンさんwa いしゃdesu"
-                ]
-            },
-            {
-                "id": 6,
-                "question_audio": "イーさんは ぎんこういんです。",
-                "correct_answers": [
-                    "イーさんは ぎんこういんです",
-                    "イーさんwa ぎんこういんdesu"
-                ]
-            },
-            {
-                "id": 7,
-                "question_audio": "カリナさんは 20さいです。",
-                "correct_answers": [
-                    "カリナさんは 20さいです",
-                    "カリナさんwa 20さいdesu"
-                ]
-            },
-            {
-                "id": 8,
-                "question_audio": "おなまえは なんですか。",
-                "correct_answers": [
-                    "おなまえは なんですか",
-                    "おなまえwa なんdesuか"
-                ]
-            },
-            {
-                "id": 9,
-                "question_audio": "ミラーさんは アメリカから きました。",
-                "correct_answers": [
-                    "ミラーさんは アメリカから きました",
-                    "miraaさんwa アメリカから きました"
-                ]
-            },
-            {
-                "id": 10,
-                "question_audio": "ナムさんも かいしゃいんです。",
-                "correct_answers": [
-                    "ナムさんも かいしゃいんです",
-                    "ナムさんも かいしゃいんdesu"
-                ]
-            },
-            {
-                "id": 11,
-                "question_audio": "やまださんは せんせいです。",
-                "correct_answers": [
-                    "やまださんは せんせいです",
-                    "やまださんwa せんせいdesu"
-                ]
-            },
-            {
-                "id": 12,
-                "question_audio": "あなたは がくせいですか。",
-                "correct_answers": [
-                    "あなたは がくせいですか",
-                    "あなたwa gakuseidesuか"
-                ]
-            },
-            {
-                "id": 13,
-                "question_audio": "おいくつですか。",
-                "correct_answers": [
-                    "おいくつですか",
-                    "おいくつdesuか"
-                ]
-            },
-            {
-                "id": 14,
-                "question_audio": "ワットさんは イギリスじんです。",
-                "correct_answers": [
-                    "ワットさんは イギリスじんです",
-                    "ワットさんwa イギリスじんdesu"
-                ]
-            },
-            {
-                "id": 15,
-                "question_audio": "シュミットさんは ドイツの けんきゅうしゃです。",
-                "correct_answers": [
-                    "シュミットさんは ドイツの けんきゅうしゃです",
-                    "シュミットさんwa ドイツの けんきゅうしゃdesu"
-                ]
-            },
-            {
-                "id": 16,
-                "question_audio": "こちらは タワポンさんです。",
-                "correct_answers": [
-                    "こちらは タワポンさんです",
-                    "こちらwa タワポンさんdesu"
-                ]
-            },
-            {
-                "id": 17,
-                "question_audio": "わたしは ベトナムじんです。",
-                "correct_answers": [
-                    "わたしは ベトナムじんです",
-                    "watashiwa ベトナムじんdesu"
-                ]
-            },
-            {
-                "id": 18,
-                "question_audio": "ナムさんは FPTの しゃいんです。",
-                "correct_answers": [
-                    "ナムさんは FPTの しゃいんです",
-                    "ナムさんwa FPTの しゃいんdesu"
-                ]
-            },
-            {
-                "id": 19,
-                "question_audio": "あのひとは にほんじんじゃありません。",
-                "correct_answers": [
-                    "あのひとは にほんじんじゃありません",
-                    "ano hitowa にほんじんja arimasen"
-                ]
-            },
-            {
-                "id": 20,
-                "question_audio": "どうぞ よろしく おねがいします。",
-                "correct_answers": [
-                    "どうぞ よろしく おねがいします",
-                    "どうぞ よろしく おねがいします"
-                ]
-            },
-            {
-                "id": 21,
-                "question_audio": "はじめまして。",
-                "correct_answers": [
-                    "はじめまして",
-                    "waじめまして"
-                ]
-            },
-            {
-                "id": 22,
-                "question_audio": "ワンさんも いしゃですか。",
-                "correct_answers": [
-                    "ワンさんも いしゃですか",
-                    "ワンさんも いしゃdesuか"
-                ]
-            },
-            {
-                "id": 23,
-                "question_audio": "いいえ、わたしは がくせいじゃありません。",
-                "correct_answers": [
-                    "いいえわたしは がくせいじゃありません",
-                    "いいえwatashiwa gakuseija arimasen"
-                ]
-            },
-            {
-                "id": 24,
-                "question_audio": "カリナさんは さくらだいがくの がくせいです。",
-                "correct_answers": [
-                    "カリナさんは さくらだいがくの がくせいです",
-                    "カリナさんwa さくらだいがくの gakuseidesu"
-                ]
-            },
-            {
-                "id": 25,
-                "question_audio": "シュミットさんは IMCの しゃいんです。",
-                "correct_answers": [
-                    "シュミットさんは IMCの しゃいんです",
-                    "シュミットさんwa IMCの しゃいんdesu"
-                ]
-            },
-            {
-                "id": 26,
-                "question_audio": "ミラーさんは 28さいです。",
-                "correct_answers": [
-                    "ミラーさんは 28さいです",
-                    "miraaさんwa 28さいdesu"
-                ]
-            },
-            {
-                "id": 27,
-                "question_audio": "イーさんは ぎんこういんじゃありません。",
-                "correct_answers": [
-                    "イーさんは ぎんこういんじゃありません",
-                    "イーさんwa ぎんこういんja arimasen"
-                ]
-            },
-            {
-                "id": 28,
-                "question_audio": "タワポンさんも タイじんです。",
-                "correct_answers": [
-                    "タワポンさんも タイじんです",
-                    "タワポンさんも タイじんdesu"
-                ]
-            },
-            {
-                "id": 29,
-                "question_audio": "わたしは パワーでんきの しゃいんです。",
-                "correct_answers": [
-                    "わたしは パワーでんきの しゃいんです",
-                    "watashiwa パワーでんきの しゃいんdesu"
-                ]
-            },
-            {
-                "id": 30,
-                "question_audio": "あのひとは ドイツじんじゃありません。",
-                "correct_answers": [
-                    "あのひとは ドイツじんじゃありません",
-                    "ano hitowa ドイツじんja arimasen"
-                ]
-            },
-            {
-                "id": 31,
-                "question_audio": "サントスさんは 30さいです。",
-                "correct_answers": [
-                    "サントスさんは 30さいです",
-                    "santosu sanwa 30さいdesu"
-                ]
-            },
-            {
-                "id": 32,
-                "question_audio": "ワットさんは さくらだいがくの せんせいです。",
-                "correct_answers": [
-                    "ワットさんは さくらだいがくの せんせいです",
-                    "ワットさんwa さくらだいがくの せんせいdesu"
-                ]
-            },
-            {
-                "id": 33,
-                "question_audio": "こちらは カリナさんです。",
-                "correct_answers": [
-                    "こちらは カリナさんです",
-                    "こちらwa カリナさんdesu"
-                ]
-            },
-            {
-                "id": 34,
-                "question_audio": "ワンさんは 35さいですか。",
-                "correct_answers": [
-                    "ワンさんは 35さいですか",
-                    "ワンさんwa 35さいdesuか"
-                ]
-            },
-            {
-                "id": 35,
-                "question_audio": "いいえ、ワンさんは ちゅうごくじんです。",
-                "correct_answers": [
-                    "いいえワンさんは ちゅうごくじんです",
-                    "いいえワンさんwa ちゅうごくじんdesu"
-                ]
-            },
-            {
-                "id": 36,
-                "question_audio": "あのひとは イギリスの がくせいです。",
-                "correct_answers": [
-                    "あのひとは イギリスの がくせいです",
-                    "ano hitowa イギリスの gakuseidesu"
-                ]
-            },
-            {
-                "id": 37,
-                "question_audio": "タワポンさんは タイから きました。",
-                "correct_answers": [
-                    "タワポンさんは タイから きました",
-                    "タワポンさんwa タイから きました"
-                ]
-            },
-            {
-                "id": 38,
-                "question_audio": "わたしも かいしゃいんじゃありません。",
-                "correct_answers": [
-                    "わたしも かいしゃいんじゃありません",
-                    "watashiも かいしゃいんja arimasen"
-                ]
-            },
-            {
-                "id": 39,
-                "question_audio": "どうぞ よろしく。",
-                "correct_answers": [
-                    "どうぞ よろしく",
-                    "どうぞ よろしく"
-                ]
-            },
-            {
-                "id": 40,
-                "question_audio": "わたしは ミラー です。",
-                "correct_answers": [
-                    "わたしは ミラー です",
-                    "watashiwa miraa desu"
-                ]
+        },
+        {
+            "id": 3,
+            "context": "Giới thiệu người thứ ba - Đoạn 3",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "やまださん、[blank1] は ワンさんです。",
+                    "text_output": "山田さん、[blank1] は ワンさんです。",
+                    "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                    "translation": "Anh Yamada, [blank1] là anh Wang."
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
+                    "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                    "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                    "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "こちら",
+                    "options": [
+                        "こちら",
+                        "わたし",
+                        "あなた",
+                        "あのかた"
+                    ],
+                    "options_translations": {
+                        "こちら": "đây / vị này (lịch sự)",
+                        "わたし": "tôi",
+                        "cậu": "cậu (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "あなた": "あなた (tiếng Việt)",
+                        "あのかた": "あのかた (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "は",
+                        "も"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "của": "của (tiếng Việt)",
+                        "thì": "thì (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "も": "も (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
+                }
             }
-        ]
-    }
+        },
+        {
+            "id": 4,
+            "context": "Hỏi tuổi tác - Đoạn 4",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
+                    "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                    "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                    "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "たろうは 9 [blank2] です。",
+                    "text_output": "太郎は 9 [blank2] です。",
+                    "romaji": "Tarou wa kyuu [blank2] desu.",
+                    "translation": "Taro thì 9 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "の",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "đâu": "đâu (tiếng Việt)",
+                        "đó": "đó (tiếng Việt)",
+                        "được": "được (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "も": "も (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "せんせい",
+                        "しゃいん"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "cháu": "cháu (tiếng Việt)",
+                        "học": "học (tiếng Việt)",
+                        "sinh": "sinh (tiếng Việt)",
+                        "じん": "じん (tiếng Việt)",
+                        "せんせい": "せんせい (tiếng Việt)",
+                        "しゃいん": "しゃいん (tiếng Việt)"
+                    },
+                    "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
+                }
+            }
+        },
+        {
+            "id": 5,
+            "context": "Đồng nhất thông tin - Đoạn 5",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
+                    "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                    "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                    "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
+                    "text_output": "はい、サントスさん [blank2] 会社員です。",
+                    "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                    "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "cũng": "cũng (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "và": "và (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
+                },
+                "blank2": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "công": "công (tiếng Việt)",
+                        "ty": "ty (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
+                }
+            }
+        },
+        {
+            "id": 6,
+            "context": "Hỏi nghề nghiệp - Đoạn 6",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "アリさんは がくせい ですか。",
+                    "text_output": "アリさんは 学生 ですか。",
+                    "romaji": "Ari san wa gakusei desu ka?",
+                    "translation": "Anh Ali là học sinh phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
+                    "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                    "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                    "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "じゃありません",
+                    "options": [
+                        "じゃありません",
+                        "です",
+                        "も",
+                        "の"
+                    ],
+                    "options_translations": {
+                        "じゃありません": "không phải là (phủ định)",
+                        "です": "là",
+                        "も": "cũng",
+                        "の": "của"
+                    },
+                    "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
+                },
+                "blank2": {
+                    "correct": "です",
+                    "options": [
+                        "です",
+                        "も",
+                        "じゃありません",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "です": "là",
+                        "も": "cũng",
+                        "じゃありません": "không phải là (phủ định)",
+                        "から": "từ"
+                    },
+                    "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
+                }
+            }
+        },
+        {
+            "id": 7,
+            "context": "Xác nhận cơ quan - Đoạn 7",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
+                    "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                    "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                    "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、パワーでんきの [blank2] です。",
+                    "text_output": "はい、パワー電気の [blank2] です。",
+                    "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                    "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
+                },
+                "blank2": {
+                    "correct": "しゃいん",
+                    "options": [
+                        "しゃいん",
+                        "がくせい",
+                        "せんせい",
+                        "いしゃ"
+                    ],
+                    "options_translations": {
+                        "しゃいん": "nhân viên công ty",
+                        "がくせい": "học sinh / sinh viên",
+                        "せんせい": "giáo viên",
+                        "いしゃ": "bác sĩ"
+                    },
+                    "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
+                }
+            }
+        },
+        {
+            "id": 8,
+            "context": "Chào hỏi xã giao tuổi tác - Đoạn 8",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "ミラーさんは なんさい [blank1]。",
+                    "text_output": "ミラーさんは 何歳 [blank1]。",
+                    "romaji": "Miraa san wa nansai [blank1]?",
+                    "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "わたしは 28 [blank2] です。",
+                    "text_output": "私は 28 [blank2] です。",
+                    "romaji": "Watashi wa 28 [blank2] desu.",
+                    "translation": "Tôi 28 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "も",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "も": "cũng",
+                        "の": "của",
+                        "から": "từ"
+                    },
+                    "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "さい",
+                        "年"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "じん": "người (quốc tịch)",
+                        "年": "năm",
+                        "歳": "tuổi"
+                    },
+                    "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
+                }
+            }
+        },
+        {
+            "id": 9,
+            "context": "Xác minh danh tính người kia - Đoạn 9",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのひとは [blank1] ですか。",
+                    "text_output": "あの人は [blank1] ですか。",
+                    "romaji": "Ano hito wa [blank1] desu ka?",
+                    "translation": "Người kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ワットさんです。イギリス [blank2] きました。",
+                    "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                    "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                    "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "だれ",
+                    "options": [
+                        "だれ",
+                        "なん",
+                        "おいくつ",
+                        "どなた"
+                    ],
+                    "options_translations": {
+                        "だれ": "ai",
+                        "なん": "gì / cái gì",
+                        "おいくつ": "bao nhiêu tuổi",
+                        "どなた": "ai (lịch sự)"
+                    },
+                    "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "も",
+                        "きました"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "の": "của",
+                        "も": "cũng",
+                        "きました": "đã đến"
+                    },
+                    "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
+                }
+            }
+        },
+        {
+            "id": 10,
+            "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 10",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのかたは [blank1] ですか。",
+                    "text_output": "あの方は [blank1] ですか。",
+                    "romaji": "Ano kata wa [blank1] desu ka?",
+                    "translation": "Vị kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
+                    "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                    "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                    "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "どなた",
+                    "options": [
+                        "どなた",
+                        "だれ",
+                        "なんさい",
+                        "なにじん"
+                    ],
+                    "options_translations": {
+                        "どなた": "vị nào / ai (lịch sự)",
+                        "だれ": "ai",
+                        "nam": "Nam",
+                        "なにじん": "người nước nào",
+                        "なんさい": "なんさい (tiếng Việt)"
+                    },
+                    "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
+                },
+                "blank2": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
+                }
+            }
+        },
+        {
+            "id": 11,
+            "context": "Chào hỏi - Đoạn 11",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
+                    "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                    "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                    "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ミラーです。どうぞ [blank2]。",
+                    "text_output": "ミラーです。どうぞ [blank2]。",
+                    "romaji": "Miraa desu. Douzo [blank2].",
+                    "translation": "Tôi là Miller. Rất mong được [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "なん",
+                    "options": [
+                        "なん",
+                        "だれ",
+                        "どなた",
+                        "どこ"
+                    ],
+                    "options_translations": {
+                        "なん": "cái gì / gì",
+                        "だれ": "ai",
+                        "どなた": "ai (lịch sự)",
+                        "đâu": "đâu (tiếng Việt)",
+                        "どこ": "どこ (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
+                },
+                "blank2": {
+                    "correct": "よろしく",
+                    "options": [
+                        "よろしく",
+                        "おねがい",
+                        "きました",
+                        "こちら"
+                    ],
+                    "options_translations": {
+                        "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                        "おねがい": "yêu cầu / nhờ vả",
+                        "きました": "đã đến",
+                        "こちら": "đây / phía này"
+                    },
+                    "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
+                }
+            }
+        },
+        {
+            "id": 12,
+            "context": "Hỏi quốc tịch - Đoạn 12",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "カリナさんは ブラジルから [blank1]。",
+                    "text_output": "カリナさんは ブラジルから [blank1]。",
+                    "romaji": "Karina san wa Burajiru kara [blank1]?",
+                    "translation": "Chị Karina [blank1] từ Brazil phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                    "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "きましたか",
+                    "options": [
+                        "きましたか",
+                        "きました",
+                        "ですか",
+                        "でした"
+                    ],
+                    "options_translations": {
+                        "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                        "きました": "đã đến (quá khứ)",
+                        "ですか": "là phải không? (nghi vấn hiện tại)",
+                        "でした": "đã là (quá khứ của です)"
+                    },
+                    "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
+                },
+                "blank2": {
+                    "correct": "きませんでした",
+                    "options": [
+                        "きませんでした",
+                        "きました",
+                        "じゃありません",
+                        "です"
+                    ],
+                    "options_translations": {
+                        "きませんでした": "đã không đến (phủ định quá khứ)",
+                        "きました": "đã đến (khẳng định quá khứ)",
+                        "chưa": "chưa (tiếng Việt)",
+                        "đến": "đến (tiếng Việt)",
+                        "じゃありません": "じゃありません (tiếng Việt)",
+                        "です": "です (tiếng Việt)"
+                    },
+                    "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
+                }
+            }
+        },
+        {
+            "id": 13,
+            "context": "Giới thiệu người thứ ba - Đoạn 13",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "やまださん、[blank1] は ワンさんです。",
+                    "text_output": "山田さん、[blank1] は ワンさんです。",
+                    "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                    "translation": "Anh Yamada, [blank1] là anh Wang."
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
+                    "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                    "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                    "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "こちら",
+                    "options": [
+                        "こちら",
+                        "わたし",
+                        "あなた",
+                        "あのかた"
+                    ],
+                    "options_translations": {
+                        "こちら": "đây / vị này (lịch sự)",
+                        "わたし": "tôi",
+                        "cậu": "cậu (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "あなた": "あなた (tiếng Việt)",
+                        "あのかた": "あのかた (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "は",
+                        "も"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "của": "của (tiếng Việt)",
+                        "thì": "thì (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "も": "も (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
+                }
+            }
+        },
+        {
+            "id": 14,
+            "context": "Hỏi tuổi tác - Đoạn 14",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
+                    "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                    "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                    "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "たろうは 9 [blank2] です。",
+                    "text_output": "太郎は 9 [blank2] です。",
+                    "romaji": "Tarou wa kyuu [blank2] desu.",
+                    "translation": "Taro thì 9 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "の",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "đâu": "đâu (tiếng Việt)",
+                        "đó": "đó (tiếng Việt)",
+                        "được": "được (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "も": "も (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "せんせい",
+                        "しゃいん"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "cháu": "cháu (tiếng Việt)",
+                        "học": "học (tiếng Việt)",
+                        "sinh": "sinh (tiếng Việt)",
+                        "じん": "じん (tiếng Việt)",
+                        "せんせい": "せんせい (tiếng Việt)",
+                        "しゃいん": "しゃいん (tiếng Việt)"
+                    },
+                    "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
+                }
+            }
+        },
+        {
+            "id": 15,
+            "context": "Đồng nhất thông tin - Đoạn 15",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
+                    "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                    "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                    "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
+                    "text_output": "はい、サントスさん [blank2] 会社員です。",
+                    "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                    "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "cũng": "cũng (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "và": "và (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
+                },
+                "blank2": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "công": "công (tiếng Việt)",
+                        "ty": "ty (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
+                }
+            }
+        },
+        {
+            "id": 16,
+            "context": "Hỏi nghề nghiệp - Đoạn 16",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "アリさんは がくせい ですか。",
+                    "text_output": "アリさんは 学生 ですか。",
+                    "romaji": "Ari san wa gakusei desu ka?",
+                    "translation": "Anh Ali là học sinh phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
+                    "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                    "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                    "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "じゃありません",
+                    "options": [
+                        "じゃありません",
+                        "です",
+                        "も",
+                        "の"
+                    ],
+                    "options_translations": {
+                        "じゃありません": "không phải là (phủ định)",
+                        "です": "là",
+                        "も": "cũng",
+                        "の": "của"
+                    },
+                    "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
+                },
+                "blank2": {
+                    "correct": "です",
+                    "options": [
+                        "です",
+                        "も",
+                        "じゃありません",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "です": "là",
+                        "も": "cũng",
+                        "じゃありません": "không phải là (phủ định)",
+                        "から": "từ"
+                    },
+                    "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
+                }
+            }
+        },
+        {
+            "id": 17,
+            "context": "Xác nhận cơ quan - Đoạn 17",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
+                    "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                    "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                    "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、パワーでんきの [blank2] です。",
+                    "text_output": "はい、パワー電気の [blank2] です。",
+                    "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                    "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
+                },
+                "blank2": {
+                    "correct": "しゃいん",
+                    "options": [
+                        "しゃいん",
+                        "がくせい",
+                        "せんせい",
+                        "いしゃ"
+                    ],
+                    "options_translations": {
+                        "しゃいん": "nhân viên công ty",
+                        "がくせい": "học sinh / sinh viên",
+                        "せんせい": "giáo viên",
+                        "いしゃ": "bác sĩ"
+                    },
+                    "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
+                }
+            }
+        },
+        {
+            "id": 18,
+            "context": "Chào hỏi xã giao tuổi tác - Đoạn 18",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "ミラーさんは なんさい [blank1]。",
+                    "text_output": "ミラーさんは 何歳 [blank1]。",
+                    "romaji": "Miraa san wa nansai [blank1]?",
+                    "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "わたしは 28 [blank2] です。",
+                    "text_output": "私は 28 [blank2] です。",
+                    "romaji": "Watashi wa 28 [blank2] desu.",
+                    "translation": "Tôi 28 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "も",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "も": "cũng",
+                        "の": "của",
+                        "から": "từ"
+                    },
+                    "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "さい",
+                        "年"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "じん": "người (quốc tịch)",
+                        "年": "năm",
+                        "歳": "tuổi"
+                    },
+                    "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
+                }
+            }
+        },
+        {
+            "id": 19,
+            "context": "Xác minh danh tính người kia - Đoạn 19",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのひとは [blank1] ですか。",
+                    "text_output": "あの人は [blank1] ですか。",
+                    "romaji": "Ano hito wa [blank1] desu ka?",
+                    "translation": "Người kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ワットさんです。イギリス [blank2] きました。",
+                    "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                    "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                    "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "だれ",
+                    "options": [
+                        "だれ",
+                        "なん",
+                        "おいくつ",
+                        "どなた"
+                    ],
+                    "options_translations": {
+                        "だれ": "ai",
+                        "なん": "gì / cái gì",
+                        "おいくつ": "bao nhiêu tuổi",
+                        "どなた": "ai (lịch sự)"
+                    },
+                    "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "も",
+                        "きました"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "の": "của",
+                        "も": "cũng",
+                        "きました": "đã đến"
+                    },
+                    "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
+                }
+            }
+        },
+        {
+            "id": 20,
+            "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 20",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのかたは [blank1] ですか。",
+                    "text_output": "あの方は [blank1] ですか。",
+                    "romaji": "Ano kata wa [blank1] desu ka?",
+                    "translation": "Vị kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
+                    "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                    "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                    "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "どなた",
+                    "options": [
+                        "どなた",
+                        "だれ",
+                        "なんさい",
+                        "なにじん"
+                    ],
+                    "options_translations": {
+                        "どなた": "vị nào / ai (lịch sự)",
+                        "だれ": "ai",
+                        "nam": "Nam",
+                        "なにじん": "người nước nào",
+                        "なんさい": "なんさい (tiếng Việt)"
+                    },
+                    "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
+                },
+                "blank2": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
+                }
+            }
+        },
+        {
+            "id": 21,
+            "context": "Chào hỏi - Đoạn 21",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
+                    "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                    "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                    "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ミラーです。どうぞ [blank2]。",
+                    "text_output": "ミラーです。どうぞ [blank2]。",
+                    "romaji": "Miraa desu. Douzo [blank2].",
+                    "translation": "Tôi là Miller. Rất mong được [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "なん",
+                    "options": [
+                        "なん",
+                        "だれ",
+                        "どなた",
+                        "どこ"
+                    ],
+                    "options_translations": {
+                        "なん": "cái gì / gì",
+                        "だれ": "ai",
+                        "どなた": "ai (lịch sự)",
+                        "đâu": "đâu (tiếng Việt)",
+                        "どこ": "どこ (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
+                },
+                "blank2": {
+                    "correct": "よろしく",
+                    "options": [
+                        "よろしく",
+                        "おねがい",
+                        "きました",
+                        "こちら"
+                    ],
+                    "options_translations": {
+                        "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                        "おねがい": "yêu cầu / nhờ vả",
+                        "きました": "đã đến",
+                        "こちら": "đây / phía này"
+                    },
+                    "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
+                }
+            }
+        },
+        {
+            "id": 22,
+            "context": "Hỏi quốc tịch - Đoạn 22",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "カリナさんは ブラジルから [blank1]。",
+                    "text_output": "カリナさんは ブラジルから [blank1]。",
+                    "romaji": "Karina san wa Burajiru kara [blank1]?",
+                    "translation": "Chị Karina [blank1] từ Brazil phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                    "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "きましたか",
+                    "options": [
+                        "きましたか",
+                        "きました",
+                        "ですか",
+                        "でした"
+                    ],
+                    "options_translations": {
+                        "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                        "きました": "đã đến (quá khứ)",
+                        "ですか": "là phải không? (nghi vấn hiện tại)",
+                        "でした": "đã là (quá khứ của です)"
+                    },
+                    "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
+                },
+                "blank2": {
+                    "correct": "きませんでした",
+                    "options": [
+                        "きませんでした",
+                        "きました",
+                        "じゃありません",
+                        "です"
+                    ],
+                    "options_translations": {
+                        "きませんでした": "đã không đến (phủ định quá khứ)",
+                        "きました": "đã đến (khẳng định quá khứ)",
+                        "chưa": "chưa (tiếng Việt)",
+                        "đến": "đến (tiếng Việt)",
+                        "じゃありません": "じゃありません (tiếng Việt)",
+                        "です": "です (tiếng Việt)"
+                    },
+                    "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
+                }
+            }
+        },
+        {
+            "id": 23,
+            "context": "Giới thiệu người thứ ba - Đoạn 23",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "やまださん、[blank1] は ワンさんです。",
+                    "text_output": "山田さん、[blank1] は ワンさんです。",
+                    "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                    "translation": "Anh Yamada, [blank1] là anh Wang."
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
+                    "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                    "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                    "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "こちら",
+                    "options": [
+                        "こちら",
+                        "わたし",
+                        "あなた",
+                        "あのかた"
+                    ],
+                    "options_translations": {
+                        "こちら": "đây / vị này (lịch sự)",
+                        "わたし": "tôi",
+                        "cậu": "cậu (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "あなた": "あなた (tiếng Việt)",
+                        "あのかた": "あのかた (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "は",
+                        "も"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "của": "của (tiếng Việt)",
+                        "thì": "thì (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "も": "も (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
+                }
+            }
+        },
+        {
+            "id": 24,
+            "context": "Hỏi tuổi tác - Đoạn 24",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
+                    "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                    "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                    "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "たろうは 9 [blank2] です。",
+                    "text_output": "太郎は 9 [blank2] です。",
+                    "romaji": "Tarou wa kyuu [blank2] desu.",
+                    "translation": "Taro thì 9 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "の",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "đâu": "đâu (tiếng Việt)",
+                        "đó": "đó (tiếng Việt)",
+                        "được": "được (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "も": "も (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "せんせい",
+                        "しゃいん"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "cháu": "cháu (tiếng Việt)",
+                        "học": "học (tiếng Việt)",
+                        "sinh": "sinh (tiếng Việt)",
+                        "じん": "じん (tiếng Việt)",
+                        "せんせい": "せんせい (tiếng Việt)",
+                        "しゃいん": "しゃいん (tiếng Việt)"
+                    },
+                    "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
+                }
+            }
+        },
+        {
+            "id": 25,
+            "context": "Đồng nhất thông tin - Đoạn 25",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
+                    "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                    "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                    "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
+                    "text_output": "はい、サントスさん [blank2] 会社員です。",
+                    "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                    "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "cũng": "cũng (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "và": "và (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
+                },
+                "blank2": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "công": "công (tiếng Việt)",
+                        "ty": "ty (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
+                }
+            }
+        },
+        {
+            "id": 26,
+            "context": "Hỏi nghề nghiệp - Đoạn 26",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "アリさんは がくせい ですか。",
+                    "text_output": "アリさんは 学生 ですか。",
+                    "romaji": "Ari san wa gakusei desu ka?",
+                    "translation": "Anh Ali là học sinh phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
+                    "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                    "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                    "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "じゃありません",
+                    "options": [
+                        "じゃありません",
+                        "です",
+                        "も",
+                        "の"
+                    ],
+                    "options_translations": {
+                        "じゃありません": "không phải là (phủ định)",
+                        "です": "là",
+                        "も": "cũng",
+                        "の": "của"
+                    },
+                    "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
+                },
+                "blank2": {
+                    "correct": "です",
+                    "options": [
+                        "です",
+                        "も",
+                        "じゃありません",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "です": "là",
+                        "も": "cũng",
+                        "じゃありません": "không phải là (phủ định)",
+                        "から": "từ"
+                    },
+                    "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
+                }
+            }
+        },
+        {
+            "id": 27,
+            "context": "Xác nhận cơ quan - Đoạn 27",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
+                    "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                    "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                    "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、パワーでんきの [blank2] です。",
+                    "text_output": "はい、パワー電気の [blank2] です。",
+                    "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                    "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
+                },
+                "blank2": {
+                    "correct": "しゃいん",
+                    "options": [
+                        "しゃいん",
+                        "がくせい",
+                        "せんせい",
+                        "いしゃ"
+                    ],
+                    "options_translations": {
+                        "しゃいん": "nhân viên công ty",
+                        "がくせい": "học sinh / sinh viên",
+                        "せんせい": "giáo viên",
+                        "いしゃ": "bác sĩ"
+                    },
+                    "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
+                }
+            }
+        },
+        {
+            "id": 28,
+            "context": "Chào hỏi xã giao tuổi tác - Đoạn 28",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "ミラーさんは なんさい [blank1]。",
+                    "text_output": "ミラーさんは 何歳 [blank1]。",
+                    "romaji": "Miraa san wa nansai [blank1]?",
+                    "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "わたしは 28 [blank2] です。",
+                    "text_output": "私は 28 [blank2] です。",
+                    "romaji": "Watashi wa 28 [blank2] desu.",
+                    "translation": "Tôi 28 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "も",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "も": "cũng",
+                        "の": "của",
+                        "から": "từ"
+                    },
+                    "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "さい",
+                        "年"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "じん": "người (quốc tịch)",
+                        "年": "năm",
+                        "歳": "tuổi"
+                    },
+                    "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
+                }
+            }
+        },
+        {
+            "id": 29,
+            "context": "Xác minh danh tính người kia - Đoạn 29",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのひとは [blank1] ですか。",
+                    "text_output": "あの人は [blank1] ですか。",
+                    "romaji": "Ano hito wa [blank1] desu ka?",
+                    "translation": "Người kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ワットさんです。イギリス [blank2] きました。",
+                    "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                    "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                    "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "だれ",
+                    "options": [
+                        "だれ",
+                        "なん",
+                        "おいくつ",
+                        "どなた"
+                    ],
+                    "options_translations": {
+                        "だれ": "ai",
+                        "なん": "gì / cái gì",
+                        "おいくつ": "bao nhiêu tuổi",
+                        "どなた": "ai (lịch sự)"
+                    },
+                    "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "も",
+                        "きました"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "の": "của",
+                        "も": "cũng",
+                        "きました": "đã đến"
+                    },
+                    "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
+                }
+            }
+        },
+        {
+            "id": 30,
+            "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 30",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのかたは [blank1] ですか。",
+                    "text_output": "あの方は [blank1] ですか。",
+                    "romaji": "Ano kata wa [blank1] desu ka?",
+                    "translation": "Vị kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
+                    "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                    "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                    "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "どなた",
+                    "options": [
+                        "どなた",
+                        "だれ",
+                        "なんさい",
+                        "なにじん"
+                    ],
+                    "options_translations": {
+                        "どなた": "vị nào / ai (lịch sự)",
+                        "だれ": "ai",
+                        "nam": "Nam",
+                        "なにじん": "người nước nào",
+                        "なんさい": "なんさい (tiếng Việt)"
+                    },
+                    "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
+                },
+                "blank2": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
+                }
+            }
+        },
+        {
+            "id": 31,
+            "context": "Chào hỏi - Đoạn 31",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "はじめまして。ナムです。おなまえは [blank1] ですか。",
+                    "text_output": "初めまして。ナムです。お名前は [blank1] ですか。",
+                    "romaji": "Hajimemashite. Namu desu. Onamae wa [blank1] desu ka?",
+                    "translation": "Rất vui được gặp bạn. Tôi là Nam. Tên bạn là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ミラーです。どうぞ [blank2]。",
+                    "text_output": "ミラーです。どうぞ [blank2]。",
+                    "romaji": "Miraa desu. Douzo [blank2].",
+                    "translation": "Tôi là Miller. Rất mong được [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "なん",
+                    "options": [
+                        "なん",
+                        "だれ",
+                        "どなた",
+                        "どこ"
+                    ],
+                    "options_translations": {
+                        "なん": "cái gì / gì",
+                        "だれ": "ai",
+                        "どなた": "ai (lịch sự)",
+                        "đâu": "đâu (tiếng Việt)",
+                        "どこ": "どこ (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng 'なん' (gì/cái gì) để hỏi tên: 'お名前 là なん ですか' (Tên bạn là gì?). 'だれ' và 'どなた' dùng để hỏi người ('ai/vị nào'), còn 'đâu' là từ tiếng Việt không phù hợp."
+                },
+                "blank2": {
+                    "correct": "よろしく",
+                    "options": [
+                        "よろしく",
+                        "おねがい",
+                        "きました",
+                        "こちら"
+                    ],
+                    "options_translations": {
+                        "よろしく": "xin hãy giúp đỡ / tốt đẹp",
+                        "おねがい": "yêu cầu / nhờ vả",
+                        "きました": "đã đến",
+                        "こちら": "đây / phía này"
+                    },
+                    "explanation": "Cấu trúc chào hỏi lần đầu gặp mặt cố định là 'どうぞ よろしく' (Rất mong được sự giúp đỡ của bạn). Từ 'おねがい' cần có 'します' đi kèm ở vế sau, còn 'きました' và 'こちら' không tạo thành câu chào."
+                }
+            }
+        },
+        {
+            "id": 32,
+            "context": "Hỏi quốc tịch - Đoạn 32",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "カリナさんは ブラジルから [blank1]。",
+                    "text_output": "カリナさんは ブラジルから [blank1]。",
+                    "romaji": "Karina san wa Burajiru kara [blank1]?",
+                    "translation": "Chị Karina [blank1] từ Brazil phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "text_output": "いいえ、ブラジルから [blank2]。インドネシアからです。",
+                    "romaji": "Iie, Burajiru kara [blank2]. Indoneshia kara desu.",
+                    "translation": "Không, tôi [blank2] từ Brazil. Tôi đến từ Indonesia."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "きましたか",
+                    "options": [
+                        "きましたか",
+                        "きました",
+                        "ですか",
+                        "でした"
+                    ],
+                    "options_translations": {
+                        "きましたか": "đã đến phải không? (quá khứ nghi vấn)",
+                        "きました": "đã đến (quá khứ)",
+                        "ですか": "là phải không? (nghi vấn hiện tại)",
+                        "でした": "đã là (quá khứ của です)"
+                    },
+                    "explanation": "Để hỏi xuất xứ/nguồn gốc của ai đó, ta dùng động từ chia thì quá khứ dạng nghi vấn 'きましたか' (đã đến từ... phải không) đi kèm trợ từ nguồn gốc 'から' (từ)."
+                },
+                "blank2": {
+                    "correct": "きませんでした",
+                    "options": [
+                        "きませんでした",
+                        "きました",
+                        "じゃありません",
+                        "です"
+                    ],
+                    "options_translations": {
+                        "きませんでした": "đã không đến (phủ định quá khứ)",
+                        "きました": "đã đến (khẳng định quá khứ)",
+                        "chưa": "chưa (tiếng Việt)",
+                        "đến": "đến (tiếng Việt)",
+                        "じゃありません": "じゃありません (tiếng Việt)",
+                        "です": "です (tiếng Việt)"
+                    },
+                    "explanation": "Bắt đầu câu trả lời bằng phủ định 'いいえ' (Không) nên vế sau phải ở dạng phủ định quá khứ 'きませんでした' (đã không đến từ Brazil) để tương ứng với động từ quá khứ nghi vấn 'きましたか' ở câu hỏi."
+                }
+            }
+        },
+        {
+            "id": 33,
+            "context": "Giới thiệu người thứ ba - Đoạn 33",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "やまださん、[blank1] は ワンさんです。",
+                    "text_output": "山田さん、[blank1] は ワンさんです。",
+                    "romaji": "Yamada san, [blank1] wa Wan san desu.",
+                    "translation": "Anh Yamada, [blank1] là anh Wang."
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はじめまして。ワンです. ちゅうごく [blank2] きました。",
+                    "text_output": "初めまして。ワンです。中国 [blank2] 来ました。",
+                    "romaji": "Hajimemashite. Wan desu. Chuugoku [blank2] kimashita.",
+                    "translation": "Rất vui được gặp anh. Tôi là Wang. Tôi đến [blank2] Trung Quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "こちら",
+                    "options": [
+                        "こちら",
+                        "わたし",
+                        "あなた",
+                        "あのかた"
+                    ],
+                    "options_translations": {
+                        "こちら": "đây / vị này (lịch sự)",
+                        "わたし": "tôi",
+                        "cậu": "cậu (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "あなた": "あなた (tiếng Việt)",
+                        "あのかた": "あのかた (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng đại từ chỉ phương hướng/người lịch sự 'こちら' (đây/vị này) khi giới thiệu một người khác đang ở gần."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "は",
+                        "も"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "của": "của (tiếng Việt)",
+                        "thì": "thì (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "も": "も (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'から' (từ) kết hợp với động từ quá khứ 'きました' (đã đến) để biểu thị xuất xứ đất nước 'Trung Quốc'."
+                }
+            }
+        },
+        {
+            "id": 34,
+            "context": "Hỏi tuổi tác - Đoạn 34",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "そのこは たろうちゃんですか。おいくつ [blank1]。",
+                    "text_output": "その子は 太郎ちゃんですか。おいくつ [blank1]。",
+                    "romaji": "Sono ko wa Tarou chan desu ka. Oikutsu [blank1]?",
+                    "translation": "Đứa bé đó là bé Taro phải không? Cháu [blank1]?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "たろうは 9 [blank2] です。",
+                    "text_output": "太郎は 9 [blank2] です。",
+                    "romaji": "Tarou wa kyuu [blank2] desu.",
+                    "translation": "Taro thì 9 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "の",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "đâu": "đâu (tiếng Việt)",
+                        "đó": "đó (tiếng Việt)",
+                        "được": "được (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "も": "も (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Cấu trúc nghi vấn hỏi tuổi lịch sự kết hợp từ nghi vấn 'おいくつ' với đuôi câu nghi vấn 'ですか' thành câu hoàn chỉnh."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "せんせい",
+                        "しゃいん"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "cháu": "cháu (tiếng Việt)",
+                        "học": "học (tiếng Việt)",
+                        "sinh": "sinh (tiếng Việt)",
+                        "じん": "じん (tiếng Việt)",
+                        "せんせい": "せんせい (tiếng Việt)",
+                        "しゃいん": "しゃいん (tiếng Việt)"
+                    },
+                    "explanation": "Đơn vị đếm tuổi của Nhật là 'さい' (tuổi), dùng đính kèm ngay sau chữ số đếm."
+                }
+            }
+        },
+        {
+            "id": 35,
+            "context": "Đồng nhất thông tin - Đoạn 35",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "わたしは かいしゃいん です。サントスさん [blank1] かいしゃいんですか。",
+                    "text_output": "私は 会社員 です。サントスさん [blank1] 会社員ですか。",
+                    "romaji": "Watashi wa kaishain desu. Santosu san [blank1] kaishain desu ka?",
+                    "translation": "Tôi là nhân viên công ty. Anh Santos [blank1] là nhân viên công ty phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、サントスさん [blank2] かいしゃいんです。",
+                    "text_output": "はい、サントスさん [blank2] 会社員です。",
+                    "romaji": "Hai, Santosu san [blank2] kaishain desu.",
+                    "translation": "Vâng, anh Santos [blank2] là nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "cũng": "cũng (tiếng Việt)",
+                        "là": "là (tiếng Việt)",
+                        "và": "và (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Sử dụng trợ từ 'も' (cũng) thay thế cho trợ từ chủ ngữ 'は' để hỏi một đối tượng khác có cùng tính chất 'là nhân viên công ty' tương đồng với người nói."
+                },
+                "blank2": {
+                    "correct": "も",
+                    "options": [
+                        "も",
+                        "は",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "も": "cũng",
+                        "công": "công (tiếng Việt)",
+                        "ty": "ty (tiếng Việt)",
+                        "mình": "mình (tiếng Việt)",
+                        "は": "は (tiếng Việt)",
+                        "の": "の (tiếng Việt)",
+                        "から": "から (tiếng Việt)"
+                    },
+                    "explanation": "Câu trả lời là khẳng định đồng tình 'はい' (Vâng), nghĩa là anh Santos cũng là nhân viên công ty, do đó tiếp tục dùng trợ từ 'も' (cũng) để thể hiện sự tương đồng."
+                }
+            }
+        },
+        {
+            "id": 36,
+            "context": "Hỏi nghề nghiệp - Đoạn 36",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "アリさんは がくせい ですか。",
+                    "text_output": "アリさんは 学生 ですか。",
+                    "romaji": "Ari san wa gakusei desu ka?",
+                    "translation": "Anh Ali là học sinh phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "いいえ、がくせい [blank1]。かいしゃいん [blank2]。",
+                    "text_output": "いいえ、学生 [blank1]。会社員 [blank2]。",
+                    "romaji": "Iie, gakusei [blank1]. Kaishain [blank2].",
+                    "translation": "Không, tôi [blank1] học sinh. Tôi [blank2] nhân viên công ty."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "じゃありません",
+                    "options": [
+                        "じゃありません",
+                        "です",
+                        "も",
+                        "の"
+                    ],
+                    "options_translations": {
+                        "じゃありません": "không phải là (phủ định)",
+                        "です": "là",
+                        "も": "cũng",
+                        "の": "của"
+                    },
+                    "explanation": "Khi phủ định danh từ ở hiện tại ('Không, tôi không phải học sinh'), ta dùng cụm phủ định danh từ 'じゃありません'."
+                },
+                "blank2": {
+                    "correct": "です",
+                    "options": [
+                        "です",
+                        "も",
+                        "じゃありません",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "です": "là",
+                        "も": "cũng",
+                        "じゃありません": "không phải là (phủ định)",
+                        "から": "từ"
+                    },
+                    "explanation": "Khi khẳng định danh từ ở hiện tại ('Tôi là nhân viên công ty'), ta dùng đuôi câu khẳng định lịch sự 'です'."
+                }
+            }
+        },
+        {
+            "id": 37,
+            "context": "Xác nhận cơ quan - Đoạn 37",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "シュミットさんは パワーでんき [blank1] しゃいんですか。",
+                    "text_output": "シュミットさんは パワー電気 [blank1] 社員ですか。",
+                    "romaji": "Shumitto san wa Pawaa Denki [blank1] shain desu ka?",
+                    "translation": "Anh Schmidt là nhân viên [blank1] công ty điện lực Power phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "はい、パワーでんきの [blank2] です。",
+                    "text_output": "はい、パワー電気の [blank2] です。",
+                    "romaji": "Hai, Pawaa Denki no [blank2] desu.",
+                    "translation": "Vâng, tôi là [blank2] của công ty điện lực Power."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Sử dụng trợ từ sở hữu/quan hệ 'の' để nối hai danh từ (công ty và nhân viên của công ty đó: 'パワー電気の社員')."
+                },
+                "blank2": {
+                    "correct": "しゃいん",
+                    "options": [
+                        "しゃいん",
+                        "がくせい",
+                        "せんせい",
+                        "いしゃ"
+                    ],
+                    "options_translations": {
+                        "しゃいん": "nhân viên công ty",
+                        "がくせい": "học sinh / sinh viên",
+                        "せんせい": "giáo viên",
+                        "いしゃ": "bác sĩ"
+                    },
+                    "explanation": "Câu hỏi hỏi về chức vụ nhân viên công ty '社員ですか', câu trả lời đồng ý 'はい' nên tiếp tục dùng danh từ 'しゃいん' (nhân viên) để khẳng định."
+                }
+            }
+        },
+        {
+            "id": 38,
+            "context": "Chào hỏi xã giao tuổi tác - Đoạn 38",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "ミラーさんは なんさい [blank1]。",
+                    "text_output": "ミラーさんは 何歳 [blank1]。",
+                    "romaji": "Miraa san wa nansai [blank1]?",
+                    "translation": "Anh Miller [blank1] bao nhiêu tuổi?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "わたしは 28 [blank2] です。",
+                    "text_output": "私は 28 [blank2] です。",
+                    "romaji": "Watashi wa 28 [blank2] desu.",
+                    "translation": "Tôi 28 [blank2]."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "ですか",
+                    "options": [
+                        "ですか",
+                        "も",
+                        "の",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "ですか": "phải không? / là không?",
+                        "も": "cũng",
+                        "の": "của",
+                        "から": "từ"
+                    },
+                    "explanation": "Đuôi câu hỏi tuổi kết thúc lịch sự bằng 'ですか' sau cụm từ hỏi tuổi 'なんさい' (bao nhiêu tuổi)."
+                },
+                "blank2": {
+                    "correct": "さい",
+                    "options": [
+                        "さい",
+                        "じん",
+                        "さい",
+                        "年"
+                    ],
+                    "options_translations": {
+                        "さい": "tuổi (đơn vị đếm tuổi Nhật)",
+                        "じん": "người (quốc tịch)",
+                        "年": "năm",
+                        "歳": "tuổi"
+                    },
+                    "explanation": "Để đếm số tuổi tiếng Nhật, dùng đơn vị đếm 'さい' (tuổi) đính ngay sau số đếm."
+                }
+            }
+        },
+        {
+            "id": 39,
+            "context": "Xác minh danh tính người kia - Đoạn 39",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのひとは [blank1] ですか。",
+                    "text_output": "あの人は [blank1] ですか。",
+                    "romaji": "Ano hito wa [blank1] desu ka?",
+                    "translation": "Người kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "ワットさんです。イギリス [blank2] きました。",
+                    "text_output": "ワットさんです。イギリス [blank2] 来ました。",
+                    "romaji": "Watto san desu. Igirisu [blank2] kimashita.",
+                    "translation": "Là anh Watt. Anh ấy [blank2] Anh quốc."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "だれ",
+                    "options": [
+                        "だれ",
+                        "なん",
+                        "おいくつ",
+                        "どなた"
+                    ],
+                    "options_translations": {
+                        "だれ": "ai",
+                        "なん": "gì / cái gì",
+                        "おいくつ": "bao nhiêu tuổi",
+                        "どなた": "ai (lịch sự)"
+                    },
+                    "explanation": "Dùng từ nghi vấn hỏi người 'だれ' (ai) cho chủ ngữ thân mật 'あの人' (người kia). Từ 'どなた' sẽ quá lịch sự so với 'あの人'."
+                },
+                "blank2": {
+                    "correct": "から",
+                    "options": [
+                        "から",
+                        "の",
+                        "も",
+                        "きました"
+                    ],
+                    "options_translations": {
+                        "から": "từ",
+                        "の": "của",
+                        "も": "cũng",
+                        "きました": "đã đến"
+                    },
+                    "explanation": "Dùng trợ từ xuất xứ 'から' (từ) đi kèm động từ 'きました' (đến) để hoàn thành cụm 'đến từ nước Anh'."
+                }
+            }
+        },
+        {
+            "id": 40,
+            "context": "Lịch sự hỏi tên người lớn tuổi - Đoạn 40",
+            "lines": [
+                {
+                    "speaker": "A",
+                    "text_kana": "あのかたは [blank1] ですか。",
+                    "text_output": "あの方は [blank1] ですか。",
+                    "romaji": "Ano kata wa [blank1] desu ka?",
+                    "translation": "Vị kia là [blank1] phải không?"
+                },
+                {
+                    "speaker": "B",
+                    "text_kana": "やまだせんせいです。さくらだいがく [blank2] せんせいです。",
+                    "text_output": "山田先生です。さくら大学 [blank2] 先生です。",
+                    "romaji": "Yamada sensei desu. Sakura daigaku [blank2] sensei desu.",
+                    "translation": "Là cô Yamada. Cô ấy là giáo viên [blank2] đại học Sakura."
+                }
+            ],
+            "blanks": {
+                "blank1": {
+                    "correct": "どなた",
+                    "options": [
+                        "どなた",
+                        "だれ",
+                        "なんさい",
+                        "なにじん"
+                    ],
+                    "options_translations": {
+                        "どなた": "vị nào / ai (lịch sự)",
+                        "だれ": "ai",
+                        "nam": "Nam",
+                        "なにじん": "người nước nào",
+                        "なんさい": "なんさい (tiếng Việt)"
+                    },
+                    "explanation": "Dùng từ nghi vấn lịch sự 'どなた' (vị nào) để tương xứng với chủ ngữ tôn kính 'あの方' (vị kia)."
+                },
+                "blank2": {
+                    "correct": "の",
+                    "options": [
+                        "の",
+                        "は",
+                        "も",
+                        "から"
+                    ],
+                    "options_translations": {
+                        "の": "của",
+                        "は": "thì / là",
+                        "も": "cũng",
+                        "から": "từ"
+                    },
+                    "explanation": "Dùng trợ từ 'の' để liên kết danh từ địa điểm 'さくら大学' và chức danh 'せんせい' ('giáo viên của đại học Sakura')."
+                }
+            }
+        }
+    ],
+    "listenings": [
+        {
+            "id": 1,
+            "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
+            "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
+            "questions": [
+                {
+                    "q": "Nam là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Việt Nam",
+                        "Indonesia"
+                    ],
+                    "corr": "Việt Nam",
+                    "explanation": "Nam giới thiệu mình là 'ベトナムのエンジニア' (kỹ sư Việt Nam) nên quốc tịch của anh ấy là Việt Nam."
+                },
+                {
+                    "q": "Karina làm nghề gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Sinh viên",
+                        "Nhân viên công ty",
+                        "Kỹ sư"
+                    ],
+                    "corr": "Sinh viên",
+                    "explanation": "Karina tự giới thiệu là 'さくら大学の学生' (sinh viên Đại học Sakura)."
+                },
+                {
+                    "q": "Karina bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "25 tuổi",
+                        "30 tuổi",
+                        "18 tuổi"
+                    ],
+                    "corr": "20 tuổi",
+                    "explanation": "Karina giới thiệu mình '20さいです' (20 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Rất vui được gặp bạn. Tôi là Nam. Tôi là kỹ sư người Việt Nam. Tôi 25 tuổi.\nB: Rất vui được gặp bạn. Tôi là Karina. Tôi là người Indonesia. Tôi là sinh viên trường Đại học Sakura. Tôi 20 tuổi."
+        },
+        {
+            "id": 2,
+            "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
+            "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
+            "questions": [
+                {
+                    "q": "Miller làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "B&C",
+                        "Sakura",
+                        "FPT"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Miller khẳng định mình là nhân viên IMC ('はい、そうです' khi hỏi có phải nhân viên IMC không)."
+                },
+                {
+                    "q": "Santos là người nước nào?",
+                    "opts": [
+                        "Mỹ",
+                        "Nhật",
+                        "Brazil",
+                        "Đức"
+                    ],
+                    "corr": "Brazil",
+                    "explanation": "Santos nói mình là nhân viên công ty hàng không Brazil Air ('ブラジルエアーの社員'), nên anh ấy đến từ Brazil."
+                },
+                {
+                    "q": "Nghề nghiệp của Santos là gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Bác sĩ"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Santos nói mình là '研究者です' (nhà nghiên cứu)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Miller là nhân viên công ty IMC phải không?\nB: Vâng, đúng vậy. Anh Santos cũng là nhân viên công ty IMC phải không?\nA: Không, tôi là nhân viên công ty Brazil Air. Tôi là nhà nghiên cứu."
+        },
+        {
+            "id": 3,
+            "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
+            "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
+            "questions": [
+                {
+                    "q": "Thầy giáo Watt đến từ nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Anh",
+                        "Mỹ",
+                        "Pháp"
+                    ],
+                    "corr": "Anh",
+                    "explanation": "Thầy Watt đến từ nước Anh ('イギリスから来ました')."
+                },
+                {
+                    "q": "Thầy giáo Watt bao nhiêu tuổi?",
+                    "opts": [
+                        "40 tuổi",
+                        "45 tuổi",
+                        "50 tuổi",
+                        "35 tuổi"
+                    ],
+                    "corr": "45 tuổi",
+                    "explanation": "Thầy Watt 45 tuổi ('45さいです')."
+                },
+                {
+                    "q": "Thầy giáo Watt dạy ở đâu?",
+                    "opts": [
+                        "Đại học FPT",
+                        "Công ty IMC",
+                        "Đại học Sakura",
+                        "Bệnh viện"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Thầy Watt dạy ở Đại học Sakura ('さくら大学の先生です')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là ai thế?\nB: Vị kia là thầy Watt. Thầy là giáo viên của Đại học Sakura. Thầy đến từ nước Anh. Thầy 45 tuổi."
+        },
+        {
+            "id": 4,
+            "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
+            "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Lee đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Trung Quốc",
+                        "Hàn Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Hàn Quốc",
+                    "explanation": "Lee giới thiệu '韓国から来ました' (đến từ Hàn Quốc)."
+                },
+                {
+                    "q": "Lee làm nghề gì?",
+                    "opts": [
+                        "Nhân viên ngân hàng",
+                        "Nhân viên công ty",
+                        "Bác sĩ",
+                        "Học sinh"
+                    ],
+                    "corr": "Nhân viên ngân hàng",
+                    "explanation": "Lee giới thiệu '銀行員です' (là nhân viên ngân hàng)."
+                },
+                {
+                    "q": "Lee bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "32 tuổi",
+                        "35 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "32 tuổi",
+                    "explanation": "Lee giới thiệu '32さいです' (32 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Lee. Tôi đến từ Hàn Quốc. Tôi là nhân viên ngân hàng. Tôi 32 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 5,
+            "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
+            "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
+            "questions": [
+                {
+                    "q": "Taro bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "9 tuổi",
+                    "explanation": "B nói '太郎ちゃんは 9歳です' (Bé Taro 9 tuổi)."
+                },
+                {
+                    "q": "Hanako bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "8 tuổi",
+                    "explanation": "B nói '花子ちゃんは 8歳です' (Bé Hanako 8 tuổi)."
+                },
+                {
+                    "q": "Hai bé là học sinh trường nào?",
+                    "opts": [
+                        "Đại học Sakura",
+                        "Tiểu học Sakura",
+                        "Công ty IMC",
+                        "FPT"
+                    ],
+                    "corr": "Tiểu học Sakura",
+                    "explanation": "Hai bé học trường Tiểu học liên kết của Đại học Sakura ('さくら大学の付属小学校')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Bé Taro mấy tuổi rồi?\nB: Bé Taro 9 tuổi. Bé Hanako 8 tuổi. Hai đứa là học sinh trường Tiểu học liên kết của Đại học Sakura."
+        },
+        {
+            "id": 6,
+            "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
+            "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
+            "questions": [
+                {
+                    "q": "Thawaphon đến từ đâu?",
+                    "opts": [
+                        "Thái Lan",
+                        "Việt Nam",
+                        "Mỹ",
+                        "Hàn Quốc"
+                    ],
+                    "corr": "Thái Lan",
+                    "explanation": "Thawaphon giới thiệu 'タイから来ました' (đến từ Thái Lan)."
+                },
+                {
+                    "q": "Anh ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "25 tuổi",
+                        "30 tuổi",
+                        "28 tuổi",
+                        "20 tuổi"
+                    ],
+                    "corr": "28 tuổi",
+                    "explanation": "Thawaphon giới thiệu '28さいです' (28 tuổi)."
+                },
+                {
+                    "q": "Công ty của anh ấy tên là gì?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Sakura",
+                        "Power Electric"
+                    ],
+                    "corr": "FPT",
+                    "explanation": "Thawaphon làm việc ở công ty FPT ('FPTの社員')."
+                }
+            ],
+            "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là Thawaphon. Tôi đến từ Thái Lan. Tôi là nhân viên công ty FPT. Tôi là kỹ sư. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 7,
+            "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
+            "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
+            "questions": [
+                {
+                    "q": "Schmidt là người nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Mỹ",
+                        "Nhật",
+                        "Anh"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "B nói Schmidt không phải người Đức mà là người Mỹ ('ドイツ人じゃありません。アメリカ人です')."
+                },
+                {
+                    "q": "Anh ấy làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Đại học Sakura"
+                    ],
+                    "corr": "Power Electric",
+                    "explanation": "Schmidt làm việc tại công ty điện lực Power ('パワー電気')."
+                },
+                {
+                    "q": "Chức vụ của anh ấy là gì?",
+                    "opts": [
+                        "Bác sĩ",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Giáo viên"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Schmidt là nhà nghiên cứu ('研究者')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là người Đức phải không?\nB: Không, vị kia là anh Schmidt. Anh ấy không phải người Đức. Anh ấy là người Mỹ. Anh ấy là nhà nghiên cứu của công ty Điện lực Power."
+        },
+        {
+            "id": 8,
+            "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
+            "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
+            "questions": [
+                {
+                    "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
+                    "opts": [
+                        "Kobe",
+                        "Sakura",
+                        "Tokyo",
+                        "FPT"
+                    ],
+                    "corr": "Kobe",
+                    "explanation": "Bác sĩ Wang làm việc ở bệnh viện Kobe ('神戸病院')."
+                },
+                {
+                    "q": "Ông ấy đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Hàn Quốc",
+                        "Trung Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Trung Quốc",
+                    "explanation": "Bác sĩ Wang đến từ Trung Quốc ('中国から来ました')."
+                },
+                {
+                    "q": "Ông ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "38 tuổi",
+                        "40 tuổi"
+                    ],
+                    "corr": "38 tuổi",
+                    "explanation": "Bác sĩ Wang 38 tuổi ('38さいです')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Wang là bác sĩ phải không?\nB: Vâng, tôi là bác sĩ của bệnh viện Kobe. Tôi đến từ Trung Quốc. Tôi 38 tuổi."
+        },
+        {
+            "id": 9,
+            "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
+            "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Alisa là sinh viên trường nào?",
+                    "opts": [
+                        "IMC",
+                        "Đại học Sakura",
+                        "FPT",
+                        "Kobe"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Alisa là sinh viên Đại học Sakura ('さくら大学の学生')."
+                },
+                {
+                    "q": "Cô ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "21 tuổi",
+                        "22 tuổi",
+                        "19 tuổi"
+                    ],
+                    "corr": "21 tuổi",
+                    "explanation": "Alisa 21 tuổi ('21さいです')."
+                },
+                {
+                    "q": "Quốc tịch của cô ấy là gì?",
+                    "opts": [
+                        "Mỹ",
+                        "Đức",
+                        "Anh",
+                        "Pháp"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "Alisa đến từ Mỹ ('アメリカから来ました')."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Alisa. Tôi đến từ Mỹ. Tôi là sinh viên Đại học Sakura. Tôi 21 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 10,
+            "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
+            "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
+            "questions": [
+                {
+                    "q": "Yamada làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Bệnh viện Kobe"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Yamada là nhân viên công ty IMC ('IMCの社員')."
+                },
+                {
+                    "q": "Yamada bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "40 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "35 tuổi",
+                    "explanation": "Yamada 35 tuổi ('35さいです')."
+                },
+                {
+                    "q": "Yamada là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Đức",
+                        "Trung Quốc"
+                    ],
+                    "corr": "Nhật Bản",
+                    "explanation": "Yamada làm việc tại IMC (một công ty Nhật Bản) nên quốc tịch của anh ấy là Nhật Bản."
+                }
+            ],
+            "audio_text_vietnamese": "A: Đây là anh Yamada. Anh ấy là nhân viên công ty IMC.\nB: Anh Yamada bao nhiêu tuổi vậy?\nA: 35 tuổi."
+        },
+        {
+            "id": 11,
+            "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
+            "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
+            "questions": [
+                {
+                    "q": "Nam là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Việt Nam",
+                        "Indonesia"
+                    ],
+                    "corr": "Việt Nam",
+                    "explanation": "Nam giới thiệu mình là 'ベトナムのエンジニア' (kỹ sư Việt Nam) nên quốc tịch của anh ấy là Việt Nam."
+                },
+                {
+                    "q": "Karina làm nghề gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Sinh viên",
+                        "Nhân viên công ty",
+                        "Kỹ sư"
+                    ],
+                    "corr": "Sinh viên",
+                    "explanation": "Karina tự giới thiệu là 'さくら大学の学生' (sinh viên Đại học Sakura)."
+                },
+                {
+                    "q": "Karina bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "25 tuổi",
+                        "30 tuổi",
+                        "18 tuổi"
+                    ],
+                    "corr": "20 tuổi",
+                    "explanation": "Karina giới thiệu mình '20さいです' (20 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Rất vui được gặp bạn. Tôi là Nam. Tôi là kỹ sư người Việt Nam. Tôi 25 tuổi.\nB: Rất vui được gặp bạn. Tôi là Karina. Tôi là người Indonesia. Tôi là sinh viên trường Đại học Sakura. Tôi 20 tuổi."
+        },
+        {
+            "id": 12,
+            "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
+            "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
+            "questions": [
+                {
+                    "q": "Miller làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "B&C",
+                        "Sakura",
+                        "FPT"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Miller khẳng định mình là nhân viên IMC ('はい、そうです' khi hỏi có phải nhân viên IMC không)."
+                },
+                {
+                    "q": "Santos là người nước nào?",
+                    "opts": [
+                        "Mỹ",
+                        "Nhật",
+                        "Brazil",
+                        "Đức"
+                    ],
+                    "corr": "Brazil",
+                    "explanation": "Santos nói mình là nhân viên công ty hàng không Brazil Air ('ブラジルエアーの社員'), nên anh ấy đến từ Brazil."
+                },
+                {
+                    "q": "Nghề nghiệp của Santos là gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Bác sĩ"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Santos nói mình là '研究者です' (nhà nghiên cứu)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Miller là nhân viên công ty IMC phải không?\nB: Vâng, đúng vậy. Anh Santos cũng là nhân viên công ty IMC phải không?\nA: Không, tôi là nhân viên công ty Brazil Air. Tôi là nhà nghiên cứu."
+        },
+        {
+            "id": 13,
+            "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
+            "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
+            "questions": [
+                {
+                    "q": "Thầy giáo Watt đến từ nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Anh",
+                        "Mỹ",
+                        "Pháp"
+                    ],
+                    "corr": "Anh",
+                    "explanation": "Thầy Watt đến từ nước Anh ('イギリスから来ました')."
+                },
+                {
+                    "q": "Thầy giáo Watt bao nhiêu tuổi?",
+                    "opts": [
+                        "40 tuổi",
+                        "45 tuổi",
+                        "50 tuổi",
+                        "35 tuổi"
+                    ],
+                    "corr": "45 tuổi",
+                    "explanation": "Thầy Watt 45 tuổi ('45さいです')."
+                },
+                {
+                    "q": "Thầy giáo Watt dạy ở đâu?",
+                    "opts": [
+                        "Đại học FPT",
+                        "Công ty IMC",
+                        "Đại học Sakura",
+                        "Bệnh viện"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Thầy Watt dạy ở Đại học Sakura ('さくら大学の先生です')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là ai thế?\nB: Vị kia là thầy Watt. Thầy là giáo viên của Đại học Sakura. Thầy đến từ nước Anh. Thầy 45 tuổi."
+        },
+        {
+            "id": 14,
+            "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
+            "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Lee đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Trung Quốc",
+                        "Hàn Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Hàn Quốc",
+                    "explanation": "Lee giới thiệu '韓国から来ました' (đến từ Hàn Quốc)."
+                },
+                {
+                    "q": "Lee làm nghề gì?",
+                    "opts": [
+                        "Nhân viên ngân hàng",
+                        "Nhân viên công ty",
+                        "Bác sĩ",
+                        "Học sinh"
+                    ],
+                    "corr": "Nhân viên ngân hàng",
+                    "explanation": "Lee giới thiệu '銀行員です' (là nhân viên ngân hàng)."
+                },
+                {
+                    "q": "Lee bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "32 tuổi",
+                        "35 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "32 tuổi",
+                    "explanation": "Lee giới thiệu '32さいです' (32 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Lee. Tôi đến từ Hàn Quốc. Tôi là nhân viên ngân hàng. Tôi 32 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 15,
+            "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
+            "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
+            "questions": [
+                {
+                    "q": "Taro bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "9 tuổi",
+                    "explanation": "B nói '太郎ちゃんは 9歳です' (Bé Taro 9 tuổi)."
+                },
+                {
+                    "q": "Hanako bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "8 tuổi",
+                    "explanation": "B nói '花子ちゃんは 8歳です' (Bé Hanako 8 tuổi)."
+                },
+                {
+                    "q": "Hai bé là học sinh trường nào?",
+                    "opts": [
+                        "Đại học Sakura",
+                        "Tiểu học Sakura",
+                        "Công ty IMC",
+                        "FPT"
+                    ],
+                    "corr": "Tiểu học Sakura",
+                    "explanation": "Hai bé học trường Tiểu học liên kết của Đại học Sakura ('さくら大学の付属小学校')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Bé Taro mấy tuổi rồi?\nB: Bé Taro 9 tuổi. Bé Hanako 8 tuổi. Hai đứa là học sinh trường Tiểu học liên kết của Đại học Sakura."
+        },
+        {
+            "id": 16,
+            "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
+            "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
+            "questions": [
+                {
+                    "q": "Thawaphon đến từ đâu?",
+                    "opts": [
+                        "Thái Lan",
+                        "Việt Nam",
+                        "Mỹ",
+                        "Hàn Quốc"
+                    ],
+                    "corr": "Thái Lan",
+                    "explanation": "Thawaphon giới thiệu 'タイから来ました' (đến từ Thái Lan)."
+                },
+                {
+                    "q": "Anh ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "25 tuổi",
+                        "30 tuổi",
+                        "28 tuổi",
+                        "20 tuổi"
+                    ],
+                    "corr": "28 tuổi",
+                    "explanation": "Thawaphon giới thiệu '28さいです' (28 tuổi)."
+                },
+                {
+                    "q": "Công ty của anh ấy tên là gì?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Sakura",
+                        "Power Electric"
+                    ],
+                    "corr": "FPT",
+                    "explanation": "Thawaphon làm việc ở công ty FPT ('FPTの社員')."
+                }
+            ],
+            "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là Thawaphon. Tôi đến từ Thái Lan. Tôi là nhân viên công ty FPT. Tôi là kỹ sư. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 17,
+            "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
+            "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
+            "questions": [
+                {
+                    "q": "Schmidt là người nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Mỹ",
+                        "Nhật",
+                        "Anh"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "B nói Schmidt không phải người Đức mà là người Mỹ ('ドイツ人じゃありません。アメリカ人です')."
+                },
+                {
+                    "q": "Anh ấy làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Đại học Sakura"
+                    ],
+                    "corr": "Power Electric",
+                    "explanation": "Schmidt làm việc tại công ty điện lực Power ('パワー電気')."
+                },
+                {
+                    "q": "Chức vụ của anh ấy là gì?",
+                    "opts": [
+                        "Bác sĩ",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Giáo viên"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Schmidt là nhà nghiên cứu ('研究者')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là người Đức phải không?\nB: Không, vị kia là anh Schmidt. Anh ấy không phải người Đức. Anh ấy là người Mỹ. Anh ấy là nhà nghiên cứu của công ty Điện lực Power."
+        },
+        {
+            "id": 18,
+            "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
+            "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
+            "questions": [
+                {
+                    "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
+                    "opts": [
+                        "Kobe",
+                        "Sakura",
+                        "Tokyo",
+                        "FPT"
+                    ],
+                    "corr": "Kobe",
+                    "explanation": "Bác sĩ Wang làm việc ở bệnh viện Kobe ('神戸病院')."
+                },
+                {
+                    "q": "Ông ấy đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Hàn Quốc",
+                        "Trung Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Trung Quốc",
+                    "explanation": "Bác sĩ Wang đến từ Trung Quốc ('中国から来ました')."
+                },
+                {
+                    "q": "Ông ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "38 tuổi",
+                        "40 tuổi"
+                    ],
+                    "corr": "38 tuổi",
+                    "explanation": "Bác sĩ Wang 38 tuổi ('38さいです')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Wang là bác sĩ phải không?\nB: Vâng, tôi là bác sĩ của bệnh viện Kobe. Tôi đến từ Trung Quốc. Tôi 38 tuổi."
+        },
+        {
+            "id": 19,
+            "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
+            "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Alisa là sinh viên trường nào?",
+                    "opts": [
+                        "IMC",
+                        "Đại học Sakura",
+                        "FPT",
+                        "Kobe"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Alisa là sinh viên Đại học Sakura ('さくら大学の学生')."
+                },
+                {
+                    "q": "Cô ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "21 tuổi",
+                        "22 tuổi",
+                        "19 tuổi"
+                    ],
+                    "corr": "21 tuổi",
+                    "explanation": "Alisa 21 tuổi ('21さいです')."
+                },
+                {
+                    "q": "Quốc tịch của cô ấy là gì?",
+                    "opts": [
+                        "Mỹ",
+                        "Đức",
+                        "Anh",
+                        "Pháp"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "Alisa đến từ Mỹ ('アメリカから来ました')."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Alisa. Tôi đến từ Mỹ. Tôi là sinh viên Đại học Sakura. Tôi 21 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 20,
+            "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
+            "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
+            "questions": [
+                {
+                    "q": "Yamada làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Bệnh viện Kobe"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Yamada là nhân viên công ty IMC ('IMCの社員')."
+                },
+                {
+                    "q": "Yamada bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "40 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "35 tuổi",
+                    "explanation": "Yamada 35 tuổi ('35さいです')."
+                },
+                {
+                    "q": "Yamada là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Đức",
+                        "Trung Quốc"
+                    ],
+                    "corr": "Nhật Bản",
+                    "explanation": "Yamada làm việc tại IMC (một công ty Nhật Bản) nên quốc tịch của anh ấy là Nhật Bản."
+                }
+            ],
+            "audio_text_vietnamese": "A: Đây là anh Yamada. Anh ấy là nhân viên công ty IMC.\nB: Anh Yamada bao nhiêu tuổi vậy?\nA: 35 tuổi."
+        },
+        {
+            "id": 21,
+            "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
+            "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
+            "questions": [
+                {
+                    "q": "Nam là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Việt Nam",
+                        "Indonesia"
+                    ],
+                    "corr": "Việt Nam",
+                    "explanation": "Nam giới thiệu mình là 'ベトナムのエンジニア' (kỹ sư Việt Nam) nên quốc tịch của anh ấy là Việt Nam."
+                },
+                {
+                    "q": "Karina làm nghề gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Sinh viên",
+                        "Nhân viên công ty",
+                        "Kỹ sư"
+                    ],
+                    "corr": "Sinh viên",
+                    "explanation": "Karina tự giới thiệu là 'さくら大学の学生' (sinh viên Đại học Sakura)."
+                },
+                {
+                    "q": "Karina bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "25 tuổi",
+                        "30 tuổi",
+                        "18 tuổi"
+                    ],
+                    "corr": "20 tuổi",
+                    "explanation": "Karina giới thiệu mình '20さいです' (20 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Rất vui được gặp bạn. Tôi là Nam. Tôi là kỹ sư người Việt Nam. Tôi 25 tuổi.\nB: Rất vui được gặp bạn. Tôi là Karina. Tôi là người Indonesia. Tôi là sinh viên trường Đại học Sakura. Tôi 20 tuổi."
+        },
+        {
+            "id": 22,
+            "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
+            "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
+            "questions": [
+                {
+                    "q": "Miller làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "B&C",
+                        "Sakura",
+                        "FPT"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Miller khẳng định mình là nhân viên IMC ('はい、そうです' khi hỏi có phải nhân viên IMC không)."
+                },
+                {
+                    "q": "Santos là người nước nào?",
+                    "opts": [
+                        "Mỹ",
+                        "Nhật",
+                        "Brazil",
+                        "Đức"
+                    ],
+                    "corr": "Brazil",
+                    "explanation": "Santos nói mình là nhân viên công ty hàng không Brazil Air ('ブラジルエアーの社員'), nên anh ấy đến từ Brazil."
+                },
+                {
+                    "q": "Nghề nghiệp của Santos là gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Bác sĩ"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Santos nói mình là '研究者です' (nhà nghiên cứu)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Miller là nhân viên công ty IMC phải không?\nB: Vâng, đúng vậy. Anh Santos cũng là nhân viên công ty IMC phải không?\nA: Không, tôi là nhân viên công ty Brazil Air. Tôi là nhà nghiên cứu."
+        },
+        {
+            "id": 23,
+            "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
+            "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
+            "questions": [
+                {
+                    "q": "Thầy giáo Watt đến từ nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Anh",
+                        "Mỹ",
+                        "Pháp"
+                    ],
+                    "corr": "Anh",
+                    "explanation": "Thầy Watt đến từ nước Anh ('イギリスから来ました')."
+                },
+                {
+                    "q": "Thầy giáo Watt bao nhiêu tuổi?",
+                    "opts": [
+                        "40 tuổi",
+                        "45 tuổi",
+                        "50 tuổi",
+                        "35 tuổi"
+                    ],
+                    "corr": "45 tuổi",
+                    "explanation": "Thầy Watt 45 tuổi ('45さいです')."
+                },
+                {
+                    "q": "Thầy giáo Watt dạy ở đâu?",
+                    "opts": [
+                        "Đại học FPT",
+                        "Công ty IMC",
+                        "Đại học Sakura",
+                        "Bệnh viện"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Thầy Watt dạy ở Đại học Sakura ('さくら大学の先生です')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là ai thế?\nB: Vị kia là thầy Watt. Thầy là giáo viên của Đại học Sakura. Thầy đến từ nước Anh. Thầy 45 tuổi."
+        },
+        {
+            "id": 24,
+            "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
+            "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Lee đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Trung Quốc",
+                        "Hàn Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Hàn Quốc",
+                    "explanation": "Lee giới thiệu '韓国から来ました' (đến từ Hàn Quốc)."
+                },
+                {
+                    "q": "Lee làm nghề gì?",
+                    "opts": [
+                        "Nhân viên ngân hàng",
+                        "Nhân viên công ty",
+                        "Bác sĩ",
+                        "Học sinh"
+                    ],
+                    "corr": "Nhân viên ngân hàng",
+                    "explanation": "Lee giới thiệu '銀行員です' (là nhân viên ngân hàng)."
+                },
+                {
+                    "q": "Lee bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "32 tuổi",
+                        "35 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "32 tuổi",
+                    "explanation": "Lee giới thiệu '32さいです' (32 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Lee. Tôi đến từ Hàn Quốc. Tôi là nhân viên ngân hàng. Tôi 32 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 25,
+            "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
+            "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
+            "questions": [
+                {
+                    "q": "Taro bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "9 tuổi",
+                    "explanation": "B nói '太郎ちゃんは 9歳です' (Bé Taro 9 tuổi)."
+                },
+                {
+                    "q": "Hanako bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "8 tuổi",
+                    "explanation": "B nói '花子ちゃんは 8歳です' (Bé Hanako 8 tuổi)."
+                },
+                {
+                    "q": "Hai bé là học sinh trường nào?",
+                    "opts": [
+                        "Đại học Sakura",
+                        "Tiểu học Sakura",
+                        "Công ty IMC",
+                        "FPT"
+                    ],
+                    "corr": "Tiểu học Sakura",
+                    "explanation": "Hai bé học trường Tiểu học liên kết của Đại học Sakura ('さくら大学の付属小学校')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Bé Taro mấy tuổi rồi?\nB: Bé Taro 9 tuổi. Bé Hanako 8 tuổi. Hai đứa là học sinh trường Tiểu học liên kết của Đại học Sakura."
+        },
+        {
+            "id": 26,
+            "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
+            "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
+            "questions": [
+                {
+                    "q": "Thawaphon đến từ đâu?",
+                    "opts": [
+                        "Thái Lan",
+                        "Việt Nam",
+                        "Mỹ",
+                        "Hàn Quốc"
+                    ],
+                    "corr": "Thái Lan",
+                    "explanation": "Thawaphon giới thiệu 'タイから来ました' (đến từ Thái Lan)."
+                },
+                {
+                    "q": "Anh ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "25 tuổi",
+                        "30 tuổi",
+                        "28 tuổi",
+                        "20 tuổi"
+                    ],
+                    "corr": "28 tuổi",
+                    "explanation": "Thawaphon giới thiệu '28さいです' (28 tuổi)."
+                },
+                {
+                    "q": "Công ty của anh ấy tên là gì?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Sakura",
+                        "Power Electric"
+                    ],
+                    "corr": "FPT",
+                    "explanation": "Thawaphon làm việc ở công ty FPT ('FPTの社員')."
+                }
+            ],
+            "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là Thawaphon. Tôi đến từ Thái Lan. Tôi là nhân viên công ty FPT. Tôi là kỹ sư. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 27,
+            "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
+            "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
+            "questions": [
+                {
+                    "q": "Schmidt là người nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Mỹ",
+                        "Nhật",
+                        "Anh"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "B nói Schmidt không phải người Đức mà là người Mỹ ('ドイツ人じゃありません。アメリカ人です')."
+                },
+                {
+                    "q": "Anh ấy làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Đại học Sakura"
+                    ],
+                    "corr": "Power Electric",
+                    "explanation": "Schmidt làm việc tại công ty điện lực Power ('パワー電気')."
+                },
+                {
+                    "q": "Chức vụ của anh ấy là gì?",
+                    "opts": [
+                        "Bác sĩ",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Giáo viên"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Schmidt là nhà nghiên cứu ('研究者')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là người Đức phải không?\nB: Không, vị kia là anh Schmidt. Anh ấy không phải người Đức. Anh ấy là người Mỹ. Anh ấy là nhà nghiên cứu của công ty Điện lực Power."
+        },
+        {
+            "id": 28,
+            "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
+            "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
+            "questions": [
+                {
+                    "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
+                    "opts": [
+                        "Kobe",
+                        "Sakura",
+                        "Tokyo",
+                        "FPT"
+                    ],
+                    "corr": "Kobe",
+                    "explanation": "Bác sĩ Wang làm việc ở bệnh viện Kobe ('神戸病院')."
+                },
+                {
+                    "q": "Ông ấy đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Hàn Quốc",
+                        "Trung Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Trung Quốc",
+                    "explanation": "Bác sĩ Wang đến từ Trung Quốc ('中国から来ました')."
+                },
+                {
+                    "q": "Ông ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "38 tuổi",
+                        "40 tuổi"
+                    ],
+                    "corr": "38 tuổi",
+                    "explanation": "Bác sĩ Wang 38 tuổi ('38さいです')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Wang là bác sĩ phải không?\nB: Vâng, tôi là bác sĩ của bệnh viện Kobe. Tôi đến từ Trung Quốc. Tôi 38 tuổi."
+        },
+        {
+            "id": 29,
+            "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
+            "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Alisa là sinh viên trường nào?",
+                    "opts": [
+                        "IMC",
+                        "Đại học Sakura",
+                        "FPT",
+                        "Kobe"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Alisa là sinh viên Đại học Sakura ('さくら大学の学生')."
+                },
+                {
+                    "q": "Cô ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "21 tuổi",
+                        "22 tuổi",
+                        "19 tuổi"
+                    ],
+                    "corr": "21 tuổi",
+                    "explanation": "Alisa 21 tuổi ('21さいです')."
+                },
+                {
+                    "q": "Quốc tịch của cô ấy là gì?",
+                    "opts": [
+                        "Mỹ",
+                        "Đức",
+                        "Anh",
+                        "Pháp"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "Alisa đến từ Mỹ ('アメリカから来ました')."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Alisa. Tôi đến từ Mỹ. Tôi là sinh viên Đại học Sakura. Tôi 21 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 30,
+            "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
+            "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
+            "questions": [
+                {
+                    "q": "Yamada làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Bệnh viện Kobe"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Yamada là nhân viên công ty IMC ('IMCの社員')."
+                },
+                {
+                    "q": "Yamada bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "40 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "35 tuổi",
+                    "explanation": "Yamada 35 tuổi ('35さいです')."
+                },
+                {
+                    "q": "Yamada là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Đức",
+                        "Trung Quốc"
+                    ],
+                    "corr": "Nhật Bản",
+                    "explanation": "Yamada làm việc tại IMC (một công ty Nhật Bản) nên quốc tịch của anh ấy là Nhật Bản."
+                }
+            ],
+            "audio_text_vietnamese": "A: Đây là anh Yamada. Anh ấy là nhân viên công ty IMC.\nB: Anh Yamada bao nhiêu tuổi vậy?\nA: 35 tuổi."
+        },
+        {
+            "id": 31,
+            "audio_text_kana": "A: はじめまして。ナムです。ベトナムのエンジニアです。25さいです。 B: はじめまして。カリナです. インドネシアじんです. さくらだいがくの がくせいです. 20さいです.",
+            "audio_text_kanji": "A: 初めまして。ナムです。ベトナムのエンジニアです。25歳です。 B: 初めまして。カリナです。インドネシア人です。さくら大学の学生です。20歳です。",
+            "questions": [
+                {
+                    "q": "Nam là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Việt Nam",
+                        "Indonesia"
+                    ],
+                    "corr": "Việt Nam",
+                    "explanation": "Nam giới thiệu mình là 'ベトナムのエンジニア' (kỹ sư Việt Nam) nên quốc tịch của anh ấy là Việt Nam."
+                },
+                {
+                    "q": "Karina làm nghề gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Sinh viên",
+                        "Nhân viên công ty",
+                        "Kỹ sư"
+                    ],
+                    "corr": "Sinh viên",
+                    "explanation": "Karina tự giới thiệu là 'さくら大学の学生' (sinh viên Đại học Sakura)."
+                },
+                {
+                    "q": "Karina bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "25 tuổi",
+                        "30 tuổi",
+                        "18 tuổi"
+                    ],
+                    "corr": "20 tuổi",
+                    "explanation": "Karina giới thiệu mình '20さいです' (20 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Rất vui được gặp bạn. Tôi là Nam. Tôi là kỹ sư người Việt Nam. Tôi 25 tuổi.\nB: Rất vui được gặp bạn. Tôi là Karina. Tôi là người Indonesia. Tôi là sinh viên trường Đại học Sakura. Tôi 20 tuổi."
+        },
+        {
+            "id": 32,
+            "audio_text_kana": "A: ミラーさんは IMCの しゃいんですか. B: はい、そうです. サントスさんも IMCの しゃいんですか。 A: いいえ、わたしは ブラジルエアーの しゃいんです. けんきゅうしゃです.",
+            "audio_text_kanji": "A: ミラーさんは IMCの社員ですか。 B: はい、そうです。サントスさんも IMCの社員ですか。 A: いいえ、私はブラジルエアーの社員です。研究者です。",
+            "questions": [
+                {
+                    "q": "Miller làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "B&C",
+                        "Sakura",
+                        "FPT"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Miller khẳng định mình là nhân viên IMC ('はい、そうです' khi hỏi có phải nhân viên IMC không)."
+                },
+                {
+                    "q": "Santos là người nước nào?",
+                    "opts": [
+                        "Mỹ",
+                        "Nhật",
+                        "Brazil",
+                        "Đức"
+                    ],
+                    "corr": "Brazil",
+                    "explanation": "Santos nói mình là nhân viên công ty hàng không Brazil Air ('ブラジルエアーの社員'), nên anh ấy đến từ Brazil."
+                },
+                {
+                    "q": "Nghề nghiệp của Santos là gì?",
+                    "opts": [
+                        "Giáo viên",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Bác sĩ"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Santos nói mình là '研究者です' (nhà nghiên cứu)."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Miller là nhân viên công ty IMC phải không?\nB: Vâng, đúng vậy. Anh Santos cũng là nhân viên công ty IMC phải không?\nA: Không, tôi là nhân viên công ty Brazil Air. Tôi là nhà nghiên cứu."
+        },
+        {
+            "id": 33,
+            "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットせんせいです。さくらだいがくの せんせいです。イギリスから きました。45さいです。",
+            "audio_text_kanji": "A: あの方はどなたですか。 B: あの方はワット先生です。さくら大学の先生です。イギリスから来ました。45歳です。",
+            "questions": [
+                {
+                    "q": "Thầy giáo Watt đến từ nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Anh",
+                        "Mỹ",
+                        "Pháp"
+                    ],
+                    "corr": "Anh",
+                    "explanation": "Thầy Watt đến từ nước Anh ('イギリスから来ました')."
+                },
+                {
+                    "q": "Thầy giáo Watt bao nhiêu tuổi?",
+                    "opts": [
+                        "40 tuổi",
+                        "45 tuổi",
+                        "50 tuổi",
+                        "35 tuổi"
+                    ],
+                    "corr": "45 tuổi",
+                    "explanation": "Thầy Watt 45 tuổi ('45さいです')."
+                },
+                {
+                    "q": "Thầy giáo Watt dạy ở đâu?",
+                    "opts": [
+                        "Đại học FPT",
+                        "Công ty IMC",
+                        "Đại học Sakura",
+                        "Bệnh viện"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Thầy Watt dạy ở Đại học Sakura ('さくら大学の先生です')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là ai thế?\nB: Vị kia là thầy Watt. Thầy là giáo viên của Đại học Sakura. Thầy đến từ nước Anh. Thầy 45 tuổi."
+        },
+        {
+            "id": 34,
+            "audio_text_kana": "イーです。かんこくから きました。ぎんこういんです。32さいです。どうぞよろしく おねがいします。",
+            "audio_text_kanji": "イーです。韓国から来ました。銀行員です。32歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Lee đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Trung Quốc",
+                        "Hàn Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Hàn Quốc",
+                    "explanation": "Lee giới thiệu '韓国から来ました' (đến từ Hàn Quốc)."
+                },
+                {
+                    "q": "Lee làm nghề gì?",
+                    "opts": [
+                        "Nhân viên ngân hàng",
+                        "Nhân viên công ty",
+                        "Bác sĩ",
+                        "Học sinh"
+                    ],
+                    "corr": "Nhân viên ngân hàng",
+                    "explanation": "Lee giới thiệu '銀行員です' (là nhân viên ngân hàng)."
+                },
+                {
+                    "q": "Lee bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "32 tuổi",
+                        "35 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "32 tuổi",
+                    "explanation": "Lee giới thiệu '32さいです' (32 tuổi)."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Lee. Tôi đến từ Hàn Quốc. Tôi là nhân viên ngân hàng. Tôi 32 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 35,
+            "audio_text_kana": "A: たろうちゃんは なんさいですか。 B: たろうちゃんは 9さいです。はなこちゃんは 8さいです。ふたりは さくらだいがくの ふぞくしょうがっこうの がくせいです。",
+            "audio_text_kanji": "A: 太郎ちゃんは何歳ですか。 B: 太郎ちゃんは 9歳です。花子ちゃんは 8歳です. 二人はさくら大学の付属小学校の学生です.",
+            "questions": [
+                {
+                    "q": "Taro bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "9 tuổi",
+                    "explanation": "B nói '太郎ちゃんは 9歳です' (Bé Taro 9 tuổi)."
+                },
+                {
+                    "q": "Hanako bao nhiêu tuổi?",
+                    "opts": [
+                        "8 tuổi",
+                        "9 tuổi",
+                        "10 tuổi",
+                        "7 tuổi"
+                    ],
+                    "corr": "8 tuổi",
+                    "explanation": "B nói '花子ちゃんは 8歳です' (Bé Hanako 8 tuổi)."
+                },
+                {
+                    "q": "Hai bé là học sinh trường nào?",
+                    "opts": [
+                        "Đại học Sakura",
+                        "Tiểu học Sakura",
+                        "Công ty IMC",
+                        "FPT"
+                    ],
+                    "corr": "Tiểu học Sakura",
+                    "explanation": "Hai bé học trường Tiểu học liên kết của Đại học Sakura ('さくら大学の付属小学校')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Bé Taro mấy tuổi rồi?\nB: Bé Taro 9 tuổi. Bé Hanako 8 tuổi. Hai đứa là học sinh trường Tiểu học liên kết của Đại học Sakura."
+        },
+        {
+            "id": 36,
+            "audio_text_kana": "はじめまして。タワポンです。タイから きました。FPTの しゃいんです. エンジニアです. 28さいです. どうぞよろしく.",
+            "audio_text_kanji": "初めまして。タワポンです。タイから来ました。FPTの社員です。エンジニアです。28歳です。どうぞよろしく。",
+            "questions": [
+                {
+                    "q": "Thawaphon đến từ đâu?",
+                    "opts": [
+                        "Thái Lan",
+                        "Việt Nam",
+                        "Mỹ",
+                        "Hàn Quốc"
+                    ],
+                    "corr": "Thái Lan",
+                    "explanation": "Thawaphon giới thiệu 'タイから来ました' (đến từ Thái Lan)."
+                },
+                {
+                    "q": "Anh ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "25 tuổi",
+                        "30 tuổi",
+                        "28 tuổi",
+                        "20 tuổi"
+                    ],
+                    "corr": "28 tuổi",
+                    "explanation": "Thawaphon giới thiệu '28さいです' (28 tuổi)."
+                },
+                {
+                    "q": "Công ty của anh ấy tên là gì?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Sakura",
+                        "Power Electric"
+                    ],
+                    "corr": "FPT",
+                    "explanation": "Thawaphon làm việc ở công ty FPT ('FPTの社員')."
+                }
+            ],
+            "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là Thawaphon. Tôi đến từ Thái Lan. Tôi là nhân viên công ty FPT. Tôi là kỹ sư. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 37,
+            "audio_text_kana": "A: あのかたは ドイツじんですか. B: いいえ、あのかたは シュミットさんです. ドイツじんじゃありません. アメリカ人です. パワーでんきの けんきゅうしゃです.",
+            "audio_text_kanji": "A: あの方はドイツ人ですか。 B: いいえ、あの方はシュミットさんです。ドイツ人じゃありません。アメリカ人です。パワー電気の研究者です。",
+            "questions": [
+                {
+                    "q": "Schmidt là người nước nào?",
+                    "opts": [
+                        "Đức",
+                        "Mỹ",
+                        "Nhật",
+                        "Anh"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "B nói Schmidt không phải người Đức mà là người Mỹ ('ドイツ人じゃありません。アメリカ人です')."
+                },
+                {
+                    "q": "Anh ấy làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Đại học Sakura"
+                    ],
+                    "corr": "Power Electric",
+                    "explanation": "Schmidt làm việc tại công ty điện lực Power ('パワー電気')."
+                },
+                {
+                    "q": "Chức vụ của anh ấy là gì?",
+                    "opts": [
+                        "Bác sĩ",
+                        "Học sinh",
+                        "Nhà nghiên cứu",
+                        "Giáo viên"
+                    ],
+                    "corr": "Nhà nghiên cứu",
+                    "explanation": "Schmidt là nhà nghiên cứu ('研究者')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Vị kia là người Đức phải không?\nB: Không, vị kia là anh Schmidt. Anh ấy không phải người Đức. Anh ấy là người Mỹ. Anh ấy là nhà nghiên cứu của công ty Điện lực Power."
+        },
+        {
+            "id": 38,
+            "audio_text_kana": "A: ワンさんは いしゃですか。 B: はい、こうべびょういんの いしゃです。ちゅうごくから きました。38さいです。",
+            "audio_text_kanji": "A: ワンさんは 医者ですか。 B: はい、神戸病院 của 医者です。中国から来ました。38歳です。",
+            "questions": [
+                {
+                    "q": "Bác sĩ Wang làm việc ở bệnh viện nào?",
+                    "opts": [
+                        "Kobe",
+                        "Sakura",
+                        "Tokyo",
+                        "FPT"
+                    ],
+                    "corr": "Kobe",
+                    "explanation": "Bác sĩ Wang làm việc ở bệnh viện Kobe ('神戸病院')."
+                },
+                {
+                    "q": "Ông ấy đến từ nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Hàn Quốc",
+                        "Trung Quốc",
+                        "Mỹ"
+                    ],
+                    "corr": "Trung Quốc",
+                    "explanation": "Bác sĩ Wang đến từ Trung Quốc ('中国から来ました')."
+                },
+                {
+                    "q": "Ông ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "38 tuổi",
+                        "40 tuổi"
+                    ],
+                    "corr": "38 tuổi",
+                    "explanation": "Bác sĩ Wang 38 tuổi ('38さいです')."
+                }
+            ],
+            "audio_text_vietnamese": "A: Anh Wang là bác sĩ phải không?\nB: Vâng, tôi là bác sĩ của bệnh viện Kobe. Tôi đến từ Trung Quốc. Tôi 38 tuổi."
+        },
+        {
+            "id": 39,
+            "audio_text_kana": "アリサです。アメリカから きました. さくらだいがくの がくせいです. 21さいです. どうぞよろしく おねがいします.",
+            "audio_text_kanji": "アリサです。アメリカから来ました。さくら大学の学生です。21歳です。どうぞよろしくおねがいします。",
+            "questions": [
+                {
+                    "q": "Alisa là sinh viên trường nào?",
+                    "opts": [
+                        "IMC",
+                        "Đại học Sakura",
+                        "FPT",
+                        "Kobe"
+                    ],
+                    "corr": "Đại học Sakura",
+                    "explanation": "Alisa là sinh viên Đại học Sakura ('さくら大学の学生')."
+                },
+                {
+                    "q": "Cô ấy bao nhiêu tuổi?",
+                    "opts": [
+                        "20 tuổi",
+                        "21 tuổi",
+                        "22 tuổi",
+                        "19 tuổi"
+                    ],
+                    "corr": "21 tuổi",
+                    "explanation": "Alisa 21 tuổi ('21さいです')."
+                },
+                {
+                    "q": "Quốc tịch của cô ấy là gì?",
+                    "opts": [
+                        "Mỹ",
+                        "Đức",
+                        "Anh",
+                        "Pháp"
+                    ],
+                    "corr": "Mỹ",
+                    "explanation": "Alisa đến từ Mỹ ('アメリカから来ました')."
+                }
+            ],
+            "audio_text_vietnamese": "Tôi là Alisa. Tôi đến từ Mỹ. Tôi là sinh viên Đại học Sakura. Tôi 21 tuổi. Rất mong nhận được sự giúp đỡ."
+        },
+        {
+            "id": 40,
+            "audio_text_kana": "A: こちらは やまださんです. IMCの しゃいんです. B: やまださんは なんさいですか. A: 35さいです.",
+            "audio_text_kanji": "A: こちらは 山田さんです。IMCの社員です。 B: 山田さんは何歳ですか。 A: 35歳です。",
+            "questions": [
+                {
+                    "q": "Yamada làm việc ở đâu?",
+                    "opts": [
+                        "IMC",
+                        "FPT",
+                        "Power Electric",
+                        "Bệnh viện Kobe"
+                    ],
+                    "corr": "IMC",
+                    "explanation": "Yamada là nhân viên công ty IMC ('IMCの社員')."
+                },
+                {
+                    "q": "Yamada bao nhiêu tuổi?",
+                    "opts": [
+                        "30 tuổi",
+                        "35 tuổi",
+                        "40 tuổi",
+                        "28 tuổi"
+                    ],
+                    "corr": "35 tuổi",
+                    "explanation": "Yamada 35 tuổi ('35さいです')."
+                },
+                {
+                    "q": "Yamada là người nước nào?",
+                    "opts": [
+                        "Nhật Bản",
+                        "Mỹ",
+                        "Đức",
+                        "Trung Quốc"
+                    ],
+                    "corr": "Nhật Bản",
+                    "explanation": "Yamada làm việc tại IMC (một công ty Nhật Bản) nên quốc tịch của anh ấy là Nhật Bản."
+                }
+            ],
+            "audio_text_vietnamese": "A: Đây là anh Yamada. Anh ấy là nhân viên công ty IMC.\nB: Anh Yamada bao nhiêu tuổi vậy?\nA: 35 tuổi."
+        }
+    ],
+    "dictations": [
+        {
+            "id": 1,
+            "question_audio": "わたしは ミラー です。",
+            "correct_answers": [
+                "わたしは ミラー です",
+                "watashiwa miraa desu"
+            ],
+            "vietnamese_answers": [
+                "Tôi là Miller",
+                "Tớ là Miller",
+                "Mình là Miller"
+            ],
+            "vietnamese_meaning": "Tôi là Miller"
+        },
+        {
+            "id": 2,
+            "question_audio": "サントスさんは がくせいじゃありません。",
+            "correct_answers": [
+                "サントスさんは がくせいじゃありません",
+                "santosu sanwa gakuseija arimasen"
+            ],
+            "vietnamese_answers": [
+                "Anh Santos không phải là học sinh",
+                "Anh Santos không phải là sinh viên",
+                "Santos không phải là học sinh",
+                "Santos không phải là sinh viên"
+            ],
+            "vietnamese_meaning": "Anh Santos không phải là học sinh"
+        },
+        {
+            "id": 3,
+            "question_audio": "あのひとは だれですか。",
+            "correct_answers": [
+                "あのひとは だれですか",
+                "ano hitowa daredesuか"
+            ],
+            "vietnamese_answers": [
+                "Người kia là ai thế",
+                "Người kia là ai vậy",
+                "Người đó là ai thế",
+                "Người đó là ai vậy",
+                "Ai thế"
+            ],
+            "vietnamese_meaning": "Người kia là ai thế"
+        },
+        {
+            "id": 4,
+            "question_audio": "あのかたは どなたですか。",
+            "correct_answers": [
+                "あのかたは どなたですか",
+                "あのかたwa どなたdesuか"
+            ],
+            "vietnamese_answers": [
+                "Vị kia là vị nào",
+                "Vị kia là ai thế",
+                "Vị đó là ai thế",
+                "Vị đó là ai vậy",
+                "Vị đó là vị nào"
+            ],
+            "vietnamese_meaning": "Vị kia là vị nào"
+        },
+        {
+            "id": 5,
+            "question_audio": "ワンさんは いしゃです。",
+            "correct_answers": [
+                "ワンさんは いしゃです",
+                "ワンさんwa いしゃdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh Wang là bác sĩ",
+                "Ông Wang là bác sĩ",
+                "Wang là bác sĩ"
+            ],
+            "vietnamese_meaning": "Anh Wang là bác sĩ"
+        },
+        {
+            "id": 6,
+            "question_audio": "イーさんは ぎんこういんです。",
+            "correct_answers": [
+                "イーさんは ぎんこういんです",
+                "イーさんwa ぎんこういんdesu"
+            ],
+            "vietnamese_answers": [
+                "Chị Lee là nhân viên ngân hàng",
+                "Cô Lee là nhân viên ngân hàng",
+                "Lee là nhân viên ngân hàng"
+            ],
+            "vietnamese_meaning": "Chị Lee là nhân viên ngân hàng"
+        },
+        {
+            "id": 7,
+            "question_audio": "カリナさんは 20さいです。",
+            "correct_answers": [
+                "カリナさんは 20さいです",
+                "カリナさんwa 20さいdesu"
+            ],
+            "vietnamese_answers": [
+                "Karina 20 tuổi",
+                "Chị Karina 20 tuổi",
+                "Karina hai mươi tuổi"
+            ],
+            "vietnamese_meaning": "Karina 20 tuổi"
+        },
+        {
+            "id": 8,
+            "question_audio": "おなまえは なんですか。",
+            "correct_answers": [
+                "おなまえは なんですか",
+                "おなまえwa なんdesuか"
+            ],
+            "vietnamese_answers": [
+                "Tên bạn là gì",
+                "Tên của bạn là gì",
+                "Tên là gì"
+            ],
+            "vietnamese_meaning": "Tên bạn là gì"
+        },
+        {
+            "id": 9,
+            "question_audio": "ミラーさんは アメリカから きました。",
+            "correct_answers": [
+                "ミラーさんは アメリカから きました",
+                "miraaさんwa アメリカから きました"
+            ],
+            "vietnamese_answers": [
+                "Anh Miller đến từ mỹ",
+                "Anh Miller đến từ nước mỹ",
+                "Miller đến từ mỹ"
+            ],
+            "vietnamese_meaning": "Anh Miller đến từ mỹ"
+        },
+        {
+            "id": 10,
+            "question_audio": "ナムさんも かいしゃいんです。",
+            "correct_answers": [
+                "ナムさんも かいしゃいんです",
+                "ナムさんも かいしゃいんdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh Nam cũng là nhân viên công ty",
+                "Nam cũng là nhân viên công ty",
+                "Nam cũng là nhân viên"
+            ],
+            "vietnamese_meaning": "Anh Nam cũng là nhân viên công ty"
+        },
+        {
+            "id": 11,
+            "question_audio": "やまださんは せんせいです。",
+            "correct_answers": [
+                "やまださんは せんせいです",
+                "やまださんwa せんせいdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh Yamada là giáo viên",
+                "Anh Yamada là thầy giáo",
+                "Yamada là giáo viên"
+            ],
+            "vietnamese_meaning": "Anh Yamada là giáo viên"
+        },
+        {
+            "id": 12,
+            "question_audio": "あなたは がくせいですか。",
+            "correct_answers": [
+                "あなたは がくせいですか",
+                "あなたwa gakuseidesuか"
+            ],
+            "vietnamese_answers": [
+                "Bạn là học sinh phải không",
+                "Bạn là sinh viên phải không",
+                "Bạn là học sinh hả",
+                "Bạn là sinh viên hả"
+            ],
+            "vietnamese_meaning": "Bạn là học sinh phải không"
+        },
+        {
+            "id": 13,
+            "question_audio": "おいくつですか。",
+            "correct_answers": [
+                "おいくつですか",
+                "おいくつdesuか"
+            ],
+            "vietnamese_answers": [
+                "Bạn bao nhiêu tuổi",
+                "Bao nhiêu tuổi",
+                "Mấy tuổi"
+            ],
+            "vietnamese_meaning": "Bạn bao nhiêu tuổi"
+        },
+        {
+            "id": 14,
+            "question_audio": "ワットさんは イギリスじんです。",
+            "correct_answers": [
+                "ワットさんは イギリスじんです",
+                "ワットさんwa イギリスじんdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh Watt là người anh",
+                "Thầy watt là người anh",
+                "Watt là người anh"
+            ],
+            "vietnamese_meaning": "Anh Watt là người anh"
+        },
+        {
+            "id": 15,
+            "question_audio": "シュミットさんは ドイツの けんきゅうしゃです。",
+            "correct_answers": [
+                "シュミットさんは ドイツの けんきゅうしゃです",
+                "シュミットさんwa ドイツの けんきゅうしゃdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh Schmidt là nhà nghiên cứu người đức",
+                "Schmidt là nhà nghiên cứu người đức",
+                "Schmidt là nhà nghiên cứu của đức"
+            ],
+            "vietnamese_meaning": "Anh Schmidt là nhà nghiên cứu người đức"
+        },
+        {
+            "id": 16,
+            "question_audio": "こちらは タワポンさんです。",
+            "correct_answers": [
+                "こちらは タワポンさんです",
+                "こちらwa タワポンさんdesu"
+            ],
+            "vietnamese_answers": [
+                "Đây là anh thawaphon",
+                "Đây là thawaphon",
+                "Vị này là anh thawaphon"
+            ],
+            "vietnamese_meaning": "Đây là anh thawaphon"
+        },
+        {
+            "id": 17,
+            "question_audio": "わたしは ベトナムじんです。",
+            "correct_answers": [
+                "わたしは ベトナムじんです",
+                "watashiwa ベトナムじんdesu"
+            ],
+            "vietnamese_answers": [
+                "Tôi là người việt nam",
+                "Tớ là người việt nam",
+                "Mình là người việt nam"
+            ],
+            "vietnamese_meaning": "Tôi là người việt nam"
+        },
+        {
+            "id": 18,
+            "question_audio": "ナムさんは FPTの しゃいんです。",
+            "correct_answers": [
+                "ナムさんは FPTの しゃいんです",
+                "ナムさんwa FPTの しゃいんdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh nam là nhân viên công ty fpt",
+                "Anh nam là nhân viên fpt",
+                "Nam là nhân viên fpt"
+            ],
+            "vietnamese_meaning": "Anh nam là nhân viên công ty fpt"
+        },
+        {
+            "id": 19,
+            "question_audio": "あのひとは にほんじんじゃありません。",
+            "correct_answers": [
+                "あのひとは にほんじんじゃありません",
+                "ano hitowa にほんじんja arimasen"
+            ],
+            "vietnamese_answers": [
+                "Người kia không phải là người nhật",
+                "Người đó không phải là người nhật",
+                "Người kia không phải là người nhật bản"
+            ],
+            "vietnamese_meaning": "Người kia không phải là người nhật"
+        },
+        {
+            "id": 20,
+            "question_audio": "どうぞ よろしく おねがいします。",
+            "correct_answers": [
+                "どうぞ よろしく おねがいします",
+                "どうぞ よろしく おねがいします"
+            ],
+            "vietnamese_answers": [
+                "Rất mong nhận được sự giúp đỡ",
+                "Rất hân hạnh được làm quen",
+                "Rất mong được giúp đỡ"
+            ],
+            "vietnamese_meaning": "Rất mong nhận được sự giúp đỡ"
+        },
+        {
+            "id": 21,
+            "question_audio": "はじめまして。",
+            "correct_answers": [
+                "はじめまして",
+                "waじめまして"
+            ],
+            "vietnamese_answers": [
+                "Rất vui được gặp bạn",
+                "Rất hân hạnh được làm quen",
+                "Lần đầu gặp mặt"
+            ],
+            "vietnamese_meaning": "Rất vui được gặp bạn"
+        },
+        {
+            "id": 22,
+            "question_audio": "ワンさんも いしゃですか。",
+            "correct_answers": [
+                "ワンさんも いしゃですか",
+                "ワンさんも いしゃdesuか"
+            ],
+            "vietnamese_answers": [
+                "Anh wang cũng là bác sĩ phải không",
+                "Ông wang cũng là bác sĩ phải không",
+                "Wang cũng là bác sĩ hả"
+            ],
+            "vietnamese_meaning": "Anh wang cũng là bác sĩ phải không"
+        },
+        {
+            "id": 23,
+            "question_audio": "いいえ、わたしは がくせいじゃありません。",
+            "correct_answers": [
+                "いいえわたしは がくせいじゃありません",
+                "いいえwatashiwa gakuseija arimasen"
+            ],
+            "vietnamese_answers": [
+                "Không tôi không phải là học sinh",
+                "Không tôi không phải là sinh viên",
+                "Không mình không phải là học sinh"
+            ],
+            "vietnamese_meaning": "Không tôi không phải là học sinh"
+        },
+        {
+            "id": 24,
+            "question_audio": "カリナさんは さくらだいがくの がくせいです。",
+            "correct_answers": [
+                "カリナさんは さくらだいがくの がくせいです",
+                "カリナさんwa さくらだいがくの gakuseidesu"
+            ],
+            "vietnamese_answers": [
+                "Karina là sinh viên trường đại học sakura",
+                "Karina là sinh viên đại học sakura",
+                "Karina là học sinh đại học sakura"
+            ],
+            "vietnamese_meaning": "Karina là sinh viên trường đại học sakura"
+        },
+        {
+            "id": 25,
+            "question_audio": "シュミットさんは IMCの しゃいんです。",
+            "correct_answers": [
+                "シュミットさんは IMCの しゃいんです",
+                "シュミットさんwa IMCの しゃいんdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh schmidt là nhân viên công ty imc",
+                "Anh schmidt là nhân viên imc",
+                "Schmidt là nhân viên imc"
+            ],
+            "vietnamese_meaning": "Anh schmidt là nhân viên công ty imc"
+        },
+        {
+            "id": 26,
+            "question_audio": "ミラーさんは 28さいです。",
+            "correct_answers": [
+                "ミラーさんは 28さいです",
+                "miraaさんwa 28さいdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh miller 28 tuổi",
+                "Miller 28 tuổi",
+                "Anh miller hai mươi tám tuổi"
+            ],
+            "vietnamese_meaning": "Anh miller 28 tuổi"
+        },
+        {
+            "id": 27,
+            "question_audio": "イーさんは ぎんこういんじゃありません。",
+            "correct_answers": [
+                "イーさんは ぎんこういんじゃありません",
+                "イーさんwa ぎんこういんja arimasen"
+            ],
+            "vietnamese_answers": [
+                "Chị lee không phải là nhân viên ngân hàng",
+                "Lee không phải là nhân viên ngân hàng"
+            ],
+            "vietnamese_meaning": "Chị lee không phải là nhân viên ngân hàng"
+        },
+        {
+            "id": 28,
+            "question_audio": "タワポンさんも タイじんです。",
+            "correct_answers": [
+                "タワポンさんも タイじんです",
+                "タワポンさんも タイじんdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh thawaphon cũng là người thái",
+                "Thawaphon cũng là người thái lan",
+                "Thawaphon cũng là người thái"
+            ],
+            "vietnamese_meaning": "Anh thawaphon cũng là người thái"
+        },
+        {
+            "id": 29,
+            "question_audio": "わたしは パワーでんきの しゃいんです。",
+            "correct_answers": [
+                "わたしは パワーでんきの しゃいんです",
+                "watashiwa パワーでんきの しゃいんdesu"
+            ],
+            "vietnamese_answers": [
+                "Tôi là nhân viên công ty điện lực power",
+                "Tôi là nhân viên điện lực power",
+                "Tôi là nhân viên của điện lực power"
+            ],
+            "vietnamese_meaning": "Tôi là nhân viên công ty điện lực power"
+        },
+        {
+            "id": 30,
+            "question_audio": "あのひとは ドイツじんじゃありません。",
+            "correct_answers": [
+                "あのひとは ドイツじんじゃありません",
+                "ano hitowa ドイツじんja arimasen"
+            ],
+            "vietnamese_answers": [
+                "Người kia không phải là người đức",
+                "Người đó không phải là người đức",
+                "Người kia không phải là người nước đức"
+            ],
+            "vietnamese_meaning": "Người kia không phải là người đức"
+        },
+        {
+            "id": 31,
+            "question_audio": "サントスさんは 30さいです。",
+            "correct_answers": [
+                "サントスさんは 30さいです",
+                "santosu sanwa 30さいdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh santos 30 tuổi",
+                "Santos 30 tuổi",
+                "Anh santos ba mươi tuổi"
+            ],
+            "vietnamese_meaning": "Anh santos 30 tuổi"
+        },
+        {
+            "id": 32,
+            "question_audio": "ワットさんは さくらだいがくの せんせいです。",
+            "correct_answers": [
+                "ワットさんは さくらだいがくの せんせいです",
+                "ワットさんwa さくらだいがくの せんせいdesu"
+            ],
+            "vietnamese_answers": [
+                "Anh watt là giáo viên trường đại học sakura",
+                "Thầy watt là giáo viên đại học sakura",
+                "Watt là giáo viên đại học sakura"
+            ],
+            "vietnamese_meaning": "Anh watt là giáo viên trường đại học sakura"
+        },
+        {
+            "id": 33,
+            "question_audio": "こちらは カリナさんです。",
+            "correct_answers": [
+                "こちらは カリナさんです",
+                "こちらwa カリナさんdesu"
+            ],
+            "vietnamese_answers": [
+                "Đây là karina",
+                "Đây là chị karina",
+                "Vị này là karina"
+            ],
+            "vietnamese_meaning": "Đây là karina"
+        },
+        {
+            "id": 34,
+            "question_audio": "ワンさんは 35さいですか。",
+            "correct_answers": [
+                "ワンさんは 35さいですか",
+                "ワンさんwa 35さいdesuか"
+            ],
+            "vietnamese_answers": [
+                "Anh wang 35 tuổi phải không",
+                "Ông wang 35 tuổi phải không",
+                "Wang 35 tuổi hả"
+            ],
+            "vietnamese_meaning": "Anh wang 35 tuổi phải không"
+        },
+        {
+            "id": 35,
+            "question_audio": "いいえ、ワンさんは ちゅうごくじんです。",
+            "correct_answers": [
+                "いいえワンさんは ちゅうごくじんです",
+                "いいえワンさんwa ちゅうごくじんdesu"
+            ],
+            "vietnamese_answers": [
+                "Không anh wang là người trung quốc",
+                "Không ông wang là người trung quốc",
+                "Không wang là người trung quốc"
+            ],
+            "vietnamese_meaning": "Không anh wang là người trung quốc"
+        },
+        {
+            "id": 36,
+            "question_audio": "あのひとは イギリスの がくせいです。",
+            "correct_answers": [
+                "あのひとは イギリスの がくせいです",
+                "ano hitowa イギリスの gakuseidesu"
+            ],
+            "vietnamese_answers": [
+                "Người kia là học sinh nước anh",
+                "Người đó là sinh viên nước anh",
+                "Người đó là học sinh nước anh"
+            ],
+            "vietnamese_meaning": "Người kia là học sinh nước anh"
+        },
+        {
+            "id": 37,
+            "question_audio": "タワポンさんは タイから きました。",
+            "correct_answers": [
+                "タワポンさんは タイから きました",
+                "タワポンさんwa タイから きました"
+            ],
+            "vietnamese_answers": [
+                "Anh thawaphon đến từ thái lan",
+                "Thawaphon đến từ thái lan",
+                "Anh thawaphon đến từ thái"
+            ],
+            "vietnamese_meaning": "Anh thawaphon đến từ thái lan"
+        },
+        {
+            "id": 38,
+            "question_audio": "わたしも かいしゃいんじゃありません。",
+            "correct_answers": [
+                "わたしも かいしゃいんじゃありません",
+                "watashiも かいしゃいんja arimasen"
+            ],
+            "vietnamese_answers": [
+                "Tôi cũng không phải là nhân viên công ty",
+                "Tôi cũng không phải là nhân viên",
+                "Mình cũng không phải là nhân viên công ty"
+            ],
+            "vietnamese_meaning": "Tôi cũng không phải là nhân viên công ty"
+        },
+        {
+            "id": 39,
+            "question_audio": "どうぞ よろしく。",
+            "correct_answers": [
+                "どうぞ よろしく",
+                "どうぞ よろしく"
+            ],
+            "vietnamese_answers": [
+                "Rất mong được giúp đỡ",
+                "Rất mong nhận được sự giúp đỡ",
+                "Rất hân hạnh được làm quen"
+            ],
+            "vietnamese_meaning": "Rất mong được giúp đỡ"
+        },
+        {
+            "id": 40,
+            "question_audio": "わたしは ミラー です。",
+            "correct_answers": [
+                "わたしは ミラー です",
+                "watashiwa miraa desu"
+            ],
+            "vietnamese_answers": [
+                "Tôi là miller",
+                "Tớ là miller",
+                "Mình là miller"
+            ],
+            "vietnamese_meaning": "Tôi là miller"
+        }
+    ]
+}
 ];
-
 module.exports = {
   lessons,
   lessonReviews,

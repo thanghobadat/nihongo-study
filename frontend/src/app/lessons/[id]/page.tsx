@@ -3091,6 +3091,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         loadCandoData();
       } else if (currentTab === 'culture') {
         loadCultureData();
+      } else if (currentTab === 'review') {
+        setLoading(false);
       }
     }
   }, [currentTab, isMarugoto, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData, loadCandoData, loadCultureData, loadSummaryData]);
@@ -11336,16 +11338,46 @@ const renderInteractivePractice = () => {
                                   })}
                                 </div>
                                 {answered && (
-                                  <div className={`text-xs font-semibold px-2 py-1 rounded w-fit ${
-                                    choiceGraded ? 'text-emerald-400 bg-emerald-500/10' : 'text-rose-400 bg-rose-500/10'
-                                  }`}>
-                                    {choiceGraded ? '✓ Đúng' : `✗ Sai (Đáp án: ${qItem.corr})`}
+                                  <div className="space-y-2 mt-2">
+                                    <div className={`text-xs font-semibold px-2 py-1 rounded w-fit ${
+                                      choiceGraded ? 'text-emerald-400 bg-emerald-500/10' : 'text-rose-400 bg-rose-500/10'
+                                    }`}>
+                                      {choiceGraded ? '✓ Đúng' : `✗ Sai (Đáp án: ${qItem.corr})`}
+                                    </div>
+                                    {qItem.explanation && (
+                                      <div className="text-xs text-slate-600 dark:text-slate-300 mt-1 pl-2.5 border-l-2 border-slate-300 dark:border-indigo-500 bg-slate-100/50 dark:bg-slate-900/40 p-2 rounded-lg leading-relaxed animate-fade-in">
+                                        💡 <b>Giải thích:</b> {qItem.explanation}
+                                      </div>
+                                    )}
                                   </div>
                                 )}
                               </div>
                             );
                           })}
                         </div>
+
+                        {/* Kịch bản hội thoại và dịch nghĩa */}
+                        {answered && (
+                          <div className="bg-slate-50 dark:bg-slate-950/60 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 animate-fade-in">
+                            <h4 className="text-xs font-bold text-indigo-600 dark:text-violet-400 uppercase tracking-wider">📄 Kịch bản đối thoại & Dịch nghĩa:</h4>
+                            <div className="space-y-2 text-xs">
+                              <div className="p-3 bg-white dark:bg-slate-900/60 rounded-lg border border-slate-200 dark:border-slate-800/50">
+                                <span className="font-bold text-slate-800 dark:text-white block mb-1">Tiếng Nhật:</span>
+                                <p className="text-slate-700 dark:text-slate-200 leading-relaxed font-mono whitespace-pre-line">
+                                  {reviewShowKanji ? current.audio_text_kanji : current.audio_text_kana}
+                                </p>
+                              </div>
+                              {current.audio_text_vietnamese && (
+                                <div className="p-3 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-lg border border-indigo-100 dark:border-indigo-900/20">
+                                  <span className="font-bold text-indigo-600 dark:text-indigo-400 block mb-1">Dịch nghĩa tiếng Việt:</span>
+                                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                                    {current.audio_text_vietnamese}
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
 
                         <div className="space-y-2">
                           {!answered ? (
@@ -11399,7 +11431,8 @@ const renderInteractivePractice = () => {
                     const answered = reviewGraded[key] !== undefined;
 
                     const checkDictation = () => {
-                      const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+                      const userAnsRaw = (reviewAnswers[key] || '').trim();
+                      const userAns = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
                       if (!userAns) return;
 
                       let isCorrect = false;
@@ -11410,11 +11443,24 @@ const renderInteractivePractice = () => {
                         }
                       });
 
+                      // Kiểm tra đáp án tiếng Việt nếu có
+                      if (!isCorrect && current.vietnamese_answers && Array.isArray(current.vietnamese_answers)) {
+                        current.vietnamese_answers.forEach((ans: string) => {
+                          const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+                          const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+                          if (cleanUserVn === cleanVnAns || calculateAccuracy(userAnsRaw, ans) >= 85) {
+                            isCorrect = true;
+                          }
+                        });
+                      }
+
                       setReviewGraded(prev => ({ ...prev, [key]: isCorrect }));
                       if (isCorrect) setReviewScore(prev => prev + 1);
+
+                      const vnMeaningStr = current.vietnamese_meaning ? ` | Ý nghĩa: ${current.vietnamese_meaning}` : '';
                       setReviewFeedback(prev => ({
                         ...prev,
-                        [key]: `Đáp án đúng: ${current.correct_answers[0]}`
+                        [key]: `Đáp án đúng: ${current.correct_answers[0]}${vnMeaningStr}`
                       }));
                     };
 
@@ -11422,7 +11468,7 @@ const renderInteractivePractice = () => {
                       <div className="space-y-4">
                         <div className="bg-slate-950/80 p-6 rounded-xl border border-slate-900 text-center space-y-3 relative overflow-hidden">
                           <div className="text-slate-400 text-xs">
-                            Nghe âm thanh phát âm và gõ lại bằng Hiragana hoặc Romaji:
+                            Nghe âm thanh phát âm và gõ lại bằng Hiragana, Romaji hoặc nghĩa tiếng Việt:
                           </div>
                           
                           <button
@@ -11439,7 +11485,7 @@ const renderInteractivePractice = () => {
                             disabled={answered}
                             value={reviewAnswers[key] || ''}
                             onChange={(e) => setReviewAnswers(prev => ({ ...prev, [key]: e.target.value }))}
-                            placeholder="Gõ lại bằng chữ Hiragana hoặc Romaji..."
+                            placeholder="Gõ bằng Hiragana, Romaji hoặc dịch nghĩa tiếng Việt..."
                             className="w-full bg-slate-950/60 border border-slate-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all disabled:opacity-75"
                             onKeyDown={(e) => {
                               if (e.key === 'Enter' && !answered) checkDictation();
