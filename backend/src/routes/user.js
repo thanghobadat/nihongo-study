@@ -921,6 +921,98 @@ router.get('/lessons/:lessonId/review', async (req, res) => {
   }
 });
 
+/**
+ * GET /api/user/reviews/combined
+ * Fetch all available lesson reviews aggregated, filterable by level (N5: 1-25, N4: 26-50) and course (default 'minna')
+ */
+router.get('/reviews/combined', async (req, res) => {
+  try {
+    const level = req.query.level || 'N5';
+    const course = req.query.course || 'minna';
+    let allReviews = [];
+
+    // Filter lessons based on course and level
+    // For Minna: N5 = lessons 1-25, N4 = lessons 26-50
+    let startLessonId = 1;
+    let endLessonId = 25;
+    if (course === 'minna') {
+      if (level === 'N4') {
+        startLessonId = 26;
+        endLessonId = 50;
+      }
+    } else {
+      startLessonId = 101;
+      endLessonId = 118;
+    }
+
+    // Load review records
+    if (req.user.isMock) {
+      allReviews = (mockDb.lessonReviews || []).filter(item => item.lesson_id >= startLessonId && item.lesson_id <= endLessonId);
+    } else {
+      // Cloud Supabase Mode
+      const { data, error } = await supabase
+        .from('lesson_reviews')
+        .select('*')
+        .gte('lesson_id', startLessonId)
+        .lte('lesson_id', endLessonId);
+
+      if (error) {
+        console.warn('lesson_reviews read error, falling back to mockDb:', error.message);
+      }
+      allReviews = data && data.length > 0 ? data : (mockDb.lessonReviews || []).filter(item => item.lesson_id >= startLessonId && item.lesson_id <= endLessonId);
+    }
+
+    // Aggregate translations, dialogues, listenings, dictations from all matching lessons
+    let combinedTranslations = [];
+    let combinedDialogues = [];
+    let combinedListenings = [];
+    let combinedDictations = [];
+
+    allReviews.forEach(review => {
+      if (review.translations) {
+        combinedTranslations.push(...review.translations.map(t => ({ ...t, lesson_id: review.lesson_id })));
+      }
+      if (review.dialogues) {
+        combinedDialogues.push(...review.dialogues.map(d => ({ ...d, lesson_id: review.lesson_id })));
+      }
+      if (review.listenings) {
+        combinedListenings.push(...review.listenings.map(l => ({ ...l, lesson_id: review.lesson_id })));
+      }
+      if (review.dictations) {
+        combinedDictations.push(...review.dictations.map(d => ({ ...d, lesson_id: review.lesson_id })));
+      }
+    });
+
+    // Fisher-Yates shuffle helper
+    const shuffleArray = (arr) => {
+      if (!Array.isArray(arr)) return [];
+      const newArr = [...arr];
+      for (let i = newArr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+      }
+      return newArr;
+    };
+
+    // Dạng 1 translations pool direction shuffle
+    const jaToVi = shuffleArray(combinedTranslations.filter(t => t.direction === 'ja-to-vi'));
+    const viToJa = shuffleArray(combinedTranslations.filter(t => t.direction === 'vi-to-ja'));
+    const selectedTranslations = shuffleArray([...jaToVi, ...viToJa]);
+
+    res.json({
+      translations: selectedTranslations,
+      dialogues: shuffleArray(combinedDialogues),
+      listenings: shuffleArray(combinedListenings),
+      dictations: shuffleArray(combinedDictations)
+    });
+  } catch (error) {
+    console.error('Error fetching combined reviews:', error);
+    res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
+
+
 // --- HELPER FUNCTIONS FOR LOCAL MOCK CUSTOM ITEMS ---
 const fs = require('fs');
 const path = require('path');

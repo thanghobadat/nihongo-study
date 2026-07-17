@@ -854,6 +854,26 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
 
+  // States cho Phân hệ Ôn tập Tổng hợp (Pha 2)
+  const [reviewLoading, setReviewLoading] = useState<boolean>(false);
+  const [reviewData, setReviewData] = useState<{
+    translations: any[];
+    dialogues: any[];
+    listenings: any[];
+    dictations: any[];
+  } | null>(null);
+  const [reviewShowKanji, setReviewShowKanji] = useState<boolean>(false); // mặc định false (chỉ hiện Kana)
+  const [reviewStep, setReviewStep] = useState<'setup' | 'test' | 'result'>('setup');
+  const [reviewQuestions, setReviewQuestions] = useState<any[]>([]);
+  const [reviewSelectedType, setReviewSelectedType] = useState<string>('translation');
+  const [reviewScore, setReviewScore] = useState<number>(0);
+  const [reviewTotal, setReviewTotal] = useState<number>(0);
+  const [reviewIndex, setReviewIndex] = useState<number>(0);
+  const [reviewAnswers, setReviewAnswers] = useState<Record<string, string>>({});
+  const [reviewGraded, setReviewGraded] = useState<Record<string, boolean>>({});
+  const [reviewFeedback, setReviewFeedback] = useState<Record<string, string>>({});
+  const [reviewTTSPlaying, setReviewTTSPlaying] = useState<boolean>(false);
+
   useEffect(() => {
     const isMarugoto = selectedLessonId >= 101;
     setActiveCourse(isMarugoto ? 'marugoto' : 'minna');
@@ -922,23 +942,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  // States cho Phân hệ Ôn tập Tổng hợp (Pha 2)
-  const [reviewLoading, setReviewLoading] = useState<boolean>(false);
-  const [reviewData, setReviewData] = useState<{
-    translations: any[];
-    dialogues: any[];
-    listenings: any[];
-    dictations: any[];
-  } | null>(null);
-  const [reviewShowKanji, setReviewShowKanji] = useState<boolean>(false); // mặc định false (chỉ hiện Kana)
-  const [reviewStep, setReviewStep] = useState<'setup' | 'translations' | 'dialogues' | 'listenings' | 'dictations' | 'result'>('setup');
-  const [reviewScore, setReviewScore] = useState<number>(0);
-  const [reviewTotal, setReviewTotal] = useState<number>(0);
-  const [reviewIndex, setReviewIndex] = useState<number>(0);
-  const [reviewAnswers, setReviewAnswers] = useState<Record<string, string>>({});
-  const [reviewGraded, setReviewGraded] = useState<Record<string, boolean>>({});
-  const [reviewFeedback, setReviewFeedback] = useState<Record<string, string>>({});
-  const [reviewTTSPlaying, setReviewTTSPlaying] = useState<boolean>(false);
+  
 
 
   const [message, setMessage] = useState<string | null>(null);
@@ -1813,6 +1817,143 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       setReviewLoading(false);
     }
   }, [selectedLessonId]);
+
+  const startReviewTest = () => {
+    if (reviewData) {
+      // Gather all items from the 4 lists
+      const pool: any[] = [];
+      if (reviewSelectedType === 'translation' && Array.isArray(reviewData.translations)) {
+        reviewData.translations.forEach((item: any) => {
+          pool.push({ type: 'translation', originalData: item, key: `trans_${item.id || Math.random()}` });
+        });
+      } else if (reviewSelectedType === 'dialogue' && Array.isArray(reviewData.dialogues)) {
+        reviewData.dialogues.forEach((item: any) => {
+          pool.push({ type: 'dialogue', originalData: item, key: `diag_${item.id || Math.random()}` });
+        });
+      } else if (reviewSelectedType === 'listening' && Array.isArray(reviewData.listenings)) {
+        reviewData.listenings.forEach((item: any) => {
+          pool.push({ type: 'listening', originalData: item, key: `list_${item.id || Math.random()}` });
+        });
+      } else if (reviewSelectedType === 'dictation' && Array.isArray(reviewData.dictations)) {
+        reviewData.dictations.forEach((item: any) => {
+          pool.push({ type: 'dictation', originalData: item, key: `dict_${item.id || Math.random()}` });
+        });
+      }
+
+      // Shuffle pool
+      const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
+
+      // Select up to 10 questions
+      const selected = shuffledPool.slice(0, 10);
+
+      // Calculate total points
+      let totalPoints = 0;
+      selected.forEach((q) => {
+        if (q.type === 'listening') {
+          totalPoints += q.originalData.questions?.length || 0;
+        } else {
+          totalPoints += 1;
+        }
+      });
+
+      setReviewQuestions(selected);
+      setReviewStep('test');
+      setReviewIndex(0);
+      setReviewAnswers({});
+      setReviewGraded({});
+      setReviewFeedback({});
+      setReviewScore(0);
+      setReviewTotal(totalPoints);
+    } else {
+      loadReviewData();
+    }
+  };
+
+  const gradeAllQuestions = () => {
+    let score = 0;
+    const graded: Record<string, boolean> = {};
+    const feedback: Record<string, string> = {};
+
+    reviewQuestions.forEach((q) => {
+      if (q.type === 'translation') {
+        const key = q.key;
+        const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+        let isCorrect = false;
+        const correctAnswersList = q.originalData.correct_answers || q.originalData.answers || [];
+        correctAnswersList.forEach((ans: string) => {
+          const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+          if (userAns === cleanAns || (cleanAns.includes(userAns) && userAns.length > 3)) {
+            isCorrect = true;
+          }
+        });
+        graded[key] = isCorrect;
+        if (isCorrect) score += 1;
+        feedback[key] = `Đáp án đúng: ${correctAnswersList.join(' / ')}`;
+      }
+      
+      else if (q.type === 'dialogue') {
+        const key1 = `${q.key}_b1`;
+        const key2 = `${q.key}_b2`;
+        const b1Ans = reviewAnswers[key1];
+        const b2Ans = reviewAnswers[key2];
+
+        const b1Correct = q.originalData.blanks.blank1.correct === b1Ans;
+        const b2Correct = q.originalData.blanks.blank2.correct === b2Ans;
+
+        graded[key1] = b1Correct;
+        graded[key2] = b2Correct;
+
+        if (b1Correct && b2Correct) {
+          score += 1;
+        } else if (b1Correct || b2Correct) {
+          score += 0.5;
+        }
+        feedback[q.key] = `Đáp án đúng: [1] ${q.originalData.blanks.blank1.correct} | [2] ${q.originalData.blanks.blank2.correct}`;
+      }
+      
+      else if (q.type === 'listening') {
+        const keyPrefix = q.key;
+        q.originalData.questions.forEach((subQ: any, subIdx: number) => {
+          const ansKey = `${keyPrefix}_q${subIdx}`;
+          const isCorrect = reviewAnswers[ansKey] === (subQ.corr || subQ.correct);
+          graded[ansKey] = isCorrect;
+          if (isCorrect) score += 1;
+        });
+        graded[`${keyPrefix}_all`] = true;
+      }
+      
+      else if (q.type === 'dictation') {
+        const key = q.key;
+        const userAnsRaw = (reviewAnswers[key] || '').trim();
+        const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+        let isCorrect = false;
+        const correctJp = q.originalData.question_audio;
+        const cleanJp = correctJp.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+        const cleanUserJp = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+        if (cleanUserJp === cleanJp) {
+          isCorrect = true;
+        }
+
+        const vnAnswers = q.originalData.vietnamese_answers || [];
+        vnAnswers.forEach((ans: string) => {
+          const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+          if (cleanUserVn === cleanVnAns || calculateAccuracy(userAnsRaw, ans) >= 85) {
+            isCorrect = true;
+          }
+        });
+
+        graded[key] = isCorrect;
+        if (isCorrect) score += 1;
+        feedback[key] = `Đáp án đúng: ${correctJp} ${q.originalData.vietnamese_meaning ? `| Ý nghĩa: ${q.originalData.vietnamese_meaning}` : ''}`;
+      }
+    });
+
+    setReviewScore(score);
+    setReviewGraded(graded);
+    setReviewFeedback(feedback);
+    setReviewStep('result');
+  };
+
 
   useEffect(() => {
     if (currentTab === 'review') {
@@ -8863,7 +9004,7 @@ const renderInteractivePractice = () => {
                                   value={translationInput}
                                   onChange={(e) => setTranslationInput(e.target.value)}
                                   placeholder={translationDirection === 'vi-to-ja' ? "Nhập câu dịch tiếng Nhật (Hiragana/Romaji)..." : "Nhập câu dịch tiếng Việt..."}
-                                  className="w-full p-4 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-[#b5179e] focus:ring-1 focus:ring-[#b5179e] text-slate-700 dark:text-slate-200 dark:bg-slate-955 outline-none"
+                                  className="w-full p-4 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-[#b5179e] focus:ring-1 focus:ring-[#b5179e] text-slate-700 dark:text-slate-200 dark:bg-slate-950 outline-none"
                                 />
                                 
                                 {translationShowAnswer && (
@@ -8903,7 +9044,7 @@ const renderInteractivePractice = () => {
                                 ) : (
                                   <button
                                     onClick={handleNextTranslation}
-                                    className="w-full py-3 bg-slate-900 hover:bg-slate-855 dark:bg-slate-100 dark:hover:bg-slate-202 text-white dark:text-slate-900 font-bold rounded-xl active:scale-[0.98] transition-all cursor-pointer text-sm shadow-md"
+                                    className="w-full py-3 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold rounded-xl active:scale-[0.98] transition-all cursor-pointer text-sm shadow-md"
                                   >
                                     Câu tiếp theo ➔
                                   </button>
@@ -10677,7 +10818,7 @@ const renderInteractivePractice = () => {
                 📝 Ôn tập tổng hợp: {lessonTitle}
               </h2>
               <p className="text-slate-400 text-xs mt-1">
-                Luyện tập sâu từ vựng & ngữ pháp qua 4 dạng bài tập phản xạ
+                Luyện tập sâu từ vựng & ngữ pháp qua các dạng bài tập phản xạ
               </p>
             </div>
             <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 p-1 rounded-xl">
@@ -10685,13 +10826,13 @@ const renderInteractivePractice = () => {
                 onClick={() => setReviewShowKanji(false)}
                 className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${!reviewShowKanji ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
               >
-                Chữ Kana (Mặc định)
+                Chữ Kana
               </button>
               <button
                 onClick={() => setReviewShowKanji(true)}
                 className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${reviewShowKanji ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
               >
-                Chữ Hán (Kanji)
+                Chữ Hán
               </button>
             </div>
           </div>
@@ -10705,7 +10846,7 @@ const renderInteractivePractice = () => {
               <div className="space-y-2">
                 <h3 className="text-lg font-bold text-white">Bắt đầu lượt ôn tập tổng hợp</h3>
                 <p className="text-slate-400 text-sm max-w-md mx-auto">
-                  Hệ thống đã chuẩn bị đầy đủ 4 dạng bài tập ôn tập từ ngân hàng đề Bài 1 để giúp bạn làm chủ từ vựng và ngữ pháp.
+                  Hệ thống đã chuẩn bị 10 câu hỏi ngẫu nhiên từ ngân hàng đề Bài 1 để giúp bạn làm chủ từ vựng và ngữ pháp.
                 </p>
               </div>
               {reviewLoading ? (
@@ -10717,151 +10858,93 @@ const renderInteractivePractice = () => {
                   Đang tải câu hỏi ôn tập...
                 </div>
               ) : (
-                <button
-                  onClick={() => {
-                    if (reviewData) {
-                      setReviewStep('translations');
-                      setReviewIndex(0);
-                      setReviewAnswers({});
-                      setReviewGraded({});
-                      setReviewFeedback({});
-                      setReviewScore(0);
-                      setReviewTotal(
-                        (reviewData.translations?.length || 0) +
-                        (reviewData.dialogues?.length || 0) +
-                        (reviewData.listenings?.length || 0) * 3 + // Dạng 3 có 3 câu hỏi con mỗi bài
-                        (reviewData.dictations?.length || 0)
-                      );
-                    } else {
-                      loadReviewData();
-                    }
-                  }}
-                  className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-500/20 active:scale-95"
-                >
-                  Bắt đầu Ngay
-                </button>
+                <div className="space-y-6">
+                                <div className="space-y-4 max-w-lg mx-auto bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80 text-left">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">Chọn dạng bài tập muốn ôn tập:</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    { id: 'translation', label: '🇯🇵 ➔ 🇻🇳 Dịch câu phản xạ' },
+                    { id: 'dialogue', label: '💬 ➔ ✏️ Điền khuyết hội thoại' },
+                    { id: 'listening', label: '🎧 ➔ 📝 Nghe hiểu hội thoại' },
+                    { id: 'dictation', label: '🔊 ➔ ✍️ Nghe viết chính tả' }
+                  ].map((type) => {
+                    const isSelected = reviewSelectedType === type.id;
+                    return (
+                      <button
+                        key={type.id}
+                        onClick={() => setReviewSelectedType(type.id)}
+                        className={`px-4 py-3 rounded-xl border text-xs font-semibold transition-all text-left flex items-center justify-between cursor-pointer ${
+                          isSelected
+                            ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-md'
+                            : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-300 hover:border-slate-700'
+                        }`}
+                      >
+                        <span>{type.label}</span>
+                        <span>{isSelected ? '🎯' : '⬜'}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+
+                  <button
+                    onClick={startReviewTest}
+                    
+                    className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-500/20 active:scale-95"
+                  >
+                    Bắt đầu Ngay
+                  </button>
+                </div>
               )}
             </div>
           )}
 
-          {/* PLAYING SCREENS (HAS NAVIGATION MENU) */}
-          {reviewStep !== 'setup' && reviewStep !== 'result' && reviewData && (
+          {/* Test in progress screens */}
+          {reviewStep === 'test' && reviewQuestions.length > 0 && (
             <div className="space-y-6 animate-scale-in">
-              {/* Navigation Menu giữa các dạng bài tập */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-900/40 p-1.5 rounded-xl border border-slate-800">
-                <button
-                  onClick={() => {
-                    setReviewStep('translations');
-                    setReviewIndex(0);
-                  }}
-                  className={`py-2.5 px-3 rounded-lg text-xs font-bold transition-all text-center flex flex-col justify-center items-center gap-1 ${
-                    reviewStep === 'translations'
-                      ? 'bg-indigo-600 text-white shadow'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
-                  }`}
-                >
-                  <span>🇯🇵 ➔ 🇻🇳</span>
-                  <span>Dạng 1: Dịch phản xạ</span>
-                </button>
-                <button
-                  onClick={() => {
-                    setReviewStep('dialogues');
-                    setReviewIndex(0);
-                  }}
-                  className={`py-2.5 px-3 rounded-lg text-xs font-bold transition-all text-center flex flex-col justify-center items-center gap-1 ${
-                    reviewStep === 'dialogues'
-                      ? 'bg-indigo-600 text-white shadow'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
-                  }`}
-                >
-                  <span>💬 ➔ ✏️</span>
-                  <span>Dạng 2: Khuyết hội thoại</span>
-                </button>
-                <button
-                  onClick={() => {
-                    setReviewStep('listenings');
-                    setReviewIndex(0);
-                  }}
-                  className={`py-2.5 px-3 rounded-lg text-xs font-bold transition-all text-center flex flex-col justify-center items-center gap-1 ${
-                    reviewStep === 'listenings'
-                      ? 'bg-indigo-600 text-white shadow'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
-                  }`}
-                >
-                  <span>🎧 ➔ 📝</span>
-                  <span>Dạng 3: Nghe hiểu</span>
-                </button>
-                <button
-                  onClick={() => {
-                    setReviewStep('dictations');
-                    setReviewIndex(0);
-                  }}
-                  className={`py-2.5 px-3 rounded-lg text-xs font-bold transition-all text-center flex flex-col justify-center items-center gap-1 ${
-                    reviewStep === 'dictations'
-                      ? 'bg-indigo-600 text-white shadow'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
-                  }`}
-                >
-                  <span>✍️ ➔ 🎧</span>
-                  <span>Dạng 4: Nghe viết</span>
-                </button>
+              {/* Progress bar */}
+              <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-4 rounded-2xl shadow-sm flex justify-between items-center">
+                <span className="text-xs font-bold text-indigo-400">
+                  Câu {reviewIndex + 1} / {reviewQuestions.length}
+                </span>
+                <div className="w-48 bg-slate-850 rounded-full h-2 overflow-hidden">
+                  <div 
+                    className="bg-indigo-650 h-full transition-all duration-300"
+                    style={{ width: `${((reviewIndex + 1) / reviewQuestions.length) * 100}%` }}
+                  />
+                </div>
               </div>
 
-              {/* DẠNG 1: DỊCH CÂU */}
-              {reviewStep === 'translations' && (
-                <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                  <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full">
-                      Dạng 1: Dịch câu phản xạ hai chiều
-                    </span>
-                    <span className="text-slate-400 text-xs font-semibold">
-                      Câu {reviewIndex + 1} / {reviewData.translations.length}
-                    </span>
-                  </div>
+              {/* Question rendering */}
+              {(() => {
+                const q = reviewQuestions[reviewIndex];
+                const current = q.originalData;
 
-                  {(() => {
-                    const current = reviewData.translations[reviewIndex];
-                    if (!current) return <p className="text-slate-400 text-sm">Đang nạp dữ liệu...</p>;
-                    const isJaToVi = current.direction === 'ja-to-vi';
-                    const key = `trans_${current.id}`;
-                    const answered = reviewGraded[key] !== undefined;
+                if (q.type === 'translation') {
+                  const isJaToVi = current.direction === 'ja-to-vi';
+                  const key = q.key;
+                  const questionDisplay = isJaToVi 
+                    ? (reviewShowKanji ? (current.question_kanji || current.question) : (current.question_kana || current.question))
+                    : current.question;
 
-                    const checkTranslation = () => {
-                      const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
-                      if (!userAns) return;
-
-                      let isCorrect = false;
-                      current.answers.forEach((ans: string) => {
-                        const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
-                        if (userAns === cleanAns || cleanAns.includes(userAns) && userAns.length > 3) {
-                          isCorrect = true;
-                        }
-                      });
-
-                      setReviewGraded(prev => ({ ...prev, [key]: isCorrect }));
-                      if (isCorrect) setReviewScore(prev => prev + 1);
-                      setReviewFeedback(prev => ({
-                        ...prev,
-                        [key]: `Đáp án đúng: ${current.answers.join(' / ')}`
-                      }));
-                    };
-
-                    return (
+                  return (
+                    <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-3 flex-wrap gap-2">
+                        <span className="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full">
+                          Dạng 1: Dịch câu phản xạ hai chiều
+                        </span>
+                      </div>
                       <div className="space-y-4">
                         <div className="bg-slate-950/80 p-5 rounded-xl border border-slate-900 space-y-3 relative overflow-hidden">
                           <div className="text-slate-400 text-xs">
                             {isJaToVi ? 'Hãy dịch câu tiếng Nhật sau sang tiếng Việt:' : 'Hãy dịch câu tiếng Việt sau sang tiếng Nhật:'}
                           </div>
-                          <div className="text-lg font-bold text-white">
-                            {isJaToVi 
-                              ? (reviewShowKanji ? current.question_kanji : current.question_kana)
-                              : current.question
-                            }
-                          </div>
+                          <div className="text-lg font-bold text-white select-all">{questionDisplay}</div>
                           {isJaToVi && (
                             <button
-                              onClick={() => playAudio(reviewShowKanji ? current.question_kanji : current.question_kana)}
-                              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition-all flex items-center gap-1"
+                              onClick={() => playAudio(questionDisplay)}
+                              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition-all flex items-center gap-1 cursor-pointer"
                             >
                               🔊 Nghe phát âm
                             </button>
@@ -10871,667 +10954,299 @@ const renderInteractivePractice = () => {
                         <div className="space-y-2">
                           <input
                             type="text"
-                            disabled={answered}
                             value={reviewAnswers[key] || ''}
                             onChange={(e) => setReviewAnswers(prev => ({ ...prev, [key]: e.target.value }))}
                             placeholder={isJaToVi ? "Nhập bản dịch tiếng Việt của bạn..." : "Nhập bản dịch tiếng Nhật (Hiragana/Romaji)..."}
-                            className="w-full bg-slate-950/60 border border-slate-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all disabled:opacity-75"
+                            className="w-full bg-slate-950/60 border border-slate-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all"
                             onKeyDown={(e) => {
-                              if (e.key === 'Enter' && !answered) checkTranslation();
-                            }}
-                          />
-                          {!answered ? (
-                            <button
-                              onClick={checkTranslation}
-                              disabled={!(reviewAnswers[key] || '').trim()}
-                              className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95"
-                            >
-                              Gửi đáp án
-                            </button>
-                          ) : (
-                            <div className="space-y-3">
-                              <div className={`p-4 rounded-xl border flex items-start gap-2 text-sm font-semibold animate-fade-in ${
-                                reviewGraded[key] 
-                                  ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' 
-                                  : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
-                              }`}>
-                                <span>{reviewGraded[key] ? '✅ Đúng rồi!' : '❌ Chưa chính xác.'}</span>
-                                <span className="text-xs font-normal text-slate-300 ml-1">{reviewFeedback[key]}</span>
-                              </div>
-
-                              <button
-                                onClick={() => {
-                                  if (reviewIndex + 1 < reviewData.translations.length) {
+                              if (e.key === 'Enter') {
+                                  if (reviewIndex + 1 < reviewQuestions.length) {
                                     setReviewIndex(prev => prev + 1);
                                   } else {
-                                    setReviewStep('dialogues');
-                                    setReviewIndex(0);
+                                    gradeAllQuestions();
                                   }
-                                }}
-                                className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all active:scale-95"
-                              >
-                                {reviewIndex + 1 < reviewData.translations.length ? 'Câu tiếp theo ➔' : 'Chuyển sang Dạng 2: Khuyết hội thoại ➔'}
-                              </button>
-                            </div>
-                          )}
+                                }
+                            }}
+                          />
                         </div>
                       </div>
-                    );
-                  })()}
-                </div>
-              )}
+                    </div>
+                  );
+                }
 
-              {/* DẠNG 2: HOÀN THIỆN ĐOẠN HỘI THOẠI */}
-              {reviewStep === 'dialogues' && (
-                <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                  <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 bg-sky-500/10 text-sky-400 border border-sky-500/20 rounded-full">
-                      Dạng 2: Hoàn thiện hội thoại điền khuyết
-                    </span>
-                    <span className="text-slate-400 text-xs font-semibold">
-                      Đoạn {reviewIndex + 1} / {reviewData.dialogues.length}
-                    </span>
-                  </div>
+                else if (q.type === 'dialogue') {
+                  const key1 = `${q.key}_b1`;
+                  const key2 = `${q.key}_b2`;
 
-                  {(() => {
-                    const current = reviewData.dialogues[reviewIndex];
-                    if (!current) return <p className="text-slate-400 text-sm">Đang nạp dữ liệu...</p>;
-                    const key1 = `diag_${current.id}_b1`;
-                    const key2 = `diag_${current.id}_b2`;
-                    const answered = reviewGraded[key1] !== undefined;
-
-                    const checkDialogue = () => {
-                      const b1Ans = reviewAnswers[key1];
-                      const b2Ans = reviewAnswers[key2];
-                      if (!b1Ans || !b2Ans) return;
-
-                      const b1Correct = current.blanks.blank1.correct === b1Ans;
-                      const b2Correct = current.blanks.blank2.correct === b2Ans;
-
-                      setReviewGraded(prev => ({ 
-                        ...prev, 
-                        [key1]: b1Correct,
-                        [key2]: b2Correct 
-                      }));
-
-                      if (b1Correct && b2Correct) {
-                        setReviewScore(prev => prev + 1);
-                      } else if (b1Correct || b2Correct) {
-                        setReviewScore(prev => prev + 0.5); // tính 0.5 điểm
-                      }
-
-                      setReviewFeedback(prev => ({
-                        ...prev,
-                        [`diag_${current.id}`]: `Đáp án đúng: [1] ${current.blanks.blank1.correct} | [2] ${current.blanks.blank2.correct}`
-                      }));
-                    };
-
-                    return (
+                  return (
+                    <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-3 flex-wrap gap-2">
+                        <span className="text-xs font-bold px-2.5 py-1 bg-sky-500/10 text-sky-400 border border-sky-500/20 rounded-full">
+                          Dạng 2: Hoàn thiện hội thoại điền khuyết
+                        </span>
+                      </div>
                       <div className="space-y-4">
                         <div className="text-slate-400 text-xs italic">
                           Ngữ cảnh đoạn thoại: {current.context}
                         </div>
 
-                        {/* Khung tin nhắn hội thoại */}
                         <div className="space-y-4 bg-slate-950/80 p-5 rounded-xl border border-slate-900">
-                      {current.lines.map((line: any, idx: number) => {
-                        const isSpeakerA = line.speaker === 'A';
-                        const textToRender = reviewShowKanji ? line.text_output : line.text_kana;
-                        
-                        // Thay thế [blank1] thành khoảng trống _______ (1) và [blank2] thành _______ (2)
-                        const cleanText = textToRender
-                          .replace('[blank1]', '_______ (1)')
-                          .replace('[blank2]', '_______ (2)');
-                        
-                        return (
-                          <div key={idx} className={`flex gap-3 ${isSpeakerA ? 'justify-start' : 'justify-end'}`}>
-                            <div className={`flex items-start gap-2 max-w-[85%] ${isSpeakerA ? 'flex-row' : 'flex-row-reverse'}`}>
-                              <div className="w-8 h-8 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center border border-slate-700">
-                                {line.speaker}
+                          {current.lines.map((line: any, idx: number) => {
+                            const isSpeakerA = line.speaker === 'A';
+                            const textToRender = reviewShowKanji ? (line.text_output || line.text_kanji) : (line.text_kana || line.text);
+                            
+                            const cleanText = textToRender
+                              .replace('[blank1]', '_______ (1)')
+                              .replace('[blank2]', '_______ (2)');
+                            
+                            return (
+                              <div key={idx} className={`flex gap-3 ${isSpeakerA ? 'justify-start' : 'justify-end'}`}>
+                                <div className={`flex items-start gap-2 max-w-[85%] ${isSpeakerA ? 'flex-row' : 'flex-row-reverse'}`}>
+                                  <div className="w-8 h-8 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center border border-slate-700">
+                                    {line.speaker}
+                                  </div>
+                                  <div className={`p-3.5 rounded-2xl border text-sm text-white ${
+                                    isSpeakerA 
+                                      ? 'bg-slate-900/80 border-slate-800 rounded-tl-none' 
+                                      : 'bg-indigo-950/50 border-indigo-900/50 rounded-tr-none'
+                                  }`}>
+                                    <span>{cleanText}</span>
+                                  </div>
+                                </div>
                               </div>
-                              <div className={`p-3.5 rounded-2xl border text-sm text-white ${
-                                isSpeakerA 
-                                  ? 'bg-slate-900/80 border-slate-800 rounded-tl-none' 
-                                  : 'bg-indigo-950/50 border-indigo-900/50 rounded-tr-none'
-                              }`}>
-                                <span>{cleanText}</span>
-                              </div>
+                            );
+                          })}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-950/65 p-5 rounded-xl border border-slate-900 mb-4">
+                          <div className="space-y-2.5">
+                            <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
+                              <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">1</span>
+                              <span>Đáp án cho vị trí (1):</span>
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {current.blanks.blank1.options.map((opt: string, oIdx: number) => {
+                                const label = ['A', 'B', 'C', 'D'][oIdx];
+                                const isSelected = reviewAnswers[key1] === opt;
+                                
+                                return (
+                                  <button
+                                    key={oIdx}
+                                    onClick={() => setReviewAnswers(prev => ({ ...prev, [key1]: opt }))}
+                                    className={`px-3 py-2 text-left rounded-xl text-xs font-semibold border transition-all flex items-center gap-2 cursor-pointer ${
+                                      isSelected
+                                        ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-md'
+                                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                                    }`}
+                                  >
+                                    <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
+                                      isSelected 
+                                        ? 'bg-indigo-600 border-indigo-400 text-white' 
+                                        : 'bg-slate-950 border-slate-800 text-slate-500'
+                                    }`}>
+                                      {label}
+                                    </span>
+                                    <span className="truncate">{opt}</span>
+                                  </button>
+                                );
+                              })}
                             </div>
                           </div>
-                        );
-                      })}
-                    </div>
 
-                    {/* 2 Ô điền/chọn đáp án bên dưới */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-950/60 p-5 rounded-xl border border-slate-900 mb-4 animate-fade-in">
-                      {/* Vị trí (1) */}
-                      <div className="space-y-2.5">
-                        <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
-                          <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">1</span>
-                          <span>Đáp án cho vị trí (1):</span>
-                        </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {current.blanks.blank1.options.map((opt: string, oIdx: number) => {
-                            const label = ['A', 'B', 'C', 'D'][oIdx];
-                            const isSelected = reviewAnswers[key1] === opt;
-                            const isChoiceGraded = reviewGraded[key1] !== undefined;
-                            const isChoiceCorrect = current.blanks.blank1.correct === opt;
-                            
-                            return (
-                              <button
-                                key={oIdx}
-                                disabled={answered}
-                                onClick={() => setReviewAnswers(prev => ({ ...prev, [key1]: opt }))}
-                                className={`px-3 py-2.5 text-left rounded-xl text-xs font-medium border transition-all flex items-center gap-2 ${
-                                  isSelected
-                                    ? (isChoiceGraded 
-                                        ? (isChoiceCorrect ? 'bg-emerald-500/20 border-emerald-500 text-white' : 'bg-rose-500/20 border-rose-500 text-white')
-                                        : 'bg-indigo-600/20 border-indigo-500 text-white shadow-md shadow-indigo-500/10')
-                                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
-                                }`}
-                              >
-                                <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
-                                  isSelected 
-                                    ? 'bg-indigo-600 border-indigo-400 text-white' 
-                                    : 'bg-slate-950 border-slate-800 text-slate-500'
-                                }`}>
-                                  {label}
-                                </span>
-                                <span className="truncate">{opt}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Vị trí (2) */}
-                      <div className="space-y-2.5">
-                        <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
-                          <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">2</span>
-                          <span>Đáp án cho vị trí (2):</span>
-                        </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {current.blanks.blank2.options.map((opt: string, oIdx: number) => {
-                            const label = ['A', 'B', 'C', 'D'][oIdx];
-                            const isSelected = reviewAnswers[key2] === opt;
-                            const isChoiceGraded = reviewGraded[key2] !== undefined;
-                            const isChoiceCorrect = current.blanks.blank2.correct === opt;
-                            
-                            return (
-                              <button
-                                key={oIdx}
-                                disabled={answered}
-                                onClick={() => setReviewAnswers(prev => ({ ...prev, [key2]: opt }))}
-                                className={`px-3 py-2.5 text-left rounded-xl text-xs font-medium border transition-all flex items-center gap-2 ${
-                                  isSelected
-                                    ? (isChoiceGraded 
-                                        ? (isChoiceCorrect ? 'bg-emerald-500/20 border-emerald-500 text-white' : 'bg-rose-500/20 border-rose-500 text-white')
-                                        : 'bg-indigo-600/20 border-indigo-500 text-white shadow-md shadow-indigo-500/10')
-                                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
-                                }`}
-                              >
-                                <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
-                                  isSelected 
-                                    ? 'bg-indigo-600 border-indigo-400 text-white' 
-                                    : 'bg-slate-950 border-slate-800 text-slate-500'
-                                }`}>
-                                  {label}
-                                </span>
-                                <span className="truncate">{opt}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                          {!answered ? (
-                            <button
-                              onClick={checkDialogue}
-                              disabled={!reviewAnswers[key1] || !reviewAnswers[key2]}
-                              className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95"
-                            >
-                              Kiểm tra đoạn hội thoại
-                            </button>
-                          ) : (
-                            <div className="space-y-3">
-                              <div className={`p-4 rounded-xl border flex flex-col gap-1 text-sm font-semibold animate-fade-in ${
-                                reviewGraded[key1] && reviewGraded[key2]
-                                  ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' 
-                                  : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
-                              }`}>
-                                <div className="flex items-center gap-2">
-                                  <span>
-                                    {reviewGraded[key1] && reviewGraded[key2] 
-                                      ? '✅ Chính xác hoàn toàn!' 
-                                      : (reviewGraded[key1] || reviewGraded[key2] ? '⚠️ Đúng một phần.' : '❌ Chưa chính xác.')}
-                                  </span>
-                                </div>
-                                <span className="text-xs font-normal text-slate-350 mt-1">
-                                  {reviewFeedback[`diag_${current.id}`]}
-                                </span>
-                              </div>
-
-                              {/* Bảng thông tin chi tiết giải thích cho đoạn hội thoại */}
-                              <div className="bg-slate-950/80 p-5 rounded-xl border border-slate-850 space-y-4 animate-fade-in text-sm text-slate-200">
-                                {/* 1. Dịch nghĩa & Phiên âm đoạn hội thoại */}
-                                <div className="space-y-2">
-                                  <h4 className="text-sky-400 font-bold flex items-center gap-1.5 text-xs uppercase tracking-wider">
-                                    💬 Phiên âm & Dịch nghĩa hội thoại
-                                  </h4>
-                                  <div className="space-y-3 pl-2.5 border-l-2 border-slate-800">
-                                    {current.lines.map((line: any, idx: number) => {
-                                      const textToFill = reviewShowKanji ? line.text_output : line.text_kana;
-                                      const b1Val = current.blanks.blank1.correct;
-                                      const b2Val = current.blanks.blank2.correct;
-                                      const filledText = textToFill
-                                        .replace('[blank1]', b1Val)
-                                        .replace('[blank2]', b2Val);
-
-                                      return (
-                                        <div key={idx} className="space-y-0.5">
-                                          <div className="font-semibold text-slate-100 flex items-center gap-2">
-                                            <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300 font-mono">{line.speaker}</span>
-                                            <span>{filledText}</span>
-                                          </div>
-                                          {line.romaji && (
-                                            <div className="text-xs text-slate-400 italic pl-6">{line.romaji}</div>
-                                          )}
-                                          {line.translation && (
-                                            <div className="text-xs text-slate-300 pl-6">{line.translation}</div>
-                                          )}
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-
-                                {/* 2. Giải nghĩa các đáp án và giải thích */}
-                                <div className="space-y-3 border-t border-slate-900 pt-3">
-                                  <h4 className="text-sky-400 font-bold flex items-center gap-1.5 text-xs uppercase tracking-wider">
-                                    🔍 Giải nghĩa & Giải thích đáp án
-                                  </h4>
-                                  
-                                  {/* Vị trí (1) */}
-                                  <div className="space-y-1.5 pl-2.5 border-l-2 border-indigo-500/30">
-                                    <div className="text-xs font-bold text-indigo-400">Vị trí (1):</div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
-                                      {current.blanks.blank1.options.map((opt: string, oIdx: number) => {
-                                        const label = ['A', 'B', 'C', 'D'][oIdx];
-                                        const meaning = current.blanks.blank1.options_translations?.[opt] || 'Chưa có bản dịch';
-                                        const isCorrect = current.blanks.blank1.correct === opt;
-                                        return (
-                                          <div key={oIdx} className={`flex items-center gap-1.5 py-0.5 ${isCorrect ? 'text-emerald-400 font-semibold' : 'text-slate-400'}`}>
-                                            <span className="font-bold">{label}. {opt}</span>
-                                            <span className="text-slate-500">→</span>
-                                            <span>{meaning}</span>
-                                            {isCorrect && <span>(Đúng)</span>}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                    {current.blanks.blank1.explanation && (
-                                      <div className="text-xs text-slate-400 italic mt-1 bg-slate-900/40 p-2 rounded border border-slate-900/80">
-                                        💡 {current.blanks.blank1.explanation}
-                                      </div>
-                                    )}
-                                  </div>
-
-                                  {/* Vị trí (2) */}
-                                  <div className="space-y-1.5 pl-2.5 border-l-2 border-purple-500/30 border-t border-slate-900/50 pt-2">
-                                    <div className="text-xs font-bold text-purple-400">Vị trí (2):</div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
-                                      {current.blanks.blank2.options.map((opt: string, oIdx: number) => {
-                                        const label = ['A', 'B', 'C', 'D'][oIdx];
-                                        const meaning = current.blanks.blank2.options_translations?.[opt] || 'Chưa có bản dịch';
-                                        const isCorrect = current.blanks.blank2.correct === opt;
-                                        return (
-                                          <div key={oIdx} className={`flex items-center gap-1.5 py-0.5 ${isCorrect ? 'text-emerald-400 font-semibold' : 'text-slate-400'}`}>
-                                            <span className="font-bold">{label}. {opt}</span>
-                                            <span className="text-slate-500">→</span>
-                                            <span>{meaning}</span>
-                                            {isCorrect && <span>(Đúng)</span>}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                    {current.blanks.blank2.explanation && (
-                                      <div className="text-xs text-slate-400 italic mt-1 bg-slate-900/40 p-2 rounded border border-slate-900/80">
-                                        💡 {current.blanks.blank2.explanation}
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-
-                              <button
-                                onClick={() => {
-                                  if (reviewIndex + 1 < reviewData.dialogues.length) {
-                                    setReviewIndex(prev => prev + 1);
-                                  } else {
-                                    setReviewStep('listenings');
-                                    setReviewIndex(0);
-                                  }
-                                }}
-                                className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all active:scale-95"
-                              >
-                                {reviewIndex + 1 < reviewData.dialogues.length ? 'Hội thoại tiếp theo ➔' : 'Chuyển sang Dạng 3: Nghe hiểu ➔'}
-                              </button>
+                          <div className="space-y-2.5">
+                            <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
+                              <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">2</span>
+                              <span>Đáp án cho vị trí (2):</span>
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {current.blanks.blank2.options.map((opt: string, oIdx: number) => {
+                                const label = ['A', 'B', 'C', 'D'][oIdx];
+                                const isSelected = reviewAnswers[key2] === opt;
+                                
+                                return (
+                                  <button
+                                    key={oIdx}
+                                    onClick={() => setReviewAnswers(prev => ({ ...prev, [key2]: opt }))}
+                                    className={`px-3 py-2 text-left rounded-xl text-xs font-semibold border transition-all flex items-center gap-2 cursor-pointer ${
+                                      isSelected
+                                        ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-md'
+                                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                                    }`}
+                                  >
+                                    <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
+                                      isSelected 
+                                        ? 'bg-indigo-600 border-indigo-400 text-white' 
+                                        : 'bg-slate-950 border-slate-800 text-slate-500'
+                                    }`}>
+                                      {label}
+                                    </span>
+                                    <span className="truncate">{opt}</span>
+                                  </button>
+                                );
+                              })}
                             </div>
-                          )}
+                          </div>
                         </div>
                       </div>
-                    );
-                  })()}
-                </div>
-              )}
+                    </div>
+                  );
+                }
 
-              {/* DẠNG 3: NGHE HIỂU ĐOẠN VĂN / HỘI THOẠI DÀI */}
-              {reviewStep === 'listenings' && (
-                <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                  <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 bg-violet-500/10 text-violet-400 border border-violet-500/20 rounded-full">
-                      Dạng 3: Nghe hiểu hội thoại dài
-                    </span>
-                    <span className="text-slate-400 text-xs font-semibold">
-                      Bài nghe {reviewIndex + 1} / {reviewData.listenings.length}
-                    </span>
-                  </div>
+                else if (q.type === 'listening') {
+                  const keyPrefix = q.key;
 
-                  {(() => {
-                    const current = reviewData.listenings[reviewIndex];
-                    if (!current) return <p className="text-slate-400 text-sm">Đang nạp dữ liệu...</p>;
-                    const answered = reviewGraded[`list_${current.id}_q0`] !== undefined;
-
-                    const playFullListening = () => {
-                      const textToPlay = reviewShowKanji ? current.audio_text_kanji : current.audio_text_kana;
-                      const regex = /([AB]):s*([^AB]+)/g;
-                      const lines: { speaker: string; text: string }[] = [];
-                      let match;
-                      while ((match = regex.exec(textToPlay)) !== null) {
-                        lines.push({ speaker: match[1], text: match[2].trim() });
-                      }
-                      
-                      if (lines.length > 0) {
-                        playDialogueAudio(lines);
-                      } else {
-                        playAudio(textToPlay);
-                      }
-                    };
-
-                    const checkListeningAnswers = () => {
-                      let correctCount = 0;
-                      const gradedTemp: Record<string, boolean> = {};
-
-                      current.questions.forEach((qItem: any, qIdx: number) => {
-                        const key = `list_${current.id}_q${qIdx}`;
-                        const userVal = reviewAnswers[key];
-                        const isCorrect = userVal === qItem.corr;
-                        gradedTemp[key] = isCorrect;
-                        if (isCorrect) correctCount++;
-                      });
-
-                      setReviewGraded(prev => ({ ...prev, ...gradedTemp }));
-                      setReviewScore(prev => prev + correctCount);
-                      setReviewFeedback(prev => ({
-                        ...prev,
-                        [`list_${current.id}`]: `Đáp án đúng: ${current.questions.map((q: any, qi: number) => `[${qi+1}] ${q.corr}`).join(' | ')}`
-                      }));
-                    };
-
-                    return (
+                  return (
+                    <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+                        <span className="text-xs font-bold px-2.5 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">
+                          Dạng 3: Nghe hiểu hội thoại dài
+                        </span>
+                      </div>
                       <div className="space-y-5">
-                        {/* Hộp phát âm lớn */}
-                        <div className="bg-slate-950/80 p-8 rounded-xl border border-slate-900 text-center space-y-4 relative overflow-hidden">
-                          <div className="text-slate-400 text-xs">
-                            Hãy nhấn nút bên dưới để nghe cuộc đối thoại 2 người (đã ẩn text chữ Nhật):
+                        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-850 flex items-center justify-between gap-4">
+                          <div className="space-y-1">
+                            <h4 className="text-xs text-slate-400 font-bold uppercase">🎧 Bài nghe đối thoại luân phiên</h4>
+                            <p className="text-sm font-semibold text-slate-200">
+                              Hãy nghe cuộc trò chuyện giữa 2 nhân vật A và B.
+                            </p>
                           </div>
-                          
                           <button
-                            onClick={playFullListening}
-                            disabled={reviewTTSPlaying}
-                            className={`mx-auto w-20 h-20 rounded-full flex items-center justify-center text-2xl transition-all shadow-md ${
-                              reviewTTSPlaying 
-                                ? 'bg-violet-600/40 text-violet-300 animate-pulse' 
-                                : 'bg-violet-600 hover:bg-violet-500 text-white hover:scale-105 active:scale-95'
-                            }`}
+                            onClick={() => playDialogueAudio(current.lines)}
+                            className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-2xl transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer text-sm"
                           >
-                            {reviewTTSPlaying ? '🔊...' : '🔊 Nghe'}
+                            🔊 Phát bài nghe
                           </button>
-
-                          {reviewTTSPlaying && (
-                            <div className="text-xs text-violet-400 animate-pulse font-semibold">
-                              Đang phát đối thoại 2 người Nam / Nữ...
-                            </div>
-                          )}
                         </div>
 
-                        {/* Các câu hỏi trắc nghiệm con */}
                         <div className="space-y-4">
-                          {current.questions.map((qItem: any, qIdx: number) => {
-                            const key = `list_${current.id}_q${qIdx}`;
-                            const choiceGraded = reviewGraded[key];
-                            
+                          {current.questions.map((subQ: any, subIdx: number) => {
+                            const ansKey = `${keyPrefix}_q${subIdx}`;
+                            const selectedAnswer = reviewAnswers[ansKey];
+                            const optionsList = subQ.opts || subQ.options || [];
+
                             return (
-                              <div key={qIdx} className="bg-slate-950/40 p-4 rounded-xl border border-slate-800 space-y-2">
-                                <div className="text-sm font-bold text-white">
-                                  {qIdx + 1}. {qItem.q}
+                              <div key={subIdx} className="bg-slate-950/40 p-4 border border-slate-800 rounded-xl space-y-3">
+                                <div className="text-xs font-bold text-slate-350 flex items-center gap-2">
+                                  <span className="w-5 h-5 rounded-full bg-slate-850 text-[10px] text-slate-300 border border-slate-700 flex items-center justify-center font-bold">
+                                    {subIdx + 1}
+                                  </span>
+                                  <span>{subQ.question}</span>
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                  {qItem.opts.map((opt: string, oIdx: number) => {
-                                    const isSelected = reviewAnswers[key] === opt;
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-7">
+                                  {optionsList.map((opt: string, oIdx: number) => {
+                                    const label = ['A', 'B', 'C', 'D'][oIdx];
+                                    const isOptSelected = selectedAnswer === opt;
+                                    
                                     return (
                                       <button
                                         key={oIdx}
-                                        disabled={answered}
-                                        onClick={() => setReviewAnswers(prev => ({ ...prev, [key]: opt }))}
-                                        className={`px-3 py-2 text-left rounded-lg text-xs font-medium border transition-all ${
-                                          isSelected
-                                            ? 'bg-indigo-600/20 border-indigo-500 text-white'
-                                            : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
+                                        onClick={() => setReviewAnswers(prev => ({ ...prev, [ansKey]: opt }))}
+                                        className={`px-3 py-2 text-left rounded-xl text-xs font-semibold border transition-all flex items-center gap-2 cursor-pointer ${
+                                          isOptSelected
+                                            ? 'bg-indigo-600/20 border-indigo-550 text-white shadow'
+                                            : 'bg-slate-905 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
                                         }`}
                                       >
-                                        {opt}
+                                        <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
+                                          isOptSelected 
+                                            ? 'bg-indigo-650 border-indigo-400 text-white' 
+                                            : 'bg-slate-950 border-slate-800 text-slate-500'
+                                        }`}>
+                                          {label}
+                                        </span>
+                                        <span className="truncate">{opt}</span>
                                       </button>
                                     );
                                   })}
                                 </div>
-                                {answered && (
-                                  <div className="space-y-2 mt-2">
-                                    <div className={`text-xs font-semibold px-2 py-1 rounded w-fit ${
-                                      choiceGraded ? 'text-emerald-400 bg-emerald-500/10' : 'text-rose-400 bg-rose-500/10'
-                                    }`}>
-                                      {choiceGraded ? '✓ Đúng' : `✗ Sai (Đáp án: ${qItem.corr})`}
-                                    </div>
-                                    {qItem.explanation && (
-                                      <div className="text-xs text-slate-600 dark:text-slate-300 mt-1 pl-2.5 border-l-2 border-slate-300 dark:border-indigo-500 bg-slate-100/50 dark:bg-slate-900/40 p-2 rounded-lg leading-relaxed animate-fade-in">
-                                        💡 <b>Giải thích:</b> {qItem.explanation}
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
                               </div>
                             );
                           })}
                         </div>
-
-                        {/* Kịch bản hội thoại và dịch nghĩa */}
-                        {answered && (
-                          <div className="bg-slate-50 dark:bg-slate-950/60 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 animate-fade-in">
-                            <h4 className="text-xs font-bold text-indigo-600 dark:text-violet-400 uppercase tracking-wider">📄 Kịch bản đối thoại & Dịch nghĩa:</h4>
-                            <div className="space-y-2 text-xs">
-                              <div className="p-3 bg-white dark:bg-slate-900/60 rounded-lg border border-slate-200 dark:border-slate-800/50">
-                                <span className="font-bold text-slate-800 dark:text-white block mb-1">Tiếng Nhật:</span>
-                                <p className="text-slate-700 dark:text-slate-200 leading-relaxed font-mono whitespace-pre-line">
-                                  {reviewShowKanji ? current.audio_text_kanji : current.audio_text_kana}
-                                </p>
-                              </div>
-                              {current.audio_text_vietnamese && (
-                                <div className="p-3 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-lg border border-indigo-100 dark:border-indigo-900/20">
-                                  <span className="font-bold text-indigo-600 dark:text-indigo-400 block mb-1">Dịch nghĩa tiếng Việt:</span>
-                                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
-                                    {current.audio_text_vietnamese}
-                                  </p>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-
-                        <div className="space-y-2">
-                          {!answered ? (
-                            <button
-                              onClick={checkListeningAnswers}
-                              disabled={current.questions.some((_: any, qi: number) => !reviewAnswers[`list_${current.id}_q${qi}`])}
-                              className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95"
-                            >
-                              Gửi đáp án
-                            </button>
-                          ) : (
-                            <div className="space-y-3">
-                              <button
-                                onClick={() => {
-                                  if (reviewIndex + 1 < reviewData.listenings.length) {
-                                    setReviewIndex(prev => prev + 1);
-                                  } else {
-                                    setReviewStep('dictations');
-                                    setReviewIndex(0);
-                                  }
-                                }}
-                                className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all active:scale-95"
-                              >
-                                {reviewIndex + 1 < reviewData.listenings.length ? 'Bài nghe tiếp theo ➔' : 'Chuyển sang Dạng 4: Nghe viết ➔'}
-                              </button>
-                            </div>
-                          )}
-                        </div>
                       </div>
-                    );
-                  })()}
-                </div>
-              )}
+                    </div>
+                  );
+                }
 
-              {/* DẠNG 4: NGHE VIẾT CHÍNH TẢ */}
-              {reviewStep === 'dictations' && (
-                <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                  <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">
-                      Dạng 4: Nghe viết chính tả
-                    </span>
-                    <span className="text-slate-400 text-xs font-semibold">
-                      Câu {reviewIndex + 1} / {reviewData.dictations.length}
-                    </span>
-                  </div>
+                else if (q.type === 'dictation') {
+                  const key = q.key;
 
-                  {(() => {
-                    const current = reviewData.dictations[reviewIndex];
-                    if (!current) return <p className="text-slate-400 text-sm">Đang nạp dữ liệu...</p>;
-                    const key = `dict_${current.id}`;
-                    const answered = reviewGraded[key] !== undefined;
-
-                    const checkDictation = () => {
-                      const userAnsRaw = (reviewAnswers[key] || '').trim();
-                      const userAns = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
-                      if (!userAns) return;
-
-                      let isCorrect = false;
-                      current.correct_answers.forEach((ans: string) => {
-                        const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
-                        if (userAns === cleanAns) {
-                          isCorrect = true;
-                        }
-                      });
-
-                      // Kiểm tra đáp án tiếng Việt nếu có
-                      if (!isCorrect && current.vietnamese_answers && Array.isArray(current.vietnamese_answers)) {
-                        current.vietnamese_answers.forEach((ans: string) => {
-                          const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
-                          const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
-                          if (cleanUserVn === cleanVnAns || calculateAccuracy(userAnsRaw, ans) >= 85) {
-                            isCorrect = true;
-                          }
-                        });
-                      }
-
-                      setReviewGraded(prev => ({ ...prev, [key]: isCorrect }));
-                      if (isCorrect) setReviewScore(prev => prev + 1);
-
-                      const vnMeaningStr = current.vietnamese_meaning ? ` | Ý nghĩa: ${current.vietnamese_meaning}` : '';
-                      setReviewFeedback(prev => ({
-                        ...prev,
-                        [key]: `Đáp án đúng: ${current.correct_answers[0]}${vnMeaningStr}`
-                      }));
-                    };
-
-                    return (
+                  return (
+                    <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-3 flex-wrap gap-2">
+                        <span className="text-xs font-bold px-2.5 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-full">
+                          Dạng 4: Nghe viết & So khớp chính tả
+                        </span>
+                      </div>
                       <div className="space-y-4">
-                        <div className="bg-slate-950/80 p-6 rounded-xl border border-slate-900 text-center space-y-3 relative overflow-hidden">
-                          <div className="text-slate-400 text-xs">
-                            Nghe âm thanh phát âm và gõ lại bằng Hiragana, Romaji hoặc nghĩa tiếng Việt:
+                        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-850 flex items-center justify-between gap-4">
+                          <div className="space-y-1">
+                            <h4 className="text-xs text-slate-450 font-bold uppercase">🎧 Chính tả âm thanh</h4>
+                            <p className="text-sm font-semibold text-slate-200">
+                              Hãy nghe câu tiếng Nhật và viết lại bằng Hiragana/Kanji hoặc dịch nghĩa sang tiếng Việt.
+                            </p>
                           </div>
-                          
                           <button
                             onClick={() => playAudio(current.question_audio)}
-                            className="mx-auto px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg border border-slate-700 transition-all flex items-center gap-1 hover:scale-105 active:scale-95"
+                            className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-2xl transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer text-sm"
                           >
-                            🔊 Nghe lại câu phát âm
+                            🔊 Phát loa nghe
                           </button>
                         </div>
 
                         <div className="space-y-2">
                           <input
                             type="text"
-                            disabled={answered}
                             value={reviewAnswers[key] || ''}
                             onChange={(e) => setReviewAnswers(prev => ({ ...prev, [key]: e.target.value }))}
-                            placeholder="Gõ bằng Hiragana, Romaji hoặc dịch nghĩa tiếng Việt..."
-                            className="w-full bg-slate-950/60 border border-slate-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all disabled:opacity-75"
+                            placeholder="Nhập câu tiếng Nhật hoặc bản dịch tiếng Việt của bạn..."
+                            className="w-full bg-slate-950/60 border border-slate-850 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all"
                             onKeyDown={(e) => {
-                              if (e.key === 'Enter' && !answered) checkDictation();
+                              if (e.key === 'Enter') {
+                                if (reviewIndex + 1 < reviewQuestions.length) {
+                                  setReviewIndex(prev => prev + 1);
+                                } else {
+                                  gradeAllQuestions();
+                                }
+                              }
                             }}
                           />
-                          {!answered ? (
-                            <button
-                              onClick={checkDictation}
-                              disabled={!(reviewAnswers[key] || '').trim()}
-                              className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95"
-                            >
-                              Gửi đáp án
-                            </button>
-                          ) : (
-                            <div className="space-y-3">
-                              <div className={`p-4 rounded-xl border flex flex-col gap-1 text-sm font-semibold animate-fade-in ${
-                                reviewGraded[key] 
-                                  ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' 
-                                  : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
-                              }`}>
-                                <div className="flex items-center gap-2">
-                                  <span>{reviewGraded[key] ? '✅ Chính xác!' : '❌ Chưa chính xác.'}</span>
-                                </div>
-                                <span className="text-xs font-normal text-slate-300 mt-1">{reviewFeedback[key]}</span>
-                              </div>
-
-                              <button
-                                onClick={() => {
-                                  if (reviewIndex + 1 < reviewData.dictations.length) {
-                                    setReviewIndex(prev => prev + 1);
-                                  } else {
-                                    setReviewStep('result');
-                                  }
-                                }}
-                                className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all active:scale-95"
-                              >
-                                {reviewIndex + 1 < reviewData.dictations.length ? 'Câu tiếp theo ➔' : 'Xem báo cáo kết quả ➔'}
-                              </button>
-                            </div>
-                          )}
                         </div>
                       </div>
-                    );
-                  })()}
-                </div>
-              )}
+                    </div>
+                  );
+                }
+
+                return null;
+              })()}
+
+              {/* Footer Navigation Buttons */}
+              <div className="flex justify-between items-center gap-4">
+                <button
+                  disabled={reviewIndex === 0}
+                  onClick={() => setReviewIndex(prev => prev - 1)}
+                  className="px-6 py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 font-bold rounded-xl transition-all active:scale-95 cursor-pointer text-sm"
+                >
+                  ⏮️ Câu trước
+                </button>
+
+                {reviewIndex + 1 < reviewQuestions.length ? (
+                  <button
+                    onClick={() => setReviewIndex(prev => prev + 1)}
+                    className="px-8 py-3 bg-indigo-650 hover:bg-indigo-500 text-white font-extrabold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-sm"
+                  >
+                    Câu tiếp theo ➔
+                  </button>
+                ) : (
+                  <button
+                    onClick={gradeAllQuestions}
+                    className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-sm"
+                  >
+                    Hoàn thành & Chấm điểm 📊 ➔
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
@@ -11560,6 +11275,86 @@ const renderInteractivePractice = () => {
                     {reviewTotal ? Math.round((reviewScore / reviewTotal) * 100) : 0}%
                   </div>
                 </div>
+              </div>
+
+              {/* Detailed review report list */}
+              <div className="text-left space-y-4 max-h-[400px] overflow-y-auto pr-2 border-t border-slate-800 pt-4">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Báo cáo đáp án chi tiết</h4>
+                {reviewQuestions.map((q, idx) => {
+                  const isCorrect = q.type === 'listening'
+                    ? q.originalData.questions.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`])
+                    : (q.type === 'dialogue'
+                      ? (reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`])
+                      : reviewGraded[q.key]);
+
+                  let qText = '';
+                  if (q.type === 'translation') {
+                    qText = q.originalData.question_kana || q.originalData.question;
+                  } else if (q.type === 'dialogue') {
+                    qText = `Hội thoại điền khuyết`;
+                  } else if (q.type === 'listening') {
+                    qText = `Nghe hiểu hội thoại`;
+                  } else if (q.type === 'dictation') {
+                    qText = `Nghe viết chính tả: ${q.originalData.question_audio}`;
+                  }
+
+                  return (
+                    <div key={idx} className={`p-4 rounded-xl border ${isCorrect ? 'bg-emerald-500/5 border-emerald-500/10' : 'bg-rose-500/5 border-rose-500/10'} space-y-2`}>
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="text-xs font-bold text-white">
+                          Câu ${idx + 1}: ${q.type === 'translation' ? 'Dịch phản xạ' : q.type === 'dialogue' ? 'Điền hội thoại' : q.type === 'listening' ? 'Nghe hiểu' : 'Nghe viết'}
+                        </span>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                          ${isCorrect ? 'Đúng' : 'Sai'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400 font-semibold">${qText}</p>
+                      
+                      {q.type === 'translation' && (
+                        <div className="text-xs space-y-1">
+                          <p className="text-slate-400">Câu trả lời: <span className="font-semibold text-slate-200">{reviewAnswers[q.key] || '(Để trống)'}</span></p>
+                          <p className="text-emerald-400">{reviewFeedback[q.key]}</p>
+                        </div>
+                      )}
+
+                      {q.type === 'dialogue' && (
+                        <div className="text-xs space-y-1">
+                          <p className="text-slate-400">Câu trả lời: <span className="font-semibold text-slate-200">[1] {reviewAnswers[`${q.key}_b1`] || '_'} | [2] {reviewAnswers[`${q.key}_b2`] || '_'}</span></p>
+                          <p className="text-emerald-400">{reviewFeedback[q.key]}</p>
+                        </div>
+                      )}
+
+                      {q.type === 'listening' && (
+                        <div className="text-xs space-y-1.5">
+                          {q.originalData.questions.map((subQ: any, sIdx: number) => {
+                            const ansKey = `${q.key}_q${sIdx}`;
+                            const subCorrect = reviewGraded[ansKey];
+                            return (
+                              <div key={sIdx} className="pl-2 border-l border-slate-800">
+                                <p className="font-medium text-slate-300">{sIdx + 1}. {subQ.question}</p>
+                                <p className="text-slate-400">Đáp án: <span className="font-semibold text-slate-200">{reviewAnswers[ansKey] || '_'}</span> {subCorrect ? '✅' : '❌'}</p>
+                                {!subCorrect && <p className="text-emerald-400 font-mono text-[10px]">Đúng: {subQ.corr || subQ.correct}</p>}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {q.type === 'dictation' && (
+                        <div className="text-xs space-y-1">
+                          <p className="text-slate-400">Câu trả lời: <span className="font-semibold text-slate-200">{reviewAnswers[q.key] || '(Để trống)'}</span></p>
+                          <p className="text-emerald-400">{reviewFeedback[q.key]}</p>
+                          {reviewAnswers[q.key] && !reviewGraded[q.key] && (
+                            <div className="mt-1 bg-slate-900/60 p-2 rounded text-[11px]">
+                              <span className="block text-slate-400 mb-1">So khớp chính tả:</span>
+                              {renderDiff(reviewAnswers[q.key], q.originalData.question_audio)}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
