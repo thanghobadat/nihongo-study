@@ -891,16 +891,39 @@ export default function KnowledgeHubPage() {
   };
 
   // Speech TTS alternating speaker for dialogue Dạng 3
-  const playDialogueAudio = async (lines: { speaker: string; text: string }[]) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  const playDialogueAudio = async (linesInput: any) => {
+    if (typeof window === 'undefined' || !window.speechSynthesis || !linesInput) return;
+
+    let dialogueLines: { speaker: string; text: string }[] = [];
+
+    if (Array.isArray(linesInput)) {
+      dialogueLines = linesInput;
+    } else if (typeof linesInput === 'string') {
+      const rawText = linesInput.trim();
+      const parts = rawText.split(/(?=[AB][：:])/).filter(Boolean);
+      parts.forEach(part => {
+        const isB = part.startsWith('B:') || part.startsWith('B：');
+        const cleanText = part.replace(/^[AB][：:]\s*/, '').trim();
+        if (cleanText) {
+          dialogueLines.push({ speaker: isB ? 'B' : 'A', text: cleanText });
+        }
+      });
+      if (dialogueLines.length === 0 && rawText) {
+        dialogueLines = [{ speaker: 'A', text: rawText }];
+      }
+    }
+
+    if (dialogueLines.length === 0) return;
+
     window.speechSynthesis.cancel();
 
     const voices = window.speechSynthesis.getVoices();
     const jpVoice = voices.find(v => v.lang.startsWith('ja') || v.lang.includes('JP'));
 
     const speakLine = (index: number) => {
-      if (index >= lines.length) return;
-      const line = lines[index];
+      if (index >= dialogueLines.length) return;
+      const line = dialogueLines[index];
+      if (!line || !line.text) return;
       const cleanLine = line.text.replace(/\[blank\d+\]/g, '_______');
       const utterance = new SpeechSynthesisUtterance(cleanLine);
       utterance.lang = 'ja-JP';
