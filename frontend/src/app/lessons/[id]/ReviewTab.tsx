@@ -694,10 +694,15 @@ export default function ReviewTab({
                           .replace('[blank2]', '_______ (2)');
                         
                         return (
-                          <div key={lIdx} className={`flex gap-3 ${isSpeakerA ? 'justify-start' : 'justify-end'}`}>
-                            <div className={`flex items-start gap-2 max-w-[85%] ${isSpeakerA ? 'flex-row' : 'flex-row-reverse'}`}>
-                              <div className="w-8 h-8 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center border border-slate-700">
-                                {line.speaker}
+                          <div key={lIdx} className={`flex ${isSpeakerA ? 'justify-start' : 'justify-end'}`}>
+                            <div className={`flex flex-col max-w-[85%] ${isSpeakerA ? 'items-start' : 'items-end'}`}>
+                              <div className="flex items-center gap-1.5 mb-1 px-1">
+                                <span className="w-6 h-6 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center border border-slate-700 shadow-sm">
+                                  {line.speaker}
+                                </span>
+                                <span className="text-xs font-semibold text-indigo-300">
+                                  {line.speaker === 'A' ? 'Nhân vật A' : 'Nhân vật B'}
+                                </span>
                               </div>
                               <div className={`p-3.5 rounded-2xl border text-sm text-white ${
                                 isSpeakerA 

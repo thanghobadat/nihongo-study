@@ -1523,6 +1523,59 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
 
+  const playDialogueAudio = async (linesInput: any) => {
+
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+
+    window.speechSynthesis.cancel();
+
+    setReviewTTSPlaying(true);
+
+    let linesToPlay: { speaker: string; text: string }[] = [];
+
+    if (Array.isArray(linesInput)) {
+      linesToPlay = linesInput.map(l => ({
+        speaker: l.speaker || 'A',
+        text: (l.text || l.text_kana || l.text_kanji || '').replace(/^[AB][:\s：]\s*/i, '').trim()
+      }));
+    } else if (typeof linesInput === 'string') {
+      const parts = linesInput.split(/(?=[AB][:\s：])/i);
+      linesToPlay = parts.map(p => {
+        const m = p.match(/^([AB])[:\s：]\s*(.*)/i);
+        if (m) {
+          return { speaker: m[1].toUpperCase(), text: m[2].trim() };
+        }
+        return { speaker: 'A', text: p.replace(/^[AB][:\s：]\s*/i, '').trim() };
+      }).filter(l => l.text.length > 0);
+    }
+
+    const voices = window.speechSynthesis.getVoices();
+    const jaVoices = voices.filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+    const voiceA = jaVoices[0] || null;
+    const voiceB = jaVoices[1] || jaVoices[0] || null;
+
+    for (let i = 0; i < linesToPlay.length; i++) {
+      const line = linesToPlay[i];
+      const cleanText = line.text.replace(/^[AB][:\s：]\s*/i, '').trim();
+      if (!cleanText) continue;
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'ja-JP';
+      utterance.voice = line.speaker === 'A' ? voiceA : voiceB;
+
+      await new Promise((resolve) => {
+        utterance.onend = () => {
+          setTimeout(resolve, 800); // nghỉ 0.8s
+        };
+        utterance.onerror = () => {
+          resolve(null);
+        };
+        window.speechSynthesis.speak(utterance);
+      });
+    }
+    setReviewTTSPlaying(false);
+  };
+
   const [speedrunDirection, setSpeedrunDirection] = useState<'ja-to-vi' | 'vi-to-ja' | 'listen-to-select'>('ja-to-vi');
 
   const [speedrunStreak, setSpeedrunStreak] = useState<number>(0);
@@ -1702,37 +1755,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Play audio voice
 
   // Phát hội thoại 2 người với 2 giọng đọc Nam/Nữ cách nhau 0.8 giây
-  const playDialogueAudio = async (lines: { speaker: string; text: string }[]) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    setReviewTTSPlaying(true);
-
-    const voices = window.speechSynthesis.getVoices();
-    // Lọc các giọng Nhật
-    const jaVoices = voices.filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
-    
-    // Giọng 1 (Nữ hoặc mặc định), Giọng 2 (Nam hoặc thay thế)
-    const voiceA = jaVoices[0] || null;
-    const voiceB = jaVoices[1] || jaVoices[0] || null;
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      const utterance = new SpeechSynthesisUtterance(line.text);
-      utterance.lang = 'ja-JP';
-      utterance.voice = line.speaker === 'A' ? voiceA : voiceB;
-
-      await new Promise((resolve) => {
-        utterance.onend = () => {
-          setTimeout(resolve, 800); // nghỉ 0.8s
-        };
-        utterance.onerror = () => {
-          resolve(null);
-        };
-        window.speechSynthesis.speak(utterance);
-      });
-    }
-    setReviewTTSPlaying(false);
-  };
+  
 
   const playAudio = (text: string) => {
 

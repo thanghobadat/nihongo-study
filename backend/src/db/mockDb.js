@@ -1422,7 +1422,7 @@ module.exports = {
       "dialogues": [
         {
           "id": 1,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 1",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 1 — B xác nhận đối phương không phải là ドイツじん",
           "lines": [
             {
               "speaker": "A",
@@ -1472,7 +1472,7 @@ module.exports = {
         },
         {
           "id": 2,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 2",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 2 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -1522,7 +1522,7 @@ module.exports = {
         },
         {
           "id": 3,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 3",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 3 — B xác nhận kết quả đúng là いしゃ",
           "lines": [
             {
               "speaker": "A",
@@ -1572,7 +1572,7 @@ module.exports = {
         },
         {
           "id": 4,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 4",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 4 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -1622,7 +1622,7 @@ module.exports = {
         },
         {
           "id": 5,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 5",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 5 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -1672,7 +1672,7 @@ module.exports = {
         },
         {
           "id": 6,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 6",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 6 — B xác nhận đối phương không phải là イギリスじん",
           "lines": [
             {
               "speaker": "A",
@@ -1722,7 +1722,7 @@ module.exports = {
         },
         {
           "id": 7,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 7",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 7 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -1772,7 +1772,7 @@ module.exports = {
         },
         {
           "id": 8,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 8",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 8 — B xác nhận kết quả đúng là かいしゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -1822,7 +1822,7 @@ module.exports = {
         },
         {
           "id": 9,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 9",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 9 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -1872,7 +1872,7 @@ module.exports = {
         },
         {
           "id": 10,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 10",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 10 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -1922,7 +1922,7 @@ module.exports = {
         },
         {
           "id": 11,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 11",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 11 — B xác nhận đối phương không phải là ちゅうごくじん",
           "lines": [
             {
               "speaker": "A",
@@ -1972,7 +1972,7 @@ module.exports = {
         },
         {
           "id": 12,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 12",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 12 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -2022,7 +2022,7 @@ module.exports = {
         },
         {
           "id": 13,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 13",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 13 — B xác nhận kết quả đúng là せんせい",
           "lines": [
             {
               "speaker": "A",
@@ -2072,7 +2072,7 @@ module.exports = {
         },
         {
           "id": 14,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 14",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 14 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -2122,7 +2122,7 @@ module.exports = {
         },
         {
           "id": 15,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 15",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 15 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -2172,7 +2172,7 @@ module.exports = {
         },
         {
           "id": 16,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 16",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 16 — B xác nhận đối phương không phải là アメリカじん",
           "lines": [
             {
               "speaker": "A",
@@ -2222,7 +2222,7 @@ module.exports = {
         },
         {
           "id": 17,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 17",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 17 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -2272,7 +2272,7 @@ module.exports = {
         },
         {
           "id": 18,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 18",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 18 — B xác nhận kết quả đúng là けんきゅうしゃ",
           "lines": [
             {
               "speaker": "A",
@@ -2322,7 +2322,7 @@ module.exports = {
         },
         {
           "id": 19,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 19",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 19 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -2372,7 +2372,7 @@ module.exports = {
         },
         {
           "id": 20,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 20",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 20 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -2422,7 +2422,7 @@ module.exports = {
         },
         {
           "id": 21,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 21",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 21 — B xác nhận đối phương không phải là タイじん",
           "lines": [
             {
               "speaker": "A",
@@ -2472,7 +2472,7 @@ module.exports = {
         },
         {
           "id": 22,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 22",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 22 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -2522,7 +2522,7 @@ module.exports = {
         },
         {
           "id": 23,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 23",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 23 — B xác nhận kết quả đúng là ぎんこういん",
           "lines": [
             {
               "speaker": "A",
@@ -2571,7 +2571,7 @@ module.exports = {
         },
         {
           "id": 24,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 24",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 24 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -2621,7 +2621,7 @@ module.exports = {
         },
         {
           "id": 25,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 25",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 25 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -2671,7 +2671,7 @@ module.exports = {
         },
         {
           "id": 26,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 26",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 26 — B xác nhận đối phương không phải là ブラジルじん",
           "lines": [
             {
               "speaker": "A",
@@ -2721,7 +2721,7 @@ module.exports = {
         },
         {
           "id": 27,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 27",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 27 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -2771,7 +2771,7 @@ module.exports = {
         },
         {
           "id": 28,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 28",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 28 — B xác nhận kết quả đúng là がくせい",
           "lines": [
             {
               "speaker": "A",
@@ -2821,7 +2821,7 @@ module.exports = {
         },
         {
           "id": 29,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 29",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 29 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -2871,7 +2871,7 @@ module.exports = {
         },
         {
           "id": 30,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 30",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 30 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -2921,7 +2921,7 @@ module.exports = {
         },
         {
           "id": 31,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 31",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 31 — B xác nhận đối phương không phải là かんこくじん",
           "lines": [
             {
               "speaker": "A",
@@ -2971,7 +2971,7 @@ module.exports = {
         },
         {
           "id": 32,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 32",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 32 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -3021,7 +3021,7 @@ module.exports = {
         },
         {
           "id": 33,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 33",
+          "context": "Xác nhận nghề nghiệp — B phủ định không phải là học sinh (がくせい) mà là kỹ sư (エンジニア)",
           "lines": [
             {
               "speaker": "A",
@@ -3053,24 +3053,25 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "エンジニア",
+              "correct": "がくせい",
               "options": [
-                "エンジニア",
-                "エンジニア",
-                "アメリカじん",
-                "しゃいn"
+                "がくせい",
+                "きょうし",
+                "けんきゅうしゃ",
+                "かいしゃいん"
               ],
               "options_translations": {
-                "エンジニア": "kỹ sư",
-                "アメリカじん": "người nước Mỹ",
-                "しゃいn": "từ vựng ôn tập"
+                "がくせい": "học sinh / sinh viên",
+                "きょうし": "thầy cô giáo",
+                "けんきゅうしゃ": "nhà nghiên cứu",
+                "かいしゃいん": "nhân viên công ty"
               }
             }
           }
         },
         {
           "id": 34,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 34",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 34 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -3120,7 +3121,7 @@ module.exports = {
         },
         {
           "id": 35,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 35",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 35 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -3170,7 +3171,7 @@ module.exports = {
         },
         {
           "id": 36,
-          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 36",
+          "context": "Hỏi han quốc tịch người thứ ba - Đoạn 36 — B xác nhận đối phương không phải là ベトナムじん",
           "lines": [
             {
               "speaker": "A",
@@ -3220,7 +3221,7 @@ module.exports = {
         },
         {
           "id": 37,
-          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 37",
+          "context": "Giới thiệu thành viên mới trong công ty - Đoạn 37 — B xác nhận kết quả đúng là しゃいん",
           "lines": [
             {
               "speaker": "A",
@@ -3270,7 +3271,7 @@ module.exports = {
         },
         {
           "id": 38,
-          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 38",
+          "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 38 — B xác nhận kết quả đúng là いしゃ",
           "lines": [
             {
               "speaker": "A",
@@ -3320,7 +3321,7 @@ module.exports = {
         },
         {
           "id": 39,
-          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 39",
+          "context": "Hỏi thăm và giới thiệu tuổi trẻ con - Đoạn 39 — B xác nhận kết quả đúng là さい",
           "lines": [
             {
               "speaker": "A",
@@ -3370,7 +3371,7 @@ module.exports = {
         },
         {
           "id": 40,
-          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 40",
+          "context": "Chào hỏi và làm quen tại sự kiện - Đoạn 40 — B xác nhận kết quả đúng là よろしくおねがい",
           "lines": [
             {
               "speaker": "A",
@@ -3422,8 +3423,8 @@ module.exports = {
       "listenings": [
         {
           "id": 1,
-          "audio_text_kana": "A: タワポンさんは パワーでんきの しゃいんですか。 B: いいえ、パワーでんきの しゃいじゃありません。わたしは タイの がくせいです。20さいです。",
-          "audio_text_kanji": "A: タワポンさんは パワーでんきの 社員ですか。 B: いいえ、パワーでんきの 社員じゃありません。私は タイの 学生です。20歳です。",
+          "audio_text_kana": "タワポンさんは パワーでんきの しゃいんですか。 いいえ、パワーでんきの しゃいじゃありません。わたしは タイの がくせいです。20さいです。",
+          "audio_text_kanji": "タワポンさんは パワーでんきの 社員ですか。 いいえ、パワーでんきの 社員じゃありません。私は タイの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh タワポン có phải là nhân viên công ty FPT không?",
@@ -3459,12 +3460,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh タワポン là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Thái Lan. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh タワポン là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Thái Lan. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "タワポンさんは パワーでんきの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、パワーでんきの しゃいじゃありません。わたしは タイの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 2,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ナムさんです。ちゅうごくから きました。きょうしです。 27さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は ナムさんです。ちゅうごくから 来ました。教師です。27歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは ナムさんです。ちゅうごくから きました。きょうしです。 27さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は ナムさんです。ちゅうごくから 来ました。教師です。27歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -3500,12 +3511,22 @@ module.exports = {
               "explanation": "Người B nói '27さいです' (27 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ナム. Người ấy đến từ nước Trung Quốc. Người ấy là giáo viên, 27 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ナム. Người ấy đến từ nước Trung Quốc. Người ấy là giáo viên, 27 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは ナムさんです。ちゅうごくから きました。きょうしです。 27さいです。"
+            }
+          ]
         },
         {
           "id": 3,
-          "audio_text_kana": "A: ワンさんは ぎんこういんですか。 B: はい、そうです。イーさんも ぎんこういんですか。 A: いいえ、イーさんは がくせいです。",
-          "audio_text_kanji": "A: ワンさんは 銀行員ですか。 B: はい、そうです。イーさんも 銀行員ですか。 A: いいえ、イーさんは 学生です.",
+          "audio_text_kana": "ワンさんは ぎんこういんですか。 はい、そうです。イーさんも ぎんこういんですか。 いいえ、イーさんは がくせいです。",
+          "audio_text_kanji": "ワンさんは 銀行員ですか。 はい、そうです。イーさんも 銀行員ですか。 いいえ、イーさんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh ワン là gì?",
@@ -3541,7 +3562,21 @@ module.exports = {
               "explanation": "Chỉ có anh ワン xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh ワン là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh イー cũng là nhân viên ngân hàng phải không?\nA: Không, anh イー là học sinh."
+          "audio_text_vietnamese": "A: Anh ワン là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh イー cũng là nhân viên ngân hàng phải không?\nA: Không, anh イー là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワンさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。イーさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、イーさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 4,
@@ -3582,12 +3617,18 @@ module.exports = {
               "explanation": "Nhân vật nói '26さいです' (26 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là カリナ. Tôi đến từ nước Trung Quốc. Tôi là kỹ sư của FPT. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là カリナ. Tôi đến từ nước Trung Quốc. Tôi là kỹ sư của FPT. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。カリナです。ちゅうごくから きました。FPTの エンジニアです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 5,
-          "audio_text_kana": "A: ナムさんは IMCの しゃいんですか。 B: いいえ、IMCの しゃいじゃありません。わたしは ベトナムの がくせいです。20さいです。",
-          "audio_text_kanji": "A: ナムさんは IMCの 社員ですか。 B: いいえ、IMCの 社員じゃありません。私は ベトナムの 学生です。20歳です。",
+          "audio_text_kana": "ナムさんは IMCの しゃいんですか。 いいえ、IMCの しゃいじゃありません。わたしは ベトナムの がくせいです。20さいです。",
+          "audio_text_kanji": "ナムさんは IMCの 社員ですか。 いいえ、IMCの 社員じゃありません。私は ベトナムの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh ナム có phải là nhân viên công ty IMC không?",
@@ -3623,12 +3664,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh ナム là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Việt Nam. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh ナム là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Việt Nam. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ナムさんは IMCの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、IMCの しゃいじゃありません。わたしは ベトナムの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 6,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは さとうさんです。ブラジルから きました。きょうしです。 31さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は 佐藤さんです。ブラジルから 来ました。教師です。31歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは さとうさんです。ブラジルから きました。きょうしです。 31さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は 佐藤さんです。ブラジルから 来ました。教師です。31歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -3664,12 +3715,22 @@ module.exports = {
               "explanation": "Người B nói '31さいです' (31 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 佐藤. Người ấy đến từ nước Brazil. Người ấy là giáo viên, 31 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 佐藤. Người ấy đến từ nước Brazil. Người ấy là giáo viên, 31 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは さとうさんです。ブラジルから きました。きょうしです。 31さいです。"
+            }
+          ]
         },
         {
           "id": 7,
-          "audio_text_kana": "A: アリさんは ぎんこういんですか。 B: はい、そうです。たなかさんも ぎんこういんですか。 A: いいえ、たなかさんは がくせいです。",
-          "audio_text_kanji": "A: アリさんは 銀行員ですか。 B: はい、そうです。田中さんも 銀行員ですか。 A: いいえ、田中さんは 学生です.",
+          "audio_text_kana": "アリさんは ぎんこういんですか。 はい、そうです。たなかさんも ぎんこういんですか。 いいえ、たなかさんは がくせいです。",
+          "audio_text_kanji": "アリさんは 銀行員ですか。 はい、そうです。田中さんも 銀行員ですか。 いいえ、田中さんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh アリ là gì?",
@@ -3705,7 +3766,21 @@ module.exports = {
               "explanation": "Chỉ có anh アリ xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh アリ là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 田中 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 田中 là học sinh."
+          "audio_text_vietnamese": "A: Anh アリ là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 田中 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 田中 là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "アリさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。たなかさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、たなかさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 8,
@@ -3746,12 +3821,18 @@ module.exports = {
               "explanation": "Nhân vật nói '30さいです' (30 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 山田. Tôi đến từ nước Brazil. Tôi là nhân viên ngân hàng của Ngân hàng Sakura. Tôi 30 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 山田. Tôi đến từ nước Brazil. Tôi là nhân viên ngân hàng của Ngân hàng Sakura. Tôi 30 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。やまだです。ブラジルから きました。さくらぎんこうの ぎんこういんです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 9,
-          "audio_text_kana": "A: さとうさんは AKCの しゃいんですか。 B: いいえ、AKCの しゃいじゃありません。わたしは インドの がくせいです。20さいです。",
-          "audio_text_kanji": "A: 佐藤さんは AKCの 社員ですか。 B: いいえ、AKCの 社員じゃありません。私は インドの 学生です。20歳です。",
+          "audio_text_kana": "さとうさんは AKCの しゃいんですか。 いいえ、AKCの しゃいじゃありません。わたしは インドの がくせいです。20さいです。",
+          "audio_text_kanji": "佐藤さんは AKCの 社員ですか。 いいえ、AKCの 社員じゃありません。私は インドの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh 佐藤 có phải là nhân viên công ty FPT không?",
@@ -3787,12 +3868,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 佐藤 là nhân viên công ty AKC phải không?\nB: Không, tôi không phải nhân viên công ty AKC. Tôi là học sinh người nước Ấn Độ. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh 佐藤 là nhân viên công ty AKC phải không?\nB: Không, tôi không phải nhân viên công ty AKC. Tôi là học sinh người nước Ấn Độ. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "さとうさんは AKCの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、AKCの しゃいじゃありません。わたしは インドの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 10,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは たろうちゃんさんです。インドネシアから きました。きょうしです。 25さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は 太郎さんです。インドネシアから 来ました。教師です。25歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは たろうちゃんさんです。インドネシアから きました。きょうしです。 25さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は 太郎さんです。インドネシアから 来ました。教師です。25歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -3828,12 +3919,22 @@ module.exports = {
               "explanation": "Người B nói '25さいです' (25 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 太郎. Người ấy đến từ nước Indonesia. Người ấy là giáo viên, 25 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 太郎. Người ấy đến từ nước Indonesia. Người ấy là giáo viên, 25 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは たろうちゃんさんです。インドネシアから きました。きょうしです。 25さいです。"
+            }
+          ]
         },
         {
           "id": 11,
-          "audio_text_kana": "A: きむらさんは ぎんこういんですか。 B: はい、そうです。はなこちゃんさんも ぎんこういんですか。 A: いいえ、はなこちゃんさんは がくせいです。",
-          "audio_text_kanji": "A: 木村さんは 銀行員ですか。 B: はい、そうです。花子さんも 銀行員ですか。 A: いいえ、花子さんは 学生です.",
+          "audio_text_kana": "きむらさんは ぎんこういんですか。 はい、そうです。はなこちゃんさんも ぎんこういんですか。 いいえ、はなこちゃんさんは がくせいです。",
+          "audio_text_kanji": "木村さんは 銀行員ですか。 はい、そうです。花子さんも 銀行員ですか。 いいえ、花子さんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh 木村 là gì?",
@@ -3869,7 +3970,21 @@ module.exports = {
               "explanation": "Chỉ có anh 木村 xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 木村 là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 花子 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 花子 là học sinh."
+          "audio_text_vietnamese": "A: Anh 木村 là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 花子 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 花子 là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "きむらさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。はなこちゃんさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、はなこちゃんさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 12,
@@ -3910,12 +4025,18 @@ module.exports = {
               "explanation": "Nhân vật nói '24さいです' (24 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 林. Tôi đến từ nước Indonesia. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 林. Tôi đến từ nước Indonesia. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。はやしです。インドネシアから きました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 13,
-          "audio_text_kana": "A: たろうちゃんさんは FPTの しゃいんですか。 B: いいえ、FPTの しゃいじゃありません。わたしは ちゅうごくの がくせいです。20さいです。",
-          "audio_text_kanji": "A: 太郎さんは FPTの 社員ですか。 B: いいえ、FPTの 社員じゃありません。私は ちゅうごくの 学生です。20歳です。",
+          "audio_text_kana": "たろうちゃんさんは FPTの しゃいんですか。 いいえ、FPTの しゃいじゃありません。わたしは ちゅうごくの がくせいです。20さいです。",
+          "audio_text_kanji": "太郎さんは FPTの 社員ですか。 いいえ、FPTの 社員じゃありません。私は ちゅうごくの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh 太郎 có phải là nhân viên công ty IMC không?",
@@ -3951,12 +4072,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 太郎 là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Trung Quốc. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh 太郎 là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Trung Quốc. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "たろうちゃんさんは FPTの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、FPTの しゃいじゃありません。わたしは ちゅうごくの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 14,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワットさんです。ドイツから きました。きょうしです。 29さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は ワットさんです。ドイツから 来ました。教師です。29歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは ワットさんです。ドイツから きました。きょうしです。 29さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は ワットさんです。ドイツから 来ました。教師です。29歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -3992,12 +4123,22 @@ module.exports = {
               "explanation": "Người B nói '29さいです' (29 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ワット. Người ấy đến từ nước Đức. Người ấy là giáo viên, 29 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ワット. Người ấy đến từ nước Đức. Người ấy là giáo viên, 29 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは ワットさんです。ドイツから きました。きょうしです。 29さいです。"
+            }
+          ]
         },
         {
           "id": 15,
-          "audio_text_kana": "A: ミラーさんは ぎんこういんですか。 B: はい、そうです。タワポンさんも ぎんこういんですか。 A: いいえ、タワポンさんは がくせいです。",
-          "audio_text_kanji": "A: ミラーさんは 銀行員ですか。 B: はい、そうです。タワポンさんも 銀行員ですか。 A: いいえ、タワポンさんは 学生です.",
+          "audio_text_kana": "ミラーさんは ぎんこういんですか。 はい、そうです。タワポンさんも ぎんこういんですか。 いいえ、タワポンさんは がくせいです。",
+          "audio_text_kanji": "ミラーさんは 銀行員ですか。 はい、そうです。タワポンさんも 銀行員ですか。 いいえ、タワポンさんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh ミラー là gì?",
@@ -4033,7 +4174,21 @@ module.exports = {
               "explanation": "Chỉ có anh ミラー xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh ミラー là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh タワポン cũng là nhân viên ngân hàng phải không?\nA: Không, anh タワポン là học sinh."
+          "audio_text_vietnamese": "A: Anh ミラー là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh タワポン cũng là nhân viên ngân hàng phải không?\nA: Không, anh タワポン là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ミラーさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。タワポンさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、タワポンさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 16,
@@ -4074,12 +4229,18 @@ module.exports = {
               "explanation": "Nhân vật nói '28さいです' (28 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là サントス. Tôi đến từ nước Đức. Tôi là bác sĩ của bệnh viện Kobe. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là サントス. Tôi đến từ nước Đức. Tôi là bác sĩ của bệnh viện Kobe. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。サントスです。ドイツから きました。こうべびょういんの いしゃです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 17,
-          "audio_text_kana": "A: ワットさんは ブラジルエアーの しゃいんですか。 B: いいえ、ブラジルエアーの しゃいじゃありません。わたしは ブラジルの がくせいです。20さいです。",
-          "audio_text_kanji": "A: ワットさんは ブラジルエアーの 社員ですか。 B: いいえ、ブラジルエアーの 社員じゃありません。私は ブラジルの 学生です。20歳です。",
+          "audio_text_kana": "ワットさんは ブラジルエアーの しゃいんですか。 いいえ、ブラジルエアーの しゃいじゃありません。わたしは ブラジルの がくせいです。20さいです。",
+          "audio_text_kanji": "ワットさんは ブラジルエアーの 社員ですか。 いいえ、ブラジルエアーの 社員じゃありません。私は ブラジルの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh ワット có phải là nhân viên công ty FPT không?",
@@ -4115,12 +4276,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh ワット là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Brazil. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh ワット là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Brazil. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワットさんは ブラジルエアーの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ブラジルエアーの しゃいじゃありません。わたしは ブラジルの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 18,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは カリナさんです。アメリカから きました。きょうしです。 33さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は カリナさんです。アメリカから 来ました。教師です。33歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは カリナさんです。アメリカから きました。きょうしです。 33さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は カリナさんです。アメリカから 来ました。教師です。33歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -4156,12 +4327,22 @@ module.exports = {
               "explanation": "Người B nói '33さいです' (33 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị カリナ. Người ấy đến từ nước Mỹ. Người ấy là giáo viên, 33 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị カリナ. Người ấy đến từ nước Mỹ. Người ấy là giáo viên, 33 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは カリナさんです。アメリカから きました。きょうしです。 33さいです。"
+            }
+          ]
         },
         {
           "id": 19,
-          "audio_text_kana": "A: シュミットさんは ぎんこういんですか。 B: はい、そうです。ナムさんも ぎんこういんですか。 A: いいえ、ナムさんは がくせいです。",
-          "audio_text_kanji": "A: シュミットさんは 銀行員ですか。 B: はい、そうです。ナムさんも 銀行員ですか。 A: いいえ、ナムさんは 学生です.",
+          "audio_text_kana": "シュミットさんは ぎんこういんですか。 はい、そうです。ナムさんも ぎんこういんですか。 いいえ、ナムさんは がくせいです。",
+          "audio_text_kanji": "シュミットさんは 銀行員ですか。 はい、そうです。ナムさんも 銀行員ですか。 いいえ、ナムさんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh シュミット là gì?",
@@ -4197,7 +4378,21 @@ module.exports = {
               "explanation": "Chỉ có anh シュミット xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh シュミット là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh ナム cũng là nhân viên ngân hàng phải không?\nA: Không, anh ナム là học sinh."
+          "audio_text_vietnamese": "A: Anh シュミット là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh ナム cũng là nhân viên ngân hàng phải không?\nA: Không, anh ナム là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "シュミットさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。ナムさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、ナムさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 20,
@@ -4238,12 +4433,18 @@ module.exports = {
               "explanation": "Nhân vật nói '22さいです' (22 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ワン. Tôi đến từ nước Mỹ. Tôi là học sinh / sinh viên của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ワン. Tôi đến từ nước Mỹ. Tôi là học sinh / sinh viên của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。ワンです。アメリカから きました。さくらだいがくの がくせいです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 21,
-          "audio_text_kana": "A: カリナさんは パワーでんきの しゃいんですか。 B: いいえ、パワーでんきの しゃいじゃありません。わたしは インドネシアの がくせいです。20さいです。",
-          "audio_text_kanji": "A: カリナさんは パワーでんきの 社員ですか。 B: いいえ、パワーでんきの 社員じゃありません。私は インドネシアの 学生です。20歳です。",
+          "audio_text_kana": "カリナさんは パワーでんきの しゃいんですか。 いいえ、パワーでんきの しゃいじゃありません。わたしは インドネシアの がくせいです。20さいです。",
+          "audio_text_kanji": "カリナさんは パワーでんきの 社員ですか。 いいえ、パワーでんきの 社員じゃありません。私は インドネシアの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh カリナ có phải là nhân viên công ty IMC không?",
@@ -4279,12 +4480,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh カリナ là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Indonesia. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh カリナ là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Indonesia. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "カリナさんは パワーでんきの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、パワーでんきの しゃいじゃありません。わたしは インドネシアの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 22,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは やまださんです。かんこくから きました。きょうしです。 27さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は 山田さんです。かんこくから 来ました。教師です。27歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは やまださんです。かんこくから きました。きょうしです。 27さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は 山田さんです。かんこくから 来ました。教師です。27歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -4320,12 +4531,22 @@ module.exports = {
               "explanation": "Người B nói '27さいです' (27 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 山田. Người ấy đến từ nước Hàn Quốc. Người ấy là giáo viên, 27 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 山田. Người ấy đến từ nước Hàn Quốc. Người ấy là giáo viên, 27 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは やまださんです。かんこくから きました。きょうしです。 27さいです。"
+            }
+          ]
         },
         {
           "id": 23,
-          "audio_text_kana": "A: イーさんは ぎんこういんですか。 B: はい、そうです。さとうさんも ぎんこういんですか。 A: いいえ、さとうさんは がくせいです。",
-          "audio_text_kanji": "A: イーさんは 銀行員ですか。 B: はい、そうです。佐藤さんも 銀行員ですか。 A: いいえ、佐藤さんは 学生です.",
+          "audio_text_kana": "イーさんは ぎんこういんですか。 はい、そうです。さとうさんも ぎんこういんですか。 いいえ、さとうさんは がくせいです。",
+          "audio_text_kanji": "イーさんは 銀行員ですか。 はい、そうです。佐藤さんも 銀行員ですか。 いいえ、佐藤さんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh イー là gì?",
@@ -4361,7 +4582,21 @@ module.exports = {
               "explanation": "Chỉ có anh イー xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh イー là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 佐藤 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 佐藤 là học sinh."
+          "audio_text_vietnamese": "A: Anh イー là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 佐藤 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 佐藤 là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "イーさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。さとうさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、さとうさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 24,
@@ -4402,12 +4637,18 @@ module.exports = {
               "explanation": "Nhân vật nói '26さいです' (26 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là アリ. Tôi đến từ nước Hàn Quốc. Tôi là nhà nghiên cứu của Đại học Sakura. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là アリ. Tôi đến từ nước Hàn Quốc. Tôi là nhà nghiên cứu của Đại học Sakura. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。アリです。かんこくから きました。さくらだいがくの けんきゅうしゃです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 25,
-          "audio_text_kana": "A: やまださんは IMCの しゃいんですか。 B: いいえ、IMCの しゃいじゃありません。わたしは ドイツの がくせいです。20さいです。",
-          "audio_text_kanji": "A: 山田さんは IMCの 社員ですか。 B: いいえ、IMCの 社員じゃありません。私は ドイツの 学生です。20歳です。",
+          "audio_text_kana": "やまださんは IMCの しゃいんですか。 いいえ、IMCの しゃいじゃありません。わたしは ドイツの がくせいです。20さいです。",
+          "audio_text_kanji": "山田さんは IMCの 社員ですか。 いいえ、IMCの 社員じゃありません。私は ドイツの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh 山田 có phải là nhân viên công ty FPT không?",
@@ -4443,12 +4684,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 山田 là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Đức. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh 山田 là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Đức. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "やまださんは IMCの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、IMCの しゃいじゃありません。わたしは ドイツの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 26,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは はやしさんです。にほんから きました。きょうしです。 31さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は 林さんです。にほんから 来ました。教師です。31歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは はやしさんです。にほんから きました。きょうしです。 31さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は 林さんです。にほんから 来ました。教師です。31歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -4484,12 +4735,22 @@ module.exports = {
               "explanation": "Người B nói '31さいです' (31 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 林. Người ấy đến từ nước Nhật Bản. Người ấy là giáo viên, 31 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị 林. Người ấy đến từ nước Nhật Bản. Người ấy là giáo viên, 31 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは はやしさんです。にほんから きました。きょうしです。 31さいです。"
+            }
+          ]
         },
         {
           "id": 27,
-          "audio_text_kana": "A: たなかさんは ぎんこういんですか。 B: はい、そうです。たろうちゃんさんも ぎんこういんですか。 A: いいえ、たろうちゃんさんは がくせいです。",
-          "audio_text_kanji": "A: 田中さんは 銀行員ですか。 B: はい、そうです。太郎さんも 銀行員ですか。 A: いいえ、太郎さんは 学生です.",
+          "audio_text_kana": "たなかさんは ぎんこういんですか。 はい、そうです。たろうちゃんさんも ぎんこういんですか。 いいえ、たろうちゃんさんは がくせいです。",
+          "audio_text_kanji": "田中さんは 銀行員ですか。 はい、そうです。太郎さんも 銀行員ですか。 いいえ、太郎さんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh 田中 là gì?",
@@ -4525,7 +4786,21 @@ module.exports = {
               "explanation": "Chỉ có anh 田中 xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 田中 là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 太郎 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 太郎 là học sinh."
+          "audio_text_vietnamese": "A: Anh 田中 là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 太郎 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 太郎 là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "たなかさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。たろうちゃんさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、たろうちゃんさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 28,
@@ -4566,12 +4841,18 @@ module.exports = {
               "explanation": "Nhân vật nói '30さいです' (30 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 木村. Tôi đến từ nước Nhật Bản. Tôi là nhân viên công ty của FPT. Tôi 30 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 木村. Tôi đến từ nước Nhật Bản. Tôi là nhân viên công ty của FPT. Tôi 30 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。きむらです。にほんから きました。FPTの かいしゃいんです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 29,
-          "audio_text_kana": "A: はやしさんは AKCの しゃいんですか。 B: いいえ、AKCの しゃいじゃありません。わたしは アメリカの がくせいです。20さいです。",
-          "audio_text_kanji": "A: 林さんは AKCの 社員ですか。 B: いいえ、AKCの 社員じゃありません。私は アメリカの 学生です。20歳です。",
+          "audio_text_kana": "はやしさんは AKCの しゃいんですか。 いいえ、AKCの しゃいじゃありません。わたしは アメリカの がくせいです。20さいです。",
+          "audio_text_kanji": "林さんは AKCの 社員ですか。 いいえ、AKCの 社員じゃありません。私は アメリカの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh 林 có phải là nhân viên công ty IMC không?",
@@ -4607,12 +4888,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 林 là nhân viên công ty AKC phải không?\nB: Không, tôi không phải nhân viên công ty AKC. Tôi là học sinh người nước Mỹ. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh 林 là nhân viên công ty AKC phải không?\nB: Không, tôi không phải nhân viên công ty AKC. Tôi là học sinh người nước Mỹ. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はやしさんは AKCの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、AKCの しゃいじゃありません。わたしは アメリカの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 30,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは サントスさんです。イギリスから きました。きょうしです。 25さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は サントスさんです。イギリスから 来ました。教師です。25歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは サントスさんです。イギリスから きました。きょうしです。 25さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は サントスさんです。イギリスから 来ました。教師です。25歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -4648,12 +4939,22 @@ module.exports = {
               "explanation": "Người B nói '25さいです' (25 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị サントス. Người ấy đến từ nước Anh. Người ấy là giáo viên, 25 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị サントス. Người ấy đến từ nước Anh. Người ấy là giáo viên, 25 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは サントスさんです。イギリスから きました。きょうしです。 25さいです。"
+            }
+          ]
         },
         {
           "id": 31,
-          "audio_text_kana": "A: はなこちゃんさんは ぎんこういんですか。 B: はい、そうです。ワットさんも ぎんこういんですか。 A: いいえ、ワットさんは がくせいです。",
-          "audio_text_kanji": "A: 花子さんは 銀行員ですか。 B: はい、そうです。ワットさんも 銀行員ですか。 A: いいえ、ワットさんは 学生です.",
+          "audio_text_kana": "はなこちゃんさんは ぎんこういんですか。 はい、そうです。ワットさんも ぎんこういんですか。 いいえ、ワットさんは がくせいです。",
+          "audio_text_kanji": "花子さんは 銀行員ですか。 はい、そうです。ワットさんも 銀行員ですか。 いいえ、ワットさんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh 花子 là gì?",
@@ -4689,7 +4990,21 @@ module.exports = {
               "explanation": "Chỉ có anh 花子 xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh 花子 là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh ワット cũng là nhân viên ngân hàng phải không?\nA: Không, anh ワット là học sinh."
+          "audio_text_vietnamese": "A: Anh 花子 là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh ワット cũng là nhân viên ngân hàng phải không?\nA: Không, anh ワット là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はなこちゃんさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。ワットさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、ワットさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 32,
@@ -4730,12 +5045,18 @@ module.exports = {
               "explanation": "Nhân vật nói '24さいです' (24 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ミラー. Tôi đến từ nước Anh. Tôi là kỹ sư của Điện lực Power. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ミラー. Tôi đến từ nước Anh. Tôi là kỹ sư của Điện lực Power. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。ミラーです。イギリスから きました。パワーでんきの エンジニアです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 33,
-          "audio_text_kana": "A: サントスさんは FPTの しゃいんですか。 B: いいえ、FPTの しゃいじゃありません。わたしは かんこくの がくせいです。20さいです。",
-          "audio_text_kanji": "A: サントスさんは FPTの 社員ですか。 B: いいえ、FPTの 社員じゃありません。私は かんこくの 学生です。20歳です。",
+          "audio_text_kana": "サントスさんは FPTの しゃいんですか。 いいえ、FPTの しゃいじゃありません。わたしは かんこくの がくせいです。20さいです。",
+          "audio_text_kanji": "サントスさんは FPTの 社員ですか。 いいえ、FPTの 社員じゃありません。私は かんこくの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh サントス có phải là nhân viên công ty FPT không?",
@@ -4771,12 +5092,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh サントス là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Hàn Quốc. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh サントス là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Hàn Quốc. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "サントスさんは FPTの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、FPTの しゃいじゃありません。わたしは かんこくの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 34,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは ワンさんです。タイから きました。きょうしです。 29さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は ワンさんです。タイから 来ました。教師です。29歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは ワンさんです。タイから きました。きょうしです。 29さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は ワンさんです。タイから 来ました。教師です。29歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -4812,12 +5143,22 @@ module.exports = {
               "explanation": "Người B nói '29さいです' (29 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ワン. Người ấy đến từ nước Thái Lan. Người ấy là giáo viên, 29 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ワン. Người ấy đến từ nước Thái Lan. Người ấy là giáo viên, 29 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは ワンさんです。タイから きました。きょうしです。 29さいです。"
+            }
+          ]
         },
         {
           "id": 35,
-          "audio_text_kana": "A: タワポンさんは ぎんこういんですか。 B: はい、そうです。カリナさんも ぎんこういんですか。 A: いいえ、カリナさんは がくせいです。",
-          "audio_text_kanji": "A: タワポンさんは 銀行員ですか。 B: はい、そうです。カリナさんも 銀行員ですか。 A: いいえ、カリナさんは 学生です.",
+          "audio_text_kana": "タワポンさんは ぎんこういんですか。 はい、そうです。カリナさんも ぎんこういんですか。 いいえ、カリナさんは がくせいです。",
+          "audio_text_kanji": "タワポンさんは 銀行員ですか。 はい、そうです。カリナさんも 銀行員ですか。 いいえ、カリナさんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh タワポン là gì?",
@@ -4853,7 +5194,21 @@ module.exports = {
               "explanation": "Chỉ có anh タワポン xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh タワポン là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh カリナ cũng là nhân viên ngân hàng phải không?\nA: Không, anh カリナ là học sinh."
+          "audio_text_vietnamese": "A: Anh タワポン là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh カリナ cũng là nhân viên ngân hàng phải không?\nA: Không, anh カリナ là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "タワポンさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。カリナさんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、カリナさんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 36,
@@ -4894,12 +5249,18 @@ module.exports = {
               "explanation": "Nhân vật nói '28さいです' (28 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là シュミット. Tôi đến từ nước Thái Lan. Tôi là nhân viên ngân hàng của Ngân hàng Sakura. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là シュミット. Tôi đến từ nước Thái Lan. Tôi là nhân viên ngân hàng của Ngân hàng Sakura. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。シュミットです。タイから きました。さくらぎんこうの ぎんこういんです。どうぞよろしく おねがいします。"
+            }
+          ]
         },
         {
           "id": 37,
-          "audio_text_kana": "A: ワンさんは ブラジルエアーの しゃいんですか。 B: いいえ、ブラジルエアーの しゃいじゃありません。わたしは にほんの がくせいです。20さいです。",
-          "audio_text_kanji": "A: ワンさんは ブラジルエアーの 社員ですか。 B: いいえ、ブラジルエアーの 社員じゃありません。私は にほんの 学生です。20歳です。",
+          "audio_text_kana": "ワンさんは ブラジルエアーの しゃいんですか。 いいえ、ブラジルエアーの しゃいじゃありません。わたしは にほんの がくせいです。20さいです。",
+          "audio_text_kanji": "ワンさんは ブラジルエアーの 社員ですか。 いいえ、ブラジルエアーの 社員じゃありません。私は にほんの 学生です。20歳です。",
           "questions": [
             {
               "q": "Anh ワン có phải là nhân viên công ty IMC không?",
@@ -4935,12 +5296,22 @@ module.exports = {
               "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Anh ワン là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Nhật Bản. Tôi 20 tuổi."
+          "audio_text_vietnamese": "A: Anh ワン là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Nhật Bản. Tôi 20 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワンさんは ブラジルエアーの しゃいんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ブラジルエアーの しゃいじゃありません。わたしは にほんの がくせいです。20さいです。"
+            }
+          ]
         },
         {
           "id": 38,
-          "audio_text_kana": "A: あのかたは どなたですか。 B: あのかたは アリさんです。ベトナムから きました。きょうしです。 33さいです。",
-          "audio_text_kanji": "A: あの方は どなたですか。 B: あの方は アリさんです。ベトナムから 来ました。教師です。33歳です。",
+          "audio_text_kana": "あのかたは どなたですか。 あのかたは アリさんです。ベトナムから きました。きょうしです。 33さいです。",
+          "audio_text_kanji": "あの方は どなたですか。 あの方は アリさんです。ベトナムから 来ました。教師です。33歳です。",
           "questions": [
             {
               "q": "Vị khách được hỏi tên là gì?",
@@ -4976,12 +5347,22 @@ module.exports = {
               "explanation": "Người B nói '33さいです' (33 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị アリ. Người ấy đến từ nước Việt Nam. Người ấy là giáo viên, 33 tuổi."
+          "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị アリ. Người ấy đến từ nước Việt Nam. Người ấy là giáo viên, 33 tuổi.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "あのかたは どなたですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "あのかたは アリさんです。ベトナムから きました。きょうしです。 33さいです。"
+            }
+          ]
         },
         {
           "id": 39,
-          "audio_text_kana": "A: ナムさんは ぎんこういんですか。 B: はい、そうです。やまださんも ぎんこういんですか。 A: いいえ、やまださんは がくせいです。",
-          "audio_text_kanji": "A: ナムさんは 銀行員ですか。 B: はい、そうです。山田さんも 銀行員ですか。 A: いいえ、山田さんは 学生です.",
+          "audio_text_kana": "ナムさんは ぎんこういんですか。 はい、そうです。やまださんも ぎんこういんですか。 いいえ、やまださんは がくせいです。",
+          "audio_text_kanji": "ナムさんは 銀行員ですか。 はい、そうです。山田さんも 銀行員ですか。 いいえ、山田さんは 学生です.",
           "questions": [
             {
               "q": "Nghề nghiệp của anh ナム là gì?",
@@ -5017,7 +5398,21 @@ module.exports = {
               "explanation": "Chỉ có anh ナム xác nhận mình là nhân viên ngân hàng."
             }
           ],
-          "audio_text_vietnamese": "A: Anh ナム là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 山田 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 山田 là học sinh."
+          "audio_text_vietnamese": "A: Anh ナム là nhân viên ngân hàng phải không?\nB: Vâng, đúng thế. Anh 山田 cũng là nhân viên ngân hàng phải không?\nA: Không, anh 山田 là học sinh.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ナムさんは ぎんこういんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "はい、そうです。やまださんも ぎんこういんですか。"
+            },
+            {
+              "speaker": "A",
+              "text": "いいえ、やまださんは がくせいです。"
+            }
+          ]
         },
         {
           "id": 40,
@@ -5058,7 +5453,13 @@ module.exports = {
               "explanation": "Nhân vật nói '22さいです' (22 tuổi)."
             }
           ],
-          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là イー. Tôi đến từ nước Việt Nam. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ."
+          "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là イー. Tôi đến từ nước Việt Nam. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ.",
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "はじめまして。イーです。ベトナムから きました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。"
+            }
+          ]
         }
       ],
       "dictations": [
@@ -6461,7 +6862,7 @@ module.exports = {
       "dialogues": [
         {
           "id": 1,
-          "context": "Hỏi lựa chọn giữa từ điển (じしょ) và đĩa CD (しーでぃー)",
+          "context": "Hỏi lựa chọn giữa từ điển và đĩa CD — B trả lời món đồ đó là đĩa CD (しーでぃー)",
           "lines": [
             {
               "speaker": "A",
@@ -6498,22 +6899,22 @@ module.exports = {
               "options": [
                 "しーでぃー",
                 "じしょ",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (đĩa CD). Đáp án đúng là 'しーでぃー'.",
               "options_translations": {
                 "しーでぃー": "đĩa CD",
                 "じしょ": "từ điển",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 2,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -6523,8 +6924,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ワットさん、あ、ありがとうございます。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "ワットさん、あ、ありがとうございます。[blank2] ですか。ありがとうございます。",
+              "text_kana": "ワットさん、あ、ありがとうございます。[blank2]。ありがとうございます。",
+              "text_kanji": "ワットさん、あ、ありがとうございます。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị ワット ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -6565,7 +6966,7 @@ module.exports = {
         },
         {
           "id": 3,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (báo)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (báo) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -6616,7 +7017,7 @@ module.exports = {
         },
         {
           "id": 4,
-          "context": "Hỏi người sở hữu của vật dụng (vở)",
+          "context": "Hỏi người sở hữu của vật dụng (vở) — B xác nhận đáp án đúng là やまだ",
           "lines": [
             {
               "speaker": "A",
@@ -6626,8 +7027,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "シュミットさん、これは [blank2] さんの です。",
-              "text_kanji": "シュミットさん、これは [blank2] さんの です。",
+              "text_kana": "シュミットさん、これは [blank2] です。",
+              "text_kanji": "シュミットさん、これは [blank2] です。",
               "translation": "Anh/Chị シュミット ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -6649,26 +7050,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "やまだ",
+              "correct": "さとうさんの",
               "options": [
-                "やまだ",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (山田). Đáp án là 'やまだ'.",
               "options_translations": {
-                "やまだ": "Anh/Chị 山田",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 5,
-          "context": "Hỏi xác nhận người sở hữu món đồ (sổ tay) giữa イー và 佐藤",
+          "context": "Hỏi xác nhận người sở hữu món đồ (sổ tay) giữa イー và 佐藤 — B xác nhận đáp án đúng là イー",
           "lines": [
             {
               "speaker": "A",
@@ -6678,8 +7079,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ワンさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "ワンさん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "ワンさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "ワンさん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị ワン ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -6701,26 +7102,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "イー",
+              "correct": "さとうさんの",
               "options": [
-                "イー",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của 佐藤 và đính chính là của イー.",
               "options_translations": {
-                "イー": "Anh/Chị イー",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 6,
-          "context": "Hỏi lựa chọn giữa đĩa CD (しーでぃー) và chìa khóa (かぎ)",
+          "context": "Hỏi lựa chọn giữa CD và chìa khóa — B trả lời món đồ đó là chìa khóa (かぎ)",
           "lines": [
             {
               "speaker": "A",
@@ -6756,22 +7157,22 @@ module.exports = {
               "options": [
                 "かぎ",
                 "しーでぃー",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (chìa khóa). Đáp án đúng là 'かぎ'.",
               "options_translations": {
                 "かぎ": "chìa khóa",
                 "しーでぃー": "đĩa CD",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 7,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -6781,8 +7182,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ナムさん、どうも。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "ナムさん、どうも。[blank2] ですか。ありがとうございます。",
+              "text_kana": "ナムさん、どうも。[blank2]。ありがとうございます。",
+              "text_kanji": "ナムさん、どうも。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị ナム ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -6823,7 +7224,7 @@ module.exports = {
         },
         {
           "id": 8,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (sách)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (sách) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -6874,7 +7275,7 @@ module.exports = {
         },
         {
           "id": 9,
-          "context": "Hỏi người sở hữu của vật dụng (bút bi)",
+          "context": "Hỏi người sở hữu của vật dụng (bút bi) — B xác nhận đáp án đúng là サントス",
           "lines": [
             {
               "speaker": "A",
@@ -6884,8 +7285,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "アリさん、これは [blank2] さんの です。",
-              "text_kanji": "アリさん、これは [blank2] さんの です。",
+              "text_kana": "アリさん、これは [blank2] です。",
+              "text_kanji": "アリさん、これは [blank2] です。",
               "translation": "Anh/Chị アリ ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -6907,26 +7308,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "サントス",
+              "correct": "さとうさんの",
               "options": [
-                "サントス",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (サントス). Đáp án là 'サントス'.",
               "options_translations": {
-                "サントス": "Anh/Chị サントス",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 10,
-          "context": "Hỏi xác nhận người sở hữu món đồ (bút chì kim) giữa 木村 và ワット",
+          "context": "Hỏi xác nhận người sở hữu món đồ (bút chì kim) giữa 木村 và ワット — B xác nhận đáp án đúng là きむら",
           "lines": [
             {
               "speaker": "A",
@@ -6936,8 +7337,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "やまださん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "山田さん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "やまださん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "山田さん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị 山田 ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -6959,26 +7360,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "きむら",
+              "correct": "さとうさんの",
               "options": [
-                "きむら",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của ワット và đính chính là của 木村.",
               "options_translations": {
-                "きむら": "Anh/Chị 木村",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 11,
-          "context": "Hỏi lựa chọn giữa chìa khóa (かぎ) và thẻ (かーど)",
+          "context": "Hỏi lựa chọn giữa chìa khóa và thẻ — B trả lời món đồ đó là thẻ (かーど)",
           "lines": [
             {
               "speaker": "A",
@@ -7015,22 +7416,22 @@ module.exports = {
               "options": [
                 "かーど",
                 "かぎ",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (thẻ). Đáp án đúng là 'かーど'.",
               "options_translations": {
                 "かーど": "thẻ / card",
                 "かぎ": "chìa khóa",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 12,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -7040,8 +7441,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "たなかさん、あ、どうも。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "田中さん、あ、どうも。[blank2] ですか。ありがとうございます。",
+              "text_kana": "たなかさん、あ、どうも。[blank2]。ありがとうございます。",
+              "text_kanji": "田中さん、あ、どうも。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị 田中 ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -7082,7 +7483,7 @@ module.exports = {
         },
         {
           "id": 13,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (sổ tay)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (sổ tay) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -7133,7 +7534,7 @@ module.exports = {
         },
         {
           "id": 14,
-          "context": "Hỏi người sở hữu của vật dụng (cặp sách)",
+          "context": "Hỏi người sở hữu của vật dụng (cặp sách) — B xác nhận đáp án đúng là カリナ",
           "lines": [
             {
               "speaker": "A",
@@ -7143,8 +7544,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ミラーさん、これは [blank2] さんの です。",
-              "text_kanji": "ミラーさん、これは [blank2] さんの です。",
+              "text_kana": "ミラーさん、これは [blank2] です。",
+              "text_kanji": "ミラーさん、これは [blank2] です。",
               "translation": "Anh/Chị ミラー ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -7165,26 +7566,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "カリナ",
+              "correct": "さとうさんの",
               "options": [
-                "カリナ",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (カリナ). Đáp án là 'カリナ'.",
               "options_translations": {
-                "カリナ": "Anh/Chị カリナ",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 15,
-          "context": "Hỏi xác nhận người sở hữu món đồ (danh thiếp) giữa シュミット và ナム",
+          "context": "Hỏi xác nhận người sở hữu món đồ (danh thiếp) giữa シュミット và ナム — B xác nhận đáp án đúng là シュミット",
           "lines": [
             {
               "speaker": "A",
@@ -7194,8 +7595,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "サントスさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "サントスさん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "サントスさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "サントスさん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị サントス ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -7217,26 +7618,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "シュミット",
+              "correct": "さとうさんの",
               "options": [
-                "シュミット",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của ナム và đính chính là của シュミット.",
               "options_translations": {
-                "シュミット": "Anh/Chị シュミット",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 16,
-          "context": "Hỏi lựa chọn giữa thẻ (かーど) và ô tô (じどうしゃ)",
+          "context": "Hỏi lựa chọn giữa thẻ và ô tô — B trả lời món đồ đó là ô tô (じどうしゃ)",
           "lines": [
             {
               "speaker": "A",
@@ -7273,22 +7674,22 @@ module.exports = {
               "options": [
                 "じどうしゃ",
                 "かーど",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (ô tô). Đáp án đúng là 'じどうしゃ'.",
               "options_translations": {
                 "じどうしゃ": "ô tô / xe hơi",
                 "かーど": "thẻ / card",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 17,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -7298,8 +7699,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "タワポンさん、どうも ありがとう ございます。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "タワポンさん、どうも ありがとう ございます。[blank2] ですか。ありがとうございます。",
+              "text_kana": "タワポンさん、どうも ありがとう ございます。[blank2]。ありがとうございます。",
+              "text_kanji": "タワポンさん、どうも ありがとう ございます。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị タワポン ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -7340,7 +7741,7 @@ module.exports = {
         },
         {
           "id": 18,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (tạp chí)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (tạp chí) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -7391,7 +7792,7 @@ module.exports = {
         },
         {
           "id": 19,
-          "context": "Hỏi người sở hữu của vật dụng (máy ảnh)",
+          "context": "Hỏi người sở hữu cái máy ảnh — B trả lời món đồ là của anh/chị Sato (さとうさんの)",
           "lines": [
             {
               "speaker": "A",
@@ -7401,8 +7802,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ワンさん、これは [blank2] さんの です。",
-              "text_kanji": "ワンさん、これは [blank2] さんの です。",
+              "text_kana": "ワンさん、これは [blank2] です。",
+              "text_kanji": "ワンさん、これは [blank2] です。",
               "translation": "Anh/Chị ワン ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -7424,26 +7825,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "さとう",
+              "correct": "さとうさんの",
               "options": [
-                "さとう",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (佐藤). Đáp án là 'さとう'.",
               "options_translations": {
-                "さとう": "Anh/Chị 佐藤",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 20,
-          "context": "Hỏi xác nhận người sở hữu món đồ (máy vi tính) giữa アリ và 田中",
+          "context": "Hỏi xác nhận người sở hữu món đồ (máy vi tính) giữa アリ và 田中 — B xác nhận đáp án đúng là アリ",
           "lines": [
             {
               "speaker": "A",
@@ -7453,8 +7854,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "カリナさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "カリナさん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "カリナさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "カリナさん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị カリナ ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -7476,26 +7877,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "アリ",
+              "correct": "さとうさんの",
               "options": [
-                "アリ",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của 田中 và đính chính là của アリ.",
               "options_translations": {
-                "アリ": "Anh/Chị アリ",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 21,
-          "context": "Hỏi lựa chọn giữa ô tô (じどうしゃ) và từ điển (じしょ)",
+          "context": "Hỏi lựa chọn giữa ô tô và từ điển — B trả lời món đồ đó là từ điển (じしょ)",
           "lines": [
             {
               "speaker": "A",
@@ -7532,22 +7933,22 @@ module.exports = {
               "options": [
                 "じしょ",
                 "じどうしゃ",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (từ điển). Đáp án đúng là 'じしょ'.",
               "options_translations": {
                 "じしょ": "từ điển",
                 "じどうしゃ": "ô tô / xe hơi",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 22,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -7557,8 +7958,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "イーさん、あ、ありがとうございます。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "イーさん、あ、ありがとうございます。[blank2] ですか。ありがとうございます。",
+              "text_kana": "イーさん、あ、ありがとうございます。[blank2]。ありがとうございます。",
+              "text_kanji": "イーさん、あ、ありがとうございます。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị イー ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -7599,7 +8000,7 @@ module.exports = {
         },
         {
           "id": 23,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (băng cassette)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (băng cassette) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -7649,7 +8050,7 @@ module.exports = {
         },
         {
           "id": 24,
-          "context": "Hỏi người sở hữu của vật dụng (quà lưu niệm)",
+          "context": "Hỏi người sở hữu của vật dụng (quà lưu niệm) — B xác nhận đáp án đúng là ワット",
           "lines": [
             {
               "speaker": "A",
@@ -7659,8 +8060,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "やまださん、これは [blank2] さんの です。",
-              "text_kanji": "山田さん、これは [blank2] さんの です。",
+              "text_kana": "やまださん、これは [blank2] です。",
+              "text_kanji": "山田さん、これは [blank2] です。",
               "translation": "Anh/Chị 山田 ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -7682,26 +8083,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "ワット",
+              "correct": "さとうさんの",
               "options": [
-                "ワット",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (ワット). Đáp án là 'ワット'.",
               "options_translations": {
-                "ワット": "Anh/Chị ワット",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 25,
-          "context": "Hỏi xác nhận người sở hữu món đồ (sách) giữa ミラー và タワポン",
+          "context": "Hỏi xác nhận người sở hữu món đồ (sách) giữa ミラー và タワポン — B xác nhận đáp án đúng là ミラー",
           "lines": [
             {
               "speaker": "A",
@@ -7711,8 +8112,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "さとうさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "佐藤さん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "さとうさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "佐藤さん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị 佐藤 ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -7734,26 +8135,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "ミラー",
+              "correct": "さとうさんの",
               "options": [
-                "ミラー",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của タワポン và đính chính là của ミラー.",
               "options_translations": {
-                "ミラー": "Anh/Chị ミラー",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 26,
-          "context": "Hỏi lựa chọn giữa từ điển (じしょ) và đĩa CD (しーでぃー)",
+          "context": "Hỏi lựa chọn giữa từ điển và đĩa CD — B trả lời món đồ đó là đĩa CD (しーでぃー)",
           "lines": [
             {
               "speaker": "A",
@@ -7790,22 +8191,22 @@ module.exports = {
               "options": [
                 "しーでぃー",
                 "じしょ",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (đĩa CD). Đáp án đúng là 'しーでぃー'.",
               "options_translations": {
                 "しーでぃー": "đĩa CD",
                 "じしょ": "từ điển",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 27,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -7815,8 +8216,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "きむらさん、どうも。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "木村さん、どうも。[blank2] ですか。ありがとうございます。",
+              "text_kana": "きむらさん、どうも。[blank2]。ありがとうございます。",
+              "text_kanji": "木村さん、どうも。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị 木村 ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -7857,7 +8258,7 @@ module.exports = {
         },
         {
           "id": 28,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (vở)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (vở) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -7908,7 +8309,7 @@ module.exports = {
         },
         {
           "id": 29,
-          "context": "Hỏi người sở hữu của vật dụng (vở)",
+          "context": "Hỏi người sở hữu của vật dụng (vở) — B xác nhận đáp án đúng là ナム",
           "lines": [
             {
               "speaker": "A",
@@ -7918,8 +8319,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "サントスさん、これは [blank2] さんの です。",
-              "text_kanji": "サントスさん、これは [blank2] さんの です。",
+              "text_kana": "サントスさん、これは [blank2] です。",
+              "text_kanji": "サントスさん、これは [blank2] です。",
               "translation": "Anh/Chị サントス ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -7941,26 +8342,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "ナム",
+              "correct": "さとうさんの",
               "options": [
-                "ナム",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (ナム). Đáp án là 'ナム'.",
               "options_translations": {
-                "ナム": "Anh/Chị ナム",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 30,
-          "context": "Hỏi xác nhận người sở hữu món đồ (sổ tay) giữa ワン và イー",
+          "context": "Hỏi xác nhận người sở hữu món đồ (sổ tay) giữa ワン và イー — B xác nhận đáp án đúng là ワン",
           "lines": [
             {
               "speaker": "A",
@@ -7970,8 +8371,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ワットさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "ワットさん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "ワットさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "ワットさん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị ワット ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -7993,26 +8394,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "ワン",
+              "correct": "さとうさんの",
               "options": [
-                "ワン",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của イー và đính chính là của ワン.",
               "options_translations": {
-                "ワン": "Anh/Chị ワン",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 31,
-          "context": "Hỏi lựa chọn giữa đĩa CD (しーでぃー) và chìa khóa (かぎ)",
+          "context": "Hỏi lựa chọn giữa CD và chìa khóa — B trả lời món đồ đó là chìa khóa (かぎ)",
           "lines": [
             {
               "speaker": "A",
@@ -8048,22 +8449,22 @@ module.exports = {
               "options": [
                 "かぎ",
                 "しーでぃー",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (chìa khóa). Đáp án đúng là 'かぎ'.",
               "options_translations": {
                 "かぎ": "chìa khóa",
                 "しーでぃー": "đĩa CD",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 32,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -8073,8 +8474,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "シュミットさん、あ、どうも。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "シュミットさん、あ、どうも。[blank2] ですか。ありがとうございます。",
+              "text_kana": "シュミットさん、あ、どうも。[blank2]。ありがとうございます。",
+              "text_kanji": "シュミットさん、あ、どうも。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị シュミット ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -8115,7 +8516,7 @@ module.exports = {
         },
         {
           "id": 33,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (từ điển)",
+          "context": "Xác nhận nghề nghiệp — B phủ định không phải là học sinh (がくせい) mà là kỹ sư (エンジニア)",
           "lines": [
             {
               "speaker": "A",
@@ -8148,25 +8549,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "にほんご",
+              "correct": "がくせい",
               "options": [
-                "にほんご",
-                "にほんご",
-                "えいご",
-                "べとなむご"
+                "がくせい",
+                "きょうし",
+                "けんきゅうしゃ",
+                "かいしゃいん"
               ],
               "explanation": "Vị trí (2) chỉ thuộc tính ngôn ngữ của ấn phẩm. B trả lời là ấn phẩm 'tiếng Nhật' (にほんご).",
               "options_translations": {
-                "にほんご": "tiếng Nhật",
-                "えいご": "tiếng Anh",
-                "べとなむご": "tiếng Việt"
+                "がくせい": "học sinh / sinh viên",
+                "きょうし": "thầy cô giáo",
+                "けんきゅうしゃ": "nhà nghiên cứu",
+                "かいしゃいん": "nhân viên công ty"
               }
             }
           }
         },
         {
           "id": 34,
-          "context": "Hỏi người sở hữu của vật dụng (bút bi)",
+          "context": "Hỏi người sở hữu của vật dụng (bút bi) — B xác nhận đáp án đúng là たなか",
           "lines": [
             {
               "speaker": "A",
@@ -8176,8 +8578,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "カリナさん、これは [blank2] さんの です。",
-              "text_kanji": "カリナさん、これは [blank2] さんの です。",
+              "text_kana": "カリナさん、これは [blank2] です。",
+              "text_kanji": "カリナさん、これは [blank2] です。",
               "translation": "Anh/Chị カリナ ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -8199,26 +8601,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "たなか",
+              "correct": "さとうさんの",
               "options": [
-                "たなか",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (田中). Đáp án là 'たなか'.",
               "options_translations": {
-                "たなか": "Anh/Chị 田中",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 35,
-          "context": "Hỏi xác nhận người sở hữu món đồ (bút chì kim) giữa 山田 và 木村",
+          "context": "Hỏi xác nhận người sở hữu món đồ (bút chì kim) giữa 山田 và 木村 — B xác nhận đáp án đúng là やまだ",
           "lines": [
             {
               "speaker": "A",
@@ -8228,8 +8630,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "ナムさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "ナムさん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "ナムさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "ナムさん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị ナム ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -8251,26 +8653,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "やまだ",
+              "correct": "さとうさんの",
               "options": [
-                "やまだ",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của 木村 và đính chính là của 山田.",
               "options_translations": {
-                "やまだ": "Anh/Chị 山田",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 36,
-          "context": "Hỏi lựa chọn giữa chìa khóa (かぎ) và thẻ (かーど)",
+          "context": "Hỏi lựa chọn giữa chìa khóa và thẻ — B trả lời món đồ đó là thẻ (かーど)",
           "lines": [
             {
               "speaker": "A",
@@ -8307,22 +8709,22 @@ module.exports = {
               "options": [
                 "かーど",
                 "かぎ",
-                "そうです",
+                "そう",
                 "ちがいます"
               ],
               "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (thẻ). Đáp án đúng là 'かーど'.",
               "options_translations": {
                 "かーど": "thẻ / card",
                 "かぎ": "chìa khóa",
-                "そうです": "từ vựng ôn tập",
-                "ちがいます": "không phải / nhầm rồi"
+                "ちがいます": "không phải / nhầm rồi",
+                "そう": "từ vựng ôn tập"
               }
             }
           }
         },
         {
           "id": 37,
-          "context": "Giao tiếp lịch sự khi tặng quà (quà lưu niệm) cho đồng nghiệp",
+          "context": "Giao tiếp khi nhận quà lưu niệm — B cảm ơn và bất ngờ hỏi 'Thật vậy sao?' (そうですか)",
           "lines": [
             {
               "speaker": "A",
@@ -8332,8 +8734,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "アリさん、どうも ありがとう ございます。[blank2] ですか。ありがとうございます。",
-              "text_kanji": "アリさん、どうも ありがとう ございます。[blank2] ですか。ありがとうございます。",
+              "text_kana": "アリさん、どうも ありがとう ございます。[blank2]。ありがとうございます。",
+              "text_kanji": "アリさん、どうも ありがとう ございます。[blank2]。ありがとうございます。",
               "translation": "Anh/Chị アリ ơi, cảm ơn. [blank2] thế à? Xin cảm ơn anh/chị."
             }
           ],
@@ -8374,7 +8776,7 @@ module.exports = {
         },
         {
           "id": 38,
-          "context": "Xác nhận ngôn ngữ của ấn phẩm (đĩa CD)",
+          "context": "Xác nhận ngôn ngữ của ấn phẩm (đĩa CD) — B xác nhận đáp án đúng là にほんご",
           "lines": [
             {
               "speaker": "A",
@@ -8425,7 +8827,7 @@ module.exports = {
         },
         {
           "id": 39,
-          "context": "Hỏi người sở hữu của vật dụng (cặp sách)",
+          "context": "Hỏi người sở hữu của vật dụng (cặp sách) — B xác nhận đáp án đúng là タワポン",
           "lines": [
             {
               "speaker": "A",
@@ -8435,8 +8837,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "さとうさん、これは [blank2] さんの です。",
-              "text_kanji": "佐藤さん、これは [blank2] さんの です。",
+              "text_kana": "さとうさん、これは [blank2] です。",
+              "text_kanji": "佐藤さん、これは [blank2] です。",
               "translation": "Anh/Chị 佐藤 ơi, cái này là của anh/chị [blank2]."
             }
           ],
@@ -8457,26 +8859,26 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "タワポン",
+              "correct": "さとうさんの",
               "options": [
-                "タワポン",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (タワポン). Đáp án là 'タワポン'.",
               "options_translations": {
-                "タワポン": "Anh/Chị タワポン",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
         },
         {
           "id": 40,
-          "context": "Hỏi xác nhận người sở hữu món đồ (danh thiếp) giữa サントス và シュミット",
+          "context": "Hỏi xác nhận người sở hữu món đồ (danh thiếp) giữa サントス và シュミット — B xác nhận đáp án đúng là サントス",
           "lines": [
             {
               "speaker": "A",
@@ -8486,8 +8888,8 @@ module.exports = {
             },
             {
               "speaker": "B",
-              "text_kana": "たなかさん、いいえ、ちがいます。それは [blank2] さんのです。",
-              "text_kanji": "田中さん、いいえ、違います。それは [blank2] さんのです。",
+              "text_kana": "たなかさん、いいえ、ちがいます。それは [blank2]です。",
+              "text_kanji": "田中さん、いいえ、違います。それは [blank2]です。",
               "translation": "Anh/Chị 田中 ơi, không phải. Cái đó là của anh/chị [blank2]."
             }
           ],
@@ -8509,19 +8911,19 @@ module.exports = {
               }
             },
             "blank2": {
-              "correct": "サントス",
+              "correct": "さとうさんの",
               "options": [
-                "サントス",
-                "わたし",
-                "あなた",
-                "なん"
+                "さとうさんの",
+                "わたしの",
+                "あなたの",
+                "だれの"
               ],
               "explanation": "Vị trí (2) chỉ người sở hữu thực sự của món đồ. B phủ nhận đồ của シュミット và đính chính là của サントス.",
               "options_translations": {
-                "サントス": "Anh/Chị サントス",
-                "わたし": "tôi / tớ / mình",
-                "あなた": "bạn / anh / chị",
-                "なん": "cái gì"
+                "さとうさんの": "của anh/chị Sato",
+                "わたしの": "của tôi",
+                "あなたの": "của bạn",
+                "だれの": "của ai"
               }
             }
           }
@@ -8530,8 +8932,8 @@ module.exports = {
       "listenings": [
         {
           "id": 1,
-          "audio_text_kana": "ワットさん、それは なんの じしょですか。 B: ワンさん、これは どいつごの じしょです。A: そうですか。ワットさんのですか。 B: いいえ、ちがいます。ワンさんのです。",
-          "audio_text_kanji": "ワットさん、それは 何の じしょですか。 B: ワンさん、これは どいつごの じしょです。A: そうですか。ワットさんのですか。 B: いいえ、違います。ワンさんのです。",
+          "audio_text_kana": "ワットさん、それは なんの じしょですか。 ワンさん、これは どいつごの じしょです。そうですか。ワットさんのですか。 いいえ、ちがいます。ワンさんのです。",
+          "audio_text_kanji": "ワットさん、それは 何の じしょですか。 ワンさん、これは どいつごの じしょです。そうですか。ワットさんのですか。 いいえ、違います。ワンさんのです。",
           "audio_text_vietnamese": "ワット hỏi: Đó là từ điển về cái gì thế?\nワン trả lời: Đây là từ điển tiếng Đức.\nワット hỏi tiếp: Thế à. Của bạn phải không?\nワン trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8556,12 +8958,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの じしょ' (từ điển tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワットさん、それは なんの じしょですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ワンさん、これは どいつごの じしょです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ワットさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ワンさんのです。"
+            }
           ]
         },
         {
           "id": 2,
-          "audio_text_kana": "タワポンさん、それは なんの ざっしですか。 B: カリナさん、これは すぺいんごの ざっしです。A: そうですか。タワポンさんのですか。 B: いいえ、ちがいます。カリナさんのです。",
-          "audio_text_kanji": "タワポンさん、それは 何の ざっしですか。 B: カリナさん、これは すぺいんごの ざっしです。A: そうですか。タワポンさんのですか。 B: いいえ、違います。カリナさんのです。",
+          "audio_text_kana": "タワポンさん、それは なんの ざっしですか。 カリナさん、これは すぺいんごの ざっしです。そうですか。タワポンさんのですか。 いいえ、ちがいます。カリナさんのです。",
+          "audio_text_kanji": "タワポンさん、それは 何の ざっしですか。 カリナさん、これは すぺいんごの ざっしです。そうですか。タワポンさんのですか。 いいえ、違います。カリナさんのです。",
           "audio_text_vietnamese": "タワポン hỏi: Đó là tạp chí về cái gì thế?\nカリナ trả lời: Đây là tạp chí tiếng Tây Ban Nha.\nタワポン hỏi tiếp: Thế à. Của bạn phải không?\nカリナ trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8586,12 +9006,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの ざっし' (tạp chí tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "タワポンさん、それは なんの ざっしですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "カリナさん、これは すぺいんごの ざっしです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。タワポンさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。カリナさんのです。"
+            }
           ]
         },
         {
           "id": 3,
-          "audio_text_kana": "シュミットさん、それは なんの しんぶんですか。 B: ナムさん、これは べとなむごの しんぶんです。A: そうですか。シュミットさんのですか。 B: いいえ、ちがいます。ナムさんのです。",
-          "audio_text_kanji": "シュミットさん、それは 何の しんぶんですか。 B: ナムさん、これは べとなむごの しんぶんです。A: そうですか。シュミットさんのですか。 B: いいえ、違います。ナムさんのです。",
+          "audio_text_kana": "シュミットさん、それは なんの しんぶんですか。 ナムさん、これは べとなむごの しんぶんです。そうですか。シュミットさんのですか。 いいえ、ちがいます。ナムさんのです。",
+          "audio_text_kanji": "シュミットさん、それは 何の しんぶんですか。 ナムさん、これは べとなむごの しんぶんです。そうですか。シュミットさんのですか。 いいえ、違います。ナムさんのです。",
           "audio_text_vietnamese": "シュミット hỏi: Đó là báo về cái gì thế?\nナム trả lời: Đây là báo tiếng Việt.\nシュミット hỏi tiếp: Thế à. Của bạn phải không?\nナム trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8616,12 +9054,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの しんぶん' (báo tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "シュミットさん、それは なんの しんぶんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ナムさん、これは べとなむごの しんぶんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。シュミットさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ナムさんのです。"
+            }
           ]
         },
         {
           "id": 4,
-          "audio_text_kana": "ワンさん、それは なんの のーとですか。 B: イーさん、これは にほんごの のーとです。A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
-          "audio_text_kanji": "ワンさん、それは 何の のーとですか。 B: イーさん、これは にほんごの のーとです。A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
+          "audio_text_kana": "ワンさん、それは なんの のーとですか。 イーさん、これは にほんごの のーとです。そうですか。ワンさんのですか。 いいえ、ちがいます。イーさんのです。",
+          "audio_text_kanji": "ワンさん、それは 何の のーとですか。 イーさん、これは にほんごの のーとです。そうですか。ワンさんのですか。 いいえ、違います。イーさんのです。",
           "audio_text_vietnamese": "ワン hỏi: Đó là vở về cái gì thế?\nイー trả lời: Đây là vở tiếng Nhật.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8646,12 +9102,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの のーと' (vở tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワンさん、それは なんの のーとですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "イーさん、これは にほんごの のーとです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ワンさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。イーさんのです。"
+            }
           ]
         },
         {
           "id": 5,
-          "audio_text_kana": "カリナさん、それは なんの てちょうですか。 B: アリさん、これは えいごの てちょうです。A: そうですか。カリナさんのですか。 B: いいえ、ちがいます。アリさんのです。",
-          "audio_text_kanji": "カリナさん、それは 何の てちょうですか。 B: アリさん、これは えいごの てちょうです。A: そうですか。カリナさんのですか。 B: いいえ、違います。アリさんのです。",
+          "audio_text_kana": "カリナさん、それは なんの てちょうですか。 アリさん、これは えいごの てちょうです。そうですか。カリナさんのですか。 いいえ、ちがいます。アリさんのです。",
+          "audio_text_kanji": "カリナさん、それは 何の てちょうですか。 アリさん、これは えいごの てちょうです。そうですか。カリナさんのですか。 いいえ、違います。アリさんのです。",
           "audio_text_vietnamese": "カリナ hỏi: Đó là sổ tay về cái gì thế?\nアリ trả lời: Đây là sổ tay tiếng Anh.\nカリナ hỏi tiếp: Thế à. Của bạn phải không?\nアリ trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8676,12 +9150,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの てちょう' (sổ tay tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "カリナさん、それは なんの てちょうですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "アリさん、これは えいごの てちょうです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。カリナさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。アリさんのです。"
+            }
           ]
         },
         {
           "id": 6,
-          "audio_text_kana": "ナムさん、それは なんの しーでぃーですか。 B: やまださん、これは どいつごの しーでぃーです。A: そうですか。ナムさんのですか。 B: いいえ、ちがいます。やまださんのです。",
-          "audio_text_kanji": "ナムさん、それは 何の しーでぃーですか。 B: 山田さん、これは どいつごの しーでぃーです。A: そうですか。ナムさんのですか。 B: いいえ、違います。山田さんのです。",
+          "audio_text_kana": "ナムさん、それは なんの しーでぃーですか。 やまださん、これは どいつごの しーでぃーです。そうですか。ナムさんのですか。 いいえ、ちがいます。やまださんのです。",
+          "audio_text_kanji": "ナムさん、それは 何の しーでぃーですか。 山田さん、これは どいつごの しーでぃーです。そうですか。ナムさんのですか。 いいえ、違います。山田さんのです。",
           "audio_text_vietnamese": "ナム hỏi: Đó là đĩa CD về cái gì thế?\n山田 trả lời: Đây là đĩa CD tiếng Đức.\nナム hỏi tiếp: Thế à. Của bạn phải không?\n山田 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8706,12 +9198,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの しーでぃー' (đĩa CD tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ナムさん、それは なんの しーでぃーですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "やまださん、これは どいつごの しーでぃーです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ナムさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。やまださんのです。"
+            }
           ]
         },
         {
           "id": 7,
-          "audio_text_kana": "イーさん、それは なんの てーぷですか。 B: さとうさん、これは すぺいんごの てーぷです。A: そうですか。イーさんのですか。 B: いいえ、ちがいます。さとうさんのです。",
-          "audio_text_kanji": "イーさん、それは 何の てーぷですか。 B: 佐藤さん、これは すぺいんごの てーぷです。A: そうですか。イーさんのですか。 B: いいえ、違います。佐藤さんのです。",
+          "audio_text_kana": "イーさん、それは なんの てーぷですか。 さとうさん、これは すぺいんごの てーぷです。そうですか。イーさんのですか。 いいえ、ちがいます。さとうさんのです。",
+          "audio_text_kanji": "イーさん、それは 何の てーぷですか。 佐藤さん、これは すぺいんごの てーぷです。そうですか。イーさんのですか。 いいえ、違います。佐藤さんのです。",
           "audio_text_vietnamese": "イー hỏi: Đó là băng cassette về cái gì thế?\n佐藤 trả lời: Đây là băng cassette tiếng Tây Ban Nha.\nイー hỏi tiếp: Thế à. Của bạn phải không?\n佐藤 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8736,12 +9246,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの てーぷ' (băng cassette tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "イーさん、それは なんの てーぷですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "さとうさん、これは すぺいんごの てーぷです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。イーさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。さとうさんのです。"
+            }
           ]
         },
         {
           "id": 8,
-          "audio_text_kana": "アリさん、それは なんの ほんですか。 B: たなかさん、これは べとなむごの ほんです。A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
-          "audio_text_kanji": "アリさん、それは 何の ほんですか。 B: 田中さん、これは べとなむごの ほんです。A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
+          "audio_text_kana": "アリさん、それは なんの ほんですか。 たなかさん、これは べとなむごの ほんです。そうですか。アリさんのですか。 いいえ、ちがいます。たなかさんのです。",
+          "audio_text_kanji": "アリさん、それは 何の ほんですか。 田中さん、これは べとなむごの ほんです。そうですか。アリさんのですか。 いいえ、違います。田中さんのです。",
           "audio_text_vietnamese": "アリ hỏi: Đó là sách về cái gì thế?\n田中 trả lời: Đây là sách tiếng Việt.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8766,12 +9294,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの ほん' (sách tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "アリさん、それは なんの ほんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "たなかさん、これは べとなむごの ほんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。アリさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。たなかさんのです。"
+            }
           ]
         },
         {
           "id": 9,
-          "audio_text_kana": "やまださん、それは なんの じしょですか。 B: きむらさん、これは にほんごの じしょです。A: そうですか。やまださんのですか。 B: いいえ、ちがいます。きむらさんのです。",
-          "audio_text_kanji": "山田さん、それは 何の じしょですか。 B: 木村さん、これは にほんごの じしょです。A: そうですか。山田さんのですか。 B: いいえ、違います。木村さんのです。",
+          "audio_text_kana": "やまださん、それは なんの じしょですか。 きむらさん、これは にほんごの じしょです。そうですか。やまださんのですか。 いいえ、ちがいます。きむらさんのです。",
+          "audio_text_kanji": "山田さん、それは 何の じしょですか。 木村さん、これは にほんごの じしょです。そうですか。山田さんのですか。 いいえ、違います。木村さんのです。",
           "audio_text_vietnamese": "山田 hỏi: Đó là từ điển về cái gì thế?\n木村 trả lời: Đây là từ điển tiếng Nhật.\n山田 hỏi tiếp: Thế à. Của bạn phải không?\n木村 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8796,12 +9342,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの じしょ' (từ điển tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "やまださん、それは なんの じしょですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "きむらさん、これは にほんごの じしょです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。やまださんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。きむらさんのです。"
+            }
           ]
         },
         {
           "id": 10,
-          "audio_text_kana": "さとうさん、それは なんの ざっしですか。 B: ミラーさん、これは えいごの ざっしです。A: そうですか。さとうさんのですか。 B: いいえ、ちがいます。ミラーさんのです。",
-          "audio_text_kanji": "佐藤さん、それは 何の ざっしですか。 B: ミラーさん、これは えいごの ざっしです。A: そうですか。佐藤さんのですか。 B: いいえ、違います。ミラーさんのです。",
+          "audio_text_kana": "さとうさん、それは なんの ざっしですか。 ミラーさん、これは えいごの ざっしです。そうですか。さとうさんのですか。 いいえ、ちがいます。ミラーさんのです。",
+          "audio_text_kanji": "佐藤さん、それは 何の ざっしですか。 ミラーさん、これは えいごの ざっしです。そうですか。佐藤さんのですか。 いいえ、違います。ミラーさんのです。",
           "audio_text_vietnamese": "佐藤 hỏi: Đó là tạp chí về cái gì thế?\nミラー trả lời: Đây là tạp chí tiếng Anh.\n佐藤 hỏi tiếp: Thế à. Của bạn phải không?\nミラー trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8826,12 +9390,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの ざっし' (tạp chí tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "さとうさん、それは なんの ざっしですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ミラーさん、これは えいごの ざっしです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。さとうさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ミラーさんのです。"
+            }
           ]
         },
         {
           "id": 11,
-          "audio_text_kana": "たなかさん、それは なんの しんぶんですか。 B: サントスさん、これは どいつごの しんぶんです。A: そうですか。たなかさんのですか。 B: いいえ、ちがいます。サントスさんのです。",
-          "audio_text_kanji": "田中さん、それは 何の しんぶんですか。 B: サントスさん、これは どいつごの しんぶんです。A: そうですか。田中さんのですか。 B: いいえ、違います。サントスさんのです。",
+          "audio_text_kana": "たなかさん、それは なんの しんぶんですか。 サントスさん、これは どいつごの しんぶんです。そうですか。たなかさんのですか。 いいえ、ちがいます。サントスさんのです。",
+          "audio_text_kanji": "田中さん、それは 何の しんぶんですか。 サントスさん、これは どいつごの しんぶんです。そうですか。田中さんのですか。 いいえ、違います。サントスさんのです。",
           "audio_text_vietnamese": "田中 hỏi: Đó là báo về cái gì thế?\nサントス trả lời: Đây là báo tiếng Đức.\n田中 hỏi tiếp: Thế à. Của bạn phải không?\nサントス trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8856,12 +9438,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの しんぶん' (báo tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "たなかさん、それは なんの しんぶんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "サントスさん、これは どいつごの しんぶんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。たなかさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。サントスさんのです。"
+            }
           ]
         },
         {
           "id": 12,
-          "audio_text_kana": "きむらさん、それは なんの のーとですか。 B: ワットさん、これは すぺいんごの のーとです。A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
-          "audio_text_kanji": "木村さん、それは 何の のーとですか。 B: ワットさん、これは すぺいんごの のーとです。A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
+          "audio_text_kana": "きむらさん、それは なんの のーとですか。 ワットさん、これは すぺいんごの のーとです。そうですか。きむらさんのですか。 いいえ、ちがいます。ワットさんのです。",
+          "audio_text_kanji": "木村さん、それは 何の のーとですか。 ワットさん、これは すぺいんごの のーとです。そうですか。木村さんのですか。 いいえ、違います。ワットさんのです。",
           "audio_text_vietnamese": "木村 hỏi: Đó là vở về cái gì thế?\nワット trả lời: Đây là vở tiếng Tây Ban Nha.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8886,12 +9486,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの のーと' (vở tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "きむらさん、それは なんの のーとですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ワットさん、これは すぺいんごの のーとです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。きむらさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ワットさんのです。"
+            }
           ]
         },
         {
           "id": 13,
-          "audio_text_kana": "ミラーさん、それは なんの てちょうですか。 B: タワポンさん、これは べとなむごの てちょうです。A: そうですか。ミラーさんのですか。 B: いいえ、ちがいます。タワポンさんのです。",
-          "audio_text_kanji": "ミラーさん、それは 何の てちょうですか。 B: タワポンさん、これは べとなむごの てちょうです。A: そうですか。ミラーさんのですか。 B: いいえ、違います。タワポンさんのです。",
+          "audio_text_kana": "ミラーさん、それは なんの てちょうですか。 タワポンさん、これは べとなむごの てちょうです。そうですか。ミラーさんのですか。 いいえ、ちがいます。タワポンさんのです。",
+          "audio_text_kanji": "ミラーさん、それは 何の てちょうですか。 タワポンさん、これは べとなむごの てちょうです。そうですか。ミラーさんのですか。 いいえ、違います。タワポンさんのです。",
           "audio_text_vietnamese": "ミラー hỏi: Đó là sổ tay về cái gì thế?\nタワポン trả lời: Đây là sổ tay tiếng Việt.\nミラー hỏi tiếp: Thế à. Của bạn phải không?\nタワポン trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8916,12 +9534,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの てちょう' (sổ tay tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ミラーさん、それは なんの てちょうですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "タワポンさん、これは べとなむごの てちょうです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ミラーさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。タワポンさんのです。"
+            }
           ]
         },
         {
           "id": 14,
-          "audio_text_kana": "サントスさん、それは なんの しーでぃーですか。 B: シュミットさん、これは にほんごの しーでぃーです。A: そうですか。サントスさんのですか。 B: いいえ、ちがいます。シュミットさんのです。",
-          "audio_text_kanji": "サントスさん、それは 何の しーでぃーですか。 B: シュミットさん、これは にほんごの しーでぃーです。A: そうですか。サントスさんのですか。 B: いいえ、違います。シュミットさんのです。",
+          "audio_text_kana": "サントスさん、それは なんの しーでぃーですか。 シュミットさん、これは にほんごの しーでぃーです。そうですか。サントスさんのですか。 いいえ、ちがいます。シュミットさんのです。",
+          "audio_text_kanji": "サントスさん、それは 何の しーでぃーですか。 シュミットさん、これは にほんごの しーでぃーです。そうですか。サントスさんのですか。 いいえ、違います。シュミットさんのです。",
           "audio_text_vietnamese": "サントス hỏi: Đó là đĩa CD về cái gì thế?\nシュミット trả lời: Đây là đĩa CD tiếng Nhật.\nサントス hỏi tiếp: Thế à. Của bạn phải không?\nシュミット trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8946,12 +9582,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの しーでぃー' (đĩa CD tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "サントスさん、それは なんの しーでぃーですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "シュミットさん、これは にほんごの しーでぃーです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。サントスさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。シュミットさんのです。"
+            }
           ]
         },
         {
           "id": 15,
-          "audio_text_kana": "ワットさん、それは なんの てーぷですか。 B: ワンさん、これは えいごの てーぷです。A: そうですか。ワットさんのですか。 B: いいえ、ちがいます。ワンさんのです。",
-          "audio_text_kanji": "ワットさん、それは 何の てーぷですか。 B: ワンさん、これは えいごの てーぷです。A: そうですか。ワットさんのですか。 B: いいえ、違います。ワンさんのです。",
+          "audio_text_kana": "ワットさん、それは なんの てーぷですか。 ワンさん、これは えいごの てーぷです。そうですか。ワットさんのですか。 いいえ、ちがいます。ワンさんのです。",
+          "audio_text_kanji": "ワットさん、それは 何の てーぷですか。 ワンさん、これは えいごの てーぷです。そうですか。ワットさんのですか。 いいえ、違います。ワンさんのです。",
           "audio_text_vietnamese": "ワット hỏi: Đó là băng cassette về cái gì thế?\nワン trả lời: Đây là băng cassette tiếng Anh.\nワット hỏi tiếp: Thế à. Của bạn phải không?\nワン trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -8976,12 +9630,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの てーぷ' (băng cassette tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワットさん、それは なんの てーぷですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ワンさん、これは えいごの てーぷです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ワットさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ワンさんのです。"
+            }
           ]
         },
         {
           "id": 16,
-          "audio_text_kana": "タワポンさん、それは なんの ほんですか。 B: カリナさん、これは どいつごの ほんです。A: そうですか。タワポンさんのですか。 B: いいえ、ちがいます。カリナさんのです。",
-          "audio_text_kanji": "タワポンさん、それは 何の ほんですか。 B: カリナさん、これは どいつごの ほんです。A: そうですか。タワポンさんのですか。 B: いいえ、違います。カリナさんのです。",
+          "audio_text_kana": "タワポンさん、それは なんの ほんですか。 カリナさん、これは どいつごの ほんです。そうですか。タワポンさんのですか。 いいえ、ちがいます。カリナさんのです。",
+          "audio_text_kanji": "タワポンさん、それは 何の ほんですか。 カリナさん、これは どいつごの ほんです。そうですか。タワポンさんのですか。 いいえ、違います。カリナさんのです。",
           "audio_text_vietnamese": "タワポン hỏi: Đó là sách về cái gì thế?\nカリナ trả lời: Đây là sách tiếng Đức.\nタワポン hỏi tiếp: Thế à. Của bạn phải không?\nカリナ trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9006,12 +9678,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの ほん' (sách tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "タワポンさん、それは なんの ほんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "カリナさん、これは どいつごの ほんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。タワポンさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。カリナさんのです。"
+            }
           ]
         },
         {
           "id": 17,
-          "audio_text_kana": "シュミットさん、それは なんの じしょですか。 B: ナムさん、これは すぺいんごの じしょです。A: そうですか。シュミットさんのですか。 B: いいえ、ちがいます。ナムさんのです。",
-          "audio_text_kanji": "シュミットさん、それは 何の じしょですか。 B: ナムさん、これは すぺいんごの じしょです。A: そうですか。シュミットさんのですか。 B: いいえ、違います。ナムさんのです。",
+          "audio_text_kana": "シュミットさん、それは なんの じしょですか。 ナムさん、これは すぺいんごの じしょです。そうですか。シュミットさんのですか。 いいえ、ちがいます。ナムさんのです。",
+          "audio_text_kanji": "シュミットさん、それは 何の じしょですか。 ナムさん、これは すぺいんごの じしょです。そうですか。シュミットさんのですか。 いいえ、違います。ナムさんのです。",
           "audio_text_vietnamese": "シュミット hỏi: Đó là từ điển về cái gì thế?\nナム trả lời: Đây là từ điển tiếng Tây Ban Nha.\nシュミット hỏi tiếp: Thế à. Của bạn phải không?\nナム trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9036,12 +9726,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの じしょ' (từ điển tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "シュミットさん、それは なんの じしょですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ナムさん、これは すぺいんごの じしょです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。シュミットさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ナムさんのです。"
+            }
           ]
         },
         {
           "id": 18,
-          "audio_text_kana": "ワンさん、それは なんの ざっしですか。 B: イーさん、これは べとなむごの ざっしです。A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
-          "audio_text_kanji": "ワンさん、それは 何の ざっしですか。 B: イーさん、これは べとなむごの ざっしです。A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
+          "audio_text_kana": "ワンさん、それは なんの ざっしですか。 イーさん、これは べとなむごの ざっしです。そうですか。ワンさんのですか。 いいえ、ちがいます。イーさんのです。",
+          "audio_text_kanji": "ワンさん、それは 何の ざっしですか。 イーさん、これは べとなむごの ざっしです。そうですか。ワンさんのですか。 いいえ、違います。イーさんのです。",
           "audio_text_vietnamese": "ワン hỏi: Đó là tạp chí về cái gì thế?\nイー trả lời: Đây là tạp chí tiếng Việt.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9066,12 +9774,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの ざっし' (tạp chí tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワンさん、それは なんの ざっしですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "イーさん、これは べとなむごの ざっしです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ワンさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。イーさんのです。"
+            }
           ]
         },
         {
           "id": 19,
-          "audio_text_kana": "カリナさん、それは なんの しんぶんですか。 B: アリさん、これは にほんごの しんぶんです。A: そうですか。カリナさんのですか。 B: いいえ、ちがいます。アリさんのです。",
-          "audio_text_kanji": "カリナさん、それは 何の しんぶんですか。 B: アリさん、これは にほんごの しんぶんです。A: そうですか。カリナさんのですか。 B: いいえ、違います。アリさんのです。",
+          "audio_text_kana": "カリナさん、それは なんの しんぶんですか。 アリさん、これは にほんごの しんぶんです。そうですか。カリナさんのですか。 いいえ、ちがいます。アリさんのです。",
+          "audio_text_kanji": "カリナさん、それは 何の しんぶんですか。 アリさん、これは にほんごの しんぶんです。そうですか。カリナさんのですか。 いいえ、違います。アリさんのです。",
           "audio_text_vietnamese": "カリナ hỏi: Đó là báo về cái gì thế?\nアリ trả lời: Đây là báo tiếng Nhật.\nカリナ hỏi tiếp: Thế à. Của bạn phải không?\nアリ trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9096,12 +9822,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの しんぶん' (báo tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "カリナさん、それは なんの しんぶんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "アリさん、これは にほんごの しんぶんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。カリナさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。アリさんのです。"
+            }
           ]
         },
         {
           "id": 20,
-          "audio_text_kana": "ナムさん、それは なんの のーとですか。 B: やまださん、これは えいごの のーとです。A: そうですか。ナムさんのですか。 B: いいえ、ちがいます。やまださんのです。",
-          "audio_text_kanji": "ナムさん、それは 何の のーとですか。 B: 山田さん、これは えいごの のーとです。A: そうですか。ナムさんのですか。 B: いいえ、違います。山田さんのです。",
+          "audio_text_kana": "ナムさん、それは なんの のーとですか。 やまださん、これは えいごの のーとです。そうですか。ナムさんのですか。 いいえ、ちがいます。やまださんのです。",
+          "audio_text_kanji": "ナムさん、それは 何の のーとですか。 山田さん、これは えいごの のーとです。そうですか。ナムさんのですか。 いいえ、違います。山田さんのです。",
           "audio_text_vietnamese": "ナム hỏi: Đó là vở về cái gì thế?\n山田 trả lời: Đây là vở tiếng Anh.\nナム hỏi tiếp: Thế à. Của bạn phải không?\n山田 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9126,12 +9870,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの のーと' (vở tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ナムさん、それは なんの のーとですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "やまださん、これは えいごの のーとです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ナムさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。やまださんのです。"
+            }
           ]
         },
         {
           "id": 21,
-          "audio_text_kana": "イーさん、それは なんの てちょうですか。 B: さとうさん、これは どいつごの てちょうです。A: そうですか。イーさんのですか。 B: いいえ、ちがいます。さとうさんのです。",
-          "audio_text_kanji": "イーさん、それは 何の てちょうですか。 B: 佐藤さん、これは どいつごの てちょうです。A: そうですか。イーさんのですか。 B: いいえ、違います。佐藤さんのです。",
+          "audio_text_kana": "イーさん、それは なんの てちょうですか。 さとうさん、これは どいつごの てちょうです。そうですか。イーさんのですか。 いいえ、ちがいます。さとうさんのです。",
+          "audio_text_kanji": "イーさん、それは 何の てちょうですか。 佐藤さん、これは どいつごの てちょうです。そうですか。イーさんのですか。 いいえ、違います。佐藤さんのです。",
           "audio_text_vietnamese": "イー hỏi: Đó là sổ tay về cái gì thế?\n佐藤 trả lời: Đây là sổ tay tiếng Đức.\nイー hỏi tiếp: Thế à. Của bạn phải không?\n佐藤 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9156,12 +9918,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの てちょう' (sổ tay tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "イーさん、それは なんの てちょうですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "さとうさん、これは どいつごの てちょうです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。イーさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。さとうさんのです。"
+            }
           ]
         },
         {
           "id": 22,
-          "audio_text_kana": "アリさん、それは なんの しーでぃーですか。 B: たなかさん、これは すぺいんごの しーでぃーです。A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
-          "audio_text_kanji": "アリさん、それは 何の しーでぃーですか。 B: 田中さん、これは すぺいんごの しーでぃーです。A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
+          "audio_text_kana": "アリさん、それは なんの しーでぃーですか。 たなかさん、これは すぺいんごの しーでぃーです。そうですか。アリさんのですか。 いいえ、ちがいます。たなかさんのです。",
+          "audio_text_kanji": "アリさん、それは 何の しーでぃーですか。 田中さん、これは すぺいんごの しーでぃーです。そうですか。アリさんのですか。 いいえ、違います。田中さんのです。",
           "audio_text_vietnamese": "アリ hỏi: Đó là đĩa CD về cái gì thế?\n田中 trả lời: Đây là đĩa CD tiếng Tây Ban Nha.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9186,12 +9966,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの しーでぃー' (đĩa CD tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "アリさん、それは なんの しーでぃーですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "たなかさん、これは すぺいんごの しーでぃーです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。アリさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。たなかさんのです。"
+            }
           ]
         },
         {
           "id": 23,
-          "audio_text_kana": "やまださん、それは なんの てーぷですか。 B: きむらさん、これは べとなむごの てーぷです。A: そうですか。やまださんのですか。 B: いいえ、ちがいます。きむらさんのです。",
-          "audio_text_kanji": "山田さん、それは 何の てーぷですか。 B: 木村さん、これは べとなむごの てーぷです。A: そうですか。山田さんのですか。 B: いいえ、違います。木村さんのです。",
+          "audio_text_kana": "やまださん、それは なんの てーぷですか。 きむらさん、これは べとなむごの てーぷです。そうですか。やまださんのですか。 いいえ、ちがいます。きむらさんのです。",
+          "audio_text_kanji": "山田さん、それは 何の てーぷですか。 木村さん、これは べとなむごの てーぷです。そうですか。山田さんのですか。 いいえ、違います。木村さんのです。",
           "audio_text_vietnamese": "山田 hỏi: Đó là băng cassette về cái gì thế?\n木村 trả lời: Đây là băng cassette tiếng Việt.\n山田 hỏi tiếp: Thế à. Của bạn phải không?\n木村 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9216,12 +10014,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの てーぷ' (băng cassette tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "やまださん、それは なんの てーぷですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "きむらさん、これは べとなむごの てーぷです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。やまださんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。きむらさんのです。"
+            }
           ]
         },
         {
           "id": 24,
-          "audio_text_kana": "さとうさん、それは なんの ほんですか。 B: ミラーさん、これは にほんごの ほんです。A: そうですか。さとうさんのですか。 B: いいえ、ちがいます。ミラーさんのです。",
-          "audio_text_kanji": "佐藤さん、それは 何の ほんですか。 B: ミラーさん、これは にほんごの ほんです。A: そうですか。佐藤さんのですか。 B: いいえ、違います。ミラーさんのです。",
+          "audio_text_kana": "さとうさん、それは なんの ほんですか。 ミラーさん、これは にほんごの ほんです。そうですか。さとうさんのですか。 いいえ、ちがいます。ミラーさんのです。",
+          "audio_text_kanji": "佐藤さん、それは 何の ほんですか。 ミラーさん、これは にほんごの ほんです。そうですか。佐藤さんのですか。 いいえ、違います。ミラーさんのです。",
           "audio_text_vietnamese": "佐藤 hỏi: Đó là sách về cái gì thế?\nミラー trả lời: Đây là sách tiếng Nhật.\n佐藤 hỏi tiếp: Thế à. Của bạn phải không?\nミラー trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9246,12 +10062,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの ほん' (sách tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "さとうさん、それは なんの ほんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ミラーさん、これは にほんごの ほんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。さとうさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ミラーさんのです。"
+            }
           ]
         },
         {
           "id": 25,
-          "audio_text_kana": "たなかさん、それは なんの じしょですか。 B: サントスさん、これは えいごの じしょです。A: そうですか。たなかさんのですか。 B: いいえ、ちがいます。サントスさんのです。",
-          "audio_text_kanji": "田中さん、それは 何の じしょですか。 B: サントスさん、これは えいごの じしょです。A: そうですか。田中さんのですか。 B: いいえ、違います。サントスさんのです。",
+          "audio_text_kana": "たなかさん、それは なんの じしょですか。 サントスさん、これは えいごの じしょです。そうですか。たなかさんのですか。 いいえ、ちがいます。サントスさんのです。",
+          "audio_text_kanji": "田中さん、それは 何の じしょですか。 サントスさん、これは えいごの じしょです。そうですか。田中さんのですか。 いいえ、違います。サントスさんのです。",
           "audio_text_vietnamese": "田中 hỏi: Đó là từ điển về cái gì thế?\nサントス trả lời: Đây là từ điển tiếng Anh.\n田中 hỏi tiếp: Thế à. Của bạn phải không?\nサントス trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9276,12 +10110,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの じしょ' (từ điển tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "たなかさん、それは なんの じしょですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "サントスさん、これは えいごの じしょです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。たなかさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。サントスさんのです。"
+            }
           ]
         },
         {
           "id": 26,
-          "audio_text_kana": "きむらさん、それは なんの ざっしですか。 B: ワットさん、これは どいつごの ざっしです。A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
-          "audio_text_kanji": "木村さん、それは 何の ざっしですか。 B: ワットさん、これは どいつごの ざっしです。A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
+          "audio_text_kana": "きむらさん、それは なんの ざっしですか。 ワットさん、これは どいつごの ざっしです。そうですか。きむらさんのですか。 いいえ、ちがいます。ワットさんのです。",
+          "audio_text_kanji": "木村さん、それは 何の ざっしですか。 ワットさん、これは どいつごの ざっしです。そうですか。木村さんのですか。 いいえ、違います。ワットさんのです。",
           "audio_text_vietnamese": "木村 hỏi: Đó là tạp chí về cái gì thế?\nワット trả lời: Đây là tạp chí tiếng Đức.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9306,12 +10158,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの ざっし' (tạp chí tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "きむらさん、それは なんの ざっしですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ワットさん、これは どいつごの ざっしです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。きむらさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ワットさんのです。"
+            }
           ]
         },
         {
           "id": 27,
-          "audio_text_kana": "ミラーさん、それは なんの しんぶんですか。 B: タワポンさん、これは すぺいんごの しんぶんです。A: そうですか。ミラーさんのですか。 B: いいえ、ちがいます。タワポンさんのです。",
-          "audio_text_kanji": "ミラーさん、それは 何の しんぶんですか。 B: タワポンさん、これは すぺいんごの しんぶんです。A: そうですか。ミラーさんのですか。 B: いいえ、違います。タワポンさんのです。",
+          "audio_text_kana": "ミラーさん、それは なんの しんぶんですか。 タワポンさん、これは すぺいんごの しんぶんです。そうですか。ミラーさんのですか。 いいえ、ちがいます。タワポンさんのです。",
+          "audio_text_kanji": "ミラーさん、それは 何の しんぶんですか。 タワポンさん、これは すぺいんごの しんぶんです。そうですか。ミラーさんのですか。 いいえ、違います。タワポンさんのです。",
           "audio_text_vietnamese": "ミラー hỏi: Đó là báo về cái gì thế?\nタワポン trả lời: Đây là báo tiếng Tây Ban Nha.\nミラー hỏi tiếp: Thế à. Của bạn phải không?\nタワポン trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9336,12 +10206,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの しんぶん' (báo tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ミラーさん、それは なんの しんぶんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "タワポンさん、これは すぺいんごの しんぶんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ミラーさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。タワポンさんのです。"
+            }
           ]
         },
         {
           "id": 28,
-          "audio_text_kana": "サントスさん、それは なんの のーとですか。 B: シュミットさん、これは べとなむごの のーとです。A: そうですか。サントスさんのですか。 B: いいえ、ちがいます。シュミットさんのです。",
-          "audio_text_kanji": "サントスさん、それは 何の のーとですか。 B: シュミットさん、これは べとなむごの のーとです。A: そうですか。サントスさんのですか。 B: いいえ、違います。シュミットさんのです。",
+          "audio_text_kana": "サントスさん、それは なんの のーとですか。 シュミットさん、これは べとなむごの のーとです。そうですか。サントスさんのですか。 いいえ、ちがいます。シュミットさんのです。",
+          "audio_text_kanji": "サントスさん、それは 何の のーとですか。 シュミットさん、これは べとなむごの のーとです。そうですか。サントスさんのですか。 いいえ、違います。シュミットさんのです。",
           "audio_text_vietnamese": "サントス hỏi: Đó là vở về cái gì thế?\nシュミット trả lời: Đây là vở tiếng Việt.\nサントス hỏi tiếp: Thế à. Của bạn phải không?\nシュミット trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9366,12 +10254,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの のーと' (vở tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "サントスさん、それは なんの のーとですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "シュミットさん、これは べとなむごの のーとです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。サントスさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。シュミットさんのです。"
+            }
           ]
         },
         {
           "id": 29,
-          "audio_text_kana": "ワットさん、それは なんの てちょうですか。 B: ワンさん、これは にほんごの てちょうです。A: そうですか。ワットさんのですか。 B: いいえ、ちがいます。ワンさんのです。",
-          "audio_text_kanji": "ワットさん、それは 何の てちょうですか。 B: ワンさん、これは にほんごの てちょうです。A: そうですか。ワットさんのですか。 B: いいえ、違います。ワンさんのです。",
+          "audio_text_kana": "ワットさん、それは なんの てちょうですか。 ワンさん、これは にほんごの てちょうです。そうですか。ワットさんのですか。 いいえ、ちがいます。ワンさんのです。",
+          "audio_text_kanji": "ワットさん、それは 何の てちょうですか。 ワンさん、これは にほんごの てちょうです。そうですか。ワットさんのですか。 いいえ、違います。ワンさんのです。",
           "audio_text_vietnamese": "ワット hỏi: Đó là sổ tay về cái gì thế?\nワン trả lời: Đây là sổ tay tiếng Nhật.\nワット hỏi tiếp: Thế à. Của bạn phải không?\nワン trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9396,12 +10302,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの てちょう' (sổ tay tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワットさん、それは なんの てちょうですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ワンさん、これは にほんごの てちょうです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ワットさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ワンさんのです。"
+            }
           ]
         },
         {
           "id": 30,
-          "audio_text_kana": "タワポンさん、それは なんの しーでぃーですか。 B: カリナさん、これは えいごの しーでぃーです。A: そうですか。タワポンさんのですか。 B: いいえ、ちがいます。カリナさんのです。",
-          "audio_text_kanji": "タワポンさん、それは 何の しーでぃーですか。 B: カリナさん、これは えいごの しーでぃーです。A: そうですか。タワポンさんのですか。 B: いいえ、違います。カリナさんのです。",
+          "audio_text_kana": "タワポンさん、それは なんの しーでぃーですか。 カリナさん、これは えいごの しーでぃーです。そうですか。タワポンさんのですか。 いいえ、ちがいます。カリナさんのです。",
+          "audio_text_kanji": "タワポンさん、それは 何の しーでぃーですか。 カリナさん、これは えいごの しーでぃーです。そうですか。タワポンさんのですか。 いいえ、違います。カリナさんのです。",
           "audio_text_vietnamese": "タワポン hỏi: Đó là đĩa CD về cái gì thế?\nカリナ trả lời: Đây là đĩa CD tiếng Anh.\nタワポン hỏi tiếp: Thế à. Của bạn phải không?\nカリナ trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9426,12 +10350,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの しーでぃー' (đĩa CD tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "タワポンさん、それは なんの しーでぃーですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "カリナさん、これは えいごの しーでぃーです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。タワポンさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。カリナさんのです。"
+            }
           ]
         },
         {
           "id": 31,
-          "audio_text_kana": "シュミットさん、それは なんの てーぷですか。 B: ナムさん、これは どいつごの てーぷです。A: そうですか。シュミットさんのですか。 B: いいえ、ちがいます。ナムさんのです。",
-          "audio_text_kanji": "シュミットさん、それは 何の てーぷですか。 B: ナムさん、これは どいつごの てーぷです。A: そうですか。シュミットさんのですか。 B: いいえ、違います。ナムさんのです。",
+          "audio_text_kana": "シュミットさん、それは なんの てーぷですか。 ナムさん、これは どいつごの てーぷです。そうですか。シュミットさんのですか。 いいえ、ちがいます。ナムさんのです。",
+          "audio_text_kanji": "シュミットさん、それは 何の てーぷですか。 ナムさん、これは どいつごの てーぷです。そうですか。シュミットさんのですか。 いいえ、違います。ナムさんのです。",
           "audio_text_vietnamese": "シュミット hỏi: Đó là băng cassette về cái gì thế?\nナム trả lời: Đây là băng cassette tiếng Đức.\nシュミット hỏi tiếp: Thế à. Của bạn phải không?\nナム trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9456,12 +10398,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの てーぷ' (băng cassette tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "シュミットさん、それは なんの てーぷですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ナムさん、これは どいつごの てーぷです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。シュミットさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ナムさんのです。"
+            }
           ]
         },
         {
           "id": 32,
-          "audio_text_kana": "ワンさん、それは なんの ほんですか。 B: イーさん、これは すぺいんごの ほんです。A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
-          "audio_text_kanji": "ワンさん、それは 何の ほんですか。 B: イーさん、これは すぺいんごの ほんです。A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
+          "audio_text_kana": "ワンさん、それは なんの ほんですか。 イーさん、これは すぺいんごの ほんです。そうですか。ワンさんのですか。 いいえ、ちがいます。イーさんのです。",
+          "audio_text_kanji": "ワンさん、それは 何の ほんですか。 イーさん、これは すぺいんごの ほんです。そうですか。ワンさんのですか。 いいえ、違います。イーさんのです。",
           "audio_text_vietnamese": "ワン hỏi: Đó là sách về cái gì thế?\nイー trả lời: Đây là sách tiếng Tây Ban Nha.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9486,12 +10446,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの ほん' (sách tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ワンさん、それは なんの ほんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "イーさん、これは すぺいんごの ほんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ワンさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。イーさんのです。"
+            }
           ]
         },
         {
           "id": 33,
-          "audio_text_kana": "カリナさん、それは なんの じしょですか。 B: アリさん、これは べとなむごの じしょです。A: そうですか。カリナさんのですか。 B: いいえ、ちがいます。アリさんのです。",
-          "audio_text_kanji": "カリナさん、それは 何の じしょですか。 B: アリさん、これは べとなむごの じしょです。A: そうですか。カリナさんのですか。 B: いいえ、違います。アリさんのです。",
+          "audio_text_kana": "カリナさん、それは なんの じしょですか。 アリさん、これは べとなむごの じしょです。そうですか。カリナさんのですか。 いいえ、ちがいます。アリさんのです。",
+          "audio_text_kanji": "カリナさん、それは 何の じしょですか。 アリさん、これは べとなむごの じしょです。そうですか。カリナさんのですか。 いいえ、違います。アリさんのです。",
           "audio_text_vietnamese": "カリナ hỏi: Đó là từ điển về cái gì thế?\nアリ trả lời: Đây là từ điển tiếng Việt.\nカリナ hỏi tiếp: Thế à. Của bạn phải không?\nアリ trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9516,12 +10494,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの じしょ' (từ điển tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "カリナさん、それは なんの じしょですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "アリさん、これは べとなむごの じしょです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。カリナさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。アリさんのです。"
+            }
           ]
         },
         {
           "id": 34,
-          "audio_text_kana": "ナムさん、それは なんの ざっしですか。 B: やまださん、これは にほんごの ざっしです。A: そうですか。ナムさんのですか。 B: いいえ、ちがいます。やまださんのです。",
-          "audio_text_kanji": "ナムさん、それは 何の ざっしですか。 B: 山田さん、これは にほんごの ざっしです。A: そうですか。ナムさんのですか。 B: いいえ、違います。山田さんのです。",
+          "audio_text_kana": "ナムさん、それは なんの ざっしですか。 やまださん、これは にほんごの ざっしです。そうですか。ナムさんのですか。 いいえ、ちがいます。やまださんのです。",
+          "audio_text_kanji": "ナムさん、それは 何の ざっしですか。 山田さん、これは にほんごの ざっしです。そうですか。ナムさんのですか。 いいえ、違います。山田さんのです。",
           "audio_text_vietnamese": "ナム hỏi: Đó là tạp chí về cái gì thế?\n山田 trả lời: Đây là tạp chí tiếng Nhật.\nナム hỏi tiếp: Thế à. Của bạn phải không?\n山田 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9546,12 +10542,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの ざっし' (tạp chí tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "ナムさん、それは なんの ざっしですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "やまださん、これは にほんごの ざっしです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。ナムさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。やまださんのです。"
+            }
           ]
         },
         {
           "id": 35,
-          "audio_text_kana": "イーさん、それは なんの しんぶんですか。 B: さとうさん、これは えいごの しんぶんです。A: そうですか。イーさんのですか。 B: いいえ、ちがいます。さとうさんのです。",
-          "audio_text_kanji": "イーさん、それは 何の しんぶんですか。 B: 佐藤さん、これは えいごの しんぶんです。A: そうですか。イーさんのですか。 B: いいえ、違います。佐藤さんのです。",
+          "audio_text_kana": "イーさん、それは なんの しんぶんですか。 さとうさん、これは えいごの しんぶんです。そうですか。イーさんのですか。 いいえ、ちがいます。さとうさんのです。",
+          "audio_text_kanji": "イーさん、それは 何の しんぶんですか。 佐藤さん、これは えいごの しんぶんです。そうですか。イーさんのですか。 いいえ、違います。佐藤さんのです。",
           "audio_text_vietnamese": "イー hỏi: Đó là báo về cái gì thế?\n佐藤 trả lời: Đây là báo tiếng Anh.\nイー hỏi tiếp: Thế à. Của bạn phải không?\n佐藤 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9576,12 +10590,30 @@ module.exports = {
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの しんぶん' (báo tiếng Anh)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "イーさん、それは なんの しんぶんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "さとうさん、これは えいごの しんぶんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。イーさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。さとうさんのです。"
+            }
           ]
         },
         {
           "id": 36,
-          "audio_text_kana": "アリさん、それは なんの のーとですか。 B: たなかさん、これは どいつごの のーとです。A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
-          "audio_text_kanji": "アリさん、それは 何の のーとですか。 B: 田中さん、これは どいつごの のーとです。A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
+          "audio_text_kana": "アリさん、それは なんの のーとですか。 たなかさん、これは どいつごの のーとです。そうですか。アリさんのですか。 いいえ、ちがいます。たなかさんのです。",
+          "audio_text_kanji": "アリさん、それは 何の のーとですか。 田中さん、これは どいつごの のーとです。そうですか。アリさんのですか。 いいえ、違います。田中さんのです。",
           "audio_text_vietnamese": "アリ hỏi: Đó là vở về cái gì thế?\n田中 trả lời: Đây là vở tiếng Đức.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9606,12 +10638,30 @@ module.exports = {
               "corr": "tiếng Đức",
               "explanation": "Người B trả lời 'どいつごの のーと' (vở tiếng Đức)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "アリさん、それは なんの のーとですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "たなかさん、これは どいつごの のーとです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。アリさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。たなかさんのです。"
+            }
           ]
         },
         {
           "id": 37,
-          "audio_text_kana": "やまださん、それは なんの てちょうですか。 B: きむらさん、これは すぺいんごの てちょうです。A: そうですか。やまださんのですか。 B: いいえ、ちがいます。きむらさんのです。",
-          "audio_text_kanji": "山田さん、それは 何の てちょうですか。 B: 木村さん、これは すぺいんごの てちょうです。A: そうですか。山田さんのですか。 B: いいえ、違います。木村さんのです。",
+          "audio_text_kana": "やまださん、それは なんの てちょうですか。 きむらさん、これは すぺいんごの てちょうです。そうですか。やまださんのですか。 いいえ、ちがいます。きむらさんのです。",
+          "audio_text_kanji": "山田さん、それは 何の てちょうですか。 木村さん、これは すぺいんごの てちょうです。そうですか。山田さんのですか。 いいえ、違います。木村さんのです。",
           "audio_text_vietnamese": "山田 hỏi: Đó là sổ tay về cái gì thế?\n木村 trả lời: Đây là sổ tay tiếng Tây Ban Nha.\n山田 hỏi tiếp: Thế à. Của bạn phải không?\n木村 trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9636,12 +10686,30 @@ module.exports = {
               "corr": "tiếng Tây Ban Nha",
               "explanation": "Người B trả lời 'すぺいんごの てちょう' (sổ tay tiếng Tây Ban Nha)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "やまださん、それは なんの てちょうですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "きむらさん、これは すぺいんごの てちょうです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。やまださんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。きむらさんのです。"
+            }
           ]
         },
         {
           "id": 38,
-          "audio_text_kana": "さとうさん、それは なんの しーでぃーですか。 B: ミラーさん、これは べとなむごの しーでぃーです。A: そうですか。さとうさんのですか。 B: いいえ、ちがいます。ミラーさんのです。",
-          "audio_text_kanji": "佐藤さん、それは 何の しーでぃーですか。 B: ミラーさん、これは べとなむごの しーでぃーです。A: そうですか。佐藤さんのですか。 B: いいえ、違います。ミラーさんのです。",
+          "audio_text_kana": "さとうさん、それは なんの しーでぃーですか。 ミラーさん、これは べとなむごの しーでぃーです。そうですか。さとうさんのですか。 いいえ、ちがいます。ミラーさんのです。",
+          "audio_text_kanji": "佐藤さん、それは 何の しーでぃーですか。 ミラーさん、これは べとなむごの しーでぃーです。そうですか。佐藤さんのですか。 いいえ、違います。ミラーさんのです。",
           "audio_text_vietnamese": "佐藤 hỏi: Đó là đĩa CD về cái gì thế?\nミラー trả lời: Đây là đĩa CD tiếng Việt.\n佐藤 hỏi tiếp: Thế à. Của bạn phải không?\nミラー trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9666,12 +10734,30 @@ module.exports = {
               "corr": "tiếng Việt",
               "explanation": "Người B trả lời 'べとなむごの しーでぃー' (đĩa CD tiếng Việt)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "さとうさん、それは なんの しーでぃーですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ミラーさん、これは べとなむごの しーでぃーです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。さとうさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ミラーさんのです。"
+            }
           ]
         },
         {
           "id": 39,
-          "audio_text_kana": "たなかさん、それは なんの てーぷですか。 B: サントスさん、これは にほんごの てーぷです。A: そうですか。たなかさんのですか。 B: いいえ、ちがいます。サントスさんのです。",
-          "audio_text_kanji": "田中さん、それは 何の てーぷですか。 B: サントスさん、これは にほんごの てーぷです。A: そうですか。田中さんのですか。 B: いいえ、違います。サントスさんのです。",
+          "audio_text_kana": "たなかさん、それは なんの てーぷですか。 サントスさん、これは にほんごの てーぷです。そうですか。たなかさんのですか。 いいえ、ちがいます。サントスさんのです。",
+          "audio_text_kanji": "田中さん、それは 何の てーぷですか。 サントスさん、これは にほんごの てーぷです。そうですか。田中さんのですか。 いいえ、違います。サントスさんのです。",
           "audio_text_vietnamese": "田中 hỏi: Đó là băng cassette về cái gì thế?\nサントス trả lời: Đây là băng cassette tiếng Nhật.\n田中 hỏi tiếp: Thế à. Của bạn phải không?\nサントス trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9696,12 +10782,30 @@ module.exports = {
               "corr": "tiếng Nhật",
               "explanation": "Người B trả lời 'にほんごの てーぷ' (băng cassette tiếng Nhật)."
             }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "たなかさん、それは なんの てーぷですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "サントスさん、これは にほんごの てーぷです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。たなかさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。サントスさんのです。"
+            }
           ]
         },
         {
           "id": 40,
-          "audio_text_kana": "きむらさん、それは なんの ほんですか。 B: ワットさん、これは えいごの ほんです。A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
-          "audio_text_kanji": "木村さん、それは 何の ほんですか。 B: ワットさん、これは えいごの ほんです。A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
+          "audio_text_kana": "きむらさん、それは なんの ほんですか。 ワットさん、これは えいごの ほんです。そうですか。きむらさんのですか。 いいえ、ちがいます。ワットさんのです。",
+          "audio_text_kanji": "木村さん、それは 何の ほんですか。 ワットさん、これは えいごの ほんです。そうですか。木村さんのですか。 いいえ、違います。ワットさんのです。",
           "audio_text_vietnamese": "木村 hỏi: Đó là sách về cái gì thế?\nワット trả lời: Đây là sách tiếng Anh.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy.",
           "questions": [
             {
@@ -9725,6 +10829,24 @@ module.exports = {
               ],
               "corr": "tiếng Anh",
               "explanation": "Người B trả lời 'えいごの ほん' (sách tiếng Anh)."
+            }
+          ],
+          "lines": [
+            {
+              "speaker": "A",
+              "text": "きむらさん、それは なんの ほんですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "ワットさん、これは えいごの ほんです。"
+            },
+            {
+              "speaker": "A",
+              "text": "そうですか。きむらさんのですか。"
+            },
+            {
+              "speaker": "B",
+              "text": "いいえ、ちがいます。ワットさんのです。"
             }
           ]
         }
