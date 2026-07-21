@@ -209,6 +209,49 @@ export default function ReviewTab({
 
 
 
+  const markAsCorrect = (q: any) => {
+    if (!q) return;
+    const key = q.key;
+    if (q.type === 'translation' || q.type === 'dictation') {
+      const wasCorrect = !!reviewGraded[key];
+      if (!wasCorrect) {
+        setReviewGraded(prev => ({ ...prev, [key]: true }));
+        setReviewScore(prev => prev + 1);
+      }
+    } else if (q.type === 'dialogue') {
+      const b1Key = `${key}_b1`;
+      const b2Key = `${key}_b2`;
+      const b1Was = !!reviewGraded[b1Key];
+      const b2Was = !!reviewGraded[b2Key];
+
+      let scoreToAdd = 0;
+      if (!b1Was && !b2Was) scoreToAdd = 1;
+      else if (!b1Was || !b2Was) scoreToAdd = 0.5;
+
+      setReviewGraded(prev => ({ ...prev, [b1Key]: true, [b2Key]: true }));
+      if (scoreToAdd > 0) {
+        setReviewScore(prev => prev + scoreToAdd);
+      }
+    } else if (q.type === 'listening') {
+      const current = q.originalData;
+      let missingPoints = 0;
+      const newGraded: Record<string, boolean> = {};
+
+      current.questions?.forEach((_: any, sIdx: number) => {
+        const ansKey = `${key}_q${sIdx}`;
+        if (!reviewGraded[ansKey]) {
+          missingPoints += 1;
+        }
+        newGraded[ansKey] = true;
+      });
+
+      setReviewGraded(prev => ({ ...prev, ...newGraded }));
+      if (missingPoints > 0) {
+        setReviewScore(prev => prev + missingPoints);
+      }
+    }
+  };
+
   const gradeTranslation = (q: any) => {
     const key = q.key;
     if (reviewGraded[key] !== undefined) return;
@@ -614,8 +657,16 @@ export default function ReviewTab({
                         Kiểm tra câu này ➔
                       </button>
                     ) : (
-                      <div className="p-3.5 rounded-xl border bg-slate-950/40 border-slate-800 text-xs space-y-1">
+                      <div className="p-3.5 rounded-xl border bg-slate-950/40 border-slate-800 text-xs space-y-2">
                         <p className="text-emerald-400 font-semibold">{reviewFeedback[key]}</p>
+                        {!reviewGraded[key] && (
+                          <button
+                            onClick={() => markAsCorrect(q)}
+                            className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-1"
+                          >
+                            ✔ Tôi nghĩ tôi đã trả lời đúng (Sửa thành Đúng)
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
@@ -787,6 +838,15 @@ export default function ReviewTab({
                             ))}
                           </div>
                         )}
+
+                        {!(reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]) && (
+                          <button
+                            onClick={() => markAsCorrect(q)}
+                            className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-2"
+                          >
+                            ✔ Tôi nghĩ tôi đã trả lời đúng (Sửa thành Đúng)
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
@@ -895,6 +955,15 @@ export default function ReviewTab({
                             );
                           })}
                         </div>
+
+                        {!current.questions.every((subQ: any, sIdx: number) => reviewGraded[`${keyPrefix}_q${sIdx}`]) && (
+                          <button
+                            onClick={() => markAsCorrect(q)}
+                            className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-2"
+                          >
+                            ✔ Tôi nghĩ tôi đã trả lời đúng (Sửa thành Đúng)
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
@@ -954,6 +1023,14 @@ export default function ReviewTab({
                             {renderDiff(reviewAnswers[key], current.question_audio)}
                           </div>
                         )}
+                        {!reviewGraded[key] && (
+                          <button
+                            onClick={() => markAsCorrect(q)}
+                            className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-2"
+                          >
+                            ✔ Tôi nghĩ tôi đã trả lời đúng (Sửa thành Đúng)
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
@@ -999,16 +1076,30 @@ export default function ReviewTab({
 
               if (answeredQuestions.length === 0) return null;
 
+              const correctQuestionsCount = answeredQuestions.filter(q => {
+                if (q.type === 'translation' || q.type === 'dictation') return !!reviewGraded[q.key];
+                if (q.type === 'dialogue') return !!(reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]);
+                if (q.type === 'listening') {
+                  return q.originalData.questions?.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`]);
+                }
+                return false;
+              }).length;
+
+              const historyAccuracy = Math.round((correctQuestionsCount / answeredQuestions.length) * 100);
+
               return (
                 <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-xl overflow-hidden mt-6">
                   {/* Accordion Header Bar */}
                   <button
                     onClick={() => setShowHistoryTable(!showHistoryTable)}
-                    className="w-full p-4 bg-slate-950/80 hover:bg-slate-900 border-b border-slate-800 flex justify-between items-center text-xs font-bold text-slate-200 transition-all cursor-pointer"
+                    className="w-full p-4 bg-slate-950/80 hover:bg-slate-900 border-b border-slate-800 flex justify-between items-center text-xs font-bold text-slate-200 transition-all cursor-pointer flex-wrap gap-2"
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-indigo-400 text-sm">📋</span>
                       <span>BẢNG LỊCH SỬ CÂU ĐÃ LÀM ({answeredQuestions.length} câu)</span>
+                      <span className="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full font-extrabold text-[11px] ml-1">
+                        🎯 Tỉ lệ đúng: {historyAccuracy}% ({correctQuestionsCount}/{answeredQuestions.length} câu)
+                      </span>
                     </div>
                     <div className="flex items-center gap-1.5 text-indigo-300 font-semibold">
                       <span>{showHistoryTable ? '▲ Thu gọn' : '▼ Mở rộng xem chi tiết'}</span>
@@ -1073,10 +1164,21 @@ export default function ReviewTab({
                                 <tr key={idx} className="hover:bg-slate-850/40 transition-all">
                                   <td className="py-3 px-3 font-bold text-white align-top">Câu {qNum}</td>
                                   <td className="py-3 px-3 align-top">
-                                    <div className="space-y-1">
-                                      <span className={`inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-md ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
-                                        {isCorrect ? '🟢 Đúng' : '🔴 Sai'}
-                                      </span>
+                                    <div className="space-y-1.5">
+                                      <div className="flex items-center gap-2 flex-wrap">
+                                        <span className={`inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-md ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                                          {isCorrect ? '🟢 Đúng' : '🔴 Sai'}
+                                        </span>
+                                        {!isCorrect && (
+                                          <button
+                                            onClick={() => markAsCorrect(q)}
+                                            title="Đánh dấu câu này thành đúng"
+                                            className="px-2 py-0.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold rounded-md transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"
+                                          >
+                                            ✔ Đánh dấu đúng
+                                          </button>
+                                        )}
+                                      </div>
                                       <div className="text-slate-200 font-semibold break-all">{userAnsStr}</div>
                                     </div>
                                   </td>
@@ -1135,12 +1237,23 @@ export default function ReviewTab({
                           }
 
                           return (
-                            <div key={idx} className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-850 space-y-2 text-xs">
-                              <div className="flex justify-between items-center">
+                            <div key={idx} className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-855 space-y-2 text-xs">
+                              <div className="flex justify-between items-center flex-wrap gap-2">
                                 <span className="font-bold text-white">Câu {qNum}</span>
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
-                                  {isCorrect ? '🟢 Đúng' : '🔴 Sai'}
-                                </span>
+                                <div className="flex items-center gap-1.5">
+                                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                                    {isCorrect ? '🟢 Đúng' : '🔴 Sai'}
+                                  </span>
+                                  {!isCorrect && (
+                                    <button
+                                      onClick={() => markAsCorrect(q)}
+                                      title="Đánh dấu câu này thành đúng"
+                                      className="px-2 py-0.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold rounded-md transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"
+                                    >
+                                      ✔ Đánh dấu đúng
+                                    </button>
+                                  )}
+                                </div>
                               </div>
                               <div>
                                 <span className="text-slate-400">Trả lời của tôi:</span>
