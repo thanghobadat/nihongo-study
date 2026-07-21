@@ -581,17 +581,40 @@ export default function ReviewTab({
                       <div className="p-4 rounded-xl border bg-slate-950/60 border-slate-800 text-xs space-y-3">
                         <p className="text-emerald-400 font-semibold">{reviewFeedback[q.key]}</p>
                         
-                        {current.blanks.blank1.explanation && (
-                          <div className="bg-indigo-500/5 p-3 rounded-lg border border-indigo-500/15 space-y-1 text-slate-300">
-                            <div className="font-bold text-indigo-400 flex items-center gap-1">💡 Giải thích ngữ pháp:</div>
-                            <p><strong className="text-slate-200">(1):</strong> {current.blanks.blank1.explanation}</p>
-                            {current.blanks.blank2.explanation && <p><strong className="text-slate-200">(2):</strong> {current.blanks.blank2.explanation}</p>}
+                        {/* 1. KHỐI ĐÁP ÁN ĐÚNG */}
+                        {current.blanks && (
+                          <div className="bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20 space-y-1 text-slate-200">
+                            <div className="font-bold text-emerald-400 flex items-center gap-1">✅ Đáp án đúng:</div>
+                            <p>
+                              <strong className="text-emerald-300">(1):</strong> {current.blanks.blank1?.correct}{' '}
+                              {current.blanks.blank1?.options_translations?.[current.blanks.blank1.correct]
+                                ? `(${current.blanks.blank1.options_translations[current.blanks.blank1.correct]})`
+                                : ''}
+                            </p>
+                            {current.blanks.blank2?.correct && (
+                              <p>
+                                <strong className="text-emerald-300">(2):</strong> {current.blanks.blank2?.correct}{' '}
+                                {current.blanks.blank2?.options_translations?.[current.blanks.blank2.correct]
+                                  ? `(${current.blanks.blank2.options_translations[current.blanks.blank2.correct]})`
+                                  : ''}
+                              </p>
+                            )}
                           </div>
                         )}
 
+                        {/* 2. KHỐI GIẢI THÍCH CHI TIẾT & NGỮ PHÁP */}
+                        {current.blanks?.blank1?.explanation && (
+                          <div className="bg-indigo-500/10 p-3 rounded-lg border border-indigo-500/20 space-y-1 text-slate-300">
+                            <div className="font-bold text-indigo-400 flex items-center gap-1">💡 Giải thích chi tiết & Ngữ pháp:</div>
+                            <p><strong className="text-indigo-200">(1):</strong> {current.blanks.blank1.explanation}</p>
+                            {current.blanks.blank2?.explanation && <p><strong className="text-indigo-200">(2):</strong> {current.blanks.blank2.explanation}</p>}
+                          </div>
+                        )}
+
+                        {/* 3. KHỐI DỊCH NGHĨA HỘI THOẠI */}
                         {current.lines && (
-                          <div className="bg-slate-900/40 p-3 rounded-lg space-y-1 text-slate-355">
-                            <div className="font-bold text-slate-400 mb-1">Dịch nghĩa hội thoại:</div>
+                          <div className="bg-slate-900/40 p-3 rounded-lg space-y-1 text-slate-300 border border-slate-800/80">
+                            <div className="font-bold text-slate-400 mb-1">💬 Dịch nghĩa hội thoại:</div>
                             {current.lines.map((line: any, lIdx: number) => (
                               <div key={lIdx}>
                                 <strong>{line.speaker}:</strong> {line.vietnamese || line.translation || '(Chưa có bản dịch)'}
@@ -914,6 +937,7 @@ export default function ReviewTab({
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
             <button
               onClick={() => {
+                loadReviewData();
                 setReviewStep('setup');
               }}
               className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-sm"

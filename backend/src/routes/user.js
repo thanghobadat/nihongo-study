@@ -862,8 +862,15 @@ router.get('/lessons/:lessonId/review', async (req, res) => {
     let reviewData = null;
 
     // Local Mode
+    const getMockReview = (id) => {
+      if (mockDb.lesson_reviews && (mockDb.lesson_reviews[id] || mockDb.lesson_reviews[String(id)])) {
+        return mockDb.lesson_reviews[id] || mockDb.lesson_reviews[String(id)];
+      }
+      return (mockDb.lessonReviews || []).find(item => item.lesson_id === id);
+    };
+
     if (req.user.isMock) {
-      reviewData = (mockDb.lessonReviews || []).find(item => item.lesson_id === lessonId);
+      reviewData = getMockReview(lessonId);
     } else {
       // Cloud Supabase Mode
       const { data, error } = await supabase
@@ -875,7 +882,7 @@ router.get('/lessons/:lessonId/review', async (req, res) => {
       if (error) {
         console.warn('lesson_reviews read error, falling back to mockDb:', error.message);
       }
-      reviewData = data || (mockDb.lessonReviews || []).find(item => item.lesson_id === lessonId);
+      reviewData = data || getMockReview(lessonId);
     }
 
     if (!reviewData) {
