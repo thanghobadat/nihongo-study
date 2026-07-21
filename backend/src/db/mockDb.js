@@ -30892,13 +30892,13 @@ const lessonReviews = [
       {
         "id": 2,
         "direction": "ja-to-vi",
-        "question_kana": "ワットさんは さくらだいがくの しゃいん ですか。",
-        "question_kanji": "ワットさんは さくらだいがくの 社員 ですか。",
+        "question_kana": "ワットさんは ブラジルエアーの しゃいん ですか。",
+        "question_kanji": "ワットさんは ブラジルエアーの 社員 ですか。",
         "answers": [
-          "Anh ワット là nhân viên của さくらだいがく phải không",
-          "Anh ワット có phải là nhân viên công ty さくらだいがく không",
-          "Chị ワット là nhân viên của さくらだいがく phải không",
-          "Chị ワット có phải là nhân viên công ty さくらだいがく không"
+          "Anh ワット là nhân viên của ブラジルエアー phải không",
+          "Anh ワット có phải là nhân viên công ty ブラジルエアー không",
+          "Chị ワット là nhân viên của ブラジルエアー phải không",
+          "Chị ワット có phải là nhân viên công ty ブラジルエアー không"
         ]
       },
       {
@@ -30982,13 +30982,13 @@ const lessonReviews = [
       {
         "id": 10,
         "direction": "ja-to-vi",
-        "question_kana": "やまださんは FPTの しゃいん ですか。",
-        "question_kanji": "山田さんは FPTの 社員 ですか。",
+        "question_kana": "やまださんは ブラジルエアーの しゃいん ですか。",
+        "question_kanji": "山田さんは ブラジルエアーの 社員 ですか。",
         "answers": [
-          "Anh 山田 là nhân viên của FPT phải không",
-          "Anh 山田 có phải là nhân viên công ty FPT không",
-          "Chị 山田 là nhân viên của FPT phải không",
-          "Chị 山田 có phải là nhân viên công ty FPT không"
+          "Anh 山田 là nhân viên của ブラジルエアー phải không",
+          "Anh 山田 có phải là nhân viên công ty ブラジルエアー không",
+          "Chị 山田 là nhân viên của ブラジルエアー phải không",
+          "Chị 山田 có phải là nhân viên công ty ブラジルエアー không"
         ]
       },
       {
@@ -31072,13 +31072,13 @@ const lessonReviews = [
       {
         "id": 18,
         "direction": "ja-to-vi",
-        "question_kana": "サントスさんは AKCの しゃいん ですか。",
-        "question_kanji": "サントスさんは AKCの 社員 ですか。",
+        "question_kana": "サントスさんは ブラジルエアーの しゃいん ですか。",
+        "question_kanji": "サントスさんは ブラジルエアーの 社員 ですか。",
         "answers": [
-          "Anh サントス là nhân viên của AKC phải không",
-          "Anh サントス có phải là nhân viên công ty AKC không",
-          "Chị サントス là nhân viên của AKC phải không",
-          "Chị サントス có phải là nhân viên công ty AKC không"
+          "Anh サントス là nhân viên của ブラジルエアー phải không",
+          "Anh サントス có phải là nhân viên công ty ブラジルエアー không",
+          "Chị サントス là nhân viên của ブラジルエアー phải không",
+          "Chị サントス có phải là nhân viên công ty ブラジルエアー không"
         ]
       },
       {
@@ -31162,13 +31162,13 @@ const lessonReviews = [
       {
         "id": 26,
         "direction": "ja-to-vi",
-        "question_kana": "アリさんは こうべびょういんの しゃいん ですか。",
-        "question_kanji": "アリさんは こうべびょういんの 社員 ですか。",
+        "question_kana": "アリさんは ブラジルエアーの しゃいん ですか。",
+        "question_kanji": "アリさんは ブラジルエアーの 社員 ですか。",
         "answers": [
-          "Anh アリ là nhân viên của こうべびょういん phải không",
-          "Anh アリ có phải là nhân viên công ty こうべびょういん không",
-          "Chị アリ là nhân viên của こうべびょういん phải không",
-          "Chị アリ có phải là nhân viên công ty こうべびょういん không"
+          "Anh アリ là nhân viên của ブラジルエアー phải không",
+          "Anh アリ có phải là nhân viên công ty ブラジルエアー không",
+          "Chị アリ là nhân viên của ブラジルエアー phải không",
+          "Chị アリ có phải là nhân viên công ty ブラジルエアー không"
         ]
       },
       {
@@ -31252,13 +31252,13 @@ const lessonReviews = [
       {
         "id": 34,
         "direction": "ja-to-vi",
-        "question_kana": "ミラーさんは IMCの しゃいん ですか。",
-        "question_kanji": "ミラーさんは IMCの 社員 ですか。",
+        "question_kana": "ミラーさんは ブラジルエアーの しゃいん ですか。",
+        "question_kanji": "ミラーさんは ブラジルエアーの 社員 ですか。",
         "answers": [
-          "Anh ミラー là nhân viên của IMC phải không",
-          "Anh ミラー có phải là nhân viên công ty IMC không",
-          "Chị ミラー là nhân viên của IMC phải không",
-          "Chị ミラー có phải là nhân viên công ty IMC không"
+          "Anh ミラー là nhân viên của ブラジルエアー phải không",
+          "Anh ミラー có phải là nhân viên công ty ブラジルエアー không",
+          "Chị ミラー là nhân viên của ブラジルエアー phải không",
+          "Chị ミラー có phải là nhân viên công ty ブラジルエアー không"
         ]
       },
       {
@@ -31331,12 +31331,12 @@ const lessonReviews = [
       {
         "id": 41,
         "direction": "vi-to-ja",
-        "question": "Tôi không phải là nhân viên ngân hàng của công ty さくらだいがく.",
+        "question": "Tôi không phải là nhân viên của công ty FPT.",
         "answers": [
-          "わたしは さくらだいがくの ぎんこういん じゃありません",
-          "watashi wa sakura daigaku no ginkouin ja arimasen",
-          "わたしはさくらだいがくのぎんこういんじゃありません",
-          "watashiwasakuradaigakunoginkouinjaarimasen"
+          "わたしは FPTの しゃいん じゃありません",
+          "watashi wa FPT no shain ja arimasen",
+          "わたしはFPTのしゃいんじゃありません",
+          "watashiwaFPTnoshainjaarimasen"
         ]
       },
       {
@@ -31353,12 +31353,12 @@ const lessonReviews = [
       {
         "id": 43,
         "direction": "vi-to-ja",
-        "question": "Vị kia là nhân viên của công ty AKC à?",
+        "question": "Vị kia là nhân viên của công ty こうべびょういん à?",
         "answers": [
-          "あのかたは AKCの しゃいん ですか",
-          "ano kata wa AKC no shain desu ka",
-          "あのかたはAKCのしゃいんですか",
-          "anokatawaAKCnoshaindesuka"
+          "あのかたは こうべびょういんの しゃいん ですか",
+          "ano kata wa koube byouin no shain desu ka",
+          "あのかたはこうべびょういんのしゃいんですか",
+          "anokatawakoubebyouinnoshaindesuka"
         ]
       },
       {
@@ -31419,17 +31419,6 @@ const lessonReviews = [
       {
         "id": 49,
         "direction": "vi-to-ja",
-        "question": "Tôi không phải là nhân viên ngân hàng của công ty FPT.",
-        "answers": [
-          "わたしは FPTの ぎんこういん じゃありません",
-          "watashi wa FPT no ginkouin ja arimasen",
-          "わたしはFPTのぎんこういんじゃありません",
-          "watashiwaFPTnoginkouinjaarimasen"
-        ]
-      },
-      {
-        "id": 50,
-        "direction": "vi-to-ja",
         "question": "Anh 花子 cũng đến từ nước Mỹ phải không?",
         "answers": [
           "はなこちゃんさんも アメリカから きましたか",
@@ -31439,18 +31428,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 51,
-        "direction": "vi-to-ja",
-        "question": "Vị kia là nhân viên của công ty こうべびょういん à?",
-        "answers": [
-          "あのかたは こうべびょういんの しゃいん ですか",
-          "ano kata wa koube byouin no shain desu ka",
-          "あのかたはこうべびょういんのしゃいんですか",
-          "anokatawakoubebyouinnoshaindesuka"
-        ]
-      },
-      {
-        "id": 52,
+        "id": 50,
         "direction": "vi-to-ja",
         "question": "Bé ワット mấy tuổi rồi?",
         "answers": [
@@ -31461,18 +31439,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 53,
-        "direction": "vi-to-ja",
-        "question": "Tôi là kỹ sư của tập đoàn ブラジルエアー.",
-        "answers": [
-          "わたしは ブラジルエアーの エンジニア です",
-          "watashi wa burajiru eaa no enjinia desu",
-          "わたしはブラジルエアーのエンジニアです",
-          "watashiwaburajirueaanoenjiniadesu"
-        ]
-      },
-      {
-        "id": 54,
+        "id": 51,
         "direction": "vi-to-ja",
         "question": "Anh シュミット không phải là sinh viên Đại học Sakura.",
         "answers": [
@@ -31483,7 +31450,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 55,
+        "id": 52,
         "direction": "vi-to-ja",
         "question": "Chị ワン là nhà giáo phải không?",
         "answers": [
@@ -31494,18 +31461,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 56,
-        "direction": "vi-to-ja",
-        "question": "Tôi không phải là nhân viên ngân hàng của công ty AKC.",
-        "answers": [
-          "わたしは AKCの ぎんこういん じゃありません",
-          "watashi wa AKC no ginkouin ja arimasen",
-          "わたしはAKCのぎんこういんじゃありません",
-          "watashiwaAKCnoginkouinjaarimasen"
-        ]
-      },
-      {
-        "id": 57,
+        "id": 53,
         "direction": "vi-to-ja",
         "question": "Anh ナム cũng đến từ nước Nhật Bản phải không?",
         "answers": [
@@ -31516,18 +31472,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 58,
-        "direction": "vi-to-ja",
-        "question": "Vị kia là nhân viên của công ty IMC à?",
-        "answers": [
-          "あのかたは IMCの しゃいん ですか",
-          "ano kata wa IMC no shain desu ka",
-          "あのかたはIMCのしゃいんですか",
-          "anokatawaIMCnoshaindesuka"
-        ]
-      },
-      {
-        "id": 59,
+        "id": 54,
         "direction": "vi-to-ja",
         "question": "Bé 山田 mấy tuổi rồi?",
         "answers": [
@@ -31538,18 +31483,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 60,
-        "direction": "vi-to-ja",
-        "question": "Tôi là kỹ sư của tập đoàn さくらだいがく.",
-        "answers": [
-          "わたしは さくらだいがくの エンジニア です",
-          "watashi wa sakura daigaku no enjinia desu",
-          "わたしはさくらだいがくのエンジニアです",
-          "watashiwasakuradaigakunoenjiniadesu"
-        ]
-      },
-      {
-        "id": 61,
+        "id": 55,
         "direction": "vi-to-ja",
         "question": "Anh 田中 không phải là sinh viên Đại học Sakura.",
         "answers": [
@@ -31560,7 +31494,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 62,
+        "id": 56,
         "direction": "vi-to-ja",
         "question": "Chị 木村 là nhà giáo phải không?",
         "answers": [
@@ -31571,18 +31505,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 63,
-        "direction": "vi-to-ja",
-        "question": "Tôi không phải là nhân viên ngân hàng của công ty こうべびょういん.",
-        "answers": [
-          "わたしは こうべびょういんの ぎんこういん じゃありません",
-          "watashi wa koube byouin no ginkouin ja arimasen",
-          "わたしはこうべびょういんのぎんこういんじゃありません",
-          "watashiwakoubebyouinnoginkouinjaarimasen"
-        ]
-      },
-      {
-        "id": 64,
+        "id": 57,
         "direction": "vi-to-ja",
         "question": "Anh 太郎 cũng đến từ nước Thái Lan phải không?",
         "answers": [
@@ -31593,18 +31516,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 65,
-        "direction": "vi-to-ja",
-        "question": "Vị kia là nhân viên của công ty パワーでんき à?",
-        "answers": [
-          "あのかたは パワーでんきの しゃいん ですか",
-          "ano kata wa pawaa denki no shain desu ka",
-          "あのかたはパワーでんきのしゃいんですか",
-          "anokatawapawaadenkinoshaindesuka"
-        ]
-      },
-      {
-        "id": 66,
+        "id": 58,
         "direction": "vi-to-ja",
         "question": "Bé サントス mấy tuổi rồi?",
         "answers": [
@@ -31615,18 +31527,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 67,
-        "direction": "vi-to-ja",
-        "question": "Tôi là kỹ sư của tập đoàn FPT.",
-        "answers": [
-          "わたしは FPTの エンジニア です",
-          "watashi wa FPT no enjinia desu",
-          "わたしはFPTのエンジニアです",
-          "watashiwaFPTnoenjiniadesu"
-        ]
-      },
-      {
-        "id": 68,
+        "id": 59,
         "direction": "vi-to-ja",
         "question": "Anh タワポン không phải là sinh viên Đại học Sakura.",
         "answers": [
@@ -31637,7 +31538,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 69,
+        "id": 60,
         "direction": "vi-to-ja",
         "question": "Chị シュミット là nhà giáo phải không?",
         "answers": [
@@ -31648,18 +31549,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 70,
-        "direction": "vi-to-ja",
-        "question": "Tôi không phải là nhân viên ngân hàng của công ty IMC.",
-        "answers": [
-          "わたしは IMCの ぎんこういん じゃありません",
-          "watashi wa IMC no ginkouin ja arimasen",
-          "わたしはIMCのぎんこういんじゃありません",
-          "watashiwaIMCnoginkouinjaarimasen"
-        ]
-      },
-      {
-        "id": 71,
+        "id": 61,
         "direction": "vi-to-ja",
         "question": "Anh カリナ cũng đến từ nước Ấn Độ phải không?",
         "answers": [
@@ -31670,18 +31560,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 72,
-        "direction": "vi-to-ja",
-        "question": "Vị kia là nhân viên của công ty ブラジルエアー à?",
-        "answers": [
-          "あのかたは ブラジルエアーの しゃいん ですか",
-          "ano kata wa burajiru eaa no shain desu ka",
-          "あのかたはブラジルエアーのしゃいんですか",
-          "anokatawaburajirueaanoshaindesuka"
-        ]
-      },
-      {
-        "id": 73,
+        "id": 62,
         "direction": "vi-to-ja",
         "question": "Bé アリ mấy tuổi rồi?",
         "answers": [
@@ -31692,18 +31571,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 74,
-        "direction": "vi-to-ja",
-        "question": "Tôi là kỹ sư của tập đoàn AKC.",
-        "answers": [
-          "わたしは AKCの エンジニア です",
-          "watashi wa AKC no enjinia desu",
-          "わたしはAKCのエンジニアです",
-          "watashiwaAKCnoenjiniadesu"
-        ]
-      },
-      {
-        "id": 75,
+        "id": 63,
         "direction": "vi-to-ja",
         "question": "Anh 佐藤 không phải là sinh viên Đại học Sakura.",
         "answers": [
@@ -31714,7 +31582,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 76,
+        "id": 64,
         "direction": "vi-to-ja",
         "question": "Chị 田中 là nhà giáo phải không?",
         "answers": [
@@ -31725,18 +31593,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 77,
-        "direction": "vi-to-ja",
-        "question": "Tôi không phải là nhân viên ngân hàng của công ty パワーでんき.",
-        "answers": [
-          "わたしは パワーでんきの ぎんこういん じゃありません",
-          "watashi wa pawaa denki no ginkouin ja arimasen",
-          "わたしはパワーでんきのぎんこういんじゃありません",
-          "watashiwapawaadenkinoginkouinjaarimasen"
-        ]
-      },
-      {
-        "id": 78,
+        "id": 65,
         "direction": "vi-to-ja",
         "question": "Anh 林 cũng đến từ nước Brazil phải không?",
         "answers": [
@@ -31747,18 +31604,7 @@ const lessonReviews = [
         ]
       },
       {
-        "id": 79,
-        "direction": "vi-to-ja",
-        "question": "Vị kia là nhân viên của công ty さくらだいがく à?",
-        "answers": [
-          "あのかたは さくらだいがくの しゃいん ですか",
-          "ano kata wa sakura daigaku no shain desu ka",
-          "あのかたはさくらだいがくのしゃいんですか",
-          "anokatawasakuradaigakunoshaindesuka"
-        ]
-      },
-      {
-        "id": 80,
+        "id": 66,
         "direction": "vi-to-ja",
         "question": "Bé ミラー mấy tuổi rồi?",
         "answers": [
@@ -31766,6 +31612,160 @@ const lessonReviews = [
           "miraa chan wa nansai desu ka",
           "ミラーちゃんはなんさいですか",
           "miraachanwanansaidesuka"
+        ]
+      },
+      {
+        "id": 67,
+        "direction": "vi-to-ja",
+        "question": "Anh ワット không phải là sinh viên Đại học Sakura.",
+        "answers": [
+          "ワットさんは さくらだいがくの がくせい じゃありません",
+          "watto san wa sakura daigaku no gakusei ja arimasen",
+          "ワットさんはさくらだいがくのがくせいじゃありません",
+          "wattosanwasakuradaigakunogakuseijaarimasen"
+        ]
+      },
+      {
+        "id": 68,
+        "direction": "vi-to-ja",
+        "question": "Chị タワポン là nhà giáo phải không?",
+        "answers": [
+          "タワポンさんは きょうし ですか",
+          "tawapon san wa kyoushi desu ka",
+          "タワポンさんはきょうしですか",
+          "tawaponsanwakyoushidesuka"
+        ]
+      },
+      {
+        "id": 69,
+        "direction": "vi-to-ja",
+        "question": "Anh ワン cũng đến từ nước Đức phải không?",
+        "answers": [
+          "ワンさんも ドイツから きましたか",
+          "wan san mo doitsu kara kimashita ka",
+          "ワンさんもドイツからきましたか",
+          "wansanmodoitsukarakimashitaka"
+        ]
+      },
+      {
+        "id": 70,
+        "direction": "vi-to-ja",
+        "question": "Bé イー mấy tuổi rồi?",
+        "answers": [
+          "イーちゃんは なんさい ですか",
+          "ii chan wa nansai desu ka",
+          "イーちゃんはなんさいですか",
+          "iichanwanansaidesuka"
+        ]
+      },
+      {
+        "id": 71,
+        "direction": "vi-to-ja",
+        "question": "Anh 山田 không phải là sinh viên Đại học Sakura.",
+        "answers": [
+          "やまださんは さくらだいがくの がくせい じゃありません",
+          "yamada san wa sakura daigaku no gakusei ja arimasen",
+          "やまださんはさくらだいがくのがくせいじゃありません",
+          "yamadasanwasakuradaigakunogakuseijaarimasen"
+        ]
+      },
+      {
+        "id": 72,
+        "direction": "vi-to-ja",
+        "question": "Chị 佐藤 là nhà giáo phải không?",
+        "answers": [
+          "さとうさんは きょうし ですか",
+          "satou san wa kyoushi desu ka",
+          "さとうさんはきょうしですか",
+          "satousanwakyoushidesuka"
+        ]
+      },
+      {
+        "id": 73,
+        "direction": "vi-to-ja",
+        "question": "Anh 木村 cũng đến từ nước Hàn Quốc phải không?",
+        "answers": [
+          "きむらさんも かんこくから きましたか",
+          "kimura san mo kankoku kara kimashita ka",
+          "きむらさんもかんこくからきましたか",
+          "kimurasanmokankokukarakimashitaka"
+        ]
+      },
+      {
+        "id": 74,
+        "direction": "vi-to-ja",
+        "question": "Bé 花子 mấy tuổi rồi?",
+        "answers": [
+          "はなこちゃんちゃんは なんさい ですか",
+          "hanako chan chan wa nansai desu ka",
+          "はなこちゃんちゃんはなんさいですか",
+          "hanakochanchanwanansaidesuka"
+        ]
+      },
+      {
+        "id": 75,
+        "direction": "vi-to-ja",
+        "question": "Anh サントス không phải là sinh viên Đại học Sakura.",
+        "answers": [
+          "サントスさんは さくらだいがくの がくせい じゃありません",
+          "santosu san wa sakura daigaku no gakusei ja arimasen",
+          "サントスさんはさくらだいがくのがくせいじゃありません",
+          "santosusanwasakuradaigakunogakuseijaarimasen"
+        ]
+      },
+      {
+        "id": 76,
+        "direction": "vi-to-ja",
+        "question": "Chị ワット là nhà giáo phải không?",
+        "answers": [
+          "ワットさんは きょうし ですか",
+          "watto san wa kyoushi desu ka",
+          "ワットさんはきょうしですか",
+          "wattosanwakyoushidesuka"
+        ]
+      },
+      {
+        "id": 77,
+        "direction": "vi-to-ja",
+        "question": "Anh シュミット cũng đến từ nước Anh phải không?",
+        "answers": [
+          "シュミットさんも イギリスから きましたか",
+          "shumitto san mo igirisu kara kimashita ka",
+          "シュミットさんもイギリスからきましたか",
+          "shumittosanmoigirisukarakimashitaka"
+        ]
+      },
+      {
+        "id": 78,
+        "direction": "vi-to-ja",
+        "question": "Bé ナム mấy tuổi rồi?",
+        "answers": [
+          "ナムちゃんは なんさい ですか",
+          "namu chan wa nansai desu ka",
+          "ナムちゃんはなんさいですか",
+          "namuchanwanansaidesuka"
+        ]
+      },
+      {
+        "id": 79,
+        "direction": "vi-to-ja",
+        "question": "Anh アリ không phải là sinh viên Đại học Sakura.",
+        "answers": [
+          "アリさんは さくらだいがくの がくせい じゃありません",
+          "ari san wa sakura daigaku no gakusei ja arimasen",
+          "アリさんはさくらだいがくのがくせいじゃありません",
+          "arisanwasakuradaigakunogakuseijaarimasen"
+        ]
+      },
+      {
+        "id": 80,
+        "direction": "vi-to-ja",
+        "question": "Chị 山田 là nhà giáo phải không?",
+        "answers": [
+          "やまださんは きょうし ですか",
+          "yamada san wa kyoushi desu ka",
+          "やまださんはきょうしですか",
+          "yamadasanwakyoushidesuka"
         ]
       }
     ],
@@ -31832,9 +31832,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。イー です。FPTの [blank2] です。",
-            "text_kanji": "初めまして。イー です。FPTの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là イー. Tôi là [blank2] của FPT."
+            "text_kana": "はじめまして。イー です。さくらだいがくの [blank2] です。",
+            "text_kanji": "初めまして。イー です。さくらだいがくの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là イー. Tôi là [blank2] của さくらだいがく."
           }
         ],
         "blanks": {
@@ -32082,9 +32082,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。きむら です。ブラジルエアーの [blank2] です。",
-            "text_kanji": "初めまして。木村 です。ブラジルエアーの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là 木村. Tôi là [blank2] của ブラジルエアー."
+            "text_kana": "はじめまして。きむら です。IMCの [blank2] です。",
+            "text_kanji": "初めまして。木村 です。IMCの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là 木村. Tôi là [blank2] của IMC."
           }
         ],
         "blanks": {
@@ -32332,9 +32332,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。サントス です。IMCの [blank2] です。",
-            "text_kanji": "初めまして。サントス です。IMCの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là サントス. Tôi là [blank2] của IMC."
+            "text_kana": "はじめまして。サントス です。AKCの [blank2] です。",
+            "text_kanji": "初めまして。サントス です。AKCの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là サントス. Tôi là [blank2] của AKC."
           }
         ],
         "blanks": {
@@ -32582,9 +32582,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。カリナ です。AKCの [blank2] です。",
-            "text_kanji": "初めまして。カリナ です。AKCの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là カリナ. Tôi là [blank2] của AKC."
+            "text_kana": "はじめまして。カリナ です。ブラジルエアーの [blank2] です。",
+            "text_kanji": "初めまして。カリナ です。ブラジルエアーの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là カリナ. Tôi là [blank2] của ブラジルエアー."
           }
         ],
         "blanks": {
@@ -32832,9 +32832,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。さとう です。さくらだいがくの [blank2] です。",
-            "text_kanji": "初めまして。佐藤 です。さくらだいがくの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là 佐藤. Tôi là [blank2] của さくらだいがく."
+            "text_kana": "はじめまして。さとう です。さくらぎんこうの [blank2] です。",
+            "text_kanji": "初めまして。佐藤 です。さくらぎんこうの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là 佐藤. Tôi là [blank2] của さくらぎんこう."
           }
         ],
         "blanks": {
@@ -33081,9 +33081,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。はなこちゃん です。パワーでんきの [blank2] です。",
-            "text_kanji": "初めまして。花子 です。パワーでんきの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là 花子. Tôi là [blank2] của パワーでんき."
+            "text_kana": "はじめまして。はなこちゃん です。FPTの [blank2] です。",
+            "text_kanji": "初めまして。花子 です。FPTの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là 花子. Tôi là [blank2] của FPT."
           }
         ],
         "blanks": {
@@ -33331,9 +33331,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。シュミット です。こうべびょういんの [blank2] です。",
-            "text_kanji": "初めまして。シュミット です。こうべびょういんの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là シュミット. Tôi là [blank2] của こうべびょういん."
+            "text_kana": "はじめまして。シュミット です。パワーでんきの [blank2] です。",
+            "text_kanji": "初めまして。シュミット です。パワーでんきの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là シュミット. Tôi là [blank2] của パワーでんき."
           }
         ],
         "blanks": {
@@ -33580,9 +33580,9 @@ const lessonReviews = [
           },
           {
             "speaker": "B",
-            "text_kana": "はじめまして。アリ です。FPTの [blank2] です。",
-            "text_kanji": "初めまして。アリ です。FPTの [blank2] です。",
-            "translation": "Rất vui được gặp anh. Tôi là アリ. Tôi là [blank2] của FPT."
+            "text_kana": "はじめまして。アリ です。こうべびょういんの [blank2] です。",
+            "text_kanji": "初めまして。アリ です。こうべびょういんの [blank2] です。",
+            "translation": "Rất vui được gặp anh. Tôi là アリ. Tôi là [blank2] của こうべびょういん."
           }
         ],
         "blanks": {
@@ -33772,11 +33772,11 @@ const lessonReviews = [
     "listenings": [
       {
         "id": 1,
-        "audio_text_kana": "A: タワポンさんは AKCの しゃいんですか。 B: いいえ、AKCの しゃいんじゃありません。わたしは タイの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: タワポンさんは AKCの 社員ですか。 B: いいえ、AKCの 社員じゃありません. 私は タイの 学生です. 20歳です.",
+        "audio_text_kana": "A: タワポンさんは パワーでんきの しゃいんですか。 B: いいえ、パワーでんきの しゃいじゃありません。わたしは タイの がくせいです。20さいです。",
+        "audio_text_kanji": "A: タワポンさんは パワーでんきの 社員ですか。 B: いいえ、パワーでんきの 社員じゃありません。私は タイの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh タワポン có phải là nhân viên công ty AKC không?",
+            "q": "Anh タワポン có phải là nhân viên công ty FPT không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -33784,7 +33784,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'AKCのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'FPTのしゃいんじゃありません'."
           },
           {
             "q": "Anh タワポン hiện đang là gì?",
@@ -33809,7 +33809,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh タワポン là nhân viên công ty AKC phải không?\nB: Không, tôi không phải nhân viên công ty AKC. Tôi là học sinh người nước Thái Lan. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh タワポン là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Thái Lan. Tôi 20 tuổi."
       },
       {
         "id": 2,
@@ -33895,8 +33895,8 @@ const lessonReviews = [
       },
       {
         "id": 4,
-        "audio_text_kana": "はじめまして。カリナです。ちゅうごくから きました。パワーでんきの エンジニアです。26さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。カリナです。ちゅうごくから 来ました。パワーでんきの エンジニアnetです。26歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。カリナです。ちゅうごくから きました。FPTの エンジニアです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。カリナです。ちゅうごくから 来ました。FPTの エンジニアです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -33932,15 +33932,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '26さいです' (26 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là カリナ. Tôi đến từ nước Trung Quốc. Tôi là kỹ sư của パワーでんき. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là カリナ. Tôi đến từ nước Trung Quốc. Tôi là kỹ sư của FPT. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 5,
-        "audio_text_kana": "A: ナムさんは ブラジルエアーの しゃいんですか。 B: いいえ、ブラジルエアーの しゃいんじゃありません。わたしは ベトナムの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: ナムさんは ブラジルエアーの 社員ですか。 B: いいえ、ブラジルエアーの 社員じゃありません. 私は ベトナムの 学生です. 20歳です.",
+        "audio_text_kana": "A: ナムさんは IMCの しゃいんですか。 B: いいえ、IMCの しゃいじゃありません。わたしは ベトナムの がくせいです。20さいです。",
+        "audio_text_kanji": "A: ナムさんは IMCの 社員ですか。 B: いいえ、IMCの 社員じゃありません。私は ベトナムの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh ナム có phải là nhân viên công ty ブラジルエアー không?",
+            "q": "Anh ナム có phải là nhân viên công ty IMC không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -33948,7 +33948,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'ブラジルエアーのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'IMCのしゃいんじゃありません'."
           },
           {
             "q": "Anh ナム hiện đang là gì?",
@@ -33973,7 +33973,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh ナム là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Việt Nam. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh ナム là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Việt Nam. Tôi 20 tuổi."
       },
       {
         "id": 6,
@@ -34059,8 +34059,8 @@ const lessonReviews = [
       },
       {
         "id": 8,
-        "audio_text_kana": "はじめまして。やまだです。ブラジルから きました。AKCの ぎんこういんです。30さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。山田です。ブラジルから 来ました。AKCの ぎんこういんnetです。30歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。やまだです。ブラジルから きました。さくらぎんこうの ぎんこういんです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。山田です。ブラジルから 来ました。さくらぎんこうの ぎんこういんです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -34096,15 +34096,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '30さいです' (30 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 山田. Tôi đến từ nước Brazil. Tôi là nhân viên ngân hàng của AKC. Tôi 30 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 山田. Tôi đến từ nước Brazil. Tôi là nhân viên ngân hàng của Ngân hàng Sakura. Tôi 30 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 9,
-        "audio_text_kana": "A: さとうさんは こうべびょういんの しゃいんですか。 B: いいえ、こうべびょういんの しゃいんじゃありません。わたしは インドの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: 佐藤さんは こうべびょういんの 社員ですか。 B: いいえ、こうべびょういんの 社員じゃありません. 私は インドの 学生です. 20歳です.",
+        "audio_text_kana": "A: さとうさんは AKCの しゃいんですか。 B: いいえ、AKCの しゃいじゃありません。わたしは インドの がくせいです。20さいです。",
+        "audio_text_kanji": "A: 佐藤さんは AKCの 社員ですか。 B: いいえ、AKCの 社員じゃありません。私は インドの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh 佐藤 có phải là nhân viên công ty こうべびょういん không?",
+            "q": "Anh 佐藤 có phải là nhân viên công ty FPT không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -34112,7 +34112,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'こうべびょういんのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'FPTのしゃいんじゃありません'."
           },
           {
             "q": "Anh 佐藤 hiện đang là gì?",
@@ -34137,7 +34137,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh 佐藤 là nhân viên công ty こうべびょういん phải không?\nB: Không, tôi không phải nhân viên công ty こうべびょういん. Tôi là học sinh người nước Ấn Độ. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh 佐藤 là nhân viên công ty AKC phải không?\nB: Không, tôi không phải nhân viên công ty AKC. Tôi là học sinh người nước Ấn Độ. Tôi 20 tuổi."
       },
       {
         "id": 10,
@@ -34223,8 +34223,8 @@ const lessonReviews = [
       },
       {
         "id": 12,
-        "audio_text_kana": "はじめまして。はやしです。インドネシアから きました。ブラジルエアーの せんせいです。24さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。林です。インドネシアから 来ました。ブラジルエアーの せんせいnetです。24歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。はやしです。インドネシアから きました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。林です。インドネシアから 来ました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -34260,15 +34260,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '24さいです' (24 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 林. Tôi đến từ nước Indonesia. Tôi là thầy giáo / cô giáo của ブラジルエアー. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là 林. Tôi đến từ nước Indonesia. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 13,
-        "audio_text_kana": "A: たろうちゃんさんは さくらだいがくの しゃいんですか。 B: いいえ、さくらだいがくの しゃいんじゃありません。わたしは ちゅうごくの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: 太郎さんは さくらだいがくの 社員ですか。 B: いいえ、さくらだいがくの 社員じゃありません. 私は ちゅうごくの 学生です. 20歳です.",
+        "audio_text_kana": "A: たろうちゃんさんは FPTの しゃいんですか。 B: いいえ、FPTの しゃいじゃありません。わたしは ちゅうごくの がくせいです。20さいです。",
+        "audio_text_kanji": "A: 太郎さんは FPTの 社員ですか。 B: いいえ、FPTの 社員じゃありません。私は ちゅうごくの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh 太郎 có phải là nhân viên công ty さくらだいがく không?",
+            "q": "Anh 太郎 có phải là nhân viên công ty IMC không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -34276,7 +34276,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'さくらだいがくのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'IMCのしゃいんじゃありません'."
           },
           {
             "q": "Anh 太郎 hiện đang là gì?",
@@ -34301,7 +34301,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh 太郎 là nhân viên công ty さくらだいがく phải không?\nB: Không, tôi không phải nhân viên công ty さくらだいがく. Tôi là học sinh người nước Trung Quốc. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh 太郎 là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Trung Quốc. Tôi 20 tuổi."
       },
       {
         "id": 14,
@@ -34387,8 +34387,8 @@ const lessonReviews = [
       },
       {
         "id": 16,
-        "audio_text_kana": "はじめまして。サントスです。ドイツから きました。こうべびょういんの いしゃです。28さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。サントスです。ドイツから 来ました。こうべびょういんの いしゃnetです。28歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。サントスです。ドイツから きました。こうべびょういんの いしゃです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。サントスです。ドイツから 来ました。こうべびょういんの いしゃです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -34424,15 +34424,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '28さいです' (28 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là サントス. Tôi đến từ nước Đức. Tôi là bác sĩ của こうべびょういん. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là サントス. Tôi đến từ nước Đức. Tôi là bác sĩ của bệnh viện Kobe. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 17,
-        "audio_text_kana": "A: ワットさんは IMCの しゃいんですか。 B: いいえ、IMCの しゃいんじゃありません。わたしは ブラジルの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: ワットさんは IMCの 社員ですか。 B: いいえ、IMCの 社員じゃありません. 私は ブラジルの 学生です. 20歳です.",
+        "audio_text_kana": "A: ワットさんは ブラジルエアーの しゃいんですか。 B: いいえ、ブラジルエアーの しゃいじゃありません。わたしは ブラジルの がくせいです。20さいです。",
+        "audio_text_kanji": "A: ワットさんは ブラジルエアーの 社員ですか。 B: いいえ、ブラジルエアーの 社員じゃありません。私は ブラジルの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh ワット có phải là nhân viên công ty IMC không?",
+            "q": "Anh ワット có phải là nhân viên công ty FPT không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -34440,7 +34440,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'IMCのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'FPTのしゃいんじゃありません'."
           },
           {
             "q": "Anh ワット hiện đang là gì?",
@@ -34465,7 +34465,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh ワット là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Brazil. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh ワット là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Brazil. Tôi 20 tuổi."
       },
       {
         "id": 18,
@@ -34551,8 +34551,8 @@ const lessonReviews = [
       },
       {
         "id": 20,
-        "audio_text_kana": "はじめまして。ワンです。アメリカから きました。さくらだいがくの がくせいです。22さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。ワンです。アメリカから 来ました。さくらだいがくの がくせいnetです。22歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。ワンです。アメリカから きました。さくらだいがくの がくせいです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。ワンです。アメリカから 来ました。さくらだいがくの がくせいです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -34588,15 +34588,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '22さいです' (22 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ワン. Tôi đến từ nước Mỹ. Tôi là học sinh / sinh viên của さくらだいがく. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ワン. Tôi đến từ nước Mỹ. Tôi là học sinh / sinh viên của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 21,
-        "audio_text_kana": "A: カリナさんは FPTの しゃいんですか。 B: いいえ、FPTの しゃいんじゃありません。わたしは インドネシアの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: カリナさんは FPTの 社員ですか。 B: いいえ、FPTの 社員じゃありません. 私は インドネシアの 学生です. 20歳です.",
+        "audio_text_kana": "A: カリナさんは パワーでんきの しゃいんですか。 B: いいえ、パワーでんきの しゃいじゃありません。わたしは インドネシアの がくせいです。20さいです。",
+        "audio_text_kanji": "A: カリナさんは パワーでんきの 社員ですか。 B: いいえ、パワーでんきの 社員じゃありません。私は インドネシアの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh カリナ có phải là nhân viên công ty FPT không?",
+            "q": "Anh カリナ có phải là nhân viên công ty IMC không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -34604,7 +34604,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'FPTのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'IMCのしゃいんじゃありません'."
           },
           {
             "q": "Anh カリナ hiện đang là gì?",
@@ -34629,7 +34629,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh カリナ là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Indonesia. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh カリナ là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Indonesia. Tôi 20 tuổi."
       },
       {
         "id": 22,
@@ -34715,8 +34715,8 @@ const lessonReviews = [
       },
       {
         "id": 24,
-        "audio_text_kana": "はじめまして。アリです。かんこくから きました。IMCの けんきゅうしゃです。26さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。アリです。かんこくから 来ました。IMCの けんきゅうしゃnetです。26歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。アリです。かんこくから きました。さくらだいがくの けんきゅうしゃです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。アリです。かんこくから 来ました。さくらだいがくの けんきゅうしゃです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -34752,15 +34752,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '26さいです' (26 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là アリ. Tôi đến từ nước Hàn Quốc. Tôi là nhà nghiên cứu của IMC. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là アリ. Tôi đến từ nước Hàn Quốc. Tôi là nhà nghiên cứu của Đại học Sakura. Tôi 26 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 25,
-        "audio_text_kana": "A: やまださんは パワーでんきの しゃいんですか。 B: いいえ、パワーでんきの しゃいんじゃありません。わたしは ドイツの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: 山田さんは パワーでんきの 社員ですか。 B: いいえ、パワーでんきの 社員じゃありません. 私は ドイツの 学生です. 20歳です.",
+        "audio_text_kana": "A: やまださんは IMCの しゃいんですか。 B: いいえ、IMCの しゃいじゃありません。わたしは ドイツの がくせいです。20さいです。",
+        "audio_text_kanji": "A: 山田さんは IMCの 社員ですか。 B: いいえ、IMCの 社員じゃありません。私は ドイツの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh 山田 có phải là nhân viên công ty パワーでんき không?",
+            "q": "Anh 山田 có phải là nhân viên công ty FPT không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -34768,7 +34768,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'パワーでんきのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'FPTのしゃいんじゃありません'."
           },
           {
             "q": "Anh 山田 hiện đang là gì?",
@@ -34793,7 +34793,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh 山田 là nhân viên công ty パワーでんき phải không?\nB: Không, tôi không phải nhân viên công ty パワーでんき. Tôi là học sinh người nước Đức. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh 山田 là nhân viên công ty IMC phải không?\nB: Không, tôi không phải nhân viên công ty IMC. Tôi là học sinh người nước Đức. Tôi 20 tuổi."
       },
       {
         "id": 26,
@@ -34879,8 +34879,8 @@ const lessonReviews = [
       },
       {
         "id": 28,
-        "audio_text_kana": "はじめまして。きむらです。にほんから きました。FPTの かいしゃいんです。30さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。木村です。にほんから 来ました。FPTの かいしゃいんnetです。30歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。きむらです。にほんから きました。FPTの かいしゃいんです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。木村です。にほんから 来ました。FPTの かいしゃいんです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -34920,11 +34920,11 @@ const lessonReviews = [
       },
       {
         "id": 29,
-        "audio_text_kana": "A: はやしさんは AKCの しゃいんですか。 B: いいえ、AKCの しゃいんじゃありません。わたしは アメリカの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: 林さんは AKCの 社員ですか。 B: いいえ、AKCの 社員じゃありません. 私は アメリカの 学生です. 20歳です.",
+        "audio_text_kana": "A: はやしさんは AKCの しゃいんですか。 B: いいえ、AKCの しゃいじゃありません。わたしは アメリカの がくせいです。20さいです。",
+        "audio_text_kanji": "A: 林さんは AKCの 社員ですか。 B: いいえ、AKCの 社員じゃありません。私は アメリカの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh 林 có phải là nhân viên công ty AKC không?",
+            "q": "Anh 林 có phải là nhân viên công ty IMC không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -34932,7 +34932,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'AKCのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'IMCのしゃいんじゃありません'."
           },
           {
             "q": "Anh 林 hiện đang là gì?",
@@ -35043,8 +35043,8 @@ const lessonReviews = [
       },
       {
         "id": 32,
-        "audio_text_kana": "はじめまして。ミラーです。イギリスから きました。パワーでんきの エンジニアです。24さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。ミラーです。イギリスから 来ました。パワーでんきの エンジニアnetです。24歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。ミラーです。イギリスから きました。パワーでんきの エンジニアです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。ミラーです。イギリスから 来ました。パワーでんきの エンジニアです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -35080,15 +35080,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '24さいです' (24 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ミラー. Tôi đến từ nước Anh. Tôi là kỹ sư của パワーでんき. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là ミラー. Tôi đến từ nước Anh. Tôi là kỹ sư của Điện lực Power. Tôi 24 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 33,
-        "audio_text_kana": "A: サントスさんは ブラジルエアーの しゃいんですか。 B: いいえ、ブラジルエアーの しゃいんじゃありません。わたしは かんこくの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: サントスさんは ブラジルエアーの 社員ですか。 B: いいえ、ブラジルエアーの 社員じゃありません. 私は かんこくの 学生です. 20歳です.",
+        "audio_text_kana": "A: サントスさんは FPTの しゃいんですか。 B: いいえ、FPTの しゃいじゃありません。わたしは かんこくの がくせいです。20さいです。",
+        "audio_text_kanji": "A: サントスさんは FPTの 社員ですか。 B: いいえ、FPTの 社員じゃありません。私は かんこくの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh サントス có phải là nhân viên công ty ブラジルエアー không?",
+            "q": "Anh サントス có phải là nhân viên công ty FPT không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -35096,7 +35096,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'ブラジルエアーのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'FPTのしゃいんじゃありません'."
           },
           {
             "q": "Anh サントス hiện đang là gì?",
@@ -35121,7 +35121,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh サントス là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Hàn Quốc. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh サントス là nhân viên công ty FPT phải không?\nB: Không, tôi không phải nhân viên công ty FPT. Tôi là học sinh người nước Hàn Quốc. Tôi 20 tuổi."
       },
       {
         "id": 34,
@@ -35207,8 +35207,8 @@ const lessonReviews = [
       },
       {
         "id": 36,
-        "audio_text_kana": "はじめまして。シュミットです。タイから きました。AKCの ぎんこういんです。28さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。シュミットです。タイから 来ました。AKCの ぎんこういんnetです。28歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。シュミットです。タイから きました。さくらぎんこうの ぎんこういんです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。シュミットです。タイから 来ました。さくらぎんこうの ぎんこういんです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -35244,15 +35244,15 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '28さいです' (28 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là シュミット. Tôi đến từ nước Thái Lan. Tôi là nhân viên ngân hàng của AKC. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là シュミット. Tôi đến từ nước Thái Lan. Tôi là nhân viên ngân hàng của Ngân hàng Sakura. Tôi 28 tuổi. Rất mong nhận được sự giúp đỡ."
       },
       {
         "id": 37,
-        "audio_text_kana": "A: ワンさんは こうべびょういんの しゃいんですか。 B: いいえ、こうべびょういんの しゃいんじゃありません。わたしは にほんの がくせいです. 20さいです.",
-        "audio_text_kanji": "A: ワンさんは こうべびょういんの 社員ですか。 B: いいえ、こうべびょういんの 社員じゃありません. 私は にほんの 学生です. 20歳です.",
+        "audio_text_kana": "A: ワンさんは ブラジルエアーの しゃいんですか。 B: いいえ、ブラジルエアーの しゃいじゃありません。わたしは にほんの がくせいです。20さいです。",
+        "audio_text_kanji": "A: ワンさんは ブラジルエアーの 社員ですか。 B: いいえ、ブラジルエアーの 社員じゃありません。私は にほんの 学生です。20歳です。",
         "questions": [
           {
-            "q": "Anh ワン có phải là nhân viên công ty こうべびょういん không?",
+            "q": "Anh ワン có phải là nhân viên công ty IMC không?",
             "opts": [
               "Có, đúng vậy",
               "Không, không phải",
@@ -35260,7 +35260,7 @@ const lessonReviews = [
               "Anh ấy là nghiên cứu sinh"
             ],
             "corr": "Không, không phải",
-            "explanation": "Nhân vật khẳng định 'こうべびょういんのしゃいんじゃありません'."
+            "explanation": "Nhân vật khẳng định 'IMCのしゃいんじゃありません'."
           },
           {
             "q": "Anh ワン hiện đang là gì?",
@@ -35285,7 +35285,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '20さいです' (20 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "A: Anh ワン là nhân viên công ty こうべびょういん phải không?\nB: Không, tôi không phải nhân viên công ty こうべびょういん. Tôi là học sinh người nước Nhật Bản. Tôi 20 tuổi."
+        "audio_text_vietnamese": "A: Anh ワン là nhân viên công ty ブラジルエアー phải không?\nB: Không, tôi không phải nhân viên công ty ブラジルエアー. Tôi là học sinh người nước Nhật Bản. Tôi 20 tuổi."
       },
       {
         "id": 38,
@@ -35371,8 +35371,8 @@ const lessonReviews = [
       },
       {
         "id": 40,
-        "audio_text_kana": "はじめまして。イーです。ベトナムから きました。ブラジルエアーの せんせいです。22さいです。どうぞよろしく おねがいします。",
-        "audio_text_kanji": "初めまして。イーです。ベトナムから 来ました。ブラジルエアーの せんせいnetです。22歳です。どうぞよろしく おねがいします。",
+        "audio_text_kana": "はじめまして。イーです。ベトナムから きました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
+        "audio_text_kanji": "初めまして。イーです。ベトナムから 来ました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
         "questions": [
           {
             "q": "Nhân vật tự giới thiệu tên là gì?",
@@ -35408,7 +35408,7 @@ const lessonReviews = [
             "explanation": "Nhân vật nói '22さいです' (22 tuổi)."
           }
         ],
-        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là イー. Tôi đến từ nước Việt Nam. Tôi là thầy giáo / cô giáo của ブラジルエアー. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ."
+        "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là イー. Tôi đến từ nước Việt Nam. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ."
       }
     ],
     "dictations": [
@@ -35428,16 +35428,16 @@ const lessonReviews = [
       },
       {
         "id": 2,
-        "question_audio": "ミラーさんは ブラジルエアーの エンジニア です。",
+        "question_audio": "ミラーさんは FPTの エンジニア です。",
         "correct_answers": [
-          "ミラーさんは ブラジルエアーの エンジニア です",
-          "miraa san wa burajiru eaa no enjinia desu"
+          "ミラーさんは FPTの エンジニア です",
+          "miraa san wa FPT no enjinia desu"
         ],
         "vietnamese_answers": [
-          "Anh ミラー là kỹ sư của ブラジルエアー",
-          "Chị ミラー là kỹ sư của ブラジルエアー"
+          "Anh ミラー là kỹ sư của FPT",
+          "Chị ミラー là kỹ sư của FPT"
         ],
-        "vietnamese_meaning": "Anh/Chị ミラー là kỹ sư của ブラジルエアー."
+        "vietnamese_meaning": "Anh/Chị ミラー là kỹ sư của FPT."
       },
       {
         "id": 3,
@@ -35481,16 +35481,16 @@ const lessonReviews = [
       },
       {
         "id": 6,
-        "question_audio": "ワンさんは IMCの いしゃ です。",
+        "question_audio": "ワンさんは こうべびょういんの いしゃ です。",
         "correct_answers": [
-          "ワンさんは IMCの いしゃ です",
-          "wan san wa IMC no isha desu"
+          "ワンさんは こうべびょういんの いしゃ です",
+          "wan san wa koube byouin no isha desu"
         ],
         "vietnamese_answers": [
-          "Anh ワン là bác sĩ của IMC",
-          "Chị ワン là bác sĩ của IMC"
+          "Anh ワン là bác sĩ của bệnh viện Kobe",
+          "Chị ワン là bác sĩ của bệnh viện Kobe"
         ],
-        "vietnamese_meaning": "Anh/Chị ワン là bác sĩ của IMC."
+        "vietnamese_meaning": "Anh/Chị ワン là bác sĩ của bệnh viện Kobe."
       },
       {
         "id": 7,
@@ -35547,16 +35547,16 @@ const lessonReviews = [
       },
       {
         "id": 11,
-        "question_audio": "やまださんは AKCの かいしゃいん です。",
+        "question_audio": "やまださんは FPTの かいしゃいん です。",
         "correct_answers": [
-          "やまださんは AKCの かいしゃいん です",
-          "yamada san wa AKC no kaishain desu"
+          "やまださんは FPTの かいしゃいん です",
+          "yamada san wa FPT no kaishain desu"
         ],
         "vietnamese_answers": [
-          "Anh 山田 là nhân viên công ty của AKC",
-          "Chị 山田 là nhân viên công ty của AKC"
+          "Anh 山田 là nhân viên công ty của FPT",
+          "Chị 山田 là nhân viên công ty của FPT"
         ],
-        "vietnamese_meaning": "Anh/Chị 山田 là nhân viên công ty của AKC."
+        "vietnamese_meaning": "Anh/Chị 山田 là nhân viên công ty của FPT."
       },
       {
         "id": 12,
@@ -35606,10 +35606,10 @@ const lessonReviews = [
           "tarou chan san wa sakura daigaku no sensei desu"
         ],
         "vietnamese_answers": [
-          "Anh 太郎 là thầy giáo / cô giáo của さくらだいがく",
-          "Chị 太郎 là thầy giáo / cô giáo của さくらだいがく"
+          "Anh 太郎 là thầy giáo / cô giáo của Đại học Sakura",
+          "Chị 太郎 là thầy giáo / cô giáo của Đại học Sakura"
         ],
-        "vietnamese_meaning": "Anh/Chị 太郎 là thầy giáo / cô giáo của さくらだいがく."
+        "vietnamese_meaning": "Anh/Chị 太郎 là thầy giáo / cô giáo của Đại học Sakura."
       },
       {
         "id": 16,
@@ -35666,16 +35666,16 @@ const lessonReviews = [
       },
       {
         "id": 20,
-        "question_audio": "タワポンさんは パワーでんきの けんきゅうしゃ です。",
+        "question_audio": "タワポンさんは さくらだいがくの けんきゅうしゃ です。",
         "correct_answers": [
-          "タワポンさんは パワーでんきの けんきゅうしゃ です",
-          "tawapon san wa pawaa denki no kenkyuusha desu"
+          "タワポンさんは さくらだいがくの けんきゅうしゃ です",
+          "tawapon san wa sakura daigaku no kenkyuusha desu"
         ],
         "vietnamese_answers": [
-          "Anh タワポン là nhà nghiên cứu của パワーでんき",
-          "Chị タワポン là nhà nghiên cứu của パワーでんき"
+          "Anh タワポン là nhà nghiên cứu của Đại học Sakura",
+          "Chị タワポン là nhà nghiên cứu của Đại học Sakura"
         ],
-        "vietnamese_meaning": "Anh/Chị タワポン là nhà nghiên cứu của パワーでんき."
+        "vietnamese_meaning": "Anh/Chị タワポン là nhà nghiên cứu của Đại học Sakura."
       },
       {
         "id": 21,
@@ -35732,16 +35732,16 @@ const lessonReviews = [
       },
       {
         "id": 25,
-        "question_audio": "イーさんは こうべびょういんの ぎんこういん です。",
+        "question_audio": "イーさんは さくらぎんこうの ぎんこういん です。",
         "correct_answers": [
-          "イーさんは こうべびょういんの ぎんこういん です",
-          "ii san wa koube byouin no ginkouin desu"
+          "イーさんは さくらぎんこうの ぎんこういん です",
+          "ii san wa sakura ginkou no ginkouin desu"
         ],
         "vietnamese_answers": [
-          "Anh イー là nhân viên ngân hàng của こうべびょういん",
-          "Chị イー là nhân viên ngân hàng của こうべびょういん"
+          "Anh イー là nhân viên ngân hàng của Ngân hàng Sakura",
+          "Chị イー là nhân viên ngân hàng của Ngân hàng Sakura"
         ],
-        "vietnamese_meaning": "Anh/Chị イー là nhân viên ngân hàng của こうべびょういん."
+        "vietnamese_meaning": "Anh/Chị イー là nhân viên ngân hàng của Ngân hàng Sakura."
       },
       {
         "id": 26,
@@ -35798,16 +35798,16 @@ const lessonReviews = [
       },
       {
         "id": 30,
-        "question_audio": "きむらさんは FPTの がくせい です。",
+        "question_audio": "きむらさんは さくらだいがくの がくせい です。",
         "correct_answers": [
-          "きむらさんは FPTの がくせい です",
-          "kimura san wa FPT no gakusei desu"
+          "きむらさんは さくらだいがくの がくせい です",
+          "kimura san wa sakura daigaku no gakusei desu"
         ],
         "vietnamese_answers": [
-          "Anh 木村 là học sinh / sinh viên của FPT",
-          "Chị 木村 là học sinh / sinh viên của FPT"
+          "Anh 木村 là học sinh / sinh viên của Đại học Sakura",
+          "Chị 木村 là học sinh / sinh viên của Đại học Sakura"
         ],
-        "vietnamese_meaning": "Anh/Chị 木村 là học sinh / sinh viên của FPT."
+        "vietnamese_meaning": "Anh/Chị 木村 là học sinh / sinh viên của Đại học Sakura."
       },
       {
         "id": 31,
@@ -35864,16 +35864,16 @@ const lessonReviews = [
       },
       {
         "id": 35,
-        "question_audio": "サントスさんは ブラジルエアーの エンジニア です。",
+        "question_audio": "サントスさんは パワーでんきの エンジニア です。",
         "correct_answers": [
-          "サントスさんは ブラジルエアーの エンジニア です",
-          "santosu san wa burajiru eaa no enjinia desu"
+          "サントスさんは パワーでんきの エンジニア です",
+          "santosu san wa pawaa denki no enjinia desu"
         ],
         "vietnamese_answers": [
-          "Anh サントス là kỹ sư của ブラジルエアー",
-          "Chị サントス là kỹ sư của ブラジルエアー"
+          "Anh サントス là kỹ sư của Điện lực Power",
+          "Chị サントス là kỹ sư của Điện lực Power"
         ],
-        "vietnamese_meaning": "Anh/Chị サントス là kỹ sư của ブラジルエアー."
+        "vietnamese_meaning": "Anh/Chị サントス là kỹ sư của Điện lực Power."
       },
       {
         "id": 36,
@@ -35917,16 +35917,16 @@ const lessonReviews = [
       },
       {
         "id": 39,
-        "question_audio": "カリナさんは IMCの いしゃ です。",
+        "question_audio": "カリナさんは こうべびょういんの いしゃ です。",
         "correct_answers": [
-          "カリナさんは IMCの いしゃ です",
-          "karina san wa IMC no isha desu"
+          "カリナさんは こうべびょういんの いしゃ です",
+          "karina san wa koube byouin no isha desu"
         ],
         "vietnamese_answers": [
-          "Anh カリナ là bác sĩ của IMC",
-          "Chị カリナ là bác sĩ của IMC"
+          "Anh カリナ là bác sĩ của bệnh viện Kobe",
+          "Chị カリナ là bác sĩ của bệnh viện Kobe"
         ],
-        "vietnamese_meaning": "Anh/Chị カリナ là bác sĩ của IMC."
+        "vietnamese_meaning": "Anh/Chị カリナ là bác sĩ của bệnh viện Kobe."
       },
       {
         "id": 40,
@@ -36905,19 +36905,19 @@ const lessonReviews = [
       },
       {
         "id": 3,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 3",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 3",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "カリナさん、この [blank1] は なんの かーどですか。",
-            "text_kanji": "カリナさん、この [blank1] は 何の かーどですか。",
-            "translation": "Anh/Chị カリナ ơi, cái [blank1] này là thẻ về cái gì thế?"
+            "text_kana": "カリナさん、この [blank1] は なんの しんぶんですか。",
+            "text_kanji": "カリナさん、この [blank1] は 何の しんぶんですか。",
+            "translation": "Anh/Chị カリナ ơi, cái [blank1] này là báo về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "タワポンさん、[blank2] の かーどです。",
-            "text_kanji": "タワポンさん、[blank2] の かーどです。",
-            "translation": "Anh/Chị タワポン ơi, là thẻ [blank2]."
+            "text_kana": "タワポンさん、[blank2] の しんぶんです。",
+            "text_kanji": "タワポンさん、[blank2] の しんぶんです。",
+            "translation": "Anh/Chị タワポン ơi, là báo [blank2]."
           }
         ],
         "blanks": {
@@ -36940,15 +36940,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -37155,19 +37154,19 @@ const lessonReviews = [
       },
       {
         "id": 8,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 8",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 8",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "さとうさん、この [blank1] は なんの とけいですか。",
-            "text_kanji": "佐藤さん、この [blank1] は 何の とけいですか。",
-            "translation": "Anh/Chị 佐藤 ơi, cái [blank1] này là đồng hồ về cái gì thế?"
+            "text_kana": "さとうさん、この [blank1] は なんの じしょですか。",
+            "text_kanji": "佐藤さん、この [blank1] は 何の じしょですか。",
+            "translation": "Anh/Chị 佐藤 ơi, cái [blank1] này là từ điển về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "イーさん、[blank2] の とけいです。",
-            "text_kanji": "イーさん、[blank2] の とけいです。",
-            "translation": "Anh/Chị イー ơi, là đồng hồ [blank2]."
+            "text_kana": "イーさん、[blank2] の じしょです。",
+            "text_kanji": "イーさん、[blank2] の じしょです。",
+            "translation": "Anh/Chị イー ơi, là từ điển [blank2]."
           }
         ],
         "blanks": {
@@ -37190,15 +37189,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -37405,19 +37403,19 @@ const lessonReviews = [
       },
       {
         "id": 13,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 13",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 13",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "ワットさん、この [blank1] は なんの らじおですか。",
-            "text_kanji": "ワットさん、この [blank1] は 何の らじおですか。",
-            "translation": "Anh/Chị ワット ơi, cái [blank1] này là đài về cái gì thế?"
+            "text_kana": "ワットさん、この [blank1] は なんの しーでぃーですか。",
+            "text_kanji": "ワットさん、この [blank1] は 何の しーでぃーですか。",
+            "translation": "Anh/Chị ワット ơi, cái [blank1] này là đĩa CD về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "きむらさん、[blank2] の らじおです。",
-            "text_kanji": "木村さん、[blank2] の らじおです。",
-            "translation": "Anh/Chị 木村 ơi, là đài [blank2]."
+            "text_kana": "きむらさん、[blank2] の しーでぃーです。",
+            "text_kanji": "木村さん、[blank2] の しーでぃーです。",
+            "translation": "Anh/Chị 木村 ơi, là đĩa CD [blank2]."
           }
         ],
         "blanks": {
@@ -37440,15 +37438,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -37654,19 +37651,19 @@ const lessonReviews = [
       },
       {
         "id": 18,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 18",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 18",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "ナムさん、この [blank1] は なんの いすですか。",
-            "text_kanji": "ナムさん、この [blank1] は 何の いすですか。",
-            "translation": "Anh/Chị ナム ơi, cái [blank1] này là ghế về cái gì thế?"
+            "text_kana": "ナムさん、この [blank1] は なんの のーとですか。",
+            "text_kanji": "ナムさん、この [blank1] は 何の のーとですか。",
+            "translation": "Anh/Chị ナム ơi, cái [blank1] này là vở về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "シュミットさん、[blank2] の いすです。",
-            "text_kanji": "シュミットさん、[blank2] の いすです。",
-            "translation": "Anh/Chị シュミット ơi, là ghế [blank2]."
+            "text_kana": "シュミットさん、[blank2] の のーとです。",
+            "text_kanji": "シュミットさん、[blank2] の のーとです。",
+            "translation": "Anh/Chị シュミット ơi, là vở [blank2]."
           }
         ],
         "blanks": {
@@ -37689,15 +37686,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -37904,19 +37900,19 @@ const lessonReviews = [
       },
       {
         "id": 23,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 23",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 23",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "たなかさん、この [blank1] は なんの じしょですか。",
-            "text_kanji": "田中さん、この [blank1] は 何の じしょですか。",
-            "translation": "Anh/Chị 田中 ơi, cái [blank1] này là từ điển về cái gì thế?"
+            "text_kana": "たなかさん、この [blank1] は なんの ざっしですか。",
+            "text_kanji": "田中さん、この [blank1] は 何の ざっしですか。",
+            "translation": "Anh/Chị 田中 ơi, cái [blank1] này là tạp chí về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "アリさん、[blank2] の じしょです。",
-            "text_kanji": "アリさん、[blank2] の じしょです。",
-            "translation": "Anh/Chị アリ ơi, là từ điển [blank2]."
+            "text_kana": "アリさん、[blank2] の ざっしです。",
+            "text_kanji": "アリさん、[blank2] の ざっしです。",
+            "translation": "Anh/Chị アリ ơi, là tạp chí [blank2]."
           }
         ],
         "blanks": {
@@ -37939,15 +37935,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -38153,19 +38148,19 @@ const lessonReviews = [
       },
       {
         "id": 28,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 28",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 28",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "タワポンさん、この [blank1] は なんの めいしですか。",
-            "text_kanji": "タワポンさん、この [blank1] は 何の めいしですか。",
-            "translation": "Anh/Chị タワポン ơi, cái [blank1] này là danh thiếp về cái gì thế?"
+            "text_kana": "タワポンさん、この [blank1] は なんの ほんですか。",
+            "text_kanji": "タワポンさん、この [blank1] は 何の ほんですか。",
+            "translation": "Anh/Chị タワポン ơi, cái [blank1] này là sách về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "ミラーさん、[blank2] の めいしです。",
-            "text_kanji": "ミラーさん、[blank2] の めいしです。",
-            "translation": "Anh/Chị ミラー ơi, là danh thiếp [blank2]."
+            "text_kana": "ミラーさん、[blank2] の ほんです。",
+            "text_kanji": "ミラーさん、[blank2] の ほんです。",
+            "translation": "Anh/Chị ミラー ơi, là sách [blank2]."
           }
         ],
         "blanks": {
@@ -38188,15 +38183,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -38403,19 +38397,19 @@ const lessonReviews = [
       },
       {
         "id": 33,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 33",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 33",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "イーさん、この [blank1] は なんの かぎですか。",
-            "text_kanji": "イーさん、この [blank1] は 何の かぎですか。",
-            "translation": "Anh/Chị イー ơi, cái [blank1] này là chìa khóa về cái gì thế?"
+            "text_kana": "イーさん、この [blank1] は なんの てちょうですか。",
+            "text_kanji": "イーさん、この [blank1] は 何の てちょうですか。",
+            "translation": "Anh/Chị イー ơi, cái [blank1] này là sổ tay về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "ワンさん、[blank2] の かぎです。",
-            "text_kanji": "ワンさん、[blank2] の かぎです。",
-            "translation": "Anh/Chị ワン ơi, là chìa khóa [blank2]."
+            "text_kana": "ワンさん、[blank2] の てちょうです。",
+            "text_kanji": "ワンさん、[blank2] の てちょうです。",
+            "translation": "Anh/Chị ワン ơi, là sổ tay [blank2]."
           }
         ],
         "blanks": {
@@ -38437,15 +38431,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -38652,19 +38645,19 @@ const lessonReviews = [
       },
       {
         "id": 38,
-        "context": "Xác nhận nội dung của đĩa CD - Đoạn 38",
+        "context": "Xác nhận nội dung của đĩa CD/sách/tạp chí - Đoạn 38",
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "きむらさん、この [blank1] は なんの てれびですか。",
-            "text_kanji": "木村さん、この [blank1] は 何の てれびですか。",
-            "translation": "Anh/Chị 木村 ơi, cái [blank1] này là tivi về cái gì thế?"
+            "text_kana": "きむらさん、この [blank1] は なんの しんぶんですか。",
+            "text_kanji": "木村さん、この [blank1] は 何の しんぶんですか。",
+            "translation": "Anh/Chị 木村 ơi, cái [blank1] này là báo về cái gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "やまださん、[blank2] の てれびです。",
-            "text_kanji": "山田さん、[blank2] の てれびです。",
-            "translation": "Anh/Chị 山田 ơi, là tivi [blank2]."
+            "text_kana": "やまださん、[blank2] の しんぶんです。",
+            "text_kanji": "山田さん、[blank2] の しんぶんです。",
+            "translation": "Anh/Chị 山田 ơi, là báo [blank2]."
           }
         ],
         "blanks": {
@@ -38686,15 +38679,14 @@ const lessonReviews = [
             "correct": "にほんご",
             "options": [
               "にほんご",
-              "じどうしゃ",
-              "ちょこれーと",
-              "山田さん"
+              "にほんご",
+              "えいご",
+              "べとなむご"
             ],
             "options_translations": {
               "にほんご": "tiếng Nhật",
-              "じどうしゃ": "ô tô / xe hơi",
-              "ちょこれーと": "sô-cô-la",
-              "山田さん": "từ vựng ôn tập"
+              "えいご": "tiếng Anh",
+              "べとなむご": "tiếng Việt"
             }
           }
         }
@@ -38926,19 +38918,19 @@ const lessonReviews = [
       },
       {
         "id": 4,
-        "audio_text_kana": "ワンさん、それは なんの ぼーるぺんですか。 B: イーさん、これは にほんごの ぼーるぺんです。 A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
-        "audio_text_kanji": "ワンさん、それは 何の ぼーるぺんですか。 B: イーさん、これは にほんごの ぼーるぺんです。 A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
+        "audio_text_kana": "ワンさん、それは なんの のーとですか。 B: イーさん、これは にほんごの のーとです。A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
+        "audio_text_kanji": "ワンさん、それは 何の のーとですか。 B: イーさん、これは にほんごの のーとです。A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "bút bi",
+              "vở",
               "đồng hồ",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "bút bi",
-            "explanation": "Nhân vật hỏi '何の ぼーるぺんですか' (đồ vật là bút bi)."
+            "corr": "vở",
+            "explanation": "Nhân vật hỏi '何の のーとですか' (đồ vật là vở)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -38949,7 +38941,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Nhật",
-            "explanation": "Người B nói 'にほんごの ぼーるぺんです' (bằng tiếng Nhật)."
+            "explanation": "Người B nói 'にほんごの のーとです' (bằng tiếng Nhật)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -38963,7 +38955,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。イーさんのです'."
           }
         ],
-        "audio_text_vietnamese": "ワン hỏi: Đó là bút bi về cái gì thế?\nイー trả lời: Đây là bút bi tiếng Nhật.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "ワン hỏi: Đó là vở về cái gì thế?\nイー trả lời: Đây là vở tiếng Nhật.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 5,
@@ -39090,19 +39082,19 @@ const lessonReviews = [
       },
       {
         "id": 8,
-        "audio_text_kana": "アリさん、それは なんの かさですか。 B: たなかさん、これは べとなむごの かさです。 A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
-        "audio_text_kanji": "アリさん、それは 何の かさですか。 B: 田中さん、これは べとなむごの かさです。 A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
+        "audio_text_kana": "アリさん、それは なんの じしょですか。 B: たなかさん、これは べとなむごの じしょです。A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
+        "audio_text_kanji": "アリさん、それは 何の じしょですか。 B: 田中さん、これは べとなむごの じしょです。A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "ô",
+              "từ điển",
               "tivi",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "ô",
-            "explanation": "Nhân vật hỏi '何の かさですか' (đồ vật là ô)."
+            "corr": "từ điển",
+            "explanation": "Nhân vật hỏi '何の じしょですか' (đồ vật là từ điển)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -39113,7 +39105,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Việt",
-            "explanation": "Người B nói 'べとなむごの かさです' (bằng tiếng Việt)."
+            "explanation": "Người B nói 'べとなむごの じしょです' (bằng tiếng Việt)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -39127,7 +39119,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。たなかさんのです'."
           }
         ],
-        "audio_text_vietnamese": "アリ hỏi: Đó là ô về cái gì thế?\n田中 trả lời: Đây là ô tiếng Việt.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "アリ hỏi: Đó là từ điển về cái gì thế?\n田中 trả lời: Đây là từ điển tiếng Việt.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 9,
@@ -39254,19 +39246,19 @@ const lessonReviews = [
       },
       {
         "id": 12,
-        "audio_text_kana": "きむらさん、それは なんの らじおですか。 B: ワットさん、これは すぺいんごの らじおです。 A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
-        "audio_text_kanji": "木村さん、それは 何の らじおですか。 B: ワットさん、これは すぺいんごの らじおです。 A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
+        "audio_text_kana": "きむらさん、それは なんの てちょうですか。 B: ワットさん、これは すぺいんごの てちょうです。A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
+        "audio_text_kanji": "木村さん、それは 何の てちょうですか。 B: ワットさん、これは すぺいんごの てちょうです。A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "đài",
+              "sổ tay",
               "ô tô",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "đài",
-            "explanation": "Nhân vật hỏi '何の らじおですか' (đồ vật là đài)."
+            "corr": "sổ tay",
+            "explanation": "Nhân vật hỏi '何の てちょうですか' (đồ vật là sổ tay)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -39277,7 +39269,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Tây Ban Nha",
-            "explanation": "Người B nói 'すぺいんごの らじおです' (bằng tiếng Tây Ban Nha)."
+            "explanation": "Người B nói 'すぺいんごの てちょうです' (bằng tiếng Tây Ban Nha)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -39291,7 +39283,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。ワットさんのです'."
           }
         ],
-        "audio_text_vietnamese": "木村 hỏi: Đó là đài về cái gì thế?\nワット trả lời: Đây là đài tiếng Tây Ban Nha.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "木村 hỏi: Đó là sổ tay về cái gì thế?\nワット trả lời: Đây là sổ tay tiếng Tây Ban Nha.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 13,
@@ -39418,19 +39410,19 @@ const lessonReviews = [
       },
       {
         "id": 16,
-        "audio_text_kana": "タワポンさん、それは なんの つくえですか。 B: カリナさん、これは どいつごの つくえです。 A: そうですか。タワポンさんのですか。 B: いいえ、ちがいます。カリナさんのです。",
-        "audio_text_kanji": "タワポンさん、それは 何の つくえですか。 B: カリナさん、これは どいつごの つくえです。 A: そうですか。タワポンさんのですか。 B: いいえ、違います。カリナさんのです。",
+        "audio_text_kana": "タワポンさん、それは なんの ざっしですか。 B: カリナさん、これは どいつごの ざっしです。A: そうですか。タワポンさんのですか。 B: いいえ、ちがいます。カリナさんのです。",
+        "audio_text_kanji": "タワポンさん、それは 何の ざっしですか。 B: カリナさん、これは どいつごの ざっしです。A: そうですか。タワポンさんのですか。 B: いいえ、違います。カリナさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "bàn",
+              "tạp chí",
               "cà phê",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "bàn",
-            "explanation": "Nhân vật hỏi '何の つくえですか' (đồ vật là bàn)."
+            "corr": "tạp chí",
+            "explanation": "Nhân vật hỏi '何の ざっしですか' (đồ vật là tạp chí)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -39441,7 +39433,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Đức",
-            "explanation": "Người B nói 'どいつごの つくえです' (bằng tiếng Đức)."
+            "explanation": "Người B nói 'どいつごの ざっしです' (bằng tiếng Đức)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -39455,7 +39447,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。カリナさんのです'."
           }
         ],
-        "audio_text_vietnamese": "タワポン hỏi: Đó là bàn về cái gì thế?\nカリナ trả lời: Đây là bàn tiếng Đức.\nタワポン hỏi tiếp: Thế à. Của bạn phải không?\nカリナ trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "タワポン hỏi: Đó là tạp chí về cái gì thế?\nカリナ trả lời: Đây là tạp chí tiếng Đức.\nタワポン hỏi tiếp: Thế à. Của bạn phải không?\nカリナ trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 17,
@@ -39582,19 +39574,19 @@ const lessonReviews = [
       },
       {
         "id": 20,
-        "audio_text_kana": "ナムさん、それは なんの おみやげですか。 B: やまださん、これは えいごの おみやげです。 A: そうですか。ナムさんのですか。 B: いいえ、ちがいます。やまださんのです。",
-        "audio_text_kanji": "ナムさん、それは 何の おみやげですか。 B: 山田さん、これは えいごの おみやげです。 A: そうですか。ナムさんのですか。 B: いいえ、違います。山田さんのです。",
+        "audio_text_kana": "ナムさん、それは なんの しーでぃーですか。 B: やまださん、これは えいごの しーでぃーです。A: そうですか。ナムさんのですか。 B: いいえ、ちがいます。やまださんのです。",
+        "audio_text_kanji": "ナムさん、それは 何の しーでぃーですか。 B: 山田さん、これは えいごの しーでぃーです。A: そうですか。ナムさんのですか。 B: いいえ、違います。山田さんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "quà lưu niệm",
+              "đĩa CD",
               "tạp chí",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "quà lưu niệm",
-            "explanation": "Nhân vật hỏi '何の おみやげですか' (đồ vật là quà lưu niệm)."
+            "corr": "đĩa CD",
+            "explanation": "Nhân vật hỏi '何の しーでぃーですか' (đồ vật là đĩa CD)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -39605,7 +39597,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Anh",
-            "explanation": "Người B nói 'えいごの おみやげです' (bằng tiếng Anh)."
+            "explanation": "Người B nói 'えいごの しーでぃーです' (bằng tiếng Anh)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -39619,7 +39611,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。やまださんのです'."
           }
         ],
-        "audio_text_vietnamese": "ナム hỏi: Đó là quà lưu niệm về cái gì thế?\n山田 trả lời: Đây là quà lưu niệm tiếng Anh.\nナム hỏi tiếp: Thế à. Của bạn phải không?\n山田 trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "ナム hỏi: Đó là đĩa CD về cái gì thế?\n山田 trả lời: Đây là đĩa CD tiếng Anh.\nナム hỏi tiếp: Thế à. Của bạn phải không?\n山田 trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 21,
@@ -39746,8 +39738,8 @@ const lessonReviews = [
       },
       {
         "id": 24,
-        "audio_text_kana": "さとうさん、それは なんの しんぶんですか。 B: ミラーさん、これは にほんごの しんぶんです。 A: そうですか。さとうさんのですか。 B: いいえ、ちがいます。ミラーさんのです。",
-        "audio_text_kanji": "佐藤さん、それは 何の しんぶんですか。 B: ミラーさん、これは にほんごの しんぶんです。 A: そうですか。佐藤さんのですか。 B: いいえ、違います。ミラーさんのです。",
+        "audio_text_kana": "さとうさん、それは なんの しんぶんですか。 B: ミラーさん、これは にほんごの しんぶんです。A: そうですか。さとうさんのですか。 B: いいえ、ちがいます。ミラーさんのです。",
+        "audio_text_kanji": "佐藤さん、それは 何の しんぶんですか。 B: ミラーさん、これは にほんごの しんぶんです。A: そうですか。佐藤さんのですか。 B: いいえ、違います。ミラーさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
@@ -39910,19 +39902,19 @@ const lessonReviews = [
       },
       {
         "id": 28,
-        "audio_text_kana": "サントスさん、それは なんの かーどですか。 B: シュミットさん、これは べとなむごの かーどです。 A: そうですか。サントスさんのですか。 B: いいえ、ちがいます。シュミットさんのです。",
-        "audio_text_kanji": "サントスさん、それは 何の かーどですか。 B: シュミットさん、これは べとなむごの かーどです。 A: そうですか。サントスさんのですか。 B: いいえ、違います。シュミットさんのです。",
+        "audio_text_kana": "サントスさん、それは なんの ほんですか。 B: シュミットさん、これは べとなむごの ほんです。A: そうですか。サントスさんのですか。 B: いいえ、ちがいます。シュミットさんのです。",
+        "audio_text_kanji": "サントスさん、それは 何の ほんですか。 B: シュミットさん、これは べとなむごの ほんです。A: そうですか。サントスさんのですか。 B: いいえ、違います。シュミットさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "thẻ",
+              "sách",
               "bút chì kim",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "thẻ",
-            "explanation": "Nhân vật hỏi '何の かーどですか' (đồ vật là thẻ)."
+            "corr": "sách",
+            "explanation": "Nhân vật hỏi '何の ほんですか' (đồ vật là sách)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -39933,7 +39925,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Việt",
-            "explanation": "Người B nói 'べとなむごの かーどです' (bằng tiếng Việt)."
+            "explanation": "Người B nói 'べとなむごの ほんです' (bằng tiếng Việt)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -39947,7 +39939,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。シュミットさんのです'."
           }
         ],
-        "audio_text_vietnamese": "サントス hỏi: Đó là thẻ về cái gì thế?\nシュミット trả lời: Đây là thẻ tiếng Việt.\nサントス hỏi tiếp: Thế à. Của bạn phải không?\nシュミット trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "サントス hỏi: Đó là sách về cái gì thế?\nシュミット trả lời: Đây là sách tiếng Việt.\nサントス hỏi tiếp: Thế à. Của bạn phải không?\nシュミット trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 29,
@@ -40074,19 +40066,19 @@ const lessonReviews = [
       },
       {
         "id": 32,
-        "audio_text_kana": "ワンさん、それは なんの かぎですか。 B: イーさん、これは すぺいんごの かぎです。 A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
-        "audio_text_kanji": "ワンさん、それは 何の かぎですか。 B: イーさん、これは すぺいんごの かぎです。 A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
+        "audio_text_kana": "ワンさん、それは なんの のーとですか。 B: イーさん、これは すぺいんごの のーとです。A: そうですか。ワンさんのですか。 B: いいえ、ちがいます。イーさんのです。",
+        "audio_text_kanji": "ワンさん、それは 何の のーとですか。 B: イーさん、これは すぺいんごの のーとです。A: そうですか。ワンさんのですか。 B: いいえ、違います。イーさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "chìa khóa",
+              "vở",
               "cặp sách",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "chìa khóa",
-            "explanation": "Nhân vật hỏi '何の かぎですか' (đồ vật là chìa khóa)."
+            "corr": "vở",
+            "explanation": "Nhân vật hỏi '何の のーとですか' (đồ vật là vở)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -40097,7 +40089,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Tây Ban Nha",
-            "explanation": "Người B nói 'すぺいんごの かぎです' (bằng tiếng Tây Ban Nha)."
+            "explanation": "Người B nói 'すぺいんごの のーとです' (bằng tiếng Tây Ban Nha)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -40111,7 +40103,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。イーさんのです'."
           }
         ],
-        "audio_text_vietnamese": "ワン hỏi: Đó là chìa khóa về cái gì thế?\nイー trả lời: Đây là chìa khóa tiếng Tây Ban Nha.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "ワン hỏi: Đó là vở về cái gì thế?\nイー trả lời: Đây là vở tiếng Tây Ban Nha.\nワン hỏi tiếp: Thế à. Của bạn phải không?\nイー trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 33,
@@ -40238,19 +40230,19 @@ const lessonReviews = [
       },
       {
         "id": 36,
-        "audio_text_kana": "アリさん、それは なんの しーでぃーですか。 B: たなかさん、これは どいつごの しーでぃーです。 A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
-        "audio_text_kanji": "アリさん、それは 何の しーでぃーですか。 B: 田中さん、これは どいつごの しーでぃーです。 A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
+        "audio_text_kana": "アリさん、それは なんの じしょですか。 B: たなかさん、これは どいつごの じしょです。A: そうですか。アリさんのですか。 B: いいえ、ちがいます。たなかさんのです。",
+        "audio_text_kanji": "アリさん、それは 何の じしょですか。 B: 田中さん、これは どいつごの じしょです。A: そうですか。アリさんのですか。 B: いいえ、違います。田中さんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "đĩa CD",
+              "từ điển",
               "máy ảnh",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "đĩa CD",
-            "explanation": "Nhân vật hỏi '何の しーでぃーですか' (đồ vật là đĩa CD)."
+            "corr": "từ điển",
+            "explanation": "Nhân vật hỏi '何の じしょですか' (đồ vật là từ điển)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -40261,7 +40253,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Đức",
-            "explanation": "Người B nói 'どいつごの しーでぃーです' (bằng tiếng Đức)."
+            "explanation": "Người B nói 'どいつごの じしょです' (bằng tiếng Đức)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -40275,7 +40267,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。たなかさんのです'."
           }
         ],
-        "audio_text_vietnamese": "アリ hỏi: Đó là đĩa CD về cái gì thế?\n田中 trả lời: Đây là đĩa CD tiếng Đức.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "アリ hỏi: Đó là từ điển về cái gì thế?\n田中 trả lời: Đây là từ điển tiếng Đức.\nアリ hỏi tiếp: Thế à. Của bạn phải không?\n田中 trả lời: Không, nhầm rồi. Của tôi đấy."
       },
       {
         "id": 37,
@@ -40402,19 +40394,19 @@ const lessonReviews = [
       },
       {
         "id": 40,
-        "audio_text_kana": "きむらさん、それは なんの こんぴゅーたーですか。 B: ワットさん、これは えいごの こんぴゅーたーです。 A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
-        "audio_text_kanji": "木村さん、それは 何の こんぴゅーたーですか。 B: ワットさん、これは えいごの こんぴゅーたーです。 A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
+        "audio_text_kana": "きむらさん、それは なんの てちょうですか。 B: ワットさん、これは えいごの てちょうです。A: そうですか。きむらさんのですか。 B: いいえ、ちがいます。ワットさんのです。",
+        "audio_text_kanji": "木村さん、それは 何の てちょうですか。 B: ワットさん、これは えいごの てちょうです。A: そうですか。木村さんのですか。 B: いいえ、違います。ワットさんのです。",
         "questions": [
           {
             "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
             "opts": [
-              "máy vi tính",
+              "sổ tay",
               "ghế",
               "Tivi",
               "Ô tô"
             ],
-            "corr": "máy vi tính",
-            "explanation": "Nhân vật hỏi '何の こんぴゅーたーですか' (đồ vật là máy vi tính)."
+            "corr": "sổ tay",
+            "explanation": "Nhân vật hỏi '何の てちょうですか' (đồ vật là sổ tay)."
           },
           {
             "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
@@ -40425,7 +40417,7 @@ const lessonReviews = [
               "Tiếng Hàn"
             ],
             "corr": "tiếng Anh",
-            "explanation": "Người B nói 'えいごの こんぴゅーたーです' (bằng tiếng Anh)."
+            "explanation": "Người B nói 'えいごの てちょうです' (bằng tiếng Anh)."
           },
           {
             "q": "Đồ vật đó thực sự là của ai?",
@@ -40439,7 +40431,7 @@ const lessonReviews = [
             "explanation": "Người B khẳng định 'いいえ、ちがいます。ワットさんのです'."
           }
         ],
-        "audio_text_vietnamese": "木村 hỏi: Đó là máy vi tính về cái gì thế?\nワット trả lời: Đây là máy vi tính tiếng Anh.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy."
+        "audio_text_vietnamese": "木村 hỏi: Đó là sổ tay về cái gì thế?\nワット trả lời: Đây là sổ tay tiếng Anh.\n木村 hỏi tiếp: Thế à. Của bạn phải không?\nワット trả lời: Không, nhầm rồi. Của tôi đấy."
       }
     ],
     "dictations": [
@@ -40471,19 +40463,6 @@ const lessonReviews = [
       },
       {
         "id": 3,
-        "question_audio": "この てちょうは すぺいんごの です。",
-        "correct_answers": [
-          "この てちょうは すぺいんごの です",
-          "kono techō wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái sổ tay này là bằng tiếng Tây Ban Nha",
-          "Cái sổ tay này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái sổ tay này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 4,
         "question_audio": "いいえ、ちがいます。",
         "correct_answers": [
           "iie, chigaimasu",
@@ -40497,7 +40476,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Không, không phải/nhầm rồi."
       },
       {
-        "id": 5,
+        "id": 4,
         "question_audio": "これは わたしの かーど です。",
         "correct_answers": [
           "これは わたしの かーど です",
@@ -40510,7 +40489,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là thẻ của tôi."
       },
       {
-        "id": 6,
+        "id": 5,
         "question_audio": "その えんぴつは イーさんのですか。",
         "correct_answers": [
           "その えんぴつは イーさんのですか",
@@ -40523,20 +40502,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái bút chì đó là của anh/chị イー phải không?"
       },
       {
-        "id": 7,
-        "question_audio": "この しゃーぷぺんしるは すぺいんごの です。",
-        "correct_answers": [
-          "この しゃーぷぺんしるは すぺいんごの です",
-          "kono shāpupenshiru wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái bút chì kim này là bằng tiếng Tây Ban Nha",
-          "Cái bút chì kim này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái bút chì kim này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 8,
+        "id": 6,
         "question_audio": "これは わたしの とけい です。",
         "correct_answers": [
           "これは わたしの とけい です",
@@ -40549,7 +40515,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là đồng hồ của tôi."
       },
       {
-        "id": 9,
+        "id": 7,
         "question_audio": "その かさは きむらさんのですか。",
         "correct_answers": [
           "その かさは きむらさんのですか",
@@ -40562,20 +40528,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái ô đó là của anh/chị 木村 phải không?"
       },
       {
-        "id": 10,
-        "question_audio": "この しーでぃーは すぺいんごの です。",
-        "correct_answers": [
-          "この しーでぃーは すぺいんごの です",
-          "kono shīdī wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái đĩa CD này là bằng tiếng Tây Ban Nha",
-          "Cái đĩa CD này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái đĩa CD này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 11,
+        "id": 8,
         "question_audio": "これは わたしの らじお です。",
         "correct_answers": [
           "これは わたしの らじお です",
@@ -40588,7 +40541,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là đài của tôi."
       },
       {
-        "id": 12,
+        "id": 9,
         "question_audio": "その かめらは シュミットさんのですか。",
         "correct_answers": [
           "その かめらは シュミットさんのですか",
@@ -40601,20 +40554,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái máy ảnh đó là của anh/chị シュミット phải không?"
       },
       {
-        "id": 13,
-        "question_audio": "この じどうしゃは すぺいんごの です。",
-        "correct_answers": [
-          "この じどうしゃは すぺいんごの です",
-          "kono jidōsha wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái ô tô này là bằng tiếng Tây Ban Nha",
-          "Cái ô tô này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái ô tô này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 14,
+        "id": 10,
         "question_audio": "これは わたしの いす です。",
         "correct_answers": [
           "これは わたしの いす です",
@@ -40627,7 +40567,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là ghế của tôi."
       },
       {
-        "id": 15,
+        "id": 11,
         "question_audio": "その ちょこれーとは アリさんのですか。",
         "correct_answers": [
           "その ちょこれーとは アリさんのですか",
@@ -40640,20 +40580,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái sô-cô-la đó là của anh/chị アリ phải không?"
       },
       {
-        "id": 16,
-        "question_audio": "この おみやげは すぺいんごの です。",
-        "correct_answers": [
-          "この おみやげは すぺいんごの です",
-          "kono omiyage wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái quà lưu niệm này là bằng tiếng Tây Ban Nha",
-          "Cái quà lưu niệm này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái quà lưu niệm này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 17,
+        "id": 12,
         "question_audio": "これは わたしの じしょ です。",
         "correct_answers": [
           "これは わたしの じしょ です",
@@ -40666,7 +40593,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là từ điển của tôi."
       },
       {
-        "id": 18,
+        "id": 13,
         "question_audio": "その ざっしは ミラーさんのですか。",
         "correct_answers": [
           "その ざっしは ミラーさんのですか",
@@ -40679,20 +40606,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái tạp chí đó là của anh/chị ミラー phải không?"
       },
       {
-        "id": 19,
-        "question_audio": "この のーとは すぺいんごの です。",
-        "correct_answers": [
-          "この のーとは すぺいんごの です",
-          "kono nōto wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái vở này là bằng tiếng Tây Ban Nha",
-          "Cái vở này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái vở này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 20,
+        "id": 14,
         "question_audio": "これは わたしの めいし です。",
         "correct_answers": [
           "これは わたしの めいし です",
@@ -40705,7 +40619,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là danh thiếp của tôi."
       },
       {
-        "id": 21,
+        "id": 15,
         "question_audio": "その かーどは ワンさんのですか。",
         "correct_answers": [
           "その かーどは ワンさんのですか",
@@ -40718,20 +40632,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái thẻ đó là của anh/chị ワン phải không?"
       },
       {
-        "id": 22,
-        "question_audio": "この ぼーるぺんは すぺいんごの です。",
-        "correct_answers": [
-          "この ぼーるぺんは すぺいんごの です",
-          "kono bōrupen wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái bút bi này là bằng tiếng Tây Ban Nha",
-          "Cái bút bi này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái bút bi này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 23,
+        "id": 16,
         "question_audio": "これは わたしの かぎ です。",
         "correct_answers": [
           "これは わたしの かぎ です",
@@ -40744,7 +40645,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là chìa khóa của tôi."
       },
       {
-        "id": 24,
+        "id": 17,
         "question_audio": "その とけいは やまださんのですか。",
         "correct_answers": [
           "その とけいは やまださんのですか",
@@ -40757,20 +40658,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái đồng hồ đó là của anh/chị 山田 phải không?"
       },
       {
-        "id": 25,
-        "question_audio": "この かばんは すぺいんごの です。",
-        "correct_answers": [
-          "この かばんは すぺいんごの です",
-          "kono kaban wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái cặp sách này là bằng tiếng Tây Ban Nha",
-          "Cái cặp sách này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái cặp sách này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 26,
+        "id": 18,
         "question_audio": "これは わたしの てれび です。",
         "correct_answers": [
           "これは わたしの てれび です",
@@ -40783,7 +40671,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là tivi của tôi."
       },
       {
-        "id": 27,
+        "id": 19,
         "question_audio": "その らじおは サントスさんのですか。",
         "correct_answers": [
           "その らじおは サントスさんのですか",
@@ -40796,20 +40684,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái đài đó là của anh/chị サントス phải không?"
       },
       {
-        "id": 28,
-        "question_audio": "この こんぴゅーたーは すぺいんごの です。",
-        "correct_answers": [
-          "この こんぴゅーたーは すぺいんごの です",
-          "kono konpyūtā wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái máy vi tính này là bằng tiếng Tây Ban Nha",
-          "Cái máy vi tính này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái máy vi tính này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 29,
+        "id": 20,
         "question_audio": "これは わたしの つくえ です。",
         "correct_answers": [
           "これは わたしの つくえ です",
@@ -40822,7 +40697,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là bàn của tôi."
       },
       {
-        "id": 30,
+        "id": 21,
         "question_audio": "その いすは カリナさんのですか。",
         "correct_answers": [
           "その いすは カリナさんのですか",
@@ -40835,20 +40710,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái ghế đó là của anh/chị カリナ phải không?"
       },
       {
-        "id": 31,
-        "question_audio": "この こーひーは すぺいんごの です。",
-        "correct_answers": [
-          "この こーひーは すぺいんごの です",
-          "kono kōhī wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái cà phê này là bằng tiếng Tây Ban Nha",
-          "Cái cà phê này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái cà phê này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 32,
+        "id": 22,
         "question_audio": "これは わたしの ほん です。",
         "correct_answers": [
           "これは わたしの ほん です",
@@ -40861,7 +40723,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là sách của tôi."
       },
       {
-        "id": 33,
+        "id": 23,
         "question_audio": "その じしょは さとうさんのですか。",
         "correct_answers": [
           "その じしょは さとうさんのですか",
@@ -40874,20 +40736,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái từ điển đó là của anh/chị 佐藤 phải không?"
       },
       {
-        "id": 34,
-        "question_audio": "この しんぶんは すぺいんごの です。",
-        "correct_answers": [
-          "この しんぶんは すぺいんごの です",
-          "kono shinbun wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái báo này là bằng tiếng Tây Ban Nha",
-          "Cái báo này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái báo này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 35,
+        "id": 24,
         "question_audio": "これは わたしの てちょう です。",
         "correct_answers": [
           "これは わたしの てちょう です",
@@ -40900,7 +40749,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là sổ tay của tôi."
       },
       {
-        "id": 36,
+        "id": 25,
         "question_audio": "その めいしは ワットさんのですか。",
         "correct_answers": [
           "その めいしは ワットさんのですか",
@@ -40913,20 +40762,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái danh thiếp đó là của anh/chị ワット phải không?"
       },
       {
-        "id": 37,
-        "question_audio": "この えんぴつは すぺいんごの です。",
-        "correct_answers": [
-          "この えんぴつは すぺいんごの です",
-          "kono enpitsu wa supeingo no desu"
-        ],
-        "vietnamese_answers": [
-          "Cái bút chì này là bằng tiếng Tây Ban Nha",
-          "Cái bút chì này bằng tiếng Tây Ban Nha"
-        ],
-        "vietnamese_meaning": "Cái bút chì này bằng tiếng Tây Ban Nha."
-      },
-      {
-        "id": 38,
+        "id": 26,
         "question_audio": "これは わたしの しゃーぷぺんしる です。",
         "correct_answers": [
           "これは わたしの しゃーぷぺんしる です",
@@ -40939,7 +40775,7 @@ const lessonReviews = [
         "vietnamese_meaning": "Đây là bút chì kim của tôi."
       },
       {
-        "id": 39,
+        "id": 27,
         "question_audio": "その かぎは ナムさんのですか。",
         "correct_answers": [
           "その かぎは ナムさんのですか",
@@ -40952,17 +40788,173 @@ const lessonReviews = [
         "vietnamese_meaning": "Cái chìa khóa đó là của anh/chị ナム phải không?"
       },
       {
-        "id": 40,
-        "question_audio": "この かさは すぺいんごの です。",
+        "id": 28,
+        "question_audio": "これは わたしの しーでぃー です。",
         "correct_answers": [
-          "この かさは すぺいんごの です",
-          "kono kasa wa supeingo no desu"
+          "これは わたしの しーでぃー です",
+          "kore wa watashi no shīdī desu"
         ],
         "vietnamese_answers": [
-          "Cái ô này là bằng tiếng Tây Ban Nha",
-          "Cái ô này bằng tiếng Tây Ban Nha"
+          "Đây là đĩa CD của tôi",
+          "Cái này là đĩa CD của tôi"
         ],
-        "vietnamese_meaning": "Cái ô này bằng tiếng Tây Ban Nha."
+        "vietnamese_meaning": "Đây là đĩa CD của tôi."
+      },
+      {
+        "id": 29,
+        "question_audio": "その てれびは たなかさんのですか。",
+        "correct_answers": [
+          "その てれびは たなかさんのですか",
+          "sono terebi wa tanaka san no desu ka"
+        ],
+        "vietnamese_answers": [
+          "Cái tivi đó là của anh 田中 phải không",
+          "Cái tivi đó là của chị 田中 phải không"
+        ],
+        "vietnamese_meaning": "Cái tivi đó là của anh/chị 田中 phải không?"
+      },
+      {
+        "id": 30,
+        "question_audio": "これは わたしの じどうしゃ です。",
+        "correct_answers": [
+          "これは わたしの じどうしゃ です",
+          "kore wa watashi no jidōsha desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là ô tô của tôi",
+          "Cái này là ô tô của tôi"
+        ],
+        "vietnamese_meaning": "Đây là ô tô của tôi."
+      },
+      {
+        "id": 31,
+        "question_audio": "その つくえは タワポンさんのですか。",
+        "correct_answers": [
+          "その つくえは タワポンさんのですか",
+          "sono tsukue wa tawapon san no desu ka"
+        ],
+        "vietnamese_answers": [
+          "Cái bàn đó là của anh タワポン phải không",
+          "Cái bàn đó là của chị タワポン phải không"
+        ],
+        "vietnamese_meaning": "Cái bàn đó là của anh/chị タワポン phải không?"
+      },
+      {
+        "id": 32,
+        "question_audio": "これは わたしの おみやげ です。",
+        "correct_answers": [
+          "これは わたしの おみやげ です",
+          "kore wa watashi no omiyage desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là quà lưu niệm của tôi",
+          "Cái này là quà lưu niệm của tôi"
+        ],
+        "vietnamese_meaning": "Đây là quà lưu niệm của tôi."
+      },
+      {
+        "id": 33,
+        "question_audio": "その ほんは イーさんのですか。",
+        "correct_answers": [
+          "その ほんは イーさんのですか",
+          "sono hon wa ii san no desu ka"
+        ],
+        "vietnamese_answers": [
+          "Cái sách đó là của anh イー phải không",
+          "Cái sách đó là của chị イー phải không"
+        ],
+        "vietnamese_meaning": "Cái sách đó là của anh/chị イー phải không?"
+      },
+      {
+        "id": 34,
+        "question_audio": "これは わたしの のーと です。",
+        "correct_answers": [
+          "これは わたしの のーと です",
+          "kore wa watashi no nōto desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là vở của tôi",
+          "Cái này là vở của tôi"
+        ],
+        "vietnamese_meaning": "Đây là vở của tôi."
+      },
+      {
+        "id": 35,
+        "question_audio": "その てちょうは きむらさんのですか。",
+        "correct_answers": [
+          "その てちょうは きむらさんのですか",
+          "sono techō wa kimura san no desu ka"
+        ],
+        "vietnamese_answers": [
+          "Cái sổ tay đó là của anh 木村 phải không",
+          "Cái sổ tay đó là của chị 木村 phải không"
+        ],
+        "vietnamese_meaning": "Cái sổ tay đó là của anh/chị 木村 phải không?"
+      },
+      {
+        "id": 36,
+        "question_audio": "これは わたしの ぼーるぺん です。",
+        "correct_answers": [
+          "これは わたしの ぼーるぺん です",
+          "kore wa watashi no bōrupen desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là bút bi của tôi",
+          "Cái này là bút bi của tôi"
+        ],
+        "vietnamese_meaning": "Đây là bút bi của tôi."
+      },
+      {
+        "id": 37,
+        "question_audio": "その しゃーぷぺんしるは シュミットさんのですか。",
+        "correct_answers": [
+          "その しゃーぷぺんしるは シュミットさんのですか",
+          "sono shāpupenshiru wa shumitto san no desu ka"
+        ],
+        "vietnamese_answers": [
+          "Cái bút chì kim đó là của anh シュミット phải không",
+          "Cái bút chì kim đó là của chị シュミット phải không"
+        ],
+        "vietnamese_meaning": "Cái bút chì kim đó là của anh/chị シュミット phải không?"
+      },
+      {
+        "id": 38,
+        "question_audio": "これは わたしの かばん です。",
+        "correct_answers": [
+          "これは わたしの かばん です",
+          "kore wa watashi no kaban desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cặp sách của tôi",
+          "Cái này là cặp sách của tôi"
+        ],
+        "vietnamese_meaning": "Đây là cặp sách của tôi."
+      },
+      {
+        "id": 39,
+        "question_audio": "その しーでぃーは アリさんのですか。",
+        "correct_answers": [
+          "その しーでぃーは アリさんのですか",
+          "sono shīdī wa ari san no desu ka"
+        ],
+        "vietnamese_answers": [
+          "Cái đĩa CD đó là của anh アリ phải không",
+          "Cái đĩa CD đó là của chị アリ phải không"
+        ],
+        "vietnamese_meaning": "Cái đĩa CD đó là của anh/chị アリ phải không?"
+      },
+      {
+        "id": 40,
+        "question_audio": "これは わたしの こんぴゅーたー です。",
+        "correct_answers": [
+          "これは わたしの こんぴゅーたー です",
+          "kore wa watashi no konpyūtā desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là máy vi tính của tôi",
+          "Cái này là máy vi tính của tôi"
+        ],
+        "vietnamese_meaning": "Đây là máy vi tính của tôi."
       }
     ]
   }
