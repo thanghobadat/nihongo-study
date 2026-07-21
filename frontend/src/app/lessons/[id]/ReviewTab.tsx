@@ -60,8 +60,107 @@ export default function ReviewTab({
   const router = useRouter();
   const [reviewSelectedType, setReviewSelectedType] = useState<string>('translation');
   const [reviewIndex, setReviewIndex] = useState<number>(0);
+  const [savedSessions, setSavedSessions] = useState<Record<string, any>>({});
+  const [showHistoryTable, setShowHistoryTable] = useState<boolean>(true);
 
+  const storageKey = selectedLessonId ? `nihongo_review_state_lesson_${selectedLessonId}` : `nihongo_review_state_combined`;
+
+  // 1. Tự động nạp danh sách tiến trình các dạng bài từ LocalStorage khi nạp dữ liệu
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const savedRaw = localStorage.getItem(storageKey);
+        if (savedRaw) {
+          const map = JSON.parse(savedRaw);
+          if (map && typeof map === 'object') {
+            setSavedSessions(map);
+          } else {
+            setSavedSessions({});
+          }
+        } else {
+          setSavedSessions({});
+        }
+      } catch (err) {
+        setSavedSessions({});
+      }
+    }
+  }, [storageKey, reviewData]);
+
+  // 2. Tự động lưu tiến trình của DẠNG BÀI ĐANG CHỌN vào savedSessions và LocalStorage
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && (reviewStep === 'test' || reviewStep === 'result') && reviewSelectedType) {
+      if (reviewQuestions.length > 0) {
+        const typeState = {
+          reviewQuestions,
+          reviewAnswers,
+          reviewGraded,
+          reviewFeedback,
+          reviewScore,
+          reviewTotal,
+          reviewIndex,
+          reviewStep,
+          timestamp: Date.now()
+        };
+        setSavedSessions(prev => {
+          const updated = { ...prev, [reviewSelectedType]: typeState };
+          localStorage.setItem(storageKey, JSON.stringify(updated));
+          return updated;
+        });
+      }
+    }
+  }, [reviewQuestions, reviewAnswers, reviewGraded, reviewFeedback, reviewScore, reviewTotal, reviewIndex, reviewStep, reviewSelectedType, storageKey]);
+
+  // 3. Hàm Master Reset xóa sạch cả 4 dạng bài và quay về trang chọn dạng
+  const masterResetAll = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(storageKey);
+    }
+    setSavedSessions({});
+    setReviewQuestions([]);
+    setReviewAnswers({});
+    setReviewGraded({});
+    setReviewFeedback({});
+    setReviewScore(0);
+    setReviewTotal(0);
+    setReviewIndex(0);
+    setReviewStep('setup');
+  };
+
+  // 4. Hàm Reset riêng 1 dạng bài
+  const resetSingleType = (type: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setSavedSessions(prev => {
+      const updated = { ...prev };
+      delete updated[type];
+      if (Object.keys(updated).length === 0) {
+        if (typeof window !== 'undefined') localStorage.removeItem(storageKey);
+      } else {
+        if (typeof window !== 'undefined') localStorage.setItem(storageKey, JSON.stringify(updated));
+      }
+      return updated;
+    });
+    startFreshType(type);
+  };
+
+  // 5. Mở dạng bài tập (Khôi phục nếu có sẵn, hoặc tạo tráo mới từ đầu)
   const startReviewTest = (type: string) => {
+    setReviewSelectedType(type);
+    if (savedSessions[type] && Array.isArray(savedSessions[type].reviewQuestions) && savedSessions[type].reviewQuestions.length > 0) {
+      const saved = savedSessions[type];
+      setReviewQuestions(saved.reviewQuestions);
+      setReviewAnswers(saved.reviewAnswers || {});
+      setReviewGraded(saved.reviewGraded || {});
+      setReviewFeedback(saved.reviewFeedback || {});
+      setReviewScore(saved.reviewScore || 0);
+      setReviewTotal(saved.reviewTotal || 0);
+      setReviewIndex(saved.reviewIndex || 0);
+      setReviewStep(saved.reviewStep || 'test');
+    } else {
+      startFreshType(type);
+    }
+  };
+
+  const startFreshType = (type: string) => {
     setReviewSelectedType(type);
     setReviewIndex(0);
     if (reviewData) {
@@ -76,14 +175,12 @@ export default function ReviewTab({
         sourceList = reviewData.dictations;
       }
 
-      // Đưa vào pool kèm key và type
       const pool = sourceList.map((item: any) => ({
         type,
         originalData: item,
         key: `${type}_${item.id || Math.random()}`
       }));
 
-      // Fisher-Yates shuffle
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -109,6 +206,8 @@ export default function ReviewTab({
       loadReviewData();
     }
   };
+
+
 
   const gradeTranslation = (q: any) => {
     const key = q.key;
@@ -243,19 +342,30 @@ export default function ReviewTab({
             Luyện tập sâu từ vựng & ngữ pháp qua các dạng bài tập phản xạ chuyên biệt
           </p>
         </div>
-        <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 p-1 rounded-xl">
-          <button
-            onClick={() => setReviewShowKanji(false)}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${!reviewShowKanji ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Chữ Kana
-          </button>
-          <button
-            onClick={() => setReviewShowKanji(true)}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${reviewShowKanji ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Chữ Hán
-          </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {Object.keys(savedSessions).length > 0 && (
+            <button
+              onClick={() => masterResetAll()}
+              title="Xóa tiến trình làm dở của cả 4 dạng bài tập"
+              className="px-3.5 py-1.5 bg-rose-600/20 hover:bg-rose-600/40 text-rose-300 border border-rose-500/30 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-sm"
+            >
+              🔄 Master Reset (Khôi phục 4 dạng)
+            </button>
+          )}
+          <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 p-1 rounded-xl">
+            <button
+              onClick={() => setReviewShowKanji(false)}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${!reviewShowKanji ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
+            >
+              Chữ Kana
+            </button>
+            <button
+              onClick={() => setReviewShowKanji(true)}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${reviewShowKanji ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
+            >
+              Chữ Hán
+            </button>
+          </div>
         </div>
       </div>
 
@@ -268,9 +378,28 @@ export default function ReviewTab({
           <div className="space-y-2">
             <h3 className="text-lg font-bold text-white">Bắt đầu lượt ôn tập theo dạng</h3>
             <p className="text-slate-400 text-sm max-w-md mx-auto">
-              Hãy chọn 1 dạng bài tập bên dưới để ôn tập chuyên sâu. Hệ thống sẽ tráo ngẫu nhiên toàn bộ câu hỏi của dạng đó.
+              Hãy chọn 1 dạng bài tập bên dưới. Hệ thống lưu tiến trình riêng biệt cho từng dạng và cho phép mở lại câu đang làm dở bất kỳ lúc nào.
             </p>
           </div>
+
+          {Object.keys(savedSessions).length > 0 && (
+            <div className="bg-indigo-950/60 border border-indigo-800/80 p-4 rounded-xl flex items-center justify-between gap-4 flex-wrap text-left max-w-2xl mx-auto shadow-inner">
+              <div className="space-y-0.5">
+                <div className="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
+                  <span>✨ Tiến trình bài làm được lưu riêng cho từng dạng bài</span>
+                </div>
+                <p className="text-slate-400 text-xs">
+                  Bấm vào từng dạng bài có đánh dấu huy hiệu dở bên dưới để làm tiếp câu dở, hoặc bấm Master Reset để làm lại cả 4 dạng.
+                </p>
+              </div>
+              <button
+                onClick={() => masterResetAll()}
+                className="px-3.5 py-2 bg-rose-600/20 hover:bg-rose-600/40 text-rose-300 border border-rose-500/30 text-xs font-bold rounded-xl transition-all active:scale-95 cursor-pointer"
+              >
+                🔄 Master Reset (Xóa hết 4 dạng)
+              </button>
+            </div>
+          )}
 
           {reviewLoading ? (
             <div className="text-indigo-400 text-sm font-semibold flex items-center justify-center gap-2 py-4">
@@ -312,20 +441,56 @@ export default function ReviewTab({
                     icon: '✍️',
                     color: 'border-purple-500/20 hover:border-purple-500/80 hover:bg-purple-500/5 text-purple-400'
                   }
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    disabled={reviewLoading}
-                    onClick={() => startReviewTest(item.id)}
-                    className={`flex items-start gap-4 p-5 rounded-2xl border bg-slate-900/40 text-left transition-all active:scale-98 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${item.color}`}
-                  >
-                    <span className="text-3xl flex-shrink-0">{item.icon}</span>
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-bold text-white">{item.title}</h4>
-                      <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                ].map((item) => {
+                  const saved = savedSessions[item.id];
+                  const hasProgress = saved && saved.reviewQuestions && saved.reviewQuestions.length > 0;
+                  const currentIdx = saved ? saved.reviewIndex + 1 : 0;
+                  const totalQ = saved ? saved.reviewQuestions.length : 0;
+
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => startReviewTest(item.id)}
+                      className={`flex flex-col justify-between p-5 rounded-2xl border bg-slate-900/40 text-left transition-all active:scale-98 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${item.color} relative overflow-hidden group`}
+                    >
+                      <div className="flex items-start gap-4">
+                        <span className="text-3xl flex-shrink-0">{item.icon}</span>
+                        <div className="space-y-1">
+                          <h4 className="text-sm font-bold text-white flex items-center justify-between gap-2">
+                            <span>{item.title}</span>
+                          </h4>
+                          <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                        </div>
+                      </div>
+
+                      {hasProgress ? (
+                        <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                          <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-extrabold flex items-center gap-1">
+                            📍 Đang ở câu {currentIdx}/{totalQ}
+                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-indigo-400 font-bold group-hover:underline">
+                              ▶️ Làm tiếp
+                            </span>
+                            <button
+                              onClick={(e) => resetSingleType(item.id, e)}
+                              title="Xóa vết riêng dạng này và xáo lại từ đầu"
+                              className="p-1 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 rounded transition-all"
+                            >
+                              🔄
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="mt-4 pt-3 border-t border-slate-800/40 text-right">
+                          <span className="text-slate-500 text-xs group-hover:text-slate-300 transition-all font-semibold">
+                            Bắt đầu ➔
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  </button>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -661,7 +826,7 @@ export default function ReviewTab({
                               <span className="w-5 h-5 rounded-full bg-slate-855 text-[10px] text-slate-300 border border-slate-700 flex items-center justify-center font-bold">
                                 {subIdx + 1}
                               </span>
-                              <span>{subQ.question}</span>
+                              <span>{subQ.q || subQ.question || subQ.question_kanji || subQ.question_kana}</span>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-7">
@@ -823,6 +988,182 @@ export default function ReviewTab({
                 )
               )}
             </div>
+
+            {/* COLLAPSIBLE ANSWER LOG TABLE (Bảng lịch sử đáp án các câu đã làm) */}
+            {(() => {
+              const answeredQuestions = reviewQuestions.slice(0, reviewIndex + (isQuestionGraded ? 1 : 0)).filter(q => {
+                if (q.type === 'listening') return reviewGraded[`${q.key}_all`] !== undefined;
+                if (q.type === 'dialogue') return reviewGraded[`${q.key}_b1`] !== undefined;
+                return reviewGraded[q.key] !== undefined || (reviewAnswers[q.key] && reviewAnswers[q.key].trim() !== '');
+              });
+
+              if (answeredQuestions.length === 0) return null;
+
+              return (
+                <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-xl overflow-hidden mt-6">
+                  {/* Accordion Header Bar */}
+                  <button
+                    onClick={() => setShowHistoryTable(!showHistoryTable)}
+                    className="w-full p-4 bg-slate-950/80 hover:bg-slate-900 border-b border-slate-800 flex justify-between items-center text-xs font-bold text-slate-200 transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-indigo-400 text-sm">📋</span>
+                      <span>BẢNG LỊCH SỬ CÂU ĐÃ LÀM ({answeredQuestions.length} câu)</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-indigo-300 font-semibold">
+                      <span>{showHistoryTable ? '▲ Thu gọn' : '▼ Mở rộng xem chi tiết'}</span>
+                    </div>
+                  </button>
+
+                  {/* Accordion Body Content */}
+                  {showHistoryTable && (
+                    <div className="p-4 space-y-3">
+                      {/* Desktop Table View */}
+                      <div className="hidden md:block overflow-x-auto">
+                        <table className="w-full text-left border-collapse text-xs">
+                          <thead>
+                            <tr className="border-b border-slate-800 text-slate-400 font-bold uppercase text-[11px]">
+                              <th className="py-2.5 px-3 w-16">Câu số</th>
+                              <th className="py-2.5 px-3 w-1/4">Câu trả lời của tôi</th>
+                              <th className="py-2.5 px-3 w-1/4">Đáp án đúng</th>
+                              <th className="py-2.5 px-3">Giải thích chi tiết</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-800/60">
+                            {answeredQuestions.map((q, idx) => {
+                              const originalIdx = reviewQuestions.findIndex(item => item.key === q.key);
+                              const qNum = originalIdx >= 0 ? originalIdx + 1 : idx + 1;
+                              const currentData = q.originalData;
+
+                              let isCorrect = false;
+                              let userAnsStr = '';
+                              let correctAnsStr = '';
+                              let explanationStr = '';
+
+                              if (q.type === 'translation') {
+                                isCorrect = !!reviewGraded[q.key];
+                                userAnsStr = reviewAnswers[q.key] || '(Chưa gõ)';
+                                const list = currentData.correct_answers || currentData.answers || [];
+                                correctAnsStr = list.join(' / ');
+                                explanationStr = reviewFeedback[q.key] || '';
+                              } else if (q.type === 'dialogue') {
+                                const b1 = reviewGraded[`${q.key}_b1`];
+                                const b2 = reviewGraded[`${q.key}_b2`];
+                                isCorrect = !!(b1 && b2);
+                                userAnsStr = `(1) ${reviewAnswers[`${q.key}_b1`] || '_'} | (2) ${reviewAnswers[`${q.key}_b2`] || '_'}`;
+                                correctAnsStr = `(1) ${currentData.blanks?.blank1?.correct} | (2) ${currentData.blanks?.blank2?.correct}`;
+                                explanationStr = currentData.blanks?.blank1?.explanation || '';
+                              } else if (q.type === 'listening') {
+                                const allSubCorrect = currentData.questions?.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`]);
+                                isCorrect = !!allSubCorrect;
+                                const userSubs = currentData.questions?.map((_: any, sIdx: number) => `Q${sIdx+1}: ${reviewAnswers[`${q.key}_q${sIdx}`] || '_'}`);
+                                userAnsStr = userSubs?.join(' | ');
+                                const corrSubs = currentData.questions?.map((sq: any, sIdx: number) => `Q${sIdx+1}: ${sq.corr || sq.correct}`);
+                                correctAnsStr = corrSubs?.join(' | ');
+                                const expSubs = currentData.questions?.map((sq: any, sIdx: number) => sq.explanation).filter(Boolean);
+                                explanationStr = expSubs?.join(' | ');
+                              } else if (q.type === 'dictation') {
+                                isCorrect = !!reviewGraded[q.key];
+                                userAnsStr = reviewAnswers[q.key] || '(Chưa gõ)';
+                                correctAnsStr = `${currentData.question_audio} ${currentData.vietnamese_meaning ? `(${currentData.vietnamese_meaning})` : ''}`;
+                                explanationStr = reviewFeedback[q.key] || '';
+                              }
+
+                              return (
+                                <tr key={idx} className="hover:bg-slate-850/40 transition-all">
+                                  <td className="py-3 px-3 font-bold text-white align-top">Câu {qNum}</td>
+                                  <td className="py-3 px-3 align-top">
+                                    <div className="space-y-1">
+                                      <span className={`inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-md ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                                        {isCorrect ? '🟢 Đúng' : '🔴 Sai'}
+                                      </span>
+                                      <div className="text-slate-200 font-semibold break-all">{userAnsStr}</div>
+                                    </div>
+                                  </td>
+                                  <td className="py-3 px-3 align-top text-emerald-300 font-semibold break-all">
+                                    {correctAnsStr}
+                                  </td>
+                                  <td className="py-3 px-3 align-top text-slate-350 text-xs leading-relaxed break-all">
+                                    {explanationStr || '(Không có giải thích)'}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Mobile Card List View */}
+                      <div className="block md:hidden space-y-3">
+                        {answeredQuestions.map((q, idx) => {
+                          const originalIdx = reviewQuestions.findIndex(item => item.key === q.key);
+                          const qNum = originalIdx >= 0 ? originalIdx + 1 : idx + 1;
+                          const currentData = q.originalData;
+
+                          let isCorrect = false;
+                          let userAnsStr = '';
+                          let correctAnsStr = '';
+                          let explanationStr = '';
+
+                          if (q.type === 'translation') {
+                            isCorrect = !!reviewGraded[q.key];
+                            userAnsStr = reviewAnswers[q.key] || '(Chưa gõ)';
+                            const list = currentData.correct_answers || currentData.answers || [];
+                            correctAnsStr = list.join(' / ');
+                            explanationStr = reviewFeedback[q.key] || '';
+                          } else if (q.type === 'dialogue') {
+                            const b1 = reviewGraded[`${q.key}_b1`];
+                            const b2 = reviewGraded[`${q.key}_b2`];
+                            isCorrect = !!(b1 && b2);
+                            userAnsStr = `(1) ${reviewAnswers[`${q.key}_b1`] || '_'} | (2) ${reviewAnswers[`${q.key}_b2`] || '_'}`;
+                            correctAnsStr = `(1) ${currentData.blanks?.blank1?.correct} | (2) ${currentData.blanks?.blank2?.correct}`;
+                            explanationStr = currentData.blanks?.blank1?.explanation || '';
+                          } else if (q.type === 'listening') {
+                            const allSubCorrect = currentData.questions?.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`]);
+                            isCorrect = !!allSubCorrect;
+                            const userSubs = currentData.questions?.map((_: any, sIdx: number) => `Q${sIdx+1}: ${reviewAnswers[`${q.key}_q${sIdx}`] || '_'}`);
+                            userAnsStr = userSubs?.join(' | ');
+                            const corrSubs = currentData.questions?.map((sq: any, sIdx: number) => `Q${sIdx+1}: ${sq.corr || sq.correct}`);
+                            correctAnsStr = corrSubs?.join(' | ');
+                            const expSubs = currentData.questions?.map((sq: any, sIdx: number) => sq.explanation).filter(Boolean);
+                            explanationStr = expSubs?.join(' | ');
+                          } else if (q.type === 'dictation') {
+                            isCorrect = !!reviewGraded[q.key];
+                            userAnsStr = reviewAnswers[q.key] || '(Chưa gõ)';
+                            correctAnsStr = `${currentData.question_audio} ${currentData.vietnamese_meaning ? `(${currentData.vietnamese_meaning})` : ''}`;
+                            explanationStr = reviewFeedback[q.key] || '';
+                          }
+
+                          return (
+                            <div key={idx} className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-850 space-y-2 text-xs">
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold text-white">Câu {qNum}</span>
+                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                                  {isCorrect ? '🟢 Đúng' : '🔴 Sai'}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="text-slate-400">Trả lời của tôi:</span>
+                                <p className="text-white font-semibold">{userAnsStr}</p>
+                              </div>
+                              <div>
+                                <span className="text-emerald-400 font-semibold">Đáp án đúng:</span>
+                                <p className="text-emerald-300 font-medium">{correctAnsStr}</p>
+                              </div>
+                              {explanationStr && (
+                                <div className="text-slate-400 pt-1 border-t border-slate-900">
+                                  <span>💡 Giải thích:</span> {explanationStr}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         );
       })()}
@@ -908,7 +1249,7 @@ export default function ReviewTab({
                         const subCorrect = reviewGraded[ansKey];
                         return (
                           <div key={sIdx} className="pl-2 border-l border-slate-800">
-                            <p className="font-medium text-slate-300">{sIdx + 1}. {subQ.question}</p>
+                            <p className="font-medium text-slate-300">{sIdx + 1}. {subQ.q || subQ.question || subQ.question_kanji || subQ.question_kana}</p>
                             <p className="text-slate-455">Đáp án: <span className="font-semibold text-slate-205">{reviewAnswers[ansKey] || '_'}</span> {subCorrect ? '✅' : '❌'}</p>
                             {!subCorrect && <p className="text-emerald-400 font-mono text-[10px]">Đúng: {subQ.corr || subQ.correct}</p>}
                           </div>
@@ -937,12 +1278,11 @@ export default function ReviewTab({
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
             <button
               onClick={() => {
-                loadReviewData();
-                setReviewStep('setup');
+                resetAndReshuffleAll();
               }}
-              className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-sm"
+              className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-sm flex items-center justify-center gap-1.5"
             >
-              🔁 Làm lượt mới (Đề mới)
+              🔄 Reset & Xáo trộn đề mới
             </button>
             <button
               onClick={() => {
