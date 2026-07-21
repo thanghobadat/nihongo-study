@@ -59,8 +59,8 @@ interface GrammarItem {
 export default function KnowledgeHubPage() {
   const router = useRouter();
 
-  const playAudio = (text) => {
-    playAudioWithFallback(text);
+  const playAudio = (text: string, kana?: string) => {
+    playAudioWithFallback(text, kana || text);
   };
 
   

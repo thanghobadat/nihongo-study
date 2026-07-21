@@ -7,9 +7,9 @@ interface ReviewTabProps {
   reviewData: any;
   reviewLoading: boolean;
   reviewStep: string;
-  setReviewStep: (step: string) => void;
+  setReviewStep: any;
   reviewQuestions: any[];
-  setReviewQuestions: (questions: any[]) => void;
+  setReviewQuestions: any;
   reviewAnswers: Record<string, string>;
   setReviewAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   reviewGraded: Record<string, boolean>;
@@ -23,10 +23,10 @@ interface ReviewTabProps {
   reviewShowKanji: boolean;
   setReviewShowKanji: (show: boolean) => void;
   loadReviewData: () => void;
-  playAudio: (text: string) => void;
+  playAudio: any;
   playDialogueAudio: (lines: any[]) => void;
   renderDiff: (userAns: string, correctAns: string) => React.ReactNode;
-  selectedLessonId: string;
+  selectedLessonId: any;
   calculateAccuracy: (user: string, correct: string) => number;
 }
 
