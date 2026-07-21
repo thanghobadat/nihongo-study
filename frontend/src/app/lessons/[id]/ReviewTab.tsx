@@ -1278,7 +1278,7 @@ export default function ReviewTab({
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
             <button
               onClick={() => {
-                resetAndReshuffleAll();
+                masterResetAll();
               }}
               className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-sm flex items-center justify-center gap-1.5"
             >
