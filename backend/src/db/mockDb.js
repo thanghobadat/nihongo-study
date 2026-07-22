@@ -11423,6 +11423,5225 @@ module.exports = {
           "vietnamese_meaning": "Đây là danh thiếp."
         }
       ]
+    },
+    {
+      "lesson_id": 3,
+      "translations": [
+        {
+          "id": 1,
+          "direction": "ja-to-vi",
+          "question_kana": "かいぎしつ は 2かい です。",
+          "question_kanji": "会議室 は 2階 です。",
+          "answers": [
+            "Phòng họp ở tầng 2",
+            "Phòng họp là ở tầng 2"
+          ]
+        },
+        {
+          "id": 2,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は うけつけ です。",
+          "question_kanji": "こちら は 受付 です。",
+          "answers": [
+            "Phía này là quầy tiếp tân",
+            "Hướng này là quầy tiếp tân",
+            "Đây là quầy tiếp tân"
+          ]
+        },
+        {
+          "id": 3,
+          "direction": "ja-to-vi",
+          "question_kana": "ろびー は どこ ですか。",
+          "question_kanji": "ロビー は どこ ですか。",
+          "answers": [
+            "Hành lang ở đâu thế",
+            "Hành lang ở đâu vậy",
+            "Hành lang ở đâu"
+          ]
+        },
+        {
+          "id": 4,
+          "direction": "ja-to-vi",
+          "question_kana": "シュミットさんの 会社 は どちら ですか。",
+          "question_kanji": "シュミットさんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh シュミット là công ty nào",
+            "Công ty của chị シュミット ở đâu",
+            "Công ty của シュミット là hướng nào"
+          ]
+        },
+        {
+          "id": 5,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は いたりあの くつ です。",
+          "question_kanji": "これ は イタリアの 靴 です。",
+          "answers": [
+            "Đây là giày của Ý",
+            "Cái này là giày sản xuất tại Ý",
+            "Cái này là giày của Ý"
+          ]
+        },
+        {
+          "id": 6,
+          "direction": "ja-to-vi",
+          "question_kana": "この ねくたい は いくら ですか。",
+          "question_kanji": "この ネクタイ は いくら ですか。",
+          "answers": [
+            "Cái cà vạt này bao nhiêu tiền",
+            "Quả cà vạt này bao nhiêu tiền",
+            "Cà vạt này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 7,
+          "direction": "ja-to-vi",
+          "question_kana": "えれべーたー は そこ です。",
+          "question_kanji": "エレベーター は そこ です。",
+          "answers": [
+            "Thang máy ở đó",
+            "Thang máy là ở đó"
+          ]
+        },
+        {
+          "id": 8,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は えすかれーたー です。",
+          "question_kanji": "ここ は エスカレーター です。",
+          "answers": [
+            "Đây là thang cuốn",
+            "Cái này là thang cuốn",
+            "Chỗ này là thang cuốn"
+          ]
+        },
+        {
+          "id": 9,
+          "direction": "ja-to-vi",
+          "question_kana": "ちか は ちか1かい です。",
+          "question_kanji": "地下 は 地下1階 です。",
+          "answers": [
+            "Tầng hầm ở tầng hầm 1",
+            "Tầng hầm là ở tầng hầm 1"
+          ]
+        },
+        {
+          "id": 10,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は うち です。",
+          "question_kanji": "こちら は うち です。",
+          "answers": [
+            "Phía này là nhà",
+            "Hướng này là nhà",
+            "Đây là nhà"
+          ]
+        },
+        {
+          "id": 11,
+          "direction": "ja-to-vi",
+          "question_kana": "きょうしつ は どこ ですか。",
+          "question_kanji": "教室 は どこ ですか。",
+          "answers": [
+            "Lớp học ở đâu thế",
+            "Lớp học ở đâu vậy",
+            "Lớp học ở đâu"
+          ]
+        },
+        {
+          "id": 12,
+          "direction": "ja-to-vi",
+          "question_kana": "きむらさんの 会社 は どちら ですか。",
+          "question_kanji": "木村さんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh 木村 là công ty nào",
+            "Công ty của chị 木村 ở đâu",
+            "Công ty của 木村 là hướng nào"
+          ]
+        },
+        {
+          "id": 13,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は いぎりすの たばこ です。",
+          "question_kanji": "これ は イギリスの たばこ です。",
+          "answers": [
+            "Đây là thuốc lá của Anh",
+            "Cái này là thuốc lá sản xuất tại Anh",
+            "Cái này là thuốc lá của Anh"
+          ]
+        },
+        {
+          "id": 14,
+          "direction": "ja-to-vi",
+          "question_kana": "この でんわ は いくら ですか。",
+          "question_kanji": "この 電話 は いくら ですか。",
+          "answers": [
+            "Cái điện thoại này bao nhiêu tiền",
+            "Quả điện thoại này bao nhiêu tiền",
+            "Điện thoại này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 15,
+          "direction": "ja-to-vi",
+          "question_kana": "うけつけ は そこ です。",
+          "question_kanji": "受付 は そこ です。",
+          "answers": [
+            "Quầy tiếp tân ở đó",
+            "Quầy tiếp tân là ở đó"
+          ]
+        },
+        {
+          "id": 16,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は ろびー です。",
+          "question_kanji": "ここ は ロビー です。",
+          "answers": [
+            "Đây là hành lang",
+            "Cái này là hành lang",
+            "Chỗ này là hành lang"
+          ]
+        },
+        {
+          "id": 17,
+          "direction": "ja-to-vi",
+          "question_kana": "へや は 3かい です。",
+          "question_kanji": "部屋 は 3階 です。",
+          "answers": [
+            "Căn phòng ở tầng 3",
+            "Căn phòng là ở tầng 3"
+          ]
+        },
+        {
+          "id": 18,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は といれ です。",
+          "question_kanji": "こちら は トイレ です。",
+          "answers": [
+            "Phía này là nhà vệ sinh",
+            "Hướng này là nhà vệ sinh",
+            "Đây là nhà vệ sinh"
+          ]
+        },
+        {
+          "id": 19,
+          "direction": "ja-to-vi",
+          "question_kana": "かいだん は どこ ですか。",
+          "question_kanji": "階段 は どこ ですか。",
+          "answers": [
+            "Cầu thang bộ ở đâu thế",
+            "Cầu thang bộ ở đâu vậy",
+            "Cầu thang bộ ở đâu"
+          ]
+        },
+        {
+          "id": 20,
+          "direction": "ja-to-vi",
+          "question_kana": "ナムさんの 会社 は どちら ですか。",
+          "question_kanji": "ナムさんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh ナム là công ty nào",
+            "Công ty của chị ナム ở đâu",
+            "Công ty của ナム là hướng nào"
+          ]
+        },
+        {
+          "id": 21,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は べとなむの ねくたい です。",
+          "question_kanji": "これ は ベトナムの ネクタイ です。",
+          "answers": [
+            "Đây là cà vạt của Việt Nam",
+            "Cái này là cà vạt sản xuất tại Việt Nam",
+            "Cái này là cà vạt của Việt Nam"
+          ]
+        },
+        {
+          "id": 22,
+          "direction": "ja-to-vi",
+          "question_kana": "この わいん は いくら ですか。",
+          "question_kanji": "この ワイン は いくら ですか。",
+          "answers": [
+            "Cái rượu vang này bao nhiêu tiền",
+            "Quả rượu vang này bao nhiêu tiền",
+            "Rượu vang này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 23,
+          "direction": "ja-to-vi",
+          "question_kana": "うち は そこ です。",
+          "question_kanji": "うち は そこ です。",
+          "answers": [
+            "Nhà ở đó",
+            "Nhà là ở đó"
+          ]
+        },
+        {
+          "id": 24,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は きょうしつ です。",
+          "question_kanji": "ここ は 教室 です。",
+          "answers": [
+            "Đây là lớp học",
+            "Cái này là lớp học",
+            "Chỗ này là lớp học"
+          ]
+        },
+        {
+          "id": 25,
+          "direction": "ja-to-vi",
+          "question_kana": "しょくどう は 1かい です。",
+          "question_kanji": "食堂 は 1階 です。",
+          "answers": [
+            "Nhà ăn ở tầng 1",
+            "Nhà ăn là ở tầng 1"
+          ]
+        },
+        {
+          "id": 26,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は じむしょ です。",
+          "question_kanji": "こちら は 事務所 です。",
+          "answers": [
+            "Phía này là văn phòng",
+            "Hướng này là văn phòng",
+            "Đây là văn phòng"
+          ]
+        },
+        {
+          "id": 27,
+          "direction": "ja-to-vi",
+          "question_kana": "かいぎしつ は どこ ですか。",
+          "question_kanji": "会議室 は どこ ですか。",
+          "answers": [
+            "Phòng họp ở đâu thế",
+            "Phòng họp ở đâu vậy",
+            "Phòng họp ở đâu"
+          ]
+        },
+        {
+          "id": 28,
+          "direction": "ja-to-vi",
+          "question_kana": "ワットさんの 会社 は どちら ですか。",
+          "question_kanji": "ワットさんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh ワット là công ty nào",
+            "Công ty của chị ワット ở đâu",
+            "Công ty của ワット là hướng nào"
+          ]
+        },
+        {
+          "id": 29,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は さくらだいがくの でんわ です。",
+          "question_kanji": "これ は さくら大学の 電話 です。",
+          "answers": [
+            "Đây là điện thoại của đại học Sakura",
+            "Cái này là điện thoại sản xuất tại đại học Sakura",
+            "Cái này là điện thoại của đại học Sakura"
+          ]
+        },
+        {
+          "id": 30,
+          "direction": "ja-to-vi",
+          "question_kana": "この くつ は いくら ですか。",
+          "question_kanji": "この 靴 は いくら ですか。",
+          "answers": [
+            "Cái giày này bao nhiêu tiền",
+            "Quả giày này bao nhiêu tiền",
+            "Giày này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 31,
+          "direction": "ja-to-vi",
+          "question_kana": "といれ は そこ です。",
+          "question_kanji": "トイレ は そこ です。",
+          "answers": [
+            "Nhà vệ sinh ở đó",
+            "Nhà vệ sinh là ở đó"
+          ]
+        },
+        {
+          "id": 32,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は かいだん です。",
+          "question_kanji": "ここ は 階段 です。",
+          "answers": [
+            "Đây là cầu thang bộ",
+            "Cái này là cầu thang bộ",
+            "Chỗ này là cầu thang bộ"
+          ]
+        },
+        {
+          "id": 33,
+          "direction": "ja-to-vi",
+          "question_kana": "えれべーたー は 4かい です。",
+          "question_kanji": "エレベーター は 4階 です。",
+          "answers": [
+            "Thang máy ở tầng 4",
+            "Thang máy là ở tầng 4"
+          ]
+        },
+        {
+          "id": 34,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は えすかれーたー です。",
+          "question_kanji": "こちら は エスカレーター です。",
+          "answers": [
+            "Phía này là thang cuốn",
+            "Hướng này là thang cuốn",
+            "Đây là thang cuốn"
+          ]
+        },
+        {
+          "id": 35,
+          "direction": "ja-to-vi",
+          "question_kana": "ちか は どこ ですか。",
+          "question_kanji": "地下 は どこ ですか。",
+          "answers": [
+            "Tầng hầm ở đâu thế",
+            "Tầng hầm ở đâu vậy",
+            "Tầng hầm ở đâu"
+          ]
+        },
+        {
+          "id": 36,
+          "direction": "ja-to-vi",
+          "question_kana": "さとうさんの 会社 は どちら ですか。",
+          "question_kanji": "佐藤さんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh 佐藤 là công ty nào",
+            "Công ty của chị 佐藤 ở đâu",
+            "Công ty của 佐藤 là hướng nào"
+          ]
+        },
+        {
+          "id": 37,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は IMCの わいん です。",
+          "question_kanji": "これ は IMCの ワイン です。",
+          "answers": [
+            "Đây là rượu vang của công ty IMC",
+            "Cái này là rượu vang sản xuất tại công ty IMC",
+            "Cái này là rượu vang của công ty IMC"
+          ]
+        },
+        {
+          "id": 38,
+          "direction": "ja-to-vi",
+          "question_kana": "この たばこ は いくら ですか。",
+          "question_kanji": "この たばこ は いくら ですか。",
+          "answers": [
+            "Cái thuốc lá này bao nhiêu tiền",
+            "Quả thuốc lá này bao nhiêu tiền",
+            "Thuốc lá này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 39,
+          "direction": "ja-to-vi",
+          "question_kana": "じむしょ は そこ です。",
+          "question_kanji": "事務所 は そこ です。",
+          "answers": [
+            "Văn phòng ở đó",
+            "Văn phòng là ở đó"
+          ]
+        },
+        {
+          "id": 40,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は かいぎしつ です。",
+          "question_kanji": "ここ は 会議室 です。",
+          "answers": [
+            "Đây là phòng họp",
+            "Cái này là phòng họp",
+            "Chỗ này là phòng họp"
+          ]
+        },
+        {
+          "id": 41,
+          "direction": "vi-to-ja",
+          "question": "Quầy tiếp tân ở tầng mấy thế?",
+          "answers": [
+            "うけつけは なんがいですか",
+            "uketsuke wa nangai desu ka",
+            "うけつけはなんがいですか",
+            "uketsukewanangaidesuka"
+          ]
+        },
+        {
+          "id": 42,
+          "direction": "vi-to-ja",
+          "question": "Cái này là điện thoại của nước nào?",
+          "answers": [
+            "これは どこの でんわですか",
+            "kore wa doko no denwa desu ka",
+            "これはどこのでんわですか",
+            "korewadokonodenwadesuka"
+          ]
+        },
+        {
+          "id": 43,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị タワポン ở đâu vậy?",
+          "answers": [
+            "タワポンさんの おくには どちらですか",
+            "tawapon san no okuni wa dochira desu ka",
+            "タワポンさんのおくにはどちらですか",
+            "tawaponsannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 44,
+          "direction": "vi-to-ja",
+          "question": "Nhà vệ sinh ở đằng kia.",
+          "answers": [
+            "といれは あそこです",
+            "toire wa asoko desu",
+            "といれはあそこです",
+            "toirewaasokodesu"
+          ]
+        },
+        {
+          "id": 45,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị カリナ ở hướng nào?",
+          "answers": [
+            "カリナさんの うちは どちらですか",
+            "karina san no uchi wa dochira desu ka",
+            "カリナさんのうちはどちらですか",
+            "karinasannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 46,
+          "direction": "vi-to-ja",
+          "question": "Kia là tầng hầm phải không?",
+          "answers": [
+            "あそこは ちかですか",
+            "asoko wa chika desu ka",
+            "あそこはちかですか",
+            "asokowachikadesuka"
+          ]
+        },
+        {
+          "id": 47,
+          "direction": "vi-to-ja",
+          "question": "Nhà ở tầng mấy thế?",
+          "answers": [
+            "うちは なんがいですか",
+            "uchi wa nangai desu ka",
+            "うちはなんがいですか",
+            "uchiwanangaidesuka"
+          ]
+        },
+        {
+          "id": 48,
+          "direction": "vi-to-ja",
+          "question": "Cái này là rượu vang của nước nào?",
+          "answers": [
+            "これは どこの わいんですか",
+            "kore wa doko no wain desu ka",
+            "これはどこのわいんですか",
+            "korewadokonowaindesuka"
+          ]
+        },
+        {
+          "id": 49,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị 田中 ở đâu vậy?",
+          "answers": [
+            "たなかさんの おくには どちらですか",
+            "tanaka san no okuni wa dochira desu ka",
+            "たなかさんのおくにはどちらですか",
+            "tanakasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 50,
+          "direction": "vi-to-ja",
+          "question": "Văn phòng ở đằng kia.",
+          "answers": [
+            "じむしょは あそこです",
+            "jimusho wa asoko desu",
+            "じむしょはあそこです",
+            "jimushowaasokodesu"
+          ]
+        },
+        {
+          "id": 51,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị サントス ở hướng nào?",
+          "answers": [
+            "サントスさんの うちは どちらですか",
+            "santosu san no uchi wa dochira desu ka",
+            "サントスさんのうちはどちらですか",
+            "santosusannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 52,
+          "direction": "vi-to-ja",
+          "question": "Kia là căn phòng phải không?",
+          "answers": [
+            "あそこは へやですか",
+            "asoko wa heya desu ka",
+            "あそこはへやですか",
+            "asokowaheyadesuka"
+          ]
+        },
+        {
+          "id": 53,
+          "direction": "vi-to-ja",
+          "question": "Nhà vệ sinh ở tầng mấy thế?",
+          "answers": [
+            "といれは なんがいですか",
+            "toire wa nangai desu ka",
+            "といれはなんがいですか",
+            "toirewanangaidesuka"
+          ]
+        },
+        {
+          "id": 54,
+          "direction": "vi-to-ja",
+          "question": "Cái này là giày của nước nào?",
+          "answers": [
+            "これは どこの くつですか",
+            "kore wa doko no kutsu desu ka",
+            "これはどこのくつですか",
+            "korewadokonokutsudesuka"
+          ]
+        },
+        {
+          "id": 55,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị カリナ ở đâu vậy?",
+          "answers": [
+            "カリナさんの おくには どちらですか",
+            "karina san no okuni wa dochira desu ka",
+            "カリナさんのおくにはどちらですか",
+            "karinasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 56,
+          "direction": "vi-to-ja",
+          "question": "Thang cuốn ở đằng kia.",
+          "answers": [
+            "えすかれーたーは あそこです",
+            "esukareetaa wa asoko desu",
+            "えすかれーたーはあそこです",
+            "esukareetaawaasokodesu"
+          ]
+        },
+        {
+          "id": 57,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị 山田 ở hướng nào?",
+          "answers": [
+            "やまださんの うちは どちらですか",
+            "yamada san no uchi wa dochira desu ka",
+            "やまださんのうちはどちらですか",
+            "yamadasannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 58,
+          "direction": "vi-to-ja",
+          "question": "Kia là nhà ăn phải không?",
+          "answers": [
+            "あそこは しょくどうですか",
+            "asoko wa shokudou desu ka",
+            "あそこはしょくどうですか",
+            "asokowashokudoudesuka"
+          ]
+        },
+        {
+          "id": 59,
+          "direction": "vi-to-ja",
+          "question": "Văn phòng ở tầng mấy thế?",
+          "answers": [
+            "じむしょは なんがいですか",
+            "jimusho wa nangai desu ka",
+            "じむしょはなんがいですか",
+            "jimushowanangaidesuka"
+          ]
+        },
+        {
+          "id": 60,
+          "direction": "vi-to-ja",
+          "question": "Cái này là thuốc lá của nước nào?",
+          "answers": [
+            "これは どこの たばこですか",
+            "kore wa doko no tabako desu ka",
+            "これはどこのたばこですか",
+            "korewadokonotabakodesuka"
+          ]
+        },
+        {
+          "id": 61,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị サントス ở đâu vậy?",
+          "answers": [
+            "サントスさんの おくには どちらですか",
+            "santosu san no okuni wa dochira desu ka",
+            "サントスさんのおくにはどちらですか",
+            "santosusannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 62,
+          "direction": "vi-to-ja",
+          "question": "Hành lang ở đằng kia.",
+          "answers": [
+            "ろびーは あそこです",
+            "robii wa asoko desu",
+            "ろびーはあそこです",
+            "robiiwaasokodesu"
+          ]
+        },
+        {
+          "id": 63,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị シュミット ở hướng nào?",
+          "answers": [
+            "シュミットさんの うちは どちらですか",
+            "shumitto san no uchi wa dochira desu ka",
+            "シュミットさんのうちはどちらですか",
+            "shumittosannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 64,
+          "direction": "vi-to-ja",
+          "question": "Kia là thang máy phải không?",
+          "answers": [
+            "あそこは えれべーたーですか",
+            "asoko wa erebeetaa desu ka",
+            "あそこはえれべーたーですか",
+            "asokowaerebeetaadesuka"
+          ]
+        },
+        {
+          "id": 65,
+          "direction": "vi-to-ja",
+          "question": "Thang cuốn ở tầng mấy thế?",
+          "answers": [
+            "えすかれーたーは なんがいですか",
+            "esukareetaa wa nangai desu ka",
+            "えすかれーたーはなんがいですか",
+            "esukareetaawanangaidesuka"
+          ]
+        },
+        {
+          "id": 66,
+          "direction": "vi-to-ja",
+          "question": "Cái này là cà vạt của nước nào?",
+          "answers": [
+            "これは どこの ねくたいですか",
+            "kore wa doko no nekutai desu ka",
+            "これはどこのねくたいですか",
+            "korewadokononekutaidesuka"
+          ]
+        },
+        {
+          "id": 67,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị 山田 ở đâu vậy?",
+          "answers": [
+            "やまださんの おくには どちらですか",
+            "yamada san no okuni wa dochira desu ka",
+            "やまださんのおくにはどちらですか",
+            "yamadasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 68,
+          "direction": "vi-to-ja",
+          "question": "Lớp học ở đằng kia.",
+          "answers": [
+            "きょうしつは あそこです",
+            "kyoushitsu wa asoko desu",
+            "きょうしつはあそこです",
+            "kyoushitsuwaasokodesu"
+          ]
+        },
+        {
+          "id": 69,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị 木村 ở hướng nào?",
+          "answers": [
+            "きむらさんの うちは どちらですか",
+            "kimura san no uchi wa dochira desu ka",
+            "きむらさんのうちはどちらですか",
+            "kimurasannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 70,
+          "direction": "vi-to-ja",
+          "question": "Kia là quầy tiếp tân phải không?",
+          "answers": [
+            "あそこは うけつけですか",
+            "asoko wa uketsuke desu ka",
+            "あそこはうけつけですか",
+            "asokowauketsukedesuka"
+          ]
+        },
+        {
+          "id": 71,
+          "direction": "vi-to-ja",
+          "question": "Hành lang ở tầng mấy thế?",
+          "answers": [
+            "ろびーは なんがいですか",
+            "robii wa nangai desu ka",
+            "ろびーはなんがいですか",
+            "robiiwanangaidesuka"
+          ]
+        },
+        {
+          "id": 72,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị シュミット ở đâu vậy?",
+          "answers": [
+            "シュミットさんの おくには どちらですか",
+            "shumitto san no okuni wa dochira desu ka",
+            "シュミットさんのおくにはどちらですか",
+            "shumittosannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 73,
+          "direction": "vi-to-ja",
+          "question": "Cầu thang bộ ở đằng kia.",
+          "answers": [
+            "かいだんは あそこです",
+            "kaidan wa asoko desu",
+            "かいだんはあそこです",
+            "kaidanwaasokodesu"
+          ]
+        },
+        {
+          "id": 74,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị ナム ở hướng nào?",
+          "answers": [
+            "ナムさんの うちは どちらですか",
+            "namu san no uchi wa dochira desu ka",
+            "ナムさんのうちはどちらですか",
+            "namusannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 75,
+          "direction": "vi-to-ja",
+          "question": "Đây là tầng hầm.",
+          "answers": [
+            "ここは ちかです",
+            "koko wa chika desu",
+            "ここはちかです",
+            "kokowachikadesu"
+          ]
+        },
+        {
+          "id": 76,
+          "direction": "vi-to-ja",
+          "question": "Kia là nhà phải không?",
+          "answers": [
+            "あそこは うちですか",
+            "asoko wa uchi desu ka",
+            "あそこはうちですか",
+            "asokowauchidesuka"
+          ]
+        },
+        {
+          "id": 77,
+          "direction": "vi-to-ja",
+          "question": "Lớp học ở tầng mấy thế?",
+          "answers": [
+            "きょうしつは なんがいですか",
+            "kyoushitsu wa nangai desu ka",
+            "きょうしつはなんがいですか",
+            "kyoushitsuwanangaidesuka"
+          ]
+        },
+        {
+          "id": 78,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị 木村 ở đâu vậy?",
+          "answers": [
+            "きむらさんの おくには どちらですか",
+            "kimura san no okuni wa dochira desu ka",
+            "きむらさんのおくにはどちらですか",
+            "kimurasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 79,
+          "direction": "vi-to-ja",
+          "question": "Phòng họp ở đằng kia.",
+          "answers": [
+            "かいぎしつは あそこです",
+            "kaigishitsu wa asoko desu",
+            "かいぎしつはあそこです",
+            "kaigishitsuwaasokodesu"
+          ]
+        },
+        {
+          "id": 80,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị ワット ở hướng nào?",
+          "answers": [
+            "ワットさんの うちは どちらですか",
+            "watto san no uchi wa dochira desu ka",
+            "ワットさんのうちはどちらですか",
+            "wattosannouchiwadochiradesuka"
+          ]
+        }
+      ],
+      "dialogues": [
+        {
+          "id": 1,
+          "context": "Hỏi nơi bán cà vạt (ねくたい) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、ねくたい うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ネクタイ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán cà vạt ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2かい です。[blank2] ですよ。",
+              "text_kanji": "2階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 2 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "2かい",
+              "options": [
+                "2かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "2かい": "tầng 2",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 2,
+          "context": "Hỏi giá tiền của rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この わいん は [blank1] ですか。",
+              "text_kanji": "すみません、この ワイン は [blank1] ですか。",
+              "translation": "Xin lỗi, cái rượu vang này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "8せん8ひゃくえん です。",
+              "text_kanji": "8,800 yên です。",
+              "translation": "Là 8,800 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 3,
+          "context": "Hỏi xuất xứ của món đồ thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の たばこ ですか。",
+              "text_kanji": "それ は [blank1] の たばこ ですか。",
+              "translation": "Đó là thuốc lá của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いぎりす の です。[blank2] です。",
+              "text_kanji": "はい、イギリス の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Anh ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いぎりす",
+              "options": [
+                "いぎりす",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いぎりす": "Anh",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 4,
+          "context": "Hỏi vị trí của quầy tiếp tân (うけつけ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、うけつけ は [blank1] ですか。",
+              "text_kanji": "すみません、受付 は [blank1] ですか。",
+              "translation": "Xin lỗi, quầy tiếp tân ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 5,
+          "context": "Hỏi nơi bán giày (くつ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、くつ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、靴 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán giày ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1かい です。[blank2] ですよ。",
+              "text_kanji": "1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "1かい",
+              "options": [
+                "1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "1かい": "tầng 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 6,
+          "context": "Hỏi giá tiền của cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この ねくたい は [blank1] ですか。",
+              "text_kanji": "すみません、この ネクタイ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái cà vạt này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3ぜん5ひゃくえん です。",
+              "text_kanji": "3,500 yên です。",
+              "translation": "Là 3,500 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 7,
+          "context": "Hỏi xuất xứ của món đồ rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の わいん ですか。",
+              "text_kanji": "それ は [blank1] の ワイン ですか。",
+              "translation": "Đó là rượu vang của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、IMC の です。[blank2] です。",
+              "text_kanji": "はい、IMC の です。[blank2] です。",
+              "translation": "Vâng, là đồ của công ty IMC ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "IMC",
+              "options": [
+                "IMC",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "IMC": "công ty IMC",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 8,
+          "context": "Hỏi vị trí của cầu thang bộ (かいだん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、かいだん は [blank1] ですか。",
+              "text_kanji": "すみません、階段 は [blank1] ですか。",
+              "translation": "Xin lỗi, cầu thang bộ ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 9,
+          "context": "Hỏi nơi bán điện thoại (でんわ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、でんわ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、電話 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán điện thoại ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "ちか1かい です。[blank2] ですよ。",
+              "text_kanji": "地下1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng hầm 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "ちか1かい",
+              "options": [
+                "ちか1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "ちか1かい": "tầng hầm 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 10,
+          "context": "Hỏi giá tiền của giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この くつ は [blank1] ですか。",
+              "text_kanji": "すみません、この 靴 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái giày này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1せんえん です。",
+              "text_kanji": "1,000 yên です。",
+              "translation": "Là 1,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 11,
+          "context": "Hỏi xuất xứ của món đồ cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の ねくたい ですか。",
+              "text_kanji": "それ は [blank1] の ネクタイ ですか。",
+              "translation": "Đó là cà vạt của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、べとなむ の です。[blank2] です。",
+              "text_kanji": "はい、ベトナム の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Việt Nam ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "べとなむ",
+              "options": [
+                "べとなむ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "べとなむ": "Việt Nam",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ"
+              }
+            }
+          }
+        },
+        {
+          "id": 12,
+          "context": "Hỏi vị trí của nhà (うち)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、うち は [blank1] ですか。",
+              "text_kanji": "すみません、うち は [blank1] ですか。",
+              "translation": "Xin lỗi, nhà ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 13,
+          "context": "Hỏi nơi bán thuốc lá (たばこ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、たばこ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、たばこ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán thuốc lá ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "4かい です。[blank2] ですよ。",
+              "text_kanji": "4階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 4 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "4かい",
+              "options": [
+                "4かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "4かい": "tầng 4",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 14,
+          "context": "Hỏi giá tiền của điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この でんわ は [blank1] ですか。",
+              "text_kanji": "すみません、この 電話 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái điện thoại này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2まんえん です。",
+              "text_kanji": "20,000 yên です。",
+              "translation": "Là 20,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 15,
+          "context": "Hỏi xuất xứ của món đồ giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の くつ ですか。",
+              "text_kanji": "それ は [blank1] の 靴 ですか。",
+              "translation": "Đó là giày của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いたりあ の です。[blank2] です。",
+              "text_kanji": "はい、イタリア の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Ý ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いたりあ",
+              "options": [
+                "いたりあ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いたりあ": "Ý",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 16,
+          "context": "Hỏi vị trí của phòng họp (かいぎしつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、かいぎしつ は [blank1] ですか。",
+              "text_kanji": "すみません、会議室 は [blank1] ですか。",
+              "translation": "Xin lỗi, phòng họp ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 17,
+          "context": "Hỏi nơi bán rượu vang (わいん) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、わいん うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ワイン 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán rượu vang ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3かい です。[blank2] ですよ。",
+              "text_kanji": "3階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 3 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "3かい",
+              "options": [
+                "3かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "3かい": "tầng 3",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 18,
+          "context": "Hỏi giá tiền của thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この たばこ は [blank1] ですか。",
+              "text_kanji": "すみません、この たばこ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái thuốc lá này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1まん5せんえん です。",
+              "text_kanji": "15,000 yên です。",
+              "translation": "Là 15,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 19,
+          "context": "Hỏi xuất xứ của món đồ điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の でんわ ですか。",
+              "text_kanji": "それ は [blank1] の 電話 ですか。",
+              "translation": "Đó là điện thoại của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、さくらだいがく の です。[blank2] です。",
+              "text_kanji": "はい、さくら大学 の です。[blank2] です。",
+              "translation": "Vâng, là đồ của đại học Sakura ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "さくらだいがく",
+              "options": [
+                "さくらだいがく",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "さくらだいがく": "đại học Sakura",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 20,
+          "context": "Hỏi vị trí của nhà vệ sinh (といれ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、といれ は [blank1] ですか。",
+              "text_kanji": "すみません、トイレ は [blank1] ですか。",
+              "translation": "Xin lỗi, nhà vệ sinh ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 21,
+          "context": "Hỏi nơi bán cà vạt (ねくたい) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、ねくたい うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ネクタイ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán cà vạt ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2かい です。[blank2] ですよ。",
+              "text_kanji": "2階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 2 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "2かい",
+              "options": [
+                "2かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "2かい": "tầng 2",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 22,
+          "context": "Hỏi giá tiền của rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この わいん は [blank1] ですか。",
+              "text_kanji": "すみません、この ワイン は [blank1] ですか。",
+              "translation": "Xin lỗi, cái rượu vang này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "8せん8ひゃくえん です。",
+              "text_kanji": "8,800 yên です。",
+              "translation": "Là 8,800 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 23,
+          "context": "Hỏi xuất xứ của món đồ thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の たばこ ですか。",
+              "text_kanji": "それ は [blank1] の たばこ ですか。",
+              "translation": "Đó là thuốc lá của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いぎりす の です。[blank2] です。",
+              "text_kanji": "はい、イギリス の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Anh ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いぎりす",
+              "options": [
+                "いぎりす",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いぎりす": "Anh",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 24,
+          "context": "Hỏi vị trí của tầng hầm (ちか)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、ちか は [blank1] ですか。",
+              "text_kanji": "すみません、地下 は [blank1] ですか。",
+              "translation": "Xin lỗi, tầng hầm ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 25,
+          "context": "Hỏi nơi bán giày (くつ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、くつ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、靴 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán giày ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1かい です。[blank2] ですよ。",
+              "text_kanji": "1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "1かい",
+              "options": [
+                "1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "1かい": "tầng 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 26,
+          "context": "Hỏi giá tiền của cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この ねくたい は [blank1] ですか。",
+              "text_kanji": "すみません、この ネクタイ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái cà vạt này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3ぜん5ひゃくえん です。",
+              "text_kanji": "3,500 yên です。",
+              "translation": "Là 3,500 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 27,
+          "context": "Hỏi xuất xứ của món đồ rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の わいん ですか。",
+              "text_kanji": "それ は [blank1] の ワイン ですか。",
+              "translation": "Đó là rượu vang của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、IMC の です。[blank2] です。",
+              "text_kanji": "はい、IMC の です。[blank2] です。",
+              "translation": "Vâng, là đồ của công ty IMC ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "IMC",
+              "options": [
+                "IMC",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "IMC": "công ty IMC",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 28,
+          "context": "Hỏi vị trí của văn phòng (じむしょ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、じむしょ は [blank1] ですか。",
+              "text_kanji": "すみません、事務所 は [blank1] ですか。",
+              "translation": "Xin lỗi, văn phòng ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 29,
+          "context": "Hỏi nơi bán điện thoại (でんわ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、でんわ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、電話 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán điện thoại ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "ちか1かい です。[blank2] ですよ。",
+              "text_kanji": "地下1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng hầm 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "ちか1かい",
+              "options": [
+                "ちか1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "ちか1かい": "tầng hầm 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 30,
+          "context": "Hỏi giá tiền của giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この くつ は [blank1] ですか。",
+              "text_kanji": "すみません、この 靴 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái giày này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1せんえん です。",
+              "text_kanji": "1,000 yên です。",
+              "translation": "Là 1,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 31,
+          "context": "Hỏi xuất xứ của món đồ cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の ねくたい ですか。",
+              "text_kanji": "それ は [blank1] の ネクタイ ですか。",
+              "translation": "Đó là cà vạt của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、べとなむ の です。[blank2] です。",
+              "text_kanji": "はい、ベトナム の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Việt Nam ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "べとなむ",
+              "options": [
+                "べとなむ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "べとなむ": "Việt Nam",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ"
+              }
+            }
+          }
+        },
+        {
+          "id": 32,
+          "context": "Hỏi vị trí của căn phòng (へや)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、へや は [blank1] ですか。",
+              "text_kanji": "すみません、部屋 は [blank1] ですか。",
+              "translation": "Xin lỗi, căn phòng ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 33,
+          "context": "Hỏi nơi bán thuốc lá (たばこ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、たばこ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、たばこ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán thuốc lá ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "4かい です。[blank2] ですよ。",
+              "text_kanji": "4階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 4 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "4かい",
+              "options": [
+                "4かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "4かい": "tầng 4",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 34,
+          "context": "Hỏi giá tiền của điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この でんわ は [blank1] ですか。",
+              "text_kanji": "すみません、この 電話 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái điện thoại này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2まんえん です。",
+              "text_kanji": "20,000 yên です。",
+              "translation": "Là 20,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 35,
+          "context": "Hỏi xuất xứ của món đồ giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の くつ ですか。",
+              "text_kanji": "それ は [blank1] の 靴 ですか。",
+              "translation": "Đó là giày của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いたりあ の です。[blank2] です。",
+              "text_kanji": "はい、イタリア の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Ý ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いたりあ",
+              "options": [
+                "いたりあ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いたりあ": "Ý",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 36,
+          "context": "Hỏi vị trí của thang cuốn (えすかれーたー)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、えすかれーたー は [blank1] ですか。",
+              "text_kanji": "すみません、エスカレーター は [blank1] ですか。",
+              "translation": "Xin lỗi, thang cuốn ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 37,
+          "context": "Hỏi nơi bán rượu vang (わいん) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、わいん うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ワイン 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán rượu vang ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3かい です。[blank2] ですよ。",
+              "text_kanji": "3階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 3 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "3かい",
+              "options": [
+                "3かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "3かい": "tầng 3",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 38,
+          "context": "Hỏi giá tiền của thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この たばこ は [blank1] ですか。",
+              "text_kanji": "すみません、この たばこ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái thuốc lá này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1まん5せんえん です。",
+              "text_kanji": "15,000 yên です。",
+              "translation": "Là 15,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 39,
+          "context": "Hỏi xuất xứ của món đồ điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の でんわ ですか。",
+              "text_kanji": "それ は [blank1] の 電話 ですか。",
+              "translation": "Đó là điện thoại của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、さくらだいがく の です。[blank2] です。",
+              "text_kanji": "はい、さくら大学 の です。[blank2] です。",
+              "translation": "Vâng, là đồ của đại học Sakura ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "さくらだいがく",
+              "options": [
+                "さくらだいがく",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "さくらだいがく": "đại học Sakura",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 40,
+          "context": "Hỏi vị trí của nhà ăn (しょくどう)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、しょくどう は [blank1] ですか。",
+              "text_kanji": "すみません、食堂 は [blank1] ですか。",
+              "translation": "Xin lỗi, nhà ăn ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        }
+      ],
+      "listenings": [
+        {
+          "id": 1,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "audio_text_kana": "A: すみません、じむしょは どこですか。 B: じむしょですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、事務所は  đâu ですか。 B: 事務所ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, văn phòng ở đâu thế?\nB: văn phòng hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm văn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'じむしょですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "audio_text_kana": "A: すみません、かいぎしつは どこですか。 B: かいぎしつですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、会議室は  đâu ですか。 B: 会議室ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, phòng họp ở đâu thế?\nB: phòng họp hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm phòng họp được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'かいぎしつですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "audio_text_kana": "A: すみません、うけつけは どこですか。 B: うけつけですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、受付は  đâu ですか。 B: 受付ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, quầy tiếp tân ở đâu thế?\nB: quầy tiếp tân hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm quầy tiếp tân được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'うけつけですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "audio_text_kana": "A: すみません、ろびーは どこですか。 B: ろびーですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、ロビーは  đâu ですか。 B: ロビーですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, hành lang ở đâu thế?\nB: hành lang hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm hành lang được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'ろびーですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "audio_text_kana": "A: すみません、へやは どこですか。 B: へやですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、部屋は  đâu ですか。 B: 部屋ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, căn phòng ở đâu thế?\nB: căn phòng hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm căn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'へやですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "audio_text_kana": "A: すみません、といれは どこですか。 B: といれですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、トイレは  đâu ですか。 B: トイレですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà vệ sinh ở đâu thế?\nB: nhà vệ sinh hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà vệ sinh được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'といれですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "audio_text_kana": "A: すみません、かいだんは どこですか。 B: かいだんですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、階段は  đâu ですか。 B: 階段ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, cầu thang bộ ở đâu thế?\nB: cầu thang bộ hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm cầu thang bộ được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'かいだんですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "audio_text_kana": "A: すみません、えれべーたーは どこですか。 B: えれべーたーですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、エレベーターは  đâu ですか。 B: エレベーターですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang máy ở đâu thế?\nB: thang máy hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang máy được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'えれべーたーですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "audio_text_kana": "A: すみません、えすかれーたーは どこですか。 B: えすかれーたーですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、エスカレーターは  đâu ですか。 B: エスカレーターですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang cuốn ở đâu thế?\nB: thang cuốn hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang cuốn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'えすかれーたーですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "audio_text_kana": "A: すみません、ちかは どこですか。 B: ちかですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、地下は  đâu ですか。 B: 地下ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, tầng hầm ở đâu thế?\nB: tầng hầm hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm tầng hầm được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'ちかですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "audio_text_kana": "A: すみません、うちは どこですか。 B: うちですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、うちは  đâu ですか。 B: うちですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ở đâu thế?\nB: nhà hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'うちですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "audio_text_kana": "A: すみません、きょうしつは どこですか。 B: きょうしつですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、教室は  đâu ですか。 B: 教室ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, lớp học ở đâu thế?\nB: lớp học hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm lớp học được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'きょうしつですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "audio_text_kana": "A: すみません、じむしょは どこですか。 B: じむしょですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、事務所は  đâu ですか。 B: 事務所ですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, văn phòng ở đâu thế?\nB: văn phòng hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm văn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'じむしょですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "audio_text_kana": "A: すみません、かいぎしつは どこですか。 B: かいぎしつですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、会議室は  đâu ですか。 B: 会議室ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, phòng họp ở đâu thế?\nB: phòng họp hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm phòng họp được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'かいぎしつですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "audio_text_kana": "A: すみません、うけつけは どこですか。 B: うけつけですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、受付は  đâu ですか。 B: 受付ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, quầy tiếp tân ở đâu thế?\nB: quầy tiếp tân hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm quầy tiếp tân được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'うけつけですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "audio_text_kana": "A: すみません、ろびーは どこですか。 B: ろびーですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、ロビーは  đâu ですか。 B: ロビーですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, hành lang ở đâu thế?\nB: hành lang hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm hành lang được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'ろびーですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "audio_text_kana": "A: すみません、へやは どこですか。 B: へやですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、部屋は  đâu ですか。 B: 部屋ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, căn phòng ở đâu thế?\nB: căn phòng hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm căn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'へやですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "audio_text_kana": "A: すみません、といれは どこですか。 B: といれですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、トイレは  đâu ですか。 B: トイレですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà vệ sinh ở đâu thế?\nB: nhà vệ sinh hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà vệ sinh được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'といれですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "audio_text_kana": "A: すみません、かいだんは どこですか。 B: かいだんですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、階段は  đâu ですか。 B: 階段ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, cầu thang bộ ở đâu thế?\nB: cầu thang bộ hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm cầu thang bộ được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'かいだんですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "audio_text_kana": "A: すみません、えれべーたーは どこですか。 B: えれべーたーですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、エレベーターは  đâu ですか。 B: エレベーターですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang máy ở đâu thế?\nB: thang máy hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang máy được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'えれべーたーですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 23,
+          "audio_text_kana": "A: すみません、えすかれーたーは どこですか。 B: えすかれーたーですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、エスカレーターは  đâu ですか。 B: エスカレーターですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang cuốn ở đâu thế?\nB: thang cuốn hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang cuốn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'えすかれーたーですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 24,
+          "audio_text_kana": "A: すみません、ちかは どこですか。 B: ちかですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、地下は  đâu ですか。 B: 地下ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, tầng hầm ở đâu thế?\nB: tầng hầm hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm tầng hầm được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'ちかですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "audio_text_kana": "A: すみません、うちは どこですか。 B: うちですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、うちは  đâu ですか。 B: うちですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ở đâu thế?\nB: nhà hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'うちですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "audio_text_kana": "A: すみません、きょうしつは どこですか。 B: きょうしつですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、教室は  đâu ですか。 B: 教室ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, lớp học ở đâu thế?\nB: lớp học hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm lớp học được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'きょうしつですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 27,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 28,
+          "audio_text_kana": "A: すみません、じむしょは どこですか。 B: じむしょですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、事務所は  đâu ですか。 B: 事務所ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, văn phòng ở đâu thế?\nB: văn phòng hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm văn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'じむしょですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 29,
+          "audio_text_kana": "A: すみません、かいぎしつは どこですか。 B: かいぎしつですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、会議室は  đâu ですか。 B: 会議室ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, phòng họp ở đâu thế?\nB: phòng họp hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm phòng họp được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'かいぎしつですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "audio_text_kana": "A: すみません、うけつけは どこですか。 B: うけつけですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、受付は  đâu ですか。 B: 受付ですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, quầy tiếp tân ở đâu thế?\nB: quầy tiếp tân hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm quầy tiếp tân được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'うけつけですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 31,
+          "audio_text_kana": "A: すみません、ろびーは どこですか。 B: ろびーですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、ロビーは  đâu ですか。 B: ロビーですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, hành lang ở đâu thế?\nB: hành lang hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm hành lang được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'ろびーですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "audio_text_kana": "A: すみません、へやは どこですか。 B: へやですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、部屋は  đâu ですか。 B: 部屋ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, căn phòng ở đâu thế?\nB: căn phòng hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm căn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'へやですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 33,
+          "audio_text_kana": "A: すみません、といれは どこですか。 B: といれですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、トイレは  đâu ですか。 B: トイレですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà vệ sinh ở đâu thế?\nB: nhà vệ sinh hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà vệ sinh được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'といれですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "audio_text_kana": "A: すみません、かいだんは どこですか。 B: かいだんですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、階段は  đâu ですか。 B: 階段ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, cầu thang bộ ở đâu thế?\nB: cầu thang bộ hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm cầu thang bộ được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'かいだんですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "audio_text_kana": "A: すみません、えれべーたーは どこですか。 B: えれべーたーですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、エレベーターは  đâu ですか。 B: エレベーターですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang máy ở đâu thế?\nB: thang máy hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang máy được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'えれべーたーですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "audio_text_kana": "A: すみません、えすかれーたーは どこですか。 B: えすかれーたーですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、エスカレーターは  đâu ですか。 B: エスカレーターですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang cuốn ở đâu thế?\nB: thang cuốn hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang cuốn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'えすかれーたーですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 37,
+          "audio_text_kana": "A: すみません、ちかは どこですか。 B: ちかですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、地下は  đâu ですか。 B: 地下ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, tầng hầm ở đâu thế?\nB: tầng hầm hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm tầng hầm được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'ちかですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "audio_text_kana": "A: すみません、うちは どこですか。 B: うちですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、うちは  đâu ですか。 B: うちですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ở đâu thế?\nB: nhà hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'うちですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 39,
+          "audio_text_kana": "A: すみません、きょうしつは どこですか。 B: きょうしつですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、教室は  đâu ですか。 B: 教室ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, lớp học ở đâu thế?\nB: lớp học hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm lớp học được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'きょうしつですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 40,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        }
+      ],
+      "dictations": [
+        {
+          "id": 1,
+          "question_audio": "これは べとなむの ねくたい です。",
+          "correct_answers": [
+            "これはべとなむのねくたいです",
+            "これは べとなむの ねくたい です",
+            "kore wa betonamu no nekutai desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là cà vạt của Việt Nam",
+            "Cái này là cà vạt sản xuất tại Việt Nam"
+          ],
+          "vietnamese_meaning": "Đây là cà vạt của Việt Nam."
+        },
+        {
+          "id": 2,
+          "question_audio": "じむしょは 3かい です。",
+          "correct_answers": [
+            "じむしょは3かいです",
+            "じむしょは 3かい です",
+            "jimusho wa 3-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Văn phòng ở tầng 3",
+            "Văn phòng ở tại tầng 3"
+          ],
+          "vietnamese_meaning": "Văn phòng ở tầng 3."
+        },
+        {
+          "id": 3,
+          "question_audio": "この たばこは いくら ですか。",
+          "correct_answers": [
+            "このたばこはいくらですか",
+            "この たばこは いくら ですか",
+            "kono tabako wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái thuốc lá này bao nhiêu tiền",
+            "Chiếc thuốc lá này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái thuốc lá này bao nhiêu tiền?"
+        },
+        {
+          "id": 4,
+          "question_audio": "うけつけは どこ ですか。",
+          "correct_answers": [
+            "うけつけはどこですか",
+            "うけつけは どこ ですか",
+            "uketsuke wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Quầy tiếp tân ở đâu vậy",
+            "Quầy tiếp tân ở đâu thế"
+          ],
+          "vietnamese_meaning": "Quầy tiếp tân ở đâu vậy?"
+        },
+        {
+          "id": 5,
+          "question_audio": "これは いたりあの くつ です。",
+          "correct_answers": [
+            "これはいたりあのくつです",
+            "これは いたりあの くつ です",
+            "kore wa itaria no kutsu desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là giày của Ý",
+            "Cái này là giày sản xuất tại Ý"
+          ],
+          "vietnamese_meaning": "Đây là giày của Ý."
+        },
+        {
+          "id": 6,
+          "question_audio": "へやは 2かい です。",
+          "correct_answers": [
+            "へやは2かいです",
+            "へやは 2かい です",
+            "heya wa 2-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Căn phòng ở tầng 2",
+            "Căn phòng ở tại tầng 2"
+          ],
+          "vietnamese_meaning": "Căn phòng ở tầng 2."
+        },
+        {
+          "id": 7,
+          "question_audio": "この わいんは いくら ですか。",
+          "correct_answers": [
+            "このわいんはいくらですか",
+            "この わいんは いくら ですか",
+            "kono wain wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái rượu vang này bao nhiêu tiền",
+            "Chiếc rượu vang này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái rượu vang này bao nhiêu tiền?"
+        },
+        {
+          "id": 8,
+          "question_audio": "かいだんは どこ ですか。",
+          "correct_answers": [
+            "かいだんはどこですか",
+            "かいだんは どこ ですか",
+            "kaidan wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cầu thang bộ ở đâu vậy",
+            "Cầu thang bộ ở đâu thế"
+          ],
+          "vietnamese_meaning": "Cầu thang bộ ở đâu vậy?"
+        },
+        {
+          "id": 9,
+          "question_audio": "これは さくらだいがくの でんわ です。",
+          "correct_answers": [
+            "これはさくらだいがくのでんわです",
+            "これは さくらだいがくの でんわ です",
+            "kore wa sakura daigaku no denwa desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là điện thoại của đại học Sakura",
+            "Cái này là điện thoại sản xuất tại đại học Sakura"
+          ],
+          "vietnamese_meaning": "Đây là điện thoại của đại học Sakura."
+        },
+        {
+          "id": 10,
+          "question_audio": "えすかれーたーは 1かい です。",
+          "correct_answers": [
+            "えすかれーたーは1かいです",
+            "えすかれーたーは 1かい です",
+            "esukareetaa wa 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Thang cuốn ở tầng 1",
+            "Thang cuốn ở tại tầng 1"
+          ],
+          "vietnamese_meaning": "Thang cuốn ở tầng 1."
+        },
+        {
+          "id": 11,
+          "question_audio": "この ねくたいは いくら ですか。",
+          "correct_answers": [
+            "このねくたいはいくらですか",
+            "この ねくたいは いくら ですか",
+            "kono nekutai wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái cà vạt này bao nhiêu tiền",
+            "Chiếc cà vạt này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái cà vạt này bao nhiêu tiền?"
+        },
+        {
+          "id": 12,
+          "question_audio": "うちは どこ ですか。",
+          "correct_answers": [
+            "うちはどこですか",
+            "うちは どこ ですか",
+            "uchi wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Nhà ở đâu vậy",
+            "Nhà ở đâu thế"
+          ],
+          "vietnamese_meaning": "Nhà ở đâu vậy?"
+        },
+        {
+          "id": 13,
+          "question_audio": "これは いぎりすの たばこ です。",
+          "correct_answers": [
+            "これはいぎりすのたばこです",
+            "これは いぎりすの たばこ です",
+            "kore wa igirisu no tabako desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là thuốc lá của Anh",
+            "Cái này là thuốc lá sản xuất tại Anh"
+          ],
+          "vietnamese_meaning": "Đây là thuốc lá của Anh."
+        },
+        {
+          "id": 14,
+          "question_audio": "しょくどうは ちか1かい です。",
+          "correct_answers": [
+            "しょくどうはちか1かいです",
+            "しょくどうは ちか1かい です",
+            "shokudou wa chika 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Nhà ăn ở tầng hầm 1",
+            "Nhà ăn ở tại tầng hầm 1"
+          ],
+          "vietnamese_meaning": "Nhà ăn ở tầng hầm 1."
+        },
+        {
+          "id": 15,
+          "question_audio": "この くつは いくら ですか。",
+          "correct_answers": [
+            "このくつはいくらですか",
+            "この くつは いくら ですか",
+            "kono kutsu wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái giày này bao nhiêu tiền",
+            "Chiếc giày này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái giày này bao nhiêu tiền?"
+        },
+        {
+          "id": 16,
+          "question_audio": "かいぎしつは どこ ですか。",
+          "correct_answers": [
+            "かいぎしつはどこですか",
+            "かいぎしつは どこ ですか",
+            "kaigishitsu wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Phòng họp ở đâu vậy",
+            "Phòng họp ở đâu thế"
+          ],
+          "vietnamese_meaning": "Phòng họp ở đâu vậy?"
+        },
+        {
+          "id": 17,
+          "question_audio": "これは IMCの わいん です。",
+          "correct_answers": [
+            "これはIMCのわいんです",
+            "これは IMCの わいん です",
+            "kore wa imc no wain desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là rượu vang của công ty IMC",
+            "Cái này là rượu vang sản xuất tại công ty IMC"
+          ],
+          "vietnamese_meaning": "Đây là rượu vang của công ty IMC."
+        },
+        {
+          "id": 18,
+          "question_audio": "ろびーは 4かい です。",
+          "correct_answers": [
+            "ろびーは4かいです",
+            "ろびーは 4かい です",
+            "robii wa 4-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Hành lang ở tầng 4",
+            "Hành lang ở tại tầng 4"
+          ],
+          "vietnamese_meaning": "Hành lang ở tầng 4."
+        },
+        {
+          "id": 19,
+          "question_audio": "この でんわは いくら ですか。",
+          "correct_answers": [
+            "このでんわはいくらですか",
+            "この でんわは いくら ですか",
+            "kono denwa wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái điện thoại này bao nhiêu tiền",
+            "Chiếc điện thoại này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái điện thoại này bao nhiêu tiền?"
+        },
+        {
+          "id": 20,
+          "question_audio": "といれは どこ ですか。",
+          "correct_answers": [
+            "といれはどこですか",
+            "といれは どこ ですか",
+            "toire wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Nhà vệ sinh ở đâu vậy",
+            "Nhà vệ sinh ở đâu thế"
+          ],
+          "vietnamese_meaning": "Nhà vệ sinh ở đâu vậy?"
+        },
+        {
+          "id": 21,
+          "question_audio": "これは べとなむの ねくたい です。",
+          "correct_answers": [
+            "これはべとなむのねくたいです",
+            "これは べとなむの ねくたい です",
+            "kore wa betonamu no nekutai desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là cà vạt của Việt Nam",
+            "Cái này là cà vạt sản xuất tại Việt Nam"
+          ],
+          "vietnamese_meaning": "Đây là cà vạt của Việt Nam."
+        },
+        {
+          "id": 22,
+          "question_audio": "えれべーたーは 3かい です。",
+          "correct_answers": [
+            "えれべーたーは3かいです",
+            "えれべーたーは 3かい です",
+            "erebeetaa wa 3-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Thang máy ở tầng 3",
+            "Thang máy ở tại tầng 3"
+          ],
+          "vietnamese_meaning": "Thang máy ở tầng 3."
+        },
+        {
+          "id": 23,
+          "question_audio": "この たばこは いくら ですか。",
+          "correct_answers": [
+            "このたばこはいくらですか",
+            "この たばこは いくら ですか",
+            "kono tabako wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái thuốc lá này bao nhiêu tiền",
+            "Chiếc thuốc lá này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái thuốc lá này bao nhiêu tiền?"
+        },
+        {
+          "id": 24,
+          "question_audio": "ちかは どこ ですか。",
+          "correct_answers": [
+            "ちかはどこですか",
+            "ちかは どこ ですか",
+            "chika wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Tầng hầm ở đâu vậy",
+            "Tầng hầm ở đâu thế"
+          ],
+          "vietnamese_meaning": "Tầng hầm ở đâu vậy?"
+        },
+        {
+          "id": 25,
+          "question_audio": "これは いたりあの くつ です。",
+          "correct_answers": [
+            "これはいたりあのくつです",
+            "これは いたりあの くつ です",
+            "kore wa itaria no kutsu desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là giày của Ý",
+            "Cái này là giày sản xuất tại Ý"
+          ],
+          "vietnamese_meaning": "Đây là giày của Ý."
+        },
+        {
+          "id": 26,
+          "question_audio": "きょうしつは 2かい です。",
+          "correct_answers": [
+            "きょうしつは2かいです",
+            "きょうしつは 2かい です",
+            "kyoushitsu wa 2-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Lớp học ở tầng 2",
+            "Lớp học ở tại tầng 2"
+          ],
+          "vietnamese_meaning": "Lớp học ở tầng 2."
+        },
+        {
+          "id": 27,
+          "question_audio": "この わいんは いくら ですか。",
+          "correct_answers": [
+            "このわいんはいくらですか",
+            "この わいんは いくら ですか",
+            "kono wain wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái rượu vang này bao nhiêu tiền",
+            "Chiếc rượu vang này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái rượu vang này bao nhiêu tiền?"
+        },
+        {
+          "id": 28,
+          "question_audio": "じむしょは どこ ですか。",
+          "correct_answers": [
+            "じむしょはどこですか",
+            "じむしょは どこ ですか",
+            "jimusho wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Văn phòng ở đâu vậy",
+            "Văn phòng ở đâu thế"
+          ],
+          "vietnamese_meaning": "Văn phòng ở đâu vậy?"
+        },
+        {
+          "id": 29,
+          "question_audio": "これは さくらだいがくの でんわ です。",
+          "correct_answers": [
+            "これはさくらだいがくのでんわです",
+            "これは さくらだいがくの でんわ です",
+            "kore wa sakura daigaku no denwa desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là điện thoại của đại học Sakura",
+            "Cái này là điện thoại sản xuất tại đại học Sakura"
+          ],
+          "vietnamese_meaning": "Đây là điện thoại của đại học Sakura."
+        },
+        {
+          "id": 30,
+          "question_audio": "うけつけは 1かい です。",
+          "correct_answers": [
+            "うけつけは1かいです",
+            "うけつけは 1かい です",
+            "uketsuke wa 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Quầy tiếp tân ở tầng 1",
+            "Quầy tiếp tân ở tại tầng 1"
+          ],
+          "vietnamese_meaning": "Quầy tiếp tân ở tầng 1."
+        },
+        {
+          "id": 31,
+          "question_audio": "この ねくたいは いくら ですか。",
+          "correct_answers": [
+            "このねくたいはいくらですか",
+            "この ねくたいは いくら ですか",
+            "kono nekutai wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái cà vạt này bao nhiêu tiền",
+            "Chiếc cà vạt này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái cà vạt này bao nhiêu tiền?"
+        },
+        {
+          "id": 32,
+          "question_audio": "へやは どこ ですか。",
+          "correct_answers": [
+            "へやはどこですか",
+            "へやは どこ ですか",
+            "heya wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Căn phòng ở đâu vậy",
+            "Căn phòng ở đâu thế"
+          ],
+          "vietnamese_meaning": "Căn phòng ở đâu vậy?"
+        },
+        {
+          "id": 33,
+          "question_audio": "これは いぎりすの たばこ です。",
+          "correct_answers": [
+            "これはいぎりすのたばこです",
+            "これは いぎりすの たばこ です",
+            "kore wa igirisu no tabako desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là thuốc lá của Anh",
+            "Cái này là thuốc lá sản xuất tại Anh"
+          ],
+          "vietnamese_meaning": "Đây là thuốc lá của Anh."
+        },
+        {
+          "id": 34,
+          "question_audio": "かいだんは ちか1かい です。",
+          "correct_answers": [
+            "かいだんはちか1かいです",
+            "かいだんは ちか1かい です",
+            "kaidan wa chika 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Cầu thang bộ ở tầng hầm 1",
+            "Cầu thang bộ ở tại tầng hầm 1"
+          ],
+          "vietnamese_meaning": "Cầu thang bộ ở tầng hầm 1."
+        },
+        {
+          "id": 35,
+          "question_audio": "この くつは いくら ですか。",
+          "correct_answers": [
+            "このくつはいくらですか",
+            "この くつは いくら ですか",
+            "kono kutsu wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái giày này bao nhiêu tiền",
+            "Chiếc giày này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái giày này bao nhiêu tiền?"
+        },
+        {
+          "id": 36,
+          "question_audio": "えすかれーたーは どこ ですか。",
+          "correct_answers": [
+            "えすかれーたーはどこですか",
+            "えすかれーたーは どこ ですか",
+            "esukareetaa wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Thang cuốn ở đâu vậy",
+            "Thang cuốn ở đâu thế"
+          ],
+          "vietnamese_meaning": "Thang cuốn ở đâu vậy?"
+        },
+        {
+          "id": 37,
+          "question_audio": "これは IMCの わいん です。",
+          "correct_answers": [
+            "これはIMCのわいんです",
+            "これは IMCの わいん です",
+            "kore wa imc no wain desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là rượu vang của công ty IMC",
+            "Cái này là rượu vang sản xuất tại công ty IMC"
+          ],
+          "vietnamese_meaning": "Đây là rượu vang của công ty IMC."
+        },
+        {
+          "id": 38,
+          "question_audio": "うちは 4かい です。",
+          "correct_answers": [
+            "うちは4かいです",
+            "うちは 4かい です",
+            "uchi wa 4-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Nhà ở tầng 4",
+            "Nhà ở tại tầng 4"
+          ],
+          "vietnamese_meaning": "Nhà ở tầng 4."
+        },
+        {
+          "id": 39,
+          "question_audio": "この でんわは いくら ですか。",
+          "correct_answers": [
+            "このでんわはいくらですか",
+            "この でんわは いくら ですか",
+            "kono denwa wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái điện thoại này bao nhiêu tiền",
+            "Chiếc điện thoại này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái điện thoại này bao nhiêu tiền?"
+        },
+        {
+          "id": 40,
+          "question_audio": "しょくどうは どこ ですか。",
+          "correct_answers": [
+            "しょくどうはどこですか",
+            "しょくどうは どこ ですか",
+            "shokudou wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Nhà ăn ở đâu vậy",
+            "Nhà ăn ở đâu thế"
+          ],
+          "vietnamese_meaning": "Nhà ăn ở đâu vậy?"
+        }
+      ]
     }
   ],
   "vocabulary": [
@@ -34735,13 +39954,13 @@ module.exports = {
     {
       "id": 16,
       "lesson_id": 3,
-      "title": "お国は どちら ですか",
-      "meaning": "Đất nước của bạn ở đâu?",
-      "structure": "お国 + は + どちら + ですか",
-      "vietnamese_explanation": "Cách hỏi lịch sự về quốc tịch, quê quán của người đối diện.",
-      "japanese_example": "お国は どちら ですか。ーベトナム です。",
-      "example_meaning": "Đất nước của bạn ở đâu? - Là Việt Nam.",
-      "romaji_example": "O kuni wa dochira desu ka. ̄Betonamu desu.",
+      "title": "N (đất nước/công ty/trường học) は どこ/どちら ですか",
+      "meaning": "Đất nước/công ty/trường học của bạn là gì / ở đâu?",
+      "structure": "Danh từ (quốc gia/tổ chức) + は + どこ/どちら + ですか",
+      "vietnamese_explanation": "Dùng để hỏi tên nước, công ty, trường học hoặc cơ quan mà ai đó trực thuộc. Khi hỏi lịch sự ta dùng どちら, hỏi thông thường dùng どこ.",
+      "japanese_example": "会社は どちら ですか。ーIMC です。",
+      "example_meaning": "Công ty của bạn là công ty nào? - Là công ty IMC.",
+      "romaji_example": "Kaisha wa dochira desu ka. - IMC desu.",
       "notes": "🔊 Nghe"
     },
     {
@@ -38104,6 +43323,30 @@ module.exports = {
           "type": "negative"
         }
       ]
+    },
+    {
+      "id": 207,
+      "lesson_id": 3,
+      "title": "N1 は N2 (địa điểm/tầng) です",
+      "meaning": "N1 ở N2 (địa điểm/tầng)",
+      "structure": "N1 (vật/người/địa điểm) + は + N2 (địa điểm/tầng) + です",
+      "vietnamese_explanation": "Dùng để diễn tả địa điểm, vị trí cụ thể hoặc số tầng mà một địa danh, vật thể hay một người đang ở đó.",
+      "japanese_example": "食堂は ２階 です。",
+      "example_meaning": "Nhà ăn ở tầng 2.",
+      "romaji_example": "Shokudou wa ni-kai desu.",
+      "notes": "🔊 Nghe"
+    },
+    {
+      "id": 208,
+      "lesson_id": 3,
+      "title": "N は いくら ですか",
+      "meaning": "N bao nhiêu tiền?",
+      "structure": "Danh từ + は + いくら + ですか",
+      "vietnamese_explanation": "Dùng để hỏi giá tiền của sản phẩm, đồ vật hoặc dịch vụ.",
+      "japanese_example": "このカメラは いくら ですか。ー２万５千円 です。",
+      "example_meaning": "Chiếc máy ảnh này bao nhiêu tiền? - Là 25,000 yên.",
+      "romaji_example": "Kono kamera wa ikura desu ka. - Ni-man go-sen en desu.",
+      "notes": "🔊 Nghe"
     }
   ],
   "kaiwaDialog": [
@@ -46468,6 +51711,5224 @@ module.exports = {
             "Cái này là danh thiếp"
           ],
           "vietnamese_meaning": "Đây là danh thiếp."
+        }
+      ]
+    },
+    "3": {
+      "translations": [
+        {
+          "id": 1,
+          "direction": "ja-to-vi",
+          "question_kana": "かいぎしつ は 2かい です。",
+          "question_kanji": "会議室 は 2階 です。",
+          "answers": [
+            "Phòng họp ở tầng 2",
+            "Phòng họp là ở tầng 2"
+          ]
+        },
+        {
+          "id": 2,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は うけつけ です。",
+          "question_kanji": "こちら は 受付 です。",
+          "answers": [
+            "Phía này là quầy tiếp tân",
+            "Hướng này là quầy tiếp tân",
+            "Đây là quầy tiếp tân"
+          ]
+        },
+        {
+          "id": 3,
+          "direction": "ja-to-vi",
+          "question_kana": "ろびー は どこ ですか。",
+          "question_kanji": "ロビー は どこ ですか。",
+          "answers": [
+            "Hành lang ở đâu thế",
+            "Hành lang ở đâu vậy",
+            "Hành lang ở đâu"
+          ]
+        },
+        {
+          "id": 4,
+          "direction": "ja-to-vi",
+          "question_kana": "シュミットさんの 会社 は どちら ですか。",
+          "question_kanji": "シュミットさんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh シュミット là công ty nào",
+            "Công ty của chị シュミット ở đâu",
+            "Công ty của シュミット là hướng nào"
+          ]
+        },
+        {
+          "id": 5,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は いたりあの くつ です。",
+          "question_kanji": "これ は イタリアの 靴 です。",
+          "answers": [
+            "Đây là giày của Ý",
+            "Cái này là giày sản xuất tại Ý",
+            "Cái này là giày của Ý"
+          ]
+        },
+        {
+          "id": 6,
+          "direction": "ja-to-vi",
+          "question_kana": "この ねくたい は いくら ですか。",
+          "question_kanji": "この ネクタイ は いくら ですか。",
+          "answers": [
+            "Cái cà vạt này bao nhiêu tiền",
+            "Quả cà vạt này bao nhiêu tiền",
+            "Cà vạt này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 7,
+          "direction": "ja-to-vi",
+          "question_kana": "えれべーたー は そこ です。",
+          "question_kanji": "エレベーター は そこ です。",
+          "answers": [
+            "Thang máy ở đó",
+            "Thang máy là ở đó"
+          ]
+        },
+        {
+          "id": 8,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は えすかれーたー です。",
+          "question_kanji": "ここ は エスカレーター です。",
+          "answers": [
+            "Đây là thang cuốn",
+            "Cái này là thang cuốn",
+            "Chỗ này là thang cuốn"
+          ]
+        },
+        {
+          "id": 9,
+          "direction": "ja-to-vi",
+          "question_kana": "ちか は ちか1かい です。",
+          "question_kanji": "地下 は 地下1階 です。",
+          "answers": [
+            "Tầng hầm ở tầng hầm 1",
+            "Tầng hầm là ở tầng hầm 1"
+          ]
+        },
+        {
+          "id": 10,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は うち です。",
+          "question_kanji": "こちら は うち です。",
+          "answers": [
+            "Phía này là nhà",
+            "Hướng này là nhà",
+            "Đây là nhà"
+          ]
+        },
+        {
+          "id": 11,
+          "direction": "ja-to-vi",
+          "question_kana": "きょうしつ は どこ ですか。",
+          "question_kanji": "教室 は どこ ですか。",
+          "answers": [
+            "Lớp học ở đâu thế",
+            "Lớp học ở đâu vậy",
+            "Lớp học ở đâu"
+          ]
+        },
+        {
+          "id": 12,
+          "direction": "ja-to-vi",
+          "question_kana": "きむらさんの 会社 は どちら ですか。",
+          "question_kanji": "木村さんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh 木村 là công ty nào",
+            "Công ty của chị 木村 ở đâu",
+            "Công ty của 木村 là hướng nào"
+          ]
+        },
+        {
+          "id": 13,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は いぎりすの たばこ です。",
+          "question_kanji": "これ は イギリスの たばこ です。",
+          "answers": [
+            "Đây là thuốc lá của Anh",
+            "Cái này là thuốc lá sản xuất tại Anh",
+            "Cái này là thuốc lá của Anh"
+          ]
+        },
+        {
+          "id": 14,
+          "direction": "ja-to-vi",
+          "question_kana": "この でんわ は いくら ですか。",
+          "question_kanji": "この 電話 は いくら ですか。",
+          "answers": [
+            "Cái điện thoại này bao nhiêu tiền",
+            "Quả điện thoại này bao nhiêu tiền",
+            "Điện thoại này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 15,
+          "direction": "ja-to-vi",
+          "question_kana": "うけつけ は そこ です。",
+          "question_kanji": "受付 は そこ です。",
+          "answers": [
+            "Quầy tiếp tân ở đó",
+            "Quầy tiếp tân là ở đó"
+          ]
+        },
+        {
+          "id": 16,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は ろびー です。",
+          "question_kanji": "ここ は ロビー です。",
+          "answers": [
+            "Đây là hành lang",
+            "Cái này là hành lang",
+            "Chỗ này là hành lang"
+          ]
+        },
+        {
+          "id": 17,
+          "direction": "ja-to-vi",
+          "question_kana": "へや は 3かい です。",
+          "question_kanji": "部屋 は 3階 です。",
+          "answers": [
+            "Căn phòng ở tầng 3",
+            "Căn phòng là ở tầng 3"
+          ]
+        },
+        {
+          "id": 18,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は といれ です。",
+          "question_kanji": "こちら は トイレ です。",
+          "answers": [
+            "Phía này là nhà vệ sinh",
+            "Hướng này là nhà vệ sinh",
+            "Đây là nhà vệ sinh"
+          ]
+        },
+        {
+          "id": 19,
+          "direction": "ja-to-vi",
+          "question_kana": "かいだん は どこ ですか。",
+          "question_kanji": "階段 は どこ ですか。",
+          "answers": [
+            "Cầu thang bộ ở đâu thế",
+            "Cầu thang bộ ở đâu vậy",
+            "Cầu thang bộ ở đâu"
+          ]
+        },
+        {
+          "id": 20,
+          "direction": "ja-to-vi",
+          "question_kana": "ナムさんの 会社 は どちら ですか。",
+          "question_kanji": "ナムさんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh ナム là công ty nào",
+            "Công ty của chị ナム ở đâu",
+            "Công ty của ナム là hướng nào"
+          ]
+        },
+        {
+          "id": 21,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は べとなむの ねくたい です。",
+          "question_kanji": "これ は ベトナムの ネクタイ です。",
+          "answers": [
+            "Đây là cà vạt của Việt Nam",
+            "Cái này là cà vạt sản xuất tại Việt Nam",
+            "Cái này là cà vạt của Việt Nam"
+          ]
+        },
+        {
+          "id": 22,
+          "direction": "ja-to-vi",
+          "question_kana": "この わいん は いくら ですか。",
+          "question_kanji": "この ワイン は いくら ですか。",
+          "answers": [
+            "Cái rượu vang này bao nhiêu tiền",
+            "Quả rượu vang này bao nhiêu tiền",
+            "Rượu vang này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 23,
+          "direction": "ja-to-vi",
+          "question_kana": "うち は そこ です。",
+          "question_kanji": "うち は そこ です。",
+          "answers": [
+            "Nhà ở đó",
+            "Nhà là ở đó"
+          ]
+        },
+        {
+          "id": 24,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は きょうしつ です。",
+          "question_kanji": "ここ は 教室 です。",
+          "answers": [
+            "Đây là lớp học",
+            "Cái này là lớp học",
+            "Chỗ này là lớp học"
+          ]
+        },
+        {
+          "id": 25,
+          "direction": "ja-to-vi",
+          "question_kana": "しょくどう は 1かい です。",
+          "question_kanji": "食堂 は 1階 です。",
+          "answers": [
+            "Nhà ăn ở tầng 1",
+            "Nhà ăn là ở tầng 1"
+          ]
+        },
+        {
+          "id": 26,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は じむしょ です。",
+          "question_kanji": "こちら は 事務所 です。",
+          "answers": [
+            "Phía này là văn phòng",
+            "Hướng này là văn phòng",
+            "Đây là văn phòng"
+          ]
+        },
+        {
+          "id": 27,
+          "direction": "ja-to-vi",
+          "question_kana": "かいぎしつ は どこ ですか。",
+          "question_kanji": "会議室 は どこ ですか。",
+          "answers": [
+            "Phòng họp ở đâu thế",
+            "Phòng họp ở đâu vậy",
+            "Phòng họp ở đâu"
+          ]
+        },
+        {
+          "id": 28,
+          "direction": "ja-to-vi",
+          "question_kana": "ワットさんの 会社 は どちら ですか。",
+          "question_kanji": "ワットさんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh ワット là công ty nào",
+            "Công ty của chị ワット ở đâu",
+            "Công ty của ワット là hướng nào"
+          ]
+        },
+        {
+          "id": 29,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は さくらだいがくの でんわ です。",
+          "question_kanji": "これ は さくら大学の 電話 です。",
+          "answers": [
+            "Đây là điện thoại của đại học Sakura",
+            "Cái này là điện thoại sản xuất tại đại học Sakura",
+            "Cái này là điện thoại của đại học Sakura"
+          ]
+        },
+        {
+          "id": 30,
+          "direction": "ja-to-vi",
+          "question_kana": "この くつ は いくら ですか。",
+          "question_kanji": "この 靴 は いくら ですか。",
+          "answers": [
+            "Cái giày này bao nhiêu tiền",
+            "Quả giày này bao nhiêu tiền",
+            "Giày này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 31,
+          "direction": "ja-to-vi",
+          "question_kana": "といれ は そこ です。",
+          "question_kanji": "トイレ は そこ です。",
+          "answers": [
+            "Nhà vệ sinh ở đó",
+            "Nhà vệ sinh là ở đó"
+          ]
+        },
+        {
+          "id": 32,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は かいだん です。",
+          "question_kanji": "ここ は 階段 です。",
+          "answers": [
+            "Đây là cầu thang bộ",
+            "Cái này là cầu thang bộ",
+            "Chỗ này là cầu thang bộ"
+          ]
+        },
+        {
+          "id": 33,
+          "direction": "ja-to-vi",
+          "question_kana": "えれべーたー は 4かい です。",
+          "question_kanji": "エレベーター は 4階 です。",
+          "answers": [
+            "Thang máy ở tầng 4",
+            "Thang máy là ở tầng 4"
+          ]
+        },
+        {
+          "id": 34,
+          "direction": "ja-to-vi",
+          "question_kana": "こちら は えすかれーたー です。",
+          "question_kanji": "こちら は エスカレーター です。",
+          "answers": [
+            "Phía này là thang cuốn",
+            "Hướng này là thang cuốn",
+            "Đây là thang cuốn"
+          ]
+        },
+        {
+          "id": 35,
+          "direction": "ja-to-vi",
+          "question_kana": "ちか は どこ ですか。",
+          "question_kanji": "地下 は どこ ですか。",
+          "answers": [
+            "Tầng hầm ở đâu thế",
+            "Tầng hầm ở đâu vậy",
+            "Tầng hầm ở đâu"
+          ]
+        },
+        {
+          "id": 36,
+          "direction": "ja-to-vi",
+          "question_kana": "さとうさんの 会社 は どちら ですか。",
+          "question_kanji": "佐藤さんの 会社 は どちら ですか。",
+          "answers": [
+            "Công ty của anh 佐藤 là công ty nào",
+            "Công ty của chị 佐藤 ở đâu",
+            "Công ty của 佐藤 là hướng nào"
+          ]
+        },
+        {
+          "id": 37,
+          "direction": "ja-to-vi",
+          "question_kana": "これ は IMCの わいん です。",
+          "question_kanji": "これ は IMCの ワイン です。",
+          "answers": [
+            "Đây là rượu vang của công ty IMC",
+            "Cái này là rượu vang sản xuất tại công ty IMC",
+            "Cái này là rượu vang của công ty IMC"
+          ]
+        },
+        {
+          "id": 38,
+          "direction": "ja-to-vi",
+          "question_kana": "この たばこ は いくら ですか。",
+          "question_kanji": "この たばこ は いくら ですか。",
+          "answers": [
+            "Cái thuốc lá này bao nhiêu tiền",
+            "Quả thuốc lá này bao nhiêu tiền",
+            "Thuốc lá này bao nhiêu tiền"
+          ]
+        },
+        {
+          "id": 39,
+          "direction": "ja-to-vi",
+          "question_kana": "じむしょ は そこ です。",
+          "question_kanji": "事務所 は そこ です。",
+          "answers": [
+            "Văn phòng ở đó",
+            "Văn phòng là ở đó"
+          ]
+        },
+        {
+          "id": 40,
+          "direction": "ja-to-vi",
+          "question_kana": "ここ は かいぎしつ です。",
+          "question_kanji": "ここ は 会議室 です。",
+          "answers": [
+            "Đây là phòng họp",
+            "Cái này là phòng họp",
+            "Chỗ này là phòng họp"
+          ]
+        },
+        {
+          "id": 41,
+          "direction": "vi-to-ja",
+          "question": "Quầy tiếp tân ở tầng mấy thế?",
+          "answers": [
+            "うけつけは なんがいですか",
+            "uketsuke wa nangai desu ka",
+            "うけつけはなんがいですか",
+            "uketsukewanangaidesuka"
+          ]
+        },
+        {
+          "id": 42,
+          "direction": "vi-to-ja",
+          "question": "Cái này là điện thoại của nước nào?",
+          "answers": [
+            "これは どこの でんわですか",
+            "kore wa doko no denwa desu ka",
+            "これはどこのでんわですか",
+            "korewadokonodenwadesuka"
+          ]
+        },
+        {
+          "id": 43,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị タワポン ở đâu vậy?",
+          "answers": [
+            "タワポンさんの おくには どちらですか",
+            "tawapon san no okuni wa dochira desu ka",
+            "タワポンさんのおくにはどちらですか",
+            "tawaponsannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 44,
+          "direction": "vi-to-ja",
+          "question": "Nhà vệ sinh ở đằng kia.",
+          "answers": [
+            "といれは あそこです",
+            "toire wa asoko desu",
+            "といれはあそこです",
+            "toirewaasokodesu"
+          ]
+        },
+        {
+          "id": 45,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị カリナ ở hướng nào?",
+          "answers": [
+            "カリナさんの うちは どちらですか",
+            "karina san no uchi wa dochira desu ka",
+            "カリナさんのうちはどちらですか",
+            "karinasannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 46,
+          "direction": "vi-to-ja",
+          "question": "Kia là tầng hầm phải không?",
+          "answers": [
+            "あそこは ちかですか",
+            "asoko wa chika desu ka",
+            "あそこはちかですか",
+            "asokowachikadesuka"
+          ]
+        },
+        {
+          "id": 47,
+          "direction": "vi-to-ja",
+          "question": "Nhà ở tầng mấy thế?",
+          "answers": [
+            "うちは なんがいですか",
+            "uchi wa nangai desu ka",
+            "うちはなんがいですか",
+            "uchiwanangaidesuka"
+          ]
+        },
+        {
+          "id": 48,
+          "direction": "vi-to-ja",
+          "question": "Cái này là rượu vang của nước nào?",
+          "answers": [
+            "これは どこの わいんですか",
+            "kore wa doko no wain desu ka",
+            "これはどこのわいんですか",
+            "korewadokonowaindesuka"
+          ]
+        },
+        {
+          "id": 49,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị 田中 ở đâu vậy?",
+          "answers": [
+            "たなかさんの おくには どちらですか",
+            "tanaka san no okuni wa dochira desu ka",
+            "たなかさんのおくにはどちらですか",
+            "tanakasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 50,
+          "direction": "vi-to-ja",
+          "question": "Văn phòng ở đằng kia.",
+          "answers": [
+            "じむしょは あそこです",
+            "jimusho wa asoko desu",
+            "じむしょはあそこです",
+            "jimushowaasokodesu"
+          ]
+        },
+        {
+          "id": 51,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị サントス ở hướng nào?",
+          "answers": [
+            "サントスさんの うちは どちらですか",
+            "santosu san no uchi wa dochira desu ka",
+            "サントスさんのうちはどちらですか",
+            "santosusannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 52,
+          "direction": "vi-to-ja",
+          "question": "Kia là căn phòng phải không?",
+          "answers": [
+            "あそこは へやですか",
+            "asoko wa heya desu ka",
+            "あそこはへやですか",
+            "asokowaheyadesuka"
+          ]
+        },
+        {
+          "id": 53,
+          "direction": "vi-to-ja",
+          "question": "Nhà vệ sinh ở tầng mấy thế?",
+          "answers": [
+            "といれは なんがいですか",
+            "toire wa nangai desu ka",
+            "といれはなんがいですか",
+            "toirewanangaidesuka"
+          ]
+        },
+        {
+          "id": 54,
+          "direction": "vi-to-ja",
+          "question": "Cái này là giày của nước nào?",
+          "answers": [
+            "これは どこの くつですか",
+            "kore wa doko no kutsu desu ka",
+            "これはどこのくつですか",
+            "korewadokonokutsudesuka"
+          ]
+        },
+        {
+          "id": 55,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị カリナ ở đâu vậy?",
+          "answers": [
+            "カリナさんの おくには どちらですか",
+            "karina san no okuni wa dochira desu ka",
+            "カリナさんのおくにはどちらですか",
+            "karinasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 56,
+          "direction": "vi-to-ja",
+          "question": "Thang cuốn ở đằng kia.",
+          "answers": [
+            "えすかれーたーは あそこです",
+            "esukareetaa wa asoko desu",
+            "えすかれーたーはあそこです",
+            "esukareetaawaasokodesu"
+          ]
+        },
+        {
+          "id": 57,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị 山田 ở hướng nào?",
+          "answers": [
+            "やまださんの うちは どちらですか",
+            "yamada san no uchi wa dochira desu ka",
+            "やまださんのうちはどちらですか",
+            "yamadasannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 58,
+          "direction": "vi-to-ja",
+          "question": "Kia là nhà ăn phải không?",
+          "answers": [
+            "あそこは しょくどうですか",
+            "asoko wa shokudou desu ka",
+            "あそこはしょくどうですか",
+            "asokowashokudoudesuka"
+          ]
+        },
+        {
+          "id": 59,
+          "direction": "vi-to-ja",
+          "question": "Văn phòng ở tầng mấy thế?",
+          "answers": [
+            "じむしょは なんがいですか",
+            "jimusho wa nangai desu ka",
+            "じむしょはなんがいですか",
+            "jimushowanangaidesuka"
+          ]
+        },
+        {
+          "id": 60,
+          "direction": "vi-to-ja",
+          "question": "Cái này là thuốc lá của nước nào?",
+          "answers": [
+            "これは どこの たばこですか",
+            "kore wa doko no tabako desu ka",
+            "これはどこのたばこですか",
+            "korewadokonotabakodesuka"
+          ]
+        },
+        {
+          "id": 61,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị サントス ở đâu vậy?",
+          "answers": [
+            "サントスさんの おくには どちらですか",
+            "santosu san no okuni wa dochira desu ka",
+            "サントスさんのおくにはどちらですか",
+            "santosusannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 62,
+          "direction": "vi-to-ja",
+          "question": "Hành lang ở đằng kia.",
+          "answers": [
+            "ろびーは あそこです",
+            "robii wa asoko desu",
+            "ろびーはあそこです",
+            "robiiwaasokodesu"
+          ]
+        },
+        {
+          "id": 63,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị シュミット ở hướng nào?",
+          "answers": [
+            "シュミットさんの うちは どちらですか",
+            "shumitto san no uchi wa dochira desu ka",
+            "シュミットさんのうちはどちらですか",
+            "shumittosannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 64,
+          "direction": "vi-to-ja",
+          "question": "Kia là thang máy phải không?",
+          "answers": [
+            "あそこは えれべーたーですか",
+            "asoko wa erebeetaa desu ka",
+            "あそこはえれべーたーですか",
+            "asokowaerebeetaadesuka"
+          ]
+        },
+        {
+          "id": 65,
+          "direction": "vi-to-ja",
+          "question": "Thang cuốn ở tầng mấy thế?",
+          "answers": [
+            "えすかれーたーは なんがいですか",
+            "esukareetaa wa nangai desu ka",
+            "えすかれーたーはなんがいですか",
+            "esukareetaawanangaidesuka"
+          ]
+        },
+        {
+          "id": 66,
+          "direction": "vi-to-ja",
+          "question": "Cái này là cà vạt của nước nào?",
+          "answers": [
+            "これは どこの ねくたいですか",
+            "kore wa doko no nekutai desu ka",
+            "これはどこのねくたいですか",
+            "korewadokononekutaidesuka"
+          ]
+        },
+        {
+          "id": 67,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị 山田 ở đâu vậy?",
+          "answers": [
+            "やまださんの おくには どちらですか",
+            "yamada san no okuni wa dochira desu ka",
+            "やまださんのおくにはどちらですか",
+            "yamadasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 68,
+          "direction": "vi-to-ja",
+          "question": "Lớp học ở đằng kia.",
+          "answers": [
+            "きょうしつは あそこです",
+            "kyoushitsu wa asoko desu",
+            "きょうしつはあそこです",
+            "kyoushitsuwaasokodesu"
+          ]
+        },
+        {
+          "id": 69,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị 木村 ở hướng nào?",
+          "answers": [
+            "きむらさんの うちは どちらですか",
+            "kimura san no uchi wa dochira desu ka",
+            "きむらさんのうちはどちらですか",
+            "kimurasannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 70,
+          "direction": "vi-to-ja",
+          "question": "Kia là quầy tiếp tân phải không?",
+          "answers": [
+            "あそこは うけつけですか",
+            "asoko wa uketsuke desu ka",
+            "あそこはうけつけですか",
+            "asokowauketsukedesuka"
+          ]
+        },
+        {
+          "id": 71,
+          "direction": "vi-to-ja",
+          "question": "Hành lang ở tầng mấy thế?",
+          "answers": [
+            "ろびーは なんがいですか",
+            "robii wa nangai desu ka",
+            "ろびーはなんがいですか",
+            "robiiwanangaidesuka"
+          ]
+        },
+        {
+          "id": 72,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị シュミット ở đâu vậy?",
+          "answers": [
+            "シュミットさんの おくには どちらですか",
+            "shumitto san no okuni wa dochira desu ka",
+            "シュミットさんのおくにはどちらですか",
+            "shumittosannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 73,
+          "direction": "vi-to-ja",
+          "question": "Cầu thang bộ ở đằng kia.",
+          "answers": [
+            "かいだんは あそこです",
+            "kaidan wa asoko desu",
+            "かいだんはあそこです",
+            "kaidanwaasokodesu"
+          ]
+        },
+        {
+          "id": 74,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị ナム ở hướng nào?",
+          "answers": [
+            "ナムさんの うちは どちらですか",
+            "namu san no uchi wa dochira desu ka",
+            "ナムさんのうちはどちらですか",
+            "namusannouchiwadochiradesuka"
+          ]
+        },
+        {
+          "id": 75,
+          "direction": "vi-to-ja",
+          "question": "Đây là tầng hầm.",
+          "answers": [
+            "ここは ちかです",
+            "koko wa chika desu",
+            "ここはちかです",
+            "kokowachikadesu"
+          ]
+        },
+        {
+          "id": 76,
+          "direction": "vi-to-ja",
+          "question": "Kia là nhà phải không?",
+          "answers": [
+            "あそこは うちですか",
+            "asoko wa uchi desu ka",
+            "あそこはうちですか",
+            "asokowauchidesuka"
+          ]
+        },
+        {
+          "id": 77,
+          "direction": "vi-to-ja",
+          "question": "Lớp học ở tầng mấy thế?",
+          "answers": [
+            "きょうしつは なんがいですか",
+            "kyoushitsu wa nangai desu ka",
+            "きょうしつはなんがいですか",
+            "kyoushitsuwanangaidesuka"
+          ]
+        },
+        {
+          "id": 78,
+          "direction": "vi-to-ja",
+          "question": "Đất nước của anh/chị 木村 ở đâu vậy?",
+          "answers": [
+            "きむらさんの おくには どちらですか",
+            "kimura san no okuni wa dochira desu ka",
+            "きむらさんのおくにはどちらですか",
+            "kimurasannookuniwadochiradesuka"
+          ]
+        },
+        {
+          "id": 79,
+          "direction": "vi-to-ja",
+          "question": "Phòng họp ở đằng kia.",
+          "answers": [
+            "かいぎしつは あそこです",
+            "kaigishitsu wa asoko desu",
+            "かいぎしつはあそこです",
+            "kaigishitsuwaasokodesu"
+          ]
+        },
+        {
+          "id": 80,
+          "direction": "vi-to-ja",
+          "question": "Nhà của anh/chị ワット ở hướng nào?",
+          "answers": [
+            "ワットさんの うちは どちらですか",
+            "watto san no uchi wa dochira desu ka",
+            "ワットさんのうちはどちらですか",
+            "wattosannouchiwadochiradesuka"
+          ]
+        }
+      ],
+      "dialogues": [
+        {
+          "id": 1,
+          "context": "Hỏi nơi bán cà vạt (ねくたい) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、ねくたい うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ネクタイ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán cà vạt ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2かい です。[blank2] ですよ。",
+              "text_kanji": "2階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 2 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "2かい",
+              "options": [
+                "2かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "2かい": "tầng 2",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 2,
+          "context": "Hỏi giá tiền của rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この わいん は [blank1] ですか。",
+              "text_kanji": "すみません、この ワイン は [blank1] ですか。",
+              "translation": "Xin lỗi, cái rượu vang này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "8せん8ひゃくえん です。",
+              "text_kanji": "8,800 yên です。",
+              "translation": "Là 8,800 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 3,
+          "context": "Hỏi xuất xứ của món đồ thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の たばこ ですか。",
+              "text_kanji": "それ は [blank1] の たばこ ですか。",
+              "translation": "Đó là thuốc lá của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いぎりす の です。[blank2] です。",
+              "text_kanji": "はい、イギリス の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Anh ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いぎりす",
+              "options": [
+                "いぎりす",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いぎりす": "Anh",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 4,
+          "context": "Hỏi vị trí của quầy tiếp tân (うけつけ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、うけつけ は [blank1] ですか。",
+              "text_kanji": "すみません、受付 は [blank1] ですか。",
+              "translation": "Xin lỗi, quầy tiếp tân ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 5,
+          "context": "Hỏi nơi bán giày (くつ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、くつ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、靴 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán giày ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1かい です。[blank2] ですよ。",
+              "text_kanji": "1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "1かい",
+              "options": [
+                "1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "1かい": "tầng 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 6,
+          "context": "Hỏi giá tiền của cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この ねくたい は [blank1] ですか。",
+              "text_kanji": "すみません、この ネクタイ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái cà vạt này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3ぜん5ひゃくえん です。",
+              "text_kanji": "3,500 yên です。",
+              "translation": "Là 3,500 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 7,
+          "context": "Hỏi xuất xứ của món đồ rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の わいん ですか。",
+              "text_kanji": "それ は [blank1] の ワイン ですか。",
+              "translation": "Đó là rượu vang của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、IMC の です。[blank2] です。",
+              "text_kanji": "はい、IMC の です。[blank2] です。",
+              "translation": "Vâng, là đồ của công ty IMC ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "IMC",
+              "options": [
+                "IMC",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "IMC": "công ty IMC",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 8,
+          "context": "Hỏi vị trí của cầu thang bộ (かいだん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、かいだん は [blank1] ですか。",
+              "text_kanji": "すみません、階段 は [blank1] ですか。",
+              "translation": "Xin lỗi, cầu thang bộ ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 9,
+          "context": "Hỏi nơi bán điện thoại (でんわ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、でんわ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、電話 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán điện thoại ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "ちか1かい です。[blank2] ですよ。",
+              "text_kanji": "地下1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng hầm 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "ちか1かい",
+              "options": [
+                "ちか1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "ちか1かい": "tầng hầm 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 10,
+          "context": "Hỏi giá tiền của giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この くつ は [blank1] ですか。",
+              "text_kanji": "すみません、この 靴 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái giày này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1せんえん です。",
+              "text_kanji": "1,000 yên です。",
+              "translation": "Là 1,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 11,
+          "context": "Hỏi xuất xứ của món đồ cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の ねくたい ですか。",
+              "text_kanji": "それ は [blank1] の ネクタイ ですか。",
+              "translation": "Đó là cà vạt của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、べとなむ の です。[blank2] です。",
+              "text_kanji": "はい、ベトナム の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Việt Nam ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "べとなむ",
+              "options": [
+                "べとなむ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "べとなむ": "Việt Nam",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ"
+              }
+            }
+          }
+        },
+        {
+          "id": 12,
+          "context": "Hỏi vị trí của nhà (うち)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、うち は [blank1] ですか。",
+              "text_kanji": "すみません、うち は [blank1] ですか。",
+              "translation": "Xin lỗi, nhà ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 13,
+          "context": "Hỏi nơi bán thuốc lá (たばこ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、たばこ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、たばこ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán thuốc lá ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "4かい です。[blank2] ですよ。",
+              "text_kanji": "4階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 4 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "4かい",
+              "options": [
+                "4かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "4かい": "tầng 4",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 14,
+          "context": "Hỏi giá tiền của điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この でんわ は [blank1] ですか。",
+              "text_kanji": "すみません、この 電話 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái điện thoại này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2まんえん です。",
+              "text_kanji": "20,000 yên です。",
+              "translation": "Là 20,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 15,
+          "context": "Hỏi xuất xứ của món đồ giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の くつ ですか。",
+              "text_kanji": "それ は [blank1] の 靴 ですか。",
+              "translation": "Đó là giày của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いたりあ の です。[blank2] です。",
+              "text_kanji": "はい、イタリア の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Ý ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いたりあ",
+              "options": [
+                "いたりあ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いたりあ": "Ý",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 16,
+          "context": "Hỏi vị trí của phòng họp (かいぎしつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、かいぎしつ は [blank1] ですか。",
+              "text_kanji": "すみません、会議室 は [blank1] ですか。",
+              "translation": "Xin lỗi, phòng họp ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 17,
+          "context": "Hỏi nơi bán rượu vang (わいん) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、わいん うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ワイン 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán rượu vang ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3かい です。[blank2] ですよ。",
+              "text_kanji": "3階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 3 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "3かい",
+              "options": [
+                "3かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "3かい": "tầng 3",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 18,
+          "context": "Hỏi giá tiền của thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この たばこ は [blank1] ですか。",
+              "text_kanji": "すみません、この たばこ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái thuốc lá này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1まん5せんえん です。",
+              "text_kanji": "15,000 yên です。",
+              "translation": "Là 15,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 19,
+          "context": "Hỏi xuất xứ của món đồ điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の でんわ ですか。",
+              "text_kanji": "それ は [blank1] の 電話 ですか。",
+              "translation": "Đó là điện thoại của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、さくらだいがく の です。[blank2] です。",
+              "text_kanji": "はい、さくら大学 の です。[blank2] です。",
+              "translation": "Vâng, là đồ của đại học Sakura ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "さくらだいがく",
+              "options": [
+                "さくらだいがく",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "さくらだいがく": "đại học Sakura",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 20,
+          "context": "Hỏi vị trí của nhà vệ sinh (といれ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、といれ は [blank1] ですか。",
+              "text_kanji": "すみません、トイレ は [blank1] ですか。",
+              "translation": "Xin lỗi, nhà vệ sinh ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 21,
+          "context": "Hỏi nơi bán cà vạt (ねくたい) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、ねくたい うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ネクタイ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán cà vạt ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2かい です。[blank2] ですよ。",
+              "text_kanji": "2階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 2 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "2かい",
+              "options": [
+                "2かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "2かい": "tầng 2",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 22,
+          "context": "Hỏi giá tiền của rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この わいん は [blank1] ですか。",
+              "text_kanji": "すみません、この ワイン は [blank1] ですか。",
+              "translation": "Xin lỗi, cái rượu vang này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "8せん8ひゃくえん です。",
+              "text_kanji": "8,800 yên です。",
+              "translation": "Là 8,800 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 23,
+          "context": "Hỏi xuất xứ của món đồ thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の たばこ ですか。",
+              "text_kanji": "それ は [blank1] の たばこ ですか。",
+              "translation": "Đó là thuốc lá của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いぎりす の です。[blank2] です。",
+              "text_kanji": "はい、イギリス の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Anh ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いぎりす",
+              "options": [
+                "いぎりす",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いぎりす": "Anh",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 24,
+          "context": "Hỏi vị trí của tầng hầm (ちか)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、ちか は [blank1] ですか。",
+              "text_kanji": "すみません、地下 は [blank1] ですか。",
+              "translation": "Xin lỗi, tầng hầm ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 25,
+          "context": "Hỏi nơi bán giày (くつ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、くつ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、靴 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán giày ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1かい です。[blank2] ですよ。",
+              "text_kanji": "1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "1かい",
+              "options": [
+                "1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "1かい": "tầng 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 26,
+          "context": "Hỏi giá tiền của cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この ねくたい は [blank1] ですか。",
+              "text_kanji": "すみません、この ネクタイ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái cà vạt này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3ぜん5ひゃくえん です。",
+              "text_kanji": "3,500 yên です。",
+              "translation": "Là 3,500 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 27,
+          "context": "Hỏi xuất xứ của món đồ rượu vang (わいん)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の わいん ですか。",
+              "text_kanji": "それ は [blank1] の ワイン ですか。",
+              "translation": "Đó là rượu vang của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、IMC の です。[blank2] です。",
+              "text_kanji": "はい、IMC の です。[blank2] です。",
+              "translation": "Vâng, là đồ của công ty IMC ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "IMC",
+              "options": [
+                "IMC",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "IMC": "công ty IMC",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 28,
+          "context": "Hỏi vị trí của văn phòng (じむしょ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、じむしょ は [blank1] ですか。",
+              "text_kanji": "すみません、事務所 は [blank1] ですか。",
+              "translation": "Xin lỗi, văn phòng ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 29,
+          "context": "Hỏi nơi bán điện thoại (でんわ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、でんわ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、電話 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán điện thoại ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "ちか1かい です。[blank2] ですよ。",
+              "text_kanji": "地下1階 です。[blank2] ですよ。",
+              "translation": "Ở tầng hầm 1 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "ちか1かい",
+              "options": [
+                "ちか1かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "ちか1かい": "tầng hầm 1",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 30,
+          "context": "Hỏi giá tiền của giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この くつ は [blank1] ですか。",
+              "text_kanji": "すみません、この 靴 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái giày này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1せんえん です。",
+              "text_kanji": "1,000 yên です。",
+              "translation": "Là 1,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 31,
+          "context": "Hỏi xuất xứ của món đồ cà vạt (ねくたい)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の ねくたい ですか。",
+              "text_kanji": "それ は [blank1] の ネクタイ ですか。",
+              "translation": "Đó là cà vạt của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、べとなむ の です。[blank2] です。",
+              "text_kanji": "はい、ベトナム の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Việt Nam ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "べとなむ",
+              "options": [
+                "べとなむ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "べとなむ": "Việt Nam",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ"
+              }
+            }
+          }
+        },
+        {
+          "id": 32,
+          "context": "Hỏi vị trí của căn phòng (へや)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、へや は [blank1] ですか。",
+              "text_kanji": "すみません、部屋 は [blank1] ですか。",
+              "translation": "Xin lỗi, căn phòng ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 33,
+          "context": "Hỏi nơi bán thuốc lá (たばこ) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、たばこ うりば は [blank1] ですか。",
+              "text_kanji": "あのう、たばこ 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán thuốc lá ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "4かい です。[blank2] ですよ。",
+              "text_kanji": "4階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 4 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "4かい",
+              "options": [
+                "4かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "4かい": "tầng 4",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 34,
+          "context": "Hỏi giá tiền của điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この でんわ は [blank1] ですか。",
+              "text_kanji": "すみません、この 電話 は [blank1] ですか。",
+              "translation": "Xin lỗi, cái điện thoại này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "2まんえん です。",
+              "text_kanji": "20,000 yên です。",
+              "translation": "Là 20,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 35,
+          "context": "Hỏi xuất xứ của món đồ giày (くつ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の くつ ですか。",
+              "text_kanji": "それ は [blank1] の 靴 ですか。",
+              "translation": "Đó là giày của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、いたりあ の です。[blank2] です。",
+              "text_kanji": "はい、イタリア の です。[blank2] です。",
+              "translation": "Vâng, là đồ của Ý ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "いたりあ",
+              "options": [
+                "いたりあ",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "いたりあ": "Ý",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 36,
+          "context": "Hỏi vị trí của thang cuốn (えすかれーたー)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、えすかれーたー は [blank1] ですか。",
+              "text_kanji": "すみません、エスカレーター は [blank1] ですか。",
+              "translation": "Xin lỗi, thang cuốn ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 37,
+          "context": "Hỏi nơi bán rượu vang (わいん) và số tầng",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "あのう、わいん うりば は [blank1] ですか。",
+              "text_kanji": "あのう、ワイン 売り場 は [blank1] ですか。",
+              "translation": "Xin hỏi, quầy bán rượu vang ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "3かい です。[blank2] ですよ。",
+              "text_kanji": "3階 です。[blank2] ですよ。",
+              "translation": "Ở tầng 3 ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どちら",
+              "options": [
+                "どちら",
+                "だれ",
+                "いくら",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) dùng từ nghi vấn lịch sự 'どちら' (hướng nào/đâu) để hỏi vị trí quầy hàng.",
+              "options_translations": {
+                "どちら": "phía nào (lịch sự)",
+                "だれ": "ai",
+                "いくら": "bao nhiêu tiền",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "3かい",
+              "options": [
+                "3かい",
+                "ちか",
+                "おくに",
+                "うち"
+              ],
+              "explanation": "Vị trí (2) đính chính lại thông tin số tầng phù hợp với câu trả lời của nhân vật B.",
+              "options_translations": {
+                "3かい": "tầng 3",
+                "ちか": "tầng hầm",
+                "おくに": "đất nước của bạn",
+                "うち": "nhà"
+              }
+            }
+          }
+        },
+        {
+          "id": 38,
+          "context": "Hỏi giá tiền của thuốc lá (たばこ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、この たばこ は [blank1] ですか。",
+              "text_kanji": "すみません、この たばこ は [blank1] ですか。",
+              "translation": "Xin lỗi, cái thuốc lá này [blank1] tiền thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "1まん5せんえん です。",
+              "text_kanji": "15,000 yên です。",
+              "translation": "Là 15,000 yên ạ."
+            },
+            {
+              "speaker": "A",
+              "text_kana": "じゃ、これを [blank2]。",
+              "text_kanji": "じゃ、これを [blank2]。",
+              "translation": "Vậy thì, tôi lấy cái này."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "いくら",
+              "options": [
+                "いくら",
+                "どこ",
+                "なん",
+                "だれ"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn hỏi giá tiền 'いくら' (bao nhiêu tiền).",
+              "options_translations": {
+                "いくら": "bao nhiêu tiền",
+                "どこ": "đâu / chỗ nào",
+                "なん": "cái gì",
+                "だれ": "ai"
+              }
+            },
+            "blank2": {
+              "correct": "ください",
+              "options": [
+                "ください",
+                "です",
+                "あります",
+                "いません"
+              ],
+              "explanation": "Vị trí (2) hoàn thành cụm từ quyết định mua đồ 'これを ください' (cho tôi lấy cái này).",
+              "options_translations": {
+                "ください": "từ vựng Bài 3",
+                "です": "từ vựng Bài 3",
+                "あります": "từ vựng Bài 3",
+                "いません": "từ vựng Bài 3"
+              }
+            }
+          }
+        },
+        {
+          "id": 39,
+          "context": "Hỏi xuất xứ của món đồ điện thoại (でんわ)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "それ は [blank1] の でんわ ですか。",
+              "text_kanji": "それ は [blank1] の 電話 ですか。",
+              "translation": "Đó là điện thoại của [blank1] phải không?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "はい、さくらだいがく の です。[blank2] です。",
+              "text_kanji": "はい、さくら大学 の です。[blank2] です。",
+              "translation": "Vâng, là đồ của đại học Sakura ạ. Là [blank2] đó."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) điền từ nghi vấn 'どこ' (đâu/nơi nào) trong cấu trúc 'どconの N' để hỏi xuất xứ.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "さくらだいがく",
+              "options": [
+                "さくらだいがく",
+                "にほん",
+                "あめりか",
+                "べとなむ"
+              ],
+              "explanation": "Vị trí (2) lặp lại chính xác tên quốc gia/tổ chức xuất xứ của sản phẩm.",
+              "options_translations": {
+                "さくらだいがく": "đại học Sakura",
+                "にほん": "Nhật Bản",
+                "あめりか": "Mỹ",
+                "べとなむ": "Việt Nam"
+              }
+            }
+          }
+        },
+        {
+          "id": 40,
+          "context": "Hỏi vị trí của nhà ăn (しょくどう)",
+          "lines": [
+            {
+              "speaker": "A",
+              "text_kana": "すみません、しょくどう は [blank1] ですか。",
+              "text_kanji": "すみません、食堂 は [blank1] ですか。",
+              "translation": "Xin lỗi, nhà ăn ở [blank1] thế ạ?"
+            },
+            {
+              "speaker": "B",
+              "text_kana": "あそこ です。[blank2] は あちら です。",
+              "text_kanji": "あそこ です。[blank2] は あちら です。",
+              "translation": "Ở kia ạ. [blank2] ở phía kia."
+            }
+          ],
+          "blanks": {
+            "blank1": {
+              "correct": "どこ",
+              "options": [
+                "どこ",
+                "いくら",
+                "だれ",
+                "なん"
+              ],
+              "explanation": "Vị trí (1) cần điền từ nghi vấn chỉ địa điểm 'どこ' (đâu) để hỏi vị trí.",
+              "options_translations": {
+                "どこ": "đâu / chỗ nào",
+                "いくら": "bao nhiêu tiền",
+                "だれ": "ai",
+                "なん": "cái gì"
+              }
+            },
+            "blank2": {
+              "correct": "かいだん",
+              "options": [
+                "かいだん",
+                "うち",
+                "おくに",
+                "かいしゃ"
+              ],
+              "explanation": "Vị trí (2) điền danh từ địa điểm 'かいだん' (cầu thang) để chỉ hướng đi tiếp theo.",
+              "options_translations": {
+                "かいだん": "cầu thang bộ",
+                "うち": "nhà",
+                "おくに": "đất nước của bạn",
+                "かいしゃ": "từ vựng Bài 3"
+              }
+            }
+          }
+        }
+      ],
+      "listenings": [
+        {
+          "id": 1,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "audio_text_kana": "A: すみません、じむしょは どこですか。 B: じむしょですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、事務所は  đâu ですか。 B: 事務所ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, văn phòng ở đâu thế?\nB: văn phòng hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm văn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'じむしょですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "audio_text_kana": "A: すみません、かいぎしつは どこですか。 B: かいぎしつですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、会議室は  đâu ですか。 B: 会議室ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, phòng họp ở đâu thế?\nB: phòng họp hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm phòng họp được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'かいぎしつですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "audio_text_kana": "A: すみません、うけつけは どこですか。 B: うけつけですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、受付は  đâu ですか。 B: 受付ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, quầy tiếp tân ở đâu thế?\nB: quầy tiếp tân hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm quầy tiếp tân được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'うけつけですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "audio_text_kana": "A: すみません、ろびーは どこですか。 B: ろびーですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、ロビーは  đâu ですか。 B: ロビーですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, hành lang ở đâu thế?\nB: hành lang hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm hành lang được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'ろびーですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "audio_text_kana": "A: すみません、へやは どこですか。 B: へやですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、部屋は  đâu ですか。 B: 部屋ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, căn phòng ở đâu thế?\nB: căn phòng hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm căn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'へやですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "audio_text_kana": "A: すみません、といれは どこですか。 B: といれですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、トイレは  đâu ですか。 B: トイレですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà vệ sinh ở đâu thế?\nB: nhà vệ sinh hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà vệ sinh được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'といれですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "audio_text_kana": "A: すみません、かいだんは どこですか。 B: かいだんですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、階段は  đâu ですか。 B: 階段ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, cầu thang bộ ở đâu thế?\nB: cầu thang bộ hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm cầu thang bộ được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'かいだんですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "audio_text_kana": "A: すみません、えれべーたーは どこですか。 B: えれべーたーですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、エレベーターは  đâu ですか。 B: エレベーターですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang máy ở đâu thế?\nB: thang máy hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang máy được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'えれべーたーですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "audio_text_kana": "A: すみません、えすかれーたーは どこですか。 B: えすかれーたーですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、エスカレーターは  đâu ですか。 B: エスカレーターですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang cuốn ở đâu thế?\nB: thang cuốn hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang cuốn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'えすかれーたーですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "audio_text_kana": "A: すみません、ちかは どこですか。 B: ちかですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、地下は  đâu ですか。 B: 地下ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, tầng hầm ở đâu thế?\nB: tầng hầm hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm tầng hầm được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'ちかですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "audio_text_kana": "A: すみません、うちは どこですか。 B: うちですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、うちは  đâu ですか。 B: うちですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ở đâu thế?\nB: nhà hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'うちですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "audio_text_kana": "A: すみません、きょうしつは どこですか。 B: きょうしつですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、教室は  đâu ですか。 B: 教室ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, lớp học ở đâu thế?\nB: lớp học hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm lớp học được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'きょうしつですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "audio_text_kana": "A: すみません、じむしょは どこですか。 B: じむしょですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、事務所は  đâu ですか。 B: 事務所ですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, văn phòng ở đâu thế?\nB: văn phòng hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm văn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'じむしょですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "audio_text_kana": "A: すみません、かいぎしつは どこですか。 B: かいぎしつですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、会議室は  đâu ですか。 B: 会議室ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, phòng họp ở đâu thế?\nB: phòng họp hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm phòng họp được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'かいぎしつですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "audio_text_kana": "A: すみません、うけつけは どこですか。 B: うけつけですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、受付は  đâu ですか。 B: 受付ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, quầy tiếp tân ở đâu thế?\nB: quầy tiếp tân hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm quầy tiếp tân được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'うけつけですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "audio_text_kana": "A: すみません、ろびーは どこですか。 B: ろびーですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、ロビーは  đâu ですか。 B: ロビーですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, hành lang ở đâu thế?\nB: hành lang hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm hành lang được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'ろびーですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "audio_text_kana": "A: すみません、へやは どこですか。 B: へやですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、部屋は  đâu ですか。 B: 部屋ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, căn phòng ở đâu thế?\nB: căn phòng hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm căn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'へやですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "audio_text_kana": "A: すみません、といれは どこですか。 B: といれですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、トイレは  đâu ですか。 B: トイレですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà vệ sinh ở đâu thế?\nB: nhà vệ sinh hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà vệ sinh được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'といれですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "audio_text_kana": "A: すみません、かいだんは どこですか。 B: かいだんですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、階段は  đâu ですか。 B: 階段ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, cầu thang bộ ở đâu thế?\nB: cầu thang bộ hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm cầu thang bộ được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'かいだんですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "audio_text_kana": "A: すみません、えれべーたーは どこですか。 B: えれべーたーですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、エレベーターは  đâu ですか。 B: エレベーターですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang máy ở đâu thế?\nB: thang máy hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang máy được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'えれべーたーですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 23,
+          "audio_text_kana": "A: すみません、えすかれーたーは どこですか。 B: えすかれーたーですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、エスカレーターは  đâu ですか。 B: エスカレーターですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang cuốn ở đâu thế?\nB: thang cuốn hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang cuốn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'えすかれーたーですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 24,
+          "audio_text_kana": "A: すみません、ちかは どこですか。 B: ちかですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、地下は  đâu ですか。 B: 地下ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, tầng hầm ở đâu thế?\nB: tầng hầm hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm tầng hầm được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'ちかですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "audio_text_kana": "A: すみません、うちは どこですか。 B: うちですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、うちは  đâu ですか。 B: うちですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ở đâu thế?\nB: nhà hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'うちですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "audio_text_kana": "A: すみません、きょうしつは どこですか。 B: きょうしつですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、教室は  đâu ですか。 B: 教室ですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, lớp học ở đâu thế?\nB: lớp học hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm lớp học được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'きょうしつですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 27,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 28,
+          "audio_text_kana": "A: すみません、じむしょは どこですか。 B: じむしょですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、事務所は  đâu ですか。 B: 事務所ですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, văn phòng ở đâu thế?\nB: văn phòng hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm văn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'じむしょですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 29,
+          "audio_text_kana": "A: すみません、かいぎしつは どこですか。 B: かいぎしつですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、会議室は  đâu ですか。 B: 会議室ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, phòng họp ở đâu thế?\nB: phòng họp hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm phòng họp được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'かいぎしつですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "audio_text_kana": "A: すみません、うけつけは どこですか。 B: うけつけですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、受付は  đâu ですか。 B: 受付ですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, quầy tiếp tân ở đâu thế?\nB: quầy tiếp tân hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm quầy tiếp tân được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'うけつけですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 31,
+          "audio_text_kana": "A: すみません、ろびーは どこですか。 B: ろびーですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは べとなむの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、ロビーは  đâu ですか。 B: ロビーですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは ベトナムの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, hành lang ở đâu thế?\nB: hành lang hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Việt Nam, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm hành lang được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'ろびーですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Việt Nam, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Việt Nam, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは べとなむの ねくたいで、3ぜん5ひゃくえん です' (của Việt Nam, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "audio_text_kana": "A: すみません、へやは どこですか。 B: へやですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは あめりかの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、部屋は  đâu ですか。 B: 部屋ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは アメリカの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, căn phòng ở đâu thế?\nB: căn phòng hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của Mỹ, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm căn phòng được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'へやですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Mỹ, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Mỹ, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは あめりかの わいんで、8せん8ひゃくえん です' (của Mỹ, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 33,
+          "audio_text_kana": "A: すみません、といれは どこですか。 B: といれですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは いぎりすの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、トイレは  đâu ですか。 B: トイレですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは イギリスの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà vệ sinh ở đâu thế?\nB: nhà vệ sinh hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của Anh, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà vệ sinh được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'といれですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Anh, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Anh, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは いぎりすの たばこで、1まん5せんえん です' (của Anh, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "audio_text_kana": "A: すみません、かいだんは どこですか。 B: かいだんですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは ふらんすの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、階段は  đâu ですか。 B: 階段ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは フランスの 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, cầu thang bộ ở đâu thế?\nB: cầu thang bộ hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của Pháp, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm cầu thang bộ được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'かいだんですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Pháp, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Pháp, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは ふらんすの でんわで、2まんえん です' (của Pháp, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "audio_text_kana": "A: すみません、えれべーたーは どこですか。 B: えれべーたーですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは いたりあの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、エレベーターは  đâu ですか。 B: エレベーターですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは イタリアの 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang máy ở đâu thế?\nB: thang máy hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Ý, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang máy được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'えれべーたーですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Ý, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Ý, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは いたりあの くつで、1せんえん です' (của Ý, giá 1,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "audio_text_kana": "A: すみません、えすかれーたーは どこですか。 B: えすかれーたーですか。2かい です。 A: そうですか。この ねくたいも 2かいですか。 B: いいえ、ねくたいは 1かいですよ。これは すいすの ねくたいで、3ぜん5ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、エスカレーターは  đâu ですか。 B: エスカレーターですか。2階 です。 A: そうですか。この ネクタイも 2階ですか。 B: いいえ、ネクタイは 1階ですよ。これは スイスの ネクタイで、3,500 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, thang cuốn ở đâu thế?\nB: thang cuốn hả? Ở tầng 2 ạ.\nA: Thế à. Cái cà vạt này cũng ở tầng 2 phải không?\nB: Không, cà vạt ở tầng 1 cơ. Đây là cà vạt của Thụy Sĩ, giá 3,500 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm thang cuốn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 2",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 2",
+              "explanation": "Nhân vật B trả lời 'えすかれーたーですか。2かい です' (Ở tầng 2)."
+            },
+            {
+              "q": "Món đồ cà vạt được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 2",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'ねくたいは 1かいですよ' (cà vạt ở tầng 1)."
+            },
+            {
+              "q": "Món đồ cà vạt có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Thụy Sĩ, giá 3,500 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Thụy Sĩ, giá 3,500 yên",
+              "explanation": "Nhân vật B nói 'これは すいすの ねくたいで、3ぜん5ひゃくえん です' (của Thụy Sĩ, giá 3,500 yên)."
+            }
+          ]
+        },
+        {
+          "id": 37,
+          "audio_text_kana": "A: すみません、ちかは どこですか。 B: ちかですか。3かい です。 A: そうですか。この わいんも 3かいですか。 B: いいえ、わいんは 1かいですよ。これは IMCの わいんで、8せん8ひゃくえん です。",
+          "audio_text_kanji": "A: すみません、地下は  đâu ですか。 B: 地下ですか。3階 です。 A: そうですか。この ワインも 3階ですか。 B: いいえ、ワインは 1階ですよ。これは IMCの ワインで、8,800 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, tầng hầm ở đâu thế?\nB: tầng hầm hả? Ở tầng 3 ạ.\nA: Thế à. Cái rượu vang này cũng ở tầng 3 phải không?\nB: Không, rượu vang ở tầng 1 cơ. Đây là rượu vang của công ty IMC, giá 8,800 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm tầng hầm được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 3",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 3",
+              "explanation": "Nhân vật B trả lời 'ちかですか。3かい です' (Ở tầng 3)."
+            },
+            {
+              "q": "Món đồ rượu vang được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 3",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'わいんは 1かいですよ' (rượu vang ở tầng 1)."
+            },
+            {
+              "q": "Món đồ rượu vang có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty IMC, giá 8,800 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty IMC, giá 8,800 yên",
+              "explanation": "Nhân vật B nói 'これは IMCの わいんで、8せん8ひゃくえん です' (của công ty IMC, giá 8,800 yên)."
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "audio_text_kana": "A: すみません、うちは どこですか。 B: うちですか。4かい です。 A: そうですか。この たばこも 4かいですか。 B: いいえ、たばこは 1かいですよ。これは FPTの たばこで、1まん5せんえん です。",
+          "audio_text_kanji": "A: すみません、うちは  đâu ですか。 B: うちですか。4階 です。 A: そうですか。この たばこも 4階ですか。 B: いいえ、たばこは 1階ですよ。これは FPTの たばこで、15,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ở đâu thế?\nB: nhà hả? Ở tầng 4 ạ.\nA: Thế à. Cái thuốc lá này cũng ở tầng 4 phải không?\nB: Không, thuốc lá ở tầng 1 cơ. Đây là thuốc lá của công ty FPT, giá 15,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 4",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 4",
+              "explanation": "Nhân vật B trả lời 'うちですか。4かい です' (Ở tầng 4)."
+            },
+            {
+              "q": "Món đồ thuốc lá được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 4",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'たばこは 1かいですよ' (thuốc lá ở tầng 1)."
+            },
+            {
+              "q": "Món đồ thuốc lá có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ công ty FPT, giá 15,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ công ty FPT, giá 15,000 yên",
+              "explanation": "Nhân vật B nói 'これは FPTの たばこで、1まん5せんえん です' (của công ty FPT, giá 15,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 39,
+          "audio_text_kana": "A: すみません、きょうしつは どこですか。 B: きょうしつですか。ちか1かい です。 A: そうですか。この でんわも ちか1かいですか。 B: いいえ、でんわは 1かいですよ。これは さくらだいがくの でんわで、2まんえん です。",
+          "audio_text_kanji": "A: すみません、教室は  đâu ですか。 B: 教室ですか。地下1階 です。 A: そうですか。この 電話も 地下1階ですか。 B: いいえ、電話は 1階ですよ。これは さくら大学の 電話で、20,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, lớp học ở đâu thế?\nB: lớp học hả? Ở tầng hầm 1 ạ.\nA: Thế à. Cái điện thoại này cũng ở tầng hầm 1 phải không?\nB: Không, điện thoại ở tầng 1 cơ. Đây là điện thoại của đại học Sakura, giá 20,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm lớp học được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng hầm 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng hầm 1",
+              "explanation": "Nhân vật B trả lời 'きょうしつですか。ちか1かい です' (Ở tầng hầm 1)."
+            },
+            {
+              "q": "Món đồ điện thoại được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng hầm 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'でんわは 1かいですよ' (điện thoại ở tầng 1)."
+            },
+            {
+              "q": "Món đồ điện thoại có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ đại học Sakura, giá 20,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ đại học Sakura, giá 20,000 yên",
+              "explanation": "Nhân vật B nói 'これは さくらだいがくの でんわで、2まんえん です' (của đại học Sakura, giá 20,000 yên)."
+            }
+          ]
+        },
+        {
+          "id": 40,
+          "audio_text_kana": "A: すみません、しょくどうは どこですか。 B: しょくどうですか。1かい です。 A: そうですか。この くつも 1かいですか。 B: いいえ、くつは 1かいですよ。これは にほんの くつで、1せんえん です。",
+          "audio_text_kanji": "A: すみません、食堂は  đâu ですか。 B: 食堂ですか。1階 です。 A: そうですか。この 靴も 1階ですか。 B: いいえ、靴は 1階ですよ。これは 日本の 靴で、1,000 yên です。",
+          "audio_text_vietnamese": "A: Xin hỏi, nhà ăn ở đâu thế?\nB: nhà ăn hả? Ở tầng 1 ạ.\nA: Thế à. Cái giày này cũng ở tầng 1 phải không?\nB: Không, giày ở tầng 1 cơ. Đây là giày của Nhật Bản, giá 1,000 yên.",
+          "questions": [
+            {
+              "q": "Địa điểm nhà ăn được hỏi nằm ở đâu?",
+              "opts": [
+                "tầng 1",
+                "Tầng 1",
+                "Tầng hầm 1",
+                "Bên ngoài tòa nhà"
+              ],
+              "corr": "tầng 1",
+              "explanation": "Nhân vật B trả lời 'しょくどうですか。1かい です' (Ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày được nhắc tới nằm ở tầng mấy?",
+              "opts": [
+                "Tầng 1",
+                "tầng 1",
+                "Tầng 3",
+                "Tầng hầm"
+              ],
+              "corr": "Tầng 1",
+              "explanation": "Nhân vật B đính chính 'くつは 1かいですよ' (giày ở tầng 1)."
+            },
+            {
+              "q": "Món đồ giày có xuất xứ từ đâu và giá bao nhiêu?",
+              "opts": [
+                "Từ Nhật Bản, giá 1,000 yên",
+                "Từ Nhật Bản, giá 5,000 yên",
+                "Từ Thụy Sĩ, giá 1,000 yên",
+                "Từ công ty IMC, giá 3,000 yên"
+              ],
+              "corr": "Từ Nhật Bản, giá 1,000 yên",
+              "explanation": "Nhân vật B nói 'これは にほんの くつで、1せんえん です' (của Nhật Bản, giá 1,000 yên)."
+            }
+          ]
+        }
+      ],
+      "dictations": [
+        {
+          "id": 1,
+          "question_audio": "これは べとなむの ねくたい です。",
+          "correct_answers": [
+            "これはべとなむのねくたいです",
+            "これは べとなむの ねくたい です",
+            "kore wa betonamu no nekutai desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là cà vạt của Việt Nam",
+            "Cái này là cà vạt sản xuất tại Việt Nam"
+          ],
+          "vietnamese_meaning": "Đây là cà vạt của Việt Nam."
+        },
+        {
+          "id": 2,
+          "question_audio": "じむしょは 3かい です。",
+          "correct_answers": [
+            "じむしょは3かいです",
+            "じむしょは 3かい です",
+            "jimusho wa 3-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Văn phòng ở tầng 3",
+            "Văn phòng ở tại tầng 3"
+          ],
+          "vietnamese_meaning": "Văn phòng ở tầng 3."
+        },
+        {
+          "id": 3,
+          "question_audio": "この たばこは いくら ですか。",
+          "correct_answers": [
+            "このたばこはいくらですか",
+            "この たばこは いくら ですか",
+            "kono tabako wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái thuốc lá này bao nhiêu tiền",
+            "Chiếc thuốc lá này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái thuốc lá này bao nhiêu tiền?"
+        },
+        {
+          "id": 4,
+          "question_audio": "うけつけは どこ ですか。",
+          "correct_answers": [
+            "うけつけはどこですか",
+            "うけつけは どこ ですか",
+            "uketsuke wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Quầy tiếp tân ở đâu vậy",
+            "Quầy tiếp tân ở đâu thế"
+          ],
+          "vietnamese_meaning": "Quầy tiếp tân ở đâu vậy?"
+        },
+        {
+          "id": 5,
+          "question_audio": "これは いたりあの くつ です。",
+          "correct_answers": [
+            "これはいたりあのくつです",
+            "これは いたりあの くつ です",
+            "kore wa itaria no kutsu desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là giày của Ý",
+            "Cái này là giày sản xuất tại Ý"
+          ],
+          "vietnamese_meaning": "Đây là giày của Ý."
+        },
+        {
+          "id": 6,
+          "question_audio": "へやは 2かい です。",
+          "correct_answers": [
+            "へやは2かいです",
+            "へやは 2かい です",
+            "heya wa 2-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Căn phòng ở tầng 2",
+            "Căn phòng ở tại tầng 2"
+          ],
+          "vietnamese_meaning": "Căn phòng ở tầng 2."
+        },
+        {
+          "id": 7,
+          "question_audio": "この わいんは いくら ですか。",
+          "correct_answers": [
+            "このわいんはいくらですか",
+            "この わいんは いくら ですか",
+            "kono wain wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái rượu vang này bao nhiêu tiền",
+            "Chiếc rượu vang này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái rượu vang này bao nhiêu tiền?"
+        },
+        {
+          "id": 8,
+          "question_audio": "かいだんは どこ ですか。",
+          "correct_answers": [
+            "かいだんはどこですか",
+            "かいだんは どこ ですか",
+            "kaidan wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cầu thang bộ ở đâu vậy",
+            "Cầu thang bộ ở đâu thế"
+          ],
+          "vietnamese_meaning": "Cầu thang bộ ở đâu vậy?"
+        },
+        {
+          "id": 9,
+          "question_audio": "これは さくらだいがくの でんわ です。",
+          "correct_answers": [
+            "これはさくらだいがくのでんわです",
+            "これは さくらだいがくの でんわ です",
+            "kore wa sakura daigaku no denwa desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là điện thoại của đại học Sakura",
+            "Cái này là điện thoại sản xuất tại đại học Sakura"
+          ],
+          "vietnamese_meaning": "Đây là điện thoại của đại học Sakura."
+        },
+        {
+          "id": 10,
+          "question_audio": "えすかれーたーは 1かい です。",
+          "correct_answers": [
+            "えすかれーたーは1かいです",
+            "えすかれーたーは 1かい です",
+            "esukareetaa wa 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Thang cuốn ở tầng 1",
+            "Thang cuốn ở tại tầng 1"
+          ],
+          "vietnamese_meaning": "Thang cuốn ở tầng 1."
+        },
+        {
+          "id": 11,
+          "question_audio": "この ねくたいは いくら ですか。",
+          "correct_answers": [
+            "このねくたいはいくらですか",
+            "この ねくたいは いくら ですか",
+            "kono nekutai wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái cà vạt này bao nhiêu tiền",
+            "Chiếc cà vạt này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái cà vạt này bao nhiêu tiền?"
+        },
+        {
+          "id": 12,
+          "question_audio": "うちは どこ ですか。",
+          "correct_answers": [
+            "うちはどこですか",
+            "うちは どこ ですか",
+            "uchi wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Nhà ở đâu vậy",
+            "Nhà ở đâu thế"
+          ],
+          "vietnamese_meaning": "Nhà ở đâu vậy?"
+        },
+        {
+          "id": 13,
+          "question_audio": "これは いぎりすの たばこ です。",
+          "correct_answers": [
+            "これはいぎりすのたばこです",
+            "これは いぎりすの たばこ です",
+            "kore wa igirisu no tabako desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là thuốc lá của Anh",
+            "Cái này là thuốc lá sản xuất tại Anh"
+          ],
+          "vietnamese_meaning": "Đây là thuốc lá của Anh."
+        },
+        {
+          "id": 14,
+          "question_audio": "しょくどうは ちか1かい です。",
+          "correct_answers": [
+            "しょくどうはちか1かいです",
+            "しょくどうは ちか1かい です",
+            "shokudou wa chika 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Nhà ăn ở tầng hầm 1",
+            "Nhà ăn ở tại tầng hầm 1"
+          ],
+          "vietnamese_meaning": "Nhà ăn ở tầng hầm 1."
+        },
+        {
+          "id": 15,
+          "question_audio": "この くつは いくら ですか。",
+          "correct_answers": [
+            "このくつはいくらですか",
+            "この くつは いくら ですか",
+            "kono kutsu wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái giày này bao nhiêu tiền",
+            "Chiếc giày này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái giày này bao nhiêu tiền?"
+        },
+        {
+          "id": 16,
+          "question_audio": "かいぎしつは どこ ですか。",
+          "correct_answers": [
+            "かいぎしつはどこですか",
+            "かいぎしつは どこ ですか",
+            "kaigishitsu wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Phòng họp ở đâu vậy",
+            "Phòng họp ở đâu thế"
+          ],
+          "vietnamese_meaning": "Phòng họp ở đâu vậy?"
+        },
+        {
+          "id": 17,
+          "question_audio": "これは IMCの わいん です。",
+          "correct_answers": [
+            "これはIMCのわいんです",
+            "これは IMCの わいん です",
+            "kore wa imc no wain desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là rượu vang của công ty IMC",
+            "Cái này là rượu vang sản xuất tại công ty IMC"
+          ],
+          "vietnamese_meaning": "Đây là rượu vang của công ty IMC."
+        },
+        {
+          "id": 18,
+          "question_audio": "ろびーは 4かい です。",
+          "correct_answers": [
+            "ろびーは4かいです",
+            "ろびーは 4かい です",
+            "robii wa 4-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Hành lang ở tầng 4",
+            "Hành lang ở tại tầng 4"
+          ],
+          "vietnamese_meaning": "Hành lang ở tầng 4."
+        },
+        {
+          "id": 19,
+          "question_audio": "この でんわは いくら ですか。",
+          "correct_answers": [
+            "このでんわはいくらですか",
+            "この でんわは いくら ですか",
+            "kono denwa wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái điện thoại này bao nhiêu tiền",
+            "Chiếc điện thoại này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái điện thoại này bao nhiêu tiền?"
+        },
+        {
+          "id": 20,
+          "question_audio": "といれは どこ ですか。",
+          "correct_answers": [
+            "といれはどこですか",
+            "といれは どこ ですか",
+            "toire wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Nhà vệ sinh ở đâu vậy",
+            "Nhà vệ sinh ở đâu thế"
+          ],
+          "vietnamese_meaning": "Nhà vệ sinh ở đâu vậy?"
+        },
+        {
+          "id": 21,
+          "question_audio": "これは べとなむの ねくたい です。",
+          "correct_answers": [
+            "これはべとなむのねくたいです",
+            "これは べとなむの ねくたい です",
+            "kore wa betonamu no nekutai desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là cà vạt của Việt Nam",
+            "Cái này là cà vạt sản xuất tại Việt Nam"
+          ],
+          "vietnamese_meaning": "Đây là cà vạt của Việt Nam."
+        },
+        {
+          "id": 22,
+          "question_audio": "えれべーたーは 3かい です。",
+          "correct_answers": [
+            "えれべーたーは3かいです",
+            "えれべーたーは 3かい です",
+            "erebeetaa wa 3-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Thang máy ở tầng 3",
+            "Thang máy ở tại tầng 3"
+          ],
+          "vietnamese_meaning": "Thang máy ở tầng 3."
+        },
+        {
+          "id": 23,
+          "question_audio": "この たばこは いくら ですか。",
+          "correct_answers": [
+            "このたばこはいくらですか",
+            "この たばこは いくら ですか",
+            "kono tabako wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái thuốc lá này bao nhiêu tiền",
+            "Chiếc thuốc lá này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái thuốc lá này bao nhiêu tiền?"
+        },
+        {
+          "id": 24,
+          "question_audio": "ちかは どこ ですか。",
+          "correct_answers": [
+            "ちかはどこですか",
+            "ちかは どこ ですか",
+            "chika wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Tầng hầm ở đâu vậy",
+            "Tầng hầm ở đâu thế"
+          ],
+          "vietnamese_meaning": "Tầng hầm ở đâu vậy?"
+        },
+        {
+          "id": 25,
+          "question_audio": "これは いたりあの くつ です。",
+          "correct_answers": [
+            "これはいたりあのくつです",
+            "これは いたりあの くつ です",
+            "kore wa itaria no kutsu desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là giày của Ý",
+            "Cái này là giày sản xuất tại Ý"
+          ],
+          "vietnamese_meaning": "Đây là giày của Ý."
+        },
+        {
+          "id": 26,
+          "question_audio": "きょうしつは 2かい です。",
+          "correct_answers": [
+            "きょうしつは2かいです",
+            "きょうしつは 2かい です",
+            "kyoushitsu wa 2-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Lớp học ở tầng 2",
+            "Lớp học ở tại tầng 2"
+          ],
+          "vietnamese_meaning": "Lớp học ở tầng 2."
+        },
+        {
+          "id": 27,
+          "question_audio": "この わいんは いくら ですか。",
+          "correct_answers": [
+            "このわいんはいくらですか",
+            "この わいんは いくら ですか",
+            "kono wain wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái rượu vang này bao nhiêu tiền",
+            "Chiếc rượu vang này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái rượu vang này bao nhiêu tiền?"
+        },
+        {
+          "id": 28,
+          "question_audio": "じむしょは どこ ですか。",
+          "correct_answers": [
+            "じむしょはどこですか",
+            "じむしょは どこ ですか",
+            "jimusho wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Văn phòng ở đâu vậy",
+            "Văn phòng ở đâu thế"
+          ],
+          "vietnamese_meaning": "Văn phòng ở đâu vậy?"
+        },
+        {
+          "id": 29,
+          "question_audio": "これは さくらだいがくの でんわ です。",
+          "correct_answers": [
+            "これはさくらだいがくのでんわです",
+            "これは さくらだいがくの でんわ です",
+            "kore wa sakura daigaku no denwa desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là điện thoại của đại học Sakura",
+            "Cái này là điện thoại sản xuất tại đại học Sakura"
+          ],
+          "vietnamese_meaning": "Đây là điện thoại của đại học Sakura."
+        },
+        {
+          "id": 30,
+          "question_audio": "うけつけは 1かい です。",
+          "correct_answers": [
+            "うけつけは1かいです",
+            "うけつけは 1かい です",
+            "uketsuke wa 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Quầy tiếp tân ở tầng 1",
+            "Quầy tiếp tân ở tại tầng 1"
+          ],
+          "vietnamese_meaning": "Quầy tiếp tân ở tầng 1."
+        },
+        {
+          "id": 31,
+          "question_audio": "この ねくたいは いくら ですか。",
+          "correct_answers": [
+            "このねくたいはいくらですか",
+            "この ねくたいは いくら ですか",
+            "kono nekutai wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái cà vạt này bao nhiêu tiền",
+            "Chiếc cà vạt này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái cà vạt này bao nhiêu tiền?"
+        },
+        {
+          "id": 32,
+          "question_audio": "へやは どこ ですか。",
+          "correct_answers": [
+            "へやはどこですか",
+            "へやは どこ ですか",
+            "heya wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Căn phòng ở đâu vậy",
+            "Căn phòng ở đâu thế"
+          ],
+          "vietnamese_meaning": "Căn phòng ở đâu vậy?"
+        },
+        {
+          "id": 33,
+          "question_audio": "これは いぎりすの たばこ です。",
+          "correct_answers": [
+            "これはいぎりすのたばこです",
+            "これは いぎりすの たばこ です",
+            "kore wa igirisu no tabako desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là thuốc lá của Anh",
+            "Cái này là thuốc lá sản xuất tại Anh"
+          ],
+          "vietnamese_meaning": "Đây là thuốc lá của Anh."
+        },
+        {
+          "id": 34,
+          "question_audio": "かいだんは ちか1かい です。",
+          "correct_answers": [
+            "かいだんはちか1かいです",
+            "かいだんは ちか1かい です",
+            "kaidan wa chika 1-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Cầu thang bộ ở tầng hầm 1",
+            "Cầu thang bộ ở tại tầng hầm 1"
+          ],
+          "vietnamese_meaning": "Cầu thang bộ ở tầng hầm 1."
+        },
+        {
+          "id": 35,
+          "question_audio": "この くつは いくら ですか。",
+          "correct_answers": [
+            "このくつはいくらですか",
+            "この くつは いくら ですか",
+            "kono kutsu wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái giày này bao nhiêu tiền",
+            "Chiếc giày này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái giày này bao nhiêu tiền?"
+        },
+        {
+          "id": 36,
+          "question_audio": "えすかれーたーは どこ ですか。",
+          "correct_answers": [
+            "えすかれーたーはどこですか",
+            "えすかれーたーは どこ ですか",
+            "esukareetaa wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Thang cuốn ở đâu vậy",
+            "Thang cuốn ở đâu thế"
+          ],
+          "vietnamese_meaning": "Thang cuốn ở đâu vậy?"
+        },
+        {
+          "id": 37,
+          "question_audio": "これは IMCの わいん です。",
+          "correct_answers": [
+            "これはIMCのわいんです",
+            "これは IMCの わいん です",
+            "kore wa imc no wain desu"
+          ],
+          "vietnamese_answers": [
+            "Đây là rượu vang của công ty IMC",
+            "Cái này là rượu vang sản xuất tại công ty IMC"
+          ],
+          "vietnamese_meaning": "Đây là rượu vang của công ty IMC."
+        },
+        {
+          "id": 38,
+          "question_audio": "うちは 4かい です。",
+          "correct_answers": [
+            "うちは4かいです",
+            "うちは 4かい です",
+            "uchi wa 4-kai desu"
+          ],
+          "vietnamese_answers": [
+            "Nhà ở tầng 4",
+            "Nhà ở tại tầng 4"
+          ],
+          "vietnamese_meaning": "Nhà ở tầng 4."
+        },
+        {
+          "id": 39,
+          "question_audio": "この でんわは いくら ですか。",
+          "correct_answers": [
+            "このでんわはいくらですか",
+            "この でんわは いくら ですか",
+            "kono denwa wa ikura desu ka"
+          ],
+          "vietnamese_answers": [
+            "Cái điện thoại này bao nhiêu tiền",
+            "Chiếc điện thoại này bao nhiêu tiền"
+          ],
+          "vietnamese_meaning": "Cái điện thoại này bao nhiêu tiền?"
+        },
+        {
+          "id": 40,
+          "question_audio": "しょくどうは どこ ですか。",
+          "correct_answers": [
+            "しょくどうはどこですか",
+            "しょくどうは どこ ですか",
+            "shokudou wa doko desu ka"
+          ],
+          "vietnamese_answers": [
+            "Nhà ăn ở đâu vậy",
+            "Nhà ăn ở đâu thế"
+          ],
+          "vietnamese_meaning": "Nhà ăn ở đâu vậy?"
         }
       ]
     }
