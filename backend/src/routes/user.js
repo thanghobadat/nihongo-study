@@ -906,11 +906,34 @@ router.get('/lessons/:lessonId/review', async (req, res) => {
     const viToJa = shuffleArray(translationsPool.filter(t => t.direction === 'vi-to-ja'));
     const selectedTranslations = shuffleArray([...jaToVi, ...viToJa]);
 
-    // Dạng 2: Hoàn thiện hội thoại (Trả về toàn bộ 40 đoạn đã tráo ngẫu nhiên)
+    // Dạng 2: Hoàn thiện hội thoại (Trả về toàn bộ 40 đoạn đã tráo ngẫu nhiên) và tráo ngẫu nhiên đáp án A, B, C, D
     const selectedDialogues = shuffleArray(reviewData.dialogues || []);
+    const shuffledDialogues = selectedDialogues.map(d => {
+      if (!d.blanks) return d;
+      const shuffledBlanks = {};
+      Object.keys(d.blanks).forEach(bKey => {
+        const b = d.blanks[bKey];
+        shuffledBlanks[bKey] = {
+          ...b,
+          options: shuffleArray(b.options || [])
+        };
+      });
+      return { ...d, blanks: shuffledBlanks };
+    });
 
-    // Dạng 3: Nghe hiểu đoạn văn/đối thoại dài (Trả về toàn bộ 40 bài nghe đã tráo ngẫu nhiên)
+    // Dạng 3: Nghe hiểu đoạn văn/đối thoại dài (Trả về toàn bộ 40 bài nghe đã tráo ngẫu nhiên) và tráo ngẫu nhiên đáp án
     const selectedListenings = shuffleArray(reviewData.listenings || []);
+    const shuffledListenings = selectedListenings.map(l => {
+      if (!Array.isArray(l.questions)) return l;
+      const shuffledQuestions = l.questions.map(q => {
+        if (!Array.isArray(q.opts)) return q;
+        return {
+          ...q,
+          opts: shuffleArray(q.opts)
+        };
+      });
+      return { ...l, questions: shuffledQuestions };
+    });
 
     // Dạng 4: Nghe viết chính tả (Trả về toàn bộ 40 câu đã tráo ngẫu nhiên)
     const selectedDictations = shuffleArray(reviewData.dictations || []);
@@ -918,8 +941,8 @@ router.get('/lessons/:lessonId/review', async (req, res) => {
     res.json({
       lesson_id: lessonId,
       translations: selectedTranslations,
-      dialogues: selectedDialogues,
-      listenings: selectedListenings,
+      dialogues: shuffledDialogues,
+      listenings: shuffledListenings,
       dictations: selectedDictations
     });
   } catch (error) {
@@ -1006,10 +1029,37 @@ router.get('/reviews/combined', async (req, res) => {
     const viToJa = shuffleArray(combinedTranslations.filter(t => t.direction === 'vi-to-ja'));
     const selectedTranslations = shuffleArray([...jaToVi, ...viToJa]);
 
+    // Tráo ngẫu nhiên đáp án A, B, C, D cho Dialogues
+    const shuffledDialogues = shuffleArray(combinedDialogues).map(d => {
+      if (!d.blanks) return d;
+      const shuffledBlanks = {};
+      Object.keys(d.blanks).forEach(bKey => {
+        const b = d.blanks[bKey];
+        shuffledBlanks[bKey] = {
+          ...b,
+          options: shuffleArray(b.options || [])
+        };
+      });
+      return { ...d, blanks: shuffledBlanks };
+    });
+
+    // Tráo ngẫu nhiên đáp án cho Listenings
+    const shuffledListenings = shuffleArray(combinedListenings).map(l => {
+      if (!Array.isArray(l.questions)) return l;
+      const shuffledQuestions = l.questions.map(q => {
+        if (!Array.isArray(q.opts)) return q;
+        return {
+          ...q,
+          opts: shuffleArray(q.opts)
+        };
+      });
+      return { ...l, questions: shuffledQuestions };
+    });
+
     res.json({
       translations: selectedTranslations,
-      dialogues: shuffleArray(combinedDialogues),
-      listenings: shuffleArray(combinedListenings),
+      dialogues: shuffledDialogues,
+      listenings: shuffledListenings,
       dictations: shuffleArray(combinedDictations)
     });
   } catch (error) {
