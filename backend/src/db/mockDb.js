@@ -58039,7 +58039,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "カリナさん、それは なんの [blank1] ですか。",
             "text_kanji": "カリナさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị カリナ ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị カリナ ơi, đó là tờ báo gì thế?"
           },
           {
             "speaker": "B",
@@ -58297,7 +58297,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "さとうさん、それは なんの [blank1] ですか。",
             "text_kanji": "佐藤さん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị 佐藤 ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị 佐藤 ơi, đó là cuốn sách gì thế?"
           },
           {
             "speaker": "B",
@@ -58556,7 +58556,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "ワットさん、それは なんの [blank1] ですか。",
             "text_kanji": "ワットさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị ワット ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị ワット ơi, đó là cuốn sổ tay gì thế?"
           },
           {
             "speaker": "B",
@@ -58814,7 +58814,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "ナムさん、それは なんの [blank1] ですか。",
             "text_kanji": "ナムさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị ナム ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị ナム ơi, đó là cuốn tạp chí gì thế?"
           },
           {
             "speaker": "B",
@@ -59073,7 +59073,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "たなかさん、それは なんの [blank1] ですか。",
             "text_kanji": "田中さん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị 田中 ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị 田中 ơi, đó là cuốn băng cassette gì thế?"
           },
           {
             "speaker": "B",
@@ -59331,7 +59331,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "タワポンさん、それは なんの [blank1] ですか。",
             "text_kanji": "タワポンさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị タワポン ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị タワポン ơi, đó là cuốn vở gì thế?"
           },
           {
             "speaker": "B",
@@ -59589,7 +59589,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "イーさん、それは なんの [blank1] ですか。",
             "text_kanji": "イーさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị イー ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị イー ơi, đó là cuốn từ điển gì thế?"
           },
           {
             "speaker": "B",
@@ -59849,7 +59849,7 @@ const lessonReviews = [
             "speaker": "A",
             "text_kana": "きむらさん、それは なんの [blank1] ですか。",
             "text_kanji": "木村さん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị 木村 ơi, đó là [blank1] gì thế?"
+            "translation": "Anh/Chị 木村 ơi, đó là đĩa CD gì thế?"
           },
           {
             "speaker": "B",
@@ -63369,7 +63369,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 2 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 2 đó."
           }
         ],
         "blanks": {
@@ -63479,7 +63479,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của nước Anh ạ."
           }
         ],
         "blanks": {
@@ -63583,7 +63583,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 1 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 1 đó."
           }
         ],
         "blanks": {
@@ -63693,7 +63693,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của công ty IMC ạ."
           }
         ],
         "blanks": {
@@ -63797,7 +63797,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng hầm 1 ạ. Là [blank2] đó."
+            "translation": "Ở tầng hầm 1 đó."
           }
         ],
         "blanks": {
@@ -63907,7 +63907,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của Việt Nam ạ."
           }
         ],
         "blanks": {
@@ -64010,7 +64010,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 4 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 4 đó."
           }
         ],
         "blanks": {
@@ -64120,7 +64120,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của nước Ý ạ."
           }
         ],
         "blanks": {
@@ -64224,7 +64224,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 3 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 3 đó."
           }
         ],
         "blanks": {
@@ -64334,7 +64334,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của đại học Sakura ạ."
           }
         ],
         "blanks": {
@@ -64438,7 +64438,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 2 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 2 đó."
           }
         ],
         "blanks": {
@@ -64548,7 +64548,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của nước Anh ạ."
           }
         ],
         "blanks": {
@@ -64652,7 +64652,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 1 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 1 đó."
           }
         ],
         "blanks": {
@@ -64762,7 +64762,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của công ty IMC ạ."
           }
         ],
         "blanks": {
@@ -64866,7 +64866,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng hầm 1 ạ. Là [blank2] đó."
+            "translation": "Ở tầng hầm 1 đó."
           }
         ],
         "blanks": {
@@ -64976,7 +64976,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của Việt Nam ạ."
           }
         ],
         "blanks": {
@@ -65079,7 +65079,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 4 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 4 đó."
           }
         ],
         "blanks": {
@@ -65189,7 +65189,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của nước Ý ạ."
           }
         ],
         "blanks": {
@@ -65293,7 +65293,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 3 ạ. Là [blank2] đó."
+            "translation": "Ở tầng 3 đó."
           }
         ],
         "blanks": {
@@ -65403,7 +65403,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của [blank2] ạ。"
+            "translation": "Vâng, là đồ của đại học Sakura ạ."
           }
         ],
         "blanks": {
