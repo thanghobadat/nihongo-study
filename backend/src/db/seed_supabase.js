@@ -37,7 +37,14 @@ async function runSeed() {
     console.log('🏁 Starting Supabase database seeding process...');
 
     // 1. Seed lessons
-    await seedTable('lessons', mockDb.lessons, ['id']);
+    const lessonsData = mockDb.lessons.map(l => ({
+      id: l.id,
+      title: l.title,
+      description: l.description,
+      roleplay_options: l.roleplay_options || {},
+      course: l.course || (l.id >= 101 ? 'marugoto' : 'minna')
+    }));
+    await seedTable('lessons', lessonsData, ['id']);
 
     // 2. Seed vocabulary
     // Map image_url to empty string if missing

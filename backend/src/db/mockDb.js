@@ -1,5 +1,5 @@
 // In-memory Mock Database generated from Excel workbooks & Gemini API
-// Updated on: 2026-07-23 09:24:48
+// Updated on: 2026-07-23 15:14:44
 
 const lessons = [
     {
@@ -26,7 +26,8 @@ const lessons = [
                 "さくら大学",
                 "AKC"
             ]
-        }
+        },
+        "course": "minna"
     },
     {
         "id": 2,
@@ -42,7 +43,8 @@ const lessons = [
             "countries": {},
             "occupations": {},
             "organizations": {}
-        }
+        },
+        "course": "minna"
     },
     {
         "id": 3,
@@ -65,289 +67,337 @@ const lessons = [
                 "医者"
             ],
             "organizations": {}
-        }
+        },
+        "course": "minna"
     },
     {
         "id": 4,
         "title": "Bài 4: Imashichijihun",
         "description": "Bai hoc tu dong nhap tu tep Bai4_Imashichijihun.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 5,
         "title": "Bài 5: GojiniOkimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai5_GojiniOkimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 6,
         "title": "Bài 6: Tabemasu",
         "description": "Bai hoc tu dong nhap tu tep Bai6_Tabemasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 7,
         "title": "Bài 7: Kirimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai7_Kirimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 8,
         "title": "Bài 8: Hansamuna",
         "description": "Bai hoc tu dong nhap tu tep Bai8_Hansamuna.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 9,
         "title": "Bài 9: RyouriGaSuki",
         "description": "Bai hoc tu dong nhap tu tep Bai9_RyouriGaSuki.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 10,
         "title": "Bài 10: OtokoNoHitoGaImasu",
         "description": "Bai hoc tu dong nhap tu tep Bai10_OtokoNoHitoGaImasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 11,
         "title": "Bài 11: KazokuGaImasu",
         "description": "Bai hoc tu dong nhap tu tep Bai11_KazokuGaImasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 12,
         "title": "Bài 12: OmatsuriWaNigiyakaDeshita",
         "description": "Bai hoc tu dong nhap tu tep Bai12_OmatsuriWaNigiyakaDeshita.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 13,
         "title": "Bài 13: OkaniGaHoshiiDesu",
         "description": "Bai hoc tu dong nhap tu tep Bai13_OkaniGaHoshiiDesu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 14,
         "title": "Bài 14: ChottoMatteKudasai",
         "description": "Bai hoc tu dong nhap tu tep Bai14_ChottoMatteKudasai.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 15,
         "title": "Bài 15: ShashinOTotteMoIiDesu",
         "description": "Bai hoc tu dong nhap tu tep Bai15_ShashinOTotteMoIiDesu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 16,
         "title": "Bài 16: NotteOrite",
         "description": "Bai hoc tu dong nhap tu tep Bai16_NotteOrite.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 17,
         "title": "Bài 17: KusuriONondeKudasai",
         "description": "Bai hoc tu dong nhap tu tep Bai17_KusuriONondeKudasai.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 18,
         "title": "Bài 18: KotoGaDekimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai18_KotoGaDekimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 19,
         "title": "Bài 19: KotoGaArimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai19_KotoGaArimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 20,
         "title": "Bài 20: Taberu",
         "description": "Bai hoc tu dong nhap tu tep Bai20_Taberu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 21,
         "title": "Bài 21: ToOmoimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai21_ToOmoimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 22,
         "title": "Bài 22: MitaMachi",
         "description": "Bai hoc tu dong nhap tu tep Bai22_MitaMachi.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 23,
         "title": "Bài 23: TokiTo",
         "description": "Bai hoc tu dong nhap tu tep Bai23_TokiTo.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 24,
         "title": "Bài 24: Kuremasu",
         "description": "Bai hoc tu dong nhap tu tep Bai24_Kuremasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 25,
         "title": "Bài 25: TaraTemo",
         "description": "Bai hoc tu dong nhap tu tep Bai25_TaraTemo.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 26,
         "title": "Bài 26: Ndesu",
         "description": "Bai hoc tu dong nhap tu tep Bai26_Ndesu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 27,
         "title": "Bài 27: KanouKei",
         "description": "Bai hoc tu dong nhap tu tep Bai27_KanouKei.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 28,
         "title": "Bài 28: Nagara",
         "description": "Bai hoc tu dong nhap tu tep Bai28_Nagara.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 29,
         "title": "Bài 29: JidoushiTeImasu",
         "description": "Bai hoc tu dong nhap tu tep Bai29_JidoushiTeImasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 30,
         "title": "Bài 30: TadoushiTeArimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai30_TadoushiTeArimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 31,
         "title": "Bài 31: IshiKei",
         "description": "Bai hoc tu dong nhap tu tep Bai31_IshiKei.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 32,
         "title": "Bài 32: HouGaIi",
         "description": "Bai hoc tu dong nhap tu tep Bai32_HouGaIi.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 33,
         "title": "Bài 33: MeireiKinshi",
         "description": "Bai hoc tu dong nhap tu tep Bai33_MeireiKinshi.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 34,
         "title": "Bài 34: TooriNi",
         "description": "Bai hoc tu dong nhap tu tep Bai34_TooriNi.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 35,
         "title": "Bài 35: JoukenKei",
         "description": "Bai hoc tu dong nhap tu tep Bai35_JoukenKei.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 36,
         "title": "Bài 36: YouNiShimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai36_YouNiShimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 37,
         "title": "Bài 37: UkemiKei",
         "description": "Bai hoc tu dong nhap tu tep Bai37_UkemiKei.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 38,
         "title": "Bài 38: KotoNo",
         "description": "Bai hoc tu dong nhap tu tep Bai38_KotoNo.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 39,
         "title": "Bài 39: Node",
         "description": "Bai hoc tu dong nhap tu tep Bai39_Node.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 40,
         "title": "Bài 40: KaDouKa",
         "description": "Bai hoc tu dong nhap tu tep Bai40_KaDouKa.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 41,
         "title": "Bài 41: KuremasuKudasaimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai41_KuremasuKudasaimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 42,
         "title": "Bài 42: TameNi",
         "description": "Bai hoc tu dong nhap tu tep Bai42_TameNi.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 43,
         "title": "Bài 43: SouDesu",
         "description": "Bai hoc tu dong nhap tu tep Bai43_SouDesu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 44,
         "title": "Bài 44: Sugimasu",
         "description": "Bai hoc tu dong nhap tu tep Bai44_Sugimasu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 45,
         "title": "Bài 45: BaAi",
         "description": "Bai hoc tu dong nhap tu tep Bai45_BaAi.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 46,
         "title": "Bài 46: Tokoro",
         "description": "Bai hoc tu dong nhap tu tep Bai46_Tokoro.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 47,
         "title": "Bài 47: SouDesuYouDesu",
         "description": "Bai hoc tu dong nhap tu tep Bai47_SouDesuYouDesu.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 48,
         "title": "Bài 48: ShiekiKei",
         "description": "Bai hoc tu dong nhap tu tep Bai48_ShiekiKei.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 49,
         "title": "Bài 49: SonkeiGo",
         "description": "Bai hoc tu dong nhap tu tep Bai49_SonkeiGo.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 50,
         "title": "Bài 50: KenjouGo",
         "description": "Bai hoc tu dong nhap tu tep Bai50_KenjouGo.xlsx",
-        "roleplay_options": null
+        "roleplay_options": null,
+        "course": "minna"
     },
     {
         "id": 101,
@@ -51123,7 +51173,7 @@ const students = [
         "id": "user123",
         "email": "user@nihongoflow.com",
         "display_name": "Học Viên A",
-        "created_at": "2026-07-23T09:24:48.080Z"
+        "created_at": "2026-07-23T15:14:44.455Z"
     }
 ];
 
@@ -51149,7 +51199,7 @@ const targetPlan = {
         "vocabulary_target": 30,
         "kanji_target": 10,
         "self_evaluation": "Tốt",
-        "updated_at": "2026-07-23T09:24:48.081Z"
+        "updated_at": "2026-07-23T15:14:44.456Z"
     }
 };
 

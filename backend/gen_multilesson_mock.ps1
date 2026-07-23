@@ -121,6 +121,7 @@ try {
             title = $title
             description = "Bai hoc tu dong nhap tu tep $($file.Name)"
             roleplay_options = $roleplayOptions
+            course = "minna"
         }
         
         # Read Tu_Vung
