@@ -1,4 +1,4 @@
-# Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
+﻿# Script to dynamically scan all Excel files in tai_lieu/ and compile them into website/backend/src/db/mockDb.js
 # Usage in PowerShell: powershell -ExecutionPolicy Bypass -File gen_multilesson_mock.ps1
 
 $files = Get-ChildItem -Path "d:\AI\japanese_learning\tai_lieu\*.xlsx" | Where-Object { $_.Name -notlike "~$*" } | Sort-Object { [int]($_.BaseName -replace '^Bai(\d+).*', '$1') }
