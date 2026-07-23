@@ -2119,8 +2119,8 @@ const vocabulary = [
     {
         "id": 127,
         "lesson_id": 3,
-        "hiragana": "なんかい",
-        "romaji": "nankai",
+        "hiragana": "なんがい",
+        "romaji": "nangai",
         "vietnamese_meaning": "tầng mấy",
         "word_type": "pronoun",
         "japanese_example": "エスカレーターは 何階ですか。",
