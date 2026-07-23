@@ -58037,15 +58037,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "カリナさん、それは なんの [blank1] ですか。",
-            "text_kanji": "カリナさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị カリナ ơi, đó là tờ báo gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "タワポンさん、[blank2] の しんぶんです。",
-            "text_kanji": "タワポンさん、[blank2] の しんぶんです。",
-            "translation": "Anh/Chị タワポン ơi, là báo [blank2]."
+            "text_kana": "[blank2] の しんぶんです。",
+            "text_kanji": "[blank2] の しんぶんです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -58081,7 +58081,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (báo) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là tờ báo gì (báo tiếng Nhật)"
       },
       {
         "id": 4,
@@ -58295,15 +58295,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "さとうさん、それは なんの [blank1] ですか。",
-            "text_kanji": "佐藤さん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị 佐藤 ơi, đó là cuốn sách gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "イーさん、[blank2] の ほんです。",
-            "text_kanji": "イーさん、[blank2] の ほんです。",
-            "translation": "Anh/Chị イー ơi, là sách [blank2]."
+            "text_kana": "[blank2] の ほんです。",
+            "text_kanji": "[blank2] の ほんです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -58339,7 +58339,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (sách) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là cuốn sách gì (sách về ô tô)"
       },
       {
         "id": 9,
@@ -58554,15 +58554,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "ワットさん、それは なんの [blank1] ですか。",
-            "text_kanji": "ワットさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị ワット ơi, đó là cuốn sổ tay gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "きむらさん、[blank2] の てちょうです。",
-            "text_kanji": "木村さん、[blank2] の てちょうです。",
-            "translation": "Anh/Chị 木村 ơi, là sổ tay [blank2]."
+            "text_kana": "[blank2] の てちょうです。",
+            "text_kanji": "[blank2] の てちょうです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -58598,7 +58598,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (sổ tay) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là cuốn sổ tay gì (sổ tay tiếng Nhật)"
       },
       {
         "id": 14,
@@ -58812,15 +58812,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "ナムさん、それは なんの [blank1] ですか。",
-            "text_kanji": "ナムさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị ナム ơi, đó là cuốn tạp chí gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "シュミットさん、[blank2] の ざっしです。",
-            "text_kanji": "シュミットさん、[blank2] の ざっしです。",
-            "translation": "Anh/Chị シュミット ơi, là tạp chí [blank2]."
+            "text_kana": "[blank2] の ざっしです。",
+            "text_kanji": "[blank2] の ざっしです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -58856,7 +58856,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (tạp chí) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là cuốn tạp chí gì (tạp chí về máy ảnh)"
       },
       {
         "id": 19,
@@ -59071,15 +59071,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "たなかさん、それは なんの [blank1] ですか。",
-            "text_kanji": "田中さん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị 田中 ơi, đó là cuốn băng cassette gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "アリさん、[blank2] の てーぷです。",
-            "text_kanji": "アリさん、[blank2] の てーぷです。",
-            "translation": "Anh/Chị アリ ơi, là băng cassette [blank2]."
+            "text_kana": "[blank2] の てーぷです。",
+            "text_kanji": "[blank2] の てーぷです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -59114,7 +59114,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (băng cassette) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là cuốn băng cassette gì (băng tiếng Anh)"
       },
       {
         "id": 24,
@@ -59329,15 +59329,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "タワポンさん、それは なんの [blank1] ですか。",
-            "text_kanji": "タワポンさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị タワポン ơi, đó là cuốn vở gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "ミラーさん、[blank2] の のーとです。",
-            "text_kanji": "ミラーさん、[blank2] の のーとです。",
-            "translation": "Anh/Chị ミラー ơi, là vở [blank2]."
+            "text_kana": "[blank2] の のーとです。",
+            "text_kanji": "[blank2] の のーとです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -59373,7 +59373,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (vở) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là cuốn vở gì (vở tiếng Nhật)"
       },
       {
         "id": 29,
@@ -59587,15 +59587,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "イーさん、それは なんの [blank1] ですか。",
-            "text_kanji": "イーさん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị イー ơi, đó là cuốn từ điển gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "ワンさん、[blank2] の じしょです。",
-            "text_kanji": "ワンさん、[blank2] の じしょです。",
-            "translation": "Anh/Chị ワン ơi, là từ điển [blank2]."
+            "text_kana": "[blank2] の じしょです。",
+            "text_kanji": "[blank2] の じしょです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -59632,7 +59632,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận nghề nghiệp — B phủ định không phải là học sinh (がくせい) mà là kỹ sư (エンジニア)"
+        "context": "Hỏi xem đây là cuốn từ điển gì (từ điển tiếng Anh)"
       },
       {
         "id": 34,
@@ -59847,15 +59847,15 @@ const lessonReviews = [
         "lines": [
           {
             "speaker": "A",
-            "text_kana": "きむらさん、それは なんの [blank1] ですか。",
-            "text_kanji": "木村さん、それは 何の [blank1] ですか。",
-            "translation": "Anh/Chị 木村 ơi, đó là đĩa CD gì thế?"
+            "text_kana": "それ は なんの [blank1] ですか。",
+            "text_kanji": "それ は 何の [blank1] ですか。",
+            "translation": "Đó là [blank1] gì thế?"
           },
           {
             "speaker": "B",
-            "text_kana": "やまださん、[blank2] の しーでぃーです。",
-            "text_kanji": "山田さん、[blank2] の しーでぃーです。",
-            "translation": "Anh/Chị 山田 ơi, là đĩa CD [blank2]."
+            "text_kana": "[blank2] の しーdeぃーです。",
+            "text_kanji": "[blank2] の しーでぃーです。",
+            "translation": "Là [blank1] [blank2] đó."
           }
         ],
         "blanks": {
@@ -59891,7 +59891,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Xác nhận ngôn ngữ của ấn phẩm (đĩa CD) — B xác nhận đáp án đúng là にほんご"
+        "context": "Hỏi xem đây là đĩa CD gì (đĩa CD tiếng Nhật)"
       },
       {
         "id": 39,
@@ -63369,7 +63369,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 2 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -63406,7 +63406,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán cà vạt (ねくたい) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 2)"
       },
       {
         "id": 2,
@@ -63479,7 +63479,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của nước Anh ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -63516,7 +63516,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ thuốc lá (たばこ)"
+        "context": "Hỏi xuất xứ của món đồ thuốc lá (thuốc lá của nước Anh)"
       },
       {
         "id": 4,
@@ -63583,7 +63583,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 1 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -63620,7 +63620,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán giày (くつ) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 1)"
       },
       {
         "id": 6,
@@ -63693,7 +63693,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của công ty IMC ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -63730,7 +63730,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ rượu vang (わいん)"
+        "context": "Hỏi xuất xứ của món đồ rượu vang (rượu vang của công ty IMC)"
       },
       {
         "id": 8,
@@ -63797,7 +63797,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng hầm 1 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -63834,7 +63834,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán điện thoại (でんわ) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng hầm 1)"
       },
       {
         "id": 10,
@@ -63907,7 +63907,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của Việt Nam ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -63943,7 +63943,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ cà vạt (ねくたい)"
+        "context": "Hỏi xuất xứ của món đồ cà vạt (điện thoại của Việt Nam)"
       },
       {
         "id": 12,
@@ -64010,7 +64010,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 4 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -64047,7 +64047,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán thuốc lá (たばこ) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 4)"
       },
       {
         "id": 14,
@@ -64120,7 +64120,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của nước Ý ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -64157,7 +64157,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ giày (くつ)"
+        "context": "Hỏi xuất xứ của món đồ giày (giày của nước Ý)"
       },
       {
         "id": 16,
@@ -64224,7 +64224,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 3 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -64261,7 +64261,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán rượu vang (わいん) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 3)"
       },
       {
         "id": 18,
@@ -64334,7 +64334,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của đại học Sakura ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -64371,7 +64371,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ điện thoại (でんわ)"
+        "context": "Hỏi xuất xứ của món đồ điện thoại (điện thoại của đại học Sakura)"
       },
       {
         "id": 20,
@@ -64438,7 +64438,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 2 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -64475,7 +64475,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán cà vạt (ねくたい) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 2)"
       },
       {
         "id": 22,
@@ -64548,7 +64548,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của nước Anh ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -64585,7 +64585,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ thuốc lá (たばこ)"
+        "context": "Hỏi xuất xứ của món đồ thuốc lá (thuốc lá của nước Anh)"
       },
       {
         "id": 24,
@@ -64652,7 +64652,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 1 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -64689,7 +64689,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán giày (くつ) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 1)"
       },
       {
         "id": 26,
@@ -64762,7 +64762,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của công ty IMC ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -64799,7 +64799,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ rượu vang (わいん)"
+        "context": "Hỏi xuất xứ của món đồ rượu vang (rượu vang của công ty IMC)"
       },
       {
         "id": 28,
@@ -64866,7 +64866,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng hầm 1 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -64903,7 +64903,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán điện thoại (でんわ) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng hầm 1)"
       },
       {
         "id": 30,
@@ -64976,7 +64976,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của Việt Nam ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -65012,7 +65012,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ cà vạt (ねくたい)"
+        "context": "Hỏi xuất xứ của món đồ cà vạt (điện thoại của Việt Nam)"
       },
       {
         "id": 32,
@@ -65079,7 +65079,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 4 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -65116,7 +65116,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán thuốc lá (たばこ) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 4)"
       },
       {
         "id": 34,
@@ -65189,7 +65189,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của nước Ý ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -65226,7 +65226,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ giày (くつ)"
+        "context": "Hỏi xuất xứ của món đồ giày (giày của nước Ý)"
       },
       {
         "id": 36,
@@ -65293,7 +65293,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "[blank2] ですよ。",
             "text_kanji": "[blank2] ですよ。",
-            "translation": "Ở tầng 3 đó."
+            "translation": "Ở [blank2] đó."
           }
         ],
         "blanks": {
@@ -65330,7 +65330,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi nơi bán rượu vang (わいん) và số tầng"
+        "context": "Hỏi vị trí của quầy bán hàng (quầy ở tầng 3)"
       },
       {
         "id": 38,
@@ -65403,7 +65403,7 @@ const lessonReviews = [
             "speaker": "B",
             "text_kana": "はい、[blank2] の です。",
             "text_kanji": "はい、[blank2] の です。",
-            "translation": "Vâng, là đồ của đại học Sakura ạ."
+            "translation": "Vâng, là đồ của [blank2] ạ."
           }
         ],
         "blanks": {
@@ -65440,7 +65440,7 @@ const lessonReviews = [
             }
           }
         },
-        "context": "Hỏi xuất xứ của món đồ điện thoại (でんわ)"
+        "context": "Hỏi xuất xứ của món đồ điện thoại (điện thoại của đại học Sakura)"
       },
       {
         "id": 40,
