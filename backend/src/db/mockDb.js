@@ -1,5 +1,5 @@
 // In-memory Mock Database generated from Excel workbooks & Gemini API
-// Updated on: 2026-07-23 15:14:44
+// Updated on: 2026-07-23 15:41:41
 
 const lessons = [
     {
@@ -45477,6 +45477,18 @@ const grammar = [
     },
     {
         "id": 18,
+        "lesson_id": 3,
+        "title": "N を ください",
+        "meaning": "Vui lòng cho tôi N / Cho tôi xin N",
+        "structure": "Danh từ + を + ください",
+        "vietnamese_explanation": "Dùng để yêu cầu người nghe đưa hoặc bán cho mình một vật nào đó. Thường dùng khi mua hàng hoặc gọi món ăn.",
+        "japanese_example": "これをください。",
+        "example_meaning": "Vui lòng cho tôi cái này.",
+        "romaji_example": "",
+        "notes": "Kore o kudasai."
+    },
+    {
+        "id": 19,
         "lesson_id": 4,
         "title": "今 ［Số］時 ［Số］分 です",
         "meaning": "Bây giờ là... giờ... phút",
@@ -45488,7 +45500,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 19,
+        "id": 20,
         "lesson_id": 4,
         "title": "Vます",
         "meaning": "Làm việc gì đó (Khẳng định tương lai/hiện tại)",
@@ -45500,7 +45512,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 20,
+        "id": 21,
         "lesson_id": 4,
         "title": "Vました / Vませんでした",
         "meaning": "Đã làm / Đã không làm việc gì đó",
@@ -45512,7 +45524,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 21,
+        "id": 22,
         "lesson_id": 4,
         "title": "N (thời gian) に V",
         "meaning": "Làm gì vào lúc nào",
@@ -45524,7 +45536,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 22,
+        "id": 23,
         "lesson_id": 4,
         "title": "N1 から N2 まで",
         "meaning": "Từ... đến...",
@@ -45536,7 +45548,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 23,
+        "id": 24,
         "lesson_id": 4,
         "title": "N1 と N2",
         "meaning": "N1 và N2",
@@ -45548,7 +45560,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 24,
+        "id": 25,
         "lesson_id": 5,
         "title": "N (địa điểm) へ いきます/きます/かえります",
         "meaning": "Đi/Đến/Về địa điểm N",
@@ -45560,7 +45572,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 25,
+        "id": 26,
         "lesson_id": 5,
         "title": "どこ ［へ］ も いきません/いきませんでした",
         "meaning": "Không đi đâu cả",
@@ -45572,7 +45584,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 26,
+        "id": 27,
         "lesson_id": 5,
         "title": "N (phương tiện) で いきます/きます/かえります",
         "meaning": "Đi/Đến/Về bằng phương tiện N",
@@ -45584,7 +45596,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 27,
+        "id": 28,
         "lesson_id": 5,
         "title": "N (người/động vật) と V",
         "meaning": "Làm gì cùng với ai",
@@ -45596,7 +45608,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 28,
+        "id": 29,
         "lesson_id": 5,
         "title": "いつ V",
         "meaning": "Khi nào làm việc gì đó",
@@ -45608,7 +45620,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 29,
+        "id": 30,
         "lesson_id": 6,
         "title": "N を V (ngoại động từ)",
         "meaning": "Làm hành động V tác động lên danh từ N",
@@ -45620,7 +45632,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 30,
+        "id": 31,
         "lesson_id": 6,
         "title": "N を します",
         "meaning": "Làm / Chơi / Thực hiện N",
@@ -45632,7 +45644,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 31,
+        "id": 32,
         "lesson_id": 6,
         "title": "なに を しますか",
         "meaning": "Làm cái gì vậy?",
@@ -45644,7 +45656,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 32,
+        "id": 33,
         "lesson_id": 6,
         "title": "N (địa điểm) で V",
         "meaning": "Làm hành động V tại địa điểm N",
@@ -45656,7 +45668,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 33,
+        "id": 34,
         "lesson_id": 6,
         "title": "Vませんか",
         "meaning": "Rủ rê / Đề nghị làm việc gì cùng nhau",
@@ -45668,7 +45680,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 34,
+        "id": 35,
         "lesson_id": 6,
         "title": "Vましょう",
         "meaning": "Chúng ta cùng làm... nhé / Đi thôi nào",
@@ -45680,7 +45692,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 35,
+        "id": 36,
         "lesson_id": 7,
         "title": "N (công cụ/phương tiện) で V",
         "meaning": "Làm hành động V bằng công cụ/phương tiện N",
@@ -45692,7 +45704,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 36,
+        "id": 37,
         "lesson_id": 7,
         "title": "Từ/Câu は Tiếng nước ngoài で なんですか",
         "meaning": "Từ/Câu trong tiếng nước ngoài là gì?",
@@ -45704,7 +45716,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 37,
+        "id": 38,
         "lesson_id": 7,
         "title": "N1 (người) に N2 を あげます / かします / おしえます",
         "meaning": "Tặng / Cho mượn / Dạy N2 cho N1",
@@ -45716,7 +45728,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 38,
+        "id": 39,
         "lesson_id": 7,
         "title": "N1 (người) に/から N2 を もらいます / かります / ならいます",
         "meaning": "Nhận / Mượn / Học N2 từ N1",
@@ -45728,7 +45740,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 39,
+        "id": 40,
         "lesson_id": 7,
         "title": "もう Vました",
         "meaning": "Đã làm việc gì đó rồi",
@@ -45740,7 +45752,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 40,
+        "id": 41,
         "lesson_id": 8,
         "title": "N は Adj［na］ です / じゃありません",
         "meaning": "N thì... / N thì không...",
@@ -45752,7 +45764,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 41,
+        "id": 42,
         "lesson_id": 8,
         "title": "N は Adj［i］ です / ~くないです",
         "meaning": "N thì... / N thì không... (đuôi i)",
@@ -45764,7 +45776,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 42,
+        "id": 43,
         "lesson_id": 8,
         "title": "Adj N",
         "meaning": "Tính từ bổ nghĩa cho danh từ N",
@@ -45776,7 +45788,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 43,
+        "id": 44,
         "lesson_id": 8,
         "title": "とても Adj / あまり Adj［phủ định］",
         "meaning": "Rất... / Không... lắm",
@@ -45788,7 +45800,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 44,
+        "id": 45,
         "lesson_id": 8,
         "title": "N は どうですか",
         "meaning": "N thế nào?",
@@ -45800,7 +45812,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 45,
+        "id": 46,
         "lesson_id": 9,
         "title": "N が あります / わかります",
         "meaning": "Có sở hữu N / Hiểu rõ N",
@@ -45812,7 +45824,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 46,
+        "id": 47,
         "lesson_id": 9,
         "title": "N が すきです / じょうずです",
         "meaning": "Thích N / Giỏi N",
@@ -45824,7 +45836,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 47,
+        "id": 48,
         "lesson_id": 9,
         "title": "どんな N が すきですか",
         "meaning": "Thích loại N như thế nào?",
@@ -45836,7 +45848,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 48,
+        "id": 49,
         "lesson_id": 9,
         "title": "Phó từ chỉ mức độ (よく / だいたい / すこし / ぜんぜん)",
         "meaning": "Mô tả mức độ hiểu biết hoặc sở hữu",
@@ -45848,7 +45860,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 49,
+        "id": 50,
         "lesson_id": 9,
         "title": "［Câu 1］から、［Câu 2］",
         "meaning": "Vì Câu 1 nên Câu 2 (Chỉ nguyên nhân)",
@@ -45860,7 +45872,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 50,
+        "id": 51,
         "lesson_id": 10,
         "title": "N1 (địa điểm) に N2 (vật/người) が あります/います",
         "meaning": "Có vật/người N2 ở địa điểm N1",
@@ -45872,7 +45884,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 51,
+        "id": 52,
         "lesson_id": 10,
         "title": "N2 (vật/người) は N1 (địa điểm) に あります/います",
         "meaning": "N2 thì ở địa điểm N1",
@@ -45884,7 +45896,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 52,
+        "id": 53,
         "lesson_id": 10,
         "title": "N1 (vật/người) の N2 (vị trí)",
         "meaning": "Vị trí N2 của N1 (trên/dưới/trước/sau...)",
@@ -45896,7 +45908,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 53,
+        "id": 54,
         "lesson_id": 10,
         "title": "N1 や N2 ［など］",
         "meaning": "N1 và N2 (Liệt kê không đầy đủ)",
@@ -45908,7 +45920,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 54,
+        "id": 55,
         "lesson_id": 11,
         "title": "Danh từ (lượng từ) + Động từ",
         "meaning": "Vị trí đặt lượng từ chỉ số lượng",
@@ -45920,7 +45932,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 55,
+        "id": 56,
         "lesson_id": 11,
         "title": "Khoảng thời gian + に + [Số lần] + V",
         "meaning": "Diễn tả tần suất thực hiện hành động",
@@ -45932,7 +45944,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 56,
+        "id": 57,
         "lesson_id": 11,
         "title": "Khoảng thời gian + V",
         "meaning": "Biểu thị khoảng thời gian duy trì hành động",
@@ -45944,7 +45956,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 57,
+        "id": 58,
         "lesson_id": 11,
         "title": "N1 (địa điểm) から N2 (địa điểm) まで + Thời gian + かかります",
         "meaning": "Mất bao lâu để di chuyển từ N1 đến N2",
@@ -45956,7 +45968,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 58,
+        "id": 59,
         "lesson_id": 11,
         "title": "Lượng từ + だけ",
         "meaning": "Chỉ (giới hạn số lượng ít)",
@@ -45968,7 +45980,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 59,
+        "id": 60,
         "lesson_id": 12,
         "title": "Danh từ 1 は Danh từ 2 より Tính từ です",
         "meaning": "So sánh hơn: Danh từ 1 hơn Danh từ 2",
@@ -45980,7 +45992,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 60,
+        "id": 61,
         "lesson_id": 12,
         "title": "Danh từ 1 と Danh từ 2 と どちらが Tính từ ですか",
         "meaning": "Hỏi so sánh lựa chọn giữa hai danh từ",
@@ -45992,7 +46004,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 61,
+        "id": 62,
         "lesson_id": 12,
         "title": "Danh từ 1 [phạm vi] で 何/どこ/誰/いつ が いちばん Tính từ ですか",
         "meaning": "So sánh nhất trong một phạm vi, tập hợp",
@@ -46004,7 +46016,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 62,
+        "id": 63,
         "lesson_id": 12,
         "title": "Noun は Adj［past］ でした / じゃありませんでした",
         "meaning": "Thì quá khứ của Danh từ và Tính từ đuôi na",
@@ -46016,7 +46028,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 63,
+        "id": 64,
         "lesson_id": 12,
         "title": "Noun は Adj［i］［past］ かったです / くなかったです",
         "meaning": "Thì quá khứ của Tính từ đuôi i",
@@ -46028,7 +46040,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 64,
+        "id": 65,
         "lesson_id": 13,
         "title": "Noun が ほしいです",
         "meaning": "Muốn có một đồ vật nào đó",
@@ -46040,7 +46052,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 65,
+        "id": 66,
         "lesson_id": 13,
         "title": "Verb［ます-stem］ たいです",
         "meaning": "Muốn thực hiện một hành động nào đó",
@@ -46052,7 +46064,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 66,
+        "id": 67,
         "lesson_id": 13,
         "title": "Danh từ (địa điểm) へ + V［ます-stem］/ Danh từ + に + いきます / きます / かえります",
         "meaning": "Đi/Đến/Về đâu nhằm mục đích gì",
@@ -46064,7 +46076,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 67,
+        "id": 68,
         "lesson_id": 13,
         "title": "なにか / どこか",
         "meaning": "Cái gì đó / Nơi nào đó",
@@ -46076,7 +46088,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 68,
+        "id": 69,
         "lesson_id": 14,
         "title": "Vて ください",
         "meaning": "Yêu cầu, đề nghị lịch sự: Xin vui lòng làm...",
@@ -46088,7 +46100,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 69,
+        "id": 70,
         "lesson_id": 14,
         "title": "Vて います",
         "meaning": "Hành động đang diễn ra tại thời điểm nói",
@@ -46100,7 +46112,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 70,
+        "id": 71,
         "lesson_id": 14,
         "title": "Vましょうか",
         "meaning": "Lời đề nghị chủ động giúp đỡ người khác",
@@ -46112,7 +46124,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 71,
+        "id": 72,
         "lesson_id": 15,
         "title": "Vて もいいです",
         "meaning": "Biểu thị sự cho phép thực hiện hành động: Có thể làm...",
@@ -46124,7 +46136,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 72,
+        "id": 73,
         "lesson_id": 15,
         "title": "Vて は いけません",
         "meaning": "Biểu thị sự cấm đoán: Không được phép làm...",
@@ -46136,7 +46148,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 73,
+        "id": 74,
         "lesson_id": 15,
         "title": "Vて います (Trạng thái kết quả)",
         "meaning": "Diễn tả một trạng thái kéo dài là kết quả của hành động",
@@ -46148,7 +46160,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 74,
+        "id": 75,
         "lesson_id": 16,
         "title": "V1て、V2て、... [Động từ cuối chia thì]",
         "meaning": "Liên kết chuỗi hành động xảy ra liên tiếp theo trình tự thời gian",
@@ -46160,7 +46172,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 75,
+        "id": 76,
         "lesson_id": 16,
         "title": "Tính từ くて / Danh từ で + [Mệnh đề liên kết]",
         "meaning": "Liên kết các tính từ hoặc danh từ trong một câu",
@@ -46172,7 +46184,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 76,
+        "id": 77,
         "lesson_id": 16,
         "title": "V1て から、V2",
         "meaning": "Sau khi làm V1 thì thực hiện V2",
@@ -46184,7 +46196,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 77,
+        "id": 78,
         "lesson_id": 17,
         "title": "Vない でください",
         "meaning": "Yêu cầu ai đó đừng làm việc gì",
@@ -46196,7 +46208,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 78,
+        "id": 79,
         "lesson_id": 17,
         "title": "Vなければなりません",
         "meaning": "Biểu thị nghĩa vụ, bắt buộc phải làm việc gì",
@@ -46208,7 +46220,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 79,
+        "id": 80,
         "lesson_id": 17,
         "title": "Vなくてもいいです",
         "meaning": "Không cần thiết phải làm việc gì đó",
@@ -46220,7 +46232,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 80,
+        "id": 81,
         "lesson_id": 18,
         "title": "V［dict-form］こと が できます",
         "meaning": "Biểu thị khả năng hoặc sự cho phép: Có thể...",
@@ -46232,7 +46244,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 81,
+        "id": 82,
         "lesson_id": 18,
         "title": "私の 趣味は V［dict-form］こと です",
         "meaning": "Sở thích của tôi là làm việc gì đó",
@@ -46244,7 +46256,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 82,
+        "id": 83,
         "lesson_id": 18,
         "title": "V1［dict-form］/ N の / Thời gian + まえに、V2",
         "meaning": "Trước khi làm việc gì đó thì làm V2",
@@ -46256,7 +46268,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 83,
+        "id": 84,
         "lesson_id": 19,
         "title": "Vた こと が あります",
         "meaning": "Diễn tả kinh nghiệm: Đã từng làm việc gì đó trong quá khứ",
@@ -46268,7 +46280,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 84,
+        "id": 85,
         "lesson_id": 19,
         "title": "V1た り、V2た り します",
         "meaning": "Liệt kê các hành động tiêu biểu (không quan tâm trình tự thời gian)",
@@ -46280,7 +46292,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 85,
+        "id": 86,
         "lesson_id": 19,
         "title": "Tính từ / Danh từ + に なります",
         "meaning": "Biểu thị sự biến đổi trạng thái: Trở nên, trở thành",
@@ -46292,7 +46304,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 86,
+        "id": 87,
         "lesson_id": 20,
         "title": "Thể thông thường (Plain Form)",
         "meaning": "Cách nói thân mật, không trang trọng",
@@ -46304,7 +46316,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 87,
+        "id": 88,
         "lesson_id": 21,
         "title": "Thể thông thường + と 思います",
         "meaning": "Tôi nghĩ là... (bày tỏ suy nghĩ cá nhân)",
@@ -46316,7 +46328,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 88,
+        "id": 89,
         "lesson_id": 21,
         "title": "Thể thông thường / 「Câu nói」 + と 言いました",
         "meaning": "Trích dẫn gián tiếp hoặc trực tiếp câu nói của ai đó",
@@ -46328,7 +46340,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 89,
+        "id": 90,
         "lesson_id": 21,
         "title": "Thể thông thường + でしょう",
         "meaning": "Đúng không? / Có đúng thế không nhỉ?",
@@ -46340,7 +46352,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 90,
+        "id": 91,
         "lesson_id": 22,
         "title": "Mệnh đề bổ ngữ cho danh từ (Noun Clause Modification)",
         "meaning": "Dùng một câu để bổ nghĩa cho danh từ",
@@ -46352,7 +46364,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 91,
+        "id": 92,
         "lesson_id": 23,
         "title": "V［dict/plain］ とき (Toki)",
         "meaning": "Khi làm việc gì đó / Khi ở trạng thái nào đó",
@@ -46364,7 +46376,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 92,
+        "id": 93,
         "lesson_id": 23,
         "title": "V［dict-form］ と、[Mệnh đề tự động/hệ quả]",
         "meaning": "Nếu... thì (Hệ quả tất yếu, tự nhiên hoặc hướng dẫn chỉ đường)",
@@ -46376,7 +46388,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 93,
+        "id": 94,
         "lesson_id": 24,
         "title": "Vて あげます",
         "meaning": "Làm việc gì đó cho người khác (mang tính giúp đỡ)",
@@ -46388,7 +46400,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 94,
+        "id": 95,
         "lesson_id": 24,
         "title": "Vて もらいます",
         "meaning": "Được ai đó làm giúp việc gì",
@@ -46400,7 +46412,7 @@ const grammar = [
         "notes": "🔊 Nghe"
     },
     {
-        "id": 95,
+        "id": 96,
         "lesson_id": 24,
         "title": "Vて くれます",
         "meaning": "Ai đó làm giúp việc gì cho tôi (hoặc gia đình tôi)",
@@ -46412,7 +46424,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 96,
+        "id": 97,
         "lesson_id": 25,
         "title": "Vたら (Mẫu câu điều kiện Nếu... thì...)",
         "meaning": "Nếu... thì... (Giả định hoặc hành động kế tiếp sau khi hoàn thành)",
@@ -46424,7 +46436,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 97,
+        "id": 98,
         "lesson_id": 25,
         "title": "Vても (Cho dù... vẫn...)",
         "meaning": "Cho dù... đi nữa thì vẫn...",
@@ -46436,7 +46448,7 @@ const grammar = [
         "notes": "#VALUE!"
     },
     {
-        "id": 98,
+        "id": 99,
         "lesson_id": 26,
         "title": "V-る/V-ない/A-い/A-な/N-な + んです",
         "meaning": "Nhấn mạnh, giải thích lý do hoặc tò mò hỏi thăm",
@@ -46448,7 +46460,7 @@ const grammar = [
         "notes": "Tránh dùng quá nhiều làm câu nói nặng nề."
     },
     {
-        "id": 99,
+        "id": 100,
         "lesson_id": 26,
         "title": "V-て + いただけませんか",
         "meaning": "Đề nghị, yêu cầu người khác làm gì giúp mình lịch sự",
@@ -46460,7 +46472,7 @@ const grammar = [
         "notes": "Dùng với cấp trên hoặc người lạ."
     },
     {
-        "id": 100,
+        "id": 101,
         "lesson_id": 27,
         "title": "Thể Khả Năng (Potential)",
         "meaning": "Biểu thị năng lực hoặc điều kiện thực hiện hành động",
@@ -46472,7 +46484,7 @@ const grammar = [
         "notes": "Động từ như みえます, きこえます tự bản chất là khả năng tự nhiên, không chia tiếp."
     },
     {
-        "id": 101,
+        "id": 102,
         "lesson_id": 27,
         "title": "しか + V-ない",
         "meaning": "Chỉ (mang sắc thái tiếc nuối, chê ít)",
@@ -46484,7 +46496,7 @@ const grammar = [
         "notes": "Thay thế cho các trợ từ が, を."
     },
     {
-        "id": 102,
+        "id": 103,
         "lesson_id": 28,
         "title": "V1-stem + ながら + V2",
         "meaning": "Vừa làm V1 vừa làm V2 (V2 là hành động chính)",
@@ -46496,7 +46508,7 @@ const grammar = [
         "notes": "Hành động chính đứng ở phía sau."
     },
     {
-        "id": 103,
+        "id": 104,
         "lesson_id": 28,
         "title": "し、～し",
         "meaning": "Liệt kê nhiều lý do, tính chất cùng loại",
@@ -46508,7 +46520,7 @@ const grammar = [
         "notes": "Thường dùng để kết luận một kết quả."
     },
     {
-        "id": 104,
+        "id": 105,
         "lesson_id": 29,
         "title": "N + が + V-ています (Tự động từ)",
         "meaning": "Diễn tả trạng thái hiện tại của sự vật do hành động trước đó để lại",
@@ -46520,7 +46532,7 @@ const grammar = [
         "notes": "Khác với V-ています hành động đang diễn ra."
     },
     {
-        "id": 105,
+        "id": 106,
         "lesson_id": 29,
         "title": "V-て + しまいました",
         "meaning": "Đã hoàn thành hoặc thể hiện sự tiếc nuối khi lỡ làm gì",
@@ -46532,7 +46544,7 @@ const grammar = [
         "notes": "Trong hội thoại viết tắt thành ちゃう (chau) hoặc じゃう (jau)."
     },
     {
-        "id": 106,
+        "id": 107,
         "lesson_id": 30,
         "title": "N1 + に + N2 + が + V-てあります (Tha động từ)",
         "meaning": "Diễn tả trạng thái của sự vật là kết quả của hành động có chủ đích",
@@ -46544,7 +46556,7 @@ const grammar = [
         "notes": "Dùng với tha động từ."
     },
     {
-        "id": 107,
+        "id": 108,
         "lesson_id": 30,
         "title": "V-て + おきます",
         "meaning": "Làm sẵn một việc để chuẩn bị cho lần sau, hoặc giữ nguyên trạng thái",
@@ -46556,7 +46568,7 @@ const grammar = [
         "notes": "Trong hội thoại thường phát âm thành とく (toku)."
     },
     {
-        "id": 108,
+        "id": 109,
         "lesson_id": 31,
         "title": "Thể Ý Chí (Volitional)",
         "meaning": "Cách nói thân mật của thể rủ rê ましょ",
@@ -46568,7 +46580,7 @@ const grammar = [
         "notes": "Là dạng rút gọn của V-ましょう."
     },
     {
-        "id": 109,
+        "id": 110,
         "lesson_id": 31,
         "title": "V-よう + と思っています",
         "meaning": "Dự định làm gì (đã quyết định từ trước và nay vẫn giữ ý định)",
@@ -46580,7 +46592,7 @@ const grammar = [
         "notes": "Nếu chỉ vừa mới nghĩ ra tại thời điểm nói thì dùng と思います."
     },
     {
-        "id": 110,
+        "id": 111,
         "lesson_id": 32,
         "title": "V-た/V-ない + ほうがいいです",
         "meaning": "Nên / Không nên làm gì (khuyên nhủ trực tiếp)",
@@ -46592,7 +46604,7 @@ const grammar = [
         "notes": "Có tính chất áp đặt mạnh nên cân nhắc khi khuyên cấp trên."
     },
     {
-        "id": 111,
+        "id": 112,
         "lesson_id": 32,
         "title": "V/A/N (thông thường) + かもしれません",
         "meaning": "Có lẽ, có thể xảy ra (độ chắc chắn khoảng 50%)",
@@ -46604,7 +46616,7 @@ const grammar = [
         "notes": "Độ tin cậy thấp hơn でしょう (deshou)."
     },
     {
-        "id": 112,
+        "id": 113,
         "lesson_id": 33,
         "title": "Thể Mệnh Lệnh (Imperative) & Cấm Đoán (Prohibitive)",
         "meaning": "Ra lệnh ép buộc hoặc cấm làm gì (mang sắc thái mạnh)",
@@ -46616,7 +46628,7 @@ const grammar = [
         "notes": "Người thường không nên dùng vì rất bất lịch sự."
     },
     {
-        "id": 113,
+        "id": 114,
         "lesson_id": 33,
         "title": "～と書いてあります / ～という意味です",
         "meaning": "Giải thích nội dung biển báo hoặc ý nghĩa từ ngữ",
@@ -46628,7 +46640,7 @@ const grammar = [
         "notes": "Hỏi ý nghĩa dùng どういう意味ですか."
     },
     {
-        "id": 114,
+        "id": 115,
         "lesson_id": 34,
         "title": "V1-る/V1-た/N-の + とおりに + V2",
         "meaning": "Làm hành động V2 theo như nội dung V1/N chỉ dẫn",
@@ -46640,7 +46652,7 @@ const grammar = [
         "notes": "Khi đi trực tiếp sau danh từ không có の thì đọc là どおり (doori)."
     },
     {
-        "id": 115,
+        "id": 116,
         "lesson_id": 34,
         "title": "V1-た/N-の + あとで + V2",
         "meaning": "Làm hành động V2 sau khi hoàn thành V1/N",
@@ -46652,7 +46664,7 @@ const grammar = [
         "notes": "Khác với V-てから ở chỗ thời gian cách xa cũng dùng được."
     },
     {
-        "id": 116,
+        "id": 117,
         "lesson_id": 35,
         "title": "Thể Điều Kiện (Conditional Form)",
         "meaning": "Nêu điều kiện cần thiết để dẫn đến kết quả tiếp theo",
@@ -46664,7 +46676,7 @@ const grammar = [
         "notes": "N-なら dùng để đưa ra lời khuyên dựa trên chủ đề người nói trước đề cập."
     },
     {
-        "id": 117,
+        "id": 118,
         "lesson_id": 35,
         "title": "V-ba + いいですか",
         "meaning": "Xin lời khuyên hoặc hướng dẫn từ người nghe",
@@ -46676,7 +46688,7 @@ const grammar = [
         "notes": "Cách hỏi lịch sự, tìm kiếm phương án tối ưu."
     },
     {
-        "id": 118,
+        "id": 119,
         "lesson_id": 36,
         "title": "V1-ru/V1-nai + ように + V2 (thay đổi trạng thái)",
         "meaning": "Biến đổi năng lực/thói quen trở nên làm được V1",
@@ -46688,7 +46700,7 @@ const grammar = [
         "notes": "Dùng với động từ khả năng."
     },
     {
-        "id": 119,
+        "id": 120,
         "lesson_id": 36,
         "title": "V-ru / V-nai + ようにします",
         "meaning": "Cố gắng tạo thói quen làm / không làm việc gì đó",
@@ -46700,7 +46712,7 @@ const grammar = [
         "notes": "Yêu cầu khuyên nhủ lịch sự: ようにしてください."
     },
     {
-        "id": 120,
+        "id": 121,
         "lesson_id": 37,
         "title": "Thể Bị Động (Passive Form)",
         "meaning": "Bị / Được ai đó tác động hành động lên bản thân",
@@ -46712,7 +46724,7 @@ const grammar = [
         "notes": "Dùng để diễn tả sự phiền toái hoặc được lợi ích."
     },
     {
-        "id": 121,
+        "id": 122,
         "lesson_id": 37,
         "title": "N1 (chủ thể) + は + N2 (tác nhân) + に + N3 (sở hữu) + を + V-bị động",
         "meaning": "Bị ai đó làm phiền, tác động xấu lên đồ vật sở hữu",
@@ -46724,7 +46736,7 @@ const grammar = [
         "notes": "Không dùng cấu trúc này với nghĩa tích cực."
     },
     {
-        "id": 122,
+        "id": 123,
         "lesson_id": 38,
         "title": "V-る + のは + A-desu",
         "meaning": "Danh từ hóa động từ làm chủ ngữ trong câu đánh giá",
@@ -46736,7 +46748,7 @@ const grammar = [
         "notes": "Sử dụng trợ từ は để làm rõ chủ đề chính."
     },
     {
-        "id": 123,
+        "id": 124,
         "lesson_id": 38,
         "title": "V-る + のが + A-desu / V-る + のを + 忘れます",
         "meaning": "Danh từ hóa động từ làm tân ngữ chỉ sở thích, năng lực hoặc quên làm gì",
@@ -46748,7 +46760,7 @@ const grammar = [
         "notes": "Dùng の để danh từ hóa cụm hành động."
     },
     {
-        "id": 124,
+        "id": 125,
         "lesson_id": 39,
         "title": "V-te / A-kute / A-de + mệnh đề kết quả",
         "meaning": "Chỉ nguyên nhân tự nhiên, ngoài ý muốn dẫn đến kết quả ở vế sau",
@@ -46760,7 +46772,7 @@ const grammar = [
         "notes": "Dùng cho cảm xúc tự nhiên, tai nạn thiên tai."
     },
     {
-        "id": 125,
+        "id": 126,
         "lesson_id": 39,
         "title": "V/A/N (thông thường) + ので + mệnh đề",
         "meaning": "Vì... nên... (chỉ nguyên nhân khách quan, lịch sự)",
@@ -46772,7 +46784,7 @@ const grammar = [
         "notes": "Nói năng trang trọng trong công sở."
     },
     {
-        "id": 126,
+        "id": 127,
         "lesson_id": 40,
         "title": "Nghi vấn từ + V/A/N (thông thường) + か、～",
         "meaning": "Lồng câu hỏi có từ để hỏi vào trong câu khác",
@@ -46784,7 +46796,7 @@ const grammar = [
         "notes": "Dùng để hỏi thông tin."
     },
     {
-        "id": 127,
+        "id": 128,
         "lesson_id": 40,
         "title": "V/A/N (thông thường) + かどうか、～",
         "meaning": "Lồng câu hỏi Có/Không vào trong câu khác",
@@ -46796,7 +46808,7 @@ const grammar = [
         "notes": "Hai vế đối lập rõ ràng."
     },
     {
-        "id": 128,
+        "id": 129,
         "lesson_id": 41,
         "title": "N1 (người bề trên) + が + 私に + N2 + を + くださいます",
         "meaning": "Bề trên cho/tặng tôi đồ vật (kính ngữ tôn kính)",
@@ -46808,7 +46820,7 @@ const grammar = [
         "notes": "Khi nhận từ bề trên."
     },
     {
-        "id": 129,
+        "id": 130,
         "lesson_id": 41,
         "title": "V-て + いただきます / くださいます / さしあげます",
         "meaning": "Hành động biếu tặng, hỗ trợ kính ngữ",
@@ -46820,7 +46832,7 @@ const grammar = [
         "notes": "Biểu lộ lòng biết ơn sâu sắc."
     },
     {
-        "id": 130,
+        "id": 131,
         "lesson_id": 42,
         "title": "V-ru / N-の + ために + mệnh đề mục đích",
         "meaning": "Vì mục đích / Lợi ích của hành động/sự vật",
@@ -46832,7 +46844,7 @@ const grammar = [
         "notes": "Khác với ように (dùng cho động từ khả năng, trạng thái)."
     },
     {
-        "id": 131,
+        "id": 132,
         "lesson_id": 42,
         "title": "V-ru / N + に (sử dụng cho, đánh giá)",
         "meaning": "Đánh giá sự tiện lợi, mục đích sử dụng công cụ",
@@ -46844,7 +46856,7 @@ const grammar = [
         "notes": "Thường đi kèm các tính từ như 便利, 役に立つ."
     },
     {
-        "id": 132,
+        "id": 133,
         "lesson_id": 43,
         "title": "V-stem / A-bỏ i, na + そうです",
         "meaning": "Trông có vẻ như vậy (phỏng đoán qua thị giác)",
@@ -46856,7 +46868,7 @@ const grammar = [
         "notes": "Dạng phủ định là そうにない / そうもありません. Biệt lệ: よい -> よさそうです."
     },
     {
-        "id": 133,
+        "id": 134,
         "lesson_id": 43,
         "title": "V-te + きます",
         "meaning": "Đi thực hiện hành động rồi quay trở lại địa điểm cũ",
@@ -46868,7 +46880,7 @@ const grammar = [
         "notes": "Địa điểm quay lại ngầm hiểu là chỗ nói chuyện."
     },
     {
-        "id": 134,
+        "id": 135,
         "lesson_id": 44,
         "title": "V-stem / A-bỏ i, na + すぎます",
         "meaning": "Vượt quá giới hạn cho phép (mang nghĩa tiêu cực)",
@@ -46880,7 +46892,7 @@ const grammar = [
         "notes": "Thường đi kèm hệ quả xấu cho sức khỏe."
     },
     {
-        "id": 135,
+        "id": 136,
         "lesson_id": 44,
         "title": "V-stem + やすい / にくいです",
         "meaning": "Dễ làm / Khó làm hành động gì đó",
@@ -46892,7 +46904,7 @@ const grammar = [
         "notes": "Cụm từ mới tạo thành hoạt động như một tính từ đuôi i."
     },
     {
-        "id": 136,
+        "id": 137,
         "lesson_id": 45,
         "title": "V/A/N (thông thường) + 場合（ばあい）は + kết quả",
         "meaning": "Trong trường hợp giả định nào đó xảy ra",
@@ -46904,7 +46916,7 @@ const grammar = [
         "notes": "Dùng cho tình huống khẩn cấp, trang trọng."
     },
     {
-        "id": 137,
+        "id": 138,
         "lesson_id": 45,
         "title": "V/A/N (thông thường) + のに + kết quả bất ngờ",
         "meaning": "Dù... thế nhưng... (thể hiện sự bất mãn, ngạc nhiên ngoài dự tính)",
@@ -46916,7 +46928,7 @@ const grammar = [
         "notes": "Không dùng cho câu rủ rê, mệnh lệnh."
     },
     {
-        "id": 138,
+        "id": 139,
         "lesson_id": 46,
         "title": "V-ru / V-teiru / V-ta + ところです",
         "meaning": "Đúng vào thời điểm chuẩn bị / đang làm / vừa xong hành động",
@@ -46928,7 +46940,7 @@ const grammar = [
         "notes": "V-ta tokoro thường đi kèm cụm từ たった今."
     },
     {
-        "id": 139,
+        "id": 140,
         "lesson_id": 46,
         "title": "V-ta + ばかりです",
         "meaning": "Vừa mới làm xong hành động (cảm giác thời gian chủ quan rất ngắn)",
@@ -46940,7 +46952,7 @@ const grammar = [
         "notes": "Khác với V-ta tokoro ở chỗ tokoro chỉ thời điểm cực ngắn thực tế."
     },
     {
-        "id": 140,
+        "id": 141,
         "lesson_id": 47,
         "title": "V/A/N (thông thường) + そうです（伝聞）",
         "meaning": "Nghe nói... (truyền đạt lại thông tin từ nguồn khác)",
@@ -46952,7 +46964,7 @@ const grammar = [
         "notes": "Khác với そうです phỏng đoán (không đi với nguồn tin, bỏ i/na)."
     },
     {
-        "id": 141,
+        "id": 142,
         "lesson_id": 47,
         "title": "V/A/N (thông thường) + ようです",
         "meaning": "Hình như là... (suy đoán dựa trên chứng cứ thực tế qua giác quan)",
@@ -46964,7 +46976,7 @@ const grammar = [
         "notes": "Độ chắc chắn cao vì có chứng cứ rõ ràng."
     },
     {
-        "id": 142,
+        "id": 143,
         "lesson_id": 48,
         "title": "Thể Sai Khiến (Causative Form)",
         "meaning": "Bắt buộc hoặc cho phép ai đó thực hiện hành động",
@@ -46976,7 +46988,7 @@ const grammar = [
         "notes": "Dùng thể hiện quyền lực chỉ đạo."
     },
     {
-        "id": 143,
+        "id": 144,
         "lesson_id": 48,
         "title": "V-sai khiến + ていただけませんか",
         "meaning": "Xin phép cho bản thân được làm một việc gì đó lịch sự",
@@ -46988,7 +47000,7 @@ const grammar = [
         "notes": "Là kính ngữ rất phổ dụng trong công sở."
     },
     {
-        "id": 144,
+        "id": 145,
         "lesson_id": 49,
         "title": "Tôn Kính Ngữ (Respectful Keigo) - Dạng động từ",
         "meaning": "Nâng cao hành động của người nghe/bề trên để thể hiện sự kính trọng",
@@ -47000,7 +47012,7 @@ const grammar = [
         "notes": "Động từ đặc biệt: irasshaimasu, meshiagarimasu, osshaimasu, nasaimasu, goranninarimasu."
     },
     {
-        "id": 145,
+        "id": 146,
         "lesson_id": 49,
         "title": "お + V-stem + ください",
         "meaning": "Yêu cầu hành động lịch sự kính ngữ dành cho khách hàng/bề trên",
@@ -47012,7 +47024,7 @@ const grammar = [
         "notes": "Cách nói tôn kính."
     },
     {
-        "id": 146,
+        "id": 147,
         "lesson_id": 50,
         "title": "Khiêm Nhường Ngữ (Humble Keigo) - Dạng động từ",
         "meaning": "Hạ thấp hành động của bản thân để gián tiếp tôn vinh người nghe/bề trên",
@@ -47024,7 +47036,7 @@ const grammar = [
         "notes": "Động từ đặc biệt: mairimasu, orimasu, moushimasu, itashimasu, haishaku-shimasu."
     },
     {
-        "id": 147,
+        "id": 148,
         "lesson_id": 50,
         "title": "ご + V-stem3 + します",
         "meaning": "Khiêm nhường ngữ cho động từ nhóm 3",
@@ -47036,7 +47048,7 @@ const grammar = [
         "notes": "Dành cho đối tác, khách hàng."
     },
     {
-        "id": 148,
+        "id": 149,
         "lesson_id": 101,
         "title": "N1 は N2 です",
         "meaning": "N1 là N2",
@@ -47055,7 +47067,7 @@ const grammar = [
         ]
     },
     {
-        "id": 149,
+        "id": 150,
         "lesson_id": 101,
         "title": "N は なん です か",
         "meaning": "N là cái gì?",
@@ -47074,7 +47086,7 @@ const grammar = [
         ]
     },
     {
-        "id": 150,
+        "id": 151,
         "lesson_id": 101,
         "title": "N1 の N2",
         "meaning": "N2 của N1",
@@ -47093,7 +47105,7 @@ const grammar = [
         ]
     },
     {
-        "id": 151,
+        "id": 152,
         "lesson_id": 102,
         "title": "N1 は N2 です",
         "meaning": "N1 là N2",
@@ -47112,7 +47124,7 @@ const grammar = [
         ]
     },
     {
-        "id": 152,
+        "id": 153,
         "lesson_id": 102,
         "title": "V-ます (lịch sự)",
         "meaning": "Làm gì đó (lịch sự)",
@@ -47131,7 +47143,7 @@ const grammar = [
         ]
     },
     {
-        "id": 153,
+        "id": 154,
         "lesson_id": 102,
         "title": "V-て ください",
         "meaning": "Hãy làm gì đó",
@@ -47150,7 +47162,7 @@ const grammar = [
         ]
     },
     {
-        "id": 154,
+        "id": 155,
         "lesson_id": 103,
         "title": "N1 は N2 です",
         "meaning": "N1 là N2",
@@ -47169,7 +47181,7 @@ const grammar = [
         ]
     },
     {
-        "id": 155,
+        "id": 156,
         "lesson_id": 103,
         "title": "N1 は N2 じゃありません",
         "meaning": "N1 không phải là N2",
@@ -47188,7 +47200,7 @@ const grammar = [
         ]
     },
     {
-        "id": 156,
+        "id": 157,
         "lesson_id": 103,
         "title": "N ですか",
         "meaning": "Có phải N không?",
@@ -47207,7 +47219,7 @@ const grammar = [
         ]
     },
     {
-        "id": 157,
+        "id": 158,
         "lesson_id": 104,
         "title": "N (người) が N (số đếm) にん います",
         "meaning": "Có N (số đếm) người.",
@@ -47226,7 +47238,7 @@ const grammar = [
         ]
     },
     {
-        "id": 158,
+        "id": 159,
         "lesson_id": 104,
         "title": "N (địa điểm) に V (tồn tại)",
         "meaning": "Tại N có...",
@@ -47245,7 +47257,7 @@ const grammar = [
         ]
     },
     {
-        "id": 159,
+        "id": 160,
         "lesson_id": 104,
         "title": "N (người) の N (vị trí) に N (vật) が あります",
         "meaning": "Ở vị trí nào của người/vật thì có cái gì.",
@@ -47264,7 +47276,7 @@ const grammar = [
         ]
     },
     {
-        "id": 160,
+        "id": 161,
         "lesson_id": 105,
         "title": "N1 は N2 が すきです",
         "meaning": "N1 thích N2",
@@ -47283,7 +47295,7 @@ const grammar = [
         ]
     },
     {
-        "id": 161,
+        "id": 162,
         "lesson_id": 105,
         "title": "N1 は N2 が きらいです",
         "meaning": "N1 ghét N2",
@@ -47302,7 +47314,7 @@ const grammar = [
         ]
     },
     {
-        "id": 162,
+        "id": 163,
         "lesson_id": 105,
         "title": "Vます",
         "meaning": "Thì hiện tại/tương lai",
@@ -47321,7 +47333,7 @@ const grammar = [
         ]
     },
     {
-        "id": 163,
+        "id": 164,
         "lesson_id": 106,
         "title": "N + で + V",
         "meaning": "Làm hành động V tại địa điểm N",
@@ -47340,7 +47352,7 @@ const grammar = [
         ]
     },
     {
-        "id": 164,
+        "id": 165,
         "lesson_id": 106,
         "title": "V-ませんか",
         "meaning": "Cùng làm gì đó không?",
@@ -47359,7 +47371,7 @@ const grammar = [
         ]
     },
     {
-        "id": 165,
+        "id": 166,
         "lesson_id": 106,
         "title": "V-ましょう",
         "meaning": "Hãy làm... nhé",
@@ -47378,7 +47390,7 @@ const grammar = [
         ]
     },
     {
-        "id": 166,
+        "id": 167,
         "lesson_id": 107,
         "title": "N (vật) が あります",
         "meaning": "Có cái gì đó (vật vô tri)",
@@ -47397,7 +47409,7 @@ const grammar = [
         ]
     },
     {
-        "id": 167,
+        "id": 168,
         "lesson_id": 107,
         "title": "N1 は N2 です",
         "meaning": "N1 là N2 (đặc điểm)",
@@ -47416,7 +47428,7 @@ const grammar = [
         ]
     },
     {
-        "id": 168,
+        "id": 169,
         "lesson_id": 108,
         "title": "N は Na-adj です",
         "meaning": "Cái gì đó thì (như thế nào)",
@@ -47435,7 +47447,7 @@ const grammar = [
         ]
     },
     {
-        "id": 169,
+        "id": 170,
         "lesson_id": 108,
         "title": "N は い-adj です",
         "meaning": "Cái gì đó thì (tính chất)",
@@ -47454,7 +47466,7 @@ const grammar = [
         ]
     },
     {
-        "id": 170,
+        "id": 171,
         "lesson_id": 109,
         "title": "N (thời gian) に V-ます",
         "meaning": "Làm gì đó vào lúc nào",
@@ -47473,7 +47485,7 @@ const grammar = [
         ]
     },
     {
-        "id": 171,
+        "id": 172,
         "lesson_id": 109,
         "title": "N (phương tiện) で V",
         "meaning": "Làm gì đó bằng phương tiện gì",
@@ -47492,7 +47504,7 @@ const grammar = [
         ]
     },
     {
-        "id": 172,
+        "id": 173,
         "lesson_id": 109,
         "title": "N1 から N2 まで",
         "meaning": "Từ N1 đến N2",
@@ -47511,7 +47523,7 @@ const grammar = [
         ]
     },
     {
-        "id": 173,
+        "id": 174,
         "lesson_id": 110,
         "title": "N (Thời gian) は いつ ですか",
         "meaning": "Thời điểm N là khi nào?",
@@ -47530,7 +47542,7 @@ const grammar = [
         ]
     },
     {
-        "id": 174,
+        "id": 175,
         "lesson_id": 110,
         "title": "V-ませんか",
         "meaning": "Bạn có muốn làm V không?",
@@ -47549,7 +47561,7 @@ const grammar = [
         ]
     },
     {
-        "id": 175,
+        "id": 176,
         "lesson_id": 110,
         "title": "V-ますか",
         "meaning": "Bạn có làm V không?",
@@ -47568,7 +47580,7 @@ const grammar = [
         ]
     },
     {
-        "id": 176,
+        "id": 177,
         "lesson_id": 111,
         "title": "N (thời gian) に V-ます",
         "meaning": "Làm gì đó vào thời điểm nào",
@@ -47587,7 +47599,7 @@ const grammar = [
         ]
     },
     {
-        "id": 177,
+        "id": 178,
         "lesson_id": 111,
         "title": "V-ます / V-ません",
         "meaning": "Làm hoặc không làm gì đó",
@@ -47606,7 +47618,7 @@ const grammar = [
         ]
     },
     {
-        "id": 178,
+        "id": 179,
         "lesson_id": 111,
         "title": "Adverb + V-ます/ません",
         "meaning": "Mức độ thực hiện hành động",
@@ -47625,7 +47637,7 @@ const grammar = [
         ]
     },
     {
-        "id": 179,
+        "id": 180,
         "lesson_id": 112,
         "title": "N (địa điểm) + へ + 行きます/来ます/帰ります",
         "meaning": "Đi/Đến/Về đâu đó",
@@ -47644,7 +47656,7 @@ const grammar = [
         ]
     },
     {
-        "id": 180,
+        "id": 181,
         "lesson_id": 112,
         "title": "N (phương tiện) + で + 行きます/来ます/帰ります",
         "meaning": "Đi/Đến/Về bằng phương tiện gì",
@@ -47663,7 +47675,7 @@ const grammar = [
         ]
     },
     {
-        "id": 181,
+        "id": 182,
         "lesson_id": 112,
         "title": "N (người) + と + V",
         "meaning": "Làm gì cùng với ai",
@@ -47682,7 +47694,7 @@ const grammar = [
         ]
     },
     {
-        "id": 182,
+        "id": 183,
         "lesson_id": 113,
         "title": "N1 は どこ ですか",
         "meaning": "N1 ở đâu?",
@@ -47701,7 +47713,7 @@ const grammar = [
         ]
     },
     {
-        "id": 183,
+        "id": 184,
         "lesson_id": 113,
         "title": "N1 は N2 です",
         "meaning": "N1 ở N2 (vị trí)",
@@ -47720,7 +47732,7 @@ const grammar = [
         ]
     },
     {
-        "id": 184,
+        "id": 185,
         "lesson_id": 113,
         "title": "V-てください",
         "meaning": "Hãy làm V",
@@ -47739,7 +47751,7 @@ const grammar = [
         ]
     },
     {
-        "id": 185,
+        "id": 186,
         "lesson_id": 114,
         "title": "N1 に N2 が あります",
         "meaning": "Tại N1 có N2",
@@ -47758,7 +47770,7 @@ const grammar = [
         ]
     },
     {
-        "id": 186,
+        "id": 187,
         "lesson_id": 114,
         "title": "N1 は N2 の [vị trí] です",
         "meaning": "N1 ở [vị trí] của N2",
@@ -47777,7 +47789,7 @@ const grammar = [
         ]
     },
     {
-        "id": 187,
+        "id": 188,
         "lesson_id": 115,
         "title": "N は いくらですか。",
         "meaning": "Cái N giá bao nhiêu?",
@@ -47796,7 +47808,7 @@ const grammar = [
         ]
     },
     {
-        "id": 188,
+        "id": 189,
         "lesson_id": 115,
         "title": "N は [Số tiền] 円です。",
         "meaning": "N là ... yên.",
@@ -47815,7 +47827,7 @@ const grammar = [
         ]
     },
     {
-        "id": 189,
+        "id": 190,
         "lesson_id": 115,
         "title": "N を ください。",
         "meaning": "Cho tôi N.",
@@ -47834,7 +47846,7 @@ const grammar = [
         ]
     },
     {
-        "id": 190,
+        "id": 191,
         "lesson_id": 116,
         "title": "N1 は N2 です",
         "meaning": "Cái N1 là N2",
@@ -47853,7 +47865,7 @@ const grammar = [
         ]
     },
     {
-        "id": 191,
+        "id": 192,
         "lesson_id": 116,
         "title": "V-te ください",
         "meaning": "Hãy làm giúp tôi...",
@@ -47872,7 +47884,7 @@ const grammar = [
         ]
     },
     {
-        "id": 192,
+        "id": 193,
         "lesson_id": 116,
         "title": "N1 は どれですか",
         "meaning": "N1 là cái nào vậy?",
@@ -47891,7 +47903,7 @@ const grammar = [
         ]
     },
     {
-        "id": 193,
+        "id": 194,
         "lesson_id": 117,
         "title": "V-ました",
         "meaning": "Đã làm gì (quá khứ)",
@@ -47910,7 +47922,7 @@ const grammar = [
         ]
     },
     {
-        "id": 194,
+        "id": 195,
         "lesson_id": 117,
         "title": "N1 と N2",
         "meaning": "Cùng với",
@@ -47929,7 +47941,7 @@ const grammar = [
         ]
     },
     {
-        "id": 195,
+        "id": 196,
         "lesson_id": 117,
         "title": "N は いかがでしたか",
         "meaning": "N thế nào?",
@@ -47948,7 +47960,7 @@ const grammar = [
         ]
     },
     {
-        "id": 196,
+        "id": 197,
         "lesson_id": 118,
         "title": "V-ます stem + たい です",
         "meaning": "Muốn làm gì",
@@ -47967,7 +47979,7 @@ const grammar = [
         ]
     },
     {
-        "id": 197,
+        "id": 198,
         "lesson_id": 118,
         "title": "N + へ + 行きたいです",
         "meaning": "Muốn đi đến đâu",
@@ -47986,7 +47998,7 @@ const grammar = [
         ]
     },
     {
-        "id": 198,
+        "id": 199,
         "lesson_id": 118,
         "title": "N + と + V",
         "meaning": "Làm cùng với ai",
@@ -51173,7 +51185,7 @@ const students = [
         "id": "user123",
         "email": "user@nihongoflow.com",
         "display_name": "Học Viên A",
-        "created_at": "2026-07-23T15:14:44.455Z"
+        "created_at": "2026-07-23T15:41:41.348Z"
     }
 ];
 
@@ -51199,7 +51211,7 @@ const targetPlan = {
         "vocabulary_target": 30,
         "kanji_target": 10,
         "self_evaluation": "Tốt",
-        "updated_at": "2026-07-23T15:14:44.456Z"
+        "updated_at": "2026-07-23T15:41:41.349Z"
     }
 };
 
