@@ -656,8 +656,8 @@ router.post('/progress', async (req, res) => {
       return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana, katakana or cando' });
     }
 
-    if (!['not_learned', 'learning', 'mastered'].includes(status)) {
-      return res.status(400).json({ error: 'status must be: not_learned, learning, or mastered' });
+    if (!['not_learned', 'learning', 'mastered', 'wrong'].includes(status)) {
+      return res.status(400).json({ error: 'status must be: not_learned, learning, mastered, or wrong' });
     }
 
     const userId = req.user.id;
@@ -749,6 +749,41 @@ router.post('/progress', async (req, res) => {
   } catch (error) {
     console.error('Error updating progress:', error);
     res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
+/**
+ * POST /api/user/progress/clear-wrong
+ * Batch clear all 'wrong' progress items for a user back to 'learning'
+ */
+router.post('/progress/clear-wrong', async (req, res) => {
+  try {
+    const { item_type } = req.body;
+    const targetType = item_type || 'vocabulary';
+    const userId = req.user.id;
+
+    if (req.user.isMock) {
+      const prefix = `${userId}:${targetType}:`;
+      Object.keys(mockDb.userProgress).forEach(k => {
+        if (k.startsWith(prefix) && mockDb.userProgress[k] === 'wrong') {
+          mockDb.userProgress[k] = 'learning';
+        }
+      });
+      return res.json({ message: 'Cleared wrong items successfully (Mock Mode)' });
+    }
+
+    const { error } = await supabase
+      .from('user_progress')
+      .update({ status: 'learning', updated_at: new Date().toISOString() })
+      .eq('user_id', userId)
+      .eq('item_type', targetType)
+      .eq('status', 'wrong');
+
+    if (error) throw error;
+    res.json({ message: 'Cleared wrong items successfully' });
+  } catch (error) {
+    console.error('Error clearing wrong items:', error);
+    res.status(500).json({ error: error.message || error });
   }
 });
 
@@ -849,6 +884,41 @@ router.get('/lessons/:lessonId/culture', async (req, res) => {
   } catch (error) {
     console.error('Error fetching culture content:', error);
     res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
+/**
+ * GET /api/user/lessons/available-reviews
+ * Dynamically scan highest available lesson with review data
+ */
+router.get('/lessons/available-reviews', async (req, res) => {
+  try {
+    let availableLessonIds = [];
+    
+    // Check mockDb
+    if (mockDb.lesson_reviews) {
+      availableLessonIds = Object.keys(mockDb.lesson_reviews).map(id => parseInt(id)).filter(id => !isNaN(id));
+    } else if (Array.isArray(mockDb.lessonReviews)) {
+      availableLessonIds = mockDb.lessonReviews.map(r => r.lesson_id);
+    }
+
+    // Check Supabase if connected
+    if (supabase && (!req.user || !req.user.isMock)) {
+      try {
+        const { data } = await supabase.from('lesson_reviews').select('lesson_id');
+        if (data && data.length > 0) {
+          const sbIds = data.map(d => d.lesson_id);
+          availableLessonIds = Array.from(new Set([...availableLessonIds, ...sbIds]));
+        }
+      } catch (e) {
+        // Fallback to mockDb IDs
+      }
+    }
+
+    const maxLessonId = availableLessonIds.length > 0 ? Math.max(...availableLessonIds) : 3;
+    res.json({ maxLessonId, availableLessonIds: availableLessonIds.sort((a, b) => a - b) });
+  } catch (error) {
+    res.json({ maxLessonId: 3, availableLessonIds: [1, 2, 3] });
   }
 });
 
@@ -1740,14 +1810,14 @@ function writeMockExams(data) {
  */
 router.post('/exams', async (req, res) => {
   try {
-    const userId = req.user.id;
-    const { course, range_start, range_end, score, total_questions, time_spent, questions_data } = req.body;
+    const userId = req.user ? req.user.id : 'demo_user';
+    const { course, range_start, range_end, score, total_questions, time_spent, questions_data } = req.body || {};
 
     if (!course || range_start === undefined || range_end === undefined || score === undefined || total_questions === undefined || time_spent === undefined || !questions_data) {
       return res.status(400).json({ error: 'Missing required exam results fields' });
     }
 
-    if (req.user.isMock) {
+    const saveMock = () => {
       const data = readMockExams();
       if (!data.exams) data.exams = [];
       const newExam = {
@@ -1764,26 +1834,37 @@ router.post('/exams', async (req, res) => {
       };
       data.exams.push(newExam);
       writeMockExams(data);
-      return res.json({ message: 'Exam results saved successfully (Mock)', examId: newExam.id });
+      return newExam.id;
+    };
+
+    if (req.user && req.user.isMock) {
+      const examId = saveMock();
+      return res.json({ message: 'Exam results saved successfully (Mock)', examId });
     }
 
-    const { data, error } = await supabase
-      .from('user_exam_results')
-      .insert({
-        user_id: userId,
-        course,
-        range_start: parseInt(range_start),
-        range_end: parseInt(range_end),
-        score: parseInt(score),
-        total_questions: parseInt(total_questions),
-        time_spent: parseInt(time_spent),
-        questions_data
-      })
-      .select('id')
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from('user_exam_results')
+        .insert({
+          user_id: userId,
+          course,
+          range_start: parseInt(range_start),
+          range_end: parseInt(range_end),
+          score: parseInt(score),
+          total_questions: parseInt(total_questions),
+          time_spent: parseInt(time_spent),
+          questions_data
+        })
+        .select('id')
+        .single();
 
-    if (error) throw error;
-    res.json({ message: 'Exam results saved successfully', examId: data.id });
+      if (error) throw error;
+      return res.json({ message: 'Exam results saved successfully', examId: data.id });
+    } catch (sbErr) {
+      console.warn('Supabase insert user_exam_results failed, falling back to mock:', sbErr.message);
+      const examId = saveMock();
+      return res.json({ message: 'Exam results saved successfully (Fallback)', examId });
+    }
   } catch (error) {
     console.error('Error saving exam result:', error);
     res.status(500).json({ error: error.message });
@@ -1796,10 +1877,10 @@ router.post('/exams', async (req, res) => {
  */
 router.get('/exams', async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user ? req.user.id : 'demo_user';
     const { course } = req.query;
 
-    if (req.user.isMock) {
+    const getMockList = () => {
       const data = readMockExams();
       let list = data.exams || [];
       list = list.filter(e => e.user_id === userId);
@@ -1807,22 +1888,30 @@ router.get('/exams', async (req, res) => {
         list = list.filter(e => e.course === course);
       }
       list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-      return res.json(list);
+      return list;
+    };
+
+    if (req.user && req.user.isMock) {
+      return res.json(getMockList());
     }
 
-    let query = supabase
-      .from('user_exam_results')
-      .select('id, course, range_start, range_end, score, total_questions, time_spent, created_at')
-      .eq('user_id', userId);
+    try {
+      let query = supabase
+        .from('user_exam_results')
+        .select('id, course, range_start, range_end, score, total_questions, time_spent, created_at')
+        .eq('user_id', userId);
 
-    if (course) {
-      query = query.eq('course', course);
+      if (course) {
+        query = query.eq('course', course);
+      }
+
+      const { data, error } = await query.order('created_at', { ascending: false });
+      if (error) throw error;
+      return res.json(data || []);
+    } catch (sbErr) {
+      console.warn('Supabase fetch user_exam_results failed, falling back to mock:', sbErr.message);
+      return res.json(getMockList());
     }
-
-    const { data, error } = await query.order('created_at', { ascending: false });
-
-    if (error) throw error;
-    res.json(data || []);
   } catch (error) {
     console.error('Error fetching exam history:', error);
     res.status(500).json({ error: error.message });
@@ -1835,30 +1924,41 @@ router.get('/exams', async (req, res) => {
  */
 router.get('/exams/:id', async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user ? req.user.id : 'demo_user';
     const examId = req.params.id;
 
-    if (req.user.isMock) {
+    const getMockDetail = () => {
       const data = readMockExams();
-      const exam = (data.exams || []).find(e => e.id === examId && e.user_id === userId);
+      return (data.exams || []).find(e => e.id === examId && e.user_id === userId);
+    };
+
+    if (req.user && req.user.isMock) {
+      const exam = getMockDetail();
       if (!exam) {
         return res.status(404).json({ error: 'Exam not found' });
       }
       return res.json(exam);
     }
 
-    const { data, error } = await supabase
-      .from('user_exam_results')
-      .select('*')
-      .eq('id', examId)
-      .eq('user_id', userId)
-      .maybeSingle();
+    try {
+      const { data, error } = await supabase
+        .from('user_exam_results')
+        .select('*')
+        .eq('id', examId)
+        .eq('user_id', userId)
+        .maybeSingle();
 
-    if (error) throw error;
-    if (!data) {
+      if (error) throw error;
+      if (data) return res.json(data);
+      const fallbackExam = getMockDetail();
+      if (fallbackExam) return res.json(fallbackExam);
+      return res.status(404).json({ error: 'Exam not found' });
+    } catch (sbErr) {
+      console.warn('Supabase fetch exam detail failed, falling back to mock:', sbErr.message);
+      const fallbackExam = getMockDetail();
+      if (fallbackExam) return res.json(fallbackExam);
       return res.status(404).json({ error: 'Exam not found' });
     }
-    res.json(data);
   } catch (error) {
     console.error('Error fetching exam details:', error);
     res.status(500).json({ error: error.message });
@@ -1897,6 +1997,122 @@ router.delete('/exams/:id', async (req, res) => {
     res.json({ message: 'Exam deleted successfully' });
   } catch (error) {
     console.error('Error deleting exam:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ----------------------------------------------------
+// WRONG EXAM QUESTIONS CLOUD SYNC ENDPOINTS
+// ----------------------------------------------------
+const wrongExamsFile = path.join(__dirname, '../db/wrong_exam_questions.json');
+
+function readMockWrongExamQuestions() {
+  try {
+    if (!fs.existsSync(wrongExamsFile)) {
+      fs.writeFileSync(wrongExamsFile, JSON.stringify({ wrong_questions: [] }, null, 2), 'utf8');
+      return { wrong_questions: [] };
+    }
+    const content = fs.readFileSync(wrongExamsFile, 'utf8');
+    return JSON.parse(content);
+  } catch (err) {
+    console.error("Error reading wrong_exam_questions.json:", err);
+    return { wrong_questions: [] };
+  }
+}
+
+function writeMockWrongExamQuestions(data) {
+  try {
+    fs.writeFileSync(wrongExamsFile, JSON.stringify(data, null, 2), 'utf8');
+  } catch (err) {
+    console.error("Error writing wrong_exam_questions.json:", err);
+  }
+}
+
+function getQuestionKey(q) {
+  if (!q) return 'unknown';
+  const lId = q.lesson_id || '0';
+  const type = q.item_type || 'unknown';
+  const idStr = q.id !== undefined && q.id !== null ? String(q.id) : (q.question_kana || q.question_kanji || q.audio_text_kana || q.context || q.question || '').slice(0, 40);
+  return `${lId}:${type}:${idStr}`;
+}
+
+/**
+ * GET /api/user/exams/wrong-questions/list
+ * Fetch list of user's wrong exam questions
+ */
+router.get('/exams/wrong-questions/list', async (req, res) => {
+  try {
+    const userId = req.user ? req.user.id : 'demo_user';
+    const data = readMockWrongExamQuestions();
+    const list = (data.wrong_questions || []).filter(q => q.user_id === userId);
+    res.json(list);
+  } catch (error) {
+    console.error('Error fetching wrong exam questions:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * POST /api/user/exams/wrong-questions/sync
+ * Sync wrong exam questions (Add new wrong ones, remove corrected ones)
+ */
+router.post('/exams/wrong-questions/sync', async (req, res) => {
+  try {
+    const userId = req.user ? req.user.id : 'demo_user';
+    const { newWrongQuestions = [], correctedQuestions = [] } = req.body || {};
+
+    const data = readMockWrongExamQuestions();
+    if (!data.wrong_questions) data.wrong_questions = [];
+
+    let userWrongList = data.wrong_questions.filter(q => q.user_id === userId);
+
+    // 1. Remove corrected questions
+    if (Array.isArray(correctedQuestions) && correctedQuestions.length > 0) {
+      const correctedKeys = new Set(correctedQuestions.map(getQuestionKey));
+      userWrongList = userWrongList.filter(q => !correctedKeys.has(getQuestionKey(q)));
+    }
+
+    // 2. Add new wrong questions (deduplicating by getQuestionKey)
+    if (Array.isArray(newWrongQuestions) && newWrongQuestions.length > 0) {
+      newWrongQuestions.forEach(nq => {
+        const key = getQuestionKey(nq);
+        const exists = userWrongList.some(q => getQuestionKey(q) === key);
+        if (!exists) {
+          userWrongList.unshift({
+            ...nq,
+            user_id: userId,
+            created_at: new Date().toISOString()
+          });
+        }
+      });
+    }
+
+    data.wrong_questions = [
+      ...data.wrong_questions.filter(q => q.user_id !== userId),
+      ...userWrongList
+    ];
+
+    writeMockWrongExamQuestions(data);
+    res.json({ message: 'Wrong exam questions synced successfully', wrong_questions: userWrongList });
+  } catch (error) {
+    console.error('Error syncing wrong exam questions:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * DELETE /api/user/exams/wrong-questions/clear
+ * Clear all wrong exam questions for user
+ */
+router.delete('/exams/wrong-questions/clear', async (req, res) => {
+  try {
+    const userId = req.user ? req.user.id : 'demo_user';
+    const data = readMockWrongExamQuestions();
+    data.wrong_questions = (data.wrong_questions || []).filter(q => q.user_id !== userId);
+    writeMockWrongExamQuestions(data);
+    res.json({ message: 'Cleared wrong exam questions successfully' });
+  } catch (error) {
+    console.error('Error clearing wrong exam questions:', error);
     res.status(500).json({ error: error.message });
   }
 });

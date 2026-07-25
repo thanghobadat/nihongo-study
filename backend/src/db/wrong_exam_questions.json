@@ -1,0 +1,663 @@
+{
+  "wrong_questions": [
+    {
+      "id": 22,
+      "question_audio": "この ちょこれーと は わたしの です。",
+      "correct_answers": [
+        "この ちょこれーと は わたしの です",
+        "このちょこれーとはわたしのです",
+        "kono chokorēto wa watashi no desu"
+      ],
+      "vietnamese_answers": [
+        "Cái sô-cô-la này là của tôi",
+        "Chiếc sô-cô-la này là của tôi"
+      ],
+      "vietnamese_meaning": "Cái sô-cô-la này là của tôi.",
+      "item_type": "dictation",
+      "lesson_id": 2,
+      "userAnswer": "some dictation text",
+      "examDate": "2026-07-25T17:21:47.998Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:21:48.080Z"
+    },
+    {
+      "id": 40,
+      "lines": [
+        {
+          "text": "はじめまして。イーです。ベトナムから きました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
+          "speaker": "A"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Nhân vật tự giới thiệu tên là gì?",
+          "corr": "イー",
+          "opts": [
+            "イー",
+            "佐藤",
+            "Yamada",
+            "Sato"
+          ],
+          "explanation": "Nhân vật tự giới thiệu 'イーです'."
+        },
+        {
+          "q": "Nhân vật đến từ nước nào?",
+          "corr": "Việt Nam",
+          "opts": [
+            "Hàn Quốc",
+            "Mỹ",
+            "Việt Nam",
+            "Nhật Bản"
+          ],
+          "explanation": "Nhân vật nói 'ベトナムからきました' (đến từ Việt Nam)."
+        },
+        {
+          "q": "Nhân vật bao nhiêu tuổi?",
+          "corr": "22 tuổi",
+          "opts": [
+            "20 tuổi",
+            "30 tuổi",
+            "24 tuổi",
+            "22 tuổi"
+          ],
+          "explanation": "Nhân vật nói '22さいです' (22 tuổi)."
+        }
+      ],
+      "audio_text_kana": "はじめまして。イーです。ベトナムから きました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
+      "audio_text_kanji": "初めまして。イーです。ベトナムから 来ました。さくらだいがくの せんせいです。どうぞよろしく おねがいします。",
+      "audio_text_vietnamese": "Rất vui được gặp bạn. Tôi là イー. Tôi đến từ nước Việt Nam. Tôi là thầy giáo / cô giáo của Đại học Sakura. Tôi 22 tuổi. Rất mong nhận được sự giúp đỡ.",
+      "item_type": "listening",
+      "lesson_id": 1,
+      "userAnswer": {
+        "0": "イー",
+        "1": "Việt Nam",
+        "2": "20 tuổi"
+      },
+      "examDate": "2026-07-25T17:21:47.997Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:21:48.079Z"
+    },
+    {
+      "id": 21,
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "やまださん、それは じどうしゃですか、[blank1] ですか。",
+          "text_kanji": "山田さん、それは じどうしゃですか、[blank1] ですか。",
+          "translation": "Anh/Chị 山田 ơi, đó là ô tô hay là [blank1]?"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ナムさん、これは [blank2] です。",
+          "text_kanji": "ナムさん、これは [blank2] です。",
+          "translation": "Anh/Chị ナム ơi, đây là [blank2]."
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "じしょ",
+          "options": [
+            "とけい",
+            "じしょ",
+            "ほん",
+            "かぎ"
+          ],
+          "explanation": "Vị trí (1) là lựa chọn thứ hai trong câu nghi vấn 'N1ですか、N2ですか'. Vì người B chọn 'từ điển' nên vị trí (1) ở câu hỏi A phải là 'じしょ' (từ điển).",
+          "options_translations": {
+            "かぎ": "chìa khóa",
+            "ほん": "sách",
+            "じしょ": "từ điển",
+            "とけい": "đồng hồ"
+          }
+        },
+        "blank2": {
+          "correct": "じしょ",
+          "options": [
+            "じしょ",
+            "ちがいます",
+            "そう",
+            "じどうしゃ"
+          ],
+          "explanation": "Vị trí (2) là món đồ mà người B xác nhận chọn (từ điển). Đáp án đúng là 'じしょ'.",
+          "options_translations": {
+            "そう": "từ vựng ôn tập",
+            "じしょ": "từ điển",
+            "じどうしゃ": "ô tô / xe hơi",
+            "ちがいます": "không phải / nhầm rồi"
+          }
+        }
+      },
+      "context": "Hỏi lựa chọn giữa ô tô và từ điển — B trả lời món đồ đó là từ điển (じしょ)",
+      "item_type": "dialogue",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 45,
+      "answers": [
+        "さとうちゃんは なんさい ですか",
+        "satou chan wa nansai desu ka",
+        "さとうちゃんはなんさいですか",
+        "satouchanwanansaidesuka"
+      ],
+      "question": "Bé 佐藤 mấy tuổi rồi?",
+      "direction": "vi-to-ja",
+      "item_type": "translation",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 16,
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "はなこちゃんさん、あの方は [blank1] の方ですか。",
+          "text_kanji": "花子さん、あの方は [blank1] の方ですか。",
+          "translation": "Anh 花子 ơi, vị kia là người nước [blank1] phải không?"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、[blank2] じゃありません。ちゅうごく人です。",
+          "text_kanji": "いいえ、[blank2] じゃありません。ちゅうごく人です。",
+          "translation": "Không, không phải là người [blank2]. Người nước Trung Quốc đấy."
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "どちら",
+          "options": [
+            "なんさい",
+            "だれ",
+            "どちら",
+            "おなまえ"
+          ],
+          "options_translations": {
+            "だれ": "ai",
+            "どちら": "nước nào / hướng nào",
+            "おなまえ": "tên",
+            "なんさい": "mấy tuổi"
+          }
+        },
+        "blank2": {
+          "correct": "アメリカじん",
+          "options": [
+            "ちゅうごくじん",
+            "せんせい",
+            "がくせい",
+            "アメリカじん"
+          ],
+          "options_translations": {
+            "がくせい": "học sinh / sinh viên",
+            "せんせい": "thầy giáo / cô giáo",
+            "アメリカじん": "người nước Mỹ",
+            "ちゅうごくじん": "người nước Trung Quốc"
+          }
+        }
+      },
+      "context": "Hỏi han quốc tịch người thứ ba - Đoạn 16 — B xác nhận đối phương không phải là アメリカじん",
+      "item_type": "dialogue",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 34,
+      "lines": [
+        {
+          "text": "あのかたは どなたですか。",
+          "speaker": "A"
+        },
+        {
+          "text": "あのかたは ワンさんです。タイから きました。きょうしです。 29さいです。",
+          "speaker": "B"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Vị khách được hỏi tên là gì?",
+          "corr": "ワン",
+          "opts": [
+            "ワン",
+            "Taro",
+            "ワット",
+            "Hanako"
+          ],
+          "explanation": "Người B trả lời 'ワンさんです'."
+        },
+        {
+          "q": "Người đó làm nghề gì?",
+          "corr": "Giáo viên (教師)",
+          "opts": [
+            "Bác sĩ",
+            "Giáo viên (教師)",
+            "Kỹ sư",
+            "Nhân viên ngân hàng"
+          ],
+          "explanation": "Người B nói 'きょうしです' (là giáo viên/nhà giáo)."
+        },
+        {
+          "q": "Người đó bao nhiêu tuổi?",
+          "corr": "29 tuổi",
+          "opts": [
+            "40 tuổi",
+            "24 tuổi",
+            "35 tuổi",
+            "29 tuổi"
+          ],
+          "explanation": "Người B nói '29さいです' (29 tuổi)."
+        }
+      ],
+      "audio_text_kana": "あのかたは どなたですか。 あのかたは ワンさんです。タイから きました。きょうしです。 29さいです。",
+      "audio_text_kanji": "あの方は どなたですか。 あの方は ワンさんです。タイから 来ました。教師です。29歳です。",
+      "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ワン. Người ấy đến từ nước Thái Lan. Người ấy là giáo viên, 29 tuổi.",
+      "item_type": "listening",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 53,
+      "answers": [
+        "あのかぎは タワポンさんのですか",
+        "ano kagi wa tawapon san no desu ka",
+        "あのかぎはタワポンさんのですか",
+        "anokagiwatawaponsannodesuka"
+      ],
+      "question": "Cái chìa khóa kia là của anh/chị タワポン phải không?",
+      "direction": "vi-to-ja",
+      "item_type": "translation",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 2,
+      "lines": [
+        {
+          "text": "あのかたは どなたですか。",
+          "speaker": "A"
+        },
+        {
+          "text": "あのかたは ナムさんです。ちゅうごくから きました。きょうしです。 27さいです。",
+          "speaker": "B"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Vị khách được hỏi tên là gì?",
+          "corr": "ナム",
+          "opts": [
+            "Hanako",
+            "ナム",
+            "シュミット",
+            "Taro"
+          ],
+          "explanation": "Người B trả lời 'ナムさんです'."
+        },
+        {
+          "q": "Người đó làm nghề gì?",
+          "corr": "Giáo viên (教師)",
+          "opts": [
+            "Kỹ sư",
+            "Nhân viên ngân hàng",
+            "Giáo viên (教師)",
+            "Bác sĩ"
+          ],
+          "explanation": "Người B nói 'きょうしです' (là giáo viên/nhà giáo)."
+        },
+        {
+          "q": "Người đó bao nhiêu tuổi?",
+          "corr": "27 tuổi",
+          "opts": [
+            "35 tuổi",
+            "22 tuổi",
+            "27 tuổi",
+            "40 tuổi"
+          ],
+          "explanation": "Người B nói '27さいです' (27 tuổi)."
+        }
+      ],
+      "audio_text_kana": "あのかたは どなたですか。 あのかたは ナムさんです。ちゅうごくから きました。きょうしです。 27さいです。",
+      "audio_text_kanji": "あの方は どなたですか。 あの方は ナムさんです。ちゅうごくから 来ました。教師です。27歳です。",
+      "audio_text_vietnamese": "A: Vị kia là vị nào vậy?\nB: Vị đó là anh/chị ナム. Người ấy đến từ nước Trung Quốc. Người ấy là giáo viên, 27 tuổi.",
+      "item_type": "listening",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 48,
+      "answers": [
+        "はやしさんは きょうし ですか",
+        "hayashi san wa kyoushi desu ka",
+        "はやしさんはきょうしですか",
+        "hayashisanwakyoushidesuka"
+      ],
+      "question": "Chị 林 là nhà giáo phải không?",
+      "direction": "vi-to-ja",
+      "item_type": "translation",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 10,
+      "lines": [
+        {
+          "text": "さとうさん、それは なんの ざっしですか。",
+          "speaker": "A"
+        },
+        {
+          "text": "ミラーさん、これは えいごの ざっしです。",
+          "speaker": "B"
+        },
+        {
+          "text": "そうですか。さとうさんのですか。",
+          "speaker": "A"
+        },
+        {
+          "text": "いいえ、ちがいます。ミラーさんのです。",
+          "speaker": "B"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
+          "corr": "tạp chí",
+          "opts": [
+            "tạp chí",
+            "Ô tô",
+            "Tivi",
+            "ghế"
+          ],
+          "explanation": "Nhân vật hỏi '何の ざっしですか' (đồ vật được nhắc đến là tạp chí)."
+        },
+        {
+          "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
+          "corr": "tiếng Anh",
+          "opts": [
+            "Tiếng Việt",
+            "Tiếng Pháp",
+            "tiếng Anh",
+            "Tiếng Hàn"
+          ],
+          "explanation": "Người B trả lời 'えいごの ざっし' (tạp chí tiếng Anh)."
+        }
+      ],
+      "audio_text_kana": "さとうさん、それは なんの ざっしですか。 ミラーさん、これは えいごの ざっしです。そうですか。さとうさんのですか。 いいえ、ちがいます。ミラーさんのです。",
+      "audio_text_kanji": "佐藤さん、それは 何の ざっしですか。 ミラーさん、これは えいごの ざっしです。そうですか。佐藤さんのですか。 いいえ、違います。ミラーさんのです。",
+      "audio_text_vietnamese": "佐藤 hỏi: Đó là tạp chí về cái gì thế?\nミラー trả lời: Đây là tạp chí tiếng Anh.\n佐藤 hỏi tiếp: Thế à. Của bạn phải không?\nミラー trả lời: Không, nhầm rồi. Của tôi đấy.",
+      "item_type": "listening",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 38,
+      "question_audio": "この かさ は わたしの です。",
+      "correct_answers": [
+        "この かさ は わたしの です",
+        "このかさはわたしのです",
+        "kono kasa wa watashi no desu"
+      ],
+      "vietnamese_answers": [
+        "Cái ô này là của tôi",
+        "Chiếc ô này là của tôi"
+      ],
+      "vietnamese_meaning": "Cái ô này là của tôi.",
+      "item_type": "dictation",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 21,
+      "question_audio": "それ は ナムさんの です。",
+      "correct_answers": [
+        "それ は ナムさんの です",
+        "それはナムさんのです",
+        "sore wa namu san no desu"
+      ],
+      "vietnamese_answers": [
+        "Đó là của anh ナム",
+        "Đó là của chị ナム",
+        "Đó là của ナム"
+      ],
+      "vietnamese_meaning": "Đó là của anh/chị ナム.",
+      "item_type": "dictation",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 19,
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "イーさん、その [blank1] は だれの ですか。",
+          "text_kanji": "イーさん、その [blank1] は だれの ですか。",
+          "translation": "Anh/Chị イー ơi, cái [blank1] đó là của ai vậy?"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ワンさん、これは [blank2] です。",
+          "text_kanji": "ワンさん、これは [blank2] です。",
+          "translation": "Anh/Chị ワン ơi, cái này là của anh/chị [blank2]."
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "かめら",
+          "options": [
+            "かばん",
+            "かめら",
+            "かぎ",
+            "つくえ"
+          ],
+          "explanation": "Vị trí (1) điền danh từ món đồ 'máy ảnh' (かめら) đứng sau chỉ định từ 'その'.",
+          "options_translations": {
+            "かぎ": "chìa khóa",
+            "かばん": "cặp sách / túi xách",
+            "かめら": "máy ảnh",
+            "つくえ": "bàn"
+          }
+        },
+        "blank2": {
+          "correct": "さとうさんの",
+          "options": [
+            "わたしの",
+            "さとうさんの",
+            "だれの",
+            "あなたの"
+          ],
+          "explanation": "Vị trí (2) chỉ tên người sở hữu món đồ (佐藤). Đáp án là 'さとう'.",
+          "options_translations": {
+            "だれの": "của ai",
+            "あなたの": "của bạn",
+            "わたしの": "của tôi",
+            "さとうさんの": "của anh/chị Sato"
+          }
+        }
+      },
+      "context": "Hỏi người sở hữu cái máy ảnh — B trả lời món đồ là của anh/chị Sato (さとうさんの)",
+      "item_type": "dialogue",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 30,
+      "answers": [
+        "Cái sổ tay đó bằng tiếng Đức phải không",
+        "Tập sổ tay đó là bằng tiếng Đức hả",
+        "Cuốn sổ tay đó bằng tiếng Đức phải không"
+      ],
+      "direction": "ja-to-vi",
+      "question_kana": "その てちょう は どいつごの ですか。",
+      "question_kanji": "その てちょう は どいつごの ですか。",
+      "item_type": "translation",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.033Z"
+    },
+    {
+      "id": 21,
+      "question_audio": "あのかたは タイじん ですか。",
+      "correct_answers": [
+        "あのかたは タイじん ですか",
+        "ano kata wa tai jin desu ka"
+      ],
+      "vietnamese_answers": [
+        "Vị kia là người nước Thái Lan phải không",
+        "Vị đó là người nước Thái Lan phải không"
+      ],
+      "vietnamese_meaning": "Vị kia là người nước Thái Lan phải không?",
+      "item_type": "dictation",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.032Z"
+    },
+    {
+      "id": 29,
+      "question_audio": "たなかさんは インドから きました。",
+      "correct_answers": [
+        "たなかさんは インドから きました",
+        "tanaka san wa indo kara kimashita"
+      ],
+      "vietnamese_answers": [
+        "Anh 田中 đến từ nước Ấn Độ",
+        "Anh 田中 đến từ Ấn Độ",
+        "Chị 田中 đến từ nước Ấn Độ"
+      ],
+      "vietnamese_meaning": "Anh/Chị 田中 đến từ nước Ấn Độ.",
+      "item_type": "dictation",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.032Z"
+    },
+    {
+      "id": 15,
+      "lines": [
+        {
+          "text": "ワットさん、それは なんの てーぷですか。",
+          "speaker": "A"
+        },
+        {
+          "text": "ワンさん、これは えいごの てーぷです。",
+          "speaker": "B"
+        },
+        {
+          "text": "そうですか。ワットさんのですか。",
+          "speaker": "A"
+        },
+        {
+          "text": "いいえ、ちがいます。ワンさんのです。",
+          "speaker": "B"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Đồ vật được nhắc đến trong đoạn nghe là gì?",
+          "corr": "băng cassette",
+          "opts": [
+            "cà phê",
+            "Tivi",
+            "băng cassette",
+            "Ô tô"
+          ],
+          "explanation": "Nhân vật hỏi '何の てーぷですか' (đồ vật được nhắc đến là băng cassette)."
+        },
+        {
+          "q": "Nội dung của đồ vật đó liên quan đến ngôn ngữ nào?",
+          "corr": "tiếng Anh",
+          "opts": [
+            "Tiếng Việt",
+            "Tiếng Pháp",
+            "Tiếng Hàn",
+            "tiếng Anh"
+          ],
+          "explanation": "Người B trả lời 'えいごの てーぷ' (băng cassette tiếng Anh)."
+        }
+      ],
+      "audio_text_kana": "ワットさん、それは なんの てーぷですか。 ワンさん、これは えいごの てーぷです。そうですか。ワットさんのですか。 いいえ、ちがいます。ワンさんのです。",
+      "audio_text_kanji": "ワットさん、それは 何の てーぷですか。 ワンさん、これは えいごの てーぷです。そうですか。ワットさんのですか。 いいえ、違います。ワンさんのです。",
+      "audio_text_vietnamese": "ワット hỏi: Đó là băng cassette về cái gì thế?\nワン trả lời: Đây là băng cassette tiếng Anh.\nワット hỏi tiếp: Thế à. Của bạn phải không?\nワン trả lời: Không, nhầm rồi. Của tôi đấy.",
+      "item_type": "listening",
+      "lesson_id": 2,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.032Z"
+    },
+    {
+      "id": 8,
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "イーさんも [blank1] ですか。",
+          "text_kanji": "イーさんも [blank1] ですか。",
+          "translation": "Anh イー cũng là [blank1] phải không?"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、わたしは [blank2] じゃありません。エンジニアです。",
+          "text_kanji": "いいえ、私は [blank2] じゃありません。エンジニアです。",
+          "translation": "Không, tôi không phải là [blank2]. Tôi là kỹ sư."
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "かいしゃいん",
+          "options": [
+            "かいしゃいん",
+            "しゃいn",
+            "ぎんこういん",
+            "どちら"
+          ],
+          "options_translations": {
+            "どちら": "nước nào / hướng nào",
+            "しゃいn": "từ vựng ôn tập",
+            "かいしゃいん": "nhân viên công ty",
+            "ぎんこういん": "nhân viên ngân hàng"
+          }
+        },
+        "blank2": {
+          "correct": "かいしゃいん",
+          "options": [
+            "しゃいn",
+            "かいしゃいん",
+            "アメリカじん",
+            "エンジニア"
+          ],
+          "options_translations": {
+            "しゃいn": "từ vựng ôn tập",
+            "エンジニア": "kỹ sư",
+            "かいしゃいん": "nhân viên công ty",
+            "アメリカじん": "người nước Mỹ"
+          }
+        }
+      },
+      "context": "Xác nhận nghề nghiệp của bạn cùng lớp - Đoạn 8 — B xác nhận kết quả đúng là かいしゃいん",
+      "item_type": "dialogue",
+      "lesson_id": 1,
+      "examDate": "2026-07-25T17:08:18.869Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-07-25T17:08:19.032Z"
+    }
+  ]
+}
