@@ -77505,6 +77505,4421 @@ const lesson_reviews = {
   "4": lessonReviews.find(r => r.lesson_id === 4)
 };
 
+
+// Standalone Combined Review Dataset for All-Lessons Review
+const combinedReviews = {
+  "minna_n5": {
+    "translations": [
+      {
+        "id": 1,
+        "direction": "ja-to-vi",
+        "question_kana": "わたしは ミラーです。かいしゃいんです。",
+        "question_kanji": "私は ミラーです。会社員です。",
+        "answers": [
+          "Tôi là Miller. Tôi là nhân viên công ty.",
+          "Tôi là Miller, nhân viên công ty."
+        ]
+      },
+      {
+        "id": 2,
+        "direction": "ja-to-vi",
+        "question_kana": "これは IMCの わいんです。",
+        "question_kanji": "これは IMCの ワインです。",
+        "answers": [
+          "Đây là rượu vang của công ty IMC.",
+          "Cái này là rượu vang IMC."
+        ]
+      },
+      {
+        "id": 3,
+        "direction": "ja-to-vi",
+        "question_kana": "ぎんこうは どこですか。3かいです。",
+        "question_kanji": "銀行は どこですか。3階です。",
+        "answers": [
+          "Ngân hàng ở đâu? Ở tầng 3.",
+          "Ngân hàng ở đâu thế? Ở tầng 3 ạ."
+        ]
+      },
+      {
+        "id": 4,
+        "direction": "ja-to-vi",
+        "question_kana": "いま なんじですか。7じはん です。",
+        "question_kanji": "今 何時ですか。7時半 です。",
+        "answers": [
+          "Bây giờ là mấy giờ? 7 giờ rưỡi.",
+          "Hiện tại mấy giờ rồi? 7h30."
+        ]
+      },
+      {
+        "id": 5,
+        "direction": "ja-to-vi",
+        "question_kana": "まいにち 9じから 5じまで はたらきます。",
+        "question_kanji": "毎日 9時から 5時まで 働きます。",
+        "answers": [
+          "Hàng ngày tôi làm việc từ 9 giờ đến 5 giờ.",
+          "Mỗi ngày tôi đi làm từ 9h đến 5h."
+        ]
+      },
+      {
+        "id": 6,
+        "direction": "ja-to-vi",
+        "question_kana": "きのう べんきょうしましたか。いいえ、やすみました。",
+        "question_kanji": "昨日 勉強しましたか。いいえ、休みました。",
+        "answers": [
+          "Hôm qua bạn có học không? Không, tôi đã nghỉ ngơi.",
+          "Hôm qua cậu học bài không? Không, tớ nghỉ."
+        ]
+      },
+      {
+        "id": 7,
+        "direction": "ja-to-vi",
+        "question_kana": "あのひとは だれですか。サントスさんです。",
+        "question_kanji": "あの人は 誰ですか。サントスさんです。",
+        "answers": [
+          "Người kia là ai? Là anh Santos.",
+          "Người đó là ai thế? Anh Santos."
+        ]
+      },
+      {
+        "id": 8,
+        "direction": "ja-to-vi",
+        "question_kana": "この でんわは いくらですか。1まんえんです。",
+        "question_kanji": "この 電話は いくらですか。1万円です。",
+        "answers": [
+          "Cái điện thoại này bao nhiêu tiền? 1 vạn yên.",
+          "Chiếc điện thoại này giá bao nhiêu? 10.000 yên."
+        ]
+      },
+      {
+        "id": 9,
+        "direction": "ja-to-vi",
+        "question_kana": "としょかんの やすみは どようびです。",
+        "question_kanji": "図書館の 休みは 土曜日です。",
+        "answers": [
+          "Ngày nghỉ của thư viện là thứ bảy.",
+          "Thư viện nghỉ vào thứ 7."
+        ]
+      },
+      {
+        "id": 10,
+        "direction": "ja-to-vi",
+        "question_kana": "あしたの あさ 6じに おきます。",
+        "question_kanji": "明日の 朝 6時に 起きます。",
+        "answers": [
+          "Sáng mai tôi sẽ thức dậy lúc 6 giờ.",
+          "Sáng mai tớ dậy lúc 6h."
+        ]
+      },
+      {
+        "id": 11,
+        "direction": "ja-to-vi",
+        "question_kana": "わたしは ミラーです。かいしゃいんです。",
+        "question_kanji": "私は ミラーです。会社員です。",
+        "answers": [
+          "Tôi là Miller. Tôi là nhân viên công ty.",
+          "Tôi là Miller, nhân viên công ty."
+        ]
+      },
+      {
+        "id": 12,
+        "direction": "ja-to-vi",
+        "question_kana": "これは IMCの わいんです。",
+        "question_kanji": "これは IMCの ワインです。",
+        "answers": [
+          "Đây là rượu vang của công ty IMC.",
+          "Cái này là rượu vang IMC."
+        ]
+      },
+      {
+        "id": 13,
+        "direction": "ja-to-vi",
+        "question_kana": "ぎんこうは どこですか。3かいです。",
+        "question_kanji": "銀行は どこですか。3階です。",
+        "answers": [
+          "Ngân hàng ở đâu? Ở tầng 3.",
+          "Ngân hàng ở đâu thế? Ở tầng 3 ạ."
+        ]
+      },
+      {
+        "id": 14,
+        "direction": "ja-to-vi",
+        "question_kana": "いま なんじですか。7じはん です。",
+        "question_kanji": "今 何時ですか。7時半 です。",
+        "answers": [
+          "Bây giờ là mấy giờ? 7 giờ rưỡi.",
+          "Hiện tại mấy giờ rồi? 7h30."
+        ]
+      },
+      {
+        "id": 15,
+        "direction": "ja-to-vi",
+        "question_kana": "まいにち 9じから 5じまで はたらきます。",
+        "question_kanji": "毎日 9時から 5時まで 働きます。",
+        "answers": [
+          "Hàng ngày tôi làm việc từ 9 giờ đến 5 giờ.",
+          "Mỗi ngày tôi đi làm từ 9h đến 5h."
+        ]
+      },
+      {
+        "id": 16,
+        "direction": "ja-to-vi",
+        "question_kana": "きのう べんきょうしましたか。いいえ、やすみました。",
+        "question_kanji": "昨日 勉強しましたか。いいえ、休みました。",
+        "answers": [
+          "Hôm qua bạn có học không? Không, tôi đã nghỉ ngơi.",
+          "Hôm qua cậu học bài không? Không, tớ nghỉ."
+        ]
+      },
+      {
+        "id": 17,
+        "direction": "ja-to-vi",
+        "question_kana": "あのひとは だれですか。サントスさんです。",
+        "question_kanji": "あの人は 誰ですか。サントスさんです。",
+        "answers": [
+          "Người kia là ai? Là anh Santos.",
+          "Người đó là ai thế? Anh Santos."
+        ]
+      },
+      {
+        "id": 18,
+        "direction": "ja-to-vi",
+        "question_kana": "この でんわは いくらですか。1まんえんです。",
+        "question_kanji": "この 電話は いくらですか。1万円です。",
+        "answers": [
+          "Cái điện thoại này bao nhiêu tiền? 1 vạn yên.",
+          "Chiếc điện thoại này giá bao nhiêu? 10.000 yên."
+        ]
+      },
+      {
+        "id": 19,
+        "direction": "ja-to-vi",
+        "question_kana": "としょかんの やすみは どようびです。",
+        "question_kanji": "図書館の 休みは 土曜日です。",
+        "answers": [
+          "Ngày nghỉ của thư viện là thứ bảy.",
+          "Thư viện nghỉ vào thứ 7."
+        ]
+      },
+      {
+        "id": 20,
+        "direction": "ja-to-vi",
+        "question_kana": "あしたの あさ 6じに おきます。",
+        "question_kanji": "明日の 朝 6時に 起きます。",
+        "answers": [
+          "Sáng mai tôi sẽ thức dậy lúc 6 giờ.",
+          "Sáng mai tớ dậy lúc 6h."
+        ]
+      },
+      {
+        "id": 21,
+        "direction": "ja-to-vi",
+        "question_kana": "わたしは ミラーです。かいしゃいんです。",
+        "question_kanji": "私は ミラーです。会社員です。",
+        "answers": [
+          "Tôi là Miller. Tôi là nhân viên công ty.",
+          "Tôi là Miller, nhân viên công ty."
+        ]
+      },
+      {
+        "id": 22,
+        "direction": "ja-to-vi",
+        "question_kana": "これは IMCの わいんです。",
+        "question_kanji": "これは IMCの ワインです。",
+        "answers": [
+          "Đây là rượu vang của công ty IMC.",
+          "Cái này là rượu vang IMC."
+        ]
+      },
+      {
+        "id": 23,
+        "direction": "ja-to-vi",
+        "question_kana": "ぎんこうは どこですか。3かいです。",
+        "question_kanji": "銀行は どこですか。3階です。",
+        "answers": [
+          "Ngân hàng ở đâu? Ở tầng 3.",
+          "Ngân hàng ở đâu thế? Ở tầng 3 ạ."
+        ]
+      },
+      {
+        "id": 24,
+        "direction": "ja-to-vi",
+        "question_kana": "いま なんじですか。7じはん です。",
+        "question_kanji": "今 何時ですか。7時半 です。",
+        "answers": [
+          "Bây giờ là mấy giờ? 7 giờ rưỡi.",
+          "Hiện tại mấy giờ rồi? 7h30."
+        ]
+      },
+      {
+        "id": 25,
+        "direction": "ja-to-vi",
+        "question_kana": "まいにち 9じから 5じまで はたらきます。",
+        "question_kanji": "毎日 9時から 5時まで 働きます。",
+        "answers": [
+          "Hàng ngày tôi làm việc từ 9 giờ đến 5 giờ.",
+          "Mỗi ngày tôi đi làm từ 9h đến 5h."
+        ]
+      },
+      {
+        "id": 26,
+        "direction": "ja-to-vi",
+        "question_kana": "きのう べんきょうしましたか。いいえ、やすみました。",
+        "question_kanji": "昨日 勉強しましたか。いいえ、休みました。",
+        "answers": [
+          "Hôm qua bạn có học không? Không, tôi đã nghỉ ngơi.",
+          "Hôm qua cậu học bài không? Không, tớ nghỉ."
+        ]
+      },
+      {
+        "id": 27,
+        "direction": "ja-to-vi",
+        "question_kana": "あのひとは だれですか。サントスさんです。",
+        "question_kanji": "あの人は 誰ですか。サントスさんです。",
+        "answers": [
+          "Người kia là ai? Là anh Santos.",
+          "Người đó là ai thế? Anh Santos."
+        ]
+      },
+      {
+        "id": 28,
+        "direction": "ja-to-vi",
+        "question_kana": "この でんわは いくらですか。1まんえんです。",
+        "question_kanji": "この 電話は いくらですか。1万円です。",
+        "answers": [
+          "Cái điện thoại này bao nhiêu tiền? 1 vạn yên.",
+          "Chiếc điện thoại này giá bao nhiêu? 10.000 yên."
+        ]
+      },
+      {
+        "id": 29,
+        "direction": "ja-to-vi",
+        "question_kana": "としょかんの やすみは どようびです。",
+        "question_kanji": "図書館の 休みは 土曜日です。",
+        "answers": [
+          "Ngày nghỉ của thư viện là thứ bảy.",
+          "Thư viện nghỉ vào thứ 7."
+        ]
+      },
+      {
+        "id": 30,
+        "direction": "ja-to-vi",
+        "question_kana": "あしたの あさ 6じに おきます。",
+        "question_kanji": "明日の 朝 6時に 起きます。",
+        "answers": [
+          "Sáng mai tôi sẽ thức dậy lúc 6 giờ.",
+          "Sáng mai tớ dậy lúc 6h."
+        ]
+      },
+      {
+        "id": 31,
+        "direction": "ja-to-vi",
+        "question_kana": "わたしは ミラーです。かいしゃいんです。",
+        "question_kanji": "私は ミラーです。会社員です。",
+        "answers": [
+          "Tôi là Miller. Tôi là nhân viên công ty.",
+          "Tôi là Miller, nhân viên công ty."
+        ]
+      },
+      {
+        "id": 32,
+        "direction": "ja-to-vi",
+        "question_kana": "これは IMCの わいんです。",
+        "question_kanji": "これは IMCの ワインです。",
+        "answers": [
+          "Đây là rượu vang của công ty IMC.",
+          "Cái này là rượu vang IMC."
+        ]
+      },
+      {
+        "id": 33,
+        "direction": "ja-to-vi",
+        "question_kana": "ぎんこうは どこですか。3かいです。",
+        "question_kanji": "銀行は どこですか。3階です。",
+        "answers": [
+          "Ngân hàng ở đâu? Ở tầng 3.",
+          "Ngân hàng ở đâu thế? Ở tầng 3 ạ."
+        ]
+      },
+      {
+        "id": 34,
+        "direction": "ja-to-vi",
+        "question_kana": "いま なんじですか。7じはん です。",
+        "question_kanji": "今 何時ですか。7時半 です。",
+        "answers": [
+          "Bây giờ là mấy giờ? 7 giờ rưỡi.",
+          "Hiện tại mấy giờ rồi? 7h30."
+        ]
+      },
+      {
+        "id": 35,
+        "direction": "ja-to-vi",
+        "question_kana": "まいにち 9じから 5じまで はたらきます。",
+        "question_kanji": "毎日 9時から 5時まで 働きます。",
+        "answers": [
+          "Hàng ngày tôi làm việc từ 9 giờ đến 5 giờ.",
+          "Mỗi ngày tôi đi làm từ 9h đến 5h."
+        ]
+      },
+      {
+        "id": 36,
+        "direction": "ja-to-vi",
+        "question_kana": "きのう べんきょうしましたか。いいえ、やすみました。",
+        "question_kanji": "昨日 勉強しましたか。いいえ、休みました。",
+        "answers": [
+          "Hôm qua bạn có học không? Không, tôi đã nghỉ ngơi.",
+          "Hôm qua cậu học bài không? Không, tớ nghỉ."
+        ]
+      },
+      {
+        "id": 37,
+        "direction": "ja-to-vi",
+        "question_kana": "あのひとは だれですか。サントスさんです。",
+        "question_kanji": "あの人は 誰ですか。サントスさんです。",
+        "answers": [
+          "Người kia là ai? Là anh Santos.",
+          "Người đó là ai thế? Anh Santos."
+        ]
+      },
+      {
+        "id": 38,
+        "direction": "ja-to-vi",
+        "question_kana": "この でんわは いくらですか。1まんえんです。",
+        "question_kanji": "この 電話は いくらですか。1万円です。",
+        "answers": [
+          "Cái điện thoại này bao nhiêu tiền? 1 vạn yên.",
+          "Chiếc điện thoại này giá bao nhiêu? 10.000 yên."
+        ]
+      },
+      {
+        "id": 39,
+        "direction": "ja-to-vi",
+        "question_kana": "としょかんの やすみは どようびです。",
+        "question_kanji": "図書館の 休みは 土曜日です。",
+        "answers": [
+          "Ngày nghỉ của thư viện là thứ bảy.",
+          "Thư viện nghỉ vào thứ 7."
+        ]
+      },
+      {
+        "id": 40,
+        "direction": "ja-to-vi",
+        "question_kana": "あしたの あさ 6じに おきます。",
+        "question_kanji": "明日の 朝 6時に 起きます。",
+        "answers": [
+          "Sáng mai tôi sẽ thức dậy lúc 6 giờ.",
+          "Sáng mai tớ dậy lúc 6h."
+        ]
+      },
+      {
+        "id": 41,
+        "direction": "vi-to-ja",
+        "question_kana": "Tôi không phải là sinh viên.",
+        "question_kanji": "Tôi không phải là sinh viên.",
+        "answers": [
+          "わたしはがくせいじゃありません",
+          "watashi wa gakusei ja arimasen"
+        ]
+      },
+      {
+        "id": 42,
+        "direction": "vi-to-ja",
+        "question_kana": "Đây là sách của ai?",
+        "question_kanji": "Đây là sách của ai?",
+        "answers": [
+          "これはだれのほんですか",
+          "kore wa dare no hon desu ka"
+        ]
+      },
+      {
+        "id": 43,
+        "direction": "vi-to-ja",
+        "question_kana": "Nhà ăn ở đâu vậy?",
+        "question_kanji": "Nhà ăn ở đâu vậy?",
+        "answers": [
+          "しょくどうはどこですか",
+          "shokudou wa doko desu ka"
+        ]
+      },
+      {
+        "id": 44,
+        "direction": "vi-to-ja",
+        "question_kana": "Bây giờ là 10 giờ 15 phút chiều.",
+        "question_kanji": "Bây giờ là 10 giờ 15 phút chiều.",
+        "answers": [
+          "いまごご10じ15ふんです",
+          "ima gogo 10-ji 15-fun desu"
+        ]
+      },
+      {
+        "id": 45,
+        "direction": "vi-to-ja",
+        "question_kana": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "question_kanji": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "answers": [
+          "どようびとにちようびはたらきません",
+          "doyoubi to nichiyoubi hatarakimasen"
+        ]
+      },
+      {
+        "id": 46,
+        "direction": "vi-to-ja",
+        "question_kana": "Tối qua bạn ngủ lúc mấy giờ?",
+        "question_kanji": "Tối qua bạn ngủ lúc mấy giờ?",
+        "answers": [
+          "きのうのばんなんじにねましたか",
+          "kinou no ban nanji ni nemashita ka"
+        ]
+      },
+      {
+        "id": 47,
+        "direction": "vi-to-ja",
+        "question_kana": "Cuộc họp kết thúc lúc 4 giờ.",
+        "question_kanji": "Cuộc họp kết thúc lúc 4 giờ.",
+        "answers": [
+          "かいぎは4じにおわります",
+          "kaigi wa 4-ji ni owarimasu"
+        ]
+      },
+      {
+        "id": 48,
+        "direction": "vi-to-ja",
+        "question_kana": "Anh Miller bao nhiêu tuổi rồi?",
+        "question_kanji": "Anh Miller bao nhiêu tuổi rồi?",
+        "answers": [
+          "ミラーさんはおいくつですか",
+          "miraa san wa oikutsu desu ka"
+        ]
+      },
+      {
+        "id": 49,
+        "direction": "vi-to-ja",
+        "question_kana": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "question_kanji": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "answers": [
+          "ゆうびんきょくは8じはんからです",
+          "yuubinkyoku wa 8-ji han kara desu"
+        ]
+      },
+      {
+        "id": 50,
+        "direction": "vi-to-ja",
+        "question_kana": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "question_kanji": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "answers": [
+          "けあさ5じにおきました",
+          "keasa 5-ji ni okimashita"
+        ]
+      },
+      {
+        "id": 51,
+        "direction": "vi-to-ja",
+        "question_kana": "Tôi không phải là sinh viên.",
+        "question_kanji": "Tôi không phải là sinh viên.",
+        "answers": [
+          "わたしはがくせいじゃありません",
+          "watashi wa gakusei ja arimasen"
+        ]
+      },
+      {
+        "id": 52,
+        "direction": "vi-to-ja",
+        "question_kana": "Đây là sách của ai?",
+        "question_kanji": "Đây là sách của ai?",
+        "answers": [
+          "これはだれのほんですか",
+          "kore wa dare no hon desu ka"
+        ]
+      },
+      {
+        "id": 53,
+        "direction": "vi-to-ja",
+        "question_kana": "Nhà ăn ở đâu vậy?",
+        "question_kanji": "Nhà ăn ở đâu vậy?",
+        "answers": [
+          "しょくどうはどこですか",
+          "shokudou wa doko desu ka"
+        ]
+      },
+      {
+        "id": 54,
+        "direction": "vi-to-ja",
+        "question_kana": "Bây giờ là 10 giờ 15 phút chiều.",
+        "question_kanji": "Bây giờ là 10 giờ 15 phút chiều.",
+        "answers": [
+          "いまごご10じ15ふんです",
+          "ima gogo 10-ji 15-fun desu"
+        ]
+      },
+      {
+        "id": 55,
+        "direction": "vi-to-ja",
+        "question_kana": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "question_kanji": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "answers": [
+          "どようびとにちようびはたらきません",
+          "doyoubi to nichiyoubi hatarakimasen"
+        ]
+      },
+      {
+        "id": 56,
+        "direction": "vi-to-ja",
+        "question_kana": "Tối qua bạn ngủ lúc mấy giờ?",
+        "question_kanji": "Tối qua bạn ngủ lúc mấy giờ?",
+        "answers": [
+          "きのうのばんなんじにねましたか",
+          "kinou no ban nanji ni nemashita ka"
+        ]
+      },
+      {
+        "id": 57,
+        "direction": "vi-to-ja",
+        "question_kana": "Cuộc họp kết thúc lúc 4 giờ.",
+        "question_kanji": "Cuộc họp kết thúc lúc 4 giờ.",
+        "answers": [
+          "かいぎは4じにおわります",
+          "kaigi wa 4-ji ni owarimasu"
+        ]
+      },
+      {
+        "id": 58,
+        "direction": "vi-to-ja",
+        "question_kana": "Anh Miller bao nhiêu tuổi rồi?",
+        "question_kanji": "Anh Miller bao nhiêu tuổi rồi?",
+        "answers": [
+          "ミラーさんはおいくつですか",
+          "miraa san wa oikutsu desu ka"
+        ]
+      },
+      {
+        "id": 59,
+        "direction": "vi-to-ja",
+        "question_kana": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "question_kanji": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "answers": [
+          "ゆうびんきょくは8じはんからです",
+          "yuubinkyoku wa 8-ji han kara desu"
+        ]
+      },
+      {
+        "id": 60,
+        "direction": "vi-to-ja",
+        "question_kana": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "question_kanji": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "answers": [
+          "けあさ5じにおきました",
+          "keasa 5-ji ni okimashita"
+        ]
+      },
+      {
+        "id": 61,
+        "direction": "vi-to-ja",
+        "question_kana": "Tôi không phải là sinh viên.",
+        "question_kanji": "Tôi không phải là sinh viên.",
+        "answers": [
+          "わたしはがくせいじゃありません",
+          "watashi wa gakusei ja arimasen"
+        ]
+      },
+      {
+        "id": 62,
+        "direction": "vi-to-ja",
+        "question_kana": "Đây là sách của ai?",
+        "question_kanji": "Đây là sách của ai?",
+        "answers": [
+          "これはだれのほんですか",
+          "kore wa dare no hon desu ka"
+        ]
+      },
+      {
+        "id": 63,
+        "direction": "vi-to-ja",
+        "question_kana": "Nhà ăn ở đâu vậy?",
+        "question_kanji": "Nhà ăn ở đâu vậy?",
+        "answers": [
+          "しょくどうはどこですか",
+          "shokudou wa doko desu ka"
+        ]
+      },
+      {
+        "id": 64,
+        "direction": "vi-to-ja",
+        "question_kana": "Bây giờ là 10 giờ 15 phút chiều.",
+        "question_kanji": "Bây giờ là 10 giờ 15 phút chiều.",
+        "answers": [
+          "いまごご10じ15ふんです",
+          "ima gogo 10-ji 15-fun desu"
+        ]
+      },
+      {
+        "id": 65,
+        "direction": "vi-to-ja",
+        "question_kana": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "question_kanji": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "answers": [
+          "どようびとにちようびはたらきません",
+          "doyoubi to nichiyoubi hatarakimasen"
+        ]
+      },
+      {
+        "id": 66,
+        "direction": "vi-to-ja",
+        "question_kana": "Tối qua bạn ngủ lúc mấy giờ?",
+        "question_kanji": "Tối qua bạn ngủ lúc mấy giờ?",
+        "answers": [
+          "きのうのばんなんじにねましたか",
+          "kinou no ban nanji ni nemashita ka"
+        ]
+      },
+      {
+        "id": 67,
+        "direction": "vi-to-ja",
+        "question_kana": "Cuộc họp kết thúc lúc 4 giờ.",
+        "question_kanji": "Cuộc họp kết thúc lúc 4 giờ.",
+        "answers": [
+          "かいぎは4じにおわります",
+          "kaigi wa 4-ji ni owarimasu"
+        ]
+      },
+      {
+        "id": 68,
+        "direction": "vi-to-ja",
+        "question_kana": "Anh Miller bao nhiêu tuổi rồi?",
+        "question_kanji": "Anh Miller bao nhiêu tuổi rồi?",
+        "answers": [
+          "ミラーさんはおいくつですか",
+          "miraa san wa oikutsu desu ka"
+        ]
+      },
+      {
+        "id": 69,
+        "direction": "vi-to-ja",
+        "question_kana": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "question_kanji": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "answers": [
+          "ゆうびんきょくは8じはんからです",
+          "yuubinkyoku wa 8-ji han kara desu"
+        ]
+      },
+      {
+        "id": 70,
+        "direction": "vi-to-ja",
+        "question_kana": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "question_kanji": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "answers": [
+          "けあさ5じにおきました",
+          "keasa 5-ji ni okimashita"
+        ]
+      },
+      {
+        "id": 71,
+        "direction": "vi-to-ja",
+        "question_kana": "Tôi không phải là sinh viên.",
+        "question_kanji": "Tôi không phải là sinh viên.",
+        "answers": [
+          "わたしはがくせいじゃありません",
+          "watashi wa gakusei ja arimasen"
+        ]
+      },
+      {
+        "id": 72,
+        "direction": "vi-to-ja",
+        "question_kana": "Đây là sách của ai?",
+        "question_kanji": "Đây là sách của ai?",
+        "answers": [
+          "これはだれのほんですか",
+          "kore wa dare no hon desu ka"
+        ]
+      },
+      {
+        "id": 73,
+        "direction": "vi-to-ja",
+        "question_kana": "Nhà ăn ở đâu vậy?",
+        "question_kanji": "Nhà ăn ở đâu vậy?",
+        "answers": [
+          "しょくどうはどこですか",
+          "shokudou wa doko desu ka"
+        ]
+      },
+      {
+        "id": 74,
+        "direction": "vi-to-ja",
+        "question_kana": "Bây giờ là 10 giờ 15 phút chiều.",
+        "question_kanji": "Bây giờ là 10 giờ 15 phút chiều.",
+        "answers": [
+          "いまごご10じ15ふんです",
+          "ima gogo 10-ji 15-fun desu"
+        ]
+      },
+      {
+        "id": 75,
+        "direction": "vi-to-ja",
+        "question_kana": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "question_kanji": "Thứ Bảy và Chủ Nhật tôi không làm việc.",
+        "answers": [
+          "どようびとにちようびはたらきません",
+          "doyoubi to nichiyoubi hatarakimasen"
+        ]
+      },
+      {
+        "id": 76,
+        "direction": "vi-to-ja",
+        "question_kana": "Tối qua bạn ngủ lúc mấy giờ?",
+        "question_kanji": "Tối qua bạn ngủ lúc mấy giờ?",
+        "answers": [
+          "きのうのばんなんじにねましたか",
+          "kinou no ban nanji ni nemashita ka"
+        ]
+      },
+      {
+        "id": 77,
+        "direction": "vi-to-ja",
+        "question_kana": "Cuộc họp kết thúc lúc 4 giờ.",
+        "question_kanji": "Cuộc họp kết thúc lúc 4 giờ.",
+        "answers": [
+          "かいぎは4じにおわります",
+          "kaigi wa 4-ji ni owarimasu"
+        ]
+      },
+      {
+        "id": 78,
+        "direction": "vi-to-ja",
+        "question_kana": "Anh Miller bao nhiêu tuổi rồi?",
+        "question_kanji": "Anh Miller bao nhiêu tuổi rồi?",
+        "answers": [
+          "ミラーさんはおいくつですか",
+          "miraa san wa oikutsu desu ka"
+        ]
+      },
+      {
+        "id": 79,
+        "direction": "vi-to-ja",
+        "question_kana": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "question_kanji": "Bưu điện làm việc từ 8 giờ 30 phút.",
+        "answers": [
+          "ゆうびんきょくは8じはんからです",
+          "yuubinkyoku wa 8-ji han kara desu"
+        ]
+      },
+      {
+        "id": 80,
+        "direction": "vi-to-ja",
+        "question_kana": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "question_kanji": "Sáng nay tôi đã dậy lúc 5 giờ.",
+        "answers": [
+          "けあさ5じにおきました",
+          "keasa 5-ji ni okimashita"
+        ]
+      }
+    ],
+    "dialogues": [
+      {
+        "id": 1,
+        "context": "Hội thoại ôn tập tổng hợp 1",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "context": "Hội thoại ôn tập tổng hợp 2",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "context": "Hội thoại ôn tập tổng hợp 3",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "context": "Hội thoại ôn tập tổng hợp 4",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 5,
+        "context": "Hội thoại ôn tập tổng hợp 5",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "context": "Hội thoại ôn tập tổng hợp 6",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "context": "Hội thoại ôn tập tổng hợp 7",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "context": "Hội thoại ôn tập tổng hợp 8",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 9,
+        "context": "Hội thoại ôn tập tổng hợp 9",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 10,
+        "context": "Hội thoại ôn tập tổng hợp 10",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 11,
+        "context": "Hội thoại ôn tập tổng hợp 11",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 12,
+        "context": "Hội thoại ôn tập tổng hợp 12",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 13,
+        "context": "Hội thoại ôn tập tổng hợp 13",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 14,
+        "context": "Hội thoại ôn tập tổng hợp 14",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 15,
+        "context": "Hội thoại ôn tập tổng hợp 15",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 16,
+        "context": "Hội thoại ôn tập tổng hợp 16",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 17,
+        "context": "Hội thoại ôn tập tổng hợp 17",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 18,
+        "context": "Hội thoại ôn tập tổng hợp 18",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 19,
+        "context": "Hội thoại ôn tập tổng hợp 19",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 20,
+        "context": "Hội thoại ôn tập tổng hợp 20",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 21,
+        "context": "Hội thoại ôn tập tổng hợp 21",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 22,
+        "context": "Hội thoại ôn tập tổng hợp 22",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 23,
+        "context": "Hội thoại ôn tập tổng hợp 23",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 24,
+        "context": "Hội thoại ôn tập tổng hợp 24",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 25,
+        "context": "Hội thoại ôn tập tổng hợp 25",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 26,
+        "context": "Hội thoại ôn tập tổng hợp 26",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 27,
+        "context": "Hội thoại ôn tập tổng hợp 27",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 28,
+        "context": "Hội thoại ôn tập tổng hợp 28",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 29,
+        "context": "Hội thoại ôn tập tổng hợp 29",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 30,
+        "context": "Hội thoại ôn tập tổng hợp 30",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 31,
+        "context": "Hội thoại ôn tập tổng hợp 31",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 32,
+        "context": "Hội thoại ôn tập tổng hợp 32",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 33,
+        "context": "Hội thoại ôn tập tổng hợp 33",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 34,
+        "context": "Hội thoại ôn tập tổng hợp 34",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 35,
+        "context": "Hội thoại ôn tập tổng hợp 35",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 36,
+        "context": "Hội thoại ôn tập tổng hợp 36",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 37,
+        "context": "Hội thoại ôn tập tổng hợp 37",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 38,
+        "context": "Hội thoại ôn tập tổng hợp 38",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 39,
+        "context": "Hội thoại ôn tập tổng hợp 39",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      },
+      {
+        "id": 40,
+        "context": "Hội thoại ôn tập tổng hợp 40",
+        "lines": [
+          {
+            "speaker": "A",
+            "text_kana": "すみません、いま なんじ[blank1]ですか。",
+            "text_kanji": "すみません、今 何時[blank1]ですか。"
+          },
+          {
+            "speaker": "B",
+            "text_kana": "9じ[blank2]です。ぎんこうは 9じから 3じまでですよ。",
+            "text_kanji": "9時[blank2]です。銀行は 9時から 3時までですよ。"
+          }
+        ],
+        "blanks": {
+          "blank1": {
+            "correct": "です",
+            "options": [
+              "です",
+              "ます",
+              "でした",
+              "ですか"
+            ],
+            "options_translations": {
+              "です": "là (thì hiện tại)",
+              "ます": "làm",
+              "でした": "đã là",
+              "ですか": "phải không"
+            }
+          },
+          "blank2": {
+            "correct": "はん",
+            "options": [
+              "はん",
+              "ふん",
+              "じ",
+              "ね"
+            ],
+            "options_translations": {
+              "はん": "rưỡi (30 phút)",
+              "ふん": "phút",
+              "じ": "giờ",
+              "ね": "nhé"
+            }
+          }
+        }
+      }
+    ],
+    "listenings": [
+      {
+        "id": 1,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 30,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 31,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 32,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 33,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 34,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 35,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 36,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 37,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 38,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 39,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      },
+      {
+        "id": 40,
+        "audio_text_kana": "A: はじめまして。ミラーです。アメリカから きました。 IMCの しゃいんです。どうぞ よろしく。 B: サントスです。ブラジルから きました。よろしく おねがいします。",
+        "audio_text_kanji": "A: 初めまして。ミラーです。アメリカから 来ました。 IMCの 社員です。どうぞ よろしく。 B: サントスです。ブラジルから 来ました。よろしく おねがいします。",
+        "questions": [
+          {
+            "q": "Anh Miller là người nước nào?",
+            "opts": [
+              "Mỹ",
+              "Brasil",
+              "Nhật Bản",
+              "Việt Nam"
+            ],
+            "corr": "Mỹ",
+            "explanation": "Miller nói 'アメリカから きました'"
+          },
+          {
+            "q": "Anh Miller làm việc ở đâu?",
+            "opts": [
+              "Công ty IMC",
+              "Trường học",
+              "Ngân hàng",
+              "Bưu điện"
+            ],
+            "corr": "Công ty IMC",
+            "explanation": "Miller nói 'IMCの しゃいんです'"
+          }
+        ]
+      }
+    ],
+    "dictations": [
+      {
+        "id": 1,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 2,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 3,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 4,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 5,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 6,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 7,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 8,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 9,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 10,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 11,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 12,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 13,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 14,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 15,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 16,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 17,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 18,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 19,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 20,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 21,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 22,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 23,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 24,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 25,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 26,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 27,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 28,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 29,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 30,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 31,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 32,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 33,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 34,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 35,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      },
+      {
+        "id": 36,
+        "question_audio": "わたしは ミラーです",
+        "correct_answers": [
+          "わたしはミラーです",
+          "わたしは ミラーです",
+          "watashi wa miraa desu"
+        ],
+        "vietnamese_answers": [
+          "Tôi là Miller."
+        ],
+        "vietnamese_meaning": "Tôi là Miller."
+      },
+      {
+        "id": 37,
+        "question_audio": "これは ほんです",
+        "correct_answers": [
+          "これはほんです",
+          "これは ほんです",
+          "kore wa hon desu"
+        ],
+        "vietnamese_answers": [
+          "Đây là cuốn sách."
+        ],
+        "vietnamese_meaning": "Đây là cuốn sách."
+      },
+      {
+        "id": 38,
+        "question_audio": "いま 8じはんです",
+        "correct_answers": [
+          "いま8じはんです",
+          "いま 8じはんです",
+          "ima 8-ji han desu"
+        ],
+        "vietnamese_answers": [
+          "Bây giờ là 8 giờ rưỡi."
+        ],
+        "vietnamese_meaning": "Bây giờ là 8 giờ rưỡi."
+      },
+      {
+        "id": 39,
+        "question_audio": "まいにち べんきょうします",
+        "correct_answers": [
+          "まいにちべんきょうします",
+          "まいにち べんきょうします",
+          "mainichi benkyoushimasu"
+        ],
+        "vietnamese_answers": [
+          "Mỗi ngày tôi đều học bài."
+        ],
+        "vietnamese_meaning": "Mỗi ngày tôi đều học bài."
+      },
+      {
+        "id": 40,
+        "question_audio": "きのう やすみました",
+        "correct_answers": [
+          "きのうやすみました",
+          "きのう やすみました",
+          "kinou yasumimashita"
+        ],
+        "vietnamese_answers": [
+          "Hôm qua tôi đã nghỉ ngơi."
+        ],
+        "vietnamese_meaning": "Hôm qua tôi đã nghỉ ngơi."
+      }
+    ]
+  }
+};
+
 module.exports = {
   lessons,
   vocabulary,
@@ -77517,5 +81932,6 @@ module.exports = {
   candoChecks,
   cultureTopics,
   lessonReviews,
+  combinedReviews,
   lesson_reviews
 };

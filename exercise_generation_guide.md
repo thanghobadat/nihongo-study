@@ -152,3 +152,21 @@ Cẩm nang này hướng dẫn AI Agent cách tìm kiếm tài liệu chuẩn s�
 ## 3. Định dạng Tệp đầu ra đề xuất
 
 Khi sinh dữ liệu cho một bài học mới (ví dụ Bài X), AI Agent phải lưu trữ kết quả đề xuất vào tệp `proposed_exercises_lessonX.md` dưới cấu trúc Markdown chuẩn kèm mã code JSON để người học dễ dàng phê duyệt và lập trình viên dễ dàng tích hợp vào cơ sở dữ liệu.
+
+
+---
+
+## 4. Phân biệt Thư viện Ôn tập theo Bài & Ôn tập Tổng hợp và Quy định Sinh Dữ liệu Song song Bắt buộc
+
+Để đảm bảo chất lượng giảng dạy và trải nghiệm luyện tập:
+1. **Phần 1: Ôn tập theo bài (Per-Lesson Review - `lessonReviews` / `proposed_exercises_lessonX.md`)**:
+   - Dùng riêng cho giao diện học từng bài (`/lessons/:id?tab=review`).
+   - Bài tập kiểm tra sâu từ vựng và ngữ pháp của chính bài học đó.
+2. **Phần 2: Ôn tập tổng hợp (Combined Review - `combinedReviews` / `proposed_combined_reviews.md`)**:
+   - Dùng riêng cho giao diện Luyện tập tổng hợp trên toàn khoá học (`/knowledge?tab=review`).
+   - Thư viện đề độc lập chuyên biệt giúp rèn luyện phản xạ liên bài học, tráo ngẫu nhiên độc lập hoàn toàn với bài tập của từng bài học.
+
+### ⚠️ QUY ĐỊNH BẮT BUỘC KHI SINH BÀI TẬP (MANDATORY DUAL-PART GENERATION):
+Mỗi khi người dùng yêu cầu sinh bài tập cho bất kỳ bài học mới nào (từ Bài 1 đến Bài 50), AI Agent **BẮT BUỘC PHẢI TẠO BÀI TẬP SONG SONG CHO CẢ 2 PHẦN**:
+- **Tạo Phần 1 (Ôn tập theo bài)**: Biên soạn 160 bài tập độc nhất cho chính bài học đó, xuất tệp `proposed_exercises_lessonX.md` và nạp vào `mockDb.lessonReviews[X]`.
+- **Tạo/Cập nhật Phần 2 (Ôn tập tổng hợp)**: Đồng thời biên soạn/bổ sung bộ bài tập ôn tập tổng hợp liên bài học mới tích hợp kiến thức của bài vừa tạo, xuất tệp `proposed_combined_reviews.md` và nạp vào `mockDb.combinedReviews`.

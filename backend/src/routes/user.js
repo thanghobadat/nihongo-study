@@ -1029,59 +1029,34 @@ router.get('/reviews/combined', async (req, res) => {
   try {
     const level = req.query.level || 'N5';
     const course = req.query.course || 'minna';
-    let allReviews = [];
+    let reviewData = null;
 
-    // Filter lessons based on course and level
-    // For Minna: N5 = lessons 1-25, N4 = lessons 26-50
-    let startLessonId = 1;
-    let endLessonId = 25;
-    if (course === 'minna') {
-      if (level === 'N4') {
-        startLessonId = 26;
-        endLessonId = 50;
-      }
-    } else {
-      startLessonId = 101;
-      endLessonId = 118;
-    }
-
-    // Load review records
+    // Load independent combined review bank (tách biệt hoàn toàn khỏi ôn tập theo bài)
     if (req.user.isMock) {
-      allReviews = (mockDb.lessonReviews || []).filter(item => item.lesson_id >= startLessonId && item.lesson_id <= endLessonId);
+      reviewData = (mockDb.combinedReviews && (mockDb.combinedReviews[`${course}_${level.toLowerCase()}`] || mockDb.combinedReviews.minna_n5)) || mockDb.combinedReviews;
     } else {
-      // Cloud Supabase Mode
       const { data, error } = await supabase
-        .from('lesson_reviews')
+        .from('combined_reviews')
         .select('*')
-        .gte('lesson_id', startLessonId)
-        .lte('lesson_id', endLessonId);
+        .eq('course', course)
+        .eq('level', level)
+        .maybeSingle();
 
       if (error) {
-        console.warn('lesson_reviews read error, falling back to mockDb:', error.message);
+        console.warn('combined_reviews read error, falling back to mockDb:', error.message);
       }
-      allReviews = data && data.length > 0 ? data : (mockDb.lessonReviews || []).filter(item => item.lesson_id >= startLessonId && item.lesson_id <= endLessonId);
+      reviewData = data || (mockDb.combinedReviews && (mockDb.combinedReviews[`${course}_${level.toLowerCase()}`] || mockDb.combinedReviews.minna_n5)) || mockDb.combinedReviews;
     }
 
-    // Aggregate translations, dialogues, listenings, dictations from all matching lessons
-    let combinedTranslations = [];
-    let combinedDialogues = [];
-    let combinedListenings = [];
-    let combinedDictations = [];
+    if (!reviewData) {
+      return res.status(404).json({ error: 'Không tìm thấy dữ liệu ôn tập tổng hợp.' });
+    }
 
-    allReviews.forEach(review => {
-      if (review.translations) {
-        combinedTranslations.push(...review.translations.map(t => ({ ...t, lesson_id: review.lesson_id })));
-      }
-      if (review.dialogues) {
-        combinedDialogues.push(...review.dialogues.map(d => ({ ...d, lesson_id: review.lesson_id })));
-      }
-      if (review.listenings) {
-        combinedListenings.push(...review.listenings.map(l => ({ ...l, lesson_id: review.lesson_id })));
-      }
-      if (review.dictations) {
-        combinedDictations.push(...review.dictations.map(d => ({ ...d, lesson_id: review.lesson_id })));
-      }
-    });
+    // Extract independent arrays
+    const combinedTranslations = reviewData.translations || reviewData.type1_translation || [];
+    const combinedDialogues = reviewData.dialogues || reviewData.type2_fill_blank || [];
+    const combinedListenings = reviewData.listenings || reviewData.type3_listening || [];
+    const combinedDictations = reviewData.dictations || reviewData.type4_dictation || [];
 
     // Fisher-Yates shuffle helper
     const shuffleArray = (arr) => {
