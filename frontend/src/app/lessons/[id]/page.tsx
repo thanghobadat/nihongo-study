@@ -1901,11 +1901,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     reviewQuestions.forEach((q) => {
       if (q.type === 'translation') {
         const key = q.key;
-        const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+        const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？。、\s]/g, '');
         let isCorrect = false;
         const correctAnswersList = q.originalData.correct_answers || q.originalData.answers || [];
         correctAnswersList.forEach((ans: string) => {
-          const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+          const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
           if (userAns === cleanAns || (cleanAns.includes(userAns) && userAns.length > 3)) {
             isCorrect = true;
           }
@@ -1949,18 +1949,18 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       else if (q.type === 'dictation') {
         const key = q.key;
         const userAnsRaw = (reviewAnswers[key] || '').trim();
-        const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+        const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？。、\s]/g, '');
         let isCorrect = false;
         const correctJp = q.originalData.question_audio;
-        const cleanJp = correctJp.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
-        const cleanUserJp = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+        const cleanJp = correctJp.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
+        const cleanUserJp = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
         if (cleanUserJp === cleanJp) {
           isCorrect = true;
         }
 
         const vnAnswers = q.originalData.vietnamese_answers || [];
         vnAnswers.forEach((ans: string) => {
-          const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
+          const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
           if (cleanUserVn === cleanVnAns || calculateAccuracy(userAnsRaw, ans) >= 85) {
             isCorrect = true;
           }
@@ -10728,39 +10728,15 @@ const renderInteractivePractice = () => {
                     ))
 
                   )}
-
                 </div>
-
               </div>
-
             )}
 
             {currentTab === 'culture' && (
-
               <div className="space-y-6 animate-fade-in max-w-4xl mx-auto">
-
-                {/* Header info */}
-
-                <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-1 text-center font-sans">
-
-                  <span className="text-xs font-black text-rose-500 uppercase tracking-widest block">Tìm hiểu văn hoá</span>
-
-                  <h2 className="text-xl font-black text-slate-800 dark:text-slate-100">CÂU CHUYỆN VĂN HÓA & CUỘC SỐNG NHẬT BẢN</h2>
-
-                </div>
-
-                {/* Culture contents */}
-
                 {cultureData.length === 0 ? (
-
-                  <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
-
-                    📭 Chưa có nội dung Văn hóa & Cuộc sống cho bài học này.
-
-                  </div>
-
+                  <div className="text-center py-12 text-slate-400">Chưa có nội dung Văn hóa & Cuộc sống cho bài học này.</div>
                 ) : (
-
                   cultureData.map((item) => (
 
                     <div
@@ -10877,7 +10853,7 @@ const renderInteractivePractice = () => {
 
                       onClick={() => setSummarySubTab('vocab')}
 
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer \${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
 
                         summarySubTab === 'vocab'
 
@@ -10897,7 +10873,7 @@ const renderInteractivePractice = () => {
 
                       onClick={() => setSummarySubTab('grammar')}
 
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer \${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
 
                         summarySubTab === 'grammar'
 
@@ -11015,100 +10991,33 @@ const renderInteractivePractice = () => {
                       ) : (
 
                         Object.keys(groupedSummaryVocab).sort((a,b) => parseInt(a) - parseInt(b)).map(lessonIdStr => {
-
                           const lessonId = parseInt(lessonIdStr);
-
                           const lessonObj = summaryLessons.find(l => l.id === lessonId);
-
                           const items = groupedSummaryVocab[lessonId];
-
                           return (
-
                             <div key={lessonId} className="space-y-3">
-
                               <h3 className="text-xs font-black tracking-wider text-indigo-600 dark:text-blue-400 uppercase border-b border-indigo-50 dark:border-slate-800 pb-1">
-
                                 Bài {lessonId - 100}: {lessonObj?.title.split(':').pop()?.trim()}
-
                               </h3>
-
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                                 {items.map(item => {
-
                                   const isCore = item.word_type === 'noun' || item.word_type === 'verb' || item.word_type === 'adjective' || item.word_type === 'pronoun' || item.word_type === 'greeting';
-
-                                  const cardBorder = item.status === 'mastered' 
-
-                                    ? 'border-emerald-500/30' 
-
-                                    : item.status === 'learning' 
-
-                                    ? 'border-amber-500/30' 
-
-                                    : 'border-slate-200 dark:border-slate-800';
-
-                                  const cardBg = item.status === 'mastered'
-
-                                    ? 'bg-emerald-500/5 dark:bg-emerald-950/10'
-
-                                    : item.status === 'learning'
-
-                                    ? 'bg-amber-500/5 dark:bg-amber-955/10'
-
-                                    : 'bg-slate-50/60 dark:bg-slate-900/60';
-
+                                  const cardBorder = item.status === 'mastered' ? 'border-emerald-500/30' : item.status === 'learning' ? 'border-amber-500/30' : 'border-slate-200 dark:border-slate-800';
+                                  const cardBg = item.status === 'mastered' ? 'bg-emerald-500/5 dark:bg-emerald-950/10' : item.status === 'learning' ? 'bg-amber-500/5 dark:bg-amber-955/10' : 'bg-slate-50/60 dark:bg-slate-900/60';
                                   return (
-
-                                    <div
-
-                                      key={item.id}
-
-                                      className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-200 \${cardBorder} \${cardBg} \${isCore ? 'border-l-4 border-l-[#b5179e] dark:border-l-pink-500' : ''}`}
-
-                                    >
-
+                                    <div key={item.id} className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-200 ${cardBorder} ${cardBg} ${isCore ? 'border-l-4 border-l-[#b5179e] dark:border-l-pink-500' : ''}`}>
                                       <div>
-
                                         <div className="flex items-center justify-between mb-3 border-b border-slate-200/55 dark:border-slate-800/40 pb-2">
-
-                                          <span className={`px-2 py-0.5 border text-[9px] font-extrabold uppercase rounded-md \${
-
-                                            isCore 
-
-                                              ? 'bg-pink-50 dark:bg-pink-900/20 border-pink-100 dark:border-pink-900 text-pink-700 dark:text-pink-400 font-extrabold' 
-
-                                              : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400'
-
-                                          }`}>
-
+                                          <span className={`px-2 py-0.5 border text-[9px] font-extrabold uppercase rounded-md ${isCore ? 'bg-pink-50 dark:bg-pink-900/20 border-pink-100 dark:border-pink-900 text-pink-700 dark:text-pink-400 font-extrabold' : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400'}`}>
                                             {item.word_type === 'noun' && 'Danh từ'}
-
                                             {item.word_type === 'pronoun' && 'Đại từ'}
-
                                             {item.word_type === 'verb' && 'Động từ'}
-
                                             {item.word_type === 'adjective' && 'Tính từ'}
-
                                             {item.word_type === 'greeting' && 'Chào hỏi'}
-
                                             {!['noun','pronoun','verb','adjective','greeting'].includes(item.word_type) && (item.word_type || 'Từ vựng')}
-
                                             {item.isCustom && ' • Cá nhân'}
-
                                           </span>
-
-                                          {/* Read-only Badge representing actual status */}
-
-                                          <span className={`text-[10px] font-bold px-2.5 py-0.5 border rounded-lg shrink-0 \${
-
-                                            item.status === 'mastered'
-
-                                              ? 'bg-emerald-500/10 border-emerald-500/35 text-emerald-600 dark:text-emerald-450'
-
-                                              : item.status === 'learning'
-
-                                              ? 'bg-amber-500/10 border-amber-500/35 text-amber-600 dark:text-amber-450'
+                                          <span className={`text-[10px] font-bold px-2.5 py-0.5 border rounded-lg shrink-0 ${item.status === 'mastered' ? 'bg-emerald-500/10 border-emerald-500/35 text-emerald-600 dark:text-emerald-450' : item.status === 'learning' ? 'bg-amber-500/10 border-amber-500/35 text-amber-600 dark:text-amber-450'
 
                                               : 'bg-slate-500/10 border-slate-500/35 text-slate-500 dark:text-slate-400'
 
@@ -11224,7 +11133,7 @@ const renderInteractivePractice = () => {
 
                                 </h3>
 
-                                <span className={`text-[9px] font-bold px-2 py-0.5 border rounded-lg \${
+                                <span className={`text-[9px] font-bold px-2 py-0.5 border rounded-lg ${
 
                                   computedStatus === 'mastered'
 

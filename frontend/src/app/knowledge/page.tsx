@@ -63,6 +63,38 @@ export default function KnowledgeHubPage() {
     playAudioWithFallback(text, kana || text);
   };
 
+  const renderFormattedGrammarText = (text?: string) => {
+    if (!text) return null;
+    const lines = text.split('\n');
+    return (
+      <div className="space-y-1">
+        {lines.map((line, idx) => {
+          let content: React.ReactNode = line;
+          if (line.includes('Khẳng định quá khứ:')) {
+            const parts = line.split('Khẳng định quá khứ:');
+            content = <><span className="text-emerald-500 font-extrabold">Khẳng định quá khứ:</span>{parts[1]}</>;
+          } else if (line.includes('Phủ định quá khứ:')) {
+            const parts = line.split('Phủ định quá khứ:');
+            content = <><span className="text-rose-500 font-extrabold">Phủ định quá khứ:</span>{parts[1]}</>;
+          } else if (line.includes('Nghi vấn quá khứ:')) {
+            const parts = line.split('Nghi vấn quá khứ:');
+            content = <><span className="text-amber-500 font-extrabold">Nghi vấn quá khứ:</span>{parts[1]}</>;
+          } else if (line.includes('Khẳng định:')) {
+            const parts = line.split('Khẳng định:');
+            content = <><span className="text-emerald-500 font-extrabold">Khẳng định:</span>{parts[1]}</>;
+          } else if (line.includes('Phủ định:')) {
+            const parts = line.split('Phủ định:');
+            content = <><span className="text-rose-500 font-extrabold">Phủ định:</span>{parts[1]}</>;
+          } else if (line.includes('Nghi vấn:')) {
+            const parts = line.split('Nghi vấn:');
+            content = <><span className="text-amber-500 font-extrabold">Nghi vấn:</span>{parts[1]}</>;
+          }
+          return <div key={idx} className="leading-snug">{content}</div>;
+        })}
+      </div>
+    );
+  };
+
   
 
   
@@ -2005,24 +2037,25 @@ export default function KnowledgeHubPage() {
 
                           {g.structure && (
                             <div className="p-3 bg-slate-50 dark:bg-slate-950/80 border-l-4 border-indigo-500 dark:border-indigo-650 rounded-r-xl">
-                              <p className="text-xs font-mono text-slate-650 dark:text-slate-350">
-                                Cấu trúc: <span className="font-bold">{g.structure}</span>
-                              </p>
+                              <div className="text-xs font-mono text-slate-650 dark:text-slate-350">
+                                <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Cấu trúc</span>
+                                {renderFormattedGrammarText(g.structure)}
+                              </div>
                             </div>
                           )}
 
                           {g.vietnamese_explanation && (
-                            <p className="text-xs text-slate-605 dark:text-slate-400 leading-relaxed pl-1 border-l-2 border-slate-200 dark:border-slate-800">
-                              {g.vietnamese_explanation}
-                            </p>
+                            <div className="text-xs text-slate-605 dark:text-slate-400 leading-relaxed pl-1 border-l-2 border-slate-200 dark:border-slate-800">
+                              {renderFormattedGrammarText(g.vietnamese_explanation)}
+                            </div>
                           )}
 
                           {g.japanese_example && (
                             <div className="bg-slate-50 dark:bg-slate-950/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 flex justify-between items-center gap-4">
-                              <div className="space-y-1">
-                                <p className="text-sm font-bold text-slate-900 dark:text-white">{g.japanese_example}</p>
-                                {g.romaji_example && <p className="text-xs text-slate-400 dark:text-slate-505 italic">{g.romaji_example}</p>}
-                                {g.example_meaning && <p className="text-xs text-slate-600 dark:text-slate-400">{g.example_meaning}</p>}
+                              <div className="space-y-1 text-xs">
+                                <div className="text-sm font-bold text-slate-900 dark:text-white">{renderFormattedGrammarText(g.japanese_example)}</div>
+                                {g.romaji_example && <div className="text-xs text-slate-400 dark:text-slate-505 italic">{renderFormattedGrammarText(g.romaji_example)}</div>}
+                                {g.example_meaning && <div className="text-xs text-slate-600 dark:text-slate-400">{renderFormattedGrammarText(g.example_meaning)}</div>}
                               </div>
                               <button
                                 onClick={() => speakTTS(g.japanese_example || '')}

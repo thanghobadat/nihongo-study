@@ -45490,61 +45490,61 @@ const grammar = [
     {
         "id": 19,
         "lesson_id": 4,
-        "title": "今 ［Số］時 ［Số］分 です",
-        "meaning": "Bây giờ là... giờ... phút",
-        "structure": "今 + [Giờ]時 + [Phút]分 + です",
-        "vietnamese_explanation": "Dùng để diễn tả thời gian hiện tại.",
-        "japanese_example": "今 7時10分 です。",
-        "example_meaning": "Bây giờ là 7 giờ 10 phút.",
-        "romaji_example": "Ima 7-ji 10-bu desu.",
+        "title": "いま ［Số］じ ［Số］ふん です\nいま なんじ ですか",
+        "meaning": "Bây giờ là... giờ... phút\nBây giờ là mấy giờ?",
+        "structure": "Khẳng định: いま + [Giờ]じ + [Phút]ふん + です\nNghi vấn: いま なんじ ですか",
+        "vietnamese_explanation": "Dùng để diễn tả thời gian hiện tại hoặc hỏi giờ. Khi hỏi mấy giờ, thay số bằng nghi vấn từ なんじ.",
+        "japanese_example": "いま 7じ10ふん です。\nいま なんじ ですか。",
+        "example_meaning": "Bây giờ là 7 giờ 10 phút.\nBây giờ là mấy giờ?",
+        "romaji_example": "Ima 7-ji 10-bu desu.\nIma nan-ji desu ka.",
         "notes": "🔊 Nghe"
     },
     {
         "id": 20,
         "lesson_id": 4,
-        "title": "Vます",
-        "meaning": "Làm việc gì đó (Khẳng định tương lai/hiện tại)",
-        "structure": "Động từ dạng ます",
-        "vietnamese_explanation": "Biểu thị một hành động sẽ xảy ra hoặc thói quen hằng ngày.",
-        "japanese_example": "私は 毎日 勉強します。",
-        "example_meaning": "Mỗi ngày tôi đều học tập.",
-        "romaji_example": "Watashi wa mainichi benkyou sh imasu.",
+        "title": "Vます\nVません\nVますか",
+        "meaning": "Làm (Hiện tại / Tương lai)\nKhông làm\nCó làm... không?",
+        "structure": "Khẳng định: Vます\nPhủ định: Vません\nNghi vấn: Vますか",
+        "vietnamese_explanation": "Biểu thị hành động ở hiện tại hoặc tương lai. Dạng ません dùng để phủ định và ますか dùng để hỏi.",
+        "japanese_example": "わたしは まいにち べんきょうします。\nあしたは はたらきません。\nあした べんきょうしますか。",
+        "example_meaning": "Tôi mỗi ngày đều học.\nNgày mai tôi không làm việc.\nNgày mai bạn có học không?",
+        "romaji_example": "Watashi wa mainichi benkyou shimasu.\nAshita wa hatarakimasen.\nAshita benkyou shimasu ka.",
         "notes": "🔊 Nghe"
     },
     {
         "id": 21,
         "lesson_id": 4,
-        "title": "Vました / Vませんでした",
-        "meaning": "Đã làm / Đã không làm việc gì đó",
-        "structure": "ます -> ました (Khẳng định quá khứ) / ませんでした (Phủ định quá khứ)",
-        "vietnamese_explanation": "Diễn tả hành động đã hoàn thành trong quá khứ.",
-        "japanese_example": "昨日は 働きませんでした。",
-        "example_meaning": "Hôm qua tôi đã không làm việc.",
-        "romaji_example": "Kinou wa hatarakimasendeshita.",
+        "title": "Vました\nVませんでした\nVましたか",
+        "meaning": "Đã làm (Quá khứ)\nĐã không làm\nĐã làm... chưa?",
+        "structure": "Khẳng định quá khứ: Vました\nPhủ định quá khứ: Vませんでした\nNghi vấn quá khứ: Vましたか",
+        "vietnamese_explanation": "Diễn tả hành động trong quá khứ. Thêm か ở cuối câu để hỏi xem đối phương đã làm việc đó trong quá khứ chưa.",
+        "japanese_example": "きのうは はたらきませんでした。\nきのう べんきょうしましたか。",
+        "example_meaning": "Hôm qua tôi đã không làm việc.\nHôm qua bạn đã học chưa?",
+        "romaji_example": "Kinou wa hatarakimasendeshita.\nKinou benkyou shimashita ka.",
         "notes": "🔊 Nghe"
     },
     {
         "id": 22,
         "lesson_id": 4,
-        "title": "N (thời gian) に V",
-        "meaning": "Làm gì vào lúc nào",
-        "structure": "Danh từ chỉ thời gian có con số + に + Động từ",
-        "vietnamese_explanation": "Diễn tả hành động xảy ra vào một thời điểm cụ thể.",
-        "japanese_example": "毎朝 6時に 起きます。",
-        "example_meaning": "Mỗi sáng tôi thức dậy lúc 6 giờ.",
-        "romaji_example": "Maiasa 6-ji ni ok imasu.",
+        "title": "N (thời gian) に V\nなんじ に Vますか",
+        "meaning": "Làm gì vào lúc nào\nMấy giờ làm gì?",
+        "structure": "Khẳng định: N (thời gian có số) + に + V\nNghi vấn: なんじ に + Vますか",
+        "vietnamese_explanation": "Diễn tả hành động xảy ra vào một thời điểm cụ thể. Dùng なんじ に khi muốn hỏi ai đó làm gì vào lúc mấy giờ.",
+        "japanese_example": "まいあさ 6じに おきます。\nまいあさ なんじに おきますか。",
+        "example_meaning": "Mỗi sáng tôi thức dậy lúc 6 giờ.\nMỗi sáng bạn thức dậy lúc mấy giờ?",
+        "romaji_example": "Maiasa 6-ji ni okimasu.\nMaiasa nan-ji ni okimasu ka.",
         "notes": "🔊 Nghe"
     },
     {
         "id": 23,
         "lesson_id": 4,
-        "title": "N1 から N2 まで",
-        "meaning": "Từ... đến...",
-        "structure": "N1 (thời gian/địa điểm) + から + N2 (thời gian/địa điểm) + まで",
-        "vietnamese_explanation": "Biểu thị khoảng thời gian hoặc không gian từ điểm đầu đến điểm cuối.",
-        "japanese_example": "9時から 5時まで 働きます。",
-        "example_meaning": "Tôi làm việc từ 9 giờ đến 5 giờ.",
-        "romaji_example": "9-Ji kara 5-ji made hatarak imasu.",
+        "title": "N1 から N2 まで\nなんじ から なんじ まで",
+        "meaning": "Từ... đến...\nTừ mấy giờ đến mấy giờ?",
+        "structure": "N1 + から + N2 + まで\nNghi vấn: なんじ から なんじ まで ですか",
+        "vietnamese_explanation": "Biểu thị khoảng thời gian hoặc không gian từ điểm đầu đến điểm cuối. Dùng なんじ から なんじ まで để hỏi khoảng thời gian.",
+        "japanese_example": "9じ から 5じ まで はたらきます。\nぎんこうは なんじ から なんじ までですか。",
+        "example_meaning": "Tôi làm việc từ 9 giờ đến 5 giờ.\nNgân hàng mở cửa từ mấy giờ đến mấy giờ?",
+        "romaji_example": "9-ji kara 5-ji made hatarakimasu.\nGinkou wa nan-ji kara nan-ji made desu ka.",
         "notes": "🔊 Nghe"
     },
     {
@@ -45554,8 +45554,8 @@ const grammar = [
         "meaning": "N1 và N2",
         "structure": "Danh từ 1 + と + Danh từ 2",
         "vietnamese_explanation": "Dùng để nối hai danh từ.",
-        "japanese_example": "休みは 土曜日と 日曜日 です。",
-        "example_meaning": "Ngày nghỉ là thứ bảy và chủ nhật.",
+        "japanese_example": "やすみは どようび と にちようび です。",
+        "example_meaning": "Ngày nghỉ là thứ Bảy và Chủ Nhật.",
         "romaji_example": "Yasumi wa doyoubi to nichiyoubi desu.",
         "notes": "🔊 Nghe"
     },
@@ -67702,10 +67702,9807 @@ const lessonReviews = [
   }
 ];
 
+
+
+// Lesson 4 Review Bank
+const lesson4ReviewData = {
+  "lesson_id": 4,
+  "translations": [
+    {
+      "id": 1,
+      "direction": "ja-to-vi",
+      "question_kana": "いま なんじ ですか。",
+      "question_kanji": "今 何時 ですか。",
+      "answers": [
+        "Bây giờ là mấy giờ",
+        "Bây giờ là mấy giờ thế",
+        "Bây giờ mấy giờ rồi"
+      ]
+    },
+    {
+      "id": 2,
+      "direction": "ja-to-vi",
+      "question_kana": "いま 7じ10ふん です。",
+      "question_kanji": "今 7時10分 です。",
+      "answers": [
+        "Bây giờ là 7 giờ 10 phút",
+        "Bây giờ là 7h10"
+      ]
+    },
+    {
+      "id": 3,
+      "direction": "ja-to-vi",
+      "question_kana": "わたしは まいにち 6じはん に おきます。",
+      "question_kanji": "私は 毎日 6時半 に 起きます。",
+      "answers": [
+        "Tôi thức dậy lúc 6 giờ rưỡi mỗi ngày",
+        "Hàng ngày tôi thức dậy lúc 6 giờ 30 phút",
+        "Mỗi ngày tôi dậy lúc 6 rưỡi"
+      ]
+    },
+    {
+      "id": 4,
+      "direction": "ja-to-vi",
+      "question_kana": "きのうの ばん 11じ に ねました。",
+      "question_kanji": "昨日の 晩 11時 に 寝ました。",
+      "answers": [
+        "Tối qua tôi đã đi ngủ lúc 11 giờ",
+        "Tối hôm qua tôi ngủ lúc 11h"
+      ]
+    },
+    {
+      "id": 5,
+      "direction": "ja-to-vi",
+      "question_kana": "あした べんきょうします。",
+      "question_kanji": "明日 勉強します。",
+      "answers": [
+        "Ngày mai tôi sẽ học bài",
+        "Ngày mai tôi học",
+        "Mai tớ học"
+      ]
+    },
+    {
+      "id": 6,
+      "direction": "ja-to-vi",
+      "question_kana": "ぎんこうは 9じから 3じまで です。",
+      "question_kanji": "銀行は 9時から 3時まで です。",
+      "answers": [
+        "Ngân hàng mở cửa từ 9 giờ đến 3 giờ",
+        "Ngân hàng làm việc từ 9h đến 3h"
+      ]
+    },
+    {
+      "id": 7,
+      "direction": "ja-to-vi",
+      "question_kana": "ゆうびんきょくの やすみは どようびと にちようび です。",
+      "question_kanji": "郵便局の 休みは 土曜日と 日曜日 です。",
+      "answers": [
+        "Ngày nghỉ của bưu điện là thứ bảy và chủ nhật",
+        "Bưu điện nghỉ thứ 7 và chủ nhật"
+      ]
+    },
+    {
+      "id": 8,
+      "direction": "ja-to-vi",
+      "question_kana": "けあさ 7じ に おきました。",
+      "question_kanji": "今朝 7時 に 起きました。",
+      "answers": [
+        "Sáng nay tôi đã thức dậy lúc 7 giờ",
+        "Sáng nay tôi dậy lúc 7h"
+      ]
+    },
+    {
+      "id": 9,
+      "direction": "ja-to-vi",
+      "question_kana": "こんばん べんきょうしません。",
+      "question_kanji": "今晩 勉強しません。",
+      "answers": [
+        "Tối nay tôi không học bài",
+        "Tối nay tớ không học"
+      ]
+    },
+    {
+      "id": 10,
+      "direction": "ja-to-vi",
+      "question_kana": "かいしゃは なんじに おわりますか。",
+      "question_kanji": "会社は 何時に 終わりますか。",
+      "answers": [
+        "Công ty kết thúc công việc lúc mấy giờ",
+        "Công ty mấy giờ thì xong"
+      ]
+    },
+    {
+      "id": 11,
+      "direction": "ja-to-vi",
+      "question_kana": "としょかんは 5じまで です。",
+      "question_kanji": "図書館は 5時まで です。",
+      "answers": [
+        "Thư viện mở cửa đến 5 giờ",
+        "Thư viện đến 5h là đóng cửa"
+      ]
+    },
+    {
+      "id": 12,
+      "direction": "ja-to-vi",
+      "question_kana": "びじゅつかんは げつようび やすみです。",
+      "question_kanji": "美術館は 月曜日 休みです。",
+      "answers": [
+        "Bảo tàng mỹ thuật nghỉ vào thứ hai",
+        "Bảo tàng nghệ thuật nghỉ thứ 2"
+      ]
+    },
+    {
+      "id": 13,
+      "direction": "ja-to-vi",
+      "question_kana": "デパートは 10じから です。",
+      "question_kanji": "デパートは 10時から です。",
+      "answers": [
+        "Trung tâm thương mại mở cửa từ 10 giờ",
+        "Bách hóa làm việc từ 10h"
+      ]
+    },
+    {
+      "id": 14,
+      "direction": "ja-to-vi",
+      "question_kana": "きのう はたらきましたか。",
+      "question_kanji": "昨日 働きましたか。",
+      "answers": [
+        "Hôm qua bạn có làm việc không",
+        "Hôm qua cậu có đi làm không"
+      ]
+    },
+    {
+      "id": 15,
+      "direction": "ja-to-vi",
+      "question_kana": "いいえ、はたらきませんでした。やすみました。",
+      "question_kanji": "いいえ、働きませんでした。休みました。",
+      "answers": [
+        "Không, tôi không làm việc. Tôi đã nghỉ ngơi.",
+        "Không, tớ không đi làm. Tớ nghỉ."
+      ]
+    },
+    {
+      "id": 16,
+      "direction": "ja-to-vi",
+      "question_kana": "まいあさ 6じに おきます。",
+      "question_kanji": "毎朝 6時に 起きます。",
+      "answers": [
+        "Mỗi sáng tôi dậy lúc 6 giờ",
+        "Hàng sáng tôi thức dậy lúc 6h"
+      ]
+    },
+    {
+      "id": 17,
+      "direction": "ja-to-vi",
+      "question_kana": "まいばん 10じから 12じまで べんきょうします。",
+      "question_kanji": "毎晩 10時から 12時まで 勉強します。",
+      "answers": [
+        "Mỗi tối tôi học từ 10 giờ đến 12 giờ",
+        "Hàng tối tôi học từ 10h đến 12h"
+      ]
+    },
+    {
+      "id": 18,
+      "direction": "ja-to-vi",
+      "question_kana": "おととい べんきょうしました。",
+      "question_kanji": "おととい 勉強しました。",
+      "answers": [
+        "Hôm kia tôi đã học bài",
+        "Ngày hôm kia tôi đã học"
+      ]
+    },
+    {
+      "id": 19,
+      "direction": "ja-to-vi",
+      "question_kana": "あさって はたらきます。",
+      "question_kanji": "あさって 働きます。",
+      "answers": [
+        "Ngày kia tôi sẽ làm việc",
+        "Ngày kia tớ đi làm"
+      ]
+    },
+    {
+      "id": 20,
+      "direction": "ja-to-vi",
+      "question_kana": "ひるやすみは 12じから 1じまで です。",
+      "question_kanji": "昼休みは 12時から 1時まで です。",
+      "answers": [
+        "Nghỉ trưa từ 12 giờ đến 1 giờ",
+        "Giờ nghỉ trưa từ 12h đến 1h"
+      ]
+    },
+    {
+      "id": 21,
+      "direction": "ja-to-vi",
+      "question_kana": "しけんは なんようびですか。",
+      "question_kanji": "試験は 何曜日ですか。",
+      "answers": [
+        "Kỳ thi vào thứ mấy",
+        "Cuộc thi là thứ mấy thế"
+      ]
+    },
+    {
+      "id": 22,
+      "direction": "ja-to-vi",
+      "question_kana": "かいぎは すいようびです。",
+      "question_kanji": "会議は 水曜日です。",
+      "answers": [
+        "Cuộc họp vào thứ tư",
+        "Cuộc họp diễn ra vào thứ 4"
+      ]
+    },
+    {
+      "id": 23,
+      "direction": "ja-to-vi",
+      "question_kana": "えいがは 8じはんから です。",
+      "question_kanji": "映画は 8時半から です。",
+      "answers": [
+        "Phim bắt đầu từ 8 giờ rưỡi",
+        "Bộ phim từ 8h30"
+      ]
+    },
+    {
+      "id": 24,
+      "direction": "ja-to-vi",
+      "question_kana": "たいへん ですね。",
+      "question_kanji": "大変 ですね。",
+      "answers": [
+        "Vất vả nhỉ",
+        "Mệt mỏi nhỉ",
+        "Vất vả quá nhỉ"
+      ]
+    },
+    {
+      "id": 25,
+      "direction": "ja-to-vi",
+      "question_kana": "ばんごうは なんばん ですか。",
+      "question_kanji": "番号は 何番 ですか。",
+      "answers": [
+        "Số điện thoại / số phòng là số mấy",
+        "Số bao nhiêu vậy"
+      ]
+    },
+    {
+      "id": 26,
+      "direction": "ja-to-vi",
+      "question_kana": "きょうは かようびです。",
+      "question_kanji": "今日は 火曜日です。",
+      "answers": [
+        "Hôm nay là thứ ba",
+        "Hôm nay là thứ 3"
+      ]
+    },
+    {
+      "id": 27,
+      "direction": "ja-to-vi",
+      "question_kana": "あしたは もくようびです。",
+      "question_kanji": "明日は 木曜日です。",
+      "answers": [
+        "Ngày mai là thứ tư",
+        "Ngày mai là thứ 4"
+      ]
+    },
+    {
+      "id": 28,
+      "direction": "ja-to-vi",
+      "question_kana": "きんようびの ばん べんきょうします。",
+      "question_kanji": "金曜日の 晩 勉強します。",
+      "answers": [
+        "Tối thứ sáu tôi học bài",
+        "Tối thứ 6 tớ học"
+      ]
+    },
+    {
+      "id": 29,
+      "direction": "ja-to-vi",
+      "question_kana": "いま ごぜん 9じです。",
+      "question_kanji": "今 午前 9時です。",
+      "answers": [
+        "Bây giờ là 9 giờ sáng",
+        "Hiện tại là 9h sáng"
+      ]
+    },
+    {
+      "id": 30,
+      "direction": "ja-to-vi",
+      "question_kana": "いま ごご 4じ15ふん です。",
+      "question_kanji": "今 午後 4時15分 です。",
+      "answers": [
+        "Bây giờ là 4 giờ 15 phút chiều",
+        "Hiện là 4h15 chiều"
+      ]
+    },
+    {
+      "id": 31,
+      "direction": "ja-to-vi",
+      "question_kana": "ミラーさんは まいにち はたらきます。",
+      "question_kanji": "ミラーさんは 毎日 働きます。",
+      "answers": [
+        "Anh Miller làm việc mỗi ngày",
+        "Anh Miller hàng ngày đều đi làm"
+      ]
+    },
+    {
+      "id": 32,
+      "direction": "ja-to-vi",
+      "question_kana": "サントスさんは きのう やすみました。",
+      "question_kanji": "サントスさんは 昨日 休みました。",
+      "answers": [
+        "Anh Santos hôm qua đã nghỉ ngơi",
+        "Anh Santos hôm qua nghỉ"
+      ]
+    },
+    {
+      "id": 33,
+      "direction": "ja-to-vi",
+      "question_kana": "わたしは 9じから 5じまで はたらきます。",
+      "question_kanji": "私は 9時から 5時まで 働きます。",
+      "answers": [
+        "Tôi làm việc từ 9 giờ đến 5 giờ",
+        "Tớ đi làm từ 9h đến 5h"
+      ]
+    },
+    {
+      "id": 34,
+      "direction": "ja-to-vi",
+      "question_kana": "としょかんの やすみは なんようびですか。",
+      "question_kanji": "図書館の 休みは 何曜日ですか。",
+      "answers": [
+        "Ngày nghỉ của thư viện là thứ mấy",
+        "Thư viện nghỉ vào thứ mấy"
+      ]
+    },
+    {
+      "id": 35,
+      "direction": "ja-to-vi",
+      "question_kana": "にちようび はたらきません。",
+      "question_kanji": "日曜日 働きません。",
+      "answers": [
+        "Chủ nhật tôi không làm việc",
+        "Chủ nhật tớ nghỉ"
+      ]
+    },
+    {
+      "id": 36,
+      "direction": "ja-to-vi",
+      "question_kana": "まいあさ 7じはん に おきます。",
+      "question_kanji": "毎朝 7時半 に 起きます。",
+      "answers": [
+        "Mỗi sáng tôi thức dậy lúc 7 giờ rưỡi",
+        "Hàng sáng tôi dậy lúc 7h30"
+      ]
+    },
+    {
+      "id": 37,
+      "direction": "ja-to-vi",
+      "question_kana": "きのう 8じまで べんきょうしました。",
+      "question_kanji": "昨日 8時まで 勉強しました。",
+      "answers": [
+        "Hôm qua tôi đã học đến 8 giờ",
+        "Hôm qua tớ học tới 8h"
+      ]
+    },
+    {
+      "id": 38,
+      "direction": "ja-to-vi",
+      "question_kana": "かいぎは 10じから です。",
+      "question_kanji": "会議は 10時から です。",
+      "answers": [
+        "Cuộc họp bắt đầu từ 10 giờ",
+        "Cuộc họp từ 10h"
+      ]
+    },
+    {
+      "id": 39,
+      "direction": "ja-to-vi",
+      "question_kana": "しけんは ぎんこうで ありますか。",
+      "question_kanji": "試験は 銀行で ありますか。",
+      "answers": [
+        "Kỳ thi có ở ngân hàng không",
+        "Cuộc thi tổ chức ở ngân hàng à"
+      ]
+    },
+    {
+      "id": 40,
+      "direction": "ja-to-vi",
+      "question_kana": "あしたの あさ 6じに おきます。",
+      "question_kanji": "明日の 朝 6時に 起きます。",
+      "answers": [
+        "Sáng mai tôi sẽ thức dậy lúc 6 giờ",
+        "Sáng mai tôi dậy lúc 6h"
+      ]
+    },
+    {
+      "id": 41,
+      "direction": "vi-to-ja",
+      "question_kana": "Bây giờ là mấy giờ?",
+      "question_kanji": "Bây giờ là mấy giờ?",
+      "answers": [
+        "いまなんじですか",
+        "いま なんじ ですか",
+        "ima nanji desu ka"
+      ]
+    },
+    {
+      "id": 42,
+      "direction": "vi-to-ja",
+      "question_kana": "Bây giờ là 8 giờ 30 phút.",
+      "question_kanji": "Bây giờ là 8 giờ 30 phút.",
+      "answers": [
+        "いま8じさんじゅっぷんです",
+        "いま 8じ はん です",
+        "ima 8-ji han desu"
+      ]
+    },
+    {
+      "id": 43,
+      "direction": "vi-to-ja",
+      "question_kana": "Tôi làm việc từ 9 giờ đến 5 giờ.",
+      "question_kanji": "Tôi làm việc từ 9 giờ đến 5 giờ.",
+      "answers": [
+        "わたしは9じから5じまではたらきます",
+        "わたしは 9じから 5じまで はたらきます",
+        "watashi wa 9-ji kara 5-ji made hatarakimasu"
+      ]
+    },
+    {
+      "id": 44,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm qua tôi đã học bài.",
+      "question_kanji": "Hôm qua tôi đã học bài.",
+      "answers": [
+        "きのうべんきょうしました",
+        "きのう べんきょうしました",
+        "kinou benkyoushima shita"
+      ]
+    },
+    {
+      "id": 45,
+      "direction": "vi-to-ja",
+      "question_kana": "Tối nay tôi không ngủ sớm.",
+      "question_kanji": "Tối nay tôi không ngủ sớm.",
+      "answers": [
+        "こんばんねません",
+        "こんばん ねません",
+        "konban nemasen"
+      ]
+    },
+    {
+      "id": 46,
+      "direction": "vi-to-ja",
+      "question_kana": "Ngân hàng nghỉ vào thứ Bảy và Chủ Nhật.",
+      "question_kanji": "Ngân hàng nghỉ vào thứ Bảy và Chủ Nhật.",
+      "answers": [
+        "ぎんこうのやすみはどようびとにちようびです",
+        "ぎんこうの やすみは どようびと にちようび です",
+        "ginkou no yasumi wa doyoubi to nichiyoubi desu"
+      ]
+    },
+    {
+      "id": 47,
+      "direction": "vi-to-ja",
+      "question_kana": "Sáng nay bạn thức dậy lúc mấy giờ?",
+      "question_kanji": "Sáng nay bạn thức dậy lúc mấy giờ?",
+      "answers": [
+        "けあさなんじにおきましたか",
+        "けあさ なんじに おきましたか",
+        "keasa nanji ni okimashita ka"
+      ]
+    },
+    {
+      "id": 48,
+      "direction": "vi-to-ja",
+      "question_kana": "Bưu điện mở cửa từ 8 giờ 30 phút.",
+      "question_kanji": "Bưu điện mở cửa từ 8 giờ 30 phút.",
+      "answers": [
+        "ゆうびんきょくは8じはんからです",
+        "ゆうびんきょくは 8じはんから です",
+        "yuubinkyoku wa 8-ji han kara desu"
+      ]
+    },
+    {
+      "id": 49,
+      "direction": "vi-to-ja",
+      "question_kana": "Hàng ngày tôi thức dậy lúc 6 giờ.",
+      "question_kanji": "Hàng ngày tôi thức dậy lúc 6 giờ.",
+      "answers": [
+        "まいにち6じにおきます",
+        "まいにち 6じに おきます",
+        "mainichi 6-ji ni okimasu"
+      ]
+    },
+    {
+      "id": 50,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm nay là thứ mấy?",
+      "question_kanji": "Hôm nay là thứ mấy?",
+      "answers": [
+        "きょうなんようびですか",
+        "きょうは なんようび ですか",
+        "kyou wa nanyoubi desu ka"
+      ]
+    },
+    {
+      "id": 51,
+      "direction": "vi-to-ja",
+      "question_kana": "Thư viện đóng cửa lúc 5 giờ.",
+      "question_kanji": "Thư viện đóng cửa lúc 5 giờ.",
+      "answers": [
+        "としょかんは5じまでです",
+        "としょかんは 5じまで です",
+        "toshokan wa 5-ji made desu"
+      ]
+    },
+    {
+      "id": 52,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm qua anh Miller có làm việc không?",
+      "question_kanji": "Hôm qua anh Miller có làm việc không?",
+      "answers": [
+        "ミラーさんはきのうはたらきましたか",
+        "ミラーさんは きのう はたらきましたか",
+        "miraa san wa kinou hatarakimashita ka"
+      ]
+    },
+    {
+      "id": 53,
+      "direction": "vi-to-ja",
+      "question_kana": "Cuộc họp kết thúc lúc 12 giờ.",
+      "question_kanji": "Cuộc họp kết thúc lúc 12 giờ.",
+      "answers": [
+        "かいぎは12じにおわります",
+        "かいぎは 12じに おわります",
+        "kaigi wa 12-ji ni owarimasu"
+      ]
+    },
+    {
+      "id": 54,
+      "direction": "vi-to-ja",
+      "question_kana": "Vất vả nhỉ!",
+      "question_kanji": "Vất vả nhỉ!",
+      "answers": [
+        "たいへんですね",
+        "たいへん ですね",
+        "taihen desu ne"
+      ]
+    },
+    {
+      "id": 55,
+      "direction": "vi-to-ja",
+      "question_kana": "Bảo tàng mỹ thuật nghỉ vào thứ Hai.",
+      "question_kanji": "Bảo tàng mỹ thuật nghỉ vào thứ Hai.",
+      "answers": [
+        "びじゅつかんはげつようびやすみです",
+        "びじゅつかんは げつようび やすみです",
+        "bijutsukan wa getsuyoubi yasumi desu"
+      ]
+    },
+    {
+      "id": 56,
+      "direction": "vi-to-ja",
+      "question_kana": "Tối qua tôi không học bài.",
+      "question_kanji": "Tối qua tôi không học bài.",
+      "answers": [
+        "きのうのばんべんきょうしませんでした",
+        "きのうの ばん べんきょうしませんでした",
+        "kinou no ban benkyoushimasen deshita"
+      ]
+    },
+    {
+      "id": 57,
+      "direction": "vi-to-ja",
+      "question_kana": "Nghỉ trưa từ 12 giờ đến 1 giờ.",
+      "question_kanji": "Nghỉ trưa từ 12 giờ đến 1 giờ.",
+      "answers": [
+        "ひるやすみは12じから1じまでです",
+        "ひるやすみは 12じから 1じまで です",
+        "hiruyasumi wa 12-ji kara 1-ji made desu"
+      ]
+    },
+    {
+      "id": 58,
+      "direction": "vi-to-ja",
+      "question_kana": "Kỳ thi bắt đầu lúc mấy giờ?",
+      "question_kanji": "Kỳ thi bắt đầu lúc mấy giờ?",
+      "answers": [
+        "しけんはなんじからですか",
+        "しけんは なんじから ですか",
+        "shiken wa nanji kara desu ka"
+      ]
+    },
+    {
+      "id": 59,
+      "direction": "vi-to-ja",
+      "question_kana": "Mỗi tối tôi ngủ lúc 11 giờ.",
+      "question_kanji": "Mỗi tối tôi ngủ lúc 11 giờ.",
+      "answers": [
+        "まいばん11じにねます",
+        "まいばん 11じに ねます",
+        "maiban 11-ji ni nemasu"
+      ]
+    },
+    {
+      "id": 60,
+      "direction": "vi-to-ja",
+      "question_kana": "Sáng mai tôi học bài từ 8 giờ.",
+      "question_kanji": "Sáng mai tôi học bài từ 8 giờ.",
+      "answers": [
+        "あしたのあさ8じからべんきょうします",
+        "あしたの あさ 8じから べんきょうします",
+        "ashita no asa 8-ji kara benkyoushimasu"
+      ]
+    },
+    {
+      "id": 61,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm nay bách hóa không nghỉ.",
+      "question_kanji": "Hôm nay bách hóa không nghỉ.",
+      "answers": [
+        "きょうデパートはやすみじゃありません",
+        "きょう デパートは やすみじゃありません",
+        "kyou depaato wa yasumi ja arimasen"
+      ]
+    },
+    {
+      "id": 62,
+      "direction": "vi-to-ja",
+      "question_kana": "Số điện thoại của bạn là bao nhiêu?",
+      "question_kanji": "Số điện thoại của bạn là bao nhiêu?",
+      "answers": [
+        "あなたのでんわばんごうはなんばんですか",
+        "でんわばんごうは なんばん ですか",
+        "denwa bangou wa nanban desu ka"
+      ]
+    },
+    {
+      "id": 63,
+      "direction": "vi-to-ja",
+      "question_kana": "Chủ Nhật tôi không làm việc.",
+      "question_kanji": "Chủ Nhật tôi không làm việc.",
+      "answers": [
+        "にちようびはたらきません",
+        "にちようび はたらきません",
+        "nichiyoubi hatarakimasen"
+      ]
+    },
+    {
+      "id": 64,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm kia tôi đã làm việc đến 9 giờ tối.",
+      "question_kanji": "Hôm kia tôi đã làm việc đến 9 giờ tối.",
+      "answers": [
+        "おとといばん9じまではたらきました",
+        "おととい ばん 9じまで はたらきました",
+        "ototoi ban 9-ji made hatarakimashita"
+      ]
+    },
+    {
+      "id": 65,
+      "direction": "vi-to-ja",
+      "question_kana": "Ngày kia là thứ Sáu.",
+      "question_kanji": "Ngày kia là thứ Sáu.",
+      "answers": [
+        "あさってはきんようびです",
+        "あさっては きんようび です",
+        "asatte wa kinyoubi desu"
+      ]
+    },
+    {
+      "id": 66,
+      "direction": "vi-to-ja",
+      "question_kana": "Bộ phim kết thúc lúc mấy giờ?",
+      "question_kanji": "Bộ phim kết thúc lúc mấy giờ?",
+      "answers": [
+        "えいがはなんじにおわりますか",
+        "えいがは なんじに おわりますか",
+        "eiga wa nanji ni owarimasu ka"
+      ]
+    },
+    {
+      "id": 67,
+      "direction": "vi-to-ja",
+      "question_kana": "Bây giờ là 10 giờ 15 phút sáng.",
+      "question_kanji": "Bây giờ là 10 giờ 15 phút sáng.",
+      "answers": [
+        "いまごぜん10じ15ふんです",
+        "いま ごぜん 10じ 15ふん です",
+        "ima gozen 10-ji 15-fun desu"
+      ]
+    },
+    {
+      "id": 68,
+      "direction": "vi-to-ja",
+      "question_kana": "Thứ Bảy tôi nghỉ ngơi.",
+      "question_kanji": "Thứ Bảy tôi nghỉ ngơi.",
+      "answers": [
+        "どようびやすみます",
+        "どようび やすみます",
+        "doyoubi yasumimasu"
+      ]
+    },
+    {
+      "id": 69,
+      "direction": "vi-to-ja",
+      "question_kana": "Cuộc họp diễn ra từ 2 giờ chiều.",
+      "question_kanji": "Cuộc họp diễn ra từ 2 giờ chiều.",
+      "answers": [
+        "かいぎはごご2じからです",
+        "かいぎは ごご 2じから です",
+        "kaigi wa gogo 2-ji kara desu"
+      ]
+    },
+    {
+      "id": 70,
+      "direction": "vi-to-ja",
+      "question_kana": "Sáng nay tôi không thức dậy lúc 5 giờ.",
+      "question_kanji": "Sáng nay tôi không thức dậy lúc 5 giờ.",
+      "answers": [
+        "けあさ5じにおきませんでした",
+        "けあさ 5じに おきませんでした",
+        "keasa 5-ji ni okimasen deshita"
+      ]
+    },
+    {
+      "id": 71,
+      "direction": "vi-to-ja",
+      "question_kana": "Mỗi ngày bạn học từ mấy giờ đến mấy giờ?",
+      "question_kanji": "Mỗi ngày bạn học từ mấy giờ đến mấy giờ?",
+      "answers": [
+        "まいにちなんじからなんじまでべんきょうしますか",
+        "まいにち なんじから なんじまで べんきょうしますか",
+        "mainichi nanji kara nanji made benkyoushimasu ka"
+      ]
+    },
+    {
+      "id": 72,
+      "direction": "vi-to-ja",
+      "question_kana": "Tối nay bạn có học không?",
+      "question_kanji": "Tối nay bạn có học không?",
+      "answers": [
+        "こんばんべんきょうしますか",
+        "こんばん べんきょうしますか",
+        "konban benkyoushimasu ka"
+      ]
+    },
+    {
+      "id": 73,
+      "direction": "vi-to-ja",
+      "question_kana": "Anh Santos đã thức dậy lúc 6 giờ rưỡi.",
+      "question_kanji": "Anh Santos đã thức dậy lúc 6 giờ rưỡi.",
+      "answers": [
+        "サントスさんは6じはんにおきました",
+        "サントスさんは 6じはん に おきました",
+        "santosu san wa 6-ji han ni okimashita"
+      ]
+    },
+    {
+      "id": 74,
+      "direction": "vi-to-ja",
+      "question_kana": "Thứ Tư và thứ Năm tôi đi làm.",
+      "question_kanji": "Thứ Tư và thứ Năm tôi đi làm.",
+      "answers": [
+        "すいようびともくようびはたらきます",
+        "すいようびと もくようび はたらきます",
+        "suiyoubi to mokuyoubi hatarakimasu"
+      ]
+    },
+    {
+      "id": 75,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm qua cuộc họp kéo dài đến 6 giờ.",
+      "question_kanji": "Hôm qua cuộc họp kéo dài đến 6 giờ.",
+      "answers": [
+        "きのうかいぎは6じまででした",
+        "きのう かいぎは 6じまででした",
+        "kinou kaigi wa 6-ji made deshita"
+      ]
+    },
+    {
+      "id": 76,
+      "direction": "vi-to-ja",
+      "question_kana": "Bưu điện không làm việc vào chủ nhật.",
+      "question_kanji": "Bưu điện không làm việc vào chủ nhật.",
+      "answers": [
+        "ゆうびんきょくはにちようびはたらきません",
+        "ゆうびんきょくは にちようび はたらきません",
+        "yuubinkyoku wa nichiyoubi hatarakimasen"
+      ]
+    },
+    {
+      "id": 77,
+      "direction": "vi-to-ja",
+      "question_kana": "Mỗi sáng anh Karina làm việc từ 8 giờ.",
+      "question_kanji": "Mỗi sáng anh Karina làm việc từ 8 giờ.",
+      "answers": [
+        "カリナさんはまいあさ8じからはたらきます",
+        "カリナさんは まいあさ 8じから はたらきます",
+        "karina san wa maiasa 8-ji kara hatarakimasu"
+      ]
+    },
+    {
+      "id": 78,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm nay nghỉ làm.",
+      "question_kanji": "Hôm nay nghỉ làm.",
+      "answers": [
+        "きょうはやすみです",
+        "きょうは やすみです",
+        "kyou wa yasumi desu"
+      ]
+    },
+    {
+      "id": 79,
+      "direction": "vi-to-ja",
+      "question_kana": "Giờ nghỉ trưa kết thúc lúc 1 giờ.",
+      "question_kanji": "Giờ nghỉ trưa kết thúc lúc 1 giờ.",
+      "answers": [
+        "ひるやすみは1じにおわります",
+        "ひるやすみは 1じに おわります",
+        "hiruyasumi wa 1-ji ni owarimasu"
+      ]
+    },
+    {
+      "id": 80,
+      "direction": "vi-to-ja",
+      "question_kana": "Ngày mai bách hóa mở cửa lúc 9 giờ 30 phút.",
+      "question_kanji": "Ngày mai bách hóa mở cửa lúc 9 giờ 30 phút.",
+      "answers": [
+        "あしたデパートは9じはんからです",
+        "あした デパートは 9じはんから です",
+        "ashita depaato wa 9-ji han kara desu"
+      ]
+    }
+  ],
+  "dialogues": [
+    {
+      "id": 1,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "context": "Hỏi ngày nghỉ trong tuần (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "context": "Hỏi thời gian nghỉ trưa (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "context": "Hỏi giờ chiếu phim (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "context": "Hỏi thời gian cuộc họp (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "context": "Hỏi mốc thời gian thức dậy (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "context": "Hỏi mốc thời gian đi ngủ (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "context": "Hỏi thời gian làm việc hàng ngày (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 12,
+      "context": "Hỏi ngày thi (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 16,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 17,
+      "context": "Hỏi ngày nghỉ trong tuần (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "context": "Hỏi thời gian nghỉ trưa (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 19,
+      "context": "Hỏi giờ chiếu phim (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "context": "Hỏi thời gian cuộc họp (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 21,
+      "context": "Hỏi mốc thời gian thức dậy (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "context": "Hỏi mốc thời gian đi ngủ (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 23,
+      "context": "Hỏi thời gian làm việc hàng ngày (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 24,
+      "context": "Hỏi ngày thi (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 25,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 26,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 27,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 28,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 29,
+      "context": "Hỏi ngày nghỉ trong tuần (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 30,
+      "context": "Hỏi thời gian nghỉ trưa (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 31,
+      "context": "Hỏi giờ chiếu phim (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 32,
+      "context": "Hỏi thời gian cuộc họp (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 33,
+      "context": "Hỏi mốc thời gian thức dậy (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 34,
+      "context": "Hỏi mốc thời gian đi ngủ (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 35,
+      "context": "Hỏi thời gian làm việc hàng ngày (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 36,
+      "context": "Hỏi ngày thi (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 37,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 38,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 39,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 40,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    }
+  ],
+  "listenings": [
+    {
+      "id": 1,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    }
+  ],
+  "dictations": [
+    {
+      "id": 1,
+      "question_audio": "いま なんじ ですか",
+      "correct_answers": [
+        "いまなんじですか",
+        "いま なんじ ですか",
+        "ima nanji desu ka"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là mấy giờ?"
+      ],
+      "vietnamese_meaning": "Bây giờ là mấy giờ?"
+    },
+    {
+      "id": 2,
+      "question_audio": "いま 9じはん です",
+      "correct_answers": [
+        "いま9じはんです",
+        "いま 9じはん です",
+        "ima 9-ji han desu"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là 9 giờ rưỡi."
+      ],
+      "vietnamese_meaning": "Bây giờ là 9 giờ rưỡi."
+    },
+    {
+      "id": 3,
+      "question_audio": "わたしは まいにち 6じに おきます",
+      "correct_answers": [
+        "わたしはまいにち6じにおきます",
+        "わたしは まいにち 6じに おきます",
+        "watashi wa mainichi 6-ji ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi ngày tôi dậy lúc 6 giờ."
+      ],
+      "vietnamese_meaning": "Mỗi ngày tôi dậy lúc 6 giờ."
+    },
+    {
+      "id": 4,
+      "question_audio": "きのうの ばん 11じに ねました",
+      "correct_answers": [
+        "きのうのばん11じにねました",
+        "きのうの ばん 11じに ねました",
+        "kinou no ban 11-ji ni nemashita"
+      ],
+      "vietnamese_answers": [
+        "Tối qua tôi ngủ lúc 11 giờ."
+      ],
+      "vietnamese_meaning": "Tối qua tôi ngủ lúc 11 giờ."
+    },
+    {
+      "id": 5,
+      "question_audio": "あした べんきょうします",
+      "correct_answers": [
+        "あしたべんきょうします",
+        "あした べんきょうします",
+        "ashita benkyoushimasu"
+      ],
+      "vietnamese_answers": [
+        "Ngày mai tôi sẽ học bài."
+      ],
+      "vietnamese_meaning": "Ngày mai tôi sẽ học bài."
+    },
+    {
+      "id": 6,
+      "question_audio": "ぎんこうは 9じから 3じまで です",
+      "correct_answers": [
+        "ぎんこうは9じから3じまでです",
+        "ぎんこうは 9じから 3じまで です",
+        "ginkou wa 9-ji kara 3-ji made desu"
+      ],
+      "vietnamese_answers": [
+        "Ngân hàng mở cửa từ 9h đến 3h."
+      ],
+      "vietnamese_meaning": "Ngân hàng mở cửa từ 9h đến 3h."
+    },
+    {
+      "id": 7,
+      "question_audio": "ゆうびんきょくの やすみは どようびと にちようび です",
+      "correct_answers": [
+        "ゆうびんきょくのやすみはどようびとにちようびです",
+        "ゆうびんきょくの やすみは どようびと にちようび です",
+        "yuubinkyoku no yasumi wa doyoubi to nichiyoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Bưu điện nghỉ thứ 7 và chủ nhật."
+      ],
+      "vietnamese_meaning": "Bưu điện nghỉ thứ 7 và chủ nhật."
+    },
+    {
+      "id": 8,
+      "question_audio": "けあさ 7じに おきました",
+      "correct_answers": [
+        "けあさ7じにおきました",
+        "けあさ 7じに おきました",
+        "keasa 7-ji ni okimashita"
+      ],
+      "vietnamese_answers": [
+        "Sáng nay tôi đã dậy lúc 7 giờ."
+      ],
+      "vietnamese_meaning": "Sáng nay tôi đã dậy lúc 7 giờ."
+    },
+    {
+      "id": 9,
+      "question_audio": "こんばん べんきょうしません",
+      "correct_answers": [
+        "こんばんべんきょうしません",
+        "こんばん べんきょうしません",
+        "konban benkyoushimasen"
+      ],
+      "vietnamese_answers": [
+        "Tối nay tôi không học."
+      ],
+      "vietnamese_meaning": "Tối nay tôi không học."
+    },
+    {
+      "id": 10,
+      "question_audio": "かいしゃは なんじに おわりますか",
+      "correct_answers": [
+        "かいしゃはなんじにおわりますか",
+        "かいしゃは なんじに おわりますか",
+        "kaigi wa nanji ni owarimasu ka"
+      ],
+      "vietnamese_answers": [
+        "Công ty mấy giờ thì kết thúc?"
+      ],
+      "vietnamese_meaning": "Công ty mấy giờ thì kết thúc?"
+    },
+    {
+      "id": 11,
+      "question_audio": "としょかんは 5じまで です",
+      "correct_answers": [
+        "としょかんは5じまでです",
+        "としょかんは 5じまで です",
+        "toshokan wa 5-ji made desu"
+      ],
+      "vietnamese_answers": [
+        "Thư viện mở cửa đến 5 giờ."
+      ],
+      "vietnamese_meaning": "Thư viện mở cửa đến 5 giờ."
+    },
+    {
+      "id": 12,
+      "question_audio": "びじゅつかんは げつようび やすみです",
+      "correct_answers": [
+        "びじゅつかんはげつようびやすみです",
+        "びじゅつかんは げつようび やすみです",
+        "bijutsukan wa getsuyoubi yasumi desu"
+      ],
+      "vietnamese_answers": [
+        "Bảo tàng mỹ thuật nghỉ thứ 2."
+      ],
+      "vietnamese_meaning": "Bảo tàng mỹ thuật nghỉ thứ 2."
+    },
+    {
+      "id": 13,
+      "question_audio": "デパートは 10じから です",
+      "correct_answers": [
+        "デパートは10じからです",
+        "デパートは 10じから です",
+        "depaato wa 10-ji kara desu"
+      ],
+      "vietnamese_answers": [
+        "Bách hóa mở cửa từ 10 giờ."
+      ],
+      "vietnamese_meaning": "Bách hóa mở cửa từ 10 giờ."
+    },
+    {
+      "id": 14,
+      "question_audio": "きのう はたらきましたか",
+      "correct_answers": [
+        "きのうはたらきましたか",
+        "きのう はたらきましたか",
+        "kinou hatarakimashita ka"
+      ],
+      "vietnamese_answers": [
+        "Hôm qua bạn có làm việc không?"
+      ],
+      "vietnamese_meaning": "Hôm qua bạn có làm việc không?"
+    },
+    {
+      "id": 15,
+      "question_audio": "いいえ はたらきませんでした",
+      "correct_answers": [
+        "いいえはたらきませんでした",
+        "いいえ はたらきませんでした",
+        "iie hatarakimasen deshita"
+      ],
+      "vietnamese_answers": [
+        "Không, tôi không làm việc."
+      ],
+      "vietnamese_meaning": "Không, tôi không làm việc."
+    },
+    {
+      "id": 16,
+      "question_audio": "まいあさ 6じに おきます",
+      "correct_answers": [
+        "まいあさ6じにおきます",
+        "まいあさ 6じに おきます",
+        "maiasa 6-ji ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi sáng tôi dậy lúc 6 giờ."
+      ],
+      "vietnamese_meaning": "Mỗi sáng tôi dậy lúc 6 giờ."
+    },
+    {
+      "id": 17,
+      "question_audio": "まいばん 10じから 12じまで べんきょうします",
+      "correct_answers": [
+        "まいばん10じから12じまでべんきょうします",
+        "まいばん 10じから 12じまで べんきょうします",
+        "maiban 10-ji kara 12-ji made benkyoushimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi tối tôi học từ 10h đến 12h."
+      ],
+      "vietnamese_meaning": "Mỗi tối tôi học từ 10h đến 12h."
+    },
+    {
+      "id": 18,
+      "question_audio": "おとtoi べんきょうしました",
+      "correct_answers": [
+        "おとtoiべんきょうしました",
+        "おとtoi べんきょうしました",
+        "ototoi benkyoushima shita"
+      ],
+      "vietnamese_answers": [
+        "Hôm kia tôi đã học."
+      ],
+      "vietnamese_meaning": "Hôm kia tôi đã học."
+    },
+    {
+      "id": 19,
+      "question_audio": "あさって はたらきます",
+      "correct_answers": [
+        "あさってはたらきます",
+        "あさって はたらきます",
+        "asatte hatarakimasu"
+      ],
+      "vietnamese_answers": [
+        "Ngày kia tôi làm việc."
+      ],
+      "vietnamese_meaning": "Ngày kia tôi làm việc."
+    },
+    {
+      "id": 20,
+      "question_audio": "ひるやすみは 12じから 1じまで です",
+      "correct_answers": [
+        "ひるやすみは12じから1じまでです",
+        "ひるやすみは 12じから 1じまで です",
+        "hiruyasumi wa 12-ji kara 1-ji made desu"
+      ],
+      "vietnamese_answers": [
+        "Nghỉ trưa từ 12h đến 1h."
+      ],
+      "vietnamese_meaning": "Nghỉ trưa từ 12h đến 1h."
+    },
+    {
+      "id": 21,
+      "question_audio": "しけんは なんようびですか",
+      "correct_answers": [
+        "しけんはなんようびですか",
+        "しけんは なんようびですか",
+        "shiken wa nanyoubi desu ka"
+      ],
+      "vietnamese_answers": [
+        "Kỳ thi vào thứ mấy?"
+      ],
+      "vietnamese_meaning": "Kỳ thi vào thứ mấy?"
+    },
+    {
+      "id": 22,
+      "question_audio": "かいぎは すいようびです",
+      "correct_answers": [
+        "かいぎはすいようびです",
+        "かいぎは すいようびです",
+        "kaigi wa suiyoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Cuộc họp vào thứ 4."
+      ],
+      "vietnamese_meaning": "Cuộc họp vào thứ 4."
+    },
+    {
+      "id": 23,
+      "question_audio": "えいがは 8じはんから です",
+      "correct_answers": [
+        "えいがは8じはんからです",
+        "えいがは 8じはんから です",
+        "eiga wa 8-ji han kara desu"
+      ],
+      "vietnamese_answers": [
+        "Phim từ 8h30."
+      ],
+      "vietnamese_meaning": "Phim từ 8h30."
+    },
+    {
+      "id": 24,
+      "question_audio": "たいへん ですね",
+      "correct_answers": [
+        "たいへんですね",
+        "たいへん ですね",
+        "taihen desu ne"
+      ],
+      "vietnamese_answers": [
+        "Vất vả nhỉ!"
+      ],
+      "vietnamese_meaning": "Vất vả nhỉ!"
+    },
+    {
+      "id": 25,
+      "question_audio": "ばんごうは なんばん ですか",
+      "correct_answers": [
+        "ばんごうはなんばんですか",
+        "ばんごうは なんばん ですか",
+        "bangou wa nanban desu ka"
+      ],
+      "vietnamese_answers": [
+        "Số điện thoại là số mấy?"
+      ],
+      "vietnamese_meaning": "Số điện thoại là số mấy?"
+    },
+    {
+      "id": 26,
+      "question_audio": "きょうは かようびです",
+      "correct_answers": [
+        "きょうはかようびです",
+        "きょうは かようびです",
+        "kyou wa kayoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Hôm nay là thứ 3."
+      ],
+      "vietnamese_meaning": "Hôm nay là thứ 3."
+    },
+    {
+      "id": 27,
+      "question_audio": "あしたは もくようびです",
+      "correct_answers": [
+        "あしたはもくようびです",
+        "あしたは もくようびです",
+        "ashita wa mokuyoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Ngày mai là thứ 5."
+      ],
+      "vietnamese_meaning": "Ngày mai là thứ 5."
+    },
+    {
+      "id": 28,
+      "question_audio": "きんようびの ばん べんきょうします",
+      "correct_answers": [
+        "きんようびのばんべんきょうします",
+        "きんようびの ばん べんきょうします",
+        "kinyoubi no ban benkyoushimasu"
+      ],
+      "vietnamese_answers": [
+        "Tối thứ 6 tôi học."
+      ],
+      "vietnamese_meaning": "Tối thứ 6 tôi học."
+    },
+    {
+      "id": 29,
+      "question_audio": "いま ごぜん 9じです",
+      "correct_answers": [
+        "いまごぜん9じです",
+        "いま ごぜん 9じです",
+        "ima gozen 9-ji desu"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là 9h sáng."
+      ],
+      "vietnamese_meaning": "Bây giờ là 9h sáng."
+    },
+    {
+      "id": 30,
+      "question_audio": "いま ごご 4じ15ふん です",
+      "correct_answers": [
+        "いまごご4じ15ふんです",
+        "いま ごご 4じ15ふん です",
+        "ima gogo 4-ji 15-fun desu"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là 4h15 chiều."
+      ],
+      "vietnamese_meaning": "Bây giờ là 4h15 chiều."
+    },
+    {
+      "id": 31,
+      "question_audio": "ミラーさんは まいにち はたらきます",
+      "correct_answers": [
+        "ミラーさんはまいにちはたらきます",
+        "ミラーさんは まいにち はたらきます",
+        "miraa san wa mainichi hatarakimasu"
+      ],
+      "vietnamese_answers": [
+        "Anh Miller làm việc mỗi ngày."
+      ],
+      "vietnamese_meaning": "Anh Miller làm việc mỗi ngày."
+    },
+    {
+      "id": 32,
+      "question_audio": "サントスさんは きのう やすみました",
+      "correct_answers": [
+        "サントスさんはきのうやすみました",
+        "サントスさんは きのう やすみました",
+        "santosu san wa kinou yasumimashita"
+      ],
+      "vietnamese_answers": [
+        "Anh Santos hôm qua nghỉ."
+      ],
+      "vietnamese_meaning": "Anh Santos hôm qua nghỉ."
+    },
+    {
+      "id": 33,
+      "question_audio": "わたしは 9じから 5じまで はたらきます",
+      "correct_answers": [
+        "わたしは9じから5じまではたらきます",
+        "わたしは 9じから 5じまで はたらきます",
+        "watashi wa 9-ji kara 5-ji made hatarakimasu"
+      ],
+      "vietnamese_answers": [
+        "Tôi làm việc từ 9h đến 5h."
+      ],
+      "vietnamese_meaning": "Tôi làm việc từ 9h đến 5h."
+    },
+    {
+      "id": 34,
+      "question_audio": "としょかんの やすみは なんようびですか",
+      "correct_answers": [
+        "としょかんのやすみはなんようびですか",
+        "としょかんの やすみは なんようびですか",
+        "toshokan no yasumi wa nanyoubi desu ka"
+      ],
+      "vietnamese_answers": [
+        "Ngày nghỉ thư viện là thứ mấy?"
+      ],
+      "vietnamese_meaning": "Ngày nghỉ thư viện là thứ mấy?"
+    },
+    {
+      "id": 35,
+      "question_audio": "にちようび はたらきません",
+      "correct_answers": [
+        "にちようびはたらきません",
+        "にちようび はたらきません",
+        "nichiyoubi hatarakimasen"
+      ],
+      "vietnamese_answers": [
+        "Chủ nhật tôi nghỉ."
+      ],
+      "vietnamese_meaning": "Chủ nhật tôi nghỉ."
+    },
+    {
+      "id": 36,
+      "question_audio": "まいあさ 7じはんに おきます",
+      "correct_answers": [
+        "まいあさ7じはんにおきます",
+        "まいあさ 7じはんに おきます",
+        "maiasa 7-ji han ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi sáng tôi dậy 7h30."
+      ],
+      "vietnamese_meaning": "Mỗi sáng tôi dậy 7h30."
+    },
+    {
+      "id": 37,
+      "question_audio": "きのう 8じまで べんきょうしました",
+      "correct_answers": [
+        "きのう8じまでべんきょうしました",
+        "きのう 8じまで べんきょうしました",
+        "kinou 8-ji made benkyoushima shita"
+      ],
+      "vietnamese_answers": [
+        "Hôm qua tôi học tới 8h."
+      ],
+      "vietnamese_meaning": "Hôm qua tôi học tới 8h."
+    },
+    {
+      "id": 38,
+      "question_audio": "かいぎは 10じから です",
+      "correct_answers": [
+        "かいぎは10じからです",
+        "かいぎは 10じから です",
+        "kaigi wa 10-ji kara desu"
+      ],
+      "vietnamese_answers": [
+        "Cuộc họp từ 10 giờ."
+      ],
+      "vietnamese_meaning": "Cuộc họp từ 10 giờ."
+    },
+    {
+      "id": 39,
+      "question_audio": "しけんは ぎんこうで ありますか",
+      "correct_answers": [
+        "しけんはぎんこうでありますか",
+        "しけんは ぎんこうで ありますか",
+        "shiken wa ginkou de arimasu ka"
+      ],
+      "vietnamese_answers": [
+        "Kỳ thi ở ngân hàng à?"
+      ],
+      "vietnamese_meaning": "Kỳ thi ở ngân hàng à?"
+    },
+    {
+      "id": 40,
+      "question_audio": "あしたの あさ 6じに おきます",
+      "correct_answers": [
+        "あしたのあさ6じにおきます",
+        "あしたの あさ 6じに おきます",
+        "ashita no asa 6-ji ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Sáng mai tôi dậy lúc 6 giờ."
+      ],
+      "vietnamese_meaning": "Sáng mai tôi dậy lúc 6 giờ."
+    }
+  ],
+  "type1_translation": [
+    {
+      "id": 1,
+      "direction": "ja-to-vi",
+      "question_kana": "いま なんじ ですか。",
+      "question_kanji": "今 何時 ですか。",
+      "answers": [
+        "Bây giờ là mấy giờ",
+        "Bây giờ là mấy giờ thế",
+        "Bây giờ mấy giờ rồi"
+      ]
+    },
+    {
+      "id": 2,
+      "direction": "ja-to-vi",
+      "question_kana": "いま 7じ10ふん です。",
+      "question_kanji": "今 7時10分 です。",
+      "answers": [
+        "Bây giờ là 7 giờ 10 phút",
+        "Bây giờ là 7h10"
+      ]
+    },
+    {
+      "id": 3,
+      "direction": "ja-to-vi",
+      "question_kana": "わたしは まいにち 6じはん に おきます。",
+      "question_kanji": "私は 毎日 6時半 に 起きます。",
+      "answers": [
+        "Tôi thức dậy lúc 6 giờ rưỡi mỗi ngày",
+        "Hàng ngày tôi thức dậy lúc 6 giờ 30 phút",
+        "Mỗi ngày tôi dậy lúc 6 rưỡi"
+      ]
+    },
+    {
+      "id": 4,
+      "direction": "ja-to-vi",
+      "question_kana": "きのうの ばん 11じ に ねました。",
+      "question_kanji": "昨日の 晩 11時 に 寝ました。",
+      "answers": [
+        "Tối qua tôi đã đi ngủ lúc 11 giờ",
+        "Tối hôm qua tôi ngủ lúc 11h"
+      ]
+    },
+    {
+      "id": 5,
+      "direction": "ja-to-vi",
+      "question_kana": "あした べんきょうします。",
+      "question_kanji": "明日 勉強します。",
+      "answers": [
+        "Ngày mai tôi sẽ học bài",
+        "Ngày mai tôi học",
+        "Mai tớ học"
+      ]
+    },
+    {
+      "id": 6,
+      "direction": "ja-to-vi",
+      "question_kana": "ぎんこうは 9じから 3じまで です。",
+      "question_kanji": "銀行は 9時から 3時まで です。",
+      "answers": [
+        "Ngân hàng mở cửa từ 9 giờ đến 3 giờ",
+        "Ngân hàng làm việc từ 9h đến 3h"
+      ]
+    },
+    {
+      "id": 7,
+      "direction": "ja-to-vi",
+      "question_kana": "ゆうびんきょくの やすみは どようびと にちようび です。",
+      "question_kanji": "郵便局の 休みは 土曜日と 日曜日 です。",
+      "answers": [
+        "Ngày nghỉ của bưu điện là thứ bảy và chủ nhật",
+        "Bưu điện nghỉ thứ 7 và chủ nhật"
+      ]
+    },
+    {
+      "id": 8,
+      "direction": "ja-to-vi",
+      "question_kana": "けあさ 7じ に おきました。",
+      "question_kanji": "今朝 7時 に 起きました。",
+      "answers": [
+        "Sáng nay tôi đã thức dậy lúc 7 giờ",
+        "Sáng nay tôi dậy lúc 7h"
+      ]
+    },
+    {
+      "id": 9,
+      "direction": "ja-to-vi",
+      "question_kana": "こんばん べんきょうしません。",
+      "question_kanji": "今晩 勉強しません。",
+      "answers": [
+        "Tối nay tôi không học bài",
+        "Tối nay tớ không học"
+      ]
+    },
+    {
+      "id": 10,
+      "direction": "ja-to-vi",
+      "question_kana": "かいしゃは なんじに おわりますか。",
+      "question_kanji": "会社は 何時に 終わりますか。",
+      "answers": [
+        "Công ty kết thúc công việc lúc mấy giờ",
+        "Công ty mấy giờ thì xong"
+      ]
+    },
+    {
+      "id": 11,
+      "direction": "ja-to-vi",
+      "question_kana": "としょかんは 5じまで です。",
+      "question_kanji": "図書館は 5時まで です。",
+      "answers": [
+        "Thư viện mở cửa đến 5 giờ",
+        "Thư viện đến 5h là đóng cửa"
+      ]
+    },
+    {
+      "id": 12,
+      "direction": "ja-to-vi",
+      "question_kana": "びじゅつかんは げつようび やすみです。",
+      "question_kanji": "美術館は 月曜日 休みです。",
+      "answers": [
+        "Bảo tàng mỹ thuật nghỉ vào thứ hai",
+        "Bảo tàng nghệ thuật nghỉ thứ 2"
+      ]
+    },
+    {
+      "id": 13,
+      "direction": "ja-to-vi",
+      "question_kana": "デパートは 10じから です。",
+      "question_kanji": "デパートは 10時から です。",
+      "answers": [
+        "Trung tâm thương mại mở cửa từ 10 giờ",
+        "Bách hóa làm việc từ 10h"
+      ]
+    },
+    {
+      "id": 14,
+      "direction": "ja-to-vi",
+      "question_kana": "きのう はたらきましたか。",
+      "question_kanji": "昨日 働きましたか。",
+      "answers": [
+        "Hôm qua bạn có làm việc không",
+        "Hôm qua cậu có đi làm không"
+      ]
+    },
+    {
+      "id": 15,
+      "direction": "ja-to-vi",
+      "question_kana": "いいえ、はたらきませんでした。やすみました。",
+      "question_kanji": "いいえ、働きませんでした。休みました。",
+      "answers": [
+        "Không, tôi không làm việc. Tôi đã nghỉ ngơi.",
+        "Không, tớ không đi làm. Tớ nghỉ."
+      ]
+    },
+    {
+      "id": 16,
+      "direction": "ja-to-vi",
+      "question_kana": "まいあさ 6じに おきます。",
+      "question_kanji": "毎朝 6時に 起きます。",
+      "answers": [
+        "Mỗi sáng tôi dậy lúc 6 giờ",
+        "Hàng sáng tôi thức dậy lúc 6h"
+      ]
+    },
+    {
+      "id": 17,
+      "direction": "ja-to-vi",
+      "question_kana": "まいばん 10じから 12じまで べんきょうします。",
+      "question_kanji": "毎晩 10時から 12時まで 勉強します。",
+      "answers": [
+        "Mỗi tối tôi học từ 10 giờ đến 12 giờ",
+        "Hàng tối tôi học từ 10h đến 12h"
+      ]
+    },
+    {
+      "id": 18,
+      "direction": "ja-to-vi",
+      "question_kana": "おととい べんきょうしました。",
+      "question_kanji": "おととい 勉強しました。",
+      "answers": [
+        "Hôm kia tôi đã học bài",
+        "Ngày hôm kia tôi đã học"
+      ]
+    },
+    {
+      "id": 19,
+      "direction": "ja-to-vi",
+      "question_kana": "あさって はたらきます。",
+      "question_kanji": "あさって 働きます。",
+      "answers": [
+        "Ngày kia tôi sẽ làm việc",
+        "Ngày kia tớ đi làm"
+      ]
+    },
+    {
+      "id": 20,
+      "direction": "ja-to-vi",
+      "question_kana": "ひるやすみは 12じから 1じまで です。",
+      "question_kanji": "昼休みは 12時から 1時まで です。",
+      "answers": [
+        "Nghỉ trưa từ 12 giờ đến 1 giờ",
+        "Giờ nghỉ trưa từ 12h đến 1h"
+      ]
+    },
+    {
+      "id": 21,
+      "direction": "ja-to-vi",
+      "question_kana": "しけんは なんようびですか。",
+      "question_kanji": "試験は 何曜日ですか。",
+      "answers": [
+        "Kỳ thi vào thứ mấy",
+        "Cuộc thi là thứ mấy thế"
+      ]
+    },
+    {
+      "id": 22,
+      "direction": "ja-to-vi",
+      "question_kana": "かいぎは すいようびです。",
+      "question_kanji": "会議は 水曜日です。",
+      "answers": [
+        "Cuộc họp vào thứ tư",
+        "Cuộc họp diễn ra vào thứ 4"
+      ]
+    },
+    {
+      "id": 23,
+      "direction": "ja-to-vi",
+      "question_kana": "えいがは 8じはんから です。",
+      "question_kanji": "映画は 8時半から です。",
+      "answers": [
+        "Phim bắt đầu từ 8 giờ rưỡi",
+        "Bộ phim từ 8h30"
+      ]
+    },
+    {
+      "id": 24,
+      "direction": "ja-to-vi",
+      "question_kana": "たいへん ですね。",
+      "question_kanji": "大変 ですね。",
+      "answers": [
+        "Vất vả nhỉ",
+        "Mệt mỏi nhỉ",
+        "Vất vả quá nhỉ"
+      ]
+    },
+    {
+      "id": 25,
+      "direction": "ja-to-vi",
+      "question_kana": "ばんごうは なんばん ですか。",
+      "question_kanji": "番号は 何番 ですか。",
+      "answers": [
+        "Số điện thoại / số phòng là số mấy",
+        "Số bao nhiêu vậy"
+      ]
+    },
+    {
+      "id": 26,
+      "direction": "ja-to-vi",
+      "question_kana": "きょうは かようびです。",
+      "question_kanji": "今日は 火曜日です。",
+      "answers": [
+        "Hôm nay là thứ ba",
+        "Hôm nay là thứ 3"
+      ]
+    },
+    {
+      "id": 27,
+      "direction": "ja-to-vi",
+      "question_kana": "あしたは もくようびです。",
+      "question_kanji": "明日は 木曜日です。",
+      "answers": [
+        "Ngày mai là thứ tư",
+        "Ngày mai là thứ 4"
+      ]
+    },
+    {
+      "id": 28,
+      "direction": "ja-to-vi",
+      "question_kana": "きんようびの ばん べんきょうします。",
+      "question_kanji": "金曜日の 晩 勉強します。",
+      "answers": [
+        "Tối thứ sáu tôi học bài",
+        "Tối thứ 6 tớ học"
+      ]
+    },
+    {
+      "id": 29,
+      "direction": "ja-to-vi",
+      "question_kana": "いま ごぜん 9じです。",
+      "question_kanji": "今 午前 9時です。",
+      "answers": [
+        "Bây giờ là 9 giờ sáng",
+        "Hiện tại là 9h sáng"
+      ]
+    },
+    {
+      "id": 30,
+      "direction": "ja-to-vi",
+      "question_kana": "いま ごご 4じ15ふん です。",
+      "question_kanji": "今 午後 4時15分 です。",
+      "answers": [
+        "Bây giờ là 4 giờ 15 phút chiều",
+        "Hiện là 4h15 chiều"
+      ]
+    },
+    {
+      "id": 31,
+      "direction": "ja-to-vi",
+      "question_kana": "ミラーさんは まいにち はたらきます。",
+      "question_kanji": "ミラーさんは 毎日 働きます。",
+      "answers": [
+        "Anh Miller làm việc mỗi ngày",
+        "Anh Miller hàng ngày đều đi làm"
+      ]
+    },
+    {
+      "id": 32,
+      "direction": "ja-to-vi",
+      "question_kana": "サントスさんは きのう やすみました。",
+      "question_kanji": "サントスさんは 昨日 休みました。",
+      "answers": [
+        "Anh Santos hôm qua đã nghỉ ngơi",
+        "Anh Santos hôm qua nghỉ"
+      ]
+    },
+    {
+      "id": 33,
+      "direction": "ja-to-vi",
+      "question_kana": "わたしは 9じから 5じまで はたらきます。",
+      "question_kanji": "私は 9時から 5時まで 働きます。",
+      "answers": [
+        "Tôi làm việc từ 9 giờ đến 5 giờ",
+        "Tớ đi làm từ 9h đến 5h"
+      ]
+    },
+    {
+      "id": 34,
+      "direction": "ja-to-vi",
+      "question_kana": "としょかんの やすみは なんようびですか。",
+      "question_kanji": "図書館の 休みは 何曜日ですか。",
+      "answers": [
+        "Ngày nghỉ của thư viện là thứ mấy",
+        "Thư viện nghỉ vào thứ mấy"
+      ]
+    },
+    {
+      "id": 35,
+      "direction": "ja-to-vi",
+      "question_kana": "にちようび はたらきません。",
+      "question_kanji": "日曜日 働きません。",
+      "answers": [
+        "Chủ nhật tôi không làm việc",
+        "Chủ nhật tớ nghỉ"
+      ]
+    },
+    {
+      "id": 36,
+      "direction": "ja-to-vi",
+      "question_kana": "まいあさ 7じはん に おきます。",
+      "question_kanji": "毎朝 7時半 に 起きます。",
+      "answers": [
+        "Mỗi sáng tôi thức dậy lúc 7 giờ rưỡi",
+        "Hàng sáng tôi dậy lúc 7h30"
+      ]
+    },
+    {
+      "id": 37,
+      "direction": "ja-to-vi",
+      "question_kana": "きのう 8じまで べんきょうしました。",
+      "question_kanji": "昨日 8時まで 勉強しました。",
+      "answers": [
+        "Hôm qua tôi đã học đến 8 giờ",
+        "Hôm qua tớ học tới 8h"
+      ]
+    },
+    {
+      "id": 38,
+      "direction": "ja-to-vi",
+      "question_kana": "かいぎは 10じから です。",
+      "question_kanji": "会議は 10時から です。",
+      "answers": [
+        "Cuộc họp bắt đầu từ 10 giờ",
+        "Cuộc họp từ 10h"
+      ]
+    },
+    {
+      "id": 39,
+      "direction": "ja-to-vi",
+      "question_kana": "しけんは ぎんこうで ありますか。",
+      "question_kanji": "試験は 銀行で ありますか。",
+      "answers": [
+        "Kỳ thi có ở ngân hàng không",
+        "Cuộc thi tổ chức ở ngân hàng à"
+      ]
+    },
+    {
+      "id": 40,
+      "direction": "ja-to-vi",
+      "question_kana": "あしたの あさ 6じに おきます。",
+      "question_kanji": "明日の 朝 6時に 起きます。",
+      "answers": [
+        "Sáng mai tôi sẽ thức dậy lúc 6 giờ",
+        "Sáng mai tôi dậy lúc 6h"
+      ]
+    },
+    {
+      "id": 41,
+      "direction": "vi-to-ja",
+      "question_kana": "Bây giờ là mấy giờ?",
+      "question_kanji": "Bây giờ là mấy giờ?",
+      "answers": [
+        "いまなんじですか",
+        "いま なんじ ですか",
+        "ima nanji desu ka"
+      ]
+    },
+    {
+      "id": 42,
+      "direction": "vi-to-ja",
+      "question_kana": "Bây giờ là 8 giờ 30 phút.",
+      "question_kanji": "Bây giờ là 8 giờ 30 phút.",
+      "answers": [
+        "いま8じさんじゅっぷんです",
+        "いま 8じ はん です",
+        "ima 8-ji han desu"
+      ]
+    },
+    {
+      "id": 43,
+      "direction": "vi-to-ja",
+      "question_kana": "Tôi làm việc từ 9 giờ đến 5 giờ.",
+      "question_kanji": "Tôi làm việc từ 9 giờ đến 5 giờ.",
+      "answers": [
+        "わたしは9じから5じまではたらきます",
+        "わたしは 9じから 5じまで はたらきます",
+        "watashi wa 9-ji kara 5-ji made hatarakimasu"
+      ]
+    },
+    {
+      "id": 44,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm qua tôi đã học bài.",
+      "question_kanji": "Hôm qua tôi đã học bài.",
+      "answers": [
+        "きのうべんきょうしました",
+        "きのう べんきょうしました",
+        "kinou benkyoushima shita"
+      ]
+    },
+    {
+      "id": 45,
+      "direction": "vi-to-ja",
+      "question_kana": "Tối nay tôi không ngủ sớm.",
+      "question_kanji": "Tối nay tôi không ngủ sớm.",
+      "answers": [
+        "こんばんねません",
+        "こんばん ねません",
+        "konban nemasen"
+      ]
+    },
+    {
+      "id": 46,
+      "direction": "vi-to-ja",
+      "question_kana": "Ngân hàng nghỉ vào thứ Bảy và Chủ Nhật.",
+      "question_kanji": "Ngân hàng nghỉ vào thứ Bảy và Chủ Nhật.",
+      "answers": [
+        "ぎんこうのやすみはどようびとにちようびです",
+        "ぎんこうの やすみは どようびと にちようび です",
+        "ginkou no yasumi wa doyoubi to nichiyoubi desu"
+      ]
+    },
+    {
+      "id": 47,
+      "direction": "vi-to-ja",
+      "question_kana": "Sáng nay bạn thức dậy lúc mấy giờ?",
+      "question_kanji": "Sáng nay bạn thức dậy lúc mấy giờ?",
+      "answers": [
+        "けあさなんじにおきましたか",
+        "けあさ なんじに おきましたか",
+        "keasa nanji ni okimashita ka"
+      ]
+    },
+    {
+      "id": 48,
+      "direction": "vi-to-ja",
+      "question_kana": "Bưu điện mở cửa từ 8 giờ 30 phút.",
+      "question_kanji": "Bưu điện mở cửa từ 8 giờ 30 phút.",
+      "answers": [
+        "ゆうびんきょくは8じはんからです",
+        "ゆうびんきょくは 8じはんから です",
+        "yuubinkyoku wa 8-ji han kara desu"
+      ]
+    },
+    {
+      "id": 49,
+      "direction": "vi-to-ja",
+      "question_kana": "Hàng ngày tôi thức dậy lúc 6 giờ.",
+      "question_kanji": "Hàng ngày tôi thức dậy lúc 6 giờ.",
+      "answers": [
+        "まいにち6じにおきます",
+        "まいにち 6じに おきます",
+        "mainichi 6-ji ni okimasu"
+      ]
+    },
+    {
+      "id": 50,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm nay là thứ mấy?",
+      "question_kanji": "Hôm nay là thứ mấy?",
+      "answers": [
+        "きょうなんようびですか",
+        "きょうは なんようび ですか",
+        "kyou wa nanyoubi desu ka"
+      ]
+    },
+    {
+      "id": 51,
+      "direction": "vi-to-ja",
+      "question_kana": "Thư viện đóng cửa lúc 5 giờ.",
+      "question_kanji": "Thư viện đóng cửa lúc 5 giờ.",
+      "answers": [
+        "としょかんは5じまでです",
+        "としょかんは 5じまで です",
+        "toshokan wa 5-ji made desu"
+      ]
+    },
+    {
+      "id": 52,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm qua anh Miller có làm việc không?",
+      "question_kanji": "Hôm qua anh Miller có làm việc không?",
+      "answers": [
+        "ミラーさんはきのうはたらきましたか",
+        "ミラーさんは きのう はたらきましたか",
+        "miraa san wa kinou hatarakimashita ka"
+      ]
+    },
+    {
+      "id": 53,
+      "direction": "vi-to-ja",
+      "question_kana": "Cuộc họp kết thúc lúc 12 giờ.",
+      "question_kanji": "Cuộc họp kết thúc lúc 12 giờ.",
+      "answers": [
+        "かいぎは12じにおわります",
+        "かいぎは 12じに おわります",
+        "kaigi wa 12-ji ni owarimasu"
+      ]
+    },
+    {
+      "id": 54,
+      "direction": "vi-to-ja",
+      "question_kana": "Vất vả nhỉ!",
+      "question_kanji": "Vất vả nhỉ!",
+      "answers": [
+        "たいへんですね",
+        "たいへん ですね",
+        "taihen desu ne"
+      ]
+    },
+    {
+      "id": 55,
+      "direction": "vi-to-ja",
+      "question_kana": "Bảo tàng mỹ thuật nghỉ vào thứ Hai.",
+      "question_kanji": "Bảo tàng mỹ thuật nghỉ vào thứ Hai.",
+      "answers": [
+        "びじゅつかんはげつようびやすみです",
+        "びじゅつかんは げつようび やすみです",
+        "bijutsukan wa getsuyoubi yasumi desu"
+      ]
+    },
+    {
+      "id": 56,
+      "direction": "vi-to-ja",
+      "question_kana": "Tối qua tôi không học bài.",
+      "question_kanji": "Tối qua tôi không học bài.",
+      "answers": [
+        "きのうのばんべんきょうしませんでした",
+        "きのうの ばん べんきょうしませんでした",
+        "kinou no ban benkyoushimasen deshita"
+      ]
+    },
+    {
+      "id": 57,
+      "direction": "vi-to-ja",
+      "question_kana": "Nghỉ trưa từ 12 giờ đến 1 giờ.",
+      "question_kanji": "Nghỉ trưa từ 12 giờ đến 1 giờ.",
+      "answers": [
+        "ひるやすみは12じから1じまでです",
+        "ひるやすみは 12じから 1じまで です",
+        "hiruyasumi wa 12-ji kara 1-ji made desu"
+      ]
+    },
+    {
+      "id": 58,
+      "direction": "vi-to-ja",
+      "question_kana": "Kỳ thi bắt đầu lúc mấy giờ?",
+      "question_kanji": "Kỳ thi bắt đầu lúc mấy giờ?",
+      "answers": [
+        "しけんはなんじからですか",
+        "しけんは なんじから ですか",
+        "shiken wa nanji kara desu ka"
+      ]
+    },
+    {
+      "id": 59,
+      "direction": "vi-to-ja",
+      "question_kana": "Mỗi tối tôi ngủ lúc 11 giờ.",
+      "question_kanji": "Mỗi tối tôi ngủ lúc 11 giờ.",
+      "answers": [
+        "まいばん11じにねます",
+        "まいばん 11じに ねます",
+        "maiban 11-ji ni nemasu"
+      ]
+    },
+    {
+      "id": 60,
+      "direction": "vi-to-ja",
+      "question_kana": "Sáng mai tôi học bài từ 8 giờ.",
+      "question_kanji": "Sáng mai tôi học bài từ 8 giờ.",
+      "answers": [
+        "あしたのあさ8じからべんきょうします",
+        "あしたの あさ 8じから べんきょうします",
+        "ashita no asa 8-ji kara benkyoushimasu"
+      ]
+    },
+    {
+      "id": 61,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm nay bách hóa không nghỉ.",
+      "question_kanji": "Hôm nay bách hóa không nghỉ.",
+      "answers": [
+        "きょうデパートはやすみじゃありません",
+        "きょう デパートは やすみじゃありません",
+        "kyou depaato wa yasumi ja arimasen"
+      ]
+    },
+    {
+      "id": 62,
+      "direction": "vi-to-ja",
+      "question_kana": "Số điện thoại của bạn là bao nhiêu?",
+      "question_kanji": "Số điện thoại của bạn là bao nhiêu?",
+      "answers": [
+        "あなたのでんわばんごうはなんばんですか",
+        "でんわばんごうは なんばん ですか",
+        "denwa bangou wa nanban desu ka"
+      ]
+    },
+    {
+      "id": 63,
+      "direction": "vi-to-ja",
+      "question_kana": "Chủ Nhật tôi không làm việc.",
+      "question_kanji": "Chủ Nhật tôi không làm việc.",
+      "answers": [
+        "にちようびはたらきません",
+        "にちようび はたらきません",
+        "nichiyoubi hatarakimasen"
+      ]
+    },
+    {
+      "id": 64,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm kia tôi đã làm việc đến 9 giờ tối.",
+      "question_kanji": "Hôm kia tôi đã làm việc đến 9 giờ tối.",
+      "answers": [
+        "おとといばん9じまではたらきました",
+        "おととい ばん 9じまで はたらきました",
+        "ototoi ban 9-ji made hatarakimashita"
+      ]
+    },
+    {
+      "id": 65,
+      "direction": "vi-to-ja",
+      "question_kana": "Ngày kia là thứ Sáu.",
+      "question_kanji": "Ngày kia là thứ Sáu.",
+      "answers": [
+        "あさってはきんようびです",
+        "あさっては きんようび です",
+        "asatte wa kinyoubi desu"
+      ]
+    },
+    {
+      "id": 66,
+      "direction": "vi-to-ja",
+      "question_kana": "Bộ phim kết thúc lúc mấy giờ?",
+      "question_kanji": "Bộ phim kết thúc lúc mấy giờ?",
+      "answers": [
+        "えいがはなんじにおわりますか",
+        "えいがは なんじに おわりますか",
+        "eiga wa nanji ni owarimasu ka"
+      ]
+    },
+    {
+      "id": 67,
+      "direction": "vi-to-ja",
+      "question_kana": "Bây giờ là 10 giờ 15 phút sáng.",
+      "question_kanji": "Bây giờ là 10 giờ 15 phút sáng.",
+      "answers": [
+        "いまごぜん10じ15ふんです",
+        "いま ごぜん 10じ 15ふん です",
+        "ima gozen 10-ji 15-fun desu"
+      ]
+    },
+    {
+      "id": 68,
+      "direction": "vi-to-ja",
+      "question_kana": "Thứ Bảy tôi nghỉ ngơi.",
+      "question_kanji": "Thứ Bảy tôi nghỉ ngơi.",
+      "answers": [
+        "どようびやすみます",
+        "どようび やすみます",
+        "doyoubi yasumimasu"
+      ]
+    },
+    {
+      "id": 69,
+      "direction": "vi-to-ja",
+      "question_kana": "Cuộc họp diễn ra từ 2 giờ chiều.",
+      "question_kanji": "Cuộc họp diễn ra từ 2 giờ chiều.",
+      "answers": [
+        "かいぎはごご2じからです",
+        "かいぎは ごご 2じから です",
+        "kaigi wa gogo 2-ji kara desu"
+      ]
+    },
+    {
+      "id": 70,
+      "direction": "vi-to-ja",
+      "question_kana": "Sáng nay tôi không thức dậy lúc 5 giờ.",
+      "question_kanji": "Sáng nay tôi không thức dậy lúc 5 giờ.",
+      "answers": [
+        "けあさ5じにおきませんでした",
+        "けあさ 5じに おきませんでした",
+        "keasa 5-ji ni okimasen deshita"
+      ]
+    },
+    {
+      "id": 71,
+      "direction": "vi-to-ja",
+      "question_kana": "Mỗi ngày bạn học từ mấy giờ đến mấy giờ?",
+      "question_kanji": "Mỗi ngày bạn học từ mấy giờ đến mấy giờ?",
+      "answers": [
+        "まいにちなんじからなんじまでべんきょうしますか",
+        "まいにち なんじから なんじまで べんきょうしますか",
+        "mainichi nanji kara nanji made benkyoushimasu ka"
+      ]
+    },
+    {
+      "id": 72,
+      "direction": "vi-to-ja",
+      "question_kana": "Tối nay bạn có học không?",
+      "question_kanji": "Tối nay bạn có học không?",
+      "answers": [
+        "こんばんべんきょうしますか",
+        "こんばん べんきょうしますか",
+        "konban benkyoushimasu ka"
+      ]
+    },
+    {
+      "id": 73,
+      "direction": "vi-to-ja",
+      "question_kana": "Anh Santos đã thức dậy lúc 6 giờ rưỡi.",
+      "question_kanji": "Anh Santos đã thức dậy lúc 6 giờ rưỡi.",
+      "answers": [
+        "サントスさんは6じはんにおきました",
+        "サントスさんは 6じはん に おきました",
+        "santosu san wa 6-ji han ni okimashita"
+      ]
+    },
+    {
+      "id": 74,
+      "direction": "vi-to-ja",
+      "question_kana": "Thứ Tư và thứ Năm tôi đi làm.",
+      "question_kanji": "Thứ Tư và thứ Năm tôi đi làm.",
+      "answers": [
+        "すいようびともくようびはたらきます",
+        "すいようびと もくようび はたらきます",
+        "suiyoubi to mokuyoubi hatarakimasu"
+      ]
+    },
+    {
+      "id": 75,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm qua cuộc họp kéo dài đến 6 giờ.",
+      "question_kanji": "Hôm qua cuộc họp kéo dài đến 6 giờ.",
+      "answers": [
+        "きのうかいぎは6じまででした",
+        "きのう かいぎは 6じまででした",
+        "kinou kaigi wa 6-ji made deshita"
+      ]
+    },
+    {
+      "id": 76,
+      "direction": "vi-to-ja",
+      "question_kana": "Bưu điện không làm việc vào chủ nhật.",
+      "question_kanji": "Bưu điện không làm việc vào chủ nhật.",
+      "answers": [
+        "ゆうびんきょくはにちようびはたらきません",
+        "ゆうびんきょくは にちようび はたらきません",
+        "yuubinkyoku wa nichiyoubi hatarakimasen"
+      ]
+    },
+    {
+      "id": 77,
+      "direction": "vi-to-ja",
+      "question_kana": "Mỗi sáng anh Karina làm việc từ 8 giờ.",
+      "question_kanji": "Mỗi sáng anh Karina làm việc từ 8 giờ.",
+      "answers": [
+        "カリナさんはまいあさ8じからはたらきます",
+        "カリナさんは まいあさ 8じから はたらきます",
+        "karina san wa maiasa 8-ji kara hatarakimasu"
+      ]
+    },
+    {
+      "id": 78,
+      "direction": "vi-to-ja",
+      "question_kana": "Hôm nay nghỉ làm.",
+      "question_kanji": "Hôm nay nghỉ làm.",
+      "answers": [
+        "きょうはやすみです",
+        "きょうは やすみです",
+        "kyou wa yasumi desu"
+      ]
+    },
+    {
+      "id": 79,
+      "direction": "vi-to-ja",
+      "question_kana": "Giờ nghỉ trưa kết thúc lúc 1 giờ.",
+      "question_kanji": "Giờ nghỉ trưa kết thúc lúc 1 giờ.",
+      "answers": [
+        "ひるやすみは1じにおわります",
+        "ひるやすみは 1じに おわります",
+        "hiruyasumi wa 1-ji ni owarimasu"
+      ]
+    },
+    {
+      "id": 80,
+      "direction": "vi-to-ja",
+      "question_kana": "Ngày mai bách hóa mở cửa lúc 9 giờ 30 phút.",
+      "question_kanji": "Ngày mai bách hóa mở cửa lúc 9 giờ 30 phút.",
+      "answers": [
+        "あしたデパートは9じはんからです",
+        "あした デパートは 9じはんから です",
+        "ashita depaato wa 9-ji han kara desu"
+      ]
+    }
+  ],
+  "type2_fill_blank": [
+    {
+      "id": 1,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "context": "Hỏi ngày nghỉ trong tuần (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "context": "Hỏi thời gian nghỉ trưa (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "context": "Hỏi giờ chiếu phim (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "context": "Hỏi thời gian cuộc họp (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "context": "Hỏi mốc thời gian thức dậy (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "context": "Hỏi mốc thời gian đi ngủ (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "context": "Hỏi thời gian làm việc hàng ngày (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 12,
+      "context": "Hỏi ngày thi (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 16,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 17,
+      "context": "Hỏi ngày nghỉ trong tuần (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "context": "Hỏi thời gian nghỉ trưa (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 19,
+      "context": "Hỏi giờ chiếu phim (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "context": "Hỏi thời gian cuộc họp (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 21,
+      "context": "Hỏi mốc thời gian thức dậy (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "context": "Hỏi mốc thời gian đi ngủ (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 23,
+      "context": "Hỏi thời gian làm việc hàng ngày (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 24,
+      "context": "Hỏi ngày thi (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 25,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 26,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 27,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 28,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 29,
+      "context": "Hỏi ngày nghỉ trong tuần (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 30,
+      "context": "Hỏi thời gian nghỉ trưa (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 31,
+      "context": "Hỏi giờ chiếu phim (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 32,
+      "context": "Hỏi thời gian cuộc họp (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 33,
+      "context": "Hỏi mốc thời gian thức dậy (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 34,
+      "context": "Hỏi mốc thời gian đi ngủ (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 35,
+      "context": "Hỏi thời gian làm việc hàng ngày (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 36,
+      "context": "Hỏi ngày thi (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    },
+    {
+      "id": 37,
+      "context": "Hỏi giờ hiện tại (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "すみません、いま なんじ[blank1]ですか。",
+          "text_kanji": "すみません、今 何時[blank1]ですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ごぜん 9じはん[blank2]です。",
+          "text_kanji": "午前 9時半[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "です",
+          "options": [
+            "です",
+            "ます",
+            "でした",
+            "ですか"
+          ],
+          "options_translations": {
+            "です": "là (thì hiện tại lịch sự)",
+            "ます": "làm (động từ hiện tại)",
+            "でした": "đã là (quá khứ)",
+            "ですか": "phải không (câu hỏi)"
+          }
+        },
+        "blank2": {
+          "correct": "です",
+          "options": [
+            "です",
+            "から",
+            "まで",
+            "に"
+          ],
+          "options_translations": {
+            "です": "là (khẳng định hiện tại)",
+            "から": "từ (thời điểm bắt đầu)",
+            "まで": "đến (thời điểm kết thúc)",
+            "に": "vào lúc (mốc thời gian)"
+          }
+        }
+      }
+    },
+    {
+      "id": 38,
+      "context": "Hỏi giờ giấc làm việc ngân hàng (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ぎんこうは なんじ[blank1]なんじまでですか。",
+          "text_kanji": "銀行は 何時[blank1]何時までですか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "9じから 3じ[blank2]です。",
+          "text_kanji": "9時から 3時[blank2]です。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "から",
+          "options": [
+            "から",
+            "まで",
+            "に",
+            "と"
+          ],
+          "options_translations": {
+            "から": "từ (mốc bắt đầu)",
+            "まで": "đến (mốc kết thúc)",
+            "に": "vào lúc",
+            "と": "và"
+          }
+        },
+        "blank2": {
+          "correct": "まで",
+          "options": [
+            "まで",
+            "から",
+            "に",
+            "ね"
+          ],
+          "options_translations": {
+            "まで": "đến (mốc kết thúc)",
+            "から": "từ (mốc bắt đầu)",
+            "に": "vào lúc",
+            "ね": "nhé/nhỉ"
+          }
+        }
+      }
+    },
+    {
+      "id": 39,
+      "context": "Hỏi thời gian học tập (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "まいあさ なんじ[blank1]おきますか。",
+          "text_kanji": "毎朝 何時[blank1]起きますか。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "6じ[blank2]おきます。",
+          "text_kanji": "6時[blank2]起きます。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "に",
+          "options": [
+            "に",
+            "から",
+            "まで",
+            "は"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "から": "từ",
+            "まで": "đến",
+            "は": "chủ ngữ"
+          }
+        },
+        "blank2": {
+          "correct": "に",
+          "options": [
+            "に",
+            "と",
+            "で",
+            "へ"
+          ],
+          "options_translations": {
+            "に": "vào lúc (chỉ mốc thời gian)",
+            "と": "và",
+            "で": "tại/bằng",
+            "へ": "hướng tới"
+          }
+        }
+      }
+    },
+    {
+      "id": 40,
+      "context": "Hỏi giờ mở cửa bưu điện (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのうの ばん べんきょうし[blank1]。",
+          "text_kanji": "昨日の 晩 勉強し[blank1]。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、べんきょうし[blank2]。",
+          "text_kanji": "いいえ、勉強し[blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "ましたか",
+          "options": [
+            "ましたか",
+            "ますか",
+            "ません",
+            "でした"
+          ],
+          "options_translations": {
+            "ましたか": "đã làm ... phải không (nghi vấn quá khứ)",
+            "ますか": "làm ... không (hiện tại)",
+            "ません": "không làm",
+            "でした": "đã là"
+          }
+        },
+        "blank2": {
+          "correct": "ませんでした",
+          "options": [
+            "ませんでした",
+            "ません",
+            "ました",
+            "です"
+          ],
+          "options_translations": {
+            "ませんでした": "đã không làm (phủ định quá khứ)",
+            "ません": "không làm (hiện tại)",
+            "ました": "đã làm (khẳng định quá khứ)",
+            "です": "là"
+          }
+        }
+      }
+    }
+  ],
+  "type3_listening": [
+    {
+      "id": 1,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 8じから 4じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 8時から 4時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "8 giờ đến 4 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "8 giờ đến 4 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '8じから 4じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 7じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 9じから 5じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 7時に 起きます。 A: 会社は 何時から 何時までですか。 B: 9時から 5時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "7 giờ",
+            "8 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "7 giờ",
+          "explanation": "Trong hội thoại Miller nói '7じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "9 giờ đến 5 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "9 giờ đến 5 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '9じから 5じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 5じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 10じから 6じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 5時に 起きます。 A: 会社は 何時から 何時までですか。 B: 10時から 6時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "5 giờ",
+            "6 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "5 giờ",
+          "explanation": "Trong hội thoại Miller nói '5じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "10 giờ đến 6 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "10 giờ đến 6 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '10じから 6じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "audio_text_kana": "A: ミラーさん、まいあさ なんじに おきますか。 B: 6じに おきます。 A: かいしゃは なんじから なんじまでですか。 B: 7じから 3じまで です。 A: きのうの ばん べんきょうしましたか。 B: はい、10じから 12じまで べんきょうしました。",
+      "audio_text_kanji": "A: ミラーさん、毎朝 何時に 起きますか。 B: 6時に 起きます。 A: 会社は 何時から 何時までですか。 B: 7時から 3時まで です。 A: 昨日の 晩 勉強しましたか。 B: はい、10時から 12時まで 勉強しました。",
+      "questions": [
+        {
+          "q": "Anh Miller mỗi sáng thức dậy lúc mấy giờ?",
+          "opts": [
+            "6 giờ",
+            "7 giờ",
+            "7 giờ",
+            "8 giờ"
+          ],
+          "corr": "6 giờ",
+          "explanation": "Trong hội thoại Miller nói '6じに おきます'"
+        },
+        {
+          "q": "Giờ làm việc của công ty anh Miller từ mấy giờ đến mấy giờ?",
+          "opts": [
+            "7 giờ đến 3 giờ chiều",
+            "8 giờ đến 5 giờ chiều",
+            "9 giờ đến 6 giờ chiều",
+            "7 giờ đến 4 giờ chiều"
+          ],
+          "corr": "7 giờ đến 3 giờ chiều",
+          "explanation": "Trong hội thoại Miller nói '7じから 3じまで'"
+        },
+        {
+          "q": "Tối qua anh Miller học bài trong khoảng thời gian nào?",
+          "opts": [
+            "Từ 10 giờ đến 12 giờ",
+            "Từ 9 giờ đến 11 giờ",
+            "Không học",
+            "Từ 8 giờ đến 10 giờ"
+          ],
+          "corr": "Từ 10 giờ đến 12 giờ",
+          "explanation": "Miller nói 'はい、10じから 12じまで べんきょうしました'"
+        }
+      ]
+    }
+  ],
+  "type4_dictation": [
+    {
+      "id": 1,
+      "question_audio": "いま なんじ ですか",
+      "correct_answers": [
+        "いまなんじですか",
+        "いま なんじ ですか",
+        "ima nanji desu ka"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là mấy giờ?"
+      ],
+      "vietnamese_meaning": "Bây giờ là mấy giờ?"
+    },
+    {
+      "id": 2,
+      "question_audio": "いま 9じはん です",
+      "correct_answers": [
+        "いま9じはんです",
+        "いま 9じはん です",
+        "ima 9-ji han desu"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là 9 giờ rưỡi."
+      ],
+      "vietnamese_meaning": "Bây giờ là 9 giờ rưỡi."
+    },
+    {
+      "id": 3,
+      "question_audio": "わたしは まいにち 6じに おきます",
+      "correct_answers": [
+        "わたしはまいにち6じにおきます",
+        "わたしは まいにち 6じに おきます",
+        "watashi wa mainichi 6-ji ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi ngày tôi dậy lúc 6 giờ."
+      ],
+      "vietnamese_meaning": "Mỗi ngày tôi dậy lúc 6 giờ."
+    },
+    {
+      "id": 4,
+      "question_audio": "きのうの ばん 11じに ねました",
+      "correct_answers": [
+        "きのうのばん11じにねました",
+        "きのうの ばん 11じに ねました",
+        "kinou no ban 11-ji ni nemashita"
+      ],
+      "vietnamese_answers": [
+        "Tối qua tôi ngủ lúc 11 giờ."
+      ],
+      "vietnamese_meaning": "Tối qua tôi ngủ lúc 11 giờ."
+    },
+    {
+      "id": 5,
+      "question_audio": "あした べんきょうします",
+      "correct_answers": [
+        "あしたべんきょうします",
+        "あした べんきょうします",
+        "ashita benkyoushimasu"
+      ],
+      "vietnamese_answers": [
+        "Ngày mai tôi sẽ học bài."
+      ],
+      "vietnamese_meaning": "Ngày mai tôi sẽ học bài."
+    },
+    {
+      "id": 6,
+      "question_audio": "ぎんこうは 9じから 3じまで です",
+      "correct_answers": [
+        "ぎんこうは9じから3じまでです",
+        "ぎんこうは 9じから 3じまで です",
+        "ginkou wa 9-ji kara 3-ji made desu"
+      ],
+      "vietnamese_answers": [
+        "Ngân hàng mở cửa từ 9h đến 3h."
+      ],
+      "vietnamese_meaning": "Ngân hàng mở cửa từ 9h đến 3h."
+    },
+    {
+      "id": 7,
+      "question_audio": "ゆうびんきょくの やすみは どようびと にちようび です",
+      "correct_answers": [
+        "ゆうびんきょくのやすみはどようびとにちようびです",
+        "ゆうびんきょくの やすみは どようびと にちようび です",
+        "yuubinkyoku no yasumi wa doyoubi to nichiyoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Bưu điện nghỉ thứ 7 và chủ nhật."
+      ],
+      "vietnamese_meaning": "Bưu điện nghỉ thứ 7 và chủ nhật."
+    },
+    {
+      "id": 8,
+      "question_audio": "けあさ 7じに おきました",
+      "correct_answers": [
+        "けあさ7じにおきました",
+        "けあさ 7じに おきました",
+        "keasa 7-ji ni okimashita"
+      ],
+      "vietnamese_answers": [
+        "Sáng nay tôi đã dậy lúc 7 giờ."
+      ],
+      "vietnamese_meaning": "Sáng nay tôi đã dậy lúc 7 giờ."
+    },
+    {
+      "id": 9,
+      "question_audio": "こんばん べんきょうしません",
+      "correct_answers": [
+        "こんばんべんきょうしません",
+        "こんばん べんきょうしません",
+        "konban benkyoushimasen"
+      ],
+      "vietnamese_answers": [
+        "Tối nay tôi không học."
+      ],
+      "vietnamese_meaning": "Tối nay tôi không học."
+    },
+    {
+      "id": 10,
+      "question_audio": "かいしゃは なんじに おわりますか",
+      "correct_answers": [
+        "かいしゃはなんじにおわりますか",
+        "かいしゃは なんじに おわりますか",
+        "kaigi wa nanji ni owarimasu ka"
+      ],
+      "vietnamese_answers": [
+        "Công ty mấy giờ thì kết thúc?"
+      ],
+      "vietnamese_meaning": "Công ty mấy giờ thì kết thúc?"
+    },
+    {
+      "id": 11,
+      "question_audio": "としょかんは 5じまで です",
+      "correct_answers": [
+        "としょかんは5じまでです",
+        "としょかんは 5じまで です",
+        "toshokan wa 5-ji made desu"
+      ],
+      "vietnamese_answers": [
+        "Thư viện mở cửa đến 5 giờ."
+      ],
+      "vietnamese_meaning": "Thư viện mở cửa đến 5 giờ."
+    },
+    {
+      "id": 12,
+      "question_audio": "びじゅつかんは げつようび やすみです",
+      "correct_answers": [
+        "びじゅつかんはげつようびやすみです",
+        "びじゅつかんは げつようび やすみです",
+        "bijutsukan wa getsuyoubi yasumi desu"
+      ],
+      "vietnamese_answers": [
+        "Bảo tàng mỹ thuật nghỉ thứ 2."
+      ],
+      "vietnamese_meaning": "Bảo tàng mỹ thuật nghỉ thứ 2."
+    },
+    {
+      "id": 13,
+      "question_audio": "デパートは 10じから です",
+      "correct_answers": [
+        "デパートは10じからです",
+        "デパートは 10じから です",
+        "depaato wa 10-ji kara desu"
+      ],
+      "vietnamese_answers": [
+        "Bách hóa mở cửa từ 10 giờ."
+      ],
+      "vietnamese_meaning": "Bách hóa mở cửa từ 10 giờ."
+    },
+    {
+      "id": 14,
+      "question_audio": "きのう はたらきましたか",
+      "correct_answers": [
+        "きのうはたらきましたか",
+        "きのう はたらきましたか",
+        "kinou hatarakimashita ka"
+      ],
+      "vietnamese_answers": [
+        "Hôm qua bạn có làm việc không?"
+      ],
+      "vietnamese_meaning": "Hôm qua bạn có làm việc không?"
+    },
+    {
+      "id": 15,
+      "question_audio": "いいえ はたらきませんでした",
+      "correct_answers": [
+        "いいえはたらきませんでした",
+        "いいえ はたらきませんでした",
+        "iie hatarakimasen deshita"
+      ],
+      "vietnamese_answers": [
+        "Không, tôi không làm việc."
+      ],
+      "vietnamese_meaning": "Không, tôi không làm việc."
+    },
+    {
+      "id": 16,
+      "question_audio": "まいあさ 6じに おきます",
+      "correct_answers": [
+        "まいあさ6じにおきます",
+        "まいあさ 6じに おきます",
+        "maiasa 6-ji ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi sáng tôi dậy lúc 6 giờ."
+      ],
+      "vietnamese_meaning": "Mỗi sáng tôi dậy lúc 6 giờ."
+    },
+    {
+      "id": 17,
+      "question_audio": "まいばん 10じから 12じまで べんきょうします",
+      "correct_answers": [
+        "まいばん10じから12じまでべんきょうします",
+        "まいばん 10じから 12じまで べんきょうします",
+        "maiban 10-ji kara 12-ji made benkyoushimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi tối tôi học từ 10h đến 12h."
+      ],
+      "vietnamese_meaning": "Mỗi tối tôi học từ 10h đến 12h."
+    },
+    {
+      "id": 18,
+      "question_audio": "おとtoi べんきょうしました",
+      "correct_answers": [
+        "おとtoiべんきょうしました",
+        "おとtoi べんきょうしました",
+        "ototoi benkyoushima shita"
+      ],
+      "vietnamese_answers": [
+        "Hôm kia tôi đã học."
+      ],
+      "vietnamese_meaning": "Hôm kia tôi đã học."
+    },
+    {
+      "id": 19,
+      "question_audio": "あさって はたらきます",
+      "correct_answers": [
+        "あさってはたらきます",
+        "あさって はたらきます",
+        "asatte hatarakimasu"
+      ],
+      "vietnamese_answers": [
+        "Ngày kia tôi làm việc."
+      ],
+      "vietnamese_meaning": "Ngày kia tôi làm việc."
+    },
+    {
+      "id": 20,
+      "question_audio": "ひるやすみは 12じから 1じまで です",
+      "correct_answers": [
+        "ひるやすみは12じから1じまでです",
+        "ひるやすみは 12じから 1じまで です",
+        "hiruyasumi wa 12-ji kara 1-ji made desu"
+      ],
+      "vietnamese_answers": [
+        "Nghỉ trưa từ 12h đến 1h."
+      ],
+      "vietnamese_meaning": "Nghỉ trưa từ 12h đến 1h."
+    },
+    {
+      "id": 21,
+      "question_audio": "しけんは なんようびですか",
+      "correct_answers": [
+        "しけんはなんようびですか",
+        "しけんは なんようびですか",
+        "shiken wa nanyoubi desu ka"
+      ],
+      "vietnamese_answers": [
+        "Kỳ thi vào thứ mấy?"
+      ],
+      "vietnamese_meaning": "Kỳ thi vào thứ mấy?"
+    },
+    {
+      "id": 22,
+      "question_audio": "かいぎは すいようびです",
+      "correct_answers": [
+        "かいぎはすいようびです",
+        "かいぎは すいようびです",
+        "kaigi wa suiyoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Cuộc họp vào thứ 4."
+      ],
+      "vietnamese_meaning": "Cuộc họp vào thứ 4."
+    },
+    {
+      "id": 23,
+      "question_audio": "えいがは 8じはんから です",
+      "correct_answers": [
+        "えいがは8じはんからです",
+        "えいがは 8じはんから です",
+        "eiga wa 8-ji han kara desu"
+      ],
+      "vietnamese_answers": [
+        "Phim từ 8h30."
+      ],
+      "vietnamese_meaning": "Phim từ 8h30."
+    },
+    {
+      "id": 24,
+      "question_audio": "たいへん ですね",
+      "correct_answers": [
+        "たいへんですね",
+        "たいへん ですね",
+        "taihen desu ne"
+      ],
+      "vietnamese_answers": [
+        "Vất vả nhỉ!"
+      ],
+      "vietnamese_meaning": "Vất vả nhỉ!"
+    },
+    {
+      "id": 25,
+      "question_audio": "ばんごうは なんばん ですか",
+      "correct_answers": [
+        "ばんごうはなんばんですか",
+        "ばんごうは なんばん ですか",
+        "bangou wa nanban desu ka"
+      ],
+      "vietnamese_answers": [
+        "Số điện thoại là số mấy?"
+      ],
+      "vietnamese_meaning": "Số điện thoại là số mấy?"
+    },
+    {
+      "id": 26,
+      "question_audio": "きょうは かようびです",
+      "correct_answers": [
+        "きょうはかようびです",
+        "きょうは かようびです",
+        "kyou wa kayoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Hôm nay là thứ 3."
+      ],
+      "vietnamese_meaning": "Hôm nay là thứ 3."
+    },
+    {
+      "id": 27,
+      "question_audio": "あしたは もくようびです",
+      "correct_answers": [
+        "あしたはもくようびです",
+        "あしたは もくようびです",
+        "ashita wa mokuyoubi desu"
+      ],
+      "vietnamese_answers": [
+        "Ngày mai là thứ 5."
+      ],
+      "vietnamese_meaning": "Ngày mai là thứ 5."
+    },
+    {
+      "id": 28,
+      "question_audio": "きんようびの ばん べんきょうします",
+      "correct_answers": [
+        "きんようびのばんべんきょうします",
+        "きんようびの ばん べんきょうします",
+        "kinyoubi no ban benkyoushimasu"
+      ],
+      "vietnamese_answers": [
+        "Tối thứ 6 tôi học."
+      ],
+      "vietnamese_meaning": "Tối thứ 6 tôi học."
+    },
+    {
+      "id": 29,
+      "question_audio": "いま ごぜん 9じです",
+      "correct_answers": [
+        "いまごぜん9じです",
+        "いま ごぜん 9じです",
+        "ima gozen 9-ji desu"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là 9h sáng."
+      ],
+      "vietnamese_meaning": "Bây giờ là 9h sáng."
+    },
+    {
+      "id": 30,
+      "question_audio": "いま ごご 4じ15ふん です",
+      "correct_answers": [
+        "いまごご4じ15ふんです",
+        "いま ごご 4じ15ふん です",
+        "ima gogo 4-ji 15-fun desu"
+      ],
+      "vietnamese_answers": [
+        "Bây giờ là 4h15 chiều."
+      ],
+      "vietnamese_meaning": "Bây giờ là 4h15 chiều."
+    },
+    {
+      "id": 31,
+      "question_audio": "ミラーさんは まいにち はたらきます",
+      "correct_answers": [
+        "ミラーさんはまいにちはたらきます",
+        "ミラーさんは まいにち はたらきます",
+        "miraa san wa mainichi hatarakimasu"
+      ],
+      "vietnamese_answers": [
+        "Anh Miller làm việc mỗi ngày."
+      ],
+      "vietnamese_meaning": "Anh Miller làm việc mỗi ngày."
+    },
+    {
+      "id": 32,
+      "question_audio": "サントスさんは きのう やすみました",
+      "correct_answers": [
+        "サントスさんはきのうやすみました",
+        "サントスさんは きのう やすみました",
+        "santosu san wa kinou yasumimashita"
+      ],
+      "vietnamese_answers": [
+        "Anh Santos hôm qua nghỉ."
+      ],
+      "vietnamese_meaning": "Anh Santos hôm qua nghỉ."
+    },
+    {
+      "id": 33,
+      "question_audio": "わたしは 9じから 5じまで はたらきます",
+      "correct_answers": [
+        "わたしは9じから5じまではたらきます",
+        "わたしは 9じから 5じまで はたらきます",
+        "watashi wa 9-ji kara 5-ji made hatarakimasu"
+      ],
+      "vietnamese_answers": [
+        "Tôi làm việc từ 9h đến 5h."
+      ],
+      "vietnamese_meaning": "Tôi làm việc từ 9h đến 5h."
+    },
+    {
+      "id": 34,
+      "question_audio": "としょかんの やすみは なんようびですか",
+      "correct_answers": [
+        "としょかんのやすみはなんようびですか",
+        "としょかんの やすみは なんようびですか",
+        "toshokan no yasumi wa nanyoubi desu ka"
+      ],
+      "vietnamese_answers": [
+        "Ngày nghỉ thư viện là thứ mấy?"
+      ],
+      "vietnamese_meaning": "Ngày nghỉ thư viện là thứ mấy?"
+    },
+    {
+      "id": 35,
+      "question_audio": "にちようび はたらきません",
+      "correct_answers": [
+        "にちようびはたらきません",
+        "にちようび はたらきません",
+        "nichiyoubi hatarakimasen"
+      ],
+      "vietnamese_answers": [
+        "Chủ nhật tôi nghỉ."
+      ],
+      "vietnamese_meaning": "Chủ nhật tôi nghỉ."
+    },
+    {
+      "id": 36,
+      "question_audio": "まいあさ 7じはんに おきます",
+      "correct_answers": [
+        "まいあさ7じはんにおきます",
+        "まいあさ 7じはんに おきます",
+        "maiasa 7-ji han ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Mỗi sáng tôi dậy 7h30."
+      ],
+      "vietnamese_meaning": "Mỗi sáng tôi dậy 7h30."
+    },
+    {
+      "id": 37,
+      "question_audio": "きのう 8じまで べんきょうしました",
+      "correct_answers": [
+        "きのう8じまでべんきょうしました",
+        "きのう 8じまで べんきょうしました",
+        "kinou 8-ji made benkyoushima shita"
+      ],
+      "vietnamese_answers": [
+        "Hôm qua tôi học tới 8h."
+      ],
+      "vietnamese_meaning": "Hôm qua tôi học tới 8h."
+    },
+    {
+      "id": 38,
+      "question_audio": "かいぎは 10じから です",
+      "correct_answers": [
+        "かいぎは10じからです",
+        "かいぎは 10じから です",
+        "kaigi wa 10-ji kara desu"
+      ],
+      "vietnamese_answers": [
+        "Cuộc họp từ 10 giờ."
+      ],
+      "vietnamese_meaning": "Cuộc họp từ 10 giờ."
+    },
+    {
+      "id": 39,
+      "question_audio": "しけんは ぎんこうで ありますか",
+      "correct_answers": [
+        "しけんはぎんこうでありますか",
+        "しけんは ぎんこうで ありますか",
+        "shiken wa ginkou de arimasu ka"
+      ],
+      "vietnamese_answers": [
+        "Kỳ thi ở ngân hàng à?"
+      ],
+      "vietnamese_meaning": "Kỳ thi ở ngân hàng à?"
+    },
+    {
+      "id": 40,
+      "question_audio": "あしたの あさ 6じに おきます",
+      "correct_answers": [
+        "あしたのあさ6じにおきます",
+        "あしたの あさ 6じに おきます",
+        "ashita no asa 6-ji ni okimasu"
+      ],
+      "vietnamese_answers": [
+        "Sáng mai tôi dậy lúc 6 giờ."
+      ],
+      "vietnamese_meaning": "Sáng mai tôi dậy lúc 6 giờ."
+    }
+  ]
+};
+if (!lessonReviews.find(r => r.lesson_id === 4)) {
+  lessonReviews.push(lesson4ReviewData);
+}
+
 const lesson_reviews = {
   "1": lessonReviews.find(r => r.lesson_id === 1),
   "2": lessonReviews.find(r => r.lesson_id === 2),
-  "3": lessonReviews.find(r => r.lesson_id === 3)
+  "3": lessonReviews.find(r => r.lesson_id === 3),
+  "4": lessonReviews.find(r => r.lesson_id === 4),
+  "4": lessonReviews.find(r => r.lesson_id === 4),
+  "4": lessonReviews.find(r => r.lesson_id === 4)
 };
 
 module.exports = {

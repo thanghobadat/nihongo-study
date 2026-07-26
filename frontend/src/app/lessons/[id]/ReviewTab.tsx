@@ -165,14 +165,14 @@ export default function ReviewTab({
     setReviewIndex(0);
     if (reviewData) {
       let sourceList: any[] = [];
-      if (type === 'translation' && Array.isArray(reviewData.translations)) {
-        sourceList = reviewData.translations;
-      } else if (type === 'dialogue' && Array.isArray(reviewData.dialogues)) {
-        sourceList = reviewData.dialogues;
-      } else if (type === 'listening' && Array.isArray(reviewData.listenings)) {
-        sourceList = reviewData.listenings;
-      } else if (type === 'dictation' && Array.isArray(reviewData.dictations)) {
-        sourceList = reviewData.dictations;
+      if (type === 'translation') {
+        sourceList = Array.isArray(reviewData.translations) ? reviewData.translations : (Array.isArray(reviewData.type1_translation) ? reviewData.type1_translation : []);
+      } else if (type === 'dialogue') {
+        sourceList = Array.isArray(reviewData.dialogues) ? reviewData.dialogues : (Array.isArray(reviewData.type2_fill_blank) ? reviewData.type2_fill_blank : []);
+      } else if (type === 'listening') {
+        sourceList = Array.isArray(reviewData.listenings) ? reviewData.listenings : (Array.isArray(reviewData.type3_listening) ? reviewData.type3_listening : []);
+      } else if (type === 'dictation') {
+        sourceList = Array.isArray(reviewData.dictations) ? reviewData.dictations : (Array.isArray(reviewData.type4_dictation) ? reviewData.type4_dictation : []);
       }
 
       const pool = sourceList.map((item: any) => ({
@@ -507,7 +507,7 @@ export default function ReviewTab({
                       </div>
 
                       {hasProgress ? (
-                        <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                        <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs gap-2">
                           <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-extrabold flex items-center gap-1">
                             📍 Đang ở câu {currentIdx}/{totalQ}
                           </span>
@@ -517,18 +517,25 @@ export default function ReviewTab({
                             </span>
                             <button
                               onClick={(e) => resetSingleType(item.id, e)}
-                              title="Xóa vết riêng dạng này và xáo lại từ đầu"
-                              className="p-1 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 rounded transition-all"
+                              title="Xóa tiến trình dạng này và tráo câu hỏi làm lại từ đầu"
+                              className="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/30 font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer active:scale-95 text-[11px]"
                             >
-                              🔄
+                              🔄 Reset dạng này
                             </button>
                           </div>
                         </div>
                       ) : (
-                        <div className="mt-4 pt-3 border-t border-slate-800/40 text-right">
+                        <div className="mt-4 pt-3 border-t border-slate-800/40 flex items-center justify-between text-xs">
                           <span className="text-slate-500 text-xs group-hover:text-slate-300 transition-all font-semibold">
                             Bắt đầu ➔
                           </span>
+                          <button
+                            onClick={(e) => resetSingleType(item.id, e)}
+                            title="Xáo trộn câu hỏi làm mới dạng này"
+                            className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-medium rounded-lg transition-all flex items-center gap-1 cursor-pointer active:scale-95 text-[11px]"
+                          >
+                            🔄 Reset
+                          </button>
                         </div>
                       )}
                     </div>
@@ -555,7 +562,7 @@ export default function ReviewTab({
           <div className="space-y-8 animate-scale-in">
             {/* Active filter alert info & Progress bar */}
             <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-5 rounded-2xl shadow-xl space-y-4">
-              <div className="flex justify-between items-center text-xs text-indigo-300">
+              <div className="flex justify-between items-center text-xs text-indigo-300 flex-wrap gap-2">
                 <span>
                   🎯 Dạng bài: <strong>{
                     reviewSelectedType === 'translation' ? 'Dịch câu phản xạ' :
@@ -563,9 +570,18 @@ export default function ReviewTab({
                     reviewSelectedType === 'listening' ? 'Nghe hiểu hội thoại' : 'Nghe viết chính tả'
                   }</strong>
                 </span>
-                <span className="font-bold text-slate-400">
-                  Câu {reviewIndex + 1} / {reviewQuestions.length}
-                </span>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => resetSingleType(reviewSelectedType)}
+                    title="Xóa tiến trình và xáo trộn làm mới dạng bài này từ câu 1"
+                    className="px-3 py-1 bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/30 text-xs font-bold rounded-lg transition-all active:scale-95 cursor-pointer flex items-center gap-1"
+                  >
+                    🔄 Reset dạng này
+                  </button>
+                  <span className="font-bold text-slate-400">
+                    Câu {reviewIndex + 1} / {reviewQuestions.length}
+                  </span>
+                </div>
               </div>
               <div className="w-full bg-slate-850 rounded-full h-2 overflow-hidden">
                 <div 
@@ -613,8 +629,8 @@ export default function ReviewTab({
                 const isJaToVi = current.direction === 'ja-to-vi';
                 const key = q.key;
                 const questionDisplay = isJaToVi 
-                  ? (reviewShowKanji ? (current.question_kanji || current.question) : (current.question_kana || current.question))
-                  : current.question;
+                  ? (reviewShowKanji ? (current.question_kanji || current.question_kana || current.question) : (current.question_kana || current.question_kanji || current.question))
+                  : (current.question_kanji || current.question_kana || current.question);
 
                 return (
                   <div className="space-y-4">
@@ -1395,20 +1411,22 @@ export default function ReviewTab({
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
             <button
-              onClick={() => {
-                masterResetAll();
-              }}
-              className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-sm flex items-center justify-center gap-1.5"
+              onClick={() => resetSingleType(reviewSelectedType)}
+              className="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-xs flex items-center justify-center gap-1.5 shadow-md"
             >
-              🔄 Reset & Xáo trộn đề mới
+              🔄 Reset dạng vừa làm
             </button>
             <button
-              onClick={() => {
-                router.push(`/lessons/${selectedLessonId}?tab=vocab`);
-              }}
-              className="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-sm"
+              onClick={() => masterResetAll()}
+              className="px-5 py-2.5 bg-rose-600/30 hover:bg-rose-600/50 text-rose-200 border border-rose-500/40 font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-xs flex items-center justify-center gap-1.5"
             >
-              🏠 Quay lại từ vựng
+              🔄 Master Reset (Xóa 4 dạng)
+            </button>
+            <button
+              onClick={() => setReviewStep('setup')}
+              className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-lg transition-all active:scale-95 cursor-pointer text-xs flex items-center justify-center gap-1.5"
+            >
+              📋 Chọn dạng bài khác
             </button>
           </div>
         </div>

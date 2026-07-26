@@ -46,6 +46,38 @@ export default function RoadmapPage() {
     }, 2500);
   };
 
+  const renderFormattedGrammarText = (text?: string) => {
+    if (!text) return null;
+    const lines = text.split('\n');
+    return (
+      <div className="space-y-1">
+        {lines.map((line, idx) => {
+          let content: React.ReactNode = line;
+          if (line.includes('Khẳng định quá khứ:')) {
+            const parts = line.split('Khẳng định quá khứ:');
+            content = <><span className="text-emerald-500 font-black">Khẳng định quá khứ:</span>{parts[1]}</>;
+          } else if (line.includes('Phủ định quá khứ:')) {
+            const parts = line.split('Phủ định quá khứ:');
+            content = <><span className="text-rose-500 font-black">Phủ định quá khứ:</span>{parts[1]}</>;
+          } else if (line.includes('Nghi vấn quá khứ:')) {
+            const parts = line.split('Nghi vấn quá khứ:');
+            content = <><span className="text-amber-500 font-black">Nghi vấn quá khứ:</span>{parts[1]}</>;
+          } else if (line.includes('Khẳng định:')) {
+            const parts = line.split('Khẳng định:');
+            content = <><span className="text-emerald-500 font-black">Khẳng định:</span>{parts[1]}</>;
+          } else if (line.includes('Phủ định:')) {
+            const parts = line.split('Phủ định:');
+            content = <><span className="text-rose-500 font-black">Phủ định:</span>{parts[1]}</>;
+          } else if (line.includes('Nghi vấn:')) {
+            const parts = line.split('Nghi vấn:');
+            content = <><span className="text-amber-500 font-black">Nghi vấn:</span>{parts[1]}</>;
+          }
+          return <div key={idx} className="leading-snug">{content}</div>;
+        })}
+      </div>
+    );
+  };
+
   const playAudio = (text: string) => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
@@ -350,7 +382,7 @@ export default function RoadmapPage() {
                             {idx + 1}
                           </span>
                           <h3 className="text-md font-black text-slate-900 dark:text-white leading-tight flex-1">
-                            {item.title}
+                            {renderFormattedGrammarText(item.title)}
                           </h3>
                           
                           <select
@@ -372,17 +404,17 @@ export default function RoadmapPage() {
                         
                         <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1">
                           <span className="text-slate-400 dark:text-slate-500 uppercase">Ý nghĩa:</span>
-                          <span className="px-2 py-0.5 bg-blue-950/40 border border-blue-100 text-blue-600 dark:text-blue-400 rounded-lg">{item.meaning}</span>
+                          <span className="px-2 py-0.5 bg-blue-950/40 border border-blue-100 text-blue-600 dark:text-blue-400 rounded-lg">{renderFormattedGrammarText(item.meaning)}</span>
                         </div>
 
                         <div className="bg-slate-50 dark:bg-slate-950/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-600 dark:text-slate-300">
                           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block mb-1">Cấu trúc:</span>
-                          {item.structure}
+                          {renderFormattedGrammarText(item.structure)}
                         </div>
 
                         <div className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
                           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block mb-0.5 font-sans">Giải nghĩa:</span>
-                          <p className="text-slate-700 dark:text-slate-200 font-medium">{item.vietnamese_explanation}</p>
+                          <div className="text-slate-700 dark:text-slate-200 font-medium">{renderFormattedGrammarText(item.vietnamese_explanation)}</div>
                         </div>
 
                         {item.japanese_example && (
@@ -398,12 +430,12 @@ export default function RoadmapPage() {
                                   <span>Nghe ví dụ</span>
                               </button>
                             </div>
-                            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-bold font-serif leading-relaxed tracking-wide pl-2 border-l-2 border-emerald-500/50">
-                              {item.japanese_example}
-                            </p>
-                            <p className="text-[11px] text-slate-400 dark:text-slate-500 italic pl-2 leading-relaxed">
-                              {item.example_meaning}
-                            </p>
+                            <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-bold font-serif leading-relaxed tracking-wide pl-2 border-l-2 border-emerald-500/50">
+                              {renderFormattedGrammarText(item.japanese_example)}
+                            </div>
+                            <div className="text-[11px] text-slate-400 dark:text-slate-500 italic pl-2 leading-relaxed">
+                              {renderFormattedGrammarText(item.example_meaning)}
+                            </div>
                           </div>
                         )}
 
