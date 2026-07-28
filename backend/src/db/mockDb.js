@@ -67763,11 +67763,11 @@ const lesson4ReviewData = {
     {
       "id": 6,
       "direction": "ja-to-vi",
-      "question_kana": "きょうの ごご 4じ35ふんに かいぎが おわります。",
-      "question_kanji": "今日の 午後 4時35分に 会議が 終わります。",
+      "question_kana": "きょうの ごご 4じ35ふんに ぎんこうの しごとが おわります。",
+      "question_kanji": "今日の 午後 4時35分に 銀行の 仕事が 終わります。",
       "answers": [
-        "4 giờ 35 phút chiều nay cuộc họp kết thúc.",
-        "Chiều nay 4h35 họp xong."
+        "4 giờ 35 phút chiều nay công việc ở ngân hàng kết thúc.",
+        "Chiều nay 4h35 ngân hàng xong việc."
       ]
     },
     {
@@ -67883,7 +67883,7 @@ const lesson4ReviewData = {
     {
       "id": 18,
       "direction": "ja-to-vi",
-      "question_kana": "おとといの ばん べんきょうしませんでした。",
+      "question_kana": "おとtoiの ばん べんきょうしませんでした。",
       "question_kanji": "一昨日の 晩 勉強しませんでした。",
       "answers": [
         "Tối hôm kia tôi không học bài.",
@@ -67913,21 +67913,21 @@ const lesson4ReviewData = {
     {
       "id": 21,
       "direction": "ja-to-vi",
-      "question_kana": "あしたは もくようびです。しけんが あります。",
-      "question_kanji": "明日は 木曜日です。試験が あります。",
+      "question_kana": "あしたは もくようびです。としょかんの やすみです。",
+      "question_kanji": "明日は 木曜日です。図書館の 休みです。",
       "answers": [
-        "Ngày mai là thứ Năm. Có bài thi.",
-        "Ngày mai thứ 5 có kỳ thi."
+        "Ngày mai là thứ Năm. Là ngày nghỉ của thư viện.",
+        "Ngày mai thứ 5 thư viện nghỉ."
       ]
     },
     {
       "id": 22,
       "direction": "ja-to-vi",
-      "question_kana": "きんようびの ごご じゅぎょうが おわります。",
-      "question_kanji": "金曜日の 午後 授業が 終わります。",
+      "question_kana": "きんようびの ごご がっこうの しごとが おわります。",
+      "question_kanji": "金曜日の 午後 学校の 仕事が 終わります。",
       "answers": [
-        "Chiều thứ Sáu tiết học kết thúc.",
-        "Chiều thứ 6 kết thúc buổi học."
+        "Chiều thứ Sáu công việc ở trường học kết thúc.",
+        "Chiều thứ 6 công việc trường học xong."
       ]
     },
     {
@@ -68075,7 +68075,7 @@ const lesson4ReviewData = {
       "id": 37,
       "direction": "ja-to-vi",
       "question_kana": "ひる 12じから 1じまで やすみます。",
-      "question_kanji": "昼 12時から 1時まで やすみます。",
+      "question_kanji": "昼 12時から 1時まで 休みます。",
       "answers": [
         "Buổi trưa nghỉ ngơi từ 12 giờ đến 1 giờ.",
         "Trưa nghỉ từ 12h đến 1h."
@@ -68094,11 +68094,11 @@ const lesson4ReviewData = {
     {
       "id": 39,
       "direction": "ja-to-vi",
-      "question_kana": "あさっての あさ しけんが あります。",
-      "question_kanji": "明後日の 朝 試験が あります。",
+      "question_kana": "あさっての あさ ゆうびんきょくへ いきます。",
+      "question_kanji": "明後日の 朝 郵便局へ 行きます。",
       "answers": [
-        "Sáng ngày kia có kỳ thi.",
-        "Sáng ngày kia có bài kiểm tra."
+        "Sáng ngày kia tôi đi bưu điện.",
+        "Sáng ngày kia tôi đến bưu điện."
       ]
     },
     {
@@ -68164,11 +68164,11 @@ const lesson4ReviewData = {
     {
       "id": 46,
       "direction": "vi-to-ja",
-      "question": "Chiều nay cuộc họp kết thúc lúc 4 giờ 35 phút.",
+      "question": "Chiều nay công việc ngân hàng kết thúc lúc 4 giờ 35 phút.",
       "answers": [
-        "kyou no gogo kaigi wa 4-ji 35-fun ni owarimasu",
-        "きょうの ごご かいぎは 4じ35ふんに おわります",
-        "今日の 午後 会議は 4時35分に 終わります"
+        "kyou no gogo ginkou no shigoto wa 4-ji 35-fun ni owarimasu",
+        "きょうの ごご ぎんこうの しごとが 4じ35ふんに おわります",
+        "今日の 午後 銀行の 仕事が 4時35分に 終わります"
       ]
     },
     {
@@ -68207,7 +68207,7 @@ const lesson4ReviewData = {
       "question": "Giờ nghỉ trưa của bách hóa từ 12 giờ đến 1 giờ.",
       "answers": [
         "depaato no hiruyasumi wa 12-ji kara 1-ji made desu",
-        "デパートの ひるやすみは 12じから 1じまでです",
+        "デパートの ひるやすみは 12じから 1じmade desu",
         "デパートの 昼休みは 12時から 1時までです"
       ]
     },
@@ -68314,21 +68314,21 @@ const lesson4ReviewData = {
     {
       "id": 61,
       "direction": "vi-to-ja",
-      "question": "Ngày mai là thứ Năm. Có bài thi.",
+      "question": "Ngày mai là thứ Năm. Thư viện nghỉ.",
       "answers": [
-        "ashita wa mokuyoubi desu. shiken ga arimasu",
-        "あしたは もくようびです。しけんが あります",
-        "明日は 木曜日です。試験が あります"
+        "ashita wa mokuyoubi desu. toshokan no yasumi desu",
+        "あしたは もくようびです。としょかんの やすみです",
+        "明日は 木曜日です。図書館の 休みです"
       ]
     },
     {
       "id": 62,
       "direction": "vi-to-ja",
-      "question": "Chiều thứ Sáu tiết học kết thúc.",
+      "question": "Chiều thứ Sáu công việc ở trường kết thúc.",
       "answers": [
-        "kinyoubi no gogo jugyou wa owarimasu",
-        "きんようびの ごご じゅぎょうが おわります",
-        "金曜日の 午後 授業が 終わります"
+        "kinyoubi no gogo gakkou no shigoto wa owarimasu",
+        "きんようびの ごご がっこうの しごとが おわります",
+        "金曜日の 午後 学校の 仕事が 終わります"
       ]
     },
     {
@@ -68494,11 +68494,11 @@ const lesson4ReviewData = {
     {
       "id": 79,
       "direction": "vi-to-ja",
-      "question": "Sáng ngày kia có bài kiểm tra.",
+      "question": "Sáng ngày kia tôi đi bưu điện.",
       "answers": [
-        "asatte no asa shiken ga arimasu",
-        "あさっての あさ しけんが あります",
-        "明後日の 朝 試験が あります"
+        "asatte no asa yuubinkyokuへ ikimasu",
+        "あさっての あさ ゆうびんきょくへ いきます",
+        "明後日の 朝 郵便局へ 行きます"
       ]
     },
     {
@@ -70495,19 +70495,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 2,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 2 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70567,19 +70567,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 6,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 6 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70639,19 +70639,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 10,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 10 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70711,19 +70711,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 14,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 14 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70783,19 +70783,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 18,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 18 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70855,19 +70855,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 22,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 22 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70927,19 +70927,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 26,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 26 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -70999,19 +70999,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 30,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 30 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -71071,19 +71071,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 34,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 34 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -71143,19 +71143,19 @@ const lesson4ReviewData = {
     },
     {
       "id": 38,
-      "audio_text_kana": "A: かいぎは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
-      "audio_text_kanji": "A: 会議は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
+      "audio_text_kana": "A: ぎんこうの しごとは なんじからですか。 B: ごぜん 10じ15ふんから 11じ45ふんまでです。 A: はい、わかりました。",
+      "audio_text_kanji": "A: 銀行の 仕事は 何時からですか。 B: 午前 10時15分から 11時45分までです。 A: はい、わかりました。",
       "questions": [
         {
           "q": "Nội dung cốt lõi của bài nghe 38 là gì?",
           "opts": [
-            "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+            "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
             "Lịch đi công tác Osaka",
             "Số phòng khách sạn",
             "Giá vé máy bay"
           ],
-          "corr": "Thông tin về hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45",
-          "explanation": "Lời thoại thể hiện rõ hỏi thời gian cuộc họp bắt đầu lúc 10h15 và kết thúc lúc 11h45."
+          "corr": "Thông tin về hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45",
+          "explanation": "Lời thoại thể hiện rõ hỏi thời gian công việc ngân hàng bắt đầu lúc 10h15 và kết thúc lúc 11h45."
         }
       ]
     },
@@ -71264,16 +71264,16 @@ const lesson4ReviewData = {
     },
     {
       "id": 6,
-      "question_audio": "かいぎは 4じ35ふんに おわります",
+      "question_audio": "ぎんこうの しごとは 4じ35ふんに おわります",
       "correct_answers": [
-        "かいぎは4じ35ふんにおわります",
-        "かいぎは 4じ35ふんに おわります",
-        "kaigi wa 4-ji 35-fun ni owarimasu"
+        "ぎんこうのしごとは4じ35ふんにおわります",
+        "ぎんこうの しごとは 4じ35ふんに おわります",
+        "ginkou no shigoto wa 4-ji 35-fun ni owarimasu"
       ],
       "vietnamese_answers": [
-        "Họp xong lúc 4h35."
+        "Ngân hàng xong việc lúc 4h35."
       ],
-      "vietnamese_meaning": "Cuộc họp kết thúc lúc 4 giờ 35 phút."
+      "vietnamese_meaning": "Công việc ở ngân hàng kết thúc lúc 4 giờ 35 phút."
     },
     {
       "id": 7,
@@ -71349,15 +71349,15 @@ const lesson4ReviewData = {
     },
     {
       "id": 13,
-      "question_audio": "きんようびの ごご じゅぎょうが おわります",
+      "question_audio": "きんようびの ごご がっこうの しごとが おわります",
       "correct_answers": [
-        "きんようびのごごじゅぎょうがおわります",
-        "きんようびの ごご じゅぎょうが おわります"
+        "きんようびのごごがっこうのしごとがおわります",
+        "きんようびの ごご がっこうの しごとが おわります"
       ],
       "vietnamese_answers": [
-        "Chiều thứ 6 kết thúc tiết học"
+        "Chiều thứ 6 công việc trường học kết thúc"
       ],
-      "vietnamese_meaning": "Chiều thứ Sáu tiết học kết thúc."
+      "vietnamese_meaning": "Chiều thứ Sáu công việc ở trường học kết thúc."
     },
     {
       "id": 14,
@@ -71529,15 +71529,15 @@ const lesson4ReviewData = {
     },
     {
       "id": 28,
-      "question_audio": "きんようびの ごご じゅぎょうが おわります",
+      "question_audio": "きんようびの ごご がっこうの しごとが おわります",
       "correct_answers": [
-        "きんようびのごごじゅぎょうがおわります",
-        "きんようびの ごご じゅぎょうが おわります"
+        "きんようびのごごがっこうのしごとがおわります",
+        "きんようびの ごご がっこうの しごとが おわります"
       ],
       "vietnamese_answers": [
-        "Chiều thứ 6 kết thúc tiết học"
+        "Chiều thứ 6 công việc trường học kết thúc"
       ],
-      "vietnamese_meaning": "Chiều thứ Sáu tiết học kết thúc."
+      "vietnamese_meaning": "Chiều thứ Sáu công việc ở trường học kết thúc."
     },
     {
       "id": 29,
