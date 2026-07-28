@@ -59,6 +59,7 @@ export default function ReviewTab({
 }: ReviewTabProps) {
   const router = useRouter();
   const [reviewSelectedType, setReviewSelectedType] = useState<string>('translation');
+  const [translationDirection, setTranslationDirection] = useState<'all' | 'ja-to-vi' | 'vi-to-ja'>('all');
   const [reviewIndex, setReviewIndex] = useState<number>(0);
   const [savedSessions, setSavedSessions] = useState<Record<string, any>>({});
   const [showHistoryTable, setShowHistoryTable] = useState<boolean>(true);
@@ -99,6 +100,7 @@ export default function ReviewTab({
           reviewTotal,
           reviewIndex,
           reviewStep,
+          translationDirection,
           timestamp: Date.now()
         };
         setSavedSessions(prev => {
@@ -108,7 +110,7 @@ export default function ReviewTab({
         });
       }
     }
-  }, [reviewQuestions, reviewAnswers, reviewGraded, reviewFeedback, reviewScore, reviewTotal, reviewIndex, reviewStep, reviewSelectedType, storageKey]);
+  }, [reviewQuestions, reviewAnswers, reviewGraded, reviewFeedback, reviewScore, reviewTotal, reviewIndex, reviewStep, reviewSelectedType, storageKey, translationDirection]);
 
   // 3. Hàm Master Reset xóa sạch cả 4 dạng bài và quay về trang chọn dạng
   const masterResetAll = () => {
@@ -143,9 +145,12 @@ export default function ReviewTab({
   };
 
   // 5. Mở dạng bài tập (Khôi phục nếu có sẵn, hoặc tạo tráo mới từ đầu)
-  const startReviewTest = (type: string) => {
+  const startReviewTest = (type: string, overrideDir?: 'all' | 'ja-to-vi' | 'vi-to-ja') => {
     setReviewSelectedType(type);
-    if (savedSessions[type] && Array.isArray(savedSessions[type].reviewQuestions) && savedSessions[type].reviewQuestions.length > 0) {
+    if (overrideDir) {
+      setTranslationDirection(overrideDir);
+    }
+    if (!overrideDir && savedSessions[type] && Array.isArray(savedSessions[type].reviewQuestions) && savedSessions[type].reviewQuestions.length > 0) {
       const saved = savedSessions[type];
       setReviewQuestions(saved.reviewQuestions);
       setReviewAnswers(saved.reviewAnswers || {});
@@ -154,19 +159,34 @@ export default function ReviewTab({
       setReviewScore(saved.reviewScore || 0);
       setReviewTotal(saved.reviewTotal || 0);
       setReviewIndex(saved.reviewIndex || 0);
+      if (saved.translationDirection) {
+        setTranslationDirection(saved.translationDirection);
+      }
       setReviewStep(saved.reviewStep || 'test');
     } else {
-      startFreshType(type);
+      startFreshType(type, overrideDir);
     }
   };
 
-  const startFreshType = (type: string) => {
+  const startFreshType = (type: string, overrideDir?: 'all' | 'ja-to-vi' | 'vi-to-ja') => {
     setReviewSelectedType(type);
     setReviewIndex(0);
+    const activeDir = overrideDir || translationDirection;
+    if (overrideDir) {
+      setTranslationDirection(overrideDir);
+    }
+
     if (reviewData) {
       let sourceList: any[] = [];
       if (type === 'translation') {
-        sourceList = Array.isArray(reviewData.translations) ? reviewData.translations : (Array.isArray(reviewData.type1_translation) ? reviewData.type1_translation : []);
+        const raw = Array.isArray(reviewData.translations) ? reviewData.translations : (Array.isArray(reviewData.type1_translation) ? reviewData.type1_translation : []);
+        if (activeDir === 'ja-to-vi') {
+          sourceList = raw.filter((item: any) => item.direction === 'ja-to-vi');
+        } else if (activeDir === 'vi-to-ja') {
+          sourceList = raw.filter((item: any) => item.direction === 'vi-to-ja');
+        } else {
+          sourceList = raw;
+        }
       } else if (type === 'dialogue') {
         sourceList = Array.isArray(reviewData.dialogues) ? reviewData.dialogues : (Array.isArray(reviewData.type2_fill_blank) ? reviewData.type2_fill_blank : []);
       } else if (type === 'listening') {
@@ -181,6 +201,7 @@ export default function ReviewTab({
         key: `${type}_${item.id || Math.random()}`
       }));
 
+      // Fisher-Yates shuffle 100% trong mọi trường hợp
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -506,6 +527,56 @@ export default function ReviewTab({
                         </div>
                       </div>
 
+                      {item.id === 'translation' && (
+                        <div className="mt-3 pt-3 border-t border-amber-500/20 space-y-2" onClick={(e) => e.stopPropagation()}>
+                          <div className="text-[11px] font-bold text-amber-300 flex items-center justify-between">
+                            <span>🔀 Tùy chọn chiều dịch:</span>
+                            <span className="text-[10px] text-amber-400/80 font-semibold">🔀 Tráo ngẫu nhiên</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            <button
+                              onClick={() => {
+                                setTranslationDirection('all');
+                                startFreshType('translation', 'all');
+                              }}
+                              className={`px-2.5 py-1 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                                translationDirection === 'all'
+                                  ? 'bg-amber-500/30 text-amber-200 border-amber-400 shadow-sm'
+                                  : 'bg-slate-800/80 text-slate-400 border-slate-700 hover:text-white'
+                              }`}
+                            >
+                              🌐 Cả 2 chiều
+                            </button>
+                            <button
+                              onClick={() => {
+                                setTranslationDirection('ja-to-vi');
+                                startFreshType('translation', 'ja-to-vi');
+                              }}
+                              className={`px-2.5 py-1 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                                translationDirection === 'ja-to-vi'
+                                  ? 'bg-amber-500/30 text-amber-200 border-amber-400 shadow-sm'
+                                  : 'bg-slate-800/80 text-slate-400 border-slate-700 hover:text-white'
+                              }`}
+                            >
+                              🇯🇵 ➔ 🇻🇳 Nhật-Việt
+                            </button>
+                            <button
+                              onClick={() => {
+                                setTranslationDirection('vi-to-ja');
+                                startFreshType('translation', 'vi-to-ja');
+                              }}
+                              className={`px-2.5 py-1 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                                translationDirection === 'vi-to-ja'
+                                  ? 'bg-amber-500/30 text-amber-200 border-amber-400 shadow-sm'
+                                  : 'bg-slate-800/80 text-slate-400 border-slate-700 hover:text-white'
+                              }`}
+                            >
+                              🇻🇳 ➔ 🇯🇵 Việt-Nhật
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
                       {hasProgress ? (
                         <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs gap-2">
                           <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-extrabold flex items-center gap-1">
@@ -562,15 +633,53 @@ export default function ReviewTab({
           <div className="space-y-8 animate-scale-in">
             {/* Active filter alert info & Progress bar */}
             <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-5 rounded-2xl shadow-xl space-y-4">
-              <div className="flex justify-between items-center text-xs text-indigo-300 flex-wrap gap-2">
-                <span>
+              <div className="flex justify-between items-center text-xs text-indigo-300 flex-wrap gap-3">
+                <span className="flex items-center gap-1.5 flex-wrap">
                   🎯 Dạng bài: <strong>{
-                    reviewSelectedType === 'translation' ? 'Dịch câu phản xạ' :
+                    reviewSelectedType === 'translation' ? (
+                      `Dịch câu phản xạ (${translationDirection === 'ja-to-vi' ? '🇯🇵 ➔ 🇻🇳 Nhật sang Việt' : translationDirection === 'vi-to-ja' ? '🇻🇳 ➔ 🇯🇵 Việt sang Nhật' : '🌐 Cả 2 chiều'})`
+                    ) :
                     reviewSelectedType === 'dialogue' ? 'Điền khuyết hội thoại' :
                     reviewSelectedType === 'listening' ? 'Nghe hiểu hội thoại' : 'Nghe viết chính tả'
                   }</strong>
+                  <span className="text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20 font-semibold">
+                    🔀 Tráo ngẫu nhiên
+                  </span>
                 </span>
-                <div className="flex items-center gap-3">
+
+                <div className="flex items-center gap-2 flex-wrap">
+                  {reviewSelectedType === 'translation' && (
+                    <div className="flex items-center gap-1 bg-slate-950/80 border border-slate-800 p-1 rounded-xl">
+                      <button
+                        onClick={() => startFreshType('translation', 'all')}
+                        title="Chuyển sang cả 2 chiều & tráo ngẫu nhiên câu hỏi mới"
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          translationDirection === 'all' ? 'bg-amber-500/30 text-amber-200 border border-amber-500/40' : 'text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        🌐 Cả 2 chiều
+                      </button>
+                      <button
+                        onClick={() => startFreshType('translation', 'ja-to-vi')}
+                        title="Chuyển sang chỉ dịch Nhật -> Việt & tráo ngẫu nhiên câu hỏi mới"
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          translationDirection === 'ja-to-vi' ? 'bg-amber-500/30 text-amber-200 border border-amber-500/40' : 'text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        🇯🇵 ➔ 🇻🇳
+                      </button>
+                      <button
+                        onClick={() => startFreshType('translation', 'vi-to-ja')}
+                        title="Chuyển sang chỉ dịch Việt -> Nhật & tráo ngẫu nhiên câu hỏi mới"
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          translationDirection === 'vi-to-ja' ? 'bg-amber-500/30 text-amber-200 border border-amber-500/40' : 'text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        🇻🇳 ➔ 🇯🇵
+                      </button>
+                    </div>
+                  )}
+
                   <button
                     onClick={() => resetSingleType(reviewSelectedType)}
                     title="Xóa tiến trình và xáo trộn làm mới dạng bài này từ câu 1"
