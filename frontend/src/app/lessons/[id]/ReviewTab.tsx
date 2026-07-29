@@ -30,6 +30,42 @@ interface ReviewTabProps {
   calculateAccuracy: (user: string, correct: string) => number;
 }
 
+const normalizeJapaneseText = (str: string): string => {
+  if (!str) return '';
+  return str
+    .toLowerCase()
+    .replace(/[\s\u3000.,\/#!$%\^&\*;:{}=\-_\`~()?？!！。、・（）()]/g, '')
+    .trim();
+};
+
+const getAllCandidateAnswers = (q: any): string[] => {
+  if (!q || !q.originalData) return [];
+  const item = q.originalData;
+  const candidates: string[] = [];
+
+  const ansList = item.correct_answers || item.answers || [];
+  if (Array.isArray(ansList)) {
+    ansList.forEach((a: any) => { if (typeof a === 'string' && a.trim()) candidates.push(a.trim()); });
+  }
+
+  if (typeof item.question_kana === 'string' && item.question_kana.trim()) candidates.push(item.question_kana.trim());
+  if (typeof item.audio_text_kana === 'string' && item.audio_text_kana.trim()) candidates.push(item.audio_text_kana.trim());
+  if (typeof item.text_kana === 'string' && item.text_kana.trim()) candidates.push(item.text_kana.trim());
+
+  if (typeof item.question_kanji === 'string' && item.question_kanji.trim()) candidates.push(item.question_kanji.trim());
+  if (typeof item.audio_text_kanji === 'string' && item.audio_text_kanji.trim()) candidates.push(item.audio_text_kanji.trim());
+  if (typeof item.text_kanji === 'string' && item.text_kanji.trim()) candidates.push(item.text_kanji.trim());
+
+  if (typeof item.question_audio === 'string' && item.question_audio.trim()) candidates.push(item.question_audio.trim());
+  if (typeof item.question === 'string' && item.question.trim()) candidates.push(item.question.trim());
+
+  if (Array.isArray(item.vietnamese_answers)) {
+    item.vietnamese_answers.forEach((a: any) => { if (typeof a === 'string' && a.trim()) candidates.push(a.trim()); });
+  }
+
+  return candidates;
+};
+
 export default function ReviewTab({
   lessonTitle,
   reviewData,
@@ -66,28 +102,45 @@ export default function ReviewTab({
 
   const storageKey = selectedLessonId ? `nihongo_review_state_lesson_${selectedLessonId}` : `nihongo_review_state_combined`;
 
-  // 1. Tự động nạp danh sách tiến trình các dạng bài từ LocalStorage khi nạp dữ liệu
+  // 1. Tự động nạp danh sách tiến trình các dạng bài từ Cloud API / LocalStorage khi nạp dữ liệu
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      try {
-        const savedRaw = localStorage.getItem(storageKey);
-        if (savedRaw) {
-          const map = JSON.parse(savedRaw);
-          if (map && typeof map === 'object') {
-            setSavedSessions(map);
+      const loadState = async () => {
+        try {
+          let loadedSession = null;
+          try {
+            const res = await fetch(`/api/user/review-sessions?storage_key=${encodeURIComponent(storageKey)}`);
+            if (res.ok) {
+              const data = await res.json();
+              if (data && data.session_data) {
+                loadedSession = data.session_data;
+              }
+            }
+          } catch (e) {
+            console.log('Cloud sync fetch error, fallback to localStorage', e);
+          }
+
+          if (!loadedSession) {
+            const savedRaw = localStorage.getItem(storageKey);
+            if (savedRaw) {
+              loadedSession = JSON.parse(savedRaw);
+            }
+          }
+
+          if (loadedSession && typeof loadedSession === 'object') {
+            setSavedSessions(loadedSession);
           } else {
             setSavedSessions({});
           }
-        } else {
+        } catch (err) {
           setSavedSessions({});
         }
-      } catch (err) {
-        setSavedSessions({});
-      }
+      };
+      loadState();
     }
   }, [storageKey, reviewData]);
 
-  // 2. Tự động lưu tiến trình của DẠNG BÀI ĐANG CHỌN vào savedSessions và LocalStorage
+  // 2. Tự động lưu tiến trình của DẠNG BÀI ĐANG CHỌN vào savedSessions, LocalStorage và Cloud API
   React.useEffect(() => {
     if (typeof window !== 'undefined' && (reviewStep === 'test' || reviewStep === 'result') && reviewSelectedType) {
       if (reviewQuestions.length > 0) {
@@ -106,6 +159,14 @@ export default function ReviewTab({
         setSavedSessions(prev => {
           const updated = { ...prev, [reviewSelectedType]: typeState };
           localStorage.setItem(storageKey, JSON.stringify(updated));
+
+          // Sync to Cloud API
+          fetch('/api/user/review-sessions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ storage_key: storageKey, session_data: updated })
+          }).catch(() => {});
+
           return updated;
         });
       }
@@ -116,6 +177,11 @@ export default function ReviewTab({
   const masterResetAll = () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(storageKey);
+      fetch('/api/user/review-sessions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ storage_key: storageKey, session_data: {} })
+      }).catch(() => {});
     }
     setSavedSessions({});
     setReviewQuestions([]);
@@ -134,15 +200,23 @@ export default function ReviewTab({
     setSavedSessions(prev => {
       const updated = { ...prev };
       delete updated[type];
-      if (Object.keys(updated).length === 0) {
-        if (typeof window !== 'undefined') localStorage.removeItem(storageKey);
-      } else {
-        if (typeof window !== 'undefined') localStorage.setItem(storageKey, JSON.stringify(updated));
+      if (typeof window !== 'undefined') {
+        if (Object.keys(updated).length === 0) {
+          localStorage.removeItem(storageKey);
+        } else {
+          localStorage.setItem(storageKey, JSON.stringify(updated));
+        }
+        fetch('/api/user/review-sessions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ storage_key: storageKey, session_data: updated })
+        }).catch(() => {});
       }
       return updated;
     });
     startFreshType(type);
   };
+
 
   // 5. Mở dạng bài tập (Khôi phục nếu có sẵn, hoặc tạo tráo mới từ đầu)
   const startReviewTest = (type: string, overrideDir?: 'all' | 'ja-to-vi' | 'vi-to-ja') => {
@@ -278,18 +352,45 @@ export default function ReviewTab({
     if (reviewGraded[key] !== undefined) return;
     
     const current = q.originalData;
-    const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+    const userAnsRaw = (reviewAnswers[key] || '').trim();
+    const userClean = normalizeJapaneseText(userAnsRaw);
     let isCorrect = false;
-    const correctAnswersList = current.correct_answers || current.answers || [];
-    correctAnswersList.forEach((ans: string) => {
-      const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
-      if (userAns === cleanAns || (cleanAns.includes(userAns) && userAns.length > 3)) {
-        isCorrect = true;
+
+    const candidates = getAllCandidateAnswers(q);
+    const correctAnswersList = current.correct_answers || current.answers || candidates;
+
+    for (const cand of candidates) {
+      const parts = cand.split(/[\/|]/);
+      for (const part of parts) {
+        let optVariants: string[] = [part];
+        if (part.includes('(') && part.includes(')')) {
+          const mainOpt = part.split('(')[0];
+          const parenOpt = part.substring(part.indexOf('(') + 1, part.indexOf(')'));
+          optVariants.push(mainOpt, parenOpt);
+        }
+        for (const opt of optVariants) {
+          const cleanOpt = normalizeJapaneseText(opt);
+          if (!cleanOpt) continue;
+          if (
+            userClean === cleanOpt ||
+            (cleanOpt.length >= 3 && cleanOpt.includes(userClean)) ||
+            (userClean.length >= 3 && userClean.includes(cleanOpt)) ||
+            calculateAccuracy(userAnsRaw, opt) >= 80
+          ) {
+            isCorrect = true;
+            break;
+          }
+        }
+        if (isCorrect) break;
       }
-    });
+      if (isCorrect) break;
+    }
     
     setReviewGraded(prev => ({ ...prev, [key]: isCorrect }));
-    setReviewFeedback(prev => ({ ...prev, [key]: `Đáp án đúng: ${correctAnswersList.join(' / ')}` }));
+    setReviewFeedback(prev => ({
+      ...prev,
+      [key]: `Đáp án đúng: ${Array.isArray(correctAnswersList) ? correctAnswersList.join(' / ') : correctAnswersList}`
+    }));
     if (isCorrect) {
       setReviewScore(prev => prev + 1);
     }
@@ -354,24 +455,40 @@ export default function ReviewTab({
 
     const current = q.originalData;
     const userAnsRaw = (reviewAnswers[key] || '').trim();
-    const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？。、\s]/g, '');
+    const userClean = normalizeJapaneseText(userAnsRaw);
     let isCorrect = false;
-    const correctJp = current.question_audio;
-    const cleanJp = correctJp.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
-    const cleanUserJp = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
-    if (cleanUserJp === cleanJp) {
-      isCorrect = true;
+
+    const candidates = getAllCandidateAnswers(q);
+
+    for (const cand of candidates) {
+      const parts = cand.split(/[\/|]/);
+      for (const part of parts) {
+        let optVariants: string[] = [part];
+        if (part.includes('(') && part.includes(')')) {
+          const mainOpt = part.split('(')[0];
+          const parenOpt = part.substring(part.indexOf('(') + 1, part.indexOf(')'));
+          optVariants.push(mainOpt, parenOpt);
+        }
+        for (const opt of optVariants) {
+          const cleanOpt = normalizeJapaneseText(opt);
+          if (!cleanOpt) continue;
+          if (
+            userClean === cleanOpt ||
+            (cleanOpt.length >= 3 && cleanOpt.includes(userClean)) ||
+            (userClean.length >= 3 && userClean.includes(cleanOpt)) ||
+            calculateAccuracy(userAnsRaw, opt) >= 80
+          ) {
+            isCorrect = true;
+            break;
+          }
+        }
+        if (isCorrect) break;
+      }
+      if (isCorrect) break;
     }
 
-    const vnAnswers = current.vietnamese_answers || [];
-    vnAnswers.forEach((ans: string) => {
-      const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?？.、\s]/g, '');
-      if (cleanUserVn === cleanVnAns || calculateAccuracy(userAnsRaw, ans) >= 85) {
-        isCorrect = true;
-      }
-    });
-
     setReviewGraded(prev => ({ ...prev, [key]: isCorrect }));
+    const correctJp = current.question_audio || current.audio_text_kanji || current.audio_text_kana || '';
     setReviewFeedback(prev => ({
       ...prev,
       [key]: `Đáp án đúng: ${correctJp} ${current.vietnamese_meaning ? `| Ý nghĩa: ${current.vietnamese_meaning}` : ''}`
@@ -381,6 +498,7 @@ export default function ReviewTab({
       setReviewScore(prev => prev + 1);
     }
   };
+
 
   const gradeQuestion = (q: any) => {
     if (q.type === 'translation') {
@@ -1206,6 +1324,8 @@ export default function ReviewTab({
 
               if (answeredQuestions.length === 0) return null;
 
+              const reversedAnsweredQuestions = [...answeredQuestions].reverse();
+
               const correctQuestionsCount = answeredQuestions.filter(q => {
                 if (q.type === 'translation' || q.type === 'dictation') return !!reviewGraded[q.key];
                 if (q.type === 'dialogue') return !!(reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]);
@@ -1251,7 +1371,7 @@ export default function ReviewTab({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-800/60">
-                            {answeredQuestions.map((q, idx) => {
+                            {reversedAnsweredQuestions.map((q, idx) => {
                               const originalIdx = reviewQuestions.findIndex(item => item.key === q.key);
                               const qNum = originalIdx >= 0 ? originalIdx + 1 : idx + 1;
                               const currentData = q.originalData;
@@ -1327,7 +1447,8 @@ export default function ReviewTab({
 
                       {/* Mobile Card List View */}
                       <div className="block md:hidden space-y-3">
-                        {answeredQuestions.map((q, idx) => {
+                        {reversedAnsweredQuestions.map((q, idx) => {
+
                           const originalIdx = reviewQuestions.findIndex(item => item.key === q.key);
                           const qNum = originalIdx >= 0 ? originalIdx + 1 : idx + 1;
                           const currentData = q.originalData;

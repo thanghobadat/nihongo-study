@@ -321,7 +321,16 @@ CREATE POLICY "Admin write access lesson_reviews" ON public.lesson_reviews FOR A
 );
 
 
+-- 16. Create User Review Sessions Table (Cloud Sync per-type review progress)
+CREATE TABLE public.user_review_sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  storage_key TEXT NOT NULL,
+  session_data JSONB NOT NULL DEFAULT '{}'::jsonb,
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, storage_key)
+);
 
-
-
-
+ALTER TABLE public.user_review_sessions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow user full access to own review sessions" ON public.user_review_sessions
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);

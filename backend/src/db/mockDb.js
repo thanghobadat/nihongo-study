@@ -71996,6 +71996,8 @@ const combinedReviews = {
   }
 };
 
+const userReviewSessions = {};
+
 module.exports = {
   lessons,
   vocabulary,
@@ -72003,11 +72005,13 @@ module.exports = {
   grammar,
   kaiwaDialog,
   students,
-  userProgress,
-  targetPlan,
+  userProgress: {},
+  userReviewSessions,
+  targetPlan: {},
   candoChecks,
   cultureTopics,
   lessonReviews,
   combinedReviews,
   lesson_reviews
 };
+

@@ -2092,6 +2092,92 @@ router.delete('/exams/wrong-questions/clear', async (req, res) => {
   }
 });
 
+/**
+ * GET /api/user/review-sessions?storage_key=...
+ * Fetch user's review session state for a given storage_key
+ */
+router.get('/review-sessions', async (req, res) => {
+  try {
+    const userId = req.user ? req.user.id : 'demo_user';
+    const { storage_key } = req.query;
+    if (!storage_key) {
+      return res.status(400).json({ error: 'storage_key is required' });
+    }
+
+    if (!req.user || req.user.isMock) {
+      const key = `${userId}:${storage_key}`;
+      const session = mockDb.userReviewSessions ? mockDb.userReviewSessions[key] : null;
+      return res.json({ session_data: session || null });
+    }
+
+    const { data, error } = await supabase
+      .from('user_review_sessions')
+      .select('session_data')
+      .eq('user_id', userId)
+      .eq('storage_key', storage_key)
+      .single();
+
+    if (error && error.code !== 'PGRST116') {
+      console.error('Error fetching review session:', error);
+    }
+
+    res.json({ session_data: data ? data.session_data : null });
+  } catch (error) {
+    console.error('Error fetching review session:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * POST /api/user/review-sessions
+ * Save user's review session state for a given storage_key
+ */
+router.post('/review-sessions', async (req, res) => {
+  try {
+    const userId = req.user ? req.user.id : 'demo_user';
+    const { storage_key, session_data } = req.body;
+    if (!storage_key) {
+      return res.status(400).json({ error: 'storage_key is required' });
+    }
+
+    if (!req.user || req.user.isMock) {
+      if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
+      const key = `${userId}:${storage_key}`;
+      if (!session_data || Object.keys(session_data).length === 0) {
+        delete mockDb.userReviewSessions[key];
+      } else {
+        mockDb.userReviewSessions[key] = session_data;
+      }
+      return res.json({ message: 'Session saved successfully' });
+    }
+
+    if (!session_data || Object.keys(session_data).length === 0) {
+      await supabase
+        .from('user_review_sessions')
+        .delete()
+        .eq('user_id', userId)
+        .eq('storage_key', storage_key);
+      return res.json({ message: 'Session cleared successfully' });
+    }
+
+    const { error } = await supabase
+      .from('user_review_sessions')
+      .upsert({
+        user_id: userId,
+        storage_key: storage_key,
+        session_data: session_data,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'user_id,storage_key' });
+
+    if (error) throw error;
+    res.json({ message: 'Session saved successfully' });
+  } catch (error) {
+    console.error('Error saving review session:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
+
 
 
