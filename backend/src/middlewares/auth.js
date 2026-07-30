@@ -59,7 +59,7 @@ const requireAuth = async (req, res, next) => {
     // Call Supabase Auth to get the user from JWT
     const { data: { user }, error } = await supabase.auth.getUser(token);
     if (error || !user) {
-      return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+      return res.status(401).json({ error: 'Unauthorized: Invalid or expired token', code: 'TOKEN_EXPIRED' });
     }
 
     // Query user profile to get the custom role ('admin' or 'user')

@@ -183,12 +183,15 @@ export default function UserDashboard() {
     if (!isLoadedFromLocalStorage) return;
     setLoading(true);
     try {
-      const lessonData = await api.get(`/api/user/lessons?course=${activeCourse}`);
+      const [lessonData, planData] = await Promise.all([
+        api.get(`/api/user/lessons?course=${activeCourse}`),
+        api.get('/api/user/target-plan').catch(() => null)
+      ]);
+
       if (Array.isArray(lessonData)) {
         setLessons(lessonData);
       }
 
-      const planData = await api.get('/api/user/target-plan');
       if (planData && !planData.message) {
         let parsedPlans: any = {};
         if (planData.self_evaluation) {
@@ -229,9 +232,11 @@ export default function UserDashboard() {
     if (!isLoadedFromLocalStorage) return;
     async function loadLessonStats() {
       try {
-        const vocabData = await api.get(`/api/user/lessons/${selectedLessonId}/vocabulary`);
-        const kanjiData = await api.get(`/api/user/lessons/${selectedLessonId}/kanji`);
-        const grammarData = await api.get(`/api/user/lessons/${selectedLessonId}/grammar`);
+        const [vocabData, kanjiData, grammarData] = await Promise.all([
+          api.get(`/api/user/lessons/${selectedLessonId}/vocabulary`),
+          api.get(`/api/user/lessons/${selectedLessonId}/kanji`),
+          api.get(`/api/user/lessons/${selectedLessonId}/grammar`)
+        ]);
         if (Array.isArray(vocabData)) setVocabItems(vocabData);
         if (Array.isArray(kanjiData)) setKanjiItems(kanjiData);
         if (Array.isArray(grammarData)) setGrammarItems(grammarData);

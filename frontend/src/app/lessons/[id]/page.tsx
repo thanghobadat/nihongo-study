@@ -2035,6 +2035,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     } catch (error) {
 
       console.error('Failed to load vocabulary:', error);
+      if (error && typeof error === 'object' && 'message' in error && (String((error as any).message).includes('hết hạn') || String((error as any).message).includes('Unauthorized'))) {
+        setMessage('⚠️ Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục đồng bộ tiến trình học.');
+      }
 
     } finally {
 

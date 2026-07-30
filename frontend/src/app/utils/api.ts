@@ -3,9 +3,41 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 export interface RequestOptions {
   headers?: Record<string, string>;
   token?: string; // Optional override token (e.g. during reset password)
+  skipCache?: boolean; // Force fresh fetch, bypassing cache
+}
+
+const memoryCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes cache
+
+export function clearApiCache(pathPrefix?: string) {
+  if (!pathPrefix) {
+    memoryCache.clear();
+    return;
+  }
+  for (const key of memoryCache.keys()) {
+    if (key.includes(pathPrefix)) {
+      memoryCache.delete(key);
+    }
+  }
 }
 
 async function request(path: string, method: string, body: any = null, options: RequestOptions = {}) {
+  const isGet = method === 'GET';
+  const cacheKey = `${path}`;
+
+  // Invalidate cache on mutations
+  if (!isGet) {
+    clearApiCache();
+  }
+
+  // Check cache for GET requests
+  if (isGet && !options.skipCache) {
+    const cached = memoryCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+      return cached.data;
+    }
+  }
+
   const url = `${BASE_URL}${path}`;
   
   const headers: Record<string, string> = {
@@ -89,6 +121,11 @@ async function request(path: string, method: string, body: any = null, options: 
     throw new Error(errorMsg);
   }
 
+  // Cache GET request result
+  if (isGet && data) {
+    memoryCache.set(cacheKey, { data, timestamp: Date.now() });
+  }
+
   return data;
 }
 
@@ -97,6 +134,7 @@ export const api = {
   post: (path: string, body?: any, options?: RequestOptions) => request(path, 'POST', body, options),
   put: (path: string, body?: any, options?: RequestOptions) => request(path, 'PUT', body, options),
   delete: (path: string, options?: RequestOptions) => request(path, 'DELETE', null, options),
+  clearCache: clearApiCache,
   
   // Auth state management helpers
   setToken: (token: string) => {
@@ -139,5 +177,6 @@ export const api = {
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');
     }
+    clearApiCache();
   }
 };
