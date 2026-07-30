@@ -71692,11 +71692,5361 @@ if (typeof lessonReviews !== 'undefined' && Array.isArray(lessonReviews)) {
   }
 }
 
+
+const lesson5ReviewData = {
+  "lesson_id": 5,
+  "translations": [
+    {
+      "id": 1,
+      "direction": "ja-to-vi",
+      "question_kana": "わたしは あした とうきょうへ いきます。",
+      "question_kanji": "私は 明日 東京へ 行きます。",
+      "answers": [
+        "Tôi sẽ đi Tokyo vào ngày mai",
+        "Ngày mai tôi đi Tokyo",
+        "Tớ sẽ đi Tokyo ngày mai"
+      ]
+    },
+    {
+      "id": 2,
+      "direction": "ja-to-vi",
+      "question_kana": "きのう どこへ いきましたか。",
+      "question_kanji": "昨日 どこへ 行きましたか。",
+      "answers": [
+        "Hôm qua bạn đã đi đâu",
+        "Hôm qua bạn đi đâu thế",
+        "Hôm qua cậu đã đi đâu"
+      ]
+    },
+    {
+      "id": 3,
+      "direction": "ja-to-vi",
+      "question_kana": "どこへも いきませんでした。",
+      "question_kanji": "どこへも 行きませんでした。",
+      "answers": [
+        "Tôi đã không đi đâu cả",
+        "Tớ không đi đâu cả",
+        "Tôi đã chẳng đi đâu cả"
+      ]
+    },
+    {
+      "id": 4,
+      "direction": "ja-to-vi",
+      "question_kana": "なにで だいがくへ いきますか。",
+      "question_kanji": "何で 大学へ 行きますか。",
+      "answers": [
+        "Bạn đi đến trường đại học bằng gì",
+        "Bạn đi đại học bằng phương tiện gì",
+        "Cậu đi đến trường bằng gì"
+      ]
+    },
+    {
+      "id": 5,
+      "direction": "ja-to-vi",
+      "question_kana": "じてんしゃで いきます。",
+      "question_kanji": "自転車で 行きます。",
+      "answers": [
+        "Tôi đi bằng xe đạp",
+        "Tớ đi xe đạp",
+        "Tôi đi đến đó bằng xe đạp"
+      ]
+    },
+    {
+      "id": 6,
+      "direction": "ja-to-vi",
+      "question_kana": "あるいて うちへ かえりました。",
+      "question_kanji": "歩いて 家へ 帰りました。",
+      "answers": [
+        "Tôi đã đi bộ về nhà",
+        "Tớ đã đi bộ về nhà",
+        "Tôi đi bộ về nhà"
+      ]
+    },
+    {
+      "id": 7,
+      "direction": "ja-to-vi",
+      "question_kana": "だれと きょうとへ いきましたか。",
+      "question_kanji": "誰と 京都へ 行きましたか。",
+      "answers": [
+        "Bạn đã đi Kyoto với ai",
+        "Cậu đã đi Kyoto cùng ai thế",
+        "Bạn đi Kyoto với ai"
+      ]
+    },
+    {
+      "id": 8,
+      "direction": "ja-to-vi",
+      "question_kana": "かぞくと いきました。",
+      "question_kanji": "家族と 行きました。",
+      "answers": [
+        "Tôi đã đi cùng gia đình",
+        "Tớ đi với gia đình",
+        "Tôi đi cùng gia đình"
+      ]
+    },
+    {
+      "id": 9,
+      "direction": "ja-to-vi",
+      "question_kana": "ひとりで行きます。",
+      "question_kanji": "一人で行きます。",
+      "answers": [
+        "Tôi đi một mình",
+        "Tớ đi một mình",
+        "Tôi sẽ đi một mình"
+      ]
+    },
+    {
+      "id": 10,
+      "direction": "ja-to-vi",
+      "question_kana": "いつ にほんへ きましたか。",
+      "question_kanji": "いつ 日本へ 来ましたか。",
+      "answers": [
+        "Bạn đã đến Nhật Bản khi nào",
+        "Cậu đến Nhật Bản bao giờ thế",
+        "Khi nào bạn đã sang Nhật"
+      ]
+    },
+    {
+      "id": 11,
+      "direction": "ja-to-vi",
+      "question_kana": "らいねんの 3がつに きます。",
+      "question_kanji": "来年の 3月に 来ます。",
+      "answers": [
+        "Tôi sẽ đến vào tháng 3 năm sau",
+        "Tớ sẽ sang vào tháng 3 năm tới",
+        "Tôi sẽ đến vào tháng 3 tới"
+      ]
+    },
+    {
+      "id": 12,
+      "direction": "ja-to-vi",
+      "question_kana": "せんしゅうの にちようびに へやで べんきょうしました。",
+      "question_kanji": "先週の 日曜日に 部屋で 勉強しました。",
+      "answers": [
+        "Chủ nhật tuần trước tôi đã học ở trong phòng",
+        "Chủ nhật tuần trước tớ học bài trong phòng"
+      ]
+    },
+    {
+      "id": 13,
+      "direction": "ja-to-vi",
+      "question_kana": "あさって ともだちと すーぱーへ いきます。",
+      "question_kanji": " ngày kia (ngày sau ngày mai) 友達と スーパーへ 行きます。",
+      "answers": [
+        "Ngày kia tôi sẽ đi siêu thị với bạn",
+        "Ngày kia tớ đi siêu thị cùng bạn"
+      ]
+    },
+    {
+      "id": 14,
+      "direction": "ja-to-vi",
+      "question_kana": "おととい (ngày trước hôm qua) どこへも いきませんでしたよ。",
+      "question_kanji": "おととい (ngày trước hôm qua) どこへも 行きませんでしたよ。",
+      "answers": [
+        "Hôm kia tôi đã không đi đâu cả đấy",
+        "Hôm kia tớ không đi đâu đâu nhé"
+      ]
+    },
+    {
+      "id": 15,
+      "direction": "ja-to-vi",
+      "question_kana": "たんじょうびは 6がつ 13にちです。",
+      "question_kanji": "誕生日は 6月 13日です。",
+      "answers": [
+        "Sinh nhật của tôi là ngày 13 tháng 6",
+        "Sinh nhật là 13/6"
+      ]
+    },
+    {
+      "id": 16,
+      "direction": "ja-to-vi",
+      "question_kana": "らいしゅうの げつようびに えきへ いきますか。",
+      "question_kanji": "来週の 月曜日に 駅へ 行きますか。",
+      "answers": [
+        "Thứ hai tuần sau bạn có đi đến nhà ga không",
+        "Thứ 2 tuần tới cậu đi nhà ga không"
+      ]
+    },
+    {
+      "id": 17,
+      "direction": "ja-to-vi",
+      "question_kana": "いいえ、いきません。",
+      "question_kanji": "いいえ、行きません。",
+      "answers": [
+        "Không, tôi không đi",
+        "Không, tớ không đi đâu"
+      ]
+    },
+    {
+      "id": 18,
+      "direction": "ja-to-vi",
+      "question_kana": "しんかんせんで おおさかへ いきます。",
+      "question_kanji": "新幹線で 大阪へ 行きます。",
+      "answers": [
+        "Tôi đi Osaka bằng tàu shinkansen",
+        "Tớ đi Osaka bằng tàu siêu tốc Shinkansen"
+      ]
+    },
+    {
+      "id": 19,
+      "direction": "ja-to-vi",
+      "question_kana": "たなかさんは かいしゃへ かえりません。",
+      "question_kanji": "田中さんは 会社へ 帰りません。",
+      "answers": [
+        "Anh Tanaka không trở về công ty",
+        "Anh Tanaka không về lại công ty"
+      ]
+    },
+    {
+      "id": 20,
+      "direction": "ja-to-vi",
+      "question_kana": "こんしゅうの きんようびに びょういんへ いきますよ。",
+      "question_kanji": "今週の 金曜日に 病院へ 行きますよ。",
+      "answers": [
+        "Thứ sáu tuần này tôi sẽ đi bệnh viện đấy",
+        "Thứ 6 tuần này tớ đi bệnh viện đấy nhé"
+      ]
+    },
+    {
+      "id": 21,
+      "direction": "ja-to-vi",
+      "question_kana": "きのうの ばん 9じに うちへ かえりました。",
+      "question_kanji": "昨日の 晩 9時に 家へ 帰りました。",
+      "answers": [
+        "Tối qua tôi đã về nhà lúc 9 giờ",
+        "Tối hôm qua tớ về nhà lúc 9h"
+      ]
+    },
+    {
+      "id": 22,
+      "direction": "ja-to-vi",
+      "question_kana": "だれと ひろしまへ いきましたか。",
+      "question_kanji": "誰と 広島へ 行きましたか。",
+      "answers": [
+        "Bạn đã đi Hiroshima với ai",
+        "Cậu đi Hiroshima với ai thế"
+      ]
+    },
+    {
+      "id": 23,
+      "direction": "ja-to-vi",
+      "question_kana": "かいしゃの ともだちと いきました。",
+      "question_kanji": "会社の 友達と 行きました。",
+      "answers": [
+        "Tôi đã đi với đồng nghiệp ở công ty",
+        "Tớ đi cùng bạn ở công ty"
+      ]
+    },
+    {
+      "id": 24,
+      "direction": "ja-to-vi",
+      "question_kana": "らいげつの 15にちに べトナムへ かえります。",
+      "question_kanji": "来月の 15日に ベトナムへ 帰ります。",
+      "answers": [
+        "Ngày 15 tháng sau tôi sẽ về Việt Nam",
+        "15 tháng tới tớ về Việt Nam"
+      ]
+    },
+    {
+      "id": 25,
+      "direction": "ja-to-vi",
+      "question_kana": "けさ なにで ここへ きましたか。",
+      "question_kanji": "今朝 何で ここへ 来ましたか。",
+      "answers": [
+        "Sáng nay bạn đã đến đây bằng gì",
+        "Sáng nay cậu đến đây bằng phương tiện gì"
+      ]
+    },
+    {
+      "id": 26,
+      "direction": "ja-to-vi",
+      "question_kana": "ばすで きました。",
+      "question_kanji": "バスで 来ました。",
+      "answers": [
+        "Tôi đã đến bằng xe bus",
+        "Tớ đến bằng xe buýt"
+      ]
+    },
+    {
+      "id": 27,
+      "direction": "ja-to-vi",
+      "question_kana": "きのうの あさ 7じはんに がっこうへ いきました。",
+      "question_kanji": "昨日の 朝 7時半に 学校へ 行きました。",
+      "answers": [
+        "Sáng qua tôi đã đi đến trường lúc 7 giờ rưỡi",
+        "Sáng hôm qua tớ đi học lúc 7h30"
+      ]
+    },
+    {
+      "id": 28,
+      "direction": "ja-to-vi",
+      "question_kana": "こんばん どこへも いきません。",
+      "question_kanji": "今晩 どこへも 行きません。",
+      "answers": [
+        "Tối nay tôi không đi đâu cả",
+        "Tối nay tớ ở nhà không đi đâu cả"
+      ]
+    },
+    {
+      "id": 29,
+      "direction": "ja-to-vi",
+      "question_kana": "ミラーさんは いつ かえりますか。",
+      "question_kanji": "ミラーさんは いつ 帰りますか。",
+      "answers": [
+        "Khi nào anh Miller sẽ trở về",
+        "Khi nào anh Miller về"
+      ]
+    },
+    {
+      "id": 30,
+      "direction": "ja-to-vi",
+      "question_kana": "らいしゅう かえります。",
+      "question_kanji": "来週 帰ります。",
+      "answers": [
+        "Tuần sau tôi sẽ về",
+        "Tuần tới tớ sẽ về"
+      ]
+    },
+    {
+      "id": 31,
+      "direction": "ja-to-vi",
+      "question_kana": "ちかてつで ぎんこうへ いきますか。",
+      "question_kanji": "地下鉄で 銀行へ 行きますか。",
+      "answers": [
+        "Bạn đi ngân hàng bằng tàu điện ngầm à",
+        "Cậu đi ngân hàng bằng tàu đệm ngầm phải không"
+      ]
+    },
+    {
+      "id": 32,
+      "direction": "ja-to-vi",
+      "question_kana": "いいえ、たくしーで いきます。",
+      "question_kanji": "いいえ、タクシーで 行きます。",
+      "answers": [
+        "Không, tôi đi bằng xe taxi",
+        "Không, tớ đi bằng taxi"
+      ]
+    },
+    {
+      "id": 33,
+      "direction": "ja-to-vi",
+      "question_kana": "きょねんの 9がつに にほんへ きました。",
+      "question_kanji": "去年の 9月に 日本へ 来ました。",
+      "answers": [
+        "Tôi đã đến Nhật Bản vào tháng 9 năm ngoái",
+        "Tớ sang Nhật tháng 9 năm ngoái"
+      ]
+    },
+    {
+      "id": 34,
+      "direction": "ja-to-vi",
+      "question_kana": "まいあさ なんにちまで べんきょうしますか。",
+      "question_kanji": "毎朝 何日まで 勉強しますか。",
+      "answers": [
+        "Mỗi sáng học đến ngày mấy"
+      ]
+    },
+    {
+      "id": 35,
+      "direction": "ja-to-vi",
+      "question_kana": "せんげつの 25にちに でんしゃで きょうとへ いきました。",
+      "question_kanji": "先月の 25日に 電車で 京都へ 行きました。",
+      "answers": [
+        "Ngày 25 tháng trước tôi đã đi Kyoto bằng tàu điện",
+        "25 tháng trước tớ đi Kyoto bằng tàu điện"
+      ]
+    },
+    {
+      "id": 36,
+      "direction": "ja-to-vi",
+      "question_kana": "あしたの あさ どこへ いきますか。",
+      "question_kanji": "明日の 朝 どこへ 行きますか。",
+      "answers": [
+        "Sáng mai bạn đi đâu",
+        "Sáng mai cậu đi đâu thế"
+      ]
+    },
+    {
+      "id": 37,
+      "direction": "ja-to-vi",
+      "question_kana": "としょかんへ いきますよ。",
+      "question_kanji": "図書館へ 行きますよ。",
+      "answers": [
+        "Tôi đi đến thư viện đấy",
+        "Tớ đi thư viện đấy nhé"
+      ]
+    },
+    {
+      "id": 38,
+      "direction": "ja-to-vi",
+      "question_kana": "だれと としょかんへ いきますか。",
+      "question_kanji": "誰と 図書館へ 行きますか。",
+      "answers": [
+        "Bạn đi thư viện với ai",
+        "Cậu đi thư viện với ai"
+      ]
+    },
+    {
+      "id": 39,
+      "direction": "ja-to-vi",
+      "question_kana": "かーるさんと いきます。",
+      "question_kanji": "カールさんと 行きます。",
+      "answers": [
+        "Tôi đi cùng anh Karl",
+        "Tớ đi với anh Karl"
+      ]
+    },
+    {
+      "id": 40,
+      "direction": "ja-to-vi",
+      "question_kana": "いつ べトナムへ かえりますか。",
+      "question_kanji": "いつ ベトナムへ 帰りますか。",
+      "answers": [
+        "Khi nào bạn về Việt Nam",
+        "Bao giờ cậu về lại Việt Nam"
+      ]
+    },
+    {
+      "id": 41,
+      "direction": "vi-to-ja",
+      "question": "Ngày mai tôi sẽ đi Tokyo.",
+      "answers": [
+        "あした とうきょうへ いきます。",
+        "明日 東京へ 行きます。"
+      ]
+    },
+    {
+      "id": 42,
+      "direction": "vi-to-ja",
+      "question": "Hôm qua bạn đã đi đâu?",
+      "answers": [
+        "きのう どこへ いきましたか。",
+        "昨日 どこへ 行きましたか。"
+      ]
+    },
+    {
+      "id": 43,
+      "direction": "vi-to-ja",
+      "question": "Tôi đã không đi đâu cả.",
+      "answers": [
+        "どこへも いきませんでした。",
+        "どこへも 行きませんでした。"
+      ]
+    },
+    {
+      "id": 44,
+      "direction": "vi-to-ja",
+      "question": "Bạn đi đến trường đại học bằng gì?",
+      "answers": [
+        "なにで だいがくへ いきますか。",
+        "何で 大学へ 行きますか。"
+      ]
+    },
+    {
+      "id": 45,
+      "direction": "vi-to-ja",
+      "question": "Tôi đi bằng xe đạp.",
+      "answers": [
+        "じてんしゃで いきます。",
+        "自転車で 行きます。"
+      ]
+    },
+    {
+      "id": 46,
+      "direction": "vi-to-ja",
+      "question": "Tôi đã đi bộ về nhà.",
+      "answers": [
+        "あるいて うちへ かえりました。",
+        "歩いて 家へ 帰りました。"
+      ]
+    },
+    {
+      "id": 47,
+      "direction": "vi-to-ja",
+      "question": "Bạn đã đi Kyoto với ai?",
+      "answers": [
+        "だれと きょうとへ いきましたか。",
+        "誰と 京都へ 行きましたか。"
+      ]
+    },
+    {
+      "id": 48,
+      "direction": "vi-to-ja",
+      "question": "Tôi đã đi cùng gia đình.",
+      "answers": [
+        "かぞくと いきました。",
+        "家族と 行きました。"
+      ]
+    },
+    {
+      "id": 49,
+      "direction": "vi-to-ja",
+      "question": "Tôi sẽ đi một mình.",
+      "answers": [
+        "ひとりで行きます。",
+        "一人で行きます。"
+      ]
+    },
+    {
+      "id": 50,
+      "direction": "vi-to-ja",
+      "question": "Khi nào bạn đã đến Nhật Bản?",
+      "answers": [
+        "いつ にほんへ きましたか。",
+        "いつ 日本へ 来ましたか。"
+      ]
+    },
+    {
+      "id": 51,
+      "direction": "vi-to-ja",
+      "question": "Tôi sẽ đến vào tháng 3 năm sau.",
+      "answers": [
+        "らいねんの 3がつに きます。",
+        "来年の 3月に 来ます。"
+      ]
+    },
+    {
+      "id": 52,
+      "direction": "vi-to-ja",
+      "question": "Chủ nhật tuần trước tôi đã học ở trong phòng.",
+      "answers": [
+        "せんしゅうの にちようびに へやで べんきょうしました。",
+        "先週の 日曜日に 部屋で 勉強しました。"
+      ]
+    },
+    {
+      "id": 53,
+      "direction": "vi-to-ja",
+      "question": "Ngày kia (ngày sau ngày mai) tôi sẽ đi siêu thị với bạn.",
+      "answers": [
+        "あさって ともだちと すーぱーへ いきます。",
+        "あさって 友達と スーパーへ 行きます。"
+      ]
+    },
+    {
+      "id": 54,
+      "direction": "vi-to-ja",
+      "question": "Hôm kia (ngày trước hôm qua) tôi đã chẳng đi đâu cả đấy.",
+      "answers": [
+        "おととい どこへも いきませんでしたよ。",
+        "おととい どこへも 行きませんでしたよ。"
+      ]
+    },
+    {
+      "id": 55,
+      "direction": "vi-to-ja",
+      "question": "Sinh nhật của tôi là ngày 13 tháng 6.",
+      "answers": [
+        "たんじょうびは 6がつ 13にちです。",
+        "誕生日は 6月 13日です。"
+      ]
+    },
+    {
+      "id": 56,
+      "direction": "vi-to-ja",
+      "question": "Thứ hai tuần sau bạn có đi đến nhà ga không?",
+      "answers": [
+        "らいしゅうの げつようびに えきへ いきますか。",
+        "来週の 月曜日に 駅へ 行きますか。"
+      ]
+    },
+    {
+      "id": 57,
+      "direction": "vi-to-ja",
+      "question": "Không, tôi không đi.",
+      "answers": [
+        "いいえ、いきません。",
+        "いいえ、行きません。"
+      ]
+    },
+    {
+      "id": 58,
+      "direction": "vi-to-ja",
+      "question": "Tôi đi Osaka bằng tàu shinkansen.",
+      "answers": [
+        "しんかんせんで おおさかへ いきます。",
+        "新幹線で 大阪へ 行きます。"
+      ]
+    },
+    {
+      "id": 59,
+      "direction": "vi-to-ja",
+      "question": "Anh Tanaka không trở về công ty.",
+      "answers": [
+        "たなかさんは かいしゃへ かえりません。",
+        "田中さんは 会社へ 帰りません。"
+      ]
+    },
+    {
+      "id": 60,
+      "direction": "vi-to-ja",
+      "question": "Thứ sáu tuần này tôi sẽ đi bệnh viện đấy.",
+      "answers": [
+        "こんしゅうの きんようびに びょういんへ いきますよ。",
+        "今週の 金曜日に 病院へ 行きますよ。"
+      ]
+    },
+    {
+      "id": 61,
+      "direction": "vi-to-ja",
+      "question": "Tối qua tôi đã về nhà lúc 9 giờ.",
+      "answers": [
+        "きのうの ばん 9じに うちへ かえりました。",
+        "昨日の 晩 9時に 家へ 帰りました。"
+      ]
+    },
+    {
+      "id": 62,
+      "direction": "vi-to-ja",
+      "question": "Bạn đã đi Hiroshima với ai?",
+      "answers": [
+        "だれと ひろしまへ いきましたか。",
+        "誰と 広島へ 行きましたか。"
+      ]
+    },
+    {
+      "id": 63,
+      "direction": "vi-to-ja",
+      "question": "Tôi đã đi với đồng nghiệp ở công ty.",
+      "answers": [
+        "かいしゃの ともだちと いきました。",
+        "会社の 友達と 行きました。"
+      ]
+    },
+    {
+      "id": 64,
+      "direction": "vi-to-ja",
+      "question": "Ngày 15 tháng sau tôi sẽ về Việt Nam.",
+      "answers": [
+        "らいげつの 15にちに べトナムへ かえります。",
+        "来月の 15日に ベトナムへ 帰ります。"
+      ]
+    },
+    {
+      "id": 65,
+      "direction": "vi-to-ja",
+      "question": "Sáng nay bạn đã đến đây bằng phương tiện gì?",
+      "answers": [
+        "けさ なにで ここへ きましたか。",
+        "今朝 何で ここへ 来ましたか。"
+      ]
+    },
+    {
+      "id": 66,
+      "direction": "vi-to-ja",
+      "question": "Tôi đã đến bằng xe buýt.",
+      "answers": [
+        "ばすで きました。",
+        "バスで 来ました。"
+      ]
+    },
+    {
+      "id": 67,
+      "direction": "vi-to-ja",
+      "question": "Sáng qua tôi đã đi học lúc 7 giờ rưỡi.",
+      "answers": [
+        "きのうの あさ 7じはんに がっこうへ いきました。",
+        "昨日の 朝 7時半に 学校へ 行きました。"
+      ]
+    },
+    {
+      "id": 68,
+      "direction": "vi-to-ja",
+      "question": "Tối nay tôi không đi đâu cả.",
+      "answers": [
+        "こんばん どこへも いきません。",
+        "今晩 どこへも 行きません。"
+      ]
+    },
+    {
+      "id": 69,
+      "direction": "vi-to-ja",
+      "question": "Khi nào anh Miller sẽ trở về?",
+      "answers": [
+        "ミラーさんは いつ かえりますか。",
+        "ミラーさんは いつ 帰りますか。"
+      ]
+    },
+    {
+      "id": 70,
+      "direction": "vi-to-ja",
+      "question": "Tuần sau tôi sẽ về.",
+      "answers": [
+        "らいしゅう かえります。",
+        "来週 帰ります。"
+      ]
+    },
+    {
+      "id": 71,
+      "direction": "vi-to-ja",
+      "question": "Bạn đi ngân hàng bằng tàu điện ngầm à?",
+      "answers": [
+        "ちかてつで ぎんこうへ いきますか。",
+        "地下鉄で 銀行へ 行きますか。"
+      ]
+    },
+    {
+      "id": 72,
+      "direction": "vi-to-ja",
+      "question": "Không, tôi đi bằng xe taxi.",
+      "answers": [
+        "いいえ、たくしーで いきます。",
+        "いいえ、タクシーで 行きます。"
+      ]
+    },
+    {
+      "id": 73,
+      "direction": "vi-to-ja",
+      "question": "Tôi đã sang Nhật vào tháng 9 năm ngoái.",
+      "answers": [
+        "きょねんの 9がつに にほんへ きました。",
+        "去年の 9月に 日本へ 来ました。"
+      ]
+    },
+    {
+      "id": 74,
+      "direction": "vi-to-ja",
+      "question": "Mỗi sáng bạn học đến mấy giờ?",
+      "answers": [
+        "まいあさ なんじまで べんきょうしますか。",
+        "毎朝 何時まで 勉強しますか。"
+      ]
+    },
+    {
+      "id": 75,
+      "direction": "vi-to-ja",
+      "question": "Ngày 25 tháng trước tôi đã đi Kyoto bằng tàu điện.",
+      "answers": [
+        "せんげつの 25にちに でんしゃで きょうとへ いきました。",
+        "先月の 25日に 電車で 京都へ 行きました。"
+      ]
+    },
+    {
+      "id": 76,
+      "direction": "vi-to-ja",
+      "question": "Sáng mai bạn đi đâu thế?",
+      "answers": [
+        "あしたの あさ どこへ いきますか。",
+        "明日の 朝 どこへ 行きますか。"
+      ]
+    },
+    {
+      "id": 77,
+      "direction": "vi-to-ja",
+      "question": "Tôi đi đến thư viện đấy nhé.",
+      "answers": [
+        "としょかんへ いきますよ。",
+        "図書館へ 行きますよ。"
+      ]
+    },
+    {
+      "id": 78,
+      "direction": "vi-to-ja",
+      "question": "Bạn đi thư viện với ai?",
+      "answers": [
+        "だれと としょかんへ いきますか。",
+        "誰と 図書館へ 行きますか。"
+      ]
+    },
+    {
+      "id": 79,
+      "direction": "vi-to-ja",
+      "question": "Tôi đi cùng anh Karl.",
+      "answers": [
+        "かーるさんと いきます。",
+        "カールさんと 行きます。"
+      ]
+    },
+    {
+      "id": 80,
+      "direction": "vi-to-ja",
+      "question": "Khi nào bạn về Việt Nam?",
+      "answers": [
+        "いつ べトナムへ かえりますか。",
+        "いつ ベトナムへ 帰りますか。"
+      ]
+    }
+  ],
+  "dialogues": [
+    {
+      "id": 1,
+      "context": "Xác nhận hành trình phủ định (Mẫu 1)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 2)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 3)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "context": "Xác nhận hành trình phủ định (Mẫu 4)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 5)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 6)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "context": "Xác nhận hành trình phủ định (Mẫu 7)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 8)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 9)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "context": "Xác nhận hành trình phủ định (Mẫu 10)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 11)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 12,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 12)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "context": "Xác nhận hành trình phủ định (Mẫu 13)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 14)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 15)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 16,
+      "context": "Xác nhận hành trình phủ định (Mẫu 16)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 17,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 17)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 18)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 19,
+      "context": "Xác nhận hành trình phủ định (Mẫu 19)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 20)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 21,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 21)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "context": "Xác nhận hành trình phủ định (Mẫu 22)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 23,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 23)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 24,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 24)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 25,
+      "context": "Xác nhận hành trình phủ định (Mẫu 25)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 26,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 26)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 27,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 27)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 28,
+      "context": "Xác nhận hành trình phủ định (Mẫu 28)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 29,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 29)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 30,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 30)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 31,
+      "context": "Xác nhận hành trình phủ định (Mẫu 31)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 32,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 32)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 33,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 33)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 34,
+      "context": "Xác nhận hành trình phủ định (Mẫu 34)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 35,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 35)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 36,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 36)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 37,
+      "context": "Xác nhận hành trình phủ định (Mẫu 37)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    },
+    {
+      "id": 38,
+      "context": "Rủ rê cùng đi địa điểm bằng phương tiện (Mẫu 38)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "あした なにで えきへ [blank1]か。",
+          "text_kanji": "明日 何で 駅へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "ともだちと でんしゃで [blank2]。",
+          "text_kanji": "友達と 電車で [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきました",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (hiện tại/tương lai)",
+            "いきました": "đã đi",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "きませんでした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định)",
+            "いきません": "không đi",
+            "きませんでした": "đã không đến",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 39,
+      "context": "Hỏi thăm thời gian và phương tiện di chuyển (Mẫu 39)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "ミラーさんは いつ にほんへ [blank1]か。",
+          "text_kanji": "ミラーさんは いつ 日本へ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "らいげつの 10にちに [blank2]。",
+          "text_kanji": "来月の 10日に [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "きません",
+            "かえりました",
+            "ですか"
+          ],
+          "options_translations": {
+            "いきます": "đi (thì hiện tại/tương lai)",
+            "きません": "không đến",
+            "かえりました": "đã về",
+            "ですか": "là phải không"
+          }
+        },
+        "blank2": {
+          "correct": "いきます",
+          "options": [
+            "いきます",
+            "いきません",
+            "でした",
+            "じゃありません"
+          ],
+          "options_translations": {
+            "いきます": "sẽ đi (khẳng định tương lai)",
+            "いきません": "không đi",
+            "でした": "đã là",
+            "じゃありません": "không phải"
+          }
+        }
+      }
+    },
+    {
+      "id": 40,
+      "context": "Xác nhận hành trình phủ định (Mẫu 40)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text_kana": "きのう どこへ [blank1]か。",
+          "text_kanji": "昨日 どこへ [blank1]か。"
+        },
+        {
+          "speaker": "B",
+          "text_kana": "いいえ、どこへも [blank2]。",
+          "text_kanji": "いいえ、どこへも [blank2]。"
+        }
+      ],
+      "blanks": {
+        "blank1": {
+          "correct": "いきました",
+          "options": [
+            "いきました",
+            "いきます",
+            "きました",
+            "かえります"
+          ],
+          "options_translations": {
+            "いきました": "đã đi (quá khứ)",
+            "いきます": "đi (hiện tại)",
+            "きました": "đã đến",
+            "かえります": "trở về"
+          }
+        },
+        "blank2": {
+          "correct": "いきませんでした",
+          "options": [
+            "いきませんでした",
+            "いきました",
+            "いきます",
+            "きません"
+          ],
+          "options_translations": {
+            "いきませんでした": "đã không đi đâu cả (phủ định quá khứ)",
+            "いきました": "đã đi",
+            "いきます": "đi",
+            "きません": "không đến"
+          }
+        }
+      }
+    }
+  ],
+  "listenings": [
+    {
+      "id": 1,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 1)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 1)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 1)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 2)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 2)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 2)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 3)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 3)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 3)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 4)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 4)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 4)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 5)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 5)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 5)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 6)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 6)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 6)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 7)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 7)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 7)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 8)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 8)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 8)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 9)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 9)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 9)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 10)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 10)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 10)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 11)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 11)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 11)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 12)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 12)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 12)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 13)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 13)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 13)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 14)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 14)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 14)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 15)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 15)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 15)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 16)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 16)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 16)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 17)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 17)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 17)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 18)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 18)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 18)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 19)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 19)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 19)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 20)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 20)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 20)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 21)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 21)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 21)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 22)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 22)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 22)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 23)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 23)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 23)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 24)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 24)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 24)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 25)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 25)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 25)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 26)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 26)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 26)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 27)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 27)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 27)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 28)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 28)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 28)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 29)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 29)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 29)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 30)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 30)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 30)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 31)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 31)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 31)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 32)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 32)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 32)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 33)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 33)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 33)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 34)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 34)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 34)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 35)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 35)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 35)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 36)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 36)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 36)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 37)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 37)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 37)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 38)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 38)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 38)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 39)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 39)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 39)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "audio_text_kana": "A: はじめまして。わたしは たなかです。きのう でんしゃで とうきょうへ いきました。 B: 初めまして。ミラーです。わたしは あした かぞくと しんかんせんで きょうとへ いきます。",
+      "audio_text_kanji": "A: 初めまして。私は 田中です。昨日 電車で 東京へ 行きました。 B: 初めまして。ミラーです。私は 明日 家族と 新幹線で 京都へ 行きます。",
+      "questions": [
+        {
+          "q": "Anh Tanaka đã đi Tokyo bằng phương tiện gì? (Bài nghe 40)",
+          "options": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "correct": "Tàu điện (電車)",
+          "opts": [
+            "Tàu điện (電車)",
+            "Xe bus (バス)",
+            "Xe đạp (自転車)",
+            "Đi bộ (歩いて)"
+          ],
+          "corr": "Tàu điện (電車)"
+        },
+        {
+          "q": "Anh Miller sẽ đi đâu vào ngày mai? (Bài nghe 40)",
+          "options": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "correct": "Kyoto (京都)",
+          "opts": [
+            "Kyoto (京都)",
+            "Tokyo (東京)",
+            "Osaka (大阪)",
+            "Hiroshima (広島)"
+          ],
+          "corr": "Kyoto (京都)"
+        },
+        {
+          "q": "Anh Miller đi Kyoto cùng với ai? (Bài nghe 40)",
+          "options": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "correct": "Gia đình (家族)",
+          "opts": [
+            "Gia đình (家族)",
+            "Một mình (一人)",
+            "Bạn bè (友達)",
+            "Đồng nghiệp (会社の人)"
+          ],
+          "corr": "Gia đình (家族)"
+        }
+      ]
+    }
+  ],
+  "dictations": [
+    {
+      "id": 1,
+      "question_audio": "わたしは あした とうきょうへ いきます",
+      "correct_answers": [
+        "わたしは あした とうきょうへ いきます",
+        "watashi wa ashita toukyou he ikimasu"
+      ]
+    },
+    {
+      "id": 2,
+      "question_audio": "きのう どこへ いきましたか",
+      "correct_answers": [
+        "きのう どこへ いきましたか",
+        "kinou dare he ikimashita ka"
+      ]
+    },
+    {
+      "id": 3,
+      "question_audio": "どこへも いきませんでした",
+      "correct_answers": [
+        "どこへも いきませんでした",
+        "doko he mo ikimasen deshita"
+      ]
+    },
+    {
+      "id": 4,
+      "question_audio": "なにで だいがくへ いきますか",
+      "correct_answers": [
+        "なにで だいがくへ いきますか",
+        "nani de daigaku he ikimasu ka"
+      ]
+    },
+    {
+      "id": 5,
+      "question_audio": "じてんしゃで いきます",
+      "correct_answers": [
+        "じてんしゃで いきます",
+        "jitensha de ikimasu"
+      ]
+    },
+    {
+      "id": 6,
+      "question_audio": "あるいて うちへ かえりました",
+      "correct_answers": [
+        "あるいて うちへ かえりました",
+        "aruite uchi he kaerimashita"
+      ]
+    },
+    {
+      "id": 7,
+      "question_audio": "だれと きょうとへ いきましたか",
+      "correct_answers": [
+        "だれと きょうとへ いきましたか",
+        "dare to kyouto he ikimashita ka"
+      ]
+    },
+    {
+      "id": 8,
+      "question_audio": "かぞくと いきました",
+      "correct_answers": [
+        "かぞくと いきました",
+        "kazoku to ikimashita"
+      ]
+    },
+    {
+      "id": 9,
+      "question_audio": "ひとりで行きます",
+      "correct_answers": [
+        "ひとりで行きます",
+        "hitori de ikimasu"
+      ]
+    },
+    {
+      "id": 10,
+      "question_audio": "いつ にほんへ きましたか",
+      "correct_answers": [
+        "いつ にほんへ きましたか",
+        "itsu nihon he kimashita ka"
+      ]
+    },
+    {
+      "id": 11,
+      "question_audio": "らいねんの 3がつに きます",
+      "correct_answers": [
+        "らいねんの 3がつに きます",
+        "rainen no 3gatsu ni kimasu"
+      ]
+    },
+    {
+      "id": 12,
+      "question_audio": "せんしゅうの にちようびに へやで べんきょうしました",
+      "correct_answers": [
+        "せんしゅうの にちようびに へやで べんきょうしました",
+        "senshuu no nichiyoubi ni heya de benkyoushima"
+      ]
+    },
+    {
+      "id": 13,
+      "question_audio": "あさって ともだちと すーぱーへ いきます",
+      "correct_answers": [
+        "あさって ともだちと すーぱーへ いきます",
+        "asatte tomodachi to suupaa he ikimasu"
+      ]
+    },
+    {
+      "id": 14,
+      "question_audio": "おととい どこへも いきませんでしたよ",
+      "correct_answers": [
+        "おととい どこへも いきませんでしたよ",
+        "ototoi doko he mo ikimasen deshita yo"
+      ]
+    },
+    {
+      "id": 15,
+      "question_audio": "たんじょうびは 6がつ 13にちです",
+      "correct_answers": [
+        "たんじょうびは 6がつ 13にちです",
+        "tanjoubi wa 6gatsu 13nichi desu"
+      ]
+    },
+    {
+      "id": 16,
+      "question_audio": "らいしゅうの げつようびに えきへ いきますか",
+      "correct_answers": [
+        "らいしゅうの げつようびに えきへ いきますか",
+        "raishuu no getsuyoubi ni eki he ikimasu ka"
+      ]
+    },
+    {
+      "id": 17,
+      "question_audio": "いいえ いきません",
+      "correct_answers": [
+        "いいえ いきません",
+        "iie ikimasen"
+      ]
+    },
+    {
+      "id": 18,
+      "question_audio": "しんかんせんで おおさかへ いきます",
+      "correct_answers": [
+        "しんかんせんで おおさかへ いきます",
+        "shinkansen de oosaka he ikimasu"
+      ]
+    },
+    {
+      "id": 19,
+      "question_audio": "たなかさんは かいしゃへ かえりません",
+      "correct_answers": [
+        "たなかさんは かいしゃへ かえりません",
+        "tanaka san wa kaisha he kaerimasen"
+      ]
+    },
+    {
+      "id": 20,
+      "question_audio": "こんしゅうの きんようびに びょういんへ いきますよ",
+      "correct_answers": [
+        "こんしゅうの きんようびに びょういんへ いきますよ",
+        "konshuu no kinyoubi ni byouin he ikimasu yo"
+      ]
+    },
+    {
+      "id": 21,
+      "question_audio": "きのうの ばん 9じに うちへ かえりました",
+      "correct_answers": [
+        "きのうの ばん 9じに うちへ かえりました",
+        "kinou no ban 9ji ni uchi he kaerimashita"
+      ]
+    },
+    {
+      "id": 22,
+      "question_audio": "だれと ひろしまへ いきましたか",
+      "correct_answers": [
+        "だれと ひろしまへ いきましたか",
+        "dare to hiroshima he ikimashita ka"
+      ]
+    },
+    {
+      "id": 23,
+      "question_audio": "かいしゃの ともだちと いきました",
+      "correct_answers": [
+        "かいしゃの ともだちと いきました",
+        "kaisha no tomodachi to ikimashita"
+      ]
+    },
+    {
+      "id": 24,
+      "question_audio": "らいげつの 15にちに べトナムへ かえります",
+      "correct_answers": [
+        "らいげつの 15にちに べトナムへ かえります",
+        "raigetsu no 15nichi ni betonamu he kaerimasu"
+      ]
+    },
+    {
+      "id": 25,
+      "question_audio": "けさ なにで ここへ きましたか",
+      "correct_answers": [
+        "けさ なにで ここへ きましたか",
+        "kesa nani de koko he kimashita ka"
+      ]
+    },
+    {
+      "id": 26,
+      "question_audio": "ばすで きました",
+      "correct_answers": [
+        "ばすで きました",
+        "basu de kimashita"
+      ]
+    },
+    {
+      "id": 27,
+      "question_audio": "きのうの あさ 7じはんに がっこうへ いきました",
+      "correct_answers": [
+        "きのうの あさ 7じはんに がっこうへ いきました",
+        "kinou no asa 7jihan ni gakkou he ikimashita"
+      ]
+    },
+    {
+      "id": 28,
+      "question_audio": "こんばん どこへも いきません",
+      "correct_answers": [
+        "こんばん どこへも いきません",
+        "konban doko he mo ikimasen"
+      ]
+    },
+    {
+      "id": 29,
+      "question_audio": "ミラーさんは いつ かえりますか",
+      "correct_answers": [
+        "ミラーさんは いつ かえりますか",
+        "miraa san wa itsu kaerimasu ka"
+      ]
+    },
+    {
+      "id": 30,
+      "question_audio": "らいしゅう かえります",
+      "correct_answers": [
+        "らいしゅう かえります",
+        "raishuu kaerimasu"
+      ]
+    },
+    {
+      "id": 31,
+      "question_audio": "ちかてつで ぎんこうへ いきますか",
+      "correct_answers": [
+        "ちかてつで ぎんこうへ いきますか",
+        "chikatetsu de ginkou he ikimasu ka"
+      ]
+    },
+    {
+      "id": 32,
+      "question_audio": "いいえ たくしーで いきます",
+      "correct_answers": [
+        "いいえ たくしーで いきます",
+        "iie takushii de ikimasu"
+      ]
+    },
+    {
+      "id": 33,
+      "question_audio": "きょねんの 9がつに にほんへ きました",
+      "correct_answers": [
+        "きょねんの 9がつに にほんへ きました",
+        "kyonen no 9gatsu ni nihon he kimashita"
+      ]
+    },
+    {
+      "id": 34,
+      "question_audio": "まいあさ なんじまで べんきょうしますか",
+      "correct_answers": [
+        "まいあさ なんじまで べんきょうしますか",
+        "maiasa nanji made benkyoushimasu ka"
+      ]
+    },
+    {
+      "id": 35,
+      "question_audio": "せんげつの 25にちに でんしゃで きょうとへ いきました",
+      "correct_answers": [
+        "せんげつの 25にちに でんしゃで きょうとへ いきました",
+        "sengetsu no 25nichi ni densha de kyouto he ikimashita"
+      ]
+    },
+    {
+      "id": 36,
+      "question_audio": "あしたの あさ どこへ いきますか",
+      "correct_answers": [
+        "あしたの あさ どこへ いきますか",
+        "ashita no asa doko he ikimasu ka"
+      ]
+    },
+    {
+      "id": 37,
+      "question_audio": "としょかんへ いきますよ",
+      "correct_answers": [
+        "としょかんへ いきますよ",
+        "toshokan he ikimasu yo"
+      ]
+    },
+    {
+      "id": 38,
+      "question_audio": "だれと としょかんへ いきますか",
+      "correct_answers": [
+        "だれと としょかんへ いきますか",
+        "dare to toshokan he ikimasu ka"
+      ]
+    },
+    {
+      "id": 39,
+      "question_audio": "かーるさんと いきます",
+      "correct_answers": [
+        "かーるさんと いきます",
+        "kaaru san to ikimasu"
+      ]
+    },
+    {
+      "id": 40,
+      "question_audio": "いつ べトナムへ かえりますか",
+      "correct_answers": [
+        "いつ べトナムへ かえりますか",
+        "itsu betonamu he kaerimasu ka"
+      ]
+    }
+  ]
+};
+
+if (typeof lessonReviews !== 'undefined' && Array.isArray(lessonReviews)) {
+  if (!lessonReviews.find(r => r && r.lesson_id === 5)) {
+    lessonReviews.push(lesson5ReviewData);
+  }
+}
+
 const lesson_reviews = {
   "1": typeof lessonReviews !== 'undefined' ? lessonReviews.find(r => r && r.lesson_id === 1) : null,
   "2": typeof lessonReviews !== 'undefined' ? lessonReviews.find(r => r && r.lesson_id === 2) : null,
   "3": typeof lessonReviews !== 'undefined' ? lessonReviews.find(r => r && r.lesson_id === 3) : null,
-  "4": lesson4ReviewData
+  "4": lesson4ReviewData,
+  "5": lesson5ReviewData
 };
 
 const combinedReviews = {
