@@ -1922,7 +1922,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         const b2Ans = reviewAnswers[key2];
 
         const b1Correct = q.originalData.blanks.blank1.correct === b1Ans;
-        const b2Correct = q.originalData.blanks.blank2.correct === b2Ans;
+        const b2Correct = q.originalData.blanks.blank2 ? q.originalData.blanks.blank2.correct === b2Ans : true;
 
         graded[key1] = b1Correct;
         graded[key2] = b2Correct;
@@ -1932,7 +1932,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
         } else if (b1Correct || b2Correct) {
           score += 0.5;
         }
-        feedback[q.key] = `Đáp án đúng: [1] ${q.originalData.blanks.blank1.correct} | [2] ${q.originalData.blanks.blank2.correct}`;
+        feedback[q.key] = q.originalData.blanks.blank2
+          ? `Đáp án đúng: [1] ${q.originalData.blanks.blank1.correct} | [2] ${q.originalData.blanks.blank2.correct}`
+          : `Đáp án đúng: ${q.originalData.blanks.blank1.correct}`;
       }
       
       else if (q.type === 'listening') {

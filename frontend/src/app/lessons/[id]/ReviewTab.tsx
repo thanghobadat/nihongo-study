@@ -314,16 +314,23 @@ export default function ReviewTab({
         setReviewScore(prev => prev + 1);
       }
     } else if (q.type === 'dialogue') {
+      const current = q.originalData;
+      const hasB2 = !!current.blanks?.blank2;
       const b1Key = `${key}_b1`;
       const b2Key = `${key}_b2`;
       const b1Was = !!reviewGraded[b1Key];
-      const b2Was = !!reviewGraded[b2Key];
+      const b2Was = hasB2 ? !!reviewGraded[b2Key] : true;
 
       let scoreToAdd = 0;
-      if (!b1Was && !b2Was) scoreToAdd = 1;
-      else if (!b1Was || !b2Was) scoreToAdd = 0.5;
+      if (hasB2) {
+        if (!b1Was && !b2Was) scoreToAdd = 1;
+        else if (!b1Was || !b2Was) scoreToAdd = 0.5;
+        setReviewGraded(prev => ({ ...prev, [b1Key]: true, [b2Key]: true }));
+      } else {
+        if (!b1Was) scoreToAdd = 1;
+        setReviewGraded(prev => ({ ...prev, [b1Key]: true }));
+      }
 
-      setReviewGraded(prev => ({ ...prev, [b1Key]: true, [b2Key]: true }));
       if (scoreToAdd > 0) {
         setReviewScore(prev => prev + scoreToAdd);
       }
@@ -406,26 +413,33 @@ export default function ReviewTab({
     const b1Ans = reviewAnswers[key1];
     const b2Ans = reviewAnswers[key2];
 
+    const hasB2 = !!current.blanks?.blank2;
     const b1Correct = current.blanks.blank1.correct === b1Ans;
-    const b2Correct = current.blanks.blank2.correct === b2Ans;
+    const b2Correct = hasB2 ? current.blanks.blank2.correct === b2Ans : true;
 
     setReviewGraded(prev => ({
       ...prev,
       [key1]: b1Correct,
-      [key2]: b2Correct,
+      ...(hasB2 ? { [key2]: b2Correct } : {}),
       [keyParent]: true
     }));
 
     let addedScore = 0;
-    if (b1Correct && b2Correct) {
-      addedScore = 1;
-    } else if (b1Correct || b2Correct) {
-      addedScore = 0.5;
+    if (hasB2) {
+      if (b1Correct && b2Correct) {
+        addedScore = 1;
+      } else if (b1Correct || b2Correct) {
+        addedScore = 0.5;
+      }
+    } else {
+      addedScore = b1Correct ? 1 : 0;
     }
     setReviewScore(prev => prev + addedScore);
     setReviewFeedback(prev => ({
       ...prev,
-      [q.key]: `Đáp án đúng: [1] ${current.blanks.blank1.correct} | [2] ${current.blanks.blank2.correct}`
+      [q.key]: hasB2
+        ? `Đáp án đúng: [1] ${current.blanks.blank1.correct} | [2] ${current.blanks.blank2.correct}`
+        : `Đáp án đúng: ${current.blanks.blank1.correct}`
     }));
   };
 
@@ -960,12 +974,12 @@ export default function ReviewTab({
                       })}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-950/65 p-5 rounded-xl border border-slate-900 mb-4">
+                    <div className={`grid ${current.blanks.blank2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 max-w-xl mx-auto'} gap-6 bg-slate-950/65 p-5 rounded-xl border border-slate-900 mb-4`}>
                       {/* Blank 1 Options */}
                       <div className="space-y-2.5">
                         <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
                           <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">1</span>
-                          <span>Đáp án cho vị trí (1):</span>
+                          <span>Đáp án cho vị trí {current.blanks.blank2 ? '(1):' : 'trống:'}</span>
                         </label>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {current.blanks.blank1.options.map((opt: string, oIdx: number) => {
@@ -998,40 +1012,42 @@ export default function ReviewTab({
                       </div>
 
                       {/* Blank 2 Options */}
-                      <div className="space-y-2.5">
-                        <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
-                          <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">2</span>
-                          <span>Đáp án cho vị trí (2):</span>
-                        </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {current.blanks.blank2.options.map((opt: string, oIdx: number) => {
-                            const label = ['A', 'B', 'C', 'D'][oIdx];
-                            const isSelected = reviewAnswers[key2] === opt;
-                            
-                            return (
-                              <button
-                                key={oIdx}
-                                disabled={isQuestionGraded}
-                                onClick={() => setReviewAnswers(prev => ({ ...prev, [key2]: opt }))}
-                                className={`px-3 py-2 text-left rounded-xl text-xs font-semibold border transition-all flex items-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer ${
-                                  isSelected
-                                    ? 'bg-indigo-600/20 border-indigo-550 text-white shadow-md'
-                                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
-                                }`}
-                              >
-                                <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
-                                  isSelected 
-                                    ? 'bg-indigo-650 border-indigo-400 text-white' 
-                                    : 'bg-slate-950 border-slate-805 text-slate-500'
-                                }`}>
-                                  {label}
-                                </span>
-                                <span className="truncate">{opt}</span>
-                              </button>
-                            );
-                          })}
+                      {current.blanks.blank2 && (
+                        <div className="space-y-2.5">
+                          <label className="text-slate-300 text-xs font-semibold flex items-center gap-1.5">
+                            <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs flex items-center justify-center border border-indigo-500/20 font-bold">2</span>
+                            <span>Đáp án cho vị trí (2):</span>
+                          </label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {current.blanks.blank2.options.map((opt: string, oIdx: number) => {
+                              const label = ['A', 'B', 'C', 'D'][oIdx];
+                              const isSelected = reviewAnswers[key2] === opt;
+                              
+                              return (
+                                <button
+                                  key={oIdx}
+                                  disabled={isQuestionGraded}
+                                  onClick={() => setReviewAnswers(prev => ({ ...prev, [key2]: opt }))}
+                                  className={`px-3 py-2 text-left rounded-xl text-xs font-semibold border transition-all flex items-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer ${
+                                    isSelected
+                                      ? 'bg-indigo-600/20 border-indigo-550 text-white shadow-md'
+                                      : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                                  }`}
+                                >
+                                  <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
+                                    isSelected 
+                                      ? 'bg-indigo-650 border-indigo-400 text-white' 
+                                      : 'bg-slate-950 border-slate-805 text-slate-500'
+                                  }`}>
+                                    {label}
+                                  </span>
+                                  <span className="truncate">{opt}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     {!isQuestionGraded ? (
@@ -1328,7 +1344,12 @@ export default function ReviewTab({
 
               const correctQuestionsCount = answeredQuestions.filter(q => {
                 if (q.type === 'translation' || q.type === 'dictation') return !!reviewGraded[q.key];
-                if (q.type === 'dialogue') return !!(reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]);
+                if (q.type === 'dialogue') {
+                  const hasB2 = !!q.originalData.blanks?.blank2;
+                  return hasB2
+                    ? !!(reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`])
+                    : !!reviewGraded[`${q.key}_b1`];
+                }
                 if (q.type === 'listening') {
                   return q.originalData.questions?.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`]);
                 }
@@ -1388,11 +1409,16 @@ export default function ReviewTab({
                                 correctAnsStr = list.join(' / ');
                                 explanationStr = reviewFeedback[q.key] || '';
                               } else if (q.type === 'dialogue') {
+                                const hasB2 = !!currentData.blanks?.blank2;
                                 const b1 = reviewGraded[`${q.key}_b1`];
                                 const b2 = reviewGraded[`${q.key}_b2`];
-                                isCorrect = !!(b1 && b2);
-                                userAnsStr = `(1) ${reviewAnswers[`${q.key}_b1`] || '_'} | (2) ${reviewAnswers[`${q.key}_b2`] || '_'}`;
-                                correctAnsStr = `(1) ${currentData.blanks?.blank1?.correct} | (2) ${currentData.blanks?.blank2?.correct}`;
+                                isCorrect = hasB2 ? !!(b1 && b2) : !!b1;
+                                userAnsStr = hasB2
+                                  ? `(1) ${reviewAnswers[`${q.key}_b1`] || '_'} | (2) ${reviewAnswers[`${q.key}_b2`] || '_'}`
+                                  : `${reviewAnswers[`${q.key}_b1`] || '_'}`;
+                                correctAnsStr = hasB2
+                                  ? `(1) ${currentData.blanks?.blank1?.correct} | (2) ${currentData.blanks?.blank2?.correct}`
+                                  : `${currentData.blanks?.blank1?.correct}`;
                                 explanationStr = currentData.blanks?.blank1?.explanation || '';
                               } else if (q.type === 'listening') {
                                 const allSubCorrect = currentData.questions?.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`]);
@@ -1465,11 +1491,16 @@ export default function ReviewTab({
                             correctAnsStr = list.join(' / ');
                             explanationStr = reviewFeedback[q.key] || '';
                           } else if (q.type === 'dialogue') {
+                            const hasB2 = !!currentData.blanks?.blank2;
                             const b1 = reviewGraded[`${q.key}_b1`];
                             const b2 = reviewGraded[`${q.key}_b2`];
-                            isCorrect = !!(b1 && b2);
-                            userAnsStr = `(1) ${reviewAnswers[`${q.key}_b1`] || '_'} | (2) ${reviewAnswers[`${q.key}_b2`] || '_'}`;
-                            correctAnsStr = `(1) ${currentData.blanks?.blank1?.correct} | (2) ${currentData.blanks?.blank2?.correct}`;
+                            isCorrect = hasB2 ? !!(b1 && b2) : !!b1;
+                            userAnsStr = hasB2
+                              ? `(1) ${reviewAnswers[`${q.key}_b1`] || '_'} | (2) ${reviewAnswers[`${q.key}_b2`] || '_'}`
+                              : `${reviewAnswers[`${q.key}_b1`] || '_'}`;
+                            correctAnsStr = hasB2
+                              ? `(1) ${currentData.blanks?.blank1?.correct} | (2) ${currentData.blanks?.blank2?.correct}`
+                              : `${currentData.blanks?.blank1?.correct}`;
                             explanationStr = currentData.blanks?.blank1?.explanation || '';
                           } else if (q.type === 'listening') {
                             const allSubCorrect = currentData.questions?.every((_: any, sIdx: number) => reviewGraded[`${q.key}_q${sIdx}`]);
