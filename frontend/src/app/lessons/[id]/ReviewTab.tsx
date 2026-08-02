@@ -100,19 +100,23 @@ export default function ReviewTab({
   const [savedSessions, setSavedSessions] = useState<Record<string, any>>({});
   const [showHistoryTable, setShowHistoryTable] = useState<boolean>(true);
 
-  const storageKey = selectedLessonId ? `nihongo_review_state_lesson_${selectedLessonId}` : `nihongo_review_state_combined`;
+  const storageKey = selectedLessonId && selectedLessonId !== 'all'
+    ? `nihongo_review_state_lesson_${selectedLessonId}`
+    : `nihongo_review_state_combined`;
+
+  const [isSessionLoaded, setIsSessionLoaded] = useState<boolean>(false);
 
   // 1. Tự động nạp danh sách tiến trình các dạng bài từ Cloud API / LocalStorage khi nạp dữ liệu
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
       const loadState = async () => {
         try {
-          let loadedSession = null;
+          let loadedSession: Record<string, any> | null = null;
           try {
             const res = await fetch(`/api/user/review-sessions?storage_key=${encodeURIComponent(storageKey)}`);
             if (res.ok) {
               const data = await res.json();
-              if (data && data.session_data) {
+              if (data && data.session_data && typeof data.session_data === 'object' && Object.keys(data.session_data).length > 0) {
                 loadedSession = data.session_data;
               }
             }
@@ -123,17 +127,43 @@ export default function ReviewTab({
           if (!loadedSession) {
             const savedRaw = localStorage.getItem(storageKey);
             if (savedRaw) {
-              loadedSession = JSON.parse(savedRaw);
+              try {
+                loadedSession = JSON.parse(savedRaw);
+              } catch (e) {}
             }
           }
 
           if (loadedSession && typeof loadedSession === 'object') {
             setSavedSessions(loadedSession);
+
+            // Restore active session data into states ONLY IF parent is already in test/result mode with empty questions
+            const activeType = ['translation', 'dialogue', 'listening', 'dictation'].find(type => {
+              const s = loadedSession![type];
+              return s && Array.isArray(s.reviewQuestions) && s.reviewQuestions.length > 0 && (s.reviewStep === 'test' || s.reviewStep === 'result');
+            });
+
+            if (activeType && reviewQuestions.length === 0 && reviewStep !== 'setup') {
+              const saved = loadedSession[activeType];
+              setReviewSelectedType(activeType);
+              setReviewQuestions(saved.reviewQuestions);
+              setReviewAnswers(saved.reviewAnswers || {});
+              setReviewGraded(saved.reviewGraded || {});
+              setReviewFeedback(saved.reviewFeedback || {});
+              setReviewScore(saved.reviewScore || 0);
+              setReviewTotal(saved.reviewTotal || 0);
+              setReviewIndex(saved.reviewIndex || 0);
+              if (saved.translationDirection) {
+                setTranslationDirection(saved.translationDirection);
+              }
+              setReviewStep(saved.reviewStep || 'test');
+            }
           } else {
             setSavedSessions({});
           }
         } catch (err) {
           setSavedSessions({});
+        } finally {
+          setIsSessionLoaded(true);
         }
       };
       loadState();
@@ -142,7 +172,7 @@ export default function ReviewTab({
 
   // 2. Tự động lưu tiến trình của DẠNG BÀI ĐANG CHỌN vào savedSessions, LocalStorage và Cloud API
   React.useEffect(() => {
-    if (typeof window !== 'undefined' && (reviewStep === 'test' || reviewStep === 'result') && reviewSelectedType) {
+    if (typeof window !== 'undefined' && isSessionLoaded && (reviewStep === 'test' || reviewStep === 'result') && reviewSelectedType) {
       if (reviewQuestions.length > 0) {
         const typeState = {
           reviewQuestions,
@@ -171,7 +201,7 @@ export default function ReviewTab({
         });
       }
     }
-  }, [reviewQuestions, reviewAnswers, reviewGraded, reviewFeedback, reviewScore, reviewTotal, reviewIndex, reviewStep, reviewSelectedType, storageKey, translationDirection]);
+  }, [isSessionLoaded, reviewQuestions, reviewAnswers, reviewGraded, reviewFeedback, reviewScore, reviewTotal, reviewIndex, reviewStep, reviewSelectedType, storageKey, translationDirection]);
 
   // 3. Hàm Master Reset xóa sạch cả 4 dạng bài và quay về trang chọn dạng
   const masterResetAll = () => {
