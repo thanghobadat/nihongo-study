@@ -9,16 +9,16 @@ Cẩm nang này hướng dẫn AI Agent cách tìm kiếm tài liệu chuẩn s�
 > 1. **BỘ 1 (Bài tập theo Bài XXX)**:
 >    - **Mục đích**: Dùng riêng cho màn hình học & ôn tập chi tiết của Bài XXX (`/lessons/XXX?tab=review`).
 >    - **Số lượng**: 160 bài tập độc nhất kết hợp Bài 1 ➔ Bài XXX (80 câu Dịch, 40 đoạn Điền khuyết, 40 bài Nghe hiểu dài, 40 câu Chính tả).
->    - **Xuất tệp đề xuất**: `proposed_exercises_lessonXXX.md`
+>    - **Xuất tệp đề xuất**: `tai_lieu/proposed_reviews/proposed_exercises_lessonXXX.md`
 >    - **Nạp Database**: Nạp vào `mockDb.lessonReviews[XXX]` và `mockDb.lesson_reviews["XXX"]`.
 >
 > 2. **BỘ 2 (Bài tập Ôn tập tổng hợp liên bài)**:
 >    - **Mục đích**: Dùng riêng cho trang Tổng hợp kiến thức (`/knowledge?tab=review`). Đây là bộ bài tập **ĐỘC LẬP CHUYÊN BIỆT KHÔNG TRÙNG LẶP CÂU HỎI VỚI BỘ 1**.
 >    - **Số lượng**: 160 bài tập độc nhất kết hợp Bài 1 ➔ Bài XXX (80 câu Dịch, 40 đoạn Điền khuyết, 40 bài Nghe hiểu dài, 40 câu Chính tả).
->    - **Xuất tệp đề xuất**: `proposed_combined_reviews.md`
+>    - **Xuất tệp đề xuất**: `tai_lieu/proposed_reviews/proposed_combined_reviews.md`
 >    - **Nạp Database**: Nạp vào `mockDb.combinedReviews`.
 >
-> 📌 **Tóm tắt quy trình tự động**: Mỗi khi nghe lệnh tạo bài tập cho Bài XXX ➔ AI Agent tự động đọc cẩm nang này, biên soạn cả 2 bộ bài tập trên, xuất tệp `proposed_exercises_lessonXXX.md` và `proposed_combined_reviews.md`, nạp sạch vào `mockDb.js`, kiểm thử nạp module và báo cáo hoàn thành.
+> 📌 **Tóm tắt quy trình tự động**: Mỗi khi nghe lệnh tạo bài tập cho Bài XXX ➔ AI Agent tự động đọc cẩm nang này, biên soạn cả 2 bộ bài tập trên, xuất tệp `tai_lieu/proposed_reviews/proposed_exercises_lessonXXX.md` và `tai_lieu/proposed_reviews/proposed_combined_reviews.md`, nạp sạch vào `mockDb.js`, kiểm thử nạp module và báo cáo hoàn thành.
 
 ---
 
