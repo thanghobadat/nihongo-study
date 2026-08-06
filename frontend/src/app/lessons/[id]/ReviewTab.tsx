@@ -899,9 +899,29 @@ export default function ReviewTab({
               {q.type === 'translation' && (() => {
                 const isJaToVi = current.direction === 'ja-to-vi';
                 const key = q.key;
+                
+                const getVietnameseQuestion = (item: any) => {
+                  if (!item) return '';
+                  const isJp = (str: string) => /[\u3040-\u30ff\u4e00-\u9faf]/.test(str || '');
+                  
+                  if (item.question && !isJp(item.question)) return item.question;
+                  if (item.question_vietnamese && !isJp(item.question_vietnamese)) return item.question_vietnamese;
+                  if (item.vietnamese_meaning && !isJp(item.vietnamese_meaning)) return item.vietnamese_meaning;
+                  if (item.vietnamese && !isJp(item.vietnamese)) return item.vietnamese;
+                  if (item.question_kana && !isJp(item.question_kana)) return item.question_kana;
+                  if (item.question_kanji && !isJp(item.question_kanji)) return item.question_kanji;
+
+                  if (Array.isArray(item.answers)) {
+                    const nonJpAns = item.answers.find((a: any) => typeof a === 'string' && !isJp(a));
+                    if (nonJpAns) return nonJpAns;
+                  }
+
+                  return item.question || 'Hãy dịch câu sang tiếng Nhật:';
+                };
+
                 const questionDisplay = isJaToVi 
                   ? (reviewShowKanji ? (current.question_kanji || current.question_kana || current.question) : (current.question_kana || current.question_kanji || current.question))
-                  : (current.question || current.question_vietnamese || (current.vietnamese_answers ? current.vietnamese_answers[0] : ''));
+                  : getVietnameseQuestion(current);
 
                 return (
                   <div className="space-y-4">

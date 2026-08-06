@@ -1077,7 +1077,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 
 ### Mốc 87: Khắc phục triệt để lỗi bài tập Dạng 1 & Dạng 2/3 ở Ôn tập bài học và Ôn tập tổng hợp cho 50 bài học (Đã hoàn thành & Đã đẩy GitHub - 06/08/2026)
 - **Sửa Dạng 1 (Dịch phản xạ)**:
-  - Sửa [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx) bắt buộc hiển thị câu hỏi tiếng Việt khi `direction === 'vi-to-ja'`.
+  - Bổ sung helper thông minh `getVietnameseQuestion` trong [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx) tự động truy quét các trường dữ liệu dự phòng và lọc bỏ phông chữ tiếng Nhật, đảm bảo 100% đề bài chiều `vi-to-ja` hiển thị câu hỏi tiếng Việt đầy đủ và không bao giờ bị trống.
   - Khôi phục 288 câu hỏi tiếng Việt và dọn dẹp 100% trường `question_kana`/`question_kanji` gán nhầm chữ Nhật ở các câu `vi-to-ja` trong `mockDb.js`.
 - **Sửa Dạng 2 (Hội thoại điền khuyết)**:
   - Sửa điều kiện đánh giá 1 ô trống `blank1` trong `ReviewTab.tsx` hiển thị chuẩn huy hiệu `✓ Đúng hoàn toàn`.
@@ -1089,6 +1089,17 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Đồng bộ `corr` `"ちかいっかい"` ➔ `"地下1階"` ở Bài 3 Dạng 3 #11.
 - **Kiểm định & Push Git**:
   - Chạy `full_audit_all_lessons.js` đạt 0 lỗi trên 100% 50 bài học. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
+
+### Mốc 88: Rà soát đa chiều & Chuẩn hóa 100% dữ liệu từ vựng 25 bài đầu (Bài 1 ➔ 25) (Đã hoàn thành & Đã đẩy GitHub - 06/08/2026)
+- **Chuẩn hóa chữ viết (Hiragana vs Katakana)**:
+  - Chuyển 113 từ mượn tiếng nước ngoài (Gairaigo) từ Hiragana về Katakana chuẩn sư phạm (`ノート`, `スーパー`, `コーヒー`, `プール`, `スキー`, `パスポート`, `サラリーマン`...).
+  - Tách bỏ 100% các ký tự ngoặc chú thích (`[...]`, `「...」`, `（...）`, `II`, `III`) ra khỏi trường `hiragana`.
+- **Khử trùng lặp (Deduplication)**:
+  - Loại bỏ 50 bản ghi trùng lặp trong cùng bài học sau khi chuẩn hóa. Đánh lại chỉ số `id` liên tục cho bộ 1,046 từ vựng.
+- **Sửa Romaji, Nghĩa tiếng Việt & Word Type**:
+  - Chuẩn hóa 14 lỗi Romaji, 29 lỗi nghĩa tiếng Việt và 172 nhãn `word_type`.
+- **Kiểm định & Push Git**:
+  - Chạy `verify_clean_vocab.js` đạt 0 lỗi. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
 
 
 

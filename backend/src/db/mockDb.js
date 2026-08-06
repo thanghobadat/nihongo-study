@@ -665,7 +665,7 @@ module.exports = {
       "hiragana": "はい",
       "romaji": "hai",
       "vietnamese_meaning": "Vâng / Dạ",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "はい、そうです。",
       "example_meaning": "Vâng, đúng vậy.",
       "mnemonic_tip": "Mẹo nhớ: 'Hai' - Vâng, có hai cái.",
@@ -678,7 +678,7 @@ module.exports = {
       "hiragana": "いいえ",
       "romaji": "iie",
       "vietnamese_meaning": "Không / Không phải",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "いいえ、そうじゃありません。",
       "example_meaning": "Không, không phải vậy.",
       "mnemonic_tip": "Mẹo nhớ: 'Y y' - Không, đừng y y chủ quan thế.",
@@ -691,7 +691,7 @@ module.exports = {
       "hiragana": "はじめまして",
       "romaji": "hajimemashite",
       "vietnamese_meaning": "Rất vui được gặp bạn",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "初めまして、ミラー です。",
       "example_meaning": "Rất vui được gặp bạn, tôi là Miller.",
       "mnemonic_tip": "Mẹo nhớ: 'Hà giờ mê má chị' - Lần đầu gặp đã chào hỏi mê luôn.",
@@ -704,7 +704,7 @@ module.exports = {
       "hiragana": "からきました",
       "romaji": "kara kimashita",
       "vietnamese_meaning": "Đến từ...",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "ベトナム から来ました。",
       "example_meaning": "Tôi đến từ Việt Nam.",
       "mnemonic_tip": "Mẹo nhớ: 'Cá ra ký tá' - Đến từ vùng biển xa xôi.",
@@ -717,7 +717,7 @@ module.exports = {
       "hiragana": "どうぞよろしく",
       "romaji": "douzo yoroshiku",
       "vietnamese_meaning": "Rất mong được sự giúp đỡ",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "どうぞよろしくお願いします。",
       "example_meaning": "Rất mong nhận được sự giúp đỡ.",
       "mnemonic_tip": "Mẹo nhớ: 'Đỗ rổ vô lịch' - Rất mong được giúp đỡ xếp rổ đỗ lịch sự.",
@@ -730,7 +730,7 @@ module.exports = {
       "hiragana": "しつれいですが",
       "romaji": "shitsurei desuga",
       "vietnamese_meaning": "Xin lỗi (khi hỏi chuyện riêng tư)",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "失礼ですが、お名前は？",
       "example_meaning": "Xin lỗi, tên bạn là gì?",
       "mnemonic_tip": "Mẹo nhớ: 'Sứt răng đi gà' - Xin lỗi nha, đi nha sĩ vì sứt răng.",
@@ -743,7 +743,7 @@ module.exports = {
       "hiragana": "おなまえは",
       "romaji": "onamae wa",
       "vietnamese_meaning": "Tên bạn là gì?",
-      "word_type": "greeting",
+      "word_type": "expression",
       "japanese_example": "お名前は 何ですか。",
       "example_meaning": "Tên của bạn là gì?",
       "mnemonic_tip": "Mẹo nhớ: 'Ổ nằm đây' - Xin hỏi tên bạn nằm ở đâu?",
@@ -924,7 +924,7 @@ module.exports = {
       "lesson_id": 1,
       "hiragana": "～さん",
       "romaji": "san",
-      "vietnamese_meaning": "anh/chị/ông/bà (hậu tố lịch sự)",
+      "vietnamese_meaning": "anh / chị / ông / bà (hậu tố lịch sự)",
       "word_type": "suffix",
       "japanese_example": "ミラーさん",
       "example_meaning": "Anh Miller",
@@ -1143,7 +1143,7 @@ module.exports = {
     {
       "id": 58,
       "lesson_id": 2,
-      "hiragana": "のーと",
+      "hiragana": "ノート",
       "romaji": "nōto",
       "vietnamese_meaning": "vở, sổ tay",
       "word_type": "noun",
@@ -1182,7 +1182,7 @@ module.exports = {
     {
       "id": 61,
       "lesson_id": 2,
-      "hiragana": "かーど",
+      "hiragana": "カード",
       "romaji": "kādo",
       "vietnamese_meaning": "thẻ, card",
       "word_type": "noun",
@@ -1208,7 +1208,7 @@ module.exports = {
     {
       "id": 63,
       "lesson_id": 2,
-      "hiragana": "ぼーるぺん",
+      "hiragana": "ボールペン",
       "romaji": "bōrupen",
       "vietnamese_meaning": "bút bi",
       "word_type": "noun",
@@ -1221,7 +1221,7 @@ module.exports = {
     {
       "id": 64,
       "lesson_id": 2,
-      "hiragana": "しゃーぷぺんしる",
+      "hiragana": "シャープペンシル",
       "romaji": "shāpupenshiru",
       "vietnamese_meaning": "bút chì kim",
       "word_type": "noun",
@@ -1286,7 +1286,7 @@ module.exports = {
     {
       "id": 69,
       "lesson_id": 2,
-      "hiragana": "しーでぃー",
+      "hiragana": "CD",
       "romaji": "shīdī",
       "vietnamese_meaning": "đĩa CD",
       "word_type": "noun",
@@ -1299,7 +1299,7 @@ module.exports = {
     {
       "id": 70,
       "lesson_id": 2,
-      "hiragana": "てれび",
+      "hiragana": "テレビ",
       "romaji": "terebi",
       "vietnamese_meaning": "tivi",
       "word_type": "noun",
@@ -1312,7 +1312,7 @@ module.exports = {
     {
       "id": 71,
       "lesson_id": 2,
-      "hiragana": "らじお",
+      "hiragana": "ラジオ",
       "romaji": "rajio",
       "vietnamese_meaning": "đài",
       "word_type": "noun",
@@ -1325,7 +1325,7 @@ module.exports = {
     {
       "id": 72,
       "lesson_id": 2,
-      "hiragana": "かめら",
+      "hiragana": "カメラ",
       "romaji": "kamera",
       "vietnamese_meaning": "máy ảnh",
       "word_type": "noun",
@@ -1338,7 +1338,7 @@ module.exports = {
     {
       "id": 73,
       "lesson_id": 2,
-      "hiragana": "こんぴゅーた",
+      "hiragana": "コンピューター",
       "romaji": "konpyūta",
       "vietnamese_meaning": "máy vi tính",
       "word_type": "noun",
@@ -1390,7 +1390,7 @@ module.exports = {
     {
       "id": 77,
       "lesson_id": 2,
-      "hiragana": "ちょこれーと",
+      "hiragana": "チョコレート",
       "romaji": "chokorēto",
       "vietnamese_meaning": "sô-cô-la",
       "word_type": "noun",
@@ -1403,7 +1403,7 @@ module.exports = {
     {
       "id": 78,
       "lesson_id": 2,
-      "hiragana": "こーひー",
+      "hiragana": "コーヒー",
       "romaji": "kōhī",
       "vietnamese_meaning": "cà phê",
       "word_type": "noun",
@@ -1780,7 +1780,7 @@ module.exports = {
     {
       "id": 107,
       "lesson_id": 3,
-      "hiragana": "ろびー",
+      "hiragana": "ロビー",
       "romaji": "robii",
       "vietnamese_meaning": "hành lang, đại sảnh",
       "word_type": "noun",
@@ -1832,7 +1832,7 @@ module.exports = {
     {
       "id": 111,
       "lesson_id": 3,
-      "hiragana": "えれべーたー",
+      "hiragana": "エレベーター",
       "romaji": "erebeetaa",
       "vietnamese_meaning": "thang máy",
       "word_type": "noun",
@@ -1845,7 +1845,7 @@ module.exports = {
     {
       "id": 112,
       "lesson_id": 3,
-      "hiragana": "えすかれーたー",
+      "hiragana": "エスカレーター",
       "romaji": "esukareetaa",
       "vietnamese_meaning": "thang cuốn",
       "word_type": "noun",
@@ -1923,7 +1923,7 @@ module.exports = {
     {
       "id": 118,
       "lesson_id": 3,
-      "hiragana": "ねくたい",
+      "hiragana": "ネクタイ",
       "romaji": "nekutai",
       "vietnamese_meaning": "cà vạt",
       "word_type": "noun",
@@ -1936,7 +1936,7 @@ module.exports = {
     {
       "id": 119,
       "lesson_id": 3,
-      "hiragana": "わいん",
+      "hiragana": "ワイン",
       "romaji": "wain",
       "vietnamese_meaning": "rượu vang",
       "word_type": "noun",
@@ -2119,7 +2119,7 @@ module.exports = {
       "id": 133,
       "lesson_id": 3,
       "hiragana": "～でございます",
-      "romaji": "~de gozaimasu",
+      "romaji": "~ de gozaimasu",
       "vietnamese_meaning": "kính ngữ của desu",
       "word_type": "expression",
       "japanese_example": "こちらは 事務所でございます。",
@@ -2147,7 +2147,7 @@ module.exports = {
       "hiragana": "じゃ",
       "romaji": "ja",
       "vietnamese_meaning": "vậy thì, thế thì",
-      "word_type": "conjunction",
+      "word_type": "noun",
       "japanese_example": "ja, これをください。",
       "example_meaning": "Vậy thì cho tôi lấy cái này.",
       "mnemonic_tip": "Dùng khi đưa ra quyết định mua hàng.",
@@ -2509,7 +2509,7 @@ module.exports = {
       "id": 163,
       "lesson_id": 4,
       "hiragana": "～じ",
-      "romaji": "~ji",
+      "romaji": "~ ji",
       "vietnamese_meaning": "~ giờ (chỉ thời gian)",
       "word_type": "counter",
       "japanese_example": "今１時です。",
@@ -2521,8 +2521,8 @@ module.exports = {
     {
       "id": 164,
       "lesson_id": 4,
-      "hiragana": "～ふん（～ぷん）",
-      "romaji": "~fun (~pun)",
+      "hiragana": "～ふん",
+      "romaji": "~ fun (~pun)",
       "vietnamese_meaning": "~ phút (chỉ thời gian)",
       "word_type": "counter",
       "japanese_example": "５分休みましょう。",
@@ -2797,7 +2797,7 @@ module.exports = {
       "hiragana": "たいへんですね",
       "romaji": "taihendesu ne",
       "vietnamese_meaning": "Vất vả quá nhỉ, khó khăn quá nhỉ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "毎日残業ですか。大変ですね。",
       "example_meaning": "Ngày nào cũng tăng ca sao? Vất vả quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Tai hèn thế' - Tai nghe chuyện hèn thế nên chia sẻ nỗi vất vả.",
@@ -2834,9 +2834,9 @@ module.exports = {
       "id": 188,
       "lesson_id": 4,
       "hiragana": "～を おねがいします",
-      "romaji": "~o onegaishimasu",
+      "romaji": "~ o onegaishimasu",
       "vietnamese_meaning": "Làm ơn..., xin vui lòng cho...",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "お水を願いします。",
       "example_meaning": "Làm ơn cho tôi xin nước.",
       "mnemonic_tip": "Mẹo nhớ: Cách nói nhờ vả lịch sự phổ biến nhất.",
@@ -2849,7 +2849,7 @@ module.exports = {
       "hiragana": "かしこまりました",
       "romaji": "kashikomarimashita",
       "vietnamese_meaning": "Tôi đã hiểu rõ rồi ạ, tuân lệnh",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "はい、かしこまりました。",
       "example_meaning": "Vâng, tôi đã hiểu rõ rồi ạ.",
       "mnemonic_tip": "Mẹo nhớ: 'Cả xích cổ mà đi' - Vẫn tuân lệnh người khác.",
@@ -2886,7 +2886,7 @@ module.exports = {
       "id": 192,
       "lesson_id": 4,
       "hiragana": "～から",
-      "romaji": "~kara",
+      "romaji": "~ kara",
       "vietnamese_meaning": "Từ ~",
       "word_type": "particle",
       "japanese_example": "９時から働きます。",
@@ -2899,7 +2899,7 @@ module.exports = {
       "id": 193,
       "lesson_id": 4,
       "hiragana": "～まで",
-      "romaji": "~made",
+      "romaji": "~ made",
       "vietnamese_meaning": "Đến ~",
       "word_type": "particle",
       "japanese_example": "５時まで働きます。",
@@ -2912,7 +2912,7 @@ module.exports = {
       "id": 194,
       "lesson_id": 4,
       "hiragana": "～と～",
-      "romaji": "~to~",
+      "romaji": "~ to ~",
       "vietnamese_meaning": "~ và ~",
       "word_type": "particle",
       "japanese_example": "月曜日と火曜日",
@@ -2979,7 +2979,7 @@ module.exports = {
       "hiragana": "えーと",
       "romaji": "e-to",
       "vietnamese_meaning": "Ờ, ừm, để tôi xem... (từ đệm suy nghĩ)",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "えーと、それは何ですか。",
       "example_meaning": "Ờ..., cái đó là cái gì vậy?",
       "mnemonic_tip": "Mẹo nhớ: Từ đệm kéo dài dùng khi cần thời gian suy nghĩ.",
@@ -3041,7 +3041,7 @@ module.exports = {
     {
       "id": 204,
       "lesson_id": 5,
-      "hiragana": "すーぱー",
+      "hiragana": "スーパー",
       "romaji": "suupaa",
       "vietnamese_meaning": "siêu thị",
       "word_type": "noun",
@@ -3262,19 +3262,6 @@ module.exports = {
     {
       "id": 221,
       "lesson_id": 5,
-      "hiragana": "スーパー",
-      "romaji": "suupaa",
-      "vietnamese_meaning": "Siêu thị",
-      "word_type": "noun",
-      "japanese_example": "私はスーパーで買い物をします。",
-      "example_meaning": "Tôi mua sắm ở \"siêu thị\".",
-      "mnemonic_tip": "Suýt pa: Đi \"siêu thị\" mà suýt \"pa\" (papa) mất tiêu con trai.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 222,
-      "lesson_id": 5,
       "hiragana": "ちかてつ",
       "romaji": "chikatetsu",
       "vietnamese_meaning": "Tàu điện ngầm",
@@ -3286,7 +3273,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 223,
+      "id": 222,
       "lesson_id": 5,
       "hiragana": "しんかんせん",
       "romaji": "shinkansen",
@@ -3299,7 +3286,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 224,
+      "id": 223,
       "lesson_id": 5,
       "hiragana": "バス",
       "romaji": "basu",
@@ -3312,7 +3299,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 225,
+      "id": 224,
       "lesson_id": 5,
       "hiragana": "タクシー",
       "romaji": "takushii",
@@ -3325,7 +3312,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 226,
+      "id": 225,
       "lesson_id": 5,
       "hiragana": "ひと",
       "romaji": "hito",
@@ -3338,7 +3325,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 227,
+      "id": 226,
       "lesson_id": 5,
       "hiragana": "かれ",
       "romaji": "kare",
@@ -3351,7 +3338,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 228,
+      "id": 227,
       "lesson_id": 5,
       "hiragana": "かのじょ",
       "romaji": "kanojo",
@@ -3364,7 +3351,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 229,
+      "id": 228,
       "lesson_id": 5,
       "hiragana": "きょねん",
       "romaji": "kyonen",
@@ -3377,7 +3364,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 230,
+      "id": 229,
       "lesson_id": 5,
       "hiragana": "ことし",
       "romaji": "kotoshi",
@@ -3390,7 +3377,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 231,
+      "id": 230,
       "lesson_id": 5,
       "hiragana": "らいねん",
       "romaji": "rainen",
@@ -3403,7 +3390,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 232,
+      "id": 231,
       "lesson_id": 5,
       "hiragana": "―がつ",
       "romaji": "-gatsu",
@@ -3416,12 +3403,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 233,
+      "id": 232,
       "lesson_id": 5,
       "hiragana": "なんがつ",
       "romaji": "nangatsu",
       "vietnamese_meaning": "tháng mấy",
-      "word_type": "interrogative counter",
+      "word_type": "noun",
       "japanese_example": "今日は何月ですか。",
       "example_meaning": "Hôm nay là tháng mấy?",
       "mnemonic_tip": "Nangatsu: \"Nắng gắt\" - Trời \"nắng gắt\" thế này thì là tháng mấy rồi nhỉ?",
@@ -3429,7 +3416,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 234,
+      "id": 233,
       "lesson_id": 5,
       "hiragana": "ついたち",
       "romaji": "tsuitachi",
@@ -3442,7 +3429,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 235,
+      "id": 234,
       "lesson_id": 5,
       "hiragana": "ふつか",
       "romaji": "futsuka",
@@ -3455,7 +3442,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 236,
+      "id": 235,
       "lesson_id": 5,
       "hiragana": "みっか",
       "romaji": "mikka",
@@ -3468,7 +3455,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 237,
+      "id": 236,
       "lesson_id": 5,
       "hiragana": "よっか",
       "romaji": "yokka",
@@ -3481,7 +3468,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 238,
+      "id": 237,
       "lesson_id": 5,
       "hiragana": "いつか",
       "romaji": "itsuka",
@@ -3494,7 +3481,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 239,
+      "id": 238,
       "lesson_id": 5,
       "hiragana": "むいか",
       "romaji": "muika",
@@ -3507,7 +3494,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 240,
+      "id": 239,
       "lesson_id": 5,
       "hiragana": "なのか",
       "romaji": "nanoka",
@@ -3520,7 +3507,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 241,
+      "id": 240,
       "lesson_id": 5,
       "hiragana": "ようか",
       "romaji": "youka",
@@ -3533,7 +3520,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 242,
+      "id": 241,
       "lesson_id": 5,
       "hiragana": "ここのか",
       "romaji": "kokonoka",
@@ -3546,7 +3533,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 243,
+      "id": 242,
       "lesson_id": 5,
       "hiragana": "とおか",
       "romaji": "tooka",
@@ -3559,7 +3546,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 244,
+      "id": 243,
       "lesson_id": 5,
       "hiragana": "じゅうよっか",
       "romaji": "juuyokka",
@@ -3572,7 +3559,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 245,
+      "id": 244,
       "lesson_id": 5,
       "hiragana": "はつか",
       "romaji": "hatsuka",
@@ -3585,7 +3572,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 246,
+      "id": 245,
       "lesson_id": 5,
       "hiragana": "にじゅうよっか",
       "romaji": "nijuuyokka",
@@ -3598,7 +3585,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 247,
+      "id": 246,
       "lesson_id": 5,
       "hiragana": "―にち",
       "romaji": "-nichi",
@@ -3611,12 +3598,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 248,
+      "id": 247,
       "lesson_id": 5,
       "hiragana": "なんにち",
       "romaji": "nannichi",
       "vietnamese_meaning": "ngày mấy, mấy ngày",
-      "word_type": "interrogative counter",
+      "word_type": "noun",
       "japanese_example": "今日(きょう)は何日(なんにち)ですか。",
       "example_meaning": "Hôm nay là ngày mấy?",
       "mnemonic_tip": "Nannichi: \"Nắng nỉ\" - Trời \"nắng nỉ\" (nắng nôi) thế này thì là ngày mấy rồi nhỉ?",
@@ -3624,12 +3611,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 249,
+      "id": 248,
       "lesson_id": 5,
       "hiragana": "いつ",
       "romaji": "itsu",
       "vietnamese_meaning": "khi nào",
-      "word_type": "interrogative pronoun",
+      "word_type": "noun",
       "japanese_example": "いつ日本(にほん)へ行(い)きますか。",
       "example_meaning": "Khi nào bạn đi Nhật?",
       "mnemonic_tip": "Itsu: \"Ít xui\" - Hỏi \"khi nào\" thì được đi chơi, mong là \"ít xui\" để đi được sớm.",
@@ -3637,7 +3624,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 250,
+      "id": 249,
       "lesson_id": 5,
       "hiragana": "たんじょうび",
       "romaji": "tanjoubi",
@@ -3650,7 +3637,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 251,
+      "id": 250,
       "lesson_id": 5,
       "hiragana": "ふつう",
       "romaji": "futsuu",
@@ -3663,7 +3650,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 252,
+      "id": 251,
       "lesson_id": 5,
       "hiragana": "きゅうこう",
       "romaji": "kyuukou",
@@ -3676,7 +3663,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 253,
+      "id": 252,
       "lesson_id": 5,
       "hiragana": "とっきゅう",
       "romaji": "tokkyuu",
@@ -3689,12 +3676,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 254,
+      "id": 253,
       "lesson_id": 5,
       "hiragana": "つぎの",
       "romaji": "tsugino",
       "vietnamese_meaning": "tiếp theo, kế tiếp",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "次(つぎ)の駅(えき)はどこですか。",
       "example_meaning": "Ga kế tiếp là ga nào?",
       "mnemonic_tip": "Tsugino: \"Chữ ghi nốt\" - Đến bài \"tiếp theo\", thầy dặn \"chữ ghi nốt\" nhé!",
@@ -3702,12 +3689,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 255,
+      "id": 254,
       "lesson_id": 5,
       "hiragana": "どういたしまして",
       "romaji": "douitashimashite",
       "vietnamese_meaning": "không có gì, đừng khách sáo",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "「ありがとう」 「どういたしまして。」",
       "example_meaning": "「Cảm ơn.」 「Không có gì (đừng khách sáo).」",
       "mnemonic_tip": "Douitashimashite: \"Đôi ta xinh mắt\" - Khi ai đó khen, mình trả lời \"không có gì\", vì \"đôi ta xinh mắt\" mà! (nghĩa là không cần khen quá).",
@@ -3715,7 +3702,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 256,
+      "id": 255,
       "lesson_id": 6,
       "hiragana": "たべます",
       "romaji": "tabemasu",
@@ -3728,7 +3715,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 257,
+      "id": 256,
       "lesson_id": 6,
       "hiragana": "のみます",
       "romaji": "nomimasu",
@@ -3741,7 +3728,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 258,
+      "id": 257,
       "lesson_id": 6,
       "hiragana": "すいます",
       "romaji": "suimasu",
@@ -3754,7 +3741,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 259,
+      "id": 258,
       "lesson_id": 6,
       "hiragana": "みます",
       "romaji": "mimasu",
@@ -3767,7 +3754,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 260,
+      "id": 259,
       "lesson_id": 6,
       "hiragana": "ききましゅ",
       "romaji": "kikimasu",
@@ -3780,7 +3767,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 261,
+      "id": 260,
       "lesson_id": 6,
       "hiragana": "よみます",
       "romaji": "yomimasu",
@@ -3793,7 +3780,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 262,
+      "id": 261,
       "lesson_id": 6,
       "hiragana": "かきます",
       "romaji": "kakimasu",
@@ -3806,7 +3793,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 263,
+      "id": 262,
       "lesson_id": 6,
       "hiragana": "かいます",
       "romaji": "kaimasu",
@@ -3819,7 +3806,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 264,
+      "id": 263,
       "lesson_id": 6,
       "hiragana": "とります",
       "romaji": "torimasu",
@@ -3832,7 +3819,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 265,
+      "id": 264,
       "lesson_id": 6,
       "hiragana": "します",
       "romaji": "shimasu",
@@ -3845,7 +3832,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 266,
+      "id": 265,
       "lesson_id": 6,
       "hiragana": "あいます",
       "romaji": "aimasu",
@@ -3858,7 +3845,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 267,
+      "id": 266,
       "lesson_id": 6,
       "hiragana": "ごはん",
       "romaji": "gohan",
@@ -3871,7 +3858,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 268,
+      "id": 267,
       "lesson_id": 6,
       "hiragana": "あさごはん",
       "romaji": "asagohan",
@@ -3884,7 +3871,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 269,
+      "id": 268,
       "lesson_id": 6,
       "hiragana": "ひるごはん",
       "romaji": "hirugohan",
@@ -3897,7 +3884,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 270,
+      "id": 269,
       "lesson_id": 6,
       "hiragana": "ばんごはん",
       "romaji": "bangohan",
@@ -3910,9 +3897,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 271,
+      "id": 270,
       "lesson_id": 6,
-      "hiragana": "ぱん",
+      "hiragana": "パン",
       "romaji": "pan",
       "vietnamese_meaning": "bánh mì",
       "word_type": "noun",
@@ -3923,7 +3910,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 272,
+      "id": 271,
       "lesson_id": 6,
       "hiragana": "たまご",
       "romaji": "tamago",
@@ -3936,7 +3923,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 273,
+      "id": 272,
       "lesson_id": 6,
       "hiragana": "にく",
       "romaji": "niku",
@@ -3949,7 +3936,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 274,
+      "id": 273,
       "lesson_id": 6,
       "hiragana": "さかな",
       "romaji": "sakana",
@@ -3962,7 +3949,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 275,
+      "id": 274,
       "lesson_id": 6,
       "hiragana": "やさい",
       "romaji": "yasai",
@@ -3975,12 +3962,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 276,
+      "id": 275,
       "lesson_id": 6,
       "hiragana": "たばこをすいます",
       "romaji": "tabako o suimasu",
       "vietnamese_meaning": "Hút thuốc lá",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "毎朝たばこを吸います。",
       "example_meaning": "Mỗi sáng tôi hút thuốc lá.",
       "mnemonic_tip": "Tabako o suimasu (Ta bốc sùi mắt) - Ta bốc khói thuốc sùi ra làm cay mắt.",
@@ -3988,7 +3975,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 277,
+      "id": 276,
       "lesson_id": 6,
       "hiragana": "ききます",
       "romaji": "kikimasu",
@@ -4001,12 +3988,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 278,
+      "id": 277,
       "lesson_id": 6,
       "hiragana": "しゃしんをとります",
       "romaji": "shashin o torimasu",
       "vietnamese_meaning": "Chụp ảnh",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "公園で写真を撮ります。",
       "example_meaning": "Chụp ảnh ở công viên.",
       "mnemonic_tip": "Shashin o torimasu (Xa xin tổ rì rầm) - Xa xin chụp một tấm hình, mọi người tổ chức rì rầm tạo dáng.",
@@ -4014,12 +4001,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 279,
+      "id": 278,
       "lesson_id": 6,
       "hiragana": "ともだちにあいます",
       "romaji": "tomodachi ni aimasu",
       "vietnamese_meaning": "Gặp bạn bè",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "週末、友達に会います。",
       "example_meaning": "Cuối tuần tôi sẽ gặp bạn bè.",
       "mnemonic_tip": "Tomodachi ni aimasu (Tô mơ đã chị, ai mắc) - Tô mơ đã gặp chị, nhưng ai mắc cái tội đi gặp chị mà không rủ tôi?",
@@ -4027,20 +4014,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 280,
-      "lesson_id": 6,
-      "hiragana": "パン",
-      "romaji": "pan",
-      "vietnamese_meaning": "Bánh mì",
-      "word_type": "noun",
-      "japanese_example": "パンを食べます。",
-      "example_meaning": "Ăn bánh mì.",
-      "mnemonic_tip": "Pan (Păn) - Bánh mì 'păn' pắn tròn xoe ngon lành.",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 281,
+      "id": 279,
       "lesson_id": 6,
       "hiragana": "くだもの",
       "romaji": "kudamono",
@@ -4053,7 +4027,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 282,
+      "id": 280,
       "lesson_id": 6,
       "hiragana": "みず",
       "romaji": "mizu",
@@ -4066,7 +4040,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 283,
+      "id": 281,
       "lesson_id": 6,
       "hiragana": "おちゃ",
       "romaji": "ocha",
@@ -4079,7 +4053,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 284,
+      "id": 282,
       "lesson_id": 6,
       "hiragana": "こうちゃ",
       "romaji": "koucha",
@@ -4092,7 +4066,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 285,
+      "id": 283,
       "lesson_id": 6,
       "hiragana": "ぎゅうにゅう",
       "romaji": "gyuunyuu",
@@ -4105,7 +4079,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 286,
+      "id": 284,
       "lesson_id": 6,
       "hiragana": "ミルク",
       "romaji": "miruku",
@@ -4118,7 +4092,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 287,
+      "id": 285,
       "lesson_id": 6,
       "hiragana": "ジュース",
       "romaji": "juusu",
@@ -4131,7 +4105,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 288,
+      "id": 286,
       "lesson_id": 6,
       "hiragana": "ビール",
       "romaji": "biiru",
@@ -4144,9 +4118,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 289,
+      "id": 287,
       "lesson_id": 6,
-      "hiragana": "（お）さけ",
+      "hiragana": "さけ",
       "romaji": "osake",
       "vietnamese_meaning": "rượu, rượu sake",
       "word_type": "noun",
@@ -4157,7 +4131,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 290,
+      "id": 288,
       "lesson_id": 6,
       "hiragana": "サッカー",
       "romaji": "sakkaa",
@@ -4170,7 +4144,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 291,
+      "id": 289,
       "lesson_id": 6,
       "hiragana": "テニス",
       "romaji": "tenisu",
@@ -4183,7 +4157,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 292,
+      "id": 290,
       "lesson_id": 6,
       "hiragana": "CD",
       "romaji": "shii dii",
@@ -4196,7 +4170,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 293,
+      "id": 291,
       "lesson_id": 6,
       "hiragana": "ビデオ",
       "romaji": "bideo",
@@ -4209,7 +4183,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 294,
+      "id": 292,
       "lesson_id": 6,
       "hiragana": "なに",
       "romaji": "nani",
@@ -4222,7 +4196,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 295,
+      "id": 293,
       "lesson_id": 6,
       "hiragana": "それから",
       "romaji": "sorekara",
@@ -4235,7 +4209,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 296,
+      "id": 294,
       "lesson_id": 6,
       "hiragana": "ちょっと",
       "romaji": "chotto",
@@ -4248,7 +4222,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 297,
+      "id": 295,
       "lesson_id": 6,
       "hiragana": "みせ",
       "romaji": "mise",
@@ -4261,7 +4235,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 298,
+      "id": 296,
       "lesson_id": 6,
       "hiragana": "レストラン",
       "romaji": "resutoran",
@@ -4274,7 +4248,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 299,
+      "id": 297,
       "lesson_id": 6,
       "hiragana": "てがみ",
       "romaji": "tegami",
@@ -4287,7 +4261,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 300,
+      "id": 298,
       "lesson_id": 6,
       "hiragana": "えいが",
       "romaji": "eiga",
@@ -4300,7 +4274,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 301,
+      "id": 299,
       "lesson_id": 6,
       "hiragana": "しゃしん",
       "romaji": "shashin",
@@ -4313,7 +4287,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 302,
+      "id": 300,
       "lesson_id": 6,
       "hiragana": "にわ",
       "romaji": "niwa",
@@ -4326,9 +4300,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 303,
+      "id": 301,
       "lesson_id": 6,
-      "hiragana": "しゅくだい [をします]",
+      "hiragana": "しゅくだい",
       "romaji": "shukudai",
       "vietnamese_meaning": "bài tập về nhà",
       "word_type": "noun",
@@ -4339,7 +4313,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 304,
+      "id": 302,
       "lesson_id": 6,
       "hiragana": "レポート",
       "romaji": "repooto",
@@ -4352,7 +4326,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 305,
+      "id": 303,
       "lesson_id": 6,
       "hiragana": "ときどき",
       "romaji": "tokidoki",
@@ -4365,7 +4339,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 306,
+      "id": 304,
       "lesson_id": 6,
       "hiragana": "いつも",
       "romaji": "itsumo",
@@ -4378,7 +4352,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 307,
+      "id": 305,
       "lesson_id": 6,
       "hiragana": "いっしょに",
       "romaji": "isshoni",
@@ -4391,12 +4365,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 308,
+      "id": 306,
       "lesson_id": 6,
       "hiragana": "いいですね",
       "romaji": "ii desu ne",
       "vietnamese_meaning": "Tốt quá nhỉ!, Được đấy!",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "「明日、テニスをしませんか。」「いいですね。」",
       "example_meaning": "Ngày mai chúng ta chơi tennis không?' 'Được đấy!'",
       "mnemonic_tip": "Ii desu ne nghe như 'yêu đến nơi' - Ai đó nói 'Tốt quá!' là sắp 'yêu đến nơi' rồi.",
@@ -4404,12 +4378,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 309,
+      "id": 307,
       "lesson_id": 6,
       "hiragana": "ええ",
       "romaji": "ee",
       "vietnamese_meaning": "vâng, ừ",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "「ご飯を食べましたか。」「ええ、食べました。」",
       "example_meaning": "Bạn đã ăn cơm chưa?' 'Vâng, tôi ăn rồi.'",
       "mnemonic_tip": "Ee nghe như 'Ê!' - Khi bạn trả lời 'Ê!' (Vâng!) với bạn bè.",
@@ -4417,7 +4391,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 310,
+      "id": 308,
       "lesson_id": 6,
       "hiragana": "こうえん",
       "romaji": "kouen",
@@ -4430,12 +4404,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 311,
+      "id": 309,
       "lesson_id": 6,
       "hiragana": "なんですか",
       "romaji": "nan desu ka",
       "vietnamese_meaning": "Vâng ạ? (Khi được gọi, hoặc khi không hiểu)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "「田中さん、ちょっと。」「はい、何ですか。」",
       "example_meaning": "Anh Tanaka, một chút.' 'Vâng, có chuyện gì vậy?'",
       "mnemonic_tip": "Nan desu ka nghe như 'nan đề xưa' - Khi bạn không hiểu, bạn nói 'nan đề xưa' (chuyện gì vậy?)",
@@ -4443,9 +4417,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 312,
+      "id": 310,
       "lesson_id": 6,
-      "hiragana": "（お）はなみ [をす]",
+      "hiragana": "はなみ",
       "romaji": "ohanami",
       "vietnamese_meaning": "ngắm hoa anh đào",
       "word_type": "noun",
@@ -4456,7 +4430,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 313,
+      "id": 311,
       "lesson_id": 6,
       "hiragana": "おおさかじょうこうえん",
       "romaji": "oosakajoukouen",
@@ -4469,12 +4443,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 314,
+      "id": 312,
       "lesson_id": 6,
-      "hiragana": "わかりました。",
+      "hiragana": "わかりました",
       "romaji": "wakarimashita",
-      "vietnamese_meaning": "Tôi đã hiểu rồi.",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Tôi đã hiểu rồi",
+      "word_type": "expression",
       "japanese_example": "「日本語が分かりますか。」「はい、少し分かりました。」",
       "example_meaning": "Bạn có hiểu tiếng Nhật không?' 'Vâng, tôi đã hiểu một chút.'",
       "mnemonic_tip": "Wakarimashita nghe như 'qua cà ri mắt ta' - Tôi đã hiểu rồi, món cà ri này 'qua cà ri mắt ta' (ngon mắt ta).",
@@ -4482,12 +4456,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 315,
+      "id": 313,
       "lesson_id": 6,
-      "hiragana": "じゃ、また。",
+      "hiragana": "じゃ、また",
       "romaji": "ja, mata",
-      "vietnamese_meaning": "Hẹn gặp lại nhé.",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Hẹn gặp lại nhé",
+      "word_type": "expression",
       "japanese_example": "「お先に失礼します。」「じゃ、また。」",
       "example_meaning": "Tôi xin phép về trước.' 'Vậy, hẹn gặp lại nhé.'",
       "mnemonic_tip": "Ja, mata nghe như 'cha, má ta' - 'Hẹn gặp lại nhé, cha má ta!' (khi chào tạm biệt bố mẹ).",
@@ -4495,7 +4469,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 316,
+      "id": 314,
       "lesson_id": 7,
       "hiragana": "きります",
       "romaji": "kirimasu",
@@ -4508,7 +4482,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 317,
+      "id": 315,
       "lesson_id": 7,
       "hiragana": "おくります",
       "romaji": "okurimasu",
@@ -4521,7 +4495,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 318,
+      "id": 316,
       "lesson_id": 7,
       "hiragana": "あげます",
       "romaji": "agemasu",
@@ -4534,7 +4508,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 319,
+      "id": 317,
       "lesson_id": 7,
       "hiragana": "もらいます",
       "romaji": "moraimasu",
@@ -4547,7 +4521,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 320,
+      "id": 318,
       "lesson_id": 7,
       "hiragana": "かします",
       "romaji": "kashimasu",
@@ -4560,7 +4534,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 321,
+      "id": 319,
       "lesson_id": 7,
       "hiragana": "かります",
       "romaji": "karimasu",
@@ -4573,7 +4547,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 322,
+      "id": 320,
       "lesson_id": 7,
       "hiragana": "おしえます",
       "romaji": "oshiemasu",
@@ -4586,7 +4560,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 323,
+      "id": 321,
       "lesson_id": 7,
       "hiragana": "ならいます",
       "romaji": "naraimasu",
@@ -4599,7 +4573,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 324,
+      "id": 322,
       "lesson_id": 7,
       "hiragana": "かけます",
       "romaji": "kakemasu",
@@ -4612,7 +4586,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 325,
+      "id": 323,
       "lesson_id": 7,
       "hiragana": "て",
       "romaji": "te",
@@ -4625,7 +4599,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 326,
+      "id": 324,
       "lesson_id": 7,
       "hiragana": "はし",
       "romaji": "hashi",
@@ -4638,7 +4612,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 327,
+      "id": 325,
       "lesson_id": 7,
       "hiragana": "はさみ",
       "romaji": "hasami",
@@ -4651,7 +4625,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 328,
+      "id": 326,
       "lesson_id": 7,
       "hiragana": "ぱそこん",
       "romaji": "pasokon",
@@ -4664,9 +4638,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 329,
+      "id": 327,
       "lesson_id": 7,
-      "hiragana": "けーたい",
+      "hiragana": "ケータイ",
       "romaji": "keetai",
       "vietnamese_meaning": "điện thoại di động",
       "word_type": "noun",
@@ -4677,9 +4651,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 330,
+      "id": 328,
       "lesson_id": 7,
-      "hiragana": "めーる",
+      "hiragana": "メール",
       "romaji": "meer",
       "vietnamese_meaning": "thư điện tử",
       "word_type": "noun",
@@ -4690,7 +4664,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 331,
+      "id": 329,
       "lesson_id": 7,
       "hiragana": "きっぷ",
       "romaji": "kippu",
@@ -4703,7 +4677,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 332,
+      "id": 330,
       "lesson_id": 7,
       "hiragana": "きる",
       "romaji": "kiru",
@@ -4716,7 +4690,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 333,
+      "id": 331,
       "lesson_id": 7,
       "hiragana": "おくる",
       "romaji": "okuru",
@@ -4729,11 +4703,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 334,
+      "id": 332,
       "lesson_id": 7,
       "hiragana": "あげる",
       "romaji": "ageru",
-      "vietnamese_meaning": "cho, tặng (khi người nói/chủ thể cho người khác)",
+      "vietnamese_meaning": "cho, tặng (khi người nói / chủ thể cho người khác)",
       "word_type": "verb",
       "japanese_example": "妹にプレゼントをあげます。",
       "example_meaning": "Tặng quà cho em gái.",
@@ -4742,7 +4716,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 335,
+      "id": 333,
       "lesson_id": 7,
       "hiragana": "もらう",
       "romaji": "morau",
@@ -4755,7 +4729,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 336,
+      "id": 334,
       "lesson_id": 7,
       "hiragana": "かす",
       "romaji": "kasu",
@@ -4768,7 +4742,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 337,
+      "id": 335,
       "lesson_id": 7,
       "hiragana": "かりる",
       "romaji": "kariru",
@@ -4781,7 +4755,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 338,
+      "id": 336,
       "lesson_id": 7,
       "hiragana": "かける",
       "romaji": "kakeru",
@@ -4794,7 +4768,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 339,
+      "id": 337,
       "lesson_id": 7,
       "hiragana": "スプーン",
       "romaji": "supuun",
@@ -4807,7 +4781,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 340,
+      "id": 338,
       "lesson_id": 7,
       "hiragana": "ナイフ",
       "romaji": "naifu",
@@ -4820,7 +4794,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 341,
+      "id": 339,
       "lesson_id": 7,
       "hiragana": "フォーク",
       "romaji": "fooku",
@@ -4833,7 +4807,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 342,
+      "id": 340,
       "lesson_id": 7,
       "hiragana": "ファクス",
       "romaji": "fakusu",
@@ -4846,7 +4820,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 343,
+      "id": 341,
       "lesson_id": 7,
       "hiragana": "ワープロ",
       "romaji": "waapuro",
@@ -4859,7 +4833,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 344,
+      "id": 342,
       "lesson_id": 7,
       "hiragana": "パソコン",
       "romaji": "pasokon",
@@ -4872,7 +4846,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 345,
+      "id": 343,
       "lesson_id": 7,
       "hiragana": "パンチ",
       "romaji": "panchi",
@@ -4885,7 +4859,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 346,
+      "id": 344,
       "lesson_id": 7,
       "hiragana": "ホッチキス",
       "romaji": "hocchikisu",
@@ -4898,7 +4872,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 347,
+      "id": 345,
       "lesson_id": 7,
       "hiragana": "セロテープ",
       "romaji": "seroteepu",
@@ -4911,7 +4885,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 348,
+      "id": 346,
       "lesson_id": 7,
       "hiragana": "けしゴム",
       "romaji": "keshigomu",
@@ -4924,7 +4898,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 349,
+      "id": 347,
       "lesson_id": 7,
       "hiragana": "かみ",
       "romaji": "kami",
@@ -4937,7 +4911,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 350,
+      "id": 348,
       "lesson_id": 7,
       "hiragana": "はな",
       "romaji": "hana",
@@ -4950,7 +4924,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 351,
+      "id": 349,
       "lesson_id": 7,
       "hiragana": "シャツ",
       "romaji": "shatsu",
@@ -4963,7 +4937,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 352,
+      "id": 350,
       "lesson_id": 7,
       "hiragana": "プレゼント",
       "romaji": "purezento",
@@ -4976,7 +4950,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 353,
+      "id": 351,
       "lesson_id": 7,
       "hiragana": "にもつ",
       "romaji": "nimotsu",
@@ -4989,7 +4963,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 354,
+      "id": 352,
       "lesson_id": 7,
       "hiragana": "おかね",
       "romaji": "okane",
@@ -5002,7 +4976,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 355,
+      "id": 353,
       "lesson_id": 7,
       "hiragana": "クリスマス",
       "romaji": "kurisumasu",
@@ -5015,7 +4989,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 356,
+      "id": 354,
       "lesson_id": 7,
       "hiragana": "ちち",
       "romaji": "chichi",
@@ -5028,7 +5002,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 357,
+      "id": 355,
       "lesson_id": 7,
       "hiragana": "はは",
       "romaji": "haha",
@@ -5041,7 +5015,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 358,
+      "id": 356,
       "lesson_id": 7,
       "hiragana": "これから",
       "romaji": "korekara",
@@ -5054,7 +5028,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 359,
+      "id": 357,
       "lesson_id": 7,
       "hiragana": "おとうさん",
       "romaji": "otousan",
@@ -5067,7 +5041,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 360,
+      "id": 358,
       "lesson_id": 7,
       "hiragana": "おかあさん",
       "romaji": "okaasan",
@@ -5080,7 +5054,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 361,
+      "id": 359,
       "lesson_id": 7,
       "hiragana": "もう",
       "romaji": "mou",
@@ -5093,7 +5067,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 362,
+      "id": 360,
       "lesson_id": 7,
       "hiragana": "まだ",
       "romaji": "mada",
@@ -5106,12 +5080,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 363,
+      "id": 361,
       "lesson_id": 7,
       "hiragana": "ごめんなさい",
       "romaji": "gomennasai",
       "vietnamese_meaning": "Xin lỗi",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "遅れてごめんなさい。",
       "example_meaning": "Xin lỗi vì đã đến muộn.",
       "mnemonic_tip": "Gô men na sai' - Gô-men là tôi, người đã làm sai, xin lỗi nhé!",
@@ -5119,12 +5093,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 364,
+      "id": 362,
       "lesson_id": 7,
       "hiragana": "いらっしゃい",
       "romaji": "irasshai",
       "vietnamese_meaning": "Chào mừng quý khách, xin mời vào",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "いらっしゃいませ！どうぞ中へ。",
       "example_meaning": "Chào mừng quý khách! Xin mời vào bên trong.",
       "mnemonic_tip": "I ra sai' - Khi khách đến, mình ra mời khách vào, 'I ra sai' chỗ đó nhé!",
@@ -5132,12 +5106,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 365,
+      "id": 363,
       "lesson_id": 7,
       "hiragana": "いってきます",
       "romaji": "ittekimasu",
       "vietnamese_meaning": "Tôi đi đây (nói khi rời nhà)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "「いってきます。」「いってらっしゃい。」",
       "example_meaning": "「Con đi đây.」「Con đi mạnh giỏi nhé.」",
       "mnemonic_tip": "Ít thế kim mắt' - Ít tiền thì phải đi kiếm thêm, nói 'Ít thế kim mắt' rồi đi làm thôi!",
@@ -5145,12 +5119,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 366,
+      "id": 364,
       "lesson_id": 7,
       "hiragana": "しつれいします",
       "romaji": "shitsureishimasu",
-      "vietnamese_meaning": "Xin phép (tôi vào/tôi về), thất lễ",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Xin phép (tôi vào / tôi về), thất lễ",
+      "word_type": "expression",
       "japanese_example": "お先に失礼します。",
       "example_meaning": "Tôi xin phép về trước.",
       "mnemonic_tip": "Sít sư rê si má sự' - Sít (sit) xuống làm việc nhưng lại rê chuột làm mất dữ liệu, xin lỗi vì đã thất lễ!",
@@ -5158,7 +5132,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 367,
+      "id": 365,
       "lesson_id": 7,
       "hiragana": "りょこう",
       "romaji": "ryokou",
@@ -5171,7 +5145,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 368,
+      "id": 366,
       "lesson_id": 7,
       "hiragana": "ヨーロッパ",
       "romaji": "yooroppa",
@@ -5184,12 +5158,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 369,
+      "id": 367,
       "lesson_id": 8,
-      "hiragana": "ハンサム[な]",
+      "hiragana": "ハンサムな",
       "romaji": "hansamuna",
       "vietnamese_meaning": "đẹp trai",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "彼は ハンサムです。",
       "example_meaning": "Anh ấy đẹp trai.",
       "mnemonic_tip": "Handsome phát âm tiếng Nhật.",
@@ -5197,12 +5171,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 370,
+      "id": 368,
       "lesson_id": 8,
-      "hiragana": "しずか[な]",
+      "hiragana": "しずかな",
       "romaji": "shizukana",
       "vietnamese_meaning": "yên tĩnh, thanh bình",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "教室は 静かです。",
       "example_meaning": "Lớp học yên tĩnh.",
       "mnemonic_tip": "Mẹo nhớ: 'Sĩ dù ca' - sĩ tử dù hát ca vẫn thích chỗ yên tĩnh.",
@@ -5210,12 +5184,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 371,
+      "id": 369,
       "lesson_id": 8,
-      "hiragana": "にぎやか[な]",
+      "hiragana": "にぎやかな",
       "romaji": "nigiyakana",
       "vietnamese_meaning": "nhộn nhịp, náo nhiệt",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "ここは にぎやかですね。",
       "example_meaning": "Chỗ này náo nhiệt quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Nghĩ da cả' - nhộn nhịp đến mức nghĩ da cả đầu.",
@@ -5223,12 +5197,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 372,
+      "id": 370,
       "lesson_id": 8,
-      "hiragana": "ゆうめい[な]",
+      "hiragana": "ゆうめいな",
       "romaji": "yuumeina",
       "vietnamese_meaning": "nổi tiếng",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "富士山は 有名です。",
       "example_meaning": "Núi Phú Sĩ nổi tiếng.",
       "mnemonic_tip": "Mẹo nhớ: Hữu danh.",
@@ -5236,12 +5210,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 373,
+      "id": 371,
       "lesson_id": 8,
-      "hiragana": "しんせつ[な]",
+      "hiragana": "しんせつな",
       "romaji": "shinsetsuna",
       "vietnamese_meaning": "tốt bụng, thân thiện",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "山田さんは 親切です。",
       "example_meaning": "Anh Yamada tốt bụng.",
       "mnemonic_tip": "Mẹo nhớ: Thân thiết.",
@@ -5249,12 +5223,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 374,
+      "id": 372,
       "lesson_id": 8,
-      "hiragana": "げんき[な]",
+      "hiragana": "げんきな",
       "romaji": "genkina",
       "vietnamese_meaning": "khỏe mạnh",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "お元気ですか。",
       "example_meaning": "Bạn có khỏe không?",
       "mnemonic_tip": "Mẹo nhớ: Nguyên khí.",
@@ -5262,12 +5236,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 375,
+      "id": 373,
       "lesson_id": 8,
-      "hiragana": "べんり[な]",
+      "hiragana": "べんりな",
       "romaji": "benrina",
       "vietnamese_meaning": "tiện lợi",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "パソコンは 便利です。",
       "example_meaning": "Máy tính rất tiện lợi.",
       "mnemonic_tip": "Mẹo nhớ: Tiện lợi.",
@@ -5275,12 +5249,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 376,
+      "id": 374,
       "lesson_id": 8,
-      "hiragana": "すてき[な]",
+      "hiragana": "すてきな",
       "romaji": "sutekina",
       "vietnamese_meaning": "đẹp, tuyệt vời",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "素敵な鞄ですね。",
       "example_meaning": "Túi xách đẹp quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Sư té kịch' - xem vở kịch tuyệt vời đến mức sư té xỉu.",
@@ -5288,12 +5262,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 377,
+      "id": 375,
       "lesson_id": 8,
       "hiragana": "おおきい",
       "romaji": "ookii",
       "vietnamese_meaning": "to, lớn",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "大きい家ですね。",
       "example_meaning": "Ngôi nhà to quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Ô kị' - cái ô lớn kỵ gió.",
@@ -5301,12 +5275,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 378,
+      "id": 376,
       "lesson_id": 8,
       "hiragana": "ちいさい",
       "romaji": "chiisai",
       "vietnamese_meaning": "nhỏ, bé",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "小さい犬がいます。",
       "example_meaning": "Có con chó nhỏ.",
       "mnemonic_tip": "Mẹo nhớ: 'Chị sai' - em nhỏ nên chị sai đi giặt đồ.",
@@ -5314,12 +5288,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 379,
+      "id": 377,
       "lesson_id": 8,
       "hiragana": "あたらしい",
       "romaji": "atarashii",
       "vietnamese_meaning": "mới",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "新しい車を買いました。",
       "example_meaning": "Tôi đã mua xe mới.",
       "mnemonic_tip": "Mẹo nhớ: 'A ta ra xí' - a ta ra xí chỗ ngồi mới tinh.",
@@ -5327,12 +5301,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 380,
+      "id": 378,
       "lesson_id": 8,
       "hiragana": "ふるい",
       "romaji": "furui",
       "vietnamese_meaning": "cũ, cổ",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "古い本があります。",
       "example_meaning": "Có quyển sách cũ.",
       "mnemonic_tip": "Mẹo nhớ: 'Phù rui' - sách cũ phủ rêu bu đầy ruồi.",
@@ -5340,12 +5314,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 381,
+      "id": 379,
       "lesson_id": 8,
       "hiragana": "いい/よい",
       "romaji": "ii/yoi",
       "vietnamese_meaning": "tốt",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "いい天気ですね。",
       "example_meaning": "Thời tiết đẹp quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Y' - y đức tốt lành.",
@@ -5353,12 +5327,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 382,
+      "id": 380,
       "lesson_id": 8,
       "hiragana": "わるい",
       "romaji": "warui",
       "vietnamese_meaning": "xấu, tồi",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "悪い人はいません。",
       "example_meaning": "Không có người xấu.",
       "mnemonic_tip": "Mẹo nhớ: 'Qua rui' - việc xấu đã qua rồi.",
@@ -5366,12 +5340,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 383,
+      "id": 381,
       "lesson_id": 8,
       "hiragana": "あつい",
       "romaji": "atsui",
-      "vietnamese_meaning": "nóng [thời tiết/cảm giác]",
-      "word_type": "adjectivei",
+      "vietnamese_meaning": "nóng [thời tiết / cảm giác]",
+      "word_type": "noun",
       "japanese_example": "今日は 暑いですね。",
       "example_meaning": "Hôm nay nóng quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Ăn xôi' - ăn xôi nóng bức cả người.",
@@ -5379,12 +5353,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 384,
+      "id": 382,
       "lesson_id": 8,
       "hiragana": "さむい",
       "romaji": "samui",
       "vietnamese_meaning": "lạnh [thời tiết]",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "冬は 寒いです。",
       "example_meaning": "Mùa đông lạnh giá.",
       "mnemonic_tip": "Mẹo nhớ: 'Sa mùi' - trời lạnh sa mùi sương tuyết.",
@@ -5392,25 +5366,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 385,
-      "lesson_id": 8,
-      "hiragana": "しずかな",
-      "romaji": "shizukana",
-      "vietnamese_meaning": "Yên tĩnh",
-      "word_type": "adjective",
-      "japanese_example": "このへやはとても静かです。",
-      "example_meaning": "Căn phòng này rất yên tĩnh.",
-      "mnemonic_tip": "Shi-zu-ka-na: Chị dư cả na. Chị ấy yên tĩnh ngồi ăn hết cả na.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 386,
+      "id": 383,
       "lesson_id": 8,
       "hiragana": "きれいな",
       "romaji": "kireina",
       "vietnamese_meaning": "Đẹp, sạch sẽ",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この町はきれいです。",
       "example_meaning": "Thành phố này sạch đẹp.",
       "mnemonic_tip": "Ki-rei-na: Kì này na. Kì này na đẹp quá, sạch sẽ quá!",
@@ -5418,77 +5379,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 387,
-      "lesson_id": 8,
-      "hiragana": "ハンサムな",
-      "romaji": "hansamuna",
-      "vietnamese_meaning": "Đẹp trai",
-      "word_type": "adjective",
-      "japanese_example": "彼はハンサムです。",
-      "example_meaning": "Anh ấy đẹp trai.",
-      "mnemonic_tip": "Han-sa-mu-na: Hắn sắm mũ nà. Hắn sắm mũ đẹp trai nà.",
-      "image_url": "",
-      "pitch_accent": 2
-    },
-    {
-      "id": 388,
-      "lesson_id": 8,
-      "hiragana": "にぎやかな",
-      "romaji": "nigiyakana",
-      "vietnamese_meaning": "Náo nhiệt, sôi động",
-      "word_type": "adjective",
-      "japanese_example": "この町はにぎやかです。",
-      "example_meaning": "Thành phố này náo nhiệt.",
-      "mnemonic_tip": "Ni-gi-ya-ka-na: Ni đi nha cả na. Ni đi chơi nha, cả khu phố náo nhiệt quá!",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 389,
-      "lesson_id": 8,
-      "hiragana": "ゆうめいな",
-      "romaji": "yuumeina",
-      "vietnamese_meaning": "Nổi tiếng",
-      "word_type": "adjective",
-      "japanese_example": "富士山は有名な山です。",
-      "example_meaning": "Núi Phú Sĩ là ngọn núi nổi tiếng.",
-      "mnemonic_tip": "Yuu-mei-na: Yêu mê na. Yêu mê na cô ca sĩ nổi tiếng này quá.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 390,
-      "lesson_id": 8,
-      "hiragana": "しんせつな",
-      "romaji": "shinsetuna",
-      "vietnamese_meaning": "Tốt bụng, tử tế",
-      "word_type": "adjective",
-      "japanese_example": "私の先生は親切です。",
-      "example_meaning": "Giáo viên của tôi rất tốt bụng.",
-      "mnemonic_tip": "Shin-se-tsu-na: Xin xét xử na. Xin xét xử na cô gái tốt bụng này không có tội.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 391,
-      "lesson_id": 8,
-      "hiragana": "げんきな",
-      "romaji": "genkina",
-      "vietnamese_meaning": "Khỏe mạnh, năng động",
-      "word_type": "adjective",
-      "japanese_example": "私の子供は元気です。",
-      "example_meaning": "Con của tôi khỏe mạnh.",
-      "mnemonic_tip": "Gen-ki-na: Gen kia na. Gen kia na, khỏe mạnh ghê.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 392,
+      "id": 384,
       "lesson_id": 8,
       "hiragana": "ひまな",
       "romaji": "himana",
       "vietnamese_meaning": "Rảnh rỗi",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "今日は暇です。",
       "example_meaning": "Hôm nay tôi rảnh.",
       "mnemonic_tip": "Hi-ma-na: Hi mà na. Hi mà na, rảnh rỗi quá nên chào nhau.",
@@ -5496,12 +5392,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 393,
+      "id": 385,
       "lesson_id": 8,
       "hiragana": "いそがしい",
       "romaji": "isogashii",
       "vietnamese_meaning": "Bận rộn",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "毎日忙しいです。",
       "example_meaning": "Hàng ngày tôi bận rộn.",
       "mnemonic_tip": "I-so-ga-shii: Y sợ ga xi. Y sợ ga xi, bận đến mức không còn hơi sức mà đi.",
@@ -5509,38 +5405,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 394,
-      "lesson_id": 8,
-      "hiragana": "べんりな",
-      "romaji": "benrina",
-      "vietnamese_meaning": "Tiện lợi, tiện ích",
-      "word_type": "adjective",
-      "japanese_example": "このアパートはとても便利です。",
-      "example_meaning": "Căn hộ này rất tiện lợi.",
-      "mnemonic_tip": "Ben-ri-na: Bên đi na. Bên đi na, chỗ này tiện lợi lắm.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 395,
-      "lesson_id": 8,
-      "hiragana": "すてきな",
-      "romaji": "sutekina",
-      "vietnamese_meaning": "Tuyệt vời, đẹp, đáng yêu",
-      "word_type": "adjective",
-      "japanese_example": "素敵なドレスですね。",
-      "example_meaning": "Cái váy thật tuyệt vời nhỉ.",
-      "mnemonic_tip": "Su-te-ki-na: Sợ tý kia na. Sợ tý kia na, đẹp tuyệt vời luôn.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 396,
+      "id": 386,
       "lesson_id": 8,
       "hiragana": "いい",
       "romaji": "ii",
       "vietnamese_meaning": "Tốt, được",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "それはいいアイデアですね。",
       "example_meaning": "Đó là một ý tưởng hay/tốt nhỉ.",
       "mnemonic_tip": "Ii: Ý. Ý này hay, tốt đấy.",
@@ -5548,12 +5418,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 397,
+      "id": 387,
       "lesson_id": 8,
       "hiragana": "つめたい",
       "romaji": "tsumetai",
       "vietnamese_meaning": "Lạnh (khi chạm vào, đồ vật)",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "冷たい水をください。",
       "example_meaning": "Xin hãy cho tôi nước lạnh.",
       "mnemonic_tip": "Tsu-me-tai: Chữ mẹ tai. Chữ mẹ viết tay lạnh buốt.",
@@ -5561,12 +5431,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 398,
+      "id": 388,
       "lesson_id": 8,
       "hiragana": "むずかしい",
       "romaji": "muzukashii",
       "vietnamese_meaning": "Khó",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この問題は難しいです。",
       "example_meaning": "Bài toán này khó.",
       "mnemonic_tip": "Mu-zu-ka-shii: Mụ rủ ca sĩ. Mụ rủ ca sĩ đi hát, khó quá.",
@@ -5574,12 +5444,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 399,
+      "id": 389,
       "lesson_id": 8,
       "hiragana": "やさしい",
       "romaji": "yasashii",
       "vietnamese_meaning": "Dễ dàng",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この本はとても優しいです。",
       "example_meaning": "Cuốn sách này rất dễ đọc.",
       "mnemonic_tip": "Ya-sa-shii: Da sa xi. Da sa xi (taxi) rồi, dễ dàng đi về nhà.",
@@ -5587,12 +5457,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 400,
+      "id": 390,
       "lesson_id": 8,
       "hiragana": "きびしい",
       "romaji": "kibishii",
       "vietnamese_meaning": "Nghiêm khắc, nghiêm ngặt",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "私の先生は厳しいです。",
       "example_meaning": "Giáo viên của tôi rất nghiêm khắc.",
       "mnemonic_tip": "Ki-bi-shii: Kì bí xi. Kì bí xi (taxi) này, tài xế nghiêm khắc không cho nói chuyện.",
@@ -5600,12 +5470,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 401,
+      "id": 391,
       "lesson_id": 8,
       "hiragana": "やすい",
       "romaji": "yasui",
       "vietnamese_meaning": "Rẻ",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この鞄は安いです。",
       "example_meaning": "Chiếc túi này rẻ.",
       "mnemonic_tip": "Ya-sui: Da xuôi. Da xuôi rồi, mua đồ rẻ mà.",
@@ -5613,12 +5483,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 402,
+      "id": 392,
       "lesson_id": 8,
       "hiragana": "たかい",
       "romaji": "takai",
       "vietnamese_meaning": "Đắt, cao",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "このビルはとても高い。",
       "example_meaning": "Tòa nhà này rất cao.",
       "mnemonic_tip": "Ta-kai: Ta cãi. Ta cãi nhau vì cái giá đắt quá, hoặc tòa nhà cao quá.",
@@ -5626,12 +5496,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 403,
+      "id": 393,
       "lesson_id": 8,
       "hiragana": "ひくい",
       "romaji": "hikui",
       "vietnamese_meaning": "Thấp",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この机は低い。",
       "example_meaning": "Cái bàn này thấp.",
       "mnemonic_tip": "Hi-kui: Hi cúi. Hi cúi xuống vì cái trần nhà thấp.",
@@ -5639,12 +5509,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 404,
+      "id": 394,
       "lesson_id": 8,
       "hiragana": "おもしろい",
       "romaji": "omoshiroi",
       "vietnamese_meaning": "Thú vị, hay",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この本は面白い。",
       "example_meaning": "Cuốn sách này hay/thú vị.",
       "mnemonic_tip": "O-mo-shi-roi: Ồ mồ xì rồi. Ồ mồ xì rồi, câu chuyện thú vị quá cười xì cả mũi.",
@@ -5652,12 +5522,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 405,
+      "id": 395,
       "lesson_id": 8,
       "hiragana": "つまらない",
       "romaji": "tsumaranai",
       "vietnamese_meaning": "Buồn tẻ, nhàm chán",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この映画はつまらない。",
       "example_meaning": "Bộ phim này nhàm chán.",
       "mnemonic_tip": "Tsu-ma-ra-nai: Chủ mà ra nai. Chủ mà ra nai, chắc chắn phim buồn tẻ lắm.",
@@ -5665,12 +5535,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 406,
+      "id": 396,
       "lesson_id": 8,
       "hiragana": "おいしい",
       "romaji": "oishii",
       "vietnamese_meaning": "Ngon",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "このケーキは美味しいです。",
       "example_meaning": "Cái bánh này ngon.",
       "mnemonic_tip": "Oi-shii: Ôi xi. Ôi xi (taxi), đưa tôi đến quán ăn ngon.",
@@ -5678,12 +5548,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 407,
+      "id": 397,
       "lesson_id": 8,
       "hiragana": "たのしい",
       "romaji": "tanoshii",
       "vietnamese_meaning": "Vui vẻ, vui nhộn",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "パーティーは楽しいです。",
       "example_meaning": "Bữa tiệc rất vui vẻ.",
       "mnemonic_tip": "Ta-no-shii: Ta nổ xi. Ta nổ xi (taxi) để đi chơi thật vui vẻ.",
@@ -5691,12 +5561,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 408,
+      "id": 398,
       "lesson_id": 8,
       "hiragana": "しろい",
       "romaji": "shiroi",
       "vietnamese_meaning": "Trắng",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "白いシャツを買いました。",
       "example_meaning": "Tôi đã mua một chiếc áo sơ mi màu trắng.",
       "mnemonic_tip": "Shiroi: \"Sỉ roi\" - Chiếc áo trắng quá nên tôi sợ bị sỉ vả nếu dính vết roi bẩn.",
@@ -5704,12 +5574,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 409,
+      "id": 399,
       "lesson_id": 8,
       "hiragana": "くろい",
       "romaji": "kuroi",
       "vietnamese_meaning": "Đen",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "黒いネコがいます。",
       "example_meaning": "Có một con mèo màu đen.",
       "mnemonic_tip": "Kuroi: \"Cứ roi\" - Chiếc áo đen này cứ roi vào người mình mãi không bẩn.",
@@ -5717,12 +5587,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 410,
+      "id": 400,
       "lesson_id": 8,
       "hiragana": "あかい",
       "romaji": "akai",
       "vietnamese_meaning": "Đỏ",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "赤いりんごが好きです。",
       "example_meaning": "Tôi thích táo đỏ.",
       "mnemonic_tip": "Akai: \"Ái cải\" - Màu đỏ là màu của ái tình, tôi phải cải thiện tình yêu của mình.",
@@ -5730,12 +5600,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 411,
+      "id": 401,
       "lesson_id": 8,
       "hiragana": "あおい",
       "romaji": "aoi",
       "vietnamese_meaning": "Xanh (lam)",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "青い空はとてもきれいです。",
       "example_meaning": "Bầu trời xanh rất đẹp.",
       "mnemonic_tip": "Aoi: \"À ơi\" - Bầu trời xanh rộng lớn, em bé ngủ \"à ơi\" trong vòng tay mẹ.",
@@ -5743,7 +5613,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 412,
+      "id": 402,
       "lesson_id": 8,
       "hiragana": "さくら",
       "romaji": "sakura",
@@ -5756,7 +5626,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 413,
+      "id": 403,
       "lesson_id": 8,
       "hiragana": "やま",
       "romaji": "yama",
@@ -5769,7 +5639,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 414,
+      "id": 404,
       "lesson_id": 8,
       "hiragana": "まち",
       "romaji": "machi",
@@ -5782,7 +5652,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 415,
+      "id": 405,
       "lesson_id": 8,
       "hiragana": "たべもの",
       "romaji": "tabemono",
@@ -5795,7 +5665,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 416,
+      "id": 406,
       "lesson_id": 8,
       "hiragana": "くるま",
       "romaji": "kuruma",
@@ -5808,7 +5678,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 417,
+      "id": 407,
       "lesson_id": 8,
       "hiragana": "ところ",
       "romaji": "tokoro",
@@ -5821,7 +5691,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 418,
+      "id": 408,
       "lesson_id": 8,
       "hiragana": "りょう",
       "romaji": "ryou",
@@ -5834,7 +5704,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 419,
+      "id": 409,
       "lesson_id": 8,
       "hiragana": "べんきょう",
       "romaji": "benkyou",
@@ -5847,7 +5717,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 420,
+      "id": 410,
       "lesson_id": 8,
       "hiragana": "せいかつ",
       "romaji": "seikatsu",
@@ -5860,7 +5730,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 421,
+      "id": 411,
       "lesson_id": 8,
       "hiragana": "しごと",
       "romaji": "shigoto",
@@ -5873,7 +5743,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 422,
+      "id": 412,
       "lesson_id": 8,
       "hiragana": "どう",
       "romaji": "dou",
@@ -5886,12 +5756,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 423,
+      "id": 413,
       "lesson_id": 8,
       "hiragana": "どんな",
       "romaji": "donna",
       "vietnamese_meaning": "Loại ~ như thế nào",
-      "word_type": "interrogative adjective",
+      "word_type": "noun",
       "japanese_example": "どんなスポーツが好きですか。",
       "example_meaning": "Bạn thích loại thể thao nào?",
       "mnemonic_tip": "Donna: \"Đón na\" - \"Đón na\" về rồi, nhưng không biết bà thích loại quà nào đây?",
@@ -5899,7 +5769,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 424,
+      "id": 414,
       "lesson_id": 8,
       "hiragana": "どれ",
       "romaji": "dore",
@@ -5912,7 +5782,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 425,
+      "id": 415,
       "lesson_id": 8,
       "hiragana": "とても",
       "romaji": "totemo",
@@ -5925,7 +5795,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 426,
+      "id": 416,
       "lesson_id": 8,
       "hiragana": "あまり",
       "romaji": "amari",
@@ -5938,12 +5808,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 427,
+      "id": 417,
       "lesson_id": 8,
       "hiragana": "そして",
       "romaji": "soshite",
       "vietnamese_meaning": "Và, sau đó (nối câu)",
-      "word_type": "conjunction",
+      "word_type": "noun",
       "japanese_example": "彼は学生です。そして、テニスが好きです。",
       "example_meaning": "Anh ấy là học sinh. Và anh ấy thích tennis.",
       "mnemonic_tip": "Soshite: \"Sơ si té\" - Sơ sẩy một chút là té ngay, và sau đó phải đi bệnh viện.",
@@ -5951,7 +5821,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 428,
+      "id": 418,
       "lesson_id": 8,
       "hiragana": "が",
       "romaji": "ga",
@@ -5964,12 +5834,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 429,
+      "id": 419,
       "lesson_id": 8,
       "hiragana": "おげんきですか",
       "romaji": "ogenki desu ka",
       "vietnamese_meaning": "Bạn có khỏe không?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "田中さん、お元気ですか。",
       "example_meaning": "Anh Tanaka, anh có khỏe không?",
       "mnemonic_tip": "Ogenki desu ka: \"Ôi ghen kì đét ca\" - Khi thấy bạn bè khỏe mạnh, vui vẻ, tôi \"ôi ghen kì đét ca\" hỏi xem bạn có khỏe không.",
@@ -5977,12 +5847,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 430,
+      "id": 420,
       "lesson_id": 8,
       "hiragana": "そうですね",
       "romaji": "sou desu ne",
       "vietnamese_meaning": "Để tôi xem nào..., Ừm... (dùng khi suy nghĩ hoặc đồng tình nhẹ)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "「これは難しいですね。」「そうですね。」",
       "example_meaning": "\"Cái này khó nhỉ.\" \"Ừm, đúng vậy.\"",
       "mnemonic_tip": "Sou desu ne: \"Sâu đét sư ne\" - \"Sâu đét sư ne\" (sâu đến mức sướng tê người), đúng là khó nghĩ thật đấy.",
@@ -5990,7 +5860,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 431,
+      "id": 421,
       "lesson_id": 8,
       "hiragana": "ふじさん",
       "romaji": "fujisan",
@@ -6003,7 +5873,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 432,
+      "id": 422,
       "lesson_id": 8,
       "hiragana": "びわこ",
       "romaji": "biwako",
@@ -6016,7 +5886,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 433,
+      "id": 423,
       "lesson_id": 8,
       "hiragana": "シャンハイ",
       "romaji": "shanhai",
@@ -6029,7 +5899,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 434,
+      "id": 424,
       "lesson_id": 8,
       "hiragana": "しちにんのさむらい",
       "romaji": "shichinin no samurai",
@@ -6042,7 +5912,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 435,
+      "id": 425,
       "lesson_id": 8,
       "hiragana": "きんかくじ",
       "romaji": "kinkakuji",
@@ -6055,12 +5925,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 436,
+      "id": 426,
       "lesson_id": 8,
       "hiragana": "にほんのせいかつになれましたか",
       "romaji": "nihon no seikatsu ni naremashita ka",
       "vietnamese_meaning": "Bạn đã quen với cuộc sống ở Nhật Bản chưa?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "日本の生活に慣れましたか。",
       "example_meaning": "Bạn đã quen với cuộc sống ở Nhật Bản chưa?",
       "mnemonic_tip": "Nihon no seikatsu ni naremashita ka: \"Ni hôn nô say cắp sư ni na rê mà sí ta ca\" - \"Ni hôn\" (Nếu hôn) vào cuộc sống ở Nhật, bạn sẽ \"say cắp sư\" (say đắm) và \"na rê mà sí ta ca\" (có quen được không?).",
@@ -6068,12 +5938,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 437,
+      "id": 427,
       "lesson_id": 8,
       "hiragana": "もういっぱいいかがですか",
       "romaji": "mou ippai ikaga desu ka",
-      "vietnamese_meaning": "Bạn dùng thêm một chén/cốc nữa nhé?",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Bạn dùng thêm một chén / cốc nữa nhé?",
+      "word_type": "expression",
       "japanese_example": "もう一杯いかがですか。",
       "example_meaning": "Bạn dùng thêm một chén nữa nhé?",
       "mnemonic_tip": "Mou ippai ikaga desu ka: \"Mô ếp bài i ca ga đét ca\" - \"Mô ếp bài\" (Muốn uống bia) thì \"i ca ga đét ca\" (cứ kêu thêm một chén nữa đi chứ!).",
@@ -6081,12 +5951,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 438,
+      "id": 428,
       "lesson_id": 8,
       "hiragana": "いいえ、けっこうです",
       "romaji": "iie, kekkou desu",
-      "vietnamese_meaning": "Không, tôi đủ rồi./Không, cảm ơn.",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Không, tôi đủ rồi / Không, cảm ơn",
+      "word_type": "expression",
       "japanese_example": "コーヒーはいかがですか。いいえ、けっこうです。",
       "example_meaning": "Bạn dùng cà phê không? Không, tôi đủ rồi ạ.",
       "mnemonic_tip": "Y-ê, kẻ có đất' - Y-ê, kẻ có đất thì làm gì có thiếu thốn mà cần thêm? Không, tôi đủ rồi.",
@@ -6094,12 +5964,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 439,
+      "id": 429,
       "lesson_id": 8,
       "hiragana": "そろそろ、しつれいします",
       "romaji": "sorosoro, shitsurei shimasu",
-      "vietnamese_meaning": "Sắp đến lúc tôi phải về rồi./Đã đến lúc tôi xin phép ra về.",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Sắp đến lúc tôi phải về rồi / Đã đến lúc tôi xin phép ra về",
+      "word_type": "expression",
       "japanese_example": "そろそろ、しつれいします。また明日。",
       "example_meaning": "Sắp đến lúc tôi phải về rồi. Hẹn gặp lại ngày mai.",
       "mnemonic_tip": "Sợ rồi sợ rồi, sứt ra sờ má' - Sợ rồi sợ rồi, đừng có sứt ra sờ má tôi nữa, sắp đến lúc tôi phải về rồi!",
@@ -6107,12 +5977,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 440,
+      "id": 430,
       "lesson_id": 8,
       "hiragana": "また いらっしゃってください",
       "romaji": "mata irasshatte kudasai",
-      "vietnamese_meaning": "Xin mời anh/chị/ông/bà lại đến chơi.",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Xin mời anh / chị / ông / bà lại đến chơi",
+      "word_type": "expression",
       "japanese_example": "今日は楽しかったです。また いらっしゃってください。",
       "example_meaning": "Hôm nay thật vui. Xin mời lần sau lại đến chơi nhé.",
       "mnemonic_tip": "Mặt tạ y ra sát tề, cút đã sai' - Mặt tạ y ra sát tề, bảo 'cút đã sai' rồi, nên mời 'lần sau lại đến chơi' đi.",
@@ -6120,7 +5990,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 441,
+      "id": 431,
       "lesson_id": 9,
       "hiragana": "わかります",
       "romaji": "wakarimasu",
@@ -6133,11 +6003,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 442,
+      "id": 432,
       "lesson_id": 9,
       "hiragana": "あります",
       "romaji": "arimasu",
-      "vietnamese_meaning": "có [sở hữu/tồn tại đồ vật]",
+      "vietnamese_meaning": "có [sở hữu / tồn tại đồ vật]",
       "word_type": "verb",
       "japanese_example": "車が あります。",
       "example_meaning": "Tôi có xe hơi.",
@@ -6146,12 +6016,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 443,
+      "id": 433,
       "lesson_id": 9,
-      "hiragana": "すき[な]",
+      "hiragana": "すきな",
       "romaji": "sukina",
       "vietnamese_meaning": "thích",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "すしが 好きです。",
       "example_meaning": "Tôi thích ăn sushi.",
       "mnemonic_tip": "Mẹo nhớ: Hảo.",
@@ -6159,12 +6029,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 444,
+      "id": 434,
       "lesson_id": 9,
-      "hiragana": "きらい[な]",
+      "hiragana": "きらいな",
       "romaji": "kiraina",
       "vietnamese_meaning": "ghét, không thích",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "肉が 嫌いです。",
       "example_meaning": "Tôi ghét thịt.",
       "mnemonic_tip": "Mẹo nhớ: 'Kỳ rài' - ghét mấy thứ kỳ quái dài rài rải.",
@@ -6172,12 +6042,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 445,
+      "id": 435,
       "lesson_id": 9,
-      "hiragana": "じょうず[な]",
+      "hiragana": "じょうずな",
       "romaji": "jouzuna",
       "vietnamese_meaning": "giỏi, khéo",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "日本語が 上手ですね。",
       "example_meaning": "Bạn giỏi tiếng Nhật quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: Thượng thủ.",
@@ -6185,12 +6055,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 446,
+      "id": 436,
       "lesson_id": 9,
-      "hiragana": "へた[な]",
+      "hiragana": "へたな",
       "romaji": "hetana",
       "vietnamese_meaning": "kém, dở",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "テニスが 下手です。",
       "example_meaning": "Tôi chơi tennis dở.",
       "mnemonic_tip": "Mẹo nhớ: Hạ thủ.",
@@ -6198,7 +6068,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 447,
+      "id": 437,
       "lesson_id": 9,
       "hiragana": "りょうり",
       "romaji": "ryouri",
@@ -6211,7 +6081,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 448,
+      "id": 438,
       "lesson_id": 9,
       "hiragana": "のみもの",
       "romaji": "nomimono",
@@ -6224,9 +6094,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 449,
+      "id": 439,
       "lesson_id": 9,
-      "hiragana": "すぽーつ",
+      "hiragana": "スポーツ",
       "romaji": "supootsu",
       "vietnamese_meaning": "thể thao",
       "word_type": "noun",
@@ -6237,7 +6107,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 450,
+      "id": 440,
       "lesson_id": 9,
       "hiragana": "やきゅう",
       "romaji": "yakyuu",
@@ -6250,7 +6120,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 451,
+      "id": 441,
       "lesson_id": 9,
       "hiragana": "おんがく",
       "romaji": "ongaku",
@@ -6263,7 +6133,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 452,
+      "id": 442,
       "lesson_id": 9,
       "hiragana": "うた",
       "romaji": "uta",
@@ -6276,7 +6146,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 453,
+      "id": 443,
       "lesson_id": 9,
       "hiragana": "かんじ",
       "romaji": "kanji",
@@ -6289,7 +6159,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 454,
+      "id": 444,
       "lesson_id": 9,
       "hiragana": "ようじ",
       "romaji": "youji",
@@ -6302,7 +6172,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 455,
+      "id": 445,
       "lesson_id": 9,
       "hiragana": "やくそく",
       "romaji": "yakusoku",
@@ -6315,72 +6185,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 456,
-      "lesson_id": 9,
-      "hiragana": "きらいな",
-      "romaji": "kiraina",
-      "vietnamese_meaning": "Ghét, không thích",
-      "word_type": "adjective",
-      "japanese_example": "私はなっとうが嫌いです。",
-      "example_meaning": "Tôi ghét natto.",
-      "mnemonic_tip": "Kiraina' - 'Kì lạ nha' - Ghét một người 'kì lạ nha', vì thế '嫌いな' (không thích).",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 457,
-      "lesson_id": 9,
-      "hiragana": "すきな",
-      "romaji": "sukina",
-      "vietnamese_meaning": "Thích",
-      "word_type": "adjective",
-      "japanese_example": "わたしはゲームが大好きです。",
-      "example_meaning": "Tôi rất thích chơi game.",
-      "mnemonic_tip": "Sukina' - 'Sướng kì nha' - Thích cái gì là thấy 'sướng kì nha', nên tôi '好きな' (thích).",
-      "image_url": "",
-      "pitch_accent": 2
-    },
-    {
-      "id": 458,
-      "lesson_id": 9,
-      "hiragana": "じょうずな",
-      "romaji": "jouzuna",
-      "vietnamese_meaning": "Giỏi, khéo (thường dùng để khen người khác)",
-      "word_type": "adjective",
-      "japanese_example": "田中さんは料理が上手です。",
-      "example_meaning": "Anh Tanaka nấu ăn rất giỏi.",
-      "mnemonic_tip": "Jouzuna' - 'Dâu giũa nha' - Giỏi thì phải thường xuyên 'giũa dâu nha' mới khéo được, nên anh ấy '上手な' (giỏi).",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 459,
-      "lesson_id": 9,
-      "hiragana": "へたな",
-      "romaji": "hetana",
-      "vietnamese_meaning": "Dở, kém",
-      "word_type": "adjective",
-      "japanese_example": "彼は歌が下手です。",
-      "example_meaning": "Anh ấy hát dở.",
-      "mnemonic_tip": "Hetana' - 'Hết tàn nha' - Dở quá nên làm 'hết tàn nha' rồi, đúng là '下手な' (kém).",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 460,
-      "lesson_id": 9,
-      "hiragana": "スポーツ",
-      "romaji": "supootsu",
-      "vietnamese_meaning": "Thể thao",
-      "word_type": "noun",
-      "japanese_example": "どんなスポーツが好きですか。",
-      "example_meaning": "Bạn thích môn thể thao nào?",
-      "mnemonic_tip": "Supootsu' - 'Súp bọt' - Chơi 'スポーツ' (thể thao) xong đổ mồ hôi, uống chén 'súp bọt' cho lại sức.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 461,
+      "id": 446,
       "lesson_id": 9,
       "hiragana": "ダンス",
       "romaji": "dansu",
@@ -6393,7 +6198,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 462,
+      "id": 447,
       "lesson_id": 9,
       "hiragana": "クラシック",
       "romaji": "kurashikku",
@@ -6406,7 +6211,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 463,
+      "id": 448,
       "lesson_id": 9,
       "hiragana": "ジャズ",
       "romaji": "jazu",
@@ -6419,7 +6224,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 464,
+      "id": 449,
       "lesson_id": 9,
       "hiragana": "コンサート",
       "romaji": "konsaato",
@@ -6432,7 +6237,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 465,
+      "id": 450,
       "lesson_id": 9,
       "hiragana": "カラオケ",
       "romaji": "karaoke",
@@ -6445,7 +6250,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 466,
+      "id": 451,
       "lesson_id": 9,
       "hiragana": "かぶき",
       "romaji": "kabuki",
@@ -6458,7 +6263,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 467,
+      "id": 452,
       "lesson_id": 9,
       "hiragana": "え",
       "romaji": "e",
@@ -6471,7 +6276,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 468,
+      "id": 453,
       "lesson_id": 9,
       "hiragana": "ひらがな",
       "romaji": "hiragana",
@@ -6484,7 +6289,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 469,
+      "id": 454,
       "lesson_id": 9,
       "hiragana": "かたかな",
       "romaji": "katakana",
@@ -6497,7 +6302,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 470,
+      "id": 455,
       "lesson_id": 9,
       "hiragana": "ローマじ",
       "romaji": "roomaji",
@@ -6510,7 +6315,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 471,
+      "id": 456,
       "lesson_id": 9,
       "hiragana": "こまかいおかね",
       "romaji": "komakaiokane",
@@ -6523,7 +6328,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 472,
+      "id": 457,
       "lesson_id": 9,
       "hiragana": "チケット",
       "romaji": "chiketto",
@@ -6536,7 +6341,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 473,
+      "id": 458,
       "lesson_id": 9,
       "hiragana": "じかん",
       "romaji": "jikan",
@@ -6549,7 +6354,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 474,
+      "id": 459,
       "lesson_id": 9,
       "hiragana": "ごしゅじん",
       "romaji": "goshujin",
@@ -6562,7 +6367,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 475,
+      "id": 460,
       "lesson_id": 9,
       "hiragana": "おっと / しゅじん",
       "romaji": "otto / shujin",
@@ -6575,7 +6380,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 476,
+      "id": 461,
       "lesson_id": 9,
       "hiragana": "おくさん",
       "romaji": "okusan",
@@ -6588,7 +6393,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 477,
+      "id": 462,
       "lesson_id": 9,
       "hiragana": "つま / かない",
       "romaji": "tsuma / kanai",
@@ -6601,7 +6406,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 478,
+      "id": 463,
       "lesson_id": 9,
       "hiragana": "こども",
       "romaji": "kodomo",
@@ -6614,9 +6419,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 479,
+      "id": 464,
       "lesson_id": 9,
-      "hiragana": "よく (わかります）",
+      "hiragana": "よく",
       "romaji": "yoku (wakarimasu)",
       "vietnamese_meaning": "Rõ, giỏi, nhiều (hiểu rõ, biết rõ)",
       "word_type": "adverb",
@@ -6627,7 +6432,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 480,
+      "id": 465,
       "lesson_id": 9,
       "hiragana": "たくさん",
       "romaji": "takusan",
@@ -6640,7 +6445,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 481,
+      "id": 466,
       "lesson_id": 9,
       "hiragana": "すこし",
       "romaji": "sukoshi",
@@ -6653,7 +6458,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 482,
+      "id": 467,
       "lesson_id": 9,
       "hiragana": "ぜんぜん～ない",
       "romaji": "zenzen ~nai",
@@ -6666,7 +6471,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 483,
+      "id": 468,
       "lesson_id": 9,
       "hiragana": "だいたい",
       "romaji": "daitai",
@@ -6679,7 +6484,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 484,
+      "id": 469,
       "lesson_id": 9,
       "hiragana": "はやく",
       "romaji": "hayaku",
@@ -6692,7 +6497,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 485,
+      "id": 470,
       "lesson_id": 9,
       "hiragana": "どうして",
       "romaji": "doushite",
@@ -6705,12 +6510,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 486,
+      "id": 471,
       "lesson_id": 9,
-      "hiragana": "ざんねんです[ね]。",
+      "hiragana": "ざんねんです",
       "romaji": "zannendesune",
       "vietnamese_meaning": "Đáng tiếc quá! / Tiếc thật đấy!",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "試験に落ちて、残念です。",
       "example_meaning": "Trượt kỳ thi, đáng tiếc thật.",
       "mnemonic_tip": "ざんねんです[ね] (zannendesune): 'Gián nên đếch ném' - Con gián nên không dám ném, tiếc thật!",
@@ -6718,12 +6523,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 487,
+      "id": 472,
       "lesson_id": 9,
       "hiragana": "もしもし",
       "romaji": "moshimoshi",
       "vietnamese_meaning": "A lô (khi nghe điện thoại)",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "もしもし、田中さんですか。",
       "example_meaning": "A lô, có phải anh Tanaka không ạ?",
       "mnemonic_tip": "もしもし (moshimoshi): 'Mô sí mô sí' - 'Mô Phật, sí (xì) cái gì mà xì? A lô đi chứ!'",
@@ -6731,12 +6536,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 488,
+      "id": 473,
       "lesson_id": 9,
-      "hiragana": "いっしょに～いかがですか。",
-      "romaji": "isshoni ~ikaga desu ka.",
-      "vietnamese_meaning": "Anh/chị cùng đi (làm) với tôi nhé?",
-      "word_type": "phrase",
+      "hiragana": "いっしょに～いかがですか",
+      "romaji": "isshoni ~ikaga desu ka",
+      "vietnamese_meaning": "Anh / chị cùng đi (làm) với tôi nhé?",
+      "word_type": "expression",
       "japanese_example": "一緒に映画を見に行きませんか。",
       "example_meaning": "Anh/chị cùng đi xem phim với tôi nhé?",
       "mnemonic_tip": "いっしょに (isshoni): 'Ít show ni' - Ít show thì mình cùng đi xem phim với tôi nhé? いかがですか (ikaga desu ka): 'Y Cá Gà' - Y cá gà cùng đi ăn thịt cá và thịt gà nhé?",
@@ -6744,12 +6549,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 489,
+      "id": 474,
       "lesson_id": 9,
-      "hiragana": "(～は) ちょっと…..",
-      "romaji": "~wa chotto.....",
+      "hiragana": "ちょっと",
+      "romaji": "~ wa chotto",
       "vietnamese_meaning": "(Cái đó thì) hơi khó... (từ chối khéo)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "今晩はちょっと.....",
       "example_meaning": "Tối nay thì hơi khó... (ám chỉ không đi được)",
       "mnemonic_tip": "ちょっと (chotto): 'Chớ tò' - Chớ tò mò hỏi vì cái đó hơi khó nói (từ chối khéo).",
@@ -6757,12 +6562,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 490,
+      "id": 475,
       "lesson_id": 9,
-      "hiragana": "だめですか。",
-      "romaji": "dame desu ka.",
+      "hiragana": "だめですか",
+      "romaji": "dame desu ka",
       "vietnamese_meaning": "Không được sao? / Không thể sao?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "明日はだめですか。",
       "example_meaning": "Ngày mai không được sao?",
       "mnemonic_tip": "だめですか (dame desu ka): 'Đám cưới cá' - Đám cưới cá mà không thể đến được sao?",
@@ -6770,12 +6575,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 491,
+      "id": 476,
       "lesson_id": 9,
       "hiragana": "またこんどおねがいします",
       "romaji": "mata kondo onegaishimasu",
-      "vietnamese_meaning": "Xin hẹn anh/chị lần khác (từ chối khéo)",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Xin hẹn anh / chị lần khác (từ chối khéo)",
+      "word_type": "expression",
       "japanese_example": "また今度お願いします。",
       "example_meaning": "Xin hẹn anh/chị lần khác.",
       "mnemonic_tip": "またこんどおねがいします (mata kondo onegaishimasu): 'Má Ta Còn Đồ, Ối Này Gái Xin Mát' - Má ta còn đồ (việc), ôi, này gái, xin hẹn lần khác cho mát (khỏi bận).",
@@ -6783,11 +6588,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 492,
+      "id": 477,
       "lesson_id": 10,
       "hiragana": "います",
       "romaji": "imasu",
-      "vietnamese_meaning": "có [tồn tại người/động vật]",
+      "vietnamese_meaning": "có [tồn tại người / động vật]",
       "word_type": "verb",
       "japanese_example": "男の人が います。",
       "example_meaning": "Có người đàn ông ở đó.",
@@ -6796,11 +6601,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 493,
+      "id": 478,
       "lesson_id": 10,
       "hiragana": "あります",
       "romaji": "arimasu",
-      "vietnamese_meaning": "có [tồn tại đồ vật/thực thể vô tri]",
+      "vietnamese_meaning": "có [tồn tại đồ vật / thực thể vô tri]",
       "word_type": "verb",
       "japanese_example": "机が あります。",
       "example_meaning": "Có cái bàn học.",
@@ -6809,7 +6614,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 494,
+      "id": 479,
       "lesson_id": 10,
       "hiragana": "おとこのひと",
       "romaji": "otoko no hito",
@@ -6822,7 +6627,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 495,
+      "id": 480,
       "lesson_id": 10,
       "hiragana": "おんなのひと",
       "romaji": "onna no hito",
@@ -6835,7 +6640,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 496,
+      "id": 481,
       "lesson_id": 10,
       "hiragana": "おとこのこ",
       "romaji": "otoko no ko",
@@ -6848,7 +6653,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 497,
+      "id": 482,
       "lesson_id": 10,
       "hiragana": "おんなのこ",
       "romaji": "onna no ko",
@@ -6861,7 +6666,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 498,
+      "id": 483,
       "lesson_id": 10,
       "hiragana": "いぬ",
       "romaji": "inu",
@@ -6874,7 +6679,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 499,
+      "id": 484,
       "lesson_id": 10,
       "hiragana": "ねこ",
       "romaji": "neko",
@@ -6887,7 +6692,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 500,
+      "id": 485,
       "lesson_id": 10,
       "hiragana": "はこ",
       "romaji": "hako",
@@ -6900,7 +6705,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 501,
+      "id": 486,
       "lesson_id": 10,
       "hiragana": "れいぞうこ",
       "romaji": "reizouko",
@@ -6913,7 +6718,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 502,
+      "id": 487,
       "lesson_id": 10,
       "hiragana": "まど",
       "romaji": "mado",
@@ -6926,7 +6731,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 503,
+      "id": 488,
       "lesson_id": 10,
       "hiragana": "こうえん",
       "romaji": "kouen",
@@ -6939,7 +6744,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 504,
+      "id": 489,
       "lesson_id": 10,
       "hiragana": "うりば",
       "romaji": "uriba",
@@ -6952,7 +6757,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 505,
+      "id": 490,
       "lesson_id": 10,
       "hiragana": "うえ",
       "romaji": "ue",
@@ -6965,7 +6770,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 506,
+      "id": 491,
       "lesson_id": 10,
       "hiragana": "した",
       "romaji": "shita",
@@ -6978,7 +6783,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 507,
+      "id": 492,
       "lesson_id": 10,
       "hiragana": "まえ",
       "romaji": "mae",
@@ -6991,7 +6796,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 508,
+      "id": 493,
       "lesson_id": 10,
       "hiragana": "うしろ",
       "romaji": "ushiro",
@@ -7004,12 +6809,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 509,
+      "id": 494,
       "lesson_id": 10,
-      "hiragana": "いろいろ「な」",
+      "hiragana": "いろいろな",
       "romaji": "iroiro na",
       "vietnamese_meaning": "nhiều loại, đa dạng",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "このまちにはいろいろなみせがあります。",
       "example_meaning": "Trong thành phố này có nhiều loại cửa hàng.",
       "mnemonic_tip": "Í rô rô' - Có quá 'í rô rô' thứ, đa dạng loại quá!",
@@ -7017,7 +6822,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 510,
+      "id": 495,
       "lesson_id": 10,
       "hiragana": "き",
       "romaji": "ki",
@@ -7030,7 +6835,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 511,
+      "id": 496,
       "lesson_id": 10,
       "hiragana": "もの",
       "romaji": "mono",
@@ -7043,7 +6848,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 512,
+      "id": 497,
       "lesson_id": 10,
       "hiragana": "フイルム",
       "romaji": "fuirumu",
@@ -7056,7 +6861,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 513,
+      "id": 498,
       "lesson_id": 10,
       "hiragana": "でんち",
       "romaji": "denchi",
@@ -7069,7 +6874,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 514,
+      "id": 499,
       "lesson_id": 10,
       "hiragana": "スイッチ",
       "romaji": "suicchi",
@@ -7082,7 +6887,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 515,
+      "id": 500,
       "lesson_id": 10,
       "hiragana": "テーブル",
       "romaji": "teeburu",
@@ -7095,7 +6900,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 516,
+      "id": 501,
       "lesson_id": 10,
       "hiragana": "ベッド",
       "romaji": "beddo",
@@ -7108,7 +6913,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 517,
+      "id": 502,
       "lesson_id": 10,
       "hiragana": "たな",
       "romaji": "tana",
@@ -7121,7 +6926,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 518,
+      "id": 503,
       "lesson_id": 10,
       "hiragana": "ドア",
       "romaji": "doa",
@@ -7134,7 +6939,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 519,
+      "id": 504,
       "lesson_id": 10,
       "hiragana": "ポスト",
       "romaji": "posuto",
@@ -7147,7 +6952,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 520,
+      "id": 505,
       "lesson_id": 10,
       "hiragana": "ビル",
       "romaji": "biru",
@@ -7160,7 +6965,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 521,
+      "id": 506,
       "lesson_id": 10,
       "hiragana": "きっさてん",
       "romaji": "kissaten",
@@ -7173,7 +6978,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 522,
+      "id": 507,
       "lesson_id": 10,
       "hiragana": "ほんや",
       "romaji": "honya",
@@ -7186,7 +6991,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 523,
+      "id": 508,
       "lesson_id": 10,
       "hiragana": "～や",
       "romaji": "ya",
@@ -7199,7 +7004,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 524,
+      "id": 509,
       "lesson_id": 10,
       "hiragana": "のりば",
       "romaji": "noriba",
@@ -7212,7 +7017,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 525,
+      "id": 510,
       "lesson_id": 10,
       "hiragana": "けん",
       "romaji": "ken",
@@ -7225,7 +7030,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 526,
+      "id": 511,
       "lesson_id": 10,
       "hiragana": "みぎ",
       "romaji": "migi",
@@ -7238,7 +7043,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 527,
+      "id": 512,
       "lesson_id": 10,
       "hiragana": "ひだり",
       "romaji": "hidari",
@@ -7251,7 +7056,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 528,
+      "id": 513,
       "lesson_id": 10,
       "hiragana": "なか",
       "romaji": "naka",
@@ -7264,7 +7069,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 529,
+      "id": 514,
       "lesson_id": 10,
       "hiragana": "そと",
       "romaji": "soto",
@@ -7277,7 +7082,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 530,
+      "id": 515,
       "lesson_id": 10,
       "hiragana": "となり",
       "romaji": "tonari",
@@ -7290,7 +7095,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 531,
+      "id": 516,
       "lesson_id": 10,
       "hiragana": "ちかく",
       "romaji": "chikaku",
@@ -7303,7 +7108,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 532,
+      "id": 517,
       "lesson_id": 10,
       "hiragana": "あいだ",
       "romaji": "aida",
@@ -7316,9 +7121,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 533,
+      "id": 518,
       "lesson_id": 10,
-      "hiragana": "～や～「など」",
+      "hiragana": "～や～",
       "romaji": "ya, nado",
       "vietnamese_meaning": "Như là... (liệt kê)",
       "word_type": "particle",
@@ -7329,11 +7134,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 534,
+      "id": 519,
       "lesson_id": 10,
       "hiragana": "いちばん～",
       "romaji": "ichiban",
-      "vietnamese_meaning": "Nhất (vị trí/độ lớn)",
+      "vietnamese_meaning": "Nhất (vị trí / độ lớn)",
       "word_type": "adverb",
       "japanese_example": "いちばん上には何がありますか。",
       "example_meaning": "Ở vị trí cao nhất có cái gì vậy?",
@@ -7342,7 +7147,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 535,
+      "id": 520,
       "lesson_id": 10,
       "hiragana": "ーだんめ",
       "romaji": "danme",
@@ -7355,12 +7160,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 536,
+      "id": 521,
       "lesson_id": 10,
-      "hiragana": "「どうも」すみません。",
+      "hiragana": "すみません",
       "romaji": "doumo sumimasen",
       "vietnamese_meaning": "Cảm ơn (khi được giúp đỡ)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "道をおしえてくれて、どうもすみません。",
       "example_meaning": "Cảm ơn bạn đã chỉ đường cho tôi.",
       "mnemonic_tip": "Doumo - Đô mô: Có tiền đô mô (mà) cảm ơn người ta.",
@@ -7368,7 +7173,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 537,
+      "id": 522,
       "lesson_id": 10,
       "hiragana": "チリソース",
       "romaji": "chirisousu",
@@ -7381,7 +7186,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 538,
+      "id": 523,
       "lesson_id": 10,
       "hiragana": "奥",
       "romaji": "oku",
@@ -7394,7 +7199,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 539,
+      "id": 524,
       "lesson_id": 10,
       "hiragana": "スパイス コーナー",
       "romaji": "supaisu koonaa",
@@ -7407,7 +7212,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 540,
+      "id": 525,
       "lesson_id": 10,
       "hiragana": "東京ディズニーランド",
       "romaji": "toukyou diziinirando",
@@ -7420,7 +7225,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 541,
+      "id": 526,
       "lesson_id": 10,
       "hiragana": "ユニューや ストア",
       "romaji": "yunyuuya sutoa",
@@ -7433,7 +7238,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 542,
+      "id": 527,
       "lesson_id": 11,
       "hiragana": "います",
       "romaji": "imasu",
@@ -7446,7 +7251,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 543,
+      "id": 528,
       "lesson_id": 11,
       "hiragana": "かかります",
       "romaji": "kamarimasu",
@@ -7459,7 +7264,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 544,
+      "id": 529,
       "lesson_id": 11,
       "hiragana": "やすみます",
       "romaji": "yasumimasu",
@@ -7472,7 +7277,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 545,
+      "id": 530,
       "lesson_id": 11,
       "hiragana": "ひとつ",
       "romaji": "hitotsu",
@@ -7485,7 +7290,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 546,
+      "id": 531,
       "lesson_id": 11,
       "hiragana": "ふたつ",
       "romaji": "futatsu",
@@ -7498,7 +7303,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 547,
+      "id": 532,
       "lesson_id": 11,
       "hiragana": "みっつ",
       "romaji": "mittsu",
@@ -7511,7 +7316,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 548,
+      "id": 533,
       "lesson_id": 11,
       "hiragana": "よっつ",
       "romaji": "yottsu",
@@ -7524,7 +7329,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 549,
+      "id": 534,
       "lesson_id": 11,
       "hiragana": "いつつ",
       "romaji": "itsutsu",
@@ -7537,7 +7342,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 550,
+      "id": 535,
       "lesson_id": 11,
       "hiragana": "むっつ",
       "romaji": "muttsu",
@@ -7550,7 +7355,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 551,
+      "id": 536,
       "lesson_id": 11,
       "hiragana": "ななつ",
       "romaji": "nanatsu",
@@ -7563,7 +7368,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 552,
+      "id": 537,
       "lesson_id": 11,
       "hiragana": "やっつ",
       "romaji": "yattsu",
@@ -7576,7 +7381,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 553,
+      "id": 538,
       "lesson_id": 11,
       "hiragana": "ここのつ",
       "romaji": "kokonotsu",
@@ -7589,7 +7394,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 554,
+      "id": 539,
       "lesson_id": 11,
       "hiragana": "とお",
       "romaji": "too",
@@ -7602,7 +7407,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 555,
+      "id": 540,
       "lesson_id": 11,
       "hiragana": "いくつ",
       "romaji": "ikutsu",
@@ -7615,7 +7420,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 556,
+      "id": 541,
       "lesson_id": 11,
       "hiragana": "ひとり",
       "romaji": "hitori",
@@ -7628,7 +7433,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 557,
+      "id": 542,
       "lesson_id": 11,
       "hiragana": "ふたり",
       "romaji": "futari",
@@ -7641,7 +7446,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 558,
+      "id": 543,
       "lesson_id": 11,
       "hiragana": "なんにん",
       "romaji": "nannin",
@@ -7654,7 +7459,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 559,
+      "id": 544,
       "lesson_id": 11,
       "hiragana": "きょうだい",
       "romaji": "kyoudai",
@@ -7667,7 +7472,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 560,
+      "id": 545,
       "lesson_id": 11,
       "hiragana": "りょうしん",
       "romaji": "ryoushin",
@@ -7680,7 +7485,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 561,
+      "id": 546,
       "lesson_id": 11,
       "hiragana": "だけ",
       "romaji": "dake",
@@ -7693,12 +7498,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 562,
+      "id": 547,
       "lesson_id": 11,
-      "hiragana": "[にほんにいます]",
+      "hiragana": "",
       "romaji": "nihon ni imasu",
       "vietnamese_meaning": "Ở Nhật",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "今、日本にいます。",
       "example_meaning": "Hiện tại tôi đang ở Nhật.",
       "mnemonic_tip": "Nihon ni i ma su - 'Ní hôn ni ý mà' - Ở Nhật mà, ní hôn nhau là chuyện ý mà.",
@@ -7706,7 +7511,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 563,
+      "id": 548,
       "lesson_id": 11,
       "hiragana": "～にん",
       "romaji": "nin",
@@ -7719,7 +7524,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 564,
+      "id": 549,
       "lesson_id": 11,
       "hiragana": "～だい",
       "romaji": "dai",
@@ -7732,7 +7537,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 565,
+      "id": 550,
       "lesson_id": 11,
       "hiragana": "～まい",
       "romaji": "mai",
@@ -7745,7 +7550,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 566,
+      "id": 551,
       "lesson_id": 11,
       "hiragana": "りんご",
       "romaji": "ringo",
@@ -7758,7 +7563,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 567,
+      "id": 552,
       "lesson_id": 11,
       "hiragana": "みかん",
       "romaji": "mikan",
@@ -7771,7 +7576,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 568,
+      "id": 553,
       "lesson_id": 11,
       "hiragana": "サンドイッチ",
       "romaji": "sandoicchi",
@@ -7784,9 +7589,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 569,
+      "id": 554,
       "lesson_id": 11,
-      "hiragana": "カレー(ライス)",
+      "hiragana": "カレーライス",
       "romaji": "karee raisu",
       "vietnamese_meaning": "Cơm cà ri",
       "word_type": "noun",
@@ -7797,7 +7602,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 570,
+      "id": 555,
       "lesson_id": 11,
       "hiragana": "アイスクリーム",
       "romaji": "aisukuriimu",
@@ -7810,7 +7615,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 571,
+      "id": 556,
       "lesson_id": 11,
       "hiragana": "きって",
       "romaji": "kitte",
@@ -7823,7 +7628,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 572,
+      "id": 557,
       "lesson_id": 11,
       "hiragana": "はがき",
       "romaji": "hagaki",
@@ -7836,7 +7641,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 573,
+      "id": 558,
       "lesson_id": 11,
       "hiragana": "ふうとう",
       "romaji": "fuutou",
@@ -7849,7 +7654,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 574,
+      "id": 559,
       "lesson_id": 11,
       "hiragana": "そくたつ",
       "romaji": "sokutatsu",
@@ -7862,7 +7667,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 575,
+      "id": 560,
       "lesson_id": 11,
       "hiragana": "かきとめ",
       "romaji": "kakitome",
@@ -7875,7 +7680,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 576,
+      "id": 561,
       "lesson_id": 11,
       "hiragana": "エアメール",
       "romaji": "eameeru",
@@ -7888,7 +7693,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 577,
+      "id": 562,
       "lesson_id": 11,
       "hiragana": "ふなびん",
       "romaji": "funabin",
@@ -7901,7 +7706,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 578,
+      "id": 563,
       "lesson_id": 11,
       "hiragana": "あに",
       "romaji": "ani",
@@ -7914,7 +7719,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 579,
+      "id": 564,
       "lesson_id": 11,
       "hiragana": "おにいさん",
       "romaji": "oniisan",
@@ -7927,7 +7732,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 580,
+      "id": 565,
       "lesson_id": 11,
       "hiragana": "あね",
       "romaji": "ane",
@@ -7940,7 +7745,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 581,
+      "id": 566,
       "lesson_id": 11,
       "hiragana": "おねえさん",
       "romaji": "oneesan",
@@ -7953,7 +7758,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 582,
+      "id": 567,
       "lesson_id": 11,
       "hiragana": "おとうと",
       "romaji": "otouto",
@@ -7966,7 +7771,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 583,
+      "id": 568,
       "lesson_id": 11,
       "hiragana": "おとうとさん",
       "romaji": "otoutosan",
@@ -7979,7 +7784,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 584,
+      "id": 569,
       "lesson_id": 11,
       "hiragana": "いもうと",
       "romaji": "imouto",
@@ -7992,7 +7797,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 585,
+      "id": 570,
       "lesson_id": 11,
       "hiragana": "いもうとさん",
       "romaji": "imoutosan",
@@ -8005,7 +7810,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 586,
+      "id": 571,
       "lesson_id": 11,
       "hiragana": "がいこく",
       "romaji": "gaikoku",
@@ -8018,7 +7823,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 587,
+      "id": 572,
       "lesson_id": 11,
       "hiragana": "～じかん",
       "romaji": "jikan",
@@ -8031,7 +7836,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 588,
+      "id": 573,
       "lesson_id": 11,
       "hiragana": "～しゅうかん",
       "romaji": "shuukan",
@@ -8044,7 +7849,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 589,
+      "id": 574,
       "lesson_id": 11,
       "hiragana": "～かげつ",
       "romaji": "kagetsu",
@@ -8057,7 +7862,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 590,
+      "id": 575,
       "lesson_id": 11,
       "hiragana": "～ねん",
       "romaji": "nen",
@@ -8070,7 +7875,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 591,
+      "id": 576,
       "lesson_id": 11,
       "hiragana": "～ぐらい",
       "romaji": "gurai",
@@ -8083,7 +7888,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 592,
+      "id": 577,
       "lesson_id": 11,
       "hiragana": "どのくらい",
       "romaji": "donokurai",
@@ -8096,7 +7901,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 593,
+      "id": 578,
       "lesson_id": 11,
       "hiragana": "ぜんぶで",
       "romaji": "zenbude",
@@ -8109,7 +7914,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 594,
+      "id": 579,
       "lesson_id": 11,
       "hiragana": "みんな",
       "romaji": "minna",
@@ -8122,7 +7927,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 595,
+      "id": 580,
       "lesson_id": 11,
       "hiragana": "～だけ",
       "romaji": "dake",
@@ -8135,12 +7940,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 596,
+      "id": 581,
       "lesson_id": 11,
       "hiragana": "いらっしゃいませ",
       "romaji": "irasshaimase",
       "vietnamese_meaning": "Chào mừng quý khách",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いらっしゃいませ、何名様ですか。",
       "example_meaning": "Chào mừng quý khách, quý khách đi mấy người ạ?",
       "mnemonic_tip": "Y ra sai ma xe - Khách vào quán, nhân viên bảo \"Y ra sai ma xe\" (xe xếp hàng ra) chào đón.",
@@ -8148,12 +7953,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 597,
+      "id": 582,
       "lesson_id": 11,
-      "hiragana": "いい (お)てんきですね",
+      "hiragana": "いいおてんきですね",
       "romaji": "ii otenki desu ne",
       "vietnamese_meaning": "Thời tiết đẹp nhỉ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いいお天気ですね。",
       "example_meaning": "Thời tiết đẹp thật nhỉ.",
       "mnemonic_tip": "Y (ý) - Ô tên ki (kìa) thời tiết hôm nay đẹp ý nhỉ.",
@@ -8161,12 +7966,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 598,
+      "id": 583,
       "lesson_id": 11,
       "hiragana": "おでかけですか",
       "romaji": "odekake desu ka",
       "vietnamese_meaning": "Bạn đi ra ngoài à?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "お出かけですか。",
       "example_meaning": "Bạn đi ra ngoài đấy à?",
       "mnemonic_tip": "Ô để cà kê - Bạn ăn mặc đẹp thế, đi ra ngoài để cà kê với ai à?",
@@ -8174,12 +7979,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 599,
+      "id": 584,
       "lesson_id": 11,
       "hiragana": "ちょっと ～まで",
       "romaji": "chotto ~ made",
       "vietnamese_meaning": "Tôi đi... một chút",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "ちょっと郵便局まで。",
       "example_meaning": "Tôi đi đến bưu điện một chút.",
       "mnemonic_tip": "Chó tồ - Đi đến chỗ kia một chút thôi, đừng để chó tồ ra.",
@@ -8187,12 +7992,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 600,
+      "id": 585,
       "lesson_id": 11,
       "hiragana": "いってらっしゃい",
       "romaji": "itterasshai",
       "vietnamese_meaning": "Anh đi nhé",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いってらっしゃい。",
       "example_meaning": "Anh đi nhé (người ở nhà nói).",
       "mnemonic_tip": "Ít thê (thế) rát sai - Đi thì nhớ về sớm nhé, đừng đi ít thế rồi rát sai lầm.",
@@ -8200,12 +8005,12 @@ module.exports = {
       "pitch_accent": 5
     },
     {
-      "id": 601,
+      "id": 586,
       "lesson_id": 11,
       "hiragana": "いって いらっしゃい",
       "romaji": "itte irasshai",
       "vietnamese_meaning": "Chào nhé, đi cẩn thận",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いってらっしゃい。",
       "example_meaning": "Đi cẩn thận nhé.",
       "mnemonic_tip": "Ít thê - Người ở nhà nói câu này để chúc người đi đường bình an.",
@@ -8213,12 +8018,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 602,
+      "id": 587,
       "lesson_id": 11,
       "hiragana": "いって まいります",
       "romaji": "itte mairimasu",
       "vietnamese_meaning": "Tôi đi đây",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いってまいります。",
       "example_meaning": "Tôi đi đây (người đi nói).",
       "mnemonic_tip": "Ít thê mai rỉ mát - Tôi đi đây, mai sẽ về rỉ mát (kể chuyện) cho nghe.",
@@ -8226,7 +8031,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 603,
+      "id": 588,
       "lesson_id": 11,
       "hiragana": "オーストラリア",
       "romaji": "oosutoraria",
@@ -8239,12 +8044,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 604,
+      "id": 589,
       "lesson_id": 12,
-      "hiragana": "かんたん[な]",
+      "hiragana": "かんたんな",
       "romaji": "kantanna",
       "vietnamese_meaning": "đơn giản, dễ dàng",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "この試験は 簡単です。",
       "example_meaning": "Kỳ thi này đơn giản.",
       "mnemonic_tip": "Mẹo nhớ: Giản đơn.",
@@ -8252,12 +8057,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 605,
+      "id": 590,
       "lesson_id": 12,
       "hiragana": "ちかい",
       "romaji": "chikai",
       "vietnamese_meaning": "gần",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "駅から 近いです。",
       "example_meaning": "Gần nhà ga.",
       "mnemonic_tip": "Mẹo nhớ: 'Chị cái' - nhà chị ngay cái ngõ gần đây.",
@@ -8265,12 +8070,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 606,
+      "id": 591,
       "lesson_id": 12,
       "hiragana": "とおい",
       "romaji": "tooi",
       "vietnamese_meaning": "xa",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "うちから 遠いです。",
       "example_meaning": "Xa nhà.",
       "mnemonic_tip": "Mẹo nhớ: 'Tôi đi' - xa quá tôi đi mỏi chân.",
@@ -8278,12 +8083,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 607,
+      "id": 592,
       "lesson_id": 12,
       "hiragana": "はやい",
       "romaji": "hayai",
       "vietnamese_meaning": "nhanh, sớm",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "朝 早く 起きます。",
       "example_meaning": "Thức dậy sớm vào buổi sáng.",
       "mnemonic_tip": "Mẹo nhớ: 'Hạ ải' - đi nhanh vượt qua ải hạ.",
@@ -8291,12 +8096,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 608,
+      "id": 593,
       "lesson_id": 12,
       "hiragana": "おそい",
       "romaji": "osoi",
       "vietnamese_meaning": "chậm, muộn",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "帰りが 遅いです。",
       "example_meaning": "Trở về muộn.",
       "mnemonic_tip": "Mẹo nhớ: 'Ổ sồi' - con rùa bò chậm dưới gốc cây sồi.",
@@ -8304,12 +8109,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 609,
+      "id": 594,
       "lesson_id": 12,
       "hiragana": "おおい",
       "romaji": "ooi",
       "vietnamese_meaning": "nhiều [người]",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "人が 多いですね。",
       "example_meaning": "Nhiều người quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Ôi' - ôi nhiều người quá xá.",
@@ -8317,12 +8122,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 610,
+      "id": 595,
       "lesson_id": 12,
       "hiragana": "すくない",
       "romaji": "sukunai",
       "vietnamese_meaning": "ít [người]",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "車が 少ないです。",
       "example_meaning": "Ít xe cộ.",
       "mnemonic_tip": "Mẹo nhớ: 'Sư cụ nài' - chùa ít người nên sư cụ nài nỉ phật tử.",
@@ -8330,12 +8135,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 611,
+      "id": 596,
       "lesson_id": 12,
       "hiragana": "あたたかい",
       "romaji": "atatakai",
-      "vietnamese_meaning": "ấm áp [thời tiết/cảm giác]",
-      "word_type": "adjectivei",
+      "vietnamese_meaning": "ấm áp [thời tiết / cảm giác]",
+      "word_type": "noun",
       "japanese_example": "今日は 温かいです。",
       "example_meaning": "Hôm nay ấm áp.",
       "mnemonic_tip": "Mẹo nhớ: 'A ta ta cãi' - trời ấm lên ta cãi nhau ấm áp cả phòng.",
@@ -8343,12 +8148,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 612,
+      "id": 597,
       "lesson_id": 12,
       "hiragana": "すずしい",
       "romaji": "suzushii",
       "vietnamese_meaning": "mát mẻ [thời tiết]",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "秋は 涼しいです。",
       "example_meaning": "Mùa thu mát mẻ.",
       "mnemonic_tip": "Mẹo nhớ: 'Sư dữ sĩ' - nhà sư mát mẻ khuyên sĩ tử.",
@@ -8356,12 +8161,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 613,
+      "id": 598,
       "lesson_id": 12,
       "hiragana": "あまい",
       "romaji": "amai",
       "vietnamese_meaning": "ngọt",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "この果物は 甘いです。",
       "example_meaning": "Quả này ngọt.",
       "mnemonic_tip": "Mẹo nhớ: 'Ả mài' - ả mài đường ngọt lịm.",
@@ -8369,12 +8174,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 614,
+      "id": 599,
       "lesson_id": 12,
       "hiragana": "からい",
       "romaji": "karai",
       "vietnamese_meaning": "cay",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "カレーは 辛いです。",
       "example_meaning": "Cà ri thì cay.",
       "mnemonic_tip": "Mẹo nhớ: 'Cá rài' - ăn cá rài ớt cay đỏ mắt.",
@@ -8382,12 +8187,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 615,
+      "id": 600,
       "lesson_id": 12,
       "hiragana": "おもい",
       "romaji": "omoi",
       "vietnamese_meaning": "nặng",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "この鞄は 重いです。",
       "example_meaning": "Cái túi xách này nặng.",
       "mnemonic_tip": "Mẹo nhớ: 'Ô mồi' - ô mồi câu cá nặng trĩu.",
@@ -8395,12 +8200,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 616,
+      "id": 601,
       "lesson_id": 12,
       "hiragana": "かるい",
       "romaji": "karui",
       "vietnamese_meaning": "nhẹ",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "紙は 軽いです。",
       "example_meaning": "Giấy thì nhẹ.",
       "mnemonic_tip": "Mẹo nhớ: 'Cá rui' - con cá rui nhỏ nhẹ nhàng bơi.",
@@ -8408,7 +8213,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 617,
+      "id": 602,
       "lesson_id": 12,
       "hiragana": "きせつ",
       "romaji": "kisetsu",
@@ -8421,7 +8226,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 618,
+      "id": 603,
       "lesson_id": 12,
       "hiragana": "はる",
       "romaji": "haru",
@@ -8434,7 +8239,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 619,
+      "id": 604,
       "lesson_id": 12,
       "hiragana": "なつ",
       "romaji": "natsu",
@@ -8447,7 +8252,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 620,
+      "id": 605,
       "lesson_id": 12,
       "hiragana": "あき",
       "romaji": "aki",
@@ -8460,7 +8265,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 621,
+      "id": 606,
       "lesson_id": 12,
       "hiragana": "ふゆ",
       "romaji": "fuyu",
@@ -8473,7 +8278,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 622,
+      "id": 607,
       "lesson_id": 12,
       "hiragana": "てんき",
       "romaji": "tenki",
@@ -8486,7 +8291,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 623,
+      "id": 608,
       "lesson_id": 12,
       "hiragana": "あめ",
       "romaji": "ame",
@@ -8499,20 +8304,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 624,
-      "lesson_id": 12,
-      "hiragana": "かんたん「な」",
-      "romaji": "kantan",
-      "vietnamese_meaning": "Đơn giản",
-      "word_type": "adjective",
-      "japanese_example": "この試験は簡単です。",
-      "example_meaning": "Bài kiểm tra này thì đơn giản.",
-      "mnemonic_tip": "Can tan - Căn tin trường làm món ăn rất đơn giản.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 625,
+      "id": 609,
       "lesson_id": 12,
       "hiragana": "ゆき",
       "romaji": "yuki",
@@ -8525,7 +8317,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 626,
+      "id": 610,
       "lesson_id": 12,
       "hiragana": "くもり",
       "romaji": "kumori",
@@ -8538,7 +8330,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 627,
+      "id": 611,
       "lesson_id": 12,
       "hiragana": "ホテル",
       "romaji": "hoteru",
@@ -8551,7 +8343,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 628,
+      "id": 612,
       "lesson_id": 12,
       "hiragana": "くうこう",
       "romaji": "kuukou",
@@ -8564,7 +8356,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 629,
+      "id": 613,
       "lesson_id": 12,
       "hiragana": "うみ",
       "romaji": "umi",
@@ -8577,7 +8369,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 630,
+      "id": 614,
       "lesson_id": 12,
       "hiragana": "せかい",
       "romaji": "sekai",
@@ -8590,7 +8382,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 631,
+      "id": 615,
       "lesson_id": 12,
       "hiragana": "パーティー",
       "romaji": "paatii",
@@ -8603,7 +8395,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 632,
+      "id": 616,
       "lesson_id": 12,
       "hiragana": "おまつり",
       "romaji": "omatsuri",
@@ -8616,7 +8408,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 633,
+      "id": 617,
       "lesson_id": 12,
       "hiragana": "しけん",
       "romaji": "shiken",
@@ -8629,7 +8421,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 634,
+      "id": 618,
       "lesson_id": 12,
       "hiragana": "すきやき",
       "romaji": "sukiyaki",
@@ -8642,7 +8434,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 635,
+      "id": 619,
       "lesson_id": 12,
       "hiragana": "さしみ",
       "romaji": "sashimi",
@@ -8655,9 +8447,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 636,
+      "id": 620,
       "lesson_id": 12,
-      "hiragana": "「お」すし",
+      "hiragana": "おすし",
       "romaji": "osushi",
       "vietnamese_meaning": "Món sushi",
       "word_type": "noun",
@@ -8668,7 +8460,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 637,
+      "id": 621,
       "lesson_id": 12,
       "hiragana": "てんぷら",
       "romaji": "tenpura",
@@ -8681,7 +8473,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 638,
+      "id": 622,
       "lesson_id": 12,
       "hiragana": "いけばな",
       "romaji": "ikebana",
@@ -8694,7 +8486,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 639,
+      "id": 623,
       "lesson_id": 12,
       "hiragana": "もみじ",
       "romaji": "momiji",
@@ -8707,7 +8499,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 640,
+      "id": 624,
       "lesson_id": 12,
       "hiragana": "どちら",
       "romaji": "dochira",
@@ -8720,7 +8512,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 641,
+      "id": 625,
       "lesson_id": 12,
       "hiragana": "はじめて",
       "romaji": "hajimete",
@@ -8733,7 +8525,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 642,
+      "id": 626,
       "lesson_id": 12,
       "hiragana": "どちらも",
       "romaji": "dochiramo",
@@ -8746,7 +8538,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 643,
+      "id": 627,
       "lesson_id": 12,
       "hiragana": "ずっと",
       "romaji": "zutto",
@@ -8759,12 +8551,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 644,
+      "id": 628,
       "lesson_id": 12,
-      "hiragana": "ただいま。",
+      "hiragana": "ただいま",
       "romaji": "tadaima",
       "vietnamese_meaning": "Tôi đã về đây (nói khi về nhà)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "ただいま。帰りました。",
       "example_meaning": "Tôi đã về đây. Tôi đã về rồi.",
       "mnemonic_tip": "Tadaima gần giống 'Ta đã im' - Về đến nhà ta đã im lặng (không nói gì vì mệt) nên nói Tadaima.",
@@ -8772,12 +8564,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 645,
+      "id": 629,
       "lesson_id": 12,
-      "hiragana": "お帰かえりなさい。",
+      "hiragana": "お帰かえりなさい",
       "romaji": "okaerinasai",
-      "vietnamese_meaning": "Chào mừng anh/chị đã về",
-      "word_type": "phrase",
+      "vietnamese_meaning": "Chào mừng anh / chị đã về",
+      "word_type": "expression",
       "japanese_example": "お帰かえりなさい。お疲れ様でした。",
       "example_meaning": "Chào mừng anh đã về. Anh đã vất vả rồi.",
       "mnemonic_tip": "Okaerinasai gần giống 'Ồ, cái ri này sai' - Ồ, cái ri (cái này) sai rồi, mừng anh đã về.",
@@ -8785,12 +8577,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 646,
+      "id": 630,
       "lesson_id": 12,
-      "hiragana": "すごいですね。",
+      "hiragana": "すごいですね",
       "romaji": "sugoi desu ne",
       "vietnamese_meaning": "Tuyệt quá nhỉ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "すごいですね。上手です。",
       "example_meaning": "Tuyệt quá nhỉ. Bạn giỏi thật.",
       "mnemonic_tip": "Sugoi gần giống 'Su gội' - Dầu gội đầu Su gội rất tuyệt vời.",
@@ -8798,7 +8590,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 647,
+      "id": 631,
       "lesson_id": 12,
       "hiragana": "でも",
       "romaji": "demo",
@@ -8811,7 +8603,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 648,
+      "id": 632,
       "lesson_id": 12,
       "hiragana": "つかれました",
       "romaji": "tsukaremashita",
@@ -8824,7 +8616,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 649,
+      "id": 633,
       "lesson_id": 12,
       "hiragana": "ホンコン",
       "romaji": "honkon",
@@ -8837,7 +8629,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 650,
+      "id": 634,
       "lesson_id": 12,
       "hiragana": "シンガポール",
       "romaji": "shingapooru",
@@ -8850,7 +8642,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 651,
+      "id": 635,
       "lesson_id": 13,
       "hiragana": "あそびます",
       "romaji": "asobimasu",
@@ -8863,7 +8655,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 652,
+      "id": 636,
       "lesson_id": 13,
       "hiragana": "およぎます",
       "romaji": "oyogimasu",
@@ -8876,7 +8668,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 653,
+      "id": 637,
       "lesson_id": 13,
       "hiragana": "むかえます",
       "romaji": "mukaemasu",
@@ -8889,7 +8681,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 654,
+      "id": 638,
       "lesson_id": 13,
       "hiragana": "つかれます",
       "romaji": "tsukaremasu",
@@ -8902,7 +8694,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 655,
+      "id": 639,
       "lesson_id": 13,
       "hiragana": "けっこんします",
       "romaji": "kekkonshimasu",
@@ -8915,7 +8707,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 656,
+      "id": 640,
       "lesson_id": 13,
       "hiragana": "かいものします",
       "romaji": "kaimonoshimasu",
@@ -8928,7 +8720,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 657,
+      "id": 641,
       "lesson_id": 13,
       "hiragana": "しょくじします",
       "romaji": "shokujishimasu",
@@ -8941,7 +8733,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 658,
+      "id": 642,
       "lesson_id": 13,
       "hiragana": "さんぽします",
       "romaji": "sanposhimasu",
@@ -8954,12 +8746,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 659,
+      "id": 643,
       "lesson_id": 13,
-      "hiragana": "たいへん[な]",
+      "hiragana": "たいへんな",
       "romaji": "taihenna",
       "vietnamese_meaning": "vất vả, cực nhọc",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "仕事は 大変ですね。",
       "example_meaning": "Công việc vất vả quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: Đại biến.",
@@ -8967,12 +8759,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 660,
+      "id": 644,
       "lesson_id": 13,
       "hiragana": "ほしい",
       "romaji": "hoshii",
       "vietnamese_meaning": "muốn có [sở hữu đồ vật]",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "新しい車が 欲しいです。",
       "example_meaning": "Tôi muốn có chiếc ô tô mới.",
       "mnemonic_tip": "Mẹo nhớ: 'Hồ sĩ' - người học sĩ muốn có cái hồ câu cá.",
@@ -8980,7 +8772,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 661,
+      "id": 645,
       "lesson_id": 13,
       "hiragana": "なにか",
       "romaji": "nanika",
@@ -8993,7 +8785,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 662,
+      "id": 646,
       "lesson_id": 13,
       "hiragana": "どこか",
       "romaji": "dokoka",
@@ -9006,7 +8798,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 663,
+      "id": 647,
       "lesson_id": 13,
       "hiragana": "しゅうまつ",
       "romaji": "shuumatsu",
@@ -9019,7 +8811,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 664,
+      "id": 648,
       "lesson_id": 13,
       "hiragana": "しやくしょ",
       "romaji": "shiyakusho",
@@ -9032,9 +8824,9 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 665,
+      "id": 649,
       "lesson_id": 13,
-      "hiragana": "ぷーる",
+      "hiragana": "プール",
       "romaji": "puuru",
       "vietnamese_meaning": "bể bơi",
       "word_type": "noun",
@@ -9045,7 +8837,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 666,
+      "id": 650,
       "lesson_id": 13,
       "hiragana": "かわ",
       "romaji": "kawa",
@@ -9058,7 +8850,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 667,
+      "id": 651,
       "lesson_id": 13,
       "hiragana": "びじゅつ",
       "romaji": "bijutsu",
@@ -9071,7 +8863,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 668,
+      "id": 652,
       "lesson_id": 13,
       "hiragana": "つり",
       "romaji": "tsuri",
@@ -9084,9 +8876,9 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 669,
+      "id": 653,
       "lesson_id": 13,
-      "hiragana": "すきー",
+      "hiragana": "スキー",
       "romaji": "sukii",
       "vietnamese_meaning": "trượt tuyết",
       "word_type": "noun",
@@ -9097,7 +8889,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 670,
+      "id": 654,
       "lesson_id": 13,
       "hiragana": "おなか",
       "romaji": "onaka",
@@ -9110,9 +8902,9 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 671,
+      "id": 655,
       "lesson_id": 13,
-      "hiragana": "だします [てがみを～]",
+      "hiragana": "だします",
       "romaji": "dashimasu",
       "vietnamese_meaning": "Gửi (thư)",
       "word_type": "verb",
@@ -9123,9 +8915,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 672,
+      "id": 656,
       "lesson_id": 13,
-      "hiragana": "はいります [きっさてんに～]",
+      "hiragana": "はいります",
       "romaji": "hairimasu",
       "vietnamese_meaning": "Vào (quán)",
       "word_type": "verb",
@@ -9136,9 +8928,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 673,
+      "id": 657,
       "lesson_id": 13,
-      "hiragana": "でます [きっさてんを～]",
+      "hiragana": "でます",
       "romaji": "demasu",
       "vietnamese_meaning": "Ra, rời khỏi (quán)",
       "word_type": "verb",
@@ -9149,38 +8941,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 674,
-      "lesson_id": 13,
-      "hiragana": "さんぽします [こうえんを～]",
-      "romaji": "sanposhimasu",
-      "vietnamese_meaning": "Đi dạo",
-      "word_type": "verb",
-      "japanese_example": "公園を散歩します。",
-      "example_meaning": "Tôi đi dạo trong công viên.",
-      "mnemonic_tip": "San-pô: Săn (tìm) phố để đi dạo.",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 675,
-      "lesson_id": 13,
-      "hiragana": "たいへん「な」",
-      "romaji": "taihen",
-      "vietnamese_meaning": "Vất vả, khó khăn",
-      "word_type": "adjective",
-      "japanese_example": "仕事は大変です。",
-      "example_meaning": "Công việc thật vất vả.",
-      "mnemonic_tip": "Tai-hen: Tại hen (xui) nên mới vất vả thế này.",
-      "image_url": "",
-      "pitch_accent": 3
-    },
-    {
-      "id": 676,
+      "id": 658,
       "lesson_id": 13,
       "hiragana": "さびしい",
       "romaji": "sabishii",
       "vietnamese_meaning": "Buồn, cô đơn",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "一人で寂しいです。",
       "example_meaning": "Tôi buồn vì ở một mình.",
       "mnemonic_tip": "Sa-bi-shi: Sa (rơi) nước mắt vì buồn cô đơn.",
@@ -9188,12 +8954,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 677,
+      "id": 659,
       "lesson_id": 13,
       "hiragana": "ひろい",
       "romaji": "hiroi",
       "vietnamese_meaning": "Rộng",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この部屋は広いです。",
       "example_meaning": "Căn phòng này rộng.",
       "mnemonic_tip": "Hi-rô-i: Hi, rô (rộng) thế này thì tha hồ nhảy.",
@@ -9201,12 +8967,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 678,
+      "id": 660,
       "lesson_id": 13,
       "hiragana": "せまい",
       "romaji": "semai",
       "vietnamese_meaning": "Chật",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "この家は狭いです。",
       "example_meaning": "Căn nhà này chật.",
       "mnemonic_tip": "Se-mai: Xê (xê dịch) một tí cũng không được vì quá chật.",
@@ -9214,20 +8980,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 679,
-      "lesson_id": 13,
-      "hiragana": "プール",
-      "romaji": "puuru",
-      "vietnamese_meaning": "Bể bơi",
-      "word_type": "noun",
-      "japanese_example": "プールで泳ぎます。",
-      "example_meaning": "Tôi bơi ở bể bơi.",
-      "mnemonic_tip": "Pu-ru: Phù (thở ra) khi bơi trong bể bơi.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 680,
+      "id": 661,
       "lesson_id": 13,
       "hiragana": "けいざい",
       "romaji": "keizai",
@@ -9240,20 +8993,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 681,
-      "lesson_id": 13,
-      "hiragana": "スキー",
-      "romaji": "sukii",
-      "vietnamese_meaning": "Việc trượt tuyết",
-      "word_type": "noun",
-      "japanese_example": "スキーに行きます。",
-      "example_meaning": "Tôi đi trượt tuyết.",
-      "mnemonic_tip": "Sư-ki: Sư đi trượt tuyết thì gọi là sương-ki (ski).",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 682,
+      "id": 662,
       "lesson_id": 13,
       "hiragana": "かいぎ",
       "romaji": "kaigi",
@@ -9266,7 +9006,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 683,
+      "id": 663,
       "lesson_id": 13,
       "hiragana": "とうろく",
       "romaji": "touroku",
@@ -9279,7 +9019,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 684,
+      "id": 664,
       "lesson_id": 13,
       "hiragana": "～ごろ",
       "romaji": "goro",
@@ -9292,12 +9032,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 685,
+      "id": 665,
       "lesson_id": 13,
-      "hiragana": "おなかが すきました。",
+      "hiragana": "おなかが すきました",
       "romaji": "onaka ga sukimashita",
       "vietnamese_meaning": "Tôi đói bụng rồi",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "お腹が空きました。何か食べましょう。",
       "example_meaning": "Tôi đói rồi. Ăn gì đó thôi.",
       "mnemonic_tip": "Ô-na-ka-sư-ki: Ô (ồ) bụng ta (thì) đói mất rồi.",
@@ -9305,12 +9045,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 686,
+      "id": 666,
       "lesson_id": 13,
-      "hiragana": "おなかが いっぱいです。",
-      "romaji": "onaka ga ippai desu.",
+      "hiragana": "おなかが いっぱいです",
+      "romaji": "onaka ga ippai desu",
       "vietnamese_meaning": "Tôi no rồi",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "もう おなかが いっぱいです。",
       "example_meaning": "Tôi no rồi, không ăn thêm được nữa.",
       "mnemonic_tip": "Ô na cà (cái bụng) ippai (i ỉa) đầy: Ăn no quá nên bụng đầy hơi.",
@@ -9318,12 +9058,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 687,
+      "id": 667,
       "lesson_id": 13,
-      "hiragana": "のどが かわきました。",
-      "romaji": "nodo ga kawakimashita.",
+      "hiragana": "のどが かわきました",
+      "romaji": "nodo ga kawakimashita",
       "vietnamese_meaning": "Khát nước",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "暑いので、のどが かわきました。",
       "example_meaning": "Vì trời nóng nên tôi khát nước quá.",
       "mnemonic_tip": "Nô đô (đồ) cà hoa (khô) quá: Cổ họng khô như hoa cỏ ngoài nắng nên khát nước.",
@@ -9331,12 +9071,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 688,
+      "id": 668,
       "lesson_id": 13,
-      "hiragana": "そうですね。",
-      "romaji": "sou desu ne.",
+      "hiragana": "そうですね",
+      "romaji": "sou desu ne",
       "vietnamese_meaning": "Đúng thế nhỉ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "A: 明日は 休みですね。 B: そうですね。",
       "example_meaning": "A: Ngày mai nghỉ nhỉ. B: Đúng thế nhỉ.",
       "mnemonic_tip": "Sâu đế nê: Để cho sâu nó đi thì đúng thế nhỉ, mình đồng tình thôi.",
@@ -9344,7 +9084,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 689,
+      "id": 669,
       "lesson_id": 13,
       "hiragana": "ロシア",
       "romaji": "roshia",
@@ -9357,12 +9097,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 690,
+      "id": 670,
       "lesson_id": 13,
-      "hiragana": "そうしましょう。",
-      "romaji": "soushimashou.",
+      "hiragana": "そうしましょう",
+      "romaji": "soushimashou",
       "vietnamese_meaning": "Chúng ta hãy làm như vậy đi",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "映画を 見に 行きましょう。 そうしましょう。",
       "example_meaning": "Đi xem phim đi. Chúng ta hãy làm như vậy đi.",
       "mnemonic_tip": "Sâu si mà show: Hãy làm như vậy đi cho sâu sắc mà show ra.",
@@ -9370,7 +9110,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 691,
+      "id": 671,
       "lesson_id": 13,
       "hiragana": "ていしょく",
       "romaji": "teishoku",
@@ -9383,12 +9123,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 692,
+      "id": 672,
       "lesson_id": 13,
       "hiragana": "ごちゅうもんは",
       "romaji": "gochuumon wa",
       "vietnamese_meaning": "Quý khách dùng gì ạ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いらっしゃいませ。 ごちゅうもんは？",
       "example_meaning": "Chào mừng quý khách. Quý khách dùng gì ạ?",
       "mnemonic_tip": "Gõ chú môn: Phục vụ gõ cửa và hỏi chú ở môn (cửa) nhà hàng là quý khách dùng gì?",
@@ -9396,7 +9136,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 693,
+      "id": 673,
       "lesson_id": 13,
       "hiragana": "ぎゅうどん",
       "romaji": "gyuudon",
@@ -9409,12 +9149,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 694,
+      "id": 674,
       "lesson_id": 13,
       "hiragana": "しょうしょう　おまちください",
       "romaji": "shoushou omachikudasai",
       "vietnamese_meaning": "Xin quý khách vui lòng đợi một lát",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "少々 お待ちください。 すぐ 持ってきます。",
       "example_meaning": "Xin đợi một lát. Tôi mang ra ngay.",
       "mnemonic_tip": "Sâu sâu (đợi) o (ò) mạch (chờ) đi sai: Đợi lâu quá, o o mạch mỏi cả người.",
@@ -9422,7 +9162,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 695,
+      "id": 675,
       "lesson_id": 13,
       "hiragana": "べつべつに",
       "romaji": "betsubetsu ni",
@@ -9435,7 +9175,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 696,
+      "id": 676,
       "lesson_id": 14,
       "hiragana": "つけます",
       "romaji": "tsukemasu",
@@ -9448,7 +9188,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 697,
+      "id": 677,
       "lesson_id": 14,
       "hiragana": "けします",
       "romaji": "keshimasu",
@@ -9461,7 +9201,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 698,
+      "id": 678,
       "lesson_id": 14,
       "hiragana": "あけます",
       "romaji": "akemasu",
@@ -9474,7 +9214,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 699,
+      "id": 679,
       "lesson_id": 14,
       "hiragana": "しめます",
       "romaji": "shimemasu",
@@ -9487,7 +9227,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 700,
+      "id": 680,
       "lesson_id": 14,
       "hiragana": "いそぎます",
       "romaji": "isogimasu",
@@ -9500,7 +9240,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 701,
+      "id": 681,
       "lesson_id": 14,
       "hiragana": "まちます",
       "romaji": "machimasu",
@@ -9513,7 +9253,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 702,
+      "id": 682,
       "lesson_id": 14,
       "hiragana": "とめます",
       "romaji": "tomemasu",
@@ -9526,11 +9266,11 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 703,
+      "id": 683,
       "lesson_id": 14,
       "hiragana": "まがります",
       "romaji": "magarimasu",
-      "vietnamese_meaning": "rẽ, quẹo [phải/trái]",
+      "vietnamese_meaning": "rẽ, quẹo [phải / trái]",
       "word_type": "verb",
       "japanese_example": "右へ 曲がります。",
       "example_meaning": "Rẽ phải.",
@@ -9539,7 +9279,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 704,
+      "id": 684,
       "lesson_id": 14,
       "hiragana": "もちます",
       "romaji": "mochimasu",
@@ -9552,7 +9292,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 705,
+      "id": 685,
       "lesson_id": 14,
       "hiragana": "とります",
       "romaji": "torimasu",
@@ -9565,7 +9305,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 706,
+      "id": 686,
       "lesson_id": 14,
       "hiragana": "てつだいます",
       "romaji": "tetsudaimasu",
@@ -9578,7 +9318,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 707,
+      "id": 687,
       "lesson_id": 14,
       "hiragana": "よびます",
       "romaji": "yobimasu",
@@ -9591,7 +9331,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 708,
+      "id": 688,
       "lesson_id": 14,
       "hiragana": "はなします",
       "romaji": "hanashimasu",
@@ -9604,7 +9344,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 709,
+      "id": 689,
       "lesson_id": 14,
       "hiragana": "みせます",
       "romaji": "misemasu",
@@ -9617,7 +9357,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 710,
+      "id": 690,
       "lesson_id": 14,
       "hiragana": "はじめます",
       "romaji": "hajimemasu",
@@ -9630,7 +9370,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 711,
+      "id": 691,
       "lesson_id": 14,
       "hiragana": "ふります",
       "romaji": "furimasu",
@@ -9643,7 +9383,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 712,
+      "id": 692,
       "lesson_id": 14,
       "hiragana": "でんき",
       "romaji": "denki",
@@ -9656,7 +9396,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 713,
+      "id": 693,
       "lesson_id": 14,
       "hiragana": "えあこん",
       "romaji": "eakon",
@@ -9669,9 +9409,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 714,
+      "id": 694,
       "lesson_id": 14,
-      "hiragana": "ぱすぽーと",
+      "hiragana": "パスポート",
       "romaji": "pasupooto",
       "vietnamese_meaning": "hộ chiếu",
       "word_type": "noun",
@@ -9682,7 +9422,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 715,
+      "id": 695,
       "lesson_id": 14,
       "hiragana": "じゅうしょ",
       "romaji": "juusho",
@@ -9695,20 +9435,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 716,
-      "lesson_id": 14,
-      "hiragana": "つけます II",
-      "romaji": "tsukemasu",
-      "vietnamese_meaning": "Bật (điện, điều hòa)",
-      "word_type": "verb",
-      "japanese_example": "エアコンを付けます。",
-      "example_meaning": "Tôi bật điều hòa.",
-      "mnemonic_tip": "Tên sư kê mát: Bật điều hòa lên cho các sư kê thấy mát mẻ.",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 717,
+      "id": 696,
       "lesson_id": 14,
       "hiragana": "けしますＩ",
       "romaji": "keshimasu",
@@ -9721,74 +9448,9 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 718,
+      "id": 697,
       "lesson_id": 14,
-      "hiragana": "あけます II",
-      "romaji": "akemasu",
-      "vietnamese_meaning": "Mở (cửa, cửa sổ)",
-      "word_type": "verb",
-      "japanese_example": "ドアを開けます。",
-      "example_meaning": "Tôi mở cửa.",
-      "mnemonic_tip": "A kê mát: Mở cửa ra cho không khí mát ùa vào, ai cũng phải kêu \"A, mát quá\".",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 719,
-      "lesson_id": 14,
-      "hiragana": "しめます II",
-      "romaji": "shimemasu",
-      "vietnamese_meaning": "Đóng (cửa, cửa sổ)",
-      "word_type": "verb",
-      "japanese_example": "窓を閉めます。",
-      "example_meaning": "Tôi đóng cửa sổ.",
-      "mnemonic_tip": "Chì mấy: Chìa khóa mất rồi, phải đóng cửa lại thôi.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 720,
-      "lesson_id": 14,
-      "hiragana": "いそぎます I",
-      "romaji": "isogimasu",
-      "vietnamese_meaning": "Vội, gấp",
-      "word_type": "verb",
-      "japanese_example": "急ぎますから、タクシーに乗ります。",
-      "example_meaning": "Vì vội nên tôi đi taxi.",
-      "mnemonic_tip": "Ý số ghi mắt: Ý là số tiền trên đồng hồ cứ tăng làm mắt tôi trợn ngược vì vội.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 721,
-      "lesson_id": 14,
-      "hiragana": "まちます I",
-      "romaji": "machimasu",
-      "vietnamese_meaning": "Đợi, chờ",
-      "word_type": "verb",
-      "japanese_example": "ここで待ちます。",
-      "example_meaning": "Tôi đợi ở đây.",
-      "mnemonic_tip": "Mát chi: Đợi ở đây mát thế này cần gì phải đi đâu.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 722,
-      "lesson_id": 14,
-      "hiragana": "とめます II",
-      "romaji": "tomemasu",
-      "vietnamese_meaning": "Dừng, đỗ (xe)",
-      "word_type": "verb",
-      "japanese_example": "車を止めます。",
-      "example_meaning": "Tôi đỗ xe.",
-      "mnemonic_tip": "Tò mò mát: Dừng xe lại chỉ vì tò mò xem chỗ kia có mát không.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 723,
-      "lesson_id": 14,
-      "hiragana": "まがります I [みぎへ～]",
+      "hiragana": "まがります I",
       "romaji": "magarimasu",
       "vietnamese_meaning": "Rẽ, quẹo [phải]",
       "word_type": "verb",
@@ -9799,87 +9461,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 724,
+      "id": 698,
       "lesson_id": 14,
-      "hiragana": "もちます I",
-      "romaji": "mochimasu",
-      "vietnamese_meaning": "Cầm, nắm, mang",
-      "word_type": "verb",
-      "japanese_example": "荷物を持ちます。",
-      "example_meaning": "Tôi cầm hành lý.",
-      "mnemonic_tip": "Mò chí: Mò vào túi thấy có con chí, sợ quá phải cầm nó vứt đi.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 725,
-      "lesson_id": 14,
-      "hiragana": "とります I",
-      "romaji": "torimasu",
-      "vietnamese_meaning": "Lấy (muối)",
-      "word_type": "verb",
-      "japanese_example": "塩を取ってください。",
-      "example_meaning": "Hãy lấy giúp tôi muối.",
-      "mnemonic_tip": "To rít: Con chim to rít lên khi tôi lấy muối của nó.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 726,
-      "lesson_id": 14,
-      "hiragana": "てつだいます I",
-      "romaji": "tetsudaimasu",
-      "vietnamese_meaning": "Giúp đỡ",
-      "word_type": "verb",
-      "japanese_example": "手伝います。",
-      "example_meaning": "Tôi giúp bạn đây.",
-      "mnemonic_tip": "Tết dại: Tết nhất rồi, dại gì không giúp đỡ mọi người để lấy may.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 727,
-      "lesson_id": 14,
-      "hiragana": "よびます I",
-      "romaji": "yobimasu",
-      "vietnamese_meaning": "Gọi (taxi, tên)",
-      "word_type": "verb",
-      "japanese_example": "タクシーを呼びます。",
-      "example_meaning": "Tôi gọi taxi.",
-      "mnemonic_tip": "Yêu bí: Gọi người yêu là \"bí\" ơi ra đây giúp anh.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 728,
-      "lesson_id": 14,
-      "hiragana": "はなします I",
-      "romaji": "hanashimasu",
-      "vietnamese_meaning": "Nói chuyện",
-      "word_type": "verb",
-      "japanese_example": "日本語で話します。",
-      "example_meaning": "Tôi nói chuyện bằng tiếng Nhật.",
-      "mnemonic_tip": "Hai na ship mát: Hai người kia nói chuyện trên tàu ship mát quá.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 729,
-      "lesson_id": 14,
-      "hiragana": "みせます II",
-      "romaji": "misemasu",
-      "vietnamese_meaning": "Cho xem, trình ra",
-      "word_type": "verb",
-      "japanese_example": "写真を見せます。",
-      "example_meaning": "Tôi cho xem ảnh.",
-      "mnemonic_tip": "Mì xe mát: Mì để trên xe mát lạnh, mang ra cho mọi người xem.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 730,
-      "lesson_id": 14,
-      "hiragana": "おしえます II",
+      "hiragana": "おしえます",
       "romaji": "oshiemasu",
       "vietnamese_meaning": "Dạy, bảo cho",
       "word_type": "verb",
@@ -9890,35 +9474,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 731,
+      "id": 699,
       "lesson_id": 14,
-      "hiragana": "はじめます II",
-      "romaji": "hajimemasu",
-      "vietnamese_meaning": "Bắt đầu",
-      "word_type": "verb",
-      "japanese_example": "会議を始めます。",
-      "example_meaning": "Chúng ta bắt đầu cuộc họp.",
-      "mnemonic_tip": "Hạ dê mé: Hạ con dê xuống mé đường để bắt đầu bữa tiệc.",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 732,
-      "lesson_id": 14,
-      "hiragana": "ふります I",
-      "romaji": "furimasu",
-      "vietnamese_meaning": "Rơi (mưa, tuyết)",
-      "word_type": "verb",
-      "japanese_example": "雨が降ります。",
-      "example_meaning": "Trời mưa.",
-      "mnemonic_tip": "Phù rì: Phù một cái, mưa rơi rì rào ngay.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 733,
-      "lesson_id": 14,
-      "hiragana": "コピーします III",
+      "hiragana": "コピーします",
       "romaji": "kopiishimasu",
       "vietnamese_meaning": "Copy",
       "word_type": "verb",
@@ -9929,7 +9487,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 734,
+      "id": 700,
       "lesson_id": 14,
       "hiragana": "エアコン",
       "romaji": "eakon",
@@ -9942,20 +9500,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 735,
-      "lesson_id": 14,
-      "hiragana": "パスポート",
-      "romaji": "pasupooto",
-      "vietnamese_meaning": "Hộ chiếu",
-      "word_type": "noun",
-      "japanese_example": "パスポートを見せます。",
-      "example_meaning": "Tôi trình hộ chiếu.",
-      "mnemonic_tip": "Pass phố tồ: Để qua phố thì phải có passport (tồ).",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 736,
+      "id": 701,
       "lesson_id": 14,
       "hiragana": "なまえ",
       "romaji": "namae",
@@ -9968,7 +9513,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 737,
+      "id": 702,
       "lesson_id": 14,
       "hiragana": "ちず",
       "romaji": "chizu",
@@ -9981,7 +9526,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 738,
+      "id": 703,
       "lesson_id": 14,
       "hiragana": "しお",
       "romaji": "shio",
@@ -9994,7 +9539,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 739,
+      "id": 704,
       "lesson_id": 14,
       "hiragana": "さとう",
       "romaji": "satou",
@@ -10007,7 +9552,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 740,
+      "id": 705,
       "lesson_id": 14,
       "hiragana": "よみかた",
       "romaji": "yomikata",
@@ -10020,7 +9565,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 741,
+      "id": 706,
       "lesson_id": 14,
       "hiragana": "～かた",
       "romaji": "kata",
@@ -10033,7 +9578,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 742,
+      "id": 707,
       "lesson_id": 14,
       "hiragana": "ゆっくり",
       "romaji": "yukkuri",
@@ -10046,7 +9591,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 743,
+      "id": 708,
       "lesson_id": 14,
       "hiragana": "すぐ",
       "romaji": "sugu",
@@ -10059,7 +9604,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 744,
+      "id": 709,
       "lesson_id": 14,
       "hiragana": "また",
       "romaji": "mata",
@@ -10072,7 +9617,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 745,
+      "id": 710,
       "lesson_id": 14,
       "hiragana": "あとで",
       "romaji": "atode",
@@ -10085,12 +9630,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 746,
+      "id": 711,
       "lesson_id": 14,
       "hiragana": "もう すこし",
       "romaji": "mou sukoshi",
       "vietnamese_meaning": "thêm một chút nữa",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "もう 少し 食べます。",
       "example_meaning": "Tôi sẽ ăn thêm một chút nữa.",
       "mnemonic_tip": "Mô su kô si - Mồ hôi có xíu, ráng làm thêm một chút nữa thôi.",
@@ -10098,7 +9643,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 747,
+      "id": 712,
       "lesson_id": 14,
       "hiragana": "もう～",
       "romaji": "mou",
@@ -10111,12 +9656,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 748,
+      "id": 713,
       "lesson_id": 14,
-      "hiragana": "いいですよ。",
+      "hiragana": "いいですよ",
       "romaji": "ii desu yo",
       "vietnamese_meaning": "được chứ, được ạ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "A: 窓を 開けても いいですか。 B: いいですよ。",
       "example_meaning": "A: Tôi mở cửa sổ được không? B: Được chứ.",
       "mnemonic_tip": "Y đi sư dồ - Ý đi sự đồ, ý bạn là muốn đồ đó, ừ thì được chứ!",
@@ -10124,12 +9669,12 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 749,
+      "id": 714,
       "lesson_id": 14,
       "hiragana": "さあ",
       "romaji": "saa",
       "vietnamese_meaning": "nào, thôi nào",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "さあ、行きましょう。",
       "example_meaning": "Nào, chúng ta cùng đi thôi.",
       "mnemonic_tip": "Saa - Sa đà vào việc gì rồi, thôi nào, cùng bắt tay làm đi!",
@@ -10137,12 +9682,12 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 750,
+      "id": 715,
       "lesson_id": 14,
       "hiragana": "あれ？",
       "romaji": "are",
       "vietnamese_meaning": "Ồ / Ơ (cảm thán khi thấy điều lạ)",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "あれ？ 鍵が ない。",
       "example_meaning": "Ơ? Chìa khóa đâu mất rồi.",
       "mnemonic_tip": "Are - À rề, ơ kìa, cái gì lạ thế này?",
@@ -10150,7 +9695,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 751,
+      "id": 716,
       "lesson_id": 14,
       "hiragana": "まっすぐ",
       "romaji": "massugu",
@@ -10163,7 +9708,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 752,
+      "id": 717,
       "lesson_id": 14,
       "hiragana": "おつり",
       "romaji": "otsuri",
@@ -10176,12 +9721,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 753,
+      "id": 718,
       "lesson_id": 14,
       "hiragana": "これでおねがいします",
       "romaji": "kore de onegaishimasu",
-      "vietnamese_meaning": "gửi anh/chị tiền này",
-      "word_type": "phrase",
+      "vietnamese_meaning": "gửi anh / chị tiền này",
+      "word_type": "expression",
       "japanese_example": "1000円です。これでおねがいします。",
       "example_meaning": "Hết 1000 yên. Gửi anh tiền này ạ.",
       "mnemonic_tip": "Cồ rê đê - Cô rê đề, gửi tiền này đi, làm ơn nhận cho tôi.",
@@ -10189,7 +9734,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 754,
+      "id": 719,
       "lesson_id": 15,
       "hiragana": "たちます",
       "romaji": "tachimasu",
@@ -10202,7 +9747,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 755,
+      "id": 720,
       "lesson_id": 15,
       "hiragana": "すわります",
       "romaji": "suwarimasu",
@@ -10215,7 +9760,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 756,
+      "id": 721,
       "lesson_id": 15,
       "hiragana": "つかいます",
       "romaji": "tsukaimasu",
@@ -10228,7 +9773,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 757,
+      "id": 722,
       "lesson_id": 15,
       "hiragana": "おきます",
       "romaji": "okimasu",
@@ -10241,7 +9786,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 758,
+      "id": 723,
       "lesson_id": 15,
       "hiragana": "つくります",
       "romaji": "tsukurimasu",
@@ -10254,7 +9799,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 759,
+      "id": 724,
       "lesson_id": 15,
       "hiragana": "うります",
       "romaji": "urimasu",
@@ -10267,7 +9812,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 760,
+      "id": 725,
       "lesson_id": 15,
       "hiragana": "しります",
       "romaji": "shirimasu",
@@ -10280,7 +9825,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 761,
+      "id": 726,
       "lesson_id": 15,
       "hiragana": "すみます",
       "romaji": "sumimasu",
@@ -10293,7 +9838,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 762,
+      "id": 727,
       "lesson_id": 15,
       "hiragana": "けんきゅうします",
       "romaji": "kenkyuushimasu",
@@ -10306,7 +9851,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 763,
+      "id": 728,
       "lesson_id": 15,
       "hiragana": "しりょう",
       "romaji": "shiryou",
@@ -10319,7 +9864,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 764,
+      "id": 729,
       "lesson_id": 15,
       "hiragana": "かたろぐ",
       "romaji": "katarogu",
@@ -10332,11 +9877,11 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 765,
+      "id": 730,
       "lesson_id": 15,
       "hiragana": "じこくひょう",
       "romaji": "jikokuhyou",
-      "vietnamese_meaning": "bảng giờ chạy xe/tàu",
+      "vietnamese_meaning": "bảng giờ chạy xe / tàu",
       "word_type": "noun",
       "japanese_example": "時刻表は どこですか。",
       "example_meaning": "Bảng giờ chạy tàu ở đâu vậy?",
@@ -10345,7 +9890,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 766,
+      "id": 731,
       "lesson_id": 15,
       "hiragana": "ふく",
       "romaji": "fuku",
@@ -10358,7 +9903,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 767,
+      "id": 732,
       "lesson_id": 15,
       "hiragana": "せいひん",
       "romaji": "seihin",
@@ -10371,7 +9916,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 768,
+      "id": 733,
       "lesson_id": 15,
       "hiragana": "そふと",
       "romaji": "sofuto",
@@ -10384,7 +9929,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 769,
+      "id": 734,
       "lesson_id": 15,
       "hiragana": "せんもん",
       "romaji": "senmon",
@@ -10397,7 +9942,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 770,
+      "id": 735,
       "lesson_id": 15,
       "hiragana": "はいしゃ",
       "romaji": "haisha",
@@ -10410,7 +9955,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 771,
+      "id": 736,
       "lesson_id": 15,
       "hiragana": "とこや",
       "romaji": "tokoya",
@@ -10423,7 +9968,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 772,
+      "id": 737,
       "lesson_id": 15,
       "hiragana": "どくしん",
       "romaji": "dokushin",
@@ -10436,7 +9981,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 773,
+      "id": 738,
       "lesson_id": 15,
       "hiragana": "おもいだします",
       "romaji": "omoidashimasu",
@@ -10449,7 +9994,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 774,
+      "id": 739,
       "lesson_id": 15,
       "hiragana": "しって います",
       "romaji": "shitte imasu",
@@ -10462,7 +10007,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 775,
+      "id": 740,
       "lesson_id": 15,
       "hiragana": "すんで います",
       "romaji": "sunde imasu",
@@ -10475,7 +10020,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 776,
+      "id": 741,
       "lesson_id": 15,
       "hiragana": "カタログ",
       "romaji": "katarogu",
@@ -10488,7 +10033,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 777,
+      "id": 742,
       "lesson_id": 15,
       "hiragana": "ソフト",
       "romaji": "sofuto",
@@ -10501,7 +10046,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 778,
+      "id": 743,
       "lesson_id": 15,
       "hiragana": "プレイガイド",
       "romaji": "pureigaido",
@@ -10514,7 +10059,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 779,
+      "id": 744,
       "lesson_id": 15,
       "hiragana": "とくに",
       "romaji": "tokuni",
@@ -10527,7 +10072,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 780,
+      "id": 745,
       "lesson_id": 15,
       "hiragana": "ごかぞく",
       "romaji": "gokazoku",
@@ -10540,7 +10085,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 781,
+      "id": 746,
       "lesson_id": 15,
       "hiragana": "いらっしゃいます",
       "romaji": "irasshaimasu",
@@ -10553,7 +10098,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 782,
+      "id": 747,
       "lesson_id": 15,
       "hiragana": "こうこう",
       "romaji": "koukou",
@@ -10566,7 +10111,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 783,
+      "id": 748,
       "lesson_id": 16,
       "hiragana": "のります",
       "romaji": "norimasu",
@@ -10579,7 +10124,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 784,
+      "id": 749,
       "lesson_id": 16,
       "hiragana": "おります",
       "romaji": "orimasu",
@@ -10592,7 +10137,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 785,
+      "id": 750,
       "lesson_id": 16,
       "hiragana": "のりかえます",
       "romaji": "norikaemasu",
@@ -10605,7 +10150,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 786,
+      "id": 751,
       "lesson_id": 16,
       "hiragana": "あびます",
       "romaji": "abimasu",
@@ -10618,7 +10163,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 787,
+      "id": 752,
       "lesson_id": 16,
       "hiragana": "いれます",
       "romaji": "iremasu",
@@ -10631,7 +10176,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 788,
+      "id": 753,
       "lesson_id": 16,
       "hiragana": "だします",
       "romaji": "dashimasu",
@@ -10644,11 +10189,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 789,
+      "id": 754,
       "lesson_id": 16,
       "hiragana": "はいります",
       "romaji": "hairimasu",
-      "vietnamese_meaning": "vào [đại học/phòng]",
+      "vietnamese_meaning": "vào [đại học / phòng]",
       "word_type": "verb",
       "japanese_example": "大学に 入ります。",
       "example_meaning": "Vào học đại học.",
@@ -10657,7 +10202,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 790,
+      "id": 755,
       "lesson_id": 16,
       "hiragana": "でます",
       "romaji": "demasu",
@@ -10670,7 +10215,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 791,
+      "id": 756,
       "lesson_id": 16,
       "hiragana": "やめます",
       "romaji": "yamemasu",
@@ -10683,7 +10228,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 792,
+      "id": 757,
       "lesson_id": 16,
       "hiragana": "おします",
       "romaji": "oshimasu",
@@ -10696,12 +10241,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 793,
+      "id": 758,
       "lesson_id": 16,
       "hiragana": "わかい",
       "romaji": "wakai",
       "vietnamese_meaning": "trẻ trung",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "若い先生ですね。",
       "example_meaning": "Thầy giáo trẻ quá nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Quá kĩ' - thầy giáo trẻ tính toán quá kỹ lưỡng.",
@@ -10709,12 +10254,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 794,
+      "id": 759,
       "lesson_id": 16,
       "hiragana": "ながい",
       "romaji": "nagai",
       "vietnamese_meaning": "dài",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "髪が 長いです。",
       "example_meaning": "Tóc dài.",
       "mnemonic_tip": "Mẹo nhớ: 'Nã gái' - người có chân dài đi nã gái.",
@@ -10722,12 +10267,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 795,
+      "id": 760,
       "lesson_id": 16,
       "hiragana": "みじかい",
       "romaji": "mijikai",
       "vietnamese_meaning": "ngắn",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "スカートが 短いです。",
       "example_meaning": "Váy ngắn.",
       "mnemonic_tip": "Mẹo nhớ: 'Mị chỉ cãi' - váy ngắn quá nên mị chỉ cãi lời mẹ.",
@@ -10735,12 +10280,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 796,
+      "id": 761,
       "lesson_id": 16,
       "hiragana": "あかるい",
       "romaji": "akarui",
       "vietnamese_meaning": "sáng sủa",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "明るい部屋ですね。",
       "example_meaning": "Căn phòng sáng sủa nhỉ.",
       "mnemonic_tip": "Mẹo nhớ: 'Ả cả rủ' - căn phòng sáng sủa ả cả rủ bạn vào chơi.",
@@ -10748,12 +10293,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 797,
+      "id": 762,
       "lesson_id": 16,
       "hiragana": "くらい",
       "romaji": "kurai",
       "vietnamese_meaning": "tối tăm, u ám",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "暗い部屋です。",
       "example_meaning": "Căn phòng tối tăm.",
       "mnemonic_tip": "Mẹo nhớ: 'Cụ rài' - phòng tối có cụ rùa rài rải bò.",
@@ -10761,7 +10306,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 798,
+      "id": 763,
       "lesson_id": 16,
       "hiragana": "からだ",
       "romaji": "karada",
@@ -10774,7 +10319,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 799,
+      "id": 764,
       "lesson_id": 16,
       "hiragana": "あたま",
       "romaji": "atama",
@@ -10787,7 +10332,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 800,
+      "id": 765,
       "lesson_id": 16,
       "hiragana": "かみ",
       "romaji": "kami",
@@ -10800,7 +10345,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 801,
+      "id": 766,
       "lesson_id": 16,
       "hiragana": "かお",
       "romaji": "kao",
@@ -10813,7 +10358,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 802,
+      "id": 767,
       "lesson_id": 16,
       "hiragana": "め",
       "romaji": "me",
@@ -10826,90 +10371,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 803,
-      "lesson_id": 16,
-      "hiragana": "のります [でんしゃに～]",
-      "romaji": "norimasu [densha ni]",
-      "vietnamese_meaning": "Lên [tàu]",
-      "word_type": "verb",
-      "japanese_example": "電車に乗ります。",
-      "example_meaning": "Tôi lên tàu điện.",
-      "mnemonic_tip": "Nori-masu: 'Nò rị' - Nò rị vào toa tàu để lên tàu điện.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 804,
-      "lesson_id": 16,
-      "hiragana": "おります [でんしゃに～]",
-      "romaji": "orimasu [densha ni]",
-      "vietnamese_meaning": "Xuống [tàu]",
-      "word_type": "verb",
-      "japanese_example": "電車を降ります。",
-      "example_meaning": "Tôi xuống tàu điện.",
-      "mnemonic_tip": "Ori-masu: 'Ô rỉ' - Tàu cũ quá nên 'ô rỉ' hết rồi, xuống thôi.",
-      "image_url": "",
-      "pitch_accent": 2
-    },
-    {
-      "id": 805,
-      "lesson_id": 16,
-      "hiragana": "あびます [シャワーを～]",
-      "romaji": "abimasu [shawaa o]",
-      "vietnamese_meaning": "Tắm [vòi hoa sen]",
-      "word_type": "verb",
-      "japanese_example": "シャワーを浴びます。",
-      "example_meaning": "Tôi tắm vòi hoa sen.",
-      "mnemonic_tip": "Abi-masu: 'A, bị' - A, bị ướt hết rồi vì đang tắm vòi sen.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 806,
-      "lesson_id": 16,
-      "hiragana": "はいります [だいがくに～]",
-      "romaji": "hairimasu [daigaku ni]",
-      "vietnamese_meaning": "Nhập học, vào [đại học]",
-      "word_type": "verb",
-      "japanese_example": "大学に入ります。",
-      "example_meaning": "Tôi vào đại học.",
-      "mnemonic_tip": "Hairi-masu: 'Hai ri' - Hai ri (hai người) cùng vào đại học.",
-      "image_url": "",
-      "pitch_accent": 2
-    },
-    {
-      "id": 807,
-      "lesson_id": 16,
-      "hiragana": "でます [だいがくを～]",
-      "romaji": "demasu [daigaku o]",
-      "vietnamese_meaning": "Tốt nghiệp [đại học]",
-      "word_type": "verb",
-      "japanese_example": "大学を出ます。",
-      "example_meaning": "Tôi tốt nghiệp đại học.",
-      "mnemonic_tip": "De-masu: 'Đê' - Tốt nghiệp xong ta cùng đi đê (đê chơi).",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 808,
-      "lesson_id": 16,
-      "hiragana": "やめます [かいしゃを～]",
-      "romaji": "yamemasu [kaisha o]",
-      "vietnamese_meaning": "Nghỉ [công ty]",
-      "word_type": "verb",
-      "japanese_example": "会社を辞めます。",
-      "example_meaning": "Tôi nghỉ việc công ty.",
-      "mnemonic_tip": "Yame-masu: 'Yeah, mê' - Nghỉ việc xong thì 'Yeah', mê quá đi.",
-      "image_url": "",
-      "pitch_accent": 3
-    },
-    {
-      "id": 809,
+      "id": 768,
       "lesson_id": 16,
       "hiragana": "せが たかい",
       "romaji": "se ga takai",
       "vietnamese_meaning": "Cao (người)",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "背が高いです。",
       "example_meaning": "Tôi cao.",
       "mnemonic_tip": "Se ga takai: 'Sê ga ta khai' - Sê ga (xe ga) cao quá, tận đài khai.",
@@ -10917,12 +10384,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 810,
+      "id": 769,
       "lesson_id": 16,
       "hiragana": "あたまが いい",
       "romaji": "atama ga ii",
       "vietnamese_meaning": "Thông minh, giỏi",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "頭が良いです。",
       "example_meaning": "Anh ấy thông minh.",
       "mnemonic_tip": "Atama ga ii: 'A ta mà ghi' - A, ta mà ghi nhớ nhanh là nhờ thông minh.",
@@ -10930,7 +10397,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 811,
+      "id": 770,
       "lesson_id": 16,
       "hiragana": "みみ",
       "romaji": "mimi",
@@ -10943,7 +10410,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 812,
+      "id": 771,
       "lesson_id": 16,
       "hiragana": "は",
       "romaji": "ha",
@@ -10956,7 +10423,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 813,
+      "id": 772,
       "lesson_id": 16,
       "hiragana": "あし",
       "romaji": "ashi",
@@ -10969,7 +10436,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 814,
+      "id": 773,
       "lesson_id": 16,
       "hiragana": "サービス",
       "romaji": "saabisu",
@@ -10982,7 +10449,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 815,
+      "id": 774,
       "lesson_id": 16,
       "hiragana": "ジョギング",
       "romaji": "jogingu",
@@ -10995,7 +10462,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 816,
+      "id": 775,
       "lesson_id": 16,
       "hiragana": "シャワー",
       "romaji": "shawaa",
@@ -11008,7 +10475,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 817,
+      "id": 776,
       "lesson_id": 16,
       "hiragana": "みどり",
       "romaji": "midori",
@@ -11021,9 +10488,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 818,
+      "id": 777,
       "lesson_id": 16,
-      "hiragana": "[お]てら",
+      "hiragana": "おてら",
       "romaji": "otera",
       "vietnamese_meaning": "Chùa",
       "word_type": "noun",
@@ -11034,7 +10501,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 819,
+      "id": 778,
       "lesson_id": 16,
       "hiragana": "じんじゃ",
       "romaji": "jinja",
@@ -11047,7 +10514,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 820,
+      "id": 779,
       "lesson_id": 16,
       "hiragana": "りゅうがくせい",
       "romaji": "ryuugakusei",
@@ -11060,7 +10527,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 821,
+      "id": 780,
       "lesson_id": 16,
       "hiragana": "一ばん",
       "romaji": "ichiban",
@@ -11073,7 +10540,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 822,
+      "id": 781,
       "lesson_id": 16,
       "hiragana": "どうやって",
       "romaji": "douyatte",
@@ -11086,7 +10553,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 823,
+      "id": 782,
       "lesson_id": 16,
       "hiragana": "どの～",
       "romaji": "dono",
@@ -11099,12 +10566,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 824,
+      "id": 783,
       "lesson_id": 16,
-      "hiragana": "[いいえ、]まだまだです。",
+      "hiragana": "まだまだです",
       "romaji": "iie, madamada desu",
       "vietnamese_meaning": "Không, tôi vẫn còn kém lắm",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "日本語が上手ですね。いいえ、まだまだです。",
       "example_meaning": "Tiếng Nhật bạn giỏi nhỉ. Không, tôi vẫn còn kém lắm.",
       "mnemonic_tip": "Ma-đa-ma-đa (ma đa ma đa): Đừng khen, tôi vẫn là ma mới, ma đa ma đa chưa giỏi đâu.",
@@ -11112,7 +10579,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 825,
+      "id": 784,
       "lesson_id": 16,
       "hiragana": "まず",
       "romaji": "mazu",
@@ -11125,7 +10592,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 826,
+      "id": 785,
       "lesson_id": 16,
       "hiragana": "キャッシュカード",
       "romaji": "kyasshukaado",
@@ -11138,7 +10605,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 827,
+      "id": 786,
       "lesson_id": 16,
       "hiragana": "あんしょうばんごう",
       "romaji": "anshoubangou",
@@ -11151,7 +10618,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 828,
+      "id": 787,
       "lesson_id": 16,
       "hiragana": "つぎ に",
       "romaji": "tsugini",
@@ -11164,7 +10631,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 829,
+      "id": 788,
       "lesson_id": 16,
       "hiragana": "かくにん",
       "romaji": "kakunin",
@@ -11177,7 +10644,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 830,
+      "id": 789,
       "lesson_id": 16,
       "hiragana": "きんがく",
       "romaji": "kingaku",
@@ -11190,7 +10657,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 831,
+      "id": 790,
       "lesson_id": 16,
       "hiragana": "ボタン",
       "romaji": "botan",
@@ -11203,7 +10670,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 832,
+      "id": 791,
       "lesson_id": 17,
       "hiragana": "おぼえます",
       "romaji": "oboemasu",
@@ -11216,7 +10683,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 833,
+      "id": 792,
       "lesson_id": 17,
       "hiragana": "わすれます",
       "romaji": "wasuremasu",
@@ -11229,7 +10696,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 834,
+      "id": 793,
       "lesson_id": 17,
       "hiragana": "なくします",
       "romaji": "nakushimasu",
@@ -11242,7 +10709,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 835,
+      "id": 794,
       "lesson_id": 17,
       "hiragana": "はらいます",
       "romaji": "haraimasu",
@@ -11255,7 +10722,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 836,
+      "id": 795,
       "lesson_id": 17,
       "hiragana": "かえします",
       "romaji": "kaeshimasu",
@@ -11268,7 +10735,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 837,
+      "id": 796,
       "lesson_id": 17,
       "hiragana": "でかけます",
       "romaji": "dekakemasu",
@@ -11281,7 +10748,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 838,
+      "id": 797,
       "lesson_id": 17,
       "hiragana": "ぬぎます",
       "romaji": "nugimasu",
@@ -11294,7 +10761,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 839,
+      "id": 798,
       "lesson_id": 17,
       "hiragana": "もっていきます",
       "romaji": "motteikimasu",
@@ -11307,7 +10774,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 840,
+      "id": 799,
       "lesson_id": 17,
       "hiragana": "もってきます",
       "romaji": "mottekimasu",
@@ -11320,7 +10787,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 841,
+      "id": 800,
       "lesson_id": 17,
       "hiragana": "しんぱいします",
       "romaji": "shinpaishimasu",
@@ -11333,7 +10800,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 842,
+      "id": 801,
       "lesson_id": 17,
       "hiragana": "ざんぎょうします",
       "romaji": "zankyoushimasu",
@@ -11346,7 +10813,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 843,
+      "id": 802,
       "lesson_id": 17,
       "hiragana": "しゅっちょうします",
       "romaji": "shucchoushimasu",
@@ -11359,7 +10826,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 844,
+      "id": 803,
       "lesson_id": 17,
       "hiragana": "くすり",
       "romaji": "kusuri",
@@ -11372,7 +10839,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 845,
+      "id": 804,
       "lesson_id": 17,
       "hiragana": "おふろ",
       "romaji": "ofuro",
@@ -11385,12 +10852,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 846,
+      "id": 805,
       "lesson_id": 17,
-      "hiragana": "たいせつ[な]",
+      "hiragana": "たいせつな",
       "romaji": "taisetsuna",
       "vietnamese_meaning": "quan trọng, quý giá",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "大切な書類です。",
       "example_meaning": "Tài liệu quan trọng.",
       "mnemonic_tip": "Đại thiết.",
@@ -11398,12 +10865,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 847,
+      "id": 806,
       "lesson_id": 17,
-      "hiragana": "だいじょうぶ[な]",
+      "hiragana": "だいじょうぶな",
       "romaji": "daijoubuna",
       "vietnamese_meaning": "không sao, ổn",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "大丈夫ですか。ーええ,大丈夫です。",
       "example_meaning": "Bạn có sao không? - Vâng, tôi ổn.",
       "mnemonic_tip": "Đại trượng phu.",
@@ -11411,12 +10878,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 848,
+      "id": 807,
       "lesson_id": 17,
       "hiragana": "あぶない",
       "romaji": "abunai",
       "vietnamese_meaning": "nguy hiểm",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "危ないですから,入らないでください。",
       "example_meaning": "Vì nguy hiểm nên vui lòng đừng vào.",
       "mnemonic_tip": "Mẹo nhớ: 'Ả bú nài' - nguy hiểm quá ả bú nài nỉ xin cứu.",
@@ -11424,7 +10891,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 849,
+      "id": 808,
       "lesson_id": 17,
       "hiragana": "もんだい",
       "romaji": "mondai",
@@ -11437,7 +10904,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 850,
+      "id": 809,
       "lesson_id": 17,
       "hiragana": "こたえ",
       "romaji": "kotae",
@@ -11450,7 +10917,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 851,
+      "id": 810,
       "lesson_id": 17,
       "hiragana": "ねつ",
       "romaji": "netsu",
@@ -11463,9 +10930,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 852,
+      "id": 811,
       "lesson_id": 17,
-      "hiragana": "[レポートを] だします",
+      "hiragana": "だします",
       "romaji": "dashimasu",
       "vietnamese_meaning": "Nộp (báo cáo)",
       "word_type": "verb",
@@ -11476,9 +10943,9 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 853,
+      "id": 812,
       "lesson_id": 17,
-      "hiragana": "[くすりを] のみます",
+      "hiragana": "のみます",
       "romaji": "nomimasu",
       "vietnamese_meaning": "Uống (thuốc)",
       "word_type": "verb",
@@ -11489,9 +10956,9 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 854,
+      "id": 813,
       "lesson_id": 17,
-      "hiragana": "[おふろに] はいります",
+      "hiragana": "はいります",
       "romaji": "hairimasu",
       "vietnamese_meaning": "Tắm bồn",
       "word_type": "verb",
@@ -11502,7 +10969,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 855,
+      "id": 814,
       "lesson_id": 17,
       "hiragana": "きんえん",
       "romaji": "kinen",
@@ -11515,9 +10982,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 856,
+      "id": 815,
       "lesson_id": 17,
-      "hiragana": "[けんこう] ほけんしょう",
+      "hiragana": "ほけんしょう",
       "romaji": "kenkouhokenshou",
       "vietnamese_meaning": "Thẻ bảo hiểm y tế",
       "word_type": "noun",
@@ -11528,7 +10995,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 857,
+      "id": 816,
       "lesson_id": 17,
       "hiragana": "かぜ",
       "romaji": "kaze",
@@ -11541,7 +11008,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 858,
+      "id": 817,
       "lesson_id": 17,
       "hiragana": "びょうき",
       "romaji": "byouki",
@@ -11554,20 +11021,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 859,
-      "lesson_id": 17,
-      "hiragana": "[お]ふろ",
-      "romaji": "ofuro",
-      "vietnamese_meaning": "Bồn tắm",
-      "word_type": "noun",
-      "japanese_example": "お風呂に入ります。",
-      "example_meaning": "Tôi vào bồn tắm.",
-      "mnemonic_tip": "Ồ phu-rồ - Cái bồn tắm này to quá, ồ phu-rồ (pro) thật.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 860,
+      "id": 818,
       "lesson_id": 17,
       "hiragana": "うわぎ",
       "romaji": "uwagi",
@@ -11580,7 +11034,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 861,
+      "id": 819,
       "lesson_id": 17,
       "hiragana": "したぎ",
       "romaji": "shitagi",
@@ -11593,7 +11047,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 862,
+      "id": 820,
       "lesson_id": 17,
       "hiragana": "２、３にち",
       "romaji": "ni san nichi",
@@ -11606,11 +11060,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 863,
+      "id": 821,
       "lesson_id": 17,
       "hiragana": "２、３～",
       "romaji": "ni san",
-      "vietnamese_meaning": "hai, ba cái/người...",
+      "vietnamese_meaning": "hai, ba cái / người...",
       "word_type": "counter",
       "japanese_example": "２、３人来ます。",
       "example_meaning": "Có hai, ba người sẽ đến.",
@@ -11619,7 +11073,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 864,
+      "id": 822,
       "lesson_id": 17,
       "hiragana": "～までに",
       "romaji": "made ni",
@@ -11632,7 +11086,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 865,
+      "id": 823,
       "lesson_id": 17,
       "hiragana": "ですから",
       "romaji": "desukara",
@@ -11645,12 +11099,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 866,
+      "id": 824,
       "lesson_id": 17,
       "hiragana": "どうしましたか",
       "romaji": "doushita desu ka",
       "vietnamese_meaning": "Bạn bị sao vậy? / Có vấn đề gì vậy?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "顔色が悪いですね。どうしましたか。",
       "example_meaning": "Sắc mặt bạn tệ quá. Bạn bị sao vậy?",
       "mnemonic_tip": "Đâu sức ta - Bạn không có sức à? Đâu sức ta mà lại mệt thế?",
@@ -11658,12 +11112,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 867,
+      "id": 825,
       "lesson_id": 17,
-      "hiragana": "[～が] いたいです",
+      "hiragana": "いたいです",
       "romaji": "itai desu",
       "vietnamese_meaning": "đau (cái gì đó)",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "頭が痛いです。",
       "example_meaning": "Tôi bị đau đầu.",
       "mnemonic_tip": "Í tai - Đau quá, í tai tôi đau nhói lên rồi.",
@@ -11671,7 +11125,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 868,
+      "id": 826,
       "lesson_id": 17,
       "hiragana": "のど",
       "romaji": "nodo",
@@ -11684,12 +11138,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 869,
+      "id": 827,
       "lesson_id": 17,
       "hiragana": "おだいじに",
       "romaji": "odaijini",
       "vietnamese_meaning": "Chúc bạn mau khỏe (nói với người bệnh)",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "おだいじにしてください。",
       "example_meaning": "Hãy giữ gìn sức khỏe nhé.",
       "mnemonic_tip": "Ô đại dì ni - Ôi đại dì này bị bệnh, chúc dì mau khỏe nhé!",
@@ -11697,7 +11151,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 870,
+      "id": 828,
       "lesson_id": 18,
       "hiragana": "できます",
       "romaji": "dekimasu",
@@ -11710,7 +11164,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 871,
+      "id": 829,
       "lesson_id": 18,
       "hiragana": "あらいます",
       "romaji": "araimasu",
@@ -11723,7 +11177,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 872,
+      "id": 830,
       "lesson_id": 18,
       "hiragana": "ひきます",
       "romaji": "hikimasu",
@@ -11736,7 +11190,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 873,
+      "id": 831,
       "lesson_id": 18,
       "hiragana": "うたいます",
       "romaji": "utaimasu",
@@ -11749,7 +11203,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 874,
+      "id": 832,
       "lesson_id": 18,
       "hiragana": "あつめます",
       "romaji": "atsumemasu",
@@ -11762,7 +11216,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 875,
+      "id": 833,
       "lesson_id": 18,
       "hiragana": "すてます",
       "romaji": "sutemasu",
@@ -11775,7 +11229,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 876,
+      "id": 834,
       "lesson_id": 18,
       "hiragana": "かえます",
       "romaji": "kaemasu",
@@ -11788,7 +11242,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 877,
+      "id": 835,
       "lesson_id": 18,
       "hiragana": "うんてんします",
       "romaji": "untenshimasu",
@@ -11801,7 +11255,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 878,
+      "id": 836,
       "lesson_id": 18,
       "hiragana": "よやくします",
       "romaji": "yoyakushimasu",
@@ -11814,7 +11268,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 879,
+      "id": 837,
       "lesson_id": 18,
       "hiragana": "しゅみ",
       "romaji": "shuumi",
@@ -11827,7 +11281,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 880,
+      "id": 838,
       "lesson_id": 18,
       "hiragana": "けんかくします",
       "romaji": "kengakushimasu",
@@ -11840,7 +11294,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 881,
+      "id": 839,
       "lesson_id": 18,
       "hiragana": "こくさい～",
       "romaji": "kokusai",
@@ -11853,7 +11307,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 882,
+      "id": 840,
       "lesson_id": 18,
       "hiragana": "げんきん",
       "romaji": "genkin",
@@ -11866,7 +11320,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 883,
+      "id": 841,
       "lesson_id": 18,
       "hiragana": "にっき",
       "romaji": "nikki",
@@ -11879,7 +11333,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 884,
+      "id": 842,
       "lesson_id": 18,
       "hiragana": "いのり",
       "romaji": "inori",
@@ -11892,7 +11346,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 885,
+      "id": 843,
       "lesson_id": 18,
       "hiragana": "かちょう",
       "romaji": "kachou",
@@ -11905,7 +11359,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 886,
+      "id": 844,
       "lesson_id": 18,
       "hiragana": "ぶちょう",
       "romaji": "buchou",
@@ -11918,7 +11372,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 887,
+      "id": 845,
       "lesson_id": 18,
       "hiragana": "しゃちょう",
       "romaji": "shachou",
@@ -11931,7 +11385,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 888,
+      "id": 846,
       "lesson_id": 18,
       "hiragana": "どうぶつ",
       "romaji": "doubutsu",
@@ -11944,7 +11398,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 889,
+      "id": 847,
       "lesson_id": 18,
       "hiragana": "うま",
       "romaji": "uma",
@@ -11957,12 +11411,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 890,
+      "id": 848,
       "lesson_id": 18,
       "hiragana": "へえ",
       "romaji": "hee",
       "vietnamese_meaning": "vậy à",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "へえ、そうですか。",
       "example_meaning": "Ồ, vậy à?",
       "mnemonic_tip": "Hee: Hê, ngạc nhiên chưa, khi nghe điều bất ngờ nói 'Hê'.",
@@ -11970,7 +11424,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 891,
+      "id": 849,
       "lesson_id": 18,
       "hiragana": "ピアノ",
       "romaji": "piano",
@@ -11983,7 +11437,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 892,
+      "id": 850,
       "lesson_id": 18,
       "hiragana": "―メートル",
       "romaji": "meetoru",
@@ -11996,12 +11450,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 893,
+      "id": 851,
       "lesson_id": 18,
       "hiragana": "それはおもしろいですね",
       "romaji": "sore wa omoshiroi desu ne",
       "vietnamese_meaning": "điều đó thú vị nhỉ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "趣味はスカイダイビングですか。それはおもしろいですね。",
       "example_meaning": "Sở thích của bạn là nhảy dù à? Thú vị nhỉ.",
       "mnemonic_tip": "So-re-wa-o-mo-shi-ro-i: Số-lạ-mà-thú-vị, những thứ số lạ thường là thứ thú vị.",
@@ -12009,7 +11463,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 894,
+      "id": 852,
       "lesson_id": 18,
       "hiragana": "ぼくじょう",
       "romaji": "bokujou",
@@ -12022,12 +11476,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 895,
+      "id": 853,
       "lesson_id": 18,
       "hiragana": "ほんとうですか",
       "romaji": "hontou desu ka",
       "vietnamese_meaning": "thật không ạ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "ほんとうですか。知りませんでした。",
       "example_meaning": "Thật không ạ? Tôi đã không biết.",
       "mnemonic_tip": "Hon-tou: Hồn-tôi-đã, tin đó thật không, làm hồn tôi bay mất.",
@@ -12035,7 +11489,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 896,
+      "id": 854,
       "lesson_id": 18,
       "hiragana": "ぜひ",
       "romaji": "zehi",
@@ -12048,7 +11502,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 897,
+      "id": 855,
       "lesson_id": 19,
       "hiragana": "のぼります",
       "romaji": "noborimasu",
@@ -12061,7 +11515,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 898,
+      "id": 856,
       "lesson_id": 19,
       "hiragana": "とまります",
       "romaji": "tomarimasu",
@@ -12074,7 +11528,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 899,
+      "id": 857,
       "lesson_id": 19,
       "hiragana": "そうじします",
       "romaji": "soujishimasu",
@@ -12087,7 +11541,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 900,
+      "id": 858,
       "lesson_id": 19,
       "hiragana": "せんたくします",
       "romaji": "sentakushimasu",
@@ -12100,7 +11554,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 901,
+      "id": 859,
       "lesson_id": 19,
       "hiragana": "なります",
       "romaji": "narimasu",
@@ -12113,12 +11567,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 902,
+      "id": 860,
       "lesson_id": 19,
       "hiragana": "ねむい",
       "romaji": "nemui",
       "vietnamese_meaning": "buồn ngủ",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "眠いですから,寝ます。",
       "example_meaning": "Vì buồn ngủ nên đi ngủ.",
       "mnemonic_tip": "Mẹo nhớ: 'Né mụ' - buồn ngủ quá, né mụ chủ đi ngủ.",
@@ -12126,12 +11580,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 903,
+      "id": 861,
       "lesson_id": 19,
       "hiragana": "つよい",
       "romaji": "tsuyoi",
       "vietnamese_meaning": "mạnh mẽ",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "体が 強いです。",
       "example_meaning": "Cơ thể khỏe mạnh.",
       "mnemonic_tip": "Mẹo nhớ: 'Chú dỗi' - chú dỗi vì người khác mạnh hơn.",
@@ -12139,12 +11593,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 904,
+      "id": 862,
       "lesson_id": 19,
       "hiragana": "よわい",
       "romaji": "yowai",
       "vietnamese_meaning": "yếu ớt",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "風が 弱いです。",
       "example_meaning": "Gió yếu.",
       "mnemonic_tip": "Mẹo nhớ: 'Vô vãi' - yếu quá vô vãi hết đồ.",
@@ -12152,12 +11606,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 905,
+      "id": 863,
       "lesson_id": 19,
-      "hiragana": "むり[な]",
+      "hiragana": "むりな",
       "romaji": "murina",
       "vietnamese_meaning": "quá sức, vô lý, không thể",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "無理な仕事ですね。",
       "example_meaning": "Công việc quá sức nhỉ.",
       "mnemonic_tip": "Vô lý.",
@@ -12165,7 +11619,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 906,
+      "id": 864,
       "lesson_id": 19,
       "hiragana": "すもう",
       "romaji": "sumou",
@@ -12178,7 +11632,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 907,
+      "id": 865,
       "lesson_id": 19,
       "hiragana": "れんしゅうします",
       "romaji": "renshuushimasu",
@@ -12191,7 +11645,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 908,
+      "id": 866,
       "lesson_id": 19,
       "hiragana": "ちょうし",
       "romaji": "choushi",
@@ -12204,12 +11658,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 909,
+      "id": 867,
       "lesson_id": 19,
       "hiragana": "ちょうしがわるい",
       "romaji": "choushigawarui",
       "vietnamese_meaning": "tình trạng xấu",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "パソコンの調子が悪い。",
       "example_meaning": "Máy tính đang bị lỗi/tình trạng xấu.",
       "mnemonic_tip": "Chờ sĩ qua (chờ sĩ qua) rồi (vãi): Chờ sĩ quan qua kiểm tra, ôi tình trạng tệ vãi.",
@@ -12217,12 +11671,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 910,
+      "id": 868,
       "lesson_id": 19,
       "hiragana": "ちょうしがいい",
       "romaji": "choushigaii",
       "vietnamese_meaning": "tình trạng tốt",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "今日は調子がいいです。",
       "example_meaning": "Hôm nay tôi rất khỏe/tình trạng tốt.",
       "mnemonic_tip": "Chờ sĩ (chờ sĩ) ghi (ghi): Chờ sĩ quan ghi điểm tốt vào trạng thái.",
@@ -12230,7 +11684,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 911,
+      "id": 869,
       "lesson_id": 19,
       "hiragana": "パチンコ",
       "romaji": "pachinko",
@@ -12243,7 +11697,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 912,
+      "id": 870,
       "lesson_id": 19,
       "hiragana": "ゴルフ",
       "romaji": "gorufu",
@@ -12256,7 +11710,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 913,
+      "id": 871,
       "lesson_id": 19,
       "hiragana": "ひ",
       "romaji": "hi",
@@ -12269,7 +11723,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 914,
+      "id": 872,
       "lesson_id": 19,
       "hiragana": "もうすぐ",
       "romaji": "mousugu",
@@ -12282,7 +11736,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 915,
+      "id": 873,
       "lesson_id": 19,
       "hiragana": "だんだん",
       "romaji": "dandan",
@@ -12295,7 +11749,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 916,
+      "id": 874,
       "lesson_id": 19,
       "hiragana": "いちど",
       "romaji": "ichido",
@@ -12308,7 +11762,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 917,
+      "id": 875,
       "lesson_id": 19,
       "hiragana": "いちども",
       "romaji": "ichidomo",
@@ -12321,12 +11775,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 918,
+      "id": 876,
       "lesson_id": 19,
       "hiragana": "おかげさまで",
       "romaji": "okagesamade",
-      "vietnamese_meaning": "nhờ ơn bạn/nhờ trời",
-      "word_type": "phrase",
+      "vietnamese_meaning": "nhờ ơn bạn / nhờ trời",
+      "word_type": "expression",
       "japanese_example": "おかげさまで元気です。",
       "example_meaning": "Nhờ ơn bạn mà tôi vẫn khỏe.",
       "mnemonic_tip": "Ô (ồ) ca (ca) ghê (ghê) sa (sa) ma (ma) đê (đê): Ồ ca ngợi ghê sao mà nhờ vả được người ta thế.",
@@ -12334,12 +11788,12 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 919,
+      "id": 877,
       "lesson_id": 19,
       "hiragana": "かんぱい",
       "romaji": "kanpai",
       "vietnamese_meaning": "cạn ly",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "みんなで乾杯します。",
       "example_meaning": "Mọi người cùng cạn ly.",
       "mnemonic_tip": "Cạn (cạn) phải (phải): Cạn ly phải làm cho hết.",
@@ -12347,7 +11801,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 920,
+      "id": 878,
       "lesson_id": 19,
       "hiragana": "じつは",
       "romaji": "jitsuha",
@@ -12360,7 +11814,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 921,
+      "id": 879,
       "lesson_id": 19,
       "hiragana": "ダイエット",
       "romaji": "daietto",
@@ -12373,7 +11827,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 922,
+      "id": 880,
       "lesson_id": 19,
       "hiragana": "なんかいも",
       "romaji": "nankaimo",
@@ -12386,7 +11840,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 923,
+      "id": 881,
       "lesson_id": 19,
       "hiragana": "しかし",
       "romaji": "shikashi",
@@ -12399,25 +11853,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 924,
-      "lesson_id": 19,
-      "hiragana": "むり「な」",
-      "romaji": "muri",
-      "vietnamese_meaning": "vô lý, quá sức",
-      "word_type": "adjective",
-      "japanese_example": "無理な運動はダメです。",
-      "example_meaning": "Vận động quá sức là không tốt.",
-      "mnemonic_tip": "Mù (mù) lì (lì): Mù lì làm việc quá sức là vô lý.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 925,
+      "id": 882,
       "lesson_id": 19,
       "hiragana": "からだにいい",
       "romaji": "karadaniii",
       "vietnamese_meaning": "tốt cho sức khỏe",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "体にいい食べ物です。",
       "example_meaning": "Đây là thực phẩm tốt cho sức khỏe.",
       "mnemonic_tip": "Cà (cà) ra (ra) da (da) đi (đi): Ăn cà da dẻ hồng hào tốt cho sức khỏe đi.",
@@ -12425,7 +11866,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 926,
+      "id": 883,
       "lesson_id": 19,
       "hiragana": "ケーキ",
       "romaji": "keeki",
@@ -12438,7 +11879,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 927,
+      "id": 884,
       "lesson_id": 20,
       "hiragana": "いります",
       "romaji": "irimasu",
@@ -12451,7 +11892,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 928,
+      "id": 885,
       "lesson_id": 20,
       "hiragana": "しらべます",
       "romaji": "shirabemasu",
@@ -12464,7 +11905,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 929,
+      "id": 886,
       "lesson_id": 20,
       "hiragana": "なおします",
       "romaji": "naoshimasu",
@@ -12477,11 +11918,11 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 930,
+      "id": 887,
       "lesson_id": 20,
       "hiragana": "おもいます",
       "romaji": "omoimasu",
-      "vietnamese_meaning": "nghĩ rằng [suy nghĩ/ý kiến]",
+      "vietnamese_meaning": "nghĩ rằng [suy nghĩ / ý kiến]",
       "word_type": "verb",
       "japanese_example": "いいと思います。",
       "example_meaning": "Tôi nghĩ là tốt đấy.",
@@ -12490,7 +11931,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 931,
+      "id": 888,
       "lesson_id": 20,
       "hiragana": "いいます",
       "romaji": "iimasu",
@@ -12503,7 +11944,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 932,
+      "id": 889,
       "lesson_id": 20,
       "hiragana": "ききます",
       "romaji": "kikimasu",
@@ -12516,7 +11957,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 933,
+      "id": 890,
       "lesson_id": 20,
       "hiragana": "うん",
       "romaji": "un",
@@ -12529,7 +11970,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 934,
+      "id": 891,
       "lesson_id": 20,
       "hiragana": "ううん",
       "romaji": "uun",
@@ -12542,9 +11983,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 935,
+      "id": 892,
       "lesson_id": 20,
-      "hiragana": "さらりーまん",
+      "hiragana": "サラリーマン",
       "romaji": "sarariiman",
       "vietnamese_meaning": "nhân viên văn phòng",
       "word_type": "noun",
@@ -12555,7 +11996,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 936,
+      "id": 893,
       "lesson_id": 20,
       "hiragana": "ぶっか",
       "romaji": "bukka",
@@ -12568,7 +12009,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 937,
+      "id": 894,
       "lesson_id": 20,
       "hiragana": "しゅうりします",
       "romaji": "shuuri shimasu",
@@ -12581,7 +12022,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 938,
+      "id": 895,
       "lesson_id": 20,
       "hiragana": "でんわします",
       "romaji": "denwa shimasu",
@@ -12594,7 +12035,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 939,
+      "id": 896,
       "lesson_id": 20,
       "hiragana": "ぼく",
       "romaji": "boku",
@@ -12607,7 +12048,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 940,
+      "id": 897,
       "lesson_id": 20,
       "hiragana": "きみ",
       "romaji": "kimi",
@@ -12620,20 +12061,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 941,
-      "lesson_id": 20,
-      "hiragana": "サラリーマン",
-      "romaji": "sarariiman",
-      "vietnamese_meaning": "nhân viên văn phòng",
-      "word_type": "noun",
-      "japanese_example": "彼はサラリーマンです。",
-      "example_meaning": "Anh ấy là nhân viên văn phòng.",
-      "mnemonic_tip": "Sarariiman: 'Salary-man' - Người đàn ông sống nhờ tiền lương (salary).",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 942,
+      "id": 898,
       "lesson_id": 20,
       "hiragana": "ことば",
       "romaji": "kotoba",
@@ -12646,7 +12074,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 943,
+      "id": 899,
       "lesson_id": 20,
       "hiragana": "きもの",
       "romaji": "kimono",
@@ -12659,7 +12087,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 944,
+      "id": 900,
       "lesson_id": 20,
       "hiragana": "ビザ",
       "romaji": "biza",
@@ -12672,7 +12100,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 945,
+      "id": 901,
       "lesson_id": 20,
       "hiragana": "はじめ",
       "romaji": "hajime",
@@ -12685,7 +12113,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 946,
+      "id": 902,
       "lesson_id": 20,
       "hiragana": "おわり",
       "romaji": "owari",
@@ -12698,7 +12126,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 947,
+      "id": 903,
       "lesson_id": 20,
       "hiragana": "こっち",
       "romaji": "kocchi",
@@ -12711,7 +12139,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 948,
+      "id": 904,
       "lesson_id": 20,
       "hiragana": "そっち",
       "romaji": "socchi",
@@ -12724,7 +12152,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 949,
+      "id": 905,
       "lesson_id": 20,
       "hiragana": "あっち",
       "romaji": "acchi",
@@ -12737,7 +12165,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 950,
+      "id": 906,
       "lesson_id": 20,
       "hiragana": "どっち",
       "romaji": "docchi",
@@ -12750,7 +12178,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 951,
+      "id": 907,
       "lesson_id": 20,
       "hiragana": "このあいだ",
       "romaji": "konoaida",
@@ -12763,7 +12191,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 952,
+      "id": 908,
       "lesson_id": 20,
       "hiragana": "みんなで",
       "romaji": "minnade",
@@ -12776,7 +12204,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 953,
+      "id": 909,
       "lesson_id": 20,
       "hiragana": "～けど",
       "romaji": "kedo",
@@ -12789,12 +12217,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 954,
+      "id": 910,
       "lesson_id": 20,
       "hiragana": "くにへかえるの",
       "romaji": "kuni e kaeru no",
       "vietnamese_meaning": "Cậu về nước à?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "来月、国へ帰るの？",
       "example_meaning": "Tháng sau cậu về nước à?",
       "mnemonic_tip": "Kuni-kaeru: 'Cú ni-cà-đầu' - Về nước phải cúi đầu chào hỏi.",
@@ -12802,12 +12230,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 955,
+      "id": 911,
       "lesson_id": 20,
       "hiragana": "どうするの",
       "romaji": "dousuru no",
       "vietnamese_meaning": "Cậu tính sao?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "これ、どうするの？",
       "example_meaning": "Cái này, cậu tính sao?",
       "mnemonic_tip": "Dousuru: 'Đố sư' - Đố sư thầy biết tương lai mình thế nào (tính sao).",
@@ -12815,12 +12243,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 956,
+      "id": 912,
       "lesson_id": 20,
       "hiragana": "どうしようかな",
       "romaji": "doushiyou kana",
       "vietnamese_meaning": "Làm thế nào nhỉ?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "どうしようかな、行こうかな。",
       "example_meaning": "Làm sao bây giờ, đi hay không nhỉ.",
       "mnemonic_tip": "Doushiyou: 'Đố sư yêu' - Đố sư yêu ai mà cứ băn khoăn mãi thế.",
@@ -12828,12 +12256,12 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 957,
+      "id": 913,
       "lesson_id": 20,
       "hiragana": "よかったら",
       "romaji": "yokattara",
       "vietnamese_meaning": "Nếu được thì...",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "良かったら、一緒に食べませんか。",
       "example_meaning": "Nếu được, mình cùng ăn nhé.",
       "mnemonic_tip": "Yokattara: 'Yêu cát ta ra' - Nếu được yêu cát ta ra (biển) chơi nhé.",
@@ -12841,12 +12269,12 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 958,
+      "id": 914,
       "lesson_id": 20,
       "hiragana": "いろいろ",
       "romaji": "iroiro",
       "vietnamese_meaning": "nhiều thứ, đa dạng",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "いろいろな食べ物があります。",
       "example_meaning": "Có nhiều loại đồ ăn khác nhau.",
       "mnemonic_tip": "Iroiro: 'Yêu rồi yêu' - Yêu rồi yêu nhiều thứ khác nhau.",
@@ -12854,7 +12282,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 959,
+      "id": 915,
       "lesson_id": 21,
       "hiragana": "おもいます",
       "romaji": "omoimasu",
@@ -12867,7 +12295,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 960,
+      "id": 916,
       "lesson_id": 21,
       "hiragana": "いいます",
       "romaji": "iimasu",
@@ -12880,7 +12308,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 961,
+      "id": 917,
       "lesson_id": 21,
       "hiragana": "たります",
       "romaji": "tarimasu",
@@ -12893,7 +12321,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 962,
+      "id": 918,
       "lesson_id": 21,
       "hiragana": "かちます",
       "romaji": "kachimasu",
@@ -12906,7 +12334,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 963,
+      "id": 919,
       "lesson_id": 21,
       "hiragana": "まけます",
       "romaji": "makemasu",
@@ -12919,7 +12347,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 964,
+      "id": 920,
       "lesson_id": 21,
       "hiragana": "あります",
       "romaji": "arimasu",
@@ -12932,12 +12360,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 965,
+      "id": 921,
       "lesson_id": 21,
       "hiragana": "おなじ",
       "romaji": "onaji",
       "vietnamese_meaning": "giống nhau, tương đồng",
-      "word_type": "adjectivena",
+      "word_type": "noun",
       "japanese_example": "同じ鞄を 買いました。",
       "example_meaning": "Đã mua cái túi xách giống nhau.",
       "mnemonic_tip": "Đồng.",
@@ -12945,12 +12373,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 966,
+      "id": 922,
       "lesson_id": 21,
       "hiragana": "すごい",
       "romaji": "sugoi",
       "vietnamese_meaning": "ghê gớm, tuyệt vời, đáng kinh ngạc",
-      "word_type": "adjectivei",
+      "word_type": "noun",
       "japanese_example": "すごいですね！",
       "example_meaning": "Tuyệt vời quá nhỉ!",
       "mnemonic_tip": "Mẹo nhớ: 'Sư gội' - nhà sư gội đầu bằng nước lạnh thật ghê gớm.",
@@ -12958,7 +12386,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 967,
+      "id": 923,
       "lesson_id": 21,
       "hiragana": "しあい",
       "romaji": "shiai",
@@ -12971,7 +12399,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 968,
+      "id": 924,
       "lesson_id": 21,
       "hiragana": "いけん",
       "romaji": "iken",
@@ -12984,7 +12412,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 969,
+      "id": 925,
       "lesson_id": 21,
       "hiragana": "やくにたちます",
       "romaji": "yaku ni tachi masu",
@@ -12997,12 +12425,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 970,
+      "id": 926,
       "lesson_id": 21,
       "hiragana": "むだ",
       "romaji": "muda",
       "vietnamese_meaning": "lãng phí, vô ích",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "お金を無駄にします。",
       "example_meaning": "Lãng phí tiền bạc.",
       "mnemonic_tip": "Mùa đá: Mùa này đi đá bóng thì chỉ có lãng phí thời gian, không hiệu quả.",
@@ -13010,12 +12438,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 971,
+      "id": 927,
       "lesson_id": 21,
       "hiragana": "ふべん",
       "romaji": "fuben",
       "vietnamese_meaning": "bất tiện",
-      "word_type": "adjective",
+      "word_type": "noun",
       "japanese_example": "ここは不便です。",
       "example_meaning": "Ở đây thật bất tiện.",
       "mnemonic_tip": "Phù bên: Phù bên này đi lại bất tiện quá, sang bên kia cho gần.",
@@ -13023,7 +12451,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 972,
+      "id": 928,
       "lesson_id": 21,
       "hiragana": "しゅしょう",
       "romaji": "shushou",
@@ -13036,7 +12464,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 973,
+      "id": 929,
       "lesson_id": 21,
       "hiragana": "だいとうりょう",
       "romaji": "daitouryou",
@@ -13049,7 +12477,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 974,
+      "id": 930,
       "lesson_id": 21,
       "hiragana": "せいじ",
       "romaji": "seiji",
@@ -13062,7 +12490,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 975,
+      "id": 931,
       "lesson_id": 21,
       "hiragana": "ニュース",
       "romaji": "nyuusu",
@@ -13075,7 +12503,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 976,
+      "id": 932,
       "lesson_id": 21,
       "hiragana": "スピーチ",
       "romaji": "supiichi",
@@ -13088,7 +12516,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 977,
+      "id": 933,
       "lesson_id": 21,
       "hiragana": "アルバイト",
       "romaji": "arubaito",
@@ -13101,7 +12529,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 978,
+      "id": 934,
       "lesson_id": 21,
       "hiragana": "はなし",
       "romaji": "hanashi",
@@ -13114,7 +12542,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 979,
+      "id": 935,
       "lesson_id": 21,
       "hiragana": "ユーモア",
       "romaji": "yuumoa",
@@ -13127,7 +12555,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 980,
+      "id": 936,
       "lesson_id": 21,
       "hiragana": "デザイン",
       "romaji": "dezain",
@@ -13140,7 +12568,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 981,
+      "id": 937,
       "lesson_id": 21,
       "hiragana": "こうつう",
       "romaji": "koutsuu",
@@ -13153,7 +12581,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 982,
+      "id": 938,
       "lesson_id": 21,
       "hiragana": "ラッシュ",
       "romaji": "rasshu",
@@ -13166,7 +12594,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 983,
+      "id": 939,
       "lesson_id": 21,
       "hiragana": "さいきん",
       "romaji": "saikin",
@@ -13179,7 +12607,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 984,
+      "id": 940,
       "lesson_id": 21,
       "hiragana": "たぶん",
       "romaji": "tabun",
@@ -13192,7 +12620,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 985,
+      "id": 941,
       "lesson_id": 21,
       "hiragana": "きっと",
       "romaji": "kitto",
@@ -13205,7 +12633,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 986,
+      "id": 942,
       "lesson_id": 21,
       "hiragana": "ほんとうに",
       "romaji": "hontouni",
@@ -13218,7 +12646,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 987,
+      "id": 943,
       "lesson_id": 21,
       "hiragana": "そんなに",
       "romaji": "sonnani",
@@ -13231,12 +12659,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 988,
+      "id": 944,
       "lesson_id": 21,
       "hiragana": "～について",
       "romaji": "ni tsuite",
       "vietnamese_meaning": "về việc ~",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "日本について話します。",
       "example_meaning": "Tôi sẽ nói chuyện về nước Nhật.",
       "mnemonic_tip": "Ni tui tê: 'Ni tui tê' (này tôi tê) vì nói về chủ đề này mãi.",
@@ -13244,12 +12672,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 989,
+      "id": 945,
       "lesson_id": 21,
       "hiragana": "しかたがありません",
       "romaji": "shikatagaarimasen",
       "vietnamese_meaning": "Đành chịu thôi, không còn cách nào khác",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "電車が遅れましたから、仕方ありません。",
       "example_meaning": "Vì tàu điện đến muộn nên đành chịu thôi.",
       "mnemonic_tip": "Sĩ-cá-tá-gà-ạ-mất-sen: Sĩ diện quá, thấy cá táp gà mà không làm được gì, đành chịu thôi.",
@@ -13257,12 +12685,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 990,
+      "id": 946,
       "lesson_id": 21,
       "hiragana": "しばらくですね",
       "romaji": "shibarakudesune",
       "vietnamese_meaning": "Lâu lắm không gặp nhỉ",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "田中さん、しばらくですね。",
       "example_meaning": "Anh Tanaka, lâu lắm không gặp nhỉ.",
       "mnemonic_tip": "Sĩ-ba-rắc: Sĩ và Ba rắc rối lâu ngày mới gặp lại, kêu lên: 'Lâu lắm không gặp nhỉ'.",
@@ -13270,12 +12698,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 991,
+      "id": 947,
       "lesson_id": 21,
       "hiragana": "～でものみませんか",
       "romaji": "demonomimasenka",
       "vietnamese_meaning": "Bạn có muốn uống cái gì đó không (ví dụ như trà, cà phê...)?",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "コーヒーでも飲みませんか。",
       "example_meaning": "Bạn có muốn uống cà phê hay cái gì đó không?",
       "mnemonic_tip": "Đề-mô-nô-mi-sen-ka: Đề mô nôm na là 'đi uống gì đó không', sen (tiền) ta sẽ trả.",
@@ -13283,12 +12711,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 992,
+      "id": 948,
       "lesson_id": 21,
-      "hiragana": "みないと。。。",
+      "hiragana": "みないと。。",
       "romaji": "minaito",
       "vietnamese_meaning": "Phải xem thôi...",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "新しい映画、見ないと。",
       "example_meaning": "Bộ phim mới này, phải xem thôi.",
       "mnemonic_tip": "Mì-nái-tô: Ăn mì nái tôm (mì tôm) xong thì phải xem phim thôi.",
@@ -13296,7 +12724,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 993,
+      "id": 949,
       "lesson_id": 21,
       "hiragana": "もちろん",
       "romaji": "mochiron",
@@ -13309,7 +12737,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 994,
+      "id": 950,
       "lesson_id": 21,
       "hiragana": "カンガルー",
       "romaji": "kangaruu",
@@ -13322,7 +12750,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 995,
+      "id": 951,
       "lesson_id": 22,
       "hiragana": "きます",
       "romaji": "kimasu",
@@ -13335,7 +12763,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 996,
+      "id": 952,
       "lesson_id": 22,
       "hiragana": "はきます",
       "romaji": "hakimasu",
@@ -13348,7 +12776,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 997,
+      "id": 953,
       "lesson_id": 22,
       "hiragana": "かぶります",
       "romaji": "kaburimasu",
@@ -13361,7 +12789,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 998,
+      "id": 954,
       "lesson_id": 22,
       "hiragana": "かけます",
       "romaji": "kakemasu",
@@ -13374,7 +12802,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 999,
+      "id": 955,
       "lesson_id": 22,
       "hiragana": "うまれます",
       "romaji": "umaremasu",
@@ -13387,7 +12815,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1000,
+      "id": 956,
       "lesson_id": 22,
       "hiragana": "うち",
       "romaji": "uchi",
@@ -13400,7 +12828,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1001,
+      "id": 957,
       "lesson_id": 22,
       "hiragana": "しごと",
       "romaji": "shigoto",
@@ -13413,7 +12841,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1002,
+      "id": 958,
       "lesson_id": 22,
       "hiragana": "さいふ",
       "romaji": "saifu",
@@ -13426,7 +12854,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1003,
+      "id": 959,
       "lesson_id": 22,
       "hiragana": "かぎ",
       "romaji": "kagi",
@@ -13439,7 +12867,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1004,
+      "id": 960,
       "lesson_id": 22,
       "hiragana": "じかん",
       "romaji": "jikan",
@@ -13452,59 +12880,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1005,
-      "lesson_id": 22,
-      "hiragana": "きます「シャツを～」",
-      "romaji": "kimasu",
-      "vietnamese_meaning": "mặc (áo sơ mi...)",
-      "word_type": "verb",
-      "japanese_example": "シャツを着ます。",
-      "example_meaning": "Tôi mặc áo sơ mi.",
-      "mnemonic_tip": "Ki mát: Mặc áo vào cho mát.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 1006,
-      "lesson_id": 22,
-      "hiragana": "はきます「くつを～」",
-      "romaji": "hakimasu",
-      "vietnamese_meaning": "đi (giày...)",
-      "word_type": "verb",
-      "japanese_example": "靴を履きます。",
-      "example_meaning": "Tôi đi giày.",
-      "mnemonic_tip": "Hạ ki má: Hạ cái má xuống để xỏ giày cho dễ.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 1007,
-      "lesson_id": 22,
-      "hiragana": "かぶります「ぼうしを～」",
-      "romaji": "kaburimasu",
-      "vietnamese_meaning": "đội (mũ...)",
-      "word_type": "verb",
-      "japanese_example": "帽子をかぶります。",
-      "example_meaning": "Tôi đội mũ.",
-      "mnemonic_tip": "Ca bự rì: Cái mũ ca bự rì che kín đầu.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
-      "id": 1008,
-      "lesson_id": 22,
-      "hiragana": "かけます「めがねを～」",
-      "romaji": "kakemasu",
-      "vietnamese_meaning": "đeo (kính...)",
-      "word_type": "verb",
-      "japanese_example": "眼鏡をかけます。",
-      "example_meaning": "Tôi đeo kính.",
-      "mnemonic_tip": "Cà kê má: Đeo kính vướng vào má nên cứ cà kê mãi.",
-      "image_url": "",
-      "pitch_accent": 1
-    },
-    {
-      "id": 1009,
+      "id": 961,
       "lesson_id": 22,
       "hiragana": "コートー",
       "romaji": "kooto",
@@ -13517,7 +12893,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1010,
+      "id": 962,
       "lesson_id": 22,
       "hiragana": "スーツ",
       "romaji": "suutsu",
@@ -13530,7 +12906,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1011,
+      "id": 963,
       "lesson_id": 22,
       "hiragana": "セーター",
       "romaji": "seetaa",
@@ -13543,7 +12919,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1012,
+      "id": 964,
       "lesson_id": 22,
       "hiragana": "ぼうし",
       "romaji": "boushi",
@@ -13556,7 +12932,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1013,
+      "id": 965,
       "lesson_id": 22,
       "hiragana": "めがね",
       "romaji": "megane",
@@ -13569,7 +12945,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1014,
+      "id": 966,
       "lesson_id": 22,
       "hiragana": "よく",
       "romaji": "yoku",
@@ -13582,12 +12958,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1015,
+      "id": 967,
       "lesson_id": 22,
       "hiragana": "おめでとうございます",
       "romaji": "omedetougozaimasu",
       "vietnamese_meaning": "chúc mừng",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "おめでとうございます！",
       "example_meaning": "Chúc mừng bạn!",
       "mnemonic_tip": "Ô mê đê: Ô mê đê (mê đi) chúc mừng bạn.",
@@ -13595,7 +12971,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1016,
+      "id": 968,
       "lesson_id": 22,
       "hiragana": "こちら",
       "romaji": "kochira",
@@ -13608,7 +12984,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1017,
+      "id": 969,
       "lesson_id": 22,
       "hiragana": "やちん",
       "romaji": "yachin",
@@ -13621,12 +12997,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1018,
+      "id": 970,
       "lesson_id": 22,
-      "hiragana": "うーん。",
+      "hiragana": "うーん",
       "romaji": "uun",
       "vietnamese_meaning": "để tôi xem, ừm",
-      "word_type": "interjection",
+      "word_type": "noun",
       "japanese_example": "うーん、どうでしょうか。",
       "example_meaning": "Ừm, thế nào nhỉ.",
       "mnemonic_tip": "U ân: U ân cần suy nghĩ 'để tôi xem'.",
@@ -13634,7 +13010,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1019,
+      "id": 971,
       "lesson_id": 22,
       "hiragana": "ダイニングキッチン",
       "romaji": "dainingukicchin",
@@ -13647,7 +13023,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1020,
+      "id": 972,
       "lesson_id": 22,
       "hiragana": "わしつ",
       "romaji": "washitsu",
@@ -13660,7 +13036,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1021,
+      "id": 973,
       "lesson_id": 22,
       "hiragana": "おしいれ",
       "romaji": "oshiire",
@@ -13673,7 +13049,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1022,
+      "id": 974,
       "lesson_id": 22,
       "hiragana": "ふとん",
       "romaji": "futon",
@@ -13686,7 +13062,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1023,
+      "id": 975,
       "lesson_id": 22,
       "hiragana": "アパート",
       "romaji": "apaato",
@@ -13699,7 +13075,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1024,
+      "id": 976,
       "lesson_id": 22,
       "hiragana": "パリ",
       "romaji": "pari",
@@ -13712,7 +13088,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1025,
+      "id": 977,
       "lesson_id": 22,
       "hiragana": "ばんりのちょうじょう",
       "romaji": "banrinochoujou",
@@ -13725,7 +13101,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1026,
+      "id": 978,
       "lesson_id": 22,
       "hiragana": "よかかいはつセンター",
       "romaji": "yokakaihatsusentaa",
@@ -13738,7 +13114,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1027,
+      "id": 979,
       "lesson_id": 22,
       "hiragana": "レジャーはくしょ",
       "romaji": "rejaahakusho",
@@ -13751,7 +13127,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1028,
+      "id": 980,
       "lesson_id": 23,
       "hiragana": "きます",
       "romaji": "kimasu",
@@ -13764,7 +13140,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1029,
+      "id": 981,
       "lesson_id": 23,
       "hiragana": "あるきます",
       "romaji": "arukimasu",
@@ -13777,11 +13153,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1030,
+      "id": 982,
       "lesson_id": 23,
       "hiragana": "わたります",
       "romaji": "watarimasu",
-      "vietnamese_meaning": "qua, băng qua [đường/cầu]",
+      "vietnamese_meaning": "qua, băng qua [đường / cầu]",
       "word_type": "verb",
       "japanese_example": "橋を 渡ります。",
       "example_meaning": "Băng qua cầu.",
@@ -13790,11 +13166,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1031,
+      "id": 983,
       "lesson_id": 23,
       "hiragana": "まがります",
       "romaji": "magarimasu",
-      "vietnamese_meaning": "rẽ, quẹo [phải/trái]",
+      "vietnamese_meaning": "rẽ, quẹo [phải / trái]",
       "word_type": "verb",
       "japanese_example": "交差点を 右へ 曲がります。",
       "example_meaning": "Rẽ phải ở ngã tư.",
@@ -13803,7 +13179,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1032,
+      "id": 984,
       "lesson_id": 23,
       "hiragana": "さわります",
       "romaji": "sawarimasu",
@@ -13816,7 +13192,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1033,
+      "id": 985,
       "lesson_id": 23,
       "hiragana": "でます",
       "romaji": "demasu",
@@ -13829,7 +13205,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1034,
+      "id": 986,
       "lesson_id": 23,
       "hiragana": "おゆ",
       "romaji": "oyu",
@@ -13842,7 +13218,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1035,
+      "id": 987,
       "lesson_id": 23,
       "hiragana": "おと",
       "romaji": "oto",
@@ -13855,7 +13231,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1036,
+      "id": 988,
       "lesson_id": 23,
       "hiragana": "きかい",
       "romaji": "kikai",
@@ -13868,7 +13244,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1037,
+      "id": 989,
       "lesson_id": 23,
       "hiragana": "しんごう",
       "romaji": "shingou",
@@ -13881,9 +13257,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1038,
+      "id": 990,
       "lesson_id": 23,
-      "hiragana": "ききます「先生に」",
+      "hiragana": "ききます",
       "romaji": "kikimasu",
       "vietnamese_meaning": "hỏi (giáo viên)",
       "word_type": "verb",
@@ -13894,7 +13270,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1039,
+      "id": 991,
       "lesson_id": 23,
       "hiragana": "みち",
       "romaji": "michi",
@@ -13907,7 +13283,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1040,
+      "id": 992,
       "lesson_id": 23,
       "hiragana": "こうさてん",
       "romaji": "kousaten",
@@ -13920,7 +13296,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1041,
+      "id": 993,
       "lesson_id": 23,
       "hiragana": "ひっこしします",
       "romaji": "hikkoshishimasu",
@@ -13933,7 +13309,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1042,
+      "id": 994,
       "lesson_id": 23,
       "hiragana": "まわします",
       "romaji": "mawashimasu",
@@ -13946,7 +13322,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1043,
+      "id": 995,
       "lesson_id": 23,
       "hiragana": "うごきます",
       "romaji": "ugokimasu",
@@ -13959,7 +13335,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1044,
+      "id": 996,
       "lesson_id": 23,
       "hiragana": "きをつけます",
       "romaji": "kiotsukemasu",
@@ -13972,7 +13348,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1045,
+      "id": 997,
       "lesson_id": 23,
       "hiragana": "でんきや",
       "romaji": "denkiya",
@@ -13985,7 +13361,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1046,
+      "id": 998,
       "lesson_id": 23,
       "hiragana": "こしょう",
       "romaji": "koshou",
@@ -13998,7 +13374,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1047,
+      "id": 999,
       "lesson_id": 23,
       "hiragana": "ーや",
       "romaji": "ya",
@@ -14011,7 +13387,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1048,
+      "id": 1000,
       "lesson_id": 23,
       "hiragana": "サイズ",
       "romaji": "saizu",
@@ -14024,7 +13400,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1049,
+      "id": 1001,
       "lesson_id": 23,
       "hiragana": "つまみ",
       "romaji": "tsumami",
@@ -14037,7 +13413,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1050,
+      "id": 1002,
       "lesson_id": 23,
       "hiragana": "かど",
       "romaji": "kado",
@@ -14050,7 +13426,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1051,
+      "id": 1003,
       "lesson_id": 23,
       "hiragana": "ちゅうしゃじょう",
       "romaji": "chuushajou",
@@ -14063,7 +13439,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1052,
+      "id": 1004,
       "lesson_id": 23,
       "hiragana": "おしょうがつ",
       "romaji": "oshougatsu",
@@ -14076,12 +13452,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1053,
+      "id": 1005,
       "lesson_id": 23,
       "hiragana": "ごちそうさまでした",
       "romaji": "gochisousamadeshita",
       "vietnamese_meaning": "Cảm ơn vì bữa ăn",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "おいしかったです。ごちそうさまでした。",
       "example_meaning": "Rất ngon ạ. Cảm ơn vì bữa ăn.",
       "mnemonic_tip": "Gô chi sao sao: Ăn xong rồi, gô (đi) chi sao sao nữa.",
@@ -14089,7 +13465,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1054,
+      "id": 1006,
       "lesson_id": 23,
       "hiragana": "ーめ",
       "romaji": "me",
@@ -14102,7 +13478,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1055,
+      "id": 1007,
       "lesson_id": 23,
       "hiragana": "たてもの",
       "romaji": "tatemono",
@@ -14115,7 +13491,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1056,
+      "id": 1008,
       "lesson_id": 23,
       "hiragana": "がいこくじんとうろくしょう",
       "romaji": "gaikokujintourokushou",
@@ -14128,7 +13504,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1057,
+      "id": 1009,
       "lesson_id": 24,
       "hiragana": "くれます",
       "romaji": "kuremasu",
@@ -14141,7 +13517,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1058,
+      "id": 1010,
       "lesson_id": 24,
       "hiragana": "つれていきます",
       "romaji": "tsureteikimasu",
@@ -14154,7 +13530,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1059,
+      "id": 1011,
       "lesson_id": 24,
       "hiragana": "つれてきます",
       "romaji": "tsuretekimasu",
@@ -14167,7 +13543,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1060,
+      "id": 1012,
       "lesson_id": 24,
       "hiragana": "おくります",
       "romaji": "okurimasu",
@@ -14180,11 +13556,11 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1061,
+      "id": 1013,
       "lesson_id": 24,
       "hiragana": "しょうかいします",
       "romaji": "shoukaishimasu",
-      "vietnamese_meaning": "giới thiệu [người/việc]",
+      "vietnamese_meaning": "giới thiệu [người / việc]",
       "word_type": "verb",
       "japanese_example": "友達を 紹介します。",
       "example_meaning": "Giới thiệu bạn bè.",
@@ -14193,7 +13569,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1062,
+      "id": 1014,
       "lesson_id": 24,
       "hiragana": "あんないします",
       "romaji": "annaishimasu",
@@ -14206,7 +13582,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1063,
+      "id": 1015,
       "lesson_id": 24,
       "hiragana": "せつめいします",
       "romaji": "setsumeishimasu",
@@ -14219,7 +13595,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1064,
+      "id": 1016,
       "lesson_id": 24,
       "hiragana": "じゅんびします",
       "romaji": "junbishimasu",
@@ -14232,7 +13608,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1065,
+      "id": 1017,
       "lesson_id": 24,
       "hiragana": "ほんやくします",
       "romaji": "honyakushimasu",
@@ -14245,7 +13621,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1066,
+      "id": 1018,
       "lesson_id": 24,
       "hiragana": "おじいさん",
       "romaji": "ojiisan",
@@ -14258,7 +13634,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1067,
+      "id": 1019,
       "lesson_id": 24,
       "hiragana": "おじいさん / おじいちゃん",
       "romaji": "ojiisan / ojiichan",
@@ -14271,7 +13647,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1068,
+      "id": 1020,
       "lesson_id": 24,
       "hiragana": "おばあさん /　おばあちゃん",
       "romaji": "obaasan / obaachan",
@@ -14284,7 +13660,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1069,
+      "id": 1021,
       "lesson_id": 24,
       "hiragana": "じゅんび",
       "romaji": "junbi",
@@ -14297,7 +13673,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1070,
+      "id": 1022,
       "lesson_id": 24,
       "hiragana": "いみ",
       "romaji": "imi",
@@ -14310,7 +13686,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1071,
+      "id": 1023,
       "lesson_id": 24,
       "hiragana": "おかし",
       "romaji": "okashi",
@@ -14323,7 +13699,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1072,
+      "id": 1024,
       "lesson_id": 24,
       "hiragana": "ぜんぶ",
       "romaji": "zenbu",
@@ -14336,7 +13712,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1073,
+      "id": 1025,
       "lesson_id": 24,
       "hiragana": "じぶんで",
       "romaji": "jibunde",
@@ -14349,7 +13725,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1074,
+      "id": 1026,
       "lesson_id": 24,
       "hiragana": "ほかに",
       "romaji": "hokani",
@@ -14362,7 +13738,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1075,
+      "id": 1027,
       "lesson_id": 24,
       "hiragana": "おべんとう",
       "romaji": "obentou",
@@ -14375,7 +13751,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1076,
+      "id": 1028,
       "lesson_id": 24,
       "hiragana": "ははのひ",
       "romaji": "hahanohi",
@@ -14388,7 +13764,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1077,
+      "id": 1029,
       "lesson_id": 25,
       "hiragana": "かんがえます",
       "romaji": "kangaemasu",
@@ -14401,7 +13777,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1078,
+      "id": 1030,
       "lesson_id": 25,
       "hiragana": "つきます",
       "romaji": "tsukimasu",
@@ -14414,7 +13790,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1079,
+      "id": 1031,
       "lesson_id": 25,
       "hiragana": "りゅうがくします",
       "romaji": "ryuugakushimasu",
@@ -14427,7 +13803,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1080,
+      "id": 1032,
       "lesson_id": 25,
       "hiragana": "いなか",
       "romaji": "inaka",
@@ -14440,7 +13816,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1081,
+      "id": 1033,
       "lesson_id": 25,
       "hiragana": "たいしかん",
       "romaji": "taishikan",
@@ -14453,7 +13829,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1082,
+      "id": 1034,
       "lesson_id": 25,
       "hiragana": "もし",
       "romaji": "moshi",
@@ -14466,7 +13842,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1083,
+      "id": 1035,
       "lesson_id": 25,
       "hiragana": "いくら",
       "romaji": "ikura",
@@ -14479,12 +13855,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1084,
+      "id": 1036,
       "lesson_id": 25,
       "hiragana": "おせわになりました",
       "romaji": "osewaninarimashita",
       "vietnamese_meaning": "cảm ơn vì đã giúp đỡ thời gian qua",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "いろいろ お世話になりました。",
       "example_meaning": "Cảm ơn vì đã giúp đỡ tôi nhiều mặt.",
       "mnemonic_tip": "Cảm ơn.",
@@ -14492,12 +13868,12 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1085,
+      "id": 1037,
       "lesson_id": 25,
       "hiragana": "どうぞおげんきで",
       "romaji": "douzoogenkide",
-      "vietnamese_meaning": "chúc anh/chị luôn mạnh khỏe [lời chúc đi xa]",
-      "word_type": "phrase",
+      "vietnamese_meaning": "chúc anh / chị luôn mạnh khỏe [lời chúc đi xa]",
+      "word_type": "expression",
       "japanese_example": "どうぞ お元気で。",
       "example_meaning": "Chúc anh luôn mạnh khỏe nhé.",
       "mnemonic_tip": "Chúc sức khỏe.",
@@ -14505,7 +13881,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1086,
+      "id": 1038,
       "lesson_id": 25,
       "hiragana": "ぶんか",
       "romaji": "bunka",
@@ -14518,22 +13894,9 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1087,
+      "id": 1039,
       "lesson_id": 25,
-      "hiragana": "つきます（駅に～）",
-      "romaji": "tsukimasu",
-      "vietnamese_meaning": "Đến (ga)",
-      "word_type": "verb",
-      "japanese_example": "８時に駅に着きます。",
-      "example_meaning": "Tôi đến nhà ga lúc 8 giờ.",
-      "mnemonic_tip": "Tủi thân khi mắt - Tủi thân khi mắt nhìn đồng hồ vì mãi mới đến ga.",
-      "image_url": "",
-      "pitch_accent": 4
-    },
-    {
-      "id": 1088,
-      "lesson_id": 25,
-      "hiragana": "とります（年を～）",
+      "hiragana": "とります",
       "romaji": "torimasu",
       "vietnamese_meaning": "Thêm (tuổi)",
       "word_type": "verb",
@@ -14544,7 +13907,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1089,
+      "id": 1040,
       "lesson_id": 25,
       "hiragana": "グループ",
       "romaji": "guruupu",
@@ -14557,7 +13920,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1090,
+      "id": 1041,
       "lesson_id": 25,
       "hiragana": "チャンス",
       "romaji": "chansu",
@@ -14570,7 +13933,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1091,
+      "id": 1042,
       "lesson_id": 25,
       "hiragana": "おく",
       "romaji": "oku",
@@ -14583,7 +13946,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1092,
+      "id": 1043,
       "lesson_id": 25,
       "hiragana": "てんきん",
       "romaji": "tenkin",
@@ -14596,7 +13959,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1093,
+      "id": 1044,
       "lesson_id": 25,
       "hiragana": "こと",
       "romaji": "koto",
@@ -14609,12 +13972,12 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1094,
+      "id": 1045,
       "lesson_id": 25,
       "hiragana": "いっぱいのみましょう",
       "romaji": "ippainomimashou",
       "vietnamese_meaning": "Cùng uống nhé",
-      "word_type": "phrase",
+      "word_type": "expression",
       "japanese_example": "一杯飲みましょう。",
       "example_meaning": "Chúng ta hãy cùng uống một ly nhé.",
       "mnemonic_tip": "Ít phải no - Uống một ly cho ít phải no bụng mà vẫn vui.",
@@ -14622,20 +13985,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1095,
-      "lesson_id": 25,
-      "hiragana": "（いろいろ）おせわになりました",
-      "romaji": "iroiroosewaninarimashita",
-      "vietnamese_meaning": "Cảm ơn đã giúp đỡ (nhiều)",
-      "word_type": "phrase",
-      "japanese_example": "いろいろお世話になりました。",
-      "example_meaning": "Cảm ơn anh chị đã giúp đỡ tôi nhiều.",
-      "mnemonic_tip": "Ô sẽ va - Ô sẽ va vấp nhiều nếu không nhờ sự giúp đỡ của anh chị.",
-      "image_url": "",
-      "pitch_accent": 3
-    },
-    {
-      "id": 1096,
+      "id": 1046,
       "lesson_id": 25,
       "hiragana": "がんばります",
       "romaji": "ganbarimasu",
@@ -14648,7 +13998,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1097,
+      "id": 1047,
       "lesson_id": 26,
       "hiragana": "みます",
       "romaji": "mimasu",
@@ -14661,7 +14011,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1098,
+      "id": 1048,
       "lesson_id": 26,
       "hiragana": "さがします",
       "romaji": "sagashimasu",
@@ -14674,7 +14024,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1099,
+      "id": 1049,
       "lesson_id": 26,
       "hiragana": "おくれます",
       "romaji": "okuremasu",
@@ -14687,7 +14037,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1100,
+      "id": 1050,
       "lesson_id": 26,
       "hiragana": "まにあいます",
       "romaji": "maniaimasu",
@@ -14700,7 +14050,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1101,
+      "id": 1051,
       "lesson_id": 26,
       "hiragana": "やります",
       "romaji": "yarimasu",
@@ -14713,7 +14063,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1102,
+      "id": 1052,
       "lesson_id": 26,
       "hiragana": "ひろいます",
       "romaji": "hiroimasu",
@@ -14726,7 +14076,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1103,
+      "id": 1053,
       "lesson_id": 26,
       "hiragana": "れんらくします",
       "romaji": "renrakushimasu",
@@ -14739,7 +14089,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1104,
+      "id": 1054,
       "lesson_id": 26,
       "hiragana": "ごみ",
       "romaji": "gomi",
@@ -14752,7 +14102,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1105,
+      "id": 1055,
       "lesson_id": 26,
       "hiragana": "こんど",
       "romaji": "kondo",
@@ -14765,7 +14115,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1106,
+      "id": 1056,
       "lesson_id": 26,
       "hiragana": "ずいぶん",
       "romaji": "zuibun",
@@ -14778,7 +14128,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1107,
+      "id": 1057,
       "lesson_id": 26,
       "hiragana": "きぶんがいい",
       "romaji": "kibungaii",
@@ -14791,7 +14141,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1108,
+      "id": 1058,
       "lesson_id": 26,
       "hiragana": "きぶんがわるい",
       "romaji": "kibungawarui",
@@ -14804,7 +14154,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1109,
+      "id": 1059,
       "lesson_id": 26,
       "hiragana": "うんどうかい",
       "romaji": "undoukai",
@@ -14817,7 +14167,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1110,
+      "id": 1060,
       "lesson_id": 26,
       "hiragana": "ぼんおどり",
       "romaji": "bonodori",
@@ -14830,7 +14180,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1111,
+      "id": 1061,
       "lesson_id": 26,
       "hiragana": "フリーマーケット",
       "romaji": "furiimaaketto",
@@ -14843,7 +14193,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1112,
+      "id": 1062,
       "lesson_id": 26,
       "hiragana": "ばしょ",
       "romaji": "basho",
@@ -14856,7 +14206,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1113,
+      "id": 1063,
       "lesson_id": 26,
       "hiragana": "ボランティア",
       "romaji": "borantia",
@@ -14869,7 +14219,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1114,
+      "id": 1064,
       "lesson_id": 26,
       "hiragana": "こっかいぎじどう",
       "romaji": "kokkaigijidou",
@@ -14882,7 +14232,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1115,
+      "id": 1065,
       "lesson_id": 26,
       "hiragana": "へいじつ",
       "romaji": "heijitsu",
@@ -14895,7 +14245,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1116,
+      "id": 1066,
       "lesson_id": 26,
       "hiragana": "べん",
       "romaji": "ben",
@@ -14908,7 +14258,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1117,
+      "id": 1067,
       "lesson_id": 26,
       "hiragana": "ちょくせつ",
       "romaji": "chokusetsu",
@@ -14921,7 +14271,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1118,
+      "id": 1068,
       "lesson_id": 26,
       "hiragana": "いつでも",
       "romaji": "itsudemo",
@@ -14934,7 +14284,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1119,
+      "id": 1069,
       "lesson_id": 26,
       "hiragana": "どこでも",
       "romaji": "dokodemo",
@@ -14947,7 +14297,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1120,
+      "id": 1070,
       "lesson_id": 26,
       "hiragana": "だれでも",
       "romaji": "daredemo",
@@ -14960,7 +14310,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1121,
+      "id": 1071,
       "lesson_id": 26,
       "hiragana": "なんでも",
       "romaji": "nandemo",
@@ -14973,7 +14323,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1122,
+      "id": 1072,
       "lesson_id": 26,
       "hiragana": "こんな…",
       "romaji": "konna",
@@ -14986,7 +14336,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1123,
+      "id": 1073,
       "lesson_id": 26,
       "hiragana": "そんな…",
       "romaji": "sonna",
@@ -14999,7 +14349,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1124,
+      "id": 1074,
       "lesson_id": 26,
       "hiragana": "あんな…",
       "romaji": "anna",
@@ -15012,7 +14362,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1125,
+      "id": 1075,
       "lesson_id": 26,
       "hiragana": "かたづきます",
       "romaji": "katadzukimasu",
@@ -15025,7 +14375,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1126,
+      "id": 1076,
       "lesson_id": 26,
       "hiragana": "もえるごみ",
       "romaji": "moerugomi",
@@ -15038,7 +14388,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1127,
+      "id": 1077,
       "lesson_id": 26,
       "hiragana": "おきば",
       "romaji": "okiba",
@@ -15051,7 +14401,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1128,
+      "id": 1078,
       "lesson_id": 26,
       "hiragana": "よこ",
       "romaji": "yoko",
@@ -15064,7 +14414,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1129,
+      "id": 1079,
       "lesson_id": 26,
       "hiragana": "びん",
       "romaji": "bin",
@@ -15077,7 +14427,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1130,
+      "id": 1080,
       "lesson_id": 26,
       "hiragana": "かん",
       "romaji": "kan",
@@ -15090,7 +14440,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1131,
+      "id": 1081,
       "lesson_id": 26,
       "hiragana": "ガス",
       "romaji": "gasu",
@@ -15103,7 +14453,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1132,
+      "id": 1082,
       "lesson_id": 26,
       "hiragana": "がいしゃ",
       "romaji": "gaisha",
@@ -15116,7 +14466,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1133,
+      "id": 1083,
       "lesson_id": 26,
       "hiragana": "うちゅう",
       "romaji": "uchuu",
@@ -15129,7 +14479,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1134,
+      "id": 1084,
       "lesson_id": 26,
       "hiragana": "さま",
       "romaji": "sama",
@@ -15142,7 +14492,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1135,
+      "id": 1085,
       "lesson_id": 26,
       "hiragana": "うちゅうせん",
       "romaji": "uchuusen",
@@ -15155,7 +14505,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1136,
+      "id": 1086,
       "lesson_id": 26,
       "hiragana": "こわい",
       "romaji": "kowai",
@@ -15168,7 +14518,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1137,
+      "id": 1087,
       "lesson_id": 26,
       "hiragana": "うちゅうひこうし",
       "romaji": "uchuuhikoushi",
@@ -15181,7 +14531,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1138,
+      "id": 1088,
       "lesson_id": 27,
       "hiragana": "かえます",
       "romaji": "kaemasu",
@@ -15194,7 +14544,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1139,
+      "id": 1089,
       "lesson_id": 27,
       "hiragana": "きこえます",
       "romaji": "kikoemasu",
@@ -15207,7 +14557,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1140,
+      "id": 1090,
       "lesson_id": 27,
       "hiragana": "みえます",
       "romaji": "miemasu",
@@ -15220,7 +14570,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1141,
+      "id": 1091,
       "lesson_id": 27,
       "hiragana": "たてます",
       "romaji": "tatemasu",
@@ -15233,7 +14583,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1142,
+      "id": 1092,
       "lesson_id": 27,
       "hiragana": "できます",
       "romaji": "dekimasu",
@@ -15246,7 +14596,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1143,
+      "id": 1093,
       "lesson_id": 27,
       "hiragana": "はっきり",
       "romaji": "hakkiri",
@@ -15259,7 +14609,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1144,
+      "id": 1094,
       "lesson_id": 27,
       "hiragana": "はしります",
       "romaji": "hashirimasu",
@@ -15272,7 +14622,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1145,
+      "id": 1095,
       "lesson_id": 27,
       "hiragana": "ひらきます",
       "romaji": "hirakimasu",
@@ -15285,7 +14635,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1146,
+      "id": 1096,
       "lesson_id": 27,
       "hiragana": "ペット",
       "romaji": "petto",
@@ -15298,7 +14648,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1147,
+      "id": 1097,
       "lesson_id": 27,
       "hiragana": "とり",
       "romaji": "tori",
@@ -15311,7 +14661,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1148,
+      "id": 1098,
       "lesson_id": 27,
       "hiragana": "こえ",
       "romaji": "koe",
@@ -15324,7 +14674,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1149,
+      "id": 1099,
       "lesson_id": 27,
       "hiragana": "なみ",
       "romaji": "nami",
@@ -15337,7 +14687,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1150,
+      "id": 1100,
       "lesson_id": 27,
       "hiragana": "はなび",
       "romaji": "hanabi",
@@ -15350,7 +14700,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1151,
+      "id": 1101,
       "lesson_id": 27,
       "hiragana": "けしき",
       "romaji": "keshiki",
@@ -15363,7 +14713,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1152,
+      "id": 1102,
       "lesson_id": 27,
       "hiragana": "ひるま",
       "romaji": "hiruma",
@@ -15376,7 +14726,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1153,
+      "id": 1103,
       "lesson_id": 27,
       "hiragana": "むかし",
       "romaji": "mukashi",
@@ -15389,7 +14739,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1154,
+      "id": 1104,
       "lesson_id": 27,
       "hiragana": "どうぐ",
       "romaji": "dougu",
@@ -15402,7 +14752,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1155,
+      "id": 1105,
       "lesson_id": 27,
       "hiragana": "じどうはんばいき",
       "romaji": "jidouhanbaiki",
@@ -15415,7 +14765,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1156,
+      "id": 1106,
       "lesson_id": 27,
       "hiragana": "つうしんはんばい",
       "romaji": "tsuushinhanbai",
@@ -15428,7 +14778,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1157,
+      "id": 1107,
       "lesson_id": 27,
       "hiragana": "クリーニング",
       "romaji": "kuriiningu",
@@ -15441,7 +14791,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1158,
+      "id": 1108,
       "lesson_id": 27,
       "hiragana": "マンション",
       "romaji": "manshon",
@@ -15454,7 +14804,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1159,
+      "id": 1109,
       "lesson_id": 27,
       "hiragana": "だいどころ",
       "romaji": "daidokoro",
@@ -15467,7 +14817,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1160,
+      "id": 1110,
       "lesson_id": 27,
       "hiragana": "～後",
       "romaji": "go",
@@ -15480,7 +14830,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1161,
+      "id": 1111,
       "lesson_id": 27,
       "hiragana": "～しか",
       "romaji": "shika",
@@ -15493,7 +14843,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1162,
+      "id": 1112,
       "lesson_id": 27,
       "hiragana": "～きょうしつ",
       "romaji": "kyoushitsu",
@@ -15506,7 +14856,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1163,
+      "id": 1113,
       "lesson_id": 27,
       "hiragana": "パーティールーム",
       "romaji": "paatiiruumu",
@@ -15519,7 +14869,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1164,
+      "id": 1114,
       "lesson_id": 27,
       "hiragana": "かんさいくうこう",
       "romaji": "kansaikuukou",
@@ -15532,7 +14882,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1165,
+      "id": 1115,
       "lesson_id": 27,
       "hiragana": "あきはばら",
       "romaji": "akihabara",
@@ -15545,7 +14895,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1166,
+      "id": 1116,
       "lesson_id": 27,
       "hiragana": "いず",
       "romaji": "izu",
@@ -15558,7 +14908,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1167,
+      "id": 1117,
       "lesson_id": 27,
       "hiragana": "にちようびだいく",
       "romaji": "nichiyoubidaiku",
@@ -15571,7 +14921,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1168,
+      "id": 1118,
       "lesson_id": 27,
       "hiragana": "ほんだな",
       "romaji": "hondana",
@@ -15584,7 +14934,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1169,
+      "id": 1119,
       "lesson_id": 27,
       "hiragana": "ゆめ",
       "romaji": "yume",
@@ -15597,7 +14947,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1170,
+      "id": 1120,
       "lesson_id": 27,
       "hiragana": "いえ",
       "romaji": "ie",
@@ -15610,7 +14960,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1171,
+      "id": 1121,
       "lesson_id": 27,
       "hiragana": "すばらしい",
       "romaji": "subarashii",
@@ -15623,7 +14973,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1172,
+      "id": 1122,
       "lesson_id": 27,
       "hiragana": "こどもたち",
       "romaji": "kodomotachi",
@@ -15636,7 +14986,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1173,
+      "id": 1123,
       "lesson_id": 27,
       "hiragana": "だいすき",
       "romaji": "daisuki",
@@ -15649,7 +14999,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1174,
+      "id": 1124,
       "lesson_id": 27,
       "hiragana": "まんが",
       "romaji": "manga",
@@ -15662,7 +15012,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1175,
+      "id": 1125,
       "lesson_id": 27,
       "hiragana": "しゅじんこう",
       "romaji": "shujinkou",
@@ -15675,7 +15025,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1176,
+      "id": 1126,
       "lesson_id": 27,
       "hiragana": "かたち",
       "romaji": "katachi",
@@ -15688,7 +15038,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1177,
+      "id": 1127,
       "lesson_id": 27,
       "hiragana": "ロボット",
       "romaji": "robotto",
@@ -15701,7 +15051,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1178,
+      "id": 1128,
       "lesson_id": 27,
       "hiragana": "ふしぎな",
       "romaji": "fushigina",
@@ -15714,7 +15064,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1179,
+      "id": 1129,
       "lesson_id": 27,
       "hiragana": "ポケット",
       "romaji": "poketto",
@@ -15727,7 +15077,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1180,
+      "id": 1130,
       "lesson_id": 27,
       "hiragana": "たとえば",
       "romaji": "tatoeba",
@@ -15740,7 +15090,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1181,
+      "id": 1131,
       "lesson_id": 27,
       "hiragana": "じゆうに",
       "romaji": "jiyuuni",
@@ -15753,7 +15103,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1182,
+      "id": 1132,
       "lesson_id": 27,
       "hiragana": "そら",
       "romaji": "sora",
@@ -15766,7 +15116,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1183,
+      "id": 1133,
       "lesson_id": 27,
       "hiragana": "とびます",
       "romaji": "tobimasu",
@@ -15779,7 +15129,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1184,
+      "id": 1134,
       "lesson_id": 27,
       "hiragana": "じぶん",
       "romaji": "jibun",
@@ -15792,7 +15142,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1185,
+      "id": 1135,
       "lesson_id": 27,
       "hiragana": "しょうらい",
       "romaji": "shourai",
@@ -15805,7 +15155,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1186,
+      "id": 1136,
       "lesson_id": 27,
       "hiragana": "ドラえもん",
       "romaji": "doraemon",
@@ -15818,7 +15168,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1187,
+      "id": 1137,
       "lesson_id": 28,
       "hiragana": "うたいます",
       "romaji": "utaimasu",
@@ -15831,7 +15181,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1188,
+      "id": 1138,
       "lesson_id": 28,
       "hiragana": "かみます",
       "romaji": "kamimasu",
@@ -15844,7 +15194,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1189,
+      "id": 1139,
       "lesson_id": 28,
       "hiragana": "かよいます",
       "romaji": "kayoimasu",
@@ -15857,7 +15207,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1190,
+      "id": 1140,
       "lesson_id": 28,
       "hiragana": "えらい",
       "romaji": "erai",
@@ -15870,7 +15220,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1191,
+      "id": 1141,
       "lesson_id": 28,
       "hiragana": "しゅうかん",
       "romaji": "shuukan",
@@ -15883,7 +15233,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1192,
+      "id": 1142,
       "lesson_id": 28,
       "hiragana": "うれます",
       "romaji": "uremasu",
@@ -15896,7 +15246,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1193,
+      "id": 1143,
       "lesson_id": 28,
       "hiragana": "おどります",
       "romaji": "odorimasu",
@@ -15909,7 +15259,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1194,
+      "id": 1144,
       "lesson_id": 28,
       "hiragana": "えらびます",
       "romaji": "erabimasu",
@@ -15922,7 +15272,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1195,
+      "id": 1145,
       "lesson_id": 28,
       "hiragana": "メモします",
       "romaji": "memo shimasu",
@@ -15935,7 +15285,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1196,
+      "id": 1146,
       "lesson_id": 28,
       "hiragana": "まじめ",
       "romaji": "majime",
@@ -15948,7 +15298,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1197,
+      "id": 1147,
       "lesson_id": 28,
       "hiragana": "ねっしん",
       "romaji": "nesshin",
@@ -15961,7 +15311,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1198,
+      "id": 1148,
       "lesson_id": 28,
       "hiragana": "ちょうどいい",
       "romaji": "choudo ii",
@@ -15974,7 +15324,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1199,
+      "id": 1149,
       "lesson_id": 28,
       "hiragana": "けいけん",
       "romaji": "keiken",
@@ -15987,7 +15337,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1200,
+      "id": 1150,
       "lesson_id": 28,
       "hiragana": "ちから",
       "romaji": "chikara",
@@ -16000,7 +15350,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1201,
+      "id": 1151,
       "lesson_id": 28,
       "hiragana": "にんき",
       "romaji": "ninki",
@@ -16013,7 +15363,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1202,
+      "id": 1152,
       "lesson_id": 28,
       "hiragana": "いろ",
       "romaji": "iro",
@@ -16026,7 +15376,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1203,
+      "id": 1153,
       "lesson_id": 28,
       "hiragana": "あじ",
       "romaji": "aji",
@@ -16039,7 +15389,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1204,
+      "id": 1154,
       "lesson_id": 28,
       "hiragana": "ガム",
       "romaji": "gamu",
@@ -16052,7 +15402,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1205,
+      "id": 1155,
       "lesson_id": 28,
       "hiragana": "しなもの",
       "romaji": "shinamono",
@@ -16065,7 +15415,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1206,
+      "id": 1156,
       "lesson_id": 28,
       "hiragana": "ねだん",
       "romaji": "nedan",
@@ -16078,7 +15428,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1207,
+      "id": 1157,
       "lesson_id": 28,
       "hiragana": "きゅうりょう",
       "romaji": "kyuuryou",
@@ -16091,7 +15441,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1208,
+      "id": 1158,
       "lesson_id": 28,
       "hiragana": "ボーナス",
       "romaji": "boonasu",
@@ -16104,7 +15454,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1209,
+      "id": 1159,
       "lesson_id": 28,
       "hiragana": "ばんぐみ",
       "romaji": "bangumi",
@@ -16117,7 +15467,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1210,
+      "id": 1160,
       "lesson_id": 28,
       "hiragana": "ドラマ",
       "romaji": "dorama",
@@ -16130,7 +15480,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1211,
+      "id": 1161,
       "lesson_id": 28,
       "hiragana": "しょうせつ",
       "romaji": "shousetsu",
@@ -16143,7 +15493,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1212,
+      "id": 1162,
       "lesson_id": 28,
       "hiragana": "しょうせつか",
       "romaji": "shousetsuka",
@@ -16156,7 +15506,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1213,
+      "id": 1163,
       "lesson_id": 28,
       "hiragana": "かしゅ",
       "romaji": "kashu",
@@ -16169,7 +15519,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1214,
+      "id": 1164,
       "lesson_id": 28,
       "hiragana": "かんりにん",
       "romaji": "kanrinin",
@@ -16182,7 +15532,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1215,
+      "id": 1165,
       "lesson_id": 28,
       "hiragana": "むすこ",
       "romaji": "musuko",
@@ -16195,7 +15545,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1216,
+      "id": 1166,
       "lesson_id": 28,
       "hiragana": "むすこさん",
       "romaji": "musukosan",
@@ -16208,7 +15558,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1217,
+      "id": 1167,
       "lesson_id": 28,
       "hiragana": "むすめ",
       "romaji": "musume",
@@ -16221,7 +15571,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1218,
+      "id": 1168,
       "lesson_id": 28,
       "hiragana": "むすめさん",
       "romaji": "musumesan",
@@ -16234,7 +15584,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1219,
+      "id": 1169,
       "lesson_id": 28,
       "hiragana": "しばらく",
       "romaji": "shibaraku",
@@ -16247,7 +15597,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1220,
+      "id": 1170,
       "lesson_id": 28,
       "hiragana": "たいてい",
       "romaji": "taitei",
@@ -16260,7 +15610,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1221,
+      "id": 1171,
       "lesson_id": 28,
       "hiragana": "それに",
       "romaji": "soreni",
@@ -16273,7 +15623,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1222,
+      "id": 1172,
       "lesson_id": 28,
       "hiragana": "それで",
       "romaji": "sorede",
@@ -16286,7 +15636,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1223,
+      "id": 1173,
       "lesson_id": 28,
       "hiragana": "「ちょっと」おねがいがあるんですが",
       "romaji": "chotto onegai ga aru ndesu ga",
@@ -16299,7 +15649,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1224,
+      "id": 1174,
       "lesson_id": 28,
       "hiragana": "ホームステイ",
       "romaji": "hoomusutei",
@@ -16312,7 +15662,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1225,
+      "id": 1175,
       "lesson_id": 28,
       "hiragana": "かいわ",
       "romaji": "kaiwa",
@@ -16325,7 +15675,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1226,
+      "id": 1176,
       "lesson_id": 28,
       "hiragana": "おしゃべりします",
       "romaji": "oshaberishimasu",
@@ -16338,7 +15688,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1227,
+      "id": 1177,
       "lesson_id": 28,
       "hiragana": "おしらせ",
       "romaji": "oshirase",
@@ -16351,7 +15701,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1228,
+      "id": 1178,
       "lesson_id": 28,
       "hiragana": "ひにち",
       "romaji": "hinichi",
@@ -16364,7 +15714,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1229,
+      "id": 1179,
       "lesson_id": 28,
       "hiragana": "ど",
       "romaji": "do",
@@ -16377,7 +15727,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1230,
+      "id": 1180,
       "lesson_id": 28,
       "hiragana": "たいいくかｎ",
       "romaji": "taiikukan",
@@ -16390,7 +15740,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1231,
+      "id": 1181,
       "lesson_id": 28,
       "hiragana": "むりょう",
       "romaji": "muryou",
@@ -16403,7 +15753,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1232,
+      "id": 1182,
       "lesson_id": 29,
       "hiragana": "あきます",
       "romaji": "akimasu",
@@ -16416,7 +15766,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1233,
+      "id": 1183,
       "lesson_id": 29,
       "hiragana": "しまります",
       "romaji": "shimarimasu",
@@ -16429,7 +15779,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1234,
+      "id": 1184,
       "lesson_id": 29,
       "hiragana": "きえます",
       "romaji": "kiemasu",
@@ -16442,7 +15792,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1235,
+      "id": 1185,
       "lesson_id": 29,
       "hiragana": "こわれます",
       "romaji": "kowaremasu",
@@ -16455,7 +15805,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1236,
+      "id": 1186,
       "lesson_id": 29,
       "hiragana": "われます",
       "romaji": "waremasu",
@@ -16468,7 +15818,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1237,
+      "id": 1187,
       "lesson_id": 29,
       "hiragana": "こみます",
       "romaji": "komimasu",
@@ -16481,7 +15831,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1238,
+      "id": 1188,
       "lesson_id": 29,
       "hiragana": "すきます",
       "romaji": "sukimasu",
@@ -16494,7 +15844,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1239,
+      "id": 1189,
       "lesson_id": 29,
       "hiragana": "おれます",
       "romaji": "oremasu",
@@ -16507,7 +15857,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1240,
+      "id": 1190,
       "lesson_id": 29,
       "hiragana": "やぶれます",
       "romaji": "yaburemasu",
@@ -16520,7 +15870,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1241,
+      "id": 1191,
       "lesson_id": 29,
       "hiragana": "よごれます",
       "romaji": "yogoremasu",
@@ -16533,7 +15883,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1242,
+      "id": 1192,
       "lesson_id": 29,
       "hiragana": "はずれます",
       "romaji": "hazuremasu",
@@ -16546,7 +15896,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1243,
+      "id": 1193,
       "lesson_id": 29,
       "hiragana": "まちがえます",
       "romaji": "machigaemasu",
@@ -16559,7 +15909,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1244,
+      "id": 1194,
       "lesson_id": 29,
       "hiragana": "おとします",
       "romaji": "otoshimasu",
@@ -16572,7 +15922,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1245,
+      "id": 1195,
       "lesson_id": 29,
       "hiragana": "ふきます",
       "romaji": "fukimasu",
@@ -16585,7 +15935,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1246,
+      "id": 1196,
       "lesson_id": 29,
       "hiragana": "とりかえます",
       "romaji": "torikaemasu",
@@ -16598,7 +15948,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1247,
+      "id": 1197,
       "lesson_id": 29,
       "hiragana": "かたづけます",
       "romaji": "katadzukemasu",
@@ -16611,7 +15961,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1248,
+      "id": 1198,
       "lesson_id": 29,
       "hiragana": "さら",
       "romaji": "sara",
@@ -16624,7 +15974,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1249,
+      "id": 1199,
       "lesson_id": 29,
       "hiragana": "ちゃわん",
       "romaji": "chawan",
@@ -16637,7 +15987,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1250,
+      "id": 1200,
       "lesson_id": 29,
       "hiragana": "コップ",
       "romaji": "koppu",
@@ -16650,7 +16000,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1251,
+      "id": 1201,
       "lesson_id": 29,
       "hiragana": "ガラス",
       "romaji": "garasu",
@@ -16663,7 +16013,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1252,
+      "id": 1202,
       "lesson_id": 29,
       "hiragana": "ふくろ",
       "romaji": "fukuro",
@@ -16676,7 +16026,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1253,
+      "id": 1203,
       "lesson_id": 29,
       "hiragana": "しょるい",
       "romaji": "shorui",
@@ -16689,7 +16039,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1254,
+      "id": 1204,
       "lesson_id": 29,
       "hiragana": "えだ",
       "romaji": "eda",
@@ -16702,7 +16052,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1255,
+      "id": 1205,
       "lesson_id": 29,
       "hiragana": "えきいん",
       "romaji": "ekiin",
@@ -16715,7 +16065,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1256,
+      "id": 1206,
       "lesson_id": 29,
       "hiragana": "こうばん",
       "romaji": "kouban",
@@ -16728,7 +16078,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1257,
+      "id": 1207,
       "lesson_id": 29,
       "hiragana": "へんじ",
       "romaji": "henji",
@@ -16741,7 +16091,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1258,
+      "id": 1208,
       "lesson_id": 29,
       "hiragana": "おさきにどうぞ",
       "romaji": "osakini douzo",
@@ -16754,7 +16104,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1259,
+      "id": 1209,
       "lesson_id": 29,
       "hiragana": "げんじものがたり",
       "romaji": "genji monogatari",
@@ -16767,7 +16117,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1260,
+      "id": 1210,
       "lesson_id": 29,
       "hiragana": "いまのでんしゃ",
       "romaji": "ima no densha",
@@ -16780,7 +16130,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1261,
+      "id": 1211,
       "lesson_id": 29,
       "hiragana": "わすれもの",
       "romaji": "wasuremono",
@@ -16793,7 +16143,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1262,
+      "id": 1212,
       "lesson_id": 29,
       "hiragana": "このくらい",
       "romaji": "kono kurai",
@@ -16806,7 +16156,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1263,
+      "id": 1213,
       "lesson_id": 29,
       "hiragana": "がわ",
       "romaji": "gawa",
@@ -16819,7 +16169,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1264,
+      "id": 1214,
       "lesson_id": 29,
       "hiragana": "へん",
       "romaji": "hen",
@@ -16832,7 +16182,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1265,
+      "id": 1215,
       "lesson_id": 29,
       "hiragana": "おぼえていません",
       "romaji": "oboete imasen",
@@ -16845,7 +16195,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1266,
+      "id": 1216,
       "lesson_id": 29,
       "hiragana": "あみだな",
       "romaji": "amidana",
@@ -16858,7 +16208,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1267,
+      "id": 1217,
       "lesson_id": 29,
       "hiragana": "たしか",
       "romaji": "tashika",
@@ -16871,7 +16221,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1268,
+      "id": 1218,
       "lesson_id": 29,
       "hiragana": "ああ、よかった",
       "romaji": "aa, yokatta",
@@ -16884,7 +16234,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1269,
+      "id": 1219,
       "lesson_id": 29,
       "hiragana": "じしん",
       "romaji": "jishin",
@@ -16897,7 +16247,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1270,
+      "id": 1220,
       "lesson_id": 29,
       "hiragana": "かべ",
       "romaji": "kabe",
@@ -16910,7 +16260,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1271,
+      "id": 1221,
       "lesson_id": 29,
       "hiragana": "はり",
       "romaji": "hari",
@@ -16923,7 +16273,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1272,
+      "id": 1222,
       "lesson_id": 29,
       "hiragana": "さします",
       "romaji": "sashimasu",
@@ -16936,7 +16286,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1273,
+      "id": 1223,
       "lesson_id": 29,
       "hiragana": "えきまえ",
       "romaji": "ekimae",
@@ -16949,7 +16299,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1274,
+      "id": 1224,
       "lesson_id": 29,
       "hiragana": "たおれます",
       "romaji": "taoremasu",
@@ -16962,7 +16312,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1275,
+      "id": 1225,
       "lesson_id": 29,
       "hiragana": "にしのほう",
       "romaji": "nishi no hou",
@@ -16975,7 +16325,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1276,
+      "id": 1226,
       "lesson_id": 29,
       "hiragana": "もえます",
       "romaji": "moemasu",
@@ -16988,7 +16338,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1277,
+      "id": 1227,
       "lesson_id": 30,
       "hiragana": "はります",
       "romaji": "harimasu",
@@ -17001,7 +16351,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1278,
+      "id": 1228,
       "lesson_id": 30,
       "hiragana": "かけます",
       "romaji": "kakemasu",
@@ -17014,7 +16364,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1279,
+      "id": 1229,
       "lesson_id": 30,
       "hiragana": "かざります",
       "romaji": "kazarimasu",
@@ -17027,7 +16377,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1280,
+      "id": 1230,
       "lesson_id": 30,
       "hiragana": "しまいます",
       "romaji": "shimaimasu",
@@ -17040,7 +16390,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1281,
+      "id": 1231,
       "lesson_id": 30,
       "hiragana": "そのままにします",
       "romaji": "sonomananishimasu",
@@ -17053,7 +16403,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1282,
+      "id": 1232,
       "lesson_id": 30,
       "hiragana": "ならべます",
       "romaji": "narabemasu",
@@ -17066,7 +16416,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1283,
+      "id": 1233,
       "lesson_id": 30,
       "hiragana": "うえます",
       "romaji": "uemasu",
@@ -17079,7 +16429,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1284,
+      "id": 1234,
       "lesson_id": 30,
       "hiragana": "もどします",
       "romaji": "modoshimasu",
@@ -17092,7 +16442,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1285,
+      "id": 1235,
       "lesson_id": 30,
       "hiragana": "まとめます",
       "romaji": "matomemasu",
@@ -17105,7 +16455,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1286,
+      "id": 1236,
       "lesson_id": 30,
       "hiragana": "きめます",
       "romaji": "kimemasu",
@@ -17118,7 +16468,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1287,
+      "id": 1237,
       "lesson_id": 30,
       "hiragana": "しらせます",
       "romaji": "shirasemasu",
@@ -17131,7 +16481,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1288,
+      "id": 1238,
       "lesson_id": 30,
       "hiragana": "そうだんします",
       "romaji": "soudanshimasu",
@@ -17144,7 +16494,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1289,
+      "id": 1239,
       "lesson_id": 30,
       "hiragana": "よしゅうします",
       "romaji": "yoshuushimasu",
@@ -17157,7 +16507,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1290,
+      "id": 1240,
       "lesson_id": 30,
       "hiragana": "ふくしゅうします",
       "romaji": "fukushuushimasu",
@@ -17170,7 +16520,7 @@ module.exports = {
       "pitch_accent": 5
     },
     {
-      "id": 1291,
+      "id": 1241,
       "lesson_id": 30,
       "hiragana": "おこさん",
       "romaji": "okosan",
@@ -17183,7 +16533,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1292,
+      "id": 1242,
       "lesson_id": 30,
       "hiragana": "じゅぎょう",
       "romaji": "jugyou",
@@ -17196,7 +16546,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1293,
+      "id": 1243,
       "lesson_id": 30,
       "hiragana": "こうぎ",
       "romaji": "kougi",
@@ -17209,7 +16559,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1294,
+      "id": 1244,
       "lesson_id": 30,
       "hiragana": "ミーテイング",
       "romaji": "miitingu",
@@ -17222,7 +16572,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1295,
+      "id": 1245,
       "lesson_id": 30,
       "hiragana": "よてい",
       "romaji": "yotei",
@@ -17235,7 +16585,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1296,
+      "id": 1246,
       "lesson_id": 30,
       "hiragana": "あんないしょ",
       "romaji": "annaisho",
@@ -17248,7 +16598,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1297,
+      "id": 1247,
       "lesson_id": 30,
       "hiragana": "カレンダー",
       "romaji": "karendaa",
@@ -17261,7 +16611,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1298,
+      "id": 1248,
       "lesson_id": 30,
       "hiragana": "ポスター",
       "romaji": "posutaa",
@@ -17274,7 +16624,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1299,
+      "id": 1249,
       "lesson_id": 30,
       "hiragana": "ごみばこ",
       "romaji": "gomibako",
@@ -17287,7 +16637,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1300,
+      "id": 1250,
       "lesson_id": 30,
       "hiragana": "にんぎょう",
       "romaji": "ningyou",
@@ -17300,7 +16650,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1301,
+      "id": 1251,
       "lesson_id": 30,
       "hiragana": "かびん",
       "romaji": "kabin",
@@ -17313,7 +16663,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1302,
+      "id": 1252,
       "lesson_id": 30,
       "hiragana": "かがみ",
       "romaji": "kagami",
@@ -17326,7 +16676,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1303,
+      "id": 1253,
       "lesson_id": 30,
       "hiragana": "ひきだし",
       "romaji": "hikidashi",
@@ -17339,7 +16689,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1304,
+      "id": 1254,
       "lesson_id": 30,
       "hiragana": "げんかん",
       "romaji": "genkan",
@@ -17352,7 +16702,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1305,
+      "id": 1255,
       "lesson_id": 30,
       "hiragana": "ろうか",
       "romaji": "rouka",
@@ -17365,7 +16715,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1306,
+      "id": 1256,
       "lesson_id": 30,
       "hiragana": "いけ",
       "romaji": "ike",
@@ -17378,7 +16728,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1307,
+      "id": 1257,
       "lesson_id": 30,
       "hiragana": "もとのところ",
       "romaji": "motono tokoro",
@@ -17391,7 +16741,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1308,
+      "id": 1258,
       "lesson_id": 30,
       "hiragana": "まわり",
       "romaji": "mawari",
@@ -17404,7 +16754,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1309,
+      "id": 1259,
       "lesson_id": 30,
       "hiragana": "まんなか",
       "romaji": "mannaka",
@@ -17417,7 +16767,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1310,
+      "id": 1260,
       "lesson_id": 30,
       "hiragana": "すみ",
       "romaji": "sumi",
@@ -17430,7 +16780,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1311,
+      "id": 1261,
       "lesson_id": 30,
       "hiragana": "―ほど",
       "romaji": "hodo",
@@ -17443,7 +16793,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1312,
+      "id": 1262,
       "lesson_id": 30,
       "hiragana": "よていひょう",
       "romaji": "yoteihyou",
@@ -17456,7 +16806,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1313,
+      "id": 1263,
       "lesson_id": 30,
       "hiragana": "ごくろうさま",
       "romaji": "gokurousama",
@@ -17469,7 +16819,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1314,
+      "id": 1264,
       "lesson_id": 30,
       "hiragana": "きぼう",
       "romaji": "kibou",
@@ -17482,7 +16832,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1315,
+      "id": 1265,
       "lesson_id": 30,
       "hiragana": "なにかごきぼうがありますか",
       "romaji": "nanika gokibou ga arimasu ka",
@@ -17495,7 +16845,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1316,
+      "id": 1266,
       "lesson_id": 30,
       "hiragana": "ミュージカル",
       "romaji": "myuujikaru",
@@ -17508,7 +16858,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1317,
+      "id": 1267,
       "lesson_id": 30,
       "hiragana": "それはいいですな",
       "romaji": "sore wa ii desu na",
@@ -17521,7 +16871,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1318,
+      "id": 1268,
       "lesson_id": 30,
       "hiragana": "まるい",
       "romaji": "marui",
@@ -17534,7 +16884,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1319,
+      "id": 1269,
       "lesson_id": 30,
       "hiragana": "つき",
       "romaji": "tsuki",
@@ -17547,7 +16897,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1320,
+      "id": 1270,
       "lesson_id": 30,
       "hiragana": "ちきゅう",
       "romaji": "chikyuu",
@@ -17560,7 +16910,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1321,
+      "id": 1271,
       "lesson_id": 30,
       "hiragana": "うれしい",
       "romaji": "ureshii",
@@ -17573,7 +16923,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1322,
+      "id": 1272,
       "lesson_id": 30,
       "hiragana": "いや（な）",
       "romaji": "iya",
@@ -17586,7 +16936,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1323,
+      "id": 1273,
       "lesson_id": 30,
       "hiragana": "すると",
       "romaji": "suruto",
@@ -17599,7 +16949,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1324,
+      "id": 1274,
       "lesson_id": 30,
       "hiragana": "めがさめます",
       "romaji": "me ga samemasu",
@@ -17612,7 +16962,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1325,
+      "id": 1275,
       "lesson_id": 31,
       "hiragana": "はじまります",
       "romaji": "hajimarimasu",
@@ -17625,7 +16975,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1326,
+      "id": 1276,
       "lesson_id": 31,
       "hiragana": "つづけます",
       "romaji": "tuduketemasu",
@@ -17638,7 +16988,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1327,
+      "id": 1277,
       "lesson_id": 31,
       "hiragana": "みつけます",
       "romaji": "mitsukemasu",
@@ -17651,7 +17001,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1328,
+      "id": 1278,
       "lesson_id": 31,
       "hiragana": "うけます",
       "romaji": "ukemasu",
@@ -17664,7 +17014,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1329,
+      "id": 1279,
       "lesson_id": 31,
       "hiragana": "とじます",
       "romaji": "tojimasu",
@@ -17677,7 +17027,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1330,
+      "id": 1280,
       "lesson_id": 31,
       "hiragana": "はじまります「式が～」",
       "romaji": "hajimarimasu (shiki ga)",
@@ -17690,7 +17040,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1331,
+      "id": 1281,
       "lesson_id": 31,
       "hiragana": "うけます「しけんを」",
       "romaji": "ukemasu (shiken wo)",
@@ -17703,7 +17053,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1332,
+      "id": 1282,
       "lesson_id": 31,
       "hiragana": "にゅうがくします「だいがくに」",
       "romaji": "nyuugakushimasu (daigaku ni)",
@@ -17716,7 +17066,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1333,
+      "id": 1283,
       "lesson_id": 31,
       "hiragana": "そつぎょうします「だいがくを」",
       "romaji": "sotsugyoushimasu (daigaku wo)",
@@ -17729,7 +17079,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1334,
+      "id": 1284,
       "lesson_id": 31,
       "hiragana": "きゅうけいします",
       "romaji": "kyuukeishimasu",
@@ -17742,7 +17092,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1335,
+      "id": 1285,
       "lesson_id": 31,
       "hiragana": "れんきゅう",
       "romaji": "renkyuu",
@@ -17755,7 +17105,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1336,
+      "id": 1286,
       "lesson_id": 31,
       "hiragana": "さくぶん",
       "romaji": "sakubun",
@@ -17768,7 +17118,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1337,
+      "id": 1287,
       "lesson_id": 31,
       "hiragana": "てんらんかい",
       "romaji": "tenrankai",
@@ -17781,7 +17131,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1338,
+      "id": 1288,
       "lesson_id": 31,
       "hiragana": "けっこんしき",
       "romaji": "kekkonshiki",
@@ -17794,7 +17144,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1339,
+      "id": 1289,
       "lesson_id": 31,
       "hiragana": "「お」そうしき",
       "romaji": "osoushiki",
@@ -17807,7 +17157,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1340,
+      "id": 1290,
       "lesson_id": 31,
       "hiragana": "しき",
       "romaji": "shiki",
@@ -17820,7 +17170,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1341,
+      "id": 1291,
       "lesson_id": 31,
       "hiragana": "ほんしゃ",
       "romaji": "honsha",
@@ -17833,7 +17183,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1342,
+      "id": 1292,
       "lesson_id": 31,
       "hiragana": "してん",
       "romaji": "shiten",
@@ -17846,7 +17196,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1343,
+      "id": 1293,
       "lesson_id": 31,
       "hiragana": "きょうかい",
       "romaji": "kyoukai",
@@ -17859,7 +17209,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1344,
+      "id": 1294,
       "lesson_id": 31,
       "hiragana": "だいがくいん",
       "romaji": "daigakuin",
@@ -17872,7 +17222,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1345,
+      "id": 1295,
       "lesson_id": 31,
       "hiragana": "どうぶつえん",
       "romaji": "doubutsuen",
@@ -17885,7 +17235,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1346,
+      "id": 1296,
       "lesson_id": 31,
       "hiragana": "おんせん",
       "romaji": "onsen",
@@ -17898,7 +17248,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1347,
+      "id": 1297,
       "lesson_id": 31,
       "hiragana": "おきゃく「さん」",
       "romaji": "okyaku-san",
@@ -17911,7 +17261,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1348,
+      "id": 1298,
       "lesson_id": 31,
       "hiragana": "だれか",
       "romaji": "dareka",
@@ -17924,7 +17274,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1349,
+      "id": 1299,
       "lesson_id": 31,
       "hiragana": "～のほう",
       "romaji": "no hou",
@@ -17937,7 +17287,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1350,
+      "id": 1300,
       "lesson_id": 31,
       "hiragana": "のこります",
       "romaji": "nokorimasu",
@@ -17950,7 +17300,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1351,
+      "id": 1301,
       "lesson_id": 31,
       "hiragana": "つきに",
       "romaji": "tsuki ni",
@@ -17963,7 +17313,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1352,
+      "id": 1302,
       "lesson_id": 31,
       "hiragana": "ふつうの",
       "romaji": "futsuu no",
@@ -17976,7 +17326,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1353,
+      "id": 1303,
       "lesson_id": 31,
       "hiragana": "インターネット",
       "romaji": "intaanetto",
@@ -17989,7 +17339,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1354,
+      "id": 1304,
       "lesson_id": 31,
       "hiragana": "むら",
       "romaji": "mura",
@@ -18002,7 +17352,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1355,
+      "id": 1305,
       "lesson_id": 31,
       "hiragana": "えいがかん",
       "romaji": "eigakan",
@@ -18015,7 +17365,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1356,
+      "id": 1306,
       "lesson_id": 31,
       "hiragana": "いや「な」",
       "romaji": "iya (na)",
@@ -18028,7 +17378,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1357,
+      "id": 1307,
       "lesson_id": 31,
       "hiragana": "とかい",
       "romaji": "tokai",
@@ -18041,7 +17391,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1358,
+      "id": 1308,
       "lesson_id": 31,
       "hiragana": "せかいじゅう",
       "romaji": "sekaijuu",
@@ -18054,7 +17404,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1359,
+      "id": 1309,
       "lesson_id": 31,
       "hiragana": "あつまります",
       "romaji": "atsumarimasu",
@@ -18067,7 +17417,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1360,
+      "id": 1310,
       "lesson_id": 31,
       "hiragana": "うつくしい",
       "romaji": "utsukushii",
@@ -18080,7 +17430,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1361,
+      "id": 1311,
       "lesson_id": 31,
       "hiragana": "しぜん",
       "romaji": "shizen",
@@ -18093,7 +17443,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1362,
+      "id": 1312,
       "lesson_id": 31,
       "hiragana": "すばらしさ",
       "romaji": "subarashisa",
@@ -18106,7 +17456,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1363,
+      "id": 1313,
       "lesson_id": 31,
       "hiragana": "きがつきます",
       "romaji": "kigatsukimasu",
@@ -18119,7 +17469,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1364,
+      "id": 1314,
       "lesson_id": 32,
       "hiragana": "うんどうします",
       "romaji": "undoushimasu",
@@ -18132,7 +17482,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1365,
+      "id": 1315,
       "lesson_id": 32,
       "hiragana": "せいこうします",
       "romaji": "seikoushimasu",
@@ -18145,7 +17495,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1366,
+      "id": 1316,
       "lesson_id": 32,
       "hiragana": "しっぱいします",
       "romaji": "shippaishimasu",
@@ -18158,7 +17508,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1367,
+      "id": 1317,
       "lesson_id": 32,
       "hiragana": "ごうかくします",
       "romaji": "goukakushimasu",
@@ -18171,7 +17521,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1368,
+      "id": 1318,
       "lesson_id": 32,
       "hiragana": "もしかしたら",
       "romaji": "moshikashitara",
@@ -18184,7 +17534,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1369,
+      "id": 1319,
       "lesson_id": 32,
       "hiragana": "しっぱいします（しけんに～）",
       "romaji": "shippaishimasu",
@@ -18197,7 +17547,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1370,
+      "id": 1320,
       "lesson_id": 32,
       "hiragana": "ごうかくします（しけんに～）",
       "romaji": "goukakushimasu",
@@ -18210,7 +17560,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1371,
+      "id": 1321,
       "lesson_id": 32,
       "hiragana": "もどります",
       "romaji": "modorimasu",
@@ -18223,7 +17573,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1372,
+      "id": 1322,
       "lesson_id": 32,
       "hiragana": "やみます（雨が～）",
       "romaji": "yamimasu",
@@ -18236,7 +17586,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1373,
+      "id": 1323,
       "lesson_id": 32,
       "hiragana": "はれます",
       "romaji": "haremasu",
@@ -18249,7 +17599,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1374,
+      "id": 1324,
       "lesson_id": 32,
       "hiragana": "くもります",
       "romaji": "kumorimasu",
@@ -18262,7 +17612,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1375,
+      "id": 1325,
       "lesson_id": 32,
       "hiragana": "ふきます（かぜが～）",
       "romaji": "fukimasu",
@@ -18275,7 +17625,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1376,
+      "id": 1326,
       "lesson_id": 32,
       "hiragana": "なおります",
       "romaji": "naorimasu",
@@ -18288,7 +17638,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1377,
+      "id": 1327,
       "lesson_id": 32,
       "hiragana": "つづきます",
       "romaji": "tsuzukimasu",
@@ -18301,7 +17651,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1378,
+      "id": 1328,
       "lesson_id": 32,
       "hiragana": "ひやします",
       "romaji": "hiyashimasu",
@@ -18314,7 +17664,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1379,
+      "id": 1329,
       "lesson_id": 32,
       "hiragana": "しんぱい（な）",
       "romaji": "shinpai",
@@ -18327,7 +17677,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1380,
+      "id": 1330,
       "lesson_id": 32,
       "hiragana": "じゅうぶん（な）",
       "romaji": "juubun",
@@ -18340,7 +17690,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1381,
+      "id": 1331,
       "lesson_id": 32,
       "hiragana": "おかしい",
       "romaji": "okashii",
@@ -18353,7 +17703,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1382,
+      "id": 1332,
       "lesson_id": 32,
       "hiragana": "うるさい",
       "romaji": "urusai",
@@ -18366,7 +17716,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1383,
+      "id": 1333,
       "lesson_id": 32,
       "hiragana": "やけど",
       "romaji": "yakedo",
@@ -18379,7 +17729,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1384,
+      "id": 1334,
       "lesson_id": 32,
       "hiragana": "けが",
       "romaji": "kega",
@@ -18392,7 +17742,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1385,
+      "id": 1335,
       "lesson_id": 32,
       "hiragana": "せき",
       "romaji": "seki",
@@ -18405,7 +17755,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1386,
+      "id": 1336,
       "lesson_id": 32,
       "hiragana": "インフルエンザ",
       "romaji": "infuruenza",
@@ -18418,7 +17768,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1387,
+      "id": 1337,
       "lesson_id": 32,
       "hiragana": "たいよう",
       "romaji": "taiyou",
@@ -18431,7 +17781,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1388,
+      "id": 1338,
       "lesson_id": 32,
       "hiragana": "ほし",
       "romaji": "hoshi",
@@ -18444,7 +17794,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1389,
+      "id": 1339,
       "lesson_id": 32,
       "hiragana": "きた",
       "romaji": "kita",
@@ -18457,7 +17807,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1390,
+      "id": 1340,
       "lesson_id": 32,
       "hiragana": "みなみ",
       "romaji": "minami",
@@ -18470,7 +17820,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1391,
+      "id": 1341,
       "lesson_id": 32,
       "hiragana": "にし",
       "romaji": "nishi",
@@ -18483,7 +17833,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1392,
+      "id": 1342,
       "lesson_id": 32,
       "hiragana": "ひがし",
       "romaji": "higashi",
@@ -18496,7 +17846,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1393,
+      "id": 1343,
       "lesson_id": 32,
       "hiragana": "すいどう",
       "romaji": "suidou",
@@ -18509,7 +17859,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1394,
+      "id": 1344,
       "lesson_id": 32,
       "hiragana": "エンジン",
       "romaji": "enjin",
@@ -18522,7 +17872,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1395,
+      "id": 1345,
       "lesson_id": 32,
       "hiragana": "チーム",
       "romaji": "chiimu",
@@ -18535,7 +17885,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1396,
+      "id": 1346,
       "lesson_id": 32,
       "hiragana": "こんや",
       "romaji": "konya",
@@ -18548,7 +17898,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1397,
+      "id": 1347,
       "lesson_id": 32,
       "hiragana": "ゆうがた",
       "romaji": "yuugata",
@@ -18561,7 +17911,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1398,
+      "id": 1348,
       "lesson_id": 32,
       "hiragana": "おそく",
       "romaji": "osoku",
@@ -18574,7 +17924,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1399,
+      "id": 1349,
       "lesson_id": 32,
       "hiragana": "こんなに",
       "romaji": "konna ni",
@@ -18587,7 +17937,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1400,
+      "id": 1350,
       "lesson_id": 32,
       "hiragana": "あんなに",
       "romaji": "anna ni",
@@ -18600,7 +17950,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1401,
+      "id": 1351,
       "lesson_id": 32,
       "hiragana": "それはいけませんね",
       "romaji": "sore wa ikemasen ne",
@@ -18613,7 +17963,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1402,
+      "id": 1352,
       "lesson_id": 32,
       "hiragana": "オリンピック",
       "romaji": "orinpikku",
@@ -18626,7 +17976,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1403,
+      "id": 1353,
       "lesson_id": 32,
       "hiragana": "げんき",
       "romaji": "genki",
@@ -18639,7 +17989,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1404,
+      "id": 1354,
       "lesson_id": 32,
       "hiragana": "い",
       "romaji": "i",
@@ -18652,7 +18002,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1405,
+      "id": 1355,
       "lesson_id": 32,
       "hiragana": "はたらきすぎ",
       "romaji": "hatarakisugi",
@@ -18665,7 +18015,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1406,
+      "id": 1356,
       "lesson_id": 32,
       "hiragana": "ストレス",
       "romaji": "sutoresu",
@@ -18678,7 +18028,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1407,
+      "id": 1357,
       "lesson_id": 32,
       "hiragana": "むりをします",
       "romaji": "muri o shimasu",
@@ -18691,7 +18041,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1408,
+      "id": 1358,
       "lesson_id": 32,
       "hiragana": "ゆっくりします",
       "romaji": "yukkuri shimasu",
@@ -18704,7 +18054,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1409,
+      "id": 1359,
       "lesson_id": 32,
       "hiragana": "ほしうらない",
       "romaji": "hoshiuranai",
@@ -18717,7 +18067,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1410,
+      "id": 1360,
       "lesson_id": 32,
       "hiragana": "おうしざ",
       "romaji": "ous hiza",
@@ -18730,7 +18080,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1411,
+      "id": 1361,
       "lesson_id": 32,
       "hiragana": "こまります",
       "romaji": "komarimasu",
@@ -18743,7 +18093,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1412,
+      "id": 1362,
       "lesson_id": 32,
       "hiragana": "たからくじ",
       "romaji": "takarakuji",
@@ -18756,7 +18106,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1413,
+      "id": 1363,
       "lesson_id": 32,
       "hiragana": "あたります",
       "romaji": "atarimasu",
@@ -18769,7 +18119,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1414,
+      "id": 1364,
       "lesson_id": 32,
       "hiragana": "けんこう",
       "romaji": "kenkou",
@@ -18782,7 +18132,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1415,
+      "id": 1365,
       "lesson_id": 32,
       "hiragana": "れんあい",
       "romaji": "renai",
@@ -18795,7 +18145,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1416,
+      "id": 1366,
       "lesson_id": 32,
       "hiragana": "こいびと",
       "romaji": "koibito",
@@ -18808,7 +18158,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1417,
+      "id": 1367,
       "lesson_id": 32,
       "hiragana": "（お）かねもち",
       "romaji": "okanemochi",
@@ -18821,7 +18171,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1418,
+      "id": 1368,
       "lesson_id": 33,
       "hiragana": "にげます",
       "romaji": "nigemasu",
@@ -18834,7 +18184,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1419,
+      "id": 1369,
       "lesson_id": 33,
       "hiragana": "あきらめます",
       "romaji": "akiramemasu",
@@ -18847,7 +18197,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1420,
+      "id": 1370,
       "lesson_id": 33,
       "hiragana": "まもります",
       "romaji": "mamorimasu",
@@ -18860,7 +18210,7 @@ module.exports = {
       "pitch_accent": 6
     },
     {
-      "id": 1421,
+      "id": 1371,
       "lesson_id": 33,
       "hiragana": "しめきり",
       "romaji": "shimekiri",
@@ -18873,7 +18223,7 @@ module.exports = {
       "pitch_accent": 5
     },
     {
-      "id": 1422,
+      "id": 1372,
       "lesson_id": 33,
       "hiragana": "きそく",
       "romaji": "kisoku",
@@ -18886,7 +18236,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1423,
+      "id": 1373,
       "lesson_id": 33,
       "hiragana": "さわぎます",
       "romaji": "sawagimasu",
@@ -18899,7 +18249,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1424,
+      "id": 1374,
       "lesson_id": 33,
       "hiragana": "なげます",
       "romaji": "nagemasu",
@@ -18912,7 +18262,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1425,
+      "id": 1375,
       "lesson_id": 33,
       "hiragana": "さげます",
       "romaji": "sagemasu",
@@ -18925,7 +18275,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1426,
+      "id": 1376,
       "lesson_id": 33,
       "hiragana": "つたえます",
       "romaji": "tsutaemasu",
@@ -18938,7 +18288,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1427,
+      "id": 1377,
       "lesson_id": 33,
       "hiragana": "ちゅういします",
       "romaji": "chuui shimasu",
@@ -18951,7 +18301,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1428,
+      "id": 1378,
       "lesson_id": 33,
       "hiragana": "はずします",
       "romaji": "hazushimasu",
@@ -18964,7 +18314,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1429,
+      "id": 1379,
       "lesson_id": 33,
       "hiragana": "だめ",
       "romaji": "dame",
@@ -18977,7 +18327,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1430,
+      "id": 1380,
       "lesson_id": 33,
       "hiragana": "ファイト",
       "romaji": "faito",
@@ -18990,7 +18340,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1431,
+      "id": 1381,
       "lesson_id": 33,
       "hiragana": "マーク",
       "romaji": "maaku",
@@ -19003,7 +18353,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1432,
+      "id": 1382,
       "lesson_id": 33,
       "hiragana": "ボール",
       "romaji": "booru",
@@ -19016,7 +18366,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1433,
+      "id": 1383,
       "lesson_id": 33,
       "hiragana": "せんたくき",
       "romaji": "sentakuki",
@@ -19029,7 +18379,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1434,
+      "id": 1384,
       "lesson_id": 33,
       "hiragana": "―き",
       "romaji": "ki",
@@ -19042,7 +18392,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1435,
+      "id": 1385,
       "lesson_id": 33,
       "hiragana": "しようきんし",
       "romaji": "shiyoukinshi",
@@ -19055,7 +18405,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1436,
+      "id": 1386,
       "lesson_id": 33,
       "hiragana": "たちいりきんし",
       "romaji": "tachiirikinshi",
@@ -19068,7 +18418,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1437,
+      "id": 1387,
       "lesson_id": 33,
       "hiragana": "いりぐち",
       "romaji": "iriguchi",
@@ -19081,7 +18431,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1438,
+      "id": 1388,
       "lesson_id": 33,
       "hiragana": "でぐち",
       "romaji": "deguchi",
@@ -19094,7 +18444,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1439,
+      "id": 1389,
       "lesson_id": 33,
       "hiragana": "ひじょうぐち",
       "romaji": "hijouguchi",
@@ -19107,7 +18457,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1440,
+      "id": 1390,
       "lesson_id": 33,
       "hiragana": "ほんじつきゅうぎょう",
       "romaji": "honjitsukyuugyou",
@@ -19120,7 +18470,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1441,
+      "id": 1391,
       "lesson_id": 33,
       "hiragana": "えいぎょうちゅう",
       "romaji": "eigyouchuu",
@@ -19133,7 +18483,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1442,
+      "id": 1392,
       "lesson_id": 33,
       "hiragana": "しようちゅう",
       "romaji": "shiyouchuu",
@@ -19146,7 +18496,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1443,
+      "id": 1393,
       "lesson_id": 33,
       "hiragana": "―ちゅう",
       "romaji": "chuu",
@@ -19159,7 +18509,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1444,
+      "id": 1394,
       "lesson_id": 33,
       "hiragana": "どういうー",
       "romaji": "douiu",
@@ -19172,7 +18522,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1445,
+      "id": 1395,
       "lesson_id": 33,
       "hiragana": "あと",
       "romaji": "ato",
@@ -19185,7 +18535,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1446,
+      "id": 1396,
       "lesson_id": 33,
       "hiragana": "ちゅうしゃいはん",
       "romaji": "chuushaihan",
@@ -19198,7 +18548,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1447,
+      "id": 1397,
       "lesson_id": 33,
       "hiragana": "そりゃあ",
       "romaji": "soryaa",
@@ -19211,7 +18561,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1448,
+      "id": 1398,
       "lesson_id": 33,
       "hiragana": "～いない",
       "romaji": "inai",
@@ -19224,7 +18574,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1449,
+      "id": 1399,
       "lesson_id": 33,
       "hiragana": "けいさつ",
       "romaji": "keisatsu",
@@ -19237,7 +18587,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1450,
+      "id": 1400,
       "lesson_id": 33,
       "hiragana": "ばっきん",
       "romaji": "bakkin",
@@ -19250,7 +18600,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1451,
+      "id": 1401,
       "lesson_id": 33,
       "hiragana": "でんぽう",
       "romaji": "denpou",
@@ -19263,7 +18613,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1452,
+      "id": 1402,
       "lesson_id": 33,
       "hiragana": "ひとびと",
       "romaji": "hitobito",
@@ -19276,7 +18626,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1453,
+      "id": 1403,
       "lesson_id": 33,
       "hiragana": "きゅうよう",
       "romaji": "kyuuyou",
@@ -19289,7 +18639,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1454,
+      "id": 1404,
       "lesson_id": 33,
       "hiragana": "うちます",
       "romaji": "uchimasu",
@@ -19302,7 +18652,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1455,
+      "id": 1405,
       "lesson_id": 33,
       "hiragana": "でんぽうだい",
       "romaji": "denpoudai",
@@ -19315,7 +18665,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1456,
+      "id": 1406,
       "lesson_id": 33,
       "hiragana": "できるだけ",
       "romaji": "dekirudake",
@@ -19328,7 +18678,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1457,
+      "id": 1407,
       "lesson_id": 33,
       "hiragana": "みじかく",
       "romaji": "mijikaku",
@@ -19341,7 +18691,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1458,
+      "id": 1408,
       "lesson_id": 33,
       "hiragana": "キトク",
       "romaji": "kitoku",
@@ -19354,7 +18704,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1459,
+      "id": 1409,
       "lesson_id": 33,
       "hiragana": "おもいびょうき",
       "romaji": "omoibyouki",
@@ -19367,7 +18717,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1460,
+      "id": 1410,
       "lesson_id": 33,
       "hiragana": "あす",
       "romaji": "asu",
@@ -19380,7 +18730,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1461,
+      "id": 1411,
       "lesson_id": 33,
       "hiragana": "るす",
       "romaji": "rusu",
@@ -19393,7 +18743,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1462,
+      "id": 1412,
       "lesson_id": 33,
       "hiragana": "るすばん",
       "romaji": "rusuban",
@@ -19406,7 +18756,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1463,
+      "id": 1413,
       "lesson_id": 33,
       "hiragana": "(お）いわい",
       "romaji": "oiwai",
@@ -19419,7 +18769,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1464,
+      "id": 1414,
       "lesson_id": 33,
       "hiragana": "なくなります",
       "romaji": "nakunarimasu",
@@ -19432,7 +18782,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1465,
+      "id": 1415,
       "lesson_id": 33,
       "hiragana": "かなしい",
       "romaji": "kanashii",
@@ -19445,7 +18795,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1466,
+      "id": 1416,
       "lesson_id": 33,
       "hiragana": "りようします",
       "romaji": "riyoushimasu",
@@ -19458,7 +18808,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1467,
+      "id": 1417,
       "lesson_id": 34,
       "hiragana": "みがきます",
       "romaji": "migakimasu",
@@ -19471,7 +18821,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1468,
+      "id": 1418,
       "lesson_id": 34,
       "hiragana": "くみたてます",
       "romaji": "kumitatemasu",
@@ -19484,7 +18834,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1469,
+      "id": 1419,
       "lesson_id": 34,
       "hiragana": "おります",
       "romaji": "orimasu",
@@ -19497,7 +18847,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1470,
+      "id": 1420,
       "lesson_id": 34,
       "hiragana": "しょうゆ",
       "romaji": "shouyu",
@@ -19510,7 +18860,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1471,
+      "id": 1421,
       "lesson_id": 34,
       "hiragana": "せつめいしょ",
       "romaji": "setsumeisho",
@@ -19523,7 +18873,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1472,
+      "id": 1422,
       "lesson_id": 34,
       "hiragana": "みつかります",
       "romaji": "mitsukarimasu",
@@ -19536,7 +18886,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1473,
+      "id": 1423,
       "lesson_id": 34,
       "hiragana": "します（ネクタイを）",
       "romaji": "shimasu",
@@ -19549,7 +18899,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1474,
+      "id": 1424,
       "lesson_id": 34,
       "hiragana": "しつもんします",
       "romaji": "shitsumonshimasu",
@@ -19562,7 +18912,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1475,
+      "id": 1425,
       "lesson_id": 34,
       "hiragana": "ほそい",
       "romaji": "hosoi",
@@ -19575,7 +18925,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1476,
+      "id": 1426,
       "lesson_id": 34,
       "hiragana": "ふとい",
       "romaji": "futoi",
@@ -19588,7 +18938,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1477,
+      "id": 1427,
       "lesson_id": 34,
       "hiragana": "スポーツクラブ",
       "romaji": "supootsukurabu",
@@ -19601,7 +18951,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1478,
+      "id": 1428,
       "lesson_id": 34,
       "hiragana": "かぐ",
       "romaji": "kagu",
@@ -19614,7 +18964,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1479,
+      "id": 1429,
       "lesson_id": 34,
       "hiragana": "キー",
       "romaji": "kii",
@@ -19627,7 +18977,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1480,
+      "id": 1430,
       "lesson_id": 34,
       "hiragana": "シートべルト",
       "romaji": "shiitoberuto",
@@ -19640,7 +18990,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1481,
+      "id": 1431,
       "lesson_id": 34,
       "hiragana": "ず",
       "romaji": "zu",
@@ -19653,7 +19003,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1482,
+      "id": 1432,
       "lesson_id": 34,
       "hiragana": "やじるし",
       "romaji": "yajirushi",
@@ -19666,7 +19016,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1483,
+      "id": 1433,
       "lesson_id": 34,
       "hiragana": "くろ",
       "romaji": "kuro",
@@ -19679,7 +19029,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1484,
+      "id": 1434,
       "lesson_id": 34,
       "hiragana": "しろ",
       "romaji": "shiro",
@@ -19692,7 +19042,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1485,
+      "id": 1435,
       "lesson_id": 34,
       "hiragana": "あか",
       "romaji": "aka",
@@ -19705,7 +19055,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1486,
+      "id": 1436,
       "lesson_id": 34,
       "hiragana": "あお",
       "romaji": "ao",
@@ -19718,7 +19068,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1487,
+      "id": 1437,
       "lesson_id": 34,
       "hiragana": "こん",
       "romaji": "kon",
@@ -19731,7 +19081,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1488,
+      "id": 1438,
       "lesson_id": 34,
       "hiragana": "きいろ",
       "romaji": "kiiro",
@@ -19744,7 +19094,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1489,
+      "id": 1439,
       "lesson_id": 34,
       "hiragana": "ちゃいろ",
       "romaji": "chairo",
@@ -19757,7 +19107,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1490,
+      "id": 1440,
       "lesson_id": 34,
       "hiragana": "ソース",
       "romaji": "soosu",
@@ -19770,7 +19120,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1491,
+      "id": 1441,
       "lesson_id": 34,
       "hiragana": "ゆうべ",
       "romaji": "yuube",
@@ -19783,7 +19133,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1492,
+      "id": 1442,
       "lesson_id": 34,
       "hiragana": "さっき",
       "romaji": "sakki",
@@ -19796,7 +19146,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1493,
+      "id": 1443,
       "lesson_id": 34,
       "hiragana": "さどう",
       "romaji": "sadou",
@@ -19809,7 +19159,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1494,
+      "id": 1444,
       "lesson_id": 34,
       "hiragana": "おちゃおたてます",
       "romaji": "ocha o tatemasu",
@@ -19822,7 +19172,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1495,
+      "id": 1445,
       "lesson_id": 34,
       "hiragana": "さきに",
       "romaji": "sakini",
@@ -19835,7 +19185,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1496,
+      "id": 1446,
       "lesson_id": 34,
       "hiragana": "のせます",
       "romaji": "nosemasu",
@@ -19848,7 +19198,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1497,
+      "id": 1447,
       "lesson_id": 34,
       "hiragana": "これでいいですか",
       "romaji": "kore de ii desu ka",
@@ -19861,7 +19211,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1498,
+      "id": 1448,
       "lesson_id": 34,
       "hiragana": "にがい",
       "romaji": "nigai",
@@ -19874,7 +19224,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1499,
+      "id": 1449,
       "lesson_id": 34,
       "hiragana": "おやこどんぶり",
       "romaji": "oyakodonburi",
@@ -19887,7 +19237,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1500,
+      "id": 1450,
       "lesson_id": 34,
       "hiragana": "ざいりょう",
       "romaji": "zairyou",
@@ -19900,7 +19250,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1501,
+      "id": 1451,
       "lesson_id": 34,
       "hiragana": "ーぶん",
       "romaji": "bun",
@@ -19913,7 +19263,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1502,
+      "id": 1452,
       "lesson_id": 34,
       "hiragana": "とりにく",
       "romaji": "toriniku",
@@ -19926,7 +19276,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1503,
+      "id": 1453,
       "lesson_id": 34,
       "hiragana": "ーグラマ",
       "romaji": "guramu",
@@ -19939,7 +19289,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1504,
+      "id": 1454,
       "lesson_id": 34,
       "hiragana": "たまねぎ",
       "romaji": "tamanegi",
@@ -19952,7 +19302,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1505,
+      "id": 1455,
       "lesson_id": 34,
       "hiragana": "よんぶんの１",
       "romaji": "yonbun no ichi",
@@ -19965,7 +19315,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1506,
+      "id": 1456,
       "lesson_id": 34,
       "hiragana": "ちょうみりょう",
       "romaji": "choumiryou",
@@ -19978,7 +19328,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1507,
+      "id": 1457,
       "lesson_id": 34,
       "hiragana": "なべ",
       "romaji": "nabe",
@@ -19991,7 +19341,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1508,
+      "id": 1458,
       "lesson_id": 34,
       "hiragana": "ひにかけます",
       "romaji": "hi ni kakemasu",
@@ -20004,7 +19354,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1509,
+      "id": 1459,
       "lesson_id": 34,
       "hiragana": "にます",
       "romaji": "nimasu",
@@ -20017,7 +19367,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1510,
+      "id": 1460,
       "lesson_id": 34,
       "hiragana": "にえます",
       "romaji": "niemasu",
@@ -20030,7 +19380,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1511,
+      "id": 1461,
       "lesson_id": 34,
       "hiragana": "どんぶり",
       "romaji": "donburi",
@@ -20043,7 +19393,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1512,
+      "id": 1462,
       "lesson_id": 35,
       "hiragana": "さきます",
       "romaji": "sakimasu",
@@ -20056,7 +19406,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1513,
+      "id": 1463,
       "lesson_id": 35,
       "hiragana": "かわります",
       "romaji": "kawarimasu",
@@ -20069,7 +19419,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1514,
+      "id": 1464,
       "lesson_id": 35,
       "hiragana": "こまります",
       "romaji": "komarimasu",
@@ -20082,7 +19432,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1515,
+      "id": 1465,
       "lesson_id": 35,
       "hiragana": "まわします",
       "romaji": "mawashimasu",
@@ -20095,7 +19445,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1516,
+      "id": 1466,
       "lesson_id": 35,
       "hiragana": "むだ",
       "romaji": "muda",
@@ -20108,7 +19458,7 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 1517,
+      "id": 1467,
       "lesson_id": 35,
       "hiragana": "らく（な）",
       "romaji": "raku na",
@@ -20121,7 +19471,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1518,
+      "id": 1468,
       "lesson_id": 35,
       "hiragana": "ただしい",
       "romaji": "tadashii",
@@ -20134,7 +19484,7 @@ module.exports = {
       "pitch_accent": 4
     },
     {
-      "id": 1519,
+      "id": 1469,
       "lesson_id": 35,
       "hiragana": "めずらしい",
       "romaji": "mezurashii",
@@ -20147,7 +19497,7 @@ module.exports = {
       "pitch_accent": 3
     },
     {
-      "id": 1520,
+      "id": 1470,
       "lesson_id": 35,
       "hiragana": "かた",
       "romaji": "kata",
@@ -20160,7 +19510,7 @@ module.exports = {
       "pitch_accent": 1
     },
     {
-      "id": 1521,
+      "id": 1471,
       "lesson_id": 35,
       "hiragana": "むこう",
       "romaji": "mukou",
@@ -20173,7 +19523,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1522,
+      "id": 1472,
       "lesson_id": 35,
       "hiragana": "しま",
       "romaji": "shima",
@@ -20186,7 +19536,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1523,
+      "id": 1473,
       "lesson_id": 35,
       "hiragana": "みなと",
       "romaji": "minato",
@@ -20199,7 +19549,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1524,
+      "id": 1474,
       "lesson_id": 35,
       "hiragana": "きんじょ",
       "romaji": "kinjo",
@@ -20212,7 +19562,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1525,
+      "id": 1475,
       "lesson_id": 35,
       "hiragana": "おくじょう",
       "romaji": "okujou",
@@ -20225,7 +19575,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1526,
+      "id": 1476,
       "lesson_id": 35,
       "hiragana": "かいがい",
       "romaji": "kaigai",
@@ -20238,7 +19588,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1527,
+      "id": 1477,
       "lesson_id": 35,
       "hiragana": "やまのぼり",
       "romaji": "yamanobori",
@@ -20251,7 +19601,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1528,
+      "id": 1478,
       "lesson_id": 35,
       "hiragana": "ハイキング",
       "romaji": "haikingu",
@@ -20264,7 +19614,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1529,
+      "id": 1479,
       "lesson_id": 35,
       "hiragana": "きょか",
       "romaji": "kyoka",
@@ -20277,7 +19627,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1530,
+      "id": 1480,
       "lesson_id": 35,
       "hiragana": "まる",
       "romaji": "maru",
@@ -20290,7 +19640,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1531,
+      "id": 1481,
       "lesson_id": 35,
       "hiragana": "そうさ",
       "romaji": "sousa",
@@ -20303,7 +19653,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1532,
+      "id": 1482,
       "lesson_id": 35,
       "hiragana": "ほうほう",
       "romaji": "houhou",
@@ -20316,7 +19666,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1533,
+      "id": 1483,
       "lesson_id": 35,
       "hiragana": "せつび",
       "romaji": "setsubi",
@@ -20329,7 +19679,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1534,
+      "id": 1484,
       "lesson_id": 35,
       "hiragana": "カ－テン",
       "romaji": "kaaten",
@@ -20342,7 +19692,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1535,
+      "id": 1485,
       "lesson_id": 35,
       "hiragana": "ひも",
       "romaji": "himo",
@@ -20355,7 +19705,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1536,
+      "id": 1486,
       "lesson_id": 35,
       "hiragana": "ふた",
       "romaji": "futa",
@@ -20368,7 +19718,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1537,
+      "id": 1487,
       "lesson_id": 35,
       "hiragana": "きょく",
       "romaji": "kyoku",
@@ -20381,7 +19731,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1538,
+      "id": 1488,
       "lesson_id": 35,
       "hiragana": "たのしみ",
       "romaji": "tanoshimi",
@@ -20394,7 +19744,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1539,
+      "id": 1489,
       "lesson_id": 35,
       "hiragana": "もっと",
       "romaji": "motto",
@@ -20407,7 +19757,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1540,
+      "id": 1490,
       "lesson_id": 35,
       "hiragana": "はじめに",
       "romaji": "hajimeni",
@@ -20420,7 +19770,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1541,
+      "id": 1491,
       "lesson_id": 35,
       "hiragana": "これでおわります",
       "romaji": "koredeowarimasu",
@@ -20433,7 +19783,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1542,
+      "id": 1492,
       "lesson_id": 35,
       "hiragana": "それなら",
       "romaji": "sorenara",
@@ -20446,7 +19796,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1543,
+      "id": 1493,
       "lesson_id": 35,
       "hiragana": "やこうバス",
       "romaji": "yakoubasu",
@@ -20459,7 +19809,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1544,
+      "id": 1494,
       "lesson_id": 35,
       "hiragana": "りょこうしゃ",
       "romaji": "ryokousha",
@@ -20472,7 +19822,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1545,
+      "id": 1495,
       "lesson_id": 35,
       "hiragana": "くわしい",
       "romaji": "kuwashii",
@@ -20485,7 +19835,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1546,
+      "id": 1496,
       "lesson_id": 35,
       "hiragana": "スキーじょう",
       "romaji": "skiijou",
@@ -20498,7 +19848,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1547,
+      "id": 1497,
       "lesson_id": 35,
       "hiragana": "しゅ",
       "romaji": "shu",
@@ -20511,7 +19861,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1548,
+      "id": 1498,
       "lesson_id": 35,
       "hiragana": "まじわります",
       "romaji": "majiwarimasu",
@@ -20524,7 +19874,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1549,
+      "id": 1499,
       "lesson_id": 35,
       "hiragana": "ことわざ",
       "romaji": "kotowaza",
@@ -20537,7 +19887,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1550,
+      "id": 1500,
       "lesson_id": 35,
       "hiragana": "なかよくします",
       "romaji": "nakayokushimasu",
@@ -20550,7 +19900,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1551,
+      "id": 1501,
       "lesson_id": 35,
       "hiragana": "ひつよう（な）",
       "romaji": "hitsuyou",
@@ -20563,7 +19913,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1552,
+      "id": 1502,
       "lesson_id": 36,
       "hiragana": "あびます",
       "romaji": "abimasu",
@@ -20576,7 +19926,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1553,
+      "id": 1503,
       "lesson_id": 36,
       "hiragana": "いれます",
       "romaji": "iremasu",
@@ -20589,7 +19939,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1554,
+      "id": 1504,
       "lesson_id": 36,
       "hiragana": "かけます",
       "romaji": "kakemasu",
@@ -20602,7 +19952,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1555,
+      "id": 1505,
       "lesson_id": 36,
       "hiragana": "おちます",
       "romaji": "ochimasu",
@@ -20615,7 +19965,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1556,
+      "id": 1506,
       "lesson_id": 36,
       "hiragana": "とどきます",
       "romaji": "todokimasu",
@@ -20628,7 +19978,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1557,
+      "id": 1507,
       "lesson_id": 36,
       "hiragana": "ちょきんします",
       "romaji": "chokinshimasu",
@@ -20641,7 +19991,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1558,
+      "id": 1508,
       "lesson_id": 36,
       "hiragana": "ふとります",
       "romaji": "futorimasu",
@@ -20654,7 +20004,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1559,
+      "id": 1509,
       "lesson_id": 36,
       "hiragana": "やせます",
       "romaji": "yasemasu",
@@ -20667,7 +20017,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1560,
+      "id": 1510,
       "lesson_id": 36,
       "hiragana": "すぎます",
       "romaji": "sugimasu",
@@ -20680,7 +20030,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1561,
+      "id": 1511,
       "lesson_id": 36,
       "hiragana": "なれます",
       "romaji": "naremasu",
@@ -20693,7 +20043,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1562,
+      "id": 1512,
       "lesson_id": 36,
       "hiragana": "かたい",
       "romaji": "katai",
@@ -20706,7 +20056,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1563,
+      "id": 1513,
       "lesson_id": 36,
       "hiragana": "やわらかい",
       "romaji": "yawarakai",
@@ -20719,7 +20069,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1564,
+      "id": 1514,
       "lesson_id": 36,
       "hiragana": "でんしー",
       "romaji": "denshii",
@@ -20732,7 +20082,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1565,
+      "id": 1515,
       "lesson_id": 36,
       "hiragana": "けいたいー",
       "romaji": "keitaii",
@@ -20745,7 +20095,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1566,
+      "id": 1516,
       "lesson_id": 36,
       "hiragana": "こうじょう",
       "romaji": "koujou",
@@ -20758,7 +20108,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1567,
+      "id": 1517,
       "lesson_id": 36,
       "hiragana": "けんどう",
       "romaji": "kendou",
@@ -20771,7 +20121,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1568,
+      "id": 1518,
       "lesson_id": 36,
       "hiragana": "まいしゅう",
       "romaji": "maishuu",
@@ -20784,7 +20134,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1569,
+      "id": 1519,
       "lesson_id": 36,
       "hiragana": "まいつき",
       "romaji": "maitsuki",
@@ -20797,7 +20147,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1570,
+      "id": 1520,
       "lesson_id": 36,
       "hiragana": "まいとし",
       "romaji": "maitoshi",
@@ -20810,7 +20160,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1571,
+      "id": 1521,
       "lesson_id": 36,
       "hiragana": "やっと",
       "romaji": "yatto",
@@ -20823,7 +20173,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1572,
+      "id": 1522,
       "lesson_id": 36,
       "hiragana": "かなり",
       "romaji": "kanari",
@@ -20836,7 +20186,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1573,
+      "id": 1523,
       "lesson_id": 36,
       "hiragana": "かならず",
       "romaji": "kanarazu",
@@ -20849,7 +20199,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1574,
+      "id": 1524,
       "lesson_id": 36,
       "hiragana": "ぜったいに",
       "romaji": "zettaini",
@@ -20862,7 +20212,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1575,
+      "id": 1525,
       "lesson_id": 36,
       "hiragana": "じょうずに",
       "romaji": "jouzuni",
@@ -20875,7 +20225,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1576,
+      "id": 1526,
       "lesson_id": 36,
       "hiragana": "このごろ",
       "romaji": "konogoro",
@@ -20888,7 +20238,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1577,
+      "id": 1527,
       "lesson_id": 36,
       "hiragana": "そのほうがー",
       "romaji": "sonohougaa",
@@ -20901,7 +20251,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1578,
+      "id": 1528,
       "lesson_id": 36,
       "hiragana": "おきゃくさま",
       "romaji": "okyakusama",
@@ -20914,7 +20264,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1579,
+      "id": 1529,
       "lesson_id": 36,
       "hiragana": "とくべつ（な）",
       "romaji": "tokubetsuna",
@@ -20927,7 +20277,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1580,
+      "id": 1530,
       "lesson_id": 36,
       "hiragana": "していらっしゃいます",
       "romaji": "shiteirasshaimasu",
@@ -20940,7 +20290,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1581,
+      "id": 1531,
       "lesson_id": 36,
       "hiragana": "すいえい",
       "romaji": "suiei",
@@ -20953,7 +20303,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1582,
+      "id": 1532,
       "lesson_id": 36,
       "hiragana": "～とか、～とか",
       "romaji": "toka, toka",
@@ -20966,7 +20316,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1583,
+      "id": 1533,
       "lesson_id": 36,
       "hiragana": "タンゴ",
       "romaji": "tango",
@@ -20979,7 +20329,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1584,
+      "id": 1534,
       "lesson_id": 36,
       "hiragana": "チャレンジします",
       "romaji": "charenji shimasu",
@@ -20992,7 +20342,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1585,
+      "id": 1535,
       "lesson_id": 36,
       "hiragana": "きもち",
       "romaji": "kimochi",
@@ -21005,7 +20355,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1586,
+      "id": 1536,
       "lesson_id": 36,
       "hiragana": "のりもの",
       "romaji": "norimono",
@@ -21018,7 +20368,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1587,
+      "id": 1537,
       "lesson_id": 36,
       "hiragana": "れきし",
       "romaji": "rekishi",
@@ -21031,7 +20381,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1588,
+      "id": 1538,
       "lesson_id": 36,
       "hiragana": "ーせいき",
       "romaji": "seiki",
@@ -21044,7 +20394,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1589,
+      "id": 1539,
       "lesson_id": 36,
       "hiragana": "とおく",
       "romaji": "tooku",
@@ -21057,7 +20407,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1590,
+      "id": 1540,
       "lesson_id": 36,
       "hiragana": "きしゃ",
       "romaji": "kisha",
@@ -21070,7 +20420,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1591,
+      "id": 1541,
       "lesson_id": 36,
       "hiragana": "きせん",
       "romaji": "kisen",
@@ -21083,7 +20433,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1592,
+      "id": 1542,
       "lesson_id": 36,
       "hiragana": "おおぜいの（ひと）",
       "romaji": "oozei no hito",
@@ -21096,7 +20446,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1593,
+      "id": 1543,
       "lesson_id": 36,
       "hiragana": "はこびます",
       "romaji": "hakobimasu",
@@ -21109,7 +20459,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1594,
+      "id": 1544,
       "lesson_id": 36,
       "hiragana": "あんぜん（な）",
       "romaji": "anzen na",
@@ -21122,7 +20472,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1595,
+      "id": 1545,
       "lesson_id": 37,
       "hiragana": "ほめます",
       "romaji": "homemasu",
@@ -21135,7 +20485,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1596,
+      "id": 1546,
       "lesson_id": 37,
       "hiragana": "しかります",
       "romaji": "shikarimasu",
@@ -21148,7 +20498,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1597,
+      "id": 1547,
       "lesson_id": 37,
       "hiragana": "さそいます",
       "romaji": "sasoimasu",
@@ -21161,7 +20511,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1598,
+      "id": 1548,
       "lesson_id": 37,
       "hiragana": "おこします",
       "romaji": "okoshimasu",
@@ -21174,7 +20524,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1599,
+      "id": 1549,
       "lesson_id": 37,
       "hiragana": "ぬすみます",
       "romaji": "nusumimasu",
@@ -21187,7 +20537,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1600,
+      "id": 1550,
       "lesson_id": 37,
       "hiragana": "しょうたいします",
       "romaji": "shoutaishimasu",
@@ -21200,7 +20550,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1601,
+      "id": 1551,
       "lesson_id": 37,
       "hiragana": "たのみます",
       "romaji": "tanomimasu",
@@ -21213,7 +20563,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1602,
+      "id": 1552,
       "lesson_id": 37,
       "hiragana": "ふみます",
       "romaji": "fumimasu",
@@ -21226,7 +20576,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1603,
+      "id": 1553,
       "lesson_id": 37,
       "hiragana": "こわします",
       "romaji": "kowashimasu",
@@ -21239,7 +20589,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1604,
+      "id": 1554,
       "lesson_id": 37,
       "hiragana": "よごします",
       "romaji": "yogoshimasu",
@@ -21252,7 +20602,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1605,
+      "id": 1555,
       "lesson_id": 37,
       "hiragana": "おこないます",
       "romaji": "okonaimasu",
@@ -21265,7 +20615,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1606,
+      "id": 1556,
       "lesson_id": 37,
       "hiragana": "ゆしゅつします",
       "romaji": "yushutsushimasu",
@@ -21278,7 +20628,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1607,
+      "id": 1557,
       "lesson_id": 37,
       "hiragana": "ゆにゅうします",
       "romaji": "yunyuushimasu",
@@ -21291,7 +20641,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1608,
+      "id": 1558,
       "lesson_id": 37,
       "hiragana": "はつめいします",
       "romaji": "hatsumeishimasu",
@@ -21304,7 +20654,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1609,
+      "id": 1559,
       "lesson_id": 37,
       "hiragana": "はっけんします",
       "romaji": "hakkenshimasu",
@@ -21317,7 +20667,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1610,
+      "id": 1560,
       "lesson_id": 37,
       "hiragana": "せっけいします",
       "romaji": "sekkeishimasu",
@@ -21330,7 +20680,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1611,
+      "id": 1561,
       "lesson_id": 37,
       "hiragana": "こめ",
       "romaji": "kome",
@@ -21343,7 +20693,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1612,
+      "id": 1562,
       "lesson_id": 37,
       "hiragana": "むぎ",
       "romaji": "mugi",
@@ -21356,7 +20706,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1613,
+      "id": 1563,
       "lesson_id": 37,
       "hiragana": "せきゆ",
       "romaji": "sekiyu",
@@ -21369,7 +20719,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1614,
+      "id": 1564,
       "lesson_id": 37,
       "hiragana": "げんりょう",
       "romaji": "genryou",
@@ -21382,7 +20732,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1615,
+      "id": 1565,
       "lesson_id": 37,
       "hiragana": "デート",
       "romaji": "deeto",
@@ -21395,7 +20745,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1616,
+      "id": 1566,
       "lesson_id": 37,
       "hiragana": "どろぼう",
       "romaji": "dorobou",
@@ -21408,7 +20758,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1617,
+      "id": 1567,
       "lesson_id": 37,
       "hiragana": "けんちくか",
       "romaji": "kenchikuka",
@@ -21421,7 +20771,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1618,
+      "id": 1568,
       "lesson_id": 37,
       "hiragana": "かがくしゃ",
       "romaji": "kagakusha",
@@ -21434,7 +20784,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1619,
+      "id": 1569,
       "lesson_id": 37,
       "hiragana": "―じゅう",
       "romaji": "juu",
@@ -21447,7 +20797,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1620,
+      "id": 1570,
       "lesson_id": 37,
       "hiragana": "―によって",
       "romaji": "niyotte",
@@ -21460,7 +20810,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1621,
+      "id": 1571,
       "lesson_id": 37,
       "hiragana": "よかったですね",
       "romaji": "yokatta desu ne",
@@ -21473,7 +20823,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1622,
+      "id": 1572,
       "lesson_id": 37,
       "hiragana": "うめたてます",
       "romaji": "umetatemasu",
@@ -21486,7 +20836,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1623,
+      "id": 1573,
       "lesson_id": 37,
       "hiragana": "ぎじゅつ",
       "romaji": "gijutsu",
@@ -21499,7 +20849,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1624,
+      "id": 1574,
       "lesson_id": 37,
       "hiragana": "とち",
       "romaji": "tochi",
@@ -21512,7 +20862,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1625,
+      "id": 1575,
       "lesson_id": 37,
       "hiragana": "そうおん",
       "romaji": "souon",
@@ -21525,7 +20875,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1626,
+      "id": 1576,
       "lesson_id": 37,
       "hiragana": "アクセス",
       "romaji": "akusesu",
@@ -21538,7 +20888,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1627,
+      "id": 1577,
       "lesson_id": 37,
       "hiragana": "ドミニカ",
       "romaji": "dominika",
@@ -21551,7 +20901,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1628,
+      "id": 1578,
       "lesson_id": 37,
       "hiragana": "ごうか（な）",
       "romaji": "gouka",
@@ -21564,7 +20914,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1629,
+      "id": 1579,
       "lesson_id": 37,
       "hiragana": "ちょうこく",
       "romaji": "choukoku",
@@ -21577,7 +20927,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1630,
+      "id": 1580,
       "lesson_id": 37,
       "hiragana": "ねむります",
       "romaji": "nemurimasu",
@@ -21590,7 +20940,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1631,
+      "id": 1581,
       "lesson_id": 37,
       "hiragana": "ほります",
       "romaji": "horimasu",
@@ -21603,7 +20953,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1632,
+      "id": 1582,
       "lesson_id": 37,
       "hiragana": "なかま",
       "romaji": "nakama",
@@ -21616,7 +20966,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1633,
+      "id": 1583,
       "lesson_id": 37,
       "hiragana": "そのあと",
       "romaji": "sono ato",
@@ -21629,7 +20979,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1634,
+      "id": 1584,
       "lesson_id": 37,
       "hiragana": "いっしょうけんめい",
       "romaji": "isshoukenmei",
@@ -21642,7 +20992,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1635,
+      "id": 1585,
       "lesson_id": 37,
       "hiragana": "ねずみ",
       "romaji": "nezumi",
@@ -21655,7 +21005,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1636,
+      "id": 1586,
       "lesson_id": 37,
       "hiragana": "いっぴきもいません",
       "romaji": "ippiki mo imasen",
@@ -21668,7 +21018,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1637,
+      "id": 1587,
       "lesson_id": 38,
       "hiragana": "そだてます",
       "romaji": "sodatemasu",
@@ -21681,7 +21031,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1638,
+      "id": 1588,
       "lesson_id": 38,
       "hiragana": "はこびます",
       "romaji": "hakobimasu",
@@ -21694,7 +21044,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1639,
+      "id": 1589,
       "lesson_id": 38,
       "hiragana": "にゅういんします",
       "romaji": "nyuuinshimasu",
@@ -21707,7 +21057,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1640,
+      "id": 1590,
       "lesson_id": 38,
       "hiragana": "たいいんします",
       "romaji": "taiinshimasu",
@@ -21720,7 +21070,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1641,
+      "id": 1591,
       "lesson_id": 38,
       "hiragana": "せいりします",
       "romaji": "seirishimasu",
@@ -21733,7 +21083,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1642,
+      "id": 1592,
       "lesson_id": 38,
       "hiragana": "きもちがいい",
       "romaji": "kimochigaii",
@@ -21746,7 +21096,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1643,
+      "id": 1593,
       "lesson_id": 38,
       "hiragana": "きもちがわるい",
       "romaji": "kimochigawarui",
@@ -21759,7 +21109,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1644,
+      "id": 1594,
       "lesson_id": 38,
       "hiragana": "おおきなー",
       "romaji": "ookina",
@@ -21772,7 +21122,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1645,
+      "id": 1595,
       "lesson_id": 38,
       "hiragana": "ちいさなー",
       "romaji": "chiisana",
@@ -21785,7 +21135,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1646,
+      "id": 1596,
       "lesson_id": 38,
       "hiragana": "あかちゃん",
       "romaji": "akachan",
@@ -21798,7 +21148,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1647,
+      "id": 1597,
       "lesson_id": 38,
       "hiragana": "しょうがっこう",
       "romaji": "shougakkou",
@@ -21811,7 +21161,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1648,
+      "id": 1598,
       "lesson_id": 38,
       "hiragana": "ちゅうがっこう",
       "romaji": "chuugakkou",
@@ -21824,7 +21174,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1649,
+      "id": 1599,
       "lesson_id": 38,
       "hiragana": "かいがん",
       "romaji": "kaigan",
@@ -21837,7 +21187,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1650,
+      "id": 1600,
       "lesson_id": 38,
       "hiragana": "うそ",
       "romaji": "uso",
@@ -21850,7 +21200,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1651,
+      "id": 1601,
       "lesson_id": 38,
       "hiragana": "でんげん",
       "romaji": "dengen",
@@ -21863,7 +21213,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1652,
+      "id": 1602,
       "lesson_id": 38,
       "hiragana": "―せい",
       "romaji": "sei",
@@ -21876,7 +21226,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1653,
+      "id": 1603,
       "lesson_id": 38,
       "hiragana": "あ、いけない",
       "romaji": "a, ikenai",
@@ -21889,7 +21239,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1654,
+      "id": 1604,
       "lesson_id": 38,
       "hiragana": "おさきに",
       "romaji": "osakini",
@@ -21902,7 +21252,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1655,
+      "id": 1605,
       "lesson_id": 38,
       "hiragana": "かいらん",
       "romaji": "kairan",
@@ -21915,7 +21265,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1656,
+      "id": 1606,
       "lesson_id": 38,
       "hiragana": "けんきゅうしつ",
       "romaji": "kenkyuushitsu",
@@ -21928,7 +21278,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1657,
+      "id": 1607,
       "lesson_id": 38,
       "hiragana": "きちんと",
       "romaji": "kichinto",
@@ -21941,7 +21291,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1658,
+      "id": 1608,
       "lesson_id": 38,
       "hiragana": "はんこ",
       "romaji": "hanko",
@@ -21954,7 +21304,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1659,
+      "id": 1609,
       "lesson_id": 38,
       "hiragana": "ふたご",
       "romaji": "futago",
@@ -21967,7 +21317,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1660,
+      "id": 1610,
       "lesson_id": 38,
       "hiragana": "しまい",
       "romaji": "shimai",
@@ -21980,7 +21330,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1661,
+      "id": 1611,
       "lesson_id": 38,
       "hiragana": "５ねんせい",
       "romaji": "gonensei",
@@ -21993,7 +21343,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1662,
+      "id": 1612,
       "lesson_id": 38,
       "hiragana": "にています",
       "romaji": "niteimasu",
@@ -22006,7 +21356,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1663,
+      "id": 1613,
       "lesson_id": 38,
       "hiragana": "せいかく",
       "romaji": "seikaku",
@@ -22019,7 +21369,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1664,
+      "id": 1614,
       "lesson_id": 38,
       "hiragana": "おとなしい",
       "romaji": "otonashii",
@@ -22032,7 +21382,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1665,
+      "id": 1615,
       "lesson_id": 38,
       "hiragana": "せわをします",
       "romaji": "sewa o shimasu",
@@ -22045,7 +21395,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1666,
+      "id": 1616,
       "lesson_id": 38,
       "hiragana": "じかんがたちます",
       "romaji": "jikan ga tachimasu",
@@ -22058,7 +21408,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1667,
+      "id": 1617,
       "lesson_id": 38,
       "hiragana": "クラス",
       "romaji": "kurasu",
@@ -22071,7 +21421,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1668,
+      "id": 1618,
       "lesson_id": 38,
       "hiragana": "けんかします",
       "romaji": "kenkashimasu",
@@ -22084,7 +21434,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1669,
+      "id": 1619,
       "lesson_id": 38,
       "hiragana": "ふしぎ（な）",
       "romaji": "fushigi na",
@@ -22097,7 +21447,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1670,
+      "id": 1620,
       "lesson_id": 39,
       "hiragana": "こたえます",
       "romaji": "kotaemasu",
@@ -22110,7 +21460,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1671,
+      "id": 1621,
       "lesson_id": 39,
       "hiragana": "たおれます",
       "romaji": "taoremasu",
@@ -22123,7 +21473,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1672,
+      "id": 1622,
       "lesson_id": 39,
       "hiragana": "とおります",
       "romaji": "toorimasu",
@@ -22136,7 +21486,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1673,
+      "id": 1623,
       "lesson_id": 39,
       "hiragana": "しにます",
       "romaji": "shinimasu",
@@ -22149,7 +21499,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1674,
+      "id": 1624,
       "lesson_id": 39,
       "hiragana": "びっくりします",
       "romaji": "bikkurishimasu",
@@ -22162,7 +21512,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1675,
+      "id": 1625,
       "lesson_id": 39,
       "hiragana": "やけます",
       "romaji": "yakemasu",
@@ -22175,7 +21525,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1676,
+      "id": 1626,
       "lesson_id": 39,
       "hiragana": "やけます（パン/にくが～）",
       "romaji": "yakemasu",
@@ -22188,7 +21538,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1677,
+      "id": 1627,
       "lesson_id": 39,
       "hiragana": "がっかりします",
       "romaji": "gakkarishimasu",
@@ -22201,7 +21551,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1678,
+      "id": 1628,
       "lesson_id": 39,
       "hiragana": "あんしんします",
       "romaji": "anshinshimasu",
@@ -22214,7 +21564,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1679,
+      "id": 1629,
       "lesson_id": 39,
       "hiragana": "ちこくします",
       "romaji": "chikokushimasu",
@@ -22227,7 +21577,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1680,
+      "id": 1630,
       "lesson_id": 39,
       "hiragana": "そうたいします",
       "romaji": "soutaishimasu",
@@ -22240,7 +21590,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1681,
+      "id": 1631,
       "lesson_id": 39,
       "hiragana": "りこんします",
       "romaji": "rikonshimasu",
@@ -22253,7 +21603,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1682,
+      "id": 1632,
       "lesson_id": 39,
       "hiragana": "ふくざつ（な）",
       "romaji": "fukuzatsu",
@@ -22266,7 +21616,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1683,
+      "id": 1633,
       "lesson_id": 39,
       "hiragana": "じゃま（な）",
       "romaji": "jama",
@@ -22279,7 +21629,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1684,
+      "id": 1634,
       "lesson_id": 39,
       "hiragana": "きたない",
       "romaji": "kitanai",
@@ -22292,7 +21642,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1685,
+      "id": 1635,
       "lesson_id": 39,
       "hiragana": "はずかしい",
       "romaji": "hazukashii",
@@ -22305,7 +21655,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1686,
+      "id": 1636,
       "lesson_id": 39,
       "hiragana": "たいふう",
       "romaji": "taifuu",
@@ -22318,7 +21668,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1687,
+      "id": 1637,
       "lesson_id": 39,
       "hiragana": "かじ",
       "romaji": "kaji",
@@ -22331,7 +21681,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1688,
+      "id": 1638,
       "lesson_id": 39,
       "hiragana": "じこ",
       "romaji": "jiko",
@@ -22344,7 +21694,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1689,
+      "id": 1639,
       "lesson_id": 39,
       "hiragana": "みあい",
       "romaji": "miai",
@@ -22357,7 +21707,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1690,
+      "id": 1640,
       "lesson_id": 39,
       "hiragana": "でんわだい",
       "romaji": "denwadai",
@@ -22370,7 +21720,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1691,
+      "id": 1641,
       "lesson_id": 39,
       "hiragana": "ーだい",
       "romaji": "dai",
@@ -22383,7 +21733,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1692,
+      "id": 1642,
       "lesson_id": 39,
       "hiragana": "フロント",
       "romaji": "furonto",
@@ -22396,7 +21746,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1693,
+      "id": 1643,
       "lesson_id": 39,
       "hiragana": "―ごうしつ",
       "romaji": "goushitsu",
@@ -22409,7 +21759,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1694,
+      "id": 1644,
       "lesson_id": 39,
       "hiragana": "あせ",
       "romaji": "ase",
@@ -22422,7 +21772,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1695,
+      "id": 1645,
       "lesson_id": 39,
       "hiragana": "タオル",
       "romaji": "taoru",
@@ -22435,7 +21785,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1696,
+      "id": 1646,
       "lesson_id": 39,
       "hiragana": "せっけん",
       "romaji": "sekken",
@@ -22448,7 +21798,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1697,
+      "id": 1647,
       "lesson_id": 39,
       "hiragana": "おおぜい",
       "romaji": "oozei",
@@ -22461,7 +21811,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1698,
+      "id": 1648,
       "lesson_id": 39,
       "hiragana": "おつかれさまでした",
       "romaji": "otsukaresamadeshita",
@@ -22474,7 +21824,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1699,
+      "id": 1649,
       "lesson_id": 39,
       "hiragana": "うかがいます",
       "romaji": "ukagaimasu",
@@ -22487,7 +21837,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1700,
+      "id": 1650,
       "lesson_id": 39,
       "hiragana": "とちゅうで",
       "romaji": "tochuude",
@@ -22500,7 +21850,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1701,
+      "id": 1651,
       "lesson_id": 39,
       "hiragana": "トラック",
       "romaji": "torakku",
@@ -22513,7 +21863,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1702,
+      "id": 1652,
       "lesson_id": 39,
       "hiragana": "ぶつかります",
       "romaji": "butsukarimasu",
@@ -22526,7 +21876,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1703,
+      "id": 1653,
       "lesson_id": 39,
       "hiragana": "ならびます",
       "romaji": "narabimasu",
@@ -22539,7 +21889,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1704,
+      "id": 1654,
       "lesson_id": 39,
       "hiragana": "おとな",
       "romaji": "otona",
@@ -22552,7 +21902,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1705,
+      "id": 1655,
       "lesson_id": 39,
       "hiragana": "ようふく",
       "romaji": "youfuku",
@@ -22565,7 +21915,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1706,
+      "id": 1656,
       "lesson_id": 39,
       "hiragana": "せいようかします",
       "romaji": "seiyoukashimasu",
@@ -22578,7 +21928,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1707,
+      "id": 1657,
       "lesson_id": 39,
       "hiragana": "いまでは",
       "romaji": "imadewa",
@@ -22591,7 +21941,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1708,
+      "id": 1658,
       "lesson_id": 39,
       "hiragana": "せいじんしき",
       "romaji": "seijinshiki",
@@ -22604,7 +21954,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1709,
+      "id": 1659,
       "lesson_id": 40,
       "hiragana": "かぞえます",
       "romaji": "kazoemasu",
@@ -22617,7 +21967,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1710,
+      "id": 1660,
       "lesson_id": 40,
       "hiragana": "はかります",
       "romaji": "hakarimasu",
@@ -22630,7 +21980,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1711,
+      "id": 1661,
       "lesson_id": 40,
       "hiragana": "たしかめます",
       "romaji": "tashikamemasu",
@@ -22643,7 +21993,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1712,
+      "id": 1662,
       "lesson_id": 40,
       "hiragana": "しゅっぱつします",
       "romaji": "shuppatsushimasu",
@@ -22656,7 +22006,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1713,
+      "id": 1663,
       "lesson_id": 40,
       "hiragana": "とうちゃくします",
       "romaji": "touchakushimasu",
@@ -22669,7 +22019,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1714,
+      "id": 1664,
       "lesson_id": 40,
       "hiragana": "よいます",
       "romaji": "yoimasu",
@@ -22682,7 +22032,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1715,
+      "id": 1665,
       "lesson_id": 40,
       "hiragana": "きけん（な）",
       "romaji": "kiken",
@@ -22695,7 +22045,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1716,
+      "id": 1666,
       "lesson_id": 40,
       "hiragana": "ぼうねんかい",
       "romaji": "bounenkai",
@@ -22708,7 +22058,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1717,
+      "id": 1667,
       "lesson_id": 40,
       "hiragana": "しんねんかい",
       "romaji": "shinnenkai",
@@ -22721,7 +22071,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1718,
+      "id": 1668,
       "lesson_id": 40,
       "hiragana": "にじかい",
       "romaji": "nijikai",
@@ -22734,7 +22084,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1719,
+      "id": 1669,
       "lesson_id": 40,
       "hiragana": "たいかい",
       "romaji": "taikai",
@@ -22747,7 +22097,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1720,
+      "id": 1670,
       "lesson_id": 40,
       "hiragana": "マラソン",
       "romaji": "marason",
@@ -22760,7 +22110,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1721,
+      "id": 1671,
       "lesson_id": 40,
       "hiragana": "コンテスト",
       "romaji": "kontesuto",
@@ -22773,7 +22123,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1722,
+      "id": 1672,
       "lesson_id": 40,
       "hiragana": "おもて",
       "romaji": "omote",
@@ -22786,7 +22136,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1723,
+      "id": 1673,
       "lesson_id": 40,
       "hiragana": "うら",
       "romaji": "ura",
@@ -22799,7 +22149,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1724,
+      "id": 1674,
       "lesson_id": 40,
       "hiragana": "もうしこみ",
       "romaji": "moushikomi",
@@ -22812,7 +22162,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1725,
+      "id": 1675,
       "lesson_id": 40,
       "hiragana": "ほんとう",
       "romaji": "hontou",
@@ -22825,7 +22175,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1726,
+      "id": 1676,
       "lesson_id": 40,
       "hiragana": "まちがい",
       "romaji": "machigai",
@@ -22838,7 +22188,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1727,
+      "id": 1677,
       "lesson_id": 40,
       "hiragana": "きず",
       "romaji": "kizu",
@@ -22851,7 +22201,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1728,
+      "id": 1678,
       "lesson_id": 40,
       "hiragana": "ズボン",
       "romaji": "zubon",
@@ -22864,7 +22214,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1729,
+      "id": 1679,
       "lesson_id": 40,
       "hiragana": "ながさ",
       "romaji": "nagasa",
@@ -22877,7 +22227,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1730,
+      "id": 1680,
       "lesson_id": 40,
       "hiragana": "おもさ",
       "romaji": "omosa",
@@ -22890,7 +22240,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1731,
+      "id": 1681,
       "lesson_id": 40,
       "hiragana": "たかさ",
       "romaji": "takasa",
@@ -22903,7 +22253,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1732,
+      "id": 1682,
       "lesson_id": 40,
       "hiragana": "―びん",
       "romaji": "bin",
@@ -22916,7 +22266,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1733,
+      "id": 1683,
       "lesson_id": 40,
       "hiragana": "―ごう",
       "romaji": "gou",
@@ -22929,7 +22279,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1734,
+      "id": 1684,
       "lesson_id": 40,
       "hiragana": "―こ",
       "romaji": "ko",
@@ -22942,7 +22292,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1735,
+      "id": 1685,
       "lesson_id": 40,
       "hiragana": "―ほん",
       "romaji": "hon",
@@ -22955,7 +22305,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1736,
+      "id": 1686,
       "lesson_id": 40,
       "hiragana": "―はい",
       "romaji": "hai",
@@ -22968,7 +22318,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1737,
+      "id": 1687,
       "lesson_id": 40,
       "hiragana": "―キロ",
       "romaji": "kiro",
@@ -22981,7 +22331,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1738,
+      "id": 1688,
       "lesson_id": 40,
       "hiragana": "―グラム",
       "romaji": "guramu",
@@ -22994,7 +22344,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1739,
+      "id": 1689,
       "lesson_id": 40,
       "hiragana": "ーセンチ",
       "romaji": "senchi",
@@ -23007,7 +22357,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1740,
+      "id": 1690,
       "lesson_id": 40,
       "hiragana": "ーミリ",
       "romaji": "miri",
@@ -23020,7 +22370,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1741,
+      "id": 1691,
       "lesson_id": 40,
       "hiragana": "―いじょう",
       "romaji": "ijou",
@@ -23033,7 +22383,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1742,
+      "id": 1692,
       "lesson_id": 40,
       "hiragana": "―いか",
       "romaji": "ika",
@@ -23046,7 +22396,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1743,
+      "id": 1693,
       "lesson_id": 40,
       "hiragana": "どうでしょうか",
       "romaji": "doudeshouka",
@@ -23059,7 +22409,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1744,
+      "id": 1694,
       "lesson_id": 40,
       "hiragana": "テスト",
       "romaji": "tesuto",
@@ -23072,7 +22422,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1745,
+      "id": 1695,
       "lesson_id": 40,
       "hiragana": "せいせき",
       "romaji": "seiseki",
@@ -23085,7 +22435,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1746,
+      "id": 1696,
       "lesson_id": 40,
       "hiragana": "ところで",
       "romaji": "tokorode",
@@ -23098,7 +22448,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1747,
+      "id": 1697,
       "lesson_id": 40,
       "hiragana": "ようす",
       "romaji": "yousu",
@@ -23111,7 +22461,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1748,
+      "id": 1698,
       "lesson_id": 40,
       "hiragana": "じけん",
       "romaji": "jiken",
@@ -23124,7 +22474,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1749,
+      "id": 1699,
       "lesson_id": 40,
       "hiragana": "オートバイ",
       "romaji": "ootobai",
@@ -23137,7 +22487,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1750,
+      "id": 1700,
       "lesson_id": 40,
       "hiragana": "ばくだん",
       "romaji": "bakudan",
@@ -23150,7 +22500,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1751,
+      "id": 1701,
       "lesson_id": 40,
       "hiragana": "つみます",
       "romaji": "tsumimasu",
@@ -23163,7 +22513,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1752,
+      "id": 1702,
       "lesson_id": 40,
       "hiragana": "うんてんしゅ",
       "romaji": "untenshu",
@@ -23176,7 +22526,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1753,
+      "id": 1703,
       "lesson_id": 40,
       "hiragana": "はなれた",
       "romaji": "hanareta",
@@ -23189,7 +22539,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1754,
+      "id": 1704,
       "lesson_id": 40,
       "hiragana": "ゆうに",
       "romaji": "yuuni",
@@ -23202,7 +22552,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1755,
+      "id": 1705,
       "lesson_id": 40,
       "hiragana": "うごかします",
       "romaji": "ugokashimasu",
@@ -23215,7 +22565,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1756,
+      "id": 1706,
       "lesson_id": 40,
       "hiragana": "いっしょけんめい",
       "romaji": "isshokenmei",
@@ -23228,7 +22578,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1757,
+      "id": 1707,
       "lesson_id": 40,
       "hiragana": "はんにん",
       "romaji": "hannin",
@@ -23241,7 +22591,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1758,
+      "id": 1708,
       "lesson_id": 40,
       "hiragana": "てにいれます",
       "romaji": "te ni iremasu",
@@ -23254,7 +22604,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1759,
+      "id": 1709,
       "lesson_id": 40,
       "hiragana": "いまでも",
       "romaji": "imademo",
@@ -23267,7 +22617,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1760,
+      "id": 1710,
       "lesson_id": 40,
       "hiragana": "うわさします",
       "romaji": "uwasashimasu",
@@ -23280,7 +22630,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1761,
+      "id": 1711,
       "lesson_id": 41,
       "hiragana": "いただきます",
       "romaji": "itadakemasu",
@@ -23293,7 +22643,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1762,
+      "id": 1712,
       "lesson_id": 41,
       "hiragana": "くださいます",
       "romaji": "kudasaimasu",
@@ -23306,7 +22656,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1763,
+      "id": 1713,
       "lesson_id": 41,
       "hiragana": "さしあげます",
       "romaji": "sashiagemasu",
@@ -23319,7 +22669,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1764,
+      "id": 1714,
       "lesson_id": 41,
       "hiragana": "やります",
       "romaji": "yarimasu",
@@ -23332,7 +22682,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1765,
+      "id": 1715,
       "lesson_id": 41,
       "hiragana": "よびます",
       "romaji": "yobimasu",
@@ -23345,7 +22695,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1766,
+      "id": 1716,
       "lesson_id": 41,
       "hiragana": "しんせつに します",
       "romaji": "shinsetsu ni shimasu",
@@ -23358,7 +22708,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1767,
+      "id": 1717,
       "lesson_id": 41,
       "hiragana": "かわいい",
       "romaji": "kawaii",
@@ -23371,7 +22721,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1768,
+      "id": 1718,
       "lesson_id": 41,
       "hiragana": "おいわい",
       "romaji": "oiwai",
@@ -23384,7 +22734,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1769,
+      "id": 1719,
       "lesson_id": 41,
       "hiragana": "おとしだま",
       "romaji": "otoshidama",
@@ -23397,7 +22747,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1770,
+      "id": 1720,
       "lesson_id": 41,
       "hiragana": "おみまい",
       "romaji": "omimai",
@@ -23410,7 +22760,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1771,
+      "id": 1721,
       "lesson_id": 41,
       "hiragana": "きょうみ",
       "romaji": "kyoumi",
@@ -23423,7 +22773,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1772,
+      "id": 1722,
       "lesson_id": 41,
       "hiragana": "じょうほう",
       "romaji": "jouhou",
@@ -23436,7 +22786,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1773,
+      "id": 1723,
       "lesson_id": 41,
       "hiragana": "ぶんぽう",
       "romaji": "bunpou",
@@ -23449,7 +22799,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1774,
+      "id": 1724,
       "lesson_id": 41,
       "hiragana": "はつおん",
       "romaji": "hatsuon",
@@ -23462,7 +22812,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1775,
+      "id": 1725,
       "lesson_id": 41,
       "hiragana": "さる",
       "romaji": "saru",
@@ -23475,7 +22825,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1776,
+      "id": 1726,
       "lesson_id": 41,
       "hiragana": "えさ",
       "romaji": "esa",
@@ -23488,7 +22838,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1777,
+      "id": 1727,
       "lesson_id": 41,
       "hiragana": "おもちゃ",
       "romaji": "omocha",
@@ -23501,7 +22851,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1778,
+      "id": 1728,
       "lesson_id": 41,
       "hiragana": "えほん",
       "romaji": "ehon",
@@ -23514,7 +22864,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1779,
+      "id": 1729,
       "lesson_id": 41,
       "hiragana": "えはがき",
       "romaji": "ehagaki",
@@ -23527,7 +22877,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1780,
+      "id": 1730,
       "lesson_id": 41,
       "hiragana": "ドライバー",
       "romaji": "doraibaa",
@@ -23540,7 +22890,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1781,
+      "id": 1731,
       "lesson_id": 41,
       "hiragana": "ハンカチ",
       "romaji": "hankachi",
@@ -23553,7 +22903,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1782,
+      "id": 1732,
       "lesson_id": 41,
       "hiragana": "くつした",
       "romaji": "kutsushita",
@@ -23566,7 +22916,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1783,
+      "id": 1733,
       "lesson_id": 41,
       "hiragana": "てぶくろ",
       "romaji": "tebukuro",
@@ -23579,7 +22929,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1784,
+      "id": 1734,
       "lesson_id": 41,
       "hiragana": "ゆびわ",
       "romaji": "yubiwa",
@@ -23592,7 +22942,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1785,
+      "id": 1735,
       "lesson_id": 41,
       "hiragana": "バッグ",
       "romaji": "baggu",
@@ -23605,7 +22955,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1786,
+      "id": 1736,
       "lesson_id": 41,
       "hiragana": "そふ",
       "romaji": "sofu",
@@ -23618,7 +22968,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1787,
+      "id": 1737,
       "lesson_id": 41,
       "hiragana": "そぼ",
       "romaji": "sobo",
@@ -23631,7 +22981,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1788,
+      "id": 1738,
       "lesson_id": 41,
       "hiragana": "まご",
       "romaji": "mago",
@@ -23644,7 +22994,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1789,
+      "id": 1739,
       "lesson_id": 41,
       "hiragana": "おじ",
       "romaji": "oji",
@@ -23657,7 +23007,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1790,
+      "id": 1740,
       "lesson_id": 41,
       "hiragana": "おじさん",
       "romaji": "ojisan",
@@ -23670,7 +23020,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1791,
+      "id": 1741,
       "lesson_id": 41,
       "hiragana": "おば",
       "romaji": "oba",
@@ -23683,7 +23033,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1792,
+      "id": 1742,
       "lesson_id": 41,
       "hiragana": "おばさん",
       "romaji": "obasan",
@@ -23696,7 +23046,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1793,
+      "id": 1743,
       "lesson_id": 41,
       "hiragana": "おととし",
       "romaji": "ototoshi",
@@ -23709,7 +23059,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1794,
+      "id": 1744,
       "lesson_id": 41,
       "hiragana": "はあ",
       "romaji": "haa",
@@ -23722,7 +23072,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1795,
+      "id": 1745,
       "lesson_id": 41,
       "hiragana": "もうしわけ ありません",
       "romaji": "moushiwake arimasen",
@@ -23735,7 +23085,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1796,
+      "id": 1746,
       "lesson_id": 41,
       "hiragana": "あずかります",
       "romaji": "azukarimasu",
@@ -23748,7 +23098,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1797,
+      "id": 1747,
       "lesson_id": 41,
       "hiragana": "せんじつ",
       "romaji": "senjitsu",
@@ -23761,7 +23111,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1798,
+      "id": 1748,
       "lesson_id": 41,
       "hiragana": "たすかります",
       "romaji": "tasukarimasu",
@@ -23774,7 +23124,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1799,
+      "id": 1749,
       "lesson_id": 41,
       "hiragana": "むかしばなし",
       "romaji": "mukashibanashi",
@@ -23787,7 +23137,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1800,
+      "id": 1750,
       "lesson_id": 41,
       "hiragana": "ある~",
       "romaji": "aru~",
@@ -23800,7 +23150,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1801,
+      "id": 1751,
       "lesson_id": 41,
       "hiragana": "おとこ",
       "romaji": "otoko",
@@ -23813,7 +23163,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1802,
+      "id": 1752,
       "lesson_id": 41,
       "hiragana": "いじめます",
       "romaji": "ijimemasu",
@@ -23826,7 +23176,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1803,
+      "id": 1753,
       "lesson_id": 41,
       "hiragana": "かめ",
       "romaji": "kame",
@@ -23839,7 +23189,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1804,
+      "id": 1754,
       "lesson_id": 41,
       "hiragana": "たすけます",
       "romaji": "tasukemasu",
@@ -23852,7 +23202,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1805,
+      "id": 1755,
       "lesson_id": 41,
       "hiragana": "［お］しろ",
       "romaji": "oshiro",
@@ -23865,7 +23215,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1806,
+      "id": 1756,
       "lesson_id": 41,
       "hiragana": "おひめさま",
       "romaji": "ohimesama",
@@ -23878,7 +23228,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1807,
+      "id": 1757,
       "lesson_id": 41,
       "hiragana": "たのしく",
       "romaji": "tanoshiku",
@@ -23891,7 +23241,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1808,
+      "id": 1758,
       "lesson_id": 41,
       "hiragana": "くらします",
       "romaji": "kurashimasu",
@@ -23904,7 +23254,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1809,
+      "id": 1759,
       "lesson_id": 41,
       "hiragana": "りく",
       "romaji": "riku",
@@ -23917,7 +23267,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1810,
+      "id": 1760,
       "lesson_id": 41,
       "hiragana": "けむり",
       "romaji": "kemuri",
@@ -23930,7 +23280,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1811,
+      "id": 1761,
       "lesson_id": 41,
       "hiragana": "まっしろ［な］",
       "romaji": "masshirona",
@@ -23943,7 +23293,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1812,
+      "id": 1762,
       "lesson_id": 41,
       "hiragana": "なかみ",
       "romaji": "nakami",
@@ -23956,7 +23306,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1813,
+      "id": 1763,
       "lesson_id": 42,
       "hiragana": "ため",
       "romaji": "tame",
@@ -23969,7 +23319,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1814,
+      "id": 1764,
       "lesson_id": 42,
       "hiragana": "べんり",
       "romaji": "benri",
@@ -23982,7 +23332,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1815,
+      "id": 1765,
       "lesson_id": 42,
       "hiragana": "ふべん",
       "romaji": "fuben",
@@ -23995,7 +23345,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1816,
+      "id": 1766,
       "lesson_id": 42,
       "hiragana": "ふやす",
       "romaji": "fuyasu",
@@ -24008,7 +23358,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1817,
+      "id": 1767,
       "lesson_id": 42,
       "hiragana": "へらす",
       "romaji": "herasu",
@@ -24021,7 +23371,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1818,
+      "id": 1768,
       "lesson_id": 42,
       "hiragana": "つつみます",
       "romaji": "tsutsumimasu",
@@ -24034,7 +23384,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1819,
+      "id": 1769,
       "lesson_id": 42,
       "hiragana": "わかします",
       "romaji": "wakashimasu",
@@ -24047,7 +23397,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1820,
+      "id": 1770,
       "lesson_id": 42,
       "hiragana": "まぜます",
       "romaji": "mazemasu",
@@ -24060,7 +23410,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1821,
+      "id": 1771,
       "lesson_id": 42,
       "hiragana": "けいさんします",
       "romaji": "keisanshimasu",
@@ -24073,7 +23423,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1822,
+      "id": 1772,
       "lesson_id": 42,
       "hiragana": "うすい",
       "romaji": "usui",
@@ -24086,7 +23436,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1823,
+      "id": 1773,
       "lesson_id": 42,
       "hiragana": "べんごし",
       "romaji": "bengoshi",
@@ -24099,7 +23449,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1824,
+      "id": 1774,
       "lesson_id": 42,
       "hiragana": "おんがくか",
       "romaji": "ongakuka",
@@ -24112,7 +23462,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1825,
+      "id": 1775,
       "lesson_id": 42,
       "hiragana": "きょういく",
       "romaji": "kyouiku",
@@ -24125,7 +23475,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1826,
+      "id": 1776,
       "lesson_id": 42,
       "hiragana": "しゃかい",
       "romaji": "shakai",
@@ -24138,7 +23488,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1827,
+      "id": 1777,
       "lesson_id": 42,
       "hiragana": "ほうりつ",
       "romaji": "houritsu",
@@ -24151,7 +23501,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1828,
+      "id": 1778,
       "lesson_id": 42,
       "hiragana": "せんそう",
       "romaji": "sensou",
@@ -24164,7 +23514,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1829,
+      "id": 1779,
       "lesson_id": 42,
       "hiragana": "へいわ",
       "romaji": "heiwa",
@@ -24177,7 +23527,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1830,
+      "id": 1780,
       "lesson_id": 42,
       "hiragana": "もくてき",
       "romaji": "mokuteki",
@@ -24190,7 +23540,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1831,
+      "id": 1781,
       "lesson_id": 42,
       "hiragana": "あんぜん",
       "romaji": "anzen",
@@ -24203,7 +23553,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1832,
+      "id": 1782,
       "lesson_id": 42,
       "hiragana": "ろんぶん",
       "romaji": "ronbun",
@@ -24216,7 +23566,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1833,
+      "id": 1783,
       "lesson_id": 42,
       "hiragana": "かんけい",
       "romaji": "kankei",
@@ -24229,7 +23579,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1834,
+      "id": 1784,
       "lesson_id": 42,
       "hiragana": "ミキサ",
       "romaji": "mikisa",
@@ -24242,7 +23592,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1835,
+      "id": 1785,
       "lesson_id": 42,
       "hiragana": "やかん",
       "romaji": "yakan",
@@ -24255,7 +23605,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1836,
+      "id": 1786,
       "lesson_id": 42,
       "hiragana": "せんぬき",
       "romaji": "sennuki",
@@ -24268,7 +23618,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1837,
+      "id": 1787,
       "lesson_id": 42,
       "hiragana": "かんきり",
       "romaji": "kankiri",
@@ -24281,7 +23631,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1838,
+      "id": 1788,
       "lesson_id": 42,
       "hiragana": "かんづめ",
       "romaji": "kandzume",
@@ -24294,7 +23644,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1839,
+      "id": 1789,
       "lesson_id": 42,
       "hiragana": "ふろしき",
       "romaji": "furoshiki",
@@ -24307,7 +23657,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1840,
+      "id": 1790,
       "lesson_id": 42,
       "hiragana": "そろばん",
       "romaji": "soroban",
@@ -24320,7 +23670,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1841,
+      "id": 1791,
       "lesson_id": 42,
       "hiragana": "たいおんけい",
       "romaji": "taionkei",
@@ -24333,7 +23683,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1842,
+      "id": 1792,
       "lesson_id": 42,
       "hiragana": "いし",
       "romaji": "ishi",
@@ -24346,7 +23696,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1843,
+      "id": 1793,
       "lesson_id": 42,
       "hiragana": "ピラミッド",
       "romaji": "piramiddo",
@@ -24359,7 +23709,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1844,
+      "id": 1794,
       "lesson_id": 42,
       "hiragana": "データ",
       "romaji": "deeta",
@@ -24372,7 +23722,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1845,
+      "id": 1795,
       "lesson_id": 42,
       "hiragana": "ファイル",
       "romaji": "fairu",
@@ -24385,7 +23735,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1846,
+      "id": 1796,
       "lesson_id": 42,
       "hiragana": "ある～",
       "romaji": "aru",
@@ -24398,7 +23748,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1847,
+      "id": 1797,
       "lesson_id": 42,
       "hiragana": "なぜ",
       "romaji": "naze",
@@ -24411,7 +23761,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1848,
+      "id": 1798,
       "lesson_id": 42,
       "hiragana": "こくれん",
       "romaji": "kokuren",
@@ -24424,7 +23774,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1849,
+      "id": 1799,
       "lesson_id": 42,
       "hiragana": "こくさいれんごう",
       "romaji": "kokusairengou",
@@ -24437,7 +23787,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1850,
+      "id": 1800,
       "lesson_id": 42,
       "hiragana": "ポーランド",
       "romaji": "poorando",
@@ -24450,7 +23800,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1851,
+      "id": 1801,
       "lesson_id": 42,
       "hiragana": "ローン",
       "romaji": "roon",
@@ -24463,7 +23813,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1852,
+      "id": 1802,
       "lesson_id": 42,
       "hiragana": "セット",
       "romaji": "setto",
@@ -24476,7 +23826,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1853,
+      "id": 1803,
       "lesson_id": 42,
       "hiragana": "あとは",
       "romaji": "ato wa",
@@ -24489,7 +23839,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1854,
+      "id": 1804,
       "lesson_id": 42,
       "hiragana": "カップラーメン",
       "romaji": "kappuraamen",
@@ -24502,7 +23852,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1855,
+      "id": 1805,
       "lesson_id": 42,
       "hiragana": "インスタントラーメン",
       "romaji": "insantoraamen",
@@ -24515,7 +23865,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1856,
+      "id": 1806,
       "lesson_id": 42,
       "hiragana": "しょくひん",
       "romaji": "shokuhin",
@@ -24528,7 +23878,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1857,
+      "id": 1807,
       "lesson_id": 42,
       "hiragana": "ちょうさ",
       "romaji": "chousa",
@@ -24541,7 +23891,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1858,
+      "id": 1808,
       "lesson_id": 42,
       "hiragana": "カップ",
       "romaji": "kappu",
@@ -24554,7 +23904,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1859,
+      "id": 1809,
       "lesson_id": 42,
       "hiragana": "～のかわりに",
       "romaji": "no kawari ni",
@@ -24567,7 +23917,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1860,
+      "id": 1810,
       "lesson_id": 42,
       "hiragana": "どこででも",
       "romaji": "dokodedemo",
@@ -24580,7 +23930,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1861,
+      "id": 1811,
       "lesson_id": 43,
       "hiragana": "ふえます",
       "romaji": "fuemasu",
@@ -24593,7 +23943,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1862,
+      "id": 1812,
       "lesson_id": 43,
       "hiragana": "へります",
       "romaji": "herimasu",
@@ -24606,7 +23956,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1863,
+      "id": 1813,
       "lesson_id": 43,
       "hiragana": "きれます",
       "romaji": "kiremasu",
@@ -24619,7 +23969,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1864,
+      "id": 1814,
       "lesson_id": 43,
       "hiragana": "とれます",
       "romaji": "toremasu",
@@ -24632,7 +23982,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1865,
+      "id": 1815,
       "lesson_id": 43,
       "hiragana": "おちます",
       "romaji": "ochimasu",
@@ -24645,7 +23995,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1866,
+      "id": 1816,
       "lesson_id": 43,
       "hiragana": "あがります",
       "romaji": "agarimasu",
@@ -24658,7 +24008,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1867,
+      "id": 1817,
       "lesson_id": 43,
       "hiragana": "さがります",
       "romaji": "sagarimasu",
@@ -24671,7 +24021,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1868,
+      "id": 1818,
       "lesson_id": 43,
       "hiragana": "じょうぶ「な」",
       "romaji": "joubuna",
@@ -24684,7 +24034,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1869,
+      "id": 1819,
       "lesson_id": 43,
       "hiragana": "へん「な」",
       "romaji": "henna",
@@ -24697,7 +24047,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1870,
+      "id": 1820,
       "lesson_id": 43,
       "hiragana": "しあわせ",
       "romaji": "shiawase",
@@ -24710,7 +24060,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1871,
+      "id": 1821,
       "lesson_id": 43,
       "hiragana": "うまい",
       "romaji": "umai",
@@ -24723,7 +24073,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1872,
+      "id": 1822,
       "lesson_id": 43,
       "hiragana": "まずい",
       "romaji": "mazui",
@@ -24736,7 +24086,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1873,
+      "id": 1823,
       "lesson_id": 43,
       "hiragana": "ガソリン",
       "romaji": "gasorin",
@@ -24749,7 +24099,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1874,
+      "id": 1824,
       "lesson_id": 43,
       "hiragana": "だんぼう",
       "romaji": "danbou",
@@ -24762,7 +24112,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1875,
+      "id": 1825,
       "lesson_id": 43,
       "hiragana": "れいぼう",
       "romaji": "reibou",
@@ -24775,7 +24125,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1876,
+      "id": 1826,
       "lesson_id": 43,
       "hiragana": "センス",
       "romaji": "sensu",
@@ -24788,7 +24138,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1877,
+      "id": 1827,
       "lesson_id": 43,
       "hiragana": "いまにも",
       "romaji": "imanimo",
@@ -24801,7 +24151,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1878,
+      "id": 1828,
       "lesson_id": 43,
       "hiragana": "わあ",
       "romaji": "waa",
@@ -24814,7 +24164,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1879,
+      "id": 1829,
       "lesson_id": 43,
       "hiragana": "かいいん",
       "romaji": "kaiin",
@@ -24827,7 +24177,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1880,
+      "id": 1830,
       "lesson_id": 43,
       "hiragana": "てきとう「な」",
       "romaji": "tekitouna",
@@ -24840,7 +24190,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1881,
+      "id": 1831,
       "lesson_id": 43,
       "hiragana": "ねんれい",
       "romaji": "nenrei",
@@ -24853,7 +24203,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1882,
+      "id": 1832,
       "lesson_id": 43,
       "hiragana": "しゅうにゅう",
       "romaji": "shuunyuu",
@@ -24866,7 +24216,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1883,
+      "id": 1833,
       "lesson_id": 43,
       "hiragana": "ぴったり",
       "romaji": "pittari",
@@ -24879,7 +24229,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1884,
+      "id": 1834,
       "lesson_id": 43,
       "hiragana": "そのうえ",
       "romaji": "sonoue",
@@ -24892,7 +24242,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1885,
+      "id": 1835,
       "lesson_id": 43,
       "hiragana": "～といいます",
       "romaji": "toimasu",
@@ -24905,7 +24255,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1886,
+      "id": 1836,
       "lesson_id": 43,
       "hiragana": "ばら",
       "romaji": "bara",
@@ -24918,7 +24268,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1887,
+      "id": 1837,
       "lesson_id": 43,
       "hiragana": "ドライブ",
       "romaji": "doraibu",
@@ -24931,7 +24281,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1888,
+      "id": 1838,
       "lesson_id": 44,
       "hiragana": "すぎます",
       "romaji": "sugimasu",
@@ -24944,7 +24294,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1889,
+      "id": 1839,
       "lesson_id": 44,
       "hiragana": "やすい",
       "romaji": "yasui",
@@ -24957,7 +24307,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1890,
+      "id": 1840,
       "lesson_id": 44,
       "hiragana": "にくい",
       "romaji": "nikui",
@@ -24970,7 +24320,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1891,
+      "id": 1841,
       "lesson_id": 44,
       "hiragana": "こい",
       "romaji": "koi",
@@ -24983,7 +24333,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1892,
+      "id": 1842,
       "lesson_id": 44,
       "hiragana": "うすい",
       "romaji": "usui",
@@ -24996,7 +24346,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1893,
+      "id": 1843,
       "lesson_id": 44,
       "hiragana": "なきます Ⅰ",
       "romaji": "nakimasu",
@@ -25009,7 +24359,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1894,
+      "id": 1844,
       "lesson_id": 44,
       "hiragana": "わらいます Ⅰ",
       "romaji": "waraimasu",
@@ -25022,7 +24372,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1895,
+      "id": 1845,
       "lesson_id": 44,
       "hiragana": "かわきます Ⅰ",
       "romaji": "kawakimasu",
@@ -25035,7 +24385,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1896,
+      "id": 1846,
       "lesson_id": 44,
       "hiragana": "ぬれます Ⅱ",
       "romaji": "nuremasu",
@@ -25048,7 +24398,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1897,
+      "id": 1847,
       "lesson_id": 44,
       "hiragana": "すべります Ⅰ",
       "romaji": "suberimasu",
@@ -25061,7 +24411,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1898,
+      "id": 1848,
       "lesson_id": 44,
       "hiragana": "おきます Ⅱ",
       "romaji": "okimasu",
@@ -25074,7 +24424,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1899,
+      "id": 1849,
       "lesson_id": 44,
       "hiragana": "ちょうせつします Ⅲ",
       "romaji": "chousetsushimasu",
@@ -25087,7 +24437,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1900,
+      "id": 1850,
       "lesson_id": 44,
       "hiragana": "あんぜん［な］",
       "romaji": "anzen",
@@ -25100,7 +24450,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1901,
+      "id": 1851,
       "lesson_id": 44,
       "hiragana": "ていねい［な］",
       "romaji": "teinei",
@@ -25113,7 +24463,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1902,
+      "id": 1852,
       "lesson_id": 44,
       "hiragana": "こまかい",
       "romaji": "komakai",
@@ -25126,7 +24476,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1903,
+      "id": 1853,
       "lesson_id": 44,
       "hiragana": "くうき",
       "romaji": "kuuki",
@@ -25139,7 +24489,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1904,
+      "id": 1854,
       "lesson_id": 44,
       "hiragana": "なみだ",
       "romaji": "namida",
@@ -25152,7 +24502,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1905,
+      "id": 1855,
       "lesson_id": 44,
       "hiragana": "わしょく",
       "romaji": "washoku",
@@ -25165,7 +24515,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1906,
+      "id": 1856,
       "lesson_id": 44,
       "hiragana": "ようしょく",
       "romaji": "youshoku",
@@ -25178,7 +24528,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1907,
+      "id": 1857,
       "lesson_id": 44,
       "hiragana": "おかず",
       "romaji": "okazu",
@@ -25191,7 +24541,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1908,
+      "id": 1858,
       "lesson_id": 44,
       "hiragana": "…ばい",
       "romaji": "bai",
@@ -25204,7 +24554,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1909,
+      "id": 1859,
       "lesson_id": 44,
       "hiragana": "はんぶん",
       "romaji": "hanbun",
@@ -25217,7 +24567,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1910,
+      "id": 1860,
       "lesson_id": 44,
       "hiragana": "シングル",
       "romaji": "shinguru",
@@ -25230,7 +24580,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1911,
+      "id": 1861,
       "lesson_id": 44,
       "hiragana": "ツイン",
       "romaji": "tsuin",
@@ -25243,7 +24593,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1912,
+      "id": 1862,
       "lesson_id": 44,
       "hiragana": "たんす",
       "romaji": "tansu",
@@ -25256,7 +24606,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1913,
+      "id": 1863,
       "lesson_id": 44,
       "hiragana": "せんたくもの",
       "romaji": "sentakumono",
@@ -25269,7 +24619,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1914,
+      "id": 1864,
       "lesson_id": 44,
       "hiragana": "りゆう",
       "romaji": "riyuu",
@@ -25282,7 +24632,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1915,
+      "id": 1865,
       "lesson_id": 44,
       "hiragana": "どう なさいますか",
       "romaji": "dou nasaimasu ka",
@@ -25295,7 +24645,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1916,
+      "id": 1866,
       "lesson_id": 44,
       "hiragana": "カット",
       "romaji": "katto",
@@ -25308,7 +24658,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1917,
+      "id": 1867,
       "lesson_id": 44,
       "hiragana": "シャンプー",
       "romaji": "shanpuu",
@@ -25321,7 +24671,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1918,
+      "id": 1868,
       "lesson_id": 44,
       "hiragana": "どういうふうに なさいますか",
       "romaji": "douiufuuni nasaimasu ka",
@@ -25334,7 +24684,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1919,
+      "id": 1869,
       "lesson_id": 44,
       "hiragana": "ショート",
       "romaji": "shooto",
@@ -25347,7 +24697,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1920,
+      "id": 1870,
       "lesson_id": 44,
       "hiragana": "～みたいに して ください",
       "romaji": "mitai ni shite kudasai",
@@ -25360,7 +24710,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1921,
+      "id": 1871,
       "lesson_id": 44,
       "hiragana": "これで よろしいでしょうか",
       "romaji": "kore de yoroshii deshouka",
@@ -25373,7 +24723,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1922,
+      "id": 1872,
       "lesson_id": 44,
       "hiragana": "［どうも］お疲れさまでした",
       "romaji": "doumo otsukaresama deshita",
@@ -25386,7 +24736,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1923,
+      "id": 1873,
       "lesson_id": 44,
       "hiragana": "いやがります",
       "romaji": "iyagarimasu",
@@ -25399,7 +24749,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1924,
+      "id": 1874,
       "lesson_id": 44,
       "hiragana": "じゅんじょ",
       "romaji": "junjo",
@@ -25412,7 +24762,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1925,
+      "id": 1875,
       "lesson_id": 44,
       "hiragana": "ひょうげん",
       "romaji": "hyougen",
@@ -25425,7 +24775,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1926,
+      "id": 1876,
       "lesson_id": 44,
       "hiragana": "わかれます",
       "romaji": "wakaremasu",
@@ -25438,7 +24788,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1927,
+      "id": 1877,
       "lesson_id": 44,
       "hiragana": "これら",
       "romaji": "korera",
@@ -25451,7 +24801,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1928,
+      "id": 1878,
       "lesson_id": 44,
       "hiragana": "えんぎが わるい",
       "romaji": "engi ga warui",
@@ -25464,7 +24814,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1929,
+      "id": 1879,
       "lesson_id": 45,
       "hiragana": "ばあい",
       "romaji": "baai",
@@ -25477,7 +24827,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1930,
+      "id": 1880,
       "lesson_id": 45,
       "hiragana": "あうます",
       "romaji": "aumasu",
@@ -25490,7 +24840,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1931,
+      "id": 1881,
       "lesson_id": 45,
       "hiragana": "しんじる",
       "romaji": "shinjiru",
@@ -25503,7 +24853,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1932,
+      "id": 1882,
       "lesson_id": 45,
       "hiragana": "よういします",
       "romaji": "youishimasu",
@@ -25516,7 +24866,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1933,
+      "id": 1883,
       "lesson_id": 45,
       "hiragana": "お見舞い",
       "romaji": "omimai",
@@ -25529,7 +24879,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1934,
+      "id": 1884,
       "lesson_id": 45,
       "hiragana": "あやまります",
       "romaji": "ayamarimasu",
@@ -25542,7 +24892,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1935,
+      "id": 1885,
       "lesson_id": 45,
       "hiragana": "あいます（じこに～）",
       "romaji": "aimasu",
@@ -25555,7 +24905,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1936,
+      "id": 1886,
       "lesson_id": 45,
       "hiragana": "しんじます",
       "romaji": "shinjimasu",
@@ -25568,7 +24918,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1937,
+      "id": 1887,
       "lesson_id": 45,
       "hiragana": "キャンセルします",
       "romaji": "kyanserushimasu",
@@ -25581,7 +24931,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1938,
+      "id": 1888,
       "lesson_id": 45,
       "hiragana": "うまくいきます",
       "romaji": "umakuikimasu",
@@ -25594,7 +24944,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1939,
+      "id": 1889,
       "lesson_id": 45,
       "hiragana": "ほしょうしょ",
       "romaji": "hoshousho",
@@ -25607,7 +24957,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1940,
+      "id": 1890,
       "lesson_id": 45,
       "hiragana": "りょうしゅうしょ",
       "romaji": "ryoushuusho",
@@ -25620,7 +24970,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1941,
+      "id": 1891,
       "lesson_id": 45,
       "hiragana": "おくりもの（をします）",
       "romaji": "okurimono",
@@ -25633,7 +24983,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1942,
+      "id": 1892,
       "lesson_id": 45,
       "hiragana": "まちがいでんわ",
       "romaji": "machigaidenwa",
@@ -25646,7 +24996,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1943,
+      "id": 1893,
       "lesson_id": 45,
       "hiragana": "キャンプ",
       "romaji": "kyanpu",
@@ -25659,7 +25009,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1944,
+      "id": 1894,
       "lesson_id": 45,
       "hiragana": "かかり",
       "romaji": "kakari",
@@ -25672,7 +25022,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1945,
+      "id": 1895,
       "lesson_id": 45,
       "hiragana": "ちゅうし",
       "romaji": "chuushi",
@@ -25685,7 +25035,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1946,
+      "id": 1896,
       "lesson_id": 45,
       "hiragana": "てん",
       "romaji": "ten",
@@ -25698,7 +25048,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1947,
+      "id": 1897,
       "lesson_id": 45,
       "hiragana": "レバー",
       "romaji": "rebaa",
@@ -25711,7 +25061,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1948,
+      "id": 1898,
       "lesson_id": 45,
       "hiragana": "[えん」さつ",
       "romaji": "ensatsu",
@@ -25724,7 +25074,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1949,
+      "id": 1899,
       "lesson_id": 45,
       "hiragana": "ちゃんと",
       "romaji": "chanto",
@@ -25737,7 +25087,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1950,
+      "id": 1900,
       "lesson_id": 45,
       "hiragana": "きゅうに",
       "romaji": "kyuuni",
@@ -25750,7 +25100,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1951,
+      "id": 1901,
       "lesson_id": 45,
       "hiragana": "たのしみにしています",
       "romaji": "tanoshimini shiteimasu",
@@ -25763,7 +25113,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1952,
+      "id": 1902,
       "lesson_id": 45,
       "hiragana": "いじょうです",
       "romaji": "ijoudesu",
@@ -25776,7 +25126,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1953,
+      "id": 1903,
       "lesson_id": 45,
       "hiragana": "かかりいん",
       "romaji": "kakariin",
@@ -25789,7 +25139,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1954,
+      "id": 1904,
       "lesson_id": 45,
       "hiragana": "ロース",
       "romaji": "roosu",
@@ -25802,7 +25152,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1955,
+      "id": 1905,
       "lesson_id": 45,
       "hiragana": "スタート",
       "romaji": "sutaato",
@@ -25815,7 +25165,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1956,
+      "id": 1906,
       "lesson_id": 45,
       "hiragana": "ゆうしょうします",
       "romaji": "yuushoushimasu",
@@ -25828,7 +25178,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1957,
+      "id": 1907,
       "lesson_id": 45,
       "hiragana": "なやみ",
       "romaji": "nayami",
@@ -25841,7 +25191,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1958,
+      "id": 1908,
       "lesson_id": 45,
       "hiragana": "めざまし「とけい」",
       "romaji": "mezamashi tokei",
@@ -25854,7 +25204,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1959,
+      "id": 1909,
       "lesson_id": 45,
       "hiragana": "だいがくせい",
       "romaji": "daigakusei",
@@ -25867,7 +25217,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1960,
+      "id": 1910,
       "lesson_id": 45,
       "hiragana": "かいとう",
       "romaji": "kaitou",
@@ -25880,7 +25230,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1961,
+      "id": 1911,
       "lesson_id": 45,
       "hiragana": "セットします",
       "romaji": "settoshimasu",
@@ -25893,7 +25243,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1962,
+      "id": 1912,
       "lesson_id": 45,
       "hiragana": "それでも",
       "romaji": "soredemo",
@@ -25906,7 +25256,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1963,
+      "id": 1913,
       "lesson_id": 46,
       "hiragana": "ばかり",
       "romaji": "bakari",
@@ -25919,7 +25269,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1964,
+      "id": 1914,
       "lesson_id": 46,
       "hiragana": "ところ",
       "romaji": "tokoro",
@@ -25932,7 +25282,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1965,
+      "id": 1915,
       "lesson_id": 46,
       "hiragana": "むかえます",
       "romaji": "mukaemasu",
@@ -25945,7 +25295,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1966,
+      "id": 1916,
       "lesson_id": 46,
       "hiragana": "たずねます",
       "romaji": "tazunemasu",
@@ -25958,7 +25308,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1967,
+      "id": 1917,
       "lesson_id": 46,
       "hiragana": "しんせつ",
       "romaji": "shinsetsu",
@@ -25971,7 +25321,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1968,
+      "id": 1918,
       "lesson_id": 46,
       "hiragana": "やきます",
       "romaji": "yakimasu",
@@ -25984,7 +25334,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1969,
+      "id": 1919,
       "lesson_id": 46,
       "hiragana": "わたします",
       "romaji": "watashimasu",
@@ -25997,7 +25347,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1970,
+      "id": 1920,
       "lesson_id": 46,
       "hiragana": "かえってきます",
       "romaji": "kaettekimasu",
@@ -26010,7 +25360,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1971,
+      "id": 1921,
       "lesson_id": 46,
       "hiragana": "でます [バスがー]",
       "romaji": "demasu",
@@ -26023,7 +25373,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1972,
+      "id": 1922,
       "lesson_id": 46,
       "hiragana": "たくはいびん",
       "romaji": "takuhaibin",
@@ -26036,7 +25386,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1973,
+      "id": 1923,
       "lesson_id": 46,
       "hiragana": "げんいん",
       "romaji": "gen-in",
@@ -26049,7 +25399,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1974,
+      "id": 1924,
       "lesson_id": 46,
       "hiragana": "ちゅうしゃ",
       "romaji": "chuusha",
@@ -26062,7 +25412,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1975,
+      "id": 1925,
       "lesson_id": 46,
       "hiragana": "しょくよく",
       "romaji": "shokuyoku",
@@ -26075,7 +25425,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1976,
+      "id": 1926,
       "lesson_id": 46,
       "hiragana": "バンフレット",
       "romaji": "panfuretto",
@@ -26088,7 +25438,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1977,
+      "id": 1927,
       "lesson_id": 46,
       "hiragana": "ステレオ",
       "romaji": "sutereo",
@@ -26101,7 +25451,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1978,
+      "id": 1928,
       "lesson_id": 46,
       "hiragana": "こちら",
       "romaji": "kochira",
@@ -26114,7 +25464,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1979,
+      "id": 1929,
       "lesson_id": 46,
       "hiragana": "~のところ",
       "romaji": "no tokoro",
@@ -26127,7 +25477,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1980,
+      "id": 1930,
       "lesson_id": 46,
       "hiragana": "ちょうど",
       "romaji": "choudo",
@@ -26140,7 +25490,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1981,
+      "id": 1931,
       "lesson_id": 46,
       "hiragana": "たったいま",
       "romaji": "tattaima",
@@ -26153,7 +25503,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1982,
+      "id": 1932,
       "lesson_id": 46,
       "hiragana": "いまいいでしょうか",
       "romaji": "ima ii deshou ka",
@@ -26166,7 +25516,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1983,
+      "id": 1933,
       "lesson_id": 46,
       "hiragana": "ガスサービスセンター",
       "romaji": "gasusaabisusentaa",
@@ -26179,7 +25529,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1984,
+      "id": 1934,
       "lesson_id": 46,
       "hiragana": "ガスコンロ",
       "romaji": "gasukonro",
@@ -26192,7 +25542,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1985,
+      "id": 1935,
       "lesson_id": 46,
       "hiragana": "ぐあい",
       "romaji": "guai",
@@ -26205,7 +25555,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1986,
+      "id": 1936,
       "lesson_id": 46,
       "hiragana": "どちらさまでしょうか",
       "romaji": "dochira sama deshou ka",
@@ -26218,7 +25568,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1987,
+      "id": 1937,
       "lesson_id": 46,
       "hiragana": "むかいます",
       "romaji": "mukaimasu",
@@ -26231,7 +25581,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1988,
+      "id": 1938,
       "lesson_id": 46,
       "hiragana": "おまたせしました。",
       "romaji": "omataseshimashita",
@@ -26244,7 +25594,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1989,
+      "id": 1939,
       "lesson_id": 46,
       "hiragana": "ちしき",
       "romaji": "chishiki",
@@ -26257,7 +25607,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1990,
+      "id": 1940,
       "lesson_id": 46,
       "hiragana": "ほうこ",
       "romaji": "houko",
@@ -26270,7 +25620,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1991,
+      "id": 1941,
       "lesson_id": 46,
       "hiragana": "てにはいります[じょうほうが~]",
       "romaji": "te ni hairimasu",
@@ -26283,7 +25633,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1992,
+      "id": 1942,
       "lesson_id": 46,
       "hiragana": "システム",
       "romaji": "shisutemu",
@@ -26296,7 +25646,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1993,
+      "id": 1943,
       "lesson_id": 46,
       "hiragana": "キーワード",
       "romaji": "kiiwādo",
@@ -26309,7 +25659,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1994,
+      "id": 1944,
       "lesson_id": 46,
       "hiragana": "いちぶぶん",
       "romaji": "ichibubun",
@@ -26322,7 +25672,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1995,
+      "id": 1945,
       "lesson_id": 46,
       "hiragana": "にゅうりょくします",
       "romaji": "nyuuryokushimasu",
@@ -26335,7 +25685,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1996,
+      "id": 1946,
       "lesson_id": 46,
       "hiragana": "びょう",
       "romaji": "byou",
@@ -26348,7 +25698,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1997,
+      "id": 1947,
       "lesson_id": 46,
       "hiragana": "でます[ほんが~]",
       "romaji": "demasu",
@@ -26361,7 +25711,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1998,
+      "id": 1948,
       "lesson_id": 47,
       "hiragana": "そうです",
       "romaji": "soudesu",
@@ -26374,7 +25724,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1999,
+      "id": 1949,
       "lesson_id": 47,
       "hiragana": "ようです",
       "romaji": "youdesu",
@@ -26387,7 +25737,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2000,
+      "id": 1950,
       "lesson_id": 47,
       "hiragana": "おと",
       "romaji": "oto",
@@ -26400,7 +25750,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2001,
+      "id": 1951,
       "lesson_id": 47,
       "hiragana": "におい",
       "romaji": "nioi",
@@ -26413,7 +25763,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2002,
+      "id": 1952,
       "lesson_id": 47,
       "hiragana": "あじ",
       "romaji": "aji",
@@ -26426,7 +25776,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2003,
+      "id": 1953,
       "lesson_id": 47,
       "hiragana": "あつまります [ひとが~]",
       "romaji": "atsumarimasu [hito ga~]",
@@ -26439,7 +25789,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2004,
+      "id": 1954,
       "lesson_id": 47,
       "hiragana": "わかれます [ひとが~]",
       "romaji": "wakaremasu [hito ga~]",
@@ -26452,7 +25802,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2005,
+      "id": 1955,
       "lesson_id": 47,
       "hiragana": "ながいきます",
       "romaji": "nagaikimasu",
@@ -26465,7 +25815,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2006,
+      "id": 1956,
       "lesson_id": 47,
       "hiragana": "[おと/こえが~] します",
       "romaji": "[oto/koe ga~] shimasu",
@@ -26478,7 +25828,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2007,
+      "id": 1957,
       "lesson_id": 47,
       "hiragana": "[あじが~] します",
       "romaji": "[aji ga~] shimasu",
@@ -26491,7 +25841,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2008,
+      "id": 1958,
       "lesson_id": 47,
       "hiragana": "[においが~] します",
       "romaji": "[nioi ga~] shimasu",
@@ -26504,7 +25854,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2009,
+      "id": 1959,
       "lesson_id": 47,
       "hiragana": "[かさを~] さします",
       "romaji": "[kasa o~] sashimasu",
@@ -26517,7 +25867,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2010,
+      "id": 1960,
       "lesson_id": 47,
       "hiragana": "ひどい",
       "romaji": "hidoi",
@@ -26530,7 +25880,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2011,
+      "id": 1961,
       "lesson_id": 47,
       "hiragana": "てんきよほう",
       "romaji": "tenki yohou",
@@ -26543,7 +25893,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2012,
+      "id": 1962,
       "lesson_id": 47,
       "hiragana": "はっぴょう",
       "romaji": "happyou",
@@ -26556,7 +25906,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2013,
+      "id": 1963,
       "lesson_id": 47,
       "hiragana": "じっけん",
       "romaji": "jikken",
@@ -26569,7 +25919,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2014,
+      "id": 1964,
       "lesson_id": 47,
       "hiragana": "じんこう",
       "romaji": "jinkou",
@@ -26582,7 +25932,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2015,
+      "id": 1965,
       "lesson_id": 47,
       "hiragana": "かがく",
       "romaji": "kagaku",
@@ -26595,7 +25945,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2016,
+      "id": 1966,
       "lesson_id": 47,
       "hiragana": "いがく",
       "romaji": "igaku",
@@ -26608,7 +25958,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2017,
+      "id": 1967,
       "lesson_id": 47,
       "hiragana": "ぶんがく",
       "romaji": "bungaku",
@@ -26621,7 +25971,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2018,
+      "id": 1968,
       "lesson_id": 47,
       "hiragana": "パトカー",
       "romaji": "patokaa",
@@ -26634,7 +25984,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2019,
+      "id": 1969,
       "lesson_id": 47,
       "hiragana": "きゅうきゅうしゃ",
       "romaji": "kyuukyuusha",
@@ -26647,7 +25997,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2020,
+      "id": 1970,
       "lesson_id": 47,
       "hiragana": "さんせい",
       "romaji": "sansei",
@@ -26660,7 +26010,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2021,
+      "id": 1971,
       "lesson_id": 47,
       "hiragana": "はんたい",
       "romaji": "hantai",
@@ -26673,7 +26023,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2022,
+      "id": 1972,
       "lesson_id": 47,
       "hiragana": "だんせい",
       "romaji": "dansei",
@@ -26686,7 +26036,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2023,
+      "id": 1973,
       "lesson_id": 47,
       "hiragana": "じょせい",
       "romaji": "josei",
@@ -26699,7 +26049,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2024,
+      "id": 1974,
       "lesson_id": 47,
       "hiragana": "~によると",
       "romaji": "~ni yoru to",
@@ -26712,7 +26062,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2025,
+      "id": 1975,
       "lesson_id": 47,
       "hiragana": "イラン",
       "romaji": "iran",
@@ -26725,7 +26075,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2026,
+      "id": 1976,
       "lesson_id": 47,
       "hiragana": "こんやくします",
       "romaji": "konyakushimasu",
@@ -26738,7 +26088,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2027,
+      "id": 1977,
       "lesson_id": 47,
       "hiragana": "あいて",
       "romaji": "aite",
@@ -26751,7 +26101,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2028,
+      "id": 1978,
       "lesson_id": 47,
       "hiragana": "しりあいます",
       "romaji": "shiriaimasu",
@@ -26764,7 +26114,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2029,
+      "id": 1979,
       "lesson_id": 47,
       "hiragana": "へいきんじゅみょう",
       "romaji": "heikinjumyou",
@@ -26777,7 +26127,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2030,
+      "id": 1980,
       "lesson_id": 47,
       "hiragana": "くらべます[だんせい]",
       "romaji": "kurabemasu [dansei]",
@@ -26790,7 +26140,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2031,
+      "id": 1981,
       "lesson_id": 47,
       "hiragana": "はかせ",
       "romaji": "hakase",
@@ -26803,7 +26153,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2032,
+      "id": 1982,
       "lesson_id": 47,
       "hiragana": "のう",
       "romaji": "nou",
@@ -26816,7 +26166,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2033,
+      "id": 1983,
       "lesson_id": 47,
       "hiragana": "ホルチン",
       "romaji": "horuchin",
@@ -26829,7 +26179,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2034,
+      "id": 1984,
       "lesson_id": 47,
       "hiragana": "けしょうひん",
       "romaji": "keshouhin",
@@ -26842,7 +26192,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2035,
+      "id": 1985,
       "lesson_id": 47,
       "hiragana": "しらべ",
       "romaji": "shirabe",
@@ -26855,7 +26205,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2036,
+      "id": 1986,
       "lesson_id": 47,
       "hiragana": "けしょう「～をします」",
       "romaji": "keshou [~o shimasu]",
@@ -26868,7 +26218,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2037,
+      "id": 1987,
       "lesson_id": 48,
       "hiragana": "いかせます",
       "romaji": "ikasemasu",
@@ -26881,7 +26231,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2038,
+      "id": 1988,
       "lesson_id": 48,
       "hiragana": "じゅんびします",
       "romaji": "junbishimasu",
@@ -26894,7 +26244,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2039,
+      "id": 1989,
       "lesson_id": 48,
       "hiragana": "しゅっせきします",
       "romaji": "shussekishimasu",
@@ -26907,7 +26257,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2040,
+      "id": 1990,
       "lesson_id": 48,
       "hiragana": "けっせきします",
       "romaji": "kessekishimasu",
@@ -26920,7 +26270,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2041,
+      "id": 1991,
       "lesson_id": 48,
       "hiragana": "いけん",
       "romaji": "iken",
@@ -26933,7 +26283,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2042,
+      "id": 1992,
       "lesson_id": 48,
       "hiragana": "おろします",
       "romaji": "oroshimasu",
@@ -26946,7 +26296,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2043,
+      "id": 1993,
       "lesson_id": 48,
       "hiragana": "とどけます",
       "romaji": "todokemasu",
@@ -26959,7 +26309,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2044,
+      "id": 1994,
       "lesson_id": 48,
       "hiragana": "いや[な]",
       "romaji": "iya",
@@ -26972,7 +26322,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2045,
+      "id": 1995,
       "lesson_id": 48,
       "hiragana": "じゅく",
       "romaji": "juku",
@@ -26985,7 +26335,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2046,
+      "id": 1996,
       "lesson_id": 48,
       "hiragana": "スケジュール",
       "romaji": "sukejuuru",
@@ -26998,7 +26348,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2047,
+      "id": 1997,
       "lesson_id": 48,
       "hiragana": "せいと",
       "romaji": "seito",
@@ -27011,7 +26361,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2048,
+      "id": 1998,
       "lesson_id": 48,
       "hiragana": "にゅうかん",
       "romaji": "nyuukan",
@@ -27024,7 +26374,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2049,
+      "id": 1999,
       "lesson_id": 48,
       "hiragana": "さいにゅうこくビザ",
       "romaji": "sainyuukoku biza",
@@ -27037,7 +26387,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2050,
+      "id": 2000,
       "lesson_id": 48,
       "hiragana": "~かん",
       "romaji": "~kan",
@@ -27050,7 +26400,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2051,
+      "id": 2001,
       "lesson_id": 48,
       "hiragana": "いいことですね。",
       "romaji": "ii koto desu ne",
@@ -27063,7 +26413,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2052,
+      "id": 2002,
       "lesson_id": 48,
       "hiragana": "おいそがしいですか。",
       "romaji": "oisogashii desu ka",
@@ -27076,7 +26426,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2053,
+      "id": 2003,
       "lesson_id": 48,
       "hiragana": "ひさしぶり",
       "romaji": "hisashiburi",
@@ -27089,7 +26439,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2054,
+      "id": 2004,
       "lesson_id": 48,
       "hiragana": "えいぎょう",
       "romaji": "eigyou",
@@ -27102,7 +26452,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2055,
+      "id": 2005,
       "lesson_id": 48,
       "hiragana": "それまでに",
       "romaji": "sore made ni",
@@ -27115,7 +26465,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2056,
+      "id": 2006,
       "lesson_id": 48,
       "hiragana": "かまいません",
       "romaji": "kamaimasen",
@@ -27128,7 +26478,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2057,
+      "id": 2007,
       "lesson_id": 48,
       "hiragana": "たのしみます",
       "romaji": "tanoshimasu",
@@ -27141,7 +26491,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2058,
+      "id": 2008,
       "lesson_id": 48,
       "hiragana": "もともと",
       "romaji": "motomoto",
@@ -27154,7 +26504,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2059,
+      "id": 2009,
       "lesson_id": 48,
       "hiragana": "かわりをします",
       "romaji": "kawari o shimasu",
@@ -27167,7 +26517,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2060,
+      "id": 2010,
       "lesson_id": 48,
       "hiragana": "スピード",
       "romaji": "supiido",
@@ -27180,7 +26530,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2061,
+      "id": 2011,
       "lesson_id": 48,
       "hiragana": "きょうそうします",
       "romaji": "kyousoushimasu",
@@ -27193,7 +26543,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2062,
+      "id": 2012,
       "lesson_id": 48,
       "hiragana": "サーカス",
       "romaji": "saakasu",
@@ -27206,7 +26556,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2063,
+      "id": 2013,
       "lesson_id": 48,
       "hiragana": "げい",
       "romaji": "gei",
@@ -27219,7 +26569,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2064,
+      "id": 2014,
       "lesson_id": 48,
       "hiragana": "すがた",
       "romaji": "sugata",
@@ -27232,7 +26582,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2065,
+      "id": 2015,
       "lesson_id": 48,
       "hiragana": "こころ",
       "romaji": "kokoro",
@@ -27245,7 +26595,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2066,
+      "id": 2016,
       "lesson_id": 48,
       "hiragana": "とらえます",
       "romaji": "toraemasu",
@@ -27258,7 +26608,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2067,
+      "id": 2017,
       "lesson_id": 48,
       "hiragana": "~にとって",
       "romaji": "~ni totte",
@@ -27271,7 +26621,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2068,
+      "id": 2018,
       "lesson_id": 49,
       "hiragana": "いらっしゃいます",
       "romaji": "irasshaimasu",
@@ -27284,7 +26634,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2069,
+      "id": 2019,
       "lesson_id": 49,
       "hiragana": "めしあがります",
       "romaji": "meshiagarimasu",
@@ -27297,7 +26647,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2070,
+      "id": 2020,
       "lesson_id": 49,
       "hiragana": "おっしゃいます",
       "romaji": "osshaimasu",
@@ -27310,7 +26660,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2071,
+      "id": 2021,
       "lesson_id": 49,
       "hiragana": "なさいます",
       "romaji": "nasaimasu",
@@ -27323,7 +26673,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2072,
+      "id": 2022,
       "lesson_id": 49,
       "hiragana": "ごらんに なります",
       "romaji": "goranninarimasu",
@@ -27336,7 +26686,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2073,
+      "id": 2023,
       "lesson_id": 49,
       "hiragana": "つとめます [かいしゃに~]",
       "romaji": "tsutomemasu",
@@ -27349,7 +26699,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2074,
+      "id": 2024,
       "lesson_id": 49,
       "hiragana": "やすみます",
       "romaji": "yasumimasu",
@@ -27362,7 +26712,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2075,
+      "id": 2025,
       "lesson_id": 49,
       "hiragana": "すごします",
       "romaji": "sugoshimasu",
@@ -27375,7 +26725,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2076,
+      "id": 2026,
       "lesson_id": 49,
       "hiragana": "よります [ぎんこうに~]",
       "romaji": "yorimasu",
@@ -27388,7 +26738,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2077,
+      "id": 2027,
       "lesson_id": 49,
       "hiragana": "ごらんになります",
       "romaji": "goran ni narimasu",
@@ -27401,7 +26751,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2078,
+      "id": 2028,
       "lesson_id": 49,
       "hiragana": "あいさつ",
       "romaji": "aisatsu",
@@ -27414,7 +26764,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2079,
+      "id": 2029,
       "lesson_id": 49,
       "hiragana": "はいざら",
       "romaji": "haizara",
@@ -27427,7 +26777,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2080,
+      "id": 2030,
       "lesson_id": 49,
       "hiragana": "りょかん",
       "romaji": "ryokan",
@@ -27440,7 +26790,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2081,
+      "id": 2031,
       "lesson_id": 49,
       "hiragana": "かいじょう",
       "romaji": "kaijou",
@@ -27453,7 +26803,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2082,
+      "id": 2032,
       "lesson_id": 49,
       "hiragana": "バスてい",
       "romaji": "basutei",
@@ -27466,7 +26816,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2083,
+      "id": 2033,
       "lesson_id": 49,
       "hiragana": "ぼうえき",
       "romaji": "boueki",
@@ -27479,7 +26829,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2084,
+      "id": 2034,
       "lesson_id": 49,
       "hiragana": "~さま",
       "romaji": "sama",
@@ -27492,7 +26842,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2085,
+      "id": 2035,
       "lesson_id": 49,
       "hiragana": "かえりに",
       "romaji": "kaerini",
@@ -27505,7 +26855,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2086,
+      "id": 2036,
       "lesson_id": 49,
       "hiragana": "たまに",
       "romaji": "tamani",
@@ -27518,7 +26868,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2087,
+      "id": 2037,
       "lesson_id": 49,
       "hiragana": "ちっとも",
       "romaji": "chittomo",
@@ -27531,7 +26881,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2088,
+      "id": 2038,
       "lesson_id": 49,
       "hiragana": "えんりょなく",
       "romaji": "enryonaku",
@@ -27544,7 +26894,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2089,
+      "id": 2039,
       "lesson_id": 49,
       "hiragana": "~ねん~(1ねん3くみ)",
       "romaji": "nen",
@@ -27557,7 +26907,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2090,
+      "id": 2040,
       "lesson_id": 49,
       "hiragana": "では",
       "romaji": "dewa",
@@ -27570,7 +26920,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2091,
+      "id": 2041,
       "lesson_id": 49,
       "hiragana": "たします(ねつを~)",
       "romaji": "dashimasu",
@@ -27583,7 +26933,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2092,
+      "id": 2042,
       "lesson_id": 49,
       "hiragana": "よろしくおつたえください",
       "romaji": "yoroshiku otsutae kudasai",
@@ -27596,7 +26946,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2093,
+      "id": 2043,
       "lesson_id": 49,
       "hiragana": "しつれいいたします",
       "romaji": "shitsurei itashimasu",
@@ -27609,7 +26959,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2094,
+      "id": 2044,
       "lesson_id": 49,
       "hiragana": "こうし",
       "romaji": "koushi",
@@ -27622,7 +26972,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2095,
+      "id": 2045,
       "lesson_id": 49,
       "hiragana": "おおくの~",
       "romaji": "ooku no",
@@ -27635,7 +26985,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2096,
+      "id": 2046,
       "lesson_id": 49,
       "hiragana": "さくひん",
       "romaji": "saku-hin",
@@ -27648,7 +26998,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2097,
+      "id": 2047,
       "lesson_id": 49,
       "hiragana": "じゅしょうします",
       "romaji": "jushou shimasu",
@@ -27661,7 +27011,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2098,
+      "id": 2048,
       "lesson_id": 49,
       "hiragana": "せかいてきに",
       "romaji": "sekaitekini",
@@ -27674,7 +27024,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2099,
+      "id": 2049,
       "lesson_id": 49,
       "hiragana": "さっか",
       "romaji": "sakka",
@@ -27687,7 +27037,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2100,
+      "id": 2050,
       "lesson_id": 49,
       "hiragana": "~でございます。",
       "romaji": "degozaimasu",
@@ -27700,7 +27050,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2101,
+      "id": 2051,
       "lesson_id": 49,
       "hiragana": "ちょうなん",
       "romaji": "chounan",
@@ -27713,7 +27063,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2102,
+      "id": 2052,
       "lesson_id": 49,
       "hiragana": "しょうがい",
       "romaji": "shougai",
@@ -27726,7 +27076,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2103,
+      "id": 2053,
       "lesson_id": 49,
       "hiragana": "お持ちです",
       "romaji": "omochidesu",
@@ -27739,7 +27089,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2104,
+      "id": 2054,
       "lesson_id": 49,
       "hiragana": "さっきょく",
       "romaji": "sakkyoku",
@@ -27752,7 +27102,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2105,
+      "id": 2055,
       "lesson_id": 49,
       "hiragana": "かつどう",
       "romaji": "katsudou",
@@ -27765,7 +27115,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2106,
+      "id": 2056,
       "lesson_id": 49,
       "hiragana": "それでは",
       "romaji": "soredewa",
@@ -27778,7 +27128,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2107,
+      "id": 2057,
       "lesson_id": 49,
       "hiragana": "とうきょうだいがく",
       "romaji": "toukyoudaigaku",
@@ -27791,7 +27141,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2108,
+      "id": 2058,
       "lesson_id": 49,
       "hiragana": "ノーベルぶんがくしょう",
       "romaji": "nooberubungakushou",
@@ -27804,7 +27154,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2109,
+      "id": 2059,
       "lesson_id": 50,
       "hiragana": "まいります",
       "romaji": "mairimasu",
@@ -27817,7 +27167,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2110,
+      "id": 2060,
       "lesson_id": 50,
       "hiragana": "おります",
       "romaji": "orimasu",
@@ -27830,7 +27180,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2111,
+      "id": 2061,
       "lesson_id": 50,
       "hiragana": "いただきます",
       "romaji": "itadakemasu",
@@ -27843,7 +27193,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2112,
+      "id": 2062,
       "lesson_id": 50,
       "hiragana": "申します",
       "romaji": "moushimasu",
@@ -27856,7 +27206,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2113,
+      "id": 2063,
       "lesson_id": 50,
       "hiragana": "いたします",
       "romaji": "itashimasu",
@@ -27869,7 +27219,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2114,
+      "id": 2064,
       "lesson_id": 50,
       "hiragana": "もうします",
       "romaji": "moushimasu",
@@ -27882,7 +27232,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2115,
+      "id": 2065,
       "lesson_id": 50,
       "hiragana": "はいけんします",
       "romaji": "haikenshimasu",
@@ -27895,7 +27245,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2116,
+      "id": 2066,
       "lesson_id": 50,
       "hiragana": "ぞんじます",
       "romaji": "zonjimasu",
@@ -27908,7 +27258,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2117,
+      "id": 2067,
       "lesson_id": 50,
       "hiragana": "おめにかかります",
       "romaji": "ome ni kakarimasu",
@@ -27921,7 +27271,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2118,
+      "id": 2068,
       "lesson_id": 50,
       "hiragana": "ございます",
       "romaji": "gozaimasu",
@@ -27934,7 +27284,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2119,
+      "id": 2069,
       "lesson_id": 50,
       "hiragana": "~でございます",
       "romaji": "de gozaimasu",
@@ -27947,7 +27297,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2120,
+      "id": 2070,
       "lesson_id": 50,
       "hiragana": "わたくし",
       "romaji": "watakushi",
@@ -27960,7 +27310,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2121,
+      "id": 2071,
       "lesson_id": 50,
       "hiragana": "ガイド",
       "romaji": "gaido",
@@ -27973,7 +27323,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2122,
+      "id": 2072,
       "lesson_id": 50,
       "hiragana": "おたく",
       "romaji": "otaku",
@@ -27986,7 +27336,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2123,
+      "id": 2073,
       "lesson_id": 50,
       "hiragana": "こうがい",
       "romaji": "kougai",
@@ -27999,7 +27349,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2124,
+      "id": 2074,
       "lesson_id": 50,
       "hiragana": "アルバム",
       "romaji": "arubamu",
@@ -28012,7 +27362,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2125,
+      "id": 2075,
       "lesson_id": 50,
       "hiragana": "さらいしゅう",
       "romaji": "saraishuu",
@@ -28025,7 +27375,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2126,
+      "id": 2076,
       "lesson_id": 50,
       "hiragana": "さらいげつ",
       "romaji": "saraigetsu",
@@ -28038,7 +27388,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2127,
+      "id": 2077,
       "lesson_id": 50,
       "hiragana": "さらいねん",
       "romaji": "sarainen",
@@ -28051,7 +27401,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2128,
+      "id": 2078,
       "lesson_id": 50,
       "hiragana": "はんとし",
       "romaji": "hantoshi",
@@ -28064,7 +27414,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2129,
+      "id": 2079,
       "lesson_id": 50,
       "hiragana": "さいしょに",
       "romaji": "saishoni",
@@ -28077,7 +27427,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2130,
+      "id": 2080,
       "lesson_id": 50,
       "hiragana": "さいごに",
       "romaji": "saigoni",
@@ -28090,7 +27440,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2131,
+      "id": 2081,
       "lesson_id": 50,
       "hiragana": "ただいま",
       "romaji": "tadaima",
@@ -28103,7 +27453,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2132,
+      "id": 2082,
       "lesson_id": 50,
       "hiragana": "きんちょうします",
       "romaji": "kinchoushimasu",
@@ -28116,7 +27466,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2133,
+      "id": 2083,
       "lesson_id": 50,
       "hiragana": "ほうそうします",
       "romaji": "housoushimasu",
@@ -28129,7 +27479,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2134,
+      "id": 2084,
       "lesson_id": 50,
       "hiragana": "しょうきん",
       "romaji": "shoukin",
@@ -28142,7 +27492,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2135,
+      "id": 2085,
       "lesson_id": 50,
       "hiragana": "きりん",
       "romaji": "kirin",
@@ -28155,7 +27505,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2136,
+      "id": 2086,
       "lesson_id": 50,
       "hiragana": "ぞう",
       "romaji": "zou",
@@ -28168,7 +27518,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2137,
+      "id": 2087,
       "lesson_id": 50,
       "hiragana": "ころ",
       "romaji": "koro",
@@ -28181,7 +27531,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2138,
+      "id": 2088,
       "lesson_id": 50,
       "hiragana": "かないます",
       "romaji": "kanaimasu",
@@ -28194,7 +27544,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2139,
+      "id": 2089,
       "lesson_id": 50,
       "hiragana": "ひとことよろしいでしょうか",
       "romaji": "hitokoto yoroshii deshou ka",
@@ -28207,7 +27557,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2140,
+      "id": 2090,
       "lesson_id": 50,
       "hiragana": "きょうりょくします",
       "romaji": "kyouryoku shimasu",
@@ -28220,7 +27570,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2141,
+      "id": 2091,
       "lesson_id": 50,
       "hiragana": "こころから",
       "romaji": "kokoro kara",
@@ -28233,7 +27583,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2142,
+      "id": 2092,
       "lesson_id": 50,
       "hiragana": "かんしゃします",
       "romaji": "kansha shimasu",
@@ -28246,7 +27596,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2143,
+      "id": 2093,
       "lesson_id": 50,
       "hiragana": "はいけい",
       "romaji": "haikei",
@@ -28259,7 +27609,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2144,
+      "id": 2094,
       "lesson_id": 50,
       "hiragana": "おげんきでいらっしゃいますか?",
       "romaji": "ogenki de irasshaimasu ka",
@@ -28272,7 +27622,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2145,
+      "id": 2095,
       "lesson_id": 50,
       "hiragana": "めいわくをかけます",
       "romaji": "meiwaku o kakemasu",
@@ -28285,7 +27635,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2146,
+      "id": 2096,
       "lesson_id": 50,
       "hiragana": "いかします",
       "romaji": "ikashimasu",
@@ -28298,7 +27648,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2147,
+      "id": 2097,
       "lesson_id": 50,
       "hiragana": "[お]しろ",
       "romaji": "oshiro",
@@ -28311,7 +27661,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2148,
+      "id": 2098,
       "lesson_id": 50,
       "hiragana": "けいぐ",
       "romaji": "keigu",
@@ -28324,7 +27674,7 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2149,
+      "id": 2099,
       "lesson_id": 50,
       "hiragana": "ミュンヘン",
       "romaji": "myunhen",
