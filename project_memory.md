@@ -1112,6 +1112,12 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Push Git**:
   - Chạy `full_criteria_audit_lessons_1_to_6.js` đạt 0 lỗi Romaji và 0 lỗi mismatch. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
 
+### Mốc 90: Quy đổi 100% phương án lựa chọn A/B/C/D Dạng 2 & Dạng 3 từ Romaji về Chữ Nhật chuẩn (Đã hoàn thành & Đã đẩy GitHub - 06/08/2026)
+- **Chuẩn hóa phương án trắc nghiệm options & correct**:
+  - Quy đổi 78 phương án Romaji ở Dạng 2 (`kasa` ➔ `かさ`, `hon` ➔ `ほん`, `gakusei` ➔ `がくせい`, `kyoushi` ➔ `きょうし`...) và 20 phương án Romaji ở Dạng 3 (`Sumimasen` ➔ `すみません`, `Arigatou gozaimasu` ➔ `ありがとうございます`...) về chữ Hiragana/Katakana/Kanji Nhật chuẩn.
+- **Kiểm định & Push Git**:
+  - Chạy `find_all_romaji_options_across_all_lessons.js` đạt 0 phương án Romaji còn sót lại. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
+
 
 
 

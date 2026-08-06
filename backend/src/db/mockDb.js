@@ -41084,12 +41084,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "kasa",
+              "correct": "かさ",
               "options": [
-                "kasa",
-                "hon",
-                "tsukue",
-                "isu"
+                "かさ",
+                "ほん",
+                "つくえ",
+                "いす"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc ô kia có phải là của anh ấy không (hoặc vật đó ở đằng kia là ô).\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"kasa\"."
@@ -41113,12 +41113,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "dare",
+              "correct": "だれ",
               "options": [
-                "dare",
-                "nan",
-                "doko",
-                "dochira"
+                "だれ",
+                "なん",
+                "どこ",
+                "どちら"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B quyển tạp chí này là của ai.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"dare\"."
@@ -41142,12 +41142,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nan",
+              "correct": "なん",
               "options": [
-                "nan",
-                "dare",
-                "kore",
-                "sore"
+                "なん",
+                "だれ",
+                "これ",
+                "それ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc cặp sách màu đen này là cái gì.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nan\"."
@@ -41171,12 +41171,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "hai",
+              "correct": "はい",
               "options": [
-                "hai",
-                "ii e",
-                "dare",
-                "nan"
+                "はい",
+                "いいえ",
+                "だれ",
+                "なん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A nói rằng đây là chiếc bút chì, và B đáp lại vâng đúng vậy.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"hai\"."
@@ -41200,12 +41200,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nihon",
+              "correct": "にほん",
               "options": [
-                "nihon",
-                "dare",
-                "nan",
-                "kore"
+                "にほん",
+                "だれ",
+                "なん",
+                "これ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi chiếc máy ảnh này là của nước nào.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nihon\"."
@@ -41229,12 +41229,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "dare no",
+              "correct": "だれの",
               "options": [
-                "dare no",
-                "nan",
-                "nihon",
-                "eigo"
+                "だれの",
+                "なん",
+                "にほん",
+                "えいご"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc máy vi tính này là của công ty nào hay của ai.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"dare no\"."
@@ -41258,12 +41258,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "meishi",
+              "correct": "めいし",
               "options": [
-                "meishi",
-                "hon",
-                "kasa",
-                "kagi"
+                "めいし",
+                "ほん",
+                "かさ",
+                "かぎ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây có phải là danh thiếp không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"meishi\"."
@@ -41287,12 +41287,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "hai",
+              "correct": "はい",
               "options": [
-                "hai",
-                "iie",
-                "chigaimasu",
-                "nan"
+                "はい",
+                "いいえ",
+                "ちがいます",
+                "なん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc chìa khóa đó có phải của trường đại học không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"hai\"."
@@ -41316,12 +41316,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "isu",
+              "correct": "いす",
               "options": [
-                "isu",
-                "kaban",
-                "kasa",
-                "hon"
+                "いす",
+                "かばん",
+                "かさ",
+                "ほん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây là cái bàn hay cái ghế.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"isu\"."
@@ -41345,12 +41345,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "honno kimochi",
+              "correct": "ほんのきもち",
               "options": [
-                "honno kimochi",
-                "omiyage",
-                "chokoreeto",
-                "koohii"
+                "ほんのきもち",
+                "おみやげ",
+                "チョコレート",
+                "コーヒー"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A đưa quà và nói đây là chút lòng thành.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"honno kimochi\"."
@@ -41374,12 +41374,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "doumo",
+              "correct": "どうも",
               "options": [
-                "doumo",
-                "hai",
-                "iie",
-                "sou"
+                "どうも",
+                "はい",
+                "いいえ",
+                "そう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A giới thiệu đây là quà lưu niệm.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"doumo\"."
@@ -41403,12 +41403,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nihongo",
+              "correct": "にほんご",
               "options": [
-                "nihongo",
-                "furansu",
-                "doitsu",
-                "chuugoku"
+                "にほんご",
+                "フランス",
+                "ドイツ",
+                "中国"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B quyển sổ tay này là tiếng Anh hay tiếng Nhật.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nihongo\"."
@@ -41432,12 +41432,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "kaisha",
+              "correct": "かいしゃ",
               "options": [
-                "kaisha",
-                "daigaku",
-                "byouin",
-                "ginkou"
+                "かいしゃ",
+                "だいがく",
+                "びょういん",
+                "ぎんこう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc ô tô kia có phải của công ty không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"kaisha\"."
@@ -41461,12 +41461,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "chokoreeto",
+              "correct": "チョコレート",
               "options": [
-                "chokoreeto",
-                "koohii",
-                "shii dii",
-                "terebi"
+                "チョコレート",
+                "コーヒー",
+                "CD",
+                "テレビ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây có phải là sô-cô-la không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"chokoreeto\"."
@@ -41490,12 +41490,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "sou",
+              "correct": "そう",
               "options": [
-                "sou",
-                "nan",
-                "dare",
-                "doko"
+                "そう",
+                "なん",
+                "だれ",
+                "どこ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A nói cái này là tivi, và B hỏi lại thế à.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"sou\"."
@@ -41519,12 +41519,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "isha",
+              "correct": "いしゃ",
               "options": [
-                "isha",
-                "gakusei",
-                "kaishain",
-                "ginkouin"
+                "いしゃ",
+                "がくせい",
+                "かいしゃいん",
+                "ぎんこういん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B cuốn tạp chí này có phải là của bác sĩ không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"isha\"."
@@ -41548,12 +41548,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "shii dii",
+              "correct": "CD",
               "options": [
-                "shii dii",
-                "kamera",
-                "terebi",
-                "konpyuuta"
+                "CD",
+                "カメラ",
+                "テレビ",
+                "コンピューター"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây có phải là đĩa CD không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"shii dii\"."
@@ -41577,12 +41577,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "shaapu penshiru",
+              "correct": "シャープペンシル",
               "options": [
-                "shaapu penshiru",
-                "boorupen",
-                "enpitsu",
-                "jisho"
+                "シャープペンシル",
+                "ボールペン",
+                "えんぴつ",
+                "じしょ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A nói cái kia là bút chì kim (sharp pencil).\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"shaapu penshiru\"."
@@ -41606,12 +41606,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "shinbun",
+              "correct": "しんぶん",
               "options": [
-                "shinbun",
-                "zasshi",
-                "hon",
-                "nooto"
+                "しんぶん",
+                "ざっし",
+                "ほん",
+                "ノート"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B cái này là báo tiếng Nhật phải không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"shinbun\"."
@@ -44260,7 +44260,7 @@ module.exports = {
               "options": [
                 "はい",
                 "いいえ",
-                "わかりません"
+                "ちがいます"
               ]
             }
           ],
@@ -44296,7 +44296,7 @@ module.exports = {
               "correct": "こんぴゅーた",
               "options": [
                 "めいし",
-                "こんぴゅ-た",
+                "こんぴゅーた",
                 "てちょう"
               ]
             },
@@ -50153,12 +50153,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "gakusei",
+              "correct": "がくせい",
               "options": [
-                "gakusei",
-                "isya",
-                "kyoushi",
-                "ginkouin"
+                "がくせい",
+                "いしゃ",
+                "きょうし",
+                "ぎんこういん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về nghề nghiệp\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"gakusei\"."
@@ -50182,12 +50182,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "betonamu",
+              "correct": "ベトナム",
               "options": [
-                "betonamu",
-                "amerika",
-                "igirisu",
-                "chuugoku"
+                "ベトナム",
+                "アメリカ",
+                "イギリス",
+                "中国"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về quê quán\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"betonamu\"."
@@ -50211,12 +50211,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "go-sen",
+              "correct": "5000",
               "options": [
-                "go-sen",
-                "nihon",
-                "ginkou",
-                "hachi-ji"
+                "5000",
+                "にほん",
+                "ぎんこう",
+                "8時"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về giá tiền\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"go-sen\"."
@@ -50240,12 +50240,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ku-ji",
+              "correct": "9時",
               "options": [
-                "ku-ji",
-                "san-gatsu",
-                "getsuyoubi",
-                "hyaku"
+                "9時",
+                "3月",
+                "月曜日",
+                "100"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi giờ giấc\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ku-ji\"."
@@ -50269,12 +50269,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "getsuyoubi",
+              "correct": "月曜日",
               "options": [
-                "getsuyoubi",
-                "ima",
-                "gogo",
-                "tokei"
+                "月曜日",
+                "いま",
+                "午後",
+                "とけい"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về thứ trong tuần\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"getsuyoubi\"."
@@ -50298,12 +50298,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "soko",
+              "correct": "そこ",
               "options": [
-                "soko",
-                "hon",
-                "kuruma",
-                "isu"
+                "そこ",
+                "ほん",
+                "くるま",
+                "いす"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về vị trí đồ vật\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"soko\"."
@@ -50327,12 +50327,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "techo",
+              "correct": "てちょう",
               "options": [
-                "techo",
-                "doko",
-                "nan",
-                "koko"
+                "てちょう",
+                "どこ",
+                "なん",
+                "ここ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về đồ vật bằng từ chỉ thị\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"techo\"."
@@ -50356,12 +50356,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ni",
+              "correct": "に",
               "options": [
-                "ni",
-                "no",
-                "wa",
-                "o"
+                "に",
+                "の",
+                "は",
+                "を"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về thời gian thức dậy\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ni\"."
@@ -50385,12 +50385,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "kara",
+              "correct": "から",
               "options": [
-                "kara",
-                "to",
-                "ni",
-                "no"
+                "から",
+                "と",
+                "に",
+                "の"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về thời gian làm việc\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"kara\"."
@@ -50414,12 +50414,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "to",
+              "correct": "と",
               "options": [
-                "to",
-                "kara",
-                "ni",
-                "wa"
+                "と",
+                "から",
+                "に",
+                "は"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về ngày nghỉ trong tuần\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"to\"."
@@ -50443,12 +50443,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "doko",
+              "correct": "どこ",
               "options": [
-                "doko",
-                "dare",
-                "nan",
-                "itsu"
+                "どこ",
+                "だれ",
+                "なん",
+                "いつ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về địa điểm phòng học\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"doko\"."
@@ -50472,12 +50472,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ni-ni-zero",
+              "correct": "220",
               "options": [
-                "ni-ni-zero",
-                "nihon",
-                "kyoushitsu",
-                "kaishain"
+                "220",
+                "にほん",
+                "きょうしつ",
+                "かいしゃいん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về số điện thoại\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ni-ni-zero\"."
@@ -50501,12 +50501,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "furansu-jin",
+              "correct": "フランス人",
               "options": [
-                "furansu-jin",
-                "isya",
-                "daigaku",
-                "ginkou"
+                "フランス人",
+                "いしゃ",
+                "だいがく",
+                "ぎんこう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về quốc tịch\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"furansu-jin\"."
@@ -50530,12 +50530,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nan",
+              "correct": "なん",
               "options": [
-                "nan",
-                "dare",
-                "doko",
-                "nani"
+                "なん",
+                "だれ",
+                "どこ",
+                "なに"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về tuổi\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nan\"."
@@ -50559,12 +50559,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "no",
+              "correct": "の",
               "options": [
-                "no",
-                "wa",
-                "ni",
-                "to"
+                "の",
+                "は",
+                "に",
+                "と"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về đồ vật sở hữu\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"no\"."
@@ -50588,12 +50588,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ja arimasen",
+              "correct": "じゃありません",
               "options": [
-                "ja arimasen",
-                "desu",
-                "ka",
-                "mo"
+                "じゃありません",
+                "です",
+                "か",
+                "も"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Xác nhận thông tin phủ định\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ja arimasen\"."
@@ -50617,12 +50617,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "asoko",
+              "correct": "あそこ",
               "options": [
-                "asoko",
-                "ima",
-                "kyou",
-                "kinou"
+                "あそこ",
+                "いま",
+                "きょう",
+                "きのう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về vị trí tòa nhà\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"asoko\"."
@@ -50646,12 +50646,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "dare",
+              "correct": "だれ",
               "options": [
-                "dare",
-                "doko",
-                "nan",
-                "itsu"
+                "だれ",
+                "どこ",
+                "なん",
+                "いつ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về người sở hữu\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"dare\"."
@@ -50675,12 +50675,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "benkyou",
+              "correct": "べんきょう",
               "options": [
-                "benkyou",
-                "ne",
-                "yasumi",
-                "tokei"
+                "べんきょう",
+                "ね",
+                "やすみ",
+                "とけい"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về hoạt động học tập\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"benkyou\"."
@@ -50704,12 +50704,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ni-kai",
+              "correct": "2階",
               "options": [
-                "ni-kai",
-                "go-ji",
-                "hyaku-en",
-                "san-sai"
+                "2階",
+                "5時",
+                "100円",
+                "3歳"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về tầng trong tòa nhà\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ni-kai\"."
@@ -52479,32 +52479,32 @@ module.exports = {
             },
             {
               "q": "Người A đã nói gì trước khi hỏi giờ?",
-              "corr": "Sumimasen",
+              "corr": "すみません",
               "opts": [
-                "Sumimasen",
-                "Arigatou",
-                "Ohayou"
+                "すみません",
+                "ありがとうございます",
+                "おはよう"
               ],
-              "correct": "Sumimasen",
+              "correct": "すみません",
               "options": [
-                "Sumimasen",
-                "Arigatou",
-                "Ohayou"
+                "すみません",
+                "ありがとうございます",
+                "おはよう"
               ]
             },
             {
               "q": "Người A cảm ơn như thế nào?",
-              "corr": "Arigatou gozaimasu",
+              "corr": "ありがとうございます",
               "opts": [
-                "Doumo",
-                "Arigatou gozaimasu",
-                "Domo arigatou"
+                "どうも",
+                "ありがとうございます",
+                "どうもありがとう"
               ],
-              "correct": "Arigatou gozaimasu",
+              "correct": "ありがとうございます",
               "options": [
-                "Doumo",
-                "Arigatou gozaimasu",
-                "Domo arigatou"
+                "どうも",
+                "ありがとうございます",
+                "どうもありがとう"
               ]
             }
           ],
@@ -52546,17 +52546,17 @@ module.exports = {
             },
             {
               "q": "Người A đáp lại bằng câu gì?",
-              "corr": "Sou desu ka",
+              "corr": "そうですか",
               "opts": [
-                "Sou desu ka",
-                "Chigaimasu",
-                "Hai"
+                "そうですか",
+                "ちがいます",
+                "はい"
               ],
-              "correct": "Sou desu ka",
+              "correct": "そうですか",
               "options": [
-                "Sou desu ka",
-                "Chigaimasu",
-                "Hai"
+                "そうですか",
+                "ちがいます",
+                "はい"
               ]
             }
           ],
@@ -52806,17 +52806,17 @@ module.exports = {
             },
             {
               "q": "Người A thốt lên từ gì?",
-              "corr": "Ah",
+              "corr": "あー",
               "opts": [
-                "Oh",
-                "Ah",
-                "Eee"
+                "おー",
+                "あー",
+                "えー"
               ],
-              "correct": "Ah",
+              "correct": "あー",
               "options": [
-                "Oh",
-                "Ah",
-                "Eee"
+                "おー",
+                "あー",
+                "えー"
               ]
             }
           ],
@@ -53014,17 +53014,17 @@ module.exports = {
             },
             {
               "q": "Động từ 'làm việc' ở quá khứ phủ định là gì?",
-              "corr": "Hatarakimasen deshita",
+              "corr": "はたらきませんでした",
               "opts": [
-                "Hatarakimashita",
-                "Hatarakimasen deshita",
-                "Hatarakimasu"
+                "はたらきました",
+                "はたらきませんでした",
+                "はたらきます"
               ],
-              "correct": "Hatarakimasen deshita",
+              "correct": "はたらきませんでした",
               "options": [
-                "Hatarakimashita",
-                "Hatarakimasen deshita",
-                "Hatarakimasu"
+                "はたらきました",
+                "はたらきませんでした",
+                "はたらきます"
               ]
             }
           ],
@@ -53066,17 +53066,17 @@ module.exports = {
             },
             {
               "q": "Câu trả lời bắt đầu bằng từ gì?",
-              "corr": "Iie",
+              "corr": "いいえ",
               "opts": [
-                "Hai",
-                "Iie",
-                "Ano"
+                "はい",
+                "いいえ",
+                "あの"
               ],
-              "correct": "Iie",
+              "correct": "いいえ",
               "options": [
-                "Hai",
-                "Iie",
-                "Ano"
+                "はい",
+                "いいえ",
+                "あの"
               ]
             }
           ],
@@ -53118,17 +53118,17 @@ module.exports = {
             },
             {
               "q": "Từ chỉ buổi chiều trong bài là gì?",
-              "corr": "Gogo",
+              "corr": "午後",
               "opts": [
-                "Gozen",
-                "Gogo",
-                "Asa"
+                "午前",
+                "午後",
+                "朝"
               ],
-              "correct": "Gogo",
+              "correct": "午後",
               "options": [
-                "Gozen",
-                "Gogo",
-                "Asa"
+                "午前",
+                "午後",
+                "朝"
               ]
             }
           ],
@@ -53222,17 +53222,17 @@ module.exports = {
             },
             {
               "q": "Động từ thức dậy ở thì quá khứ là gì?",
-              "corr": "Okimashita",
+              "corr": "おきました",
               "opts": [
-                "Okimasu",
-                "Okimashita",
-                "Okimasen"
+                "おきます",
+                "おきました",
+                "おきません"
               ],
-              "correct": "Okimashita",
+              "correct": "おきました",
               "options": [
-                "Okimasu",
-                "Okimashita",
-                "Okimasen"
+                "おきます",
+                "おきました",
+                "おきません"
               ]
             }
           ],
@@ -53326,17 +53326,17 @@ module.exports = {
             },
             {
               "q": "Động từ ngủ ở thì quá khứ là gì?",
-              "corr": "Nemashita",
+              "corr": "ねました",
               "opts": [
-                "Nemasu",
-                "Nemashita",
-                "Nemasen"
+                "ねます",
+                "ねました",
+                "ねません"
               ],
-              "correct": "Nemashita",
+              "correct": "ねました",
               "options": [
-                "Nemasu",
-                "Nemashita",
-                "Nemasen"
+                "ねます",
+                "ねました",
+                "ねません"
               ]
             }
           ],
@@ -53467,32 +53467,32 @@ module.exports = {
             },
             {
               "q": "Từ chỉ phút trong đoạn là gì?",
-              "corr": "Fun",
+              "corr": "分",
               "opts": [
-                "Ji",
-                "Fun",
-                "Nen"
+                "時",
+                "分",
+                "年"
               ],
-              "correct": "Fun",
+              "correct": "分",
               "options": [
-                "Ji",
-                "Fun",
-                "Nen"
+                "時",
+                "分",
+                "年"
               ]
             },
             {
               "q": "Người A nói cảm ơn bằng từ gì?",
-              "corr": "Arigatou",
+              "corr": "ありがとうございます",
               "opts": [
-                "Arigatou",
-                "Doumo",
-                "Sumimasen"
+                "ありがとうございます",
+                "どうも",
+                "すみません"
               ],
-              "correct": "Arigatou",
+              "correct": "ありがとうございます",
               "options": [
-                "Arigatou",
-                "Doumo",
-                "Sumimasen"
+                "ありがとうございます",
+                "どうも",
+                "すみません"
               ]
             }
           ],
@@ -70381,12 +70381,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "kasa",
+              "correct": "かさ",
               "options": [
-                "kasa",
-                "hon",
-                "tsukue",
-                "isu"
+                "かさ",
+                "ほん",
+                "つくえ",
+                "いす"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc ô kia có phải là của anh ấy không (hoặc vật đó ở đằng kia là ô).\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"kasa\"."
@@ -70410,12 +70410,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "dare",
+              "correct": "だれ",
               "options": [
-                "dare",
-                "nan",
-                "doko",
-                "dochira"
+                "だれ",
+                "なん",
+                "どこ",
+                "どちら"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B quyển tạp chí này là của ai.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"dare\"."
@@ -70439,12 +70439,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nan",
+              "correct": "なん",
               "options": [
-                "nan",
-                "dare",
-                "kore",
-                "sore"
+                "なん",
+                "だれ",
+                "これ",
+                "それ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc cặp sách màu đen này là cái gì.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nan\"."
@@ -70468,12 +70468,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "hai",
+              "correct": "はい",
               "options": [
-                "hai",
-                "ii e",
-                "dare",
-                "nan"
+                "はい",
+                "いいえ",
+                "だれ",
+                "なん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A nói rằng đây là chiếc bút chì, và B đáp lại vâng đúng vậy.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"hai\"."
@@ -70497,12 +70497,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nihon",
+              "correct": "にほん",
               "options": [
-                "nihon",
-                "dare",
-                "nan",
-                "kore"
+                "にほん",
+                "だれ",
+                "なん",
+                "これ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi chiếc máy ảnh này là của nước nào.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nihon\"."
@@ -70526,12 +70526,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "dare no",
+              "correct": "だれの",
               "options": [
-                "dare no",
-                "nan",
-                "nihon",
-                "eigo"
+                "だれの",
+                "なん",
+                "にほん",
+                "えいご"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc máy vi tính này là của công ty nào hay của ai.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"dare no\"."
@@ -70555,12 +70555,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "meishi",
+              "correct": "めいし",
               "options": [
-                "meishi",
-                "hon",
-                "kasa",
-                "kagi"
+                "めいし",
+                "ほん",
+                "かさ",
+                "かぎ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây có phải là danh thiếp không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"meishi\"."
@@ -70584,12 +70584,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "hai",
+              "correct": "はい",
               "options": [
-                "hai",
-                "iie",
-                "chigaimasu",
-                "nan"
+                "はい",
+                "いいえ",
+                "ちがいます",
+                "なん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc chìa khóa đó có phải của trường đại học không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"hai\"."
@@ -70613,12 +70613,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "isu",
+              "correct": "いす",
               "options": [
-                "isu",
-                "kaban",
-                "kasa",
-                "hon"
+                "いす",
+                "かばん",
+                "かさ",
+                "ほん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây là cái bàn hay cái ghế.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"isu\"."
@@ -70642,12 +70642,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "honno kimochi",
+              "correct": "ほんのきもち",
               "options": [
-                "honno kimochi",
-                "omiyage",
-                "chokoreeto",
-                "koohii"
+                "ほんのきもち",
+                "おみやげ",
+                "チョコレート",
+                "コーヒー"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A đưa quà và nói đây là chút lòng thành.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"honno kimochi\"."
@@ -70671,12 +70671,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "doumo",
+              "correct": "どうも",
               "options": [
-                "doumo",
-                "hai",
-                "iie",
-                "sou"
+                "どうも",
+                "はい",
+                "いいえ",
+                "そう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A giới thiệu đây là quà lưu niệm.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"doumo\"."
@@ -70700,12 +70700,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nihongo",
+              "correct": "にほんご",
               "options": [
-                "nihongo",
-                "furansu",
-                "doitsu",
-                "chuugoku"
+                "にほんご",
+                "フランス",
+                "ドイツ",
+                "中国"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B quyển sổ tay này là tiếng Anh hay tiếng Nhật.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nihongo\"."
@@ -70729,12 +70729,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "kaisha",
+              "correct": "かいしゃ",
               "options": [
-                "kaisha",
-                "daigaku",
-                "byouin",
-                "ginkou"
+                "かいしゃ",
+                "だいがく",
+                "びょういん",
+                "ぎんこう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B chiếc ô tô kia có phải của công ty không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"kaisha\"."
@@ -70758,12 +70758,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "chokoreeto",
+              "correct": "チョコレート",
               "options": [
-                "chokoreeto",
-                "koohii",
-                "shii dii",
-                "terebi"
+                "チョコレート",
+                "コーヒー",
+                "CD",
+                "テレビ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây có phải là sô-cô-la không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"chokoreeto\"."
@@ -70787,12 +70787,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "sou",
+              "correct": "そう",
               "options": [
-                "sou",
-                "nan",
-                "dare",
-                "doko"
+                "そう",
+                "なん",
+                "だれ",
+                "どこ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A nói cái này là tivi, và B hỏi lại thế à.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"sou\"."
@@ -70816,12 +70816,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "isha",
+              "correct": "いしゃ",
               "options": [
-                "isha",
-                "gakusei",
-                "kaishain",
-                "ginkouin"
+                "いしゃ",
+                "がくせい",
+                "かいしゃいん",
+                "ぎんこういん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B cuốn tạp chí này có phải là của bác sĩ không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"isha\"."
@@ -70845,12 +70845,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "shii dii",
+              "correct": "CD",
               "options": [
-                "shii dii",
-                "kamera",
-                "terebi",
-                "konpyuuta"
+                "CD",
+                "カメラ",
+                "テレビ",
+                "コンピューター"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B đây có phải là đĩa CD không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"shii dii\"."
@@ -70874,12 +70874,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "shaapu penshiru",
+              "correct": "シャープペンシル",
               "options": [
-                "shaapu penshiru",
-                "boorupen",
-                "enpitsu",
-                "jisho"
+                "シャープペンシル",
+                "ボールペン",
+                "えんぴつ",
+                "じしょ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A nói cái kia là bút chì kim (sharp pencil).\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"shaapu penshiru\"."
@@ -70903,12 +70903,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "shinbun",
+              "correct": "しんぶん",
               "options": [
-                "shinbun",
-                "zasshi",
-                "hon",
-                "nooto"
+                "しんぶん",
+                "ざっし",
+                "ほん",
+                "ノート"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"A hỏi B cái này là báo tiếng Nhật phải không.\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"shinbun\"."
@@ -73557,7 +73557,7 @@ module.exports = {
               "options": [
                 "はい",
                 "いいえ",
-                "わかりません"
+                "ちがいます"
               ]
             }
           ],
@@ -73593,7 +73593,7 @@ module.exports = {
               "correct": "こんぴゅーた",
               "options": [
                 "めいし",
-                "こんぴゅ-た",
+                "こんぴゅーた",
                 "てちょう"
               ]
             },
@@ -79450,12 +79450,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "gakusei",
+              "correct": "がくせい",
               "options": [
-                "gakusei",
-                "isya",
-                "kyoushi",
-                "ginkouin"
+                "がくせい",
+                "いしゃ",
+                "きょうし",
+                "ぎんこういん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về nghề nghiệp\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"gakusei\"."
@@ -79479,12 +79479,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "betonamu",
+              "correct": "ベトナム",
               "options": [
-                "betonamu",
-                "amerika",
-                "igirisu",
-                "chuugoku"
+                "ベトナム",
+                "アメリカ",
+                "イギリス",
+                "中国"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về quê quán\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"betonamu\"."
@@ -79508,12 +79508,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "go-sen",
+              "correct": "5000",
               "options": [
-                "go-sen",
-                "nihon",
-                "ginkou",
-                "hachi-ji"
+                "5000",
+                "にほん",
+                "ぎんこう",
+                "8時"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về giá tiền\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"go-sen\"."
@@ -79537,12 +79537,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ku-ji",
+              "correct": "9時",
               "options": [
-                "ku-ji",
-                "san-gatsu",
-                "getsuyoubi",
-                "hyaku"
+                "9時",
+                "3月",
+                "月曜日",
+                "100"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi giờ giấc\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ku-ji\"."
@@ -79566,12 +79566,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "getsuyoubi",
+              "correct": "月曜日",
               "options": [
-                "getsuyoubi",
-                "ima",
-                "gogo",
-                "tokei"
+                "月曜日",
+                "いま",
+                "午後",
+                "とけい"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về thứ trong tuần\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"getsuyoubi\"."
@@ -79595,12 +79595,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "soko",
+              "correct": "そこ",
               "options": [
-                "soko",
-                "hon",
-                "kuruma",
-                "isu"
+                "そこ",
+                "ほん",
+                "くるま",
+                "いす"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về vị trí đồ vật\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"soko\"."
@@ -79624,12 +79624,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "techo",
+              "correct": "てちょう",
               "options": [
-                "techo",
-                "doko",
-                "nan",
-                "koko"
+                "てちょう",
+                "どこ",
+                "なん",
+                "ここ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về đồ vật bằng từ chỉ thị\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"techo\"."
@@ -79653,12 +79653,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ni",
+              "correct": "に",
               "options": [
-                "ni",
-                "no",
-                "wa",
-                "o"
+                "に",
+                "の",
+                "は",
+                "を"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về thời gian thức dậy\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ni\"."
@@ -79682,12 +79682,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "kara",
+              "correct": "から",
               "options": [
-                "kara",
-                "to",
-                "ni",
-                "no"
+                "から",
+                "と",
+                "に",
+                "の"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về thời gian làm việc\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"kara\"."
@@ -79711,12 +79711,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "to",
+              "correct": "と",
               "options": [
-                "to",
-                "kara",
-                "ni",
-                "wa"
+                "と",
+                "から",
+                "に",
+                "は"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về ngày nghỉ trong tuần\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"to\"."
@@ -79740,12 +79740,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "doko",
+              "correct": "どこ",
               "options": [
-                "doko",
-                "dare",
-                "nan",
-                "itsu"
+                "どこ",
+                "だれ",
+                "なん",
+                "いつ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về địa điểm phòng học\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"doko\"."
@@ -79769,12 +79769,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ni-ni-zero",
+              "correct": "220",
               "options": [
-                "ni-ni-zero",
-                "nihon",
-                "kyoushitsu",
-                "kaishain"
+                "220",
+                "にほん",
+                "きょうしつ",
+                "かいしゃいん"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về số điện thoại\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ni-ni-zero\"."
@@ -79798,12 +79798,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "furansu-jin",
+              "correct": "フランス人",
               "options": [
-                "furansu-jin",
-                "isya",
-                "daigaku",
-                "ginkou"
+                "フランス人",
+                "いしゃ",
+                "だいがく",
+                "ぎんこう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về quốc tịch\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"furansu-jin\"."
@@ -79827,12 +79827,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "nan",
+              "correct": "なん",
               "options": [
-                "nan",
-                "dare",
-                "doko",
-                "nani"
+                "なん",
+                "だれ",
+                "どこ",
+                "なに"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về tuổi\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"nan\"."
@@ -79856,12 +79856,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "no",
+              "correct": "の",
               "options": [
-                "no",
-                "wa",
-                "ni",
-                "to"
+                "の",
+                "は",
+                "に",
+                "と"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về đồ vật sở hữu\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"no\"."
@@ -79885,12 +79885,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ja arimasen",
+              "correct": "じゃありません",
               "options": [
-                "ja arimasen",
-                "desu",
-                "ka",
-                "mo"
+                "じゃありません",
+                "です",
+                "か",
+                "も"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Xác nhận thông tin phủ định\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ja arimasen\"."
@@ -79914,12 +79914,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "asoko",
+              "correct": "あそこ",
               "options": [
-                "asoko",
-                "ima",
-                "kyou",
-                "kinou"
+                "あそこ",
+                "いま",
+                "きょう",
+                "きのう"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về vị trí tòa nhà\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"asoko\"."
@@ -79943,12 +79943,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "dare",
+              "correct": "だれ",
               "options": [
-                "dare",
-                "doko",
-                "nan",
-                "itsu"
+                "だれ",
+                "どこ",
+                "なん",
+                "いつ"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về người sở hữu\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"dare\"."
@@ -79972,12 +79972,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "benkyou",
+              "correct": "べんきょう",
               "options": [
-                "benkyou",
-                "ne",
-                "yasumi",
-                "tokei"
+                "べんきょう",
+                "ね",
+                "やすみ",
+                "とけい"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về hoạt động học tập\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"benkyou\"."
@@ -80001,12 +80001,12 @@ module.exports = {
           ],
           "blanks": {
             "blank1": {
-              "correct": "ni-kai",
+              "correct": "2階",
               "options": [
-                "ni-kai",
-                "go-ji",
-                "hyaku-en",
-                "san-sai"
+                "2階",
+                "5時",
+                "100円",
+                "3歳"
               ],
               "options_translations": {},
               "explanation": "Dựa theo ngữ cảnh \"Hỏi về tầng trong tòa nhà\", từ/cụm từ phù hợp nhất điền vào vị trí (1) là \"ni-kai\"."
@@ -81776,32 +81776,32 @@ module.exports = {
             },
             {
               "q": "Người A đã nói gì trước khi hỏi giờ?",
-              "corr": "Sumimasen",
+              "corr": "すみません",
               "opts": [
-                "Sumimasen",
-                "Arigatou",
-                "Ohayou"
+                "すみません",
+                "ありがとうございます",
+                "おはよう"
               ],
-              "correct": "Sumimasen",
+              "correct": "すみません",
               "options": [
-                "Sumimasen",
-                "Arigatou",
-                "Ohayou"
+                "すみません",
+                "ありがとうございます",
+                "おはよう"
               ]
             },
             {
               "q": "Người A cảm ơn như thế nào?",
-              "corr": "Arigatou gozaimasu",
+              "corr": "ありがとうございます",
               "opts": [
-                "Doumo",
-                "Arigatou gozaimasu",
-                "Domo arigatou"
+                "どうも",
+                "ありがとうございます",
+                "どうもありがとう"
               ],
-              "correct": "Arigatou gozaimasu",
+              "correct": "ありがとうございます",
               "options": [
-                "Doumo",
-                "Arigatou gozaimasu",
-                "Domo arigatou"
+                "どうも",
+                "ありがとうございます",
+                "どうもありがとう"
               ]
             }
           ],
@@ -81843,17 +81843,17 @@ module.exports = {
             },
             {
               "q": "Người A đáp lại bằng câu gì?",
-              "corr": "Sou desu ka",
+              "corr": "そうですか",
               "opts": [
-                "Sou desu ka",
-                "Chigaimasu",
-                "Hai"
+                "そうですか",
+                "ちがいます",
+                "はい"
               ],
-              "correct": "Sou desu ka",
+              "correct": "そうですか",
               "options": [
-                "Sou desu ka",
-                "Chigaimasu",
-                "Hai"
+                "そうですか",
+                "ちがいます",
+                "はい"
               ]
             }
           ],
@@ -82103,17 +82103,17 @@ module.exports = {
             },
             {
               "q": "Người A thốt lên từ gì?",
-              "corr": "Ah",
+              "corr": "あー",
               "opts": [
-                "Oh",
-                "Ah",
-                "Eee"
+                "おー",
+                "あー",
+                "えー"
               ],
-              "correct": "Ah",
+              "correct": "あー",
               "options": [
-                "Oh",
-                "Ah",
-                "Eee"
+                "おー",
+                "あー",
+                "えー"
               ]
             }
           ],
@@ -82311,17 +82311,17 @@ module.exports = {
             },
             {
               "q": "Động từ 'làm việc' ở quá khứ phủ định là gì?",
-              "corr": "Hatarakimasen deshita",
+              "corr": "はたらきませんでした",
               "opts": [
-                "Hatarakimashita",
-                "Hatarakimasen deshita",
-                "Hatarakimasu"
+                "はたらきました",
+                "はたらきませんでした",
+                "はたらきます"
               ],
-              "correct": "Hatarakimasen deshita",
+              "correct": "はたらきませんでした",
               "options": [
-                "Hatarakimashita",
-                "Hatarakimasen deshita",
-                "Hatarakimasu"
+                "はたらきました",
+                "はたらきませんでした",
+                "はたらきます"
               ]
             }
           ],
@@ -82363,17 +82363,17 @@ module.exports = {
             },
             {
               "q": "Câu trả lời bắt đầu bằng từ gì?",
-              "corr": "Iie",
+              "corr": "いいえ",
               "opts": [
-                "Hai",
-                "Iie",
-                "Ano"
+                "はい",
+                "いいえ",
+                "あの"
               ],
-              "correct": "Iie",
+              "correct": "いいえ",
               "options": [
-                "Hai",
-                "Iie",
-                "Ano"
+                "はい",
+                "いいえ",
+                "あの"
               ]
             }
           ],
@@ -82415,17 +82415,17 @@ module.exports = {
             },
             {
               "q": "Từ chỉ buổi chiều trong bài là gì?",
-              "corr": "Gogo",
+              "corr": "午後",
               "opts": [
-                "Gozen",
-                "Gogo",
-                "Asa"
+                "午前",
+                "午後",
+                "朝"
               ],
-              "correct": "Gogo",
+              "correct": "午後",
               "options": [
-                "Gozen",
-                "Gogo",
-                "Asa"
+                "午前",
+                "午後",
+                "朝"
               ]
             }
           ],
@@ -82519,17 +82519,17 @@ module.exports = {
             },
             {
               "q": "Động từ thức dậy ở thì quá khứ là gì?",
-              "corr": "Okimashita",
+              "corr": "おきました",
               "opts": [
-                "Okimasu",
-                "Okimashita",
-                "Okimasen"
+                "おきます",
+                "おきました",
+                "おきません"
               ],
-              "correct": "Okimashita",
+              "correct": "おきました",
               "options": [
-                "Okimasu",
-                "Okimashita",
-                "Okimasen"
+                "おきます",
+                "おきました",
+                "おきません"
               ]
             }
           ],
@@ -82623,17 +82623,17 @@ module.exports = {
             },
             {
               "q": "Động từ ngủ ở thì quá khứ là gì?",
-              "corr": "Nemashita",
+              "corr": "ねました",
               "opts": [
-                "Nemasu",
-                "Nemashita",
-                "Nemasen"
+                "ねます",
+                "ねました",
+                "ねません"
               ],
-              "correct": "Nemashita",
+              "correct": "ねました",
               "options": [
-                "Nemasu",
-                "Nemashita",
-                "Nemasen"
+                "ねます",
+                "ねました",
+                "ねません"
               ]
             }
           ],
@@ -82764,32 +82764,32 @@ module.exports = {
             },
             {
               "q": "Từ chỉ phút trong đoạn là gì?",
-              "corr": "Fun",
+              "corr": "分",
               "opts": [
-                "Ji",
-                "Fun",
-                "Nen"
+                "時",
+                "分",
+                "年"
               ],
-              "correct": "Fun",
+              "correct": "分",
               "options": [
-                "Ji",
-                "Fun",
-                "Nen"
+                "時",
+                "分",
+                "年"
               ]
             },
             {
               "q": "Người A nói cảm ơn bằng từ gì?",
-              "corr": "Arigatou",
+              "corr": "ありがとうございます",
               "opts": [
-                "Arigatou",
-                "Doumo",
-                "Sumimasen"
+                "ありがとうございます",
+                "どうも",
+                "すみません"
               ],
-              "correct": "Arigatou",
+              "correct": "ありがとうございます",
               "options": [
-                "Arigatou",
-                "Doumo",
-                "Sumimasen"
+                "ありがとうございます",
+                "どうも",
+                "すみません"
               ]
             }
           ],
