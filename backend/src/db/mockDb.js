@@ -41044,12 +41044,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa jisho desu ka.",
+              "text_kana": "これ は じしょ ですか。",
               "text_kanji": "これは辞書ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1], hon desu.",
+              "text_kana": "[blank1]、ほん です。",
               "text_kanji": "[blank1]、本です。"
             }
           ],
@@ -41073,12 +41073,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Are wa kasa desu ka.",
+              "text_kana": "あれは かさ ですか。",
               "text_kanji": "あれは傘ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Hai, [blank1] desu.",
+              "text_kana": "はい、[blank1] です。",
               "text_kanji": "はい、[blank1]です。"
             }
           ],
@@ -41102,12 +41102,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono zasshi wa [blank1] desu ka.",
+              "text_kana": "この ざっし は [blank1] ですか。",
               "text_kanji": "この雑誌は[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Watashi no zasshi desu.",
+              "text_kana": "わたし の ざっし です。",
               "text_kanji": "私の雑誌です。"
             }
           ],
@@ -41131,12 +41131,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono kaban wa [blank1] desu ka.",
+              "text_kana": "この かばん は [blank1] ですか。",
               "text_kanji": "このカバンは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Eigo no hon desu.",
+              "text_kana": "えいご の ほん です。",
               "text_kanji": "英語の本です。"
             }
           ],
@@ -41160,12 +41160,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa enpitsu desu ka.",
+              "text_kana": "これ は えんぴつ ですか。",
               "text_kanji": "これは鉛筆ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1], enpitsu desu.",
+              "text_kana": "[blank1]、えんぴつ です。",
               "text_kanji": "[blank1]、鉛筆です。"
             }
           ],
@@ -41189,12 +41189,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono kamera wa [blank1] no kamera desu ka.",
+              "text_kana": "この かめら は [blank1] の かめら ですか。",
               "text_kanji": "このカメラは[blank1]のカメラですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Nihon no kamera desu.",
+              "text_kana": "にほん の かめら です。",
               "text_kanji": "日本のカメラです。"
             }
           ],
@@ -41218,12 +41218,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono konpyuuta wa [blank1] desu ka.",
+              "text_kana": "この こんぴゅーたー は [blank1] ですか。",
               "text_kanji": "このコンピューターは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Watashi no desu.",
+              "text_kana": "わたし の です。",
               "text_kanji": "私のです。"
             }
           ],
@@ -41247,12 +41247,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu ka.",
+              "text_kana": "これ は [blank1] ですか。",
               "text_kanji": "これは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, kaado desu.",
+              "text_kana": "いいえ、かーど です。",
               "text_kanji": "いいえ、カードです。"
             }
           ],
@@ -41276,12 +41276,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Sono kagi wa daigaku no kagi desu ka.",
+              "text_kana": "その かぎ は だいがく の かぎ ですか。",
               "text_kanji": "その鍵は大学の鍵ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1], daigaku no kagi desu.",
+              "text_kana": "[blank1]、だいがく の かぎ です。",
               "text_kanji": "[blank1]、大学の鍵です。"
             }
           ],
@@ -41305,12 +41305,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa tsukue desu ka, [blank1] desu ka.",
+              "text_kana": "これ は つくえ ですか、[blank1] ですか。",
               "text_kanji": "これは机ですか、[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Tsukue desu.",
+              "text_kana": "つくえ です。",
               "text_kanji": "机です。"
             }
           ],
@@ -41334,12 +41334,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu. Douzo.",
+              "text_kana": "これ は [blank1] です。どうぞ。",
               "text_kanji": "これは[blank1]です。どうぞ。"
             },
             {
               "speaker": "B",
-              "text_kana": "Doumo arigatou gozaimasu.",
+              "text_kana": "どうも ありがとうございます。",
               "text_kanji": "どうもありがとうございます。"
             }
           ],
@@ -41363,12 +41363,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa omiyage desu. Douzo.",
+              "text_kana": "これ は おみやげ です。どうぞ。",
               "text_kanji": "これはお土産です。どうぞ。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] arigatou gozaimasu.",
+              "text_kana": "[blank1] ありがとうございます。",
               "text_kanji": "[blank1]ありがとうございます。"
             }
           ],
@@ -41392,12 +41392,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono techou wa eigo desu ka, [blank1] desu ka.",
+              "text_kana": "この てちょう は えいご ですか、[blank1] ですか。",
               "text_kanji": "この手帳は英語ですか、[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Nihongo desu.",
+              "text_kana": "にほんご です。",
               "text_kanji": "日本語です。"
             }
           ],
@@ -41421,12 +41421,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Ano jidousha wa [blank1] no jidousha desu ka.",
+              "text_kana": "あの じどうしゃ は [blank1] の じどうしゃ ですか。",
               "text_kanji": "あの自動車は[blank1]の自動車ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, ginkou no desu.",
+              "text_kana": "いいえ、ぎんこう の です。",
               "text_kanji": "いいえ、銀行のです。"
             }
           ],
@@ -41450,12 +41450,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu ka.",
+              "text_kana": "これ は [blank1] ですか。",
               "text_kanji": "これは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Hai, chokoreeto desu.",
+              "text_kana": "はい、ちょこれーと です。",
               "text_kanji": "はい、チョコレートです。"
             }
           ],
@@ -41479,12 +41479,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa terebi desu.",
+              "text_kana": "これ は てれび です。",
               "text_kanji": "これはテレビです。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu ka.",
+              "text_kana": "[blank1] ですか。",
               "text_kanji": "[blank1]ですか。"
             }
           ],
@@ -41508,12 +41508,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono zasshi wa [blank1] no desu ka.",
+              "text_kana": "この ざっし は [blank1] の ですか。",
               "text_kanji": "この雑誌は[blank1]のですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, watashi no desu.",
+              "text_kana": "いいえ、わたし の です。",
               "text_kanji": "いいえ、私のです。"
             }
           ],
@@ -41537,12 +41537,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu ka.",
+              "text_kana": "これ は [blank1] ですか。",
               "text_kanji": "これは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, rajio desu.",
+              "text_kana": "いいえ、らじお です。",
               "text_kanji": "いいえ、ラジオです。"
             }
           ],
@@ -41566,12 +41566,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Are wa [blank1] desu.",
+              "text_kana": "あれ は [blank1] です。",
               "text_kanji": "あれは[blank1]です。"
             },
             {
               "speaker": "B",
-              "text_kana": "Sou desu ka.",
+              "text_kana": "そうですか。",
               "text_kanji": "そうですか。"
             }
           ],
@@ -41595,12 +41595,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa nihongo no [blank1] desu ka.",
+              "text_kana": "これ は にほんご の [blank1] ですか。",
               "text_kanji": "これは日本語の[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Hai, shinbun desu.",
+              "text_kana": "はい、しんぶん です。",
               "text_kanji": "はい、新聞です。"
             }
           ],
@@ -50142,12 +50142,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "anata wa gakusei desu ka.",
+              "text_kana": "あなたは がくせい ですか。",
               "text_kanji": "あなたはがくせいですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "iie, [blank1] ja arimasen. kaishain desu.",
+              "text_kana": "いいえ、[blank1] じゃありません。かいしゃいん です。",
               "text_kanji": "いいえ、[blank1]じゃありません。かいしゃいんです。"
             }
           ],
@@ -50171,12 +50171,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "o-kuni wa dochira desu ka.",
+              "text_kana": "おくには どちら ですか。",
               "text_kanji": "おくにはどちらですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] kara kimashita.",
+              "text_kana": "[blank1] から きました。",
               "text_kanji": "[blank1]からきました。"
             }
           ],
@@ -50200,12 +50200,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kono tokei wa ikura desu ka.",
+              "text_kana": "この とけい は いくら ですか。",
               "text_kanji": "このとけいはいくらですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "sore wa [blank1] en desu.",
+              "text_kana": "それは [blank1] えん です。",
               "text_kanji": "それは[blank1]えんです。"
             }
           ],
@@ -50229,12 +50229,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "ima nan-ji desu ka.",
+              "text_kana": "いま なんじ ですか。",
               "text_kanji": "いまなんじですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -50258,12 +50258,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kyou wa nanyoubi desu ka.",
+              "text_kana": "きょうは なんようび ですか。",
               "text_kanji": "きょうはなんようびですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -50287,12 +50287,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "jisho wa doko desu ka.",
+              "text_kana": "じしょは どこ ですか。",
               "text_kanji": "じしょはどこですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -50316,12 +50316,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kore wa nan desu ka.",
+              "text_kana": "これ は なん ですか。",
               "text_kanji": "これはなんですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "sore wa [blank1] desu.",
+              "text_kana": "それは [blank1] です。",
               "text_kanji": "それは[blank1]です。"
             }
           ],
@@ -50345,12 +50345,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "mainichi nan-ji ni okimasu ka.",
+              "text_kana": "まいにち なんじ に おきますか。",
               "text_kanji": "まいにちなんじにおきますか。"
             },
             {
               "speaker": "B",
-              "text_kana": "roku-ji [blank1] okimasu.",
+              "text_kana": "ろくじ [blank1] おきます。",
               "text_kanji": "ろくじ[blank1]おきます。"
             }
           ],
@@ -50374,12 +50374,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "nan-ji kara nan-ji made hatarakimasu ka.",
+              "text_kana": "なんじ から なんじ まで はたらきますか。",
               "text_kanji": "なんじからなんじまではたらきますか。"
             },
             {
               "speaker": "B",
-              "text_kana": "ku-ji [blank1] go-ji made hatarakimasu.",
+              "text_kana": "くじ [blank1] ごじ まで はたらきます。",
               "text_kanji": "くじ[blank1]ごじまではたらきます。"
             }
           ],
@@ -50403,12 +50403,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "yasumi wa nanyoubi desu ka.",
+              "text_kana": "やすみは なんようび ですか。",
               "text_kanji": "やすみはなんようびですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "doyoubi [blank1] nichiyoubi desu.",
+              "text_kana": "どようび [blank1] にちようび です。",
               "text_kanji": "どようび[blank1]にちようびです。"
             }
           ],
@@ -50432,12 +50432,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kyoushitsu wa [blank1] desu ka.",
+              "text_kana": "きょうしつは [blank1] ですか。",
               "text_kanji": "きょうしつは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "koko desu.",
+              "text_kana": "ここ です。",
               "text_kanji": "ここです。"
             }
           ],
@@ -50461,12 +50461,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "denwa bangou wa nan-ban desu ka.",
+              "text_kana": "でんわ ばんごう は なんばん ですか。",
               "text_kanji": "でんわばんごうはなんばんですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -50490,12 +50490,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "anata wa amerika-jin desu ka.",
+              "text_kana": "あなたは アメリカじん ですか。",
               "text_kanji": "あなたはアメリカじんですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "iie, [blank1] desu.",
+              "text_kana": "いいえ、[blank1] です。",
               "text_kanji": "いいえ、[blank1]です。"
             }
           ],
@@ -50519,12 +50519,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "anata wa [blank1] sai desu ka.",
+              "text_kana": "あなたは [blank1] さい ですか。",
               "text_kanji": "あなたは[blank1]さいですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "hatachi desu.",
+              "text_kana": "はたち です。",
               "text_kanji": "はたちです。"
             }
           ],
@@ -50548,12 +50548,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kore wa watashi [blank1] hon desu.",
+              "text_kana": "これ は わたし [blank1] ほん です。",
               "text_kanji": "これはわたし[blank1]ほんです。"
             },
             {
               "speaker": "B",
-              "text_kana": "sou desu ka.",
+              "text_kana": "そうですか。",
               "text_kanji": "そうですか。"
             }
           ],
@@ -50577,12 +50577,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "sore wa rajio desu ka.",
+              "text_kana": "それ は らじお ですか。",
               "text_kanji": "それはラジオですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "iie, rajio [blank1]. terebi desu.",
+              "text_kana": "いいえ、らじお [blank1]。てれび です。",
               "text_kanji": "いいえ、ラジオ[blank1]。テレビです。"
             }
           ],
@@ -50606,12 +50606,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "ginkou wa doko desu ka.",
+              "text_kana": "ぎんこうは どこ ですか。",
               "text_kanji": "ぎんこうはどこですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -50635,12 +50635,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kono kasa wa [blank1] desu ka.",
+              "text_kana": "この かさ は [blank1] ですか。",
               "text_kanji": "このかさは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "watashi no desu.",
+              "text_kana": "わたし の です。",
               "text_kanji": "わたしのものです。"
             }
           ],
@@ -50664,12 +50664,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kyou benkyou shimasu ka.",
+              "text_kana": "きょう べんきょう しますか。",
               "text_kanji": "きょうべんきょうしますか。"
             },
             {
               "speaker": "B",
-              "text_kana": "hai, [blank1] shimasu.",
+              "text_kana": "はい、[blank1] します。",
               "text_kanji": "はい、[blank1]します。"
             }
           ],
@@ -50693,12 +50693,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "shokudou wa nan-gai desu ka.",
+              "text_kana": "しょくどう は なんがい ですか。",
               "text_kanji": "しょくどうは何階ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -70341,12 +70341,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa jisho desu ka.",
+              "text_kana": "これ は じしょ ですか。",
               "text_kanji": "これは辞書ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1], hon desu.",
+              "text_kana": "[blank1]、ほん です。",
               "text_kanji": "[blank1]、本です。"
             }
           ],
@@ -70370,12 +70370,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Are wa kasa desu ka.",
+              "text_kana": "あれは かさ ですか。",
               "text_kanji": "あれは傘ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Hai, [blank1] desu.",
+              "text_kana": "はい、[blank1] です。",
               "text_kanji": "はい、[blank1]です。"
             }
           ],
@@ -70399,12 +70399,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono zasshi wa [blank1] desu ka.",
+              "text_kana": "この ざっし は [blank1] ですか。",
               "text_kanji": "この雑誌は[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Watashi no zasshi desu.",
+              "text_kana": "わたし の ざっし です。",
               "text_kanji": "私の雑誌です。"
             }
           ],
@@ -70428,12 +70428,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono kaban wa [blank1] desu ka.",
+              "text_kana": "この かばん は [blank1] ですか。",
               "text_kanji": "このカバンは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Eigo no hon desu.",
+              "text_kana": "えいご の ほん です。",
               "text_kanji": "英語の本です。"
             }
           ],
@@ -70457,12 +70457,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa enpitsu desu ka.",
+              "text_kana": "これ は えんぴつ ですか。",
               "text_kanji": "これは鉛筆ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1], enpitsu desu.",
+              "text_kana": "[blank1]、えんぴつ です。",
               "text_kanji": "[blank1]、鉛筆です。"
             }
           ],
@@ -70486,12 +70486,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono kamera wa [blank1] no kamera desu ka.",
+              "text_kana": "この かめら は [blank1] の かめら ですか。",
               "text_kanji": "このカメラは[blank1]のカメラですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Nihon no kamera desu.",
+              "text_kana": "にほん の かめら です。",
               "text_kanji": "日本のカメラです。"
             }
           ],
@@ -70515,12 +70515,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono konpyuuta wa [blank1] desu ka.",
+              "text_kana": "この こんぴゅーたー は [blank1] ですか。",
               "text_kanji": "このコンピューターは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Watashi no desu.",
+              "text_kana": "わたし の です。",
               "text_kanji": "私のです。"
             }
           ],
@@ -70544,12 +70544,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu ka.",
+              "text_kana": "これ は [blank1] ですか。",
               "text_kanji": "これは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, kaado desu.",
+              "text_kana": "いいえ、かーど です。",
               "text_kanji": "いいえ、カードです。"
             }
           ],
@@ -70573,12 +70573,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Sono kagi wa daigaku no kagi desu ka.",
+              "text_kana": "その かぎ は だいがく の かぎ ですか。",
               "text_kanji": "その鍵は大学の鍵ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1], daigaku no kagi desu.",
+              "text_kana": "[blank1]、だいがく の かぎ です。",
               "text_kanji": "[blank1]、大学の鍵です。"
             }
           ],
@@ -70602,12 +70602,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa tsukue desu ka, [blank1] desu ka.",
+              "text_kana": "これ は つくえ ですか、[blank1] ですか。",
               "text_kanji": "これは机ですか、[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Tsukue desu.",
+              "text_kana": "つくえ です。",
               "text_kanji": "机です。"
             }
           ],
@@ -70631,12 +70631,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu. Douzo.",
+              "text_kana": "これ は [blank1] です。どうぞ。",
               "text_kanji": "これは[blank1]です。どうぞ。"
             },
             {
               "speaker": "B",
-              "text_kana": "Doumo arigatou gozaimasu.",
+              "text_kana": "どうも ありがとうございます。",
               "text_kanji": "どうもありがとうございます。"
             }
           ],
@@ -70660,12 +70660,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa omiyage desu. Douzo.",
+              "text_kana": "これ は おみやげ です。どうぞ。",
               "text_kanji": "これはお土産です。どうぞ。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] arigatou gozaimasu.",
+              "text_kana": "[blank1] ありがとうございます。",
               "text_kanji": "[blank1]ありがとうございます。"
             }
           ],
@@ -70689,12 +70689,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono techou wa eigo desu ka, [blank1] desu ka.",
+              "text_kana": "この てちょう は えいご ですか、[blank1] ですか。",
               "text_kanji": "この手帳は英語ですか、[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Nihongo desu.",
+              "text_kana": "にほんご です。",
               "text_kanji": "日本語です。"
             }
           ],
@@ -70718,12 +70718,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Ano jidousha wa [blank1] no jidousha desu ka.",
+              "text_kana": "あの じどうしゃ は [blank1] の じどうしゃ ですか。",
               "text_kanji": "あの自動車は[blank1]の自動車ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, ginkou no desu.",
+              "text_kana": "いいえ、ぎんこう の です。",
               "text_kanji": "いいえ、銀行のです。"
             }
           ],
@@ -70747,12 +70747,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu ka.",
+              "text_kana": "これ は [blank1] ですか。",
               "text_kanji": "これは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Hai, chokoreeto desu.",
+              "text_kana": "はい、ちょこれーと です。",
               "text_kanji": "はい、チョコレートです。"
             }
           ],
@@ -70776,12 +70776,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa terebi desu.",
+              "text_kana": "これ は てれび です。",
               "text_kanji": "これはテレビです。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu ka.",
+              "text_kana": "[blank1] ですか。",
               "text_kanji": "[blank1]ですか。"
             }
           ],
@@ -70805,12 +70805,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kono zasshi wa [blank1] no desu ka.",
+              "text_kana": "この ざっし は [blank1] の ですか。",
               "text_kanji": "この雑誌は[blank1]のですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, watashi no desu.",
+              "text_kana": "いいえ、わたし の です。",
               "text_kanji": "いいえ、私のです。"
             }
           ],
@@ -70834,12 +70834,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa [blank1] desu ka.",
+              "text_kana": "これ は [blank1] ですか。",
               "text_kanji": "これは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Iie, rajio desu.",
+              "text_kana": "いいえ、らじお です。",
               "text_kanji": "いいえ、ラジオです。"
             }
           ],
@@ -70863,12 +70863,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Are wa [blank1] desu.",
+              "text_kana": "あれ は [blank1] です。",
               "text_kanji": "あれは[blank1]です。"
             },
             {
               "speaker": "B",
-              "text_kana": "Sou desu ka.",
+              "text_kana": "そうですか。",
               "text_kanji": "そうですか。"
             }
           ],
@@ -70892,12 +70892,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "Kore wa nihongo no [blank1] desu ka.",
+              "text_kana": "これ は にほんご の [blank1] ですか。",
               "text_kanji": "これは日本語の[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "Hai, shinbun desu.",
+              "text_kana": "はい、しんぶん です。",
               "text_kanji": "はい、新聞です。"
             }
           ],
@@ -79439,12 +79439,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "anata wa gakusei desu ka.",
+              "text_kana": "あなたは がくせい ですか。",
               "text_kanji": "あなたはがくせいですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "iie, [blank1] ja arimasen. kaishain desu.",
+              "text_kana": "いいえ、[blank1] じゃありません。かいしゃいん です。",
               "text_kanji": "いいえ、[blank1]じゃありません。かいしゃいんです。"
             }
           ],
@@ -79468,12 +79468,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "o-kuni wa dochira desu ka.",
+              "text_kana": "おくには どちら ですか。",
               "text_kanji": "おくにはどちらですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] kara kimashita.",
+              "text_kana": "[blank1] から きました。",
               "text_kanji": "[blank1]からきました。"
             }
           ],
@@ -79497,12 +79497,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kono tokei wa ikura desu ka.",
+              "text_kana": "この とけい は いくら ですか。",
               "text_kanji": "このとけいはいくらですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "sore wa [blank1] en desu.",
+              "text_kana": "それは [blank1] えん です。",
               "text_kanji": "それは[blank1]えんです。"
             }
           ],
@@ -79526,12 +79526,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "ima nan-ji desu ka.",
+              "text_kana": "いま なんじ ですか。",
               "text_kanji": "いまなんじですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -79555,12 +79555,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kyou wa nanyoubi desu ka.",
+              "text_kana": "きょうは なんようび ですか。",
               "text_kanji": "きょうはなんようびですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -79584,12 +79584,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "jisho wa doko desu ka.",
+              "text_kana": "じしょは どこ ですか。",
               "text_kanji": "じしょはどこですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -79613,12 +79613,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kore wa nan desu ka.",
+              "text_kana": "これ は なん ですか。",
               "text_kanji": "これはなんですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "sore wa [blank1] desu.",
+              "text_kana": "それは [blank1] です。",
               "text_kanji": "それは[blank1]です。"
             }
           ],
@@ -79642,12 +79642,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "mainichi nan-ji ni okimasu ka.",
+              "text_kana": "まいにち なんじ に おきますか。",
               "text_kanji": "まいにちなんじにおきますか。"
             },
             {
               "speaker": "B",
-              "text_kana": "roku-ji [blank1] okimasu.",
+              "text_kana": "ろくじ [blank1] おきます。",
               "text_kanji": "ろくじ[blank1]おきます。"
             }
           ],
@@ -79671,12 +79671,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "nan-ji kara nan-ji made hatarakimasu ka.",
+              "text_kana": "なんじ から なんじ まで はたらきますか。",
               "text_kanji": "なんじからなんじまではたらきますか。"
             },
             {
               "speaker": "B",
-              "text_kana": "ku-ji [blank1] go-ji made hatarakimasu.",
+              "text_kana": "くじ [blank1] ごじ まで はたらきます。",
               "text_kanji": "くじ[blank1]ごじまではたらきます。"
             }
           ],
@@ -79700,12 +79700,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "yasumi wa nanyoubi desu ka.",
+              "text_kana": "やすみは なんようび ですか。",
               "text_kanji": "やすみはなんようびですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "doyoubi [blank1] nichiyoubi desu.",
+              "text_kana": "どようび [blank1] にちようび です。",
               "text_kanji": "どようび[blank1]にちようびです。"
             }
           ],
@@ -79729,12 +79729,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kyoushitsu wa [blank1] desu ka.",
+              "text_kana": "きょうしつは [blank1] ですか。",
               "text_kanji": "きょうしつは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "koko desu.",
+              "text_kana": "ここ です。",
               "text_kanji": "ここです。"
             }
           ],
@@ -79758,12 +79758,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "denwa bangou wa nan-ban desu ka.",
+              "text_kana": "でんわ ばんごう は なんばん ですか。",
               "text_kanji": "でんわばんごうはなんばんですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -79787,12 +79787,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "anata wa amerika-jin desu ka.",
+              "text_kana": "あなたは アメリカじん ですか。",
               "text_kanji": "あなたはアメリカじんですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "iie, [blank1] desu.",
+              "text_kana": "いいえ、[blank1] です。",
               "text_kanji": "いいえ、[blank1]です。"
             }
           ],
@@ -79816,12 +79816,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "anata wa [blank1] sai desu ka.",
+              "text_kana": "あなたは [blank1] さい ですか。",
               "text_kanji": "あなたは[blank1]さいですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "hatachi desu.",
+              "text_kana": "はたち です。",
               "text_kanji": "はたちです。"
             }
           ],
@@ -79845,12 +79845,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kore wa watashi [blank1] hon desu.",
+              "text_kana": "これ は わたし [blank1] ほん です。",
               "text_kanji": "これはわたし[blank1]ほんです。"
             },
             {
               "speaker": "B",
-              "text_kana": "sou desu ka.",
+              "text_kana": "そうですか。",
               "text_kanji": "そうですか。"
             }
           ],
@@ -79874,12 +79874,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "sore wa rajio desu ka.",
+              "text_kana": "それ は らじお ですか。",
               "text_kanji": "それはラジオですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "iie, rajio [blank1]. terebi desu.",
+              "text_kana": "いいえ、らじお [blank1]。てれび です。",
               "text_kanji": "いいえ、ラジオ[blank1]。テレビです。"
             }
           ],
@@ -79903,12 +79903,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "ginkou wa doko desu ka.",
+              "text_kana": "ぎんこうは どこ ですか。",
               "text_kanji": "ぎんこうはどこですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],
@@ -79932,12 +79932,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kono kasa wa [blank1] desu ka.",
+              "text_kana": "この かさ は [blank1] ですか。",
               "text_kanji": "このかさは[blank1]ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "watashi no desu.",
+              "text_kana": "わたし の です。",
               "text_kanji": "わたしのものです。"
             }
           ],
@@ -79961,12 +79961,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "kyou benkyou shimasu ka.",
+              "text_kana": "きょう べんきょう しますか。",
               "text_kanji": "きょうべんきょうしますか。"
             },
             {
               "speaker": "B",
-              "text_kana": "hai, [blank1] shimasu.",
+              "text_kana": "はい、[blank1] します。",
               "text_kanji": "はい、[blank1]します。"
             }
           ],
@@ -79990,12 +79990,12 @@ module.exports = {
           "lines": [
             {
               "speaker": "A",
-              "text_kana": "shokudou wa nan-gai desu ka.",
+              "text_kana": "しょくどう は なんがい ですか。",
               "text_kanji": "しょくどうは何階ですか。"
             },
             {
               "speaker": "B",
-              "text_kana": "[blank1] desu.",
+              "text_kana": "[blank1] です。",
               "text_kanji": "[blank1]です。"
             }
           ],

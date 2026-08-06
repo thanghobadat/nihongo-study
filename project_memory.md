@@ -1101,6 +1101,17 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Push Git**:
   - Chạy `verify_clean_vocab.js` đạt 0 lỗi. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
 
+### Mốc 89: Khắc phục triệt để lỗi Romaji Dạng 2 ở Bài 2 & Bài 4 và Đối chiếu Quy chuẩn 6 Bài học (Đã hoàn thành & Đã đẩy GitHub - 06/08/2026)
+- **Quy đổi Romaji ➔ Hiragana/Kanji ở Bài 2 & Bài 4 Dạng 2**:
+  - Chuyển 160 dòng thoại Romaji ở Bài 2 và Bài 4 Dạng 2 về chữ Hiragana chuẩn (`text_kana`) và Kanji (`text_kanji`).
+- **Rà soát 100% tiêu chí exercise_generation_guide.md (Bài 1 ➔ 6)**:
+  - Dạng 1: Đạt 80 câu/bài, lưu song song Kana và Kanji.
+  - Dạng 2: Đạt 40 đoạn/bài, 100% dòng thoại dùng Hiragana/Kanji, options A/B/C/D trực quan.
+  - Dạng 3: Đạt 40 bài nghe/bài, 3 câu hỏi trắc nghiệm con tiếng Việt.
+  - Dạng 4: Đạt 40-60 câu audio/bài.
+- **Kiểm định & Push Git**:
+  - Chạy `full_criteria_audit_lessons_1_to_6.js` đạt 0 lỗi Romaji và 0 lỗi mismatch. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
+
 
 
 
