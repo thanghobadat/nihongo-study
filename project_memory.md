@@ -1075,6 +1075,21 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Git Commit & Push Remote**:
   - Commit và đẩy mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`).
 
+### Mốc 87: Khắc phục triệt để lỗi bài tập Dạng 1 & Dạng 2/3 ở Ôn tập bài học và Ôn tập tổng hợp cho 50 bài học (Đã hoàn thành & Đã đẩy GitHub - 06/08/2026)
+- **Sửa Dạng 1 (Dịch phản xạ)**:
+  - Sửa [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx) bắt buộc hiển thị câu hỏi tiếng Việt khi `direction === 'vi-to-ja'`.
+  - Khôi phục 288 câu hỏi tiếng Việt và dọn dẹp 100% trường `question_kana`/`question_kanji` gán nhầm chữ Nhật ở các câu `vi-to-ja` trong `mockDb.js`.
+- **Sửa Dạng 2 (Hội thoại điền khuyết)**:
+  - Sửa điều kiện đánh giá 1 ô trống `blank1` trong `ReviewTab.tsx` hiển thị chuẩn huy hiệu `✓ Đúng hoàn toàn`.
+  - Làm nổi bật hộp ngữ cảnh `📌 Ngữ cảnh đoạn thoại:`.
+  - Nạp 670 câu giải thích chi tiết cho 240 đoạn hội thoại Dạng 2 trong `mockDb.js`.
+  - Sửa lỗi chính tả `correct: "くだいさい"` ➔ `"ください"` ở Bài 3 Dạng 2 #29.
+- **Sửa Dạng 3 (Nghe hiểu)**:
+  - Chuẩn hóa phương án `"こんぴゅ-た"` ➔ `"こんぴゅーた"` ở Bài 2 Dạng 3 #36.
+  - Đồng bộ `corr` `"ちかいっかい"` ➔ `"地下1階"` ở Bài 3 Dạng 3 #11.
+- **Kiểm định & Push Git**:
+  - Chạy `full_audit_all_lessons.js` đạt 0 lỗi trên 100% 50 bài học. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
+
 
 
 

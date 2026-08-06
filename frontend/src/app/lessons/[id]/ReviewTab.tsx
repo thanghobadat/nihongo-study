@@ -882,13 +882,13 @@ export default function ReviewTab({
                     q.type === 'listening'
                       ? (current.questions.every((subQ: any, sIdx: number) => reviewAnswers[`${q.key}_q${sIdx}`] === (subQ.corr || subQ.correct)) ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
                       : q.type === 'dialogue'
-                        ? ((reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]) ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
+                        ? ((reviewGraded[`${q.key}_b1`] && (current.blanks?.blank2 ? reviewGraded[`${q.key}_b2`] : true)) ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
                         : (reviewGraded[q.key] ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
                   }`}>
                     {q.type === 'listening'
                       ? (current.questions.every((subQ: any, sIdx: number) => reviewAnswers[`${q.key}_q${sIdx}`] === (subQ.corr || subQ.correct)) ? '✓ Đúng tất cả' : '✗ Chưa đúng tất cả')
                       : q.type === 'dialogue'
-                        ? ((reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]) ? '✓ Đúng hoàn toàn' : '✗ Chưa đúng hoàn toàn')
+                        ? ((reviewGraded[`${q.key}_b1`] && (current.blanks?.blank2 ? reviewGraded[`${q.key}_b2`] : true)) ? '✓ Đúng hoàn toàn' : '✗ Chưa đúng hoàn toàn')
                         : (reviewGraded[q.key] ? '✓ Đúng' : '✗ Chưa đúng')
                     }
                   </span>
@@ -901,7 +901,7 @@ export default function ReviewTab({
                 const key = q.key;
                 const questionDisplay = isJaToVi 
                   ? (reviewShowKanji ? (current.question_kanji || current.question_kana || current.question) : (current.question_kana || current.question_kanji || current.question))
-                  : (current.question_kanji || current.question_kana || current.question);
+                  : (current.question || current.question_vietnamese || (current.vietnamese_answers ? current.vietnamese_answers[0] : ''));
 
                 return (
                   <div className="space-y-4">
@@ -967,9 +967,12 @@ export default function ReviewTab({
 
                 return (
                   <div className="space-y-4">
-                    <div className="text-slate-400 text-xs italic">
-                      Ngữ cảnh đoạn thoại: {current.context}
-                    </div>
+                    {current.context && (
+                      <div className="bg-indigo-950/60 border border-indigo-800/60 text-indigo-200 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                        <span className="text-indigo-400 font-bold">📌 Ngữ cảnh đoạn thoại:</span>
+                        <span>{current.context}</span>
+                      </div>
+                    )}
 
                     <div className="space-y-4 bg-slate-950/80 p-5 rounded-xl border border-slate-900">
                       {current.lines.map((line: any, lIdx: number) => {
@@ -1113,13 +1116,23 @@ export default function ReviewTab({
                         )}
 
                         {/* 2. KHỐI GIẢI THÍCH CHI TIẾT & NGỮ PHÁP */}
-                        {current.blanks?.blank1?.explanation && (
-                          <div className="bg-indigo-500/10 p-3 rounded-lg border border-indigo-500/20 space-y-1 text-slate-300">
-                            <div className="font-bold text-indigo-400 flex items-center gap-1">💡 Giải thích chi tiết & Ngữ pháp:</div>
-                            <p><strong className="text-indigo-200">(1):</strong> {current.blanks.blank1.explanation}</p>
-                            {current.blanks.blank2?.explanation && <p><strong className="text-indigo-200">(2):</strong> {current.blanks.blank2.explanation}</p>}
-                          </div>
-                        )}
+                        <div className="bg-indigo-500/10 p-3 rounded-lg border border-indigo-500/20 space-y-1 text-slate-300">
+                          <div className="font-bold text-indigo-400 flex items-center gap-1">💡 Giải thích chi tiết & Ngữ pháp:</div>
+                          <p>
+                            <strong className="text-indigo-200">(1):</strong>{' '}
+                            {current.blanks?.blank1?.explanation ||
+                              (current.context
+                                ? `Dựa theo ngữ cảnh "${current.context}", đáp án phù hợp nhất cho vị trí (1) là "${current.blanks?.blank1?.correct}".`
+                                : `Đáp án chính xác cho vị trí (1) là "${current.blanks?.blank1?.correct}".`)}
+                          </p>
+                          {current.blanks?.blank2 && (
+                            <p>
+                              <strong className="text-indigo-200">(2):</strong>{' '}
+                              {current.blanks.blank2.explanation ||
+                                `Đáp án chính xác cho vị trí (2) là "${current.blanks.blank2.correct}".`}
+                            </p>
+                          )}
+                        </div>
 
                         {/* 3. KHỐI DỊCH NGHĨA HỘI THOẠI */}
                         {current.lines && (
@@ -1133,7 +1146,7 @@ export default function ReviewTab({
                           </div>
                         )}
 
-                        {!(reviewGraded[`${q.key}_b1`] && reviewGraded[`${q.key}_b2`]) && (
+                        {!(reviewGraded[`${q.key}_b1`] && (current.blanks?.blank2 ? reviewGraded[`${q.key}_b2`] : true)) && (
                           <button
                             onClick={() => markAsCorrect(q)}
                             className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-2"
