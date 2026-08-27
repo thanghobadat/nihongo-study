@@ -1118,6 +1118,18 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Push Git**:
   - Chạy `find_all_romaji_options_across_all_lessons.js` đạt 0 phương án Romaji còn sót lại. Build Next.js frontend thành công 100%. Commit và push mã nguồn lên nhánh `main` remote GitHub.
 
+### Mốc 91: Tạo trang Text Stash độc lập lưu trữ & chuyển văn bản 30.000 dòng đa thiết bị (Đã hoàn thành & Sẵn sàng Push GitHub - 27/08/2026)
+- **Tạo trang độc lập `/stash` (Frontend)**:
+  - Xây dựng giao diện standalone [stash/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/stash/page.tsx) không dính líu đến menu học tập chính.
+  - Tối ưu hóa Textarea và bộ đếm thời gian thực xử lý mượt mà văn bản cực lớn (30.000+ dòng hoặc lên tới 50MB).
+  - Hiển thị trực quan chỉ số: **Số dòng (Line Count)**, **Số ký tự**, **Dung lượng (KB/MB)**.
+  - Cung cấp danh sách tệp đã lưu kèm các nút: Tải trực tiếp về máy (`⬇️ Tải về`), nạp lại ô paste (`👁️ Xem`), và xóa tệp (`🗑️ Xóa`).
+- **Nâng cấp Backend & Database**:
+  - Nâng giới hạn body parser trong [index.js](file:///d:/AI/japanese_learning/website/backend/src/index.js) lên `50mb`.
+  - Viết tuyến API độc lập [routes/stash.js](file:///d:/AI/japanese_learning/website/backend/src/routes/stash.js) hỗ trợ lưu trữ vào Supabase Cloud (`public.text_pastes`) và lưu file dự phòng cục bộ `backend/data/pastes/`.
+  - Bổ sung schema bảng `public.text_pastes` vào [schema.sql](file:///d:/AI/japanese_learning/website/backend/src/db/schema.sql).
+
+
 
 
 

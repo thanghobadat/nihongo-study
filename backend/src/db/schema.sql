@@ -334,3 +334,18 @@ CREATE TABLE public.user_review_sessions (
 ALTER TABLE public.user_review_sessions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow user full access to own review sessions" ON public.user_review_sessions
   FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+
+-- 17. Create Text Pastes Table (Independent Stash / Large Text Transfer)
+CREATE TABLE IF NOT EXISTS public.text_pastes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  filename TEXT NOT NULL,
+  content TEXT NOT NULL,
+  line_count INTEGER DEFAULT 0,
+  size_bytes BIGINT DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.text_pastes ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read and write text_pastes" ON public.text_pastes FOR ALL USING (true) WITH CHECK (true);
+

@@ -23,7 +23,8 @@ app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
 }));
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Request logging middleware for debugging crashes
 app.use((req, res, next) => {
@@ -62,6 +63,8 @@ app.get('/test-client.js', (req, res) => {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/stash', require('./routes/stash'));
+
 
 // Global Error Handler
 app.use((err, req, res, next) => {

@@ -46,4 +46,6 @@ backend/src/db/exams.json
 backend/src/db/users.json
 backend/src/db/custom_items.json
 backend/src/db/mockDb_backup*.js
+backend/data/
+
 
