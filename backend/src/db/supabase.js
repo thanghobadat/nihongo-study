@@ -1,18 +1,19 @@
 // Polyfill WebSocket for Node.js < 22 (required by Supabase Realtime)
 global.WebSocket = require('ws');
 
+const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseUrl = process.env.SUPABASE_URL || 'https://placeholder-url.supabase.co';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder_key';
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  console.warn('WARNING: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is missing from environment variables.');
+if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  console.warn('WARNING: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is missing from environment variables (using mock/fallback).');
 }
 
 // Client for database operations (headers will never be mutated because we don't call auth methods on it)
-const dbClient = createClient(supabaseUrl || '', supabaseServiceKey || '', {
+const dbClient = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
     persistSession: false,
     autoRefreshToken: false
@@ -20,7 +21,7 @@ const dbClient = createClient(supabaseUrl || '', supabaseServiceKey || '', {
 });
 
 // Client for auth operations (mutates headers when verifying tokens, isolating mutation from dbClient)
-const authClient = createClient(supabaseUrl || '', supabaseServiceKey || '', {
+const authClient = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
     persistSession: false,
     autoRefreshToken: false

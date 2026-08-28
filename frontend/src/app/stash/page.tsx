@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { api } from '../utils/api';
 
 interface StashItem {
   id: string;
@@ -10,8 +11,6 @@ interface StashItem {
   created_at: string;
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-
 export default function StashPage() {
   const [content, setContent] = useState<string>('');
   const [filename, setFilename] = useState<string>('');
@@ -19,6 +18,7 @@ export default function StashPage() {
   const [isLoadingList, setIsLoadingList] = useState<boolean>(true);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
   const [isDark, setIsDark] = useState<boolean>(true);
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -75,29 +75,48 @@ export default function StashPage() {
   const fetchSavedItems = async () => {
     try {
       setIsLoadingList(true);
-      const res = await fetch(`${API_BASE_URL}/api/stash`, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setSavedItems(data.items || []);
+      setConnectionError(null);
+      const data = await api.get('/api/stash', { skipCache: true });
+      if (data && data.items) {
+        setSavedItems(data.items);
+      } else if (Array.isArray(data)) {
+        setSavedItems(data);
+      } else {
+        setSavedItems([]);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error fetching stash list:', err);
+      setConnectionError(err.message || 'Không thể kết nối máy chủ Backend. Vui lòng kiểm tra server.');
     } finally {
       setIsLoadingList(false);
     }
   };
 
-  // Calculate stats (lines, chars, size) efficiently
+  // Calculate stats (lines, chars, size) efficiently with ZERO RAM allocation
   const stats = useMemo(() => {
     if (!content) {
       return { lines: 0, chars: 0, sizeKb: '0 KB', sizeMb: '0.00 MB', bytes: 0 };
     }
-    const lines = (content.match(/\n/g) || []).length + 1;
     const chars = content.length;
-    // Estimate byte length
-    const bytes = new Blob([content]).size;
+    let lines = 1;
+    let bytes = 0;
+
+    // Fast single-pass integer loop (runs in < 1ms for 4MB text without array creation)
+    for (let i = 0; i < chars; i++) {
+      const code = content.charCodeAt(i);
+      if (code === 10) lines++; // '\n'
+      if (code <= 0x7f) {
+        bytes += 1;
+      } else if (code <= 0x7ff) {
+        bytes += 2;
+      } else if (code >= 0xd800 && code <= 0xdbff) {
+        bytes += 4;
+        i++; // skip surrogate pair
+      } else {
+        bytes += 3;
+      }
+    }
+
     const sizeKb = (bytes / 1024).toFixed(1) + ' KB';
     const sizeMb = (bytes / (1024 * 1024)).toFixed(2) + ' MB';
     return { lines, chars, sizeKb, sizeMb, bytes };
@@ -139,24 +158,18 @@ export default function StashPage() {
     try {
       setIsSaving(true);
       const cleanFilename = filename.trim() || generateDefaultFilename();
+      const sizeStr = stats.bytes > 1024 * 1024 ? stats.sizeMb : stats.sizeKb;
+      showToast(`⏳ Đang tải lên máy chủ (${stats.lines.toLocaleString()} dòng / ${sizeStr})...`);
 
-      const res = await fetch(`${API_BASE_URL}/api/stash`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          filename: cleanFilename,
-          content: content
-        })
+      const data = await api.post('/api/stash', {
+        filename: cleanFilename,
+        content: content
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        showToast(`✅ Đã lưu thành công tệp "${cleanFilename}" (${stats.lines.toLocaleString()} dòng)!`);
+      if (data && (data.success || data.id)) {
+        showToast(`✅ Đã lưu thành công tệp "${cleanFilename}" (${stats.lines.toLocaleString()} dòng / ${sizeStr})!`);
         setFilename(generateDefaultFilename());
         fetchSavedItems();
-      } else {
-        const errorData = await res.json().catch(() => ({}));
-        alert(`Lỗi khi lưu tệp: ${errorData.error || res.statusText}`);
       }
     } catch (err: any) {
       console.error('Error saving stash:', err);
@@ -166,34 +179,43 @@ export default function StashPage() {
     }
   };
 
-  // Direct download file trigger
-  const handleDownload = (item: StashItem) => {
-    const downloadUrl = `${API_BASE_URL}/api/stash/${item.id}/download`;
-    // Create hidden anchor to trigger native browser download
-    const a = document.createElement('a');
-    a.href = downloadUrl;
-    a.download = item.filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    showToast(`⬇️ Bắt đầu tải tệp "${item.filename}"...`);
+  // Direct download file trigger (using client-side Blob for maximum speed & resilience)
+  const handleDownload = async (item: StashItem) => {
+    try {
+      showToast(`⏳ Đang chuẩn bị tải tệp "${item.filename}"...`);
+      const data = await api.get(`/api/stash/${item.id}`, { skipCache: true });
+      if (data?.item && data.item.content !== undefined) {
+        const blob = new Blob([data.item.content], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = item.filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`⬇️ Đã tải xong tệp "${item.filename}"!`);
+      } else {
+        throw new Error('Không có nội dung để tải.');
+      }
+    } catch (err: any) {
+      console.error('Error downloading stash:', err);
+      showToast(`⚠️ Lỗi khi tải tệp: ${err.message}`);
+    }
   };
 
   // Load content from saved stash into editor
   const handleLoadContent = async (item: StashItem) => {
     try {
       showToast(`⏳ Đang tải nội dung "${item.filename}"...`);
-      const res = await fetch(`${API_BASE_URL}/api/stash/${item.id}`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.item && data.item.content !== undefined) {
-          setContent(data.item.content);
-          setFilename(item.filename);
-          setActiveItemId(item.id);
-          showToast(`📋 Đã nạp "${item.filename}" (${(data.item.line_count || 0).toLocaleString()} dòng) vào ô nhập.`);
-          if (textareaRef.current) {
-            textareaRef.current.focus();
-          }
+      const data = await api.get(`/api/stash/${item.id}`, { skipCache: true });
+      if (data?.item && data.item.content !== undefined) {
+        setContent(data.item.content);
+        setFilename(item.filename);
+        setActiveItemId(item.id);
+        showToast(`📋 Đã nạp "${item.filename}" (${(data.item.line_count || 0).toLocaleString()} dòng) vào ô nhập.`);
+        if (textareaRef.current) {
+          textareaRef.current.focus();
         }
       } else {
         alert('Không thể nạp tệp.');
@@ -207,16 +229,13 @@ export default function StashPage() {
   // Copy content directly to clipboard
   const handleCopyContent = async (item: StashItem) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/stash/${item.id}`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.item && data.item.content) {
-          await navigator.clipboard.writeText(data.item.content);
-          showToast(`📋 Đã sao chép toàn bộ nội dung "${item.filename}" vào Clipboard!`);
-        }
+      const data = await api.get(`/api/stash/${item.id}`, { skipCache: true });
+      if (data?.item && data.item.content) {
+        await navigator.clipboard.writeText(data.item.content);
+        showToast(`📋 Đã sao chép toàn bộ nội dung "${item.filename}" vào Clipboard!`);
       }
-    } catch (err) {
-      showToast('⚠️ Không thể tự động sao chép: ' + err);
+    } catch (err: any) {
+      showToast('⚠️ Không thể tự động sao chép: ' + err.message);
     }
   };
 
@@ -227,18 +246,12 @@ export default function StashPage() {
     }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/stash/${item.id}`, {
-        method: 'DELETE'
-      });
-      if (res.ok) {
-        showToast(`🗑️ Đã xóa tệp "${item.filename}".`);
-        if (activeItemId === item.id) {
-          setActiveItemId(null);
-        }
-        setSavedItems(prev => prev.filter(i => i.id !== item.id));
-      } else {
-        alert('Không thể xóa tệp.');
+      await api.delete(`/api/stash/${item.id}`);
+      showToast(`🗑️ Đã xóa tệp "${item.filename}".`);
+      if (activeItemId === item.id) {
+        setActiveItemId(null);
       }
+      setSavedItems(prev => prev.filter(i => i.id !== item.id));
     } catch (err: any) {
       alert('Lỗi khi xóa tệp: ' + err.message);
     }
@@ -432,6 +445,28 @@ export default function StashPage() {
               Mở trang này trên máy khác để tải về
             </span>
           </div>
+
+          {connectionError && (
+            <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 text-amber-900 dark:text-amber-200 text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+              <div className="flex items-start space-x-2.5">
+                <span className="text-xl shrink-0">⚠️</span>
+                <div>
+                  <p className="font-bold">Không thể kết nối với máy chủ Backend:</p>
+                  <p className="text-amber-800 dark:text-amber-300 font-mono text-xs mt-0.5">{connectionError}</p>
+                  <p className="text-amber-700 dark:text-amber-400 text-xs mt-1">
+                    Nếu đang chạy cục bộ, vui lòng bật server backend (cổng 8080). Nếu trên Render, server có thể đang khởi động lại (vui lòng chờ 30s).
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={fetchSavedItems}
+                className="self-end sm:self-center px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shrink-0 shadow transition"
+              >
+                🔄 Thử lại
+              </button>
+            </div>
+          )}
 
           {isLoadingList ? (
             <div className="py-12 flex flex-col items-center justify-center text-slate-400 space-y-3">

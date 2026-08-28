@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Global process error handlers to prevent crashes from unhandled promise rejections or exceptions
 process.on('unhandledRejection', (reason, promise) => {
@@ -18,9 +18,11 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Security Middlewares
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: true,
   credentials: true
 }));
 app.use(express.json({ limit: '50mb' }));
