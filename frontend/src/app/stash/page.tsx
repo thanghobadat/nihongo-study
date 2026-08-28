@@ -419,8 +419,14 @@ export default function StashPage() {
               ref={textareaRef}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Dán văn bản lớn (hỗ trợ tới 30.000 dòng hoặc 50MB) vào đây..."
+              placeholder="Dán văn bản lớn (hỗ trợ tới 50.000+ dòng hoặc 50MB) vào đây..."
               spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="off"
+              autoComplete="off"
+              data-gramm="false"
+              data-gramm_editor="false"
+              data-enable-grammarly="false"
               className="w-full h-[460px] sm:h-[540px] p-4 rounded-xl font-mono text-xs sm:text-sm leading-relaxed bg-slate-950 text-slate-100 border border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-y shadow-inner"
               style={{
                 tabSize: 2,

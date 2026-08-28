@@ -1,4 +1,17 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+export function getBaseUrl(): string {
+  // If explicitly configured to a remote HTTPS domain
+  if (process.env.NEXT_PUBLIC_API_URL && !process.env.NEXT_PUBLIC_API_URL.includes('localhost')) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  // If running in browser and NOT on local machine (e.g. on Vercel or any online domain)
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host !== 'localhost' && host !== '127.0.0.1') {
+      return 'https://nihongo-flow-backend.onrender.com';
+    }
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+}
 
 export interface RequestOptions {
   headers?: Record<string, string>;
@@ -38,7 +51,8 @@ async function request(path: string, method: string, body: any = null, options: 
     }
   }
 
-  const url = `${BASE_URL}${path}`;
+  const baseUrl = getBaseUrl();
+  const url = `${baseUrl}${path}`;
   
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -71,7 +85,7 @@ async function request(path: string, method: string, body: any = null, options: 
     const refreshToken = localStorage.getItem('refreshToken');
     if (refreshToken) {
       try {
-        const refreshResponse = await fetch(`${BASE_URL}/api/auth/refresh`, {
+        const refreshResponse = await fetch(`${baseUrl}/api/auth/refresh`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ refreshToken })
