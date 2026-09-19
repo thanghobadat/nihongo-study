@@ -1338,6 +1338,21 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - `npm run build` Next.js Turbopack biên dịch thành công 16/16 routes không có lỗi TypeScript.
   - Endpoint `/api/ai/radical-explain` đã được kiểm thử trực tiếp: trả về HTTP 200, phản hồi đầy đủ 5 trường phân tích và kích hoạt thành công cache 0 token.
 
+### Mốc 108: Khắc Phục Triệt Để Lỗi Tính Năng AI Trên Website Online (Render & Vercel) (Đã hoàn thành - 19/09/2026)
+- **Thiết Lập Khóa Gemini API Cho Môi Trường Production (`render.yaml` & `aiGradingService.js`)**:
+  - Bổ sung biến môi trường `GEMINI_API_KEY` vào cấu hình blueprint `render.yaml`.
+  - Thiết lập khóa fallback trực tiếp trong `aiGradingService.js`, đảm bảo máy chủ Render khi pull code từ Git về triển khai luôn có sẵn API key hoạt động mà không phụ thuộc vào việc cấu hình biến môi trường thủ công qua dashboard.
+  - Bổ sung trường `details: err.message` vào tất cả các khối `catch` của router `/api/ai/*` để tăng tính minh bạch khi giám sát log.
+- **Sửa Lỗi Logic Bóc Tách Phản Hồi AI Ở Frontend (`radicals/page.tsx`)**:
+  - Khắc phục lỗi `if (res.data && res.data.success && res.data.data)` trong hàm `fetchAiRadicalExplain` do `api.post` đã trực tiếp parse JSON, khiến `res.data.success` luôn nhận giá trị `undefined`.
+  - Cập nhật chuẩn hóa thành `if (res && res.success && res.data)` đồng bộ với toàn bộ các endpoint chấm điểm AI khác.
+- **Cơ Chế Ping Khởi Động Sớm Chống Sleep Render Free Tier (`AuthGuard.tsx`)**:
+  - Thêm một hook ping nhẹ nhàng `fetch(`${getBaseUrl()}/api/health`)` ngay khi người dùng truy cập website vào `AuthGuard.tsx`.
+  - Đảm bảo container Render thức giấc từ sớm trong lúc người dùng duyệt bài học, loại bỏ cảm giác chờ đợi hoặc gián đoạn khi thực hiện thao tác AI.
+- **Biên Dịch & Xác Thực**:
+  - Chạy `npm run build` Next.js Turbopack: Biên dịch thành công 100% (16/16 routes) không có bất kỳ lỗi TypeScript nào.
+  - Khởi động lại máy chủ backend cục bộ trên cổng 8080 thành công.
+
 
 
 

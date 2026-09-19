@@ -64,19 +64,19 @@ export default function RadicalsPage() {
   const fetchAiRadicalExplain = async (rad: RadicalInfo) => {
     try {
       setAiRadicalExplain({ loading: true, data: null, error: null });
-      const res = await api.post('/api/ai/radical-explain', {
+      const res: any = await api.post('/api/ai/radical-explain', {
         character: rad.character,
         sinoVietnamese: rad.sinoVietnamese,
         meaning: rad.meaning,
         description: rad.description
       });
-      if (res.data && res.data.success && res.data.data) {
-        setAiRadicalExplain({ loading: false, data: res.data.data, error: null });
+      if (res && res.success && res.data) {
+        setAiRadicalExplain({ loading: false, data: res.data, error: null });
       } else {
         setAiRadicalExplain({
           loading: false,
           data: null,
-          error: res.data?.error || 'Không thể tải phân tích AI lúc này.'
+          error: res?.error || 'Không thể tải phân tích AI lúc này.'
         });
       }
     } catch (err: any) {

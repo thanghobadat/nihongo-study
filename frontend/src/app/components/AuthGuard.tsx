@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { api } from '../utils/api';
+import { api, getBaseUrl } from '../utils/api';
 
 const PUBLIC_PATHS = ['/login', '/register', '/forgot-password', '/reset-password'];
 
@@ -11,6 +11,15 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Background wake-up ping for sleeping Render Free tier instances
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        fetch(`${getBaseUrl()}/api/health`, { method: 'GET' }).catch(() => {});
+      } catch (e) {}
+    }
+  }, []);
 
   useEffect(() => {
     checkAuth();

@@ -110,7 +110,8 @@ router.post('/grade', async (req, res) => {
     return res.json({
       success: false,
       fallbackToLocal: true,
-      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Đã chuyển sang bộ chấm điểm cục bộ.'
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Đã chuyển sang bộ chấm điểm cục bộ.',
+      details: err.message
     });
   }
 });
@@ -169,7 +170,8 @@ router.post('/grade-radical', async (req, res) => {
     return res.json({
       success: false,
       fallbackToLocal: true,
-      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Đã chuyển sang bộ chấm điểm cục bộ.'
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Đã chuyển sang bộ chấm điểm cục bộ.',
+      details: err.message
     });
   }
 });
@@ -248,7 +250,8 @@ router.post('/grade-radical-full', async (req, res) => {
     return res.json({
       success: false,
       fallbackToLocal: true,
-      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.'
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.',
+      details: err.message
     });
   }
 });
@@ -322,7 +325,8 @@ router.post('/radical-explain', async (req, res) => {
     return res.json({
       success: false,
       fallbackToLocal: true,
-      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.'
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.',
+      details: err.message
     });
   }
 });
