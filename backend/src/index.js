@@ -66,6 +66,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/stash', require('./routes/stash'));
+app.use('/api/ai', require('./routes/ai'));
 
 
 // Global Error Handler

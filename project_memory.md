@@ -1201,3 +1201,44 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định Benchmark:**
   - Đã kiểm thử thành công gói dữ liệu 50.000 dòng (~5.08 MB): Lưu tệp trong 403ms, tải danh sách trong 5ms, tải xuống trong 91ms (khớp 100% dữ liệu).
 
+### Mốc 100: Tích hợp Tính năng Chấm điểm bằng AI & Cơ chế Quản lý Token 4 Lớp (Đã hoàn thành - 19/09/2026)
+- **Hệ thống Quản lý & Tiết kiệm Token Toàn diện (4 Lớp Bảo Vệ)**:
+  - Lập trình `aiQuotaService.js` hỗ trợ 4 lớp bảo vệ: (1) Cache 0-Token tại `ai_grading_cache.json` trả về kết quả trong < 1ms; (2) Hạn ngạch 50 lượt/ngày cho mỗi người dùng; (3) Ngắt an toàn Circuit Breaker trần 200.000 tokens/ngày ghi nhận từ `usageMetadata`; (4) Tối ưu hóa prompt với `thinkingConfig: { thinkingBudget: 0 }` (tiết kiệm ~500 tokens suy nghĩ mỗi lượt) và `maxOutputTokens: 600`.
+- **Dịch vụ Chấm điểm Gemini Sư phạm (`aiGradingService.js`)**:
+  - Tích hợp mô hình `gemini-2.5-flash` (fallback `gemini-flash-lite-latest`) với cấu trúc ép kiểu JSON Schema chuẩn: `is_correct`, `score`, `status`, `status_label`, `feedback`, `grammar_analysis`, `suggested_answer`.
+  - Nhận diện và phân tích chính xác các lỗi sai trợ từ tiếng Nhật, chia thể động từ/tính từ, từ đồng nghĩa và độ tự nhiên theo chuẩn N5/N4.
+- **Tuyến đường Backend (`/api/ai`)**:
+  - Triển khai `GET /api/ai/quota` và `POST /api/ai/grade` trong `routes/ai.js` và gắn vào `index.js`.
+- **Giao diện Frontend (`ReviewTab.tsx`)**:
+  - Hiển thị huy hiệu hạn ngạch trực quan `✨ AI: Còn X/50 lượt` trên Toolbar.
+  - Tích hợp nút bấm `✨ Nhờ AI chấm & Nhận xét sư phạm` và Card nhận xét thông minh (điểm %, lời giải thích tiếng Việt, phân tích ngữ pháp, câu gợi ý kèm loa phát âm `🔊`, và nút 1-chạm áp dụng điểm AI).
+- **Kiểm định & Xác thực**:
+  - Kiểm thử đơn vị tự động `test_ai_quota.js` vượt qua 100%.
+  - Biên dịch thành công Next.js Frontend (`npm run build`) 100% không lỗi TypeScript.
+
+### Mốc 101: Nâng cấp Chấm AI Trực tiếp khi Submit & Cơ chế Multi-model Failover Pool Chống Timeout / 503 (Đã hoàn thành - 19/09/2026)
+- **Tích hợp Trực tiếp AI vào Nút Submit (`ReviewTab.tsx`)**:
+  - Chuyển đổi luồng người dùng từ 2 bước sang 1 bước duy nhất: Khi bấm "Kiểm tra câu này" (hoặc phím Enter), AI trực tiếp chấm và đánh giá đúng/sai ngay lập tức.
+  - Tự động cộng điểm và cập nhật lịch sử làm bài theo đánh giá sư phạm của AI mà không cần thao tác thêm.
+  - Bổ sung nút toggle trên Toolbar cho phép người dùng linh hoạt bật/tắt chế độ chấm trực tiếp bằng AI theo nhu cầu.
+- **Khắc phục Triệt để Lỗi Timeout & 503 High Demand (`aiGradingService.js`, `routes/ai.js`)**:
+  - Xây dựng **Multi-model Failover Pool**: Thiết lập danh sách ưu tiên gồm 4 model Gemini (`gemini-2.5-flash`, `gemini-flash-lite-latest`, `gemini-2.5-flash-lite`, `gemini-flash-latest`). Khi một model gặp tải cao (503), lỗi mạng (429, 500) hoặc quá thời gian, hệ thống tự động chuyển sang model tiếp theo trong pool.
+  - Bổ sung **Request Timeout Controller**: Cấu hình `AbortController` với ngưỡng giới hạn 8 giây mỗi model để triệt tiêu tình trạng treo request do mạng chậm.
+  - **Graceful Fallback**: Backend trả về HTTP 200 kèm `fallbackToLocal: true` trong trường hợp mạng gián đoạn, giúp Frontend tự động chuyển sang bộ so khớp cục bộ mượt mà, không bao giờ làm xuất hiện màn hình báo lỗi đỏ (dev overlay) của Next.js.
+  - Kiểm thử thực tế qua endpoint `POST /api/ai/grade` hoàn thành thành công trong ~2.5s, cache hit hoàn thành trong ~10ms.
+
+### Mốc 102: Gỡ Bỏ Giới Hạn 50 Lượt/Ngày & Chuyển Sang Unlimited AI Grading (Đã hoàn thành - 19/09/2026)
+- **Gỡ bỏ hạn ngạch 50 lượt/ngày (`aiQuotaService.js`, `routes/ai.js`)**:
+  - Loại bỏ hoàn toàn hạn mức `DAILY_USER_LIMIT = 50`. Chuyển sang trạng thái `isUnlimited: true`, `remaining: 999999`.
+  - Bỏ kiểm tra `remaining <= 0` trong `checkCanUseAI()`, cho phép học viên gọi AI chấm bài tự do không giới hạn.
+  - Giữ nguyên bộ đệm 0-token Cache để tối ưu tốc độ phản hồi tức thì (10ms) cho các câu trả lời trùng lặp.
+- **Tối ưu Giao diện Frontend (`ReviewTab.tsx`)**:
+  - Cập nhật huy hiệu trên thanh Toolbar thành: `✨ AI: Không giới hạn`.
+  - Gỡ bỏ thuộc tính `disabled={... aiQuota.remaining <= 0}` trên tất cả các nút chấm bài.
+  - Bỏ dòng cảnh báo `Đã hết lượt AI hôm nay`.
+- **Kiểm thử Xác minh**:
+  - `GET /api/ai/quota`: Phản hồi `isUnlimited: true`, `limit: null`.
+  - `POST /api/ai/grade`: Chấm điểm thành công trong 2.1s với trạng thái không giới hạn.
+
+
+

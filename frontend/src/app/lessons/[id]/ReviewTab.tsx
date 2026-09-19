@@ -1,6 +1,7 @@
 'use strict';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { api } from '../../utils/api';
 
 interface ReviewTabProps {
   lessonTitle: string;
@@ -106,6 +107,28 @@ export default function ReviewTab({
 
   const [isSessionLoaded, setIsSessionLoaded] = useState<boolean>(false);
 
+  // AI Grading states & Quota
+  const [aiQuota, setAiQuota] = useState<{ remaining: number; limit: number } | null>(null);
+  const [aiGradingLoading, setAiGradingLoading] = useState<Record<string, boolean>>({});
+  const [aiGradingResults, setAiGradingResults] = useState<Record<string, any>>({});
+  const [aiErrorMessage, setAiErrorMessage] = useState<Record<string, string>>({});
+  const [autoAiGrading, setAutoAiGrading] = useState<boolean>(true);
+
+  // Fetch AI Quota on mount
+  useEffect(() => {
+    const fetchQuota = async () => {
+      try {
+        const res = await api.get('/api/ai/quota');
+        if (res && res.quota) {
+          setAiQuota({ remaining: res.quota.remaining, limit: res.quota.limit });
+        }
+      } catch (err) {
+        console.warn('Failed to fetch AI quota:', err);
+      }
+    };
+    fetchQuota();
+  }, []);
+
   // 1. Tự động nạp danh sách tiến trình các dạng bài từ Cloud API / LocalStorage khi nạp dữ liệu
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -113,12 +136,9 @@ export default function ReviewTab({
         try {
           let loadedSession: Record<string, any> | null = null;
           try {
-            const res = await fetch(`/api/user/review-sessions?storage_key=${encodeURIComponent(storageKey)}`);
-            if (res.ok) {
-              const data = await res.json();
-              if (data && data.session_data && typeof data.session_data === 'object' && Object.keys(data.session_data).length > 0) {
-                loadedSession = data.session_data;
-              }
+            const data = await api.get(`/api/user/review-sessions?storage_key=${encodeURIComponent(storageKey)}`);
+            if (data && data.session_data && typeof data.session_data === 'object' && Object.keys(data.session_data).length > 0) {
+              loadedSession = data.session_data;
             }
           } catch (e) {
             console.log('Cloud sync fetch error, fallback to localStorage', e);
@@ -191,11 +211,7 @@ export default function ReviewTab({
           localStorage.setItem(storageKey, JSON.stringify(updated));
 
           // Sync to Cloud API
-          fetch('/api/user/review-sessions', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ storage_key: storageKey, session_data: updated })
-          }).catch(() => {});
+          api.post('/api/user/review-sessions', { storage_key: storageKey, session_data: updated }).catch(() => {});
 
           return updated;
         });
@@ -207,11 +223,7 @@ export default function ReviewTab({
   const masterResetAll = () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(storageKey);
-      fetch('/api/user/review-sessions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ storage_key: storageKey, session_data: {} })
-      }).catch(() => {});
+      api.post('/api/user/review-sessions', { storage_key: storageKey, session_data: {} }).catch(() => {});
     }
     setSavedSessions({});
     setReviewQuestions([]);
@@ -236,11 +248,7 @@ export default function ReviewTab({
         } else {
           localStorage.setItem(storageKey, JSON.stringify(updated));
         }
-        fetch('/api/user/review-sessions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ storage_key: storageKey, session_data: updated })
-        }).catch(() => {});
+        api.post('/api/user/review-sessions', { storage_key: storageKey, session_data: updated }).catch(() => {});
       }
       return updated;
     });
@@ -382,6 +390,193 @@ export default function ReviewTab({
         setReviewScore(prev => prev + missingPoints);
       }
     }
+  };
+
+  const handleAiGrade = async (q: any) => {
+    if (!q) return;
+    const key = q.key;
+    const current = q.originalData;
+    const userAns = (reviewAnswers[key] || '').trim();
+    if (!userAns) return;
+
+    setAiGradingLoading(prev => ({ ...prev, [key]: true }));
+    setAiErrorMessage(prev => ({ ...prev, [key]: '' }));
+
+    try {
+      let questionText = '';
+      let direction = 'vi-to-ja';
+
+      if (q.type === 'translation') {
+        const isJaToVi = current.direction === 'ja-to-vi';
+        direction = isJaToVi ? 'ja-to-vi' : 'vi-to-ja';
+        const isJp = (str: string) => /[\u3040-\u30ff\u4e00-\u9faf]/.test(str || '');
+        const getVnQ = (item: any) => {
+          if (!item) return '';
+          if (item.question && !isJp(item.question)) return item.question;
+          if (item.question_vietnamese && !isJp(item.question_vietnamese)) return item.question_vietnamese;
+          if (item.vietnamese_meaning && !isJp(item.vietnamese_meaning)) return item.vietnamese_meaning;
+          if (item.vietnamese && !isJp(item.vietnamese)) return item.vietnamese;
+          return item.question || 'Hãy dịch câu sang tiếng Nhật:';
+        };
+        questionText = isJaToVi
+          ? (reviewShowKanji ? (current.question_kanji || current.question_kana || current.question) : (current.question_kana || current.question_kanji || current.question))
+          : getVnQ(current);
+      } else if (q.type === 'dictation') {
+        direction = 'ja-to-vi';
+        questionText = current.question_audio || current.audio_text_kanji || current.audio_text_kana || '';
+      }
+
+      const candidates = getAllCandidateAnswers(q);
+      const correctAns = Array.isArray(candidates) ? candidates.join(' / ') : String(candidates || '');
+
+      const res = await api.post('/api/ai/grade', {
+        direction,
+        question: questionText,
+        userAnswer: userAns,
+        correctAnswer: correctAns,
+        lessonTitle: lessonTitle || '',
+        context: current.context || current.explanation || ''
+      });
+
+      if (res && res.success && res.data) {
+        setAiGradingResults(prev => ({ ...prev, [key]: res.data }));
+        if (res.quota) {
+          setAiQuota({ remaining: res.quota.remaining, limit: res.quota.limit });
+        }
+
+        // Quyết định ĐÚNG/SAI trực tiếp từ đánh giá AI:
+        const isAiCorrect = !!(res.data.is_correct || res.data.score >= 80);
+        setReviewGraded(prev => ({ ...prev, [key]: isAiCorrect }));
+        if (isAiCorrect) {
+          setReviewScore(prev => prev + 1);
+        }
+        const fbText = `AI Đánh giá: ${isAiCorrect ? '✓ Đúng' : '❌ Chưa chính xác'} (${res.data.score}%) - ${res.data.status_label}`;
+        setReviewFeedback(prev => ({ ...prev, [key]: fbText }));
+      } else {
+        if (res?.quota) {
+          setAiQuota({ remaining: res.quota.remaining, limit: res.quota.limit });
+        }
+        setAiErrorMessage(prev => ({ ...prev, [key]: res?.error || 'AI tạm thời không phản hồi. Đã chuyển sang bộ chấm tự động.' }));
+        if (q.type === 'translation') {
+          gradeTranslation(q);
+        } else if (q.type === 'dictation') {
+          gradeDictation(q);
+        }
+      }
+    } catch (err: any) {
+      console.error('AI grading error:', err);
+      setAiErrorMessage(prev => ({ ...prev, [key]: 'Lỗi kết nối AI. Đã chuyển sang bộ chấm tự động.' }));
+      if (q.type === 'translation') {
+        gradeTranslation(q);
+      } else if (q.type === 'dictation') {
+        gradeDictation(q);
+      }
+    } finally {
+      setAiGradingLoading(prev => ({ ...prev, [key]: false }));
+    }
+  };
+
+  const renderAiGradingBox = (q: any) => {
+    const key = q.key;
+    const aiResult = aiGradingResults[key];
+    const isLoading = !!aiGradingLoading[key];
+    const errorMsg = aiErrorMessage[key];
+
+    return (
+      <div className="mt-3 pt-3 border-t border-slate-800/80">
+        {!aiResult ? (
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={isLoading}
+              onClick={() => handleAiGrade(q)}
+              className="px-3.5 py-1.5 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 hover:from-purple-600/50 hover:to-indigo-600/50 text-purple-200 border border-purple-500/40 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <>
+                  <span className="inline-block animate-spin">⚡</span>
+                  <span>AI đang phân tích ngữ pháp...</span>
+                </>
+              ) : (
+                <>
+                  <span>✨ Nhờ AI chấm & Nhận xét sư phạm</span>
+                </>
+              )}
+            </button>
+          </div>
+        ) : (
+          <div className="bg-gradient-to-br from-purple-950/40 via-slate-900/70 to-indigo-950/40 border border-purple-500/30 rounded-xl p-3.5 text-xs space-y-2.5 relative overflow-hidden shadow-lg backdrop-blur-md">
+            {/* AI Header Badge */}
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 font-extrabold text-[11px] flex items-center gap-1 border border-purple-500/30">
+                  🤖 Gemini AI Đánh giá
+                </span>
+                <span className={`px-2 py-0.5 rounded-md font-bold text-[11px] border ${
+                  aiResult.score >= 80
+                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                    : aiResult.score >= 50
+                      ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                      : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
+                }`}>
+                  🎯 {aiResult.score}% - {aiResult.status_label}
+                </span>
+              </div>
+
+              {/* Quick Apply button if AI considers it correct but currently marked false */}
+              {!reviewGraded[key] && (aiResult.is_correct || aiResult.score >= 80) && (
+                <button
+                  type="button"
+                  onClick={() => markAsCorrect(q)}
+                  className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-[11px] shadow transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                >
+                  ✔ Áp dụng điểm AI (Sửa thành Đúng)
+                </button>
+              )}
+            </div>
+
+            {/* Feedback */}
+            <div className="text-slate-200 leading-relaxed bg-slate-950/50 p-2.5 rounded-lg border border-slate-800/80">
+              <span className="text-purple-300 font-bold block mb-1">💡 Lời nhận xét sư phạm:</span>
+              {aiResult.feedback}
+            </div>
+
+            {/* Grammar Analysis */}
+            {aiResult.grammar_analysis && (
+              <div className="text-slate-300 leading-relaxed bg-slate-950/30 p-2.5 rounded-lg border border-slate-800/60">
+                <span className="text-sky-300 font-bold block mb-1">🔍 Phân tích ngữ pháp:</span>
+                {aiResult.grammar_analysis}
+              </div>
+            )}
+
+            {/* Suggested Answer */}
+            {aiResult.suggested_answer && (
+              <div className="flex items-center justify-between gap-2 bg-purple-950/30 p-2.5 rounded-lg border border-purple-500/20">
+                <div className="space-y-0.5">
+                  <span className="text-purple-300 font-bold block text-[11px]">🇯🇵 Cách nói chuẩn tự nhiên:</span>
+                  <span className="text-white font-bold text-sm select-all">{aiResult.suggested_answer}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => playAudio(aiResult.suggested_answer)}
+                  title="Nghe phát âm chuẩn"
+                  className="px-2.5 py-1.5 bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shrink-0"
+                >
+                  🔊 Nghe
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Error Message if any */}
+        {errorMsg && (
+          <div className="mt-2 p-2 bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs rounded-lg">
+            ⚠️ {errorMsg}
+          </div>
+        )}
+      </div>
+    );
   };
 
   const gradeTranslation = (q: any) => {
@@ -544,15 +739,23 @@ export default function ReviewTab({
   };
 
 
-  const gradeQuestion = (q: any) => {
+  const gradeQuestion = async (q: any) => {
     if (q.type === 'translation') {
-      gradeTranslation(q);
+      if (autoAiGrading) {
+        await handleAiGrade(q);
+      } else {
+        gradeTranslation(q);
+      }
     } else if (q.type === 'dialogue') {
       gradeDialogue(q);
     } else if (q.type === 'listening') {
       gradeListening(q);
     } else if (q.type === 'dictation') {
-      gradeDictation(q);
+      if (autoAiGrading) {
+        await handleAiGrade(q);
+      } else {
+        gradeDictation(q);
+      }
     }
   };
 
@@ -849,6 +1052,26 @@ export default function ReviewTab({
                   >
                     🔄 Reset dạng này
                   </button>
+                  <div 
+                    title="Chế độ chấm điểm trực tiếp bằng AI (Không giới hạn lượt dùng)"
+                    className="px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30 flex items-center gap-1.5 shadow-sm cursor-default"
+                  >
+                    <span>✨ AI:</span>
+                    <span className="font-semibold text-[11px] text-purple-200">Không giới hạn</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setAutoAiGrading(prev => !prev)}
+                    title="Bật/Tắt tự động chấm trực tiếp bằng AI khi nhấn Kiểm tra"
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer border ${
+                      autoAiGrading 
+                        ? 'bg-purple-600/25 text-purple-300 border-purple-500/40 shadow-sm' 
+                        : 'bg-slate-800 text-slate-400 border-slate-700'
+                    }`}
+                  >
+                    <span>🤖 Chấm AI:</span>
+                    <span>{autoAiGrading ? 'BẬT' : 'TẮT'}</span>
+                  </button>
                   <span className="font-bold text-slate-400">
                     Câu {reviewIndex + 1} / {reviewQuestions.length}
                   </span>
@@ -949,7 +1172,7 @@ export default function ReviewTab({
                         placeholder={isJaToVi ? "Nhập bản dịch tiếng Việt..." : "Nhập bản dịch tiếng Nhật (Hiragana/Romaji)..."}
                         className="w-full bg-slate-955/60 border border-slate-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all disabled:opacity-75 disabled:cursor-not-allowed"
                         onKeyDown={(e) => {
-                          if (e.key === 'Enter' && !isQuestionGraded) {
+                          if (e.key === 'Enter' && !isQuestionGraded && !aiGradingLoading[key]) {
                             gradeQuestion(q);
                           }
                         }}
@@ -958,22 +1181,35 @@ export default function ReviewTab({
 
                     {!isQuestionGraded ? (
                       <button
+                        type="button"
+                        disabled={!!aiGradingLoading[key]}
                         onClick={() => gradeQuestion(q)}
-                        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-xs"
+                        className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-xs flex items-center gap-1.5 disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        Kiểm tra câu này ➔
+                        {aiGradingLoading[key] ? (
+                          <>
+                            <span className="inline-block animate-spin">⚡</span>
+                            <span>AI đang chấm bài...</span>
+                          </>
+                        ) : (
+                          <span>{autoAiGrading ? '✨ Kiểm tra bằng AI ➔' : 'Kiểm tra câu này ➔'}</span>
+                        )}
                       </button>
                     ) : (
                       <div className="p-3.5 rounded-xl border bg-slate-950/40 border-slate-800 text-xs space-y-2">
-                        <p className="text-emerald-400 font-semibold">{reviewFeedback[key]}</p>
+                        <p className={`font-semibold ${reviewGraded[key] ? 'text-emerald-400' : 'text-rose-400'}`}>
+                          {reviewFeedback[key]}
+                        </p>
                         {!reviewGraded[key] && (
                           <button
+                            type="button"
                             onClick={() => markAsCorrect(q)}
                             className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-1"
                           >
                             ✔ Tôi nghĩ tôi đã trả lời đúng (Sửa thành Đúng)
                           </button>
                         )}
+                        {renderAiGradingBox(q)}
                       </div>
                     )}
                   </div>
@@ -1327,7 +1563,7 @@ export default function ReviewTab({
                         placeholder="Nhập câu tiếng Nhật hoặc bản dịch tiếng Việt..."
                         className="w-full bg-slate-950/60 border border-slate-850 focus:border-indigo-500 rounded-xl px-4 py-3 text-white text-sm outline-none transition-all disabled:opacity-75 disabled:cursor-not-allowed"
                         onKeyDown={(e) => {
-                          if (e.key === 'Enter' && !isQuestionGraded) {
+                          if (e.key === 'Enter' && !isQuestionGraded && !aiGradingLoading[key]) {
                             gradeQuestion(q);
                           }
                         }}
@@ -1336,14 +1572,25 @@ export default function ReviewTab({
 
                     {!isQuestionGraded ? (
                       <button
+                        type="button"
+                        disabled={!!aiGradingLoading[key]}
                         onClick={() => gradeQuestion(q)}
-                        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-xs"
+                        className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-xs flex items-center gap-1.5 disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        Kiểm tra câu này ➔
+                        {aiGradingLoading[key] ? (
+                          <>
+                            <span className="inline-block animate-spin">⚡</span>
+                            <span>AI đang chấm bài...</span>
+                          </>
+                        ) : (
+                          <span>{autoAiGrading ? '✨ Kiểm tra bằng AI ➔' : 'Kiểm tra câu này ➔'}</span>
+                        )}
                       </button>
                     ) : (
                       <div className="p-3.5 rounded-xl border bg-slate-950/40 border-slate-800 text-xs space-y-2">
-                        <p className="text-emerald-400 font-semibold">{reviewFeedback[key]}</p>
+                        <p className={`font-semibold ${reviewGraded[key] ? 'text-emerald-400' : 'text-rose-400'}`}>
+                          {reviewFeedback[key]}
+                        </p>
                         {reviewAnswers[key] && !reviewGraded[key] && (
                           <div className="mt-1 bg-slate-900/60 p-2.5 rounded border border-slate-800 text-[11px]">
                             <span className="block text-slate-400 mb-1">So khớp chính tả:</span>
@@ -1352,12 +1599,14 @@ export default function ReviewTab({
                         )}
                         {!reviewGraded[key] && (
                           <button
+                            type="button"
                             onClick={() => markAsCorrect(q)}
                             className="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/30 font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 text-xs shadow-sm mt-2"
                           >
                             ✔ Tôi nghĩ tôi đã trả lời đúng (Sửa thành Đúng)
                           </button>
                         )}
+                        {renderAiGradingBox(q)}
                       </div>
                     )}
                   </div>
