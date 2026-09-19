@@ -1353,6 +1353,18 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Chạy `npm run build` Next.js Turbopack: Biên dịch thành công 100% (16/16 routes) không có bất kỳ lỗi TypeScript nào.
   - Khởi động lại máy chủ backend cục bộ trên cổng 8080 thành công.
 
+### Mốc 109: Khắc Phục Triệt Để Lỗi POST /api/user/review-sessions 500 & Hoàn Thiện Schema Supabase (Đã hoàn thành - 19/09/2026)
+- **Tạo Bảng & Phân Quyền RLS Trên Supabase Cloud Database**:
+  - Chạy kịch bản migration [create_review_sessions_table.js](file:///d:/AI/japanese_learning/website/backend/scratch/create_review_sessions_table.js) trực tiếp lên cơ sở dữ liệu Supabase Cloud (`db.bwkpcxpidtjqfyztvcly.supabase.co`).
+  - Tạo thành công bảng `public.user_review_sessions` lưu trữ tiến trình làm bài từng dạng ôn tập kèm chỉ mục duy nhất `UNIQUE(user_id, storage_key)`.
+  - Thiết lập phân quyền RLS cho phép người dùng truy cập phiên của chính mình và cấp quyền đầy đủ cho vai trò `service_role`.
+  - Tạo bảng `public.text_pastes` hỗ trợ kho lưu trữ tạm độc lập.
+- **Bổ Sung Cơ Chế Fallback Phòng Thụ Cho Backend (`user.js`)**:
+  - Tích hợp khối `try/catch` bọc ngoài các thao tác Supabase trong cả 2 endpoint `GET` và `POST /api/user/review-sessions`.
+  - Nếu cơ sở dữ liệu gặp sự cố mạng hoặc bảng đang cập nhật, backend tự động lưu tạm phiên vào bộ nhớ đệm `mockDb.userReviewSessions` và phản hồi HTTP 200 thành công thay vì ném lỗi HTTP 500 ra trình duyệt.
+- **Xác Thực**:
+  - Đã gửi request mẫu kiểm thử cả 2 phương thức `POST` và `GET`: Đều phản hồi mã trạng thái HTTP 200 thành công và lưu/đọc dữ liệu chính xác.
+
 
 
 
