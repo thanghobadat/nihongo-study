@@ -21,10 +21,34 @@ const REQUEST_TIMEOUT_MS = 8000; // 8 seconds timeout per model attempt
 /**
  * Call Gemini API with JSON Schema and resilient Multi-model Failover Pool
  */
-async function callGemini(prompt) {
+async function callGemini(partsInput, customSchema = null) {
   if (!GEMINI_API_KEY) {
     throw new Error('GEMINI_API_KEY is not configured in backend/.env');
   }
+
+  let parts = [];
+  if (typeof partsInput === 'string') {
+    parts = [{ text: partsInput }];
+  } else if (Array.isArray(partsInput)) {
+    parts = partsInput;
+  }
+
+  const defaultSchema = {
+    type: "OBJECT",
+    properties: {
+      is_correct: { type: "BOOLEAN" },
+      score: { type: "INTEGER" },
+      status: { 
+        type: "STRING", 
+        enum: ["exact", "acceptable", "minor_mistake", "incorrect"] 
+      },
+      status_label: { type: "STRING" },
+      feedback: { type: "STRING" },
+      grammar_analysis: { type: "STRING" },
+      suggested_answer: { type: "STRING" }
+    },
+    required: ["is_correct", "score", "status", "status_label", "feedback", "suggested_answer"]
+  };
 
   let lastError = null;
 
@@ -34,11 +58,7 @@ async function callGemini(prompt) {
     const payload = {
       contents: [
         {
-          parts: [
-            {
-              text: prompt
-            }
-          ]
+          parts: parts
         }
       ],
       generationConfig: {
@@ -48,22 +68,7 @@ async function callGemini(prompt) {
           thinkingBudget: 0
         },
         responseMimeType: "application/json",
-        responseSchema: {
-          type: "OBJECT",
-          properties: {
-            is_correct: { type: "BOOLEAN" },
-            score: { type: "INTEGER" },
-            status: { 
-              type: "STRING", 
-              enum: ["exact", "acceptable", "minor_mistake", "incorrect"] 
-            },
-            status_label: { type: "STRING" },
-            feedback: { type: "STRING" },
-            grammar_analysis: { type: "STRING" },
-            suggested_answer: { type: "STRING" }
-          },
-          required: ["is_correct", "score", "status", "status_label", "feedback", "suggested_answer"]
-        }
+        responseSchema: customSchema || defaultSchema
       }
     };
 
@@ -159,6 +164,68 @@ TIÊU CHÍ CHẤM ĐIỂM SƯ PHẠM:
   return await callGemini(prompt);
 }
 
+/**
+ * Grade handwriting of a Japanese Kanji radical using Gemini Vision AI
+ */
+async function gradeRadicalHandwriting({
+  targetRadical = '',
+  sinoVietnamese = '',
+  meaning = '',
+  imageBase64 = ''
+}) {
+  const cleanBase64 = (imageBase64 || '').replace(/^data:image\/[a-z]+;base64,/, '');
+
+  const prompt = `
+Bạn là một chuyên gia thư pháp và giảng dạy chữ Hán / Kanji tiếng Nhật.
+Học viên vừa vẽ một bộ thủ trên bảng vẽ cảm ứng/chuột.
+Thông tin bộ thủ mục tiêu cần vẽ:
+- Bộ thủ chuẩn: "${targetRadical}"
+- Tên Hán Việt: "${sinoVietnamese}"
+- Ý nghĩa: "${meaning}"
+
+Hình ảnh đính kèm là nét vẽ thực tế của học viên (nét vẽ màu sáng trên nền sẫm).
+Hãy quan sát kỹ hình ảnh và đánh giá khách quan, sư phạm:
+1. Đánh giá nhận diện: Chữ học viên vẽ có đúng là bộ thủ "${targetRadical}" không?
+2. Đánh giá bố cục nét: Độ thẳng/cong của nét sổ, độ nghiêng của nét phẩy, nét móc, độ khép kín của các khung vuông/hộp, tỷ lệ cân đối giữa các nét.
+3. Chấm điểm theo thang 100:
+   - 90 - 100: Xuất sắc! Nét vẽ rất đẹp, chuẩn xác, cân đối.
+   - 75 - 89: Đạt chuẩn! Vẽ đúng chữ, hình thái nhận diện rõ ràng, có thể nét còn hơi rung nhẹ nhưng chuẩn xác.
+   - 50 - 74: Cần cải thiện! Nhận diện được chữ nhưng tỷ lệ nét bị méo, thiếu/thừa nét hoặc lệch vị trí.
+   - 0 - 49: Không đạt! Vẽ sai chữ hoàn toàn, hoặc vẽ nguệch ngoạc không đúng bộ thủ "${targetRadical}".
+4. Lời nhận xét sư phạm: Viết bằng TIẾNG VIỆT súc tích (1-2 câu ngắn gọn, dưới 60 từ), mang tính khích lệ, chỉ ra điểm đẹp và mẹo để nét bút hoàn thiện hơn.
+`;
+
+  const parts = [];
+  if (cleanBase64) {
+    parts.push({
+      inlineData: {
+        mimeType: "image/png",
+        data: cleanBase64
+      }
+    });
+  }
+  parts.push({ text: prompt });
+
+  const handwritingSchema = {
+    type: "OBJECT",
+    properties: {
+      is_correct: { type: "BOOLEAN" },
+      score: { type: "INTEGER" },
+      status: {
+        type: "STRING",
+        enum: ["excellent", "acceptable", "needs_improvement", "incorrect"]
+      },
+      status_label: { type: "STRING" },
+      feedback: { type: "STRING" },
+      stroke_tips: { type: "STRING" }
+    },
+    required: ["is_correct", "score", "status", "status_label", "feedback"]
+  };
+
+  return await callGemini(parts, handwritingSchema);
+}
+
 module.exports = {
-  gradeJapaneseAnswer
+  gradeJapaneseAnswer,
+  gradeRadicalHandwriting
 };

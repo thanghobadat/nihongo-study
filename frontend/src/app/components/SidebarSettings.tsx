@@ -96,11 +96,11 @@ export default function SidebarSettings() {
           {/* Navigation Shortcuts */}
           <div className="space-y-1.5">
             <button
-              onClick={() => handleNavigate('/mock-test')}
+              onClick={() => handleNavigate('/radicals')}
               className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
             >
-              <span className="text-sm">🏆</span>
-              <span>Thi thử JLPT</span>
+              <span className="text-sm">🉐</span>
+              <span>Ôn bộ thủ Kanji</span>
             </button>
             <button
               onClick={() => handleNavigate('/knowledge')}

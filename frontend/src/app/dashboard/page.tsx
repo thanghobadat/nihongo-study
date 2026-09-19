@@ -471,8 +471,6 @@ export default function UserDashboard() {
                     router.push('/roadmap');
                   } else if (item.id === 'kana') {
                     router.push('/kana');
-                  } else if (item.id === 'mock-test') {
-                    router.push('/mock-test');
                   } else if (item.id === 'knowledge') {
                     router.push('/knowledge');
                   } else if (item.id !== 'dashboard') {

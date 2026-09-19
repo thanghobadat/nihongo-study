@@ -918,8 +918,6 @@ export default function AlphabetReviewPage() {
                     router.push('/roadmap');
                   } else if (item.id === 'kana') {
                     // Stay here
-                  } else if (item.id === 'mock-test') {
-                    router.push('/mock-test');
                   } else if (item.id === 'knowledge') {
                     router.push('/knowledge');
                   } else {

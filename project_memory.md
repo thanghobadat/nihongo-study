@@ -1240,5 +1240,18 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - `GET /api/ai/quota`: Phản hồi `isUnlimited: true`, `limit: null`.
   - `POST /api/ai/grade`: Chấm điểm thành công trong 2.1s với trạng thái không giới hạn.
 
+### Mốc 103: Xóa Tính Năng Thi Thử JLPT & Di Chuyển Ôn Bộ Thủ Vào Menu Cài Đặt (Đã hoàn thành - 19/09/2026)
+- **Di chuyển tính năng Ôn bộ thủ (`page.tsx`, `SidebarSettings.tsx`)**:
+  - Gỡ bỏ nút `🉐 Ôn bộ thủ` khỏi thanh công cụ tìm kiếm tab Kanji trong `lessons/[id]/page.tsx` giúp giao diện tinh gọn, thoáng đãng.
+  - Bổ sung nút **`🉐 Ôn bộ thủ Kanji`** vào danh sách phím tắt tiện ích trong menu **⚙️ Cài đặt** (`SidebarSettings.tsx`), cho phép truy cập nhanh trang luyện tập bộ thủ `/radicals` từ chân thanh Sidebar.
+- **Xóa hoàn toàn tính năng Thi thử JLPT**:
+  - Xóa toàn bộ thư mục `website/frontend/src/app/mock-test` (gồm các trang setup, exam, history, review).
+  - Gỡ bỏ nút `🏆 Thi thử JLPT` khỏi `SidebarSettings.tsx`.
+  - Dọn dẹp sạch sẽ các đường dẫn điều hướng `router.push('/mock-test')` trên thanh Sidebar của toàn bộ các trang (`lessons/[id]`, `dashboard`, `roadmap`, `kana`, `guide`).
+- **Biên dịch & Xác minh**:
+  - Next.js Turbopack biên dịch thành công 100% không còn tham chiếu tới `mock-test`.
+
+
+
 
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useCallback, use, useMemo, useRef } from 'react';
 
@@ -6505,10 +6505,6 @@ const renderInteractivePractice = () => {
 
                     router.push('/kana');
 
-                  } else if (item.id === 'mock-test') {
-
-                    router.push('/mock-test');
-
                   } else if (item.id === 'knowledge') {
 
                     router.push('/knowledge');
@@ -9227,20 +9223,6 @@ const renderInteractivePractice = () => {
                       <span className="absolute left-3.5 top-3.5 text-slate-400 dark:text-slate-500 text-sm">🔍</span>
 
                     </div>
-
-                    {/* Học bộ thủ button */}
-
-                    <button
-
-                      onClick={() => router.push('/radicals')}
-
-                      className="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-900 dark:text-white text-xs font-black rounded-xl border border-emerald-500/20 shadow-md active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
-
-                    >
-
-                      <span>🉐</span> Ôn bộ thủ
-
-                    </button>
 
                     {/* Toggle hiển thị bộ thủ */}
 

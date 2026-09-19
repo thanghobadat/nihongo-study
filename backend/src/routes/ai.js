@@ -115,4 +115,64 @@ router.post('/grade', async (req, res) => {
   }
 });
 
+/**
+ * POST /api/ai/grade-radical
+ * Grade handwriting of a radical drawing using Gemini Multimodal Vision AI
+ */
+router.post('/grade-radical', async (req, res) => {
+  try {
+    const {
+      targetRadical,
+      sinoVietnamese = '',
+      meaning = '',
+      imageBase64
+    } = req.body;
+
+    if (!targetRadical || !imageBase64) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vui lòng cung cấp đầy đủ bộ thủ mục tiêu (targetRadical) và hình ảnh nét vẽ (imageBase64).'
+      });
+    }
+
+    const userId = getUserId(req);
+
+    // Check Daily Quota & Circuit Breaker
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // Call Gemini Multimodal Vision via aiGradingService
+    const { result, usageMetadata } = await aiGradingService.gradeRadicalHandwriting({
+      targetRadical,
+      sinoVietnamese,
+      meaning,
+      imageBase64
+    });
+
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+
+    return res.json({
+      success: true,
+      data: result,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error grading radical handwriting:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Đã chuyển sang bộ chấm điểm cục bộ.'
+    });
+  }
+});
+
 module.exports = router;
+

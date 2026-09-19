@@ -261,8 +261,6 @@ export default function RoadmapPage() {
                     // Stay here
                   } else if (item.id === 'kana') {
                     router.push('/kana');
-                  } else if (item.id === 'mock-test') {
-                    router.push('/mock-test');
                   } else if (item.id === 'knowledge') {
                     router.push('/knowledge');
                   } else {
