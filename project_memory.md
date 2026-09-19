@@ -1251,6 +1251,94 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Biên dịch & Xác minh**:
   - Next.js Turbopack biên dịch thành công 100% không còn tham chiếu tới `mock-test`.
 
+### Mốc 104: Tích Hợp Quản Lý Trạng Thái Học Tập & Bộ Lọc Đa Chọn Cho Bộ Thủ Kanji (Đã hoàn thành - 19/09/2026)
+- **Hạ tầng Backend API (`user.js`)**:
+  - Mở rộng mảng kiểm tra hợp lệ `item_type` tại tuyến `POST /api/user/progress` và `GET /api/user/progress` để chấp nhận thêm giá trị `'radical'`.
+  - Hỗ trợ lưu trữ và đồng bộ hóa tiến trình học tập của 176 bộ thủ lên Supabase Cloud DB và Local Mock DB theo chỉ số 1..176.
+- **Quản lý Trạng thái Bộ thủ (`radicals/page.tsx`)**:
+  - Khai báo kiểu `RadicalStatus` gồm 3 trạng thái: 🔴 Chưa học (`not_learned`), 🟡 Đang học (`learning`), 🟢 Đã thuộc (`mastered`).
+  - Lưu trữ trạng thái song song qua `localStorage` (0ms tải tức thì) và đồng bộ đám mây qua API `/api/user/progress?item_type=radical`.
+  - **Giao diện Tra cứu (Browse Tab)**:
+    - Bổ sung thanh thống kê số lượng: *Tất cả (176) • 🔴 Chưa học (X) • 🟡 Đang học (Y) • 🟢 Đã thuộc (Z)* kèm các nút lọc nhanh dạng pill.
+    - Thêm dropdown bộ lọc trạng thái vào thanh tìm kiếm.
+    - Tích hợp bộ chọn trạng thái trực tiếp trên từng thẻ bộ thủ trong lưới (có `e.stopPropagation()`).
+    - Bổ sung thanh 3 nút trạng thái trực quan trong Modal Chi tiết Bộ thủ (`selectedRadical`).
+  - **Giao diện Ôn tập & Luyện tập (Quiz Tab)**:
+    - Màn hình cấu hình: Tích hợp Dropdown đa chọn trạng thái ôn tập (*Chưa học*, *Đang học*, *Đã thuộc* hoặc mặc định *Học hết*) tương tự như phân hệ luyện tập Từ vựng.
+    - Hiển thị số lượng bộ thủ khả dụng phù hợp với tiêu chí lọc theo thời gian thực.
+    - Cập nhật logic `startPractice` để lọc bộ câu hỏi chính xác theo phạm vi bài học và các trạng thái đã tích chọn.
+    - Màn hình kết thúc: Liệt kê danh sách các bộ thủ đã ôn kèm bộ chọn trạng thái nhanh để học viên cập nhật kết quả ngay sau khi hoàn thành.
+- **Biên dịch & Kiểm định**:
+  - `npm run build` Next.js frontend biên dịch thành công 100% không phát sinh lỗi TypeScript.
+
+### Mốc 105: Nâng Cấp Chế Độ Ôn Bộ Thủ 2 Hàng (Tên Hán Việt & Ý Nghĩa) Tích Hợp AI Chấm Điểm & Nhắc Nghĩa Còn Thiếu (Đã hoàn thành - 19/09/2026)
+- **Gỡ bỏ Chế độ Trắc nghiệm cũ**:
+  - Loại bỏ hoàn toàn chế độ trắc nghiệm 4 lựa chọn (`choice`) trong trang `/radicals`.
+  - Giữ lại 2 chế độ hiện hữu: ✍️ Luyện viết bộ thủ (AI Chấm nét trên canvas) và ⚡ Phản xạ nhanh (10s speedrun).
+- **Backend AI Grading Service (`aiGradingService.js`, `routes/ai.js`)**:
+  - Bổ sung hàm `gradeRadicalFull({ character, sinoVietnamese, meaning, description, userSino, userMeaning })`.
+  - Tích hợp JSON Schema nghiêm ngặt: `is_correct`, `score`, `status`, `status_label`, `sino_is_correct`, `sino_feedback`, `meaning_is_correct`, `meaning_feedback`, `matched_meanings`, `missing_meanings`, `suggested_sino`, `suggested_meaning`.
+  - **Quy tắc Sư phạm Đột phá**: Nếu bộ thủ có nhiều nét nghĩa (ví dụ `一` có 3 nghĩa: "số một, thứ nhất, khởi đầu") và học viên nhớ được ít nhất 1 nét nghĩa:
+    + AI chấm ĐÚNG (85-100 điểm), xếp vào `matched_meanings` và gửi lời khen ngợi trong `meaning_feedback`.
+    + Các nét nghĩa còn lại tự động được gom vào `missing_meanings` để mở rộng kiến thức mà không phạt trừ điểm nặng nề.
+  - Bổ sung endpoint `POST /api/ai/grade-radical-full` tích hợp cơ chế 0-token Cache và Failover Model Pool 4 model Gemini.
+- **Frontend 2-Row Meaning Review UI (`radicals/page.tsx`)**:
+  - Giao diện 2 hàng nhập liệu độc lập:
+    + Hàng 1: `🏷️ TÊN HÁN VIỆT` (Nhấn `Enter` tự động nhảy focus sang Hàng 2).
+    + Hàng 2: `💡 Ý NGHĨA TIẾNG VIỆT` (Nhấn `Enter` tự động gọi AI chấm điểm).
+  - Tự động lấy tiêu điểm (`auto-focus`) vào ô Hàng 1 mỗi khi sang câu hỏi mới.
+  - **Khối Hiển thị Đánh giá Sư phạm**:
+    + Thẻ so sánh trực quan Hán Việt và Ý nghĩa bộ thủ kèm huy hiệu Đúng/Chưa chuẩn và lời nhận xét chi tiết.
+    + Các badge xanh `✓ Đã nhớ: [nét nghĩa]` thể hiện những gì học viên đã làm tốt.
+    + **Hộp Cảnh báo Nhắc nhở Thân thiện (`missing_meanings`)**: Khi còn các nét nghĩa chưa nêu, xuất hiện khung màu hổ phách vàng sang trọng: *"💡 Mở rộng kiến thức: Ngoài ra bộ [...] còn mang thêm các nét nghĩa: [+ ...] hãy ghi nhớ thêm nhé!"*.
+    + Thẻ Mẹo nhớ hình tượng & Lưới ví dụ các chữ Kanji thực tế chứa bộ thủ đó (`ex.char`, `ex.meaning`, `ex.romaji`).
+    + Phím `Enter` toàn cục tự động chuyển sang câu tiếp theo ngay sau khi đã chấm bài.
+  - Bộ so khớp cục bộ thông minh `calculateLocalMeaningGrade` dự phòng 100% khi mất mạng hoặc nghẽn quota.
+- **Biên dịch & Xác thực**:
+  - Next.js Turbopack (`npm run build`) biên dịch thành công 16/16 routes không có bất kỳ lỗi TypeScript nào.
+  - Backend AI modules nạp thành công không lỗi cú pháp.
+
+### Mốc 106: Đa Chọn Bài Học Checkbox (Kết Hợp Nhiều Bài) & Giới Hạn Câu Hỏi Động Theo Bộ Thủ Khả Dụng (Đã hoàn thành - 19/09/2026)
+- **Đa Chọn Bài Học Bằng Checkbox (`radicals/page.tsx`)**:
+  - Chuyển đổi bộ chọn bài học từ Dropdown `<select>` đơn lẻ sang Menu Dropdown Checkbox đa chọn hiện đại (`selectedQuizLessons: string[]`).
+  - Hỗ trợ chọn kết hợp nhiều bài cùng lúc (ví dụ: Tích chọn cả Bài 1.1 + Bài 1.2 vào chung một đề ôn tập).
+  - Thanh điều khiển tiện lợi: Nút bấm "Chọn tất cả" / "Chỉ Bài 1.1", hiển thị số bài đã chọn và tổng số bộ thủ khả dụng theo thời gian thực.
+  - Hỗ trợ sự kiện đóng menu khi nhấp chuột ra ngoài (`click-outside`).
+- **Co Giãn Số Lượng Câu Hỏi Động Theo Từng Bài Đã Chọn**:
+  - Co giãn giới hạn tối đa (`max = eligiblePracticeCount`) theo đúng số bộ thủ khả dụng của các bài được chọn (ví dụ: Chọn Bài 1.1 có 15 bộ thì con số tối đa là 15; chọn kết hợp Bài 1.1 + Bài 1.2 thì tối đa là 30).
+  - Tự động đồng bộ và mặc định số lượng câu hỏi theo tổng số bộ thủ của bài được chọn, không bao giờ vượt quá giới hạn.
+  - Bổ sung bộ điều khiển tăng/giảm Stepper (`-`, ô nhập số, `+`, nút `Toàn bộ`) cùng các nút bấm chọn nhanh thông minh (Smart Preset Pills: `5 câu`, `10 câu`, `Toàn bộ (15 câu)`).
+  - Nút Luyện tập nhanh từ thẻ bài học ở tab Tra cứu tự động tích chọn duy nhất bài đó và đặt số lượng câu hỏi bằng đúng số bộ thủ của bài.
+- **Biên dịch & Xác thực**:
+  - `npm run build` Next.js biên dịch thành công 16/16 route không có lỗi TypeScript.
+  - Server Dev hot-reloaded phục vụ HTTP 200 tại `http://localhost:3000/radicals`.
+
+### Mốc 107: Nâng Cấp Toàn Diện Mô Tả Ý Nghĩa Từng Bộ Thủ Khi Click & Tích Hợp AI Phân Tích Chuyên Sâu (Đã hoàn thành - 19/09/2026)
+- **Cơ Sở Dữ Liệu Ngữ Nghĩa Bộ Thủ Mở Rộng (`kanjiRadicals.ts`)**:
+  - Bổ sung trường `origin` (Nguồn gốc tượng hình cổ xưa) và `kanjiRole` (Ý nghĩa biểu thị khi cấu tạo chữ Kanji) cho giao diện `RadicalInfo`.
+  - Xây dựng từ điển `RADICAL_SEMANTIC_ROLES` và hàm `getRadicalSemanticDetails`:
+    + Tự động bóc tách các nét nghĩa độc lập thành mảng badge riêng biệt (`meaningBadges`).
+    + Cung cấp giải thích chi tiết về cội nguồn hình ảnh thời cổ đại và vai trò ngữ nghĩa của bộ thủ khi đứng ở các vị trí khác nhau trong chữ Hán.
+    + Cơ chế tự động suy luận thông minh (fallback derivation) đảm bảo mọi bộ thủ đều có mô tả đầy đủ.
+- **Backend AI Service & Endpoint (`aiGradingService.js` & `ai.js`)**:
+  - Bổ sung hàm `explainRadicalMeaning` với Gemini 2.5 Flash, cấu hình `maxOutputTokens: 1500` và `timeoutMs: 15000`.
+  - Sinh cấu trúc phân tích 5 phần: `origin_story`, `kanji_role`, `cultural_meaning`, `mnemonic_tip`, `common_kanji_breakdown`.
+  - Endpoint `POST /api/ai/radical-explain` tích hợp đầy đủ kiểm tra Quota hàng ngày và Cache 0-Token (xác thực `cached: true` qua script kiểm thử).
+- **Giao Diện Modal Chi Tiết Đa Chiều (`radicals/page.tsx`)**:
+  - Khi click vào bất kỳ bộ thủ nào trong danh sách tra cứu hoặc trong bảng tổng kết kết quả sau bài ôn tập:
+    + **Đầu Modal**: Ký tự bộ thủ kích thước lớn kèm nút phát âm tiếng Nhật `🔊`, tên Hán Việt và huy hiệu bài học.
+    + **Khung Trạng Thái Học**: Chuyển đổi trạng thái nhanh (🔴 Chưa học / 🟡 Đang học / 🟢 Đã thuộc).
+    + **Khung 1 - Các Nét Nghĩa Chính**: Bóc tách thành từng thẻ badge ngọc bích nổi bật.
+    + **Khung 2 - Ý Nghĩa Tượng Hình & Nguồn Gốc**: Giải thích chi tiết nguồn gốc nét vẽ cổ đại.
+    + **Khung 3 - Ý Nghĩa Khi Ghép Chữ Kanji**: Nêu rõ vai trò biểu thị ngữ nghĩa khi tạo chữ Hán.
+    + **Khung 4 - Mẹo Ghi Nhớ Trực Quan**: Câu chuyện chiết tự gợi nhớ sinh động.
+    + **Khung 5 - Phân Tích Chuyên Sâu Gemini AI**: Nút "✨ Khám phá cội nguồn" gọi AI phân tích triết lý nhân sinh phương Đông, cội nguồn giáp cốt văn và phân tích chiết tự chữ Kanji tiêu biểu.
+    + **Khung 6 - Chữ Hán Ví Dụ**: Lưới các chữ Hán ví dụ thực tế, click để nghe phát âm tiếng Nhật `🔊`.
+- **Biên dịch & Xác thực**:
+  - `npm run build` Next.js Turbopack biên dịch thành công 16/16 routes không có lỗi TypeScript.
+  - Endpoint `/api/ai/radical-explain` đã được kiểm thử trực tiếp: trả về HTTP 200, phản hồi đầy đủ 5 trường phân tích và kích hoạt thành công cache 0 token.
+
+
 
 
 

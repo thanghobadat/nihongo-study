@@ -12,16 +12,15 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 // Multi-model Fallback Pool for high-demand / 503 / 429 resiliency
 const MODEL_POOL = [
   'gemini-2.5-flash',
-  'gemini-flash-lite-latest',
-  'gemini-2.5-flash-lite',
-  'gemini-flash-latest'
+  'gemini-2.0-flash',
+  'gemini-1.5-flash'
 ];
-const REQUEST_TIMEOUT_MS = 8000; // 8 seconds timeout per model attempt
+const REQUEST_TIMEOUT_MS = 10000; // 10 seconds timeout per model attempt
 
 /**
  * Call Gemini API with JSON Schema and resilient Multi-model Failover Pool
  */
-async function callGemini(partsInput, customSchema = null) {
+async function callGemini(partsInput, customSchema = null, options = {}) {
   if (!GEMINI_API_KEY) {
     throw new Error('GEMINI_API_KEY is not configured in backend/.env');
   }
@@ -51,6 +50,8 @@ async function callGemini(partsInput, customSchema = null) {
   };
 
   let lastError = null;
+  const maxTokens = options.maxOutputTokens || 800;
+  const timeoutMs = options.timeoutMs || REQUEST_TIMEOUT_MS;
 
   for (const model of MODEL_POOL) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
@@ -63,7 +64,7 @@ async function callGemini(partsInput, customSchema = null) {
       ],
       generationConfig: {
         temperature: 0.2,
-        maxOutputTokens: 600,
+        maxOutputTokens: maxTokens,
         thinkingConfig: {
           thinkingBudget: 0
         },
@@ -75,7 +76,7 @@ async function callGemini(partsInput, customSchema = null) {
     try {
       console.log(`[aiGradingService] Attempting model: ${model}...`);
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
       const response = await fetch(url, {
         method: 'POST',
@@ -225,7 +226,165 @@ Hãy quan sát kỹ hình ảnh và đánh giá khách quan, sư phạm:
   return await callGemini(parts, handwritingSchema);
 }
 
+/**
+ * Grade full radical review (Sino-Vietnamese name + Vietnamese Meaning with partial recall support)
+ */
+async function gradeRadicalFull({
+  character = '',
+  sinoVietnamese = '',
+  meaning = '',
+  description = '',
+  userSino = '',
+  userMeaning = ''
+}) {
+  const prompt = `
+Bạn là một chuyên gia Hán Nôm và tiếng Nhật hàng đầu, tận tâm và giàu kinh nghiệm sư phạm.
+Học viên đang thực hiện bài kiểm tra nhớ Bộ thủ chữ Hán (Kanji Radical).
+Bộ thủ này gồm 2 phần trả lời:
+1. Tên Hán Việt (Âm Hán Việt của bộ thủ)
+2. Ý nghĩa tiếng Việt của bộ thủ
+
+THÔNG TIN BỘ THỦ CHUẨN:
+- Chữ bộ thủ: "${character}"
+- Tên Hán Việt chuẩn: "${sinoVietnamese}"
+- Ý nghĩa chuẩn: "${meaning}"
+${description ? `- Câu chuyện ghi nhớ / Ngữ cảnh: "${description}"` : ''}
+
+CÂU TRẢ LỜI CỦA HỌC VIÊN:
+- Tên Hán Việt học viên nhập: "${userSino}"
+- Ý nghĩa học viên nhập: "${userMeaning}"
+
+HƯỚNG DẪN CHẤM ĐIỂM SƯ PHẠM VÀ PHÂN TÍCH CHI TIẾT:
+1. ĐÁNH GIÁ TÊN HÁN VIỆT (sino_is_correct, sino_feedback):
+   - So sánh "userSino" với "sinoVietnamese".
+   - Chấp nhận nếu đúng âm đọc Hán Việt (không phân biệt hoa/thường, cho phép gõ không dấu nếu rõ âm hoặc các biến thể Hán Việt tương đương phổ biến, ví dụ: "Nhất" / "Nhat").
+   - Nhận xét ngắn gọn, khích lệ.
+
+2. ĐÁNH GIÁ Ý NGHĨA (meaning_is_correct, matched_meanings, missing_meanings, meaning_feedback):
+   - Ý nghĩa chuẩn của một bộ thủ thường chứa một hoặc nhiều nét nghĩa (ví dụ: "Số một, thứ nhất, khởi đầu" gồm 3 nét nghĩa: "số một", "thứ nhất", "khởi đầu").
+   - Hãy bóc tách các nét nghĩa chuẩn và đối chiếu với câu trả lời "userMeaning" của học viên.
+   - NGUYÊN TẮC KHUYẾN KHÍCH CỰC KỲ QUAN TRỌNG:
+     + Nếu học viên nêu được ít nhất MỘT nét nghĩa chính xác hoặc gần đúng (ví dụ chuẩn có 3 nghĩa mà học viên chỉ nhớ 1 nghĩa như "số một" hoặc "một"):
+       * Đánh giá là ĐÚNG (meaning_is_correct: true, status: "correct" hoặc "partially_correct", score: 85 - 100).
+       * Đưa các nét nghĩa mà học viên đã nhớ đúng vào mảng "matched_meanings".
+       * Đưa TẤT CẢ các nét nghĩa còn lại mà học viên chưa nhắc đến vào mảng "missing_meanings".
+       * Trong "meaning_feedback": Khen ngợi học viên vì đã nhớ chính xác nét nghĩa đó!
+     + Nếu học viên nêu đầy đủ tất cả các nét nghĩa:
+       * meaning_is_correct: true, status: "correct", score: 100.
+       * matched_meanings: danh sách các nghĩa đã nhớ.
+       * missing_meanings: [] (rỗng).
+       * meaning_feedback: Lời khen xuất sắc, nhớ rất sâu và trọn vẹn.
+     + Nếu học viên trả lời sai hoàn toàn hoặc để trống:
+       * meaning_is_correct: false, status: "incorrect", score: 0 - 30.
+       * matched_meanings: [].
+       * missing_meanings: danh sách tất cả các nét nghĩa chuẩn.
+       * meaning_feedback: Giải thích rõ nét nghĩa đúng bằng giọng điệu động viên.
+
+3. TỔNG KẾT CHUNG:
+   - is_correct: true nếu cả Hán Việt và Ý nghĩa đều đúng/chấp nhận được (hoặc trúng ít nhất 1 nét nghĩa hợp lệ).
+   - score: thang 100 tổng hợp cả 2 phần.
+   - status: "correct" (đúng toàn diện), "partially_correct" (đúng Hán Việt hoặc nhớ được 1 phần nghĩa), "incorrect" (sai cả 2).
+   - status_label: Ví dụ "Rất tốt!", "Chính xác!", "Đúng một phần!", "Cần cố gắng!".
+   - suggested_sino: "${sinoVietnamese}".
+   - suggested_meaning: "${meaning}".
+`;
+
+  const radicalFullSchema = {
+    type: "OBJECT",
+    properties: {
+      is_correct: { type: "BOOLEAN" },
+      score: { type: "INTEGER" },
+      status: {
+        type: "STRING",
+        enum: ["correct", "partially_correct", "incorrect"]
+      },
+      status_label: { type: "STRING" },
+      sino_is_correct: { type: "BOOLEAN" },
+      sino_feedback: { type: "STRING" },
+      meaning_is_correct: { type: "BOOLEAN" },
+      meaning_feedback: { type: "STRING" },
+      matched_meanings: {
+        type: "ARRAY",
+        items: { type: "STRING" }
+      },
+      missing_meanings: {
+        type: "ARRAY",
+        items: { type: "STRING" }
+      },
+      suggested_sino: { type: "STRING" },
+      suggested_meaning: { type: "STRING" }
+    },
+    required: [
+      "is_correct",
+      "score",
+      "status",
+      "status_label",
+      "sino_is_correct",
+      "sino_feedback",
+      "meaning_is_correct",
+      "meaning_feedback",
+      "matched_meanings",
+      "missing_meanings",
+      "suggested_sino",
+      "suggested_meaning"
+    ]
+  };
+
+  return await callGemini(prompt, radicalFullSchema);
+}
+
+/**
+ * Explain in-depth meaning, origin, cultural significance, and mnemonic for a Japanese radical
+ */
+async function explainRadicalMeaning({ character, sinoVietnamese, meaning, description }) {
+  const prompt = `Bạn là một chuyên gia ngôn ngữ tiếng Nhật và Hán học hàng đầu.
+Hãy phân tích cặn kẽ, sâu sắc và truyền cảm hứng về ý nghĩa của bộ thủ sau cho học viên người Việt:
+
+- Ký tự bộ thủ: "${character}"
+- Tên Hán Việt: "${sinoVietnamese}"
+- Nghĩa tiếng Việt: "${meaning}"
+- Mô tả cơ bản: "${description}"
+
+Hãy cung cấp:
+1. "origin_story": Nguồn gốc tượng hình cổ xưa (từ thời Giáp cốt văn / Kim văn, hình vẽ mô phỏng sự vật/hiện tượng gì trong tự nhiên hoặc đời sống con người thời cổ đại).
+2. "kanji_role": Ý nghĩa biểu đạt khi ghép vào cấu tạo chữ Kanji (bộ thủ này khi xuất hiện ở các vị trí bên trái, phải, trên, dưới... thì đóng vai trò gì, truyền tải nét nghĩa cốt lõi gì cho các chữ Hán chứa nó).
+3. "cultural_meaning": Triết lý nhân sinh hoặc nét đẹp văn hóa phương Đông ẩn chứa sau bộ thủ này.
+4. "mnemonic_tip": Mẹo ghi nhớ hình ảnh độc đáo, sinh động giúp học viên thuộc mãi không quên.
+5. "common_kanji_breakdown": Danh sách 2-3 chữ Kanji N5/N4 tiêu biểu chứa bộ thủ này, kèm phân tích ngắn gọn lý do vì sao bộ thủ này lại tạo nên nghĩa của chữ đó.
+`;
+
+  const schema = {
+    type: "OBJECT",
+    properties: {
+      origin_story: { type: "STRING" },
+      kanji_role: { type: "STRING" },
+      cultural_meaning: { type: "STRING" },
+      mnemonic_tip: { type: "STRING" },
+      common_kanji_breakdown: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            kanji: { type: "STRING" },
+            romaji: { type: "STRING" },
+            meaning: { type: "STRING" },
+            role_explanation: { type: "STRING" }
+          },
+          required: ["kanji", "romaji", "meaning", "role_explanation"]
+        }
+      }
+    },
+    required: ["origin_story", "kanji_role", "cultural_meaning", "mnemonic_tip", "common_kanji_breakdown"]
+  };
+
+  return await callGemini(prompt, schema, { maxOutputTokens: 1500, timeoutMs: 15000 });
+}
+
 module.exports = {
   gradeJapaneseAnswer,
-  gradeRadicalHandwriting
+  gradeRadicalHandwriting,
+  gradeRadicalFull,
+  explainRadicalMeaning
 };
+
+

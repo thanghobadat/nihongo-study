@@ -652,8 +652,8 @@ router.post('/progress', async (req, res) => {
       return res.status(400).json({ error: 'item_type, item_id, and status are required' });
     }
 
-    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'cando'].includes(item_type)) {
-      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana, katakana or cando' });
+    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'cando', 'radical'].includes(item_type)) {
+      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana, katakana, cando or radical' });
     }
 
     if (!['not_learned', 'learning', 'mastered', 'wrong'].includes(status)) {

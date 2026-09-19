@@ -174,5 +174,160 @@ router.post('/grade-radical', async (req, res) => {
   }
 });
 
+/**
+ * POST /api/ai/grade-radical-full
+ * Grade full radical review (Sino-Vietnamese name + Vietnamese Meaning with partial recall support)
+ */
+router.post('/grade-radical-full', async (req, res) => {
+  try {
+    const {
+      character,
+      sinoVietnamese = '',
+      meaning = '',
+      description = '',
+      userSino = '',
+      userMeaning = ''
+    } = req.body;
+
+    if (!character) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vui lòng cung cấp bộ thủ cần chấm (character).'
+      });
+    }
+
+    const userId = getUserId(req);
+
+    // 1. LAYER 1: Check in-memory/disk Cache (0 Token consumed!)
+    const cacheQuestionKey = character;
+    const cacheAnswerKey = `${(userSino || '').trim()}___${(userMeaning || '').trim()}`;
+    const cachedResult = aiQuotaService.getCachedGrading('radical_full', cacheQuestionKey, cacheAnswerKey);
+    if (cachedResult) {
+      return res.json({
+        success: true,
+        cached: true,
+        data: cachedResult,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // 2. LAYER 2 & 3: Check Daily Quota & Circuit Breaker
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // 3. LAYER 4: Call Gemini via aiGradingService
+    const { result, usageMetadata } = await aiGradingService.gradeRadicalFull({
+      character,
+      sinoVietnamese,
+      meaning,
+      description,
+      userSino,
+      userMeaning
+    });
+
+    // 4. Update quota & save to cache
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+    aiQuotaService.setCachedGrading('radical_full', cacheQuestionKey, cacheAnswerKey, result);
+
+    return res.json({
+      success: true,
+      cached: false,
+      data: result,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error grading radical full:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.'
+    });
+  }
+});
+
+/**
+ * POST /api/ai/radical-explain
+ * Explain in-depth meaning, cultural origin, and Kanji roles for a radical
+ */
+router.post('/radical-explain', async (req, res) => {
+  try {
+    const {
+      character,
+      sinoVietnamese = '',
+      meaning = '',
+      description = ''
+    } = req.body;
+
+    if (!character) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vui lòng cung cấp ký tự bộ thủ (character).'
+      });
+    }
+
+    const userId = getUserId(req);
+
+    // 1. LAYER 1: Check Cache (0 tokens consumed!)
+    const cacheKey = character.trim();
+    const cachedResult = aiQuotaService.getCachedGrading('radical_explain', cacheKey, 'details');
+    if (cachedResult) {
+      return res.json({
+        success: true,
+        cached: true,
+        data: cachedResult,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // 2. LAYER 2 & 3: Check Quota & Circuit Breaker
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // 3. LAYER 4: Call Gemini via aiGradingService
+    const { result, usageMetadata } = await aiGradingService.explainRadicalMeaning({
+      character,
+      sinoVietnamese,
+      meaning,
+      description
+    });
+
+    // 4. Update quota & save to cache
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+    aiQuotaService.setCachedGrading('radical_explain', cacheKey, 'details', result);
+
+    return res.json({
+      success: true,
+      cached: false,
+      data: result,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error explaining radical meaning:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.'
+    });
+  }
+});
+
 module.exports = router;
+
+
 

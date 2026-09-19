@@ -5,6 +5,8 @@ export interface RadicalInfo {
   description: string;     // Mẹo ghi nhớ hình ảnh chi tiết
   lessonId?: string;       // Thuộc bài học nào (ví dụ: '1-1', '1-2'...)
   examples: { char: string; meaning: string; romaji: string }[]; // Ví dụ Kanji thực tế
+  origin?: string;         // Nguồn gốc hình ảnh tượng hình cổ xưa
+  kanjiRole?: string;      // Ý nghĩa & vai trò biểu thị khi cấu tạo chữ Kanji
 }
 
 export interface RadicalLesson {
@@ -227,6 +229,146 @@ export const RADICAL_LESSONS: RadicalLesson[] = [
     radicals: ['馬', '骨', '高', '鬼', '魚', '鳥', '鹿', '麥', '麻', '黃', '黑', '鼠', '鼻', '齒', '龍', '龜']
   }
 ];
+
+// Bảng tra cứu nguồn gốc tượng hình và vai trò biểu thị ngữ nghĩa khi cấu tạo chữ Kanji
+export const RADICAL_SEMANTIC_ROLES: Record<string, { origin: string; kanjiRole: string }> = {
+  '一': { origin: 'Vẽ một ngón tay giơ ngang hoặc một vạch phân định ranh giới đất trời.', kanjiRole: 'Thường biểu thị số một, sự khởi đầu nguyên sơ, ranh giới, mặt đất hoặc vòm trời.' },
+  '丨': { origin: 'Nét sổ thẳng đứng từ trên xuyên suốt xuống dưới.', kanjiRole: 'Biểu thị sự kết nối trời - đất, xuyên qua tâm điểm, tính chính trực hoặc đường trục.' },
+  '丶': { origin: 'Dấu chấm đọng lại của ngọn lửa hoặc giọt sương nhỏ.', kanjiRole: 'Biểu thị đốm lửa, giọt nước nhỏ, mầm sống hoặc điểm nhấn phân biệt nghĩa.' },
+  '丿': { origin: 'Nét phẩy cong vát từ trên sang trái như ngọn cỏ ngả nghiêng.', kanjiRole: 'Biểu thị chuyển động lướt qua, chém vạt, dòng chảy nhẹ hoặc sợi tóc.' },
+  '乙': { origin: 'Hình dáng mầm non uốn lượn ngoằn ngoèo đang vươn lên khỏi mặt đất.', kanjiRole: 'Biểu thị sự gập ghềnh, uốn cong, nhẫn nại hoặc can thứ hai trong thiên can.' },
+  '亅': { origin: 'Hình lưỡi câu uốn cong có ngạnh ngược lên để móc giữ.', kanjiRole: 'Biểu thị sự giữ lại, móc câu, kéo lên hoặc sự dứt khoát dồn lực.' },
+  '二': { origin: 'Hai ngón tay giơ ngang hoặc hai vạch tượng trưng Trời và Đất.', kanjiRole: 'Biểu thị số 2, sự lặp lại, đôi lứa, tương hỗ hoặc hai thái cực đối lập.' },
+  '亠': { origin: 'Hình cái nắp vung có núm cầm hoặc mái che phủ phía trên.', kanjiRole: 'Biểu thị sự che phủ, bảo vệ phía trên, đỉnh cao hoặc kinh thành rộng lớn.' },
+  '人': { origin: 'Hình dáng con người nhìn nghiêng hai chân đang sải bước vững vàng.', kanjiRole: 'Biểu thị con người, hành vi, mối quan hệ xã hội hoặc phẩm chất nhân văn.' },
+  '亻': { origin: 'Biến thể của bộ Nhân khi đứng bên trái (thiên bàng) chữ Hán.', kanjiRole: 'Chuyên biểu thị thân thể, hành vi, năng lực và chức nghiệp của con người (体, 休, 働, 作, 促).' },
+  '儿': { origin: 'Hình hai cẳng chân người đang chạy hoặc dáng đi thoăn thoắt của trẻ nhỏ.', kanjiRole: 'Biểu thị sự vận động của đôi chân, bước đi, thị giác (mắt có chân: 見) hoặc con trẻ.' },
+  '入': { origin: 'Hình mũi nhọn đi sâu vào bên trong hoặc mái lều hé mở.', kanjiRole: 'Biểu thị sự tiến vào, thâm nhập, gia nhập hoặc thu nhận vào bên trong.' },
+  '八': { origin: 'Hai nét vạch xòe sang hai phía ngược nhau mở rộng.', kanjiRole: 'Biểu thị số 8, sự chia tách đôi ngả, tỏa rộng sang hai bên hoặc phân phát chia đều.' },
+  '冂': { origin: 'Khung rào vây bọc ba phía như đường biên giới lãnh thổ bờ cõi.', kanjiRole: 'Biểu thị vùng biên cương, không gian bên trong, chu vi hoặc sự bao hàm.' },
+  '冖': { origin: 'Tấm khăn hoặc bạt phủ chụp trùm lên đồ vật cất giữ.', kanjiRole: 'Biểu thị sự che đậy, giấu kín, giữ gìn khoảnh khắc hoặc mũ miện trên đầu.' },
+  '冫': { origin: 'Hình các mảnh băng giá tuyết nứt nẻ đông cứng xếp chồng.', kanjiRole: 'Biểu thị băng tuyết, nhiệt độ buốt giá, sự đông kết hoặc mùa đông lạnh lẽo (冬, 冷, 凍).' },
+  '几': { origin: 'Hình chiếc ghế thấp hoặc bàn nhỏ quỳ chân thời xưa.', kanjiRole: 'Biểu thị vật dụng nâng đỡ, đồ đạc nội thất hoặc cơ thể được nâng đỡ thư thái.' },
+  '凵': { origin: 'Hình hố đất đào sâu hoặc miệng há rộng hứng đồ vật rơi vào.', kanjiRole: 'Biểu thị vùng trũng sâu, cái hố, lòng chứa đựng hoặc vượt qua nghịch cảnh (出).' },
+  '刀': { origin: 'Hình con dao găm hoặc thanh gươm kim loại sắc bén có cán.', kanjiRole: 'Biểu thị vũ khí, công cụ cắt gọt, sự chia rẽ, phán quyết dứt khoát.' },
+  '刂': { origin: 'Biến thể của bộ Đao khi đứng ở bên phải (tiết) chữ Hán.', kanjiRole: 'Xuất hiện trong các chữ biểu thị hành động chia cắt, phân tách, hình phạt hoặc lưỡi chém (切, 割, 判, 別).' },
+  '力': { origin: 'Hình bắp tay gân guốc đang co lại vận dụng sức mạnh cơ bắp.', kanjiRole: 'Biểu thị sức lực, cơ bắp, sự siêng năng, nỗ lực lao động hoặc năng lượng.' },
+  '勹': { origin: 'Hình người cúi lưng ôm bọc một đứa trẻ hoặc bọc đồ vật quý.', kanjiRole: 'Biểu thị sự bao bọc, ôm lấy, gói ghém, che chở ấm áp yêu thương.' },
+  '匕': { origin: 'Hình cái muỗng múc canh nhỏ hoặc con dao găm nhỏ tiện dụng.', kanjiRole: 'Biểu thị dụng cụ ăn uống, sự biến hóa hoặc so sánh.' },
+  '匚': { origin: 'Hình chiếc hòm, tráp gỗ có nắp mở bên sườn để cất đồ quý.', kanjiRole: 'Biểu thị đồ chứa đựng, hòm tủ, sự cất giấu hoặc bảo quản đồ đạc.' },
+  '十': { origin: 'Hai vạch ngang dọc cắt nhau biểu thị sự chu toàn bốn phương tám hướng.', kanjiRole: 'Biểu thị số 10, sự tròn vẹn, viên mãn, hoàn thiện tuyệt đối.' },
+  '卜': { origin: 'Hình vết rạn nứt trên mai rùa hoặc xương thú khi nung lửa bói toán.', kanjiRole: 'Biểu thị bói toán, dự đoán tương lai, linh cảm hoặc chức vụ quan sát.' },
+  '卩': { origin: 'Hình người đang quỳ gối phục tùng hoặc thẻ tre chia đôi làm tín vật.', kanjiRole: 'Biểu thị tiết khí, đốt tre, tín vật, sự gập lại hoặc tư thế quỳ phục.' },
+  '厂': { origin: 'Hình vách núi đá dựng đứng che chở phía dưới sườn núi.', kanjiRole: 'Biểu thị sườn núi, vách đá, mái hiên che chắn hoặc công xưởng sơ khởi.' },
+  '厶': { origin: 'Hình cánh tay co gập về phía lòng mình thể hiện cái của riêng mình.', kanjiRole: 'Biểu thị sự riêng tư, tính cá nhân, bí mật hoặc cái tôi độc lập.' },
+  '又': { origin: 'Hình bàn tay phải nắm lại đang vươn ra cầm nắm đồ vật.', kanjiRole: 'Biểu thị hành động lặp lại, sự liên kết, bàn tay phải hoặc tiếp tục.' },
+  '口': { origin: 'Hình khuôn miệng người đang mở ra nói chuyện hoặc ăn uống.', kanjiRole: 'Biểu thị miệng, lời nói, phát âm, nếm vị, ăn uống, lối ra vào hoặc tiếng động (味, 呼, 叫, 吸).' },
+  '囗': { origin: 'Khung viền vuông khép kín hoàn toàn như tường thành bao bọc quốc gia.', kanjiRole: 'Biểu thị sự bao vây, giam giữ, tường thành, bờ cõi đất nước hoặc toàn vẹn lãnh thổ (国, 園, 囲).' },
+  '土': { origin: 'Hình ụ đất đắp cao mọc lên từ nền đất bằng phẳng.', kanjiRole: 'Biểu thị đất đai, bùn đất, gò đất, công trình xây dựng hoặc địa lý (地, 坂, 城, 培).' },
+  '士': { origin: 'Hình người đàn ông trưởng thành có tri thức hoặc cầm vũ khí bảo vệ xã hội.', kanjiRole: 'Biểu thị kẻ sĩ, học giả, người trí thức, người có chí khí hoặc chiến binh.' },
+  '夂': { origin: 'Hình bàn chân đi ngược hướng hoặc bước đi chậm chạp phía sau.', kanjiRole: 'Biểu thị sự đi theo sau, chậm trễ, lùi lại hoặc theo đuổi.' },
+  '夕': { origin: 'Hình mảnh trăng khuyết lấp ló vừa mới mọc lúc hoàng hôn.', kanjiRole: 'Biểu thị buổi chiều tối, màn đêm, thời gian chạng vạng hoặc giấc mộng (夜, 夢, 多).' },
+  '大': { origin: 'Hình con người trưởng thành dang rộng hai tay hai chân hiên ngang.', kanjiRole: 'Biểu thị sự to lớn, vĩ đại, sự mở rộng hoặc vị thế vượt trội.' },
+  '女': { origin: 'Hình người phụ nữ đoan trang đang quỳ gối chắp tay.', kanjiRole: 'Biểu thị phái nữ, người mẹ, vẻ đẹp, sự dịu dàng hoặc quan hệ hôn nhân gia đình (好, 妹, 姉, 始).' },
+  '子': { origin: 'Hình đứa trẻ sơ sinh quấn tã vẫy vẫy hai tay mũm mĩm.', kanjiRole: 'Biểu thị đứa con, con cái, thế hệ sau, sự sinh sôi hoặc học trò.' },
+  '宀': { origin: 'Hình mái nhà ngói có đỉnh nhọn và hai bên tường vững chãi.', kanjiRole: 'Biểu thị ngôi nhà, nơi cư trú, nơi sinh sống an toàn, gia đình ấm cúng (家, 安, 室, 宿).' },
+  '寸': { origin: 'Hình bàn tay có dấu chấm ở cổ tay nơi đo mạch đập (khoảng cách 1 tấc).', kanjiRole: 'Biểu thị thước đo chiều dài, sự chuẩn xác, quy tắc mực thước hoặc cẩn trọng (寺, 専, 尊).' },
+  '小': { origin: 'Hình ba hạt bụi nhỏ hoặc một vật thể được chia tách thành những mảnh vụn.', kanjiRole: 'Biểu thị sự nhỏ bé, ít ỏi, khiêm tốn hoặc thu hẹp (少, 尖, 省).' },
+  '尢': { origin: 'Hình người có chân đi khập khiễng hoặc cơ thể biến dạng.', kanjiRole: 'Biểu thị sự yếu đuối, què quặt hoặc đặc điểm cơ thể đặc biệt.' },
+  '尸': { origin: 'Hình người nằm bất động như xác ướp hoặc tư thế nằm.', kanjiRole: 'Biểu thị thi thể, xác thịt, tư thế nằm hoặc lớp vỏ bên ngoài (屋, 履, 局).' },
+  '屮': { origin: 'Hình mầm cỏ non mới đâm chồi nhú lên khỏi mặt đất.', kanjiRole: 'Biểu thị sự sinh sôi non nớt, đâm chồi, khởi nguồn sức sống.' },
+  '山': { origin: 'Hình ba ngọn núi nhô cao sừng sững liên tiếp nhau.', kanjiRole: 'Biểu thị núi non, địa hình đồi dốc, cảnh quan thiên nhiên hùng vĩ (島, 岩, 岳).' },
+  '川': { origin: 'Hình các dòng nước uốn lượn chảy cuồn cuộn qua bờ bãi.', kanjiRole: 'Biểu thị dòng sông, dòng nước chảy xuôi, sự thông suốt hoặc kênh rạch (州, 順).' },
+  '巛': { origin: 'Biến thể nét lượn của dòng sông nước chảy cuồn cuộn.', kanjiRole: 'Biểu thị dòng sông, dòng nước chảy êm đềm, sự thuận buồm xuôi gió.' },
+  '工': { origin: 'Hình cái đe, cái thước thợ hoặc dụng cụ mộc của nghệ nhân.', kanjiRole: 'Biểu thị nghề thủ công, kỹ nghệ, công trình, sự khéo léo hoặc lao động (巧, 左, 功).' },
+  '己': { origin: 'Hình sợi dây thừng cuộn lại uốn lượn gọn gàng.', kanjiRole: 'Biểu thị chính bản thân mình, sự tự chủ, kỷ cương hoặc can Kỷ.' },
+  '巾': { origin: 'Hình tấm vải dệt treo rủ xuống hoặc khăn tay lau mặt.', kanjiRole: 'Biểu thị khăn, vải vóc, lụa là, cờ hiệu hoặc trang phục (布, 希, 帯).' },
+  '干': { origin: 'Hình cây gậy phòng thủ có nhánh chẽ hoặc cọc phơi đồ.', kanjiRole: 'Biểu thị sự chống cự, bảo vệ, phơi khô, can thiệp hoặc sự cạn kiệt (乾, 刊).' },
+  '幺': { origin: 'Hình cuộn sợi tơ tằm nhỏ sơ khai mới se lại.', kanjiRole: 'Biểu thị sự nhỏ bé, yếu ớt, non nớt hoặc thứ tự sau cùng (幼, 幻).' },
+  '广': { origin: 'Hình mái nhà lớn xây tựa vào vách núi có một bên tường hở.', kanjiRole: 'Biểu thị ngôi nhà lớn, dinh thự, sảnh đường, kho chứa đồ sộ (店, 広, 庫, 席).' },
+  '廴': { origin: 'Hình bước chân dài đang sải bước tiến về phía trước.', kanjiRole: 'Biểu thị sự kéo dài, bước tiến xa, phát triển không ngừng (延, 建).' },
+  '弓': { origin: 'Hình cây cung uốn cong có buộc dây cung sẵn sàng bắn tên.', kanjiRole: 'Biểu thị cung tên, vũ khí tầm xa, sự căng thẳng, uốn cong hoặc đàn hồi (引, 張, 強).' },
+  '彳': { origin: 'Hình nửa bên trái của ngã tư đường (chữ Hành 行).', kanjiRole: 'Biểu thị bước chân đi bộ, di chuyển, con đường, hành động dạo bước (行, 待, 律, 徒).' },
+  '心': { origin: 'Hình quả tim với các ngăn mạch máu và nhịp đập cảm xúc.', kanjiRole: 'Biểu thị trái tim, cảm xúc, tâm trạng, tư duy, sự trăn trở hay phẩm hạnh (思, 忘, 愛, 念).' },
+  '忄': { origin: 'Biến thể của bộ Tâm khi đứng bên trái (thiên bàng) chữ Hán.', kanjiRole: 'Chuyên xuất hiện trong chữ diễn tả tâm trạng, xúc cảm nội tâm (忙, 快, 怖, 性, 慢).' },
+  '戈': { origin: 'Hình ngọn kích hoặc mũi giáo có lưỡi ngang để đâm chém.', kanjiRole: 'Biểu thị vũ khí, chiến tranh, binh đao, phòng thủ hoặc xâm lược (成, 戦, 我).' },
+  '戶': { origin: 'Hình một cánh cửa đơn bằng gỗ khép mở.', kanjiRole: 'Biểu thị cánh cửa, ngôi nhà, hộ gia đình, căn phòng riêng (所, 房, 戻).' },
+  '手': { origin: 'Hình bàn tay với năm ngón xòe ra thao tác linh hoạt.', kanjiRole: 'Biểu thị bàn tay, hành vi cầm nắm, tác động vật lý, kỹ năng thủ công (手, 挙, 掌).' },
+  '扌': { origin: 'Biến thể của bộ Thủ khi đứng bên trái (thiên bàng) chữ Hán.', kanjiRole: 'Chuyên biểu thị các động tác của bàn tay: đánh, nhặt, giữ, chỉ, đẩy (打, 拾, 持, 指, 押).' },
+  '日': { origin: 'Hình mặt trời tròn sáng có điểm chấm ở tâm vũ trụ.', kanjiRole: 'Biểu thị mặt trời, ban ngày, thời gian, ánh sáng rực rỡ, ngày tháng (明, 時, 映, 晴).' },
+  '月': { origin: 'Hình vầng trăng lưỡi liềm trên bầu trời đêm hoặc hình miếng thịt sườn (chữ Nhục).', kanjiRole: 'Biểu thị mặt trăng, chu kỳ tháng, hoặc các bộ phận cơ thể người (thịt): não, vai, tay, chân (朝, 期, 服, 腕, 脳).' },
+  '木': { origin: 'Hình cây cối có tán lá xòe bên trên và rễ bám sâu vào lòng đất.', kanjiRole: 'Biểu thị cây cối, gỗ, rừng, các loại quả hoặc đồ dùng chế tạo từ gỗ (本, 林, 森, 机, 校).' },
+  '欠': { origin: 'Hình người há to miệng ngáp vì mệt mỏi hoặc thở dài.', kanjiRole: 'Biểu thị sự thiếu hụt, ngáp, há miệng thở, khao khát hoặc ca hát (次, 歌, 欲).' },
+  '止': { origin: 'Hình bàn chân dừng lại trên mặt đất không bước tiếp.', kanjiRole: 'Biểu thị sự dừng lại, đứng yên, ngăn cản hoặc điểm kết thúc (正, 歩, 歴).' },
+  '水': { origin: 'Hình dòng nước chảy cuồn cuộn với các giọt nước bắn tung tóe.', kanjiRole: 'Biểu thị nước, chất lỏng, sông hồ biển cả, thời tiết mưa ẩm hoặc rửa sạch.' },
+  '氵': { origin: 'Biến thể (Ba chấm thủy) của bộ Thủy khi đứng bên trái chữ Hán.', kanjiRole: 'Chuyên biểu thị sông nước, chất lỏng, sự trôi chảy, ẩm ướt (海, 泳, 洗, 酒, 湖).' },
+  '火': { origin: 'Hình ngọn lửa đang bùng cháy rực rỡ với các tia lửa bắn ra.', kanjiRole: 'Biểu thị lửa, hơi nóng, năng lượng, thiêu đốt, nấu nướng hoặc sự rực rỡ (焼, 灯, 煙).' },
+  '灬': { origin: 'Biến thể của bộ Hỏa (Bốn chấm hỏa) khi nằm ở dưới đáy chữ Hán.', kanjiRole: 'Biểu thị nguồn nhiệt đun nấu bên dưới, sự nóng rực, nung nấu (熱, 照, 点, 然).' },
+  '牛': { origin: 'Hình đầu con trâu bò nhìn thẳng với hai sừng cong vút và đôi tai.', kanjiRole: 'Biểu thị trâu bò, gia súc, động vật ăn cỏ, sức kéo hoặc vật tế lễ (物, 特, 牧).' },
+  '犬': { origin: 'Hình dáng con chó với cái đuôi cong vểnh và đôi tai nhọn.', kanjiRole: 'Biểu thị loài chó, sự trung thành hoặc muông thú.' },
+  '犭': { origin: 'Biến thể của bộ Khuyển khi đứng bên trái chữ Hán.', kanjiRole: 'Chuyên biểu thị muông thú hoang dã, động vật săn mồi, bản tính thú (猫, 犯, 狩, 狂).' },
+  '王': { origin: 'Hình lưỡi rìu ngọc nghi lễ đại diện cho quyền lực tối cao của thiên tử.', kanjiRole: 'Biểu thị vua chúa, người cai trị, sự cao quý tột bậc (皇, 旺).' },
+  '玉': { origin: 'Hình ba viên ngọc quý được xâu luồn qua một sợi dây kết nối.', kanjiRole: 'Biểu thị ngọc quý, châu báu, vẻ đẹp lấp lánh, sự tinh khiết (国, 宝, 理, 現).' },
+  '田': { origin: 'Hình thửa ruộng vuông vắn được chia thành bốn ô bờ ngăn nước.', kanjiRole: 'Biểu thị đồng ruộng, canh tác nông nghiệp, đất đai sản xuất (町, 画, 界, 男).' },
+  '目': { origin: 'Hình con mắt người nhìn thẳng với đồng tử và con ngươi rõ nét.', kanjiRole: 'Biểu thị đôi mắt, thị giác, sự quan sát, cái nhìn hoặc mục tiêu (見, 相, 省, 着).' },
+  '石': { origin: 'Hình hòn đá lăn rơi từ vách núi đá dựng đứng xuống chân bờ.', kanjiRole: 'Biểu thị đá, sỏi, khoáng sản, sự cứng rắn, kiên định (砂, 破, 研, 磨).' },
+  '示': { origin: 'Hình chiếc bàn tế lễ thần linh bằng đá với các giọt rượu cúng nhỏ xuống.', kanjiRole: 'Biểu thị thần linh, cúng tế, tôn giáo, phước lành hoặc tai họa (祭, 禁).' },
+  '礻': { origin: 'Biến thể của bộ Thị khi đứng bên trái chữ Hán.', kanjiRole: 'Chuyên biểu thị thần linh, điềm lành, lễ nghi, chúc tụng (神, 社, 祝, 礼, 福).' },
+  '禾': { origin: 'Hình cây lúa chín trĩu hạt uốn cong ngọn bông xuống đất.', kanjiRole: 'Biểu thị cây lúa, ngũ cốc, mùa màng thu hoạch, nông nghiệp hoặc tài sản (秋, 私, 利, 和, 科).' },
+  '穴': { origin: 'Hình hang động đào sâu trong lòng đất có mái vòm che chở.', kanjiRole: 'Biểu thị hang hốc, lỗ thủng, không gian ngầm hoặc chui rúc (空, 究, 突).' },
+  '立': { origin: 'Hình người đứng vững vàng hai chân trên mặt đất.', kanjiRole: 'Biểu thị sự đứng thẳng, độc lập, thiết lập, dựng xây hoặc khởi đầu (親, 端, 産).' },
+  '竹': { origin: 'Hình hai nhánh lá tre rủ xuống xanh mướt.', kanjiRole: 'Biểu thị cây tre, đốt tre, sự dẻo dai kiên cường.' },
+  '⺮': { origin: 'Biến thể của bộ Trúc khi nằm ở phía trên đầu chữ Hán.', kanjiRole: 'Chuyên biểu thị các vật dụng chế tạo bằng tre: bút lông, rổ rá, sọt, nhạc cụ sáo (筆, 答, 笑, 箱).' },
+  '米': { origin: 'Hình những hạt gạo tẻ tỏa ra từ bông lúa khi đập.', kanjiRole: 'Biểu thị hạt gạo, lương thực, thực phẩm nuôi sống con người hoặc tinh túy (料, 粉, 精, 粒).' },
+  '糸': { origin: 'Hình bó tơ tằm mềm mại được se thành sợi chỉ dài.', kanjiRole: 'Biểu thị sợi tơ, dây nhợ, sự gắn kết, dệt may, mối quan hệ ràng buộc (終, 約, 紙, 組, 結).' },
+  '纟': { origin: 'Dạng giản thể của bộ Mịch (sợi tơ chỉ).', kanjiRole: 'Biểu thị dây sợi, sự liên kết, ràng buộc, may mặc.' },
+  '耳': { origin: 'Hình vành tai người với các nếp sụn đón nhận âm thanh.', kanjiRole: 'Biểu thị đôi tai, thính giác, sự lắng nghe, hiểu biết thấu đáo (聞, 職, 声, 取).' },
+  '艸': { origin: 'Hình hai khóm cỏ non nhú mọc vươn lên đón nắng.', kanjiRole: 'Biểu thị thực vật, cỏ cây, hoa lá thảo mộc.' },
+  '艹': { origin: 'Biến thể của bộ Thảo khi nằm trên đầu (quán) chữ Hán.', kanjiRole: 'Chuyên biểu thị hoa cỏ, cây cỏ, thảo mộc, rau quả và vị thuốc thiên nhiên (花, 茶, 草, 薬, 苦).' },
+  '言': { origin: 'Hình khuôn miệng phát ra âm thanh và lời nói từ tận đáy lòng.', kanjiRole: 'Biểu thị lời nói, ngôn ngữ, đàm thoại, giao tiếp, kế hoạch, tính toán (語, 話, 読, 計, 認).' },
+  '讠': { origin: 'Dạng giản thể của bộ Ngôn khi làm thiên bàng bên trái.', kanjiRole: 'Chuyên biểu thị lời nói, chữ viết, bàn luận, cam kết.' },
+  '貝': { origin: 'Hình vỏ sò quý xòe mép được dùng làm tiền tệ giao thương thời cổ.', kanjiRole: 'Biểu thị tiền bạc, của cải, buôn bán, tài sản, giá trị hoặc quý giá (買, 貸, 費, 財, 質).' },
+  '車': { origin: 'Hình cỗ xe ngựa nhìn từ trên cao với hai bánh xe, trục xe và thùng xe.', kanjiRole: 'Biểu thị xe cộ, phương tiện bánh lăn, vận chuyển, chuyên chở (転, 輪, 輸, 軽).' },
+  '辶': { origin: 'Hình bàn chân bước đi trên con đường dài rộng mở.', kanjiRole: 'Biểu thị sự di chuyển, con đường, đi xa, tiến tới, gặp gỡ hoặc thời gian trôi qua (道, 通, 進, 近, 返).' },
+  '⻌': { origin: 'Biến thể của bộ Xước (quai xước) bao quanh bên trái và dưới đáy chữ Hán.', kanjiRole: 'Biểu thị hành trình, đường sá, chuyển động di chuyển hoặc tiếp cận.' },
+  '邑': { origin: 'Hình vùng đất phong có người quỳ gối sinh sống yên bình.', kanjiRole: 'Biểu thị làng mạc, thôn xóm, thành phố, đô thị (khi đứng bên phải chữ Hán viết thành 阝: 都, 部, 郷).' },
+  '阜': { origin: 'Hình gò đồi đất cao có từng bậc thang nhấp nhô nối tiếp nhau.', kanjiRole: 'Biểu thị núi non, gò đồi hiểm trở, cản trở hoặc bậc thềm (khi đứng bên trái chữ Hán viết thành 阝: 阪, 防, 陽, 院).' },
+  '金': { origin: 'Hình các thỏi vàng, kim loại quý được nung đúc ẩn sâu dưới lòng đất.', kanjiRole: 'Biểu thị kim loại, vàng, tiền bạc, chuông sắt hoặc công cụ sắt nhọn (銀, 鉄, 銅, 鏡, 針).' },
+  '門': { origin: 'Hình hai cánh cổng gỗ lớn khép mở của phủ đệ, làng xóm.', kanjiRole: 'Biểu thị cửa ngõ, lối vào, sự ngăn cách, gia môn hoặc hỏi han thăm viếng (開, 閉, 問, 間, 関).' },
+  '雨': { origin: 'Hình những hạt mưa từ vòm trời mây đen rơi rớt xuống mặt đất.', kanjiRole: 'Biểu thị mưa, bão tuyết, sấm chớp, thời tiết khí tượng bầu trời (雪, 雲, 電, 雷, 霜).' },
+  '食': { origin: 'Hình chiếc vạc có nắp đậy bên trên chứa thức ăn ấm nóng.', kanjiRole: 'Biểu thị thức ăn, việc ăn uống, nuôi nấng dưỡng dục, bữa cơm (飯, 飲, 館, 養).' },
+  '飠': { origin: 'Biến thể của bộ Thực khi đứng bên trái chữ Hán.', kanjiRole: 'Chuyên biểu thị việc ăn uống, các món ăn, bánh trái, no đủ.' }
+};
+
+// Hàm trích xuất toàn diện các chi tiết ý nghĩa của một bộ thủ
+export function getRadicalSemanticDetails(
+  character: string,
+  meaning: string,
+  description: string
+): { origin: string; kanjiRole: string; meaningBadges: string[] } {
+  // 1. Tách các nét nghĩa cốt lõi thành danh sách badge
+  const cleanedMeaning = meaning.replace(/[\(\)\[\]\{\}]/g, '');
+  const rawParts = cleanedMeaning.split(/[,;\/•\n]+/).map(s => s.trim()).filter(Boolean);
+  const meaningBadges = rawParts.length > 0 ? Array.from(new Set(rawParts)) : [meaning];
+
+  // 2. Tra cứu nguồn gốc & vai trò ghép Kanji
+  const baseChar = character.split(' ')[0] || character;
+  const semanticData = RADICAL_SEMANTIC_ROLES[baseChar] || RADICAL_SEMANTIC_ROLES[character];
+
+  let origin = semanticData?.origin;
+  let kanjiRole = semanticData?.kanjiRole;
+
+  // Fallback thông minh nếu bộ thủ chưa có trong từ điển mở rộng
+  if (!origin) {
+    origin = description || `Mô phỏng hình tượng tượng hình của "${meaningBadges[0] || meaning}", bắt nguồn từ đời sống và thiên nhiên cổ xưa.`;
+  }
+  if (!kanjiRole) {
+    const mainMeaning = meaningBadges[0] || meaning;
+    kanjiRole = `Khi xuất hiện trong cấu tạo chữ Hán, bộ thủ này thường đóng vai trò chỉ ngữ nghĩa (biểu nghĩa), gợi mở chữ Kanji đó liên quan đến "${mainMeaning}".`;
+  }
+
+  return { origin, kanjiRole, meaningBadges };
+}
 
 // Từ điển bộ thủ chi tiết chuẩn hóa theo 15 bài học
 export const RADICALS_DICT: Record<string, RadicalInfo> = {
