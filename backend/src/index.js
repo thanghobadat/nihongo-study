@@ -34,11 +34,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rate Limiter: 100 requests per 15 minutes (10000 in development/testing)
+// Rate Limiter: 1500 requests per 15 minutes (10000 in development/testing)
 const isProd = process.env.NODE_ENV === 'production';
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: isProd ? 100 : 10000,
+  max: isProd ? 1500 : 10000,
   message: { error: 'Too many requests from this IP, please try again after 15 minutes.' }
 });
 app.use('/api/', limiter);

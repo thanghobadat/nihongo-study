@@ -383,10 +383,12 @@ Hãy cung cấp:
 }
 
 module.exports = {
+  callGemini,
   gradeJapaneseAnswer,
   gradeRadicalHandwriting,
   gradeRadicalFull,
   explainRadicalMeaning
 };
+
 
 

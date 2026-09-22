@@ -1,8 +1,70 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
 const supabase = require('../db/supabase');
 const { requireAuth } = require('../middlewares/auth');
 const mockDb = require('../db/mockDb');
+const pushNotificationService = require('../services/pushNotificationService');
+const aiPlannerService = require('../services/aiPlannerService');
+
+const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
+
+function loadPersistentPlans() {
+  try {
+    if (fs.existsSync(STUDY_PLANS_FILE)) {
+      return JSON.parse(fs.readFileSync(STUDY_PLANS_FILE, 'utf8'));
+    }
+  } catch (e) {
+    console.error('[StudyPlan] Error reading study_plans.json:', e.message);
+  }
+  return {};
+}
+
+function savePersistentPlans(plans) {
+  try {
+    fs.writeFileSync(STUDY_PLANS_FILE, JSON.stringify(plans, null, 2), 'utf8');
+  } catch (e) {
+    console.error('[StudyPlan] Error writing study_plans.json:', e.message);
+  }
+}
+
+// Initialize mockDb.studyPlans from persistent disk storage
+if (!mockDb.studyPlans) mockDb.studyPlans = {};
+try {
+  const loaded = loadPersistentPlans();
+  mockDb.studyPlans = { ...loaded, ...mockDb.studyPlans };
+} catch (e) {}
+
+/**
+ * Sync Supabase user_progress table into local auto-tracking cache for online users
+ */
+async function syncUserProgressFromSupabase(userId) {
+  try {
+    if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) {
+      return;
+    }
+    const { data, error } = await supabase
+      .from('user_progress')
+      .select('item_type, item_id, status')
+      .eq('user_id', userId);
+    if (data && Array.isArray(data)) {
+      if (!mockDb.userProgress) mockDb.userProgress = {};
+      for (const row of data) {
+        mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
+      }
+    }
+  } catch (err) {
+    console.warn('[AutoTracking] Supabase sync warning:', err.message);
+  }
+}
+
+function getLocalDateStr(d = new Date()) {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 // Apply auth middleware to all user routes
 router.use(requireAuth);
@@ -214,7 +276,7 @@ router.get('/daily-report-status', async (req, res) => {
 router.post('/daily-report-ack', async (req, res) => {
   try {
     const userId = req.user.id;
-    const reportDate = req.body.date || new Date().toISOString().split('T')[0];
+    const reportDate = req.body.date || getLocalDateStr();
 
     if (req.user.isMock) {
       if (!mockDb.dailyReportStatus) mockDb.dailyReportStatus = {};
@@ -348,7 +410,6 @@ router.get('/course-summary', async (req, res) => {
 
 /**
  * GET /api/lessons
-```,StartLine:178,TargetContent:
  * Get list of lessons
  */
 router.get('/lessons', async (req, res) => {
@@ -745,6 +806,10 @@ router.post('/progress', async (req, res) => {
 
     if (error) throw error;
 
+    // Mirror to in-memory for instant auto-tracking reflection
+    if (!mockDb.userProgress) mockDb.userProgress = {};
+    mockDb.userProgress[`${userId}:${item_type}:${item_id}`] = status;
+
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
     console.error('Error updating progress:', error);
@@ -1116,8 +1181,6 @@ router.get('/reviews/combined', async (req, res) => {
 
 
 // --- HELPER FUNCTIONS FOR LOCAL MOCK CUSTOM ITEMS ---
-const fs = require('fs');
-const path = require('path');
 const customItemsPath = path.join(__dirname, '../db/custom_items.json');
 
 function readCustomItems() {
@@ -2195,6 +2258,599 @@ router.post('/review-sessions', async (req, res) => {
     console.error('Error saving review session:', error);
     // Never fail with 500 to keep UI completely responsive
     res.json({ message: 'Session saved locally' });
+  }
+});
+
+/**
+ * Auto-tracking Helper: Scans database for mastered status and automatically marks tasks as completed
+ */
+function applyAutoTracking(plan, userId) {
+  if (!plan || !plan.days) return plan;
+
+  const userProgress = mockDb.userProgress || {};
+  const userReviewSessions = mockDb.userReviewSessions || {};
+
+  for (const day of plan.days) {
+    if (!day.tasks) continue;
+    let dayCompleted = 0;
+
+    for (const task of day.tasks) {
+      const lesson = task.lesson || 1;
+      let count = 0;
+
+      if (task.itemType === 'vocabulary') {
+        const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
+        const targetItems = (task.itemIds && task.itemIds.length > 0)
+          ? vocabList.filter(v => task.itemIds.includes(v.id))
+          : vocabList;
+        count = targetItems.filter(v => {
+          const s = userProgress[`${userId}:vocabulary:${v.id}`];
+          return s === 'mastered' || s === 'learning';
+        }).length;
+      } else if (task.itemType === 'kanji') {
+        const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
+        const targetItems = (task.itemIds && task.itemIds.length > 0)
+          ? kanjiList.filter(k => task.itemIds.includes(k.id))
+          : kanjiList;
+        count = targetItems.filter(k => {
+          const s = userProgress[`${userId}:kanji:${k.id}`];
+          return s === 'mastered' || s === 'learning';
+        }).length;
+      } else if (task.itemType === 'grammar') {
+        const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
+        const targetItems = (task.itemIds && task.itemIds.length > 0)
+          ? grammarList.filter(g => task.itemIds.includes(g.id))
+          : grammarList;
+        count = targetItems.filter(g => {
+          const s = userProgress[`${userId}:grammar:${g.id}`];
+          return s === 'mastered' || s === 'learning';
+        }).length;
+      } else if (task.itemType === 'single_review') {
+        const key = `${userId}:review_session_lesson_${lesson}`;
+        count = userReviewSessions[key] ? 1 : 0;
+      } else if (task.itemType === 'cumulative_review') {
+        const key = `${userId}:combined_review_level_N5`;
+        count = userReviewSessions[key] ? 1 : 0;
+      }
+
+      task.currentCount = count;
+      const target = task.targetCount || 1;
+      task.progressPct = Math.min(100, Math.round((count / target) * 100));
+
+      if (count >= target && target > 0) {
+        task.completed = true;
+        if (!task.completed_at) {
+          task.completed_at = '✓ Tự động ghi nhận';
+        }
+      }
+
+      if (task.completed) {
+        dayCompleted++;
+      }
+    }
+
+    day.completedCount = dayCompleted;
+    day.completionRate = day.plannedCount > 0 ? Math.round((dayCompleted / day.plannedCount) * 100) : 100;
+  }
+
+  return plan;
+}
+
+/**
+ * GET /api/user/study-debt
+ * Check yesterday's unfinished debt
+ */
+router.get('/study-debt', (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    let plan = mockDb.studyPlans[userId];
+    if (plan) {
+      plan = applyAutoTracking(plan, userId);
+    }
+    const debt = aiPlannerService.getUnfinishedDebt({ userId, plan });
+    return res.json({ success: true, ...debt });
+  } catch (err) {
+    console.error('Error getting study debt:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/replan-debt
+ * Rebalance debt over future days while strictly keeping endDate
+ */
+router.post('/replan-debt', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    let plan = mockDb.studyPlans[userId];
+    if (!plan) {
+      return res.status(400).json({ success: false, error: 'Không tìm thấy kế hoạch để replan.' });
+    }
+
+    const updatedPlan = await aiPlannerService.refineStudyPlan({
+      currentPlan: plan,
+      userComment: 'Học bù nợ bài hôm qua, dời vào các ngày tới',
+      startDate: plan.startDate,
+      endDate: plan.endDate,
+      currentProgress: {}
+    });
+
+    mockDb.studyPlans[userId] = updatedPlan;
+    return res.json({ success: true, plan: updatedPlan, message: 'Đã phân bổ lại bài nợ thành công và giữ nguyên hạn chót!' });
+  } catch (err) {
+    console.error('Error replanning debt:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/user/study-plan
+ * Get active study plan with auto-tracking applied (auto-upgrade old plan if missing granular scopeDetails)
+ */
+router.get('/study-plan', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    if (!mockDb.studyPlans[userId]) {
+      const persisted = loadPersistentPlans();
+      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
+    }
+
+    let plan = mockDb.studyPlans[userId];
+
+    // Restore from Supabase target_plans if online and memory was cleared by cloud sleep
+    if (!plan && !req.user.isMock) {
+      try {
+        const { data: tp } = await supabase
+          .from('target_plans')
+          .select('start_date, end_date')
+          .eq('user_id', userId)
+          .maybeSingle();
+        if (tp && tp.start_date && tp.end_date) {
+          plan = aiPlannerService.generateAlgorithmicPlan({
+            startDate: tp.start_date,
+            endDate: tp.end_date,
+            targetLevel: 'All',
+            currentLesson: 1
+          });
+          mockDb.studyPlans[userId] = plan;
+          savePersistentPlans(mockDb.studyPlans);
+        }
+      } catch (e) {
+        console.warn('[StudyPlan] Could not restore from Supabase target_plans:', e.message);
+      }
+    }
+
+    // Check if plan is missing or was created with old format
+    const maxLessonCovered = plan?.days ? Math.max(0, ...plan.days.flatMap(d => (d.tasks || []).map(t => t.lesson || 0))) : 0;
+    const isOldPlan = !plan || !plan.days || !plan.days[0]?.dayRationale ||
+      maxLessonCovered < 50 ||
+      !plan.isBalancedPacing ||
+      plan.days.some(d => d.isDedicatedPracticeDay || d.tasks?.some(t => !t.scopeDetails || t.title.includes('25-35') || (t.itemType === 'vocabulary' && t.estimatedMinutes < 50) || t.title.includes('Hoàn thành lý thuyết'))) ||
+      plan.workloadRationale?.includes('1 Ngày Thực Hành Chuyên Biệt');
+
+    if (isOldPlan) {
+      const today = new Date();
+      const nextMonth = new Date();
+      nextMonth.setDate(today.getDate() + 30);
+      const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      plan = aiPlannerService.generateAlgorithmicPlan({
+        startDate: plan?.startDate || fmt(today),
+        endDate: plan?.endDate || fmt(nextMonth),
+        targetLevel: 'All',
+        currentLesson: 1
+      });
+      mockDb.studyPlans[userId] = plan;
+      savePersistentPlans(mockDb.studyPlans);
+    }
+
+    // Synchronize Supabase user_progress before auto-tracking
+    await syncUserProgressFromSupabase(userId);
+
+    // Apply auto-tracking from database
+    plan = applyAutoTracking(plan, userId);
+
+    return res.json({ success: true, plan });
+  } catch (err) {
+    console.error('Error fetching study plan:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/study-plan
+ * Save or update active study plan
+ */
+router.post('/study-plan', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { plan } = req.body;
+    if (!plan || !plan.startDate || !plan.endDate) {
+      return res.status(400).json({ success: false, error: 'Thiếu thông tin kế hoạch (startDate, endDate).' });
+    }
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    mockDb.studyPlans[userId] = plan;
+    savePersistentPlans(mockDb.studyPlans);
+
+    // If online with Supabase, sync target_plans table as well
+    if (!req.user.isMock && plan.startDate && plan.endDate) {
+      try {
+        await supabase.from('target_plans').upsert({
+          user_id: userId,
+          start_date: plan.startDate,
+          end_date: plan.endDate,
+          vocabulary_target: plan.totalLessons ? plan.totalLessons * 40 : 2000,
+          kanji_target: plan.totalLessons ? plan.totalLessons * 10 : 500,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id' });
+      } catch (e) {
+        console.warn('[StudyPlan] Supabase target_plans sync warning:', e.message);
+      }
+    }
+
+    return res.json({ success: true, message: 'Đã lưu kế hoạch học tập thành công', plan });
+  } catch (err) {
+    console.error('Error saving study plan:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/daily-tasks/schedule
+ * Update task due_time and completed status
+ */
+router.post('/daily-tasks/schedule', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { taskId, due_time, completed, date } = req.body;
+    if (!taskId) {
+      return res.status(400).json({ success: false, error: 'taskId is required' });
+    }
+
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    if (!mockDb.studyPlans[userId]) {
+      const persisted = loadPersistentPlans();
+      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
+    }
+    const plan = mockDb.studyPlans[userId];
+    if (plan && plan.days) {
+      for (const day of plan.days) {
+        if (!date || day.date === date) {
+          const task = day.tasks ? day.tasks.find(t => t.id === taskId) : null;
+          if (task) {
+            if (due_time !== undefined) task.due_time = due_time;
+            if (completed !== undefined) {
+              task.completed = completed;
+              if (completed) {
+                task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+              } else {
+                delete task.completed_at;
+              }
+            }
+            day.completedCount = day.tasks.filter(t => t.completed).length;
+            break;
+          }
+        }
+      }
+      savePersistentPlans(mockDb.studyPlans);
+    }
+
+    return res.json({ success: true, message: 'Đã cập nhật nhiệm vụ thành công' });
+  } catch (err) {
+    console.error('Error scheduling daily task:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/user/study-overview
+ * Overview of completed knowledge, current position, Pace status, and Milestones
+ */
+router.get('/study-overview', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    if (!mockDb.studyPlans[userId]) {
+      const persisted = loadPersistentPlans();
+      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
+    }
+
+    // Sync Supabase progress before computing overview
+    await syncUserProgressFromSupabase(userId);
+
+    const plan = mockDb.studyPlans[userId];
+
+    const vocabList = mockDb.vocabulary || [];
+    const kanjiList = mockDb.kanji || [];
+    const grammarList = mockDb.grammar || [];
+    const progressKeys = Object.keys(mockDb.userProgress || {}).filter(k => k.startsWith(`${userId}:`));
+
+    const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
+    const masteredKanji = progressKeys.filter(k => k.includes(':kanji:') && mockDb.userProgress[k] === 'mastered').length;
+    const masteredGrammar = progressKeys.filter(k => k.includes(':grammar:') && mockDb.userProgress[k] === 'mastered').length;
+
+    let currentLesson = 1;
+    let todayLessonsDetails = [];
+    if (plan && plan.days) {
+      const todayStr = getLocalDateStr();
+      const currentDay = plan.days.find(d => d.date === todayStr) || plan.days[0];
+      if (currentDay && currentDay.tasks && currentDay.tasks.length > 0) {
+        currentLesson = currentDay.tasks[0].lesson || 1;
+        const lessonIds = [...new Set(currentDay.tasks.map(t => t.lesson).filter(Boolean))];
+        todayLessonsDetails = lessonIds.map(lessonId => {
+          const counts = aiPlannerService.getLessonCounts(lessonId);
+          const tasksForLesson = currentDay.tasks.filter(t => t.lesson === lessonId);
+          const isPractice = currentDay.isPracticeDay || tasksForLesson.some(t => t.itemType === 'single_review' || t.itemType === 'cumulative_review' || t.type === 'practice');
+
+          return {
+            lesson: lessonId,
+            title: `Bài ${lessonId}: Minna no Nihongo`,
+            vocabCount: counts.vocabCount,
+            vocabScope: counts.vocabScope,
+            kanjiCount: counts.kanjiCount,
+            kanjiScope: counts.kanjiScope,
+            kanjiChars: counts.kanjiChars,
+            grammarCount: counts.grammarCount,
+            grammarScope: counts.grammarScope,
+            grammarTitlesList: counts.grammarTitlesList,
+            firstVocab: counts.firstVocab,
+            lastVocab: counts.lastVocab,
+            isPracticeDay: isPractice,
+            tasksToday: tasksForLesson.map(t => ({
+              id: t.id,
+              type: t.itemType || t.type,
+              title: t.title,
+              scopeDetails: t.scopeDetails || t.scope,
+              estimatedMinutes: t.estimatedMinutes,
+              due_time: t.due_time,
+              completed: t.completed
+            }))
+          };
+        });
+      }
+    }
+
+    if (todayLessonsDetails.length === 0) {
+      const counts = aiPlannerService.getLessonCounts(currentLesson);
+      todayLessonsDetails = [{
+        lesson: currentLesson,
+        title: `Bài ${currentLesson}: Minna no Nihongo`,
+        vocabCount: counts.vocabCount,
+        vocabScope: counts.vocabScope,
+        kanjiCount: counts.kanjiCount,
+        kanjiScope: counts.kanjiScope,
+        kanjiChars: counts.kanjiChars,
+        grammarCount: counts.grammarCount,
+        grammarScope: counts.grammarScope,
+        grammarTitlesList: counts.grammarTitlesList,
+        firstVocab: counts.firstVocab,
+        lastVocab: counts.lastVocab,
+        isPracticeDay: false,
+        tasksToday: []
+      }];
+    }
+
+    const startDate = plan?.startDate || getLocalDateStr();
+    const today = new Date();
+    const nextMonth = new Date();
+    nextMonth.setDate(today.getDate() + 30);
+    const endDate = plan?.endDate || getLocalDateStr(nextMonth);
+
+    const pace = aiPlannerService.calculatePaceDeviation({
+      startDate,
+      endDate,
+      totalLessons: 50,
+      completedLessons: Math.max(0, currentLesson - 1),
+      currentProgress: { currentLesson, masteredVocab, masteredGrammar, masteredKanji }
+    });
+
+    const milestones = [
+      {
+        id: 'm1',
+        title: 'N5 Cơ bản',
+        lessons: 'Bài 1 - 10',
+        targetLessons: 10,
+        completedLessons: Math.min(10, Math.max(0, currentLesson - 1)),
+        percentage: Math.min(100, Math.round((Math.min(10, Math.max(0, currentLesson - 1)) / 10) * 100)),
+        status: currentLesson > 10 ? 'completed' : (currentLesson >= 1 ? 'in_progress' : 'locked')
+      },
+      {
+        id: 'm2',
+        title: 'N5 Nâng cao',
+        lessons: 'Bài 11 - 25',
+        targetLessons: 15,
+        completedLessons: Math.min(15, Math.max(0, currentLesson - 11)),
+        percentage: currentLesson <= 10 ? 0 : Math.min(100, Math.round((Math.min(15, Math.max(0, currentLesson - 11)) / 15) * 100)),
+        status: currentLesson > 25 ? 'completed' : (currentLesson >= 11 ? 'in_progress' : 'locked')
+      },
+      {
+        id: 'm3',
+        title: 'N4 Khởi động',
+        lessons: 'Bài 26 - 37',
+        targetLessons: 12,
+        completedLessons: Math.min(12, Math.max(0, currentLesson - 26)),
+        percentage: currentLesson <= 25 ? 0 : Math.min(100, Math.round((Math.min(12, Math.max(0, currentLesson - 26)) / 12) * 100)),
+        status: currentLesson > 37 ? 'completed' : (currentLesson >= 26 ? 'in_progress' : 'locked')
+      },
+      {
+        id: 'm4',
+        title: 'N4 Về đích',
+        lessons: 'Bài 38 - 50',
+        targetLessons: 13,
+        completedLessons: Math.min(13, Math.max(0, currentLesson - 38)),
+        percentage: currentLesson <= 37 ? 0 : Math.min(100, Math.round((Math.min(13, Math.max(0, currentLesson - 38)) / 13) * 100)),
+        status: currentLesson >= 50 ? 'completed' : (currentLesson >= 38 ? 'in_progress' : 'locked')
+      }
+    ];
+
+    return res.json({
+      success: true,
+      overview: {
+        totalVocab: vocabList.length || 1500,
+        masteredVocab,
+        vocabPercentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0,
+        totalKanji: kanjiList.length || 255,
+        masteredKanji,
+        kanjiPercentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0,
+        totalGrammar: grammarList.length || 204,
+        masteredGrammar,
+        grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
+        totalLessons: 50,
+        currentLesson
+      },
+      current_position: {
+        lesson: currentLesson,
+        title: `Bài ${currentLesson}: Minna no Nihongo`,
+        progressRatio: parseFloat(((currentLesson / 50) * 100).toFixed(1))
+      },
+      pace,
+      milestones,
+      todayLessonsDetails,
+      planMetadata: {
+        startDate,
+        endDate,
+        totalDays: pace.totalDays,
+        daysRemaining: pace.daysRemaining
+      }
+    });
+  } catch (err) {
+    console.error('Error fetching study overview:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/user/daily-history
+ * Daily History Overview for progress tracking and detail inspection
+ */
+router.get('/daily-history', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    let plan = mockDb.studyPlans[userId];
+
+    const isOldPlan = !plan || !plan.days || !plan.days[0]?.dayRationale || !plan.isBalancedPacing || plan.days.some(d => d.tasks?.some(t => !t.scopeDetails || t.title.includes('25-35') || (t.itemType === 'vocabulary' && t.estimatedMinutes < 50) || t.title.includes('Hoàn thành lý thuyết')));
+    if (isOldPlan) {
+      const today = new Date();
+      const nextMonth = new Date();
+      nextMonth.setDate(today.getDate() + 30);
+      const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      plan = aiPlannerService.generateAlgorithmicPlan({
+        startDate: plan?.startDate || fmt(today),
+        endDate: plan?.endDate || fmt(nextMonth),
+        targetLevel: plan?.targetLevel || 'All',
+        currentLesson: 1
+      });
+      mockDb.studyPlans[userId] = plan;
+    }
+
+    plan = applyAutoTracking(plan, userId);
+
+    const todayStr = getLocalDateStr();
+
+    const history = plan.days.map((day) => {
+      const planned = day.plannedCount || (day.tasks ? day.tasks.length : 0);
+      const completed = day.completedCount || (day.tasks ? day.tasks.filter(t => t.completed).length : 0);
+      const completionRate = planned > 0 ? Math.round((completed / planned) * 100) : 100;
+
+      let pace_status = 'on_track';
+      let pace_label = 'Đạt 100% 🟢';
+
+      const isPast = day.date < todayStr;
+      const isToday = day.date === todayStr;
+
+      if (isPast) {
+        if (completionRate >= 120) {
+          pace_status = 'ahead';
+          pace_label = `Vượt ${completionRate}% 🚀`;
+        } else if (completionRate >= 100) {
+          pace_status = 'on_track';
+          pace_label = 'Hoàn thành 100% 🟢';
+        } else if (completionRate >= 60) {
+          pace_status = 'behind';
+          pace_label = `Chậm nhẹ (${completionRate}%) ⚠️`;
+        } else {
+          pace_status = 'behind';
+          pace_label = `Chậm trễ (${completionRate}%) ⚠️`;
+        }
+      } else if (isToday) {
+        if (completionRate >= 100) {
+          pace_status = 'on_track';
+          pace_label = 'Đã hoàn thành hôm nay 🟢';
+        } else {
+          pace_status = 'on_track';
+          pace_label = `Đang học hôm nay (${completionRate}%) ⚡`;
+        }
+      } else {
+        pace_status = 'scheduled';
+        pace_label = 'Sắp tới 📅';
+      }
+
+      return {
+        date: day.date,
+        dayIndex: day.dayIndex,
+        isBufferDay: day.isBufferDay,
+        isPracticeDay: day.isDedicatedPracticeDay,
+        planned_count: planned,
+        completed_count: completed,
+        completion_rate: completionRate,
+        pace_status,
+        pace_label,
+        dayRationale: day.dayRationale,
+        workloadPoints: day.workloadPoints,
+        tasks_detail: day.tasks || []
+      };
+    });
+
+    return res.json({ success: true, history });
+  } catch (err) {
+    console.error('Error fetching daily history:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/user/vapid-public-key
+ */
+router.get('/vapid-public-key', (req, res) => {
+  try {
+    const key = pushNotificationService.getVapidPublicKey();
+    return res.json({ success: true, publicKey: key });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/push-subscription
+ */
+router.post('/push-subscription', (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { subscription, deviceName } = req.body;
+    if (!subscription) {
+      return res.status(400).json({ success: false, error: 'Subscription data required' });
+    }
+    const saved = pushNotificationService.saveSubscription(userId, subscription, deviceName);
+    return res.json({ success: true, message: 'Đã lưu token thông báo cho thiết bị', data: saved });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/send-test-push
+ */
+router.post('/send-test-push', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const result = await pushNotificationService.sendTestNotification(userId);
+    return res.json({ success: true, message: 'Đã gửi thông báo thử nghiệm thành công!', result });
+  } catch (err) {
+    console.error('Error sending test push:', err.message);
+    return res.status(400).json({ success: false, error: err.message });
   }
 });
 

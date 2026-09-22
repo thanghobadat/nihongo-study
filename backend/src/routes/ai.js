@@ -331,6 +331,86 @@ router.post('/radical-explain', async (req, res) => {
   }
 });
 
+const aiPlannerService = require('../services/aiPlannerService');
+
+/**
+ * POST /api/ai/generate-study-plan
+ * Generate an AI micro-learning plan based on startDate and endDate
+ */
+router.post('/generate-study-plan', async (req, res) => {
+  try {
+    const {
+      startDate,
+      endDate,
+      targetLevel = 'All',
+      restDays = [],
+      currentProgress = {}
+    } = req.body;
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vui lòng cung cấp ngày bắt đầu (startDate) và ngày kết thúc (endDate).'
+      });
+    }
+
+    const plan = await aiPlannerService.generateStudyPlan({
+      startDate,
+      endDate,
+      targetLevel,
+      restDays,
+      currentProgress
+    });
+
+    return res.json({
+      success: true,
+      plan
+    });
+  } catch (err) {
+    console.error('[AI Route] Error generating study plan:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/ai/refine-study-plan
+ * Refine study plan based on user comments while strictly keeping endDate
+ */
+router.post('/refine-study-plan', async (req, res) => {
+  try {
+    const {
+      currentPlan,
+      userComment = '',
+      startDate,
+      endDate,
+      currentProgress = {}
+    } = req.body;
+
+    if (!userComment && !currentPlan) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vui lòng cung cấp kế hoạch hiện tại hoặc nội dung yêu cầu điều chỉnh.'
+      });
+    }
+
+    const updatedPlan = await aiPlannerService.refineStudyPlan({
+      currentPlan,
+      userComment,
+      startDate: startDate || currentPlan?.startDate,
+      endDate: endDate || currentPlan?.endDate,
+      currentProgress
+    });
+
+    return res.json({
+      success: true,
+      plan: updatedPlan
+    });
+  } catch (err) {
+    console.error('[AI Route] Error refining study plan:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 module.exports = router;
 
 
