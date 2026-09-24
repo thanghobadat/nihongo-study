@@ -109,30 +109,32 @@ export default function UserDashboard() {
         }
       }).catch(() => {});
 
-      // 2. Check local browser PushManager and auto-sync to backend
-      navigator.serviceWorker.ready.then((reg) => {
-        reg.pushManager.getSubscription().then((sub) => {
-          if (sub) {
-            setIsPushSubscribed(true);
-            const deviceName = navigator.userAgent.includes('iPhone') 
-              ? 'iPhone Safari (PWA)' 
-              : (navigator.userAgent.includes('Mobile') ? 'Mobile Browser' : 'Trình duyệt Web');
-            
-            // Silent auto-sync token to server to keep it fresh
-            api.post('/api/user/push-subscription', {
-              subscription: sub,
-              deviceName
-            }).then((syncRes: any) => {
-              if (syncRes && syncRes.success && syncRes.data) {
-                setPushDeviceInfo({
-                  deviceName: syncRes.data.deviceName || deviceName,
-                  updatedAt: syncRes.data.updatedAt
-                });
-              }
-            }).catch(() => {});
-          }
-        });
-      }).catch(() => {});
+      // 2. Register service worker and auto-sync PushManager subscription to backend
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        return reg.pushManager.getSubscription();
+      }).then((sub) => {
+        if (sub) {
+          setIsPushSubscribed(true);
+          const deviceName = navigator.userAgent.includes('iPhone') 
+            ? 'iPhone Safari (PWA)' 
+            : (navigator.userAgent.includes('Mobile') ? 'Mobile Browser' : 'Trình duyệt Web');
+          
+          // Silent auto-sync token to server to keep it fresh
+          api.post('/api/user/push-subscription', {
+            subscription: sub,
+            deviceName
+          }).then((syncRes: any) => {
+            if (syncRes && syncRes.success && syncRes.data) {
+              setPushDeviceInfo({
+                deviceName: syncRes.data.deviceName || deviceName,
+                updatedAt: syncRes.data.updatedAt
+              });
+            }
+          }).catch(() => {});
+        }
+      }).catch((err) => {
+        console.warn('SW auto-registration error:', err);
+      });
     }
   }, []);
 
@@ -273,6 +275,8 @@ export default function UserDashboard() {
 
       if (res && res.success && res.plan) {
         setStudyPlan(res.plan);
+        if (res.plan.startDate) setStartDateStr(res.plan.startDate);
+        if (res.plan.endDate) setEndDateStr(res.plan.endDate);
         await api.post('/api/user/study-plan', { plan: res.plan });
         showNotification('✨ AI đã làm mới hoàn toàn kế hoạch trọn vẹn 50 bài bám sát mốc thời gian!');
         fetchDashboardData();
@@ -310,6 +314,9 @@ export default function UserDashboard() {
         setStudyPlan(res.plan);
         if (res.plan.startDate) {
           setStartDateStr(res.plan.startDate);
+        }
+        if (res.plan.endDate) {
+          setEndDateStr(res.plan.endDate);
         }
         setAiNote(res.plan.refinementNote || null);
         await api.post('/api/user/study-plan', { plan: res.plan });
@@ -641,8 +648,11 @@ export default function UserDashboard() {
 
   // Countdown calculations
   const calculateDaysRemaining = () => {
-    const end = new Date(endDateStr);
+    const targetEnd = studyPlan?.endDate || endDateStr;
+    const end = new Date(targetEnd);
     const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
     const diff = Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
     return Math.max(0, diff);
   };
@@ -828,7 +838,10 @@ export default function UserDashboard() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Khóa ngày kết thúc: <strong className="text-slate-200">{startDateStr}</strong> ➔ <strong className="text-emerald-400">{endDateStr}</strong>
+                  Khóa ngày kết thúc: <strong className="text-slate-200">{studyPlan?.startDate || startDateStr}</strong> ➔ <strong className="text-emerald-400">{studyPlan?.endDate || endDateStr}</strong>
+                  {studyPlan && (startDateStr !== studyPlan.startDate || endDateStr !== studyPlan.endDate) && (
+                    <span className="ml-2 text-amber-400 font-semibold">(Đã đổi mốc ngày - bấm Tạo lại để áp dụng)</span>
+                  )}
                 </p>
               </div>
             </div>
@@ -872,7 +885,11 @@ export default function UserDashboard() {
                   <button
                     onClick={handleGeneratePlan}
                     disabled={isGeneratingPlan}
-                    className="px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                    className={`px-4 py-1.5 rounded-xl border text-xs font-bold transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer ${
+                      studyPlan && (startDateStr !== studyPlan.startDate || endDateStr !== studyPlan.endDate)
+                        ? 'bg-gradient-to-r from-amber-600 to-emerald-600 hover:from-amber-500 hover:to-emerald-500 border-amber-400 text-white shadow-lg shadow-amber-500/20 animate-pulse'
+                        : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200'
+                    }`}
                   >
                     {isGeneratingPlan ? 'Đang tính toán...' : '✨ Tạo lại plan theo mốc này'}
                   </button>

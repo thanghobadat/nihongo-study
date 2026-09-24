@@ -61,7 +61,7 @@ function initVapidKeys() {
     }
   }
 
-  const subject = process.env.VAPID_SUBJECT || 'mailto:admin@nihongoflow.local';
+  const subject = process.env.VAPID_SUBJECT || 'mailto:hoangthanh01022000@gmail.com';
   webpush.setVapidDetails(subject, vapidKeys.publicKey, vapidKeys.privateKey);
   console.log('[PushNotification] WebPush VAPID configured successfully');
 }

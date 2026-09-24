@@ -1,6 +1,29 @@
 const { callGemini } = require('./aiGradingService');
 
 /**
+ * Normalize any date string (ISO YYYY-MM-DD or Vietnamese DD/MM/YYYY or DD-MM-YYYY) to standard YYYY-MM-DD
+ */
+function normalizeDateStr(str) {
+  if (!str) return null;
+  const s = String(str).trim();
+  const vnMatch = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+  if (vnMatch) {
+    const day = vnMatch[1].padStart(2, '0');
+    const month = vnMatch[2].padStart(2, '0');
+    const year = vnMatch[3];
+    return `${year}-${month}-${day}`;
+  }
+  const isoMatch = s.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+  if (isoMatch) {
+    const year = isoMatch[1];
+    const month = isoMatch[2].padStart(2, '0');
+    const day = isoMatch[3].padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  return s;
+}
+
+/**
  * Format a Date to YYYY-MM-DD
  */
 function formatDate(d) {
@@ -20,11 +43,13 @@ function addDays(d, n) {
 }
 
 /**
- * Calculate difference in days between two YYYY-MM-DD strings
+ * Calculate difference in days between two date strings (supports YYYY-MM-DD and DD/MM/YYYY)
  */
 function diffInDays(startStr, endStr) {
-  const start = new Date(startStr);
-  const end = new Date(endStr);
+  const startNormalized = normalizeDateStr(startStr);
+  const endNormalized = normalizeDateStr(endStr);
+  const start = new Date(startNormalized);
+  const end = new Date(endNormalized);
   const diffTime = end.getTime() - start.getTime();
   return Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)) + 1);
 }
@@ -282,11 +307,40 @@ function validateSequence(tasks) {
 }
 
 /**
+ * Retrieve sets of mastered item IDs for a given user from mockDb or Supabase
+ */
+function getMasteredItemIds(userId) {
+  const masteredVocabIds = new Set();
+  const masteredKanjiIds = new Set();
+  const masteredGrammarIds = new Set();
+
+  if (!userId) {
+    return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
+  }
+
+  const mockDb = require('../db/mockDb');
+  const userProgress = mockDb.userProgress || {};
+  Object.keys(userProgress).forEach(k => {
+    if (k.startsWith(`${userId}:`) && userProgress[k] === 'mastered') {
+      const parts = k.split(':');
+      const itemType = parts[1];
+      const itemId = parseInt(parts[2], 10);
+      if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
+      else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
+      else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
+    }
+  });
+
+  return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
+}
+
+/**
  * Content-Driven Plan Generator (Total Vocab, Kanji, Grammar + 2 Review parts merged with Grammar)
  * Rules:
  * 1. No standalone review days: 2 review tasks (4 dạng bài tập + ôn tích lũy) are merged directly into the day where Grammar is studied.
  * 2. 100% of the 50 lessons are dynamically and completely distributed across the user's active timeframe.
  * 3. Workload Points (1 Kanji = 1 Grammar = 3 Vocab) are strictly preserved.
+ * 4. Filters out items already mastered by the user so they never have to re-learn mastered knowledge.
  */
 function generateAlgorithmicPlan({
   startDate,
@@ -297,13 +351,23 @@ function generateAlgorithmicPlan({
   startLesson = null,
   targetLesson = 50,
   archivedPastDays = [],
-  originalStartDate = null
+  originalStartDate = null,
+  userId = null,
+  masteredItemIds = null
 }) {
+  const normStartDate = normalizeDateStr(startDate);
+  const normEndDate = normalizeDateStr(endDate);
   const actualStartLesson = startLesson || currentLesson || 1;
-  const startD = new Date(startDate);
-  const totalDays = Math.max(1, diffInDays(startDate, endDate));
+  const startD = new Date(normStartDate);
+  const totalDays = Math.max(1, diffInDays(normStartDate, normEndDate));
   const actualTargetLesson = targetLesson || 50;
   const totalLessons = Math.max(1, actualTargetLesson - actualStartLesson + 1);
+
+  // Retrieve mastered items if userId is provided or passed in
+  const mastered = masteredItemIds || getMasteredItemIds(userId);
+  const masteredVocabIds = mastered.masteredVocabIds || new Set();
+  const masteredKanjiIds = mastered.masteredKanjiIds || new Set();
+  const masteredGrammarIds = mastered.masteredGrammarIds || new Set();
 
   // 1. Build atomic tasks for lessons actualStartLesson to actualTargetLesson with fine-grained chunking
   const atomicTasks = [];
@@ -311,87 +375,103 @@ function generateAlgorithmicPlan({
 
   for (let l = actualStartLesson; l <= actualTargetLesson; l++) {
     const counts = getLessonCounts(l);
-    const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === l);
-    const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === l);
-    const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === l);
+    const allVocab = (mockDb.vocabulary || []).filter(v => v.lesson_id === l);
+    const allKanji = (mockDb.kanji || []).filter(k => k.lesson_id === l);
+    const allGrammar = (mockDb.grammar || []).filter(g => g.lesson_id === l);
 
-    // Vocab chunking based on totalDays:
-    // When timeframe is long (> 60 days), chunk by ~18 words (~108 mins) to prevent lumpy days
-    // When timeframe is moderate (35-60 days), chunk by ~25 words (~150 mins)
-    // When sprint (<= 35 days), keep whole vocab block
-    const vChunkSize = totalDays > 60 ? 18 : totalDays > 35 ? 25 : 50;
-    const vChunks = Math.max(1, Math.ceil(vocabList.length / vChunkSize));
-    for (let c = 0; c < vChunks; c++) {
-      const sub = vocabList.slice(c * vChunkSize, (c + 1) * vChunkSize);
-      const startIdx = c * vChunkSize + 1;
-      const endIdx = c * vChunkSize + sub.length;
-      const firstW = sub[0]?.hiragana || sub[0]?.word || '';
-      const lastW = sub[sub.length - 1]?.hiragana || sub[sub.length - 1]?.word || '';
+    // Filter out items already mastered by the user
+    const vocabList = allVocab.filter(v => !masteredVocabIds.has(v.id));
+    const kanjiList = allKanji.filter(k => !masteredKanjiIds.has(k.id));
+    const grammarList = allGrammar.filter(g => !masteredGrammarIds.has(g.id));
+
+    // Vocab chunking based on totalDays (only for unmastered words):
+    if (vocabList.length > 0) {
+      const vChunkSize = totalDays > 60 ? 18 : totalDays > 35 ? 25 : 50;
+      const vChunks = Math.max(1, Math.ceil(vocabList.length / vChunkSize));
+      for (let c = 0; c < vChunks; c++) {
+        const sub = vocabList.slice(c * vChunkSize, (c + 1) * vChunkSize);
+        const startIdx = c * vChunkSize + 1;
+        const endIdx = c * vChunkSize + sub.length;
+        const firstW = sub[0]?.hiragana || sub[0]?.word || '';
+        const lastW = sub[sub.length - 1]?.hiragana || sub[sub.length - 1]?.word || '';
+        atomicTasks.push({
+          lesson: l,
+          itemType: 'vocabulary',
+          part: c + 1,
+          totalParts: vChunks,
+          itemIds: sub.map(v => v.id),
+          title: vChunks > 1
+            ? `Minna Bài ${l}: Học từ vựng chưa thuộc (Phần ${c + 1}/${vChunks}: ${sub.length} từ)`
+            : (allVocab.length > vocabList.length
+                ? `Minna Bài ${l}: Học ${sub.length} từ vựng còn lại (Đã thuộc ${allVocab.length - vocabList.length} từ)`
+                : `Minna Bài ${l}: Học chính xác ${sub.length} từ vựng`),
+          scopeDetails: vChunks > 1
+            ? `Phần ${c + 1}: ${sub.length} từ (Từ #${startIdx}: ${firstW} ➔ #${endIdx}: ${lastW})`
+            : (allVocab.length > vocabList.length
+                ? `Còn lại ${sub.length}/${allVocab.length} từ vựng cần học`
+                : counts.vocabScope),
+          targetCount: sub.length,
+          currentCount: 0,
+          workloadPoints: sub.length * WORKLOAD_WEIGHTS.vocabulary,
+          estimatedMinutes: sub.length * 6,
+          link: `/lessons/${l}?tab=vocab`,
+          completed: false
+        });
+      }
+    }
+
+    // Kanji chunking (only for unmastered kanji):
+    if (kanjiList.length > 0) {
+      const kChunkSize = totalDays > 60 ? 5 : totalDays > 35 ? 8 : 16;
+      const kChunks = Math.max(1, Math.ceil(kanjiList.length / kChunkSize));
+      for (let c = 0; c < kChunks; c++) {
+        const sub = kanjiList.slice(c * kChunkSize, (c + 1) * kChunkSize);
+        const chars = sub.map(k => k.kanji || k.character).join(', ');
+        atomicTasks.push({
+          lesson: l,
+          itemType: 'kanji',
+          part: c + 1,
+          totalParts: kChunks,
+          itemIds: sub.map(k => k.id),
+          title: kChunks > 1
+            ? `Minna Bài ${l}: Nắm vững chữ Hán chưa thuộc (Phần ${c + 1}/${kChunks}: ${sub.length} chữ)`
+            : (allKanji.length > kanjiList.length
+                ? `Minna Bài ${l}: Nắm vững ${sub.length} chữ Hán còn lại (Đã thuộc ${allKanji.length - kanjiList.length} chữ)`
+                : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`),
+          scopeDetails: `Chữ Hán: ${chars}`,
+          targetCount: sub.length,
+          currentCount: 0,
+          workloadPoints: sub.length * WORKLOAD_WEIGHTS.kanji,
+          estimatedMinutes: sub.length * 18,
+          link: `/lessons/${l}?tab=kanji`,
+          completed: false
+        });
+      }
+    }
+
+    // Grammar (only for unmastered grammar):
+    if (grammarList.length > 0) {
+      const gTotal = grammarList.length;
       atomicTasks.push({
         lesson: l,
-        itemType: 'vocabulary',
-        part: c + 1,
-        totalParts: vChunks,
-        itemIds: sub.map(v => v.id),
-        title: vChunks > 1
-          ? `Minna Bài ${l}: Học từ vựng (Phần ${c + 1}/${vChunks}: ${sub.length} từ)`
-          : `Minna Bài ${l}: Học chính xác ${sub.length} từ vựng`,
-        scopeDetails: vChunks > 1
-          ? `Phần ${c + 1}: ${sub.length} từ (Từ #${startIdx}: ${firstW} ➔ #${endIdx}: ${lastW})`
-          : counts.vocabScope,
-        targetCount: sub.length,
+        itemType: 'grammar',
+        part: 1,
+        totalParts: 1,
+        itemIds: grammarList.map(g => g.id),
+        title: allGrammar.length > grammarList.length
+          ? `Minna Bài ${l}: Làm chủ ${gTotal} mẫu ngữ pháp còn lại (Đã thuộc ${allGrammar.length - grammarList.length} mẫu)`
+          : `Minna Bài ${l}: Làm chủ ${gTotal} mẫu ngữ pháp cốt lõi`,
+        scopeDetails: allGrammar.length > grammarList.length
+          ? `Học các mẫu ngữ pháp còn lại của Bài ${l}`
+          : counts.grammarScope,
+        targetCount: gTotal,
         currentCount: 0,
-        workloadPoints: sub.length * WORKLOAD_WEIGHTS.vocabulary,
-        estimatedMinutes: sub.length * 6,
-        link: `/lessons/${l}?tab=vocab`,
+        workloadPoints: gTotal * WORKLOAD_WEIGHTS.grammar,
+        estimatedMinutes: gTotal * 18,
+        link: `/lessons/${l}?tab=grammar`,
         completed: false
       });
     }
-
-    // Kanji chunking:
-    // When timeframe is long (> 60 days), chunk by ~5 kanji (~90 mins)
-    // When moderate (35-60 days), chunk by ~8 kanji (~144 mins)
-    const kChunkSize = totalDays > 60 ? 5 : totalDays > 35 ? 8 : 16;
-    const kChunks = Math.max(1, Math.ceil(kanjiList.length / kChunkSize));
-    for (let c = 0; c < kChunks; c++) {
-      const sub = kanjiList.slice(c * kChunkSize, (c + 1) * kChunkSize);
-      const chars = sub.map(k => k.kanji || k.character).join(', ');
-      atomicTasks.push({
-        lesson: l,
-        itemType: 'kanji',
-        part: c + 1,
-        totalParts: kChunks,
-        itemIds: sub.map(k => k.id),
-        title: kChunks > 1
-          ? `Minna Bài ${l}: Nắm vững chữ Hán (Phần ${c + 1}/${kChunks}: ${sub.length} chữ)`
-          : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`,
-        scopeDetails: `Chữ Hán: ${chars}`,
-        targetCount: sub.length,
-        currentCount: 0,
-        workloadPoints: sub.length * WORKLOAD_WEIGHTS.kanji,
-        estimatedMinutes: sub.length * 18,
-        link: `/lessons/${l}?tab=kanji`,
-        completed: false
-      });
-    }
-
-    // Grammar: 1 concise block
-    const gTotal = grammarList.length || 4;
-    atomicTasks.push({
-      lesson: l,
-      itemType: 'grammar',
-      part: 1,
-      totalParts: 1,
-      itemIds: grammarList.map(g => g.id),
-      title: `Minna Bài ${l}: Làm chủ ${gTotal} mẫu ngữ pháp cốt lõi`,
-      scopeDetails: counts.grammarScope,
-      targetCount: gTotal,
-      currentCount: 0,
-      workloadPoints: gTotal * WORKLOAD_WEIGHTS.grammar,
-      estimatedMinutes: gTotal * 18,
-      link: `/lessons/${l}?tab=grammar`,
-      completed: false
-    });
 
     // Review 1 (4 dạng bài tập)
     atomicTasks.push({
@@ -544,9 +624,9 @@ function generateAlgorithmicPlan({
     : `Lộ trình ${totalDays} ngày được tối ưu hóa cân bằng tải trọng toàn diện cho 50 bài học. Mỗi ngày bạn học lượng kiến thức đồng đều khoảng ${Math.round(totalEstimatedMins / totalDays)} phút để duy trì phong độ bền bỉ nhất!`;
 
   return {
-    startDate,
-    endDate,
-    originalStartDate: originalStartDate || startDate,
+    startDate: normStartDate,
+    endDate: normEndDate,
+    originalStartDate: normalizeDateStr(originalStartDate) || normStartDate,
     targetLevel,
     totalDays,
     startLesson: actualStartLesson,
@@ -566,16 +646,8 @@ function generateAlgorithmicPlan({
  * Generate AI study plan with Gemini assistance and automatic algorithmic fallback
  */
 async function generateStudyPlan(params) {
-  let startL = params.startLesson || params.currentLesson || 1;
-  if (params.currentProgress && typeof params.currentProgress.currentLesson === 'number' && params.currentProgress.currentLesson > 1) {
-    startL = Math.max(startL, params.currentProgress.currentLesson);
-  }
-  if (params.userId) {
-    const completed = getCompletedLessons({ userId: params.userId, currentProgress: params.currentProgress });
-    if (completed.length > 0) {
-      startL = Math.max(startL, Math.max(...completed) + 1);
-    }
-  }
+  // Fresh plan generation strictly for all 50 lessons as required by Rule 7
+  const startL = params.startLesson || 1;
 
   const basePlan = generateAlgorithmicPlan({
     ...params,
@@ -792,7 +864,7 @@ function getCompletedLessons({ userId, currentPlan, currentProgress }) {
  */
 async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, currentProgress, userId }) {
   const todayStr = formatDate(new Date());
-  const targetEndDate = endDate || (currentPlan && currentPlan.endDate);
+  const targetEndDate = normalizeDateStr(endDate) || (currentPlan && normalizeDateStr(currentPlan.endDate));
 
   // 1. Determine completed lessons
   const completedLessons = getCompletedLessons({ userId, currentPlan, currentProgress });
@@ -816,8 +888,9 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   }
 
   // If user explicitly provided a future startDate, use it; otherwise start from today
-  if (startDate && startDate >= todayStr) {
-    effectiveStartDate = startDate;
+  const normStartDate = normalizeDateStr(startDate);
+  if (normStartDate && normStartDate >= todayStr) {
+    effectiveStartDate = normStartDate;
   }
 
   if (effectiveStartDate > targetEndDate) {
@@ -835,7 +908,8 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
     startLesson,
     targetLesson: 50,
     archivedPastDays,
-    originalStartDate: currentPlan?.originalStartDate || currentPlan?.startDate || startDate || todayStr
+    originalStartDate: currentPlan?.originalStartDate || currentPlan?.startDate || startDate || todayStr,
+    userId
   });
 
   // 4. Generate educational rationale and refinement note
@@ -1298,6 +1372,9 @@ function autoAllocateDailyTimeSlots({ plan, date, timeSlots = {}, userId }) {
 }
 
 module.exports = {
+  normalizeDateStr,
+  diffInDays,
+  getMasteredItemIds,
   getLessonCounts,
   generateSequentialLessonTasks,
   validateSequence,

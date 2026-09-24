@@ -89,6 +89,14 @@ if (process.env.NODE_ENV !== 'test') {
     } catch (seedErr) {
       console.warn('⚠️ Failed to load auto-seed script:', seedErr.message || seedErr);
     }
+
+    // Khởi động tiến trình gửi thông báo ngầm tự động 24/7 về điện thoại
+    try {
+      const { startNotificationScheduler } = require('./services/notificationSchedulerService');
+      startNotificationScheduler();
+    } catch (schedErr) {
+      console.warn('⚠️ Failed to start notification scheduler:', schedErr.message || schedErr);
+    }
   });
 }
 

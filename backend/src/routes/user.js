@@ -37,6 +37,20 @@ try {
 } catch (e) {}
 
 /**
+ * Safely get active user study plan from memory or persistent disk storage
+ */
+function getUserPlan(userId) {
+  if (!mockDb.studyPlans) mockDb.studyPlans = {};
+  if (!mockDb.studyPlans[userId]) {
+    const loaded = loadPersistentPlans();
+    if (loaded && loaded[userId]) {
+      mockDb.studyPlans[userId] = loaded[userId];
+    }
+  }
+  return mockDb.studyPlans[userId] || null;
+}
+
+/**
  * Sync Supabase user_progress table into local auto-tracking cache for online users
  */
 async function syncUserProgressFromSupabase(userId) {
@@ -2343,8 +2357,7 @@ function applyAutoTracking(plan, userId) {
 router.get('/study-debt', (req, res) => {
   try {
     const userId = req.user.id;
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    let plan = mockDb.studyPlans[userId];
+    let plan = getUserPlan(userId);
     if (plan) {
       plan = applyAutoTracking(plan, userId);
     }
@@ -2363,8 +2376,7 @@ router.get('/study-debt', (req, res) => {
 router.post('/replan-debt', async (req, res) => {
   try {
     const userId = req.user.id;
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    let plan = mockDb.studyPlans[userId];
+    let plan = getUserPlan(userId);
     if (!plan) {
       return res.status(400).json({ success: false, error: 'Không tìm thấy kế hoạch để replan.' });
     }
@@ -2406,13 +2418,7 @@ router.post('/replan-debt', async (req, res) => {
 router.get('/study-plan', async (req, res) => {
   try {
     const userId = req.user.id;
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    if (!mockDb.studyPlans[userId]) {
-      const persisted = loadPersistentPlans();
-      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
-    }
-
-    let plan = mockDb.studyPlans[userId];
+    let plan = getUserPlan(userId);
 
     // Restore from Supabase target_plans if online and memory was cleared by cloud sleep
     if (!plan && !req.user.isMock) {
@@ -2437,22 +2443,15 @@ router.get('/study-plan', async (req, res) => {
       }
     }
 
-    // Check if plan is missing or was created with old format
-    const maxLessonCovered = plan?.days ? Math.max(0, ...plan.days.flatMap(d => (d.tasks || []).map(t => t.lesson || 0))) : 0;
-    const isOldPlan = !plan || !plan.days || !plan.days[0]?.dayRationale ||
-      maxLessonCovered < 50 ||
-      !plan.isBalancedPacing ||
-      plan.days.some(d => d.isDedicatedPracticeDay || d.tasks?.some(t => !t.scopeDetails || t.title.includes('25-35') || (t.itemType === 'vocabulary' && t.estimatedMinutes < 50) || t.title.includes('Hoàn thành lý thuyết'))) ||
-      plan.workloadRationale?.includes('1 Ngày Thực Hành Chuyên Biệt');
-
-    if (isOldPlan) {
+    // Only generate a default initial plan if user has NO plan at all (first-time visitor)
+    if (!plan || !plan.days || plan.days.length === 0) {
       const today = new Date();
-      const nextMonth = new Date();
-      nextMonth.setDate(today.getDate() + 30);
+      const defaultEnd = new Date(today);
+      defaultEnd.setDate(today.getDate() + 30);
       const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       plan = aiPlannerService.generateAlgorithmicPlan({
-        startDate: plan?.startDate || fmt(today),
-        endDate: plan?.endDate || fmt(nextMonth),
+        startDate: fmt(today),
+        endDate: fmt(defaultEnd),
         targetLevel: 'All',
         currentLesson: 1
       });
@@ -2523,12 +2522,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
       return res.status(400).json({ success: false, error: 'taskId is required' });
     }
 
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    if (!mockDb.studyPlans[userId]) {
-      const persisted = loadPersistentPlans();
-      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
-    }
-    const plan = mockDb.studyPlans[userId];
+    const plan = getUserPlan(userId);
     if (plan && plan.days) {
       for (const day of plan.days) {
         if (!date || day.date === date) {
@@ -2597,12 +2591,7 @@ router.post('/check-daily-notification', async (req, res) => {
     const { date, localTimeStr } = req.body;
     const todayStr = date || getLocalDateStr();
 
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    if (!mockDb.studyPlans[userId]) {
-      const persisted = loadPersistentPlans();
-      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
-    }
-    const plan = mockDb.studyPlans[userId];
+    const plan = getUserPlan(userId);
     if (!plan || !Array.isArray(plan.days)) {
       return res.json({ success: true, message: 'No active plan found' });
     }
@@ -2702,13 +2691,7 @@ router.post('/daily-tasks/rebatch', async (req, res) => {
     const userId = req.user.id;
     const { date, configs } = req.body;
 
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    if (!mockDb.studyPlans[userId]) {
-      const persisted = loadPersistentPlans();
-      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
-    }
-
-    let plan = mockDb.studyPlans[userId];
+    let plan = getUserPlan(userId);
     if (!plan || !Array.isArray(plan.days)) {
       return res.status(404).json({ success: false, error: 'Không tìm thấy kế hoạch học tập' });
     }
@@ -2748,13 +2731,7 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
     const userId = req.user.id;
     const { date, timeSlots } = req.body;
 
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    if (!mockDb.studyPlans[userId]) {
-      const persisted = loadPersistentPlans();
-      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
-    }
-
-    let plan = mockDb.studyPlans[userId];
+    let plan = getUserPlan(userId);
     if (!plan || !Array.isArray(plan.days)) {
       return res.status(404).json({ success: false, error: 'Không tìm thấy kế hoạch học tập' });
     }
@@ -2793,16 +2770,11 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
 router.get('/study-overview', async (req, res) => {
   try {
     const userId = req.user.id;
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    if (!mockDb.studyPlans[userId]) {
-      const persisted = loadPersistentPlans();
-      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
-    }
 
     // Sync Supabase progress before computing overview
     await syncUserProgressFromSupabase(userId);
 
-    const plan = mockDb.studyPlans[userId];
+    const plan = getUserPlan(userId);
 
     const vocabList = mockDb.vocabulary || [];
     const kanjiList = mockDb.kanji || [];
@@ -2875,10 +2847,9 @@ router.get('/study-overview', async (req, res) => {
     }
 
     const startDate = plan?.originalStartDate || plan?.startDate || getLocalDateStr();
-    const today = new Date();
-    const nextMonth = new Date();
-    nextMonth.setDate(today.getDate() + 30);
-    const endDate = plan?.endDate || getLocalDateStr(nextMonth);
+    const defaultNextMonth = new Date();
+    defaultNextMonth.setDate(defaultNextMonth.getDate() + 30);
+    const endDate = plan?.endDate || getLocalDateStr(defaultNextMonth);
 
     const completedLessonCount = Math.max(0, currentLesson - 1, plan?.completedLessonsCount || 0);
 
@@ -2972,22 +2943,22 @@ router.get('/study-overview', async (req, res) => {
 router.get('/daily-history', async (req, res) => {
   try {
     const userId = req.user.id;
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    let plan = mockDb.studyPlans[userId];
+    let plan = getUserPlan(userId);
 
-    const isOldPlan = !plan || !plan.days || !plan.days[0]?.dayRationale || !plan.isBalancedPacing || plan.days.some(d => d.tasks?.some(t => !t.scopeDetails || t.title.includes('25-35') || (t.itemType === 'vocabulary' && t.estimatedMinutes < 50) || t.title.includes('Hoàn thành lý thuyết')));
-    if (isOldPlan) {
+    // Only generate a default initial plan if user has NO plan at all (first-time visitor)
+    if (!plan || !plan.days || plan.days.length === 0) {
       const today = new Date();
-      const nextMonth = new Date();
-      nextMonth.setDate(today.getDate() + 30);
+      const defaultEnd = new Date(today);
+      defaultEnd.setDate(today.getDate() + 30);
       const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       plan = aiPlannerService.generateAlgorithmicPlan({
-        startDate: plan?.startDate || fmt(today),
-        endDate: plan?.endDate || fmt(nextMonth),
-        targetLevel: plan?.targetLevel || 'All',
+        startDate: fmt(today),
+        endDate: fmt(defaultEnd),
+        targetLevel: 'All',
         currentLesson: 1
       });
       mockDb.studyPlans[userId] = plan;
+      savePersistentPlans(mockDb.studyPlans);
     }
 
     plan = applyAutoTracking(plan, userId);
