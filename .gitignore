@@ -45,6 +45,7 @@ scratch/
 backend/src/db/exams.json
 backend/src/db/users.json
 backend/src/db/custom_items.json
+backend/src/db/push_subscriptions.json
 backend/src/db/mockDb_backup*.js
 backend/src/db/ai_*.json
 backend/data/

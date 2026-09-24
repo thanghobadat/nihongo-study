@@ -332,6 +332,14 @@ router.post('/radical-explain', async (req, res) => {
 });
 
 const aiPlannerService = require('../services/aiPlannerService');
+const pushNotificationService = require('../services/pushNotificationService');
+
+function getLocalDateString(d = new Date()) {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 /**
  * POST /api/ai/generate-study-plan
@@ -354,13 +362,26 @@ router.post('/generate-study-plan', async (req, res) => {
       });
     }
 
+    const userId = getUserId(req);
     const plan = await aiPlannerService.generateStudyPlan({
       startDate,
       endDate,
       targetLevel,
       restDays,
-      currentProgress
+      currentProgress,
+      userId
     });
+
+    // Scenario 3: Timeline replan push notification
+    if (plan && plan.days) {
+      const todayStr = getLocalDateString();
+      const todayTasks = plan.days.find(d => d.date === todayStr)?.tasks || [];
+      pushNotificationService.sendTimelineReplanNotification(userId, {
+        startDate: plan.startDate,
+        endDate: plan.endDate,
+        todayTasks
+      }).catch(e => console.warn('[PushNotification] Timeline replan push failed:', e.message));
+    }
 
     return res.json({
       success: true,
@@ -393,13 +414,26 @@ router.post('/refine-study-plan', async (req, res) => {
       });
     }
 
+    const userId = getUserId(req);
     const updatedPlan = await aiPlannerService.refineStudyPlan({
       currentPlan,
       userComment,
       startDate: startDate || currentPlan?.startDate,
       endDate: endDate || currentPlan?.endDate,
-      currentProgress
+      currentProgress,
+      userId
     });
+
+    // Scenario 3: Timeline replan push notification
+    if (updatedPlan && updatedPlan.days) {
+      const todayStr = getLocalDateString();
+      const todayTasks = updatedPlan.days.find(d => d.date === todayStr)?.tasks || [];
+      pushNotificationService.sendTimelineReplanNotification(userId, {
+        startDate: updatedPlan.startDate,
+        endDate: updatedPlan.endDate,
+        todayTasks
+      }).catch(e => console.warn('[PushNotification] Timeline refine push failed:', e.message));
+    }
 
     return res.json({
       success: true,

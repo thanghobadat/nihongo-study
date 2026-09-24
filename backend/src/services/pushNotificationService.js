@@ -4,11 +4,36 @@ const path = require('path');
 const mockDb = require('../db/mockDb');
 
 const VAPID_FILE = path.join(__dirname, '../../vapid_keys.json');
+const SUBSCRIPTIONS_FILE = path.join(__dirname, '../db/push_subscriptions.json');
 
-// Ensure subscriptions store exists on mockDb
+function loadPersistentSubscriptions() {
+  try {
+    if (fs.existsSync(SUBSCRIPTIONS_FILE)) {
+      const data = JSON.parse(fs.readFileSync(SUBSCRIPTIONS_FILE, 'utf8'));
+      return data || {};
+    }
+  } catch (e) {
+    console.error('[PushNotification] Error reading push_subscriptions.json:', e.message);
+  }
+  return {};
+}
+
+function savePersistentSubscriptions(subs) {
+  try {
+    fs.writeFileSync(SUBSCRIPTIONS_FILE, JSON.stringify(subs, null, 2), 'utf8');
+  } catch (e) {
+    console.error('[PushNotification] Error writing push_subscriptions.json:', e.message);
+  }
+}
+
+// Ensure subscriptions store exists on mockDb and initialize from persistent disk storage
 if (!mockDb.pushSubscriptions) {
   mockDb.pushSubscriptions = {};
 }
+try {
+  const loadedSubs = loadPersistentSubscriptions();
+  mockDb.pushSubscriptions = { ...loadedSubs, ...mockDb.pushSubscriptions };
+} catch (e) {}
 
 let vapidKeys = null;
 
@@ -61,12 +86,35 @@ function saveSubscription(userId, subscription, deviceName = 'iPhone / Mobile') 
     deviceName,
     updatedAt: new Date().toISOString()
   };
+  savePersistentSubscriptions(mockDb.pushSubscriptions);
   return mockDb.pushSubscriptions[userId];
 }
 
 function getSubscription(userId) {
-  if (!mockDb.pushSubscriptions) return null;
-  return mockDb.pushSubscriptions[userId] || null;
+  if (!mockDb.pushSubscriptions || !mockDb.pushSubscriptions[userId]) {
+    const loaded = loadPersistentSubscriptions();
+    if (loaded && loaded[userId]) {
+      if (!mockDb.pushSubscriptions) mockDb.pushSubscriptions = {};
+      mockDb.pushSubscriptions[userId] = loaded[userId];
+    }
+  }
+  return mockDb.pushSubscriptions ? (mockDb.pushSubscriptions[userId] || null) : null;
+}
+
+function getSubscriptionStatus(userId) {
+  const userSub = getSubscription(userId);
+  if (!userSub || !userSub.subscription) {
+    return {
+      hasSubscription: false,
+      deviceName: null,
+      updatedAt: null
+    };
+  }
+  return {
+    hasSubscription: true,
+    deviceName: userSub.deviceName || 'iPhone / Mobile',
+    updatedAt: userSub.updatedAt || null
+  };
 }
 
 async function sendNotification(userId, payload) {
@@ -92,6 +140,7 @@ async function sendNotification(userId, payload) {
     // If subscription is expired/unsubscribed (410 or 404), clean it up
     if (err.statusCode === 404 || err.statusCode === 410) {
       delete mockDb.pushSubscriptions[userId];
+      savePersistentSubscriptions(mockDb.pushSubscriptions);
     }
     throw err;
   }
@@ -105,10 +154,260 @@ async function sendTestNotification(userId) {
   });
 }
 
+function getTaskDisplayName(task) {
+  if (!task) return 'Nhiệm vụ học tập';
+  const batchLabel = task.batchIndex ? `Đợt ${task.batchIndex}: ` : '';
+  const count = task.targetCount || 1;
+  const lesson = task.lesson ? ` Bài ${task.lesson}` : '';
+  if (task.itemType === 'vocabulary') return `${batchLabel}${count} từ vựng${lesson}`;
+  if (task.itemType === 'kanji') return `${batchLabel}${count} chữ Kanji${lesson}`;
+  if (task.itemType === 'grammar') return `${batchLabel}${count} mẫu ngữ pháp${lesson}`;
+  if (task.itemType === 'single_review') return `${batchLabel}Ôn tập tổng hợp${lesson}`;
+  if (task.itemType === 'cumulative_review') return `${batchLabel}Ôn tập lũy tích${lesson}`;
+  return `${batchLabel}${task.title || 'Nhiệm vụ học tập'}`;
+}
+
+function formatTasksDetailed(tasks = []) {
+  if (!Array.isArray(tasks) || tasks.length === 0) {
+    return 'Không có nhiệm vụ mới';
+  }
+  return tasks.map(t => {
+    const name = getTaskDisplayName(t);
+    const due = t.due_time ? ` (hạn ${t.due_time})` : '';
+    return `${name}${due}`;
+  }).join(', ');
+}
+
+function formatDebtDetailed(debtItems = []) {
+  if (!Array.isArray(debtItems) || debtItems.length === 0) {
+    return '';
+  }
+  const parts = [];
+  const vocabDebt = debtItems.filter(i => i.type === 'vocabulary');
+  const kanjiDebt = debtItems.filter(i => i.type === 'kanji');
+  const grammarDebt = debtItems.filter(i => i.type === 'grammar');
+  const reviewDebt = debtItems.filter(i => i.type === 'single_review' || i.type === 'cumulative_review');
+
+  if (vocabDebt.length > 0) {
+    const count = vocabDebt.reduce((s, i) => s + (i.count || 1), 0);
+    parts.push(`${count} từ vựng`);
+  }
+  if (kanjiDebt.length > 0) {
+    const count = kanjiDebt.reduce((s, i) => s + (i.count || 1), 0);
+    parts.push(`${count} chữ Kanji`);
+  }
+  if (grammarDebt.length > 0) {
+    const count = grammarDebt.reduce((s, i) => s + (i.count || 1), 0);
+    parts.push(`${count} mẫu ngữ pháp`);
+  }
+  if (reviewDebt.length > 0) {
+    parts.push(`${reviewDebt.length} bài ôn tập`);
+  }
+  return parts.length > 0 ? parts.join(', ') : `${debtItems.length} mục`;
+}
+
+async function safeDispatchNotification(userId, payload) {
+  if (typeof module.exports.sendNotification === 'function') {
+    return module.exports.sendNotification(userId, payload);
+  }
+  return sendNotification(userId, payload);
+}
+
+// 1. Kịch bản 1: Thông báo qua ngày mới
+async function sendNewDayNotification(userId, { yesterdayDebtItems = [], todayTasks = [] } = {}) {
+  const hasDebt = Array.isArray(yesterdayDebtItems) && yesterdayDebtItems.length > 0;
+  const tasksStr = formatTasksDetailed(todayTasks);
+
+  let title = '🌅 Chào ngày mới - Nihongo Flow';
+  let body = '';
+
+  if (hasDebt) {
+    const debtStr = formatDebtDetailed(yesterdayDebtItems);
+    body = `Hôm qua bạn còn tồn đọng: ${debtStr}. Nhiệm vụ hôm nay: ${tasksStr}. Cùng bứt phá nhé!`;
+  } else {
+    body = `Nhiệm vụ hôm nay của bạn: ${tasksStr}. Chúc bạn học tập hiệu quả!`;
+  }
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'new_day', hasDebt, timestamp: Date.now() }
+  });
+}
+
+// 2. Kịch bản 2: Thông báo sau khi Replan bài nợ
+async function sendDebtReplanNotification(userId, { debtCount = 0, todayTasks = [] } = {}) {
+  const tasksStr = formatTasksDetailed(todayTasks);
+  const title = '🔄 Đã điều chỉnh kế hoạch học tập';
+  const body = `Do có bài học còn tồn đọng hôm qua, hệ thống đã điều chỉnh kế hoạch để bù đắp tiến độ. Kế hoạch mới hôm nay: ${tasksStr}. Bắt đầu học ngay nhé!`;
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'debt_replan', debtCount, timestamp: Date.now() }
+  });
+}
+
+// 3. Kịch bản 3: Replan tổng khi thay đổi Ngày bắt đầu / Ngày kết thúc
+async function sendTimelineReplanNotification(userId, { startDate, endDate, todayTasks = [] } = {}) {
+  const tasksStr = formatTasksDetailed(todayTasks);
+  const timeRangeStr = (startDate && endDate) ? ` (${startDate} ➔ ${endDate})` : '';
+  const title = '📅 Lộ trình học tập đã được cập nhật';
+  const body = `Lộ trình học đã được cập nhật${timeRangeStr}. Kế hoạch mới hôm nay: ${tasksStr}. Cố gắng bám sát mục tiêu nhé!`;
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'timeline_replan', startDate, endDate, timestamp: Date.now() }
+  });
+}
+
+// 4. Kịch bản 4: Nhắc nhở khi quá hạn trong ngày
+async function sendOverdueReminderNotification(userId, { task } = {}) {
+  const taskName = getTaskDisplayName(task);
+  const due = task?.due_time || 'hạn chót';
+  const title = '⏰ Nhắc nhở quá hạn bài học!';
+  const body = `Đã quá giờ (${due}) nhưng bạn chưa hoàn thành: ${taskName}. Hãy dành vài phút học ngay để không bị dồn bài nhé!`;
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'overdue_reminder', taskId: task?.id, timestamp: Date.now() }
+  });
+}
+
+// 5. Kịch bản 5: Thông báo hoàn thành task trong ngày
+async function sendTaskCompletedNotification(userId, { completedTask, isAllDoneToday = false, completedCount = 0, totalCount = 0 } = {}) {
+  const taskName = getTaskDisplayName(completedTask);
+  let title = '';
+  let body = '';
+
+  if (isAllDoneToday) {
+    title = '🎉 Xuất sắc! Hoàn thành mục tiêu hôm nay!';
+    body = `Tuyệt vời! Bạn đã hoàn thành toàn bộ ${totalCount}/${totalCount} nhiệm vụ của ngày hôm nay. Hãy nghỉ ngơi và sẵn sàng cho ngày mai!`;
+  } else {
+    title = '✅ Đã hoàn thành nhiệm vụ!';
+    body = `Chúc mừng bạn đã hoàn thành: ${taskName}! (Đã hoàn thành ${completedCount}/${totalCount} nhiệm vụ hôm nay). Tiếp tục phát huy nhé!`;
+  }
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'task_completed', isAllDoneToday, taskId: completedTask?.id, timestamp: Date.now() }
+  });
+}
+
+// 6. Kịch bản 6 (Mở rộng): Nhắc trước giờ Deadline 15-30 phút
+async function sendPreDueReminderNotification(userId, { task, minutesLeft = 30 } = {}) {
+  const taskName = getTaskDisplayName(task);
+  const due = task?.due_time || 'hạn chót';
+  const title = '⏳ Sắp đến giờ hạn chót bài học!';
+  const body = `Còn ${minutesLeft} phút nữa là đến hạn ${due} cho nhiệm vụ: ${taskName}. Tranh thủ mở app hoàn thành nhé!`;
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'pre_due_reminder', taskId: task?.id, timestamp: Date.now() }
+  });
+}
+
+// 7. Kịch bản 7 (Mở rộng): Cảnh báo nguy cơ đứt chuỗi Streak buổi tối
+async function sendStreakAlertNotification(userId, { currentStreak = 1, remainingTasksCount = 1 } = {}) {
+  const title = '🔥 Cảnh báo: Nguy cơ đứt chuỗi học tập!';
+  const body = `Bạn đang giữ chuỗi ${currentStreak} ngày học liên tiếp! Chỉ còn vài tiếng trước nửa đêm, hãy dành 10 phút hoàn thành ${remainingTasksCount} nhiệm vụ hôm nay để giữ chuỗi nhé!`;
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'streak_alert', currentStreak, timestamp: Date.now() }
+  });
+}
+
+// 8. Kịch bản 8 (Mở rộng): Vinh danh Cột mốc chặng
+async function sendMilestoneNotification(userId, { milestoneTitle, milestoneMessage } = {}) {
+  const title = milestoneTitle || '🏆 Chúc mừng cột mốc quan trọng!';
+  const body = milestoneMessage || 'Chúc mừng bạn đã hoàn thành xuất sắc cột mốc lộ trình! Tiếp tục bứt phá cùng Nihongo Flow!';
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'milestone_achievement', timestamp: Date.now() }
+  });
+}
+
+// Generic summary notification backward compatibility
+async function sendStudyPlanNotification(userId, todayTasks = [], planSummary = {}) {
+  const activeTasks = Array.isArray(todayTasks) ? todayTasks : [];
+  const incompleteTasks = activeTasks.filter(t => !t.completed);
+  
+  let title = '🇯🇵 Nihongo Flow - Kế hoạch học tập hôm nay';
+  let body = '';
+
+  if (activeTasks.length === 0) {
+    body = 'Hôm nay bạn không có nhiệm vụ mới trong kế hoạch. Hãy tranh thủ ôn tập lại kiến thức nhé!';
+  } else if (incompleteTasks.length === 0) {
+    title = '🎉 Chúc mừng! Bạn đã hoàn thành bài hôm nay';
+    body = `Tuyệt vời! Bạn đã hoàn tất toàn bộ ${activeTasks.length} nhiệm vụ của ngày hôm nay. Tiếp tục phát huy nhé!`;
+  } else {
+    const tasksStr = formatTasksDetailed(incompleteTasks);
+    title = `🎯 Kế hoạch hôm nay (${incompleteTasks.length} nhiệm vụ)`;
+    body = `Hôm nay cần học: ${tasksStr}. Cố lên nhé!`;
+  }
+
+  return sendNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: {
+      url: '/dashboard',
+      timestamp: Date.now()
+    }
+  });
+}
+
 module.exports = {
   getVapidPublicKey,
   saveSubscription,
   getSubscription,
+  getSubscriptionStatus,
   sendNotification,
-  sendTestNotification
+  sendTestNotification,
+  sendStudyPlanNotification,
+  sendNewDayNotification,
+  sendDebtReplanNotification,
+  sendTimelineReplanNotification,
+  sendOverdueReminderNotification,
+  sendPreDueReminderNotification,
+  sendTaskCompletedNotification,
+  sendStreakAlertNotification,
+  sendMilestoneNotification,
+  getTaskDisplayName,
+  formatTasksDetailed,
+  formatDebtDetailed
 };

@@ -10,6 +10,7 @@ import DailyReportModal from '../components/DailyReportModal';
 import VisualRoadmapModal from '../components/VisualRoadmapModal';
 import DayDetailModal, { DayHistoryItem } from '../components/DayDetailModal';
 import UnfinishedDebtModal, { DebtItem } from '../components/UnfinishedDebtModal';
+import RebatchTasksModal, { RebatchConfig } from '../components/RebatchTasksModal';
 
 // Helper for VAPID base64 conversion
 function urlBase64ToUint8Array(base64String: string) {
@@ -53,6 +54,10 @@ export default function UserDashboard() {
   const [isDebtModalOpen, setIsDebtModalOpen] = useState<boolean>(false);
   const [isReplanningDebt, setIsReplanningDebt] = useState<boolean>(false);
 
+  // Rebatch Modal State
+  const [isRebatchModalOpen, setIsRebatchModalOpen] = useState<boolean>(false);
+  const [isRebatching, setIsRebatching] = useState<boolean>(false);
+
   // Fixed Timeline state
   const [startDateStr, setStartDateStr] = useState<string>(() => {
     const d = new Date();
@@ -79,6 +84,7 @@ export default function UserDashboard() {
   const [isPushSupported, setIsPushSupported] = useState<boolean>(false);
   const [isPushSubscribed, setIsPushSubscribed] = useState<boolean>(false);
   const [pushLoading, setPushLoading] = useState<boolean>(false);
+  const [pushDeviceInfo, setPushDeviceInfo] = useState<{ deviceName: string; updatedAt: string } | null>(null);
 
   const showNotification = (msg: string) => {
     setMessage(msg);
@@ -87,14 +93,43 @@ export default function UserDashboard() {
     }, 3500);
   };
 
-  // Check Web Push support on mount
+  // Check Web Push support and auto-sync subscription on mount
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && 'PushManager' in window) {
       setIsPushSupported(true);
+
+      // 1. Check status from server
+      api.get('/api/user/push-subscription-status').then((statusRes: any) => {
+        if (statusRes && statusRes.success && statusRes.hasSubscription) {
+          setIsPushSubscribed(true);
+          setPushDeviceInfo({
+            deviceName: statusRes.deviceName || 'Thiết bị di động',
+            updatedAt: statusRes.updatedAt
+          });
+        }
+      }).catch(() => {});
+
+      // 2. Check local browser PushManager and auto-sync to backend
       navigator.serviceWorker.ready.then((reg) => {
         reg.pushManager.getSubscription().then((sub) => {
           if (sub) {
             setIsPushSubscribed(true);
+            const deviceName = navigator.userAgent.includes('iPhone') 
+              ? 'iPhone Safari (PWA)' 
+              : (navigator.userAgent.includes('Mobile') ? 'Mobile Browser' : 'Trình duyệt Web');
+            
+            // Silent auto-sync token to server to keep it fresh
+            api.post('/api/user/push-subscription', {
+              subscription: sub,
+              deviceName
+            }).then((syncRes: any) => {
+              if (syncRes && syncRes.success && syncRes.data) {
+                setPushDeviceInfo({
+                  deviceName: syncRes.data.deviceName || deviceName,
+                  updatedAt: syncRes.data.updatedAt
+                });
+              }
+            }).catch(() => {});
           }
         });
       }).catch(() => {});
@@ -150,9 +185,35 @@ export default function UserDashboard() {
     }
   }, []);
 
+  // Check daily notifications (New Day, Pre-due, Overdue, Streak alert)
+  const triggerDailyNotificationCheck = useCallback(async () => {
+    try {
+      const now = new Date();
+      const localTimeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
+      await api.post('/api/user/check-daily-notification', {
+        date: dateStr,
+        localTimeStr
+      });
+    } catch (e) {
+      // Non-blocking background check
+    }
+  }, []);
+
   useEffect(() => {
     fetchDashboardData();
-  }, [fetchDashboardData]);
+    triggerDailyNotificationCheck();
+
+    // Check periodically every 5 minutes for pre-due and overdue task notifications
+    const interval = setInterval(() => {
+      triggerDailyNotificationCheck();
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [fetchDashboardData, triggerDailyNotificationCheck]);
 
   // Handle Replan Debt
   const handleReplanDebt = async () => {
@@ -171,6 +232,29 @@ export default function UserDashboard() {
       showNotification('Lỗi khi replan bài nợ: ' + err.message);
     } finally {
       setIsReplanningDebt(false);
+    }
+  };
+
+  // Handle Rebatch Tasks for a day
+  const handleApplyRebatch = async (configs: RebatchConfig[]) => {
+    try {
+      setIsRebatching(true);
+      const res: any = await api.post('/api/user/daily-tasks/rebatch', {
+        date: todayStr,
+        configs
+      });
+      if (res && res.success) {
+        showNotification('✨ Đã phân chia lại công việc hôm nay thành công!');
+        setIsRebatchModalOpen(false);
+        fetchDashboardData();
+      } else {
+        showNotification(res?.error || 'Không thể phân chia lại công việc lúc này.');
+      }
+    } catch (err: any) {
+      const errorMsg = err.response?.data?.error || err.message || 'Lỗi khi phân chia lại công việc';
+      showNotification(errorMsg);
+    } finally {
+      setIsRebatching(false);
     }
   };
 
@@ -224,10 +308,13 @@ export default function UserDashboard() {
 
       if (res && res.success && res.plan) {
         setStudyPlan(res.plan);
+        if (res.plan.startDate) {
+          setStartDateStr(res.plan.startDate);
+        }
         setAiNote(res.plan.refinementNote || null);
         await api.post('/api/user/study-plan', { plan: res.plan });
         setRefinementComment('');
-        showNotification('🎯 AI đã làm mới hoàn toàn kế hoạch 50 bài và GIỮ NGUYÊN 100% ngày kết thúc!');
+        showNotification(res.plan.refinementNote ? `🎯 ${res.plan.refinementNote}` : '🎯 AI đã tinh chỉnh kế hoạch và bỏ qua các bài đã hoàn thành!');
         fetchDashboardData();
       } else {
         showNotification(res?.error || 'Không thể tinh chỉnh kế hoạch lúc này.');
@@ -268,7 +355,7 @@ export default function UserDashboard() {
     }
   };
 
-  // Enable Web Push on iPhone / Browser
+  // Enable Web Push on iPhone / Browser (or force re-sync)
   const handleEnablePush = async () => {
     if (!isPushSupported) {
       showNotification('Vui lòng làm theo hướng dẫn Safari để thêm ra màn hình chính trước.');
@@ -293,18 +380,31 @@ export default function UserDashboard() {
       }
 
       const convertedKey = urlBase64ToUint8Array(keyRes.publicKey);
-      const subscription = await reg.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: convertedKey
-      });
+      let subscription = await reg.pushManager.getSubscription();
+      if (!subscription) {
+        subscription = await reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: convertedKey
+        });
+      }
 
-      await api.post('/api/user/push-subscription', {
+      const deviceName = navigator.userAgent.includes('iPhone') 
+        ? 'iPhone Safari (PWA)' 
+        : (navigator.userAgent.includes('Mobile') ? 'Mobile Browser' : 'Trình duyệt Web');
+
+      const saveRes = await api.post('/api/user/push-subscription', {
         subscription,
-        deviceName: navigator.userAgent.includes('iPhone') ? 'iPhone Safari (PWA)' : 'Trình duyệt Web'
+        deviceName
       });
 
       setIsPushSubscribed(true);
-      showNotification('🔔 Đã bật thông báo thành công! iPhone đã sẵn sàng nhận tin.');
+      if (saveRes && saveRes.data) {
+        setPushDeviceInfo({
+          deviceName: saveRes.data.deviceName || deviceName,
+          updatedAt: saveRes.data.updatedAt
+        });
+      }
+      showNotification('🔔 Đã kết nối thông báo thành công! Thiết bị đã sẵn sàng nhận tin.');
     } catch (err: any) {
       console.error('Push error:', err);
       showNotification('Không thể kích hoạt thông báo: ' + err.message);
@@ -319,12 +419,47 @@ export default function UserDashboard() {
       setPushLoading(true);
       const res = await api.post('/api/user/send-test-push', {});
       if (res && res.success) {
-        showNotification('📲 Đã bắn chuông thông báo thử nghiệm về iPhone của bạn!');
+        showNotification('📲 Đã bắn chuông thông báo thử nghiệm về điện thoại của bạn!');
       } else {
-        showNotification(res?.error || 'Chưa gửi được thông báo. Hãy bật thông báo trước.');
+        if (res?.error && res.error.includes('Chưa tìm thấy thiết bị')) {
+          setIsPushSubscribed(false);
+          showNotification('⚠️ Chưa tìm thấy thiết bị trên máy chủ. Vui lòng bấm "Kết nối lại"!');
+        } else {
+          showNotification(res?.error || 'Chưa gửi được thông báo. Hãy bật thông báo trước.');
+        }
       }
     } catch (err: any) {
+      if (err.message && err.message.includes('Chưa tìm thấy thiết bị')) {
+        setIsPushSubscribed(false);
+      }
       showNotification('Lỗi gửi thử chuông: ' + err.message);
+    } finally {
+      setPushLoading(false);
+    }
+  };
+
+  // Send Study Plan Push Notification
+  const handleSendStudyPlanPush = async () => {
+    try {
+      setPushLoading(true);
+      const res = await api.post('/api/user/send-study-plan-notification', {
+        tasks: todayTasks
+      });
+      if (res && res.success) {
+        showNotification('📲 Đã gửi thông báo kế hoạch học tập hôm nay về điện thoại!');
+      } else {
+        if (res?.error && res.error.includes('Chưa tìm thấy thiết bị')) {
+          setIsPushSubscribed(false);
+          showNotification('⚠️ Chưa tìm thấy thiết bị trên máy chủ. Vui lòng bấm "Kết nối lại"!');
+        } else {
+          showNotification(res?.error || 'Chưa gửi được thông báo kế hoạch.');
+        }
+      }
+    } catch (err: any) {
+      if (err.message && err.message.includes('Chưa tìm thấy thiết bị')) {
+        setIsPushSubscribed(false);
+      }
+      showNotification('Lỗi gửi thông báo kế hoạch: ' + err.message);
     } finally {
       setPushLoading(false);
     }
@@ -1057,9 +1192,20 @@ export default function UserDashboard() {
                 Tuân thủ dứt điểm: <strong className="text-slate-200">Từ vựng ➔ Kanji ➔ Ngữ pháp ➔ Ôn tập bài (30p) ➔ Ôn tập tích lũy (30p)</strong>. Tự động ghi nhận theo trạng thái học.
               </p>
             </div>
-            <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
-              {todayTasks.filter((t: any) => t.completed).length} / {todayTasks.length} việc hoàn thành
-            </span>
+            <div className="flex flex-wrap items-center gap-2 self-start sm:self-center">
+              <button
+                type="button"
+                onClick={() => setIsRebatchModalOpen(true)}
+                className="px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-600/30 to-cyan-600/30 hover:from-indigo-600/50 hover:to-cyan-600/50 text-indigo-200 border border-indigo-500/40 hover:border-cyan-400 transition-all flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
+                title="Chủ động chia nhỏ hoặc gộp các phần học trong ngày (1 batch hoặc N batches)"
+              >
+                <span>⚡</span>
+                <span>Tùy chỉnh chia Batch</span>
+              </button>
+              <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-3 py-1.5 rounded-xl border border-cyan-500/20">
+                {todayTasks.filter((t: any) => t.completed).length} / {todayTasks.length} việc hoàn thành
+              </span>
+            </div>
           </div>
 
           {todayTasks.length > 0 ? (
@@ -1537,12 +1683,22 @@ export default function UserDashboard() {
                   Kích hoạt dịch vụ thông báo nền Web Push để nhận thông báo đúng giờ học trên iPhone.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2.5">
                   {isPushSubscribed ? (
-                    <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                      Đã kết nối iPhone
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        {pushDeviceInfo?.deviceName ? `Đã kết nối: ${pushDeviceInfo.deviceName}` : 'Đã kết nối iPhone'}
+                      </span>
+                      <button
+                        onClick={handleEnablePush}
+                        disabled={pushLoading}
+                        title="Đồng bộ lại token thiết bị với máy chủ"
+                        className="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 transition-all active:scale-95 cursor-pointer"
+                      >
+                        🔄 Kết nối lại
+                      </button>
+                    </div>
                   ) : (
                     <button
                       onClick={handleEnablePush}
@@ -1554,12 +1710,21 @@ export default function UserDashboard() {
                   )}
 
                   <button
+                    onClick={handleSendStudyPlanPush}
+                    disabled={pushLoading}
+                    className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <span>📅</span>
+                    <span>Gửi kế hoạch hôm nay</span>
+                  </button>
+
+                  <button
                     onClick={handleSendTestPush}
                     disabled={pushLoading}
-                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-xs transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                    className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-xs transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
                   >
-                    <span>📲</span>
-                    <span>Gửi thử chuông ngay</span>
+                    <span>🔔</span>
+                    <span>Thử chuông</span>
                   </button>
                 </div>
               </div>
@@ -1636,6 +1801,16 @@ export default function UserDashboard() {
           setIsDailyReportOpen(false);
           router.push(`/lessons/${selectedLessonId}`);
         }}
+      />
+
+      {/* Rebatch Tasks Modal (Custom Daily Task Batching) */}
+      <RebatchTasksModal
+        isOpen={isRebatchModalOpen}
+        onClose={() => setIsRebatchModalOpen(false)}
+        date={todayStr}
+        dayTasks={todayTasks}
+        onApplyRebatch={handleApplyRebatch}
+        isRebatching={isRebatching}
       />
     </div>
   );

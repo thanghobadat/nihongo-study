@@ -293,20 +293,23 @@ function generateAlgorithmicPlan({
   endDate,
   targetLevel = 'All', // 'N5', 'N4', 'All'
   restDays = [], // e.g. [0] for Sunday
-  currentLesson = 1
+  currentLesson = 1,
+  startLesson = null,
+  targetLesson = 50,
+  archivedPastDays = [],
+  originalStartDate = null
 }) {
+  const actualStartLesson = startLesson || currentLesson || 1;
   const startD = new Date(startDate);
   const totalDays = Math.max(1, diffInDays(startDate, endDate));
+  const actualTargetLesson = targetLesson || 50;
+  const totalLessons = Math.max(1, actualTargetLesson - actualStartLesson + 1);
 
-  // Requirement: Plan ALWAYS covers all 50 lessons
-  const targetLesson = 50;
-  const totalLessons = Math.max(1, targetLesson - currentLesson + 1);
-
-  // 1. Build atomic tasks for all 50 lessons with fine-grained chunking
+  // 1. Build atomic tasks for lessons actualStartLesson to actualTargetLesson with fine-grained chunking
   const atomicTasks = [];
   const mockDb = require('../db/mockDb');
 
-  for (let l = currentLesson; l <= targetLesson; l++) {
+  for (let l = actualStartLesson; l <= actualTargetLesson; l++) {
     const counts = getLessonCounts(l);
     const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === l);
     const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === l);
@@ -488,6 +491,7 @@ function generateAlgorithmicPlan({
       const dueTimeStr = `${String(Math.min(22, baseHour)).padStart(2, '0')}:${baseMin}`;
       return {
         ...t,
+        lesson_id: t.lesson,
         id: `task_${dateStr}_${t.itemType}_L${t.lesson}_p${t.part || 1}`,
         date: dateStr,
         due_time: dueTimeStr,
@@ -530,19 +534,31 @@ function generateAlgorithmicPlan({
 
   const daysPerLesson = parseFloat((totalDays / totalLessons).toFixed(1));
 
+  const isPartial = actualStartLesson > 1;
+  const planRationale = isPartial
+    ? `Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Kế hoạch đã tối ưu hóa thông minh: Bỏ qua các bài đã nắm vững (Bài 1 đến Bài ${actualStartLesson - 1}), tập trung phân bổ đều đặn ${totalLessons} bài còn lại (Bài ${actualStartLesson} ➔ Bài ${actualTargetLesson}) trong ${totalDays} ngày còn lại (~${Math.round(totalEstimatedMins / totalDays)} phút/ngày) để về đích đúng hạn ${endDate}.`
+    : `Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Áp dụng thuật toán Cân bằng Tải trọng Động (Load-Balanced Dynamic Pacing): toàn bộ 50 bài học được cắt nhỏ thành từng phần vừa vặn, phân bổ đều khắp ${totalDays} ngày để mọi ngày có thời lượng học đồng đều (~${Math.round(totalEstimatedMins / totalDays)} phút/ngày), triệt tiêu hoàn toàn sự chênh lệch và dồn ép.`;
+
+  const coachingTip = isPartial
+    ? `Lộ trình ${totalDays} ngày tiếp theo được tinh chỉnh riêng cho ${totalLessons} bài học còn lại (Bài ${actualStartLesson} ➔ Bài ${actualTargetLesson}). Mỗi ngày bạn học đồng đều khoảng ${Math.round(totalEstimatedMins / totalDays)} phút để vững vàng về đích đúng hạn ${endDate}!`
+    : `Lộ trình ${totalDays} ngày được tối ưu hóa cân bằng tải trọng toàn diện cho 50 bài học. Mỗi ngày bạn học lượng kiến thức đồng đều khoảng ${Math.round(totalEstimatedMins / totalDays)} phút để duy trì phong độ bền bỉ nhất!`;
+
   return {
     startDate,
     endDate,
+    originalStartDate: originalStartDate || startDate,
     targetLevel,
     totalDays,
-    startLesson: currentLesson,
-    targetLesson,
+    startLesson: actualStartLesson,
+    targetLesson: actualTargetLesson,
     totalLessons,
+    completedLessonsCount: Math.max(0, actualStartLesson - 1),
+    archivedPastDays: archivedPastDays || [],
     milestones,
     days,
     isBalancedPacing: true,
-    workloadRationale: `Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Áp dụng thuật toán Cân bằng Tải trọng Động (Load-Balanced Dynamic Pacing): toàn bộ 50 bài học được cắt nhỏ thành từng phần vừa vặn, phân bổ đều khắp ${totalDays} ngày để mọi ngày có thời lượng học đồng đều (~${Math.round(totalEstimatedMins / totalDays)} phút/ngày), triệt tiêu hoàn toàn sự chênh lệch và dồn ép.`,
-    aiCoachingTip: `Lộ trình ${totalDays} ngày được tối ưu hóa cân bằng tải trọng toàn diện cho 50 bài học. Mỗi ngày bạn học lượng kiến thức đồng đều khoảng ${Math.round(totalEstimatedMins / totalDays)} phút để duy trì phong độ bền bỉ nhất!`
+    workloadRationale: planRationale,
+    aiCoachingTip: coachingTip
   };
 }
 
@@ -550,7 +566,22 @@ function generateAlgorithmicPlan({
  * Generate AI study plan with Gemini assistance and automatic algorithmic fallback
  */
 async function generateStudyPlan(params) {
-  const basePlan = generateAlgorithmicPlan(params);
+  let startL = params.startLesson || params.currentLesson || 1;
+  if (params.currentProgress && typeof params.currentProgress.currentLesson === 'number' && params.currentProgress.currentLesson > 1) {
+    startL = Math.max(startL, params.currentProgress.currentLesson);
+  }
+  if (params.userId) {
+    const completed = getCompletedLessons({ userId: params.userId, currentProgress: params.currentProgress });
+    if (completed.length > 0) {
+      startL = Math.max(startL, Math.max(...completed) + 1);
+    }
+  }
+
+  const basePlan = generateAlgorithmicPlan({
+    ...params,
+    startLesson: Math.min(50, Math.max(1, startL)),
+    targetLesson: params.targetLesson || 50
+  });
 
   try {
     const prompt = `
@@ -663,34 +694,180 @@ function getUnfinishedDebt({ userId, plan }) {
 }
 
 /**
- * Refine Study Plan strictly keeping endDate (Water-level Rebalancing / Sequential Pipeline)
+ * Detect completed lessons from userProgress in database and completed tasks in past days
  */
-async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, currentProgress }) {
-  const targetEndDate = endDate || (currentPlan && currentPlan.endDate);
-  const targetStartDate = startDate || (currentPlan && currentPlan.startDate);
-  const curLesson = currentProgress?.currentLesson || currentPlan?.startLesson || 1;
+function getCompletedLessons({ userId, currentPlan, currentProgress }) {
+  const completed = new Set();
 
-  // Requirement: Fresh regeneration 100% covering all 50 lessons according to active timeframe
-  const freshPlan = generateAlgorithmicPlan({
-    startDate: targetStartDate,
-    endDate: targetEndDate,
-    targetLevel: 'All',
-    currentLesson: curLesson
-  });
-
-  const commentLower = (userComment || '').toLowerCase();
-  let explanation = '';
-  if (commentLower.includes('bận') || commentLower.includes('nghỉ') || commentLower.includes('giảm') || commentLower.includes('ốm') || commentLower.includes('mệt')) {
-    explanation = `AI đã làm mới toàn bộ kế hoạch 50 bài và điều chỉnh phân bổ nhẹ nhàng theo yêu cầu giảm tải, đảm bảo 100% giữ nguyên mốc kết thúc ngày ${targetEndDate}.`;
-  } else if (commentLower.includes('nhanh') || commentLower.includes('sớm') || commentLower.includes('dồn') || commentLower.includes('tăng')) {
-    explanation = `AI đã tăng tốc và làm mới kế hoạch 50 bài theo ý bạn: Đẩy dồn bài lên các ngày gần nhất bám sát tiến độ học tập. Hạn chót kết thúc ngày ${targetEndDate} được bảo đảm tuyệt đối!`;
-  } else {
-    explanation = `AI đã làm mới hoàn toàn kế hoạch học tập trọn vẹn 50 bài học theo khung thời gian từ ${targetStartDate} đến ${targetEndDate}. Mỗi bài học đều được tích hợp trực tiếp 2 phần ôn tập vào ngày học ngữ pháp.`;
+  // 1. From currentProgress if explicitly passed
+  if (currentProgress && Array.isArray(currentProgress.completedLessons)) {
+    for (const l of currentProgress.completedLessons) {
+      if (typeof l === 'number' && l >= 1 && l <= 50) completed.add(l);
+    }
+  }
+  if (currentProgress && typeof currentProgress.currentLesson === 'number' && currentProgress.currentLesson > 1) {
+    for (let l = 1; l < currentProgress.currentLesson; l++) {
+      completed.add(l);
+    }
   }
 
-  freshPlan.refinementNote = explanation;
-  freshPlan.lastRefinedAt = new Date().toISOString();
-  return freshPlan;
+  // 2. From actual userProgress in database
+  if (userId) {
+    try {
+      const mockDb = require('../db/mockDb');
+      const userProgress = mockDb.userProgress || {};
+
+      for (let l = 1; l <= 50; l++) {
+        const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === l);
+        const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === l);
+        const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === l);
+
+        if (vocabList.length === 0 && kanjiList.length === 0 && grammarList.length === 0) continue;
+
+        const masteredV = vocabList.filter(v => {
+          const s = userProgress[`${userId}:vocabulary:${v.id}`];
+          return s === 'mastered' || s === 'learning';
+        }).length;
+
+        const masteredK = kanjiList.filter(k => {
+          const s = userProgress[`${userId}:kanji:${k.id}`];
+          return s === 'mastered' || s === 'learning';
+        }).length;
+
+        const masteredG = grammarList.filter(g => {
+          const s = userProgress[`${userId}:grammar:${g.id}`];
+          return s === 'mastered' || s === 'learning';
+        }).length;
+
+        const vRate = vocabList.length > 0 ? masteredV / vocabList.length : 1;
+        const kRate = kanjiList.length > 0 ? masteredK / kanjiList.length : 1;
+        const gRate = grammarList.length > 0 ? masteredG / grammarList.length : 1;
+
+        if (vRate >= 0.8 && kRate >= 0.8 && gRate >= 0.8) {
+          completed.add(l);
+        }
+      }
+    } catch (err) {
+      console.warn('[AI Planner] Error checking database userProgress:', err.message);
+    }
+  }
+
+  // 3. From currentPlan: Check past days where all scheduled tasks of a lesson were marked completed
+  if (currentPlan && Array.isArray(currentPlan.days)) {
+    const todayStr = formatDate(new Date());
+    const pastDays = currentPlan.days.filter(d => d.date < todayStr);
+
+    const lessonTaskStats = {};
+    for (const day of pastDays) {
+      for (const t of (day.tasks || [])) {
+        if (!t.lesson) continue;
+        if (!lessonTaskStats[t.lesson]) {
+          lessonTaskStats[t.lesson] = { total: 0, completed: 0 };
+        }
+        lessonTaskStats[t.lesson].total++;
+        if (t.completed) {
+          lessonTaskStats[t.lesson].completed++;
+        }
+      }
+    }
+
+    for (const [lStr, stats] of Object.entries(lessonTaskStats)) {
+      const l = parseInt(lStr, 10);
+      if (stats.total > 0 && stats.completed === stats.total) {
+        completed.add(l);
+      }
+    }
+  }
+
+  return Array.from(completed).sort((a, b) => a - b);
+}
+
+/**
+ * Refine Study Plan strictly keeping endDate (Water-level Rebalancing / Sequential Pipeline)
+ * Optimizations:
+ * 1. Skips lessons already completed/mastered (does not force user to re-learn).
+ * 2. Drops passed days before today from active schedule, starts from today to endDate.
+ * 3. Preserves completed history in archivedPastDays so dashboard tracking is preserved.
+ * 4. Paces remaining lessons dynamically over remaining days.
+ */
+async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, currentProgress, userId }) {
+  const todayStr = formatDate(new Date());
+  const targetEndDate = endDate || (currentPlan && currentPlan.endDate);
+
+  // 1. Determine completed lessons
+  const completedLessons = getCompletedLessons({ userId, currentPlan, currentProgress });
+  const maxCompleted = completedLessons.length > 0 ? Math.max(...completedLessons) : 0;
+
+  let startLesson = 1;
+  if (currentProgress && typeof currentProgress.currentLesson === 'number' && currentProgress.currentLesson > 1) {
+    startLesson = Math.max(currentProgress.currentLesson, maxCompleted + 1);
+  } else if (maxCompleted > 0) {
+    startLesson = maxCompleted + 1;
+  }
+  startLesson = Math.min(50, Math.max(1, startLesson));
+
+  // 2. Determine effective start date & past days
+  let effectiveStartDate = todayStr;
+  let archivedPastDays = [];
+
+  if (currentPlan && Array.isArray(currentPlan.days)) {
+    const pastDays = currentPlan.days.filter(d => d.date < todayStr);
+    archivedPastDays = [...(currentPlan.archivedPastDays || []), ...pastDays];
+  }
+
+  // If user explicitly provided a future startDate, use it; otherwise start from today
+  if (startDate && startDate >= todayStr) {
+    effectiveStartDate = startDate;
+  }
+
+  if (effectiveStartDate > targetEndDate) {
+    effectiveStartDate = targetEndDate;
+  }
+
+  const remainingDaysCount = diffInDays(effectiveStartDate, targetEndDate);
+  const remainingLessonsCount = Math.max(1, 50 - startLesson + 1);
+
+  // 3. Generate refined algorithmic plan for the remaining lessons over the remaining days
+  const refinedPlan = generateAlgorithmicPlan({
+    startDate: effectiveStartDate,
+    endDate: targetEndDate,
+    targetLevel: 'All',
+    startLesson,
+    targetLesson: 50,
+    archivedPastDays,
+    originalStartDate: currentPlan?.originalStartDate || currentPlan?.startDate || startDate || todayStr
+  });
+
+  // 4. Generate educational rationale and refinement note
+  const commentLower = (userComment || '').toLowerCase();
+  let explanation = '';
+  const passedDaysCount = archivedPastDays.length;
+
+  const skippedLessonsStr = startLesson > 1
+    ? (startLesson === 2 ? 'Bài 1' : `từ Bài 1 đến Bài ${startLesson - 1}`)
+    : '';
+
+  const avgMinutes = Math.round(refinedPlan.days.reduce((s, d) => s + d.totalEstimatedMinutes, 0) / refinedPlan.totalDays);
+
+  if (passedDaysCount > 0 && startLesson > 1) {
+    explanation = `🎯 AI đã tối ưu hóa thông minh theo tiến độ thực tế: Bỏ qua ${passedDaysCount} ngày đã qua và không cần học lại các bài đã nắm vững (${skippedLessonsStr}). Lộ trình mới bắt đầu từ hôm nay (${effectiveStartDate}) đến ${targetEndDate}, tập trung học dứt điểm ${remainingLessonsCount} bài còn lại (Bài ${startLesson} ➔ Bài 50) với tải học cân bằng (~${avgMinutes} phút/ngày) để bảo đảm 100% về đích đúng hạn!`;
+  } else if (passedDaysCount > 0) {
+    explanation = `🎯 AI đã làm mới lộ trình từ hôm nay (${effectiveStartDate}) đến ${targetEndDate}, bỏ qua ${passedDaysCount} ngày đã qua và phân bổ đều đặn các bài học trong ${remainingDaysCount} ngày còn lại, giữ nguyên hạn chót ${targetEndDate}.`;
+  } else if (startLesson > 1) {
+    explanation = `🎯 AI đã tinh chỉnh kế hoạch: Bỏ qua các bài đã học (${skippedLessonsStr}), tập trung phân bổ đều đặn ${remainingLessonsCount} bài còn lại (Bài ${startLesson} ➔ Bài 50) từ ${effectiveStartDate} đến ${targetEndDate} (~${avgMinutes} phút/ngày).`;
+  } else {
+    explanation = `AI đã làm mới hoàn toàn kế hoạch học tập trọn vẹn 50 bài học theo khung thời gian từ ${effectiveStartDate} đến ${targetEndDate}. Mỗi bài học đều được tích hợp trực tiếp 2 phần ôn tập vào ngày học ngữ pháp.`;
+  }
+
+  if (commentLower.includes('bận') || commentLower.includes('nghỉ') || commentLower.includes('giảm') || commentLower.includes('ốm') || commentLower.includes('mệt')) {
+    explanation += ` (Đã tự động điều chỉnh phân bổ nhẹ nhàng hơn theo yêu cầu giảm tải của bạn).`;
+  } else if (commentLower.includes('nhanh') || commentLower.includes('sớm') || commentLower.includes('dồn') || commentLower.includes('tăng')) {
+    explanation += ` (Đã ưu tiên tăng tốc và dồn tải tối đa lên các ngày sớm nhất theo mong muốn).`;
+  }
+
+  refinedPlan.refinementNote = explanation;
+  refinedPlan.lastRefinedAt = new Date().toISOString();
+  return refinedPlan;
 }
 
 /**
@@ -747,13 +924,390 @@ function calculatePaceDeviation({ startDate, endDate, totalLessons = 50, complet
   };
 }
 
+/**
+ * Rebatch tasks for a specific date according to user custom preferences
+ * Allows user to actively split or merge vocabulary, kanji, or grammar into N batches
+ * @param {Object} params
+ * @param {Object} params.plan - Current study plan
+ * @param {string} params.date - Date to rebatch (e.g. '2026-09-24')
+ * @param {Array} params.configs - Array of { lesson, itemType, batchCount }
+ */
+function rebatchDayTasks({ plan, date, configs = [] }) {
+  if (!plan || !Array.isArray(plan.days)) {
+    throw new Error('Kế hoạch học tập không hợp lệ');
+  }
+
+  const day = plan.days.find(d => d.date === date);
+  if (!day) {
+    throw new Error(`Không tìm thấy ngày học ${date} trong kế hoạch`);
+  }
+
+  const mockDb = require('../db/mockDb');
+  const normalizedConfigs = Array.isArray(configs) ? configs : [configs];
+
+  if (!day.tasks) day.tasks = [];
+
+  for (const cfg of normalizedConfigs) {
+    const lesson = parseInt(cfg.lesson, 10);
+    const itemType = cfg.itemType; // 'vocabulary' | 'kanji' | 'grammar'
+    if (!lesson || !itemType) continue;
+
+    // Find all existing tasks for this (lesson, itemType) on this day
+    const matchingTasks = day.tasks.filter(t => (t.lesson === lesson || t.lesson_id === lesson) && t.itemType === itemType);
+    if (matchingTasks.length === 0) continue;
+
+    // Collect all items for this skill
+    let allItems = [];
+    if (itemType === 'vocabulary') {
+      const dbVocab = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
+      const existingIds = [];
+      matchingTasks.forEach(t => {
+        if (Array.isArray(t.itemIds)) {
+          t.itemIds.forEach(id => {
+            if (!existingIds.includes(id)) existingIds.push(id);
+          });
+        }
+      });
+      if (existingIds.length > 0) {
+        allItems = existingIds.map(id => dbVocab.find(v => v.id === id)).filter(Boolean);
+        if (allItems.length === 0) allItems = dbVocab;
+      } else {
+        allItems = dbVocab;
+      }
+    } else if (itemType === 'kanji') {
+      const dbKanji = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
+      const existingIds = [];
+      matchingTasks.forEach(t => {
+        if (Array.isArray(t.itemIds)) {
+          t.itemIds.forEach(id => {
+            if (!existingIds.includes(id)) existingIds.push(id);
+          });
+        }
+      });
+      if (existingIds.length > 0) {
+        allItems = existingIds.map(id => dbKanji.find(k => k.id === id)).filter(Boolean);
+        if (allItems.length === 0) allItems = dbKanji;
+      } else {
+        allItems = dbKanji;
+      }
+    } else if (itemType === 'grammar') {
+      const dbGrammar = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
+      const existingIds = [];
+      matchingTasks.forEach(t => {
+        if (Array.isArray(t.itemIds)) {
+          t.itemIds.forEach(id => {
+            if (!existingIds.includes(id)) existingIds.push(id);
+          });
+        }
+      });
+      if (existingIds.length > 0) {
+        allItems = existingIds.map(id => dbGrammar.find(g => g.id === id)).filter(Boolean);
+        if (allItems.length === 0) allItems = dbGrammar;
+      } else {
+        allItems = dbGrammar;
+      }
+    }
+
+    if (allItems.length === 0) continue;
+
+    const batchSlices = [];
+    if (Array.isArray(cfg.batches) && cfg.batches.length > 0) {
+      const unitName = itemType === 'vocabulary' ? 'từ vựng' : itemType === 'kanji' ? 'chữ Hán' : 'mẫu ngữ pháp';
+      const totalAllocated = cfg.batches.reduce((sum, b) => sum + (parseInt(b.count, 10) || 0), 0);
+
+      if (totalAllocated < allItems.length) {
+        const missing = allItems.length - totalAllocated;
+        throw new Error(`Chưa phân bổ hết kiến thức Bài ${lesson} (${unitName}): Còn thiếu ${missing} ${unitName} chưa có trong batch nào! Cần phân bổ đủ 100% (${allItems.length} ${unitName}) trước khi áp dụng.`);
+      }
+      if (totalAllocated > allItems.length) {
+        const excess = totalAllocated - allItems.length;
+        throw new Error(`Số lượng phân bổ Bài ${lesson} (${unitName}) vượt quá mục tiêu: Đã phân bổ ${totalAllocated} / ${allItems.length} ${unitName} (thừa ${excess} ${unitName}). Vui lòng điều chỉnh lại.`);
+      }
+
+      for (let i = 0; i < cfg.batches.length; i++) {
+        const bCount = parseInt(cfg.batches[i].count, 10);
+        if (!bCount || bCount <= 0) {
+          throw new Error(`Batch #${i + 1} của Bài ${lesson} (${unitName}) phải có ít nhất 1 ${unitName}.`);
+        }
+      }
+
+      let currentOffset = 0;
+      for (let i = 0; i < cfg.batches.length; i++) {
+        const b = cfg.batches[i];
+        const bCount = parseInt(b.count, 10);
+        const sub = allItems.slice(currentOffset, currentOffset + bCount);
+        batchSlices.push({
+          sub,
+          offset: currentOffset,
+          customDueTime: b.due_time,
+          customTitle: b.title
+        });
+        currentOffset += bCount;
+      }
+    } else {
+      const requestedBatches = Math.max(1, Math.min(20, parseInt(cfg.batchCount, 10) || 1));
+      const effectiveBatches = Math.min(requestedBatches, allItems.length);
+      const chunkSize = Math.ceil(allItems.length / effectiveBatches);
+      let currentOffset = 0;
+      for (let c = 0; c < effectiveBatches; c++) {
+        const sub = allItems.slice(currentOffset, currentOffset + chunkSize);
+        if (sub.length > 0) {
+          batchSlices.push({
+            sub,
+            offset: currentOffset
+          });
+          currentOffset += sub.length;
+        }
+      }
+    }
+
+    const totalBatches = batchSlices.length;
+    // Build new tasks
+    const newTasks = [];
+    for (let c = 0; c < totalBatches; c++) {
+      const slice = batchSlices[c];
+      const sub = slice.sub;
+      if (!sub || sub.length === 0) continue;
+
+      let title = '';
+      let scopeDetails = '';
+      let wp = 0;
+      let estMin = 0;
+      const subIds = sub.map(x => x.id);
+
+      if (itemType === 'vocabulary') {
+        const startIdx = slice.offset + 1;
+        const endIdx = slice.offset + sub.length;
+        const firstW = sub[0]?.hiragana || sub[0]?.word || '';
+        const lastW = sub[sub.length - 1]?.hiragana || sub[sub.length - 1]?.word || '';
+        title = slice.customTitle || (totalBatches > 1
+          ? `Minna Bài ${lesson}: Học từ vựng (Phần ${c + 1}/${totalBatches}: ${sub.length} từ)`
+          : `Minna Bài ${lesson}: Học chính xác ${sub.length} từ vựng`);
+        scopeDetails = totalBatches > 1
+          ? `Phần ${c + 1}: ${sub.length} từ (Từ #${startIdx}: ${firstW} ➔ #${endIdx}: ${lastW})`
+          : `Toàn bộ ${sub.length} từ vựng Bài ${lesson}`;
+        wp = sub.length * WORKLOAD_WEIGHTS.vocabulary;
+        estMin = sub.length * 6;
+      } else if (itemType === 'kanji') {
+        const chars = sub.map(k => k.kanji || k.character).filter(Boolean).join(', ');
+        title = slice.customTitle || (totalBatches > 1
+          ? `Minna Bài ${lesson}: Nắm vững chữ Hán (Phần ${c + 1}/${totalBatches}: ${sub.length} chữ)`
+          : `Minna Bài ${lesson}: Nắm vững toàn bộ ${sub.length} chữ Hán`);
+        scopeDetails = `Chữ Hán (${sub.length} chữ): ${chars}`;
+        wp = sub.length * WORKLOAD_WEIGHTS.kanji;
+        estMin = sub.length * 18;
+      } else if (itemType === 'grammar') {
+        const gTitles = sub.map(g => g.title || g.structure || g.name).filter(Boolean).join(' • ');
+        title = slice.customTitle || (totalBatches > 1
+          ? `Minna Bài ${lesson}: Mẫu ngữ pháp cốt lõi (Phần ${c + 1}/${totalBatches}: ${sub.length} mẫu)`
+          : `Minna Bài ${lesson}: Làm chủ ${sub.length} mẫu ngữ pháp cốt lõi`);
+        scopeDetails = `Mẫu ngữ pháp (${sub.length} mẫu): ${gTitles}`;
+        wp = sub.length * WORKLOAD_WEIGHTS.grammar;
+        estMin = sub.length * 18;
+      }
+
+      newTasks.push({
+        id: `task_${date}_${itemType}_L${lesson}_p${c + 1}`,
+        lesson,
+        lesson_id: lesson,
+        itemType,
+        part: c + 1,
+        totalParts: totalBatches,
+        itemIds: subIds,
+        title,
+        scopeDetails,
+        targetCount: sub.length,
+        currentCount: 0,
+        workloadPoints: wp,
+        estimatedMinutes: estMin,
+        link: `/lessons/${lesson}?tab=${itemType === 'vocabulary' ? 'vocab' : itemType}`,
+        completed: false,
+        date,
+        due_time: slice.customDueTime
+      });
+    }
+
+    // Replace matching tasks in day.tasks preserving relative order
+    const firstIdx = day.tasks.findIndex(t => (t.lesson === lesson || t.lesson_id === lesson) && t.itemType === itemType);
+    if (firstIdx >= 0) {
+      const before = day.tasks.slice(0, firstIdx).filter(t => !((t.lesson === lesson || t.lesson_id === lesson) && t.itemType === itemType));
+      const after = day.tasks.slice(firstIdx).filter(t => !((t.lesson === lesson || t.lesson_id === lesson) && t.itemType === itemType));
+      day.tasks = [...before, ...newTasks, ...after];
+    } else {
+      const nonMatching = day.tasks.filter(t => !((t.lesson === lesson || t.lesson_id === lesson) && t.itemType === itemType));
+      day.tasks = [...nonMatching, ...newTasks];
+    }
+  }
+
+  // Re-distribute step and progressive due_times across all tasks for the day
+  day.tasks.forEach((task, idx) => {
+    task.step = idx + 1;
+    task.date = date;
+    if (!task.due_time) {
+      const baseHour = Math.min(22, 8 + Math.floor((14 / Math.max(1, day.tasks.length)) * idx));
+      const baseMin = (idx % 2 === 0) ? '00' : '30';
+      task.due_time = `${String(baseHour).padStart(2, '0')}:${baseMin}`;
+    }
+  });
+
+  day.plannedCount = day.tasks.length;
+  day.workloadPoints = day.tasks.reduce((sum, t) => sum + (t.workloadPoints || 0), 0);
+  day.totalEstimatedMinutes = day.tasks.reduce((sum, t) => sum + (t.estimatedMinutes || 0), 0);
+
+  return { plan, updatedDay: day };
+}
+
+/**
+ * Calculate batches for a skill based on user's available time across 3 slots:
+ * Slot 1: 08:00 - 12:00 (Sáng)
+ * Slot 2: 12:00 - 18:00 (Chiều)
+ * Slot 3: 18:00 - 22:00 (Tối) -> DỒN TOÀN BỘ PHẦN DƯ (OVERFLOW BUFFER)
+ * @param {Object} params
+ * @param {number} params.totalItems - Total items (e.g. 47 words)
+ * @param {string} params.itemType - 'vocabulary' | 'kanji' | 'grammar'
+ * @param {Object} params.timeSlots - { morning: number, afternoon: number, evening: number } in minutes
+ * @param {number} [params.lesson] - Lesson number
+ * @returns {Array} Array of { count, due_time, title, slotName, estimatedMinutes }
+ */
+function calculateTimeSlotBatches({ totalItems, itemType = 'vocabulary', timeSlots = {}, lesson = 1 }) {
+  if (!totalItems || totalItems <= 0) return [];
+
+  const minsPerItem = itemType === 'vocabulary' ? 6 : 18;
+  const morningMins = Math.max(0, parseInt(timeSlots.morning, 10) || 0);
+  const afternoonMins = Math.max(0, parseInt(timeSlots.afternoon, 10) || 0);
+
+  // 1. Slot 1 (08:00 - 12:00)
+  const cap1 = Math.floor(morningMins / minsPerItem);
+  const count1 = Math.min(totalItems, cap1);
+  const rem1 = totalItems - count1;
+
+  // 2. Slot 2 (12:00 - 18:00)
+  const cap2 = Math.floor(afternoonMins / minsPerItem);
+  const count2 = Math.min(rem1, cap2);
+
+  // 3. Slot 3 (18:00 - 22:00) - Absorbs ALL remaining items (overflow buffer)
+  const count3 = rem1 - count2;
+
+  const batches = [];
+  if (count1 > 0) {
+    batches.push({
+      count: count1,
+      due_time: '11:30',
+      slotName: 'Sáng (08:00 - 12:00)',
+      estimatedMinutes: count1 * minsPerItem
+    });
+  }
+
+  if (count2 > 0) {
+    batches.push({
+      count: count2,
+      due_time: '17:30',
+      slotName: 'Chiều (12:00 - 18:00)',
+      estimatedMinutes: count2 * minsPerItem
+    });
+  }
+
+  if (count3 > 0) {
+    batches.push({
+      count: count3,
+      due_time: '21:30',
+      slotName: 'Tối (18:00 - 22:00) [Dồn task dư]',
+      estimatedMinutes: count3 * minsPerItem
+    });
+  }
+
+  // Fallback if all slots were 0
+  if (batches.length === 0 && totalItems > 0) {
+    batches.push({
+      count: totalItems,
+      due_time: '21:30',
+      slotName: 'Tối (18:00 - 22:00) [Dồn task dư]',
+      estimatedMinutes: totalItems * minsPerItem
+    });
+  }
+
+  return batches;
+}
+
+/**
+ * Auto-allocate daily tasks for all skills on a date based on 3 time slots:
+ * 08:00-12:00, 12:00-18:00, 18:00-22:00 (overflow)
+ * @param {Object} params
+ * @param {Object} params.plan - Current study plan
+ * @param {string} params.date - Target date YYYY-MM-DD
+ * @param {Object} params.timeSlots - { morning: number, afternoon: number, evening: number } in minutes
+ * @param {string} params.userId - User ID
+ */
+function autoAllocateDailyTimeSlots({ plan, date, timeSlots = {}, userId }) {
+  if (!plan || !Array.isArray(plan.days)) {
+    throw new Error('Kế hoạch học tập không hợp lệ');
+  }
+
+  const day = plan.days.find(d => d.date === date);
+  if (!day) {
+    throw new Error(`Không tìm thấy ngày học ${date} trong kế hoạch`);
+  }
+
+  // Find all distinct skill groups present on this day
+  const skillGroups = [];
+  const seen = new Set();
+  (day.tasks || []).forEach(t => {
+    if (t.itemType !== 'vocabulary' && t.itemType !== 'kanji' && t.itemType !== 'grammar') return;
+    const l = t.lesson || t.lesson_id || 1;
+    const key = `${l}_${t.itemType}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      skillGroups.push({ lesson: l, itemType: t.itemType });
+    }
+  });
+
+  const configs = [];
+  for (const group of skillGroups) {
+    const matchingTasks = day.tasks.filter(t => (t.lesson === group.lesson || t.lesson_id === group.lesson) && t.itemType === group.itemType);
+    const totalItems = matchingTasks.reduce((s, t) => s + (t.targetCount || 1), 0);
+
+    const calculatedBatches = calculateTimeSlotBatches({
+      totalItems,
+      itemType: group.itemType,
+      timeSlots,
+      lesson: group.lesson
+    });
+
+    configs.push({
+      lesson: group.lesson,
+      itemType: group.itemType,
+      batches: calculatedBatches.map(b => ({
+        count: b.count,
+        due_time: b.due_time
+      }))
+    });
+  }
+
+  // Run rebatchDayTasks with these configs
+  const rebatchResult = rebatchDayTasks({
+    plan,
+    date,
+    configs
+  });
+
+  return {
+    plan: rebatchResult.plan,
+    updatedDay: rebatchResult.updatedDay,
+    configs
+  };
+}
+
 module.exports = {
   getLessonCounts,
   generateSequentialLessonTasks,
   validateSequence,
   generateAlgorithmicPlan,
   generateStudyPlan,
+  getCompletedLessons,
   getUnfinishedDebt,
   refineStudyPlan,
-  calculatePaceDeviation
+  calculatePaceDeviation,
+  rebatchDayTasks,
+  calculateTimeSlotBatches,
+  autoAllocateDailyTimeSlots
 };

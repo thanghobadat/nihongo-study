@@ -2378,6 +2378,20 @@ router.post('/replan-debt', async (req, res) => {
     });
 
     mockDb.studyPlans[userId] = updatedPlan;
+    savePersistentPlans(mockDb.studyPlans);
+
+    // Scenario 2: Send debt replan push notification
+    if (updatedPlan && updatedPlan.days) {
+      const todayStr = getLocalDateStr();
+      const todayTasks = updatedPlan.days.find(d => d.date === todayStr)?.tasks || [];
+      const debtInfo = aiPlannerService.getUnfinishedDebt({ userId, plan });
+      const debtCount = debtInfo?.debtItems?.length || 1;
+      pushNotificationService.sendDebtReplanNotification(userId, {
+        debtCount,
+        todayTasks
+      }).catch(e => console.warn('[PushNotification] Debt replan push failed:', e.message));
+    }
+
     return res.json({ success: true, plan: updatedPlan, message: 'Đã phân bổ lại bài nợ thành công và giữ nguyên hạn chót!' });
   } catch (err) {
     console.error('Error replanning debt:', err);
@@ -2525,6 +2539,31 @@ router.post('/daily-tasks/schedule', async (req, res) => {
               task.completed = completed;
               if (completed) {
                 task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                const dayTasks = day.tasks || [];
+                const completedCount = dayTasks.filter(t => t.completed).length;
+                const totalCount = dayTasks.length;
+                const isAllDoneToday = completedCount >= totalCount && totalCount > 0;
+
+                // Scenario 5: Task Completed Notification
+                pushNotificationService.sendTaskCompletedNotification(userId, {
+                  completedTask: task,
+                  isAllDoneToday,
+                  completedCount,
+                  totalCount
+                }).catch(e => console.warn('[PushNotification] Task completed push failed:', e.message));
+
+                // Scenario 8: Milestone Achievement (Lesson 25 or Lesson 50)
+                if (task.lesson === 25 && isAllDoneToday) {
+                  pushNotificationService.sendMilestoneNotification(userId, {
+                    milestoneTitle: '🏆 Tốt nghiệp Minna no Nihongo N5 (Bài 25)!',
+                    milestoneMessage: 'Chúc mừng bạn đã hoàn thành xuất sắc toàn bộ 25 bài N5! Hãy sẵn sàng bứt phá lên N4 nhé!'
+                  }).catch(e => console.warn('[PushNotification] Milestone push failed:', e.message));
+                } else if (task.lesson === 50 && isAllDoneToday) {
+                  pushNotificationService.sendMilestoneNotification(userId, {
+                    milestoneTitle: '🏆 Chinh phục toàn bộ 50 bài Minna no Nihongo (N4)!',
+                    milestoneMessage: 'Kỳ tích! Bạn đã làm chủ hoàn toàn 50 bài Minna no Nihongo N5 và N4. Bạn đã sẵn sàng tự tin bước vào kỳ thi JLPT!'
+                  }).catch(e => console.warn('[PushNotification] Milestone push failed:', e.message));
+                }
               } else {
                 delete task.completed_at;
               }
@@ -2541,6 +2580,209 @@ router.post('/daily-tasks/schedule', async (req, res) => {
   } catch (err) {
     console.error('Error scheduling daily task:', err);
     return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/check-daily-notification
+ * Check and trigger scheduled / event-based push notifications:
+ * 1. Scenario 1: New Day (with or without debt)
+ * 2. Scenario 6: Pre-due Reminder (15-30 mins before due_time)
+ * 3. Scenario 4: Overdue Reminder (past due_time)
+ * 4. Scenario 7: Streak Alert (evening 20:30 - 23:59 if no task done today)
+ */
+router.post('/check-daily-notification', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { date, localTimeStr } = req.body;
+    const todayStr = date || getLocalDateStr();
+
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    if (!mockDb.studyPlans[userId]) {
+      const persisted = loadPersistentPlans();
+      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
+    }
+    const plan = mockDb.studyPlans[userId];
+    if (!plan || !Array.isArray(plan.days)) {
+      return res.json({ success: true, message: 'No active plan found' });
+    }
+
+    let modified = false;
+    const todayDay = plan.days.find(d => d.date === todayStr);
+    const todayTasks = todayDay?.tasks || [];
+
+    // 1. Scenario 1: Qua ngày mới (New Day Notification)
+    if (plan.lastNewDayNotifiedDate !== todayStr) {
+      const debtInfo = aiPlannerService.getUnfinishedDebt({ userId, plan });
+      const yesterdayDebtItems = debtInfo?.debtItems || [];
+
+      pushNotificationService.sendNewDayNotification(userId, {
+        yesterdayDebtItems,
+        todayTasks
+      }).catch(e => console.warn('[PushNotification] New day push failed:', e.message));
+
+      plan.lastNewDayNotifiedDate = todayStr;
+      modified = true;
+    }
+
+    // Determine current time in minutes
+    let currentHours, currentMinutes;
+    if (localTimeStr && localTimeStr.includes(':')) {
+      const parts = localTimeStr.split(':');
+      currentHours = parseInt(parts[0], 10);
+      currentMinutes = parseInt(parts[1], 10);
+    } else {
+      const now = new Date();
+      currentHours = now.getHours();
+      currentMinutes = now.getMinutes();
+    }
+    const totalCurrentMinutes = currentHours * 60 + currentMinutes;
+
+    // Check tasks for Pre-due (Scenario 6) and Overdue (Scenario 4)
+    for (const task of todayTasks) {
+      if (task.completed || !task.due_time || !task.due_time.includes(':')) continue;
+
+      const [dHours, dMins] = task.due_time.split(':').map(Number);
+      const totalDueMinutes = dHours * 60 + dMins;
+      const diffMinutes = totalDueMinutes - totalCurrentMinutes;
+
+      // Scenario 6: Pre-due (15 to 30 mins before deadline)
+      if (diffMinutes > 0 && diffMinutes <= 30 && !task.preDueNotified) {
+        pushNotificationService.sendPreDueReminderNotification(userId, {
+          task,
+          minutesLeft: diffMinutes
+        }).catch(e => console.warn('[PushNotification] Pre-due push failed:', e.message));
+
+        task.preDueNotified = true;
+        modified = true;
+      }
+
+      // Scenario 4: Overdue (past deadline)
+      if (diffMinutes < 0 && !task.overdueNotified) {
+        pushNotificationService.sendOverdueReminderNotification(userId, {
+          task
+        }).catch(e => console.warn('[PushNotification] Overdue push failed:', e.message));
+
+        task.overdueNotified = true;
+        modified = true;
+      }
+    }
+
+    // Scenario 7: Streak Alert (between 20:30 and 23:59 if no tasks done today)
+    if (todayDay && totalCurrentMinutes >= 20 * 60 + 30 && totalCurrentMinutes <= 23 * 60 + 59) {
+      const completedCount = (todayDay.tasks || []).filter(t => t.completed).length;
+      if (completedCount === 0 && (todayDay.tasks || []).length > 0 && !todayDay.streakAlertNotified) {
+        pushNotificationService.sendStreakAlertNotification(userId, {
+          currentStreak: 3,
+          remainingTasksCount: todayDay.tasks.length
+        }).catch(e => console.warn('[PushNotification] Streak alert push failed:', e.message));
+
+        todayDay.streakAlertNotified = true;
+        modified = true;
+      }
+    }
+
+    if (modified) {
+      savePersistentPlans(mockDb.studyPlans);
+    }
+
+    return res.json({ success: true, message: 'Daily notification check completed', checkedDate: todayStr });
+  } catch (err) {
+    console.error('Error checking daily notifications:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/daily-tasks/rebatch
+ * Re-batch daily tasks (e.g. 1 batch or N batches) for vocabulary, kanji, or grammar
+ */
+router.post('/daily-tasks/rebatch', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { date, configs } = req.body;
+
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    if (!mockDb.studyPlans[userId]) {
+      const persisted = loadPersistentPlans();
+      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
+    }
+
+    let plan = mockDb.studyPlans[userId];
+    if (!plan || !Array.isArray(plan.days)) {
+      return res.status(404).json({ success: false, error: 'Không tìm thấy kế hoạch học tập' });
+    }
+
+    const targetDate = date || getLocalDateStr();
+    const result = aiPlannerService.rebatchDayTasks({
+      plan,
+      date: targetDate,
+      configs
+    });
+
+    // Run auto-tracking so mastered items are immediately updated on new batches
+    plan = applyAutoTracking(result.plan, userId);
+    mockDb.studyPlans[userId] = plan;
+    savePersistentPlans(mockDb.studyPlans);
+
+    const updatedDay = plan.days.find(d => d.date === targetDate);
+
+    return res.json({
+      success: true,
+      message: 'Đã phân chia lại công việc thành công',
+      updatedDay,
+      plan
+    });
+  } catch (err) {
+    console.error('Error rebatching daily tasks:', err);
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/daily-tasks/auto-allocate-slots
+ * Auto-allocate daily tasks into 3 time slots (8-12h, 12-18h, 18-22h overflow)
+ */
+router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { date, timeSlots } = req.body;
+
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    if (!mockDb.studyPlans[userId]) {
+      const persisted = loadPersistentPlans();
+      if (persisted[userId]) mockDb.studyPlans[userId] = persisted[userId];
+    }
+
+    let plan = mockDb.studyPlans[userId];
+    if (!plan || !Array.isArray(plan.days)) {
+      return res.status(404).json({ success: false, error: 'Không tìm thấy kế hoạch học tập' });
+    }
+
+    const targetDate = date || getLocalDateStr();
+    const result = aiPlannerService.autoAllocateDailyTimeSlots({
+      plan,
+      date: targetDate,
+      timeSlots: timeSlots || {},
+      userId
+    });
+
+    plan = applyAutoTracking(result.plan, userId);
+    mockDb.studyPlans[userId] = plan;
+    savePersistentPlans(mockDb.studyPlans);
+
+    const updatedDay = plan.days.find(d => d.date === targetDate);
+
+    return res.json({
+      success: true,
+      message: 'AI đã tự động phân bổ công việc theo các mốc thời gian rảnh',
+      updatedDay,
+      plan,
+      configs: result.configs
+    });
+  } catch (err) {
+    console.error('Error auto-allocating time slots:', err);
+    return res.status(400).json({ success: false, error: err.message });
   }
 });
 
@@ -2632,17 +2874,19 @@ router.get('/study-overview', async (req, res) => {
       }];
     }
 
-    const startDate = plan?.startDate || getLocalDateStr();
+    const startDate = plan?.originalStartDate || plan?.startDate || getLocalDateStr();
     const today = new Date();
     const nextMonth = new Date();
     nextMonth.setDate(today.getDate() + 30);
     const endDate = plan?.endDate || getLocalDateStr(nextMonth);
 
+    const completedLessonCount = Math.max(0, currentLesson - 1, plan?.completedLessonsCount || 0);
+
     const pace = aiPlannerService.calculatePaceDeviation({
       startDate,
       endDate,
       totalLessons: 50,
-      completedLessons: Math.max(0, currentLesson - 1),
+      completedLessons: completedLessonCount,
       currentProgress: { currentLesson, masteredVocab, masteredGrammar, masteredKanji }
     });
 
@@ -2652,36 +2896,36 @@ router.get('/study-overview', async (req, res) => {
         title: 'N5 Cơ bản',
         lessons: 'Bài 1 - 10',
         targetLessons: 10,
-        completedLessons: Math.min(10, Math.max(0, currentLesson - 1)),
-        percentage: Math.min(100, Math.round((Math.min(10, Math.max(0, currentLesson - 1)) / 10) * 100)),
-        status: currentLesson > 10 ? 'completed' : (currentLesson >= 1 ? 'in_progress' : 'locked')
+        completedLessons: Math.min(10, Math.max(0, completedLessonCount)),
+        percentage: Math.min(100, Math.round((Math.min(10, Math.max(0, completedLessonCount)) / 10) * 100)),
+        status: completedLessonCount >= 10 ? 'completed' : (completedLessonCount >= 1 || currentLesson >= 1 ? 'in_progress' : 'locked')
       },
       {
         id: 'm2',
         title: 'N5 Nâng cao',
         lessons: 'Bài 11 - 25',
         targetLessons: 15,
-        completedLessons: Math.min(15, Math.max(0, currentLesson - 11)),
-        percentage: currentLesson <= 10 ? 0 : Math.min(100, Math.round((Math.min(15, Math.max(0, currentLesson - 11)) / 15) * 100)),
-        status: currentLesson > 25 ? 'completed' : (currentLesson >= 11 ? 'in_progress' : 'locked')
+        completedLessons: Math.min(15, Math.max(0, completedLessonCount - 10)),
+        percentage: completedLessonCount < 10 ? 0 : Math.min(100, Math.round((Math.min(15, Math.max(0, completedLessonCount - 10)) / 15) * 100)),
+        status: completedLessonCount >= 25 ? 'completed' : (completedLessonCount >= 11 || currentLesson >= 11 ? 'in_progress' : 'locked')
       },
       {
         id: 'm3',
         title: 'N4 Khởi động',
         lessons: 'Bài 26 - 37',
         targetLessons: 12,
-        completedLessons: Math.min(12, Math.max(0, currentLesson - 26)),
-        percentage: currentLesson <= 25 ? 0 : Math.min(100, Math.round((Math.min(12, Math.max(0, currentLesson - 26)) / 12) * 100)),
-        status: currentLesson > 37 ? 'completed' : (currentLesson >= 26 ? 'in_progress' : 'locked')
+        completedLessons: Math.min(12, Math.max(0, completedLessonCount - 25)),
+        percentage: completedLessonCount < 25 ? 0 : Math.min(100, Math.round((Math.min(12, Math.max(0, completedLessonCount - 25)) / 12) * 100)),
+        status: completedLessonCount >= 37 ? 'completed' : (completedLessonCount >= 26 || currentLesson >= 26 ? 'in_progress' : 'locked')
       },
       {
         id: 'm4',
         title: 'N4 Về đích',
         lessons: 'Bài 38 - 50',
         targetLessons: 13,
-        completedLessons: Math.min(13, Math.max(0, currentLesson - 38)),
-        percentage: currentLesson <= 37 ? 0 : Math.min(100, Math.round((Math.min(13, Math.max(0, currentLesson - 38)) / 13) * 100)),
-        status: currentLesson >= 50 ? 'completed' : (currentLesson >= 38 ? 'in_progress' : 'locked')
+        completedLessons: Math.min(13, Math.max(0, completedLessonCount - 37)),
+        percentage: completedLessonCount < 37 ? 0 : Math.min(100, Math.round((Math.min(13, Math.max(0, completedLessonCount - 37)) / 13) * 100)),
+        status: completedLessonCount >= 50 ? 'completed' : (completedLessonCount >= 38 || currentLesson >= 38 ? 'in_progress' : 'locked')
       }
     ];
 
@@ -2750,7 +2994,12 @@ router.get('/daily-history', async (req, res) => {
 
     const todayStr = getLocalDateStr();
 
-    const history = plan.days.map((day) => {
+    const allDays = [
+      ...(plan.archivedPastDays || []),
+      ...(plan.days || [])
+    ];
+
+    const history = allDays.map((day) => {
       const planned = day.plannedCount || (day.tasks ? day.tasks.length : 0);
       const completed = day.completedCount || (day.tasks ? day.tasks.filter(t => t.completed).length : 0);
       const completionRate = planned > 0 ? Math.round((completed / planned) * 100) : 100;
@@ -2824,6 +3073,19 @@ router.get('/vapid-public-key', (req, res) => {
 });
 
 /**
+ * GET /api/user/push-subscription-status
+ */
+router.get('/push-subscription-status', (req, res) => {
+  try {
+    const userId = req.user.id;
+    const status = pushNotificationService.getSubscriptionStatus(userId);
+    return res.json({ success: true, ...status });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
  * POST /api/user/push-subscription
  */
 router.post('/push-subscription', (req, res) => {
@@ -2850,6 +3112,42 @@ router.post('/send-test-push', async (req, res) => {
     return res.json({ success: true, message: 'Đã gửi thông báo thử nghiệm thành công!', result });
   } catch (err) {
     console.error('Error sending test push:', err.message);
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/send-study-plan-notification
+ */
+router.post('/send-study-plan-notification', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const todayStr = getLocalDateStr(new Date());
+    let todayTasks = [];
+    let userPlan = mockDb.studyPlans ? mockDb.studyPlans[userId] : null;
+
+    if (!userPlan) {
+      const allPlans = loadPersistentPlans();
+      userPlan = allPlans[userId] || null;
+    }
+
+    if (req.body && Array.isArray(req.body.tasks) && req.body.tasks.length > 0) {
+      todayTasks = req.body.tasks;
+    } else if (userPlan && Array.isArray(userPlan.days)) {
+      const todayDay = userPlan.days.find(d => d.date === todayStr);
+      if (todayDay && Array.isArray(todayDay.tasks)) {
+        todayTasks = todayDay.tasks;
+      }
+    }
+
+    const result = await pushNotificationService.sendStudyPlanNotification(userId, todayTasks);
+    return res.json({ 
+      success: true, 
+      message: 'Đã gửi thông báo kế hoạch học tập hôm nay về điện thoại thành công!', 
+      result 
+    });
+  } catch (err) {
+    console.error('Error sending study plan push:', err.message);
     return res.status(400).json({ success: false, error: err.message });
   }
 });
