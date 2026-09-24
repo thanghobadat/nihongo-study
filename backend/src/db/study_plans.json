@@ -48,14 +48,16 @@
         "isRestDay": false,
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
-        "plannedCount": 2,
+        "plannedCount": 3,
         "completedCount": 0,
         "workloadPoints": 36,
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 36 từ vựng của Bài 1 (36 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "totalEstimatedMinutes": 216,
         "tasks": [
           {
+            "id": "task_2026-09-24_vocabulary_L1_p1",
             "lesson": 1,
+            "lesson_id": 1,
             "itemType": "vocabulary",
             "part": 1,
             "totalParts": 3,
@@ -71,35 +73,35 @@
               9,
               10,
               11,
-              12,
+              12
+            ],
+            "title": "Minna Bài 1: Học từ vựng (Phần 1/3: 12 từ)",
+            "scopeDetails": "Phần 1: 12 từ (Từ #1: わたし ➔ #12: けんきゅうしゃ)",
+            "targetCount": 12,
+            "currentCount": 0,
+            "workloadPoints": 12,
+            "estimatedMinutes": 72,
+            "link": "/lessons/1?tab=vocab",
+            "completed": false,
+            "date": "2026-09-24",
+            "due_time": "17:00",
+            "step": 1,
+            "progressPct": 0
+          },
+          {
+            "id": "task_2026-09-24_vocabulary_L1_p2",
+            "lesson": 1,
+            "lesson_id": 1,
+            "itemType": "vocabulary",
+            "part": 2,
+            "totalParts": 3,
+            "itemIds": [
               13,
               14,
               15,
               16,
               17,
-              18
-            ],
-            "title": "Minna Bài 1: Học từ vựng (Phần 1/3: 18 từ)",
-            "scopeDetails": "Phần 1: 18 từ (Từ #1: わたし ➔ #18: どなた)",
-            "targetCount": 18,
-            "currentCount": 0,
-            "workloadPoints": 18,
-            "estimatedMinutes": 108,
-            "link": "/lessons/1?tab=vocab",
-            "completed": false,
-            "lesson_id": 1,
-            "id": "task_2026-09-24_vocabulary_L1_p1",
-            "date": "2026-09-24",
-            "due_time": "17:00",
-            "step": 1,
-            "overdueNotified": true
-          },
-          {
-            "lesson": 1,
-            "itemType": "vocabulary",
-            "part": 2,
-            "totalParts": 3,
-            "itemIds": [
+              18,
               19,
               20,
               21,
@@ -111,7 +113,29 @@
               27,
               28,
               29,
-              30,
+              30
+            ],
+            "title": "Minna Bài 1: Học từ vựng (Phần 2/3: 18 từ)",
+            "scopeDetails": "Phần 2: 18 từ (Từ #13: エンジニア ➔ #30: イギリス)",
+            "targetCount": 18,
+            "currentCount": 0,
+            "workloadPoints": 18,
+            "estimatedMinutes": 108,
+            "link": "/lessons/1?tab=vocab",
+            "completed": false,
+            "date": "2026-09-24",
+            "due_time": "18:30",
+            "step": 2,
+            "progressPct": 0
+          },
+          {
+            "id": "task_2026-09-24_vocabulary_L1_p3",
+            "lesson": 1,
+            "lesson_id": 1,
+            "itemType": "vocabulary",
+            "part": 3,
+            "totalParts": 3,
+            "itemIds": [
               31,
               32,
               33,
@@ -119,22 +143,21 @@
               35,
               36
             ],
-            "title": "Minna Bài 1: Học từ vựng (Phần 2/3: 18 từ)",
-            "scopeDetails": "Phần 2: 18 từ (Từ #19: さい ➔ #36: ドイツ)",
-            "targetCount": 18,
+            "title": "Minna Bài 1: Học từ vựng (Phần 3/3: 6 từ)",
+            "scopeDetails": "Phần 3: 6 từ (Từ #31: インド ➔ #36: ドイツ)",
+            "targetCount": 6,
             "currentCount": 0,
-            "workloadPoints": 18,
-            "estimatedMinutes": 108,
+            "workloadPoints": 6,
+            "estimatedMinutes": 36,
             "link": "/lessons/1?tab=vocab",
             "completed": false,
-            "lesson_id": 1,
-            "id": "task_2026-09-24_vocabulary_L1_p2",
             "date": "2026-09-24",
-            "due_time": "18:30",
-            "step": 2,
-            "overdueNotified": true
+            "due_time": "21:00",
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-09-25",
@@ -179,7 +202,8 @@
             "id": "task_2026-09-25_vocabulary_L1_p3",
             "date": "2026-09-25",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 1,
@@ -205,9 +229,11 @@
             "id": "task_2026-09-25_kanji_L1_p1",
             "date": "2026-09-25",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-09-26",
@@ -246,7 +272,8 @@
             "id": "task_2026-09-26_kanji_L1_p2",
             "date": "2026-09-26",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 1,
@@ -268,7 +295,8 @@
             "id": "task_2026-09-26_kanji_L1_p3",
             "date": "2026-09-26",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 1,
@@ -294,9 +322,11 @@
             "id": "task_2026-09-26_grammar_L1_p1",
             "date": "2026-09-26",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-09-27",
@@ -328,7 +358,8 @@
             "id": "task_2026-09-27_single_review_L1_p1",
             "date": "2026-09-27",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 1,
@@ -347,7 +378,8 @@
             "id": "task_2026-09-27_cumulative_review_L1_p1",
             "date": "2026-09-27",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 2,
@@ -386,9 +418,11 @@
             "id": "task_2026-09-27_vocabulary_L2_p1",
             "date": "2026-09-27",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-09-28",
@@ -440,7 +474,8 @@
             "id": "task_2026-09-28_vocabulary_L2_p2",
             "date": "2026-09-28",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 2,
@@ -471,9 +506,11 @@
             "id": "task_2026-09-28_vocabulary_L2_p3",
             "date": "2026-09-28",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-09-29",
@@ -512,7 +549,8 @@
             "id": "task_2026-09-29_kanji_L2_p1",
             "date": "2026-09-29",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 2,
@@ -538,9 +576,11 @@
             "id": "task_2026-09-29_kanji_L2_p2",
             "date": "2026-09-29",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-09-30",
@@ -579,7 +619,8 @@
             "id": "task_2026-09-30_kanji_L2_p3",
             "date": "2026-09-30",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 2,
@@ -606,9 +647,11 @@
             "id": "task_2026-09-30_grammar_L2_p1",
             "date": "2026-09-30",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-01",
@@ -640,7 +683,8 @@
             "id": "task_2026-10-01_single_review_L2_p1",
             "date": "2026-10-01",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 2,
@@ -659,7 +703,8 @@
             "id": "task_2026-10-01_cumulative_review_L2_p1",
             "date": "2026-10-01",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 3,
@@ -698,9 +743,11 @@
             "id": "task_2026-10-01_vocabulary_L3_p1",
             "date": "2026-10-01",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-02",
@@ -752,7 +799,8 @@
             "id": "task_2026-10-02_vocabulary_L3_p2",
             "date": "2026-10-02",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 3,
@@ -782,9 +830,11 @@
             "id": "task_2026-10-02_vocabulary_L3_p3",
             "date": "2026-10-02",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-03",
@@ -823,7 +873,8 @@
             "id": "task_2026-10-03_kanji_L3_p1",
             "date": "2026-10-03",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 3,
@@ -849,9 +900,11 @@
             "id": "task_2026-10-03_kanji_L3_p2",
             "date": "2026-10-03",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-04",
@@ -892,7 +945,8 @@
             "id": "task_2026-10-04_grammar_L3_p1",
             "date": "2026-10-04",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 3,
@@ -911,7 +965,8 @@
             "id": "task_2026-10-04_single_review_L3_p1",
             "date": "2026-10-04",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 3,
@@ -930,9 +985,11 @@
             "id": "task_2026-10-04_cumulative_review_L3_p1",
             "date": "2026-10-04",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-05",
@@ -984,7 +1041,8 @@
             "id": "task_2026-10-05_vocabulary_L4_p1",
             "date": "2026-10-05",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 4,
@@ -1023,9 +1081,11 @@
             "id": "task_2026-10-05_vocabulary_L4_p2",
             "date": "2026-10-05",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-06",
@@ -1077,7 +1137,8 @@
             "id": "task_2026-10-06_vocabulary_L4_p3",
             "date": "2026-10-06",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 4,
@@ -1105,9 +1166,11 @@
             "id": "task_2026-10-06_vocabulary_L4_p4",
             "date": "2026-10-06",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-07",
@@ -1146,7 +1209,8 @@
             "id": "task_2026-10-07_kanji_L4_p1",
             "date": "2026-10-07",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 4,
@@ -1172,9 +1236,11 @@
             "id": "task_2026-10-07_kanji_L4_p2",
             "date": "2026-10-07",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-08",
@@ -1214,7 +1280,8 @@
             "id": "task_2026-10-08_grammar_L4_p1",
             "date": "2026-10-08",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 4,
@@ -1233,7 +1300,8 @@
             "id": "task_2026-10-08_single_review_L4_p1",
             "date": "2026-10-08",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 4,
@@ -1252,7 +1320,8 @@
             "id": "task_2026-10-08_cumulative_review_L4_p1",
             "date": "2026-10-08",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 5,
@@ -1291,9 +1360,11 @@
             "id": "task_2026-10-08_vocabulary_L5_p1",
             "date": "2026-10-08",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-09",
@@ -1345,9 +1416,11 @@
             "id": "task_2026-10-09_vocabulary_L5_p2",
             "date": "2026-10-09",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-10",
@@ -1399,7 +1472,8 @@
             "id": "task_2026-10-10_vocabulary_L5_p3",
             "date": "2026-10-10",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 5,
@@ -1421,7 +1495,8 @@
             "id": "task_2026-10-10_vocabulary_L5_p4",
             "date": "2026-10-10",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 5,
@@ -1447,9 +1522,11 @@
             "id": "task_2026-10-10_kanji_L5_p1",
             "date": "2026-10-10",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-11",
@@ -1488,7 +1565,8 @@
             "id": "task_2026-10-11_kanji_L5_p2",
             "date": "2026-10-11",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 5,
@@ -1514,9 +1592,11 @@
             "id": "task_2026-10-11_grammar_L5_p1",
             "date": "2026-10-11",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-12",
@@ -1548,7 +1628,8 @@
             "id": "task_2026-10-12_single_review_L5_p1",
             "date": "2026-10-12",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 5,
@@ -1567,7 +1648,8 @@
             "id": "task_2026-10-12_cumulative_review_L5_p1",
             "date": "2026-10-12",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 6,
@@ -1606,9 +1688,11 @@
             "id": "task_2026-10-12_vocabulary_L6_p1",
             "date": "2026-10-12",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-13",
@@ -1660,7 +1744,8 @@
             "id": "task_2026-10-13_vocabulary_L6_p2",
             "date": "2026-10-13",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 6,
@@ -1699,9 +1784,11 @@
             "id": "task_2026-10-13_vocabulary_L6_p3",
             "date": "2026-10-13",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-14",
@@ -1740,7 +1827,8 @@
             "id": "task_2026-10-14_vocabulary_L6_p4",
             "date": "2026-10-14",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 6,
@@ -1766,7 +1854,8 @@
             "id": "task_2026-10-14_kanji_L6_p1",
             "date": "2026-10-14",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 6,
@@ -1792,9 +1881,11 @@
             "id": "task_2026-10-14_kanji_L6_p2",
             "date": "2026-10-14",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-15",
@@ -1834,7 +1925,8 @@
             "id": "task_2026-10-15_grammar_L6_p1",
             "date": "2026-10-15",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 6,
@@ -1853,9 +1945,11 @@
             "id": "task_2026-10-15_single_review_L6_p1",
             "date": "2026-10-15",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-16",
@@ -1887,7 +1981,8 @@
             "id": "task_2026-10-16_cumulative_review_L6_p1",
             "date": "2026-10-16",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 7,
@@ -1926,7 +2021,8 @@
             "id": "task_2026-10-16_vocabulary_L7_p1",
             "date": "2026-10-16",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 7,
@@ -1965,9 +2061,11 @@
             "id": "task_2026-10-16_vocabulary_L7_p2",
             "date": "2026-10-16",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-17",
@@ -2018,9 +2116,11 @@
             "id": "task_2026-10-17_vocabulary_L7_p3",
             "date": "2026-10-17",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-18",
@@ -2059,7 +2159,8 @@
             "id": "task_2026-10-18_kanji_L7_p1",
             "date": "2026-10-18",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 7,
@@ -2085,9 +2186,11 @@
             "id": "task_2026-10-18_kanji_L7_p2",
             "date": "2026-10-18",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-19",
@@ -2126,7 +2229,8 @@
             "id": "task_2026-10-19_grammar_L7_p1",
             "date": "2026-10-19",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 7,
@@ -2145,7 +2249,8 @@
             "id": "task_2026-10-19_single_review_L7_p1",
             "date": "2026-10-19",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 7,
@@ -2164,7 +2269,8 @@
             "id": "task_2026-10-19_cumulative_review_L7_p1",
             "date": "2026-10-19",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 8,
@@ -2203,9 +2309,11 @@
             "id": "task_2026-10-19_vocabulary_L8_p1",
             "date": "2026-10-19",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-20",
@@ -2257,9 +2365,11 @@
             "id": "task_2026-10-20_vocabulary_L8_p2",
             "date": "2026-10-20",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-21",
@@ -2311,7 +2421,8 @@
             "id": "task_2026-10-21_vocabulary_L8_p3",
             "date": "2026-10-21",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 8,
@@ -2342,7 +2453,8 @@
             "id": "task_2026-10-21_vocabulary_L8_p4",
             "date": "2026-10-21",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 8,
@@ -2368,9 +2480,11 @@
             "id": "task_2026-10-21_kanji_L8_p1",
             "date": "2026-10-21",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-22",
@@ -2409,7 +2523,8 @@
             "id": "task_2026-10-22_kanji_L8_p2",
             "date": "2026-10-22",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 8,
@@ -2435,9 +2550,11 @@
             "id": "task_2026-10-22_grammar_L8_p1",
             "date": "2026-10-22",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-23",
@@ -2469,7 +2586,8 @@
             "id": "task_2026-10-23_single_review_L8_p1",
             "date": "2026-10-23",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 8,
@@ -2488,7 +2606,8 @@
             "id": "task_2026-10-23_cumulative_review_L8_p1",
             "date": "2026-10-23",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 9,
@@ -2527,9 +2646,11 @@
             "id": "task_2026-10-23_vocabulary_L9_p1",
             "date": "2026-10-23",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-24",
@@ -2581,7 +2702,8 @@
             "id": "task_2026-10-24_vocabulary_L9_p2",
             "date": "2026-10-24",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 9,
@@ -2612,9 +2734,11 @@
             "id": "task_2026-10-24_vocabulary_L9_p3",
             "date": "2026-10-24",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-25",
@@ -2653,7 +2777,8 @@
             "id": "task_2026-10-25_kanji_L9_p1",
             "date": "2026-10-25",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 9,
@@ -2679,9 +2804,11 @@
             "id": "task_2026-10-25_kanji_L9_p2",
             "date": "2026-10-25",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-26",
@@ -2720,7 +2847,8 @@
             "id": "task_2026-10-26_grammar_L9_p1",
             "date": "2026-10-26",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 9,
@@ -2739,7 +2867,8 @@
             "id": "task_2026-10-26_single_review_L9_p1",
             "date": "2026-10-26",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 9,
@@ -2758,9 +2887,11 @@
             "id": "task_2026-10-26_cumulative_review_L9_p1",
             "date": "2026-10-26",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-27",
@@ -2812,7 +2943,8 @@
             "id": "task_2026-10-27_vocabulary_L10_p1",
             "date": "2026-10-27",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 10,
@@ -2851,9 +2983,11 @@
             "id": "task_2026-10-27_vocabulary_L10_p2",
             "date": "2026-10-27",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-28",
@@ -2901,7 +3035,8 @@
             "id": "task_2026-10-28_vocabulary_L10_p3",
             "date": "2026-10-28",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 10,
@@ -2927,9 +3062,11 @@
             "id": "task_2026-10-28_kanji_L10_p1",
             "date": "2026-10-28",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-29",
@@ -2968,7 +3105,8 @@
             "id": "task_2026-10-29_kanji_L10_p2",
             "date": "2026-10-29",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 10,
@@ -2993,7 +3131,8 @@
             "id": "task_2026-10-29_grammar_L10_p1",
             "date": "2026-10-29",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 10,
@@ -3012,9 +3151,11 @@
             "id": "task_2026-10-29_single_review_L10_p1",
             "date": "2026-10-29",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-30",
@@ -3046,7 +3187,8 @@
             "id": "task_2026-10-30_cumulative_review_L10_p1",
             "date": "2026-10-30",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 11,
@@ -3085,9 +3227,11 @@
             "id": "task_2026-10-30_vocabulary_L11_p1",
             "date": "2026-10-30",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-10-31",
@@ -3139,7 +3283,8 @@
             "id": "task_2026-10-31_vocabulary_L11_p2",
             "date": "2026-10-31",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 11,
@@ -3178,9 +3323,11 @@
             "id": "task_2026-10-31_vocabulary_L11_p3",
             "date": "2026-10-31",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-01",
@@ -3222,7 +3369,8 @@
             "id": "task_2026-11-01_vocabulary_L11_p4",
             "date": "2026-11-01",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 11,
@@ -3248,7 +3396,8 @@
             "id": "task_2026-11-01_kanji_L11_p1",
             "date": "2026-11-01",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 11,
@@ -3274,9 +3423,11 @@
             "id": "task_2026-11-01_kanji_L11_p2",
             "date": "2026-11-01",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-02",
@@ -3315,7 +3466,8 @@
             "id": "task_2026-11-02_grammar_L11_p1",
             "date": "2026-11-02",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 11,
@@ -3334,7 +3486,8 @@
             "id": "task_2026-11-02_single_review_L11_p1",
             "date": "2026-11-02",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 11,
@@ -3353,9 +3506,11 @@
             "id": "task_2026-11-02_cumulative_review_L11_p1",
             "date": "2026-11-02",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-03",
@@ -3407,7 +3562,8 @@
             "id": "task_2026-11-03_vocabulary_L12_p1",
             "date": "2026-11-03",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 12,
@@ -3446,9 +3602,11 @@
             "id": "task_2026-11-03_vocabulary_L12_p2",
             "date": "2026-11-03",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-04",
@@ -3492,7 +3650,8 @@
             "id": "task_2026-11-04_vocabulary_L12_p3",
             "date": "2026-11-04",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 12,
@@ -3518,9 +3677,11 @@
             "id": "task_2026-11-04_kanji_L12_p1",
             "date": "2026-11-04",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-05",
@@ -3559,7 +3720,8 @@
             "id": "task_2026-11-05_kanji_L12_p2",
             "date": "2026-11-05",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 12,
@@ -3585,9 +3747,11 @@
             "id": "task_2026-11-05_grammar_L12_p1",
             "date": "2026-11-05",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-06",
@@ -3619,7 +3783,8 @@
             "id": "task_2026-11-06_single_review_L12_p1",
             "date": "2026-11-06",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 12,
@@ -3638,7 +3803,8 @@
             "id": "task_2026-11-06_cumulative_review_L12_p1",
             "date": "2026-11-06",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 13,
@@ -3677,9 +3843,11 @@
             "id": "task_2026-11-06_vocabulary_L13_p1",
             "date": "2026-11-06",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-07",
@@ -3731,7 +3899,8 @@
             "id": "task_2026-11-07_vocabulary_L13_p2",
             "date": "2026-11-07",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 13,
@@ -3757,7 +3926,8 @@
             "id": "task_2026-11-07_vocabulary_L13_p3",
             "date": "2026-11-07",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 13,
@@ -3783,9 +3953,11 @@
             "id": "task_2026-11-07_kanji_L13_p1",
             "date": "2026-11-07",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-08",
@@ -3824,7 +3996,8 @@
             "id": "task_2026-11-08_kanji_L13_p2",
             "date": "2026-11-08",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 13,
@@ -3849,9 +4022,11 @@
             "id": "task_2026-11-08_grammar_L13_p1",
             "date": "2026-11-08",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-09",
@@ -3883,7 +4058,8 @@
             "id": "task_2026-11-09_single_review_L13_p1",
             "date": "2026-11-09",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 13,
@@ -3902,7 +4078,8 @@
             "id": "task_2026-11-09_cumulative_review_L13_p1",
             "date": "2026-11-09",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 14,
@@ -3941,9 +4118,11 @@
             "id": "task_2026-11-09_vocabulary_L14_p1",
             "date": "2026-11-09",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-10",
@@ -3995,7 +4174,8 @@
             "id": "task_2026-11-10_vocabulary_L14_p2",
             "date": "2026-11-10",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 14,
@@ -4023,7 +4203,8 @@
             "id": "task_2026-11-10_vocabulary_L14_p3",
             "date": "2026-11-10",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 14,
@@ -4049,9 +4230,11 @@
             "id": "task_2026-11-10_kanji_L14_p1",
             "date": "2026-11-10",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-11",
@@ -4090,7 +4273,8 @@
             "id": "task_2026-11-11_kanji_L14_p2",
             "date": "2026-11-11",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 14,
@@ -4114,9 +4298,11 @@
             "id": "task_2026-11-11_grammar_L14_p1",
             "date": "2026-11-11",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-12",
@@ -4148,7 +4334,8 @@
             "id": "task_2026-11-12_single_review_L14_p1",
             "date": "2026-11-12",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 14,
@@ -4167,7 +4354,8 @@
             "id": "task_2026-11-12_cumulative_review_L14_p1",
             "date": "2026-11-12",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 15,
@@ -4206,9 +4394,11 @@
             "id": "task_2026-11-12_vocabulary_L15_p1",
             "date": "2026-11-12",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-13",
@@ -4253,7 +4443,8 @@
             "id": "task_2026-11-13_vocabulary_L15_p2",
             "date": "2026-11-13",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 15,
@@ -4279,9 +4470,11 @@
             "id": "task_2026-11-13_kanji_L15_p1",
             "date": "2026-11-13",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-14",
@@ -4320,7 +4513,8 @@
             "id": "task_2026-11-14_kanji_L15_p2",
             "date": "2026-11-14",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 15,
@@ -4344,7 +4538,8 @@
             "id": "task_2026-11-14_grammar_L15_p1",
             "date": "2026-11-14",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 15,
@@ -4363,7 +4558,8 @@
             "id": "task_2026-11-14_single_review_L15_p1",
             "date": "2026-11-14",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 15,
@@ -4382,9 +4578,11 @@
             "id": "task_2026-11-14_cumulative_review_L15_p1",
             "date": "2026-11-14",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-15",
@@ -4436,7 +4634,8 @@
             "id": "task_2026-11-15_vocabulary_L16_p1",
             "date": "2026-11-15",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 16,
@@ -4475,9 +4674,11 @@
             "id": "task_2026-11-15_vocabulary_L16_p2",
             "date": "2026-11-15",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-16",
@@ -4518,7 +4719,8 @@
             "id": "task_2026-11-16_vocabulary_L16_p3",
             "date": "2026-11-16",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 16,
@@ -4544,9 +4746,11 @@
             "id": "task_2026-11-16_kanji_L16_p1",
             "date": "2026-11-16",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-17",
@@ -4585,7 +4789,8 @@
             "id": "task_2026-11-17_kanji_L16_p2",
             "date": "2026-11-17",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 16,
@@ -4609,7 +4814,8 @@
             "id": "task_2026-11-17_grammar_L16_p1",
             "date": "2026-11-17",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 16,
@@ -4628,7 +4834,8 @@
             "id": "task_2026-11-17_single_review_L16_p1",
             "date": "2026-11-17",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 16,
@@ -4647,9 +4854,11 @@
             "id": "task_2026-11-17_cumulative_review_L16_p1",
             "date": "2026-11-17",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-18",
@@ -4701,7 +4910,8 @@
             "id": "task_2026-11-18_vocabulary_L17_p1",
             "date": "2026-11-18",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 17,
@@ -4740,9 +4950,11 @@
             "id": "task_2026-11-18_vocabulary_L17_p2",
             "date": "2026-11-18",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-19",
@@ -4777,7 +4989,8 @@
             "id": "task_2026-11-19_vocabulary_L17_p3",
             "date": "2026-11-19",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 17,
@@ -4803,7 +5016,8 @@
             "id": "task_2026-11-19_kanji_L17_p1",
             "date": "2026-11-19",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 17,
@@ -4829,9 +5043,11 @@
             "id": "task_2026-11-19_kanji_L17_p2",
             "date": "2026-11-19",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-20",
@@ -4868,7 +5084,8 @@
             "id": "task_2026-11-20_grammar_L17_p1",
             "date": "2026-11-20",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 17,
@@ -4887,7 +5104,8 @@
             "id": "task_2026-11-20_single_review_L17_p1",
             "date": "2026-11-20",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 17,
@@ -4906,9 +5124,11 @@
             "id": "task_2026-11-20_cumulative_review_L17_p1",
             "date": "2026-11-20",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-21",
@@ -4960,7 +5180,8 @@
             "id": "task_2026-11-21_vocabulary_L18_p1",
             "date": "2026-11-21",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 18,
@@ -4990,7 +5211,8 @@
             "id": "task_2026-11-21_vocabulary_L18_p2",
             "date": "2026-11-21",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 18,
@@ -5013,7 +5235,8 @@
             "id": "task_2026-11-21_kanji_L18_p1",
             "date": "2026-11-21",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 18,
@@ -5037,9 +5260,11 @@
             "id": "task_2026-11-21_grammar_L18_p1",
             "date": "2026-11-21",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-22",
@@ -5071,7 +5296,8 @@
             "id": "task_2026-11-22_single_review_L18_p1",
             "date": "2026-11-22",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 18,
@@ -5090,7 +5316,8 @@
             "id": "task_2026-11-22_cumulative_review_L18_p1",
             "date": "2026-11-22",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 19,
@@ -5129,9 +5356,11 @@
             "id": "task_2026-11-22_vocabulary_L19_p1",
             "date": "2026-11-22",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-23",
@@ -5176,7 +5405,8 @@
             "id": "task_2026-11-23_vocabulary_L19_p2",
             "date": "2026-11-23",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 19,
@@ -5199,7 +5429,8 @@
             "id": "task_2026-11-23_kanji_L19_p1",
             "date": "2026-11-23",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 19,
@@ -5223,7 +5454,8 @@
             "id": "task_2026-11-23_grammar_L19_p1",
             "date": "2026-11-23",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 19,
@@ -5242,9 +5474,11 @@
             "id": "task_2026-11-23_single_review_L19_p1",
             "date": "2026-11-23",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-24",
@@ -5276,7 +5510,8 @@
             "id": "task_2026-11-24_cumulative_review_L19_p1",
             "date": "2026-11-24",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 20,
@@ -5315,7 +5550,8 @@
             "id": "task_2026-11-24_vocabulary_L20_p1",
             "date": "2026-11-24",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 20,
@@ -5349,9 +5585,11 @@
             "id": "task_2026-11-24_vocabulary_L20_p2",
             "date": "2026-11-24",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-25",
@@ -5390,7 +5628,8 @@
             "id": "task_2026-11-25_kanji_L20_p1",
             "date": "2026-11-25",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 20,
@@ -5414,9 +5653,11 @@
             "id": "task_2026-11-25_grammar_L20_p1",
             "date": "2026-11-25",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-26",
@@ -5448,7 +5689,8 @@
             "id": "task_2026-11-26_single_review_L20_p1",
             "date": "2026-11-26",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 20,
@@ -5467,7 +5709,8 @@
             "id": "task_2026-11-26_cumulative_review_L20_p1",
             "date": "2026-11-26",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 21,
@@ -5506,9 +5749,11 @@
             "id": "task_2026-11-26_vocabulary_L21_p1",
             "date": "2026-11-26",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-27",
@@ -5560,7 +5805,8 @@
             "id": "task_2026-11-27_vocabulary_L21_p2",
             "date": "2026-11-27",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 21,
@@ -5585,9 +5831,11 @@
             "id": "task_2026-11-27_kanji_L21_p1",
             "date": "2026-11-27",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-28",
@@ -5624,7 +5872,8 @@
             "id": "task_2026-11-28_grammar_L21_p1",
             "date": "2026-11-28",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 21,
@@ -5643,7 +5892,8 @@
             "id": "task_2026-11-28_single_review_L21_p1",
             "date": "2026-11-28",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 21,
@@ -5662,7 +5912,8 @@
             "id": "task_2026-11-28_cumulative_review_L21_p1",
             "date": "2026-11-28",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 22,
@@ -5701,9 +5952,11 @@
             "id": "task_2026-11-28_vocabulary_L22_p1",
             "date": "2026-11-28",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-29",
@@ -5748,7 +6001,8 @@
             "id": "task_2026-11-29_vocabulary_L22_p2",
             "date": "2026-11-29",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 22,
@@ -5773,7 +6027,8 @@
             "id": "task_2026-11-29_kanji_L22_p1",
             "date": "2026-11-29",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 22,
@@ -5797,9 +6052,11 @@
             "id": "task_2026-11-29_grammar_L22_p1",
             "date": "2026-11-29",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-11-30",
@@ -5831,7 +6088,8 @@
             "id": "task_2026-11-30_single_review_L22_p1",
             "date": "2026-11-30",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 22,
@@ -5850,7 +6108,8 @@
             "id": "task_2026-11-30_cumulative_review_L22_p1",
             "date": "2026-11-30",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 23,
@@ -5889,9 +6148,11 @@
             "id": "task_2026-11-30_vocabulary_L23_p1",
             "date": "2026-11-30",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-01",
@@ -5936,7 +6197,8 @@
             "id": "task_2026-12-01_vocabulary_L23_p2",
             "date": "2026-12-01",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 23,
@@ -5961,7 +6223,8 @@
             "id": "task_2026-12-01_kanji_L23_p1",
             "date": "2026-12-01",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 23,
@@ -5986,9 +6249,11 @@
             "id": "task_2026-12-01_grammar_L23_p1",
             "date": "2026-12-01",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-02",
@@ -6020,7 +6285,8 @@
             "id": "task_2026-12-02_single_review_L23_p1",
             "date": "2026-12-02",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 23,
@@ -6039,7 +6305,8 @@
             "id": "task_2026-12-02_cumulative_review_L23_p1",
             "date": "2026-12-02",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 24,
@@ -6078,9 +6345,11 @@
             "id": "task_2026-12-02_vocabulary_L24_p1",
             "date": "2026-12-02",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-03",
@@ -6116,7 +6385,8 @@
             "id": "task_2026-12-03_vocabulary_L24_p2",
             "date": "2026-12-03",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 24,
@@ -6141,7 +6411,8 @@
             "id": "task_2026-12-03_kanji_L24_p1",
             "date": "2026-12-03",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 24,
@@ -6165,7 +6436,8 @@
             "id": "task_2026-12-03_grammar_L24_p1",
             "date": "2026-12-03",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 24,
@@ -6184,9 +6456,11 @@
             "id": "task_2026-12-03_single_review_L24_p1",
             "date": "2026-12-03",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-04",
@@ -6218,7 +6492,8 @@
             "id": "task_2026-12-04_cumulative_review_L24_p1",
             "date": "2026-12-04",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 25,
@@ -6257,7 +6532,8 @@
             "id": "task_2026-12-04_vocabulary_L25_p1",
             "date": "2026-12-04",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 25,
@@ -6282,9 +6558,11 @@
             "id": "task_2026-12-04_kanji_L25_p1",
             "date": "2026-12-04",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-05",
@@ -6322,7 +6600,8 @@
             "id": "task_2026-12-05_grammar_L25_p1",
             "date": "2026-12-05",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 25,
@@ -6341,7 +6620,8 @@
             "id": "task_2026-12-05_single_review_L25_p1",
             "date": "2026-12-05",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 25,
@@ -6360,9 +6640,11 @@
             "id": "task_2026-12-05_cumulative_review_L25_p1",
             "date": "2026-12-05",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-06",
@@ -6414,7 +6696,8 @@
             "id": "task_2026-12-06_vocabulary_L26_p1",
             "date": "2026-12-06",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 26,
@@ -6453,9 +6736,11 @@
             "id": "task_2026-12-06_vocabulary_L26_p2",
             "date": "2026-12-06",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-07",
@@ -6494,7 +6779,8 @@
             "id": "task_2026-12-07_vocabulary_L26_p3",
             "date": "2026-12-07",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 26,
@@ -6517,7 +6803,8 @@
             "id": "task_2026-12-07_kanji_L26_p1",
             "date": "2026-12-07",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 26,
@@ -6543,7 +6830,8 @@
             "id": "task_2026-12-07_grammar_L26_p1",
             "date": "2026-12-07",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 26,
@@ -6562,9 +6850,11 @@
             "id": "task_2026-12-07_single_review_L26_p1",
             "date": "2026-12-07",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-08",
@@ -6596,7 +6886,8 @@
             "id": "task_2026-12-08_cumulative_review_L26_p1",
             "date": "2026-12-08",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 27,
@@ -6635,9 +6926,11 @@
             "id": "task_2026-12-08_vocabulary_L27_p1",
             "date": "2026-12-08",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-09",
@@ -6689,7 +6982,8 @@
             "id": "task_2026-12-09_vocabulary_L27_p2",
             "date": "2026-12-09",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 27,
@@ -6723,7 +7017,8 @@
             "id": "task_2026-12-09_vocabulary_L27_p3",
             "date": "2026-12-09",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 27,
@@ -6746,9 +7041,11 @@
             "id": "task_2026-12-09_kanji_L27_p1",
             "date": "2026-12-09",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-10",
@@ -6787,7 +7084,8 @@
             "id": "task_2026-12-10_grammar_L27_p1",
             "date": "2026-12-10",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 27,
@@ -6806,7 +7104,8 @@
             "id": "task_2026-12-10_single_review_L27_p1",
             "date": "2026-12-10",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 27,
@@ -6825,9 +7124,11 @@
             "id": "task_2026-12-10_cumulative_review_L27_p1",
             "date": "2026-12-10",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-11",
@@ -6879,7 +7180,8 @@
             "id": "task_2026-12-11_vocabulary_L28_p1",
             "date": "2026-12-11",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 28,
@@ -6918,9 +7220,11 @@
             "id": "task_2026-12-11_vocabulary_L28_p2",
             "date": "2026-12-11",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-12",
@@ -6963,7 +7267,8 @@
             "id": "task_2026-12-12_vocabulary_L28_p3",
             "date": "2026-12-12",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 28,
@@ -6986,7 +7291,8 @@
             "id": "task_2026-12-12_kanji_L28_p1",
             "date": "2026-12-12",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 28,
@@ -7011,7 +7317,8 @@
             "id": "task_2026-12-12_grammar_L28_p1",
             "date": "2026-12-12",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 28,
@@ -7030,9 +7337,11 @@
             "id": "task_2026-12-12_single_review_L28_p1",
             "date": "2026-12-12",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-13",
@@ -7064,7 +7373,8 @@
             "id": "task_2026-12-13_cumulative_review_L28_p1",
             "date": "2026-12-13",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 29,
@@ -7103,9 +7413,11 @@
             "id": "task_2026-12-13_vocabulary_L29_p1",
             "date": "2026-12-13",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-14",
@@ -7157,7 +7469,8 @@
             "id": "task_2026-12-14_vocabulary_L29_p2",
             "date": "2026-12-14",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 29,
@@ -7187,7 +7500,8 @@
             "id": "task_2026-12-14_vocabulary_L29_p3",
             "date": "2026-12-14",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 29,
@@ -7210,9 +7524,11 @@
             "id": "task_2026-12-14_kanji_L29_p1",
             "date": "2026-12-14",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-15",
@@ -7250,7 +7566,8 @@
             "id": "task_2026-12-15_grammar_L29_p1",
             "date": "2026-12-15",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 29,
@@ -7269,7 +7586,8 @@
             "id": "task_2026-12-15_single_review_L29_p1",
             "date": "2026-12-15",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 29,
@@ -7288,7 +7606,8 @@
             "id": "task_2026-12-15_cumulative_review_L29_p1",
             "date": "2026-12-15",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 30,
@@ -7327,9 +7646,11 @@
             "id": "task_2026-12-15_vocabulary_L30_p1",
             "date": "2026-12-15",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-16",
@@ -7381,7 +7702,8 @@
             "id": "task_2026-12-16_vocabulary_L30_p2",
             "date": "2026-12-16",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 30,
@@ -7414,9 +7736,11 @@
             "id": "task_2026-12-16_vocabulary_L30_p3",
             "date": "2026-12-16",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-17",
@@ -7452,7 +7776,8 @@
             "id": "task_2026-12-17_kanji_L30_p1",
             "date": "2026-12-17",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 30,
@@ -7477,7 +7802,8 @@
             "id": "task_2026-12-17_grammar_L30_p1",
             "date": "2026-12-17",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 30,
@@ -7496,9 +7822,11 @@
             "id": "task_2026-12-17_single_review_L30_p1",
             "date": "2026-12-17",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-18",
@@ -7530,7 +7858,8 @@
             "id": "task_2026-12-18_cumulative_review_L30_p1",
             "date": "2026-12-18",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 31,
@@ -7569,7 +7898,8 @@
             "id": "task_2026-12-18_vocabulary_L31_p1",
             "date": "2026-12-18",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 31,
@@ -7608,9 +7938,11 @@
             "id": "task_2026-12-18_vocabulary_L31_p2",
             "date": "2026-12-18",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-19",
@@ -7647,7 +7979,8 @@
             "id": "task_2026-12-19_vocabulary_L31_p3",
             "date": "2026-12-19",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 31,
@@ -7670,7 +8003,8 @@
             "id": "task_2026-12-19_kanji_L31_p1",
             "date": "2026-12-19",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 31,
@@ -7695,9 +8029,11 @@
             "id": "task_2026-12-19_grammar_L31_p1",
             "date": "2026-12-19",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-20",
@@ -7729,7 +8065,8 @@
             "id": "task_2026-12-20_single_review_L31_p1",
             "date": "2026-12-20",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 31,
@@ -7748,7 +8085,8 @@
             "id": "task_2026-12-20_cumulative_review_L31_p1",
             "date": "2026-12-20",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 32,
@@ -7787,9 +8125,11 @@
             "id": "task_2026-12-20_vocabulary_L32_p1",
             "date": "2026-12-20",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-21",
@@ -7841,7 +8181,8 @@
             "id": "task_2026-12-21_vocabulary_L32_p2",
             "date": "2026-12-21",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 32,
@@ -7880,9 +8221,11 @@
             "id": "task_2026-12-21_vocabulary_L32_p3",
             "date": "2026-12-21",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-22",
@@ -7918,7 +8261,8 @@
             "id": "task_2026-12-22_kanji_L32_p1",
             "date": "2026-12-22",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 32,
@@ -7943,7 +8287,8 @@
             "id": "task_2026-12-22_grammar_L32_p1",
             "date": "2026-12-22",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 32,
@@ -7962,7 +8307,8 @@
             "id": "task_2026-12-22_single_review_L32_p1",
             "date": "2026-12-22",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 32,
@@ -7981,9 +8327,11 @@
             "id": "task_2026-12-22_cumulative_review_L32_p1",
             "date": "2026-12-22",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-23",
@@ -8035,7 +8383,8 @@
             "id": "task_2026-12-23_vocabulary_L33_p1",
             "date": "2026-12-23",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 33,
@@ -8074,9 +8423,11 @@
             "id": "task_2026-12-23_vocabulary_L33_p2",
             "date": "2026-12-23",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-24",
@@ -8123,7 +8474,8 @@
             "id": "task_2026-12-24_vocabulary_L33_p3",
             "date": "2026-12-24",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 33,
@@ -8146,7 +8498,8 @@
             "id": "task_2026-12-24_kanji_L33_p1",
             "date": "2026-12-24",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 33,
@@ -8171,9 +8524,11 @@
             "id": "task_2026-12-24_grammar_L33_p1",
             "date": "2026-12-24",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-25",
@@ -8205,7 +8560,8 @@
             "id": "task_2026-12-25_single_review_L33_p1",
             "date": "2026-12-25",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 33,
@@ -8224,7 +8580,8 @@
             "id": "task_2026-12-25_cumulative_review_L33_p1",
             "date": "2026-12-25",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 34,
@@ -8263,9 +8620,11 @@
             "id": "task_2026-12-25_vocabulary_L34_p1",
             "date": "2026-12-25",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-26",
@@ -8317,7 +8676,8 @@
             "id": "task_2026-12-26_vocabulary_L34_p2",
             "date": "2026-12-26",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 34,
@@ -8347,9 +8707,11 @@
             "id": "task_2026-12-26_vocabulary_L34_p3",
             "date": "2026-12-26",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-27",
@@ -8385,7 +8747,8 @@
             "id": "task_2026-12-27_kanji_L34_p1",
             "date": "2026-12-27",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 34,
@@ -8409,7 +8772,8 @@
             "id": "task_2026-12-27_grammar_L34_p1",
             "date": "2026-12-27",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 34,
@@ -8428,7 +8792,8 @@
             "id": "task_2026-12-27_single_review_L34_p1",
             "date": "2026-12-27",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 34,
@@ -8447,9 +8812,11 @@
             "id": "task_2026-12-27_cumulative_review_L34_p1",
             "date": "2026-12-27",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-28",
@@ -8501,7 +8868,8 @@
             "id": "task_2026-12-28_vocabulary_L35_p1",
             "date": "2026-12-28",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 35,
@@ -8540,9 +8908,11 @@
             "id": "task_2026-12-28_vocabulary_L35_p2",
             "date": "2026-12-28",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-29",
@@ -8580,7 +8950,8 @@
             "id": "task_2026-12-29_vocabulary_L35_p3",
             "date": "2026-12-29",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 35,
@@ -8603,7 +8974,8 @@
             "id": "task_2026-12-29_kanji_L35_p1",
             "date": "2026-12-29",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 35,
@@ -8628,7 +9000,8 @@
             "id": "task_2026-12-29_grammar_L35_p1",
             "date": "2026-12-29",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 35,
@@ -8647,7 +9020,8 @@
             "id": "task_2026-12-29_single_review_L35_p1",
             "date": "2026-12-29",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           },
           {
             "lesson": 35,
@@ -8666,9 +9040,11 @@
             "id": "task_2026-12-29_cumulative_review_L35_p1",
             "date": "2026-12-29",
             "due_time": "21:00",
-            "step": 5
+            "step": 5,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-30",
@@ -8720,7 +9096,8 @@
             "id": "task_2026-12-30_vocabulary_L36_p1",
             "date": "2026-12-30",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 36,
@@ -8759,9 +9136,11 @@
             "id": "task_2026-12-30_vocabulary_L36_p2",
             "date": "2026-12-30",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2026-12-31",
@@ -8802,7 +9181,8 @@
             "id": "task_2026-12-31_vocabulary_L36_p3",
             "date": "2026-12-31",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 36,
@@ -8825,7 +9205,8 @@
             "id": "task_2026-12-31_kanji_L36_p1",
             "date": "2026-12-31",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 36,
@@ -8850,9 +9231,11 @@
             "id": "task_2026-12-31_grammar_L36_p1",
             "date": "2026-12-31",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-01",
@@ -8884,7 +9267,8 @@
             "id": "task_2027-01-01_single_review_L36_p1",
             "date": "2027-01-01",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 36,
@@ -8903,7 +9287,8 @@
             "id": "task_2027-01-01_cumulative_review_L36_p1",
             "date": "2027-01-01",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 37,
@@ -8942,9 +9327,11 @@
             "id": "task_2027-01-01_vocabulary_L37_p1",
             "date": "2027-01-01",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-02",
@@ -8996,7 +9383,8 @@
             "id": "task_2027-01-02_vocabulary_L37_p2",
             "date": "2027-01-02",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 37,
@@ -9023,7 +9411,8 @@
             "id": "task_2027-01-02_vocabulary_L37_p3",
             "date": "2027-01-02",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 37,
@@ -9046,9 +9435,11 @@
             "id": "task_2027-01-02_kanji_L37_p1",
             "date": "2027-01-02",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-03",
@@ -9086,7 +9477,8 @@
             "id": "task_2027-01-03_grammar_L37_p1",
             "date": "2027-01-03",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 37,
@@ -9105,7 +9497,8 @@
             "id": "task_2027-01-03_single_review_L37_p1",
             "date": "2027-01-03",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 37,
@@ -9124,7 +9517,8 @@
             "id": "task_2027-01-03_cumulative_review_L37_p1",
             "date": "2027-01-03",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 38,
@@ -9163,9 +9557,11 @@
             "id": "task_2027-01-03_vocabulary_L38_p1",
             "date": "2027-01-03",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-04",
@@ -9214,7 +9610,8 @@
             "id": "task_2027-01-04_vocabulary_L38_p2",
             "date": "2027-01-04",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 38,
@@ -9237,9 +9634,11 @@
             "id": "task_2027-01-04_kanji_L38_p1",
             "date": "2027-01-04",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-05",
@@ -9277,7 +9676,8 @@
             "id": "task_2027-01-05_grammar_L38_p1",
             "date": "2027-01-05",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 38,
@@ -9296,7 +9696,8 @@
             "id": "task_2027-01-05_single_review_L38_p1",
             "date": "2027-01-05",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 38,
@@ -9315,7 +9716,8 @@
             "id": "task_2027-01-05_cumulative_review_L38_p1",
             "date": "2027-01-05",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 39,
@@ -9354,9 +9756,11 @@
             "id": "task_2027-01-05_vocabulary_L39_p1",
             "date": "2027-01-05",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-06",
@@ -9408,7 +9812,8 @@
             "id": "task_2027-01-06_vocabulary_L39_p2",
             "date": "2027-01-06",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 39,
@@ -9432,7 +9837,8 @@
             "id": "task_2027-01-06_vocabulary_L39_p3",
             "date": "2027-01-06",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 39,
@@ -9455,9 +9861,11 @@
             "id": "task_2027-01-06_kanji_L39_p1",
             "date": "2027-01-06",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-07",
@@ -9495,7 +9903,8 @@
             "id": "task_2027-01-07_grammar_L39_p1",
             "date": "2027-01-07",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 39,
@@ -9514,7 +9923,8 @@
             "id": "task_2027-01-07_single_review_L39_p1",
             "date": "2027-01-07",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 39,
@@ -9533,9 +9943,11 @@
             "id": "task_2027-01-07_cumulative_review_L39_p1",
             "date": "2027-01-07",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-08",
@@ -9587,7 +9999,8 @@
             "id": "task_2027-01-08_vocabulary_L40_p1",
             "date": "2027-01-08",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 40,
@@ -9626,9 +10039,11 @@
             "id": "task_2027-01-08_vocabulary_L40_p2",
             "date": "2027-01-08",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-09",
@@ -9678,7 +10093,8 @@
             "id": "task_2027-01-09_vocabulary_L40_p3",
             "date": "2027-01-09",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 40,
@@ -9701,7 +10117,8 @@
             "id": "task_2027-01-09_kanji_L40_p1",
             "date": "2027-01-09",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 40,
@@ -9726,9 +10143,11 @@
             "id": "task_2027-01-09_grammar_L40_p1",
             "date": "2027-01-09",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-10",
@@ -9760,7 +10179,8 @@
             "id": "task_2027-01-10_single_review_L40_p1",
             "date": "2027-01-10",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 40,
@@ -9779,7 +10199,8 @@
             "id": "task_2027-01-10_cumulative_review_L40_p1",
             "date": "2027-01-10",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 41,
@@ -9818,9 +10239,11 @@
             "id": "task_2027-01-10_vocabulary_L41_p1",
             "date": "2027-01-10",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-11",
@@ -9872,7 +10295,8 @@
             "id": "task_2027-01-11_vocabulary_L41_p2",
             "date": "2027-01-11",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 41,
@@ -9909,9 +10333,11 @@
             "id": "task_2027-01-11_vocabulary_L41_p3",
             "date": "2027-01-11",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-12",
@@ -9947,7 +10373,8 @@
             "id": "task_2027-01-12_kanji_L41_p1",
             "date": "2027-01-12",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 41,
@@ -9972,7 +10399,8 @@
             "id": "task_2027-01-12_grammar_L41_p1",
             "date": "2027-01-12",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 41,
@@ -9991,7 +10419,8 @@
             "id": "task_2027-01-12_single_review_L41_p1",
             "date": "2027-01-12",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 41,
@@ -10010,9 +10439,11 @@
             "id": "task_2027-01-12_cumulative_review_L41_p1",
             "date": "2027-01-12",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-13",
@@ -10064,7 +10495,8 @@
             "id": "task_2027-01-13_vocabulary_L42_p1",
             "date": "2027-01-13",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 42,
@@ -10103,9 +10535,11 @@
             "id": "task_2027-01-13_vocabulary_L42_p2",
             "date": "2027-01-13",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-14",
@@ -10151,7 +10585,8 @@
             "id": "task_2027-01-14_vocabulary_L42_p3",
             "date": "2027-01-14",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 42,
@@ -10174,7 +10609,8 @@
             "id": "task_2027-01-14_kanji_L42_p1",
             "date": "2027-01-14",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 42,
@@ -10199,9 +10635,11 @@
             "id": "task_2027-01-14_grammar_L42_p1",
             "date": "2027-01-14",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-15",
@@ -10233,7 +10671,8 @@
             "id": "task_2027-01-15_single_review_L42_p1",
             "date": "2027-01-15",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 42,
@@ -10252,7 +10691,8 @@
             "id": "task_2027-01-15_cumulative_review_L42_p1",
             "date": "2027-01-15",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 43,
@@ -10291,9 +10731,11 @@
             "id": "task_2027-01-15_vocabulary_L43_p1",
             "date": "2027-01-15",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-16",
@@ -10336,7 +10778,8 @@
             "id": "task_2027-01-16_vocabulary_L43_p2",
             "date": "2027-01-16",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 43,
@@ -10359,7 +10802,8 @@
             "id": "task_2027-01-16_kanji_L43_p1",
             "date": "2027-01-16",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 43,
@@ -10384,9 +10828,11 @@
             "id": "task_2027-01-16_grammar_L43_p1",
             "date": "2027-01-16",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-17",
@@ -10418,7 +10864,8 @@
             "id": "task_2027-01-17_single_review_L43_p1",
             "date": "2027-01-17",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 43,
@@ -10437,7 +10884,8 @@
             "id": "task_2027-01-17_cumulative_review_L43_p1",
             "date": "2027-01-17",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 44,
@@ -10476,9 +10924,11 @@
             "id": "task_2027-01-17_vocabulary_L44_p1",
             "date": "2027-01-17",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-18",
@@ -10530,7 +10980,8 @@
             "id": "task_2027-01-18_vocabulary_L44_p2",
             "date": "2027-01-18",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 44,
@@ -10556,7 +11007,8 @@
             "id": "task_2027-01-18_vocabulary_L44_p3",
             "date": "2027-01-18",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 44,
@@ -10579,9 +11031,11 @@
             "id": "task_2027-01-18_kanji_L44_p1",
             "date": "2027-01-18",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-19",
@@ -10619,7 +11073,8 @@
             "id": "task_2027-01-19_grammar_L44_p1",
             "date": "2027-01-19",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 44,
@@ -10638,7 +11093,8 @@
             "id": "task_2027-01-19_single_review_L44_p1",
             "date": "2027-01-19",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 44,
@@ -10657,7 +11113,8 @@
             "id": "task_2027-01-19_cumulative_review_L44_p1",
             "date": "2027-01-19",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 45,
@@ -10696,9 +11153,11 @@
             "id": "task_2027-01-19_vocabulary_L45_p1",
             "date": "2027-01-19",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-20",
@@ -10748,7 +11207,8 @@
             "id": "task_2027-01-20_vocabulary_L45_p2",
             "date": "2027-01-20",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 45,
@@ -10771,9 +11231,11 @@
             "id": "task_2027-01-20_kanji_L45_p1",
             "date": "2027-01-20",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-21",
@@ -10810,7 +11272,8 @@
             "id": "task_2027-01-21_grammar_L45_p1",
             "date": "2027-01-21",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 45,
@@ -10829,7 +11292,8 @@
             "id": "task_2027-01-21_single_review_L45_p1",
             "date": "2027-01-21",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 45,
@@ -10848,7 +11312,8 @@
             "id": "task_2027-01-21_cumulative_review_L45_p1",
             "date": "2027-01-21",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 46,
@@ -10887,9 +11352,11 @@
             "id": "task_2027-01-21_vocabulary_L46_p1",
             "date": "2027-01-21",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-22",
@@ -10940,7 +11407,8 @@
             "id": "task_2027-01-22_vocabulary_L46_p2",
             "date": "2027-01-22",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 46,
@@ -10963,7 +11431,8 @@
             "id": "task_2027-01-22_kanji_L46_p1",
             "date": "2027-01-22",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 46,
@@ -10987,9 +11456,11 @@
             "id": "task_2027-01-22_grammar_L46_p1",
             "date": "2027-01-22",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-23",
@@ -11021,7 +11492,8 @@
             "id": "task_2027-01-23_single_review_L46_p1",
             "date": "2027-01-23",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 46,
@@ -11040,7 +11512,8 @@
             "id": "task_2027-01-23_cumulative_review_L46_p1",
             "date": "2027-01-23",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 47,
@@ -11079,9 +11552,11 @@
             "id": "task_2027-01-23_vocabulary_L47_p1",
             "date": "2027-01-23",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-24",
@@ -11133,7 +11608,8 @@
             "id": "task_2027-01-24_vocabulary_L47_p2",
             "date": "2027-01-24",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 47,
@@ -11157,7 +11633,8 @@
             "id": "task_2027-01-24_vocabulary_L47_p3",
             "date": "2027-01-24",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 47,
@@ -11180,9 +11657,11 @@
             "id": "task_2027-01-24_kanji_L47_p1",
             "date": "2027-01-24",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-25",
@@ -11219,7 +11698,8 @@
             "id": "task_2027-01-25_grammar_L47_p1",
             "date": "2027-01-25",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 47,
@@ -11238,7 +11718,8 @@
             "id": "task_2027-01-25_single_review_L47_p1",
             "date": "2027-01-25",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 47,
@@ -11257,7 +11738,8 @@
             "id": "task_2027-01-25_cumulative_review_L47_p1",
             "date": "2027-01-25",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 48,
@@ -11296,9 +11778,11 @@
             "id": "task_2027-01-25_vocabulary_L48_p1",
             "date": "2027-01-25",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-26",
@@ -11345,7 +11829,8 @@
             "id": "task_2027-01-26_vocabulary_L48_p2",
             "date": "2027-01-26",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 48,
@@ -11368,7 +11853,8 @@
             "id": "task_2027-01-26_kanji_L48_p1",
             "date": "2027-01-26",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 48,
@@ -11393,9 +11879,11 @@
             "id": "task_2027-01-26_grammar_L48_p1",
             "date": "2027-01-26",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-27",
@@ -11427,7 +11915,8 @@
             "id": "task_2027-01-27_single_review_L48_p1",
             "date": "2027-01-27",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 48,
@@ -11446,7 +11935,8 @@
             "id": "task_2027-01-27_cumulative_review_L48_p1",
             "date": "2027-01-27",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 49,
@@ -11485,9 +11975,11 @@
             "id": "task_2027-01-27_vocabulary_L49_p1",
             "date": "2027-01-27",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-28",
@@ -11539,7 +12031,8 @@
             "id": "task_2027-01-28_vocabulary_L49_p2",
             "date": "2027-01-28",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 49,
@@ -11565,7 +12058,8 @@
             "id": "task_2027-01-28_vocabulary_L49_p3",
             "date": "2027-01-28",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 49,
@@ -11588,9 +12082,11 @@
             "id": "task_2027-01-28_kanji_L49_p1",
             "date": "2027-01-28",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-29",
@@ -11628,7 +12124,8 @@
             "id": "task_2027-01-29_grammar_L49_p1",
             "date": "2027-01-29",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 49,
@@ -11647,7 +12144,8 @@
             "id": "task_2027-01-29_single_review_L49_p1",
             "date": "2027-01-29",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 49,
@@ -11666,9 +12164,11 @@
             "id": "task_2027-01-29_cumulative_review_L49_p1",
             "date": "2027-01-29",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-30",
@@ -11720,7 +12220,8 @@
             "id": "task_2027-01-30_vocabulary_L50_p1",
             "date": "2027-01-30",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 50,
@@ -11759,9 +12260,11 @@
             "id": "task_2027-01-30_vocabulary_L50_p2",
             "date": "2027-01-30",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       },
       {
         "date": "2027-01-31",
@@ -11800,7 +12303,8 @@
             "id": "task_2027-01-31_vocabulary_L50_p3",
             "date": "2027-01-31",
             "due_time": "17:00",
-            "step": 1
+            "step": 1,
+            "progressPct": 0
           },
           {
             "lesson": 50,
@@ -11823,7 +12327,8 @@
             "id": "task_2027-01-31_kanji_L50_p1",
             "date": "2027-01-31",
             "due_time": "18:30",
-            "step": 2
+            "step": 2,
+            "progressPct": 0
           },
           {
             "lesson": 50,
@@ -11848,7 +12353,8 @@
             "id": "task_2027-01-31_grammar_L50_p1",
             "date": "2027-01-31",
             "due_time": "19:00",
-            "step": 3
+            "step": 3,
+            "progressPct": 0
           },
           {
             "lesson": 50,
@@ -11867,7 +12373,8 @@
             "id": "task_2027-01-31_single_review_L50_p1",
             "date": "2027-01-31",
             "due_time": "20:30",
-            "step": 4
+            "step": 4,
+            "progressPct": 0
           },
           {
             "lesson": 50,
@@ -11886,9 +12393,11 @@
             "id": "task_2027-01-31_cumulative_review_L50_p1",
             "date": "2027-01-31",
             "due_time": "21:00",
-            "step": 5
+            "step": 5,
+            "progressPct": 0
           }
-        ]
+        ],
+        "completionRate": 0
       }
     ],
     "isBalancedPacing": true,

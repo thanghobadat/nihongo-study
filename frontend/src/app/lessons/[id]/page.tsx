@@ -3539,6 +3539,23 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   };
 
+  const handleBatchVocabStatus = async (targetStatus: 'mastered' | 'not_learned') => {
+    if (!vocabItems || vocabItems.length === 0) return;
+    try {
+      const itemIds = vocabItems.map(v => v.id);
+      await api.post('/api/user/progress/batch', {
+        item_type: 'vocabulary',
+        item_ids: itemIds,
+        status: targetStatus
+      });
+      setVocabItems(prev => prev.map(item => ({ ...item, status: targetStatus })));
+      showNotification(targetStatus === 'mastered' ? '🎉 Đã đánh dấu thuộc toàn bộ từ vựng bài này!' : 'Đã đặt lại trạng thái từ vựng về chưa học.');
+    } catch (error) {
+      console.error('Failed to batch update vocab status:', error);
+      showNotification('Lỗi cập nhật trạng thái từ vựng.');
+    }
+  };
+
   const showNotification = (msg: string) => {
 
     setMessage(msg);
@@ -7226,6 +7243,25 @@ const renderInteractivePractice = () => {
                       Thuộc từ vựng giúp bạn tăng cường từ vựng và tự tin Kaiwa
 
                     </p>
+                    <div className="flex flex-wrap items-center gap-2 pt-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handleBatchVocabStatus('mastered')}
+                        className="px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-sm cursor-pointer active:scale-95 flex items-center gap-1"
+                        title="Đánh dấu đã thuộc tất cả từ vựng trong bài này"
+                      >
+                        <span>✓</span>
+                        <span>Đã thuộc tất cả ({vocabTotalCount})</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleBatchVocabStatus('not_learned')}
+                        className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all cursor-pointer active:scale-95"
+                        title="Đặt lại trạng thái chưa học cho tất cả từ vựng bài này"
+                      >
+                        <span>Đặt lại</span>
+                      </button>
+                    </div>
 
                   </div>
 

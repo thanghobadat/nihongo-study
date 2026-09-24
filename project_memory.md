@@ -1353,12 +1353,26 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Chạy script kiểm tra `audit_final_all_50_lessons.js` đạt 100% PASS (0 lỗi).
   - Next.js Turbopack build thành công 16/16 routes không phát sinh bất kỳ lỗi TypeScript nào.
 
+### Mốc 109: Kiến Trúc AI Study Planner Toàn Diện (Đã hoàn thành - 22/09/2026)
+- **Quy trình học dứt điểm tuần tự từng mảng**: Bắt buộc theo chuỗi Từ vựng (100%) -> Kanji (100%) -> Ngữ pháp (100%) -> Ôn tập bài -> Ôn tập tích lũy.
+- **Khóa cứng ngày kết thúc (Strict Keep End Date)**: Thuật toán Water-level Rebalancing không bao giờ dời `endDate`.
+- **Cơ chế Xử lý Nợ Bài Hôm Qua (`UnfinishedDebtModal`)**: Tự động cảnh báo nợ bài và cho phép replan.
 
-
-
-
-
-
-
-
-
+### Mốc 110: Kiến Trúc Database-First Cho AI Planner & Dashboard, Loại Trừ Triệt Để Mục Đã Học, API Batch Progress & Tự Động Push Notification Daemon 24/7 (Đã hoàn thành - 24/09/2026)
+- **Chuẩn hóa Database-First toàn diện (`progressService.js`)**:
+  - Trực tiếp truy vấn và upsert bảng `user_progress` trong Database Supabase PostgreSQL khi online.
+  - Tự động fallback đọc/ghi tệp `user_progress.json` trên ổ đĩa khi chạy local offline, khắc phục triệt để lỗi mất dữ liệu khi restart server.
+  - Bộ lọc đa trạng thái: Nhận diện cả `'mastered'` và `'learning'` để không bỏ sót các từ đang học.
+- **Loại trừ triệt để mục đã thuộc khi tạo hoặc tinh chỉnh kế hoạch**:
+  - `aiPlannerService.js` và `ai.js` đồng bộ trực tiếp từ Database trước khi sinh plan.
+  - Nếu đã học toàn bộ từ vựng Bài 1, số nhiệm vụ từ vựng Bài 1 sinh ra trong plan mới = 0.
+  - Phân bổ linh hoạt 100% theo đúng `endDate` người dùng đặt (ví dụ 129-130 ngày từ 25/09/2026 đến 31/01/2027), không bị reset về 30 ngày hay 120 ngày.
+- **Tự động đồng bộ Database khi hoàn thành Task trên Dashboard**:
+  - Khi hoàn thành task trong `POST /api/user/daily-tasks/schedule`, tự động bulk upsert toàn bộ `itemIds` với status `'mastered'` vào bảng `user_progress`.
+- **Bổ sung API Batch Progress & Nút thao tác nhanh trên UI**:
+  - API `POST /api/user/progress/batch` cập nhật hàng chục mục chỉ trong 1 request.
+  - Thêm 2 nút "✓ Đã thuộc tất cả" và "Đặt lại" ngay tại thẻ tiến độ từ vựng bài học (`page.tsx`).
+- **Sửa cạm bẫy định tuyến URL mạng nội bộ (`api.ts`)**:
+  - Nhận diện các IP mạng nội bộ (như `100.120.20.30`, `192.168.*`, `10.*`) để trỏ thẳng về backend `http://${host}:8080`, tránh bị chuyển hướng nhầm lên Render.
+- **Tiến trình gửi thông báo ngầm tự động 24/7 (`notificationSchedulerService.js`)**:
+  - Daemon quét mỗi 60 giây và tự động đẩy Web Push Notification về điện thoại mà không cần thao tác thủ công trên web.

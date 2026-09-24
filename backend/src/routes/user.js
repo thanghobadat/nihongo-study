@@ -7,6 +7,7 @@ const { requireAuth } = require('../middlewares/auth');
 const mockDb = require('../db/mockDb');
 const pushNotificationService = require('../services/pushNotificationService');
 const aiPlannerService = require('../services/aiPlannerService');
+const progressService = require('../services/progressService');
 
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
@@ -54,23 +55,7 @@ function getUserPlan(userId) {
  * Sync Supabase user_progress table into local auto-tracking cache for online users
  */
 async function syncUserProgressFromSupabase(userId) {
-  try {
-    if (!process.env.SUPABASE_URL || process.env.SUPABASE_URL.includes('placeholder')) {
-      return;
-    }
-    const { data, error } = await supabase
-      .from('user_progress')
-      .select('item_type, item_id, status')
-      .eq('user_id', userId);
-    if (data && Array.isArray(data)) {
-      if (!mockDb.userProgress) mockDb.userProgress = {};
-      for (const row of data) {
-        mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
-      }
-    }
-  } catch (err) {
-    console.warn('[AutoTracking] Supabase sync warning:', err.message);
-  }
+  return progressService.syncUserProgressFromSupabase(userId);
 }
 
 function getLocalDateStr(d = new Date()) {
@@ -768,6 +753,7 @@ router.post('/progress', async (req, res) => {
 
       const key = `${userId}:${item_type}:${item_id}`;
       mockDb.userProgress[key] = status;
+      progressService.savePersistentProgress(mockDb.userProgress);
       return res.json({
         message: 'Progress updated successfully (Mock Mode)',
         progress: {
@@ -820,14 +806,51 @@ router.post('/progress', async (req, res) => {
 
     if (error) throw error;
 
-    // Mirror to in-memory for instant auto-tracking reflection
+    // Mirror to in-memory for instant auto-tracking reflection and disk persistence
     if (!mockDb.userProgress) mockDb.userProgress = {};
     mockDb.userProgress[`${userId}:${item_type}:${item_id}`] = status;
+    progressService.savePersistentProgress(mockDb.userProgress);
 
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
     console.error('Error updating progress:', error);
     res.status(500).json({ error: error.message || error, details: error });
+  }
+});
+
+/**
+ * POST /api/user/progress/batch
+ * Batch update progress for multiple items (e.g. mark entire lesson mastered/not_learned)
+ */
+router.post('/progress/batch', async (req, res) => {
+  try {
+    const { item_type, item_ids, status } = req.body;
+
+    if (!item_type || !Array.isArray(item_ids) || item_ids.length === 0 || !status) {
+      return res.status(400).json({ error: 'item_type, item_ids (non-empty array), and status are required' });
+    }
+
+    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'cando', 'radical'].includes(item_type)) {
+      return res.status(400).json({ error: 'invalid item_type' });
+    }
+
+    if (!['not_learned', 'learning', 'mastered', 'wrong'].includes(status)) {
+      return res.status(400).json({ error: 'invalid status' });
+    }
+
+    const userId = req.user.id;
+    await progressService.setItemProgressBatch(userId, item_type, item_ids, status);
+
+    return res.json({
+      success: true,
+      message: `Cập nhật thành công ${item_ids.length} mục`,
+      count: item_ids.length,
+      item_type,
+      status
+    });
+  } catch (error) {
+    console.error('Error in batch progress update:', error);
+    res.status(500).json({ error: error.message || error });
   }
 });
 
@@ -2354,9 +2377,10 @@ function applyAutoTracking(plan, userId) {
  * GET /api/user/study-debt
  * Check yesterday's unfinished debt
  */
-router.get('/study-debt', (req, res) => {
+router.get('/study-debt', async (req, res) => {
   try {
     const userId = req.user.id;
+    await progressService.syncUserProgressFromSupabase(userId);
     let plan = getUserPlan(userId);
     if (plan) {
       plan = applyAutoTracking(plan, userId);
@@ -2533,6 +2557,13 @@ router.post('/daily-tasks/schedule', async (req, res) => {
               task.completed = completed;
               if (completed) {
                 task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+
+                // Synchronize task items into user_progress table and disk cache
+                if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
+                  progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered')
+                    .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
+                }
+
                 const dayTasks = day.tasks || [];
                 const completedCount = dayTasks.filter(t => t.completed).length;
                 const totalCount = dayTasks.length;
@@ -2943,6 +2974,7 @@ router.get('/study-overview', async (req, res) => {
 router.get('/daily-history', async (req, res) => {
   try {
     const userId = req.user.id;
+    await progressService.syncUserProgressFromSupabase(userId);
     let plan = getUserPlan(userId);
 
     // Only generate a default initial plan if user has NO plan at all (first-time visitor)

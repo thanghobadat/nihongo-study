@@ -1,4 +1,5 @@
 const { callGemini } = require('./aiGradingService');
+const progressService = require('./progressService');
 
 /**
  * Normalize any date string (ISO YYYY-MM-DD or Vietnamese DD/MM/YYYY or DD-MM-YYYY) to standard YYYY-MM-DD
@@ -307,31 +308,13 @@ function validateSequence(tasks) {
 }
 
 /**
- * Retrieve sets of mastered item IDs for a given user from mockDb or Supabase
+ * Retrieve sets of mastered item IDs for a given user from progressService
  */
 function getMasteredItemIds(userId) {
-  const masteredVocabIds = new Set();
-  const masteredKanjiIds = new Set();
-  const masteredGrammarIds = new Set();
-
   if (!userId) {
-    return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
+    return { masteredVocabIds: new Set(), masteredKanjiIds: new Set(), masteredGrammarIds: new Set() };
   }
-
-  const mockDb = require('../db/mockDb');
-  const userProgress = mockDb.userProgress || {};
-  Object.keys(userProgress).forEach(k => {
-    if (k.startsWith(`${userId}:`) && userProgress[k] === 'mastered') {
-      const parts = k.split(':');
-      const itemType = parts[1];
-      const itemId = parseInt(parts[2], 10);
-      if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
-      else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
-      else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
-    }
-  });
-
-  return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
+  return progressService.getMasteredItemIdsSync(userId);
 }
 
 /**
@@ -648,9 +631,11 @@ function generateAlgorithmicPlan({
 async function generateStudyPlan(params) {
   // Fresh plan generation strictly for all 50 lessons as required by Rule 7
   const startL = params.startLesson || 1;
+  const masteredItemIds = params.masteredItemIds || (params.userId ? await progressService.getMasteredItemIds(params.userId) : null);
 
   const basePlan = generateAlgorithmicPlan({
     ...params,
+    masteredItemIds,
     startLesson: Math.min(50, Math.max(1, startL)),
     targetLesson: params.targetLesson || 50
   });
@@ -787,7 +772,8 @@ function getCompletedLessons({ userId, currentPlan, currentProgress }) {
   if (userId) {
     try {
       const mockDb = require('../db/mockDb');
-      const userProgress = mockDb.userProgress || {};
+      const diskProgress = progressService.loadPersistentProgress();
+      const userProgress = { ...diskProgress, ...(mockDb.userProgress || {}) };
 
       for (let l = 1; l <= 50; l++) {
         const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === l);
@@ -901,6 +887,7 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   const remainingLessonsCount = Math.max(1, 50 - startLesson + 1);
 
   // 3. Generate refined algorithmic plan for the remaining lessons over the remaining days
+  const masteredItemIds = userId ? await progressService.getMasteredItemIds(userId) : null;
   const refinedPlan = generateAlgorithmicPlan({
     startDate: effectiveStartDate,
     endDate: targetEndDate,
@@ -909,7 +896,8 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
     targetLesson: 50,
     archivedPastDays,
     originalStartDate: currentPlan?.originalStartDate || currentPlan?.startDate || startDate || todayStr,
-    userId
+    userId,
+    masteredItemIds
   });
 
   // 4. Generate educational rationale and refinement note

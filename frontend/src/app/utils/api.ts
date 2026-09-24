@@ -3,12 +3,22 @@ export function getBaseUrl(): string {
   if (process.env.NEXT_PUBLIC_API_URL && !process.env.NEXT_PUBLIC_API_URL.includes('localhost')) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
-  // If running in browser and NOT on local machine (e.g. on Vercel or any online domain)
+  // If running in browser
   if (typeof window !== 'undefined') {
     const host = window.location.hostname;
-    if (host !== 'localhost' && host !== '127.0.0.1') {
-      return 'https://nihongo-flow-backend.onrender.com';
+    // Localhost, LAN IP (192.168.*, 10.*, 100.*, 172.*), or local domain
+    if (
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host.startsWith('192.168.') ||
+      host.startsWith('10.') ||
+      host.startsWith('100.') ||
+      /^172\.(1[6-9]|2\d|3[0-1])\./.test(host) ||
+      host.endsWith('.local')
+    ) {
+      return `http://${host}:8080`;
     }
+    return 'https://nihongo-flow-backend.onrender.com';
   }
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const aiQuotaService = require('../services/aiQuotaService');
 const aiGradingService = require('../services/aiGradingService');
+const progressService = require('../services/progressService');
 
 /**
  * Helper to get a stable user identifier (logged in user ID, or IP-based fallback)
@@ -363,6 +364,7 @@ router.post('/generate-study-plan', async (req, res) => {
     }
 
     const userId = getUserId(req);
+    await progressService.syncUserProgressFromSupabase(userId);
     const plan = await aiPlannerService.generateStudyPlan({
       startDate,
       endDate,
@@ -415,6 +417,7 @@ router.post('/refine-study-plan', async (req, res) => {
     }
 
     const userId = getUserId(req);
+    await progressService.syncUserProgressFromSupabase(userId);
     const updatedPlan = await aiPlannerService.refineStudyPlan({
       currentPlan,
       userComment,
