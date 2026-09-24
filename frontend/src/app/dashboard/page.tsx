@@ -162,7 +162,6 @@ export default function UserDashboard() {
         setStudyPlan(planRes.plan);
         if (planRes.plan.startDate) setStartDateStr(planRes.plan.startDate);
         if (planRes.plan.endDate) setEndDateStr(planRes.plan.endDate);
-        if (planRes.plan.refinementNote) setAiNote(planRes.plan.refinementNote);
       }
 
       if (historyRes && historyRes.success && Array.isArray(historyRes.history)) {
