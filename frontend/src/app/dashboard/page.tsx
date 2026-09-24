@@ -45,7 +45,6 @@ export default function UserDashboard() {
   // Collapsible Accordion States (Auxiliary sections default collapsed; Main sections always open)
   const [isTomorrowOpen, setIsTomorrowOpen] = useState<boolean>(false);
   const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(false);
-  const [isRefinementOpen, setIsRefinementOpen] = useState<boolean>(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState<boolean>(false);
   const [isPushSettingsOpen, setIsPushSettingsOpen] = useState<boolean>(false);
 
@@ -57,6 +56,7 @@ export default function UserDashboard() {
   // Rebatch Modal State
   const [isRebatchModalOpen, setIsRebatchModalOpen] = useState<boolean>(false);
   const [isRebatching, setIsRebatching] = useState<boolean>(false);
+  const [rebatchTargetDate, setRebatchTargetDate] = useState<string>('');
 
   // Fixed Timeline state
   const [startDateStr, setStartDateStr] = useState<string>(() => {
@@ -74,11 +74,8 @@ export default function UserDashboard() {
   const [studyOverview, setStudyOverview] = useState<any>(null);
   const [dailyHistory, setDailyHistory] = useState<DayHistoryItem[]>([]);
 
-  // AI Refinement State
-  const [refinementComment, setRefinementComment] = useState<string>('');
-  const [isRefining, setIsRefining] = useState<boolean>(false);
+  // Plan Generation State
   const [isGeneratingPlan, setIsGeneratingPlan] = useState<boolean>(false);
-  const [aiNote, setAiNote] = useState<string | null>(null);
 
   // Web Push State (iOS / Mobile)
   const [isPushSupported, setIsPushSupported] = useState<boolean>(false);
@@ -238,15 +235,16 @@ export default function UserDashboard() {
   };
 
   // Handle Rebatch Tasks for a day
-  const handleApplyRebatch = async (configs: RebatchConfig[]) => {
+  const handleApplyRebatch = async (configs: RebatchConfig[], targetDate?: string) => {
+    const dateToUse = targetDate || rebatchTargetDate || todayStr;
     try {
       setIsRebatching(true);
       const res: any = await api.post('/api/user/daily-tasks/rebatch', {
-        date: todayStr,
+        date: dateToUse,
         configs
       });
       if (res && res.success) {
-        showNotification('✨ Đã phân chia lại công việc hôm nay thành công!');
+        showNotification(`✨ Đã phân chia lại công việc ${dateToUse === todayStr ? 'hôm nay' : 'ngày mai'} thành công!`);
         setIsRebatchModalOpen(false);
         fetchDashboardData();
       } else {
@@ -290,48 +288,7 @@ export default function UserDashboard() {
     }
   };
 
-  // AI Refine Plan keeping endDate
-  const handleRefinePlan = async () => {
-    if (!refinementComment.trim()) {
-      showNotification('Vui lòng nhập mong muốn điều chỉnh để AI xử lý.');
-      return;
-    }
 
-    try {
-      setIsRefining(true);
-      const res = await api.post('/api/ai/refine-study-plan', {
-        currentPlan: studyPlan,
-        userComment: refinementComment,
-        startDate: startDateStr,
-        endDate: endDateStr,
-        targetLevel: 'All',
-        currentProgress: {
-          currentLesson: selectedLessonId
-        }
-      });
-
-      if (res && res.success && res.plan) {
-        setStudyPlan(res.plan);
-        if (res.plan.startDate) {
-          setStartDateStr(res.plan.startDate);
-        }
-        if (res.plan.endDate) {
-          setEndDateStr(res.plan.endDate);
-        }
-        setAiNote(res.plan.refinementNote || null);
-        await api.post('/api/user/study-plan', { plan: res.plan });
-        setRefinementComment('');
-        showNotification(res.plan.refinementNote ? `🎯 ${res.plan.refinementNote}` : '🎯 AI đã tinh chỉnh kế hoạch và bỏ qua các bài đã hoàn thành!');
-        fetchDashboardData();
-      } else {
-        showNotification(res?.error || 'Không thể tinh chỉnh kế hoạch lúc này.');
-      }
-    } catch (err: any) {
-      showNotification('Lỗi khi tinh chỉnh kế hoạch: ' + err.message);
-    } finally {
-      setIsRefining(false);
-    }
-  };
 
   // Update task due time
   const handleUpdateTaskDueTime = async (taskId: string, due_time: string, date?: string) => {
@@ -908,8 +865,9 @@ export default function UserDashboard() {
           )}
         </div>
 
-        {/* 2. OVERVIEW CARDS (ALWAYS OPEN - 2 CỘT CÂN ĐỐI) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* 2. OVERVIEW CARDS (ALWAYS OPEN) */}
+        <div className="grid grid-cols-1 gap-4">
+
           {/* Card 1: Đánh giá tốc độ & Tiến độ các mảng hôm nay */}
           <div className={`p-5 rounded-2xl border space-y-3 flex flex-col justify-between ${
             studyOverview?.pace?.status === 'completed'
@@ -1014,179 +972,17 @@ export default function UserDashboard() {
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed pt-2 border-t border-slate-800/80">
-              {studyOverview?.pace?.message || 'Tiến độ học tập ổn định theo đúng dự kiến.'}
-            </p>
-          </div>
-
-          {/* Card 3: Nội dung bài đang học (Detailed Lesson Content - Supports 1 or 2 Lessons) */}
-          <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-2.5 flex flex-col justify-between">
-            <div className="space-y-2">
-              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span className="text-sm">📖</span>
-                  <span>Nội dung bài đang học</span>
-                </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                  {lessonsToday.length > 1 ? `Hôm nay: 2 bài (Gối đầu)` : `Bài ${lessonsToday[0]?.lesson || selectedLessonId}`}
-                </span>
-              </div>
-
-              {lessonsToday.length <= 1 ? (
-                // Single Lesson View
-                (() => {
-                  const item = lessonsToday[0] || {
-                    lesson: selectedLessonId,
-                    vocabCount: 32,
-                    kanjiCount: 5,
-                    grammarCount: 4,
-                    vocabScope: 'Toàn bộ từ vựng',
-                    kanjiChars: '',
-                    grammarTitlesList: [],
-                    isPracticeDay: false
-                  };
-                  return (
-                    <div className="space-y-2 text-xs pt-0.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-extrabold text-white">Bài {item.lesson}</span>
-                        {item.isPracticeDay ? (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                            🛡️ Thực hành chuyên biệt
-                          </span>
-                        ) : (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                            🎯 Học tuần tự
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <div className={`p-2 rounded-xl flex items-start gap-2 border transition-all ${
-                          isVocabDone ? 'bg-emerald-950/40 border-emerald-500/50 shadow-sm shadow-emerald-500/10' : 'bg-slate-950/60 border-slate-800/80'
-                        }`}>
-                          <span className="text-cyan-400 text-xs mt-0.5">📚</span>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <div className="font-bold text-slate-200 text-xs">
-                                Từ vựng: <span className="text-cyan-400 font-extrabold">{item.vocabCount} từ</span>
-                              </div>
-                              {isVocabDone ? (
-                                <span className="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded border border-emerald-500/30">✓ Đã xong</span>
-                              ) : (
-                                <span className="text-[10px] text-slate-400">Chưa xong</span>
-                              )}
-                            </div>
-                            <div className="text-[11px] text-slate-400 truncate" title={item.vocabScope}>
-                              {item.firstVocab && item.lastVocab 
-                                ? `Từ #1: ${item.firstVocab} ➔ #${item.vocabCount}: ${item.lastVocab}`
-                                : item.vocabScope || 'Toàn bộ từ vựng bài'}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className={`p-2 rounded-xl flex items-start gap-2 border transition-all ${
-                          isKanjiDone ? 'bg-emerald-950/40 border-emerald-500/50 shadow-sm shadow-emerald-500/10' : 'bg-slate-950/60 border-slate-800/80'
-                        }`}>
-                          <span className="text-amber-400 text-xs mt-0.5">🉐</span>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <div className="font-bold text-slate-200 text-xs">
-                                Chữ Hán: <span className="text-amber-400 font-extrabold">{item.kanjiCount} chữ</span>
-                              </div>
-                              {isKanjiDone ? (
-                                <span className="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded border border-emerald-500/30">✓ Đã xong</span>
-                              ) : (
-                                <span className="text-[10px] text-slate-400">Chưa xong</span>
-                              )}
-                            </div>
-                            <div className="text-[11px] text-slate-400 truncate" title={item.kanjiChars || item.kanjiScope}>
-                              {item.kanjiChars ? `Ký tự: ${item.kanjiChars}` : item.kanjiScope || 'Toàn bộ chữ Hán bài'}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className={`p-2 rounded-xl flex items-start gap-2 border transition-all ${
-                          isGrammarDone ? 'bg-emerald-950/40 border-emerald-500/50 shadow-sm shadow-emerald-500/10' : 'bg-slate-950/60 border-slate-800/80'
-                        }`}>
-                          <span className="text-purple-400 text-xs mt-0.5">⛩️</span>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <div className="font-bold text-slate-200 text-xs">
-                                Ngữ pháp: <span className="text-purple-400 font-extrabold">{item.grammarCount} mẫu câu</span>
-                              </div>
-                              {isGrammarDone ? (
-                                <span className="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded border border-emerald-500/30">✓ Đã xong</span>
-                              ) : (
-                                <span className="text-[10px] text-slate-400">Chưa xong</span>
-                              )}
-                            </div>
-                            <div className="text-[11px] text-slate-400 truncate" title={item.grammarTitlesList?.join(' • ') || item.grammarScope}>
-                              {item.grammarTitlesList && item.grammarTitlesList.length > 0 
-                                ? item.grammarTitlesList.slice(0, 2).join(' • ') + (item.grammarTitlesList.length > 2 ? ` (+${item.grammarTitlesList.length - 2})` : '')
-                                : item.grammarScope || 'Toàn bộ mẫu ngữ pháp bài'}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })()
-              ) : (
-                // 2 Lessons View (Rollover Split Day)
-                <div className="space-y-2 pt-0.5 max-h-[195px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-700">
-                  {lessonsToday.map((item: any, idx: number) => {
-                    const lessonVocabDone = todayTasks.some((t: any) => t.lesson === item.lesson && t.itemType === 'vocabulary') && todayTasks.filter((t: any) => t.lesson === item.lesson && t.itemType === 'vocabulary').every((t: any) => t.completed);
-                    const lessonKanjiDone = todayTasks.some((t: any) => t.lesson === item.lesson && t.itemType === 'kanji') && todayTasks.filter((t: any) => t.lesson === item.lesson && t.itemType === 'kanji').every((t: any) => t.completed);
-                    const lessonGrammarDone = todayTasks.some((t: any) => t.lesson === item.lesson && t.itemType === 'grammar') && todayTasks.filter((t: any) => t.lesson === item.lesson && t.itemType === 'grammar').every((t: any) => t.completed);
-
-                    return (
-                      <div key={item.lesson || idx} className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                            <span className="text-indigo-400 font-black">#{idx + 1}</span> Bài {item.lesson}
-                          </span>
-                          {item.isPracticeDay ? (
-                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                              🛡️ Thực hành
-                            </span>
-                          ) : (
-                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                              🎯 Học mới
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-1.5 text-center">
-                          <div className={`p-1.5 rounded-lg border transition-all ${lessonVocabDone ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300' : 'bg-slate-900/90 border-slate-800'}`}>
-                            <span className="text-slate-400 block text-[9px]">{lessonVocabDone ? '✓ Từ vựng' : 'Từ vựng'}</span>
-                            <span className={`font-extrabold text-xs ${lessonVocabDone ? 'text-emerald-300' : 'text-cyan-400'}`}>{item.vocabCount}</span>
-                          </div>
-                          <div className={`p-1.5 rounded-lg border transition-all ${lessonKanjiDone ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300' : 'bg-slate-900/90 border-slate-800'}`}>
-                            <span className="text-slate-400 block text-[9px]">{lessonKanjiDone ? '✓ Kanji' : 'Kanji'}</span>
-                            <span className={`font-extrabold text-xs ${lessonKanjiDone ? 'text-emerald-300' : 'text-amber-400'}`}>{item.kanjiCount}</span>
-                          </div>
-                          <div className={`p-1.5 rounded-lg border transition-all ${lessonGrammarDone ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300' : 'bg-slate-900/90 border-slate-800'}`}>
-                            <span className="text-slate-400 block text-[9px]">{lessonGrammarDone ? '✓ Ngữ pháp' : 'Ngữ pháp'}</span>
-                            <span className={`font-extrabold text-xs ${lessonGrammarDone ? 'text-emerald-300' : 'text-purple-400'}`}>{item.grammarCount}</span>
-                          </div>
-                        </div>
-
-                        <div className="text-[10px] text-slate-400 truncate" title={item.kanjiChars || item.vocabScope}>
-                          {item.kanjiChars ? `Kanji: ${item.kanjiChars}` : item.vocabScope}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800/80">
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {studyOverview?.pace?.message || 'Tiến độ học tập ổn định theo đúng dự kiến.'}
+              </p>
+              <button
+                onClick={() => setIsVisualRoadmapOpen(true)}
+                className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors shrink-0 cursor-pointer text-right"
+              >
+                Xem sơ đồ & tiến độ tổng quan ➔
+              </button>
             </div>
-
-            <button
-              onClick={() => setIsVisualRoadmapOpen(true)}
-              className="w-full pt-1.5 text-[11px] font-semibold text-indigo-400 hover:text-indigo-300 transition-colors text-right block border-t border-slate-800/80 cursor-pointer"
-            >
-              Xem sơ đồ & tiến độ tổng quan ➔
-            </button>
           </div>
         </div>
 
@@ -1212,7 +1008,10 @@ export default function UserDashboard() {
             <div className="flex flex-wrap items-center gap-2 self-start sm:self-center">
               <button
                 type="button"
-                onClick={() => setIsRebatchModalOpen(true)}
+                onClick={() => {
+                  setRebatchTargetDate(todayStr);
+                  setIsRebatchModalOpen(true);
+                }}
                 className="px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-600/30 to-cyan-600/30 hover:from-indigo-600/50 hover:to-cyan-600/50 text-indigo-200 border border-indigo-500/40 hover:border-cyan-400 transition-all flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
                 title="Chủ động chia nhỏ hoặc gộp các phần học trong ngày (1 batch hoặc N batches)"
               >
@@ -1379,9 +1178,24 @@ export default function UserDashboard() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-300 bg-indigo-500/20 hover:bg-indigo-500/30 px-3 py-1.5 rounded-xl border border-indigo-500/30 transition-all">
-                  <span>{isTomorrowOpen ? 'Thu gọn' : 'Xổ ra xem chi tiết'}</span>
-                  <span>{isTomorrowOpen ? '▲' : '▼'}</span>
+                <div className="flex items-center gap-2 self-start sm:self-center">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setRebatchTargetDate(tomorrowDateStr);
+                      setIsRebatchModalOpen(true);
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-600/30 to-cyan-600/30 hover:from-indigo-600/50 hover:to-cyan-600/50 text-indigo-200 border border-indigo-500/40 hover:border-cyan-400 transition-all flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
+                    title="Chủ động chia nhỏ hoặc gộp các phần học cho ngày mai"
+                  >
+                    <span>⚡</span>
+                    <span>Tùy chỉnh chia Batch</span>
+                  </button>
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-300 bg-indigo-500/20 hover:bg-indigo-500/30 px-3 py-1.5 rounded-xl border border-indigo-500/30 transition-all">
+                    <span>{isTomorrowOpen ? 'Thu gọn' : 'Xổ ra xem chi tiết'}</span>
+                    <span>{isTomorrowOpen ? '▲' : '▼'}</span>
+                  </div>
                 </div>
               </button>
 
@@ -1450,9 +1264,27 @@ export default function UserDashboard() {
                             </div>
 
                             <div className="flex items-center gap-3 self-end sm:self-center">
-                              <div className="flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-xs text-amber-300 font-bold">
-                                <span className="text-slate-400 font-normal">⏰ Giờ dự kiến:</span>
-                                <span>{task.due_time || '10:00'}</span>
+                              <div
+                                onClick={(e) => {
+                                  const input = (e.currentTarget as HTMLElement).querySelector('input');
+                                  if (input) {
+                                    try { (input as any).showPicker?.(); } catch {}
+                                  }
+                                }}
+                                className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 transition-colors cursor-pointer"
+                                title="Click để chọn giờ hẹn deadline ngày mai"
+                              >
+                                <span className="text-xs text-slate-400 select-none">⏰ Hẹn xong:</span>
+                                <input
+                                  type="time"
+                                  value={task.due_time || '10:00'}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    try { (e.currentTarget as any).showPicker?.(); } catch {}
+                                  }}
+                                  onChange={(e) => handleUpdateTaskDueTime(task.id, e.target.value, tomorrowDateStr)}
+                                  className="bg-transparent text-xs font-bold text-amber-300 focus:outline-none cursor-pointer"
+                                />
                               </div>
 
                               <Link
@@ -1477,73 +1309,6 @@ export default function UserDashboard() {
           </div>
         </div>
 
-
-        {/* 4. COLLAPSIBLE: TINH CHỈNH KẾ HOẠCH VỚI AI */}
-        <div className="rounded-2xl border border-indigo-500/30 bg-slate-900/80 overflow-hidden transition-all shadow-xl">
-          <button
-            type="button"
-            onClick={() => setIsRefinementOpen(!isRefinementOpen)}
-            className="w-full p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left hover:bg-slate-800/40 transition-colors cursor-pointer"
-          >
-            <div className="flex items-center gap-3">
-              <span className="text-xl">✨</span>
-              <div>
-                <div className="text-sm font-bold text-white flex flex-wrap items-center gap-2">
-                  <span>Tinh Chỉnh Kế Hoạch Với AI (Giữ Chặt Deadline & Thứ Tự Tuần Tự)</span>
-                  <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                    🔒 Khóa Ngày Kết Thúc
-                  </span>
-                </div>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Tái phân bổ khi bận việc đột xuất, mệt, hoặc muốn dồn bài mà không làm thay đổi hạn chót ({endDateStr}).
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs font-semibold text-indigo-300 bg-indigo-500/15 hover:bg-indigo-500/25 px-3 py-1.5 rounded-xl border border-indigo-500/30 transition-all self-end sm:self-center">
-              <span>{isRefinementOpen ? 'Thu gọn' : 'Nhập yêu cầu điều chỉnh'}</span>
-              <span>{isRefinementOpen ? '▲' : '▼'}</span>
-            </div>
-          </button>
-
-          {isRefinementOpen && (
-            <div className="p-5 sm:p-6 border-t border-slate-800 bg-slate-950/60 space-y-3 animate-in fade-in duration-200">
-              <p className="text-xs text-slate-300">
-                Nếu bạn bận đột xuất, mệt, hoặc muốn dồn bài, hãy comment mong muốn. AI sẽ tự động tái phân bổ vào ngày đệm hoặc các ngày tới, đảm bảo giữ nguyên mốc ngày kết thúc ({endDateStr}) và giữ đúng thứ tự dứt điểm từng mảng.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
-                <input
-                  type="text"
-                  value={refinementComment}
-                  onChange={(e) => setRefinementComment(e.target.value)}
-                  placeholder="💬 Nhập lý do (vd: hôm nay bận giảm bài, muốn hoàn thành sớm 5 ngày...)"
-                  className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors"
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleRefinePlan();
-                  }}
-                />
-                <button
-                  onClick={handleRefinePlan}
-                  disabled={isRefining}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  {isRefining ? 'AI đang tính toán...' : 'Cập nhật kế hoạch ➔'}
-                </button>
-              </div>
-
-              {aiNote && (
-                <div className="p-3.5 rounded-xl bg-indigo-950/60 border border-indigo-500/40 text-xs text-indigo-200 flex items-start gap-2.5 mt-2">
-                  <span className="text-base">🤖</span>
-                  <div className="space-y-0.5">
-                    <span className="font-bold text-white block">Lời nhắn từ AI Cố Vấn:</span>
-                    <p className="leading-relaxed">{aiNote}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
 
         {/* 5. COLLAPSIBLE: BẢNG LỊCH SỬ TỪNG NGÀY */}
         <div className="rounded-2xl border border-slate-800 bg-slate-900/80 overflow-hidden transition-all shadow-xl">
@@ -1824,9 +1589,9 @@ export default function UserDashboard() {
       <RebatchTasksModal
         isOpen={isRebatchModalOpen}
         onClose={() => setIsRebatchModalOpen(false)}
-        date={todayStr}
-        dayTasks={todayTasks}
-        onApplyRebatch={handleApplyRebatch}
+        date={rebatchTargetDate || todayStr}
+        dayTasks={(rebatchTargetDate || todayStr) === todayStr ? todayTasks : tomorrowTasks}
+        onApplyRebatch={(configs) => handleApplyRebatch(configs, rebatchTargetDate || todayStr)}
         isRebatching={isRebatching}
       />
     </div>

@@ -28,6 +28,7 @@ import FillInBlanks from './components/FillInBlanks';
 
 import DialogueReading from './components/DialogueReading';
 import ReviewTab from './ReviewTab';
+import KanjiPracticeTab from './components/KanjiPracticeTab';
 
 // Defined types
 
@@ -854,6 +855,16 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const user = api.getUser();
 
   const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
+  const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>('vocab');
+
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat === 'kanji') {
+      setPracticeCategory('kanji');
+    } else if (cat === 'vocab') {
+      setPracticeCategory('vocab');
+    }
+  }, [searchParams]);
 
   // States cho Phân hệ Ôn tập Tổng hợp (Pha 2)
   const [reviewLoading, setReviewLoading] = useState<boolean>(false);
@@ -9282,9 +9293,21 @@ const renderInteractivePractice = () => {
 
                   </div>
 
-                  {/* Status filters */}
+                  {/* Action buttons & Status filters */}
+                  <div className="flex items-center gap-3 w-full xl:w-auto shrink-0 flex-wrap justify-between xl:justify-start">
+                    {/* Nút chuyển nhanh sang Luyện tập Kanji */}
+                    <button
+                      onClick={() => {
+                        setPracticeCategory('kanji');
+                        router.push(`/lessons/${selectedLessonId}?tab=practice&category=kanji`);
+                      }}
+                      className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white text-xs font-bold shadow-md shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer shrink-0"
+                    >
+                      <span>⚡ Luyện tập Kanji</span>
+                    </button>
 
-                  <div className="flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 w-full sm:w-auto shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
+                    {/* Status filters */}
+                    <div className="flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shrink-0 overflow-x-auto max-w-full justify-between sm:justify-start">
 
                     <button
 
@@ -9365,6 +9388,8 @@ const renderInteractivePractice = () => {
                       Đã thuộc ({kanjiItems.filter(v => v.status === 'mastered').length})
 
                     </button>
+
+                  </div>
 
                   </div>
 
@@ -9680,21 +9705,21 @@ const renderInteractivePractice = () => {
 
                                           {/* Onyomi & Kunyomi */}
 
-                                          <div className="grid grid-cols-2 gap-3 mt-3 border-t border-slate-200 dark:border-slate-800 pb-2.5 pt-2.5 text-[11px]">
+                                          <div className="grid grid-cols-2 gap-2 mt-3 border-t border-slate-200 dark:border-slate-800/80 pt-2.5 text-[11px]">
 
-                                            <div className="space-y-0.5">
+                                            <div className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 space-y-0.5">
 
-                                              <span className="block text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Onyomi</span>
+                                              <span className="block text-[8px] text-purple-600 dark:text-purple-400 font-extrabold uppercase tracking-wider">Onyomi (Âm Hán)</span>
 
-                                              <span className="font-semibold text-slate-400 dark:text-slate-500">{item.onyomi || '-'}</span>
+                                              <span className="font-bold text-purple-700 dark:text-purple-300 break-words">{item.onyomi || '-'}</span>
 
                                             </div>
 
-                                            <div className="space-y-0.5">
+                                            <div className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 space-y-0.5">
 
-                                              <span className="block text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Kunyomi</span>
+                                              <span className="block text-[8px] text-emerald-600 dark:text-emerald-400 font-extrabold uppercase tracking-wider">Kunyomi (Âm Thuần)</span>
 
-                                              <span className="font-semibold text-slate-355">{item.kunyomi || '-'}</span>
+                                              <span className="font-bold text-emerald-700 dark:text-emerald-300 break-words">{item.kunyomi || '-'}</span>
 
                                             </div>
 
@@ -10608,7 +10633,47 @@ const renderInteractivePractice = () => {
 
               ) : (
 
-                <>{renderInteractivePractice()}</>
+                <div className="space-y-6">
+
+                  {/* Segmented Control: Ôn Từ Vựng vs Ôn Chữ Hán */}
+                  <div className="flex bg-slate-200/70 dark:bg-slate-900/80 p-1.5 rounded-2xl max-w-md mx-auto border border-slate-200 dark:border-slate-800 shadow-inner">
+                    <button
+                      onClick={() => setPracticeCategory('vocab')}
+                      className={`flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                        practiceCategory === 'vocab'
+                          ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-md font-extrabold'
+                          : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                      }`}
+                    >
+                      <span>📚 Ôn Từ Vựng</span>
+                      <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700">({vocabItems.length})</span>
+                    </button>
+                    <button
+                      onClick={() => setPracticeCategory('kanji')}
+                      className={`flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                        practiceCategory === 'kanji'
+                          ? 'bg-gradient-to-r from-amber-500 to-indigo-600 text-white shadow-md font-extrabold'
+                          : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                      }`}
+                    >
+                      <span>🉐 Ôn Chữ Hán (Kanji)</span>
+                      <span className={`text-[11px] px-1.5 py-0.5 rounded-full ${practiceCategory === 'kanji' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-700'}`}>({kanjiItems.length})</span>
+                    </button>
+                  </div>
+
+                  {practiceCategory === 'vocab' ? (
+                    <>{renderInteractivePractice()}</>
+                  ) : (
+                    <KanjiPracticeTab
+                      kanjiItems={kanjiItems}
+                      selectedLessonId={selectedLessonId}
+                      lessonTitle={lessonTitle}
+                      onUpdateKanjiStatus={handleKanjiStatusChange}
+                      onBackToVocabPractice={() => setPracticeCategory('vocab')}
+                    />
+                  )}
+
+                </div>
 
               )
 
