@@ -367,6 +367,12 @@ function generateAlgorithmicPlan({
     const kanjiList = allKanji.filter(k => !masteredKanjiIds.has(k.id));
     const grammarList = allGrammar.filter(g => !masteredGrammarIds.has(g.id));
 
+    // If all theory items in this lesson are already mastered, skip this lesson completely
+    // (Do not generate redundant review tasks for an already completed lesson)
+    if (allVocab.length > 0 && vocabList.length === 0 && kanjiList.length === 0 && grammarList.length === 0) {
+      continue;
+    }
+
     // Vocab chunking based on totalDays (only for unmastered words):
     if (vocabList.length > 0) {
       const vChunkSize = totalDays > 60 ? 18 : totalDays > 35 ? 25 : 50;
@@ -630,8 +636,21 @@ function generateAlgorithmicPlan({
  */
 async function generateStudyPlan(params) {
   // Fresh plan generation strictly for all 50 lessons as required by Rule 7
-  const startL = params.startLesson || 1;
+  let startL = params.startLesson || 1;
   const masteredItemIds = params.masteredItemIds || (params.userId ? await progressService.getMasteredItemIds(params.userId) : null);
+
+  // If startLesson was not explicitly forced > 1, determine completed lessons from user progress
+  if (!params.startLesson || params.startLesson === 1) {
+    const completedLessons = getCompletedLessons({
+      userId: params.userId,
+      currentProgress: params.currentProgress,
+      masteredItemIds
+    });
+    if (completedLessons && completedLessons.length > 0) {
+      const maxCompleted = Math.max(...completedLessons);
+      startL = Math.max(startL, maxCompleted + 1);
+    }
+  }
 
   const basePlan = generateAlgorithmicPlan({
     ...params,
@@ -753,7 +772,7 @@ function getUnfinishedDebt({ userId, plan }) {
 /**
  * Detect completed lessons from userProgress in database and completed tasks in past days
  */
-function getCompletedLessons({ userId, currentPlan, currentProgress }) {
+function getCompletedLessons({ userId, currentPlan, currentProgress, masteredItemIds }) {
   const completed = new Set();
 
   // 1. From currentProgress if explicitly passed
@@ -768,8 +787,13 @@ function getCompletedLessons({ userId, currentPlan, currentProgress }) {
     }
   }
 
-  // 2. From actual userProgress in database
-  if (userId) {
+  // 2. From actual userProgress in database or masteredItemIds
+  const mastered = masteredItemIds || (userId ? progressService.getMasteredItemIdsSync(userId) : null);
+  const masteredVIds = mastered?.masteredVocabIds;
+  const masteredKIds = mastered?.masteredKanjiIds;
+  const masteredGIds = mastered?.masteredGrammarIds;
+
+  if (userId || mastered) {
     try {
       const mockDb = require('../db/mockDb');
       const diskProgress = progressService.loadPersistentProgress();
@@ -782,20 +806,28 @@ function getCompletedLessons({ userId, currentPlan, currentProgress }) {
 
         if (vocabList.length === 0 && kanjiList.length === 0 && grammarList.length === 0) continue;
 
-        const masteredV = vocabList.filter(v => {
-          const s = userProgress[`${userId}:vocabulary:${v.id}`];
-          return s === 'mastered' || s === 'learning';
-        }).length;
+        let masteredV = 0;
+        let masteredK = 0;
+        let masteredG = 0;
 
-        const masteredK = kanjiList.filter(k => {
-          const s = userProgress[`${userId}:kanji:${k.id}`];
-          return s === 'mastered' || s === 'learning';
-        }).length;
-
-        const masteredG = grammarList.filter(g => {
-          const s = userProgress[`${userId}:grammar:${g.id}`];
-          return s === 'mastered' || s === 'learning';
-        }).length;
+        if (masteredVIds) {
+          masteredV = vocabList.filter(v => masteredVIds.has(v.id)).length;
+          masteredK = kanjiList.filter(k => masteredKIds.has(k.id)).length;
+          masteredG = grammarList.filter(g => masteredGIds.has(g.id)).length;
+        } else if (userId) {
+          masteredV = vocabList.filter(v => {
+            const s = userProgress[`${userId}:vocabulary:${v.id}`];
+            return s === 'mastered' || s === 'learning';
+          }).length;
+          masteredK = kanjiList.filter(k => {
+            const s = userProgress[`${userId}:kanji:${k.id}`];
+            return s === 'mastered' || s === 'learning';
+          }).length;
+          masteredG = grammarList.filter(g => {
+            const s = userProgress[`${userId}:grammar:${g.id}`];
+            return s === 'mastered' || s === 'learning';
+          }).length;
+        }
 
         const vRate = vocabList.length > 0 ? masteredV / vocabList.length : 1;
         const kRate = kanjiList.length > 0 ? masteredK / kanjiList.length : 1;
@@ -853,7 +885,8 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   const targetEndDate = normalizeDateStr(endDate) || (currentPlan && normalizeDateStr(currentPlan.endDate));
 
   // 1. Determine completed lessons
-  const completedLessons = getCompletedLessons({ userId, currentPlan, currentProgress });
+  const masteredItemIds = userId ? await progressService.getMasteredItemIds(userId) : null;
+  const completedLessons = getCompletedLessons({ userId, currentPlan, currentProgress, masteredItemIds });
   const maxCompleted = completedLessons.length > 0 ? Math.max(...completedLessons) : 0;
 
   let startLesson = 1;
@@ -887,7 +920,6 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   const remainingLessonsCount = Math.max(1, 50 - startLesson + 1);
 
   // 3. Generate refined algorithmic plan for the remaining lessons over the remaining days
-  const masteredItemIds = userId ? await progressService.getMasteredItemIds(userId) : null;
   const refinedPlan = generateAlgorithmicPlan({
     startDate: effectiveStartDate,
     endDate: targetEndDate,

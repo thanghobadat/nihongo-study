@@ -1,23 +1,89 @@
 const express = require('express');
 const router = express.Router();
+const supabase = require('../db/supabase');
 const aiQuotaService = require('../services/aiQuotaService');
 const aiGradingService = require('../services/aiGradingService');
 const progressService = require('../services/progressService');
 
 /**
- * Helper to get a stable user identifier (logged in user ID, or IP-based fallback)
+ * Helper to get a stable user identifier synchronously
+ * Supports req.user.id, mock token, Supabase JWT payload decoding, and IP fallback
  */
 function getUserId(req) {
   if (req.user && req.user.id) {
     return req.user.id;
   }
   const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer mock-token-')) {
-    return authHeader.replace('Bearer mock-token-', '').replace('-admin', '');
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.substring(7).trim();
+    if (token.startsWith('mock-token-')) {
+      return token.replace('mock-token-', '').replace('-admin', '');
+    }
+    // Attempt decoding Supabase JWT payload directly
+    if (token.includes('.')) {
+      try {
+        const parts = token.split('.');
+        if (parts.length === 3) {
+          const payloadJson = Buffer.from(parts[1], 'base64').toString('utf8');
+          const payload = JSON.parse(payloadJson);
+          if (payload && payload.sub) {
+            return payload.sub;
+          }
+        }
+      } catch (err) {
+        // Fallback to IP below
+      }
+    }
   }
   // Fallback to client IP or demo_user
   const ip = req.ip || req.headers['x-forwarded-for'] || 'demo_user';
   return String(ip).replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 32) || 'demo_user';
+}
+
+/**
+ * Asynchronous helper to get authenticated user identifier
+ * Verifies Supabase JWT token via Supabase Auth when available, with fast payload fallback
+ */
+async function getUserIdAsync(req) {
+  if (req.user && req.user.id) {
+    return req.user.id;
+  }
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.substring(7).trim();
+    if (token.startsWith('mock-token-')) {
+      return token.replace('mock-token-', '').replace('-admin', '');
+    }
+
+    // Supabase JWT verification
+    if (token.includes('.')) {
+      try {
+        if (supabase && supabase.auth && typeof supabase.auth.getUser === 'function') {
+          const { data, error } = await supabase.auth.getUser(token);
+          if (!error && data?.user?.id) {
+            return data.user.id;
+          }
+        }
+      } catch (err) {
+        // Non-blocking, fallback to decoding JWT payload sub
+      }
+
+      try {
+        const parts = token.split('.');
+        if (parts.length === 3) {
+          const payloadJson = Buffer.from(parts[1], 'base64').toString('utf8');
+          const payload = JSON.parse(payloadJson);
+          if (payload && payload.sub) {
+            return payload.sub;
+          }
+        }
+      } catch (err) {
+        console.warn('[AI Route] Error decoding JWT token payload:', err.message);
+      }
+    }
+  }
+
+  return getUserId(req);
 }
 
 /**
@@ -363,7 +429,7 @@ router.post('/generate-study-plan', async (req, res) => {
       });
     }
 
-    const userId = getUserId(req);
+    const userId = await getUserIdAsync(req);
     await progressService.syncUserProgressFromSupabase(userId);
     const plan = await aiPlannerService.generateStudyPlan({
       startDate,
@@ -416,7 +482,7 @@ router.post('/refine-study-plan', async (req, res) => {
       });
     }
 
-    const userId = getUserId(req);
+    const userId = await getUserIdAsync(req);
     await progressService.syncUserProgressFromSupabase(userId);
     const updatedPlan = await aiPlannerService.refineStudyPlan({
       currentPlan,
