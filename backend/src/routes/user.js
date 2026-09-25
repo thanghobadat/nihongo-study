@@ -438,22 +438,19 @@ router.get('/course-summary', async (req, res) => {
  */
 router.get('/lessons', async (req, res) => {
   try {
-    const { course } = req.query; // 'minna', 'marugoto', hoặc undefined
+    const course = req.query.course || 'minna'; // Mặc định luôn là giáo trình chuẩn 'minna'
 
     // Return mock data for local testing
     if (req.user.isMock) {
-      let data = mockDb.lessons;
-      if (course) {
-        data = data.filter(l => (l.course || 'minna') === course);
-      }
+      let data = mockDb.lessons.filter(l => (l.course || 'minna') === course);
       return res.json(data);
     }
 
-    let query = supabase.from('lessons').select('*').order('id', { ascending: true });
-    if (course) {
-      query = query.eq('course', course);
-    }
-    const { data, error } = await query;
+    const { data, error } = await supabase
+      .from('lessons')
+      .select('*')
+      .eq('course', course)
+      .order('id', { ascending: true });
 
     if (error) throw error;
 
@@ -2324,7 +2321,9 @@ router.post('/review-sessions', async (req, res) => {
 });
 
 /**
- * Auto-tracking Helper: Scans database for mastered status and automatically marks tasks as completed
+ * Auto-tracking Helper: Scans database for mastered status and automatically marks tasks as completed.
+ * Uses Cumulative Lesson Pool tracking: Tasks are fulfilled based on the required learning volume of that lesson,
+ * ensuring users are credited for achieving their target count regardless of internal item order.
  */
 function applyAutoTracking(plan, userId) {
   if (!plan || !plan.days) return plan;
@@ -2332,41 +2331,71 @@ function applyAutoTracking(plan, userId) {
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
 
+  // 1. Cache learned items per (lesson, itemType)
+  const learnedPool = {};
+  const getLearnedInLesson = (lesson, itemType) => {
+    const key = `${lesson}:${itemType}`;
+    if (learnedPool[key] !== undefined) return learnedPool[key];
+
+    let items = [];
+    if (itemType === 'vocabulary') {
+      items = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
+    } else if (itemType === 'kanji') {
+      items = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
+    } else if (itemType === 'grammar') {
+      items = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
+    }
+
+    const learnedSet = new Set(
+      items.filter(it => {
+        const s = userProgress[`${userId}:${itemType}:${it.id}`];
+        return s === 'mastered' || s === 'learning';
+      }).map(it => it.id)
+    );
+
+    learnedPool[key] = {
+      total: learnedSet.size,
+      ids: learnedSet
+    };
+    return learnedPool[key];
+  };
+
+  // 2. Track allocated counts per (lesson, itemType) across chronological plan days
+  const allocatedPool = {};
+
   for (const day of plan.days) {
     if (!day.tasks) continue;
     let dayCompleted = 0;
 
     for (const task of day.tasks) {
       const lesson = task.lesson || 1;
+      const target = task.targetCount || 1;
       let count = 0;
 
-      if (task.itemType === 'vocabulary') {
-        const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
-        const targetItems = (task.itemIds && task.itemIds.length > 0)
-          ? vocabList.filter(v => task.itemIds.includes(v.id))
-          : vocabList;
-        count = targetItems.filter(v => {
-          const s = userProgress[`${userId}:vocabulary:${v.id}`];
-          return s === 'mastered' || s === 'learning';
-        }).length;
-      } else if (task.itemType === 'kanji') {
-        const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
-        const targetItems = (task.itemIds && task.itemIds.length > 0)
-          ? kanjiList.filter(k => task.itemIds.includes(k.id))
-          : kanjiList;
-        count = targetItems.filter(k => {
-          const s = userProgress[`${userId}:kanji:${k.id}`];
-          return s === 'mastered' || s === 'learning';
-        }).length;
-      } else if (task.itemType === 'grammar') {
-        const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
-        const targetItems = (task.itemIds && task.itemIds.length > 0)
-          ? grammarList.filter(g => task.itemIds.includes(g.id))
-          : grammarList;
-        count = targetItems.filter(g => {
-          const s = userProgress[`${userId}:grammar:${g.id}`];
-          return s === 'mastered' || s === 'learning';
-        }).length;
+      if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
+        const itemType = task.itemType;
+        const key = `${lesson}:${itemType}`;
+        if (allocatedPool[key] === undefined) allocatedPool[key] = 0;
+
+        const pool = getLearnedInLesson(lesson, itemType);
+
+        if (task.completed) {
+          count = target;
+          allocatedPool[key] += target;
+        } else {
+          // Calculate available quota from cumulative lesson pool
+          const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
+          const poolContribution = Math.min(target, availableFromPool);
+
+          // Calculate specific exact matches if task had designated itemIds
+          const exactMatchCount = (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0)
+            ? task.itemIds.filter(id => pool.ids.has(id)).length
+            : 0;
+
+          // Count takes whichever is higher: pool volume or exact matches (capped at target)
+          count = Math.min(target, Math.max(poolContribution, exactMatchCount));
+          allocatedPool[key] += count;
+        }
       } else if (task.itemType === 'single_review') {
         const key = `${userId}:review_session_lesson_${lesson}`;
         count = userReviewSessions[key] ? 1 : 0;
@@ -2376,7 +2405,6 @@ function applyAutoTracking(plan, userId) {
       }
 
       task.currentCount = count;
-      const target = task.targetCount || 1;
       task.progressPct = Math.min(100, Math.round((count / target) * 100));
 
       if (count >= target && target > 0) {

@@ -1449,4 +1449,36 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Next.js Turbopack build thành công 100% (16/16 routes, 0 lỗi TypeScript).
   - Cú pháp toàn bộ backend và các kịch bản kiểm thử push persistence, schedule update vượt qua 100%.
 
+### Mốc 114: Tinh Gọn Hệ Thống - Loại Bỏ Khóa Học Marugoto & Tab Cẩm Nang Học (Đã hoàn thành - 25/09/2026)
+- **Loại bỏ tab "Cẩm nang học" (`guide`)**:
+  - Gỡ bỏ mục "Cẩm nang học" khỏi danh sách sidebar trên toàn bộ 5 trang chính: [dashboard](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx), [roadmap](file:///d:/AI/japanese_learning/website/frontend/src/app/roadmap/page.tsx), [kana](file:///d:/AI/japanese_learning/website/frontend/src/app/kana/page.tsx), [knowledge](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx), [lessons/[id]](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx).
+  - Thay thế trang [guide/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/guide/page.tsx) bằng cơ chế tự động điều hướng an toàn ngay lập tức về `/dashboard`.
+- **Loại bỏ hoàn toàn khóa học Marugoto**:
+  - Xóa component và tệp `frontend/src/app/components/CourseSwitcher.tsx`.
+  - Gỡ bỏ import và component `CourseSwitcher` khỏi sidebar của `dashboard`, `roadmap`, `kana`, `lessons/[id]`.
+  - Cố định thương hiệu sidebar logo thành `Minna Nihongo` (hoặc `Nihongo Flow` trên dashboard), xóa các biểu thức điều kiện ternary `activeCourse === 'marugoto'`.
+  - Xóa bỏ toàn bộ phân nhánh logic `activeCourse` trên `roadmap`, `kana`, `lessons/[id]`, tập trung 100% vào giáo trình chuẩn Minna no Nihongo (Bài 1 - Bài 50).
+  - Tự động reset `activeCourse` trong `localStorage` về `'minna'` trên các trang nếu người dùng đã từng lưu trữ `'marugoto'`.
+  - Nếu người dùng truy cập ID bài học cũ của Marugoto (`selectedLessonId >= 101`), tự động điều hướng về `/lessons/1?tab=vocab`.
+- **Backend API**:
+  - Tại [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js) (`GET /api/user/lessons`), thiết lập mặc định `const course = req.query.course || 'minna'` và lọc `eq('course', course)` để luôn trả về các bài học Minna (Bài 1 - 50).
+- **Kiểm định & Biên dịch**:
+  - Cú pháp backend `node --check src/routes/user.js` đạt 100%.
+  - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
+
+### Mốc 115: Tinh Gọn Dashboard & Nâng Cấp Tự Động Ghi Nhận Hoàn Thành Theo Định Lượng Bài Học (Đã hoàn thành - 25/09/2026)
+- **Loại bỏ khối "Đánh giá tốc độ & Tiến độ hôm nay" trên Dashboard**:
+  - Xóa bỏ khối thẻ card `⚡ Đánh giá tốc độ & Tiến độ hôm nay` (khối OVERVIEW CARDS cũ) và các hàm tính toán `todayBreakdown` phụ trợ khỏi [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx).
+  - Tinh gọn giao diện Dashboard: người dùng sau khi xem/chỉnh Khung thời gian mục tiêu sẽ tiếp cận trực diện ngay vào **🎯 Nhiệm Vụ Hôm Nay**, mang lại trải nghiệm tinh giản, tập trung và tốc độ render nhanh hơn.
+- **Nâng cấp cơ chế Auto-tracking theo Hồ tích lũy bài học (Cumulative Lesson Pool Tracking)**:
+  - Nâng cấp hàm `applyAutoTracking` trong [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js): chuyển đổi triệt để từ kiểm tra cứng danh sách ID (`task.itemIds`) sang theo dõi định lượng tích lũy theo từng bài học (`(lesson, itemType)`).
+  - Khi một bài học được chia thành nhiều đợt (ví dụ: Bài 1 có 47 từ vựng, Ngày 1 học 36 từ, Ngày 2 học 11 từ), miễn là người dùng hoàn thành đủ 36 từ bất kỳ thuộc Bài 1, nhiệm vụ của Ngày 1 sẽ **tự động công nhận hoàn thành 100% (`✓ Tự động ghi nhận`)**, không bị loại trừ hay bắt buộc phải học đúng thứ tự danh sách ID ban đầu.
+  - Số lượng học vượt (ví dụ học 40 từ) tự động được chuyển tiếp sang chỉ tiêu nhiệm vụ ngày kế tiếp của bài đó.
+  - Áp dụng đồng bộ cho cả Từ vựng (Vocabulary), Chữ Hán (Kanji) và Ngữ pháp (Grammar).
+- **Kiểm định & Biên dịch**:
+  - Cú pháp backend `node --check src/routes/user.js` đạt 100% (0 lỗi).
+  - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
+
+
+
 

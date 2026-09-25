@@ -1513,7 +1513,6 @@ export default function KnowledgeHubPage() {
 
   // Sidebar Menu list (Minna Nihongo static menu)
   const menuItems = [
-    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
@@ -1566,9 +1565,7 @@ export default function KnowledgeHubPage() {
               key={item.id}
               onClick={() => {
                 setIsSidebarOpen(false);
-                if (item.id === 'guide') {
-                  router.push('/guide');
-                } else if (item.id === 'dashboard') {
+                if (item.id === 'dashboard') {
                   router.push('/dashboard');
                 } else if (item.id === 'roadmap') {
                   router.push('/roadmap');

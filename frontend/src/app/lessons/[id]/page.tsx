@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect, useCallback, use, useMemo, useRef } from 'react';
 
@@ -9,9 +9,6 @@ import { api } from '../../utils/api';
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/roadmapMapping';
 
 import { getKanjiForm } from '../../utils/kanjiFormLookup';
-
-import CourseSwitcher from '../../components/CourseSwitcher';
-
 import SidebarSettings from '../../components/SidebarSettings';
 
 import { getRadicalsString } from '../../utils/kanjiRadicals';
@@ -854,7 +851,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const grammarIndex = grammarIndexParam !== null ? parseInt(grammarIndexParam) : null;
   const user = api.getUser();
 
-  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>('vocab');
 
   useEffect(() => {
@@ -887,39 +883,25 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [reviewTTSPlaying, setReviewTTSPlaying] = useState<boolean>(false);
 
   useEffect(() => {
-    const isMarugoto = selectedLessonId >= 101;
-    setActiveCourse(isMarugoto ? 'marugoto' : 'minna');
-    localStorage.setItem('activeCourse', isMarugoto ? 'marugoto' : 'minna');
-  }, [selectedLessonId]);
+    if (typeof window !== 'undefined' && localStorage.getItem('activeCourse') === 'marugoto') {
+      localStorage.setItem('activeCourse', 'minna');
+    }
+    if (selectedLessonId >= 101) {
+      router.replace('/lessons/1?tab=vocab');
+    }
+  }, [selectedLessonId, router]);
 
-  // Navigation Items corresponding to the 9 Sheets / Areas
-  const isMarugoto = selectedLessonId >= 101;
-  const isEvenMarugoto = isMarugoto && selectedLessonId % 2 === 0;
+  // Navigation Items corresponding to the Minna Sheets / Areas
+  const isMarugoto = false;
+  const isEvenMarugoto = false;
 
   const menuItems = [
-    ...(isMarugoto ? [
-      { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
-      { name: 'Ngữ pháp', id: 'grammar', icon: '📖', active: currentTab === 'grammar' },
-      { name: 'Luyện tập 4 kỹ năng', id: 'practice', icon: '⚡', active: currentTab === 'practice' },
-      { name: 'Tổng hợp kiến thức', id: 'summary', icon: '📝', active: currentTab === 'summary' }
-    ] : [
-
-      { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
-
-      { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
-
-      { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: false },
-
-      { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
-
-      { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
-
-      { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
-
-      { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: currentTab === 'review' }
-
-    ])
-
+    { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
+    { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: false },
+    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
+    { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
+    { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
+    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: currentTab === 'review' }
   ];
 
   useEffect(() => {
@@ -6466,65 +6448,26 @@ const renderInteractivePractice = () => {
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
 
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-
-              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
-
+              Minna Nihongo
             </span>
 
             <button
-
               onClick={() => setIsSidebarOpen(false)}
-
               className="lg:hidden text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 text-xl p-1 font-bold cursor-pointer"
-
             >
-
               ✕
-
             </button>
-
           </div>
 
-          {/* Course Switcher */}
-
-          <CourseSwitcher
-
-            activeCourse={activeCourse}
-
-            onSwitch={(course) => {
-
-              localStorage.setItem('activeCourse', course);
-
-              const nextLessonId = course === 'minna' ? 1 : 101;
-
-              router.push(`/lessons/${nextLessonId}?tab=${currentTab}`);
-
-            }}
-
-          />
-
           {/* Navigation Menu */}
-
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-
             {menuItems.map((item) => (
-
               <button
-
                 key={item.id}
-
                 onClick={() => {
-
                   setIsSidebarOpen(false);
-
-                  if (item.id === 'guide') {
-
-                    router.push('/guide');
-
-                  } else if (item.id === 'dashboard') {
-
+                  if (item.id === 'dashboard') {
                     router.push('/dashboard');
-
                   } else if (item.id === 'roadmap') {
 
                     router.push('/roadmap');

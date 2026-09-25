@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '../utils/api';
-import CourseSwitcher from '../components/CourseSwitcher';
 import SidebarSettings from '../components/SidebarSettings';
 import DailyReportModal from '../components/DailyReportModal';
 import VisualRoadmapModal from '../components/VisualRoadmapModal';
@@ -30,7 +29,6 @@ export default function UserDashboard() {
 
   // Navigation & Level State
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
-  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isDailyReportOpen, setIsDailyReportOpen] = useState<boolean>(false);
@@ -146,6 +144,10 @@ export default function UserDashboard() {
       }).catch((err) => {
         console.warn('SW auto-registration error:', err);
       });
+    }
+
+    if (typeof window !== 'undefined' && localStorage.getItem('activeCourse') === 'marugoto') {
+      localStorage.setItem('activeCourse', 'minna');
     }
   }, []);
 
@@ -531,107 +533,6 @@ export default function UserDashboard() {
   const isKanjiDone = todayTasks.some((t: any) => t.itemType === 'kanji') && todayTasks.filter((t: any) => t.itemType === 'kanji').every((t: any) => t.completed);
   const isGrammarDone = todayTasks.some((t: any) => t.itemType === 'grammar') && todayTasks.filter((t: any) => t.itemType === 'grammar').every((t: any) => t.completed);
 
-  // Dynamic breakdown of today's active tasks (vocabulary, kanji, grammar, review)
-  const todayBreakdown = (() => {
-    const list: Array<{
-      key: string;
-      name: string;
-      icon: string;
-      current: number;
-      target: number;
-      remaining: number;
-      unit: string;
-    }> = [];
-
-    // 1. Vocabulary
-    const vocabTasks = todayTasks.filter((t: any) => (t.itemType || t.type) === 'vocabulary');
-    if (vocabTasks.length > 0) {
-      const current = vocabTasks.reduce((sum: number, t: any) => sum + (t.currentCount || 0), 0);
-      const target = vocabTasks.reduce((sum: number, t: any) => sum + (t.targetCount || 1), 0);
-      list.push({
-        key: 'vocabulary',
-        name: 'Từ vựng',
-        icon: '📚',
-        current,
-        target,
-        remaining: Math.max(0, target - current),
-        unit: 'từ'
-      });
-    }
-
-    // 2. Kanji
-    const kanjiTasks = todayTasks.filter((t: any) => (t.itemType || t.type) === 'kanji');
-    if (kanjiTasks.length > 0) {
-      const current = kanjiTasks.reduce((sum: number, t: any) => sum + (t.currentCount || 0), 0);
-      const target = kanjiTasks.reduce((sum: number, t: any) => sum + (t.targetCount || 1), 0);
-      list.push({
-        key: 'kanji',
-        name: 'Chữ Hán (Kanji)',
-        icon: '🉐',
-        current,
-        target,
-        remaining: Math.max(0, target - current),
-        unit: 'chữ'
-      });
-    }
-
-    // 3. Grammar
-    const grammarTasks = todayTasks.filter((t: any) => (t.itemType || t.type) === 'grammar');
-    if (grammarTasks.length > 0) {
-      const current = grammarTasks.reduce((sum: number, t: any) => sum + (t.currentCount || 0), 0);
-      const target = grammarTasks.reduce((sum: number, t: any) => sum + (t.targetCount || 1), 0);
-      list.push({
-        key: 'grammar',
-        name: 'Ngữ pháp',
-        icon: '⛩️',
-        current,
-        target,
-        remaining: Math.max(0, target - current),
-        unit: 'mẫu câu'
-      });
-    }
-
-    // 4. Single Review (Thực hành bài)
-    const singleReviewTasks = todayTasks.filter((t: any) => (t.itemType || t.type) === 'single_review');
-    if (singleReviewTasks.length > 0) {
-      const current = singleReviewTasks.reduce((sum: number, t: any) => sum + (t.currentCount || (t.completed ? 1 : 0)), 0);
-      const target = singleReviewTasks.length;
-      list.push({
-        key: 'single_review',
-        name: 'Thực hành bài',
-        icon: '🛡️',
-        current,
-        target,
-        remaining: Math.max(0, target - current),
-        unit: 'bài'
-      });
-    }
-
-    // 5. Cumulative Review (Ôn tích lũy)
-    const cumulativeReviewTasks = todayTasks.filter((t: any) => (t.itemType || t.type) === 'cumulative_review');
-    if (cumulativeReviewTasks.length > 0) {
-      const current = cumulativeReviewTasks.reduce((sum: number, t: any) => sum + (t.currentCount || (t.completed ? 1 : 0)), 0);
-      const target = cumulativeReviewTasks.length;
-      list.push({
-        key: 'cumulative_review',
-        name: 'Ôn tích lũy',
-        icon: '🔄',
-        current,
-        target,
-        remaining: Math.max(0, target - current),
-        unit: 'bài'
-      });
-    }
-
-    return list;
-  })();
-
-  const todayRemainingTotal = todayBreakdown.reduce((sum, item) => sum + item.remaining, 0);
-  const todayTargetTotal = todayBreakdown.reduce((sum, item) => sum + item.target, 0);
-  const todayCurrentTotal = todayBreakdown.reduce((sum, item) => sum + item.current, 0);
-  const todayPercentage = todayTargetTotal > 0 ? Math.round((todayCurrentTotal / todayTargetTotal) * 100) : 0;
-  const todayUnitLabel = todayBreakdown.length === 1 ? todayBreakdown[0].unit : 'mục';
-
   // Countdown calculations
   const calculateDaysRemaining = () => {
     const targetEnd = studyPlan?.endDate || endDateStr;
@@ -677,7 +578,6 @@ export default function UserDashboard() {
   };
 
   const menuItems = [
-    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: true },
     { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: false },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
@@ -713,7 +613,7 @@ export default function UserDashboard() {
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Nihongo Flow'}
+              Nihongo Flow
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -723,23 +623,13 @@ export default function UserDashboard() {
             </button>
           </div>
 
-          <CourseSwitcher
-            activeCourse={activeCourse}
-            onSwitch={(course) => {
-              setActiveCourse(course);
-              localStorage.setItem('activeCourse', course);
-              setSelectedLessonId(course === 'minna' ? 1 : 101);
-            }}
-          />
-
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none scrollbar-thin scrollbar-thumb-slate-800">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id === 'guide') router.push('/guide');
-                  else if (item.id === 'roadmap') router.push('/roadmap');
+                  if (item.id === 'roadmap') router.push('/roadmap');
                   else if (item.id !== 'dashboard') router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
                 }}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
@@ -892,127 +782,6 @@ export default function UserDashboard() {
               )}
             </div>
           )}
-        </div>
-
-        {/* 2. OVERVIEW CARDS (ALWAYS OPEN) */}
-        <div className="grid grid-cols-1 gap-4">
-
-          {/* Card 1: Đánh giá tốc độ & Tiến độ các mảng hôm nay */}
-          <div className={`p-5 rounded-2xl border space-y-3 flex flex-col justify-between ${
-            studyOverview?.pace?.status === 'completed'
-              ? 'bg-gradient-to-br from-emerald-950/50 via-slate-900 to-indigo-950/40 border-emerald-400/50 shadow-lg shadow-emerald-500/10'
-              : studyOverview?.pace?.status === 'ahead'
-              ? 'bg-gradient-to-br from-emerald-950/30 to-slate-900 border-emerald-500/40'
-              : studyOverview?.pace?.status === 'behind'
-              ? 'bg-gradient-to-br from-amber-950/30 to-slate-900 border-amber-500/40'
-              : 'bg-slate-900/90 border-slate-800'
-          }`}>
-            <div className="space-y-2.5">
-              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span>⚡</span>
-                  <span>Đánh giá tốc độ & Tiến độ hôm nay</span>
-                </span>
-                <span className="text-xs">
-                  {studyOverview?.pace?.status === 'completed' ? '🏆' : studyOverview?.pace?.status === 'ahead' ? '🚀' : studyOverview?.pace?.status === 'behind' ? '⚠️' : '⚡'}
-                </span>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                  {studyOverview?.pace?.label || 'Đang bám sát kế hoạch 🟢'}
-                </div>
-                <div className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-slate-300">
-                  Tiến độ hôm nay: <strong className="text-cyan-400">{todayCurrentTotal}</strong> / {todayTargetTotal} {todayUnitLabel} ({todayPercentage}%)
-                </div>
-              </div>
-
-              {/* Dynamic Active Breakdown: Từ vựng xx/xx, Kanji yy/yy, Ngữ pháp aa/bb (Chỉ hiển thị mảng có học hôm nay) */}
-              <div className="space-y-2 pt-1">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-indigo-300 flex items-center gap-1.5">
-                    <span>🎯</span>
-                    <span>Mục tiêu cần hoàn thành hôm nay:</span>
-                  </span>
-                  {todayRemainingTotal > 0 ? (
-                    <span className="text-[11px] font-bold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/30">
-                      Còn lại: {todayRemainingTotal} mục
-                    </span>
-                  ) : (
-                    <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                      ✓ Đã xong toàn bộ mục tiêu hôm nay
-                    </span>
-                  )}
-                </div>
-
-                {todayBreakdown.length > 0 ? (
-                  <div className={`grid gap-2 ${todayBreakdown.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}>
-                    {todayBreakdown.map((item) => {
-                      const isFinished = item.current >= item.target;
-                      return (
-                        <div
-                          key={item.key}
-                          className={`p-2.5 rounded-xl border transition-all space-y-1.5 ${
-                            isFinished
-                              ? 'bg-emerald-950/40 border-emerald-500/50 shadow-sm shadow-emerald-500/10'
-                              : 'bg-slate-950/70 border-slate-800'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="font-bold text-slate-200 flex items-center gap-1.5">
-                              <span>{item.icon}</span>
-                              <span>{item.name}:</span>
-                            </span>
-                            <span className={`font-black ${isFinished ? 'text-emerald-300' : 'text-cyan-300'}`}>
-                              {item.current} / {item.target} {item.unit}
-                            </span>
-                          </div>
-
-                          <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className={`h-full rounded-full transition-all duration-300 ${
-                                isFinished ? 'bg-emerald-400' : 'bg-cyan-400'
-                              }`}
-                              style={{ width: `${Math.min(100, item.target > 0 ? Math.round((item.current / item.target) * 100) : 0)}%` }}
-                            ></div>
-                          </div>
-
-                          <div className="flex items-center justify-between text-[11px]">
-                            <span className="text-slate-400">
-                              {isFinished ? (
-                                <span className="text-emerald-400 font-bold">✓ Đã hoàn thành</span>
-                              ) : (
-                                <span>Chưa xong: <strong className="text-amber-300 font-bold">còn {item.remaining} {item.unit}</strong></span>
-                              )}
-                            </span>
-                            <span className={`${isFinished ? 'text-emerald-300 font-bold' : 'text-slate-400 font-medium'}`}>
-                              {item.target > 0 ? Math.round((item.current / item.target) * 100) : 0}%
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800 text-xs text-slate-400 text-center">
-                    Hôm nay chưa có bài tập cụ thể. Hãy bấm "Chỉnh sửa / Tạo lại plan" để AI phân bổ nhé!
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800/80">
-              <p className="text-xs text-slate-300 leading-relaxed">
-                {studyOverview?.pace?.message || 'Tiến độ học tập ổn định theo đúng dự kiến.'}
-              </p>
-              <button
-                onClick={() => setIsVisualRoadmapOpen(true)}
-                className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors shrink-0 cursor-pointer text-right"
-              >
-                Xem sơ đồ & tiến độ tổng quan ➔
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* 2. TODAY'S MISSIONS (ALWAYS OPEN - LUÔN MỞ) */}

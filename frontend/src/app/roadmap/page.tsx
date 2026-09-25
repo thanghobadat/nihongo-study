@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
-import CourseSwitcher from '../components/CourseSwitcher';
 import SidebarSettings from '../components/SidebarSettings';
 
 interface Lesson {
@@ -30,7 +29,6 @@ export default function RoadmapPage() {
 
   // UI States
   const [level, setLevel] = useState<'N5' | 'N4'>('N5');
-  const [activeCourse, setActiveCourse] = useState<'minna' | 'marugoto'>('minna');
   const [selectedLessonId, setSelectedLessonId] = useState<number>(1);
   const [isLoadedFromLocalStorage, setIsLoadedFromLocalStorage] = useState<boolean>(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -107,23 +105,23 @@ export default function RoadmapPage() {
     }
   };
 
-  // Load selectedLessonId and activeCourse from localStorage on mount
+  // Load selectedLessonId from localStorage on mount and reset activeCourse if marugoto
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const storedCourse = localStorage.getItem('activeCourse') as 'minna' | 'marugoto';
-      if (storedCourse) {
-        setActiveCourse(storedCourse);
+      if (localStorage.getItem('activeCourse') === 'marugoto') {
+        localStorage.setItem('activeCourse', 'minna');
       }
 
       const stored = localStorage.getItem('selectedLessonId');
       if (stored) {
         const parsed = parseInt(stored);
-        if (!isNaN(parsed)) {
+        if (!isNaN(parsed) && parsed <= 50) {
           setSelectedLessonId(parsed);
           setLevel(parsed >= 26 ? 'N4' : 'N5');
+        } else {
+          setSelectedLessonId(1);
+          setLevel('N5');
         }
-      } else if (storedCourse === 'marugoto') {
-        setSelectedLessonId(101);
       }
       setIsLoadedFromLocalStorage(true);
     }
@@ -140,7 +138,7 @@ export default function RoadmapPage() {
   useEffect(() => {
     async function loadLessons() {
       try {
-        const lessonData = await api.get(`/api/user/lessons?course=${activeCourse}`);
+        const lessonData = await api.get('/api/user/lessons?course=minna');
         if (Array.isArray(lessonData)) {
           setLessons(lessonData);
         }
@@ -151,7 +149,7 @@ export default function RoadmapPage() {
     if (isLoadedFromLocalStorage) {
       loadLessons();
     }
-  }, [activeCourse, isLoadedFromLocalStorage]);
+  }, [isLoadedFromLocalStorage]);
 
   // Fetch data for active lesson
   const loadLessonData = useCallback(async () => {
@@ -178,13 +176,7 @@ export default function RoadmapPage() {
 
 
 
-  const menuItems = activeCourse === 'marugoto' ? [
-    { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
-    { name: 'Ngữ pháp', id: 'grammar', icon: '📖', active: false },
-    { name: 'Luyện tập 4 kỹ năng', id: 'practice', icon: '⚡', active: false },
-    { name: 'Tổng hợp kiến thức', id: 'summary', icon: '📝', active: false }
-  ] : [
-    { name: 'Cẩm nang học', id: 'guide', icon: '📖', active: false },
+  const menuItems = [
     { name: 'Tiến độ học', id: 'dashboard', icon: '📊', active: false },
     { name: 'Ngữ pháp', id: 'roadmap', icon: '🗺️', active: true },
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
@@ -194,7 +186,6 @@ export default function RoadmapPage() {
   ];
 
   const filteredLessons = lessons.filter(l => {
-    if (activeCourse === 'marugoto') return true;
     if (level === 'N5') return l.id >= 1 && l.id <= 25;
     return l.id >= 26 && l.id <= 50;
   });
@@ -227,7 +218,7 @@ export default function RoadmapPage() {
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           <div className="flex items-center justify-between mb-8 px-2 shrink-0">
             <span className="text-2xl font-black bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              {activeCourse === 'marugoto' ? 'Marugoto A1' : 'Minna Nihongo'}
+              Minna Nihongo
             </span>
             <button
               onClick={() => setIsSidebarOpen(false)}
@@ -237,25 +228,13 @@ export default function RoadmapPage() {
             </button>
           </div>
 
-          {/* Course Switcher */}
-          <CourseSwitcher
-            activeCourse={activeCourse}
-            onSwitch={(course) => {
-              setActiveCourse(course);
-              localStorage.setItem('activeCourse', course);
-              setSelectedLessonId(course === 'minna' ? 1 : 101);
-            }}
-          />
-
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
                   setIsSidebarOpen(false);
-                  if (item.id === 'guide') {
-                    router.push('/guide');
-                  } else if (item.id === 'dashboard') {
+                  if (item.id === 'dashboard') {
                     router.push('/dashboard');
                   } else if (item.id === 'roadmap') {
                     // Stay here
@@ -270,7 +249,7 @@ export default function RoadmapPage() {
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
                   item.active
                     ? 'bg-indigo-50/80 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 border border-indigo-100/50 dark:border-blue-900/40 text-indigo-600 dark:text-blue-400 shadow-sm dark:shadow-[0_0_15px_rgba(29,78,216,0.15)]'
-                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
+                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
                 }`}
               >
                 <span className="text-lg">{item.icon}</span>
@@ -298,7 +277,7 @@ export default function RoadmapPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-1">
-              NGỮ PHÁP CHI TIẾT BÀI {activeCourse === 'marugoto' ? selectedLessonId - 100 : selectedLessonId}
+              NGỮ PHÁP CHI TIẾT BÀI {selectedLessonId}
             </h1>
             <p className="text-xs sm:text-sm text-slate-400 dark:text-slate-500">
               Tra cứu các cấu trúc ngữ pháp mẫu câu, giải nghĩa và câu ví dụ mẫu sinh động.
@@ -307,30 +286,28 @@ export default function RoadmapPage() {
           
           {/* Level Switcher N5/N4 & Lesson Dropdown Selector */}
           <div className="flex items-center space-x-3 self-start sm:self-auto">
-            {activeCourse === 'minna' && (
-              <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
-                <button
-                  onClick={() => handleLevelChange('N5')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                    level === 'N5'
-                      ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                      : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                  }`}
-                >
-                  N5
-                </button>
-                <button
-                  onClick={() => handleLevelChange('N4')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-                    level === 'N4'
-                      ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
-                      : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
-                  }`}
-                >
-                  N4
-                </button>
-              </div>
-            )}
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+              <button
+                onClick={() => handleLevelChange('N5')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                  level === 'N5'
+                    ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                }`}
+              >
+                N5
+              </button>
+              <button
+                onClick={() => handleLevelChange('N4')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                  level === 'N4'
+                    ? 'bg-blue-600 text-slate-900 dark:text-white shadow-lg'
+                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+                }`}
+              >
+                N4
+              </button>
+            </div>
 
 
 
