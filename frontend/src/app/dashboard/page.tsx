@@ -107,9 +107,23 @@ export default function UserDashboard() {
       }).catch(() => {});
 
       // 2. Register service worker and auto-sync PushManager subscription to backend
-      navigator.serviceWorker.register('/sw.js').then((reg) => {
-        return reg.pushManager.getSubscription();
-      }).then((sub) => {
+      navigator.serviceWorker.register('/sw.js').then(async (reg) => {
+        let sub = await reg.pushManager.getSubscription();
+        // If permission is already granted but browser lost subscription, auto-resubscribe silently
+        if (!sub && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+          try {
+            const keyRes = await api.get('/api/user/vapid-public-key');
+            if (keyRes && keyRes.publicKey) {
+              const convertedKey = urlBase64ToUint8Array(keyRes.publicKey);
+              sub = await reg.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: convertedKey
+              });
+            }
+          } catch (subErr) {
+            console.warn('[Push] Auto-resubscribe error:', subErr);
+          }
+        }
         if (sub) {
           setIsPushSubscribed(true);
           const deviceName = navigator.userAgent.includes('iPhone') 
@@ -291,7 +305,7 @@ export default function UserDashboard() {
 
   // Update task due time
   const handleUpdateTaskDueTime = async (taskId: string, due_time: string, date?: string) => {
-    // 1. Optimistic update local state immediately so user sees new time instantly without losing focus
+    // 1. Optimistic update local studyPlan state immediately so user sees new time instantly without losing focus
     if (studyPlan && studyPlan.days) {
       const updatedDays = studyPlan.days.map((day: any) => {
         if (!date || day.date === date) {
@@ -305,7 +319,18 @@ export default function UserDashboard() {
       setStudyPlan({ ...studyPlan, days: updatedDays });
     }
 
-    // 2. Persist silently to backend without triggering full-page reload
+    // 2. Also update dailyHistory immediately so any components relying on dailyHistory are immediately in sync
+    setDailyHistory(prev => (prev || []).map((day: any) => {
+      if (!date || day.date === date) {
+        return {
+          ...day,
+          tasks_detail: (day.tasks_detail || []).map((t: any) => t.id === taskId ? { ...t, due_time } : t)
+        };
+      }
+      return day;
+    }));
+
+    // 3. Persist silently to backend without triggering full-page reload
     try {
       await api.post('/api/user/daily-tasks/schedule', {
         taskId,
@@ -451,35 +476,40 @@ export default function UserDashboard() {
     return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
   })();
 
+  const tomorrowDayPlan = (studyPlan?.days || []).find((d: any) => d.date === tomorrowDateStr);
+  const todayDayPlan = (studyPlan?.days || []).find((d: any) => d.date === todayStr);
+  const tomorrowTasks = tomorrowDayPlan?.tasks || [];
+
   const tomorrowDay = (() => {
     let day = dailyHistory.find(d => d.date === tomorrowDateStr);
-    if (!day && studyPlan?.days) {
-      const planDay = studyPlan.days.find((d: any) => d.date === tomorrowDateStr);
-      if (planDay) {
-        const planned = planDay.plannedCount || (planDay.tasks ? planDay.tasks.length : 0);
-        const completed = planDay.completedCount || (planDay.tasks ? planDay.tasks.filter((t: any) => t.completed).length : 0);
-        day = {
-          date: planDay.date,
-          dayIndex: planDay.dayIndex,
-          isBufferDay: planDay.isBufferDay,
-          isPracticeDay: planDay.isPracticeDay,
-          planned_count: planned,
-          completed_count: completed,
-          completion_rate: planned > 0 ? Math.round((completed / planned) * 100) : 0,
-          pace_status: 'scheduled',
-          pace_label: planDay.isPracticeDay ? 'Ngày thực hành chuyên biệt 🛡️' : 'Sắp tới 📅',
-          tasks_detail: planDay.tasks || [],
-          dayRationale: planDay.dayRationale,
-          workloadPoints: planDay.workloadPoints
-        } as any;
-      }
+    if (day && tomorrowDayPlan) {
+      return {
+        ...day,
+        tasks_detail: tomorrowDayPlan.tasks || day.tasks_detail || [],
+        dayRationale: tomorrowDayPlan.dayRationale || day.dayRationale,
+        workloadPoints: tomorrowDayPlan.workloadPoints || day.workloadPoints
+      };
+    }
+    if (!day && tomorrowDayPlan) {
+      const planned = tomorrowDayPlan.plannedCount || (tomorrowDayPlan.tasks ? tomorrowDayPlan.tasks.length : 0);
+      const completed = tomorrowDayPlan.completedCount || (tomorrowDayPlan.tasks ? tomorrowDayPlan.tasks.filter((t: any) => t.completed).length : 0);
+      day = {
+        date: tomorrowDayPlan.date,
+        dayIndex: tomorrowDayPlan.dayIndex,
+        isBufferDay: tomorrowDayPlan.isBufferDay,
+        isPracticeDay: tomorrowDayPlan.isPracticeDay,
+        planned_count: planned,
+        completed_count: completed,
+        completion_rate: planned > 0 ? Math.round((completed / planned) * 100) : 0,
+        pace_status: 'scheduled',
+        pace_label: tomorrowDayPlan.isPracticeDay ? 'Ngày thực hành chuyên biệt 🛡️' : 'Sắp tới 📅',
+        tasks_detail: tomorrowDayPlan.tasks || [],
+        dayRationale: tomorrowDayPlan.dayRationale,
+        workloadPoints: tomorrowDayPlan.workloadPoints
+      } as any;
     }
     return day;
   })();
-
-  const tomorrowDayPlan = (studyPlan?.days || []).find((d: any) => d.date === tomorrowDateStr);
-  const todayDayPlan = (studyPlan?.days || []).find((d: any) => d.date === todayStr);
-  const tomorrowTasks = tomorrowDay?.tasks_detail || tomorrowDayPlan?.tasks || [];
 
   // Lessons today details for Overview Card 2
   const lessonsToday = studyOverview?.todayLessonsDetails || [];

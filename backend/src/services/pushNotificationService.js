@@ -2,9 +2,19 @@ const webpush = require('web-push');
 const fs = require('fs');
 const path = require('path');
 const mockDb = require('../db/mockDb');
+const supabase = require('../db/supabase');
 
 const VAPID_FILE = path.join(__dirname, '../../vapid_keys.json');
 const SUBSCRIPTIONS_FILE = path.join(__dirname, '../db/push_subscriptions.json');
+
+function isSupabaseConfigured() {
+  return (
+    process.env.SUPABASE_URL &&
+    !process.env.SUPABASE_URL.includes('placeholder') &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY &&
+    !process.env.SUPABASE_SERVICE_ROLE_KEY.includes('placeholder')
+  );
+}
 
 function loadPersistentSubscriptions() {
   try {
@@ -34,6 +44,40 @@ try {
   const loadedSubs = loadPersistentSubscriptions();
   mockDb.pushSubscriptions = { ...loadedSubs, ...mockDb.pushSubscriptions };
 } catch (e) {}
+
+/**
+ * Synchronize subscriptions from Supabase into memory & local disk cache
+ */
+async function syncSubscriptionsFromSupabase() {
+  if (!isSupabaseConfigured()) return;
+  try {
+    const { data, error } = await supabase.from('user_push_subscriptions').select('*');
+    if (error) {
+      console.warn('[PushNotification] Could not query user_push_subscriptions from Supabase:', error.message);
+      return;
+    }
+    if (Array.isArray(data) && data.length > 0) {
+      if (!mockDb.pushSubscriptions) mockDb.pushSubscriptions = {};
+      for (const row of data) {
+        if (row.user_id && row.subscription) {
+          mockDb.pushSubscriptions[row.user_id] = {
+            subscription: row.subscription,
+            deviceName: row.device_name || 'iPhone / Mobile',
+            updatedAt: row.updated_at || new Date().toISOString()
+          };
+        }
+      }
+      savePersistentSubscriptions(mockDb.pushSubscriptions);
+      console.log(`[PushNotification] Successfully synced ${data.length} push subscription(s) from Supabase.`);
+    }
+  } catch (err) {
+    console.warn('[PushNotification] Error syncing subscriptions from Supabase:', err.message);
+  }
+}
+
+// Auto-sync on startup
+syncSubscriptionsFromSupabase().catch(() => {});
+
 
 let vapidKeys = null;
 
@@ -87,6 +131,19 @@ function saveSubscription(userId, subscription, deviceName = 'iPhone / Mobile') 
     updatedAt: new Date().toISOString()
   };
   savePersistentSubscriptions(mockDb.pushSubscriptions);
+
+  // Database-first: Persist to Supabase so tokens survive container restarts
+  if (isSupabaseConfigured()) {
+    supabase.from('user_push_subscriptions').upsert({
+      user_id: String(userId),
+      subscription: subscription,
+      device_name: deviceName,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id' }).then(({ error }) => {
+      if (error) console.warn('[PushNotification] Supabase subscription upsert warning:', error.message);
+    }).catch(e => console.warn('[PushNotification] Supabase subscription upsert error:', e.message));
+  }
+
   return mockDb.pushSubscriptions[userId];
 }
 
@@ -118,7 +175,24 @@ function getSubscriptionStatus(userId) {
 }
 
 async function sendNotification(userId, payload) {
-  const userSub = getSubscription(userId);
+  let userSub = getSubscription(userId);
+  // If not found in cache, attempt one synchronous-like fetch from Supabase if online
+  if ((!userSub || !userSub.subscription) && isSupabaseConfigured()) {
+    try {
+      const { data } = await supabase.from('user_push_subscriptions').select('*').eq('user_id', String(userId)).maybeSingle();
+      if (data && data.subscription) {
+        if (!mockDb.pushSubscriptions) mockDb.pushSubscriptions = {};
+        mockDb.pushSubscriptions[userId] = {
+          subscription: data.subscription,
+          deviceName: data.device_name || 'iPhone / Mobile',
+          updatedAt: data.updated_at || new Date().toISOString()
+        };
+        savePersistentSubscriptions(mockDb.pushSubscriptions);
+        userSub = mockDb.pushSubscriptions[userId];
+      }
+    } catch (e) {}
+  }
+
   if (!userSub || !userSub.subscription) {
     throw new Error('Chưa tìm thấy thiết bị đăng ký nhận thông báo cho tài khoản này.');
   }
@@ -141,6 +215,9 @@ async function sendNotification(userId, payload) {
     if (err.statusCode === 404 || err.statusCode === 410) {
       delete mockDb.pushSubscriptions[userId];
       savePersistentSubscriptions(mockDb.pushSubscriptions);
+      if (isSupabaseConfigured()) {
+        supabase.from('user_push_subscriptions').delete().eq('user_id', String(userId)).catch(() => {});
+      }
     }
     throw err;
   }
@@ -409,5 +486,6 @@ module.exports = {
   sendMilestoneNotification,
   getTaskDisplayName,
   formatTasksDetailed,
-  formatDebtDetailed
+  formatDebtDetailed,
+  syncSubscriptionsFromSupabase
 };

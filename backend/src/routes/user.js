@@ -22,11 +22,36 @@ function loadPersistentPlans() {
   return {};
 }
 
+function isSupabaseConfigured() {
+  return (
+    process.env.SUPABASE_URL &&
+    !process.env.SUPABASE_URL.includes('placeholder') &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY &&
+    !process.env.SUPABASE_SERVICE_ROLE_KEY.includes('placeholder')
+  );
+}
+
 function savePersistentPlans(plans) {
   try {
     fs.writeFileSync(STUDY_PLANS_FILE, JSON.stringify(plans, null, 2), 'utf8');
   } catch (e) {
     console.error('[StudyPlan] Error writing study_plans.json:', e.message);
+  }
+}
+
+/**
+ * Persist full 130-day plan data directly to Supabase so it survives container restarts
+ */
+async function persistPlanToSupabase(userId, plan) {
+  if (!isSupabaseConfigured() || !userId || !plan) return;
+  try {
+    await supabase.from('user_study_plans').upsert({
+      user_id: String(userId),
+      plan_data: plan,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id' });
+  } catch (err) {
+    console.warn('[StudyPlan] Supabase user_study_plans sync warning:', err.message);
   }
 }
 
@@ -2415,6 +2440,7 @@ router.post('/replan-debt', async (req, res) => {
 
     mockDb.studyPlans[userId] = updatedPlan;
     savePersistentPlans(mockDb.studyPlans);
+    persistPlanToSupabase(userId, updatedPlan);
 
     // Scenario 2: Send debt replan push notification
     if (updatedPlan && updatedPlan.days) {
@@ -2444,26 +2470,45 @@ router.get('/study-plan', async (req, res) => {
     const userId = req.user.id;
     let plan = getUserPlan(userId);
 
-    // Restore from Supabase target_plans if online and memory was cleared by cloud sleep
-    if (!plan && !req.user.isMock) {
+    // Restore from Supabase user_study_plans or target_plans if online and memory was cleared by cloud sleep
+    if (!plan && isSupabaseConfigured() && !req.user.isMock) {
       try {
-        const { data: tp } = await supabase
-          .from('target_plans')
-          .select('start_date, end_date')
-          .eq('user_id', userId)
+        const { data: sp } = await supabase
+          .from('user_study_plans')
+          .select('plan_data')
+          .eq('user_id', String(userId))
           .maybeSingle();
-        if (tp && tp.start_date && tp.end_date) {
-          plan = aiPlannerService.generateAlgorithmicPlan({
-            startDate: tp.start_date,
-            endDate: tp.end_date,
-            targetLevel: 'All',
-            currentLesson: 1
-          });
+        if (sp && sp.plan_data && Array.isArray(sp.plan_data.days)) {
+          plan = sp.plan_data;
           mockDb.studyPlans[userId] = plan;
           savePersistentPlans(mockDb.studyPlans);
+          console.log(`[StudyPlan] Restored full customized study plan from Supabase for user ${userId}`);
         }
       } catch (e) {
-        console.warn('[StudyPlan] Could not restore from Supabase target_plans:', e.message);
+        console.warn('[StudyPlan] Could not restore from Supabase user_study_plans:', e.message);
+      }
+
+      if (!plan) {
+        try {
+          const { data: tp } = await supabase
+            .from('target_plans')
+            .select('start_date, end_date')
+            .eq('user_id', userId)
+            .maybeSingle();
+          if (tp && tp.start_date && tp.end_date) {
+            plan = aiPlannerService.generateAlgorithmicPlan({
+              startDate: tp.start_date,
+              endDate: tp.end_date,
+              targetLevel: 'All',
+              currentLesson: 1
+            });
+            mockDb.studyPlans[userId] = plan;
+            savePersistentPlans(mockDb.studyPlans);
+            persistPlanToSupabase(userId, plan);
+          }
+        } catch (e) {
+          console.warn('[StudyPlan] Could not restore from Supabase target_plans:', e.message);
+        }
       }
     }
 
@@ -2510,6 +2555,7 @@ router.post('/study-plan', async (req, res) => {
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
+    persistPlanToSupabase(userId, plan);
 
     // If online with Supabase, sync target_plans table as well
     if (!req.user.isMock && plan.startDate && plan.endDate) {
@@ -2548,10 +2594,12 @@ router.post('/daily-tasks/schedule', async (req, res) => {
 
     const plan = getUserPlan(userId);
     if (plan && plan.days) {
+      let taskFound = false;
       for (const day of plan.days) {
         if (!date || day.date === date) {
           const task = day.tasks ? day.tasks.find(t => t.id === taskId) : null;
           if (task) {
+            taskFound = true;
             if (due_time !== undefined) task.due_time = due_time;
             if (completed !== undefined) {
               task.completed = completed;
@@ -2598,10 +2646,25 @@ router.post('/daily-tasks/schedule', async (req, res) => {
           }
         }
       }
+
+      // Fallback search across all days if not found on specified date
+      if (!taskFound) {
+        for (const day of plan.days) {
+          const task = day.tasks ? day.tasks.find(t => t.id === taskId) : null;
+          if (task) {
+            if (due_time !== undefined) task.due_time = due_time;
+            if (completed !== undefined) task.completed = completed;
+            day.completedCount = day.tasks.filter(t => t.completed).length;
+            break;
+          }
+        }
+      }
+
       savePersistentPlans(mockDb.studyPlans);
+      persistPlanToSupabase(userId, plan);
     }
 
-    return res.json({ success: true, message: 'Đã cập nhật nhiệm vụ thành công' });
+    return res.json({ success: true, message: 'Đã cập nhật nhiệm vụ thành công', updatedPlan: plan });
   } catch (err) {
     console.error('Error scheduling daily task:', err);
     return res.status(500).json({ success: false, error: err.message });
@@ -2639,10 +2702,12 @@ router.post('/check-daily-notification', async (req, res) => {
       pushNotificationService.sendNewDayNotification(userId, {
         yesterdayDebtItems,
         todayTasks
-      }).catch(e => console.warn('[PushNotification] New day push failed:', e.message));
-
-      plan.lastNewDayNotifiedDate = todayStr;
-      modified = true;
+      }).then(() => {
+        plan.lastNewDayNotifiedDate = todayStr;
+        savePersistentPlans(mockDb.studyPlans);
+        persistPlanToSupabase(userId, plan);
+        console.log(`[PushNotification] New day notification sent successfully to ${userId}`);
+      }).catch(e => console.warn('[PushNotification] New day push failed or device not registered:', e.message));
     }
 
     // Determine current time in minutes
@@ -2738,6 +2803,7 @@ router.post('/daily-tasks/rebatch', async (req, res) => {
     plan = applyAutoTracking(result.plan, userId);
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
+    persistPlanToSupabase(userId, plan);
 
     const updatedDay = plan.days.find(d => d.date === targetDate);
 
@@ -2778,6 +2844,7 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
     plan = applyAutoTracking(result.plan, userId);
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
+    persistPlanToSupabase(userId, plan);
 
     const updatedDay = plan.days.find(d => d.date === targetDate);
 

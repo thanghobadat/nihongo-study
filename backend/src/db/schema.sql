@@ -349,3 +349,26 @@ CREATE TABLE IF NOT EXISTS public.text_pastes (
 ALTER TABLE public.text_pastes ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read and write text_pastes" ON public.text_pastes FOR ALL USING (true) WITH CHECK (true);
 
+
+-- 18. Create User Push Subscriptions Table (Web Push for iPhone / Mobile / Web)
+CREATE TABLE IF NOT EXISTS public.user_push_subscriptions (
+  user_id TEXT PRIMARY KEY,
+  subscription JSONB NOT NULL,
+  device_name TEXT DEFAULT 'iPhone / Mobile',
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_push_subscriptions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public all access user_push_subscriptions" ON public.user_push_subscriptions FOR ALL USING (true) WITH CHECK (true);
+
+
+-- 19. Create User Study Plans Table (Persistent 130-day master schedule)
+CREATE TABLE IF NOT EXISTS public.user_study_plans (
+  user_id TEXT PRIMARY KEY,
+  plan_data JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_study_plans ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public all access user_study_plans" ON public.user_study_plans FOR ALL USING (true) WITH CHECK (true);
+

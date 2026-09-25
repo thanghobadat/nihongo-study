@@ -1353,10 +1353,30 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Chạy script kiểm tra `audit_final_all_50_lessons.js` đạt 100% PASS (0 lỗi).
   - Next.js Turbopack build thành công 16/16 routes không phát sinh bất kỳ lỗi TypeScript nào.
 
-### Mốc 109: Kiến Trúc AI Study Planner Toàn Diện (Đã hoàn thành - 22/09/2026)
-- **Quy trình học dứt điểm tuần tự từng mảng**: Bắt buộc theo chuỗi Từ vựng (100%) -> Kanji (100%) -> Ngữ pháp (100%) -> Ôn tập bài -> Ôn tập tích lũy.
-- **Khóa cứng ngày kết thúc (Strict Keep End Date)**: Thuật toán Water-level Rebalancing không bao giờ dời `endDate`.
-- **Cơ chế Xử lý Nợ Bài Hôm Qua (`UnfinishedDebtModal`)**: Tự động cảnh báo nợ bài và cho phép replan.
+### Mốc 109: Kiến Trúc AI Study Planner Toàn Diện: Học Dứt Điểm Từng Mảng, 2 Chế Độ Ôn Tập, Khung 3 Giờ Cân Bằng Tải, Sơ Đồ Lộ Trình Đo Pace & Tự Động Tracking (Đang hoàn thiện - 22/09/2026)
+- **Quy trình học dứt điểm tuần tự từng mảng (Sequential Mastery Workflow)**:
+  - Bắt buộc theo đúng chuỗi 5 bước trong mỗi bài:
+    1. Bước 1: Học toàn bộ 100% Từ vựng của bài (lấy số lượng chuẩn xác từ DB).
+    2. Bước 2: Học toàn bộ 100% Chữ Hán (Kanji) của bài (lấy số lượng chuẩn xác từ DB).
+    3. Bước 3: Học toàn bộ 100% Ngữ pháp của bài (lấy số lượng chuẩn xác từ DB).
+    4. Bước 4: 30 phút Ôn tập tổng hợp bài vừa xong (`/lessons/L?tab=review`).
+    5. Bước 5: 30 phút Ôn tập tích lũy từ Bài 1 đến Bài hiện tại (`/knowledge?tab=review`).
+- **Khung công suất 3 giờ/ngày & Nguyên tắc Điều hòa tải học (Workload Balance)**:
+  - Ngày thường: Dành trọn 3 giờ học sâu kiến thức mới.
+  - Ngày có Ôn tập tổng hợp: 60 phút ôn tập (30p bài đó + 30p tích lũy) đi kèm việc tự động giảm tải bài mới để tổng thời gian học cả ngày không vượt quá 3 giờ.
+- **Khóa cứng ngày kết thúc (Strict Keep End Date)**:
+  - Dù người dùng bận đột xuất hay yêu cầu dời bài, thuật toán *Water-level Rebalancing* dời bài sang ngày đệm/ngày kế tiếp mà 100% không bao giờ dời `endDate`.
+- **Cơ chế Xử lý Nợ Bài Hôm Qua (`UnfinishedDebtModal`)**:
+  - Quét tiến độ hôm qua, nếu còn nợ sẽ hiện modal liệt kê rõ ràng bài thiếu.
+  - 2 Lựa chọn: Nhờ AI Replan (giữ deadline) hoặc Tự học bù hôm nay.
+  - Tự động biến mất (Auto-dismiss) ngay khi người dùng học bù xong số nợ.
+- **Tự động Tracking theo status Database (Zero-Manual Tick)**:
+  - Quét trực tiếp `user_progress` và `user_review_sessions` để hiển thị thanh tiến trình realtime `[ X/Y items (Z%) ]` và tự động đánh dấu hoàn thành nhiệm vụ.
+- **Giao diện Dashboard Mới**:
+  - Khung thời gian cố định kèm đếm ngược.
+  - Sơ đồ lộ trình trực quan (`VisualRoadmapModal`) đo Pace nhanh/chậm và hiển thị 4 milestones.
+  - Bảng Daily History Overview kèm nút `Chi tiết 🔍` mở `DayDetailModal`.
+  - Web Push Notification cho iPhone iOS 16.4+ (APNs VAPID).
 
 ### Mốc 110: Kiến Trúc Database-First Cho AI Planner & Dashboard, Loại Trừ Triệt Để Mục Đã Học, API Batch Progress & Tự Động Push Notification Daemon 24/7 (Đã hoàn thành - 24/09/2026)
 - **Chuẩn hóa Database-First toàn diện (`progressService.js`)**:
@@ -1376,3 +1396,57 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Nhận diện các IP mạng nội bộ (như `100.120.20.30`, `192.168.*`, `10.*`) để trỏ thẳng về backend `http://${host}:8080`, tránh bị chuyển hướng nhầm lên Render.
 - **Tiến trình gửi thông báo ngầm tự động 24/7 (`notificationSchedulerService.js`)**:
   - Daemon quét mỗi 60 giây và tự động đẩy Web Push Notification về điện thoại mà không cần thao tác thủ công trên web.
+
+### Mốc 111: Tích Hợp Phân Hệ Ôn Tập Kanji Chuyên Sâu Theo Từng Bài Học & Nâng Cấp Hiển Thị Âm On/Kun Trực Quan (Đã hoàn thành - 24/09/2026)
+- **Tiện ích Sinh Đề & Chấm Điểm Kanji (`kanjiPracticeHelper.ts`)**:
+  - Tích hợp 3 dạng câu hỏi trắc nghiệm nhận diện: Nhìn Kanji ➔ chọn Hán Việt & Nghĩa, Nhìn Hán Việt/Nghĩa ➔ chọn Kanji, và Điền chữ Hán vào từ ghép khuyết.
+  - Tích hợp kho 60 chữ Hán mẫu phổ biến `COMMON_KANJI_DISTRACTORS` đảm bảo luôn sinh đủ 4 phương án lựa chọn độc nhất ngay cả với bài có ít chữ Hán.
+  - Hàm `gradeKanjiWritten` chấm điểm tự luận thông minh (so khớp chuẩn hóa cả âm Hán Việt, các nét nghĩa tiếng Việt và cách đọc Hiragana/Romaji).
+- **Component Phân Hệ Ôn Tập Kanji (`KanjiPracticeTab.tsx`)**:
+  - Hỗ trợ 3 chế độ luyện tập:
+    1. **🎯 Trắc nghiệm nhận diện (Choice Mode)**: 4 lựa chọn A/B/C/D, phản hồi trực quan, phân tích chiết tự bộ thủ cấu thành (`getRadicalsString`), âm On/Kun, mẹo ghi nhớ hình tượng và danh sách từ ghép trong bài.
+    2. **✍️ Tự luận viết (Written Mode)**: Nhập câu trả lời bằng phím Enter, chấm điểm tức thì kèm nút ghi đè đúng nếu tự thấy bản thân làm đúng.
+    3. **⚡ Phản xạ nhanh (Speedrun Mode)**: Đếm ngược 10 giây mỗi câu, cộng điểm streak liên tục, lưu vết High Score vào `localStorage`.
+  - Bộ lọc trạng thái học tập (Tất cả, Chưa học, Đang học, Đã thuộc) và bộ điều khiển số lượng câu hỏi linh hoạt.
+  - Bảng tổng kết kết quả kèm bộ nút cập nhật nhanh trạng thái chữ Hán (🔴 Chưa học, 🟡 Đang học, 🟢 Đã thuộc) đồng bộ trực tiếp lên Database.
+- **Tích Hợp Giao Diện Bài Học (`lessons/[id]/page.tsx`)**:
+  - Nâng cấp tab Ôn tập (`tab=practice`) với thanh chuyển đổi Segmented Control mượt mà: `[ 📚 Ôn Từ Vựng | 🉐 Ôn Chữ Hán (Kanji) ]`, tự động đồng bộ tham số URL `?category=kanji`.
+  - Bổ sung nút bấm phím tắt `⚡ Luyện tập Kanji` nổi bật ngay trên thanh công cụ của tab Chữ Hán (`tab=kanji`).
+  - Nâng cấp giao diện hiển thị âm Onyomi (nổi bật với tông màu tím Katakana) và Kunyomi (tông màu xanh ngọc Hiragana) trên tất cả các thẻ Kanji.
+- **Biên Dịch & Kiểm Định**:
+  - Next.js Turbopack build thành công 16/16 routes không phát sinh bất kỳ lỗi TypeScript hay cú pháp nào.
+
+### Mốc 112: Tối Ưu Hóa Trải Nghiệm Dashboard: Đổi Giờ & Chia Batch Kế Hoạch Ngày Mai, Tinh Gọn Giao Diện (Đã hoàn thành - 24/09/2026)
+- **Tùy Chỉnh Chia Batch Cho Kế Hoạch Ngày Mai (`RebatchTasksModal` & `dashboard/page.tsx`)**:
+  - Bổ sung state `rebatchTargetDate` và cập nhật hàm `handleApplyRebatch(configs, targetDate)`.
+  - Thêm nút hành động `⚡ Tùy chỉnh chia Batch` vào thanh tiêu đề của mục **Kế hoạch Ngày mai** (`tomorrowTasks`), cho phép người dùng chủ động gom nhóm hoặc chia nhỏ các nhiệm vụ học tập của ngày mai thành 1, 2, 3... batch tùy ý kèm thời gian dự kiến cụ thể ngay từ hôm trước.
+  - Đồng bộ `RebatchTasksModal` hiển thị chính xác danh sách nhiệm vụ của ngày mai khi mở từ mục Ngày mai.
+- **Chỉnh Sửa Giờ Hẹn Deadline Linh Hoạt Cho Ngày Mai**:
+  - Thay thế nhãn hiển thị giờ tĩnh của từng task ngày mai bằng bộ chọn giờ tương tác `<input type="time">`.
+  - Hỗ trợ kích hoạt trực tiếp `showPicker()` và cập nhật thời gian hoàn thành mong muốn của ngày mai về backend thông qua API `POST /api/user/daily-tasks/schedule` với tham số `tomorrowDateStr`.
+- **Tinh Gọn Giao Diện Dashboard (Card & Section Cleanup)**:
+  - **Xóa Card 3 ("Nội dung bài đang học")**: Chuyển nút hành động `Xem sơ đồ & tiến độ tổng quan ➔` (mở modal sơ đồ tiến độ `VisualRoadmapModal`) sang tích hợp cân đối và gọn gàng vào chân Card 1 (Đánh giá tiến độ hôm nay).
+  - Chuyển layout khối Overview sang `grid-cols-1` toàn chiều rộng, tạo không gian thoáng đãng và tập trung.
+  - **Xóa Section 4 ("Tinh chỉnh kế hoạch với AI")**: Loại bỏ hoàn toàn khối accordion tinh chỉnh AI cùng toàn bộ các state/handler không còn sử dụng (`refinementComment`, `isRefining`, `handleRefinePlan`, `aiNote`), giúp giao diện tập trung tuyệt đối vào nhiệm vụ học tập hàng ngày và lịch sử tiến độ.
+- **Biên Dịch & Kiểm Định**:
+  - Biên dịch Next.js production build (`npm run build:frontend`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
+  - Khắc phục lỗi sót `setAiNote` dòng 165 gây fail build CI/CD trên GitHub (Commit `f28a0c9`).
+
+### Mốc 113: Khắc Phục Lỗi Cập Nhật Giờ Hẹn Ngày Mai, Tự Động Re-subscribe Push Token & Đồng Bộ Hóa Database-First Lên Supabase (Đã hoàn thành & Đã đẩy GitHub - 25/09/2026)
+- **Khắc phục lỗi đổi giờ deadline (`due_time`) cho Kế hoạch Ngày mai**:
+  - Chuyển `tomorrowTasks` và `tomorrowDay` trong [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx) sang lấy trực tiếp và đồng bộ với `studyPlan.days` thay vì snapshot cũ của `dailyHistory`.
+  - Cập nhật hàm `handleUpdateTaskDueTime` để đồng thời cập nhật cả 2 state `studyPlan` và `dailyHistory` (0ms delay), giữ nguyên giá trị giờ mới mà không bao giờ bị nhảy ngược về giờ cũ.
+  - Cập nhật API `POST /api/user/daily-tasks/schedule` trong [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js) hỗ trợ fallback tìm kiếm theo `taskId` trên toàn bộ các ngày và trả về plan cập nhật.
+- **Tự động cấp lại Push Token ngầm (Silent Auto-Resubscribe)**:
+  - Bổ sung cơ chế tự động lấy lại subscription và đẩy lên máy chủ trong `dashboard/page.tsx` khi thiết bị đã được cấp quyền nhưng token trên server bị mất do Render restart.
+- **Lưu trữ vĩnh viễn Subscriptions & Kế hoạch học tập lên Supabase Database-First**:
+  - Bổ sung định nghĩa bảng `public.user_push_subscriptions` và `public.user_study_plans` trong [schema.sql](file:///d:/AI/japanese_learning/website/backend/src/db/schema.sql).
+  - Nâng cấp [pushNotificationService.js](file:///d:/AI/japanese_learning/website/backend/src/services/pushNotificationService.js) tự động đồng bộ hóa token thiết bị lên Supabase PostgreSQL để bảo toàn vĩnh viễn qua các lần Render spin down / restart.
+  - Nâng cấp [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js) tự động lưu trữ và khôi phục toàn bộ 130 ngày của `studyPlan` (chứa các mốc `due_time` tùy chỉnh) từ Supabase.
+- **Sửa logic kích hoạt thông báo ngày mới**:
+  - Chỉ ghi nhận `lastNewDayNotifiedDate = todayStr` khi việc gửi push thực sự thành công, tránh việc người dùng bị bỏ lỡ thông báo cả ngày nếu sáng sớm server chưa có token.
+- **Kiểm định & Biên dịch**:
+  - Next.js Turbopack build thành công 100% (16/16 routes, 0 lỗi TypeScript).
+  - Cú pháp toàn bộ backend và các kịch bản kiểm thử push persistence, schedule update vượt qua 100%.
+
+

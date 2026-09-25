@@ -42,6 +42,9 @@ function loadJsonFile(filePath) {
  * Core periodic check running in background on the server
  */
 async function checkAndSendNotifications() {
+  if (typeof pushNotificationService.syncSubscriptionsFromSupabase === 'function') {
+    await pushNotificationService.syncSubscriptionsFromSupabase().catch(() => {});
+  }
   const subscriptions = loadJsonFile(SUBSCRIPTIONS_FILE);
   const userIds = Object.keys(subscriptions);
   if (userIds.length === 0) return;
