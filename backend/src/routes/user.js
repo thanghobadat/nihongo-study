@@ -776,6 +776,7 @@ router.post('/progress', async (req, res) => {
       const key = `${userId}:${item_type}:${item_id}`;
       mockDb.userProgress[key] = status;
       progressService.savePersistentProgress(mockDb.userProgress);
+      checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
       return res.json({
         message: 'Progress updated successfully (Mock Mode)',
         progress: {
@@ -832,6 +833,7 @@ router.post('/progress', async (req, res) => {
     if (!mockDb.userProgress) mockDb.userProgress = {};
     mockDb.userProgress[`${userId}:${item_type}:${item_id}`] = status;
     progressService.savePersistentProgress(mockDb.userProgress);
+    checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
 
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
@@ -862,6 +864,7 @@ router.post('/progress/batch', async (req, res) => {
 
     const userId = req.user.id;
     await progressService.setItemProgressBatch(userId, item_type, item_ids, status);
+    checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
 
     return res.json({
       success: true,
@@ -2427,6 +2430,77 @@ function applyAutoTracking(plan, userId) {
 }
 
 /**
+ * Tự động kiểm tra hoàn thành nhiệm vụ theo tiến độ học tập thực tế và bắn chuông thông báo về điện thoại
+ */
+async function checkAndNotifyNewlyCompletedTasks(userId) {
+  try {
+    let plan = mockDb.studyPlans ? mockDb.studyPlans[userId] : null;
+    if (!plan) {
+      const allPlans = loadPersistentPlans();
+      plan = allPlans[userId] || null;
+    }
+    if (!plan && isSupabaseConfigured()) {
+      try {
+        const { data } = await supabase.from('user_study_plans').select('*').eq('user_id', String(userId)).maybeSingle();
+        if (data && data.plan_data) {
+          plan = data.plan_data;
+        }
+      } catch (e) {}
+    }
+    if (!plan || !Array.isArray(plan.days)) return;
+
+    // Lấy ngày hôm nay theo múi giờ Việt Nam
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+    const todayStr = formatter.format(new Date());
+
+    const todayDay = plan.days.find(d => d.date === todayStr);
+    if (!todayDay || !Array.isArray(todayDay.tasks)) return;
+
+    // Ghi nhớ trạng thái hoàn thành trước khi tính toán
+    const prevCompletedMap = new Map();
+    for (const t of todayDay.tasks) {
+      prevCompletedMap.set(t.id, !!t.completed);
+    }
+
+    // Chạy auto-tracking định lượng bài học
+    plan = applyAutoTracking(plan, userId);
+
+    // Lưu ngay kế hoạch cập nhật vào RAM, file đĩa và Supabase
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
+    mockDb.studyPlans[userId] = plan;
+    savePersistentPlans(mockDb.studyPlans);
+    persistPlanToSupabase(userId, plan).catch(() => {});
+
+    // Kiểm tra xem có task nào vừa mới đạt chỉ tiêu và hoàn thành không
+    const dayTasks = todayDay.tasks || [];
+    const completedCount = dayTasks.filter(t => t.completed).length;
+    const totalCount = dayTasks.length;
+    const isAllDoneToday = completedCount >= totalCount && totalCount > 0;
+
+    for (const t of dayTasks) {
+      const wasCompleted = prevCompletedMap.get(t.id);
+      if (!wasCompleted && t.completed) {
+        console.log(`[AutoNotify] Task ${t.id} (${t.itemType}) đạt chỉ tiêu hoàn thành! Đang gửi thông báo tới ${userId}...`);
+        pushNotificationService.sendTaskCompletedNotification(userId, {
+          completedTask: t,
+          isAllDoneToday,
+          completedCount,
+          totalCount
+        }).catch(err => console.warn('[AutoNotify] Lỗi gửi push hoàn thành:', err.message));
+        break; // Tránh gửi dồn dập nhiều push trong 1 thao tác batch
+      }
+    }
+  } catch (err) {
+    console.warn('[AutoNotify] Lỗi trong checkAndNotifyNewlyCompletedTasks:', err.message);
+  }
+}
+
+/**
  * GET /api/user/study-debt
  * Check yesterday's unfinished debt
  */
@@ -3173,10 +3247,10 @@ router.get('/vapid-public-key', (req, res) => {
 /**
  * GET /api/user/push-subscription-status
  */
-router.get('/push-subscription-status', (req, res) => {
+router.get('/push-subscription-status', async (req, res) => {
   try {
     const userId = req.user.id;
-    const status = pushNotificationService.getSubscriptionStatus(userId);
+    const status = await pushNotificationService.getSubscriptionStatusAsync(userId);
     return res.json({ success: true, ...status });
   } catch (err) {
     return res.status(500).json({ success: false, error: err.message });

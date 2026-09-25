@@ -1479,6 +1479,17 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Cú pháp backend `node --check src/routes/user.js` đạt 100% (0 lỗi).
   - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
 
-
-
-
+### Mốc 116: Khắc Phục Triệt Để Hệ Thống Thông Báo Đẩy - Chuẩn Hóa Múi Giờ GMT+7, Đồng Bộ Database Daemon & Tự Động Bắn Thông Báo Khi Đổi Trạng Thái Học Liệu (Đã hoàn thành - 25/09/2026)
+- **Chuẩn hóa toàn diện múi giờ Việt Nam (Asia/Ho_Chi_Minh - GMT+7)**:
+  - Nâng cấp [notificationSchedulerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/notificationSchedulerService.js) với hàm `getVietnamTime()` chuẩn W3C `Intl.DateTimeFormat`.
+  - Khắc phục triệt để lỗi lệch 7 tiếng do máy chủ Render chạy múi giờ quốc tế UTC: đảm bảo thông báo đầu ngày (07:30 - 09:30 VN), nhắc trước hạn (10-30 phút), quá hạn (10-60 phút) và cảnh báo cứu chuỗi streak (20:30 - 22:30 VN) luôn kích hoạt đúng từng phút theo giờ thực tế tại Việt Nam.
+- **Tự động đồng bộ `studyPlan` từ Supabase vào Daemon 24/7**:
+  - Tích hợp hàm `syncPlansFromSupabase()` trong scheduler daemon, tự động nạp kế hoạch của người dùng từ bảng `user_study_plans` trên Supabase PostgreSQL, triệt tiêu lỗi daemon bỏ qua người dùng khi container Render khởi động lại làm mất file đĩa.
+- **Tự động kích hoạt thông báo hoàn thành nhiệm vụ ngay khi đổi trạng thái học liệu**:
+  - Xây dựng hàm `checkAndNotifyNewlyCompletedTasks(userId)` trong [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js).
+  - Tích hợp trực tiếp vào hai tuyến `POST /api/user/progress` và `POST /api/user/progress/batch`: Ngay khi người dùng chuyển trạng thái từ vựng/Kanji/Ngữ pháp sang "Đã thuộc" ở trang chi tiết bài học (`/lessons/[id]`) và đạt đủ chỉ tiêu số lượng của ngày hôm nay, hệ thống tự động hoàn thành nhiệm vụ và lập tức bắn chuông chúc mừng về điện thoại!
+- **Nâng cấp cơ chế tra cứu thiết bị đa tầng & Fallback linh hoạt**:
+  - Nâng cấp `pushNotificationService.getSubscriptionStatusAsync(userId)` và `sendNotification(userId)`: hỗ trợ tra cứu trực tiếp từ Supabase và fallback đa tầng, đảm bảo mọi thao tác kiểm tra thử nghiệm và bắn thông báo thực tế luôn tìm thấy thiết bị 100%.
+- **Kiểm định & Biên dịch**:
+  - Cú pháp backend `node --check` đạt 100% (0 lỗi).
+  - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).

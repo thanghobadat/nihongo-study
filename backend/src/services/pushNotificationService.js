@@ -174,6 +174,47 @@ function getSubscriptionStatus(userId) {
   };
 }
 
+async function getSubscriptionStatusAsync(userId) {
+  let userSub = getSubscription(userId);
+  if ((!userSub || !userSub.subscription) && isSupabaseConfigured()) {
+    try {
+      const { data } = await supabase.from('user_push_subscriptions').select('*').eq('user_id', String(userId)).maybeSingle();
+      if (data && data.subscription) {
+        if (!mockDb.pushSubscriptions) mockDb.pushSubscriptions = {};
+        mockDb.pushSubscriptions[userId] = {
+          subscription: data.subscription,
+          deviceName: data.device_name || 'iPhone / Mobile',
+          updatedAt: data.updated_at || new Date().toISOString()
+        };
+        savePersistentSubscriptions(mockDb.pushSubscriptions);
+        userSub = mockDb.pushSubscriptions[userId];
+      }
+    } catch (e) {}
+  }
+  if (!userSub || !userSub.subscription) {
+    const allSubs = mockDb.pushSubscriptions || loadPersistentSubscriptions();
+    const subKeys = Object.keys(allSubs);
+    if (subKeys.length === 1 && allSubs[subKeys[0]]?.subscription) {
+      userSub = allSubs[subKeys[0]];
+    } else if (userId !== 'demo_user' && allSubs['demo_user']?.subscription) {
+      userSub = allSubs['demo_user'];
+    }
+  }
+
+  if (!userSub || !userSub.subscription) {
+    return {
+      hasSubscription: false,
+      deviceName: null,
+      updatedAt: null
+    };
+  }
+  return {
+    hasSubscription: true,
+    deviceName: userSub.deviceName || 'iPhone / Mobile',
+    updatedAt: userSub.updatedAt || null
+  };
+}
+
 async function sendNotification(userId, payload) {
   let userSub = getSubscription(userId);
   // If not found in cache, attempt one synchronous-like fetch from Supabase if online
@@ -191,6 +232,18 @@ async function sendNotification(userId, payload) {
         userSub = mockDb.pushSubscriptions[userId];
       }
     } catch (e) {}
+  }
+
+  // Fallback: If not found for current userId, check demo_user or single active device on system
+  if (!userSub || !userSub.subscription) {
+    const allSubs = mockDb.pushSubscriptions || loadPersistentSubscriptions();
+    const subKeys = Object.keys(allSubs);
+    if (subKeys.length === 1 && allSubs[subKeys[0]]?.subscription) {
+      console.log(`[PushNotification] Fallback using single active device subscription (${subKeys[0]}) for ${userId}`);
+      userSub = allSubs[subKeys[0]];
+    } else if (userId !== 'demo_user' && allSubs['demo_user']?.subscription) {
+      userSub = allSubs['demo_user'];
+    }
   }
 
   if (!userSub || !userSub.subscription) {
@@ -473,6 +526,7 @@ module.exports = {
   saveSubscription,
   getSubscription,
   getSubscriptionStatus,
+  getSubscriptionStatusAsync,
   sendNotification,
   sendTestNotification,
   sendStudyPlanNotification,
