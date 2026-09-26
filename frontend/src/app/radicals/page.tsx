@@ -5,13 +5,15 @@ import { useRouter } from 'next/navigation';
 import {
   RADICALS_DICT,
   RadicalInfo,
-  RADICAL_LESSONS,
-  RadicalLesson,
-  getRadicalSemanticDetails
+  getRadicalSemanticDetails,
+  getRadicalLevel,
+  N5_RADICALS_SET,
+  N4_RADICALS_SET
 } from '../utils/kanjiRadicals';
 import { api } from '../utils/api';
 
 export type RadicalStatus = 'not_learned' | 'learning' | 'mastered';
+export type RadicalLevel = 'n5' | 'n4' | 'n5_n4' | 'all';
 
 export default function RadicalsPage() {
   const router = useRouter();
@@ -30,11 +32,10 @@ export default function RadicalsPage() {
     mastered: false,
   });
   const [practiceDropdownOpen, setPracticeDropdownOpen] = useState(false);
-  const [lessonDropdownOpen, setLessonDropdownOpen] = useState(false);
 
 
-  // Lesson and search filter states for Browse Tab
-  const [selectedLessonId, setSelectedLessonId] = useState<string>('all');
+  // Level and search filter states for Browse Tab
+  const [selectedLevel, setSelectedLevel] = useState<RadicalLevel>('n5');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRadical, setSelectedRadical] = useState<RadicalInfo | null>(null);
 
@@ -93,28 +94,14 @@ export default function RadicalsPage() {
     return Object.values(RADICALS_DICT);
   }, []);
 
-  // Currently selected lesson object
-  const currentLesson = useMemo(() => {
-    if (selectedLessonId === 'all') return null;
-    return RADICAL_LESSONS.find(l => l.id === selectedLessonId) || null;
-  }, [selectedLessonId]);
-
-  // Filtered radicals list based on selected lesson, search query, and status filter
+    // Filtered radicals list based on selected level, search query, and status filter
   const filteredRadicals = useMemo(() => {
     return radicalsList.filter(rad => {
-      // Filter by lesson
-      let lessonMatch = true;
-      if (selectedLessonId !== 'all') {
-        const lesson = RADICAL_LESSONS.find(l => l.id === selectedLessonId);
-        if (lesson) {
-          if (lesson.radicals.length === 0) {
-            lessonMatch = false; // Bài mở đầu không chứa danh sách bộ thủ riêng
-          } else {
-            const cleanChar = rad.character.split(' ')[0];
-            lessonMatch = lesson.radicals.includes(cleanChar) || rad.lessonId === selectedLessonId;
-          }
-        }
-      }
+      // Filter by JLPT level
+      const lvl = getRadicalLevel(rad.character);
+      if (selectedLevel === 'n5' && lvl !== 'N5') return false;
+      if (selectedLevel === 'n4' && lvl !== 'N4') return false;
+      if (selectedLevel === 'n5_n4' && lvl !== 'N5' && lvl !== 'N4') return false;
 
       // Filter by search query
       const query = searchQuery.toLowerCase().trim();
@@ -124,7 +111,7 @@ export default function RadicalsPage() {
         rad.meaning.toLowerCase().includes(query) ||
         rad.description.toLowerCase().includes(query);
         
-      if (!lessonMatch || !textMatch) return false;
+      if (!textMatch) return false;
 
       // Filter by learning status
       if (filterStatus !== 'all') {
@@ -134,7 +121,7 @@ export default function RadicalsPage() {
 
       return true;
     });
-  }, [radicalsList, selectedLessonId, searchQuery, filterStatus, radicalStatusMap]);
+  }, [radicalsList, selectedLevel, searchQuery, filterStatus, radicalStatusMap]);
 
   // Counts by status
   const statusCounts = useMemo(() => {
@@ -157,17 +144,14 @@ export default function RadicalsPage() {
       if (!target.closest('#radical-practice-dropdown-container')) {
         setPracticeDropdownOpen(false);
       }
-      if (!target.closest('#radical-lesson-dropdown-container')) {
-        setLessonDropdownOpen(false);
-      }
     };
-    if (practiceDropdownOpen || lessonDropdownOpen) {
+    if (practiceDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [practiceDropdownOpen, lessonDropdownOpen]);
+  }, [practiceDropdownOpen]);
 
 
   // Load status from LocalStorage and Cloud Server
@@ -238,7 +222,7 @@ export default function RadicalsPage() {
   const [quizState, setQuizState] = useState<'menu' | 'meaning' | 'write' | 'speedrun' | 'finished'>('menu');
   const [practiceType, setPracticeType] = useState<'meaning' | 'write' | 'speedrun'>('meaning');
   const [practiceLimit, setPracticeLimit] = useState<number>(15);
-  const [selectedQuizLessons, setSelectedQuizLessons] = useState<string[]>([]);
+  const [selectedQuizLevel, setSelectedQuizLevel] = useState<RadicalLevel>('n5');
   
   const [quizList, setQuizList] = useState<RadicalInfo[]>([]);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -272,18 +256,20 @@ export default function RadicalsPage() {
   const sinoInputRef = useRef<HTMLInputElement | null>(null);
   const meaningInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Eligible radicals count for quiz based on selected lessons & status filter
+  // Eligible radicals count for quiz based on selected level & status filter
   const eligiblePracticeCount = useMemo(() => {
     let eligible = radicalsList;
-    if (selectedQuizLessons.length > 0) {
+    if (selectedQuizLevel === 'n5') {
+      eligible = eligible.filter(r => getRadicalLevel(r.character) === 'N5');
+    } else if (selectedQuizLevel === 'n4') {
+      eligible = eligible.filter(r => getRadicalLevel(r.character) === 'N4');
+    } else if (selectedQuizLevel === 'n5_n4') {
       eligible = eligible.filter(r => {
-        const clean = r.character.split(' ')[0];
-        return selectedQuizLessons.some(lessonId => {
-          const lesson = RADICAL_LESSONS.find(l => l.id === lessonId);
-          return (lesson && lesson.radicals.includes(clean)) || r.lessonId === lessonId;
-        });
+        const lvl = getRadicalLevel(r.character);
+        return lvl === 'N5' || lvl === 'N4';
       });
     }
+
     const activeStatuses = Object.keys(practiceFilterStatuses).filter(
       (k) => practiceFilterStatuses[k as RadicalStatus]
     );
@@ -294,7 +280,7 @@ export default function RadicalsPage() {
       });
     }
     return eligible.length;
-  }, [radicalsList, selectedQuizLessons, practiceFilterStatuses, radicalStatusMap]);
+  }, [radicalsList, selectedQuizLevel, practiceFilterStatuses, radicalStatusMap]);
 
   // Auto-sync practiceLimit whenever eligiblePracticeCount changes
   useEffect(() => {
@@ -715,13 +701,14 @@ export default function RadicalsPage() {
   // Start practice session
   const startPractice = () => {
     let eligible = radicalsList;
-    if (selectedQuizLessons.length > 0) {
+    if (selectedQuizLevel === 'n5') {
+      eligible = eligible.filter(r => getRadicalLevel(r.character) === 'N5');
+    } else if (selectedQuizLevel === 'n4') {
+      eligible = eligible.filter(r => getRadicalLevel(r.character) === 'N4');
+    } else if (selectedQuizLevel === 'n5_n4') {
       eligible = eligible.filter(r => {
-        const clean = r.character.split(' ')[0];
-        return selectedQuizLessons.some(lessonId => {
-          const lesson = RADICAL_LESSONS.find(l => l.id === lessonId);
-          return (lesson && lesson.radicals.includes(clean)) || r.lessonId === lessonId;
-        });
+        const lvl = getRadicalLevel(r.character);
+        return lvl === 'N5' || lvl === 'N4';
       });
     }
     
@@ -769,12 +756,15 @@ export default function RadicalsPage() {
     }
   };
 
-  // Quick switch from Lesson Card to Quiz
-  const handleQuickPracticeLesson = (lessonId: string) => {
-    setSelectedQuizLessons([lessonId]);
-    const lesson = RADICAL_LESSONS.find(l => l.id === lessonId);
-    const lessonCount = lesson && lesson.radicals.length > 0 ? lesson.radicals.length : 15;
-    setPracticeLimit(lessonCount);
+  // Quick switch from Level Banner to Quiz
+  const handleQuickPracticeLevel = (level: RadicalLevel) => {
+    setSelectedQuizLevel(level);
+    let count = 15;
+    if (level === 'n5') count = 57;
+    else if (level === 'n4') count = 74;
+    else if (level === 'n5_n4') count = 131;
+    else count = 30;
+    setPracticeLimit(count);
     setActiveTab('quiz');
     setQuizState('menu');
   };
@@ -1018,10 +1008,10 @@ export default function RadicalsPage() {
           </button>
           <div>
             <h1 className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 tracking-wider">
-              CẨM NANG 176 BỘ THỦ KANJI
+              CẨM NANG BỘ THỦ KANJI (JLPT N5 & N4)
             </h1>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 uppercase font-bold tracking-widest">
-              Lộ trình học & ôn tập bám sát 15 Video Bài Giảng Minato
+              Lộ trình học bộ thủ chiết tự tinh gọn phân theo cấp độ JLPT N5 & N4 chuẩn xác
             </p>
           </div>
         </div>
@@ -1036,7 +1026,7 @@ export default function RadicalsPage() {
                 : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
-            📚 Học & Tra cứu theo bài
+            📚 Học & Tra cứu theo cấp độ
           </button>
           <button
             onClick={() => setActiveTab('quiz')}
@@ -1054,56 +1044,91 @@ export default function RadicalsPage() {
       {/* Main container */}
       <main className="max-w-7xl mx-auto space-y-6">
 
-        {/* --- LESSON SELECTOR BAR (15 VIDEO LESSONS) --- */}
+        {/* --- LEVEL SELECTOR BAR (JLPT N5 & N4) --- */}
         <div className="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl backdrop-blur-md">
           <div className="flex items-center justify-between gap-2 mb-2 px-1">
             <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 dark:text-slate-500">
-              Chọn bài học theo 15 Video (Từ 1 nét đến 17 nét)
+              Phân loại theo Cấp độ JLPT
             </span>
             <span className="text-[10px] font-bold text-teal-500">
-              {selectedLessonId === 'all' ? 'Tất cả 176 bộ thủ' : currentLesson?.lessonNumber}
+              {selectedLevel === 'n5'
+                ? '🟢 Cấp độ N5 (57 bộ thủ)'
+                : selectedLevel === 'n4'
+                ? '🟡 Cấp độ N4 (74 bộ thủ)'
+                : selectedLevel === 'n5_n4'
+                ? '⚡ Trọn bộ N5 & N4 (131 bộ thủ)'
+                : '📚 Tất cả 201 bộ thủ'}
             </span>
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-slate-700">
-            {/* All lessons option */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <button
-              onClick={() => setSelectedLessonId('all')}
-              className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer border shrink-0 ${
-                selectedLessonId === 'all'
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-slate-900 dark:text-white border-teal-500 shadow-md scale-105'
+              onClick={() => setSelectedLevel('n5')}
+              className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                selectedLevel === 'n5'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-teal-500 shadow-md scale-[1.02]'
                   : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
-              🌟 Tất cả ({radicalsList.length} bộ)
+              <span>🟢</span>
+              <span>Bộ thủ N5</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                selectedLevel === 'n5' ? 'bg-slate-900/30 text-white' : 'bg-emerald-500/10 text-emerald-400'
+              }`}>
+                57
+              </span>
             </button>
 
-            {/* 15 Individual Lessons */}
-            {RADICAL_LESSONS.map(lesson => {
-              const isSelected = selectedLessonId === lesson.id;
-              const hasRadicals = lesson.radicals.length > 0;
-              return (
-                <button
-                  key={lesson.id}
-                  onClick={() => setSelectedLessonId(lesson.id)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer border shrink-0 flex items-center gap-1.5 ${
-                    isSelected
-                      ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-slate-900 dark:text-white border-teal-500 shadow-md scale-105'
-                      : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
-                  }`}
-                >
-                  <span>{lesson.id === 'intro' ? '📌' : '📖'}</span>
-                  <span>{lesson.lessonNumber}</span>
-                  {hasRadicals && (
-                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
-                      isSelected ? 'bg-slate-900/30 text-white' : 'bg-slate-200 dark:bg-slate-800 text-teal-400'
-                    }`}>
-                      {lesson.radicals.length}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+            <button
+              onClick={() => setSelectedLevel('n4')}
+              className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                selectedLevel === 'n4'
+                  ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-500 shadow-md scale-[1.02]'
+                  : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
+              }`}
+            >
+              <span>🟡</span>
+              <span>Bộ thủ N4</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                selectedLevel === 'n4' ? 'bg-slate-900/30 text-white' : 'bg-amber-500/10 text-amber-400'
+              }`}>
+                74
+              </span>
+            </button>
+
+            <button
+              onClick={() => setSelectedLevel('n5_n4')}
+              className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                selectedLevel === 'n5_n4'
+                  ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white border-indigo-500 shadow-md scale-[1.02]'
+                  : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
+              }`}
+            >
+              <span>⚡</span>
+              <span>Trọn bộ N5 + N4</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                selectedLevel === 'n5_n4' ? 'bg-slate-900/30 text-white' : 'bg-indigo-500/10 text-indigo-400'
+              }`}>
+                131
+              </span>
+            </button>
+
+            <button
+              onClick={() => setSelectedLevel('all')}
+              className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                selectedLevel === 'all'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white border-purple-500 shadow-md scale-[1.02]'
+                  : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
+              }`}
+            >
+              <span>📚</span>
+              <span>Tất cả (Kèm Nâng cao)</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                selectedLevel === 'all' ? 'bg-slate-900/30 text-white' : 'bg-purple-500/10 text-purple-400'
+              }`}>
+                {radicalsList.length}
+              </span>
+            </button>
           </div>
         </div>
         
@@ -1111,109 +1136,138 @@ export default function RadicalsPage() {
         {activeTab === 'browse' && (
           <div className="space-y-6">
 
-            {/* --- LESSON SUMMARY BANNER: CORE IDEAS & MEMORY METHOD --- */}
-            {currentLesson ? (
-              <div className="bg-slate-900/60 border border-teal-500/30 rounded-3xl p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-5 animate-in fade-in duration-300">
-                {/* Header: Title, Stroke & Direct YouTube link */}
+            {/* --- LEVEL SUMMARY BANNER --- */}
+            {selectedLevel === 'n5' && (
+              <div className="bg-slate-900/60 border border-emerald-500/30 rounded-3xl p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-4 animate-in fade-in duration-300">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30">
-                        {currentLesson.lessonNumber} • {currentLesson.strokesDescription}
+                      <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        CẤP ĐỘ JLPT N5 • 57 BỘ THỦ NỀN TẢNG
                       </span>
-                      {currentLesson.radicals.length > 0 && (
-                        <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                          {currentLesson.radicals.length} bộ thủ
-                        </span>
-                      )}
                     </div>
                     <h2 className="text-base sm:text-lg font-black text-white">
-                      {currentLesson.title}
+                      57 Bộ thủ cốt lõi để làm chủ 100% Chữ Hán N5
                     </h2>
                   </div>
-
-                  {/* Direct YouTube Video Link */}
-                  <a
-                    href={currentLesson.youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-black transition-all shadow-md hover:shadow-red-600/30 flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
-                    title="Mở xem video bài giảng trực tiếp trên YouTube"
+                  <button
+                    onClick={() => handleQuickPracticeLevel('n5')}
+                    className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
                   >
-                    <span>▶️</span> Xem video trên YouTube ↗
-                  </a>
+                    <span>⚡</span> Luyện tập 57 bộ thủ N5
+                  </button>
                 </div>
-
-                {/* 2-Column Grid: Core Ideas & Memory Method */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Left: Core Ideas */}
-                  <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2.5">
-                    <div className="flex items-center gap-2">
-                      <span className="text-base">🎯</span>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-teal-400">
-                        Ý chính của bài học
-                      </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
+                  <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-emerald-400 font-black">
+                      <span>🎯</span> Ý nghĩa đối với người học N5:
                     </div>
-                    <ul className="space-y-2 text-xs text-slate-300">
-                      {currentLesson.keyIdeas.map((idea, idx) => (
-                        <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                          <span className="text-teal-400 font-black mt-0.5">•</span>
-                          <span>{idea}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="leading-relaxed">
+                      57 bộ thủ này xuất hiện xuyên suốt trong toàn bộ 205 chữ Hán của 25 bài học N5 (Minna no Nihongo Tập 1). Bao gồm các bộ thân thuộc: Nhân (人/亻), Nhật (日), Nguyệt (月), Mộc (木), Thủy (水), Hỏa (火), Thổ (土), Khẩu (口)...
+                    </p>
                   </div>
-
-                  {/* Right: Memory Method */}
-                  <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2.5 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-base">💡</span>
-                        <h3 className="text-xs font-black uppercase tracking-wider text-amber-400">
-                          Phương pháp ôn nhớ đặc thù
-                        </h3>
-                      </div>
-                      <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                        {currentLesson.memoryMethod}
-                      </p>
+                  <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-teal-400 font-black">
+                      <span>💡</span> Phương pháp học hiệu quả:
                     </div>
-
-                    {/* Quick Practice Button for this lesson */}
-                    {currentLesson.radicals.length > 0 && (
-                      <div className="pt-3 border-t border-slate-800/60 flex justify-end">
-                        <button
-                          onClick={() => handleQuickPracticeLesson(currentLesson.id)}
-                          className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-black transition-all cursor-pointer shadow-md active:scale-95 flex items-center gap-1.5"
-                        >
-                          <span>⚡</span> Luyện tập {currentLesson.radicals.length} bộ thủ bài này
-                        </button>
-                      </div>
-                    )}
+                    <p className="leading-relaxed">
+                      Chỉ cần nhớ vững 57 bộ này là bạn có thể dễ dàng chiết tự từng chữ Hán như ghép lego. Khi gặp chữ khó, hãy tìm bộ thủ quen thuộc để liên tưởng câu chuyện!
+                    </p>
                   </div>
                 </div>
               </div>
-            ) : (
-              /* Overview Welcome Banner when "All" is selected */
-              <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-5 sm:p-6 backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                      TỔNG HỢP 15 BÀI HỌC • 176 BỘ THỦ KANJI
-                    </span>
+            )}
+
+            {selectedLevel === 'n4' && (
+              <div className="bg-slate-900/60 border border-amber-500/30 rounded-3xl p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-4 animate-in fade-in duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                        CẤP ĐỘ JLPT N4 • 74 BỘ THỦ MỞ RỘNG
+                      </span>
+                    </div>
+                    <h2 className="text-base sm:text-lg font-black text-white">
+                      74 Bộ thủ mới phát sinh ở trình độ N4
+                    </h2>
                   </div>
-                  <h2 className="text-sm sm:text-base font-black text-white">
-                    Phương pháp học bộ thủ chiết tự & liên tưởng hình ảnh
-                  </h2>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    Hệ thống hóa toàn diện các bộ thủ từ 1 nét đến 17 nét theo giáo trình 15 video của cô Ngọc Tiệp Minato. Hãy chọn từng bài ở thanh trên để xem ý chính, phương pháp ôn nhớ và làm bài kiểm tra!
-                  </p>
+                  <button
+                    onClick={() => handleQuickPracticeLevel('n4')}
+                    className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
+                  >
+                    <span>⚡</span> Luyện tập 74 bộ thủ N4
+                  </button>
                 </div>
-                <button
-                  onClick={() => { setActiveTab('quiz'); setQuizState('menu'); }}
-                  className="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-black transition-all cursor-pointer shadow-lg active:scale-95 whitespace-nowrap shrink-0 flex items-center gap-1.5"
-                >
-                  <span>⚡</span> Bắt đầu làm bài test tổng hợp
-                </button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
+                  <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-amber-400 font-black">
+                      <span>🎯</span> Bước tiến quan trọng từ N5 lên N4:
+                    </div>
+                    <p className="leading-relaxed">
+                      Để học tốt 200 chữ Hán N4 (Bài 26 đến 50), bạn chỉ cần bổ sung thêm 74 bộ thủ mới này (như Y 衣, Thảo 艸, Chuy 隹, Cân 巾, Trùng 虫, Thạch 石, Thần 辰, Trảo 爪...).
+                    </p>
+                  </div>
+                  <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-orange-400 font-black">
+                      <span>💡</span> Lời khuyên ôn luyện:
+                    </div>
+                    <p className="leading-relaxed">
+                      Kết hợp 57 bộ N5 đã biết với 74 bộ N4 này, bạn đã nắm trọn 131 bộ thủ quan trọng nhất trong tiếng Nhật, phủ kín 100% toàn bộ 50 bài Minna no Nihongo!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {selectedLevel === 'n5_n4' && (
+              <div className="bg-slate-900/60 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-4 animate-in fade-in duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                        TRỌN BỘ SƠ CẤP • 131 BỘ THỦ KANJI N5 & N4
+                      </span>
+                    </div>
+                    <h2 className="text-base sm:text-lg font-black text-white">
+                      Tổng hợp 131 bộ thủ chiết tự toàn bộ 405 Chữ Hán N5 & N4
+                    </h2>
+                  </div>
+                  <button
+                    onClick={() => handleQuickPracticeLevel('n5_n4')}
+                    className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
+                  >
+                    <span>⚡</span> Luyện tập 131 bộ thủ N5 & N4
+                  </button>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  131 bộ thủ này chiếm tới 65% từ điển 201 bộ thủ, cấu thành 100% chữ Hán sơ cấp. Nắm vững nhóm này giúp bạn hoàn toàn làm chủ Kanji trong các bài thi JLPT N5 và N4.
+                </p>
+              </div>
+            )}
+
+            {selectedLevel === 'all' && (
+              <div className="bg-slate-900/60 border border-purple-500/30 rounded-3xl p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-4 animate-in fade-in duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                        TOÀN BỘ 201 BỘ THỦ CHUẨN
+                      </span>
+                    </div>
+                    <h2 className="text-base sm:text-lg font-black text-white">
+                      Từ điển đầy đủ 201 Bộ thủ tiếng Nhật (N5, N4 & Nâng cao N3-N1)
+                    </h2>
+                  </div>
+                  <button
+                    onClick={() => handleQuickPracticeLevel('all')}
+                    className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
+                  >
+                    <span>⚡</span> Luyện tập tất cả 201 bộ thủ
+                  </button>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Bao gồm 57 bộ N5, 74 bộ N4 và 70 bộ thủ Nâng cao (từ 8 đến 17 nét như Mãnh, Đỉnh, Xỉ, Dược...).
+                </p>
               </div>
             )}
             
@@ -1315,29 +1369,42 @@ export default function RadicalsPage() {
               <div className="text-center py-16 text-slate-400 border border-dashed border-slate-800 rounded-3xl bg-slate-900/20 space-y-2">
                 <div className="text-3xl">📭</div>
                 <p className="text-xs font-bold">
-                  {selectedLessonId === 'intro' 
-                    ? 'Bài mở đầu tập trung vào phương pháp tư duy và định hướng. Hãy chọn Bài 1.1 để bắt đầu học bộ thủ!' 
-                    : 'Không tìm thấy bộ thủ nào trùng khớp với từ khóa tìm kiếm hoặc bộ lọc trạng thái.'}
+                  Không tìm thấy bộ thủ nào phù hợp với cấp độ hoặc bộ lọc trạng thái đã chọn.
                 </p>
-                {selectedLessonId === 'intro' && (
-                  <button
-                    onClick={() => setSelectedLessonId('1-1')}
-                    className="mt-2 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-xl cursor-pointer"
-                  >
-                    Chuyển sang Bài 1.1 ➔
-                  </button>
-                )}
+                <button
+                  onClick={() => { setSelectedLevel('all'); setFilterStatus('all'); setSearchQuery(''); }}
+                  className="mt-2 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-xl cursor-pointer"
+                >
+                  Xem tất cả bộ thủ ➔
+                </button>
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                {filteredRadicals.map((rad) => {
+                {filteredRadicals.map((rad, index) => {
                   const currentStatus = radicalStatusMap[rad.character] || 'not_learned';
+                  const radLevel = getRadicalLevel(rad.character);
                   return (
                     <div
                       key={rad.character}
                       onClick={() => setSelectedRadical(rad)}
                       className="group bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 p-3.5 rounded-2xl flex flex-col items-center justify-between gap-2.5 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(20,184,166,0.1)] shadow-sm"
                     >
+                      {/* Level Badge & Index */}
+                      <div className="w-full flex items-center justify-between text-[10px] font-black">
+                        <span className={`px-2 py-0.5 rounded-full uppercase tracking-wider text-[9px] font-extrabold ${
+                          radLevel === 'N5'
+                            ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                            : radLevel === 'N4'
+                            ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                            : 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20'
+                        }`}>
+                          {radLevel === 'advanced' ? 'N3-N1' : radLevel}
+                        </span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold">
+                          #{index + 1}
+                        </span>
+                      </div>
+
                       {/* Big radical character */}
                       <div className="w-14 h-14 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-center text-3xl font-black text-slate-900 dark:text-white group-hover:text-teal-400 group-hover:border-teal-900 transition-colors shadow-inner">
                         {rad.character.split(' ')[0]}
@@ -1493,100 +1560,56 @@ export default function RadicalsPage() {
 
                 {/* Scope Configuration */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {/* Select Lesson Multi-select Checkbox (15 video lessons) */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-[10px] text-slate-400 uppercase font-black tracking-wider block">
-                        Phạm vi bài học (Chọn nhiều bài)
-                      </label>
-                      {selectedQuizLessons.length > 0 && (
-                        <button
-                          type="button"
-                          onClick={() => setSelectedQuizLessons([])}
-                          className="text-[9px] text-teal-400 hover:text-teal-300 font-bold cursor-pointer transition-colors"
-                        >
-                          Chọn tất cả
-                        </button>
-                      )}
-                    </div>
-                    <div id="radical-lesson-dropdown-container" className="relative z-30">
+                  {/* Select Level Scope */}
+                  <div className="space-y-2 sm:col-span-2">
+                    <label className="text-[10px] text-slate-400 uppercase font-black tracking-wider block">
+                      Phạm vi cấp độ muốn luyện tập
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       <button
                         type="button"
-                        onClick={() => setLessonDropdownOpen(!lessonDropdownOpen)}
-                        className="w-full flex items-center justify-between bg-slate-950 border border-slate-800 hover:border-slate-700 px-3 py-2.5 rounded-xl text-xs font-bold text-slate-200 cursor-pointer transition-colors"
+                        onClick={() => setSelectedQuizLevel('n5')}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                          selectedQuizLevel === 'n5'
+                            ? 'bg-emerald-950/50 border-emerald-500 text-emerald-400 shadow-sm ring-1 ring-emerald-500/50'
+                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                        }`}
                       >
-                        <div className="flex items-center gap-1.5 truncate">
-                          <span className="text-slate-400">📚:</span>
-                          <span className="text-teal-400 truncate">
-                            {selectedQuizLessons.length === 0
-                              ? `Tất cả các bài (${radicalsList.length} bộ)`
-                              : selectedQuizLessons.length === 1
-                              ? `${RADICAL_LESSONS.find(l => l.id === selectedQuizLessons[0])?.lessonNumber || ''} (${RADICAL_LESSONS.find(l => l.id === selectedQuizLessons[0])?.radicals.length || 0} bộ)`
-                              : `Đã chọn ${selectedQuizLessons.length} bài (${eligiblePracticeCount} bộ)`}
-                          </span>
-                        </div>
-                        <span className="text-[10px] text-slate-400 ml-1">▼</span>
+                        <span>🟢 N5 (57 bộ)</span>
                       </button>
-
-                      {lessonDropdownOpen && (
-                        <div className="absolute left-0 right-0 mt-2 bg-[#0c1328] border border-slate-800 shadow-2xl rounded-2xl z-50 p-2.5 space-y-1.5 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 animate-in fade-in zoom-in-95 duration-150">
-                          <div className="flex items-center justify-between pb-2 mb-1 border-b border-slate-800 px-1 text-[10px]">
-                            <span className="text-slate-400 font-bold uppercase tracking-wider">
-                              Tích chọn kết hợp:
-                            </span>
-                            <div className="flex gap-2">
-                              <button
-                                type="button"
-                                onClick={() => setSelectedQuizLessons([])}
-                                className="text-teal-400 hover:underline font-bold cursor-pointer"
-                              >
-                                Tất cả
-                              </button>
-                              <span className="text-slate-600">•</span>
-                              <button
-                                type="button"
-                                onClick={() => setSelectedQuizLessons(['1-1'])}
-                                className="text-slate-400 hover:underline font-bold cursor-pointer"
-                              >
-                                Chỉ Bài 1.1
-                              </button>
-                            </div>
-                          </div>
-
-                          {RADICAL_LESSONS.filter(l => l.radicals.length > 0).map(lesson => {
-                            const isChecked = selectedQuizLessons.includes(lesson.id);
-                            return (
-                              <label
-                                key={lesson.id}
-                                className="flex items-center justify-between px-2.5 py-1.5 hover:bg-slate-900/60 rounded-xl cursor-pointer text-xs text-slate-300 hover:text-white transition-colors"
-                              >
-                                <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                                  <input
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    onChange={(e) => {
-                                      const checked = e.target.checked;
-                                      setSelectedQuizLessons(prev => {
-                                        if (checked) {
-                                          return [...prev, lesson.id];
-                                        } else {
-                                          return prev.filter(id => id !== lesson.id);
-                                        }
-                                      });
-                                    }}
-                                    className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-teal-500 focus:ring-teal-500 shrink-0"
-                                  />
-                                  <span className="font-bold text-white shrink-0">{lesson.lessonNumber}:</span>
-                                  <span className="text-slate-400 text-[11px] truncate">{lesson.title.split(':')[0]}</span>
-                                </div>
-                                <span className="text-[10px] font-bold text-teal-400/90 bg-teal-500/10 px-1.5 py-0.5 rounded-md shrink-0">
-                                  {lesson.radicals.length} bộ
-                                </span>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      )}
+                      <button
+                        type="button"
+                        onClick={() => setSelectedQuizLevel('n4')}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                          selectedQuizLevel === 'n4'
+                            ? 'bg-amber-950/50 border-amber-500 text-amber-400 shadow-sm ring-1 ring-amber-500/50'
+                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                        }`}
+                      >
+                        <span>🟡 N4 (74 bộ)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedQuizLevel('n5_n4')}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                          selectedQuizLevel === 'n5_n4'
+                            ? 'bg-indigo-950/50 border-indigo-500 text-indigo-400 shadow-sm ring-1 ring-indigo-500/50'
+                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                        }`}
+                      >
+                        <span>⚡ N5+N4 (131 bộ)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedQuizLevel('all')}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
+                          selectedQuizLevel === 'all'
+                            ? 'bg-purple-950/50 border-purple-500 text-purple-400 shadow-sm ring-1 ring-purple-500/50'
+                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                        }`}
+                      >
+                        <span>📚 Tất cả (201)</span>
+                      </button>
                     </div>
                   </div>
 

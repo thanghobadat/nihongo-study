@@ -948,10 +948,17 @@ export default function UserDashboard() {
           {/* ACCORDION: MỤC TIÊU & NHIỆM VỤ NGÀY MAI (ĐÓNG/MỞ TRỰC TIẾP - KHÔNG POPUP) */}
           <div className="pt-2 border-t border-slate-800/80">
             <div className="rounded-xl border border-indigo-500/30 bg-slate-950/60 overflow-hidden transition-all">
-              <button
-                type="button"
+              <div
+                role="button"
+                tabIndex={0}
                 onClick={() => setIsTomorrowOpen(!isTomorrowOpen)}
-                className="w-full p-3.5 sm:p-4 flex items-center justify-between text-left hover:bg-slate-900/60 transition-colors cursor-pointer"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsTomorrowOpen(!isTomorrowOpen);
+                  }
+                }}
+                className="w-full p-3.5 sm:p-4 flex items-center justify-between text-left hover:bg-slate-900/60 transition-colors cursor-pointer select-none"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xl">📅</span>
@@ -995,7 +1002,7 @@ export default function UserDashboard() {
                     <span>{isTomorrowOpen ? '▲' : '▼'}</span>
                   </div>
                 </div>
-              </button>
+              </div>
 
               {isTomorrowOpen && (
                 <div className="p-4 border-t border-slate-800/80 bg-slate-900/40 space-y-3 animate-in fade-in duration-200">

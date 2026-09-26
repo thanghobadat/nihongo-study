@@ -50,4 +50,7 @@ backend/src/db/mockDb_backup*.js
 backend/src/db/ai_*.json
 backend/data/
 
+# backup files
+*.bak
+
 

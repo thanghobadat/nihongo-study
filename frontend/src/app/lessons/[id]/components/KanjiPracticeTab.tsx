@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {
   KanjiItemData,
+  KanjiQuestionType,
   KanjiPracticeQuestion,
   generateKanjiPracticeQuestions,
   gradeKanjiWritten,
@@ -27,8 +28,11 @@ export default function KanjiPracticeTab({
   onUpdateKanjiStatus,
   onBackToVocabPractice
 }: KanjiPracticeTabProps) {
-  // Mode: choice (Trắc nghiệm), written (Tự luận), speedrun (Phản xạ 10s)
-  const [practiceMode, setPracticeMode] = useState<'choice' | 'written' | 'speedrun'>('choice');
+  // Mode: choice (Trắc nghiệm), written (Tự luận), draw (Tập viết Canvas), speedrun (Phản xạ 10s)
+  const [practiceMode, setPracticeMode] = useState<'choice' | 'written' | 'draw' | 'speedrun'>('choice');
+  // Direction: 'kanji-to-meaning' (Chữ Hán ➔ Nghĩa), 'meaning-to-kanji' (Nghĩa ➔ Chữ Hán), 'both' (Song song)
+  const [practiceDirection, setPracticeDirection] = useState<'kanji-to-meaning' | 'meaning-to-kanji' | 'both'>('both');
+  const [isQuestionFlipped, setIsQuestionFlipped] = useState<boolean>(false);
   const [questionLimit, setQuestionLimit] = useState<number | ''>(10);
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
   const [filterDropdownOpen, setFilterDropdownOpen] = useState<boolean>(false);
@@ -50,6 +54,35 @@ export default function KanjiPracticeTab({
   // Written mode specific state
   const [writtenInput, setWrittenInput] = useState<string>('');
   const writtenInputRef = useRef<HTMLInputElement>(null);
+
+  // Draw mode specific state
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [isDrawing, setIsDrawing] = useState<boolean>(false);
+  const [hasDrawn, setHasDrawn] = useState<boolean>(false);
+  const [showGhostGuide, setShowGhostGuide] = useState<boolean>(true);
+  const [drawIndex, setDrawIndex] = useState<number>(0);
+  const [drawResult, setDrawResult] = useState<{
+    score: number;
+    is_correct: boolean;
+    status: 'excellent' | 'acceptable' | 'needs_improvement' | 'incorrect';
+    status_label: string;
+    feedback: string;
+  } | null>(null);
+  const [drawEvaluated, setDrawEvaluated] = useState<Record<number, {
+    score: number;
+    is_correct: boolean;
+    status_label: string;
+    feedback: string;
+  }>>({});
+  const [isDrawFinished, setIsDrawFinished] = useState<boolean>(false);
+
+  // Derived list of Kanji for drawing
+  const drawKanjiList = useMemo(() => {
+    const limitNum = typeof questionLimit === 'number' ? questionLimit : eligibleKanji.length;
+    return eligibleKanji.slice(0, Math.min(limitNum, eligibleKanji.length));
+  }, [eligibleKanji, questionLimit]);
+
+  const currentDrawKanji = drawKanjiList[drawIndex] || null;
 
   // Speedrun mode state
   const [speedrunActive, setSpeedrunActive] = useState<boolean>(false);
@@ -74,6 +107,11 @@ export default function KanjiPracticeTab({
     }
   }, [selectedLessonId]);
 
+  // Reset flipped state on question or draw index change
+  useEffect(() => {
+    setIsQuestionFlipped(false);
+  }, [currentIndex, drawIndex]);
+
   // Generator for Choice & Written modes
   const initPracticeSession = useCallback(() => {
     if (!eligibleKanji || eligibleKanji.length === 0) {
@@ -81,11 +119,20 @@ export default function KanjiPracticeTab({
       return;
     }
     const limitNum = typeof questionLimit === 'number' ? questionLimit : eligibleKanji.length;
+
+    // Filter enabled question types based on practice direction
+    let enabledTypes: KanjiQuestionType[] = ['kanji_to_sino_meaning', 'meaning_to_kanji', 'compound_fill'];
+    if (practiceDirection === 'kanji-to-meaning') {
+      enabledTypes = ['kanji_to_sino_meaning', 'compound_fill'];
+    } else if (practiceDirection === 'meaning-to-kanji') {
+      enabledTypes = ['meaning_to_kanji'];
+    }
+
     const generated = generateKanjiPracticeQuestions(
       eligibleKanji,
       COMMON_KANJI_DISTRACTORS,
       Math.min(limitNum, Math.max(eligibleKanji.length, 5)),
-      ['kanji_to_sino_meaning', 'meaning_to_kanji', 'compound_fill']
+      enabledTypes
     );
 
     setQuestions(generated);
@@ -95,9 +142,16 @@ export default function KanjiPracticeTab({
     setResults({});
     setIsFinished(false);
     setWrittenInput('');
-  }, [eligibleKanji, questionLimit]);
+    setIsQuestionFlipped(false);
 
-  // Re-generate on lesson change or status filter change
+    // Reset draw mode session state
+    setDrawIndex(0);
+    setDrawResult(null);
+    setDrawEvaluated({});
+    setIsDrawFinished(false);
+  }, [eligibleKanji, questionLimit, practiceDirection]);
+
+  // Re-generate on lesson change, status filter change, or direction change
   useEffect(() => {
     initPracticeSession();
   }, [initPracticeSession]);
@@ -215,14 +269,20 @@ export default function KanjiPracticeTab({
   // ==================== SPEEDRUN MODE HANDLERS ====================
   const generateNextSpeedrunQuestion = useCallback(() => {
     if (!eligibleKanji || eligibleKanji.length === 0) return null;
+    let enabledTypes: KanjiQuestionType[] = ['kanji_to_sino_meaning', 'meaning_to_kanji'];
+    if (practiceDirection === 'kanji-to-meaning') {
+      enabledTypes = ['kanji_to_sino_meaning'];
+    } else if (practiceDirection === 'meaning-to-kanji') {
+      enabledTypes = ['meaning_to_kanji'];
+    }
     const generated = generateKanjiPracticeQuestions(
       eligibleKanji,
       COMMON_KANJI_DISTRACTORS,
       1,
-      ['kanji_to_sino_meaning', 'meaning_to_kanji']
+      enabledTypes
     );
     return generated[0] || null;
-  }, [eligibleKanji]);
+  }, [eligibleKanji, practiceDirection]);
 
   const startSpeedrun = () => {
     setSpeedrunActive(true);
@@ -305,6 +365,274 @@ export default function KanjiPracticeTab({
     return parseCompounds(questions[currentIndex].compounds);
   }, [questions, currentIndex]);
 
+  // ==================== DRAW (TẬP VIẾT) HANDLERS ====================
+  // Draw Tian Zi Ge (田字格) grid & optional Ghost guide on canvas
+  const drawGridAndGuide = useCallback((targetChar?: string, ghostVisible = false) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Dark canvas background
+    ctx.fillStyle = '#090d1f';
+    ctx.fillRect(0, 0, w, h);
+
+    // Outer boundary
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([]);
+    ctx.strokeRect(1, 1, w - 2, h - 2);
+
+    // Inner dashed crosslines (Tian Zi Ge)
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 6]);
+
+    ctx.beginPath();
+    ctx.moveTo(0, h / 2);
+    ctx.lineTo(w, h / 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(w / 2, 0);
+    ctx.lineTo(w / 2, h);
+    ctx.stroke();
+
+    // Subtle diagonal dashed guides
+    ctx.strokeStyle = '#151d2f';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 8]);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(w, h);
+    ctx.moveTo(w, 0);
+    ctx.lineTo(0, h);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+    // Ghost template guide
+    if (ghostVisible && targetChar) {
+      ctx.fillStyle = 'rgba(20, 184, 166, 0.22)';
+      ctx.font = '900 150px "Noto Sans JP", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(targetChar, w / 2, h / 2 + 5);
+    }
+  }, []);
+
+  // Synchronize canvas when Kanji changes, ghost guide toggles, or direction/flip changes
+  useEffect(() => {
+    if (practiceMode === 'draw' && currentDrawKanji) {
+      const char = currentDrawKanji.character;
+      const t = setTimeout(() => {
+        const effectiveGhost = practiceDirection === 'meaning-to-kanji' && !isQuestionFlipped ? false : showGhostGuide;
+        drawGridAndGuide(char, effectiveGhost);
+        setHasDrawn(false);
+        const existing = drawEvaluated[drawIndex];
+        setDrawResult(existing ? {
+          score: existing.score,
+          is_correct: existing.is_correct,
+          status: existing.score >= 85 ? 'excellent' : existing.score >= 60 ? 'acceptable' : 'needs_improvement',
+          status_label: existing.status_label,
+          feedback: existing.feedback
+        } : null);
+      }, 50);
+      return () => clearTimeout(t);
+    }
+  }, [practiceMode, drawIndex, showGhostGuide, drawGridAndGuide, currentDrawKanji, drawEvaluated, practiceDirection, isQuestionFlipped]);
+
+  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#2dd4bf'; // Teal-400
+    ctx.setLineDash([]);
+
+    let x = 0;
+    let y = 0;
+    const rect = canvas.getBoundingClientRect();
+    if ('touches' in e) {
+      e.preventDefault();
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
+    } else {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    setIsDrawing(true);
+    setHasDrawn(true);
+  };
+
+  const drawStroke = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let x = 0;
+    let y = 0;
+    const rect = canvas.getBoundingClientRect();
+    if ('touches' in e) {
+      e.preventDefault();
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
+    } else {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+    }
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  };
+
+  const stopDrawing = () => {
+    setIsDrawing(false);
+  };
+
+  const clearCanvas = () => {
+    if (!currentDrawKanji) return;
+    drawGridAndGuide(currentDrawKanji.character, showGhostGuide);
+    setHasDrawn(false);
+    setDrawResult(null);
+  };
+
+  // Local stroke similarity evaluation (Tian Zi Ge grid sampling & F1 score)
+  const evaluateDrawing = () => {
+    if (!currentDrawKanji) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const offscreen = document.createElement('canvas');
+    offscreen.width = canvas.width;
+    offscreen.height = canvas.height;
+    const oCtx = offscreen.getContext('2d');
+    if (!oCtx) return;
+
+    oCtx.fillStyle = '#090d1f';
+    oCtx.fillRect(0, 0, offscreen.width, offscreen.height);
+    oCtx.fillStyle = '#2dd4bf';
+    oCtx.font = '900 150px "Noto Sans JP", sans-serif';
+    oCtx.textAlign = 'center';
+    oCtx.textBaseline = 'middle';
+    oCtx.fillText(currentDrawKanji.character, offscreen.width / 2, offscreen.height / 2 + 5);
+
+    const userCtx = canvas.getContext('2d');
+    if (!userCtx) return;
+
+    const uImg = userCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const tImg = oCtx.getImageData(0, 0, offscreen.width, offscreen.height).data;
+
+    const W = 40;
+    const H = 40;
+    const stepX = canvas.width / W;
+    const stepY = canvas.height / H;
+
+    let overlap = 0;
+    let targetFilled = 0;
+    let userFilled = 0;
+
+    for (let gy = 0; gy < H; gy++) {
+      for (let gx = 0; gx < W; gx++) {
+        const px = Math.floor(gx * stepX);
+        const py = Math.floor(gy * stepY);
+        const idx = (py * canvas.width + px) * 4;
+
+        const uIsDrawn = uImg[idx + 1] > 90 && (uImg[idx] !== 9 && uImg[idx + 2] !== 31);
+        const tIsDrawn = tImg[idx + 1] > 90 && (tImg[idx] !== 9 && tImg[idx + 2] !== 31);
+
+        if (tIsDrawn) targetFilled++;
+        if (uIsDrawn) userFilled++;
+        if (uIsDrawn && tIsDrawn) overlap++;
+      }
+    }
+
+    if (userFilled < 10) {
+      const res = {
+        score: 20,
+        is_correct: false,
+        status: 'incorrect' as const,
+        status_label: 'Chưa đủ nét (20/100)',
+        feedback: 'Nét vẽ quá ít hoặc chưa hoàn thành. Hãy viết đầy đủ các nét của chữ Hán nhé.'
+      };
+      setDrawResult(res);
+      setDrawEvaluated(prev => ({ ...prev, [drawIndex]: res }));
+      return;
+    }
+
+    const precision = overlap / Math.max(1, userFilled);
+    const recall = overlap / Math.max(1, targetFilled);
+    const f1 = (precision + recall) > 0 ? (2 * precision * recall) / (precision + recall) : 0;
+    const rawScore = Math.min(100, Math.max(30, Math.round(f1 * 130) + 18));
+
+    let status: 'excellent' | 'acceptable' | 'needs_improvement' | 'incorrect' = 'acceptable';
+    let status_label = `Đạt yêu cầu (${rawScore}/100)`;
+    let feedback = 'Nét vẽ tương đối chuẩn xác với chữ Hán mẫu. Tiếp tục phát huy!';
+
+    if (rawScore >= 85) {
+      status = 'excellent';
+      status_label = `Xuất sắc! (${rawScore}/100)`;
+      feedback = 'Nét vẽ rất chuẩn xác, cân đối và đúng tỷ lệ chữ Hán!';
+    } else if (rawScore < 60) {
+      status = 'needs_improvement';
+      status_label = `Cần rèn thêm (${rawScore}/100)`;
+      feedback = 'Hình dáng chữ còn hơi lệch hoặc chưa cân đối, hãy bật chữ mẫu mờ để đồ theo nhé.';
+    }
+
+    const res = {
+      score: rawScore,
+      is_correct: rawScore >= 60,
+      status,
+      status_label,
+      feedback
+    };
+
+    setDrawResult(res);
+    setDrawEvaluated(prev => ({ ...prev, [drawIndex]: res }));
+
+    if (res.is_correct) {
+      handlePlayAudio(currentDrawKanji.character, currentDrawKanji.kunyomi || currentDrawKanji.character);
+    }
+  };
+
+  const handleNextDraw = () => {
+    if (drawIndex + 1 < drawKanjiList.length) {
+      setDrawIndex(prev => prev + 1);
+    } else {
+      setIsDrawFinished(true);
+    }
+  };
+
+  const handlePrevDraw = () => {
+    if (drawIndex > 0) {
+      setDrawIndex(prev => prev - 1);
+    }
+  };
+
+  // Phân tích bộ thủ và từ ghép của chữ Kanji đang vẽ
+  const currentDrawRadicals = useMemo(() => {
+    if (!currentDrawKanji) return '';
+    return getRadicalsString(currentDrawKanji.character);
+  }, [currentDrawKanji]);
+
+  const currentDrawCompounds = useMemo(() => {
+    if (!currentDrawKanji) return [];
+    return parseCompounds(currentDrawKanji.compounds);
+  }, [currentDrawKanji]);
+
   return (
     <div className="space-y-6 max-w-5xl mx-auto animate-fade-in pb-12">
       {/* 1. Header Toolbar */}
@@ -369,6 +697,22 @@ export default function KanjiPracticeTab({
             </button>
             <button
               onClick={() => {
+                setPracticeMode('draw');
+                setDrawIndex(0);
+                setDrawResult(null);
+                setDrawEvaluated({});
+                setIsDrawFinished(false);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                practiceMode === 'draw'
+                  ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-md font-extrabold'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <span>🖌️ Tập viết</span>
+            </button>
+            <button
+              onClick={() => {
                 setPracticeMode('speedrun');
                 setSpeedrunActive(false);
                 setSpeedrunGameOver(false);
@@ -383,8 +727,48 @@ export default function KanjiPracticeTab({
             </button>
           </div>
 
-          {/* Right Toolbar: Limit & Status Filters */}
+          {/* Right Toolbar: Direction, Limit & Status Filters */}
           <div className="flex flex-wrap items-center gap-3">
+            {/* Direction Switcher: Kanji ➔ Nghĩa / Nghĩa ➔ Kanji / Song song */}
+            <div className="flex bg-slate-100 dark:bg-slate-950/60 p-1 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-xs font-bold shrink-0">
+              <button
+                onClick={() => setPracticeDirection('kanji-to-meaning')}
+                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                  practiceDirection === 'kanji-to-meaning'
+                    ? 'bg-blue-600 text-white shadow-md font-extrabold'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                }`}
+                title="Chữ Hán ➔ Nghĩa: Nhìn Kanji, đoán Âm Hán & Nghĩa"
+              >
+                <span>🇯🇵 ➔ 🇻🇳</span>
+                <span className="hidden sm:inline">Kanji ➔ Nghĩa</span>
+              </button>
+              <button
+                onClick={() => setPracticeDirection('meaning-to-kanji')}
+                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                  practiceDirection === 'meaning-to-kanji'
+                    ? 'bg-blue-600 text-white shadow-md font-extrabold'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                }`}
+                title="Nghĩa ➔ Chữ Hán: Nhìn Nghĩa & Hán Việt, đoán/viết Kanji"
+              >
+                <span>🇻🇳 ➔ 🇯🇵</span>
+                <span className="hidden sm:inline">Nghĩa ➔ Kanji</span>
+              </button>
+              <button
+                onClick={() => setPracticeDirection('both')}
+                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                  practiceDirection === 'both'
+                    ? 'bg-indigo-600 text-white shadow-md font-extrabold'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                }`}
+                title="Song song: Đan xen cả hai chiều câu hỏi"
+              >
+                <span>🔄</span>
+                <span>Song song</span>
+              </button>
+            </div>
+
             {practiceMode !== 'speedrun' && (
               <>
                 {/* Question Limit Stepper */}
@@ -629,6 +1013,349 @@ export default function KanjiPracticeTab({
             </div>
           ) : null}
         </div>
+      ) : practiceMode === 'draw' ? (
+        /* ==================== DRAW (TẬP VIẾT) MODE ==================== */
+        isDrawFinished ? (
+          /* ==================== DRAW MODE SUMMARY SCREEN ==================== */
+          <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl shadow-sm backdrop-blur-md space-y-6">
+            <div className="text-center py-6 space-y-3">
+              <span className="text-5xl">🖌️</span>
+              <h3 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">
+                Hoàn Thành Luyện Viết Kanji!
+              </h3>
+              <p className="text-sm text-slate-500">
+                Bạn đã luyện viết trọn vẹn <span className="font-extrabold text-teal-600 dark:text-teal-400 text-lg">{drawKanjiList.length}</span> chữ Hán của bài học.
+              </p>
+            </div>
+
+            {/* List of practiced Kanji with scores and status switchers */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Kết quả đánh giá từng chữ:
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {drawKanjiList.map((k, idx) => {
+                  const evalRes = drawEvaluated[idx];
+                  const currentStatus = k.status || 'not_learned';
+
+                  return (
+                    <div
+                      key={k.id || idx}
+                      className={`p-4 rounded-2xl border transition-all ${
+                        evalRes?.is_correct
+                          ? 'bg-emerald-500/5 border-emerald-500/20'
+                          : evalRes
+                          ? 'bg-amber-500/5 border-amber-500/20'
+                          : 'bg-slate-500/5 border-slate-500/20'
+                      } flex items-center justify-between gap-3`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-3xl font-serif font-extrabold text-slate-800 dark:text-slate-100 w-12 text-center">
+                          {k.character}
+                        </span>
+                        <div className="space-y-0.5">
+                          <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                            {k.sino_vietnamese ? `${k.sino_vietnamese} • ` : ''}{k.vietnamese_meaning}
+                          </p>
+                          <p className="text-[11px] font-medium">
+                            {evalRes ? (
+                              <span className={evalRes.is_correct ? 'text-emerald-500' : 'text-amber-500'}>
+                                {evalRes.status_label}
+                              </span>
+                            ) : (
+                              <span className="text-slate-400">Chưa chấm điểm nét vẽ</span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Status toggles */}
+                      {onUpdateKanjiStatus && (
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            onClick={() => onUpdateKanjiStatus(k.id, 'learning')}
+                            className={`px-2 py-1 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
+                              currentStatus === 'learning'
+                                ? 'bg-amber-500/20 border-amber-500 text-amber-500 font-extrabold'
+                                : 'border-slate-200 dark:border-slate-800 text-slate-400 hover:text-amber-500'
+                            }`}
+                            title="Đang học"
+                          >
+                            🟡
+                          </button>
+                          <button
+                            onClick={() => onUpdateKanjiStatus(k.id, 'mastered')}
+                            className={`px-2 py-1 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
+                              currentStatus === 'mastered'
+                                ? 'bg-emerald-500/20 border-emerald-500 text-emerald-500 font-extrabold'
+                                : 'border-slate-200 dark:border-slate-800 text-slate-400 hover:text-emerald-500'
+                            }`}
+                            title="Đã thuộc"
+                          >
+                            🟢
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <button
+                onClick={() => {
+                  setDrawIndex(0);
+                  setDrawResult(null);
+                  setDrawEvaluated({});
+                  setIsDrawFinished(false);
+                }}
+                className="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 hover:opacity-90 text-white font-bold text-sm shadow-md cursor-pointer"
+              >
+                🔄 Luyện viết lại từ đầu
+              </button>
+              <button
+                onClick={() => {
+                  setPracticeMode('choice');
+                  initPracticeSession();
+                }}
+                className="px-5 py-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-sm cursor-pointer"
+              >
+                🎯 Chuyển sang Trắc nghiệm
+              </button>
+            </div>
+          </div>
+        ) : currentDrawKanji ? (
+          /* ==================== ACTIVE DRAW MODE SCREEN ==================== */
+          <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl shadow-sm backdrop-blur-md space-y-6">
+            {/* Progress Bar */}
+            <div className="flex items-center justify-between text-xs font-bold text-slate-400">
+              <span className="flex items-center gap-1.5">
+                <span>Chữ {drawIndex + 1} / {drawKanjiList.length}</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20 font-bold">
+                  🖌️ Tập viết Canvas
+                </span>
+              </span>
+              <span>Đã chấm điểm: {Object.keys(drawEvaluated).length} / {drawKanjiList.length}</span>
+            </div>
+
+            <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full transition-all duration-300"
+                style={{ width: `${((drawIndex + 1) / drawKanjiList.length) * 100}%` }}
+              />
+            </div>
+
+            {/* Main Practice Workspace: Canvas on left/center, Details on right */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              {/* Left Column: Canvas Box & Controls (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col items-center gap-3">
+                {/* Canvas Toolbar */}
+                <div className="w-full max-w-[280px] flex items-center justify-between text-xs">
+                  <button
+                    onClick={() => setShowGhostGuide(prev => !prev)}
+                    className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer text-xs border ${
+                      showGhostGuide
+                        ? 'bg-teal-500/15 border-teal-500/40 text-teal-600 dark:text-teal-300'
+                        : 'bg-slate-100 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400'
+                    }`}
+                  >
+                    <span>{showGhostGuide ? '👁️ Ẩn chữ mẫu' : '👁️ Hiện chữ mẫu'}</span>
+                  </button>
+
+                  <button
+                    onClick={clearCanvas}
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 text-slate-600 dark:text-slate-300 font-bold transition-all flex items-center gap-1 cursor-pointer text-xs active:scale-95"
+                    title="Xóa nét vẽ để tập viết lại"
+                  >
+                    <span>🗑️ Vẽ lại</span>
+                  </button>
+                </div>
+
+                {/* Tian Zi Ge Canvas */}
+                <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-slate-700/80 bg-[#090d1f]">
+                  <canvas
+                    ref={canvasRef}
+                    width={280}
+                    height={280}
+                    onMouseDown={startDrawing}
+                    onMouseMove={drawStroke}
+                    onMouseUp={stopDrawing}
+                    onMouseLeave={stopDrawing}
+                    onTouchStart={startDrawing}
+                    onTouchMove={drawStroke}
+                    onTouchEnd={stopDrawing}
+                    className="cursor-crosshair touch-none select-none block"
+                  />
+
+                  {!hasDrawn && !drawResult && (
+                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-4">
+                      <span className="text-[11px] text-slate-300 font-bold bg-slate-950/80 px-3 py-1.5 rounded-full border border-slate-800 backdrop-blur-sm">
+                        ✍️ Dùng ngón tay hoặc chuột để viết
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Evaluate Stroke Button */}
+                <button
+                  onClick={evaluateDrawing}
+                  disabled={!hasDrawn && !drawResult}
+                  className="w-full max-w-[280px] py-3.5 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-600 hover:opacity-95 disabled:from-slate-200 disabled:to-slate-200 dark:disabled:from-slate-800 dark:disabled:to-slate-800 disabled:text-slate-400 text-white rounded-2xl text-xs font-extrabold transition-all cursor-pointer active:scale-95 shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 uppercase tracking-wider"
+                >
+                  <span>✨ Chấm điểm nét vẽ</span>
+                </button>
+
+                {/* Evaluation Result Feedback */}
+                {drawResult && (
+                  <div className={`w-full max-w-[280px] p-3.5 rounded-2xl border text-xs space-y-1.5 animate-fade-in ${
+                    drawResult.score >= 85
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300'
+                      : drawResult.score >= 60
+                      ? 'bg-teal-500/10 border-teal-500/30 text-teal-700 dark:text-teal-300'
+                      : 'bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-300'
+                  }`}>
+                    <div className="flex items-center justify-between font-extrabold">
+                      <span>{drawResult.status_label}</span>
+                      <span>{drawResult.score >= 60 ? '✓ Đạt' : '⚠️ Thử lại'}</span>
+                    </div>
+                    <p className="text-[11px] leading-relaxed opacity-90">{drawResult.feedback}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Kanji Information, Readings, Mnemonic, Compounds & Navigation (7 cols) */}
+              <div className="lg:col-span-7 space-y-4">
+                {/* Kanji Card Header */}
+                <div className="p-5 rounded-3xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    {/* When direction is meaning-to-kanji and not flipped: Mask Kanji to challenge recall */}
+                    {practiceDirection === 'meaning-to-kanji' && !isQuestionFlipped ? (
+                      <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex flex-col items-center justify-center text-indigo-500 shrink-0">
+                        <span className="text-xl font-black">❓</span>
+                        <span className="text-[8px] font-bold uppercase tracking-tighter">Nhớ chữ</span>
+                      </div>
+                    ) : (
+                      <span className="text-5xl font-extrabold font-serif text-slate-800 dark:text-slate-100">
+                        {currentDrawKanji.character}
+                      </span>
+                    )}
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-lg font-black text-slate-800 dark:text-slate-100">
+                          {currentDrawKanji.sino_vietnamese || '---'}
+                        </h3>
+                        <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                          {currentDrawKanji.vietnamese_meaning}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        {currentDrawKanji.stroke_count ? `${currentDrawKanji.stroke_count} nét • ` : ''}
+                        Bài {selectedLessonId}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    {/* Toggle button to peek at Kanji in meaning-to-kanji mode */}
+                    {practiceDirection === 'meaning-to-kanji' && (
+                      <button
+                        type="button"
+                        onClick={() => setIsQuestionFlipped(prev => !prev)}
+                        className={`px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
+                          isQuestionFlipped
+                            ? 'bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400'
+                            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-400'
+                        }`}
+                        title="Bấm để lật mở xem chữ Hán mẫu"
+                      >
+                        {isQuestionFlipped ? '🙈 Ẩn mẫu' : '👁️ Xem chữ'}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={() => handlePlayAudio(currentDrawKanji.character, currentDrawKanji.kunyomi || currentDrawKanji.character)}
+                      className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-teal-600 hover:border-teal-400 transition-colors cursor-pointer text-lg shrink-0"
+                      title="Nghe phát âm chữ Hán"
+                    >
+                      🔊
+                    </button>
+                  </div>
+                </div>
+
+                {/* Readings: Onyomi & Kunyomi */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="p-3.5 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 space-y-1">
+                    <span className="font-extrabold uppercase text-[10px] tracking-wider block text-purple-500">
+                      Onyomi (Âm Hán):
+                    </span>
+                    <span className="font-bold text-sm">{currentDrawKanji.onyomi || '-'}</span>
+                  </div>
+                  <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 space-y-1">
+                    <span className="font-extrabold uppercase text-[10px] tracking-wider block text-emerald-500">
+                      Kunyomi (Âm Nhật):
+                    </span>
+                    <span className="font-bold text-sm">{currentDrawKanji.kunyomi || '-'}</span>
+                  </div>
+                </div>
+
+                {/* Radicals Breakdown */}
+                {currentDrawRadicals && (
+                  <div className="p-3.5 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-teal-700 dark:text-teal-300 text-xs flex items-start gap-2">
+                    <span className="font-bold shrink-0">🉐 Bộ thủ:</span>
+                    <span className="font-medium">{currentDrawRadicals}</span>
+                  </div>
+                )}
+
+                {/* Mnemonic Tip */}
+                {currentDrawKanji.mnemonic_tip && (
+                  <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 text-xs leading-relaxed space-y-1">
+                    <span className="font-bold block text-amber-600 dark:text-amber-400">💡 Mẹo ghi nhớ:</span>
+                    <span>{currentDrawKanji.mnemonic_tip}</span>
+                  </div>
+                )}
+
+                {/* Compounds (Từ ghép thực tế) */}
+                {currentDrawCompounds.length > 0 && (
+                  <div className="space-y-2 text-xs">
+                    <span className="font-bold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      📚 Từ ghép xuất hiện trong bài:
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {currentDrawCompounds.map((c, cIdx) => (
+                        <span
+                          key={cIdx}
+                          className="px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200"
+                        >
+                          <span className="text-teal-600 dark:text-teal-400 font-bold">{c.word}</span>
+                          {c.reading ? ` (${c.reading})` : ''}: {c.meaning}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Navigation Toolbar */}
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                  <button
+                    onClick={handlePrevDraw}
+                    disabled={drawIndex === 0}
+                    className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:pointer-events-none text-slate-600 dark:text-slate-300 font-bold text-xs transition-colors cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>← Chữ trước</span>
+                  </button>
+
+                  <button
+                    onClick={handleNextDraw}
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 hover:opacity-90 text-white font-extrabold text-xs shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>{drawIndex + 1 < drawKanjiList.length ? 'Chữ tiếp theo ➔' : 'Hoàn thành bài tập 🏆'}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null
       ) : isFinished ? (
         /* ==================== SUMMARY RESULT SCREEN ==================== */
         <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl shadow-sm backdrop-blur-md space-y-6">
@@ -751,15 +1478,62 @@ export default function KanjiPracticeTab({
 
           {/* Question Card Box */}
           <div className="p-6 md:p-8 rounded-3xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 text-center space-y-3 relative shadow-inner">
-            <p className="text-xs font-bold text-slate-500 dark:text-slate-400">
-              {questions[currentIndex].questionPrompt}
-            </p>
+            {/* Header row: Question prompt & Instant Flip toggle */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 border-b border-slate-200/60 dark:border-slate-800/60 pb-2.5">
+              <p className="text-xs font-bold text-slate-500 dark:text-slate-400 text-left">
+                {isQuestionFlipped
+                  ? (questions[currentIndex].type === 'meaning_to_kanji'
+                      ? '🔄 Đang lật xem mặt chữ Kanji đối chiếu:'
+                      : '🔄 Đang lật xem Nghĩa & Hán Việt đối chiếu:')
+                  : questions[currentIndex].questionPrompt}
+              </p>
+
+              <button
+                type="button"
+                onClick={() => setIsQuestionFlipped(prev => !prev)}
+                className={`px-3 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
+                  isQuestionFlipped
+                    ? 'bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-300 shadow-sm'
+                    : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 shadow-sm'
+                }`}
+                title="Bấm để lật xem mặt đối ứng (Chữ Hán ⇋ Nghĩa) để ôn song song"
+              >
+                <span>🔄</span>
+                <span>{isQuestionFlipped ? 'Quay lại câu hỏi' : 'Lật Kanji ⇋ Nghĩa'}</span>
+              </button>
+            </div>
 
             {/* Display Subject */}
             <div className="flex items-center justify-center gap-3">
-              <h1 className="text-5xl md:text-7xl font-extrabold text-slate-800 dark:text-slate-100 font-serif tracking-wide py-2">
-                {questions[currentIndex].displaySubject}
-              </h1>
+              {isQuestionFlipped ? (
+                /* Flipped content */
+                <div className="py-2 space-y-1 animate-fade-in">
+                  {questions[currentIndex].type === 'meaning_to_kanji' ? (
+                    <div className="space-y-1">
+                      <h1 className="text-5xl md:text-7xl font-extrabold text-blue-600 dark:text-blue-400 font-serif tracking-wide">
+                        {questions[currentIndex].character}
+                      </h1>
+                      <span className="text-[11px] text-slate-400 font-medium">
+                        (Mặt chữ Kanji của nghĩa trên)
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
+                        {questions[currentIndex].sinoVietnamese ? `${questions[currentIndex].sinoVietnamese} • ` : ''}{questions[currentIndex].vietnameseMeaning}
+                      </h2>
+                      <span className="text-[11px] text-slate-400 font-mono">
+                        (Nghĩa & Hán Việt của chữ: {questions[currentIndex].character})
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Normal Subject */
+                <h1 className="text-5xl md:text-7xl font-extrabold text-slate-800 dark:text-slate-100 font-serif tracking-wide py-2">
+                  {questions[currentIndex].displaySubject}
+                </h1>
+              )}
 
               {/* TTS Audio button for Kanji */}
               <button
@@ -772,7 +1546,7 @@ export default function KanjiPracticeTab({
             </div>
 
             {/* Sub-info if available (e.g. stroke count, compound reading) */}
-            {questions[currentIndex].subInfo && (
+            {questions[currentIndex].subInfo && !isQuestionFlipped && (
               <p className="text-xs font-medium text-slate-400 dark:text-slate-500">
                 {questions[currentIndex].subInfo}
               </p>
