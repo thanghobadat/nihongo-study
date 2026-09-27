@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const supabase = require('../db/supabase');
@@ -393,6 +395,248 @@ router.post('/radical-explain', async (req, res) => {
       success: false,
       fallbackToLocal: true,
       error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.',
+      details: err.message
+    });
+  }
+});
+
+/**
+ * POST /api/ai/kanji-explain
+ * Explain in-depth Kanji character etymology, component radicals, and synthesis logic
+ */
+router.post('/kanji-explain', async (req, res) => {
+  try {
+    const {
+      character,
+      sinoVietnamese = '',
+      meaning = '',
+      strokeCount = '',
+      radicals = []
+    } = req.body;
+
+    if (!character) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vui lòng cung cấp ký tự chữ Hán (character).'
+      });
+    }
+
+    const userId = getUserId(req);
+
+    // 1. LAYER 1: Check Cache (0 tokens consumed!)
+    const cacheKey = character.trim();
+    const cachedResult = aiQuotaService.getCachedGrading('kanji_explain', cacheKey, 'details');
+    if (cachedResult) {
+      return res.json({
+        success: true,
+        cached: true,
+        data: cachedResult,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // 2. LAYER 2 & 3: Check Quota & Circuit Breaker
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // 3. LAYER 4: Call Gemini via aiGradingService
+    const { result, usageMetadata } = await aiGradingService.explainKanjiStructure({
+      character,
+      sinoVietnamese,
+      meaning,
+      strokeCount,
+      radicals
+    });
+
+    // 4. Update quota & save to cache
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+    aiQuotaService.setCachedGrading('kanji_explain', cacheKey, 'details', result);
+
+    return res.json({
+      success: true,
+      cached: false,
+      data: result,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error explaining kanji structure:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Dịch vụ AI đang bận hoặc gián đoạn. Vui lòng thử lại sau.',
+      details: err.message
+    });
+  }
+});
+
+/**
+ * Helper to get or create disk cache for Kanji Writing Riddles
+ */
+const RIDDLES_CACHE_FILE = path.resolve(__dirname, '../../data/kanji_riddles_cache.json');
+function getRiddlesDiskCache() {
+  try {
+    if (fs.existsSync(RIDDLES_CACHE_FILE)) {
+      return JSON.parse(fs.readFileSync(RIDDLES_CACHE_FILE, 'utf8'));
+    }
+  } catch (e) {
+    console.warn('[AI Route] Error reading riddles cache file:', e.message);
+  }
+  return {};
+}
+
+function saveRiddlesDiskCache(cache) {
+  try {
+    const dir = path.dirname(RIDDLES_CACHE_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(RIDDLES_CACHE_FILE, JSON.stringify(cache, null, 2), 'utf8');
+  } catch (e) {
+    console.warn('[AI Route] Error saving riddles cache file:', e.message);
+  }
+}
+
+/**
+ * POST /api/ai/grade-kanji-writing
+ * Grade Kanji handwriting on Canvas using Gemini Multimodal Vision AI
+ * Returns score, precision feedback, and actionable improvement tip
+ */
+router.post('/grade-kanji-writing', async (req, res) => {
+  try {
+    const {
+      imageBase64,
+      targetKanji,
+      strokeCount,
+      sinoVietnamese = '',
+      meaning = '',
+      radicals = []
+    } = req.body;
+
+    if (!imageBase64 || !targetKanji) {
+      return res.status(400).json({
+        success: false,
+        error: 'imageBase64 and targetKanji are required'
+      });
+    }
+
+    const userId = await getUserIdAsync(req);
+
+    // Check quota
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason,
+        quota: aiQuotaService.getQuotaStatus(userId)
+      });
+    }
+
+    // Call Gemini Vision AI
+    const { result, usageMetadata } = await aiGradingService.gradeKanjiHandwritingWithVision({
+      imageBase64,
+      targetKanji,
+      strokeCount,
+      sinoVietnamese,
+      meaning,
+      radicals
+    });
+
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+
+    return res.json({
+      success: true,
+      result,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata?.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error grading kanji handwriting with vision:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Không thể kết nối đến Gemini Vision AI. Hệ thống chuyển sang chấm điểm cục bộ.',
+      details: err.message
+    });
+  }
+});
+
+/**
+ * POST /api/ai/kanji-writing-riddles
+ * Generate characteristic-based Kanji Writing Riddles using Gemini with permanent disk cache
+ */
+router.post('/kanji-writing-riddles', async (req, res) => {
+  try {
+    const { lessonId, kanjis = [], forceRefresh = false } = req.body;
+
+    if (!lessonId || !Array.isArray(kanjis) || kanjis.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'lessonId and kanjis array are required'
+      });
+    }
+
+    const diskCache = getRiddlesDiskCache();
+    const cacheKey = `lesson_${lessonId}`;
+
+    // 1. Check permanent disk cache (only if not forceRefresh)
+    if (!forceRefresh && diskCache[cacheKey] && Array.isArray(diskCache[cacheKey].riddles) && diskCache[cacheKey].riddles.length > 0) {
+      return res.json({
+        success: true,
+        cached: true,
+        riddles: diskCache[cacheKey].riddles
+      });
+    }
+
+    const userId = await getUserIdAsync(req);
+
+    // 2. Check quota
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason
+      });
+    }
+
+    // 3. Call Gemini to generate riddles
+    const { result, usageMetadata } = await aiGradingService.generateKanjiWritingRiddles({
+      lessonId,
+      kanjis
+    });
+
+    const riddles = result?.riddles || [];
+
+    // 4. Save to permanent disk cache
+    diskCache[cacheKey] = {
+      lessonId,
+      riddles,
+      createdAt: new Date().toISOString()
+    };
+    saveRiddlesDiskCache(diskCache);
+
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+
+    return res.json({
+      success: true,
+      cached: false,
+      riddles,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata?.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error generating kanji writing riddles:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Không thể sinh câu đố bằng AI lúc này. Hệ thống chuyển sang sinh câu đố cục bộ.',
       details: err.message
     });
   }

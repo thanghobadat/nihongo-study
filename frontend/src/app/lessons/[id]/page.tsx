@@ -11,7 +11,8 @@ import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/road
 import { getKanjiForm } from '../../utils/kanjiFormLookup';
 import SidebarSettings from '../../components/SidebarSettings';
 
-import { getRadicalsString } from '../../utils/kanjiRadicals';
+import { getRadicalsString, getRadicalsForCharacter } from '../../utils/kanjiRadicals';
+import KanjiStrokePlayer from '../../components/KanjiStrokePlayer';
 
 import PitchAccentDisplay from '../../components/PitchAccentDisplay';
 
@@ -26,6 +27,7 @@ import FillInBlanks from './components/FillInBlanks';
 import DialogueReading from './components/DialogueReading';
 import ReviewTab from './ReviewTab';
 import KanjiPracticeTab from './components/KanjiPracticeTab';
+import { gradeKanjiWithAI, KanjiGradingResult } from '../../utils/kanjiPracticeHelper';
 
 // Defined types
 
@@ -931,6 +933,22 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [vocabItems, setVocabItems] = useState<VocabItem[]>([]);
 
   const [kanjiItems, setKanjiItems] = useState<KanjiItem[]>([]);
+
+  // Kanji Detail & Drawing Modal State
+  const [selectedKanjiModal, setSelectedKanjiModal] = useState<KanjiItem | null>(null);
+  const [kanjiModalTab, setKanjiModalTab] = useState<'info' | 'draw'>('info');
+  const [showModalGhostGuide, setShowModalGhostGuide] = useState<boolean>(true);
+  const [isModalDrawing, setIsModalDrawing] = useState<boolean>(false);
+  const [hasModalDrawn, setHasModalDrawn] = useState<boolean>(false);
+  const [modalDrawResult, setModalDrawResult] = useState<KanjiGradingResult | null>(null);
+  const [isModalGradingWithAI, setIsModalGradingWithAI] = useState<boolean>(false);
+  const modalCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Kanji AI Explanation & Stroke Player States
+  const [isExplainingKanji, setIsExplainingKanji] = useState<boolean>(false);
+  const [kanjiAiExplanation, setKanjiAiExplanation] = useState<any>(null);
+  const [kanjiAiError, setKanjiAiError] = useState<string | null>(null);
+  const [kanjiDrawSubMode, setKanjiDrawSubMode] = useState<'anim' | 'canvas'>('anim');
 
   const [grammarItems, setGrammarItems] = useState<GrammarItem[]>([]);
 
@@ -3500,6 +3518,219 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
     }
 
+  };
+
+  // ==================== KANJI MODAL DRAWING HANDLERS ====================
+  // Draw Tian Zi Ge (田字格) grid & Ghost guide on modal canvas
+  const drawModalGridAndGuide = useCallback((targetChar?: string, ghostVisible = true) => {
+    const canvas = modalCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Dark canvas background
+    ctx.fillStyle = '#090d1f';
+    ctx.fillRect(0, 0, w, h);
+
+    // Outer boundary
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([]);
+    ctx.strokeRect(1, 1, w - 2, h - 2);
+
+    // Inner dashed crosslines (Tian Zi Ge)
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 6]);
+
+    ctx.beginPath();
+    ctx.moveTo(0, h / 2);
+    ctx.lineTo(w, h / 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(w / 2, 0);
+    ctx.lineTo(w / 2, h);
+    ctx.stroke();
+
+    // Subtle diagonal dashed guides
+    ctx.strokeStyle = '#151d2f';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 8]);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(w, h);
+    ctx.moveTo(w, 0);
+    ctx.lineTo(0, h);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+    // Ghost template guide: Pure Kanji Character (no kunyomi)
+    if (ghostVisible && targetChar) {
+      ctx.fillStyle = 'rgba(20, 184, 166, 0.25)';
+      ctx.font = '900 150px "Noto Sans JP", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(targetChar, w / 2, h / 2 + 5);
+    }
+  }, []);
+
+  // Synchronize modal canvas whenever modal opens or tab/char changes
+  useEffect(() => {
+    if (selectedKanjiModal && kanjiModalTab === 'draw') {
+      const char = selectedKanjiModal.character;
+      const t = setTimeout(() => {
+        drawModalGridAndGuide(char, showModalGhostGuide);
+        setHasModalDrawn(false);
+        setModalDrawResult(null);
+      }, 60);
+      return () => clearTimeout(t);
+    }
+  }, [selectedKanjiModal, kanjiModalTab, showModalGhostGuide, drawModalGridAndGuide]);
+
+  // Escape key listener for Kanji Modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedKanjiModal) {
+        setSelectedKanjiModal(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedKanjiModal]);
+
+  // Reset AI explanation & submode when modal opens/switches
+  useEffect(() => {
+    if (selectedKanjiModal) {
+      setKanjiAiExplanation(null);
+      setKanjiAiError(null);
+      setKanjiDrawSubMode('anim');
+    }
+  }, [selectedKanjiModal?.id, selectedKanjiModal?.character]);
+
+  const handleExplainKanji = async (item: KanjiItem) => {
+    try {
+      setIsExplainingKanji(true);
+      setKanjiAiError(null);
+      const radicals = getRadicalsForCharacter(item.character);
+      const data = await api.post('/api/ai/kanji-explain', {
+        character: item.character,
+        sinoVietnamese: item.sino_vietnamese,
+        meaning: item.vietnamese_meaning,
+        strokeCount: item.stroke_count,
+        radicals
+      });
+      if (data && data.success && data.data) {
+        setKanjiAiExplanation(data.data);
+      } else {
+        setKanjiAiError(data?.error || 'Dịch vụ AI đang bận, vui lòng thử lại sau.');
+      }
+    } catch (err: any) {
+      setKanjiAiError(err.message || 'Lỗi kết nối máy chủ AI');
+    } finally {
+      setIsExplainingKanji(false);
+    }
+  };
+
+  const startModalDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    const canvas = modalCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#2dd4bf'; // Teal-400
+    ctx.setLineDash([]);
+
+    let x = 0;
+    let y = 0;
+    const rect = canvas.getBoundingClientRect();
+    if ('touches' in e) {
+      e.preventDefault();
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
+    } else {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    setIsModalDrawing(true);
+    setHasModalDrawn(true);
+  };
+
+  const drawModalStroke = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isModalDrawing) return;
+    const canvas = modalCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let x = 0;
+    let y = 0;
+    const rect = canvas.getBoundingClientRect();
+    if ('touches' in e) {
+      e.preventDefault();
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
+    } else {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+    }
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  };
+
+  const stopModalDrawing = () => {
+    setIsModalDrawing(false);
+  };
+
+  const clearModalCanvas = () => {
+    if (!selectedKanjiModal) return;
+    drawModalGridAndGuide(selectedKanjiModal.character, showModalGhostGuide);
+    setHasModalDrawn(false);
+    setModalDrawResult(null);
+  };
+
+  // Evaluate Kanji handwriting with Gemini Vision AI + local fallback & concise improvement tip
+  const evaluateModalDrawing = async () => {
+    if (!selectedKanjiModal) return;
+    const canvas = modalCanvasRef.current;
+    if (!canvas) return;
+
+    setIsModalGradingWithAI(true);
+    setModalDrawResult(null);
+
+    try {
+      const strokeCount = parseInt(selectedKanjiModal.stroke_count || '0') || undefined;
+      const res = await gradeKanjiWithAI({
+        canvas,
+        targetKanji: selectedKanjiModal.character,
+        strokeCount,
+        sinoVietnamese: selectedKanjiModal.sino_vietnamese,
+        meaning: selectedKanjiModal.vietnamese_meaning,
+        radicals: (selectedKanjiModal as any).radicals
+      });
+
+      setModalDrawResult(res);
+
+      if (res.is_correct) {
+        playAudio(selectedKanjiModal.character);
+      }
+    } catch (err) {
+      console.error('[evaluateModalDrawing] Error:', err);
+    } finally {
+      setIsModalGradingWithAI(false);
+    }
   };
 
   // Update grammar study status
@@ -9342,736 +9573,780 @@ const renderInteractivePractice = () => {
 
                 {/* 3. Kanji Cards Grouped by Grammar (Collapsible Accordions) */}
 
-                {processedKanjiGroups.totalVisible === 0 ? (
+                {(() => {
+                  const renderKanjiCard = (item: KanjiItem) => {
+                    let borderClass = 'border-slate-200 dark:border-slate-800';
+                    let statusBg = 'bg-white dark:bg-slate-900/40';
+                    let shadowClass = '';
 
-                  <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
+                    if (item.status === 'mastered') {
+                      borderClass = 'border-emerald-500/40 hover:border-emerald-500/70';
+                      statusBg = 'bg-emerald-500/5 dark:bg-emerald-950/15';
+                      shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.06)]';
+                    } else if (item.status === 'learning') {
+                      borderClass = 'border-amber-500/40 hover:border-amber-500/70';
+                      statusBg = 'bg-amber-500/5 dark:bg-amber-950/15';
+                      shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.06)]';
+                    }
 
-                    📭 Không tìm thấy chữ Hán nào phù hợp với điều kiện tìm kiếm.
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={() => {
+                          setSelectedKanjiModal(item);
+                          setKanjiModalTab('info');
+                        }}
+                        className={`p-3.5 sm:p-4 rounded-2xl border backdrop-blur-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.015] hover:shadow-lg hover:border-teal-500/60 cursor-pointer group select-none ${borderClass} ${statusBg} ${shadowClass}`}
+                      >
+                        <div>
+                          {/* Card Top: Stroke count & status dropdown */}
+                          <div className="flex items-center justify-between mb-3 border-b border-slate-100 dark:border-slate-800 pb-2">
+                            <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
+                              {item.stroke_count} nét
+                            </span>
 
-                  </div>
-
-                ) : (
-
-                  <div className="space-y-6">
-
-                    {processedKanjiGroups.groups.map((group) => {
-
-                      const idx = group.grammarIndex;
-
-                      const isCollapsedBool = collapsedKanjiSections[idx.toString()] === true;
-
-                      // Skip rendering if search/filter is active and no items are inside
-
-                      if (group.newItems.length === 0 && group.copiedItems.length === 0 && (searchQuery || statusFilter !== 'all')) {
-
-                        return null;
-
-                      }
-
-                      return (
-
-                        <div key={idx} className="space-y-4 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
-
-                          {/* Accordion Header */}
-
-                          <div 
-
-                            onClick={() => toggleKanjiSection(idx.toString())}
-
-                            className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none gap-3 group/header active:scale-[0.995]"
-
-                          >
-
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-
-                              <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
-
-                                {isCollapsedBool ? '📁' : '📂'}
-
-                              </span>
-
-                              <div className="min-w-0">
-
-                                <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex flex-wrap items-center gap-2">
-
-                                  <span className="text-blue-500 text-xs uppercase tracking-wider">Mẫu {idx + 1}:</span>
-
-                                  <span className="text-slate-700 dark:text-slate-200 truncate">{group.grammarTitle}</span>
-
-                                  <div className="flex items-center gap-1.5 ml-1 sm:ml-2">
-
-                                    <span className="px-1.5 py-0.2 bg-emerald-950/80 border border-emerald-900/40 text-[9px] font-black text-emerald-600 dark:text-emerald-400 rounded-md">
-
-                                      {group.newItems.length} mới
-
-                                    </span>
-
-                                    {group.copiedItems.length > 0 && (
-
-                                      <span className="px-1.5 py-0.2 bg-blue-950/80 border border-blue-900/40 text-[9px] font-black text-blue-600 dark:text-blue-400 rounded-md">
-
-                                        {group.copiedItems.length} trùng lặp
-
-                                      </span>
-
-                                    )}
-
-                                  </div>
-
-                                </h3>
-
-                                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 truncate italic">
-
-                                  {group.grammarMeaning || 'Không có dịch nghĩa'}
-
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                            <div className="flex items-center gap-3 shrink-0 justify-between md:justify-end">
-
-
-
-                              <div className="flex items-center gap-2">
-
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
-
-                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
-
-                                </span>
-
-                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
-
-                                  {isCollapsedBool ? '▼' : '▲'}
-
-                                </span>
-
-                              </div>
-
-                            </div>
-
+                            <select
+                              value={item.status}
+                              onClick={(e) => e.stopPropagation()}
+                              onChange={(e) => {
+                                e.stopPropagation();
+                                handleKanjiStatusChange(item.id, e.target.value as any);
+                              }}
+                              className={`bg-white dark:bg-slate-900/80 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
+                                item.status === 'mastered'
+                                  ? 'border-emerald-500/60 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30'
+                                  : item.status === 'learning'
+                                  ? 'border-amber-500/60 text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30'
+                                  : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
+                              }`}
+                            >
+                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-500">🟡 Đang học</option>
+                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-500">🟢 Đã thuộc</option>
+                            </select>
                           </div>
 
-                          {/* Accordion Content */}
-
-                          {!isCollapsedBool && (
-
-                            <div className="space-y-4 pt-2">
-
-                              {/* Warning overlaps / Copied Items */}
-
-                              {group.copiedItems.length > 0 && (
-
-                                <div className="p-3 bg-blue-950/20 border border-blue-100 rounded-xl space-y-1.5">
-
-                                  <span className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-
-                                    Các chữ Hán đã được học ở phần trước nhưng được dùng ở mẫu này:
-
-                                  </span>
-
-                                  <div className="flex flex-wrap gap-1.5">
-
-                                    {group.copiedItems.map((c) => (
-
-                                      <span 
-
-                                        key={c.id} 
-
-                                        onClick={() => playAudio(c.character)}
-
-                                        className="inline-flex items-center gap-1 px-3 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-sm font-black rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all" 
-
-                                        title={`${c.vietnamese_meaning} - Nhấp để nghe`}
-
-                                      >
-
-                                        <span>{c.character}</span>
-
-                                        <span className="text-[10px] text-blue-455">🔊</span>
-
-                                      </span>
-
-                                    ))}
-
-                                  </div>
-
-                                </div>
-
-                              )}
-
-                              {/* Cards Grid for new items */}
-
-                              {group.newItems.length === 0 ? (
-
-                                <div className="text-center py-6 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-xl bg-slate-100/5">
-
-                                  📝 Không có chữ Hán mới nào trong mẫu ngữ pháp này.
-
-                                </div>
-
-                              ) : (
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                                  {group.newItems.map((item) => {
-
-                                    let borderClass = 'border-slate-200 dark:border-slate-800';
-
-                                    let statusBg = 'bg-slate-50 dark:bg-slate-950/40';
-
-                                    let shadowClass = '';
-
-                                    if (item.status === 'mastered') {
-
-                                      borderClass = 'border-emerald-800/30 hover:border-emerald-600/50';
-
-                                      statusBg = 'bg-emerald-950/5';
-
-                                      shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.02)]';
-
-                                    } else if (item.status === 'learning') {
-
-                                      borderClass = 'border-amber-800/30 hover:border-amber-600/50';
-
-                                      statusBg = 'bg-amber-950/5';
-
-                                      shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.02)]';
-
-                                    }
-
-                                    return (
-
-                                      <div
-
-                                        key={item.id}
-
-                                        className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.005] hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/20 ${borderClass} ${statusBg} ${shadowClass}`}
-
-                                      >
-
-                                        <div>
-
-                                          {/* Card Top Row: stroke count and dropdown status */}
-
-                                          <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
-
-                                            <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
-
-                                              {item.stroke_count} nét
-
-                                            </span>
-
-                                            <select
-
-                                              value={item.status}
-
-                                              onChange={(e) => handleKanjiStatusChange(item.id, e.target.value as any)}
-
-                                              className={`bg-white dark:bg-slate-900/60 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
-
-                                                item.status === 'mastered'
-
-                                                  ? 'border-emerald-900 text-emerald-600 dark:text-emerald-400 bg-emerald-950/20'
-
-                                                  : item.status === 'learning'
-
-                                                  ? 'border-amber-900 text-amber-400 bg-amber-950/20'
-
-                                                  : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
-
-                                              }`}
-
-                                            >
-
-                                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-
-                                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
-
-                                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
-
-                                            </select>
-
-                                          </div>
-
-                                          {/* Card Character & readings row */}
-
-                                          <div className="flex items-start gap-3.5 mb-3">
-
-                                            {/* Large Kanji Display */}
-
-                                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center relative shrink-0">
-
-                                              <span className="text-3xl font-black text-slate-900 dark:text-white select-none">
-
-                                                {item.character}
-
-                                              </span>
-
-                                              <button
-
-                                                onClick={() => playAudio(item.character)}
-
-                                                className="absolute bottom-0.5 right-0.5 p-0.5 rounded bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90"
-
-                                                title="Nghe phát âm"
-
-                                              >
-
-                                                🔊
-
-                                              </button>
-
-                                            </div>
-
-                                            {/* Sino-Vietnamese & Vietnamese Meaning */}
-
-                                            <div className="flex-1 space-y-0.5">
-
-                                              <h4 className="text-base font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-
-                                                {item.sino_vietnamese}
-
-                                              </h4>
-
-                                              <p className="text-xs font-extrabold text-slate-800 dark:text-slate-100 leading-tight">
-
-                                                {item.vietnamese_meaning}
-
-                                              </p>
-
-                                            </div>
-
-                                          </div>
-
-                                          {/* Onyomi & Kunyomi */}
-
-                                          <div className="grid grid-cols-2 gap-2 mt-3 border-t border-slate-200 dark:border-slate-800/80 pt-2.5 text-[11px]">
-
-                                            <div className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 space-y-0.5">
-
-                                              <span className="block text-[8px] text-purple-600 dark:text-purple-400 font-extrabold uppercase tracking-wider">Onyomi (Âm Hán)</span>
-
-                                              <span className="font-bold text-purple-700 dark:text-purple-300 break-words">{item.onyomi || '-'}</span>
-
-                                            </div>
-
-                                            <div className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 space-y-0.5">
-
-                                              <span className="block text-[8px] text-emerald-600 dark:text-emerald-400 font-extrabold uppercase tracking-wider">Kunyomi (Âm Thuần)</span>
-
-                                              <span className="font-bold text-emerald-700 dark:text-emerald-300 break-words">{item.kunyomi || '-'}</span>
-
-                                            </div>
-
-                                          </div>
-
-                                          {/* Radicals mapping display */}
-
-                                          {showRadicals && (
-
-                                            <div className="mt-3 p-2.5 rounded-lg bg-teal-950/20 border border-teal-900/35 flex items-start space-x-2">
-
-                                              <span className="text-xs shrink-0">🉐</span>
-
-                                              <div className="space-y-0.5">
-
-                                                <span className="block text-[8px] font-black text-teal-400 uppercase tracking-wider">Bộ thủ cấu thành</span>
-
-                                                <p className="text-[10px] text-slate-600 dark:text-slate-300 leading-relaxed">
-
-                                                  {getRadicalsString(item.character)}
-
-                                                </p>
-
-                                              </div>
-
-                                            </div>
-
-                                          )}
-
-                                          {/* Mnemonic tip */}
-
-                                          {item.mnemonic_tip && (
-
-                                            <div className="mt-3 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 flex items-start space-x-2">
-
-                                              <span className="text-xs shrink-0">💡</span>
-
-                                              <div className="space-y-0.5">
-
-                                                <span className="block text-[8px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Mẹo ghi nhớ</span>
-
-                                                <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">{item.mnemonic_tip}</p>
-
-                                              </div>
-
-                                            </div>
-
-                                          )}
-
-                                          {/* Compounds section */}
-
-                                          {item.compounds && (
-
-                                            <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 pb-1.5 space-y-1">
-
-                                              <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/20 border border-emerald-900/20 px-1.5 py-0.2 rounded uppercase tracking-wider inline-block">
-
-                                                Từ ghép ví dụ
-
-                                              </span>
-
-                                              <p className="text-[11px] text-slate-400 dark:text-slate-500 leading-relaxed font-serif whitespace-pre-line">
-
-                                                {item.compounds}
-
-                                              </p>
-
-                                            </div>
-
-                                          )}
-
-                                        </div>
-
-                                      </div>
-
-                                    );
-
-                                  })}
-
-                                </div>
-
-                              )}
-
+                          {/* Card Character & Meaning */}
+                          <div className="flex items-center gap-3.5">
+                            {/* Large Kanji Character Box */}
+                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-center relative shrink-0 shadow-inner group-hover:border-teal-500/50 transition-colors">
+                              <span className="text-3xl font-black text-slate-900 dark:text-white select-none group-hover:scale-110 transition-transform">
+                                {item.character}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  playAudio(item.character);
+                                }}
+                                className="absolute -bottom-1 -right-1 p-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] text-slate-500 dark:text-slate-300 hover:text-teal-400 hover:border-teal-500 transition-colors cursor-pointer active:scale-90 shadow-sm"
+                                title="Nghe phát âm"
+                              >
+                                🔊
+                              </button>
                             </div>
 
-                          )}
-
+                            {/* Sino-Vietnamese & Vietnamese Meaning */}
+                            <div className="flex-1 min-w-0 space-y-1">
+                              <h4 className="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider truncate">
+                                {item.sino_vietnamese}
+                              </h4>
+                              <p className="text-xs font-bold text-slate-700 dark:text-slate-200 line-clamp-2 leading-snug">
+                                {item.vietnamese_meaning}
+                              </p>
+                            </div>
+                          </div>
                         </div>
 
-                      );
+                        {/* Card Footer: Subtle click hint */}
+                        <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-teal-600 dark:text-teal-400/80 font-semibold group-hover:text-teal-500 transition-colors">
+                          <span className="flex items-center gap-1">
+                            <span>👆</span>
+                            <span>Nhấp xem chi tiết & tập viết</span>
+                          </span>
+                          <span className="text-xs text-slate-400 group-hover:translate-x-1 transition-transform">➔</span>
+                        </div>
+                      </div>
+                    );
+                  };
 
-                    })}
+                  return processedKanjiGroups.totalVisible === 0 ? (
+                    <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
+                      📭 Không tìm thấy chữ Hán nào phù hợp với điều kiện tìm kiếm.
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      {processedKanjiGroups.groups.map((group) => {
+                        const idx = group.grammarIndex;
+                        const isCollapsedBool = collapsedKanjiSections[idx.toString()] === true;
 
-                    {/* Supplemental Kanji Accordion */}
+                        if (group.newItems.length === 0 && group.copiedItems.length === 0 && (searchQuery || statusFilter !== 'all')) {
+                          return null;
+                        }
 
-                    {processedKanjiGroups.supplemental.length > 0 && (() => {
-
-                      const isCollapsedBool = collapsedKanjiSections['supplemental'] === true;
-
-                      return (
-
-                        <div className="space-y-4 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
-
-                          {/* Accordion Header */}
-
-                          <div 
-
-                            onClick={() => toggleKanjiSection('supplemental')}
-
-                            className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none group/header active:scale-[0.995]"
-
-                          >
-
-                            <div className="flex items-center gap-3">
-
-                              <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
-
-                                {isCollapsedBool ? '📁' : '📂'}
-
-                              </span>
-
-                              <div>
-
-                                <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
-
-                                  <span className="text-slate-700 dark:text-slate-200">Chữ Hán bổ sung / Khác</span>
-
-                                  <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
-
-                                    {processedKanjiGroups.supplemental.length} chữ
-
-                                  </span>
-
-                                </h3>
-
-                                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 italic">
-
-                                  Các chữ Hán bổ sung hỗ trợ thêm cho bài học
-
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                            <div className="flex items-center gap-2">
-
-                              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
-
-                                {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
-
-                              </span>
-
-                              <span className="w-6 h-6 rounded-lg bg-white border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
-
-                                {isCollapsedBool ? '▼' : '▲'}
-
-                              </span>
-
-                            </div>
-
-                          </div>
-
-                          {/* Accordion Content */}
-
-                          {!isCollapsedBool && (
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-
-                              {processedKanjiGroups.supplemental.map((item) => {
-
-                                let borderClass = 'border-slate-200 dark:border-slate-800';
-
-                                let statusBg = 'bg-slate-50 dark:bg-slate-950/40';
-
-                                let shadowClass = '';
-
-                                if (item.status === 'mastered') {
-
-                                  borderClass = 'border-emerald-800/30 hover:border-emerald-600/50';
-
-                                  statusBg = 'bg-emerald-950/5';
-
-                                  shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.02)]';
-
-                                } else if (item.status === 'learning') {
-
-                                  borderClass = 'border-amber-800/30 hover:border-amber-600/50';
-
-                                  statusBg = 'bg-amber-950/5';
-
-                                  shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.02)]';
-
-                                }
-
-                                return (
-
-                                  <div
-
-                                    key={item.id}
-
-                                    className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.005] hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/20 ${borderClass} ${statusBg} ${shadowClass}`}
-
-                                  >
-
-                                    <div>
-
-                                      {/* Card Top Row */}
-
-                                      <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
-
-                                        <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
-
-                                          {item.stroke_count} nét
-
+                        return (
+                          <div key={idx} className="space-y-4 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
+                            {/* Accordion Header */}
+                            <div 
+                              onClick={() => toggleKanjiSection(idx.toString())}
+                              className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 transition-all select-none gap-3 group/header active:scale-[0.995]"
+                            >
+                              <div className="flex items-center gap-3 flex-1 min-w-0">
+                                <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
+                                  {isCollapsedBool ? '📁' : '📂'}
+                                </span>
+                                <div className="min-w-0">
+                                  <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex flex-wrap items-center gap-2">
+                                    <span className="text-blue-500 text-xs uppercase tracking-wider">Mẫu {idx + 1}:</span>
+                                    <span className="text-slate-700 dark:text-slate-200 truncate">{group.grammarTitle}</span>
+                                    <div className="flex items-center gap-1.5 ml-1 sm:ml-2">
+                                      <span className="px-1.5 py-0.2 bg-emerald-950/80 border border-emerald-900/40 text-[9px] font-black text-emerald-600 dark:text-emerald-400 rounded-md">
+                                        {group.newItems.length} mới
+                                      </span>
+                                      {group.copiedItems.length > 0 && (
+                                        <span className="px-1.5 py-0.2 bg-blue-950/80 border border-blue-900/40 text-[9px] font-black text-blue-600 dark:text-blue-400 rounded-md">
+                                          {group.copiedItems.length} trùng lặp
                                         </span>
-
-                                        <select
-
-                                          value={item.status}
-
-                                          onChange={(e) => handleKanjiStatusChange(item.id, e.target.value as any)}
-
-                                          className={`bg-white dark:bg-slate-900/60 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
-
-                                            item.status === 'mastered'
-
-                                              ? 'border-emerald-900 text-emerald-600 dark:text-emerald-400 bg-emerald-950/20'
-
-                                              : item.status === 'learning'
-
-                                              ? 'border-amber-900 text-amber-400 bg-amber-950/20'
-
-                                              : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
-
-                                          }`}
-
-                                        >
-
-                                          <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-
-                                          <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
-
-                                          <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
-
-                                        </select>
-
-                                      </div>
-
-                                      {/* Card Character & readings row */}
-
-                                      <div className="flex items-start gap-3.5 mb-3">
-
-                                        {/* Large Kanji Display */}
-
-                                        <div className="w-16 h-16 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center relative shrink-0">
-
-                                          <span className="text-3xl font-black text-slate-900 dark:text-white select-none">
-
-                                            {item.character}
-
-                                          </span>
-
-                                          <button
-
-                                            onClick={() => playAudio(item.character)}
-
-                                            className="absolute bottom-0.5 right-0.5 p-0.5 rounded bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90"
-
-                                            title="Nghe phát âm"
-
-                                          >
-
-                                            🔊
-
-                                          </button>
-
-                                        </div>
-
-                                        {/* Sino-Vietnamese & Vietnamese Meaning */}
-
-                                        <div className="flex-1 space-y-0.5">
-
-                                          <h4 className="text-base font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-
-                                            {item.sino_vietnamese}
-
-                                          </h4>
-
-                                          <p className="text-xs font-extrabold text-slate-800 dark:text-slate-100 leading-tight">
-
-                                            {item.vietnamese_meaning}
-
-                                          </p>
-
-                                        </div>
-
-                                      </div>
-
-                                      {/* Onyomi & Kunyomi */}
-
-                                      <div className="grid grid-cols-2 gap-3 mt-3 border-t border-slate-200 dark:border-slate-800 pb-2.5 pt-2.5 text-[11px]">
-
-                                        <div className="space-y-0.5">
-
-                                          <span className="block text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Onyomi</span>
-
-                                          <span className="font-semibold text-slate-400 dark:text-slate-500">{item.onyomi || '-'}</span>
-
-                                        </div>
-
-                                        <div className="space-y-0.5">
-
-                                          <span className="block text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Kunyomi</span>
-
-                                          <span className="font-semibold text-slate-355">{item.kunyomi || '-'}</span>
-
-                                        </div>
-
-                                      </div>
-
-                                      {/* Radicals mapping display */}
-
-                                      {showRadicals && (
-
-                                        <div className="mt-3 p-2.5 rounded-lg bg-teal-950/20 border border-teal-900/35 flex items-start space-x-2">
-
-                                          <span className="text-xs shrink-0">🉐</span>
-
-                                          <div className="space-y-0.5">
-
-                                            <span className="block text-[8px] font-black text-teal-400 uppercase tracking-wider">Bộ thủ cấu thành</span>
-
-                                            <p className="text-[10px] text-slate-600 dark:text-slate-300 leading-relaxed">
-
-                                              {getRadicalsString(item.character)}
-
-                                            </p>
-
-                                          </div>
-
-                                        </div>
-
                                       )}
-
-                                      {/* Mnemonic tip */}
-
-                                      {item.mnemonic_tip && (
-
-                                        <div className="mt-3 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 flex items-start space-x-2">
-
-                                          <span className="text-xs shrink-0">💡</span>
-
-                                          <div className="space-y-0.5">
-
-                                            <span className="block text-[8px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Mẹo ghi nhớ</span>
-
-                                            <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">{item.mnemonic_tip}</p>
-
-                                          </div>
-
-                                        </div>
-
-                                      )}
-
-                                      {/* Compounds section */}
-
-                                      {item.compounds && (
-
-                                        <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 pb-1.5 space-y-1">
-
-                                          <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/20 border border-emerald-900/20 px-1.5 py-0.2 rounded uppercase tracking-wider inline-block">
-
-                                            Từ ghép ví dụ
-
-                                          </span>
-
-                                          <p className="text-[11px] text-slate-355 leading-relaxed font-serif whitespace-pre-line">
-
-                                            {item.compounds}
-
-                                          </p>
-
-                                        </div>
-
-                                      )}
-
                                     </div>
-
-                                  </div>
-
-                                );
-
-                              })}
-
+                                  </h3>
+                                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 truncate italic">
+                                    {group.grammarMeaning || 'Không có dịch nghĩa'}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
+                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
+                                </span>
+                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
+                                  {isCollapsedBool ? '▼' : '▲'}
+                                </span>
+                              </div>
                             </div>
 
-                          )}
+                            {/* Accordion Content */}
+                            {!isCollapsedBool && (
+                              <div className="space-y-4 pt-2">
+                                {group.copiedItems.length > 0 && (
+                                  <div className="p-3 bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 rounded-xl space-y-1.5">
+                                    <span className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                                      Các chữ Hán đã được học ở phần trước nhưng được dùng ở mẫu này:
+                                    </span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {group.copiedItems.map((c) => (
+                                        <span 
+                                          key={c.id} 
+                                          onClick={() => {
+                                            setSelectedKanjiModal(c);
+                                            setKanjiModalTab('info');
+                                          }}
+                                          className="inline-flex items-center gap-1 px-3 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 text-sm font-black rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all" 
+                                          title={`${c.vietnamese_meaning} - Nhấp xem chi tiết & tập viết`}
+                                        >
+                                          <span>{c.character}</span>
+                                          <span className="text-[10px] text-blue-400">🔍</span>
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
 
+                                {/* Cards Grid for new items */}
+                                {group.newItems.length === 0 ? (
+                                  <div className="text-center py-6 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-xl bg-slate-100/5">
+                                    📝 Không có chữ Hán mới nào trong mẫu ngữ pháp này.
+                                  </div>
+                                ) : (
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                    {group.newItems.map((item) => renderKanjiCard(item))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+
+                      {/* Supplemental Kanji Accordion */}
+                      {processedKanjiGroups.supplemental.length > 0 && (() => {
+                        const isCollapsedBool = collapsedKanjiSections['supplemental'] === true;
+                        return (
+                          <div className="space-y-4 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
+                            <div 
+                              onClick={() => toggleKanjiSection('supplemental')}
+                              className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 transition-all select-none group/header active:scale-[0.995]"
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
+                                  {isCollapsedBool ? '📁' : '📂'}
+                                </span>
+                                <div>
+                                  <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                                    <span className="text-slate-700 dark:text-slate-200">Chữ Hán bổ sung / Khác</span>
+                                    <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
+                                      {processedKanjiGroups.supplemental.length} chữ
+                                    </span>
+                                  </h3>
+                                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 italic">
+                                    Các chữ Hán bổ sung hỗ trợ thêm cho bài học
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
+                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
+                                </span>
+                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
+                                  {isCollapsedBool ? '▼' : '▲'}
+                                </span>
+                              </div>
+                            </div>
+
+                            {!isCollapsedBool && (
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-2">
+                                {processedKanjiGroups.supplemental.map((item) => renderKanjiCard(item))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  );
+                })()}
+
+                {/* ==================== MODAL CHI TIẾT & TẬP VIẾT CHỮ HÁN ==================== */}
+                {selectedKanjiModal && (
+                  <div
+                    className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200"
+                    onClick={() => setSelectedKanjiModal(null)}
+                  >
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-white dark:bg-[#0b1226] border border-slate-200 dark:border-teal-500/25 rounded-3xl p-5 sm:p-7 space-y-5 shadow-2xl dark:shadow-[0_0_60px_rgba(20,184,166,0.18)] animate-in fade-in zoom-in-95 duration-200 custom-scrollbar text-slate-800 dark:text-slate-100"
+                    >
+                      {/* Close button */}
+                      <button
+                        type="button"
+                        onClick={() => setSelectedKanjiModal(null)}
+                        className="absolute right-4 top-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm transition-colors cursor-pointer z-10"
+                      >
+                        ✕
+                      </button>
+
+                      {/* Modal Header: Character, Audio, Sino-Vietnamese, Meaning, Strokes */}
+                      <div className="flex items-start sm:items-center gap-4 border-b border-slate-200 dark:border-slate-800/80 pb-4 pr-8">
+                        <div className="relative shrink-0">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-950 border border-slate-300 dark:border-teal-500/30 flex items-center justify-center text-4xl sm:text-5xl font-black text-slate-900 dark:text-white shadow-inner">
+                            {selectedKanjiModal.character}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => playAudio(selectedKanjiModal.character)}
+                            className="absolute -bottom-1 -right-1 p-1.5 rounded-full bg-teal-600 hover:bg-teal-500 text-white text-xs shadow-md transition-transform active:scale-90 cursor-pointer"
+                            title="Nghe phát âm chuẩn Nhật"
+                          >
+                            🔊
+                          </button>
                         </div>
 
-                      );
+                        <div className="space-y-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h2 className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-teal-400 tracking-wider">
+                              {selectedKanjiModal.sino_vietnamese}
+                            </h2>
+                            <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700/60">
+                              {selectedKanjiModal.stroke_count} nét
+                            </span>
+                            {selectedKanjiModal.lesson_id && (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                                Bài {selectedKanjiModal.lesson_id}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm font-extrabold text-slate-700 dark:text-slate-200">
+                            {selectedKanjiModal.vietnamese_meaning}
+                          </p>
+                        </div>
+                      </div>
 
-                    })()}
+                      {/* Status Bar */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-2xl">
+                        <span className="text-xs font-bold text-slate-600 dark:text-slate-300 flex items-center gap-2">
+                          <span>Trạng thái:</span>
+                          <span className={`text-[11px] font-black px-2 py-0.5 rounded-md ${
+                            selectedKanjiModal.status === 'mastered'
+                              ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
+                              : selectedKanjiModal.status === 'learning'
+                              ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400'
+                              : 'bg-slate-500/20 text-slate-600 dark:text-slate-400'
+                          }`}>
+                            {selectedKanjiModal.status === 'mastered'
+                              ? '🟢 Đã thuộc'
+                              : selectedKanjiModal.status === 'learning'
+                              ? '🟡 Đang học'
+                              : '⚪ Chưa học'}
+                          </span>
+                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              handleKanjiStatusChange(selectedKanjiModal.id, 'not_learned');
+                              setSelectedKanjiModal({ ...selectedKanjiModal, status: 'not_learned' });
+                            }}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                              selectedKanjiModal.status === 'not_learned'
+                                ? 'bg-slate-600 text-white shadow-md'
+                                : 'bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
+                            }`}
+                          >
+                            ⚪ Chưa học
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              handleKanjiStatusChange(selectedKanjiModal.id, 'learning');
+                              setSelectedKanjiModal({ ...selectedKanjiModal, status: 'learning' });
+                            }}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                              selectedKanjiModal.status === 'learning'
+                                ? 'bg-amber-600 text-white shadow-md'
+                                : 'bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
+                            }`}
+                          >
+                            🟡 Đang học
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              handleKanjiStatusChange(selectedKanjiModal.id, 'mastered');
+                              setSelectedKanjiModal({ ...selectedKanjiModal, status: 'mastered' });
+                            }}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                              selectedKanjiModal.status === 'mastered'
+                                ? 'bg-emerald-600 text-white shadow-md'
+                                : 'bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
+                            }`}
+                          >
+                            🟢 Đã thuộc
+                          </button>
+                        </div>
+                      </div>
 
+                      {/* Sub-tabs: Info vs Draw */}
+                      <div className="grid grid-cols-2 p-1 bg-slate-100 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <button
+                          type="button"
+                          onClick={() => setKanjiModalTab('info')}
+                          className={`py-2 px-3 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                            kanjiModalTab === 'info'
+                              ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm'
+                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                          }`}
+                        >
+                          <span>📖</span>
+                          <span>Thông tin & Ngữ nghĩa</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setKanjiModalTab('draw')}
+                          className={`py-2 px-3 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                            kanjiModalTab === 'draw'
+                              ? 'bg-white dark:bg-slate-800 text-teal-600 dark:text-teal-400 shadow-sm'
+                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                          }`}
+                        >
+                          <span>✍️</span>
+                          <span>Tập viết chữ Hán</span>
+                        </button>
+                      </div>
+
+                      {/* Tab 1: Info Content */}
+                      {kanjiModalTab === 'info' && (
+                        <div className="space-y-4 animate-in fade-in duration-200">
+                          {/* Onyomi & Kunyomi */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 space-y-1">
+                              <span className="block text-[10px] text-purple-600 dark:text-purple-400 font-extrabold uppercase tracking-wider">
+                                Onyomi (Âm Hán - Katakana)
+                              </span>
+                              <span className="font-bold text-purple-700 dark:text-purple-300 text-sm break-words">
+                                {selectedKanjiModal.onyomi || '-'}
+                              </span>
+                              <p className="text-[10px] text-slate-400 italic">Thường dùng khi ghép từ Hán-Nhật (2 chữ Kanji trở lên)</p>
+                            </div>
+
+                            <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-1">
+                              <span className="block text-[10px] text-emerald-600 dark:text-emerald-400 font-extrabold uppercase tracking-wider">
+                                Kunyomi (Âm Thuần - Hiragana)
+                              </span>
+                              <span className="font-bold text-emerald-700 dark:text-emerald-300 text-sm break-words">
+                                {selectedKanjiModal.kunyomi || '-'}
+                              </span>
+                              <p className="text-[10px] text-slate-400 italic">Thường dùng khi đứng độc lập hoặc có đuôi Okurigana</p>
+                            </div>
+                          </div>
+
+                          {/* Radicals / Chiết tự đầy đủ các bộ thủ cấu thành */}
+                          {(() => {
+                            const radicalsList = getRadicalsForCharacter(selectedKanjiModal.character);
+                            return (
+                              <div className="p-3.5 rounded-2xl bg-teal-950/20 border border-teal-500/25 space-y-2.5">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-[10px] font-black text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
+                                    <span>🧩</span> Các bộ thủ cấu thành ({radicalsList.length} bộ)
+                                  </span>
+                                  <span className="text-[11px] font-bold text-slate-400">
+                                    {radicalsList.map(r => r.character).join(' + ')} ➔ <strong className="text-teal-300">{selectedKanjiModal.character}</strong>
+                                  </span>
+                                </div>
+
+                                {/* Lưới các bộ thủ thành phần đầy đủ */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                  {radicalsList.map((rad, idx) => (
+                                    <div key={idx} className="p-2.5 rounded-xl bg-slate-900/60 border border-teal-500/20 flex items-start gap-2.5">
+                                      <span className="text-2xl font-black text-teal-400 font-serif shrink-0 w-8 text-center">
+                                        {rad.character}
+                                      </span>
+                                      <div className="space-y-0.5 min-w-0 flex-1">
+                                        <div className="flex items-center gap-1.5">
+                                          <span className="text-xs font-bold text-slate-200">
+                                            Bộ {rad.sinoVietnamese}
+                                          </span>
+                                          <span className="text-[10px] text-teal-400 font-medium truncate">
+                                            ({rad.meaning})
+                                          </span>
+                                        </div>
+                                        {rad.origin && (
+                                          <p className="text-[10px] text-slate-400 line-clamp-2 leading-tight">
+                                            {rad.origin}
+                                          </p>
+                                        )}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })()}
+
+                          {/* AI Phân tích chi tiết cội nguồn chữ Hán */}
+                          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-slate-950/60 border border-indigo-500/30 space-y-3">
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-lg">✨</span>
+                                <div>
+                                  <span className="block text-xs font-black text-indigo-300 uppercase tracking-wide">
+                                    AI Phân tích chi tiết cội nguồn chữ Hán
+                                  </span>
+                                  <span className="text-[10px] text-slate-400">
+                                    Vì sao dùng các bộ thủ này? Logic ghép chữ tạo nghĩa ra sao?
+                                  </span>
+                                </div>
+                              </div>
+
+                              {!kanjiAiExplanation && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleExplainKanji(selectedKanjiModal)}
+                                  disabled={isExplainingKanji}
+                                  className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shrink-0"
+                                >
+                                  {isExplainingKanji ? (
+                                    <>
+                                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                      <span>Đang phân tích...</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <span>✨</span>
+                                      <span>AI Giải thích</span>
+                                    </>
+                                  )}
+                                </button>
+                              )}
+                            </div>
+
+                            {kanjiAiError && (
+                              <div className="p-2.5 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-300 text-xs">
+                                ⚠️ {kanjiAiError}
+                              </div>
+                            )}
+
+                            {/* Kết quả AI phân tích ngắn gọn, súc tích */}
+                            {kanjiAiExplanation && (
+                              <div className="space-y-2.5 pt-2 border-t border-indigo-500/20 text-xs animate-in fade-in duration-200">
+                                {/* Vì sao dùng các bộ thủ này */}
+                                {kanjiAiExplanation.radicals_analysis && Array.isArray(kanjiAiExplanation.radicals_analysis) && (
+                                  <div className="space-y-1.5">
+                                    <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider block">
+                                      🏷️ Vì sao chữ này dùng các bộ thủ này?
+                                    </span>
+                                    <div className="grid grid-cols-1 gap-1.5">
+                                      {kanjiAiExplanation.radicals_analysis.map((item: any, idx: number) => (
+                                        <div key={idx} className="p-2 rounded-lg bg-indigo-950/40 border border-indigo-500/20 text-slate-300 text-xs flex items-start gap-2">
+                                          <span className="px-1.5 py-0.5 rounded bg-indigo-900/60 text-indigo-300 font-bold shrink-0">
+                                            {item.radical} ({item.name})
+                                          </span>
+                                          <span className="leading-snug text-slate-300">
+                                            {item.why_used}
+                                          </span>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Logic kết hợp tạo nghĩa */}
+                                {kanjiAiExplanation.synthesis_logic && (
+                                  <div className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/25 space-y-1">
+                                    <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider block">
+                                      🔗 Logic người xưa kết hợp tạo nghĩa:
+                                    </span>
+                                    <p className="text-slate-200 leading-relaxed font-sans text-xs">
+                                      {kanjiAiExplanation.synthesis_logic}
+                                    </p>
+                                  </div>
+                                )}
+
+                                {/* Mẹo nhớ 5 giây */}
+                                {kanjiAiExplanation.quick_memory_hook && (
+                                  <div className="p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/30 flex items-start gap-2">
+                                    <span className="text-base shrink-0">🧠</span>
+                                    <div className="space-y-0.5">
+                                      <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">
+                                        Mẹo nhớ 5 giây:
+                                      </span>
+                                      <p className="text-amber-200 font-medium leading-relaxed text-xs">
+                                        {kanjiAiExplanation.quick_memory_hook}
+                                      </p>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Mnemonic Tip */}
+                          {selectedKanjiModal.mnemonic_tip && (
+                            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5">
+                              <span className="text-base shrink-0">💡</span>
+                              <div className="space-y-0.5">
+                                <span className="block text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                                  Mẹo ghi nhớ hình tượng
+                                </span>
+                                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+                                  {selectedKanjiModal.mnemonic_tip}
+                                </p>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Compounds */}
+                          {selectedKanjiModal.compounds && (
+                            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
+                              <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/20 border border-emerald-900/20 px-2 py-0.5 rounded-md uppercase tracking-wider inline-block">
+                                📚 Từ ghép ví dụ thực tế
+                              </span>
+                              <div className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-line font-medium space-y-1">
+                                {selectedKanjiModal.compounds.split('\n').filter(Boolean).map((line, idx) => (
+                                  <div key={idx} className="flex items-center justify-between py-1 border-b border-slate-100 dark:border-slate-800/60 last:border-0">
+                                    <span>{line}</span>
+                                    <button
+                                      type="button"
+                                      onClick={() => playAudio(line.split(' ')[0] || line)}
+                                      className="p-1 text-[11px] text-slate-400 hover:text-teal-400 transition-colors cursor-pointer"
+                                      title="Nghe phát âm"
+                                    >
+                                      🔊
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Tab 2: Tập viết chữ Hán (Hoạt ảnh bút thuận & Bảng vẽ Canvas) */}
+                      {kanjiModalTab === 'draw' && (
+                        <div className="space-y-4 animate-in fade-in duration-200">
+                          {/* Segmented Control: Hoạt ảnh bút thuận vs Bảng vẽ Canvas */}
+                          <div className="flex justify-center">
+                            <div className="p-1 rounded-xl bg-slate-800/80 border border-slate-700 flex gap-1 text-xs">
+                              <button
+                                type="button"
+                                onClick={() => setKanjiDrawSubMode('anim')}
+                                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                                  kanjiDrawSubMode === 'anim'
+                                    ? 'bg-indigo-600 text-white shadow-sm'
+                                    : 'text-slate-400 hover:text-slate-200'
+                                }`}
+                              >
+                                <span>🎬</span>
+                                <span>Hoạt ảnh nét viết</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => setKanjiDrawSubMode('canvas')}
+                                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                                  kanjiDrawSubMode === 'canvas'
+                                    ? 'bg-teal-600 text-white shadow-sm'
+                                    : 'text-slate-400 hover:text-slate-200'
+                                }`}
+                              >
+                                <span>🖌️</span>
+                                <span>Bảng vẽ tự luyện</span>
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Chế độ 1: Hoạt ảnh viết động từng nét KanjiVG */}
+                          {kanjiDrawSubMode === 'anim' && (
+                            <div className="flex flex-col items-center justify-center animate-in fade-in duration-150">
+                              <KanjiStrokePlayer
+                                character={selectedKanjiModal.character}
+                                sinoVietnamese={selectedKanjiModal.sino_vietnamese}
+                                size={280}
+                              />
+                            </div>
+                          )}
+
+                          {/* Chế độ 2: Bảng vẽ Canvas Tian Zi Ge tự luyện & chấm điểm */}
+                          {kanjiDrawSubMode === 'canvas' && (
+                            <div className="flex flex-col items-center justify-center space-y-3 animate-in fade-in duration-150">
+                              <div className="flex items-center justify-between w-full max-w-[280px]">
+                                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                  <span>Vẽ chữ:</span>
+                                  <span className="text-xl font-black text-teal-400">{selectedKanjiModal.character}</span>
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => setShowModalGhostGuide(!showModalGhostGuide)}
+                                  className="text-[11px] font-bold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer flex items-center gap-1"
+                                >
+                                  <span>{showModalGhostGuide ? '👁️ Ẩn nét mờ' : '👁️ Hiện nét mờ'}</span>
+                                </button>
+                              </div>
+
+                              {/* Tian Zi Ge Canvas */}
+                              <div className="relative w-[280px] h-[280px] rounded-2xl overflow-hidden border-2 border-slate-700 shadow-xl bg-[#090d1f] touch-none">
+                                <canvas
+                                  ref={modalCanvasRef}
+                                  width={280}
+                                  height={280}
+                                  onMouseDown={startModalDrawing}
+                                  onMouseMove={drawModalStroke}
+                                  onMouseUp={stopModalDrawing}
+                                  onMouseLeave={stopModalDrawing}
+                                  onTouchStart={startModalDrawing}
+                                  onTouchMove={drawModalStroke}
+                                  onTouchEnd={stopModalDrawing}
+                                  className="w-full h-full cursor-crosshair"
+                                />
+                              </div>
+
+                              {/* Drawing controls */}
+                              <div className="flex items-center gap-2.5 w-full max-w-[280px]">
+                                <button
+                                  type="button"
+                                  onClick={clearModalCanvas}
+                                  disabled={isModalGradingWithAI}
+                                  className="flex-1 py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer flex items-center justify-center gap-1 disabled:opacity-50"
+                                >
+                                  <span>🗑️</span>
+                                  <span>Vẽ lại</span>
+                                </button>
+
+                                <button
+                                  type="button"
+                                  onClick={evaluateModalDrawing}
+                                  disabled={isModalGradingWithAI}
+                                  className="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-50"
+                                >
+                                  {isModalGradingWithAI ? (
+                                    <>
+                                      <span className="animate-spin text-sm">⏳</span>
+                                      <span>AI đang chấm...</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <span>✨</span>
+                                      <span>Chấm điểm AI</span>
+                                    </>
+                                  )}
+                                </button>
+                              </div>
+
+                              {/* Evaluation Result */}
+                              {modalDrawResult && (
+                                <div className={`w-full max-w-[280px] p-3 rounded-xl border space-y-2 animate-in fade-in duration-150 ${
+                                  modalDrawResult.is_correct
+                                    ? 'bg-emerald-950/20 border-emerald-500/30 text-emerald-300'
+                                    : 'bg-amber-950/20 border-amber-500/30 text-amber-300'
+                                }`}>
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-xs font-black flex items-center gap-1.5">
+                                      <span>{modalDrawResult.is_correct ? '✅' : '⚠️'}</span>
+                                      <span>{modalDrawResult.status_label}</span>
+                                      {modalDrawResult.isAIGraded && (
+                                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                                          AI Vision
+                                        </span>
+                                      )}
+                                    </span>
+                                    <span className="text-xs font-black px-2 py-0.5 rounded-full bg-white/10">
+                                      {modalDrawResult.score}/100
+                                    </span>
+                                  </div>
+                                  <p className="text-[11px] text-slate-300 leading-tight">
+                                    {modalDrawResult.feedback}
+                                  </p>
+
+                                  {/* Hướng dẫn hoàn thiện ngắn gọn */}
+                                  {modalDrawResult.improvement_tip && (
+                                    <div className="p-2 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/30 text-amber-300 dark:text-amber-200 text-[11px] leading-relaxed flex items-start gap-1.5">
+                                      <span className="shrink-0 text-xs">💡</span>
+                                      <div>
+                                        <span className="font-bold text-amber-400">Cần làm: </span>
+                                        <span>{modalDrawResult.improvement_tip}</span>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Footer */}
+                      <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedKanjiModal(null);
+                            setPracticeCategory('kanji');
+                            router.push(`/lessons/${selectedLessonId}?tab=practice&category=kanji`);
+                          }}
+                          className="text-xs font-bold text-amber-500 hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <span>⚡ Luyện tập Kanji chuyên sâu ➔</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setSelectedKanjiModal(null)}
+                          className="px-5 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-xl cursor-pointer transition-colors"
+                        >
+                          Đóng lại
+                        </button>
+                      </div>
+                    </div>
                   </div>
-
                 )}
-
               </div>
 
             )}

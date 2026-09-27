@@ -392,3 +392,276 @@ export function gradeKanjiWritten(
     feedback: `Chưa chính xác. Đáp án chuẩn: Hán Việt: ${kanji.sino_vietnamese || '-'} | Nghĩa: ${kanji.vietnamese_meaning}.`
   };
 }
+
+export interface KanjiWritingRiddle {
+  target_character: string;
+  sino_vietnamese: string;
+  meaning: string;
+  stroke_count: number;
+  riddle_question: string;
+  hint: string;
+  radicals_hint?: string;
+}
+
+export interface KanjiGradingResult {
+  score: number;
+  is_correct: boolean;
+  status: 'excellent' | 'acceptable' | 'needs_improvement' | 'incorrect';
+  status_label: string;
+  feedback: string;
+  improvement_tip: string;
+  detected_character?: string;
+  isAIGraded?: boolean;
+}
+
+/**
+ * Sinh câu đố đặc trưng cục bộ (Local Fallback) dựa trên chiết tự bộ thủ và nghĩa
+ */
+export function generateLocalKanjiRiddles(kanjis: KanjiItemData[]): KanjiWritingRiddle[] {
+  return kanjis.map(k => {
+    const sino = k.sino_vietnamese || '';
+    const meaning = k.vietnamese_meaning || '';
+    const strokes = parseInt(k.stroke_count || '0') || 4;
+    
+    let question = '';
+    if (k.mnemonic_tip && !k.mnemonic_tip.includes(k.character)) {
+      question = `Câu đố hình tượng: ${k.mnemonic_tip}`;
+    } else {
+      question = `Chữ Hán có âm Hán Việt là "${sino}", biểu thị ý nghĩa "${meaning}". Hãy nhớ lại cấu trúc các nét và viết lại chữ Hán này.`;
+    }
+
+    return {
+      target_character: k.character,
+      sino_vietnamese: sino,
+      meaning: meaning,
+      stroke_count: strokes,
+      riddle_question: question,
+      hint: `Âm Hán Việt: ${sino} • Gồm ${strokes} nét`,
+      radicals_hint: `Ý nghĩa cốt lõi: ${meaning}`
+    };
+  });
+}
+
+/**
+ * Gọi API backend lấy bộ câu đố AI ra đề (kèm cache vĩnh viễn), fallback sang local nếu lỗi
+ */
+export async function fetchKanjiWritingRiddles(
+  lessonId: number,
+  kanjis: KanjiItemData[],
+  forceRefresh: boolean = false
+): Promise<KanjiWritingRiddle[]> {
+  try {
+    const res = await fetch('/api/ai/kanji-writing-riddles', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lessonId, kanjis, forceRefresh })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && Array.isArray(data.riddles) && data.riddles.length > 0) {
+        return data.riddles;
+      }
+    }
+  } catch (e) {
+    console.warn('[fetchKanjiWritingRiddles] API call failed, using local generator:', e);
+  }
+  return generateLocalKanjiRiddles(kanjis);
+}
+
+/**
+ * Thuật toán chấm điểm hình học Canvas cục bộ (Fallback) + sinh hướng dẫn hoàn thiện ngắn gọn
+ */
+export function evaluateKanjiDrawingLocally(
+  canvas: HTMLCanvasElement,
+  targetChar: string,
+  strokeCount?: number
+): KanjiGradingResult {
+  const offscreen = document.createElement('canvas');
+  offscreen.width = canvas.width;
+  offscreen.height = canvas.height;
+  const oCtx = offscreen.getContext('2d');
+  if (!oCtx) {
+    return {
+      score: 50,
+      is_correct: false,
+      status: 'needs_improvement',
+      status_label: 'Cần rèn thêm',
+      feedback: 'Không thể phân tích hình ảnh Canvas.',
+      improvement_tip: 'Hãy vẽ lại chữ vào chính giữa ô chữ điền.'
+    };
+  }
+
+  oCtx.fillStyle = '#090d1f';
+  oCtx.fillRect(0, 0, offscreen.width, offscreen.height);
+  oCtx.fillStyle = '#2dd4bf';
+  oCtx.font = '900 150px "Noto Sans JP", sans-serif';
+  oCtx.textAlign = 'center';
+  oCtx.textBaseline = 'middle';
+  oCtx.fillText(targetChar, offscreen.width / 2, offscreen.height / 2 + 5);
+
+  const userCtx = canvas.getContext('2d');
+  if (!userCtx) {
+    return {
+      score: 0,
+      is_correct: false,
+      status: 'incorrect',
+      status_label: 'Không đạt',
+      feedback: 'Chưa có nét vẽ nào.',
+      improvement_tip: 'Hãy đặt bút và vẽ chữ vào giữa ô chữ điền.'
+    };
+  }
+
+  const uImg = userCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+  const tImg = oCtx.getImageData(0, 0, offscreen.width, offscreen.height).data;
+
+  const W = 40;
+  const H = 40;
+  const stepX = canvas.width / W;
+  const stepY = canvas.height / H;
+
+  let overlap = 0;
+  let targetFilled = 0;
+  let userFilled = 0;
+  let sumUserX = 0;
+  let sumUserY = 0;
+
+  for (let gy = 0; gy < H; gy++) {
+    for (let gx = 0; gx < W; gx++) {
+      const px = Math.floor(gx * stepX);
+      const py = Math.floor(gy * stepY);
+      const idx = (py * canvas.width + px) * 4;
+
+      const tR = tImg[idx];
+      const tG = tImg[idx + 1];
+      const isT = (tG > 100 && tR < 100);
+
+      const uG = uImg[idx + 1];
+      const uB = uImg[idx + 2];
+      const isU = (uG > 150 && uB > 150);
+
+      if (isT) targetFilled++;
+      if (isU) {
+        userFilled++;
+        sumUserX += gx;
+        sumUserY += gy;
+      }
+      if (isT && isU) overlap++;
+    }
+  }
+
+  if (userFilled < 10) {
+    return {
+      score: 0,
+      is_correct: false,
+      status: 'incorrect',
+      status_label: 'Chưa đủ nét',
+      feedback: 'Nét vẽ quá ít hoặc chưa vẽ hoàn chỉnh chữ.',
+      improvement_tip: `Chữ "${targetChar}" có ${strokeCount || 'nhiều'} nét, bạn đang vẽ thiếu nét; hãy vẽ đủ các nét cơ bản.`
+    };
+  }
+
+  const precision = userFilled > 0 ? overlap / userFilled : 0;
+  const recall = targetFilled > 0 ? overlap / targetFilled : 0;
+  const f1 = (precision + recall) > 0 ? (2 * precision * recall) / (precision + recall) : 0;
+
+  const finalScore = Math.min(100, Math.max(0, Math.round(f1 * 135)));
+  const isCorrect = finalScore >= 60;
+  const status: 'excellent' | 'acceptable' | 'needs_improvement' | 'incorrect' =
+    finalScore >= 85 ? 'excellent' : finalScore >= 60 ? 'acceptable' : finalScore >= 35 ? 'needs_improvement' : 'incorrect';
+  const status_label = finalScore >= 85 ? 'Xuất sắc' : finalScore >= 60 ? 'Đạt chuẩn' : finalScore >= 35 ? 'Cần rèn thêm' : 'Chưa đúng';
+  
+  let improvement_tip = '';
+  const avgUserX = userFilled > 0 ? sumUserX / userFilled : 20;
+  const avgUserY = userFilled > 0 ? sumUserY / userFilled : 20;
+  const isOffCenter = Math.abs(avgUserX - 20) > 4 || Math.abs(avgUserY - 20) > 4;
+
+  if (finalScore >= 85) {
+    improvement_tip = 'Nét vẽ rất chuẩn mực và cân đối! Chú ý thêm nét móc dứt khoát ở điểm dừng bút.';
+  } else if (recall < 0.45) {
+    improvement_tip = `Chữ này có ${strokeCount || 'nhiều'} nét, bạn đang thiếu nét hoặc nét quá mảnh; hãy vẽ đủ nét và đậm tay hơn.`;
+  } else if (precision < 0.40) {
+    improvement_tip = 'Nét vẽ bị tràn ra ngoài form mẫu; hãy giữ nét gọn trong các ô của ô chữ điền.';
+  } else if (isOffCenter) {
+    improvement_tip = 'Cần căn chỉnh chữ vào chính giữa tâm ô chữ điền (giao điểm 2 đường nét đứt).';
+  } else if (userFilled < targetFilled * 0.6) {
+    improvement_tip = 'Hãy vẽ chữ to hơn (chiếm khoảng 70-80% ô vuông) để nét chữ không bị dính vào nhau.';
+  } else {
+    improvement_tip = 'Hãy bật nét mờ để đồ theo chữ mẫu thêm 1 lần giúp quen tay hơn nhé.';
+  }
+
+  const feedback = finalScore >= 85
+    ? 'Tuyệt vời! Dáng nét chữ Kanji rất chuẩn và cân đối.'
+    : finalScore >= 60
+    ? 'Đạt yêu cầu! Các nét chữ đã vào đúng vị trí của chữ mẫu.'
+    : 'Nét chữ còn chệch khỏi chữ mẫu. Hãy xem lại hướng dẫn bên dưới nhé.';
+
+  return {
+    score: finalScore,
+    is_correct: isCorrect,
+    status,
+    status_label,
+    feedback,
+    improvement_tip,
+    isAIGraded: false
+  };
+}
+
+/**
+ * Chấm điểm nét vẽ chữ Hán bằng Gemini Multimodal Vision AI
+ * Tự động fallback về thuật toán hình học nếu offline / mất mạng
+ */
+export async function gradeKanjiWithAI({
+  canvas,
+  targetKanji,
+  strokeCount,
+  sinoVietnamese = '',
+  meaning = '',
+  radicals = []
+}: {
+  canvas: HTMLCanvasElement;
+  targetKanji: string;
+  strokeCount?: number;
+  sinoVietnamese?: string;
+  meaning?: string;
+  radicals?: any;
+}): Promise<KanjiGradingResult> {
+  const imageBase64 = canvas.toDataURL('image/png');
+
+  try {
+    const res = await fetch('/api/ai/grade-kanji-writing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        imageBase64,
+        targetKanji,
+        strokeCount,
+        sinoVietnamese,
+        meaning,
+        radicals
+      })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.result) {
+        const r = data.result;
+        return {
+          score: typeof r.score === 'number' ? r.score : 70,
+          is_correct: Boolean(r.is_correct ?? (r.score >= 60)),
+          status: r.status || (r.score >= 85 ? 'excellent' : r.score >= 60 ? 'acceptable' : 'needs_improvement'),
+          status_label: r.status_label || (r.score >= 85 ? 'Xuất sắc' : r.score >= 60 ? 'Đạt chuẩn' : 'Cần rèn thêm'),
+          feedback: r.feedback || 'AI đã phân tích nét vẽ của bạn.',
+          improvement_tip: r.improvement_tip || 'Hãy căn chỉnh các nét vào đúng vị trí ô chữ điền.',
+          detected_character: r.detected_character,
+          isAIGraded: true
+        };
+      }
+    }
+  } catch (e) {
+    console.warn('[gradeKanjiWithAI] AI grading failed, falling back to local geometric grading:', e);
+  }
+
+  // Graceful Fallback to Local Geometric Grading
+  return evaluateKanjiDrawingLocally(canvas, targetKanji, strokeCount);
+}
+

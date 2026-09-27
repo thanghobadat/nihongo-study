@@ -382,12 +382,228 @@ Hãy cung cấp:
   return await callGemini(prompt, schema, { maxOutputTokens: 1500, timeoutMs: 15000 });
 }
 
+/**
+ * Explain in-depth Kanji character structure, component radicals, and synthesis logic
+ * Focuses on the KANJI CHARACTER itself: Why it uses those radicals, how they combine to create meaning
+ */
+async function explainKanjiStructure({ character, sinoVietnamese, meaning, strokeCount, radicals = [] }) {
+  const radicalsText = Array.isArray(radicals) && radicals.length > 0
+    ? radicals.map((r, i) => `${i + 1}. Bộ "${r.character}" (${r.sinoVietnamese || 'Chưa rõ'}: ${r.meaning || 'Nét cấu thành'})`).join('\n')
+    : `Bộ thủ chính: ${character}`;
+
+  const prompt = `Bạn là chuyên gia ngôn ngữ tiếng Nhật và Hán học hàng đầu.
+Hãy phân tích cặn kẽ bản chất cấu tạo và ý nghĩa của CHỮ HÁN sau cho học viên người Việt:
+
+- Chữ Hán: "${character}"
+- Tên Hán Việt: "${sinoVietnamese}"
+- Nghĩa tiếng Việt: "${meaning}"
+- Số nét: ${strokeCount || 'Chuẩn'} nét
+- Danh sách bộ thủ / thành phần cấu thành:
+${radicalsText}
+
+YÊU CẦU BẮT BUỘC:
+1. Tập trung giải thích CHÍNH CHỮ HÁN "${character}" (chứ không nói lý thuyết chung về bộ thủ).
+2. Liệt kê ĐẦY ĐỦ TẤT CẢ các bộ thủ cấu thành chữ này. Nêu rõ VÌ SAO chữ này lại dùng các bộ thủ đó (vai trò biểu thị của từng bộ thủ trong việc tạo nên chữ này).
+3. Phân tích logic kết hợp: Người xưa ghép các bộ thủ này lại với nhau như thế nào (hội ý, tượng hình, hình thanh...) để tạo thành ý nghĩa của chữ "${character}"?
+4. Đưa ra một câu thần chú / mẹo nhớ 5 giây ngắn gọn, đắt giá, liên kết các bộ thủ để học viên thuộc vĩnh viễn nghĩa của chữ.
+5. PHONG CÁCH: CỰC KỲ NGẮN GỌN, SÚC TÍCH, ĐỦ Ý, đi thẳng vào bản chất, mỗi phần chỉ 1-2 câu ngắn, không lê thê.`;
+
+  const schema = {
+    type: "OBJECT",
+    properties: {
+      radicals_analysis: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            radical: { type: "STRING" },
+            name: { type: "STRING" },
+            meaning: { type: "STRING" },
+            why_used: { type: "STRING", description: "Vì sao chữ này lại dùng bộ thủ này (1 câu ngắn)" }
+          },
+          required: ["radical", "name", "meaning", "why_used"]
+        }
+      },
+      synthesis_logic: {
+        type: "STRING",
+        description: "Logic kết hợp các bộ thủ tạo thành nghĩa của chữ Hán (1-2 câu súc tích)"
+      },
+      origin_short: {
+        type: "STRING",
+        description: "Nguồn gốc tượng hình hoặc hội ý cổ xưa của chữ này (1 câu ngắn)"
+      },
+      quick_memory_hook: {
+        type: "STRING",
+        description: "Mẹo nhớ 5 giây đắt giá, dễ thuộc ngay lập tức (1 câu ngắn)"
+      }
+    },
+    required: ["radicals_analysis", "synthesis_logic", "origin_short", "quick_memory_hook"]
+  };
+
+  return await callGemini(prompt, schema, { maxOutputTokens: 1000, timeoutMs: 15000 });
+}
+
+/**
+ * Grade Kanji handwriting on Tian Zi Ge canvas using Gemini Multimodal Vision
+ * Analyzes stroke precision, missing/extra strokes, radical layout & balance, and provides an actionable improvement tip
+ */
+async function gradeKanjiHandwritingWithVision({
+  imageBase64,
+  targetKanji,
+  strokeCount,
+  sinoVietnamese = '',
+  meaning = '',
+  radicals = []
+}) {
+  if (!imageBase64) {
+    throw new Error('imageBase64 is required for handwriting evaluation');
+  }
+
+  // Clean data URL prefix if present
+  const cleanBase64 = imageBase64.replace(/^data:image\/\w+;base64,/, '');
+
+  const radicalsStr = Array.isArray(radicals) && radicals.length > 0
+    ? radicals.map(r => typeof r === 'string' ? r : `${r.character || ''} (${r.meaning || ''})`).join(', ')
+    : 'Không rõ';
+
+  const prompt = `Bạn là chuyên gia thẩm định thư pháp và sư phạm chữ Hán (Kanji) tiếng Nhật.
+Học viên vừa tự tay vẽ nét chữ Hán trên ô kẻ vuông chữ điền (Tian Zi Ge).
+CHỮ MẪU MỤC TIÊU:
+- Ký tự Kanji: "${targetKanji}"
+- Tên Hán Việt: "${sinoVietnamese || 'Chuẩn'}"
+- Nghĩa tiếng Việt: "${meaning || 'Chuẩn'}"
+- Số nét vẽ chuẩn: ${strokeCount || 'Chuẩn'} nét
+- Các bộ thủ cấu thành: ${radicalsStr}
+
+NHIỆM VỤ CỦA BẠN:
+Hãy quan sát kỹ hình ảnh nét vẽ thực tế của học viên và đánh giá công tâm:
+1. Nhận diện chữ: Nét vẽ có đúng hình thái của chữ "${targetKanji}" không? AI nhận diện ra chữ gì?
+2. Kiểm tra nét bút:
+   - Có bị thiếu nét hay thừa nét nào không?
+   - Các nét móc (hane), nét phẩy (harai), nét sổ, nét chấm có đúng dáng không?
+3. Kiểm tra bố cục & tỷ lệ:
+   - Các bộ thủ/bộ phận có cân đối với nhau không?
+   - Vị trí chữ có bị lệch so với tâm ô chữ điền (giao điểm 2 đường nét đứt) không?
+4. Chấm điểm trên thang 100:
+   - 90 - 100: Xuất sắc! Nét vẽ chuẩn mực, tỷ lệ hài hòa, đầy đủ nét.
+   - 75 - 89: Đạt chuẩn! Đúng chữ, rõ ràng, có thể hơi run hoặc tỷ lệ chưa thật cân đối.
+   - 50 - 74: Cần cải thiện! Nhận diện được chữ nhưng thiếu/thừa nét, nét móc sai hoặc chữ bị méo/lệch tâm.
+   - 0 - 49: Không đạt! Nét vẽ nguệch ngoạc, sai chữ hoặc thiếu quá nhiều nét cơ bản.
+5. ĐẶC BIỆT: "improvement_tip" - ĐƯA RA ĐÚNG 1 CÂU HƯỚNG DẪN HOÀN THIỆN NGẮN GỌN (tối đa 25 từ) bằng tiếng Việt, chỉ rõ hành động người dùng cần làm để vẽ đẹp và hoàn chỉnh hơn (Ví dụ: "Chữ này có 6 nét, bạn đang thiếu nét ngang ở giữa; hãy vẽ đủ nét và kéo nét móc dứt khoát hơn.", "Cần căn chỉnh chữ vào chính giữa tâm ô chữ điền và thu nhỏ bộ Nhân đứng bên trái lại.", "Nét vẽ rất đẹp! Hãy giữ nét phẩy sau cùng thon gọn để đạt điểm tối đa.").
+`;
+
+  const parts = [
+    {
+      inlineData: {
+        mimeType: "image/png",
+        data: cleanBase64
+      }
+    },
+    { text: prompt }
+  ];
+
+  const kanjiHandwritingSchema = {
+    type: "OBJECT",
+    properties: {
+      is_correct: { type: "BOOLEAN" },
+      score: { type: "INTEGER" },
+      status: {
+        type: "STRING",
+        enum: ["excellent", "acceptable", "needs_improvement", "incorrect"]
+      },
+      status_label: { type: "STRING" },
+      feedback: { type: "STRING", description: "Nhận xét tổng quan 1 câu ngắn" },
+      improvement_tip: { type: "STRING", description: "Đúng 1 câu hướng dẫn cụ thể cần làm gì để sửa hoàn chỉnh hơn (tối đa 25 từ)" },
+      detected_character: { type: "STRING", description: "Chữ Hán nhận diện được từ ảnh" }
+    },
+    required: ["is_correct", "score", "status", "status_label", "feedback", "improvement_tip"]
+  };
+
+  return await callGemini(parts, kanjiHandwritingSchema, { maxOutputTokens: 600, timeoutMs: 15000 });
+}
+
+/**
+ * Generate Kanji Writing Riddles using Gemini with strict constraints
+ * Strict Rule: Never reveal the target Kanji character in the riddle question or hints
+ */
+async function generateKanjiWritingRiddles({ lessonId, kanjis = [] }) {
+  if (!Array.isArray(kanjis) || kanjis.length === 0) {
+    throw new Error('kanjis array is required to generate riddles');
+  }
+
+  const kanjisList = kanjis.map((k, idx) => {
+    const char = k.character || '';
+    const sino = k.sino_vietnamese || k.sinoVietnamese || '';
+    const meaning = k.vietnamese_meaning || k.meaning || '';
+    const strokes = k.stroke_count || k.strokeCount || '';
+    const radicals = Array.isArray(k.radicals) 
+      ? k.radicals.map(r => typeof r === 'string' ? r : (r.character || '')).join(' + ')
+      : (typeof k.radicals === 'string' ? k.radicals : '');
+    const mnemonic = k.mnemonic_tip || k.story || '';
+    const examples = Array.isArray(k.examples) ? k.examples.map(e => e.reading || e.japanese || '').join(', ') : '';
+
+    return `${idx + 1}. Ký tự mục tiêu: "${char}"
+- Tên Hán Việt: "${sino}"
+- Nghĩa tiếng Việt: "${meaning}"
+- Số nét: ${strokes}
+- Bộ thủ cấu thành: ${radicals || 'Thành phần cơ bản'}
+- Mẹo nhớ hình tượng: "${mnemonic}"
+- Ví dụ từ vựng: "${examples}"`;
+  }).join('\n\n');
+
+  const prompt = `Bạn là chuyên gia sư phạm tiếng Nhật hàng đầu.
+Nhiệm vụ của bạn là tạo các CÂU ĐỐ TẬP VIẾT CHỮ HÁN (Kanji Writing Riddles) cho học viên trong Bài ${lessonId || ''}.
+Học viên sẽ đọc câu đố, suy luận ra chữ Hán và tự tay vẽ mặt chữ Hán lên bảng vẽ Canvas.
+
+DANH SÁCH CÁC CHỮ HÁN CẦN RA ĐỀ:
+${kanjisList}
+
+QUY TẮC BẮT BUỘC KHI RA ĐỀ (STRICT RIDDLE GUIDE):
+1. TUYỆT ĐỐI KHÔNG ĐƯỢC CHỨA KÝ TỰ KANJI MỤC TIÊU trong "riddle_question" và "hint" (nếu để lộ chữ thì học viên sẽ nhìn thấy và chép lại, mất ý nghĩa câu đố suy luận).
+2. BIẾN HÓA VÀ ĐỔI MỚI GÓC NHÌN: Hãy sáng tạo văn phong mới mẻ, luân chuyển linh hoạt và đa dạng giữa các góc độ đố:
+   - Chiết tự các bộ thủ cấu thành (Ví dụ: "Chữ gì được tạo nên từ bộ Nhân đứng và bộ Mộc mang nghĩa nghỉ ngơi?").
+   - Hình tượng cội nguồn thú vị (Ví dụ: "Hình ảnh người đứng tựa vào gốc cây sau ngày làm việc vất vả là chữ gì?").
+   - Nghĩa cốt lõi hoặc ngữ cảnh từ vựng thực tế (Ví dụ: "Trong từ 'Nhật Bản', chữ mang nghĩa mặt trời/ngày là chữ gì?").
+   - Câu đố mẹo hoặc câu chuyện đời sống liên tưởng đến chữ.
+3. "hint": Đưa ra gợi ý ngắn gọn (như âm Hán Việt, số nét vẽ, hoặc vị trí các bộ thủ).
+4. "radicals_hint": Liệt kê tên các bộ thủ gợi ý (viết bằng chữ Hán bộ thủ hoặc tên gọi tiếng Việt).
+5. Trả về đúng số lượng câu đố tương ứng với danh sách chữ Hán đầu vào.`;
+
+  const schema = {
+    type: "OBJECT",
+    properties: {
+      riddles: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            target_character: { type: "STRING" },
+            sino_vietnamese: { type: "STRING" },
+            meaning: { type: "STRING" },
+            stroke_count: { type: "INTEGER" },
+            riddle_question: { type: "STRING", description: "Câu đố gợi mở đặc trưng, TUYỆT ĐỐI KHÔNG chứa ký tự target_character" },
+            hint: { type: "STRING", description: "Gợi ý âm Hán Việt hoặc số nét" },
+            radicals_hint: { type: "STRING", description: "Gợi ý các bộ thủ cấu thành" }
+          },
+          required: ["target_character", "sino_vietnamese", "meaning", "stroke_count", "riddle_question", "hint"]
+        }
+      }
+    },
+    required: ["riddles"]
+  };
+
+  return await callGemini(prompt, schema, { maxOutputTokens: 2000, timeoutMs: 20000 });
+}
+
 module.exports = {
   callGemini,
   gradeJapaneseAnswer,
   gradeRadicalHandwriting,
   gradeRadicalFull,
-  explainRadicalMeaning
+  explainRadicalMeaning,
+  explainKanjiStructure,
+  gradeKanjiHandwritingWithVision,
+  generateKanjiWritingRiddles
 };
 
 
