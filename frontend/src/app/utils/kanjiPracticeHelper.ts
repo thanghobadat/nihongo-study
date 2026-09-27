@@ -450,20 +450,25 @@ export async function fetchKanjiWritingRiddles(
   kanjis: KanjiItemData[],
   forceRefresh: boolean = false
 ): Promise<KanjiWritingRiddle[]> {
-  try {
-    const res = await fetch('/api/ai/kanji-writing-riddles', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ lessonId, kanjis, forceRefresh })
-    });
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success && Array.isArray(data.riddles) && data.riddles.length > 0) {
-        return data.riddles;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      if (attempt > 0) {
+        await new Promise(r => setTimeout(r, 800));
       }
+      const res = await fetch('/api/ai/kanji-writing-riddles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId, kanjis, forceRefresh })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.riddles) && data.riddles.length > 0) {
+          return data.riddles;
+        }
+      }
+    } catch (e) {
+      console.warn(`[fetchKanjiWritingRiddles] Attempt ${attempt + 1} failed:`, e);
     }
-  } catch (e) {
-    console.warn('[fetchKanjiWritingRiddles] API call failed, using local generator:', e);
   }
   return generateLocalKanjiRiddles(kanjis);
 }
@@ -627,38 +632,43 @@ export async function gradeKanjiWithAI({
 }): Promise<KanjiGradingResult> {
   const imageBase64 = canvas.toDataURL('image/png');
 
-  try {
-    const res = await fetch('/api/ai/grade-kanji-writing', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        imageBase64,
-        targetKanji,
-        strokeCount,
-        sinoVietnamese,
-        meaning,
-        radicals
-      })
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success && data.result) {
-        const r = data.result;
-        return {
-          score: typeof r.score === 'number' ? r.score : 70,
-          is_correct: Boolean(r.is_correct ?? (r.score >= 60)),
-          status: r.status || (r.score >= 85 ? 'excellent' : r.score >= 60 ? 'acceptable' : 'needs_improvement'),
-          status_label: r.status_label || (r.score >= 85 ? 'Xuất sắc' : r.score >= 60 ? 'Đạt chuẩn' : 'Cần rèn thêm'),
-          feedback: r.feedback || 'AI đã phân tích nét vẽ của bạn.',
-          improvement_tip: r.improvement_tip || 'Hãy căn chỉnh các nét vào đúng vị trí ô chữ điền.',
-          detected_character: r.detected_character,
-          isAIGraded: true
-        };
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      if (attempt > 0) {
+        await new Promise(r => setTimeout(r, 800));
       }
+      const res = await fetch('/api/ai/grade-kanji-writing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          imageBase64,
+          targetKanji,
+          strokeCount,
+          sinoVietnamese,
+          meaning,
+          radicals
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.result) {
+          const r = data.result;
+          return {
+            score: typeof r.score === 'number' ? r.score : 70,
+            is_correct: Boolean(r.is_correct ?? (r.score >= 60)),
+            status: r.status || (r.score >= 85 ? 'excellent' : r.score >= 60 ? 'acceptable' : 'needs_improvement'),
+            status_label: r.status_label || (r.score >= 85 ? 'Xuất sắc' : r.score >= 60 ? 'Đạt chuẩn' : 'Cần rèn thêm'),
+            feedback: r.feedback || 'AI đã phân tích nét vẽ của bạn.',
+            improvement_tip: r.improvement_tip || 'Hãy căn chỉnh các nét vào đúng vị trí ô chữ điền.',
+            detected_character: r.detected_character,
+            isAIGraded: true
+          };
+        }
+      }
+    } catch (e) {
+      console.warn(`[gradeKanjiWithAI] Attempt ${attempt + 1} failed:`, e);
     }
-  } catch (e) {
-    console.warn('[gradeKanjiWithAI] AI grading failed, falling back to local geometric grading:', e);
   }
 
   // Graceful Fallback to Local Geometric Grading

@@ -2375,36 +2375,41 @@ function applyAutoTracking(plan, userId) {
       const target = task.targetCount || 1;
       let count = 0;
 
-      if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
+      if (task.completed) {
+        count = target;
+        if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
+          const itemType = task.itemType;
+          const key = `${lesson}:${itemType}`;
+          if (allocatedPool[key] === undefined) allocatedPool[key] = 0;
+          allocatedPool[key] += target;
+        }
+      } else if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
         const itemType = task.itemType;
         const key = `${lesson}:${itemType}`;
         if (allocatedPool[key] === undefined) allocatedPool[key] = 0;
 
         const pool = getLearnedInLesson(lesson, itemType);
 
-        if (task.completed) {
-          count = target;
-          allocatedPool[key] += target;
-        } else {
-          // Calculate available quota from cumulative lesson pool
-          const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
-          const poolContribution = Math.min(target, availableFromPool);
+        // Calculate available quota from cumulative lesson pool
+        const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
+        const poolContribution = Math.min(target, availableFromPool);
 
-          // Calculate specific exact matches if task had designated itemIds
-          const exactMatchCount = (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0)
-            ? task.itemIds.filter(id => pool.ids.has(id)).length
-            : 0;
+        // Calculate specific exact matches if task had designated itemIds
+        const exactMatchCount = (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0)
+          ? task.itemIds.filter(id => pool.ids.has(id)).length
+          : 0;
 
-          // Count takes whichever is higher: pool volume or exact matches (capped at target)
-          count = Math.min(target, Math.max(poolContribution, exactMatchCount));
-          allocatedPool[key] += count;
-        }
+        // Count takes whichever is higher: pool volume or exact matches (capped at target)
+        count = Math.min(target, Math.max(poolContribution, exactMatchCount));
+        allocatedPool[key] += count;
       } else if (task.itemType === 'single_review') {
-        const key = `${userId}:review_session_lesson_${lesson}`;
-        count = userReviewSessions[key] ? 1 : 0;
+        const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
+        const key2 = `${userId}:review_session_lesson_${lesson}`;
+        count = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
       } else if (task.itemType === 'cumulative_review') {
-        const key = `${userId}:combined_review_level_N5`;
-        count = userReviewSessions[key] ? 1 : 0;
+        const key1 = `${userId}:nihongo_review_state_combined`;
+        const key2 = `${userId}:combined_review_level_N5`;
+        count = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
       }
 
       task.currentCount = count;
@@ -2707,6 +2712,8 @@ router.post('/daily-tasks/schedule', async (req, res) => {
               task.completed = completed;
               if (completed) {
                 task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                task.currentCount = task.targetCount || 1;
+                task.progressPct = 100;
 
                 // Synchronize task items into user_progress table and disk cache
                 if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
@@ -2741,9 +2748,12 @@ router.post('/daily-tasks/schedule', async (req, res) => {
                 }
               } else {
                 delete task.completed_at;
+                task.currentCount = 0;
+                task.progressPct = 0;
               }
             }
             day.completedCount = day.tasks.filter(t => t.completed).length;
+            day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : (day.completedCount > 0 ? 100 : 0);
             break;
           }
         }
@@ -2755,8 +2765,20 @@ router.post('/daily-tasks/schedule', async (req, res) => {
           const task = day.tasks ? day.tasks.find(t => t.id === taskId) : null;
           if (task) {
             if (due_time !== undefined) task.due_time = due_time;
-            if (completed !== undefined) task.completed = completed;
+            if (completed !== undefined) {
+              task.completed = completed;
+              if (completed) {
+                task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                task.currentCount = task.targetCount || 1;
+                task.progressPct = 100;
+              } else {
+                delete task.completed_at;
+                task.currentCount = 0;
+                task.progressPct = 0;
+              }
+            }
             day.completedCount = day.tasks.filter(t => t.completed).length;
+            day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : (day.completedCount > 0 ? 100 : 0);
             break;
           }
         }

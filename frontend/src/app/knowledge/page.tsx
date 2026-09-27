@@ -522,27 +522,36 @@ export default function KnowledgeHubPage() {
   }, [selectedKanjiModal?.id, selectedKanjiModal?.character]);
 
   const handleExplainKanji = async (item: KanjiItem) => {
-    try {
-      setIsExplainingKanji(true);
-      setKanjiAiError(null);
-      const radicals = getRadicalsForCharacter(item.character);
-      const data = await api.post('/api/ai/kanji-explain', {
-        character: item.character,
-        sinoVietnamese: item.sino_vietnamese,
-        meaning: item.vietnamese_meaning,
-        strokeCount: item.stroke_count,
-        radicals
-      });
-      if (data && data.success && data.data) {
-        setKanjiAiExplanation(data.data);
-      } else {
-        setKanjiAiError(data?.error || 'Dịch vụ AI đang bận, vui lòng thử lại sau.');
+    setIsExplainingKanji(true);
+    setKanjiAiError(null);
+    const radicals = getRadicalsForCharacter(item.character);
+
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        if (attempt > 0) {
+          await new Promise(r => setTimeout(r, 800));
+        }
+        const data = await api.post('/api/ai/kanji-explain', {
+          character: item.character,
+          sinoVietnamese: item.sino_vietnamese,
+          meaning: item.vietnamese_meaning,
+          strokeCount: item.stroke_count,
+          radicals
+        });
+        if (data && data.success && data.data) {
+          setKanjiAiExplanation(data.data);
+          setIsExplainingKanji(false);
+          return;
+        } else if (attempt === 1) {
+          setKanjiAiError(data?.error || 'Dịch vụ AI đang bận, vui lòng thử lại sau.');
+        }
+      } catch (err: any) {
+        if (attempt === 1) {
+          setKanjiAiError(err.message || 'Lỗi kết nối máy chủ AI');
+        }
       }
-    } catch (err: any) {
-      setKanjiAiError(err.message || 'Lỗi kết nối máy chủ AI');
-    } finally {
-      setIsExplainingKanji(false);
     }
+    setIsExplainingKanji(false);
   };
 
   const startModalDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {

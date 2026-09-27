@@ -1493,3 +1493,18 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Biên dịch**:
   - Cú pháp backend `node --check` đạt 100% (0 lỗi).
   - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
+
+### Mốc 127: Khắc Phục Triệt Để Hiện Tượng AI Gián Đoạn Tạm Thời & Lỗi Lặp Lại Cố Định Theo Tác Vụ (Đã hoàn thành - 27/09/2026)
+- **Chuẩn đoán & Giải quyết 5 Nguyên nhân Gốc rễ**:
+  1. **Gỡ bỏ bộ lọc kiểm duyệt quá chặt (Safety Filters)**: Cấu hình `SAFETY_SETTINGS: BLOCK_NONE` cho toàn bộ các danh mục trong [aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js). Triệt tiêu lỗi AI từ chối phản hồi (`finishReason: SAFETY`) với các từ vựng học tập thường gặp (hút thuốc `たばこを吸います`, uống rượu `お酒`, tai nạn, bệnh tật, chết `死ぬ`, và các bộ thủ chữ Hán như `刀` - dao kiếm, `血` - máu, `尸` - thi thể, `鬼` - ma quỷ).
+  2. **Nâng trần Token & Tối ưu Timeout**: Nâng `maxOutputTokens` từ 800 lên 2500–4000 và nâng `REQUEST_TIMEOUT_MS` từ 10s lên 25s–30s. Loại bỏ hoàn toàn tình trạng cắt ngang JSON (`Unexpected end of JSON input`) khi Gemini giải thích ngữ pháp chi tiết hoặc sinh 15 câu đố chữ Hán cùng lúc.
+  3. **Xây dựng Bộ Phân Tích & Vá Lỗi JSON Thông Minh (`safeParseGeminiJson`)**: Tự động bóc tách khối JSON giữa `{ ... }` hoặc `[ ... ]`, tự động làm sạch dấu phẩy thừa (trailing commas), ký tự xuống dòng chưa escape và tự đóng ngoặc nếu gặp tình trạng đứt gãy.
+  4. **Cập nhật Model Pool Thế Hệ Mới 2026 kèm Jittered Exponential Backoff**: Thay thế các model đã bị Google khai tử (HTTP 404) bằng danh sách hoạt động 100%: `gemini-2.5-flash`, `gemini-flash-lite-latest`, `gemini-3.5-flash-lite`, `gemini-3.5-flash`. Bổ sung vòng lặp retry 2 lần với độ trễ ngẫu nhiên (500ms - 800ms) khi gặp quá tải tức thời (HTTP 503 / 429).
+  5. **Chuẩn hóa Trích Xuất Dữ Liệu & Bổ Sung Client-side Silent Retry ở Frontend**:
+     - Tại [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx): Chuẩn hóa fallback đa tầng `questionText` hỗ trợ cả 50 bài học (kể cả các bài chỉ có `question_kana` và `question_kanji`), điều chỉnh đúng hướng đánh giá chính tả tiếng Nhật cho dạng nghe chép (Dictation).
+     - Bổ sung cơ chế auto-retry 1 lần sau 800ms trước khi fallback sang chấm cục bộ tại [kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts), [radicals/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/radicals/page.tsx), [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx) và [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx).
+- **Kiểm định & Xác thực Thực tế**:
+  - Đã chạy kiểm thử thực tế `verify_ai_resilience.js`: Chấm điểm từ vựng nhạy cảm (Hút thuốc, Chết chóc), chiết tự bộ thủ nhạy cảm (Đao `刀`), và sinh trọn vẹn 15 câu đố Kanji Bài 2: Vượt qua 100% với model `gemini-2.5-flash`.
+  - Cú pháp backend `node --check` đạt 100% (0 lỗi).
+  - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
+

@@ -63,29 +63,38 @@ export default function RadicalsPage() {
   }, [selectedRadical?.character]);
 
   const fetchAiRadicalExplain = async (rad: RadicalInfo) => {
-    try {
-      setAiRadicalExplain({ loading: true, data: null, error: null });
-      const res: any = await api.post('/api/ai/radical-explain', {
-        character: rad.character,
-        sinoVietnamese: rad.sinoVietnamese,
-        meaning: rad.meaning,
-        description: rad.description
-      });
-      if (res && res.success && res.data) {
-        setAiRadicalExplain({ loading: false, data: res.data, error: null });
-      } else {
-        setAiRadicalExplain({
-          loading: false,
-          data: null,
-          error: res?.error || 'Không thể tải phân tích AI lúc này.'
+    setAiRadicalExplain({ loading: true, data: null, error: null });
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        if (attempt > 0) {
+          await new Promise(r => setTimeout(r, 800));
+        }
+        const res: any = await api.post('/api/ai/radical-explain', {
+          character: rad.character,
+          sinoVietnamese: rad.sinoVietnamese,
+          meaning: rad.meaning,
+          description: rad.description
         });
+        if (res && res.success && res.data) {
+          setAiRadicalExplain({ loading: false, data: res.data, error: null });
+          return;
+        } else if (attempt === 1) {
+          setAiRadicalExplain({
+            loading: false,
+            data: null,
+            error: res?.error || 'Không thể tải phân tích AI lúc này.'
+          });
+          return;
+        }
+      } catch (err: any) {
+        if (attempt === 1) {
+          setAiRadicalExplain({
+            loading: false,
+            data: null,
+            error: err?.response?.data?.error || err?.message || 'Có lỗi khi kết nối tới dịch vụ AI.'
+          });
+        }
       }
-    } catch (err: any) {
-      setAiRadicalExplain({
-        loading: false,
-        data: null,
-        error: err?.response?.data?.error || err?.message || 'Có lỗi khi kết nối tới dịch vụ AI.'
-      });
     }
   };
 
@@ -635,46 +644,48 @@ export default function RadicalsPage() {
     setIsGradingAI(true);
 
     try {
-      const res: any = await api.post('/api/ai/grade-radical', {
-        targetRadical: char,
-        sinoVietnamese: currentRadical.sinoVietnamese,
-        meaning: currentRadical.meaning,
-        imageBase64
-      });
+      for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        if (attempt > 0) {
+          await new Promise(r => setTimeout(r, 800));
+        }
+        const res: any = await api.post('/api/ai/grade-radical', {
+          targetRadical: char,
+          sinoVietnamese: currentRadical.sinoVietnamese,
+          meaning: currentRadical.meaning,
+          imageBase64
+        });
 
-      if (res && res.success && res.data) {
-        setAiGradingResult(res.data);
-        setIsAnswerChecked(true);
-        if (res.data.is_correct || res.data.score >= 70) {
-          setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
-        } else {
-          setScore(prev => ({ ...prev, total: prev.total + 1 }));
+        if (res && res.success && res.data) {
+          setAiGradingResult(res.data);
+          setIsAnswerChecked(true);
+          if (res.data.is_correct || res.data.score >= 70) {
+            setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
+          } else {
+            setScore(prev => ({ ...prev, total: prev.total + 1 }));
+          }
+          return;
         }
-      } else {
-        const localRes = calculateLocalSimilarity(char);
-        setAiGradingResult(localRes);
-        setIsAnswerChecked(true);
-        if (localRes.is_correct) {
-          setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
-        } else {
-          setScore(prev => ({ ...prev, total: prev.total + 1 }));
+      } catch (err) {
+        if (attempt === 1) {
+          console.warn('AI Grading API call error, falling back to local evaluation:', err);
         }
       }
-    } catch (err) {
-      console.warn('AI Grading API call error, falling back to local evaluation:', err);
-      const localRes = calculateLocalSimilarity(char);
-      setAiGradingResult(localRes);
-      setIsAnswerChecked(true);
-      if (localRes.is_correct) {
-        setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
-      } else {
-        setScore(prev => ({ ...prev, total: prev.total + 1 }));
-      }
-    } finally {
-      setIsGradingAI(false);
-      speakText(char);
     }
-  };
+
+    const localRes = calculateLocalSimilarity(char);
+    setAiGradingResult(localRes);
+    setIsAnswerChecked(true);
+    if (localRes.is_correct) {
+      setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
+    } else {
+      setScore(prev => ({ ...prev, total: prev.total + 1 }));
+    }
+  } finally {
+    setIsGradingAI(false);
+    speakText(char);
+  }
+};
 
   // Generate choice options for multiple-choice mode
   const generateChoices = useCallback((correctRadical: RadicalInfo, sourcePool: RadicalInfo[]) => {
@@ -853,48 +864,50 @@ export default function RadicalsPage() {
     setIsGradingMeaning(true);
 
     try {
-      const res: any = await api.post('/api/ai/grade-radical-full', {
-        character: currentRadical.character.split(' ')[0],
-        sinoVietnamese: currentRadical.sinoVietnamese,
-        meaning: currentRadical.meaning,
-        description: currentRadical.description,
-        userSino: trimmedSino,
-        userMeaning: trimmedMeaning
-      });
+      for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        if (attempt > 0) {
+          await new Promise(r => setTimeout(r, 800));
+        }
+        const res: any = await api.post('/api/ai/grade-radical-full', {
+          character: currentRadical.character.split(' ')[0],
+          sinoVietnamese: currentRadical.sinoVietnamese,
+          meaning: currentRadical.meaning,
+          description: currentRadical.description,
+          userSino: trimmedSino,
+          userMeaning: trimmedMeaning
+        });
 
-      if (res && res.success && res.data) {
-        setMeaningAIResult(res.data);
-        setIsAnswerChecked(true);
-        if (res.data.is_correct || res.data.score >= 70) {
-          setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
-        } else {
-          setScore(prev => ({ ...prev, total: prev.total + 1 }));
+        if (res && res.success && res.data) {
+          setMeaningAIResult(res.data);
+          setIsAnswerChecked(true);
+          if (res.data.is_correct || res.data.score >= 70) {
+            setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
+          } else {
+            setScore(prev => ({ ...prev, total: prev.total + 1 }));
+          }
+          return;
         }
-      } else {
-        const localRes = calculateLocalMeaningGrade(currentRadical, trimmedSino, trimmedMeaning);
-        setMeaningAIResult(localRes);
-        setIsAnswerChecked(true);
-        if (localRes.is_correct) {
-          setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
-        } else {
-          setScore(prev => ({ ...prev, total: prev.total + 1 }));
+      } catch (err) {
+        if (attempt === 1) {
+          console.warn('AI Grade Radical Full error, falling back to local check:', err);
         }
       }
-    } catch (err) {
-      console.warn('AI Grade Radical Full error, falling back to local check:', err);
-      const localRes = calculateLocalMeaningGrade(currentRadical, trimmedSino, trimmedMeaning);
-      setMeaningAIResult(localRes);
-      setIsAnswerChecked(true);
-      if (localRes.is_correct) {
-        setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
-      } else {
-        setScore(prev => ({ ...prev, total: prev.total + 1 }));
-      }
-    } finally {
-      setIsGradingMeaning(false);
-      speakText(currentRadical.character.split(' ')[0]);
     }
-  };
+
+    const localRes = calculateLocalMeaningGrade(currentRadical, trimmedSino, trimmedMeaning);
+    setMeaningAIResult(localRes);
+    setIsAnswerChecked(true);
+    if (localRes.is_correct) {
+      setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
+    } else {
+      setScore(prev => ({ ...prev, total: prev.total + 1 }));
+    }
+  } finally {
+    setIsGradingMeaning(false);
+    speakText(currentRadical.character.split(' ')[0]);
+  }
+};
 
   const handleSpeedrunGameOver = useCallback(() => {
     setQuizState('finished');

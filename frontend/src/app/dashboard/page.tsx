@@ -345,6 +345,81 @@ export default function UserDashboard() {
     }
   };
 
+  // Toggle task completed status (specifically for review / practice tasks or manual marking)
+  const handleToggleTaskStatus = async (taskId: string, completed: boolean, date?: string) => {
+    const targetDate = date || todayStr;
+
+    // 1. Optimistic update local studyPlan state immediately (0ms delay)
+    if (studyPlan && studyPlan.days) {
+      const updatedDays = studyPlan.days.map((day: any) => {
+        if (!date || day.date === targetDate) {
+          const updatedTasks = (day.tasks || []).map((t: any) => {
+            if (t.id === taskId) {
+              return {
+                ...t,
+                completed,
+                completed_at: completed ? new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : undefined,
+                currentCount: completed ? (t.targetCount || 1) : 0,
+                progressPct: completed ? 100 : 0
+              };
+            }
+            return t;
+          });
+          const completedCount = updatedTasks.filter((t: any) => t.completed).length;
+          const plannedCount = day.plannedCount || updatedTasks.length;
+          return {
+            ...day,
+            tasks: updatedTasks,
+            completedCount,
+            completionRate: plannedCount > 0 ? Math.round((completedCount / plannedCount) * 100) : (completedCount > 0 ? 100 : 0)
+          };
+        }
+        return day;
+      });
+      setStudyPlan({ ...studyPlan, days: updatedDays });
+    }
+
+    // 2. Also optimistic update dailyHistory immediately
+    setDailyHistory(prev => (prev || []).map((day: any) => {
+      if (!date || day.date === targetDate) {
+        const updatedTasks = (day.tasks_detail || []).map((t: any) => {
+          if (t.id === taskId) {
+            return {
+              ...t,
+              completed,
+              completed_at: completed ? new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : undefined,
+              currentCount: completed ? (t.targetCount || 1) : 0,
+              progressPct: completed ? 100 : 0
+            };
+          }
+          return t;
+        });
+        const completedCount = updatedTasks.filter((t: any) => t.completed).length;
+        const plannedCount = day.planned_count || updatedTasks.length;
+        return {
+          ...day,
+          tasks_detail: updatedTasks,
+          completed_count: completedCount,
+          completion_rate: plannedCount > 0 ? Math.round((completedCount / plannedCount) * 100) : (completedCount > 0 ? 100 : 0)
+        };
+      }
+      return day;
+    }));
+
+    // 3. Persist to backend silently
+    try {
+      await api.post('/api/user/daily-tasks/schedule', {
+        taskId,
+        completed,
+        date: targetDate
+      });
+      showNotification(completed ? '✅ Đã hoàn thành nhiệm vụ ôn luyện!' : '🔄 Đã chuyển nhiệm vụ về Chưa hoàn thành!');
+    } catch (err: any) {
+      showNotification('Lỗi cập nhật trạng thái nhiệm vụ: ' + err.message);
+      fetchDashboardData();
+    }
+  };
+
   // Enable Web Push on iPhone / Browser (or force re-sync)
   const handleEnablePush = async () => {
     if (!isPushSupported) {
@@ -877,28 +952,57 @@ export default function UserDashboard() {
                           </div>
                         )}
 
-                        {/* Live Auto-Tracking Progress Badge */}
-                        <div className="flex items-center gap-3 text-xs mt-1.5">
-                          {isDone ? (
-                            <span className="inline-flex items-center gap-1 text-emerald-400 font-bold bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/40 shadow-sm">
-                              ✓ ĐÃ HOÀN THÀNH (Tự động ghi nhận)
-                            </span>
-                          ) : inProgress ? (
-                            <span className="inline-flex items-center gap-1.5 text-amber-300 font-semibold bg-amber-500/15 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                              Đang học: {task.currentCount} / {task.targetCount} ({task.progressPct || 0}%)
-                            </span>
+                        {/* Live Auto-Tracking Progress Badge / Manual Review Status Toggle */}
+                        <div className="flex flex-wrap items-center gap-2.5 text-xs mt-2">
+                          {isReviewTask ? (
+                            isDone ? (
+                              <div className="inline-flex items-center gap-2">
+                                <span className="inline-flex items-center gap-1.5 text-emerald-300 font-bold bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-500/40 shadow-sm">
+                                  <span>✓</span>
+                                  <span>ĐÃ HOÀN THÀNH {task.completed_at ? `(${task.completed_at})` : ''}</span>
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => handleToggleTaskStatus(task.id, false, todayStr)}
+                                  className="text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline underline-offset-2 transition-colors cursor-pointer"
+                                  title="Bấm để chuyển lại Chưa hoàn thành"
+                                >
+                                  ↺ Đặt lại chưa xong
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => handleToggleTaskStatus(task.id, true, todayStr)}
+                                className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-200 hover:text-emerald-200 bg-amber-500/15 hover:bg-emerald-500/20 px-3 py-1 rounded-full border border-amber-500/35 hover:border-emerald-500/45 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+                                title="Bấm để đánh dấu đã hoàn thành phần ôn luyện này"
+                              >
+                                <span className="text-amber-400">⭕</span>
+                                <span>Chưa hoàn thành • <strong>Bấm đánh dấu đã xong ✓</strong></span>
+                              </button>
+                            )
                           ) : (
-                            <span className="inline-flex items-center gap-1.5 text-slate-400 bg-slate-900/80 px-2.5 py-0.5 rounded-full border border-slate-800">
-                              <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-                              Mục tiêu: {task.targetCount} mục • Chưa hoàn thành
-                            </span>
+                            isDone ? (
+                              <span className="inline-flex items-center gap-1 text-emerald-400 font-bold bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/40 shadow-sm">
+                                ✓ ĐÃ HOÀN THÀNH (Tự động ghi nhận)
+                              </span>
+                            ) : inProgress ? (
+                              <span className="inline-flex items-center gap-1.5 text-amber-300 font-semibold bg-amber-500/15 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                                Đang học: {task.currentCount} / {task.targetCount} ({task.progressPct || 0}%)
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1.5 text-slate-400 bg-slate-900/80 px-2.5 py-0.5 rounded-full border border-slate-800">
+                                <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                Mục tiêu: {task.targetCount} mục • Chưa hoàn thành
+                              </span>
+                            )
                           )}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 self-end sm:self-center">
+                    <div className="flex items-center gap-2.5 self-end sm:self-center">
                       <div
                         onClick={(e) => {
                           const input = (e.currentTarget as HTMLElement).querySelector('input');
@@ -921,6 +1025,22 @@ export default function UserDashboard() {
                           className="bg-transparent text-xs font-bold text-amber-300 focus:outline-none cursor-pointer"
                         />
                       </div>
+
+                      {/* Quick Status Toggle Button for Review Tasks */}
+                      {isReviewTask && (
+                        <button
+                          type="button"
+                          onClick={() => handleToggleTaskStatus(task.id, !isDone, todayStr)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95 ${
+                            isDone
+                              ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border-emerald-500/40 hover:border-emerald-400'
+                              : 'bg-amber-500/20 hover:bg-emerald-500/25 text-amber-200 hover:text-emerald-200 border-amber-500/40 hover:border-emerald-500/45'
+                          }`}
+                          title={isDone ? 'Bấm để đánh dấu chưa xong' : 'Bấm để đánh dấu đã hoàn thành'}
+                        >
+                          <span>{isDone ? '✓ Đã xong' : '⭕ Đánh dấu xong'}</span>
+                        </button>
+                      )}
 
                       <Link
                         href={task.link || `/lessons/${task.lesson || selectedLessonId}?tab=vocab`}
@@ -1028,12 +1148,15 @@ export default function UserDashboard() {
                   {tomorrowTasks.length > 0 ? (
                     <div className="space-y-3">
                       {tomorrowTasks.map((task: any) => {
+                        const isDone = !!task.completed;
                         const isReviewTask = task.itemType === 'single_review' || task.itemType === 'cumulative_review' || task.type === 'practice';
                         return (
                           <div
                             key={task.id}
                             className={`p-3.5 sm:p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-                              isReviewTask
+                              isDone
+                                ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-100 shadow-md shadow-emerald-950/30'
+                                : isReviewTask
                                 ? 'bg-gradient-to-r from-slate-950 to-indigo-950/30 border-indigo-500/40 text-white'
                                 : 'bg-slate-950/80 border-slate-800 text-white'
                             }`}
@@ -1055,7 +1178,7 @@ export default function UserDashboard() {
                                   )}
                                 </div>
 
-                                <div className="text-sm font-semibold mt-1.5 text-white">
+                                <div className={`text-sm font-semibold mt-1.5 ${isDone ? 'line-through text-emerald-200/80' : 'text-white'}`}>
                                   {task.title}
                                 </div>
 
@@ -1065,10 +1188,42 @@ export default function UserDashboard() {
                                     <span>{task.scopeDetails}</span>
                                   </div>
                                 )}
+
+                                {/* Tomorrow Review Status Toggle */}
+                                {isReviewTask && (
+                                  <div className="flex items-center gap-2 text-xs mt-2">
+                                    {isDone ? (
+                                      <div className="inline-flex items-center gap-2">
+                                        <span className="inline-flex items-center gap-1.5 text-emerald-300 font-bold bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/40 shadow-sm">
+                                          <span>✓</span>
+                                          <span>ĐÃ HOÀN THÀNH {task.completed_at ? `(${task.completed_at})` : ''}</span>
+                                        </span>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleToggleTaskStatus(task.id, false, tomorrowDateStr)}
+                                          className="text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline underline-offset-2 transition-colors cursor-pointer"
+                                          title="Bấm để chuyển lại Chưa hoàn thành"
+                                        >
+                                          ↺ Đặt lại chưa xong
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      <button
+                                        type="button"
+                                        onClick={() => handleToggleTaskStatus(task.id, true, tomorrowDateStr)}
+                                        className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-200 hover:text-emerald-200 bg-amber-500/15 hover:bg-emerald-500/20 px-3 py-1 rounded-full border border-amber-500/35 hover:border-emerald-500/45 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+                                        title="Bấm để đánh dấu đã hoàn thành phần ôn luyện này trước"
+                                      >
+                                        <span className="text-amber-400">⭕</span>
+                                        <span>Chưa hoàn thành • <strong>Bấm đánh dấu đã xong ✓</strong></span>
+                                      </button>
+                                    )}
+                                  </div>
+                                )}
                               </div>
                             </div>
 
-                            <div className="flex items-center gap-3 self-end sm:self-center">
+                            <div className="flex items-center gap-2.5 self-end sm:self-center">
                               <div
                                 onClick={(e) => {
                                   const input = (e.currentTarget as HTMLElement).querySelector('input');
@@ -1091,6 +1246,21 @@ export default function UserDashboard() {
                                   className="bg-transparent text-xs font-bold text-amber-300 focus:outline-none cursor-pointer"
                                 />
                               </div>
+
+                              {isReviewTask && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleToggleTaskStatus(task.id, !isDone, tomorrowDateStr)}
+                                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95 ${
+                                    isDone
+                                      ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border-emerald-500/40 hover:border-emerald-400'
+                                      : 'bg-amber-500/20 hover:bg-emerald-500/25 text-amber-200 hover:text-emerald-200 border-amber-500/40 hover:border-emerald-500/45'
+                                  }`}
+                                  title={isDone ? 'Bấm để đánh dấu chưa xong' : 'Bấm để đánh dấu đã hoàn thành'}
+                                >
+                                  <span>{isDone ? '✓ Đã xong' : '⭕ Đánh dấu xong'}</span>
+                                </button>
+                              )}
 
                               <Link
                                 href={task.link || `/lessons/${task.lesson || selectedLessonId}?tab=vocab`}

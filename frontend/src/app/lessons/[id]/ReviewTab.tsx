@@ -406,6 +406,9 @@ export default function ReviewTab({
       let questionText = '';
       let direction = 'vi-to-ja';
 
+      const candidates = getAllCandidateAnswers(q);
+      const correctAns = Array.isArray(candidates) ? candidates.join(' / ') : String(candidates || '');
+
       if (q.type === 'translation') {
         const isJaToVi = current.direction === 'ja-to-vi';
         direction = isJaToVi ? 'ja-to-vi' : 'vi-to-ja';
@@ -416,27 +419,47 @@ export default function ReviewTab({
           if (item.question_vietnamese && !isJp(item.question_vietnamese)) return item.question_vietnamese;
           if (item.vietnamese_meaning && !isJp(item.vietnamese_meaning)) return item.vietnamese_meaning;
           if (item.vietnamese && !isJp(item.vietnamese)) return item.vietnamese;
-          return item.question || 'Hãy dịch câu sang tiếng Nhật:';
+          return item.question || '';
         };
-        questionText = isJaToVi
-          ? (reviewShowKanji ? (current.question_kanji || current.question_kana || current.question) : (current.question_kana || current.question_kanji || current.question))
-          : getVnQ(current);
+
+        if (isJaToVi) {
+          questionText = reviewShowKanji
+            ? (current.question_kanji || current.question_kana || current.question || '')
+            : (current.question_kana || current.question_kanji || current.question || '');
+        } else {
+          questionText = getVnQ(current);
+        }
+
+        // Guaranteed fallback if questionText is still blank
+        if (!questionText) {
+          questionText = isJaToVi
+            ? (current.question_kanji || current.question_kana || 'Dịch câu tiếng Nhật sang tiếng Việt')
+            : (current.question_vietnamese || current.vietnamese || current.vietnamese_meaning || 'Dịch câu sang tiếng Nhật');
+        }
       } else if (q.type === 'dictation') {
-        direction = 'ja-to-vi';
-        questionText = current.question_audio || current.audio_text_kanji || current.audio_text_kana || '';
+        direction = 'ja-to-ja';
+        questionText = current.question_audio || current.audio_text_kanji || current.audio_text_kana || (Array.isArray(candidates) ? candidates[0] : candidates) || 'Nghe và chép lại câu tiếng Nhật';
       }
 
-      const candidates = getAllCandidateAnswers(q);
-      const correctAns = Array.isArray(candidates) ? candidates.join(' / ') : String(candidates || '');
-
-      const res = await api.post('/api/ai/grade', {
-        direction,
-        question: questionText,
-        userAnswer: userAns,
-        correctAnswer: correctAns,
-        lessonTitle: lessonTitle || '',
-        context: current.context || current.explanation || ''
-      });
+      let res: any = null;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          if (attempt > 0) {
+            await new Promise(r => setTimeout(r, 800));
+          }
+          res = await api.post('/api/ai/grade', {
+            direction,
+            question: questionText,
+            userAnswer: userAns,
+            correctAnswer: correctAns,
+            lessonTitle: lessonTitle || '',
+            context: current.context || current.explanation || (q.type === 'dictation' ? 'Nghe chép chính tả tiếng Nhật. Hãy đánh giá độ chính xác chính tả Kana/Kanji và trợ từ của học viên.' : '')
+          });
+          if (res && res.success) break;
+        } catch (callErr) {
+          if (attempt === 1) throw callErr;
+        }
+      }
 
       if (res && res.success && res.data) {
         setAiGradingResults(prev => ({ ...prev, [key]: res.data }));
