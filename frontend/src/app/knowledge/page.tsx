@@ -2401,7 +2401,14 @@ export default function KnowledgeHubPage() {
                             Kunyomi (Âm Thuần - Hiragana)
                           </span>
                           <span className="font-bold text-emerald-700 dark:text-emerald-300 text-sm break-words">
-                            {selectedKanjiModal.kunyomi || '-'}
+                            {selectedKanjiModal.kunyomi
+                                  ? selectedKanjiModal.kunyomi
+                                      .replace(/\.([a-zA-Z]+)/g, (_, tail) => {
+                                        const map: Record<string, string> = { bu: 'ぶ', mu: 'む', ru: 'る', ku: 'く', su: 'す', tsu: 'つ', nu: 'ぬ', fu: 'ふ', u: 'う' };
+                                        return '・' + (map[tail.toLowerCase()] || tail);
+                                      })
+                                      .replace(/\./g, '・')
+                                  : '-'}
                           </span>
                           <p className="text-[10px] text-slate-400 italic">Thường dùng khi đứng độc lập hoặc có đuôi Okurigana</p>
                         </div>
@@ -2496,7 +2503,20 @@ export default function KnowledgeHubPage() {
                         {/* Kết quả AI phân tích ngắn gọn, súc tích */}
                         {kanjiAiExplanation && (
                           <div className="space-y-2.5 pt-2 border-t border-indigo-500/20 text-xs animate-in fade-in duration-200">
-                            {/* Vì sao dùng các bộ thủ này */}
+                            {/* Cội nguồn chữ cổ & Biến đổi hình thái */}
+                                  {kanjiAiExplanation.ancient_form_origin && (
+                                    <div className="p-3 rounded-xl bg-indigo-950/60 border border-indigo-400/35 space-y-1.5 shadow-sm">
+                                      <span className="text-[10px] font-bold text-indigo-300 uppercase tracking-wider block flex items-center gap-1.5">
+                                        <span>📜</span>
+                                        <span>Cội nguồn chữ cổ & Biến đổi hình thái:</span>
+                                      </span>
+                                      <p className="text-indigo-100 leading-relaxed font-sans text-xs">
+                                        {kanjiAiExplanation.ancient_form_origin}
+                                      </p>
+                                    </div>
+                                  )}
+
+                                  {/* Vì sao dùng các bộ thủ này */}
                             {kanjiAiExplanation.radicals_analysis && Array.isArray(kanjiAiExplanation.radicals_analysis) && (
                               <div className="space-y-1.5">
                                 <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider block">

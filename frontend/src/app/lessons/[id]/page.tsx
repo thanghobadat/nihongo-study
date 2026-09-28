@@ -10,6 +10,7 @@ import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/road
 
 import { getKanjiForm } from '../../utils/kanjiFormLookup';
 import SidebarSettings from '../../components/SidebarSettings';
+import QuickLookupModal from '../../components/QuickLookupModal';
 
 import { getRadicalsString, getRadicalsForCharacter } from '../../utils/kanjiRadicals';
 import KanjiStrokePlayer from '../../components/KanjiStrokePlayer';
@@ -854,6 +855,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const user = api.getUser();
 
   const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>('vocab');
+  const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
+  const [quickLookupTab, setQuickLookupTab] = useState<'radicals' | 'vocab'>('radicals');
 
   useEffect(() => {
     const cat = searchParams.get('category');
@@ -4431,105 +4434,159 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   }, [selectedLessonId, grammarItems, kanjiItems]);
 
-  // Filtered grouped vocabulary items
-
-  const processedVocabGroups = useMemo(() => {
-
-    const filterVocab = (item: VocabItem) => {
-
-      const matchesSearch = 
-
+  // Filtered vocabulary items (phẳng theo bài học)
+  const filteredVocabItems = useMemo(() => {
+    return vocabItems.filter((item) => {
+      const matchesSearch =
         item.hiragana.toLowerCase().includes(searchQuery.toLowerCase()) ||
-
         item.romaji.toLowerCase().includes(searchQuery.toLowerCase()) ||
-
         item.vietnamese_meaning.toLowerCase().includes(searchQuery.toLowerCase());
 
-      
-
       const matchesStatus = statusFilter === 'all' ? true : item.status === statusFilter;
-
       return matchesSearch && matchesStatus;
+    });
+  }, [vocabItems, searchQuery, statusFilter]);
 
-    };
-
-    const filteredGroups = groupedVocab.groups.map(g => ({
-
-      ...g,
-
-      newItems: g.newItems.filter(filterVocab),
-
-      copiedItems: g.copiedItems.filter(filterVocab),
-
-    }));
-
-    const filteredSupplemental = groupedVocab.supplementalItems.filter(filterVocab);
-
-    const totalVisible = filteredGroups.reduce((acc, g) => acc + g.newItems.length + g.copiedItems.length, 0) + filteredSupplemental.length;
-
-    return {
-
-      groups: filteredGroups,
-
-      supplemental: filteredSupplemental,
-
-      totalVisible
-
-    };
-
-  }, [groupedVocab, searchQuery, statusFilter]);
-
-  // Filtered grouped Kanji items
-
-  const processedKanjiGroups = useMemo(() => {
-
-    const filterKanji = (item: KanjiItem) => {
-
-      const matchesSearch = 
-
+  // Filtered Kanji items (phẳng theo bài học)
+  const filteredKanjiItems = useMemo(() => {
+    return kanjiItems.filter((item) => {
+      const matchesSearch =
         item.character.toLowerCase().includes(searchQuery.toLowerCase()) ||
-
         item.sino_vietnamese.toLowerCase().includes(searchQuery.toLowerCase()) ||
-
         item.vietnamese_meaning.toLowerCase().includes(searchQuery.toLowerCase()) ||
-
         item.onyomi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-
         item.kunyomi.toLowerCase().includes(searchQuery.toLowerCase());
 
-      
-
       const matchesStatus = statusFilter === 'all' ? true : item.status === statusFilter;
-
       return matchesSearch && matchesStatus;
+    });
+  }, [kanjiItems, searchQuery, statusFilter]);
 
-    };
+  // Helper render thẻ từ vựng phẳng
+  const renderVocabCard = (item: VocabItem) => {
+    let borderClass = 'border-slate-200 dark:border-slate-800';
+    let statusBg = 'bg-slate-50 dark:bg-slate-950/40';
+    let shadowClass = '';
 
-    const filteredGroups = groupedKanji.groups.map(g => ({
+    if (item.status === 'mastered') {
+      borderClass = 'border-emerald-800/30 hover:border-emerald-600/50';
+      statusBg = 'bg-emerald-950/5';
+      shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.02)]';
+    } else if (item.status === 'learning') {
+      borderClass = 'border-amber-800/30 hover:border-amber-600/50';
+      statusBg = 'bg-amber-950/5';
+      shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.02)]';
+    }
 
-      ...g,
+    return (
+      <div
+        key={item.id}
+        className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.005] hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/20 ${borderClass} ${statusBg} ${shadowClass}`}
+      >
+        <div>
+          {/* Card Top Row */}
+          <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
+            <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
+              {item.word_type === 'noun' && 'Danh từ'}
+              {item.word_type === 'pronoun' && 'Đại từ'}
+              {item.word_type === 'verb' && 'Động từ'}
+              {item.word_type === 'adjective' && 'Tính từ'}
+              {item.word_type === 'greeting' && 'Chào hỏi'}
+              {!['noun', 'pronoun', 'verb', 'adjective', 'greeting'].includes(item.word_type) && (item.word_type || 'Từ vựng')}
+            </span>
 
-      newItems: g.newItems.filter(filterKanji),
+            <select
+              value={item.status}
+              onChange={(e) => handleStatusChange(item.id, e.target.value as any)}
+              className={`bg-white dark:bg-slate-900/60 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
+                item.status === 'mastered'
+                  ? 'border-emerald-900 text-emerald-600 dark:text-emerald-400 bg-emerald-950/20'
+                  : item.status === 'learning'
+                  ? 'border-amber-900 text-amber-400 bg-amber-950/20'
+                  : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
+              }`}
+            >
+              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
+              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
+              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
+            </select>
+          </div>
 
-      copiedItems: g.copiedItems.filter(filterKanji),
+          {/* Card Japanese Word */}
+          <div className="flex items-baseline flex-wrap gap-2 mb-3">
+            {showKanjiInVocab ? (
+              <>
+                <span className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-wide">
+                  {getKanjiForm(item.hiragana, kanjiItems)}
+                </span>
+                <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
+                  ({item.hiragana})
+                </span>
+              </>
+            ) : (
+              <PitchAccentDisplay
+                kana={item.hiragana}
+                accent={item.pitch_accent || 0}
+                size="md"
+              />
+            )}
+            <button
+              onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
+              className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90 self-center"
+              title="Nghe phát âm"
+            >
+              🔊
+            </button>
+          </div>
 
-    }));
+          {/* Card translations */}
+          <div className="space-y-0.5 mb-3 text-[11px] sm:text-xs">
+            <p className="text-slate-400 dark:text-slate-500 font-semibold tracking-wide">
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase mr-1">Romaji:</span>
+              {item.romaji}
+            </p>
+            <p className="text-slate-700 dark:text-slate-200 font-bold">
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase mr-1">Nghĩa:</span>
+              {item.vietnamese_meaning}
+            </p>
+          </div>
 
-    const filteredSupplemental = groupedKanji.supplementalItems.filter(filterKanji);
+          {/* Mnemonic card */}
+          {item.mnemonic_tip && (
+            <div className="mb-3 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 flex items-start space-x-2">
+              <span className="text-xs shrink-0">💡</span>
+              <div className="space-y-0.5">
+                <span className="block text-[8px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Mẹo ghi nhớ</span>
+                <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">{item.mnemonic_tip}</p>
+              </div>
+            </div>
+          )}
 
-    const totalVisible = filteredGroups.reduce((acc, g) => acc + g.newItems.length + g.copiedItems.length, 0) + filteredSupplemental.length;
-
-    return {
-
-      groups: filteredGroups,
-
-      supplemental: filteredSupplemental,
-
-      totalVisible
-
-    };
-
-  }, [groupedKanji, searchQuery, statusFilter]);
+          {/* Sentence example section */}
+          {item.japanese_example && (
+            <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/60 space-y-1">
+              <div className="flex items-center space-x-1.5">
+                <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/20 border border-emerald-900/20 px-1.5 py-0.2 rounded uppercase tracking-wider">Ví dụ</span>
+                <button
+                  onClick={() => playAudio(item.japanese_example)}
+                  className="text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 cursor-pointer"
+                  title="Nghe câu ví dụ"
+                >
+                  🔊 Nghe
+                </button>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
+                {item.japanese_example}
+              </p>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 italic leading-relaxed">
+                {item.example_meaning}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   // Vocab progress calculated dynamically
 
@@ -6857,6 +6914,19 @@ const renderInteractivePractice = () => {
 
             )}
 
+            <button
+              type="button"
+              onClick={() => {
+                setQuickLookupTab(currentTab === 'vocab' ? 'vocab' : 'radicals');
+                setIsQuickLookupOpen(true);
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm active:scale-95 cursor-pointer shrink-0"
+              title="Tra cứu nhanh Bộ thủ Kanji hoặc Từ vựng"
+            >
+              <span>🔍</span>
+              <span className="hidden sm:inline">Tra cứu</span>
+            </button>
+
             <select
 
               value={selectedLessonId}
@@ -7656,9 +7726,9 @@ const renderInteractivePractice = () => {
 
                 </div>
 
-                {/* 3. Vocabulary Cards Grouped by Grammar (Collapsible Accordions) */}
+                {/* 3. Danh sách Thẻ Từ vựng (Hiển thị phẳng) */}
 
-                {processedVocabGroups.totalVisible === 0 ? (
+                {filteredVocabItems.length === 0 ? (
 
                   <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
 
@@ -7668,761 +7738,9 @@ const renderInteractivePractice = () => {
 
                 ) : (
 
-                  <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                    {processedVocabGroups.groups.map((group) => {
-
-                      const idx = group.grammarIndex;
-
-                      const isCollapsedBool = collapsedVocabSections[idx.toString()] === true;
-
-                      
-
-                      // Skip rendering this accordion if total items inside is 0 and we are searching/filtering
-
-                      if (group.newItems.length === 0 && group.copiedItems.length === 0 && (searchQuery || statusFilter !== 'all')) {
-
-                        return null;
-
-                      }
-
-                      return (
-
-                        <div key={idx} className="space-y-4 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
-
-                          {/* Accordion Header */}
-
-                          <div 
-
-                            onClick={() => toggleVocabSection(idx.toString())}
-
-                            className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none gap-3 group/header active:scale-[0.995]"
-
-                          >
-
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-
-                              <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
-
-                                {isCollapsedBool ? '📁' : '📂'}
-
-                              </span>
-
-                              <div className="min-w-0">
-
-                                <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex flex-wrap items-center gap-2">
-
-                                  <span className="text-blue-500 text-xs uppercase tracking-wider">Mẫu {idx + 1}:</span>
-
-                                  <span className="text-slate-700 dark:text-slate-200 truncate">{group.grammarTitle}</span>
-
-                                  <div className="flex items-center gap-1.5 ml-1 sm:ml-2">
-
-                                    <span className="px-1.5 py-0.2 bg-emerald-950/80 border border-emerald-900/40 text-[9px] font-black text-emerald-600 dark:text-emerald-400 rounded-md">
-
-                                      {group.newItems.length} mới
-
-                                    </span>
-
-                                    {group.copiedItems.length > 0 && (
-
-                                      <span className="px-1.5 py-0.2 bg-blue-950/80 border border-blue-900/40 text-[9px] font-black text-blue-600 dark:text-blue-400 rounded-md">
-
-                                        {group.copiedItems.length} trùng lặp
-
-                                      </span>
-
-                                    )}
-
-                                  </div>
-
-                                </h3>
-
-                                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 truncate italic">
-
-                                  {group.grammarMeaning || 'Không có dịch nghĩa'}
-
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                            <div className="flex items-center gap-3 shrink-0 justify-between md:justify-end">
-
-
-
-                              <div className="flex items-center gap-2">
-
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
-
-                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
-
-                                </span>
-
-                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
-
-                                  {isCollapsedBool ? '▼' : '▲'}
-
-                                </span>
-
-                              </div>
-
-                            </div>
-
-                          </div>
-
-                          {/* Accordion Content */}
-
-                          {!isCollapsedBool && (
-
-                            <div className="space-y-4 pt-2">
-
-                              {/* Warning overlaps / Copied Items */}
-
-                              {group.copiedItems.length > 0 && (
-
-                                <div className="p-3 bg-blue-950/20 border border-blue-100 rounded-xl space-y-1.5">
-
-                                  <span className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-
-                                    Các từ vựng đã được học ở phần trước nhưng được dùng ở mẫu này:
-
-                                  </span>
-
-                                  <div className="flex flex-wrap gap-1.5">
-
-                                    {group.copiedItems.map((c) => (
-
-                                      <span 
-
-                                        key={c.id} 
-
-                                        onClick={() => playAudioWithFallback(getKanjiForm(c.hiragana, kanjiItems), c.hiragana)}
-
-                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-slate-200 dark:border-slate-800 text-xs rounded-lg text-slate-400 dark:text-slate-500 cursor-pointer active:scale-95 transition-all" 
-
-                                        title={`${c.vietnamese_meaning} - Nhấp để nghe`}
-
-                                      >
-
-                                        {showKanjiInVocab ? (
-
-                                          <span className="font-bold text-slate-700 dark:text-slate-200 text-xs">
-
-                                            {getKanjiForm(c.hiragana, kanjiItems)}
-
-                                          </span>
-
-                                        ) : (
-
-                                          <PitchAccentDisplay kana={c.hiragana} accent={c.pitch_accent || 0} size="sm" />
-
-                                        )}
-
-                                        <span className="text-[10px] text-slate-400 dark:text-slate-500">({c.romaji})</span>
-
-                                        <span className="text-[10px] text-blue-450">🔊</span>
-
-                                      </span>
-
-                                    ))}
-
-                                  </div>
-
-                                </div>
-
-                              )}
-
-                              {/* Cards Grid for new items */}
-
-                              {group.newItems.length === 0 ? (
-
-                                <div className="text-center py-6 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-xl bg-slate-100/5">
-
-                                  📝 Không có từ vựng mới nào trong mẫu ngữ pháp này.
-
-                                </div>
-
-                              ) : (
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                                  {group.newItems.map((item) => {
-
-                                    let borderClass = 'border-slate-200 dark:border-slate-800';
-
-                                    let statusBg = 'bg-slate-50 dark:bg-slate-950/40';
-
-                                    let shadowClass = '';
-
-                                    if (item.status === 'mastered') {
-
-                                      borderClass = 'border-emerald-800/30 hover:border-emerald-600/50';
-
-                                      statusBg = 'bg-emerald-950/5';
-
-                                      shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.02)]';
-
-                                    } else if (item.status === 'learning') {
-
-                                      borderClass = 'border-amber-800/30 hover:border-amber-600/50';
-
-                                      statusBg = 'bg-amber-950/5';
-
-                                      shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.02)]';
-
-                                    }
-
-                                    return (
-
-                                      <div
-
-                                        key={item.id}
-
-                                        className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.005] hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/20 ${borderClass} ${statusBg} ${shadowClass}`}
-
-                                      >
-
-                                        <div>
-
-                                          {/* Card Top Row */}
-
-                                          <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
-
-                                            <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
-
-                                              {item.word_type === 'noun' && 'Danh từ'}
-
-                                              {item.word_type === 'pronoun' && 'Đại từ'}
-
-                                              {item.word_type === 'verb' && 'Động từ'}
-
-                                              {item.word_type === 'adjective' && 'Tính từ'}
-
-                                              {item.word_type === 'greeting' && 'Chào hỏi'}
-
-                                              {!['noun','pronoun','verb','adjective','greeting'].includes(item.word_type) && (item.word_type || 'Từ vựng')}
-
-                                            </span>
-
-                                            <select
-
-                                              value={item.status}
-
-                                              onChange={(e) => handleStatusChange(item.id, e.target.value as any)}
-
-                                              className={`bg-white dark:bg-slate-900/60 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
-
-                                                item.status === 'mastered'
-
-                                                  ? 'border-emerald-900 text-emerald-600 dark:text-emerald-400 bg-emerald-950/20'
-
-                                                  : item.status === 'learning'
-
-                                                  ? 'border-amber-900 text-amber-400 bg-amber-950/20'
-
-                                                  : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
-
-                                              }`}
-
-                                            >
-
-                                              <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-
-                                              <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
-
-                                              <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
-
-                                            </select>
-
-                                          </div>
-
-                                          {/* Card Japanese Word */}
-
-                                          <div className="flex items-baseline flex-wrap gap-2 mb-3">
-
-                                            {showKanjiInVocab ? (
-
-                                              <>
-
-                                                <span className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-wide">
-
-                                                  {getKanjiForm(item.hiragana, kanjiItems)}
-
-                                                </span>
-
-                                                <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
-
-                                                  ({item.hiragana})
-
-                                                </span>
-
-                                              </>
-
-                                            ) : (
-
-                                              <PitchAccentDisplay
-
-                                                kana={item.hiragana}
-
-                                                accent={item.pitch_accent || 0}
-
-                                                size="md"
-
-                                              />
-
-                                            )}
-
-                                            <button
-
-                                              onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
-
-                                              className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90 self-center"
-
-                                              title="Nghe phát âm"
-
-                                            >
-
-                                              🔊
-
-                                            </button>
-
-                                          </div>
-
-                                          {/* Card translations */}
-
-                                          <div className="space-y-0.5 mb-3 text-[11px] sm:text-xs">
-
-                                            <p className="text-slate-400 dark:text-slate-500 font-semibold tracking-wide">
-
-                                              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase mr-1">Romaji:</span>
-
-                                              {item.romaji}
-
-                                            </p>
-
-                                            <p className="text-slate-700 dark:text-slate-200 font-bold">
-
-                                              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase mr-1">Nghĩa:</span>
-
-                                              {item.vietnamese_meaning}
-
-                                            </p>
-
-                                          </div>
-
-                                          {/* Mnemonic card */}
-
-                                          {item.mnemonic_tip && (
-
-                                            <div className="mb-3 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 flex items-start space-x-2">
-
-                                              <span className="text-xs shrink-0">💡</span>
-
-                                              <div className="space-y-0.5">
-
-                                                <span className="block text-[8px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Mẹo ghi nhớ</span>
-
-                                                <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">{item.mnemonic_tip}</p>
-
-                                              </div>
-
-                                            </div>
-
-                                          )}
-
-                                          {/* Sentence example section */}
-
-                                          {item.japanese_example && (
-
-                                            <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 space-y-1">
-
-                                              <div className="flex items-center space-x-1.5">
-
-                                                <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/20 border border-emerald-900/20 px-1.5 py-0.2 rounded uppercase tracking-wider">Ví dụ</span>
-
-                                                <button
-
-                                                  onClick={() => playAudio(item.japanese_example)}
-
-                                                  className="text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 cursor-pointer"
-
-                                                  title="Nghe câu ví dụ"
-
-                                                >
-
-                                                  🔊 Nghe
-
-                                                </button>
-
-                                              </div>
-
-                                              <p className="text-[11px] sm:text-xs text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
-
-                                                {item.japanese_example}
-
-                                              </p>
-
-                                              <p className="text-[10px] text-slate-400 dark:text-slate-500 italic leading-relaxed">
-
-                                                {item.example_meaning}
-
-                                              </p>
-
-                                            </div>
-
-                                          )}
-
-                                        </div>
-
-                                      </div>
-
-                                    );
-
-                                  })}
-
-                                </div>
-
-                              )}
-
-                            </div>
-
-                          )}
-
-                        </div>
-
-                      );
-
-                    })}
-
-                    {/* Supplemental Words Accordion */}
-
-                    {processedVocabGroups.supplemental.length > 0 && (() => {
-
-                      const isCollapsedBool = collapsedVocabSections['supplemental'] === true;
-
-                      return (
-
-                        <div className="space-y-4 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
-
-                          {/* Accordion Header */}
-
-                          <div 
-
-                            onClick={() => toggleVocabSection('supplemental')}
-
-                            className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 dark:bg-slate-900/60 hover:border-slate-200 dark:border-slate-800 transition-all select-none group/header active:scale-[0.995]"
-
-                          >
-
-                            <div className="flex items-center gap-3">
-
-                              <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
-
-                                {isCollapsedBool ? '📁' : '📂'}
-
-                              </span>
-
-                              <div>
-
-                                <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
-
-                                  <span className="text-slate-700 dark:text-slate-200">Từ vựng bổ sung / Khác</span>
-
-                                  <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
-
-                                    {processedVocabGroups.supplemental.length} từ
-
-                                  </span>
-
-                                </h3>
-
-                                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 italic">
-
-                                  Các từ vựng bổ sung bổ trợ thêm cho bài học
-
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                            
-
-                            <div className="flex items-center gap-3 shrink-0 justify-between md:justify-end">
-
-
-
-                              <div className="flex items-center gap-2">
-
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
-
-                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
-
-                                </span>
-
-                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
-
-                                  {isCollapsedBool ? '▼' : '▲'}
-
-                                </span>
-
-                              </div>
-
-                            </div>
-
-                          </div>
-
-                          {/* Accordion Content */}
-
-                          {!isCollapsedBool && (
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-
-                              {processedVocabGroups.supplemental.map((item) => {
-
-                                let borderClass = 'border-slate-200 dark:border-slate-800';
-
-                                let statusBg = 'bg-slate-50 dark:bg-slate-950/40';
-
-                                let shadowClass = '';
-
-                                if (item.status === 'mastered') {
-
-                                  borderClass = 'border-emerald-800/30 hover:border-emerald-600/50';
-
-                                  statusBg = 'bg-emerald-950/5';
-
-                                  shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.02)]';
-
-                                } else if (item.status === 'learning') {
-
-                                  borderClass = 'border-amber-800/30 hover:border-amber-600/50';
-
-                                  statusBg = 'bg-amber-950/5';
-
-                                  shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.02)]';
-
-                                }
-
-                                return (
-
-                                  <div
-
-                                    key={item.id}
-
-                                    className={`p-4 rounded-xl border backdrop-blur-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.005] hover:bg-slate-50 dark:hover:bg-slate-900/40 dark:bg-slate-950/20 ${borderClass} ${statusBg} ${shadowClass}`}
-
-                                  >
-
-                                    <div>
-
-                                      {/* Card Top Row */}
-
-                                      <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2.5">
-
-                                        <span className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] font-bold uppercase rounded-md text-blue-600 dark:text-blue-400">
-
-                                          {item.word_type === 'noun' && 'Danh từ'}
-
-                                          {item.word_type === 'pronoun' && 'Đại từ'}
-
-                                          {item.word_type === 'verb' && 'Động từ'}
-
-                                          {item.word_type === 'adjective' && 'Tính từ'}
-
-                                          {item.word_type === 'greeting' && 'Chào hỏi'}
-
-                                          {!['noun','pronoun','verb','adjective','greeting'].includes(item.word_type) && (item.word_type || 'Từ vựng')}
-
-                                        </span>
-
-                                        <select
-
-                                          value={item.status}
-
-                                          onChange={(e) => handleStatusChange(item.id, e.target.value as any)}
-
-                                          className={`bg-white dark:bg-slate-900/60 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
-
-                                            item.status === 'mastered'
-
-                                              ? 'border-emerald-900 text-emerald-600 dark:text-emerald-400 bg-emerald-950/20'
-
-                                              : item.status === 'learning'
-
-                                              ? 'border-amber-900 text-amber-400 bg-amber-950/20'
-
-                                              : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
-
-                                          }`}
-
-                                        >
-
-                                          <option value="not_learned" className="bg-white dark:bg-slate-950 text-slate-400 dark:text-slate-500">⚪ Chưa học</option>
-
-                                          <option value="learning" className="bg-white dark:bg-slate-950 text-amber-400">🟡 Đang học</option>
-
-                                          <option value="mastered" className="bg-white dark:bg-slate-950 text-emerald-600 dark:text-emerald-400">🟢 Đã thuộc</option>
-
-                                        </select>
-
-                                      </div>
-
-                                      {/* Card Japanese Word */}
-
-                                      <div className="flex items-baseline flex-wrap gap-2 mb-3">
-
-                                        {showKanjiInVocab ? (
-
-                                          <>
-
-                                            <span className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-wide">
-
-                                              {getKanjiForm(item.hiragana, kanjiItems)}
-
-                                            </span>
-
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
-
-                                              ({item.hiragana})
-
-                                            </span>
-
-                                          </>
-
-                                        ) : (
-
-                                          <PitchAccentDisplay
-
-                                            kana={item.hiragana}
-
-                                            accent={item.pitch_accent || 0}
-
-                                            size="md"
-
-                                          />
-
-                                        )}
-
-                                        <button
-
-                                          onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
-
-                                          className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/50 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90 self-center"
-
-                                          title="Nghe phát âm"
-
-                                        >
-
-                                          🔊
-
-                                        </button>
-
-                                      </div>
-
-                                      {/* Card translations */}
-
-                                      <div className="space-y-0.5 mb-3 text-[11px] sm:text-xs">
-
-                                        <p className="text-slate-400 dark:text-slate-500 font-semibold tracking-wide">
-
-                                          <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase mr-1">Romaji:</span>
-
-                                          {item.romaji}
-
-                                        </p>
-
-                                        <p className="text-slate-700 dark:text-slate-200 font-bold">
-
-                                          <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase mr-1">Nghĩa:</span>
-
-                                          {item.vietnamese_meaning}
-
-                                        </p>
-
-                                      </div>
-
-                                      {/* Mnemonic card */}
-
-                                      {item.mnemonic_tip && (
-
-                                        <div className="mb-3 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 flex items-start space-x-2">
-
-                                          <span className="text-xs shrink-0">💡</span>
-
-                                          <div className="space-y-0.5">
-
-                                            <span className="block text-[8px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Mẹo ghi nhớ</span>
-
-                                            <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">{item.mnemonic_tip}</p>
-
-                                          </div>
-
-                                        </div>
-
-                                      )}
-
-                                      {/* Sentence example section */}
-
-                                      {item.japanese_example && (
-
-                                        <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 space-y-1">
-
-                                          <div className="flex items-center space-x-1.5">
-
-                                            <span className="text-[8px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-950/20 border border-emerald-900/20 px-1.5 py-0.2 rounded uppercase tracking-wider">Ví dụ</span>
-
-                                            <button
-
-                                              onClick={() => playAudio(item.japanese_example)}
-
-                                              className="text-[9px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 cursor-pointer"
-
-                                              title="Nghe câu ví dụ"
-
-                                            >
-
-                                              🔊 Nghe
-
-                                            </button>
-
-                                          </div>
-
-                                          <p className="text-[11px] sm:text-xs text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
-
-                                            {item.japanese_example}
-
-                                          </p>
-
-                                          <p className="text-[10px] text-slate-405 italic leading-relaxed">
-
-                                            {item.example_meaning}
-
-                                          </p>
-
-                                        </div>
-
-                                      )}
-
-                                    </div>
-
-                                  </div>
-
-                                );
-
-                              })}
-
-                            </div>
-
-                          )}
-
-                        </div>
-
-                      );
-
-                    })()}
+                    {filteredVocabItems.map(renderVocabCard)}
 
                   </div>
 
@@ -9679,147 +8997,13 @@ const renderInteractivePractice = () => {
                     );
                   };
 
-                  return processedKanjiGroups.totalVisible === 0 ? (
+                  return filteredKanjiItems.length === 0 ? (
                     <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
                       📭 Không tìm thấy chữ Hán nào phù hợp với điều kiện tìm kiếm.
                     </div>
                   ) : (
-                    <div className="space-y-6">
-                      {processedKanjiGroups.groups.map((group) => {
-                        const idx = group.grammarIndex;
-                        const isCollapsedBool = collapsedKanjiSections[idx.toString()] === true;
-
-                        if (group.newItems.length === 0 && group.copiedItems.length === 0 && (searchQuery || statusFilter !== 'all')) {
-                          return null;
-                        }
-
-                        return (
-                          <div key={idx} className="space-y-4 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
-                            {/* Accordion Header */}
-                            <div 
-                              onClick={() => toggleKanjiSection(idx.toString())}
-                              className="flex flex-col md:flex-row md:items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 transition-all select-none gap-3 group/header active:scale-[0.995]"
-                            >
-                              <div className="flex items-center gap-3 flex-1 min-w-0">
-                                <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
-                                  {isCollapsedBool ? '📁' : '📂'}
-                                </span>
-                                <div className="min-w-0">
-                                  <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex flex-wrap items-center gap-2">
-                                    <span className="text-blue-500 text-xs uppercase tracking-wider">Mẫu {idx + 1}:</span>
-                                    <span className="text-slate-700 dark:text-slate-200 truncate">{group.grammarTitle}</span>
-                                    <div className="flex items-center gap-1.5 ml-1 sm:ml-2">
-                                      <span className="px-1.5 py-0.2 bg-emerald-950/80 border border-emerald-900/40 text-[9px] font-black text-emerald-600 dark:text-emerald-400 rounded-md">
-                                        {group.newItems.length} mới
-                                      </span>
-                                      {group.copiedItems.length > 0 && (
-                                        <span className="px-1.5 py-0.2 bg-blue-950/80 border border-blue-900/40 text-[9px] font-black text-blue-600 dark:text-blue-400 rounded-md">
-                                          {group.copiedItems.length} trùng lặp
-                                        </span>
-                                      )}
-                                    </div>
-                                  </h3>
-                                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 truncate italic">
-                                    {group.grammarMeaning || 'Không có dịch nghĩa'}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
-                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
-                                </span>
-                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
-                                  {isCollapsedBool ? '▼' : '▲'}
-                                </span>
-                              </div>
-                            </div>
-
-                            {/* Accordion Content */}
-                            {!isCollapsedBool && (
-                              <div className="space-y-4 pt-2">
-                                {group.copiedItems.length > 0 && (
-                                  <div className="p-3 bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 rounded-xl space-y-1.5">
-                                    <span className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-                                      Các chữ Hán đã được học ở phần trước nhưng được dùng ở mẫu này:
-                                    </span>
-                                    <div className="flex flex-wrap gap-1.5">
-                                      {group.copiedItems.map((c) => (
-                                        <span 
-                                          key={c.id} 
-                                          onClick={() => {
-                                            setSelectedKanjiModal(c);
-                                            setKanjiModalTab('info');
-                                          }}
-                                          className="inline-flex items-center gap-1 px-3 py-1 bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 text-sm font-black rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all" 
-                                          title={`${c.vietnamese_meaning} - Nhấp xem chi tiết & tập viết`}
-                                        >
-                                          <span>{c.character}</span>
-                                          <span className="text-[10px] text-blue-400">🔍</span>
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Cards Grid for new items */}
-                                {group.newItems.length === 0 ? (
-                                  <div className="text-center py-6 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-xl bg-slate-100/5">
-                                    📝 Không có chữ Hán mới nào trong mẫu ngữ pháp này.
-                                  </div>
-                                ) : (
-                                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                                    {group.newItems.map((item) => renderKanjiCard(item))}
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-
-                      {/* Supplemental Kanji Accordion */}
-                      {processedKanjiGroups.supplemental.length > 0 && (() => {
-                        const isCollapsedBool = collapsedKanjiSections['supplemental'] === true;
-                        return (
-                          <div className="space-y-4 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-4 bg-slate-100/20 dark:bg-slate-900/20 backdrop-blur-md">
-                            <div 
-                              onClick={() => toggleKanjiSection('supplemental')}
-                              className="flex items-center justify-between py-3.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/60 transition-all select-none group/header active:scale-[0.995]"
-                            >
-                              <div className="flex items-center gap-3">
-                                <span className="text-lg shrink-0 text-blue-600 dark:text-blue-400 group-hover/header:scale-110 transition-transform">
-                                  {isCollapsedBool ? '📁' : '📂'}
-                                </span>
-                                <div>
-                                  <h3 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                                    <span className="text-slate-700 dark:text-slate-200">Chữ Hán bổ sung / Khác</span>
-                                    <span className="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[9px] font-black text-slate-400 dark:text-slate-500 rounded-md">
-                                      {processedKanjiGroups.supplemental.length} chữ
-                                    </span>
-                                  </h3>
-                                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5 italic">
-                                    Các chữ Hán bổ sung hỗ trợ thêm cho bài học
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider hidden sm:inline">
-                                  {isCollapsedBool ? 'Mở rộng' : 'Thu gọn'}
-                                </span>
-                                <span className="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xs font-black text-blue-600 dark:text-blue-400">
-                                  {isCollapsedBool ? '▼' : '▲'}
-                                </span>
-                              </div>
-                            </div>
-
-                            {!isCollapsedBool && (
-                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-2">
-                                {processedKanjiGroups.supplemental.map((item) => renderKanjiCard(item))}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })()}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      {filteredKanjiItems.map((item) => renderKanjiCard(item))}
                     </div>
                   );
                 })()}
@@ -9991,7 +9175,14 @@ const renderInteractivePractice = () => {
                                 Kunyomi (Âm Thuần - Hiragana)
                               </span>
                               <span className="font-bold text-emerald-700 dark:text-emerald-300 text-sm break-words">
-                                {selectedKanjiModal.kunyomi || '-'}
+                                {selectedKanjiModal.kunyomi
+                                  ? selectedKanjiModal.kunyomi
+                                      .replace(/\.([a-zA-Z]+)/g, (_, tail) => {
+                                        const map: Record<string, string> = { bu: 'ぶ', mu: 'む', ru: 'る', ku: 'く', su: 'す', tsu: 'つ', nu: 'ぬ', fu: 'ふ', u: 'う' };
+                                        return '・' + (map[tail.toLowerCase()] || tail);
+                                      })
+                                      .replace(/\./g, '・')
+                                  : '-'}
                               </span>
                               <p className="text-[10px] text-slate-400 italic">Thường dùng khi đứng độc lập hoặc có đuôi Okurigana</p>
                             </div>
@@ -10086,7 +9277,20 @@ const renderInteractivePractice = () => {
                             {/* Kết quả AI phân tích ngắn gọn, súc tích */}
                             {kanjiAiExplanation && (
                               <div className="space-y-2.5 pt-2 border-t border-indigo-500/20 text-xs animate-in fade-in duration-200">
-                                {/* Vì sao dùng các bộ thủ này */}
+                                {/* Cội nguồn chữ cổ & Biến đổi hình thái */}
+                                  {kanjiAiExplanation.ancient_form_origin && (
+                                    <div className="p-3 rounded-xl bg-indigo-950/60 border border-indigo-400/35 space-y-1.5 shadow-sm">
+                                      <span className="text-[10px] font-bold text-indigo-300 uppercase tracking-wider block flex items-center gap-1.5">
+                                        <span>📜</span>
+                                        <span>Cội nguồn chữ cổ & Biến đổi hình thái:</span>
+                                      </span>
+                                      <p className="text-indigo-100 leading-relaxed font-sans text-xs">
+                                        {kanjiAiExplanation.ancient_form_origin}
+                                      </p>
+                                    </div>
+                                  )}
+
+                                  {/* Vì sao dùng các bộ thủ này */}
                                 {kanjiAiExplanation.radicals_analysis && Array.isArray(kanjiAiExplanation.radicals_analysis) && (
                                   <div className="space-y-1.5">
                                     <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider block">
@@ -11625,6 +10829,13 @@ const renderInteractivePractice = () => {
         )}
 
             </main>
+
+      <QuickLookupModal
+        isOpen={isQuickLookupOpen}
+        onClose={() => setIsQuickLookupOpen(false)}
+        initialTab={quickLookupTab}
+        currentLessonId={selectedLessonId}
+      />
 
       {selectedPopupGrammar && (
 

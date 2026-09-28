@@ -492,26 +492,36 @@ async function explainKanjiStructure({ character, sinoVietnamese, meaning, strok
     ? radicals.map((r, i) => `${i + 1}. Bộ "${r.character}" (${r.sinoVietnamese || 'Chưa rõ'}: ${r.meaning || 'Nét cấu thành'})`).join('\n')
     : `Bộ thủ chính: ${character}`;
 
-  const prompt = `Bạn là chuyên gia ngôn ngữ tiếng Nhật và Hán học hàng đầu.
-Hãy phân tích cặn kẽ bản chất cấu tạo và ý nghĩa của CHỮ HÁN sau cho học viên người Việt:
+  const prompt = `Bạn là chuyên gia ngôn ngữ tiếng Nhật, Hán tự học và Ngữ nguyên học (Etymology) hàng đầu.
+Hãy phân tích cặn kẽ bản chất cấu tạo, cội nguồn lịch sử và ý nghĩa của CHỮ HÁN sau cho học viên người Việt:
 
 - Chữ Hán: "${character}"
 - Tên Hán Việt: "${sinoVietnamese}"
 - Nghĩa tiếng Việt: "${meaning}"
 - Số nét: ${strokeCount || 'Chuẩn'} nét
-- Danh sách bộ thủ / thành phần cấu thành:
+- Danh sách bộ thủ được bóc tách:
 ${radicalsText}
 
-YÊU CẦU BẮT BUỘC:
-1. Tập trung giải thích CHÍNH CHỮ HÁN "${character}" (chứ không nói lý thuyết chung về bộ thủ).
-2. Liệt kê ĐẦY ĐỦ TẤT CẢ các bộ thủ cấu thành chữ này. Nêu rõ VÌ SAO chữ này lại dùng các bộ thủ đó (vai trò biểu thị của từng bộ thủ trong việc tạo nên chữ này).
-3. Phân tích logic kết hợp: Người xưa ghép các bộ thủ này lại với nhau như thế nào (hội ý, tượng hình, hình thanh...) để tạo thành ý nghĩa của chữ "${character}"?
-4. Đưa ra một câu thần chú / mẹo nhớ 5 giây ngắn gọn, đắt giá, liên kết các bộ thủ để học viên thuộc vĩnh viễn nghĩa của chữ.
-5. PHONG CÁCH: CỰC KỲ NGẮN GỌN, SÚC TÍCH, ĐỦ Ý, đi thẳng vào bản chất, mỗi phần chỉ 1-2 câu ngắn, không lê thê.`;
+YÊU CẦU BẮT BUỘC VÀ CHUYÊN SÂU:
+1. NGUỒN GỐC CHỮ CỔ & QUÁ TRÌNH BIẾN ĐỔI HÌNH THÁI (ancient_form_origin):
+   - Nếu chữ "${character}" là chữ Tân tự thể (Shinjitai) hoặc có nét giản lược thời hiện đại: BẮT BUỘC chỉ rõ chữ cổ / chữ Phồn thể nguyên bản (Cựu tự thể Kyūjitai) viết như thế nào.
+   - Giải thích ĐẦY ĐỦ các nét/thành phần đặc trưng KHÔNG THUỘC 201 bộ thủ nhưng cấu tạo nên chữ (Ví dụ: 3 nét "⺍" trong chữ "学" là dấu tích giản lược của hai bàn tay người thầy "𦥑" và que tính tri thức "爻" trong chữ cổ "學"; 2 nét "⺍" trong "労" là từ 2 chữ Hỏa; nét "⺡" là biến thể của Thủy...).
+   - Nếu chữ không giản lược, hãy giải thích hình thái Giáp cốt văn / Kim văn nguyên thủy tượng hình điều gì.
+2. PHÂN TÍCH TỪNG BỘ PHẬN CẤU THÀNH (radicals_analysis):
+   - Liệt kê đầy đủ từng bộ thủ và thành phần cấu thành (bao gồm cả các nét đặc trưng như ⺍ nếu có).
+   - Nêu rõ VÌ SAO chữ này lại dùng bộ phận đó, vai trò ngữ nghĩa của từng thành phần. Giải thích mạch lạc, sâu sắc, không nói qua loa cộc lốc.
+3. LOGIC KẾT HỢP TẠO NGHĨA (synthesis_logic):
+   - Phân tích cơ chế tạo chữ theo Lục Thư (Hội ý, Tượng hình, Hình thanh...) và tư duy triết học của người xưa khi ghép các thành phần đó lại để thể hiện khái niệm "${meaning}".
+4. MẸO GHI NHỚ ĐẮT GIÁ (quick_memory_hook):
+   - Đưa ra một câu thần chú / mẹo nhớ 5 giây dễ thuộc, liên kết chặt chẽ mọi thành phần để học viên nhớ vĩnh viễn và không bao giờ viết nhầm nét.`;
 
   const schema = {
     type: "OBJECT",
     properties: {
+      ancient_form_origin: {
+        type: "STRING",
+        description: "Nguồn gốc chữ cổ/phồn thể (Cựu tự thể nếu có) và lý giải cặn kẽ các nét giản lược/biến thể đặc trưng (như ⺍, 𦥑, 爻...)."
+      },
       radicals_analysis: {
         type: "ARRAY",
         items: {
@@ -520,28 +530,28 @@ YÊU CẦU BẮT BUỘC:
             radical: { type: "STRING" },
             name: { type: "STRING" },
             meaning: { type: "STRING" },
-            why_used: { type: "STRING", description: "Vì sao chữ này lại dùng bộ thủ này (1 câu ngắn)" }
+            why_used: { type: "STRING", description: "Vì sao chữ này dùng thành phần/bộ thủ này, vai trò biểu thị trong chữ" }
           },
           required: ["radical", "name", "meaning", "why_used"]
         }
       },
       synthesis_logic: {
         type: "STRING",
-        description: "Logic kết hợp các bộ thủ tạo thành nghĩa của chữ Hán (1-2 câu súc tích)"
+        description: "Logic kết hợp các thành phần theo Lục Thư tạo thành nghĩa của chữ Hán một cách sâu sắc, rõ ràng"
       },
       origin_short: {
         type: "STRING",
-        description: "Nguồn gốc tượng hình hoặc hội ý cổ xưa của chữ này (1 câu ngắn)"
+        description: "Tóm lược nguồn gốc cốt lõi của chữ"
       },
       quick_memory_hook: {
         type: "STRING",
-        description: "Mẹo nhớ 5 giây đắt giá, dễ thuộc ngay lập tức (1 câu ngắn)"
+        description: "Mẹo nhớ 5 giây đắt giá, liên kết trọn vẹn các thành phần của chữ"
       }
     },
-    required: ["radicals_analysis", "synthesis_logic", "origin_short", "quick_memory_hook"]
+    required: ["ancient_form_origin", "radicals_analysis", "synthesis_logic", "origin_short", "quick_memory_hook"]
   };
 
-  return await callGemini(prompt, schema, { maxOutputTokens: 2500, timeoutMs: 25000 });
+  return await callGemini(prompt, schema, { maxOutputTokens: 3000, timeoutMs: 25000 });
 }
 
 /**

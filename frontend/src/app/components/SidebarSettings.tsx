@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { useTheme } from './ThemeProvider';
+import QuickLookupModal from './QuickLookupModal';
 
 // SVG Helper to generate consistent animal avatars matching index.js
 function getAvatarSvg(userId: string) {
@@ -31,6 +32,8 @@ export default function SidebarSettings() {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
+  const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'radicals'>('radicals');
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const [user, setUser] = useState<any>(null);
 
@@ -96,11 +99,26 @@ export default function SidebarSettings() {
           {/* Navigation Shortcuts */}
           <div className="space-y-1.5">
             <button
-              onClick={() => handleNavigate('/radicals')}
+              onClick={() => {
+                setIsOpen(false);
+                setQuickLookupTab('radicals');
+                setIsQuickLookupOpen(true);
+              }}
               className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
             >
               <span className="text-sm">🉐</span>
-              <span>Ôn bộ thủ Kanji</span>
+              <span>Tra cứu Bộ thủ Kanji</span>
+            </button>
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                setQuickLookupTab('vocab');
+                setIsQuickLookupOpen(true);
+              }}
+              className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
+            >
+              <span className="text-sm">📚</span>
+              <span>Tra cứu Từ vựng</span>
             </button>
             <button
               onClick={() => handleNavigate('/knowledge')}
@@ -165,6 +183,13 @@ export default function SidebarSettings() {
           ▲
         </span>
       </button>
+
+      {/* Quick Lookup Modal (overlay on current page) */}
+      <QuickLookupModal
+        isOpen={isQuickLookupOpen}
+        onClose={() => setIsQuickLookupOpen(false)}
+        initialTab={quickLookupTab}
+      />
     </div>
   );
 }
