@@ -573,7 +573,7 @@ router.post('/grade-kanji-writing', async (req, res) => {
  */
 router.post('/kanji-writing-riddles', async (req, res) => {
   try {
-    const { lessonId, kanjis = [], forceRefresh = false } = req.body;
+    const { lessonId, kanjis = [], vocabItems = [], forceRefresh = false } = req.body;
 
     if (!lessonId || !Array.isArray(kanjis) || kanjis.length === 0) {
       return res.status(400).json({
@@ -583,7 +583,7 @@ router.post('/kanji-writing-riddles', async (req, res) => {
     }
 
     const diskCache = getRiddlesDiskCache();
-    const cacheKey = `lesson_${lessonId}`;
+    const cacheKey = `lesson_${lessonId}_v2`;
 
     // 1. Check permanent disk cache (only if not forceRefresh)
     if (!forceRefresh && diskCache[cacheKey] && Array.isArray(diskCache[cacheKey].riddles) && diskCache[cacheKey].riddles.length > 0) {
@@ -609,7 +609,8 @@ router.post('/kanji-writing-riddles', async (req, res) => {
     // 3. Call Gemini to generate riddles
     const { result, usageMetadata } = await aiGradingService.generateKanjiWritingRiddles({
       lessonId,
-      kanjis
+      kanjis,
+      vocabList: vocabItems
     });
 
     const riddles = result?.riddles || [];

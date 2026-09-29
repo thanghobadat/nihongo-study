@@ -398,6 +398,7 @@ export interface KanjiWritingRiddle {
   sino_vietnamese: string;
   meaning: string;
   stroke_count: number;
+  question_type?: 'sino_meaning' | 'vocab_context' | 'compound_fill' | 'situational';
   riddle_question: string;
   hint: string;
   radicals_hint?: string;
@@ -415,19 +416,41 @@ export interface KanjiGradingResult {
 }
 
 /**
- * Sinh câu đố đặc trưng cục bộ (Local Fallback) dựa trên chiết tự bộ thủ và nghĩa
+ * Sinh câu đố đặc trưng cục bộ (Local Fallback) theo 4 dạng thực chiến đa dạng, TUYỆT ĐỐI không mớm bộ thủ
  */
-export function generateLocalKanjiRiddles(kanjis: KanjiItemData[]): KanjiWritingRiddle[] {
-  return kanjis.map(k => {
+export function generateLocalKanjiRiddles(
+  kanjis: KanjiItemData[],
+  vocabList: any[] = []
+): KanjiWritingRiddle[] {
+  return kanjis.map((k, idx) => {
     const sino = k.sino_vietnamese || '';
     const meaning = k.vietnamese_meaning || '';
-    const strokes = parseInt(k.stroke_count || '0') || 4;
+    const strokes = parseInt(k.stroke_count || '0', 10) || 4;
+    const mode = idx % 4;
+
+    // Tìm từ ghép hoặc từ vựng trong bài chứa chữ này
+    const parsedCompounds = parseCompounds(k.compounds);
+    const validCompound = parsedCompounds.find(c => c.word && c.word.includes(k.character));
     
+    // Tìm từ vựng trong bài
+    const relatedVocab = vocabList.find(v => v && v.hiragana && (v.kanji || '').includes(k.character));
+
     let question = '';
-    if (k.mnemonic_tip && !k.mnemonic_tip.includes(k.character)) {
-      question = `Câu đố hình tượng: ${k.mnemonic_tip}`;
+    let question_type: 'sino_meaning' | 'vocab_context' | 'compound_fill' | 'situational' = 'sino_meaning';
+
+    if (mode === 1 && relatedVocab) {
+      question_type = 'vocab_context';
+      question = `Từ vựng "${relatedVocab.hiragana}" trong bài mang ý nghĩa "${relatedVocab.vietnamese_meaning || meaning}". Hãy viết chữ Hán của từ vựng này!`;
+    } else if (mode === 2 && validCompound) {
+      question_type = 'compound_fill';
+      const masked = validCompound.word.replace(k.character, '【 ? 】');
+      question = `Điền chữ Hán còn thiếu vào từ ghép: ${masked} (Cách đọc: ${validCompound.reading || 'chuẩn'}, Nghĩa: ${validCompound.meaning}).`;
+    } else if (mode === 3) {
+      question_type = 'situational';
+      question = `Khái niệm hoặc đối tượng mang ý nghĩa "${meaning}" (Âm Hán Việt: ${sino}). Hãy nhớ lại cấu trúc nét và viết chữ Hán này.`;
     } else {
-      question = `Chữ Hán có âm Hán Việt là "${sino}", biểu thị ý nghĩa "${meaning}". Hãy nhớ lại cấu trúc các nét và viết lại chữ Hán này.`;
+      question_type = 'sino_meaning';
+      question = `Hãy viết chữ Hán có âm Hán Việt là "${sino}", biểu thị ý nghĩa cốt lõi: "${meaning}".`;
     }
 
     return {
@@ -435,8 +458,9 @@ export function generateLocalKanjiRiddles(kanjis: KanjiItemData[]): KanjiWriting
       sino_vietnamese: sino,
       meaning: meaning,
       stroke_count: strokes,
+      question_type,
       riddle_question: question,
-      hint: `Âm Hán Việt: ${sino} • Gồm ${strokes} nét`,
+      hint: `Gồm ${strokes} nét vẽ • Âm Hán: ${sino}`,
       radicals_hint: `Ý nghĩa cốt lõi: ${meaning}`
     };
   });
@@ -448,7 +472,8 @@ export function generateLocalKanjiRiddles(kanjis: KanjiItemData[]): KanjiWriting
 export async function fetchKanjiWritingRiddles(
   lessonId: number,
   kanjis: KanjiItemData[],
-  forceRefresh: boolean = false
+  forceRefresh: boolean = false,
+  vocabItems: any[] = []
 ): Promise<KanjiWritingRiddle[]> {
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
@@ -458,7 +483,7 @@ export async function fetchKanjiWritingRiddles(
       const res = await fetch('/api/ai/kanji-writing-riddles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lessonId, kanjis, forceRefresh })
+        body: JSON.stringify({ lessonId, kanjis, vocabItems, forceRefresh })
       });
       if (res.ok) {
         const data = await res.json();
@@ -470,7 +495,7 @@ export async function fetchKanjiWritingRiddles(
       console.warn(`[fetchKanjiWritingRiddles] Attempt ${attempt + 1} failed:`, e);
     }
   }
-  return generateLocalKanjiRiddles(kanjis);
+  return generateLocalKanjiRiddles(kanjis, vocabItems);
 }
 
 /**

@@ -6,10 +6,7 @@ import {
   COMMON_KANJI_DISTRACTORS,
   shuffleArray,
   KanjiWritingRiddle,
-  KanjiGradingResult,
-  fetchKanjiWritingRiddles,
-  gradeKanjiWithAI,
-  evaluateKanjiDrawingLocally
+  fetchKanjiWritingRiddles
 } from '../../../utils/kanjiPracticeHelper';
 import { playAudioWithFallback } from '../../../utils/audioHelper';
 import { getKanjiForm } from '../../../utils/kanjiFormLookup';
@@ -398,6 +395,8 @@ export default function KanjiPracticeTab({
   // =========================================================================
   // 2. TÍNH NĂNG 2: TẬP VIẾT AI RA ĐỀ & HỌC VIÊN TỰ VẼ ĐÁP ÁN
   // =========================================================================
+  // 2. TÍNH NĂNG 2: TẬP VIẾT KANJI (ĐA DẠNG CÂU HỎI & HIỆN ĐÁP ÁN ĐỐI CHIẾU)
+  // =========================================================================
   const [riddles, setRiddles] = useState<KanjiWritingRiddle[]>([]);
   const [isLoadingRiddles, setIsLoadingRiddles] = useState<boolean>(false);
   const [riddleIndex, setRiddleIndex] = useState<number>(0);
@@ -405,9 +404,8 @@ export default function KanjiPracticeTab({
   const [showGhostGuide, setShowGhostGuide] = useState<boolean>(false);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [hasDrawn, setHasDrawn] = useState<boolean>(false);
-  const [isGradingAI, setIsGradingAI] = useState<boolean>(false);
-  const [aiGradingResult, setAiGradingResult] = useState<KanjiGradingResult | null>(null);
-  const [riddleEvaluated, setRiddleEvaluated] = useState<Record<number, KanjiGradingResult>>({});
+  const [isAnswerRevealed, setIsAnswerRevealed] = useState<boolean>(false);
+  const [userEvaluations, setUserEvaluations] = useState<Record<number, 'correct' | 'wrong'>>({});
   const [isRiddleFinished, setIsRiddleFinished] = useState<boolean>(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -421,15 +419,15 @@ export default function KanjiPracticeTab({
     let isMounted = true;
     setIsLoadingRiddles(true);
 
-    fetchKanjiWritingRiddles(selectedLessonId, eligibleKanji)
+    fetchKanjiWritingRiddles(selectedLessonId, eligibleKanji, false, vocabItems)
       .then(fetchedRiddles => {
         if (!isMounted) return;
         setRiddles(shuffleArray(fetchedRiddles));
         setRiddleIndex(0);
         setShowRiddleHint(false);
         setShowGhostGuide(false);
-        setAiGradingResult(null);
-        setRiddleEvaluated({});
+        setIsAnswerRevealed(false);
+        setUserEvaluations({});
         setIsRiddleFinished(false);
       })
       .finally(() => {
@@ -439,7 +437,7 @@ export default function KanjiPracticeTab({
     return () => {
       isMounted = false;
     };
-  }, [activeTab, selectedLessonId, eligibleKanji]);
+  }, [activeTab, selectedLessonId, eligibleKanji, vocabItems]);
 
   // Xáo trộn ngẫu nhiên toàn bộ danh sách câu đố AI
   const handleShuffleRiddles = () => {
@@ -448,8 +446,8 @@ export default function KanjiPracticeTab({
     setRiddleIndex(0);
     setShowRiddleHint(false);
     setShowGhostGuide(false);
-    setAiGradingResult(null);
-    setRiddleEvaluated({});
+    setIsAnswerRevealed(false);
+    setUserEvaluations({});
   };
 
   // Yêu cầu AI sinh bộ câu đố mới hoàn toàn (bỏ qua cache)
@@ -457,13 +455,13 @@ export default function KanjiPracticeTab({
     if (eligibleKanji.length === 0) return;
     setIsLoadingRiddles(true);
     try {
-      const freshRiddles = await fetchKanjiWritingRiddles(selectedLessonId, eligibleKanji, true);
+      const freshRiddles = await fetchKanjiWritingRiddles(selectedLessonId, eligibleKanji, true, vocabItems);
       setRiddles(shuffleArray(freshRiddles));
       setRiddleIndex(0);
       setShowRiddleHint(false);
       setShowGhostGuide(false);
-      setAiGradingResult(null);
-      setRiddleEvaluated({});
+      setIsAnswerRevealed(false);
+      setUserEvaluations({});
       setIsRiddleFinished(false);
     } finally {
       setIsLoadingRiddles(false);
@@ -568,8 +566,8 @@ export default function KanjiPracticeTab({
       setHasDrawn(false);
       const t = setTimeout(() => {
         drawGridAndGuide(currentRiddle.target_character, showGhostGuide, false);
-        const existing = riddleEvaluated[riddleIndex];
-        setAiGradingResult(existing || null);
+        const existing = userEvaluations[riddleIndex];
+        setIsAnswerRevealed(!!existing);
       }, 50);
       return () => clearTimeout(t);
     }
@@ -652,45 +650,22 @@ export default function KanjiPracticeTab({
     currentStrokeRef.current = [];
     drawGridAndGuide(currentRiddle.target_character, showGhostGuide, false);
     setHasDrawn(false);
-    setAiGradingResult(null);
+    setIsAnswerRevealed(false);
   };
 
-  // Grade drawing using Gemini Multimodal Vision AI + local fallback & actionable tip
-  const handleGradeDrawing = async () => {
+  // Hiện đáp án đúng tức thì, lồng chữ mẫu lên canvas và phát âm thanh
+  const handleRevealAnswer = () => {
     if (!currentRiddle) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    setIsAnswerRevealed(true);
+    setShowGhostGuide(true);
+    handlePlayAudio(
+      currentRiddle.target_character,
+      currentRiddleKanji?.kunyomi || currentRiddle.target_character
+    );
+  };
 
-    setIsGradingAI(true);
-    setAiGradingResult(null);
-
-    try {
-      const targetKanji = currentRiddle.target_character;
-      const strokeCount = currentRiddle.stroke_count;
-      const sinoVietnamese = currentRiddle.sino_vietnamese;
-      const meaning = currentRiddle.meaning;
-      const radicals = currentRiddleKanji ? (currentRiddleKanji as any).radicals : undefined;
-
-      const res = await gradeKanjiWithAI({
-        canvas,
-        targetKanji,
-        strokeCount,
-        sinoVietnamese,
-        meaning,
-        radicals
-      });
-
-      setAiGradingResult(res);
-      setRiddleEvaluated(prev => ({ ...prev, [riddleIndex]: res }));
-
-      if (res.is_correct) {
-        handlePlayAudio(targetKanji, currentRiddleKanji?.kunyomi || targetKanji);
-      }
-    } catch (err) {
-      console.error('[handleGradeDrawing] Grading error:', err);
-    } finally {
-      setIsGradingAI(false);
-    }
+  const handleSelfEvaluate = (status: 'correct' | 'wrong') => {
+    setUserEvaluations(prev => ({ ...prev, [riddleIndex]: status }));
   };
 
   // Navigate riddles
@@ -699,6 +674,7 @@ export default function KanjiPracticeTab({
       setRiddleIndex(prev => prev + 1);
       setShowRiddleHint(false);
       setShowGhostGuide(false);
+      setIsAnswerRevealed(false);
     } else {
       setIsRiddleFinished(true);
     }
@@ -709,6 +685,7 @@ export default function KanjiPracticeTab({
       setRiddleIndex(prev => prev - 1);
       setShowRiddleHint(false);
       setShowGhostGuide(false);
+      setIsAnswerRevealed(false);
     }
   };
 
@@ -1040,17 +1017,14 @@ export default function KanjiPracticeTab({
             <div className="p-12 text-center bg-white dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
               <span className="text-4xl animate-spin inline-block">🤖</span>
               <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                AI đang phân tích lại các chữ và sáng tạo bộ câu đố hoàn toàn mới...
-              </p>
-              <p className="text-xs text-slate-400">
-                (Đổi mới văn phong, luân chuyển góc độ đố: chiết tự bộ thủ, tượng hình cội nguồn và từ ghép)
+                AI đang chuẩn bị bộ câu hỏi tập viết thực chiến mới...
               </p>
             </div>
           ) : riddles.length === 0 ? (
             <div className="p-12 text-center bg-white dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
               <span className="text-4xl">📭</span>
               <p className="text-sm font-bold text-slate-600 dark:text-slate-400">
-                Không tìm thấy câu đố tập viết cho bài học này.
+                Không tìm thấy câu hỏi tập viết cho bài học này.
               </p>
             </div>
           ) : isRiddleFinished ? (
@@ -1059,28 +1033,34 @@ export default function KanjiPracticeTab({
               <span className="text-5xl">🎉</span>
               <div className="space-y-2">
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                  HOÀN THÀNH TẬP VIẾT AI!
+                  HOÀN THÀNH TẬP VIẾT KANJI!
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Bạn đã hoàn thành thử thách suy luận và vẽ nét toàn bộ {riddles.length} câu đố chữ Hán.
+                  Bạn đã hoàn thành thử thách suy luận và vẽ nét toàn bộ {riddles.length} chữ Hán trong bài.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left space-y-2 text-xs">
                 <span className="font-bold text-slate-700 dark:text-slate-300 block">
-                  Điểm số các chữ bạn vừa viết:
+                  Kết quả tự đối chiếu nét vẽ của bạn:
                 </span>
                 <div className="grid grid-cols-2 gap-2">
                   {riddles.map((r, i) => {
-                    const evalItem = riddleEvaluated[i];
+                    const evalItem = userEvaluations[i];
                     return (
                       <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                         <span className="font-bold font-['Noto_Sans_JP'] text-base text-teal-400">
                           {r.target_character}
                         </span>
                         <span className="text-slate-400 text-[11px]">{r.sino_vietnamese}</span>
-                        <span className={`font-black text-xs ${evalItem?.is_correct ? 'text-emerald-400' : 'text-amber-400'}`}>
-                          {evalItem ? `${evalItem.score}đ` : 'Chưa chấm'}
+                        <span className={`font-black text-xs ${
+                          evalItem === 'correct' 
+                            ? 'text-emerald-400' 
+                            : evalItem === 'wrong'
+                            ? 'text-rose-400'
+                            : 'text-slate-400'
+                        }`}>
+                          {evalItem === 'correct' ? '✓ Viết đúng' : evalItem === 'wrong' ? '↺ Cần luyện' : 'Chưa đánh giá'}
                         </span>
                       </div>
                     );
@@ -1107,8 +1087,8 @@ export default function KanjiPracticeTab({
                     setRiddleIndex(0);
                     setShowRiddleHint(false);
                     setShowGhostGuide(false);
-                    setAiGradingResult(null);
-                    setRiddleEvaluated({});
+                    setIsAnswerRevealed(false);
+                    setUserEvaluations({});
                   }}
                   className="py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 cursor-pointer"
                 >
@@ -1120,12 +1100,27 @@ export default function KanjiPracticeTab({
             <div className="max-w-2xl mx-auto space-y-6">
               {/* Riddle Question Header */}
               <div className="p-6 bg-gradient-to-br from-teal-950/40 via-slate-900 to-slate-900 border-2 border-teal-500/30 rounded-3xl shadow-lg space-y-3 relative overflow-hidden">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🤖</span>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xl">✍️</span>
                     <span className="text-xs font-black text-teal-400 uppercase tracking-wider">
-                      AI Ra Đề Đố Chữ (Câu {riddleIndex + 1} / {riddles.length})
+                      Câu {riddleIndex + 1} / {riddles.length}
                     </span>
+                    {/* Badge loại câu hỏi */}
+                    {(() => {
+                      const badgeMap: Record<string, { label: string; cls: string }> = {
+                        vocab_context: { label: '📚 Từ vựng trong bài', cls: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
+                        compound_fill: { label: '🧩 Điền từ ghép khuyết', cls: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
+                        situational: { label: '💡 Ngữ cảnh đối tượng', cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+                        sino_meaning: { label: '🎯 Hán Việt & Nghĩa', cls: 'bg-teal-500/10 text-teal-400 border-teal-500/20' }
+                      };
+                      const b = badgeMap[currentRiddle.question_type || ''] || badgeMap.sino_meaning;
+                      return (
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${b.cls}`}>
+                          {b.label}
+                        </span>
+                      );
+                    })()}
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -1169,21 +1164,16 @@ export default function KanjiPracticeTab({
                 {showRiddleHint && (
                   <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs space-y-1 animate-in fade-in duration-150">
                     <div className="font-bold flex items-center gap-1">
-                      <span>💡 Gợi ý AI:</span>
+                      <span>💡 Gợi ý:</span>
                       <span>{currentRiddle.hint}</span>
                     </div>
-                    {currentRiddle.radicals_hint && (
-                      <div className="text-[11px] text-amber-300/80">
-                        {currentRiddle.radicals_hint}
-                      </div>
-                    )}
                   </div>
                 )}
               </div>
 
               {/* Tian Zi Ge Canvas Drawing Board */}
               <div className="flex flex-col items-center justify-center space-y-4">
-                <div className="flex items-center justify-between w-full max-w-[300px]">
+                <div className="flex items-center justify-between w-full max-w-[340px]">
                   <span className="text-xs font-bold text-slate-400">
                     Bảng vẽ ô chữ điền (Tian Zi Ge):
                   </span>
@@ -1196,11 +1186,11 @@ export default function KanjiPracticeTab({
                   </button>
                 </div>
 
-                <div className="relative w-[280px] h-[280px] sm:w-[300px] sm:h-[300px] rounded-3xl overflow-hidden border-2 border-slate-700 shadow-2xl bg-[#090d1f] touch-none">
+                <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] rounded-3xl overflow-hidden border-2 border-slate-700 shadow-2xl bg-[#090d1f] touch-none">
                   <canvas
                     ref={canvasRef}
-                    width={300}
-                    height={300}
+                    width={320}
+                    height={320}
                     onMouseDown={startDrawing}
                     onMouseMove={drawStroke}
                     onMouseUp={stopDrawing}
@@ -1213,12 +1203,11 @@ export default function KanjiPracticeTab({
                 </div>
 
                 {/* Canvas Controls */}
-                <div className="flex items-center gap-2.5 w-full max-w-[300px]">
+                <div className="flex items-center gap-2.5 w-full max-w-[340px]">
                   <button
                     type="button"
                     onClick={clearCanvas}
-                    disabled={isGradingAI}
-                    className="flex-1 py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer flex items-center justify-center gap-1 disabled:opacity-50"
+                    className="py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer flex items-center justify-center gap-1"
                   >
                     <span>🗑️</span>
                     <span>Vẽ lại</span>
@@ -1226,73 +1215,102 @@ export default function KanjiPracticeTab({
 
                   <button
                     type="button"
-                    onClick={handleGradeDrawing}
-                    disabled={isGradingAI}
-                    className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-50"
+                    onClick={handleRevealAnswer}
+                    className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
                   >
-                    {isGradingAI ? (
-                      <>
-                        <span className="animate-spin text-sm">⏳</span>
-                        <span>AI đang chấm...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>✨</span>
-                        <span>Chấm điểm AI</span>
-                      </>
-                    )}
+                    <span>👁️</span>
+                    <span>{isAnswerRevealed ? 'Đã hiện đáp án' : 'Xem đáp án & Đối chiếu'}</span>
                   </button>
                 </div>
 
-                {/* AI Grading & Actionable Improvement Tip Display */}
-                {aiGradingResult && (
-                  <div className={`w-full max-w-[300px] p-4 rounded-2xl border space-y-2.5 animate-in fade-in duration-150 ${
-                    aiGradingResult.is_correct
-                      ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-300'
-                      : 'bg-amber-950/30 border-amber-500/40 text-amber-300'
-                  }`}>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-black flex items-center gap-1.5">
-                        <span>{aiGradingResult.is_correct ? '✅' : '⚠️'}</span>
-                        <span>{aiGradingResult.status_label}</span>
-                        {aiGradingResult.isAIGraded && (
-                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                            AI Vision
-                          </span>
-                        )}
-                      </span>
-                      <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-white/10">
-                        {aiGradingResult.score}/100
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-slate-300 leading-tight">
-                      {aiGradingResult.feedback}
-                    </p>
-
-                    {/* Reveal target Kanji after evaluated */}
-                    <div className="flex items-center justify-between pt-1 border-t border-white/10 text-xs">
-                      <span className="text-slate-400">Đáp án chữ Hán:</span>
-                      <span className="font-black font-['Noto_Sans_JP'] text-teal-400 text-base">
-                        {currentRiddle.target_character} ({currentRiddle.sino_vietnamese})
-                      </span>
-                    </div>
-
-                    {/* Actionable Improvement Tip */}
-                    {aiGradingResult.improvement_tip && (
-                      <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/30 text-amber-300 dark:text-amber-200 text-xs leading-relaxed flex items-start gap-2">
-                        <span className="shrink-0 text-sm">💡</span>
+                {/* Revealed Answer Card & Self-Evaluation Display */}
+                {isAnswerRevealed && (
+                  <div className="w-full max-w-[340px] p-4 rounded-2xl border border-teal-500/40 bg-teal-950/40 text-slate-100 space-y-3 animate-in fade-in duration-150 shadow-lg backdrop-blur-md">
+                    <div className="flex items-center justify-between pb-2 border-b border-teal-500/20">
+                      <div className="flex items-center gap-3">
+                        <span className="text-4xl font-black font-['Noto_Sans_JP'] text-teal-300 leading-none">
+                          {currentRiddle.target_character}
+                        </span>
                         <div>
-                          <span className="font-bold text-amber-400">Cần làm: </span>
-                          <span>{aiGradingResult.improvement_tip}</span>
+                          <span className="text-sm font-black text-amber-400 block">
+                            {currentRiddle.sino_vietnamese}
+                          </span>
+                          <span className="text-xs text-slate-300 font-medium">
+                            {currentRiddle.meaning}
+                          </span>
                         </div>
                       </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handlePlayAudio(currentRiddle.target_character, currentRiddleKanji?.kunyomi || currentRiddle.target_character)}
+                        className="p-2.5 rounded-xl bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 text-sm transition-colors cursor-pointer active:scale-95"
+                        title="Nghe phát âm chuẩn"
+                      >
+                        🔊
+                      </button>
+                    </div>
+
+                    {/* Readings info */}
+                    <div className="grid grid-cols-2 gap-2 text-[11px]">
+                      <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/20">
+                        <span className="text-purple-400 font-bold block">Âm On (Onyomi):</span>
+                        <span className="text-slate-200 font-medium">{currentRiddleKanji?.onyomi || '-'}</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                        <span className="text-emerald-400 font-bold block">Âm Kun (Kunyomi):</span>
+                        <span className="text-slate-200 font-medium">{currentRiddleKanji?.kunyomi || '-'}</span>
+                      </div>
+                    </div>
+
+                    {/* Related Compounds / Vocab if any */}
+                    {currentRiddleKanji?.compounds && (
+                      <div className="text-[11px] bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+                        <span className="text-slate-400 font-bold block mb-1">Từ ghép trong bài:</span>
+                        <span className="text-slate-300 leading-tight block">
+                          {currentRiddleKanji.compounds.split(';').slice(0, 2).join(' • ')}
+                        </span>
+                      </div>
                     )}
+
+                    {/* Self Evaluation Buttons */}
+                    <div className="pt-2 border-t border-teal-500/20 space-y-2">
+                      <span className="text-[11px] text-slate-300 block font-medium">
+                        👉 Đối chiếu với chữ mẫu mờ trên ô Canvas:
+                      </span>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleSelfEvaluate('correct')}
+                          className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 active:scale-95 ${
+                            userEvaluations[riddleIndex] === 'correct'
+                              ? 'bg-emerald-500 text-white shadow-md'
+                              : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                          }`}
+                        >
+                          <span>✓</span>
+                          <span>Tôi đã viết đúng</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleSelfEvaluate('wrong')}
+                          className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 active:scale-95 ${
+                            userEvaluations[riddleIndex] === 'wrong'
+                              ? 'bg-rose-500 text-white shadow-md'
+                              : 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                          }`}
+                        >
+                          <span>↺</span>
+                          <span>Cần luyện lại</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 )}
 
                 {/* Navigation Buttons for Riddles */}
-                <div className="flex items-center justify-between w-full max-w-[300px] pt-2">
+                <div className="flex items-center justify-between w-full max-w-[340px] pt-2">
                   <button
                     type="button"
                     onClick={handlePrevRiddle}

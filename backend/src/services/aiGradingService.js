@@ -635,50 +635,71 @@ Hãy quan sát kỹ hình ảnh nét vẽ thực tế của học viên và đá
 
 /**
  * Generate Kanji Writing Riddles using Gemini with strict constraints
- * Strict Rule: Never reveal the target Kanji character in the riddle question or hints
+ * Strict Rules: 
+ * 1. Never reveal the target Kanji character in the riddle question or hints
+ * 2. NEVER reveal radical names, radical characters, or (A + B) formulas in riddle_question
+ * 3. Diversify across 4 practical question types like Speedrun Reflex review
  */
-async function generateKanjiWritingRiddles({ lessonId, kanjis = [] }) {
+async function generateKanjiWritingRiddles({ lessonId, kanjis = [], vocabList = [] }) {
   if (!Array.isArray(kanjis) || kanjis.length === 0) {
     throw new Error('kanjis array is required to generate riddles');
   }
 
+  // Build lesson vocabulary context for the target kanjis
   const kanjisList = kanjis.map((k, idx) => {
     const char = k.character || '';
     const sino = k.sino_vietnamese || k.sinoVietnamese || '';
     const meaning = k.vietnamese_meaning || k.meaning || '';
     const strokes = k.stroke_count || k.strokeCount || '';
-    const radicals = Array.isArray(k.radicals) 
-      ? k.radicals.map(r => typeof r === 'string' ? r : (r.character || '')).join(' + ')
-      : (typeof k.radicals === 'string' ? k.radicals : '');
-    const mnemonic = k.mnemonic_tip || k.story || '';
+    
+    // Find vocab items in lesson that use this character
+    let relatedVocab = [];
+    if (Array.isArray(vocabList) && vocabList.length > 0) {
+      relatedVocab = vocabList
+        .filter(v => v && v.hiragana && (v.kanji || '').includes(char))
+        .map(v => `${v.hiragana} (${v.vietnamese_meaning || ''})`);
+    }
     const examples = Array.isArray(k.examples) ? k.examples.map(e => e.reading || e.japanese || '').join(', ') : '';
+    const compounds = k.compounds || '';
 
     return `${idx + 1}. Ký tự mục tiêu: "${char}"
 - Tên Hán Việt: "${sino}"
 - Nghĩa tiếng Việt: "${meaning}"
 - Số nét: ${strokes}
-- Bộ thủ cấu thành: ${radicals || 'Thành phần cơ bản'}
-- Mẹo nhớ hình tượng: "${mnemonic}"
-- Ví dụ từ vựng: "${examples}"`;
+- Từ vựng trong bài chứa chữ này: ${relatedVocab.join(', ') || examples || compounds || 'Từ vựng bài học'}`;
   }).join('\n\n');
 
   const prompt = `Bạn là chuyên gia sư phạm tiếng Nhật hàng đầu.
-Nhiệm vụ của bạn là tạo các CÂU ĐỐ TẬP VIẾT CHỮ HÁN (Kanji Writing Riddles) cho học viên trong Bài ${lessonId || ''}.
-Học viên sẽ đọc câu đố, suy luận ra chữ Hán và tự tay vẽ mặt chữ Hán lên bảng vẽ Canvas.
+Nhiệm vụ của bạn là tạo các CÂU HỎI THỰC CHIẾN TẬP VIẾT CHỮ HÁN (Kanji Writing Questions) cho học viên trong Bài ${lessonId || ''}.
+Học viên sẽ đọc câu hỏi, tự suy luận mặt chữ trong trí nhớ và tự tay vẽ nét chữ Hán lên bảng vẽ Canvas.
 
 DANH SÁCH CÁC CHỮ HÁN CẦN RA ĐỀ:
 ${kanjisList}
 
-QUY TẮC BẮT BUỘC KHI RA ĐỀ (STRICT RIDDLE GUIDE):
-1. TUYỆT ĐỐI KHÔNG ĐƯỢC CHỨA KÝ TỰ KANJI MỤC TIÊU trong "riddle_question" và "hint" (nếu để lộ chữ thì học viên sẽ nhìn thấy và chép lại, mất ý nghĩa câu đố suy luận).
-2. BIẾN HÓA VÀ ĐỔI MỚI GÓC NHÌN: Hãy sáng tạo văn phong mới mẻ, luân chuyển linh hoạt và đa dạng giữa các góc độ đố:
-   - Chiết tự các bộ thủ cấu thành (Ví dụ: "Chữ gì được tạo nên từ bộ Nhân đứng và bộ Mộc mang nghĩa nghỉ ngơi?").
-   - Hình tượng cội nguồn thú vị (Ví dụ: "Hình ảnh người đứng tựa vào gốc cây sau ngày làm việc vất vả là chữ gì?").
-   - Nghĩa cốt lõi hoặc ngữ cảnh từ vựng thực tế (Ví dụ: "Trong từ 'Nhật Bản', chữ mang nghĩa mặt trời/ngày là chữ gì?").
-   - Câu đố mẹo hoặc câu chuyện đời sống liên tưởng đến chữ.
-3. "hint": Đưa ra gợi ý ngắn gọn (như âm Hán Việt, số nét vẽ, hoặc vị trí các bộ thủ).
-4. "radicals_hint": Liệt kê tên các bộ thủ gợi ý (viết bằng chữ Hán bộ thủ hoặc tên gọi tiếng Việt).
-5. Trả về đúng số lượng câu đố tương ứng với danh sách chữ Hán đầu vào.`;
+QUY TẮC BẮT BUỘC KHI RA ĐỀ (STRICT GUIDELINES):
+1. TUYỆT ĐỐI KHÔNG ĐƯỢC CHỨA KÝ TỰ KANJI MỤC TIÊU trong "riddle_question" và "hint".
+2. CẤM TIỆT GỢI Ý BỘ THỦ LỘ LIỄU:
+   - TUYỆT ĐỐI KHÔNG nhắc đến tên các bộ thủ (như "bộ Nhân", "bộ Mộc", "bộ Hòa", "bộ Tư"...).
+   - TUYỆT ĐỐI KHÔNG cho ký tự bộ thủ trong ngoặc đơn hoặc phép cộng bộ thủ "(A + B)".
+   - TUYỆT ĐỐI KHÔNG chép y nguyên mẹo nhớ chiết tự (vì sẽ làm lộ ngay các nét cấu thành).
+3. ĐA DẠNG HÓA 4 DẠNG CÂU HỎI THỰC CHIẾN (Phân bổ ngẫu nhiên, đan xen đều đặn giữa các câu):
+   - Dạng 1 ("sino_meaning"): Hỏi trực diện dựa trên Âm Hán Việt và ý nghĩa cốt lõi.
+     * Ví dụ: "Hãy viết chữ Hán có âm Hán Việt là TIÊN, mang ý nghĩa 'Trước, đi trước, thế hệ trước'."
+     * Ví dụ: "Chữ Hán nào có âm Hán Việt là HỌC, mang ý nghĩa 'Học tập, học hỏi'? Hãy viết chữ đó."
+   - Dạng 2 ("vocab_context"): Cho từ vựng Minna no Nihongo trong bài (viết bằng Hiragana + nghĩa tiếng Việt), yêu cầu viết chữ Hán của từ hoặc âm tương ứng.
+     * Ví dụ: "Trong từ vựng 'せんせい' (Thầy cô giáo), hãy viết chữ Hán tương ứng với âm 'せん' (Tiên)!"
+     * Ví dụ: "Từ vựng 'がくせい' có nghĩa là 'Học sinh, sinh viên'. Hãy viết chữ Hán tương ứng với âm 'がく' (Học)!"
+     * Ví dụ: "Từ 'にほん' có nghĩa là 'Nước Nhật'. Hãy viết chữ Hán tương ứng với chữ 'Nhật' (mặt trời/ngày)!"
+   - Dạng 3 ("compound_fill"): Điền chữ Hán còn thiếu vào từ ghép khuyết 【 ? 】, kèm cách đọc Hiragana và nghĩa tiếng Việt.
+     * Ví dụ: "Điền chữ Hán còn thiếu vào từ ghép: 【 ? 】生 (Cách đọc: せんせい, Nghĩa: Thầy cô giáo)."
+     * Ví dụ: "Điền chữ Hán còn thiếu vào từ ghép: 大【 ? 】 (Cách đọc: だいがく, Nghĩa: Trường đại học)."
+     * Ví dụ: "Điền chữ Hán còn thiếu vào từ ghép: 【 ? 】人 (Cách đọc: にほんじん, Nghĩa: Người Nhật)."
+   - Dạng 4 ("situational"): Ngữ cảnh đời sống hoặc định nghĩa đối tượng thực tế không lộ chữ.
+     * Ví dụ: "Người làm nghề dạy học, truyền đạt kiến thức cho học sinh (せんせい). Hãy viết chữ TIÊN trong danh xưng này."
+     * Ví dụ: "Đại từ nhân xưng ngôi thứ nhất dùng để tự xưng về bản thân mình một cách lịch sự (わたし). Hãy viết chữ Hán của đại từ này."
+4. "hint": Chỉ gợi ý số nét vẽ hoặc một sắc thái nghĩa bổ trợ ngắn gọn (Ví dụ: "Gồm 6 nét vẽ • Thường đứng đầu trong từ せんせい"). TUYỆT ĐỐI không mớm bộ thủ.
+5. "question_type": Phải gán đúng 1 trong 4 loại: "sino_meaning", "vocab_context", "compound_fill", "situational".
+6. Trả về đúng số lượng câu hỏi tương ứng với danh sách chữ Hán đầu vào.`;
 
   const schema = {
     type: "OBJECT",
@@ -692,11 +713,14 @@ QUY TẮC BẮT BUỘC KHI RA ĐỀ (STRICT RIDDLE GUIDE):
             sino_vietnamese: { type: "STRING" },
             meaning: { type: "STRING" },
             stroke_count: { type: "INTEGER" },
-            riddle_question: { type: "STRING", description: "Câu đố gợi mở đặc trưng, TUYỆT ĐỐI KHÔNG chứa ký tự target_character" },
-            hint: { type: "STRING", description: "Gợi ý âm Hán Việt hoặc số nét" },
-            radicals_hint: { type: "STRING", description: "Gợi ý các bộ thủ cấu thành" }
+            question_type: { 
+              type: "STRING", 
+              enum: ["sino_meaning", "vocab_context", "compound_fill", "situational"] 
+            },
+            riddle_question: { type: "STRING", description: "Câu hỏi thực chiến đa dạng, TUYỆT ĐỐI KHÔNG chứa ký tự target_character và KHÔNG chứa tên/ký tự bộ thủ" },
+            hint: { type: "STRING", description: "Gợi ý số nét hoặc ngữ cảnh phụ, tuyệt đối không lộ bộ thủ" }
           },
-          required: ["target_character", "sino_vietnamese", "meaning", "stroke_count", "riddle_question", "hint"]
+          required: ["target_character", "sino_vietnamese", "meaning", "stroke_count", "question_type", "riddle_question", "hint"]
         }
       }
     },
