@@ -2352,7 +2352,7 @@ function applyAutoTracking(plan, userId) {
     const learnedSet = new Set(
       items.filter(it => {
         const s = userProgress[`${userId}:${itemType}:${it.id}`];
-        return s === 'mastered' || s === 'learning';
+        return s === 'mastered';
       }).map(it => it.id)
     );
 
@@ -2537,12 +2537,14 @@ router.post('/replan-debt', async (req, res) => {
       return res.status(400).json({ success: false, error: 'Không tìm thấy kế hoạch để replan.' });
     }
 
+    await progressService.syncUserProgressFromSupabase(userId);
     const updatedPlan = await aiPlannerService.refineStudyPlan({
       currentPlan: plan,
       userComment: 'Học bù nợ bài hôm qua, dời vào các ngày tới',
       startDate: plan.startDate,
       endDate: plan.endDate,
-      currentProgress: {}
+      currentProgress: {},
+      userId
     });
 
     mockDb.studyPlans[userId] = updatedPlan;

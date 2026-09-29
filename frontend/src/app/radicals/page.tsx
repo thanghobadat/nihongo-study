@@ -314,8 +314,9 @@ export default function RadicalsPage() {
   }, [eligiblePracticeCount]);
 
 
-  // --- CANVAS & AI HANDWRITING STATES ---
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const strokesRef = useRef<Array<Array<{ x: number; y: number }>>>([]);
+  const currentStrokeRef = useRef<Array<{ x: number; y: number }>>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasDrawn, setHasDrawn] = useState(false);
   const [showGhostGuide, setShowGhostGuide] = useState(false);
@@ -382,8 +383,26 @@ export default function RadicalsPage() {
     }
   };
 
+  // Replay user's strokes on canvas
+  const renderStrokes = useCallback((ctx: CanvasRenderingContext2D) => {
+    ctx.lineWidth = 9;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#2dd4bf'; // Teal-400
+    ctx.setLineDash([]);
+    for (const stroke of strokesRef.current) {
+      if (stroke.length === 0) continue;
+      ctx.beginPath();
+      ctx.moveTo(stroke[0].x, stroke[0].y);
+      for (let i = 1; i < stroke.length; i++) {
+        ctx.lineTo(stroke[i].x, stroke[i].y);
+      }
+      ctx.stroke();
+    }
+  }, []);
+
   // Draw Tian Zi Ge (田字格) grid & optional Ghost guide on canvas
-  const drawGridAndGuide = useCallback((targetChar?: string, ghostVisible = false) => {
+  const drawGridAndGuide = useCallback((targetChar?: string, ghostVisible = false, preserveStrokes = false) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -439,21 +458,35 @@ export default function RadicalsPage() {
       ctx.textBaseline = 'middle';
       ctx.fillText(targetChar, w / 2, h / 2 + 5);
     }
-  }, []);
 
-  // Synchronize canvas when radical changes or ghost guide toggles
+    if (preserveStrokes) {
+      renderStrokes(ctx);
+    }
+  }, [renderStrokes]);
+
+  // Synchronize canvas when radical changes (reset strokes)
   useEffect(() => {
     if (quizState === 'write' && quizList[currentQuizIndex]) {
+      strokesRef.current = [];
+      currentStrokeRef.current = [];
+      setHasDrawn(false);
+      setAiGradingResult(null);
+      setUserDrawingSnapshot('');
       const char = quizList[currentQuizIndex].character.split(' ')[0];
       const t = setTimeout(() => {
-        drawGridAndGuide(char, showGhostGuide);
-        setHasDrawn(false);
-        setAiGradingResult(null);
-        setUserDrawingSnapshot('');
+        drawGridAndGuide(char, showGhostGuide, false);
       }, 50);
       return () => clearTimeout(t);
     }
-  }, [quizState, currentQuizIndex, showGhostGuide, drawGridAndGuide, quizList]);
+  }, [quizState, currentQuizIndex, quizList, drawGridAndGuide]);
+
+  // Re-draw when ghost guide toggles while PRESERVING existing strokes
+  useEffect(() => {
+    if (quizState === 'write' && quizList[currentQuizIndex]) {
+      const char = quizList[currentQuizIndex].character.split(' ')[0];
+      drawGridAndGuide(char, showGhostGuide, true);
+    }
+  }, [showGhostGuide, drawGridAndGuide, quizState, currentQuizIndex, quizList]);
 
   // Canvas drawing events
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -480,6 +513,7 @@ export default function RadicalsPage() {
       y = e.clientY - rect.top;
     }
 
+    currentStrokeRef.current = [{ x, y }];
     ctx.beginPath();
     ctx.moveTo(x, y);
     setIsDrawing(true);
@@ -504,17 +538,24 @@ export default function RadicalsPage() {
       y = e.clientY - rect.top;
     }
 
+    currentStrokeRef.current.push({ x, y });
     ctx.lineTo(x, y);
     ctx.stroke();
   };
 
   const stopDrawing = () => {
     setIsDrawing(false);
+    if (currentStrokeRef.current.length > 0) {
+      strokesRef.current.push([...currentStrokeRef.current]);
+      currentStrokeRef.current = [];
+    }
   };
 
   const clearCanvas = () => {
+    strokesRef.current = [];
+    currentStrokeRef.current = [];
     const char = quizList[currentQuizIndex]?.character.split(' ')[0];
-    drawGridAndGuide(char, showGhostGuide);
+    drawGridAndGuide(char, showGhostGuide, false);
     setHasDrawn(false);
     setAiGradingResult(null);
     setUserDrawingSnapshot('');

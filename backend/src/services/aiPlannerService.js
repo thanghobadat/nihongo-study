@@ -727,19 +727,19 @@ function getUnfinishedDebt({ userId, plan }) {
       const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
       completedCount = vocabList.filter(v => {
         const status = userProgress[`${userId}:vocabulary:${v.id}`];
-        return status === 'mastered' || status === 'learning';
+        return status === 'mastered';
       }).length;
     } else if (task.itemType === 'kanji') {
       const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
       completedCount = kanjiList.filter(k => {
         const status = userProgress[`${userId}:kanji:${k.id}`];
-        return status === 'mastered' || status === 'learning';
+        return status === 'mastered';
       }).length;
     } else if (task.itemType === 'grammar') {
       const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
       completedCount = grammarList.filter(g => {
         const status = userProgress[`${userId}:grammar:${g.id}`];
-        return status === 'mastered' || status === 'learning';
+        return status === 'mastered';
       }).length;
     } else if (task.itemType === 'single_review') {
       const key = `${userId}:review_session_lesson_${lesson}`;
@@ -817,15 +817,15 @@ function getCompletedLessons({ userId, currentPlan, currentProgress, masteredIte
         } else if (userId) {
           masteredV = vocabList.filter(v => {
             const s = userProgress[`${userId}:vocabulary:${v.id}`];
-            return s === 'mastered' || s === 'learning';
+            return s === 'mastered';
           }).length;
           masteredK = kanjiList.filter(k => {
             const s = userProgress[`${userId}:kanji:${k.id}`];
-            return s === 'mastered' || s === 'learning';
+            return s === 'mastered';
           }).length;
           masteredG = grammarList.filter(g => {
             const s = userProgress[`${userId}:grammar:${g.id}`];
-            return s === 'mastered' || s === 'learning';
+            return s === 'mastered';
           }).length;
         }
 

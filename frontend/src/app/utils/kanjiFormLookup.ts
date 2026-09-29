@@ -1794,45 +1794,54 @@ export const HIRAGANA_TO_KANJI: Record<string, string> = {
 export function getKanjiForm(hiragana: string, kanjiItems: any[] = []): string {
   if (!hiragana) return '';
 
-  // 1. Check hardcoded dictionary
   const trimmed = hiragana.trim();
-  if (HIRAGANA_TO_KANJI[trimmed]) {
-    return HIRAGANA_TO_KANJI[trimmed];
-  }
+  const hasLessonKanji = Array.isArray(kanjiItems) && kanjiItems.length > 0;
+  const lessonKanjiChars = hasLessonKanji ? new Set(kanjiItems.map((k: any) => k.character)) : null;
 
-  // 2. Try to resolve using current lesson's Kanji items dynamically
-  if (Array.isArray(kanjiItems) && kanjiItems.length > 0) {
+  // 1. Try to resolve using current lesson's Kanji compounds directly
+  if (hasLessonKanji && kanjiItems) {
     for (const kanji of kanjiItems) {
-      if (!kanji.kunyomi || !kanji.character) continue;
+      if (!kanji.character) continue;
 
-      // Kunyomi readings (can be comma-separated, e.g. "い.く, おこな.う")
-      const readings = kanji.kunyomi.split(',').map((r: string) => r.trim());
-
-      for (const r of readings) {
-        if (r.includes('.')) {
-          const [base, tail] = r.split('.');
-          
-          // Match verbs/adjectives inflection (e.g. starts with base "い" and ends with "ます" / "て" / "た")
-          if (trimmed.startsWith(base) && (trimmed.endsWith('ます') || trimmed.endsWith('ました') || trimmed.endsWith('て') || trimmed.endsWith('た') || trimmed.endsWith('ない'))) {
-            return kanji.character + trimmed.slice(base.length);
-          }
-          
-          // Match base form (e.g. "いく")
-          const fullReading = r.replace('.', '');
-          if (trimmed === fullReading) {
-            return kanji.character + trimmed.slice(base.length);
-          }
-        } else {
-          // Solid noun readings (e.g. "みず", "いぬ")
-          if (trimmed === r) {
-            return kanji.character;
-          }
-          // Partial match for prefixes
-          if (trimmed.startsWith(r) && r.length >= 2) {
-            return kanji.character + trimmed.slice(r.length);
+      // Check compounds (e.g. "先生 (せんせい): Giáo viên; 学生 (がくせい): Học sinh")
+      if (kanji.compounds) {
+        const parts = kanji.compounds.split(';');
+        for (const part of parts) {
+          const m = part.match(/([^\(\)\s:;]+)\s*\(([^)]+)\)/);
+          if (m) {
+            const kWord = m[1].trim();
+            const hWord = m[2].trim();
+            if (trimmed === hWord) {
+              return kWord;
+            }
           }
         }
       }
+
+      // Check direct single character match
+      if (trimmed === kanji.character) {
+        return kanji.character;
+      }
+    }
+  }
+
+  // 2. Check global dictionary, BUT strictly enforce:
+  // If kanjiItems is provided, ONLY allow words whose ALL Kanji characters belong to this lesson's Kanji list!
+  if (HIRAGANA_TO_KANJI[trimmed]) {
+    const candidate = HIRAGANA_TO_KANJI[trimmed];
+    if (lessonKanjiChars && lessonKanjiChars.size > 0) {
+      const kanjiInCandidate = candidate.match(/[\u4e00-\u9faf]/g);
+      if (kanjiInCandidate && kanjiInCandidate.length > 0) {
+        const allInLesson = kanjiInCandidate.every((c: string) => lessonKanjiChars.has(c));
+        if (allInLesson) {
+          return candidate;
+        }
+        // Candidate contains Kanji not taught in this lesson -> DO NOT convert, keep original kana!
+        return hiragana;
+      }
+    } else {
+      // If no lesson Kanji context provided (e.g. global lookup), return candidate
+      return candidate;
     }
   }
 

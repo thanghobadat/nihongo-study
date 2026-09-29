@@ -946,6 +946,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [modalDrawResult, setModalDrawResult] = useState<KanjiGradingResult | null>(null);
   const [isModalGradingWithAI, setIsModalGradingWithAI] = useState<boolean>(false);
   const modalCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const modalStrokesRef = useRef<Array<Array<{ x: number; y: number }>>>([]);
+  const currentModalStrokeRef = useRef<Array<{ x: number; y: number }>>([]);
 
   // Kanji AI Explanation & Stroke Player States
   const [isExplainingKanji, setIsExplainingKanji] = useState<boolean>(false);
@@ -3524,8 +3526,26 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   };
 
   // ==================== KANJI MODAL DRAWING HANDLERS ====================
+  // Replay user's modal strokes on canvas
+  const renderModalStrokes = useCallback((ctx: CanvasRenderingContext2D) => {
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#2dd4bf'; // Teal-400
+    ctx.setLineDash([]);
+    for (const stroke of modalStrokesRef.current) {
+      if (stroke.length === 0) continue;
+      ctx.beginPath();
+      ctx.moveTo(stroke[0].x, stroke[0].y);
+      for (let i = 1; i < stroke.length; i++) {
+        ctx.lineTo(stroke[i].x, stroke[i].y);
+      }
+      ctx.stroke();
+    }
+  }, []);
+
   // Draw Tian Zi Ge (田字格) grid & Ghost guide on modal canvas
-  const drawModalGridAndGuide = useCallback((targetChar?: string, ghostVisible = true) => {
+  const drawModalGridAndGuide = useCallback((targetChar?: string, ghostVisible = true, preserveStrokes = false) => {
     const canvas = modalCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -3581,20 +3601,33 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       ctx.textBaseline = 'middle';
       ctx.fillText(targetChar, w / 2, h / 2 + 5);
     }
-  }, []);
+
+    if (preserveStrokes) {
+      renderModalStrokes(ctx);
+    }
+  }, [renderModalStrokes]);
 
   // Synchronize modal canvas whenever modal opens or tab/char changes
   useEffect(() => {
     if (selectedKanjiModal && kanjiModalTab === 'draw') {
+      modalStrokesRef.current = [];
+      currentModalStrokeRef.current = [];
+      setHasModalDrawn(false);
+      setModalDrawResult(null);
       const char = selectedKanjiModal.character;
       const t = setTimeout(() => {
-        drawModalGridAndGuide(char, showModalGhostGuide);
-        setHasModalDrawn(false);
-        setModalDrawResult(null);
+        drawModalGridAndGuide(char, showModalGhostGuide, false);
       }, 60);
       return () => clearTimeout(t);
     }
-  }, [selectedKanjiModal, kanjiModalTab, showModalGhostGuide, drawModalGridAndGuide]);
+  }, [selectedKanjiModal?.id, selectedKanjiModal?.character, kanjiModalTab, drawModalGridAndGuide]);
+
+  // Re-draw grid and guide when ghost guide is toggled while PRESERVING existing strokes
+  useEffect(() => {
+    if (selectedKanjiModal && kanjiModalTab === 'draw') {
+      drawModalGridAndGuide(selectedKanjiModal.character, showModalGhostGuide, true);
+    }
+  }, [showModalGhostGuide, drawModalGridAndGuide, selectedKanjiModal, kanjiModalTab]);
 
   // Escape key listener for Kanji Modal
   useEffect(() => {
@@ -3673,6 +3706,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       y = e.clientY - rect.top;
     }
 
+    currentModalStrokeRef.current = [{ x, y }];
     ctx.beginPath();
     ctx.moveTo(x, y);
     setIsModalDrawing(true);
@@ -3698,17 +3732,24 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       y = e.clientY - rect.top;
     }
 
+    currentModalStrokeRef.current.push({ x, y });
     ctx.lineTo(x, y);
     ctx.stroke();
   };
 
   const stopModalDrawing = () => {
     setIsModalDrawing(false);
+    if (currentModalStrokeRef.current.length > 0) {
+      modalStrokesRef.current.push([...currentModalStrokeRef.current]);
+      currentModalStrokeRef.current = [];
+    }
   };
 
   const clearModalCanvas = () => {
     if (!selectedKanjiModal) return;
-    drawModalGridAndGuide(selectedKanjiModal.character, showModalGhostGuide);
+    modalStrokesRef.current = [];
+    currentModalStrokeRef.current = [];
+    drawModalGridAndGuide(selectedKanjiModal.character, showModalGhostGuide, false);
     setHasModalDrawn(false);
     setModalDrawResult(null);
   };
@@ -10097,6 +10138,7 @@ const renderInteractivePractice = () => {
                   ) : (
                     <KanjiPracticeTab
                       kanjiItems={kanjiItems}
+                      vocabItems={vocabItems}
                       selectedLessonId={selectedLessonId}
                       lessonTitle={lessonTitle}
                       onUpdateKanjiStatus={handleKanjiStatusChange}

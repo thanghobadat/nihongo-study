@@ -12,9 +12,67 @@ import {
   evaluateKanjiDrawingLocally
 } from '../../../utils/kanjiPracticeHelper';
 import { playAudioWithFallback } from '../../../utils/audioHelper';
+import { getKanjiForm } from '../../../utils/kanjiFormLookup';
+
+interface LinkedVocab {
+  hiragana: string;
+  meaning: string;
+  kanjiForm: string;
+}
+
+const getLinkedVocabForKanji = (
+  kanjiChar: string,
+  vocabList?: any[],
+  kanjiList: KanjiItemData[] = []
+): LinkedVocab[] => {
+  const results: LinkedVocab[] = [];
+  const seenHira = new Set<string>();
+
+  if (Array.isArray(vocabList)) {
+    for (const v of vocabList) {
+      if (!v || !v.hiragana) continue;
+      const kForm = getKanjiForm(v.hiragana, kanjiList);
+      if (kForm && kForm.includes(kanjiChar) && !seenHira.has(v.hiragana)) {
+        seenHira.add(v.hiragana);
+        results.push({
+          hiragana: v.hiragana,
+          meaning: v.vietnamese_meaning || '',
+          kanjiForm: kForm
+        });
+      }
+    }
+  }
+
+  // Fallback: check kanji compounds if vocabList doesn't have it
+  if (results.length === 0) {
+    const targetKanji = kanjiList.find(k => k.character === kanjiChar);
+    if (targetKanji && targetKanji.compounds) {
+      const parts = targetKanji.compounds.split(';');
+      for (const p of parts) {
+        const m = p.match(/([^\(\)\s:;]+)\s*\(([^)]+)\)\s*[:：]\s*(.+)/);
+        if (m) {
+          const kWord = m[1].trim();
+          const hWord = m[2].trim();
+          const mean = m[3].trim();
+          if (kWord.includes(kanjiChar) && !seenHira.has(hWord)) {
+            seenHira.add(hWord);
+            results.push({
+              hiragana: hWord,
+              meaning: mean,
+              kanjiForm: kWord
+            });
+          }
+        }
+      }
+    }
+  }
+
+  return results;
+};
 
 interface KanjiPracticeTabProps {
   kanjiItems: KanjiItemData[];
+  vocabItems?: any[];
   selectedLessonId: number;
   lessonTitle: string;
   onUpdateKanjiStatus?: (id: number, status: 'not_learned' | 'learning' | 'mastered') => void;
@@ -23,6 +81,7 @@ interface KanjiPracticeTabProps {
 
 export default function KanjiPracticeTab({
   kanjiItems,
+  vocabItems,
   selectedLessonId,
   lessonTitle,
   onUpdateKanjiStatus,
@@ -57,21 +116,24 @@ export default function KanjiPracticeTab({
   const [speedrunMaxStreak, setSpeedrunMaxStreak] = useState<number>(0);
   const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(10);
   const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
-  const [speedrunDirection, setSpeedrunDirection] = useState<'kanji-to-meaning' | 'meaning-to-kanji' | 'both'>('both');
+  const [speedrunDirection, setSpeedrunDirection] = useState<'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-vocab' | 'both'>('both');
   const [speedrunWrongList, setSpeedrunWrongList] = useState<KanjiItemData[]>([]);
 
   interface SpeedrunQ {
     subject: string;
     subText?: string;
+    promptText: string;
     correctKanji: KanjiItemData;
+    audioWord?: string;
     correctAnswerText: string;
     options: { text: string; isCorrect: boolean }[];
-    direction: 'kanji-to-meaning' | 'meaning-to-kanji';
+    direction: 'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab' | 'vocab-to-kanji';
   }
   const [currentSpeedrunQ, setCurrentSpeedrunQ] = useState<SpeedrunQ | null>(null);
 
   const speedrunTimerRef = useRef<any>(null);
   const speedrunScoreRef = useRef<number>(0);
+  const speedrunMaxTimeRef = useRef<number>(10);
 
   // Load Speedrun high score from localStorage
   useEffect(() => {
@@ -85,12 +147,10 @@ export default function KanjiPracticeTab({
     }
   }, [selectedLessonId]);
 
-  // Calculate dynamic max time based on streak
+  // Calculate dynamic max time based on streak (similar to vocab speedrun: 10% reduction every 3 streaks, min 2s)
   const getDynamicTimeForStreak = (streak: number): number => {
-    if (streak >= 12) return 5;
-    if (streak >= 8) return 6;
-    if (streak >= 4) return 8;
-    return 10;
+    const reductionCount = Math.floor(streak / 3);
+    return Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
   };
 
   // Generate next Speedrun Question
@@ -101,13 +161,21 @@ export default function KanjiPracticeTab({
     const target = eligibleKanji[Math.floor(Math.random() * eligibleKanji.length)];
 
     // Decide question direction
-    let dir: 'kanji-to-meaning' | 'meaning-to-kanji' = 'kanji-to-meaning';
+    let dir: 'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab' | 'vocab-to-kanji' = 'kanji-to-meaning';
     if (speedrunDirection === 'kanji-to-meaning') {
       dir = 'kanji-to-meaning';
     } else if (speedrunDirection === 'meaning-to-kanji') {
       dir = 'meaning-to-kanji';
+    } else if (speedrunDirection === 'kanji-vocab') {
+      dir = Math.random() > 0.5 ? 'kanji-to-vocab' : 'vocab-to-kanji';
     } else {
-      dir = Math.random() > 0.5 ? 'kanji-to-meaning' : 'meaning-to-kanji';
+      const allModes: ('kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab' | 'vocab-to-kanji')[] = [
+        'kanji-to-meaning',
+        'meaning-to-kanji',
+        'kanji-to-vocab',
+        'vocab-to-kanji'
+      ];
+      dir = allModes[Math.floor(Math.random() * allModes.length)];
     }
 
     // Pick 3 distractors
@@ -116,19 +184,91 @@ export default function KanjiPracticeTab({
     const shuffledPool = shuffleArray(combinedPool);
     const distractors = shuffledPool.slice(0, 3);
 
+    // 1. Dạng Kanji độc lập ➔ Từ vựng Hiragana (+ Nghĩa)
+    if (dir === 'kanji-to-vocab') {
+      const linked = getLinkedVocabForKanji(target.character, vocabItems, kanjiItems);
+      if (linked.length > 0) {
+        const chosen = linked[Math.floor(Math.random() * linked.length)];
+        const targetAns = `${chosen.hiragana}: ${chosen.meaning}`.trim();
+
+        // 3 distractor vocabs that do NOT use this Kanji
+        let wrongVocabs = (vocabItems || [])
+          .filter(v => v.hiragana && v.hiragana !== chosen.hiragana && !getKanjiForm(v.hiragana, kanjiItems).includes(target.character))
+          .map(v => ({ hiragana: v.hiragana, meaning: v.vietnamese_meaning || '' }));
+
+        if (wrongVocabs.length < 3) {
+          for (const k of COMMON_KANJI_DISTRACTORS) {
+            if (wrongVocabs.length >= 3) break;
+            wrongVocabs.push({ hiragana: k.kunyomi || k.character, meaning: k.vietnamese_meaning });
+          }
+        }
+        const shuffledWrong = shuffleArray(wrongVocabs).slice(0, 3);
+        const options = shuffleArray([
+          { text: targetAns, isCorrect: true },
+          ...shuffledWrong.map(w => ({
+            text: `${w.hiragana}: ${w.meaning}`.trim(),
+            isCorrect: false
+          }))
+        ]);
+
+        return {
+          subject: target.character, // Chữ Hán HOÀN TOÀN ĐỘC LẬP
+          subText: undefined,
+          promptText: 'Từ vựng nào trong bài sử dụng chữ Hán trên?',
+          correctKanji: target,
+          audioWord: chosen.hiragana,
+          correctAnswerText: targetAns,
+          options,
+          direction: 'kanji-to-vocab'
+        };
+      }
+      // If no linked vocab found, fall back to kanji-to-meaning
+      dir = 'kanji-to-meaning';
+    }
+
+    // 2. Dạng Từ vựng Hiragana ➔ Chọn Chữ Hán độc lập
+    if (dir === 'vocab-to-kanji') {
+      const linked = getLinkedVocabForKanji(target.character, vocabItems, kanjiItems);
+      if (linked.length > 0) {
+        const chosen = linked[Math.floor(Math.random() * linked.length)];
+        const targetAns = target.character;
+        const options = shuffleArray([
+          { text: targetAns, isCorrect: true },
+          ...distractors.map(d => ({
+            text: d.character, // Chữ Hán độc lập
+            isCorrect: false
+          }))
+        ]);
+
+        return {
+          subject: chosen.hiragana,
+          subText: chosen.meaning,
+          promptText: 'Chữ Hán nào xuất hiện trong từ vựng trên?',
+          correctKanji: target,
+          audioWord: chosen.hiragana,
+          correctAnswerText: targetAns,
+          options,
+          direction: 'vocab-to-kanji'
+        };
+      }
+      // If no linked vocab found, fall back to meaning-to-kanji
+      dir = 'meaning-to-kanji';
+    }
+
     if (dir === 'kanji-to-meaning') {
-      const targetAns = `${target.sino_vietnamese || ''}: ${target.vietnamese_meaning}`.trim();
+      const targetAns = `${target.sino_vietnamese ? target.sino_vietnamese + ': ' : ''}${target.vietnamese_meaning}`.trim();
       const options = shuffleArray([
         { text: targetAns, isCorrect: true },
         ...distractors.map(d => ({
-          text: `${d.sino_vietnamese || ''}: ${d.vietnamese_meaning}`.trim(),
+          text: `${d.sino_vietnamese ? d.sino_vietnamese + ': ' : ''}${d.vietnamese_meaning}`.trim(),
           isCorrect: false
         }))
       ]);
 
       return {
-        subject: target.character,
-        subText: target.stroke_count ? `${target.stroke_count} nét` : undefined,
+        subject: target.character, // Chữ Hán HOÀN TOÀN ĐỘC LẬP
+        subText: undefined,
+        promptText: 'Chọn Nghĩa đúng cho chữ Hán:',
         correctKanji: target,
         correctAnswerText: targetAns,
         options,
@@ -139,21 +279,22 @@ export default function KanjiPracticeTab({
       const options = shuffleArray([
         { text: targetAns, isCorrect: true },
         ...distractors.map(d => ({
-          text: d.character,
+          text: d.character, // Chữ Hán HOÀN TOÀN ĐỘC LẬP
           isCorrect: false
         }))
       ]);
 
       return {
         subject: target.vietnamese_meaning,
-        subText: target.sino_vietnamese ? `Âm Hán: ${target.sino_vietnamese}` : undefined,
+        subText: undefined, // Không mớm âm Hán
+        promptText: 'Chọn Chữ Hán đúng cho Nghĩa:',
         correctKanji: target,
         correctAnswerText: targetAns,
         options,
         direction: dir
       };
     }
-  }, [eligibleKanji, speedrunDirection]);
+  }, [eligibleKanji, speedrunDirection, vocabItems, kanjiItems]);
 
   // Start Speedrun Game
   const startSpeedrun = () => {
@@ -165,6 +306,7 @@ export default function KanjiPracticeTab({
     setSpeedrunMaxStreak(0);
     setSpeedrunWrongList([]);
     const initialTime = 10;
+    speedrunMaxTimeRef.current = initialTime;
     setSpeedrunMaxTime(initialTime);
     setSpeedrunTimeLeft(initialTime);
 
@@ -172,27 +314,30 @@ export default function KanjiPracticeTab({
     setCurrentSpeedrunQ(firstQ);
   };
 
-  // Speedrun Countdown Timer
+  // Speedrun Countdown Timer (High-precision Date.now() timer at 50ms interval, same as vocab)
   useEffect(() => {
-    if (!speedrunActive || speedrunGameOver) {
+    if (!speedrunActive || speedrunGameOver || !currentSpeedrunQ) {
       if (speedrunTimerRef.current) clearInterval(speedrunTimerRef.current);
       return;
     }
 
+    const maxTime = speedrunMaxTimeRef.current || 10;
+    const startTime = Date.now();
+
     speedrunTimerRef.current = setInterval(() => {
-      setSpeedrunTimeLeft(prev => {
-        if (prev <= 1) {
-          // Timeout -> Game Over
-          setSpeedrunActive(false);
-          setSpeedrunGameOver(true);
-          if (currentSpeedrunQ) {
-            setSpeedrunWrongList(list => [...list, currentSpeedrunQ.correctKanji]);
-          }
-          return 0;
+      const elapsed = (Date.now() - startTime) / 1000;
+      const remaining = Math.max(0, maxTime - elapsed);
+      setSpeedrunTimeLeft(remaining);
+
+      if (remaining <= 0) {
+        if (speedrunTimerRef.current) clearInterval(speedrunTimerRef.current);
+        setSpeedrunActive(false);
+        setSpeedrunGameOver(true);
+        if (currentSpeedrunQ) {
+          setSpeedrunWrongList(list => [...list, currentSpeedrunQ.correctKanji]);
         }
-        return prev - 1;
-      });
-    }, 1000);
+      }
+    }, 50);
 
     return () => {
       if (speedrunTimerRef.current) clearInterval(speedrunTimerRef.current);
@@ -203,9 +348,14 @@ export default function KanjiPracticeTab({
   const handleSpeedrunAnswer = (opt: { text: string; isCorrect: boolean }) => {
     if (!speedrunActive || !currentSpeedrunQ) return;
 
+    if (speedrunTimerRef.current) {
+      clearInterval(speedrunTimerRef.current);
+    }
+
     if (opt.isCorrect) {
-      // Audio cue
-      handlePlayAudio(currentSpeedrunQ.correctKanji.character, currentSpeedrunQ.correctKanji.kunyomi || currentSpeedrunQ.correctKanji.character);
+      // Audio cue (plays vocab audio if available, else kanji audio)
+      const audioToPlay = currentSpeedrunQ.audioWord || currentSpeedrunQ.correctKanji.character;
+      handlePlayAudio(audioToPlay, currentSpeedrunQ.audioWord || currentSpeedrunQ.correctKanji.kunyomi || currentSpeedrunQ.correctKanji.character);
 
       // Score calculation: 10 base + streak bonus
       const bonus = Math.min(speedrunStreak * 2, 20);
@@ -218,8 +368,9 @@ export default function KanjiPracticeTab({
       setSpeedrunStreak(nextStreak);
       setSpeedrunMaxStreak(m => Math.max(m, nextStreak));
 
-      // Dynamic time for next question
+      // Dynamic time for next question (vocab style reduction)
       const nextTime = getDynamicTimeForStreak(nextStreak);
+      speedrunMaxTimeRef.current = nextTime;
       setSpeedrunMaxTime(nextTime);
       setSpeedrunTimeLeft(nextTime);
 
@@ -260,6 +411,8 @@ export default function KanjiPracticeTab({
   const [isRiddleFinished, setIsRiddleFinished] = useState<boolean>(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const strokesRef = useRef<Array<Array<{ x: number; y: number }>>>([]);
+  const currentStrokeRef = useRef<Array<{ x: number; y: number }>>([]);
 
   // Fetch AI Riddles when entering tab or changing lesson/filter
   useEffect(() => {
@@ -325,8 +478,26 @@ export default function KanjiPracticeTab({
     return eligibleKanji.find(k => k.character === currentRiddle.target_character) || null;
   }, [currentRiddle, eligibleKanji]);
 
+  // Replay user's strokes on canvas
+  const renderStrokes = useCallback((ctx: CanvasRenderingContext2D) => {
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#2dd4bf'; // Teal-400
+    ctx.setLineDash([]);
+    for (const stroke of strokesRef.current) {
+      if (stroke.length === 0) continue;
+      ctx.beginPath();
+      ctx.moveTo(stroke[0].x, stroke[0].y);
+      for (let i = 1; i < stroke.length; i++) {
+        ctx.lineTo(stroke[i].x, stroke[i].y);
+      }
+      ctx.stroke();
+    }
+  }, []);
+
   // Tian Zi Ge Grid Painter
-  const drawGridAndGuide = useCallback((targetChar?: string, ghostVisible = false) => {
+  const drawGridAndGuide = useCallback((targetChar?: string, ghostVisible = false, preserveStrokes = false) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -382,20 +553,34 @@ export default function KanjiPracticeTab({
       ctx.textBaseline = 'middle';
       ctx.fillText(targetChar, w / 2, h / 2 + 5);
     }
-  }, []);
 
-  // Sync canvas on riddle change or ghost guide toggle
+    // Replay user's drawing if requested
+    if (preserveStrokes) {
+      renderStrokes(ctx);
+    }
+  }, [renderStrokes]);
+
+  // Reset strokes and initialize canvas on riddle change
   useEffect(() => {
     if (activeTab === 'ai_writing' && currentRiddle) {
+      strokesRef.current = [];
+      currentStrokeRef.current = [];
+      setHasDrawn(false);
       const t = setTimeout(() => {
-        drawGridAndGuide(currentRiddle.target_character, showGhostGuide);
-        setHasDrawn(false);
+        drawGridAndGuide(currentRiddle.target_character, showGhostGuide, false);
         const existing = riddleEvaluated[riddleIndex];
         setAiGradingResult(existing || null);
       }, 50);
       return () => clearTimeout(t);
     }
-  }, [activeTab, riddleIndex, currentRiddle, showGhostGuide, drawGridAndGuide, riddleEvaluated]);
+  }, [activeTab, riddleIndex, currentRiddle?.target_character, drawGridAndGuide]);
+
+  // Re-draw grid and guide when ghost guide is toggled while PRESERVING existing strokes
+  useEffect(() => {
+    if (activeTab === 'ai_writing' && currentRiddle) {
+      drawGridAndGuide(currentRiddle.target_character, showGhostGuide, true);
+    }
+  }, [showGhostGuide, drawGridAndGuide, activeTab, currentRiddle]);
 
   // Drawing event handlers
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -422,6 +607,7 @@ export default function KanjiPracticeTab({
       y = e.clientY - rect.top;
     }
 
+    currentStrokeRef.current = [{ x, y }];
     ctx.beginPath();
     ctx.moveTo(x, y);
     setIsDrawing(true);
@@ -447,17 +633,24 @@ export default function KanjiPracticeTab({
       y = e.clientY - rect.top;
     }
 
+    currentStrokeRef.current.push({ x, y });
     ctx.lineTo(x, y);
     ctx.stroke();
   };
 
   const stopDrawing = () => {
     setIsDrawing(false);
+    if (currentStrokeRef.current.length > 0) {
+      strokesRef.current.push([...currentStrokeRef.current]);
+      currentStrokeRef.current = [];
+    }
   };
 
   const clearCanvas = () => {
     if (!currentRiddle) return;
-    drawGridAndGuide(currentRiddle.target_character, showGhostGuide);
+    strokesRef.current = [];
+    currentStrokeRef.current = [];
+    drawGridAndGuide(currentRiddle.target_character, showGhostGuide, false);
     setHasDrawn(false);
     setAiGradingResult(null);
   };
@@ -614,21 +807,21 @@ export default function KanjiPracticeTab({
                   Thử Thách Phản Xạ Kanji Siêu Tốc
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
-                  Tương tự luyện phản xạ từ vựng: Thời gian sẽ <b>giảm dần khi streak tăng</b> (10s ➔ 8s ➔ 6s ➔ 5s).
-                  Trả lời sai hoặc hết giờ sẽ dừng lượt chơi ngay lập tức!
+                  Tương tự luyện phản xạ từ vựng: Thời gian sẽ <b>giảm dần khi streak tăng</b> (mỗi 3 câu đúng giảm 10%).
+                  Chữ Hán hiển thị độc lập, kích thích phản xạ gắn kết trực tiếp với từ vựng bài học!
                 </p>
               </div>
 
-              {/* Chuyển đổi 2 chiều VI & Kanji */}
+              {/* Chuyển đổi chiều phản xạ */}
               <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
                   Chiều câu hỏi phản xạ:
                 </span>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <button
                     type="button"
                     onClick={() => setSpeedrunDirection('kanji-to-meaning')}
-                    className={`py-2 px-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                       speedrunDirection === 'kanji-to-meaning'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
@@ -639,7 +832,7 @@ export default function KanjiPracticeTab({
                   <button
                     type="button"
                     onClick={() => setSpeedrunDirection('meaning-to-kanji')}
-                    className={`py-2 px-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                       speedrunDirection === 'meaning-to-kanji'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
@@ -649,14 +842,25 @@ export default function KanjiPracticeTab({
                   </button>
                   <button
                     type="button"
+                    onClick={() => setSpeedrunDirection('kanji-vocab')}
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                      speedrunDirection === 'kanji-vocab'
+                        ? 'bg-blue-600 text-white shadow-sm font-extrabold'
+                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    }`}
+                  >
+                    📖 Kanji ⟷ Từ vựng
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setSpeedrunDirection('both')}
-                    className={`py-2 px-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                       speedrunDirection === 'both'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
                     }`}
                   >
-                    🔄 Song song cả hai
+                    🔄 Toàn diện
                   </button>
                 </div>
               </div>
@@ -685,7 +889,7 @@ export default function KanjiPracticeTab({
               {/* Dynamic Countdown Bar */}
               <div className="bg-slate-200 dark:bg-slate-800 rounded-full h-3 overflow-hidden shadow-inner">
                 <div
-                  className={`h-full transition-all duration-300 rounded-full ${
+                  className={`h-full transition-all duration-75 rounded-full ${
                     speedrunTimeLeft > speedrunMaxTime * 0.5
                       ? 'bg-emerald-500'
                       : speedrunTimeLeft > speedrunMaxTime * 0.25
@@ -698,13 +902,10 @@ export default function KanjiPracticeTab({
 
               {/* Status Header */}
               <div className="flex items-center justify-between px-2 text-xs font-bold">
-                <span className="flex items-center gap-1.5 text-rose-500 font-extrabold text-sm">
+                <div className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500 font-extrabold text-xs uppercase tracking-wider">
                   <span>⏱️</span>
-                  <span>{speedrunTimeLeft}s</span>
-                  <span className="text-[10px] text-slate-400 font-normal">
-                    (Max: {speedrunMaxTime}s)
-                  </span>
-                </span>
+                  <span>Thời gian</span>
+                </div>
 
                 <div className="flex items-center gap-3">
                   <span className="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 font-black">
@@ -719,17 +920,19 @@ export default function KanjiPracticeTab({
               {/* Question Card */}
               <div className="p-8 text-center bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-lg space-y-3">
                 <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                  {currentSpeedrunQ.direction === 'kanji-to-meaning' ? 'Chọn Nghĩa đúng cho chữ Hán:' : 'Chọn Chữ Hán đúng cho Nghĩa:'}
+                  {currentSpeedrunQ.promptText || 'Chọn đáp án đúng:'}
                 </div>
 
                 <div className={`font-black font-['Noto_Sans_JP'] text-slate-900 dark:text-white ${
-                  currentSpeedrunQ.direction === 'kanji-to-meaning' ? 'text-7xl sm:text-8xl py-2' : 'text-2xl sm:text-3xl py-4'
+                  currentSpeedrunQ.direction === 'kanji-to-meaning' || currentSpeedrunQ.direction === 'kanji-to-vocab'
+                    ? 'text-7xl sm:text-8xl py-2'
+                    : 'text-3xl sm:text-4xl py-3'
                 }`}>
                   {currentSpeedrunQ.subject}
                 </div>
 
                 {currentSpeedrunQ.subText && (
-                  <div className="text-xs font-semibold text-blue-500">
+                  <div className="text-sm font-bold text-blue-500">
                     {currentSpeedrunQ.subText}
                   </div>
                 )}
@@ -737,20 +940,23 @@ export default function KanjiPracticeTab({
 
               {/* 4 Speedrun Options */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {currentSpeedrunQ.options.map((opt, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => handleSpeedrunAnswer(opt)}
-                    className={`p-4 rounded-2xl border-2 font-bold text-center transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-95 ${
-                      currentSpeedrunQ.direction === 'meaning-to-kanji'
-                        ? 'text-3xl font-black font-[\'Noto_Sans_JP\'] py-5'
-                        : 'text-sm'
-                    } bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-400 text-slate-800 dark:text-slate-100 hover:bg-amber-500/5`}
-                  >
-                    {opt.text}
-                  </button>
-                ))}
+                {currentSpeedrunQ.options.map((opt, idx) => {
+                  const isSingleKanji = opt.text.length <= 2 && /[\u4e00-\u9faf]/.test(opt.text);
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleSpeedrunAnswer(opt)}
+                      className={`p-4 rounded-2xl border-2 font-bold text-center transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-95 ${
+                        isSingleKanji
+                          ? 'text-3xl sm:text-4xl font-black font-[\'Noto_Sans_JP\'] py-5'
+                          : 'text-xs sm:text-sm py-4 px-4 text-left sm:text-center'
+                      } bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-400 text-slate-800 dark:text-slate-100 hover:bg-amber-500/5`}
+                    >
+                      {opt.text}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -767,7 +973,7 @@ export default function KanjiPracticeTab({
                   LƯỢT CHƠI KẾT THÚC!
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {speedrunTimeLeft === 0 ? 'Bạn đã hết thời gian phản xạ!' : 'Bạn đã chọn sai đáp án!'}
+                  {speedrunTimeLeft <= 0.05 ? 'Bạn đã hết thời gian phản xạ!' : 'Bạn đã chọn sai đáp án!'}
                 </p>
               </div>
 

@@ -104,7 +104,7 @@ async function getMasteredItemIds(userId) {
         .from('user_progress')
         .select('item_type, item_id, status')
         .eq('user_id', userId)
-        .in('status', ['mastered', 'learning']);
+        .eq('status', 'mastered');
 
       if (!error && Array.isArray(data)) {
         if (!mockDb.userProgress) mockDb.userProgress = {};
@@ -131,7 +131,7 @@ async function getMasteredItemIds(userId) {
   Object.keys(userProgress).forEach(k => {
     if (k.startsWith(`${userId}:`)) {
       const status = userProgress[k];
-      if (status === 'mastered' || status === 'learning') {
+      if (status === 'mastered') {
         const parts = k.split(':');
         const itemType = parts[1];
         const itemId = parseInt(parts[2], 10);
@@ -257,7 +257,7 @@ function getMasteredItemIdsSync(userId) {
   Object.keys(userProgress).forEach(k => {
     if (k.startsWith(`${userId}:`)) {
       const status = userProgress[k];
-      if (status === 'mastered' || status === 'learning') {
+      if (status === 'mastered') {
         const parts = k.split(':');
         const itemType = parts[1];
         const itemId = parseInt(parts[2], 10);
