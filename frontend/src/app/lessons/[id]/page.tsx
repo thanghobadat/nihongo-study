@@ -8,7 +8,7 @@ import { api } from '../../utils/api';
 
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/roadmapMapping';
 
-import { getKanjiForm } from '../../utils/kanjiFormLookup';
+import { getKanjiForm, hasLessonKanji } from '../../utils/kanjiFormLookup';
 import SidebarSettings from '../../components/SidebarSettings';
 import QuickLookupModal from '../../components/QuickLookupModal';
 
@@ -4475,18 +4475,28 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   }, [selectedLessonId, grammarItems, kanjiItems]);
 
+  // Base pool of vocabulary items depending on Kanji mode
+  const visibleVocabPool = useMemo(() => {
+    if (showKanjiInVocab) {
+      return vocabItems.filter(item => hasLessonKanji(item.hiragana, kanjiItems));
+    }
+    return vocabItems;
+  }, [vocabItems, showKanjiInVocab, kanjiItems]);
+
   // Filtered vocabulary items (phẳng theo bài học)
   const filteredVocabItems = useMemo(() => {
-    return vocabItems.filter((item) => {
+    return visibleVocabPool.filter((item) => {
+      const kanjiFormStr = showKanjiInVocab ? getKanjiForm(item.hiragana, kanjiItems) : '';
       const matchesSearch =
         item.hiragana.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.romaji.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.vietnamese_meaning.toLowerCase().includes(searchQuery.toLowerCase());
+        item.vietnamese_meaning.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (kanjiFormStr && kanjiFormStr.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesStatus = statusFilter === 'all' ? true : item.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
-  }, [vocabItems, searchQuery, statusFilter]);
+  }, [visibleVocabPool, searchQuery, statusFilter, showKanjiInVocab, kanjiItems]);
 
   // Filtered Kanji items (phẳng theo bài học)
   const filteredKanjiItems = useMemo(() => {
@@ -7659,7 +7669,7 @@ const renderInteractivePractice = () => {
 
                     {/* Kanji Mode Checkbox */}
 
-                    <label className="flex items-center space-x-2 text-xs font-bold text-slate-600 dark:text-slate-400 cursor-pointer select-none py-1.5 px-3 bg-slate-100/60 dark:bg-slate-900/40 rounded-xl border border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-200/40 dark:hover:bg-slate-800/60 transition-colors">
+                    <label className="flex items-center space-x-2 text-xs font-bold text-slate-600 dark:text-slate-400 cursor-pointer select-none py-1.5 px-3 bg-slate-100/60 dark:bg-slate-900/40 rounded-xl border border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-200/40 dark:hover:bg-slate-800/60 transition-colors" title="Chỉ hiển thị các từ vựng có chứa Chữ Hán của bài học này">
 
                       <input
 
@@ -7673,7 +7683,7 @@ const renderInteractivePractice = () => {
 
                       />
 
-                      <span>🇯🇵 Học bằng Kanji</span>
+                      <span>🇯🇵 Học bằng Kanji {showKanjiInVocab && `(${visibleVocabPool.length})`}</span>
 
                     </label>
 
@@ -7697,7 +7707,7 @@ const renderInteractivePractice = () => {
 
                       >
 
-                        Tất cả ({vocabTotalCount})
+                        Tất cả ({visibleVocabPool.length})
 
                       </button>
 
@@ -7717,7 +7727,7 @@ const renderInteractivePractice = () => {
 
                       >
 
-                        Chưa học ({vocabItems.filter(v => v.status === 'not_learned').length})
+                        Chưa học ({visibleVocabPool.filter(v => v.status === 'not_learned').length})
 
                       </button>
 
@@ -7737,7 +7747,7 @@ const renderInteractivePractice = () => {
 
                       >
 
-                        Đang học ({vocabItems.filter(v => v.status === 'learning').length})
+                        Đang học ({visibleVocabPool.filter(v => v.status === 'learning').length})
 
                       </button>
 
@@ -7757,7 +7767,7 @@ const renderInteractivePractice = () => {
 
                       >
 
-                        Đã thuộc ({vocabItems.filter(v => v.status === 'mastered').length})
+                        Đã thuộc ({visibleVocabPool.filter(v => v.status === 'mastered').length})
 
                       </button>
 
@@ -7771,9 +7781,20 @@ const renderInteractivePractice = () => {
 
                 {filteredVocabItems.length === 0 ? (
 
-                  <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20">
+                  <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-100/20 dark:bg-slate-900/20 px-4">
 
-                    📭 Không tìm thấy từ vựng nào phù hợp với điều kiện tìm kiếm.
+                    {showKanjiInVocab ? (
+                      <div>
+                        <p className="font-semibold text-slate-600 dark:text-slate-300 mb-1">
+                          📭 Không tìm thấy từ vựng nào chứa Chữ Hán của bài học này.
+                        </p>
+                        <p className="text-xs text-slate-400 dark:text-slate-500">
+                          (Thử đổi bộ lọc trạng thái hoặc bỏ chọn &quot;Học bằng Kanji&quot; để xem tất cả từ vựng)
+                        </p>
+                      </div>
+                    ) : (
+                      "📭 Không tìm thấy từ vựng nào phù hợp với điều kiện tìm kiếm."
+                    )}
 
                   </div>
 

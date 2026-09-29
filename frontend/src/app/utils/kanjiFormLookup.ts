@@ -1848,3 +1848,17 @@ export function getKanjiForm(hiragana: string, kanjiItems: any[] = []): string {
   // 3. Fallback to original Hiragana/Katakana form
   return hiragana;
 }
+
+/**
+ * Checks if a word has a valid Kanji form composed of the current lesson's Kanji characters.
+ * Returns true only if the word converts to a Kanji form and all its Kanji belong to this lesson.
+ */
+export function hasLessonKanji(hiragana: string, kanjiItems: any[] = []): boolean {
+  if (!hiragana || !Array.isArray(kanjiItems) || kanjiItems.length === 0) return false;
+  const kForm = getKanjiForm(hiragana, kanjiItems);
+  if (!kForm || kForm.trim() === hiragana.trim()) return false;
+
+  const lessonKanjiChars = new Set(kanjiItems.map((k: any) => k?.character).filter(Boolean));
+  const kanjiChars = kForm.match(/[\u4e00-\u9faf]/g);
+  return Boolean(kanjiChars && kanjiChars.length > 0 && kanjiChars.every(c => lessonKanjiChars.has(c)));
+}

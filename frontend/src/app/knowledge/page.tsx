@@ -283,6 +283,9 @@ export default function KnowledgeHubPage() {
     if (hideMastered) {
       list = list.filter(v => v.status !== 'mastered');
     }
+    if (showKanjiInVocab) {
+      list = list.filter(v => Boolean(v.kanji_form && v.kanji_form.trim() !== ''));
+    }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       list = list.filter(v => 
@@ -296,7 +299,7 @@ export default function KnowledgeHubPage() {
       if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
       return a.id - b.id;
     });
-  }, [vocabList, startLessonId, endLessonId, filterLesson, filterStatus, hideMastered, searchQuery]);
+  }, [vocabList, startLessonId, endLessonId, filterLesson, filterStatus, hideMastered, searchQuery, showKanjiInVocab]);
 
   const displayedKanji = useMemo(() => {
     let list = kanjiList.filter(k => k.lesson_id >= startLessonId && k.lesson_id <= endLessonId);
