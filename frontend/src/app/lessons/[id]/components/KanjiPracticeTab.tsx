@@ -690,7 +690,7 @@ export default function KanjiPracticeTab({
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto animate-fade-in pb-16">
+    <div className="space-y-6 max-w-5xl mx-auto animate-fade-in pb-16 overflow-x-hidden min-w-0 max-w-full">
       {/* 1. Header Toolbar */}
       <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-5 rounded-3xl shadow-sm backdrop-blur-md space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800/80 pb-4">
@@ -724,30 +724,33 @@ export default function KanjiPracticeTab({
         {/* 2 Trọng tâm: Mode Switcher & Status Filter */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           {/* Main 2 Tab Switcher */}
-          <div className="flex bg-slate-100 dark:bg-slate-950/80 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shrink-0 overflow-x-auto shadow-inner">
+          <div className="w-full sm:w-auto grid grid-cols-2 sm:flex bg-slate-100 dark:bg-slate-950/80 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-inner">
             <button
               onClick={() => {
                 setActiveTab('speedrun');
                 setSpeedrunActive(false);
                 setSpeedrunGameOver(false);
               }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 ${
                 activeTab === 'speedrun'
                   ? 'bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-md font-extrabold'
                   : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
-              <span>⚡ Luyện phản xạ</span>
+              <span>⚡</span>
+              <span>Luyện phản xạ</span>
             </button>
             <button
               onClick={() => setActiveTab('ai_writing')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 ${
                 activeTab === 'ai_writing'
                   ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-md font-extrabold'
                   : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
-              <span>✍️ Tập viết AI ra đề</span>
+              <span>✍️</span>
+              <span className="hidden sm:inline">Tập viết AI ra đề</span>
+              <span className="sm:hidden">Tập viết AI</span>
             </button>
           </div>
 

@@ -1506,5 +1506,21 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Xác thực Thực tế**:
   - Đã chạy kiểm thử thực tế `verify_ai_resilience.js`: Chấm điểm từ vựng nhạy cảm (Hút thuốc, Chết chóc), chiết tự bộ thủ nhạy cảm (Đao `刀`), và sinh trọn vẹn 15 câu đố Kanji Bài 2: Vượt qua 100% với model `gemini-2.5-flash`.
   - Cú pháp backend `node --check` đạt 100% (0 lỗi).
-  - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
-
+### Mốc 137: Thanh Lọc Triệt Để Khoá Học Marugoto, Thu Gọn Toàn Diện Toàn Bộ Ứng Dụng Chuyên Biệt Cho Minna No Nihongo (Bài 1 - 50) (Đã hoàn thành - 01/10/2026)
+- **Frontend Cleanup**:
+  - Dọn sạch hơn 5.000 dòng mã phế liệu liên quan đến Marugoto trong [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx):
+    - Xoá `MARUGOTO_TOPIC_KEYWORDS` và bộ sinh bài tập động `DYNAMIC MARUGOTO PRACTICE GENERATOR`.
+    - Xoá bỏ hoàn toàn các cờ `isMarugoto`, `isEvenMarugoto`.
+    - Xoá toàn bộ state, handler và generator phục vụ riêng cho Marugoto: `translationQuestions`, `transformQuestions`, `writingQuestions`, `particleQuestions`, `candoChecks`, `cultureData`, `summary*`, `handleCandoStatusChange`, `loadSummaryData`, `loadCandoData`, `loadCultureData`, v.v.
+    - Xoá bỏ các nhánh render điều kiện `isMarugoto ? ... : ...` ở tab Từ vựng, Ngữ pháp, Luyện tập; xoá các tab Can-do, Văn hoá, Tổng hợp kiến thức và component modal `GrammarDetailModal`.
+    - Thu gọn file `lessons/[id]/page.tsx` từ 12.113 dòng xuống còn ~5.500 dòng (giảm hơn 54% kích thước), giúp trang tải cực nhanh và hoàn toàn thanh thoát.
+  - Loại bỏ hoàn toàn các đoạn kiểm tra `activeCourse === 'marugoto'` trong [SidebarSettings.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/SidebarSettings.tsx), [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx), [roadmap/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/roadmap/page.tsx), [kana/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/kana/page.tsx).
+- **Backend Cleanup**:
+  - [mockDb.js](file:///d:/AI/japanese_learning/website/backend/src/db/mockDb.js): Xoá bỏ hoàn toàn 2 mảng `candoChecks` và `cultureTopics`.
+  - [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js): Xoá 2 endpoint `GET /lessons/:lessonId/cando` và `GET /lessons/:lessonId/culture`. Loại bỏ `'cando'` khỏi danh sách kiểm tra `item_type` hợp lệ. Cố định `/course-summary` phục vụ trực tiếp Minna no Nihongo.
+  - [seed_supabase.js](file:///d:/AI/japanese_learning/website/backend/src/db/seed_supabase.js) & [schema.sql](file:///d:/AI/japanese_learning/website/backend/src/db/schema.sql): Xoá các định nghĩa bảng `cando_checks`, `culture_topics` và mã seeding liên quan; cố định `course: 'minna'`.
+  - `scratch/`: Xoá sạch các tệp script cào/sinh/inject Marugoto cũ (`*marugoto*`, `*cando*`, `*culture*`).
+- **Bảo toàn và Kiểm định**:
+  - Biên dịch Frontend: `npx tsc --noEmit` đạt 100% (0 lỗi TypeScript).
+  - Cú pháp Backend: `node -c` trên toàn bộ tệp index, routes, mockDb, seed đạt 100% (0 lỗi).
+  - Toàn bộ nền tảng vận hành duy nhất, chuẩn chỉ và tối ưu cho giáo trình **Minna no Nihongo (Bài 1 - 50)**.

@@ -1,3 +1,6 @@
+// Force server default timezone to Vietnam (Asia/Ho_Chi_Minh - GMT+7)
+process.env.TZ = 'Asia/Ho_Chi_Minh';
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');

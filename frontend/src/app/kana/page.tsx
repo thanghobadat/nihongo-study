@@ -289,12 +289,6 @@ export default function AlphabetReviewPage() {
     const currentUser = api.getUser();
     setUser(currentUser);
     
-    if (typeof window !== 'undefined') {
-      if (localStorage.getItem('activeCourse') === 'marugoto') {
-        localStorage.setItem('activeCourse', 'minna');
-      }
-    }
-    
     const storedLessonId = localStorage.getItem('selectedLessonId');
     if (storedLessonId) {
       const parsed = parseInt(storedLessonId);

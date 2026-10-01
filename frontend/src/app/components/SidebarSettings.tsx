@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { useTheme } from './ThemeProvider';
 import QuickLookupModal from './QuickLookupModal';
+import DailyReportModal from './DailyReportModal';
+import { formatStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
 
 // SVG Helper to generate consistent animal avatars matching index.js
 function getAvatarSvg(userId: string) {
@@ -34,12 +36,29 @@ export default function SidebarSettings() {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
   const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'radicals'>('radicals');
+  const [isDailyReportOpen, setIsDailyReportOpen] = useState(false);
+  const [overviewData, setOverviewData] = useState<any>(null);
+  const [studyTimeSeconds, setStudyTimeSeconds] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const today = getVietnamDateString();
+      return parseInt(localStorage.getItem(`study_time_${today}`) || '0', 10);
+    }
+    return 0;
+  });
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     // Fetch user info on client side
     setUser(api.getUser());
+
+    const handleSync = (e: any) => {
+      if (e.detail && e.detail.seconds !== undefined) {
+        setStudyTimeSeconds(e.detail.seconds);
+      }
+    };
+    window.addEventListener('study-time-sync', handleSync);
+    return () => window.removeEventListener('study-time-sync', handleSync);
   }, []);
 
   // Close popover when clicking outside
@@ -62,16 +81,18 @@ export default function SidebarSettings() {
     router.replace('/login');
   };
 
+  const handleOpenDailyReport = async () => {
+    try {
+      const res: any = await api.get('/api/user/study-overview');
+      if (res && res.success) {
+        setOverviewData(res);
+      }
+    } catch {}
+    setIsDailyReportOpen(true);
+  };
+
   const handleNavigate = (path: string) => {
     setIsOpen(false);
-    if (path === '/knowledge') {
-      const activeCourse = localStorage.getItem('activeCourse');
-      if (activeCourse === 'marugoto') {
-        const storedLesson = localStorage.getItem('selectedLessonId') || '101';
-        router.push(`/lessons/${storedLesson}?tab=summary`);
-        return;
-      }
-    }
     router.push(path);
   };
 
@@ -91,6 +112,12 @@ export default function SidebarSettings() {
                 {user?.user_metadata?.display_name || user?.email?.split('@')[0] || 'Học viên'}
               </p>
               <p className="text-xs text-slate-400 dark:text-slate-500 truncate">{user?.email}</p>
+              <div className="flex items-center gap-1.5 mt-1 text-[11px] font-bold text-indigo-600 dark:text-indigo-400">
+                <span>⏱️ Đã học hôm nay:</span>
+                <span className="bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded border border-indigo-200/50 dark:border-indigo-800/40">
+                  {formatStudyTime(studyTimeSeconds)}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -98,6 +125,23 @@ export default function SidebarSettings() {
 
           {/* Navigation Shortcuts */}
           <div className="space-y-1.5">
+            {/* Daily Report Button */}
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                handleOpenDailyReport();
+              }}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 hover:bg-indigo-100/80 dark:bg-indigo-950/50 dark:hover:bg-indigo-900/60 transition-all cursor-pointer border border-indigo-200/60 dark:border-indigo-800/50 shadow-xs"
+            >
+              <div className="flex items-center space-x-2.5">
+                <span className="text-sm">📊</span>
+                <span>Báo cáo ngày hôm nay</span>
+              </div>
+              <span className="text-[10px] px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 font-bold">
+                {formatStudyTime(studyTimeSeconds)}
+              </span>
+            </button>
+
             <button
               onClick={() => {
                 setIsOpen(false);
@@ -189,6 +233,31 @@ export default function SidebarSettings() {
         isOpen={isQuickLookupOpen}
         onClose={() => setIsQuickLookupOpen(false)}
         initialTab={quickLookupTab}
+      />
+
+      {/* Daily Report Modal (accessible from any page via Settings) */}
+      <DailyReportModal
+        isOpen={isDailyReportOpen}
+        onClose={() => setIsDailyReportOpen(false)}
+        userName={user?.display_name || user?.user_metadata?.display_name || 'Học viên'}
+        lessonTitle={overviewData?.current_position?.title || 'Minna no Nihongo'}
+        lessonId={overviewData?.current_position?.lesson || 1}
+        vocabTotal={overviewData?.overview?.totalVocab || 1500}
+        vocabMastered={overviewData?.overview?.masteredVocab || 0}
+        kanjiTotal={overviewData?.overview?.totalKanji || 255}
+        kanjiMastered={overviewData?.overview?.masteredKanji || 0}
+        grammarTotal={overviewData?.overview?.totalGrammar || 204}
+        grammarMastered={overviewData?.overview?.masteredGrammar || 0}
+        startDateStr={overviewData?.planMetadata?.startDate || ''}
+        endDateStr={overviewData?.planMetadata?.endDate || ''}
+        totalDays={overviewData?.pace?.totalDays || 30}
+        daysElapsed={overviewData?.pace?.daysElapsed || 1}
+        daysRemaining={overviewData?.pace?.daysRemaining || 29}
+        targetVocabToday={10}
+        vocabBehind={0}
+        calculatedVocabTargetPerDay={5}
+        studyTimeSeconds={studyTimeSeconds}
+        onContinueStudy={() => setIsDailyReportOpen(false)}
       />
     </div>
   );

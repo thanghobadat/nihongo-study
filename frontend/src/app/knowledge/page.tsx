@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
+import StudyTimeBadge from '../components/StudyTimeBadge';
 import ReviewTab from '../lessons/[id]/ReviewTab';
 import { playAudioWithFallback, speakTTS } from '../utils/audioHelper';
 import { getRadicalsString, getRadicalsForCharacter } from '../utils/kanjiRadicals';
@@ -1886,6 +1887,8 @@ export default function KnowledgeHubPage() {
           </div>
 
           <div className="flex items-center space-x-3 self-start sm:self-auto flex-wrap gap-2">
+            <StudyTimeBadge />
+
             {/* Level Switcher N5/N4 */}
             <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
               <button

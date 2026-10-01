@@ -1,6 +1,5 @@
-'use client';
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { formatStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
 
 interface DailyReportModalProps {
   isOpen: boolean;
@@ -23,6 +22,8 @@ interface DailyReportModalProps {
   vocabBehind: number;
   calculatedVocabTargetPerDay: number;
   onContinueStudy: () => void;
+  studyTimeFormatted?: string;
+  studyTimeSeconds?: number;
 }
 
 export default function DailyReportModal({
@@ -46,8 +47,39 @@ export default function DailyReportModal({
   vocabBehind,
   calculatedVocabTargetPerDay,
   onContinueStudy,
+  studyTimeFormatted,
+  studyTimeSeconds,
 }: DailyReportModalProps) {
   if (!isOpen) return null;
+
+  const [internalStudyTime, setInternalStudyTime] = useState<string>(() => {
+    if (studyTimeFormatted) return studyTimeFormatted;
+    if (studyTimeSeconds !== undefined) return formatStudyTime(studyTimeSeconds);
+    if (typeof window !== 'undefined') {
+      const today = getVietnamDateString();
+      const sec = parseInt(localStorage.getItem(`study_time_${today}`) || '0', 10);
+      return formatStudyTime(sec);
+    }
+    return '0 phút';
+  });
+
+  useEffect(() => {
+    if (studyTimeFormatted) {
+      setInternalStudyTime(studyTimeFormatted);
+      return;
+    }
+    if (studyTimeSeconds !== undefined) {
+      setInternalStudyTime(formatStudyTime(studyTimeSeconds));
+      return;
+    }
+    const handleSync = (e: any) => {
+      if (e.detail && e.detail.seconds !== undefined) {
+        setInternalStudyTime(formatStudyTime(e.detail.seconds));
+      }
+    };
+    window.addEventListener('study-time-sync', handleSync);
+    return () => window.removeEventListener('study-time-sync', handleSync);
+  }, [studyTimeFormatted, studyTimeSeconds]);
 
   // Format dates for display
   const formatDateStr = (dStr: string) => {
@@ -94,7 +126,7 @@ export default function DailyReportModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           title="Đóng"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,6 +147,27 @@ export default function DailyReportModal({
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Xin chào <span className="font-semibold text-indigo-600 dark:text-indigo-400">{userName || 'Học viên'}</span>! 🖐️ Chúc bạn một ngày học tập hiệu quả.
           </p>
+        </div>
+
+        {/* Actual Study Time Banner */}
+        <div className="mb-5 p-3.5 rounded-2xl bg-gradient-to-r from-indigo-50/90 via-purple-50/80 to-pink-50/80 dark:from-indigo-950/50 dark:via-purple-950/40 dark:to-pink-950/30 border border-indigo-200/70 dark:border-indigo-800/60 flex items-center justify-between shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl p-2 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-indigo-100 dark:border-indigo-900/50">⏱️</span>
+            <div>
+              <div className="text-xs text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-1.5">
+                <span>Thời gian học thực tế hôm nay</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Đo thực tế" />
+              </div>
+              <div className="text-lg font-black text-slate-800 dark:text-slate-100 tracking-tight">
+                {internalStudyTime}
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            <span className="inline-block px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+              Đo tích cực 🟢
+            </span>
+          </div>
         </div>
 
         {/* Current Active Lesson Pill */}

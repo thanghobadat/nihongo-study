@@ -174,36 +174,6 @@ CREATE POLICY "Admin write access kaiwa_dialog" ON public.kaiwa_dialog FOR ALL U
   (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
 );
 
--- 8. Create Can-do Checks Table
-CREATE TABLE public.cando_checks (
-  id SERIAL PRIMARY KEY,
-  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
-  text TEXT NOT NULL,
-  text_vi TEXT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-ALTER TABLE public.cando_checks ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow public read of cando_checks" ON public.cando_checks FOR SELECT USING (true);
-CREATE POLICY "Admin write access cando_checks" ON public.cando_checks FOR ALL USING (
-  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
-);
-
--- 9. Create Culture Topics Table
-CREATE TABLE public.culture_topics (
-  id SERIAL PRIMARY KEY,
-  lesson_id INTEGER REFERENCES public.lessons(id) ON DELETE CASCADE,
-  title TEXT NOT NULL,
-  content TEXT NOT NULL,
-  image_url TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-ALTER TABLE public.culture_topics ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow public read of culture_topics" ON public.culture_topics FOR SELECT USING (true);
-CREATE POLICY "Admin write access culture_topics" ON public.culture_topics FOR ALL USING (
-  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
-);
 
 
 -- 10. Create User Custom Vocabulary Table
@@ -288,7 +258,7 @@ CREATE POLICY "Allow user full access to own knowledge items" ON public.user_kno
 CREATE TABLE public.user_exam_results (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
-  course TEXT NOT NULL, -- 'minna' or 'marugoto'
+  course TEXT NOT NULL DEFAULT 'minna', -- 'minna'
   range_start INTEGER NOT NULL,
   range_end INTEGER NOT NULL,
   score INTEGER NOT NULL,
@@ -371,4 +341,19 @@ CREATE TABLE IF NOT EXISTS public.user_study_plans (
 
 ALTER TABLE public.user_study_plans ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public all access user_study_plans" ON public.user_study_plans FOR ALL USING (true) WITH CHECK (true);
+
+
+-- 20. Create User Study Time Table (Daily Active Study Time for Multi-Device)
+CREATE TABLE IF NOT EXISTS public.user_study_time (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id TEXT NOT NULL,
+  date DATE NOT NULL,
+  total_seconds INTEGER NOT NULL DEFAULT 0,
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, date)
+);
+
+ALTER TABLE public.user_study_time ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public all access user_study_time" ON public.user_study_time FOR ALL USING (true) WITH CHECK (true);
+
 

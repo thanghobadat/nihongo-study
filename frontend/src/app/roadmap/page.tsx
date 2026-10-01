@@ -105,12 +105,9 @@ export default function RoadmapPage() {
     }
   };
 
-  // Load selectedLessonId from localStorage on mount and reset activeCourse if marugoto
+  // Load selectedLessonId from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (localStorage.getItem('activeCourse') === 'marugoto') {
-        localStorage.setItem('activeCourse', 'minna');
-      }
 
       const stored = localStorage.getItem('selectedLessonId');
       if (stored) {

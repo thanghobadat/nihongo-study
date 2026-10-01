@@ -11,6 +11,7 @@ import {
   N4_RADICALS_SET
 } from '../utils/kanjiRadicals';
 import { api } from '../utils/api';
+import StudyTimeBadge from '../components/StudyTimeBadge';
 
 export type RadicalStatus = 'not_learned' | 'learning' | 'mastered';
 export type RadicalLevel = 'n5' | 'n4' | 'n5_n4' | 'all';
@@ -1048,7 +1049,7 @@ export default function RadicalsPage() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0f24] to-[#040714] text-slate-800 dark:text-slate-100 p-4 sm:p-6 lg:p-8 font-sans">
+    <div className="min-h-screen overflow-x-hidden min-w-0 max-w-full bg-gradient-to-b from-[#0a0f24] to-[#040714] text-slate-800 dark:text-slate-100 p-3.5 sm:p-6 lg:p-8 font-sans">
       
       {/* Header section */}
       <header className="max-w-7xl mx-auto mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
@@ -1070,28 +1071,36 @@ export default function RadicalsPage() {
           </div>
         </div>
 
-        {/* Tab switcher */}
-        <div className="flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 self-start md:self-center">
-          <button
-            onClick={() => setActiveTab('browse')}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-              activeTab === 'browse'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-slate-900 dark:text-white shadow-md'
-                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
-            }`}
-          >
-            📚 Học & Tra cứu theo cấp độ
-          </button>
-          <button
-            onClick={() => setActiveTab('quiz')}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
-              activeTab === 'quiz'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-slate-900 dark:text-white shadow-md'
-                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
-            }`}
-          >
-            ⚡ Ôn tập & Kiểm tra
-          </button>
+        <div className="flex flex-wrap items-center gap-2.5 self-start md:self-center">
+          <StudyTimeBadge />
+
+          {/* Tab switcher */}
+          <div className="w-full sm:w-auto grid grid-cols-2 sm:flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+            <button
+              onClick={() => setActiveTab('browse')}
+              className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 ${
+                activeTab === 'browse'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-slate-900 dark:text-white shadow-md'
+                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+              }`}
+            >
+              <span>📚</span>
+              <span className="hidden sm:inline">Học & Tra cứu theo cấp độ</span>
+              <span className="sm:hidden">Học & Tra cứu</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('quiz')}
+              className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 ${
+                activeTab === 'quiz'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-slate-900 dark:text-white shadow-md'
+                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+              }`}
+            >
+              <span>⚡</span>
+              <span className="hidden sm:inline">Ôn tập & Kiểm tra</span>
+              <span className="sm:hidden">Ôn tập</span>
+            </button>
+          </div>
         </div>
       </header>
 

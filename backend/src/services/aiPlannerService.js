@@ -24,14 +24,13 @@ function normalizeDateStr(str) {
   return s;
 }
 
+const { getVietnamDateStr, getYesterdayVietnamDateStr } = require('../utils/vietnamTime');
+
 /**
- * Format a Date to YYYY-MM-DD
+ * Format a Date to YYYY-MM-DD in Vietnam Timezone
  */
 function formatDate(d) {
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  return getVietnamDateStr(d);
 }
 
 /**
@@ -700,10 +699,7 @@ function getUnfinishedDebt({ userId, plan }) {
     return { hasDebt: false, debtItems: [], yesterdayDate: null };
   }
 
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayStr = formatDate(yesterday);
+  const yesterdayStr = getYesterdayVietnamDateStr();
 
   const yesterdayDay = plan.days.find(d => d.date === yesterdayStr);
   if (!yesterdayDay || !yesterdayDay.tasks || yesterdayDay.tasks.length === 0) {
@@ -844,7 +840,7 @@ function getCompletedLessons({ userId, currentPlan, currentProgress, masteredIte
 
   // 3. From currentPlan: Check past days where all scheduled tasks of a lesson were marked completed
   if (currentPlan && Array.isArray(currentPlan.days)) {
-    const todayStr = formatDate(new Date());
+    const todayStr = getVietnamDateStr();
     const pastDays = currentPlan.days.filter(d => d.date < todayStr);
 
     const lessonTaskStats = {};
@@ -881,7 +877,7 @@ function getCompletedLessons({ userId, currentPlan, currentProgress, masteredIte
  * 4. Paces remaining lessons dynamically over remaining days.
  */
 async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, currentProgress, userId }) {
-  const todayStr = formatDate(new Date());
+  const todayStr = getVietnamDateStr();
   const targetEndDate = normalizeDateStr(endDate) || (currentPlan && normalizeDateStr(currentPlan.endDate));
 
   // 1. Determine completed lessons
@@ -968,9 +964,9 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
  * Calculate Pace Deviation (Ahead / Behind / On Track)
  */
 function calculatePaceDeviation({ startDate, endDate, totalLessons = 50, completedLessons = 0, currentProgress = {} }) {
-  const startD = new Date(startDate);
-  const endD = new Date(endDate);
-  const today = new Date();
+  const startD = new Date(normalizeDateStr(startDate));
+  const endD = new Date(normalizeDateStr(endDate));
+  const today = new Date(getVietnamDateStr());
   
   const totalDays = Math.max(1, Math.round((endD.getTime() - startD.getTime()) / (1000 * 60 * 60 * 24)) + 1);
   const daysElapsed = Math.max(0, Math.min(totalDays, Math.round((today.getTime() - startD.getTime()) / (1000 * 60 * 60 * 24))));

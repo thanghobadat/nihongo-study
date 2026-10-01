@@ -74,27 +74,17 @@ async function syncPlansFromSupabase() {
   }
 }
 
+const { getVietnamDateStr, getVietnamTimeParts, addVietnamDays } = require('../utils/vietnamTime');
+
 /**
  * Lấy chính xác thời gian và ngày theo Múi giờ Việt Nam (Asia/Ho_Chi_Minh - GMT+7)
  * Đảm bảo 100% không bị lệch 7 tiếng khi server chạy trên cloud (Render UTC)
  */
 function getVietnamTime() {
-  const formatter = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Ho_Chi_Minh',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  });
-  const parts = formatter.formatToParts(new Date());
-  const map = {};
-  parts.forEach(p => { map[p.type] = p.value; });
-  const todayStr = `${map.year}-${map.month}-${map.day}`;
-  const curHours = parseInt(map.hour, 10);
-  const curMins = parseInt(map.minute, 10);
+  const parts = getVietnamTimeParts();
+  const todayStr = `${parts.year}-${parts.month}-${parts.day}`;
+  const curHours = parseInt(parts.hour, 10);
+  const curMins = parseInt(parts.minute, 10);
   const nowTotalMins = curHours * 60 + curMins;
   return { todayStr, curHours, curMins, nowTotalMins };
 }
@@ -120,7 +110,7 @@ async function checkAndSendNotifications() {
   const { todayStr, curHours, curMins, nowTotalMins } = getVietnamTime();
 
   // Clean up log entries older than 3 days
-  const cutoffDate = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const cutoffDate = addVietnamDays(todayStr, -3);
   let logChanged = false;
   for (const k of Object.keys(sentLog)) {
     const parts = k.split(':');

@@ -38192,41 +38192,6 @@ module.exports = {
       "updated_at": "2026-08-04T03:01:27.278Z"
     }
   },
-  "candoChecks": [
-    {
-      "id": 1,
-      "lesson_id": 101,
-      "text": "Exchange greetings when meeting for the first time.",
-      "text_vi": "Chào hỏi cơ bản khi gặp gỡ lần đầu tiên."
-    },
-    {
-      "id": 2,
-      "lesson_id": 101,
-      "text": "Recognize Japanese characters (Hiragana/Katakana).",
-      "text_vi": "Nhận biết được mặt chữ cái Hiragana/Katakana."
-    },
-    {
-      "id": 3,
-      "lesson_id": 102,
-      "text": "Use basic classroom expressions to ask teacher to repeat.",
-      "text_vi": "Sử dụng các câu lớp học cơ bản để nhờ giáo viên nhắc lại."
-    },
-    {
-      "id": 4,
-      "lesson_id": 102,
-      "text": "Say and write your name and country in Japanese.",
-      "text_vi": "Nói và viết tên, quốc tịch của mình bằng tiếng Nhật."
-    }
-  ],
-  "cultureTopics": [
-    {
-      "id": 1,
-      "lesson_id": 102,
-      "title": "Hậu tố xưng hô & Nghi thức chào hỏi cúi đầu (Bow)",
-      "content": "Người Nhật xưng hô lịch sự bằng cách thêm '-san' sau họ/tên. Trong môi trường trang trọng dùng '-sama', thân mật dùng '-chan' (cho bạn nữ/bé gái) hoặc '-kun' (cho bạn nam/bé trai). Khi cúi đầu chào (ojigi), góc nghiêng thể hiện độ tôn trọng (15 độ cho chào hỏi thường, 30 độ cho chào đối tác lịch sự).",
-      "image_url": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600"
-    }
-  ],
   "lessonReviews": [
     {
       "lesson_id": 1,

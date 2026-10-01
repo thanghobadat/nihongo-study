@@ -8,6 +8,7 @@ const mockDb = require('../db/mockDb');
 const pushNotificationService = require('../services/pushNotificationService');
 const aiPlannerService = require('../services/aiPlannerService');
 const progressService = require('../services/progressService');
+const studyTimeService = require('../services/studyTimeService');
 
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
@@ -83,11 +84,10 @@ async function syncUserProgressFromSupabase(userId) {
   return progressService.syncUserProgressFromSupabase(userId);
 }
 
+const { getVietnamDateStr, getVietnamTimeStr, addVietnamDays, getYesterdayVietnamDateStr } = require('../utils/vietnamTime');
+
 function getLocalDateStr(d = new Date()) {
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  return getVietnamDateStr(d);
 }
 
 // Apply auth middleware to all user routes
@@ -734,8 +734,8 @@ router.post('/progress', async (req, res) => {
       return res.status(400).json({ error: 'item_type, item_id, and status are required' });
     }
 
-    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'cando', 'radical'].includes(item_type)) {
-      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana, katakana, cando or radical' });
+    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'radical'].includes(item_type)) {
+      return res.status(400).json({ error: 'item_type must be either vocabulary, kanji, grammar, hiragana, katakana, or radical' });
     }
 
     if (!['not_learned', 'learning', 'mastered', 'wrong'].includes(status)) {
@@ -854,7 +854,7 @@ router.post('/progress/batch', async (req, res) => {
       return res.status(400).json({ error: 'item_type, item_ids (non-empty array), and status are required' });
     }
 
-    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'cando', 'radical'].includes(item_type)) {
+    if (!['vocabulary', 'kanji', 'grammar', 'hiragana', 'katakana', 'radical'].includes(item_type)) {
       return res.status(400).json({ error: 'invalid item_type' });
     }
 
@@ -911,106 +911,6 @@ router.post('/progress/clear-wrong', async (req, res) => {
   } catch (error) {
     console.error('Error clearing wrong items:', error);
     res.status(500).json({ error: error.message || error });
-  }
-});
-
-/**
- * GET /api/lessons/:lessonId/cando
- * Fetch Can-do checklists for a lesson, joined with user progress status
- */
-router.get('/lessons/:lessonId/cando', async (req, res) => {
-  try {
-    const lessonId = parseInt(req.params.lessonId);
-    const userId = req.user.id;
-
-    // Return mock data for local testing
-    if (req.user.isMock) {
-      const list = (mockDb.candoChecks || [])
-        .filter(item => item.lesson_id === lessonId)
-        .map(item => {
-          const status = mockDb.userProgress[`${userId}:cando:${item.id}`] || 'not_learned';
-          return {
-            ...item,
-            status
-          };
-        });
-      return res.json(list);
-    }
-
-    // Fetch from Supabase
-    const { data: candoList, error: cError } = await supabase
-      .from('cando_checks')
-      .select('*')
-      .eq('lesson_id', lessonId);
-
-    if (cError) {
-      // Fallback to mockDb
-      console.warn('cando_checks table read error, falling back to mockDb:', cError.message);
-      const fallbackList = (mockDb.candoChecks || [])
-        .filter(item => item.lesson_id === lessonId)
-        .map(item => {
-          const status = mockDb.userProgress[`${userId}:cando:${item.id}`] || 'not_learned';
-          return {
-            ...item,
-            status
-          };
-        });
-      return res.json(fallbackList);
-    }
-
-    const { data: userProgress, error: pError } = await supabase
-      .from('user_progress')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('item_type', 'cando');
-
-    if (pError) throw pError;
-
-    const mergedList = candoList.map(item => {
-      const progress = userProgress.find(p => p.item_id === item.id);
-      return {
-        ...item,
-        status: progress ? progress.status : 'not_learned'
-      };
-    });
-
-    res.json(mergedList);
-  } catch (error) {
-    console.error('Error fetching cando checklist:', error);
-    res.status(500).json({ error: error.message || error, details: error });
-  }
-});
-
-/**
- * GET /api/lessons/:lessonId/culture
- * Fetch Culture content for a lesson
- */
-router.get('/lessons/:lessonId/culture', async (req, res) => {
-  try {
-    const lessonId = parseInt(req.params.lessonId);
-
-    // Return mock data for local testing
-    if (req.user.isMock) {
-      const cultureData = (mockDb.cultureTopics || []).filter(item => item.lesson_id === lessonId);
-      return res.json(cultureData);
-    }
-
-    const { data, error } = await supabase
-      .from('culture_topics')
-      .select('*')
-      .eq('lesson_id', lessonId);
-
-    if (error) {
-      // Fallback to mockDb
-      console.warn('culture_topics table read error, falling back to mockDb:', error.message);
-      const fallbackData = (mockDb.cultureTopics || []).filter(item => item.lesson_id === lessonId);
-      return res.json(fallbackData);
-    }
-
-    res.json(data);
-  } catch (error) {
-    console.error('Error fetching culture content:', error);
-    res.status(500).json({ error: error.message || error, details: error });
   }
 });
 
@@ -2455,13 +2355,7 @@ async function checkAndNotifyNewlyCompletedTasks(userId) {
     if (!plan || !Array.isArray(plan.days)) return;
 
     // Lấy ngày hôm nay theo múi giờ Việt Nam
-    const formatter = new Intl.DateTimeFormat('en-CA', {
-      timeZone: 'Asia/Ho_Chi_Minh',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
-    const todayStr = formatter.format(new Date());
+    const todayStr = getVietnamDateStr();
 
     const todayDay = plan.days.find(d => d.date === todayStr);
     if (!todayDay || !Array.isArray(todayDay.tasks)) return;
@@ -2623,13 +2517,11 @@ router.get('/study-plan', async (req, res) => {
 
     // Only generate a default initial plan if user has NO plan at all (first-time visitor)
     if (!plan || !plan.days || plan.days.length === 0) {
-      const today = new Date();
-      const defaultEnd = new Date(today);
-      defaultEnd.setDate(today.getDate() + 30);
-      const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      const startDate = getVietnamDateStr();
+      const defaultEnd = addVietnamDays(startDate, 30);
       plan = aiPlannerService.generateAlgorithmicPlan({
-        startDate: fmt(today),
-        endDate: fmt(defaultEnd),
+        startDate: startDate,
+        endDate: defaultEnd,
         targetLevel: 'All',
         currentLesson: 1
       });
@@ -2713,7 +2605,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
             if (completed !== undefined) {
               task.completed = completed;
               if (completed) {
-                task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                task.completed_at = getVietnamTimeStr();
                 task.currentCount = task.targetCount || 1;
                 task.progressPct = 100;
 
@@ -2770,7 +2662,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
             if (completed !== undefined) {
               task.completed = completed;
               if (completed) {
-                task.completed_at = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                task.completed_at = getVietnamTimeStr();
                 task.currentCount = task.targetCount || 1;
                 task.progressPct = 100;
               } else {
@@ -3124,6 +3016,8 @@ router.get('/study-overview', async (req, res) => {
       }
     ];
 
+    const todayStudyTime = studyTimeService.getStudyTime(userId, getLocalDateStr());
+
     return res.json({
       success: true,
       overview: {
@@ -3138,6 +3032,10 @@ router.get('/study-overview', async (req, res) => {
         grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
         totalLessons: 50,
         currentLesson
+      },
+      todayStudyTime: {
+        seconds: todayStudyTime.totalSeconds,
+        formatted: todayStudyTime.formatted
       },
       current_position: {
         lesson: currentLesson,
@@ -3189,6 +3087,7 @@ router.get('/daily-history', async (req, res) => {
     plan = applyAutoTracking(plan, userId);
 
     const todayStr = getLocalDateStr();
+    const studyTimeMap = studyTimeService.getUserStudyTimeMap(userId);
 
     const allDays = [
       ...(plan.archivedPastDays || []),
@@ -3233,6 +3132,8 @@ router.get('/daily-history', async (req, res) => {
         pace_label = 'Sắp tới 📅';
       }
 
+      const dayStudySeconds = studyTimeMap[day.date] || 0;
+
       return {
         date: day.date,
         dayIndex: day.dayIndex,
@@ -3245,13 +3146,53 @@ router.get('/daily-history', async (req, res) => {
         pace_label,
         dayRationale: day.dayRationale,
         workloadPoints: day.workloadPoints,
-        tasks_detail: day.tasks || []
+        tasks_detail: day.tasks || [],
+        studyTimeSeconds: dayStudySeconds,
+        studyTimeFormatted: studyTimeService.formatStudyTime(dayStudySeconds)
       };
     });
 
     return res.json({ success: true, history });
   } catch (err) {
     console.error('Error fetching daily history:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * POST /api/user/study-time
+ * Gửi lượng thời gian học tăng thêm (Incremental Delta) từ bất kỳ thiết bị nào
+ */
+router.post('/study-time', async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { date, deltaSeconds } = req.body;
+    const result = await studyTimeService.addStudyTime(userId, date || getLocalDateStr(), deltaSeconds);
+    return res.json({
+      success: true,
+      data: result
+    });
+  } catch (err) {
+    console.error('[study-time] Error adding study time:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/user/study-time/today
+ * Lấy tổng thời gian học hôm nay của người dùng để đồng bộ mốc khởi điểm cho thiết bị mới
+ */
+router.get('/study-time/today', (req, res) => {
+  try {
+    const userId = req.user.id;
+    const dateStr = req.query.date || getLocalDateStr();
+    const result = studyTimeService.getStudyTime(userId, dateStr);
+    return res.json({
+      success: true,
+      data: result
+    });
+  } catch (err) {
+    console.error('[study-time] Error getting today study time:', err);
     return res.status(500).json({ success: false, error: err.message });
   }
 });

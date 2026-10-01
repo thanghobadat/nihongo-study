@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
 import DailyReportModal from '../components/DailyReportModal';
+import StudyTimeBadge from '../components/StudyTimeBadge';
+import { formatStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
 import VisualRoadmapModal from '../components/VisualRoadmapModal';
 import DayDetailModal, { DayHistoryItem } from '../components/DayDetailModal';
 import UnfinishedDebtModal, { DebtItem } from '../components/UnfinishedDebtModal';
@@ -56,21 +58,27 @@ export default function UserDashboard() {
   const [isRebatching, setIsRebatching] = useState<boolean>(false);
   const [rebatchTargetDate, setRebatchTargetDate] = useState<string>('');
 
-  // Fixed Timeline state
+  // Fixed Timeline state (Vietnam Timezone: Asia/Ho_Chi_Minh)
   const [startDateStr, setStartDateStr] = useState<string>(() => {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(new Date());
   });
   const [endDateStr, setEndDateStr] = useState<string>(() => {
     const d = new Date();
     d.setDate(d.getDate() + 30);
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(d);
   });
 
   // Study Plan & Overview data
   const [studyPlan, setStudyPlan] = useState<any>(null);
   const [studyOverview, setStudyOverview] = useState<any>(null);
   const [dailyHistory, setDailyHistory] = useState<DayHistoryItem[]>([]);
+  const [todayStudyTimeSeconds, setTodayStudyTimeSeconds] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const today = getVietnamDateString();
+      return parseInt(localStorage.getItem(`study_time_${today}`) || '0', 10);
+    }
+    return 0;
+  });
 
   // Plan Generation State
   const [isGeneratingPlan, setIsGeneratingPlan] = useState<boolean>(false);
@@ -146,9 +154,13 @@ export default function UserDashboard() {
       });
     }
 
-    if (typeof window !== 'undefined' && localStorage.getItem('activeCourse') === 'marugoto') {
-      localStorage.setItem('activeCourse', 'minna');
-    }
+    const handleSync = (e: any) => {
+      if (e.detail && e.detail.seconds !== undefined) {
+        setTodayStudyTimeSeconds(e.detail.seconds);
+      }
+    };
+    window.addEventListener('study-time-sync', handleSync);
+    return () => window.removeEventListener('study-time-sync', handleSync);
   }, []);
 
   // Fetch Study Plan, Overview, Daily History and Unfinished Debt
@@ -164,6 +176,9 @@ export default function UserDashboard() {
 
       if (overviewRes && overviewRes.success) {
         setStudyOverview(overviewRes);
+        if (overviewRes.todayStudyTime?.seconds) {
+          setTodayStudyTimeSeconds(overviewRes.todayStudyTime.seconds);
+        }
         if (overviewRes.planMetadata) {
           if (overviewRes.planMetadata.startDate) setStartDateStr(overviewRes.planMetadata.startDate);
           if (overviewRes.planMetadata.endDate) setEndDateStr(overviewRes.planMetadata.endDate);
@@ -203,11 +218,8 @@ export default function UserDashboard() {
   const triggerDailyNotificationCheck = useCallback(async () => {
     try {
       const now = new Date();
-      const localTimeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      const dateStr = `${year}-${month}-${day}`;
+      const localTimeStr = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', hour12: false }).format(now);
+      const dateStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(now);
       await api.post('/api/user/check-daily-notification', {
         date: dateStr,
         localTimeStr
@@ -530,27 +542,23 @@ export default function UserDashboard() {
     }
   };
 
-  // Current today's date in YYYY-MM-DD (Local Timezone)
+  // Current today's date in YYYY-MM-DD (Vietnam Timezone: Asia/Ho_Chi_Minh)
   const todayStr = (() => {
-    const d = new Date();
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(new Date());
   })();
   const todayTasks = (studyPlan?.days || []).find((d: any) => d.date === todayStr)?.tasks || [];
 
-  // Tomorrow calculations & Tasks for Accordion
+  // Tomorrow calculations & Tasks for Accordion (Vietnam Timezone)
   const tomorrowDateStr = (() => {
     const d = new Date();
     d.setDate(d.getDate() + 1);
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(d);
   })();
 
   const tomorrowFormatted = (() => {
     const d = new Date();
     d.setDate(d.getDate() + 1);
-    return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+    return new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', day: '2-digit', month: '2-digit' }).format(d);
   })();
 
   const tomorrowDayPlan = (studyPlan?.days || []).find((d: any) => d.date === tomorrowDateStr);
@@ -749,6 +757,15 @@ export default function UserDashboard() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+            <StudyTimeBadge onClick={() => setIsDailyReportOpen(true)} />
+            <button
+              onClick={() => setIsDailyReportOpen(true)}
+              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-pink-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-purple-600/30 flex items-center gap-1.5 transition-all duration-200 active:scale-95 border border-purple-400/30 cursor-pointer"
+              title="Báo cáo tiến độ hôm nay"
+            >
+              <span>📊</span>
+              <span>Báo Cáo Ngày</span>
+            </button>
             <button
               onClick={() => {
                 setRoadmapInitialTab('overview');
@@ -867,6 +884,11 @@ export default function UserDashboard() {
                 <h2 className="text-base font-bold text-white flex items-center gap-2">
                   <span>🎯</span> Nhiệm Vụ Hôm Nay ({todayStr})
                 </h2>
+                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold shadow-sm">
+                  <span>⏱️ Thực tế:</span>
+                  <span className="text-white font-extrabold">{formatStudyTime(todayStudyTimeSeconds)}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Đang đo thực tế" />
+                </div>
                 {todayTotalEstMinutes > 0 && (
                   <span className="text-xs font-bold text-cyan-300 bg-cyan-950/70 border border-cyan-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-sm">
                     <span>⏱️</span>
@@ -1350,6 +1372,12 @@ export default function UserDashboard() {
                                     Buffer
                                   </span>
                                 )}
+                                {day.studyTimeFormatted && day.studyTimeFormatted !== '0 phút' && (
+                                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 flex items-center gap-1 font-semibold" title="Thời gian học thực tế">
+                                    <span>⏱️</span>
+                                    <span>{day.studyTimeFormatted}</span>
+                                  </span>
+                                )}
                               </div>
                             </td>
                             <td className="py-3.5 px-4 text-slate-300">
@@ -1554,6 +1582,7 @@ export default function UserDashboard() {
         targetVocabToday={10}
         vocabBehind={0}
         calculatedVocabTargetPerDay={5}
+        studyTimeSeconds={todayStudyTimeSeconds}
         onContinueStudy={() => {
           setIsDailyReportOpen(false);
           router.push(`/lessons/${selectedLessonId}`);

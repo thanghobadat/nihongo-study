@@ -31,6 +31,8 @@ export interface DayHistoryItem {
   tasks_detail: TaskDetail[];
   dayRationale?: string;
   workloadPoints?: number;
+  studyTimeSeconds?: number;
+  studyTimeFormatted?: string;
 }
 
 interface DayDetailModalProps {
@@ -125,7 +127,7 @@ export default function DayDetailModal({
         </div>
 
         {/* Daily Pace & Summary Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-slate-950/70 border border-slate-800">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-xl bg-slate-950/70 border border-slate-800">
           <div>
             <div className="text-[11px] uppercase tracking-wider text-slate-400">Tiến độ ngày</div>
             <div className="text-base font-bold text-white mt-0.5">
@@ -149,7 +151,16 @@ export default function DayDetailModal({
             </div>
           </div>
 
-          <div className="col-span-2 sm:col-span-1">
+          <div>
+            <div className="text-[11px] uppercase tracking-wider text-indigo-400 font-semibold">Thời gian học</div>
+            <div className="text-base font-bold text-indigo-300 mt-0.5 flex items-center gap-1">
+              <span>⏱️</span>
+              <span>{dayData.studyTimeFormatted || '0 phút'}</span>
+            </div>
+            <div className="text-[10px] text-slate-400 mt-0.5">Đo thực tế</div>
+          </div>
+
+          <div>
             <div className="text-[11px] uppercase tracking-wider text-slate-400">Trạng thái hoàn thành</div>
             <div className="text-xs text-slate-300 mt-1">
               {dayData.completion_rate === 100 ? (
