@@ -1873,7 +1873,7 @@ export default function KnowledgeHubPage() {
       </aside>
 
       {/* 2. Main content area */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 pt-20 lg:p-10 space-y-6">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-3.5 sm:p-6 lg:p-10 space-y-6">
         
         {/* Header toolbar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
@@ -2973,9 +2973,9 @@ export default function KnowledgeHubPage() {
         {/* Tab 4: Luyện từ vựng (practice) */}
         {/* ------------------------------------------------------------- */}
         {!loading && activeTab === 'practice' && (
-          <div className="space-y-6 max-w-6xl mx-auto animate-fade-in" ref={practiceTopRef}>
+          <div className="space-y-6 max-w-6xl mx-auto animate-fade-in overflow-x-hidden min-w-0 max-w-full w-full" ref={practiceTopRef}>
             {!speedrunActive && (
-              <div className="relative z-20 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
+              <div className="relative z-20 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-3.5 sm:p-5 rounded-2xl backdrop-blur-md space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-3">
                   <h2 className="text-md font-bold text-slate-700 dark:text-slate-200 flex items-center space-x-2">
                     <span>✏️</span>

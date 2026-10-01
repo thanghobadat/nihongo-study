@@ -4027,11 +4027,11 @@ const renderInteractivePractice = () => {
 
     return (
 
-      <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
+      <div className="space-y-6 max-w-6xl mx-auto animate-fade-in overflow-x-hidden min-w-0 max-w-full w-full">
 
                 {/* 1. Header Toolbar Controls */}
 
-                <div className="relative z-20 bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 rounded-2xl backdrop-blur-md space-y-4">
+                <div className="relative z-20 bg-white border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none p-3.5 sm:p-5 rounded-2xl backdrop-blur-md space-y-4">
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60 pb-3">
 
@@ -5661,7 +5661,7 @@ const renderInteractivePractice = () => {
 
       {/* 2. Main Content Area */}
 
-      <main className="flex-1 overflow-y-auto p-6 pt-20 lg:p-10 space-y-6 md:space-y-8">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-w-0 max-w-full p-3.5 sm:p-6 lg:p-10 space-y-6 md:space-y-8">
 
         
 
@@ -5707,9 +5707,9 @@ const renderInteractivePractice = () => {
 
           {/* Level Switcher N5/N4 & Lesson Dropdown Selector */}
 
-          <div className="flex items-center space-x-3 self-start sm:self-auto">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 self-start sm:self-auto max-w-full">
 
-            <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex shrink-0">
 
                 <button
 
@@ -5772,7 +5772,7 @@ const renderInteractivePractice = () => {
 
               onChange={(e) => handleLessonChange(parseInt(e.target.value))}
 
-              className="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-[130px]"
+              className="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl px-2.5 sm:px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bold focus:outline-none focus:border-blue-700/60 cursor-pointer min-w-0 max-w-[160px] sm:max-w-xs truncate"
 
             >
 
@@ -6999,28 +6999,31 @@ const renderInteractivePractice = () => {
               <div className="space-y-6">
 
                   {/* Segmented Control: Ôn Từ Vựng vs Ôn Chữ Hán */}
-                  <div className="flex bg-slate-200/70 dark:bg-slate-900/80 p-1.5 rounded-2xl max-w-md mx-auto border border-slate-200 dark:border-slate-800 shadow-inner">
+                  <div className="flex bg-slate-200/70 dark:bg-slate-900/80 p-1 sm:p-1.5 rounded-2xl w-full max-w-md mx-auto border border-slate-200 dark:border-slate-800 shadow-inner">
                     <button
                       onClick={() => setPracticeCategory('vocab')}
-                      className={`flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                      className={`flex-1 py-2 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
                         practiceCategory === 'vocab'
                           ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-md font-extrabold'
                           : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
                       }`}
                     >
                       <span>📚 Ôn Từ Vựng</span>
-                      <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700">({vocabItems.length})</span>
+                      <span className="text-[10px] sm:text-[11px] px-1.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 shrink-0">({vocabItems.length})</span>
                     </button>
                     <button
                       onClick={() => setPracticeCategory('kanji')}
-                      className={`flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                      className={`flex-1 py-2 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
                         practiceCategory === 'kanji'
                           ? 'bg-gradient-to-r from-amber-500 to-indigo-600 text-white shadow-md font-extrabold'
                           : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
                       }`}
                     >
-                      <span>🉐 Ôn Chữ Hán (Kanji)</span>
-                      <span className={`text-[11px] px-1.5 py-0.5 rounded-full ${practiceCategory === 'kanji' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-700'}`}>({kanjiItems.length})</span>
+                      <span>
+                        <span className="sm:hidden">🉐 Ôn Kanji</span>
+                        <span className="hidden sm:inline">🉐 Ôn Chữ Hán (Kanji)</span>
+                      </span>
+                      <span className={`text-[10px] sm:text-[11px] px-1.5 py-0.5 rounded-full shrink-0 ${practiceCategory === 'kanji' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-700'}`}>({kanjiItems.length})</span>
                     </button>
                   </div>
 

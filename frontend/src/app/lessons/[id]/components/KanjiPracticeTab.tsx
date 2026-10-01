@@ -690,9 +690,9 @@ export default function KanjiPracticeTab({
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto animate-fade-in pb-16 overflow-x-hidden min-w-0 max-w-full">
+    <div className="space-y-6 max-w-5xl mx-auto animate-fade-in pb-16 overflow-x-hidden min-w-0 max-w-full w-full">
       {/* 1. Header Toolbar */}
-      <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-5 rounded-3xl shadow-sm backdrop-blur-md space-y-4">
+      <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl shadow-sm backdrop-blur-md space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800/80 pb-4">
           <div className="flex items-center gap-3">
             <span className="text-3xl p-2.5 rounded-2xl bg-amber-500/10 text-amber-500 border border-amber-500/20 shrink-0">
@@ -777,13 +777,13 @@ export default function KanjiPracticeTab({
       {activeTab === 'speedrun' && (
         <div className="space-y-6">
           {!speedrunActive && !speedrunGameOver && (
-            <div className="p-8 sm:p-12 text-center bg-white dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm max-w-xl mx-auto space-y-6">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-4xl shadow-lg shadow-amber-500/20 text-white animate-bounce">
+            <div className="p-4 sm:p-8 lg:p-12 text-center bg-white dark:bg-slate-900/60 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm max-w-xl mx-auto space-y-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-3xl sm:text-4xl shadow-lg shadow-amber-500/20 text-white animate-bounce">
                 ⚡
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-xl font-extrabold text-slate-800 dark:text-slate-100">
+                <h3 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-100">
                   Thử Thách Phản Xạ Kanji Siêu Tốc
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
@@ -793,7 +793,7 @@ export default function KanjiPracticeTab({
               </div>
 
               {/* Chuyển đổi chiều phản xạ */}
-              <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
                   Chiều câu hỏi phản xạ:
                 </span>
@@ -801,7 +801,7 @@ export default function KanjiPracticeTab({
                   <button
                     type="button"
                     onClick={() => setSpeedrunDirection('kanji-to-meaning')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-1.5 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all cursor-pointer text-center truncate ${
                       speedrunDirection === 'kanji-to-meaning'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
@@ -812,7 +812,7 @@ export default function KanjiPracticeTab({
                   <button
                     type="button"
                     onClick={() => setSpeedrunDirection('meaning-to-kanji')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-1.5 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all cursor-pointer text-center truncate ${
                       speedrunDirection === 'meaning-to-kanji'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
@@ -823,7 +823,7 @@ export default function KanjiPracticeTab({
                   <button
                     type="button"
                     onClick={() => setSpeedrunDirection('kanji-vocab')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-1.5 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all cursor-pointer text-center truncate ${
                       speedrunDirection === 'kanji-vocab'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
@@ -834,7 +834,7 @@ export default function KanjiPracticeTab({
                   <button
                     type="button"
                     onClick={() => setSpeedrunDirection('both')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-2 px-1.5 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all cursor-pointer text-center truncate ${
                       speedrunDirection === 'both'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
@@ -1102,7 +1102,7 @@ export default function KanjiPracticeTab({
           ) : currentRiddle && (
             <div className="max-w-2xl mx-auto space-y-6">
               {/* Riddle Question Header */}
-              <div className="p-6 bg-gradient-to-br from-teal-950/40 via-slate-900 to-slate-900 border-2 border-teal-500/30 rounded-3xl shadow-lg space-y-3 relative overflow-hidden">
+              <div className="p-4 sm:p-6 bg-gradient-to-br from-teal-950/40 via-slate-900 to-slate-900 border-2 border-teal-500/30 rounded-2xl sm:rounded-3xl shadow-lg space-y-3 relative overflow-hidden">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-xl">✍️</span>

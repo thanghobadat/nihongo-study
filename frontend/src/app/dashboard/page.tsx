@@ -293,9 +293,7 @@ export default function UserDashboard() {
         startDate: startDateStr,
         endDate: endDateStr,
         targetLevel: 'All',
-        currentProgress: {
-          currentLesson: selectedLessonId
-        }
+        currentProgress: {}
       });
 
       if (res && res.success && res.plan) {

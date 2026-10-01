@@ -1494,18 +1494,435 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Cú pháp backend `node --check` đạt 100% (0 lỗi).
   - Frontend Turbopack production build (`next build`) thành công 100% (16/16 routes, 0 lỗi TypeScript).
 
-### Mốc 127: Khắc Phục Triệt Để Hiện Tượng AI Gián Đoạn Tạm Thời & Lỗi Lặp Lại Cố Định Theo Tác Vụ (Đã hoàn thành - 27/09/2026)
-- **Chuẩn đoán & Giải quyết 5 Nguyên nhân Gốc rễ**:
-  1. **Gỡ bỏ bộ lọc kiểm duyệt quá chặt (Safety Filters)**: Cấu hình `SAFETY_SETTINGS: BLOCK_NONE` cho toàn bộ các danh mục trong [aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js). Triệt tiêu lỗi AI từ chối phản hồi (`finishReason: SAFETY`) với các từ vựng học tập thường gặp (hút thuốc `たばこを吸います`, uống rượu `お酒`, tai nạn, bệnh tật, chết `死ぬ`, và các bộ thủ chữ Hán như `刀` - dao kiếm, `血` - máu, `尸` - thi thể, `鬼` - ma quỷ).
-  2. **Nâng trần Token & Tối ưu Timeout**: Nâng `maxOutputTokens` từ 800 lên 2500–4000 và nâng `REQUEST_TIMEOUT_MS` từ 10s lên 25s–30s. Loại bỏ hoàn toàn tình trạng cắt ngang JSON (`Unexpected end of JSON input`) khi Gemini giải thích ngữ pháp chi tiết hoặc sinh 15 câu đố chữ Hán cùng lúc.
-  3. **Xây dựng Bộ Phân Tích & Vá Lỗi JSON Thông Minh (`safeParseGeminiJson`)**: Tự động bóc tách khối JSON giữa `{ ... }` hoặc `[ ... ]`, tự động làm sạch dấu phẩy thừa (trailing commas), ký tự xuống dòng chưa escape và tự đóng ngoặc nếu gặp tình trạng đứt gãy.
-  4. **Cập nhật Model Pool Thế Hệ Mới 2026 kèm Jittered Exponential Backoff**: Thay thế các model đã bị Google khai tử (HTTP 404) bằng danh sách hoạt động 100%: `gemini-2.5-flash`, `gemini-flash-lite-latest`, `gemini-3.5-flash-lite`, `gemini-3.5-flash`. Bổ sung vòng lặp retry 2 lần với độ trễ ngẫu nhiên (500ms - 800ms) khi gặp quá tải tức thời (HTTP 503 / 429).
-  5. **Chuẩn hóa Trích Xuất Dữ Liệu & Bổ Sung Client-side Silent Retry ở Frontend**:
-     - Tại [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx): Chuẩn hóa fallback đa tầng `questionText` hỗ trợ cả 50 bài học (kể cả các bài chỉ có `question_kana` và `question_kanji`), điều chỉnh đúng hướng đánh giá chính tả tiếng Nhật cho dạng nghe chép (Dictation).
-     - Bổ sung cơ chế auto-retry 1 lần sau 800ms trước khi fallback sang chấm cục bộ tại [kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts), [radicals/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/radicals/page.tsx), [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx) và [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx).
-- **Kiểm định & Xác thực Thực tế**:
-  - Đã chạy kiểm thử thực tế `verify_ai_resilience.js`: Chấm điểm từ vựng nhạy cảm (Hút thuốc, Chết chóc), chiết tự bộ thủ nhạy cảm (Đao `刀`), và sinh trọn vẹn 15 câu đố Kanji Bài 2: Vượt qua 100% với model `gemini-2.5-flash`.
-  - Cú pháp backend `node --check` đạt 100% (0 lỗi).
+### Mốc 117: Bổ Sung Toàn Diện 200 Chữ Hán JLPT N4 (Bài 26 - Bài 50), Chuẩn Hóa Chiết Tự Bộ Thủ & Tối Ưu Hệ Thống Dữ Liệu (Đã hoàn thành - 26/09/2026)
+- **Bổ sung 200 chữ Hán N4 chuẩn Minna no Nihongo II / JLPT N4**:
+  - Khắc phục tình trạng N4 chỉ có 50 chữ Hán mẫu (2 chữ/bài).
+  - Phân bổ chuẩn xác 8 chữ Hán/bài cho tất cả 25 bài học N4 (Bài 26 đến Bài 50).
+  - Nâng tổng số chữ Hán toàn cơ sở dữ liệu từ 255 lên **405 chữ Hán** (205 chữ N5: Bài 1-25; 200 chữ N4: Bài 26-50) với mã định danh liên tục từ ID 1 đến 405.
+- **Chuẩn hóa chất lượng dữ liệu học liệu Kanji**:
+  - Đầy đủ 10 trường thuộc tính chuẩn cho từng chữ Hán: `id`, `lesson_id`, `character`, `stroke_count`, `onyomi`, `kunyomi`, `sino_vietnamese`, `vietnamese_meaning`, `mnemonic_tip`, `compounds`.
+  - Bổ sung mẹo ghi nhớ hình tượng (`mnemonic_tip`) còn thiếu cho 8 chữ Hán N5 cũ (`服`, `着`, `時`, `間`, `送`, `迎`, `考`, `留`).
+  - Đảm bảo 100% tính toàn vẹn: 0 chữ trùng giữa N4 và N5, 0 chữ trùng nội bộ trong 200 chữ N4.
+- **Khai báo chiết tự bộ thủ toàn diện trong `kanjiRadicals.ts`**:
+  - Ánh xạ toàn bộ 200 chữ Hán N4 mới vào bản đồ `KANJI_TO_RADICALS` theo các bộ thủ chuẩn Khang Hy có sẵn trong từ điển 201 bộ thủ `RADICALS_DICT`.
+  - Chuẩn hóa các biến thể tương thích với từ điển (như `襾`, `攴`, `毋`, `邑`, `阜`...).
+- **Tương thích hoàn hảo với toàn bộ phân hệ học tập**:
+  - Tab Chữ Hán (`/lessons/[id]?tab=kanji`): Hiển thị đầy đủ 8 thẻ chữ Hán/bài với âm On tím, âm Kun xanh ngọc, mẹo nhớ, chiết tự bộ thủ và các từ ghép thực tế.
+  - Phân hệ Ôn tập Kanji (`/lessons/[id]?tab=practice&category=kanji`): Hỗ trợ mượt mà 3 chế độ (Trắc nghiệm nhận diện 4 lựa chọn, Tự luận viết câu trả lời, Speedrun 10 giây).
+  - Flashcards, Lộ trình học (Roadmap), và hệ thống tự động ghi nhận tiến độ học tập (Auto-tracking).
+- **Kiểm định & Biên dịch**:
+  - Kịch bản kiểm tra toàn vẹn [verify_n4_kanji.js](file:///d:/AI/japanese_learning/website/backend/scratch/verify_n4_kanji.js) đạt 100% (0 lỗi, 405/405 chữ Hán chuẩn chỉnh).
+  - API endpoint bài học `GET /api/user/lessons/:id/kanji` trả về chính xác 8 chữ Hán cho toàn bộ các bài 26 - 50.
+  - Frontend Turbopack production build (`next build`) hoàn tất 16/16 routes thành công rực rỡ với 0 lỗi TypeScript / JSX.
+
+### Mốc 118: Tái Cấu Trúc Trang Ôn Bộ Thủ Theo Cấp Độ JLPT N5 & N4 (Đã hoàn thành - 26/09/2026)
+- **Tái thiết kế toàn diện trang Ôn bộ thủ (`/radicals`)**:
+  - Loại bỏ hoàn toàn cách phân chia cũ theo 15 video bài giảng và số nét (1 nét đến 17 nét).
+  - Chuyển đổi sang phân chia chuẩn hóa theo cấp độ JLPT:
+    - **🟢 Cấp độ N5 (57 bộ thủ)**: Cấu thành 100% chữ Hán N5 (Bài 1 - 25).
+    - **🟡 Cấp độ N4 (74 bộ thủ)**: Bộ thủ mới phát sinh ở N4 (Bài 26 - 50).
+    - **⚡ Trọn bộ N5 + N4 (131 bộ thủ)**: Chiếm 65% từ điển bộ thủ, bao phủ 100% toàn bộ 405 chữ Hán sơ cấp.
+    - **📚 Tất cả 201 bộ thủ**: Bổ sung thêm 70 bộ thủ Nâng cao (N3-N1).
+- **Nâng cấp Giao diện Tra cứu & Thẻ Bộ thủ**:
+  - Tiêu đề & Subtitle mới: "CẨM NANG BỘ THỦ KANJI (JLPT N5 & N4)".
+  - Thanh chuyển đổi Segmented Control 4 cấp độ với hiệu ứng mượt mà và số đếm chính xác.
+  - Khung Banner tóm tắt định hướng phương pháp học và nút bấm chuyển nhanh sang bài luyện tập tương ứng.
+  - Thẻ bộ thủ hiển thị trực quan Badge cấp độ: `N5` (xanh ngọc), `N4` (vàng cam), `N3-N1` (tím).
+- **Đồng bộ Phân hệ Ôn tập & Quiz**:
+  - Thay thế dropdown chọn bài học cũ bằng bộ 4 nút chọn cấp độ luyện tập nhanh: `[ 🟢 N5 (57 bộ) ]`, `[ 🟡 N4 (74 bộ) ]`, `[ ⚡ N5+N4 (131 bộ) ]`, `[ 📚 Tất cả (201) ]`.
+  - Tự động lọc phạm vi câu hỏi cho cả 3 chế độ: Ôn Tên & Ý nghĩa (AI chấm 2 hàng), Luyện viết (Gemini AI chấm nét vẽ), và Phản xạ nhanh (Speedrun 10s).
+- **Kiểm định & Biên dịch**:
+  - Kiểm tra logic lọc: 57 bộ N5, 74 bộ N4, 131 bộ N5+N4, 70 bộ Nâng cao, tổng 201/201 bộ thủ chuẩn xác 100%.
+  - Frontend Turbopack production build (`next build`) hoàn tất thành công 16/16 routes với 0 lỗi TypeScript / JSX.
+
+### Mốc 119: Khắc Phục Lỗi React Hydration Nesting Thẻ Button Trong Dashboard (Đã hoàn thành - 26/09/2026)
+- **Khắc phục triệt để 2 lỗi Hydration Console `<button> cannot contain a nested <button>`**:
+  - Phát hiện tại khối **"Mục Tiêu & Nhiệm Vụ Ngày Mai"** trong [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx): Thanh tiêu đề Accordion sử dụng thẻ `<button>` bọc ngoài, trong khi bên trong lại chứa nút `<button>` "⚡ Tùy chỉnh chia Batch".
+  - Chuyển đổi thẻ bọc ngoài của thanh tiêu đề Accordion sang thẻ `<div role="button" tabIndex={0} ...>` chuẩn HTML5, tích hợp đầy đủ phím tắt bàn phím (Enter/Space) và sự kiện `onClick`.
+  - Nút con "⚡ Tùy chỉnh chia Batch" giữ nguyên thẻ `<button>` độc lập cùng `e.stopPropagation()`.
+- **Kiểm định & Biên dịch**:
+  - Quét kiểm tra DOM nesting: Đạt 100% (0 thẻ button lồng nhau).
+  - Frontend Turbopack production build (`next build`) hoàn tất thành công 16/16 routes với 0 lỗi TypeScript / JSX.
+
+### Mốc 120: Tích Hợp Chế Độ Luyện Viết Canvas Cho Phân Hệ Luyện Tập Kanji (Đã hoàn thành - 26/09/2026)
+- **Bổ sung tính năng Luyện viết chữ Hán trực tiếp trong Kanji Practice Tab (`KanjiPracticeTab.tsx`)**:
+  - Không phân mảnh ra các tab ngoài; mở rộng thanh công cụ Segmented Control lên **4 chế độ luyện tập toàn diện**:
+    1. `🎯 Trắc nghiệm`: 4 lựa chọn nhận diện nghĩa, âm Hán Việt và từ ghép.
+    2. `✍️ Tự luận viết`: Gõ phím kiểm tra âm Hán Việt, cách đọc Hiragana hoặc nghĩa tiếng Việt.
+    3. `🖌️ Tập viết` (Mới): Bảng vẽ Canvas HTML5 tương tác mượt mà bằng chuột, bút cảm ứng hoặc ngón tay trên điện thoại.
+    4. `⚡ Phản xạ (10s)`: Speedrun tính điểm và streak theo thời gian thực.
+- **Tính năng bảng vẽ Canvas tương tác (Tian Zi Ge - 田字格)**:
+  - Khung vẽ kích thước 280x280px với đường biên và các đường kẻ chia ô chữ điền (nét đứt ngang, dọc, chéo) chuẩn học viết chữ Hán.
+  - Tùy chọn `👁️ Hiện/Ẩn chữ mẫu`: Bật tắt chữ mẫu mờ (`ghost template guide`) 150px kiểu Noto Sans JP để người học đồ theo khi mới bắt đầu.
+  - Nút `🗑️ Vẽ lại` để xóa nhanh và viết lại từ đầu.
+  - Hỗ trợ đa nền tảng hoàn hảo (Desktop, Tablet, Mobile) với thuộc tính `touch-none` và chặn cuộn trang tự động khi vẽ (`preventDefault`).
+- **Thuật toán chấm điểm nét vẽ cục bộ thông minh (Local Similarity Evaluation)**:
+  - Khởi tạo Canvas ảo Offscreen kết xuất chữ Hán chuẩn 150px, lấy mẫu lưới 40x40 ô điểm ảnh để so sánh nét vẽ người dùng với mẫu chữ.
+  - Tính toán độ chính xác (Precision), độ bao phủ nét (Recall) và chỉ số F1 Score để quy đổi ra điểm số thang 100.
+  - Phân loại 4 mức đánh giá kèm nhãn trạng thái và lời khuyên chi tiết: `Xuất sắc (>=85)`, `Đạt yêu cầu (60-84)`, `Cần rèn thêm (<60)`, `Chưa đủ nét (<10 nét)`.
+  - Tự động phát âm thanh đọc chuẩn của chữ Hán khi người học đạt yêu cầu hoặc xuất sắc.
+- **Giao diện bài học chi tiết & Điều hướng mượt mà**:
+  - Cột bên phải hiển thị đầy đủ thông tin chữ Hán đang luyện viết: Ký tự lớn, âm Hán Việt, nghĩa tiếng Việt, số nét, âm Onyomi (tím), âm Kunyomi (xanh lá), chiết tự bộ thủ cấu thành, mẹo ghi nhớ hình tượng và các từ vựng ghép thực tế.
+  - Thanh tiến trình hiển thị số chữ đang luyện và số chữ đã được chấm điểm.
+  - Hỗ trợ điều hướng linh hoạt: `← Chữ trước` và `Chữ tiếp theo ➔`.
+  - Màn hình tổng kết khi hoàn thành: Bảng thống kê điểm số từng chữ Hán, nhãn trạng thái và cho phép người dùng đổi nhanh trạng thái chữ (`🟡 Đang học`, `🟢 Đã thuộc`).
+- **Kiểm định & Biên dịch**:
+  - Chạy kiểm tra TypeScript (`npx tsc --noEmit`) đạt 100% (0 lỗi type).
+  - Dev server Next.js biên dịch hoàn tất trong 262ms và tải trang `GET /lessons/1?tab=practice&category=kanji` trả về HTTP 200 thành công.
+
+### Mốc 121: Tích Hợp Chuyển Đổi Chiều Ôn Tập Kanji ⇋ Nghĩa & Ôn Song Song (Đã hoàn thành - 26/09/2026)
+- **Thanh công cụ chuyển đổi chiều học (Practice Direction Switcher) trong `KanjiPracticeTab.tsx`**:
+  - Tích hợp Segmented Control 3 tùy chọn trực quan bên cạnh bộ đếm số câu & lọc trạng thái:
+    1. `🇯🇵 ➔ 🇻🇳 Kanji ➔ Nghĩa`: Tập trung nhận diện mặt chữ Kanji, suy luận và chọn/gõ âm Hán Việt & nghĩa tiếng Việt.
+    2. `🇻🇳 ➔ 🇯🇵 Nghĩa ➔ Kanji`: Tập trung gợi nhớ mặt chữ từ ý nghĩa tiếng Việt và âm Hán Việt.
+    3. `🔄 Song song (Cả hai)`: Trộn ngẫu nhiên câu hỏi đan xen cả 2 chiều (mặc định), tối ưu rèn luyện phản xạ đối ứng song song.
+- **Hỗ trợ toàn diện trên cả 4 chế độ luyện tập**:
+  - **Trắc nghiệm (`choice`)**: Tự động lọc loại câu hỏi (`kanji_to_sino_meaning` hoặc `meaning_to_kanji`) hoặc trộn cả hai.
+  - **Tự luận (`written`)**: Kiểm tra gõ phím chuẩn xác theo chiều tương ứng.
+  - **Tập viết Canvas (`draw`)**: Trong chiều `Nghĩa ➔ Kanji`, mặt chữ Hán trên thẻ bài học và nét mờ trên Canvas được ẩn/làm mờ có chủ đích (`❓ Nhớ chữ`), thử thách người học nhớ lại nét chữ từ trong trí nhớ để vẽ lên ô Tian Zi Ge; có nút `👁️ Xem chữ` để lật mở khi bí.
+  - **Phản xạ 10s (`speedrun`)**: Sinh câu hỏi tốc độ theo đúng chiều lựa chọn hoặc đan xen song song.
+- **Nút lật nhanh đối chiếu tức thì (`🔄 Lật Kanji ⇋ Nghĩa`)**:
+  - Bổ sung nút bấm lật nhanh trên góc thẻ câu hỏi của chế độ Trắc nghiệm và Tự luận.
+  - Cho phép người học chuyển đổi hiển thị tức thời giữa chữ Kanji và Nghĩa đối ứng để tự kiểm tra (self-quiz) trước khi chọn hoặc gõ câu trả lời, không làm gián đoạn bài ôn tập.
+- **Kiểm định & Biên dịch**:
+### Mốc 122: Tinh Giản Thẻ Kanji Ngoài Danh Sách & Tích Hợp Modal Chi Tiết Kèm Bảng Tập Viết Chữ Hán Tian Zi Ge (Đã hoàn thành - 27/09/2026)
+- **Tinh giản thẻ Chữ Hán (Kanji) ngoài danh sách**:
+  - Tối giản giao diện thẻ Kanji ngoài danh sách bài học ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx)) và trang tổng hợp kiến thức ([knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx)).
+  - Bỏ các khối thông tin cồng kềnh ngoài thẻ: chỉ hiển thị ngắn gọn mặt chữ Kanji kích thước lớn (kèm nút phát âm 🔊), số nét, dropdown đổi trạng thái học, âm Hán Việt in đậm và nghĩa tiếng Việt súc tích cùng gợi ý bấm xem chi tiết (`👆 Nhấp xem chi tiết & tập viết`).
+  - Danh sách thẻ trên trang Kiến thức được dàn layout 4 cột trực quan, gọn gàng, tăng tốc độ lướt và tìm kiếm.
+- **Modal Xem Chi Tiết Thông Tin Chữ Hán Toàn Diện**:
+  - Khi nhấp vào bất kỳ thẻ chữ Hán nào, mở Modal chi tiết hiện đại với hiệu ứng làm mờ nền (backdrop-blur) và phím tắt `Escape` để đóng nhanh.
+  - Phân tách thành 2 tab điều hướng rõ ràng:
+    1. `📖 Thông tin & Ngữ nghĩa`:
+       - Ký tự Kanji siêu lớn (72px) kèm nút loa phát âm âm thanh chuẩn W3C Web Speech API.
+       - Huy hiệu số nét và dropdown cập nhật trạng thái học tập trực tiếp đồng bộ với hệ thống.
+       - Thẻ âm On (Onyomi) Katakana màu tím và âm Kun (Kunyomi) Hiragana màu xanh ngọc.
+       - Chiết tự các bộ thủ cấu thành (`getRadicalsString`).
+       - Thẻ Mẹo ghi nhớ hình tượng (`mnemonic_tip`) sinh động với khung viền vàng hổ phách.
+       - Bảng danh sách các từ vựng ghép thực tế (`compounds`) đi kèm cách đọc Hiragana và nghĩa tiếng Việt.
+    2. `✍️ Tập viết chữ Hán` (Canvas Tian Zi Ge - 田字格):
+       - Bảng vẽ Canvas HTML5 280x280px chia 4 ô chữ điền chuẩn mực tập viết chữ Hán với các đường kẻ đứt ngang, dọc và chéo.
+       - **Chỉ tập trung luyện viết thuần túy hình thái nét chữ Kanji** (không bắt người học viết âm Kun, giữ trải nghiệm viết tự nhiên và chuẩn xác).
+       - Nút `👁️ Hiện/Ẩn chữ mẫu`: Bật tắt chữ mẫu mờ (Ghost guide 150px Noto Sans JP) hỗ trợ người mới bắt đầu đồ theo nét.
+       - Nút `🗑️ Vẽ lại`: Xóa sạch khung vẽ để luyện tập lại nhiều lần.
+       - Nút `✨ Chấm điểm nét vẽ`: Sử dụng thuật toán so sánh lưới điểm ảnh cục bộ (Local F1 Score Matrix) so khớp với mẫu chuẩn:
+         + Điểm >= 85: Xuất sắc (xanh lục), tự động kích hoạt phát âm thanh chuẩn của chữ Kanji.
+         + Điểm 60 - 84: Đạt yêu cầu (xanh dương), tự động phát âm thanh.
+         + Điểm < 60: Cần rèn thêm nét vẽ (vàng cam).
+         + Điểm < 10: Nhắc nhở vẽ chưa đủ nét.
+       - Hỗ trợ cảm ứng mượt mà trên điện thoại/máy tính bảng với chặn cuộn màn hình (`touch-none`, `preventDefault`).
+- **Kiểm định & Biên dịch**:
+  - Kiểm tra kiểu dữ liệu TypeScript (`npx tsc --noEmit`) đạt kết quả 100% (0 lỗi cú pháp).
+  - Next.js dev server biên dịch thành công không phát sinh runtime warning hay lỗi Hydration.
+
+### Mốc 123: Giải Mã Cấu Tạo Chữ Hán (Đủ Bộ Thủ), AI Phân Tích Cội Nguồn Ngắn Gọn & Hoạt Ảnh Viết Động Nét Bút Thuận KanjiVG (Đã hoàn thành - 27/09/2026)
+- **Chuẩn hóa & Bổ sung ĐẦY ĐỦ các bộ thủ cấu thành chữ Hán**:
+  - Khắc phục triệt để tình trạng thiếu bộ thủ cấu thành: Chuẩn hóa 105+ chữ Hán chính trong [kanjiRadicals.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiRadicals.ts), đảm bảo liệt kê đầy đủ tất cả các thành phần cấu tạo (2, 3 bộ thủ).
+  - Đặc biệt: Sửa chữ Tư (`私`) hiển thị chuẩn xác **cả 2 bộ thủ**: `禾` (Hòa: Cây lúa, hoa màu) bên trái + `厶` (Tư: Cái riêng, tư hữu) bên phải; chữ Tư (`思`) gồm `田` (Điền) + `心` (Tâm)...
+  - Khối chiết tự hiển thị dạng công thức trực quan: `[ 禾 (Hòa: Cây lúa) ] + [ 厶 (Tư: Cái riêng) ] ➔ 私 (TƯ: Tôi, riêng tư)` kèm các thẻ mô tả chi tiết nguồn gốc tượng hình và vai trò tạo chữ của từng bộ.
+- **Nút "✨ AI Giải thích chi tiết Chữ Hán" (Tập trung vào CHỮ HÁN, Ngắn gọn - Súc tích - Đủ ý)**:
+  - Bổ sung hàm `explainKanjiStructure` trong [aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js) và endpoint `POST /api/ai/kanji-explain` trong [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js).
+  - Tập trung giải thích sâu sắc về **CHÍNH CHỮ HÁN ĐÓ**:
+    1. 🏷️ *Vì sao chữ này lại dùng các bộ thủ này?*: Giải thích vai trò của từng bộ thủ trong bối cảnh tạo chữ.
+    2. 🔗 *Logic kết hợp tạo nghĩa*: 1-2 câu súc tích làm rõ cách người xưa ghép các bộ thủ để sinh ra nghĩa của chữ Hán.
+    3. 🧠 *Mẹo nhớ 5 giây*: Câu thần chú đắt giá, dễ thuộc ngay lập tức.
+  - Tích hợp cơ chế **Cache 0-token** vĩnh viễn trên máy chủ: Sau lần phân tích đầu tiên, mọi lượt tra cứu tiếp theo đều phản hồi tức thì (<15ms) và tiêu tốn 0 token.
+- **Component Hoạt ảnh Viết động Từng nét KanjiVG (`KanjiStrokePlayer.tsx`)**:
+  - Xây dựng component [KanjiStrokePlayer.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/KanjiStrokePlayer.tsx) sử dụng chuẩn vector quốc tế KanjiVG (JIS stroke order).
+  - Tích hợp thanh chuyển đổi Segmented Control trong Tab Tập viết: `[ 🎬 Hoạt ảnh nét viết | 🖌️ Bảng vẽ tự luyện ]`.
+  - Hỗ trợ đầy đủ bộ điều khiển chuyên nghiệp: Nút **Phát / Tạm dừng**, **Xem từng nét một (Nét trước / Nét sau)**, **Bật / Tắt đánh số thứ tự nét (1, 2, 3...)**, **Phát lại từ đầu**, và **Điều chỉnh tốc độ** (1x / 0.5x).
+  - Tích hợp đồng bộ trên cả 2 trang: [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx) và [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx).
+- **Kiểm định & Biên dịch**:
+  - TypeScript typecheck (`npx tsc --noEmit`) đạt 100% (0 lỗi cú pháp).
+  - Node syntax check backend đạt 100%.
+  - API endpoint `POST /api/ai/kanji-explain` đã được kiểm thử trực tiếp: phân tích chính xác chữ `私` với cả 2 bộ `禾` và `厶`, kích hoạt thành công cache 0-token trong lần gọi thứ hai.
+
+### Mốc 124: Tái Cấu Trúc Ôn Tập Kanji (3 Tính Năng Cốt Lõi) & Chấm Điểm Chữ Viết Bằng Gemini Vision AI Kèm Hướng Dẫn Hoàn Thiện Ngắn Gọn (Đã hoàn thành - 27/09/2026)
+- **Tái Cấu Trúc Phân Hệ Ôn Tập Kanji ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx)) thành 3 Tính Năng Cốt Lõi**:
+  1. `🗂️ Flashcard Kanji`:
+     - Thẻ lật 3D 2 mặt mượt mà.
+     - Mặt trước: Ký tự Kanji siêu lớn (90px), nút loa phát âm `🔊`, âm Hán Việt in hoa, số nét vẽ và huy hiệu bài học.
+     - Mặt sau: Âm On (tím), Âm Kun (xanh ngọc), Nghĩa tiếng Việt, Chiết tự các bộ thủ cấu thành, Mẹo nhớ hình tượng và Từ ghép ví dụ thực tế.
+     - Hỗ trợ đầy đủ bộ điều khiển: Chuyển thẻ Trước / Sau (phím mũi tên `←` / `→`), Lật thẻ (phím `Space`), Xáo trộn thẻ (`🔀`), Chế độ Tự động chạy (`▶️ Auto-play` 2.5s / 3.5s) và Đánh dấu trạng thái học (`🔴 Chưa học`, `🟡 Đang học`, `🟢 Đã thuộc`).
+  2. `⚡ Luyện Tập Phản Xạ Kanji (Speedrun)`:
+     - Tương tự như luyện phản xạ từ vựng của bài học.
+     - **Giảm thời gian động theo chuỗi Streak**: 10s (Streak 0-3) ➔ 8s (Streak 4-7) ➔ 6s (Streak 8-11) ➔ 5s (Streak 12+).
+     - Thanh thời gian (Countdown Bar) chạy mượt mà chuyển màu Xanh lục ➔ Vàng ➔ Đỏ.
+     - **Chuyển đổi 2 chiều linh hoạt**: `🇯🇵 ➔ 🇻🇳 Kanji ➔ Nghĩa`, `🇻🇳 ➔ 🇯🇵 Nghĩa ➔ Kanji`, và `🔄 Song song cả hai`.
+     - Tính điểm combo streak, lưu High score kỷ lục trong `localStorage` và màn hình tổng kết chi tiết danh sách chữ sai để ôn lại.
+  3. `✍️ Tập Viết AI Ra Đề & Tự Vẽ Đáp Án (AI Kanji Writing Riddles)`:
+     - AI dựa trên đặc trưng độc nhất của từng chữ (bộ thủ cấu thành, hình tượng cội nguồn, ý nghĩa cốt lõi, từ ghép thực tế) để sinh ra **câu đố gợi mở hấp dẫn** mà **tuyệt đối không làm lộ mặt chữ Kanji đáp án**.
+     - Tích hợp **Cache 0-token vĩnh viễn** trên máy chủ (`POST /api/ai/kanji-writing-riddles`) và Bộ tạo câu đố dự phòng nội bộ (Local Fallback) phòng khi mất mạng.
+     - Bảng vẽ Canvas Tian Zi Ge (田字格) 300x300px để học viên suy luận chữ và tự tay vẽ mặt chữ Hán đáp án.
+     - **Xáo trộn ngẫu nhiên tuyệt đối (Fisher-Yates Shuffle)**: Toàn bộ danh sách câu đố AI tự động tráo đổi vị trí lộn xộn khi tải về, bổ sung nút `🔀 Xáo trộn` chủ động trên giao diện và tự động tráo mới khi "Luyện lại từ đầu".
+     - **Cơ chế Sinh bộ đề MỚI TOÀN DIỆN (Fresh Regeneration)**: Hỗ trợ cờ `forceRefresh: true` tại `POST /api/ai/kanji-writing-riddles`. Khi học viên bấm nút **`✨ Tạo đề mới`** trên toolbar hoặc nút **`✨ AI Tạo bộ đề mới & Luyện tập`** ở màn hình hoàn thành, AI sẽ bỏ qua cache cũ và sáng tạo một bộ câu đố mới toanh (luân chuyển góc nhìn: chiết tự bộ thủ ⇋ hình tượng cội nguồn ⇋ ngữ cảnh đời sống), giúp chống học vẹt và kích thích tư duy suy luận tự nhiên.
+     - Nút `💡 Xem gợi ý`, `🗑️ Vẽ lại`, `👁️ Xem chữ mẫu`.
+- **Chấm Điểm Nét Vẽ Bằng Gemini Multimodal Vision AI & Hướng Dẫn Hoàn Thiện Ngắn Gọn (Actionable Improvement Tip)**:
+  - Xây dựng endpoint mới `POST /api/ai/grade-kanji-writing` và hàm `gradeKanjiHandwritingWithVision` trong [aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js).
+  - Gemini Vision AI "nhìn" trực tiếp ảnh nét vẽ Canvas của học viên, phát hiện chính xác lỗi nét vẽ (thiếu nét, thừa nét, nét móc sai, lệch bố cục bộ thủ).
+  - Cung cấp **ĐÚNG 1 CÂU HƯỚNG DẪN HOÀN THIỆN NGẮN GỌN (tối đa 25 từ)** chỉ rõ ngay hành động người dùng cần làm để hoàn chỉnh chữ viết hơn (ví dụ: *"Chữ này có 6 nét, bạn đang thiếu nét ngang ở giữa; hãy vẽ đủ nét và kéo nét móc dứt khoát hơn."* hoặc *"Cần căn chỉnh chữ vào chính giữa tâm ô chữ điền và thu nhỏ bộ Nhân đứng bên trái lại."*).
+  - Tích hợp **Cơ chế Fallback Hình học Local**: Tự động so khớp ma trận điểm ảnh F1 Grid 40x40 và tọa độ trọng tâm (Centroid Offset) nếu mất mạng, đảm bảo không bao giờ bị gián đoạn hay treo màn hình.
+  - **Triển khai đồng bộ ở cả 2 nơi**:
+    + Tab 3 (Tập viết AI ra đề) trong phân hệ Ôn tập Kanji ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx)).
+    + Modal chi tiết chữ Hán trên trang Bài học ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx)) và trang Kiến thức ([knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx)).
+- **Kiểm định & Biên dịch**:
+  - TypeScript biên dịch không lỗi (`npx tsc --noEmit` exit 0).
+  - Node syntax check backend (`node --check`) đạt exit 0.
+  - Đã gửi request kiểm thử thành công cả 2 endpoint: `POST /api/ai/kanji-writing-riddles` (sinh câu đố không lộ chữ, cache 0-token lần 2) và `POST /api/ai/grade-kanji-writing` (nhận diện hình ảnh và trả về hướng dẫn sửa ngắn gọn).
+
+### Mốc 125: Tinh Gọn Phân Hệ Ôn Tập Kanji - Loại Bỏ Flashcard, Tập Trung 2 Tính Năng Trọng Tâm (Speedrun Phản Xạ & Tập Viết Vision AI) (Đã hoàn thành - 27/09/2026)
+- **Loại bỏ hoàn toàn tính năng Flashcard tại phân hệ Ôn tập Kanji ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx)) theo yêu cầu**:
+  - Xóa bỏ toàn bộ state, handler và phím tắt của Flashcard (lật thẻ, lùi/tiến thẻ, tự động chạy, giải nghĩa bộ thủ, từ ghép).
+  - Xóa bỏ hoàn toàn khối render JSX `{activeTab === 'flashcard' && (...)}`, giảm gần 300 dòng code thừa, tối ưu hóa kích thước bundle và tăng tốc độ tải trang.
+  - Tinh chỉnh toolbar Segmented Control từ 3 nút thành 2 nút trọng tâm: `[ ⚡ Luyện phản xạ | ✍️ Tập viết AI ra đề ]`.
+  - Thiết lập tab mặc định khi vào ôn Kanji là `'speedrun'` (Luyện phản xạ).
+  - Loại bỏ các import không còn sử dụng (`parseCompounds`, `getRadicalsString`).
+- **Giữ vững và phát huy 2 tính năng ôn tập cốt lõi**:
+  1. `⚡ Luyện phản xạ`: Speedrun giảm thời gian theo streak (10s ➔ 5s), đảo 2 chiều VI-Kanji, combo streak & high score.
+  2. `✍️ Tập viết AI ra đề`: AI sáng tạo câu đố đặc trưng mới mẻ luân chuyển góc nhìn (Fresh Regeneration), vẽ nét trên Canvas Tian Zi Ge, chấm điểm Gemini Vision AI kèm hướng dẫn hoàn thiện ngắn gọn (<=25 từ), tráo thứ tự câu đố ngẫu nhiên (Fisher-Yates Shuffle).
+- **Kiểm định & Đẩy mã nguồn**:
+  - Kiểm tra kiểu dữ liệu TypeScript (`npx tsc --noEmit`) đạt kết quả exit 0 thành công tuyệt đối, không có bất kỳ lỗi lầm nào.
+  - Hệ thống dev servers (Frontend Next.js port 3000 và Backend Express port 8080) vận hành ổn định.
+  - Đã thực hiện commit (`6ef59a4`) và đẩy thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`origin/main`).
+
+### Mốc 126: Tích Hợp Đánh Dấu Trạng Thái Trực Tiếp Cho Nhiệm Vụ Ôn Luyện Trên Dashboard & Bảo Toàn Auto-Tracking Backend (Đã hoàn thành - 27/09/2026)
+- **Vấn đề giải quyết**:
+  - Các nhiệm vụ Ôn luyện (Ôn tập bài 4 dạng `single_review` và Ôn tích lũy `cumulative_review`) không có danh sách ID từ vựng lẻ trong `user_progress` để hệ thống tự động đếm số lượng, khiến người học không thể hoàn thành hoặc ghi nhận tiến độ trên Dashboard.
+  - Ngoài ra trong `applyAutoTracking`, nếu nhiệm vụ ôn luyện được đánh dấu `completed`, `currentCount` có thể bị gán lại về 0 do thiếu điều kiện kiểm tra và lệch key review session.
+- **Frontend Dashboard ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))**:
+  - Xây dựng handler `handleToggleTaskStatus(taskId, completed, date)` cập nhật optimistic update (0ms delay) đồng bộ cả `studyPlan` và `dailyHistory`, tính lại `completionRate` và gọi `POST /api/user/daily-tasks/schedule`.
+  - Tích hợp 2 vị trí thao tác trực quan trên thẻ nhiệm vụ ôn luyện:
+    1. **Thanh công cụ bên phải (cạnh hẹn deadline)**: Nút chuyển đổi nhanh `[ ⭕ Đánh dấu xong ]` ⇋ `[ ✓ Đã xong ]`.
+    2. **Khung trạng thái bên trái**: Nút hiển thị nổi bật `[ ⭕ Chưa hoàn thành • Bấm đánh dấu đã xong ✓ ]` ⇋ Huy hiệu `[ ✓ ĐÃ HOÀN THÀNH (Đã đánh dấu) • ↺ Đặt lại chưa xong ]`.
+  - Áp dụng đồng bộ cho cả **🎯 Nhiệm Vụ Hôm Nay** (`todayTasks`) và **📅 Mục Tiêu Ngày Mai** (`tomorrowTasks`).
+- **Backend ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))**:
+  - Cập nhật `applyAutoTracking`: Khi `task.completed === true`, luôn bảo toàn `count = target`, `progressPct = 100%`, không bao giờ bị ghi đè về 0. Hỗ trợ tra cứu song song cả 2 key lưu trữ review session (`nihongo_review_state_lesson_${lesson}` và `review_session_lesson_${lesson}`).
+  - Cập nhật `POST /api/user/daily-tasks/schedule`: Cập nhật đồng bộ `task.completed`, `task.currentCount`, `task.progressPct`, `task.completed_at`, `day.completedCount` và `day.completionRate`, lưu trữ vĩnh viễn trên Supabase Cloud DB và file đĩa cục bộ.
+- **Kiểm định & Biên dịch**:
+  - `node --check website/backend/src/routes/user.js` đạt exit code 0.
+  - Next.js Turbopack build (`npm run build`) biên dịch thành công 100% (16/16 routes tĩnh/động, 0 lỗi TypeScript).
+  - Script kiểm thử logic `test_review_tracking.js` đạt 100% PASS.
+
+### Mốc 127: Rà Soát & Chuẩn Hóa Toàn Diện Bộ Thủ, Chiết Tự Cấu Thành Của 405 Chữ Hán (Bài 1 - 50) & Làm Sạch Cache Gemini AI (Đã hoàn thành - 28/09/2026)
+- **Rà soát dữ liệu toàn diện (Data Audit)**:
+  - Viết kịch bản kiểm tra tự động đối chiếu toàn bộ 405 chữ Hán trong `mockDb.js` với bản đồ `KANJI_TO_RADICALS` và từ điển 201 bộ thủ `RADICALS_DICT`.
+  - Phát hiện và xử lý triệt để 107 chữ Hán gặp vấn đề chiết tự:
+    + **Sửa lỗi bộ thủ nghiêm trọng**: Chữ `国` (QUỐC) sửa từ nhầm `['口', '日']` sang chuẩn `['囗', '玉']` (Vi + Ngọc); chữ `図` (ĐỒ) sửa khung ngoài thành Bộ Vi `囗`; chữ `物` (VẬT) sửa từ nhầm `['手']` sang chuẩn `['牛', '勹']` (Ngưu + Bao); chữ `午` (NGỌ) sửa bỏ gán nhầm Thổ `土`.
+    + **Xóa bỏ 100% bộ thủ ảo**: Khắc phục 21 chữ Hán chứa bộ thủ không thuộc từ điển 201 bộ chuẩn Khang Hy (`尺`, `周`, `売`, `七`, `关`, `昔`, `袁`, `哥`, `相`, `官`, `寺`, `乍`, `吏`, `主`, `本`, `甬`, `丙`, `合`, `甲`), chấm dứt hoàn toàn tình trạng giao diện hiển thị `Chưa rõ - Nét cấu thành` trên modal chi tiết.
+    + **Bổ sung thành phần cho các chữ ghép phức tạp**: Cung cấp đầy đủ 2-3 bộ thủ cấu thành trực quan cho các chữ như `習` (`['羽', '白']`), `教` (`['土', '子', '攴']`), `来` (`['木', '人']`), `貸` (`['人', '弋', '貝']`), `議` (`['言', '羊', '戈']`), `学` (`['冖', '子']`)...
+- **Làm sạch & Cập nhật Cache AI Gemini**:
+  - Xóa bỏ phân tích ảo giác (hallucination) cũ của chữ `国` do nạp nhầm `['口', '日']`.
+  - Kiểm thử endpoint AI và nạp bản phân tích cội nguồn chuẩn xác 100% vào `ai_grading_cache.json`: Bộ Vi `囗` (bờ cõi, biên cương) + Bộ Ngọc `玉` (vua, ngọc quý báu vật), mẹo nhớ: *"Đất nước (国) là nơi biên cương (囗) bao bọc những viên ngọc quý (玉)."*
+- **Kiểm định & Xác thực**:
+  - Script `verify_all_405_kanji.js`: Đạt 100% PASS (0 lỗi, 405/405 chữ Hán có bộ thủ chuẩn mực trong `RADICALS_DICT`).
+  - TypeScript typecheck (`npx tsc --noEmit`): Hoàn thành 100% không phát sinh lỗi.
+  - Node syntax check backend (`node --check`): Hoàn thành 100% không lỗi cú pháp.
+
+### Mốc 128: Phát triển Popup Tra cứu Nhanh Bộ Thủ Kanji & Từ Vựng (Overlay Modal) và Chuyển Đổi Hiển Thị Phẳng Từ Vựng/Kanji Trang Bài Học (Đã hoàn thành - 28/09/2026)
+- **Bối cảnh & Yêu cầu người dùng**:
+  - Người dùng khi đang học cần tra cứu nhanh Từ vựng hoặc Bộ thủ Kanji mà không bị chuyển trang gây ngắt quãng tiến trình học dở dang. Cần một Popup / Modal đè lên trang hiện tại với đầy đủ thanh tìm kiếm, bộ lọc cấp độ/bài học, và vẫn cung cấp nút điều hướng sang trang đầy đủ tính năng.
+  - Khi click vào mục "Bộ thủ Kanji" hoặc "Từ vựng" (ở Sidebar/Cài đặt), mặc định sẽ mở popup tra cứu này thay vì chuyển trang ngay.
+  - Loại bỏ hoàn toàn việc phân chia Từ vựng và Chữ Hán theo từng mẫu câu ngữ pháp (grammar accordions) trong trang bài học `lessons/[id]`, chuyển về hiển thị danh sách dạng lưới phẳng bình thường.
+- **Triển khai kỹ thuật**:
+  1. **Component Popup Tra cứu Nhanh ([QuickLookupModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/QuickLookupModal.tsx))**:
+     - Thiết kế theo phong cách Glassmorphism + Modern Dark/Light theme, có thanh Tabs chuyển đổi linh hoạt:
+       + **📚 Tra cứu Từ vựng**: Hỗ trợ tìm kiếm realtime đa ngôn ngữ (tiếng Nhật, Hiragana, Romaji, tiếng Việt); bộ lọc chọn theo Bài (1 - 50 hoặc Tất cả bài); nút phát âm TTS `🔊`; thẻ thông tin từ vựng đầy đủ từ loại, kanji form, pitch accent, nghĩa tiếng Việt, câu ví dụ; nút liên kết *"Đi đến trang học Từ vựng đầy đủ ➔"*. Tích hợp cache in-memory khi fetch dữ liệu từ `/api/user/course-summary?course=minna`.
+       + **🉐 Tra cứu Bộ thủ Kanji**: Lọc 201 bộ thủ Khang Hy theo cấp độ N5 / N4 / N3-N1 / Tất cả; thanh tìm kiếm realtime theo Tên Hán Việt, ký tự, nghĩa, số nét; hiển thị thẻ bộ thủ chi tiết kèm modal con xem cội nguồn gốc chữ; nút liên kết *"Đi đến trang Ôn tập Bộ thủ đầy đủ (Có Luyện viết & Speedrun) ➔"*.
+     - Hỗ trợ phím tắt `Esc` để đóng nhanh modal, backdrop blur mờ ảo tối ưu trải nghiệm.
+  2. **Tích hợp mở Popup tại Sidebar Cài đặt ([SidebarSettings.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/SidebarSettings.tsx))**:
+     - Nút *"🉐 Tra cứu Bộ thủ Kanji"* -> mở `QuickLookupModal` với tab mặc định `radicals`.
+     - Nút *"📚 Tra cứu Từ vựng"* -> mở `QuickLookupModal` với tab mặc định `vocab`.
+     - Nhúng component `<QuickLookupModal>` tại chân Sidebar, sẵn sàng bật lên trên mọi trang mà không làm mất trạng thái.
+  3. **Tối ưu hóa Trang Chi Tiết Bài Học ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx))**:
+     - Thêm nút tiện ích `🔍 Tra cứu` trực tiếp trên thanh toolbar header cạnh ô chọn bài học, tự động mở đúng tab ngữ cảnh (đang ở tab Từ vựng thì mở popup tra từ vựng, các tab khác mở tra cứu bộ thủ/kanji).
+     - **Loại bỏ accordion phân nhóm theo ngữ pháp ở Tab Từ vựng**: Khai báo danh sách phẳng `filteredVocabItems` (lọc theo từ khóa tìm kiếm và trạng thái học tập) và hàm render `renderVocabCard` hiển thị lưới phẳng `grid-cols-1 md:grid-cols-2`.
+     - **Loại bỏ accordion phân nhóm theo ngữ pháp ở Tab Chữ Hán**: Khai báo danh sách phẳng `filteredKanjiItems` (lọc theo từ khóa tìm kiếm và trạng thái học tập) hiển thị lưới phẳng `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`.
+     - Render `<QuickLookupModal>` tại chân trang bài học, đảm bảo tra cứu liền mạch tức thì.
+- **Kiểm định & Xác thực**:
+  - TypeScript Typecheck (`npx tsc --noEmit`): Hoàn thành 100% với 0 lỗi cú pháp hoặc kiểu dữ liệu.
+  - Bảo tồn nguyên vẹn các tính năng ôn tập sâu, luyện viết Kanji AI, speedrun ở trang `/radicals` và `/lessons/[id]`.
+  - Tuân thủ nghiêm ngặt quy tắc Rule 5: Không tự động commit/push git.
+
+### Mốc 129: Sửa Lỗi Popup Tra Cứu (React Portal, Fullscreen Device Responsive) & Nâng Cấp AI Phân Tích Cội Nguồn Kanji Chuyên Sâu (Đã hoàn thành - 28/09/2026)
+- **Vấn đề giải quyết**:
+  - **Popup bị co cụm trong Sidebar**: Do `<aside>` chứa `backdrop-blur-xl` và `transform`, biến nó thành containing block theo chuẩn W3C CSS, giam cầm `fixed inset-0` của modal vào trong cột rộng 288px ở góc trái màn hình.
+  - **AI phân tích thiếu thành phần**: Modal Kanji khi phân tích chữ `学` (HỌC) chỉ bóc tách 2 bộ thủ Khang Hy `冖` (Mịch) và `子` (Tử), bỏ sót 3 nét `⺍` trên đầu và không giải thích chữ cổ `學` (chữ Phồn thể / Kyūjitai).
+  - **Kunyomi hiển thị thô**: Chuỗi dạng từ điển `まな.bu (mana.bu)` có dấu chấm và lẫn lộn Romaji gây khó đọc.
+- **Triển khai kỹ thuật**:
+  1. **Nâng cấp Popup Tra Cứu Nhanh ([QuickLookupModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/QuickLookupModal.tsx))**:
+     - Áp dụng **React Portal (`createPortal(..., document.body)`)**: Thoát hoàn toàn khỏi containing block của Sidebar, đảm bảo modal luôn mount trực tiếp vào `document.body` với `z-[99999]` phủ kín toàn bộ viewport thiết bị.
+     - **Bố cục Full Màn Hình theo thiết bị (Device Responsive)**:
+       + Mobile (`< sm`): Chiếm trọn 100vw x 100vh (`inset-0`, `rounded-none`, không viền thừa), thanh công cụ ghim trên đỉnh.
+       + Tablet/Desktop: Kích thước tối đa `w-[96vw] max-w-7xl h-[95vh] rounded-3xl`, tận dụng 95% diện tích màn hình.
+       + Lưới hiển thị rộng rãi: Lưới Bộ thủ dàn từ 3 đến 10 cột (`grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10`), quan sát hàng chục bộ thủ cùng lúc; Lưới Từ vựng dàn 2-3 cột thoáng đãng.
+     - **Tính năng mở rộng**: Thêm nút phóng to toàn màn hình (Fullscreen toggle `⛶`), khóa cuộn trang nền (`body scroll lock`) khi mở popup.
+  2. **Nâng cấp Hệ thống AI Phân Tích Cội Nguồn Kanji ([aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js))**:
+     - Nâng cấp Prompt chuyên sâu: Yêu cầu AI đối chiếu chữ cổ / phồn thể nguyên bản (Cựu tự thể Kyūjitai như `学` $\leftarrow$ `學`, `覚` $\leftarrow$ `覺`, `気` $\leftarrow$ `氣`...), giải thích cặn kẽ các nét cách điệu/giản lược không thuộc 201 bộ thủ (như 3 nét `⺍` trong `学` là từ hai bàn tay `𦥑` + que tính tri thức `爻`), phân tích cơ chế Lục Thư và đưa ra mẹo nhớ 5 giây đắt giá.
+     - Cập nhật JSON Schema: Bổ sung trường `ancient_form_origin` (Nguồn gốc chữ cổ & Biến đổi hình thái).
+     - Cập nhật cache cội nguồn `ai_grading_cache.json` cho chữ `学` đầy đủ 100% ngữ nguyên học.
+  3. **Tối ưu Giao diện Modal Kanji ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx) & [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx))**:
+     - Bổ sung khối giao diện **"📜 Cội nguồn chữ cổ & Biến đổi hình thái"** hiển thị chữ cổ và quá trình tiến hóa nét.
+     - Chuẩn hóa hiển thị Kunyomi: Tự động chuyển các chuỗi `まな.bu (mana.bu)` thành định dạng `まな・ぶ (manabu)` đẹp mắt và chuẩn quy ước sư phạm.
+- **Kiểm định & Xác thực**:
+  - `npx tsc --noEmit` đạt 100% PASS (0 lỗi TypeScript).
+  - `node --check` các file backend đạt 100% PASS.
+  - Cả Backend (port 8080) và Frontend (port 3000) đang vận hành ổn định trong nền.
+  - Tuân thủ nghiêm ngặt Rule 5: Đã thực hiện commit (`fbe3ce8`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`origin/main`) theo yêu cầu trực tiếp của người dùng.
+
+
+
+### Mốc 130: Bảo Toàn Nét Vẽ Kanji Khi Bật/Tắt Nét Mờ, Khắc Phục AI Replan, Chuẩn Hóa Tiến Độ 'Đã Thuộc' & Lọc Kanji Từ Vựng Theo Bài Học (Đã hoàn thành - 29/09/2026)
+- **Vấn đề 1: Bảo toàn nét vẽ khi nhấn Ẩn/Hiện chữ mẫu mờ trên Canvas**:
+  - Tích hợp bộ lưu trữ nét vẽ strokesRef và currentStrokeRef trong KanjiPracticeTab.tsx, modal Kanji ở lessons/[id]/page.tsx, knowledge/page.tsx và radicals/page.tsx.
+  - Tách riêng useEffect lắng nghe showGhostGuide với cờ preserveStrokes = true: Khi bật/tắt nét mờ, canvas vẽ lại lưới/chữ mờ mới đồng thời tự động replay toàn bộ các nét vẽ người dùng đang vẽ dở mà không hề làm mất nét.
+  - Reset mảng nét khi chuyển chữ/riddle mới hoặc khi người học bấm nút 'Vẽ lại'.
+- **Vấn đề 2: Khắc phục lỗi AI Replan đưa từ vựng đã thuộc vào kế hoạch mới**:
+  - Sửa lỗi trong tuyến API POST /api/user/replan-debt tại user.js: Bổ sung userId vào aiPlannerService.refineStudyPlan và nạp đồng bộ syncUserProgressFromSupabase(userId).
+  - Khắc phục việc thiếu userId khiến generateAlgorithmicPlan coi danh sách đã thuộc là rỗng. Các bài đã thuộc 100% từ vựng (như 47 từ Bài 1) được lọc sạch 100%, không còn xuất hiện nhiệm vụ thừa trong kế hoạch mới.
+- **Vấn đề 3: Chuẩn hóa logic hoàn thành tiến độ - Chỉ tính 'Đã thuộc' (mastered)**:
+  - Loại bỏ hoàn toàn điều kiện gộp status === 'learning' (Đang học) tại progressService.js, hàm applyAutoTracking trong user.js và getUnfinishedDebt / getCompletedLessons trong aiPlannerService.js.
+  - Trạng thái learning (Đang học) không được tính là hoàn thành. Chỉ khi chuyển sang mastered (Đã thuộc) thì hệ thống mới đếm vào số lượng hoàn thành và đánh dấu task hoàn tất.
+- **Vấn đề 4: Tinh chỉnh chế độ 'Học bằng Kanji' - Chỉ chuyển đổi từ vựng tương ứng với Chữ Hán của bài**:
+  - Tái cấu trúc hàm getKanjiForm trong kanjiFormLookup.ts:
+    1. Ưu tiên đối chiếu từ ghép trong compounds của các chữ Hán thuộc bài học hiện tại (kanjiItems).
+    2. Đối với từ điển toàn cục HIRAGANA_TO_KANJI: Chỉ cho phép chuyển đổi nếu 100% các ký tự Kanji trong từ mục tiêu đều thuộc danh sách Chữ Hán của bài học đó (lessonKanjiChars).
+    3. Loại bỏ logic đoán đuôi chia động từ / tiếp vĩ ngữ lỏng lẻo gây biến dạng chữ (あなた -> 会なた).
+    4. Giữ nguyên dạng Kana/Hiragana gốc cho mọi từ vựng chứa Chữ Hán bài sau chưa học (Bài 1 giữ nguyên きょうし, いしゃ, びょういん, けんきゅうしゃ, ぎんこういん, だれ, さい, なんさい...).
+- **Kiểm định & Xác thực**:
+  - npx tsc --noEmit đạt 100% PASS (0 lỗi TypeScript).
+  - node --check các file backend đạt 100% PASS.
+  - Kịch bản kiểm thử độc lập xác nhận: Trạng thái learning không bị tính hoàn thành; Replan loại bỏ 47/47 từ đã thuộc của Bài 1; Lọc Kanji Bài 1 chỉ chuyển đổi đúng 8 từ chuẩn.
+
+### Mốc 131: Đồng Bộ Cơ Chế Đếm Ngược Phản Xạ Kanji & Ẩn Số Giây Hiển Thị (Đã hoàn thành - 29/09/2026)
+- **Đồng bộ Cơ chế Đếm Ngược Phản Xạ Kanji ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx))**:
+  - Chuyển đổi từ `setInterval` 1000ms đếm lùi -1 mỗi giây sang cơ chế đếm tần số cao `50ms` dựa trên độ lệch thời gian thực `Date.now() - startTime`, loại bỏ hoàn toàn hiện tượng trễ nhịp (timer drift) của trình duyệt.
+  - Đồng bộ công thức giảm thời gian: Giảm mềm mại 10% (nhân 0.9) sau mỗi 3 câu trả lời đúng liên tục (`reductionCount = Math.floor(streak / 3)`), chặn sàn tối thiểu 2 giây.
+  - Reset timer tức thời khi người học click chọn đáp án (`clearInterval` trong `handleSpeedrunAnswer`), đảm bảo không bị timeout oan giữa các câu hỏi.
+- **Ẩn Số Giây Hiển Thị**:
+  - Loại bỏ hoàn toàn text số giây (`10s`, `(Max: 10s)`) trên thanh Header trạng thái của giao diện chơi phản xạ Kanji.
+  - Thay thế bằng nhãn thị giác `⏱️ THỜI GIAN`, giữ lại `🔥 Streak` và `⭐ Điểm`.
+  - Nâng cấp thanh tiến trình (Dynamic Progress Bar) co dần mượt mà liên tục với `duration-75` và đổi màu động (Xanh lá ➔ Vàng ➔ Đỏ nhấp nháy), giúp người học tập trung thị giác 100% vào nhận diện mặt chữ Kanji.
+- **Kiểm định & Xác thực**:
+  - Next.js dev server biên dịch thành công (`Compiled in 254ms`, 0 lỗi linter/TypeScript).
+  - Hệ thống đang chạy ổn định tại `http://localhost:3000`.
+
+### Mốc 132: Tích Hợp Nhận Thức Chữ Hán Trong Từ Vựng Bài Học Vào Luyện Phản Xạ Speedrun (Đã hoàn thành - 29/09/2026)
+- **Truyền Học Liệu Từ Vựng Vào Tab Chữ Hán ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/%5Bid%5D/page.tsx))**:
+  - Cung cấp toàn bộ danh sách `vocabItems` của bài học vào `<KanjiPracticeTab />`.
+- **Cơ Chế Nhận Thức Kanji Trong Từ Vựng ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/%5Bid%5D/components/KanjiPracticeTab.tsx))**:
+  - Xây dựng hàm liên kết tự nhiên `getLinkedVocabForKanji`: Ánh xạ chữ Hán mục tiêu với các từ vựng Minna no Nihongo trong bài có sử dụng chữ đó qua `getKanjiForm`.
+  - **Dạng 1 (Kanji độc lập ➔ Từ vựng Hiragana)**: Đề bài chỉ hiển thị chữ Hán độc lập (không mớm âm Hán hay nghĩa). 4 đáp án viết hoàn toàn bằng **HIRAGANA + Nghĩa tiếng Việt** (ví dụ: `がくせい: Học sinh`), buộc người học phải nhớ lại dạng chữ Hán của từ vựng trong đầu, kích hoạt tư duy liên kết thật sự.
+  - **Dạng 2 (Từ vựng Hiragana ➔ Chọn Chữ Hán)**: Đề bài hiển thị từ vựng Hiragana kèm nghĩa tiếng Việt (ví dụ `がくせい: Học sinh`), 4 đáp án là 4 Chữ Hán **HOÀN TOÀN ĐỘC LẬP** (`学`, `先`, `校`, `人`), không mớm âm nghĩa.
+  - **Chữ Hán luôn hiển thị độc lập**: Loại bỏ toàn bộ phụ đề âm Hán và nghĩa mớm gợi ý ở tất cả các dạng câu hỏi, giúp người học phản xạ thuần túy trên mặt chữ.
+  - **Âm thanh từ vựng ngữ cảnh**: Khi trả lời đúng câu hỏi từ vựng, hệ thống ưu tiên phát âm thanh chuẩn của chính từ vựng đó (`audioWord`).
+  - **Bổ sung 4 chế độ chơi linh hoạt**: `🇯🇵 ➔ 🇻🇳 Kanji ➔ Nghĩa`, `🇻🇳 ➔ 🇯🇵 Nghĩa ➔ Kanji`, `📖 Kanji ⟷ Từ vựng`, `🔄 Toàn diện` (trộn ngẫu nhiên tất cả các dạng).
+- **Kiểm định & Xác thực**:
+  - `npx tsc --noEmit` đạt 100% PASS (0 lỗi TypeScript trên toàn bộ frontend).
+  - Next.js Turbopack dev server biên dịch thành công (`Compiled in 201ms` - `276ms`).
+  - Hệ thống đang chạy mượt mà tại `http://localhost:3000`.
+  - Tuân thủ Rule 5: Đã thực hiện commit (`60cbd19`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 133: Tái Cấu Trúc Tập Viết Kanji AI - Cấm Gợi Ý Bộ Thủ Lộ Liễu, Đa Dạng Hóa 4 Dạng Câu Hỏi Thực Chiến & Hiện Đáp Án Đối Chiếu Tức Thì (Đã hoàn thành - 29/09/2026)
+- **Tái Cấu Trúc Câu Hỏi Tập Viết ([aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js) & [kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts))**:
+  - **Cấm tiệt bộ thủ lộ liễu**: CẤM TUYỆT ĐỐI đưa tên bộ thủ, ký tự bộ thủ hay công thức phép ghép `(A + B)` vào trong câu hỏi đề bài (`riddle_question`), xóa bỏ hoàn toàn tình trạng "nhìn đề là đoán ngay được đáp án".
+  - **Đa dạng hóa 4 dạng câu hỏi thực chiến chuẩn ôn phản xạ**:
+    1. `sino_meaning` (🎯 Hán Việt & Nghĩa): Hỏi trực diện dựa trên âm Hán Việt và định nghĩa tiếng Việt thuần túy.
+    2. `vocab_context` (📚 Từ vựng trong bài): Cho từ vựng Minna no Nihongo trong bài (viết bằng Hiragana + nghĩa tiếng Việt), yêu cầu viết chữ Hán của từ hoặc âm tương ứng.
+    3. `compound_fill` (🧩 Điền từ ghép khuyết): Cho từ ghép có chữ bị khuyết `【 ? 】`, cách đọc Hiragana và nghĩa, yêu cầu viết chữ còn thiếu.
+    4. `situational` (💡 Ngữ cảnh đối tượng): Mô tả tình huống đời sống hoặc đối tượng cụ thể mà không làm lộ mặt chữ.
+  - Hiển thị huy hiệu loại câu hỏi trực quan trên giao diện (`[ 🎯 Hán Việt & Nghĩa ]`, `[ 📚 Từ vựng trong bài ]`...).
+- **Loại Bỏ Chấm Điểm AI & Chuyển Sang Hiện Đáp Án Đối Chiếu Tức Thì ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/%5Bid%5D/components/KanjiPracticeTab.tsx))**:
+  - Loại bỏ hoàn toàn luồng gọi Gemini Vision AI chấm điểm chậm chạp, tốn thời gian xoay vòng và không đem lại nhiều giá trị thực tiễn.
+  - Thay thế bằng nút bấm **`👁️ Xem đáp án & Đối chiếu`** (phản hồi **0ms tức thì**):
+    - Tự động bật chữ mẫu mờ (`ghost guide`) lồng ghép ngay dưới nét vẽ trên Canvas Tian Zi Ge để người học trực tiếp đối chiếu từng nét của mình so với chữ chuẩn.
+    - Hiển thị Thẻ Đáp Án Chuẩn Đầy Đủ: Ký tự Kanji to rõ (40px font Noto Sans JP), âm Hán Việt, nghĩa tiếng Việt, âm On/Kun và từ ghép ví dụ thực tế trong bài.
+    - Tự động phát âm thanh chuẩn của chữ Kanji `🔊`.
+    - Bộ 2 nút tự đánh giá nhẹ nhàng: `[ ✓ Tôi đã viết đúng ]` và `[ ↺ Cần luyện lại ]` ghi nhận trạng thái vào màn hình tổng kết.
+- **Làm Sạch Cache ([ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js))**:
+  - Nâng cấp cache key thành `lesson_${lessonId}_v2` và xóa bỏ cache cũ `data/kanji_riddles_cache.json` để bộ câu hỏi mới được áp dụng ngay lập tức cho toàn bộ người dùng.
+- **Kiểm định & Biên dịch**:
+  - `npx tsc --noEmit` đạt 100% PASS (0 lỗi TypeScript).
+  - `node --check` các file backend đạt 100% PASS.
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5.
+
+### Mốc 134: Lọc Từ Vựng Chỉ Xuất Hiện Từ Có Kanji Khi Bật Chế Độ 'Học Bằng Kanji' & Đồng Bộ Số Đếm Trạng Thái (Đã hoàn thành - 29/09/2026)
+- **Hàm tiện ích `hasLessonKanji` ([kanjiFormLookup.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiFormLookup.ts))**:
+  - Bổ sung và export hàm `hasLessonKanji(hiragana, kanjiItems)`.
+  - Phân giải dạng Kanji của từ qua `getKanjiForm` và kiểm tra 100% các ký tự Kanji có thuộc danh sách Chữ Hán của bài học hiện tại (`lessonKanjiChars`) hay không.
+  - Trả về `true` nếu từ chứa Chữ Hán của bài học, `false` nếu từ thuần Kana, Katakana hoặc chứa Kanji của các bài sau.
+- **Lọc danh sách từ vựng bài học ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/%5Bid%5D/page.tsx))**:
+  - Khởi tạo tập từ vựng cơ sở `visibleVocabPool`: Khi `showKanjiInVocab === true`, tự động lọc và chỉ giữ lại các từ có `hasLessonKanji(item.hiragana, kanjiItems) === true`.
+  - Cập nhật `filteredVocabItems`: Lọc từ `visibleVocabPool`, bổ sung hỗ trợ tìm kiếm theo cả dạng chữ Kanji khi chế độ Kanji đang bật.
+  - Đồng bộ số đếm trên thanh bộ lọc trạng thái (Status Filter Buttons): `Tất cả ({count})`, `Chưa học ({count})`, `Đang học ({count})`, `Đã thuộc ({count})` hiển thị chính xác theo số từ vựng đang được lọc, khớp 100% với số lượng thẻ bên dưới.
+  - Hiển thị số lượng từ Kanji trực tiếp trên nhãn checkbox: `[🇯🇵 Học bằng Kanji (X)]`.
+  - Cập nhật thông báo rỗng (Empty State) hướng dẫn người học rõ ràng khi không tìm thấy từ vựng Kanji nào phù hợp.
+- **Đồng bộ trang Tổng hợp kiến thức ([knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx))**:
+  - Cập nhật `displayedVocab`: Khi `showKanjiInVocab` được tích chọn, lọc chỉ hiển thị các từ có `v.kanji_form`.
+- **Kiểm định & Xác thực**:
+  - `npx tsc --noEmit` hoàn tất 100% PASS (0 lỗi TypeScript trên toàn bộ frontend).
+  - Kịch bản kiểm thử độc lập trên Bài 1 xác nhận: Ban đầu có 47 từ; khi bật "Học bằng Kanji" chỉ còn đúng 8 từ chứa Chữ Hán Bài 1 (*私, あの人, 先生, 学生, 会社員, 社員, 日本, 〜人*); 39 từ không có Kanji của bài được ẩn 100%.
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5: Đã thực hiện commit (`27192e6`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 135: Khắc Phục Triệt Để Tràn Thanh Cuộn Ngang (Horizontal Scrollbar) Trên iPhone 15 Pro & Chuẩn Hóa Múi Giờ Tracking Về Giờ Việt Nam (Asia/Ho_Chi_Minh - GMT+7) (Đã hoàn thành - 01/10/2026)
+- **Khắc phục lỗi tràn thanh cuộn ngang (Overflow-X) trên thiết bị di động (iPhone 15 Pro - Viewport 393px)**:
+  - **Phân tích nguyên nhân gốc rễ**:
+    + Thẻ `<main>` container chính tại [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx) áp dụng `p-6` (padding 2 bên 48px khiến độ rộng nội dung khả dụng chỉ còn 345px), thiếu `overflow-x-hidden min-w-0 max-w-full`.
+    + Hàng Header điều khiển chọn bài học (`flex items-center space-x-3 self-start`) không có `flex-wrap`, thẻ `<select>` chọn bài học chứa danh sách tên bài rất dài (ví dụ `Bài 1: Hajimemashite - Rất vui được làm quen` ~280px) không có giới hạn `max-w`, khiến hàng này nở rộng tới 415px - 440px (> 393px của iPhone 15 Pro), làm phình toàn bộ trang web sang ngang.
+    + Thanh lọc trạng thái Kanji (`Tất cả`, `Chưa học`, `Đang học`, `Đã thuộc`) chứa `shrink-0` với chiều rộng nội tại cố định ~375px (> 345px khả dụng), đẩy bung layout trang.
+    + Segmented Control Ôn tập Kanji có nhãn nút dài trên mobile (`🉐 Ôn Chữ Hán (Kanji)`).
+    + Trang Cẩm nang bộ thủ ([radicals/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/radicals/page.tsx)) thiếu `overflow-x-hidden` và header tab switcher chật chội trên màn hình 393px.
+  - **Giải pháp & Triển khai**:
+    + [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx): Thêm `overflow-x-hidden min-w-0 max-w-full` và điều chỉnh padding mobile `p-3.5 sm:p-6 lg:p-10`. Thêm `flex-wrap gap-2 sm:gap-3 max-w-full` và giới hạn `<select>` bài học với `max-w-[170px] sm:max-w-xs truncate`. Cho phép thanh lọc trạng thái Kanji cuộn ngang nội bộ êm ái (`overflow-x-auto scrollbar-none max-w-full`) thay vì đẩy vỡ layout cha. Rút gọn nhãn nút segmented control responsive (`sm:hidden` "Ôn Kanji" / `hidden sm:inline` "Ôn Chữ Hán (Kanji)").
+    + [radicals/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/radicals/page.tsx): Thêm `overflow-x-hidden min-w-0 max-w-full` và padding `p-3.5 sm:p-6 lg:p-8`. Header tab switcher chuyển sang `grid grid-cols-2 sm:flex` với text responsive ("Học & Tra cứu" / "Ôn tập").
+    + [KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx): Thêm `overflow-x-hidden min-w-0 max-w-full`. Tối ưu tab switcher thành `grid-cols-2 sm:flex` với nhãn "Tập viết AI".
+- **Chuẩn hóa toàn diện múi giờ tracking tiến độ học tập về Giờ Việt Nam (`Asia/Ho_Chi_Minh` - GMT+7)**:
+  - **Phân tích nguyên nhân gốc rễ**:
+    + Server Backend chạy trên nền tảng đám mây Render (container Linux) mặc định theo giờ quốc tế UTC (GMT+0), chậm hơn Việt Nam 7 tiếng.
+    + Trong khung giờ từ 00:00 đến 06:59 sáng hàng ngày theo giờ Việt Nam (khi UTC vẫn là 17:00 đến 23:59 của ngày hôm trước), các lệnh `new Date()` thuần hoặc `getLocalDateStr()` trả về ngày hôm qua, dẫn đến việc xác định sai nhiệm vụ hôm nay, streak, nợ bài hôm qua và tự động ghi nhận tiến độ.
+  - **Giải pháp & Triển khai**:
+    + Cấu hình `process.env.TZ = 'Asia/Ho_Chi_Minh'` ngay đầu tệp [index.js](file:///d:/AI/japanese_learning/website/backend/src/index.js) và thêm `TZ=Asia/Ho_Chi_Minh` vào [.env](file:///d:/AI/japanese_learning/website/backend/.env).
+    + Xây dựng module tiện ích thời gian tập trung [vietnamTime.js](file:///d:/AI/japanese_learning/website/backend/src/utils/vietnamTime.js) cung cấp `getVietnamDateStr()`, `getVietnamTimeStr()`, `getVietnamTimeParts()`, `addVietnamDays()`, `getYesterdayVietnamDateStr()`, `getTomorrowVietnamDateStr()` định dạng chuẩn xác theo `Intl.DateTimeFormat` với `timeZone: 'Asia/Ho_Chi_Minh'`.
+    + Đồng bộ toàn bộ các tuyến Backend: [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js), [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js), [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js), [notificationSchedulerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/notificationSchedulerService.js).
+    + Đồng bộ [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx) của Frontend Next.js: Sử dụng `Intl.DateTimeFormat` với `timeZone: 'Asia/Ho_Chi_Minh'` cho `startDateStr`, `endDateStr`, `todayStr`, `tomorrowDateStr`, và kiểm tra push notification.
+- **Kiểm định & Xác thực**:
+  - `node --check` toàn bộ các file backend: Đạt 100% PASS (0 lỗi cú pháp).
+  - Script unit test kiểm tra logic chuyển đổi múi giờ `vietnamTime.js` qua các mốc UTC biên (00:30, 06:59 sáng VN): Đạt 100% PASS.
+  - `npx tsc --noEmit` toàn bộ Frontend: Đạt 100% PASS (0 lỗi TypeScript).
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5 (không commit/push git nếu không có lệnh trực tiếp từ người dùng).
+
+### Mốc 136: Cơ Chế Đo Thời Gian Học Thực Tế Tích Cực (Anti-Idle & Active Tab), Đồng Bộ Đa Thiết Bị (Delta Sync) & Báo Cáo Hằng Ngày Đa Vị Trí (Đã hoàn thành - 01/10/2026)
+- **Cơ chế đo thời gian học thực tế chuẩn xác (Anti-Idle & Anti-Fake Time)**:
+  - Chỉ tính thời gian khi người học đang thực sự mở tab và tương tác trên web:
+    + Sử dụng **Page Visibility API (`document.visibilityState`)**: Tự động tạm dừng (Pause) ngay lập tức khi tab bị ẩn hoặc chuyển sang tab khác.
+    + Cơ chế **Idle Detection (Chống tính giờ khi treo máy/bỏ đi)**: Lắng nghe các sự kiện tương tác (`mousemove`, `keydown`, `scroll`, `touchstart`, `pointerdown`). Nếu sau 60 giây không có bất kỳ thao tác nào $\rightarrow$ Tự động chuyển sang trạng thái tạm dừng. Ngay khi chạm/di chuột lại $\rightarrow$ Tiếp tục đếm.
+    + Chuẩn hóa theo Múi giờ Việt Nam (`Asia/Ho_Chi_Minh` - GMT+7): Tự động chuyển mốc ngày mới vào đúng 00:00 đêm giờ Việt Nam.
+- **Kiến trúc đồng bộ Đa Thiết Bị (Incremental Delta Sync)**:
+  - Khắc phục triệt để vấn đề mất dữ liệu khi người học dùng luân phiên trên nhiều thiết bị (Laptop, iPhone 15 Pro, iPad...):
+    + Khi mở web, thiết bị lấy tổng số giây tích lũy hôm nay từ Server qua `GET /api/user/study-time/today` làm mốc nền.
+    + Trong quá trình học, thiết bị chỉ đếm lượng thời gian tăng thêm trên thiết bị này (`deltaSeconds`).
+    + Định kỳ mỗi 30s hoặc khi rời tab/đóng trang (`visibilitychange`, `beforeunload`, `pagehide`), gửi `POST /api/user/study-time` để Server cộng dồn: `serverTotalSeconds[userId][date] += deltaSeconds`.
+    + Dù học trên máy tính hay điện thoại, dữ liệu luôn được cộng dồn chính xác 100% và bảo toàn bền vững trong CSDL [user_study_time.json](file:///d:/AI/japanese_learning/website/backend/src/db/user_study_time.json) (hỗ trợ đồng bộ Supabase).
+- **Triển khai Hiển thị Thời gian học hôm nay & Báo cáo ngày đa vị trí**:
+  1. **Mini Live Badge trên Header / Top Bar ([StudyTimeBadge.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/StudyTimeBadge.tsx))**:
+     - Hiển thị nhỏ gọn, thẩm mỹ: `⏱️ 25m` (kèm chấm xanh lá phát sáng nhịp tim nhẹ khi active / màu vàng hổ phách khi idle).
+     - Bấm vào mở ngay [DailyReportModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/DailyReportModal.tsx) xem báo cáo ngày toàn diện.
+     - Tích hợp trên Top Bar của toàn bộ các trang: [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx), [radicals/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/radicals/page.tsx), [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx), [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx).
+  2. **Trong Menu Cài đặt ([SidebarSettings.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/SidebarSettings.tsx))**:
+     - Hiển thị dòng `⏱️ Đã học hôm nay: {formatStudyTime(studyTimeSeconds)}` ngay trong thẻ người dùng.
+     - Bổ sung nút bấm `📊 Báo cáo ngày hôm nay` (nhúng `<DailyReportModal />` bên trong `SidebarSettings`, cho phép xem báo cáo từ bất kỳ màn hình nào).
+  3. **Trên Trang Tiến Độ Dashboard ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))**:
+     - Thêm nút `📊 Báo Cáo Ngày` trên Header bar.
+     - Hiển thị huy hiệu `⏱️ Thực tế: {formatStudyTime(todayStudyTimeSeconds)}` trong khu vực Nhiệm vụ hôm nay.
+     - Trong bảng `Daily History`: Từng ngày đều có huy hiệu `⏱️ {day.studyTimeFormatted}` ghi nhận thời lượng học thực tế.
+  4. **Trong [DailyReportModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/DailyReportModal.tsx) & [DayDetailModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/DayDetailModal.tsx)**:
+     - Hiển thị banner nổi bật `⏱️ Thời gian học thực tế hôm nay: X phút`.
+     - Trong lưới chi tiết ngày của `DayDetailModal`: Hiển thị cột `Thời gian học: ⏱️ {dayData.studyTimeFormatted}`.
+- **Kiểm định & Xác thực**:
+  - `node --check` các file backend: Đạt 100% PASS (0 lỗi cú pháp).
+  - Script kiểm thử kịch bản mô phỏng đa thiết bị (Laptop 30p + iPhone 20p = 50p): Đạt 100% PASS.
+  - `npx tsc --noEmit` toàn bộ Frontend: Đạt 100% PASS (0 lỗi TypeScript).
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5 (không commit/push git nếu không có lệnh trực tiếp từ người dùng).
+
 ### Mốc 137: Thanh Lọc Triệt Để Khoá Học Marugoto, Thu Gọn Toàn Diện Toàn Bộ Ứng Dụng Chuyên Biệt Cho Minna No Nihongo (Bài 1 - 50) (Đã hoàn thành - 01/10/2026)
 - **Frontend Cleanup**:
   - Dọn sạch hơn 5.000 dòng mã phế liệu liên quan đến Marugoto trong [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx):
@@ -1524,3 +1941,37 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Biên dịch Frontend: `npx tsc --noEmit` đạt 100% (0 lỗi TypeScript).
   - Cú pháp Backend: `node -c` trên toàn bộ tệp index, routes, mockDb, seed đạt 100% (0 lỗi).
   - Toàn bộ nền tảng vận hành duy nhất, chuẩn chỉ và tối ưu cho giáo trình **Minna no Nihongo (Bài 1 - 50)**.
+
+### Mốc 138: Khắc Phục Triệt Để Tràn Thanh Ngang Mobile (iPhone 15 Pro 393px) Tại Phân Hệ Ôn Tập & Sửa Lỗi Replan Bỏ Qua Bài Chưa Hoàn Thành (Đã hoàn thành - 01/10/2026)
+- **Khắc phục lỗi thanh cuộn ngang (Overflow-X) trên iPhone 15 Pro (Viewport 393px)**:
+  - **Trang Bài học (`lessons/[id]/page.tsx`)**:
+    + Bổ sung `overflow-x-hidden min-w-0 max-w-full` và điều chỉnh padding mobile `p-3.5 sm:p-6 lg:p-10` cho thẻ `<main>` chính.
+    + Thêm `flex-wrap gap-2 sm:gap-3 max-w-full` vào cụm Level N5/N4 + Tra cứu + Select bài học; giới hạn độ rộng `<select>` với `min-w-0 max-w-[160px] sm:max-w-xs truncate` để không đẩy bung chiều rộng trên màn hình nhỏ.
+    + Tinh chỉnh thanh chuyển đổi Segmented Control Ôn Từ Vựng ⇋ Ôn Chữ Hán: Thêm `w-full max-w-md`, áp dụng nhãn rút gọn responsive (`sm:hidden` "Ôn Kanji" / `hidden sm:inline` "Ôn Chữ Hán (Kanji)") và padding `px-2 sm:px-3`.
+    + Toolbar Ôn từ vựng (`renderInteractivePractice`): Chuyển sang `p-3.5 sm:p-5` kèm `overflow-x-hidden min-w-0 max-w-full w-full`.
+  - **Tab Luyện Kanji (`KanjiPracticeTab.tsx`)**:
+    + Thêm `overflow-x-hidden min-w-0 max-w-full w-full` vào root container.
+    + Tối ưu padding các thẻ bài học: `p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl` và thẻ câu đố `p-4 sm:p-6`.
+    + Thêm `truncate px-1.5 sm:px-2 text-[11px] sm:text-xs` cho 4 nút chọn chiều Speedrun để không tràn lưới 2 cột.
+  - **Trang Kiến thức (`knowledge/page.tsx`)**:
+    + Điều chỉnh padding `<main>` và toolbar luyện tập thành `p-3.5 sm:p-6 lg:p-10` và `p-3.5 sm:p-5`.
+- **Sửa triệt để lỗi Replan bỏ qua Bài 1 và Bài 2**:
+  - **Phân tích nguyên nhân**:
+    + `dashboard/page.tsx` truyền nhầm `currentProgress: { currentLesson: selectedLessonId }` khi bấm tạo lại kế hoạch, khiến backend coi các bài trước `selectedLessonId` là đã hoàn thành.
+    + `getCompletedLessons` trong `aiPlannerService.js` tự động coi tất cả bài `< currentLesson` và bài có task cũ trong `pastDays` là đã xong toàn bộ (`completed.add(l)`), đồng thời dùng ngưỡng lỏng lẻo 80% (`0.8`).
+    + `generateStudyPlan` và `refineStudyPlan` gán `startLesson = maxCompleted + 1 = 3`, khiến vòng lặp bỏ qua hoàn toàn việc kiểm tra Bài 1 và Bài 2.
+  - **Giải pháp & Triển khai**:
+    + [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx): Chuyển `currentProgress: {}` để backend nạp tiến độ thực tế chính xác từ CSDL.
+    + [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js):
+      * Xóa bỏ hoàn toàn logic giả định sai lầm theo `currentLesson` và `pastDays` trong `getCompletedLessons`.
+      * Chuẩn hóa điều kiện bài hoàn thành: Phải đạt 100% ở cả 3 hạng mục (Từ vựng, Chữ Hán, Mẫu câu).
+      * `generateStudyPlan` luôn quét tuần tự trọn vẹn từ Bài 1 (`startL = 1`), cho phép `generateAlgorithmicPlan` lọc trừ thông minh theo từng mục (Bài 1 đã thuộc từ vựng -> chỉ sinh task Kanji còn thiếu; Bài 2 chưa xong Kanji & Mẫu câu -> sinh đủ task Kanji & Mẫu câu; bài nào thuộc 100% cả 3 mục mới bỏ qua).
+      * `refineStudyPlan`: Tìm bài học đầu tiên chưa hoàn thành trọn vẹn (`firstUnfinishedLesson`) làm mốc bắt đầu, không nhảy cóc theo `maxCompleted + 1`.
+- **Kiểm định & Xác thực**:
+  - `npx tsc --noEmit` toàn bộ Frontend: 100% PASS (0 lỗi TypeScript).
+  - `node --check` các file backend: 100% PASS (0 lỗi cú pháp).
+  - Tập lệnh kiểm thử `verify_replan_fix.js`: Mô phỏng tài khoản thực tế (Bài 1 thuộc 47 từ vựng, 0 kanji; Bài 2 có 0 kanji, 0 ngữ pháp):
+    + Kế hoạch sinh mới và tinh chỉnh: Bài 1 sinh chính xác 3 task Kanji (11 chữ) + 1 task Ngữ pháp + 2 task Ôn tập, không sinh task Từ vựng (vì đã thuộc 100%).
+    + Bài 2 sinh đầy đủ task Từ vựng, Chữ Hán và Mẫu câu.
+    + Kế hoạch tiếp tục phân bổ trọn vẹn đến Bài 50.
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5 (không commit/push git nếu không có lệnh trực tiếp từ người dùng).

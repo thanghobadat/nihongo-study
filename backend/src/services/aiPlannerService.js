@@ -635,21 +635,11 @@ function generateAlgorithmicPlan({
  */
 async function generateStudyPlan(params) {
   // Fresh plan generation strictly for all 50 lessons as required by Rule 7
-  let startL = params.startLesson || 1;
   const masteredItemIds = params.masteredItemIds || (params.userId ? await progressService.getMasteredItemIds(params.userId) : null);
 
-  // If startLesson was not explicitly forced > 1, determine completed lessons from user progress
-  if (!params.startLesson || params.startLesson === 1) {
-    const completedLessons = getCompletedLessons({
-      userId: params.userId,
-      currentProgress: params.currentProgress,
-      masteredItemIds
-    });
-    if (completedLessons && completedLessons.length > 0) {
-      const maxCompleted = Math.max(...completedLessons);
-      startL = Math.max(startL, maxCompleted + 1);
-    }
-  }
+  // Default to lesson 1 (or explicit startLesson if requested) so each lesson 1..50 is evaluated.
+  // generateAlgorithmicPlan automatically skips lessons where 100% of items are already mastered.
+  const startL = params.startLesson || 1;
 
   const basePlan = generateAlgorithmicPlan({
     ...params,
@@ -771,15 +761,10 @@ function getUnfinishedDebt({ userId, plan }) {
 function getCompletedLessons({ userId, currentPlan, currentProgress, masteredItemIds }) {
   const completed = new Set();
 
-  // 1. From currentProgress if explicitly passed
+  // 1. From explicit completedLessons array if explicitly passed
   if (currentProgress && Array.isArray(currentProgress.completedLessons)) {
     for (const l of currentProgress.completedLessons) {
       if (typeof l === 'number' && l >= 1 && l <= 50) completed.add(l);
-    }
-  }
-  if (currentProgress && typeof currentProgress.currentLesson === 'number' && currentProgress.currentLesson > 1) {
-    for (let l = 1; l < currentProgress.currentLesson; l++) {
-      completed.add(l);
     }
   }
 
@@ -825,43 +810,17 @@ function getCompletedLessons({ userId, currentPlan, currentProgress, masteredIte
           }).length;
         }
 
-        const vRate = vocabList.length > 0 ? masteredV / vocabList.length : 1;
-        const kRate = kanjiList.length > 0 ? masteredK / kanjiList.length : 1;
-        const gRate = grammarList.length > 0 ? masteredG / grammarList.length : 1;
+        // Must be 100% mastered across all existing categories to be considered completed!
+        const vDone = vocabList.length === 0 || masteredV === vocabList.length;
+        const kDone = kanjiList.length === 0 || masteredK === kanjiList.length;
+        const gDone = grammarList.length === 0 || masteredG === grammarList.length;
 
-        if (vRate >= 0.8 && kRate >= 0.8 && gRate >= 0.8) {
+        if (vDone && kDone && gDone) {
           completed.add(l);
         }
       }
     } catch (err) {
       console.warn('[AI Planner] Error checking database userProgress:', err.message);
-    }
-  }
-
-  // 3. From currentPlan: Check past days where all scheduled tasks of a lesson were marked completed
-  if (currentPlan && Array.isArray(currentPlan.days)) {
-    const todayStr = getVietnamDateStr();
-    const pastDays = currentPlan.days.filter(d => d.date < todayStr);
-
-    const lessonTaskStats = {};
-    for (const day of pastDays) {
-      for (const t of (day.tasks || [])) {
-        if (!t.lesson) continue;
-        if (!lessonTaskStats[t.lesson]) {
-          lessonTaskStats[t.lesson] = { total: 0, completed: 0 };
-        }
-        lessonTaskStats[t.lesson].total++;
-        if (t.completed) {
-          lessonTaskStats[t.lesson].completed++;
-        }
-      }
-    }
-
-    for (const [lStr, stats] of Object.entries(lessonTaskStats)) {
-      const l = parseInt(lStr, 10);
-      if (stats.total > 0 && stats.completed === stats.total) {
-        completed.add(l);
-      }
     }
   }
 
@@ -880,18 +839,21 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   const todayStr = getVietnamDateStr();
   const targetEndDate = normalizeDateStr(endDate) || (currentPlan && normalizeDateStr(currentPlan.endDate));
 
-  // 1. Determine completed lessons
+  // 1. Determine completed lessons and find earliest unfinished lesson
   const masteredItemIds = userId ? await progressService.getMasteredItemIds(userId) : null;
   const completedLessons = getCompletedLessons({ userId, currentPlan, currentProgress, masteredItemIds });
-  const maxCompleted = completedLessons.length > 0 ? Math.max(...completedLessons) : 0;
+  const completedSet = new Set(completedLessons);
 
-  let startLesson = 1;
-  if (currentProgress && typeof currentProgress.currentLesson === 'number' && currentProgress.currentLesson > 1) {
-    startLesson = Math.max(currentProgress.currentLesson, maxCompleted + 1);
-  } else if (maxCompleted > 0) {
-    startLesson = maxCompleted + 1;
+  // Earliest lesson (1..50) that still has unmastered knowledge
+  let firstUnfinishedLesson = 1;
+  for (let l = 1; l <= 50; l++) {
+    if (!completedSet.has(l)) {
+      firstUnfinishedLesson = l;
+      break;
+    }
   }
-  startLesson = Math.min(50, Math.max(1, startLesson));
+
+  const startLesson = Math.min(50, Math.max(1, firstUnfinishedLesson));
 
   // 2. Determine effective start date & past days
   let effectiveStartDate = todayStr;
