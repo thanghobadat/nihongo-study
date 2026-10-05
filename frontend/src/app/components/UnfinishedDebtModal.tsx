@@ -4,12 +4,15 @@ import React from 'react';
 
 export interface DebtItem {
   taskId: string;
+  date?: string;
   title: string;
   itemType: string;
   lesson: number;
   targetCount: number;
   completedCount: number;
   missingCount: number;
+  scopeDetails?: string;
+  estimatedMinutes?: number;
 }
 
 interface UnfinishedDebtModalProps {
@@ -17,7 +20,7 @@ interface UnfinishedDebtModalProps {
   onClose: () => void;
   yesterdayDate: string | null;
   debtItems: DebtItem[];
-  onReplan: () => Promise<void>;
+  onReplan: () => Promise<void> | void;
   onCatchUpToday: () => void;
   isReplanning?: boolean;
 }

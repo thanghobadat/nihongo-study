@@ -1975,3 +1975,71 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
     + Bài 2 sinh đầy đủ task Từ vựng, Chữ Hán và Mẫu câu.
     + Kế hoạch tiếp tục phân bổ trọn vẹn đến Bài 50.
   - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5 (không commit/push git nếu không có lệnh trực tiếp từ người dùng).
+
+### Mốc 139: Nâng Thời Gian Speedrun Kanji Lên 20 Giây & Tích Hợp Khối Hiển Thị Bài Tập Còn Nợ Trên Dashboard (Đã hoàn thành - 05/10/2026)
+- **Nâng thời gian làm bài tập phản xạ Kanji lên 20 giây ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx))**:
+  - Đổi giá trị khởi tạo và thời gian cơ bản từ 10s lên **20s** (`speedrunTimeLeft`, `speedrunMaxTime`, `speedrunMaxTimeRef`, `initialTime`, `maxTime`).
+  - Giữ nguyên 100% cơ chế trừ thời gian theo streak: giảm 10% (nhân 0.9) sau mỗi 3 câu đúng (`Math.floor(streak / 3)`), giới hạn tối thiểu chặn sàn là 2 giây (`Math.max(2, ...)`).
+  - Thanh tiến trình đếm ngược co đều đặn từ 20s với độ chính xác cao 50ms chống trễ nhịp.
+- **Tích hợp khối hiển thị Bài Tập Còn Nợ trên Dashboard ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))**:
+  - Vị trí: Đặt trực tiếp giữa **Khung thời gian mục tiêu (Plan)** và **Nhiệm vụ hôm nay** đúng theo đặc tả yêu cầu.
+  - Nâng cấp Backend `getUnfinishedDebt` trong [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js): Quét toàn diện tất cả các ngày trong quá khứ trước hôm nay (`d.date < todayStr`), tập hợp đầy đủ các bài tập chưa hoàn thành kèm ngày giao, tên bài, phạm vi chi tiết, số lượng thiếu và ước tính thời gian.
+  - Giao diện người dùng:
+    - Khi có bài nợ: Container card viền hổ phách sang trọng, hiển thị chi tiết từng bài nợ kèm ngày giao, số lượng thiếu, nút `🚀 Vào học bù ngay ➔` điều hướng chính xác đến bài học và tab tương ứng, cùng nút `✨ Nhờ AI Replan (Giữ Deadline)` để phân bổ lại nợ.
+    - Khi không có bài nợ: Hiển thị card trạng thái sạch nợ khuyến khích người học (`✓ 0 bài nợ (100%)`).
+- **Kiểm định & Xác thực**:
+  - `npx tsc --noEmit` toàn bộ Frontend: Đạt 100% PASS (0 lỗi TypeScript).
+  - `node --check` các file backend: Đạt 100% PASS (0 lỗi cú pháp).
+  - Kiểm thử unit test `getUnfinishedDebt`: Xác nhận nhận diện chính xác bài nợ từ các ngày trước hôm nay.
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5 (không commit/push git nếu không có lệnh trực tiếp từ người dùng).
+
+### Mốc 140: Tích Hợp Popup Xác Nhận AI Replan Chống Bấm Nhầm Kèm Bộ Đếm & Cảnh Báo Sư Phạm Chống Ỷ Lại (Đã hoàn thành - 05/10/2026)
+- **Thiết kế Component `ReplanConfirmModal` ([ReplanConfirmModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/ReplanConfirmModal.tsx))**:
+  - Popup xác nhận chống bấm nhầm với giao diện Dark Mode Glassmorphism cao cấp, viền hổ phách sắc nét, hiệu ứng animation mượt mà và `z-[70]` luôn hiển thị trên mọi lớp modal khác.
+  - **Bộ đếm số lần Replan (`replanCount`)**: Hiển thị badge thống kê số lần đã replan và nhãn `Lần này là Lần #{nextCount}` nổi bật.
+  - **Hệ thống cảnh báo sư phạm đa tầng (Pedagogical Guardrails) tăng dần theo tần suất**:
+    + *Lần 0*: Lời khuyên khởi đầu nhẹ nhàng (khuyến khích tự học bù để giữ kỷ luật và thói quen).
+    + *Lần 1 - 2*: Nhắc nhở sư phạm (việc dời bài sẽ làm tải học tập các ngày tới tăng lên).
+    + *Lần 3 - 4*: Cảnh báo tải học tập màu cam (các bài dời bắt đầu tích tụ và tạo áp lực thời gian lớn hơn).
+    + *Lần 5 trở lên*: Cảnh báo nghiêm túc màu đỏ nhấp nháy chống thói quen ỷ lại vào việc Replan, cảnh báo nguy cơ vỡ kế hoạch nếu liên tục trì hoãn.
+  - 2 Nút hành động rõ ràng:
+    + `💪 Hủy bỏ - Tôi sẽ tự học bù`: Đóng modal, không can thiệp kế hoạch.
+    + `✨ Xác nhận Replan (Lần #{nextCount})`: Xác nhận thực hiện việc dàn trải hoặc làm mới plan.
+- **Tích hợp toàn diện trên Dashboard & Modal Bài Nợ ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx), [UnfinishedDebtModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/UnfinishedDebtModal.tsx))**:
+  - Gắn chặn xác nhận tại tất cả các điểm kích hoạt Replan:
+    1. Nút `✨ Nhờ AI Replan (Giữ Deadline)` tại khối Bài Tập Còn Nợ.
+    2. Nút `✨ Nhờ AI Replan (Dàn trải nợ, Giữ Deadline)` trong modal cảnh báo nợ tự động `UnfinishedDebtModal`.
+    3. Nút `✨ Tạo lại plan theo mốc này` tại Khung thời gian mục tiêu (Plan Timeline).
+  - Đồng bộ và lưu trữ bền vững trạng thái `replanCount` song song qua `localStorage.getItem('nihongo_replan_count')` và trường `replanCount` trong `studyPlan` trên server, tự động nạp lại khi tải trang hoặc đăng nhập lại.
+  - Nâng cấp endpoint backend `POST /api/user/replan-debt` ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js)) tự động tăng `updatedPlan.replanCount = (plan.replanCount || 0) + 1` và đồng bộ lưu trữ.
+- **Kiểm định & Trạng thái Hệ thống**:
+  - `npx tsc --noEmit` Frontend: 100% PASS (0 lỗi TypeScript).
+  - Dev server Backend (cổng 8080) và Next.js Frontend (cổng 3000) đang chạy ổn định.
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5.
+
+### Mốc 141: Lưu Trữ & Đánh Giá Thời Gian Học Từng Ngày Thành Dạng Bảng (Ngày X Học Y Tiếng) (Đã hoàn thành - 05/10/2026)
+- **Nâng cấp Hệ thống Lưu trữ & API Backend ([studyTimeService.js](file:///d:/AI/japanese_learning/website/backend/src/services/studyTimeService.js), [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))**:
+  - Viết hàm `evaluateStudyTime(seconds)`: Đánh giá phân loại nỗ lực học tập theo 5 cấp độ (Xuất sắc 🔥 ≥2h, Đạt chuẩn 🟢 1h-2h, Duy trì 🟡 30p-1h, Khởi động ⚡ <30p, Chưa học 💤 0h).
+  - Viết hàm `getStudyTimeHistory(userId)`: Quy đổi số giây sang số giờ (`hours` dạng số thực 1 chữ số thập phân, vd: `1.5 giờ`), chuỗi hiển thị dễ đọc, thanh tiến độ % so với mục tiêu ngày 1.5h, và tính toán số liệu thống kê tổng hợp (`summary`: tổng giờ tích lũy, số ngày có học, trung bình giờ/ngày, kỷ lục 1 ngày, tỷ lệ ngày đạt chuẩn).
+  - Thêm endpoint `GET /api/user/study-time/history`.
+  - Cập nhật mapping endpoint `GET /api/user/daily-history` trả về song song `studyTimeHours` và `studyTimeEvaluation`.
+- **Phát triển Component Bảng Thời Gian Học Chuyên Biệt ([StudyTimeHistoryModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/StudyTimeHistoryModal.tsx))**:
+  - Thiết kế Dark Mode Glassmorphism cao cấp, viền sắc nét và responsive mượt mà.
+  - **5 Thẻ thống kê tổng quan (Cards)**: Tổng tích lũy (giờ), Số ngày có học, Trung bình giờ/ngày, Kỷ lục 1 ngày, Tỷ lệ ngày đạt chuẩn (≥ 1h).
+  - **Bộ lọc thời gian 3 nấc**: 7 ngày qua, 30 ngày qua, Toàn bộ lịch sử.
+  - **Bảng dữ liệu chi tiết từng ngày (Table View)**:
+    + Cột Ngày học (Thứ, DD/MM/YYYY, nhãn "Hôm nay 🟢").
+    + Cột Thời gian học (hiển thị rõ số tiếng, vd: `1.8 giờ`, kèm text chi tiết `1 giờ 48 phút`).
+    + Cột Tiến độ mục tiêu ngày (% hoàn thành so với mốc khuyến nghị 1.5h kèm thanh progress bar chuyển màu).
+    + Cột Đánh giá nỗ lực (Badge màu sư phạm: Xuất sắc 🔥, Đạt chuẩn 🟢, Duy trì 🟡, Khởi động ⚡).
+    + Cột Nhận xét sư phạm (lời khuyên & động viên chuyên cần).
+- **Tích hợp Hiển thị Toàn diện trên Dashboard & Modal Báo Cáo ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx), [DailyReportModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/DailyReportModal.tsx), [StudyTimeBadge.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/StudyTimeBadge.tsx))**:
+  - Bổ sung nút bấm **"⏱️ Bảng Thời Gian Học"** ngay tại thanh Header của Dashboard.
+  - Nâng cấp bảng `Bảng Lịch Sử & Đánh Giá Tiến Độ Từng Ngày` trên Dashboard: thêm cột riêng **"⏱️ Thời gian học"** (hiển thị rõ `X.X tiếng`) và **"Đánh giá nỗ lực"** (badge màu trực quan), kèm nút tắt mở Bảng chuyên biệt.
+  - Nâng cấp `DailyReportModal`: Bổ sung liên kết nút `Bảng các ngày ➔` ở phần thời gian học thực tế hôm nay để người học dễ dàng chuyển tiếp.
+  - Tích hợp liên kết mở bảng trong `StudyTimeBadge`.
+- **Kiểm định & Trạng thái Hệ thống**:
+  - `npx tsc --noEmit` Frontend: 100% PASS (0 lỗi TypeScript).
+  - `node --check` Backend: 100% PASS (0 lỗi cú pháp).
+  - Dev server Backend (cổng 8080) và Next.js Frontend (cổng 3000) đang chạy ổn định.
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5.

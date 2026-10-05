@@ -49,7 +49,7 @@
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
         "plannedCount": 3,
-        "completedCount": 0,
+        "completedCount": 3,
         "workloadPoints": 36,
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 36 từ vựng của Bài 1 (36 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "totalEstimatedMinutes": 216,
@@ -78,15 +78,16 @@
             "title": "Minna Bài 1: Học từ vựng (Phần 1/3: 12 từ)",
             "scopeDetails": "Phần 1: 12 từ (Từ #1: わたし ➔ #12: けんきゅうしゃ)",
             "targetCount": 12,
-            "currentCount": 0,
+            "currentCount": 12,
             "workloadPoints": 12,
             "estimatedMinutes": 72,
             "link": "/lessons/1?tab=vocab",
-            "completed": false,
+            "completed": true,
             "date": "2026-09-24",
             "due_time": "17:00",
             "step": 1,
-            "progressPct": 0
+            "progressPct": 100,
+            "completed_at": "✓ Tự động ghi nhận"
           },
           {
             "id": "task_2026-09-24_vocabulary_L1_p2",
@@ -118,15 +119,16 @@
             "title": "Minna Bài 1: Học từ vựng (Phần 2/3: 18 từ)",
             "scopeDetails": "Phần 2: 18 từ (Từ #13: エンジニア ➔ #30: イギリス)",
             "targetCount": 18,
-            "currentCount": 0,
+            "currentCount": 18,
             "workloadPoints": 18,
             "estimatedMinutes": 108,
             "link": "/lessons/1?tab=vocab",
-            "completed": false,
+            "completed": true,
             "date": "2026-09-24",
             "due_time": "18:30",
             "step": 2,
-            "progressPct": 0
+            "progressPct": 100,
+            "completed_at": "✓ Tự động ghi nhận"
           },
           {
             "id": "task_2026-09-24_vocabulary_L1_p3",
@@ -146,18 +148,19 @@
             "title": "Minna Bài 1: Học từ vựng (Phần 3/3: 6 từ)",
             "scopeDetails": "Phần 3: 6 từ (Từ #31: インド ➔ #36: ドイツ)",
             "targetCount": 6,
-            "currentCount": 0,
+            "currentCount": 6,
             "workloadPoints": 6,
             "estimatedMinutes": 36,
             "link": "/lessons/1?tab=vocab",
-            "completed": false,
+            "completed": true,
             "date": "2026-09-24",
             "due_time": "21:00",
             "step": 3,
-            "progressPct": 0
+            "progressPct": 100,
+            "completed_at": "✓ Tự động ghi nhận"
           }
         ],
-        "completionRate": 0
+        "completionRate": 100
       },
       {
         "date": "2026-09-25",
@@ -167,7 +170,7 @@
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
         "plannedCount": 2,
-        "completedCount": 0,
+        "completedCount": 1,
         "workloadPoints": 26,
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 1 gồm 11 từ vựng, 5 chữ Hán và 0 mẫu câu (26 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "totalEstimatedMinutes": 156,
@@ -193,17 +196,18 @@
             "title": "Minna Bài 1: Học từ vựng (Phần 3/3: 11 từ)",
             "scopeDetails": "Phần 3: 11 từ (Từ #37: にほん ➔ #47: おいくつ)",
             "targetCount": 11,
-            "currentCount": 0,
+            "currentCount": 11,
             "workloadPoints": 11,
             "estimatedMinutes": 66,
             "link": "/lessons/1?tab=vocab",
-            "completed": false,
+            "completed": true,
             "lesson_id": 1,
             "id": "task_2026-09-25_vocabulary_L1_p3",
             "date": "2026-09-25",
             "due_time": "17:00",
             "step": 1,
-            "progressPct": 0
+            "progressPct": 100,
+            "completed_at": "✓ Tự động ghi nhận"
           },
           {
             "lesson": 1,
@@ -233,7 +237,7 @@
             "progressPct": 0
           }
         ],
-        "completionRate": 0
+        "completionRate": 50
       },
       {
         "date": "2026-09-26",
@@ -1042,7 +1046,8 @@
             "date": "2026-10-05",
             "due_time": "17:00",
             "step": 1,
-            "progressPct": 0
+            "progressPct": 0,
+            "overdueNotified": true
           },
           {
             "lesson": 4,
@@ -1082,10 +1087,12 @@
             "date": "2026-10-05",
             "due_time": "18:30",
             "step": 2,
-            "progressPct": 0
+            "progressPct": 0,
+            "overdueNotified": true
           }
         ],
-        "completionRate": 0
+        "completionRate": 0,
+        "streakAlertNotified": true
       },
       {
         "date": "2026-10-06",

@@ -44,3 +44,70 @@ export function formatStudyTimeShort(totalSeconds: number): string {
   if (remMins === 0) return `${hours}h`;
   return `${hours}h${remMins}m`;
 }
+
+export function formatStudyHours(totalSeconds: number): string {
+  const sec = Math.max(0, Math.floor(totalSeconds || 0));
+  const hours = (sec / 3600).toFixed(1);
+  return `${hours} giờ`;
+}
+
+export interface StudyTimeEvaluation {
+  level: 'excellent' | 'standard' | 'moderate' | 'starter' | 'none';
+  label: string;
+  badge: string;
+  color: string;
+  score: number;
+  comment: string;
+}
+
+export function evaluateStudyTime(totalSeconds: number): StudyTimeEvaluation {
+  const sec = Math.max(0, Math.floor(totalSeconds || 0));
+  if (sec >= 7200) {
+    return {
+      level: 'excellent',
+      label: 'Xuất sắc (≥ 2h)',
+      badge: '🔥',
+      color: 'emerald',
+      score: 100,
+      comment: 'Nỗ lực học tập phi thường, vượt chỉ tiêu ngày!'
+    };
+  }
+  if (sec >= 3600) {
+    return {
+      level: 'standard',
+      label: 'Đạt chuẩn (1h - 2h)',
+      badge: '🟢',
+      color: 'teal',
+      score: 80,
+      comment: 'Đạt thời lượng khuyến nghị lý tưởng cho kỳ thi JLPT.'
+    };
+  }
+  if (sec >= 1800) {
+    return {
+      level: 'moderate',
+      label: 'Duy trì (30p - 1h)',
+      badge: '🟡',
+      color: 'amber',
+      score: 60,
+      comment: 'Giữ vững nhịp độ và thói quen học tập hàng ngày.'
+    };
+  }
+  if (sec > 0) {
+    return {
+      level: 'starter',
+      label: 'Khởi động (< 30p)',
+      badge: '⚡',
+      color: 'cyan',
+      score: 30,
+      comment: 'Đã có nỗ lực khởi động, hãy tăng tốc học thêm nhé!'
+    };
+  }
+  return {
+    level: 'none',
+    label: 'Chưa học (0h)',
+    badge: '💤',
+    color: 'slate',
+    score: 0,
+    comment: 'Chưa ghi nhận thời gian học trong ngày.'
+  };
+}

@@ -111,8 +111,8 @@ export default function KanjiPracticeTab({
   const [speedrunHighScore, setSpeedrunHighScore] = useState<number>(0);
   const [speedrunStreak, setSpeedrunStreak] = useState<number>(0);
   const [speedrunMaxStreak, setSpeedrunMaxStreak] = useState<number>(0);
-  const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(10);
-  const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
+  const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(20);
+  const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(20);
   const [speedrunDirection, setSpeedrunDirection] = useState<'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-vocab' | 'both'>('both');
   const [speedrunWrongList, setSpeedrunWrongList] = useState<KanjiItemData[]>([]);
 
@@ -130,7 +130,7 @@ export default function KanjiPracticeTab({
 
   const speedrunTimerRef = useRef<any>(null);
   const speedrunScoreRef = useRef<number>(0);
-  const speedrunMaxTimeRef = useRef<number>(10);
+  const speedrunMaxTimeRef = useRef<number>(20);
 
   // Load Speedrun high score from localStorage
   useEffect(() => {
@@ -147,7 +147,7 @@ export default function KanjiPracticeTab({
   // Calculate dynamic max time based on streak (similar to vocab speedrun: 10% reduction every 3 streaks, min 2s)
   const getDynamicTimeForStreak = (streak: number): number => {
     const reductionCount = Math.floor(streak / 3);
-    return Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
+    return Math.max(2, Math.round(20 * Math.pow(0.9, reductionCount) * 10) / 10);
   };
 
   // Generate next Speedrun Question
@@ -302,7 +302,7 @@ export default function KanjiPracticeTab({
     setSpeedrunStreak(0);
     setSpeedrunMaxStreak(0);
     setSpeedrunWrongList([]);
-    const initialTime = 10;
+    const initialTime = 20;
     speedrunMaxTimeRef.current = initialTime;
     setSpeedrunMaxTime(initialTime);
     setSpeedrunTimeLeft(initialTime);
@@ -318,7 +318,7 @@ export default function KanjiPracticeTab({
       return;
     }
 
-    const maxTime = speedrunMaxTimeRef.current || 10;
+    const maxTime = speedrunMaxTimeRef.current || 20;
     const startTime = Date.now();
 
     speedrunTimerRef.current = setInterval(() => {

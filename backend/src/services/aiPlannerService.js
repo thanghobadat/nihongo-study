@@ -682,17 +682,19 @@ Hãy đưa ra lời khuyên huấn luyện (coaching advice) ngắn gọn, truy�
 }
 
 /**
- * Detect Unfinished Debt from yesterday
+ * Detect Unfinished Debt from past days (before today)
  */
 function getUnfinishedDebt({ userId, plan }) {
   if (!plan || !plan.days) {
     return { hasDebt: false, debtItems: [], yesterdayDate: null };
   }
 
+  const todayStr = getVietnamDateStr();
   const yesterdayStr = getYesterdayVietnamDateStr();
 
-  const yesterdayDay = plan.days.find(d => d.date === yesterdayStr);
-  if (!yesterdayDay || !yesterdayDay.tasks || yesterdayDay.tasks.length === 0) {
+  // Find all past days with date < todayStr
+  const pastDays = plan.days.filter(d => d.date < todayStr);
+  if (pastDays.length === 0) {
     return { hasDebt: false, debtItems: [], yesterdayDate: yesterdayStr };
   }
 
@@ -702,49 +704,56 @@ function getUnfinishedDebt({ userId, plan }) {
 
   const debtItems = [];
 
-  for (const task of yesterdayDay.tasks) {
-    if (task.completed) continue;
+  for (const day of pastDays) {
+    for (const task of (day.tasks || [])) {
+      if (task.completed) continue;
 
-    const lesson = task.lesson || 1;
-    let completedCount = 0;
-    const targetCount = task.targetCount || 1;
+      const lesson = task.lesson || task.lesson_id || 1;
+      let completedCount = task.currentCount || 0;
+      const targetCount = task.targetCount || 1;
 
-    if (task.itemType === 'vocabulary') {
-      const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
-      completedCount = vocabList.filter(v => {
-        const status = userProgress[`${userId}:vocabulary:${v.id}`];
-        return status === 'mastered';
-      }).length;
-    } else if (task.itemType === 'kanji') {
-      const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
-      completedCount = kanjiList.filter(k => {
-        const status = userProgress[`${userId}:kanji:${k.id}`];
-        return status === 'mastered';
-      }).length;
-    } else if (task.itemType === 'grammar') {
-      const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
-      completedCount = grammarList.filter(g => {
-        const status = userProgress[`${userId}:grammar:${g.id}`];
-        return status === 'mastered';
-      }).length;
-    } else if (task.itemType === 'single_review') {
-      const key = `${userId}:review_session_lesson_${lesson}`;
-      completedCount = userReviewSessions[key] ? 1 : 0;
-    } else if (task.itemType === 'cumulative_review') {
-      const key = `${userId}:combined_review_level_N5`;
-      completedCount = userReviewSessions[key] ? 1 : 0;
-    }
+      if (task.itemType === 'vocabulary') {
+        const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
+        completedCount = vocabList.filter(v => {
+          const status = userProgress[`${userId}:vocabulary:${v.id}`];
+          return status === 'mastered';
+        }).length;
+      } else if (task.itemType === 'kanji') {
+        const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
+        completedCount = kanjiList.filter(k => {
+          const status = userProgress[`${userId}:kanji:${k.id}`];
+          return status === 'mastered';
+        }).length;
+      } else if (task.itemType === 'grammar') {
+        const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
+        completedCount = grammarList.filter(g => {
+          const status = userProgress[`${userId}:grammar:${g.id}`];
+          return status === 'mastered';
+        }).length;
+      } else if (task.itemType === 'single_review') {
+        const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
+        const key2 = `${userId}:review_session_lesson_${lesson}`;
+        completedCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+      } else if (task.itemType === 'cumulative_review') {
+        const key1 = `${userId}:nihongo_review_state_combined`;
+        const key2 = `${userId}:combined_review_level_N5`;
+        completedCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+      }
 
-    if (completedCount < targetCount) {
-      debtItems.push({
-        taskId: task.id,
-        title: task.title,
-        itemType: task.itemType,
-        lesson,
-        targetCount,
-        completedCount,
-        missingCount: targetCount - completedCount
-      });
+      if (completedCount < targetCount) {
+        debtItems.push({
+          taskId: task.id,
+          date: day.date,
+          title: task.title,
+          itemType: task.itemType,
+          lesson,
+          targetCount,
+          completedCount,
+          missingCount: Math.max(1, targetCount - completedCount),
+          scopeDetails: task.scopeDetails,
+          estimatedMinutes: task.estimatedMinutes || 30
+        });
+      }
     }
   }
 

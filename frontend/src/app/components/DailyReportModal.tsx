@@ -24,6 +24,7 @@ interface DailyReportModalProps {
   onContinueStudy: () => void;
   studyTimeFormatted?: string;
   studyTimeSeconds?: number;
+  onOpenHistoryTable?: () => void;
 }
 
 export default function DailyReportModal({
@@ -49,6 +50,7 @@ export default function DailyReportModal({
   onContinueStudy,
   studyTimeFormatted,
   studyTimeSeconds,
+  onOpenHistoryTable,
 }: DailyReportModalProps) {
   if (!isOpen) return null;
 
@@ -163,10 +165,23 @@ export default function DailyReportModal({
               </div>
             </div>
           </div>
-          <div className="text-right">
+          <div className="text-right flex flex-col items-end gap-1.5">
             <span className="inline-block px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
               Đo tích cực 🟢
             </span>
+            {onOpenHistoryTable && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenHistoryTable();
+                }}
+                className="text-[11px] font-bold text-amber-500 hover:text-amber-400 dark:text-amber-400 dark:hover:text-amber-300 hover:underline flex items-center gap-1 cursor-pointer transition-colors"
+                title="Mở bảng lưu trữ và đánh giá thời gian học các ngày (ngày X học Y tiếng)"
+              >
+                <span>Bảng các ngày ➔</span>
+              </button>
+            )}
           </div>
         </div>
 

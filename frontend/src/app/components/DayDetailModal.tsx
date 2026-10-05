@@ -33,6 +33,15 @@ export interface DayHistoryItem {
   workloadPoints?: number;
   studyTimeSeconds?: number;
   studyTimeFormatted?: string;
+  studyTimeHours?: number;
+  studyTimeEvaluation?: {
+    level: string;
+    label: string;
+    badge: string;
+    color: string;
+    score: number;
+    comment: string;
+  };
 }
 
 interface DayDetailModalProps {
@@ -153,11 +162,17 @@ export default function DayDetailModal({
 
           <div>
             <div className="text-[11px] uppercase tracking-wider text-indigo-400 font-semibold">Thời gian học</div>
-            <div className="text-base font-bold text-indigo-300 mt-0.5 flex items-center gap-1">
+            <div className="text-base font-bold text-amber-300 mt-0.5 flex items-baseline gap-1">
               <span>⏱️</span>
-              <span>{dayData.studyTimeFormatted || '0 phút'}</span>
+              <span>{dayData.studyTimeHours !== undefined ? `${dayData.studyTimeHours} giờ` : (dayData.studyTimeFormatted || '0 phút')}</span>
             </div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Đo thực tế</div>
+            <div className="text-[10px] text-slate-400 mt-0.5 flex items-center gap-1">
+              {dayData.studyTimeEvaluation ? (
+                <span className="text-teal-300 font-semibold">{dayData.studyTimeEvaluation.badge} {dayData.studyTimeEvaluation.label}</span>
+              ) : (
+                <span>Đo thực tế ({dayData.studyTimeFormatted || '0 phút'})</span>
+              )}
+            </div>
           </div>
 
           <div>

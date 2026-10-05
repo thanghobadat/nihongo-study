@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { formatStudyTimeShort, getVietnamDateString } from '../utils/studyTimeHelper';
 import DailyReportModal from './DailyReportModal';
+import StudyTimeHistoryModal from './StudyTimeHistoryModal';
 import { api } from '../utils/api';
 
 interface StudyTimeBadgeProps {
@@ -25,6 +26,7 @@ export default function StudyTimeBadge({
   });
   const [isLive, setIsLive] = useState<boolean>(true);
   const [isReportOpen, setIsReportOpen] = useState<boolean>(false);
+  const [isHistoryTableOpen, setIsHistoryTableOpen] = useState<boolean>(false);
   const [reportData, setReportData] = useState<any>(null);
 
   useEffect(() => {
@@ -107,7 +109,16 @@ export default function StudyTimeBadge({
           vocabBehind={0}
           calculatedVocabTargetPerDay={5}
           studyTimeSeconds={seconds}
+          onOpenHistoryTable={() => setIsHistoryTableOpen(true)}
           onContinueStudy={() => setIsReportOpen(false)}
+        />
+      )}
+
+      {/* Study Time History Modal */}
+      {isHistoryTableOpen && (
+        <StudyTimeHistoryModal
+          isOpen={isHistoryTableOpen}
+          onClose={() => setIsHistoryTableOpen(false)}
         />
       )}
     </>

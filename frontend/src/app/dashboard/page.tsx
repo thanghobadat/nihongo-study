@@ -7,11 +7,13 @@ import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
 import DailyReportModal from '../components/DailyReportModal';
 import StudyTimeBadge from '../components/StudyTimeBadge';
-import { formatStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
+import { formatStudyTime, getVietnamDateString, evaluateStudyTime } from '../utils/studyTimeHelper';
 import VisualRoadmapModal from '../components/VisualRoadmapModal';
 import DayDetailModal, { DayHistoryItem } from '../components/DayDetailModal';
 import UnfinishedDebtModal, { DebtItem } from '../components/UnfinishedDebtModal';
 import RebatchTasksModal, { RebatchConfig } from '../components/RebatchTasksModal';
+import ReplanConfirmModal from '../components/ReplanConfirmModal';
+import StudyTimeHistoryModal from '../components/StudyTimeHistoryModal';
 
 // Helper for VAPID base64 conversion
 function urlBase64ToUint8Array(base64String: string) {
@@ -41,6 +43,7 @@ export default function UserDashboard() {
   const [isVisualRoadmapOpen, setIsVisualRoadmapOpen] = useState<boolean>(false);
   const [roadmapInitialTab, setRoadmapInitialTab] = useState<'overview' | 'master_plan'>('overview');
   const [selectedHistoryDay, setSelectedHistoryDay] = useState<DayHistoryItem | null>(null);
+  const [isStudyTimeHistoryOpen, setIsStudyTimeHistoryOpen] = useState<boolean>(false);
 
   // Collapsible Accordion States (Auxiliary sections default collapsed; Main sections always open)
   const [isTomorrowOpen, setIsTomorrowOpen] = useState<boolean>(false);
@@ -52,6 +55,16 @@ export default function UserDashboard() {
   const [debtData, setDebtData] = useState<{ hasDebt: boolean; debtItems: DebtItem[]; yesterdayDate: string | null } | null>(null);
   const [isDebtModalOpen, setIsDebtModalOpen] = useState<boolean>(false);
   const [isReplanningDebt, setIsReplanningDebt] = useState<boolean>(false);
+
+  // Replan Confirm Modal State (Pedagogical guard & counter)
+  const [isReplanConfirmOpen, setIsReplanConfirmOpen] = useState<boolean>(false);
+  const [pendingReplanType, setPendingReplanType] = useState<'debt' | 'timeline'>('debt');
+  const [replanCount, setReplanCount] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      return parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
+    }
+    return 0;
+  });
 
   // Rebatch Modal State
   const [isRebatchModalOpen, setIsRebatchModalOpen] = useState<boolean>(false);
@@ -193,6 +206,15 @@ export default function UserDashboard() {
         setStudyPlan(planRes.plan);
         if (planRes.plan.startDate) setStartDateStr(planRes.plan.startDate);
         if (planRes.plan.endDate) setEndDateStr(planRes.plan.endDate);
+        if (typeof planRes.plan.replanCount === 'number') {
+          setReplanCount(prev => Math.max(prev, planRes.plan.replanCount));
+          if (typeof window !== 'undefined') {
+            const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
+            if (planRes.plan.replanCount > cur) {
+              localStorage.setItem('nihongo_replan_count', String(planRes.plan.replanCount));
+            }
+          }
+        }
       }
 
       if (historyRes && historyRes.success && Array.isArray(historyRes.history)) {
@@ -240,6 +262,27 @@ export default function UserDashboard() {
 
     return () => clearInterval(interval);
   }, [fetchDashboardData, triggerDailyNotificationCheck]);
+
+  // Trigger Replan Confirmation Modal
+  const triggerReplanConfirm = (type: 'debt' | 'timeline') => {
+    setPendingReplanType(type);
+    setIsReplanConfirmOpen(true);
+  };
+
+  // Execute Replan after user confirmed in modal
+  const handleExecuteConfirmedReplan = async () => {
+    setIsReplanConfirmOpen(false);
+    const nextCount = replanCount + 1;
+    setReplanCount(nextCount);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('nihongo_replan_count', String(nextCount));
+    }
+    if (pendingReplanType === 'debt') {
+      await handleReplanDebt();
+    } else {
+      await handleGeneratePlan();
+    }
+  };
 
   // Handle Replan Debt
   const handleReplanDebt = async () => {
@@ -297,10 +340,12 @@ export default function UserDashboard() {
       });
 
       if (res && res.success && res.plan) {
-        setStudyPlan(res.plan);
+        const nextReplanCount = replanCount + 1;
+        const planWithCount = { ...res.plan, replanCount: nextReplanCount };
+        setStudyPlan(planWithCount);
         if (res.plan.startDate) setStartDateStr(res.plan.startDate);
         if (res.plan.endDate) setEndDateStr(res.plan.endDate);
-        await api.post('/api/user/study-plan', { plan: res.plan });
+        await api.post('/api/user/study-plan', { plan: planWithCount });
         showNotification('✨ AI đã làm mới hoàn toàn kế hoạch trọn vẹn 50 bài bám sát mốc thời gian!');
         fetchDashboardData();
       } else {
@@ -608,6 +653,7 @@ export default function UserDashboard() {
   };
 
   const todayTotalEstMinutes = todayTasks.reduce((sum: number, t: any) => sum + (t.estimatedMinutes || 0), 0);
+  const totalDebtEstMinutes = (debtData?.debtItems || []).reduce((sum: number, item: any) => sum + (item.estimatedMinutes || 25), 0);
 
   // Status checks for knowledge sections in today's lesson(s)
   const isVocabDone = todayTasks.some((t: any) => t.itemType === 'vocabulary') && todayTasks.filter((t: any) => t.itemType === 'vocabulary').every((t: any) => t.completed);
@@ -765,6 +811,14 @@ export default function UserDashboard() {
               <span>Báo Cáo Ngày</span>
             </button>
             <button
+              onClick={() => setIsStudyTimeHistoryOpen(true)}
+              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-amber-600/30 flex items-center gap-1.5 transition-all duration-200 active:scale-95 border border-amber-400/30 cursor-pointer"
+              title="Xem bảng đánh giá thời gian học từng ngày (ngày X học Y tiếng)"
+            >
+              <span>⏱️</span>
+              <span>Bảng Thời Gian Học</span>
+            </button>
+            <button
               onClick={() => {
                 setRoadmapInitialTab('overview');
                 setIsVisualRoadmapOpen(true);
@@ -849,7 +903,7 @@ export default function UserDashboard() {
                   </div>
 
                   <button
-                    onClick={handleGeneratePlan}
+                    onClick={() => triggerReplanConfirm('timeline')}
                     disabled={isGeneratingPlan}
                     className={`px-4 py-1.5 rounded-xl border text-xs font-bold transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer ${
                       studyPlan && (startDateStr !== studyPlan.startDate || endDateStr !== studyPlan.endDate)
@@ -873,6 +927,146 @@ export default function UserDashboard() {
             </div>
           )}
         </div>
+
+        {/* 1.5. BÀI TẬP CÒN NỢ (NẰM TRÊN BÀI HỌC HÔM NAY VÀ DƯỚI PHẦN PLAN) */}
+        {debtData?.hasDebt && debtData.debtItems && debtData.debtItems.length > 0 ? (
+          <div className="p-5 sm:p-6 rounded-2xl border-2 border-amber-500/50 bg-gradient-to-br from-slate-900 via-amber-950/20 to-slate-900 shadow-2xl space-y-4 animate-in fade-in duration-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-500/30 pb-3.5">
+              <div>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <h2 className="text-base sm:text-lg font-black text-amber-300 flex items-center gap-2">
+                    <span className="text-xl">⚠️</span>
+                    <span>Bài Tập Còn Nợ ({debtData.debtItems.length} nhiệm vụ)</span>
+                  </h2>
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">
+                    🚨 Chưa hoàn thành
+                  </span>
+                  {totalDebtEstMinutes > 0 && (
+                    <span className="text-xs font-bold text-amber-200 bg-amber-950/80 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                      <span>⏱️</span>
+                      <span>Ước tính: ~{totalDebtEstMinutes} phút</span>
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-300 mt-1">
+                  Nhiệm vụ còn tồn đọng trước hôm nay. Hãy học bù ngay hoặc nhờ AI Replan dàn trải đều vào các ngày tới (giữ nguyên hạn chót)!
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 self-start sm:self-center">
+                <button
+                  type="button"
+                  onClick={() => triggerReplanConfirm('debt')}
+                  disabled={isReplanningDebt}
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 via-rose-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white border border-amber-400/40 shadow-lg shadow-amber-500/20 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  title="Nhờ AI dàn trải bài nợ vào các ngày tiếp theo mà không kéo dài ngày kết thúc"
+                >
+                  <span>✨</span>
+                  <span>{isReplanningDebt ? 'AI đang dàn trải nợ...' : 'Nhờ AI Replan (Giữ Deadline)'}</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3">
+              {debtData.debtItems.map((item, idx) => {
+                const isReviewTask = item.itemType === 'single_review' || item.itemType === 'cumulative_review';
+                const getDebtDestination = () => {
+                  if (item.itemType === 'vocabulary') return `/lessons/${item.lesson}?tab=vocab`;
+                  if (item.itemType === 'kanji') return `/lessons/${item.lesson}?tab=kanji`;
+                  if (item.itemType === 'grammar') return `/roadmap`;
+                  if (item.itemType === 'single_review') return `/lessons/${item.lesson}?tab=review`;
+                  if (item.itemType === 'cumulative_review') return `/knowledge?tab=review`;
+                  return `/lessons/${item.lesson}`;
+                };
+
+                return (
+                  <div
+                    key={item.taskId || idx}
+                    className="p-4 rounded-xl border border-amber-500/35 bg-slate-950/90 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md hover:border-amber-400/50 transition-all"
+                  >
+                    <div className="flex items-start gap-3.5">
+                      <span className="text-2xl mt-0.5">{getTaskIcon(item.itemType)}</span>
+                      <div className="space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase border ${getTaskBadgeStyle(item.itemType)}`}>
+                            {getTaskTypeName(item.itemType)}
+                          </span>
+                          {item.date && (
+                            <span className="text-[11px] font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">
+                              📅 Giao ngày: {item.date}
+                            </span>
+                          )}
+                          <span className="text-[11px] font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/30">
+                            Thiếu {item.missingCount} {item.itemType === 'vocabulary' ? 'từ' : item.itemType === 'kanji' ? 'chữ' : item.itemType === 'grammar' ? 'mẫu' : 'lượt'}
+                          </span>
+                        </div>
+
+                        <div className="text-sm font-bold text-white">
+                          Bài {item.lesson}: {item.title}
+                        </div>
+
+                        {item.scopeDetails && (
+                          <div className="text-xs text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded-lg border border-slate-800 leading-relaxed max-w-xl">
+                            <span className="font-semibold text-amber-300 mr-1">🔍 Chi tiết phạm vi:</span>
+                            <span>{item.scopeDetails}</span>
+                          </div>
+                        )}
+
+                        <div className="text-xs text-slate-400 pt-0.5">
+                          Đã thuộc: <strong className="text-emerald-400">{item.completedCount}</strong> / <strong className="text-slate-200">{item.targetCount}</strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 self-end sm:self-center shrink-0">
+                      {isReviewTask && (
+                        <button
+                          type="button"
+                          onClick={() => handleToggleTaskStatus(item.taskId, true, item.date || debtData.yesterdayDate || todayStr)}
+                          className="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-emerald-500/20 text-amber-200 hover:text-emerald-200 border border-amber-500/40 hover:border-emerald-500/40 transition-all cursor-pointer"
+                          title="Bấm để đánh dấu đã ôn tập bù xong"
+                        >
+                          <span>✓ Đánh dấu xong</span>
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => router.push(getDebtDestination())}
+                        className="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-white shadow-md shadow-rose-500/20 transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
+                      >
+                        <span>🚀 Vào học bù ngay</span>
+                        <span>➔</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <div className="p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+            <div className="flex items-center gap-3">
+              <span className="text-xl sm:text-2xl">🎉</span>
+              <div>
+                <div className="text-sm font-bold text-white flex items-center gap-2">
+                  <span>Bài Tập Còn Nợ</span>
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                    Sạch nợ 🟢
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Tuyệt vời! Bạn không có bài tập nào bị nợ đọng từ các ngày trước. Toàn bộ tiến độ đang được hoàn thành đúng hạn.
+                </p>
+              </div>
+            </div>
+            <div className="self-end sm:self-center">
+              <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/30">
+                ✓ 0 bài nợ (100%)
+              </span>
+            </div>
+          </div>
+        )}
 
         {/* 2. TODAY'S MISSIONS (ALWAYS OPEN - LUÔN MỞ) */}
         <div className="p-5 sm:p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
@@ -1335,12 +1529,28 @@ export default function UserDashboard() {
 
           {isHistoryOpen && (
             <div className="p-5 sm:p-6 border-t border-slate-800 bg-slate-950/60 space-y-4 animate-in fade-in duration-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+                <div className="text-xs text-slate-300">
+                  💡 Bảng hiển thị song song <strong className="text-white">tiến độ hoàn thành nhiệm vụ</strong> và <strong className="text-amber-300">thời gian học thực tế (ngày X học Y tiếng)</strong>.
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsStudyTimeHistoryOpen(true)}
+                  className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold text-xs shadow-md shadow-amber-500/20 active:scale-95 transition-all flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
+                >
+                  <span>⏱️</span>
+                  <span>Mở Bảng Đánh Giá Thời Gian Học Chuyên Biệt</span>
+                </button>
+              </div>
+
               {dailyHistory.length > 0 ? (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs text-slate-300">
                     <thead className="bg-slate-950/80 uppercase tracking-wider text-[11px] text-slate-400 border-b border-slate-800">
                       <tr>
                         <th className="py-3 px-4">Ngày</th>
+                        <th className="py-3 px-4">⏱️ Thời gian học</th>
+                        <th className="py-3 px-4">Đánh giá nỗ lực</th>
                         <th className="py-3 px-4">Mục tiêu</th>
                         <th className="py-3 px-4">Đã xong</th>
                         <th className="py-3 px-4">Tốc độ (Pace)</th>
@@ -1350,6 +1560,8 @@ export default function UserDashboard() {
                     <tbody className="divide-y divide-slate-800/60">
                       {dailyHistory.slice(0, 15).map((day) => {
                         const isToday = day.date === todayStr;
+                        const evalInfo = day.studyTimeEvaluation || evaluateStudyTime(day.studyTimeSeconds || 0);
+
                         return (
                           <tr
                             key={day.date}
@@ -1357,6 +1569,7 @@ export default function UserDashboard() {
                               isToday ? 'bg-indigo-950/20 font-semibold' : ''
                             }`}
                           >
+                            {/* Cột 1: Ngày */}
                             <td className="py-3.5 px-4">
                               <div className="flex items-center gap-2">
                                 <span className="text-white font-bold">{day.date}</span>
@@ -1370,22 +1583,55 @@ export default function UserDashboard() {
                                     Buffer
                                   </span>
                                 )}
-                                {day.studyTimeFormatted && day.studyTimeFormatted !== '0 phút' && (
-                                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 flex items-center gap-1 font-semibold" title="Thời gian học thực tế">
-                                    <span>⏱️</span>
-                                    <span>{day.studyTimeFormatted}</span>
-                                  </span>
-                                )}
                               </div>
                             </td>
-                            <td className="py-3.5 px-4 text-slate-300">
-                              {day.planned_count} nhiệm vụ
+
+                            {/* Cột 2: Thời gian học (Ngày X học Y tiếng) */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              {day.studyTimeSeconds && day.studyTimeSeconds > 0 ? (
+                                <div className="flex items-baseline gap-1">
+                                  <span className="text-amber-300 font-black text-sm">
+                                    {day.studyTimeHours !== undefined ? day.studyTimeHours : Number((day.studyTimeSeconds / 3600).toFixed(1))}
+                                  </span>
+                                  <span className="text-xs text-slate-300 font-bold">tiếng</span>
+                                  <span className="text-[10px] text-slate-400">({day.studyTimeFormatted})</span>
+                                </div>
+                              ) : (
+                                <span className="text-slate-500 text-xs">0.0 giờ</span>
+                              )}
                             </td>
+
+                            {/* Cột 3: Đánh giá nỗ lực */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full border ${
+                                evalInfo.level === 'excellent'
+                                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                                  : evalInfo.level === 'standard'
+                                  ? 'bg-teal-500/20 text-teal-300 border-teal-500/30'
+                                  : evalInfo.level === 'moderate'
+                                  ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                                  : evalInfo.level === 'starter'
+                                  ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30'
+                                  : 'bg-slate-800 text-slate-400 border-slate-700'
+                              }`}>
+                                <span>{evalInfo.badge}</span>
+                                <span>{evalInfo.label}</span>
+                              </span>
+                            </td>
+
+                            {/* Cột 4: Mục tiêu */}
+                            <td className="py-3.5 px-4 text-slate-300">
+                              {day.planned_count} việc
+                            </td>
+
+                            {/* Cột 5: Đã xong */}
                             <td className="py-3.5 px-4">
                               <span className={day.completed_count >= day.planned_count && day.planned_count > 0 ? 'text-emerald-400 font-bold' : 'text-slate-300'}>
                                 {day.completed_count} / {day.planned_count} ({day.completion_rate}%)
                               </span>
                             </td>
+
+                            {/* Cột 6: Tốc độ */}
                             <td className="py-3.5 px-4">
                               <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full border ${
                                 day.pace_status === 'ahead'
@@ -1397,6 +1643,8 @@ export default function UserDashboard() {
                                 {day.pace_label}
                               </span>
                             </td>
+
+                            {/* Cột 7: Thao tác */}
                             <td className="py-3.5 px-4 text-right">
                               <button
                                 onClick={() => setSelectedHistoryDay(day)}
@@ -1533,9 +1781,20 @@ export default function UserDashboard() {
         onClose={() => setIsDebtModalOpen(false)}
         yesterdayDate={debtData?.yesterdayDate || null}
         debtItems={debtData?.debtItems || []}
-        onReplan={handleReplanDebt}
+        onReplan={() => triggerReplanConfirm('debt')}
         onCatchUpToday={() => setIsDebtModalOpen(false)}
         isReplanning={isReplanningDebt}
+      />
+
+      {/* Replan Confirmation Modal with Counter & Pedagogical Guard */}
+      <ReplanConfirmModal
+        isOpen={isReplanConfirmOpen}
+        onClose={() => setIsReplanConfirmOpen(false)}
+        onConfirm={handleExecuteConfirmedReplan}
+        isLoading={isReplanningDebt || isGeneratingPlan}
+        replanType={pendingReplanType}
+        replanCount={replanCount}
+        targetEndDate={studyPlan?.endDate || endDateStr}
       />
 
       {/* Visual Roadmap Modal */}
@@ -1581,6 +1840,7 @@ export default function UserDashboard() {
         vocabBehind={0}
         calculatedVocabTargetPerDay={5}
         studyTimeSeconds={todayStudyTimeSeconds}
+        onOpenHistoryTable={() => setIsStudyTimeHistoryOpen(true)}
         onContinueStudy={() => {
           setIsDailyReportOpen(false);
           router.push(`/lessons/${selectedLessonId}`);
@@ -1595,6 +1855,16 @@ export default function UserDashboard() {
         dayTasks={(rebatchTargetDate || todayStr) === todayStr ? todayTasks : tomorrowTasks}
         onApplyRebatch={(configs) => handleApplyRebatch(configs, rebatchTargetDate || todayStr)}
         isRebatching={isRebatching}
+      />
+
+      {/* Study Time History Modal (Lưu trữ & Đánh giá ngày X học Y tiếng) */}
+      <StudyTimeHistoryModal
+        isOpen={isStudyTimeHistoryOpen}
+        onClose={() => setIsStudyTimeHistoryOpen(false)}
+        onContinueStudy={() => {
+          setIsStudyTimeHistoryOpen(false);
+          router.push(`/lessons/${selectedLessonId}`);
+        }}
       />
     </div>
   );

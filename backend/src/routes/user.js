@@ -2441,6 +2441,7 @@ router.post('/replan-debt', async (req, res) => {
       userId
     });
 
+    updatedPlan.replanCount = (plan.replanCount || 0) + 1;
     mockDb.studyPlans[userId] = updatedPlan;
     savePersistentPlans(mockDb.studyPlans);
     persistPlanToSupabase(userId, updatedPlan);
@@ -3148,7 +3149,9 @@ router.get('/daily-history', async (req, res) => {
         workloadPoints: day.workloadPoints,
         tasks_detail: day.tasks || [],
         studyTimeSeconds: dayStudySeconds,
-        studyTimeFormatted: studyTimeService.formatStudyTime(dayStudySeconds)
+        studyTimeFormatted: studyTimeService.formatStudyTime(dayStudySeconds),
+        studyTimeHours: Number((dayStudySeconds / 3600).toFixed(1)),
+        studyTimeEvaluation: studyTimeService.evaluateStudyTime(dayStudySeconds)
       };
     });
 
@@ -3193,6 +3196,24 @@ router.get('/study-time/today', (req, res) => {
     });
   } catch (err) {
     console.error('[study-time] Error getting today study time:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/user/study-time/history
+ * Lấy toàn bộ lịch sử thời gian học các ngày (ngày X học Y tiếng) kèm đánh giá nỗ lực & thống kê
+ */
+router.get('/study-time/history', (req, res) => {
+  try {
+    const userId = req.user.id;
+    const result = studyTimeService.getStudyTimeHistory(userId);
+    return res.json({
+      success: true,
+      ...result
+    });
+  } catch (err) {
+    console.error('[study-time] Error getting study time history:', err);
     return res.status(500).json({ success: false, error: err.message });
   }
 });

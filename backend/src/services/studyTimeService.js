@@ -156,10 +156,152 @@ async function syncFromSupabase(userId) {
   }
 }
 
+/**
+ * Đánh giá mức độ nỗ lực học tập theo số giây học trong ngày
+ * @param {number} seconds
+ */
+function evaluateStudyTime(seconds) {
+  const sec = Math.max(0, parseInt(seconds, 10) || 0);
+  if (sec >= 7200) {
+    return {
+      level: 'excellent',
+      label: 'Xuất sắc (≥ 2h)',
+      badge: '🔥',
+      color: 'emerald',
+      score: 100,
+      comment: 'Nỗ lực học tập phi thường, vượt chỉ tiêu ngày!'
+    };
+  }
+  if (sec >= 3600) {
+    return {
+      level: 'standard',
+      label: 'Đạt chuẩn (1h - 2h)',
+      badge: '🟢',
+      color: 'teal',
+      score: 80,
+      comment: 'Đạt thời lượng khuyến nghị lý tưởng cho kỳ thi JLPT.'
+    };
+  }
+  if (sec >= 1800) {
+    return {
+      level: 'moderate',
+      label: 'Duy trì (30p - 1h)',
+      badge: '🟡',
+      color: 'amber',
+      score: 60,
+      comment: 'Giữ vững nhịp độ và thói quen học tập hàng ngày.'
+    };
+  }
+  if (sec > 0) {
+    return {
+      level: 'starter',
+      label: 'Khởi động (< 30p)',
+      badge: '⚡',
+      color: 'cyan',
+      score: 30,
+      comment: 'Đã có nỗ lực khởi động, hãy tăng tốc học thêm nhé!'
+    };
+  }
+  return {
+    level: 'none',
+    label: 'Chưa học (0h)',
+    badge: '💤',
+    color: 'slate',
+    score: 0,
+    comment: 'Chưa ghi nhận thời gian học trong ngày.'
+  };
+}
+
+/**
+ * Lấy lịch sử thời gian học theo từng ngày kèm đánh giá nỗ lực và thống kê tổng quan
+ * @param {string} userId
+ */
+function getStudyTimeHistory(userId) {
+  if (!userId) {
+    return {
+      history: [],
+      summary: {
+        totalSeconds: 0,
+        totalHours: 0,
+        totalHoursFormatted: '0 giờ',
+        activeDays: 0,
+        averageHoursPerActiveDay: 0,
+        recordDay: null,
+        standardDays: 0,
+        standardRate: 0
+      }
+    };
+  }
+
+  const userMap = getUserStudyTimeMap(userId);
+  const dates = Object.keys(userMap).sort((a, b) => b.localeCompare(a)); // Mới nhất lên đầu
+
+  let totalSeconds = 0;
+  let activeDays = 0;
+  let standardDays = 0;
+  let recordSeconds = 0;
+  let recordDate = null;
+
+  const history = dates.map(dateStr => {
+    const sec = userMap[dateStr] || 0;
+    const hours = Number((sec / 3600).toFixed(1));
+    totalSeconds += sec;
+
+    if (sec > 0) {
+      activeDays++;
+      if (sec >= 3600) standardDays++;
+      if (sec > recordSeconds) {
+        recordSeconds = sec;
+        recordDate = dateStr;
+      }
+    }
+
+    const evaluation = evaluateStudyTime(sec);
+    // Mục tiêu khuyến nghị: 1.5 giờ = 5400 giây
+    const targetSeconds = 5400;
+    const progressPct = Math.min(100, Math.round((sec / targetSeconds) * 100));
+
+    return {
+      date: dateStr,
+      totalSeconds: sec,
+      hours,
+      formatted: formatStudyTime(sec),
+      hoursLabel: `${hours} giờ`,
+      progressPct,
+      evaluation
+    };
+  });
+
+  const totalHours = Number((totalSeconds / 3600).toFixed(1));
+  const averageHoursPerActiveDay = activeDays > 0 ? Number((totalHours / activeDays).toFixed(1)) : 0;
+  const standardRate = activeDays > 0 ? Math.round((standardDays / activeDays) * 100) : 0;
+
+  return {
+    history,
+    summary: {
+      totalSeconds,
+      totalHours,
+      totalHoursFormatted: formatStudyTime(totalSeconds),
+      activeDays,
+      averageHoursPerActiveDay,
+      recordDay: recordDate ? {
+        date: recordDate,
+        seconds: recordSeconds,
+        hours: Number((recordSeconds / 3600).toFixed(1)),
+        formatted: formatStudyTime(recordSeconds)
+      } : null,
+      standardDays,
+      standardRate
+    }
+  };
+}
+
 module.exports = {
   addStudyTime,
   getStudyTime,
   getUserStudyTimeMap,
   formatStudyTime,
+  evaluateStudyTime,
+  getStudyTimeHistory,
   syncFromSupabase
 };
