@@ -730,6 +730,128 @@ QUY TẮC BẮT BUỘC KHI RA ĐỀ (STRICT GUIDELINES):
   return await callGemini(prompt, schema, { maxOutputTokens: 4000, timeoutMs: 30000 });
 }
 
+/**
+ * Sinh bộ câu hỏi trắc nghiệm nhận diện chữ Hán & từ vựng ngữ cảnh tự nhiên bằng Gemini AI
+ * TUYỆT ĐỐI KHÔNG dùng tiếng Việt trong đề bài và đáp án (trừ câu hỏi nghĩa).
+ * Học viên phải nhận diện 100% bằng tiếng Nhật trực quan.
+ */
+async function generateKanjiRecognitionQuestions({ lessonId, kanjis = [], vocabList = [] }) {
+  if (!Array.isArray(kanjis) || kanjis.length === 0) {
+    throw new Error('kanjis array is required to generate recognition questions');
+  }
+
+  const isSmallScope = kanjis.length <= 4;
+  const targetCount = isSmallScope ? Math.min(8, Math.max(5, kanjis.length * 2)) : Math.min(14, Math.max(8, kanjis.length + 2));
+
+  // Build lesson context
+  const kanjisList = kanjis.map((k, idx) => {
+    const char = k.character || '';
+    const sino = k.sino_vietnamese || k.sinoVietnamese || '';
+    const meaning = k.vietnamese_meaning || k.meaning || '';
+    const on = k.onyomi || '';
+    const kun = k.kunyomi || '';
+    const compounds = k.compounds || '';
+
+    let relatedVocab = [];
+    if (Array.isArray(vocabList) && vocabList.length > 0) {
+      relatedVocab = vocabList
+        .filter(v => v && v.hiragana && ((v.kanji || '').includes(char) || (v.japanese_example || '').includes(char)))
+        .map(v => `${v.hiragana} (${v.vietnamese_meaning || ''})`);
+    }
+
+    return `${idx + 1}. Kanji: "${char}" (Hán Việt: ${sino}, Nghĩa: ${meaning})
+- Âm On: ${on} | Âm Kun: ${kun}
+- Từ ghép: ${compounds || relatedVocab.join(', ') || 'Chưa có'}`;
+  }).join('\n');
+
+  // Sample sentences from vocabList
+  const sampleSentences = Array.isArray(vocabList)
+    ? vocabList
+        .filter(v => v && v.japanese_example)
+        .slice(0, 15)
+        .map(v => `- ${v.japanese_example} (${v.example_meaning || v.vietnamese_meaning || ''})`)
+        .join('\n')
+    : '';
+
+  const prompt = `Bạn là chuyên gia sư phạm tiếng Nhật hàng đầu thế giới về Minna no Nihongo (trình độ N5/N4).
+Nhiệm vụ của bạn là tạo một BỘ CÂU HỎI TRẮC NGHIỆM NHẬN DIỆN CHỮ HÁN & THUỘC TỪ VỰNG THỰC CHIẾN (Kanji Vocabulary Recognition Quiz) cho học viên trong Bài ${lessonId || ''}.
+
+DANH SÁCH CHỮ HÁN MỤC TIÊU TRONG PHẠM VI HỌC VIÊN ĐANG ÔN (${kanjis.length} chữ):
+${kanjisList}
+
+MỘT SỐ CÂU VÍ DỤ VÀ TỪ VỰNG CỦA BÀI HỌC:
+${sampleSentences}
+
+YÊU CẦU QUAN TRỌNG VỀ SỐ LƯỢNG:
+- Hãy sinh chính xác khoảng ${targetCount} câu hỏi trắc nghiệm chất lượng cao.
+
+QUY TẮC BẮT BUỘC VỀ NGÔN NGỮ (STRICT LANGUAGE IMMERSION):
+1. **100% TIẾNG NHẬT TRONG ĐỀ BÀI VÀ CÁC ĐÁP ÁN LỰA CHỌN**:
+   - Học viên cần luyện "nhận diện mặt chữ tiếng Nhật trực quan", vì vậy:
+   - TUYỆT ĐỐI KHÔNG dùng tiếng Việt trong "question_text", "context_sentence" và "options" (trừ loại 'meaning_choice').
+   - TUYỆT ĐỐI KHÔNG mớm tiếng Việt trong câu hỏi (Ví dụ CẤM: "Chọn từ có nghĩa là giáo viên: 【 ? 】").
+   - Hãy viết câu hỏi hoàn toàn bằng tiếng Nhật tự nhiên, trình độ N5 dễ hiểu:
+     * Ví dụ hội thoại: A:「あの方は どなたですか。」 B:「さくら大学の【 ? 】です。」
+     * Ví dụ đọc chữ: 「ミラーさんは アメリカ【人】です。」 【人】の 読み方は どれですか。
+     * Ví dụ chữ Hán đúng: 「あした【がっこう】へ いきます。」 【がくせい】の 正しい 漢字は どれですか。
+2. **ĐA DẠNG HÓA 4 DẠNG CÂU HỎI TỰ NHIÊN (Tránh rập khuôn cứng ngắc)**:
+   - **Dạng 1 (dialogue_fill)**: Hội thoại ngắn 2 câu (A - B) trong đời sống, khuyết 1 từ vựng chữ Hán.
+   - **Dạng 2 (reading_in_context)**: Câu văn tự nhiên có chữ Hán trong ngoặc 【 】, hỏi cách đọc Hiragana đúng trong ngữ cảnh (chú ý phân biệt âm On/Kun thực tế, như 人 trong アメリカ人 đọc là じん, trong あの人 đọc là ひと).
+   - **Dạng 3 (kanji_orthography)**: Câu văn có từ Hiragana, chọn dạng chữ Hán/từ ghép đúng (các đáp án sai là chữ viết đảo trật tự hoặc từ vựng khác trong bài).
+   - **Dạng 4 (word_formation)**: Ghép 2 chữ Hán trong bài thành từ vựng có nghĩa (Ví dụ: 「先」＋「生」＝【 ? 】).
+   - (Chỉ tối đa 1-2 câu dạng **meaning_choice** hỏi nghĩa tiếng Việt nếu cần thiết).
+3. **PHƯƠNG ÁN LỰA CHỌN (options)**:
+   - Luôn gồm đúng 4 lựa chọn (A, B, C, D).
+   - "correct_index" là chỉ số của đáp án đúng (0, 1, 2, hoặc 3).
+   - Các phương án nhiễu phải hợp lý, lấy từ các chữ Hán và từ vựng trong bài học hoặc bẫy đảo thứ tự nét chữ (như 先生 vs 生先).
+4. **GIẢI THÍCH (explanation)**:
+   - Viết bằng TIẾNG VIỆT rõ ràng, phân tích tại sao đáp án đó đúng, chỉ ra cách phát âm On/Kun và mẹo nhớ từ vựng để học viên THUỘC TỪ VỰNG sâu sắc.`;
+
+  const schema = {
+    type: "OBJECT",
+    properties: {
+      questions: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            id: { type: "STRING" },
+            question_type: { 
+              type: "STRING", 
+              enum: ["dialogue_fill", "reading_in_context", "kanji_orthography", "word_formation", "meaning_choice"] 
+            },
+            question_text: { type: "STRING", description: "Câu hỏi hoặc ngữ cảnh viết 100% bằng tiếng Nhật thuần túy (không lộ tiếng Việt)" },
+            context_sentence: { type: "STRING", description: "Câu văn hoặc đoạn hội thoại tiếng Nhật đầy đủ" },
+            target_kanji: { type: "STRING", description: "Chữ Hán mục tiêu đang ôn" },
+            target_word: { type: "STRING", description: "Từ vựng chứa chữ Hán (viết bằng Kanji/Kana)" },
+            target_word_reading: { type: "STRING", description: "Cách đọc Hiragana của từ vựng" },
+            target_word_meaning: { type: "STRING", description: "Nghĩa tiếng Việt của từ vựng để hiển thị sau khi trả lời" },
+            options: {
+              type: "ARRAY",
+              items: { type: "STRING" },
+              description: "Đúng 4 lựa chọn trắc nghiệm (viết bằng tiếng Nhật)"
+            },
+            correct_index: { type: "INTEGER", description: "Chỉ số 0, 1, 2, 3 của đáp án đúng" },
+            explanation: { type: "STRING", description: "Giải thích chi tiết bằng tiếng Việt giúp học viên thuộc từ vựng" }
+          },
+          required: [
+            "question_type",
+            "question_text",
+            "target_kanji",
+            "target_word",
+            "options",
+            "correct_index",
+            "explanation"
+          ]
+        }
+      }
+    },
+    required: ["questions"]
+  };
+
+  return await callGemini(prompt, schema, { maxOutputTokens: 4000, timeoutMs: 30000 });
+}
+
 module.exports = {
   callGemini,
   gradeJapaneseAnswer,
@@ -738,8 +860,10 @@ module.exports = {
   explainRadicalMeaning,
   explainKanjiStructure,
   gradeKanjiHandwritingWithVision,
-  generateKanjiWritingRiddles
+  generateKanjiWritingRiddles,
+  generateKanjiRecognitionQuestions
 };
+
 
 
 

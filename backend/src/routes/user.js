@@ -2129,10 +2129,12 @@ router.get('/review-sessions', async (req, res) => {
       return res.status(400).json({ error: 'storage_key is required' });
     }
 
-    if (!req.user || req.user.isMock) {
-      const key = `${userId}:${storage_key}`;
-      const session = mockDb.userReviewSessions ? mockDb.userReviewSessions[key] : null;
-      return res.json({ session_data: session || null });
+    const key = `${userId}:${storage_key}`;
+    if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
+
+    if (!req.user || req.user.isMock || !isSupabaseConfigured()) {
+      const session = mockDb.userReviewSessions[key] || null;
+      return res.json({ session_data: session });
     }
 
     try {
@@ -2143,22 +2145,51 @@ router.get('/review-sessions', async (req, res) => {
         .eq('storage_key', storage_key)
         .single();
 
-      if (error && error.code !== 'PGRST116') {
-        console.warn('Warning fetching review session from Supabase:', error.message);
+      if (data && data.session_data) {
+        mockDb.userReviewSessions[key] = data.session_data;
+        progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+        return res.json({ session_data: data.session_data });
       }
-
-      return res.json({ session_data: data ? data.session_data : null });
     } catch (dbErr) {
       console.warn('Fallback to local session on error:', dbErr.message);
-      const key = `${userId}:${storage_key}`;
-      const session = mockDb.userReviewSessions ? mockDb.userReviewSessions[key] : null;
-      return res.json({ session_data: session || null });
     }
+    const session = mockDb.userReviewSessions[key] || null;
+    return res.json({ session_data: session });
   } catch (error) {
     console.error('Error in review session handler:', error);
     res.json({ session_data: null });
   }
 });
+
+/**
+ * Helper to mark review session record completed in memory, disk, and Supabase
+ */
+function markReviewSessionCompleted(userId, task, isMock) {
+  if (!task || (task.itemType !== 'single_review' && task.itemType !== 'cumulative_review')) return;
+  const lesson = task.lesson || task.lesson_id || 1;
+  const storageKey = task.itemType === 'single_review'
+    ? `nihongo_review_state_lesson_${lesson}`
+    : `nihongo_review_state_combined`;
+  const sessionData = {
+    completed: true,
+    completed_at: getVietnamTimeStr(),
+    manualMarked: true,
+    timestamp: Date.now()
+  };
+  const key = `${userId}:${storageKey}`;
+  if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
+  mockDb.userReviewSessions[key] = sessionData;
+  progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+
+  if (isSupabaseConfigured() && !isMock) {
+    supabase.from('user_review_sessions').upsert({
+      user_id: userId,
+      storage_key: storageKey,
+      session_data: sessionData,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id,storage_key' }).catch(e => console.warn('[DailyTasks] Review session upsert error:', e.message));
+  }
+}
 
 /**
  * POST /api/user/review-sessions
@@ -2172,53 +2203,91 @@ router.post('/review-sessions', async (req, res) => {
       return res.status(400).json({ error: 'storage_key is required' });
     }
 
-    if (!req.user || req.user.isMock) {
-      if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
-      const key = `${userId}:${storage_key}`;
-      if (!session_data || Object.keys(session_data).length === 0) {
-        delete mockDb.userReviewSessions[key];
-      } else {
-        mockDb.userReviewSessions[key] = session_data;
+    const key = `${userId}:${storage_key}`;
+    if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
+
+    if (!session_data || Object.keys(session_data).length === 0) {
+      delete mockDb.userReviewSessions[key];
+    } else {
+      mockDb.userReviewSessions[key] = session_data;
+    }
+    progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+
+    if (isSupabaseConfigured() && req.user && !req.user.isMock) {
+      try {
+        if (!session_data || Object.keys(session_data).length === 0) {
+          await supabase
+            .from('user_review_sessions')
+            .delete()
+            .eq('user_id', userId)
+            .eq('storage_key', storage_key);
+        } else {
+          await supabase
+            .from('user_review_sessions')
+            .upsert({
+              user_id: userId,
+              storage_key: storage_key,
+              session_data: session_data,
+              updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,storage_key' });
+        }
+      } catch (dbErr) {
+        console.warn('Supabase review session upsert catch:', dbErr.message);
       }
-      return res.json({ message: 'Session saved successfully' });
     }
 
+    // Auto-complete review task in active study plan if user practiced/completed:
     try {
-      if (!session_data || Object.keys(session_data).length === 0) {
-        await supabase
-          .from('user_review_sessions')
-          .delete()
-          .eq('user_id', userId)
-          .eq('storage_key', storage_key);
-        return res.json({ message: 'Session cleared successfully' });
+      const plan = getUserPlan(userId);
+      if (plan && Array.isArray(plan.days)) {
+        let lessonId = null;
+        let isCumulative = false;
+        if (storage_key.includes('lesson_')) {
+          const match = storage_key.match(/lesson_(\d+)/);
+          if (match) lessonId = parseInt(match[1], 10);
+        } else if (storage_key.includes('combined')) {
+          isCumulative = true;
+        }
+
+        let planModified = false;
+        for (const day of plan.days) {
+          for (const task of (day.tasks || [])) {
+            if (isCumulative && task.itemType === 'cumulative_review') {
+              if (!task.completed) {
+                task.completed = true;
+                task.completed_at = getVietnamTimeStr();
+                task.currentCount = task.targetCount || 1;
+                task.progressPct = 100;
+                planModified = true;
+              }
+            } else if (lessonId && task.itemType === 'single_review' && (task.lesson === lessonId || task.lesson_id === lessonId)) {
+              if (!task.completed) {
+                task.completed = true;
+                task.completed_at = getVietnamTimeStr();
+                task.currentCount = task.targetCount || 1;
+                task.progressPct = 100;
+                planModified = true;
+              }
+            }
+          }
+          if (planModified) {
+            day.completedCount = (day.tasks || []).filter(t => t.completed).length;
+            day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : 100;
+          }
+        }
+        if (planModified) {
+          savePersistentPlans(mockDb.studyPlans);
+          persistPlanToSupabase(userId, plan).catch(() => {});
+          console.log(`[ReviewSession] Auto-completed plan review task for user ${userId} (${storage_key})`);
+        }
       }
-
-      const { error } = await supabase
-        .from('user_review_sessions')
-        .upsert({
-          user_id: userId,
-          storage_key: storage_key,
-          session_data: session_data,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'user_id,storage_key' });
-
-      if (error) {
-        console.warn('Supabase upsert review session error, saving to in-memory fallback:', error.message);
-        if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
-        mockDb.userReviewSessions[`${userId}:${storage_key}`] = session_data;
-        return res.json({ message: 'Session saved to cache (fallback)' });
-      }
-
-      return res.json({ message: 'Session saved successfully' });
-    } catch (dbErr) {
-      console.warn('Supabase review session catch, saving to in-memory fallback:', dbErr.message);
-      if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
-      mockDb.userReviewSessions[`${userId}:${storage_key}`] = session_data;
-      return res.json({ message: 'Session saved to cache (fallback)' });
+    } catch (planErr) {
+      console.warn('[ReviewSession] Auto-plan sync error:', planErr.message);
     }
+
+    return res.json({ message: 'Session saved successfully' });
   } catch (error) {
     console.error('Error saving review session:', error);
-    // Never fail with 500 to keep UI completely responsive
     res.json({ message: 'Session saved locally' });
   }
 });
@@ -2616,6 +2685,11 @@ router.post('/daily-tasks/schedule', async (req, res) => {
                     .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
                 }
 
+                // Synchronize review session record if this is a review task
+                if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
+                  markReviewSessionCompleted(userId, task, req.user && req.user.isMock);
+                }
+
                 const dayTasks = day.tasks || [];
                 const completedCount = dayTasks.filter(t => t.completed).length;
                 const totalCount = dayTasks.length;
@@ -2666,6 +2740,17 @@ router.post('/daily-tasks/schedule', async (req, res) => {
                 task.completed_at = getVietnamTimeStr();
                 task.currentCount = task.targetCount || 1;
                 task.progressPct = 100;
+
+                // Synchronize task items into user_progress table and disk cache
+                if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
+                  progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered')
+                    .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
+                }
+
+                // Synchronize review session record if this is a review task
+                if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
+                  markReviewSessionCompleted(userId, task, req.user && req.user.isMock);
+                }
               } else {
                 delete task.completed_at;
                 task.currentCount = 0;

@@ -4,6 +4,7 @@ const supabase = require('../db/supabase');
 const mockDb = require('../db/mockDb');
 
 const USER_PROGRESS_FILE = path.join(__dirname, '../db/user_progress.json');
+const USER_REVIEW_SESSIONS_FILE = path.join(__dirname, '../db/user_review_sessions.json');
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
 /**
@@ -32,11 +33,43 @@ function savePersistentProgress(progress) {
   }
 }
 
-// Initialize mockDb.userProgress on module load
+/**
+ * Load user review sessions from local JSON file
+ */
+function loadPersistentReviewSessions() {
+  try {
+    if (fs.existsSync(USER_REVIEW_SESSIONS_FILE)) {
+      const content = fs.readFileSync(USER_REVIEW_SESSIONS_FILE, 'utf8');
+      return JSON.parse(content);
+    }
+  } catch (err) {
+    console.error('[ProgressService] Error loading user_review_sessions.json:', err.message);
+  }
+  return {};
+}
+
+/**
+ * Save user review sessions to local JSON file
+ */
+function savePersistentReviewSessions(sessions) {
+  try {
+    fs.writeFileSync(USER_REVIEW_SESSIONS_FILE, JSON.stringify(sessions, null, 2), 'utf8');
+  } catch (err) {
+    console.error('[ProgressService] Error saving user_review_sessions.json:', err.message);
+  }
+}
+
+// Initialize mockDb.userProgress and mockDb.userReviewSessions on module load
 if (!mockDb.userProgress) mockDb.userProgress = {};
 try {
   const loaded = loadPersistentProgress();
   mockDb.userProgress = { ...loaded, ...mockDb.userProgress };
+} catch (e) {}
+
+if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
+try {
+  const loadedSessions = loadPersistentReviewSessions();
+  mockDb.userReviewSessions = { ...loadedSessions, ...mockDb.userReviewSessions };
 } catch (e) {}
 
 /**
@@ -52,7 +85,7 @@ function isSupabaseConfigured() {
 }
 
 /**
- * Synchronize user progress from Supabase into memory and disk cache
+ * Synchronize user progress and review sessions from Supabase into memory and disk cache
  */
 async function syncUserProgressFromSupabase(userId) {
   if (!userId || !isSupabaseConfigured()) {
@@ -66,10 +99,7 @@ async function syncUserProgressFromSupabase(userId) {
 
     if (error) {
       console.warn('[ProgressService] Supabase sync warning:', error.message);
-      return;
-    }
-
-    if (data && Array.isArray(data)) {
+    } else if (data && Array.isArray(data)) {
       if (!mockDb.userProgress) mockDb.userProgress = {};
       for (const row of data) {
         mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
@@ -78,6 +108,39 @@ async function syncUserProgressFromSupabase(userId) {
     }
   } catch (err) {
     console.warn('[ProgressService] Error during Supabase sync:', err.message);
+  }
+
+  // Also sync user review sessions
+  await syncUserReviewSessionsFromSupabase(userId);
+}
+
+/**
+ * Synchronize user review sessions from Supabase into memory and disk cache
+ */
+async function syncUserReviewSessionsFromSupabase(userId) {
+  if (!userId || !isSupabaseConfigured()) {
+    return;
+  }
+  try {
+    const { data, error } = await supabase
+      .from('user_review_sessions')
+      .select('storage_key, session_data')
+      .eq('user_id', userId);
+
+    if (error) {
+      console.warn('[ProgressService] Supabase review session sync warning:', error.message);
+      return;
+    }
+
+    if (data && Array.isArray(data)) {
+      if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
+      for (const row of data) {
+        mockDb.userReviewSessions[`${userId}:${row.storage_key}`] = row.session_data;
+      }
+      savePersistentReviewSessions(mockDb.userReviewSessions);
+    }
+  } catch (err) {
+    console.warn('[ProgressService] Error during Supabase review session sync:', err.message);
   }
 }
 
@@ -298,8 +361,11 @@ function getMasteredItemIdsSync(userId) {
 module.exports = {
   loadPersistentProgress,
   savePersistentProgress,
+  loadPersistentReviewSessions,
+  savePersistentReviewSessions,
   isSupabaseConfigured,
   syncUserProgressFromSupabase,
+  syncUserReviewSessionsFromSupabase,
   getMasteredItemIds,
   getMasteredItemIdsSync,
   setItemProgress,

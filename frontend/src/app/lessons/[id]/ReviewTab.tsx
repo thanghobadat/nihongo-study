@@ -114,6 +114,55 @@ export default function ReviewTab({
   const [aiErrorMessage, setAiErrorMessage] = useState<Record<string, string>>({});
   const [autoAiGrading, setAutoAiGrading] = useState<boolean>(true);
 
+  // Study Plan review task sync
+  const [isPlanTaskCompleted, setIsPlanTaskCompleted] = useState<boolean>(false);
+  const [planTaskId, setPlanTaskId] = useState<string | null>(null);
+  const [markingPlanLoading, setMarkingPlanLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchPlanStatus = async () => {
+      try {
+        const res = await api.get('/api/user/study-plan');
+        if (res && res.plan && Array.isArray(res.plan.days)) {
+          const numLesson = selectedLessonId === 'all' ? null : parseInt(String(selectedLessonId), 10);
+          for (const day of res.plan.days) {
+            for (const task of (day.tasks || [])) {
+              if (selectedLessonId === 'all' && task.itemType === 'cumulative_review') {
+                setPlanTaskId(task.id);
+                setIsPlanTaskCompleted(!!task.completed);
+                return;
+              } else if (numLesson && task.itemType === 'single_review' && (task.lesson === numLesson || task.lesson_id === numLesson)) {
+                setPlanTaskId(task.id);
+                setIsPlanTaskCompleted(!!task.completed);
+                return;
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Failed to fetch plan status in ReviewTab:', err);
+      }
+    };
+    fetchPlanStatus();
+  }, [selectedLessonId]);
+
+  const handleTogglePlanTask = async () => {
+    if (!planTaskId) return;
+    try {
+      setMarkingPlanLoading(true);
+      const nextCompleted = !isPlanTaskCompleted;
+      await api.post('/api/user/daily-tasks/schedule', {
+        taskId: planTaskId,
+        completed: nextCompleted
+      });
+      setIsPlanTaskCompleted(nextCompleted);
+    } catch (e: any) {
+      console.warn('Error updating plan task from ReviewTab:', e.message);
+    } finally {
+      setMarkingPlanLoading(false);
+    }
+  };
+
   // Fetch AI Quota on mount
   useEffect(() => {
     const fetchQuota = async () => {
@@ -210,8 +259,12 @@ export default function ReviewTab({
           const updated = { ...prev, [reviewSelectedType]: typeState };
           localStorage.setItem(storageKey, JSON.stringify(updated));
 
-          // Sync to Cloud API
-          api.post('/api/user/review-sessions', { storage_key: storageKey, session_data: updated }).catch(() => {});
+          // Sync to Cloud API & update plan status in UI
+          api.post('/api/user/review-sessions', { storage_key: storageKey, session_data: updated })
+            .then(() => {
+              setIsPlanTaskCompleted(true);
+            })
+            .catch(() => {});
 
           return updated;
         });
@@ -795,6 +848,21 @@ export default function ReviewTab({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          {planTaskId && (
+            <button
+              onClick={handleTogglePlanTask}
+              disabled={markingPlanLoading}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer border shadow-sm ${
+                isPlanTaskCompleted
+                  ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/25'
+                  : 'bg-amber-500/15 text-amber-200 border-amber-500/40 hover:bg-emerald-500/20 hover:text-emerald-200'
+              }`}
+              title="Đánh dấu trạng thái nhiệm vụ ôn tập bài học này trong Kế hoạch học tập (Study Plan)"
+            >
+              <span>{isPlanTaskCompleted ? '✓' : '⭕'}</span>
+              <span>{isPlanTaskCompleted ? 'Plan: Đã hoàn thành' : 'Đánh dấu xong vào Plan'}</span>
+            </button>
+          )}
           {Object.keys(savedSessions).length > 0 && (
             <button
               onClick={() => masterResetAll()}

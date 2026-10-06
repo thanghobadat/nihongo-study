@@ -503,6 +503,31 @@ function saveRiddlesDiskCache(cache) {
 }
 
 /**
+ * Helper to get or create disk cache for Kanji Recognition Quiz
+ */
+const QUIZ_CACHE_FILE = path.resolve(__dirname, '../../data/kanji_recognition_quiz_cache.json');
+function getRecognitionQuizDiskCache() {
+  try {
+    if (fs.existsSync(QUIZ_CACHE_FILE)) {
+      return JSON.parse(fs.readFileSync(QUIZ_CACHE_FILE, 'utf8'));
+    }
+  } catch (e) {
+    console.warn('[AI Route] Error reading quiz cache file:', e.message);
+  }
+  return {};
+}
+
+function saveRecognitionQuizDiskCache(cache) {
+  try {
+    const dir = path.dirname(QUIZ_CACHE_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(QUIZ_CACHE_FILE, JSON.stringify(cache, null, 2), 'utf8');
+  } catch (e) {
+    console.warn('[AI Route] Error saving quiz cache file:', e.message);
+  }
+}
+
+/**
  * POST /api/ai/grade-kanji-writing
  * Grade Kanji handwriting on Canvas using Gemini Multimodal Vision AI
  * Returns score, precision feedback, and actionable improvement tip
@@ -638,6 +663,86 @@ router.post('/kanji-writing-riddles', async (req, res) => {
       success: false,
       fallbackToLocal: true,
       error: 'Không thể sinh câu đố bằng AI lúc này. Hệ thống chuyển sang sinh câu đố cục bộ.',
+      details: err.message
+    });
+  }
+});
+
+/**
+ * POST /api/ai/kanji-recognition-quiz
+ * Generate situational Kanji & Vocabulary recognition questions with permanent disk cache
+ */
+router.post('/kanji-recognition-quiz', async (req, res) => {
+  try {
+    const { lessonId, kanjis = [], vocabItems = [], forceRefresh = false } = req.body;
+
+    if (!lessonId || !Array.isArray(kanjis) || kanjis.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'lessonId and kanjis array are required'
+      });
+    }
+
+    const diskCache = getRecognitionQuizDiskCache();
+    const charSig = kanjis.map(k => k.character || '').sort().join('');
+    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v1`;
+
+    // 1. Check permanent disk cache (only if not forceRefresh)
+    if (!forceRefresh && diskCache[cacheKey] && Array.isArray(diskCache[cacheKey].questions) && diskCache[cacheKey].questions.length > 0) {
+      return res.json({
+        success: true,
+        cached: true,
+        questions: diskCache[cacheKey].questions
+      });
+    }
+
+    const userId = await getUserIdAsync(req);
+
+    // 2. Check quota
+    const check = aiQuotaService.checkCanUseAI(userId);
+    if (!check.canUse) {
+      return res.json({
+        success: false,
+        fallbackToLocal: true,
+        error: check.reason
+      });
+    }
+
+    // 3. Call Gemini to generate recognition questions
+    const { result, usageMetadata } = await aiGradingService.generateKanjiRecognitionQuestions({
+      lessonId,
+      kanjis,
+      vocabList: vocabItems
+    });
+
+    const questions = result?.questions || [];
+
+    // 4. Save to permanent disk cache
+    if (questions.length > 0) {
+      diskCache[cacheKey] = {
+        lessonId,
+        charSig,
+        questions,
+        createdAt: new Date().toISOString()
+      };
+      saveRecognitionQuizDiskCache(diskCache);
+    }
+
+    const updatedQuota = aiQuotaService.recordUsage(userId, usageMetadata);
+
+    return res.json({
+      success: true,
+      cached: false,
+      questions,
+      quota: updatedQuota,
+      tokensConsumed: usageMetadata?.totalTokenCount || 0
+    });
+  } catch (err) {
+    console.error('[AI Route] Error generating kanji recognition quiz:', err);
+    return res.json({
+      success: false,
+      fallbackToLocal: true,
+      error: 'Không thể sinh câu hỏi nhận diện bằng AI lúc này. Hệ thống chuyển sang sinh cục bộ.',
       details: err.message
     });
   }

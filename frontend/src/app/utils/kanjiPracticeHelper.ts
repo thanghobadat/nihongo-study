@@ -498,6 +498,227 @@ export async function fetchKanjiWritingRiddles(
   return generateLocalKanjiRiddles(kanjis, vocabItems);
 }
 
+export interface KanjiRecognitionQuizQuestion {
+  id: string;
+  question_type: 'dialogue_fill' | 'reading_in_context' | 'kanji_orthography' | 'word_formation' | 'meaning_choice';
+  question_text: string;
+  context_sentence?: string;
+  target_kanji: string;
+  target_word: string;
+  target_word_reading?: string;
+  target_word_meaning?: string;
+  options: string[];
+  correct_index: number;
+  explanation: string;
+}
+
+/**
+ * Sinh câu hỏi nhận diện 100% tiếng Nhật cục bộ (Local Fallback) khi offline hoặc mất mạng
+ */
+export function generateLocalKanjiRecognitionQuestions(
+  kanjis: KanjiItemData[],
+  vocabItems: any[] = []
+): KanjiRecognitionQuizQuestion[] {
+  if (!kanjis || kanjis.length === 0) return [];
+  const questions: KanjiRecognitionQuizQuestion[] = [];
+  const isSmallScope = kanjis.length <= 4;
+  const targetCount = isSmallScope ? Math.min(8, Math.max(5, kanjis.length * 2)) : Math.min(14, Math.max(8, kanjis.length + 2));
+
+  // Extract compounds and vocab forms
+  const allCompoundWords: { word: string; reading: string; meaning: string; kanjiChar: string }[] = [];
+  kanjis.forEach(k => {
+    const parsed = parseCompounds(k.compounds);
+    parsed.forEach(p => {
+      allCompoundWords.push({ ...p, kanjiChar: k.character });
+    });
+  });
+
+  const lessonVocabMatches: { hiragana: string; meaning: string; example?: string; kanjiWord?: string; char: string }[] = [];
+  kanjis.forEach(k => {
+    vocabItems.forEach(v => {
+      if (v && v.hiragana && ((v.kanji || '').includes(k.character) || (v.japanese_example || '').includes(k.character))) {
+        lessonVocabMatches.push({
+          hiragana: v.hiragana,
+          meaning: v.vietnamese_meaning || '',
+          example: v.japanese_example || '',
+          kanjiWord: v.kanji || '',
+          char: k.character
+        });
+      }
+    });
+  });
+
+  let index = 0;
+  while (questions.length < targetCount && index < targetCount * 3) {
+    const k = kanjis[index % kanjis.length];
+    const mode = (index + questions.length) % 4;
+    index++;
+
+    if (mode === 0) {
+      const match = lessonVocabMatches.find(m => m.char === k.character && m.example) ||
+                    lessonVocabMatches.find(m => m.example);
+      const compound = allCompoundWords.find(c => c.kanjiChar === k.character);
+      const targetWord = match?.kanjiWord || compound?.word || k.character;
+      const reading = match?.hiragana || compound?.reading || k.kunyomi || k.onyomi || '';
+      const meaning = match?.meaning || compound?.meaning || k.vietnamese_meaning;
+      
+      let sentence = match?.example || `「わたしは 【 ? 】 です。」`;
+      if (match?.example && targetWord && sentence.includes(targetWord)) {
+        sentence = sentence.replace(targetWord, '【 ? 】');
+      } else if (!sentence.includes('【 ? 】')) {
+        sentence = `「あの方は 【 ? 】 です。」`;
+      }
+
+      const wrongWords = shuffleArray(
+        allCompoundWords.filter(c => c.word !== targetWord).map(c => c.word)
+          .concat(kanjis.filter(other => other.character !== k.character).map(o => o.character))
+      ).filter(w => w !== targetWord).slice(0, 3);
+      while (wrongWords.length < 3) {
+        wrongWords.push(`${k.character}人`, `生${k.character}`, `大${k.character}`);
+      }
+
+      const options = shuffleArray([targetWord, ...wrongWords.slice(0, 3)]);
+      const correctIdx = options.indexOf(targetWord);
+
+      questions.push({
+        id: `local_q_${k.id}_dial_${index}`,
+        question_type: 'dialogue_fill',
+        question_text: `${sentence}\n【 ? 】に 入る 正しい 言葉は どれですか。`,
+        context_sentence: sentence,
+        target_kanji: k.character,
+        target_word: targetWord,
+        target_word_reading: reading,
+        target_word_meaning: meaning,
+        options,
+        correct_index: correctIdx,
+        explanation: `Chính xác! Từ phù hợp là "${targetWord}" (${reading}: ${meaning}). Chữ Hán: ${k.character} (${k.sino_vietnamese || ''}).`
+      });
+    } else if (mode === 1) {
+      const compound = allCompoundWords.find(c => c.kanjiChar === k.character);
+      const targetChar = k.character;
+      const correctReading = compound?.reading || k.kunyomi || k.onyomi || '';
+      const cleanReading = correctReading.split(/[\s,()（）]/)[0] || correctReading || 'ひと';
+
+      const promptSentence = compound?.word 
+        ? `「${compound.word}」の 【${targetChar}】の 読み方は どれですか。`
+        : `「${targetChar}」の 正しい 読み方は どれですか。`;
+
+      const otherReadings = kanjis
+        .filter(o => o.character !== targetChar)
+        .map(o => (o.kunyomi || o.onyomi || '').split(/[\s,()（）]/)[0])
+        .filter(r => r && r !== cleanReading);
+
+      const fallbackReadings = ['じん', 'ひと', 'せい', 'せん', 'がく', 'かい', 'しゃ', 'ほん', 'にち'];
+      const wrongReadings = shuffleArray([...otherReadings, ...fallbackReadings.filter(r => r !== cleanReading)]).slice(0, 3);
+
+      const options = shuffleArray([cleanReading, ...wrongReadings]);
+      const correctIdx = options.indexOf(cleanReading);
+
+      questions.push({
+        id: `local_q_${k.id}_read_${index}`,
+        question_type: 'reading_in_context',
+        question_text: promptSentence,
+        context_sentence: compound?.word || targetChar,
+        target_kanji: targetChar,
+        target_word: compound?.word || targetChar,
+        target_word_reading: cleanReading,
+        target_word_meaning: compound?.meaning || k.vietnamese_meaning,
+        options,
+        correct_index: correctIdx,
+        explanation: `Đúng rồi! Chữ 【${targetChar}】 (${k.sino_vietnamese || ''}: ${k.vietnamese_meaning}) trong ngữ cảnh này đọc là "${cleanReading}".`
+      });
+    } else if (mode === 2) {
+      const compound = allCompoundWords.find(c => c.kanjiChar === k.character);
+      const match = lessonVocabMatches.find(m => m.char === k.character);
+      const targetKanjiWord = compound?.word || match?.kanjiWord || k.character;
+      const targetKana = compound?.reading || match?.hiragana || k.kunyomi || '';
+
+      const wrongOptions = shuffleArray(
+        allCompoundWords.filter(c => c.word !== targetKanjiWord).map(c => c.word)
+          .concat(kanjis.filter(o => o.character !== k.character).map(o => o.character))
+          .concat(targetKanjiWord.length === 2 ? [targetKanjiWord.split('').reverse().join('')] : [])
+      ).filter(w => w !== targetKanjiWord).slice(0, 3);
+
+      while (wrongOptions.length < 3) {
+        wrongOptions.push(`生${k.character}`, `先${k.character}`, `会${k.character}`);
+      }
+
+      const options = shuffleArray([targetKanjiWord, ...wrongOptions.slice(0, 3)]);
+      const correctIdx = options.indexOf(targetKanjiWord);
+
+      questions.push({
+        id: `local_q_${k.id}_orth_${index}`,
+        question_type: 'kanji_orthography',
+        question_text: `「${targetKana || targetKanjiWord}」の 正しい 漢字は どれですか。`,
+        context_sentence: `「${targetKana || targetKanjiWord}」`,
+        target_kanji: k.character,
+        target_word: targetKanjiWord,
+        target_word_reading: targetKana,
+        target_word_meaning: compound?.meaning || match?.meaning || k.vietnamese_meaning,
+        options,
+        correct_index: correctIdx,
+        explanation: `Chính xác! Từ "${targetKana || targetKanjiWord}" có chữ Hán chuẩn là "${targetKanjiWord}" (Nghĩa: ${compound?.meaning || match?.meaning || k.vietnamese_meaning}).`
+      });
+    } else {
+      const targetChar = k.character;
+      const otherChar = kanjis.find(o => o.character !== targetChar)?.character || '生';
+      const combined = `${targetChar}${otherChar}`;
+      const reversed = `${otherChar}${targetChar}`;
+      
+      const options = shuffleArray([combined, reversed, `${targetChar}大`, `校${targetChar}`]);
+      const correctIdx = options.indexOf(combined);
+
+      questions.push({
+        id: `local_q_${k.id}_form_${index}`,
+        question_type: 'word_formation',
+        question_text: `「${targetChar}」＋「${otherChar}」＝【 ? 】`,
+        context_sentence: `「${targetChar}」＋「${otherChar}」`,
+        target_kanji: targetChar,
+        target_word: combined,
+        target_word_meaning: k.vietnamese_meaning,
+        options,
+        correct_index: correctIdx,
+        explanation: `Đúng rồi! Hai chữ Hán ghép lại theo đúng trật tự là "${combined}". Chữ "${targetChar}" (${k.sino_vietnamese || ''}) đứng trước.`
+      });
+    }
+  }
+
+  return questions.slice(0, targetCount);
+}
+
+/**
+ * Gọi API backend lấy bộ câu hỏi nhận diện AI (kèm cache vĩnh viễn), fallback sang local nếu lỗi
+ */
+export async function fetchKanjiRecognitionQuestions(
+  lessonId: number,
+  kanjis: KanjiItemData[],
+  forceRefresh: boolean = false,
+  vocabItems: any[] = []
+): Promise<KanjiRecognitionQuizQuestion[]> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      if (attempt > 0) {
+        await new Promise(r => setTimeout(r, 800));
+      }
+      const res = await fetch('/api/ai/kanji-recognition-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId, kanjis, vocabItems, forceRefresh })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.questions) && data.questions.length > 0) {
+          return data.questions;
+        }
+      }
+    } catch (e) {
+      console.warn(`[fetchKanjiRecognitionQuestions] Attempt ${attempt + 1} failed:`, e);
+    }
+  }
+  return generateLocalKanjiRecognitionQuestions(kanjis, vocabItems);
+}
+
+
 /**
  * Thuật toán chấm điểm hình học Canvas cục bộ (Fallback) + sinh hướng dẫn hoàn thiện ngắn gọn
  */

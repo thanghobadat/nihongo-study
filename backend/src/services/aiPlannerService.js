@@ -740,6 +740,11 @@ function getUnfinishedDebt({ userId, plan }) {
         completedCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
       }
 
+      if (completedCount >= targetCount && targetCount > 0) {
+        task.completed = true;
+        continue;
+      }
+
       if (completedCount < targetCount) {
         debtItems.push({
           taskId: task.id,

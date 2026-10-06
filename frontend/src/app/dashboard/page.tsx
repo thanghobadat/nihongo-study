@@ -461,7 +461,20 @@ export default function UserDashboard() {
       return day;
     }));
 
-    // 3. Persist to backend silently
+    // 3. Also optimistic update debtData immediately (0ms delay)
+    if (completed) {
+      setDebtData(prev => {
+        if (!prev || !prev.debtItems) return prev;
+        const remainingDebt = prev.debtItems.filter((item: any) => item.taskId !== taskId);
+        return {
+          ...prev,
+          hasDebt: remainingDebt.length > 0,
+          debtItems: remainingDebt
+        };
+      });
+    }
+
+    // 4. Persist to backend silently
     try {
       await api.post('/api/user/daily-tasks/schedule', {
         taskId,
@@ -469,6 +482,12 @@ export default function UserDashboard() {
         date: targetDate
       });
       showNotification(completed ? '✅ Đã hoàn thành nhiệm vụ ôn luyện!' : '🔄 Đã chuyển nhiệm vụ về Chưa hoàn thành!');
+      // Silently sync debt with server to ensure accuracy
+      api.get('/api/user/study-debt').then((res: any) => {
+        if (res && res.success) {
+          setDebtData(res);
+        }
+      }).catch(() => {});
     } catch (err: any) {
       showNotification('Lỗi cập nhật trạng thái nhiệm vụ: ' + err.message);
       fetchDashboardData();
@@ -1784,6 +1803,7 @@ export default function UserDashboard() {
         onReplan={() => triggerReplanConfirm('debt')}
         onCatchUpToday={() => setIsDebtModalOpen(false)}
         isReplanning={isReplanningDebt}
+        onToggleTaskStatus={handleToggleTaskStatus}
       />
 
       {/* Replan Confirmation Modal with Counter & Pedagogical Guard */}
