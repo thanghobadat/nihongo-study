@@ -692,9 +692,13 @@ function getUnfinishedDebt({ userId, plan }) {
   const todayStr = getVietnamDateStr();
   const yesterdayStr = getYesterdayVietnamDateStr();
 
-  // Find all past days with date < todayStr
-  const pastDays = plan.days.filter(d => d.date < todayStr);
-  if (pastDays.length === 0) {
+  // Find all past days with date < todayStr (searching both active plan days and archivedPastDays)
+  const allPastDays = [
+    ...(plan.archivedPastDays || []).filter(d => d.date < todayStr),
+    ...(plan.days || []).filter(d => d.date < todayStr)
+  ];
+
+  if (allPastDays.length === 0) {
     return { hasDebt: false, debtItems: [], yesterdayDate: yesterdayStr };
   }
 
@@ -702,64 +706,141 @@ function getUnfinishedDebt({ userId, plan }) {
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
 
-  const debtItems = [];
+  // 1. Group past uncompleted tasks by (itemType, lesson)
+  const taskGroups = new Map();
 
-  for (const day of pastDays) {
+  for (const day of allPastDays) {
     for (const task of (day.tasks || [])) {
       if (task.completed) continue;
 
       const lesson = task.lesson || task.lesson_id || 1;
-      let completedCount = task.currentCount || 0;
-      const targetCount = task.targetCount || 1;
+      const groupKey = task.itemType === 'cumulative_review'
+        ? 'cumulative_review'
+        : `${task.itemType}_L${lesson}`;
 
-      if (task.itemType === 'vocabulary') {
-        const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
-        completedCount = vocabList.filter(v => {
-          const status = userProgress[`${userId}:vocabulary:${v.id}`];
-          return status === 'mastered';
-        }).length;
-      } else if (task.itemType === 'kanji') {
-        const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
-        completedCount = kanjiList.filter(k => {
-          const status = userProgress[`${userId}:kanji:${k.id}`];
-          return status === 'mastered';
-        }).length;
-      } else if (task.itemType === 'grammar') {
-        const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
-        completedCount = grammarList.filter(g => {
-          const status = userProgress[`${userId}:grammar:${g.id}`];
-          return status === 'mastered';
-        }).length;
-      } else if (task.itemType === 'single_review') {
-        const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
-        const key2 = `${userId}:review_session_lesson_${lesson}`;
-        completedCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
-      } else if (task.itemType === 'cumulative_review') {
-        const key1 = `${userId}:nihongo_review_state_combined`;
-        const key2 = `${userId}:combined_review_level_N5`;
-        completedCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
-      }
-
-      if (completedCount >= targetCount && targetCount > 0) {
-        task.completed = true;
-        continue;
-      }
-
-      if (completedCount < targetCount) {
-        debtItems.push({
-          taskId: task.id,
-          date: day.date,
-          title: task.title,
+      if (!taskGroups.has(groupKey)) {
+        taskGroups.set(groupKey, {
           itemType: task.itemType,
           lesson,
-          targetCount,
-          completedCount,
-          missingCount: Math.max(1, targetCount - completedCount),
-          scopeDetails: task.scopeDetails,
-          estimatedMinutes: task.estimatedMinutes || 30
+          tasks: [],
+          dates: new Set(),
+          totalTargetCount: 0,
+          totalEstimatedMinutes: 0
         });
       }
+
+      const grp = taskGroups.get(groupKey);
+      grp.tasks.push(task);
+      if (day.date) grp.dates.add(day.date);
+      grp.totalTargetCount += (task.targetCount || 1);
+      grp.totalEstimatedMinutes += (task.estimatedMinutes || 30);
     }
+  }
+
+  const debtItems = [];
+
+  // 2. Evaluate actual mastered status for each group
+  for (const [groupKey, grp] of taskGroups.entries()) {
+    const { itemType, lesson, tasks, dates, totalTargetCount, totalEstimatedMinutes } = grp;
+    let actualMasteredCount = 0;
+
+    if (itemType === 'vocabulary') {
+      const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
+      actualMasteredCount = vocabList.filter(v => {
+        const status = userProgress[`${userId}:vocabulary:${v.id}`];
+        return status === 'mastered';
+      }).length;
+    } else if (itemType === 'kanji') {
+      const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
+      actualMasteredCount = kanjiList.filter(k => {
+        const status = userProgress[`${userId}:kanji:${k.id}`];
+        return status === 'mastered';
+      }).length;
+    } else if (itemType === 'grammar') {
+      const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
+      actualMasteredCount = grammarList.filter(g => {
+        const status = userProgress[`${userId}:grammar:${g.id}`];
+        return status === 'mastered';
+      }).length;
+    } else if (itemType === 'single_review') {
+      const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
+      const key2 = `${userId}:review_session_lesson_${lesson}`;
+      actualMasteredCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+    } else if (itemType === 'cumulative_review') {
+      const key1 = `${userId}:nihongo_review_state_combined`;
+      const key2 = `${userId}:combined_review_level_N5`;
+      actualMasteredCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+    }
+
+    // If user has mastered enough for the whole group, mark all tasks in group completed
+    if (actualMasteredCount >= totalTargetCount && totalTargetCount > 0) {
+      tasks.forEach(t => {
+        t.completed = true;
+        t.currentCount = t.targetCount || 1;
+        t.progressPct = 100;
+      });
+      continue;
+    }
+
+    // Otherwise, mark partially satisfied subtasks completed based on running count
+    let remainingBudget = actualMasteredCount;
+    for (const t of tasks) {
+      const tTarget = t.targetCount || 1;
+      if (remainingBudget >= tTarget) {
+        t.completed = true;
+        t.currentCount = tTarget;
+        t.progressPct = 100;
+        remainingBudget -= tTarget;
+      } else {
+        t.currentCount = remainingBudget;
+        t.progressPct = Math.round((remainingBudget / tTarget) * 100);
+        remainingBudget = 0;
+      }
+    }
+
+    const uncompletedTasks = tasks.filter(t => !t.completed);
+    if (uncompletedTasks.length === 0) continue;
+
+    const sortedDates = Array.from(dates).sort();
+    const dateStr = sortedDates.length > 1
+      ? `${sortedDates[0]} ➔ ${sortedDates[sortedDates.length - 1]}`
+      : sortedDates[0] || yesterdayStr;
+
+    const taskIds = uncompletedTasks.map(t => t.id);
+    const primaryTaskId = taskIds.join(',');
+
+    const unit = itemType === 'vocabulary' ? 'từ vựng' : itemType === 'kanji' ? 'chữ Kanji' : itemType === 'grammar' ? 'mẫu ngữ pháp' : 'lượt';
+
+    let mergedTitle = '';
+    let mergedScope = '';
+
+    if (uncompletedTasks.length > 1) {
+      if (itemType === 'vocabulary') mergedTitle = `Minna Bài ${lesson}: Từ vựng (Gộp trọn bộ ${totalTargetCount} từ)`;
+      else if (itemType === 'kanji') mergedTitle = `Minna Bài ${lesson}: Chữ Hán (Gộp trọn bộ ${totalTargetCount} chữ)`;
+      else if (itemType === 'grammar') mergedTitle = `Minna Bài ${lesson}: Ngữ pháp (Gộp trọn bộ ${totalTargetCount} mẫu)`;
+      else if (itemType === 'single_review') mergedTitle = `Minna Bài ${lesson}: Ôn tập tổng hợp 4 dạng bài`;
+      else if (itemType === 'cumulative_review') mergedTitle = `Ôn tập tích lũy tổng hợp`;
+      else mergedTitle = `Bài ${lesson}: ${itemType} (Gộp)`;
+
+      mergedScope = `Gộp toàn bộ ${totalTargetCount} ${unit} của Bài ${lesson} (${uncompletedTasks.length} phần nhỏ)`;
+    } else {
+      mergedTitle = uncompletedTasks[0].title;
+      mergedScope = uncompletedTasks[0].scopeDetails || `Ôn tập ${totalTargetCount} ${unit} Bài ${lesson}`;
+    }
+
+    debtItems.push({
+      taskId: primaryTaskId,
+      taskIds,
+      date: dateStr,
+      title: mergedTitle,
+      itemType,
+      lesson,
+      targetCount: totalTargetCount,
+      completedCount: Math.min(totalTargetCount, actualMasteredCount),
+      missingCount: Math.max(1, totalTargetCount - actualMasteredCount),
+      scopeDetails: mergedScope,
+      estimatedMinutes: uncompletedTasks.reduce((sum, t) => sum + (t.estimatedMinutes || 30), 0)
+    });
   }
 
   return {

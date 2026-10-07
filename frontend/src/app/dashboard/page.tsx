@@ -48,7 +48,7 @@ export default function UserDashboard() {
   // Collapsible Accordion States (Auxiliary sections default collapsed; Main sections always open)
   const [isTomorrowOpen, setIsTomorrowOpen] = useState<boolean>(false);
   const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(false);
-  const [isHistoryOpen, setIsHistoryOpen] = useState<boolean>(false);
+  const [isHistoryOpen, setIsHistoryOpen] = useState<boolean>(true);
   const [isPushSettingsOpen, setIsPushSettingsOpen] = useState<boolean>(false);
 
   // Debt Modal State
@@ -401,15 +401,16 @@ export default function UserDashboard() {
   };
 
   // Toggle task completed status (specifically for review / practice tasks or manual marking)
-  const handleToggleTaskStatus = async (taskId: string, completed: boolean, date?: string) => {
+  const handleToggleTaskStatus = async (taskId: string | string[], completed: boolean, date?: string) => {
     const targetDate = date || todayStr;
+    const taskIdsList = Array.isArray(taskId) ? taskId : [taskId];
 
     // 1. Optimistic update local studyPlan state immediately (0ms delay)
     if (studyPlan && studyPlan.days) {
       const updatedDays = studyPlan.days.map((day: any) => {
         if (!date || day.date === targetDate) {
           const updatedTasks = (day.tasks || []).map((t: any) => {
-            if (t.id === taskId) {
+            if (taskIdsList.includes(t.id)) {
               return {
                 ...t,
                 completed,
@@ -438,7 +439,7 @@ export default function UserDashboard() {
     setDailyHistory(prev => (prev || []).map((day: any) => {
       if (!date || day.date === targetDate) {
         const updatedTasks = (day.tasks_detail || []).map((t: any) => {
-          if (t.id === taskId) {
+          if (taskIdsList.includes(t.id)) {
             return {
               ...t,
               completed,
@@ -465,7 +466,12 @@ export default function UserDashboard() {
     if (completed) {
       setDebtData(prev => {
         if (!prev || !prev.debtItems) return prev;
-        const remainingDebt = prev.debtItems.filter((item: any) => item.taskId !== taskId);
+        const remainingDebt = prev.debtItems.filter((item: any) => {
+          if (item.taskIds && Array.isArray(item.taskIds)) {
+            return !item.taskIds.some((id: string) => taskIdsList.includes(id));
+          }
+          return !taskIdsList.includes(item.taskId);
+        });
         return {
           ...prev,
           hasDebt: remainingDebt.length > 0,
@@ -477,7 +483,8 @@ export default function UserDashboard() {
     // 4. Persist to backend silently
     try {
       await api.post('/api/user/daily-tasks/schedule', {
-        taskId,
+        taskId: Array.isArray(taskId) ? taskId.join(',') : taskId,
+        taskIds: taskIdsList,
         completed,
         date: targetDate
       });
@@ -1041,7 +1048,7 @@ export default function UserDashboard() {
                       {isReviewTask && (
                         <button
                           type="button"
-                          onClick={() => handleToggleTaskStatus(item.taskId, true, item.date || debtData.yesterdayDate || todayStr)}
+                          onClick={() => handleToggleTaskStatus(item.taskIds || item.taskId, true, item.date || debtData.yesterdayDate || todayStr)}
                           className="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-emerald-500/20 text-amber-200 hover:text-emerald-200 border border-amber-500/40 hover:border-emerald-500/40 transition-all cursor-pointer"
                           title="Bấm để đánh dấu đã ôn tập bù xong"
                         >
@@ -1095,11 +1102,17 @@ export default function UserDashboard() {
                 <h2 className="text-base font-bold text-white flex items-center gap-2">
                   <span>🎯</span> Nhiệm Vụ Hôm Nay ({todayStr})
                 </h2>
-                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold shadow-sm">
-                  <span>⏱️ Thực tế:</span>
+                <button
+                  type="button"
+                  onClick={() => setIsStudyTimeHistoryOpen(true)}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 text-indigo-300 text-xs font-bold shadow-sm cursor-pointer transition-all hover:scale-105 active:scale-95"
+                  title="Bấm để xem bảng đánh giá thời gian học các ngày (ngày X học Y tiếng)"
+                >
+                  <span>⏱️ Hôm nay:</span>
                   <span className="text-white font-extrabold">{formatStudyTime(todayStudyTimeSeconds)}</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Đang đo thực tế" />
-                </div>
+                  <span className="text-[10px] text-amber-300 ml-1 underline">Lịch sử ➔</span>
+                </button>
                 {todayTotalEstMinutes > 0 && (
                   <span className="text-xs font-bold text-cyan-300 bg-cyan-950/70 border border-cyan-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-sm">
                     <span>⏱️</span>

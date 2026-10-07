@@ -112,6 +112,12 @@ async function syncUserProgressFromSupabase(userId) {
 
   // Also sync user review sessions
   await syncUserReviewSessionsFromSupabase(userId);
+
+  // Also sync user study time
+  try {
+    const studyTimeService = require('./studyTimeService');
+    await studyTimeService.syncFromSupabase(userId);
+  } catch (stErr) {}
 }
 
 /**

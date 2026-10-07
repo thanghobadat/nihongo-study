@@ -123,9 +123,13 @@ export default function ReviewTab({
     const fetchPlanStatus = async () => {
       try {
         const res = await api.get('/api/user/study-plan');
-        if (res && res.plan && Array.isArray(res.plan.days)) {
+        if (res && res.plan) {
+          const allPlanDays = [
+            ...(res.plan.days || []),
+            ...(res.plan.archivedPastDays || [])
+          ];
           const numLesson = selectedLessonId === 'all' ? null : parseInt(String(selectedLessonId), 10);
-          for (const day of res.plan.days) {
+          for (const day of allPlanDays) {
             for (const task of (day.tasks || [])) {
               if (selectedLessonId === 'all' && task.itemType === 'cumulative_review') {
                 setPlanTaskId(task.id);
@@ -532,7 +536,7 @@ export default function ReviewTab({
         if (res?.quota) {
           setAiQuota({ remaining: res.quota.remaining, limit: res.quota.limit });
         }
-        setAiErrorMessage(prev => ({ ...prev, [key]: res?.error || 'AI tạm thời không phản hồi. Đã chuyển sang bộ chấm tự động.' }));
+        setAiErrorMessage(prev => ({ ...prev, [key]: res?.error || 'ℹ️ Chuyển sang chấm đối chiếu chuẩn xác (Offline Fallback).' }));
         if (q.type === 'translation') {
           gradeTranslation(q);
         } else if (q.type === 'dictation') {
@@ -541,7 +545,7 @@ export default function ReviewTab({
       }
     } catch (err: any) {
       console.error('AI grading error:', err);
-      setAiErrorMessage(prev => ({ ...prev, [key]: 'Lỗi kết nối AI. Đã chuyển sang bộ chấm tự động.' }));
+      setAiErrorMessage(prev => ({ ...prev, [key]: 'ℹ️ Chuyển sang chấm đối chiếu chuẩn xác (Offline Fallback).' }));
       if (q.type === 'translation') {
         gradeTranslation(q);
       } else if (q.type === 'dictation') {
@@ -645,10 +649,14 @@ export default function ReviewTab({
           </div>
         )}
 
-        {/* Error Message if any */}
+        {/* Error / Notice Message if any */}
         {errorMsg && (
-          <div className="mt-2 p-2 bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs rounded-lg">
-            ⚠️ {errorMsg}
+          <div className={`mt-2 p-2 text-xs rounded-lg flex items-center gap-1.5 ${
+            errorMsg.includes('ℹ️')
+              ? 'bg-indigo-500/10 border border-indigo-500/30 text-indigo-300'
+              : 'bg-rose-500/10 border border-rose-500/30 text-rose-300'
+          }`}>
+            <span>{errorMsg.includes('ℹ️') ? '' : '⚠️ '}{errorMsg}</span>
           </div>
         )}
       </div>

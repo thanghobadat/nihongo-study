@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { api } from '../utils/api';
 import { formatStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
 
 interface DailyReportModalProps {
@@ -65,6 +66,26 @@ export default function DailyReportModal({
     return '0 phút';
   });
 
+  const [historyList, setHistoryList] = useState<any[]>([]);
+  const [historySummary, setHistorySummary] = useState<any>(null);
+  const [loadingHistory, setLoadingHistory] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setLoadingHistory(true);
+    api.get('/api/user/study-time/history', { skipCache: true })
+      .then((res: any) => {
+        if (res && res.success) {
+          setHistoryList(res.history || []);
+          setHistorySummary(res.summary || null);
+        }
+      })
+      .catch((err) => {
+        console.warn('Failed to load study time history in DailyReportModal:', err);
+      })
+      .finally(() => setLoadingHistory(false));
+  }, [isOpen]);
+
   useEffect(() => {
     if (studyTimeFormatted) {
       setInternalStudyTime(studyTimeFormatted);
@@ -118,7 +139,7 @@ export default function DailyReportModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
       <div 
-        className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white/90 dark:bg-slate-900/95 p-6 md:p-8 shadow-2xl border border-slate-200/60 dark:border-slate-800/80 text-slate-800 dark:text-slate-100 transition-all transform duration-300 scale-100"
+        className="relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white/95 dark:bg-slate-900/95 p-5 sm:p-7 shadow-2xl border border-slate-200/60 dark:border-slate-800/80 text-slate-800 dark:text-slate-100 transition-all transform duration-300 scale-100 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-700"
         style={{ boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(99, 102, 241, 0.2)' }}
       >
         {/* Background Decorative Gradient Blobs */}
@@ -263,6 +284,119 @@ export default function DailyReportModal({
               </div>
             </div>
           )}
+        </div>
+
+        {/* Daily Study Time Breakdown (Tổng hợp thời gian học các ngày) */}
+        <div className="mb-5 p-4 rounded-2xl bg-gradient-to-br from-slate-900/95 via-indigo-950/40 to-slate-900/95 border border-indigo-500/30 text-white shadow-lg">
+          <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-700/60 flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">📊</span>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-300">
+                  Tổng Hợp Thời Gian Học Các Ngày
+                </h4>
+                <div className="text-[11px] text-slate-400">
+                  Chuẩn sư phạm: 1.5 giờ / ngày
+                </div>
+              </div>
+            </div>
+            {onOpenHistoryTable && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenHistoryTable();
+                }}
+                className="text-xs font-bold text-amber-400 hover:text-amber-300 hover:underline flex items-center gap-1 cursor-pointer transition-colors"
+                title="Mở bảng phân tích chi tiết toàn bộ các ngày"
+              >
+                <span>Xem chi tiết & biểu đồ ➔</span>
+              </button>
+            )}
+          </div>
+
+          {/* Quick Metrics Bar */}
+          <div className="grid grid-cols-3 gap-2 mb-3">
+            <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 text-center">
+              <div className="text-[10px] text-slate-400">Tổng tích lũy</div>
+              <div className="text-sm font-extrabold text-indigo-300">
+                {historySummary?.totalHoursFormatted || '0 giờ'}
+              </div>
+            </div>
+            <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 text-center">
+              <div className="text-[10px] text-slate-400">Trung bình/ngày</div>
+              <div className="text-sm font-extrabold text-emerald-400">
+                {historySummary?.averageHoursPerActiveDay ? `${historySummary.averageHoursPerActiveDay}h` : '0h'}
+              </div>
+            </div>
+            <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 text-center">
+              <div className="text-[10px] text-slate-400">Kỷ lục ngày</div>
+              <div className="text-sm font-extrabold text-amber-400 truncate" title={historySummary?.recordDay?.formatted}>
+                {historySummary?.recordDay?.formatted || '---'}
+              </div>
+            </div>
+          </div>
+
+          {/* Daily List / Table (Recent days up to today) */}
+          <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-700">
+            {loadingHistory ? (
+              <div className="py-4 text-center text-xs text-slate-400 animate-pulse">
+                ⏳ Đang tải tổng hợp thời gian học các ngày...
+              </div>
+            ) : historyList.length === 0 ? (
+              <div className="py-3 text-center text-xs text-slate-400">
+                Chưa có dữ liệu học tập các ngày trước.
+              </div>
+            ) : (
+              historyList.slice(-7).reverse().map((day) => {
+                const isToday = day.date === getVietnamDateString();
+                const evalInfo = day.evaluation || { badge: '⚪', label: 'Chưa học', level: 'none' };
+                return (
+                  <div
+                    key={day.date}
+                    className={`p-2 rounded-xl border flex items-center justify-between gap-2 text-xs transition-all ${
+                      isToday
+                        ? 'bg-indigo-950/70 border-indigo-500/60 shadow-sm'
+                        : 'bg-slate-950/50 border-slate-800/80 hover:bg-slate-900/70'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-slate-200">
+                        {formatDateStr(day.date)}
+                      </span>
+                      {isToday && (
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-indigo-500/30 text-indigo-300 border border-indigo-500/40">
+                          Hôm nay
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-2.5">
+                      <div className="text-right">
+                        <span className="font-bold text-white">
+                          {day.formatted || '0 phút'}
+                        </span>
+                        <span className="text-[10px] text-slate-400 ml-1">
+                          ({day.hoursLabel || '0.0h'})
+                        </span>
+                      </div>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                        evalInfo.level === 'excellent'
+                          ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+                          : evalInfo.level === 'standard' || evalInfo.level === 'good'
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                          : evalInfo.level === 'fair'
+                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                          : 'bg-slate-800 text-slate-400 border-slate-700'
+                      }`}>
+                        {evalInfo.badge} {evalInfo.label}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
 
         {/* Motivational Quote */}

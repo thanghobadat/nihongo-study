@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { api } from '../utils/api';
+import { api, getBaseUrl } from '../utils/api';
 import { getVietnamDateString } from '../utils/studyTimeHelper';
 
 /**
@@ -77,10 +77,10 @@ export default function ActiveStudyTracker() {
       }
     } catch {}
 
-    // Fetch authoritative initial time from server (Multi-device initial sync)
+    // Fetch authoritative initial time from server (Multi-device initial sync - bypass cache)
     const user = api.getUser();
     if (user && user.id) {
-      api.get(`/api/user/study-time/today?date=${dateToday}`).then((res: any) => {
+      api.get(`/api/user/study-time/today?date=${dateToday}`, { skipCache: true }).then((res: any) => {
         if (res && res.success && res.data) {
           const serverSec = res.data.totalSeconds || 0;
           if (serverSec > totalSecondsRef.current) {
@@ -123,8 +123,23 @@ export default function ActiveStudyTracker() {
         broadcastUpdate(false);
         flushDeltaToServer();
       } else {
-        // Tab hiển thị lại -> Reset idle timer
+        // Tab hiển thị lại -> Reset idle timer & Re-sync số giây mới nhất từ máy chủ (đa thiết bị)
         resetIdleTimer();
+        const u = api.getUser();
+        if (u && u.id) {
+          api.get(`/api/user/study-time/today?date=${currentDateRef.current}`, { skipCache: true }).then((res: any) => {
+            if (res && res.success && res.data) {
+              const serverSec = res.data.totalSeconds || 0;
+              if (serverSec > totalSecondsRef.current) {
+                totalSecondsRef.current = serverSec;
+                try {
+                  localStorage.setItem(`study_time_${currentDateRef.current}`, String(serverSec));
+                } catch {}
+                broadcastUpdate(isUserActiveRef.current);
+              }
+            }
+          }).catch(() => {});
+        }
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -172,13 +187,13 @@ export default function ActiveStudyTracker() {
             date: currentDateRef.current,
             deltaSeconds: delta
           });
-          const url = '/api/user/study-time';
+          const url = `${getBaseUrl()}/api/user/study-time`;
           // Use fetch with keepalive for reliable background request on close
           fetch(url, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
+              'Authorization': token ? `Bearer ${token}` : ''
             },
             body: payload,
             keepalive: true

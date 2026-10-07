@@ -215,8 +215,9 @@ function evaluateStudyTime(seconds) {
 /**
  * Lấy lịch sử thời gian học theo từng ngày kèm đánh giá nỗ lực và thống kê tổng quan
  * @param {string} userId
+ * @param {object} plan - Tùy chọn lộ trình học của user để lấy trọn vẹn danh sách ngày
  */
-function getStudyTimeHistory(userId) {
+function getStudyTimeHistory(userId, plan = null) {
   if (!userId) {
     return {
       history: [],
@@ -233,8 +234,25 @@ function getStudyTimeHistory(userId) {
     };
   }
 
+  const todayStr = getVietnamDateStr();
   const userMap = getUserStudyTimeMap(userId);
-  const dates = Object.keys(userMap).sort((a, b) => b.localeCompare(a)); // Mới nhất lên đầu
+  const dateSet = new Set(Object.keys(userMap));
+  dateSet.add(todayStr);
+
+  // If user plan is provided, include all plan days from start to today
+  if (plan) {
+    const allPlanDays = [
+      ...(plan.archivedPastDays || []),
+      ...(plan.days || [])
+    ];
+    for (const d of allPlanDays) {
+      if (d.date && d.date <= todayStr) {
+        dateSet.add(d.date);
+      }
+    }
+  }
+
+  const dates = Array.from(dateSet).sort((a, b) => b.localeCompare(a)); // Mới nhất lên đầu
 
   let totalSeconds = 0;
   let activeDays = 0;

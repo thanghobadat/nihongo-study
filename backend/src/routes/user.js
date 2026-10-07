@@ -2250,7 +2250,12 @@ router.post('/review-sessions', async (req, res) => {
         }
 
         let planModified = false;
-        for (const day of plan.days) {
+        const allPlanDays = [
+          ...(plan.archivedPastDays || []),
+          ...(plan.days || [])
+        ];
+
+        for (const day of allPlanDays) {
           for (const task of (day.tasks || [])) {
             if (isCumulative && task.itemType === 'cumulative_review') {
               if (!task.completed) {
@@ -2658,108 +2663,71 @@ router.post('/study-plan', async (req, res) => {
 router.post('/daily-tasks/schedule', async (req, res) => {
   try {
     const userId = req.user.id;
-    const { taskId, due_time, completed, date } = req.body;
-    if (!taskId) {
-      return res.status(400).json({ success: false, error: 'taskId is required' });
+    const { taskId, taskIds, due_time, completed, date } = req.body;
+    if (!taskId && (!taskIds || taskIds.length === 0)) {
+      return res.status(400).json({ success: false, error: 'taskId or taskIds is required' });
     }
 
+    const targetIds = Array.isArray(taskIds) && taskIds.length > 0
+      ? taskIds
+      : (typeof taskId === 'string' && taskId.includes(',') ? taskId.split(',').map(s => s.trim()) : [taskId]);
+
     const plan = getUserPlan(userId);
-    if (plan && plan.days) {
-      let taskFound = false;
-      for (const day of plan.days) {
-        if (!date || day.date === date) {
-          const task = day.tasks ? day.tasks.find(t => t.id === taskId) : null;
-          if (task) {
-            taskFound = true;
-            if (due_time !== undefined) task.due_time = due_time;
-            if (completed !== undefined) {
-              task.completed = completed;
-              if (completed) {
-                task.completed_at = getVietnamTimeStr();
-                task.currentCount = task.targetCount || 1;
-                task.progressPct = 100;
+    if (plan) {
+      const allPlanDays = [
+        ...(plan.days || []),
+        ...(plan.archivedPastDays || [])
+      ];
 
-                // Synchronize task items into user_progress table and disk cache
-                if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
-                  progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered')
-                    .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
+      let anyTaskFound = false;
+
+      for (const targetId of targetIds) {
+        for (const day of allPlanDays) {
+          if (!date || day.date === date || targetIds.length > 1) {
+            const task = day.tasks ? day.tasks.find(t => t.id === targetId) : null;
+            if (task) {
+              anyTaskFound = true;
+              if (due_time !== undefined) task.due_time = due_time;
+              if (completed !== undefined) {
+                task.completed = completed;
+                if (completed) {
+                  task.completed_at = getVietnamTimeStr();
+                  task.currentCount = task.targetCount || 1;
+                  task.progressPct = 100;
+
+                  // Synchronize task items into user_progress table and disk cache
+                  if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
+                    progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered')
+                      .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
+                  }
+
+                  // Synchronize review session record if this is a review task
+                  if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
+                    markReviewSessionCompleted(userId, task, req.user && req.user.isMock);
+                  }
+
+                  const dayTasks = day.tasks || [];
+                  const completedCount = dayTasks.filter(t => t.completed).length;
+                  const totalCount = dayTasks.length;
+                  const isAllDoneToday = completedCount >= totalCount && totalCount > 0;
+
+                  // Scenario 5: Task Completed Notification
+                  pushNotificationService.sendTaskCompletedNotification(userId, {
+                    completedTask: task,
+                    isAllDoneToday,
+                    completedCount,
+                    totalCount
+                  }).catch(e => console.warn('[PushNotification] Task completed push failed:', e.message));
+                } else {
+                  delete task.completed_at;
+                  task.currentCount = 0;
+                  task.progressPct = 0;
                 }
-
-                // Synchronize review session record if this is a review task
-                if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
-                  markReviewSessionCompleted(userId, task, req.user && req.user.isMock);
-                }
-
-                const dayTasks = day.tasks || [];
-                const completedCount = dayTasks.filter(t => t.completed).length;
-                const totalCount = dayTasks.length;
-                const isAllDoneToday = completedCount >= totalCount && totalCount > 0;
-
-                // Scenario 5: Task Completed Notification
-                pushNotificationService.sendTaskCompletedNotification(userId, {
-                  completedTask: task,
-                  isAllDoneToday,
-                  completedCount,
-                  totalCount
-                }).catch(e => console.warn('[PushNotification] Task completed push failed:', e.message));
-
-                // Scenario 8: Milestone Achievement (Lesson 25 or Lesson 50)
-                if (task.lesson === 25 && isAllDoneToday) {
-                  pushNotificationService.sendMilestoneNotification(userId, {
-                    milestoneTitle: '🏆 Tốt nghiệp Minna no Nihongo N5 (Bài 25)!',
-                    milestoneMessage: 'Chúc mừng bạn đã hoàn thành xuất sắc toàn bộ 25 bài N5! Hãy sẵn sàng bứt phá lên N4 nhé!'
-                  }).catch(e => console.warn('[PushNotification] Milestone push failed:', e.message));
-                } else if (task.lesson === 50 && isAllDoneToday) {
-                  pushNotificationService.sendMilestoneNotification(userId, {
-                    milestoneTitle: '🏆 Chinh phục toàn bộ 50 bài Minna no Nihongo (N4)!',
-                    milestoneMessage: 'Kỳ tích! Bạn đã làm chủ hoàn toàn 50 bài Minna no Nihongo N5 và N4. Bạn đã sẵn sàng tự tin bước vào kỳ thi JLPT!'
-                  }).catch(e => console.warn('[PushNotification] Milestone push failed:', e.message));
-                }
-              } else {
-                delete task.completed_at;
-                task.currentCount = 0;
-                task.progressPct = 0;
               }
+              day.completedCount = (day.tasks || []).filter(t => t.completed).length;
+              day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : (day.completedCount > 0 ? 100 : 0);
+              break;
             }
-            day.completedCount = day.tasks.filter(t => t.completed).length;
-            day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : (day.completedCount > 0 ? 100 : 0);
-            break;
-          }
-        }
-      }
-
-      // Fallback search across all days if not found on specified date
-      if (!taskFound) {
-        for (const day of plan.days) {
-          const task = day.tasks ? day.tasks.find(t => t.id === taskId) : null;
-          if (task) {
-            if (due_time !== undefined) task.due_time = due_time;
-            if (completed !== undefined) {
-              task.completed = completed;
-              if (completed) {
-                task.completed_at = getVietnamTimeStr();
-                task.currentCount = task.targetCount || 1;
-                task.progressPct = 100;
-
-                // Synchronize task items into user_progress table and disk cache
-                if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
-                  progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered')
-                    .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
-                }
-
-                // Synchronize review session record if this is a review task
-                if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
-                  markReviewSessionCompleted(userId, task, req.user && req.user.isMock);
-                }
-              } else {
-                delete task.completed_at;
-                task.currentCount = 0;
-                task.progressPct = 0;
-              }
-            }
-            day.completedCount = day.tasks.filter(t => t.completed).length;
-            day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : (day.completedCount > 0 ? 100 : 0);
-            break;
           }
         }
       }
@@ -3270,9 +3238,12 @@ router.post('/study-time', async (req, res) => {
  * GET /api/user/study-time/today
  * Lấy tổng thời gian học hôm nay của người dùng để đồng bộ mốc khởi điểm cho thiết bị mới
  */
-router.get('/study-time/today', (req, res) => {
+router.get('/study-time/today', async (req, res) => {
   try {
     const userId = req.user.id;
+    if (isSupabaseConfigured() && req.user && !req.user.isMock) {
+      await studyTimeService.syncFromSupabase(userId).catch(() => {});
+    }
     const dateStr = req.query.date || getLocalDateStr();
     const result = studyTimeService.getStudyTime(userId, dateStr);
     return res.json({
@@ -3289,10 +3260,14 @@ router.get('/study-time/today', (req, res) => {
  * GET /api/user/study-time/history
  * Lấy toàn bộ lịch sử thời gian học các ngày (ngày X học Y tiếng) kèm đánh giá nỗ lực & thống kê
  */
-router.get('/study-time/history', (req, res) => {
+router.get('/study-time/history', async (req, res) => {
   try {
     const userId = req.user.id;
-    const result = studyTimeService.getStudyTimeHistory(userId);
+    if (isSupabaseConfigured() && req.user && !req.user.isMock) {
+      await studyTimeService.syncFromSupabase(userId).catch(() => {});
+    }
+    const plan = getUserPlan(userId);
+    const result = studyTimeService.getStudyTimeHistory(userId, plan);
     return res.json({
       success: true,
       ...result

@@ -4,6 +4,7 @@ import React from 'react';
 
 export interface DebtItem {
   taskId: string;
+  taskIds?: string[];
   date?: string;
   title: string;
   itemType: string;
@@ -23,7 +24,7 @@ interface UnfinishedDebtModalProps {
   onReplan: () => Promise<void> | void;
   onCatchUpToday: () => void;
   isReplanning?: boolean;
-  onToggleTaskStatus?: (taskId: string, completed: boolean, date?: string) => Promise<void> | void;
+  onToggleTaskStatus?: (taskId: string | string[], completed: boolean, date?: string) => Promise<void> | void;
 }
 
 export default function UnfinishedDebtModal({
@@ -106,18 +107,22 @@ export default function UnfinishedDebtModal({
                 <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[11px] font-bold border border-amber-500/40 whitespace-nowrap">
                   Thiếu {item.missingCount}
                 </span>
-                {onToggleTaskStatus && (item.itemType === 'single_review' || item.itemType === 'cumulative_review') && (
+                {onToggleTaskStatus && (item.itemType === 'single_review' || item.itemType === 'cumulative_review') ? (
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onToggleTaskStatus(item.taskId, true, item.date || yesterdayDate || undefined);
+                      onToggleTaskStatus(item.taskIds || item.taskId, true, item.date || yesterdayDate || undefined);
                     }}
                     className="px-2.5 py-1 rounded-lg bg-amber-500/25 hover:bg-emerald-500/30 text-amber-200 hover:text-emerald-200 border border-amber-500/40 hover:border-emerald-500/40 font-bold text-[11px] transition-all cursor-pointer flex items-center gap-1 active:scale-95"
                     title="Bấm để đánh dấu đã hoàn thành bài ôn tập này"
                   >
                     <span>✓ Xong</span>
                   </button>
+                ) : (
+                  <span className="text-[10px] text-slate-400 bg-slate-800/70 px-1.5 py-0.5 rounded border border-slate-700/60" title="Hệ thống tự động ghi nhận khi bạn học thuộc đủ số lượng">
+                    Tự tracking ⚡
+                  </span>
                 )}
               </div>
             </div>
