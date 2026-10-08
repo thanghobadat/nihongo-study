@@ -871,6 +871,13 @@ const COMMON_KANJI_TO_HIRAGANA = [
   { kanji: 'お金', hiragana: 'おかね' }
 ];
 
+let mockDb = null;
+try {
+  mockDb = require('../db/mockDb');
+} catch (e) {
+  // non-blocking
+}
+
 const SINGLE_KANJI_FALLBACK = {
   '正': 'ただ', '言': 'こと', '葉': 'ば', '読': 'よ', '書': 'か', '買': 'か',
   '行': 'い', '来': 'き', '帰': 'かえ', '食': 'た', '飲': 'の', '見': 'み',
@@ -881,18 +888,48 @@ const SINGLE_KANJI_FALLBACK = {
   '達': 'だち', '病': 'びょう', '院': 'いん', '銀': 'ぎん', '医': 'い',
   '者': 'しゃ', '研': 'けん', '究': 'きゅう', '物': 'もの', '手': 'て',
   '紙': 'がみ', '電': 'でん', '語': 'ご', '漢': 'かん', '字': 'じ',
-  '男': 'おとこ', '女': 'おんな', '子': 'こ', '父': 'ちち', '母': 'はは'
+  '男': 'おとこ', '女': 'おんな', '子': 'こ', '父': 'ちち', '母': 'はは',
+  '高': 'たか', '白': 'しろ', '面': 'めん', '安': 'やす', '新': 'あたら',
+  '古': 'ふる', '長': 'なが', '短': 'みじか', '早': 'はや', '多': 'おお',
+  '少': 'すく', '近': 'ちか', '遠': 'とお', '明': 'あか', '暗': 'くら'
 };
+
+// Dynamically augment SINGLE_KANJI_FALLBACK with readings from mockDb.kanji
+if (mockDb && Array.isArray(mockDb.kanji)) {
+  for (const k of mockDb.kanji) {
+    if (k && k.character && !SINGLE_KANJI_FALLBACK[k.character]) {
+      const raw = k.kunyomi || k.onyomi || '';
+      const clean = raw.split(/[\s,()（）.]/)[0] || '';
+      if (clean) {
+        // Convert Katakana onyomi to Hiragana if needed
+        const hira = clean.replace(/[\u30a1-\u30f6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+        SINGLE_KANJI_FALLBACK[k.character] = hira;
+      }
+    }
+  }
+}
 
 function purifyKanjiText(text, allowedSet, vocabList = []) {
   if (!text || typeof text !== 'string') return text;
 
   let result = text;
 
-  // Build combined word replacement list: vocabList entries + COMMON_KANJI_TO_HIRAGANA
+  // Remove common Japanese meta-instruction boilerplate if embedded
+  result = result.replace(/【\s*\?\s*】\s*に\s*はいる\s*ただしい\s*ことばは\s*どれですか[。.]?/g, '');
+  result = result.replace(/【\s*\?\s*】\s*にはいる正しい言葉はどれですか[。.]?/g, '');
+  result = result.trim();
+
+  // Build combined word replacement list: mockDb vocabulary + vocabList + COMMON_KANJI_TO_HIRAGANA
   const wordsToTry = [...COMMON_KANJI_TO_HIRAGANA];
   if (Array.isArray(vocabList)) {
     for (const v of vocabList) {
+      if (v && v.kanji && v.hiragana && v.kanji !== v.hiragana) {
+        wordsToTry.push({ kanji: v.kanji, hiragana: v.hiragana });
+      }
+    }
+  }
+  if (mockDb && Array.isArray(mockDb.vocabulary)) {
+    for (const v of mockDb.vocabulary) {
       if (v && v.kanji && v.hiragana && v.kanji !== v.hiragana) {
         wordsToTry.push({ kanji: v.kanji, hiragana: v.hiragana });
       }
@@ -928,23 +965,126 @@ function purifyKanjiText(text, allowedSet, vocabList = []) {
   return purifiedChars;
 }
 
-function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = []) {
+function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = [], lessonId = null) {
   if (!Array.isArray(questions)) return [];
+
+  const lookupMeaning = (word) => {
+    if (!word) return '';
+    const cleanWord = word.trim();
+    if (cleanWord.length === 1 && /[\u4E00-\u9FAF]/.test(cleanWord)) {
+      const kData = (mockDb?.kanji || []).find(k => k.character === cleanWord);
+      if (kData) {
+        const sino = kData.sino_vietnamese || kData.sinoVietnamese || '';
+        const mean = kData.vietnamese_meaning || kData.meaning || '';
+        return `${sino ? sino + ': ' : ''}${mean}`.trim();
+      }
+    }
+    const found = (vocabList || []).find(v => v.kanji === cleanWord || v.hiragana === cleanWord)
+      || (mockDb?.vocabulary || []).find(v => v.kanji === cleanWord || v.hiragana === cleanWord);
+    return found?.vietnamese_meaning || '';
+  };
+
+  // Collect candidate valid words for filling missing or duplicated options
+  const fallbackCandidates = [];
+  if (Array.isArray(vocabList) && vocabList.length > 0) {
+    for (const v of vocabList) {
+      const w = v.kanji || v.hiragana;
+      if (w && w.length >= 2 && !fallbackCandidates.includes(w)) {
+        fallbackCandidates.push(w);
+      }
+    }
+  } else if (mockDb && Array.isArray(mockDb.vocabulary)) {
+    const maxLesson = Number(lessonId) || 50;
+    for (const v of mockDb.vocabulary) {
+      if (Number(v.lesson_id) <= maxLesson) {
+        const w = v.kanji || v.hiragana;
+        if (w && w.length >= 2 && !fallbackCandidates.includes(w)) {
+          fallbackCandidates.push(w);
+        }
+      }
+    }
+  }
 
   return questions.map(q => {
     const purifiedQText = purifyKanjiText(q.question_text || '', allowedSet, vocabList);
     const purifiedContext = purifyKanjiText(q.context_sentence || '', allowedSet, vocabList);
     const purifiedTargetWord = purifyKanjiText(q.target_word || '', allowedSet, vocabList);
-    const purifiedOptions = Array.isArray(q.options)
-      ? q.options.map(opt => purifyKanjiText(opt, allowedSet, vocabList))
-      : [];
+
+    const isWordFormation = q.question_type === 'word_formation';
+
+    // 1. Purify options & deduplicate
+    const rawPurified = (Array.isArray(q.options) ? q.options : [])
+      .map(opt => purifyKanjiText(opt || '', allowedSet, vocabList).trim())
+      .filter(Boolean);
+
+    const isCompoundTarget = purifiedTargetWord.length >= 2;
+    const seen = new Set();
+    let distinctOptions = [];
+
+    // Prioritize keeping targetWord
+    if (purifiedTargetWord) {
+      seen.add(purifiedTargetWord);
+      distinctOptions.push(purifiedTargetWord);
+    }
+
+    for (const opt of rawPurified) {
+      if (seen.has(opt)) continue;
+      // Filter out isolated single kanji only if question target is a compound word AND not word_formation
+      if (!isWordFormation && isCompoundTarget && opt.length === 1 && /[\u4E00-\u9FAF]/.test(opt)) {
+        continue;
+      }
+      seen.add(opt);
+      distinctOptions.push(opt);
+    }
+
+    // Fill up to 4 options
+    if (isWordFormation) {
+      for (const kChar of allowedSet) {
+        if (distinctOptions.length >= 4) break;
+        if (!seen.has(kChar) && kChar !== purifiedTargetWord) {
+          seen.add(kChar);
+          distinctOptions.push(kChar);
+        }
+      }
+    } else {
+      for (const cand of fallbackCandidates) {
+        if (distinctOptions.length >= 4) break;
+        const purifiedCand = purifyKanjiText(cand, allowedSet, vocabList);
+        if (!seen.has(purifiedCand) && purifiedCand !== purifiedTargetWord) {
+          seen.add(purifiedCand);
+          distinctOptions.push(purifiedCand);
+        }
+      }
+    }
+
+    // Shuffle options so correct target is not always first
+    const shuffledOptions = distinctOptions.slice(0, 4);
+    for (let i = shuffledOptions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+    }
+
+    const correctIdx = shuffledOptions.indexOf(purifiedTargetWord);
+
+    // 2. Build 4 options_meanings
+    const optionsMeanings = shuffledOptions.map((opt, idx) => {
+      if (Array.isArray(q.options_meanings) && q.options_meanings[idx] && rawPurified[idx] === opt) {
+        return q.options_meanings[idx];
+      }
+      return lookupMeaning(opt);
+    });
+
+    const targetHint = q.target_word_hint || q.target_word_meaning || lookupMeaning(purifiedTargetWord) || '';
 
     return {
       ...q,
       question_text: purifiedQText,
       context_sentence: purifiedContext,
       target_word: purifiedTargetWord,
-      options: purifiedOptions
+      target_word_hint: targetHint,
+      options: shuffledOptions,
+      options_meanings: optionsMeanings,
+      correct_index: correctIdx >= 0 ? correctIdx : 0
     };
   });
 }
@@ -998,6 +1138,11 @@ async function generateKanjiRecognitionQuestions({ lessonId, kanjis = [], vocabL
   const prompt = `Bạn là chuyên gia sư phạm tiếng Nhật hàng đầu thế giới về Minna no Nihongo (trình độ N5/N4).
 Nhiệm vụ của bạn là tạo một BỘ CÂU HỎI TRẮC NGHIỆM NHẬN DIỆN CHỮ HÁN & THUỘC TỪ VỰNG THỰC CHIẾN (Kanji Vocabulary Recognition Quiz) cho học viên trong Bài ${lessonId || ''}.
 
+GIỚI HẠN PHẠM VI BÀI HỌC (STRICT LESSON SCOPE):
+- Học viên đang học Bài ${lessonId || 1}.
+- TUYỆT ĐỐI CHỈ sử dụng từ vựng, chữ Hán và ngữ pháp từ Bài 1 đến Bài ${lessonId || 1}.
+- TUYỆT ĐỐI KHÔNG dùng từ vựng, chữ Hán hay ngữ pháp của các bài sau bài ${lessonId || 1} (Ví dụ học viên đang ở bài 2, tuyệt đối KHÔNG dùng 高い, 面白い, 食べます,... vì là từ của các bài 4-8!).
+
 DANH SÁCH CHỮ HÁN MỤC TIÊU TRONG PHẠM VI HỌC VIÊN ĐANG ÔN (${kanjis.length} chữ):
 ${kanjisList}
 
@@ -1010,55 +1155,48 @@ ${sampleSentences}
 YÊU CẦU QUAN TRỌNG VỀ SỐ LƯỢNG:
 - Hãy sinh chính xác khoảng ${targetCount} câu hỏi trắc nghiệm chất lượng cao.
 
-QUY TẮC SƯ PHẠM BẮT BUỘC VỀ CHỮ HÁN & TỪ VỰNG (STRICT KANJI RESTRICTION):
+QUY TẮC SƯ PHẠM BẮT BUỘC:
 1. **TUYỆT ĐỐI CHỈ DÙNG KANJI CHO CÁC CHỮ ĐÃ HỌC**:
    - CHỈ ĐƯỢC PHÉP VIẾT DẠNG KANJI nếu chữ Hán đó nằm trong danh sách được phép: [ ${allowedKanjiStr} ].
    - BẤT KỲ TỪ NÀO KHÁC chưa học chữ Hán hoặc không thuộc danh sách trên BẮT BUỘC PHẢI VIẾT 100% BẰNG HIRAGANA / KATAKANA!
-   - Đây là nguyên tắc tối quan trọng vì học viên chưa học các chữ Hán ngoài bài và sẽ không đọc được.
-   - Các ví dụ bắt buộc tuân theo:
-     * Viết 「あのかた」 THAY VÌ 「あの方」 (nếu chữ 方 chưa học).
-     * Viết 「だいがく」 THAY VÌ 「大学」 (nếu chữ 大 hoặc 学 chưa học).
-     * Viết 「なんじ」 THAY VÌ 「何時」 (nếu chữ 何 hoặc 時 chưa học).
-     * Viết 「くるま」 THAY VÌ 「車」 (nếu chữ 車 chưa học).
-     * Viết 「いきます」 THAY VÌ 「行きます」 (nếu chữ 行 chưa học).
-     * Viết 「かいます」 THAY VÌ 「買います」 (nếu chữ 買 chưa học).
-     * Viết 「ともだち」 THAY VÌ 「友達」 (nếu chữ 友 hoặc 達 chưa học).
-     * Viết 「いま」 THAY VÌ 「今」 (nếu chữ 今 chưa học).
-     * Viết 「きょう」 THAY VÌ 「今日」 (nếu chữ 今 chưa học).
-     * Viết 「ただしい」 THAY VÌ 「正しい」 (nếu chữ 正 chưa học).
-     * Viết 「ことば」 THAY VÌ 「言葉」 (nếu chữ 言 hoặc 葉 chưa học).
-     * Viết 「かんじ」 THAY VÌ 「漢字」 (nếu chữ 漢 hoặc 字 chưa học).
-     * Viết 「よみかた」 THAY VÌ 「読み方」 (nếu chữ 読 hoặc 方 chưa học).
-     * Viết 「はいる」 THAY VÌ 「入る」 (nếu chữ 入 chưa học).
-   - Tóm lại: Tất cả các từ vựng nếu chữ Hán của nó chưa có trong danh sách trên đều phải viết bằng Hiragana/Katakana.
+   - Ví dụ: Viết 「あのかた」 THAY VÌ 「あの方」 (nếu chữ 方 chưa học); viết 「いま」 THAY VÌ 「今」 (nếu chữ 今 chưa học).
 
 2. **100% TIẾNG NHẬT TRONG ĐỀ BÀI VÀ CÁC ĐÁP ÁN LỰA CHỌN**:
-   - Học viên cần luyện "nhận diện mặt chữ tiếng Nhật trực quan", vì vậy:
-   - TUYỆT ĐỐI KHÔNG dùng tiếng Việt trong "question_text", "context_sentence" và "options" (trừ loại 'meaning_choice').
-   - TUYỆT ĐỐI KHÔNG mớm tiếng Việt trong câu hỏi.
-   - Viết câu hỏi hoàn toàn bằng tiếng Nhật tự nhiên, trình độ N5 dễ hiểu (chú ý chỉ dùng Kanji trong danh sách cho phép).
+   - Học viên cần luyện "nhận diện mặt chữ tiếng Nhật trực quan".
+   - TUYỆT ĐỐI KHÔNG dùng tiếng Việt trong "question_text", "context_sentence" và "options".
+   - KHÔNG thêm câu tiếng Nhật sáo rỗng như "【 ? 】に はいる ただしい ことばは どれですか". Hãy viết trực tiếp câu tình huống hoặc hội thoại, ví dụ:
+     "これは 【 ? 】 ですか。…はい、ざっしです。" hoặc "あれは だれの 【 ? 】 ですか。…たなかさんの とけいです。"
 
-3. **ĐA DẠNG HÓA 4 DẠNG CÂU HỎI TỰ NHIÊN**:
-   - **Dạng 1 (dialogue_fill)**: Hội thoại ngắn 2 câu (A - B) trong đời sống, khuyết 1 từ vựng chữ Hán mục tiêu.
-   - **Dạng 2 (reading_in_context)**: Câu văn tự nhiên có chữ Hán trong ngoặc 【 】, hỏi cách đọc Hiragana đúng trong ngữ cảnh (chú ý phân biệt âm On/Kun thực tế, như 人 trong アメリカ人 đọc là じん, trong あの人 đọc là ひと).
-   - **Dạng 3 (kanji_orthography)**: Câu văn có từ Hiragana, chọn dạng chữ Hán/từ ghép đúng (các đáp án sai là chữ viết đảo trật tự nét hoặc từ vựng khác trong bài).
-   - **Dạng 4 (word_formation)**: Ghép 2 chữ Hán trong bài thành từ vựng có nghĩa (Ví dụ: 「先」＋「生」＝【 ? 】).
-   - (Chỉ tối đa 1 câu dạng **meaning_choice** hỏi nghĩa tiếng Việt nếu cần thiết).
+3. **CÁC DẠNG CÂU HỎI TRẮC NGHIỆM ĐA DẠNG**:
+   - **Dạng 1 (dialogue_fill - Điền hội thoại thực tế)**: Đoạn thoại ngắn 2 câu (A - B), khuyết 1 từ vựng chữ Hán mục tiêu thành 【 ? 】. 4 options là 4 từ vựng hoàn chỉnh.
+   - **Dạng 2 (reading_in_context - Cách đọc trong ngữ cảnh)**: Câu văn có chữ Hán trong 【 】, chọn cách đọc Hiragana đúng.
+   - **Dạng 3 (kanji_orthography - Chọn chữ Hán chuẩn)**: Câu văn có từ Hiragana, chọn dạng chữ Hán viết chuẩn.
+   - **Dạng 4 (word_formation - Điền khuyết hoàn thiện từ ghép Hán tự)**:
+     * QUY TẮC BẮT BUỘC CHO DẠNG NÀY:
+     * Cho 1 chữ Hán đã biết và để khuyết 1 chữ Hán trong từ ghép bằng 【 ? 】, kèm cách đọc Hiragana và nghĩa tiếng Việt của từ ghép hoàn chỉnh.
+     * Cú pháp bắt buộc của question_text: 「Chữ_1」＋【 ? 】＝ Cách_đọc (Nghĩa_tiếng_Việt) hoặc 【 ? 】＋「Chữ_2」＝ Cách_đọc (Nghĩa_tiếng_Việt).
+     * Ví dụ: 「学」＋【 ? 】＝ がくせい (Học sinh) hoặc 【 ? 】＋「計」＝ とけい (Đồng hồ).
+     * TUYỆT ĐỐI KHÔNG cho sẵn cả 2 chữ Hán rồi hỏi kết quả! Phải để khuyết 1 chữ Hán để học viên chọn.
+     * 4 options cho dạng này BẮT BUỘC LÀ 4 CHỮ HÁN ĐƠN LẺ đã học trong bài (Ví dụ: ['生', '先', '校', '人']).
+     * 'target_word' là chữ Hán đúng điền vào 【 ? 】 (ví dụ: '生').
+     * 'options_meanings' là mảng 4 chuỗi chứa Âm Hán Việt + Nghĩa của 4 chữ Hán đó (Ví dụ: ['SINH: Sống, sinh ra', 'TIÊN: Trước', 'HIỆU: Trường học', 'NHÂN: Người']).
+   - **Dạng 5 (meaning_choice - Phản xạ nghĩa theo tình huống)**: Câu hỏi tình huống hoặc mô tả đặc điểm của từ vựng chữ Hán.
 
-4. **PHƯƠNG ÁN LỰA CHỌN (options)**:
-   - Luôn gồm đúng 4 lựa chọn (A, B, C, D) viết bằng tiếng Nhật (tuân thủ quy tắc chỉ dùng Kanji đã học).
-   - "correct_index" là chỉ số của đáp án đúng (0, 1, 2, hoặc 3).
-   - Các phương án nhiễu phải hợp lý, lấy từ các chữ Hán và từ vựng trong bài học hoặc bẫy đảo thứ tự nét chữ (như 先生 vs 生先).
+4. **GỢI Ý NGHĨA TỪ CẦN ĐIỀN (target_word_hint)**:
+   - Cung cấp trường 'target_word_hint' là nghĩa tiếng Việt chính xác của từ vựng cần điền vào chỗ trống 【 ? 】.
+   - Ví dụ: Nếu chỗ trống cần điền là 「ざっし」 thì target_word_hint là "Tạp chí"; nếu là dạng word_formation thì target_word_hint là nghĩa của từ ghép (ví dụ: "Học sinh").
 
-5. **BẢN DỊCH NGHĨA CÂU HỎI (question_translation)**:
-   - Cung cấp bản dịch nghĩa tiếng Việt đầy đủ, chuẩn xác và tự nhiên của câu hỏi hoặc đoạn hội thoại ngữ cảnh đề bài.
+5. **PHƯƠNG ÁN LỰA CHỌN (options) & NGHĨA TIẾNG VIỆT (options_meanings)**:
+   - Luôn gồm đúng 4 lựa chọn (A, B, C, D) viết bằng tiếng Nhật trong mảng 'options'.
+   - TUYỆT ĐỐI KHÔNG được trùng lặp các phương án trong 4 options!
+   - Với Dạng 4 (word_formation): 4 lựa chọn là 4 chữ Hán đơn lẻ đã học.
+   - Với các dạng còn lại: 4 lựa chọn là 4 từ vựng hoàn chỉnh khác biệt nhau trong bài học.
+   - 'correct_index' là chỉ số (0, 1, 2, 3) của đáp án đúng.
+   - Cung cấp trường 'options_meanings' gồm đúng 4 chuỗi nghĩa tiếng Việt tương ứng cho 4 phương án trên.
 
-6. **GIẢI THÍCH CHI TIẾT & SƯ PHẠM (explanation)**:
-   - Viết bằng TIẾNG VIỆT đầy đủ, chi tiết, có cấu trúc rõ ràng:
-     * Dòng 1: 【Dịch nghĩa hoàn chỉnh】: Dịch toàn bộ câu văn đề bài khi điền đáp án đúng.
-     * Dòng 2: 【Lý do chọn】: Giải thích tại sao đáp án đó là đúng nhất trong ngữ cảnh.
-     * Dòng 3: 【Ý nghĩa các lựa chọn】: Giải nghĩa và dịch ngắn gọn cả 4 lựa chọn A, B, C, D để học viên hiểu rõ tại sao các lựa chọn khác sai (Ví dụ: A. 学生: Học sinh (đúng) | B. 先生: Giáo viên | C. 会社員: Nhân viên công ty | D. 社員: Nhân viên).
-     * Dòng 4: 【Phân tích Chữ Hán】: Nêu rõ âm Hán Việt, âm On/Kun, ý nghĩa cốt lõi của chữ Hán mục tiêu và mẹo ghi nhớ mặt chữ để học viên nhớ lâu.`;
+6. **BẢN DỊCH VÀ GIẢI THÍCH**:
+   - 'question_translation': Bản dịch tiếng Việt đầy đủ của ngữ cảnh đề bài.
+   - 'explanation': Giải thích ngắn gọn lý do chọn đáp án đúng và phân tích chữ Hán mục tiêu.`;
 
   const schema = {
     type: "OBJECT",
@@ -1080,10 +1218,16 @@ QUY TẮC SƯ PHẠM BẮT BUỘC VỀ CHỮ HÁN & TỪ VỰNG (STRICT KANJI RE
             target_word: { type: "STRING", description: "Từ vựng chứa chữ Hán (viết bằng Kanji/Kana theo đúng quy tắc chữ đã học)" },
             target_word_reading: { type: "STRING", description: "Cách đọc Hiragana của từ vựng" },
             target_word_meaning: { type: "STRING", description: "Nghĩa tiếng Việt của từ vựng để hiển thị sau khi trả lời" },
+            target_word_hint: { type: "STRING", description: "Gợi ý nghĩa tiếng Việt của từ cần điền vào chỗ trống (ví dụ: 'Đồng hồ', 'Tạp chí')" },
             options: {
               type: "ARRAY",
               items: { type: "STRING" },
-              description: "Đúng 4 lựa chọn trắc nghiệm (viết bằng tiếng Nhật)"
+              description: "Đúng 4 lựa chọn từ vựng trắc nghiệm khác biệt nhau hoàn toàn (viết bằng tiếng Nhật)"
+            },
+            options_meanings: {
+              type: "ARRAY",
+              items: { type: "STRING" },
+              description: "Mảng gồm đúng 4 nghĩa tiếng Việt tương ứng cho 4 phương án lựa chọn trong options"
             },
             correct_index: { type: "INTEGER", description: "Chỉ số 0, 1, 2, 3 của đáp án đúng" },
             explanation: { type: "STRING", description: "Giải thích chi tiết và phân tích từ vựng bằng tiếng Việt giúp học viên thuộc bài" }
@@ -1094,7 +1238,9 @@ QUY TẮC SƯ PHẠM BẮT BUỘC VỀ CHỮ HÁN & TỪ VỰNG (STRICT KANJI RE
             "question_translation",
             "target_kanji",
             "target_word",
+            "target_word_hint",
             "options",
+            "options_meanings",
             "correct_index",
             "explanation"
           ]
@@ -1106,7 +1252,7 @@ QUY TẮC SƯ PHẠM BẮT BUỘC VỀ CHỮ HÁN & TỪ VỰNG (STRICT KANJI RE
 
   const response = await callGemini(prompt, schema, { maxOutputTokens: 4000, timeoutMs: 30000 });
   if (response?.result?.questions && Array.isArray(response.result.questions)) {
-    response.result.questions = sanitizeRecognitionQuizQuestions(response.result.questions, allowedSet, vocabList);
+    response.result.questions = sanitizeRecognitionQuizQuestions(response.result.questions, allowedSet, vocabList, lessonId);
   }
   return response;
 }

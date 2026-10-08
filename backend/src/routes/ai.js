@@ -686,7 +686,7 @@ router.post('/kanji-recognition-quiz', async (req, res) => {
 
     const diskCache = getRecognitionQuizDiskCache();
     const charSig = kanjis.map(k => k.character || '').sort().join('');
-    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v3`;
+    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v5`;
 
     // 1. Check permanent disk cache (only if not forceRefresh)
     if (!forceRefresh && diskCache[cacheKey] && Array.isArray(diskCache[cacheKey].questions) && diskCache[cacheKey].questions.length > 0) {
@@ -717,11 +717,18 @@ router.post('/kanji-recognition-quiz', async (req, res) => {
         .map(k => k.character);
     }
 
+    // Collect all learned vocabulary up to current lesson
+    let cumulativeVocab = [];
+    if (mockDb && Array.isArray(mockDb.vocabulary)) {
+      cumulativeVocab = mockDb.vocabulary.filter(v => v && Number(v.lesson_id) <= Number(lessonId));
+    }
+    const vocabListForQuiz = cumulativeVocab.length > 0 ? cumulativeVocab : vocabItems;
+
     // 3. Call Gemini to generate recognition questions
     const { result, usageMetadata } = await aiGradingService.generateKanjiRecognitionQuestions({
       lessonId,
       kanjis,
-      vocabList: vocabItems,
+      vocabList: vocabListForQuiz,
       allowedKanjiList
     });
 

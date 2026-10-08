@@ -256,6 +256,8 @@ export default function KanjiPracticeTab({
     direction: 'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab' | 'vocab-to-kanji';
   }
   const [currentSpeedrunQ, setCurrentSpeedrunQ] = useState<SpeedrunQ | null>(null);
+  const [speedrunSelectedIdx, setSpeedrunSelectedIdx] = useState<number | null>(null);
+  const [speedrunIsAnswerCorrect, setSpeedrunIsAnswerCorrect] = useState<boolean | null>(null);
 
   const speedrunTimerRef = useRef<any>(null);
   const speedrunScoreRef = useRef<number>(0);
@@ -291,9 +293,9 @@ export default function KanjiPracticeTab({
       const q = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
       const targetKanjiItem = eligibleKanji.find(k => k.character === q.target_kanji) || target;
       return {
-        subject: q.context_sentence || q.target_word || q.target_kanji,
-        subText: undefined,
-        promptText: q.question_text,
+        subject: q.context_sentence || q.question_text || q.target_word || q.target_kanji,
+        subText: q.target_word_hint ? `💡 Gợi ý: ${q.target_word_hint}` : undefined,
+        promptText: '👉 Chọn từ thích hợp điền vào chỗ trống 【 ? 】:',
         correctKanji: targetKanjiItem,
         audioWord: q.target_word_reading || q.target_word,
         correctAnswerText: q.options[q.correct_index],
@@ -490,53 +492,65 @@ export default function KanjiPracticeTab({
   }, [speedrunActive, speedrunGameOver, currentSpeedrunQ]);
 
   // Answer handling in Speedrun
-  const handleSpeedrunAnswer = (opt: { text: string; isCorrect: boolean }) => {
-    if (!speedrunActive || !currentSpeedrunQ) return;
+  const handleSpeedrunAnswer = (opt: { text: string; isCorrect: boolean }, idx: number) => {
+    if (!speedrunActive || !currentSpeedrunQ || speedrunSelectedIdx !== null) return;
 
     if (speedrunTimerRef.current) {
       clearInterval(speedrunTimerRef.current);
     }
+
+    setSpeedrunSelectedIdx(idx);
+    setSpeedrunIsAnswerCorrect(opt.isCorrect);
 
     if (opt.isCorrect) {
       // Audio cue (plays vocab audio if available, else kanji audio)
       const audioToPlay = currentSpeedrunQ.audioWord || currentSpeedrunQ.correctKanji.character;
       handlePlayAudio(audioToPlay, currentSpeedrunQ.audioWord || currentSpeedrunQ.correctKanji.kunyomi || currentSpeedrunQ.correctKanji.character);
 
-      // Score calculation: 10 base + streak bonus
-      const bonus = Math.min(speedrunStreak * 2, 20);
-      const points = 10 + bonus;
-      const newScore = speedrunScoreRef.current + points;
-      speedrunScoreRef.current = newScore;
-      setSpeedrunScore(newScore);
+      setTimeout(() => {
+        // Score calculation: 10 base + streak bonus
+        const bonus = Math.min(speedrunStreak * 2, 20);
+        const points = 10 + bonus;
+        const newScore = speedrunScoreRef.current + points;
+        speedrunScoreRef.current = newScore;
+        setSpeedrunScore(newScore);
 
-      const nextStreak = speedrunStreak + 1;
-      setSpeedrunStreak(nextStreak);
-      setSpeedrunMaxStreak(m => Math.max(m, nextStreak));
+        const nextStreak = speedrunStreak + 1;
+        setSpeedrunStreak(nextStreak);
+        setSpeedrunMaxStreak(m => Math.max(m, nextStreak));
 
-      // Dynamic time for next question (vocab style reduction)
-      const nextTime = getDynamicTimeForStreak(nextStreak);
-      speedrunMaxTimeRef.current = nextTime;
-      setSpeedrunMaxTime(nextTime);
-      setSpeedrunTimeLeft(nextTime);
+        // Dynamic time for next question (vocab style reduction)
+        const nextTime = getDynamicTimeForStreak(nextStreak);
+        speedrunMaxTimeRef.current = nextTime;
+        setSpeedrunMaxTime(nextTime);
+        setSpeedrunTimeLeft(nextTime);
 
-      // Save high score
-      if (newScore > speedrunHighScore) {
-        setSpeedrunHighScore(newScore);
-        try {
-          localStorage.setItem(`kanji_speedrun_high_${selectedLessonId}`, newScore.toString());
-        } catch (e) {
-          // ignore
+        // Save high score
+        if (newScore > speedrunHighScore) {
+          setSpeedrunHighScore(newScore);
+          try {
+            localStorage.setItem(`kanji_speedrun_high_${selectedLessonId}`, newScore.toString());
+          } catch (e) {
+            // ignore
+          }
         }
-      }
 
-      // Next question
-      const nextQ = generateSpeedrunQuestion();
-      setCurrentSpeedrunQ(nextQ);
+        setSpeedrunSelectedIdx(null);
+        setSpeedrunIsAnswerCorrect(null);
+
+        // Next question
+        const nextQ = generateSpeedrunQuestion();
+        setCurrentSpeedrunQ(nextQ);
+      }, 250);
     } else {
-      // Wrong choice -> Game Over
-      setSpeedrunActive(false);
-      setSpeedrunGameOver(true);
-      setSpeedrunWrongList(list => [...list, currentSpeedrunQ.correctKanji]);
+      setTimeout(() => {
+        // Wrong choice -> Game Over
+        setSpeedrunActive(false);
+        setSpeedrunGameOver(true);
+        setSpeedrunWrongList(list => [...list, currentSpeedrunQ.correctKanji]);
+        setSpeedrunSelectedIdx(null);
+        setSpeedrunIsAnswerCorrect(null);
+      }, 350);
     }
   };
 
@@ -1106,7 +1120,7 @@ export default function KanjiPracticeTab({
                       dialogue_fill: { label: '💬 会話・Điền hội thoại', cls: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' },
                       reading_in_context: { label: '📖 読み方・Cách đọc', cls: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
                       kanji_orthography: { label: '🔤 漢字・Chọn chữ Hán', cls: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
-                      word_formation: { label: '🧩 熟語・Ghép từ', cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+                      word_formation: { label: '🧩 熟語・Hoàn thiện từ ghép', cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
                       meaning_choice: { label: '💡 意味・Ý nghĩa', cls: 'bg-teal-500/10 text-teal-400 border-teal-500/20' }
                     };
                     const b = badgeMap[currentQuizQ.question_type || ''] || badgeMap.dialogue_fill;
@@ -1154,13 +1168,19 @@ export default function KanjiPracticeTab({
                 </div>
               </div>
 
-              {/* Question Text Box (100% Japanese immersion - pure character recognition) */}
+              {/* Question Text Box */}
               <div className="p-5 sm:p-7 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-md space-y-3">
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center justify-between">
-                  <span>NHẬN DIỆN MẶT CHỮ (日本語)</span>
-                  <span className="font-['Noto_Sans_JP'] text-blue-500 font-black">
-                    漢字: {currentQuizQ.target_kanji}
+                <div className="flex flex-col gap-1 pb-1 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-xs sm:text-sm font-black text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                    {currentQuizQ.question_type === 'word_formation'
+                      ? '👉 Chọn chữ Hán thích hợp điền vào 【 ? 】 để hoàn thiện từ ghép:'
+                      : '👉 Chọn từ thích hợp điền vào chỗ trống 【 ? 】:'}
                   </span>
+                  {(currentQuizQ.target_word_hint || currentQuizQ.target_word_meaning) && (
+                    <span className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20 w-fit">
+                      💡 Gợi ý nghĩa từ cần hoàn thành: <span className="font-black underline decoration-amber-500">{currentQuizQ.target_word_hint || currentQuizQ.target_word_meaning}</span>
+                    </span>
+                  )}
                 </div>
 
                 <div className="font-['Noto_Sans_JP'] text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed whitespace-pre-line py-1">
@@ -1202,7 +1222,7 @@ export default function KanjiPracticeTab({
                         <span className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black shrink-0 ${badgeStyle}`}>
                           {letter}
                         </span>
-                        <span className="font-['Noto_Sans_JP'] text-base sm:text-lg font-bold truncate">
+                        <span className={`font-['Noto_Sans_JP'] font-bold truncate ${opt.length === 1 ? 'text-xl sm:text-2xl font-black' : 'text-base sm:text-lg'}`}>
                           {opt}
                         </span>
                       </div>
@@ -1287,6 +1307,7 @@ export default function KanjiPracticeTab({
                         const isAns = i === currentQuizQ.correct_index;
                         const isUserChoice = i === selectedOptionIdx;
                         const letter = String.fromCharCode(65 + i);
+                        const meaning = (currentQuizQ.options_meanings && currentQuizQ.options_meanings[i]) || '';
                         return (
                           <div
                             key={i}
@@ -1313,24 +1334,18 @@ export default function KanjiPracticeTab({
                               <span className="font-['Noto_Sans_JP'] font-bold truncate text-sm">
                                 {opt}
                               </span>
+                              {meaning && (
+                                <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
+                                  ({meaning})
+                                </span>
+                              )}
                             </div>
-                            <span className="text-[11px] font-semibold shrink-0">
+                            <span className="text-[11px] font-semibold shrink-0 ml-1">
                               {isAns ? '✓ Đáp án đúng' : isUserChoice ? '✗ Bạn đã chọn' : 'Lựa chọn nhiễu'}
                             </span>
                           </div>
                         );
                       })}
-                    </div>
-                  </div>
-
-                  {/* Detailed Explanation & Pedagogical Insights */}
-                  <div className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed space-y-1.5">
-                    <span className="font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
-                      <span>💡</span>
-                      <span>Phân tích chi tiết & Mẹo nhớ sâu:</span>
-                    </span>
-                    <div className="bg-slate-50/70 dark:bg-slate-950/60 p-3 sm:p-4 rounded-xl border border-slate-100 dark:border-slate-800 text-slate-700 dark:text-slate-200 whitespace-pre-line leading-relaxed text-xs sm:text-sm">
-                      {currentQuizQ.explanation}
                     </div>
                   </div>
 
@@ -1487,21 +1502,23 @@ export default function KanjiPracticeTab({
               </div>
 
               {/* Question Card */}
-              <div className="p-8 text-center bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-lg space-y-3">
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                  {currentSpeedrunQ.promptText || 'Chọn đáp án đúng:'}
+              <div className="p-6 sm:p-8 text-center bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-lg space-y-3">
+                <div className="text-xs sm:text-sm font-black text-amber-600 dark:text-amber-400">
+                  {currentSpeedrunQ.promptText || '👉 Chọn đáp án đúng:'}
                 </div>
 
                 <div className={`font-black font-['Noto_Sans_JP'] text-slate-900 dark:text-white ${
-                  currentSpeedrunQ.direction === 'kanji-to-meaning' || currentSpeedrunQ.direction === 'kanji-to-vocab'
+                  currentSpeedrunQ.subject.length <= 2
                     ? 'text-7xl sm:text-8xl py-2'
-                    : 'text-3xl sm:text-4xl py-3'
+                    : currentSpeedrunQ.subject.length <= 4
+                    ? 'text-4xl sm:text-5xl py-2'
+                    : 'text-lg sm:text-xl md:text-2xl py-2 leading-relaxed'
                 }`}>
                   {currentSpeedrunQ.subject}
                 </div>
 
                 {currentSpeedrunQ.subText && (
-                  <div className="text-sm font-bold text-blue-500">
+                  <div className="text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/20 inline-block">
                     {currentSpeedrunQ.subText}
                   </div>
                 )}
@@ -1511,18 +1528,36 @@ export default function KanjiPracticeTab({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {currentSpeedrunQ.options.map((opt, idx) => {
                   const isSingleKanji = opt.text.length <= 2 && /[\u4e00-\u9faf]/.test(opt.text);
+                  const isSelected = speedrunSelectedIdx === idx;
+
+                  let btnStyle = 'bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-400 text-slate-800 dark:text-slate-100 hover:bg-amber-500/5';
+                  if (isSelected) {
+                    if (speedrunIsAnswerCorrect) {
+                      btnStyle = 'bg-emerald-500 text-white border-emerald-600 ring-2 ring-emerald-400 shadow-lg';
+                    } else {
+                      btnStyle = 'bg-rose-500 text-white border-rose-600 ring-2 ring-rose-400 shadow-lg';
+                    }
+                  }
+
                   return (
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => handleSpeedrunAnswer(opt)}
-                      className={`p-4 rounded-2xl border-2 font-bold text-center transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-95 ${
+                      disabled={speedrunSelectedIdx !== null}
+                      onClick={() => handleSpeedrunAnswer(opt, idx)}
+                      className={`p-4 rounded-2xl border-2 font-bold transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 active:scale-95 ${
                         isSingleKanji
                           ? 'text-3xl sm:text-4xl font-black font-[\'Noto_Sans_JP\'] py-5'
-                          : 'text-xs sm:text-sm py-4 px-4 text-left sm:text-center'
-                      } bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-400 text-slate-800 dark:text-slate-100 hover:bg-amber-500/5`}
+                          : 'text-xs sm:text-sm py-4 px-4 text-center'
+                      } ${btnStyle}`}
                     >
-                      {opt.text}
+                      <span>{opt.text}</span>
+                      {isSelected && speedrunIsAnswerCorrect && (
+                        <span className="text-white text-base font-black shrink-0">✓</span>
+                      )}
+                      {isSelected && speedrunIsAnswerCorrect === false && (
+                        <span className="text-white text-base font-black shrink-0">✗</span>
+                      )}
                     </button>
                   );
                 })}

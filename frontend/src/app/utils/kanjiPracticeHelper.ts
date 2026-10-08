@@ -508,7 +508,9 @@ export interface KanjiRecognitionQuizQuestion {
   target_word: string;
   target_word_reading?: string;
   target_word_meaning?: string;
+  target_word_hint?: string;
   options: string[];
+  options_meanings?: string[];
   options_analysis?: string[];
   correct_index: number;
   explanation: string;
@@ -540,6 +542,20 @@ export function generateLocalKanjiRecognitionQuestions(
       }
     });
   });
+
+  const meaningMap = new Map<string, string>();
+  vocabItems.forEach(v => {
+    if (v?.kanji) meaningMap.set(v.kanji, v.vietnamese_meaning || '');
+    if (v?.hiragana) meaningMap.set(v.hiragana, v.vietnamese_meaning || '');
+  });
+  kanjis.forEach(k => {
+    if (!meaningMap.has(k.character)) meaningMap.set(k.character, k.vietnamese_meaning || '');
+    const parsed = parseCompounds(k.compounds);
+    parsed.forEach(p => {
+      if (p.word && p.meaning && !meaningMap.has(p.word)) meaningMap.set(p.word, p.meaning);
+    });
+  });
+  const getMeaning = (w: string) => meaningMap.get(w) || '';
 
   const lessonVocabMatches: { hiragana: string; meaning: string; example?: string; kanjiWord?: string; char: string }[] = [];
   kanjis.forEach(k => {
@@ -577,17 +593,30 @@ export function generateLocalKanjiRecognitionQuestions(
         sentence = `「あのかたは 【 ? 】 です。」`;
       }
 
-      const wrongWords = shuffleArray(
-        allCompoundWords.filter(c => c.word !== targetWord).map(c => c.word)
-          .concat(kanjis.filter(other => other.character !== k.character).map(o => o.character))
-      ).filter(w => w !== targetWord).slice(0, 3);
+      const isCompoundTarget = targetWord.length >= 2;
+      const candidateWrong = allCompoundWords
+        .filter(c => c.word !== targetWord)
+        .map(c => c.word)
+        .concat(
+          !isCompoundTarget 
+            ? kanjis.filter(other => other.character !== k.character).map(o => o.character)
+            : []
+        );
+
+      const wrongWords = shuffleArray(candidateWrong).filter(w => w !== targetWord).slice(0, 3);
       while (wrongWords.length < 3) {
         const otherK = kanjis.find(o => o.character !== k.character)?.character || k.character;
-        wrongWords.push(`${k.character}${otherK}`, `${otherK}${k.character}`, `${otherK}`);
+        const candidate = `${k.character}${otherK}`;
+        if (!wrongWords.includes(candidate) && candidate !== targetWord) {
+          wrongWords.push(candidate);
+        } else {
+          wrongWords.push(`${otherK}${k.character}`);
+        }
       }
 
       const options = shuffleArray([targetWord, ...wrongWords.slice(0, 3)]);
       const correctIdx = options.indexOf(targetWord);
+      const optionsMeanings = options.map(opt => getMeaning(opt) || (opt === targetWord ? meaning : ''));
 
       const sentenceTranslation = sentence.includes('わたしは')
         ? '「Tôi là 【 ? 】.」'
@@ -598,14 +627,16 @@ export function generateLocalKanjiRecognitionQuestions(
       questions.push({
         id: `local_q_${k.id}_dial_${index}`,
         question_type: 'dialogue_fill',
-        question_text: `${sentence}\n【 ? 】に はいる ただしい ことばは どれですか。`,
+        question_text: sentence,
         context_sentence: sentence,
-        question_translation: `${sentenceTranslation}\nTừ thích hợp điền vào chỗ trống 【 ? 】 là từ nào?`,
+        question_translation: `${sentenceTranslation}\nChọn từ thích hợp điền vào chỗ trống 【 ? 】.`,
         target_kanji: k.character,
         target_word: targetWord,
         target_word_reading: reading,
         target_word_meaning: meaning,
+        target_word_hint: meaning,
         options,
+        options_meanings: optionsMeanings,
         correct_index: correctIdx,
         explanation: `【Dịch nghĩa hoàn chỉnh】: "${sentence.replace('【 ? 】', targetWord)}"\n【Lý do chọn】: Từ phù hợp nhất để điền vào ngữ cảnh là "${targetWord}" (${reading}: ${meaning}).\n【Phân tích Chữ Hán】: Chữ Hán mục tiêu 【${k.character}】 (Hán Việt: ${k.sino_vietnamese || ''} - Nghĩa: ${k.vietnamese_meaning}).`
       });
@@ -629,6 +660,7 @@ export function generateLocalKanjiRecognitionQuestions(
 
       const options = shuffleArray([cleanReading, ...wrongReadings]);
       const correctIdx = options.indexOf(cleanReading);
+      const targetHint = compound?.meaning || k.vietnamese_meaning;
 
       const qTranslation = compound?.word
         ? `Cách đọc của chữ Hán 【${targetChar}】 trong từ「${compound.word}」là gì?`
@@ -643,16 +675,19 @@ export function generateLocalKanjiRecognitionQuestions(
         target_kanji: targetChar,
         target_word: compound?.word || targetChar,
         target_word_reading: cleanReading,
-        target_word_meaning: compound?.meaning || k.vietnamese_meaning,
+        target_word_meaning: targetHint,
+        target_word_hint: targetHint,
         options,
+        options_meanings: options.map(opt => `Âm đọc: ${opt}`),
         correct_index: correctIdx,
-        explanation: `【Dịch nghĩa câu hỏi】: ${qTranslation}\n【Đáp án chính xác】: "${cleanReading}"\n【Giải thích chi tiết】: Chữ Hán 【${targetChar}】 (Hán Việt: ${k.sino_vietnamese || ''} - Nghĩa: ${k.vietnamese_meaning}) trong ngữ cảnh này được đọc là "${cleanReading}". Từ đầy đủ: "${compound?.word || targetChar}" (${cleanReading}: ${compound?.meaning || k.vietnamese_meaning}).`
+        explanation: `【Dịch nghĩa câu hỏi】: ${qTranslation}\n【Đáp án chính xác】: "${cleanReading}"\n【Giải thích chi tiết】: Chữ Hán 【${targetChar}】 (Hán Việt: ${k.sino_vietnamese || ''} - Nghĩa: ${k.vietnamese_meaning}) trong ngữ cảnh này được đọc là "${cleanReading}". Từ đầy đủ: "${compound?.word || targetChar}" (${cleanReading}: ${targetHint}).`
       });
     } else if (mode === 2) {
       const compound = allCompoundWords.find(c => c.kanjiChar === k.character);
       const match = lessonVocabMatches.find(m => m.char === k.character);
       const targetKanjiWord = compound?.word || match?.kanjiWord || k.character;
       const targetKana = compound?.reading || match?.hiragana || k.kunyomi || '';
+      const meaning = compound?.meaning || match?.meaning || k.vietnamese_meaning;
 
       const wrongOptions = shuffleArray(
         allCompoundWords.filter(c => c.word !== targetKanjiWord).map(c => c.word)
@@ -667,6 +702,7 @@ export function generateLocalKanjiRecognitionQuestions(
 
       const options = shuffleArray([targetKanjiWord, ...wrongOptions.slice(0, 3)]);
       const correctIdx = options.indexOf(targetKanjiWord);
+      const optionsMeanings = options.map(opt => getMeaning(opt) || (opt === targetKanjiWord ? meaning : ''));
 
       questions.push({
         id: `local_q_${k.id}_orth_${index}`,
@@ -677,33 +713,83 @@ export function generateLocalKanjiRecognitionQuestions(
         target_kanji: k.character,
         target_word: targetKanjiWord,
         target_word_reading: targetKana,
-        target_word_meaning: compound?.meaning || match?.meaning || k.vietnamese_meaning,
+        target_word_meaning: meaning,
+        target_word_hint: meaning,
         options,
+        options_meanings: optionsMeanings,
         correct_index: correctIdx,
-        explanation: `【Dịch nghĩa câu hỏi】: Chữ Hán chuẩn của từ「${targetKana || targetKanjiWord}」là chữ nào?\n【Đáp án chính xác】:「${targetKanjiWord}」\n【Giải thích chi tiết】: Từ「${targetKana || targetKanjiWord}」(Nghĩa: ${compound?.meaning || match?.meaning || k.vietnamese_meaning}) được viết bằng chữ Hán chuẩn là「${targetKanjiWord}」. Chữ Hán mục tiêu: 【${k.character}】 (Hán Việt: ${k.sino_vietnamese || ''}).`
+        explanation: `【Dịch nghĩa câu hỏi】: Chữ Hán chuẩn của từ「${targetKana || targetKanjiWord}」là chữ nào?\n【Đáp án chính xác】:「${targetKanjiWord}」\n【Giải thích chi tiết】: Từ「${targetKana || targetKanjiWord}」(Nghĩa: ${meaning}) được viết bằng chữ Hán chuẩn là「${targetKanjiWord}」. Chữ Hán mục tiêu: 【${k.character}】 (Hán Việt: ${k.sino_vietnamese || ''}).`
       });
     } else {
-      const targetChar = k.character;
-      const otherChar = kanjis.find(o => o.character !== targetChar)?.character || k.character;
-      const combined = `${targetChar}${otherChar}`;
-      const reversed = `${otherChar}${targetChar}`;
-      const otherChar2 = kanjis.filter(o => o.character !== targetChar && o.character !== otherChar)[0]?.character || otherChar;
+      // Dạng 4: Điền khuyết hoàn thiện từ ghép (Jukugo Completion)
+      const compound = allCompoundWords.find(c => c.kanjiChar === k.character && c.word.length >= 2)
+        || allCompoundWords.find(c => c.word.includes(k.character) && c.word.length >= 2);
       
-      const options = shuffleArray([combined, reversed, `${targetChar}${otherChar2}`, `${otherChar2}${targetChar}`]);
-      const correctIdx = options.indexOf(combined);
+      let word = compound?.word || '';
+      let reading = compound?.reading || '';
+      let meaning = compound?.meaning || k.vietnamese_meaning;
+
+      // If no compound with >= 2 chars, look in lessonVocabMatches
+      if (!word) {
+        const vMatch = lessonVocabMatches.find(m => m.kanjiWord && m.kanjiWord.length >= 2 && m.kanjiWord.includes(k.character));
+        if (vMatch) {
+          word = vMatch.kanjiWord!;
+          reading = vMatch.hiragana;
+          meaning = vMatch.meaning;
+        }
+      }
+
+      // If still no compound, fallback to pairing targetChar with another learned kanji
+      const otherK = kanjis.find(o => o.character !== k.character)?.character || '人';
+      if (!word) {
+        word = `${k.character}${otherK}`;
+        reading = `${k.kunyomi || k.character}${otherK}`;
+      }
+
+      // Mask one of the Kanji characters
+      const chars = word.split('');
+      const targetChar = k.character;
+      const maskIdx = chars.includes(targetChar) ? chars.indexOf(targetChar) : 0;
+      const correctChar = chars[maskIdx];
+
+      // Build formula: 「学」＋【 ? 】＝ がくせい (Học sinh)
+      const formulaParts = chars.map((ch, idx) => (idx === maskIdx ? '【 ? 】' : `「${ch}」`));
+      const questionText = `${formulaParts.join('＋')}＝ ${reading ? reading + ' ' : ''}(${meaning})`;
+
+      const otherKanjis = shuffleArray(
+        kanjis.filter(o => o.character !== correctChar).map(o => o.character)
+          .concat(COMMON_KANJI_DISTRACTORS.filter(d => d.character !== correctChar).map(d => d.character))
+      ).slice(0, 3);
+
+      const options = shuffleArray([correctChar, ...otherKanjis]);
+      const correctIdx = options.indexOf(correctChar);
+
+      const getKanjiMeaning = (char: string) => {
+        const foundK = kanjis.find(item => item.character === char)
+          || COMMON_KANJI_DISTRACTORS.find(d => d.character === char);
+        if (foundK) {
+          return `${foundK.sino_vietnamese ? foundK.sino_vietnamese + ': ' : ''}${foundK.vietnamese_meaning}`.trim();
+        }
+        return getMeaning(char) || '';
+      };
+
+      const optionsMeanings = options.map(opt => getKanjiMeaning(opt));
 
       questions.push({
         id: `local_q_${k.id}_form_${index}`,
         question_type: 'word_formation',
-        question_text: `「${targetChar}」＋「${otherChar}」＝【 ? 】`,
-        context_sentence: `「${targetChar}」＋「${otherChar}」`,
-        question_translation: `Ghép hai chữ Hán「${targetChar}」và「${otherChar}」thành từ vựng nào?`,
-        target_kanji: targetChar,
-        target_word: combined,
-        target_word_meaning: k.vietnamese_meaning,
+        question_text: questionText,
+        context_sentence: questionText,
+        question_translation: `Chọn chữ Hán thích hợp điền vào 【 ? 】 để hoàn thiện từ ghép "${meaning}"${reading ? ' (' + reading + ')' : ''}.`,
+        target_kanji: correctChar,
+        target_word: correctChar,
+        target_word_reading: reading,
+        target_word_meaning: meaning,
+        target_word_hint: meaning,
         options,
+        options_meanings: optionsMeanings,
         correct_index: correctIdx,
-        explanation: `【Dịch nghĩa câu hỏi】: Ghép hai chữ Hán「${targetChar}」và「${otherChar}」thành từ vựng nào?\n【Đáp án chính xác】: "${combined}"\n【Giải thích chi tiết】: Hai chữ Hán ghép lại theo đúng trật tự từ vựng là "${combined}". Chữ "${targetChar}" (${k.sino_vietnamese || ''}) ghép với "${otherChar}".`
+        explanation: `【Dịch nghĩa câu hỏi】: Chọn chữ Hán thích hợp điền vào 【 ? 】 để hoàn thiện từ ghép "${meaning}" (${reading}).\n【Đáp án chính xác】:「${correctChar}」\n【Giải thích chi tiết】: Chữ Hán「${correctChar}」khi điền vào vị trí 【 ? 】 sẽ tạo thành từ vựng hoàn chỉnh「${word}」(${reading}: ${meaning}).`
       });
     }
   }

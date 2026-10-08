@@ -845,6 +845,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [speedrunOptions, setSpeedrunOptions] = useState<string[]>([]);
 
+  const [speedrunSelectedOption, setSpeedrunSelectedOption] = useState<string | null>(null);
+
+  const [speedrunIsAnswerCorrect, setSpeedrunIsAnswerCorrect] = useState<boolean | null>(null);
+
   const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(10);
 
   const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
@@ -3013,6 +3017,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
     setSpeedrunStreak(0);
 
+    setSpeedrunSelectedOption(null);
+
+    setSpeedrunIsAnswerCorrect(null);
+
     setSpeedrunTimeLeft(10);
 
     setSpeedrunMaxTime(10);
@@ -3026,6 +3034,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     setSpeedrunActive(false);
 
     setSpeedrunGameOver(false);
+
+    setSpeedrunSelectedOption(null);
+
+    setSpeedrunIsAnswerCorrect(null);
 
     if (speedrunTimerRef.current) {
 
@@ -3045,9 +3057,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const checkSpeedrunAnswer = (selected: string) => {
 
-    if (!speedrunQuestion) return;
-
-    
+    if (!speedrunQuestion || speedrunSelectedOption !== null) return;
 
     if (speedrunTimerRef.current) {
 
@@ -3061,29 +3071,11 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       : calculateAccuracy(selected, speedrunQuestion.vietnamese_meaning) === 100;
 
-      
+    setSpeedrunSelectedOption(selected);
+
+    setSpeedrunIsAnswerCorrect(isCorrect);
 
     if (isCorrect) {
-
-      const nextScore = speedrunScoreRef.current + 1;
-
-      speedrunScoreRef.current = nextScore;
-
-      setSpeedrunScore(nextScore);
-
-      const nextStreak = speedrunStreak + 1;
-
-      setSpeedrunStreak(nextStreak);
-
-      let newMaxTime = speedrunMaxTime;
-
-      if (nextStreak > 0 && nextStreak % 3 === 0) {
-
-        newMaxTime = Math.max(2, parseFloat((speedrunMaxTime * 0.9).toFixed(1)));
-
-        setSpeedrunMaxTime(newMaxTime);
-
-      }
 
       if (speedrunDirection !== 'listen-to-select') {
 
@@ -3091,37 +3083,73 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       }
 
-      nextSpeedrunQuestion(nextScore, newMaxTime);
+      setTimeout(() => {
+
+        const nextScore = speedrunScoreRef.current + 1;
+
+        speedrunScoreRef.current = nextScore;
+
+        setSpeedrunScore(nextScore);
+
+        const nextStreak = speedrunStreak + 1;
+
+        setSpeedrunStreak(nextStreak);
+
+        let newMaxTime = speedrunMaxTime;
+
+        if (nextStreak > 0 && nextStreak % 3 === 0) {
+
+          newMaxTime = Math.max(2, parseFloat((speedrunMaxTime * 0.9).toFixed(1)));
+
+          setSpeedrunMaxTime(newMaxTime);
+
+        }
+
+        setSpeedrunSelectedOption(null);
+
+        setSpeedrunIsAnswerCorrect(null);
+
+        nextSpeedrunQuestion(nextScore, newMaxTime);
+
+      }, 250);
 
     } else {
 
-      setSpeedrunGameOver(true);
+      setTimeout(() => {
 
-      setSpeedrunActive(false);
+        setSpeedrunGameOver(true);
 
-      setSpeedrunStreak(0);
+        setSpeedrunActive(false);
 
-      // Save high score
+        setSpeedrunStreak(0);
 
-      const finalScore = speedrunScoreRef.current;
+        setSpeedrunSelectedOption(null);
 
-      const key = `vocab_speedrun_high_score_${selectedLessonId}_${speedrunDirection}`;
+        setSpeedrunIsAnswerCorrect(null);
 
-      const savedHigh = localStorage.getItem(key);
+        // Save high score
 
-      const currentHigh = savedHigh ? parseInt(savedHigh) || 0 : 0;
+        const finalScore = speedrunScoreRef.current;
 
-      if (finalScore > currentHigh) {
+        const key = `vocab_speedrun_high_score_${selectedLessonId}_${speedrunDirection}`;
 
-        setSpeedrunHighScore(finalScore);
+        const savedHigh = localStorage.getItem(key);
 
-        localStorage.setItem(key, finalScore.toString());
+        const currentHigh = savedHigh ? parseInt(savedHigh) || 0 : 0;
 
-        setMessage(`Kỷ lục mới: ${finalScore} điểm! 🎉`);
+        if (finalScore > currentHigh) {
 
-        setTimeout(() => setMessage(null), 2500);
+          setSpeedrunHighScore(finalScore);
 
-      }
+          localStorage.setItem(key, finalScore.toString());
+
+          setMessage(`Kỷ lục mới: ${finalScore} điểm! 🎉`);
+
+          setTimeout(() => setMessage(null), 2500);
+
+        }
+
+      }, 350);
 
     }
 
@@ -5410,23 +5438,63 @@ const renderInteractivePractice = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                          {speedrunOptions.map((option, idx) => (
+                          {speedrunOptions.map((option, idx) => {
 
-                            <button
+                            const isSelected = speedrunSelectedOption === option;
 
-                              key={idx}
+                            let btnStyle = "w-full py-4 px-4 shadow-md border rounded-2xl text-xs font-bold text-center transition-all duration-150 cursor-pointer active:scale-98 flex items-center justify-center gap-2 ";
 
-                              onClick={() => checkSpeedrunAnswer(option)}
+                            if (isSelected) {
 
-                              className="w-full py-4 px-4 bg-slate-50 dark:bg-slate-950/60 hover:bg-white dark:hover:bg-slate-800/80 dark:bg-slate-900/90 shadow-md border border-slate-200 dark:border-slate-800 hover:border-blue-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white rounded-2xl text-xs font-bold text-center transition-all duration-200 cursor-pointer active:scale-98 shadow-md"
+                              if (speedrunIsAnswerCorrect) {
 
-                            >
+                                btnStyle += "bg-emerald-500 text-white border-emerald-600 ring-2 ring-emerald-400 shadow-emerald-500/30 ";
 
-                              {option}
+                              } else {
 
-                            </button>
+                                btnStyle += "bg-rose-500 text-white border-rose-600 ring-2 ring-rose-400 ";
 
-                          ))}
+                              }
+
+                            } else {
+
+                              btnStyle += "bg-slate-50 dark:bg-slate-950/60 hover:bg-white dark:hover:bg-slate-800/80 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-blue-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white ";
+
+                            }
+
+                            return (
+
+                              <button
+
+                                key={idx}
+
+                                disabled={speedrunSelectedOption !== null}
+
+                                onClick={() => checkSpeedrunAnswer(option)}
+
+                                className={btnStyle}
+
+                              >
+
+                                <span>{option}</span>
+
+                                {isSelected && speedrunIsAnswerCorrect && (
+
+                                  <span className="text-white text-base font-black shrink-0">✓</span>
+
+                                )}
+
+                                {isSelected && speedrunIsAnswerCorrect === false && (
+
+                                  <span className="text-white text-base font-black shrink-0">✗</span>
+
+                                )}
+
+                              </button>
+
+                            );
+
+                          })}
 
                         </div>
 
