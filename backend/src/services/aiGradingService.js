@@ -734,14 +734,236 @@ QUY TẮC BẮT BUỘC KHI RA ĐỀ (STRICT GUIDELINES):
  * Sinh bộ câu hỏi trắc nghiệm nhận diện chữ Hán & từ vựng ngữ cảnh tự nhiên bằng Gemini AI
  * TUYỆT ĐỐI KHÔNG dùng tiếng Việt trong đề bài và đáp án (trừ câu hỏi nghĩa).
  * Học viên phải nhận diện 100% bằng tiếng Nhật trực quan.
+ * CHỈ dùng Kanji đã học; các từ còn lại BẮT BUỘC viết bằng Hiragana.
+ * Kèm bản dịch câu hỏi question_translation và giải thích chi tiết.
  */
-async function generateKanjiRecognitionQuestions({ lessonId, kanjis = [], vocabList = [] }) {
+// Comprehensive dictionary of common N5 words and expressions to Hiragana
+const COMMON_KANJI_TO_HIRAGANA = [
+  // Question & prompt templates
+  { kanji: '正しい', hiragana: 'ただしい' },
+  { kanji: '言葉', hiragana: 'ことば' },
+  { kanji: '読み方', hiragana: 'よみかた' },
+  { kanji: '漢字', hiragana: 'かんじ' },
+  { kanji: '入る', hiragana: 'はいる' },
+  { kanji: '意味', hiragana: 'いみ' },
+  { kanji: '会話', hiragana: 'かいわ' },
+  { kanji: 'どれ', hiragana: 'どれ' },
+  // Common pronouns & question words
+  { kanji: 'あの方', hiragana: 'あのかた' },
+  { kanji: '方', hiragana: 'かた' },
+  { kanji: '誰', hiragana: 'だれ' },
+  { kanji: '何時', hiragana: 'なんじ' },
+  { kanji: '何歳', hiragana: 'なんさい' },
+  { kanji: '何人', hiragana: 'なんにん' },
+  { kanji: '何', hiragana: 'なに' },
+  { kanji: '貴方', hiragana: 'あなた' },
+  { kanji: '彼', hiragana: 'かれ' },
+  { kanji: '彼女', hiragana: 'かのじょ' },
+  { kanji: '私', hiragana: 'わたし' },
+  // Common verbs
+  { kanji: '行きます', hiragana: 'いきます' },
+  { kanji: '行きました', hiragana: 'いきました' },
+  { kanji: '行かない', hiragana: 'いかない' },
+  { kanji: '行く', hiragana: 'いく' },
+  { kanji: '来ます', hiragana: 'きます' },
+  { kanji: '来ました', hiragana: 'きました' },
+  { kanji: '来ない', hiragana: 'こない' },
+  { kanji: '来る', hiragana: 'くる' },
+  { kanji: '帰ります', hiragana: 'かえります' },
+  { kanji: '帰る', hiragana: 'かえる' },
+  { kanji: '食べます', hiragana: 'たべます' },
+  { kanji: '食べる', hiragana: 'たべる' },
+  { kanji: '飲みます', hiragana: 'のみます' },
+  { kanji: '飲む', hiragana: 'のむ' },
+  { kanji: '見ます', hiragana: 'みます' },
+  { kanji: '見る', hiragana: 'みる' },
+  { kanji: '聞きます', hiragana: 'ききます' },
+  { kanji: '聞く', hiragana: 'きく' },
+  { kanji: '読みます', hiragana: 'よみます' },
+  { kanji: '読む', hiragana: 'よむ' },
+  { kanji: '書きます', hiragana: 'かきます' },
+  { kanji: '書く', hiragana: 'かく' },
+  { kanji: '買います', hiragana: 'かいます' },
+  { kanji: '買う', hiragana: 'かう' },
+  { kanji: '撮ります', hiragana: 'とります' },
+  { kanji: '会います', hiragana: 'あいます' },
+  { kanji: '分かります', hiragana: 'わかります' },
+  { kanji: '勉強します', hiragana: 'べんきょうします' },
+  // Places, objects & occupations
+  { kanji: '大学', hiragana: 'だいがく' },
+  { kanji: '学校', hiragana: 'がっこう' },
+  { kanji: '高校', hiragana: 'こうこう' },
+  { kanji: '教室', hiragana: 'きょうしつ' },
+  { kanji: '食堂', hiragana: 'しょくどう' },
+  { kanji: '事務所', hiragana: 'じむしょ' },
+  { kanji: '会議室', hiragana: 'かいぎしつ' },
+  { kanji: '受付', hiragana: 'うけつけ' },
+  { kanji: '部屋', hiragana: 'へや' },
+  { kanji: '病院', hiragana: 'びょういん' },
+  { kanji: '銀行', hiragana: 'ぎんこう' },
+  { kanji: '銀行員', hiragana: 'ぎんこういん' },
+  { kanji: '郵便局', hiragana: 'ゆうびんきょく' },
+  { kanji: '図書館', hiragana: 'としょかん' },
+  { kanji: '美術館', hiragana: 'びじゅつかん' },
+  { kanji: '駅', hiragana: 'えき' },
+  { kanji: '会社', hiragana: 'かいしゃ' },
+  { kanji: '会社員', hiragana: 'かいしゃいん' },
+  { kanji: '社員', hiragana: 'しゃいん' },
+  { kanji: '家', hiragana: 'うち' },
+  { kanji: '友達', hiragana: 'ともだち' },
+  { kanji: '家族', hiragana: 'かぞく' },
+  { kanji: '子供', hiragana: 'こども' },
+  { kanji: '医者', hiragana: 'いしゃ' },
+  { kanji: '研究者', hiragana: 'けんきゅうしゃ' },
+  { kanji: '外国人', hiragana: 'がいこくじん' },
+  { kanji: '今日', hiragana: 'きょう' },
+  { kanji: '昨日', hiragana: 'きのう' },
+  { kanji: '明日', hiragana: 'あした' },
+  { kanji: '今', hiragana: 'いま' },
+  { kanji: '朝', hiragana: 'あさ' },
+  { kanji: '昼', hiragana: 'ひる' },
+  { kanji: '晩', hiragana: 'ばん' },
+  { kanji: '夜', hiragana: 'よる' },
+  { kanji: '毎朝', hiragana: 'まいあさ' },
+  { kanji: '毎晩', hiragana: 'まいばん' },
+  { kanji: '毎日', hiragana: 'まいにち' },
+  { kanji: '先週', hiragana: 'せんしゅう' },
+  { kanji: '今週', hiragana: 'こんしゅう' },
+  { kanji: '来週', hiragana: 'らいしゅう' },
+  { kanji: '先月', hiragana: 'せんげつ' },
+  { kanji: '今月', hiragana: 'こんげつ' },
+  { kanji: '来月', hiragana: 'らいげつ' },
+  { kanji: '去年', hiragana: 'きょねん' },
+  { kanji: '今年', hiragana: 'ことし' },
+  { kanji: '来年', hiragana: 'らいねん' },
+  { kanji: '日曜日', hiragana: 'にちようび' },
+  { kanji: '月曜日', hiragana: 'げつようび' },
+  { kanji: '火曜日', hiragana: 'かようび' },
+  { kanji: '水曜日', hiragana: 'すいようび' },
+  { kanji: '木曜日', hiragana: 'もくようび' },
+  { kanji: '金曜日', hiragana: 'きんようび' },
+  { kanji: '土曜日', hiragana: 'どようび' },
+  { kanji: '時計', hiragana: 'とけい' },
+  { kanji: '自動車', hiragana: 'じどうしゃ' },
+  { kanji: '車', hiragana: 'くるま' },
+  { kanji: '自転車', hiragana: 'じてんしゃ' },
+  { kanji: '電車', hiragana: 'でんしゃ' },
+  { kanji: '地下鉄', hiragana: 'ちかてつ' },
+  { kanji: '新幹線', hiragana: 'しんかんせん' },
+  { kanji: '飛行機', hiragana: 'ひこうき' },
+  { kanji: '船', hiragana: 'ふね' },
+  { kanji: '本', hiragana: 'ほん' },
+  { kanji: '辞書', hiragana: 'じしょ' },
+  { kanji: '雑誌', hiragana: 'ざっし' },
+  { kanji: '新聞', hiragana: 'しんぶん' },
+  { kanji: '手帳', hiragana: 'てちょう' },
+  { kanji: '名刺', hiragana: 'めいし' },
+  { kanji: '鉛筆', hiragana: 'えんぴつ' },
+  { kanji: '机', hiragana: 'つくえ' },
+  { kanji: '椅子', hiragana: 'いす' },
+  { kanji: '傘', hiragana: 'かさ' },
+  { kanji: '鞄', hiragana: 'かばん' },
+  { kanji: '手紙', hiragana: 'てがみ' },
+  { kanji: '写真', hiragana: 'しゃしん' },
+  { kanji: '切手', hiragana: 'きって' },
+  { kanji: '切符', hiragana: 'きっぷ' },
+  { kanji: '荷物', hiragana: 'にもつ' },
+  { kanji: 'お金', hiragana: 'おかね' }
+];
+
+const SINGLE_KANJI_FALLBACK = {
+  '正': 'ただ', '言': 'こと', '葉': 'ば', '読': 'よ', '書': 'か', '買': 'か',
+  '行': 'い', '来': 'き', '帰': 'かえ', '食': 'た', '飲': 'の', '見': 'み',
+  '聞': 'き', '入': 'はい', '出': 'で', '会': 'あ', '話': 'はな', '名': 'な',
+  '前': 'まえ', '後': 'うしろ', '上': 'うえ', '下': 'した', '中': 'なか',
+  '大': 'だい', '小': 'しょう', '校': 'こう', '誰': 'だれ', '何': 'なに',
+  '時': 'じ', '分': 'ふん', '方': 'かた', '車': 'くるま', '友': 'とも',
+  '達': 'だち', '病': 'びょう', '院': 'いん', '銀': 'ぎん', '医': 'い',
+  '者': 'しゃ', '研': 'けん', '究': 'きゅう', '物': 'もの', '手': 'て',
+  '紙': 'がみ', '電': 'でん', '語': 'ご', '漢': 'かん', '字': 'じ',
+  '男': 'おとこ', '女': 'おんな', '子': 'こ', '父': 'ちち', '母': 'はは'
+};
+
+function purifyKanjiText(text, allowedSet, vocabList = []) {
+  if (!text || typeof text !== 'string') return text;
+
+  let result = text;
+
+  // Build combined word replacement list: vocabList entries + COMMON_KANJI_TO_HIRAGANA
+  const wordsToTry = [...COMMON_KANJI_TO_HIRAGANA];
+  if (Array.isArray(vocabList)) {
+    for (const v of vocabList) {
+      if (v && v.kanji && v.hiragana && v.kanji !== v.hiragana) {
+        wordsToTry.push({ kanji: v.kanji, hiragana: v.hiragana });
+      }
+    }
+  }
+
+  // Sort by kanji length descending to replace compound words first
+  wordsToTry.sort((a, b) => (b.kanji?.length || 0) - (a.kanji?.length || 0));
+
+  for (const item of wordsToTry) {
+    if (!item.kanji || !result.includes(item.kanji)) continue;
+
+    // Check if this word contains ANY Kanji character not in allowedSet
+    const chars = item.kanji.split('');
+    const hasDisallowedKanji = chars.some(c => /[\u4E00-\u9FAF\u3400-\u4DBF]/.test(c) && !allowedSet.has(c));
+
+    if (hasDisallowedKanji) {
+      result = result.split(item.kanji).join(item.hiragana);
+    }
+  }
+
+  // Final pass: check for any isolated single Kanji characters outside allowedSet
+  let purifiedChars = '';
+  for (let i = 0; i < result.length; i++) {
+    const ch = result[i];
+    if (/[\u4E00-\u9FAF\u3400-\u4DBF]/.test(ch) && !allowedSet.has(ch)) {
+      purifiedChars += SINGLE_KANJI_FALLBACK[ch] || ch;
+    } else {
+      purifiedChars += ch;
+    }
+  }
+
+  return purifiedChars;
+}
+
+function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = []) {
+  if (!Array.isArray(questions)) return [];
+
+  return questions.map(q => {
+    const purifiedQText = purifyKanjiText(q.question_text || '', allowedSet, vocabList);
+    const purifiedContext = purifyKanjiText(q.context_sentence || '', allowedSet, vocabList);
+    const purifiedTargetWord = purifyKanjiText(q.target_word || '', allowedSet, vocabList);
+    const purifiedOptions = Array.isArray(q.options)
+      ? q.options.map(opt => purifyKanjiText(opt, allowedSet, vocabList))
+      : [];
+
+    return {
+      ...q,
+      question_text: purifiedQText,
+      context_sentence: purifiedContext,
+      target_word: purifiedTargetWord,
+      options: purifiedOptions
+    };
+  });
+}
+
+async function generateKanjiRecognitionQuestions({ lessonId, kanjis = [], vocabList = [], allowedKanjiList = [] }) {
   if (!Array.isArray(kanjis) || kanjis.length === 0) {
     throw new Error('kanjis array is required to generate recognition questions');
   }
 
   const isSmallScope = kanjis.length <= 4;
   const targetCount = isSmallScope ? Math.min(8, Math.max(5, kanjis.length * 2)) : Math.min(14, Math.max(8, kanjis.length + 2));
+
+  // Determine all allowed Kanji characters (target kanjis + accumulated learned kanjis up to this lesson)
+  const targetChars = kanjis.map(k => k.character || '').filter(Boolean);
+  const extraChars = Array.isArray(allowedKanjiList)
+    ? allowedKanjiList.map(c => (typeof c === 'string' ? c : c?.character || '')).filter(Boolean)
+    : [];
+  const allowedSet = new Set([...targetChars, ...extraChars]);
+  const allowedKanjiStr = Array.from(allowedSet).join(', ');
 
   // Build lesson context
   const kanjisList = kanjis.map((k, idx) => {
@@ -779,33 +1001,64 @@ Nhiệm vụ của bạn là tạo một BỘ CÂU HỎI TRẮC NGHIỆM NHẬN 
 DANH SÁCH CHỮ HÁN MỤC TIÊU TRONG PHẠM VI HỌC VIÊN ĐANG ÔN (${kanjis.length} chữ):
 ${kanjisList}
 
+DANH SÁCH TẤT CẢ CHỮ HÁN ĐƯỢC PHÉP XUẤT HIỆN DƯỚI DẠNG KANJI (${allowedSet.size} chữ):
+[ ${allowedKanjiStr} ]
+
 MỘT SỐ CÂU VÍ DỤ VÀ TỪ VỰNG CỦA BÀI HỌC:
 ${sampleSentences}
 
 YÊU CẦU QUAN TRỌNG VỀ SỐ LƯỢNG:
 - Hãy sinh chính xác khoảng ${targetCount} câu hỏi trắc nghiệm chất lượng cao.
 
-QUY TẮC BẮT BUỘC VỀ NGÔN NGỮ (STRICT LANGUAGE IMMERSION):
-1. **100% TIẾNG NHẬT TRONG ĐỀ BÀI VÀ CÁC ĐÁP ÁN LỰA CHỌN**:
+QUY TẮC SƯ PHẠM BẮT BUỘC VỀ CHỮ HÁN & TỪ VỰNG (STRICT KANJI RESTRICTION):
+1. **TUYỆT ĐỐI CHỈ DÙNG KANJI CHO CÁC CHỮ ĐÃ HỌC**:
+   - CHỈ ĐƯỢC PHÉP VIẾT DẠNG KANJI nếu chữ Hán đó nằm trong danh sách được phép: [ ${allowedKanjiStr} ].
+   - BẤT KỲ TỪ NÀO KHÁC chưa học chữ Hán hoặc không thuộc danh sách trên BẮT BUỘC PHẢI VIẾT 100% BẰNG HIRAGANA / KATAKANA!
+   - Đây là nguyên tắc tối quan trọng vì học viên chưa học các chữ Hán ngoài bài và sẽ không đọc được.
+   - Các ví dụ bắt buộc tuân theo:
+     * Viết 「あのかた」 THAY VÌ 「あの方」 (nếu chữ 方 chưa học).
+     * Viết 「だいがく」 THAY VÌ 「大学」 (nếu chữ 大 hoặc 学 chưa học).
+     * Viết 「なんじ」 THAY VÌ 「何時」 (nếu chữ 何 hoặc 時 chưa học).
+     * Viết 「くるま」 THAY VÌ 「車」 (nếu chữ 車 chưa học).
+     * Viết 「いきます」 THAY VÌ 「行きます」 (nếu chữ 行 chưa học).
+     * Viết 「かいます」 THAY VÌ 「買います」 (nếu chữ 買 chưa học).
+     * Viết 「ともだち」 THAY VÌ 「友達」 (nếu chữ 友 hoặc 達 chưa học).
+     * Viết 「いま」 THAY VÌ 「今」 (nếu chữ 今 chưa học).
+     * Viết 「きょう」 THAY VÌ 「今日」 (nếu chữ 今 chưa học).
+     * Viết 「ただしい」 THAY VÌ 「正しい」 (nếu chữ 正 chưa học).
+     * Viết 「ことば」 THAY VÌ 「言葉」 (nếu chữ 言 hoặc 葉 chưa học).
+     * Viết 「かんじ」 THAY VÌ 「漢字」 (nếu chữ 漢 hoặc 字 chưa học).
+     * Viết 「よみかた」 THAY VÌ 「読み方」 (nếu chữ 読 hoặc 方 chưa học).
+     * Viết 「はいる」 THAY VÌ 「入る」 (nếu chữ 入 chưa học).
+   - Tóm lại: Tất cả các từ vựng nếu chữ Hán của nó chưa có trong danh sách trên đều phải viết bằng Hiragana/Katakana.
+
+2. **100% TIẾNG NHẬT TRONG ĐỀ BÀI VÀ CÁC ĐÁP ÁN LỰA CHỌN**:
    - Học viên cần luyện "nhận diện mặt chữ tiếng Nhật trực quan", vì vậy:
    - TUYỆT ĐỐI KHÔNG dùng tiếng Việt trong "question_text", "context_sentence" và "options" (trừ loại 'meaning_choice').
-   - TUYỆT ĐỐI KHÔNG mớm tiếng Việt trong câu hỏi (Ví dụ CẤM: "Chọn từ có nghĩa là giáo viên: 【 ? 】").
-   - Hãy viết câu hỏi hoàn toàn bằng tiếng Nhật tự nhiên, trình độ N5 dễ hiểu:
-     * Ví dụ hội thoại: A:「あの方は どなたですか。」 B:「さくら大学の【 ? 】です。」
-     * Ví dụ đọc chữ: 「ミラーさんは アメリカ【人】です。」 【人】の 読み方は どれですか。
-     * Ví dụ chữ Hán đúng: 「あした【がっこう】へ いきます。」 【がくせい】の 正しい 漢字は どれですか。
-2. **ĐA DẠNG HÓA 4 DẠNG CÂU HỎI TỰ NHIÊN (Tránh rập khuôn cứng ngắc)**:
-   - **Dạng 1 (dialogue_fill)**: Hội thoại ngắn 2 câu (A - B) trong đời sống, khuyết 1 từ vựng chữ Hán.
+   - TUYỆT ĐỐI KHÔNG mớm tiếng Việt trong câu hỏi.
+   - Viết câu hỏi hoàn toàn bằng tiếng Nhật tự nhiên, trình độ N5 dễ hiểu (chú ý chỉ dùng Kanji trong danh sách cho phép).
+
+3. **ĐA DẠNG HÓA 4 DẠNG CÂU HỎI TỰ NHIÊN**:
+   - **Dạng 1 (dialogue_fill)**: Hội thoại ngắn 2 câu (A - B) trong đời sống, khuyết 1 từ vựng chữ Hán mục tiêu.
    - **Dạng 2 (reading_in_context)**: Câu văn tự nhiên có chữ Hán trong ngoặc 【 】, hỏi cách đọc Hiragana đúng trong ngữ cảnh (chú ý phân biệt âm On/Kun thực tế, như 人 trong アメリカ人 đọc là じん, trong あの人 đọc là ひと).
-   - **Dạng 3 (kanji_orthography)**: Câu văn có từ Hiragana, chọn dạng chữ Hán/từ ghép đúng (các đáp án sai là chữ viết đảo trật tự hoặc từ vựng khác trong bài).
+   - **Dạng 3 (kanji_orthography)**: Câu văn có từ Hiragana, chọn dạng chữ Hán/từ ghép đúng (các đáp án sai là chữ viết đảo trật tự nét hoặc từ vựng khác trong bài).
    - **Dạng 4 (word_formation)**: Ghép 2 chữ Hán trong bài thành từ vựng có nghĩa (Ví dụ: 「先」＋「生」＝【 ? 】).
-   - (Chỉ tối đa 1-2 câu dạng **meaning_choice** hỏi nghĩa tiếng Việt nếu cần thiết).
-3. **PHƯƠNG ÁN LỰA CHỌN (options)**:
-   - Luôn gồm đúng 4 lựa chọn (A, B, C, D).
+   - (Chỉ tối đa 1 câu dạng **meaning_choice** hỏi nghĩa tiếng Việt nếu cần thiết).
+
+4. **PHƯƠNG ÁN LỰA CHỌN (options)**:
+   - Luôn gồm đúng 4 lựa chọn (A, B, C, D) viết bằng tiếng Nhật (tuân thủ quy tắc chỉ dùng Kanji đã học).
    - "correct_index" là chỉ số của đáp án đúng (0, 1, 2, hoặc 3).
    - Các phương án nhiễu phải hợp lý, lấy từ các chữ Hán và từ vựng trong bài học hoặc bẫy đảo thứ tự nét chữ (như 先生 vs 生先).
-4. **GIẢI THÍCH (explanation)**:
-   - Viết bằng TIẾNG VIỆT rõ ràng, phân tích tại sao đáp án đó đúng, chỉ ra cách phát âm On/Kun và mẹo nhớ từ vựng để học viên THUỘC TỪ VỰNG sâu sắc.`;
+
+5. **BẢN DỊCH NGHĨA CÂU HỎI (question_translation)**:
+   - Cung cấp bản dịch nghĩa tiếng Việt đầy đủ, chuẩn xác và tự nhiên của câu hỏi hoặc đoạn hội thoại ngữ cảnh đề bài.
+
+6. **GIẢI THÍCH CHI TIẾT & SƯ PHẠM (explanation)**:
+   - Viết bằng TIẾNG VIỆT đầy đủ, chi tiết, có cấu trúc rõ ràng:
+     * Dòng 1: 【Dịch nghĩa hoàn chỉnh】: Dịch toàn bộ câu văn đề bài khi điền đáp án đúng.
+     * Dòng 2: 【Lý do chọn】: Giải thích tại sao đáp án đó là đúng nhất trong ngữ cảnh.
+     * Dòng 3: 【Ý nghĩa các lựa chọn】: Giải nghĩa và dịch ngắn gọn cả 4 lựa chọn A, B, C, D để học viên hiểu rõ tại sao các lựa chọn khác sai (Ví dụ: A. 学生: Học sinh (đúng) | B. 先生: Giáo viên | C. 会社員: Nhân viên công ty | D. 社員: Nhân viên).
+     * Dòng 4: 【Phân tích Chữ Hán】: Nêu rõ âm Hán Việt, âm On/Kun, ý nghĩa cốt lõi của chữ Hán mục tiêu và mẹo ghi nhớ mặt chữ để học viên nhớ lâu.`;
 
   const schema = {
     type: "OBJECT",
@@ -820,10 +1073,11 @@ QUY TẮC BẮT BUỘC VỀ NGÔN NGỮ (STRICT LANGUAGE IMMERSION):
               type: "STRING", 
               enum: ["dialogue_fill", "reading_in_context", "kanji_orthography", "word_formation", "meaning_choice"] 
             },
-            question_text: { type: "STRING", description: "Câu hỏi hoặc ngữ cảnh viết 100% bằng tiếng Nhật thuần túy (không lộ tiếng Việt)" },
+            question_text: { type: "STRING", description: "Câu hỏi hoặc ngữ cảnh viết 100% bằng tiếng Nhật thuần túy (không dùng Kanji ngoài phạm vi đã học)" },
             context_sentence: { type: "STRING", description: "Câu văn hoặc đoạn hội thoại tiếng Nhật đầy đủ" },
+            question_translation: { type: "STRING", description: "Bản dịch nghĩa tiếng Việt đầy đủ và tự nhiên của câu hỏi hoặc đoạn hội thoại ngữ cảnh" },
             target_kanji: { type: "STRING", description: "Chữ Hán mục tiêu đang ôn" },
-            target_word: { type: "STRING", description: "Từ vựng chứa chữ Hán (viết bằng Kanji/Kana)" },
+            target_word: { type: "STRING", description: "Từ vựng chứa chữ Hán (viết bằng Kanji/Kana theo đúng quy tắc chữ đã học)" },
             target_word_reading: { type: "STRING", description: "Cách đọc Hiragana của từ vựng" },
             target_word_meaning: { type: "STRING", description: "Nghĩa tiếng Việt của từ vựng để hiển thị sau khi trả lời" },
             options: {
@@ -832,11 +1086,12 @@ QUY TẮC BẮT BUỘC VỀ NGÔN NGỮ (STRICT LANGUAGE IMMERSION):
               description: "Đúng 4 lựa chọn trắc nghiệm (viết bằng tiếng Nhật)"
             },
             correct_index: { type: "INTEGER", description: "Chỉ số 0, 1, 2, 3 của đáp án đúng" },
-            explanation: { type: "STRING", description: "Giải thích chi tiết bằng tiếng Việt giúp học viên thuộc từ vựng" }
+            explanation: { type: "STRING", description: "Giải thích chi tiết và phân tích từ vựng bằng tiếng Việt giúp học viên thuộc bài" }
           },
           required: [
             "question_type",
             "question_text",
+            "question_translation",
             "target_kanji",
             "target_word",
             "options",
@@ -849,7 +1104,11 @@ QUY TẮC BẮT BUỘC VỀ NGÔN NGỮ (STRICT LANGUAGE IMMERSION):
     required: ["questions"]
   };
 
-  return await callGemini(prompt, schema, { maxOutputTokens: 4000, timeoutMs: 30000 });
+  const response = await callGemini(prompt, schema, { maxOutputTokens: 4000, timeoutMs: 30000 });
+  if (response?.result?.questions && Array.isArray(response.result.questions)) {
+    response.result.questions = sanitizeRecognitionQuizQuestions(response.result.questions, allowedSet, vocabList);
+  }
+  return response;
 }
 
 module.exports = {
@@ -861,7 +1120,9 @@ module.exports = {
   explainKanjiStructure,
   gradeKanjiHandwritingWithVision,
   generateKanjiWritingRiddles,
-  generateKanjiRecognitionQuestions
+  generateKanjiRecognitionQuestions,
+  purifyKanjiText,
+  sanitizeRecognitionQuizQuestions
 };
 
 

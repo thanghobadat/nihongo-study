@@ -1244,10 +1244,21 @@ export default function KanjiPracticeTab({
                     </div>
                   </div>
 
+                  {/* Question Sentence Translation (Dịch nghĩa tiếng Việt câu hỏi & ngữ cảnh) */}
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-900/50 text-xs space-y-1.5 animate-in fade-in duration-150">
+                    <div className="flex items-center gap-1.5 font-bold text-indigo-700 dark:text-indigo-300">
+                      <span>🌐</span>
+                      <span>Dịch nghĩa câu hỏi & ngữ cảnh đề bài:</span>
+                    </div>
+                    <p className="text-slate-800 dark:text-slate-200 font-medium leading-relaxed pl-1 whitespace-pre-line text-xs sm:text-sm">
+                      {currentQuizQ.question_translation || 'Dịch nghĩa: Hãy nhận diện mặt chữ và chọn từ vựng đúng ngữ cảnh.'}
+                    </p>
+                  </div>
+
                   {/* Target Word Breakdown */}
-                  <div className="flex flex-wrap items-center gap-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 text-xs">
+                  <div className="flex flex-wrap items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 text-xs">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-slate-400 font-bold">Từ vựng:</span>
+                      <span className="text-slate-400 font-bold">Từ vựng mục tiêu:</span>
                       <span className="font-['Noto_Sans_JP'] font-black text-blue-500 text-sm">
                         {currentQuizQ.target_word}
                       </span>
@@ -1261,16 +1272,66 @@ export default function KanjiPracticeTab({
                       </span>
                     )}
                     <span className="text-slate-400 text-[11px] ml-auto">
-                      Kanji: <b className="font-['Noto_Sans_JP'] text-slate-700 dark:text-slate-200">{currentQuizQ.target_kanji}</b>
+                      Chữ Hán: <b className="font-['Noto_Sans_JP'] text-slate-800 dark:text-slate-100 text-sm font-black">{currentQuizQ.target_kanji}</b>
                     </span>
                   </div>
 
-                  {/* Detailed Explanation */}
-                  <div className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed space-y-1">
-                    <span className="font-bold text-slate-700 dark:text-slate-200 block">💡 Giải thích từ vựng & ngữ cảnh:</span>
-                    <p className="bg-slate-50/50 dark:bg-slate-950/40 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                  {/* Options Breakdown (Giải nghĩa và đối chiếu 4 lựa chọn A, B, C, D) */}
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 space-y-2 text-xs">
+                    <div className="flex items-center gap-1.5 font-bold text-slate-700 dark:text-slate-300 pb-1 border-b border-slate-200/60 dark:border-slate-800">
+                      <span>📋</span>
+                      <span>Đối chiếu 4 phương án lựa chọn:</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
+                      {currentQuizQ.options.map((opt, i) => {
+                        const isAns = i === currentQuizQ.correct_index;
+                        const isUserChoice = i === selectedOptionIdx;
+                        const letter = String.fromCharCode(65 + i);
+                        return (
+                          <div
+                            key={i}
+                            className={`p-2.5 rounded-xl text-xs flex items-center justify-between border transition-all ${
+                              isAns
+                                ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 font-bold'
+                                : isUserChoice
+                                ? 'bg-rose-500/10 border-rose-500/30 text-rose-500'
+                                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span
+                                className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black shrink-0 ${
+                                  isAns
+                                    ? 'bg-emerald-500 text-white'
+                                    : isUserChoice
+                                    ? 'bg-rose-500 text-white'
+                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                                }`}
+                              >
+                                {letter}
+                              </span>
+                              <span className="font-['Noto_Sans_JP'] font-bold truncate text-sm">
+                                {opt}
+                              </span>
+                            </div>
+                            <span className="text-[11px] font-semibold shrink-0">
+                              {isAns ? '✓ Đáp án đúng' : isUserChoice ? '✗ Bạn đã chọn' : 'Lựa chọn nhiễu'}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Detailed Explanation & Pedagogical Insights */}
+                  <div className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed space-y-1.5">
+                    <span className="font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
+                      <span>💡</span>
+                      <span>Phân tích chi tiết & Mẹo nhớ sâu:</span>
+                    </span>
+                    <div className="bg-slate-50/70 dark:bg-slate-950/60 p-3 sm:p-4 rounded-xl border border-slate-100 dark:border-slate-800 text-slate-700 dark:text-slate-200 whitespace-pre-line leading-relaxed text-xs sm:text-sm">
                       {currentQuizQ.explanation}
-                    </p>
+                    </div>
                   </div>
 
                   {/* Navigation Buttons */}

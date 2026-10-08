@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const supabase = require('../db/supabase');
+const mockDb = require('../db/mockDb');
 const aiQuotaService = require('../services/aiQuotaService');
 const aiGradingService = require('../services/aiGradingService');
 const progressService = require('../services/progressService');
@@ -685,7 +686,7 @@ router.post('/kanji-recognition-quiz', async (req, res) => {
 
     const diskCache = getRecognitionQuizDiskCache();
     const charSig = kanjis.map(k => k.character || '').sort().join('');
-    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v1`;
+    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v3`;
 
     // 1. Check permanent disk cache (only if not forceRefresh)
     if (!forceRefresh && diskCache[cacheKey] && Array.isArray(diskCache[cacheKey].questions) && diskCache[cacheKey].questions.length > 0) {
@@ -708,11 +709,20 @@ router.post('/kanji-recognition-quiz', async (req, res) => {
       });
     }
 
+    // Collect all learned Kanji up to current lesson to strictly restrict out-of-scope Kanji
+    let allowedKanjiList = [];
+    if (mockDb && Array.isArray(mockDb.kanji)) {
+      allowedKanjiList = mockDb.kanji
+        .filter(k => k && Number(k.lesson_id) <= Number(lessonId))
+        .map(k => k.character);
+    }
+
     // 3. Call Gemini to generate recognition questions
     const { result, usageMetadata } = await aiGradingService.generateKanjiRecognitionQuestions({
       lessonId,
       kanjis,
-      vocabList: vocabItems
+      vocabList: vocabItems,
+      allowedKanjiList
     });
 
     const questions = result?.questions || [];
