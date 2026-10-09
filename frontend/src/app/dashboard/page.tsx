@@ -82,7 +82,15 @@ export default function UserDashboard() {
   });
 
   // Study Plan & Overview data
-  const [studyPlan, setStudyPlan] = useState<any>(null);
+  const [studyPlan, setStudyPlan] = useState<any>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem('nihongo_cached_study_plan');
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return null;
+  });
   const [studyOverview, setStudyOverview] = useState<any>(null);
   const [dailyHistory, setDailyHistory] = useState<DayHistoryItem[]>([]);
   const [todayStudyTimeSeconds, setTodayStudyTimeSeconds] = useState<number>(() => {
@@ -204,6 +212,11 @@ export default function UserDashboard() {
 
       if (planRes && planRes.success && planRes.plan) {
         setStudyPlan(planRes.plan);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(planRes.plan));
+          } catch (e) {}
+        }
         if (planRes.plan.startDate) setStartDateStr(planRes.plan.startDate);
         if (planRes.plan.endDate) setEndDateStr(planRes.plan.endDate);
         if (typeof planRes.plan.replanCount === 'number') {
@@ -291,6 +304,11 @@ export default function UserDashboard() {
       const res = await api.post('/api/user/replan-debt', {});
       if (res && res.success && res.plan) {
         setStudyPlan(res.plan);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(res.plan));
+          } catch (e) {}
+        }
         setIsDebtModalOpen(false);
         showNotification('🎯 AI đã tái phân bổ bài nợ vào các ngày tới và GIỮ NGUYÊN ngày kết thúc!');
         fetchDashboardData();
@@ -336,13 +354,19 @@ export default function UserDashboard() {
         startDate: startDateStr,
         endDate: endDateStr,
         targetLevel: 'All',
-        currentProgress: {}
+        currentProgress: {},
+        currentPlan: studyPlan
       });
 
       if (res && res.success && res.plan) {
         const nextReplanCount = replanCount + 1;
         const planWithCount = { ...res.plan, replanCount: nextReplanCount };
         setStudyPlan(planWithCount);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(planWithCount));
+          } catch (e) {}
+        }
         if (res.plan.startDate) setStartDateStr(res.plan.startDate);
         if (res.plan.endDate) setEndDateStr(res.plan.endDate);
         await api.post('/api/user/study-plan', { plan: planWithCount });

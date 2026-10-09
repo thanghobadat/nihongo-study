@@ -2043,3 +2043,122 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - `node --check` Backend: 100% PASS (0 lỗi cú pháp).
   - Dev server Backend (cổng 8080) và Next.js Frontend (cổng 3000) đang chạy ổn định.
   - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5.
+
+### Mốc 142: Lưu Trữ Bền Vững Trạng Thái Ôn Tập (Review Sessions) & Khắc Phục Lỗi Đánh Dấu Hoàn Thành Bài Tập Nợ Trên Dashboard & Modal (Đã hoàn thành - 06/10/2026)
+- **Lưu trữ bền vững phiên ôn tập đa tầng (RAM + Disk + Cloud)**:
+  - Khởi tạo tệp lưu trữ đĩa cục bộ [user_review_sessions.json](file:///d:/AI/japanese_learning/website/backend/src/db/user_review_sessions.json) và các hàm quản lý `loadPersistentReviewSessions`, `savePersistentReviewSessions` trong [progressService.js](file:///d:/AI/japanese_learning/website/backend/src/services/progressService.js), tự động nạp vào `mockDb.userReviewSessions` khi server khởi động.
+  - Xây dựng hàm `syncUserReviewSessionsFromSupabase(userId)` đồng bộ toàn bộ phiên ôn tập từ bảng `user_review_sessions` trên Supabase về RAM và ghi lưu đĩa cục bộ, tích hợp tự động vào chu kỳ `syncUserProgressFromSupabase`.
+  - Cập nhật tuyến `GET /api/user/review-sessions` và `POST /api/user/review-sessions` ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js)) luôn lưu đồng thời vào cả 3 tầng (RAM, Disk, Supabase Cloud).
+- **Đồng bộ tự động 2 chiều giữa Phân hệ Ôn tập và Kế hoạch học tập (Study Plan)**:
+  - Khi học viên làm bài tập trên tab Ôn tập ([ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx)) và lưu tiến trình, tuyến `POST /api/user/review-sessions` tự động tìm nhiệm vụ ôn tập tương ứng (`single_review` cho bài học hoặc `cumulative_review`), cập nhật `completed = true`, tính lại tỷ lệ hoàn thành ngày và lưu kế hoạch.
+  - Tích hợp nút huy hiệu tương tác trực tiếp trên Header của [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx): `[✓ Plan: Đã hoàn thành]` / `[⭕ Đánh dấu xong vào Plan]` giúp người học chủ động theo dõi và cập nhật trạng thái nhiệm vụ mà không cần chuyển trang.
+  - Cập nhật tuyến `POST /api/user/daily-tasks/schedule` trong [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js): Khi người dùng bấm hoàn thành một nhiệm vụ ôn tập, hàm `markReviewSessionCompleted` sẽ tự động tạo và lưu bản ghi phiên ôn tập hoàn thành tương ứng.
+- **Khắc phục triệt để lỗi không đánh dấu xong bài tập nợ trên Dashboard & Modal**:
+  - [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx): Cập nhật `handleToggleTaskStatus` cập nhật optimistic update (0ms delay) cho `debtData`, loại bỏ ngay lập tức bài nợ đã đánh dấu khỏi danh sách và tự động chuyển sang card "🎉 Sạch nợ 🟢" khi không còn bài nợ, đồng thời gửi request đồng bộ ngầm với server.
+  - [UnfinishedDebtModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/UnfinishedDebtModal.tsx): Bổ sung prop `onToggleTaskStatus` và nút bấm **`[ ✓ Xong ]`** trực tiếp cạnh huy hiệu còn thiếu của từng mục ôn tập nợ, cho phép xử lý và loại bỏ bài nợ trực tiếp từ popup cảnh báo.
+  - [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js): Cập nhật `getUnfinishedDebt` tự động đánh dấu `task.completed = true` và bỏ qua các bài đã có phiên ôn tập hoàn thành, đảm bảo ngày hôm sau không bao giờ bị xuất hiện lại trong danh sách nợ.
+- **Kiểm định & Trạng thái Hệ thống**:
+  - `node --check` các file Backend: 100% PASS (0 lỗi cú pháp).
+  - `npx tsc --noEmit` Frontend: 100% PASS (0 lỗi TypeScript).
+  - Dev server Backend (cổng 8080) và Next.js Frontend (cổng 3000) đang chạy ổn định.
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5.
+
+### Mốc 143: Đa Dạng Hóa Nhận Diện Kanji Bằng Gemini AI & Đắm Chìm 100% Tiếng Nhật (Đã hoàn thành - 06/10/2026)
+- **Backend Service & Route (`POST /api/ai/kanji-recognition-quiz`) ([aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js), [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js))**:
+  - Xây dựng hàm `generateKanjiRecognitionQuestions`: Sử dụng Gemini AI sinh các câu hỏi tình huống giao tiếp đời sống, hội thoại ngắn 2 dòng (Micro-dialogue A-B), cách đọc trong câu ngữ cảnh và ghép từ Jukugo.
+  - Áp dụng nguyên tắc đắm chìm ngôn ngữ nghiêm ngặt (Strict Language Immersion): Đề bài, câu văn ngữ cảnh và 4 lựa chọn đều viết 100% bằng tiếng Nhật (Kanji / Kana), tuyệt đối không chèn tiếng Việt lộ đề (trừ dạng câu hỏi trực tiếp về nghĩa). Buộc người học phải nhận diện mặt chữ trực quan.
+  - Cung cấp lời giải thích chi tiết sau khi chọn bằng tiếng Việt, phân tích từ vựng, âm On/Kun và ngữ cảnh sử dụng để người học thuộc từ vựng thực tế.
+  - Quản lý bộ nhớ đệm vĩnh viễn trên đĩa qua [kanji_recognition_quiz_cache.json](file:///d:/AI/japanese_learning/website/backend/src/db/kanji_recognition_quiz_cache.json), kèm hỗ trợ `forceRefresh` khi người dùng bấm tạo mới đề.
+  - Tích hợp cơ chế Thích ứng Quy mô Nhỏ (Adaptive Scope): Tự động điều chỉnh số lượng và phong cách ra đề (kể cả khi học viên chỉ chọn học 4 Kanji / 2 từ vựng), tập trung so sánh đối chiếu ngữ cảnh và trật tự chữ mà không bị loãng.
+- **Frontend Helpers ([kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts))**:
+  - Định nghĩa interface `KanjiRecognitionQuizQuestion`.
+  - Xây dựng hàm `fetchKanjiRecognitionQuestions` kết nối backend AI và hàm dự phòng `generateLocalKanjiRecognitionQuestions` 100% tiếng Nhật khi mất mạng / offline.
+- **Giao diện Luyện tập Kanji ([KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx))**:
+  - Mở rộng thanh chuyển đổi thành 3 phân hệ trực quan: **`🎯 Nhận diện mặt chữ`**, **`⚡ Luyện phản xạ (Speedrun)`**, **`✍️ Tập viết AI`**.
+  - Triển khai phân hệ Nhận diện: Làm bài từng câu không áp lực thời gian, nút phát âm thanh 🔊 từ vựng chuẩn, hiển thị bảng giải thích chi tiết sau khi chọn, tổng kết điểm trực quan và nút **"Luyện lại câu sai"**.
+  - Cung cấp nút **"✨ AI Tạo bộ đề mới"** và **"🔀 Tráo câu"** giúp kho đề luôn tươi mới bất tận.
+  - Nâng cấp phân hệ Speedrun: Tự động tích hợp kho câu hỏi nhận diện phong phú mới, chấm dứt hoàn toàn tình trạng lặp lại 2-3 câu đơn điệu cũ.
+- **Kiểm định & Trạng thái Hệ thống**:
+  - `node --check` các file Backend: 100% PASS (0 lỗi cú pháp).
+  - `npx tsc --noEmit` Frontend: 100% PASS (0 lỗi TypeScript).
+  - Dev server Backend (cổng 8080) và Next.js Frontend (cổng 3000) đang chạy ổn định.
+  - Tuân thủ tuyệt đối Rule 3, Rule 4 và Rule 5.
+
+### Mốc 144: Khắc phục lỗi nợ bài Ôn tập tổng hợp, Đồng bộ thời gian học đa thiết bị, Tự động gộp bài nợ & Bổ sung bảng tổng hợp thời gian học theo ngày (Đã hoàn thành & Đã đẩy lên GitHub - 07/10/2026)
+- **Khắc phục lỗi khi hoàn thành nợ bài "Ôn tập tổng hợp"**:
+  - Xác định nguyên nhân gốc rễ: Nhiệm vụ nợ các ngày trước được chuyển sang `plan.archivedPastDays`, trong khi `POST /api/user/daily-tasks/schedule`, `POST /api/user/review-sessions` và `fetchPlanStatus` trong [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/ReviewTab.tsx) chỉ duyệt `plan.days`, dẫn tới lỗi không tìm thấy task (404/Task not found).
+  - Đã khắc phục: Backend quét và cập nhật trạng thái nhiệm vụ đồng thời trên cả `plan.days` và `plan.archivedPastDays`. Tinh chỉnh thông báo offline fallback của AI chấm bài thành thông báo hỗ trợ sư phạm chuẩn xác, không còn gây hoang mang lỗi.
+- **Khắc phục lệch đồng bộ thời gian học giữa các thiết bị (PC, Mobile, Safari)**:
+  - Khắc phục lỗi gọi đường dẫn tương đối `/api/user/study-time` trong sự kiện `beforeunload`/`pagehide` tại [ActiveStudyTracker.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/ActiveStudyTracker.tsx) bằng `getBaseUrl() + '/api/user/study-time'` tránh bị 404 sang Next.js port 3000.
+  - Bổ sung tham số `{ skipCache: true }` khi lấy thời gian học và bổ sung listener `visibilitychange` tự động re-sync thời gian thực tế từ server khi chuyển tab.
+  - Backend [studyTimeService.js](file:///d:/AI/japanese_learning/website/backend/src/services/studyTimeService.js) và [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js) đồng bộ 2 chiều với Supabase trước khi trả kết quả thời gian học.
+- **Tự động gộp bài tập nợ cùng loại & Chuẩn hóa cơ chế tracking**:
+  - Tại [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js), hàm `getUnfinishedDebt` tự động gom các phần bài nợ cùng loại theo từng bài (ví dụ 3 phần 5 Kanji gộp thành 1 phần 15 Kanji; tương tự với Từ vựng và Ngữ pháp), tổng hợp targetCount, tính toán số đã thuộc thực tế từ `user_progress` để trừ dần missingCount. Tự động đánh dấu hoàn thành khi đã thuộc đủ số lượng.
+  - **Phân định nút "Đánh dấu xong"**: Từ vựng, Kanji, Ngữ pháp tuyệt đối **không có nút đánh dấu xong thủ công** (100% tự động tracking theo status `mastered` trong `user_progress`). Chỉ riêng dạng Ôn tập tổng hợp (`single_review`, `cumulative_review`) mới có nút `[ ✓ Đánh dấu xong ]`.
+- **Bổ sung bảng Tổng hợp Thời gian học theo từng ngày**:
+  - Tại [DailyReportModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/DailyReportModal.tsx): Bổ sung khối "📊 Tổng Hợp Thời Gian Học Các Ngày (Daily Study Breakdown)" hiển thị: Tổng tích lũy, Trung bình/ngày, Kỷ lục ngày, danh sách cuộn các ngày kèm số giờ học thực tế, badge nỗ lực sư phạm (🔥 Xuất sắc, 🟢 Đạt chuẩn, 🟡 Cần cố gắng) và nút dẫn nhanh đến Bảng phân tích chi tiết.
+  - Tại [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx): Bật mặc định hiển thị bảng Lịch Sử & Đánh Giá Tiến Độ Từng Ngày (`isHistoryOpen = true`) và biến huy hiệu thời gian học trên thanh Nhiệm vụ thành nút tương tác mở trực tiếp modal lịch sử.
+- **Đẩy mã nguồn lên GitHub**:
+  - Đã add, commit (`491f40d`) và push thành công toàn bộ mã nguồn lên nhánh `main` của repository GitHub (`nihongo-study`).
+  - Kiểm tra cú pháp Backend (`node --check`) và Frontend (`npx tsc --noEmit`) đạt 100% PASS (0 lỗi).
+
+### Mốc 145: Chuẩn Hóa Triệt Để Chữ Hán Nhận Diện (Bộ Lọc Kanji Sanitizer Hiragana), Dịch Nghĩa Câu Hỏi & Nâng Cấp Bảng Đối Chiếu 4 Lựa Chọn (Đã hoàn thành & Đã đẩy lên GitHub - 08/10/2026)
+- **Bộ Lọc Hậu Xử Lý Tự Động (Kanji Sanitizer Post-Processor)**:
+  - Cập nhật [aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js):
+    + Xây dựng hàm `purifyKanjiText(text, allowedSet, vocabList)` và `sanitizeRecognitionQuizQuestions`: Tự động quét toàn bộ `question_text`, `context_sentence`, `target_word` và `options` trả về từ Gemini AI.
+    + Tự động thay thế mọi từ vựng hoặc chữ Hán ngoài `allowedSet` thành **Hiragana** chuẩn xác dựa trên từ điển đối chiếu N5 (`あの方` -> `あのかた`, `誰` -> `だれ`, `何時` -> `なんじ`, `大学` -> `だいがく`, `車` -> `くるま`, `時計` -> `とけい`, `行きます` -> `いきます`, `来ます` -> `きます`, `正しい` -> `ただしい`, `言葉` -> `ことば`, `漢字` -> `かんじ`, `読み方` -> `よみかた`, `入る` -> `はいる`...).
+    + Đảm bảo 100% không còn bất kỳ chữ Hán nào ngoài phạm vi bài học có thể lọt vào đề bài của học viên.
+- **Chuẩn Hóa Bộ Sinh Cục Bộ (Local Fallback Sanitizer)**:
+  - Cập nhật [kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts):
+    + Thay thế toàn bộ chữ Hán trong các câu hỏi mẫu tĩnh sang thuần Hiragana (`【 ? 】に はいる ただしい ことばは どれですか`, `よみかたは どれですか`, `ただしい かんじは どれですか`).
+    + Lọc danh sách từ ghép `allCompoundWords`: Chỉ sử dụng các từ ghép mà 100% các chữ Hán cấu thành đều đã được học trong bài (loại bỏ hoàn toàn các từ chứa Kanji lạ như `大学`, `先月`, `銀行員` ở Bài 1).
+- **Nâng Cấp Giao Diện Giải Thích Chuyên Sâu Sau Khi Trả Lời**:
+  - Cập nhật [KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx):
+    + **Khối Dịch Nghĩa Câu Hỏi & Ngữ Cảnh (🌐)**: Hiển thị nổi bật bản dịch tiếng Việt của toàn bộ câu hỏi hoặc câu văn ngữ cảnh.
+    + **Khối Bảng Đối Chiếu 4 Phương Án (📋)**: Phân tích trực quan cả 4 lựa chọn A, B, C, D (hiển thị rõ huy hiệu `✓ Đáp án đúng`, `✗ Bạn đã chọn`, hoặc `Lựa chọn nhiễu`).
+    + **Khối Phân Tích Chi Tiết & Mẹo Nhớ Sâu (💡)**: Trình bày bản dịch hoàn chỉnh, lý do chọn, phân tích âm Hán Việt/âm On/Kun và mẹo nhớ mặt chữ.
+- **Nâng Cấp Cache Key**:
+  - Chuyển `cacheKey` sang `_v3` trong [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js) để vô hiệu hóa hoàn toàn cache cũ.
+- **Đẩy mã nguồn lên GitHub**:
+  - Đã add, commit (`b480db1`) và push thành công toàn bộ mã nguồn lên nhánh `main` của repository GitHub (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng (Rule 5).
+- **Kiểm định & Xác thực**:
+  - Unit test `test_purify.js` với các ca kiểm thử phức tạp: Đạt 100% PASS (6/6 test cases).
+  - Cú pháp Backend `node --check` các file `aiGradingService.js`, `ai.js`: Đạt 100% PASS (0 lỗi).
+  - Biên dịch Frontend `npx tsc --noEmit`: Đạt 100% PASS (0 lỗi TypeScript).
+
+### Mốc 146: Khắc phục triệt để lỗi Replan nhận lại Từ vựng Bài 1 đã học và Tự động Reset Kế hoạch về Bài 1 sau vài tiếng / 1 ngày trên Production (Đã hoàn thành - 09/10/2026)
+- **Nguyên nhân gốc rễ trên Web Online (Render Free Tier + Supabase + Vercel)**:
+  1. *Render Container ngủ đông (Sleep after 15m)*: Khi container khởi động lại, bộ nhớ RAM (`mockDb.studyPlans`) và file cục bộ bị xóa sạch.
+  2. *Lỗi không `await persistPlanToSupabase`*: Trước đây hàm lưu kế hoạch lên Supabase `user_study_plans` không được `await`, khiến payload lớn (~424 KB) bị hủy giữa chừng khi HTTP response đóng, dẫn tới Supabase mất hoặc lưu thiếu dữ liệu plan.
+  3. *Lỗi reset tự động khi vào Dashboard*: Khi Render khởi động nguội, các endpoint `GET /api/user/study-overview`, `GET /api/user/daily-history`, và `GET /api/user/study-plan` gọi đồng bộ `getUserPlan(userId)` (chỉ đọc RAM), không thấy plan nên tự ý gọi `generateAlgorithmicPlan({ currentLesson: 1 })` không có `userId` và không có `masteredItemIds`. Kế hoạch mới toanh từ Bài 1 sinh ra và ghi đè thẳng lên Supabase, xóa sạch lộ trình của học viên!
+  4. *Lỗi Replan nhận lại Từ vựng Bài 1*: `progressService.getMasteredItemIds` trước đây chỉ đọc cache RAM cục bộ, không truy vấn `user_study_plans` trên Supabase và không nhận `currentPlan`. Nếu từ vựng được học thông qua task của lộ trình mà chưa tick lẻ trong `user_progress`, cold-start sẽ hoàn toàn không biết học viên đã học xong từ vựng Bài 1, dẫn tới sinh lại từ vựng Bài 1 ở lần Replan đầu tiên.
+- **Các biện pháp giải quyết triệt để**:
+  - **Backend [progressService.js](file:///d:/AI/japanese_learning/website/backend/src/services/progressService.js)**:
+    + Thêm hàm `extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds)` trích xuất item IDs từ các task đã hoàn thành (`t.completed === true`) trong cả `plan.days` và `plan.archivedPastDays`.
+    + Nâng cấp `getMasteredItemIds(userId, currentPlan)`: Truy vấn song song bảng `user_progress` và bảng `user_study_plans` trên Supabase, đồng thời trích xuất trực tiếp từ `currentPlan`.
+    + Nâng cấp `getMasteredItemIdsSync(userId, currentPlan)`: Trích xuất trực tiếp từ `currentPlan` làm fallback đồng bộ an toàn.
+  - **Backend [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js)**:
+    + Viết hàm `getUserPlanAsync(userId)`: Khi RAM trống, tự động nạp bất đồng bộ từ Supabase `user_study_plans`, khôi phục vào RAM và ổ đĩa.
+    + Nâng cấp `persistPlanToSupabase(userId, plan)` có kiểm tra lỗi trả về và bắt buộc `await` ở tất cả các route (`/study-plan`, `/replan-debt`, `/daily-tasks/schedule`, `/review-session`, `/study-plan/task/toggle`, `/daily-tasks/rebatch`, `/auto-allocate-slots`).
+    + Chuyển đổi toàn bộ các lời gọi `getUserPlan(userId)` đồng bộ tại các route sang `await getUserPlanAsync(userId)`.
+    + Xóa bỏ triệt để đoạn code fallback tự tiện sinh kế hoạch Bài 1 không có ngữ cảnh trong `GET /api/user/study-plan` và `GET /api/user/daily-history`.
+  - **Backend [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js)**:
+    + Thêm hàm `isLessonCategoryCompletedInPlan(plan, lessonId, itemType)` kiểm tra dứt điểm hoàn thành theo từng phân hệ.
+    + Cập nhật `generateAlgorithmicPlan`: Nhận `currentPlan`, tự động bổ sung toàn bộ từ vựng/kanji/ngữ pháp của bài học vào danh sách đã thuộc nếu phân hệ đó đã hoàn thành trong `currentPlan`.
+    + Cập nhật `generateStudyPlan`: Nhận `params.currentPlan`, truyền vào `progressService.getMasteredItemIds` và `generateAlgorithmicPlan`.
+    + Cập nhật `getCompletedLessons`: Duyệt trực tiếp `currentPlan.days` và `currentPlan.archivedPastDays` để ghi nhận bài đã hoàn thành 100%.
+    + Cập nhật `refineStudyPlan`: Truyền `currentPlan` vào `getMasteredItemIds` và `generateAlgorithmicPlan`.
+  - **Backend [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js)**:
+    + Nhận `currentPlan` từ `req.body` trong `POST /api/ai/generate-study-plan` và truyền vào `aiPlannerService.generateStudyPlan`.
+  - **Frontend [page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx)**:
+    + Khởi tạo `studyPlan` từ `localStorage.getItem('nihongo_cached_study_plan')` giúp giao diện hiển thị tức thì, không bị chớp nháy khi mạng chậm hoặc cold start.
+    + Lưu đệm `nihongo_cached_study_plan` mỗi khi nạp hoặc tạo kế hoạch mới.
+    + Bổ sung tham số `currentPlan: studyPlan` trong `handleGeneratePlan` khi gọi `POST /api/ai/generate-study-plan`.
+- **Kiểm định & Xác thực**:
+  - `node --check` 4 file Backend: 100% PASS (0 lỗi cú pháp).
+  - `npx tsc --noEmit` Frontend: 100% PASS (0 lỗi TypeScript).
+  - Chạy script kiểm thử giả lập cold-start (`verify_replan_fix.js`):
+    + Test 1: `isLessonCategoryCompletedInPlan` nhận diện chính xác phân hệ đã hoàn thành.
+    + Test 2: `generateAlgorithmicPlan` với `currentPlan` sinh 0 task Từ vựng Bài 1, giữ nguyên Kanji Bài 1 chưa học.
+    + Test 3: `refineStudyPlan` khi Bài 1 hoàn thành 100% bắt đầu chính xác từ Bài 2 (`startLesson = 2`).
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5 (không commit/push nếu người dùng chưa yêu cầu).

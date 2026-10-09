@@ -784,7 +784,8 @@ router.post('/generate-study-plan', async (req, res) => {
       endDate,
       targetLevel = 'All',
       restDays = [],
-      currentProgress = {}
+      currentProgress = {},
+      currentPlan = null
     } = req.body;
 
     if (!startDate || !endDate) {
@@ -802,6 +803,7 @@ router.post('/generate-study-plan', async (req, res) => {
       targetLevel,
       restDays,
       currentProgress,
+      currentPlan,
       userId
     });
 

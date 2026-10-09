@@ -44,15 +44,21 @@ function savePersistentPlans(plans) {
  * Persist full 130-day plan data directly to Supabase so it survives container restarts
  */
 async function persistPlanToSupabase(userId, plan) {
-  if (!isSupabaseConfigured() || !userId || !plan) return;
+  if (!isSupabaseConfigured() || !userId || !plan) return false;
   try {
-    await supabase.from('user_study_plans').upsert({
+    const { error } = await supabase.from('user_study_plans').upsert({
       user_id: String(userId),
       plan_data: plan,
       updated_at: new Date().toISOString()
     }, { onConflict: 'user_id' });
+    if (error) {
+      console.error('[StudyPlan] Supabase user_study_plans upsert error:', error.message);
+      return false;
+    }
+    return true;
   } catch (err) {
     console.warn('[StudyPlan] Supabase user_study_plans sync warning:', err.message);
+    return false;
   }
 }
 
@@ -75,6 +81,35 @@ function getUserPlan(userId) {
     }
   }
   return mockDb.studyPlans[userId] || null;
+}
+
+/**
+ * Asynchronous helper to get active user study plan, checking memory, disk, and Supabase cloud
+ */
+async function getUserPlanAsync(userId) {
+  if (!userId) return null;
+  const inMemory = getUserPlan(userId);
+  if (inMemory && inMemory.days && inMemory.days.length > 0) {
+    return inMemory;
+  }
+  if (isSupabaseConfigured()) {
+    try {
+      const { data: sp, error: spErr } = await supabase
+        .from('user_study_plans')
+        .select('plan_data')
+        .eq('user_id', String(userId))
+        .maybeSingle();
+      if (!spErr && sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
+        if (!mockDb.studyPlans) mockDb.studyPlans = {};
+        mockDb.studyPlans[userId] = sp.plan_data;
+        savePersistentPlans(mockDb.studyPlans);
+        return sp.plan_data;
+      }
+    } catch (e) {
+      console.warn('[StudyPlan] Error fetching user_study_plans in getUserPlanAsync:', e.message);
+    }
+  }
+  return inMemory || null;
 }
 
 /**
@@ -2238,7 +2273,7 @@ router.post('/review-sessions', async (req, res) => {
 
     // Auto-complete review task in active study plan if user practiced/completed:
     try {
-      const plan = getUserPlan(userId);
+      const plan = await getUserPlanAsync(userId);
       if (plan && Array.isArray(plan.days)) {
         let lessonId = null;
         let isCumulative = false;
@@ -2282,7 +2317,7 @@ router.post('/review-sessions', async (req, res) => {
         }
         if (planModified) {
           savePersistentPlans(mockDb.studyPlans);
-          persistPlanToSupabase(userId, plan).catch(() => {});
+          await persistPlanToSupabase(userId, plan);
           console.log(`[ReviewSession] Auto-completed plan review task for user ${userId} (${storage_key})`);
         }
       }
@@ -2447,7 +2482,7 @@ async function checkAndNotifyNewlyCompletedTasks(userId) {
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
-    persistPlanToSupabase(userId, plan).catch(() => {});
+    await persistPlanToSupabase(userId, plan);
 
     // Kiểm tra xem có task nào vừa mới đạt chỉ tiêu và hoàn thành không
     const dayTasks = todayDay.tasks || [];
@@ -2481,7 +2516,7 @@ router.get('/study-debt', async (req, res) => {
   try {
     const userId = req.user.id;
     await progressService.syncUserProgressFromSupabase(userId);
-    let plan = getUserPlan(userId);
+    let plan = await getUserPlanAsync(userId);
     if (plan) {
       plan = applyAutoTracking(plan, userId);
     }
@@ -2500,7 +2535,7 @@ router.get('/study-debt', async (req, res) => {
 router.post('/replan-debt', async (req, res) => {
   try {
     const userId = req.user.id;
-    let plan = getUserPlan(userId);
+    let plan = await getUserPlanAsync(userId);
     if (!plan) {
       return res.status(400).json({ success: false, error: 'Không tìm thấy kế hoạch để replan.' });
     }
@@ -2516,9 +2551,10 @@ router.post('/replan-debt', async (req, res) => {
     });
 
     updatedPlan.replanCount = (plan.replanCount || 0) + 1;
+    if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = updatedPlan;
     savePersistentPlans(mockDb.studyPlans);
-    persistPlanToSupabase(userId, updatedPlan);
+    await persistPlanToSupabase(userId, updatedPlan);
 
     // Scenario 2: Send debt replan push notification
     if (updatedPlan && updatedPlan.days) {
@@ -2546,17 +2582,17 @@ router.post('/replan-debt', async (req, res) => {
 router.get('/study-plan', async (req, res) => {
   try {
     const userId = req.user.id;
-    let plan = getUserPlan(userId);
+    let plan = await getUserPlanAsync(userId);
 
     // Restore from Supabase user_study_plans or target_plans if online and memory was cleared by cloud sleep
     if (!plan && isSupabaseConfigured() && !req.user.isMock) {
       try {
-        const { data: sp } = await supabase
+        const { data: sp, error: spErr } = await supabase
           .from('user_study_plans')
           .select('plan_data')
           .eq('user_id', String(userId))
           .maybeSingle();
-        if (sp && sp.plan_data && Array.isArray(sp.plan_data.days)) {
+        if (!spErr && sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
           plan = sp.plan_data;
           mockDb.studyPlans[userId] = plan;
           savePersistentPlans(mockDb.studyPlans);
@@ -2574,15 +2610,17 @@ router.get('/study-plan', async (req, res) => {
             .eq('user_id', userId)
             .maybeSingle();
           if (tp && tp.start_date && tp.end_date) {
+            const masteredItemIds = await progressService.getMasteredItemIds(userId);
             plan = aiPlannerService.generateAlgorithmicPlan({
               startDate: tp.start_date,
               endDate: tp.end_date,
               targetLevel: 'All',
-              currentLesson: 1
+              userId,
+              masteredItemIds
             });
             mockDb.studyPlans[userId] = plan;
             savePersistentPlans(mockDb.studyPlans);
-            persistPlanToSupabase(userId, plan);
+            await persistPlanToSupabase(userId, plan);
           }
         } catch (e) {
           console.warn('[StudyPlan] Could not restore from Supabase target_plans:', e.message);
@@ -2594,14 +2632,17 @@ router.get('/study-plan', async (req, res) => {
     if (!plan || !plan.days || plan.days.length === 0) {
       const startDate = getVietnamDateStr();
       const defaultEnd = addVietnamDays(startDate, 30);
+      const masteredItemIds = await progressService.getMasteredItemIds(userId);
       plan = aiPlannerService.generateAlgorithmicPlan({
         startDate: startDate,
         endDate: defaultEnd,
         targetLevel: 'All',
-        currentLesson: 1
+        userId,
+        masteredItemIds
       });
       mockDb.studyPlans[userId] = plan;
       savePersistentPlans(mockDb.studyPlans);
+      await persistPlanToSupabase(userId, plan);
     }
 
     // Synchronize Supabase user_progress before auto-tracking
@@ -2631,7 +2672,7 @@ router.post('/study-plan', async (req, res) => {
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
-    persistPlanToSupabase(userId, plan);
+    await persistPlanToSupabase(userId, plan);
 
     // If online with Supabase, sync target_plans table as well
     if (!req.user.isMock && plan.startDate && plan.endDate) {
@@ -2672,7 +2713,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
       ? taskIds
       : (typeof taskId === 'string' && taskId.includes(',') ? taskId.split(',').map(s => s.trim()) : [taskId]);
 
-    const plan = getUserPlan(userId);
+    const plan = await getUserPlanAsync(userId);
     if (plan) {
       const allPlanDays = [
         ...(plan.days || []),
@@ -2733,7 +2774,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
       }
 
       savePersistentPlans(mockDb.studyPlans);
-      persistPlanToSupabase(userId, plan);
+      await persistPlanToSupabase(userId, plan);
     }
 
     return res.json({ success: true, message: 'Đã cập nhật nhiệm vụ thành công', updatedPlan: plan });
@@ -2757,7 +2798,7 @@ router.post('/check-daily-notification', async (req, res) => {
     const { date, localTimeStr } = req.body;
     const todayStr = date || getLocalDateStr();
 
-    const plan = getUserPlan(userId);
+    const plan = await getUserPlanAsync(userId);
     if (!plan || !Array.isArray(plan.days)) {
       return res.json({ success: true, message: 'No active plan found' });
     }
@@ -2774,10 +2815,10 @@ router.post('/check-daily-notification', async (req, res) => {
       pushNotificationService.sendNewDayNotification(userId, {
         yesterdayDebtItems,
         todayTasks
-      }).then(() => {
+      }).then(async () => {
         plan.lastNewDayNotifiedDate = todayStr;
         savePersistentPlans(mockDb.studyPlans);
-        persistPlanToSupabase(userId, plan);
+        await persistPlanToSupabase(userId, plan);
         console.log(`[PushNotification] New day notification sent successfully to ${userId}`);
       }).catch(e => console.warn('[PushNotification] New day push failed or device not registered:', e.message));
     }
@@ -2859,7 +2900,7 @@ router.post('/daily-tasks/rebatch', async (req, res) => {
     const userId = req.user.id;
     const { date, configs } = req.body;
 
-    let plan = getUserPlan(userId);
+    let plan = await getUserPlanAsync(userId);
     if (!plan || !Array.isArray(plan.days)) {
       return res.status(404).json({ success: false, error: 'Không tìm thấy kế hoạch học tập' });
     }
@@ -2875,7 +2916,7 @@ router.post('/daily-tasks/rebatch', async (req, res) => {
     plan = applyAutoTracking(result.plan, userId);
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
-    persistPlanToSupabase(userId, plan);
+    await persistPlanToSupabase(userId, plan);
 
     const updatedDay = plan.days.find(d => d.date === targetDate);
 
@@ -2900,7 +2941,7 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
     const userId = req.user.id;
     const { date, timeSlots } = req.body;
 
-    let plan = getUserPlan(userId);
+    let plan = await getUserPlanAsync(userId);
     if (!plan || !Array.isArray(plan.days)) {
       return res.status(404).json({ success: false, error: 'Không tìm thấy kế hoạch học tập' });
     }
@@ -2916,7 +2957,7 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
     plan = applyAutoTracking(result.plan, userId);
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
-    persistPlanToSupabase(userId, plan);
+    await persistPlanToSupabase(userId, plan);
 
     const updatedDay = plan.days.find(d => d.date === targetDate);
 
@@ -2944,7 +2985,7 @@ router.get('/study-overview', async (req, res) => {
     // Sync Supabase progress before computing overview
     await syncUserProgressFromSupabase(userId);
 
-    const plan = getUserPlan(userId);
+    const plan = await getUserPlanAsync(userId);
 
     const vocabList = mockDb.vocabulary || [];
     const kanjiList = mockDb.kanji || [];
@@ -3120,7 +3161,7 @@ router.get('/daily-history', async (req, res) => {
   try {
     const userId = req.user.id;
     await progressService.syncUserProgressFromSupabase(userId);
-    let plan = getUserPlan(userId);
+    let plan = await getUserPlanAsync(userId);
 
     // Only generate a default initial plan if user has NO plan at all (first-time visitor)
     if (!plan || !plan.days || plan.days.length === 0) {
@@ -3128,14 +3169,17 @@ router.get('/daily-history', async (req, res) => {
       const defaultEnd = new Date(today);
       defaultEnd.setDate(today.getDate() + 30);
       const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      const masteredItemIds = await progressService.getMasteredItemIds(userId);
       plan = aiPlannerService.generateAlgorithmicPlan({
         startDate: fmt(today),
         endDate: fmt(defaultEnd),
         targetLevel: 'All',
-        currentLesson: 1
+        userId,
+        masteredItemIds
       });
       mockDb.studyPlans[userId] = plan;
       savePersistentPlans(mockDb.studyPlans);
+      await persistPlanToSupabase(userId, plan);
     }
 
     plan = applyAutoTracking(plan, userId);
@@ -3266,7 +3310,7 @@ router.get('/study-time/history', async (req, res) => {
     if (isSupabaseConfigured() && req.user && !req.user.isMock) {
       await studyTimeService.syncFromSupabase(userId).catch(() => {});
     }
-    const plan = getUserPlan(userId);
+    const plan = await getUserPlanAsync(userId);
     const result = studyTimeService.getStudyTimeHistory(userId, plan);
     return res.json({
       success: true,

@@ -307,13 +307,31 @@ function validateSequence(tasks) {
 }
 
 /**
+ * Check if a specific category of a lesson has all its tasks completed in a given plan
+ */
+function isLessonCategoryCompletedInPlan(plan, lessonId, itemType) {
+  if (!plan) return false;
+  const allDays = [...(plan.days || []), ...(plan.archivedPastDays || [])];
+  const matchingTasks = [];
+  for (const day of allDays) {
+    if (!day || !Array.isArray(day.tasks)) continue;
+    for (const t of day.tasks) {
+      if (t.lesson === lessonId && t.itemType === itemType) {
+        matchingTasks.push(t);
+      }
+    }
+  }
+  return matchingTasks.length > 0 && matchingTasks.every(t => t.completed);
+}
+
+/**
  * Retrieve sets of mastered item IDs for a given user from progressService
  */
-function getMasteredItemIds(userId) {
-  if (!userId) {
+function getMasteredItemIds(userId, currentPlan = null) {
+  if (!userId && !currentPlan) {
     return { masteredVocabIds: new Set(), masteredKanjiIds: new Set(), masteredGrammarIds: new Set() };
   }
-  return progressService.getMasteredItemIdsSync(userId);
+  return progressService.getMasteredItemIdsSync(userId, currentPlan);
 }
 
 /**
@@ -335,7 +353,8 @@ function generateAlgorithmicPlan({
   archivedPastDays = [],
   originalStartDate = null,
   userId = null,
-  masteredItemIds = null
+  masteredItemIds = null,
+  currentPlan = null
 }) {
   const normStartDate = normalizeDateStr(startDate);
   const normEndDate = normalizeDateStr(endDate);
@@ -346,10 +365,30 @@ function generateAlgorithmicPlan({
   const totalLessons = Math.max(1, actualTargetLesson - actualStartLesson + 1);
 
   // Retrieve mastered items if userId is provided or passed in
-  const mastered = masteredItemIds || getMasteredItemIds(userId);
-  const masteredVocabIds = mastered.masteredVocabIds || new Set();
-  const masteredKanjiIds = mastered.masteredKanjiIds || new Set();
-  const masteredGrammarIds = mastered.masteredGrammarIds || new Set();
+  const mastered = masteredItemIds || getMasteredItemIds(userId, currentPlan);
+  const masteredVocabIds = new Set(mastered.masteredVocabIds || []);
+  const masteredKanjiIds = new Set(mastered.masteredKanjiIds || []);
+  const masteredGrammarIds = new Set(mastered.masteredGrammarIds || []);
+
+  // Category-level completion check from currentPlan (guards against partial plans or missing itemIds)
+  if (currentPlan) {
+    try {
+      const mockDb = require('../db/mockDb');
+      for (let l = 1; l <= 50; l++) {
+        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'vocabulary')) {
+          (mockDb.vocabulary || []).filter(v => v.lesson_id === l).forEach(v => masteredVocabIds.add(v.id));
+        }
+        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'kanji')) {
+          (mockDb.kanji || []).filter(k => k.lesson_id === l).forEach(k => masteredKanjiIds.add(k.id));
+        }
+        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'grammar')) {
+          (mockDb.grammar || []).filter(g => g.lesson_id === l).forEach(g => masteredGrammarIds.add(g.id));
+        }
+      }
+    } catch (e) {
+      console.warn('[AI Planner] Error checking category completion from currentPlan:', e.message);
+    }
+  }
 
   // 1. Build atomic tasks for lessons actualStartLesson to actualTargetLesson with fine-grained chunking
   const atomicTasks = [];
@@ -635,7 +674,8 @@ function generateAlgorithmicPlan({
  */
 async function generateStudyPlan(params) {
   // Fresh plan generation strictly for all 50 lessons as required by Rule 7
-  const masteredItemIds = params.masteredItemIds || (params.userId ? await progressService.getMasteredItemIds(params.userId) : null);
+  const currentPlan = params.currentPlan || null;
+  const masteredItemIds = params.masteredItemIds || (params.userId ? await progressService.getMasteredItemIds(params.userId, currentPlan) : null);
 
   // Default to lesson 1 (or explicit startLesson if requested) so each lesson 1..50 is evaluated.
   // generateAlgorithmicPlan automatically skips lessons where 100% of items are already mastered.
@@ -643,6 +683,7 @@ async function generateStudyPlan(params) {
 
   const basePlan = generateAlgorithmicPlan({
     ...params,
+    currentPlan,
     masteredItemIds,
     startLesson: Math.min(50, Math.max(1, startL)),
     targetLesson: params.targetLesson || 50
@@ -863,8 +904,34 @@ function getCompletedLessons({ userId, currentPlan, currentProgress, masteredIte
     }
   }
 
-  // 2. From actual userProgress in database or masteredItemIds
-  const mastered = masteredItemIds || (userId ? progressService.getMasteredItemIdsSync(userId) : null);
+  // 2. From currentPlan if passed: check if all tasks of lesson l are completed
+  if (currentPlan) {
+    const allDays = [...(currentPlan.days || []), ...(currentPlan.archivedPastDays || [])];
+    const lessonTaskStatus = {};
+    for (const d of allDays) {
+      if (!d || !Array.isArray(d.tasks)) continue;
+      for (const t of d.tasks) {
+        if (t.lesson && t.lesson >= 1 && t.lesson <= 50) {
+          if (!lessonTaskStatus[t.lesson]) {
+            lessonTaskStatus[t.lesson] = { total: 0, completed: 0 };
+          }
+          lessonTaskStatus[t.lesson].total += 1;
+          if (t.completed) {
+            lessonTaskStatus[t.lesson].completed += 1;
+          }
+        }
+      }
+    }
+    for (const [lStr, stats] of Object.entries(lessonTaskStatus)) {
+      const l = parseInt(lStr, 10);
+      if (stats.total > 0 && stats.completed === stats.total) {
+        completed.add(l);
+      }
+    }
+  }
+
+  // 3. From actual userProgress in database or masteredItemIds
+  const mastered = masteredItemIds || (userId ? progressService.getMasteredItemIdsSync(userId, currentPlan) : null);
   const masteredVIds = mastered?.masteredVocabIds;
   const masteredKIds = mastered?.masteredKanjiIds;
   const masteredGIds = mastered?.masteredGrammarIds;
@@ -935,7 +1002,7 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   const targetEndDate = normalizeDateStr(endDate) || (currentPlan && normalizeDateStr(currentPlan.endDate));
 
   // 1. Determine completed lessons and find earliest unfinished lesson
-  const masteredItemIds = userId ? await progressService.getMasteredItemIds(userId) : null;
+  const masteredItemIds = userId ? await progressService.getMasteredItemIds(userId, currentPlan) : null;
   const completedLessons = getCompletedLessons({ userId, currentPlan, currentProgress, masteredItemIds });
   const completedSet = new Set(completedLessons);
 
@@ -982,7 +1049,8 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
     archivedPastDays,
     originalStartDate: currentPlan?.originalStartDate || currentPlan?.startDate || startDate || todayStr,
     userId,
-    masteredItemIds
+    masteredItemIds,
+    currentPlan
   });
 
   // 4. Generate educational rationale and refinement note
@@ -1447,6 +1515,7 @@ function autoAllocateDailyTimeSlots({ plan, date, timeSlots = {}, userId }) {
 module.exports = {
   normalizeDateStr,
   diffInDays,
+  isLessonCategoryCompletedInPlan,
   getMasteredItemIds,
   getLessonCounts,
   generateSequentialLessonTasks,

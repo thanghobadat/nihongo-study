@@ -151,22 +151,52 @@ async function syncUserReviewSessionsFromSupabase(userId) {
 }
 
 /**
+ * Helper to extract mastered item IDs from completed tasks in a study plan
+ */
+function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds) {
+  if (!plan) return;
+  const allDays = [
+    ...(Array.isArray(plan.days) ? plan.days : []),
+    ...(Array.isArray(plan.archivedPastDays) ? plan.archivedPastDays : [])
+  ];
+  for (const day of allDays) {
+    if (Array.isArray(day.tasks)) {
+      for (const task of day.tasks) {
+        if (task.completed && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
+          for (const id of task.itemIds) {
+            const numId = Number(id);
+            if (task.itemType === 'vocabulary') masteredVocabIds.add(numId);
+            else if (task.itemType === 'kanji') masteredKanjiIds.add(numId);
+            else if (task.itemType === 'grammar') masteredGrammarIds.add(numId);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * Retrieve sets of mastered/learned item IDs for a user (DB-First with Local Cache Fallback)
  * Considers:
- * 1. Supabase user_progress table (if online) with status 'mastered' or 'learning'
- * 2. Local user_progress.json / mockDb.userProgress with status 'mastered' or 'learning'
- * 3. Completed tasks in study_plans.json (if task.completed is true, task.itemIds are mastered)
+ * 1. Supabase user_progress table (if online) with status 'mastered'
+ * 2. Supabase user_study_plans table (if online, completed tasks in cloud plan)
+ * 3. Explicit currentPlan passed into function
+ * 4. Local user_progress.json / mockDb.userProgress with status 'mastered'
+ * 5. Completed tasks in study_plans.json / mockDb.studyPlans
  */
-async function getMasteredItemIds(userId) {
+async function getMasteredItemIds(userId, currentPlan = null) {
   const masteredVocabIds = new Set();
   const masteredKanjiIds = new Set();
   const masteredGrammarIds = new Set();
 
   if (!userId) {
+    if (currentPlan) {
+      extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+    }
     return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
   }
 
-  // 1. If Supabase is configured, fetch directly from Supabase DB
+  // 1. If Supabase is configured, fetch directly from Supabase user_progress DB
   if (isSupabaseConfigured()) {
     try {
       const { data, error } = await supabase
@@ -190,9 +220,29 @@ async function getMasteredItemIds(userId) {
     } catch (dbErr) {
       console.warn('[ProgressService] Supabase fetch warning, falling back to local cache:', dbErr.message);
     }
+
+    // 1b. Also check Supabase user_study_plans for completed tasks (vital when Render was cold started)
+    try {
+      const { data: sp, error: spErr } = await supabase
+        .from('user_study_plans')
+        .select('plan_data')
+        .eq('user_id', String(userId))
+        .maybeSingle();
+
+      if (!spErr && sp && sp.plan_data) {
+        extractMasteredItemsFromPlan(sp.plan_data, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+      }
+    } catch (spErr) {
+      console.warn('[ProgressService] Supabase user_study_plans fetch warning:', spErr.message);
+    }
   }
 
-  // 2. Fetch from local cache / file (covers local mock and offline)
+  // 2. Extract from explicit currentPlan if provided by caller
+  if (currentPlan) {
+    extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+  }
+
+  // 3. Fetch from local cache / file (covers local mock and offline)
   const diskProgress = loadPersistentProgress();
   const userProgress = { ...diskProgress, ...(mockDb.userProgress || {}) };
   mockDb.userProgress = userProgress;
@@ -211,28 +261,15 @@ async function getMasteredItemIds(userId) {
     }
   });
 
-  // 3. Inspect completed tasks in active study plans
+  // 4. Inspect completed tasks in active study plans from disk / RAM
   try {
     let plans = {};
     if (fs.existsSync(STUDY_PLANS_FILE)) {
       plans = JSON.parse(fs.readFileSync(STUDY_PLANS_FILE, 'utf8'));
     }
     const userPlan = plans[userId] || (mockDb.studyPlans && mockDb.studyPlans[userId]);
-    if (userPlan && Array.isArray(userPlan.days)) {
-      for (const day of userPlan.days) {
-        if (Array.isArray(day.tasks)) {
-          for (const task of day.tasks) {
-            if (task.completed && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
-              for (const id of task.itemIds) {
-                const numId = Number(id);
-                if (task.itemType === 'vocabulary') masteredVocabIds.add(numId);
-                else if (task.itemType === 'kanji') masteredKanjiIds.add(numId);
-                else if (task.itemType === 'grammar') masteredGrammarIds.add(numId);
-              }
-            }
-          }
-        }
-      }
+    if (userPlan) {
+      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
     }
   } catch (planErr) {
     console.warn('[ProgressService] Error reading completed tasks from study_plans:', planErr.message);
@@ -308,12 +345,16 @@ async function setItemProgressBatch(userId, itemType, itemIds, status) {
 }
 
 /**
- * Synchronous version of getMasteredItemIds using local cache and study plans
+ * Synchronous version of getMasteredItemIds using local cache, currentPlan, and study plans
  */
-function getMasteredItemIdsSync(userId) {
+function getMasteredItemIdsSync(userId, currentPlan = null) {
   const masteredVocabIds = new Set();
   const masteredKanjiIds = new Set();
   const masteredGrammarIds = new Set();
+
+  if (currentPlan) {
+    extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+  }
 
   if (!userId) {
     return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
@@ -343,21 +384,8 @@ function getMasteredItemIdsSync(userId) {
       plans = JSON.parse(fs.readFileSync(STUDY_PLANS_FILE, 'utf8'));
     }
     const userPlan = plans[userId] || (mockDb.studyPlans && mockDb.studyPlans[userId]);
-    if (userPlan && Array.isArray(userPlan.days)) {
-      for (const day of userPlan.days) {
-        if (Array.isArray(day.tasks)) {
-          for (const task of day.tasks) {
-            if (task.completed && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
-              for (const id of task.itemIds) {
-                const numId = Number(id);
-                if (task.itemType === 'vocabulary') masteredVocabIds.add(numId);
-                else if (task.itemType === 'kanji') masteredKanjiIds.add(numId);
-                else if (task.itemType === 'grammar') masteredGrammarIds.add(numId);
-              }
-            }
-          }
-        }
-      }
+    if (userPlan) {
+      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
     }
   } catch (e) {}
 
