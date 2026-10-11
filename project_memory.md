@@ -2162,3 +2162,58 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
     + Test 2: `generateAlgorithmicPlan` với `currentPlan` sinh 0 task Từ vựng Bài 1, giữ nguyên Kanji Bài 1 chưa học.
     + Test 3: `refineStudyPlan` khi Bài 1 hoàn thành 100% bắt đầu chính xác từ Bài 2 (`startLesson = 2`).
   - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5 (không commit/push nếu người dùng chưa yêu cầu).
+
+### Mốc 147: Rà Soát Chuyên Sâu 7 Lớp & Sửa Toàn Bộ Lỗi Chính Tả, Bảng Mã, Hira/Kata & Trùng Lặp Từ Vựng 50 Bài Minna No Nihongo (Đã hoàn thành - 11/10/2026)
+- **Rà soát chuyên sâu toàn bộ 2.099 từ vựng Minna no Nihongo qua 7 lớp phòng thủ**:
+  - Xây dựng kịch bản kiểm tra tự động [deep_exhaustive_vocab_audit.js](file:///d:/AI/japanese_learning/website/backend/scratch/deep_exhaustive_vocab_audit.js) quét 100% dữ liệu từ vựng trong [mockDb.js](file:///d:/AI/japanese_learning/website/backend/src/db/mockDb.js).
+- **Sửa toàn diện 53 lỗi từ vựng & loại bỏ 11 bản ghi trùng lặp thừa**:
+  - **Chuẩn hóa Hira / Kata**:
+    + Sửa từ mượn ngoại lai bị viết Hiragana: `といれ` -> `トイレ` (ID 109, B3).
+    + Sửa từ Hán-Nhật thuần túy bị viết Katakana: `キトク` -> `きとく` (ID 1408, B33).
+  - **Sửa 7 lỗi chính tả Katakana nghiêm trọng**:
+    + ID 1904 (B45): `ロース` -> `コース` (Romaji: `koosu`, đường chạy / course).
+    + ID 1926 (B46): `バンフレット` -> `パンフレット` (Tờ rơi / pamphlet).
+    + ID 1983 (B47): `ホルチン` -> `ホルモン` (Romaji: `horumon`, hormone).
+    + ID 961 (B22): `コートー` -> `コート` (bỏ thừa dấu trường âm của coat).
+    + ID 1784 (B42): `ミキサ` -> `ミキサー` (thêm trường âm của mixer).
+    + ID 1244 (B30): `ミーテイング` -> `ミーティング` (chữ ィ nhỏ của meeting).
+    + ID 497 (B10): `フイルム` -> `フィルム` (chữ ィ nhỏ của film).
+  - **Sửa 2 ký tự trộn bảng mã (Lookalike Kana)**:
+    + ID 1430 (B34): `シートべルト` -> `シートベルト` (thay Hiragana `べ` U+3079 bằng Katakana `ベ` U+30D9).
+    + ID 526 (B10): `ユニューや ストア` -> `ユニューヤ ストア` (thay Hiragana `や` U+3084 bằng Katakana `ヤ` U+30E4).
+  - **Sửa 14 từ bị rỗng, lẫn Latinh và lẫn chữ Hán**:
+    + ID 547 (B11): điền Hiragana bị bỏ rỗng -> `にほんに います` (Ở Nhật / nihon ni imasu).
+    + Sửa lẫn chữ Latinh: ID 90 `どうもありがとうございます`, ID 190 `にちようび`, ID 69 & 290 `シーディー`.
+    + Sửa lẫn chữ Hán trong Hiragana: ID 629 `おかえりなさい`, ID 523 `おく`, ID 525 `とうきょうディズニーランド`, ID 780 `いちばん`, ID 1110 `～ご`, ID 1872 `［どうも］おつかれさまでした`, ID 1883 `おみまい`, ID 2053 `おもちです`, ID 2062 `もうします`.
+  - **Sửa 15 từ dùng nhầm dấu trường âm `ー` cho tiền tố/hậu tố thay vì dấu sóng `～`**:
+    + Sửa: `～だんめ` (B10), `～や` (B23), `～め` (B23), `どういう～` (B33), `～ぶん` (B34), `～グラム` (B34), `でんし～` (B36), `けいたい～` (B36), `そのほうが～` (B36), `～せいき` (B36), `おおきな～` (B38), `ちいさな～` (B38), `～だい` (B39), `～センチ` (B40), `～ミリ` (B40).
+  - **Đồng bộ 9 từ lệch Romaji & thiếu tiền tố kính ngữ**:
+    + ID 328: `romaji: "meeru"`; ID 1805: `romaji: "insutantoraamen"`.
+    + Đồng bộ kính ngữ: ID 815 `［けんこう］ほけんしょう`, ID 287 `［お］さけ`, ID 310 `［お］はなみ`, ID 471 `ざんねんです［ね］`, ID 474 `［～は］ちょっと`, ID 521 `［どうも］すみません`, ID 783 `［いいえ、］まだまだです`.
+  - **Loại bỏ 11 bản ghi trùng lặp thừa**:
+    + Loại bỏ 4 từ Hiragana trùng với Katakana: ID 326 `ぱそこん`, ID 693 `えあこん`, ID 729 `かたろぐ`, ID 733 `そふと`.
+    + Loại bỏ 7 từ trùng lặp 100%: ID 697 `まがります`, ID 1280 `はじまります`, ID 1281 `うけます`, ID 1319 `しっぱいします`, ID 1320 `ごうかくします`, ID 1625 `やけます`, ID 2027 `ごらんになります`.
+    + Tổng từ vựng tinh gọn từ 2.099 xuống 2.088 từ sạch đẹp 100%.
+- **Kiểm định & Xác thực**:
+  - Chạy lại kịch bản kiểm tra 7 lớp `deep_exhaustive_vocab_audit.js`: Đạt 0 lỗi thiếu, 0 lỗi Latinh, 0 lỗi chữ Hán trong Hiragana, 0 lỗi nhầm Hira/Kata, 0 lỗi bảng mã lookalike, 0 lỗi dấu trường âm, 0 lỗi chính tả Katakana, 0 lỗi lệch Romaji.
+  - `node --check` toàn bộ backend: 100% PASS (0 lỗi cú pháp).
+  - `npx tsc --noEmit` toàn bộ Frontend Next.js: 100% PASS (0 lỗi TypeScript).
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5: Đã thực hiện commit (`3a94b58`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 148: Khắc Phục Triệt Để Lỗi Silent Cold-Start Plan Reset Đẩy Bài Nợ Vào Hôm Nay & Chống Double-Counting Bài Nợ Đã Replan (Đã hoàn thành - 11/10/2026)
+- **Khắc phục lỗi Silent Cold-Start Plan Reset trên Backend ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))**:
+  - Xóa bỏ triệt để đoạn code tự động sinh kế hoạch mới toanh (`generateAlgorithmicPlan({ startDate: today })`) tại các route đọc dữ liệu `GET /api/user/study-plan` và `GET /api/user/daily-history`.
+  - Ngăn chặn hoàn toàn việc server tự ý reset ngày bắt đầu kế hoạch về Hôm nay khi Render bị ngủ đông (cold-start), bảo tồn 100% các ngày trong quá khứ và danh sách bài nợ gốc.
+  - Nâng cấp `getUserPlanAsync`: Bổ sung cơ chế thử lại (retry 2 lần kèm delay 200ms) khi nạp `user_study_plans` từ Supabase để chống nghẽn mạng lúc khởi động nguội.
+- **Bảo vệ và Tự Phục Hồi Cache Phía Frontend ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))**:
+  - Triển khai cơ chế Self-Healing Cache: Nếu server trả về `plan: null` (hoặc `requiresClientRestore: true`), Frontend tự động khôi phục kế hoạch từ `localStorage.getItem('nihongo_cached_study_plan')` và gửi đồng bộ ngược lại lên server qua `POST /api/user/study-plan`.
+  - Thêm lớp phòng vệ từ chối: Nếu server trả về bản plan có `startDate` bị nhảy cóc về hôm nay trong khi cache của client có `startDate` hợp lệ từ quá khứ và người dùng không yêu cầu Replan, Frontend từ chối ghi đè và tự động đồng bộ lại bản plan gốc lên máy chủ.
+- **Chống Double-Counting Bài Nợ Trong `getUnfinishedDebt` ([aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js))**:
+  - Thêm logic kiểm tra `futureScheduledCount`: Đối chiếu các nhiệm vụ nợ trong quá khứ với các nhiệm vụ đã được xếp lịch từ hôm nay trở đi (`plan.days.filter(d => d.date >= todayStr)`).
+  - Khi người dùng chủ động bấm Replan, các bài nợ đã được chuyển giao vào lịch hôm nay hoặc tương lai sẽ tự động được khấu trừ sạch khỏi khối "Bài Tập Còn Nợ", không còn tình trạng mâu thuẫn 1 bài vừa báo nợ vừa giao làm hôm nay.
+  - Khi người dùng KHÔNG bấm Replan, bài nợ từ 2 ngày trước (như Kanji Bài 2) được giữ nguyên 100% trong khối Bài Nợ, không bị nhảy sang hôm nay.
+- **Kiểm định & Xác thực**:
+  - `node --check` toàn bộ file Backend: 100% PASS (0 lỗi cú pháp).
+  - Script unit test `test_debt_fix.js`: 100% PASS (Kiểm chứng thành công: Test 1 giữ nguyên Kanji Bài 2 trong nợ khi không Replan; Test 2 loại bỏ nợ sau khi Replan hợp lệ).
+  - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5.

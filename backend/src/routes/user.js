@@ -93,20 +93,25 @@ async function getUserPlanAsync(userId) {
     return inMemory;
   }
   if (isSupabaseConfigured()) {
-    try {
-      const { data: sp, error: spErr } = await supabase
-        .from('user_study_plans')
-        .select('plan_data')
-        .eq('user_id', String(userId))
-        .maybeSingle();
-      if (!spErr && sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
-        if (!mockDb.studyPlans) mockDb.studyPlans = {};
-        mockDb.studyPlans[userId] = sp.plan_data;
-        savePersistentPlans(mockDb.studyPlans);
-        return sp.plan_data;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const { data: sp, error: spErr } = await supabase
+          .from('user_study_plans')
+          .select('plan_data')
+          .eq('user_id', String(userId))
+          .maybeSingle();
+        if (!spErr && sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
+          if (!mockDb.studyPlans) mockDb.studyPlans = {};
+          mockDb.studyPlans[userId] = sp.plan_data;
+          savePersistentPlans(mockDb.studyPlans);
+          return sp.plan_data;
+        }
+        if (attempt === 0) {
+          await new Promise(r => setTimeout(r, 200));
+        }
+      } catch (e) {
+        console.warn(`[StudyPlan] Error fetching user_study_plans in getUserPlanAsync (attempt ${attempt + 1}):`, e.message);
       }
-    } catch (e) {
-      console.warn('[StudyPlan] Error fetching user_study_plans in getUserPlanAsync:', e.message);
     }
   }
   return inMemory || null;
@@ -2602,47 +2607,12 @@ router.get('/study-plan', async (req, res) => {
         console.warn('[StudyPlan] Could not restore from Supabase user_study_plans:', e.message);
       }
 
-      if (!plan) {
-        try {
-          const { data: tp } = await supabase
-            .from('target_plans')
-            .select('start_date, end_date')
-            .eq('user_id', userId)
-            .maybeSingle();
-          if (tp && tp.start_date && tp.end_date) {
-            const masteredItemIds = await progressService.getMasteredItemIds(userId);
-            plan = aiPlannerService.generateAlgorithmicPlan({
-              startDate: tp.start_date,
-              endDate: tp.end_date,
-              targetLevel: 'All',
-              userId,
-              masteredItemIds
-            });
-            mockDb.studyPlans[userId] = plan;
-            savePersistentPlans(mockDb.studyPlans);
-            await persistPlanToSupabase(userId, plan);
-          }
-        } catch (e) {
-          console.warn('[StudyPlan] Could not restore from Supabase target_plans:', e.message);
-        }
       }
-    }
 
-    // Only generate a default initial plan if user has NO plan at all (first-time visitor)
+    // Do NOT silently auto-generate a new plan starting today.
+    // If user has no plan or cold-start cleared it, return plan: null so client can restore its cached plan or prompt user.
     if (!plan || !plan.days || plan.days.length === 0) {
-      const startDate = getVietnamDateStr();
-      const defaultEnd = addVietnamDays(startDate, 30);
-      const masteredItemIds = await progressService.getMasteredItemIds(userId);
-      plan = aiPlannerService.generateAlgorithmicPlan({
-        startDate: startDate,
-        endDate: defaultEnd,
-        targetLevel: 'All',
-        userId,
-        masteredItemIds
-      });
-      mockDb.studyPlans[userId] = plan;
-      savePersistentPlans(mockDb.studyPlans);
-      await persistPlanToSupabase(userId, plan);
+      return res.json({ success: true, plan: null, requiresClientRestore: true });
     }
 
     // Synchronize Supabase user_progress before auto-tracking
@@ -3163,23 +3133,8 @@ router.get('/daily-history', async (req, res) => {
     await progressService.syncUserProgressFromSupabase(userId);
     let plan = await getUserPlanAsync(userId);
 
-    // Only generate a default initial plan if user has NO plan at all (first-time visitor)
     if (!plan || !plan.days || plan.days.length === 0) {
-      const today = new Date();
-      const defaultEnd = new Date(today);
-      defaultEnd.setDate(today.getDate() + 30);
-      const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      const masteredItemIds = await progressService.getMasteredItemIds(userId);
-      plan = aiPlannerService.generateAlgorithmicPlan({
-        startDate: fmt(today),
-        endDate: fmt(defaultEnd),
-        targetLevel: 'All',
-        userId,
-        masteredItemIds
-      });
-      mockDb.studyPlans[userId] = plan;
-      savePersistentPlans(mockDb.studyPlans);
-      await persistPlanToSupabase(userId, plan);
+      return res.json({ success: true, history: [] });
     }
 
     plan = applyAutoTracking(plan, userId);

@@ -823,6 +823,27 @@ function getUnfinishedDebt({ userId, plan }) {
       continue;
     }
 
+    // Check how many items of this (itemType, lesson) have already been officially rescheduled into active plan days (date >= todayStr)
+    const futureScheduledCount = (plan.days || [])
+      .filter(d => d.date >= todayStr)
+      .reduce((sum, d) => {
+        const matchingTasks = (d.tasks || []).filter(t => {
+          const l = t.lesson || t.lesson_id || 1;
+          if (itemType === 'cumulative_review') return t.itemType === 'cumulative_review';
+          return t.itemType === itemType && l === lesson;
+        });
+        return sum + matchingTasks.reduce((s, t) => s + (t.targetCount || 1), 0);
+      }, 0);
+
+    // If future/today tasks already cover the remaining workload for this group (e.g. after Replan), do not double-count as past debt
+    if (futureScheduledCount >= (totalTargetCount - actualMasteredCount) && (totalTargetCount - actualMasteredCount) > 0) {
+      tasks.forEach(t => {
+        t.completed = true;
+        t.rescheduled = true;
+      });
+      continue;
+    }
+
     // Otherwise, mark partially satisfied subtasks completed based on running count
     let remainingBudget = actualMasteredCount;
     for (const t of tasks) {

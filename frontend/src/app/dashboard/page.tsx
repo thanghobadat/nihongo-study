@@ -210,23 +210,57 @@ export default function UserDashboard() {
         }
       }
 
-      if (planRes && planRes.success && planRes.plan) {
-        setStudyPlan(planRes.plan);
-        if (typeof window !== 'undefined') {
+      if (planRes && planRes.success && planRes.plan && Array.isArray(planRes.plan.days) && planRes.plan.days.length > 0) {
+        // Guard against accidental server reset starting from today if client had a genuine earlier plan
+        const cachedStr = typeof window !== 'undefined' ? localStorage.getItem('nihongo_cached_study_plan') : null;
+        let shouldAcceptServerPlan = true;
+        if (cachedStr) {
           try {
-            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(planRes.plan));
+            const cachedPlan = JSON.parse(cachedStr);
+            if (cachedPlan && cachedPlan.startDate && planRes.plan.startDate) {
+              if (cachedPlan.startDate < todayStr && planRes.plan.startDate === todayStr && !cachedPlan.replanCount && !planRes.plan.replanCount) {
+                shouldAcceptServerPlan = false;
+                setStudyPlan(cachedPlan);
+                api.post('/api/user/study-plan', { plan: cachedPlan }).catch(() => {});
+              }
+            }
           } catch (e) {}
         }
-        if (planRes.plan.startDate) setStartDateStr(planRes.plan.startDate);
-        if (planRes.plan.endDate) setEndDateStr(planRes.plan.endDate);
-        if (typeof planRes.plan.replanCount === 'number') {
-          setReplanCount(prev => Math.max(prev, planRes.plan.replanCount));
+
+        if (shouldAcceptServerPlan) {
+          setStudyPlan(planRes.plan);
           if (typeof window !== 'undefined') {
-            const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
-            if (planRes.plan.replanCount > cur) {
-              localStorage.setItem('nihongo_replan_count', String(planRes.plan.replanCount));
+            try {
+              localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(planRes.plan));
+            } catch (e) {}
+          }
+          if (planRes.plan.startDate) setStartDateStr(planRes.plan.startDate);
+          if (planRes.plan.endDate) setEndDateStr(planRes.plan.endDate);
+          if (typeof planRes.plan.replanCount === 'number') {
+            setReplanCount(prev => Math.max(prev, planRes.plan.replanCount));
+            if (typeof window !== 'undefined') {
+              const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
+              if (planRes.plan.replanCount > cur) {
+                localStorage.setItem('nihongo_replan_count', String(planRes.plan.replanCount));
+              }
             }
           }
+        }
+      } else if (!planRes?.plan || planRes?.requiresClientRestore) {
+        // Server has no plan (e.g. cold start). Restore from client cache if available!
+        if (typeof window !== 'undefined') {
+          try {
+            const cachedStr = localStorage.getItem('nihongo_cached_study_plan');
+            if (cachedStr) {
+              const cachedPlan = JSON.parse(cachedStr);
+              if (cachedPlan && Array.isArray(cachedPlan.days) && cachedPlan.days.length > 0) {
+                setStudyPlan(cachedPlan);
+                if (cachedPlan.startDate) setStartDateStr(cachedPlan.startDate);
+                if (cachedPlan.endDate) setEndDateStr(cachedPlan.endDate);
+                api.post('/api/user/study-plan', { plan: cachedPlan }).catch(() => {});
+              }
+            }
+          } catch (e) {}
         }
       }
 
