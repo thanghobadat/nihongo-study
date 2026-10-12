@@ -311,17 +311,25 @@ function validateSequence(tasks) {
  */
 function isLessonCategoryCompletedInPlan(plan, lessonId, itemType) {
   if (!plan) return false;
+  const mockDb = require('../db/mockDb');
+  let totalInLesson = 0;
+  if (itemType === 'vocabulary') totalInLesson = (mockDb.vocabulary || []).filter(v => v.lesson_id === lessonId).length;
+  else if (itemType === 'kanji') totalInLesson = (mockDb.kanji || []).filter(k => k.lesson_id === lessonId).length;
+  else if (itemType === 'grammar') totalInLesson = (mockDb.grammar || []).filter(g => g.lesson_id === lessonId).length;
+  if (totalInLesson === 0) return true;
+
   const allDays = [...(plan.days || []), ...(plan.archivedPastDays || [])];
-  const matchingTasks = [];
+  let completedTargetCount = 0;
   for (const day of allDays) {
     if (!day || !Array.isArray(day.tasks)) continue;
     for (const t of day.tasks) {
-      if (t.lesson === lessonId && t.itemType === itemType) {
-        matchingTasks.push(t);
+      const tLesson = t.lesson || t.lesson_id;
+      if (tLesson === lessonId && t.itemType === itemType && t.completed && !t.rescheduled) {
+        completedTargetCount += (t.targetCount || 0);
       }
     }
   }
-  return matchingTasks.length > 0 && matchingTasks.every(t => t.completed);
+  return completedTargetCount >= totalInLesson;
 }
 
 /**
@@ -925,27 +933,13 @@ function getCompletedLessons({ userId, currentPlan, currentProgress, masteredIte
     }
   }
 
-  // 2. From currentPlan if passed: check if all tasks of lesson l are completed
+  // 2. From currentPlan if passed: check if all 3 categories (vocab, kanji, grammar) are completed
   if (currentPlan) {
-    const allDays = [...(currentPlan.days || []), ...(currentPlan.archivedPastDays || [])];
-    const lessonTaskStatus = {};
-    for (const d of allDays) {
-      if (!d || !Array.isArray(d.tasks)) continue;
-      for (const t of d.tasks) {
-        if (t.lesson && t.lesson >= 1 && t.lesson <= 50) {
-          if (!lessonTaskStatus[t.lesson]) {
-            lessonTaskStatus[t.lesson] = { total: 0, completed: 0 };
-          }
-          lessonTaskStatus[t.lesson].total += 1;
-          if (t.completed) {
-            lessonTaskStatus[t.lesson].completed += 1;
-          }
-        }
-      }
-    }
-    for (const [lStr, stats] of Object.entries(lessonTaskStatus)) {
-      const l = parseInt(lStr, 10);
-      if (stats.total > 0 && stats.completed === stats.total) {
+    for (let l = 1; l <= 50; l++) {
+      const vDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'vocabulary');
+      const kDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'kanji');
+      const gDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'grammar');
+      if (vDone && kDone && gDone) {
         completed.add(l);
       }
     }

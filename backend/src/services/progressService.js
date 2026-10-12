@@ -162,7 +162,7 @@ function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, 
   for (const day of allDays) {
     if (Array.isArray(day.tasks)) {
       for (const task of day.tasks) {
-        if (task.completed && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
+        if (task.completed && !task.rescheduled && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
           for (const id of task.itemIds) {
             const numId = Number(id);
             if (task.itemType === 'vocabulary') masteredVocabIds.add(numId);

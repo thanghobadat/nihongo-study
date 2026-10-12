@@ -686,7 +686,7 @@ router.post('/kanji-recognition-quiz', async (req, res) => {
 
     const diskCache = getRecognitionQuizDiskCache();
     const charSig = kanjis.map(k => k.character || '').sort().join('');
-    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v5`;
+    const cacheKey = `lesson_${lessonId}_quiz_${charSig || 'all'}_v6`;
 
     // 1. Check permanent disk cache (only if not forceRefresh)
     if (!forceRefresh && diskCache[cacheKey] && Array.isArray(diskCache[cacheKey].questions) && diskCache[cacheKey].questions.length > 0) {
@@ -709,11 +709,23 @@ router.post('/kanji-recognition-quiz', async (req, res) => {
       });
     }
 
-    // Collect all learned Kanji up to current lesson to strictly restrict out-of-scope Kanji
+    // Collect all learned/mastered Kanji up to current lesson to strictly restrict out-of-scope Kanji
     let allowedKanjiList = [];
     if (mockDb && Array.isArray(mockDb.kanji)) {
-      allowedKanjiList = mockDb.kanji
-        .filter(k => k && Number(k.lesson_id) <= Number(lessonId))
+      const candidateKanjis = mockDb.kanji.filter(k => k && Number(k.lesson_id) <= Number(lessonId));
+      let persistentProgress = {};
+      try {
+        if (progressService?.loadPersistentProgress) persistentProgress = progressService.loadPersistentProgress();
+      } catch (e) {}
+
+      allowedKanjiList = candidateKanjis
+        .filter(k => {
+          if (Number(k.lesson_id) === Number(lessonId)) return true;
+          const pKey = `${userId}:kanji:${k.id}`;
+          const status = mockDb.userProgress?.[pKey] || persistentProgress?.[pKey];
+          if (!status) return true; // default include previous lessons
+          return status === 'learning' || status === 'mastered';
+        })
         .map(k => k.character);
     }
 

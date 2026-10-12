@@ -340,7 +340,7 @@
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
         "plannedCount": 3,
-        "completedCount": 0,
+        "completedCount": 1,
         "workloadPoints": 18,
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 18 từ vựng của Bài 1 (18 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "totalEstimatedMinutes": 168,
@@ -373,17 +373,19 @@
             "title": "Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài 1",
             "scopeDetails": "Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài 1 (30 phút)",
             "targetCount": 1,
-            "currentCount": 0,
+            "currentCount": 1,
             "workloadPoints": 0,
             "estimatedMinutes": 30,
             "link": "/knowledge?tab=review",
-            "completed": false,
+            "completed": true,
             "lesson_id": 1,
             "id": "task_2026-09-27_cumulative_review_L1_p1",
             "date": "2026-09-27",
             "due_time": "18:30",
             "step": 2,
-            "progressPct": 0
+            "progressPct": 100,
+            "rescheduled": true,
+            "completed_at": "✓ Tự động ghi nhận"
           },
           {
             "lesson": 2,
@@ -426,7 +428,7 @@
             "progressPct": 0
           }
         ],
-        "completionRate": 0
+        "completionRate": 33
       },
       {
         "date": "2026-09-28",
@@ -665,7 +667,7 @@
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
         "plannedCount": 3,
-        "completedCount": 0,
+        "completedCount": 1,
         "workloadPoints": 18,
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 18 từ vựng của Bài 2 (18 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "totalEstimatedMinutes": 168,
@@ -698,17 +700,19 @@
             "title": "Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài 2",
             "scopeDetails": "Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài 2 (30 phút)",
             "targetCount": 1,
-            "currentCount": 0,
+            "currentCount": 1,
             "workloadPoints": 0,
             "estimatedMinutes": 30,
             "link": "/knowledge?tab=review",
-            "completed": false,
+            "completed": true,
             "lesson_id": 2,
             "id": "task_2026-10-01_cumulative_review_L2_p1",
             "date": "2026-10-01",
             "due_time": "18:30",
             "step": 2,
-            "progressPct": 0
+            "progressPct": 100,
+            "rescheduled": true,
+            "completed_at": "✓ Tự động ghi nhận"
           },
           {
             "lesson": 3,
@@ -751,7 +755,7 @@
             "progressPct": 0
           }
         ],
-        "completionRate": 0
+        "completionRate": 33
       },
       {
         "date": "2026-10-02",
@@ -918,7 +922,7 @@
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
         "plannedCount": 3,
-        "completedCount": 0,
+        "completedCount": 1,
         "workloadPoints": 21,
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 3 gồm 0 từ vựng, 0 chữ Hán và 7 mẫu câu (21 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "totalEstimatedMinutes": 186,
@@ -980,20 +984,22 @@
             "title": "Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài 3",
             "scopeDetails": "Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài 3 (30 phút)",
             "targetCount": 1,
-            "currentCount": 0,
+            "currentCount": 1,
             "workloadPoints": 0,
             "estimatedMinutes": 30,
             "link": "/knowledge?tab=review",
-            "completed": false,
+            "completed": true,
             "lesson_id": 3,
             "id": "task_2026-10-04_cumulative_review_L3_p1",
             "date": "2026-10-04",
             "due_time": "19:00",
             "step": 3,
-            "progressPct": 0
+            "progressPct": 100,
+            "rescheduled": true,
+            "completed_at": "✓ Tự động ghi nhận"
           }
         ],
-        "completionRate": 0
+        "completionRate": 33
       },
       {
         "date": "2026-10-05",
@@ -1257,7 +1263,7 @@
         "isDedicatedPracticeDay": false,
         "isBufferDay": false,
         "plannedCount": 4,
-        "completedCount": 0,
+        "completedCount": 1,
         "workloadPoints": 36,
         "dayRationale": "Hôm nay theo lộ trình tăng tốc hoàn thành 50 bài, bạn hoàn thành các bài Bài 4 & Bài 5 (36 điểm tải). Mỗi bài sau phần ngữ pháp đều tích hợp 2 bài ôn tập thực hành (4 dạng bài tập và ôn tích lũy) để củng cố phản xạ vững vàng.",
         "totalEstimatedMinutes": 276,
@@ -1318,17 +1324,19 @@
             "title": "Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài 4",
             "scopeDetails": "Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài 4 (30 phút)",
             "targetCount": 1,
-            "currentCount": 0,
+            "currentCount": 1,
             "workloadPoints": 0,
             "estimatedMinutes": 30,
             "link": "/knowledge?tab=review",
-            "completed": false,
+            "completed": true,
             "lesson_id": 4,
             "id": "task_2026-10-08_cumulative_review_L4_p1",
             "date": "2026-10-08",
             "due_time": "19:00",
             "step": 3,
-            "progressPct": 0
+            "progressPct": 100,
+            "rescheduled": true,
+            "completed_at": "✓ Tự động ghi nhận"
           },
           {
             "lesson": 5,
@@ -1371,7 +1379,7 @@
             "progressPct": 0
           }
         ],
-        "completionRate": 0
+        "completionRate": 25
       },
       {
         "date": "2026-10-09",
@@ -1636,7 +1644,8 @@
             "date": "2026-10-12",
             "due_time": "17:00",
             "step": 1,
-            "progressPct": 0
+            "progressPct": 0,
+            "overdueNotified": true
           },
           {
             "lesson": 5,
@@ -1656,7 +1665,8 @@
             "date": "2026-10-12",
             "due_time": "18:30",
             "step": 2,
-            "progressPct": 0
+            "progressPct": 0,
+            "overdueNotified": true
           },
           {
             "lesson": 6,
@@ -1696,10 +1706,12 @@
             "date": "2026-10-12",
             "due_time": "19:00",
             "step": 3,
-            "progressPct": 0
+            "progressPct": 0,
+            "overdueNotified": true
           }
         ],
-        "completionRate": 0
+        "completionRate": 0,
+        "streakAlertNotified": true
       },
       {
         "date": "2026-10-13",

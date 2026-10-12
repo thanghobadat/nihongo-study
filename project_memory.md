@@ -2280,3 +2280,44 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Tích hợp trực tiếp chế độ Speedrun 10 giây dành riêng cho Hán tự với 3 chiều lựa chọn, hiển thị streak, sound effects, visual feedback và lưu High score vào localStorage.
 - **Kiểm định & Xác thực**:
   - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).
+
+### Mốc 152: Khắc Phục Triệt Để Lỗi Replan Bỏ Sót Từ Vựng Chưa Học Hết (Bài 3) Do Ngộ Nhận Hoàn Thành Bài Học (Đã hoàn thành - 12/10/2026)
+- **Nguyên nhân gốc rễ**:
+  1. *Hàm `isLessonCategoryCompletedInPlan` ([aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js))*: Trước đây chỉ kiểm tra nếu các task của phân hệ trong plan đều xong (`matchingTasks.every(t => t.completed)`). Nếu từ vựng của bài được chia nhỏ (chunk) hoặc kế hoạch cũ chỉ có 1 task từ vựng đã xong, hàm ngộ nhận toàn bộ phân hệ đã hoàn thành và tự động nạp 100% từ vựng của bài vào `masteredVocabIds`, khiến số từ vựng còn lại (ví dụ 13 từ chưa học của Bài 3) bị lọc bỏ hoàn toàn.
+  2. *Hàm `getCompletedLessons` ([aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js))*: Bước 2 kiểm tra tỷ lệ task thô sơ (`stats.completed === stats.total`), khiến bài học mới chỉ có 1 task từ vựng xong cũng bị coi là xong 100% cả bài $\rightarrow$ `startLesson` nhảy cóc sang Bài 4, bỏ qua toàn bộ Bài 3.
+  3. *Hàm `extractMasteredItemsFromPlan` ([progressService.js](file:///d:/AI/japanese_learning/website/backend/src/services/progressService.js))*: Không kiểm tra cờ `!task.rescheduled`, trích xuất nhầm cả các task nợ bị dời lịch vào danh sách đã học.
+- **Giải pháp triển khai**:
+  - *Backend `aiPlannerService.js`*:
+    + Nâng cấp `isLessonCategoryCompletedInPlan`: Lấy tổng số lượng item thực tế của bài trong `mockDb` (`totalInLesson`). Tính tổng `targetCount` của các task đã hoàn thành thực sự (`t.completed && !t.rescheduled`). Chỉ trả về `true` khi `completedTargetCount >= totalInLesson`.
+    + Nâng cấp `getCompletedLessons`: Chỉ đưa bài học vào danh sách `completed` khi cả 3 phân hệ Từ vựng, Kanji, Ngữ pháp đều đạt 100% qua `isLessonCategoryCompletedInPlan`.
+  - *Backend `progressService.js`*:
+    + Cập nhật `extractMasteredItemsFromPlan`: Thêm điều kiện `!task.rescheduled` để bỏ qua các task nợ dời lịch.
+- **Kiểm định & Xác thực**:
+  - Chạy kịch bản kiểm thử độc lập `verify_lesson3_vocab_replan.js`: 100% PASS cả 5 ca kiểm thử (Bài 3 thuộc 32/45 từ $\rightarrow$ `isLessonCategoryCompletedInPlan` trả về `false`, không đưa vào `completedLessons`, sinh chính xác task học 13 từ còn lại với `targetCount: 13`; các bài 1 & 2 đã thuộc 100% vẫn được bỏ qua đúng chuẩn).
+  - Cú pháp Backend: `node --check` 4 file đạt 100% PASS (0 lỗi).
+  - Frontend: `npx tsc --noEmit` đạt 100% PASS (0 lỗi TypeScript).
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5.
+
+### Mốc 153: Nâng Cấp Toàn Diện Tính Năng Nhận Diện Chữ Hán - Triệt Tiêu Kanji Lạ, Thêm Câu Dịch Tiếng Việt Chuẩn Xác, Điền Khuyết Từ Ghép & Đồng Nhất Phương Án (Đã hoàn thành - 12/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  1. *Xuất hiện chữ Kanji lạ ngoài bài học*: Trong câu ví dụ `【 ? 】の上に本があります。`, chữ `上` (Thượng) chưa học đã xuất hiện dưới dạng Kanji, trong khi các phương án lại chứa những chữ Hán phức tạp như `傘` (kasa - 12 nét) hay `鍵` (kagi - 17 nét) gây choáng ngợp.
+  2. *Mập mờ nhiều đáp án đều đúng*: Câu `【 ? 】の上に本があります。` nếu không có câu dịch tiếng Việt thì chọn `机` (bàn) hay `新聞` (báo) đều đúng ngữ pháp và đời sống. Huy hiệu gợi ý `💡 Gợi ý nghĩa từ cần hoàn thành: bàn` nằm riêng lẻ, thiếu tự nhiên.
+  3. *Phương án lựa chọn cọc cạch*: Câu hỏi chữ đơn (`机`) lại chứa phương án từ ghép 2 chữ (`新聞`) lẫn với chữ đơn (`聞`, `辞`). Với từ ghép như `新聞`, người học yêu cầu cho sẵn 1 chữ Hán và chỉ hỏi chữ còn lại (`新【 ? 】`).
+- **Giải pháp triển khai**:
+  - **Triệt tiêu 100% chữ Kanji lạ (Kanji Purification)**:
+    + Cập nhật [kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts) và [aiGradingService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiGradingService.js): Xây dựng bộ từ điển chuyển đổi `COMMON_KANJI_TO_HIRAGANA_FRONTEND` và `SINGLE_KANJI_FALLBACK_FRONTEND`.
+    + Bất kỳ chữ Hán nào không nằm trong danh sách `allowedSet` (chỉ gồm các chữ Hán ở trạng thái `learning` hoặc `mastered` từ Bài 1 đến bài học hiện tại) đều được tự động chuyển 100% sang Hiragana (ví dụ: `【 ? 】のうえに本があります。`, `まいにち 新【 ? 】をよみます。`).
+  - **Bổ sung câu dịch Tiếng Việt hoàn chỉnh & Xóa bỏ ô gợi ý rời rạc**:
+    + Cập nhật [KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx): Gỡ bỏ ô huy hiệu gợi ý rời rạc, hiển thị trực tiếp câu dịch nghĩa tiếng Việt chuẩn xác `🇻🇳 「Có quyển sách ở trên bàn.」` hoặc `🇻🇳 「Mỗi ngày tôi đều đọc báo.」` ngay trên câu tiếng Nhật để ngữ cảnh rõ ràng 100%.
+  - **Điền khuyết từ ghép (Jukugo Partial Fill) & Đồng nhất độ dài phương án**:
+    + Với từ ghép (như `新聞`, `辞書`, `時計`): Cho sẵn 1 chữ Hán và để khuyết 1 chữ Hán (`新【 ? 】` hoặc `【 ? 】聞`), 4 options là 4 chữ Hán đơn lẻ `[聞, 書, 誌, 計]`.
+    + Đồng nhất độ dài phương án: Câu hỏi chữ đơn (`机`) có 4 options đều là chữ đơn `[机, 車, 本, 傘]`, tuyệt đối không pha trộn từ 2 chữ như `新聞`.
+  - **Khắc phục đường dẫn gọi API Backend**:
+    + Cập nhật `getBaseUrl()` trong [kanjiPracticeHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiPracticeHelper.ts) cho `fetchKanjiRecognitionQuestions` và `fetchKanjiWritingRiddles` để kết nối trực tiếp cổng 8080 (khắc phục lỗi 404 do Next.js không có rewrite).
+    + Nâng `cacheKey` lên `_v6` trong [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js) để hủy cache cũ.
+- **Kiểm định & Xác thực**:
+  - Chạy unit test kiểm tra `sanitizeRecognitionQuizQuestions`: 100% PASS (chữ `上` chuyển thành `うえ`, chữ `読` chuyển thành `よ`, 4 options 100% đồng nhất độ dài).
+  - Cú pháp Backend: `node --check` 2 file đạt 100% PASS (0 lỗi).
+  - Frontend TypeScript: `npx tsc --noEmit` đạt 100% PASS (0 lỗi).
+  - Backend daemon chạy sẵn sàng trên cổng 8080.
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5.

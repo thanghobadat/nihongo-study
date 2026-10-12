@@ -1,4 +1,5 @@
 // website/frontend/src/app/utils/kanjiPracticeHelper.ts
+import { getBaseUrl } from './api';
 
 export interface KanjiItemData {
   id: number;
@@ -480,7 +481,7 @@ export async function fetchKanjiWritingRiddles(
       if (attempt > 0) {
         await new Promise(r => setTimeout(r, 800));
       }
-      const res = await fetch('/api/ai/kanji-writing-riddles', {
+      const res = await fetch(`${getBaseUrl()}/api/ai/kanji-writing-riddles`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ lessonId, kanjis, vocabItems, forceRefresh })
@@ -516,19 +517,125 @@ export interface KanjiRecognitionQuizQuestion {
   explanation: string;
 }
 
+const COMMON_KANJI_TO_HIRAGANA_FRONTEND: Array<{ kanji: string; hiragana: string }> = [
+  { kanji: '月曜日', hiragana: 'げつようび' },
+  { kanji: '火曜日', hiragana: 'かようび' },
+  { kanji: '水曜日', hiragana: 'すいようび' },
+  { kanji: '木曜日', hiragana: 'もくようび' },
+  { kanji: '金曜日', hiragana: 'きんようび' },
+  { kanji: '土曜日', hiragana: 'どようび' },
+  { kanji: '日曜日', hiragana: 'にちようび' },
+  { kanji: '時計', hiragana: 'とけい' },
+  { kanji: '自動車', hiragana: 'じどうしゃ' },
+  { kanji: '車', hiragana: 'くるま' },
+  { kanji: '自転車', hiragana: 'じてんしゃ' },
+  { kanji: '電車', hiragana: 'でんしゃ' },
+  { kanji: '地下鉄', hiragana: 'ちかてつ' },
+  { kanji: '新幹線', hiragana: 'しんかんせん' },
+  { kanji: '飛行機', hiragana: 'ひこうき' },
+  { kanji: '船', hiragana: 'ふね' },
+  { kanji: '本', hiragana: 'ほん' },
+  { kanji: '辞書', hiragana: 'じしょ' },
+  { kanji: '雑誌', hiragana: 'ざっし' },
+  { kanji: '新聞', hiragana: 'しんぶん' },
+  { kanji: '手帳', hiragana: 'てちょう' },
+  { kanji: '名刺', hiragana: 'めいし' },
+  { kanji: '鉛筆', hiragana: 'えんぴつ' },
+  { kanji: '机', hiragana: 'つくえ' },
+  { kanji: '椅子', hiragana: 'いす' },
+  { kanji: '傘', hiragana: 'かさ' },
+  { kanji: '鍵', hiragana: 'かぎ' },
+  { kanji: '鞄', hiragana: 'かばん' },
+  { kanji: '手紙', hiragana: 'てがみ' },
+  { kanji: '写真', hiragana: 'しゃしん' },
+  { kanji: '切手', hiragana: 'きって' },
+  { kanji: '切符', hiragana: 'きっぷ' },
+  { kanji: '荷物', hiragana: 'にもつ' },
+  { kanji: 'お金', hiragana: 'おかね' },
+  { kanji: '勉強', hiragana: 'べんきょう' },
+  { kanji: '名前', hiragana: 'なまえ' },
+  { kanji: '電話', hiragana: 'でんわ' },
+  { kanji: '教室', hiragana: 'きょうしつ' },
+  { kanji: '食堂', hiragana: 'しょくどう' },
+  { kanji: '会社', hiragana: 'かいしゃ' },
+  { kanji: '部屋', hiragana: 'へや' },
+  { kanji: '階段', hiragana: 'かいだん' },
+  { kanji: '大学', hiragana: 'だいがく' },
+  { kanji: '病院', hiragana: 'びょういん' },
+  { kanji: '毎日', hiragana: 'まいにち' }
+];
+
+const SINGLE_KANJI_FALLBACK_FRONTEND: Record<string, string> = {
+  '正': 'ただ', '言': 'こと', '葉': 'ば', '読': 'よ', '書': 'か', '買': 'か',
+  '行': 'い', '来': 'き', '帰': 'かえ', '食': 'た', '飲': 'の', '見': 'み',
+  '聞': 'き', '入': 'はい', '出': 'で', '会': 'あ', '話': 'はな', '名': 'な',
+  '前': 'まえ', '後': 'うしろ', '上': 'うえ', '下': 'した', '中': 'なか',
+  '大': 'だい', '小': 'しょう', '校': 'こう', '誰': 'だれ', '何': 'なに',
+  '時': 'じ', '分': 'ふん', '方': 'かた', '車': 'くるま', '友': 'とも',
+  '達': 'だち', '病': 'びょう', '院': 'いん', '銀': 'ぎん', '医': 'い',
+  '者': 'しゃ', '研': 'けん', '究': 'きゅう', '物': 'もの', '手': 'て',
+  '紙': 'がみ', '電': 'でん', '語': 'ご', '漢': 'かん', '字': 'じ',
+  '男': 'おとこ', '女': 'おんな', '子': 'こ', '父': 'ちち', '母': 'はは',
+  '高': 'たか', '白': 'しろ', '面': 'めん', '安': 'やす', '新': 'あたら',
+  '古': 'ふる', '長': 'なが', '短': 'みじか', '早': 'はや', '多': 'おお',
+  '少': 'すく', '近': 'ちか', '遠': 'とお', '明': 'あか', '暗': 'くら',
+  '傘': 'かさ', '鍵': 'かぎ', '机': 'つくえ', '本': 'ほん', '辞': 'じ',
+  '雑': 'ざつ', '誌': 'し', '計': 'けい', '年': 'ねん', '月': 'つき',
+  '日': 'ひ', '火': 'ひ', '水': 'みず', '木': 'き', '金': 'かね', '土': 'つち',
+  '右': 'みぎ', '左': 'ひだり', '東': 'ひがし', '西': 'にし', '南': 'みなみ', '北': 'きた'
+};
+
+export function purifyKanjiTextFrontend(text: string, allowedSet: Set<string>, vocabList: any[] = []): string {
+  if (!text || typeof text !== 'string') return text;
+  let result = text;
+
+  const wordsToTry = [...COMMON_KANJI_TO_HIRAGANA_FRONTEND];
+  if (Array.isArray(vocabList)) {
+    for (const v of vocabList) {
+      if (v?.kanji && v.hiragana && v.kanji !== v.hiragana) {
+        wordsToTry.push({ kanji: v.kanji, hiragana: v.hiragana });
+      }
+    }
+  }
+
+  wordsToTry.sort((a, b) => (b.kanji?.length || 0) - (a.kanji?.length || 0));
+
+  for (const item of wordsToTry) {
+    if (!item.kanji || !result.includes(item.kanji)) continue;
+    const chars = item.kanji.split('');
+    const hasDisallowedKanji = chars.some(c => /[\u4E00-\u9FAF\u3400-\u4DBF]/.test(c) && !allowedSet.has(c));
+    if (hasDisallowedKanji) {
+      result = result.split(item.kanji).join(item.hiragana);
+    }
+  }
+
+  let purifiedChars = '';
+  for (let i = 0; i < result.length; i++) {
+    const ch = result[i];
+    if (/[\u4E00-\u9FAF\u3400-\u4DBF]/.test(ch) && !allowedSet.has(ch)) {
+      purifiedChars += SINGLE_KANJI_FALLBACK_FRONTEND[ch] || ch;
+    } else {
+      purifiedChars += ch;
+    }
+  }
+
+  return purifiedChars;
+}
+
 /**
  * Sinh bộ câu hỏi trắc nghiệm nhận diện chữ Hán cục bộ (Local Fallback)
  * TUYỆT ĐỐI KHÔNG dùng Kanji chưa học trong đề bài mẫu và các lựa chọn
  */
 export function generateLocalKanjiRecognitionQuestions(
   kanjis: KanjiItemData[],
-  vocabItems: any[] = []
+  vocabItems: any[] = [],
+  extraAllowedChars: string[] = []
 ): KanjiRecognitionQuizQuestion[] {
   if (!kanjis || kanjis.length === 0) return [];
   const questions: KanjiRecognitionQuizQuestion[] = [];
   const isSmallScope = kanjis.length <= 4;
   const targetCount = isSmallScope ? Math.min(8, Math.max(5, kanjis.length * 2)) : Math.min(14, Math.max(8, kanjis.length + 2));
-  const allowedSet = new Set(kanjis.map(k => k.character));
+  const allowedSet = new Set([...kanjis.map(k => k.character), ...extraAllowedChars]);
 
   // Extract compounds and vocab forms - CHỈ LẤY từ ghép mà 100% chữ Hán cấu thành đều đã học!
   const allCompoundWords: { word: string; reading: string; meaning: string; kanjiChar: string }[] = [];
@@ -557,7 +664,16 @@ export function generateLocalKanjiRecognitionQuestions(
   });
   const getMeaning = (w: string) => meaningMap.get(w) || '';
 
-  const lessonVocabMatches: { hiragana: string; meaning: string; example?: string; kanjiWord?: string; char: string }[] = [];
+  const getKanjiMeaning = (char: string) => {
+    const foundK = kanjis.find(item => item.character === char)
+      || COMMON_KANJI_DISTRACTORS.find(d => d.character === char);
+    if (foundK) {
+      return `${foundK.sino_vietnamese ? foundK.sino_vietnamese + ': ' : ''}${foundK.vietnamese_meaning}`.trim();
+    }
+    return getMeaning(char) || '';
+  };
+
+  const lessonVocabMatches: { hiragana: string; meaning: string; example?: string; exampleMeaning?: string; kanjiWord?: string; char: string }[] = [];
   kanjis.forEach(k => {
     vocabItems.forEach(v => {
       if (v && v.hiragana && ((v.kanji || '').includes(k.character) || (v.japanese_example || '').includes(k.character))) {
@@ -565,6 +681,7 @@ export function generateLocalKanjiRecognitionQuestions(
           hiragana: v.hiragana,
           meaning: v.vietnamese_meaning || '',
           example: v.japanese_example || '',
+          exampleMeaning: v.example_meaning || '',
           kanjiWord: v.kanji || '',
           char: k.character
         });
@@ -582,63 +699,103 @@ export function generateLocalKanjiRecognitionQuestions(
       const match = lessonVocabMatches.find(m => m.char === k.character && m.example) ||
                     lessonVocabMatches.find(m => m.example);
       const compound = allCompoundWords.find(c => c.kanjiChar === k.character);
-      const targetWord = match?.kanjiWord || compound?.word || k.character;
+      const rawTargetWord = match?.kanjiWord || compound?.word || k.character;
       const reading = match?.hiragana || compound?.reading || k.kunyomi || k.onyomi || '';
       const meaning = match?.meaning || compound?.meaning || k.vietnamese_meaning;
       
-      let sentence = match?.example || `「わたしは 【 ? 】 です。」`;
-      if (match?.example && targetWord && sentence.includes(targetWord)) {
-        sentence = sentence.replace(targetWord, '【 ? 】');
-      } else if (!sentence.includes('【 ? 】')) {
-        sentence = `「あのかたは 【 ? 】 です。」`;
-      }
+      let rawSentence = match?.example || `「わたしは ${rawTargetWord} です。」`;
+      const isCompoundTarget = rawTargetWord.length >= 2;
 
-      const isCompoundTarget = targetWord.length >= 2;
-      const candidateWrong = allCompoundWords
-        .filter(c => c.word !== targetWord)
-        .map(c => c.word)
-        .concat(
-          !isCompoundTarget 
-            ? kanjis.filter(other => other.character !== k.character).map(o => o.character)
-            : []
-        );
+      let sentence = '';
+      let targetWord = rawTargetWord;
+      let targetHint = meaning;
+      let options: string[] = [];
+      let optionsMeanings: string[] = [];
+      let correctIdx = 0;
 
-      const wrongWords = shuffleArray(candidateWrong).filter(w => w !== targetWord).slice(0, 3);
-      while (wrongWords.length < 3) {
-        const otherK = kanjis.find(o => o.character !== k.character)?.character || k.character;
-        const candidate = `${k.character}${otherK}`;
-        if (!wrongWords.includes(candidate) && candidate !== targetWord) {
-          wrongWords.push(candidate);
-        } else {
-          wrongWords.push(`${otherK}${k.character}`);
+      if (isCompoundTarget) {
+        // ĐIỀN KHUYẾT TỪ GHÉP: Cho 1 chữ Hán, để khuyết 1 chữ Hán còn lại (dạng 新【 ? 】 hoặc 【 ? 】聞)
+        const chars = rawTargetWord.split('');
+        const maskChar = chars.includes(k.character) ? k.character : (chars[1] || chars[0]);
+        const maskIndex = chars.indexOf(maskChar);
+        const maskedCompound = chars.map((ch, i) => (i === maskIndex ? '【 ? 】' : ch)).join('');
+        
+        sentence = rawSentence.includes(rawTargetWord)
+          ? rawSentence.replace(rawTargetWord, maskedCompound)
+          : `「${maskedCompound}」`;
+        sentence = purifyKanjiTextFrontend(sentence, allowedSet, vocabItems);
+
+        targetWord = maskChar;
+        targetHint = `${meaning}`;
+
+        // 4 options BẮT BUỘC LÀ 4 CHỮ HÁN ĐƠN LẺ trong allowedSet
+        const otherSingleChars = kanjis
+          .filter(o => o.character !== maskChar)
+          .map(o => o.character);
+        const fallbackSingle = ['本', '書', '聞', '話', '見', '生', '先', '語', '何', '人', '車', '時', '計'];
+        const wrongChars = shuffleArray([
+          ...otherSingleChars,
+          ...fallbackSingle.filter(c => allowedSet.has(c) && c !== maskChar)
+        ]).slice(0, 3);
+
+        while (wrongChars.length < 3) {
+          const cand = kanjis.find(o => o.character !== maskChar && !wrongChars.includes(o.character))?.character || '人';
+          wrongChars.push(cand);
         }
+
+        options = shuffleArray([maskChar, ...wrongChars.slice(0, 3)]);
+        correctIdx = options.indexOf(maskChar);
+        optionsMeanings = options.map(opt => getKanjiMeaning(opt));
+      } else {
+        // TỪ ĐƠN (1 chữ Hán như 机, 本, 車, 傘)
+        sentence = rawSentence.includes(rawTargetWord)
+          ? rawSentence.replace(rawTargetWord, '【 ? 】')
+          : `「わたしは 【 ? 】 です。」`;
+        sentence = purifyKanjiTextFrontend(sentence, allowedSet, vocabItems);
+
+        targetWord = rawTargetWord;
+        targetHint = meaning;
+
+        // 4 options BẮT BUỘC ĐỀU LÀ CHỮ ĐƠN (1 chữ Hán)
+        const otherSingleChars = kanjis
+          .filter(o => o.character !== targetWord)
+          .map(o => o.character);
+        const wrongChars = shuffleArray(otherSingleChars).slice(0, 3);
+        while (wrongChars.length < 3) {
+          const fallback = ['本', '車', '机', '傘', '鍵', '時', '計', '語', '何'];
+          const cand = fallback.find(c => c !== targetWord && !wrongChars.includes(c)) || '人';
+          wrongChars.push(cand);
+        }
+
+        options = shuffleArray([targetWord, ...wrongChars.slice(0, 3)]);
+        correctIdx = options.indexOf(targetWord);
+        optionsMeanings = options.map(opt => getMeaning(opt) || getKanjiMeaning(opt) || (opt === targetWord ? meaning : ''));
       }
 
-      const options = shuffleArray([targetWord, ...wrongWords.slice(0, 3)]);
-      const correctIdx = options.indexOf(targetWord);
-      const optionsMeanings = options.map(opt => getMeaning(opt) || (opt === targetWord ? meaning : ''));
-
-      const sentenceTranslation = sentence.includes('わたしは')
-        ? '「Tôi là 【 ? 】.」'
-        : sentence.includes('あのかたは')
-        ? '「Người kia là 【 ? 】.」'
-        : `「${sentence.replace('【 ? 】', '...')}」`;
+      // Bản dịch nghĩa tiếng Việt chuẩn xác (câu VI hoàn chỉnh)
+      let sentenceTranslation = match?.exampleMeaning || '';
+      if (!sentenceTranslation) {
+        if (sentence.includes('わたしは')) sentenceTranslation = `Tôi là ${meaning}.`;
+        else if (sentence.includes('あのかたは')) sentenceTranslation = `Người kia là ${meaning}.`;
+        else if (sentence.includes('これは')) sentenceTranslation = `Đây là ${meaning}.`;
+        else sentenceTranslation = `${meaning}.`;
+      }
 
       questions.push({
         id: `local_q_${k.id}_dial_${index}`,
         question_type: 'dialogue_fill',
         question_text: sentence,
         context_sentence: sentence,
-        question_translation: `${sentenceTranslation}\nChọn từ thích hợp điền vào chỗ trống 【 ? 】.`,
+        question_translation: sentenceTranslation,
         target_kanji: k.character,
         target_word: targetWord,
         target_word_reading: reading,
         target_word_meaning: meaning,
-        target_word_hint: meaning,
+        target_word_hint: targetHint,
         options,
         options_meanings: optionsMeanings,
         correct_index: correctIdx,
-        explanation: `【Dịch nghĩa hoàn chỉnh】: "${sentence.replace('【 ? 】', targetWord)}"\n【Lý do chọn】: Từ phù hợp nhất để điền vào ngữ cảnh là "${targetWord}" (${reading}: ${meaning}).\n【Phân tích Chữ Hán】: Chữ Hán mục tiêu 【${k.character}】 (Hán Việt: ${k.sino_vietnamese || ''} - Nghĩa: ${k.vietnamese_meaning}).`
+        explanation: `【Dịch nghĩa hoàn chỉnh】: "${sentenceTranslation}"\n【Lý do chọn】: Từ/chữ phù hợp nhất để điền vào ngữ cảnh là "${targetWord}" (${reading ? reading + ': ' : ''}${meaning}).\n【Phân tích Chữ Hán】: Chữ Hán mục tiêu 【${k.character}】 (Hán Việt: ${k.sino_vietnamese || ''} - Nghĩa: ${k.vietnamese_meaning}).`
       });
     } else if (mode === 1) {
       const compound = allCompoundWords.find(c => c.kanjiChar === k.character);
@@ -804,17 +961,18 @@ export async function fetchKanjiRecognitionQuestions(
   lessonId: number,
   kanjis: KanjiItemData[],
   forceRefresh: boolean = false,
-  vocabItems: any[] = []
+  vocabItems: any[] = [],
+  extraAllowedChars: string[] = []
 ): Promise<KanjiRecognitionQuizQuestion[]> {
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       if (attempt > 0) {
         await new Promise(r => setTimeout(r, 800));
       }
-      const res = await fetch('/api/ai/kanji-recognition-quiz', {
+      const res = await fetch(`${getBaseUrl()}/api/ai/kanji-recognition-quiz`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lessonId, kanjis, vocabItems, forceRefresh })
+        body: JSON.stringify({ lessonId, kanjis, vocabItems, forceRefresh, extraAllowedChars })
       });
       if (res.ok) {
         const data = await res.json();
@@ -826,7 +984,7 @@ export async function fetchKanjiRecognitionQuestions(
       console.warn(`[fetchKanjiRecognitionQuestions] Attempt ${attempt + 1} failed:`, e);
     }
   }
-  return generateLocalKanjiRecognitionQuestions(kanjis, vocabItems);
+  return generateLocalKanjiRecognitionQuestions(kanjis, vocabItems, extraAllowedChars);
 }
 
 

@@ -843,6 +843,7 @@ const COMMON_KANJI_TO_HIRAGANA = [
   { kanji: '木曜日', hiragana: 'もくようび' },
   { kanji: '金曜日', hiragana: 'きんようび' },
   { kanji: '土曜日', hiragana: 'どようび' },
+  { kanji: '日曜日', hiragana: 'にちようび' },
   { kanji: '時計', hiragana: 'とけい' },
   { kanji: '自動車', hiragana: 'じどうしゃ' },
   { kanji: '車', hiragana: 'くるま' },
@@ -862,13 +863,24 @@ const COMMON_KANJI_TO_HIRAGANA = [
   { kanji: '机', hiragana: 'つくえ' },
   { kanji: '椅子', hiragana: 'いす' },
   { kanji: '傘', hiragana: 'かさ' },
+  { kanji: '鍵', hiragana: 'かぎ' },
   { kanji: '鞄', hiragana: 'かばん' },
   { kanji: '手紙', hiragana: 'てがみ' },
   { kanji: '写真', hiragana: 'しゃしん' },
   { kanji: '切手', hiragana: 'きって' },
   { kanji: '切符', hiragana: 'きっぷ' },
   { kanji: '荷物', hiragana: 'にもつ' },
-  { kanji: 'お金', hiragana: 'おかね' }
+  { kanji: 'お金', hiragana: 'おかね' },
+  { kanji: '勉強', hiragana: 'べんきょう' },
+  { kanji: '名前', hiragana: 'なまえ' },
+  { kanji: '電話', hiragana: 'でんわ' },
+  { kanji: '教室', hiragana: 'きょうしつ' },
+  { kanji: '食堂', hiragana: 'しょくどう' },
+  { kanji: '会社', hiragana: 'かいしゃ' },
+  { kanji: '部屋', hiragana: 'へや' },
+  { kanji: '階段', hiragana: 'かいだん' },
+  { kanji: '大学', hiragana: 'だいがく' },
+  { kanji: '病院', hiragana: 'びょういん' }
 ];
 
 let mockDb = null;
@@ -891,7 +903,11 @@ const SINGLE_KANJI_FALLBACK = {
   '男': 'おとこ', '女': 'おんな', '子': 'こ', '父': 'ちち', '母': 'はは',
   '高': 'たか', '白': 'しろ', '面': 'めん', '安': 'やす', '新': 'あたら',
   '古': 'ふる', '長': 'なが', '短': 'みじか', '早': 'はや', '多': 'おお',
-  '少': 'すく', '近': 'ちか', '遠': 'とお', '明': 'あか', '暗': 'くら'
+  '少': 'すく', '近': 'ちか', '遠': 'とお', '明': 'あか', '暗': 'くら',
+  '傘': 'かさ', '鍵': 'かぎ', '机': 'つくえ', '本': 'ほん', '辞': 'じ',
+  '雑': 'ざつ', '誌': 'し', '計': 'けい', '年': 'ねん', '月': 'つき',
+  '日': 'ひ', '火': 'ひ', '水': 'みず', '木': 'き', '金': 'かね', '土': 'つち',
+  '右': 'みぎ', '左': 'ひだり', '東': 'ひがし', '西': 'にし', '南': 'みなみ', '北': 'きた'
 };
 
 // Dynamically augment SINGLE_KANJI_FALLBACK with readings from mockDb.kanji
@@ -1011,13 +1027,17 @@ function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = [],
     const purifiedTargetWord = purifyKanjiText(q.target_word || '', allowedSet, vocabList);
 
     const isWordFormation = q.question_type === 'word_formation';
+    const isSingleCharTarget = purifiedTargetWord.length === 1;
+    const isCompoundTarget = purifiedTargetWord.length >= 2;
 
-    // 1. Purify options & deduplicate
+    // Check if question_text is partial fill (e.g. 新【 ? 】 or 【 ? 】聞)
+    const isPartialFill = /[\u4E00-\u9FAF]【\s*\?\s*】|【\s*\?\s*】[\u4E00-\u9FAF]/.test(purifiedQText);
+
+    // 1. Purify options & deduplicate with strict homogeneity
     const rawPurified = (Array.isArray(q.options) ? q.options : [])
       .map(opt => purifyKanjiText(opt || '', allowedSet, vocabList).trim())
       .filter(Boolean);
 
-    const isCompoundTarget = purifiedTargetWord.length >= 2;
     const seen = new Set();
     let distinctOptions = [];
 
@@ -1029,8 +1049,12 @@ function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = [],
 
     for (const opt of rawPurified) {
       if (seen.has(opt)) continue;
-      // Filter out isolated single kanji only if question target is a compound word AND not word_formation
-      if (!isWordFormation && isCompoundTarget && opt.length === 1 && /[\u4E00-\u9FAF]/.test(opt)) {
+      // If target is single character (or partial fill), reject any compound words (length >= 2)
+      if ((isSingleCharTarget || isPartialFill || isWordFormation) && opt.length > 1) {
+        continue;
+      }
+      // If target is full compound word, reject single characters (length === 1)
+      if (!isWordFormation && !isPartialFill && isCompoundTarget && opt.length === 1) {
         continue;
       }
       seen.add(opt);
@@ -1038,7 +1062,7 @@ function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = [],
     }
 
     // Fill up to 4 options
-    if (isWordFormation) {
+    if (isWordFormation || isSingleCharTarget || isPartialFill) {
       for (const kChar of allowedSet) {
         if (distinctOptions.length >= 4) break;
         if (!seen.has(kChar) && kChar !== purifiedTargetWord) {
@@ -1050,7 +1074,7 @@ function sanitizeRecognitionQuizQuestions(questions, allowedSet, vocabList = [],
       for (const cand of fallbackCandidates) {
         if (distinctOptions.length >= 4) break;
         const purifiedCand = purifyKanjiText(cand, allowedSet, vocabList);
-        if (!seen.has(purifiedCand) && purifiedCand !== purifiedTargetWord) {
+        if (purifiedCand.length >= 2 && !seen.has(purifiedCand) && purifiedCand !== purifiedTargetWord) {
           seen.add(purifiedCand);
           distinctOptions.push(purifiedCand);
         }
@@ -1168,7 +1192,17 @@ QUY TẮC SƯ PHẠM BẮT BUỘC:
      "これは 【 ? 】 ですか。…はい、ざっしです。" hoặc "あれは だれの 【 ? 】 ですか。…たなかさんの とけいです。"
 
 3. **CÁC DẠNG CÂU HỎI TRẮC NGHIỆM ĐA DẠNG**:
-   - **Dạng 1 (dialogue_fill - Điền hội thoại thực tế)**: Đoạn thoại ngắn 2 câu (A - B), khuyết 1 từ vựng chữ Hán mục tiêu thành 【 ? 】. 4 options là 4 từ vựng hoàn chỉnh.
+   - **Dạng 1 (dialogue_fill - Điền hội thoại / ngữ cảnh thực tế)**:
+     * Đoạn thoại ngắn 2 câu (A - B) hoặc câu văn tình huống tự nhiên.
+     * NẾU TỪ MỤC TIÊU LÀ TỪ GHÉP TỪ 2 CHỮ HÁN TRỞ LÊN (Jukugo, ví dụ: 新聞, 辞書, 雑誌, 時計,...):
+       BẮT BUỘC cho sẵn 1 chữ Hán và để khuyết 1 chữ Hán còn lại dưới dạng 【 ? 】.
+       Ví dụ: "毎日 新【 ? 】を よみます。" hoặc "これは 辞【 ? 】です。" hoặc "あれは 【 ? 】計です。".
+       4 options khi đó BẮT BUỘC LÀ 4 CHỮ HÁN ĐƠN LẺ trong danh sách đã học (ví dụ: ['聞', '書', '誌', '計']).
+       'target_word' là chữ Hán đơn lẻ cần điền (ví dụ: '聞').
+     * NẾU TỪ MỤC TIÊU LÀ TỪ ĐƠN (1 chữ Hán, ví dụ: 机, 本, 車, 傘,...):
+       Khuyết từ đó thành 【 ? 】 (ví dụ: "【 ? 】のうえに 本が あります。").
+       4 options khi đó BẮT BUỘC ĐỀU LÀ 4 TỪ ĐƠN (độ dài 1 chữ) đã học (ví dụ: ['机', '車', '本', '傘']).
+       TUYỆT ĐỐI KHÔNG để lẫn lộn từ 2 chữ như 新聞 vào câu hỏi chữ đơn!
    - **Dạng 2 (reading_in_context - Cách đọc trong ngữ cảnh)**: Câu văn có chữ Hán trong 【 】, chọn cách đọc Hiragana đúng.
    - **Dạng 3 (kanji_orthography - Chọn chữ Hán chuẩn)**: Câu văn có từ Hiragana, chọn dạng chữ Hán viết chuẩn.
    - **Dạng 4 (word_formation - Điền khuyết hoàn thiện từ ghép Hán tự)**:
@@ -1186,16 +1220,16 @@ QUY TẮC SƯ PHẠM BẮT BUỘC:
    - Cung cấp trường 'target_word_hint' là nghĩa tiếng Việt chính xác của từ vựng cần điền vào chỗ trống 【 ? 】.
    - Ví dụ: Nếu chỗ trống cần điền là 「ざっし」 thì target_word_hint là "Tạp chí"; nếu là dạng word_formation thì target_word_hint là nghĩa của từ ghép (ví dụ: "Học sinh").
 
-5. **PHƯƠNG ÁN LỰA CHỌN (options) & NGHĨA TIẾNG VIỆT (options_meanings)**:
+5. **ĐỒNG NHẤT ĐỘ DÀI PHƯƠNG ÁN LỰA CHỌN (options) & NGHĨA TIẾNG VIỆT (options_meanings)**:
    - Luôn gồm đúng 4 lựa chọn (A, B, C, D) viết bằng tiếng Nhật trong mảng 'options'.
    - TUYỆT ĐỐI KHÔNG được trùng lặp các phương án trong 4 options!
-   - Với Dạng 4 (word_formation): 4 lựa chọn là 4 chữ Hán đơn lẻ đã học.
-   - Với các dạng còn lại: 4 lựa chọn là 4 từ vựng hoàn chỉnh khác biệt nhau trong bài học.
+   - ĐỒNG NHẤT ĐỘ DÀI: Nếu đáp án là chữ đơn (độ dài 1 chữ Hán), cả 4 options BẮT BUỘC là chữ đơn. Nếu đáp án là từ ghép (độ dài >= 2), cả 4 options BẮT BUỘC là từ ghép.
    - 'correct_index' là chỉ số (0, 1, 2, 3) của đáp án đúng.
    - Cung cấp trường 'options_meanings' gồm đúng 4 chuỗi nghĩa tiếng Việt tương ứng cho 4 phương án trên.
 
-6. **BẢN DỊCH VÀ GIẢI THÍCH**:
-   - 'question_translation': Bản dịch tiếng Việt đầy đủ của ngữ cảnh đề bài.
+6. **BẢN DỊCH TIẾNG VIỆT HOÀN CHỈNH BẮT BUỘC (question_translation) VÀ GIẢI THÍCH (explanation)**:
+   - 'question_translation': BẢN DỊCH TIẾNG VIỆT ĐẦY ĐỦ, HOÀN CHỈNH VÀ CHUẨN XÁC của toàn bộ câu hỏi hoặc câu ngữ cảnh đề bài (ví dụ: "Có quyển sách ở trên bàn.", "Mỗi ngày tôi đều đọc báo.", "Đây là quyển từ điển của bạn à?").
+   - TUYỆT ĐỐI KHÔNG dịch cụt lủn, KHÔNG dùng chuỗi sáo rỗng như "【 ? 】" hay "...". Phải dịch nguyên văn câu có nghĩa hoàn chỉnh để học viên hiểu đúng ngữ cảnh.
    - 'explanation': Giải thích ngắn gọn lý do chọn đáp án đúng và phân tích chữ Hán mục tiêu.`;
 
   const schema = {

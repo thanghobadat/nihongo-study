@@ -124,7 +124,9 @@ export default function KanjiPracticeTab({
     let isMounted = true;
     setIsLoadingQuiz(true);
 
-    fetchKanjiRecognitionQuestions(selectedLessonId, eligibleKanji, false, vocabItems)
+    const learnedChars = kanjiItems.filter(k => k.status === 'learning' || k.status === 'mastered').map(k => k.character);
+
+    fetchKanjiRecognitionQuestions(selectedLessonId, eligibleKanji, false, vocabItems, learnedChars)
       .then(fetchedQuestions => {
         if (!isMounted) return;
         setQuizQuestions(shuffleArray(fetchedQuestions));
@@ -143,7 +145,7 @@ export default function KanjiPracticeTab({
     return () => {
       isMounted = false;
     };
-  }, [activeTab, selectedLessonId, eligibleKanji, vocabItems]);
+  }, [activeTab, selectedLessonId, eligibleKanji, vocabItems, kanjiItems]);
 
   // Xáo trộn ngẫu nhiên toàn bộ danh sách câu hỏi
   const handleShuffleQuiz = () => {
@@ -159,7 +161,8 @@ export default function KanjiPracticeTab({
     if (eligibleKanji.length === 0) return;
     setIsLoadingQuiz(true);
     try {
-      const freshQuestions = await fetchKanjiRecognitionQuestions(selectedLessonId, eligibleKanji, true, vocabItems);
+      const learnedChars = kanjiItems.filter(k => k.status === 'learning' || k.status === 'mastered').map(k => k.character);
+      const freshQuestions = await fetchKanjiRecognitionQuestions(selectedLessonId, eligibleKanji, true, vocabItems, learnedChars);
       setQuizQuestions(shuffleArray(freshQuestions));
       setQuizIndex(0);
       setSelectedOptionIdx(null);
@@ -1170,16 +1173,18 @@ export default function KanjiPracticeTab({
 
               {/* Question Text Box */}
               <div className="p-5 sm:p-7 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-md space-y-3">
-                <div className="flex flex-col gap-1 pb-1 border-b border-slate-100 dark:border-slate-800">
+                <div className="flex flex-col gap-2 pb-2 border-b border-slate-100 dark:border-slate-800">
                   <span className="text-xs sm:text-sm font-black text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
                     {currentQuizQ.question_type === 'word_formation'
                       ? '👉 Chọn chữ Hán thích hợp điền vào 【 ? 】 để hoàn thiện từ ghép:'
-                      : '👉 Chọn từ thích hợp điền vào chỗ trống 【 ? 】:'}
+                      : '👉 Chọn chữ/từ thích hợp điền vào chỗ trống 【 ? 】:'}
                   </span>
-                  {(currentQuizQ.target_word_hint || currentQuizQ.target_word_meaning) && (
-                    <span className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20 w-fit">
-                      💡 Gợi ý nghĩa từ cần hoàn thành: <span className="font-black underline decoration-amber-500">{currentQuizQ.target_word_hint || currentQuizQ.target_word_meaning}</span>
-                    </span>
+                  {/* Bản dịch câu tiếng Việt chuẩn xác (loại bỏ ô gợi ý rời rạc) */}
+                  {currentQuizQ.question_translation && (
+                    <div className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 italic flex items-center gap-2 bg-slate-50 dark:bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+                      <span className="text-base not-italic shrink-0">🇻🇳</span>
+                      <span>「{currentQuizQ.question_translation.replace(/【\s*\?\s*】/g, '...').replace(/\nChọn từ thích hợp điền vào chỗ trống.*/, '').trim()}」</span>
+                    </div>
                   )}
                 </div>
 
