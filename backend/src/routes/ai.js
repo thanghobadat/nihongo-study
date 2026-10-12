@@ -807,6 +807,10 @@ router.post('/generate-study-plan', async (req, res) => {
       userId
     });
 
+    if (plan) {
+      plan.updated_at = new Date().toISOString();
+    }
+
     // Scenario 3: Timeline replan push notification
     if (plan && plan.days) {
       const todayStr = getLocalDateString();
@@ -859,6 +863,10 @@ router.post('/refine-study-plan', async (req, res) => {
       currentProgress,
       userId
     });
+
+    if (updatedPlan) {
+      updatedPlan.updated_at = new Date().toISOString();
+    }
 
     // Scenario 3: Timeline replan push notification
     if (updatedPlan && updatedPlan.days) {

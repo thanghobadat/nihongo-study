@@ -2217,3 +2217,37 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Script unit test `test_debt_fix.js`: 100% PASS (Kiểm chứng thành công: Test 1 giữ nguyên Kanji Bài 2 trong nợ khi không Replan; Test 2 loại bỏ nợ sau khi Replan hợp lệ).
   - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).
   - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5.
+
+### Mốc 149: Khắc Phục Triệt Để 2 Lỗi Production: Lệch Thời Gian Học Đa Thiết Bị & Mất Task Gộp 10 Kanji Sau Khi Học Xong (Đã hoàn thành - 12/10/2026)
+- **Khắc phục lỗi lệch thời gian học đa thiết bị (Device A 1h41m, Device B chỉ còn 40m)**:
+  - *Nguyên nhân*: Backend `studyTimeService.addStudyTime` trước đây không đối chiếu Supabase trước khi cộng delta và không hòa giải với tổng thời gian client đã tích lũy (`clientTotalSeconds`). Khi Render cold-start, thời gian server bị reset về 0, làm Supabase bị đè số giây nhỏ. Khi Thiết bị B tải trang, server trả về 0 khiến B giữ nguyên 40m từ cache cũ.
+  - *Giải pháp [studyTimeService.js](file:///d:/AI/japanese_learning/website/backend/src/services/studyTimeService.js) & [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js)*: Nâng cấp `addStudyTime(userId, dateStr, deltaSeconds, clientTotalSeconds)` hỗ trợ hòa giải hai chiều (**Authoritative Reconciliation**). Server luôn đọc Supabase trước và lấy `Math.max(memory, supabase, clientTotal)`. Đồng thời `GET /study-overview` và `GET /daily-history` luôn chủ động `syncFromSupabase` trước khi trả dữ liệu.
+  - *Giải pháp [ActiveStudyTracker.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/ActiveStudyTracker.tsx)*: Client gửi kèm `clientTotalSeconds` trong mọi lần flush delta và `beforeunload`. Khi mở tab, nếu server có số giây lớn hơn, client nâng ngay lập tức lên số giây của server; nếu client có số giây cao hơn do server vừa khởi động lại, client gửi delta hòa giải để nâng server lên ngay lập tức.
+- **Khắc phục lỗi mất task gộp 10 Kanji quay về 2 phần 5 Kanji khi hoàn thành buổi học**:
+  - *Nguyên nhân*: Plan thiếu trường định danh phiên bản `updated_at`. `handleApplyRebatch` không lưu ngay `res.plan` vào React state và `localStorage ('nihongo_cached_study_plan')`. Đồng thời trong `dashboard/page.tsx`, khi nạp dữ liệu mạng bị chậm, client tự ý lấy cache cũ (chứa 2 task 5 kanji) gửi `POST /api/user/study-plan`, ghi đè làm mất task gộp 10 kanji trên Supabase.
+  - *Giải pháp [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js) & [ai.js](file:///d:/AI/japanese_learning/website/backend/src/routes/ai.js)*: Luôn gắn mốc thời gian phiên bản `plan.updated_at = new Date().toISOString()` khi lưu kế hoạch ở tất cả các route (`/rebatch`, `/schedule`, `/auto-allocate-slots`, `/replan-debt`, `/generate-study-plan`, `/refine-study-plan`). Trong `POST /study-plan`, thêm chốt chặn chống ghi đè kế hoạch cũ (**Stale Plan Rejection**) dựa trên so sánh `updated_at`.
+  - *Giải pháp [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx)*: `handleApplyRebatch` cập nhật ngay lập tức `setStudyPlan(res.plan)` và `localStorage ('nihongo_cached_study_plan')`. Xóa bỏ triệt để đoạn code tự động gửi `api.post('/api/user/study-plan', { plan: cachedPlan })` khi tải trang hoặc khi mạng lỗi.
+- **Kiểm định & Xác thực**:
+  - Script test `verify_sync_fixes.js`: 100% PASS (Device A 6060s -> Device B nhận 6060s -> học thêm 30s thành 6090s; cold-start server wipe giữ nguyên 6100s; Stale plan từ chối ghi đè bảo toàn task 10 Kanji).
+  - `node --check` 3 file backend: 100% PASS (0 lỗi).
+  - `npx tsc --noEmit` frontend Next.js: 100% PASS (0 lỗi).
+
+### Mốc 150: Bổ Sung Hiệu Ứng Phản Hồi Âm Thanh/Hình Ảnh Khi Chọn Đáp Án & Tích Hợp Chế Độ Luyện Phản Xạ Hán Tự (Kanji Speedrun) (Đã hoàn thành - 12/10/2026)
+- **Hiệu ứng phản hồi chọn đáp án tức thì (Visual & Sound Feedback)**:
+  - *Web Audio API Synth ([audioHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/audioHelper.ts))*: Thêm hàm `playSpeedrunSound('correct' | 'wrong')` tạo sóng âm trực tiếp trong trình duyệt, phản hồi 0ms không tải file ngoài (Chuông đôi thanh thoát C5->G5 khi đúng; Buzzer trầm khi sai/hết giờ).
+  - *Giao diện tương tác ([knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx))*:
+    + Khi bấm **ĐÚNG**: Nút chuyển sang màu xanh ngọc rực rỡ (`bg-emerald-500 text-white`), hiện icon `✓`, streak nhấp nháy, dừng nhẹ 350ms để ghi nhận phản xạ trước khi lật câu mới.
+    + Khi bấm **SAI**: Nút bấm chuyển màu đỏ rung lắc (`bg-rose-500 text-white animate-shake`), đồng thời nút đáp án ĐÚNG tự động sáng màu xanh (`border-emerald-500 bg-emerald-50 text-emerald-600`) kèm `Đúng ✓` trong 800ms để học viên nhìn thấy đáp án chính xác trước khi Game Over.
+    + Thêm cờ khóa click `isEvaluatingChoice` chống bấm nhầm nhiều lần.
+- **Tích hợp chế độ Luyện phản xạ cho Chữ Hán (Kanji Speedrun)**:
+  - Thêm thanh chọn đối tượng `speedrunTarget: 'vocab' | 'kanji'` với 2 tab `[ 📖 Từ vựng ]` và `[ 🈸 Hán tự (Kanji) ]`.
+  - Hỗ trợ 3 chiều phản xạ Kanji chuyên sâu (`kanjiSpeedrunDirection`):
+    1. `🈸 Chữ Hán ➔ 🇻🇳 Nghĩa & Âm Hán`: Nhìn chữ Hán font serif lớn chọn nghĩa tiếng Việt và âm Hán Việt.
+    2. `🇻🇳 Nghĩa & Âm Hán ➔ 🈸 Chữ Hán`: Nhìn nghĩa và âm Hán để phản xạ chọn nhanh trong 4 chữ Hán lớn.
+    3. `🈸 Chữ Hán ➔ 🔊 Âm đọc`: Nhìn chữ Hán chọn đúng cách đọc Onyomi / Kunyomi.
+  - Tự động lọc kho Kanji theo cấp độ (N5/N4), bài học và sinh 3 đáp án nhiễu ngẫu nhiên từ chính kho Kanji.
+  - Lưu trữ kỷ lục (High Score) riêng cho từng thể loại và chiều phản xạ.
+  - Tự động ghi nhận Kanji làm sai vào tiến độ (`item_type: 'kanji'`, `status: 'wrong'`) để ôn tập lại trong Sổ tay.
+- **Kiểm định & Xác thực**:
+  - `node --check` Backend: 100% PASS (0 lỗi).
+  - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).

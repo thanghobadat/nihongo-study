@@ -46,10 +46,13 @@ function savePersistentPlans(plans) {
 async function persistPlanToSupabase(userId, plan) {
   if (!isSupabaseConfigured() || !userId || !plan) return false;
   try {
+    if (!plan.updated_at) {
+      plan.updated_at = new Date().toISOString();
+    }
     const { error } = await supabase.from('user_study_plans').upsert({
       user_id: String(userId),
       plan_data: plan,
-      updated_at: new Date().toISOString()
+      updated_at: plan.updated_at
     }, { onConflict: 'user_id' });
     if (error) {
       console.error('[StudyPlan] Supabase user_study_plans upsert error:', error.message);
@@ -86,10 +89,10 @@ function getUserPlan(userId) {
 /**
  * Asynchronous helper to get active user study plan, checking memory, disk, and Supabase cloud
  */
-async function getUserPlanAsync(userId) {
+async function getUserPlanAsync(userId, forceSync = false) {
   if (!userId) return null;
   const inMemory = getUserPlan(userId);
-  if (inMemory && inMemory.days && inMemory.days.length > 0) {
+  if (!forceSync && inMemory && inMemory.days && inMemory.days.length > 0 && !isSupabaseConfigured()) {
     return inMemory;
   }
   if (isSupabaseConfigured()) {
@@ -97,14 +100,23 @@ async function getUserPlanAsync(userId) {
       try {
         const { data: sp, error: spErr } = await supabase
           .from('user_study_plans')
-          .select('plan_data')
+          .select('plan_data, updated_at')
           .eq('user_id', String(userId))
           .maybeSingle();
         if (!spErr && sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
-          if (!mockDb.studyPlans) mockDb.studyPlans = {};
-          mockDb.studyPlans[userId] = sp.plan_data;
-          savePersistentPlans(mockDb.studyPlans);
-          return sp.plan_data;
+          const inMemTime = inMemory?.updated_at ? new Date(inMemory.updated_at).getTime() : 0;
+          const spTime = sp.plan_data.updated_at ? new Date(sp.plan_data.updated_at).getTime() : (sp.updated_at ? new Date(sp.updated_at).getTime() : 0);
+
+          if (!inMemory || forceSync || spTime >= inMemTime) {
+            if (!sp.plan_data.updated_at && (sp.updated_at || spTime > 0)) {
+              sp.plan_data.updated_at = sp.updated_at || new Date(spTime).toISOString();
+            }
+            if (!mockDb.studyPlans) mockDb.studyPlans = {};
+            mockDb.studyPlans[userId] = sp.plan_data;
+            savePersistentPlans(mockDb.studyPlans);
+            return sp.plan_data;
+          }
+          return inMemory;
         }
         if (attempt === 0) {
           await new Promise(r => setTimeout(r, 200));
@@ -2453,19 +2465,7 @@ function applyAutoTracking(plan, userId) {
  */
 async function checkAndNotifyNewlyCompletedTasks(userId) {
   try {
-    let plan = mockDb.studyPlans ? mockDb.studyPlans[userId] : null;
-    if (!plan) {
-      const allPlans = loadPersistentPlans();
-      plan = allPlans[userId] || null;
-    }
-    if (!plan && isSupabaseConfigured()) {
-      try {
-        const { data } = await supabase.from('user_study_plans').select('*').eq('user_id', String(userId)).maybeSingle();
-        if (data && data.plan_data) {
-          plan = data.plan_data;
-        }
-      } catch (e) {}
-    }
+    let plan = await getUserPlanAsync(userId);
     if (!plan || !Array.isArray(plan.days)) return;
 
     // Lấy ngày hôm nay theo múi giờ Việt Nam
@@ -2556,6 +2556,7 @@ router.post('/replan-debt', async (req, res) => {
     });
 
     updatedPlan.replanCount = (plan.replanCount || 0) + 1;
+    updatedPlan.updated_at = new Date().toISOString();
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = updatedPlan;
     savePersistentPlans(mockDb.studyPlans);
@@ -2639,6 +2640,24 @@ router.post('/study-plan', async (req, res) => {
     if (!plan || !plan.startDate || !plan.endDate) {
       return res.status(400).json({ success: false, error: 'Thiếu thông tin kế hoạch (startDate, endDate).' });
     }
+
+    // Protection against stale plan overwrite
+    const existingPlan = await getUserPlanAsync(userId);
+    if (existingPlan && existingPlan.updated_at) {
+      const existingTime = new Date(existingPlan.updated_at).getTime();
+      const incomingTime = plan.updated_at ? new Date(plan.updated_at).getTime() : 0;
+      if (incomingTime < existingTime) {
+        console.warn(`[StudyPlan] Stale plan rejected for user ${userId}. Incoming: ${plan.updated_at || 'none'}, Existing: ${existingPlan.updated_at}`);
+        return res.json({
+          success: true,
+          message: 'Kế hoạch trên máy chủ mới hơn, đã bỏ qua ghi đè từ bản lưu cũ.',
+          plan: existingPlan,
+          staleRejected: true
+        });
+      }
+    }
+
+    plan.updated_at = new Date().toISOString();
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
@@ -2743,6 +2762,9 @@ router.post('/daily-tasks/schedule', async (req, res) => {
         }
       }
 
+      plan.updated_at = new Date().toISOString();
+      if (!mockDb.studyPlans) mockDb.studyPlans = {};
+      mockDb.studyPlans[userId] = plan;
       savePersistentPlans(mockDb.studyPlans);
       await persistPlanToSupabase(userId, plan);
     }
@@ -2884,6 +2906,7 @@ router.post('/daily-tasks/rebatch', async (req, res) => {
 
     // Run auto-tracking so mastered items are immediately updated on new batches
     plan = applyAutoTracking(result.plan, userId);
+    plan.updated_at = new Date().toISOString();
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
     await persistPlanToSupabase(userId, plan);
@@ -2925,6 +2948,7 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
     });
 
     plan = applyAutoTracking(result.plan, userId);
+    plan.updated_at = new Date().toISOString();
     mockDb.studyPlans[userId] = plan;
     savePersistentPlans(mockDb.studyPlans);
     await persistPlanToSupabase(userId, plan);
@@ -3081,6 +3105,7 @@ router.get('/study-overview', async (req, res) => {
       }
     ];
 
+    await studyTimeService.syncFromSupabase(userId).catch(() => {});
     const todayStudyTime = studyTimeService.getStudyTime(userId, getLocalDateStr());
 
     return res.json({
@@ -3130,7 +3155,10 @@ router.get('/study-overview', async (req, res) => {
 router.get('/daily-history', async (req, res) => {
   try {
     const userId = req.user.id;
-    await progressService.syncUserProgressFromSupabase(userId);
+    await Promise.all([
+      progressService.syncUserProgressFromSupabase(userId).catch(() => {}),
+      studyTimeService.syncFromSupabase(userId).catch(() => {})
+    ]);
     let plan = await getUserPlanAsync(userId);
 
     if (!plan || !plan.days || plan.days.length === 0) {
@@ -3221,8 +3249,8 @@ router.get('/daily-history', async (req, res) => {
 router.post('/study-time', async (req, res) => {
   try {
     const userId = req.user.id;
-    const { date, deltaSeconds } = req.body;
-    const result = await studyTimeService.addStudyTime(userId, date || getLocalDateStr(), deltaSeconds);
+    const { date, deltaSeconds, clientTotalSeconds } = req.body;
+    const result = await studyTimeService.addStudyTime(userId, date || getLocalDateStr(), deltaSeconds, clientTotalSeconds);
     return res.json({
       success: true,
       data: result

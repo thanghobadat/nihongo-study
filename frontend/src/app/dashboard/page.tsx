@@ -211,43 +211,43 @@ export default function UserDashboard() {
       }
 
       if (planRes && planRes.success && planRes.plan && Array.isArray(planRes.plan.days) && planRes.plan.days.length > 0) {
-        // Guard against accidental server reset starting from today if client had a genuine earlier plan
         const cachedStr = typeof window !== 'undefined' ? localStorage.getItem('nihongo_cached_study_plan') : null;
-        let shouldAcceptServerPlan = true;
+        let finalPlan = planRes.plan;
+
         if (cachedStr) {
           try {
             const cachedPlan = JSON.parse(cachedStr);
-            if (cachedPlan && cachedPlan.startDate && planRes.plan.startDate) {
-              if (cachedPlan.startDate < todayStr && planRes.plan.startDate === todayStr && !cachedPlan.replanCount && !planRes.plan.replanCount) {
-                shouldAcceptServerPlan = false;
-                setStudyPlan(cachedPlan);
-                api.post('/api/user/study-plan', { plan: cachedPlan }).catch(() => {});
-              }
+            // If cachedPlan has a strictly newer updated_at than server plan, preserve client cache and sync
+            if (
+              cachedPlan?.updated_at &&
+              planRes.plan?.updated_at &&
+              new Date(cachedPlan.updated_at).getTime() > new Date(planRes.plan.updated_at).getTime()
+            ) {
+              finalPlan = cachedPlan;
+              api.post('/api/user/study-plan', { plan: cachedPlan }).catch(() => {});
             }
           } catch (e) {}
         }
 
-        if (shouldAcceptServerPlan) {
-          setStudyPlan(planRes.plan);
+        setStudyPlan(finalPlan);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(finalPlan));
+          } catch (e) {}
+        }
+        if (finalPlan.startDate) setStartDateStr(finalPlan.startDate);
+        if (finalPlan.endDate) setEndDateStr(finalPlan.endDate);
+        if (typeof finalPlan.replanCount === 'number') {
+          setReplanCount(prev => Math.max(prev, finalPlan.replanCount));
           if (typeof window !== 'undefined') {
-            try {
-              localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(planRes.plan));
-            } catch (e) {}
-          }
-          if (planRes.plan.startDate) setStartDateStr(planRes.plan.startDate);
-          if (planRes.plan.endDate) setEndDateStr(planRes.plan.endDate);
-          if (typeof planRes.plan.replanCount === 'number') {
-            setReplanCount(prev => Math.max(prev, planRes.plan.replanCount));
-            if (typeof window !== 'undefined') {
-              const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
-              if (planRes.plan.replanCount > cur) {
-                localStorage.setItem('nihongo_replan_count', String(planRes.plan.replanCount));
-              }
+            const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
+            if (finalPlan.replanCount > cur) {
+              localStorage.setItem('nihongo_replan_count', String(finalPlan.replanCount));
             }
           }
         }
       } else if (!planRes?.plan || planRes?.requiresClientRestore) {
-        // Server has no plan (e.g. cold start). Restore from client cache if available!
+        // Server has no plan (e.g. cold start / offline). Display client cache as offline fallback only!
         if (typeof window !== 'undefined') {
           try {
             const cachedStr = localStorage.getItem('nihongo_cached_study_plan');
@@ -257,7 +257,7 @@ export default function UserDashboard() {
                 setStudyPlan(cachedPlan);
                 if (cachedPlan.startDate) setStartDateStr(cachedPlan.startDate);
                 if (cachedPlan.endDate) setEndDateStr(cachedPlan.endDate);
-                api.post('/api/user/study-plan', { plan: cachedPlan }).catch(() => {});
+                // Do not auto-post cachedPlan here to avoid overwriting newer server data during temporary network glitches
               }
             }
           } catch (e) {}
@@ -368,6 +368,14 @@ export default function UserDashboard() {
       if (res && res.success) {
         showNotification(`✨ Đã phân chia lại công việc ${dateToUse === todayStr ? 'hôm nay' : 'ngày mai'} thành công!`);
         setIsRebatchModalOpen(false);
+        if (res.plan) {
+          setStudyPlan(res.plan);
+          if (typeof window !== 'undefined') {
+            try {
+              localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(res.plan));
+            } catch {}
+          }
+        }
         fetchDashboardData();
       } else {
         showNotification(res?.error || 'Không thể phân chia lại công việc lúc này.');

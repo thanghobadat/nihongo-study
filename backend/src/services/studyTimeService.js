@@ -54,20 +54,35 @@ function formatStudyTime(totalSeconds) {
 }
 
 /**
- * Cộng dồn thời gian học thực tế (Delta Increment Sync)
- * Đảm bảo đồng bộ an toàn từ nhiều thiết bị (Laptop, iPhone, v.v.)
+ * Cộng dồn thời gian học thực tế (Delta Increment Sync & Reconciliation)
+ * Đảm bảo đồng bộ an toàn từ nhiều thiết bị (Laptop, iPhone, v.v.) và chống mất mát khi Render cold-start
+ * @param {string} userId
+ * @param {string} dateStr
+ * @param {number} deltaSeconds
+ * @param {number} [clientTotalSeconds] - Tổng thời gian thiết bị client đang tích lũy (dùng để hòa giải reconciliation)
  */
-async function addStudyTime(userId, dateStr, deltaSeconds) {
+async function addStudyTime(userId, dateStr, deltaSeconds, clientTotalSeconds = 0) {
   if (!userId) throw new Error('userId is required');
 
   const validDate = dateStr || getVietnamDateStr();
   const delta = Math.min(Math.max(1, parseInt(deltaSeconds, 10) || 0), 600); // Tối đa 10 phút mỗi lần gửi delta
+  const clientTotal = Math.max(0, parseInt(clientTotalSeconds, 10) || 0);
+
+  // Nếu Supabase được cấu hình, luôn sync từ Supabase trước nếu bộ nhớ chưa có dữ liệu ngày này
+  if (isSupabaseConfigured()) {
+    const memData = loadStudyTime();
+    if (!memData[userId] || !memData[userId][validDate]) {
+      await syncFromSupabase(userId);
+    }
+  }
 
   const data = loadStudyTime();
   if (!data[userId]) data[userId] = {};
 
   const current = data[userId][validDate] || 0;
-  const newTotal = current + delta;
+  // Hòa giải với tổng thời gian thiết bị client báo lên (tránh trường hợp server cold-start bị reset về 0)
+  const authoritativeCurrent = Math.max(current, clientTotal > delta ? clientTotal - delta : 0);
+  const newTotal = Math.max(authoritativeCurrent + delta, clientTotal);
   data[userId][validDate] = newTotal;
 
   saveStudyTime(data);
@@ -75,19 +90,22 @@ async function addStudyTime(userId, dateStr, deltaSeconds) {
   // Cố gắng đồng bộ lên Supabase nếu có cấu hình
   if (isSupabaseConfigured()) {
     try {
-      await supabase
+      const { error } = await supabase
         .from('user_study_time')
         .upsert(
           {
-            user_id: userId,
+            user_id: String(userId),
             date: validDate,
             total_seconds: newTotal,
             updated_at: new Date().toISOString()
           },
           { onConflict: 'user_id,date' }
         );
+      if (error) {
+        console.warn('[studyTimeService] Supabase upsert error:', error.message);
+      }
     } catch (e) {
-      // Supabase table có thể chưa tạo, fallback dùng JSON cục bộ an toàn
+      console.warn('[studyTimeService] Supabase upsert exception:', e.message);
     }
   }
 
@@ -115,6 +133,17 @@ function getStudyTime(userId, dateStr) {
 }
 
 /**
+ * Lấy tổng thời gian học bất đồng bộ (tự động đồng bộ Supabase nếu cold start)
+ */
+async function getStudyTimeAsync(userId, dateStr) {
+  if (!userId) return { totalSeconds: 0, formatted: '0 phút' };
+  if (isSupabaseConfigured()) {
+    await syncFromSupabase(userId);
+  }
+  return getStudyTime(userId, dateStr);
+}
+
+/**
  * Lấy toàn bộ bản đồ thời gian học của người dùng ({ [dateStr]: seconds })
  */
 function getUserStudyTimeMap(userId) {
@@ -132,17 +161,23 @@ async function syncFromSupabase(userId) {
     const { data: rows, error } = await supabase
       .from('user_study_time')
       .select('date, total_seconds')
-      .eq('user_id', userId);
+      .eq('user_id', String(userId));
 
-    if (!error && Array.isArray(rows)) {
+    if (error) {
+      console.warn('[studyTimeService] Supabase select error:', error.message);
+      return;
+    }
+
+    if (Array.isArray(rows)) {
       const data = loadStudyTime();
       if (!data[userId]) data[userId] = {};
       let changed = false;
 
       for (const row of rows) {
+        const rowSec = parseInt(row.total_seconds, 10) || 0;
         const current = data[userId][row.date] || 0;
-        if (row.total_seconds > current) {
-          data[userId][row.date] = row.total_seconds;
+        if (rowSec > current) {
+          data[userId][row.date] = rowSec;
           changed = true;
         }
       }
@@ -152,7 +187,7 @@ async function syncFromSupabase(userId) {
       }
     }
   } catch (e) {
-    // Graceful fallback
+    console.warn('[studyTimeService] Supabase sync exception:', e.message);
   }
 }
 

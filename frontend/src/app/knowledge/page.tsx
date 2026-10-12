@@ -6,7 +6,7 @@ import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
 import StudyTimeBadge from '../components/StudyTimeBadge';
 import ReviewTab from '../lessons/[id]/ReviewTab';
-import { playAudioWithFallback, speakTTS } from '../utils/audioHelper';
+import { playAudioWithFallback, speakTTS, playSpeedrunSound } from '../utils/audioHelper';
 import { getRadicalsString, getRadicalsForCharacter } from '../utils/kanjiRadicals';
 import KanjiStrokePlayer from '../components/KanjiStrokePlayer';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../utils/kanjiPracticeHelper';
@@ -43,7 +43,7 @@ interface KanjiItem {
   vietnamese_meaning: string;
   mnemonic_tip?: string;
   compounds?: string;
-  status?: 'not_learned' | 'learning' | 'mastered';
+  status?: 'not_learned' | 'learning' | 'mastered' | 'wrong';
 }
 
 interface GrammarItem {
@@ -180,11 +180,14 @@ export default function KnowledgeHubPage() {
   });
 
   // Speedrun states
+  const [speedrunTarget, setSpeedrunTarget] = useState<'vocab' | 'kanji'>('vocab');
+  const [kanjiSpeedrunDirection, setKanjiSpeedrunDirection] = useState<'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-yomi'>('kanji-to-meaning');
   const [speedrunActive, setSpeedrunActive] = useState<boolean>(false);
   const [speedrunGameOver, setSpeedrunGameOver] = useState<boolean>(false);
   const [speedrunScore, setSpeedrunScore] = useState<number>(0);
   const [speedrunHighScore, setSpeedrunHighScore] = useState<number>(0);
   const [speedrunQuestion, setSpeedrunQuestion] = useState<VocabItem | null>(null);
+  const [speedrunKanjiQuestion, setSpeedrunKanjiQuestion] = useState<KanjiItem | null>(null);
   const [speedrunOptions, setSpeedrunOptions] = useState<string[]>([]);
   const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(10);
   const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
@@ -196,6 +199,11 @@ export default function KnowledgeHubPage() {
     mastered: false,
   });
   const [speedrunDropdownOpen, setSpeedrunDropdownOpen] = useState<boolean>(false);
+
+  // Speedrun interactive feedback states
+  const [speedrunSelectedChoice, setSpeedrunSelectedChoice] = useState<string | null>(null);
+  const [speedrunChoiceStatus, setSpeedrunChoiceStatus] = useState<'correct' | 'wrong' | null>(null);
+  const [isEvaluatingChoice, setIsEvaluatingChoice] = useState<boolean>(false);
 
   const speedrunTimerRef = useRef<any>(null);
   const speedrunScoreRef = useRef<number>(0);
@@ -966,16 +974,28 @@ export default function KnowledgeHubPage() {
     return vocabListForLevel.filter(item => speedrunFilterStatuses[item.status || 'not_learned']);
   }, [vocabListForLevel, speedrunFilterStatuses]);
 
+  const kanjiListForLevel = useMemo(() => {
+    return kanjiList.filter(k => k.lesson_id >= startLessonId && k.lesson_id <= endLessonId);
+  }, [kanjiList, startLessonId, endLessonId]);
+
+  const speedrunKanjiSourceList = useMemo(() => {
+    const active = Object.keys(speedrunFilterStatuses).filter(k => speedrunFilterStatuses[k]);
+    if (active.length === 0) return kanjiListForLevel;
+    return kanjiListForLevel.filter(item => speedrunFilterStatuses[item.status || 'not_learned']);
+  }, [kanjiListForLevel, speedrunFilterStatuses]);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && activeTab === 'practice') {
-      const saved = localStorage.getItem(`vocab_speedrun_high_score_all_${level}_${speedrunDirection}`);
+      const dirKey = speedrunTarget === 'kanji' ? kanjiSpeedrunDirection : speedrunDirection;
+      const key = `${speedrunTarget}_speedrun_high_score_all_${level}_${dirKey}`;
+      const saved = localStorage.getItem(key);
       if (saved) {
-        setSpeedrunHighScore(parseInt(saved) || 0);
+        setSpeedrunHighScore(parseInt(saved, 10) || 0);
       } else {
         setSpeedrunHighScore(0);
       }
     }
-  }, [level, speedrunDirection, activeTab]);
+  }, [level, speedrunDirection, kanjiSpeedrunDirection, speedrunTarget, activeTab]);
 
   const stopSpeedrun = () => {
     if (speedrunTimerRef.current) {
@@ -984,47 +1004,118 @@ export default function KnowledgeHubPage() {
     setSpeedrunActive(false);
     setSpeedrunGameOver(false);
     setSpeedrunQuestion(null);
+    setSpeedrunKanjiQuestion(null);
     setSpeedrunOptions([]);
     setSpeedrunStreak(0);
+    setSpeedrunSelectedChoice(null);
+    setSpeedrunChoiceStatus(null);
+    setIsEvaluatingChoice(false);
   };
 
-  const nextSpeedrunQuestion = useCallback((currentScore: number, customMaxTime?: number) => {
-    if (speedrunSourceList.length === 0) {
-      showToast('Không có từ vựng nào để chơi Speedrun.');
-      return;
+  const getSpeedrunCorrectVal = useCallback(() => {
+    if (speedrunTarget === 'vocab') {
+      if (!speedrunQuestion) return '';
+      return speedrunDirection === 'vi-to-ja' ? speedrunQuestion.hiragana : speedrunQuestion.vietnamese_meaning;
+    } else {
+      if (!speedrunKanjiQuestion) return '';
+      if (kanjiSpeedrunDirection === 'kanji-to-meaning') {
+        const sino = speedrunKanjiQuestion.sino_vietnamese ? `[${speedrunKanjiQuestion.sino_vietnamese.toUpperCase()}] ` : '';
+        return `${sino}${speedrunKanjiQuestion.vietnamese_meaning}`;
+      } else if (kanjiSpeedrunDirection === 'meaning-to-kanji') {
+        return speedrunKanjiQuestion.character;
+      } else {
+        const on = speedrunKanjiQuestion.onyomi ? `On: ${speedrunKanjiQuestion.onyomi}` : '';
+        const kun = speedrunKanjiQuestion.kunyomi ? `Kun: ${speedrunKanjiQuestion.kunyomi}` : '';
+        return [on, kun].filter(Boolean).join(' | ') || speedrunKanjiQuestion.character;
+      }
     }
-    const randomQuestion = speedrunSourceList[Math.floor(Math.random() * speedrunSourceList.length)];
-    setSpeedrunQuestion(randomQuestion);
-    
-    // distractors
-    const distractors = speedrunSourceList
-      .filter(item => item.vietnamese_meaning !== randomQuestion.vietnamese_meaning)
-      .map(item => speedrunDirection === 'vi-to-ja' ? item.hiragana : item.vietnamese_meaning);
-    
-    const uniqueDistractors = Array.from(new Set(distractors)).sort(() => Math.random() - 0.5).slice(0, 3);
-    const correctOption = speedrunDirection === 'vi-to-ja' ? randomQuestion.hiragana : randomQuestion.vietnamese_meaning;
-    
-    const choices = [correctOption, ...uniqueDistractors];
-    while (choices.length < 4) {
-      choices.push(`Đáp án nhiễu ${choices.length + 1}`);
+  }, [speedrunTarget, speedrunQuestion, speedrunKanjiQuestion, speedrunDirection, kanjiSpeedrunDirection]);
+
+  const nextSpeedrunQuestion = useCallback((currentScore: number, customMaxTime?: number, customStreak?: number) => {
+    if (speedrunTarget === 'vocab') {
+      if (speedrunSourceList.length === 0) {
+        showToast('Không có từ vựng nào để chơi Speedrun.');
+        return;
+      }
+      const randomQuestion = speedrunSourceList[Math.floor(Math.random() * speedrunSourceList.length)];
+      setSpeedrunQuestion(randomQuestion);
+      setSpeedrunKanjiQuestion(null);
+      
+      const distractors = speedrunSourceList
+        .filter(item => item.vietnamese_meaning !== randomQuestion.vietnamese_meaning)
+        .map(item => speedrunDirection === 'vi-to-ja' ? item.hiragana : item.vietnamese_meaning);
+      
+      const uniqueDistractors = Array.from(new Set(distractors)).sort(() => Math.random() - 0.5).slice(0, 3);
+      const correctOption = speedrunDirection === 'vi-to-ja' ? randomQuestion.hiragana : randomQuestion.vietnamese_meaning;
+      
+      const choices = [correctOption, ...uniqueDistractors];
+      while (choices.length < 4) {
+        choices.push(`Đáp án nhiễu ${choices.length + 1}`);
+      }
+      choices.sort(() => Math.random() - 0.5);
+      setSpeedrunOptions(choices);
+
+      if (speedrunDirection === 'listen-to-select' && randomQuestion) {
+        playAudioWithFallback(randomQuestion.japanese_example || '', randomQuestion.hiragana);
+      }
+    } else {
+      if (speedrunKanjiSourceList.length === 0) {
+        showToast('Không có chữ Hán nào để chơi Speedrun.');
+        return;
+      }
+      const randomKanji = speedrunKanjiSourceList[Math.floor(Math.random() * speedrunKanjiSourceList.length)];
+      setSpeedrunKanjiQuestion(randomKanji);
+      setSpeedrunQuestion(null);
+
+      let correctOption = '';
+      let distractors: string[] = [];
+
+      if (kanjiSpeedrunDirection === 'kanji-to-meaning') {
+        const formatMeaning = (k: KanjiItem) => {
+          const sino = k.sino_vietnamese ? `[${k.sino_vietnamese.toUpperCase()}] ` : '';
+          return `${sino}${k.vietnamese_meaning}`;
+        };
+        correctOption = formatMeaning(randomKanji);
+        distractors = speedrunKanjiSourceList
+          .filter(k => k.id !== randomKanji.id && k.vietnamese_meaning !== randomKanji.vietnamese_meaning)
+          .map(k => formatMeaning(k));
+      } else if (kanjiSpeedrunDirection === 'meaning-to-kanji') {
+        correctOption = randomKanji.character;
+        distractors = speedrunKanjiSourceList
+          .filter(k => k.id !== randomKanji.id && k.character !== randomKanji.character)
+          .map(k => k.character);
+      } else {
+        const formatYomi = (k: KanjiItem) => {
+          const on = k.onyomi ? `On: ${k.onyomi}` : '';
+          const kun = k.kunyomi ? `Kun: ${k.kunyomi}` : '';
+          return [on, kun].filter(Boolean).join(' | ') || k.character;
+        };
+        correctOption = formatYomi(randomKanji);
+        distractors = speedrunKanjiSourceList
+          .filter(k => k.id !== randomKanji.id)
+          .map(k => formatYomi(k));
+      }
+
+      const uniqueDistractors = Array.from(new Set(distractors)).sort(() => Math.random() - 0.5).slice(0, 3);
+      const choices = [correctOption, ...uniqueDistractors];
+      while (choices.length < 4) {
+        choices.push(`Đáp án nhiễu ${choices.length + 1}`);
+      }
+      choices.sort(() => Math.random() - 0.5);
+      setSpeedrunOptions(choices);
     }
-    choices.sort(() => Math.random() - 0.5);
-    setSpeedrunOptions(choices);
     
     let maxTime = 10;
     if (customMaxTime !== undefined) {
       maxTime = customMaxTime;
     } else {
-      const reductionCount = Math.floor(speedrunStreak / 3);
+      const currentStreakVal = customStreak !== undefined ? customStreak : speedrunStreak;
+      const reductionCount = Math.floor(currentStreakVal / 3);
       maxTime = Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
     }
     
     setSpeedrunMaxTime(maxTime);
     setSpeedrunTimeLeft(maxTime);
-    
-    if (speedrunDirection === 'listen-to-select' && randomQuestion) {
-      playAudioWithFallback(randomQuestion.japanese_example || '', randomQuestion.hiragana);
-    }
     
     if (speedrunTimerRef.current) {
       clearInterval(speedrunTimerRef.current);
@@ -1035,19 +1126,25 @@ export default function KnowledgeHubPage() {
       remaining = Math.round((remaining - 0.1) * 10) / 10;
       if (remaining <= 0) {
         clearInterval(speedrunTimerRef.current);
+        playSpeedrunSound('wrong');
         setSpeedrunGameOver(true);
         setSpeedrunActive(false);
         setSpeedrunStreak(0);
+        setSpeedrunSelectedChoice(null);
+        setSpeedrunChoiceStatus(null);
+        setIsEvaluatingChoice(false);
+
         const finalScore = speedrunScoreRef.current;
-        const key = `vocab_speedrun_high_score_all_${level}_${speedrunDirection}`;
+        const dirKey = speedrunTarget === 'kanji' ? kanjiSpeedrunDirection : speedrunDirection;
+        const key = `${speedrunTarget}_speedrun_high_score_all_${level}_${dirKey}`;
         const saved = localStorage.getItem(key);
-        const currentHigh = saved ? (parseInt(saved) || 0) : 0;
+        const currentHigh = saved ? (parseInt(saved, 10) || 0) : 0;
         if (finalScore > currentHigh) {
           localStorage.setItem(key, finalScore.toString());
           setSpeedrunHighScore(finalScore);
           api.post('/api/user/progress', {
-            item_type: 'vocabulary',
-            item_id: 200000 + (level === 'N5' ? 5 : 4),
+            item_type: speedrunTarget === 'kanji' ? 'kanji' : 'vocabulary',
+            item_id: (speedrunTarget === 'kanji' ? 300000 : 200000) + (level === 'N5' ? 5 : 4),
             status: 'mastered'
           }).catch(console.error);
         }
@@ -1055,28 +1152,44 @@ export default function KnowledgeHubPage() {
         setSpeedrunTimeLeft(remaining);
       }
     }, 100);
-  }, [speedrunSourceList, speedrunDirection, speedrunStreak, level]);
+  }, [speedrunTarget, speedrunSourceList, speedrunKanjiSourceList, speedrunDirection, kanjiSpeedrunDirection, speedrunStreak, level]);
 
   const startSpeedrunGame = () => {
-    if (speedrunSourceList.length < 4) {
-      showToast('Cần ít nhất 4 từ vựng để bắt đầu game Speedrun.');
+    const sourceList = speedrunTarget === 'kanji' ? speedrunKanjiSourceList : speedrunSourceList;
+    if (sourceList.length < 4) {
+      showToast(`Cần ít nhất 4 ${speedrunTarget === 'kanji' ? 'chữ Hán' : 'từ vựng'} để bắt đầu game Speedrun.`);
       return;
     }
     setSpeedrunScore(0);
     speedrunScoreRef.current = 0;
     setSpeedrunStreak(0);
+    setSpeedrunSelectedChoice(null);
+    setSpeedrunChoiceStatus(null);
+    setIsEvaluatingChoice(false);
     setSpeedrunActive(true);
     setSpeedrunGameOver(false);
-    nextSpeedrunQuestion(0, 10);
+    nextSpeedrunQuestion(0, 10, 0);
   };
 
   const handleSpeedrunChoice = (choice: string) => {
-    if (!speedrunQuestion) return;
+    if (isEvaluatingChoice) return;
+    if (speedrunTarget === 'vocab' && !speedrunQuestion) return;
+    if (speedrunTarget === 'kanji' && !speedrunKanjiQuestion) return;
     
-    const correctVal = speedrunDirection === 'vi-to-ja' ? speedrunQuestion.hiragana : speedrunQuestion.vietnamese_meaning;
+    const correctVal = getSpeedrunCorrectVal();
     const isCorrect = choice === correctVal;
+
+    setIsEvaluatingChoice(true);
+    setSpeedrunSelectedChoice(choice);
+    
+    if (speedrunTimerRef.current) {
+      clearInterval(speedrunTimerRef.current);
+    }
     
     if (isCorrect) {
+      setSpeedrunChoiceStatus('correct');
+      playSpeedrunSound('correct');
+
       const newScore = speedrunScore + 1;
       setSpeedrunScore(newScore);
       speedrunScoreRef.current = newScore;
@@ -1086,36 +1199,55 @@ export default function KnowledgeHubPage() {
       const reductionCount = Math.floor(newStreak / 3);
       const nextMaxTime = Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
       
-      nextSpeedrunQuestion(newScore, nextMaxTime);
+      setTimeout(() => {
+        setSpeedrunSelectedChoice(null);
+        setSpeedrunChoiceStatus(null);
+        setIsEvaluatingChoice(false);
+        nextSpeedrunQuestion(newScore, nextMaxTime, newStreak);
+      }, 350);
     } else {
-      if (speedrunTimerRef.current) {
-        clearInterval(speedrunTimerRef.current);
-      }
-      if (speedrunQuestion) {
+      setSpeedrunChoiceStatus('wrong');
+      playSpeedrunSound('wrong');
+
+      if (speedrunTarget === 'vocab' && speedrunQuestion) {
         api.post('/api/user/progress', {
           item_type: 'vocabulary',
           item_id: speedrunQuestion.id,
           status: 'wrong'
         }).catch(err => console.error('Speedrun mark wrong error:', err));
         setVocabList(prev => prev.map(v => v.id === speedrunQuestion.id ? { ...v, status: 'wrong' } : v));
-      }
-      setSpeedrunGameOver(true);
-      setSpeedrunActive(false);
-      setSpeedrunStreak(0);
-      
-      const finalScore = speedrunScore;
-      const key = `vocab_speedrun_high_score_all_${level}_${speedrunDirection}`;
-      const saved = localStorage.getItem(key);
-      const currentHigh = saved ? (parseInt(saved) || 0) : 0;
-      if (finalScore > currentHigh) {
-        localStorage.setItem(key, finalScore.toString());
-        setSpeedrunHighScore(finalScore);
+      } else if (speedrunTarget === 'kanji' && speedrunKanjiQuestion) {
         api.post('/api/user/progress', {
-          item_type: 'vocabulary',
-          item_id: 200000 + (level === 'N5' ? 5 : 4),
-          status: 'mastered'
-        }).catch(console.error);
+          item_type: 'kanji',
+          item_id: speedrunKanjiQuestion.id,
+          status: 'wrong'
+        }).catch(err => console.error('Speedrun mark wrong kanji error:', err));
+        setKanjiList(prev => prev.map(k => k.id === speedrunKanjiQuestion.id ? { ...k, status: 'wrong' } : k));
       }
+
+      setTimeout(() => {
+        setSpeedrunGameOver(true);
+        setSpeedrunActive(false);
+        setSpeedrunStreak(0);
+        setSpeedrunSelectedChoice(null);
+        setSpeedrunChoiceStatus(null);
+        setIsEvaluatingChoice(false);
+        
+        const finalScore = speedrunScore;
+        const dirKey = speedrunTarget === 'kanji' ? kanjiSpeedrunDirection : speedrunDirection;
+        const key = `${speedrunTarget}_speedrun_high_score_all_${level}_${dirKey}`;
+        const saved = localStorage.getItem(key);
+        const currentHigh = saved ? (parseInt(saved, 10) || 0) : 0;
+        if (finalScore > currentHigh) {
+          localStorage.setItem(key, finalScore.toString());
+          setSpeedrunHighScore(finalScore);
+          api.post('/api/user/progress', {
+            item_type: speedrunTarget === 'kanji' ? 'kanji' : 'vocabulary',
+            item_id: (speedrunTarget === 'kanji' ? 300000 : 200000) + (level === 'N5' ? 5 : 4),
+            status: 'mastered'
+          }).catch(console.error);
+        }
+      }, 800);
     }
   };
 
@@ -3416,30 +3548,76 @@ export default function KnowledgeHubPage() {
                       ⚡
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-lg font-black text-slate-900 dark:text-white">Trắc nghiệm phản xạ từ vựng</h3>
+                      <h3 className="text-lg font-black text-slate-900 dark:text-white">
+                        Trắc nghiệm phản xạ {speedrunTarget === 'kanji' ? 'Hán tự (Kanji)' : 'Từ vựng'}
+                      </h3>
                       <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed max-w-sm mx-auto">
-                        Mỗi câu có tối đa 10 giây để trả lời. Trả lời đúng liên tục sẽ tăng streak và rút ngắn thời gian. Game kết thúc khi hết giờ hoặc chọn sai.
+                        Mỗi câu có tối đa 10 giây để phản xạ. Trả lời đúng liên tục sẽ tăng streak và rút ngắn thời gian. Game kết thúc khi hết giờ hoặc chọn sai.
                       </p>
+                    </div>
+
+                    {/* Mode / Target Selector: Vocab vs Kanji */}
+                    <div className="space-y-1.5 text-left">
+                      <label className="text-[11px] font-bold text-slate-400 dark:text-slate-500 block uppercase">Nội dung phản xạ:</label>
+                      <div className="grid grid-cols-2 gap-2 bg-slate-50 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <button
+                          type="button"
+                          onClick={() => setSpeedrunTarget('vocab')}
+                          className={`py-2 px-3 rounded-lg text-xs font-black transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
+                            speedrunTarget === 'vocab'
+                              ? 'bg-blue-600 text-white shadow-md'
+                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                          }`}
+                        >
+                          <span>📖</span>
+                          <span>Từ vựng</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setSpeedrunTarget('kanji')}
+                          className={`py-2 px-3 rounded-lg text-xs font-black transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
+                            speedrunTarget === 'kanji'
+                              ? 'bg-indigo-600 text-white shadow-md'
+                              : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                          }`}
+                        >
+                          <span>🈸</span>
+                          <span>Hán tự (Kanji)</span>
+                        </button>
+                      </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left border-y border-slate-100 dark:border-slate-850 py-4">
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold text-slate-400 dark:text-slate-500 block uppercase">Chiều ôn tập:</label>
-                        <select
-                          value={speedrunDirection}
-                          onChange={(e) => setSpeedrunDirection(e.target.value as any)}
-                          className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-500 cursor-pointer shadow-sm"
-                        >
-                          <option value="ja-to-vi">🇯🇵 Nhật ➔ 🇻🇳 Việt</option>
-                          <option value="vi-to-ja">🇻🇳 Việt ➔ 🇯🇵 Nhật</option>
-                          <option value="listen-to-select">🎧 Nghe ➔ 🇻🇳 Việt</option>
-                        </select>
+                        <label className="text-[11px] font-bold text-slate-400 dark:text-slate-500 block uppercase">Chiều phản xạ:</label>
+                        {speedrunTarget === 'vocab' ? (
+                          <select
+                            value={speedrunDirection}
+                            onChange={(e) => setSpeedrunDirection(e.target.value as any)}
+                            className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-500 cursor-pointer shadow-sm"
+                          >
+                            <option value="ja-to-vi">🇯🇵 Nhật ➔ 🇻🇳 Việt</option>
+                            <option value="vi-to-ja">🇻🇳 Việt ➔ 🇯🇵 Nhật</option>
+                            <option value="listen-to-select">🎧 Nghe ➔ 🇻🇳 Việt</option>
+                          </select>
+                        ) : (
+                          <select
+                            value={kanjiSpeedrunDirection}
+                            onChange={(e) => setKanjiSpeedrunDirection(e.target.value as any)}
+                            className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer shadow-sm"
+                          >
+                            <option value="kanji-to-meaning">🈸 Chữ Hán ➔ 🇻🇳 Nghĩa & Âm Hán</option>
+                            <option value="meaning-to-kanji">🇻🇳 Nghĩa & Âm Hán ➔ 🈸 Chữ Hán</option>
+                            <option value="kanji-to-yomi">🈸 Chữ Hán ➔ 🔊 Âm Onyomi/Kunyomi</option>
+                          </select>
+                        )}
                       </div>
 
                       <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-slate-400 dark:text-slate-500 block uppercase">Lọc trạng thái:</label>
                         <div id="speedrun-dropdown-container" className="relative">
                           <button
+                            type="button"
                             onClick={() => setSpeedrunDropdownOpen(!speedrunDropdownOpen)}
                             className="w-full text-left bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 flex items-center justify-between cursor-pointer"
                           >
@@ -3483,8 +3661,9 @@ export default function KnowledgeHubPage() {
                     </div>
 
                     <button
+                      type="button"
                       onClick={startSpeedrunGame}
-                      className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-500 hover:to-indigo-500 text-slate-900 dark:text-white font-extrabold text-sm rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-sm rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
                     >
                       🚀 Bắt Đầu Chơi
                     </button>
@@ -3492,7 +3671,7 @@ export default function KnowledgeHubPage() {
                 )}
 
                 {/* Speedrun active gameplay screen */}
-                {speedrunActive && speedrunQuestion && (
+                {speedrunActive && (speedrunQuestion || speedrunKanjiQuestion) && (
                   <div className="max-w-xl mx-auto p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-6 shadow-2xl animate-scale-up">
                     <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-850 pb-3">
                       <div>
@@ -3521,49 +3700,121 @@ export default function KnowledgeHubPage() {
                       </div>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-950 p-8 rounded-2xl border border-slate-100 dark:border-slate-850 text-center space-y-4 shadow-inner">
-                      {speedrunDirection === 'listen-to-select' ? (
-                        <div className="space-y-3">
-                          <button
-                            onClick={() => playAudioWithFallback(speedrunQuestion.japanese_example || '', speedrunQuestion.hiragana)}
-                            className="w-16 h-16 bg-blue-500/10 text-blue-550 dark:text-blue-450 rounded-full flex items-center justify-center mx-auto text-3xl shadow cursor-pointer border border-blue-500/20 active:scale-95"
-                          >
-                            🔊
-                          </button>
-                          <p className="text-xs text-slate-450 font-bold">Nghe âm thanh phát ra và chọn nghĩa Việt tương ứng</p>
-                        </div>
-                      ) : (
+                    <div className="bg-slate-50 dark:bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-100 dark:border-slate-850 text-center space-y-3 shadow-inner">
+                      {speedrunTarget === 'vocab' && speedrunQuestion && (
+                        speedrunDirection === 'listen-to-select' ? (
+                          <div className="space-y-3">
+                            <button
+                              type="button"
+                              onClick={() => playAudioWithFallback(speedrunQuestion.japanese_example || '', speedrunQuestion.hiragana)}
+                              className="w-16 h-16 bg-blue-500/10 text-blue-550 dark:text-blue-450 rounded-full flex items-center justify-center mx-auto text-3xl shadow cursor-pointer border border-blue-500/20 active:scale-95"
+                            >
+                              🔊
+                            </button>
+                            <p className="text-xs text-slate-450 font-bold">Nghe âm thanh phát ra và chọn nghĩa Việt tương ứng</p>
+                          </div>
+                        ) : (
+                          <>
+                            <p className="text-xs text-slate-450 font-bold uppercase tracking-wider">
+                              {speedrunDirection === 'ja-to-vi' ? 'Chọn nghĩa dịch tiếng Việt đúng:' : 'Chọn từ tiếng Nhật tương ứng:'}
+                            </p>
+                            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white break-all select-all">
+                              {speedrunDirection === 'ja-to-vi' ? speedrunQuestion.hiragana : speedrunQuestion.vietnamese_meaning}
+                            </h2>
+                            {speedrunDirection === 'ja-to-vi' && speedrunQuestion.kanji_form && (
+                              <p className="text-sm font-semibold text-slate-400">({speedrunQuestion.kanji_form})</p>
+                            )}
+                          </>
+                        )
+                      )}
+
+                      {speedrunTarget === 'kanji' && speedrunKanjiQuestion && (
                         <>
-                          <p className="text-xs text-slate-450 font-bold uppercase tracking-wider">
-                            {speedrunDirection === 'ja-to-vi' ? 'Chọn nghĩa dịch tiếng Việt đúng:' : 'Chọn từ tiếng Nhật tương ứng:'}
+                          <p className="text-xs text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-wider">
+                            {kanjiSpeedrunDirection === 'kanji-to-meaning'
+                              ? 'Nhìn chữ Hán chọn nghĩa & âm Hán Việt tương ứng:'
+                              : kanjiSpeedrunDirection === 'meaning-to-kanji'
+                              ? 'Chọn chữ Hán đúng với nghĩa sau:'
+                              : 'Nhìn chữ Hán chọn âm đọc Onyomi / Kunyomi:'}
                           </p>
-                          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white break-all select-all">
-                            {speedrunDirection === 'ja-to-vi' ? speedrunQuestion.hiragana : speedrunQuestion.vietnamese_meaning}
-                          </h2>
-                          {speedrunDirection === 'ja-to-vi' && speedrunQuestion.kanji_form && (
-                            <p className="text-sm font-semibold text-slate-400">({speedrunQuestion.kanji_form})</p>
+                          {kanjiSpeedrunDirection === 'meaning-to-kanji' ? (
+                            <div className="space-y-1">
+                              {speedrunKanjiQuestion.sino_vietnamese && (
+                                <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                                  Âm Hán: {speedrunKanjiQuestion.sino_vietnamese.toUpperCase()}
+                                </span>
+                              )}
+                              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+                                {speedrunKanjiQuestion.vietnamese_meaning}
+                              </h2>
+                            </div>
+                          ) : (
+                            <div className="space-y-1">
+                              <h2 className="text-5xl sm:text-6xl font-black text-indigo-600 dark:text-indigo-400 font-serif my-1 select-all">
+                                {speedrunKanjiQuestion.character}
+                              </h2>
+                              {kanjiSpeedrunDirection === 'kanji-to-meaning' && speedrunKanjiQuestion.stroke_count && (
+                                <p className="text-[11px] text-slate-400 font-semibold">({speedrunKanjiQuestion.stroke_count} nét)</p>
+                              )}
+                            </div>
                           )}
                         </>
                       )}
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {speedrunOptions.map((choice, oIdx) => (
-                        <button
-                          key={oIdx}
-                          onClick={() => handleSpeedrunChoice(choice)}
-                          className="px-4 py-3.5 text-left rounded-xl text-xs sm:text-sm font-bold border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:bg-blue-50 dark:hover:bg-slate-900 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all shadow-sm break-all"
-                        >
-                          <span className="inline-block w-5 h-5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-bold text-center leading-5 text-slate-500 mr-2 flex-shrink-0">
-                            {['A', 'B', 'C', 'D'][oIdx]}
-                          </span>
-                          {choice}
-                        </button>
-                      ))}
+                      {speedrunOptions.map((choice, oIdx) => {
+                        const correctVal = getSpeedrunCorrectVal();
+                        const isSelected = speedrunSelectedChoice === choice;
+                        const isCorrectAnswer = choice === correctVal;
+
+                        let btnStyle = 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-900';
+                        let badgeStyle = 'bg-slate-100 dark:bg-slate-800 text-slate-500 border-slate-200 dark:border-slate-700';
+
+                        if (speedrunChoiceStatus === 'correct' && isSelected) {
+                          btnStyle = 'border-emerald-500 bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 scale-[1.02] ring-2 ring-emerald-300';
+                          badgeStyle = 'bg-white text-emerald-600 border-emerald-400';
+                        } else if (speedrunChoiceStatus === 'wrong') {
+                          if (isSelected) {
+                            btnStyle = 'border-rose-500 bg-rose-500 text-white shadow-lg shadow-rose-500/30 animate-shake ring-2 ring-rose-300';
+                            badgeStyle = 'bg-white text-rose-600 border-rose-400';
+                          } else if (isCorrectAnswer) {
+                            btnStyle = 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 font-extrabold ring-2 ring-emerald-500/50 scale-[1.01]';
+                            badgeStyle = 'bg-emerald-500 text-white border-emerald-400';
+                          }
+                        }
+
+                        return (
+                          <button
+                            key={oIdx}
+                            type="button"
+                            onClick={() => handleSpeedrunChoice(choice)}
+                            disabled={isEvaluatingChoice}
+                            className={`px-4 py-3.5 text-left rounded-xl text-xs sm:text-sm font-bold border cursor-pointer transition-all shadow-sm break-all flex items-center justify-between ${btnStyle} ${speedrunTarget === 'kanji' && kanjiSpeedrunDirection === 'meaning-to-kanji' ? 'justify-center text-2xl font-serif py-4' : ''}`}
+                          >
+                            <div className="flex items-center space-x-2 min-w-0">
+                              <span className={`inline-block w-5 h-5 rounded-md border text-[10px] font-bold text-center leading-5 flex-shrink-0 ${badgeStyle}`}>
+                                {['A', 'B', 'C', 'D'][oIdx]}
+                              </span>
+                              <span className="truncate">{choice}</span>
+                            </div>
+                            {speedrunChoiceStatus === 'correct' && isSelected && (
+                              <span className="text-sm font-black animate-bounce ml-2 flex-shrink-0">✓</span>
+                            )}
+                            {speedrunChoiceStatus === 'wrong' && isSelected && (
+                              <span className="text-sm font-black animate-pulse ml-2 flex-shrink-0">✗</span>
+                            )}
+                            {speedrunChoiceStatus === 'wrong' && isCorrectAnswer && !isSelected && (
+                              <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 ml-2 flex-shrink-0">Đúng ✓</span>
+                            )}
+                          </button>
+                        );
+                      })}
                     </div>
 
                     <div className="text-center pt-2">
                       <button
+                        type="button"
                         onClick={stopSpeedrun}
                         className="text-xs text-red-500 hover:underline font-bold cursor-pointer"
                       >
@@ -3598,12 +3849,14 @@ export default function KnowledgeHubPage() {
 
                     <div className="flex space-x-3">
                       <button
+                        type="button"
                         onClick={startSpeedrunGame}
-                        className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white font-black text-xs sm:text-sm rounded-xl transition-all shadow-md active:scale-95 cursor-pointer"
+                        className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs sm:text-sm rounded-xl transition-all shadow-md active:scale-95 cursor-pointer"
                       >
                         🔄 Chơi lại lượt mới
                       </button>
                       <button
+                        type="button"
                         onClick={() => {
                           setSpeedrunGameOver(false);
                           setSpeedrunActive(false);

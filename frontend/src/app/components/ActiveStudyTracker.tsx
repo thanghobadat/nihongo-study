@@ -45,13 +45,17 @@ export default function ActiveStudyTracker() {
       isSyncingRef.current = true;
       const res: any = await api.post('/api/user/study-time', {
         date: currentDateRef.current,
-        deltaSeconds: delta
+        deltaSeconds: delta,
+        clientTotalSeconds: totalSecondsRef.current
       });
 
       if (res && res.success && res.data) {
         unsyncedDeltaRef.current = Math.max(0, unsyncedDeltaRef.current - delta);
         if (res.data.totalSeconds && res.data.totalSeconds > totalSecondsRef.current) {
           totalSecondsRef.current = res.data.totalSeconds;
+          try {
+            localStorage.setItem(`study_time_${currentDateRef.current}`, String(res.data.totalSeconds));
+          } catch {}
           broadcastUpdate(isTabVisibleRef.current && isUserActiveRef.current);
         }
       }
@@ -89,6 +93,11 @@ export default function ActiveStudyTracker() {
               localStorage.setItem(`study_time_${dateToday}`, String(serverSec));
             } catch {}
             broadcastUpdate(isTabVisibleRef.current && isUserActiveRef.current);
+          } else if (totalSecondsRef.current > serverSec) {
+            // Thiết bị hiện tại có tổng thời gian cao hơn máy chủ (do máy chủ Render ngủ đông/cold-start)
+            // Lập tức gửi delta hòa giải để nâng tổng trên server và đồng bộ các thiết bị khác
+            unsyncedDeltaRef.current = Math.max(unsyncedDeltaRef.current, totalSecondsRef.current - serverSec);
+            flushDeltaToServer();
           }
         }
       }).catch(() => {});
@@ -185,7 +194,8 @@ export default function ActiveStudyTracker() {
           const token = api.getToken();
           const payload = JSON.stringify({
             date: currentDateRef.current,
-            deltaSeconds: delta
+            deltaSeconds: delta,
+            clientTotalSeconds: totalSecondsRef.current
           });
           const url = `${getBaseUrl()}/api/user/study-time`;
           // Use fetch with keepalive for reliable background request on close
