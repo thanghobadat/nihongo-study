@@ -2251,3 +2251,32 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Xác thực**:
   - `node --check` Backend: 100% PASS (0 lỗi).
   - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).
+
+### Mốc 151: Triển Khai Phân Hệ Luyện Chữ Hán (Kanji Practice) Chuyên Biệt Tương Tự Luyện Từ Vựng Trên Trang Sổ Tay Tri Thức (/knowledge) (Đã hoàn thành - 12/10/2026)
+- **Thanh điều hướng & Menu Sidebar ([knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx))**:
+  - Bổ sung tab chuyên biệt **`🖌️ Luyện chữ Hán`** (`kanji-practice`) song song với **`✏️ Luyện từ vựng`** trên cả thanh Tab Bar và menu Sidebar.
+  - Tự động đồng bộ cấu hình đối tượng phản xạ `speedrunTarget = 'kanji'` khi người dùng chuyển sang tab `kanji-practice`.
+- **Chế độ ✍️ Tự luận (Bảng Luyện Tập & Đảo Đề Tương Tác Chữ Hán)**:
+  - Hỗ trợ 3 chiều luyện tập:
+    1. `🈸 ➔ 🇻🇳 Nghĩa`: Nhìn chữ Hán font serif lớn điền Nghĩa tiếng Việt hoặc Âm Hán Việt.
+    2. `🇻🇳 ➔ 🈸 Chữ`: Nhìn Nghĩa tiếng Việt và Âm Hán Việt điền Chữ Hán (`character`).
+    3. `🈸 ➔ 🔊 Âm đọc`: Nhìn chữ Hán điền Âm đọc Onyomi hoặc Kunyomi.
+  - Bộ lọc bài tập hoàn chỉnh:
+    + Lọc theo bài học (`Bài 1 - 25` cho N5, `Bài 26 - 50` cho N4, hoặc `Tất cả các bài`).
+    + Lọc theo trạng thái học tập (Chưa học, Đang học, Đã thuộc).
+    + Chức năng `❌ Chỉ ôn chữ làm sai` kèm huy hiệu đếm số lượng chữ Hán bị sai và nút `🗑️ Xóa chữ sai`.
+    + Giới hạn số câu tùy chỉnh linh hoạt (`kanjiPracticeLimit`).
+    + Nút `🔀 Tráo đề` (xáo trộn ngẫu nhiên đề bài).
+  - Giao diện bài tập trực quan:
+    + Phiên bản Desktop: Bảng chi tiết gồm STT, Nghe TTS, Câu hỏi, Thông tin Hán tự (Âm Hán, số nét, bài học), Ô nhập câu trả lời, Kết quả, % Đúng và Đáp án chi tiết.
+    + Phiên bản Mobile: Thẻ câu hỏi bóng bẩy, nút nghe phát âm, ô nhập đáp án và hiển thị so sánh lỗi sai.
+    + Nút `👁️ Xem đáp án` hỗ trợ học nhanh khi chưa nộp bài.
+  - Chấm điểm thông minh & Lưu tiến độ:
+    + Hàm `calculateKanjiAccuracy`: So khớp linh hoạt (chấp nhận cả âm Hán hoặc các từ khóa trong nghĩa tiếng Việt; so khớp chính xác chữ Hán; phân tách kiểm tra âm On/Kun).
+    + Hiển thị phân tích lỗi sai chính tả trực quan từng ký tự (`renderDiff`).
+    + Nút `📊 Nộp Bài & Chấm Điểm Chữ Hán`: Tự động gửi API `POST /api/user/progress` cập nhật trạng thái `mastered` khi đạt 100% hoặc `wrong` khi làm sai để đồng bộ đám mây đa thiết bị.
+    + Bảng kết quả tổng kết số câu đúng, lời động viên khích lệ kèm 2 nút `🔄 Làm đề mới` và `📝 Làm lại đề này`.
+- **Chế độ ⚡ Phản xạ nhanh (Trắc nghiệm phản xạ Chữ Hán Speedrun)**:
+  - Tích hợp trực tiếp chế độ Speedrun 10 giây dành riêng cho Hán tự với 3 chiều lựa chọn, hiển thị streak, sound effects, visual feedback và lưu High score vào localStorage.
+- **Kiểm định & Xác thực**:
+  - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).
