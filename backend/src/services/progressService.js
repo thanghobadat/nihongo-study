@@ -153,7 +153,7 @@ async function syncUserReviewSessionsFromSupabase(userId) {
 /**
  * Helper to extract mastered item IDs from completed tasks in a study plan
  */
-function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds) {
+function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgressMap = null, userId = null) {
   if (!plan) return;
   const allDays = [
     ...(Array.isArray(plan.days) ? plan.days : []),
@@ -165,6 +165,13 @@ function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, 
         if (task.completed && !task.rescheduled && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
           for (const id of task.itemIds) {
             const numId = Number(id);
+            // If userProgress exists for this user, do not falsely mark an item as mastered if it is NOT mastered in DB!
+            if (userProgressMap && userId) {
+              const status = userProgressMap[`${userId}:${task.itemType}:${numId}`];
+              if (status !== 'mastered') {
+                continue;
+              }
+            }
             if (task.itemType === 'vocabulary') masteredVocabIds.add(numId);
             else if (task.itemType === 'kanji') masteredKanjiIds.add(numId);
             else if (task.itemType === 'grammar') masteredGrammarIds.add(numId);
@@ -230,19 +237,14 @@ async function getMasteredItemIds(userId, currentPlan = null) {
         .maybeSingle();
 
       if (!spErr && sp && sp.plan_data) {
-        extractMasteredItemsFromPlan(sp.plan_data, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+        extractMasteredItemsFromPlan(sp.plan_data, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, mockDb.userProgress, userId);
       }
     } catch (spErr) {
       console.warn('[ProgressService] Supabase user_study_plans fetch warning:', spErr.message);
     }
   }
 
-  // 2. Extract from explicit currentPlan if provided by caller
-  if (currentPlan) {
-    extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
-  }
-
-  // 3. Fetch from local cache / file (covers local mock and offline)
+  // 2. Fetch from local cache / file (covers local mock and offline)
   const diskProgress = loadPersistentProgress();
   const userProgress = { ...diskProgress, ...(mockDb.userProgress || {}) };
   mockDb.userProgress = userProgress;
@@ -261,7 +263,12 @@ async function getMasteredItemIds(userId, currentPlan = null) {
     }
   });
 
-  // 4. Inspect completed tasks in active study plans from disk / RAM
+  // 3. Extract from explicit currentPlan if provided by caller (guarded by userProgress)
+  if (currentPlan) {
+    extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
+  }
+
+  // 4. Inspect completed tasks in active study plans from disk / RAM (guarded by userProgress)
   try {
     let plans = {};
     if (fs.existsSync(STUDY_PLANS_FILE)) {
@@ -269,7 +276,7 @@ async function getMasteredItemIds(userId, currentPlan = null) {
     }
     const userPlan = plans[userId] || (mockDb.studyPlans && mockDb.studyPlans[userId]);
     if (userPlan) {
-      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
     }
   } catch (planErr) {
     console.warn('[ProgressService] Error reading completed tasks from study_plans:', planErr.message);
@@ -352,31 +359,29 @@ function getMasteredItemIdsSync(userId, currentPlan = null) {
   const masteredKanjiIds = new Set();
   const masteredGrammarIds = new Set();
 
-  if (currentPlan) {
-    extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
-  }
-
-  if (!userId) {
-    return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
-  }
-
   const diskProgress = loadPersistentProgress();
   const userProgress = { ...diskProgress, ...(mockDb.userProgress || {}) };
   mockDb.userProgress = userProgress;
 
-  Object.keys(userProgress).forEach(k => {
-    if (k.startsWith(`${userId}:`)) {
-      const status = userProgress[k];
-      if (status === 'mastered') {
-        const parts = k.split(':');
-        const itemType = parts[1];
-        const itemId = parseInt(parts[2], 10);
-        if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
-        else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
-        else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
+  if (userId) {
+    Object.keys(userProgress).forEach(k => {
+      if (k.startsWith(`${userId}:`)) {
+        const status = userProgress[k];
+        if (status === 'mastered') {
+          const parts = k.split(':');
+          const itemType = parts[1];
+          const itemId = parseInt(parts[2], 10);
+          if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
+          else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
+          else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
+        }
       }
-    }
-  });
+    });
+  }
+
+  if (currentPlan) {
+    extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
+  }
 
   try {
     let plans = {};
@@ -385,7 +390,7 @@ function getMasteredItemIdsSync(userId, currentPlan = null) {
     }
     const userPlan = plans[userId] || (mockDb.studyPlans && mockDb.studyPlans[userId]);
     if (userPlan) {
-      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds);
+      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
     }
   } catch (e) {}
 

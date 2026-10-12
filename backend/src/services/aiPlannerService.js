@@ -309,14 +309,25 @@ function validateSequence(tasks) {
 /**
  * Check if a specific category of a lesson has all its tasks completed in a given plan
  */
-function isLessonCategoryCompletedInPlan(plan, lessonId, itemType) {
+function isLessonCategoryCompletedInPlan(plan, lessonId, itemType, userId = null) {
   if (!plan) return false;
   const mockDb = require('../db/mockDb');
-  let totalInLesson = 0;
-  if (itemType === 'vocabulary') totalInLesson = (mockDb.vocabulary || []).filter(v => v.lesson_id === lessonId).length;
-  else if (itemType === 'kanji') totalInLesson = (mockDb.kanji || []).filter(k => k.lesson_id === lessonId).length;
-  else if (itemType === 'grammar') totalInLesson = (mockDb.grammar || []).filter(g => g.lesson_id === lessonId).length;
+  let items = [];
+  if (itemType === 'vocabulary') items = (mockDb.vocabulary || []).filter(v => v.lesson_id === lessonId);
+  else if (itemType === 'kanji') items = (mockDb.kanji || []).filter(k => k.lesson_id === lessonId);
+  else if (itemType === 'grammar') items = (mockDb.grammar || []).filter(g => g.lesson_id === lessonId);
+  const totalInLesson = items.length;
   if (totalInLesson === 0) return true;
+
+  // If userId is provided, cross-check directly with actual database userProgress!
+  // If user has ANY unmastered items in userProgress for this category, it is NOT completed!
+  if (userId) {
+    const userProgress = mockDb.userProgress || {};
+    const unmasteredCount = items.filter(it => userProgress[`${userId}:${itemType}:${it.id}`] !== 'mastered').length;
+    if (unmasteredCount > 0) {
+      return false;
+    }
+  }
 
   const allDays = [...(plan.days || []), ...(plan.archivedPastDays || [])];
   let completedTargetCount = 0;
@@ -383,13 +394,13 @@ function generateAlgorithmicPlan({
     try {
       const mockDb = require('../db/mockDb');
       for (let l = 1; l <= 50; l++) {
-        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'vocabulary')) {
+        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'vocabulary', userId)) {
           (mockDb.vocabulary || []).filter(v => v.lesson_id === l).forEach(v => masteredVocabIds.add(v.id));
         }
-        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'kanji')) {
+        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'kanji', userId)) {
           (mockDb.kanji || []).filter(k => k.lesson_id === l).forEach(k => masteredKanjiIds.add(k.id));
         }
-        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'grammar')) {
+        if (isLessonCategoryCompletedInPlan(currentPlan, l, 'grammar', userId)) {
           (mockDb.grammar || []).filter(g => g.lesson_id === l).forEach(g => masteredGrammarIds.add(g.id));
         }
       }
@@ -457,6 +468,7 @@ function generateAlgorithmicPlan({
 
     // Kanji chunking (only for unmastered kanji):
     if (kanjiList.length > 0) {
+      const isDebt = l < (currentLesson || 1);
       const kChunkSize = totalDays > 60 ? 5 : totalDays > 35 ? 8 : 16;
       const kChunks = Math.max(1, Math.ceil(kanjiList.length / kChunkSize));
       for (let c = 0; c < kChunks; c++) {
@@ -468,11 +480,16 @@ function generateAlgorithmicPlan({
           part: c + 1,
           totalParts: kChunks,
           itemIds: sub.map(k => k.id),
-          title: kChunks > 1
-            ? `Minna Bài ${l}: Nắm vững chữ Hán chưa thuộc (Phần ${c + 1}/${kChunks}: ${sub.length} chữ)`
-            : (allKanji.length > kanjiList.length
-                ? `Minna Bài ${l}: Nắm vững ${sub.length} chữ Hán còn lại (Đã thuộc ${allKanji.length - kanjiList.length} chữ)`
-                : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`),
+          isDebt,
+          title: isDebt
+            ? (kChunks > 1
+                ? `Minna Bài ${l}: [Bài nợ] Nắm vững chữ Hán chưa thuộc (Phần ${c + 1}/${kChunks}: ${sub.length} chữ)`
+                : `Minna Bài ${l}: [Bài nợ] Nắm vững toàn bộ ${sub.length} chữ Hán còn lại`)
+            : (kChunks > 1
+                ? `Minna Bài ${l}: Nắm vững chữ Hán chưa thuộc (Phần ${c + 1}/${kChunks}: ${sub.length} chữ)`
+                : (allKanji.length > kanjiList.length
+                    ? `Minna Bài ${l}: Nắm vững ${sub.length} chữ Hán còn lại (Đã thuộc ${allKanji.length - kanjiList.length} chữ)`
+                    : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`)),
           scopeDetails: `Chữ Hán: ${chars}`,
           targetCount: sub.length,
           currentCount: 0,
@@ -555,6 +572,16 @@ function generateAlgorithmicPlan({
 
     while (taskIdx < atomicTasks.length) {
       const task = atomicTasks[taskIdx];
+
+      // PREREQUISITE GUARD (Rule 7):
+      // If task is kanji, grammar, single_review, or cumulative_review of lesson L,
+      // and day d already contains vocabulary of lesson L:
+      // DO NOT place it on day d! Break and defer to day d + 1 (or later).
+      const hasVocabOfSameLesson = dayBuckets[d].some(t => t.lesson === task.lesson && t.itemType === 'vocabulary');
+      if (hasVocabOfSameLesson && (task.itemType === 'kanji' || task.itemType === 'grammar' || task.itemType === 'single_review' || task.itemType === 'cumulative_review')) {
+        break;
+      }
+
       const diffWithout = Math.abs(curCum - targetCum);
       const diffWith = Math.abs((curCum + task.estimatedMinutes) - targetCum);
 
@@ -846,7 +873,6 @@ function getUnfinishedDebt({ userId, plan }) {
     // If future/today tasks already cover the remaining workload for this group (e.g. after Replan), do not double-count as past debt
     if (futureScheduledCount >= (totalTargetCount - actualMasteredCount) && (totalTargetCount - actualMasteredCount) > 0) {
       tasks.forEach(t => {
-        t.completed = true;
         t.rescheduled = true;
       });
       continue;
@@ -926,19 +952,34 @@ function getUnfinishedDebt({ userId, plan }) {
 function getCompletedLessons({ userId, currentPlan, currentProgress, masteredItemIds }) {
   const completed = new Set();
 
-  // 1. From explicit completedLessons array if explicitly passed
+  // 1. From explicit completedLessons array if explicitly passed (validated against userProgress)
   if (currentProgress && Array.isArray(currentProgress.completedLessons)) {
     for (const l of currentProgress.completedLessons) {
-      if (typeof l === 'number' && l >= 1 && l <= 50) completed.add(l);
+      if (typeof l === 'number' && l >= 1 && l <= 50) {
+        if (userId) {
+          const mockDb = require('../db/mockDb');
+          const kanjiList = (mockDb.kanji || []).filter(k => k.lesson_id === l);
+          const vocabList = (mockDb.vocabulary || []).filter(v => v.lesson_id === l);
+          const grammarList = (mockDb.grammar || []).filter(g => g.lesson_id === l);
+          const userProgress = mockDb.userProgress || {};
+          const unmasteredK = kanjiList.filter(k => userProgress[`${userId}:kanji:${k.id}`] !== 'mastered').length;
+          const unmasteredV = vocabList.filter(v => userProgress[`${userId}:vocabulary:${v.id}`] !== 'mastered').length;
+          const unmasteredG = grammarList.filter(g => userProgress[`${userId}:grammar:${g.id}`] !== 'mastered').length;
+          if (unmasteredK > 0 || unmasteredV > 0 || unmasteredG > 0) {
+            continue;
+          }
+        }
+        completed.add(l);
+      }
     }
   }
 
   // 2. From currentPlan if passed: check if all 3 categories (vocab, kanji, grammar) are completed
   if (currentPlan) {
     for (let l = 1; l <= 50; l++) {
-      const vDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'vocabulary');
-      const kDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'kanji');
-      const gDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'grammar');
+      const vDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'vocabulary', userId);
+      const kDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'kanji', userId);
+      const gDone = isLessonCategoryCompletedInPlan(currentPlan, l, 'grammar', userId);
       if (vDone && kDone && gDone) {
         completed.add(l);
       }
