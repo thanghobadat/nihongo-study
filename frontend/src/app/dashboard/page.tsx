@@ -188,11 +188,12 @@ export default function UserDashboard() {
   const fetchDashboardData = useCallback(async () => {
     try {
       setLoading(true);
+      const currentDateStr = getVietnamDateString();
       const [overviewRes, planRes, historyRes, debtRes] = await Promise.all([
         api.get('/api/user/study-overview').catch(() => null),
         api.get('/api/user/study-plan').catch(() => null),
         api.get('/api/user/daily-history').catch(() => null),
-        api.get('/api/user/study-debt').catch(() => null)
+        api.get(`/api/user/study-debt?date=${currentDateStr}`).catch(() => null)
       ]);
 
       if (overviewRes && overviewRes.success) {
@@ -257,6 +258,13 @@ export default function UserDashboard() {
                 setStudyPlan(cachedPlan);
                 if (cachedPlan.startDate) setStartDateStr(cachedPlan.startDate);
                 if (cachedPlan.endDate) setEndDateStr(cachedPlan.endDate);
+                // Re-check debt against restored cache
+                api.get(`/api/user/study-debt?date=${currentDateStr}`).then((res: any) => {
+                  if (res && res.hasDebt && res.debtItems && res.debtItems.length > 0) {
+                    setDebtData(res);
+                    setIsDebtModalOpen(true);
+                  }
+                }).catch(() => {});
                 // Do not auto-post cachedPlan here to avoid overwriting newer server data during temporary network glitches
               }
             }
@@ -556,7 +564,7 @@ export default function UserDashboard() {
       });
       showNotification(completed ? '✅ Đã hoàn thành nhiệm vụ ôn luyện!' : '🔄 Đã chuyển nhiệm vụ về Chưa hoàn thành!');
       // Silently sync debt with server to ensure accuracy
-      api.get('/api/user/study-debt').then((res: any) => {
+      api.get(`/api/user/study-debt?date=${targetDate}`).then((res: any) => {
         if (res && res.success) {
           setDebtData(res);
         }

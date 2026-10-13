@@ -2520,12 +2520,13 @@ async function checkAndNotifyNewlyCompletedTasks(userId) {
 router.get('/study-debt', async (req, res) => {
   try {
     const userId = req.user.id;
+    const clientDate = req.query.date;
     await progressService.syncUserProgressFromSupabase(userId);
     let plan = await getUserPlanAsync(userId);
     if (plan) {
       plan = applyAutoTracking(plan, userId);
     }
-    const debt = aiPlannerService.getUnfinishedDebt({ userId, plan });
+    const debt = aiPlannerService.getUnfinishedDebt({ userId, plan, currentDate: clientDate });
     return res.json({ success: true, ...debt });
   } catch (err) {
     console.error('Error getting study debt:', err);
@@ -2566,7 +2567,7 @@ router.post('/replan-debt', async (req, res) => {
     if (updatedPlan && updatedPlan.days) {
       const todayStr = getLocalDateStr();
       const todayTasks = updatedPlan.days.find(d => d.date === todayStr)?.tasks || [];
-      const debtInfo = aiPlannerService.getUnfinishedDebt({ userId, plan });
+      const debtInfo = aiPlannerService.getUnfinishedDebt({ userId, plan, currentDate: todayStr });
       const debtCount = debtInfo?.debtItems?.length || 1;
       pushNotificationService.sendDebtReplanNotification(userId, {
         debtCount,
@@ -2801,7 +2802,7 @@ router.post('/check-daily-notification', async (req, res) => {
 
     // 1. Scenario 1: Qua ngày mới (New Day Notification)
     if (plan.lastNewDayNotifiedDate !== todayStr) {
-      const debtInfo = aiPlannerService.getUnfinishedDebt({ userId, plan });
+      const debtInfo = aiPlannerService.getUnfinishedDebt({ userId, plan, currentDate: todayStr });
       const yesterdayDebtItems = debtInfo?.debtItems || [];
 
       pushNotificationService.sendNewDayNotification(userId, {

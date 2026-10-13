@@ -24,7 +24,7 @@ function normalizeDateStr(str) {
   return s;
 }
 
-const { getVietnamDateStr, getYesterdayVietnamDateStr } = require('../utils/vietnamTime');
+const { getVietnamDateStr, getYesterdayVietnamDateStr, addVietnamDays } = require('../utils/vietnamTime');
 
 /**
  * Format a Date to YYYY-MM-DD in Vietnam Timezone
@@ -760,18 +760,18 @@ Hãy đưa ra lời khuyên huấn luyện (coaching advice) ngắn gọn, truy�
 /**
  * Detect Unfinished Debt from past days (before today)
  */
-function getUnfinishedDebt({ userId, plan }) {
+function getUnfinishedDebt({ userId, plan, currentDate = null }) {
   if (!plan || !plan.days) {
     return { hasDebt: false, debtItems: [], yesterdayDate: null };
   }
 
-  const todayStr = getVietnamDateStr();
-  const yesterdayStr = getYesterdayVietnamDateStr();
+  const todayStr = currentDate ? normalizeDateStr(currentDate) : getVietnamDateStr();
+  const yesterdayStr = addVietnamDays(todayStr, -1);
 
   // Find all past days with date < todayStr (searching both active plan days and archivedPastDays)
   const allPastDays = [
-    ...(plan.archivedPastDays || []).filter(d => d.date < todayStr),
-    ...(plan.days || []).filter(d => d.date < todayStr)
+    ...(plan.archivedPastDays || []).filter(d => normalizeDateStr(d.date) < todayStr),
+    ...(plan.days || []).filter(d => normalizeDateStr(d.date) < todayStr)
   ];
 
   if (allPastDays.length === 0) {
@@ -858,20 +858,35 @@ function getUnfinishedDebt({ userId, plan }) {
       continue;
     }
 
-    // Check how many items of this (itemType, lesson) have already been officially rescheduled into active plan days (date >= todayStr)
-    const futureScheduledCount = (plan.days || [])
-      .filter(d => d.date >= todayStr)
-      .reduce((sum, d) => {
-        const matchingTasks = (d.tasks || []).filter(t => {
-          const l = t.lesson || t.lesson_id || 1;
-          if (itemType === 'cumulative_review') return t.itemType === 'cumulative_review';
-          return t.itemType === itemType && l === lesson;
-        });
-        return sum + matchingTasks.reduce((s, t) => s + (t.targetCount || 1), 0);
-      }, 0);
+    // Check how many items of this uncompleted group have ALREADY been officially rescheduled into active plan days (date >= todayStr)
+    // A task is only considered "rescheduled" from debt if:
+    // (a) It was explicitly marked as debt (t.isDebt === true) or rescheduled, OR
+    // (b) Its specific itemIds overlap with future scheduled tasks
+    const futureDays = (plan.days || []).filter(d => normalizeDateStr(d.date) >= todayStr);
+    const matchingFutureTasks = futureDays.flatMap(d => (d.tasks || [])).filter(t => {
+      const l = t.lesson || t.lesson_id || 1;
+      if (itemType === 'cumulative_review') return t.itemType === 'cumulative_review';
+      return t.itemType === itemType && l === lesson;
+    });
 
-    // If future/today tasks already cover the remaining workload for this group (e.g. after Replan), do not double-count as past debt
-    if (futureScheduledCount >= (totalTargetCount - actualMasteredCount) && (totalTargetCount - actualMasteredCount) > 0) {
+    // Check 1: Explicit debt tasks scheduled in future (created by Replan)
+    const explicitFutureDebtCount = matchingFutureTasks
+      .filter(t => t.isDebt || t.rescheduledFrom)
+      .reduce((sum, t) => sum + (t.targetCount || 1), 0);
+
+    // Check 2: Item ID overlap (if tasks designate itemIds)
+    const pastUncompletedItemIds = new Set(tasks.flatMap(t => Array.isArray(t.itemIds) ? t.itemIds : []));
+    let itemIdRescheduledCount = 0;
+    if (pastUncompletedItemIds.size > 0) {
+      const futureItemIds = new Set(matchingFutureTasks.flatMap(t => Array.isArray(t.itemIds) ? t.itemIds : []));
+      itemIdRescheduledCount = [...pastUncompletedItemIds].filter(id => futureItemIds.has(id)).length;
+    }
+
+    const effectiveRescheduledCount = Math.max(explicitFutureDebtCount, itemIdRescheduledCount);
+
+    // If future tasks actually rescheduled these specific missing items (e.g. after Replan), do not double-count as past debt
+    const missingInGroup = totalTargetCount - actualMasteredCount;
+    if (effectiveRescheduledCount >= missingInGroup && missingInGroup > 0) {
       tasks.forEach(t => {
         t.rescheduled = true;
       });
