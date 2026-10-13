@@ -1,1 +1,16 @@
-{}
+{
+  "user-1781344343083:review_session_lesson_1": {
+    "completed": true,
+    "score": 100,
+    "completedAt": "2026-10-12T10:00:00Z"
+  },
+  "user-1781344343083:nihongo_review_state_lesson_1": {
+    "completed": true,
+    "score": 100,
+    "isCompleted": true
+  },
+  "user-1781344343083:nihongo_review_state_combined": {
+    "completed": true,
+    "score": 100
+  }
+}

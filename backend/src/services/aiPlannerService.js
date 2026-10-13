@@ -480,7 +480,7 @@ function generateAlgorithmicPlan({
 
     // Vocab chunking based on totalDays (only for unmastered words):
     if (vocabList.length > 0) {
-      const vChunkSize = totalDays > 60 ? 18 : totalDays > 35 ? 25 : 50;
+      const vChunkSize = totalDays > 60 ? 14 : totalDays > 35 ? 20 : 35;
       const vChunks = Math.max(1, Math.ceil(vocabList.length / vChunkSize));
       for (let c = 0; c < vChunks; c++) {
         const sub = vocabList.slice(c * vChunkSize, (c + 1) * vChunkSize);
@@ -517,7 +517,7 @@ function generateAlgorithmicPlan({
     // Kanji chunking (only for unmastered kanji):
     if (kanjiList.length > 0) {
       const isDebt = l < (currentLesson || 1);
-      const kChunkSize = totalDays > 60 ? 5 : totalDays > 35 ? 8 : 16;
+      const kChunkSize = totalDays > 60 ? 3 : totalDays > 35 ? 5 : 8;
       const kChunks = Math.max(1, Math.ceil(kanjiList.length / kChunkSize));
       for (let c = 0; c < kChunks; c++) {
         const sub = kanjiList.slice(c * kChunkSize, (c + 1) * kChunkSize);
@@ -549,28 +549,36 @@ function generateAlgorithmicPlan({
       }
     }
 
-    // Grammar (only for unmastered grammar):
+    // Grammar chunking (only for unmastered grammar):
     if (grammarList.length > 0) {
-      const gTotal = grammarList.length;
-      atomicTasks.push({
-        lesson: l,
-        itemType: 'grammar',
-        part: 1,
-        totalParts: 1,
-        itemIds: grammarList.map(g => g.id),
-        title: allGrammar.length > grammarList.length
-          ? `Minna Bài ${l}: Làm chủ ${gTotal} mẫu ngữ pháp còn lại (Đã thuộc ${allGrammar.length - grammarList.length} mẫu)`
-          : `Minna Bài ${l}: Làm chủ ${gTotal} mẫu ngữ pháp cốt lõi`,
-        scopeDetails: allGrammar.length > grammarList.length
-          ? `Học các mẫu ngữ pháp còn lại của Bài ${l}`
-          : counts.grammarScope,
-        targetCount: gTotal,
-        currentCount: 0,
-        workloadPoints: gTotal * WORKLOAD_WEIGHTS.grammar,
-        estimatedMinutes: gTotal * 18,
-        link: `/lessons/${l}?tab=grammar`,
-        completed: false
-      });
+      const gChunkSize = totalDays > 60 ? 3 : totalDays > 35 ? 4 : 6;
+      const gChunks = Math.max(1, Math.ceil(grammarList.length / gChunkSize));
+      for (let c = 0; c < gChunks; c++) {
+        const sub = grammarList.slice(c * gChunkSize, (c + 1) * gChunkSize);
+        atomicTasks.push({
+          lesson: l,
+          itemType: 'grammar',
+          part: c + 1,
+          totalParts: gChunks,
+          itemIds: sub.map(g => g.id),
+          title: gChunks > 1
+            ? `Minna Bài ${l}: Làm chủ ngữ pháp (Phần ${c + 1}/${gChunks}: ${sub.length} mẫu)`
+            : (allGrammar.length > grammarList.length
+                ? `Minna Bài ${l}: Làm chủ ${sub.length} mẫu ngữ pháp còn lại (Đã thuộc ${allGrammar.length - grammarList.length} mẫu)`
+                : `Minna Bài ${l}: Làm chủ ${sub.length} mẫu ngữ pháp cốt lõi`),
+          scopeDetails: gChunks > 1
+            ? `Phần ${c + 1}: ${sub.length} mẫu câu (${sub.map(g => g.title).join(' • ')})`
+            : (allGrammar.length > grammarList.length
+                ? `Học các mẫu ngữ pháp còn lại của Bài ${l}`
+                : counts.grammarScope),
+          targetCount: sub.length,
+          currentCount: 0,
+          workloadPoints: sub.length * WORKLOAD_WEIGHTS.grammar,
+          estimatedMinutes: sub.length * 18,
+          link: `/lessons/${l}?tab=grammar`,
+          completed: false
+        });
+      }
     }
 
     // Review 1 (4 dạng bài tập) - ONLY schedule if NOT already completed in userReviewSessions
@@ -612,47 +620,74 @@ function generateAlgorithmicPlan({
     }
   }
 
-  // 2. Distribute evenly into totalDays using target daily pacing
+  // 2. Distribute evenly into totalDays using dynamic daily pacing
   const totalEstimatedMins = atomicTasks.reduce((s, t) => s + (t.estimatedMinutes || 0), 0);
-  const targetDailyMins = totalEstimatedMins / totalDays;
-
   const dayBuckets = Array.from({ length: totalDays }, () => []);
   const dayMinutes = Array(totalDays).fill(0);
   let taskIdx = 0;
 
   for (let d = 0; d < totalDays; d++) {
-    const targetCum = (d + 1) * targetDailyMins;
-    let curCum = dayMinutes.slice(0, d + 1).reduce((a, b) => a + b, 0);
+    const remainingMins = atomicTasks.slice(taskIdx).reduce((s, t) => s + (t.estimatedMinutes || 0), 0);
+    const remainingDays = totalDays - d;
+    const dayTarget = Math.ceil(remainingMins / remainingDays);
+    const hardMax = 275;
 
     while (taskIdx < atomicTasks.length) {
       const task = atomicTasks[taskIdx];
 
-      // PREREQUISITE GUARD (Rule 7):
-      // If task is kanji, grammar, single_review, or cumulative_review of lesson L,
-      // and day d already contains vocabulary of lesson L:
-      // DO NOT place it on day d! Break and defer to day d + 1 (or later).
-      const hasVocabOfSameLesson = dayBuckets[d].some(t => t.lesson === task.lesson && t.itemType === 'vocabulary');
-      if (hasVocabOfSameLesson && (task.itemType === 'kanji' || task.itemType === 'grammar' || task.itemType === 'single_review' || task.itemType === 'cumulative_review')) {
-        break;
-      }
-
-      const diffWithout = Math.abs(curCum - targetCum);
-      const diffWith = Math.abs((curCum + task.estimatedMinutes) - targetCum);
-
-      if (d === totalDays - 1 || (diffWith <= diffWithout && dayMinutes[d] < targetDailyMins + 35) || dayMinutes[d] === 0) {
+      if (dayMinutes[d] === 0) {
         dayBuckets[d].push(task);
         dayMinutes[d] += task.estimatedMinutes;
-        curCum += task.estimatedMinutes;
         taskIdx++;
-      } else {
+        continue;
+      }
+
+      if (dayMinutes[d] + task.estimatedMinutes > hardMax) {
         break;
       }
+
+      if (dayMinutes[d] >= dayTarget) {
+        break;
+      }
+
+      dayBuckets[d].push(task);
+      dayMinutes[d] += task.estimatedMinutes;
+      taskIdx++;
     }
   }
 
-  // If any trailing days remain empty, fill with JLPT sprint
+  // Second pass: if any leftover tasks remain (e.g. near the final days),
+  // distribute them to days from the back that have room (< hardMax):
+  while (taskIdx < atomicTasks.length) {
+    const task = atomicTasks[taskIdx];
+    let bestDay = -1;
+    let minMins = 9999;
+    const startSearchDay = Math.max(0, totalDays - 15);
+    for (let d = startSearchDay; d < totalDays; d++) {
+      if (dayMinutes[d] + task.estimatedMinutes <= 275 && dayMinutes[d] < minMins) {
+        minMins = dayMinutes[d];
+        bestDay = d;
+      }
+    }
+    if (bestDay !== -1) {
+      dayBuckets[bestDay].push(task);
+      dayMinutes[bestDay] += task.estimatedMinutes;
+      taskIdx++;
+    } else {
+      let lowestDay = startSearchDay;
+      for (let d = startSearchDay + 1; d < totalDays; d++) {
+        if (dayMinutes[d] < dayMinutes[lowestDay]) lowestDay = d;
+      }
+      dayBuckets[lowestDay].push(task);
+      dayMinutes[lowestDay] += task.estimatedMinutes;
+      taskIdx++;
+    }
+  }
+
+  // If any day has less than 195 minutes (e.g. trailing days), top-up with JLPT sprint
   for (let d = 0; d < totalDays; d++) {
-    if (dayBuckets[d].length === 0) {
+    if (dayMinutes[d] < 195) {
+      const needed = Math.max(60, 225 - dayMinutes[d]);
       dayBuckets[d].push({
         lesson: targetLesson,
         itemType: 'practice',
@@ -662,12 +697,12 @@ function generateAlgorithmicPlan({
         scopeDetails: `Làm đề thi thử tổng hợp cấu trúc đề JLPT ${targetLevel} (Từ vựng, Ngữ pháp, Đọc hiểu, Nghe hiểu)`,
         targetCount: 1,
         currentCount: 0,
-        workloadPoints: 0,
-        estimatedMinutes: 60,
+        workloadPoints: Math.round(needed / 6),
+        estimatedMinutes: needed,
         link: `/knowledge?tab=practice`,
         completed: false
       });
-      dayMinutes[d] = 60;
+      dayMinutes[d] += needed;
     }
   }
 

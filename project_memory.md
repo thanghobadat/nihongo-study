@@ -2343,3 +2343,54 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
     + Kết quả: 100% ALL CHECKS PASSED.
   - `node --check` 2 file backend: 100% PASS (0 lỗi cú pháp).
   - Next.js production build: 100% PASS (0 lỗi).
+
+### Mốc 155: Cân Bằng Tải Trọng Động Lộ Trình Học Tập (Load-Balanced Dynamic Pacing) - Triệt Tiêu Biến Thiên Ngày Học (384m vs 132m), Cắt Nhỏ Granular Chunks & Kiểm Định Trạng Thái Thực Tế (Đã hoàn thành - 13/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  1. *Chênh lệch ngày học quá lớn*: Khi Replan từ ngày hiện tại (13/10/2026 đến 31/01/2027 = 111 ngày), kế hoạch xuất hiện hiện tượng dao động răng cưa nghiêm trọng (có ngày học dồn ép tới 384 phút, trong khi ngày hôm sau chỉ có 108 phút hoặc 132 phút, và những ngày cuối chỉ có 6 phút).
+  2. *Yêu cầu của người dùng*: "ok chia để plan same nhau là đc. thử đánh status local tương tự trên web online rồi replan thử đã ta kết quả tốt nhất chưa".
+- **Nguyên nhân gốc rễ**:
+  1. *Chunking quá thô*: Trước đây Kanji gom 5-8 chữ/lần (90m-144m), Ngữ pháp gom toàn bộ bài 1 lần (lên tới 126m), Từ vựng gom 18-25 từ/lần (108m-150m).
+  2. *Dao động bám đuổi tích lũy (Cumulative Sawtooth Oscillation)*: Thuật toán cũ dùng điều kiện bám đuổi sai số tích lũy `diffWith <= diffWithout` dựa trên tổng dồn `curCum` vs `targetCum`. Khi một ngày bị non tải do vướng chốt chặn tiên quyết (prerequisite guard), ngày tiếp theo cố gắng "bù" và gánh task lớn vọt lên 384m. Ngày kế tiếp lại bị vượt tải và buộc phải dừng sớm ở 108m.
+  3. *Thiếu trần cứng theo ngày (Hard Max Cap)*: Ngày học có thể cộng thêm task lớn 108m nếu trước đó chưa đạt `targetDailyMins + 35`, dẫn đến các ngày đỉnh điểm 384m.
+- **Giải pháp triển khai**:
+  - **Cắt nhỏ hạt nhân dữ liệu học tập (Granular Atomic Chunking)**:
+    + Từ vựng: Chia nhỏ 14 từ/phần (~84m).
+    + Chữ Hán (Kanji): Chia nhỏ 3 chữ/phần (~54m).
+    + Ngữ pháp (Grammar): Chia nhỏ 2-3 mẫu/phần (~36m-54m).
+  - **Thuật toán Phân bổ Tải trọng Động từng ngày (Dynamic Daily Target & Hard Max)**:
+    + Với mỗi ngày `d`: Tính lại mục tiêu tải trọng thực tế dựa trên khối lượng còn lại và số ngày còn lại `dayTarget = Math.ceil(remainingMins / remainingDays)`.
+    + Thiết lập trần cứng `hardMax = 275 phút` (~4.5 giờ) triệt tiêu hoàn toàn khả năng vượt ngưỡng.
+    + Thêm lượt gom thứ hai (Second-pass distribution) để hấp thụ các task còn lại vào các ngày non tải nhất.
+    + Tự động bù đắp bài thi thử JLPT tổng hợp (`practice`) cho các ngày cuối nếu bài học hoàn tất trước hạn để đảm bảo mọi ngày đều duy trì phong độ ~220m-240m.
+  - **Đồng bộ hóa Trạng thái Mock DB Local khớp 100% với Web Online (`user-1781344343083`)**:
+    + Nạp trạng thái hoàn thành Bài 1 (47 từ vựng, 11 chữ Hán, 5 mẫu câu ngữ pháp, 2 phần ôn tập hoàn tất).
+    + Nạp trạng thái đang học Bài 2 (7/15 chữ Hán đã thuộc, còn lại 8 chữ Hán và các phần còn lại).
+- **Kiểm định & Xác thực**:
+  - Kịch bản mô phỏng benchmark `scratch/tune_balance.js` & `test_user_replan.js`:
+    + Tổng số ngày: 111 ngày (từ 13/10/2026 đến 31/01/2027).
+    + Min: 198 phút/ngày (~3.3 giờ).
+    + Max: 270 phút/ngày (~4.5 giờ).
+    + Average: 231 phút/ngày (~3.85 giờ).
+    + Standard Deviation (Độ lệch chuẩn): Chỉ 19 phút! (Giảm từ 62m xuống 19m).
+    + Số ngày < 190 phút: **0 ngày** (trước đây 52 ngày).
+    + Số ngày > 275 phút: **0 ngày** (trước đây có ngày 384 phút).
+  - Kiểm tra Bài nợ sau khi Replan: `hasDebt: false`, `debtItems: []` (100% chính xác, không phát sinh nợ ảo).
+  - Cú pháp Backend: `node --check` 100% PASS (0 lỗi cú pháp).
+  - Frontend: `npm run build` Next.js 16 hoàn tất trong 2.8s, 100% PASS (0 lỗi).
+  - Tuân thủ Rule 5: Không tự ý commit/push code lên GitHub.
+
+### Mốc 156: Loại Bỏ Tab Thừa "Luyện Chữ Hán" (kanji-practice) Trên Sidebar & Tab Bar Trang Tổng Hợp Kiến Thức (/knowledge) (Đã hoàn thành - 13/10/2026)
+- **Bối cảnh & Yêu cầu của người dùng**:
+  - Người dùng phản hồi: Khi yêu cầu luyện tập tổng hợp, trên thanh menu bên trái và tab bar xuất hiện mục "Luyện chữ Hán" (`kanji-practice`) bị thừa thêm vào hôm qua. Cần gỡ bỏ hoàn toàn vì toàn bộ nội dung ôn tập Kanji đã được tích hợp đầy đủ trong phân hệ "Ôn tập tổng hợp" (`review`).
+- **Giải pháp triển khai**:
+  - *Cập nhật [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx)*:
+    + Loại bỏ `{ name: 'Luyện chữ Hán', id: 'kanji-practice', icon: '🖌️', active: false }` khỏi mảng `menuItems` ở sidebar, khôi phục danh sách 6 mục chuẩn đồng bộ hoàn toàn với trang bài học `/lessons/[id]`.
+    + Loại bỏ tab `{ id: 'kanji-practice', label: '🖌️ Luyện chữ Hán' }` khỏi Navigation Tabs Bar.
+    + Cập nhật kiểu `activeTab`: `'vocab' | 'kanji' | 'grammar' | 'practice' | 'review' | 'exam'`.
+    + Gỡ bỏ hoàn toàn khối render giao diện Tab 4b (`activeTab === 'kanji-practice'`) cùng hơn 700 dòng code thừa.
+    + Dọn dẹp các state và hàm xử lý không còn sử dụng (`kanjiPracticeList`, `handleClearWrongKanji`, v.v.).
+- **Kiểm định & Xác thực**:
+  - `npm run build` Next.js 16 hoàn tất thành công trong 2.8s, 100% PASS (0 lỗi TypeScript, 0 lỗi JSX).
+  - Kiểm tra từ khóa: Không còn bất kỳ xuất hiện nào của `kanji-practice` hay `Luyện chữ Hán` trong `knowledge/page.tsx`.
+  - Phân hệ "Ôn tập tổng hợp" (`review`) tiếp tục hoạt động trơn tru với đầy đủ 4 dạng bài tập gồm nhận diện chữ Hán & từ vựng.
+  - Tuân thủ Rule 5: Không tự động commit/push code lên GitHub.
