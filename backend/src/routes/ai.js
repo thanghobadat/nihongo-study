@@ -809,8 +809,13 @@ router.post('/generate-study-plan', async (req, res) => {
 
     const userId = await getUserIdAsync(req);
     await progressService.syncUserProgressFromSupabase(userId);
+
+    const { getVietnamDateStr } = require('../utils/vietnamTime');
+    const todayStr = getVietnamDateStr();
+    const effectiveStartDate = (startDate && startDate < todayStr) ? todayStr : startDate;
+
     const plan = await aiPlannerService.generateStudyPlan({
-      startDate,
+      startDate: effectiveStartDate,
       endDate,
       targetLevel,
       restDays,

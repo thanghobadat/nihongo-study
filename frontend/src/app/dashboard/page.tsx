@@ -351,6 +351,7 @@ export default function UserDashboard() {
             localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(res.plan));
           } catch (e) {}
         }
+        setDebtData({ hasDebt: false, debtItems: [], yesterdayDate: null });
         setIsDebtModalOpen(false);
         showNotification('🎯 AI đã tái phân bổ bài nợ vào các ngày tới và GIỮ NGUYÊN ngày kết thúc!');
         fetchDashboardData();
@@ -400,8 +401,9 @@ export default function UserDashboard() {
   const handleGeneratePlan = async () => {
     try {
       setIsGeneratingPlan(true);
+      const effectiveStart = startDateStr < todayStr ? todayStr : startDateStr;
       const res = await api.post('/api/ai/generate-study-plan', {
-        startDate: startDateStr,
+        startDate: effectiveStart,
         endDate: endDateStr,
         targetLevel: 'All',
         currentProgress: {},
@@ -409,6 +411,8 @@ export default function UserDashboard() {
       });
 
       if (res && res.success && res.plan) {
+        setDebtData({ hasDebt: false, debtItems: [], yesterdayDate: null });
+        setIsDebtModalOpen(false);
         const nextReplanCount = replanCount + 1;
         const planWithCount = { ...res.plan, replanCount: nextReplanCount };
         setStudyPlan(planWithCount);

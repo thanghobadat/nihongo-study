@@ -2416,26 +2416,29 @@ function applyAutoTracking(plan, userId) {
 
         const pool = getLearnedInLesson(lesson, itemType);
 
-        // Calculate available quota from cumulative lesson pool
-        const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
-        const poolContribution = Math.min(target, availableFromPool);
-
-        // Calculate specific exact matches if task had designated itemIds
-        const exactMatchCount = (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0)
-          ? task.itemIds.filter(id => pool.ids.has(id)).length
-          : 0;
-
-        // Count takes whichever is higher: pool volume or exact matches (capped at target)
-        count = Math.min(target, Math.max(poolContribution, exactMatchCount));
+        // When a task has specific designated itemIds, count ONLY those specific items that are mastered.
+        // DO NOT use poolContribution, which would mistakenly credit prior mastered items to this new unmastered chunk!
+        const hasDesignatedIds = task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0;
+        if (hasDesignatedIds) {
+          count = task.itemIds.filter(id => pool.ids.has(id)).length;
+        } else {
+          // Fallback only for generic tasks without itemIds
+          const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
+          count = Math.min(target, availableFromPool);
+        }
         allocatedPool[key] += count;
       } else if (task.itemType === 'single_review') {
         const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
         const key2 = `${userId}:review_session_lesson_${lesson}`;
-        count = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+        const sess = userReviewSessions[key1] || userReviewSessions[key2];
+        const isDone = !!(sess && (sess.completed || sess.isCompleted || sess.manualMarked || sess.score !== undefined || sess.results !== undefined || sess.currentQuestionIndex !== undefined));
+        count = isDone ? 1 : 0;
       } else if (task.itemType === 'cumulative_review') {
         const key1 = `${userId}:nihongo_review_state_combined`;
         const key2 = `${userId}:combined_review_level_N5`;
-        count = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+        const sess = userReviewSessions[key1] || userReviewSessions[key2];
+        const isDone = !!(sess && (sess.completed || sess.isCompleted || sess.manualMarked || sess.score !== undefined || sess.results !== undefined));
+        count = isDone ? 1 : 0;
       }
 
       task.currentCount = count;

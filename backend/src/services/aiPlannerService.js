@@ -354,12 +354,60 @@ function getMasteredItemIds(userId, currentPlan = null) {
 }
 
 /**
+ * Check if user has already completed a single review session for a lesson
+ */
+function isLessonReviewDone(userId, lesson) {
+  if (!userId) return false;
+  try {
+    const mockDb = require('../db/mockDb');
+    const userReviewSessions = mockDb.userReviewSessions || {};
+    const s1 = userReviewSessions[`${userId}:nihongo_review_state_lesson_${lesson}`];
+    const s2 = userReviewSessions[`${userId}:review_session_lesson_${lesson}`];
+    const sess = s1 || s2;
+    if (!sess) return false;
+    if (typeof sess === 'object') {
+      if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
+      if (sess.score !== undefined || sess.results !== undefined || sess.correctAnswers !== undefined) return true;
+      if (sess.answers && Object.keys(sess.answers).length > 0) return true;
+      if (sess.currentQuestionIndex !== undefined && sess.currentQuestionIndex > 0) return true;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Check if user has already completed cumulative review
+ */
+function isCumulativeReviewDone(userId, lesson) {
+  if (!userId) return false;
+  try {
+    const mockDb = require('../db/mockDb');
+    const userReviewSessions = mockDb.userReviewSessions || {};
+    const s1 = userReviewSessions[`${userId}:nihongo_review_state_combined`];
+    const s2 = userReviewSessions[`${userId}:combined_review_level_N5`];
+    const sess = s1 || s2;
+    if (!sess) return false;
+    if (typeof sess === 'object') {
+      if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
+      if (sess.score !== undefined || sess.results !== undefined) return true;
+      if (sess.answers && Object.keys(sess.answers).length > 0) return true;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Content-Driven Plan Generator (Total Vocab, Kanji, Grammar + 2 Review parts merged with Grammar)
  * Rules:
  * 1. No standalone review days: 2 review tasks (4 dạng bài tập + ôn tích lũy) are merged directly into the day where Grammar is studied.
  * 2. 100% of the 50 lessons are dynamically and completely distributed across the user's active timeframe.
  * 3. Workload Points (1 Kanji = 1 Grammar = 3 Vocab) are strictly preserved.
  * 4. Filters out items already mastered by the user so they never have to re-learn mastered knowledge.
+ * 5. Uses userReviewSessions to permanently skip review tasks that were already completed.
  */
 function generateAlgorithmicPlan({
   startDate,
@@ -525,37 +573,43 @@ function generateAlgorithmicPlan({
       });
     }
 
-    // Review 1 (4 dạng bài tập)
-    atomicTasks.push({
-      lesson: l,
-      itemType: 'single_review',
-      part: 1,
-      totalParts: 1,
-      title: `Minna Bài ${l}: Ôn tập tổng hợp 4 dạng toàn bộ Bài ${l}`,
-      scopeDetails: `Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm`,
-      targetCount: 1,
-      currentCount: 0,
-      workloadPoints: 0,
-      estimatedMinutes: 30,
-      link: `/lessons/${l}?tab=review`,
-      completed: false
-    });
+    // Review 1 (4 dạng bài tập) - ONLY schedule if NOT already completed in userReviewSessions
+    const singleReviewDone = isLessonReviewDone(userId, l);
+    if (!singleReviewDone && (kanjiList.length > 0 || grammarList.length > 0 || vocabList.length > 0 || (allVocab.length - vocabList.length > 0 && actualStartLesson === l))) {
+      atomicTasks.push({
+        lesson: l,
+        itemType: 'single_review',
+        part: 1,
+        totalParts: 1,
+        title: `Minna Bài ${l}: Ôn tập tổng hợp 4 dạng toàn bộ Bài ${l}`,
+        scopeDetails: `Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm`,
+        targetCount: 1,
+        currentCount: 0,
+        workloadPoints: 0,
+        estimatedMinutes: 30,
+        link: `/lessons/${l}?tab=review`,
+        completed: false
+      });
+    }
 
-    // Review 2 (Ôn tập tích lũy)
-    atomicTasks.push({
-      lesson: l,
-      itemType: 'cumulative_review',
-      part: 1,
-      totalParts: 1,
-      title: `Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài ${l}`,
-      scopeDetails: `Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${l} (30 phút)`,
-      targetCount: 1,
-      currentCount: 0,
-      workloadPoints: 0,
-      estimatedMinutes: 30,
-      link: `/knowledge?tab=review`,
-      completed: false
-    });
+    // Review 2 (Ôn tập tích lũy) - ONLY schedule if NOT already completed
+    const cumReviewDone = isCumulativeReviewDone(userId, l);
+    if (!cumReviewDone && (kanjiList.length > 0 || grammarList.length > 0)) {
+      atomicTasks.push({
+        lesson: l,
+        itemType: 'cumulative_review',
+        part: 1,
+        totalParts: 1,
+        title: `Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài ${l}`,
+        scopeDetails: `Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${l} (30 phút)`,
+        targetCount: 1,
+        currentCount: 0,
+        workloadPoints: 0,
+        estimatedMinutes: 30,
+        link: `/knowledge?tab=review`,
+        completed: false
+      });
+    }
   }
 
   // 2. Distribute evenly into totalDays using target daily pacing
@@ -712,14 +766,34 @@ async function generateStudyPlan(params) {
   const currentPlan = params.currentPlan || null;
   const masteredItemIds = params.masteredItemIds || (params.userId ? await progressService.getMasteredItemIds(params.userId, currentPlan) : null);
 
+  const todayStr = getVietnamDateStr();
+  const rawStart = normalizeDateStr(params.startDate);
+  // Guardrail: A freshly generated plan must start from today, not a past date
+  const effectiveStartDate = (rawStart && rawStart < todayStr) ? todayStr : (rawStart || todayStr);
+
+  let archivedPastDays = [];
+  if (currentPlan && Array.isArray(currentPlan.days)) {
+    const pastDays = currentPlan.days.filter(d => normalizeDateStr(d.date) < todayStr).map(d => ({
+      ...d,
+      tasks: (d.tasks || []).map(t => (!t.completed ? { ...t, rescheduled: true, rescheduledAt: todayStr } : t))
+    }));
+    const priorArchived = (currentPlan.archivedPastDays || []).map(d => ({
+      ...d,
+      tasks: (d.tasks || []).map(t => (!t.completed ? { ...t, rescheduled: true, rescheduledAt: todayStr } : t))
+    }));
+    archivedPastDays = [...priorArchived, ...pastDays];
+  }
+
   // Default to lesson 1 (or explicit startLesson if requested) so each lesson 1..50 is evaluated.
-  // generateAlgorithmicPlan automatically skips lessons where 100% of items are already mastered.
+  // generateAlgorithmicPlan automatically skips items and reviews already mastered.
   const startL = params.startLesson || 1;
 
   const basePlan = generateAlgorithmicPlan({
     ...params,
+    startDate: effectiveStartDate,
     currentPlan,
     masteredItemIds,
+    archivedPastDays,
     startLesson: Math.min(50, Math.max(1, startL)),
     targetLesson: params.targetLesson || 50
   });
@@ -1093,8 +1167,15 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
   let archivedPastDays = [];
 
   if (currentPlan && Array.isArray(currentPlan.days)) {
-    const pastDays = currentPlan.days.filter(d => d.date < todayStr);
-    archivedPastDays = [...(currentPlan.archivedPastDays || []), ...pastDays];
+    const pastDays = currentPlan.days.filter(d => normalizeDateStr(d.date) < todayStr).map(d => ({
+      ...d,
+      tasks: (d.tasks || []).map(t => (!t.completed ? { ...t, rescheduled: true, rescheduledAt: todayStr } : t))
+    }));
+    const priorArchived = (currentPlan.archivedPastDays || []).map(d => ({
+      ...d,
+      tasks: (d.tasks || []).map(t => (!t.completed ? { ...t, rescheduled: true, rescheduledAt: todayStr } : t))
+    }));
+    archivedPastDays = [...priorArchived, ...pastDays];
   }
 
   // If user explicitly provided a future startDate, use it; otherwise start from today
