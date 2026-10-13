@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { api } from '../utils/api';
 import { formatStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
 
@@ -53,7 +54,12 @@ export default function DailyReportModal({
   studyTimeSeconds,
   onOpenHistoryTable,
 }: DailyReportModalProps) {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const [internalStudyTime, setInternalStudyTime] = useState<string>(() => {
     if (studyTimeFormatted) return studyTimeFormatted;
@@ -136,7 +142,7 @@ export default function DailyReportModal({
   ];
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
       <div 
         className="relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white/95 dark:bg-slate-900/95 p-5 sm:p-7 shadow-2xl border border-slate-200/60 dark:border-slate-800/80 text-slate-800 dark:text-slate-100 transition-all transform duration-300 scale-100 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-700"
@@ -420,6 +426,7 @@ export default function DailyReportModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

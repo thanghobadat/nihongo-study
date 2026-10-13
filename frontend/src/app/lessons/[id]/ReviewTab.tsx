@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../../utils/api';
+import QuickLookupModal from '../../components/QuickLookupModal';
 
 interface ReviewTabProps {
   lessonTitle: string;
@@ -100,6 +101,8 @@ export default function ReviewTab({
   const [reviewIndex, setReviewIndex] = useState<number>(0);
   const [savedSessions, setSavedSessions] = useState<Record<string, any>>({});
   const [showHistoryTable, setShowHistoryTable] = useState<boolean>(true);
+  const [isQuickLookupOpen, setIsQuickLookupOpen] = useState<boolean>(false);
+  const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'kanji' | 'grammar' | 'kana'>('vocab');
 
   const storageKey = selectedLessonId && selectedLessonId !== 'all'
     ? `nihongo_review_state_lesson_${selectedLessonId}`
@@ -856,6 +859,20 @@ export default function ReviewTab({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          {/* Quick Lookup Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setQuickLookupTab('vocab');
+              setIsQuickLookupOpen(true);
+            }}
+            className="px-3.5 py-1.5 bg-blue-600/20 hover:bg-blue-600/35 text-blue-300 border border-blue-500/30 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-sm"
+            title="Tra cứu nhanh Từ vựng, Kanji, Mẫu câu, Bảng chữ cái"
+          >
+            <span>🔍</span>
+            <span>Tra cứu</span>
+          </button>
+
           {planTaskId && (
             <button
               onClick={handleTogglePlanTask}
@@ -2103,6 +2120,14 @@ export default function ReviewTab({
           </div>
         </div>
       )}
+
+      {/* Quick Lookup Modal */}
+      <QuickLookupModal
+        isOpen={isQuickLookupOpen}
+        onClose={() => setIsQuickLookupOpen(false)}
+        initialTab={quickLookupTab}
+        currentLessonId={selectedLessonId !== 'all' ? selectedLessonId : 1}
+      />
     </div>
   );
 }

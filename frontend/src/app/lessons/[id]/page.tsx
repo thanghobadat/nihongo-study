@@ -5760,6 +5760,7 @@ const renderInteractivePractice = () => {
               {currentTab === 'flashcards' && 'THẺ NHỚ'}
               {currentTab === 'kaiwa' && 'LUYỆN NÓI'}
               {currentTab === 'practice' && 'LUYỆN TẬP'}
+              {currentTab === 'review' && 'ÔN TẬP TỔNG HỢP'}
               <span className="text-blue-600 dark:text-blue-400 ml-2">{lessonTitle}</span>
             </h1>
 
@@ -5824,11 +5825,11 @@ const renderInteractivePractice = () => {
             <button
               type="button"
               onClick={() => {
-                setQuickLookupTab(currentTab === 'vocab' ? 'vocab' : 'radicals');
+                setQuickLookupTab(currentTab === 'vocab' ? 'vocab' : 'kanji');
                 setIsQuickLookupOpen(true);
               }}
               className="flex items-center gap-1.5 px-3 py-2 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm active:scale-95 cursor-pointer shrink-0"
-              title="Tra cứu nhanh Bộ thủ Kanji hoặc Từ vựng"
+              title="Tra cứu nhanh Từ vựng, Kanji hoặc Bảng chữ cái"
             >
               <span>🔍</span>
               <span className="hidden sm:inline">Tra cứu</span>

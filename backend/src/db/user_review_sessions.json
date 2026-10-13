@@ -7,7 +7,1068 @@
   "user-1781344343083:nihongo_review_state_lesson_1": {
     "completed": true,
     "score": 100,
-    "isCompleted": true
+    "isCompleted": true,
+    "translation": {
+      "reviewQuestions": [
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 44,
+            "direction": "vi-to-ja",
+            "answers": [
+              "みなさんは がくせいですか。",
+              "みなさんは がくせいですか"
+            ],
+            "question": "Mọi người là học sinh phải không?"
+          },
+          "key": "translation_44"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 43,
+            "direction": "vi-to-ja",
+            "answers": [
+              "わたしたちは ベトナムじんです。",
+              "わたしたちは ベトナムじんです"
+            ],
+            "question": "Chúng tôi là người Việt Nam."
+          },
+          "key": "translation_43"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 38,
+            "answers": [
+              "サトウさんも ぎんこういん です。",
+              "サトウさん も ぎんこういん です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Chị Sato cũng là nhân viên ngân hàng."
+          },
+          "key": "translation_38"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 64,
+            "answers": [
+              "わたしはがくせいじゃありません"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi không phải là học sinh."
+          },
+          "key": "translation_64"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 3,
+            "direction": "ja-to-vi",
+            "question_kana": "わたしたちは ベトナムじんです。",
+            "question_kanji": "私たちは ベトナム人です。",
+            "answers": [
+              "Chúng tôi là người Việt Nam",
+              "Chúng ta là người Việt Nam"
+            ]
+          },
+          "key": "translation_3"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 45,
+            "answers": [
+              "Bạn là kỹ sư phải không?",
+              "Anh/chị có phải là kỹ sư không?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "あなた は エンジニア です か。",
+            "question_kanji": "あなたは エンジニア です か。"
+          },
+          "key": "translation_45"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 69,
+            "answers": [
+              "にほんのだいがくです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Là trường đại học của Nhật Bản."
+          },
+          "key": "translation_69"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 59,
+            "answers": [
+              "Xin lỗi, tên bạn là gì?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "しつれいですが、おなまえは。",
+            "question_kanji": "失礼ですが、お名前は。"
+          },
+          "key": "translation_59"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 36,
+            "answers": [
+              "はじめまして、どうぞよろしく。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Rất hân hạnh được làm quen."
+          },
+          "key": "translation_36"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 20,
+            "answers": [
+              "Chào mọi người.",
+              "Chào các bạn."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "みなさん、おはよう ございます。",
+            "question_kanji": "皆さん、おはよう ございます。"
+          },
+          "key": "translation_20"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 74,
+            "answers": [
+              "カリナさんはフランスじんです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Chị Karina là người Pháp."
+          },
+          "key": "translation_74"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 68,
+            "answers": [
+              "やまださんはかいしゃいんです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Anh Yamada là nhân viên công ty."
+          },
+          "key": "translation_68"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 40,
+            "answers": [
+              "みなさんは かいしゃいん です。",
+              "みなさん は かいしゃいん です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Mọi người là nhân viên công ty."
+          },
+          "key": "translation_40"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 41,
+            "direction": "vi-to-ja",
+            "answers": [
+              "しつれいですが、おいくつですか。",
+              "しつれいですが、おいくつですか"
+            ],
+            "question": "Xin hỏi, anh/chị bao nhiêu tuổi?"
+          },
+          "key": "translation_41"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 31,
+            "answers": [
+              "こちらは ワンさん です。",
+              "こちら は ワンさん です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Đây là anh Wang."
+          },
+          "key": "translation_31"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 78,
+            "answers": [
+              "はじめましてどうぞよろしく"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Rất hân hạnh được làm quen."
+          },
+          "key": "translation_78"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 65,
+            "answers": [
+              "あなたはエンジニアですか"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Bạn là kỹ sư phải không?"
+          },
+          "key": "translation_65"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 39,
+            "answers": [
+              "あのひたちは がくせい です。",
+              "あのひとたち は がくせい です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Những người kia là học sinh."
+          },
+          "key": "translation_39"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 15,
+            "answers": [
+              "Bạn mấy tuổi?",
+              "Anh/chị bao nhiêu tuổi?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "あなたわ なんさい ですか。",
+            "question_kanji": "あなたは 何歳 ですか。"
+          },
+          "key": "translation_15"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 44,
+            "answers": [
+              "Tôi không phải là học sinh.",
+              "Tôi không phải là sinh viên."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "わたし は がくせい じゃありません。",
+            "question_kanji": "私は 学生 じゃありません。"
+          },
+          "key": "translation_44"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 80,
+            "answers": [
+              "こちらはワンさんです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Đây là anh Wang."
+          },
+          "key": "translation_80"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 50,
+            "answers": [
+              "Đó là bệnh viện ở Việt Nam."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "ベトナム の びょういん です。",
+            "question_kanji": "ベトナム の 病院 です。"
+          },
+          "key": "translation_50"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 17,
+            "answers": [
+              "Đây là giáo viên của chúng tôi.",
+              "Vị này là thầy giáo của chúng tôi."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "こちらわ わたしたちの せんせい です。",
+            "question_kanji": "こちらは 私たちの 先生 です。"
+          },
+          "key": "translation_17"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 72,
+            "answers": [
+              "わたしもかいしゃいんです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi cũng là nhân viên công ty."
+          },
+          "key": "translation_72"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 47,
+            "answers": [
+              "Cô ấy là nhà nghiên cứu."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "かのじょ は けんきゅうしゃ です。",
+            "question_kanji": "彼女 は 研究者 です。"
+          },
+          "key": "translation_47"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 26,
+            "answers": [
+              "わたしも エンジニア です。",
+              "わたし も エンジニア です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi cũng là kỹ sư."
+          },
+          "key": "translation_26"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 37,
+            "answers": [
+              "わたしは きょうし です。",
+              "わたし は きょうし です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi là giáo viên."
+          },
+          "key": "translation_37"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 62,
+            "answers": [
+              "あのひとはいしゃですか"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Người kia là bác sĩ phải không?"
+          },
+          "key": "translation_62"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 60,
+            "answers": [
+              "Đây là anh/chị Wang.",
+              "Vị này là anh Wang."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "こちら は ワンさん です。",
+            "question_kanji": "こちらは ワンさん です。"
+          },
+          "key": "translation_60"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 58,
+            "answers": [
+              "Rất vui được gặp bạn. Rất mong được giúp đỡ."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "はじめまして。どうぞよろしく。",
+            "question_kanji": "初めまして。どうぞよろしく。"
+          },
+          "key": "translation_58"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 16,
+            "answers": [
+              "Bao nhiêu tuổi ạ? (lịch sự)",
+              "Ngài bao nhiêu tuổi ạ?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "おいくつ ですか。",
+            "question_kanji": "おいくつ ですか。"
+          },
+          "key": "translation_16"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 7,
+            "answers": [
+              "Anh Mira là người Mỹ.",
+              "Ông Miller là người Mỹ."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "ミラーさんは アメリカじん です。",
+            "question_kanji": "ミラーさんは アメリカ人 です。"
+          },
+          "key": "translation_7"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 27,
+            "answers": [
+              "ミラーさんは アメリカじん ですか。",
+              "ミラーさん は アメリカじん ですか。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Anh Miller là người Mỹ phải không?"
+          },
+          "key": "translation_27"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 48,
+            "answers": [
+              "Anh/chị/ông/bà Yamada là nhân viên công ty."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "やまださん は かいしゃいん です。",
+            "question_kanji": "山田さん は 会社員 です。"
+          },
+          "key": "translation_48"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 29,
+            "answers": [
+              "あのひとは けんきゅうしゃ です。",
+              "あのひと は けんきゅうしゃ です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Người kia là nhà nghiên cứu."
+          },
+          "key": "translation_29"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 33,
+            "answers": [
+              "あなたわ なんさい ですか。",
+              "あなた は なんさい ですか。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Bạn bao nhiêu tuổi?"
+          },
+          "key": "translation_33"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 2,
+            "direction": "ja-to-vi",
+            "question_kana": "ミラーさんは フランスじんじゃありません。",
+            "question_kanji": "ミラーさんは フランス人じゃありません。",
+            "answers": [
+              "Anh Miller không phải là người Pháp",
+              "Anh Miller không phải người Pháp",
+              "Chị Miller không phải là người Pháp"
+            ]
+          },
+          "key": "translation_2"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 63,
+            "answers": [
+              "あのかたはどなたですか"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Vị kia là vị nào vậy?"
+          },
+          "key": "translation_63"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 51,
+            "answers": [
+              "Không phải sự chuẩn bị của Mỹ."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "アメリカ の じゅんび じゃありません。",
+            "question_kanji": "アメリカ の 準備 じゃありません。"
+          },
+          "key": "translation_51"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 8,
+            "answers": [
+              "Tôi cũng là học sinh.",
+              "Tôi cũng là sinh viên."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "わたしも がくせい です。",
+            "question_kanji": "私も 学生 です。"
+          },
+          "key": "translation_8"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 67,
+            "answers": [
+              "かのじょはけんきゅうしゃです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Cô ấy là nhà nghiên cứu."
+          },
+          "key": "translation_67"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 28,
+            "answers": [
+              "たなかさんは ぎんこういん です。",
+              "たなかさん は ぎんこういん です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Anh Tanaka là nhân viên ngân hàng."
+          },
+          "key": "translation_28"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 43,
+            "answers": [
+              "Vị kia là ai vậy ạ?",
+              "Vị đó là vị nào thế?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "あのかた は どなた です か。",
+            "question_kanji": "あの方 は どなた です か。"
+          },
+          "key": "translation_43"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 30,
+            "answers": [
+              "これは びょういん です。",
+              "これ は びょういん です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Đây là bệnh viện."
+          },
+          "key": "translation_30"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 42,
+            "answers": [
+              "Người kia là bác sĩ phải không?",
+              "Người đó có phải là bác sĩ không?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "あのひと は いしゃ です か。",
+            "question_kanji": "あの人は 医者 です か。"
+          },
+          "key": "translation_42"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 66,
+            "answers": [
+              "きょうしはわたしです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Giáo viên là tôi."
+          },
+          "key": "translation_66"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 12,
+            "answers": [
+              "Đây là bệnh viện."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "これは びょういん です。",
+            "question_kanji": "これは 病院 です。"
+          },
+          "key": "translation_12"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 46,
+            "answers": [
+              "Giáo viên là tôi.",
+              "Người là giáo viên chính là tôi."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "きょうし は わたし です。",
+            "question_kanji": "教師 は 私 です。"
+          },
+          "key": "translation_46"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 52,
+            "answers": [
+              "Tôi cũng là nhân viên công ty."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "わたし も かいしゃいん です。",
+            "question_kanji": "私も 会社員 です。"
+          },
+          "key": "translation_52"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 25,
+            "answers": [
+              "あのかたは どなた ですか。",
+              "あのかた は どなた ですか。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Vị kia là vị nào vậy?"
+          },
+          "key": "translation_25"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 11,
+            "answers": [
+              "Anh Wang là kỹ sư.",
+              "Chị Wang là kỹ sư."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "ワンさんは エンジニア です。",
+            "question_kanji": "ワンさんは エンジニア です。"
+          },
+          "key": "translation_11"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 41,
+            "answers": [
+              "Tôi là nhân viên ngân hàng.",
+              "Tôi là một nhân viên ngân hàng."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "わたし は ぎんこういん です。",
+            "question_kanji": "私は 銀行員 です。"
+          },
+          "key": "translation_41"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 55,
+            "answers": [
+              "Bạn là người Trung Quốc phải không?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "ちゅうごくじん です か。",
+            "question_kanji": "中国人 です か。"
+          },
+          "key": "translation_55"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 14,
+            "answers": [
+              "Tôi là người Việt Nam."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "わたしは ベトナムじん です。",
+            "question_kanji": "私は ベトナム人 です。"
+          },
+          "key": "translation_14"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 5,
+            "answers": [
+              "Giáo viên là ai thế?",
+              "Ai là giáo viên?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "きょうし は だれ ですか。",
+            "question_kanji": "教師 は 誰 ですか。"
+          },
+          "key": "translation_5"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 49,
+            "answers": [
+              "Đó là trường đại học của Nhật Bản."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "にほん の だいがく です。",
+            "question_kanji": "日本 の 大学 です。"
+          },
+          "key": "translation_49"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 71,
+            "answers": [
+              "アメリカのじゅんびじゃありません"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Không phải là sự chuẩn bị của Mỹ."
+          },
+          "key": "translation_71"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 10,
+            "answers": [
+              "Người kia là nhà nghiên cứu.",
+              "Người đó là nhà nghiên cứu."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "あのひとは けんきゅうしゃ です。",
+            "question_kanji": "あの人は 研究者 です。"
+          },
+          "key": "translation_10"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 77,
+            "answers": [
+              "わたしはブラジルからきました"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi đến từ Brasil."
+          },
+          "key": "translation_77"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 61,
+            "answers": [
+              "わたしはぎんこういんです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi là nhân viên ngân hàng."
+          },
+          "key": "translation_61"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 32,
+            "answers": [
+              "わたしわ ベトナムじん です。",
+              "わたし は ベトナムじん です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Tôi là người Việt Nam."
+          },
+          "key": "translation_32"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 9,
+            "answers": [
+              "Nhân viên ngân hàng là anh Sawada.",
+              "Nhân viên ngân hàng là chị Sawada."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "きんこういんは サワダさん です。",
+            "question_kanji": "銀行員は 沢田さん です。"
+          },
+          "key": "translation_9"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 18,
+            "answers": [
+              "Xin lỗi, tên anh/chị là gì?",
+              "Xin thất lễ, tên bạn là gì?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "しつれいですが、おなまえわ。",
+            "question_kanji": "失礼ですが、お名前は。"
+          },
+          "key": "translation_18"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 56,
+            "answers": [
+              "Không phải người Đức."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "ドイツじん じゃありません。",
+            "question_kanji": "ドイツ人 じゃありません。"
+          },
+          "key": "translation_56"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 13,
+            "answers": [
+              "Chị Sato có phải là nhân viên ngân hàng không?",
+              "Anh Sato là nhân viên ngân hàng phải không?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "サトウさんは ぎんこういん ですか。",
+            "question_kanji": "佐藤さんは 銀行員 ですか。"
+          },
+          "key": "translation_13"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 75,
+            "answers": [
+              "ちゅうごくじんですか"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Là người Trung Quốc phải không?"
+          },
+          "key": "translation_75"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 79,
+            "answers": [
+              "しつれいですがおなまえは"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Xin lỗi, tên bạn là gì?"
+          },
+          "key": "translation_79"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 19,
+            "answers": [
+              "Rất vui được gặp bạn, rất mong được giúp đỡ.",
+              "Lần đầu gặp mặt, rất mong nhận được sự giúp đỡ."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "はじめまして、どうぞよろしく。",
+            "question_kanji": "はじめまして、どうぞよろしく。"
+          },
+          "key": "translation_19"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 53,
+            "answers": [
+              "Anh Santos cũng là học sinh phải không?",
+              "Anh Santos cũng là sinh viên chứ?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "サントスさん も がくせい です か。",
+            "question_kanji": "サントスさん も 学生 です か。"
+          },
+          "key": "translation_53"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 1,
+            "direction": "ja-to-vi",
+            "question_kana": "しつれいですが、おいくつですか。",
+            "question_kanji": "失礼ですが、おいくつですか。",
+            "answers": [
+              "Xin hỏi, anh/chị bao nhiêu tuổi?",
+              "Xin hỏi, bạn bao nhiêu tuổi?",
+              "Xin lỗi, anh/chị bao nhiêu tuổi?"
+            ]
+          },
+          "key": "translation_1"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 70,
+            "answers": [
+              "ベトナムのびょういんです"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Là bệnh viện của Việt Nam."
+          },
+          "key": "translation_70"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 42,
+            "direction": "vi-to-ja",
+            "answers": [
+              "ミラーさんは フランスじんじゃありません。",
+              "ミラーさんは フランスじんじゃありません"
+            ],
+            "question": "Anh Miller không phải là người Pháp."
+          },
+          "key": "translation_42"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 57,
+            "answers": [
+              "Tôi đến từ Brazil."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "わたし は ブラジル から きました。",
+            "question_kanji": "私は ブラジル から 来ました。"
+          },
+          "key": "translation_57"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 6,
+            "answers": [
+              "Vị kia là ai vậy?",
+              "Vị đó là vị nào thế?"
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "あのかたは どなた ですか。",
+            "question_kanji": "あの方 は どなた ですか。"
+          },
+          "key": "translation_6"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 34,
+            "answers": [
+              "あのひとわ じゅうきゅうさい です。",
+              "あのひと は じゅうきゅうさい です。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Người kia 19 tuổi."
+          },
+          "key": "translation_34"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 35,
+            "answers": [
+              "しつれいですが、おなまえわ。",
+              "しつれいですが、おなまえ は。"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Xin lỗi, tên bạn là gì?"
+          },
+          "key": "translation_35"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 73,
+            "answers": [
+              "サントスさんもがくせいですか"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Anh Santos cũng là học sinh phải không?"
+          },
+          "key": "translation_73"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 4,
+            "direction": "ja-to-vi",
+            "question_kana": "みなさんは がくせいですか。",
+            "question_kanji": "みなさんは 学生ですか。",
+            "answers": [
+              "Mọi người là học sinh phải không",
+              "Các bạn là học sinh phải không",
+              "Mọi người là sinh viên phải không"
+            ]
+          },
+          "key": "translation_4"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 54,
+            "answers": [
+              "Chị Karina là người Pháp."
+            ],
+            "direction": "ja-to-vi",
+            "question_kana": "カリナさん は フランスじん です。",
+            "question_kanji": "カリナさん は フランス人 です。"
+          },
+          "key": "translation_54"
+        },
+        {
+          "type": "translation",
+          "originalData": {
+            "id": 76,
+            "answers": [
+              "ドイツじんじゃありません"
+            ],
+            "direction": "vi-to-ja",
+            "question": "Không phải là người Đức."
+          },
+          "key": "translation_76"
+        }
+      ],
+      "reviewAnswers": {},
+      "reviewGraded": {},
+      "reviewFeedback": {},
+      "reviewScore": 0,
+      "reviewTotal": 80,
+      "reviewIndex": 0,
+      "reviewStep": "test",
+      "translationDirection": "all",
+      "timestamp": 1791904773819
+    }
   },
   "user-1781344343083:nihongo_review_state_combined": {
     "completed": true,

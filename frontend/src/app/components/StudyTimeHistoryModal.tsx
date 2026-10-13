@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { api } from '../utils/api';
 import { formatStudyTime, formatStudyHours, evaluateStudyTime, getVietnamDateString } from '../utils/studyTimeHelper';
 
@@ -54,6 +55,30 @@ export default function StudyTimeHistoryModal({
   const [filterPeriod, setFilterPeriod] = useState<'7days' | '30days' | 'all'>('30days');
 
   const todayStr = useMemo(() => getVietnamDateString(), []);
+  const [liveSeconds, setLiveSeconds] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const today = getVietnamDateString();
+      return parseInt(localStorage.getItem(`study_time_${today}`) || '0', 10);
+    }
+    return 0;
+  });
+  const [isLiveActive, setIsLiveActive] = useState<boolean>(true);
+
+  // Sync with global study timer
+  useEffect(() => {
+    const handleSync = (e: any) => {
+      if (e.detail) {
+        if (e.detail.seconds !== undefined) {
+          setLiveSeconds(e.detail.seconds);
+        }
+        if (e.detail.isLive !== undefined) {
+          setIsLiveActive(e.detail.isLive);
+        }
+      }
+    };
+    window.addEventListener('study-time-sync', handleSync);
+    return () => window.removeEventListener('study-time-sync', handleSync);
+  }, []);
 
   // Fetch history data when opened
   useEffect(() => {
@@ -104,7 +129,15 @@ export default function StudyTimeHistoryModal({
     return historyList.slice(0, limit);
   }, [historyList, filterPeriod]);
 
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
+
+  const todayEval = evaluateStudyTime(liveSeconds);
 
   // Evaluation badge styling helper
   const getBadgeStyle = (level: string) => {
@@ -122,7 +155,7 @@ export default function StudyTimeHistoryModal({
     }
   };
 
-  return (
+  return createPortal(
     <div 
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
       onClick={onClose}
@@ -144,10 +177,10 @@ export default function StudyTimeHistoryModal({
             <div>
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">
-                  Bảng Lưu Trữ & Đánh Giá Thời Gian Học
+                  Thống Kê & Đánh Giá Thời Gian Học
                 </h2>
                 <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                  Ngày X học Y tiếng
+                  Thời gian hôm nay & Các ngày trước
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-1">
@@ -165,6 +198,74 @@ export default function StudyTimeHistoryModal({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+        </div>
+
+        {/* 1.5. Real-time Today's Study Time Banner (Nổi bật thời gian hôm nay) */}
+        <div className="p-4 sm:p-5 border-b border-indigo-500/30 bg-gradient-to-r from-indigo-950/70 via-purple-950/50 to-slate-950/80 shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="relative shrink-0">
+                <div className="w-13 h-13 rounded-2xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/20">
+                  ⏱️
+                </div>
+                {isLiveActive ? (
+                  <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500"></span>
+                  </span>
+                ) : (
+                  <span className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-amber-400" />
+                )}
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs font-black text-indigo-300 uppercase tracking-wider">
+                    Hôm nay ({formatDateLabel(todayStr)})
+                  </span>
+                  <span className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${
+                    isLiveActive
+                      ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                      : 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                  }`}>
+                    {isLiveActive ? '🟢 Đang tính giờ (Active)' : '🟡 Tạm dừng (Idle)'}
+                  </span>
+                </div>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="text-2xl sm:text-3xl font-black text-amber-300 tracking-tight">
+                    {formatStudyTime(liveSeconds)}
+                  </span>
+                  <span className="text-xs font-bold text-slate-400">
+                    (~{formatStudyHours(liveSeconds)})
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Target progress & evaluation for today */}
+            <div className="flex-1 sm:max-w-xs space-y-1.5 sm:border-l sm:border-slate-800/80 sm:pl-4">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-slate-400 font-medium">Tiến độ mục tiêu 1.5h:</span>
+                <span className="font-bold text-teal-300">
+                  {Math.min(100, Math.round((liveSeconds / 5400) * 100))}%
+                </span>
+              </div>
+              <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-teal-500 via-indigo-500 to-purple-500 transition-all duration-300"
+                  style={{ width: `${Math.min(100, Math.round((liveSeconds / 5400) * 100))}%` }}
+                />
+              </div>
+              <div className="flex items-center justify-between text-[11px]">
+                <span className={`font-black ${todayEval.color === 'emerald' ? 'text-emerald-300' : todayEval.color === 'teal' ? 'text-teal-300' : 'text-amber-300'}`}>
+                  {todayEval.badge} {todayEval.label}
+                </span>
+                <span className="text-slate-400 truncate max-w-[170px]" title={todayEval.comment}>
+                  {todayEval.comment}
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 2. Overview Stats Cards */}
@@ -320,7 +421,11 @@ export default function StudyTimeHistoryModal({
                 <tbody className="divide-y divide-slate-800/60">
                   {filteredList.map((item) => {
                     const isToday = item.date === todayStr;
-                    const evalInfo = item.evaluation || evaluateStudyTime(item.totalSeconds);
+                    const effectiveSeconds = isToday ? Math.max(item.totalSeconds, liveSeconds) : item.totalSeconds;
+                    const effectiveHours = Number((effectiveSeconds / 3600).toFixed(1));
+                    const effectiveFormatted = formatStudyTime(effectiveSeconds);
+                    const effectiveProgressPct = Math.min(100, Math.round((effectiveSeconds / 5400) * 100));
+                    const evalInfo = evaluateStudyTime(effectiveSeconds);
 
                     return (
                       <tr 
@@ -350,11 +455,11 @@ export default function StudyTimeHistoryModal({
                         <td className="py-3.5 px-4 whitespace-nowrap">
                           <div className="flex items-baseline gap-1.5">
                             <span className="text-base sm:text-lg font-black text-amber-300">
-                              {item.hours}
+                              {effectiveHours}
                             </span>
                             <span className="text-xs font-bold text-slate-300">tiếng</span>
                             <span className="text-[11px] text-slate-400">
-                              ({item.formatted})
+                              ({effectiveFormatted})
                             </span>
                           </div>
                         </td>
@@ -363,25 +468,25 @@ export default function StudyTimeHistoryModal({
                         <td className="py-3.5 px-4">
                           <div className="space-y-1">
                             <div className="flex items-center justify-between text-[11px]">
-                              <span className="text-slate-400">{item.progressPct}% chuẩn 1.5h</span>
-                              {item.totalSeconds >= 5400 && (
+                              <span className="text-slate-400">{effectiveProgressPct}% chuẩn 1.5h</span>
+                              {effectiveSeconds >= 5400 && (
                                 <span className="text-emerald-400 font-bold">✓ Đạt mục tiêu</span>
                               )}
                             </div>
                             <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
                               <div 
                                 className={`h-full rounded-full transition-all duration-300 ${
-                                  item.totalSeconds >= 7200
+                                  effectiveSeconds >= 7200
                                     ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
-                                    : item.totalSeconds >= 3600
+                                    : effectiveSeconds >= 3600
                                     ? 'bg-gradient-to-r from-teal-500 to-cyan-400'
-                                    : item.totalSeconds >= 1800
+                                    : effectiveSeconds >= 1800
                                     ? 'bg-gradient-to-r from-amber-500 to-yellow-400'
-                                    : item.totalSeconds > 0
+                                    : effectiveSeconds > 0
                                     ? 'bg-cyan-500'
                                     : 'bg-slate-700'
                                 }`}
-                                style={{ width: `${Math.min(100, item.progressPct)}%` }}
+                                style={{ width: `${effectiveProgressPct}%` }}
                               />
                             </div>
                           </div>
@@ -447,6 +552,7 @@ export default function StudyTimeHistoryModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

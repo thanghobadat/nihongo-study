@@ -123,35 +123,69 @@ export default function ActiveStudyTracker() {
       window.addEventListener(ev, resetIdleTimer, { passive: true });
     });
 
-    // 2. Page Visibility API
+    // 2. Page Visibility API & Window Focus (Multi-Device Immediate Sync)
+    const syncLatestFromServer = () => {
+      const u = api.getUser();
+      if (u && u.id) {
+        api.get(`/api/user/study-time/today?date=${currentDateRef.current}`, { skipCache: true }).then((res: any) => {
+          if (res && res.success && res.data) {
+            const serverSec = res.data.totalSeconds || 0;
+            if (serverSec > totalSecondsRef.current) {
+              totalSecondsRef.current = serverSec;
+              try {
+                localStorage.setItem(`study_time_${currentDateRef.current}`, String(serverSec));
+              } catch {}
+              broadcastUpdate(isUserActiveRef.current);
+            }
+          }
+        }).catch(() => {});
+      }
+    };
+
     const handleVisibilityChange = () => {
       const isVisible = !document.hidden;
       isTabVisibleRef.current = isVisible;
       if (!isVisible) {
-        // Tab bị ẩn -> Ngay lập tức tạm dừng và flush delta lên server
+        // Tab bị ẩn / chuyển app / khoá màn hình -> Ngay lập tức gửi delta với keepalive
         broadcastUpdate(false);
-        flushDeltaToServer();
+        const delta = unsyncedDeltaRef.current;
+        const user = api.getUser();
+        if (delta > 0 && user && user.id) {
+          try {
+            const token = api.getToken();
+            const payload = JSON.stringify({
+              date: currentDateRef.current,
+              deltaSeconds: delta,
+              clientTotalSeconds: totalSecondsRef.current
+            });
+            const url = `${getBaseUrl()}/api/user/study-time`;
+            fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token ? `Bearer ${token}` : ''
+              },
+              body: payload,
+              keepalive: true
+            }).then(() => {
+              unsyncedDeltaRef.current = Math.max(0, unsyncedDeltaRef.current - delta);
+            }).catch(() => {});
+          } catch {}
+        }
       } else {
         // Tab hiển thị lại -> Reset idle timer & Re-sync số giây mới nhất từ máy chủ (đa thiết bị)
         resetIdleTimer();
-        const u = api.getUser();
-        if (u && u.id) {
-          api.get(`/api/user/study-time/today?date=${currentDateRef.current}`, { skipCache: true }).then((res: any) => {
-            if (res && res.success && res.data) {
-              const serverSec = res.data.totalSeconds || 0;
-              if (serverSec > totalSecondsRef.current) {
-                totalSecondsRef.current = serverSec;
-                try {
-                  localStorage.setItem(`study_time_${currentDateRef.current}`, String(serverSec));
-                } catch {}
-                broadcastUpdate(isUserActiveRef.current);
-              }
-            }
-          }).catch(() => {});
-        }
+        syncLatestFromServer();
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Kéo dữ liệu mới nhất tức thì khi focus cửa sổ (chuyển đổi qua lại giữa các máy)
+    const handleWindowFocus = () => {
+      resetIdleTimer();
+      syncLatestFromServer();
+    };
+    window.addEventListener('focus', handleWindowFocus);
 
     // 3. Main Tick Interval: Counts every 1 second when active
     const tickInterval = setInterval(() => {
@@ -220,6 +254,7 @@ export default function ActiveStudyTracker() {
         window.removeEventListener(ev, resetIdleTimer);
       });
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleWindowFocus);
       window.removeEventListener('beforeunload', handleBeforeUnload);
       window.removeEventListener('pagehide', handleBeforeUnload);
       clearInterval(tickInterval);

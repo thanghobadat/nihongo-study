@@ -11,7 +11,6 @@ import {
   N4_RADICALS_SET
 } from '../utils/kanjiRadicals';
 import { api } from '../utils/api';
-import StudyTimeBadge from '../components/StudyTimeBadge';
 
 export type RadicalStatus = 'not_learned' | 'learning' | 'mastered';
 export type RadicalLevel = 'n5' | 'n4' | 'n5_n4' | 'all';
@@ -1072,8 +1071,6 @@ export default function RadicalsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5 self-start md:self-center">
-          <StudyTimeBadge />
-
           {/* Tab switcher */}
           <div className="w-full sm:w-auto grid grid-cols-2 sm:flex bg-slate-50 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
             <button

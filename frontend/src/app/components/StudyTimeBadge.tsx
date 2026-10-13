@@ -45,21 +45,14 @@ export default function StudyTimeBadge({
     return () => window.removeEventListener('study-time-sync', handleSync);
   }, []);
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (onClick) {
       onClick();
       return;
     }
 
     if (showModalOnClick) {
-      // Load study overview to populate report modal
-      try {
-        const res: any = await api.get('/api/user/study-overview');
-        if (res && res.success) {
-          setReportData(res);
-        }
-      } catch {}
-      setIsReportOpen(true);
+      setIsHistoryTableOpen(true);
     }
   };
 
@@ -71,7 +64,7 @@ export default function StudyTimeBadge({
       <button
         onClick={handleClick}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100/90 hover:bg-slate-200/90 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer shrink-0 ${className}`}
-        title="Thời gian học thực tế hôm nay (Bấm xem Báo cáo ngày)"
+        title="Thời gian học thực tế hôm nay (Bấm xem Thống kê thời gian học)"
         type="button"
       >
         <span className="text-sm">⏱️</span>

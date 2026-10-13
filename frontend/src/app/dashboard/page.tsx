@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
 import DailyReportModal from '../components/DailyReportModal';
-import StudyTimeBadge from '../components/StudyTimeBadge';
 import { formatStudyTime, getVietnamDateString, evaluateStudyTime } from '../utils/studyTimeHelper';
 import VisualRoadmapModal from '../components/VisualRoadmapModal';
 import DayDetailModal, { DayHistoryItem } from '../components/DayDetailModal';
@@ -905,33 +904,6 @@ export default function UserDashboard() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
-            <StudyTimeBadge onClick={() => setIsDailyReportOpen(true)} />
-            <button
-              onClick={() => setIsDailyReportOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-pink-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-purple-600/30 flex items-center gap-1.5 transition-all duration-200 active:scale-95 border border-purple-400/30 cursor-pointer"
-              title="Báo cáo tiến độ hôm nay"
-            >
-              <span>📊</span>
-              <span>Báo Cáo Ngày</span>
-            </button>
-            <button
-              onClick={() => setIsStudyTimeHistoryOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-amber-600/30 flex items-center gap-1.5 transition-all duration-200 active:scale-95 border border-amber-400/30 cursor-pointer"
-              title="Xem bảng đánh giá thời gian học từng ngày (ngày X học Y tiếng)"
-            >
-              <span>⏱️</span>
-              <span>Bảng Thời Gian Học</span>
-            </button>
-            <button
-              onClick={() => {
-                setRoadmapInitialTab('overview');
-                setIsVisualRoadmapOpen(true);
-              }}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/30 flex items-center gap-2 transition-all duration-200 active:scale-95 border border-indigo-400/30 cursor-pointer"
-            >
-              <span>🗺️</span>
-              <span>Sơ Đồ Tiến Độ</span>
-            </button>
             <button
               onClick={() => {
                 setRoadmapInitialTab('master_plan');

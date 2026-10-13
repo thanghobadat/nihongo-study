@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthGuard from "./components/AuthGuard";
 import { ThemeProvider } from "./components/ThemeProvider";
 import ActiveStudyTracker from "./components/ActiveStudyTracker";
+import GlobalStudyTimeWidget from "./components/GlobalStudyTimeWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,6 +61,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ActiveStudyTracker />
+          <GlobalStudyTimeWidget />
           <AuthGuard>{children}</AuthGuard>
         </ThemeProvider>
       </body>

@@ -1,6 +1,146 @@
 {
   "wrong_questions": [
     {
+      "id": 77,
+      "answers": [
+        "わたしはブラジルからきました"
+      ],
+      "direction": "vi-to-ja",
+      "question": "Tôi đến từ Brasil.",
+      "item_type": "translation",
+      "lesson_id": 1,
+      "userAnswer": "2",
+      "examDate": "2026-10-13T15:10:27.595Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-10-13T15:10:27.652Z"
+    },
+    {
+      "id": 7,
+      "question_audio": "あのひとはだれですか",
+      "correct_answers": [
+        "あのひとはだれですか",
+        "anohito wa dare desu ka"
+      ],
+      "item_type": "dictation",
+      "lesson_id": 1,
+      "userAnswer": "12",
+      "examDate": "2026-10-13T15:10:27.595Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-10-13T15:10:27.652Z"
+    },
+    {
+      "id": 17,
+      "answers": [
+        "Đây là cuốn từ điển tiếng Anh."
+      ],
+      "direction": "ja-to-vi",
+      "question_kana": "これは えいごの じしょ です。",
+      "question_kanji": "これは 英語の 辞書 です。",
+      "item_type": "translation",
+      "lesson_id": 2,
+      "userAnswer": "adsf",
+      "examDate": "2026-10-13T14:57:14.078Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-10-13T14:57:14.136Z"
+    },
+    {
+      "id": 49,
+      "answers": [
+        "Đó là trường đại học của Nhật Bản."
+      ],
+      "direction": "ja-to-vi",
+      "question_kana": "にほん の だいがく です。",
+      "question_kanji": "日本 の 大学 です。",
+      "item_type": "translation",
+      "lesson_id": 1,
+      "userAnswer": "ádf",
+      "examDate": "2026-10-13T14:57:14.078Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-10-13T14:57:14.136Z"
+    },
+    {
+      "id": 3,
+      "questions": [
+        {
+          "q": "なまえは なんですか。",
+          "corr": "ミラー",
+          "opts": [
+            "グプタ",
+            "ワン",
+            "サントス",
+            "ミラー"
+          ],
+          "correct": "ミラー",
+          "options": [
+            "ワン",
+            "ミラー",
+            "サントス",
+            "グプタ"
+          ]
+        },
+        {
+          "q": "ミラーさんはどこの国の人ですか。",
+          "corr": "アメリカ",
+          "opts": [
+            "イギリス",
+            "フランス",
+            "ドイツ",
+            "アメリカ"
+          ],
+          "correct": "アメリカ",
+          "options": [
+            "イギリス",
+            "アメリカ",
+            "フランス",
+            "ドイツ"
+          ]
+        },
+        {
+          "q": "ミラーさんはがくせですか。",
+          "corr": "いいえ",
+          "opts": [
+            "そうです",
+            "いいえ",
+            "わかりません",
+            "はい"
+          ],
+          "correct": "いいえ",
+          "options": [
+            "はい",
+            "いいえ",
+            "わかりません",
+            "そうです"
+          ]
+        }
+      ],
+      "audio_text_kana": "しつれいですが、おなまえは。わたしは ミラーです。アメリカからきました。どうぞよろしく。",
+      "audio_text_kanji": "失礼ですが、お名前は。私は ミラーです。アメリカから来ました。どうぞよろしく。",
+      "item_type": "listening",
+      "lesson_id": 1,
+      "userAnswer": {
+        "0": "サントス",
+        "1": "アメリカ",
+        "2": "わかりません"
+      },
+      "examDate": "2026-10-13T14:57:14.078Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-10-13T14:57:14.136Z"
+    },
+    {
+      "id": 36,
+      "question_audio": "それはどこのこんぴゅーたですか",
+      "correct_answers": [
+        "それはどこのこんぴゅーたですか",
+        "sore wa doko no konpyuuta desu ka"
+      ],
+      "item_type": "dictation",
+      "lesson_id": 2,
+      "userAnswer": "adf",
+      "examDate": "2026-10-13T14:57:14.078Z",
+      "user_id": "user-1781344343083",
+      "created_at": "2026-10-13T14:57:14.136Z"
+    },
+    {
       "id": 22,
       "question_audio": "この ちょこれーと は わたしの です。",
       "correct_answers": [

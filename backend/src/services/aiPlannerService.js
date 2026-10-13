@@ -816,7 +816,8 @@ async function generateStudyPlan(params) {
       ...d,
       tasks: (d.tasks || []).map(t => (!t.completed ? { ...t, rescheduled: true, rescheduledAt: todayStr } : t))
     }));
-    archivedPastDays = [...priorArchived, ...pastDays];
+    // Only retain past days that had actual completed work
+    archivedPastDays = [...priorArchived, ...pastDays].filter(d => (d.tasks || []).some(t => t.completed));
   }
 
   // Default to lesson 1 (or explicit startLesson if requested) so each lesson 1..50 is evaluated.
@@ -891,14 +892,28 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
 
+  // Determine earliest unfinished lesson to prevent phantom debt for future lessons
+  const completedLessons = getCompletedLessons({ userId, currentPlan: plan });
+  let firstUnfinishedLesson = 1;
+  while (completedLessons.has(firstUnfinishedLesson) && firstUnfinishedLesson <= 50) {
+    firstUnfinishedLesson++;
+  }
+
   // 1. Group past uncompleted tasks by (itemType, lesson)
   const taskGroups = new Map();
 
   for (const day of allPastDays) {
     for (const task of (day.tasks || [])) {
-      if (task.completed) continue;
+      if (task.completed || task.rescheduled) continue;
 
       const lesson = task.lesson || task.lesson_id || 1;
+
+      // Defense 1: A task cannot be debt if the user hasn't even reached that lesson yet
+      if (lesson > firstUnfinishedLesson) continue;
+
+      // Defense 2: An end-of-lesson review cannot be debt if the lesson itself is currently in progress
+      if (lesson === firstUnfinishedLesson && task.itemType === 'single_review') continue;
+
       const groupKey = task.itemType === 'cumulative_review'
         ? 'cumulative_review'
         : `${task.itemType}_L${lesson}`;
@@ -1210,7 +1225,8 @@ async function refineStudyPlan({ currentPlan, userComment, startDate, endDate, c
       ...d,
       tasks: (d.tasks || []).map(t => (!t.completed ? { ...t, rescheduled: true, rescheduledAt: todayStr } : t))
     }));
-    archivedPastDays = [...priorArchived, ...pastDays];
+    // Only retain past days that had actual completed work
+    archivedPastDays = [...priorArchived, ...pastDays].filter(d => (d.tasks || []).some(t => t.completed));
   }
 
   // If user explicitly provided a future startDate, use it; otherwise start from today
