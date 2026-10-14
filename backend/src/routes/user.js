@@ -2369,11 +2369,11 @@ function applyAutoTracking(plan, userId) {
 
     let items = [];
     if (itemType === 'vocabulary') {
-      items = (mockDb.vocabulary || []).filter(v => v.lesson_id === lesson);
+      items = (mockDb.vocabulary || []).filter(v => Number(v.lesson_id) === Number(lesson));
     } else if (itemType === 'kanji') {
-      items = (mockDb.kanji || []).filter(k => k.lesson_id === lesson);
+      items = (mockDb.kanji || []).filter(k => Number(k.lesson_id) === Number(lesson));
     } else if (itemType === 'grammar') {
-      items = (mockDb.grammar || []).filter(g => g.lesson_id === lesson);
+      items = (mockDb.grammar || []).filter(g => Number(g.lesson_id) === Number(lesson));
     }
 
     const learnedSet = new Set(
@@ -2409,11 +2409,18 @@ function applyAutoTracking(plan, userId) {
 
         const pool = getLearnedInLesson(lesson, itemType);
 
-        // Sequential pool allocation based on total mastered items in this lesson:
-        // Available items from pool after subtracting previously allocated items to earlier batches
-        const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
-        count = Math.min(target, availableFromPool);
-        allocatedPool[key] += count;
+        const hasDesignatedIds = task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0;
+        if (hasDesignatedIds) {
+          // When a task has specific designated itemIds, count ONLY those specific items that are mastered.
+          // This avoids phantom completions from previously mastered items outside this task's scope.
+          const designatedIds = task.itemIds.map(Number);
+          count = designatedIds.filter(id => pool.ids.has(id)).length;
+        } else {
+          // Fallback sequential pool allocation for generic/legacy tasks without itemIds
+          const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
+          count = Math.min(target, availableFromPool);
+          allocatedPool[key] += count;
+        }
       } else if (task.completed) {
         count = target;
       } else if (task.itemType === 'single_review') {

@@ -2517,3 +2517,21 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
   - Biên dịch Frontend: `npm run build` Next.js 16 thành công 100% trong 2.8s (16/16 routes).
   - Tuân thủ Rule 5: Đã thực hiện commit (`b726485`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 162: Khắc Phục Triệt Để Lỗi Phantom Completion Cho Nhiệm Vụ Chưa Học (Ngày Mai) Bằng Cơ Chế Đối Chiếu Designated ItemIds (Đã hoàn thành cục bộ - 14/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  - Người dùng phản hồi: *"hiện tại phần hiển thị từ vựng cho ngày mai đang sai tương tự, còn 14 từ nhưng khi ra plan 14 từ lại đánh hoàn thành"*.
+- **Nguyên nhân cốt lõi**:
+  - Khi người dùng Replan, `aiPlannerService` chỉ tạo nhiệm vụ cho những từ/chữ **chưa thuộc** (ví dụ 14 từ còn lại của Bài 2 được đưa vào ngày mai).
+  - Thuật toán tracking cũ lấy `pool.total` (bao gồm 31 từ người dùng đã thuộc trong quá khứ) để cấp phát cho nhiệm vụ ngày mai $\rightarrow$ dẫn tới nhiệm vụ 14 từ mới của ngày mai bị lấy nhầm 14 từ cũ gán vào và đánh dấu `completed = true`.
+- **Giải pháp triển khai**:
+  - Tại [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js):
+    - Kiểm tra `hasDesignatedIds = task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0`.
+    - Nếu có `itemIds`: Chỉ đếm những ID thực sự nằm trong danh sách được chỉ định mà người dùng đã `mastered` (`count = designatedIds.filter(id => pool.ids.has(id)).length`).
+    - Nếu không có `itemIds`: Dự phòng dùng sequential pool allocation theo tổng bài (`availableFromPool = Math.max(0, pool.total - allocatedPool[key])`).
+- **Kiểm định & Xác thực**:
+  - Unit test kịch bản A: Người dùng thuộc 31 từ cũ, nhiệm vụ 14 từ ngày mai ban đầu hiển thị `0/14 (completed=false)`, học 5 từ thành `5/14 (completed=false)`, học đủ 14 từ thành `14/14 (completed=true)` [PASS 100%].
+  - Unit test kịch bản B: 4 batch chữ Hán Bài 2, học xong 3 chữ batch 1 thì chỉ batch 1 hoàn thành (3/3), các batch 2, 3, 4 giữ nguyên 0/3 [PASS 100%].
+  - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
+  - Biên dịch Frontend: `npm run build` Next.js 16 thành công 100% trong 2.8s (16/16 routes).
+  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.
