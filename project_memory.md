@@ -2494,4 +2494,4 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Xác thực**:
   - Truy vấn Supabase: 4 bảng đều [OK], dữ liệu kế hoạch và thời gian học đã được nạp thành công.
   - Next.js build: `npm run build` thành công 100% trong 3.1s (16/16 routes).
-  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.
+  - Tuân thủ Rule 5: Đã thực hiện commit (`8e8fce8`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
