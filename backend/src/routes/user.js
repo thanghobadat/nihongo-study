@@ -2402,38 +2402,20 @@ function applyAutoTracking(plan, userId) {
       const target = task.targetCount || 1;
       let count = 0;
 
-      if (task.completed) {
-        count = target;
-        if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
-          const itemType = task.itemType;
-          const key = `${lesson}:${itemType}`;
-          if (allocatedPool[key] === undefined) allocatedPool[key] = 0;
-          allocatedPool[key] += target;
-        }
-      } else if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
+      if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
         const itemType = task.itemType;
         const key = `${lesson}:${itemType}`;
         if (allocatedPool[key] === undefined) allocatedPool[key] = 0;
 
         const pool = getLearnedInLesson(lesson, itemType);
 
-        // When a task has specific designated itemIds, count ONLY those specific items that are mastered.
-        // DO NOT use poolContribution, which would mistakenly credit prior mastered items to this new unmastered chunk!
-        const hasDesignatedIds = task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0;
-        if (hasDesignatedIds) {
-          const designatedIds = task.itemIds.map(Number);
-          count = designatedIds.filter(id => pool.ids.has(id)).length;
-          // Fallback: If designatedIds has mismatching IDs or lesson words were updated,
-          // ensure that if user has mastered words in this lesson, they get credited up to target.
-          if (count < target && pool.total > 0) {
-            count = Math.max(count, Math.min(target, pool.total));
-          }
-        } else {
-          // Fallback only for generic tasks without itemIds
-          const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
-          count = Math.min(target, availableFromPool);
-        }
+        // Sequential pool allocation based on total mastered items in this lesson:
+        // Available items from pool after subtracting previously allocated items to earlier batches
+        const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
+        count = Math.min(target, availableFromPool);
         allocatedPool[key] += count;
+      } else if (task.completed) {
+        count = target;
       } else if (task.itemType === 'single_review') {
         const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
         const key2 = `${userId}:review_session_lesson_${lesson}`;
@@ -2459,6 +2441,9 @@ function applyAutoTracking(plan, userId) {
         if (!task.completed_at) {
           task.completed_at = '✓ Tự động ghi nhận';
         }
+      } else if (task.itemType === 'vocabulary' || task.itemType === 'kanji' || task.itemType === 'grammar') {
+        task.completed = false;
+        task.completed_at = undefined;
       }
 
       if (task.currentCount !== prevCount || !!task.completed !== prevCompleted) {

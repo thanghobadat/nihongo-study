@@ -2495,3 +2495,25 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Truy vấn Supabase: 4 bảng đều [OK], dữ liệu kế hoạch và thời gian học đã được nạp thành công.
   - Next.js build: `npm run build` thành công 100% trong 3.1s (16/16 routes).
   - Tuân thủ Rule 5: Đã thực hiện commit (`8e8fce8`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 161: Chuyển Đổi Thuật Toán Auto-Tracking Sang Phân Bổ Theo Số Tổng Khấu Trừ Tuần Tự (FIFO Pool Allocation) (Đã hoàn thành cục bộ - 14/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  - Người dùng học xong 3 chữ Hán của Bài 2 (tổng 12 chữ, chia làm 4 batch, mỗi batch 3 chữ).
+  - Tuy nhiên trong Plan, cả 4 batch đều được đánh dấu hoàn thành (pass hết) dù thực tế người học mới chỉ thuộc 3/12 chữ.
+  - Người dùng yêu cầu đổi cơ chế tracking theo số tổng để phản ánh chính xác tiến độ thực tế.
+- **Nguyên nhân cốt lõi**:
+  - Tại [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js): Đoạn code fallback cũ sử dụng `count = Math.max(count, Math.min(target, pool.total))` mà không trừ đi lượng đã phân bổ cho các batch trước (`allocatedPool`).
+  - Dẫn tới hiện tượng 3 chữ Hán đã thuộc bị ghi nhận lặp lại cho tất cả các batch tiếp theo trong bài.
+- **Giải pháp triển khai**:
+  - Viết lại cơ chế tính toán trong `applyAutoTracking`:
+    - Tính số lượng còn lại khả dụng trong bài: `const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);`
+    - Cấp phát cho batch hiện tại: `count = Math.min(target, availableFromPool);`
+    - Cập nhật số lượng đã phân bổ: `allocatedPool[key] += count;`
+    - Cập nhật trạng thái hoàn thành: Nếu `count >= target` thì `completed = true`, ngược lại nếu `count < target` thì `completed = false`.
+- **Kiểm định & Xác thực**:
+  - Kịch bản kiểm tra độc lập và kiểm tra trực tiếp với tài khoản thực tế của người dùng:
+    - Thuộc 3 chữ Hán (3/12): Chỉ duy nhất Phần 1/4 hoàn thành (3/3, 100%), các phần 2/4, 3/4, 4/4 đều là 0/3 (0%) và `completed = false`.
+    - Dữ liệu kế hoạch chính xác đã được lưu trực tiếp vào bảng `user_study_plans` trên Supabase PostgreSQL.
+  - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
+  - Biên dịch Frontend: `npm run build` Next.js 16 thành công 100% trong 2.8s (16/16 routes).
+  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.
