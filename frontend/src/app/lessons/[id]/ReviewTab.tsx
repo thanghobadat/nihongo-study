@@ -1663,7 +1663,7 @@ export default function ReviewTab({
                         </p>
                       </div>
                       <button
-                        onClick={() => playAudio(current.question_audio)}
+                        onClick={() => playAudio(current.question_audio || current.audio_text_kanji || current.audio_text_kana || current.audio || '')}
                         className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-2xl transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer text-sm"
                       >
                         🔊 Phát loa nghe

@@ -2535,3 +2535,26 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
   - Biên dịch Frontend: `npm run build` Next.js 16 thành công 100% trong 2.8s (16/16 routes).
   - Tuân thủ Rule 5: Đã thực hiện commit (`d485add`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 163: Khắc Phục Lỗi Âm Thanh Phần Nghe Viết Đáp Án (Dạng 4) Trong Bài Kiểm Tra & Ôn Tập Tổng Hợp (Đã hoàn thành cục bộ - 14/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  - Người dùng phản hồi: *"phần nghe viết đáp án của luyện tập tổng hợp bài kiểm tra đang không nghe được âm thanh"*.
+- **Nguyên nhân cốt lõi**:
+  - Tại [knowledge/page.tsx:3281](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx#L3281): Nút phát âm thanh câu chính tả chỉ đọc `examQuestions[examIndex].audio_text_kanji || examQuestions[examIndex].audio_text_kana`.
+  - Tuy nhiên dữ liệu Dạng 4 (Nghe viết chính tả / dictation) lưu câu tiếng Nhật trong thuộc tính **`question_audio`** (theo chuẩn Quy tắc 6 trong `AGENTS.md` và `mockDb.js`). Vì vậy cả hai trường trên đều là `undefined`, dẫn đến việc gọi `playAudio(undefined)` và không phát ra âm thanh.
+  - Tương tự tại dòng 3432 & 1304 (màn hình xem lại kết quả bài thi), thiếu `q.question_audio` khiến câu chính tả hiển thị `---` hoặc không bấm nghe lại được.
+  - Trong [audioHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/audioHelper.ts): Điều kiện phát hiện câu `isSentence` chỉ xét `length > 15`, khiến các câu chính tả ngắn (10-14 ký tự) cố kết nối từ điển LanguagePod101 đơn từ gây timeout/chậm 2.5s hoặc lỗi; đồng thời `speakTTS` thiếu cơ chế GC protection.
+- **Giải pháp triển khai**:
+  - Tại [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx):
+    - Bổ sung `examQuestions[examIndex].question_audio` cho nút phát loa Dạng 4.
+    - Bổ sung `q.question_audio` vào màn hình tổng kết bài thi và hiển thị đáp án đúng `getQuestionCorrectAnswerStr`.
+  - Tại [audioHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/audioHelper.ts):
+    - Cải tiến `isSentence` nhận diện câu khi độ dài $\ge 8$ hoặc chứa trợ từ/đuôi câu `です`, `ます`, `でした`, `ません`, `じゃありません`, `か`, `は`, `が`, `を`, `に`, `で`, `と` $\rightarrow$ phát ngay lập tức bằng browser TTS.
+    - Thêm cơ chế chống Garbage Collection `_activeUtterances` trên `window` cho `speakTTS`.
+  - Tại [ReviewTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/%5Bid%5D/ReviewTab.tsx#L1666):
+    - Bổ sung fallback đa tầng `current.question_audio || current.audio_text_kanji || current.audio_text_kana || current.audio || ''`.
+- **Kiểm định & Xác thực**:
+  - Unit test 1: Kiểm tra 100% (280/280 câu dictation của 50 bài học trong `mockDb.js`) đều giải quyết thành công chuỗi âm thanh tiếng Nhật hợp lệ [PASS].
+  - Unit test 2: Kiểm tra bộ nhận diện câu tiếng Nhật trong `audioHelper.ts` với các câu ngắn và từ vựng đơn lẻ [PASS].
+  - Biên dịch Frontend: `npm run build` thành công 100% trong 2.8s (16/16 routes).
+  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.

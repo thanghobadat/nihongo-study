@@ -17,6 +17,23 @@ export function speakTTS(text: string) {
     
     utterance.lang = 'ja-JP';
     utterance.rate = 0.85; // Slightly slower for easier learning
+
+    // GC protection for Chrome & iOS/Safari
+    (window as any)._activeUtterances = (window as any)._activeUtterances || [];
+    (window as any)._activeUtterances.push(utterance);
+    utterance.onend = () => {
+      const idx = (window as any)._activeUtterances.indexOf(utterance);
+      if (idx > -1) (window as any)._activeUtterances.splice(idx, 1);
+    };
+    utterance.onerror = () => {
+      const idx = (window as any)._activeUtterances.indexOf(utterance);
+      if (idx > -1) (window as any)._activeUtterances.splice(idx, 1);
+    };
+
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+
     window.speechSynthesis.speak(utterance);
   }
 }
@@ -37,11 +54,12 @@ export async function playAudioWithFallback(kanji: string, kana: string) {
   
   if (!cleanKana) return;
 
-  // 1. Detect if it's a long sentence or contains Japanese punctuation/spaces
-  const isSentence = cleanKana.length > 15 || 
+  // 1. Detect if it's a sentence or contains Japanese grammatical markers/particles/spaces
+  const isSentence = cleanKana.length >= 8 || 
                     /[\u3001\u3002\uff0c\uff0e\uff1f\uff01\?\!（）\(\)]/.test(cleanKana) || 
                     cleanKana.includes(' ') || 
-                    cleanKana.includes('　');
+                    cleanKana.includes('　') ||
+                    /(です|ます|でした|ません|じゃありません|か$|は|が|を|に|で|と)/.test(cleanKana);
 
   if (isSentence) {
     console.log(`[AudioHelper] Detected sentence. Using Browser TTS directly: ${cleanKana}`);

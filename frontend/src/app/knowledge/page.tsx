@@ -1301,7 +1301,7 @@ export default function KnowledgeHubPage() {
       const parts = questions.map((subQ: any, sIdx: number) => `Câu ${sIdx + 1}: ${subQ.corr || subQ.correct || '---'}`);
       return parts.length > 0 ? parts.join(' | ') : '---';
     } else if (q.item_type === 'dictation') {
-      const jp = q.audio_text_kana ? `${q.audio_text_kana} (${q.audio_text_kanji || ''})` : (q.audio_text_kanji || '');
+      const jp = q.question_audio || (q.audio_text_kana ? `${q.audio_text_kana} (${q.audio_text_kanji || ''})` : (q.audio_text_kanji || ''));
       const vn = q.vietnamese_meaning || (q.vietnamese_answers ? q.vietnamese_answers[0] : '');
       return jp ? `${jp}${vn ? ` (Nghĩa: ${vn})` : ''}` : (vn || '---');
     }
@@ -3278,7 +3278,12 @@ export default function KnowledgeHubPage() {
                   {examQuestions[examIndex]?.item_type === 'dictation' && (
                     <div className="space-y-4">
                       <button
-                        onClick={() => playAudio(examQuestions[examIndex].audio_text_kanji || examQuestions[examIndex].audio_text_kana)}
+                        onClick={() => playAudio(
+                          examQuestions[examIndex].question_audio ||
+                          examQuestions[examIndex].audio_text_kanji ||
+                          examQuestions[examIndex].audio_text_kana ||
+                          examQuestions[examIndex].audio || ''
+                        )}
                         className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white rounded-xl text-xs font-bold shadow-md cursor-pointer flex items-center space-x-2"
                       >
                         <span>🔊</span>
@@ -3427,9 +3432,9 @@ export default function KnowledgeHubPage() {
                                 </span>
                               </div>
 
-                              {(q.audio_text_kanji || q.audio_text_kana) && (
+                              {(q.audio_text_kanji || q.audio_text_kana || q.question_audio) && (
                                 <button
-                                  onClick={() => playAudio(q.audio_text_kanji || q.audio_text_kana)}
+                                  onClick={() => playAudio(q.question_audio || q.audio_text_kanji || q.audio_text_kana)}
                                   className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline cursor-pointer"
                                 >
                                   🔊 Nghe
@@ -3438,7 +3443,7 @@ export default function KnowledgeHubPage() {
                             </div>
 
                             <p className="text-sm font-bold text-slate-900 dark:text-white">
-                              {q.question_kanji || q.question_kana || q.question || q.audio_text_kanji || 'Nội dung câu hỏi'}
+                              {q.question_kanji || q.question_kana || q.question_audio || q.question || q.audio_text_kanji || 'Nội dung câu hỏi'}
                             </p>
 
                             {renderQuestionReviewOptions(gr, rIdx)}
