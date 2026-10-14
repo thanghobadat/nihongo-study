@@ -2516,4 +2516,4 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
     - Dữ liệu kế hoạch chính xác đã được lưu trực tiếp vào bảng `user_study_plans` trên Supabase PostgreSQL.
   - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
   - Biên dịch Frontend: `npm run build` Next.js 16 thành công 100% trong 2.8s (16/16 routes).
-  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.
+  - Tuân thủ Rule 5: Đã thực hiện commit (`b726485`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
