@@ -2534,4 +2534,4 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Unit test kịch bản B: 4 batch chữ Hán Bài 2, học xong 3 chữ batch 1 thì chỉ batch 1 hoàn thành (3/3), các batch 2, 3, 4 giữ nguyên 0/3 [PASS 100%].
   - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
   - Biên dịch Frontend: `npm run build` Next.js 16 thành công 100% trong 2.8s (16/16 routes).
-  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.
+  - Tuân thủ Rule 5: Đã thực hiện commit (`d485add`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
