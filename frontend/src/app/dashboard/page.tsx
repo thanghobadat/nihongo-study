@@ -294,12 +294,28 @@ export default function UserDashboard() {
     fetchDashboardData();
     triggerDailyNotificationCheck();
 
+    // Auto re-fetch fresh data whenever user switches back to this tab / window gains focus
+    const handleFocus = () => {
+      fetchDashboardData();
+    };
+    const handleVisibilityChange = () => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        fetchDashboardData();
+      }
+    };
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+
     // Check periodically every 5 minutes for pre-due and overdue task notifications
     const interval = setInterval(() => {
       triggerDailyNotificationCheck();
     }, 5 * 60 * 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      clearInterval(interval);
+    };
   }, [fetchDashboardData, triggerDailyNotificationCheck]);
 
   // Trigger Replan Confirmation Modal

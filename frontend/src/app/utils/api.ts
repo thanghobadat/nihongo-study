@@ -61,13 +61,28 @@ async function request(path: string, method: string, body: any = null, options: 
     }
   }
 
+  // When skipping cache, append timestamp query parameter to bust any browser/proxy cache
+  let finalPath = path;
+  if (options.skipCache && isGet) {
+    const separator = finalPath.includes('?') ? '&' : '?';
+    if (!finalPath.includes('_t=')) {
+      finalPath = `${finalPath}${separator}_t=${Date.now()}`;
+    }
+  }
+
   const baseUrl = getBaseUrl();
-  const url = `${baseUrl}${path}`;
+  const url = `${baseUrl}${finalPath}`;
   
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...options.headers,
   };
+
+  if (options.skipCache) {
+    headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+    headers['Pragma'] = 'no-cache';
+    headers['Expires'] = '0';
+  }
 
   // Get token from localStorage if available (client side only)
   let token = options.token;
@@ -82,6 +97,7 @@ async function request(path: string, method: string, body: any = null, options: 
   const fetchOptions: RequestInit = {
     method,
     headers,
+    cache: options.skipCache ? 'no-store' : 'default',
   };
 
   if (body) {

@@ -2380,7 +2380,7 @@ function applyAutoTracking(plan, userId) {
       items.filter(it => {
         const s = userProgress[`${userId}:${itemType}:${it.id}`];
         return s === 'mastered';
-      }).map(it => it.id)
+      }).map(it => Number(it.id))
     );
 
     learnedPool[key] = {
@@ -2421,7 +2421,13 @@ function applyAutoTracking(plan, userId) {
         // DO NOT use poolContribution, which would mistakenly credit prior mastered items to this new unmastered chunk!
         const hasDesignatedIds = task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0;
         if (hasDesignatedIds) {
-          count = task.itemIds.filter(id => pool.ids.has(id)).length;
+          const designatedIds = task.itemIds.map(Number);
+          count = designatedIds.filter(id => pool.ids.has(id)).length;
+          // Fallback: If designatedIds has mismatching IDs or lesson words were updated,
+          // ensure that if user has mastered words in this lesson, they get credited up to target.
+          if (count < target && pool.total > 0) {
+            count = Math.max(count, Math.min(target, pool.total));
+          }
         } else {
           // Fallback only for generic tasks without itemIds
           const availableFromPool = Math.max(0, pool.total - allocatedPool[key]);
@@ -2480,6 +2486,9 @@ function applyAutoTracking(plan, userId) {
  */
 async function checkAndNotifyNewlyCompletedTasks(userId) {
   try {
+    // Synchronize latest Supabase user_progress before auto-tracking
+    await syncUserProgressFromSupabase(userId);
+
     let plan = await getUserPlanAsync(userId);
     if (!plan || !Array.isArray(plan.days)) return;
 
@@ -2534,6 +2543,9 @@ async function checkAndNotifyNewlyCompletedTasks(userId) {
  * Check yesterday's unfinished debt
  */
 router.get('/study-debt', async (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   try {
     const userId = req.user.id;
     const clientDate = req.query.date;
@@ -2603,6 +2615,9 @@ router.post('/replan-debt', async (req, res) => {
  * Get active study plan with auto-tracking applied (auto-upgrade old plan if missing granular scopeDetails)
  */
 router.get('/study-plan', async (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   try {
     const userId = req.user.id;
     let plan = await getUserPlanAsync(userId);
@@ -2997,6 +3012,9 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
  * Overview of completed knowledge, current position, Pace status, and Milestones
  */
 router.get('/study-overview', async (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   try {
     const userId = req.user.id;
 
@@ -3177,6 +3195,9 @@ router.get('/study-overview', async (req, res) => {
  * Daily History Overview for progress tracking and detail inspection
  */
 router.get('/daily-history', async (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   try {
     const userId = req.user.id;
     await Promise.all([

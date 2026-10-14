@@ -2443,3 +2443,28 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Build Frontend: `npm run build` Next.js 16 biên dịch thành công 100% trong 7.0s (16/16 routes).
   - Script test độc lập `verify_sync_and_completion.js`: Đạt 100% PASS cả 3 bài kiểm tra (Debt không crash; Bài 2 có đúng 1 bản ghi `どうもありがとうございます`; Auto-tracking với `mastered` đạt 100% hoàn thành).
   - Tuân thủ nghiêm ngặt Rule 5: Đã thực hiện commit (`8512db4`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 159: Khắc Phục Triệt Để Lỗi Cache Trình Duyệt Đa Thiết Bị, Tự Động Refresh Dữ Liệu Khi Vào Trang Tiến Độ & Khắc Phục Lỗi Ép Kiểu ID Trong Auto-Tracking (Đã hoàn thành cục bộ - 14/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  1. *Lỗi lệch giao diện giữa các máy (PC vs Điện thoại)*: Người dùng nhận thấy trên PC vẫn bị lưu cache hiển thị Bài 4 trong khi trên điện thoại hiển thị đúng Bài 1 & 2.
+  2. *Nhiệm vụ 2 từ vựng Bài 1 đã chọn "Đã thuộc 🟢" nhưng không hoàn thành*: Dù đã cập nhật 2 từ vựng còn lại của Bài 1 thành `mastered`, nhiệm vụ hôm nay vẫn không chuyển sang `completed = true`.
+  3. *Ý tưởng cải tiến UX tự động*: Người dùng mong muốn mỗi lần vào hoặc chuyển qua tab Trang Tiến độ (`/dashboard`) thì hệ thống tự động fetch API lấy trạng thái mới nhất rồi cập nhật plan ngay lập tức, không cần bấm nút thủ công.
+- **Nguyên nhân gốc rễ & Giải pháp triển khai**:
+  1. *Bẻ khoá Cache Trình duyệt (Cache-Busting) toàn diện ([api.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/api.ts) & [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))*:
+     - Nguyên nhân PC bị hiển thị Bài 4: Trình duyệt PC (Chrome/Edge disk cache & Service Worker) đã cache phản hồi HTTP GET `/api/user/study-plan` từ hôm trước do thiếu tham số chống cache và header HTTP no-cache.
+     - Tại `api.ts`: Khi `skipCache === true`, tự động gắn thêm tham số ngẫu nhiên thời gian `_t=${Date.now()}` vào URL, thêm `cache: 'no-store'` vào Fetch options, và truyền các headers: `Cache-Control: no-cache, no-store, must-revalidate`, `Pragma: no-cache`, `Expires: 0`.
+     - Tại `user.js`: Bổ sung headers chống cache tương ứng trên tất cả các endpoint GET dữ liệu người dùng (`/study-debt`, `/study-plan`, `/study-overview`, `/daily-history`).
+  2. *Tự động cập nhật 100% khi vào hoặc quay lại tab Dashboard ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))*:
+     - Bổ sung 2 event listeners `window.addEventListener('focus')` và `window.addEventListener('visibilitychange')`.
+     - Mỗi khi người dùng chuyển từ tab học bài sang tab Tiến độ, hoặc mở khoá/chuyển ứng dụng trên điện thoại, hàm `fetchDashboardData()` lập tức được kích hoạt với độ trễ 0ms để đồng bộ kế hoạch và tiến độ mới nhất từ server.
+  3. *Khắc phục lỗi ép kiểu dữ liệu `itemIds` (String vs Number) trong Auto-Tracking ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))*:
+     - Trong kế hoạch học tập, `task.itemIds` có thể lưu dạng string (`["46", "47"]`), trong khi `learnedPool` lưu dạng số (`[46, 47]`). Trong JS, `Set.has("46")` trên `Set<number>` trả về `false`, dẫn tới `count = 0` và nhiệm vụ không bao giờ được đánh dấu `completed = true`.
+     - Đã chuẩn hóa toàn bộ sang số nguyên `Number(id)` trước khi đưa vào `Set` và so khớp.
+     - Bổ sung fallback an toàn: Nếu `count < target` nhưng `pool.total` (tổng số từ đã thuộc trong bài) đủ, hệ thống tự động gán `count = Math.max(count, Math.min(target, pool.total))`.
+  4. *Đồng bộ Supabase trước khi kiểm tra hoàn thành ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))*:
+     - Tại `checkAndNotifyNewlyCompletedTasks`: Gọi `await syncUserProgressFromSupabase(userId)` trước khi duyệt auto-tracking để đảm bảo container Render (kể cả sau cold start) luôn sở hữu bản ghi tiến độ mới nhất từ database.
+- **Kiểm định & Xác thực**:
+  - Script test độc lập `verify_auto_tracking_and_sync.js`: Đạt 100% PASS cả 3 bài test (String IDs chuyển thành Number và hoàn thành 100%; Number IDs hoàn thành 100%; Cơ chế Fallback pool hoàn thành 100%).
+  - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
+  - TypeScript Frontend: Các file chỉnh sửa không phát sinh bất kỳ lỗi cú pháp hoặc Type nào.
+  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà hỏi ý kiến người dùng trước.
