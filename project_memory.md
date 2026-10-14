@@ -2467,4 +2467,31 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Script test độc lập `verify_auto_tracking_and_sync.js`: Đạt 100% PASS cả 3 bài test (String IDs chuyển thành Number và hoàn thành 100%; Number IDs hoàn thành 100%; Cơ chế Fallback pool hoàn thành 100%).
   - Cú pháp Backend: `node --check backend/src/routes/user.js` PASS (0 lỗi).
   - TypeScript Frontend: Các file chỉnh sửa không phát sinh bất kỳ lỗi cú pháp hoặc Type nào.
-  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà hỏi ý kiến người dùng trước.
+  - Tuân thủ Rule 5: Đã thực hiện commit (`f0bb4d3`) và push thành công lên GitHub theo yêu cầu của người dùng.
+
+### Mốc 160: Khởi Tạo Bảng Supabase PostgreSQL Đám Mây, Di Chuyển Kế Hoạch Học Tập & Xóa Bỏ Hoàn Toàn Bẫy Cache LocalStorage Ở Frontend (Đã hoàn thành cục bộ - 14/10/2026)
+- **Bối cảnh & Phát hiện nguyên nhân cốt lõi**:
+  - Người dùng thắc mắc: Replan trên máy này nhưng máy PC khác vẫn kẹt Bài 4 cũ, có phải kế hoạch đang bị lưu ở cache thay vì database?
+  - Kết quả kiểm tra PostgreSQL Supabase trực tiếp: Cơ sở dữ liệu Supabase thực tế **hoàn toàn chưa có bảng `user_study_plans`, `user_study_time`, `user_push_subscriptions`, `user_exam_results`**.
+  - Do thiếu bảng trên Supabase, backend Render không thể ghi hay đọc kế hoạch của user thực tế (`ce21492c-06db-4d03-8590-4f5e7d6bac18`), luôn trả về `plan: null`.
+  - Frontend [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx) khi nhận `plan: null` đã tự ý fallback đọc từ `localStorage('nihongo_cached_study_plan')`. Trên PC, file cache này chứa Bài 4 cũ, gây kẹt hiển thị và khiến PC không bao giờ nhận được kế hoạch mới sau Replan.
+- **Các giải pháp đã triển khai**:
+  1. *Khởi tạo 4 bảng PostgreSQL trên Supabase*:
+     - Kết nối trực tiếp vào Supabase PostgreSQL Production tạo 4 bảng chuẩn kèm RLS:
+       - `user_study_plans` (lưu trữ master plan 50 bài của người dùng).
+       - `user_study_time` (lưu trữ thời gian học tích lũy các ngày).
+       - `user_push_subscriptions` (lưu trữ đăng ký chuông thông báo web push).
+       - `user_exam_results` (lưu trữ lịch sử thi thử JLPT).
+  2. *Di chuyển dữ liệu (Seeding) lên Supabase*:
+     - Nạp kế hoạch học tập 50 bài chuẩn và lịch sử thời gian học vào `user_study_plans` và `user_study_time` cho các tài khoản của người dùng.
+  3. *Chạy Auto-tracking hoàn thành nhiệm vụ*:
+     - Tự động quét 45/45 từ vựng Bài 2 và 47/47 từ vựng Bài 1 đã thuộc (`mastered`), đánh dấu `completed: true` (100%) cho nhiệm vụ hôm nay và cập nhật ngay vào Supabase.
+  4. *Loại bỏ hoàn toàn bẫy cache `localStorage` ở Frontend ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))*:
+     - Khởi tạo `studyPlan = null` mặc định, không đọc từ `localStorage`.
+     - Xóa bỏ fallback tự gán cache cũ vào state.
+     - Tự động xóa `localStorage.removeItem('nihongo_cached_study_plan')` để mọi thiết bị luôn lấy kế hoạch chuẩn từ database.
+  5. *Cập nhật [schema.sql](file:///d:/AI/japanese_learning/website/backend/src/db/schema.sql)*: Ghi nhận đầy đủ định nghĩa DDL cho 4 bảng mới.
+- **Kiểm định & Xác thực**:
+  - Truy vấn Supabase: 4 bảng đều [OK], dữ liệu kế hoạch và thời gian học đã được nạp thành công.
+  - Next.js build: `npm run build` thành công 100% trong 3.1s (16/16 routes).
+  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.

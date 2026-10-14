@@ -345,15 +345,41 @@ CREATE POLICY "Allow public all access user_study_plans" ON public.user_study_pl
 
 -- 20. Create User Study Time Table (Daily Active Study Time for Multi-Device)
 CREATE TABLE IF NOT EXISTS public.user_study_time (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id TEXT NOT NULL,
-  date DATE NOT NULL,
+  date TEXT NOT NULL,
   total_seconds INTEGER NOT NULL DEFAULT 0,
   updated_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(user_id, date)
+  PRIMARY KEY (user_id, date)
 );
 
 ALTER TABLE public.user_study_time ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public all access user_study_time" ON public.user_study_time FOR ALL USING (true) WITH CHECK (true);
+
+
+-- 21. Create User Exam Results Table (JLPT Mock Exams History)
+CREATE TABLE IF NOT EXISTS public.user_exam_results (
+  id BIGSERIAL PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  exam_id TEXT,
+  score INTEGER,
+  total_questions INTEGER,
+  answers JSONB,
+  completed_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.user_exam_results ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public all access user_exam_results" ON public.user_exam_results FOR ALL USING (true) WITH CHECK (true);
+
+
+-- 22. Create Combined Reviews Table
+CREATE TABLE IF NOT EXISTS public.combined_reviews (
+  level TEXT PRIMARY KEY,
+  review_data JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.combined_reviews ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public all access combined_reviews" ON public.combined_reviews FOR ALL USING (true) WITH CHECK (true);
+
 
 

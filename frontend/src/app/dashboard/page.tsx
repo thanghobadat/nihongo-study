@@ -80,16 +80,8 @@ export default function UserDashboard() {
     return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(d);
   });
 
-  // Study Plan & Overview data
-  const [studyPlan, setStudyPlan] = useState<any>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const cached = localStorage.getItem('nihongo_cached_study_plan');
-        if (cached) return JSON.parse(cached);
-      } catch (e) {}
-    }
-    return null;
-  });
+  // Study Plan & Overview data (Always fetch fresh from server, no stale localStorage fallback)
+  const [studyPlan, setStudyPlan] = useState<any>(null);
   const [studyOverview, setStudyOverview] = useState<any>(null);
   const [dailyHistory, setDailyHistory] = useState<DayHistoryItem[]>([]);
   const [todayStudyTimeSeconds, setTodayStudyTimeSeconds] = useState<number>(() => {
@@ -217,7 +209,7 @@ export default function UserDashboard() {
         setStudyPlan(finalPlan);
         if (typeof window !== 'undefined') {
           try {
-            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(finalPlan));
+            localStorage.removeItem('nihongo_cached_study_plan');
           } catch (e) {}
         }
         if (finalPlan.startDate) setStartDateStr(finalPlan.startDate);
@@ -231,27 +223,11 @@ export default function UserDashboard() {
             }
           }
         }
-      } else if (!planRes?.plan || planRes?.requiresClientRestore) {
-        // Server has no plan (e.g. cold start / offline). Display client cache as offline fallback only!
+      } else if (!planRes?.plan) {
+        setStudyPlan(null);
         if (typeof window !== 'undefined') {
           try {
-            const cachedStr = localStorage.getItem('nihongo_cached_study_plan');
-            if (cachedStr) {
-              const cachedPlan = JSON.parse(cachedStr);
-              if (cachedPlan && Array.isArray(cachedPlan.days) && cachedPlan.days.length > 0) {
-                setStudyPlan(cachedPlan);
-                if (cachedPlan.startDate) setStartDateStr(cachedPlan.startDate);
-                if (cachedPlan.endDate) setEndDateStr(cachedPlan.endDate);
-                // Re-check debt against restored cache
-                api.get(`/api/user/study-debt?date=${currentDateStr}`).then((res: any) => {
-                  if (res && res.hasDebt && res.debtItems && res.debtItems.length > 0) {
-                    setDebtData(res);
-                    setIsDebtModalOpen(true);
-                  }
-                }).catch(() => {});
-                // Do not auto-post cachedPlan here to avoid overwriting newer server data during temporary network glitches
-              }
-            }
+            localStorage.removeItem('nihongo_cached_study_plan');
           } catch (e) {}
         }
       }
@@ -418,7 +394,7 @@ export default function UserDashboard() {
         setStudyPlan(planWithCount);
         if (typeof window !== 'undefined') {
           try {
-            localStorage.setItem('nihongo_cached_study_plan', JSON.stringify(planWithCount));
+            localStorage.removeItem('nihongo_cached_study_plan');
           } catch (e) {}
         }
         if (res.plan.startDate) setStartDateStr(res.plan.startDate);
