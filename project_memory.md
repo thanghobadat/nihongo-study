@@ -2420,7 +2420,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Biên dịch Frontend Next.js 16 (`npm run build`): Đạt 100% PASS (0 lỗi TypeScript, 0 lỗi JSX). 16/16 route tĩnh & động tạo thành công.
   - Tuân thủ Rule 5: Không tự động commit và push code lên GitHub.
 
-### Mốc 158: Khắc Phục Lỗi Đồng Bộ Kế Hoạch Đa Thiết Bị (PC vs Phone), Sửa Crash API Bài Nợ, Khử Trùng Lặp Từ Vựng & Chuẩn Hóa Auto-Tracking Hoàn Thành Nhiệm Vụ (Đã hoàn thành - 14/10/2026)
+### Mốc 158: Khắc Phục Lỗi Đồng Bộ Kế Hoạch Đa Thiết Bị (PC vs Phone), Sửa Crash API Bài Nợ, Khử Trùng Lặp Từ Vựng & Chuẩn Hóa Auto-Tracking Hoàn Thành Nhiệm Vụ (Đã hoàn thành & Đã đẩy lên GitHub - 14/10/2026)
 - **Bối cảnh & Phản hồi từ người dùng**:
   1. *Nhiệm vụ hôm nay không cập nhật thành OK*: Bài 1 chưa học 2 từ vựng nên có trong plan hôm nay, người dùng đã update thành đã học nhưng plan không đổi thành complete; tương tự với Bài 2.
   2. *Lệch kế hoạch giữa các thiết bị*: Mở trên điện thoại thì plan hiển thị đúng Bài 1 và Bài 2, nhưng mở trên PC lại hiển thị học từ vựng Bài 4.
@@ -2442,4 +2442,4 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Syntax Backend: `node --check` các file `aiPlannerService.js`, `user.js`, `mockDb.js` đạt 100% PASS (0 lỗi).
   - Build Frontend: `npm run build` Next.js 16 biên dịch thành công 100% trong 7.0s (16/16 routes).
   - Script test độc lập `verify_sync_and_completion.js`: Đạt 100% PASS cả 3 bài kiểm tra (Debt không crash; Bài 2 có đúng 1 bản ghi `どうもありがとうございます`; Auto-tracking với `mastered` đạt 100% hoàn thành).
-  - Tuân thủ nghiêm ngặt Rule 5: Không tự động commit và push code lên remote GitHub.
+  - Tuân thủ nghiêm ngặt Rule 5: Đã thực hiện commit (`8512db4`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
