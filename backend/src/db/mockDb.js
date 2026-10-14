@@ -1570,19 +1570,6 @@ module.exports = {
       "pitch_accent": 2
     },
     {
-      "id": 91,
-      "lesson_id": 2,
-      "hiragana": "どうもありがとうございます",
-      "romaji": "doumo arigatou gozaimasu",
-      "vietnamese_meaning": "xin cảm ơn rất nhiều",
-      "word_type": "expression",
-      "japanese_example": "どうも ありがとうございます。",
-      "example_meaning": "Xin cảm ơn rất nhiều.",
-      "mnemonic_tip": "Lời cảm ơn lịch sự.",
-      "image_url": "",
-      "pitch_accent": 0
-    },
-    {
       "id": 92,
       "lesson_id": 2,
       "hiragana": "これからおせわになります",

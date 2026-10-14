@@ -189,10 +189,10 @@ export default function UserDashboard() {
       setLoading(true);
       const currentDateStr = getVietnamDateString();
       const [overviewRes, planRes, historyRes, debtRes] = await Promise.all([
-        api.get('/api/user/study-overview').catch(() => null),
-        api.get('/api/user/study-plan').catch(() => null),
-        api.get('/api/user/daily-history').catch(() => null),
-        api.get(`/api/user/study-debt?date=${currentDateStr}`).catch(() => null)
+        api.get('/api/user/study-overview', { skipCache: true }).catch(() => null),
+        api.get('/api/user/study-plan', { skipCache: true }).catch(() => null),
+        api.get('/api/user/daily-history', { skipCache: true }).catch(() => null),
+        api.get(`/api/user/study-debt?date=${currentDateStr}`, { skipCache: true }).catch(() => null)
       ]);
 
       if (overviewRes && overviewRes.success) {
@@ -211,23 +211,8 @@ export default function UserDashboard() {
       }
 
       if (planRes && planRes.success && planRes.plan && Array.isArray(planRes.plan.days) && planRes.plan.days.length > 0) {
-        const cachedStr = typeof window !== 'undefined' ? localStorage.getItem('nihongo_cached_study_plan') : null;
-        let finalPlan = planRes.plan;
-
-        if (cachedStr) {
-          try {
-            const cachedPlan = JSON.parse(cachedStr);
-            // If cachedPlan has a strictly newer updated_at than server plan, preserve client cache and sync
-            if (
-              cachedPlan?.updated_at &&
-              planRes.plan?.updated_at &&
-              new Date(cachedPlan.updated_at).getTime() > new Date(planRes.plan.updated_at).getTime()
-            ) {
-              finalPlan = cachedPlan;
-              api.post('/api/user/study-plan', { plan: cachedPlan }).catch(() => {});
-            }
-          } catch (e) {}
-        }
+        // Server is always the Authoritative Source of Truth when a valid plan is returned
+        const finalPlan = planRes.plan;
 
         setStudyPlan(finalPlan);
         if (typeof window !== 'undefined') {

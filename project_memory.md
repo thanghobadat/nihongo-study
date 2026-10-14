@@ -2200,7 +2200,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - `npx tsc --noEmit` toàn bộ Frontend Next.js: 100% PASS (0 lỗi TypeScript).
   - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5: Đã thực hiện commit (`3a94b58`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
 
-### Mốc 148: Khắc Phục Triệt Để Lỗi Silent Cold-Start Plan Reset Đẩy Bài Nợ Vào Hôm Nay & Chống Double-Counting Bài Nợ Đã Replan (Đã hoàn thành - 11/10/2026)
+### Mốc 148: Khắc Phục Triệt Để Lỗi Silent Cold-Start Plan Reset Đẩy Bài Nợ Vào Hôm Nay & Chống Double-Counting Bài Nợ Đã Replan (Đã hoàn thành & Đã đẩy lên GitHub - 11/10/2026)
 - **Khắc phục lỗi Silent Cold-Start Plan Reset trên Backend ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))**:
   - Xóa bỏ triệt để đoạn code tự động sinh kế hoạch mới toanh (`generateAlgorithmicPlan({ startDate: today })`) tại các route đọc dữ liệu `GET /api/user/study-plan` và `GET /api/user/daily-history`.
   - Ngăn chặn hoàn toàn việc server tự ý reset ngày bắt đầu kế hoạch về Hôm nay khi Render bị ngủ đông (cold-start), bảo tồn 100% các ngày trong quá khứ và danh sách bài nợ gốc.
@@ -2216,7 +2216,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - `node --check` toàn bộ file Backend: 100% PASS (0 lỗi cú pháp).
   - Script unit test `test_debt_fix.js`: 100% PASS (Kiểm chứng thành công: Test 1 giữ nguyên Kanji Bài 2 trong nợ khi không Replan; Test 2 loại bỏ nợ sau khi Replan hợp lệ).
   - `npx tsc --noEmit` Frontend Next.js: 100% PASS (0 lỗi TypeScript).
-  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5.
+  - Tuân thủ nghiêm ngặt Rule 3, Rule 4 và Rule 5: Đã thực hiện commit (`875e17a`) và push thành công toàn bộ mã nguồn lên nhánh `main` của GitHub remote repository (`https://github.com/thanghobadat/nihongo-study.git`) theo yêu cầu trực tiếp của người dùng.
 
 ### Mốc 149: Khắc Phục Triệt Để 2 Lỗi Production: Lệch Thời Gian Học Đa Thiết Bị & Mất Task Gộp 10 Kanji Sau Khi Học Xong (Đã hoàn thành - 12/10/2026)
 - **Khắc phục lỗi lệch thời gian học đa thiết bị (Device A 1h41m, Device B chỉ còn 40m)**:
@@ -2394,3 +2394,52 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Kiểm tra từ khóa: Không còn bất kỳ xuất hiện nào của `kanji-practice` hay `Luyện chữ Hán` trong `knowledge/page.tsx`.
   - Phân hệ "Ôn tập tổng hợp" (`review`) tiếp tục hoạt động trơn tru với đầy đủ 4 dạng bài tập gồm nhận diện chữ Hán & từ vựng.
   - Tuân thủ Rule 5: Không tự động commit/push code lên GitHub.
+
+### Mốc 157: Nút Đếm Giờ Nổi Toàn Cục, Popup Thống Kê Thời Gian Học, Tinh Giản Trang Tiến Độ & Nâng Cấp Bộ Tra Cứu Toàn Diện (Đã hoàn thành - 13/10/2026)
+- **Bối cảnh & Yêu cầu của người dùng**:
+  1. *Nút Đếm Giờ Nổi Toàn Cục*: Chuyển nút đếm giờ ra khỏi trang tiến độ, hiển thị cố định ở mọi trang (`fixed bottom-5 right-5 z-40`). Khi click vào nút đếm giờ, hiển thị popup gồm Thời gian hôm nay (live time, nhịp tim Active/Idle, thanh tiến độ, đánh giá nỗ lực) và Bảng thống kê thời gian học các ngày trước (thẻ tóm tắt + bảng chi tiết kèm bộ lọc 7 ngày, 30 ngày, tất cả).
+  2. *Tinh Giản Toolbar Trang Tiến Độ (`/dashboard`)*: Loại bỏ 4 nút: `StudyTimeBadge`, `📊 Báo Cáo Ngày`, `⏱️ Bảng Thời Gian Học`, `🗺️ Sơ Đồ Tiến Độ`. Giữ lại nút `📅 Master Plan 50 Bài`.
+  3. *Menu Cài Đặt (`SidebarSettings.tsx`)*: Chỉ xoá duy nhất nút `📚 Tra cứu Từ vựng`. Giữ nguyên nút `🉐 Tra cứu Bộ thủ Kanji`.
+  4. *Sửa Lỗi & Nâng Cấp Phân Hệ Tra Cứu (`QuickLookupModal.tsx`)*:
+     - Sửa triệt để lỗi tra cứu Từ vựng không tìm được từ nào: Do cấu trúc API response `/api/user/course-summary?course=minna` trả về trực tiếp `{ lessons, vocabulary, kanji, ... }` mà code cũ kiểm tra `res.success` và `lesson.vocabulary` dẫn đến mảng rỗng. Đã sửa để lấy trực tiếp `res.vocabulary` và `res.customVocabulary` (1500+ từ vựng).
+     - Đổi chức năng Tra cứu Bộ thủ thành **Tra cứu Từ vựng Kanji**: Tìm theo chữ Hán, âm Hán Việt, On/Kun, nghĩa tiếng Việt; lọc theo bài học 1-50 hoặc cấp độ N5/N4; hiển thị đầy đủ thẻ chi tiết, từ ghép và phát âm.
+     - Bổ sung tab **Tra cứu Bảng Chữ Cái**: Tích hợp toàn bộ 92 ký tự Hiragana & Katakana kèm Romaji, mẹo ghi nhớ hình tượng và nút nghe phát âm chuẩn Nhật.
+  5. *Tối Ưu Đồng Bộ Đa Thiết Bị (`ActiveStudyTracker.tsx`)*: Bổ sung `keepalive: true` khi kích hoạt `visibilitychange` (chuyển app, khoá màn hình điện thoại) chống rớt request và tự động re-sync thời gian mới nhất khi focus tab (`window.onfocus`).
+- **Các tệp tin cập nhật**:
+  - [GlobalStudyTimeWidget.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/GlobalStudyTimeWidget.tsx): Tạo mới widget nổi cố định góc dưới bên phải màn hình.
+  - [StudyTimeBadge.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/StudyTimeBadge.tsx): Mặc định click mở trực tiếp `StudyTimeHistoryModal`.
+  - [StudyTimeHistoryModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/StudyTimeHistoryModal.tsx): Bổ sung Banner Thời gian hôm nay real-time, nhịp tim Active/Idle và đồng bộ liveSeconds vào dòng hôm nay trong bảng.
+  - [QuickLookupModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/QuickLookupModal.tsx): Sửa lỗi search từ vựng; đổi search bộ thủ thành search Từ vựng Kanji; bổ sung search Bảng chữ cái.
+  - [SidebarSettings.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/SidebarSettings.tsx): Chỉ xoá duy nhất nút Tra cứu Từ vựng, giữ nguyên Tra cứu Bộ thủ Kanji.
+  - [dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx): Gỡ bỏ 4 nút khỏi header, giữ lại Master Plan 50 Bài.
+  - [ActiveStudyTracker.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/ActiveStudyTracker.tsx): Thêm keepalive và window focus re-sync đa thiết bị.
+  - [layout.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/layout.tsx): Mount `GlobalStudyTimeWidget`.
+  - [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx): Cập nhật nút tra cứu nhanh trên header sang vocab/kanji.
+  - [knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx) & [radicals/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/radicals/page.tsx): Gỡ bỏ StudyTimeBadge cục bộ.
+- **Kiểm định & Xác thực**:
+  - Biên dịch Frontend Next.js 16 (`npm run build`): Đạt 100% PASS (0 lỗi TypeScript, 0 lỗi JSX). 16/16 route tĩnh & động tạo thành công.
+  - Tuân thủ Rule 5: Không tự động commit và push code lên GitHub.
+
+### Mốc 158: Khắc Phục Lỗi Đồng Bộ Kế Hoạch Đa Thiết Bị (PC vs Phone), Sửa Crash API Bài Nợ, Khử Trùng Lặp Từ Vựng & Chuẩn Hóa Auto-Tracking Hoàn Thành Nhiệm Vụ (Đã hoàn thành - 14/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  1. *Nhiệm vụ hôm nay không cập nhật thành OK*: Bài 1 chưa học 2 từ vựng nên có trong plan hôm nay, người dùng đã update thành đã học nhưng plan không đổi thành complete; tương tự với Bài 2.
+  2. *Lệch kế hoạch giữa các thiết bị*: Mở trên điện thoại thì plan hiển thị đúng Bài 1 và Bài 2, nhưng mở trên PC lại hiển thị học từ vựng Bài 4.
+- **Nguyên nhân gốc rễ & Giải pháp triển khai**:
+  1. *Khắc phục lỗi Cache Client đè ngược Server trên Dashboard ([dashboard/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/dashboard/page.tsx))*:
+     - Xóa bỏ triệt để đoạn code so sánh `cachedPlan.updated_at > planRes.plan.updated_at` và `api.post('/api/user/study-plan', { plan: cachedPlan })`.
+     - Quy chuẩn Server luôn là Nguồn Chân Lý Duy Nhất (Authoritative Source of Truth) khi `planRes.plan` hợp lệ. Tự động cập nhật vào React state và làm mới `localStorage.setItem('nihongo_cached_study_plan', ...)`. Triệt tiêu hoàn toàn hiện tượng PC kẹt cache Bài 4 cũ khác với điện thoại.
+     - Thêm `{ skipCache: true }` cho toàn bộ các lời gọi API khi `fetchDashboardData` để đảm bảo nạp dữ liệu tươi mới 100% từ server.
+  2. *Cập nhật `plan.updated_at` trong Auto-Tracking ([user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js))*:
+     - Tại `applyAutoTracking`, `checkAndNotifyNewlyCompletedTasks` và `GET /study-plan`: tự động phát hiện thay đổi tiến độ và gán `plan.updated_at = new Date().toISOString()`, đồng thời lưu bền vững vào RAM, ổ đĩa và Supabase.
+  3. *Sửa lỗi crash API `getUnfinishedDebt` ([aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js))*:
+     - Sửa lỗi `completedLessons.has is not a function` thành `new Set(completedLessons).has(...)`. Khôi phục thành công API `GET /api/user/study-debt` và hiển thị đầy đủ bài tập nợ của ngày trước trên Dashboard.
+  4. *Khử trùng lặp từ vựng Bài 2 ([mockDb.js](file:///d:/AI/japanese_learning/website/backend/src/db/mockDb.js) & [study_plans.json](file:///d:/AI/japanese_learning/website/backend/src/db/study_plans.json))*:
+     - Xóa bỏ bản ghi thừa ID 91 (`どうもありがとうございます` trùng 100% với ID 90). Chuẩn hóa Bài 2 còn đúng 45 từ vựng độc nhất. Cập nhật task `vocabulary_L2_p4` thành 3 từ `[90, 92, 93]` để khi đánh dấu thuộc từ, nhiệm vụ đạt 100% (3/3) và chuyển ngay sang `✓ ĐÃ HOÀN THÀNH`.
+  5. *Nâng cấp thông báo sư phạm khi đổi status ([lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx))*:
+     - Khi chọn `🟢 Đã thuộc`: Thông báo `Đã cập nhật: Đã thuộc 🟢 (Tự động ghi nhận hoàn thành vào Plan)`.
+     - Khi chọn `🟡 Đang học`: Thông báo `Đã cập nhật: Đang học 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)`.
+- **Kiểm định & Xác thực**:
+  - Syntax Backend: `node --check` các file `aiPlannerService.js`, `user.js`, `mockDb.js` đạt 100% PASS (0 lỗi).
+  - Build Frontend: `npm run build` Next.js 16 biên dịch thành công 100% trong 7.0s (16/16 routes).
+  - Script test độc lập `verify_sync_and_completion.js`: Đạt 100% PASS cả 3 bài kiểm tra (Debt không crash; Bài 2 có đúng 1 bản ghi `どうもありがとうございます`; Auto-tracking với `mastered` đạt 100% hoàn thành).
+  - Tuân thủ nghiêm ngặt Rule 5: Không tự động commit và push code lên remote GitHub.

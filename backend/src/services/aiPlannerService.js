@@ -894,8 +894,9 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
 
   // Determine earliest unfinished lesson to prevent phantom debt for future lessons
   const completedLessons = getCompletedLessons({ userId, currentPlan: plan });
+  const completedSet = new Set(completedLessons);
   let firstUnfinishedLesson = 1;
-  while (completedLessons.has(firstUnfinishedLesson) && firstUnfinishedLesson <= 50) {
+  while (completedSet.has(firstUnfinishedLesson) && firstUnfinishedLesson <= 50) {
     firstUnfinishedLesson++;
   }
 

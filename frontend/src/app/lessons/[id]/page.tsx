@@ -2293,7 +2293,13 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       setVocabItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
 
-      showNotification('Đã cập nhật trạng thái học tập!');
+      if (newStatus === 'mastered') {
+        showNotification('Đã cập nhật: Đã thuộc 🟢 (Tự động ghi nhận hoàn thành vào Plan)');
+      } else if (newStatus === 'learning') {
+        showNotification('Đã cập nhật: Đang học 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)');
+      } else {
+        showNotification('Đã cập nhật: Chưa học ⚪');
+      }
 
     } catch (error) {
 
@@ -2323,7 +2329,13 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       setKanjiItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
 
-      showNotification('Đã cập nhật trạng thái học tập chữ Hán!');
+      if (newStatus === 'mastered') {
+        showNotification('Đã cập nhật: Đã thuộc chữ Hán 🟢 (Tự động ghi nhận hoàn thành vào Plan)');
+      } else if (newStatus === 'learning') {
+        showNotification('Đã cập nhật: Đang học chữ Hán 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)');
+      } else {
+        showNotification('Đã cập nhật: Chưa học ⚪');
+      }
 
     } catch (error) {
 

@@ -2359,6 +2359,7 @@ function applyAutoTracking(plan, userId) {
 
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
+  let planModified = false;
 
   // 1. Cache learned items per (lesson, itemType)
   const learnedPool = {};
@@ -2441,6 +2442,9 @@ function applyAutoTracking(plan, userId) {
         count = isDone ? 1 : 0;
       }
 
+      const prevCount = task.currentCount || 0;
+      const prevCompleted = !!task.completed;
+
       task.currentCount = count;
       task.progressPct = Math.min(100, Math.round((count / target) * 100));
 
@@ -2451,6 +2455,10 @@ function applyAutoTracking(plan, userId) {
         }
       }
 
+      if (task.currentCount !== prevCount || !!task.completed !== prevCompleted) {
+        planModified = true;
+      }
+
       if (task.completed) {
         dayCompleted++;
       }
@@ -2458,6 +2466,10 @@ function applyAutoTracking(plan, userId) {
 
     day.completedCount = dayCompleted;
     day.completionRate = day.plannedCount > 0 ? Math.round((dayCompleted / day.plannedCount) * 100) : 100;
+  }
+
+  if (planModified) {
+    plan.updated_at = new Date().toISOString();
   }
 
   return plan;
@@ -2485,6 +2497,7 @@ async function checkAndNotifyNewlyCompletedTasks(userId) {
 
     // Chạy auto-tracking định lượng bài học
     plan = applyAutoTracking(plan, userId);
+    plan.updated_at = new Date().toISOString();
 
     // Lưu ngay kế hoạch cập nhật vào RAM, file đĩa và Supabase
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
@@ -2624,7 +2637,14 @@ router.get('/study-plan', async (req, res) => {
     await syncUserProgressFromSupabase(userId);
 
     // Apply auto-tracking from database
+    const prevUpdatedAt = plan.updated_at;
     plan = applyAutoTracking(plan, userId);
+    if (plan.updated_at !== prevUpdatedAt) {
+      if (!mockDb.studyPlans) mockDb.studyPlans = {};
+      mockDb.studyPlans[userId] = plan;
+      savePersistentPlans(mockDb.studyPlans);
+      persistPlanToSupabase(userId, plan).catch(() => {});
+    }
 
     return res.json({ success: true, plan });
   } catch (err) {
