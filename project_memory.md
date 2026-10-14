@@ -2557,4 +2557,4 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Unit test 1: Kiểm tra 100% (280/280 câu dictation của 50 bài học trong `mockDb.js`) đều giải quyết thành công chuỗi âm thanh tiếng Nhật hợp lệ [PASS].
   - Unit test 2: Kiểm tra bộ nhận diện câu tiếng Nhật trong `audioHelper.ts` với các câu ngắn và từ vựng đơn lẻ [PASS].
   - Biên dịch Frontend: `npm run build` thành công 100% trong 2.8s (16/16 routes).
-  - Tuân thủ Rule 5: Không tự ý commit và push lên GitHub mà báo cáo và xin ý kiến người dùng trước.
+  - Tuân thủ Rule 5: Đã thực hiện commit (`6be0db2`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
