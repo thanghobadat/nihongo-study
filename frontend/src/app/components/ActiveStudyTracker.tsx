@@ -142,6 +142,14 @@ export default function ActiveStudyTracker() {
       }
     };
 
+    let lastFocusSyncTime = 0;
+    const throttledSyncLatestFromServer = () => {
+      const now = Date.now();
+      if (now - lastFocusSyncTime < 5000) return; // at most once every 5 seconds
+      lastFocusSyncTime = now;
+      syncLatestFromServer();
+    };
+
     const handleVisibilityChange = () => {
       const isVisible = !document.hidden;
       isTabVisibleRef.current = isVisible;
@@ -173,17 +181,17 @@ export default function ActiveStudyTracker() {
           } catch {}
         }
       } else {
-        // Tab hiển thị lại -> Reset idle timer & Re-sync số giây mới nhất từ máy chủ (đa thiết bị)
+        // Tab hiển thị lại -> Reset idle timer & Re-sync số giây mới nhất từ máy chủ (đa thiết bị, throttled)
         resetIdleTimer();
-        syncLatestFromServer();
+        throttledSyncLatestFromServer();
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Kéo dữ liệu mới nhất tức thì khi focus cửa sổ (chuyển đổi qua lại giữa các máy)
+    // Kéo dữ liệu mới nhất tức thì khi focus cửa sổ (chuyển đổi qua lại giữa các máy, throttled)
     const handleWindowFocus = () => {
       resetIdleTimer();
-      syncLatestFromServer();
+      throttledSyncLatestFromServer();
     };
     window.addEventListener('focus', handleWindowFocus);
 

@@ -418,6 +418,27 @@ async function sendOverdueReminderNotification(userId, { task } = {}) {
   });
 }
 
+// Gộp các nhiệm vụ quá hạn thành 1 thông báo duy nhất (tránh gửi nhiều tin lẻ)
+async function sendOverdueBatchNotification(userId, { overdueTasks = [] } = {}) {
+  if (!overdueTasks || overdueTasks.length === 0) return null;
+  if (overdueTasks.length === 1) {
+    return sendOverdueReminderNotification(userId, { task: overdueTasks[0] });
+  }
+
+  const tasksListStr = overdueTasks.map(t => getTaskDisplayName(t)).join(', ');
+  const title = `⏰ Nhắc nhở: Có ${overdueTasks.length} bài học quá hạn hôm nay!`;
+  const body = `Các nhiệm vụ chưa xong: ${tasksListStr}. Hãy dành ít phút học ngay để không bị dồn bài nhé!`;
+
+  return safeDispatchNotification(userId, {
+    title,
+    body,
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
+    url: '/dashboard',
+    data: { scenario: 'overdue_reminder', taskCount: overdueTasks.length, timestamp: Date.now() }
+  });
+}
+
 // 5. Kịch bản 5: Thông báo hoàn thành task trong ngày
 async function sendTaskCompletedNotification(userId, { completedTask, isAllDoneToday = false, completedCount = 0, totalCount = 0 } = {}) {
   const taskName = getTaskDisplayName(completedTask);
@@ -534,6 +555,7 @@ module.exports = {
   sendDebtReplanNotification,
   sendTimelineReplanNotification,
   sendOverdueReminderNotification,
+  sendOverdueBatchNotification,
   sendPreDueReminderNotification,
   sendTaskCompletedNotification,
   sendStreakAlertNotification,

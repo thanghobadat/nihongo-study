@@ -2864,7 +2864,8 @@ router.post('/check-daily-notification', async (req, res) => {
     }
     const totalCurrentMinutes = currentHours * 60 + currentMinutes;
 
-    // Check tasks for Pre-due (Scenario 6) and Overdue (Scenario 4)
+    // Collect overdue tasks and check pre-due tasks
+    const overdueTasks = [];
     for (const task of todayTasks) {
       if (task.completed || !task.due_time || !task.due_time.includes(':')) continue;
 
@@ -2883,14 +2884,27 @@ router.post('/check-daily-notification', async (req, res) => {
         modified = true;
       }
 
-      // Scenario 4: Overdue (past deadline)
-      if (diffMinutes < 0 && !task.overdueNotified) {
-        pushNotificationService.sendOverdueReminderNotification(userId, {
-          task
-        }).catch(e => console.warn('[PushNotification] Overdue push failed:', e.message));
+      // Collect Overdue tasks (past deadline)
+      if (diffMinutes < 0) {
+        overdueTasks.push(task);
+      }
+    }
 
-        task.overdueNotified = true;
+    // Scenario 4: Overdue Reminder - Cooldown tối thiểu 60 phút (1 tiếng) & Gộp thành 1 thông báo duy nhất
+    if (overdueTasks.length > 0) {
+      const ONE_HOUR_MS = 60 * 60 * 1000;
+      const lastOverdueTime = plan.lastOverdueNotifiedAt ? new Date(plan.lastOverdueNotifiedAt).getTime() : 0;
+      const isCooldownActive = (Date.now() - lastOverdueTime) < ONE_HOUR_MS;
+
+      if (!isCooldownActive) {
+        pushNotificationService.sendOverdueBatchNotification(userId, {
+          overdueTasks
+        }).catch(e => console.warn('[PushNotification] Overdue batch push failed:', e.message));
+
+        plan.lastOverdueNotifiedAt = new Date().toISOString();
+        overdueTasks.forEach(t => { t.overdueNotified = true; });
         modified = true;
+        console.log(`[PushNotification] Sent batch overdue reminder for ${overdueTasks.length} tasks to ${userId}. Cooldown active for next 60 mins.`);
       }
     }
 
@@ -2910,6 +2924,7 @@ router.post('/check-daily-notification', async (req, res) => {
 
     if (modified) {
       savePersistentPlans(mockDb.studyPlans);
+      await persistPlanToSupabase(userId, plan);
     }
 
     return res.json({ success: true, message: 'Daily notification check completed', checkedDate: todayStr });

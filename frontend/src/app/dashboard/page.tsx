@@ -270,24 +270,33 @@ export default function UserDashboard() {
     fetchDashboardData();
     triggerDailyNotificationCheck();
 
-    // Auto re-fetch fresh data whenever user switches back to this tab / window gains focus
+    // Auto re-fetch fresh data whenever user switches back to this tab / window gains focus (Debounced to prevent double-fetch)
+    let debounceTimer: NodeJS.Timeout | null = null;
+    const triggerDebouncedFetch = () => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        fetchDashboardData();
+      }, 1000);
+    };
+
     const handleFocus = () => {
-      fetchDashboardData();
+      triggerDebouncedFetch();
     };
     const handleVisibilityChange = () => {
       if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
-        fetchDashboardData();
+        triggerDebouncedFetch();
       }
     };
     window.addEventListener('focus', handleFocus);
     window.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Check periodically every 5 minutes for pre-due and overdue task notifications
+    // Check periodically every 30 minutes for pre-due and overdue task notifications
     const interval = setInterval(() => {
       triggerDailyNotificationCheck();
-    }, 5 * 60 * 1000);
+    }, 30 * 60 * 1000);
 
     return () => {
+      if (debounceTimer) clearTimeout(debounceTimer);
       window.removeEventListener('focus', handleFocus);
       window.removeEventListener('visibilitychange', handleVisibilityChange);
       clearInterval(interval);
