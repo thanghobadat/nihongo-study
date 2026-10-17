@@ -892,14 +892,6 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
 
-  // Determine earliest unfinished lesson to prevent phantom debt for future lessons
-  const completedLessons = getCompletedLessons({ userId, currentPlan: plan });
-  const completedSet = new Set(completedLessons);
-  let firstUnfinishedLesson = 1;
-  while (completedSet.has(firstUnfinishedLesson) && firstUnfinishedLesson <= 50) {
-    firstUnfinishedLesson++;
-  }
-
   // 1. Group past uncompleted tasks by (itemType, lesson)
   const taskGroups = new Map();
 
@@ -908,16 +900,7 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
       if (task.completed || task.rescheduled) continue;
 
       const lesson = task.lesson || task.lesson_id || 1;
-
-      // Defense 1: A task cannot be debt if the user hasn't even reached that lesson yet
-      if (lesson > firstUnfinishedLesson) continue;
-
-      // Defense 2: An end-of-lesson review cannot be debt if the lesson itself is currently in progress
-      if (lesson === firstUnfinishedLesson && task.itemType === 'single_review') continue;
-
-      const groupKey = task.itemType === 'cumulative_review'
-        ? 'cumulative_review'
-        : `${task.itemType}_L${lesson}`;
+      const groupKey = `${task.itemType}_L${lesson}`;
 
       if (!taskGroups.has(groupKey)) {
         taskGroups.set(groupKey, {
@@ -990,7 +973,6 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
     const futureDays = (plan.days || []).filter(d => normalizeDateStr(d.date) >= todayStr);
     const matchingFutureTasks = futureDays.flatMap(d => (d.tasks || [])).filter(t => {
       const l = t.lesson || t.lesson_id || 1;
-      if (itemType === 'cumulative_review') return t.itemType === 'cumulative_review';
       return t.itemType === itemType && l === lesson;
     });
 
@@ -1055,7 +1037,7 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
       else if (itemType === 'kanji') mergedTitle = `Minna Bài ${lesson}: Chữ Hán (Gộp trọn bộ ${totalTargetCount} chữ)`;
       else if (itemType === 'grammar') mergedTitle = `Minna Bài ${lesson}: Ngữ pháp (Gộp trọn bộ ${totalTargetCount} mẫu)`;
       else if (itemType === 'single_review') mergedTitle = `Minna Bài ${lesson}: Ôn tập tổng hợp 4 dạng bài`;
-      else if (itemType === 'cumulative_review') mergedTitle = `Ôn tập tích lũy tổng hợp`;
+      else if (itemType === 'cumulative_review') mergedTitle = `Minna Bài ${lesson}: Ôn tập tích lũy tổng hợp`;
       else mergedTitle = `Bài ${lesson}: ${itemType} (Gộp)`;
 
       mergedScope = `Gộp toàn bộ ${totalTargetCount} ${unit} của Bài ${lesson} (${uncompletedTasks.length} phần nhỏ)`;
@@ -1079,10 +1061,15 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
     });
   }
 
+  const allDates = Array.from(new Set(debtItems.map(item => item.date).filter(Boolean))).sort();
+  const dateRangeStr = allDates.length > 1
+    ? `${allDates[0]} ➔ ${allDates[allDates.length - 1]}`
+    : (allDates[0] || yesterdayStr);
+
   return {
     hasDebt: debtItems.length > 0,
     debtItems,
-    yesterdayDate: yesterdayStr
+    yesterdayDate: dateRangeStr
   };
 }
 

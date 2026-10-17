@@ -74,10 +74,10 @@ export default function UnfinishedDebtModal({
           </div>
           <div>
             <h3 className="text-lg sm:text-xl font-bold text-white">
-              Bạn Còn Bài Chưa Hoàn Thành Từ Hôm Qua!
+              Bạn Còn Bài Tập Nợ Chưa Hoàn Thành!
             </h3>
             <p className="text-xs text-slate-300 mt-1">
-              Tiến độ ngày <span className="text-amber-300 font-semibold">{yesterdayDate}</span> chưa đạt 100%. Hãy chọn cách xử lý để đảm bảo không bị dồn ứ nhé:
+              Tiến độ {yesterdayDate ? `các ngày (${yesterdayDate})` : 'trước đây'} chưa đạt 100%. Hãy chọn cách xử lý để đảm bảo không bị dồn ứ nhé:
             </p>
           </div>
         </div>
@@ -95,8 +95,13 @@ export default function UnfinishedDebtModal({
               <div className="flex items-center gap-2.5">
                 <span className="text-base">{getItemIcon(item.itemType)}</span>
                 <div>
-                  <div className="font-semibold text-white">
-                    Bài {item.lesson}: {getItemTypeName(item.itemType)}
+                  <div className="font-semibold text-white flex items-center gap-1.5 flex-wrap">
+                    <span>Bài {item.lesson}: {getItemTypeName(item.itemType)}</span>
+                    {item.date && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-normal">
+                        📅 {item.date}
+                      </span>
+                    )}
                   </div>
                   <div className="text-[11px] text-slate-400">
                     Đã thuộc: {item.completedCount} / {item.targetCount}

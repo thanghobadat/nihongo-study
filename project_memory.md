@@ -2558,3 +2558,33 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Unit test 2: Kiểm tra bộ nhận diện câu tiếng Nhật trong `audioHelper.ts` với các câu ngắn và từ vựng đơn lẻ [PASS].
   - Biên dịch Frontend: `npm run build` thành công 100% trong 2.8s (16/16 routes).
   - Tuân thủ Rule 5: Đã thực hiện commit (`6be0db2`) và push thành công lên GitHub theo yêu cầu trực tiếp của người dùng.
+
+### Mốc 164: Đơn Giản Hóa Triệt Để Logic Ghi Nợ Tiến Độ - Tích Lũy Nợ Đa Ngày & Chống Mất Bài Nợ Sau Khi Hoàn Thành Bài Trước (Đã hoàn thành cục bộ - 17/10/2026)
+- **Bối cảnh & Phản hồi từ người dùng**:
+  - Người dùng trễ hạn 2 ngày khác nhau: Ngày hôm trước nợ 15 Kanji Bài 2, ngày hôm qua nợ 10 Kanji Bài 3.
+  - Tuy nhiên hôm nay hệ thống chỉ ghi nợ mỗi Kanji Bài 2. Sau khi học xong Kanji Bài 2 thì tự động đánh dấu hoàn thành, và bài nợ Kanji Bài 3 bị mất hoàn toàn, không hiển thị ở đâu!
+  - Người dùng yêu cầu chuẩn hóa logic sư phạm: Bất kỳ nhiệm vụ nào trong kế hoạch từ ngày hôm nay trở về trước (`date < todayStr`) chưa hoàn thành đều phải được tính là nợ.
+- **Nguyên nhân gốc rễ**:
+  - Trong `getUnfinishedDebt` ([aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js)), mã nguồn cũ có rào chắn `firstUnfinishedLesson` và `Defense 1: if (lesson > firstUnfinishedLesson) continue;`.
+  - Khi Bài 2 chưa xong thì `firstUnfinishedLesson = 2`. Nhiệm vụ Bài 3 hôm qua (`lesson = 3 > 2`) bị chặn lọc và bỏ qua.
+  - Khi học xong Kanji Bài 2 nhưng Bài 2 vẫn còn phần khác chưa xong, `firstUnfinishedLesson` vẫn là 2 $\rightarrow$ Bài 3 tiếp tục bị chặn, dẫn tới bài nợ biến mất hoàn toàn.
+- **Giải pháp triển khai**:
+  - Tại [aiPlannerService.js](file:///d:/AI/japanese_learning/website/backend/src/services/aiPlannerService.js):
+    - Xóa bỏ triệt để `firstUnfinishedLesson`, `Defense 1` và `Defense 2`.
+    - Mọi nhiệm vụ chưa hoàn thành và chưa dời lịch từ hôm nay trở về trước (`d.date < todayStr`) đều được đưa vào `taskGroups` theo từng bài (`itemType_L${lesson}`).
+    - Kiểm tra chéo 2 lớp bảo vệ với Database: `userProgress` (đối với Từ vựng, Kanji, Ngữ pháp) và `userReviewSessions` (đối với Ôn tập bài và Ôn tập tích lũy). Hễ bài nào chưa thuộc/chưa làm thì lập tức đưa vào `debtItems`.
+    - Tính toán dải ngày nợ `yesterdayDate` đa ngày (`minDate ➔ maxDate`).
+  - Tại [user.js](file:///d:/AI/japanese_learning/website/backend/src/routes/user.js):
+    - Mở rộng `applyAutoTracking` duyệt qua cả `plan.archivedPastDays` và `plan.days`, tự động đánh dấu `completed = true` khi học viên học thuộc kiến thức của ngày quá khứ.
+  - Tại [UnfinishedDebtModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/UnfinishedDebtModal.tsx):
+    - Cập nhật tiêu đề và mô tả phù hợp với nợ trải dài nhiều ngày, hiển thị huy hiệu ngày giao `📅 item.date` trên từng mục nợ.
+- **Kiểm định & Xác thực**:
+  - `node --check` các file Backend: 100% PASS (0 lỗi cú pháp).
+  - Script kiểm thử độc lập `test_multi_day_debt.js` vượt qua 5/5 test cases:
+    + Test 1: Nợ 2 ngày khác nhau (Bài 2 và Bài 3 Kanji) $\rightarrow$ ghi nợ đủ 2 bài [PASS].
+    + Test 2: Học xong Kanji Bài 2 $\rightarrow$ Bài 2 đánh dấu xong, Bài 3 Kanji vẫn còn nợ [PASS].
+    + Test 3: Trễ thêm Từ vựng Bài 4 hôm nay $\rightarrow$ ngày mai nợ cả Bài 3 Kanji và Bài 4 Từ vựng [PASS].
+    + Test 4: Trễ cả Single Review và Cumulative Review $\rightarrow$ ghi nợ đầy đủ cả 2 [PASS].
+    + Test 5: Hoàn thành Single Review $\rightarrow$ tự động gỡ khỏi nợ, Cumulative Review vẫn còn nợ [PASS].
+  - Biên dịch Frontend Next.js 16 (`npm run build`): Thành công 100% trong 3.6s (16/16 routes).
+  - Tuân thủ Rule 5: Không commit và push mã nguồn lên GitHub nếu chưa có yêu cầu trực tiếp.

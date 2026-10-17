@@ -2393,7 +2393,12 @@ function applyAutoTracking(plan, userId) {
   // 2. Track allocated counts per (lesson, itemType) across chronological plan days
   const allocatedPool = {};
 
-  for (const day of plan.days) {
+  const allDays = [
+    ...(Array.isArray(plan.archivedPastDays) ? plan.archivedPastDays : []),
+    ...(Array.isArray(plan.days) ? plan.days : [])
+  ];
+
+  for (const day of allDays) {
     if (!day.tasks) continue;
     let dayCompleted = 0;
 
