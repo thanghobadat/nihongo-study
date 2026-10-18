@@ -434,7 +434,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>('vocab');
   const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
-  const [quickLookupTab, setQuickLookupTab] = useState<'radicals' | 'vocab'>('radicals');
+  const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'kanji' | 'grammar' | 'kana' | 'radicals'>('vocab');
 
   useEffect(() => {
     const cat = searchParams.get('category');

@@ -1862,3 +1862,64 @@ export function hasLessonKanji(hiragana: string, kanjiItems: any[] = []): boolea
   const kanjiChars = kForm.match(/[\u4e00-\u9faf]/g);
   return Boolean(kanjiChars && kanjiChars.length > 0 && kanjiChars.every(c => lessonKanjiChars.has(c)));
 }
+
+/**
+ * Global Kanji lookup without restricting to a single lesson's taught Kanji.
+ * Used for course-wide lookup modals, knowledge hub, and search indexing.
+ */
+export function getGlobalKanjiForm(hiragana: string, allKanjiList: any[] = []): string {
+  if (!hiragana) return '';
+  const trimmed = hiragana.trim();
+
+  // 1. Check compounds across all kanji if provided
+  if (Array.isArray(allKanjiList) && allKanjiList.length > 0) {
+    for (const kanji of allKanjiList) {
+      if (!kanji?.character) continue;
+      if (kanji.compounds) {
+        const parts = kanji.compounds.split(';');
+        for (const part of parts) {
+          const m = part.match(/([^\(\)\s:;]+)\s*\(([^)]+)\)/);
+          if (m) {
+            const kWord = m[1].trim();
+            const hWord = m[2].trim();
+            if (trimmed === hWord) {
+              return kWord;
+            }
+          }
+        }
+      }
+      if (trimmed === kanji.character) {
+        return kanji.character;
+      }
+    }
+  }
+
+  // 2. Direct dictionary lookup
+  if (HIRAGANA_TO_KANJI[trimmed]) {
+    const candidate = HIRAGANA_TO_KANJI[trimmed].trim();
+    if (candidate && candidate !== trimmed) {
+      return candidate;
+    }
+  }
+
+  // 3. Fallback
+  return hiragana;
+}
+
+/**
+ * Finds all vocabulary items in the course that contain a specific Kanji character.
+ */
+export function getRelatedVocabForKanji(kanjiChar: string, allVocabs: any[], allKanjiList: any[] = []): any[] {
+  if (!kanjiChar || !Array.isArray(allVocabs) || allVocabs.length === 0) return [];
+  const char = kanjiChar.trim();
+
+  return allVocabs.filter(v => {
+    if (!v) return false;
+    const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, allKanjiList);
+    return kForm && kForm.includes(char);
+  }).map(v => ({
+    ...v,
+    kanji_form: v.kanji_form || getGlobalKanjiForm(v.hiragana, allKanjiList)
+  }));
+}
+

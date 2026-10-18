@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { playAudioWithFallback, speakTTS } from '../utils/audioHelper';
 import { hiraganaData, katakanaData, KanaItem } from '../kana/kanaData';
+import { getGlobalKanjiForm, getRelatedVocabForKanji } from '../utils/kanjiFormLookup';
 
 interface QuickLookupModalProps {
   isOpen: boolean;
@@ -126,19 +127,25 @@ export default function QuickLookupModal({
           setLessons(loadedLessons);
           cachedLessonsList = loadedLessons;
 
-          // Parse Vocabulary (raw + custom)
-          const rawVocab = res.vocabulary || res.data?.vocabulary || [];
-          const customVocab = res.customVocabulary || res.data?.customVocabulary || [];
-          const allVocabs: VocabItem[] = [...rawVocab, ...customVocab];
-          setVocabList(allVocabs);
-          cachedVocabList = allVocabs;
-
           // Parse Kanji (raw + custom)
           const rawKanji = res.kanji || res.data?.kanji || [];
           const customKanji = res.customKanji || res.data?.customKanji || [];
           const allKanji: KanjiItem[] = [...rawKanji, ...customKanji];
           setKanjiList(allKanji);
           cachedKanjiList = allKanji;
+
+          // Parse Vocabulary (raw + custom) with Kanji form enriched
+          const rawVocab = res.vocabulary || res.data?.vocabulary || [];
+          const customVocab = res.customVocabulary || res.data?.customVocabulary || [];
+          const allVocabs: VocabItem[] = [...rawVocab, ...customVocab].map((item: any) => {
+            const kForm = getGlobalKanjiForm(item.hiragana, allKanji);
+            return {
+              ...item,
+              kanji_form: kForm && kForm !== item.hiragana ? kForm : undefined
+            };
+          });
+          setVocabList(allVocabs);
+          cachedVocabList = allVocabs;
 
           // Parse Grammar
           const rawGrammar = res.grammar || res.data?.grammar || [];
@@ -180,17 +187,18 @@ export default function QuickLookupModal({
       }
       if (!q) return true;
 
+      const kanjiForm = item.kanji_form || getGlobalKanjiForm(item.hiragana, kanjiList);
       const matchesHira = item.hiragana?.toLowerCase().includes(q);
       const matchesRomaji = item.romaji?.toLowerCase().includes(q);
       const matchesMeaning = item.vietnamese_meaning?.toLowerCase().includes(q);
-      const matchesKanji = item.kanji_form?.toLowerCase().includes(q);
+      const matchesKanji = kanjiForm ? kanjiForm.toLowerCase().includes(q) : false;
       const matchesExample =
         item.japanese_example?.toLowerCase().includes(q) ||
         item.example_meaning?.toLowerCase().includes(q);
 
       return matchesHira || matchesRomaji || matchesMeaning || matchesKanji || matchesExample;
     });
-  }, [vocabList, vocabSearch, selectedLessonFilter]);
+  }, [vocabList, vocabSearch, selectedLessonFilter, kanjiList]);
 
   // ==============================================================
   // 2. KANJI VOCABULARY LOOKUP STATE & LOGIC
@@ -1162,6 +1170,65 @@ export default function QuickLookupModal({
                   <p className="leading-relaxed">{selectedKanjiDetail.compounds}</p>
                 </div>
               )}
+
+              {/* Mapping 2 chiều: Các từ vựng trong giáo trình chứa chữ Kanji này */}
+              {(() => {
+                const relatedVocabs = getRelatedVocabForKanji(selectedKanjiDetail.character, vocabList, kanjiList);
+                return (
+                  <div className="p-3.5 bg-slate-100/70 dark:bg-slate-800/50 rounded-2xl space-y-2 border border-slate-200 dark:border-slate-700/60">
+                    <span className="block font-black text-purple-700 dark:text-purple-300 text-xs flex items-center gap-1.5">
+                      <span>📚</span>
+                      <span>Từ vựng bài học chứa chữ 【 {selectedKanjiDetail.character} 】 ({relatedVocabs.length} từ)</span>
+                    </span>
+
+                    {relatedVocabs.length === 0 ? (
+                      <p className="text-slate-400 italic text-[11px]">
+                        Chưa có từ vựng cụ thể nào trong bài học sử dụng trực tiếp chữ này.
+                      </p>
+                    ) : (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+                        {relatedVocabs.map((v) => (
+                          <div
+                            key={v.id}
+                            className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start justify-between gap-2 hover:border-purple-400/50 transition-colors"
+                          >
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className="font-black text-sm text-slate-900 dark:text-white">
+                                  {v.kanji_form || v.hiragana}
+                                </span>
+                                {v.kanji_form && (
+                                  <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.2 rounded">
+                                    {v.hiragana}
+                                  </span>
+                                )}
+                                <span className="text-[9px] uppercase font-bold px-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
+                                  B{v.lesson_id}
+                                </span>
+                              </div>
+                              <p className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 truncate mt-0.5">
+                                {v.vietnamese_meaning}
+                              </p>
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                playAudioWithFallback(v.kanji_form || v.hiragana, v.hiragana);
+                              }}
+                              className="w-6 h-6 rounded-md bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 text-[11px] cursor-pointer"
+                              title="Nghe phát âm"
+                            >
+                              🔊
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
 
             <div className="pt-2 flex justify-between items-center">

@@ -10,6 +10,7 @@ import KanjiStrokePlayer from '../components/KanjiStrokePlayer';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../utils/kanjiPracticeHelper';
 import QuickLookupModal from '../components/QuickLookupModal';
 import CombinedKanjiPractice from '../components/CombinedKanjiPractice';
+import { getGlobalKanjiForm, getRelatedVocabForKanji } from '../utils/kanjiFormLookup';
 
 interface Lesson {
   id: number;
@@ -184,6 +185,8 @@ export default function KnowledgeHubPage() {
     learning: false,
     mastered: false,
   });
+  const [practiceScopeFilter, setPracticeScopeFilter] = useState<'level' | 'all_50' | string>('level');
+  const [showVocabLessonMatrix, setShowVocabLessonMatrix] = useState<boolean>(false);
 
   // Speedrun states
   const [speedrunTarget, setSpeedrunTarget] = useState<'vocab' | 'kanji'>('vocab');
@@ -237,9 +240,18 @@ export default function KnowledgeHubPage() {
     setLoading(true);
     try {
       const res = await api.get(`/api/user/course-summary?course=minna`);
+      const rawKanji = res.kanji || [];
+      const rawVocab = res.vocabulary || [];
+      const enrichedVocab = rawVocab.map((v: any) => {
+        const kForm = getGlobalKanjiForm(v.hiragana, rawKanji);
+        return {
+          ...v,
+          kanji_form: kForm && kForm !== v.hiragana ? kForm : undefined
+        };
+      });
       setLessons(res.lessons || []);
-      setVocabList(res.vocabulary || []);
-      setKanjiList(res.kanji || []);
+      setKanjiList(rawKanji);
+      setVocabList(enrichedVocab);
       setGrammarList(res.grammar || []);
     } catch (err) {
       console.error('Error loading course summary:', err);
@@ -285,22 +297,28 @@ export default function KnowledgeHubPage() {
       list = list.filter(v => v.status !== 'mastered');
     }
     if (showKanjiInVocab) {
-      list = list.filter(v => Boolean(v.kanji_form && v.kanji_form.trim() !== ''));
+      list = list.filter(v => {
+        const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList);
+        return Boolean(kForm && kForm.trim() !== '' && kForm !== v.hiragana);
+      });
     }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
-      list = list.filter(v => 
-        v.hiragana.toLowerCase().includes(q) || 
-        v.romaji.toLowerCase().includes(q) || 
-        v.vietnamese_meaning.toLowerCase().includes(q) ||
-        (v.kanji_form && v.kanji_form.toLowerCase().includes(q))
-      );
+      list = list.filter(v => {
+        const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList);
+        return (
+          v.hiragana.toLowerCase().includes(q) || 
+          v.romaji.toLowerCase().includes(q) || 
+          v.vietnamese_meaning.toLowerCase().includes(q) ||
+          (kForm && kForm.toLowerCase().includes(q))
+        );
+      });
     }
     return list.sort((a, b) => {
       if (a.lesson_id !== b.lesson_id) return a.lesson_id - b.lesson_id;
       return a.id - b.id;
     });
-  }, [vocabList, startLessonId, endLessonId, filterLesson, filterStatus, hideMastered, searchQuery, showKanjiInVocab]);
+  }, [vocabList, startLessonId, endLessonId, filterLesson, filterStatus, hideMastered, searchQuery, showKanjiInVocab, kanjiList]);
 
   const displayedKanji = useMemo(() => {
     let list = kanjiList.filter(k => k.lesson_id >= startLessonId && k.lesson_id <= endLessonId);
@@ -405,11 +423,12 @@ export default function KnowledgeHubPage() {
     setLevel(selectedLevel);
     setFilterLesson('all');
     setFilterStatus('all');
+    setPracticeScopeFilter('level');
     setLocalSearchQuery('');
     stopSpeedrun();
     setPracticeList([]);
-    setReviewStep('setup');
-    setReviewData(null);
+    setExamStep('setup');
+    setExamResultData(null);
   };
 
   // Sync state update of item status
@@ -715,8 +734,16 @@ export default function KnowledgeHubPage() {
   // 4. Vocabulary Practice implementation
   // -------------------------------------------------------------
   const vocabListForLevel = useMemo(() => {
+    if (practiceScopeFilter === 'all_50') return vocabList;
+    if (practiceScopeFilter === 'level') {
+      return vocabList.filter(v => v.lesson_id >= startLessonId && v.lesson_id <= endLessonId);
+    }
+    const lId = parseInt(practiceScopeFilter, 10);
+    if (!isNaN(lId)) {
+      return vocabList.filter(v => v.lesson_id === lId);
+    }
     return vocabList.filter(v => v.lesson_id >= startLessonId && v.lesson_id <= endLessonId);
-  }, [vocabList, startLessonId, endLessonId]);
+  }, [vocabList, practiceScopeFilter, startLessonId, endLessonId]);
 
   const wrongVocabCount = useMemo(() => {
     return vocabListForLevel.filter(v => v.status === 'wrong').length;
@@ -730,6 +757,28 @@ export default function KnowledgeHubPage() {
     if (active.length === 0) return vocabListForLevel;
     return vocabListForLevel.filter(item => practiceFilterStatuses[item.status || 'not_learned']);
   }, [vocabListForLevel, practiceFilterStatuses, practiceOnlyWrong]);
+
+  // Statistics for Vocabulary Practice
+  const vocabTotalCount = vocabListForLevel.length;
+  const vocabMasteredCount = vocabListForLevel.filter(v => v.status === 'mastered').length;
+  const vocabLearningCount = vocabListForLevel.filter(v => v.status === 'learning').length;
+  const vocabMasteredPercent = vocabTotalCount > 0 ? Math.round((vocabMasteredCount / vocabTotalCount) * 100) : 0;
+  const vocabLearningPercent = vocabTotalCount > 0 ? Math.round((vocabLearningCount / vocabTotalCount) * 100) : 0;
+
+  // Per-lesson Vocab statistics mapping: lessonId -> { total, mastered, learning, notLearned, percent }
+  const perLessonVocabStats = useMemo(() => {
+    const stats: Record<number, { total: number; mastered: number; learning: number; notLearned: number; percent: number }> = {};
+    for (let i = 1; i <= 50; i++) {
+      const inLesson = vocabList.filter(v => v.lesson_id === i);
+      const total = inLesson.length;
+      const mastered = inLesson.filter(v => v.status === 'mastered').length;
+      const learning = inLesson.filter(v => v.status === 'learning').length;
+      const notLearned = inLesson.filter(v => (v.status || 'not_learned') === 'not_learned').length;
+      const percent = total > 0 ? Math.round((mastered / total) * 100) : 0;
+      stats[i] = { total, mastered, learning, notLearned, percent };
+    }
+    return stats;
+  }, [vocabList]);
 
   const handleClearWrongWords = async () => {
     try {
@@ -2193,6 +2242,33 @@ export default function KnowledgeHubPage() {
 
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div className="flex flex-wrap items-center gap-4">
+                    {/* Scope Selector for Vocab Practice */}
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-slate-400 dark:text-slate-500">Phạm vi:</span>
+                      <select
+                        value={practiceScopeFilter}
+                        onChange={(e) => setPracticeScopeFilter(e.target.value)}
+                        className="px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer max-w-[260px] sm:max-w-none truncate"
+                      >
+                        <option value="level">
+                          Trình độ {level} ({level === 'N5' ? 'Bài 1 - 25' : 'Bài 26 - 50'}) • {vocabMasteredPercent}% đã thuộc
+                        </option>
+                        <option value="all_50">Toàn bộ 50 bài học (N5 & N4)</option>
+                        <optgroup label="Từng bài học cụ thể:">
+                          {Array.from({ length: 50 }, (_, i) => i + 1).map((lNum) => {
+                            const st = perLessonVocabStats[lNum];
+                            const badge = !st || st.total === 0 ? '' : st.percent === 100 ? '🟢' : st.mastered > 0 || st.learning > 0 ? '🟡' : '⚪';
+                            const text = st && st.total > 0 ? ` (${st.mastered}/${st.total} từ • ${st.percent}% ${badge})` : ' (0 từ)';
+                            return (
+                              <option key={lNum} value={lNum.toString()}>
+                                Bài {lNum} {lNum <= 25 ? '[N5]' : '[N4]'}{text}
+                              </option>
+                            );
+                          })}
+                        </optgroup>
+                      </select>
+                    </div>
+
                     <div className="bg-slate-50 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
                       <button
                         onClick={() => setPracticeType('write')}
@@ -2375,6 +2451,148 @@ export default function KnowledgeHubPage() {
                     </button>
                   )}
                 </div>
+
+                {/* Progress Bar & Matrix Toggle Row for Vocab */}
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-extrabold text-slate-700 dark:text-slate-200">
+                        📈 Tiến độ Từ vựng ({practiceScopeFilter === 'all_50' ? '50 bài' : practiceScopeFilter === 'level' ? `Trình độ ${level}` : `Bài ${practiceScopeFilter}`}):
+                      </span>
+                      <span className="font-black text-emerald-600 dark:text-emerald-400">
+                        Đã thuộc {vocabMasteredCount}/{vocabTotalCount} từ ({vocabMasteredPercent}%)
+                      </span>
+                      {vocabLearningCount > 0 && (
+                        <span className="text-amber-500 font-bold">
+                          • Đang học: {vocabLearningCount} từ
+                        </span>
+                      )}
+                      {wrongVocabCount > 0 && (
+                        <span className="text-rose-500 font-bold">
+                          • Cần ôn lại: {wrongVocabCount} từ sai
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowVocabLessonMatrix(!showVocabLessonMatrix)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto border ${
+                        showVocabLessonMatrix
+                          ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      }`}
+                    >
+                      <span>📊</span>
+                      <span>{showVocabLessonMatrix ? 'Thu gọn bảng tiến độ' : 'Xem tiến độ từng bài'}</span>
+                      <span className="text-[10px]">{showVocabLessonMatrix ? '▲' : '▼'}</span>
+                    </button>
+                  </div>
+
+                  {/* Multi-segmented Progress Bar */}
+                  <div className="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden flex shadow-inner">
+                    <div
+                      className="bg-emerald-500 h-full transition-all duration-300"
+                      style={{ width: `${vocabMasteredPercent}%` }}
+                      title={`Đã thuộc: ${vocabMasteredCount} từ (${vocabMasteredPercent}%)`}
+                    />
+                    <div
+                      className="bg-amber-400 h-full transition-all duration-300"
+                      style={{ width: `${vocabLearningPercent}%` }}
+                      title={`Đang học: ${vocabLearningCount} từ (${vocabLearningPercent}%)`}
+                    />
+                  </div>
+
+                  {/* Interactive Per-Lesson Matrix (Collapsible Grid) */}
+                  {showVocabLessonMatrix && (
+                    <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 space-y-3 animate-in fade-in duration-200">
+                      <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
+                        <span className="flex items-center gap-1.5">
+                          <span>💡</span>
+                          <span>Bấm vào bài bất kỳ để chọn nhanh phạm vi học:</span>
+                        </span>
+                        <div className="flex items-center gap-2 text-[11px]">
+                          <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-black">
+                            <span>🟢</span> 100%
+                          </span>
+                          <span className="flex items-center gap-1 text-amber-500 font-black">
+                            <span>🟡</span> Đang học
+                          </span>
+                          <span className="flex items-center gap-1 text-slate-400 font-black">
+                            <span>⚪</span> Chưa học
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Lesson Grid: 25 lessons of current level or 50 lessons */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2 max-h-72 overflow-y-auto pr-1">
+                        {Array.from(
+                          { length: practiceScopeFilter === 'all_50' ? 50 : 25 },
+                          (_, i) => (practiceScopeFilter === 'all_50' ? i + 1 : (level === 'N5' ? 1 : 26) + i)
+                        ).map((lNum) => {
+                          const st = perLessonVocabStats[lNum] || { total: 0, mastered: 0, learning: 0, percent: 0 };
+                          const isCurrentScope = practiceScopeFilter === lNum.toString();
+                          const isDone = st.total > 0 && st.percent === 100;
+                          const isLearning = st.total > 0 && (st.mastered > 0 || st.learning > 0) && st.percent < 100;
+
+                          let borderCls = 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300';
+                          let badgeCls = 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+
+                          if (isDone) {
+                            borderCls = 'border-emerald-500/40 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300';
+                            badgeCls = 'bg-emerald-500 text-white';
+                          } else if (isLearning) {
+                            borderCls = 'border-amber-500/40 bg-amber-50/50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-300';
+                            badgeCls = 'bg-amber-500 text-white';
+                          }
+
+                          if (isCurrentScope) {
+                            borderCls += ' ring-2 ring-blue-500 shadow-md font-extrabold';
+                          }
+
+                          return (
+                            <button
+                              key={lNum}
+                              type="button"
+                              onClick={() => setPracticeScopeFilter(lNum.toString())}
+                              className={`p-2 rounded-xl border text-left transition-all hover:scale-[1.02] cursor-pointer flex flex-col justify-between gap-1.5 ${borderCls}`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-black">Bài {lNum}</span>
+                                <span className={`text-[10px] font-black px-1.5 py-0.2 rounded-md ${badgeCls}`}>
+                                  {st.total > 0 ? `${st.percent}%` : '0 từ'}
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between text-[11px] opacity-80">
+                                <span>{st.mastered}/{st.total} từ</span>
+                                <span>{isDone ? '🟢' : isLearning ? '🟡' : '⚪'}</span>
+                              </div>
+                              {/* Mini lesson progress bar */}
+                              <div className="w-full bg-slate-200 dark:bg-slate-700/60 h-1 rounded-full overflow-hidden">
+                                <div
+                                  className="bg-emerald-500 h-full"
+                                  style={{ width: `${st.percent}%` }}
+                                />
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {practiceScopeFilter !== 'level' && practiceScopeFilter !== 'all_50' && (
+                        <div className="pt-1 flex justify-end">
+                          <button
+                            type="button"
+                            onClick={() => setPracticeScopeFilter('level')}
+                            className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                          >
+                            ↺ Đặt lại: Học toàn bộ trình độ {level}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
@@ -2404,7 +2622,8 @@ export default function KnowledgeHubPage() {
                         <tbody className="divide-y divide-slate-150 dark:divide-slate-850">
                           {practiceList.map((item, idx) => {
                             const isViToJa = practiceDirection === 'vi-to-ja';
-                            const questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (item.kanji_form || item.hiragana) : item.hiragana);
+                            const kForm = item.kanji_form || getGlobalKanjiForm(item.hiragana, kanjiList);
+                            const questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (kForm || item.hiragana) : item.hiragana);
                             const correctAnswer = isViToJa ? item.hiragana : item.vietnamese_meaning;
                             const userAnswer = practiceAnswers[idx] || '';
                             const pct = calculateAccuracy(userAnswer, correctAnswer);
@@ -2414,7 +2633,7 @@ export default function KnowledgeHubPage() {
                                 <td className="p-4 text-center font-bold text-slate-400">{idx + 1}</td>
                                 <td className="p-4 text-center">
                                   <button
-                                    onClick={() => playAudioWithFallback(item.kanji_form || '', item.hiragana)}
+                                    onClick={() => playAudioWithFallback(kForm || item.hiragana, item.hiragana)}
                                     className="p-2 text-slate-400 hover:text-blue-505 rounded bg-slate-50 dark:bg-slate-800 cursor-pointer"
                                   >
                                     🔊
@@ -2460,8 +2679,8 @@ export default function KnowledgeHubPage() {
                                   {isGraded ? (
                                     <div className="space-y-1 text-xs">
                                       <p className="font-bold text-slate-700 dark:text-slate-200 select-all">{correctAnswer}</p>
-                                      {isViToJa && item.kanji_form && (
-                                        <p className="text-slate-500 dark:text-slate-400">Kanji: {item.kanji_form}</p>
+                                      {isViToJa && (item.kanji_form || kForm) && (
+                                        <p className="text-slate-500 dark:text-slate-400">Kanji: {item.kanji_form || kForm}</p>
                                       )}
                                       {userAnswer.trim() && pct < 100 && (
                                         <div className="bg-slate-50 dark:bg-slate-900 p-1 px-2 border border-slate-200 dark:border-slate-800 rounded mt-1 select-none">
@@ -2490,7 +2709,8 @@ export default function KnowledgeHubPage() {
                     <div className="lg:hidden space-y-4">
                       {practiceList.map((item, idx) => {
                         const isViToJa = practiceDirection === 'vi-to-ja';
-                        const questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (item.kanji_form || item.hiragana) : item.hiragana);
+                        const kForm = item.kanji_form || getGlobalKanjiForm(item.hiragana, kanjiList);
+                        const questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (kForm || item.hiragana) : item.hiragana);
                         const correctAnswer = isViToJa ? item.hiragana : item.vietnamese_meaning;
                         const userAnswer = practiceAnswers[idx] || '';
                         const pct = calculateAccuracy(userAnswer, correctAnswer);
@@ -2503,7 +2723,7 @@ export default function KnowledgeHubPage() {
                             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-850 pb-2">
                               <span className="text-xs font-bold text-slate-400 font-mono">Câu hỏi {idx + 1}</span>
                               <button
-                                onClick={() => playAudioWithFallback(item.kanji_form || '', item.hiragana)}
+                                onClick={() => playAudioWithFallback(kForm || item.hiragana, item.hiragana)}
                                 className="p-1.5 text-xs text-slate-500 hover:text-blue-500 rounded bg-slate-50 dark:bg-slate-950"
                               >
                                 🔊 Nghe phát âm
@@ -2535,7 +2755,7 @@ export default function KnowledgeHubPage() {
                                 </div>
                                 <div className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 text-xs">
                                   <p className="font-bold text-slate-700 dark:text-slate-350 select-all">Đáp án: {correctAnswer}</p>
-                                  {isViToJa && item.kanji_form && <p className="text-[10px] text-slate-400">Kanji: {item.kanji_form}</p>}
+                                  {isViToJa && (item.kanji_form || kForm) && <p className="text-[10px] text-slate-400">Kanji: {item.kanji_form || kForm}</p>}
                                   {userAnswer.trim() && pct < 100 && (
                                     <div className="border-t border-slate-200 dark:border-slate-800 pt-1.5 mt-1.5">
                                       <span className="text-[9px] text-slate-450 block font-bold mb-0.5">Chi tiết lỗi:</span>
@@ -2794,8 +3014,8 @@ export default function KnowledgeHubPage() {
                             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white break-all select-all">
                               {speedrunDirection === 'ja-to-vi' ? speedrunQuestion.hiragana : speedrunQuestion.vietnamese_meaning}
                             </h2>
-                            {speedrunDirection === 'ja-to-vi' && speedrunQuestion.kanji_form && (
-                              <p className="text-sm font-semibold text-slate-400">({speedrunQuestion.kanji_form})</p>
+                            {speedrunDirection === 'ja-to-vi' && (speedrunQuestion.kanji_form || getGlobalKanjiForm(speedrunQuestion.hiragana, kanjiList)) && (
+                              <p className="text-sm font-semibold text-slate-400">({speedrunQuestion.kanji_form || getGlobalKanjiForm(speedrunQuestion.hiragana, kanjiList)})</p>
                             )}
                           </>
                         )

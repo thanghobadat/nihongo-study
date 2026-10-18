@@ -434,7 +434,7 @@ export function generateLocalKanjiRiddles(
     const validCompound = parsedCompounds.find(c => c.word && c.word.includes(k.character));
     
     // Tìm từ vựng trong bài
-    const relatedVocab = vocabList.find(v => v && v.hiragana && (v.kanji || '').includes(k.character));
+    const relatedVocab = vocabList.find(v => v && v.hiragana && ((v.kanji_form || v.kanji || '').includes(k.character)));
 
     let question = '';
     let question_type: 'sino_meaning' | 'vocab_context' | 'compound_fill' | 'situational' = 'sino_meaning';
@@ -592,8 +592,9 @@ export function purifyKanjiTextFrontend(text: string, allowedSet: Set<string>, v
   const wordsToTry = [...COMMON_KANJI_TO_HIRAGANA_FRONTEND];
   if (Array.isArray(vocabList)) {
     for (const v of vocabList) {
-      if (v?.kanji && v.hiragana && v.kanji !== v.hiragana) {
-        wordsToTry.push({ kanji: v.kanji, hiragana: v.hiragana });
+      const k = v?.kanji_form || v?.kanji;
+      if (k && v.hiragana && k !== v.hiragana) {
+        wordsToTry.push({ kanji: k, hiragana: v.hiragana });
       }
     }
   }

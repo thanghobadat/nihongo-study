@@ -555,7 +555,8 @@
             "currentCount": 0,
             "scopeDetails": "Phần 4: 14 từ (Từ #43: ひるやすみ ➔ #56: ～と～)",
             "workloadPoints": 14,
-            "estimatedMinutes": 84
+            "estimatedMinutes": 84,
+            "overdueNotified": true
           },
           {
             "id": "task_2026-10-18_vocabulary_L4_p5",
@@ -582,7 +583,8 @@
             "currentCount": 0,
             "scopeDetails": "Phần 5: 5 từ (Từ #57: ペキン ➔ #61: えーと)",
             "workloadPoints": 5,
-            "estimatedMinutes": 30
+            "estimatedMinutes": 30,
+            "overdueNotified": true
           },
           {
             "id": "task_2026-10-18_kanji_L4_p1",
@@ -608,7 +610,8 @@
             "currentCount": 0,
             "scopeDetails": "Chữ Hán: 時, 分, 半",
             "workloadPoints": 9,
-            "estimatedMinutes": 54
+            "estimatedMinutes": 54,
+            "overdueNotified": true
           },
           {
             "id": "task_2026-10-18_kanji_L4_p2",
@@ -634,7 +637,8 @@
             "currentCount": 0,
             "scopeDetails": "Chữ Hán: 午, 前, 後",
             "workloadPoints": 9,
-            "estimatedMinutes": 54
+            "estimatedMinutes": 54,
+            "overdueNotified": true
           }
         ],
         "dayIndex": 5,
@@ -647,7 +651,8 @@
         "completionRate": 0,
         "workloadPoints": 37,
         "totalEstimatedMinutes": 222,
-        "isDedicatedPracticeDay": false
+        "isDedicatedPracticeDay": false,
+        "streakAlertNotified": true
       },
       {
         "date": "2026-10-19",
@@ -15216,7 +15221,8 @@
     "originalStartDate": "2026-10-14",
     "workloadRationale": "Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Áp dụng thuật toán Cân bằng Tải trọng Động (Load-Balanced Dynamic Pacing): toàn bộ 50 bài học được cắt nhỏ thành từng phần vừa vặn, phân bổ đều khắp 103 ngày để mọi ngày có thời lượng học đồng đều (~244 phút/ngày), triệt tiêu hoàn toàn sự chênh lệch và dồn ép.",
     "completedLessonsCount": 0,
-    "lastNewDayNotifiedDate": "2026-10-17"
+    "lastNewDayNotifiedDate": "2026-10-17",
+    "lastOverdueNotifiedAt": "2026-10-18T13:53:11.733Z"
   },
   "ce21492c-06db-4d03-8590-4f5e7d6bac18": {
     "days": [

@@ -2588,3 +2588,62 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
     + Test 5: Hoàn thành Single Review $\rightarrow$ tự động gỡ khỏi nợ, Cumulative Review vẫn còn nợ [PASS].
   - Biên dịch Frontend Next.js 16 (`npm run build`): Thành công 100% trong 3.6s (16/16 routes).
   - Tuân thủ Rule 5: Không commit và push mã nguồn lên GitHub nếu chưa có yêu cầu trực tiếp.
+
+### Mốc 165: Chuyển Đổi Tab Luyện Viết Thành Ôn Từ Vựng Kanji Của Bài Học (Đã hoàn thành cục bộ - 18/10/2026)
+- **Bối cảnh & Yêu cầu từ người dùng**:
+  - Trong màn hình ôn tập Kanji từng bài học ([KanjiPracticeTab.tsx](file:///website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx)), người dùng muốn chuyển đổi phần "Tập viết AI" (vẽ trên Canvas Tian Zi Ge) thành phần "Ôn từ vựng của bài" (`vocab_quiz`).
+  - Dữ liệu câu hỏi: Trích xuất các từ vựng trong bài học đó mà sử dụng những chữ Kanji trong bài.
+  - Định dạng: Trắc nghiệm khách quan A-B-C-D với chấm điểm tức thì, âm thanh phát âm và giải thích chi tiết.
+  - Phân loại 4 dạng bài tập cốt lõi (theo yêu cầu loại bỏ dạng đọc Furigana):
+    1. `kanji_to_meaning`: Cho từ chữ Hán $\rightarrow$ Chọn ý nghĩa tiếng Việt & âm Hán Việt.
+    2. `meaning_to_kanji`: Cho ý nghĩa & cách đọc $\rightarrow$ Chọn từ vựng chữ Hán viết chuẩn.
+    3. `complete_word`: Điền chữ Hán còn thiếu vào từ ghép khuyết (`【 ? 】生`).
+    4. `context_fill`: Điền từ vựng chữ Hán vào câu ví dụ ngữ cảnh Minna (`わたしは【 ... 】です`).
+- **Giải pháp triển khai**:
+  - Tại [kanjiVocabQuizHelper.ts](file:///website/frontend/src/app/utils/kanjiVocabQuizHelper.ts):
+    - `extractLessonKanjiVocabs`: Tự động tìm kiếm, ghép cặp và lọc ra tất cả từ vựng trong bài học sử dụng các chữ Kanji tương ứng (kết hợp cả `vocabItems` và `compounds` của Kanji).
+    - `generateKanjiVocabQuizQuestions`: Thuật toán sinh đề cân bằng 4 dạng bài tập, tự động tạo 3 phương án gây nhiễu (distractors) hợp lý từ kho từ vựng bài học, xáo trộn bằng Fisher-Yates, cung cấp giải thích chi tiết và audio word.
+  - Tại [KanjiPracticeTab.tsx](file:///website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx):
+    - Thay thế kiểu `activeTab` thành `'recognition' | 'speedrun' | 'vocab_quiz'`.
+    - Thay thế nút Tab 3 thành `📚 Ôn từ vựng Kanji` / `Từ vựng`.
+    - Thay thế toàn bộ mã nguồn Canvas/Tian Zi Ge cũ bằng trạng thái và bộ xử lý trắc nghiệm (`vocabQuizQuestions`, `handleSelectVocabOption`, `handleNextVocabQuestion`, `handlePrevVocabQuestion`, `handleShuffleVocabQuiz`, `handleRegenerateVocabQuiz`).
+    - Giao diện người dùng hiện đại, sắc nét: thẻ hiển thị to rõ, 4 lựa chọn A-B-C-D trực quan, thẻ giải thích kèm nút phát âm 🔊, màn hình tổng kết tỷ lệ phần trăm chính xác, danh sách từ sai để ôn lại.
+- **Kiểm định & Xác thực**:
+  - TypeScript validation: `npx tsc --noEmit` đạt 0 lỗi (PASS).
+  - Next.js 16 Production Build: `npm run build` thành công 100% (16/16 routes) trong 3.2s (PASS).
+  - Dev server Backend (port 8080) và Frontend (port 3000) tiếp tục chạy ổn định.
+  - Tuân thủ Rule 5: Không tự động commit hay push mã nguồn khi chưa có yêu cầu trực tiếp.
+
+### Mốc 166: Sắp Xếp Lại Thứ Tự 3 Tab Trong Phần Cài Đặt (Đã hoàn thành cục bộ - 18/10/2026)
+- **Bối cảnh & Yêu cầu từ người dùng**:
+  - Tại popover mở rộng của nút `⚙️ Cài đặt` ([SidebarSettings.tsx](file:///website/frontend/src/app/components/SidebarSettings.tsx)) ở chân thanh bên Sidebar, người dùng yêu cầu sắp xếp lại thứ tự danh sách lối tắt: Từ vựng trên cùng, đến Bộ thủ, đến Ôn tổng hợp.
+- **Giải pháp triển khai**:
+  - Tại [SidebarSettings.tsx](file:///website/frontend/src/app/components/SidebarSettings.tsx):
+    - Đưa nút `📚 Tra cứu Từ vựng` lên vị trí trên cùng (kích hoạt `setQuickLookupTab('vocab'); setIsQuickLookupOpen(true)`).
+    - Đặt nút `🉐 Tra cứu Bộ thủ Kanji` ở vị trí thứ hai (kích hoạt `setQuickLookupTab('radicals'); setIsQuickLookupOpen(true)`).
+    - Đặt nút `📝 Ôn tập tổng hợp` ở vị trí thứ ba (điều hướng sang trang tổng hợp kiến thức & luyện thi liên bài `/knowledge`).
+    - Lược bỏ mục bảng chữ cái khỏi popover cài đặt để đảm bảo chuẩn chỉnh đúng 3 mục theo yêu cầu (bảng chữ cái vẫn được duy trì thuận tiện trên top banner và trong modal tra cứu nhanh).
+- **Kiểm định & Xác thực**:
+  - TypeScript validation: `npx tsc --noEmit` đạt 0 lỗi (PASS).
+  - Next.js 16 Production Build: `npm run build` thành công 100% (16/16 routes) trong 3.2s (PASS).
+  - Dev server Backend (port 8080) và Frontend (port 3000) tiếp tục chạy ổn định.
+  - Tuân thủ Rule 5: Không tự động commit hay push mã nguồn khi chưa có yêu cầu trực tiếp.
+
+### Mốc 167: Bổ Sung Thông Tin Tiến Độ Học Kanji & Từ Vựng Từng Bài Trong Ôn Tập Tổng Hợp (Đã hoàn thành cục bộ - 18/10/2026)
+- **Bối cảnh & Yêu cầu từ người dùng**:
+  - Tại trang Ôn tập tổng hợp ([knowledge/page.tsx](file:///website/frontend/src/app/knowledge/page.tsx)), người dùng muốn biết rõ thông tin tiến độ: đã học được bao nhiêu chữ Kanji/Từ vựng tổng cộng, và từng bài học đã học/thuộc được bao nhiêu chữ rồi.
+- **Giải pháp triển khai**:
+  - Tại [CombinedKanjiPractice.tsx](file:///website/frontend/src/app/components/CombinedKanjiPractice.tsx) (Phân hệ Luyện Kanji):
+    - Tính toán `perLessonKanjiStats` thống kê toàn bộ 50 bài học (tổng số chữ Hán, số chữ đã thuộc, số chữ đang học, tỷ lệ %).
+    - Bổ sung thanh tiến độ Kanji tổng quan đa màu sắc trực quan: hiển thị rõ số chữ đã thuộc, đang học, chưa học và tỷ lệ % trong phạm vi đang chọn.
+    - Bổ sung nút bấm mở rộng **`📊 Xem tiến độ từng bài`** với lưới thẻ bài học tương tác: hiển thị số chữ đã thuộc/tổng số chữ của từng bài (`Bài 1: 4/4 🟢`, `Bài 2: 3/6 🟡`...), bấm vào bài bất kỳ để tự động chọn phạm vi học bài đó.
+    - Cập nhật menu dropdown "Phạm vi" hiển thị tỷ lệ tiến độ từng bài trực tiếp trên từng tùy chọn.
+  - Tại [knowledge/page.tsx](file:///website/frontend/src/app/knowledge/page.tsx) (Phân hệ Luyện từ vựng):
+    - Bổ sung bộ lọc phạm vi bài học `practiceScopeFilter` cho phép chọn luyện từ vựng theo trình độ (N5/N4), toàn bộ 50 bài, hoặc từng bài học cụ thể.
+    - Tính toán `perLessonVocabStats` thống kê từ vựng theo 50 bài học.
+    - Bổ sung thanh tiến độ Từ vựng tổng quan và bảng lưới tiến độ từ vựng từng bài học kèm nút bấm chọn bài tức thì.
+- **Kiểm định & Xác thực**:
+  - TypeScript validation: `npx tsc --noEmit` đạt 0 lỗi (PASS).
+  - Next.js 16 Production Build: `npm run build` thành công 100% (16/16 routes) trong 4.1s (PASS).
+  - Dev server Backend (port 8080) và Frontend (port 3000) tiếp tục chạy ổn định.
+  - Tuân thủ Rule 5: Không tự động commit hay push mã nguồn khi chưa có yêu cầu trực tiếp.

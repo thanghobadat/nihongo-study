@@ -46,13 +46,13 @@ export function speakTTS(text: string) {
  * @param kanji The Kanji form of the word (if any).
  * @param kana The Hiragana/Katakana reading.
  */
-export async function playAudioWithFallback(kanji: string, kana: string) {
+export async function playAudioWithFallback(kanji: string, kana?: string) {
   if (typeof window === 'undefined') return;
 
   const cleanKanji = (kanji || '').trim();
-  const cleanKana = (kana || '').trim();
+  const cleanKana = (kana !== undefined ? kana : cleanKanji).trim();
   
-  if (!cleanKana) return;
+  if (!cleanKana && !cleanKanji) return;
 
   // 1. Detect if it's a sentence or contains Japanese grammatical markers/particles/spaces
   const isSentence = cleanKana.length >= 8 || 

@@ -9,7 +9,7 @@ import {
   fetchKanjiRecognitionQuestions
 } from '../utils/kanjiPracticeHelper';
 import { playAudioWithFallback, playSpeedrunSound } from '../utils/audioHelper';
-import { getKanjiForm } from '../utils/kanjiFormLookup';
+import { getKanjiForm, getGlobalKanjiForm } from '../utils/kanjiFormLookup';
 
 interface LinkedVocab {
   hiragana: string;
@@ -28,7 +28,7 @@ const getLinkedVocabForKanji = (
   if (Array.isArray(vocabList)) {
     for (const v of vocabList) {
       if (!v || !v.hiragana) continue;
-      const kForm = getKanjiForm(v.hiragana, kanjiList);
+      const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList);
       if (kForm && kForm.includes(kanjiChar) && !seenHira.has(v.hiragana)) {
         seenHira.add(v.hiragana);
         results.push({
@@ -89,6 +89,9 @@ export default function CombinedKanjiPractice({
   // Status Filter: 'all' | 'not_learned' | 'learning' | 'mastered'
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
 
+  // Toggle view for per-lesson breakdown matrix
+  const [showLessonMatrix, setShowLessonMatrix] = useState<boolean>(false);
+
   // Scoped Kanji by level or specific lesson
   const scopedKanji = useMemo(() => {
     if (scopeFilter === 'all_50') return kanjiList;
@@ -115,6 +118,24 @@ export default function CombinedKanjiPractice({
   const masteredCount = scopedKanji.filter(k => k.status === 'mastered').length;
   const learningCount = scopedKanji.filter(k => k.status === 'learning').length;
   const notLearnedCount = scopedKanji.filter(k => (k.status || 'not_learned') === 'not_learned').length;
+
+  const scopedMasteredPercent = totalCount > 0 ? Math.round((masteredCount / totalCount) * 100) : 0;
+  const scopedLearningPercent = totalCount > 0 ? Math.round((learningCount / totalCount) * 100) : 0;
+
+  // Per-lesson Kanji statistics mapping: lessonId -> { total, mastered, learning, notLearned, percent }
+  const perLessonKanjiStats = useMemo(() => {
+    const stats: Record<number, { total: number; mastered: number; learning: number; notLearned: number; percent: number }> = {};
+    for (let i = 1; i <= 50; i++) {
+      const inLesson = kanjiList.filter(k => k.lesson_id === i);
+      const total = inLesson.length;
+      const mastered = inLesson.filter(k => k.status === 'mastered').length;
+      const learning = inLesson.filter(k => k.status === 'learning').length;
+      const notLearned = inLesson.filter(k => (k.status || 'not_learned') === 'not_learned').length;
+      const percent = total > 0 ? Math.round((mastered / total) * 100) : 0;
+      stats[i] = { total, mastered, learning, notLearned, percent };
+    }
+    return stats;
+  }, [kanjiList]);
 
   // Audio helper
   const handlePlayAudio = useCallback((char: string, kana?: string) => {
@@ -646,16 +667,23 @@ export default function CombinedKanjiPractice({
               <select
                 value={scopeFilter}
                 onChange={(e) => setScopeFilter(e.target.value)}
-                className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer max-w-[260px] sm:max-w-none truncate"
               >
-                <option value="level">Trình độ {currentLevel} ({currentLevel === 'N5' ? 'Bài 1 - 25' : 'Bài 26 - 50'})</option>
+                <option value="level">
+                  Trình độ {currentLevel} ({currentLevel === 'N5' ? 'Bài 1 - 25' : 'Bài 26 - 50'}) • {scopedMasteredPercent}% đã thuộc
+                </option>
                 <option value="all_50">Toàn bộ 50 bài học (N5 & N4)</option>
                 <optgroup label="Từng bài học cụ thể:">
-                  {Array.from({ length: 50 }, (_, i) => i + 1).map((lNum) => (
-                    <option key={lNum} value={lNum.toString()}>
-                      Bài {lNum} ({lNum <= 25 ? 'N5' : 'N4'})
-                    </option>
-                  ))}
+                  {Array.from({ length: 50 }, (_, i) => i + 1).map((lNum) => {
+                    const st = perLessonKanjiStats[lNum];
+                    const badge = !st || st.total === 0 ? '' : st.percent === 100 ? '🟢' : st.mastered > 0 || st.learning > 0 ? '🟡' : '⚪';
+                    const text = st && st.total > 0 ? ` (${st.mastered}/${st.total} chữ • ${st.percent}% ${badge})` : ' (0 chữ)';
+                    return (
+                      <option key={lNum} value={lNum.toString()}>
+                        Bài {lNum} {lNum <= 25 ? '[N5]' : '[N4]'}{text}
+                      </option>
+                    );
+                  })}
                 </optgroup>
               </select>
             </div>
@@ -714,6 +742,143 @@ export default function CombinedKanjiPractice({
             <span>📚 Khả dụng:</span>
             <span className="font-black text-slate-800 dark:text-slate-200">{eligibleKanji.length} chữ</span>
           </div>
+        </div>
+
+        {/* Progress Bar & Matrix Toggle Row */}
+        <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-extrabold text-slate-700 dark:text-slate-200">
+                📈 Tiến độ Kanji ({scopeFilter === 'all_50' ? '50 bài' : scopeFilter === 'level' ? `Trình độ ${currentLevel}` : `Bài ${scopeFilter}`}):
+              </span>
+              <span className="font-black text-emerald-600 dark:text-emerald-400">
+                Đã thuộc {masteredCount}/{totalCount} chữ ({scopedMasteredPercent}%)
+              </span>
+              {learningCount > 0 && (
+                <span className="text-amber-500 font-bold">
+                  • Đang học: {learningCount} chữ
+                </span>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowLessonMatrix(!showLessonMatrix)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto border ${
+                showLessonMatrix
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
+              }`}
+            >
+              <span>📊</span>
+              <span>{showLessonMatrix ? 'Thu gọn bảng tiến độ' : 'Xem tiến độ từng bài'}</span>
+              <span className="text-[10px]">{showLessonMatrix ? '▲' : '▼'}</span>
+            </button>
+          </div>
+
+          {/* Multi-segmented Progress Bar */}
+          <div className="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden flex shadow-inner">
+            <div
+              className="bg-emerald-500 h-full transition-all duration-300"
+              style={{ width: `${scopedMasteredPercent}%` }}
+              title={`Đã thuộc: ${masteredCount} chữ (${scopedMasteredPercent}%)`}
+            />
+            <div
+              className="bg-amber-400 h-full transition-all duration-300"
+              style={{ width: `${scopedLearningPercent}%` }}
+              title={`Đang học: ${learningCount} chữ (${scopedLearningPercent}%)`}
+            />
+          </div>
+
+          {/* Interactive Per-Lesson Matrix (Collapsible Grid) */}
+          {showLessonMatrix && (
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 space-y-3 animate-in fade-in duration-200">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <span>💡</span>
+                  <span>Bấm vào bài bất kỳ để chọn nhanh phạm vi học:</span>
+                </span>
+                <div className="flex items-center gap-2 text-[11px]">
+                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-black">
+                    <span>🟢</span> 100%
+                  </span>
+                  <span className="flex items-center gap-1 text-amber-500 font-black">
+                    <span>🟡</span> Đang học
+                  </span>
+                  <span className="flex items-center gap-1 text-slate-400 font-black">
+                    <span>⚪</span> Chưa học
+                  </span>
+                </div>
+              </div>
+
+              {/* Lesson Grid: 25 lessons of current level or 50 lessons */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2 max-h-72 overflow-y-auto pr-1">
+                {Array.from(
+                  { length: scopeFilter === 'all_50' ? 50 : 25 },
+                  (_, i) => (scopeFilter === 'all_50' ? i + 1 : (currentLevel === 'N5' ? 1 : 26) + i)
+                ).map((lNum) => {
+                  const st = perLessonKanjiStats[lNum] || { total: 0, mastered: 0, learning: 0, percent: 0 };
+                  const isCurrentScope = scopeFilter === lNum.toString();
+                  const isDone = st.total > 0 && st.percent === 100;
+                  const isLearning = st.total > 0 && (st.mastered > 0 || st.learning > 0) && st.percent < 100;
+
+                  let borderCls = 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300';
+                  let badgeCls = 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+
+                  if (isDone) {
+                    borderCls = 'border-emerald-500/40 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300';
+                    badgeCls = 'bg-emerald-500 text-white';
+                  } else if (isLearning) {
+                    borderCls = 'border-amber-500/40 bg-amber-50/50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-300';
+                    badgeCls = 'bg-amber-500 text-white';
+                  }
+
+                  if (isCurrentScope) {
+                    borderCls += ' ring-2 ring-blue-500 shadow-md font-extrabold';
+                  }
+
+                  return (
+                    <button
+                      key={lNum}
+                      type="button"
+                      onClick={() => setScopeFilter(lNum.toString())}
+                      className={`p-2 rounded-xl border text-left transition-all hover:scale-[1.02] cursor-pointer flex flex-col justify-between gap-1.5 ${borderCls}`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black">Bài {lNum}</span>
+                        <span className={`text-[10px] font-black px-1.5 py-0.2 rounded-md ${badgeCls}`}>
+                          {st.total > 0 ? `${st.percent}%` : '0 chữ'}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between text-[11px] opacity-80">
+                        <span>{st.mastered}/{st.total} chữ</span>
+                        <span>{isDone ? '🟢' : isLearning ? '🟡' : '⚪'}</span>
+                      </div>
+                      {/* Mini lesson progress bar */}
+                      <div className="w-full bg-slate-200 dark:bg-slate-700/60 h-1 rounded-full overflow-hidden">
+                        <div
+                          className="bg-emerald-500 h-full"
+                          style={{ width: `${st.percent}%` }}
+                        />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {scopeFilter !== 'level' && scopeFilter !== 'all_50' && (
+                <div className="pt-1 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setScopeFilter('level')}
+                    className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                  >
+                    ↺ Đặt lại: Học toàn bộ trình độ {currentLevel}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -831,12 +996,14 @@ export default function CombinedKanjiPractice({
               {/* Main Quiz Question Prompt Card */}
               <div className="p-6 sm:p-8 bg-white dark:bg-slate-900/80 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-4 text-center">
                 <div className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                  {currentQuizQ.question_type === 'reading_identification'
+                  {currentQuizQ.question_type === 'reading_in_context'
                     ? '🎯 Nhận diện cách đọc Kana chuẩn'
                     : currentQuizQ.question_type === 'kanji_orthography'
                     ? '🉐 Tìm chữ Hán viết chuẩn xác'
                     : currentQuizQ.question_type === 'word_formation'
                     ? '🧩 Điền chữ Hán vào từ ghép khuyết'
+                    : currentQuizQ.question_type === 'dialogue_fill'
+                    ? '💬 Điền khuyết hội thoại'
                     : '📖 Nhận diện ý nghĩa & ngữ cảnh'}
                 </div>
 
