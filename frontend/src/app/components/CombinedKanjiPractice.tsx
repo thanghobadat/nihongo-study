@@ -4,72 +4,19 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import {
   KanjiItemData,
   COMMON_KANJI_DISTRACTORS,
-  shuffleArray,
-  KanjiRecognitionQuizQuestion,
-  fetchKanjiRecognitionQuestions
+  shuffleArray
 } from '../utils/kanjiPracticeHelper';
 import { playAudioWithFallback, playSpeedrunSound } from '../utils/audioHelper';
-import { getKanjiForm, getGlobalKanjiForm } from '../utils/kanjiFormLookup';
-
-interface LinkedVocab {
-  hiragana: string;
-  meaning: string;
-  kanjiForm: string;
-}
-
-const getLinkedVocabForKanji = (
-  kanjiChar: string,
-  vocabList?: any[],
-  kanjiList: KanjiItemData[] = []
-): LinkedVocab[] => {
-  const results: LinkedVocab[] = [];
-  const seenHira = new Set<string>();
-
-  if (Array.isArray(vocabList)) {
-    for (const v of vocabList) {
-      if (!v || !v.hiragana) continue;
-      const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList);
-      if (kForm && kForm.includes(kanjiChar) && !seenHira.has(v.hiragana)) {
-        seenHira.add(v.hiragana);
-        results.push({
-          hiragana: v.hiragana,
-          meaning: v.vietnamese_meaning || '',
-          kanjiForm: kForm
-        });
-      }
-    }
-  }
-
-  // Fallback: check kanji compounds if vocabList doesn't have it
-  if (results.length === 0) {
-    const targetKanji = kanjiList.find(k => k.character === kanjiChar);
-    if (targetKanji && targetKanji.compounds) {
-      const parts = targetKanji.compounds.split(';');
-      for (const p of parts) {
-        const m = p.match(/([^\(\)\s:;]+)\s*\(([^)]+)\)\s*[:：]\s*(.+)/);
-        if (m) {
-          const kWord = m[1].trim();
-          const hWord = m[2].trim();
-          const mean = m[3].trim();
-          if (kWord.includes(kanjiChar) && !seenHira.has(hWord)) {
-            seenHira.add(hWord);
-            results.push({
-              hiragana: hWord,
-              meaning: mean,
-              kanjiForm: kWord
-            });
-          }
-        }
-      }
-    }
-  }
-
-  return results;
-};
+import {
+  generatePracticeQuestions,
+  PracticeCategory,
+  PracticeExerciseQuestion
+} from '../utils/kanjiOverhaulHelper';
 
 interface CombinedKanjiPracticeProps {
   kanjiList: KanjiItemData[];
   vocabList?: any[];
+  grammarList?: any[];
   currentLevel?: 'N5' | 'N4';
   onUpdateKanjiStatus?: (id: number, type: 'vocabulary' | 'kanji' | 'grammar', status: 'not_learned' | 'learning' | 'mastered') => void;
 }
@@ -77,13 +24,14 @@ interface CombinedKanjiPracticeProps {
 export default function CombinedKanjiPractice({
   kanjiList,
   vocabList = [],
+  grammarList = [],
   currentLevel = 'N5',
   onUpdateKanjiStatus
 }: CombinedKanjiPracticeProps) {
-  // Main Game Mode: 'recognition' | 'speedrun'
-  const [activeGame, setActiveGame] = useState<'recognition' | 'speedrun'>('recognition');
+  // Main Tab: 'memorize' (Nhớ mặt chữ) | 'practice' (Luyện tập)
+  const [activeTab, setActiveTab] = useState<'memorize' | 'practice'>('memorize');
 
-  // Scope filter: 'level' (current N5 or N4) | 'all_50' (all 50 lessons) | specific lesson number
+  // Scope filter: 'level' (current N5/N4) | 'all_50' (all 50 lessons) | specific lesson number '1'..'50'
   const [scopeFilter, setScopeFilter] = useState<'level' | 'all_50' | string>('level');
 
   // Status Filter: 'all' | 'not_learned' | 'learning' | 'mastered'
@@ -107,7 +55,7 @@ export default function CombinedKanjiPractice({
     return kanjiList;
   }, [kanjiList, scopeFilter, currentLevel]);
 
-  // Eligible Kanji after applying status filter
+  // Eligible Kanji after applying status filter (Nguồn đề từ TẤT CẢ các bài thỏa mãn)
   const eligibleKanji = useMemo(() => {
     if (statusFilter === 'all') return scopedKanji;
     return scopedKanji.filter(k => (k.status || 'not_learned') === statusFilter);
@@ -118,9 +66,7 @@ export default function CombinedKanjiPractice({
   const masteredCount = scopedKanji.filter(k => k.status === 'mastered').length;
   const learningCount = scopedKanji.filter(k => k.status === 'learning').length;
   const notLearnedCount = scopedKanji.filter(k => (k.status || 'not_learned') === 'not_learned').length;
-
   const scopedMasteredPercent = totalCount > 0 ? Math.round((masteredCount / totalCount) * 100) : 0;
-  const scopedLearningPercent = totalCount > 0 ? Math.round((learningCount / totalCount) * 100) : 0;
 
   // Per-lesson Kanji statistics mapping: lessonId -> { total, mastered, learning, notLearned, percent }
   const perLessonKanjiStats = useMemo(() => {
@@ -143,27 +89,7 @@ export default function CombinedKanjiPractice({
     playAudioWithFallback(char, playKana);
   }, []);
 
-  // Update status handler
-  const handleQuickStatusChange = (kanjiItem: KanjiItemData, newStatus: 'not_learned' | 'learning' | 'mastered') => {
-    if (onUpdateKanjiStatus) {
-      onUpdateKanjiStatus(kanjiItem.id, 'kanji', newStatus);
-    }
-  };
-
-  // =========================================================================
-  // 1. GAME 1: NHẬN DIỆN MẶT CHỮ (AI RECOGNITION QUIZ)
-  // =========================================================================
-  const [quizQuestions, setQuizQuestions] = useState<KanjiRecognitionQuizQuestion[]>([]);
-  const [isLoadingQuiz, setIsLoadingQuiz] = useState<boolean>(false);
-  const [quizIndex, setQuizIndex] = useState<number>(0);
-  const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(null);
-  const [isQuizSubmitted, setIsQuizSubmitted] = useState<boolean>(false);
-  const [quizScore, setQuizScore] = useState<number>(0);
-  const [userQuizAnswers, setUserQuizAnswers] = useState<Record<number, { chosenIdx: number; isCorrect: boolean }>>({});
-  const [isQuizFinished, setIsQuizFinished] = useState<boolean>(false);
-  const [quizWrongList, setQuizWrongList] = useState<KanjiRecognitionQuizQuestion[]>([]);
-
-  // Target lesson ID passed to API
+  // Target lesson ID passed to generator
   const targetLessonId = useMemo(() => {
     if (scopeFilter !== 'level' && scopeFilter !== 'all_50') {
       const n = parseInt(scopeFilter, 10);
@@ -172,515 +98,524 @@ export default function CombinedKanjiPractice({
     return currentLevel === 'N5' ? 25 : 50;
   }, [scopeFilter, currentLevel]);
 
-  // Fetch AI Recognition Quiz when entering game or changing scope/filter
-  useEffect(() => {
-    if (activeGame !== 'recognition' || eligibleKanji.length === 0) return;
-
-    let isMounted = true;
-    setIsLoadingQuiz(true);
-
-    const learnedChars = kanjiList
-      .filter(k => k.status === 'learning' || k.status === 'mastered')
-      .map(k => k.character);
-
-    fetchKanjiRecognitionQuestions(targetLessonId, eligibleKanji, false, vocabList, learnedChars)
-      .then(fetchedQuestions => {
-        if (!isMounted) return;
-        setQuizQuestions(shuffleArray(fetchedQuestions));
-        setQuizIndex(0);
-        setSelectedOptionIdx(null);
-        setIsQuizSubmitted(false);
-        setQuizScore(0);
-        setUserQuizAnswers({});
-        setIsQuizFinished(false);
-        setQuizWrongList([]);
-      })
-      .finally(() => {
-        if (isMounted) setIsLoadingQuiz(false);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [activeGame, targetLessonId, eligibleKanji, vocabList, kanjiList]);
-
-  // Shuffle quiz questions
-  const handleShuffleQuiz = () => {
-    if (quizQuestions.length <= 1) return;
-    setQuizQuestions(shuffleArray(quizQuestions));
-    setQuizIndex(0);
-    setSelectedOptionIdx(null);
-    setIsQuizSubmitted(false);
-  };
-
-  // Fresh AI questions (bypass cache via forceRefresh)
-  const loadFreshQuiz = async () => {
-    if (eligibleKanji.length === 0) return;
-    setIsLoadingQuiz(true);
-    try {
-      const learnedChars = kanjiList
-        .filter(k => k.status === 'learning' || k.status === 'mastered')
-        .map(k => k.character);
-      const freshQuestions = await fetchKanjiRecognitionQuestions(targetLessonId, eligibleKanji, true, vocabList, learnedChars);
-      setQuizQuestions(shuffleArray(freshQuestions));
-      setQuizIndex(0);
-      setSelectedOptionIdx(null);
-      setIsQuizSubmitted(false);
-      setQuizScore(0);
-      setUserQuizAnswers({});
-      setIsQuizFinished(false);
-      setQuizWrongList([]);
-    } finally {
-      setIsLoadingQuiz(false);
-    }
-  };
-
-  const currentQuizQ = quizQuestions[quizIndex] || null;
-
-  const handleSelectQuizOption = (idx: number) => {
-    if (isQuizSubmitted || !currentQuizQ) return;
-    setSelectedOptionIdx(idx);
-    setIsQuizSubmitted(true);
-    const isCorrect = idx === currentQuizQ.correct_index;
-
-    setUserQuizAnswers(prev => ({ ...prev, [quizIndex]: { chosenIdx: idx, isCorrect } }));
-
-    if (isCorrect) {
-      setQuizScore(s => s + 1);
-      playSpeedrunSound('correct');
-      const audioToPlay = currentQuizQ.target_word || currentQuizQ.target_kanji;
-      handlePlayAudio(audioToPlay, currentQuizQ.target_word_reading || audioToPlay);
-    } else {
-      playSpeedrunSound('wrong');
-      setQuizWrongList(list => {
-        if (list.some(q => q.id === currentQuizQ.id)) return list;
-        return [...list, currentQuizQ];
-      });
-    }
-  };
-
-  const handleNextQuizQuestion = () => {
-    if (quizIndex + 1 < quizQuestions.length) {
-      setQuizIndex(prev => prev + 1);
-      setSelectedOptionIdx(null);
-      setIsQuizSubmitted(false);
-    } else {
-      setIsQuizFinished(true);
-    }
-  };
-
-  const handlePrevQuizQuestion = () => {
-    if (quizIndex > 0) {
-      setQuizIndex(prev => prev - 1);
-      const prevAnswer = userQuizAnswers[quizIndex - 1];
-      if (prevAnswer) {
-        setSelectedOptionIdx(prevAnswer.chosenIdx);
-        setIsQuizSubmitted(true);
-      } else {
-        setSelectedOptionIdx(null);
-        setIsQuizSubmitted(false);
-      }
-    }
-  };
-
-  const handleRetryWrongQuestions = () => {
-    if (quizWrongList.length === 0) return;
-    setQuizQuestions(shuffleArray(quizWrongList));
-    setQuizIndex(0);
-    setSelectedOptionIdx(null);
-    setIsQuizSubmitted(false);
-    setQuizScore(0);
-    setUserQuizAnswers({});
-    setIsQuizFinished(false);
-    setQuizWrongList([]);
-  };
-
   // =========================================================================
-  // 2. GAME 2: SPEEDRUN LUYỆN PHẢN XẠ KANJI
+  // 1. PHÂN HỆ 1: 🧠 NHỚ MẶT CHỮ (SPEEDRUN PHẢN XẠ NHANH ĐA BÀI HỌC)
   // =========================================================================
-  const [speedrunActive, setSpeedrunActive] = useState<boolean>(false);
-  const [speedrunGameOver, setSpeedrunGameOver] = useState<boolean>(false);
-  const [speedrunScore, setSpeedrunScore] = useState<number>(0);
-  const [speedrunHighScore, setSpeedrunHighScore] = useState<number>(0);
-  const [speedrunStreak, setSpeedrunStreak] = useState<number>(0);
-  const [speedrunMaxStreak, setSpeedrunMaxStreak] = useState<number>(0);
-  const [speedrunTimeLeft, setSpeedrunTimeLeft] = useState<number>(15);
-  const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(15);
-  const [speedrunDirection, setSpeedrunDirection] = useState<'both' | 'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-vocab'>('both');
-  const [speedrunWrongList, setSpeedrunWrongList] = useState<KanjiItemData[]>([]);
+  const [memorizeActive, setMemorizeActive] = useState<boolean>(false);
+  const [memorizeGameOver, setMemorizeGameOver] = useState<boolean>(false);
+  const [memorizeScore, setMemorizeScore] = useState<number>(0);
+  const [memorizeHighScore, setMemorizeHighScore] = useState<number>(0);
+  const [memorizeStreak, setMemorizeStreak] = useState<number>(0);
+  const [memorizeMaxStreak, setMemorizeMaxStreak] = useState<number>(0);
+  const [memorizeTimeLeft, setMemorizeTimeLeft] = useState<number>(20);
+  const [memorizeMaxTime, setMemorizeMaxTime] = useState<number>(20);
+  const [memorizeDirection, setMemorizeDirection] = useState<'jp-to-vn' | 'vn-to-jp' | 'both'>('both');
+  const [memorizeWrongList, setMemorizeWrongList] = useState<KanjiItemData[]>([]);
 
-  interface SpeedrunQ {
+  interface MemorizeQ {
     subject: string;
     subText?: string;
     promptText: string;
     correctKanji: KanjiItemData;
-    audioWord?: string;
     correctAnswerText: string;
     options: { text: string; isCorrect: boolean }[];
-    direction: 'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab' | 'vocab-to-kanji';
+    direction: 'jp-to-vn' | 'vn-to-jp';
   }
-  const [currentSpeedrunQ, setCurrentSpeedrunQ] = useState<SpeedrunQ | null>(null);
-  const [speedrunSelectedIdx, setSpeedrunSelectedIdx] = useState<number | null>(null);
-  const [speedrunIsAnswerCorrect, setSpeedrunIsAnswerCorrect] = useState<boolean | null>(null);
 
-  const speedrunTimerRef = useRef<any>(null);
-  const speedrunScoreRef = useRef<number>(0);
-  const speedrunMaxTimeRef = useRef<number>(15);
+  const [currentMemorizeQ, setCurrentMemorizeQ] = useState<MemorizeQ | null>(null);
+  const [memorizeSelectedIdx, setMemorizeSelectedIdx] = useState<number | null>(null);
+  const [isEvaluatingChoice, setIsEvaluatingChoice] = useState<boolean>(false);
 
-  // Load Speedrun high score from localStorage
+  const timerRef = useRef<any>(null);
+  const scoreRef = useRef<number>(0);
+  const maxTimeRef = useRef<number>(20);
+
+  // Nạp high score
   useEffect(() => {
     try {
-      const savedHigh = localStorage.getItem('kanji_speedrun_high_combined');
+      const savedHigh = localStorage.getItem(`kanji_memorize_high_combined_${scopeFilter}_${statusFilter}`);
       if (savedHigh) {
-        setSpeedrunHighScore(parseInt(savedHigh, 10) || 0);
+        setMemorizeHighScore(parseInt(savedHigh, 10) || 0);
+      } else {
+        setMemorizeHighScore(0);
       }
-    } catch {
+    } catch (e) {
       // ignore
     }
-  }, []);
+  }, [scopeFilter, statusFilter]);
 
-  // Dynamic time calculation (10% reduction every 3 streak points, minimum 2.5s)
+  // Dynamic time: giảm 10% mỗi 3 streak, tối thiểu 2s
   const getDynamicTimeForStreak = (streak: number): number => {
     const reductionCount = Math.floor(streak / 3);
-    return Math.max(2.5, Math.round(15 * Math.pow(0.9, reductionCount) * 10) / 10);
+    return Math.max(2, Math.round(20 * Math.pow(0.9, reductionCount) * 10) / 10);
   };
 
-  // Generate next Speedrun question
-  const generateSpeedrunQuestion = useCallback((): SpeedrunQ | null => {
+  // Sinh câu hỏi Nhớ mặt chữ đa bài học
+  const generateNextMemorizeQuestion = useCallback((): MemorizeQ | null => {
     if (eligibleKanji.length === 0) return null;
 
     const target = eligibleKanji[Math.floor(Math.random() * eligibleKanji.length)];
 
-    // Blend AI situational questions if available (40% probability)
-    if (quizQuestions.length > 0 && (speedrunDirection === 'both' || speedrunDirection === 'kanji-vocab') && Math.random() < 0.4) {
-      const q = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
-      const targetKanjiItem = eligibleKanji.find(k => k.character === q.target_kanji) || target;
-      return {
-        subject: q.context_sentence || q.question_text || q.target_word || q.target_kanji,
-        subText: q.target_word_hint ? `💡 ${q.target_word_hint}` : undefined,
-        promptText: q.question_translation ? `👉 ${q.question_translation}` : '👉 Nhận diện chữ Hán trong ngữ cảnh:',
-        correctKanji: targetKanjiItem,
-        audioWord: q.target_word || q.target_kanji,
-        correctAnswerText: q.options[q.correct_index],
-        options: q.options.map((opt, idx) => ({
-          text: opt,
-          isCorrect: idx === q.correct_index
-        })),
-        direction: 'kanji-to-vocab'
-      };
-    }
+    let dir: 'jp-to-vn' | 'vn-to-jp' = 'jp-to-vn';
+    if (memorizeDirection === 'jp-to-vn') dir = 'jp-to-vn';
+    else if (memorizeDirection === 'vn-to-jp') dir = 'vn-to-jp';
+    else dir = Math.random() > 0.5 ? 'jp-to-vn' : 'vn-to-jp';
 
-    // Direction selection
-    let chosenDir: 'kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab' | 'vocab-to-kanji' = 'kanji-to-meaning';
-    if (speedrunDirection === 'both') {
-      const modes: ('kanji-to-meaning' | 'meaning-to-kanji' | 'kanji-to-vocab')[] = ['kanji-to-meaning', 'meaning-to-kanji'];
-      if (vocabList && vocabList.length > 0) modes.push('kanji-to-vocab');
-      chosenDir = modes[Math.floor(Math.random() * modes.length)];
-    } else if (speedrunDirection === 'kanji-vocab') {
-      chosenDir = 'kanji-to-vocab';
-    } else {
-      chosenDir = speedrunDirection;
-    }
+    const pool = eligibleKanji.filter(k => k.id !== target.id);
+    const combinedPool = pool.length >= 3 ? pool : [...pool, ...COMMON_KANJI_DISTRACTORS.filter(d => d.character !== target.character)];
+    const shuffledPool = shuffleArray(combinedPool);
+    const distractors = shuffledPool.slice(0, 3);
 
-    // Mode 1: Kanji -> Meaning / Sino-Vietnamese
-    if (chosenDir === 'kanji-to-meaning') {
-      const correctText = `${target.sino_vietnamese ? target.sino_vietnamese + ' • ' : ''}${target.vietnamese_meaning}`;
-      const pool = eligibleKanji.length >= 4 ? eligibleKanji : kanjiList;
-      const otherKanjis = shuffleArray(pool.filter(k => k.character !== target.character)).slice(0, 3);
-      const wrongOptions = otherKanjis.map(k => `${k.sino_vietnamese ? k.sino_vietnamese + ' • ' : ''}${k.vietnamese_meaning}`);
-
-      const allOpts = shuffleArray([
-        { text: correctText, isCorrect: true },
-        ...wrongOptions.map(t => ({ text: t, isCorrect: false }))
+    // Chiều 1: 🈸 ➔ 🇻🇳 (Chữ Hán -> Chọn Nghĩa & Âm Hán)
+    if (dir === 'jp-to-vn') {
+      const targetAns = `${target.sino_vietnamese ? target.sino_vietnamese + ' • ' : ''}${target.vietnamese_meaning}`.trim();
+      const options = shuffleArray([
+        { text: targetAns, isCorrect: true },
+        ...distractors.map(d => ({
+          text: `${d.sino_vietnamese ? d.sino_vietnamese + ' • ' : ''}${d.vietnamese_meaning}`.trim(),
+          isCorrect: false
+        }))
       ]);
 
       return {
         subject: target.character,
-        subText: `Âm On: ${target.onyomi || '—'}  |  Âm Kun: ${target.kunyomi || '—'}`,
-        promptText: '👉 Chọn âm Hán Việt và ý nghĩa đúng của chữ Hán:',
+        promptText: '👉 Chọn âm Hán Việt và nghĩa của chữ Hán:',
         correctKanji: target,
-        correctAnswerText: correctText,
-        options: allOpts,
-        direction: 'kanji-to-meaning'
+        correctAnswerText: targetAns,
+        options,
+        direction: 'jp-to-vn'
       };
     }
 
-    // Mode 2: Meaning / Sino-Vietnamese -> Kanji
-    if (chosenDir === 'meaning-to-kanji') {
-      const promptMeaning = `${target.sino_vietnamese ? target.sino_vietnamese + ' : ' : ''}${target.vietnamese_meaning}`;
-      const pool = eligibleKanji.length >= 4 ? eligibleKanji : kanjiList;
-      const otherKanjis = shuffleArray(
-        pool.filter(k => k.character !== target.character)
-          .concat(COMMON_KANJI_DISTRACTORS.filter(d => d.character !== target.character))
-      ).slice(0, 3);
+    // Chiều 2: 🇻🇳 ➔ 🈸 (Nghĩa -> Chọn Chữ Hán)
+    const targetAns = target.character;
+    const options = shuffleArray([
+      { text: targetAns, isCorrect: true },
+      ...distractors.map(d => ({
+        text: d.character,
+        isCorrect: false
+      }))
+    ]);
 
-      const allOpts = shuffleArray([
-        { text: target.character, isCorrect: true },
-        ...otherKanjis.map(k => ({ text: k.character, isCorrect: false }))
-      ]);
-
-      return {
-        subject: promptMeaning,
-        subText: `Nét bút: ${target.stroke_count || '—'} nét  |  Âm Kun: ${target.kunyomi || '—'}`,
-        promptText: '👉 Chọn chữ Hán tương ứng với ý nghĩa:',
-        correctKanji: target,
-        correctAnswerText: target.character,
-        options: allOpts,
-        direction: 'meaning-to-kanji'
-      };
-    }
-
-    // Mode 3: Kanji -> Linked Vocab in Context
-    const linked = getLinkedVocabForKanji(target.character, vocabList, kanjiList);
-    if (linked.length > 0) {
-      const item = linked[Math.floor(Math.random() * linked.length)];
-      const pool = eligibleKanji.length >= 4 ? eligibleKanji : kanjiList;
-      const wrongList = shuffleArray(
-        pool.filter(k => k.character !== target.character)
-          .concat(COMMON_KANJI_DISTRACTORS.filter(d => d.character !== target.character))
-      ).slice(0, 3);
-
-      const wrongOpts = wrongList.map(w => item.kanjiForm.replace(target.character, w.character));
-      const allOpts = shuffleArray([
-        { text: item.kanjiForm, isCorrect: true },
-        ...wrongOpts.map(t => ({ text: t, isCorrect: false }))
-      ]);
-
-      return {
-        subject: item.hiragana,
-        subText: `Nghĩa: ${item.meaning}  •  Chữ mục tiêu: 【${target.character}】`,
-        promptText: '👉 Chọn từ vựng chữ Hán viết chuẩn xác:',
-        correctKanji: target,
-        audioWord: item.kanjiForm,
-        correctAnswerText: item.kanjiForm,
-        options: allOpts,
-        direction: 'kanji-to-vocab'
-      };
-    }
-
-    // Default fallback to Kanji -> Meaning
-    const correctText = `${target.sino_vietnamese ? target.sino_vietnamese + ' • ' : ''}${target.vietnamese_meaning}`;
-    const otherKanjis = shuffleArray(kanjiList.filter(k => k.character !== target.character)).slice(0, 3);
-    const wrongOptions = otherKanjis.map(k => `${k.sino_vietnamese ? k.sino_vietnamese + ' • ' : ''}${k.vietnamese_meaning}`);
+    const subjectText = `${target.vietnamese_meaning}${target.sino_vietnamese ? ' (' + target.sino_vietnamese + ')' : ''}`;
 
     return {
-      subject: target.character,
-      promptText: '👉 Chọn âm Hán Việt và ý nghĩa đúng:',
+      subject: subjectText,
+      promptText: '👉 Chọn chữ Hán tương ứng với nghĩa trên:',
       correctKanji: target,
-      correctAnswerText: correctText,
-      options: shuffleArray([
-        { text: correctText, isCorrect: true },
-        ...wrongOptions.map(t => ({ text: t, isCorrect: false }))
-      ]),
-      direction: 'kanji-to-meaning'
+      correctAnswerText: targetAns,
+      options,
+      direction: 'vn-to-jp'
     };
-  }, [eligibleKanji, kanjiList, vocabList, quizQuestions, speedrunDirection]);
+  }, [eligibleKanji, memorizeDirection]);
 
-  // Start Speedrun Game
-  const startSpeedrun = () => {
+  // Bắt đầu game Speedrun Nhớ mặt chữ
+  const startMemorizeGame = () => {
     if (eligibleKanji.length === 0) return;
-    setSpeedrunScore(0);
-    speedrunScoreRef.current = 0;
-    setSpeedrunStreak(0);
-    setSpeedrunMaxStreak(0);
-    setSpeedrunWrongList([]);
-    setSpeedrunGameOver(false);
-    setSpeedrunSelectedIdx(null);
-    setSpeedrunIsAnswerCorrect(null);
+    setMemorizeActive(true);
+    setMemorizeGameOver(false);
+    setMemorizeScore(0);
+    scoreRef.current = 0;
+    setMemorizeStreak(0);
+    setMemorizeMaxStreak(0);
+    setMemorizeWrongList([]);
+    setMemorizeSelectedIdx(null);
+    setIsEvaluatingChoice(false);
 
-    const initialTime = getDynamicTimeForStreak(0);
-    setSpeedrunTimeLeft(initialTime);
-    setSpeedrunMaxTime(initialTime);
-    speedrunMaxTimeRef.current = initialTime;
+    const initialTime = 20;
+    setMemorizeMaxTime(initialTime);
+    maxTimeRef.current = initialTime;
+    setMemorizeTimeLeft(initialTime);
 
-    const firstQ = generateSpeedrunQuestion();
-    setCurrentSpeedrunQ(firstQ);
-    setSpeedrunActive(true);
+    const q = generateNextMemorizeQuestion();
+    setCurrentMemorizeQ(q);
   };
 
-  // Speedrun Countdown Timer effect
+  // Timer đồng hồ đếm ngược
   useEffect(() => {
-    if (!speedrunActive || speedrunGameOver) {
-      if (speedrunTimerRef.current) clearInterval(speedrunTimerRef.current);
+    if (!memorizeActive || memorizeGameOver) {
+      if (timerRef.current) clearInterval(timerRef.current);
       return;
     }
 
-    speedrunTimerRef.current = setInterval(() => {
-      setSpeedrunTimeLeft(prev => {
+    timerRef.current = setInterval(() => {
+      setMemorizeTimeLeft(prev => {
         if (prev <= 0.1) {
-          clearInterval(speedrunTimerRef.current);
-          handleSpeedrunTimeOut();
+          clearInterval(timerRef.current);
+          handleMemorizeTimeout();
           return 0;
         }
-        return Math.max(0, Math.round((prev - 0.1) * 10) / 10);
+        return Math.round((prev - 0.1) * 10) / 10;
       });
     }, 100);
 
     return () => {
-      if (speedrunTimerRef.current) clearInterval(speedrunTimerRef.current);
+      if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [speedrunActive, speedrunGameOver]);
+  }, [memorizeActive, memorizeGameOver, currentMemorizeQ]);
 
-  // Handle Timeout
-  const handleSpeedrunTimeOut = () => {
+  // Xử lý khi hết giờ
+  const handleMemorizeTimeout = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
     playSpeedrunSound('wrong');
-    if (currentSpeedrunQ) {
-      setSpeedrunWrongList(list => {
-        if (list.some(k => k.id === currentSpeedrunQ.correctKanji.id)) return list;
-        return [...list, currentSpeedrunQ.correctKanji];
-      });
+    setMemorizeGameOver(true);
+    setMemorizeActive(false);
+
+    if (currentMemorizeQ) {
+      setMemorizeWrongList(list => [...list, currentMemorizeQ.correctKanji]);
     }
-    endSpeedrun();
-  };
 
-  // Handle Option Click
-  const handleSpeedrunAnswer = (opt: { text: string; isCorrect: boolean }, idx: number) => {
-    if (speedrunSelectedIdx !== null || !speedrunActive || speedrunGameOver) return;
-    if (speedrunTimerRef.current) clearInterval(speedrunTimerRef.current);
-
-    setSpeedrunSelectedIdx(idx);
-    setSpeedrunIsAnswerCorrect(opt.isCorrect);
-
-    if (opt.isCorrect) {
-      playSpeedrunSound('correct');
-      if (currentSpeedrunQ?.audioWord) {
-        handlePlayAudio(currentSpeedrunQ.audioWord);
-      } else if (currentSpeedrunQ?.correctKanji) {
-        handlePlayAudio(currentSpeedrunQ.correctKanji.character);
-      }
-
-      const timeBonus = Math.round(speedrunTimeLeft * 10);
-      const streakMultiplier = Math.min(4, 1 + Math.floor(speedrunStreak / 5) * 0.5);
-      const pointsEarned = Math.round((100 + timeBonus) * streakMultiplier);
-
-      const newScore = speedrunScoreRef.current + pointsEarned;
-      speedrunScoreRef.current = newScore;
-      setSpeedrunScore(newScore);
-
-      const newStreak = speedrunStreak + 1;
-      setSpeedrunStreak(newStreak);
-      setSpeedrunMaxStreak(prev => Math.max(prev, newStreak));
-
-      // Advance to next question after 350ms
-      setTimeout(() => {
-        const nextTime = getDynamicTimeForStreak(newStreak);
-        setSpeedrunTimeLeft(nextTime);
-        setSpeedrunMaxTime(nextTime);
-        speedrunMaxTimeRef.current = nextTime;
-        setSpeedrunSelectedIdx(null);
-        setSpeedrunIsAnswerCorrect(null);
-
-        const nextQ = generateSpeedrunQuestion();
-        setCurrentSpeedrunQ(nextQ);
-      }, 350);
-    } else {
-      playSpeedrunSound('wrong');
-      if (currentSpeedrunQ) {
-        setSpeedrunWrongList(list => {
-          if (list.some(k => k.id === currentSpeedrunQ.correctKanji.id)) return list;
-          return [...list, currentSpeedrunQ.correctKanji];
-        });
-      }
-      setTimeout(() => {
-        endSpeedrun();
-      }, 550);
-    }
-  };
-
-  // End Speedrun & update High Score
-  const endSpeedrun = () => {
-    setSpeedrunActive(false);
-    setSpeedrunGameOver(true);
-    setSpeedrunSelectedIdx(null);
-    setSpeedrunIsAnswerCorrect(null);
-
-    const finalScore = speedrunScoreRef.current;
-    if (finalScore > speedrunHighScore) {
-      setSpeedrunHighScore(finalScore);
+    const currentScore = scoreRef.current;
+    if (currentScore > memorizeHighScore) {
+      setMemorizeHighScore(currentScore);
       try {
-        localStorage.setItem('kanji_speedrun_high_combined', finalScore.toString());
-      } catch {
+        localStorage.setItem(`kanji_memorize_high_combined_${scopeFilter}_${statusFilter}`, currentScore.toString());
+      } catch (e) {
         // ignore
       }
     }
   };
 
+  // Xử lý khi người dùng chọn đáp án Nhớ mặt chữ
+  const handleSelectMemorizeAnswer = (idx: number) => {
+    if (isEvaluatingChoice || !currentMemorizeQ || memorizeGameOver) return;
+    setIsEvaluatingChoice(true);
+    setMemorizeSelectedIdx(idx);
+
+    const chosenOpt = currentMemorizeQ.options[idx];
+    const isCorrect = chosenOpt.isCorrect;
+
+    if (isCorrect) {
+      playSpeedrunSound('correct');
+      handlePlayAudio(currentMemorizeQ.correctKanji.character, currentMemorizeQ.correctKanji.onyomi || currentMemorizeQ.correctKanji.kunyomi);
+
+      const newScore = memorizeScore + 1;
+      setMemorizeScore(newScore);
+      scoreRef.current = newScore;
+
+      const newStreak = memorizeStreak + 1;
+      setMemorizeStreak(newStreak);
+      if (newStreak > memorizeMaxStreak) {
+        setMemorizeMaxStreak(newStreak);
+      }
+
+      if (newScore > memorizeHighScore) {
+        setMemorizeHighScore(newScore);
+        try {
+          localStorage.setItem(`kanji_memorize_high_combined_${scopeFilter}_${statusFilter}`, newScore.toString());
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      setTimeout(() => {
+        const nextTime = getDynamicTimeForStreak(newStreak);
+        setMemorizeMaxTime(nextTime);
+        maxTimeRef.current = nextTime;
+        setMemorizeTimeLeft(nextTime);
+
+        setMemorizeSelectedIdx(null);
+        setIsEvaluatingChoice(false);
+        const nextQ = generateNextMemorizeQuestion();
+        setCurrentMemorizeQ(nextQ);
+      }, 400);
+    } else {
+      playSpeedrunSound('wrong');
+      if (timerRef.current) clearInterval(timerRef.current);
+      setMemorizeWrongList(list => [...list, currentMemorizeQ.correctKanji]);
+
+      setTimeout(() => {
+        setMemorizeGameOver(true);
+        setMemorizeActive(false);
+        setIsEvaluatingChoice(false);
+      }, 600);
+    }
+  };
+
+  // =========================================================================
+  // 2. PHÂN HỆ 2: 🎯 LUYỆN TẬP (3 DẠNG BÀI TẬP THỰC CHIẾN ĐA BÀI HỌC)
+  // =========================================================================
+  const [selectedCategories, setSelectedCategories] = useState<PracticeCategory[]>([
+    'type1_vocab',
+    'type2_partial',
+    'type3_sentence'
+  ]);
+
+  const [practiceQuestions, setPracticeQuestions] = useState<PracticeExerciseQuestion[]>([]);
+  const [practiceIndex, setPracticeIndex] = useState<number>(0);
+  const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(null);
+  const [isQuestionSubmitted, setIsQuestionSubmitted] = useState<boolean>(false);
+  const [practiceScore, setPracticeScore] = useState<number>(0);
+  const [userPracticeAnswers, setUserPracticeAnswers] = useState<Record<number, { chosenIdx: number; isCorrect: boolean }>>({});
+  const [isPracticeFinished, setIsPracticeFinished] = useState<boolean>(false);
+  const [practiceWrongList, setPracticeWrongList] = useState<PracticeExerciseQuestion[]>([]);
+
+  // Tái tạo hoặc sinh mới bộ câu hỏi Luyện tập đa bài học
+  const generateNewPracticeSet = useCallback(() => {
+    if (eligibleKanji.length === 0) {
+      setPracticeQuestions([]);
+      return;
+    }
+    const questions = generatePracticeQuestions({
+      eligibleKanji,
+      vocabItems: vocabList,
+      grammarItems: grammarList,
+      allLessonKanji: kanjiList,
+      selectedCategories: selectedCategories.length > 0 ? selectedCategories : ['type1_vocab', 'type2_partial', 'type3_sentence'],
+      currentLessonId: targetLessonId,
+      limit: 15
+    });
+    setPracticeQuestions(questions);
+    setPracticeIndex(0);
+    setSelectedOptionIdx(null);
+    setIsQuestionSubmitted(false);
+    setPracticeScore(0);
+    setUserPracticeAnswers({});
+    setIsPracticeFinished(false);
+    setPracticeWrongList([]);
+  }, [eligibleKanji, vocabList, grammarList, kanjiList, selectedCategories, targetLessonId]);
+
+  // Tự động sinh câu hỏi khi đổi tab sang practice hoặc đổi bộ lọc
+  useEffect(() => {
+    if (activeTab === 'practice') {
+      generateNewPracticeSet();
+    }
+  }, [activeTab, scopeFilter, statusFilter, eligibleKanji.length]);
+
+  // Bật/tắt 1 danh mục dạng bài tập
+  const toggleCategory = (cat: PracticeCategory) => {
+    setSelectedCategories(prev => {
+      let next: PracticeCategory[];
+      if (prev.includes(cat)) {
+        if (prev.length === 1) return prev;
+        next = prev.filter(c => c !== cat);
+      } else {
+        next = [...prev, cat];
+      }
+      return next;
+    });
+  };
+
+  const selectAllCategories = () => {
+    setSelectedCategories(['type1_vocab', 'type2_partial', 'type3_sentence']);
+  };
+
+  const currentQ = practiceQuestions[practiceIndex] || null;
+
+  // Người dùng chọn phương án A, B, C, D
+  const handleSelectPracticeOption = (idx: number) => {
+    if (isQuestionSubmitted || !currentQ) return;
+    setSelectedOptionIdx(idx);
+    setIsQuestionSubmitted(true);
+
+    const isCorrect = idx === currentQ.correctIndex;
+    setUserPracticeAnswers(prev => ({
+      ...prev,
+      [practiceIndex]: { chosenIdx: idx, isCorrect }
+    }));
+
+    if (isCorrect) {
+      setPracticeScore(s => s + 1);
+      handlePlayAudio(currentQ.targetWord, currentQ.targetWordReading || currentQ.targetWord);
+    } else {
+      setPracticeWrongList(list => {
+        if (list.some(q => q.id === currentQ.id)) return list;
+        return [...list, currentQ];
+      });
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (practiceIndex + 1 < practiceQuestions.length) {
+      const nextIdx = practiceIndex + 1;
+      setPracticeIndex(nextIdx);
+      const existing = userPracticeAnswers[nextIdx];
+      if (existing) {
+        setSelectedOptionIdx(existing.chosenIdx);
+        setIsQuestionSubmitted(true);
+      } else {
+        setSelectedOptionIdx(null);
+        setIsQuestionSubmitted(false);
+      }
+    } else {
+      setIsPracticeFinished(true);
+    }
+  };
+
+  const handlePrevQuestion = () => {
+    if (practiceIndex > 0) {
+      const prevIdx = practiceIndex - 1;
+      setPracticeIndex(prevIdx);
+      const existing = userPracticeAnswers[prevIdx];
+      if (existing) {
+        setSelectedOptionIdx(existing.chosenIdx);
+        setIsQuestionSubmitted(true);
+      } else {
+        setSelectedOptionIdx(null);
+        setIsQuestionSubmitted(false);
+      }
+    }
+  };
+
+  const handleShufflePractice = () => {
+    if (practiceQuestions.length <= 1) return;
+    setPracticeQuestions(shuffleArray([...practiceQuestions]));
+    setPracticeIndex(0);
+    setSelectedOptionIdx(null);
+    setIsQuestionSubmitted(false);
+    setPracticeScore(0);
+    setUserPracticeAnswers({});
+    setIsPracticeFinished(false);
+  };
+
+  const handleRetryPracticeWrongs = () => {
+    if (practiceWrongList.length === 0) return;
+    setPracticeQuestions(shuffleArray([...practiceWrongList]));
+    setPracticeIndex(0);
+    setSelectedOptionIdx(null);
+    setIsQuestionSubmitted(false);
+    setPracticeScore(0);
+    setUserPracticeAnswers({});
+    setIsPracticeFinished(false);
+    setPracticeWrongList([]);
+  };
+
   return (
-    <div className="space-y-6 max-w-5xl mx-auto animate-fade-in font-sans pb-12">
-      {/* ============================================================== */}
-      {/* 1. TOP HEADER & FILTER TOOLBAR                                 */}
-      {/* ============================================================== */}
-      <div className="p-4 sm:p-6 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-4 backdrop-blur-md">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
+    <div className="space-y-6 max-w-6xl mx-auto animate-fade-in pb-12">
+      {/* ========================================================================= */}
+      {/* TOP HEADER CONTROLS (PHẠM VI & TRẠNG THÁI & SUB-TAB SWITCHER)            */}
+      {/* ========================================================================= */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 rounded-3xl shadow-sm space-y-4">
+        {/* Banner Title & Progress Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-2xl sm:text-3xl">🉐</span>
-              <h2 className="text-lg sm:text-2xl font-black text-slate-800 dark:text-slate-100">
-                Luyện Tập Chữ Hán (Kanji)
-              </h2>
+              <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-extrabold text-[11px] border border-indigo-500/20">
+                🈸 Luyện Hán Tự Tổng Hợp
+              </span>
+              <span className="text-xs font-bold text-slate-400">
+                • {eligibleKanji.length} chữ làm nguồn đề
+              </span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Phản xạ đa chiều & Nhận diện mặt chữ thực chiến qua 2 mini-game kịch tính
+            <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
+              Trung Tâm Luyện Chữ Hán (Kanji Practice Center)
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Luyện phản xạ nhanh & giải bài tập thực chiến tổng hợp theo phạm vi và trạng thái đã thuộc.
             </p>
           </div>
 
-          {/* Game Switcher (Segmented Control) */}
-          <div className="flex p-1 bg-slate-200/70 dark:bg-slate-800/70 rounded-2xl self-start md:self-auto shrink-0 shadow-inner">
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <span className="text-[11px] font-bold text-slate-400 block">ĐÃ THUỘC TRONG PHẠM VI</span>
+              <span className="text-base sm:text-lg font-black text-emerald-500">
+                {masteredCount} / {totalCount} chữ ({scopedMasteredPercent}%)
+              </span>
+            </div>
             <button
               type="button"
-              onClick={() => {
-                if (speedrunActive) setSpeedrunActive(false);
-                setActiveGame('recognition');
-              }}
-              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeGame === 'recognition'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+              onClick={() => setShowLessonMatrix(!showLessonMatrix)}
+              className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 transition-colors cursor-pointer flex items-center gap-1.5"
             >
-              <span>🎯</span>
-              <span>Nhận diện mặt chữ</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveGame('speedrun');
-              }}
-              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeGame === 'speedrun'
-                  ? 'bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-md'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <span>⚡</span>
-              <span>Luyện phản xạ</span>
+              <span>📊 Ma trận 50 bài</span>
+              <span className="text-[10px]">{showLessonMatrix ? '▲' : '▼'}</span>
             </button>
           </div>
         </div>
 
-        {/* Filter Controls Row */}
-        <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            {/* Scope Selector */}
+        {/* Per-Lesson Matrix Expandable Card */}
+        {showLessonMatrix && (
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-3 animate-in fade-in duration-150">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-extrabold text-slate-700 dark:text-slate-300">
+                Tiến độ chữ Hán đã thuộc từng bài (Bài 1 - 50):
+              </span>
+              <span className="text-[11px] text-slate-400">
+                🟢 100% | 🟡 Đang học | ⚪ Chưa học
+              </span>
+            </div>
+            <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5">
+              {Array.from({ length: 50 }, (_, i) => i + 1).map(lId => {
+                const st = perLessonKanjiStats[lId];
+                if (!st || st.total === 0) return null;
+                const isSelected = scopeFilter === lId.toString();
+                const colorBg = st.percent === 100 ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' : st.mastered > 0 ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30' : 'bg-slate-100 dark:bg-slate-900 text-slate-400 border-slate-200 dark:border-slate-800';
+                return (
+                  <button
+                    key={lId}
+                    type="button"
+                    onClick={() => setScopeFilter(isSelected ? 'level' : lId.toString())}
+                    className={`p-1.5 rounded-lg border text-center text-[10px] font-bold transition-all cursor-pointer ${colorBg} ${isSelected ? 'ring-2 ring-indigo-500 scale-105' : 'hover:opacity-80'}`}
+                    title={`Bài ${lId}: ${st.mastered}/${st.total} chữ (${st.percent}%)`}
+                  >
+                    <div>B.{lId}</div>
+                    <div className="text-[9px] font-black">{st.mastered}/{st.total}</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Toolbar: Sub-tab switcher + Scope + Status */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+          {/* Sub-tab Navigation (Nhớ mặt chữ ĐỨNG ĐẦU) */}
+          <div className="grid grid-cols-2 bg-slate-100 dark:bg-slate-950 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-inner gap-1">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('memorize');
+                setMemorizeActive(false);
+                setMemorizeGameOver(false);
+              }}
+              className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 ${
+                activeTab === 'memorize'
+                  ? 'bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-md font-extrabold'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <span>🧠</span>
+              <span>Nhớ mặt chữ</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('practice');
+                setMemorizeActive(false);
+                setMemorizeGameOver(false);
+              }}
+              className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 ${
+                activeTab === 'practice'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md font-extrabold'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <span>🎯</span>
+              <span>Luyện tập</span>
+            </button>
+          </div>
+
+          {/* Filters: Scope & Status */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Scope Filter */}
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-slate-400 dark:text-slate-500">Phạm vi:</span>
+              <span className="text-xs text-slate-400 font-bold">Phạm vi:</span>
               <select
                 value={scopeFilter}
-                onChange={(e) => setScopeFilter(e.target.value)}
-                className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer max-w-[260px] sm:max-w-none truncate"
+                onChange={e => setScopeFilter(e.target.value)}
+                className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold py-2 px-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-sm max-w-[190px] truncate"
               >
                 <option value="level">
-                  Trình độ {currentLevel} ({currentLevel === 'N5' ? 'Bài 1 - 25' : 'Bài 26 - 50'}) • {scopedMasteredPercent}% đã thuộc
+                  Trình độ {currentLevel} ({currentLevel === 'N5' ? 'Bài 1 - 25' : 'Bài 26 - 50'})
                 </option>
                 <option value="all_50">Toàn bộ 50 bài học (N5 & N4)</option>
-                <optgroup label="Từng bài học cụ thể:">
-                  {Array.from({ length: 50 }, (_, i) => i + 1).map((lNum) => {
-                    const st = perLessonKanjiStats[lNum];
-                    const badge = !st || st.total === 0 ? '' : st.percent === 100 ? '🟢' : st.mastered > 0 || st.learning > 0 ? '🟡' : '⚪';
-                    const text = st && st.total > 0 ? ` (${st.mastered}/${st.total} chữ • ${st.percent}% ${badge})` : ' (0 chữ)';
+                <optgroup label="Từng bài cụ thể:">
+                  {Array.from({ length: 50 }, (_, i) => i + 1).map(lId => {
+                    const st = perLessonKanjiStats[lId];
+                    if (!st || st.total === 0) return null;
                     return (
-                      <option key={lNum} value={lNum.toString()}>
-                        Bài {lNum} {lNum <= 25 ? '[N5]' : '[N4]'}{text}
+                      <option key={lId} value={lId.toString()}>
+                        Bài {lId} ({st.mastered}/{st.total} chữ đã thuộc)
                       </option>
                     );
                   })}
@@ -689,346 +624,529 @@ export default function CombinedKanjiPractice({
             </div>
 
             {/* Status Filter */}
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800/60 p-1 rounded-xl border border-slate-200/80 dark:border-slate-700/60">
-              <button
-                type="button"
-                onClick={() => setStatusFilter('all')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  statusFilter === 'all'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-slate-400 font-bold">Trạng thái:</span>
+              <select
+                value={statusFilter}
+                onChange={e => setStatusFilter(e.target.value as any)}
+                className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold py-2 px-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-sm"
               >
-                Tất cả ({totalCount})
-              </button>
-              <button
-                type="button"
-                onClick={() => setStatusFilter('not_learned')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  statusFilter === 'not_learned'
-                    ? 'bg-slate-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Chưa học ({notLearnedCount})
-              </button>
-              <button
-                type="button"
-                onClick={() => setStatusFilter('learning')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  statusFilter === 'learning'
-                    ? 'bg-amber-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Đang học ({learningCount})
-              </button>
-              <button
-                type="button"
-                onClick={() => setStatusFilter('mastered')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  statusFilter === 'mastered'
-                    ? 'bg-emerald-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Đã thuộc ({masteredCount})
-              </button>
+                <option value="all">Tất cả ({scopedKanji.length})</option>
+                <option value="not_learned">🔴 Chưa học ({scopedKanji.filter(k => (k.status || 'not_learned') === 'not_learned').length})</option>
+                <option value="learning">🟡 Đang học ({scopedKanji.filter(k => k.status === 'learning').length})</option>
+                <option value="mastered">🟢 Đã thuộc ({scopedKanji.filter(k => k.status === 'mastered').length})</option>
+              </select>
             </div>
-          </div>
-
-          {/* Active Kanji Pool Count Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-xs font-bold text-blue-600 dark:text-blue-400">
-            <span>📚 Khả dụng:</span>
-            <span className="font-black text-slate-800 dark:text-slate-200">{eligibleKanji.length} chữ</span>
           </div>
         </div>
+      </div>
 
-        {/* Progress Bar & Matrix Toggle Row */}
-        <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-extrabold text-slate-700 dark:text-slate-200">
-                📈 Tiến độ Kanji ({scopeFilter === 'all_50' ? '50 bài' : scopeFilter === 'level' ? `Trình độ ${currentLevel}` : `Bài ${scopeFilter}`}):
-              </span>
-              <span className="font-black text-emerald-600 dark:text-emerald-400">
-                Đã thuộc {masteredCount}/{totalCount} chữ ({scopedMasteredPercent}%)
-              </span>
-              {learningCount > 0 && (
-                <span className="text-amber-500 font-bold">
-                  • Đang học: {learningCount} chữ
+      {/* ========================================================================= */}
+      {/* 1. PHÂN HỆ 1: 🧠 NHỚ MẶT CHỮ (SPEEDRUN PHẢN XẠ NHANH ĐA BÀI HỌC)          */}
+      {/* ========================================================================= */}
+      {activeTab === 'memorize' && (
+        <div className="space-y-6">
+          {!memorizeActive && !memorizeGameOver && (
+            <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm max-w-xl mx-auto space-y-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-3xl sm:text-4xl shadow-lg shadow-amber-500/20 text-white animate-bounce">
+                🧠
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-100">
+                  Thử Thách Nhớ Mặt Chữ Kanji Tổng Hợp
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
+                  Luyện phản xạ nhanh giúp bạn nhận diện mặt chữ Hán và ý nghĩa từ <b>{eligibleKanji.length} chữ Hán</b> trong phạm vi đã chọn.
+                  Thời gian giảm dần theo chuỗi đúng (mỗi 3 câu đúng giảm 10%).
+                </p>
+              </div>
+
+              {/* Chuyển đổi 2 chiều phản xạ + Tổng hợp */}
+              <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
+                  Chiều câu hỏi phản xạ:
                 </span>
-              )}
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setMemorizeDirection('jp-to-vn')}
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                      memorizeDirection === 'jp-to-vn'
+                        ? 'bg-indigo-600 text-white shadow-sm font-extrabold'
+                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    }`}
+                  >
+                    🈸 ➔ 🇻🇳 Chữ Hán
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMemorizeDirection('vn-to-jp')}
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                      memorizeDirection === 'vn-to-jp'
+                        ? 'bg-indigo-600 text-white shadow-sm font-extrabold'
+                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    }`}
+                  >
+                    🇻🇳 ➔ 🈸 Nghĩa
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMemorizeDirection('both')}
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                      memorizeDirection === 'both'
+                        ? 'bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-sm font-extrabold'
+                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    }`}
+                  >
+                    🔀 Tổng hợp
+                  </button>
+                </div>
+              </div>
+
+              {/* High Score & Start */}
+              <div className="flex items-center justify-between px-2 text-xs">
+                <span className="text-slate-400 font-bold">Kỷ lục hiện tại:</span>
+                <span className="text-amber-500 font-black text-sm">{memorizeHighScore} điểm</span>
+              </div>
+
+              <button
+                type="button"
+                disabled={eligibleKanji.length === 0}
+                onClick={startMemorizeGame}
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:from-amber-600 hover:to-purple-700 text-white font-black text-sm shadow-xl shadow-rose-500/20 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+              >
+                {eligibleKanji.length === 0 ? 'Chưa có chữ Hán nào phù hợp bộ lọc' : '⚡ BẮT ĐẦU PHẢN XẠ NHANH'}
+              </button>
             </div>
+          )}
 
-            <button
-              type="button"
-              onClick={() => setShowLessonMatrix(!showLessonMatrix)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto border ${
-                showLessonMatrix
-                  ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
-              }`}
-            >
-              <span>📊</span>
-              <span>{showLessonMatrix ? 'Thu gọn bảng tiến độ' : 'Xem tiến độ từng bài'}</span>
-              <span className="text-[10px]">{showLessonMatrix ? '▲' : '▼'}</span>
-            </button>
-          </div>
-
-          {/* Multi-segmented Progress Bar */}
-          <div className="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden flex shadow-inner">
-            <div
-              className="bg-emerald-500 h-full transition-all duration-300"
-              style={{ width: `${scopedMasteredPercent}%` }}
-              title={`Đã thuộc: ${masteredCount} chữ (${scopedMasteredPercent}%)`}
-            />
-            <div
-              className="bg-amber-400 h-full transition-all duration-300"
-              style={{ width: `${scopedLearningPercent}%` }}
-              title={`Đang học: ${learningCount} chữ (${scopedLearningPercent}%)`}
-            />
-          </div>
-
-          {/* Interactive Per-Lesson Matrix (Collapsible Grid) */}
-          {showLessonMatrix && (
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 space-y-3 animate-in fade-in duration-200">
-              <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <span>💡</span>
-                  <span>Bấm vào bài bất kỳ để chọn nhanh phạm vi học:</span>
-                </span>
-                <div className="flex items-center gap-2 text-[11px]">
-                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-black">
-                    <span>🟢</span> 100%
+          {/* Active Gameplay */}
+          {memorizeActive && currentMemorizeQ && (
+            <div className="max-w-xl mx-auto space-y-4 animate-in fade-in duration-200">
+              <div className="flex items-center justify-between px-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-black text-amber-500">
+                    {memorizeScore} <span className="text-xs text-slate-400 font-bold">điểm</span>
                   </span>
-                  <span className="flex items-center gap-1 text-amber-500 font-black">
-                    <span>🟡</span> Đang học
-                  </span>
-                  <span className="flex items-center gap-1 text-slate-400 font-black">
-                    <span>⚪</span> Chưa học
+                  {memorizeStreak >= 3 && (
+                    <span className="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-500 border border-rose-500/20 text-xs font-black animate-pulse">
+                      🔥 Streak {memorizeStreak}
+                    </span>
+                  )}
+                </div>
+                <div className="text-right">
+                  <span className="text-xs font-bold text-slate-400">Thời gian: </span>
+                  <span className={`text-sm font-black ${memorizeTimeLeft <= 3 ? 'text-rose-500 animate-ping' : 'text-slate-700 dark:text-slate-200'}`}>
+                    {memorizeTimeLeft.toFixed(1)}s
                   </span>
                 </div>
               </div>
 
-              {/* Lesson Grid: 25 lessons of current level or 50 lessons */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2 max-h-72 overflow-y-auto pr-1">
-                {Array.from(
-                  { length: scopeFilter === 'all_50' ? 50 : 25 },
-                  (_, i) => (scopeFilter === 'all_50' ? i + 1 : (currentLevel === 'N5' ? 1 : 26) + i)
-                ).map((lNum) => {
-                  const st = perLessonKanjiStats[lNum] || { total: 0, mastered: 0, learning: 0, percent: 0 };
-                  const isCurrentScope = scopeFilter === lNum.toString();
-                  const isDone = st.total > 0 && st.percent === 100;
-                  const isLearning = st.total > 0 && (st.mastered > 0 || st.learning > 0) && st.percent < 100;
+              {/* Timer Progress Bar */}
+              <div className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-amber-500 to-rose-500 transition-all duration-100 ease-linear rounded-full"
+                  style={{ width: `${Math.max(0, Math.min(100, (memorizeTimeLeft / memorizeMaxTime) * 100))}%` }}
+                />
+              </div>
 
-                  let borderCls = 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300';
-                  let badgeCls = 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+              {/* Question Box */}
+              <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border-2 border-slate-200 dark:border-slate-800 shadow-xl space-y-3">
+                <span className="text-xs font-black text-indigo-600 dark:text-indigo-400 block">
+                  {currentMemorizeQ.promptText}
+                </span>
 
-                  if (isDone) {
-                    borderCls = 'border-emerald-500/40 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300';
-                    badgeCls = 'bg-emerald-500 text-white';
-                  } else if (isLearning) {
-                    borderCls = 'border-amber-500/40 bg-amber-50/50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-300';
-                    badgeCls = 'bg-amber-500 text-white';
-                  }
+                <div className={`font-['Noto_Sans_JP'] font-black text-slate-900 dark:text-white leading-relaxed ${
+                  currentMemorizeQ.direction === 'jp-to-vn'
+                    ? 'text-6xl sm:text-7xl py-4'
+                    : 'text-2xl sm:text-3xl py-2'
+                }`}>
+                  {currentMemorizeQ.subject}
+                </div>
+              </div>
 
-                  if (isCurrentScope) {
-                    borderCls += ' ring-2 ring-blue-500 shadow-md font-extrabold';
+              {/* 4 Choices */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {currentMemorizeQ.options.map((opt, idx) => {
+                  const letter = String.fromCharCode(65 + idx);
+                  const isChosen = idx === memorizeSelectedIdx;
+                  const isCorrect = opt.isCorrect;
+
+                  let btnStyle = 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 hover:border-indigo-500 hover:bg-indigo-500/5';
+                  let badgeStyle = 'bg-slate-100 dark:bg-slate-800 text-slate-500';
+
+                  if (memorizeSelectedIdx !== null) {
+                    if (isCorrect) {
+                      btnStyle = 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400/50';
+                      badgeStyle = 'bg-white/20 text-white';
+                    } else if (isChosen && !isCorrect) {
+                      btnStyle = 'bg-rose-500 text-white border-rose-600 shadow-md animate-shake';
+                      badgeStyle = 'bg-white/20 text-white';
+                    } else {
+                      btnStyle = 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800 text-slate-400 opacity-60';
+                    }
                   }
 
                   return (
                     <button
-                      key={lNum}
+                      key={idx}
                       type="button"
-                      onClick={() => setScopeFilter(lNum.toString())}
-                      className={`p-2 rounded-xl border text-left transition-all hover:scale-[1.02] cursor-pointer flex flex-col justify-between gap-1.5 ${borderCls}`}
+                      disabled={isEvaluatingChoice}
+                      onClick={() => handleSelectMemorizeAnswer(idx)}
+                      className={`p-4 rounded-2xl border-2 font-bold text-left transition-all duration-150 cursor-pointer shadow-sm flex items-center justify-between gap-3 active:scale-[0.98] ${btnStyle}`}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-black">Bài {lNum}</span>
-                        <span className={`text-[10px] font-black px-1.5 py-0.2 rounded-md ${badgeCls}`}>
-                          {st.total > 0 ? `${st.percent}%` : '0 chữ'}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black shrink-0 ${badgeStyle}`}>
+                          {letter}
+                        </span>
+                        <span className={`font-['Noto_Sans_JP'] font-bold truncate ${
+                          currentMemorizeQ.direction === 'vn-to-jp' ? 'text-2xl sm:text-3xl font-black' : 'text-sm sm:text-base'
+                        }`}>
+                          {opt.text}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between text-[11px] opacity-80">
-                        <span>{st.mastered}/{st.total} chữ</span>
-                        <span>{isDone ? '🟢' : isLearning ? '🟡' : '⚪'}</span>
-                      </div>
-                      {/* Mini lesson progress bar */}
-                      <div className="w-full bg-slate-200 dark:bg-slate-700/60 h-1 rounded-full overflow-hidden">
-                        <div
-                          className="bg-emerald-500 h-full"
-                          style={{ width: `${st.percent}%` }}
-                        />
-                      </div>
+
+                      {memorizeSelectedIdx !== null && isCorrect && (
+                        <span className="text-white text-base font-black shrink-0">✓</span>
+                      )}
                     </button>
                   );
                 })}
               </div>
-
-              {scopeFilter !== 'level' && scopeFilter !== 'all_50' && (
-                <div className="pt-1 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={() => setScopeFilter('level')}
-                    className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
-                  >
-                    ↺ Đặt lại: Học toàn bộ trình độ {currentLevel}
-                  </button>
-                </div>
-              )}
             </div>
           )}
-        </div>
-      </div>
 
-      {/* ============================================================== */}
-      {/* 2. GAME 1 CONTENT: NHẬN DIỆN MẶT CHỮ (AI RECOGNITION QUIZ)     */}
-      {/* ============================================================== */}
-      {activeGame === 'recognition' && (
-        <div className="space-y-4">
-          {isLoadingQuiz ? (
-            <div className="py-24 text-center bg-white dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
-              <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-              <div className="space-y-1">
-                <p className="text-sm font-bold text-slate-700 dark:text-slate-200">
-                  AI Gemini đang phân tích và sinh câu hỏi nhận diện mặt chữ...
-                </p>
-                <p className="text-xs text-slate-400">
-                  Đang thiết lập tình huống câu đố thực tế và từ vựng liên quan
-                </p>
-              </div>
-            </div>
-          ) : eligibleKanji.length === 0 ? (
-            <div className="py-20 text-center bg-white dark:bg-slate-900/60 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 space-y-3">
-              <span className="text-4xl block">📭</span>
-              <p className="text-sm font-bold text-slate-600 dark:text-slate-300">
-                Không tìm thấy chữ Hán nào thỏa mãn bộ lọc hiện tại.
-              </p>
-              <p className="text-xs text-slate-400">
-                Hãy chuyển bộ lọc trạng thái sang "Tất cả" hoặc mở rộng phạm vi bài học.
-              </p>
-            </div>
-          ) : isQuizFinished ? (
-            /* Quiz Completion Screen */
-            <div className="p-8 sm:p-12 text-center bg-white dark:bg-slate-900/80 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-6 max-w-xl mx-auto animate-fade-in">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-blue-500/10 text-blue-500 border border-blue-500/20 flex items-center justify-center text-4xl">
-                🏆
+          {/* Game Over Screen */}
+          {memorizeGameOver && (
+            <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-xl mx-auto space-y-6 animate-in zoom-in-95 duration-200">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-rose-500/10 text-rose-500 border border-rose-500/20 flex items-center justify-center text-4xl shadow-md">
+                💥
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                  HOÀN THÀNH LƯỢT LUYỆN TẬP!
+                  KẾT THÚC LƯỢT CHƠI!
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Bạn đã hoàn thành toàn bộ {quizQuestions.length} câu đố nhận diện chữ Hán
+                  {memorizeTimeLeft <= 0 ? 'Đã hết thời gian phản xạ!' : 'Bạn đã chọn chưa chính xác.'}
                 </p>
               </div>
 
-              {/* Score breakdown */}
+              {/* Score summary */}
               <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                <div>
-                  <span className="text-[11px] font-bold text-slate-400 block">ĐÚNG</span>
-                  <span className="text-3xl font-black text-emerald-500">{quizScore} / {quizQuestions.length}</span>
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-slate-400 block">ĐIỂM ĐẠT ĐƯỢC</span>
+                  <span className="text-3xl font-black text-amber-500">
+                    {memorizeScore}
+                  </span>
                 </div>
-                <div>
-                  <span className="text-[11px] font-bold text-slate-400 block">TỶ LỆ CHÍNH XÁC</span>
-                  <span className="text-3xl font-black text-blue-500">
-                    {quizQuestions.length > 0 ? Math.round((quizScore / quizQuestions.length) * 100) : 0}%
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-slate-400 block">CHUỖI ĐÚNG DÀI NHẤT</span>
+                  <span className="text-3xl font-black text-rose-500">
+                    {memorizeMaxStreak}
                   </span>
                 </div>
               </div>
 
-              {/* Action buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                {quizWrongList.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={handleRetryWrongQuestions}
-                    className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-black text-xs shadow-md shadow-rose-500/20 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-1.5"
-                  >
-                    <span>🔄 Luyện lại {quizWrongList.length} câu làm sai</span>
-                  </button>
-                )}
+              {/* Chữ Hán sai */}
+              {memorizeWrongList.length > 0 && (
+                <div className="text-left space-y-2 bg-rose-500/5 p-4 rounded-2xl border border-rose-500/20">
+                  <span className="text-xs font-bold text-rose-500 block">
+                    Chữ Hán cần chú ý ôn lại ({memorizeWrongList.length} chữ):
+                  </span>
+                  <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-1">
+                    {memorizeWrongList.map((k, i) => (
+                      <div key={i} className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-500/20 text-xs flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-black text-rose-500 font-['Noto_Sans_JP'] text-xl shrink-0">
+                            {k.character}
+                          </span>
+                          <span className="font-bold text-slate-800 dark:text-slate-100">
+                            {k.sino_vietnamese ? `[${k.sino_vietnamese}] ` : ''}{k.vietnamese_meaning}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={loadFreshQuiz}
-                  className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-md shadow-blue-500/20 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  onClick={startMemorizeGame}
+                  className="py-3 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-600 hover:to-rose-600 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer"
                 >
-                  <span>🔀 Đổi lượt câu mới (AI)</span>
+                  🔄 Chơi lại lượt mới
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMemorizeActive(false);
+                    setMemorizeGameOver(false);
+                  }}
+                  className="py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                >
+                  Quay lại màn hình chuẩn bị
                 </button>
               </div>
             </div>
-          ) : currentQuizQ ? (
-            /* Active Question Card */
-            <div className="space-y-4">
-              {/* Question Navigation Bar */}
-              <div className="flex items-center justify-between px-2">
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-black text-xs border border-blue-200 dark:border-blue-900">
-                    Câu {quizIndex + 1} / {quizQuestions.length}
-                  </span>
-                  <span className="text-xs font-bold text-slate-500">
-                    Đúng: <b className="text-emerald-500">{quizScore}</b>
+          )}
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 2. PHÂN HỆ 2: 🎯 LUYỆN TẬP (3 DẠNG THỰC CHIẾN ĐA BÀI HỌC)                 */}
+      {/* ========================================================================= */}
+      {activeTab === 'practice' && (
+        <div className="space-y-5">
+          {/* Category Selector Chips */}
+          <div className="p-3.5 sm:p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold text-slate-400 mr-1 hidden sm:inline">Dạng bài:</span>
+              <button
+                type="button"
+                onClick={selectAllCategories}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  selectedCategories.length === 3
+                    ? 'bg-indigo-600 text-white shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                }`}
+              >
+                Tất cả dạng
+              </button>
+
+              <button
+                type="button"
+                onClick={() => toggleCategory('type1_vocab')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedCategories.includes('type1_vocab')
+                    ? 'bg-indigo-500 text-white shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200'
+                }`}
+              >
+                <span>📖</span>
+                <span>Dạng 1: Từ vựng Hán tự</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => toggleCategory('type2_partial')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedCategories.includes('type2_partial')
+                    ? 'bg-amber-500 text-white shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200'
+                }`}
+              >
+                <span>🧩</span>
+                <span>Dạng 2: Từ vựng nửa vời</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => toggleCategory('type3_sentence')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedCategories.includes('type3_sentence')
+                    ? 'bg-emerald-500 text-white shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200'
+                }`}
+              >
+                <span>📝</span>
+                <span>Dạng 3: Hán tự trong câu</span>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleShufflePractice}
+                disabled={practiceQuestions.length <= 1}
+                className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer disabled:opacity-40"
+                title="Tráo đổi ngẫu nhiên câu hỏi"
+              >
+                🔀
+              </button>
+              <button
+                type="button"
+                onClick={generateNewPracticeSet}
+                className="py-1.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors cursor-pointer shadow-sm active:scale-95"
+              >
+                ✨ Đổi bộ đề ({practiceQuestions.length} câu)
+              </button>
+            </div>
+          </div>
+
+          {/* Practice Questions Screen */}
+          {practiceQuestions.length === 0 ? (
+            <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
+              <span className="text-4xl">📭</span>
+              <p className="text-sm font-bold text-slate-600 dark:text-slate-400">
+                Không tìm thấy chữ Hán nào phù hợp với bộ lọc hiện tại.
+              </p>
+              <button
+                type="button"
+                onClick={generateNewPracticeSet}
+                className="py-2.5 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
+              >
+                ✨ Tạo lại bộ đề
+              </button>
+            </div>
+          ) : isPracticeFinished ? (
+            /* Summary Screen */
+            <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-xl mx-auto space-y-6 animate-in zoom-in-95 duration-200">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-indigo-500/10 text-indigo-500 border border-indigo-500/20 flex items-center justify-center text-4xl shadow-md">
+                🎉
+              </div>
+
+              <div className="space-y-1.5">
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">
+                  HOÀN THÀNH BÀI LUYỆN TẬP TỔNG HỢP!
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Bạn đã hoàn thành thử thách toàn bộ {practiceQuestions.length} câu hỏi bài tập thực chiến đa bài học.
+                </p>
+              </div>
+
+              {/* Scorecard */}
+              <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-slate-400 block">SỐ CÂU ĐÚNG</span>
+                  <span className="text-3xl font-black text-emerald-500">
+                    {practiceScore} <span className="text-base text-slate-400 font-semibold">/ {practiceQuestions.length}</span>
                   </span>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={handleShuffleQuiz}
-                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold transition-all cursor-pointer"
-                    title="Xáo trộn câu hỏi"
-                  >
-                    🔀 Xáo trộn
-                  </button>
-                  <button
-                    type="button"
-                    onClick={loadFreshQuiz}
-                    className="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950 dark:hover:bg-indigo-900 text-indigo-600 dark:text-indigo-400 text-xs font-bold border border-indigo-200 dark:border-indigo-900 transition-all cursor-pointer"
-                    title="Yêu cầu AI sinh bộ câu hỏi mới hoàn toàn"
-                  >
-                    ✨ Đổi câu mới (AI)
-                  </button>
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-slate-400 block">TỶ LỆ CHÍNH XÁC</span>
+                  <span className="text-3xl font-black text-indigo-500">
+                    {Math.round((practiceScore / practiceQuestions.length) * 100)}%
+                  </span>
                 </div>
               </div>
 
-              {/* Main Quiz Question Prompt Card */}
-              <div className="p-6 sm:p-8 bg-white dark:bg-slate-900/80 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-4 text-center">
-                <div className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                  {currentQuizQ.question_type === 'reading_in_context'
-                    ? '🎯 Nhận diện cách đọc Kana chuẩn'
-                    : currentQuizQ.question_type === 'kanji_orthography'
-                    ? '🉐 Tìm chữ Hán viết chuẩn xác'
-                    : currentQuizQ.question_type === 'word_formation'
-                    ? '🧩 Điền chữ Hán vào từ ghép khuyết'
-                    : currentQuizQ.question_type === 'dialogue_fill'
-                    ? '💬 Điền khuyết hội thoại'
-                    : '📖 Nhận diện ý nghĩa & ngữ cảnh'}
+              {/* Missed questions review */}
+              {practiceWrongList.length > 0 && (
+                <div className="text-left space-y-2 bg-rose-500/5 p-4 rounded-2xl border border-rose-500/20">
+                  <span className="text-xs font-bold text-rose-500 block">
+                    Câu hỏi cần chú ý ôn lại ({practiceWrongList.length} câu):
+                  </span>
+                  <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-1">
+                    {practiceWrongList.map((q, i) => (
+                      <div key={i} className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-500/20 text-xs flex items-center justify-between gap-2">
+                        <div className="min-w-0">
+                          <span className="font-black text-rose-500 font-['Noto_Sans_JP'] text-sm mr-2">
+                            {q.badgeLabel}
+                          </span>
+                          <span className="font-bold text-slate-800 dark:text-slate-100 truncate font-['Noto_Sans_JP']">
+                            {q.displaySubject}
+                          </span>
+                        </div>
+                        <span className="text-xs font-bold text-emerald-500 shrink-0">
+                          Đáp án: {q.options[q.correctIndex]}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              )}
 
-                <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white leading-relaxed font-['Noto_Sans_JP']">
-                  {currentQuizQ.context_sentence || currentQuizQ.question_text}
-                </div>
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={generateNewPracticeSet}
+                  className="py-3 px-5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-xs font-black shadow-lg shadow-indigo-500/20 cursor-pointer transition-all active:scale-95"
+                >
+                  ✨ Đổi bộ đề mới
+                </button>
 
-                {currentQuizQ.question_translation && (
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                    💡 {currentQuizQ.question_translation}
-                  </p>
+                {practiceWrongList.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleRetryPracticeWrongs}
+                    className="py-3 px-4 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-extrabold text-xs shadow-md transition-all active:scale-95 cursor-pointer"
+                  >
+                    ↺ Luyện lại câu sai ({practiceWrongList.length})
+                  </button>
                 )}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPracticeIndex(0);
+                    setSelectedOptionIdx(null);
+                    setIsQuestionSubmitted(false);
+                    setPracticeScore(0);
+                    setUserPracticeAnswers({});
+                    setIsPracticeFinished(false);
+                    setPracticeWrongList([]);
+                  }}
+                  className="py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                >
+                  🔀 Làm lại đề này
+                </button>
+              </div>
+            </div>
+          ) : currentQ && (
+            /* Active Question Card */
+            <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-200">
+              {/* Question Header Toolbar */}
+              <div className="flex items-center justify-between gap-2 px-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-black text-xs">
+                    Câu {practiceIndex + 1} / {practiceQuestions.length}
+                  </span>
+
+                  {/* Badge dạng bài tập */}
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
+                    currentQ.category === 'type1_vocab'
+                      ? 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20'
+                      : currentQ.category === 'type2_partial'
+                      ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                      : 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                  }`}>
+                    {currentQ.badgeLabel}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handlePlayAudio(currentQ.targetWord, currentQ.targetWordReading)}
+                  className="p-1.5 px-2.5 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-500 border border-indigo-500/20 text-xs font-bold transition-colors cursor-pointer active:scale-95 flex items-center gap-1"
+                  title="Nghe phát âm"
+                >
+                  <span>🔊</span>
+                  <span className="hidden sm:inline">Phát âm</span>
+                </button>
               </div>
 
-              {/* 4 Interactive Options */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {currentQuizQ.options.map((opt, idx) => {
+              {/* Question Prompt & Display Box */}
+              <div className="p-5 sm:p-7 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-md space-y-3">
+                <div className="pb-2 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-xs sm:text-sm font-black text-indigo-600 dark:text-indigo-400">
+                    {currentQ.prompt}
+                  </span>
+                </div>
+
+                {/* Main Subject Text */}
+                <div className="font-['Noto_Sans_JP'] text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-relaxed whitespace-pre-line py-2">
+                  {currentQ.displaySubject}
+                </div>
+              </div>
+
+              {/* 4 Options Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {currentQ.options.map((opt, idx) => {
                   const letter = String.fromCharCode(65 + idx);
-                  const isCorrect = idx === currentQuizQ.correct_index;
+                  const isCorrect = idx === currentQ.correctIndex;
                   const isChosen = idx === selectedOptionIdx;
 
-                  let btnStyle = 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-500/5';
+                  let btnStyle = 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 hover:border-indigo-500 dark:hover:border-indigo-400 hover:bg-indigo-500/5';
                   let badgeStyle = 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400';
 
-                  if (isQuizSubmitted) {
+                  if (isQuestionSubmitted) {
                     if (isCorrect) {
                       btnStyle = 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400/50';
                       badgeStyle = 'bg-white/20 text-white';
@@ -1044,23 +1162,23 @@ export default function CombinedKanjiPractice({
                     <button
                       key={idx}
                       type="button"
-                      disabled={isQuizSubmitted}
-                      onClick={() => handleSelectQuizOption(idx)}
+                      disabled={isQuestionSubmitted}
+                      onClick={() => handleSelectPracticeOption(idx)}
                       className={`p-4 rounded-2xl border-2 font-bold text-left transition-all duration-150 cursor-pointer shadow-sm flex items-center justify-between gap-3 active:scale-[0.98] ${btnStyle}`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <span className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black shrink-0 ${badgeStyle}`}>
                           {letter}
                         </span>
-                        <span className={`font-['Noto_Sans_JP'] font-bold truncate ${opt.length <= 2 ? 'text-2xl sm:text-3xl font-black' : 'text-base sm:text-lg'}`}>
+                        <span className={`font-['Noto_Sans_JP'] font-bold truncate ${opt.length <= 2 ? 'text-xl sm:text-2xl font-black' : 'text-base sm:text-lg'}`}>
                           {opt}
                         </span>
                       </div>
 
-                      {isQuizSubmitted && isCorrect && (
+                      {isQuestionSubmitted && isCorrect && (
                         <span className="text-white text-base font-black shrink-0">✓</span>
                       )}
-                      {isQuizSubmitted && isChosen && !isCorrect && (
+                      {isQuestionSubmitted && isChosen && !isCorrect && (
                         <span className="text-white text-base font-black shrink-0">✗</span>
                       )}
                     </button>
@@ -1068,453 +1186,57 @@ export default function CombinedKanjiPractice({
                 })}
               </div>
 
-              {/* Post-Answer Detailed Feedback Card */}
-              {isQuizSubmitted && (
-                <div className="p-4 sm:p-6 rounded-3xl border bg-white dark:bg-slate-900 shadow-lg space-y-4 animate-in fade-in duration-150 border-blue-500/30">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-                    <div className="flex items-center gap-2">
-                      <span className={`text-sm sm:text-base font-black flex items-center gap-1.5 ${
-                        selectedOptionIdx === currentQuizQ.correct_index ? 'text-emerald-500' : 'text-rose-500'
-                      }`}>
-                        {selectedOptionIdx === currentQuizQ.correct_index ? '✅ Chính xác! (正解)' : '❌ Chưa đúng (不正解)'}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const audioWord = currentQuizQ.target_word || currentQuizQ.target_kanji;
-                          handlePlayAudio(audioWord, currentQuizQ.target_word_reading || audioWord);
-                        }}
-                        className="py-1 px-3 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
-                      >
-                        <span>🔊 Phát âm</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Target Word Breakdown */}
-                  <div className="flex flex-wrap items-center gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 text-xs">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-slate-400 font-bold">Mục tiêu:</span>
-                      <span className="font-['Noto_Sans_JP'] font-black text-blue-500 text-base">
-                        {currentQuizQ.target_word || currentQuizQ.target_kanji}
-                      </span>
-                      {currentQuizQ.target_word_reading && (
-                        <span className="text-slate-500 font-medium">({currentQuizQ.target_word_reading})</span>
-                      )}
-                    </div>
-                    {currentQuizQ.target_word_meaning && (
-                      <span className="text-slate-600 dark:text-slate-300 font-bold">
-                        • {currentQuizQ.target_word_meaning}
-                      </span>
-                    )}
-                    <span className="text-slate-400 text-xs ml-auto">
-                      Hán tự: <b className="font-['Noto_Sans_JP'] text-slate-800 dark:text-slate-100 text-base font-black">{currentQuizQ.target_kanji}</b>
+              {/* Detailed Post-Answer Explanation Card */}
+              {isQuestionSubmitted && (
+                <div className="p-4 sm:p-5 rounded-2xl border bg-white dark:bg-slate-900 shadow-lg space-y-3 animate-in fade-in duration-150 border-indigo-500/30">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                    <span className={`text-sm font-black flex items-center gap-1.5 ${
+                      selectedOptionIdx === currentQ.correctIndex ? 'text-emerald-500' : 'text-rose-500'
+                    }`}>
+                      {selectedOptionIdx === currentQ.correctIndex ? '✅ Chính xác! (正解)' : '❌ Chưa đúng (不正解)'}
                     </span>
+
+                    <button
+                      type="button"
+                      onClick={() => handlePlayAudio(currentQ.targetWord, currentQ.targetWordReading)}
+                      className="py-1 px-2.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-500 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <span>🔊 Phát âm</span>
+                    </button>
                   </div>
 
-                  {/* Options Comparison (4 Choices Table) */}
+                  {/* Chi tiết phân tích chữ Hán và sự kết hợp */}
                   <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 space-y-2 text-xs">
-                    <div className="flex items-center gap-1.5 font-bold text-slate-700 dark:text-slate-300 pb-1.5 border-b border-slate-200/60 dark:border-slate-800">
-                      <span>📋</span>
-                      <span>Đối chiếu 4 phương án lựa chọn:</span>
+                    <div className="flex items-center gap-1.5 font-bold text-slate-700 dark:text-slate-300">
+                      <span>💡</span>
+                      <span>Giải thích chi tiết cấu tạo & ý nghĩa Hán tự:</span>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                      {currentQuizQ.options.map((opt, i) => {
-                        const isAns = i === currentQuizQ.correct_index;
-                        const isUserChoice = i === selectedOptionIdx;
-                        const letter = String.fromCharCode(65 + i);
-                        const meaning = (currentQuizQ.options_meanings && currentQuizQ.options_meanings[i]) || '';
-                        return (
-                          <div
-                            key={i}
-                            className={`p-2.5 rounded-xl text-xs flex items-center justify-between border transition-all ${
-                              isAns
-                                ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 font-bold'
-                                : isUserChoice
-                                ? 'bg-rose-500/10 border-rose-500/30 text-rose-500'
-                                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
-                            }`}
-                          >
-                            <div className="flex items-center gap-2 min-w-0">
-                              <span
-                                className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black shrink-0 ${
-                                  isAns
-                                    ? 'bg-emerald-500 text-white'
-                                    : isUserChoice
-                                    ? 'bg-rose-500 text-white'
-                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
-                                }`}
-                              >
-                                {letter}
-                              </span>
-                              <span className="font-['Noto_Sans_JP'] font-bold truncate text-sm">
-                                {opt}
-                              </span>
-                              {meaning && (
-                                <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
-                                  ({meaning})
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-[10px] font-semibold shrink-0 ml-1">
-                              {isAns ? '✓ Đúng' : isUserChoice ? '✗ Đã chọn' : 'Nhiễu'}
-                            </span>
-                          </div>
-                        );
-                      })}
+                    <div className="text-slate-800 dark:text-slate-200 font-medium leading-relaxed whitespace-pre-line text-xs sm:text-sm pl-1">
+                      {currentQ.explanation}
                     </div>
                   </div>
 
-                  {/* Detailed Explanation */}
-                  {currentQuizQ.explanation && (
-                    <div className="p-3.5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-900/40 text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
-                      {currentQuizQ.explanation}
-                    </div>
-                  )}
-
-                  {/* Quick Status Updater */}
-                  {(() => {
-                    const matchedKanji = kanjiList.find(k => k.character === currentQuizQ.target_kanji);
-                    if (!matchedKanji) return null;
-                    return (
-                      <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800">
-                        <span className="text-xs font-bold text-slate-500">
-                          Trạng thái chữ Hán 【{matchedKanji.character}】:
-                        </span>
-                        <div className="flex items-center gap-1.5">
-                          <button
-                            type="button"
-                            onClick={() => handleQuickStatusChange(matchedKanji, 'not_learned')}
-                            className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                              (matchedKanji.status || 'not_learned') === 'not_learned'
-                                ? 'bg-slate-700 text-white shadow-xs'
-                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
-                            }`}
-                          >
-                            Chưa học
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleQuickStatusChange(matchedKanji, 'learning')}
-                            className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                              matchedKanji.status === 'learning'
-                                ? 'bg-amber-600 text-white shadow-xs'
-                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
-                            }`}
-                          >
-                            Đang học
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleQuickStatusChange(matchedKanji, 'mastered')}
-                            className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                              matchedKanji.status === 'mastered'
-                                ? 'bg-emerald-600 text-white shadow-xs'
-                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
-                            }`}
-                          >
-                            Đã thuộc ⭐
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })()}
-
-                  {/* Navigation Footer */}
-                  <div className="pt-2 flex justify-between items-center">
+                  {/* Navigation Buttons */}
+                  <div className="flex items-center justify-between pt-2">
                     <button
                       type="button"
-                      onClick={handlePrevQuizQuestion}
-                      disabled={quizIndex === 0}
-                      className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                      onClick={handlePrevQuestion}
+                      disabled={practiceIndex === 0}
+                      className="py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 cursor-pointer"
                     >
-                      ⬅ Câu trước
+                      ← Câu trước
                     </button>
+
                     <button
                       type="button"
-                      onClick={handleNextQuizQuestion}
-                      className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-black shadow-md shadow-blue-500/25 active:scale-95 transition-all cursor-pointer"
+                      onClick={handleNextQuestion}
+                      className="py-2.5 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
                     >
-                      {quizIndex + 1 < quizQuestions.length ? 'Câu tiếp theo ➔' : 'Xem kết quả tổng kết ➔'}
+                      <span>{practiceIndex + 1 < practiceQuestions.length ? 'Câu tiếp theo ➔' : 'Xem tổng kết ➔'}</span>
                     </button>
                   </div>
                 </div>
               )}
-            </div>
-          ) : null}
-        </div>
-      )}
-
-      {/* ============================================================== */}
-      {/* 3. GAME 2 CONTENT: SPEEDRUN LUYỆN PHẢN XẠ KANJI               */}
-      {/* ============================================================== */}
-      {activeGame === 'speedrun' && (
-        <div className="space-y-6">
-          {/* Speedrun Lobby / Start Screen */}
-          {!speedrunActive && !speedrunGameOver && (
-            <div className="p-8 sm:p-12 text-center bg-white dark:bg-slate-900/80 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-6 max-w-xl mx-auto">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500 to-rose-500 text-white flex items-center justify-center text-4xl shadow-lg shadow-rose-500/30 animate-pulse">
-                ⚡
-              </div>
-
-              <div className="space-y-1">
-                <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                  SPEEDRUN LUYỆN PHẢN XẠ KANJI
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Phản xạ nhịp độ cao: Chuỗi combo càng dài thời gian càng rút ngắn!
-                </p>
-              </div>
-
-              {/* Reflection Direction Options */}
-              <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
-                  Chiều câu hỏi phản xạ:
-                </span>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setSpeedrunDirection('both')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
-                      speedrunDirection === 'both'
-                        ? 'bg-blue-600 text-white shadow-sm font-black'
-                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
-                    }`}
-                  >
-                    🔄 Toàn diện (Hỗn hợp)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSpeedrunDirection('kanji-to-meaning')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
-                      speedrunDirection === 'kanji-to-meaning'
-                        ? 'bg-blue-600 text-white shadow-sm font-black'
-                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
-                    }`}
-                  >
-                    🇯🇵 ➔ 🇻🇳 Kanji ➔ Nghĩa
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSpeedrunDirection('meaning-to-kanji')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
-                      speedrunDirection === 'meaning-to-kanji'
-                        ? 'bg-blue-600 text-white shadow-sm font-black'
-                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
-                    }`}
-                  >
-                    🇻🇳 ➔ 🇯🇵 Nghĩa ➔ Kanji
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSpeedrunDirection('kanji-vocab')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
-                      speedrunDirection === 'kanji-vocab'
-                        ? 'bg-blue-600 text-white shadow-sm font-black'
-                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
-                    }`}
-                  >
-                    📖 Kanji trong từ vựng
-                  </button>
-                </div>
-              </div>
-
-              {/* High Score Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-500/10 text-amber-500 border border-amber-500/20 text-xs font-black">
-                <span>🏆 Kỷ lục cao nhất:</span>
-                <span className="text-base">{speedrunHighScore} điểm</span>
-              </div>
-
-              <div>
-                <button
-                  type="button"
-                  disabled={eligibleKanji.length === 0}
-                  onClick={startSpeedrun}
-                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-red-500 hover:from-amber-400 hover:to-red-400 text-white font-black text-sm shadow-lg shadow-rose-500/25 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  <span>🚀 BẮT ĐẦU SPEEDRUN ({eligibleKanji.length} CHỮ)</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Speedrun Active Playing Interface */}
-          {speedrunActive && currentSpeedrunQ && (
-            <div className="max-w-xl mx-auto space-y-4 animate-fade-in">
-              {/* Dynamic Countdown Bar */}
-              <div className="bg-slate-200 dark:bg-slate-800 rounded-full h-3 overflow-hidden shadow-inner">
-                <div
-                  className={`h-full transition-all duration-75 rounded-full ${
-                    speedrunTimeLeft > speedrunMaxTime * 0.5
-                      ? 'bg-emerald-500'
-                      : speedrunTimeLeft > speedrunMaxTime * 0.25
-                      ? 'bg-amber-500'
-                      : 'bg-rose-500 animate-pulse'
-                  }`}
-                  style={{ width: `${Math.max(0, Math.min(100, (speedrunTimeLeft / speedrunMaxTime) * 100))}%` }}
-                />
-              </div>
-
-              {/* Status Header */}
-              <div className="flex items-center justify-between px-2 text-xs font-bold">
-                <div className="flex items-center gap-1.5 text-slate-400 font-extrabold uppercase tracking-wider">
-                  <span>⏱️</span>
-                  <span>{speedrunTimeLeft}s</span>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <span className="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 font-black">
-                    🔥 Streak: {speedrunStreak}
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20 font-black">
-                    ⭐ Điểm: {speedrunScore}
-                  </span>
-                </div>
-              </div>
-
-              {/* Question Card */}
-              <div className="p-6 sm:p-8 text-center bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-lg space-y-3">
-                <div className="text-xs sm:text-sm font-black text-amber-600 dark:text-amber-400">
-                  {currentSpeedrunQ.promptText || '👉 Chọn đáp án đúng:'}
-                </div>
-
-                <div className={`font-black font-['Noto_Sans_JP'] text-slate-900 dark:text-white ${
-                  currentSpeedrunQ.subject.length <= 2
-                    ? 'text-6xl sm:text-7xl py-2'
-                    : currentSpeedrunQ.subject.length <= 4
-                    ? 'text-3xl sm:text-4xl py-2'
-                    : 'text-base sm:text-lg md:text-xl py-2 leading-relaxed'
-                }`}>
-                  {currentSpeedrunQ.subject}
-                </div>
-
-                {currentSpeedrunQ.subText && (
-                  <div className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/20 inline-block">
-                    {currentSpeedrunQ.subText}
-                  </div>
-                )}
-              </div>
-
-              {/* 4 Speedrun Options */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {currentSpeedrunQ.options.map((opt, idx) => {
-                  const isSingleKanji = opt.text.length <= 2 && /[\u4e00-\u9faf]/.test(opt.text);
-                  const isSelected = speedrunSelectedIdx === idx;
-
-                  let btnStyle = 'bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-400 text-slate-800 dark:text-slate-100 hover:bg-amber-500/5';
-                  if (isSelected) {
-                    if (speedrunIsAnswerCorrect) {
-                      btnStyle = 'bg-emerald-500 text-white border-emerald-600 ring-2 ring-emerald-400 shadow-lg';
-                    } else {
-                      btnStyle = 'bg-rose-500 text-white border-rose-600 ring-2 ring-rose-400 shadow-lg';
-                    }
-                  }
-
-                  return (
-                    <button
-                      key={idx}
-                      type="button"
-                      disabled={speedrunSelectedIdx !== null}
-                      onClick={() => handleSpeedrunAnswer(opt, idx)}
-                      className={`p-4 rounded-2xl border-2 font-bold transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 active:scale-95 ${
-                        isSingleKanji
-                          ? 'text-3xl sm:text-4xl font-black font-[\'Noto_Sans_JP\'] py-5'
-                          : 'text-xs sm:text-sm py-4 px-4 text-center'
-                      } ${btnStyle}`}
-                    >
-                      <span>{opt.text}</span>
-                      {isSelected && speedrunIsAnswerCorrect && (
-                        <span className="text-white text-base font-black shrink-0">✓</span>
-                      )}
-                      {isSelected && speedrunIsAnswerCorrect === false && (
-                        <span className="text-white text-base font-black shrink-0">✗</span>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Speedrun Game Over Screen */}
-          {speedrunGameOver && (
-            <div className="p-8 sm:p-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-lg mx-auto space-y-6 animate-fade-in">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-rose-500/10 text-rose-500 border border-rose-500/20 flex items-center justify-center text-4xl">
-                💥
-              </div>
-
-              <div className="space-y-1">
-                <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                  LƯỢT CHƠI KẾT THÚC!
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {speedrunTimeLeft <= 0.05 ? 'Hết thời gian phản xạ!' : 'Bạn đã chọn sai đáp án!'}
-                </p>
-              </div>
-
-              {/* Final Scoreboard */}
-              <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                <div className="space-y-1">
-                  <span className="text-[11px] font-bold text-slate-400 block">ĐIỂM ĐẠT ĐƯỢC</span>
-                  <span className="text-3xl font-black text-amber-500">{speedrunScore}</span>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[11px] font-bold text-slate-400 block">CHUỖI ĐÚNG (MAX)</span>
-                  <span className="text-3xl font-black text-rose-500">{speedrunMaxStreak}</span>
-                </div>
-              </div>
-
-              {/* Review Missed Kanji List */}
-              {speedrunWrongList.length > 0 && (
-                <div className="text-left space-y-2 pt-2">
-                  <span className="text-xs font-bold text-slate-400 block">
-                    Chữ Hán cần chú ý ôn lại ({speedrunWrongList.length} chữ):
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
-                    {speedrunWrongList.map(k => (
-                      <div
-                        key={k.id}
-                        className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="text-2xl font-black font-['Noto_Sans_JP'] text-slate-900 dark:text-white">
-                            {k.character}
-                          </span>
-                          <div>
-                            <span className="text-xs font-bold text-purple-600 dark:text-purple-400 block">
-                              {k.sino_vietnamese || 'HÁN TỰ'}
-                            </span>
-                            <span className="text-[11px] text-slate-500 block truncate max-w-[120px]">
-                              {k.vietnamese_meaning}
-                            </span>
-                          </div>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => handlePlayAudio(k.character)}
-                          className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-500 flex items-center justify-center text-xs"
-                          title="Nghe phát âm"
-                        >
-                          🔊
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Play Again Button */}
-              <button
-                type="button"
-                onClick={startSpeedrun}
-                className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-red-500 hover:from-amber-400 hover:to-red-400 text-white font-black text-sm shadow-lg shadow-rose-500/25 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
-              >
-                <span>🔄 CHƠI LẠI NGAY</span>
-              </button>
             </div>
           )}
         </div>

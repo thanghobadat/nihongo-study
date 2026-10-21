@@ -2749,3 +2749,32 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
   - Dev server Next.js biên dịch hoàn tất, sẵn sàng phục vụ người dùng trải nghiệm thực tế.
   - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
+
+### Mốc 172: Cải Tổ Toàn Diện Trang Tổng Hợp Kiến Thức (/knowledge): Loại Bỏ Tự Luận & Hán Tự Trong Luyện Từ Vựng, Chuẩn Hóa Phân Hệ Luyện Kanji Đa Bài Học (21/10/2026)
+- **Bối cảnh & Chỉ đạo từ người dùng**:
+  1. **Tab ✏️ Luyện từ vựng**:
+     - Loại bỏ hoàn toàn chế độ `✍️ Tự luận`, chỉ giữ lại `⚡ Phản xạ nhanh`.
+     - Loại bỏ chữ Hán (Kanji) trong phần phản xạ từ vựng: Bỏ bộ chọn `[📖 Từ vựng] / [🈸 Hán tự (Kanji)]` (cố định mục tiêu là từ vựng Kana), bỏ dòng chữ Hán phụ `({kanji_form})` bên dưới câu hỏi. Đảm bảo phản xạ từ vựng thuần túy giữa Kana và Tiếng Việt.
+  2. **Tab 🈸 Luyện Hán tự (`CombinedKanjiPractice.tsx`)**:
+     - Chuẩn hóa cấu trúc và cơ chế tương tự như phân hệ Luyện Kanji của từng bài học (`KanjiPracticeTab.tsx`):
+       - Phân hệ 1: `🧠 Nhớ mặt chữ` (đặt lên đầu, mặc định): Speedrun phản xạ 2 chiều (`🈸 ➔ 🇻🇳`, `🇻🇳 ➔ 🈸`, `🔀 Tổng hợp`).
+       - Phân hệ 2: `🎯 Luyện tập` (đặt thứ hai): 3 dạng bài tập thực chiến (Dạng 1: Từ vựng Hán tự 100% Kanji, Dạng 2: Từ vựng nửa vời, Dạng 3: Hán tự trong câu) sinh từ `generatePracticeQuestions` (`kanjiOverhaulHelper.ts`).
+     - Cơ chế nguồn đề đa bài học linh hoạt:
+       - Lấy chữ Hán mục tiêu `eligibleKanji` theo tổ hợp **Phạm vi** (N5 [Bài 1-25], N4 [Bài 26-50], Toàn bộ 50 bài, hoặc từng bài cụ thể) $\times$ **Trạng thái** (`Tất cả`, `🔴 Chưa học`, `🟡 Đang học`, `🟢 Đã thuộc`).
+       - Ví dụ thực tế: Khi người dùng chọn trạng thái `🟢 Đã thuộc` và phạm vi N5, nguồn chữ Hán để sinh câu hỏi thực chiến và phản xạ là toàn bộ các chữ đã thuộc của tất cả các bài (Bài 1, Bài 2, Bài 3...), không giới hạn trong 1 bài đơn lẻ.
+       - Tuân thủ cơ chế cốt lõi: 100% chữ Hán trong options trắc nghiệm, triệt tiêu Hiragana gây lộ đáp án, khử trùng lặp đáp án bằng `Set`, và thẻ giải thích chi tiết chuẩn hóa bóc tách từng chữ Hán cấu thành kèm Romaji.
+- **Giải pháp triển khai**:
+  - Tại [website/frontend/src/app/knowledge/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/knowledge/page.tsx):
+    - Đặt `practiceType` cố định là `'speedrun'`, xóa bỏ hoàn toàn toggle tự luận và toàn bộ khối giao diện tự luận `practiceType === 'write'`.
+    - Di chuyển bộ chọn phạm vi bài học (`practiceScopeFilter`) vào thẳng thẻ thiết lập Speedrun.
+    - Xóa bỏ bộ chọn mục tiêu `speedrunTarget` (`vocab`/`kanji`), cố định 100% là Từ vựng.
+    - Xóa hiển thị chữ Hán phụ `({speedrunQuestion.kanji_form || getGlobalKanjiForm(...)})` trong gameplay phản xạ từ vựng.
+    - Truyền `grammarList={grammarList}` vào component `CombinedKanjiPractice`.
+  - Tại [website/frontend/src/app/components/CombinedKanjiPractice.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/CombinedKanjiPractice.tsx):
+    - Tái cấu trúc thành 2 phân hệ: `🧠 Nhớ mặt chữ` (mặc định) và `🎯 Luyện tập`.
+    - Tích hợp `generatePracticeQuestions` từ [kanjiOverhaulHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiOverhaulHelper.ts) cho phân hệ Luyện tập.
+    - Hỗ trợ bộ lọc phạm vi đa tầng kết hợp trạng thái học (`eligibleKanji`), cho phép luyện tập tổng hợp chữ Hán đã thuộc từ nhiều bài học cùng lúc.
+- **Kiểm định & Xác thực**:
+  - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
+  - Dev server Next.js biên dịch hoàn tất, `GET http://localhost:3000/knowledge` trả về HTTP 200 OK.
+  - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
