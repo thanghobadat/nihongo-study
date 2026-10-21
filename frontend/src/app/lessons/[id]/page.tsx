@@ -7114,6 +7114,7 @@ const renderInteractivePractice = () => {
                     <KanjiPracticeTab
                       kanjiItems={kanjiItems}
                       vocabItems={vocabItems}
+                      grammarItems={grammarItems}
                       selectedLessonId={selectedLessonId}
                       lessonTitle={lessonTitle}
                       onUpdateKanjiStatus={handleKanjiStatusChange}

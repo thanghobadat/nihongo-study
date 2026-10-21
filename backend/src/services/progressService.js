@@ -63,13 +63,13 @@ function savePersistentReviewSessions(sessions) {
 if (!mockDb.userProgress) mockDb.userProgress = {};
 try {
   const loaded = loadPersistentProgress();
-  mockDb.userProgress = { ...loaded, ...mockDb.userProgress };
+  mockDb.userProgress = { ...mockDb.userProgress, ...loaded };
 } catch (e) {}
 
 if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
 try {
   const loadedSessions = loadPersistentReviewSessions();
-  mockDb.userReviewSessions = { ...loadedSessions, ...mockDb.userReviewSessions };
+  mockDb.userReviewSessions = { ...mockDb.userReviewSessions, ...loadedSessions };
 } catch (e) {}
 
 /**

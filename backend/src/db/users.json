@@ -1,5 +1,12 @@
 [
   {
+    "id": "ce21492c-06db-4d03-8590-4f5e7d6bac18",
+    "email": "hoangthanhdev123@gmail.com",
+    "password": "Password123!",
+    "displayName": "ThanhNH33",
+    "role": "user"
+  },
+  {
     "id": "user-1781344343083",
     "email": "hoangthanh01022000@gmail.com",
     "password": "Password123!",

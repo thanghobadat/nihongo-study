@@ -2647,3 +2647,105 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Next.js 16 Production Build: `npm run build` thành công 100% (16/16 routes) trong 4.1s (PASS).
   - Dev server Backend (port 8080) và Frontend (port 3000) tiếp tục chạy ổn định.
   - Tuân thủ Rule 5: Không tự động commit hay push mã nguồn khi chưa có yêu cầu trực tiếp.
+
+### Mốc 168: Cải Tổ Toàn Diện Phân Hệ Luyện Hán Tự - Tinh Giản "Nhớ Mặt Chữ" & Phát Triển "Luyện Tập" 3 Dạng Thực Chiến Lũy Tiến (Đã hoàn thành cục bộ - 21/10/2026)
+- **Bối cảnh & Yêu cầu từ người dùng**:
+  - Tái cấu trúc toàn diện trang Luyện tập Kanji (`KanjiPracticeTab.tsx`) tập trung vào 2 phân hệ chính:
+    1. *Nhớ mặt chữ (trước đây là Luyện phản xạ / Speedrun)*: Bỏ tab ôn từ vựng phức tạp, chỉ giữ lại 3 tùy chọn: JP -> VN, VN -> JP và Tổng hợp, phục vụ mục tiêu duy nhất là ghi nhớ mặt chữ Hán và ý nghĩa của bài.
+    2. *Luyện tập (trước đây là Nhận diện mặt chữ)*: Xây dựng 3 dạng bài tập thực chiến có bộ lọc chọn dạng linh hoạt:
+       - **Dạng 1 (Từ vựng Hán tự)**: Hỏi nghĩa/Hiragana -> Chọn dạng chữ Hán tương ứng, áp dụng cơ chế bán Kanji lũy tiến (chữ chưa có trạng thái `mastered` thì viết Hiragana, chữ đã `mastered` thì viết Kanji, ví dụ: `でんわ` -> `電わ` nếu `話` chưa thuộc; `電話` nếu `話` đã thuộc).
+       - **Dạng 2 (Từ vựng nửa vời)**: Điền khuyết từ ghép $\ge 2$ chữ Kanji (hỗ trợ cả từ ghép 3 chữ như `会社いん` -> `会【 ? 】いん`).
+       - **Dạng 3 (Hán tự trong câu - Tỷ lệ 50/50)**: Dạng 3.1 (Câu Hiragana tìm Kanji) & Dạng 3.2 (Điền khuyết trong câu).
+  - 3 lưu ý sư phạm bắt buộc:
+    - Giải thích chi tiết cấu tạo từng chữ Hán, nguồn gốc bài học, chữ chưa học (bạn sẽ học ở Bài Y), và ý nghĩa kết hợp.
+    - Không chêm tiếng Việt vào câu hỏi/đáp án tiếng Nhật.
+    - 100% câu hỏi Dạng 3 lấy từ ví dụ bài học quen thuộc của người học (`vocabulary`, `grammar`), không tự bịa câu lạ.
+- **Giải pháp triển khai**:
+  - Tạo mới module [kanjiOverhaulHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiOverhaulHelper.ts):
+    - Xây dựng `KANJI_COMPOUND_BREAKDOWN` lưu trữ cấu trúc phân rã của các từ ghép N5/N4.
+    - Xây dựng `GLOBAL_KANJI_META` lưu thông tin âm Hán, nghĩa, bài học của các chữ Hán.
+    - Xây dựng hàm `toProgressiveKanjiWord` chuyển đổi thông minh sang dạng bán Kanji lũy tiến dựa theo trạng thái `mastered` của học viên.
+    - Xây dựng trình sinh câu hỏi thực chiến `generatePracticeQuestions` sinh 3 dạng bài tập với giải thích sư phạm chi tiết và 100% câu ví dụ thực tế.
+  - Cải tổ toàn diện [KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx):
+    - Đổi 2 tab chính: `🎯 Luyện tập` và `🧠 Nhớ mặt chữ`.
+    - Tab `🎯 Luyện tập`: Tích hợp bộ lọc dạng bài (Dạng 1, Dạng 2, Dạng 3, Tất cả), giao diện câu hỏi trực quan, 4 phương án rõ ràng, thẻ giải thích chi tiết nổi bật ngay sau khi chọn đáp án, màn hình tổng kết & luyện lại câu sai.
+    - Tab `🧠 Nhớ mặt chữ`: Tinh giản chỉ gồm 3 chiều phản xạ `🈸 ➔ 🇻🇳 Chữ Hán`, `🇻🇳 ➔ 🈸 Nghĩa` và `🔀 Tổng hợp`.
+    - Cập nhật [lessons/[id]/page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/page.tsx) truyền thêm `grammarItems` cho `KanjiPracticeTab`.
+- **Kiểm định & Xác thực**:
+  - Unit test kịch bản `scratch/test_kanji_overhaul.js`: 100% PASS cả 4 ca kiểm thử bán Kanji (`電話` -> `電わ` / `電話`, `教室` -> `きょう室`, `会社員` -> `会社いん`).
+  - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
+  - Next.js 16 Production Build (`npm run build -w frontend`): 100% PASS trong 8.4s (16/16 routes tạo thành công).
+  - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub nếu chưa có yêu cầu trực tiếp.
+
+### Mốc 169: Đồng Bộ Trạng Thái Học Tập Từ Supabase Online Về Local & Khởi Chạy Môi Trường Kiểm Thử Thực Tế (21/10/2026)
+- **Bối cảnh & Yêu cầu từ người dùng**:
+  - Tải toàn bộ trạng thái học tập thực tế từ website online (Supabase Cloud Database) về cập nhật cho môi trường cục bộ (local).
+  - Khởi chạy đồng thời cả Backend và Frontend để người dùng truy cập trực tiếp kiểm thử tình trạng thực tế và các tính năng mới nâng cấp (đặc biệt là phân hệ Luyện tập Hán tự lũy tiến ở Mốc 168).
+- **Giải pháp triển khai**:
+  - Cập nhật biến môi trường `SUPABASE_URL=https://bwkpcxpidtjqfyztvcly.supabase.co` trong [website/backend/.env](file:///d:/AI/japanese_learning/website/backend/.env).
+  - Xây dựng và thực thi script phân trang trọn vẹn `scratch/sync_cloud_to_local.js` kết nối qua `supabase.js`:
+    - Đồng bộ thành công 100% dữ liệu: 1512 bản ghi `user_progress` (với 1125 mục `mastered`), 3 kế hoạch học tập `user_study_plans`, 14 bản ghi `user_study_time`, và 4 phiên `user_review_sessions`.
+    - Đồng bộ song song cho tài khoản chính `ce21492c-06db-4d03-8590-4f5e7d6bac18` (Email: `hoangthanhdev123@gmail.com`) cùng các alias kiểm thử local (`user123`, `user-1781344343083`) vào:
+      - [user_progress.json](file:///d:/AI/japanese_learning/website/backend/src/db/user_progress.json)
+      - [study_plans.json](file:///d:/AI/japanese_learning/website/backend/src/db/study_plans.json)
+      - [user_study_time.json](file:///d:/AI/japanese_learning/website/backend/src/db/user_study_time.json)
+      - [user_review_sessions.json](file:///d:/AI/japanese_learning/website/backend/src/db/user_review_sessions.json)
+      - [users.json](file:///d:/AI/japanese_learning/website/backend/src/db/users.json)
+    - Tinh chỉnh `progressService.js` đảm bảo nạp dữ liệu từ persistent json file có độ ưu tiên cao nhất khi nạp vào bộ nhớ cache.
+  - Khởi chạy các dịch vụ daemon:
+    - Backend Express API chạy trên cổng `http://localhost:8080`.
+    - Frontend Next.js (Turbopack) chạy trên cổng `http://localhost:3000`.
+- **Kiểm định & Xác thực**:
+  - `GET http://localhost:8080/api/health`: 200 OK (`{"status":"ok"}`).
+  - `GET http://localhost:3000`: 200 OK.
+  - `GET http://localhost:3000/lessons/1`: 200 OK.
+  - Môi trường hoàn toàn sẵn sàng phục vụ người dùng trải nghiệm thực tế.
+
+### Mốc 170: Chuẩn Hóa Phân Hệ Luyện Tập Hán Tự & Cập Nhật Thẻ Giải Thích Chi Tiết (Bỏ Romaji Câu) (21/10/2026)
+- **Bối cảnh & Yêu cầu từ người dùng**:
+  - Dựa trên phản hồi thực tế khi người dùng trải nghiệm trên `http://localhost:3000/lessons/3`:
+    1. **Dạng 2 (Từ vựng nửa vời)**: Bỏ hoàn toàn phần dịch nghĩa tiếng Việt kèm theo trong câu hỏi (ví dụ: `「【 ? 】わ」＝ でんわ (Điện thoại)` -> chuyển thành thuần tiếng Nhật `「【 ? 】わ」＝ でんわ`).
+    2. **Dạng 3.1 (Hán tự trong câu)**: Khắc phục triệt để việc lộ phương án do Hiragana. Khi câu có từ bán Kanji như `ここは きょうしつ です`, trước đây khoanh cả cụm `【 きょうしつ 】` dẫn đến 4 phương án là `きょう室`, `じむ所`, `会しゃ`... khiến người học chỉ nhìn Hiragana `きょう` là đoán được. Giải pháp: Trong câu chỉ khoanh đúng âm đọc của chữ Hán mục tiêu `ここは きょう【 しつ 】 です。`, và 4 phương án trả lời 100% là các chữ Kanji đơn lẻ (`室`, `所`, `校`, `店`).
+    3. **Chuẩn hóa thẻ Giải thích chi tiết**:
+       - Bỏ dòng Romaji của cả câu theo yêu cầu người dùng ("bỏ Romaji câu").
+       - Giữ Romaji ở 2 vị trí quan trọng: Từ vựng hoàn chỉnh và âm đọc của từng chữ Hán cấu thành.
+       - Cấu trúc mẫu chuẩn:
+         ```text
+         🇻🇳 Dịch nghĩa câu: "Văn phòng ở đó."
+         【Từ hoàn chỉnh】: 事務所 (じむしょ • Romaji: jimusho: Văn phòng)
+         • Bài 20: 【事】 (Âm Hán: SỰ - Nghĩa: Sự việc, việc - Romaji: ji)
+         • Bài 24: 【務】 (Âm Hán: VỤ - Nghĩa: Nhiệm vụ, công việc - Romaji: mu)
+         • Bài 3: 【所】 (Âm Hán: SỞ - Nghĩa: Nơi chốn, văn phòng - Romaji: sho)
+         ```
+    4. **Sửa lỗi metadata chữ Hán**: Chữ `外` bị hiển thị nhầm là `Bài 3` do fallback `currentLessonId`. Cập nhật `GLOBAL_KANJI_META` đầy đủ các chữ Hán N5/N4 (`外` Bài 11, `事` Bài 20, `務` Bài 24, `部` Bài 23, `屋` Bài 3, `受`/`付` Bài 37, `階`/`段` Bài 18, `靴` Bài 19, `地`/`鉄` Bài 13, `教` Bài 7, `話` Bài 14...), và fallback mặc định `lesson: 0`.
+- **Giải pháp triển khai trong [kanjiOverhaulHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiOverhaulHelper.ts)**:
+  - Bổ sung hàm tiện ích `kanaToRomaji(kana: string)` chuẩn Hepburn chuyển đổi âm đọc Hiragana sang Romaji offline.
+  - Bổ sung và cập nhật bài học chính xác của tất cả các chữ Hán trong `GLOBAL_KANJI_META`.
+  - Hàm `buildKanjiExplanation`: Sinh format giải thích chi tiết chuẩn hóa theo đúng khuôn mẫu người dùng yêu cầu (không có Romaji câu, có dịch nghĩa câu tiếng Việt, từ vựng hoàn chỉnh kèm Romaji, và phân tích từng chữ Hán kèm bài học, âm Hán, nghĩa, Romaji).
+  - Dạng 2: Bỏ nghĩa tiếng Việt khỏi `displayPrompt`: `「${maskedWord}」＝ ${cVocab.hiragana}`.
+  - Dạng 3.1: Chỉ khoanh `【 ${targetReading} 】` trong câu, 4 phương án tráo ngẫu nhiên là 100% chữ Kanji đơn lẻ.
+- **Kiểm định & Xác thực**:
+  - Viết kịch bản kiểm thử độc lập `scratch/test_kanji_overhaul_v2.js` chạy bằng `tsx`: 100% PASS cho cả 12 câu hỏi (Dạng 1, Dạng 2, Dạng 3.1, Dạng 3.2).
+  - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
+  - Dev server Next.js tự động recompile trong ~100ms, phục vụ người dùng test trực tiếp tại `http://localhost:3000/lessons/3?tab=practice`.
+  - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
+
+### Mốc 171: Thiết Lập Cơ Chế Cốt Lõi Triệt Tiêu Hiragana Trong Options Luyện Tập & Đưa Phân Hệ "Nhớ Mặt Chữ" Lên Đầu (21/10/2026)
+- **Bối cảnh & Chỉ đạo từ người dùng**:
+  - Khi trải nghiệm câu hỏi Dạng 1 (`「へや」`), hệ thống hiển thị đáp án `へ屋` (vẫn còn dính ký tự Hiragana `へ`), đồng thời các phương án sai bị trùng lặp (`食堂` - `食堂`). Sự xuất hiện của Hiragana làm lộ ngay đáp án vì người học chỉ cần nhìn chữ `へ` là chọn được mà không cần nhận diện chữ Hán `屋`.
+  - Người dùng yêu cầu thiết lập **cơ chế hệ thống cốt lõi**: Tuyệt đối không được để từ chứa Hiragana lọt vào các phương án đáp án vì dễ bị lộ, và đưa phân hệ "Nhớ mặt chữ" ra vị trí đầu tiên.
+- **Giải pháp triển khai**:
+  - **Thiết lập cơ chế bất biến trong [kanjiOverhaulHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiOverhaulHelper.ts)**:
+    - Ở Dạng 1: Sử dụng 100% dạng chữ Hán hoàn chỉnh của từ vựng (`currentVocab.kanjiWord`: `部屋`, `教室`, `事務所`, `外国`, `電話`, `会社員`...), loại bỏ hoàn toàn cơ chế chuyển đổi chữ chưa học thành Hiragana (`toProgressiveKanjiWord`) ở phần phương án lựa chọn.
+    - Bổ sung bộ lọc kiểm định: `!/[\u3040-\u309F]/.test(w)` loại bỏ triệt để bất kỳ từ vựng nào còn chứa ký tự Hiragana khỏi kho phương án sai.
+    - Khử trùng lặp phương án bằng `Array.from(new Set(...))` trên tất cả các dạng (Dạng 1, 2, 3.1, 3.2), ngăn chặn triệt để tình trạng trùng lặp đáp án.
+  - **Đưa phân hệ "Nhớ mặt chữ" lên đầu trong [KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx)**:
+    - Đặt `activeTab = 'memorize'` làm trạng thái mặc định khi mở trang Luyện Kanji.
+    - Đảo vị trí nút bấm trên thanh chuyển tab: Nút `🧠 Nhớ mặt chữ` nằm ở vị trí đầu tiên bên trái, nút `🎯 Luyện tập` nằm ở vị trí thứ hai.
+- **Kiểm định & Xác thực**:
+  - Chạy kịch bản kiểm thử độc lập `scratch/test_kanji_overhaul_v2.js` trên 15 câu hỏi đa dạng (bao gồm `部屋`, `教室`, `事務所`, `外国`, `電話`):
+    - 100% câu hỏi Dạng 1: Các phương án options là 100% chữ Hán thuần túy, không có bất kỳ ký tự Hiragana nào (`部屋` thay vì `へ屋`).
+    - 100% câu hỏi: 4 phương án lựa chọn là duy nhất, 0 lỗi trùng lặp phương án.
+  - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
+  - Dev server Next.js biên dịch hoàn tất, sẵn sàng phục vụ người dùng trải nghiệm thực tế.
+  - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
