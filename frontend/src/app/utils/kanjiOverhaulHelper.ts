@@ -153,6 +153,260 @@ export function kanaToRomaji(kana: string): string {
 }
 
 /**
+ * Bản đồ tra cứu Romaji chuẩn xác theo từng bài học (Lesson-specific Romaji Mapping).
+ * Đảm bảo khi một chữ Hán có nhiều âm đọc, hệ thống sẽ ưu tiên chọn đúng âm đọc
+ * được dùng trong các từ vựng cốt lõi của bài học đó.
+ * Khóa dạng: `${lessonId}_${character}`
+ */
+export const LESSON_KANJI_ROMAJI_MAP: Record<string, string> = {
+  // Bài 1
+  '1_私': 'watashi',
+  '1_人': 'jin',     // 日本人, 社員, アメリカ人
+  '1_先': 'sen',     // 先生
+  '1_生': 'sei',     // 先生, 学生
+  '1_学': 'gaku',    // 学生, 大学, 学校
+  '1_校': 'kou',     // 学校
+  '1_日': 'nichi',   // 日本 (ni), 日曜日 (nichi)
+  '1_本': 'hon',     // 日本, 本
+  '1_会': 'kai',     // 会社, 会社員
+  '1_社': 'sha',     // 会社, 社員, 会社員
+  '1_員': 'in',      // 会社員, 社員, 銀行員
+  '1_一': 'ichi',
+  '1_二': 'ni',
+  '1_三': 'san',
+
+  // Bài 2
+  '2_本': 'hon',     // 本
+  '2_語': 'go',      // 日本語, 英語
+  '2_何': 'nan',     // 何
+  '2_時': 'ji',      // 時計, 何時
+  '2_計': 'kei',     // 時計
+  '2_車': 'sha',     // 自動車
+  '2_机': 'tsukue',  // 机
+  '2_傘': 'kasa',    // 傘
+  '2_鞄': 'kaban',   // 鞄
+  '2_新': 'shin',    // 新聞
+  '2_聞': 'bun',     // 新聞
+  '2_読': 'doku',    // 読書
+  '2_書': 'sho',     // 辞書
+  '2_辞': 'ji',      // 辞書
+  '2_雑': 'zatsu',   // 雑誌
+  '2_誌': 'shi',     // 雑誌
+  '2_鍵': 'kagi',    // 鍵
+  '2_英': 'ei',      // 英語
+
+  // Bài 3
+  '3_室': 'shitsu',  // 教室, 会議室
+  '3_食': 'shoku',   // 食堂
+  '3_堂': 'dou',     // 食堂
+  '3_所': 'sho',     // 事務所
+  '3_屋': 'ya',      // 部屋, 本屋
+  '3_国': 'koku',    // 外国, お国
+  '3_議': 'gi',      // 会議, 会議室
+  '3_駅': 'eki',     // 駅
+  '3_電': 'den',     // 電話
+  '3_靴': 'kutsu',   // 靴
+  '3_地': 'chi',     // 地下
+  '3_下': 'ka',      // 地下
+
+  // Bài 4
+  '4_分': 'fun',     // 何分 (pun/fun), 分
+  '4_半': 'han',     // 半
+  '4_午': 'go',      // 午前, 午後
+  '4_前': 'zen',     // 午前 (zen) / mae
+  '4_後': 'go',      // 午後 (go) / ushiro
+  '4_今': 'ima',     // 今 (ima), 今朝 (kesa), 今晩 (konban)
+  '4_朝': 'asa',     // 朝, 毎朝
+  '4_昼': 'hiru',    // 昼, 昼休み
+  '4_夜': 'yoru',    // 夜
+  '4_晩': 'ban',     // 晩, 毎晩
+  '4_毎': 'mai',     // 毎日, 毎朝, 毎晩
+  '4_休': 'yasu',    // 休み
+  '4_銀': 'gin',     // 銀行
+  '4_間': 'kan',     // 時間
+
+  // Bài 5
+  '5_行': 'i',       // 行きます (i), 銀行/飛行機 (kou)
+  '5_来': 'ki',      // 来ます (ki), 来週 (rai)
+  '5_帰': 'kae',     // 帰ります
+  '5_動': 'dou',     // 自動車
+  '5_自': 'ji',      // 自動車, 自転車
+  '5_転': 'ten',     // 自転車
+  '5_車': 'sha',     // 電車, 自転車
+  '5_駅': 'eki',     // 駅
+  '5_飛': 'hi',      // 飛行機
+  '5_機': 'ki',      // 飛行機
+  '5_船': 'fune',    // 船
+  '5_先': 'sen',     // 先週
+  '5_週': 'shuu',    // 今週, 来週, 先週
+  '5_誕': 'tan',     // 誕生日
+  '5_年': 'nen',     // 去年, 今年, 来年
+
+  // Bài 6
+  '6_食': 'ta',      // 食べます
+  '6_飲': 'no',      // 飲みます
+  '6_吸': 'su',      // 吸います
+  '6_見': 'mi',      // 見ます
+  '6_聞': 'ki',      // 聞きます
+  '6_読': 'yo',      // 読みます
+  '6_書': 'ka',      // 書きます
+  '6_買': 'ka',      // 買います
+  '6_撮': 'to',      // 撮ります
+  '6_友': 'tomo',    // 友達
+  '6_達': 'dachi',   // 友達
+  '6_酒': 'sake',    // お酒
+  '6_店': 'mise',    // 店
+
+  // Bài 7
+  '7_切': 'ki',      // 切ります
+  '7_送': 'oku',     // 送ります
+  '7_手': 'te',      // 手
+  '7_紙': 'kami',    // 手紙
+  '7_花': 'hana',    // 花
+  '7_荷': 'ni',      // 荷物
+  '7_物': 'motsu',   // 荷物
+  '7_父': 'chichi',  // 父
+  '7_母': 'haha',    // 母
+  '7_教': 'oshi',    // 教えます
+  '7_習': 'nara',    // 習います
+  '7_貸': 'ka',      // 貸します
+  '7_借': 'ka',      // 借ります
+
+  // Bài 8
+  '8_親': 'shin',    // 親切
+  '8_切': 'setsu',   // 親切
+  '8_便': 'ben',     // 便利
+  '8_利': 'ri',      // 便利
+  '8_有': 'yuu',     // 有名
+  '8_名': 'mei',     // 有名
+  '8_白': 'shiro',   // 白い
+  '8_黒': 'kuro',    // 黒い
+  '8_赤': 'aka',     // 赤い
+  '8_青': 'ao',      // 青い
+  '8_町': 'machi',   // 町
+  '8_山': 'yama',    // 山
+  '8_静': 'shizu',   // 静か
+  '8_高': 'taka',    // 高い
+  '8_安': 'yasu',    // 安い
+  '8_新': 'atara',   // 新しい
+  '8_古': 'furu',    // 古い
+
+  // Bài 9
+  '9_好': 'su',      // 好き
+  '9_嫌': 'kira',    // 嫌い
+  '9_上': 'jou',     // 上手
+  '9_手': 'zu',      // 上手
+  '9_下': 'he',      // 下手
+  '9_歌': 'uta',     // 歌
+  '9_絵': 'e',       // 絵
+  '9_字': 'ji',      // 漢字, 字
+  '9_肉': 'niku',    // 肉
+  '9_魚': 'sakana',  // 魚
+  '9_野': 'ya',      // 野菜
+  '9_菜': 'sai',     // 野菜
+  '9_音': 'on',      // 音楽
+  '9_楽': 'gaku',    // 音楽
+  '9_料': 'ryou',    // 料理
+  '9_理': 'ri',      // 料理
+
+  // Bài 10
+  '10_男': 'otoko',  // 男
+  '10_女': 'onna',   // 女
+  '10_子': 'ko',     // 子
+  '10_犬': 'inu',    // 犬
+  '10_猫': 'neko',   // 猫
+  '10_木': 'ki',     // 木
+  '10_家': 'ie',     // 家
+  '10_箱': 'bako',   // 箱
+  '10_棚': 'tana',   // 棚
+  '10_中': 'naka',   // 中
+  '10_外': 'soto',   // 外
+  '10_隣': 'tonari', // 隣
+  '10_近': 'chika',  // 近く
+  '10_間': 'aida',   // 間
+  '10_段': 'dan'     // 階段
+};
+
+/**
+ * Trích xuất Romaji chuẩn xác của một chữ Hán theo bài học tương ứng.
+ */
+export function getLessonKanjiRomaji(
+  kanji: KanjiItemData,
+  lessonId: number,
+  vocabItems: any[] = []
+): string {
+  if (!kanji || !kanji.character) return '';
+
+  // 1. Tra cứu trực tiếp từ bảng chuẩn bài học
+  const key = `${lessonId}_${kanji.character}`;
+  if (LESSON_KANJI_ROMAJI_MAP[key]) {
+    return LESSON_KANJI_ROMAJI_MAP[key];
+  }
+
+  // 2. Tra cứu từ vựng của bài học kết hợp KANJI_COMPOUND_BREAKDOWN
+  if (vocabItems && vocabItems.length > 0) {
+    for (const v of vocabItems) {
+      if (!v) continue;
+      const kWord = v.kanji_form || v.kanji || '';
+      if (kWord && KANJI_COMPOUND_BREAKDOWN[kWord]) {
+        const bd = KANJI_COMPOUND_BREAKDOWN[kWord];
+        const idx = bd.chars.indexOf(kanji.character);
+        if (idx !== -1 && bd.readings[idx]) {
+          const rom = kanaToRomaji(bd.readings[idx]);
+          if (rom) return rom;
+        }
+      }
+    }
+  }
+
+  // 3. Tra cứu từ compounds của Kanji nếu có
+  if (kanji.compounds) {
+    const parts = kanji.compounds.split(/[;\n]/);
+    for (const p of parts) {
+      const m = p.match(/^([^\(:\s]+)(?:\s*\(([^)]+)\))?\s*[:：]/);
+      if (m) {
+        const word = m[1].trim();
+        const reading = m[2]?.trim() || '';
+        if (word === kanji.character && reading) {
+          const rom = kanaToRomaji(reading);
+          if (rom) return rom;
+        }
+        if (KANJI_COMPOUND_BREAKDOWN[word]) {
+          const bd = KANJI_COMPOUND_BREAKDOWN[word];
+          const idx = bd.chars.indexOf(kanji.character);
+          if (idx !== -1 && bd.readings[idx]) {
+            const rom = kanaToRomaji(bd.readings[idx]);
+            if (rom) return rom;
+          }
+        }
+      }
+    }
+  }
+
+  // 4. Fallback trích xuất từ onyomi hoặc kunyomi
+  const extractRomajiFromField = (field?: string): string => {
+    if (!field) return '';
+    const match = field.match(/\(([a-zA-Z\s,.-]+)\)/);
+    if (match) {
+      const parts = match[1].split(/[\s,.]+/).filter(Boolean);
+      if (parts[0]) return parts[0].toLowerCase();
+    }
+    const clean = field.replace(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '').trim();
+    const parts = clean.split(/[\s,()（）.]+/).filter(Boolean);
+    if (parts[0]) return parts[0].toLowerCase();
+    return '';
+  };
+
+  const kunRom = extractRomajiFromField(kanji.kunyomi);
+  if (kunRom) return kunRom;
+
+  const onRom = extractRomajiFromField(kanji.onyomi);
+  if (onRom) return onRom;
+
+  return '';
+}
+
+/**
  * Bản đồ tra cứu chữ Hán: Âm Hán, Nghĩa tiếng Việt và Bài học giới thiệu.
  */
 export const GLOBAL_KANJI_META: Record<string, { sino: string; meaning: string; lesson: number }> = {

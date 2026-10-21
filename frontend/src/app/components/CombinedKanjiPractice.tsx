@@ -107,8 +107,8 @@ export default function CombinedKanjiPractice({
   const [memorizeHighScore, setMemorizeHighScore] = useState<number>(0);
   const [memorizeStreak, setMemorizeStreak] = useState<number>(0);
   const [memorizeMaxStreak, setMemorizeMaxStreak] = useState<number>(0);
-  const [memorizeTimeLeft, setMemorizeTimeLeft] = useState<number>(20);
-  const [memorizeMaxTime, setMemorizeMaxTime] = useState<number>(20);
+  const [memorizeTimeLeft, setMemorizeTimeLeft] = useState<number>(10);
+  const [memorizeMaxTime, setMemorizeMaxTime] = useState<number>(10);
   const [memorizeDirection, setMemorizeDirection] = useState<'jp-to-vn' | 'vn-to-jp' | 'both'>('both');
   const [memorizeWrongList, setMemorizeWrongList] = useState<KanjiItemData[]>([]);
 
@@ -128,7 +128,7 @@ export default function CombinedKanjiPractice({
 
   const timerRef = useRef<any>(null);
   const scoreRef = useRef<number>(0);
-  const maxTimeRef = useRef<number>(20);
+  const maxTimeRef = useRef<number>(10);
 
   // Nạp high score
   useEffect(() => {
@@ -144,10 +144,10 @@ export default function CombinedKanjiPractice({
     }
   }, [scopeFilter, statusFilter]);
 
-  // Dynamic time: giảm 10% mỗi 3 streak, tối thiểu 2s
+  // Dynamic time: xuất phát 10s, giảm 10% mỗi 3 streak, tối thiểu 2s
   const getDynamicTimeForStreak = (streak: number): number => {
     const reductionCount = Math.floor(streak / 3);
-    return Math.max(2, Math.round(20 * Math.pow(0.9, reductionCount) * 10) / 10);
+    return Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
   };
 
   // Sinh câu hỏi Nhớ mặt chữ đa bài học
@@ -222,7 +222,7 @@ export default function CombinedKanjiPractice({
     setMemorizeSelectedIdx(null);
     setIsEvaluatingChoice(false);
 
-    const initialTime = 20;
+    const initialTime = 10;
     setMemorizeMaxTime(initialTime);
     maxTimeRef.current = initialTime;
     setMemorizeTimeLeft(initialTime);
@@ -658,7 +658,7 @@ export default function CombinedKanjiPractice({
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
                   Luyện phản xạ nhanh giúp bạn nhận diện mặt chữ Hán và ý nghĩa từ <b>{eligibleKanji.length} chữ Hán</b> trong phạm vi đã chọn.
-                  Thời gian giảm dần theo chuỗi đúng (mỗi 3 câu đúng giảm 10%).
+                  Thời gian giảm dần theo chuỗi đúng (xuất phát từ 10s, mỗi 3 câu đúng giảm 10%).
                 </p>
               </div>
 

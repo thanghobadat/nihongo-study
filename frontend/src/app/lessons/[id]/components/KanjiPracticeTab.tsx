@@ -11,7 +11,8 @@ import { playAudioWithFallback, playSpeedrunSound } from '../../../utils/audioHe
 import {
   PracticeExerciseQuestion,
   PracticeCategory,
-  generatePracticeQuestions
+  generatePracticeQuestions,
+  getLessonKanjiRomaji
 } from '../../../utils/kanjiOverhaulHelper';
 
 interface KanjiPracticeTabProps {
@@ -213,9 +214,9 @@ export default function KanjiPracticeTab({
   const [memorizeHighScore, setMemorizeHighScore] = useState<number>(0);
   const [memorizeStreak, setMemorizeStreak] = useState<number>(0);
   const [memorizeMaxStreak, setMemorizeMaxStreak] = useState<number>(0);
-  const [memorizeTimeLeft, setMemorizeTimeLeft] = useState<number>(20);
-  const [memorizeMaxTime, setMemorizeMaxTime] = useState<number>(20);
-  const [memorizeDirection, setMemorizeDirection] = useState<'jp-to-vn' | 'vn-to-jp' | 'both'>('both');
+  const [memorizeTimeLeft, setMemorizeTimeLeft] = useState<number>(10);
+  const [memorizeMaxTime, setMemorizeMaxTime] = useState<number>(10);
+  const [memorizeDirection, setMemorizeDirection] = useState<'jp-to-vn' | 'vn-to-jp' | 'jp-to-romaji' | 'both'>('both');
   const [memorizeWrongList, setMemorizeWrongList] = useState<KanjiItemData[]>([]);
 
   interface MemorizeQ {
@@ -225,7 +226,7 @@ export default function KanjiPracticeTab({
     correctKanji: KanjiItemData;
     correctAnswerText: string;
     options: { text: string; isCorrect: boolean }[];
-    direction: 'jp-to-vn' | 'vn-to-jp';
+    direction: 'jp-to-vn' | 'vn-to-jp' | 'jp-to-romaji';
   }
 
   const [currentMemorizeQ, setCurrentMemorizeQ] = useState<MemorizeQ | null>(null);
@@ -235,7 +236,7 @@ export default function KanjiPracticeTab({
 
   const timerRef = useRef<any>(null);
   const scoreRef = useRef<number>(0);
-  const maxTimeRef = useRef<number>(20);
+  const maxTimeRef = useRef<number>(10);
 
   // Nạp kỷ lục high score từ localStorage
   useEffect(() => {
@@ -249,13 +250,13 @@ export default function KanjiPracticeTab({
     }
   }, [selectedLessonId]);
 
-  // Tính thời gian động theo streak: giảm 10% sau mỗi 3 câu đúng, min 2s
+  // Tính thời gian động theo streak: bắt đầu 10s (như Luyện từ vựng), giảm 10% sau mỗi 3 câu đúng, min 2s
   const getDynamicTimeForStreak = (streak: number): number => {
     const reductionCount = Math.floor(streak / 3);
-    return Math.max(2, Math.round(20 * Math.pow(0.9, reductionCount) * 10) / 10);
+    return Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
   };
 
-  // Sinh câu hỏi Nhớ mặt chữ tiếp theo (100% Kanji độc lập <-> Nghĩa)
+  // Sinh câu hỏi Nhớ mặt chữ tiếp theo (100% Kanji độc lập <-> Nghĩa / Romaji)
   const generateNextMemorizeQuestion = useCallback((): MemorizeQ | null => {
     if (eligibleKanji.length === 0) return null;
 
@@ -263,12 +264,18 @@ export default function KanjiPracticeTab({
     const target = eligibleKanji[Math.floor(Math.random() * eligibleKanji.length)];
 
     // Xác định chiều câu hỏi
-    let dir: 'jp-to-vn' | 'vn-to-jp' = 'jp-to-vn';
+    let dir: 'jp-to-vn' | 'vn-to-jp' | 'jp-to-romaji' = 'jp-to-vn';
     if (memorizeDirection === 'jp-to-vn') dir = 'jp-to-vn';
     else if (memorizeDirection === 'vn-to-jp') dir = 'vn-to-jp';
-    else dir = Math.random() > 0.5 ? 'jp-to-vn' : 'vn-to-jp';
+    else if (memorizeDirection === 'jp-to-romaji') dir = 'jp-to-romaji';
+    else {
+      const rand = Math.random();
+      if (rand < 0.34) dir = 'jp-to-vn';
+      else if (rand < 0.67) dir = 'vn-to-jp';
+      else dir = 'jp-to-romaji';
+    }
 
-    // 3 phương án gây nhiễu
+    // 3 phương án gây nhiễu cho Nghĩa và Chữ Hán
     const pool = eligibleKanji.filter(k => k.id !== target.id);
     const combinedPool = pool.length >= 3 ? pool : [...pool, ...COMMON_KANJI_DISTRACTORS.filter(d => d.character !== target.character)];
     const shuffledPool = shuffleArray(combinedPool);
@@ -296,26 +303,77 @@ export default function KanjiPracticeTab({
     }
 
     // Chiều 2: 🇻🇳 ➔ 🈸 (Nghĩa -> Chọn Chữ Hán)
-    const targetAns = target.character;
+    if (dir === 'vn-to-jp') {
+      const targetAns = target.character;
+      const options = shuffleArray([
+        { text: targetAns, isCorrect: true },
+        ...distractors.map(d => ({
+          text: d.character,
+          isCorrect: false
+        }))
+      ]);
+
+      const subjectText = `${target.vietnamese_meaning}${target.sino_vietnamese ? ' (' + target.sino_vietnamese + ')' : ''}`;
+
+      return {
+        subject: subjectText,
+        promptText: '👉 Chọn chữ Hán tương ứng với nghĩa trên:',
+        correctKanji: target,
+        correctAnswerText: targetAns,
+        options,
+        direction: 'vn-to-jp'
+      };
+    }
+
+    // Chiều 3: 🈸 ➔ 🔤 Romaji (Chữ Hán -> Chọn Romaji tương ứng trong bài)
+    const targetRomaji = getLessonKanjiRomaji(target, selectedLessonId, vocabItems).toLowerCase().trim() ||
+      (target.onyomi || target.kunyomi || target.character).split(/[\s,()（）.]+/)[0].toLowerCase();
+
+    // Thu thập kho Romaji gây nhiễu độc nhất
+    const distractorRomajis = new Set<string>();
+    for (const k of shuffleArray(pool)) {
+      const r = getLessonKanjiRomaji(k, selectedLessonId, vocabItems).toLowerCase().trim();
+      if (r && r !== targetRomaji) {
+        distractorRomajis.add(r);
+      }
+      if (distractorRomajis.size >= 3) break;
+    }
+
+    // Nếu kho chữ của bài ít hơn 4 chữ, lấy thêm từ COMMON_KANJI_DISTRACTORS
+    if (distractorRomajis.size < 3) {
+      for (const d of shuffleArray(COMMON_KANJI_DISTRACTORS)) {
+        const r = getLessonKanjiRomaji(d, 0, []).toLowerCase().trim();
+        if (r && r !== targetRomaji) {
+          distractorRomajis.add(r);
+        }
+        if (distractorRomajis.size >= 3) break;
+      }
+    }
+
+    // Fallback nếu vẫn thiếu
+    const FALLBACK_ROMAJIS = ['kai', 'sha', 'in', 'sen', 'sei', 'gaku', 'kou', 'hon', 'ji', 'sho', 'shin', 'bun', 'dou', 'eki'];
+    for (const fb of shuffleArray(FALLBACK_ROMAJIS)) {
+      if (distractorRomajis.size >= 3) break;
+      if (fb !== targetRomaji) {
+        distractorRomajis.add(fb);
+      }
+    }
+
+    const chosenRomajiDistractors = Array.from(distractorRomajis).slice(0, 3);
     const options = shuffleArray([
-      { text: targetAns, isCorrect: true },
-      ...distractors.map(d => ({
-        text: d.character,
-        isCorrect: false
-      }))
+      { text: targetRomaji, isCorrect: true },
+      ...chosenRomajiDistractors.map(r => ({ text: r, isCorrect: false }))
     ]);
 
-    const subjectText = `${target.vietnamese_meaning}${target.sino_vietnamese ? ' (' + target.sino_vietnamese + ')' : ''}`;
-
     return {
-      subject: subjectText,
-      promptText: '👉 Chọn chữ Hán tương ứng với nghĩa trên:',
+      subject: target.character,
+      promptText: '👉 Chọn cách đọc Romaji tương ứng trong bài:',
       correctKanji: target,
-      correctAnswerText: targetAns,
+      correctAnswerText: targetRomaji,
       options,
-      direction: 'vn-to-jp'
+      direction: 'jp-to-romaji'
     };
-  }, [eligibleKanji, memorizeDirection]);
+  }, [eligibleKanji, memorizeDirection, selectedLessonId, vocabItems]);
 
   // Bắt đầu Speedrun Nhớ mặt chữ
   const startMemorizeGame = () => {
@@ -331,7 +389,7 @@ export default function KanjiPracticeTab({
     setMemorizeIsCorrect(null);
     setIsEvaluatingChoice(false);
 
-    const initialTime = 20;
+    const initialTime = 10;
     setMemorizeMaxTime(initialTime);
     maxTimeRef.current = initialTime;
     setMemorizeTimeLeft(initialTime);
@@ -874,16 +932,16 @@ export default function KanjiPracticeTab({
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
                   Luyện phản xạ nhanh giúp bạn ghi nhớ mặt chữ Hán và ý nghĩa của bài học.
-                  Thời gian sẽ <b>giảm dần khi streak tăng</b> (mỗi 3 câu đúng giảm 10%).
+                  Thời gian sẽ <b>giảm dần khi streak tăng</b> (xuất phát từ 10s, mỗi 3 câu đúng giảm 10%).
                 </p>
               </div>
 
-              {/* Chuyển đổi 2 chiều phản xạ + Tổng hợp */}
+              {/* Chuyển đổi các chiều phản xạ + Tổng hợp */}
               <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
                   Chiều câu hỏi phản xạ:
                 </span>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <button
                     type="button"
                     onClick={() => setMemorizeDirection('jp-to-vn')}
@@ -905,6 +963,17 @@ export default function KanjiPracticeTab({
                     }`}
                   >
                     🇻🇳 ➔ 🈸 Nghĩa
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMemorizeDirection('jp-to-romaji')}
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                      memorizeDirection === 'jp-to-romaji'
+                        ? 'bg-blue-600 text-white shadow-sm font-extrabold'
+                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    }`}
+                  >
+                    🈸 ➔ 🔤 Romaji
                   </button>
                   <button
                     type="button"
@@ -973,7 +1042,7 @@ export default function KanjiPracticeTab({
                 </span>
 
                 <div className={`font-['Noto_Sans_JP'] font-black text-slate-900 dark:text-white leading-relaxed ${
-                  currentMemorizeQ.direction === 'jp-to-vn'
+                  currentMemorizeQ.direction === 'jp-to-vn' || currentMemorizeQ.direction === 'jp-to-romaji'
                     ? 'text-6xl sm:text-7xl py-4'
                     : 'text-2xl sm:text-3xl py-2'
                 }`}>
@@ -1016,7 +1085,11 @@ export default function KanjiPracticeTab({
                           {letter}
                         </span>
                         <span className={`font-['Noto_Sans_JP'] font-bold truncate ${
-                          currentMemorizeQ.direction === 'vn-to-jp' ? 'text-2xl sm:text-3xl font-black' : 'text-sm sm:text-base'
+                          currentMemorizeQ.direction === 'vn-to-jp'
+                            ? 'text-2xl sm:text-3xl font-black'
+                            : currentMemorizeQ.direction === 'jp-to-romaji'
+                              ? 'text-lg sm:text-xl font-mono font-black lowercase'
+                              : 'text-sm sm:text-base'
                         }`}>
                           {opt.text}
                         </span>
@@ -1079,6 +1152,11 @@ export default function KanjiPracticeTab({
                           </span>
                           <span className="font-bold text-slate-800 dark:text-slate-100">
                             {k.sino_vietnamese ? `[${k.sino_vietnamese}] ` : ''}{k.vietnamese_meaning}
+                            {getLessonKanjiRomaji(k, selectedLessonId, vocabItems) && (
+                              <span className="ml-1.5 text-blue-500 font-mono font-bold">
+                                • Romaji: {getLessonKanjiRomaji(k, selectedLessonId, vocabItems)}
+                              </span>
+                            )}
                           </span>
                         </div>
                       </div>

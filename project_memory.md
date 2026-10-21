@@ -2629,7 +2629,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Dev server Backend (port 8080) và Frontend (port 3000) tiếp tục chạy ổn định.
   - Tuân thủ Rule 5: Không tự động commit hay push mã nguồn khi chưa có yêu cầu trực tiếp.
 
-### Mốc 167: Bổ Sung Thông Tin Tiến Độ Học Kanji & Từ Vựng Từng Bài Trong Ôn Tập Tổng Hợp (Đã hoàn thành cục bộ - 18/10/2026)
+### Mốc 167: Bổ Sung Thông Tin Tiến Độ Học Kanji & Từ Vựng Từng Bài Trong Ôn Tập Tổng Hợp (Đã hoàn thành & Đã đẩy GitHub - 18/10/2026)
 - **Bối cảnh & Yêu cầu từ người dùng**:
   - Tại trang Ôn tập tổng hợp ([knowledge/page.tsx](file:///website/frontend/src/app/knowledge/page.tsx)), người dùng muốn biết rõ thông tin tiến độ: đã học được bao nhiêu chữ Kanji/Từ vựng tổng cộng, và từng bài học đã học/thuộc được bao nhiêu chữ rồi.
 - **Giải pháp triển khai**:
@@ -2646,7 +2646,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - TypeScript validation: `npx tsc --noEmit` đạt 0 lỗi (PASS).
   - Next.js 16 Production Build: `npm run build` thành công 100% (16/16 routes) trong 4.1s (PASS).
   - Dev server Backend (port 8080) và Frontend (port 3000) tiếp tục chạy ổn định.
-  - Tuân thủ Rule 5: Không tự động commit hay push mã nguồn khi chưa có yêu cầu trực tiếp.
+  - Commit & Push lên GitHub: Đã hoàn thành commit `c0480ac` (`feat: cap nhat luyen tu vung kanji, sap xep cai dat, va theo doi tien do on tap tong hop (Moc 165-167)`) và push thành công lên nhánh `main` của `https://github.com/thanghobadat/nihongo-study.git`.
 
 ### Mốc 168: Cải Tổ Toàn Diện Phân Hệ Luyện Hán Tự - Tinh Giản "Nhớ Mặt Chữ" & Phát Triển "Luyện Tập" 3 Dạng Thực Chiến Lũy Tiến (Đã hoàn thành cục bộ - 21/10/2026)
 - **Bối cảnh & Yêu cầu từ người dùng**:
@@ -2777,4 +2777,35 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
 - **Kiểm định & Xác thực**:
   - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
   - Dev server Next.js biên dịch hoàn tất, `GET http://localhost:3000/knowledge` trả về HTTP 200 OK.
+  - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
+
+### Mốc 173: Bổ Sung Tùy Chọn Phản Xạ Romaji Theo Bài Học & Rút Ngắn Thời Gian Đếm Ngược Nhớ Mặt Chữ Kanji Xuống 10s (21/10/2026)
+- **Bối cảnh & Chỉ đạo từ người dùng**:
+  1. *Thêm tùy chọn Romaji theo ngữ cảnh bài học*:
+     - Trong tính năng Nhớ mặt chữ của Luyện Kanji từng bài, bổ sung tùy chọn: Chữ Hán $\rightarrow$ Chọn Romaji tương ứng.
+     - Xử lý triệt để trường hợp chữ Hán có nhiều âm đọc Romaji: Đáp án đúng là Romaji được dùng cho từ vựng của bài học đó (ví dụ: Bài 1 có từ `会` trong `会社員` thì đáp án là `kai`; nếu bài khác đọc là `gai` thì đáp án bài đó là `gai`).
+  2. *Đồng bộ thời gian đếm ngược*:
+     - Giảm thời gian đếm ngược của phần Nhớ mặt chữ Kanji từ 20s xuống **10s** (bằng với thời gian của Luyện từ vựng).
+     - Giữ nguyên phần Luyện tập 3 dạng bài thực chiến (không áp timer).
+- **Giải pháp triển khai**:
+  - Tại [website/frontend/src/app/utils/kanjiOverhaulHelper.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiOverhaulHelper.ts):
+    - Xây dựng bản đồ chuẩn hóa [LESSON_KANJI_ROMAJI_MAP](file:///d:/AI/japanese_learning/website/frontend/src/app/utils/kanjiOverhaulHelper.ts) cho các bài học Minna (khóa `${lessonId}_${character}`).
+    - Xây dựng hàm `getLessonKanjiRomaji(kanji, lessonId, vocabItems)` kết hợp: tra cứu bảng chuẩn, bóc tách `KANJI_COMPOUND_BREAKDOWN` từ từ vựng bài học, phân tích `compounds`, và fallback từ `onyomi`/`kunyomi`.
+  - Tại [website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/lessons/[id]/components/KanjiPracticeTab.tsx):
+    - Mở rộng kiểu `memorizeDirection` hỗ trợ `'jp-to-romaji'`.
+    - Điều chỉnh thanh công cụ chọn chiều phản xạ thành lưới 4 nút: `🈸 ➔ 🇻🇳 Chữ Hán`, `🇻🇳 ➔ 🈸 Nghĩa`, `🈸 ➔ 🔤 Romaji`, `🔀 Tổng hợp`.
+    - Khi chọn `🔀 Tổng hợp`: Tráo ngẫu nhiên đều giữa cả 3 chiều (`jp-to-vn`, `vn-to-jp`, `jp-to-romaji`).
+    - Trong `generateNextMemorizeQuestion`: Trích xuất đáp án Romaji chuẩn theo bài, sinh 4 phương án độc nhất khử trùng lặp 100% bằng `Set`.
+    - Điều chỉnh thời gian xuất phát từ 20s $\rightarrow$ **10s** (`memorizeTimeLeft = 10`, `memorizeMaxTime = 10`, `maxTimeRef = 10`), công thức giảm streak từ 10s.
+    - Hiển thị Romaji của bài học cho danh sách các chữ Hán làm sai trên màn hình Game Over.
+  - Tại [website/frontend/src/app/components/CombinedKanjiPractice.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/components/CombinedKanjiPractice.tsx):
+    - Đồng bộ thời gian xuất phát của phân hệ Nhớ mặt chữ đa bài học từ 20s $\rightarrow$ **10s** và công thức giảm streak theo 10s.
+- **Kiểm định & Xác thực**:
+  - Script test độc lập [scratch/test_kanji_romaji.js](file:///d:/AI/japanese_learning/scratch/test_kanji_romaji.js):
+    + Test 1: 14/14 chữ Hán Bài 1 (bao gồm `会` -> `kai`, `人` -> `jin`, `先` -> `sen`, `生` -> `sei`, `学` -> `gaku`) [100% PASS].
+    + Test 2: 9/9 chữ Hán Bài 2 & 3 (bao gồm `本` -> `hon`, `時` -> `ji`, `室` -> `shitsu`, `所` -> `sho`, `電` -> `den`) [100% PASS].
+    + Test 3: 100% các câu hỏi Romaji đều sinh ra đúng 4 options độc nhất, không trùng lặp [100% PASS].
+  - TypeScript validation: `npx tsc --noEmit` đạt 0 lỗi (PASS).
+  - Next.js 16 Production Build: `npm run build -w frontend` thành công 100% (16/16 routes) trong 3.6s (PASS).
+  - Dev server Backend (port 8080) và Frontend (port 3000) đang vận hành ổn định phục vụ trải nghiệm thực tế.
   - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
