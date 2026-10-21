@@ -2779,7 +2779,7 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Dev server Next.js biên dịch hoàn tất, `GET http://localhost:3000/knowledge` trả về HTTP 200 OK.
   - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
 
-### Mốc 173: Bổ Sung Tùy Chọn Phản Xạ Romaji Theo Bài Học & Rút Ngắn Thời Gian Đếm Ngược Nhớ Mặt Chữ Kanji Xuống 10s (21/10/2026)
+### Mốc 173: Bổ Sung Tùy Chọn Phản Xạ Romaji Theo Bài Học & Rút Ngắn Thời Gian Đếm Ngược Nhớ Mặt Chữ Kanji Xuống 10s (Đã hoàn thành & Đã đẩy lên GitHub - 21/10/2026)
 - **Bối cảnh & Chỉ đạo từ người dùng**:
   1. *Thêm tùy chọn Romaji theo ngữ cảnh bài học*:
      - Trong tính năng Nhớ mặt chữ của Luyện Kanji từng bài, bổ sung tùy chọn: Chữ Hán $\rightarrow$ Chọn Romaji tương ứng.
