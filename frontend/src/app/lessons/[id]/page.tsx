@@ -5847,6 +5847,16 @@ const renderInteractivePractice = () => {
               <span className="hidden sm:inline">Tra cứu</span>
             </button>
 
+            <button
+              type="button"
+              onClick={() => router.push(`/fundamentals?lesson=${selectedLessonId}`)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm active:scale-95 cursor-pointer shrink-0"
+              title={`Xem kiến thức nền tảng tương ứng Bài ${selectedLessonId}`}
+            >
+              <span>📘</span>
+              <span className="hidden md:inline">Nền tảng</span>
+            </button>
+
             <select
 
               value={selectedLessonId}

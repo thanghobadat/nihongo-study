@@ -2809,3 +2809,38 @@ Dự án học tiếng Nhật **Minna & Marugoto Flow** hiện tại đã đạt
   - Next.js 16 Production Build: `npm run build -w frontend` thành công 100% (16/16 routes) trong 3.6s (PASS).
   - Dev server Backend (port 8080) và Frontend (port 3000) đang vận hành ổn định phục vụ trải nghiệm thực tế.
   - Tuân thủ Rule 5: Không tự động commit và push mã nguồn lên GitHub.
+
+### Mốc 174: Triển Khai Hệ Thống Bài Tập Luyện Tập Kiến Thức Nền Tảng Chuyên Sâu Cho Toàn Bộ 26 Bài Học (/fundamentals) Với 1.960 Câu Hỏi (24/10/2026)
+- **Bối cảnh & Chỉ đạo từ người dùng**:
+  - Xây dựng hệ thống luyện tập thực chiến toàn diện cho toàn bộ 26 bài học có kiến thức nền tảng (Minna I & II).
+  - Bài tập phải được phân loại chặt chẽ theo **Từng loại kiến thức** (Knowledge Type cụ thể như: Số đếm 0-99, Đếm tuổi, Trợ từ は/も/の/を/で/に/へ/から/まで/より/しか/だけ, Nhóm động từ, Động từ ngoại lệ, Thể Te/Nai/Jisho/Ta/Khả năng/Ý chí/Điều kiện/Bị động/Sai khiến), KHÔNG phân loại theo dạng bài chung chung.
+  - Định lượng câu hỏi chuẩn hóa:
+    - Các đơn vị dạng quy tắc (Q): Tối thiểu **20 câu hỏi** chất lượng cao + chế độ sinh ngẫu nhiên vô hạn (`♾️ Luyện không giới hạn`) với trọng số ưu tiên x3 cho biến âm và các trường hợp đặc biệt.
+    - Các đơn vị dạng ngữ pháp / trợ từ / phó từ / liên từ (G): **40 câu hỏi** cho mỗi đơn vị.
+    - Tổng cộng: **1.960 câu hỏi** trắc nghiệm bao phủ toàn bộ 63 đơn vị kiến thức trên 26 bài học.
+  - Cho phép người dùng chọn lọc **Định dạng câu hỏi** (Format) khi luyện tập (số sang chữ, chữ sang số, câu thoại, tình huống hội thoại, bẫy biến âm, đối chiếu cặp...).
+  - Trang bị cả nút ôn toàn bài (`📝 Ôn tập Bài X`) và nút ôn từng thẻ (`🎯 Luyện thẻ này`).
+  - Hỗ trợ phát âm Audio TTS chuẩn giọng Nhật, đồng thời có cơ chế bảo vệ: Ẩn/khóa nút phát âm ở các câu hỏi kiểm tra cách đọc cho tới khi người dùng chọn đáp án để chống lộ bài.
+- **Giải pháp triển khai**:
+  - **Kiến trúc dữ liệu (`website/frontend/src/app/fundamentals/data/practice/`)**:
+    - [types.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/data/practice/types.ts): Định nghĩa kiểu dữ liệu `PracticeQuestion` và `UnitPracticeSummary` (chuẩn hóa song song `question_kana`, `question_kanji`, `options` [4 lựa chọn], `correctIndex`, `explanation`, `audioText`).
+    - [wordBank.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/data/practice/wordBank.ts): Ngân hàng động từ và tính từ N5 & N4 toàn diện phân loại theo nhóm, gán thẻ ngoại lệ đặc biệt.
+    - [generators.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/data/practice/generators.ts): Thuật toán sinh tự động vô hạn cho số đếm, tuổi tác, chia thể Te, Nai, Ta, Khả năng, Ý chí, Điều kiện, Bị động, Sai khiến, và tính từ. Tích hợp tráo Fisher-Yates và tự động tính lại `correctIndex`.
+    - Thư mục [lessons/](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/data/practice/lessons): 26 tệp module độc lập (`lesson01.ts` đến `lesson48.ts`) chứa đủ 1.960 câu hỏi.
+    - [index.ts](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/data/practice/index.ts): Trình nạp động `loadLessonPractice(lessonId)` qua `import()` chia nhỏ bundle Next.js, bảng tra số lượng câu hỏi tĩnh `LESSON_QUESTION_COUNTS` và các hàm tiện ích.
+  - **Giao diện người dùng**:
+    - [LessonPracticeModal.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/components/LessonPracticeModal.tsx): Modal luyện tập tương tác cao cấp gồm 3 màn hình:
+      1. *Màn hình thiết lập (Config)*: Chọn đơn vị kiến thức (tất cả hoặc từng unit), lọc định dạng bài, chọn thời lượng (10 câu nhanh, 20 câu chuẩn, 40 câu cày sâu, làm toàn bộ, hoặc luyện không giới hạn), toggle bật/tắt Kanji.
+      2. *Màn hình làm bài (Quiz)*: Thanh tiến trình phần trăm, huy hiệu dạng bài, audio TTS (khóa chống lộ đáp án), 4 nút lựa chọn trực quan đổi màu xanh/đỏ ngay lập tức, thẻ giải thích chi tiết nền hổ phách nổi bật.
+      3. *Màn hình tổng kết (Summary)*: Huy hiệu tỷ lệ đúng, thống kê chi tiết, danh sách các câu làm sai kèm đối chiếu đáp án, tính năng `🔄 Luyện lại câu sai`, lưu lịch sử vào `localStorage`.
+    - [KnowledgeUnitCard.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/components/KnowledgeUnitCard.tsx): Tích hợp nút `🎯 Luyện thẻ` ở header và nút `🎯 Luyện tập sâu thẻ này` ở chân nội dung mở rộng.
+    - [page.tsx](file:///d:/AI/japanese_learning/website/frontend/src/app/fundamentals/page.tsx): Tích hợp nút `📝 Ôn tập Bài X (N câu)` trên thanh tiêu đề bài học và kết nối liền mạch với `LessonPracticeModal`.
+- **Kiểm định & Xác thực**:
+  - Script kiểm tra độc lập [scratch/validate_all_with_tsx.ts](file:///d:/AI/japanese_learning/scratch/validate_all_with_tsx.ts):
+    - Kiểm tra toàn bộ 26 bài học: 100% nạp thành công (PASS).
+    - Kiểm tra toàn bộ 1.960 câu hỏi: 100% ID độc nhất, 100% có đúng 4 options không trùng lặp, `0 <= correctIndex <= 3`, đầy đủ Kana/Kanji/Giải thích (PASS).
+    - Kiểm tra toàn bộ 63 đơn vị kiến thức trong `knowledgeUnits.ts`: 100% phủ kín (PASS).
+  - TypeScript validation (`npx tsc --noEmit`): 100% PASS (0 lỗi).
+  - Next.js Production Build (`next build`): Biên dịch thành công 100% (17 routes, trong đó có `/fundamentals`) trong 3.1s (PASS).
+  - Sửa dứt điểm lỗi Hydration Error (`<button>` lồng trong `<button>`) tại `KnowledgeUnitCard.tsx` bằng cách chuyển wrapper header thành `<div>` và tách biệt độc lập vùng accordion toggle với nút `🎯 Luyện thẻ`.
+  - Tuân thủ nghiêm ngặt các quy tắc Rule 1-7 trong `.agents/AGENTS.md`.
