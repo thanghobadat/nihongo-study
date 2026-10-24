@@ -600,6 +600,78 @@ export interface GeneratePracticeParams {
 }
 
 /**
+ * Tra cứu metadata chữ Hán (Âm Hán, Nghĩa tiếng Việt, Bài học).
+ */
+export function getKanjiInfo(char: string, allLessonKanji: KanjiItemData[] = []) {
+  const meta = GLOBAL_KANJI_META[char];
+  if (meta) return meta;
+  const foundK = (allLessonKanji || []).find(k => k.character === char);
+  if (foundK) {
+    return {
+      sino: foundK.sino_vietnamese || '',
+      meaning: foundK.vietnamese_meaning || '',
+      lesson: foundK.lesson_id || 0
+    };
+  }
+  return { sino: '', meaning: '', lesson: 0 };
+}
+
+/**
+ * Trình tạo thẻ Giải thích chi tiết cấu tạo chữ Hán chuẩn hóa (bóc tách rõ từng chữ, âm Hán, nghĩa, bài học).
+ */
+export function buildVocabKanjiExplanation({
+  sentenceMeaning,
+  targetVocab,
+  allLessonKanji = []
+}: {
+  sentenceMeaning?: string;
+  targetVocab: {
+    kanjiWord: string;
+    hiragana: string;
+    meaning: string;
+    romaji?: string;
+    kanjiChars?: string[];
+  };
+  allLessonKanji?: KanjiItemData[];
+}): string {
+  const parts: string[] = [];
+  if (sentenceMeaning) {
+    parts.push(`🇻🇳 Dịch nghĩa câu: "${sentenceMeaning}"`);
+  }
+
+  const wordRom = targetVocab.romaji || kanaToRomaji(targetVocab.hiragana);
+  const romPart = wordRom ? ` • Romaji: ${wordRom}` : '';
+  parts.push(`【Từ hoàn chỉnh】: ${targetVocab.kanjiWord} (${targetVocab.hiragana}${romPart}: ${targetVocab.meaning})`);
+
+  const breakdown = KANJI_COMPOUND_BREAKDOWN[targetVocab.kanjiWord];
+  if (breakdown && breakdown.chars.length > 0) {
+    breakdown.chars.forEach((ch, idx) => {
+      const info = getKanjiInfo(ch, allLessonKanji);
+      const chKana = breakdown.readings[idx] || '';
+      const chRom = kanaToRomaji(chKana);
+      const chRomPart = chRom ? ` - Romaji: ${chRom}` : '';
+      const lessonPrefix = info.lesson ? `Bài ${info.lesson}: ` : '';
+      const sinoPart = info.sino ? `Âm Hán: ${info.sino}` : 'Hán tự';
+      const meanPart = info.meaning ? ` - Nghĩa: ${info.meaning}` : '';
+      parts.push(`• ${lessonPrefix}【${ch}】 (${sinoPart}${meanPart}${chRomPart})`);
+    });
+  } else {
+    const chars = targetVocab.kanjiWord.split('').filter(c => /[\u4E00-\u9FAF]/.test(c));
+    const uniqueChars = Array.from(new Set(chars.length > 0 ? chars : (targetVocab.kanjiChars || [])));
+    uniqueChars.forEach(ch => {
+      const info = getKanjiInfo(ch, allLessonKanji);
+      const chRom = kanaToRomaji(targetVocab.hiragana);
+      const chRomPart = chRom ? ` - Romaji: ${chRom}` : '';
+      const lessonPrefix = info.lesson ? `Bài ${info.lesson}: ` : '';
+      const sinoPart = info.sino ? `Âm Hán: ${info.sino}` : 'Hán tự';
+      const meanPart = info.meaning ? ` - Nghĩa: ${info.meaning}` : '';
+      parts.push(`• ${lessonPrefix}【${ch}】 (${sinoPart}${meanPart}${chRomPart})`);
+    });
+  }
+  return parts.join('\n');
+}
+
+/**
  * Trình sinh câu hỏi Luyện tập thực chiến 3 dạng hoàn chỉnh.
  */
 export function generatePracticeQuestions({
@@ -624,71 +696,8 @@ export function generatePracticeQuestions({
   // Tập hợp các chữ Kanji của bài học hiện tại đang luyện
   const lessonKanjiSet = new Set<string>(eligibleKanji.map(k => k.character));
 
-  // Tra cứu metadata chữ Hán
-  const getKanjiInfo = (char: string) => {
-    const meta = GLOBAL_KANJI_META[char];
-    if (meta) return meta;
-    const foundK = (allLessonKanji || []).find(k => k.character === char);
-    if (foundK) {
-      return {
-        sino: foundK.sino_vietnamese || '',
-        meaning: foundK.vietnamese_meaning || '',
-        lesson: foundK.lesson_id || 0
-      };
-    }
-    return { sino: '', meaning: '', lesson: 0 };
-  };
-
-  // Trình tạo thẻ Giải thích chi tiết chuẩn hóa theo format người dùng yêu cầu
-  const buildKanjiExplanation = ({
-    sentenceMeaning,
-    targetVocab
-  }: {
-    sentenceMeaning?: string;
-    targetVocab: {
-      kanjiWord: string;
-      hiragana: string;
-      meaning: string;
-      romaji?: string;
-      kanjiChars: string[];
-    };
-  }): string => {
-    const parts: string[] = [];
-    if (sentenceMeaning) {
-      parts.push(`🇻🇳 Dịch nghĩa câu: "${sentenceMeaning}"`);
-    }
-
-    const wordRom = targetVocab.romaji || kanaToRomaji(targetVocab.hiragana);
-    const romPart = wordRom ? ` • Romaji: ${wordRom}` : '';
-    parts.push(`【Từ hoàn chỉnh】: ${targetVocab.kanjiWord} (${targetVocab.hiragana}${romPart}: ${targetVocab.meaning})`);
-
-    const breakdown = KANJI_COMPOUND_BREAKDOWN[targetVocab.kanjiWord];
-    if (breakdown && breakdown.chars.length > 0) {
-      breakdown.chars.forEach((ch, idx) => {
-        const info = getKanjiInfo(ch);
-        const chKana = breakdown.readings[idx] || '';
-        const chRom = kanaToRomaji(chKana);
-        const chRomPart = chRom ? ` - Romaji: ${chRom}` : '';
-        const lessonPrefix = info.lesson ? `Bài ${info.lesson}: ` : '';
-        const sinoPart = info.sino ? `Âm Hán: ${info.sino}` : 'Hán tự';
-        const meanPart = info.meaning ? ` - Nghĩa: ${info.meaning}` : '';
-        parts.push(`• ${lessonPrefix}【${ch}】 (${sinoPart}${meanPart}${chRomPart})`);
-      });
-    } else {
-      const chars = targetVocab.kanjiWord.split('').filter(c => /[\u4E00-\u9FAF]/.test(c));
-      const uniqueChars = Array.from(new Set(chars.length > 0 ? chars : targetVocab.kanjiChars));
-      uniqueChars.forEach(ch => {
-        const info = getKanjiInfo(ch);
-        const chRom = kanaToRomaji(targetVocab.hiragana);
-        const chRomPart = chRom ? ` - Romaji: ${chRom}` : '';
-        const lessonPrefix = info.lesson ? `Bài ${info.lesson}: ` : '';
-        const sinoPart = info.sino ? `Âm Hán: ${info.sino}` : 'Hán tự';
-        const meanPart = info.meaning ? ` - Nghĩa: ${info.meaning}` : '';
-        parts.push(`• ${lessonPrefix}【${ch}】 (${sinoPart}${meanPart}${chRomPart})`);
-      });
-    }
-    return parts.join('\n');
-  };
+  // Trình tạo thẻ Giải thích chi tiết dùng chung
+  const buildKanjiExplanation = (params: any) => buildVocabKanjiExplanation({ ...params, allLessonKanji });
 
   // 1. Thu thập danh sách từ vựng của bài có chứa Kanji của bài
   const targetVocabs: Array<{

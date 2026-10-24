@@ -2191,7 +2191,7 @@ export default function KnowledgeHubPage() {
           <div className="flex border-b border-slate-200 dark:border-slate-800 p-1 bg-slate-100/65 dark:bg-slate-900/65 rounded-xl max-w-2xl shadow-sm overflow-x-auto">
             {[
               { id: 'practice', label: '✏️ Luyện từ vựng' },
-              { id: 'kanji_practice', label: '🉐 Luyện Kanji' },
+              { id: 'kanji_practice', label: '🉐 Phản xạ Kanji' },
               { id: 'exam', label: '🎓 Bài kiểm tra' }
             ].map(tab => (
               <button
