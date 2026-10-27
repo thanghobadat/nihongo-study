@@ -13,7 +13,8 @@
     "build:backend": "npm run build -w backend",
     "start:frontend": "npm run start -w frontend",
     "start:backend": "npm run start -w backend",
-    "test:backend": "npm run test -w backend"
+    "test:backend": "npm run test -w backend",
+    "validate": "node scripts/validate-data.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

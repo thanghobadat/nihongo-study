@@ -58,8 +58,10 @@ async function runSeed() {
       japanese_example: v.japanese_example,
       example_meaning: v.example_meaning,
       mnemonic_tip: v.mnemonic_tip,
+      kanji_word: v.kanji_word || '',
       image_url: v.image_url || '',
-      pitch_accent: v.pitch_accent || 0
+      pitch_accent: v.pitch_accent || 0,
+      jlpt_level: v.jlpt_level || 'other'
     }));
     await seedTable('vocabulary', vocabData, ['id']);
 
@@ -74,7 +76,8 @@ async function runSeed() {
       sino_vietnamese: k.sino_vietnamese,
       vietnamese_meaning: k.vietnamese_meaning,
       mnemonic_tip: k.mnemonic_tip,
-      compounds: k.compounds
+      compounds: k.compounds,
+      jlpt_level: k.jlpt_level || 'other'
     }));
     await seedTable('kanji', kanjiData, ['id']);
 
@@ -89,7 +92,8 @@ async function runSeed() {
       japanese_example: g.japanese_example,
       example_meaning: g.example_meaning,
       romaji_example: g.romaji_example,
-      notes: g.notes
+      notes: g.notes,
+      jlpt_level: g.jlpt_level || 'other'
     }));
     await seedTable('grammar', grammarData, ['id']);
 

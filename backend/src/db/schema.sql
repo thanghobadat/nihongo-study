@@ -56,6 +56,7 @@ CREATE TABLE public.vocabulary (
   mnemonic_tip TEXT,
   image_url TEXT,
   pitch_accent INTEGER DEFAULT 0,
+  jlpt_level TEXT DEFAULT 'other',
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -71,6 +72,7 @@ CREATE TABLE public.kanji (
   vietnamese_meaning TEXT NOT NULL,
   mnemonic_tip TEXT,
   compounds TEXT,
+  jlpt_level TEXT DEFAULT 'other',
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -86,6 +88,7 @@ CREATE TABLE public.grammar (
   example_meaning TEXT,
   romaji_example TEXT,
   notes TEXT,
+  jlpt_level TEXT DEFAULT 'other',
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

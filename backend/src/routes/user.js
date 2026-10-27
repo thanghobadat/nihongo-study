@@ -432,26 +432,40 @@ router.get('/course-summary', async (req, res) => {
     if (lErr) throw lErr;
     const lessonIds = lessons.map(l => l.id);
 
-    const [vocabRes, kanjiRes, grammarRes] = await Promise.all([
-      supabase.from('vocabulary').select('*').in('lesson_id', lessonIds),
-      supabase.from('kanji').select('*').in('lesson_id', lessonIds),
-      supabase.from('grammar').select('*').in('lesson_id', lessonIds)
+    // Helper to bypass Supabase default 1000-row limit
+    const fetchAllRows = async (queryFn, pageSize = 1000) => {
+      let allRows = [];
+      let from = 0;
+      let hasMore = true;
+      while (hasMore) {
+        const { data, error } = await queryFn().range(from, from + pageSize - 1);
+        if (error) throw error;
+        if (data && data.length > 0) {
+          allRows = allRows.concat(data);
+          if (data.length < pageSize) {
+            hasMore = false;
+          } else {
+            from += pageSize;
+          }
+        } else {
+          hasMore = false;
+        }
+      }
+      return allRows;
+    };
+
+    const [vocabData, kanjiData, grammarData, userProgress] = await Promise.all([
+      fetchAllRows(() => supabase.from('vocabulary').select('*').in('lesson_id', lessonIds).order('id', { ascending: true })),
+      fetchAllRows(() => supabase.from('kanji').select('*').in('lesson_id', lessonIds).order('id', { ascending: true })),
+      fetchAllRows(() => supabase.from('grammar').select('*').in('lesson_id', lessonIds).order('id', { ascending: true })),
+      fetchAllRows(() => supabase.from('user_progress').select('*').eq('user_id', userId))
     ]);
-    if (vocabRes.error) throw vocabRes.error;
-    if (kanjiRes.error) throw kanjiRes.error;
-    if (grammarRes.error) throw grammarRes.error;
 
-    const { data: userProgress, error: pErr } = await supabase
-      .from('user_progress')
-      .select('*')
-      .eq('user_id', userId);
-    if (pErr) throw pErr;
-
-    const vocabList = vocabRes.data.map(v => {
+    const vocabList = vocabData.map(v => {
       const p = userProgress.find(progress => progress.item_type === 'vocabulary' && progress.item_id === v.id);
       return { ...v, status: p ? p.status : 'not_learned' };
     });
-    const kanjiList = kanjiRes.data.map(k => {
+    const kanjiList = kanjiData.map(k => {
       const p = userProgress.find(progress => progress.item_type === 'kanji' && progress.item_id === k.id);
       return { ...k, status: p ? p.status : 'not_learned' };
     });
