@@ -469,7 +469,7 @@ router.get('/course-summary', async (req, res) => {
       const p = userProgress.find(progress => progress.item_type === 'kanji' && progress.item_id === k.id);
       return { ...k, status: p ? p.status : 'not_learned' };
     });
-    const grammarList = grammarRes.data.map(g => {
+    const grammarList = grammarData.map(g => {
       const p = userProgress.find(progress => progress.item_type === 'grammar' && progress.item_id === g.id);
       return { ...g, status: p ? p.status : 'not_learned' };
     });
@@ -3049,9 +3049,24 @@ router.get('/study-overview', async (req, res) => {
 
     const plan = await getUserPlanAsync(userId);
 
-    const vocabList = mockDb.vocabulary || [];
-    const kanjiList = mockDb.kanji || [];
-    const grammarList = mockDb.grammar || [];
+    let totalVocab = (mockDb.vocabulary || []).length;
+    let totalKanji = (mockDb.kanji || []).length;
+    let totalGrammar = (mockDb.grammar || []).length;
+
+    if (!req.user.isMock && isSupabaseConfigured()) {
+      try {
+        const [vCount, kCount, gCount] = await Promise.all([
+          supabase.from('vocabulary').select('*', { count: 'exact', head: true }).gte('lesson_id', 0).lte('lesson_id', 50),
+          supabase.from('kanji').select('*', { count: 'exact', head: true }).gte('lesson_id', 0).lte('lesson_id', 50),
+          supabase.from('grammar').select('*', { count: 'exact', head: true }).gte('lesson_id', 0).lte('lesson_id', 50)
+        ]);
+        if (!vCount.error && typeof vCount.count === 'number') totalVocab = vCount.count;
+        if (!kCount.error && typeof kCount.count === 'number') totalKanji = kCount.count;
+        if (!gCount.error && typeof gCount.count === 'number') totalGrammar = gCount.count;
+      } catch (err) {
+        console.warn('[study-overview] Error fetching counts from Supabase:', err.message);
+      }
+    }
     const progressKeys = Object.keys(mockDb.userProgress || {}).filter(k => k.startsWith(`${userId}:`));
 
     const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
@@ -3179,15 +3194,15 @@ router.get('/study-overview', async (req, res) => {
     return res.json({
       success: true,
       overview: {
-        totalVocab: vocabList.length || 1500,
+        totalVocab,
         masteredVocab,
-        vocabPercentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0,
-        totalKanji: kanjiList.length || 255,
+        vocabPercentage: totalVocab ? parseFloat(((masteredVocab / totalVocab) * 100).toFixed(1)) : 0,
+        totalKanji,
         masteredKanji,
-        kanjiPercentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0,
-        totalGrammar: grammarList.length || 204,
+        kanjiPercentage: totalKanji ? parseFloat(((masteredKanji / totalKanji) * 100).toFixed(1)) : 0,
+        totalGrammar,
         masteredGrammar,
-        grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
+        grammarPercentage: totalGrammar ? parseFloat(((masteredGrammar / totalGrammar) * 100).toFixed(1)) : 0,
         totalLessons: 50,
         currentLesson
       },
