@@ -24,6 +24,7 @@ interface VocabItem {
   lesson_id: number;
   hiragana: string;
   romaji: string;
+  kanji_word?: string;
   vietnamese_meaning: string;
   word_type: string;
   japanese_example?: string;
@@ -243,7 +244,7 @@ export default function KnowledgeHubPage() {
       const rawKanji = res.kanji || [];
       const rawVocab = res.vocabulary || [];
       const enrichedVocab = rawVocab.map((v: any) => {
-        const kForm = getGlobalKanjiForm(v.hiragana, rawKanji);
+        const kForm = v.kanji_word || getGlobalKanjiForm(v.hiragana, rawKanji, v.kanji_word);
         return {
           ...v,
           kanji_form: kForm && kForm !== v.hiragana ? kForm : undefined
@@ -298,14 +299,14 @@ export default function KnowledgeHubPage() {
     }
     if (showKanjiInVocab) {
       list = list.filter(v => {
-        const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList);
+        const kForm = v.kanji_word || v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList, v.kanji_word);
         return Boolean(kForm && kForm.trim() !== '' && kForm !== v.hiragana);
       });
     }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       list = list.filter(v => {
-        const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList);
+        const kForm = v.kanji_word || v.kanji_form || getGlobalKanjiForm(v.hiragana, kanjiList, v.kanji_word);
         return (
           v.hiragana.toLowerCase().includes(q) || 
           v.romaji.toLowerCase().includes(q) || 

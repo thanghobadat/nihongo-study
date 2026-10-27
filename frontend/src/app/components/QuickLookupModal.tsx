@@ -20,6 +20,7 @@ interface VocabItem {
   lesson_id: number;
   hiragana: string;
   romaji: string;
+  kanji_word?: string;
   vietnamese_meaning: string;
   word_type: string;
   japanese_example?: string;
@@ -138,7 +139,7 @@ export default function QuickLookupModal({
           const rawVocab = res.vocabulary || res.data?.vocabulary || [];
           const customVocab = res.customVocabulary || res.data?.customVocabulary || [];
           const allVocabs: VocabItem[] = [...rawVocab, ...customVocab].map((item: any) => {
-            const kForm = getGlobalKanjiForm(item.hiragana, allKanji);
+            const kForm = item.kanji_word || getGlobalKanjiForm(item.hiragana, allKanji, item.kanji_word);
             return {
               ...item,
               kanji_form: kForm && kForm !== item.hiragana ? kForm : undefined
@@ -187,7 +188,7 @@ export default function QuickLookupModal({
       }
       if (!q) return true;
 
-      const kanjiForm = item.kanji_form || getGlobalKanjiForm(item.hiragana, kanjiList);
+      const kanjiForm = item.kanji_word || item.kanji_form || getGlobalKanjiForm(item.hiragana, kanjiList, item.kanji_word);
       const matchesHira = item.hiragana?.toLowerCase().includes(q);
       const matchesRomaji = item.romaji?.toLowerCase().includes(q);
       const matchesMeaning = item.vietnamese_meaning?.toLowerCase().includes(q);

@@ -57,7 +57,7 @@ export function extractLessonKanjiVocabs(
   if (Array.isArray(vocabItems)) {
     for (const v of vocabItems) {
       if (!v || !v.hiragana) continue;
-      const kForm = v.kanji_form || getGlobalKanjiForm(v.hiragana, allKanjiList.length > 0 ? allKanjiList : kanjiItems);
+      const kForm = v.kanji_word || v.kanji_form || getGlobalKanjiForm(v.hiragana, allKanjiList.length > 0 ? allKanjiList : kanjiItems, v.kanji_word);
       if (!kForm || kForm === v.hiragana) continue;
 
       // Check if kForm contains any Kanji character from this lesson

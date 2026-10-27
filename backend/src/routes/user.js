@@ -432,33 +432,49 @@ router.get('/course-summary', async (req, res) => {
     if (lErr) throw lErr;
     const lessonIds = lessons.map(l => l.id);
 
-    const [vocabRes, kanjiRes, grammarRes] = await Promise.all([
-      supabase.from('vocabulary').select('*').in('lesson_id', lessonIds),
-      supabase.from('kanji').select('*').in('lesson_id', lessonIds),
-      supabase.from('grammar').select('*').in('lesson_id', lessonIds)
+    // Helper to fetch all rows from Supabase bypassing the 1000-row default limit
+    async function fetchAllTableRows(table, filterFn = null) {
+      let all = [];
+      let from = 0;
+      while (true) {
+        let q = supabase.from(table).select('*').order('id', { ascending: true });
+        if (filterFn) {
+          q = filterFn(q);
+        }
+        const { data, error } = await q.range(from, from + 999);
+        if (error) throw error;
+        if (!data || data.length === 0) break;
+        all = all.concat(data);
+        if (data.length < 1000) break;
+        from += 1000;
+      }
+      return all;
+    }
+
+    const [allVocab, allKanji, allGrammar, allProgress] = await Promise.all([
+      fetchAllTableRows('vocabulary', q => q.in('lesson_id', lessonIds)),
+      fetchAllTableRows('kanji', q => q.in('lesson_id', lessonIds)),
+      fetchAllTableRows('grammar', q => q.in('lesson_id', lessonIds)),
+      fetchAllTableRows('user_progress', q => q.eq('user_id', userId))
     ]);
-    if (vocabRes.error) throw vocabRes.error;
-    if (kanjiRes.error) throw kanjiRes.error;
-    if (grammarRes.error) throw grammarRes.error;
 
-    const { data: userProgress, error: pErr } = await supabase
-      .from('user_progress')
-      .select('*')
-      .eq('user_id', userId);
-    if (pErr) throw pErr;
+    const progressMap = new Map();
+    allProgress.forEach(p => {
+      progressMap.set(`${p.item_type}:${p.item_id}`, p.status);
+    });
 
-    const vocabList = vocabRes.data.map(v => {
-      const p = userProgress.find(progress => progress.item_type === 'vocabulary' && progress.item_id === v.id);
-      return { ...v, status: p ? p.status : 'not_learned' };
-    });
-    const kanjiList = kanjiRes.data.map(k => {
-      const p = userProgress.find(progress => progress.item_type === 'kanji' && progress.item_id === k.id);
-      return { ...k, status: p ? p.status : 'not_learned' };
-    });
-    const grammarList = grammarRes.data.map(g => {
-      const p = userProgress.find(progress => progress.item_type === 'grammar' && progress.item_id === g.id);
-      return { ...g, status: p ? p.status : 'not_learned' };
-    });
+    const vocabList = allVocab.map(v => ({
+      ...v,
+      status: progressMap.get(`vocabulary:${v.id}`) || 'not_learned'
+    }));
+    const kanjiList = allKanji.map(k => ({
+      ...k,
+      status: progressMap.get(`kanji:${k.id}`) || 'not_learned'
+    }));
+    const grammarList = allGrammar.map(g => ({
+      ...g,
+      status: progressMap.get(`grammar:${g.id}`) || 'not_learned'
+    }));
 
     const [customVocabRes, customKanjiRes, customGrammarRes] = await Promise.all([
       supabase.from('user_custom_vocabulary').select('*').eq('user_id', userId).in('lesson_id', lessonIds),

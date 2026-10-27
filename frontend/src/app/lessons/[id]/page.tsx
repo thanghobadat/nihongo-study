@@ -3091,7 +3091,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
       if (speedrunDirection !== 'listen-to-select') {
 
-        playAudioWithFallback(getKanjiForm(speedrunQuestion.hiragana, kanjiItems), speedrunQuestion.hiragana);
+        playAudioWithFallback(speedrunQuestion.kanji_word || getKanjiForm(speedrunQuestion.hiragana, kanjiItems, speedrunQuestion.kanji_word), speedrunQuestion.hiragana);
 
       }
 
@@ -3330,7 +3330,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   // Filtered vocabulary items (phẳng theo bài học)
   const filteredVocabItems = useMemo(() => {
     return visibleVocabPool.filter((item) => {
-      const kanjiFormStr = showKanjiInVocab ? getKanjiForm(item.hiragana, kanjiItems) : '';
+      const kanjiFormStr = showKanjiInVocab ? (item.kanji_word || getKanjiForm(item.hiragana, kanjiItems, item.kanji_word)) : '';
       const matchesSearch =
         item.hiragana.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.romaji.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -3412,7 +3412,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
             {showKanjiInVocab ? (
               <>
                 <span className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-wide">
-                  {getKanjiForm(item.hiragana, kanjiItems)}
+                  {item.kanji_word || getKanjiForm(item.hiragana, kanjiItems, item.kanji_word)}
                 </span>
                 <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">
                   ({item.hiragana})
@@ -3426,7 +3426,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
               />
             )}
             <button
-              onClick={() => playAudioWithFallback(getKanjiForm(item.hiragana, kanjiItems), item.hiragana)}
+              onClick={() => playAudioWithFallback(item.kanji_word || getKanjiForm(item.hiragana, kanjiItems, item.kanji_word), item.hiragana)}
               className="p-1 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:text-blue-400 hover:border-blue-200 dark:border-blue-800/40 transition-colors cursor-pointer active:scale-90 self-center"
               title="Nghe phát âm"
             >
