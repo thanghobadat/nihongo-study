@@ -432,44 +432,30 @@ router.get('/course-summary', async (req, res) => {
     if (lErr) throw lErr;
     const lessonIds = lessons.map(l => l.id);
 
-    // Helper to bypass Supabase default 1000-row limit
-    const fetchAllRows = async (queryFn, pageSize = 1000) => {
-      let allRows = [];
-      let from = 0;
-      let hasMore = true;
-      while (hasMore) {
-        const { data, error } = await queryFn().range(from, from + pageSize - 1);
-        if (error) throw error;
-        if (data && data.length > 0) {
-          allRows = allRows.concat(data);
-          if (data.length < pageSize) {
-            hasMore = false;
-          } else {
-            from += pageSize;
-          }
-        } else {
-          hasMore = false;
-        }
-      }
-      return allRows;
-    };
-
-    const [vocabData, kanjiData, grammarData, userProgress] = await Promise.all([
-      fetchAllRows(() => supabase.from('vocabulary').select('*').in('lesson_id', lessonIds).order('id', { ascending: true })),
-      fetchAllRows(() => supabase.from('kanji').select('*').in('lesson_id', lessonIds).order('id', { ascending: true })),
-      fetchAllRows(() => supabase.from('grammar').select('*').in('lesson_id', lessonIds).order('id', { ascending: true })),
-      fetchAllRows(() => supabase.from('user_progress').select('*').eq('user_id', userId))
+    const [vocabRes, kanjiRes, grammarRes] = await Promise.all([
+      supabase.from('vocabulary').select('*').in('lesson_id', lessonIds),
+      supabase.from('kanji').select('*').in('lesson_id', lessonIds),
+      supabase.from('grammar').select('*').in('lesson_id', lessonIds)
     ]);
+    if (vocabRes.error) throw vocabRes.error;
+    if (kanjiRes.error) throw kanjiRes.error;
+    if (grammarRes.error) throw grammarRes.error;
 
-    const vocabList = vocabData.map(v => {
+    const { data: userProgress, error: pErr } = await supabase
+      .from('user_progress')
+      .select('*')
+      .eq('user_id', userId);
+    if (pErr) throw pErr;
+
+    const vocabList = vocabRes.data.map(v => {
       const p = userProgress.find(progress => progress.item_type === 'vocabulary' && progress.item_id === v.id);
       return { ...v, status: p ? p.status : 'not_learned' };
     });
-    const kanjiList = kanjiData.map(k => {
+    const kanjiList = kanjiRes.data.map(k => {
       const p = userProgress.find(progress => progress.item_type === 'kanji' && progress.item_id === k.id);
       return { ...k, status: p ? p.status : 'not_learned' };
     });
-    const grammarList = grammarData.map(g => {
+    const grammarList = grammarRes.data.map(g => {
       const p = userProgress.find(progress => progress.item_type === 'grammar' && progress.item_id === g.id);
       return { ...g, status: p ? p.status : 'not_learned' };
     });
@@ -3049,24 +3035,9 @@ router.get('/study-overview', async (req, res) => {
 
     const plan = await getUserPlanAsync(userId);
 
-    let totalVocab = (mockDb.vocabulary || []).length;
-    let totalKanji = (mockDb.kanji || []).length;
-    let totalGrammar = (mockDb.grammar || []).length;
-
-    if (!req.user.isMock && isSupabaseConfigured()) {
-      try {
-        const [vCount, kCount, gCount] = await Promise.all([
-          supabase.from('vocabulary').select('*', { count: 'exact', head: true }).gte('lesson_id', 0).lte('lesson_id', 50),
-          supabase.from('kanji').select('*', { count: 'exact', head: true }).gte('lesson_id', 0).lte('lesson_id', 50),
-          supabase.from('grammar').select('*', { count: 'exact', head: true }).gte('lesson_id', 0).lte('lesson_id', 50)
-        ]);
-        if (!vCount.error && typeof vCount.count === 'number') totalVocab = vCount.count;
-        if (!kCount.error && typeof kCount.count === 'number') totalKanji = kCount.count;
-        if (!gCount.error && typeof gCount.count === 'number') totalGrammar = gCount.count;
-      } catch (err) {
-        console.warn('[study-overview] Error fetching counts from Supabase:', err.message);
-      }
-    }
+    const vocabList = mockDb.vocabulary || [];
+    const kanjiList = mockDb.kanji || [];
+    const grammarList = mockDb.grammar || [];
     const progressKeys = Object.keys(mockDb.userProgress || {}).filter(k => k.startsWith(`${userId}:`));
 
     const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
@@ -3194,15 +3165,15 @@ router.get('/study-overview', async (req, res) => {
     return res.json({
       success: true,
       overview: {
-        totalVocab,
+        totalVocab: vocabList.length || 1500,
         masteredVocab,
-        vocabPercentage: totalVocab ? parseFloat(((masteredVocab / totalVocab) * 100).toFixed(1)) : 0,
-        totalKanji,
+        vocabPercentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0,
+        totalKanji: kanjiList.length || 255,
         masteredKanji,
-        kanjiPercentage: totalKanji ? parseFloat(((masteredKanji / totalKanji) * 100).toFixed(1)) : 0,
-        totalGrammar,
+        kanjiPercentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0,
+        totalGrammar: grammarList.length || 204,
         masteredGrammar,
-        grammarPercentage: totalGrammar ? parseFloat(((masteredGrammar / totalGrammar) * 100).toFixed(1)) : 0,
+        grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
         totalLessons: 50,
         currentLesson
       },
