@@ -20791,7 +20791,7 @@ module.exports = {
     },
     {
       "id": 3010,
-      "lesson_id": 25,
+      "lesson_id": 2,
       "hiragana": "まんねんひつ",
       "romaji": "mannenhitsu",
       "vietnamese_meaning": "bút máy",
@@ -20819,7 +20819,7 @@ module.exports = {
     },
     {
       "id": 3012,
-      "lesson_id": 25,
+      "lesson_id": 10,
       "hiragana": "やおや",
       "romaji": "yaoya",
       "vietnamese_meaning": "cửa hàng rau",
@@ -20833,7 +20833,7 @@ module.exports = {
     },
     {
       "id": 3013,
-      "lesson_id": 25,
+      "lesson_id": 12,
       "hiragana": "より",
       "romaji": "yori",
       "vietnamese_meaning": "hơn",
@@ -20847,7 +20847,7 @@ module.exports = {
     },
     {
       "id": 3014,
-      "lesson_id": 25,
+      "lesson_id": 8,
       "hiragana": "よい",
       "romaji": "yoi",
       "vietnamese_meaning": "tốt, được",
@@ -20861,7 +20861,7 @@ module.exports = {
     },
     {
       "id": 3015,
-      "lesson_id": 25,
+      "lesson_id": 1,
       "hiragana": "みな",
       "romaji": "mina",
       "vietnamese_meaning": "mọi người",
@@ -20945,7 +20945,7 @@ module.exports = {
     },
     {
       "id": 3021,
-      "lesson_id": 25,
+      "lesson_id": 8,
       "hiragana": "りっぱ",
       "romaji": "rippa",
       "vietnamese_meaning": "Tuyệt vời, xuất sắc",
@@ -21015,7 +21015,7 @@ module.exports = {
     },
     {
       "id": 3026,
-      "lesson_id": 25,
+      "lesson_id": 8,
       "hiragana": "けっこう",
       "romaji": "kekkou",
       "vietnamese_meaning": "khá tốt, được",
@@ -21043,7 +21043,7 @@ module.exports = {
     },
     {
       "id": 3028,
-      "lesson_id": 25,
+      "lesson_id": 4,
       "hiragana": "はち",
       "romaji": "hachi",
       "vietnamese_meaning": "tám",
@@ -21057,7 +21057,7 @@ module.exports = {
     },
     {
       "id": 3029,
-      "lesson_id": 25,
+      "lesson_id": 4,
       "hiragana": "ろく",
       "romaji": "roku",
       "vietnamese_meaning": "sáu",
@@ -21141,7 +21141,7 @@ module.exports = {
     },
     {
       "id": 3035,
-      "lesson_id": 25,
+      "lesson_id": 2,
       "hiragana": "ページ",
       "romaji": "pe-ji",
       "vietnamese_meaning": "trang (sách)",
@@ -21183,7 +21183,7 @@ module.exports = {
     },
     {
       "id": 3038,
-      "lesson_id": 50,
+      "lesson_id": 44,
       "hiragana": "きいろい",
       "romaji": "kiiroi",
       "vietnamese_meaning": "màu vàng",
@@ -21211,7 +21211,7 @@ module.exports = {
     },
     {
       "id": 3040,
-      "lesson_id": 25,
+      "lesson_id": 22,
       "hiragana": "ワイシャツ",
       "romaji": "waishatsu",
       "vietnamese_meaning": "(formal) shirt, dress shirt, business shirt",
@@ -21253,7 +21253,7 @@ module.exports = {
     },
     {
       "id": 3043,
-      "lesson_id": 25,
+      "lesson_id": 11,
       "hiragana": "キロメートル",
       "romaji": "kirome-toru",
       "vietnamese_meaning": "kilômét",
@@ -21267,7 +21267,7 @@ module.exports = {
     },
     {
       "id": 3044,
-      "lesson_id": 25,
+      "lesson_id": 14,
       "hiragana": "マッチ",
       "romaji": "macchi",
       "vietnamese_meaning": "diêm",
@@ -21295,7 +21295,7 @@ module.exports = {
     },
     {
       "id": 3046,
-      "lesson_id": 25,
+      "lesson_id": 16,
       "hiragana": "せ",
       "romaji": "se",
       "vietnamese_meaning": "lưng, chiều cao",
@@ -21309,7 +21309,7 @@ module.exports = {
     },
     {
       "id": 3047,
-      "lesson_id": 25,
+      "lesson_id": 10,
       "hiragana": "など",
       "romaji": "nado",
       "vietnamese_meaning": "vân vân, các thứ",
@@ -21323,7 +21323,7 @@ module.exports = {
     },
     {
       "id": 3048,
-      "lesson_id": 25,
+      "lesson_id": 2,
       "hiragana": "ペン",
       "romaji": "pen",
       "vietnamese_meaning": "bút",
@@ -21337,7 +21337,7 @@ module.exports = {
     },
     {
       "id": 3049,
-      "lesson_id": 25,
+      "lesson_id": 18,
       "hiragana": "ギター",
       "romaji": "gita-",
       "vietnamese_meaning": "đàn ghi-ta",
@@ -21351,7 +21351,7 @@ module.exports = {
     },
     {
       "id": 3050,
-      "lesson_id": 25,
+      "lesson_id": 11,
       "hiragana": "メートル",
       "romaji": "me-toru",
       "vietnamese_meaning": "mét",
@@ -21365,7 +21365,7 @@ module.exports = {
     },
     {
       "id": 3051,
-      "lesson_id": 25,
+      "lesson_id": 6,
       "hiragana": "バター",
       "romaji": "bata-",
       "vietnamese_meaning": "bơ",
@@ -21379,7 +21379,7 @@ module.exports = {
     },
     {
       "id": 3052,
-      "lesson_id": 25,
+      "lesson_id": 11,
       "hiragana": "キロ",
       "romaji": "kiro",
       "vietnamese_meaning": "ký, kilô",
@@ -21393,7 +21393,7 @@ module.exports = {
     },
     {
       "id": 3053,
-      "lesson_id": 25,
+      "lesson_id": 22,
       "hiragana": "スカート",
       "romaji": "suka-to",
       "vietnamese_meaning": "váy",
@@ -21407,7 +21407,7 @@ module.exports = {
     },
     {
       "id": 3054,
-      "lesson_id": 25,
+      "lesson_id": 18,
       "hiragana": "レコード",
       "romaji": "reko-do",
       "vietnamese_meaning": "(phonograph) record",
@@ -21435,7 +21435,7 @@ module.exports = {
     },
     {
       "id": 3056,
-      "lesson_id": 25,
+      "lesson_id": 14,
       "hiragana": "ストーブ",
       "romaji": "suto-bu",
       "vietnamese_meaning": "(room) heater, stove",
@@ -21463,7 +21463,7 @@ module.exports = {
     },
     {
       "id": 3058,
-      "lesson_id": 25,
+      "lesson_id": 18,
       "hiragana": "テープレコーダー",
       "romaji": "te-pureko-da-",
       "vietnamese_meaning": "máy ghi âm",
@@ -21477,7 +21477,7 @@ module.exports = {
     },
     {
       "id": 3059,
-      "lesson_id": 25,
+      "lesson_id": 6,
       "hiragana": "します",
       "romaji": "shimasu",
       "vietnamese_meaning": "làm, thực hiện",
@@ -21519,7 +21519,7 @@ module.exports = {
     },
     {
       "id": 3062,
-      "lesson_id": 25,
+      "lesson_id": 10,
       "hiragana": "もん",
       "romaji": "mon",
       "vietnamese_meaning": "cổng",
@@ -21561,7 +21561,7 @@ module.exports = {
     },
     {
       "id": 3065,
-      "lesson_id": 25,
+      "lesson_id": 16,
       "hiragana": "おさら",
       "romaji": "osara",
       "vietnamese_meaning": "đĩa",
@@ -21575,7 +21575,7 @@ module.exports = {
     },
     {
       "id": 3066,
-      "lesson_id": 25,
+      "lesson_id": 1,
       "hiragana": "じゃあ",
       "romaji": "jaa",
       "vietnamese_meaning": "vậy thì",
@@ -21715,7 +21715,7 @@ module.exports = {
     },
     {
       "id": 3076,
-      "lesson_id": 50,
+      "lesson_id": 32,
       "hiragana": "うで",
       "romaji": "ude",
       "vietnamese_meaning": "cánh tay",
@@ -21757,7 +21757,7 @@ module.exports = {
     },
     {
       "id": 3079,
-      "lesson_id": 50,
+      "lesson_id": 34,
       "hiragana": "ぶどう",
       "romaji": "budou",
       "vietnamese_meaning": "nho",
@@ -21799,7 +21799,7 @@ module.exports = {
     },
     {
       "id": 3082,
-      "lesson_id": 50,
+      "lesson_id": 27,
       "hiragana": "みずうみ",
       "romaji": "mizuumi",
       "vietnamese_meaning": "hồ",
@@ -21841,7 +21841,7 @@ module.exports = {
     },
     {
       "id": 3085,
-      "lesson_id": 50,
+      "lesson_id": 27,
       "hiragana": "もり",
       "romaji": "mori",
       "vietnamese_meaning": "rừng",
@@ -21869,7 +21869,7 @@ module.exports = {
     },
     {
       "id": 3087,
-      "lesson_id": 50,
+      "lesson_id": 26,
       "hiragana": "ざんねん",
       "romaji": "zannen",
       "vietnamese_meaning": "đáng tiếc",
@@ -21883,7 +21883,7 @@ module.exports = {
     },
     {
       "id": 3088,
-      "lesson_id": 50,
+      "lesson_id": 35,
       "hiragana": "そつぎょう",
       "romaji": "sotsugyou",
       "vietnamese_meaning": "tốt nghiệp",
@@ -21897,7 +21897,7 @@ module.exports = {
     },
     {
       "id": 3089,
-      "lesson_id": 50,
+      "lesson_id": 43,
       "hiragana": "くも",
       "romaji": "kumo",
       "vietnamese_meaning": "mây",
@@ -21911,7 +21911,7 @@ module.exports = {
     },
     {
       "id": 3090,
-      "lesson_id": 50,
+      "lesson_id": 43,
       "hiragana": "ひかり",
       "romaji": "hikari",
       "vietnamese_meaning": "ánh sáng",
@@ -21925,7 +21925,7 @@ module.exports = {
     },
     {
       "id": 3091,
-      "lesson_id": 50,
+      "lesson_id": 32,
       "hiragana": "ゆび",
       "romaji": "yuび",
       "vietnamese_meaning": "ngón tay",
@@ -21953,7 +21953,7 @@ module.exports = {
     },
     {
       "id": 3093,
-      "lesson_id": 50,
+      "lesson_id": 30,
       "hiragana": "あそび",
       "romaji": "asoび",
       "vietnamese_meaning": "trò chơi",
@@ -22023,7 +22023,7 @@ module.exports = {
     },
     {
       "id": 3098,
-      "lesson_id": 50,
+      "lesson_id": 27,
       "hiragana": "すな",
       "romaji": "suna",
       "vietnamese_meaning": "cát",
@@ -22037,7 +22037,7 @@ module.exports = {
     },
     {
       "id": 3099,
-      "lesson_id": 50,
+      "lesson_id": 37,
       "hiragana": "きぬ",
       "romaji": "kinu",
       "vietnamese_meaning": "lụa",
@@ -22051,7 +22051,7 @@ module.exports = {
     },
     {
       "id": 3100,
-      "lesson_id": 50,
+      "lesson_id": 37,
       "hiragana": "いと",
       "romaji": "ito",
       "vietnamese_meaning": "sợi chỉ",
@@ -22093,7 +22093,7 @@ module.exports = {
     },
     {
       "id": 3103,
-      "lesson_id": 50,
+      "lesson_id": 27,
       "hiragana": "はやし",
       "romaji": "hayashi",
       "vietnamese_meaning": "rừng cây",
@@ -22163,7 +22163,7 @@ module.exports = {
     },
     {
       "id": 3108,
-      "lesson_id": 50,
+      "lesson_id": 36,
       "hiragana": "じてん",
       "romaji": "jiten",
       "vietnamese_meaning": "từ điển",
@@ -22177,7 +22177,7 @@ module.exports = {
     },
     {
       "id": 3109,
-      "lesson_id": 50,
+      "lesson_id": 40,
       "hiragana": "けんか",
       "romaji": "kenka",
       "vietnamese_meaning": "cãi nhau",
@@ -22191,7 +22191,7 @@ module.exports = {
     },
     {
       "id": 3110,
-      "lesson_id": 50,
+      "lesson_id": 32,
       "hiragana": "ひげ",
       "romaji": "hige",
       "vietnamese_meaning": "râu",
@@ -22219,7 +22219,7 @@ module.exports = {
     },
     {
       "id": 3112,
-      "lesson_id": 50,
+      "lesson_id": 49,
       "hiragana": "きゃく",
       "romaji": "kyaku",
       "vietnamese_meaning": "khách",
@@ -22247,7 +22247,7 @@ module.exports = {
     },
     {
       "id": 3114,
-      "lesson_id": 50,
+      "lesson_id": 32,
       "hiragana": "しっぱい",
       "romaji": "shippai",
       "vietnamese_meaning": "Thất bại",
@@ -22317,7 +22317,7 @@ module.exports = {
     },
     {
       "id": 3119,
-      "lesson_id": 50,
+      "lesson_id": 39,
       "hiragana": "おこる",
       "romaji": "okoru",
       "vietnamese_meaning": "Tức giận",
@@ -22345,7 +22345,7 @@ module.exports = {
     },
     {
       "id": 3121,
-      "lesson_id": 50,
+      "lesson_id": 39,
       "hiragana": "よろこぶ",
       "romaji": "yorokobu",
       "vietnamese_meaning": "Vui mừng",
@@ -22373,7 +22373,7 @@ module.exports = {
     },
     {
       "id": 3123,
-      "lesson_id": 50,
+      "lesson_id": 42,
       "hiragana": "すすむ",
       "romaji": "susumu",
       "vietnamese_meaning": "Tiến lên",
@@ -22443,7 +22443,7 @@ module.exports = {
     },
     {
       "id": 3128,
-      "lesson_id": 50,
+      "lesson_id": 44,
       "hiragana": "ふかい",
       "romaji": "fukai",
       "vietnamese_meaning": "Sâu",
@@ -22457,7 +22457,7 @@ module.exports = {
     },
     {
       "id": 3129,
-      "lesson_id": 50,
+      "lesson_id": 28,
       "hiragana": "おっと",
       "romaji": "otto",
       "vietnamese_meaning": "Chồng",
