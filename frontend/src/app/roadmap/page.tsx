@@ -44,42 +44,65 @@ export default function RoadmapPage() {
     }, 2500);
   };
 
+  const formatHiraganaInText = (str: string) => {
+    if (!str || !str.includes('(')) return str;
+    const tokens = str.split(/(\([^\)]+\))/g);
+    return tokens.map((tok, i) => {
+      if (tok.startsWith('(') && tok.endsWith(')')) {
+        return (
+          <span key={i} className="text-[0.78em] font-medium text-blue-600 dark:text-blue-400 mx-0.5 opacity-90 select-none">
+            {tok}
+          </span>
+        );
+      }
+      return tok;
+    });
+  };
+
   const renderFormattedGrammarText = (text?: string) => {
     if (!text) return null;
     const lines = text.split('\n');
     return (
       <div className="space-y-1">
         {lines.map((line, idx) => {
-          let content: React.ReactNode = line;
-          if (line.includes('Khẳng định quá khứ:')) {
-            const parts = line.split('Khẳng định quá khứ:');
-            content = <><span className="text-emerald-500 font-black">Khẳng định quá khứ:</span>{parts[1]}</>;
-          } else if (line.includes('Phủ định quá khứ:')) {
-            const parts = line.split('Phủ định quá khứ:');
-            content = <><span className="text-rose-500 font-black">Phủ định quá khứ:</span>{parts[1]}</>;
-          } else if (line.includes('Nghi vấn quá khứ:')) {
-            const parts = line.split('Nghi vấn quá khứ:');
-            content = <><span className="text-amber-500 font-black">Nghi vấn quá khứ:</span>{parts[1]}</>;
-          } else if (line.includes('Khẳng định:')) {
-            const parts = line.split('Khẳng định:');
-            content = <><span className="text-emerald-500 font-black">Khẳng định:</span>{parts[1]}</>;
-          } else if (line.includes('Phủ định:')) {
-            const parts = line.split('Phủ định:');
-            content = <><span className="text-rose-500 font-black">Phủ định:</span>{parts[1]}</>;
-          } else if (line.includes('Nghi vấn:')) {
-            const parts = line.split('Nghi vấn:');
-            content = <><span className="text-amber-500 font-black">Nghi vấn:</span>{parts[1]}</>;
+          let prefix: React.ReactNode = null;
+          let body = line;
+
+          const labels = [
+            { text: 'Khẳng định quá khứ:', color: 'text-emerald-500 font-black' },
+            { text: 'Phủ định quá khứ:', color: 'text-rose-500 font-black' },
+            { text: 'Nghi vấn quá khứ:', color: 'text-amber-500 font-black' },
+            { text: 'Khẳng định:', color: 'text-emerald-500 font-black' },
+            { text: 'Phủ định:', color: 'text-rose-500 font-black' },
+            { text: 'Nghi vấn:', color: 'text-amber-500 font-black' }
+          ];
+
+          for (const lbl of labels) {
+            if (line.includes(lbl.text)) {
+              const parts = line.split(lbl.text);
+              prefix = <span className={lbl.color}>{lbl.text}</span>;
+              body = parts[1];
+              break;
+            }
           }
-          return <div key={idx} className="leading-snug">{content}</div>;
+
+          return (
+            <div key={idx} className="leading-snug">
+              {prefix}
+              {formatHiraganaInText(body)}
+            </div>
+          );
         })}
       </div>
     );
   };
 
   const playAudio = (text: string) => {
+    const cleanText = (text || '').replace(/\([^)]+\)/g, '').replace(/（[^）]+）/g, '').trim();
+    if (!cleanText) return;
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
+      const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = 'ja-JP';
       const voices = window.speechSynthesis.getVoices();
       const jaVoice = voices.find(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));

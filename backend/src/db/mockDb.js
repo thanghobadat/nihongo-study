@@ -441,7 +441,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'À, nó hí ta' - Người kia đang hí hửng nhìn ta.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "",
+      "kanji_word": "あの人",
       "pitch_accent": 2
     },
     {
@@ -456,7 +456,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'À, nó ca ta' - Vị kia đang ca ngợi ta.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "",
+      "kanji_word": "あの方",
       "pitch_accent": 3
     },
     {
@@ -473,6 +473,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.655773+00:00",
       "kanji_word": "先生",
       "pitch_accent": 0
+    },
+    {
+      "id": 6,
+      "lesson_id": 1,
+      "hiragana": "きょうし",
+      "romaji": "kyoushi",
+      "vietnamese_meaning": "Nhà giáo (chỉ nghề nghiệp)",
+      "word_type": "noun",
+      "japanese_example": "私は 教師 です。",
+      "example_meaning": "Tôi là nhà giáo.",
+      "mnemonic_tip": "Mẹo nhớ: 'Kiêu sĩ' - Người nhà giáo không được kiêu ngạo.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "教師",
+      "pitch_accent": 1
     },
     {
       "id": 7,
@@ -996,7 +1011,7 @@ module.exports = {
       "mnemonic_tip": "Hậu tố lịch sự thêm vào sau tên người.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "三",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -1255,6 +1270,51 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 59,
+      "lesson_id": 2,
+      "hiragana": "てちょう",
+      "romaji": "techō",
+      "vietnamese_meaning": "sổ tay",
+      "word_type": "noun",
+      "japanese_example": "手帳に予定を書きます。",
+      "example_meaning": "Tôi viết lịch trình vào sổ tay.",
+      "mnemonic_tip": "手帳 - Thủ trướng",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "手帳",
+      "pitch_accent": 0
+    },
+    {
+      "id": 60,
+      "lesson_id": 2,
+      "hiragana": "めいし",
+      "romaji": "meishi",
+      "vietnamese_meaning": "danh thiếp",
+      "word_type": "noun",
+      "japanese_example": "名刺を交換します。",
+      "example_meaning": "Chúng tôi trao đổi danh thiếp.",
+      "mnemonic_tip": "名刺 - Danh thứ",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "名刺",
+      "pitch_accent": 1
+    },
+    {
+      "id": 61,
+      "lesson_id": 2,
+      "hiragana": "カード",
+      "romaji": "kādo",
+      "vietnamese_meaning": "thẻ, card",
+      "word_type": "noun",
+      "japanese_example": "これはクレジットカードです。",
+      "example_meaning": "Đây là thẻ tín dụng.",
+      "mnemonic_tip": "Thẻ nhựa",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 62,
       "lesson_id": 2,
       "hiragana": "えんぴつ",
@@ -1279,6 +1339,21 @@ module.exports = {
       "japanese_example": "ボールペンで書きます。",
       "example_meaning": "Tôi viết bằng bút bi.",
       "mnemonic_tip": "Bút bi nước",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 64,
+      "lesson_id": 2,
+      "hiragana": "シャープペンシル",
+      "romaji": "shāpupenshiru",
+      "vietnamese_meaning": "bút chì kim",
+      "word_type": "noun",
+      "japanese_example": "シャープペンシルは便利です。",
+      "example_meaning": "Bút chì kim thì tiện lợi.",
+      "mnemonic_tip": "Chì bấm",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
       "kanji_word": "",
@@ -1342,6 +1417,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
       "kanji_word": "鞄",
+      "pitch_accent": 0
+    },
+    {
+      "id": 69,
+      "lesson_id": 2,
+      "hiragana": "シーディー",
+      "romaji": "shīdī",
+      "vietnamese_meaning": "đĩa CD",
+      "word_type": "noun",
+      "japanese_example": "CDを聴きます。",
+      "example_meaning": "Tôi nghe đĩa CD.",
+      "mnemonic_tip": "Đĩa nhạc",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -1448,6 +1538,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.655773+00:00",
       "kanji_word": "椅子",
       "pitch_accent": 1
+    },
+    {
+      "id": 77,
+      "lesson_id": 2,
+      "hiragana": "チョコレート",
+      "romaji": "chokorēto",
+      "vietnamese_meaning": "sô-cô-la",
+      "word_type": "noun",
+      "japanese_example": "チョコレートを食べます。",
+      "example_meaning": "Tôi ăn sô-cô-la.",
+      "mnemonic_tip": "Kẹo ngọt",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
     },
     {
       "id": 78,
@@ -1855,6 +1960,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 107,
+      "lesson_id": 3,
+      "hiragana": "ロビー",
+      "romaji": "robii",
+      "vietnamese_meaning": "hành lang, đại sảnh",
+      "word_type": "noun",
+      "japanese_example": "ロビーで 待ちます。",
+      "example_meaning": "Tôi đợi ở đại sảnh.",
+      "mnemonic_tip": "Mẹo nhớ: Âm mượn Lobby.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 108,
       "lesson_id": 3,
       "hiragana": "へや",
@@ -1928,6 +2048,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.655773+00:00",
       "kanji_word": "",
       "pitch_accent": 3
+    },
+    {
+      "id": 113,
+      "lesson_id": 3,
+      "hiragana": "おくに",
+      "romaji": "okuni",
+      "vietnamese_meaning": "đất nước (của bạn)",
+      "word_type": "noun",
+      "japanese_example": "お国は どちら ですか。",
+      "example_meaning": "Đất nước của bạn là nước nào?",
+      "mnemonic_tip": "Mẹo nhớ: 'Ô cu ni' hỏi về đất nước.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "お国",
+      "pitch_accent": 2
     },
     {
       "id": 114,
@@ -2005,6 +2140,21 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 119,
+      "lesson_id": 3,
+      "hiragana": "ワイン",
+      "romaji": "wain",
+      "vietnamese_meaning": "rượu vang",
+      "word_type": "noun",
+      "japanese_example": "ワインを 飲みます。",
+      "example_meaning": "Tôi uống rượu vang.",
+      "mnemonic_tip": "Mẹo nhớ: Wine phát âm tiếng Nhật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
       "id": 120,
       "lesson_id": 3,
       "hiragana": "たばこ",
@@ -2035,6 +2185,21 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 122,
+      "lesson_id": 3,
+      "hiragana": "ちか",
+      "romaji": "chika",
+      "vietnamese_meaning": "tầng hầm",
+      "word_type": "noun",
+      "japanese_example": "地下に 駐車場があります。",
+      "example_meaning": "Có bãi đỗ xe ở tầng hầm.",
+      "mnemonic_tip": "Mẹo nhớ: 'Chỉ cá' bơi dưới tầng hầm nước.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "地下",
+      "pitch_accent": 3
+    },
+    {
       "id": 123,
       "lesson_id": 3,
       "hiragana": "いくら",
@@ -2046,7 +2211,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đi cua là' tốn bao nhiêu tiền?",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "幾ら",
+      "kanji_word": "",
       "pitch_accent": 2
     },
     {
@@ -2241,7 +2406,7 @@ module.exports = {
       "mnemonic_tip": "Dùng khi mua hàng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "下さい",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -2421,7 +2586,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đi' - 9 giờ rồi, đi học thôi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "字",
+      "kanji_word": "時",
       "pitch_accent": 0
     },
     {
@@ -2590,6 +2755,21 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 161,
+      "lesson_id": 4,
+      "hiragana": "でんわばんごう",
+      "romaji": "denwabangou",
+      "vietnamese_meaning": "Số điện thoại",
+      "word_type": "noun",
+      "japanese_example": "あなたの電話番号を教えてください。",
+      "example_meaning": "Làm ơn hãy cho tôi biết số điện thoại của bạn.",
+      "mnemonic_tip": "Mẹo nhớ: 'Đèn hoa bán gỗ' - Có đèn hoa bán gỗ thì gọi số điện thoại này.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00",
+      "kanji_word": "電話番号",
+      "pitch_accent": 0
+    },
+    {
       "id": 162,
       "lesson_id": 4,
       "hiragana": "なんばん",
@@ -2616,7 +2796,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Từ chỉ giờ trong tiếng Nhật.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "字",
+      "kanji_word": "～時",
       "pitch_accent": 1
     },
     {
@@ -2676,7 +2856,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Gỗ gõ' - Buổi chiều gõ vào thanh gỗ thư giãn.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "朝",
+      "kanji_word": "午後",
       "pitch_accent": 0
     },
     {
@@ -2691,7 +2871,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'A, sa' - A, sao sáng đã mọc rồi, trời đã sáng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "昼",
+      "kanji_word": "朝",
       "pitch_accent": 0
     },
     {
@@ -2706,7 +2886,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hí hửng' - Trưa được nghỉ nên hí hửng đi ăn.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "晩",
+      "kanji_word": "昼",
       "pitch_accent": 0
     },
     {
@@ -3036,7 +3216,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Trợ từ liên kết hai danh từ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "戸",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -3400,6 +3580,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 220,
+      "lesson_id": 5,
+      "hiragana": "ばんせん",
+      "romaji": "bansen",
+      "vietnamese_meaning": "Sân ga số ~",
+      "word_type": "counter",
+      "japanese_example": "１番線の電車は間もなく発車します。",
+      "example_meaning": "Chuyến tàu ở sân ga số 1 sẽ khởi hành ngay bây giờ.",
+      "mnemonic_tip": "Bán xe: Cứ mỗi \"sân ga\" là có người \"bán xe\" cho những hành khách đi lại.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "番線",
+      "pitch_accent": 1
+    },
+    {
       "id": 221,
       "lesson_id": 5,
       "hiragana": "ちかてつ",
@@ -3413,6 +3608,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "地下鉄",
       "pitch_accent": 3
+    },
+    {
+      "id": 222,
+      "lesson_id": 5,
+      "hiragana": "しんかんせん",
+      "romaji": "shinkansen",
+      "vietnamese_meaning": "Tàu siêu tốc Shinkansen",
+      "word_type": "noun",
+      "japanese_example": "新幹線はとても速いです。",
+      "example_meaning": "Tàu Shinkansen rất nhanh.",
+      "mnemonic_tip": "Xin ăn sen: Đi \"tàu siêu tốc Shinkansen\" phải \"xin ăn sen\" để khỏi đói.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "新幹線",
+      "pitch_accent": 1
     },
     {
       "id": 223,
@@ -3532,6 +3742,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "来年",
+      "pitch_accent": 0
+    },
+    {
+      "id": 231,
+      "lesson_id": 5,
+      "hiragana": "―がつ",
+      "romaji": "-gatsu",
+      "vietnamese_meaning": "tháng – (dùng để hỏi hoặc chỉ tháng nào đó)",
+      "word_type": "counter",
+      "japanese_example": "何月ですか。",
+      "example_meaning": "Là tháng mấy vậy?",
+      "mnemonic_tip": "-Gatsu: \"Gắt xử\" - Hỏi tháng mấy mà không biết là \"gắt xử\" liền!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "―月",
       "pitch_accent": 0
     },
     {
@@ -3700,6 +3925,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 243,
+      "lesson_id": 5,
+      "hiragana": "じゅうよっか",
+      "romaji": "juuyokka",
+      "vietnamese_meaning": "ngày 14, 14 ngày",
+      "word_type": "noun",
+      "japanese_example": "１４日(じゅうよっか)はバレンタインデーです。",
+      "example_meaning": "Ngày 14 là Ngày lễ tình nhân.",
+      "mnemonic_tip": "Juuyokka: \"Du dốc cả\" - Đi chơi đến ngày 14 mà vẫn \"du dốc cả\" (chưa về).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "十四日",
+      "pitch_accent": 2
+    },
+    {
       "id": 244,
       "lesson_id": 5,
       "hiragana": "はつか",
@@ -3713,6 +3953,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "２０日",
       "pitch_accent": 3
+    },
+    {
+      "id": 245,
+      "lesson_id": 5,
+      "hiragana": "にじゅうよっか",
+      "romaji": "nijuuyokka",
+      "vietnamese_meaning": "ngày 24, 24 ngày",
+      "word_type": "noun",
+      "japanese_example": "２４日(にじゅうよっか)はクリスマスイブです。",
+      "example_meaning": "Ngày 24 là đêm Giáng sinh.",
+      "mnemonic_tip": "Nijuuyokka: \"Nhìu dốc cả\" - Đến ngày 24 rồi mà vẫn còn \"nhìu dốc cả\" (nhiều việc cần làm).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "二十四日",
+      "pitch_accent": 1
+    },
+    {
+      "id": 246,
+      "lesson_id": 5,
+      "hiragana": "―にち",
+      "romaji": "-nichi",
+      "vietnamese_meaning": "ngày – (dùng để đếm số ngày, hoặc chỉ ngày trong tháng từ 11 trở đi)",
+      "word_type": "counter",
+      "japanese_example": "３０日(さんじゅうにち)に終わります。",
+      "example_meaning": "Nó sẽ kết thúc vào ngày 30.",
+      "mnemonic_tip": "-Nichi: \"Ní chị\" - Hỏi \"Ní chị\" xem còn bao nhiêu \"ngày\" nữa là đến sinh nhật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "―日",
+      "pitch_accent": 0
     },
     {
       "id": 247,
@@ -4255,6 +4525,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 284,
+      "lesson_id": 6,
+      "hiragana": "ミルク",
+      "romaji": "miruku",
+      "vietnamese_meaning": "Sữa (dùng cho loại sữa nói chung, đặc biệt là sữa tươi)",
+      "word_type": "noun",
+      "japanese_example": "ホットミルクを飲みます。",
+      "example_meaning": "Uống sữa nóng.",
+      "mnemonic_tip": "Miruku (Mì rủ cô) - Mì rủ cô đi uống sữa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
+    },
+    {
       "id": 285,
       "lesson_id": 6,
       "hiragana": "ジュース",
@@ -4268,6 +4553,21 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Juice' trong tiếng Anh - nước ép trái cây mát lành.",
       "image_url": "",
       "created_at": "2026-10-27T16:32:42.012Z"
+    },
+    {
+      "id": 286,
+      "lesson_id": 6,
+      "hiragana": "ビール",
+      "romaji": "biiru",
+      "vietnamese_meaning": "bia",
+      "word_type": "noun",
+      "japanese_example": "ビールを飲みます。",
+      "example_meaning": "Tôi uống bia.",
+      "mnemonic_tip": "Biiru nghe như 'bí rượu' - Bia là một loại bí rượu, uống vào dễ say.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
     },
     {
       "id": 287,
@@ -4285,6 +4585,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 288,
+      "lesson_id": 6,
+      "hiragana": "サッカー",
+      "romaji": "sakkaa",
+      "vietnamese_meaning": "bóng đá",
+      "word_type": "noun",
+      "japanese_example": "サッカーをします。",
+      "example_meaning": "Tôi chơi bóng đá.",
+      "mnemonic_tip": "Sakkaa nghe như 'sắc ca' - Sắc ca khúc ca chiến thắng khi ghi bàn trong bóng đá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 289,
       "lesson_id": 6,
       "hiragana": "テニス",
@@ -4294,6 +4609,21 @@ module.exports = {
       "japanese_example": "週末にテニスをします。",
       "example_meaning": "Cuối tuần tôi chơi tennis.",
       "mnemonic_tip": "Tenisu nghe như 'ten nít' - Cầm vợt tennis thì ten (tay) nít (nhỏ) cũng đánh được.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 291,
+      "lesson_id": 6,
+      "hiragana": "ビデオ",
+      "romaji": "bideo",
+      "vietnamese_meaning": "video, băng video",
+      "word_type": "noun",
+      "japanese_example": "ビデオを見ます。",
+      "example_meaning": "Tôi xem video.",
+      "mnemonic_tip": "Bideo nghe như 'bi đeo' - Xem video thì bi (cậu bé) thường 'đeo' tai nghe.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "",
@@ -4570,6 +4900,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 310,
+      "lesson_id": 6,
+      "hiragana": "［お］はなみ",
+      "romaji": "ohanami",
+      "vietnamese_meaning": "ngắm hoa anh đào",
+      "word_type": "noun",
+      "japanese_example": "今週末、お花見に行きましょう。",
+      "example_meaning": "Cuối tuần này chúng ta hãy đi ngắm hoa anh đào nhé.",
+      "mnemonic_tip": "Hanami nghe như 'há ra mi' - Khi ngắm hoa anh đào đẹp quá, bạn phải 'há ra (miệng) mà khen'.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "お花見",
+      "pitch_accent": 0
+    },
+    {
       "id": 312,
       "lesson_id": 6,
       "hiragana": "わかりました",
@@ -4613,6 +4958,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "上げる",
       "pitch_accent": 0
+    },
+    {
+      "id": 317,
+      "lesson_id": 7,
+      "hiragana": "もらいます",
+      "romaji": "moraimasu",
+      "vietnamese_meaning": "nhận",
+      "word_type": "verb",
+      "japanese_example": "プレゼントを もらいます。",
+      "example_meaning": "Tôi nhận quà tặng.",
+      "mnemonic_tip": "Mẹo nhớ: 'Mỏ rài máy' - nhận được cái mỏ hàn máy rài rải.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
     },
     {
       "id": 318,
@@ -4718,6 +5078,51 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "橋",
       "pitch_accent": 1
+    },
+    {
+      "id": 325,
+      "lesson_id": 7,
+      "hiragana": "はさみ",
+      "romaji": "hasami",
+      "vietnamese_meaning": "kéo",
+      "word_type": "noun",
+      "japanese_example": "はさみで 切ります。",
+      "example_meaning": "Cắt bằng kéo.",
+      "mnemonic_tip": "Mẹo nhớ: 'Hạ sa mì' - lấy kéo cắt mì ăn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 327,
+      "lesson_id": 7,
+      "hiragana": "ケータイ",
+      "romaji": "keetai",
+      "vietnamese_meaning": "điện thoại di động",
+      "word_type": "noun",
+      "japanese_example": "携帯で メールを送ります。",
+      "example_meaning": "Gửi thư điện tử bằng điện thoại.",
+      "mnemonic_tip": "Mẹo nhớ: 'Kê tai' - kê điện thoại vào tai nghe.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 328,
+      "lesson_id": 7,
+      "hiragana": "メール",
+      "romaji": "meeru",
+      "vietnamese_meaning": "thư điện tử",
+      "word_type": "noun",
+      "japanese_example": "メールを 書きました。",
+      "example_meaning": "Tôi đã viết thư điện tử.",
+      "mnemonic_tip": "E-mail phát âm kiểu Nhật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
     },
     {
       "id": 329,
@@ -4930,6 +5335,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 353,
+      "lesson_id": 7,
+      "hiragana": "クリスマス",
+      "romaji": "kurisumasu",
+      "vietnamese_meaning": "Giáng sinh",
+      "word_type": "noun",
+      "japanese_example": "クリスマスにパーティーをします。",
+      "example_meaning": "Tổ chức tiệc vào Giáng sinh.",
+      "mnemonic_tip": "Cư ri sư mát sờ' - Cư ri sư mát sờ, mùa Giáng sinh thật mát mẻ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 354,
       "lesson_id": 7,
       "hiragana": "ちち",
@@ -5031,7 +5451,7 @@ module.exports = {
       "mnemonic_tip": "Má đã' - Má đã dặn rồi, nhưng tôi vẫn chưa làm bài tập!",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "未だ",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -5048,6 +5468,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "",
       "pitch_accent": 2
+    },
+    {
+      "id": 362,
+      "lesson_id": 7,
+      "hiragana": "いらっしゃい",
+      "romaji": "irasshai",
+      "vietnamese_meaning": "Chào mừng quý khách, xin mời vào",
+      "word_type": "noun",
+      "japanese_example": "いらっしゃいませ！どうぞ中へ。",
+      "example_meaning": "Chào mừng quý khách! Xin mời vào bên trong.",
+      "mnemonic_tip": "I ra sai' - Khi khách đến, mình ra mời khách vào, 'I ra sai' chỗ đó nhé!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
     },
     {
       "id": 363,
@@ -5093,6 +5528,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "旅行",
       "pitch_accent": 0
+    },
+    {
+      "id": 367,
+      "lesson_id": 8,
+      "hiragana": "ハンサムな",
+      "romaji": "hansamuna",
+      "vietnamese_meaning": "đẹp trai",
+      "word_type": "noun",
+      "japanese_example": "彼は ハンサムです。",
+      "example_meaning": "Anh ấy đẹp trai.",
+      "mnemonic_tip": "Handsome phát âm tiếng Nhật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
     },
     {
       "id": 368,
@@ -5182,6 +5632,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
       "kanji_word": "便利",
+      "pitch_accent": 0
+    },
+    {
+      "id": 374,
+      "lesson_id": 8,
+      "hiragana": "すてきな",
+      "romaji": "sutekina",
+      "vietnamese_meaning": "đẹp, tuyệt vời",
+      "word_type": "noun",
+      "japanese_example": "素敵な鞄ですね。",
+      "example_meaning": "Túi xách đẹp quá nhỉ.",
+      "mnemonic_tip": "Mẹo nhớ: 'Sư té kịch' - xem vở kịch tuyệt vời đến mức sư té xỉu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:08.970138+00:00",
+      "kanji_word": "素敵",
       "pitch_accent": 0
     },
     {
@@ -5575,6 +6040,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 402,
+      "lesson_id": 8,
+      "hiragana": "さくら",
+      "romaji": "sakura",
+      "vietnamese_meaning": "Hoa anh đào",
+      "word_type": "noun",
+      "japanese_example": "桜の花は美しいです。",
+      "example_meaning": "Hoa anh đào rất đẹp.",
+      "mnemonic_tip": "Sakura: \"Sắc cưa\" - Sắc đẹp của hoa anh đào khiến người ta muốn cưa đổ nó mang về.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "桜",
+      "pitch_accent": 0
+    },
+    {
       "id": 403,
       "lesson_id": 8,
       "hiragana": "やま",
@@ -5648,6 +6128,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.377371+00:00",
       "kanji_word": "所",
       "pitch_accent": 0
+    },
+    {
+      "id": 408,
+      "lesson_id": 8,
+      "hiragana": "りょう",
+      "romaji": "ryou",
+      "vietnamese_meaning": "Ký túc xá",
+      "word_type": "noun",
+      "japanese_example": "大学の寮に住んでいます。",
+      "example_meaning": "Tôi đang sống ở ký túc xá của trường đại học.",
+      "mnemonic_tip": "Ryou: \"Rio\" - Ký túc xá này đẹp như bãi biển Rio de Janeiro vậy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "寮",
+      "pitch_accent": 1
     },
     {
       "id": 409,
@@ -5751,7 +6246,7 @@ module.exports = {
       "mnemonic_tip": "Totemo: \"Tô tem mô\" - Cái tô này rất đẹp, tôi muốn tô thêm một lớp sơn nữa.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "迚も",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -5766,7 +6261,7 @@ module.exports = {
       "mnemonic_tip": "Amari: \"A mà ri\" - A mà riết rồi tôi không thích cái này lắm đâu!",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "余り",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -5781,7 +6276,7 @@ module.exports = {
       "mnemonic_tip": "Soshite: \"Sơ si té\" - Sơ sẩy một chút là té ngay, và sau đó phải đi bệnh viện.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "而して",
+      "kanji_word": "",
       "pitch_accent": 2
     },
     {
@@ -5796,7 +6291,7 @@ module.exports = {
       "mnemonic_tip": "Ga: \"Gà\" - Con gà này bé quá, nhưng nó rất khỏe.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "絵",
+      "kanji_word": "",
       "pitch_accent": 2
     },
     {
@@ -6040,6 +6535,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 440,
+      "lesson_id": 9,
+      "hiragana": "やきゅう",
+      "romaji": "yakyuu",
+      "vietnamese_meaning": "bóng chày",
+      "word_type": "noun",
+      "japanese_example": "野球を します。",
+      "example_meaning": "Tôi chơi bóng chày.",
+      "mnemonic_tip": "Mẹo nhớ: 'Dạ cứu' - cứu bóng chày ban đêm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "野球",
+      "pitch_accent": 0
+    },
+    {
       "id": 441,
       "lesson_id": 9,
       "hiragana": "おんがく",
@@ -6115,6 +6625,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 446,
+      "lesson_id": 9,
+      "hiragana": "ダンス",
+      "romaji": "dansu",
+      "vietnamese_meaning": "Nhảy, khiêu vũ",
+      "word_type": "noun",
+      "japanese_example": "彼女はダンスがとても上手です。",
+      "example_meaning": "Cô ấy nhảy rất giỏi.",
+      "mnemonic_tip": "Dansu' - 'Dân sú' - 'Dân Sú' (Sài Gòn) 'ダンス' (nhảy) hay lắm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 447,
+      "lesson_id": 9,
+      "hiragana": "クラシック",
+      "romaji": "kurashikku",
+      "vietnamese_meaning": "Nhạc cổ điển, nhạc Classic",
+      "word_type": "noun",
+      "japanese_example": "私はクラシック音楽をよく聞きます。",
+      "example_meaning": "Tôi thường nghe nhạc cổ điển.",
+      "mnemonic_tip": "Kurashikku' - 'Cứ là sick' - Nghe 'クラシック' (nhạc cổ điển) mà 'cứ là sick' (tuyệt vời).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 448,
+      "lesson_id": 9,
+      "hiragana": "ジャズ",
+      "romaji": "jazu",
+      "vietnamese_meaning": "Nhạc Jazz",
+      "word_type": "noun",
+      "japanese_example": "喫茶店でジャズを聴きました。",
+      "example_meaning": "Tôi đã nghe nhạc Jazz ở quán cà phê.",
+      "mnemonic_tip": "Jazu' - 'Da dưới' - Nghe 'ジャズ' (nhạc Jazz) làm 'da dưới' chân cũng phải nhún nhảy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 449,
       "lesson_id": 9,
       "hiragana": "コンサート",
@@ -6130,6 +6685,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 450,
+      "lesson_id": 9,
+      "hiragana": "カラオケ",
+      "romaji": "karaoke",
+      "vietnamese_meaning": "Karaoke",
+      "word_type": "noun",
+      "japanese_example": "友達とカラオケに行きました。",
+      "example_meaning": "Tôi đã đi hát karaoke với bạn bè.",
+      "mnemonic_tip": "Karaoke' - 'Ca ra ok' - Hát 'カラオケ', cứ 'ca ra là ok' hết.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 451,
+      "lesson_id": 9,
+      "hiragana": "かぶき",
+      "romaji": "kabuki",
+      "vietnamese_meaning": "Kịch Kabuki (kịch truyền thống Nhật Bản)",
+      "word_type": "noun",
+      "japanese_example": "歌舞伎は日本の伝統芸能です。",
+      "example_meaning": "Kabuki là nghệ thuật truyền thống của Nhật Bản.",
+      "mnemonic_tip": "Kabuki' - 'Ca bù kì' - '歌舞伎' (Kịch Kabuki) có những bài 'ca bù kì' công lắm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "歌舞伎",
+      "pitch_accent": 0
+    },
+    {
       "id": 452,
       "lesson_id": 9,
       "hiragana": "え",
@@ -6142,6 +6727,81 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
       "kanji_word": "絵",
+      "pitch_accent": 0
+    },
+    {
+      "id": 453,
+      "lesson_id": 9,
+      "hiragana": "ひらがな",
+      "romaji": "hiragana",
+      "vietnamese_meaning": "Chữ Hiragana",
+      "word_type": "noun",
+      "japanese_example": "ひらがなは読みやすいです。",
+      "example_meaning": "Chữ Hiragana dễ đọc.",
+      "mnemonic_tip": "Hiragana' - 'Hì ra ga na' - Học 'ひらがな' (Hiragana) xong 'hì ra ga na' cũng viết được.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "平仮名",
+      "pitch_accent": 0
+    },
+    {
+      "id": 454,
+      "lesson_id": 9,
+      "hiragana": "かたかな",
+      "romaji": "katakana",
+      "vietnamese_meaning": "Chữ Katakana",
+      "word_type": "noun",
+      "japanese_example": "カタカナは外来語に使われます。",
+      "example_meaning": "Chữ Katakana được dùng cho từ mượn.",
+      "mnemonic_tip": "Katakana' - 'Cà ta cà na' - 'カタカナ' (Chữ Katakana) cứ 'cà ta cà na' (cà nhắc) khó viết ghê.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "片仮名",
+      "pitch_accent": 2
+    },
+    {
+      "id": 455,
+      "lesson_id": 9,
+      "hiragana": "ローマじ",
+      "romaji": "roomaji",
+      "vietnamese_meaning": "Chữ Romaji",
+      "word_type": "noun",
+      "japanese_example": "パスポートの名前はローマ字です。",
+      "example_meaning": "Tên trên hộ chiếu là chữ Romaji.",
+      "mnemonic_tip": "Roomaji' - 'Rô ma dì' - 'ローマ字' (Chữ Romaji) giống chữ của 'rô ma dì' (người Roman) quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "ローマ字",
+      "pitch_accent": 0
+    },
+    {
+      "id": 456,
+      "lesson_id": 9,
+      "hiragana": "こまかいおかね",
+      "romaji": "komakaiokane",
+      "vietnamese_meaning": "Tiền lẻ",
+      "word_type": "noun",
+      "japanese_example": "お釣りは細かいお金でお願いします。",
+      "example_meaning": "Tiền thừa xin trả bằng tiền lẻ.",
+      "mnemonic_tip": "Komakaiokane' - 'Không mà cái ô kè này' - '細かいお金' (Tiền lẻ) nhiều quá 'không mà cái ô kè này' không đủ đựng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "細かいお金",
+      "pitch_accent": 0
+    },
+    {
+      "id": 457,
+      "lesson_id": 9,
+      "hiragana": "チケット",
+      "romaji": "chiketto",
+      "vietnamese_meaning": "Vé",
+      "word_type": "noun",
+      "japanese_example": "コンサートのチケットを買いました。",
+      "example_meaning": "Tôi đã mua vé xem hòa nhạc.",
+      "mnemonic_tip": "Chiketto' - 'Chí két tồ' - Cái 'チケット' (vé) này 'chí két tồ' (chắc kẹt) trong túi rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -6231,7 +6891,7 @@ module.exports = {
       "mnemonic_tip": "よく (yoku): 'Yêu cúc' - Tôi yêu cúc vạn thọ rất rõ ràng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "良く",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -6277,6 +6937,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
       "kanji_word": "大体",
+      "pitch_accent": 0
+    },
+    {
+      "id": 469,
+      "lesson_id": 9,
+      "hiragana": "はやく",
+      "romaji": "hayaku",
+      "vietnamese_meaning": "Sớm, nhanh",
+      "word_type": "adverb",
+      "japanese_example": "早く起きてください。",
+      "example_meaning": "Xin hãy dậy sớm.",
+      "mnemonic_tip": "はやく (hayaku): 'Hai anh cụ' - Hai anh cụ già đi nhanh quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "早く",
       "pitch_accent": 0
     },
     {
@@ -6456,7 +7131,7 @@ module.exports = {
       "mnemonic_tip": "Nữ + Tử.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "男の人",
+      "kanji_word": "女の子",
       "pitch_accent": 0
     },
     {
@@ -6471,7 +7146,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Y nỏ' - con chó sủa y như tiếng nỏ bắn.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "女の人",
+      "kanji_word": "犬",
       "pitch_accent": 0
     },
     {
@@ -6486,7 +7161,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Né cô' - con mèo hay lén lén né tránh cô chủ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "男の子",
+      "kanji_word": "猫",
       "pitch_accent": 0
     },
     {
@@ -6501,7 +7176,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hạ cổ' - đặt cái hộp hạ xuống cổ xe.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "女の子",
+      "kanji_word": "箱",
       "pitch_accent": 0
     },
     {
@@ -6532,36 +7207,6 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
       "kanji_word": "窓",
-      "pitch_accent": 0
-    },
-    {
-      "id": 488,
-      "lesson_id": 10,
-      "hiragana": "こうえん",
-      "romaji": "kouen",
-      "vietnamese_meaning": "công viên",
-      "word_type": "noun",
-      "japanese_example": "公園へ 行きます。",
-      "example_meaning": "Tôi đi công viên.",
-      "mnemonic_tip": "Công viên.",
-      "image_url": "",
-      "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "公園",
-      "pitch_accent": 0
-    },
-    {
-      "id": 489,
-      "lesson_id": 10,
-      "hiragana": "うりば",
-      "romaji": "uriba",
-      "vietnamese_meaning": "quầy bán hàng",
-      "word_type": "noun",
-      "japanese_example": "パン売り場は あそこです。",
-      "example_meaning": "Quầy bán bánh mì ở đằng kia.",
-      "mnemonic_tip": "Mẹo nhớ: 'Ừ đi bà' - đi đến quầy bán hàng.",
-      "image_url": "",
-      "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "売り場",
       "pitch_accent": 0
     },
     {
@@ -6685,6 +7330,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 498,
+      "lesson_id": 10,
+      "hiragana": "でんち",
+      "romaji": "denchi",
+      "vietnamese_meaning": "pin, cục pin",
+      "word_type": "noun",
+      "japanese_example": "この電池がありますか。",
+      "example_meaning": "Bạn có cục pin này không?",
+      "mnemonic_tip": "Đèn chì' - Cục pin này dùng cho 'đèn chì' (đèn pin mini).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "電池",
+      "pitch_accent": 0
+    },
+    {
+      "id": 499,
+      "lesson_id": 10,
+      "hiragana": "スイッチ",
+      "romaji": "suicchi",
+      "vietnamese_meaning": "công tắc",
+      "word_type": "noun",
+      "japanese_example": "スイッチをいれてください。",
+      "example_meaning": "Hãy bật công tắc lên.",
+      "mnemonic_tip": "Sủi chích' - Cái công tắc này bị hỏng, cứ chạm vào là nó 'sủi chích chích' (kêu điện).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 500,
       "lesson_id": 10,
       "hiragana": "テーブル",
@@ -6790,6 +7465,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 507,
+      "lesson_id": 10,
+      "hiragana": "ほんや",
+      "romaji": "honya",
+      "vietnamese_meaning": "hiệu sách, nhà sách",
+      "word_type": "noun",
+      "japanese_example": "本屋で新しい本をかいました。",
+      "example_meaning": "Tôi đã mua sách mới ở hiệu sách.",
+      "mnemonic_tip": "Hôn nha' - Đến 'hiệu sách' toàn thấy các cặp đôi 'hôn nha' (hôn nhau), thật lãng mạn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "本屋",
+      "pitch_accent": 0
+    },
+    {
       "id": 508,
       "lesson_id": 10,
       "hiragana": "～や",
@@ -6801,7 +7491,37 @@ module.exports = {
       "mnemonic_tip": "Da' - Mở 'tiệm' bán quần áo có 'da' (da thật) thì phải nhớ đuôi '~ya'.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "嫌",
+      "kanji_word": "～屋",
+      "pitch_accent": 0
+    },
+    {
+      "id": 509,
+      "lesson_id": 10,
+      "hiragana": "のりば",
+      "romaji": "noriba",
+      "vietnamese_meaning": "điểm lên xe (bus, taxi...), bến",
+      "word_type": "noun",
+      "japanese_example": "タクシー乗り場はどこですか。",
+      "example_meaning": "Điểm đón taxi ở đâu?",
+      "mnemonic_tip": "Nó rì ba' - 'Nó rì ba' (Nó đi đâu) đến 'điểm đón xe' thế?",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "乗り場",
+      "pitch_accent": 0
+    },
+    {
+      "id": 510,
+      "lesson_id": 10,
+      "hiragana": "けん",
+      "romaji": "ken",
+      "vietnamese_meaning": "tỉnh",
+      "word_type": "counter",
+      "japanese_example": "わたしはホーチミンけんにすんでいます。",
+      "example_meaning": "Tôi sống ở tỉnh Hồ Chí Minh.",
+      "mnemonic_tip": "Kén' - Ở 'tỉnh' này toàn là người 'kén' cá chọn canh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "県",
       "pitch_accent": 0
     },
     {
@@ -6921,7 +7641,7 @@ module.exports = {
       "mnemonic_tip": "Ya nado - Ya nát đồ: Liệt kê như sách vở, bút thước... làm túi ya (hơi) nát đồ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "嫌",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -6951,7 +7671,7 @@ module.exports = {
       "mnemonic_tip": "Danme - Dàn mè: Cái kệ chia làm từng tầng như dàn phơi mè.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "",
+      "kanji_word": "～段目",
       "pitch_accent": 0
     },
     {
@@ -7161,7 +7881,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Y cụ xù' - bao nhiêu cái áo cụ xù lông?",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "幾つ",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -7330,6 +8050,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 552,
+      "lesson_id": 11,
+      "hiragana": "みかん",
+      "romaji": "mikan",
+      "vietnamese_meaning": "Quýt",
+      "word_type": "noun",
+      "japanese_example": "みかんを二つ食べます。",
+      "example_meaning": "Tôi ăn hai quả quýt.",
+      "mnemonic_tip": "Mikan - 'Mì căn' - Quýt ăn với mì căn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 553,
       "lesson_id": 11,
       "hiragana": "サンドイッチ",
@@ -7343,6 +8078,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.377371+00:00",
       "kanji_word": "",
       "pitch_accent": 0
+    },
+    {
+      "id": 554,
+      "lesson_id": 11,
+      "hiragana": "カレーライス",
+      "romaji": "karee raisu",
+      "vietnamese_meaning": "Cơm cà ri",
+      "word_type": "noun",
+      "japanese_example": "カレーを注文します。",
+      "example_meaning": "Tôi gọi món cơm cà ri.",
+      "mnemonic_tip": "Karee - 'Ca rê' - Cà ri đổ ra ca rê.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 555,
+      "lesson_id": 11,
+      "hiragana": "アイスクリーム",
+      "romaji": "aisukuriimu",
+      "vietnamese_meaning": "Kem",
+      "word_type": "noun",
+      "japanese_example": "アイスクリームはおいしいです。",
+      "example_meaning": "Kem thì ngon.",
+      "mnemonic_tip": "Aisukuriimu - 'Ai xù rì' - Ai ăn kem mà mặt xù rì.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.377371+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
     },
     {
       "id": 556,
@@ -7551,7 +8316,7 @@ module.exports = {
       "mnemonic_tip": "Suýt quán - Chờ đợi cả tuần mà suýt nữa không được vào quán.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "習慣",
+      "kanji_word": "～週間",
       "pitch_accent": 0
     },
     {
@@ -7626,7 +8391,7 @@ module.exports = {
       "mnemonic_tip": "Dền bù đê - Tổng cộng số tiền phải dền bù đê.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "",
+      "kanji_word": "全部で",
       "pitch_accent": 0
     },
     {
@@ -8245,6 +9010,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 626,
+      "lesson_id": 12,
+      "hiragana": "どちらも",
+      "romaji": "dochiramo",
+      "vietnamese_meaning": "Cả hai",
+      "word_type": "pronoun",
+      "japanese_example": "どちらも好きです。",
+      "example_meaning": "Cả hai tôi đều thích.",
+      "mnemonic_tip": "Dochiramo gần giống 'Đồ chi rồi mô' - Cả hai món đồ chi rồi mô, tôi đều lấy hết.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 627,
       "lesson_id": 12,
       "hiragana": "ずっと",
@@ -8519,7 +9299,7 @@ module.exports = {
       "lesson_id": 13,
       "hiragana": "どこか",
       "romaji": "dokoka",
-      "kanji_word": "どこか",
+      "kanji_word": "",
       "vietnamese_meaning": "Nơi nào đó, đâu đó",
       "word_type": "pronoun",
       "pitch_accent": 1,
@@ -8542,6 +9322,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "週末",
+      "pitch_accent": 3
+    },
+    {
+      "id": 648,
+      "lesson_id": 13,
+      "hiragana": "しやくしょ",
+      "romaji": "shiyakusho",
+      "vietnamese_meaning": "văn phòng thị chính",
+      "word_type": "noun",
+      "japanese_example": "市役所は あそこです。",
+      "example_meaning": "Văn phòng thị chính ở kia.",
+      "mnemonic_tip": "Thị dịch sở.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "市役所",
       "pitch_accent": 3
     },
     {
@@ -8572,6 +9367,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "川",
+      "pitch_accent": 0
+    },
+    {
+      "id": 651,
+      "lesson_id": 13,
+      "hiragana": "びじゅつ",
+      "romaji": "bijutsu",
+      "vietnamese_meaning": "mỹ thuật",
+      "word_type": "noun",
+      "japanese_example": "美術の 本を買いました。",
+      "example_meaning": "Tôi đã mua sách mỹ thuật.",
+      "mnemonic_tip": "Mỹ thuật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "美術",
+      "pitch_accent": 0
+    },
+    {
+      "id": 652,
+      "lesson_id": 13,
+      "hiragana": "つり",
+      "romaji": "tsuri",
+      "vietnamese_meaning": "câu cá",
+      "word_type": "noun",
+      "japanese_example": "釣りが 好きです。",
+      "example_meaning": "Tôi thích câu cá.",
+      "mnemonic_tip": "Mẹo nhớ: 'Chú rị' - chú rị cần câu để câu cá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "釣り",
+      "pitch_accent": 1
+    },
+    {
+      "id": 653,
+      "lesson_id": 13,
+      "hiragana": "スキー",
+      "romaji": "sukii",
+      "vietnamese_meaning": "trượt tuyết",
+      "word_type": "noun",
+      "japanese_example": "スキーに 行きます。",
+      "example_meaning": "Đi trượt tuyết.",
+      "mnemonic_tip": "Ski phát âm kiểu Nhật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -8710,6 +9550,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 663,
+      "lesson_id": 13,
+      "hiragana": "とうろく",
+      "romaji": "touroku",
+      "vietnamese_meaning": "Đăng ký",
+      "word_type": "noun",
+      "japanese_example": "登録してください。",
+      "example_meaning": "Hãy đăng ký giúp tôi.",
+      "mnemonic_tip": "Tô-rô-ku: Tô (sơn) đỏ vào khung đăng ký.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "登録",
+      "pitch_accent": 0
+    },
+    {
       "id": 664,
       "lesson_id": 13,
       "hiragana": "～ごろ",
@@ -8843,6 +9698,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "",
       "pitch_accent": 2
+    },
+    {
+      "id": 675,
+      "lesson_id": 13,
+      "hiragana": "べつべつに",
+      "romaji": "betsubetsu ni",
+      "vietnamese_meaning": "Riêng biệt, tách rời",
+      "word_type": "adverb",
+      "japanese_example": "お会計は べつべつに お願いします。",
+      "example_meaning": "Làm ơn tính tiền riêng cho chúng tôi.",
+      "mnemonic_tip": "Bét (bét) bét ni: Chia bét ra từng phần riêng biệt cho chắc chắn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "別々に",
+      "pitch_accent": 1
     },
     {
       "id": 676,
@@ -9085,6 +9955,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 694,
+      "lesson_id": 14,
+      "hiragana": "パスポート",
+      "romaji": "pasupooto",
+      "vietnamese_meaning": "hộ chiếu",
+      "word_type": "noun",
+      "japanese_example": "パスポートを 見せます。",
+      "example_meaning": "Trình hộ chiếu.",
+      "mnemonic_tip": "Passport phát âm kiểu Nhật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 695,
       "lesson_id": 14,
       "hiragana": "じゅうしょ",
@@ -9109,6 +9994,21 @@ module.exports = {
       "japanese_example": "書類をコピーします。",
       "example_meaning": "Tôi photocopy tài liệu.",
       "mnemonic_tip": "Copy thì dễ: Sao chép thì dễ quá rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 700,
+      "lesson_id": 14,
+      "hiragana": "エアコン",
+      "romaji": "eakon",
+      "vietnamese_meaning": "Điều hòa",
+      "word_type": "noun",
+      "japanese_example": "エアコンを消してください。",
+      "example_meaning": "Hãy tắt điều hòa đi.",
+      "mnemonic_tip": "E con: Em con nhà ai mà bật điều hòa lạnh thế.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "",
@@ -9175,6 +10075,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 705,
+      "lesson_id": 14,
+      "hiragana": "よみかた",
+      "romaji": "yomikata",
+      "vietnamese_meaning": "Cách đọc",
+      "word_type": "noun",
+      "japanese_example": "この漢字の読み方を教えてください。",
+      "example_meaning": "Hãy chỉ cho tôi cách đọc chữ Hán này.",
+      "mnemonic_tip": "Yêu mì cả ta: Cả ta yêu mì nên phải học cách đọc tên món mì.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "読み方",
+      "pitch_accent": 0
+    },
+    {
       "id": 706,
       "lesson_id": 14,
       "hiragana": "～かた",
@@ -9231,7 +10146,7 @@ module.exports = {
       "mnemonic_tip": "Mà ta: Mà ta lại gặp nhau nữa rồi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "又",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -9321,7 +10236,7 @@ module.exports = {
       "mnemonic_tip": "Massugu - Mắt sù gù, muốn hết gù thì phải đứng thật thẳng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "真っ直ぐ",
+      "kanji_word": "",
       "pitch_accent": 3
     },
     {
@@ -9475,6 +10390,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 728,
+      "lesson_id": 15,
+      "hiragana": "しりょう",
+      "romaji": "shiryou",
+      "vietnamese_meaning": "tài liệu, dữ liệu",
+      "word_type": "noun",
+      "japanese_example": "資料を 見せてください。",
+      "example_meaning": "Vui lòng cho tôi xem tài liệu.",
+      "mnemonic_tip": "Tư liệu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "資料",
+      "pitch_accent": 0
+    },
+    {
+      "id": 730,
+      "lesson_id": 15,
+      "hiragana": "じこくひょう",
+      "romaji": "jikokuhyou",
+      "vietnamese_meaning": "bảng giờ chạy xe / tàu",
+      "word_type": "noun",
+      "japanese_example": "時刻表は どこですか。",
+      "example_meaning": "Bảng giờ chạy tàu ở đâu vậy?",
+      "mnemonic_tip": "Thời khắc biểu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "時刻表",
+      "pitch_accent": 0
+    },
+    {
       "id": 731,
       "lesson_id": 15,
       "hiragana": "ふく",
@@ -9488,6 +10433,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "服",
       "pitch_accent": 1
+    },
+    {
+      "id": 732,
+      "lesson_id": 15,
+      "hiragana": "せいひん",
+      "romaji": "seihin",
+      "vietnamese_meaning": "sản phẩm, thành phẩm",
+      "word_type": "noun",
+      "japanese_example": "電気製品が あります。",
+      "example_meaning": "Có đồ điện tử.",
+      "mnemonic_tip": "Chế phẩm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "製品",
+      "pitch_accent": 0
+    },
+    {
+      "id": 734,
+      "lesson_id": 15,
+      "hiragana": "せんもん",
+      "romaji": "senmon",
+      "vietnamese_meaning": "chuyên môn, chuyên ngành",
+      "word_type": "noun",
+      "japanese_example": "私の専門は 経済です。",
+      "example_meaning": "Chuyên ngành của tôi là kinh tế.",
+      "mnemonic_tip": "Chuyên môn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "専門",
+      "pitch_accent": 0
     },
     {
       "id": 735,
@@ -9520,6 +10495,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 737,
+      "lesson_id": 15,
+      "hiragana": "どくしん",
+      "romaji": "dokushin",
+      "vietnamese_meaning": "độc thân",
+      "word_type": "noun",
+      "japanese_example": "私は 独身です。",
+      "example_meaning": "Tôi độc thân.",
+      "mnemonic_tip": "Độc thân.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "独身",
+      "pitch_accent": 0
+    },
+    {
       "id": 738,
       "lesson_id": 15,
       "hiragana": "おもいだします",
@@ -9532,6 +10522,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "思い出す",
+      "pitch_accent": 0
+    },
+    {
+      "id": 741,
+      "lesson_id": 15,
+      "hiragana": "カタログ",
+      "romaji": "katarogu",
+      "vietnamese_meaning": "catalogue",
+      "word_type": "noun",
+      "japanese_example": "新しいカタログを見ます。",
+      "example_meaning": "Tôi xem quyển catalogue mới.",
+      "mnemonic_tip": "Ca ta lo - Ca bài ca ta lo trong cuốn catalogue.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -9681,7 +10686,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dạ mẻ máy' - xin thôi việc vì làm mẻ máy móc.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "顔",
+      "kanji_word": "辞めます",
       "pitch_accent": 1
     },
     {
@@ -9696,7 +10701,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ổ sĩ máy' - bấm nút khởi động ổ máy của sĩ tử.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "目",
+      "kanji_word": "押します",
       "pitch_accent": 0
     },
     {
@@ -9711,7 +10716,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Quá kĩ' - thầy giáo trẻ tính toán quá kỹ lưỡng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "耳",
+      "kanji_word": "若い",
       "pitch_accent": 1
     },
     {
@@ -9726,7 +10731,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Nã gái' - người có chân dài đi nã gái.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "鼻",
+      "kanji_word": "長い",
       "pitch_accent": 0
     },
     {
@@ -9741,7 +10746,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mị chỉ cãi' - váy ngắn quá nên mị chỉ cãi lời mẹ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "口",
+      "kanji_word": "短い",
       "pitch_accent": 0
     },
     {
@@ -9756,7 +10761,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ả cả rủ' - căn phòng sáng sủa ả cả rủ bạn vào chơi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "歯",
+      "kanji_word": "明るい",
       "pitch_accent": 0
     },
     {
@@ -9786,7 +10791,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cả nhà đã' - giữ gìn cơ thể khỏe mạnh cả nhà đã vui.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "手",
+      "kanji_word": "体",
       "pitch_accent": 0
     },
     {
@@ -9801,7 +10806,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ả tá máy' - đau đầu vì ả tá tá hỏa trước máy tính.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "足",
+      "kanji_word": "頭",
       "pitch_accent": 0
     },
     {
@@ -9816,7 +10821,22 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cá mì' - cô gái có mái tóc dài ăn cá kho mì.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "紙",
+      "kanji_word": "髪",
+      "pitch_accent": 0
+    },
+    {
+      "id": 766,
+      "lesson_id": 16,
+      "hiragana": "かお",
+      "romaji": "kao",
+      "vietnamese_meaning": "khuôn mặt",
+      "word_type": "noun",
+      "japanese_example": "顔を 洗います。",
+      "example_meaning": "Rửa mặt.",
+      "mnemonic_tip": "Mẹo nhớ: 'Cả ổ' - rửa sạch cả ổ mụn trên khuôn mặt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "顔",
       "pitch_accent": 0
     },
     {
@@ -9848,6 +10868,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "背が高い",
       "pitch_accent": 2
+    },
+    {
+      "id": 769,
+      "lesson_id": 16,
+      "hiragana": "あたまが いい",
+      "romaji": "atama ga ii",
+      "vietnamese_meaning": "Thông minh, giỏi",
+      "word_type": "noun",
+      "japanese_example": "頭が良いです。",
+      "example_meaning": "Anh ấy thông minh.",
+      "mnemonic_tip": "Atama ga ii: 'A ta mà ghi' - A, ta mà ghi nhớ nhanh là nhờ thông minh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "頭がいい",
+      "pitch_accent": 1
     },
     {
       "id": 770,
@@ -9895,6 +10930,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 773,
+      "lesson_id": 16,
+      "hiragana": "サービス",
+      "romaji": "saabisu",
+      "vietnamese_meaning": "Dịch vụ",
+      "word_type": "noun",
+      "japanese_example": "サービスが良いです。",
+      "example_meaning": "Dịch vụ tốt.",
+      "mnemonic_tip": "Saabisu: 'Sa-bị-xù' - Dịch vụ mà tệ thì khách sa sút, bị xù.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 774,
+      "lesson_id": 16,
+      "hiragana": "ジョギング",
+      "romaji": "jogingu",
+      "vietnamese_meaning": "Đi bộ, chạy bộ",
+      "word_type": "noun",
+      "japanese_example": "ジョギングをします。",
+      "example_meaning": "Tôi đi chạy bộ.",
+      "mnemonic_tip": "Jogingu: 'Dô-gìn-gù' - Dô (chạy) để gìn giữ cái gù (đỡ bị gù lưng).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 775,
       "lesson_id": 16,
       "hiragana": "シャワー",
@@ -9922,6 +10987,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "緑",
+      "pitch_accent": 0
+    },
+    {
+      "id": 777,
+      "lesson_id": 16,
+      "hiragana": "おてら",
+      "romaji": "otera",
+      "vietnamese_meaning": "Chùa",
+      "word_type": "noun",
+      "japanese_example": "京都にお寺がたくさんあります。",
+      "example_meaning": "Ở Kyoto có rất nhiều chùa.",
+      "mnemonic_tip": "Ô-tê-ra (ô tê ra): Chùa là nơi bước ra khỏi cõi trần, ô tơi tả cũng vào chùa trú.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "お寺",
       "pitch_accent": 0
     },
     {
@@ -10030,6 +11110,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 785,
+      "lesson_id": 16,
+      "hiragana": "キャッシュカード",
+      "romaji": "kyasshukaado",
+      "vietnamese_meaning": "Thẻ ATM, thẻ ngân hàng",
+      "word_type": "noun",
+      "japanese_example": "キャッシュカードを忘れました。",
+      "example_meaning": "Tôi quên thẻ ATM rồi.",
+      "mnemonic_tip": "Cát-sư-cát (cát sư cát): Cầm cái thẻ ATM như cầm cát sư, quẹt là tiền cát (cất) vào túi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 786,
+      "lesson_id": 16,
+      "hiragana": "あんしょうばんごう",
+      "romaji": "anshoubangou",
+      "vietnamese_meaning": "Mã số bí mật (mật khẩu)",
+      "word_type": "noun",
+      "japanese_example": "暗証番号を教えてください。",
+      "example_meaning": "Hãy cho tôi biết mã số bí mật.",
+      "mnemonic_tip": "An-sô-ban-gô (án sổ bàn gỗ): Ghi mật khẩu lên bàn gỗ thì án mạng sổ (sổ sách) lộ ra mất.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "暗証番号",
+      "pitch_accent": 0
+    },
+    {
       "id": 787,
       "lesson_id": 16,
       "hiragana": "つぎ に",
@@ -10045,6 +11155,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 788,
+      "lesson_id": 16,
+      "hiragana": "かくにん",
+      "romaji": "kakunin",
+      "vietnamese_meaning": "Xác nhận",
+      "word_type": "noun",
+      "japanese_example": "内容を確認してください。",
+      "example_meaning": "Hãy xác nhận nội dung.",
+      "mnemonic_tip": "Ka-ku-nin (cá cừ nhìn): Xác nhận xem cá cừ (cá cừu) có đang nhìn mình không.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "確認",
+      "pitch_accent": 0
+    },
+    {
+      "id": 789,
+      "lesson_id": 16,
+      "hiragana": "きんがく",
+      "romaji": "kingaku",
+      "vietnamese_meaning": "Số tiền",
+      "word_type": "noun",
+      "japanese_example": "金額を確認しました。",
+      "example_meaning": "Tôi đã xác nhận số tiền.",
+      "mnemonic_tip": "Kin-ga-ku (kin gác): Số tiền phải được gác (giữ) cẩn thận trong két sắt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "金額",
+      "pitch_accent": 0
+    },
+    {
       "id": 790,
       "lesson_id": 16,
       "hiragana": "ボタン",
@@ -10056,7 +11196,7 @@ module.exports = {
       "mnemonic_tip": "Bô-tan (bô tàn): Cái nút áo bô tàn (vỡ tan) ra rồi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "釦",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -10162,6 +11302,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
       "kanji_word": "脱ぐ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 798,
+      "lesson_id": 17,
+      "hiragana": "もっていきます",
+      "romaji": "motteikimasu",
+      "vietnamese_meaning": "mang đi, mang theo",
+      "word_type": "verb",
+      "japanese_example": "カメラを 持っていきます。",
+      "example_meaning": "Mang theo máy ảnh.",
+      "mnemonic_tip": "Mang đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "持って行きます",
+      "pitch_accent": 0
+    },
+    {
+      "id": 799,
+      "lesson_id": 17,
+      "hiragana": "もってきます",
+      "romaji": "mottekimasu",
+      "vietnamese_meaning": "mang đến",
+      "word_type": "verb",
+      "japanese_example": "資料を 持ってきてください。",
+      "example_meaning": "Xin vui lòng mang tài liệu đến đây.",
+      "mnemonic_tip": "Mang đến.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.574517+00:00",
+      "kanji_word": "持って来ます",
       "pitch_accent": 0
     },
     {
@@ -10330,6 +11500,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 814,
+      "lesson_id": 17,
+      "hiragana": "きんえん",
+      "romaji": "kinen",
+      "vietnamese_meaning": "Cấm hút thuốc",
+      "word_type": "noun",
+      "japanese_example": "ここは禁煙です。",
+      "example_meaning": "Ở đây cấm hút thuốc.",
+      "mnemonic_tip": "Kinh yên - Cấm hút thuốc để không gian kinh (là) yên bình.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "禁煙",
+      "pitch_accent": 0
+    },
+    {
+      "id": 815,
+      "lesson_id": 17,
+      "hiragana": "［けんこう］ほけんしょう",
+      "romaji": "kenkouhokenshou",
+      "vietnamese_meaning": "Thẻ bảo hiểm y tế",
+      "word_type": "noun",
+      "japanese_example": "健康保険証を見せます。",
+      "example_meaning": "Tôi cho xem thẻ bảo hiểm y tế.",
+      "mnemonic_tip": "Kèn không hố - Có thẻ bảo hiểm nên đi khám bệnh kèn không hố (không lỗ).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "健康保険証",
+      "pitch_accent": 3
+    },
+    {
       "id": 816,
       "lesson_id": 17,
       "hiragana": "かぜ",
@@ -10448,6 +11648,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "",
       "pitch_accent": 0
+    },
+    {
+      "id": 826,
+      "lesson_id": 17,
+      "hiragana": "のど",
+      "romaji": "nodo",
+      "vietnamese_meaning": "cổ họng",
+      "word_type": "noun",
+      "japanese_example": "のどが渇きました。",
+      "example_meaning": "Tôi bị khát cổ họng.",
+      "mnemonic_tip": "Nó đó - Cổ họng khô khốc, muốn uống nước là nó đó.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
     },
     {
       "id": 827,
@@ -10630,6 +11845,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 840,
+      "lesson_id": 18,
+      "hiragana": "げんきん",
+      "romaji": "genkin",
+      "vietnamese_meaning": "tiền mặt",
+      "word_type": "noun",
+      "japanese_example": "現金で払います。",
+      "example_meaning": "Tôi trả bằng tiền mặt.",
+      "mnemonic_tip": "Gen-kin: Gần-kín, giữ tiền mặt trong túi cho kín.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "現金",
+      "pitch_accent": 0
+    },
+    {
       "id": 841,
       "lesson_id": 18,
       "hiragana": "にっき",
@@ -10703,6 +11933,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "動物",
       "pitch_accent": 2
+    },
+    {
+      "id": 847,
+      "lesson_id": 18,
+      "hiragana": "うま",
+      "romaji": "uma",
+      "vietnamese_meaning": "con ngựa",
+      "word_type": "noun",
+      "japanese_example": "馬に乗ります。",
+      "example_meaning": "Tôi cưỡi ngựa.",
+      "mnemonic_tip": "Uma: Ù-mà, con ngựa chạy ù một cái là thấy nó chạy xa rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "馬",
+      "pitch_accent": 0
     },
     {
       "id": 849,
@@ -10915,6 +12160,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 866,
+      "lesson_id": 19,
+      "hiragana": "ちょうし",
+      "romaji": "choushi",
+      "vietnamese_meaning": "trạng thái",
+      "word_type": "noun",
+      "japanese_example": "体の調子はいいです。",
+      "example_meaning": "Tình trạng sức khỏe tôi tốt.",
+      "mnemonic_tip": "Chờ (chờ) sĩ (sĩ): Chờ vị sĩ quan kiểm tra trạng thái sức khỏe.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "調子",
+      "pitch_accent": 0
+    },
+    {
       "id": 867,
       "lesson_id": 19,
       "hiragana": "ちょうしがわるい",
@@ -10945,6 +12205,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 870,
+      "lesson_id": 19,
+      "hiragana": "ゴルフ",
+      "romaji": "gorufu",
+      "vietnamese_meaning": "golf",
+      "word_type": "noun",
+      "japanese_example": "ゴルフをします。",
+      "example_meaning": "Tôi chơi golf.",
+      "mnemonic_tip": "Gò (gò) lú (lú): Gò lưng đánh golf tới lú đầu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 871,
       "lesson_id": 19,
       "hiragana": "ひ",
@@ -10971,7 +12246,7 @@ module.exports = {
       "mnemonic_tip": "Mô (mô) su (su) gu (gu): Mô phật, sắp sửa tới nơi rồi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "もう直ぐ",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -10986,7 +12261,7 @@ module.exports = {
       "mnemonic_tip": "Dần (dần) dần (dần): Từ này đọc y như tiếng Việt, chỉ sự tiến triển dần dần.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "段々",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -11002,6 +12277,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "一度",
+      "pitch_accent": 0
+    },
+    {
+      "id": 875,
+      "lesson_id": 19,
+      "hiragana": "いちども",
+      "romaji": "ichidomo",
+      "vietnamese_meaning": "chưa một lần nào",
+      "word_type": "adverb",
+      "japanese_example": "一度も食べません。",
+      "example_meaning": "Tôi chưa ăn lần nào.",
+      "mnemonic_tip": "Ít (ít) độ (độ) mô (mô): Ít độ mô tê, là chưa một lần nào.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "一度も",
       "pitch_accent": 0
     },
     {
@@ -11050,6 +12340,21 @@ module.exports = {
       "pitch_accent": 4
     },
     {
+      "id": 879,
+      "lesson_id": 19,
+      "hiragana": "ダイエット",
+      "romaji": "daietto",
+      "vietnamese_meaning": "ăn kiêng",
+      "word_type": "noun",
+      "japanese_example": "ダイエットをします。",
+      "example_meaning": "Tôi ăn kiêng.",
+      "mnemonic_tip": "Đai (đai) ét (ét) tô (tô): Đai lưng bị ép chặt tới nỗi tô không nổi cơm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
+    },
+    {
       "id": 880,
       "lesson_id": 19,
       "hiragana": "なんかいも",
@@ -11061,7 +12366,7 @@ module.exports = {
       "mnemonic_tip": "Nản (nản) cái (cái) mô (mô): Nản quá cái môn này, phải làm nhiều lần.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "",
+      "kanji_word": "何回も",
       "pitch_accent": 0
     },
     {
@@ -11076,7 +12381,7 @@ module.exports = {
       "mnemonic_tip": "Si (si) cả (cả) chi (chi): Tuy nhiên suy cả chi cũng thấy khó.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "然し",
+      "kanji_word": "",
       "pitch_accent": 3
     },
     {
@@ -11215,6 +12520,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 893,
+      "lesson_id": 20,
+      "hiragana": "ぶっか",
+      "romaji": "bukka",
+      "vietnamese_meaning": "giá cả, vật giá",
+      "word_type": "noun",
+      "japanese_example": "物価が 高いですね。",
+      "example_meaning": "Vật giá đắt đỏ nhỉ.",
+      "mnemonic_tip": "Vật giá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "物価",
+      "pitch_accent": 0
+    },
+    {
       "id": 894,
       "lesson_id": 20,
       "hiragana": "しゅうりします",
@@ -11303,6 +12623,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "着物",
       "pitch_accent": 0
+    },
+    {
+      "id": 900,
+      "lesson_id": 20,
+      "hiragana": "ビザ",
+      "romaji": "biza",
+      "vietnamese_meaning": "visa, thị thực",
+      "word_type": "noun",
+      "japanese_example": "ビザを申請します。",
+      "example_meaning": "Tôi xin visa.",
+      "mnemonic_tip": "Biza: 'Bí da' - Đi nước ngoài không có visa thì 'bí' như bị 'da' (da thuộc) bọc kín không đi đâu được.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
     },
     {
       "id": 901,
@@ -11635,6 +12970,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 926,
+      "lesson_id": 21,
+      "hiragana": "むだ",
+      "romaji": "muda",
+      "vietnamese_meaning": "lãng phí, vô ích",
+      "word_type": "noun",
+      "japanese_example": "お金を無駄にします。",
+      "example_meaning": "Lãng phí tiền bạc.",
+      "mnemonic_tip": "Mùa đá: Mùa này đi đá bóng thì chỉ có lãng phí thời gian, không hiệu quả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "無駄",
+      "pitch_accent": 0
+    },
+    {
       "id": 927,
       "lesson_id": 21,
       "hiragana": "ふべん",
@@ -11647,6 +12997,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "不便",
+      "pitch_accent": 0
+    },
+    {
+      "id": 928,
+      "lesson_id": 21,
+      "hiragana": "しゅしょう",
+      "romaji": "shushou",
+      "vietnamese_meaning": "thủ tướng",
+      "word_type": "noun",
+      "japanese_example": "首相がスピーチをします。",
+      "example_meaning": "Thủ tướng đang phát biểu.",
+      "mnemonic_tip": "Su show: Thủ tướng lên show truyền hình để phát biểu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "首相",
+      "pitch_accent": 0
+    },
+    {
+      "id": 929,
+      "lesson_id": 21,
+      "hiragana": "だいとうりょう",
+      "romaji": "daitouryou",
+      "vietnamese_meaning": "tổng thống",
+      "word_type": "noun",
+      "japanese_example": "大統領に会います。",
+      "example_meaning": "Tôi gặp tổng thống.",
+      "mnemonic_tip": "Đại tường: Vị tổng thống vĩ đại như một bức tường thành bảo vệ đất nước.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "大統領",
       "pitch_accent": 0
     },
     {
@@ -11674,6 +13054,21 @@ module.exports = {
       "japanese_example": "ニュースを見ます。",
       "example_meaning": "Tôi xem tin tức.",
       "mnemonic_tip": "Nhiều sự: Trong bản tin có nhiều sự kiện mới đáng chú ý.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 932,
+      "lesson_id": 21,
+      "hiragana": "スピーチ",
+      "romaji": "supiichi",
+      "vietnamese_meaning": "bài phát biểu",
+      "word_type": "noun",
+      "japanese_example": "スピーチをしました。",
+      "example_meaning": "Tôi đã phát biểu.",
+      "mnemonic_tip": "Sư bí: Sư lên phát biểu mà bí từ, đứng hình luôn.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "",
@@ -11710,6 +13105,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 935,
+      "lesson_id": 21,
+      "hiragana": "ユーモア",
+      "romaji": "yuumoa",
+      "vietnamese_meaning": "hài hước",
+      "word_type": "noun",
+      "japanese_example": "ユーモアがある人です。",
+      "example_meaning": "Anh ấy là người hài hước.",
+      "mnemonic_tip": "Yêu mô-a: Yêu cái sự hài hước của anh ấy, 'moa' hôn một cái!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 936,
+      "lesson_id": 21,
+      "hiragana": "デザイン",
+      "romaji": "dezain",
+      "vietnamese_meaning": "thiết kế",
+      "word_type": "noun",
+      "japanese_example": "このデザインはいいですね。",
+      "example_meaning": "Thiết kế này tốt nhỉ.",
+      "mnemonic_tip": "Đề zan: Thiết kế này để dành cho người giỏi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 937,
       "lesson_id": 21,
       "hiragana": "こうつう",
@@ -11722,6 +13147,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "交通",
+      "pitch_accent": 0
+    },
+    {
+      "id": 938,
+      "lesson_id": 21,
+      "hiragana": "ラッシュ",
+      "romaji": "rasshu",
+      "vietnamese_meaning": "giờ cao điểm",
+      "word_type": "noun",
+      "japanese_example": "ラッシュの時間は大変です。",
+      "example_meaning": "Giờ cao điểm thật vất vả.",
+      "mnemonic_tip": "Rát: Giờ cao điểm chen lấn đến rát cả người.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -11766,7 +13206,7 @@ module.exports = {
       "mnemonic_tip": "Kít: Chắc chắn là cái nắp này sẽ đóng chặt, kít lại không hở tí nào.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "屹度",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -11781,7 +13221,7 @@ module.exports = {
       "mnemonic_tip": "Hồn tôi ni: Hồn tôi thực sự bay bổng khi ăn món này.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "",
+      "kanji_word": "本当に",
       "pitch_accent": 0
     },
     {
@@ -11980,21 +13420,6 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 959,
-      "lesson_id": 22,
-      "hiragana": "かぎ",
-      "romaji": "kagi",
-      "vietnamese_meaning": "chìa khóa",
-      "word_type": "noun",
-      "japanese_example": "鍵を かけます。",
-      "example_meaning": "Khóa cửa.",
-      "mnemonic_tip": "Mẹo nhớ: 'Cá ghi' - khóa tủ cất tranh cá ghi chép.",
-      "image_url": "",
-      "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "鍵",
-      "pitch_accent": 0
-    },
-    {
       "id": 960,
       "lesson_id": 22,
       "hiragana": "じかん",
@@ -12096,7 +13521,7 @@ module.exports = {
       "mnemonic_tip": "Yêu cừu: Thường xuyên yêu con cừu.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "良く",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -12128,6 +13553,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "",
       "pitch_accent": 0
+    },
+    {
+      "id": 969,
+      "lesson_id": 22,
+      "hiragana": "やちん",
+      "romaji": "yachin",
+      "vietnamese_meaning": "tiền thuê nhà",
+      "word_type": "noun",
+      "japanese_example": "家賃が高いです。",
+      "example_meaning": "Tiền thuê nhà đắt quá.",
+      "mnemonic_tip": "Ya chín: Tiền thuê nhà phải trả đủ chín triệu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "家賃",
+      "pitch_accent": 0
+    },
+    {
+      "id": 972,
+      "lesson_id": 22,
+      "hiragana": "わしつ",
+      "romaji": "washitsu",
+      "vietnamese_meaning": "phòng kiểu Nhật",
+      "word_type": "noun",
+      "japanese_example": "和室が好きです。",
+      "example_meaning": "Tôi thích phòng kiểu Nhật.",
+      "mnemonic_tip": "Hoa sít: Phòng Nhật hoa sít sao đẹp thế.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "和室",
+      "pitch_accent": 4
     },
     {
       "id": 973,
@@ -12235,6 +13690,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 986,
+      "lesson_id": 23,
+      "hiragana": "おゆ",
+      "romaji": "oyu",
+      "vietnamese_meaning": "nước nóng",
+      "word_type": "noun",
+      "japanese_example": "お湯を 入れます。",
+      "example_meaning": "Đổ nước nóng vào.",
+      "mnemonic_tip": "Mẹo nhớ: 'Ổ dụ' - bồn tắm nước nóng là cái ổ dụ người tắm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "お湯",
+      "pitch_accent": 0
+    },
+    {
       "id": 987,
       "lesson_id": 23,
       "hiragana": "おと",
@@ -12262,6 +13732,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
       "kanji_word": "機会",
+      "pitch_accent": 0
+    },
+    {
+      "id": 989,
+      "lesson_id": 23,
+      "hiragana": "しんごう",
+      "romaji": "shingou",
+      "vietnamese_meaning": "đèn tín hiệu giao thông",
+      "word_type": "noun",
+      "japanese_example": "信号が 赤になりました。",
+      "example_meaning": "Đèn tín hiệu đã chuyển sang màu đỏ.",
+      "mnemonic_tip": "Tín hiệu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "信号",
       "pitch_accent": 0
     },
     {
@@ -12340,6 +13825,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 996,
+      "lesson_id": 23,
+      "hiragana": "きをつけます",
+      "romaji": "kiotsukemasu",
+      "vietnamese_meaning": "chú ý, cẩn thận",
+      "word_type": "verb",
+      "japanese_example": "車に気をつけてください。",
+      "example_meaning": "Hãy chú ý xe cộ nhé.",
+      "mnemonic_tip": "Ki - Khi: Khi làm gì cũng phải chú ý cẩn thận.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "気をつけます",
+      "pitch_accent": 0
+    },
+    {
+      "id": 997,
+      "lesson_id": 23,
+      "hiragana": "でんきや",
+      "romaji": "denkiya",
+      "vietnamese_meaning": "cửa hàng đồ điện",
+      "word_type": "noun",
+      "japanese_example": "電気屋でテレビを買いました。",
+      "example_meaning": "Tôi đã mua tivi ở cửa hàng đồ điện.",
+      "mnemonic_tip": "Điên kìa: Vào cửa hàng đồ điện thấy nhiều đồ lạ quá kêu 'điên kìa'.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "電気屋",
+      "pitch_accent": 0
+    },
+    {
       "id": 998,
       "lesson_id": 23,
       "hiragana": "こしょう",
@@ -12370,6 +13885,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1000,
+      "lesson_id": 23,
+      "hiragana": "サイズ",
+      "romaji": "saizu",
+      "vietnamese_meaning": "kích cỡ",
+      "word_type": "noun",
+      "japanese_example": "サイズが合います。",
+      "example_meaning": "Kích cỡ vừa vặn.",
+      "mnemonic_tip": "Sai zù: Chọn size sai rồi, không vừa đâu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.748998+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1002,
       "lesson_id": 23,
       "hiragana": "かど",
@@ -12397,6 +13927,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "駐車場",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1004,
+      "lesson_id": 23,
+      "hiragana": "おしょうがつ",
+      "romaji": "oshougatsu",
+      "vietnamese_meaning": "Tết",
+      "word_type": "noun",
+      "japanese_example": "お正月は家族と過ごします。",
+      "example_meaning": "Tôi đón Tết cùng gia đình.",
+      "mnemonic_tip": "Ô show gặt: Ô, tết đến rồi, gặt hái thành quả cả năm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "お正月",
       "pitch_accent": 0
     },
     {
@@ -12801,7 +14346,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mổ sĩ' - nếu mổ bụng quân sĩ...",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "若し",
+      "kanji_word": "",
       "pitch_accent": 2
     },
     {
@@ -12865,6 +14410,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1040,
+      "lesson_id": 25,
+      "hiragana": "グループ",
+      "romaji": "guruupu",
+      "vietnamese_meaning": "Nhóm",
+      "word_type": "noun",
+      "japanese_example": "グループで話し合います。",
+      "example_meaning": "Chúng tôi thảo luận theo nhóm.",
+      "mnemonic_tip": "Gù ru - Nhóm này ai cũng gù lưng vì ngồi máy tính.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1041,
+      "lesson_id": 25,
+      "hiragana": "チャンス",
+      "romaji": "chansu",
+      "vietnamese_meaning": "Cơ hội",
+      "word_type": "noun",
+      "japanese_example": "今がチャンスです。",
+      "example_meaning": "Bây giờ là cơ hội.",
+      "mnemonic_tip": "Chẳng sợ - Có cơ hội là chẳng sợ gì cả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1042,
       "lesson_id": 25,
       "hiragana": "おく",
@@ -12880,6 +14455,36 @@ module.exports = {
       "pitch_accent": 4
     },
     {
+      "id": 1043,
+      "lesson_id": 25,
+      "hiragana": "てんきん",
+      "romaji": "tenkin",
+      "vietnamese_meaning": "Chuyển công tác",
+      "word_type": "noun",
+      "japanese_example": "東京へ転勤します。",
+      "example_meaning": "Tôi chuyển công tác đến Tokyo.",
+      "mnemonic_tip": "Tên kín - Tên tôi được ghi kín trong danh sách chuyển công tác.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "転勤",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1044,
+      "lesson_id": 25,
+      "hiragana": "こと",
+      "romaji": "koto",
+      "vietnamese_meaning": "Việc",
+      "word_type": "noun",
+      "japanese_example": "困ったことがあります。",
+      "example_meaning": "Tôi có chuyện (việc) rắc rối.",
+      "mnemonic_tip": "Cò to - Cò to là một việc quan trọng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
       "id": 1045,
       "lesson_id": 25,
       "hiragana": "いっぱいのみましょう",
@@ -12893,6 +14498,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "",
       "pitch_accent": 4
+    },
+    {
+      "id": 1046,
+      "lesson_id": 25,
+      "hiragana": "がんばります",
+      "romaji": "ganbarimasu",
+      "vietnamese_meaning": "Cố gắng",
+      "word_type": "verb",
+      "japanese_example": "仕事に頑張ります。",
+      "example_meaning": "Tôi sẽ cố gắng trong công việc.",
+      "mnemonic_tip": "Gàn ba rị - Gàn dở cỡ nào thì cũng phải cố gắng ba lần mới giỏi được.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "頑張ります",
+      "pitch_accent": 3
     },
     {
       "id": 1048,
@@ -12940,6 +14560,21 @@ module.exports = {
       "pitch_accent": 4
     },
     {
+      "id": 1051,
+      "lesson_id": 26,
+      "hiragana": "やる",
+      "romaji": "yaru",
+      "vietnamese_meaning": "làm",
+      "word_type": "verb",
+      "japanese_example": "宿題を やります。",
+      "example_meaning": "Làm bài tập về nhà.",
+      "mnemonic_tip": "Mẹo: 'Da' tay làm việc.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1052,
       "lesson_id": 26,
       "hiragana": "ひろう",
@@ -12970,6 +14605,21 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 1054,
+      "lesson_id": 26,
+      "hiragana": "ごみ",
+      "romaji": "gomi",
+      "vietnamese_meaning": "rác",
+      "word_type": "noun",
+      "japanese_example": "ゴミを 捨てます。",
+      "example_meaning": "Vứt rác.",
+      "mnemonic_tip": "Mẹo: Rác bẩn 'Gợi mì' tôm thiu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
+    },
+    {
       "id": 1055,
       "lesson_id": 26,
       "hiragana": "こんど",
@@ -12982,6 +14632,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "今度",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1056,
+      "lesson_id": 26,
+      "hiragana": "ずいぶん",
+      "romaji": "zuibun",
+      "vietnamese_meaning": "khá, tương đối",
+      "word_type": "adverb",
+      "japanese_example": "ずいぶん 寒くなりました。",
+      "example_meaning": "Trời đã lạnh đi khá nhiều.",
+      "mnemonic_tip": "Mẹo: 'Dùi đục' đục khá sâu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "随分",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1057,
+      "lesson_id": 26,
+      "hiragana": "きぶんがいい",
+      "romaji": "kibungaii",
+      "vietnamese_meaning": "tâm trạng tốt, khỏe mạnh",
+      "word_type": "adjective",
+      "japanese_example": "今日は気分がいいです。",
+      "example_meaning": "Hôm nay tâm trạng tôi rất tốt.",
+      "mnemonic_tip": "Kì bùn gà - Kì bùn cho gà xong thấy tâm trạng vui vẻ, thoải mái.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "気分がいい",
       "pitch_accent": 0
     },
     {
@@ -13000,6 +14680,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1059,
+      "lesson_id": 26,
+      "hiragana": "うんどうかい",
+      "romaji": "undoukai",
+      "vietnamese_meaning": "hội thi thể thao",
+      "word_type": "noun",
+      "japanese_example": "運動会に参加します。",
+      "example_meaning": "Tôi tham gia hội thi thể thao.",
+      "mnemonic_tip": "Uống đô cai - Uống đô (đô la) cai (cai nghiện) để chuẩn bị thi thể thao.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "運動会",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1061,
+      "lesson_id": 26,
+      "hiragana": "フリーマーケット",
+      "romaji": "furiimaaketto",
+      "vietnamese_meaning": "chợ trời, chợ đồ cũ",
+      "word_type": "noun",
+      "japanese_example": "フリーマーケットで服を買います。",
+      "example_meaning": "Tôi mua quần áo ở chợ đồ cũ.",
+      "mnemonic_tip": "Phi ri mệt - Đi chợ đồ cũ phải đi phi (bay) ri (đi riết) mệt quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1062,
       "lesson_id": 26,
       "hiragana": "ばしょ",
@@ -13015,6 +14725,111 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1063,
+      "lesson_id": 26,
+      "hiragana": "ボランティア",
+      "romaji": "borantia",
+      "vietnamese_meaning": "tình nguyện viên",
+      "word_type": "noun",
+      "japanese_example": "ボランティアをします。",
+      "example_meaning": "Tôi làm tình nguyện viên.",
+      "mnemonic_tip": "Bỏ lan tia - Bỏ đi những tia nắng nóng để đi làm tình nguyện.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1065,
+      "lesson_id": 26,
+      "hiragana": "へいじつ",
+      "romaji": "heijitsu",
+      "vietnamese_meaning": "ngày thường",
+      "word_type": "noun",
+      "japanese_example": "平日は忙しいです。",
+      "example_meaning": "Ngày thường tôi rất bận.",
+      "mnemonic_tip": "Hê ý - Hê (làm việc) ý (í ới) suốt ngày thường.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "平日",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1066,
+      "lesson_id": 26,
+      "hiragana": "べん",
+      "romaji": "ben",
+      "vietnamese_meaning": "tiếng (địa phương)",
+      "word_type": "noun",
+      "japanese_example": "大阪弁がわかります。",
+      "example_meaning": "Tôi hiểu tiếng Osaka.",
+      "mnemonic_tip": "Bèn - Bèn dùng tiếng địa phương để nói chuyện cho thân mật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "弁",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1067,
+      "lesson_id": 26,
+      "hiragana": "ちょくせつ",
+      "romaji": "chokusetsu",
+      "vietnamese_meaning": "trực tiếp",
+      "word_type": "adverb",
+      "japanese_example": "直接話したいです。",
+      "example_meaning": "Tôi muốn nói chuyện trực tiếp.",
+      "mnemonic_tip": "Chọc sét - Trực tiếp đi chọc vào cái sét (sét đánh) thật nguy hiểm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "直接",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1068,
+      "lesson_id": 26,
+      "hiragana": "いつでも",
+      "romaji": "itsudemo",
+      "vietnamese_meaning": "lúc nào cũng",
+      "word_type": "adverb",
+      "japanese_example": "いつでもいいですよ。",
+      "example_meaning": "Lúc nào cũng được.",
+      "mnemonic_tip": "Ít xư - Lúc nào cũng ít xư (xử) lý công việc nhanh gọn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1069,
+      "lesson_id": 26,
+      "hiragana": "どこでも",
+      "romaji": "dokodemo",
+      "vietnamese_meaning": "ở đâu cũng",
+      "word_type": "adverb",
+      "japanese_example": "どこでも座れます。",
+      "example_meaning": "Ở đâu cũng có thể ngồi được.",
+      "mnemonic_tip": "Đô cô - Ở đâu có đô (tiền) là cô ấy thích.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1070,
+      "lesson_id": 26,
+      "hiragana": "だれでも",
+      "romaji": "daredemo",
+      "vietnamese_meaning": "ai cũng",
+      "word_type": "adverb",
+      "japanese_example": "だれでも知っています。",
+      "example_meaning": "Ai cũng biết.",
+      "mnemonic_tip": "Da dê - Ai cũng thích ăn da dê.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1071,
       "lesson_id": 26,
       "hiragana": "なんでも",
@@ -13026,7 +14841,7 @@ module.exports = {
       "mnemonic_tip": "Nản - Cái gì cũng nản nên không làm gì cả.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "",
+      "kanji_word": "何でも",
       "pitch_accent": 0
     },
     {
@@ -13060,6 +14875,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1075,
+      "lesson_id": 26,
+      "hiragana": "かたづく",
+      "romaji": "katadzuku",
+      "vietnamese_meaning": "được dọn dẹp, ngăn nắp",
+      "word_type": "verb",
+      "japanese_example": "部屋が 片付きました。",
+      "example_meaning": "Căn phòng đã được dọn dẹp ngăn nắp rồi.",
+      "mnemonic_tip": "Ca ta dứt kimasu: Ca ta (cái ca) dứt điểm là dọn sạch kimasu (đến/được ngăn nắp).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "片づく",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1076,
+      "lesson_id": 26,
+      "hiragana": "もえるごみ",
+      "romaji": "moerugomi",
+      "vietnamese_meaning": "rác cháy được",
+      "word_type": "noun",
+      "japanese_example": "これは 燃えるゴミです。",
+      "example_meaning": "Đây là rác cháy được.",
+      "mnemonic_tip": "Mơ ơ gô mì: Mơ ngủ mà đổ nhầm rác cháy được (moeru gomi) vào nồi mì thì cháy to.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "燃えるごみ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1077,
+      "lesson_id": 26,
+      "hiragana": "おきば",
+      "romaji": "okiba",
+      "vietnamese_meaning": "nơi để",
+      "word_type": "noun",
+      "japanese_example": "ここは ゴミの 置き場です。",
+      "example_meaning": "Đây là nơi để rác.",
+      "mnemonic_tip": "Ô kìa ba: Ô kìa ba cái đồ này để ở nơi để (okiba) này à?",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "置き場",
+      "pitch_accent": 0
+    },
+    {
       "id": 1078,
       "lesson_id": 26,
       "hiragana": "よこ",
@@ -13073,6 +14933,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "横",
       "pitch_accent": 0
+    },
+    {
+      "id": 1079,
+      "lesson_id": 26,
+      "hiragana": "びん",
+      "romaji": "bin",
+      "vietnamese_meaning": "cái chai",
+      "word_type": "noun",
+      "japanese_example": "空の ビンを 捨てます。",
+      "example_meaning": "Tôi vứt cái chai rỗng.",
+      "mnemonic_tip": "Bin: Cái chai bằng nhựa bị 'bín' (bị biến) mất rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "瓶",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1080,
+      "lesson_id": 26,
+      "hiragana": "かん",
+      "romaji": "kan",
+      "vietnamese_meaning": "cái lon",
+      "word_type": "noun",
+      "japanese_example": "ジュースの カンを 片付けます。",
+      "example_meaning": "Tôi dọn dẹp mấy cái lon nước ngọt.",
+      "mnemonic_tip": "Căn: Cái lon bị 'căn' (cắn) móp méo hết rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "缶",
+      "pitch_accent": 3
     },
     {
       "id": 1081,
@@ -13090,6 +14980,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1082,
+      "lesson_id": 26,
+      "hiragana": "がいしゃ",
+      "romaji": "gaisha",
+      "vietnamese_meaning": "công ty ga",
+      "word_type": "noun",
+      "japanese_example": "ガス会社に 電話します。",
+      "example_meaning": "Tôi gọi điện cho công ty ga.",
+      "mnemonic_tip": "Gai xã: Công ty ga này có ông 'gai xã' (người xã khác) làm việc.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "会社",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1083,
+      "lesson_id": 26,
+      "hiragana": "うちゅう",
+      "romaji": "uchuu",
+      "vietnamese_meaning": "vũ trụ",
+      "word_type": "noun",
+      "japanese_example": "宇宙は 広いです。",
+      "example_meaning": "Vũ trụ thật rộng lớn.",
+      "mnemonic_tip": "Ư chu: Ư là chu (chú) ấy muốn bay lên vũ trụ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "宇宙",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1084,
+      "lesson_id": 26,
+      "hiragana": "さま",
+      "romaji": "sama",
+      "vietnamese_meaning": "vị, ngài (kính ngữ)",
+      "word_type": "noun",
+      "japanese_example": "田中様、こちらへ どうぞ。",
+      "example_meaning": "Ngài Tanaka, mời đi lối này.",
+      "mnemonic_tip": "Sa mạ: 'Sa mạ' (Sa mạc) rộng lớn nên phải dùng kính ngữ (sama) với các vị khách ở đó.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "様",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1085,
+      "lesson_id": 26,
+      "hiragana": "うちゅうせん",
+      "romaji": "uchuusen",
+      "vietnamese_meaning": "tàu vũ trụ",
+      "word_type": "noun",
+      "japanese_example": "宇宙船を 見ました。",
+      "example_meaning": "Tôi đã nhìn thấy tàu vũ trụ.",
+      "mnemonic_tip": "Ư chu sen: Tàu vũ trụ (uchuusen) chở 'ư chu sen' (ư, chú sen) đi lên trời.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "宇宙船",
+      "pitch_accent": 3
+    },
+    {
       "id": 1086,
       "lesson_id": 26,
       "hiragana": "こわい",
@@ -13102,6 +15052,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "怖い",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1087,
+      "lesson_id": 26,
+      "hiragana": "うちゅうひこうし",
+      "romaji": "uchuuhikoushi",
+      "vietnamese_meaning": "phi hành gia",
+      "word_type": "noun",
+      "japanese_example": "宇宙飛行士になりたいです。",
+      "example_meaning": "Tôi muốn trở thành phi hành gia.",
+      "mnemonic_tip": "Ư chu hi cô shi: Phi hành gia (uchuuhikoushi) là những người 'hi cô shi' (hi, cô sĩ) quan trọng trên tàu vũ trụ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "宇宙飛行士",
       "pitch_accent": 3
     },
     {
@@ -13240,6 +15205,36 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1099,
+      "lesson_id": 27,
+      "hiragana": "なみ",
+      "romaji": "nami",
+      "vietnamese_meaning": "Sóng",
+      "word_type": "noun",
+      "japanese_example": "波の音が好きです。",
+      "example_meaning": "Tôi thích tiếng sóng biển.",
+      "mnemonic_tip": "Nà-mi: Nà mình cùng ra xem sóng biển.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "波",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1100,
+      "lesson_id": 27,
+      "hiragana": "はなび",
+      "romaji": "hanabi",
+      "vietnamese_meaning": "Pháo hoa",
+      "word_type": "noun",
+      "japanese_example": "花火がきれいでした。",
+      "example_meaning": "Pháo hoa rất đẹp.",
+      "mnemonic_tip": "Ha-na-bi: Hạ nà bí, pháo hoa nổ to quá làm rơi mất quả bí.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "花火",
+      "pitch_accent": 2
+    },
+    {
       "id": 1101,
       "lesson_id": 27,
       "hiragana": "けしき",
@@ -13297,6 +15292,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "道具",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1105,
+      "lesson_id": 27,
+      "hiragana": "じどうはんばいき",
+      "romaji": "jidouhanbaiki",
+      "vietnamese_meaning": "Máy bán hàng tự động",
+      "word_type": "noun",
+      "japanese_example": "自動販売機で飲み物を買います。",
+      "example_meaning": "Tôi mua nước ở máy bán hàng tự động.",
+      "mnemonic_tip": "Gì-đô-hắn-bán-kì: Gì đó hắn đang bán ở cái máy kìa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "自動販売機",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1107,
+      "lesson_id": 27,
+      "hiragana": "クリーニング",
+      "romaji": "kuriiningu",
+      "vietnamese_meaning": "Giặt ủi",
+      "word_type": "noun",
+      "japanese_example": "クリーニングを出します。",
+      "example_meaning": "Tôi đi giặt ủi đồ.",
+      "mnemonic_tip": "Cứ-li-nình: Cứ làm sạch đồ cho nó lung linh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1108,
+      "lesson_id": 27,
+      "hiragana": "マンション",
+      "romaji": "manshon",
+      "vietnamese_meaning": "Chung cư",
+      "word_type": "noun",
+      "japanese_example": "マンションに住んでいます。",
+      "example_meaning": "Tôi đang sống ở chung cư.",
+      "mnemonic_tip": "Man-sòn: Màn sương bao quanh khu chung cư.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -13405,6 +15445,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1121,
+      "lesson_id": 27,
+      "hiragana": "すばらしい",
+      "romaji": "subarashii",
+      "vietnamese_meaning": "Tuyệt vời",
+      "word_type": "adjective",
+      "japanese_example": "素晴らしい景色ですね。",
+      "example_meaning": "Phong cảnh thật tuyệt vời nhỉ.",
+      "mnemonic_tip": "Su ba ra xi - Su, ba ra, xi! Thật là tuyệt vời!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "素晴らしい",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1122,
+      "lesson_id": 27,
+      "hiragana": "こどもたち",
+      "romaji": "kodomotachi",
+      "vietnamese_meaning": "Trẻ em",
+      "word_type": "noun",
+      "japanese_example": "公園で子供たちが遊んでいます。",
+      "example_meaning": "Trẻ em đang chơi ở công viên.",
+      "mnemonic_tip": "Cô đâu mà tách - Cô đâu mà tách lũ trẻ em ra khỏi nhau thế?",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "子供たち",
+      "pitch_accent": 0
+    },
+    {
       "id": 1123,
       "lesson_id": 27,
       "hiragana": "だいすき",
@@ -13433,6 +15503,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "漫画",
       "pitch_accent": 2
+    },
+    {
+      "id": 1125,
+      "lesson_id": 27,
+      "hiragana": "しゅじんこう",
+      "romaji": "shujinkou",
+      "vietnamese_meaning": "Nhân vật chính",
+      "word_type": "noun",
+      "japanese_example": "この物語の主人公は誰ですか。",
+      "example_meaning": "Nhân vật chính của câu chuyện này là ai?",
+      "mnemonic_tip": "Sư giữ không - Sư thầy giữ không cho nhân vật chính thoát khỏi kịch bản.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "主人公",
+      "pitch_accent": 1
     },
     {
       "id": 1126,
@@ -13492,6 +15577,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "例えば",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1131,
+      "lesson_id": 27,
+      "hiragana": "じゆうに",
+      "romaji": "jiyuuni",
+      "vietnamese_meaning": "Tự do",
+      "word_type": "adverb",
+      "japanese_example": "自由に話してください。",
+      "example_meaning": "Hãy nói chuyện tự do nhé.",
+      "mnemonic_tip": "Di du ni - Đi du lịch tự do thôi nào.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "自由に",
       "pitch_accent": 0
     },
     {
@@ -13585,6 +15685,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1140,
+      "lesson_id": 28,
+      "hiragana": "えらい",
+      "romaji": "erai",
+      "vietnamese_meaning": "vĩ đại, giỏi giang",
+      "word_type": "adjective",
+      "japanese_example": "偉い 人ですね。",
+      "example_meaning": "Đúng là một người vĩ đại.",
+      "mnemonic_tip": "Mẹo: 'Em lại' khen người vĩ đại.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "偉い",
+      "pitch_accent": 0
+    },
+    {
       "id": 1141,
       "lesson_id": 28,
       "hiragana": "しゅうかん",
@@ -13598,6 +15713,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "習慣",
       "pitch_accent": 1
+    },
+    {
+      "id": 1142,
+      "lesson_id": 28,
+      "hiragana": "うれる",
+      "romaji": "ureru",
+      "vietnamese_meaning": "bán chạy",
+      "word_type": "verb",
+      "japanese_example": "このパンはよく売れます。",
+      "example_meaning": "Loại bánh mì này bán rất chạy.",
+      "mnemonic_tip": "U rê mát - Hàng bán chạy vì chất lượng tốt nên U (mẹ) rê mát lạnh cả người.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "売れる",
+      "pitch_accent": 0
     },
     {
       "id": 1143,
@@ -13645,6 +15775,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1146,
+      "lesson_id": 28,
+      "hiragana": "まじめ",
+      "romaji": "majime",
+      "vietnamese_meaning": "nghiêm túc, chăm chỉ",
+      "word_type": "adjective",
+      "japanese_example": "彼はとても真面目な学生です。",
+      "example_meaning": "Anh ấy là một sinh viên rất nghiêm túc.",
+      "mnemonic_tip": "Mẹ dìm - Mẹ dìm hàng nhưng con vẫn rất nghiêm túc làm việc.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "真面目",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1147,
+      "lesson_id": 28,
+      "hiragana": "ねっしん",
+      "romaji": "nesshin",
+      "vietnamese_meaning": "nhiệt tình",
+      "word_type": "adjective",
+      "japanese_example": "仕事に熱心に取り組みます。",
+      "example_meaning": "Tôi làm việc một cách nhiệt tình.",
+      "mnemonic_tip": "Nét xin - Có nét xin xắn nên ai cũng nhiệt tình giúp đỡ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "熱心",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1148,
+      "lesson_id": 28,
+      "hiragana": "ちょうどいい",
+      "romaji": "choudo ii",
+      "vietnamese_meaning": "vừa đúng, vừa vặn",
+      "word_type": "adjective",
+      "japanese_example": "この靴はちょうどいいです。",
+      "example_meaning": "Đôi giày này vừa vặn.",
+      "mnemonic_tip": "Chờ độ y - Chờ độ y phục này mãi, vừa đúng ý mình luôn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "丁度いい",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1149,
+      "lesson_id": 28,
+      "hiragana": "けいけん",
+      "romaji": "keiken",
+      "vietnamese_meaning": "kinh nghiệm",
+      "word_type": "noun",
+      "japanese_example": "仕事の経験があります。",
+      "example_meaning": "Tôi có kinh nghiệm làm việc.",
+      "mnemonic_tip": "Kê ken - Kê cái kèn lên miệng thổi, kinh nghiệm đầy mình.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "経験",
+      "pitch_accent": 0
+    },
+    {
       "id": 1150,
       "lesson_id": 28,
       "hiragana": "ちから",
@@ -13658,6 +15848,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "力",
       "pitch_accent": 0
+    },
+    {
+      "id": 1151,
+      "lesson_id": 28,
+      "hiragana": "にんき",
+      "romaji": "ninki",
+      "vietnamese_meaning": "được hâm mộ, nổi tiếng",
+      "word_type": "noun",
+      "japanese_example": "この歌は人気があります。",
+      "example_meaning": "Bài hát này được yêu thích.",
+      "mnemonic_tip": "Nín kì - Fan hâm mộ nín thở kỳ vọng thần tượng xuất hiện.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "人気",
+      "pitch_accent": 3
     },
     {
       "id": 1152,
@@ -13687,6 +15892,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "味",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1154,
+      "lesson_id": 28,
+      "hiragana": "ガム",
+      "romaji": "gamu",
+      "vietnamese_meaning": "kẹo cao su",
+      "word_type": "noun",
+      "japanese_example": "ガムをかみます。",
+      "example_meaning": "Tôi nhai kẹo cao su.",
+      "mnemonic_tip": "Gà mu - Con gà mù đang nhai kẹo cao su.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -13720,6 +15940,36 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1157,
+      "lesson_id": 28,
+      "hiragana": "きゅうりょう",
+      "romaji": "kyuuryou",
+      "vietnamese_meaning": "lương",
+      "word_type": "noun",
+      "japanese_example": "給料をもらいます。",
+      "example_meaning": "Tôi nhận lương.",
+      "mnemonic_tip": "Cứ yêu - Làm vì lương, cứ yêu tiền là được.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "給料",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1158,
+      "lesson_id": 28,
+      "hiragana": "ボーナス",
+      "romaji": "boonasu",
+      "vietnamese_meaning": "thưởng",
+      "word_type": "noun",
+      "japanese_example": "ボーナスが出ます。",
+      "example_meaning": "Tiền thưởng sẽ được phát.",
+      "mnemonic_tip": "Bô nát - Tiền thưởng bô nát (bổ nát) cả ví vì tiêu quá nhiều.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
       "id": 1159,
       "lesson_id": 28,
       "hiragana": "ばんぐみ",
@@ -13733,6 +15983,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "番組",
       "pitch_accent": 4
+    },
+    {
+      "id": 1160,
+      "lesson_id": 28,
+      "hiragana": "ドラマ",
+      "romaji": "dorama",
+      "vietnamese_meaning": "phim truyền hình",
+      "word_type": "noun",
+      "japanese_example": "ドラマが好きです。",
+      "example_meaning": "Tôi thích phim truyền hình.",
+      "mnemonic_tip": "Đo ra ma - Đo ra ma (đo ra ma lực) của bộ phim truyền hình này.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
     },
     {
       "id": 1161,
@@ -13750,6 +16015,21 @@ module.exports = {
       "pitch_accent": 2
     },
     {
+      "id": 1162,
+      "lesson_id": 28,
+      "hiragana": "しょうせつか",
+      "romaji": "shousetsuka",
+      "vietnamese_meaning": "tiểu thuyết gia",
+      "word_type": "noun",
+      "japanese_example": "彼は有名な小説家です。",
+      "example_meaning": "Anh ấy là một tiểu thuyết gia nổi tiếng.",
+      "mnemonic_tip": "Show sét ca - Ca sĩ làm tiểu thuyết gia, show sét đánh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "小説家",
+      "pitch_accent": 0
+    },
+    {
       "id": 1163,
       "lesson_id": 28,
       "hiragana": "かしゅ",
@@ -13763,6 +16043,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "歌手",
       "pitch_accent": 2
+    },
+    {
+      "id": 1164,
+      "lesson_id": 28,
+      "hiragana": "かんりにん",
+      "romaji": "kanrinin",
+      "vietnamese_meaning": "quản lý",
+      "word_type": "noun",
+      "japanese_example": "管理人を呼びます。",
+      "example_meaning": "Tôi gọi người quản lý.",
+      "mnemonic_tip": "Căn ri nín - Căn nhà ri này người quản lý nín thở trông coi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "管理人",
+      "pitch_accent": 0
     },
     {
       "id": 1165,
@@ -13836,7 +16131,7 @@ module.exports = {
       "mnemonic_tip": "Sỉ ba rắc - Chờ một lát cho sỉ nhục bớt rắc rối.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "暫く",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -13851,7 +16146,7 @@ module.exports = {
       "mnemonic_tip": "Tại tề - Tại vì tề tựu đông đủ nên thường hay tụ tập.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "大抵",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -13900,6 +16195,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1174,
+      "lesson_id": 28,
+      "hiragana": "ホームステイ",
+      "romaji": "hoomusutei",
+      "vietnamese_meaning": "Ở trọ cùng gia đình bản địa (homestay)",
+      "word_type": "noun",
+      "japanese_example": "日本でホームステイをします。",
+      "example_meaning": "Tôi sẽ homestay ở Nhật Bản.",
+      "mnemonic_tip": "Hôm mút tơi - Hôm nay mút tơi (mệt tơi bời) khi đi ở trọ homestay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1175,
       "lesson_id": 28,
       "hiragana": "かいわ",
@@ -13927,6 +16237,66 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1177,
+      "lesson_id": 28,
+      "hiragana": "おしらせ",
+      "romaji": "oshirase",
+      "vietnamese_meaning": "Thông báo",
+      "word_type": "noun",
+      "japanese_example": "お知らせを読んでください。",
+      "example_meaning": "Hãy đọc thông báo nhé.",
+      "mnemonic_tip": "Ô si ra sê - Ô sĩ ra xe thông báo tin tức.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "お知らせ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1178,
+      "lesson_id": 28,
+      "hiragana": "ひにち",
+      "romaji": "hinichi",
+      "vietnamese_meaning": "Ngày (để tổ chức sự kiện)",
+      "word_type": "noun",
+      "japanese_example": "旅行の日にちを決めます。",
+      "example_meaning": "Tôi quyết định ngày đi du lịch.",
+      "mnemonic_tip": "Hi ni chi - Hi ni chi (ghi nhớ) ngày để đi chơi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "日にち",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1179,
+      "lesson_id": 28,
+      "hiragana": "ど",
+      "romaji": "do",
+      "vietnamese_meaning": "Thứ Bảy",
+      "word_type": "noun",
+      "japanese_example": "土曜日に会います。",
+      "example_meaning": "Chúng ta gặp nhau vào thứ Bảy.",
+      "mnemonic_tip": "Đô - Đô (độ) người ta chỉ nghỉ vào thứ Bảy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "度",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1181,
+      "lesson_id": 28,
+      "hiragana": "むりょう",
+      "romaji": "muryou",
+      "vietnamese_meaning": "Miễn phí",
+      "word_type": "noun",
+      "japanese_example": "入場は無料です。",
+      "example_meaning": "Vào cửa miễn phí.",
+      "mnemonic_tip": "Mưu rồ - Mưu rồ mà được miễn phí thì tội gì không nhận.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "無料",
       "pitch_accent": 0
     },
     {
@@ -14020,6 +16390,21 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 1188,
+      "lesson_id": 29,
+      "hiragana": "すく",
+      "romaji": "suku",
+      "vietnamese_meaning": "vắng vẻ (đường)",
+      "word_type": "verb",
+      "japanese_example": "道がすきます。",
+      "example_meaning": "Đường vắng vẻ.",
+      "mnemonic_tip": "Su-ki-ma-su: 'Suýt kiệt mắt' - Đường vắng quá, lái xe suýt kiệt mắt vì buồn ngủ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "空く",
+      "pitch_accent": 2
+    },
+    {
       "id": 1189,
       "lesson_id": 29,
       "hiragana": "おれる",
@@ -14035,6 +16420,21 @@ module.exports = {
       "pitch_accent": 4
     },
     {
+      "id": 1190,
+      "lesson_id": 29,
+      "hiragana": "やぶれる",
+      "romaji": "yabureru",
+      "vietnamese_meaning": "rách (giấy)",
+      "word_type": "verb",
+      "japanese_example": "紙が破れます。",
+      "example_meaning": "Tờ giấy bị rách.",
+      "mnemonic_tip": "Ya-bu-re-ma-su: 'Ya! Bù rờ mạ' - Tờ giấy rách rồi, Ya! Bù rờ mạ (cho phẳng) lại đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "破れる",
+      "pitch_accent": 3
+    },
+    {
       "id": 1191,
       "lesson_id": 29,
       "hiragana": "よごれる",
@@ -14048,6 +16448,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:09.995366+00:00",
       "kanji_word": "汚れる",
       "pitch_accent": 3
+    },
+    {
+      "id": 1192,
+      "lesson_id": 29,
+      "hiragana": "はずれる",
+      "romaji": "hazureru",
+      "vietnamese_meaning": "tuột, rơi ra (cúc)",
+      "word_type": "verb",
+      "japanese_example": "ボタンが外れます。",
+      "example_meaning": "Cúc áo bị tuột ra.",
+      "mnemonic_tip": "Ha-zu-re-ma-su: 'Ha! Dư rờ mạ' - Cúc áo tuột ra, Ha! Dư một cái rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "外れる",
+      "pitch_accent": 2
     },
     {
       "id": 1193,
@@ -14125,6 +16540,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1198,
+      "lesson_id": 29,
+      "hiragana": "さら",
+      "romaji": "sara",
+      "vietnamese_meaning": "cái đĩa",
+      "word_type": "noun",
+      "japanese_example": "皿を洗います。",
+      "example_meaning": "Rửa cái đĩa.",
+      "mnemonic_tip": "Sa-ra: 'Sa đà' - Vì ăn nhiều quá nên sa đà vào cái đĩa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:09.995366+00:00",
+      "kanji_word": "皿",
+      "pitch_accent": 4
+    },
+    {
       "id": 1199,
       "lesson_id": 29,
       "hiragana": "ちゃわん",
@@ -14168,6 +16598,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "硝子",
       "pitch_accent": 3
+    },
+    {
+      "id": 1202,
+      "lesson_id": 29,
+      "hiragana": "ふくろ",
+      "romaji": "fukuro",
+      "vietnamese_meaning": "cái túi",
+      "word_type": "noun",
+      "japanese_example": "袋をもらいます。",
+      "example_meaning": "Lấy cái túi.",
+      "mnemonic_tip": "Fu-ku-ro: 'Phù khô' - Cái túi này dày quá, để phù khô (thổi cho khô) là xong.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "袋",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1203,
+      "lesson_id": 29,
+      "hiragana": "しょるい",
+      "romaji": "shorui",
+      "vietnamese_meaning": "giấy tờ",
+      "word_type": "noun",
+      "japanese_example": "書類を整理します。",
+      "example_meaning": "Sắp xếp giấy tờ.",
+      "mnemonic_tip": "Sho-ru-i: 'Sô rùa í' - Giấy tờ nhiều như là sô rùa í (đầy cả ra).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "書類",
+      "pitch_accent": 0
     },
     {
       "id": 1204,
@@ -14350,6 +16810,21 @@ module.exports = {
       "pitch_accent": 2
     },
     {
+      "id": 1221,
+      "lesson_id": 29,
+      "hiragana": "はり",
+      "romaji": "hari",
+      "vietnamese_meaning": "Kim (đồng hồ)",
+      "word_type": "noun",
+      "japanese_example": "時計の針が動きます。",
+      "example_meaning": "Kim đồng hồ đang chuyển động.",
+      "mnemonic_tip": "Ha ri - Ha ri (hà rí) cái kim nhọn hoắt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "針",
+      "pitch_accent": 0
+    },
+    {
       "id": 1222,
       "lesson_id": 29,
       "hiragana": "さす",
@@ -14365,6 +16840,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1223,
+      "lesson_id": 29,
+      "hiragana": "えきまえ",
+      "romaji": "ekimae",
+      "vietnamese_meaning": "Trước nhà ga",
+      "word_type": "noun",
+      "japanese_example": "駅前に銀行があります。",
+      "example_meaning": "Trước nhà ga có ngân hàng.",
+      "mnemonic_tip": "Ê kìa mẹ - Ê kìa mẹ đang đứng đợi trước nhà ga.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "駅前",
+      "pitch_accent": 0
+    },
+    {
       "id": 1224,
       "lesson_id": 29,
       "hiragana": "たおれる",
@@ -14377,6 +16867,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "倒れる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1226,
+      "lesson_id": 29,
+      "hiragana": "もえる",
+      "romaji": "moeru",
+      "vietnamese_meaning": "Cháy",
+      "word_type": "verb",
+      "japanese_example": "家が燃えています。",
+      "example_meaning": "Ngôi nhà đang bị cháy.",
+      "mnemonic_tip": "Mô em mát - Lửa cháy to quá, làm mô (gò má) em mát rượi (vì nóng quá mà lú luôn).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "燃える",
       "pitch_accent": 0
     },
     {
@@ -14408,6 +16913,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "飾る",
       "pitch_accent": 3
+    },
+    {
+      "id": 1230,
+      "lesson_id": 30,
+      "hiragana": "しまう",
+      "romaji": "shimau",
+      "vietnamese_meaning": "cất vào, để vào",
+      "word_type": "verb",
+      "japanese_example": "道具を しまいます。",
+      "example_meaning": "Cất dọn dụng cụ.",
+      "mnemonic_tip": "Mẹo: 'Xì má' bảo cất đồ đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
     },
     {
       "id": 1231,
@@ -14468,6 +16988,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "戻す",
       "pitch_accent": 3
+    },
+    {
+      "id": 1235,
+      "lesson_id": 30,
+      "hiragana": "まとめる",
+      "romaji": "matomeru",
+      "vietnamese_meaning": "tóm tắt, gom lại",
+      "word_type": "verb",
+      "japanese_example": "意見をまとめます。",
+      "example_meaning": "Tôi tóm tắt các ý kiến.",
+      "mnemonic_tip": "Mà tô mê - Mà tô lại hết cái mớ hỗn độn này cho gọn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "まとめる",
+      "pitch_accent": 2
     },
     {
       "id": 1236,
@@ -14590,6 +17125,21 @@ module.exports = {
       "pitch_accent": 2
     },
     {
+      "id": 1244,
+      "lesson_id": 30,
+      "hiragana": "ミーティング",
+      "romaji": "miitingu",
+      "vietnamese_meaning": "cuộc họp",
+      "word_type": "noun",
+      "japanese_example": "会議室でミーティングをします。",
+      "example_meaning": "Tôi họp ở phòng họp.",
+      "mnemonic_tip": "Mít tin - Cuộc họp này làm mọi người mít tin (mất tin) vì quá dài.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1245,
       "lesson_id": 30,
       "hiragana": "よてい",
@@ -14605,6 +17155,21 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 1246,
+      "lesson_id": 30,
+      "hiragana": "あんないしょ",
+      "romaji": "annaisho",
+      "vietnamese_meaning": "sách hướng dẫn",
+      "word_type": "noun",
+      "japanese_example": "旅行の案内書を読みます。",
+      "example_meaning": "Tôi đọc sách hướng dẫn du lịch.",
+      "mnemonic_tip": "An này sơ - Cái cuốn sách hướng dẫn này sơ sài quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "案内書",
+      "pitch_accent": 2
+    },
+    {
       "id": 1247,
       "lesson_id": 30,
       "hiragana": "カレンダー",
@@ -14618,6 +17183,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "",
       "pitch_accent": 0
+    },
+    {
+      "id": 1248,
+      "lesson_id": 30,
+      "hiragana": "ポスター",
+      "romaji": "posutaa",
+      "vietnamese_meaning": "áp phích",
+      "word_type": "noun",
+      "japanese_example": "新しいポスターを貼ります。",
+      "example_meaning": "Tôi dán áp phích mới.",
+      "mnemonic_tip": "Bố sờ ta - Bố sờ vào cái áp phích treo trên tường.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1249,
+      "lesson_id": 30,
+      "hiragana": "ごみばこ",
+      "romaji": "gomibako",
+      "vietnamese_meaning": "thùng rác",
+      "word_type": "noun",
+      "japanese_example": "ごみをゴミ箱に捨てます。",
+      "example_meaning": "Tôi vứt rác vào thùng rác.",
+      "mnemonic_tip": "Gô mì bả - Đừng vứt gô mì bả vào thùng rác nhé.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "ごみ箱",
+      "pitch_accent": 4
     },
     {
       "id": 1250,
@@ -14770,6 +17365,36 @@ module.exports = {
       "pitch_accent": 2
     },
     {
+      "id": 1261,
+      "lesson_id": 30,
+      "hiragana": "―ほど",
+      "romaji": "hodo",
+      "vietnamese_meaning": "Khoảng chừng",
+      "word_type": "counter",
+      "japanese_example": "３時間ほどかかります。",
+      "example_meaning": "Mất khoảng 3 tiếng.",
+      "mnemonic_tip": "Hờ đô: Khoảng chừng hờ đô la thôi, không đắt lắm đâu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1262,
+      "lesson_id": 30,
+      "hiragana": "よていひょう",
+      "romaji": "yoteihyou",
+      "vietnamese_meaning": "Thời gian biểu",
+      "word_type": "noun",
+      "japanese_example": "予定表を確認します。",
+      "example_meaning": "Tôi kiểm tra thời gian biểu.",
+      "mnemonic_tip": "Y tế hy vọng: Nhìn vào thời gian biểu, hy vọng lịch y tế không trùng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "予定表",
+      "pitch_accent": 0
+    },
+    {
       "id": 1263,
       "lesson_id": 30,
       "hiragana": "ごくろうさま",
@@ -14785,6 +17410,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1264,
+      "lesson_id": 30,
+      "hiragana": "きぼう",
+      "romaji": "kibou",
+      "vietnamese_meaning": "Nguyện vọng",
+      "word_type": "noun",
+      "japanese_example": "将来の希望は何ですか。",
+      "example_meaning": "Nguyện vọng tương lai của bạn là gì?",
+      "mnemonic_tip": "Kì bầu: Nguyện vọng của tôi là kì bầu cử tới sẽ trúng tuyển.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "希望",
+      "pitch_accent": 0
+    },
+    {
       "id": 1265,
       "lesson_id": 30,
       "hiragana": "なにかごきぼうがありますか",
@@ -14794,6 +17434,21 @@ module.exports = {
       "japanese_example": "何かご希望がありますか。",
       "example_meaning": "Bạn có nguyện vọng gì không?",
       "mnemonic_tip": "Na ni ca: Là câu hỏi lịch sự hỏi về nguyện vọng của khách.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1266,
+      "lesson_id": 30,
+      "hiragana": "ミュージカル",
+      "romaji": "myuujikaru",
+      "vietnamese_meaning": "Nhạc kịch",
+      "word_type": "noun",
+      "japanese_example": "ミュージカルを見に行きます。",
+      "example_meaning": "Tôi đi xem nhạc kịch.",
+      "mnemonic_tip": "Miu-di-ca-ru: Âm nhạc (music) cứ rủ nhau đi xem nhạc kịch.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "",
@@ -14845,6 +17500,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1270,
+      "lesson_id": 30,
+      "hiragana": "ちきゅう",
+      "romaji": "chikyuu",
+      "vietnamese_meaning": "Trái đất",
+      "word_type": "noun",
+      "japanese_example": "地球を守りましょう。",
+      "example_meaning": "Hãy bảo vệ trái đất.",
+      "mnemonic_tip": "Chi cứu: Chúng ta phải chi tiền để cứu trái đất khỏi ô nhiễm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "地球",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1271,
+      "lesson_id": 30,
+      "hiragana": "うれしい",
+      "romaji": "ureshii",
+      "vietnamese_meaning": "Vui mừng",
+      "word_type": "adjective",
+      "japanese_example": "合格して、とても嬉しいです。",
+      "example_meaning": "Đậu rồi, tôi rất vui mừng.",
+      "mnemonic_tip": "U rê shi: Ư, rê đi, vui quá đi thôi!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "嬉しい",
+      "pitch_accent": 0
+    },
+    {
       "id": 1272,
       "lesson_id": 30,
       "hiragana": "いや",
@@ -14872,6 +17557,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1274,
+      "lesson_id": 30,
+      "hiragana": "めがさめる",
+      "romaji": "megasameru",
+      "vietnamese_meaning": "Tỉnh giấc",
+      "word_type": "verb",
+      "japanese_example": "朝、６時に目が覚めます。",
+      "example_meaning": "Sáng tôi tỉnh giấc lúc 6 giờ.",
+      "mnemonic_tip": "Mê gà: Mê gà quá nên nằm mơ, chợt tỉnh giấc mới biết là mơ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "目が覚める",
       "pitch_accent": 0
     },
     {
@@ -14935,6 +17635,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1279,
+      "lesson_id": 31,
+      "hiragana": "とじる",
+      "romaji": "tojiru",
+      "vietnamese_meaning": "đóng, nhắm [mắt, sách]",
+      "word_type": "verb",
+      "japanese_example": "本を 閉じます。",
+      "example_meaning": "Đóng sách lại.",
+      "mnemonic_tip": "Mẹo: 'Tô dĩa' đóng nắp.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "閉じる",
+      "pitch_accent": 2
+    },
+    {
       "id": 1282,
       "lesson_id": 31,
       "hiragana": "にゅうがくする",
@@ -14980,6 +17695,111 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1285,
+      "lesson_id": 31,
+      "hiragana": "れんきゅう",
+      "romaji": "renkyuu",
+      "vietnamese_meaning": "kỳ nghỉ liền nhau",
+      "word_type": "noun",
+      "japanese_example": "連休に旅行に行きます。",
+      "example_meaning": "Tôi sẽ đi du lịch vào kỳ nghỉ liền nhau.",
+      "mnemonic_tip": "Ren-kyuu: Rèn cưu, đợt nghỉ dài là thời gian rèn luyện để cứu lấy thân hình.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "連休",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1287,
+      "lesson_id": 31,
+      "hiragana": "てんらんかい",
+      "romaji": "tenrankai",
+      "vietnamese_meaning": "triển lãm",
+      "word_type": "noun",
+      "japanese_example": "展覧会を見に行きます。",
+      "example_meaning": "Tôi đi xem triển lãm.",
+      "mnemonic_tip": "Ten-ran-kai: Tên rạn cái, tên triển lãm nghe rạn nứt cả tai.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "展覧会",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1288,
+      "lesson_id": 31,
+      "hiragana": "けっこんしき",
+      "romaji": "kekkonshiki",
+      "vietnamese_meaning": "lễ cưới",
+      "word_type": "noun",
+      "japanese_example": "友達の結婚式に行きます。",
+      "example_meaning": "Tôi đi đến lễ cưới của bạn.",
+      "mnemonic_tip": "Kek-kon-shi-ki: Kết con sì ki, lễ cưới là lúc kết nạp con sì ki (cún) vào gia đình.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "結婚式",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1289,
+      "lesson_id": 31,
+      "hiragana": "そうしき",
+      "romaji": "soushiki",
+      "vietnamese_meaning": "Đám tang, tang lễ (lịch sự: おそうしき)",
+      "word_type": "noun",
+      "japanese_example": "お葬式に出席します。",
+      "example_meaning": "Tôi dự đám tang.",
+      "mnemonic_tip": "So-u-shi-ki: Sô xì ki, đám tang mà cứ xô xì (xô đẩy) thì kỳ quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "葬式",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1290,
+      "lesson_id": 31,
+      "hiragana": "しき",
+      "romaji": "shiki",
+      "vietnamese_meaning": "buổi lễ",
+      "word_type": "noun",
+      "japanese_example": "式は静かでした。",
+      "example_meaning": "Buổi lễ rất yên tĩnh.",
+      "mnemonic_tip": "Shi-ki: Si kì, buổi lễ này nhìn si (đồ si) quá kỳ cục.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "式",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1291,
+      "lesson_id": 31,
+      "hiragana": "ほんしゃ",
+      "romaji": "honsha",
+      "vietnamese_meaning": "trụ sở chính",
+      "word_type": "noun",
+      "japanese_example": "本社で働いています。",
+      "example_meaning": "Tôi đang làm việc tại trụ sở chính.",
+      "mnemonic_tip": "Hon-sha: Hơn xã, trụ sở chính thì lúc nào cũng oai hơn xã.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "本社",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1292,
+      "lesson_id": 31,
+      "hiragana": "してん",
+      "romaji": "shiten",
+      "vietnamese_meaning": "chi nhánh",
+      "word_type": "noun",
+      "japanese_example": "支店は東京にあります。",
+      "example_meaning": "Chi nhánh nằm ở Tokyo.",
+      "mnemonic_tip": "Shi-ten: Chi tiền, chi nhánh nào cũng phải chi tiền nhiều.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "支店",
+      "pitch_accent": 1
+    },
+    {
       "id": 1293,
       "lesson_id": 31,
       "hiragana": "きょうかい",
@@ -14995,6 +17815,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1294,
+      "lesson_id": 31,
+      "hiragana": "だいがくいん",
+      "romaji": "daigakuin",
+      "vietnamese_meaning": "cao học",
+      "word_type": "noun",
+      "japanese_example": "大学院で研究します。",
+      "example_meaning": "Tôi nghiên cứu ở trường cao học.",
+      "mnemonic_tip": "Dai-ga-ku-in: Đại gà cu in, học cao học là đại học dành cho mấy chú gà cu in (kiên) trì.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "大学院",
+      "pitch_accent": 0
+    },
+    {
       "id": 1295,
       "lesson_id": 31,
       "hiragana": "どうぶつえん",
@@ -15007,6 +17842,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "動物園",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1296,
+      "lesson_id": 31,
+      "hiragana": "おんせん",
+      "romaji": "onsen",
+      "vietnamese_meaning": "suối nước nóng",
+      "word_type": "noun",
+      "japanese_example": "温泉に入ります。",
+      "example_meaning": "Tôi đi tắm suối nước nóng.",
+      "mnemonic_tip": "On-sen: Ôn sen, suối nước nóng là nơi ôn lại tình sen (bạn thân).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "温泉",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1297,
+      "lesson_id": 31,
+      "hiragana": "おきゃくさん",
+      "romaji": "okyakusan",
+      "vietnamese_meaning": "Khách hàng, khách",
+      "word_type": "noun",
+      "japanese_example": "お客様が来ました。",
+      "example_meaning": "Khách hàng đã đến.",
+      "mnemonic_tip": "O-kya-ku: Ô kìa cu, ôi kìa cu khách hàng đến kìa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "お客さん",
       "pitch_accent": 0
     },
     {
@@ -15037,6 +17902,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "残る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1302,
+      "lesson_id": 31,
+      "hiragana": "ふつうの",
+      "romaji": "futsuu no",
+      "vietnamese_meaning": "bình thường",
+      "word_type": "adjective",
+      "japanese_example": "これは普通のペンです。",
+      "example_meaning": "Đây là cây bút bình thường.",
+      "mnemonic_tip": "Fut-suu: Phút su, bình thường chỉ mất một phút là xong (su).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "普通の",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1303,
+      "lesson_id": 31,
+      "hiragana": "インターネット",
+      "romaji": "intaanetto",
+      "vietnamese_meaning": "internet",
+      "word_type": "noun",
+      "japanese_example": "インターネットで調べます。",
+      "example_meaning": "Tôi tra cứu bằng internet.",
+      "mnemonic_tip": "In-taa-net-to: In tờ nét to, dùng internet in tờ giấy ra nét to đùng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -15085,6 +17980,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1307,
+      "lesson_id": 31,
+      "hiragana": "とかい",
+      "romaji": "tokai",
+      "vietnamese_meaning": "đô thị, thành phố",
+      "word_type": "noun",
+      "japanese_example": "東京は大きな都会です。",
+      "example_meaning": "Tokyo là một đô thị lớn.",
+      "mnemonic_tip": "To cái - Thành phố này cái gì cũng thấy to cái.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "都会",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1308,
+      "lesson_id": 31,
+      "hiragana": "せかいじゅう",
+      "romaji": "sekaijuu",
+      "vietnamese_meaning": "khắp thế giới",
+      "word_type": "noun",
+      "japanese_example": "世界中から人が集まります。",
+      "example_meaning": "Mọi người tụ tập từ khắp thế giới.",
+      "mnemonic_tip": "Sẽ khai dù - Đi khắp thế giới, dù trời mưa cũng sẽ khai dù ra để che.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "世界中",
+      "pitch_accent": 0
+    },
+    {
       "id": 1309,
       "lesson_id": 31,
       "hiragana": "あつまる",
@@ -15112,6 +18037,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "美しい",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1311,
+      "lesson_id": 31,
+      "hiragana": "しぜん",
+      "romaji": "shizen",
+      "vietnamese_meaning": "thiên nhiên",
+      "word_type": "noun",
+      "japanese_example": "自然を大切にしましょう。",
+      "example_meaning": "Hãy trân trọng thiên nhiên.",
+      "mnemonic_tip": "Sĩ diện - Đừng vì sĩ diện mà phá hoại thiên nhiên.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "自然",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1313,
+      "lesson_id": 31,
+      "hiragana": "きがつく",
+      "romaji": "kigatsuku",
+      "vietnamese_meaning": "nhận ra, để ý",
+      "word_type": "verb",
+      "japanese_example": "忘れ物に気が付きます。",
+      "example_meaning": "Nhận ra là đã để quên đồ.",
+      "mnemonic_tip": "Kí gà chút mắm - Đang viết kí tự lên con gà thì nhận ra là phải cho chút mắm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "気がつく",
       "pitch_accent": 0
     },
     {
@@ -15172,6 +18127,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "合格する",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1318,
+      "lesson_id": 32,
+      "hiragana": "もしかしたら",
+      "romaji": "moshikashitara",
+      "vietnamese_meaning": "có thể, biết đâu là",
+      "word_type": "adverb",
+      "japanese_example": "もしかしたら 雨が降るかもしれません。",
+      "example_meaning": "Biết đâu trời có thể mưa.",
+      "mnemonic_tip": "Mẹo: 'Mọi sự có' khả năng xảy ra.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
       "pitch_accent": 1
     },
     {
@@ -15267,8 +18237,8 @@ module.exports = {
     {
       "id": 1328,
       "lesson_id": 32,
-      "hiragana": "ひやする",
-      "romaji": "hiyasuru",
+      "hiragana": "ひやす",
+      "romaji": "hiyasu",
       "vietnamese_meaning": "làm lạnh",
       "word_type": "verb",
       "japanese_example": "ビールを冷やします。",
@@ -15325,6 +18295,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1333,
+      "lesson_id": 32,
+      "hiragana": "やけど",
+      "romaji": "yakedo",
+      "vietnamese_meaning": "bỏng",
+      "word_type": "noun",
+      "japanese_example": "手にやけどをしました。",
+      "example_meaning": "Tôi bị bỏng ở tay.",
+      "mnemonic_tip": "Ya ke độ (yakedo): Ya ơi, nhiệt độ nóng quá làm bị bỏng rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "火傷",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1334,
+      "lesson_id": 32,
+      "hiragana": "けが",
+      "romaji": "kega",
+      "vietnamese_meaning": "vết thương",
+      "word_type": "noun",
+      "japanese_example": "足をけがしました。",
+      "example_meaning": "Tôi bị thương ở chân.",
+      "mnemonic_tip": "Kệ gà (kega): Kệ con gà mổ, mình bị thương rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "怪我",
+      "pitch_accent": 0
+    },
+    {
       "id": 1335,
       "lesson_id": 32,
       "hiragana": "せき",
@@ -15338,6 +18338,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "席",
       "pitch_accent": 0
+    },
+    {
+      "id": 1336,
+      "lesson_id": 32,
+      "hiragana": "インフルエンザ",
+      "romaji": "infuruenza",
+      "vietnamese_meaning": "bệnh cúm",
+      "word_type": "noun",
+      "japanese_example": "インフルエンザにかかりました。",
+      "example_meaning": "Tôi đã bị mắc bệnh cúm.",
+      "mnemonic_tip": "In flu en za: In (in ấn) tờ rơi thông báo bệnh cúm đang lan tràn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1337,
+      "lesson_id": 32,
+      "hiragana": "たいよう",
+      "romaji": "taiyou",
+      "vietnamese_meaning": "mặt trời",
+      "word_type": "noun",
+      "japanese_example": "太陽が昇ります。",
+      "example_meaning": "Mặt trời mọc.",
+      "mnemonic_tip": "Tại yêu (taiyou): Tại yêu mặt trời nên ngày nào cũng ngắm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "太陽",
+      "pitch_accent": 3
     },
     {
       "id": 1338,
@@ -15430,6 +18460,36 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 1344,
+      "lesson_id": 32,
+      "hiragana": "エンジン",
+      "romaji": "enjin",
+      "vietnamese_meaning": "động cơ",
+      "word_type": "noun",
+      "japanese_example": "車のエンジンが壊れました。",
+      "example_meaning": "Động cơ xe hơi bị hỏng rồi.",
+      "mnemonic_tip": "En-jin: Én chạy bằng động cơ nên bay rất nhanh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1345,
+      "lesson_id": 32,
+      "hiragana": "チーム",
+      "romaji": "chiimu",
+      "vietnamese_meaning": "đội, nhóm",
+      "word_type": "noun",
+      "japanese_example": "チームで協力して仕事をします。",
+      "example_meaning": "Chúng tôi làm việc hợp tác theo nhóm.",
+      "mnemonic_tip": "Chí-im: Cả đội có chí lớn nên im lặng làm việc chăm chỉ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
+    },
+    {
       "id": 1346,
       "lesson_id": 32,
       "hiragana": "こんや",
@@ -15460,6 +18520,51 @@ module.exports = {
       "pitch_accent": 3
     },
     {
+      "id": 1348,
+      "lesson_id": 32,
+      "hiragana": "おそく",
+      "romaji": "osoku",
+      "vietnamese_meaning": "muộn, trễ",
+      "word_type": "adverb",
+      "japanese_example": "昨夜は遅く帰りました。",
+      "example_meaning": "Tối qua tôi đã về nhà muộn.",
+      "mnemonic_tip": "Ô-sô-ku: Ôi, sao cô đi trễ quá vậy?",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "遅く",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1349,
+      "lesson_id": 32,
+      "hiragana": "こんなに",
+      "romaji": "konna ni",
+      "vietnamese_meaning": "như thế này",
+      "word_type": "adverb",
+      "japanese_example": "こんなに高いケーキは初めてです。",
+      "example_meaning": "Đây là lần đầu tiên tôi thấy cái bánh đắt như thế này.",
+      "mnemonic_tip": "Con-na-ni: Con nạ ni (này) sao lại to như thế này?",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 4
+    },
+    {
+      "id": 1350,
+      "lesson_id": 32,
+      "hiragana": "あんなに",
+      "romaji": "anna ni",
+      "vietnamese_meaning": "như thế kia",
+      "word_type": "adverb",
+      "japanese_example": "あんなに遠い所へは行けません。",
+      "example_meaning": "Tôi không thể đi đến nơi xa như thế kia được.",
+      "mnemonic_tip": "An-na-ni: Ăn na ni (này) ngon quá, giống như thế kia vậy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1351,
       "lesson_id": 32,
       "hiragana": "それはいけませんね",
@@ -15469,6 +18574,21 @@ module.exports = {
       "japanese_example": "財布を忘れましたか。それはいけませんね。",
       "example_meaning": "Bạn quên ví hả? Thế thì không ổn rồi.",
       "mnemonic_tip": "Sore-wa-ikemasen-ne: So rẻ mà y kê (kê khai) mắc Sen (sen tiền) nghe (ne) là không ổn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1352,
+      "lesson_id": 32,
+      "hiragana": "オリンピック",
+      "romaji": "orinpikku",
+      "vietnamese_meaning": "Thế vận hội Olympic",
+      "word_type": "noun",
+      "japanese_example": "オリンピックを見に行きます。",
+      "example_meaning": "Tôi đi xem Thế vận hội Olympic.",
+      "mnemonic_tip": "O-rin-pik-ku: Ồ, Rin (tên người) thích Olympic nên nhảy lên (pi-ku) ăn mừng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "",
@@ -15505,6 +18625,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1356,
+      "lesson_id": 32,
+      "hiragana": "ストレス",
+      "romaji": "sutoresu",
+      "vietnamese_meaning": "căng thẳng, stress",
+      "word_type": "noun",
+      "japanese_example": "ストレスが溜まっています。",
+      "example_meaning": "Tôi đang bị tích tụ căng thẳng (stress).",
+      "mnemonic_tip": "Su-to-re-su: Sư (thầy) to (to) rể (rể) su (sự) căng thẳng làm thầy stress.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 1
+    },
+    {
       "id": 1357,
       "lesson_id": 32,
       "hiragana": "むりをする",
@@ -15516,7 +18651,7 @@ module.exports = {
       "mnemonic_tip": "Mu-ri-o-shi-ma-su: Mù (mù quáng) ri (rì) o (ố) si (suy) mà (mà) su (sức) là đang làm quá sức đấy.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "",
+      "kanji_word": "無理をする",
       "pitch_accent": 3
     },
     {
@@ -15548,6 +18683,66 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "困る",
       "pitch_accent": 3
+    },
+    {
+      "id": 1362,
+      "lesson_id": 32,
+      "hiragana": "たからくじ",
+      "romaji": "takarakuji",
+      "vietnamese_meaning": "xổ số",
+      "word_type": "noun",
+      "japanese_example": "宝くじを買いました。",
+      "example_meaning": "Tôi đã mua vé số.",
+      "mnemonic_tip": "Ta-ka-ra-ku-ji: Ta (ta) ka (cá) ra (ra) ku (cứ) ji (gì) là trúng xổ số.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "宝くじ",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1363,
+      "lesson_id": 32,
+      "hiragana": "あたる",
+      "romaji": "ataru",
+      "vietnamese_meaning": "trúng (xổ số)",
+      "word_type": "verb",
+      "japanese_example": "宝くじが当たりました。",
+      "example_meaning": "Tôi đã trúng xổ số.",
+      "mnemonic_tip": "A-ta-ri-ma-su: A (a) ta (ta) ri (rồi) ma (mà) su (sướng) khi trúng số.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "当たる",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1364,
+      "lesson_id": 32,
+      "hiragana": "けんこう",
+      "romaji": "kenkou",
+      "vietnamese_meaning": "sức khỏe",
+      "word_type": "noun",
+      "japanese_example": "健康のために走ります。",
+      "example_meaning": "Tôi chạy bộ vì sức khỏe.",
+      "mnemonic_tip": "Ken-kou: Kèn (thổi kèn) không (ken-kou) khỏe thì sao mà thổi nổi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "健康",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1365,
+      "lesson_id": 32,
+      "hiragana": "れんあい",
+      "romaji": "renai",
+      "vietnamese_meaning": "tình yêu",
+      "word_type": "noun",
+      "japanese_example": "恋愛小説が好きです。",
+      "example_meaning": "Tôi thích tiểu thuyết tình yêu.",
+      "mnemonic_tip": "Ren-ai: Rèn (rèn luyện) ai (ai) đó để có tình yêu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "恋愛",
+      "pitch_accent": 4
     },
     {
       "id": 1366,
@@ -15592,6 +18787,66 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "逃げる",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1369,
+      "lesson_id": 33,
+      "hiragana": "あきらめる",
+      "romaji": "akirameru",
+      "vietnamese_meaning": "từ bỏ, bỏ cuộc",
+      "word_type": "verb",
+      "japanese_example": "夢を 諦めます。",
+      "example_meaning": "Từ bỏ ước mơ.",
+      "mnemonic_tip": "Mẹo: 'Ả kìa bỏ' cuộc rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "諦める",
+      "pitch_accent": 4
+    },
+    {
+      "id": 1370,
+      "lesson_id": 33,
+      "hiragana": "まもる",
+      "romaji": "mamoru",
+      "vietnamese_meaning": "bảo vệ, tuân thủ [luật]",
+      "word_type": "verb",
+      "japanese_example": "ルールを 守ります。",
+      "example_meaning": "Tuân thủ luật lệ.",
+      "mnemonic_tip": "Mẹo: 'Má mỗi' ngày bảo vệ con.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "守る",
+      "pitch_accent": 6
+    },
+    {
+      "id": 1371,
+      "lesson_id": 33,
+      "hiragana": "しめきり",
+      "romaji": "shimekiri",
+      "vietnamese_meaning": "hạn cuối, đóng sổ",
+      "word_type": "noun",
+      "japanese_example": "申し込みの 締め切り。",
+      "example_meaning": "Hạn chót đăng ký.",
+      "mnemonic_tip": "Mẹo: 'Xí mẹ kỳ' quá, hết hạn rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "締め切り",
+      "pitch_accent": 5
+    },
+    {
+      "id": 1372,
+      "lesson_id": 33,
+      "hiragana": "きそく",
+      "romaji": "kisoku",
+      "vietnamese_meaning": "quy tắc, luật lệ",
+      "word_type": "noun",
+      "japanese_example": "規則を 守ります。",
+      "example_meaning": "Tuân thủ quy tắc.",
+      "mnemonic_tip": "Mẹo: 'Kí sổ' quy tắc chung.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "規則",
       "pitch_accent": 1
     },
     {
@@ -15685,6 +18940,66 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1379,
+      "lesson_id": 33,
+      "hiragana": "だめ",
+      "romaji": "dame",
+      "vietnamese_meaning": "Không được",
+      "word_type": "adjective",
+      "japanese_example": "ここでたばこはだめです。",
+      "example_meaning": "Ở đây không được hút thuốc.",
+      "mnemonic_tip": "Dame nghe như 'Đa mê' - Đã mê cái xấu rồi thì không được đâu nhé.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "駄目",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1381,
+      "lesson_id": 33,
+      "hiragana": "マーク",
+      "romaji": "maaku",
+      "vietnamese_meaning": "Ký hiệu, dấu hiệu",
+      "word_type": "noun",
+      "japanese_example": "禁止のマークです。",
+      "example_meaning": "Đó là ký hiệu cấm.",
+      "mnemonic_tip": "Maaku phiên âm từ Mark tiếng Anh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1382,
+      "lesson_id": 33,
+      "hiragana": "ボール",
+      "romaji": "booru",
+      "vietnamese_meaning": "Quả bóng",
+      "word_type": "noun",
+      "japanese_example": "ボールで遊びます。",
+      "example_meaning": "Tôi chơi bóng.",
+      "mnemonic_tip": "Booru phiên âm từ Ball tiếng Anh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1383,
+      "lesson_id": 33,
+      "hiragana": "せんたくき",
+      "romaji": "sentakuki",
+      "vietnamese_meaning": "Máy giặt",
+      "word_type": "noun",
+      "japanese_example": "洗濯機が壊れました。",
+      "example_meaning": "Máy giặt bị hỏng rồi.",
+      "mnemonic_tip": "Sentakuki nghe như 'Sền sệt kị' - Quần áo bẩn sền sệt nên kị, phải cho vào máy giặt thôi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "洗濯機",
+      "pitch_accent": 1
+    },
+    {
       "id": 1387,
       "lesson_id": 33,
       "hiragana": "いりぐち",
@@ -15712,6 +19027,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
       "kanji_word": "出口",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1389,
+      "lesson_id": 33,
+      "hiragana": "ひじょうぐち",
+      "romaji": "hijouguchi",
+      "vietnamese_meaning": "Cửa thoát hiểm",
+      "word_type": "noun",
+      "japanese_example": "非常口を確認してください。",
+      "example_meaning": "Hãy xác nhận cửa thoát hiểm.",
+      "mnemonic_tip": "Hijou (khẩn cấp) + Guchi (cửa) = Cửa thoát hiểm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "非常口",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1393,
+      "lesson_id": 33,
+      "hiragana": "―ちゅう",
+      "romaji": "chuu",
+      "vietnamese_meaning": "Đang làm...",
+      "word_type": "noun",
+      "japanese_example": "会議中です。",
+      "example_meaning": "Tôi đang trong cuộc họp.",
+      "mnemonic_tip": "Chuu là giữa, khi đang ở giữa việc gì đó thì là đang làm việc đó.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "―中",
       "pitch_accent": 1
     },
     {
@@ -15790,6 +19135,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1400,
+      "lesson_id": 33,
+      "hiragana": "ばっきん",
+      "romaji": "bakkin",
+      "vietnamese_meaning": "tiền phạt",
+      "word_type": "noun",
+      "japanese_example": "罰金を払います。",
+      "example_meaning": "Tôi sẽ nộp tiền phạt.",
+      "mnemonic_tip": "Bak-kin: 'Bác kín' ví tiền lại vì bị phạt tiền",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.170089+00:00",
+      "kanji_word": "罰金",
+      "pitch_accent": 1
+    },
+    {
       "id": 1401,
       "lesson_id": 33,
       "hiragana": "でんぽう",
@@ -15820,6 +19180,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1403,
+      "lesson_id": 33,
+      "hiragana": "きゅうよう",
+      "romaji": "kyuuyou",
+      "vietnamese_meaning": "việc gấp",
+      "word_type": "noun",
+      "japanese_example": "急用で帰ります。",
+      "example_meaning": "Tôi có việc gấp nên xin về trước.",
+      "mnemonic_tip": "Kyuu-you: 'Cứ yêu' công việc gấp thì nhanh xong",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "急用",
+      "pitch_accent": 0
+    },
+    {
       "id": 1404,
       "lesson_id": 33,
       "hiragana": "うつ",
@@ -15833,6 +19208,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "打つ",
       "pitch_accent": 0
+    },
+    {
+      "id": 1406,
+      "lesson_id": 33,
+      "hiragana": "できるだけ",
+      "romaji": "dekirudake",
+      "vietnamese_meaning": "cố gắng hết sức",
+      "word_type": "adverb",
+      "japanese_example": "できるだけ早く来てください。",
+      "example_meaning": "Hãy đến nhanh hết sức có thể.",
+      "mnemonic_tip": "Đê-ki-ru-đa-kê: 'Đê kìa ru đa kê' (rủ đá ghê) - hãy cố gắng hết sức",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1407,
+      "lesson_id": 33,
+      "hiragana": "みじかく",
+      "romaji": "mijikaku",
+      "vietnamese_meaning": "ngắn gọn",
+      "word_type": "adjective",
+      "japanese_example": "短く話してください。",
+      "example_meaning": "Hãy nói ngắn gọn thôi.",
+      "mnemonic_tip": "Mi-ji-ka-ku: 'Mi gi (gì) cả cu' - ngắn gọn thôi đừng kể dài dòng",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "短く",
+      "pitch_accent": 1
     },
     {
       "id": 1410,
@@ -15863,6 +19268,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "留守",
       "pitch_accent": 3
+    },
+    {
+      "id": 1412,
+      "lesson_id": 33,
+      "hiragana": "るすばん",
+      "romaji": "rusuban",
+      "vietnamese_meaning": "trông nhà",
+      "word_type": "noun",
+      "japanese_example": "今日は留守番をします。",
+      "example_meaning": "Hôm nay tôi sẽ trông nhà.",
+      "mnemonic_tip": "Ru-su-ban: 'Ru su bán' (bạn) ở nhà trông nhà",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "留守番",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1413,
+      "lesson_id": 33,
+      "hiragana": "いわい",
+      "romaji": "iwai",
+      "vietnamese_meaning": "Lễ kỷ niệm, quà mừng (lịch sự: おいわい)",
+      "word_type": "noun",
+      "japanese_example": "お祝いを贈ります。",
+      "example_meaning": "Tôi gửi quà mừng (lễ kỷ niệm).",
+      "mnemonic_tip": "Ô-i-wai: 'Ôi vai' (nặng) vì quà mừng quá nhiều",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "お祝い",
+      "pitch_accent": 2
     },
     {
       "id": 1414,
@@ -15925,6 +19360,21 @@ module.exports = {
       "pitch_accent": 2
     },
     {
+      "id": 1418,
+      "lesson_id": 34,
+      "hiragana": "くみたてる",
+      "romaji": "kumitateru",
+      "vietnamese_meaning": "lắp ráp, lắp đặt",
+      "word_type": "verb",
+      "japanese_example": "家具を 組み立てます。",
+      "example_meaning": "Lắp ráp đồ nội thất.",
+      "mnemonic_tip": "Mẹo: 'Cứ mì ta' lắp ghép ăn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "組み立てる",
+      "pitch_accent": 1
+    },
+    {
       "id": 1420,
       "lesson_id": 34,
       "hiragana": "しょうゆ",
@@ -15937,6 +19387,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "醤油",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1421,
+      "lesson_id": 34,
+      "hiragana": "せつめいしょ",
+      "romaji": "setsumeisho",
+      "vietnamese_meaning": "bản hướng dẫn sử dụng",
+      "word_type": "noun",
+      "japanese_example": "説明書を 読みます。",
+      "example_meaning": "Đọc sách hướng dẫn.",
+      "mnemonic_tip": "Mẹo: 'Sếp mới' đưa tờ hướng dẫn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "説明書",
       "pitch_accent": 1
     },
     {
@@ -15997,6 +19462,96 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "太い",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1427,
+      "lesson_id": 34,
+      "hiragana": "スポーツクラブ",
+      "romaji": "supootsukurabu",
+      "vietnamese_meaning": "câu lạc bộ thể thao",
+      "word_type": "noun",
+      "japanese_example": "スポーツクラブへ行きます。",
+      "example_meaning": "Tôi đi đến câu lạc bộ thể thao.",
+      "mnemonic_tip": "Súp po tốt cu ra bu: Câu lạc bộ thể thao có món 'súp' cho 'tốt' sức khỏe.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1428,
+      "lesson_id": 34,
+      "hiragana": "かぐ",
+      "romaji": "kagu",
+      "vietnamese_meaning": "đồ nội thất",
+      "word_type": "noun",
+      "japanese_example": "新しい家具を買います。",
+      "example_meaning": "Tôi mua đồ nội thất mới.",
+      "mnemonic_tip": "Ca gù: Cái ghế 'ca' (căng) quá làm 'gù' lưng, món đồ nội thất này tệ quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "家具",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1429,
+      "lesson_id": 34,
+      "hiragana": "キー",
+      "romaji": "kii",
+      "vietnamese_meaning": "chìa khóa",
+      "word_type": "noun",
+      "japanese_example": "キーをなくしました。",
+      "example_meaning": "Tôi đã làm mất chìa khóa.",
+      "mnemonic_tip": "Kì: 'Kì' lạ, sao không mở cửa được, hóa ra mất chìa khóa rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1430,
+      "lesson_id": 34,
+      "hiragana": "シートベルト",
+      "romaji": "shiitoberuto",
+      "vietnamese_meaning": "dây an toàn",
+      "word_type": "noun",
+      "japanese_example": "シートベルトを締めます。",
+      "example_meaning": "Tôi thắt dây an toàn.",
+      "mnemonic_tip": "Si tồ bê rự tô: Dây an toàn bảo vệ 'si' (sĩ) tử 'tồ' (tồi) 'bê' (bế) 'rự' (rựt) 'tô' (tô) lên.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
+      "id": 1431,
+      "lesson_id": 34,
+      "hiragana": "ず",
+      "romaji": "zu",
+      "vietnamese_meaning": "biểu đồ, hình vẽ",
+      "word_type": "noun",
+      "japanese_example": "図を見てください。",
+      "example_meaning": "Hãy nhìn vào biểu đồ.",
+      "mnemonic_tip": "Zu (dù): 'Dù' là hình vẽ đơn giản nhưng nhìn vào hiểu ngay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "図",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1432,
+      "lesson_id": 34,
+      "hiragana": "やじるし",
+      "romaji": "yajirushi",
+      "vietnamese_meaning": "dấu mũi tên",
+      "word_type": "noun",
+      "japanese_example": "矢印の方へ行きます。",
+      "example_meaning": "Đi về hướng dấu mũi tên.",
+      "mnemonic_tip": "Da di rủ sĩ: 'Da' (gia) đình 'di' (đi) theo 'rủ' 'sĩ' (sỹ) hướng mũi tên.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "矢印",
       "pitch_accent": 0
     },
     {
@@ -16105,6 +19660,21 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1440,
+      "lesson_id": 34,
+      "hiragana": "ソース",
+      "romaji": "soosu",
+      "vietnamese_meaning": "nước sốt",
+      "word_type": "noun",
+      "japanese_example": "ソースをかけます。",
+      "example_meaning": "Tôi rưới nước sốt lên.",
+      "mnemonic_tip": "Sô sự: 'Sô' (xô) nước sốt này là 'sự' (sự) thật cần thiết cho món ăn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 2
+    },
+    {
       "id": 1441,
       "lesson_id": 34,
       "hiragana": "ゆうべ",
@@ -16131,8 +19701,53 @@ module.exports = {
       "mnemonic_tip": "Sắc kí: 'Sắc' 'kí' ức vừa xảy ra 'lúc nãy' còn mới nguyên.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "先",
+      "kanji_word": "",
       "pitch_accent": 1
+    },
+    {
+      "id": 1443,
+      "lesson_id": 34,
+      "hiragana": "さどう",
+      "romaji": "sadou",
+      "vietnamese_meaning": "Trà đạo",
+      "word_type": "noun",
+      "japanese_example": "日本で茶道を習います。",
+      "example_meaning": "Tôi học trà đạo ở Nhật Bản.",
+      "mnemonic_tip": "Sa (xa) - dou (đâu): Trà đạo là nghệ thuật uống trà ở xa tận đâu đó chứ không phải trà đá vỉa hè.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "茶道",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1445,
+      "lesson_id": 34,
+      "hiragana": "さきに",
+      "romaji": "sakini",
+      "vietnamese_meaning": "Trước, làm trước",
+      "word_type": "adverb",
+      "japanese_example": "お先に失礼します。",
+      "example_meaning": "Tôi xin phép về trước ạ.",
+      "mnemonic_tip": "Sa-ki-ni: Sa kia đi trước đi, mình đi sau.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "先に",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1446,
+      "lesson_id": 34,
+      "hiragana": "のせる",
+      "romaji": "noseru",
+      "vietnamese_meaning": "Đặt lên, xếp lên",
+      "word_type": "verb",
+      "japanese_example": "荷物を棚に載せます。",
+      "example_meaning": "Tôi đặt hành lý lên giá.",
+      "mnemonic_tip": "No-se-ma-su: Nô (nô lệ) xếp đồ lên xe cho chủ nhân.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "載せる",
+      "pitch_accent": 0
     },
     {
       "id": 1447,
@@ -16165,6 +19780,51 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1450,
+      "lesson_id": 34,
+      "hiragana": "ざいりょう",
+      "romaji": "zairyou",
+      "vietnamese_meaning": "Nguyên liệu",
+      "word_type": "noun",
+      "japanese_example": "料理の材料を買います。",
+      "example_meaning": "Tôi đi mua nguyên liệu nấu ăn.",
+      "mnemonic_tip": "Zai-ryou: Dài ròng (nguyên liệu mua về) dài ròng rã.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "材料",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1451,
+      "lesson_id": 34,
+      "hiragana": "～ぶん",
+      "romaji": "bun",
+      "vietnamese_meaning": "Phần (suất)",
+      "word_type": "counter",
+      "japanese_example": "二人分の食事を作ります。",
+      "example_meaning": "Tôi làm bữa ăn cho hai người.",
+      "mnemonic_tip": "Bun: Bưng (bưng mấy phần ăn ra).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "～分",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1452,
+      "lesson_id": 34,
+      "hiragana": "とりにく",
+      "romaji": "toriniku",
+      "vietnamese_meaning": "Thịt gà",
+      "word_type": "noun",
+      "japanese_example": "鶏肉を小さく切ります。",
+      "example_meaning": "Tôi cắt nhỏ thịt gà.",
+      "mnemonic_tip": "Tori-niku: Tờ ri (thịt gà) níu kéo thực khách.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "とり肉",
+      "pitch_accent": 0
+    },
+    {
       "id": 1453,
       "lesson_id": 34,
       "hiragana": "～グラム",
@@ -16180,6 +19840,51 @@ module.exports = {
       "pitch_accent": 1
     },
     {
+      "id": 1454,
+      "lesson_id": 34,
+      "hiragana": "たまねぎ",
+      "romaji": "tamanegi",
+      "vietnamese_meaning": "Hành tây",
+      "word_type": "noun",
+      "japanese_example": "たまねぎを切ると涙が出ます。",
+      "example_meaning": "Cắt hành tây thì bị chảy nước mắt.",
+      "mnemonic_tip": "Tama-negi: Tha ma nghé (đừng có làm hành tây làm cay mắt).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "玉ねぎ",
+      "pitch_accent": 1
+    },
+    {
+      "id": 1456,
+      "lesson_id": 34,
+      "hiragana": "ちょうみりょう",
+      "romaji": "choumiryou",
+      "vietnamese_meaning": "Gia vị",
+      "word_type": "noun",
+      "japanese_example": "調味料を入れます。",
+      "example_meaning": "Tôi cho gia vị vào.",
+      "mnemonic_tip": "Chou-mi-ryou: Cho mì (vào) rồi (thêm) gia vị vào nhé.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "調味料",
+      "pitch_accent": 3
+    },
+    {
+      "id": 1457,
+      "lesson_id": 34,
+      "hiragana": "なべ",
+      "romaji": "nabe",
+      "vietnamese_meaning": "Cái nồi",
+      "word_type": "noun",
+      "japanese_example": "鍋でスープを作ります。",
+      "example_meaning": "Tôi nấu súp bằng cái nồi.",
+      "mnemonic_tip": "Na-be: Nà bé ơi, lấy cái nồi cho mẹ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "鍋",
+      "pitch_accent": 0
+    },
+    {
       "id": 1459,
       "lesson_id": 34,
       "hiragana": "にる",
@@ -16193,6 +19898,36 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "似る",
       "pitch_accent": 3
+    },
+    {
+      "id": 1460,
+      "lesson_id": 34,
+      "hiragana": "にえる",
+      "romaji": "nieru",
+      "vietnamese_meaning": "Được nấu chín",
+      "word_type": "verb",
+      "japanese_example": "料理が煮えました。",
+      "example_meaning": "Món ăn đã chín rồi.",
+      "mnemonic_tip": "Ni-e-ma-su: Nì, e (nó) chín rồi kìa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "煮える",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1461,
+      "lesson_id": 34,
+      "hiragana": "どんぶり",
+      "romaji": "donburi",
+      "vietnamese_meaning": "Cái tô lớn",
+      "word_type": "noun",
+      "japanese_example": "大きなどんぶりです。",
+      "example_meaning": "Cái tô lớn thật.",
+      "mnemonic_tip": "Don-bu-ri: Đòn bự (thế này) phải đựng trong cái tô lớn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "丼",
+      "pitch_accent": 0
     },
     {
       "id": 1462,
@@ -16223,6 +19958,21 @@ module.exports = {
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "変わる",
       "pitch_accent": 0
+    },
+    {
+      "id": 1467,
+      "lesson_id": 35,
+      "hiragana": "らく",
+      "romaji": "raku",
+      "vietnamese_meaning": "Nhàn nhã, dễ chịu (tính từ đuôi な)",
+      "word_type": "adjective",
+      "japanese_example": "タクシーで行くと楽です。",
+      "example_meaning": "Đi bằng taxi thì nhàn nhã, dễ chịu.",
+      "mnemonic_tip": "Ra ku - Ra khu nghỉ dưỡng nằm thư giãn thật nhàn nhã.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "楽",
+      "pitch_accent": 3
     },
     {
       "id": 1468,
@@ -16345,6 +20095,156 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1476,
+      "lesson_id": 35,
+      "hiragana": "かいがい",
+      "romaji": "kaigai",
+      "vietnamese_meaning": "Nước ngoài, hải ngoại",
+      "word_type": "noun",
+      "japanese_example": "海外へ旅行に行きます。",
+      "example_meaning": "Tôi sẽ đi du lịch nước ngoài.",
+      "mnemonic_tip": "Kai gai - Cái gai trong lòng vì muốn đi nước ngoài mà chưa được đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "海外",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1477,
+      "lesson_id": 35,
+      "hiragana": "やまのぼり",
+      "romaji": "yamanobori",
+      "vietnamese_meaning": "Leo núi",
+      "word_type": "noun",
+      "japanese_example": "週末は山登りをします。",
+      "example_meaning": "Cuối tuần tôi đi leo núi.",
+      "mnemonic_tip": "Ya ma no bo ri - Ya! Ma nó bò ri (rì) rào trên núi thật đáng sợ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "山登り",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1478,
+      "lesson_id": 35,
+      "hiragana": "ハイキング",
+      "romaji": "haikingu",
+      "vietnamese_meaning": "Đi bộ đường dài",
+      "word_type": "noun",
+      "japanese_example": "晴れた日にハイキングをしました。",
+      "example_meaning": "Vào ngày nắng, tôi đã đi bộ đường dài.",
+      "mnemonic_tip": "Hai kin gu - Hai anh cùng đi bộ đường dài cho khỏe người.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1479,
+      "lesson_id": 35,
+      "hiragana": "きょか",
+      "romaji": "kyoka",
+      "vietnamese_meaning": "Sự cho phép, giấy phép",
+      "word_type": "noun",
+      "japanese_example": "許可をもらいました。",
+      "example_meaning": "Tôi đã nhận được sự cho phép.",
+      "mnemonic_tip": "Kyo ka - Kìa, cái (giấy) phép kia đã được duyệt rồi đó.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "許可",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1480,
+      "lesson_id": 35,
+      "hiragana": "まる",
+      "romaji": "maru",
+      "vietnamese_meaning": "Hình tròn",
+      "word_type": "noun",
+      "japanese_example": "丸を書いてください。",
+      "example_meaning": "Hãy vẽ một hình tròn.",
+      "mnemonic_tip": "Ma ru - Mặt rủ (xệ) vì vẽ hình tròn không đều.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "丸",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1481,
+      "lesson_id": 35,
+      "hiragana": "そうさ",
+      "romaji": "sousa",
+      "vietnamese_meaning": "Thao tác",
+      "word_type": "noun",
+      "japanese_example": "操作が簡単です。",
+      "example_meaning": "Thao tác rất đơn giản.",
+      "mnemonic_tip": "Sou sa - Sô sa (so sánh) các thao tác với nhau để làm đúng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "操作",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1482,
+      "lesson_id": 35,
+      "hiragana": "ほうほう",
+      "romaji": "houhou",
+      "vietnamese_meaning": "Phương pháp",
+      "word_type": "noun",
+      "japanese_example": "いい方法を考えました。",
+      "example_meaning": "Tôi đã nghĩ ra một phương pháp hay.",
+      "mnemonic_tip": "Hou hou - Hô hô, phương pháp này hay quá nhỉ!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "方法",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1483,
+      "lesson_id": 35,
+      "hiragana": "せつび",
+      "romaji": "setsubi",
+      "vietnamese_meaning": "Thiết bị",
+      "word_type": "noun",
+      "japanese_example": "この寮は設備が良いです。",
+      "example_meaning": "Ký túc xá này thiết bị tốt.",
+      "mnemonic_tip": "Set su bi - Xếp xụ (xếp các thiết bị) bị hỏng rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "設備",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1484,
+      "lesson_id": 35,
+      "hiragana": "カ－テン",
+      "romaji": "kaaten",
+      "vietnamese_meaning": "Rèm cửa",
+      "word_type": "noun",
+      "japanese_example": "カーテンを閉めてください。",
+      "example_meaning": "Hãy đóng rèm cửa lại.",
+      "mnemonic_tip": "Ka - A, cái rèm cửa này đẹp ghê.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1485,
+      "lesson_id": 35,
+      "hiragana": "ひも",
+      "romaji": "himo",
+      "vietnamese_meaning": "Sợi dây",
+      "word_type": "noun",
+      "japanese_example": "ひもで結びます。",
+      "example_meaning": "Buộc lại bằng sợi dây.",
+      "mnemonic_tip": "Hi mo - Hì hì, mua sợi dây này về buộc đồ nhé.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1486,
       "lesson_id": 35,
       "hiragana": "ふた",
@@ -16357,6 +20257,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "二",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1487,
+      "lesson_id": 35,
+      "hiragana": "きょく",
+      "romaji": "kyoku",
+      "vietnamese_meaning": "Bài hát, bản nhạc",
+      "word_type": "noun",
+      "japanese_example": "この曲が好きです。",
+      "example_meaning": "Tôi thích bài hát này.",
+      "mnemonic_tip": "Kyo ku - Kìa, khúc nhạc này hay quá!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "曲",
       "pitch_accent": 0
     },
     {
@@ -16390,6 +20305,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1490,
+      "lesson_id": 35,
+      "hiragana": "はじめに",
+      "romaji": "hajimeni",
+      "vietnamese_meaning": "Đầu tiên, trước tiên",
+      "word_type": "adverb",
+      "japanese_example": "初めに名前を書いてください。",
+      "example_meaning": "Trước tiên, hãy viết tên vào đi ạ.",
+      "mnemonic_tip": "Ha gì mê ni: Ha gì mà mê ni (này), phải làm việc đầu tiên đã.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "初めに",
+      "pitch_accent": 0
+    },
+    {
       "id": 1491,
       "lesson_id": 35,
       "hiragana": "これでおわりる",
@@ -16405,6 +20335,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1492,
+      "lesson_id": 35,
+      "hiragana": "それなら",
+      "romaji": "sorenara",
+      "vietnamese_meaning": "Nếu vậy, nếu thế thì",
+      "word_type": "adverb",
+      "japanese_example": "それなら、一緒に行きましょう。",
+      "example_meaning": "Nếu vậy thì cùng đi nhé.",
+      "mnemonic_tip": "Sợ nạ ra: Nếu sợ nạ (mặt nạ) ra thì hãy nói \"nếu vậy\" chúng ta đổi hướng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1494,
+      "lesson_id": 35,
+      "hiragana": "りょこうしゃ",
+      "romaji": "ryokousha",
+      "vietnamese_meaning": "Công ty du lịch",
+      "word_type": "noun",
+      "japanese_example": "旅行社に申し込みます。",
+      "example_meaning": "Tôi đăng ký tại công ty du lịch.",
+      "mnemonic_tip": "Rượu khoe xà: Đi công ty du lịch về được tặng rượu khoe xà (xã) hội.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "旅行社",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1495,
+      "lesson_id": 35,
+      "hiragana": "くわしい",
+      "romaji": "kuwashii",
+      "vietnamese_meaning": "Chi tiết, tường tận",
+      "word_type": "adjective",
+      "japanese_example": "詳しい地図を見てください。",
+      "example_meaning": "Hãy xem bản đồ chi tiết đi.",
+      "mnemonic_tip": "Cua và si: Nhìn con cua và si (suy) ngẫm một cách chi tiết.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "詳しい",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1499,
+      "lesson_id": 35,
+      "hiragana": "ことわざ",
+      "romaji": "kotowaza",
+      "vietnamese_meaning": "Tục ngữ",
+      "word_type": "noun",
+      "japanese_example": "有名なことわざを知っています。",
+      "example_meaning": "Tôi biết một câu tục ngữ nổi tiếng.",
+      "mnemonic_tip": "Cô tô vả: Cô tô (tô vẽ) câu tục ngữ lên bảng đến nỗi vả cả mồ hôi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "ことわざ",
+      "pitch_accent": 0
+    },
+    {
       "id": 1500,
       "lesson_id": 35,
       "hiragana": "なかよくする",
@@ -16416,7 +20406,7 @@ module.exports = {
       "mnemonic_tip": "Nạ khóc gì: Nạ (mặt) khóc gì nữa, hãy hòa thuận chơi thân với bạn đi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "",
+      "kanji_word": "仲良くする",
       "pitch_accent": 0
     },
     {
@@ -16447,6 +20437,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "落ちる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1506,
+      "lesson_id": 36,
+      "hiragana": "とどく",
+      "romaji": "todoku",
+      "vietnamese_meaning": "được gửi đến",
+      "word_type": "verb",
+      "japanese_example": "荷物が 届きます。",
+      "example_meaning": "Hành lý được gửi đến.",
+      "mnemonic_tip": "Mẹo: 'Tớ đói kìa' chờ đồ ăn gửi đến.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "届く",
       "pitch_accent": 0
     },
     {
@@ -16555,6 +20560,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1514,
+      "lesson_id": 36,
+      "hiragana": "でんし～",
+      "romaji": "denshii",
+      "vietnamese_meaning": "điện tử",
+      "word_type": "noun",
+      "japanese_example": "電子辞書を使います。",
+      "example_meaning": "Sử dụng từ điển điện tử.",
+      "mnemonic_tip": "Đên-shi: Đến khi - Đến khi công nghệ phát triển thì đồ gì cũng là điện tử.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "電子～",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1515,
+      "lesson_id": 36,
+      "hiragana": "けいたい～",
+      "romaji": "keitaii",
+      "vietnamese_meaning": "di động (điện thoại)",
+      "word_type": "noun",
+      "japanese_example": "携帯電話を持っています。",
+      "example_meaning": "Đang cầm điện thoại di động.",
+      "mnemonic_tip": "Kêi-tai: Kê tai - Điện thoại di động là để kê vào tai mà nói.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "携帯～",
+      "pitch_accent": 0
+    },
+    {
       "id": 1516,
       "lesson_id": 36,
       "hiragana": "こうじょう",
@@ -16626,7 +20661,22 @@ module.exports = {
       "mnemonic_tip": "Yat-tô: Ya! Tò - Cuối cùng thì cũng xong, Ya! Tò mò quá xem kết quả nào.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "漸と",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1522,
+      "lesson_id": 36,
+      "hiragana": "かなり",
+      "romaji": "kanari",
+      "vietnamese_meaning": "khá là",
+      "word_type": "adverb",
+      "japanese_example": "かなり難しいです。",
+      "example_meaning": "Khá là khó.",
+      "mnemonic_tip": "Ka-na-ri: Ca na rì - Ca hát bài ca này khá là khó đấy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -16642,6 +20692,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "必ず",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1524,
+      "lesson_id": 36,
+      "hiragana": "ぜったいに",
+      "romaji": "zettaini",
+      "vietnamese_meaning": "tuyệt đối",
+      "word_type": "adverb",
+      "japanese_example": "絶対に秘密にします。",
+      "example_meaning": "Tuyệt đối sẽ giữ bí mật.",
+      "mnemonic_tip": "Zêt-tai-ni: Dệt tai ni - Tuyệt đối không được nói bí mật ra ngoài nhé.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "絶対に",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1525,
+      "lesson_id": 36,
+      "hiragana": "じょうずに",
+      "romaji": "jouzuni",
+      "vietnamese_meaning": "giỏi, khéo léo",
+      "word_type": "adverb",
+      "japanese_example": "上手に絵を描きます。",
+      "example_meaning": "Vẽ tranh giỏi.",
+      "mnemonic_tip": "Jô-zu-ni: Dô dù ni - Dô vào mà vẽ khéo léo giỏi hơn dù ni.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "上手に",
       "pitch_accent": 0
     },
     {
@@ -16672,6 +20752,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1528,
+      "lesson_id": 36,
+      "hiragana": "おきゃくさま",
+      "romaji": "okyakusama",
+      "vietnamese_meaning": "quý khách",
+      "word_type": "noun",
+      "japanese_example": "お客様が来ました。",
+      "example_meaning": "Quý khách đã đến.",
+      "mnemonic_tip": "Ô-kya-ku-sa-ma: Ô kìa cụ xa mà - Ô kìa, quý khách là cụ ở xa mà đến đấy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "お客様",
       "pitch_accent": 0
     },
     {
@@ -16780,6 +20875,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1538,
+      "lesson_id": 36,
+      "hiragana": "～せいき",
+      "romaji": "seiki",
+      "vietnamese_meaning": "thế kỷ",
+      "word_type": "counter",
+      "japanese_example": "21世紀を生きています。",
+      "example_meaning": "Chúng ta đang sống ở thế kỷ 21.",
+      "mnemonic_tip": "Sê-kì - Thế kỷ này ai cũng thích xế (ô tô) kì lạ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "～世紀",
+      "pitch_accent": 0
+    },
+    {
       "id": 1539,
       "lesson_id": 36,
       "hiragana": "とおく",
@@ -16870,6 +20980,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1546,
+      "lesson_id": 37,
+      "hiragana": "しかる",
+      "romaji": "shikaru",
+      "vietnamese_meaning": "mắng mỏ, trách mắng",
+      "word_type": "verb",
+      "japanese_example": "母に 叱られました。",
+      "example_meaning": "Tôi bị mẹ mắng.",
+      "mnemonic_tip": "Mẹo: 'Sĩ ca' bị mắng vì hát dở.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "叱る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1547,
+      "lesson_id": 37,
+      "hiragana": "さそう",
+      "romaji": "sasou",
+      "vietnamese_meaning": "rủ rê, mời mọc",
+      "word_type": "verb",
+      "japanese_example": "友達を 誘います。",
+      "example_meaning": "Rủ bạn bè đi chơi.",
+      "mnemonic_tip": "Mẹo: 'Sa số' lần rủ rê đi chơi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "誘う",
+      "pitch_accent": 0
+    },
+    {
       "id": 1548,
       "lesson_id": 37,
       "hiragana": "おこす",
@@ -16927,6 +21067,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "頼む",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1552,
+      "lesson_id": 37,
+      "hiragana": "ふむ",
+      "romaji": "fumu",
+      "vietnamese_meaning": "giẫm, đạp",
+      "word_type": "verb",
+      "japanese_example": "電車で足を踏まれました。",
+      "example_meaning": "Tôi bị giẫm vào chân trên tàu điện.",
+      "mnemonic_tip": "Phù mi: Giẫm lên cái phù mi mắt (cái chân) đau quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "踏む",
       "pitch_accent": 0
     },
     {
@@ -17065,6 +21220,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1562,
+      "lesson_id": 37,
+      "hiragana": "むぎ",
+      "romaji": "mugi",
+      "vietnamese_meaning": "lúa mạch",
+      "word_type": "noun",
+      "japanese_example": "麦でパンを作ります。",
+      "example_meaning": "Làm bánh mì bằng lúa mạch.",
+      "mnemonic_tip": "Mù ghi: Mù ghi chép nên không biết đây là lúa mạch.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "麦",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1563,
+      "lesson_id": 37,
+      "hiragana": "せきゆ",
+      "romaji": "sekiyu",
+      "vietnamese_meaning": "dầu mỏ",
+      "word_type": "noun",
+      "japanese_example": "中東は石油が豊富です。",
+      "example_meaning": "Trung Đông rất phong phú dầu mỏ.",
+      "mnemonic_tip": "Sét kêu: Dầu mỏ cháy làm sét kêu ầm ĩ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "石油",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1564,
+      "lesson_id": 37,
+      "hiragana": "げんりょう",
+      "romaji": "genryou",
+      "vietnamese_meaning": "nguyên liệu",
+      "word_type": "noun",
+      "japanese_example": "ビールの原料は麦です。",
+      "example_meaning": "Nguyên liệu làm bia là lúa mạch.",
+      "mnemonic_tip": "Ghen liều: Ghen vì liều lĩnh lấy nguyên liệu của người khác.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "原料",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1565,
+      "lesson_id": 37,
+      "hiragana": "デート",
+      "romaji": "deeto",
+      "vietnamese_meaning": "hẹn hò",
+      "word_type": "noun",
+      "japanese_example": "週末は彼女とデートします。",
+      "example_meaning": "Cuối tuần tôi hẹn hò với bạn gái.",
+      "mnemonic_tip": "Đê: Hẹn hò ở con đê cho lãng mạn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1566,
       "lesson_id": 37,
       "hiragana": "どろぼう",
@@ -17077,6 +21292,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "泥棒",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1567,
+      "lesson_id": 37,
+      "hiragana": "けんちくか",
+      "romaji": "kenchikuka",
+      "vietnamese_meaning": "kiến trúc sư",
+      "word_type": "noun",
+      "japanese_example": "彼は有名な建築家です。",
+      "example_meaning": "Ông ấy là kiến trúc sư nổi tiếng.",
+      "mnemonic_tip": "Kênh: Kiến trúc sư thiết kế cái kênh.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "建築家",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1568,
+      "lesson_id": 37,
+      "hiragana": "かがくしゃ",
+      "romaji": "kagakusha",
+      "vietnamese_meaning": "nhà khoa học",
+      "word_type": "noun",
+      "japanese_example": "父は科学者です。",
+      "example_meaning": "Bố tôi là nhà khoa học.",
+      "mnemonic_tip": "Ca gác: Nhà khoa học ca bài ca gác đêm nghiên cứu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "科学者",
       "pitch_accent": 0
     },
     {
@@ -17125,6 +21370,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1574,
+      "lesson_id": 37,
+      "hiragana": "とち",
+      "romaji": "tochi",
+      "vietnamese_meaning": "Đất, mảnh đất",
+      "word_type": "noun",
+      "japanese_example": "広い土地を買いました。",
+      "example_meaning": "Tôi đã mua một mảnh đất rộng.",
+      "mnemonic_tip": "To-chi: 'To chỉ' - Mảnh đất này to chỉ bằng một nửa sân bóng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "土地",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1575,
+      "lesson_id": 37,
+      "hiragana": "そうおん",
+      "romaji": "souon",
+      "vietnamese_meaning": "Tiếng ồn",
+      "word_type": "noun",
+      "japanese_example": "工場の騒音がうるさいです。",
+      "example_meaning": "Tiếng ồn từ nhà máy rất khó chịu.",
+      "mnemonic_tip": "Sou-on: 'Sâu hồn' - Tiếng ồn lớn quá làm bay cả sâu hồn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "騒音",
+      "pitch_accent": 0
+    },
+    {
       "id": 1580,
       "lesson_id": 37,
       "hiragana": "ねむる",
@@ -17140,6 +21415,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1581,
+      "lesson_id": 37,
+      "hiragana": "ほる",
+      "romaji": "horu",
+      "vietnamese_meaning": "Khắc, đục",
+      "word_type": "verb",
+      "japanese_example": "石に名前を彫ります。",
+      "example_meaning": "Tôi khắc tên lên đá.",
+      "mnemonic_tip": "Ho-ri-ma-su: 'Hò rì mà sướt' - Vừa hò vừa mài, khắc đục cho trơn mượt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "彫る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1582,
+      "lesson_id": 37,
+      "hiragana": "なかま",
+      "romaji": "nakama",
+      "vietnamese_meaning": "Bạn bè, đồng nghiệp",
+      "word_type": "noun",
+      "japanese_example": "彼は私の大切な仲間です。",
+      "example_meaning": "Anh ấy là người bạn quan trọng của tôi.",
+      "mnemonic_tip": "Na-ka-ma: 'Nạ ka ma' - Bạn bè đồng nghiệp như cái nạ (mặt nạ) của nhau, cùng hội cùng thuyền.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "仲間",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1583,
+      "lesson_id": 37,
+      "hiragana": "そのあと",
+      "romaji": "sono ato",
+      "vietnamese_meaning": "Sau đó",
+      "word_type": "noun",
+      "japanese_example": "そのあと、映画を見に行きます。",
+      "example_meaning": "Sau đó, tôi sẽ đi xem phim.",
+      "mnemonic_tip": "So-no-a-to: 'Sờ nọ, át tô' - Làm xong việc này, sau đó (sờ nọ) thì 'át tô' (át chủ bài) lại làm việc tiếp.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1584,
       "lesson_id": 37,
       "hiragana": "いっしょうけんめい",
@@ -17152,6 +21472,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "一生懸命",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1585,
+      "lesson_id": 37,
+      "hiragana": "ねずみ",
+      "romaji": "nezumi",
+      "vietnamese_meaning": "Con chuột",
+      "word_type": "noun",
+      "japanese_example": "部屋にねずみがいます。",
+      "example_meaning": "Trong phòng có con chuột.",
+      "mnemonic_tip": "Ne-zu-mi: 'Nè dừ mi' - Nè con chuột, mi dừ (già) quá rồi đấy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -17227,6 +21562,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
       "kanji_word": "整理する",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1592,
+      "lesson_id": 38,
+      "hiragana": "きもちがいい",
+      "romaji": "kimochigaii",
+      "vietnamese_meaning": "dễ chịu, thoải mái",
+      "word_type": "adjective",
+      "japanese_example": "ここは気持ちがいい所ですね。",
+      "example_meaning": "Nơi này thật dễ chịu nhỉ.",
+      "mnemonic_tip": "Ki mô chi gà ii: Khi mô (lúc nào) chi gà (làn da) cũng thấy ii (tốt - dễ chịu).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "気持ちがいい",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1593,
+      "lesson_id": 38,
+      "hiragana": "きもちがわるい",
+      "romaji": "kimochigawarui",
+      "vietnamese_meaning": "khó chịu, ghê",
+      "word_type": "adjective",
+      "japanese_example": "気持ちが悪いから休みます。",
+      "example_meaning": "Vì thấy khó chịu nên tôi xin nghỉ.",
+      "mnemonic_tip": "Ki mô chi gà wari: Khi mô chi (da) gà nổi lên là thấy khó chịu, wari (vãi).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "気持ちが悪い",
       "pitch_accent": 0
     },
     {
@@ -17320,6 +21685,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1600,
+      "lesson_id": 38,
+      "hiragana": "うそ",
+      "romaji": "uso",
+      "vietnamese_meaning": "lời nói dối",
+      "word_type": "noun",
+      "japanese_example": "嘘をついてはいけません。",
+      "example_meaning": "Không được nói dối.",
+      "mnemonic_tip": "U sơ: Nói dối là u (cô ấy) sẽ sợ (sơ) mất.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.355455+00:00",
+      "kanji_word": "嘘",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1601,
+      "lesson_id": 38,
+      "hiragana": "でんげん",
+      "romaji": "dengen",
+      "vietnamese_meaning": "nguồn điện",
+      "word_type": "noun",
+      "japanese_example": "電源を切ってください。",
+      "example_meaning": "Xin vui lòng tắt nguồn điện.",
+      "mnemonic_tip": "Đèn ghen: Nguồn điện làm cái đèn ghen tỵ vì nó sáng hơn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "電源",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1602,
+      "lesson_id": 38,
+      "hiragana": "―せい",
+      "romaji": "sei",
+      "vietnamese_meaning": "hàng sản xuất tại (nước nào đó)",
+      "word_type": "noun",
+      "japanese_example": "これは日本製です。",
+      "example_meaning": "Cái này là hàng sản xuất tại Nhật.",
+      "mnemonic_tip": "Sê: Hàng sê (thế) này là hàng sản xuất tại nơi đó.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "―製",
+      "pitch_accent": 0
+    },
+    {
       "id": 1603,
       "lesson_id": 38,
       "hiragana": "あ、いけない",
@@ -17365,6 +21775,96 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1607,
+      "lesson_id": 38,
+      "hiragana": "きちんと",
+      "romaji": "kichinto",
+      "vietnamese_meaning": "chỉnh tề, cẩn thận",
+      "word_type": "adverb",
+      "japanese_example": "書類をきちんと整理します。",
+      "example_meaning": "Tôi sắp xếp giấy tờ cẩn thận.",
+      "mnemonic_tip": "Ki chỉnh tò: Làm cái gì cũng phải chỉnh tò (tề) một cách cẩn thận.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1608,
+      "lesson_id": 38,
+      "hiragana": "はんこ",
+      "romaji": "hanko",
+      "vietnamese_meaning": "con dấu",
+      "word_type": "noun",
+      "japanese_example": "ここにハンコを押します。",
+      "example_meaning": "Tôi đóng dấu vào đây.",
+      "mnemonic_tip": "Hàn cô: Hàn con dấu của cô vào đây.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "判子",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1609,
+      "lesson_id": 38,
+      "hiragana": "ふたご",
+      "romaji": "futago",
+      "vietnamese_meaning": "anh chị em sinh đôi",
+      "word_type": "noun",
+      "japanese_example": "双子の兄弟です。",
+      "example_meaning": "Họ là anh em sinh đôi.",
+      "mnemonic_tip": "Phù ta gô: Phù (phú) cho ta gô (cặp) song sinh đáng yêu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "双子",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1610,
+      "lesson_id": 38,
+      "hiragana": "しまい",
+      "romaji": "shimai",
+      "vietnamese_meaning": "chị em",
+      "word_type": "noun",
+      "japanese_example": "姉妹は仲が良いです。",
+      "example_meaning": "Hai chị em rất hòa thuận.",
+      "mnemonic_tip": "Chị em - 'Si mai' - Siêng năng mãi, hai chị em làm việc siêng năng mãi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "姉妹",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1613,
+      "lesson_id": 38,
+      "hiragana": "せいかく",
+      "romaji": "seikaku",
+      "vietnamese_meaning": "tính cách",
+      "word_type": "noun",
+      "japanese_example": "性格が良い人です。",
+      "example_meaning": "Anh ấy là người có tính cách tốt.",
+      "mnemonic_tip": "Tính cách - 'Sê-i-ka-ku' - Xê ra kẻo cu cậu có tính cách gắt gỏng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "性格",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1614,
+      "lesson_id": 38,
+      "hiragana": "おとなしい",
+      "romaji": "otonashii",
+      "vietnamese_meaning": "hiền lành, trầm tính",
+      "word_type": "adjective",
+      "japanese_example": "弟はおとなしいです。",
+      "example_meaning": "Em trai tôi là người hiền lành.",
+      "mnemonic_tip": "Hiền - 'Ô-tô-na-shii' - Ô tô này shi (xê) đi nhẹ nhàng vì cậu ta rất hiền.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "大人しい",
+      "pitch_accent": 0
+    },
+    {
       "id": 1615,
       "lesson_id": 38,
       "hiragana": "せわをする",
@@ -17376,7 +21876,22 @@ module.exports = {
       "mnemonic_tip": "Chăm sóc - 'Sê-wa' - Xê ra và lo chăm sóc cho người bệnh.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "",
+      "kanji_word": "世話をする",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1616,
+      "lesson_id": 38,
+      "hiragana": "じかんがたつ",
+      "romaji": "jikangatatsu",
+      "vietnamese_meaning": "thời gian trôi qua",
+      "word_type": "verb",
+      "japanese_example": "時間がたちます。",
+      "example_meaning": "Thời gian đang trôi qua.",
+      "mnemonic_tip": "Thời gian trôi - 'Ta-chi-ma-su' - Ta chỉ mới đây mà thời gian đã trôi mất rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "時間が経つ",
       "pitch_accent": 0
     },
     {
@@ -17407,6 +21922,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1619,
+      "lesson_id": 38,
+      "hiragana": "ふしぎ",
+      "romaji": "fushigi",
+      "vietnamese_meaning": "Bí ẩn, kỳ lạ (tính từ đuôi な)",
+      "word_type": "adjective",
+      "japanese_example": "不思議な話ですね。",
+      "example_meaning": "Đó là một câu chuyện kỳ lạ nhỉ.",
+      "mnemonic_tip": "Bí ẩn - 'Phu-si-gi' - Phu (vợ) sĩ ghi chép lại những điều bí ẩn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "不思議",
       "pitch_accent": 0
     },
     {
@@ -17575,6 +22105,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1633,
+      "lesson_id": 39,
+      "hiragana": "じゃま",
+      "romaji": "jama",
+      "vietnamese_meaning": "Cản trở, vướng víu (tính từ đuôi な)",
+      "word_type": "adjective",
+      "japanese_example": "邪魔な車です。",
+      "example_meaning": "Chiếc xe cản trở đường đi.",
+      "mnemonic_tip": "Chả ma nào: Chả ma nào dám đi vì bị cản trở.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "邪魔",
+      "pitch_accent": 0
+    },
+    {
       "id": 1634,
       "lesson_id": 39,
       "hiragana": "きたない",
@@ -17650,6 +22195,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1640,
+      "lesson_id": 39,
+      "hiragana": "でんわだい",
+      "romaji": "denwadai",
+      "vietnamese_meaning": "Tiền điện thoại",
+      "word_type": "noun",
+      "japanese_example": "電話代が高いです。",
+      "example_meaning": "Tiền điện thoại đắt.",
+      "mnemonic_tip": "Điên qua đài: Tiền điện thoại nhiều quá đến điên cả đài.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "電話代",
+      "pitch_accent": 0
+    },
+    {
       "id": 1641,
       "lesson_id": 39,
       "hiragana": "～だい",
@@ -17662,6 +22222,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "～代",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1642,
+      "lesson_id": 39,
+      "hiragana": "フロント",
+      "romaji": "furonto",
+      "vietnamese_meaning": "Quầy lễ tân",
+      "word_type": "noun",
+      "japanese_example": "フロントへ行きます。",
+      "example_meaning": "Đi đến quầy lễ tân.",
+      "mnemonic_tip": "Phù rông: Quầy lễ tân trang trí phù rông thật đẹp.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1644,
+      "lesson_id": 39,
+      "hiragana": "あせ",
+      "romaji": "ase",
+      "vietnamese_meaning": "Mồ hôi",
+      "word_type": "noun",
+      "japanese_example": "汗をかきます。",
+      "example_meaning": "Đổ mồ hôi.",
+      "mnemonic_tip": "À xe: À xe nóng quá, đổ mồ hôi rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "汗",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1645,
+      "lesson_id": 39,
+      "hiragana": "タオル",
+      "romaji": "taoru",
+      "vietnamese_meaning": "Khăn tắm",
+      "word_type": "noun",
+      "japanese_example": "タオルを使います。",
+      "example_meaning": "Dùng khăn tắm.",
+      "mnemonic_tip": "Tao ừ: Tao ừ, đưa khăn tắm đây.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -17704,6 +22309,66 @@ module.exports = {
       "japanese_example": "皆さん、お疲れさまでした。",
       "example_meaning": "Mọi người đã vất vả rồi.",
       "mnemonic_tip": "Ô, tu cả da mà chả mệt - Làm việc vất vả đến mức 'tu cả da' nhưng vẫn phải nói câu này.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1649,
+      "lesson_id": 39,
+      "hiragana": "うかがう",
+      "romaji": "ukagau",
+      "vietnamese_meaning": "tôi đến thăm (khiêm nhường ngữ)",
+      "word_type": "verb",
+      "japanese_example": "明日、伺います。",
+      "example_meaning": "Ngày mai tôi sẽ đến thăm.",
+      "mnemonic_tip": "U cả gai - U (bà) bị gai đâm nên cháu phải đến thăm, nhớ dùng khiêm nhường ngữ nhé.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "伺う",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1650,
+      "lesson_id": 39,
+      "hiragana": "とちゅうで",
+      "romaji": "tochuude",
+      "vietnamese_meaning": "giữa đường",
+      "word_type": "adverb",
+      "japanese_example": "途中で雨が降りました。",
+      "example_meaning": "Giữa đường thì trời đổ mưa.",
+      "mnemonic_tip": "Tô chu đê - Tô màu lên chu vi của cái đê giữa đường đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "途中で",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1651,
+      "lesson_id": 39,
+      "hiragana": "トラック",
+      "romaji": "torakku",
+      "vietnamese_meaning": "xe tải",
+      "word_type": "noun",
+      "japanese_example": "トラックが通ります。",
+      "example_meaning": "Xe tải chạy qua.",
+      "mnemonic_tip": "To rắc - Xe tải to chở hàng rắc đầy đường.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1652,
+      "lesson_id": 39,
+      "hiragana": "ぶつかる",
+      "romaji": "butsukaru",
+      "vietnamese_meaning": "va chạm, đâm vào",
+      "word_type": "verb",
+      "japanese_example": "車が壁にぶつかります。",
+      "example_meaning": "Xe đâm vào tường.",
+      "mnemonic_tip": "Bút của rima - Bút của Rima bị va chạm nên gãy làm đôi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "",
@@ -17770,6 +22435,81 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1657,
+      "lesson_id": 39,
+      "hiragana": "いまでは",
+      "romaji": "imadewa",
+      "vietnamese_meaning": "bây giờ thì",
+      "word_type": "adverb",
+      "japanese_example": "今では有名です。",
+      "example_meaning": "Bây giờ thì đã nổi tiếng rồi.",
+      "mnemonic_tip": "Im đã và - Im lặng đã và đang là vàng, bây giờ thì hiểu ra rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "今では",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1658,
+      "lesson_id": 39,
+      "hiragana": "せいじんしき",
+      "romaji": "seijinshiki",
+      "vietnamese_meaning": "lễ trưởng thành",
+      "word_type": "noun",
+      "japanese_example": "成人式に出ます。",
+      "example_meaning": "Tham dự lễ trưởng thành.",
+      "mnemonic_tip": "Xê jin (gin) sì ki - Xê dịch cái lễ trưởng thành sang một bên vì quá là sì-tai.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "成人式",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1659,
+      "lesson_id": 40,
+      "hiragana": "かぞえる",
+      "romaji": "kazoeru",
+      "vietnamese_meaning": "đếm",
+      "word_type": "verb",
+      "japanese_example": "数を 数えます。",
+      "example_meaning": "Đếm số lượng.",
+      "mnemonic_tip": "Mẹo: 'Cả rổ' đếm mãi mới hết.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "数える",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1660,
+      "lesson_id": 40,
+      "hiragana": "はかる",
+      "romaji": "hakaru",
+      "vietnamese_meaning": "đo, cân [chiều cao/nặng]",
+      "word_type": "verb",
+      "japanese_example": "長さを 測ります。",
+      "example_meaning": "Đo chiều dài.",
+      "mnemonic_tip": "Mẹo: 'Hạ cả' bàn cân ra đo.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "測る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1661,
+      "lesson_id": 40,
+      "hiragana": "たしかめる",
+      "romaji": "tashikameru",
+      "vietnamese_meaning": "xác nhận, kiểm tra",
+      "word_type": "verb",
+      "japanese_example": "時間を 確かめます。",
+      "example_meaning": "Xác nhận lại thời gian.",
+      "mnemonic_tip": "Mẹo: 'Ta chỉ cả' đám kiểm tra lại.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "確かめる",
+      "pitch_accent": 0
+    },
+    {
       "id": 1662,
       "lesson_id": 40,
       "hiragana": "しゅっぱつする",
@@ -17815,6 +22555,81 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1666,
+      "lesson_id": 40,
+      "hiragana": "ぼうねんかい",
+      "romaji": "bounenkai",
+      "vietnamese_meaning": "tiệc cuối năm",
+      "word_type": "noun",
+      "japanese_example": "忘年会に参加します",
+      "example_meaning": "Tham gia tiệc tất niên.",
+      "mnemonic_tip": "Bô-nền-kai: Bỏ hết mọi phiền não để đi dự tiệc cuối năm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "忘年会",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1667,
+      "lesson_id": 40,
+      "hiragana": "しんねんかい",
+      "romaji": "shinnenkai",
+      "vietnamese_meaning": "tiệc đầu năm",
+      "word_type": "noun",
+      "japanese_example": "新年会で飲みます",
+      "example_meaning": "Uống rượu trong tiệc đầu năm.",
+      "mnemonic_tip": "Shin-nền-kai: Sinh ra một năm mới bằng buổi tiệc đầu năm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "新年会",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1669,
+      "lesson_id": 40,
+      "hiragana": "たいかい",
+      "romaji": "taikai",
+      "vietnamese_meaning": "đại hội, cuộc thi lớn",
+      "word_type": "noun",
+      "japanese_example": "大会に出ます",
+      "example_meaning": "Tham dự đại hội.",
+      "mnemonic_tip": "Tai-kai: Tất cả cái đại hội này đều có nhiều người tham gia.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "大会",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1670,
+      "lesson_id": 40,
+      "hiragana": "マラソン",
+      "romaji": "marason",
+      "vietnamese_meaning": "ma-ra-tông",
+      "word_type": "noun",
+      "japanese_example": "マラソンを走ります",
+      "example_meaning": "Chạy ma-ra-tông.",
+      "mnemonic_tip": "Ma-ra-sơn: Chạy ma-ra-tông mệt quá, phải mang ra sơn màu cho đẹp.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1671,
+      "lesson_id": 40,
+      "hiragana": "コンテスト",
+      "romaji": "kontesuto",
+      "vietnamese_meaning": "cuộc thi",
+      "word_type": "noun",
+      "japanese_example": "歌のコンテスト",
+      "example_meaning": "Cuộc thi hát.",
+      "mnemonic_tip": "Con-tét-tô: Con té rồi mà vẫn đi thi cuộc thi này.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1672,
       "lesson_id": 40,
       "hiragana": "おもて",
@@ -17845,6 +22660,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1674,
+      "lesson_id": 40,
+      "hiragana": "もうしこみ",
+      "romaji": "moushikomi",
+      "vietnamese_meaning": "sự đăng ký",
+      "word_type": "noun",
+      "japanese_example": "申し込みはここです",
+      "example_meaning": "Chỗ đăng ký ở đây.",
+      "mnemonic_tip": "Mô-shi-ko-mi: Mồ hôi nhỏ xuống khi làm đơn đăng ký.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "申し込み",
+      "pitch_accent": 0
+    },
+    {
       "id": 1675,
       "lesson_id": 40,
       "hiragana": "ほんとう",
@@ -17860,6 +22690,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1676,
+      "lesson_id": 40,
+      "hiragana": "まちがい",
+      "romaji": "machigai",
+      "vietnamese_meaning": "lỗi, sai lầm",
+      "word_type": "noun",
+      "japanese_example": "間違いを探します",
+      "example_meaning": "Tìm ra lỗi sai.",
+      "mnemonic_tip": "Ma-chi-gai: Ma chỉ sai, nên bài làm bị lỗi rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "間違い",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1677,
+      "lesson_id": 40,
+      "hiragana": "きず",
+      "romaji": "kizu",
+      "vietnamese_meaning": "vết thương, vết xước",
+      "word_type": "noun",
+      "japanese_example": "体に傷があります",
+      "example_meaning": "Có vết thương trên người.",
+      "mnemonic_tip": "Ki-zu: Kìa, cái chú đó có vết thương trên tay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "傷",
+      "pitch_accent": 0
+    },
+    {
       "id": 1678,
       "lesson_id": 40,
       "hiragana": "ズボン",
@@ -17872,6 +22732,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "洋袴",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1679,
+      "lesson_id": 40,
+      "hiragana": "ながさ",
+      "romaji": "nagasa",
+      "vietnamese_meaning": "chiều dài",
+      "word_type": "noun",
+      "japanese_example": "長さは何センチですか",
+      "example_meaning": "Chiều dài bao nhiêu cm?",
+      "mnemonic_tip": "Na-ga-sa: Nà ga xa, chiều dài đường ray này xa quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "長さ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1680,
+      "lesson_id": 40,
+      "hiragana": "おもさ",
+      "romaji": "omosa",
+      "vietnamese_meaning": "trọng lượng",
+      "word_type": "noun",
+      "japanese_example": "重さを量ります",
+      "example_meaning": "Đo trọng lượng.",
+      "mnemonic_tip": "Ô-mô-sa: Ồ mô, sao cái túi này nặng (trọng lượng lớn) thế?",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "重さ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1681,
+      "lesson_id": 40,
+      "hiragana": "たかさ",
+      "romaji": "takasa",
+      "vietnamese_meaning": "chiều cao",
+      "word_type": "noun",
+      "japanese_example": "高さは10メートルです",
+      "example_meaning": "Chiều cao là 10 mét.",
+      "mnemonic_tip": "Ta-ka-sa: Ta cao quá, hãy đo chiều cao nào.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "高さ",
       "pitch_accent": 0
     },
     {
@@ -17920,6 +22825,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1687,
+      "lesson_id": 40,
+      "hiragana": "―キロ",
+      "romaji": "kiro",
+      "vietnamese_meaning": "ki-lô (mét, gam)",
+      "word_type": "counter",
+      "japanese_example": "5キロ走ります。",
+      "example_meaning": "Tôi chạy bộ 5 ki-lô-mét.",
+      "mnemonic_tip": "Ki lô - Cứ đi bộ 5 cây (ki lô) là giảm cân.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1689,
+      "lesson_id": 40,
+      "hiragana": "～センチ",
+      "romaji": "senchi",
+      "vietnamese_meaning": "xăng-ti-mét",
+      "word_type": "counter",
+      "japanese_example": "身長は170センチです。",
+      "example_meaning": "Chiều cao của tôi là 170 xăng-ti-mét.",
+      "mnemonic_tip": "Sen chỉ - Sen chỉ cao thêm được 1 xăng-ti-mét.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1690,
+      "lesson_id": 40,
+      "hiragana": "～ミリ",
+      "romaji": "miri",
+      "vietnamese_meaning": "mi-li-mét",
+      "word_type": "counter",
+      "japanese_example": "1ミリの誤差もありません。",
+      "example_meaning": "Không có sai số dù chỉ 1 mi-li-mét.",
+      "mnemonic_tip": "Mì ri - Sợi mì này nhỏ li ti, chỉ có 1 mi-li-mét thôi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1693,
       "lesson_id": 40,
       "hiragana": "どうでしょうか",
@@ -17950,6 +22900,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1695,
+      "lesson_id": 40,
+      "hiragana": "せいせき",
+      "romaji": "seiseki",
+      "vietnamese_meaning": "thành tích, kết quả học tập",
+      "word_type": "noun",
+      "japanese_example": "成績がいいです。",
+      "example_meaning": "Thành tích học tập tốt.",
+      "mnemonic_tip": "Sê sê kê - Kết quả thành tích cứ sê sê kê, chưa bứt phá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "成績",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1696,
+      "lesson_id": 40,
+      "hiragana": "ところで",
+      "romaji": "tokorode",
+      "vietnamese_meaning": "nhân tiện",
+      "word_type": "adverb",
+      "japanese_example": "ところで、お元気ですか。",
+      "example_meaning": "Nhân tiện, anh có khỏe không?",
+      "mnemonic_tip": "Tò mò đê - Nhân tiện tò mò đê, hỏi một câu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1697,
+      "lesson_id": 40,
+      "hiragana": "ようす",
+      "romaji": "yousu",
+      "vietnamese_meaning": "vẻ bề ngoài, tình trạng",
+      "word_type": "noun",
+      "japanese_example": "街の様子が変わりました。",
+      "example_meaning": "Tình trạng của thành phố đã thay đổi.",
+      "mnemonic_tip": "Yêu sư - Vẻ ngoài của người yêu sư trông thật lạ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "様子",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1698,
+      "lesson_id": 40,
+      "hiragana": "じけん",
+      "romaji": "jiken",
+      "vietnamese_meaning": "vụ án, sự kiện",
+      "word_type": "noun",
+      "japanese_example": "事件が起きました。",
+      "example_meaning": "Vụ án đã xảy ra.",
+      "mnemonic_tip": "Di kiện - Di kiện (di dời kiện hàng) là cả một vụ án.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "事件",
+      "pitch_accent": 0
+    },
+    {
       "id": 1699,
       "lesson_id": 40,
       "hiragana": "オートバイ",
@@ -17962,6 +22972,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1701,
+      "lesson_id": 40,
+      "hiragana": "つむ",
+      "romaji": "tsumu",
+      "vietnamese_meaning": "chất lên, xếp lên",
+      "word_type": "verb",
+      "japanese_example": "荷物をトラックに積みます。",
+      "example_meaning": "Tôi chất hành lý lên xe tải.",
+      "mnemonic_tip": "Tú mì - Chất chồng túi mì lên xe.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "積む",
       "pitch_accent": 0
     },
     {
@@ -17982,8 +23007,8 @@ module.exports = {
     {
       "id": 1705,
       "lesson_id": 40,
-      "hiragana": "うごかする",
-      "romaji": "ugokasuru",
+      "hiragana": "うごかす",
+      "romaji": "ugokasu",
       "vietnamese_meaning": "làm chuyển động, vận hành",
       "word_type": "verb",
       "japanese_example": "機械を動かします。",
@@ -17992,6 +23017,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "動かす",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1707,
+      "lesson_id": 40,
+      "hiragana": "はんにん",
+      "romaji": "hannin",
+      "vietnamese_meaning": "phạm nhân, thủ phạm",
+      "word_type": "noun",
+      "japanese_example": "犯人を捕まえました。",
+      "example_meaning": "Tôi đã bắt được thủ phạm.",
+      "mnemonic_tip": "Hẳn nhìn - Nhìn mặt hẳn là biết thủ phạm rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "犯人",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1708,
+      "lesson_id": 40,
+      "hiragana": "てにいれる",
+      "romaji": "teniireru",
+      "vietnamese_meaning": "đạt được, có được",
+      "word_type": "verb",
+      "japanese_example": "情報を手に入れます。",
+      "example_meaning": "Tôi có được thông tin.",
+      "mnemonic_tip": "Tê nì - Tê nì (tay này) đã có được món đồ rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "手に入れる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1709,
+      "lesson_id": 40,
+      "hiragana": "いまでも",
+      "romaji": "imademo",
+      "vietnamese_meaning": "ngay cả bây giờ",
+      "word_type": "adverb",
+      "japanese_example": "今でも彼女を愛しています。",
+      "example_meaning": "Ngay cả bây giờ tôi vẫn yêu cô ấy.",
+      "mnemonic_tip": "Ít mà đờ - Ít mà đờ (đờ đẫn) vì ngay cả bây giờ vẫn nhớ người xưa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "今でも",
       "pitch_accent": 0
     },
     {
@@ -18007,6 +23077,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "噂する",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1712,
+      "lesson_id": 41,
+      "hiragana": "くださる",
+      "romaji": "kudasaru",
+      "vietnamese_meaning": "cho (tôn kính của くれます)",
+      "word_type": "verb",
+      "japanese_example": "先生が 本を くださいます。",
+      "example_meaning": "Thầy giáo cho tôi cuốn sách.",
+      "mnemonic_tip": "Mẹo: 'Cụ đã sai' cho tôi kẹo.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "下さる",
       "pitch_accent": 0
     },
     {
@@ -18070,6 +23155,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1719,
+      "lesson_id": 41,
+      "hiragana": "おとしだま",
+      "romaji": "otoshidama",
+      "vietnamese_meaning": "Tiền lì xì",
+      "word_type": "noun",
+      "japanese_example": "お正月に子供にお年玉をあげます。",
+      "example_meaning": "Vào dịp Tết, tôi cho trẻ con tiền lì xì.",
+      "mnemonic_tip": "Ôi, tốn tiền đà mà - Tốn tiền lì xì cho bọn trẻ, ôi tốn đà mà.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "お年玉",
+      "pitch_accent": 0
+    },
+    {
       "id": 1720,
       "lesson_id": 41,
       "hiragana": "おみまい",
@@ -18097,6 +23197,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "興味",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1722,
+      "lesson_id": 41,
+      "hiragana": "じょうほう",
+      "romaji": "jouhou",
+      "vietnamese_meaning": "Thông tin",
+      "word_type": "noun",
+      "japanese_example": "新しい情報を集めます。",
+      "example_meaning": "Tôi tập hợp thông tin mới.",
+      "mnemonic_tip": "Jô-hôi - 'Dô hội' (vào hội) thì mới có thông tin nhanh nhất.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "情報",
       "pitch_accent": 0
     },
     {
@@ -18130,6 +23245,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1725,
+      "lesson_id": 41,
+      "hiragana": "さる",
+      "romaji": "saru",
+      "vietnamese_meaning": "Con khỉ",
+      "word_type": "noun",
+      "japanese_example": "動物園で猿を見ました。",
+      "example_meaning": "Tôi đã xem khỉ ở sở thú.",
+      "mnemonic_tip": "Sa-ru - 'Sa rũ' lông ra như con khỉ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "猿",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1726,
+      "lesson_id": 41,
+      "hiragana": "えさ",
+      "romaji": "esa",
+      "vietnamese_meaning": "Đồ ăn cho động vật",
+      "word_type": "noun",
+      "japanese_example": "鳥にえさをやります。",
+      "example_meaning": "Tôi cho chim ăn.",
+      "mnemonic_tip": "E-sa - 'Ê, sa' (xà) vào ăn đồ ăn đi các bạn động vật.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "餌",
+      "pitch_accent": 0
+    },
+    {
       "id": 1727,
       "lesson_id": 41,
       "hiragana": "おもちゃ",
@@ -18142,6 +23287,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "玩具",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1728,
+      "lesson_id": 41,
+      "hiragana": "えほん",
+      "romaji": "ehon",
+      "vietnamese_meaning": "Sách tranh",
+      "word_type": "noun",
+      "japanese_example": "寝る前に絵本を読みます。",
+      "example_meaning": "Tôi đọc sách tranh trước khi đi ngủ.",
+      "mnemonic_tip": "Ê-hồn - 'Ê hồn' (hồn nhiên) như trong mấy cuốn sách tranh vậy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "絵本",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1729,
+      "lesson_id": 41,
+      "hiragana": "えはがき",
+      "romaji": "ehagaki",
+      "vietnamese_meaning": "Bưu thiếp tranh",
+      "word_type": "noun",
+      "japanese_example": "友達に絵はがきを送ります。",
+      "example_meaning": "Tôi gửi bưu thiếp tranh cho bạn.",
+      "mnemonic_tip": "E-ha-ga-ki - 'Ê, há ra' nhìn cái bưu thiếp tranh này đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "絵葉書",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1730,
+      "lesson_id": 41,
+      "hiragana": "ドライバー",
+      "romaji": "doraibaa",
+      "vietnamese_meaning": "Tua vít",
+      "word_type": "noun",
+      "japanese_example": "ドライバーでネジを回します。",
+      "example_meaning": "Tôi vặn ốc bằng tua vít.",
+      "mnemonic_tip": "Doraibaa - Giống 'Driver' (người lái xe) nhưng ở đây là cái tua vít lái ốc.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -18205,6 +23395,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1735,
+      "lesson_id": 41,
+      "hiragana": "バッグ",
+      "romaji": "baggu",
+      "vietnamese_meaning": "Túi xách",
+      "word_type": "noun",
+      "japanese_example": "新しいバッグを買いました。",
+      "example_meaning": "Tôi đã mua túi xách mới.",
+      "mnemonic_tip": "Baggu - Đọc giống từ 'Bag' trong tiếng Anh, là cái túi xách.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1736,
       "lesson_id": 41,
       "hiragana": "そふ",
@@ -18232,6 +23437,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "祖母",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1738,
+      "lesson_id": 41,
+      "hiragana": "まご",
+      "romaji": "mago",
+      "vietnamese_meaning": "Cháu (đối với ông bà)",
+      "word_type": "noun",
+      "japanese_example": "孫はとてもかわいいです。",
+      "example_meaning": "Cháu rất dễ thương.",
+      "mnemonic_tip": "Ma-gô - 'Ma' (mang) 'gô' (ghế) cho cháu ngồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "孫",
       "pitch_accent": 0
     },
     {
@@ -18340,6 +23560,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1746,
+      "lesson_id": 41,
+      "hiragana": "あずかる",
+      "romaji": "azukaru",
+      "vietnamese_meaning": "Giữ, trông coi, nhận giữ",
+      "word_type": "verb",
+      "japanese_example": "荷物を預かります。",
+      "example_meaning": "Tôi sẽ giữ hành lý cho bạn.",
+      "mnemonic_tip": "A, dư cá ma: 'A, dư cá mà' nên gửi lại cho người ta giữ hộ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "預かる",
+      "pitch_accent": 0
+    },
+    {
       "id": 1747,
       "lesson_id": 41,
       "hiragana": "せんじつ",
@@ -18352,6 +23587,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "先日",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1748,
+      "lesson_id": 41,
+      "hiragana": "たすかる",
+      "romaji": "tasukaru",
+      "vietnamese_meaning": "Được giúp đỡ, nhờ đó mà cứu được",
+      "word_type": "verb",
+      "japanese_example": "手伝ってくれて、助かります。",
+      "example_meaning": "Nhờ bạn giúp đỡ mà tôi được cứu/đỡ vất vả rồi.",
+      "mnemonic_tip": "Ta sờ cà ri: 'Ta sờ' vào bát 'cà ri' nóng, nhờ có bạn cứu nên không bị bỏng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "助かる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1749,
+      "lesson_id": 41,
+      "hiragana": "むかしばなし",
+      "romaji": "mukashibanashi",
+      "vietnamese_meaning": "Truyện cổ tích",
+      "word_type": "noun",
+      "japanese_example": "子供に昔話を話します。",
+      "example_meaning": "Tôi kể truyện cổ tích cho bọn trẻ nghe.",
+      "mnemonic_tip": "Mù cái bán: 'Mù cái bán' là chuyện cổ tích xưa xửa xừa xưa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "昔話",
       "pitch_accent": 0
     },
     {
@@ -18400,10 +23665,55 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1753,
+      "lesson_id": 41,
+      "hiragana": "かめ",
+      "romaji": "kame",
+      "vietnamese_meaning": "Con rùa",
+      "word_type": "noun",
+      "japanese_example": "かめはゆっくり歩きます。",
+      "example_meaning": "Rùa đi bộ rất chậm rãi.",
+      "mnemonic_tip": "Ca mê: 'Ca' hát 'mê' mẩn cùng con rùa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "亀",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1754,
+      "lesson_id": 41,
+      "hiragana": "たすける",
+      "romaji": "tasukeru",
+      "vietnamese_meaning": "Giúp đỡ, cứu giúp",
+      "word_type": "verb",
+      "japanese_example": "溺れている人を助けます。",
+      "example_meaning": "Tôi cứu người đang bị đuối nước.",
+      "mnemonic_tip": "Ta-sờ-kê: 'Ta sờ kề' vào người gặp nạn để cứu giúp.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "助ける",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1757,
+      "lesson_id": 41,
+      "hiragana": "たのしく",
+      "romaji": "tanoshiku",
+      "vietnamese_meaning": "Vui vẻ",
+      "word_type": "adverb",
+      "japanese_example": "家族と楽しく過ごします。",
+      "example_meaning": "Tôi dành thời gian vui vẻ bên gia đình.",
+      "mnemonic_tip": "Ta-nô-sư-ku: 'Ta nô' nức 'sư' (sướng) 'ku' (cu) - vui vẻ quá đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "楽しく",
+      "pitch_accent": 0
+    },
+    {
       "id": 1758,
       "lesson_id": 41,
-      "hiragana": "くらする",
-      "romaji": "kurasuru",
+      "hiragana": "くらす",
+      "romaji": "kurasu",
       "vietnamese_meaning": "Sống, sinh sống",
       "word_type": "verb",
       "japanese_example": "東京で暮らしています。",
@@ -18412,6 +23722,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "暮らす",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1759,
+      "lesson_id": 41,
+      "hiragana": "りく",
+      "romaji": "riku",
+      "vietnamese_meaning": "Đất liền, lục địa",
+      "word_type": "noun",
+      "japanese_example": "陸に上がりました。",
+      "example_meaning": "Tôi đã lên đất liền.",
+      "mnemonic_tip": "Rì-ku: 'Rì' rào sóng biển vỗ vào 'ku' (khu) đất liền.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "陸",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1760,
+      "lesson_id": 41,
+      "hiragana": "けむり",
+      "romaji": "kemuri",
+      "vietnamese_meaning": "Khói",
+      "word_type": "noun",
+      "japanese_example": "工場から煙が出ています。",
+      "example_meaning": "Khói đang bay ra từ nhà máy.",
+      "mnemonic_tip": "Kê-mu-ri: 'Kê' cái 'mu' (mũ) 'ri' (rì) vào cho khỏi hít phải khói.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "煙",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1762,
+      "lesson_id": 41,
+      "hiragana": "なかみ",
+      "romaji": "nakami",
+      "vietnamese_meaning": "Nội dung, bên trong",
+      "word_type": "noun",
+      "japanese_example": "箱の中身は何ですか。",
+      "example_meaning": "Bên trong cái hộp là gì vậy?",
+      "mnemonic_tip": "Nà-ka-mi: 'Nà' 'ca' 'mi' (mì) ở 'bên trong' bát kia kìa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "中身",
       "pitch_accent": 0
     },
     {
@@ -18445,18 +23800,33 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1765,
+      "id": 1766,
       "lesson_id": 42,
-      "hiragana": "ふべん",
-      "romaji": "fuben",
-      "vietnamese_meaning": "bất tiện",
-      "word_type": "adjective",
-      "japanese_example": "交通が 不便です。",
-      "example_meaning": "Giao thông bất tiện.",
-      "mnemonic_tip": "Mẹo: 'Phủ bên' ngoài sự bất tiện.",
+      "hiragana": "ふやす",
+      "romaji": "fuyasu",
+      "vietnamese_meaning": "làm tăng lên",
+      "word_type": "verb",
+      "japanese_example": "貯金を 増やします。",
+      "example_meaning": "Làm tăng tiền tiết kiệm.",
+      "mnemonic_tip": "Mẹo: 'Phù sa' bồi đắp tăng đất.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "不便",
+      "kanji_word": "増やす",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1767,
+      "lesson_id": 42,
+      "hiragana": "へらす",
+      "romaji": "herasu",
+      "vietnamese_meaning": "làm giảm đi",
+      "word_type": "verb",
+      "japanese_example": "体重を 減らします。",
+      "example_meaning": "Giảm cân nặng.",
+      "mnemonic_tip": "Mẹo: 'Hé răng' ăn ít để giảm cân.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "減らす",
       "pitch_accent": 0
     },
     {
@@ -18487,6 +23857,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "沸かす",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1770,
+      "lesson_id": 42,
+      "hiragana": "まぜる",
+      "romaji": "mazeru",
+      "vietnamese_meaning": "trộn, khuấy",
+      "word_type": "verb",
+      "japanese_example": "サラダをよく混ぜます。",
+      "example_meaning": "Trộn salad thật đều.",
+      "mnemonic_tip": "Mẹ dở: Mẹ dở tay nên trộn gia vị không đều, phải khuấy lại.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "混ぜる",
       "pitch_accent": 0
     },
     {
@@ -18532,6 +23917,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "弁護士",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1774,
+      "lesson_id": 42,
+      "hiragana": "おんがくか",
+      "romaji": "ongakuka",
+      "vietnamese_meaning": "nhạc sĩ",
+      "word_type": "noun",
+      "japanese_example": "将来は音楽家になりたいです。",
+      "example_meaning": "Tương lai tôi muốn trở thành nhạc sĩ.",
+      "mnemonic_tip": "Ông gác ca: Ông nhạc sĩ ngồi gác chân và ca hát.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "音楽家",
       "pitch_accent": 0
     },
     {
@@ -18595,6 +23995,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1779,
+      "lesson_id": 42,
+      "hiragana": "へいわ",
+      "romaji": "heiwa",
+      "vietnamese_meaning": "hòa bình",
+      "word_type": "noun",
+      "japanese_example": "世界平和を祈ります。",
+      "example_meaning": "Tôi cầu nguyện cho hòa bình thế giới.",
+      "mnemonic_tip": "Hê hòa: Hê, hòa bình rồi, vui quá!",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "平和",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1780,
+      "lesson_id": 42,
+      "hiragana": "もくてき",
+      "romaji": "mokuteki",
+      "vietnamese_meaning": "mục đích",
+      "word_type": "noun",
+      "japanese_example": "この旅行の目的は観光です。",
+      "example_meaning": "Mục đích của chuyến du lịch này là tham quan.",
+      "mnemonic_tip": "Mục tiêu kê: Mục đích của tôi là kê cái bàn vào mục tiêu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "目的",
+      "pitch_accent": 0
+    },
+    {
       "id": 1781,
       "lesson_id": 42,
       "hiragana": "あんぜん",
@@ -18607,6 +24037,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "安全",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1782,
+      "lesson_id": 42,
+      "hiragana": "ろんぶん",
+      "romaji": "ronbun",
+      "vietnamese_meaning": "luận văn",
+      "word_type": "noun",
+      "japanese_example": "論文を書きます。",
+      "example_meaning": "Tôi viết luận văn.",
+      "mnemonic_tip": "Rốn bận: Viết luận văn đến mức không rốn bận (rảnh) việc gì cả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "論文",
       "pitch_accent": 0
     },
     {
@@ -18625,6 +24070,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1785,
+      "lesson_id": 42,
+      "hiragana": "やかん",
+      "romaji": "yakan",
+      "vietnamese_meaning": "ấm đun nước",
+      "word_type": "noun",
+      "japanese_example": "やかんでお湯を沸かします。",
+      "example_meaning": "Tôi đun nước bằng ấm.",
+      "mnemonic_tip": "Ya cạn: Nước trong ấm đã cạn rồi, phải đổ thêm thôi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1788,
+      "lesson_id": 42,
+      "hiragana": "かんづめ",
+      "romaji": "kandzume",
+      "vietnamese_meaning": "đồ hộp",
+      "word_type": "noun",
+      "japanese_example": "非常食として缶詰を買います。",
+      "example_meaning": "Tôi mua đồ hộp làm thức ăn dự phòng.",
+      "mnemonic_tip": "Căn dù mê: Món đồ hộp này ngon đến nỗi tui căn dù mê (dù là món gì cũng mê).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "缶詰",
+      "pitch_accent": 0
+    },
+    {
       "id": 1792,
       "lesson_id": 42,
       "hiragana": "いし",
@@ -18637,6 +24112,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
       "kanji_word": "石",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1794,
+      "lesson_id": 42,
+      "hiragana": "データ",
+      "romaji": "deeta",
+      "vietnamese_meaning": "Dữ liệu",
+      "word_type": "noun",
+      "japanese_example": "データを保存してください。",
+      "example_meaning": "Hãy lưu dữ liệu lại giúp tôi.",
+      "mnemonic_tip": "Đê-tạ: Để tạ dữ liệu vào máy cho an toàn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1795,
+      "lesson_id": 42,
+      "hiragana": "ファイル",
+      "romaji": "fairu",
+      "vietnamese_meaning": "Tập tin, file",
+      "word_type": "noun",
+      "japanese_example": "ファイルをメールで送る。",
+      "example_meaning": "Gửi tập tin qua email.",
+      "mnemonic_tip": "Phai-lờ: Phai lờ đi là mất file ngay, nên phải cẩn thận.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.534552+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -18670,6 +24175,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1801,
+      "lesson_id": 42,
+      "hiragana": "ローン",
+      "romaji": "roon",
+      "vietnamese_meaning": "Khoản vay, trả góp",
+      "word_type": "noun",
+      "japanese_example": "家をローンで買う。",
+      "example_meaning": "Mua nhà trả góp.",
+      "mnemonic_tip": "Rôn: Rôn rả đi vay tiền để trả góp hàng tháng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1803,
       "lesson_id": 42,
       "hiragana": "あとは",
@@ -18682,6 +24202,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1806,
+      "lesson_id": 42,
+      "hiragana": "しょくひん",
+      "romaji": "shokuhin",
+      "vietnamese_meaning": "Thực phẩm",
+      "word_type": "noun",
+      "japanese_example": "食品売り場は地下にある。",
+      "example_meaning": "Quầy thực phẩm ở dưới tầng hầm.",
+      "mnemonic_tip": "Sô-cù-hìn: Xô đựng thực phẩm nhìn hình dáng thật lạ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "食品",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1807,
+      "lesson_id": 42,
+      "hiragana": "ちょうさ",
+      "romaji": "chousa",
+      "vietnamese_meaning": "Điều tra, khảo sát",
+      "word_type": "noun",
+      "japanese_example": "市場調査をする。",
+      "example_meaning": "Tiến hành khảo sát thị trường.",
+      "mnemonic_tip": "Chô-sa: 'Chô sa' - Trò sa lưới pháp luật là do bị điều tra.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "調査",
       "pitch_accent": 0
     },
     {
@@ -18727,6 +24277,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "増える",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1812,
+      "lesson_id": 43,
+      "hiragana": "へる",
+      "romaji": "heru",
+      "vietnamese_meaning": "giảm đi [nhập khẩu]",
+      "word_type": "verb",
+      "japanese_example": "輸入が 減ります。",
+      "example_meaning": "Nhập khẩu giảm đi.",
+      "mnemonic_tip": "Mẹo: 'Hé răng' ăn ít đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "減る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1813,
+      "lesson_id": 43,
+      "hiragana": "きれる",
+      "romaji": "kireru",
+      "vietnamese_meaning": "đứt [dây]",
+      "word_type": "verb",
+      "japanese_example": "紐が 切れます。",
+      "example_meaning": "Sợi dây bị đứt.",
+      "mnemonic_tip": "Mẹo: 'Kì lạ' tự nhiên đứt dây.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "切れる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1814,
+      "lesson_id": 43,
+      "hiragana": "とれる",
+      "romaji": "toreru",
+      "vietnamese_meaning": "tuột [cúc áo]",
+      "word_type": "verb",
+      "japanese_example": "ボタンが とれます。",
+      "example_meaning": "Cúc áo bị tuột.",
+      "mnemonic_tip": "Mẹo: 'Tơ rách' tuột nút.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "取れる",
       "pitch_accent": 0
     },
     {
@@ -18790,6 +24385,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1820,
+      "lesson_id": 43,
+      "hiragana": "しあわせ",
+      "romaji": "shiawase",
+      "vietnamese_meaning": "Hạnh phúc",
+      "word_type": "adjective",
+      "japanese_example": "幸せな家族。",
+      "example_meaning": "Gia đình hạnh phúc.",
+      "mnemonic_tip": "Chia và xe: Hạnh phúc là được chia sẻ, cùng đi xe.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "幸せ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1821,
+      "lesson_id": 43,
+      "hiragana": "うまい",
+      "romaji": "umai",
+      "vietnamese_meaning": "Ngon",
+      "word_type": "adjective",
+      "japanese_example": "うまい料理。",
+      "example_meaning": "Món ăn ngon.",
+      "mnemonic_tip": "U mê: Món ăn ngon làm người ta u mê.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1822,
       "lesson_id": 43,
       "hiragana": "まずい",
@@ -18850,6 +24475,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1827,
+      "lesson_id": 43,
+      "hiragana": "いまにも",
+      "romaji": "imanimo",
+      "vietnamese_meaning": "Bất cứ lúc nào (sắp xảy ra)",
+      "word_type": "adverb",
+      "japanese_example": "今にも雨が降りそうです。",
+      "example_meaning": "Trời sắp mưa đến nơi rồi.",
+      "mnemonic_tip": "Im á ni mô: Mọi thứ đang im ắng, ni mô (nơi mô) cũng sắp xảy ra chuyện rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "今にも",
+      "pitch_accent": 0
+    },
+    {
       "id": 1828,
       "lesson_id": 43,
       "hiragana": "わあ",
@@ -18862,6 +24502,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1829,
+      "lesson_id": 43,
+      "hiragana": "かいいん",
+      "romaji": "kaiin",
+      "vietnamese_meaning": "Hội viên",
+      "word_type": "noun",
+      "japanese_example": "会員になります。",
+      "example_meaning": "Trở thành hội viên.",
+      "mnemonic_tip": "Cái in: Cái in thẻ thành viên cho hội viên mới.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "会員",
       "pitch_accent": 0
     },
     {
@@ -18880,6 +24535,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1831,
+      "lesson_id": 43,
+      "hiragana": "ねんれい",
+      "romaji": "nenrei",
+      "vietnamese_meaning": "Tuổi tác",
+      "word_type": "noun",
+      "japanese_example": "年齢を聞きます。",
+      "example_meaning": "Hỏi tuổi.",
+      "mnemonic_tip": "Nên lê: Đến tuổi này thì nên lê bước thong dong.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "年齢",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1832,
+      "lesson_id": 43,
+      "hiragana": "しゅうにゅう",
+      "romaji": "shuunyuu",
+      "vietnamese_meaning": "Thu nhập",
+      "word_type": "noun",
+      "japanese_example": "収入が増えます。",
+      "example_meaning": "Thu nhập tăng lên.",
+      "mnemonic_tip": "Sưu nhiều: Sưu tầm nhiều tiền thì thu nhập mới cao.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "収入",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1833,
+      "lesson_id": 43,
+      "hiragana": "ぴったり",
+      "romaji": "pittari",
+      "vietnamese_meaning": "Vừa vặn, chính xác",
+      "word_type": "adverb",
+      "japanese_example": "サイズがぴったりです。",
+      "example_meaning": "Kích cỡ vừa vặn.",
+      "mnemonic_tip": "Bít tờ ri: Bít cái tờ ri lại cho vừa vặn, chính xác.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1834,
+      "lesson_id": 43,
+      "hiragana": "そのうえ",
+      "romaji": "sonoue",
+      "vietnamese_meaning": "Thêm vào đó, hơn nữa",
+      "word_type": "adverb",
+      "japanese_example": "そのうえ、安いですね。",
+      "example_meaning": "Hơn nữa, nó lại rẻ nữa.",
+      "mnemonic_tip": "Sơn u ê: Sơn thêm vào đó, u ê hết cả tay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "その上",
+      "pitch_accent": 0
+    },
+    {
       "id": 1835,
       "lesson_id": 43,
       "hiragana": "という",
@@ -18889,6 +24604,36 @@ module.exports = {
       "japanese_example": "田中と言います。",
       "example_meaning": "Tôi tên là Tanaka.",
       "mnemonic_tip": "Tôi im á: Tên tôi im á, đừng gọi to.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1836,
+      "lesson_id": 43,
+      "hiragana": "ばら",
+      "romaji": "bara",
+      "vietnamese_meaning": "Hoa hồng",
+      "word_type": "noun",
+      "japanese_example": "バラの花。",
+      "example_meaning": "Hoa hồng.",
+      "mnemonic_tip": "Ba ra: Ba mang đóa hoa hồng ra cho mẹ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1837,
+      "lesson_id": 43,
+      "hiragana": "ドライブ",
+      "romaji": "doraibu",
+      "vietnamese_meaning": "Lái xe đi dạo",
+      "word_type": "noun",
+      "japanese_example": "ドライブに行きます。",
+      "example_meaning": "Đi lái xe dạo phố.",
+      "mnemonic_tip": "Đổ lại bù: Lái xe đi dạo rồi đổ lại bù thêm xăng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "",
@@ -18907,6 +24652,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "安い",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1840,
+      "lesson_id": 44,
+      "hiragana": "にくい",
+      "romaji": "nikui",
+      "vietnamese_meaning": "khó làm gì đó",
+      "word_type": "suffix",
+      "japanese_example": "この肉は 食べにくいです。",
+      "example_meaning": "Thịt này dai khó ăn.",
+      "mnemonic_tip": "Mẹo: 'Nị cười' vì khó khăn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1841,
+      "lesson_id": 44,
+      "hiragana": "こい",
+      "romaji": "koi",
+      "vietnamese_meaning": "đậm, đặc",
+      "word_type": "adjective",
+      "japanese_example": "味が 濃いです。",
+      "example_meaning": "Hương vị đậm đà.",
+      "mnemonic_tip": "Mẹo: 'Cá coi' đậm màu sắc.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "濃い",
       "pitch_accent": 0
     },
     {
@@ -18985,6 +24760,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1847,
+      "lesson_id": 44,
+      "hiragana": "すべる",
+      "romaji": "suberu",
+      "vietnamese_meaning": "Trượt, trơn",
+      "word_type": "verb",
+      "japanese_example": "雪で 滑ります。",
+      "example_meaning": "Trượt vì tuyết.",
+      "mnemonic_tip": "Su-be-ri-masu: 'Sư bị rớt' - ông sư đi trên băng bị trượt rớt xuống.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "滑る",
+      "pitch_accent": 0
+    },
+    {
       "id": 1849,
       "lesson_id": 44,
       "hiragana": "ちょうせつする",
@@ -19060,6 +24850,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1854,
+      "lesson_id": 44,
+      "hiragana": "なみだ",
+      "romaji": "namida",
+      "vietnamese_meaning": "Nước mắt",
+      "word_type": "noun",
+      "japanese_example": "涙が 出ます。",
+      "example_meaning": "Nước mắt rơi.",
+      "mnemonic_tip": "Na-mi-da: 'Nạ mi đa' - nạ (mặt) có mi (nhiều) da dính nước mắt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "涙",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1855,
+      "lesson_id": 44,
+      "hiragana": "わしょく",
+      "romaji": "washoku",
+      "vietnamese_meaning": "Món ăn Nhật",
+      "word_type": "noun",
+      "japanese_example": "和食は 美味しいです。",
+      "example_meaning": "Món ăn Nhật ngon.",
+      "mnemonic_tip": "Wa-sho-ku: 'Wa' (như Wow) - Món Nhật làm mình phải thốt lên Wow.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "和食",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1856,
+      "lesson_id": 44,
+      "hiragana": "ようしょく",
+      "romaji": "youshoku",
+      "vietnamese_meaning": "Món ăn Tây",
+      "word_type": "noun",
+      "japanese_example": "洋食を 食べます。",
+      "example_meaning": "Ăn món Tây.",
+      "mnemonic_tip": "You-sho-ku: 'Yêu' - Yêu thích món Tây.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "洋食",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1857,
+      "lesson_id": 44,
+      "hiragana": "おかず",
+      "romaji": "okazu",
+      "vietnamese_meaning": "Thức ăn (ăn kèm cơm)",
+      "word_type": "noun",
+      "japanese_example": "今日のおかずは 何ですか。",
+      "example_meaning": "Thức ăn hôm nay là gì?",
+      "mnemonic_tip": "O-ka-zu: 'Ô cá dự' - món thức ăn có cá dự định cho bữa tối.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1859,
       "lesson_id": 44,
       "hiragana": "はんぶん",
@@ -19072,6 +24922,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "半分",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1862,
+      "lesson_id": 44,
+      "hiragana": "たんす",
+      "romaji": "tansu",
+      "vietnamese_meaning": "Tủ quần áo",
+      "word_type": "noun",
+      "japanese_example": "たんすに 服を 入れます。",
+      "example_meaning": "Cho quần áo vào tủ.",
+      "mnemonic_tip": "Tan-su: 'Tán sự' - cái tủ này tán sự (rất nhiều đồ) bên trong.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1863,
+      "lesson_id": 44,
+      "hiragana": "せんたくもの",
+      "romaji": "sentakumono",
+      "vietnamese_meaning": "Đồ giặt",
+      "word_type": "noun",
+      "japanese_example": "洗濯物を 干します。",
+      "example_meaning": "Phơi đồ giặt.",
+      "mnemonic_tip": "Sen-ta-ku: 'Săn' - phải đi săn lùng đồ để giặt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "洗濯物",
       "pitch_accent": 0
     },
     {
@@ -19180,6 +25060,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1874,
+      "lesson_id": 44,
+      "hiragana": "じゅんじょ",
+      "romaji": "junjo",
+      "vietnamese_meaning": "Thứ tự",
+      "word_type": "noun",
+      "japanese_example": "正しい 順序で 並べてください。",
+      "example_meaning": "Hãy xếp theo thứ tự đúng.",
+      "mnemonic_tip": "Jun-jo: 'Dân dở' - Dân dở người thường hay làm việc lộn xộn, không theo thứ tự.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "順序",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1875,
+      "lesson_id": 44,
+      "hiragana": "ひょうげん",
+      "romaji": "hyougen",
+      "vietnamese_meaning": "Cách diễn đạt",
+      "word_type": "noun",
+      "japanese_example": "面白い 表現を 使います。",
+      "example_meaning": "Sử dụng cách diễn đạt thú vị.",
+      "mnemonic_tip": "Hyou-gen: 'Hiệu ghen' - Cái hiệu (tiệm) này ghen tị với cách diễn đạt của tiệm kia.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "表現",
+      "pitch_accent": 0
+    },
+    {
       "id": 1876,
       "lesson_id": 44,
       "hiragana": "わかれる",
@@ -19192,6 +25102,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "別れる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1877,
+      "lesson_id": 44,
+      "hiragana": "これら",
+      "romaji": "korera",
+      "vietnamese_meaning": "Những cái này",
+      "word_type": "pronoun",
+      "japanese_example": "これらは 私の 本です。",
+      "example_meaning": "Những cái này là sách của tôi.",
+      "mnemonic_tip": "Ko-re-ra: 'Cứ la' - Những cái này cứ la lối làm ồn suốt, gom lại hết đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -19270,6 +25195,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1886,
+      "lesson_id": 45,
+      "hiragana": "しんじる",
+      "romaji": "shinjiru",
+      "vietnamese_meaning": "Tin tưởng",
+      "word_type": "verb",
+      "japanese_example": "私は彼を信じています。",
+      "example_meaning": "Tôi tin tưởng anh ấy.",
+      "mnemonic_tip": "Shin (sinh) ra là phải 'tin' nhau thì đời mới tươi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "信じる",
+      "pitch_accent": 0
+    },
+    {
       "id": 1887,
       "lesson_id": 45,
       "hiragana": "キャンセルする",
@@ -19282,6 +25222,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1888,
+      "lesson_id": 45,
+      "hiragana": "うまくいく",
+      "romaji": "umakuiku",
+      "vietnamese_meaning": "Thuận lợi, tốt đẹp",
+      "word_type": "verb",
+      "japanese_example": "すべてがうまくいきますように。",
+      "example_meaning": "Chúc mọi thứ đều thuận lợi.",
+      "mnemonic_tip": "U ma (u mà) cứ đi (ikimasu) thì mọi việc sẽ 'thuận lợi' trôi chảy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "上手くいく",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1889,
+      "lesson_id": 45,
+      "hiragana": "ほしょうしょ",
+      "romaji": "hoshousho",
+      "vietnamese_meaning": "Phiếu bảo hành",
+      "word_type": "noun",
+      "japanese_example": "保証書を大切に保管してください。",
+      "example_meaning": "Hãy cất giữ phiếu bảo hành cẩn thận.",
+      "mnemonic_tip": "Hô (hồ) show show: Hô lên là show cái 'phiếu bảo hành' ra cho người ta sửa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "保証書",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1890,
+      "lesson_id": 45,
+      "hiragana": "りょうしゅうしょ",
+      "romaji": "ryoushuusho",
+      "vietnamese_meaning": "Hóa đơn",
+      "word_type": "noun",
+      "japanese_example": "領収書をいただけますか。",
+      "example_meaning": "Bạn cho tôi xin hóa đơn được không?",
+      "mnemonic_tip": "Rượu thu số: Thu số tiền rượu vào 'hóa đơn' cho khách.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "領収書",
       "pitch_accent": 0
     },
     {
@@ -19300,6 +25285,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1893,
+      "lesson_id": 45,
+      "hiragana": "キャンプ",
+      "romaji": "kyanpu",
+      "vietnamese_meaning": "Cắm trại",
+      "word_type": "noun",
+      "japanese_example": "週末はキャンプに行きます。",
+      "example_meaning": "Cuối tuần tôi đi cắm trại.",
+      "mnemonic_tip": "Căn (căn) cái lều đi 'cắm trại' là chuẩn nhất.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1894,
       "lesson_id": 45,
       "hiragana": "かかり",
@@ -19315,6 +25315,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1895,
+      "lesson_id": 45,
+      "hiragana": "ちゅうし",
+      "romaji": "chuushi",
+      "vietnamese_meaning": "Hủy bỏ, dừng lại",
+      "word_type": "noun",
+      "japanese_example": "雨で試合が中止になりました。",
+      "example_meaning": "Trận đấu đã bị hủy do trời mưa.",
+      "mnemonic_tip": "Chú sĩ (chú sĩ quan) bảo 'dừng lại' lệnh rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "中止",
+      "pitch_accent": 0
+    },
+    {
       "id": 1896,
       "lesson_id": 45,
       "hiragana": "てん",
@@ -19327,6 +25342,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "点",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1898,
+      "lesson_id": 45,
+      "hiragana": "えんさつ",
+      "romaji": "ensatsu",
+      "vietnamese_meaning": "Tờ tiền Yên, tiền giấy",
+      "word_type": "noun",
+      "japanese_example": "千円札を出します。",
+      "example_meaning": "Tôi đưa ra tờ tiền 1000 yên.",
+      "mnemonic_tip": "Ên (ên) sao (sao) tờ 'tiền giấy' lại bay đi mất.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "円札",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1899,
+      "lesson_id": 45,
+      "hiragana": "ちゃんと",
+      "romaji": "chanto",
+      "vietnamese_meaning": "Đàng hoàng, chỉnh chu",
+      "word_type": "adverb",
+      "japanese_example": "ちゃんと片付けてください。",
+      "example_meaning": "Hãy dọn dẹp đàng hoàng đi.",
+      "mnemonic_tip": "Chẳng tỏ: Chẳng tỏ ra là người 'đàng hoàng' gì cả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1900,
+      "lesson_id": 45,
+      "hiragana": "きゅうに",
+      "romaji": "kyuuni",
+      "vietnamese_meaning": "Đột nhiên",
+      "word_type": "adverb",
+      "japanese_example": "急に雨が降ってきました。",
+      "example_meaning": "Đột nhiên trời đổ mưa.",
+      "mnemonic_tip": "Kíu ni (cứu ni): Đột nhiên thấy người ta hét 'cứu ni' (cứu ni cô).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "急に",
       "pitch_accent": 0
     },
     {
@@ -19375,6 +25435,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1904,
+      "lesson_id": 45,
+      "hiragana": "コース",
+      "romaji": "koosu",
+      "vietnamese_meaning": "Đường chạy",
+      "word_type": "noun",
+      "japanese_example": "長いロースを走ります。",
+      "example_meaning": "Tôi chạy trên đường chạy dài.",
+      "mnemonic_tip": "Rố (rỗ) u (u) sờ: Đường chạy này 'rỗ' làm trầy da quá.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1905,
+      "lesson_id": 45,
+      "hiragana": "スタート",
+      "romaji": "sutaato",
+      "vietnamese_meaning": "Bắt đầu",
+      "word_type": "noun",
+      "japanese_example": "マラソンがスタートしました。",
+      "example_meaning": "Cuộc chạy marathon đã bắt đầu.",
+      "mnemonic_tip": "Sút tà (tà áo) to: 'Bắt đầu' chạy thì sút vào tà áo to của đối thủ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1906,
       "lesson_id": 45,
       "hiragana": "ゆうしょうする",
@@ -19387,6 +25477,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "優勝する",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1907,
+      "lesson_id": 45,
+      "hiragana": "なやみ",
+      "romaji": "nayami",
+      "vietnamese_meaning": "Nỗi lo âu",
+      "word_type": "noun",
+      "japanese_example": "悩みがあるなら言ってください。",
+      "example_meaning": "Nếu có nỗi lo nào thì hãy nói ra nhé.",
+      "mnemonic_tip": "Này mì: 'Nỗi lo' là tối nay lấy gì để ăn mì đây.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "悩み",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1908,
+      "lesson_id": 45,
+      "hiragana": "めざましとけい",
+      "romaji": "mezamashitokei",
+      "vietnamese_meaning": "Đồng hồ báo thức",
+      "word_type": "noun",
+      "japanese_example": "目覚まし時計を6時にかけます。",
+      "example_meaning": "Tôi đặt báo thức lúc 6 giờ.",
+      "mnemonic_tip": "Mê (mê) dạ (dạ dày) mã (mã) chỉ: 'Đồng hồ báo thức' làm ta mê ngủ, dạ dày cũng muốn ngủ tiếp.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "目覚まし時計",
       "pitch_accent": 0
     },
     {
@@ -19405,6 +25525,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1910,
+      "lesson_id": 45,
+      "hiragana": "かいとう",
+      "romaji": "kaitou",
+      "vietnamese_meaning": "Trả lời",
+      "word_type": "noun",
+      "japanese_example": "質問に回答してください。",
+      "example_meaning": "Hãy trả lời câu hỏi.",
+      "mnemonic_tip": "Cái (cái) tô: 'Trả lời' xong thì đi ăn cái tô mì.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "回答",
+      "pitch_accent": 0
+    },
+    {
       "id": 1911,
       "lesson_id": 45,
       "hiragana": "セットする",
@@ -19414,6 +25549,36 @@ module.exports = {
       "japanese_example": "目覚まし時計をセットします。",
       "example_meaning": "Cài đặt đồng hồ báo thức.",
       "mnemonic_tip": "Set-to-shimasu: 'Sét to chi mát' - Cài đặt máy lạnh ở chế độ sét to cho mát.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1912,
+      "lesson_id": 45,
+      "hiragana": "それでも",
+      "romaji": "soredemo",
+      "vietnamese_meaning": "tuy nhiên, mặc dù vậy",
+      "word_type": "adverb",
+      "japanese_example": "雨が降りました。それでも、出かけます。",
+      "example_meaning": "Trời đã mưa. Tuy nhiên, tôi vẫn sẽ ra ngoài.",
+      "mnemonic_tip": "Sore-demo: 'Sờ rê đêm mô' - Tuy nhiên, vẫn sờ được rèm cửa trong đêm tối.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1913,
+      "lesson_id": 46,
+      "hiragana": "ばかり",
+      "romaji": "bakari",
+      "vietnamese_meaning": "vừa mới [cảm giác chủ quan]",
+      "word_type": "suffix",
+      "japanese_example": "日本に 来たばかりです。",
+      "example_meaning": "Tôi vừa mới đến Nhật Bản.",
+      "mnemonic_tip": "Mẹo: 'Ba cả' ngày vừa mới về.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "",
@@ -19495,6 +25660,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1920,
+      "lesson_id": 46,
+      "hiragana": "かえってくる",
+      "romaji": "kaettekuru",
+      "vietnamese_meaning": "Trở về",
+      "word_type": "verb",
+      "japanese_example": "父が帰ってきます。",
+      "example_meaning": "Bố tôi đang trở về nhà.",
+      "mnemonic_tip": "Ka-e-t-te-ki-ma-su: \"Kẻ lại tí ki (kì) ma sứ\" - Kẻ lại tí kì lạ, sứ giả đã trở về.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "帰ってくる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1922,
+      "lesson_id": 46,
+      "hiragana": "たくはいびん",
+      "romaji": "takuhaibin",
+      "vietnamese_meaning": "Chuyển phát nhanh tại nhà",
+      "word_type": "noun",
+      "japanese_example": "宅配便が届きました。",
+      "example_meaning": "Dịch vụ chuyển phát nhanh đã đến nơi.",
+      "mnemonic_tip": "Ta-ku-hai-bin: \"Ta cứ hay bín\" - Ta cứ hay bín (biến) mất khỏi nhà để chuyển phát nhanh phải giao đồ ở cửa.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "宅配便",
+      "pitch_accent": 0
+    },
+    {
       "id": 1923,
       "lesson_id": 46,
       "hiragana": "げんいん",
@@ -19522,6 +25717,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "注射",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1925,
+      "lesson_id": 46,
+      "hiragana": "しょくよく",
+      "romaji": "shokuyoku",
+      "vietnamese_meaning": "Khẩu vị, cảm giác thèm ăn",
+      "word_type": "noun",
+      "japanese_example": "食欲がありません。",
+      "example_meaning": "Tôi không có cảm giác thèm ăn.",
+      "mnemonic_tip": "Sho-ku-yo-ku: \"Sô-cô-la yêu\" - Thấy sô-cô-la là yêu, là thèm ăn ngay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "食欲",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1926,
+      "lesson_id": 46,
+      "hiragana": "パンフレット",
+      "romaji": "panfuretto",
+      "vietnamese_meaning": "Tờ rơi, tập quảng cáo",
+      "word_type": "noun",
+      "japanese_example": "観光のパンフレットを見ます。",
+      "example_meaning": "Tôi xem tờ rơi quảng cáo du lịch.",
+      "mnemonic_tip": "Pan-fu-ret-to: \"Phan (fan) phơ rét to\" - Fan hâm mộ phơ phất tay khi đọc tờ rơi quảng cáo to.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -19567,6 +25792,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1931,
+      "lesson_id": 46,
+      "hiragana": "たったいま",
+      "romaji": "tattaima",
+      "vietnamese_meaning": "Ngay bây giờ",
+      "word_type": "adverb",
+      "japanese_example": "たった今帰りました。",
+      "example_meaning": "Tôi vừa mới về ngay bây giờ.",
+      "mnemonic_tip": "Tat-tai-ma: \"Tát tai ma\" - Ma vừa mới tát tai mình ngay bây giờ luôn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "たった今",
       "pitch_accent": 0
     },
     {
@@ -19645,6 +25885,66 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1939,
+      "lesson_id": 46,
+      "hiragana": "ちしき",
+      "romaji": "chishiki",
+      "vietnamese_meaning": "Kiến thức",
+      "word_type": "noun",
+      "japanese_example": "専門的な知識。",
+      "example_meaning": "Kiến thức chuyên môn.",
+      "mnemonic_tip": "Chi-shi-ki: \"Chỉ sĩ ki\" - Chỉ sĩ tử thì cần nhiều kiến thức (ki).",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "知識",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1941,
+      "lesson_id": 46,
+      "hiragana": "てにはいる",
+      "romaji": "tenihairu",
+      "vietnamese_meaning": "Nhận được, có được [thông tin ~]",
+      "word_type": "verb",
+      "japanese_example": "情報が手に入ります。",
+      "example_meaning": "Thông tin đã đến tay tôi.",
+      "mnemonic_tip": "Te-ni-hai-ri-masu: \"Tay ni hải (hài) ri ma sứ\" - Đôi tay này nhận được (thông tin) hài hước từ sứ giả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "手に入る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1942,
+      "lesson_id": 46,
+      "hiragana": "システム",
+      "romaji": "shisutemu",
+      "vietnamese_meaning": "Hệ thống",
+      "word_type": "noun",
+      "japanese_example": "新しいシステム。",
+      "example_meaning": "Hệ thống mới.",
+      "mnemonic_tip": "Shi-su-te-mu: \"Sĩ sư tê mu\" - Hệ thống của sư sĩ làm tê tái mù mắt.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1943,
+      "lesson_id": 46,
+      "hiragana": "キーワード",
+      "romaji": "kiiwādo",
+      "vietnamese_meaning": "Từ khóa",
+      "word_type": "noun",
+      "japanese_example": "キーワードを入力します。",
+      "example_meaning": "Tôi nhập từ khóa.",
+      "mnemonic_tip": "Ki-i-waa-do: \"Ki, y wa, đo\" - Ki và y đã đo được từ khóa này.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 1945,
       "lesson_id": 46,
       "hiragana": "にゅうりょくする",
@@ -19660,18 +25960,63 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 1950,
-      "lesson_id": 47,
-      "hiragana": "おと",
-      "romaji": "oto",
-      "vietnamese_meaning": "âm thanh, tiếng động",
+      "id": 1946,
+      "lesson_id": 46,
+      "hiragana": "びょう",
+      "romaji": "byou",
+      "vietnamese_meaning": "giây",
       "word_type": "noun",
-      "japanese_example": "大きな音が します。",
-      "example_meaning": "Có tiếng động lớn phát ra.",
-      "mnemonic_tip": "Mẹo: Tiếng còi 'Ô tô' kêu bíp bíp.",
+      "japanese_example": "あと5秒で着きます。",
+      "example_meaning": "5 giây nữa tôi sẽ đến nơi.",
+      "mnemonic_tip": "Bẹo - Nhanh như một cái bẹo tai, chỉ mất đúng 1 giây.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
-      "kanji_word": "音",
+      "kanji_word": "秒",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1948,
+      "lesson_id": 47,
+      "hiragana": "そうです",
+      "romaji": "soudesu",
+      "vietnamese_meaning": "nghe nói [truyền đạt tin đồn]",
+      "word_type": "suffix",
+      "japanese_example": "天気予報によると 雨だそうです。",
+      "example_meaning": "Theo dự báo thời tiết nghe nói trời sẽ mưa.",
+      "mnemonic_tip": "Mẹo: 'Số đầy' tai nghe tin đồn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1949,
+      "lesson_id": 47,
+      "hiragana": "ようです",
+      "romaji": "youdesu",
+      "vietnamese_meaning": "hình như là [phán đoán cảm giác]",
+      "word_type": "suffix",
+      "japanese_example": "誰か いるようです。",
+      "example_meaning": "Hình như có ai đó ở trong phòng.",
+      "mnemonic_tip": "Mẹo: 'Yêu đầy' cảm giác nhớ nhung.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1951,
+      "lesson_id": 47,
+      "hiragana": "におい",
+      "romaji": "nioi",
+      "vietnamese_meaning": "mùi hương",
+      "word_type": "noun",
+      "japanese_example": "いい匂いが します。",
+      "example_meaning": "Có mùi thơm tỏa ra.",
+      "mnemonic_tip": "Mẹo: 'Nỉ ôi' ngửi mùi thơm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "匂い",
       "pitch_accent": 0
     },
     {
@@ -19687,6 +26032,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "味",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1955,
+      "lesson_id": 47,
+      "hiragana": "ながいきする",
+      "romaji": "nagaikisuru",
+      "vietnamese_meaning": "sống lâu",
+      "word_type": "verb",
+      "japanese_example": "祖母は長生きしています。",
+      "example_meaning": "Bà tôi đang sống rất thọ.",
+      "mnemonic_tip": "Naga-iki - 'Nà gái ki' - Nàng gái kia sống thọ quá, chắc ăn ở hiền lành.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "長生きする",
       "pitch_accent": 0
     },
     {
@@ -19717,6 +26077,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "天気予報",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1962,
+      "lesson_id": 47,
+      "hiragana": "はっぴょう",
+      "romaji": "happyou",
+      "vietnamese_meaning": "phát biểu, công bố",
+      "word_type": "noun",
+      "japanese_example": "今日の発表は頑張ります。",
+      "example_meaning": "Tôi sẽ cố gắng cho bài phát biểu hôm nay.",
+      "mnemonic_tip": "Happyou - 'Háp pồ' - Háp một hơi rồi phát biểu công bố thôi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "発表",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1963,
+      "lesson_id": 47,
+      "hiragana": "じっけん",
+      "romaji": "jikken",
+      "vietnamese_meaning": "thí nghiệm",
+      "word_type": "noun",
+      "japanese_example": "科学の実験をします。",
+      "example_meaning": "Làm thí nghiệm khoa học.",
+      "mnemonic_tip": "Jikken - 'Dịch kiến' - Dịch chuyển con kiến làm thí nghiệm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "実験",
       "pitch_accent": 0
     },
     {
@@ -19777,6 +26167,51 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "文学",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1968,
+      "lesson_id": 47,
+      "hiragana": "パトカー",
+      "romaji": "patokaa",
+      "vietnamese_meaning": "xe cảnh sát",
+      "word_type": "noun",
+      "japanese_example": "パトカーが走っています。",
+      "example_meaning": "Xe cảnh sát đang chạy trên đường.",
+      "mnemonic_tip": "Patokaa - 'Pa to qua' - Còi xe cảnh sát 'pa' to quá làm ai cũng sợ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1969,
+      "lesson_id": 47,
+      "hiragana": "きゅうきゅうしゃ",
+      "romaji": "kyuukyuusha",
+      "vietnamese_meaning": "xe cứu thương",
+      "word_type": "noun",
+      "japanese_example": "救急車を呼びました。",
+      "example_meaning": "Tôi đã gọi xe cứu thương.",
+      "mnemonic_tip": "Kyuukyuu - 'Cứu cứu' - Xe cứu thương đi đâu cũng kêu cứu cứu.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "救急車",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1970,
+      "lesson_id": 47,
+      "hiragana": "さんせい",
+      "romaji": "sansei",
+      "vietnamese_meaning": "tán thành",
+      "word_type": "noun",
+      "japanese_example": "私はその意見に賛成です。",
+      "example_meaning": "Tôi tán thành ý kiến đó.",
+      "mnemonic_tip": "Sansei - 'Sẵn xê' - Tôi sẵn sàng 'xê' dịch ý kiến để tán thành với bạn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "賛成",
       "pitch_accent": 0
     },
     {
@@ -19855,6 +26290,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1977,
+      "lesson_id": 47,
+      "hiragana": "あいて",
+      "romaji": "aite",
+      "vietnamese_meaning": "đối phương, bạn đời",
+      "word_type": "noun",
+      "japanese_example": "結婚の相手を探します。",
+      "example_meaning": "Tôi đang tìm đối tượng kết hôn.",
+      "mnemonic_tip": "Aite - 'Ai tê' - Người đối diện xinh đẹp quá làm tôi 'ai tê' (tê tái) hết cả người.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "相手",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1978,
+      "lesson_id": 47,
+      "hiragana": "しりあう",
+      "romaji": "shiriau",
+      "vietnamese_meaning": "làm quen, quen biết",
+      "word_type": "verb",
+      "japanese_example": "パーティーで知り合いました。",
+      "example_meaning": "Tôi đã quen biết họ tại bữa tiệc.",
+      "mnemonic_tip": "Shiriaimasu - 'Si ri ai' - 'Si ri ai' (suy đi tính lại) cuối cùng cũng làm quen được nhau.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "知り合う",
+      "pitch_accent": 0
+    },
+    {
       "id": 1980,
       "lesson_id": 47,
       "hiragana": "くらべる",
@@ -19870,6 +26335,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 1981,
+      "lesson_id": 47,
+      "hiragana": "はかせ",
+      "romaji": "hakase",
+      "vietnamese_meaning": "Tiến sĩ",
+      "word_type": "noun",
+      "japanese_example": "彼は科学の博士です。",
+      "example_meaning": "Anh ấy là tiến sĩ khoa học.",
+      "mnemonic_tip": "Hakase: 'Há cái' - Một ông tiến sĩ lúc nào cũng mở miệng 'há cái' miệng ra để giảng bài cho học trò.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "博士",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1982,
+      "lesson_id": 47,
+      "hiragana": "のう",
+      "romaji": "nou",
+      "vietnamese_meaning": "Não",
+      "word_type": "noun",
+      "japanese_example": "脳を鍛えることが大切です。",
+      "example_meaning": "Rèn luyện não bộ là việc rất quan trọng.",
+      "mnemonic_tip": "Nou: 'Nâu' - Não bộ của người thông minh thường có màu nâu đậm vì chứa đầy kiến thức.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "脳",
+      "pitch_accent": 0
+    },
+    {
       "id": 1985,
       "lesson_id": 47,
       "hiragana": "しらべ",
@@ -19882,6 +26377,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "調べ",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1986,
+      "lesson_id": 47,
+      "hiragana": "けしょう",
+      "romaji": "keshou",
+      "vietnamese_meaning": "Trang điểm [trang điểm: けしょうをします]",
+      "word_type": "verb",
+      "japanese_example": "毎日化粧をします。",
+      "example_meaning": "Tôi trang điểm mỗi ngày.",
+      "mnemonic_tip": "Keshou: 'Kê show' - Mỗi sáng trang điểm xong là phải đứng 'kê' mặt vào gương để 'show' (khoe) vẻ đẹp bản thân.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "化粧",
       "pitch_accent": 0
     },
     {
@@ -19932,8 +26442,8 @@ module.exports = {
     {
       "id": 1992,
       "lesson_id": 48,
-      "hiragana": "おろする",
-      "romaji": "orosuru",
+      "hiragana": "おろす",
+      "romaji": "orosu",
       "vietnamese_meaning": "hạ xuống, dỡ xuống",
       "word_type": "verb",
       "japanese_example": "荷物を車から降ろします。",
@@ -19941,7 +26451,7 @@ module.exports = {
       "mnemonic_tip": "Ô rồi mát - Hạ đồ từ trên cao xuống nên thấy mát mẻ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
-      "kanji_word": "降ろす",
+      "kanji_word": "下ろす",
       "pitch_accent": 0
     },
     {
@@ -19972,6 +26482,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
       "kanji_word": "嫌",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1995,
+      "lesson_id": 48,
+      "hiragana": "じゅく",
+      "romaji": "juku",
+      "vietnamese_meaning": "trường học thêm",
+      "word_type": "noun",
+      "japanese_example": "塾へ行きます。",
+      "example_meaning": "Tôi đi đến trường học thêm.",
+      "mnemonic_tip": "Du cu - Đi học thêm để sau này du cư đi nước ngoài.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "塾",
+      "pitch_accent": 0
+    },
+    {
+      "id": 1996,
+      "lesson_id": 48,
+      "hiragana": "スケジュール",
+      "romaji": "sukejuuru",
+      "vietnamese_meaning": "lịch trình",
+      "word_type": "noun",
+      "japanese_example": "スケジュールを確認します。",
+      "example_meaning": "Tôi kiểm tra lịch trình.",
+      "mnemonic_tip": "Sự kê du - Sự kê khai lịch trình cho chuyến du lịch.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.728994+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -20035,6 +26575,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2004,
+      "lesson_id": 48,
+      "hiragana": "えいぎょう",
+      "romaji": "eigyou",
+      "vietnamese_meaning": "kinh doanh",
+      "word_type": "noun",
+      "japanese_example": "営業を始めます。",
+      "example_meaning": "Chúng tôi bắt đầu kinh doanh.",
+      "mnemonic_tip": "Êi ghi ông - Êi, kinh doanh thì phải ghi chép lại cho ông chủ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "営業",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2005,
+      "lesson_id": 48,
+      "hiragana": "それまでに",
+      "romaji": "sore made ni",
+      "vietnamese_meaning": "trước lúc đó",
+      "word_type": "adverb",
+      "japanese_example": "それまでに終わらせます。",
+      "example_meaning": "Tôi sẽ kết thúc trước lúc đó.",
+      "mnemonic_tip": "So rẻ mà đi - Mua đồ trước lúc đó vì giá nó so với rẻ mà đi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2006,
+      "lesson_id": 48,
+      "hiragana": "かまいません",
+      "romaji": "kamaimasen",
+      "vietnamese_meaning": "không sao, không vấn đề gì",
+      "word_type": "expression",
+      "japanese_example": "いいえ、かまいません。",
+      "example_meaning": "Không, không sao đâu.",
+      "mnemonic_tip": "Cả mai mất sen - Cả mai mất sen cũng không sao cả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "構いません",
+      "pitch_accent": 0
+    },
+    {
       "id": 2007,
       "lesson_id": 48,
       "hiragana": "たのしむ",
@@ -20050,6 +26635,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2008,
+      "lesson_id": 48,
+      "hiragana": "もともと",
+      "romaji": "motomoto",
+      "vietnamese_meaning": "vốn dĩ, nguyên là",
+      "word_type": "adverb",
+      "japanese_example": "もともといい人です。",
+      "example_meaning": "Vốn dĩ anh ấy là người tốt.",
+      "mnemonic_tip": "Một tô mô tô - Vốn dĩ anh ấy có một tô mô tô.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "元々",
+      "pitch_accent": 0
+    },
+    {
       "id": 2009,
       "lesson_id": 48,
       "hiragana": "かわりをする",
@@ -20059,6 +26659,21 @@ module.exports = {
       "japanese_example": "先生の代わりをします。",
       "example_meaning": "Tôi thay thế cho thầy giáo.",
       "mnemonic_tip": "Cả vợ đi - Phải thay thế cả vợ đi làm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "代わりをする",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2010,
+      "lesson_id": 48,
+      "hiragana": "スピード",
+      "romaji": "supiido",
+      "vietnamese_meaning": "tốc độ",
+      "word_type": "noun",
+      "japanese_example": "スピードを出します。",
+      "example_meaning": "Tôi tăng tốc độ.",
+      "mnemonic_tip": "Sút bi đi - Tốc độ nhanh như sút viên bi đi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "",
@@ -20077,6 +26692,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "競争する",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2014,
+      "lesson_id": 48,
+      "hiragana": "すがた",
+      "romaji": "sugata",
+      "vietnamese_meaning": "hình dáng, bóng dáng",
+      "word_type": "noun",
+      "japanese_example": "美しい姿です。",
+      "example_meaning": "Một hình dáng thật đẹp.",
+      "mnemonic_tip": "Sự gà ta - Hình dáng giống sự gà ta đang chạy.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "姿",
       "pitch_accent": 0
     },
     {
@@ -20110,6 +26740,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2018,
+      "lesson_id": 49,
+      "hiragana": "いらっしゃる",
+      "romaji": "irassharu",
+      "vietnamese_meaning": "đi, đến, ở (tôn kính của いきます/きます/います)",
+      "word_type": "verb",
+      "japanese_example": "社長は どちらにいらっしゃいますか。",
+      "example_meaning": "Giám đốc đang ở đâu ạ?",
+      "mnemonic_tip": "Mẹo: 'Y ra sân' đón khách quý đến.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "いらっしゃる",
+      "pitch_accent": 0
+    },
+    {
       "id": 2019,
       "lesson_id": 49,
       "hiragana": "めしあがる",
@@ -20122,6 +26767,36 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "召し上がる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2020,
+      "lesson_id": 49,
+      "hiragana": "おっしゃる",
+      "romaji": "ossharu",
+      "vietnamese_meaning": "nói (tôn kính của いいます)",
+      "word_type": "verb",
+      "japanese_example": "社長が そうおっしゃいました。",
+      "example_meaning": "Giám đốc đã nói như vậy.",
+      "mnemonic_tip": "Mẹo: 'Ối sướng' vì được nghe giám đốc nói.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "仰る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2021,
+      "lesson_id": 49,
+      "hiragana": "なさる",
+      "romaji": "nasaru",
+      "vietnamese_meaning": "làm (tôn kính của します)",
+      "word_type": "verb",
+      "japanese_example": "週末は 何をなさいますか。",
+      "example_meaning": "Cuối tuần anh/chị làm gì ạ?",
+      "mnemonic_tip": "Mẹo: 'Nên say' làm việc tích cực.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "なさる",
       "pitch_accent": 0
     },
     {
@@ -20157,8 +26832,8 @@ module.exports = {
     {
       "id": 2025,
       "lesson_id": 49,
-      "hiragana": "すごする",
-      "romaji": "sugosuru",
+      "hiragana": "すごす",
+      "romaji": "sugosu",
       "vietnamese_meaning": "trải qua (thời gian)",
       "word_type": "verb",
       "japanese_example": "夏休みを日本で過ごします。",
@@ -20182,6 +26857,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "夜",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2028,
+      "lesson_id": 49,
+      "hiragana": "あいさつ",
+      "romaji": "aisatsu",
+      "vietnamese_meaning": "chào hỏi",
+      "word_type": "noun",
+      "japanese_example": "挨拶をします。",
+      "example_meaning": "Thực hiện việc chào hỏi.",
+      "mnemonic_tip": "Ai sát - Ai đứng sát mình thì phải chào hỏi ngay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "挨拶",
       "pitch_accent": 0
     },
     {
@@ -20230,6 +26920,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2032,
+      "lesson_id": 49,
+      "hiragana": "バスてい",
+      "romaji": "basutei",
+      "vietnamese_meaning": "trạm xe buýt",
+      "word_type": "noun",
+      "japanese_example": "バス停で待ちます。",
+      "example_meaning": "Tôi đợi ở trạm xe buýt.",
+      "mnemonic_tip": "Bát tơi - Đợi xe buýt ở trạm nên ăn bát mì tơi tả.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "バス停",
+      "pitch_accent": 0
+    },
+    {
       "id": 2033,
       "lesson_id": 49,
       "hiragana": "ぼうえき",
@@ -20245,6 +26950,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2035,
+      "lesson_id": 49,
+      "hiragana": "かえりに",
+      "romaji": "kaerini",
+      "vietnamese_meaning": "trên đường về",
+      "word_type": "noun",
+      "japanese_example": "帰りにコンビニに寄ります。",
+      "example_meaning": "Trên đường về tôi ghé vào cửa hàng tiện lợi.",
+      "mnemonic_tip": "Cà ri ni - Trên đường về ghé vào ăn cà ri ni (nỉ) non.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "帰りに",
+      "pitch_accent": 0
+    },
+    {
       "id": 2036,
       "lesson_id": 49,
       "hiragana": "たまに",
@@ -20256,7 +26976,7 @@ module.exports = {
       "mnemonic_tip": "Ta mà ni - Ta mà ni (nỉ) là thỉnh thoảng mới nói lời yêu thương.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
-      "kanji_word": "偶に",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -20271,7 +26991,22 @@ module.exports = {
       "mnemonic_tip": "Chít tò mò - Không tò mò gì cả, nên không hiểu tí nào.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
-      "kanji_word": "些とも",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2038,
+      "lesson_id": 49,
+      "hiragana": "えんりょなく",
+      "romaji": "enryonaku",
+      "vietnamese_meaning": "không khách sáo, không ngần ngại",
+      "word_type": "adverb",
+      "japanese_example": "遠慮なく召し上がってください。",
+      "example_meaning": "Xin mời cứ tự nhiên dùng bữa.",
+      "mnemonic_tip": "En liều nặc - Đừng 'en' (e ngại) liều mạng ăn uống không khách sáo.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "遠慮なく",
       "pitch_accent": 0
     },
     {
@@ -20322,8 +27057,8 @@ module.exports = {
     {
       "id": 2043,
       "lesson_id": 49,
-      "hiragana": "しつれいいたする",
-      "romaji": "shitsureiitasuru",
+      "hiragana": "しつれいいたします",
+      "romaji": "shitsurei itashimasu",
       "vietnamese_meaning": "Xin lỗi / Xin phép (khiêm nhường ngữ)",
       "word_type": "expression",
       "japanese_example": "失礼いたします。",
@@ -20331,7 +27066,52 @@ module.exports = {
       "mnemonic_tip": "Sít rèm - Xin phép 'sít rèm' (khép rèm) để không thất lễ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
-      "kanji_word": "",
+      "kanji_word": "失礼いたします",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2044,
+      "lesson_id": 49,
+      "hiragana": "こうし",
+      "romaji": "koushi",
+      "vietnamese_meaning": "giảng viên, báo cáo viên",
+      "word_type": "noun",
+      "japanese_example": "講師を招きます。",
+      "example_meaning": "Tôi mời giảng viên đến.",
+      "mnemonic_tip": "Cố sĩ - Giảng viên phải là người cố gắng như một sĩ tử.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "講師",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2045,
+      "lesson_id": 49,
+      "hiragana": "おおくの~",
+      "romaji": "ooku no",
+      "vietnamese_meaning": "nhiều ~",
+      "word_type": "noun",
+      "japanese_example": "多くの学生がいます。",
+      "example_meaning": "Có nhiều học sinh.",
+      "mnemonic_tip": "Ô cự - Ô cự (cứ) nhiều người thế này thì làm sao chen qua được.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "多くの～",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2046,
+      "lesson_id": 49,
+      "hiragana": "さくひん",
+      "romaji": "saku-hin",
+      "vietnamese_meaning": "tác phẩm",
+      "word_type": "noun",
+      "japanese_example": "素晴らしい作品ですね。",
+      "example_meaning": "Tác phẩm tuyệt vời quá nhỉ.",
+      "mnemonic_tip": "Sắc pin - Tác phẩm này đẹp đến mức phải 'sắc pin' (sạc pin) điện thoại chụp ngay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "作品",
       "pitch_accent": 0
     },
     {
@@ -20350,6 +27130,36 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2048,
+      "lesson_id": 49,
+      "hiragana": "せかいてきに",
+      "romaji": "sekaitekini",
+      "vietnamese_meaning": "mang tính toàn cầu, đẳng cấp thế giới",
+      "word_type": "adverb",
+      "japanese_example": "彼は世界的に有名な作家です。",
+      "example_meaning": "Anh ấy là một nhà văn nổi tiếng thế giới.",
+      "mnemonic_tip": "Sê ca i tê ki ni: Sê (dế) ca i (ai) tê (thế) ki (kỳ) ni (nhi). Dế ca ai thế, kỳ nhi, nổi tiếng toàn thế giới.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "世界的に",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2049,
+      "lesson_id": 49,
+      "hiragana": "さっか",
+      "romaji": "sakka",
+      "vietnamese_meaning": "tác giả, nhà văn",
+      "word_type": "noun",
+      "japanese_example": "彼女は新しい作家を支援している。",
+      "example_meaning": "Cô ấy đang hỗ trợ các tác giả mới.",
+      "mnemonic_tip": "Sắc ca: Nhà văn này viết rất Sắc, ca tụng ai là người đó nổi tiếng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "作家",
+      "pitch_accent": 0
+    },
+    {
       "id": 2050,
       "lesson_id": 49,
       "hiragana": "~でございます。",
@@ -20362,6 +27172,81 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2051,
+      "lesson_id": 49,
+      "hiragana": "ちょうなん",
+      "romaji": "chounan",
+      "vietnamese_meaning": "con trai trưởng",
+      "word_type": "noun",
+      "japanese_example": "彼は三兄弟の長男です。",
+      "example_meaning": "Anh ấy là con trai trưởng trong ba anh em.",
+      "mnemonic_tip": "Cho nan: Cho (con) nan (nạn) - Con trai trưởng luôn là người gánh vác mọi nạn cho cả gia đình.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "長男",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2052,
+      "lesson_id": 49,
+      "hiragana": "しょうがい",
+      "romaji": "shougai",
+      "vietnamese_meaning": "khiếm khuyết, chướng ngại",
+      "word_type": "noun",
+      "japanese_example": "彼は身体に障害があります。",
+      "example_meaning": "Anh ấy bị khiếm khuyết về cơ thể.",
+      "mnemonic_tip": "Sô gai: Sô (xô) gai - Đi đường mà xô phải gai thì quả là một chướng ngại lớn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "障害",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2053,
+      "lesson_id": 49,
+      "hiragana": "おもちです",
+      "romaji": "omochidesu",
+      "vietnamese_meaning": "có (cách nói kính ngữ của motteimasu)",
+      "word_type": "verb",
+      "japanese_example": "先生はお持ちですか。",
+      "example_meaning": "Thầy có (cái đó) không ạ?",
+      "mnemonic_tip": "Ô mô chi đê sự: Ô (cái) mô (mô) chi (gì) đê (để) sự (chắc) - Có cái gì thì hãy nói lịch sự là ô mô chi đê sự.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "お持ちです",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2054,
+      "lesson_id": 49,
+      "hiragana": "さっきょく",
+      "romaji": "sakkyoku",
+      "vietnamese_meaning": "sáng tác nhạc",
+      "word_type": "verb",
+      "japanese_example": "彼は毎日作曲をしています。",
+      "example_meaning": "Anh ấy sáng tác nhạc mỗi ngày.",
+      "mnemonic_tip": "Sắc kyoku: Sắc (thật) kyoku (kỳ) - Sáng tác nhạc phải thật kỳ công mới hay.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "作曲",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2055,
+      "lesson_id": 49,
+      "hiragana": "かつどう",
+      "romaji": "katsudou",
+      "vietnamese_meaning": "hoạt động",
+      "word_type": "noun",
+      "japanese_example": "ボランティア活動に参加します。",
+      "example_meaning": "Tôi sẽ tham gia hoạt động tình nguyện.",
+      "mnemonic_tip": "Cắt đuôi: Cắt đuôi con mèo đang chạy nhảy hoạt động liên tục.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "活動",
       "pitch_accent": 0
     },
     {
@@ -20392,6 +27277,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "参る",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2061,
+      "lesson_id": 50,
+      "hiragana": "いただく",
+      "romaji": "itadaku",
+      "vietnamese_meaning": "ăn, uống, nhận (khiêm nhường của たべます/のみます/もらいます)",
+      "word_type": "verb",
+      "japanese_example": "お茶を いただきます。",
+      "example_meaning": "Tôi xin phép dùng trà ạ.",
+      "mnemonic_tip": "Mẹo: 'Y tá đã' xin nhận.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "頂く",
       "pitch_accent": 0
     },
     {
@@ -20440,6 +27340,81 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2066,
+      "lesson_id": 50,
+      "hiragana": "ぞんじる",
+      "romaji": "zonjiru",
+      "vietnamese_meaning": "biết (khiêm nhường ngữ)",
+      "word_type": "verb",
+      "japanese_example": "存じております。",
+      "example_meaning": "Tôi biết việc đó ạ.",
+      "mnemonic_tip": "Dòng dã (zonjimasu) - Dòng dã bao năm tôi vẫn biết điều này.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "存じる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2067,
+      "lesson_id": 50,
+      "hiragana": "おめにかかる",
+      "romaji": "omenikakaru",
+      "vietnamese_meaning": "gặp (khiêm nhường ngữ)",
+      "word_type": "verb",
+      "japanese_example": "お目にかかります。",
+      "example_meaning": "Rất hân hạnh được gặp ngài.",
+      "mnemonic_tip": "Ô mê nì (ome ni) - Ô mê nì (mê cái nì) khi lần đầu gặp gỡ.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "お目にかかる",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2068,
+      "lesson_id": 50,
+      "hiragana": "ございます",
+      "romaji": "gozaimasu",
+      "vietnamese_meaning": "có (lịch sự của あります)",
+      "word_type": "expression",
+      "japanese_example": "在庫がございます。",
+      "example_meaning": "Hàng vẫn còn trong kho ạ.",
+      "mnemonic_tip": "Gỗ dài (gozaimasu) - Gỗ dài quá, chúng tôi hiện có sẵn trong kho.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2070,
+      "lesson_id": 50,
+      "hiragana": "わたくし",
+      "romaji": "watakushi",
+      "vietnamese_meaning": "tôi (khiêm nhường ngữ)",
+      "word_type": "pronoun",
+      "japanese_example": "私、わたくし。",
+      "example_meaning": "Tôi là (tự xưng khiêm tốn).",
+      "mnemonic_tip": "Và ta cứ (watakushi) - Và ta cứ xưng là 'tôi' cho khiêm tốn.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "私",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2071,
+      "lesson_id": 50,
+      "hiragana": "ガイド",
+      "romaji": "gaido",
+      "vietnamese_meaning": "hướng dẫn viên du lịch",
+      "word_type": "noun",
+      "japanese_example": "ガイドと行きます。",
+      "example_meaning": "Tôi đi cùng với hướng dẫn viên.",
+      "mnemonic_tip": "Gái đồ (gaido) - Gái đồ (gái giỏi) làm hướng dẫn viên.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
       "id": 2072,
       "lesson_id": 50,
       "hiragana": "おたく",
@@ -20467,6 +27442,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "郊外",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2074,
+      "lesson_id": 50,
+      "hiragana": "アルバム",
+      "romaji": "arubamu",
+      "vietnamese_meaning": "album, tập ảnh",
+      "word_type": "noun",
+      "japanese_example": "写真をアルバムに入れる。",
+      "example_meaning": "Tôi bỏ ảnh vào tập ảnh.",
+      "mnemonic_tip": "A, rủ băm (arubamu) - A, rủ băm ảnh ra để xếp vào album.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -20515,6 +27505,51 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2078,
+      "lesson_id": 50,
+      "hiragana": "はんとし",
+      "romaji": "hantoshi",
+      "vietnamese_meaning": "nửa năm",
+      "word_type": "noun",
+      "japanese_example": "半年日本にいます。",
+      "example_meaning": "Tôi ở Nhật nửa năm.",
+      "mnemonic_tip": "Hàn tới (hantoshi) - Hàn tới đây được nửa năm rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "半年",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2079,
+      "lesson_id": 50,
+      "hiragana": "さいしょに",
+      "romaji": "saishoni",
+      "vietnamese_meaning": "đầu tiên",
+      "word_type": "adverb",
+      "japanese_example": "最初に挨拶します。",
+      "example_meaning": "Đầu tiên tôi xin chào hỏi.",
+      "mnemonic_tip": "Sai sờ ni (saishoni) - Sai sờ ni (sờ nỉ) là hành động đầu tiên.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "最初に",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2080,
+      "lesson_id": 50,
+      "hiragana": "さいごに",
+      "romaji": "saigoni",
+      "vietnamese_meaning": "cuối cùng",
+      "word_type": "adverb",
+      "japanese_example": "最後に歌います。",
+      "example_meaning": "Cuối cùng tôi sẽ hát.",
+      "mnemonic_tip": "Sai gò ni (saigoni) - Sai gò ni là việc cuối cùng phải làm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "最後に",
+      "pitch_accent": 0
+    },
+    {
       "id": 2081,
       "lesson_id": 50,
       "hiragana": "ただいま",
@@ -20560,6 +27595,81 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2084,
+      "lesson_id": 50,
+      "hiragana": "しょうきん",
+      "romaji": "shoukin",
+      "vietnamese_meaning": "tiền thưởng",
+      "word_type": "noun",
+      "japanese_example": "賞金を貰いました。",
+      "example_meaning": "Tôi đã nhận được tiền thưởng.",
+      "mnemonic_tip": "Show kin (shoukin) - Show tiền thưởng ra cho mọi người xem.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "賞金",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2085,
+      "lesson_id": 50,
+      "hiragana": "きりん",
+      "romaji": "kirin",
+      "vietnamese_meaning": "hươu cao cổ",
+      "word_type": "noun",
+      "japanese_example": "麒麟は首が長いです。",
+      "example_meaning": "Hươu cao cổ có cái cổ dài.",
+      "mnemonic_tip": "Kì rình (kirin) - Con hươu đứng kì rình xem mọi người.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2086,
+      "lesson_id": 50,
+      "hiragana": "ぞう",
+      "romaji": "zou",
+      "vietnamese_meaning": "con voi",
+      "word_type": "noun",
+      "japanese_example": "像は大きいです。",
+      "example_meaning": "Con voi rất to lớn.",
+      "mnemonic_tip": "Dô (zou) - Con voi to quá, mọi người tránh 'dô' (vô) kẻo bị đụng.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "象",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2087,
+      "lesson_id": 50,
+      "hiragana": "ころ",
+      "romaji": "koro",
+      "vietnamese_meaning": "Thời điểm, ngày tháng",
+      "word_type": "noun",
+      "japanese_example": "子供の頃、よく遊びました。",
+      "example_meaning": "Khi còn bé, tôi đã chơi rất nhiều.",
+      "mnemonic_tip": "Cơ rô: Cứ tới thời điểm này là nhớ tới rô phi, ngày xưa hay đi bắt cá rô.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "頃",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2088,
+      "lesson_id": 50,
+      "hiragana": "かなう",
+      "romaji": "kanau",
+      "vietnamese_meaning": "Thành hiện thực (ước mơ)",
+      "word_type": "verb",
+      "japanese_example": "夢が叶います。",
+      "example_meaning": "Ước mơ trở thành hiện thực.",
+      "mnemonic_tip": "Ca na y mát: Ca hát ngoài bãi biển khi ước mơ thành hiện thực thì thấy mát lắm.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "叶う",
+      "pitch_accent": 0
+    },
+    {
       "id": 2089,
       "lesson_id": 50,
       "hiragana": "ひとことよろしいでしょうか",
@@ -20590,6 +27700,21 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2091,
+      "lesson_id": 50,
+      "hiragana": "こころから",
+      "romaji": "kokoro kara",
+      "vietnamese_meaning": "Từ tận đáy lòng",
+      "word_type": "adverb",
+      "japanese_example": "心から感謝しています。",
+      "example_meaning": "Tôi biết ơn từ tận đáy lòng.",
+      "mnemonic_tip": "Cô cô ra: Cô cô từ tận đáy lòng nói ra những lời chân thành.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "心から",
+      "pitch_accent": 0
+    },
+    {
       "id": 2092,
       "lesson_id": 50,
       "hiragana": "かんしゃする",
@@ -20602,6 +27727,21 @@ module.exports = {
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
       "kanji_word": "感謝する",
+      "pitch_accent": 0
+    },
+    {
+      "id": 2093,
+      "lesson_id": 50,
+      "hiragana": "はいけい",
+      "romaji": "haikei",
+      "vietnamese_meaning": "Kính gửi (phần đầu thư)",
+      "word_type": "noun",
+      "japanese_example": "拝啓、お元気ですか。",
+      "example_meaning": "Kính gửi, bạn có khỏe không.",
+      "mnemonic_tip": "Hai kê: Hai con gà đang mổ thư, trên đó viết Kính gửi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "拝啓",
       "pitch_accent": 0
     },
     {
@@ -20620,10 +27760,25 @@ module.exports = {
       "pitch_accent": 0
     },
     {
+      "id": 2095,
+      "lesson_id": 50,
+      "hiragana": "めいわくをかける",
+      "romaji": "meiwakuokakeru",
+      "vietnamese_meaning": "Làm phiền, gây phiền toái",
+      "word_type": "verb",
+      "japanese_example": "皆さんに迷惑をかけます。",
+      "example_meaning": "Tôi làm phiền mọi người quá.",
+      "mnemonic_tip": "Mê quá cào: Đang làm phiền người ta mà cứ đòi cào, mê quá rồi.",
+      "image_url": "",
+      "created_at": "2026-07-23T09:25:10.909622+00:00",
+      "kanji_word": "迷惑をかける",
+      "pitch_accent": 0
+    },
+    {
       "id": 2096,
       "lesson_id": 50,
-      "hiragana": "いかする",
-      "romaji": "ikasuru",
+      "hiragana": "いかす",
+      "romaji": "ikasu",
       "vietnamese_meaning": "Phát huy, tận dụng",
       "word_type": "verb",
       "japanese_example": "経験を生かします。",
@@ -20650,18 +27805,18 @@ module.exports = {
       "pitch_accent": 0
     },
     {
-      "id": 2112,
+      "id": 2098,
       "lesson_id": 50,
-      "hiragana": "もうします",
-      "romaji": "moushimasu",
-      "vietnamese_meaning": "Nói, tên là (khiêm nhường ngữ của 言います)",
-      "word_type": "verb",
-      "japanese_example": "ミラーと 申します。アメリカから 来ました。",
-      "example_meaning": "Tôi tên là Miller. Tôi đến từ Mỹ.",
-      "mnemonic_tip": "Mẹo nhớ: 'Thân' (申) - chắp tay khiêm tốn thưa gửi danh tính của bản thân.",
+      "hiragana": "けいぐ",
+      "romaji": "keigu",
+      "vietnamese_meaning": "Trân trọng/Kính chào (phần cuối thư)",
+      "word_type": "noun",
+      "japanese_example": "敬具。",
+      "example_meaning": "Trân trọng.",
+      "mnemonic_tip": "Kê gù: Kính chào xong rồi thì đi về, cái lưng hơi gù.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
-      "kanji_word": "申します",
+      "kanji_word": "敬具",
       "pitch_accent": 0
     },
     {
@@ -20676,7 +27831,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bá' (伯) - bác trai lớn tuổi hiền từ, đứng tựa cửa nhà chào đón cháu con.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "工業"
+      "kanji_word": "工業",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3003,
@@ -20690,7 +27846,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bá mẫu' (伯母) - bác gái dịu dàng luôn làm bánh ngon cho các cháu.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "年"
+      "kanji_word": "年",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3004,
@@ -20704,7 +27861,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Khẩu' (口) vuông vức vẽ hình chiếc miệng xinh xắn tươi cười.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "口"
+      "kanji_word": "口",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3005,
@@ -20718,7 +27876,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ngoại quốc nhân' (外国人) - người bạn đến từ quốc gia bên ngoài lãnh thổ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "外国人"
+      "kanji_word": "外国人",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3006,
@@ -20732,7 +27891,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Diệp' (葉) - chiếc lá xanh mướt đu đưa trên cành cây đón nắng mai.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "夏休み"
+      "kanji_word": "夏休み",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3007,
@@ -20746,7 +27906,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Gia đình' (家庭) - mái ấm có khoảng sân vườn và tình yêu thương che chở.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "家庭"
+      "kanji_word": "家庭",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3008,
@@ -20760,7 +27921,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sâm' (森) - ba chữ Mộc (cây) đứng chụm lại thành khu rừng rậm rạp xanh tốt.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "牛肉"
+      "kanji_word": "牛肉",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3009,
@@ -20774,7 +27936,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bối quảng' (背広) - bộ áo com-lê lưng rộng sang trọng cho nam giới.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "背広"
+      "kanji_word": "背広",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3010,
@@ -20788,7 +27951,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Vạn niên bút' (万年筆) - cây bút máy bền bỉ viết suốt vạn năm không hỏng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "万年筆"
+      "kanji_word": "万年筆",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3011,
@@ -20802,7 +27966,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Phương' (方) - chỉ phương hướng hoặc vị khách quý phương xa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "豚肉"
+      "kanji_word": "豚肉",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3012,
@@ -20816,7 +27981,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bát bách ốc' (八百屋) - cửa hàng bán tám trăm thứ rau củ quả tươi ngon.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "八百屋"
+      "kanji_word": "八百屋",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3013,
@@ -20830,7 +27996,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Vô lý' (yori) quá, sao xe đạp lại có thể chạy nhanh hơn ô tô được!",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3014,
@@ -20844,7 +28011,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Lương' (良) - làm việc lương thiện thì luôn nhận lại kết quả tốt đẹp.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "良い"
+      "kanji_word": "良い",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3015,
@@ -20858,7 +28026,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mina' là cô bạn dễ thương được tất cả mọi người yêu mến.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "皆"
+      "kanji_word": "皆",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3017,
@@ -20872,7 +28041,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Quốc' (国) - đường biên giới khép kín bảo vệ viên ngọc quý ở bên trong.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "国"
+      "kanji_word": "国",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3018,
@@ -20886,7 +28056,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Chất vấn' (質問) - chất vấn hỏi han để làm sáng tỏ bản chất vấn đề.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "質問"
+      "kanji_word": "質問",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3019,
@@ -20900,7 +28071,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cảnh quan' (警官) - viên quan cảnh sát luôn cảnh giác giữ gìn an ninh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "警官"
+      "kanji_word": "警官",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3020,
@@ -20914,7 +28086,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Nhị' (二) gồm hai nét gạch ngang song song biểu thị số 2.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "二"
+      "kanji_word": "二",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3021,
@@ -20928,7 +28101,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Lập phái' (立派) - đứng thẳng hiên ngang đàng hoàng, phong độ xuất chúng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "立派"
+      "kanji_word": "立派",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3022,
@@ -20942,7 +28116,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Nữ' (女) vẽ hình dáng người phụ nữ dịu dàng khép nép duyên dáng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "女"
+      "kanji_word": "女",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3023,
@@ -20956,7 +28131,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phiên hiệu' (番号) - chuỗi số thứ tự định danh chính xác rõ ràng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "番号"
+      "kanji_word": "番号",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3024,
@@ -20970,7 +28146,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Bị va đập kêu toáng lên 'Í-tai' vì quá đau buốt.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "痛い"
+      "kanji_word": "痛い",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3025,
@@ -20984,7 +28161,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Thập' (十) hình dấu cộng (+), tròn mười phân vẹn mười.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "十"
+      "kanji_word": "十",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3026,
@@ -20998,7 +28176,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Kết cấu' (結構) - kết cấu chặt chẽ vừa vặn, như vậy là đủ rồi.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "結構"
+      "kanji_word": "結構",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3027,
@@ -21012,7 +28191,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Bị kim châm kêu 'Ít-tê' vì vết thương nhói đau tức thì.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "文章"
+      "kanji_word": "文章",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3028,
@@ -21026,7 +28206,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Bát' (八) mở rộng về hai phía dưới, biểu tượng phát tài phát lộc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "八"
+      "kanji_word": "八",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3029,
@@ -21040,7 +28221,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Lục' (六) vững vàng sáu hướng biểu thị con số 6 may mắn.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "六"
+      "kanji_word": "六",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3030,
@@ -21054,7 +28236,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ngũ' (五) gồm năm nét gạch nối liền vững chãi tượng trưng số 5.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "晴れ"
+      "kanji_word": "晴れ",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3031,
@@ -21068,7 +28251,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tung' (縦) - đường tung hoành ngang dọc, hướng thẳng đứng từ trên xuống.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "縦"
+      "kanji_word": "縦",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3032,
@@ -21082,7 +28266,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tiên' (先) trong tiên phong - người luôn đi trước một bước.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "先"
+      "kanji_word": "先",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3033,
@@ -21096,7 +28281,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Giai' (階) - từng bậc thang đá dẫn lối bước lên tầng cao mới.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "一日"
+      "kanji_word": "一日",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3035,
@@ -21110,7 +28296,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Page' trong tiếng Anh có nghĩa là trang sách.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "頁"
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3036,
@@ -21124,7 +28311,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Nhất' (一) nét gạch ngang đơn giản bắt đầu chuỗi số đếm tự nhiên.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "一"
+      "kanji_word": "一",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3037,
@@ -21138,7 +28326,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Âm 'baa' ngân dài trìu mến gọi người bà kính yêu.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お祖母さん"
+      "kanji_word": "お祖母さん",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3038,
@@ -21152,7 +28341,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cửu' (九) - con số chín cửu đỉnh tượng trưng cho sự trường cửu.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "黄色い"
+      "kanji_word": "黄色い",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3039,
@@ -21166,7 +28356,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tịch phạn' (夕飯) - mâm cơm tối sum vầy ấm cúng sau ngày dài.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "夕飯"
+      "kanji_word": "夕飯",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3040,
@@ -21180,7 +28371,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tam' (三) gồm ba nét gạch ngang tượng trưng cho số 3.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3041,
@@ -21194,7 +28386,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mawari' là đi tuần quanh - bác cảnh sát đi tuần quanh các con phố.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お巡りさん"
+      "kanji_word": "お巡りさん",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3042,
@@ -21208,7 +28401,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Lê' (rei) rụng sạch cây, không còn quả nào trên cành (số 0).",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "零"
+      "kanji_word": "零",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3043,
@@ -21222,7 +28416,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thử' (chu) - con chuột nhỏ kêu chít chít gặm nhấm góc nhà.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "粁"
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3044,
@@ -21236,7 +28431,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mao' (ke) - sợi lông tơ mềm mại phủ trên áo len giữ ấm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "燐寸"
+      "kanji_word": "燐寸",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3045,
@@ -21244,13 +28440,14 @@ module.exports = {
       "hiragana": "もういちど",
       "romaji": "mouichido",
       "vietnamese_meaning": "Một lần nữa",
-      "word_type": "verb",
+      "word_type": "adverb",
       "japanese_example": "もう一度 言ってください。",
       "example_meaning": "Xin vui lòng nhắc lại một lần nữa.",
       "mnemonic_tip": "Mẹo nhớ: 'Ngoại' (soto) - cánh cửa mở ra khoảng không gian rộng lớn bên ngoài.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "もう一度"
+      "kanji_word": "もう一度",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3046,
@@ -21264,7 +28461,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bối' (背) - sống lưng thẳng tắp đo chiều cao của con người.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "背"
+      "kanji_word": "背",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3047,
@@ -21278,7 +28476,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đẳng' (等) - liệt kê bình đẳng các vật phẩm: vân vân, các thứ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "等"
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3048,
@@ -21292,7 +28491,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Pen' - cây bút bi, bút mực cầm tay tiện lợi.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3049,
@@ -21306,7 +28506,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thao tác' (操作) - đôi tay khéo léo điều khiển máy móc vận hành.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3050,
@@ -21320,7 +28521,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Họa xá' (画廊) - phòng triển lãm tranh nghệ thuật đặc sắc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "米"
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3051,
@@ -21334,7 +28536,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thổ sản' (土産) - món quà lưu niệm ý nghĩa mang về từ chuyến đi.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お土産"
+      "kanji_word": "お土産",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3052,
@@ -21342,13 +28545,14 @@ module.exports = {
       "hiragana": "ぜんぜん",
       "romaji": "zenzen",
       "vietnamese_meaning": "Hoàn toàn không (đi kèm với thể phủ định)",
-      "word_type": "verb",
+      "word_type": "adverb",
       "japanese_example": "日本語の ニュースは まだ 全然 分かりません。",
       "example_meaning": "Tôi vẫn hoàn toàn chưa hiểu được bản tin thời sự tiếng Nhật.",
       "mnemonic_tip": "Mẹo nhớ: 'Toàn nhiên' (全然) - quét sạch toàn bộ, số 0 tròn trĩnh hoàn toàn không.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "全然"
+      "kanji_word": "全然",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3053,
@@ -21362,7 +28566,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Giác vi' (覚悟) - chuẩn bị tâm lý sẵn sàng đối mặt thử thách.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3054,
@@ -21376,7 +28581,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Record' - chiếc đĩa than cổ điển quay tròn phát điệu nhạc hoài niệm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3055,
@@ -21390,7 +28596,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tape' - cuộn băng dính trong suốt dán chặt mép giấy.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3056,
@@ -21404,7 +28611,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dịch' (eki) - chất lỏng tinh dầu thơm nhỏ giọt nuôi dưỡng làn da.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3057,
@@ -21418,7 +28626,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Slipper' - đôi dép bệt êm ái xỏ chân đi lại trong nhà ấm áp.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3058,
@@ -21432,7 +28641,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Chiết' (ori) - chiếc lồng tre đan nhốt thú rừng chắc chắn.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3061,
@@ -21446,7 +28656,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sô-pha' (soba) kê ở ngay bên cạnh cửa sổ đón gió.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "側"
+      "kanji_word": "側",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3062,
@@ -21460,7 +28671,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Môn' (門) vẽ hai cánh cổng lớn mở sang hai bên.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "門"
+      "kanji_word": "門",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3063,
@@ -21474,7 +28686,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Thất' (七) hình chiếc lưỡi câu vung lên biểu thị số bảy.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "七"
+      "kanji_word": "七",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3064,
@@ -21488,7 +28701,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Tứ' (四) bao bọc bốn góc phương hướng vững chãi.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "四"
+      "kanji_word": "四",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3065,
@@ -21502,7 +28716,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mãnh' (皿) - chiếc đĩa tròn phẳng phiu đựng thức ăn đẹp mắt.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お皿"
+      "kanji_word": "お皿",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3066,
@@ -21516,7 +28731,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Lời chào thân mật trước khi tạm biệt bạn bè: 'Jaa, mata ne!'.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3067,
@@ -21530,7 +28746,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ngao' (hoka) - mở rộng ra những điều khác ngoài phạm vi hiện tại.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "２０歳"
+      "kanji_word": "２０歳",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3068,
@@ -21544,7 +28761,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Canh nguội tanh ăn vào cứ 'nôn nao' (nurui) không ngon miệng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "温い"
+      "kanji_word": "温い",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3069,
@@ -21558,7 +28776,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Xâu chuỗi hành động trước và hành động nối tiếp theo sau.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3070,
@@ -21572,7 +28791,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tác văn' (作文) - viết nên bài văn biểu đạt cảm xúc chân thành.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "作文"
+      "kanji_word": "作文",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3072,
@@ -21586,7 +28806,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bưu tiện phiên hiệu' - mã số định danh giúp gửi thư chuẩn xác.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "郵便番号"
+      "kanji_word": "郵便番号",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3073,
@@ -21600,7 +28821,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Curry' - món cơm cà ri thơm lừng cay nồng hấp dẫn.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3074,
@@ -21614,7 +28836,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tự dẫn' (字引) - lần theo từng nét chữ để tra cứu nghĩa từ điển.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "字引"
+      "kanji_word": "字引",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3075,
@@ -21628,7 +28851,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Đài radio kết hợp máy cassette nghe băng hoài niệm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3076,
@@ -21642,7 +28866,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cực' (kyoku) - điểm cực hạn, đỉnh cao nhất của sự việc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "腕"
+      "kanji_word": "腕",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3077,
@@ -21656,7 +28881,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sản nghiệp' (産業) - ngành công nghiệp sản xuất của cải phồn vinh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "産業"
+      "kanji_word": "産業",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3078,
@@ -21670,7 +28896,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thiết' (tetsu) - thanh sắt thép cứng rắn làm đường ray xe lửa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "飛行場"
+      "kanji_word": "飛行場",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3079,
@@ -21684,7 +28911,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hạch' (kaku) - hạt nhân cốt lõi trung tâm của vấn đề.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "葡萄"
+      "kanji_word": "葡萄",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3080,
@@ -21698,7 +28926,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Chú ý' (注意) - rót trọn tâm ý để cẩn thận quan sát phòng ngừa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "注意"
+      "kanji_word": "注意",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3082,
@@ -21712,7 +28941,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mizu' (nước) tụ lại thành vùng biển hồ bao la (mizuumi).",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "湖"
+      "kanji_word": "湖",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3083,
@@ -21726,7 +28956,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Số học' (数学) - bộ môn khoa học khám phá các con số kỳ diệu.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "数学"
+      "kanji_word": "数学",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3084,
@@ -21740,7 +28971,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tự do' (自由) - bay bổng như cánh chim giữa bầu trời rộng mở.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "自由"
+      "kanji_word": "自由",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3085,
@@ -21754,7 +28986,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Khí lực' (気力) - nguồn năng lượng tinh thần dồi dào hăng hái.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "森"
+      "kanji_word": "森",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3086,
@@ -21768,7 +29001,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Khí phân' (気分) - tâm trạng và cảm xúc tươi vui ngập tràn trong lòng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "気分"
+      "kanji_word": "気分",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3087,
@@ -21782,7 +29016,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tiến độ' (進度) - nhịp độ tiến triển từng bước vững chắc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "残念"
+      "kanji_word": "残念",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3088,
@@ -21796,7 +29031,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cơ năng' (機能) - chức năng hoạt động thông minh của thiết bị.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "卒業"
+      "kanji_word": "卒業",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3089,
@@ -21810,7 +29046,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thực' (shoku) - miếng ăn mộc mạc nuôi dưỡng cơ thể khỏe mạnh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "雲"
+      "kanji_word": "雲",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3090,
@@ -21824,7 +29061,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Khí quan' (器官) - các cơ quan bộ phận trong cơ thể sinh vật.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "光"
+      "kanji_word": "光",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3091,
@@ -21838,7 +29076,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cơ quan' (機関) - cỗ máy đầu máy xe lửa kéo đoàn tàu băng băng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "指"
+      "kanji_word": "指",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3092,
@@ -21852,7 +29091,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sinh sản' (生産) - chế tạo làm ra nhiều hàng hóa giá trị.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "生産"
+      "kanji_word": "生産",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3093,
@@ -21866,7 +29106,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thủy vực' (水域) - vùng nước mênh mông sông hồ đầm phá.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "遊び"
+      "kanji_word": "遊び",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3094,
@@ -21880,7 +29121,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tân' (shin) - điều mới mẻ mang làn gió tươi mát tới cuộc sống.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "入学"
+      "kanji_word": "入学",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3095,
@@ -21894,7 +29136,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Giới' (kai) - ranh giới phân định rõ ràng giữa các khu vực.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "背中"
+      "kanji_word": "背中",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3096,
@@ -21908,7 +29151,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hiệu trưởng' (校長) - người đứng đầu lãnh đạo toàn trường học.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "校長"
+      "kanji_word": "校長",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3097,
@@ -21922,7 +29166,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thị dân' (市民) - những cư dân công dân sinh sống nơi đô thị.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "市民"
+      "kanji_word": "市民",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3098,
@@ -21936,7 +29181,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phương' (kata) - cách thức, phương pháp tiến hành công việc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "砂"
+      "kanji_word": "砂",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3099,
@@ -21950,7 +29196,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ngoại lai' (gairai) - từ ngữ hoặc sản vật từ nước ngoài du nhập vào.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "絹"
+      "kanji_word": "絹",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3100,
@@ -21964,7 +29211,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Địa bàn' (jiban) - nền móng đất đai vững chãi làm bệ đỡ xây nhà.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "糸"
+      "kanji_word": "糸",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3101,
@@ -21978,7 +29226,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tây dương' (西洋) - nền văn minh các nước phương Tây cổ kính.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "西洋"
+      "kanji_word": "西洋",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3102,
@@ -21992,7 +29241,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tiền bối' (先輩) - người đi trước, ta phải kính cẩn học hỏi theo.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "先輩"
+      "kanji_word": "先輩",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3103,
@@ -22006,7 +29256,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phong' (kaze) - làn gió thoảng bay làm rung rinh ngọn cỏ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "林"
+      "kanji_word": "林",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3104,
@@ -22020,7 +29271,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Nhu đạo' (柔道) - lấy nhu thắng cương, môn võ truyền thống Nhật Bản.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "柔道"
+      "kanji_word": "柔道",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3105,
@@ -22034,7 +29286,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Địa vị' (chii) - vị trí và vai trò được xã hội tôn trọng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "高等学校"
+      "kanji_word": "高等学校",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3106,
@@ -22048,7 +29301,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đại chúng' (taishuu) - đông đảo quần chúng nhân dân trong xã hội.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "花見"
+      "kanji_word": "花見",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3107,
@@ -22062,7 +29316,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Công vụ viên' (公務員) - người cống hiến cho công vụ nhà nước.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "公務員"
+      "kanji_word": "公務員",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3108,
@@ -22076,7 +29331,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Trọng yếu' (juuyou) - việc cốt lõi mang tầm quan trọng hàng đầu.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "辞典"
+      "kanji_word": "辞典",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3109,
@@ -22090,7 +29346,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thủ vị' (shui) - giữ vững vị trí dẫn đầu bảng xếp hạng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "喧嘩"
+      "kanji_word": "喧嘩",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3110,
@@ -22104,7 +29361,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đặc thù' (tokushu) - nét đặc biệt độc đáo không giống ai.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "髭"
+      "kanji_word": "髭",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3111,
@@ -22118,7 +29376,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Tương miso thơm bùi ấm bụng trong bát canh sáng truyền thống.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "味噌"
+      "kanji_word": "味噌",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3112,
@@ -22132,7 +29391,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thủy lộ' (suiro) - con mương dẫn nước mát về cánh đồng lúa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "客"
+      "kanji_word": "客",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3113,
@@ -22146,7 +29406,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Kiến vật' (見物) - đi nhìn ngắm cảnh vật và con người bốn phương.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "見物"
+      "kanji_word": "見物",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3114,
@@ -22160,7 +29421,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sinh địa' (seichi) - mảnh đất thiêng liêng khai sinh một danh nhân.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "失敗"
+      "kanji_word": "失敗",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3115,
@@ -22174,7 +29436,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dĩ thượng' (以上) - từ mốc đó trở lên trên; dùng cuối bài: Xin hết!",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "以上"
+      "kanji_word": "以上",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3116,
@@ -22188,7 +29451,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Quyết' (決して) - lời thề quyết tâm dứt khoát: Tuyệt đối không từ bỏ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "決して"
+      "kanji_word": "決して",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3117,
@@ -22202,7 +29466,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Tử' (子) giống hình đứa bé sơ sinh quấn tã vẫy tay.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "子"
+      "kanji_word": "子",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3118,
@@ -22216,7 +29481,8 @@ module.exports = {
       "mnemonic_tip": "Ô cửa' - Đứng ở ô cửa tiễn bạn đi xa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "送る"
+      "kanji_word": "送る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3119,
@@ -22230,7 +29496,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hóa' (ka) - sự chuyển hóa, biến đổi dần sang trạng thái mới.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "怒る"
+      "kanji_word": "怒る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3120,
@@ -22244,7 +29511,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tối sơ' (最初) - vạch xuất phát ban sơ mở đầu mọi hành trình.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "最初"
+      "kanji_word": "最初",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3121,
@@ -22258,7 +29526,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thiếu' (shou) - chỉ một chút ít, một lượng nhỏ tinh túy.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "喜ぶ"
+      "kanji_word": "喜ぶ",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3122,
@@ -22272,7 +29541,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Lợi dụng' (利用) - tận dụng mọi cơ hội một cách hữu ích.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "利用"
+      "kanji_word": "利用",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3123,
@@ -22286,7 +29556,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Kỳ' (ki) - một thời kỳ, giai đoạn đánh dấu sự chuyển mình.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "進む"
+      "kanji_word": "進む",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3124,
@@ -22300,7 +29571,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tiết' (bushi) - khúc nhạc điệu hò ngân nga trong ngày hội làng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "赤ん坊"
+      "kanji_word": "赤ん坊",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3125,
@@ -22314,7 +29586,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tối hậu' (最後) - giây phút sau cùng quyết định mọi thành bại.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "最後"
+      "kanji_word": "最後",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3126,
@@ -22328,7 +29601,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thời đại' (時代) - dòng chảy năm tháng ghi dấu từng dấu mốc lịch sử.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "時代"
+      "kanji_word": "時代",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3127,
@@ -22342,7 +29616,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đồ trung' (途中) - đang trên đường đi, nửa chừng chặng hành trình.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "途中"
+      "kanji_word": "途中",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3128,
@@ -22356,7 +29631,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đại' (dai) - thế hệ những người cùng trang lứa nối tiếp nhau.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "深い"
+      "kanji_word": "深い",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3129,
@@ -22370,7 +29646,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phu' (夫) - người chồng vững chãi, trụ cột chở che gia đình.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "夫"
+      "kanji_word": "夫",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3130,
@@ -22384,7 +29661,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đại' (代) - đảm đương trọng trách thay thế cho người khác.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "代わり"
+      "kanji_word": "代わり",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3131,
@@ -22398,7 +29676,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dụng ý' (用意) - chủ động chuẩn bị trước để mọi sự suôn sẻ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "用意"
+      "kanji_word": "用意",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3132,
@@ -22412,7 +29691,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Liên lạc' (連絡) - giữ sợi dây kết nối và trao đổi thông tin.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "連絡"
+      "kanji_word": "連絡",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3133,
@@ -22426,7 +29706,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hạ' (ka) - đặt dưới sự quản lý hay sự bảo bọc nâng đỡ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "大事"
+      "kanji_word": "大事",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3134,
@@ -22440,7 +29721,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Quyết' (決) - dòng nước dứt khoát chảy xuôi, phương án đã định.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "決まる"
+      "kanji_word": "決まる",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3135,
@@ -22454,7 +29736,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cạnh tranh' (競争) - cùng nhau chạy đua tranh tài để cùng tiến bộ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "競争"
+      "kanji_word": "競争",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3136,
@@ -22468,7 +29751,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Nhập viện' (入院) - vào bệnh viện nằm điều trị cho mau lành bệnh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "入院"
+      "kanji_word": "入院",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3137,
@@ -22482,7 +29766,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tập' (shuu) - tuyển tập những câu chuyện hoặc bài thơ hay.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "仕方"
+      "kanji_word": "仕方",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3138,
@@ -22496,7 +29781,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thủ' (首) - vùng cổ kết nối thân mình với đầu não.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "首"
+      "kanji_word": "首",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3139,
@@ -22510,7 +29796,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Huyết' (血) - giọt máu đỏ lưu thông mang sự sống nuôi cơ thể.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "血"
+      "kanji_word": "血",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3140,
@@ -22524,7 +29811,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Hiku (kéo) + Kosu (vượt) = Dọn chuyển đồ đạc sang ngôi nhà mới.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "引っ越す"
+      "kanji_word": "引っ越す",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3141,
@@ -22538,7 +29826,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thân thượng' - nâng niu lời ăn tiếng nói thưa gửi các bậc bề trên.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "申し上げる"
+      "kanji_word": "申し上げる",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3142,
@@ -22552,7 +29841,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tồn tri' - kính cẩn hỏi han sự hiểu biết uyên bác của người nghe.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "ご存知"
+      "kanji_word": "ご存知",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3143,
@@ -22566,7 +29856,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thảo' (草) - thảm cỏ xanh êm ái phủ kín mặt đất hiền hòa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "草"
+      "kanji_word": "草",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3144,
@@ -22580,7 +29871,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dĩ hạ' (以下) - từ mức quy định đổ xuống phía dưới.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "以下"
+      "kanji_word": "以下",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3145,
@@ -22594,7 +29886,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bội' (倍) - nhân đôi thành quả nhờ sự nỗ lực không ngừng nghỉ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "倍"
+      "kanji_word": "倍",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3146,
@@ -22608,7 +29901,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mục' (me) - con số thứ tự xếp theo danh mục rõ ràng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "両方"
+      "kanji_word": "両方",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3147,
@@ -22622,7 +29916,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'An tâm' (安心) - cởi bỏ mọi âu lo, giữ lòng bình an nhẹ nhõm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "安心"
+      "kanji_word": "安心",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3148,
@@ -22636,7 +29931,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Trùng' (虫) - những sinh vật nhỏ bé bò rộn rã trong thiên nhiên.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "虫"
+      "kanji_word": "虫",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3149,
@@ -22650,7 +29946,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tiểu điểu' (小鳥) - chú chim nhỏ xinh xắn lông mềm mượt hót líu lo.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "小鳥"
+      "kanji_word": "小鳥",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3150,
@@ -22664,7 +29961,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Trưởng' (chou) - người có thâm niên đứng đầu một tập thể.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "高校生"
+      "kanji_word": "高校生",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3151,
@@ -22678,7 +29976,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tự' (寺) - mái chùa uy nghiêm tĩnh mặc nơi Phật môn thanh tịnh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "寺"
+      "kanji_word": "寺",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3152,
@@ -22692,7 +29991,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tiên' (sen) - tuyến đường ray thẳng tắp chạy dài tít tắp.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "店員"
+      "kanji_word": "店員",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3153,
@@ -22706,7 +30006,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Kaeru (trở về) -> Kaeri: quãng đường và thời điểm trên đường về.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "帰り"
+      "kanji_word": "帰り",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3154,
@@ -22720,7 +30021,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Lãnh' (冷) - đón gió bấc tràn về làm cơ thể lạnh cóng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "冷える"
+      "kanji_word": "冷える",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3155,
@@ -22734,7 +30036,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Viễn lự' (遠慮) - lo nghĩ e dè làm phiền người khác nên giữ kẽ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "遠慮"
+      "kanji_word": "遠慮",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3156,
@@ -22748,7 +30051,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đô hợp' (都合) - thời gian và hoàn cảnh sắp xếp khớp vừa vặn.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "都合"
+      "kanji_word": "都合",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3157,
@@ -22762,7 +30066,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cấp' (急) - việc gấp gáp như lửa thiêu đốt tâm can cần xử lý ngay.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "急"
+      "kanji_word": "急",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3158,
@@ -22776,7 +30081,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Nối hai vế lựa chọn tương đương nhau: A hoặc là B.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3159,
@@ -22790,7 +30096,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Địa lý' (地理) - môn khoa học nghiên cứu quy luật của mặt đất.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "地理"
+      "kanji_word": "地理",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3160,
@@ -22804,7 +30111,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Điện đăng' (電灯) - ngọn đèn thắp sáng lung linh bằng nguồn điện.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "電灯"
+      "kanji_word": "電灯",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3161,
@@ -22818,7 +30126,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dũng' (踊) - bước chân nhịp nhàng uyển chuyển theo điệu nhạc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "踊り"
+      "kanji_word": "踊り",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3162,
@@ -22832,13 +30141,14 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thịnh' (盛) - ngọn lửa phát triển bùng cháy rực rỡ, thịnh vượng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "盛ん"
+      "kanji_word": "盛ん",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3163,
       "lesson_id": 22,
-      "hiragana": "ひきだす",
-      "romaji": "hikidasu",
+      "hiragana": "ひきだします",
+      "romaji": "hikidashimasu",
       "vietnamese_meaning": "Rút ra (tiền), kéo ra ngoài",
       "word_type": "verb",
       "japanese_example": "銀行の 窓口で 生活費を 引き出しました。",
@@ -22846,7 +30156,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hiku' (kéo) + 'Dasu' (ra ngoài) = Rút tiền hoặc mở ngăn kéo.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "引き出す"
+      "kanji_word": "引き出します",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3164,
@@ -22860,7 +30171,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cát hợp' (割合) - phân chia tỷ lệ các phần ăn khớp trong tổng thể.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "割合"
+      "kanji_word": "割合",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3165,
@@ -22874,7 +30186,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thoái viện' (退院) - khỏe mạnh bước ra khỏi cánh cổng bệnh viện.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "退院"
+      "kanji_word": "退院",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3166,
@@ -22888,7 +30201,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Giảng đường' (講堂) - tòa nhà lớn trang nghiêm dành cho việc giảng dạy.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "講堂"
+      "kanji_word": "講堂",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3167,
@@ -22902,7 +30216,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tổ' (kumi) - tổ nhóm những người bạn cùng chung chí hướng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "下宿"
+      "kanji_word": "下宿",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3168,
@@ -22916,7 +30231,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thực liệu phẩm' (食料品) - các loại nhu yếu phẩm để nuôi sống con người.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "食料品"
+      "kanji_word": "食料品",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3169,
@@ -22930,13 +30246,14 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tân văn xã' (新聞社) - trụ sở sản xuất tin tức mới mỗi ngày.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "新聞社"
+      "kanji_word": "新聞社",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3170,
       "lesson_id": 2,
-      "hiragana": "うつす",
-      "romaji": "utsusu",
+      "hiragana": "うつします",
+      "romaji": "utsushimasu",
       "vietnamese_meaning": "Chép lại, sao chụp, chụp ảnh",
       "word_type": "verb",
       "japanese_example": "先生が 黒板に 書いた 重要な ポイントを ノートに 写します。",
@@ -22944,7 +30261,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tả' (写) - sao chép y nguyên hình mẫu hoặc bức tranh lên trang giấy.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "写す"
+      "kanji_word": "写します",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3171,
@@ -22958,7 +30276,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thang' (湯) - làn nước nóng bốc hơi sảng khoái tại suối khoáng Onsen.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "湯"
+      "kanji_word": "湯",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3172,
@@ -22972,7 +30291,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Điệp' (畳) - tấm chiếu cói dệt đều tăm tắp đậm chất văn hóa Nhật.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "畳"
+      "kanji_word": "畳",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3173,
@@ -22986,7 +30306,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Định nương' (お嬢さん) - cô tiểu thư khuê các cành vàng lá ngọc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お嬢さん"
+      "kanji_word": "お嬢さん",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3174,
@@ -23000,7 +30321,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tích' (積) - tích lũy quyết tâm và ấp ủ dự định hướng tới tương lai.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3175,
@@ -23014,7 +30336,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Biểu thị mức độ đã hoàn thành từ 90 đến 99% công việc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3176,
@@ -23028,7 +30351,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Kinh' (驚) - ngựa bất ngờ giật mình tung vó hí vang kinh ngạc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "驚く"
+      "kanji_word": "驚く",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3177,
@@ -23042,7 +30366,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Căn cứ logic vững chắc khẳng định điều gì đó chắc chắn xảy ra.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3178,
@@ -23056,7 +30381,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Biệt' (別) - dao sắc tách rời từng phần riêng biệt rõ ràng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "別"
+      "kanji_word": "別",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3179,
@@ -23070,7 +30396,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dĩ ngoại' (以外) - nằm bên ngoài vùng phạm vi đang xét.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "以外"
+      "kanji_word": "以外",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3180,
@@ -23084,7 +30411,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hồi' (回) - hình hai vòng tròn lồng nhau xoay đều bất tận.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "回る"
+      "kanji_word": "回る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3181,
@@ -23098,7 +30426,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Nắm chắc, khóa chặt và làm việc nghiêm túc chu đáo không sơ suất.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3182,
@@ -23112,7 +30441,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đồ' (塗) - dùng chổi quét sơn lên tường hoặc phết mứt bơ lên bánh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "塗る"
+      "kanji_word": "塗る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3183,
@@ -23126,7 +30456,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đáo đầu' (到頭) - đi đến tận cùng chặng đường và chạm tay tới đích.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "到頭"
+      "kanji_word": "到頭",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3184,
@@ -23140,7 +30471,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bộ' (捕) - giơ tay chộp giữ chặt đối tượng không cho tẩu thoát.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "捕まえる"
+      "kanji_word": "捕まえる",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3185,
@@ -23154,7 +30486,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Kính ngữ sang trọng hỏi han hành động của đối phương.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "為さる"
+      "kanji_word": "為さる",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3186,
@@ -23168,7 +30501,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dao' (揺) - cành lá dập dờn đung đưa trước ngọn gió lành.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "揺れる"
+      "kanji_word": "揺れる",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3187,
@@ -23182,7 +30516,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Kỳ' (祈) - chắp tay hướng về thần linh gửi gắm ước nguyện chân thành.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "祈る"
+      "kanji_word": "祈る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3188,
@@ -23196,7 +30531,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Chiết' (折) - dùng tay bẻ gập chiếc que hay gấp mép giấy origami.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "折る"
+      "kanji_word": "折る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3189,
@@ -23210,7 +30546,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Lễ' (礼) - lễ nghĩa cảm tạ chân thành tới ân nhân giúp đỡ mình.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お礼"
+      "kanji_word": "お礼",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3190,
@@ -23224,7 +30561,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Sore (cái đó) + hodo (mức độ) = Không nghiêm trọng đến mức độ đó.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3191,
@@ -23238,7 +30576,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Suri' - kẻ lẻn tay thò vào túi móc mất ví tiền lúc sơ hở.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "掏摸"
+      "kanji_word": "掏摸",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3192,
@@ -23252,7 +30591,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Tiếng gật gù tâm đắc khi hiểu rõ nguyên lý vấn đề.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3193,
@@ -23266,7 +30606,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Di' (移) - dời chuyển từ vị trí hoặc chủ đề này sang chủ đề khác.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "移る"
+      "kanji_word": "移る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3194,
@@ -23280,7 +30621,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Quang' (光) - ánh hào quang lấp lánh thắp sáng màn đêm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "光る"
+      "kanji_word": "光る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3195,
@@ -23294,7 +30636,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Điếu' (釣) - buông dây cước câu con cá bơi dưới làn nước trong.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "釣る"
+      "kanji_word": "釣る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3196,
@@ -23308,7 +30651,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Cố gắng trong khả năng tối đa để đạt được điều tốt đẹp nhất.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3197,
@@ -23322,27 +30666,14 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thiển' (浅) - dòng nước cạn, đáy hồ nhìn thấy rõ từng hòn sỏi.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "浅い"
-    },
-    {
-      "id": 3198,
-      "lesson_id": 11,
-      "hiragana": "はいけん",
-      "romaji": "haiken",
-      "vietnamese_meaning": "Xem, nhìn (khiêm nhường ngữ)",
-      "word_type": "verb",
-      "japanese_example": "パスポートを 拝見しても よろしいでしょうか。",
-      "example_meaning": "Cho phép tôi được xem hộ chiếu của quý khách được không ạ?",
-      "mnemonic_tip": "Mẹo nhớ: 'Bái kiến' (拝見) - chắp tay kính cẩn xin phép được xem đồ vật.",
-      "image_url": "",
-      "pitch_accent": 0,
-      "kanji_word": "拝見"
+      "kanji_word": "浅い",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3199,
       "lesson_id": 17,
-      "hiragana": "たす",
-      "romaji": "tasu",
+      "hiragana": "たします",
+      "romaji": "tashimasu",
       "vietnamese_meaning": "Cộng thêm, thêm vào",
       "word_type": "verb",
       "japanese_example": "スープに 少し 塩を 足してください。",
@@ -23350,7 +30681,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Túc' (足) - thêm vào cho đầy đủ, trọn vẹn sung túc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "足す"
+      "kanji_word": "足します",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3200,
@@ -23364,7 +30696,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thính' (chou) - các thính giả chăm chú lắng nghe bản tin radio.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "予習"
+      "kanji_word": "予習",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3201,
@@ -23378,7 +30711,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tẩm' (寝) ngủ vùi say sưa đến nỗi quên cả giờ giấc chuông báo thức.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "寝坊"
+      "kanji_word": "寝坊",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3202,
@@ -23392,7 +30726,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phí' (沸) - bọt nước sủi tăm ùng ục réo vang trên bếp lửa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "沸く"
+      "kanji_word": "沸く",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3203,
@@ -23406,7 +30741,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Đoạn' (dan) - giai đoạn hoặc bậc tam cấp bước lên hiên nhà.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "復習"
+      "kanji_word": "復習",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3204,
@@ -23420,7 +30756,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Africa' - vùng đất thiên nhiên kỳ vĩ chan hòa nắng ấm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "阿弗利加"
+      "kanji_word": "阿弗利加",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3205,
@@ -23434,7 +30771,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chỉ dẫn phương pháp thực hiện cụ thể ngay trước mắt người nghe.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3206,
@@ -23448,13 +30786,14 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Khán hộ sư' (看護師) - thiên thần áo trắng ngày đêm chăm sóc bệnh nhân.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "看護師"
+      "kanji_word": "看護師",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3207,
       "lesson_id": 12,
-      "hiragana": "ふりだす",
-      "romaji": "furidasu",
+      "hiragana": "ふりだします",
+      "romaji": "furidashimasu",
       "vietnamese_meaning": "Bắt đầu đổ mưa, bắt đầu tuyết rơi",
       "word_type": "verb",
       "japanese_example": "外出先で 急に 雨が 降り出しました。",
@@ -23462,7 +30801,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Furu' (rơi) ghép với 'Dasu' (phát ra) = Mưa bắt đầu tuôn rơi ào ào.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "降り出す"
+      "kanji_word": "降り出します",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3208,
@@ -23470,13 +30810,14 @@ module.exports = {
       "hiragana": "だいぶ",
       "romaji": "daibu",
       "vietnamese_meaning": "Khá nhiều, đáng kể, phần lớn",
-      "word_type": "verb",
+      "word_type": "adverb",
       "japanese_example": "おかげさまで、体調は だいぶ 良くなりました。",
       "example_meaning": "Nhờ trời, sức khỏe của tôi đã hồi phục khá nhiều rồi.",
       "mnemonic_tip": "Mẹo nhớ: 'Đại phân' (大分) - chiếm phần lớn, tiến triển một bước dài.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "大分"
+      "kanji_word": "大分",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3209,
@@ -23490,7 +30831,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thân' (親) - đứng tựa gốc cây dõi mắt theo bước chân khôn lớn của con.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "親"
+      "kanji_word": "親",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3210,
@@ -23504,7 +30846,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mộc miên' (木綿) - hoa bông trắng dệt nên sợi vải êm ái thoáng mát.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "木綿"
+      "kanji_word": "木綿",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3211,
@@ -23518,7 +30861,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Computer' - cỗ máy điện toán xử lý thông tin thông minh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3212,
@@ -23532,7 +30876,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Curtain' - tấm màn mềm buông rủ cản bớt ánh nắng gắt.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3213,
@@ -23546,7 +30891,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Alcohol' - cồn y tế hoặc bia rượu cần dùng thận trọng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3214,
@@ -23560,7 +30906,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Salad' - món rau xanh giòn ngọt thanh lọc cơ thể.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3215,
@@ -23574,7 +30921,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Textbook' - cuốn sách cung cấp kiến thức nền tảng bài bản.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3216,
@@ -23588,7 +30936,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm 'Gasoline stand' - điểm dừng tiếp nhiên liệu cho phương tiện.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3217,
@@ -23602,7 +30951,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Jam' - mứt hoa quả sánh mịn ngọt lịm phết bánh mì.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3218,
@@ -23616,7 +30966,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm 'Announcer' - người đọc bản tin rõ ràng truyền cảm trên sóng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3219,
@@ -23630,7 +30981,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Part-time job' - công việc theo giờ linh hoạt phụ giúp gia đình.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3220,
@@ -23644,7 +30996,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Accessory' - vòng cổ, hoa tai, nhẫn tô điểm nét duyên.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3221,
@@ -23658,7 +31011,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Tiếng thốt lên bất ngờ khi sực nhớ ra điều quan trọng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3222,
@@ -23672,7 +31026,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Suitcase' - chiếc va li có bánh xe kéo tiện lợi trên mọi nẻo đường.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3223,
@@ -23686,7 +31041,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Steak' - miếng thịt bò bít tết thơm lừng xèo xèo.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3224,
@@ -23700,7 +31056,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Asia' - châu lục rộng lớn đông dân nhất hành tinh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "亜細亜"
+      "kanji_word": "亜細亜",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3225,
@@ -23714,7 +31071,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Check' - đánh dấu rà soát kỹ từng hạng mục.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3226,
@@ -23728,7 +31086,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Screen' - màn chiếu phẳng hiển thị hình ảnh sống động.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3227,
@@ -23742,7 +31101,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sandal' - đôi dép quai êm chân thoáng mát ngày hè oi ả.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3228,
@@ -23750,13 +31110,14 @@ module.exports = {
       "hiragana": "いっぱい",
       "romaji": "ippai",
       "vietnamese_meaning": "Đầy, tràn ngập / một cốc",
-      "word_type": "verb",
+      "word_type": "adverb",
       "japanese_example": "お腹が いっぱいです。",
       "example_meaning": "Tôi đã no căng bụng rồi.",
       "mnemonic_tip": "Mẹo nhớ: 'Quan' (kan) - người quan sát tinh tế nhìn ra bản chất sự việc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "一杯"
+      "kanji_word": "一杯",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3229,
@@ -23770,7 +31131,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chữ 'Dụng' (用) - có công chuyện cần dùng đến thì giờ và sức lực.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "用"
+      "kanji_word": "用",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3230,
@@ -23784,7 +31146,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Rút gọn từ Cash register - quầy tính tiền nhận hóa đơn mua hàng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3231,
@@ -23798,7 +31161,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Dịch' (訳) - nguồn cơ chân tướng giải thích căn nguyên sự việc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "訳"
+      "kanji_word": "訳",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3232,
@@ -23812,7 +31176,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Âm' (陰) - nấp bóng râm che chở mát lành, nhờ có người tương trợ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お陰"
+      "kanji_word": "お陰",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3233,
@@ -23826,7 +31191,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Oyogi' (bơi lội) kết hợp với 'Kata' (phương pháp, cách thức).",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "泳ぎ方"
+      "kanji_word": "泳ぎ方",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3234,
@@ -23840,7 +31206,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Gia nội' (家内) - người bạn đời gắn bó cùng xây đắp mái ấm trong nhà.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "家内"
+      "kanji_word": "家内",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3235,
@@ -23854,7 +31221,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phi thường' (非常に) - vượt xa ngưỡng bình thường muôn phần.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "非常に"
+      "kanji_word": "非常に",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3236,
@@ -23868,7 +31236,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Từ nối nguyên nhân dẫn tới hệ quả tất yếu: Vì A nên B.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3237,
@@ -23882,7 +31251,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Biến chuyển trọn vẹn 100%, không còn vương lại chút dấu vết cũ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3238,
@@ -23896,7 +31266,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Chỉ tính chất ở xa tầm với của cả người nói lẫn người nghe.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3239,
@@ -23910,7 +31281,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Type' - phong cách, chủng loại hoặc mẫu người tiêu biểu.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3240,
@@ -23924,7 +31296,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ngưỡng' (仰) - ngước nhìn lên kính cẩn lắng nghe lời vàng ngọc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "仰る"
+      "kanji_word": "仰る",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3241,
@@ -23938,7 +31311,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Báo hiệu thời điểm sắp sửa bắt đầu hoặc kết thúc một việc.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3242,
@@ -23952,7 +31326,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Bell' - tiếng chuông reng vang ngân nga trong trẻo.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3243,
@@ -23966,7 +31341,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Kính ngữ cao cấp tôn vinh sự hiện diện quý báu của thượng khách.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3244,
@@ -23980,7 +31356,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Tiếng trống dồn 'đùng đùng' biểu thị nhịp độ phát triển không ngừng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3245,
@@ -23994,7 +31371,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Phân' (bun) - phần đóng góp xứng đáng của mỗi cá nhân.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "ご馳走"
+      "kanji_word": "ご馳走",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3246,
@@ -24008,7 +31386,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Handbag' - chiếc túi xách tay nhỏ gọn trang nhã của phái nữ.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3247,
@@ -24022,7 +31401,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Fax' - thiết bị truyền gửi văn bản nhanh chóng qua đường dây mạng.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3248,
@@ -24036,7 +31416,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Cảm giác sảng khoái tức thì xua tan đi mọi bức bối, mỏi mệt.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3249,
@@ -24050,7 +31431,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Hướng ánh nhìn về phong thái cách thức tốt đẹp ở phía xa.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": ""
+      "kanji_word": "",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3250,
@@ -24064,7 +31446,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Thê' (妻) - người phụ nữ đầu ấp tay gối cùng sẻ chia buồn vui.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "妻"
+      "kanji_word": "妻",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3251,
@@ -24078,7 +31461,8 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Ni-kai (tầng 2) + Tate (xây dựng) = Căn nhà 2 tầng khang trang.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "二階建て"
+      "kanji_word": "二階建て",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
       "id": 3252,
@@ -24092,7 +31476,428 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Oide ni naru - lời thưa gửi cung kính miêu tả việc khách quý tới thăm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "お出でになる"
+      "kanji_word": "お出でになる",
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3253,
+      "lesson_id": 8,
+      "hiragana": "いかが",
+      "romaji": "ikaga",
+      "kanji_word": "",
+      "vietnamese_meaning": "như thế nào (cách nói lịch sự của どう)",
+      "word_type": "adverb",
+      "japanese_example": "お茶は いかがですか。",
+      "example_meaning": "Bạn dùng một tách trà nhé?",
+      "mnemonic_tip": "Mẹo nhớ: 'i ka ga' - Đi ca hát thế nào rồi?",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3254,
+      "lesson_id": 4,
+      "hiragana": "ゼロ",
+      "romaji": "zero",
+      "kanji_word": "",
+      "vietnamese_meaning": "số 0, số không",
+      "word_type": "noun",
+      "japanese_example": "電話番号は ゼロ一二三です。",
+      "example_meaning": "Số điện thoại là 0123.",
+      "mnemonic_tip": "Mẹo nhớ: 'zero' - số không trong tiếng Anh.",
+      "image_url": "",
+      "pitch_accent": 1,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3255,
+      "lesson_id": 6,
+      "hiragana": "バター",
+      "romaji": "bata-",
+      "kanji_word": "",
+      "vietnamese_meaning": "bơ",
+      "word_type": "noun",
+      "japanese_example": "パンに バターを つけます。",
+      "example_meaning": "Quết bơ vào bánh mì.",
+      "mnemonic_tip": "Mẹo nhớ: 'butter' - bơ béo ngậy.",
+      "image_url": "",
+      "pitch_accent": 1,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3256,
+      "lesson_id": 11,
+      "hiragana": "～さつ",
+      "romaji": "~satsu",
+      "kanji_word": "～冊",
+      "vietnamese_meaning": "~ cuốn, ~ quyển (đơn vị đếm sách, vở)",
+      "word_type": "counter",
+      "japanese_example": "本を 二冊 買いました。",
+      "example_meaning": "Tôi đã mua 2 quyển sách.",
+      "mnemonic_tip": "Mẹo nhớ: 'Sách sát' - sách xếp sát nhau đếm từng cuốn.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3257,
+      "lesson_id": 11,
+      "hiragana": "～ひき",
+      "romaji": "~hiki",
+      "kanji_word": "～匹",
+      "vietnamese_meaning": "~ con (đơn vị đếm động vật nhỏ, cá, côn trùng)",
+      "word_type": "counter",
+      "japanese_example": "猫が 一匹 います。",
+      "example_meaning": "Có một con mèo.",
+      "mnemonic_tip": "Mẹo nhớ: 'Hiki' - đếm từng con vật bé nhỏ.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3258,
+      "lesson_id": 25,
+      "hiragana": "こんな",
+      "romaji": "konna",
+      "kanji_word": "",
+      "vietnamese_meaning": "như thế này",
+      "word_type": "pronoun",
+      "japanese_example": "こんな 家に 住みたいです。",
+      "example_meaning": "Tôi muốn sống trong ngôi nhà như thế này.",
+      "mnemonic_tip": "Mẹo nhớ: 'konna' - như thế này ở ngay gần mình.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3259,
+      "lesson_id": 26,
+      "hiragana": "そんな",
+      "romaji": "sonna",
+      "kanji_word": "",
+      "vietnamese_meaning": "như thế đó (gần người nghe)",
+      "word_type": "pronoun",
+      "japanese_example": "そんな ことは ありません。",
+      "example_meaning": "Không có chuyện như thế đâu.",
+      "mnemonic_tip": "Mẹo nhớ: 'sonna' - như thế đó của bạn.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3260,
+      "lesson_id": 26,
+      "hiragana": "～ずつ",
+      "romaji": "~zutsu",
+      "kanji_word": "",
+      "vietnamese_meaning": "từng ~, mỗi ~",
+      "word_type": "particle",
+      "japanese_example": "一つずつ 取ってください。",
+      "example_meaning": "Hãy lấy từng cái một.",
+      "mnemonic_tip": "Mẹo nhớ: 'zutsu' - chia đều từng chút từng cái một.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3261,
+      "lesson_id": 26,
+      "hiragana": "やっぱり",
+      "romaji": "yappari",
+      "kanji_word": "",
+      "vietnamese_meaning": "quả nhiên, đúng như dự đoán",
+      "word_type": "adverb",
+      "japanese_example": "やっぱり 彼が 来ました。",
+      "example_meaning": "Quả nhiên là anh ấy đã đến.",
+      "mnemonic_tip": "Mẹo nhớ: 'yappari' - quả nhiên không ngoài dự đoán.",
+      "image_url": "",
+      "pitch_accent": 3,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3262,
+      "lesson_id": 30,
+      "hiragana": "～すぎ",
+      "romaji": "~sugi",
+      "kanji_word": "～過ぎ",
+      "vietnamese_meaning": "quá ~ (giờ giấc hoặc mức độ)",
+      "word_type": "suffix",
+      "japanese_example": "８時すぎに 家を 出ます。",
+      "example_meaning": "Tôi ra khỏi nhà lúc hơn 8 giờ một chút.",
+      "mnemonic_tip": "Mẹo nhớ: 'Quá' - sugi vượt quá giới hạn.",
+      "image_url": "",
+      "pitch_accent": 2,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3263,
+      "lesson_id": 31,
+      "hiragana": "よろしい",
+      "romaji": "yoroshii",
+      "kanji_word": "",
+      "vietnamese_meaning": "được, ổn (cách nói lịch sự của いい)",
+      "word_type": "adjective",
+      "japanese_example": "こちらで よろしいですか。",
+      "example_meaning": "Như thế này đã được chưa ạ?",
+      "mnemonic_tip": "Mẹo nhớ: 'yoroshii' - rất tốt, được rồi ạ.",
+      "image_url": "",
+      "pitch_accent": 3,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3264,
+      "lesson_id": 31,
+      "hiragana": "かれら",
+      "romaji": "karera",
+      "kanji_word": "彼ら",
+      "vietnamese_meaning": "họ, chúng nó",
+      "word_type": "pronoun",
+      "japanese_example": "彼らは 学生です。",
+      "example_meaning": "Họ là sinh viên.",
+      "mnemonic_tip": "Mẹo nhớ: 'Bỉ đẳng' - kare (anh ấy) thêm số nhiều ra thành họ.",
+      "image_url": "",
+      "pitch_accent": 1,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3265,
+      "lesson_id": 32,
+      "hiragana": "なかなか",
+      "romaji": "nakanaka",
+      "kanji_word": "",
+      "vietnamese_meaning": "khá là, mãi mà (không ~)",
+      "word_type": "adverb",
+      "japanese_example": "バスが なかなか 来ません。",
+      "example_meaning": "Xe buýt mãi mà không tới.",
+      "mnemonic_tip": "Mẹo nhớ: 'nakanaka' - mãi mà không xong.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3266,
+      "lesson_id": 33,
+      "hiragana": "けいかく",
+      "romaji": "keikaku",
+      "kanji_word": "計画",
+      "vietnamese_meaning": "kế hoạch",
+      "word_type": "noun",
+      "japanese_example": "旅行の 計画を 立てます。",
+      "example_meaning": "Lập kế hoạch đi du lịch.",
+      "mnemonic_tip": "Mẹo nhớ: 'Kế hoạch' - keikaku rõ ràng từng bước.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3267,
+      "lesson_id": 33,
+      "hiragana": "とおり",
+      "romaji": "toori",
+      "kanji_word": "通り",
+      "vietnamese_meaning": "đúng như, theo như (hoặc con đường)",
+      "word_type": "noun",
+      "japanese_example": "説明書の とおりに 作ります。",
+      "example_meaning": "Làm theo đúng như sách hướng dẫn.",
+      "mnemonic_tip": "Mẹo nhớ: 'Thông' - toori đi đúng theo con đường chỉ lối.",
+      "image_url": "",
+      "pitch_accent": 3,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3268,
+      "lesson_id": 34,
+      "hiragana": "したく",
+      "romaji": "shitaku",
+      "kanji_word": "支度",
+      "vietnamese_meaning": "sự chuẩn bị, sửa soạn",
+      "word_type": "noun",
+      "japanese_example": "出かける 支度を します。",
+      "example_meaning": "Chuẩn bị ra ngoài.",
+      "mnemonic_tip": "Mẹo nhớ: 'Chi độ' - shitaku chuẩn bị chu đáo.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3269,
+      "lesson_id": 35,
+      "hiragana": "～まま",
+      "romaji": "~mama",
+      "kanji_word": "",
+      "vietnamese_meaning": "cứ để nguyên trạng thái ~, giữ nguyên ~",
+      "word_type": "expression",
+      "japanese_example": "靴を はいた まま 入らないでください。",
+      "example_meaning": "Xin đừng đi cả giày vào.",
+      "mnemonic_tip": "Mẹo nhớ: 'mama' - cứ để nguyên trạng thái như ban đầu.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3270,
+      "lesson_id": 36,
+      "hiragana": "しょうちする",
+      "romaji": "shouchisuru",
+      "kanji_word": "承知する",
+      "vietnamese_meaning": "hiểu rõ, nhận thức, đồng ý",
+      "word_type": "verb",
+      "japanese_example": "その件は 承知しました。",
+      "example_meaning": "Tôi đã hiểu rõ sự việc đó rồi.",
+      "mnemonic_tip": "Mẹo nhớ: 'Thừa tri' - shouchisuru nhận biết và tuân lệnh.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3271,
+      "lesson_id": 37,
+      "hiragana": "もっとも",
+      "romaji": "mottomo",
+      "kanji_word": "最も",
+      "vietnamese_meaning": "nhất (bậc nhất)",
+      "word_type": "adverb",
+      "japanese_example": "富士山は 日本で 最も 高い山です。",
+      "example_meaning": "Núi Phú Sĩ là ngọn núi cao nhất Nhật Bản.",
+      "mnemonic_tip": "Mẹo nhớ: 'Tối' - mottomo đỉnh cao nhất.",
+      "image_url": "",
+      "pitch_accent": 3,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3272,
+      "lesson_id": 38,
+      "hiragana": "～おき",
+      "romaji": "~oki",
+      "kanji_word": "",
+      "vietnamese_meaning": "cách mỗi ~, cứ cách ~",
+      "word_type": "suffix",
+      "japanese_example": "１日おきに 運動します。",
+      "example_meaning": "Cứ cách một ngày tôi lại tập thể dục một lần.",
+      "mnemonic_tip": "Mẹo nhớ: 'oki' - đặt cách quãng thời gian đều đặn.",
+      "image_url": "",
+      "pitch_accent": 2,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3273,
+      "lesson_id": 39,
+      "hiragana": "かっこう",
+      "romaji": "kakkou",
+      "kanji_word": "格好",
+      "vietnamese_meaning": "ngoại hình, diện mạo, dáng vẻ",
+      "word_type": "noun",
+      "japanese_example": "変な 格好を しています。",
+      "example_meaning": "Đang ăn mặc kiểu dáng kỳ lạ.",
+      "mnemonic_tip": "Mẹo nhớ: 'Cách hảo' - kakkou dáng vẻ bên ngoài.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3274,
+      "lesson_id": 40,
+      "hiragana": "けれど",
+      "romaji": "keredo",
+      "kanji_word": "",
+      "vietnamese_meaning": "tuy nhiên, nhưng mà",
+      "word_type": "expression",
+      "japanese_example": "行きたい けれど、時間が ありません。",
+      "example_meaning": "Muốn đi nhưng không có thời gian.",
+      "mnemonic_tip": "Mẹo nhớ: 'keredo' - nhưng mà nối hai vế tương phản.",
+      "image_url": "",
+      "pitch_accent": 1,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3275,
+      "lesson_id": 41,
+      "hiragana": "～ちょう",
+      "romaji": "~chou",
+      "kanji_word": "～町",
+      "vietnamese_meaning": "~ khu phố, ~ phường (đơn vị hành chính/khu phố)",
+      "word_type": "counter",
+      "japanese_example": "本町２丁目を 歩きます。",
+      "example_meaning": "Đi bộ qua khu phố Honmachi.",
+      "mnemonic_tip": "Mẹo nhớ: 'Đinh / Khu phố' - chou khu phố thân quen.",
+      "image_url": "",
+      "pitch_accent": 1,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3276,
+      "lesson_id": 42,
+      "hiragana": "～がくぶ",
+      "romaji": "~gakubu",
+      "kanji_word": "～学部",
+      "vietnamese_meaning": "khoa ~, ngành học ~ (đại học)",
+      "word_type": "suffix",
+      "japanese_example": "経済学部の 学生です。",
+      "example_meaning": "Là sinh viên khoa kinh tế.",
+      "mnemonic_tip": "Mẹo nhớ: 'Học bộ' - gakubu phân khoa chuyên ngành.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3277,
+      "lesson_id": 43,
+      "hiragana": "～だて",
+      "romaji": "~date",
+      "kanji_word": "～建て",
+      "vietnamese_meaning": "nhà xây ~ tầng",
+      "word_type": "suffix",
+      "japanese_example": "二階建ての 家に 住んでいます。",
+      "example_meaning": "Sống trong ngôi nhà xây 2 tầng.",
+      "mnemonic_tip": "Mẹo nhớ: 'Kiến' - date xây dựng số tầng nhà.",
+      "image_url": "",
+      "pitch_accent": 0,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3278,
+      "lesson_id": 44,
+      "hiragana": "つれていく",
+      "romaji": "tsureteiku",
+      "kanji_word": "連れて行く",
+      "vietnamese_meaning": "dắt theo, dẫn đi",
+      "word_type": "verb",
+      "japanese_example": "子供を 公園へ 連れて行く。",
+      "example_meaning": "Dẫn trẻ con đến công viên.",
+      "mnemonic_tip": "Mẹo nhớ: 'Liên' - tsureteiku dắt tay ai đó đi cùng.",
+      "image_url": "",
+      "pitch_accent": 4,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3279,
+      "lesson_id": 45,
+      "hiragana": "け",
+      "romaji": "ke",
+      "kanji_word": "毛",
+      "vietnamese_meaning": "lông, tóc",
+      "word_type": "noun",
+      "japanese_example": "猫の 毛が 抜けます。",
+      "example_meaning": "Lông mèo bị rụng.",
+      "mnemonic_tip": "Mẹo nhớ: 'Mao' - ke sợi lông mao.",
+      "image_url": "",
+      "pitch_accent": 1,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
+    },
+    {
+      "id": 3280,
+      "lesson_id": 46,
+      "hiragana": "さか",
+      "romaji": "saka",
+      "kanji_word": "坂",
+      "vietnamese_meaning": "con dốc",
+      "word_type": "noun",
+      "japanese_example": "急な 坂を 登ります。",
+      "example_meaning": "Leo lên con dốc đứng.",
+      "mnemonic_tip": "Mẹo nhớ: 'Phản' - saka leo dốc mệt nghỉ.",
+      "image_url": "",
+      "pitch_accent": 2,
+      "created_at": "2026-07-23T09:25:08.655773+00:00"
     }
   ],
   "kanji": [
@@ -27304,7 +35109,7 @@ module.exports = {
       "meaning": "Khẳng định: N1 là N2\nPhủ định: N1 không phải là N2\nNghi vấn: N1 có phải là N2 không?",
       "structure": "Khẳng định: Danh từ 1 + は + Danh từ 2 + です\nPhủ định: Danh từ 1 + は + Danh từ 2 + じゃありません / では ありません\nNghi vấn: Danh từ 1 + は + Danh từ 2 + じゃありませんか",
       "vietnamese_explanation": "Mẫu câu phủ định cơ bản của danh từ, sử dụng liên tục trong đời sống.",
-      "japanese_example": "Khẳng định: サントスさんは 学生 です。\nPhủ định: サントスさんは 学生 じゃありません。\nNghi vấn: サントスさんは 学生 じゃありませんか。",
+      "japanese_example": "Khẳng định: サントスさんは 学生(がくせい) です。\nPhủ định: サントスさんは 学生(がくせい) じゃありません。\nNghi vấn: サントスさんは 学生(がくせい) じゃありませんか。",
       "example_meaning": "Khẳng định: Anh Santos là sinh viên.\nPhủ định: Anh Santos không phải là sinh viên.\nNghi vấn: Anh Santos không phải là sinh viên phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:01.139759+00:00",
@@ -27318,7 +35123,7 @@ module.exports = {
       "meaning": "Khẳng định: N1 là N2\nPhủ định: N1 không phải là N2\nNghi vấn: N1 có phải là N2 không?",
       "structure": "Khẳng định: Danh từ 1 + は + Danh từ 2 + です\nPhủ định: Danh từ 1 + は + Danh từ 2 + じゃありません\nNghi vấn: Danh từ 1 + は + Danh từ 2 + ですか",
       "vietnamese_explanation": "Dùng để xác nhận thông tin của người đối diện, cấu trúc hỏi đáp sơ cấp điển hình.",
-      "japanese_example": "Khẳng định: ミラーさんは 会社員 です。\nPhủ định: ミラーさんは 会社員 じゃありません。\nNghi vấn: ミラーさんは 会社員 ですか。",
+      "japanese_example": "Khẳng định: ミラーさんは 会社員(かいしゃいん) です。\nPhủ định: ミラーさんは 会社員(かいしゃいん) じゃありません。\nNghi vấn: ミラーさんは 会社員(かいしゃいん) ですか。",
       "example_meaning": "Khẳng định: Anh Miller là nhân viên công ty.\nPhủ định: Anh Miller không phải là nhân viên công ty.\nNghi vấn: Anh Miller có phải là nhân viên công ty không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:01.270315+00:00",
@@ -27332,7 +35137,7 @@ module.exports = {
       "meaning": "Khẳng định: N1 cũng là N2\nPhủ định: N1 cũng không phải là N2\nNghi vấn: N1 cũng là N2 phải không?",
       "structure": "Khẳng định: Danh từ 1 + も + Danh từ 2 + です\nPhủ định: Danh từ 1 + も + Danh từ 2 + じゃありません\nNghi vấn: Danh từ 1 + も + Danh từ 2 + ですか",
       "vietnamese_explanation": "Ứng dụng rất cao khi nói về sự giống nhau giữa các đối tượng trong hội thoại nhóm.",
-      "japanese_example": "Khẳng định: わたしも 会社員 です。\nPhủ định: わたしも 会社員 じゃありません。\nNghi vấn: あなたも 会社員 ですか。",
+      "japanese_example": "Khẳng định: わたしも 会社員(かいしゃいん) です。\nPhủ định: わたしも 会社員(かいしゃいん) じゃありません。\nNghi vấn: あなたも 会社員(かいしゃいん) ですか。",
       "example_meaning": "Khẳng định: Tôi cũng là nhân viên công ty.\nPhủ định: Tôi cũng không phải là nhân viên công ty.\nNghi vấn: Bạn cũng là nhân viên công ty phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:01.401572+00:00",
@@ -27346,7 +35151,7 @@ module.exports = {
       "meaning": "Khẳng định: N2 của N1 / N2 thuộc N1\nPhủ định: N2 không phải của N1\nNghi vấn: N2 có phải của N1 không?",
       "structure": "Khẳng định: Danh từ 1 + の + Danh từ 2 + です\nPhủ định: Danh từ 1 + の + Danh từ 2 + じゃありません\nNghi vấn: Danh từ 1 + の + Danh từ 2 + ですか",
       "vietnamese_explanation": "Mẫu câu nối danh từ cốt lõi, dùng khi giới thiệu công ty hoặc trường học sở tại của mình.",
-      "japanese_example": "Khẳng định: わたしは IMCの 社員 です。\nPhủ định: わたしは IMCの 社員 じゃありません。\nNghi vấn: あなたは IMCの 社員 ですか。",
+      "japanese_example": "Khẳng định: わたしは IMCの 社員(しゃいん) です。\nPhủ định: わたしは IMCの 社員(しゃいん) じゃありません。\nNghi vấn: あなたは IMCの 社員(しゃいん) ですか。",
       "example_meaning": "Khẳng định: Tôi là nhân viên của công ty IMC.\nPhủ định: Tôi không phải là nhân viên của công ty IMC.\nNghi vấn: Bạn có phải là nhân viên của công ty IMC không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:01.532596+00:00",
@@ -27360,7 +35165,7 @@ module.exports = {
       "meaning": "Khẳng định: Đây/Đó/Kia là N\nPhủ định: Đây/Đó/Kia không phải là N\nNghi vấn: Đây/Đó/Kia có phải là N không?",
       "structure": "Khẳng định: これ/それ/あれ + は + Danh từ + です\nPhủ định: これ/それ/あれ + は + Danh từ + じゃありません (ではありません)\nNghi vấn: これ/それ/あれ + は + Danh từ + ですか",
       "vietnamese_explanation": "Dùng để chỉ vật dựa vào khoảng cách tới người nói và người nghe. 'これ' chỉ vật gần người nói, 'それ' chỉ vật gần người nghe, 'あれ' chỉ vật xa cả hai.",
-      "japanese_example": "Khẳng định: これは私のノートです。\nPhủ định: これは私のノートではありません。\nNghi vấn: これはあなたのノートですか。",
+      "japanese_example": "Khẳng định: これは私(わたし)のノートです。\nPhủ định: これは私(わたし)のノートではありません。\nNghi vấn: これはあなたのノートですか。",
       "example_meaning": "Khẳng định: Đây là vở của tôi.\nPhủ định: Đây không phải là vở của tôi.\nNghi vấn: Đây có phải là vở của bạn không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:01.670457+00:00",
@@ -27374,7 +35179,7 @@ module.exports = {
       "meaning": "Khẳng định: [N] này/đó/kia là...\nPhủ định: [N] này/đó/kia không phải là...\nNghi vấn: [N] này/đó/kia có phải là... không?",
       "structure": "Khẳng định: この/その/あの + Danh từ + は + Danh từ/Tính từ + です\nPhủ định: この/その/あの + Danh từ + は + Danh từ/Tính từ + じゃありません\nNghi vấn: この/その/あの + Danh từ + は + Danh từ/Tính từ + ですか",
       "vietnamese_explanation": "Chỉ định từ đi trực tiếp trước danh từ để bổ nghĩa. 'この' chỉ vật gần người nói, 'その' chỉ vật gần người nghe, 'あの' chỉ vật xa cả hai.",
-      "japanese_example": "Khẳng định: この傘は私のです。\nPhủ định: この傘は私のではありません。\nNghi vấn: この傘はあなたのですか。",
+      "japanese_example": "Khẳng định: この傘(かさ)は私(わたし)のです。\nPhủ định: この傘(かさ)は私(わたし)のではありません。\nNghi vấn: この傘(かさ)はあなたのですか。",
       "example_meaning": "Khẳng định: Cái ô này là của tôi.\nPhủ định: Cái ô này không phải là của tôi.\nNghi vấn: Cái ô này có phải là của bạn không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:01.800853+00:00",
@@ -27430,7 +35235,7 @@ module.exports = {
       "meaning": "Khẳng định: N2 của N1 / N2 về N1",
       "structure": "Khẳng định: [N1] + の + [N2]",
       "vietnamese_explanation": "Trợ từ の diễn tả mối quan hệ sở hữu (N2 thuộc về N1) hoặc chỉ nội dung, tính chất của N2 (N2 nói về nội dung gì của N1).",
-      "japanese_example": "Khẳng định: これは日本語の教科書です。",
+      "japanese_example": "Khẳng định: これは日本語(にほんご)の教科書(きょうかしょ)です。",
       "example_meaning": "Khẳng định: Đây là sách giáo khoa tiếng Nhật.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:02.311544+00:00",
@@ -27444,7 +35249,7 @@ module.exports = {
       "meaning": "Khẳng định: Đây/Đó/Kia là N (địa điểm)\nPhủ định: Đây/Đó/Kia không phải là N (địa điểm)\nNghi vấn: Đây/Đó/Kia có phải là N (địa điểm) không?",
       "structure": "Khẳng định: ここ/そこ/あそこ + は + Danh từ địa điểm + です\nPhủ định: ここ/そこ/あそこ + は + Danh từ địa điểm + じゃありません\nNghi vấn: ここ/そこ/あそこ + は + Danh từ địa điểm + ですか",
       "vietnamese_explanation": "Dùng để chỉ địa điểm dựa vào khoảng cách tới người nói/nghe.",
-      "japanese_example": "Khẳng định:ここは 教室 です。\nPhủ định:ここは 教室 じゃありません。\nNghi vấn:ここは 教室 ですか。",
+      "japanese_example": "Khẳng định:ここは 教室(きょうしつ) です。\nPhủ định:ここは 教室(きょうしつ) じゃありません。\nNghi vấn:ここは 教室(きょうしつ) ですか。",
       "example_meaning": "Khẳng định:Đây là phòng học.\nPhủ định:Đây không phải là phòng học.\nNghi vấn:Đây có phải là phòng học không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:02.441348+00:00",
@@ -27458,7 +35263,7 @@ module.exports = {
       "meaning": "Khẳng định: N ở đây/đó/kia\nPhủ định: N không ở đây/đó/kia\nNghi vấn: N ở đâu / ở đây/đó/kia phải không?",
       "structure": "Khẳng định: Danh từ (địa điểm/người/vật) + は + ここ/そこ/あそこ + です\nPhủ định: Danh từ (địa điểm/người/vật) + は + ここ/そこ/あそこ + じゃありません\nNghi vấn: Danh từ (địa điểm/người/vật) + は + ここ/そこ/あそこ + ですか",
       "vietnamese_explanation": "Dùng để diễn tả nơi chốn của một người, vật hoặc địa điểm cụ thể.",
-      "japanese_example": "Khẳng định:事務所は そこ です。\nPhủ định:事務所は そこ じゃありません。\nNghi vấn:事務所は そこ ですか。",
+      "japanese_example": "Khẳng định:事務所(じむしょ)は そこ です。\nPhủ định:事務所(じむしょ)は そこ じゃありません。\nNghi vấn:事務所(じむしょ)は そこ ですか。",
       "example_meaning": "Khẳng định:Văn phòng ở đó.\nPhủ định:Văn phòng không ở đó.\nNghi vấn:Văn phòng ở đó phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:02.571739+00:00",
@@ -27472,7 +35277,7 @@ module.exports = {
       "meaning": "Khẳng định: Phía này/đó/kia là N\nPhủ định: Phía này/đó/kia không phải là N\nNghi vấn: Phía này/đó/kia có phải là N không?",
       "structure": "Khẳng định: こちら/そちら/あちら + は + Danh từ + です\nPhủ định: こちら/そちら/あちら + は + Danh từ + じゃありません\nNghi vấn: こちら/そちら/あちら + は + Danh từ + ですか",
       "vietnamese_explanation": "Là cách nói lịch sự (kính ngữ) của khi/đó/kia.",
-      "japanese_example": "Khẳng định:こちらは 受付 です。\nPhủ định:こちらは 受付 じゃありません。\nNghi vấn:こちらは 受付 ですか。",
+      "japanese_example": "Khẳng định:こちらは 受付(うけつけ) です。\nPhủ định:こちらは 受付(うけつけ) じゃありません。\nNghi vấn:こちらは 受付(うけつけ) ですか。",
       "example_meaning": "Khẳng định:Phía này là quầy tiếp tân.\nPhủ định:Phía này không phải là quầy tiếp tân.\nNghi vấn:Phía này có phải là quầy tiếp tân không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:02.69994+00:00",
@@ -27496,11 +35301,11 @@ module.exports = {
     {
       "id": 16,
       "lesson_id": 3,
-      "title": "お国は どちら ですか",
+      "title": "お国(くに)は どちら ですか",
       "meaning": "Nghi vấn: Đất nước của bạn ở đâu?",
-      "structure": "Nghi vấn: お国 + は + どちら + ですか",
+      "structure": "Nghi vấn: お国(くに) + は + どちら + ですか",
       "vietnamese_explanation": "Cách hỏi lịch sự về quốc tịch, quê quán của người đối diện.",
-      "japanese_example": "Nghi vấn:お国は どちら ですか。ーベトナム です。",
+      "japanese_example": "Nghi vấn:お国(くに)は どちら ですか。ーベトナム です。",
       "example_meaning": "Nghi vấn:Đất nước của bạn ở đâu? - Là Việt Nam.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:02.967307+00:00",
@@ -27524,11 +35329,11 @@ module.exports = {
     {
       "id": 19,
       "lesson_id": 4,
-      "title": "今 ［Số］時 ［Số］分 です",
+      "title": "今(いま) ［Số］時(じ) ［Số］分(ふん) です",
       "meaning": "Khẳng định: Bây giờ là... giờ... phút\nPhủ định: Bây giờ không phải là... giờ... phút\nNghi vấn: Bây giờ là... giờ... phút phải không?",
-      "structure": "Khẳng định: 今 + [Giờ]時 + [Phút]分 + です\nPhủ định: 今 + [Giờ]時 + [Phút]分 + ではありません\nNghi vấn: 今 + [Giờ]時 + [Phút]分 + ですか",
+      "structure": "Khẳng định: 今(いま) + [Giờ]時(じ) + [Phút]分(ふん) + です\nPhủ định: 今(いま) + [Giờ]時(じ) + [Phút]分(ふん) + ではありません\nNghi vấn: 今(いま) + [Giờ]時(じ) + [Phút]分(ふん) + ですか",
       "vietnamese_explanation": "Dùng để diễn tả thời gian hiện tại.",
-      "japanese_example": "Khẳng định: 今 7時10分 です。\nPhủ định: 今 7時10分 ではありません。\nNghi vấn: 今 7時10分 ですか。",
+      "japanese_example": "Khẳng định: 今(いま) 7時(じ)10分(ふん) です。\nPhủ định: 今(いま) 7時(じ)10分(ふん) ではありません。\nNghi vấn: 今(いま) 7時(じ)10分(ふん) ですか。",
       "example_meaning": "Khẳng định: Bây giờ là 7 giờ 10 phút.\nPhủ định: Bây giờ không phải là 7 giờ 10 phút.\nNghi vấn: Bây giờ là 7 giờ 10 phút phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:03.368536+00:00",
@@ -27542,7 +35347,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm việc gì đó\nPhủ định: Không làm việc gì đó\nNghi vấn: Có làm việc gì đó không?",
       "structure": "Khẳng định: Động từ dạng ます\nPhủ định: Động từ dạng ません\nNghi vấn: Động từ dạng ます + か",
       "vietnamese_explanation": "Biểu thị một hành động sẽ xảy ra hoặc thói quen hằng ngày.",
-      "japanese_example": "Khẳng định: 私は 毎日 勉強します。\nPhủ định: 私は 毎日 勉強しません。\nNghi vấn: 毎日 勉強しますか。",
+      "japanese_example": "Khẳng định: 私(わたし)は 毎日(まいにち) 勉強(べんきょう)します。\nPhủ định: 私(わたし)は 毎日(まいにち) 勉強(べんきょう)しません。\nNghi vấn: 毎日(まいにち) 勉強(べんきょう)しますか。",
       "example_meaning": "Khẳng định: Mỗi ngày tôi đều học tập.\nPhủ định: Mỗi ngày tôi không học tập.\nNghi vấn: Mỗi ngày bạn có học tập không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:03.497952+00:00",
@@ -27556,7 +35361,7 @@ module.exports = {
       "meaning": "Khẳng định: Đã làm việc gì đó\nPhủ định: Đã không làm việc gì đó\nNghi vấn: Đã làm việc gì đó phải không?",
       "structure": "Khẳng định: Động từ dạng ました\nPhủ định: Động từ dạng ませんでした\nNghi vấn: Động từ dạng ました + か",
       "vietnamese_explanation": "Diễn tả hành động đã hoàn thành trong quá khứ.",
-      "japanese_example": "Khẳng định: 昨日は 働きました。\nPhủ định: 昨日は 働きませんでした。\nNghi vấn: 昨日は 働きましたか。",
+      "japanese_example": "Khẳng định: 昨日(きのう)は 働(はたら)きました。\nPhủ định: 昨日(きのう)は 働(はたら)きませんでした。\nNghi vấn: 昨日(きのう)は 働(はたら)きましたか。",
       "example_meaning": "Khẳng định: Hôm qua tôi đã làm việc.\nPhủ định: Hôm qua tôi đã không làm việc.\nNghi vấn: Hôm qua bạn đã làm việc phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:03.625889+00:00",
@@ -27570,7 +35375,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm gì vào lúc nào\nPhủ định: Không làm gì vào lúc nào\nNghi vấn: Có làm gì vào lúc đó không?",
       "structure": "Khẳng định: Danh từ chỉ thời gian có con số + に + Động từ ます\nPhủ định: Danh từ chỉ thời gian có con số + に + Động từ ません\nNghi vấn: Danh từ chỉ thời gian có con số + に + Động từ ます + か",
       "vietnamese_explanation": "Diễn tả hành động xảy ra vào một thời điểm cụ thể.",
-      "japanese_example": "Khẳng định: 毎朝 6時に 起きます。\nPhủ định: 毎朝 6時に 起きません。\nNghi vấn: 毎朝 6時に 起きますか。",
+      "japanese_example": "Khẳng định: 毎朝(まいあさ) 6時(じ)に 起(お)きます。\nPhủ định: 毎朝(まいあさ) 6時(じ)に 起(お)きません。\nNghi vấn: 毎朝(まいあさ) 6時(じ)に 起(お)きますか。",
       "example_meaning": "Khẳng định: Mỗi sáng tôi thức dậy lúc 6 giờ.\nPhủ định: Mỗi sáng tôi không thức dậy lúc 6 giờ.\nNghi vấn: Mỗi sáng bạn thức dậy lúc 6 giờ phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:03.754075+00:00",
@@ -27584,7 +35389,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm việc từ... đến...\nPhủ định: Không làm việc từ... đến...\nNghi vấn: Có làm việc từ... đến... không?",
       "structure": "Khẳng định: N1 から N2 まで + Động từ\nPhủ định: N1 から N2 まで + Động từ (phủ định)\nNghi vấn: N1 から N2 まで + Động từ + か",
       "vietnamese_explanation": "Biểu thị khoảng thời gian hoặc không gian từ điểm đầu đến điểm cuối.",
-      "japanese_example": "Khẳng định: 9時から 5時まで 働きます。\nPhủ định: 9時から 5時まで 働きません。\nNghi vấn: 9時から 5時まで 働きますか。",
+      "japanese_example": "Khẳng định: 9時(じ)から 5時(じ)まで 働(はたら)きます。\nPhủ định: 9時(じ)から 5時(じ)まで 働(はたら)きません。\nNghi vấn: 9時(じ)から 5時(じ)まで 働(はたら)きますか。",
       "example_meaning": "Khẳng định: Tôi làm việc từ 9 giờ đến 5 giờ.\nPhủ định: Tôi không làm việc từ 9 giờ đến 5 giờ.\nNghi vấn: Bạn làm việc từ 9 giờ đến 5 giờ phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:03.882039+00:00",
@@ -27598,7 +35403,7 @@ module.exports = {
       "meaning": "Khẳng định: N1 và N2",
       "structure": "Khẳng định: Danh từ 1 + と + Danh từ 2",
       "vietnamese_explanation": "Dùng để nối hai danh từ.",
-      "japanese_example": "Khẳng định: 休みは 土曜日と 日曜日 です。",
+      "japanese_example": "Khẳng định: 休(やす)みは 土曜日(どようび)と 日曜日(にちようび) です。",
       "example_meaning": "Khẳng định: Ngày nghỉ là thứ bảy và chủ nhật.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.013558+00:00",
@@ -27612,7 +35417,7 @@ module.exports = {
       "meaning": "Đi/Đến/Về địa điểm N",
       "structure": "N + へ (e) + Động từ di chuyển",
       "vietnamese_explanation": "Trợ từ へ biểu thị hướng di chuyển của hành động.",
-      "japanese_example": "わたしは 日本へ 行きます。\n明日 東京へ 来ますか。\n毎晩 7時に うちへ 帰ります。",
+      "japanese_example": "わたしは 日本(にほん)へ 行(い)きます。\n明日(あした) 東京(とうきょう)へ 来(き)ますか。\n毎晩(まいばん) 7時(じ)に うちへ 帰(かえ)ります。",
       "example_meaning": "Tôi đi Nhật Bản.\nNgày mai bạn có đến Tokyo không?\nMỗi tối tôi về nhà lúc 7 giờ.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.143433+00:00",
@@ -27626,7 +35431,7 @@ module.exports = {
       "meaning": "Không đi đâu cả",
       "structure": "どこ + へ + も + Động từ di chuyển phủ định",
       "vietnamese_explanation": "Dùng để phủ định hoàn toàn hướng di chuyển.",
-      "japanese_example": "日曜日は どこへも 行きませんでした。",
+      "japanese_example": "日曜日(にちようび)は どこへも 行(い)きませんでした。",
       "example_meaning": "Chủ nhật tôi đã không đi đâu cả.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.271378+00:00",
@@ -27640,7 +35445,7 @@ module.exports = {
       "meaning": "Đi/Đến/Về bằng phương tiện N",
       "structure": "N (phương tiện giao thông) + で + Động từ di chuyển",
       "vietnamese_explanation": "Trợ từ で biểu thị phương tiện, cách thức di chuyển.",
-      "japanese_example": "電車で 会社へ 行きます。\n飛行機で 日本へ 行きました。\n駅から 歩いて うちへ 帰ります。",
+      "japanese_example": "電車(でんしゃ)で 会社(かいしゃ)へ 行(い)きます。\n飛行機(ひこうき)で 日本(にほん)へ 行(い)きました。\n駅(えき)から 歩(ある)いて うちへ 帰(かえ)ります。",
       "example_meaning": "Tôi đi đến công ty bằng tàu điện.\nTôi đã đến Nhật Bản bằng máy bay.\nTừ ga tôi đi bộ về nhà.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.41493+00:00",
@@ -27654,7 +35459,7 @@ module.exports = {
       "meaning": "Làm gì cùng với ai",
       "structure": "N (người/động vật) + と + Động từ",
       "vietnamese_explanation": "Trợ từ と biểu thị đối tượng cùng thực hiện hành động.",
-      "japanese_example": "家族と 日本へ 来ました。\n友達と 映画を 見に行きます。\n一人で 買い物に 行きます。",
+      "japanese_example": "家族(かぞく)と 日本(にほん)へ 来(き)ました。\n友達(ともだち)と 映画(えいが)を 見(み)に行(い)きます。\n一人(ひとり)で 買(か)い物(もの)に 行(い)きます。",
       "example_meaning": "Tôi đã đến Nhật Bản cùng gia đình.\nTôi đi xem phim cùng bạn bè.\nTôi đi mua sắm một mình.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.545495+00:00",
@@ -27668,7 +35473,7 @@ module.exports = {
       "meaning": "Khi nào làm việc gì đó",
       "structure": "いつ + Động từ + ですか/ますか",
       "vietnamese_explanation": "Dùng để hỏi về thời gian thực hiện hành động.",
-      "japanese_example": "いつ 日本へ 行きますか。\n誕生日は いつですか。\nいつ 国へ 帰りますか。",
+      "japanese_example": "いつ 日本(にほん)へ 行(い)きますか。\n誕生日(たんじょうび)は いつですか。\nいつ 国(くに)へ 帰(かえ)りますか。",
       "example_meaning": "Khi nào bạn đi Nhật Bản vậy?\nSinh nhật của bạn là khi nào?\nKhi nào bạn về nước?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.674446+00:00",
@@ -27682,7 +35487,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm hành động V tác động lên danh từ N\nPhủ định: Không làm hành động V tác động lên danh từ N\nNghi vấn: Có làm hành động V tác động lên danh từ N không?",
       "structure": "Khẳng định: Danh từ N + を (o) + Động từ V\nPhủ định: Danh từ N + を (o) + Động từ V (thể phủ định Vません)\nNghi vấn: Danh từ N + を (o) + Động từ V (thể nghi vấn Vますか)",
       "vietnamese_explanation": "Trợ từ を biểu thị đối tượng trực tiếp của hành động.",
-      "japanese_example": "Khẳng định: ジュースを 飲みます。\nPhủ định: ジュースを 飲みません。\nNghi vấn: ジュースを 飲みますか。",
+      "japanese_example": "Khẳng định: ジュースを 飲(の)みます。\nPhủ định: ジュースを 飲(の)みません。\nNghi vấn: ジュースを 飲(の)みますか。",
       "example_meaning": "Khẳng định: Tôi uống nước hoa quả.\nPhủ định: Tôi không uống nước hoa quả.\nNghi vấn: Bạn có uống nước hoa quả không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:04.802386+00:00",
@@ -27708,9 +35513,9 @@ module.exports = {
       "lesson_id": 6,
       "title": "なに を しますか",
       "meaning": "Khẳng định: Làm cái gì đó\nPhủ định: Không làm cái gì cả\nNghi vấn: Làm cái gì vậy?",
-      "structure": "Khẳng định: 何 + を + します\nPhủ định: 何も + を + しません\nNghi vấn: 何 + を + しますか",
+      "structure": "Khẳng định: 何(なに) + を + します\nPhủ định: 何(なに)も + を + しません\nNghi vấn: 何(なに) + を + しますか",
       "vietnamese_explanation": "Dùng để hỏi về hành động của đối phương.",
-      "japanese_example": "Khẳng định: ロビーで 本を 読みます。\nPhủ định: ロビーで 何も しません。\nNghi vấn: ロビーで 何を しますか。ー本を 読みます。",
+      "japanese_example": "Khẳng định: ロビーで 本(ほん)を 読(よ)みます。\nPhủ định: ロビーで 何(なに)も しません。\nNghi vấn: ロビーで 何(なに)を しますか。ー本(ほん)を 読(よ)みます。",
       "example_meaning": "Khẳng định: Tôi đọc sách ở sảnh.\nPhủ định: Tôi không làm gì ở sảnh cả.\nNghi vấn: Bạn làm gì ở sảnh? - Tôi đọc sách.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.058613+00:00",
@@ -27724,7 +35529,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm hành động V tại địa điểm N\nPhủ định: Không làm hành động V tại địa điểm N\nNghi vấn: Có làm hành động V tại địa điểm N không?",
       "structure": "Khẳng định: N (địa điểm) + で + Động từ V\nPhủ định: N (địa điểm) + で + Động từ V (thể phủ định Vません)\nNghi vấn: N (địa điểm) + で + Động từ V (thể nghi vấn Vますか)",
       "vietnamese_explanation": "Trợ từ で biểu thị nơi diễn ra hành động.",
-      "japanese_example": "Khẳng định: スーパーで パンを 買いました。\nPhủ định: スーパーで パンを 買いません。\nNghi vấn: スーパーで パンを 買いますか。",
+      "japanese_example": "Khẳng định: スーパーで パンを 買(か)いました。\nPhủ định: スーパーで パンを 買(か)いません。\nNghi vấn: スーパーで パンを 買(か)いますか。",
       "example_meaning": "Khẳng định: Tôi đã mua bánh mì ở siêu thị.\nPhủ định: Tôi không mua bánh mì ở siêu thị.\nNghi vấn: Bạn có mua bánh mì ở siêu thị không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.192455+00:00",
@@ -27738,7 +35543,7 @@ module.exports = {
       "meaning": "Khẳng định: Rủ rê / Đề nghị làm việc gì cùng nhau",
       "structure": "Khẳng định: V (bỏ masu) + ませんか",
       "vietnamese_explanation": "Lời mời rủ lịch sự, tôn trọng ý kiến đối phương.",
-      "japanese_example": "Khẳng định: 一緒に 神戸へ 行きませんか。",
+      "japanese_example": "Khẳng định: 一緒(いっしょ)に 神戸(こうべ)へ 行(い)きませんか。",
       "example_meaning": "Khẳng định: Chúng ta cùng đi Kobe chơi không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.319632+00:00",
@@ -27752,7 +35557,7 @@ module.exports = {
       "meaning": "Khẳng định: Chúng ta cùng làm... nhé / Đi thôi nào",
       "structure": "Khẳng định: V (bỏ masu) + ましょう",
       "vietnamese_explanation": "Dùng khi đồng ý lời mời rủ hoặc chủ động đề xuất.",
-      "japanese_example": "Khẳng định: ちょっと 休みましょう。",
+      "japanese_example": "Khẳng định: ちょっと 休(やす)みましょう。",
       "example_meaning": "Khẳng định: Chúng ta cùng nghỉ ngơi một chút nhé.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.448053+00:00",
@@ -27766,7 +35571,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm hành động V bằng công cụ/phương tiện N\nPhủ định: Không làm hành động V bằng công cụ/phương tiện N\nNghi vấn: Có làm hành động V bằng công cụ/phương tiện N không?",
       "structure": "Khẳng định: N (công cụ) で Động từ V\nPhủ định: N (công cụ) で Động từ Vません\nNghi vấn: N (công cụ) で Động từ Vますか",
       "vietnamese_explanation": "Trợ từ で biểu thị công cụ, phương pháp thực hiện hành động.",
-      "japanese_example": "Khẳng định: はさみで 紙を 切ります。\nPhủ định: はさみで 紙を 切りません。\nNghi vấn: はさみで 紙を 切りますか。",
+      "japanese_example": "Khẳng định: はさみで 紙(かみ)を 切(き)ります。\nPhủ định: はさみで 紙(かみ)を 切(き)りません。\nNghi vấn: はさみで 紙(かみ)を 切(き)りますか。",
       "example_meaning": "Khẳng định: Tôi cắt giấy bằng kéo.\nPhủ định: Tôi không cắt giấy bằng kéo.\nNghi vấn: Bạn có cắt giấy bằng kéo không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.576201+00:00",
@@ -27780,7 +35585,7 @@ module.exports = {
       "meaning": "Khẳng định: Từ/Câu trong tiếng nước ngoài là gì\nNghi vấn: Từ/Câu trong tiếng nước ngoài là gì?",
       "structure": "Khẳng định: Từ/Câu + は + Ngôn ngữ + で + なんですか\nNghi vấn: Từ/Câu + は + Ngôn ngữ + で + なんですか",
       "vietnamese_explanation": "Dùng để hỏi cách diễn đạt của một từ/câu bằng ngôn ngữ khác.",
-      "japanese_example": "Khẳng định: 「ありがとう」は 英語で 何ですか。\nNghi vấn: 「ありがとう」は 英語で 何ですか。",
+      "japanese_example": "Khẳng định: 「ありがとう」は 英語(えいご)で 何(なに)ですか。\nNghi vấn: 「ありがとう」は 英語(えいご)で 何(なに)ですか。",
       "example_meaning": "Khẳng định: \"Arigatou\" tiếng Anh là gì?\nNghi vấn: \"Arigatou\" tiếng Anh là gì?",
       "notes": "",
       "created_at": "2026-06-14T16:17:05.702529+00:00",
@@ -27794,7 +35599,7 @@ module.exports = {
       "meaning": "Khẳng định: Tặng / Cho mượn / Dạy N2 cho N1\nPhủ định: Không tặng / Không cho mượn / Không dạy N2 cho N1\nNghi vấn: Có tặng / Cho mượn / Dạy N2 cho N1 không?",
       "structure": "Khẳng định: N1 に N2 を あげます / かします / おしえます\nPhủ định: N1 に N2 を あげません / かしません / おしえません\nNghi vấn: N1 に N2 を あげますか / かしますか / おしえますか",
       "vietnamese_explanation": "Trợ từ に chỉ đối tượng tiếp nhận hành động.",
-      "japanese_example": "Khẳng định: 私は ミラーさんに 花を あげました。\nPhủ định: 私は ミラーさんに 花を あげませんでした。\nNghi vấn: 私は ミラーさんに 花を あげましたか。",
+      "japanese_example": "Khẳng định: 私(わたし)は ミラーさんに 花(はな)を あげました。\nPhủ định: 私(わたし)は ミラーさんに 花(はな)を あげませんでした。\nNghi vấn: 私(わたし)は ミラーさんに 花(はな)を あげましたか。",
       "example_meaning": "Khẳng định: Tôi đã tặng hoa cho anh Miller.\nPhủ định: Tôi đã không tặng hoa cho anh Miller.\nNghi vấn: Bạn đã tặng hoa cho anh Miller phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.829069+00:00",
@@ -27808,7 +35613,7 @@ module.exports = {
       "meaning": "Khẳng định: Nhận / Mượn / Học N2 từ N1\nPhủ định: Không nhận / Không mượn / Không học N2 từ N1\nNghi vấn: Có nhận / Mượn / Học N2 từ N1 không?",
       "structure": "Khẳng định: N1 に/から N2 を もらいます / かります / ならいます\nPhủ định: N1 に/から N2 を もらいません / かりません / ならいません\nNghi vấn: N1 に/から N2 を もらいますか / かりますか / ならいますか",
       "vietnamese_explanation": "Trợ từ に hoặc から chỉ đối tượng cung cấp đồ vật/tri thức.",
-      "japanese_example": "Khẳng định: サントスさんに 本を 借りました。\nPhủ định: サントスさんに 本を 借りませんでした。\nNghi vấn: サントスさんに 本を 借りましたか。",
+      "japanese_example": "Khẳng định: サントスさんに 本(ほん)を 借(か)りました。\nPhủ định: サントスさんに 本(ほん)を 借(か)りませんでした。\nNghi vấn: サントスさんに 本(ほん)を 借(か)りましたか。",
       "example_meaning": "Khẳng định: Tôi đã mượn sách từ anh Santos.\nPhủ định: Tôi đã không mượn sách từ anh Santos.\nNghi vấn: Bạn đã mượn sách từ anh Santos phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:05.958463+00:00",
@@ -27822,7 +35627,7 @@ module.exports = {
       "meaning": "Khẳng định: Đã làm việc gì đó rồi\nPhủ định: Vẫn chưa làm việc gì đó\nNghi vấn: Đã làm việc gì đó chưa?",
       "structure": "Khẳng định: もう + Động từ Vました\nPhủ định: まだ + Động từ Vませんでした\nNghi vấn: もう + Động từ Vましたか",
       "vietnamese_explanation": "Biểu thị hành động đã hoàn tất ở thời điểm hiện tại.",
-      "japanese_example": "Khẳng định: もう 晩ご飯を 食べました。\nPhủ định: いいえ、まだ 食べません。\nNghi vấn: もう 晩ご飯を 食べましたか。",
+      "japanese_example": "Khẳng định: もう 晩(ばん)ご飯(はん)を 食(た)べました。\nPhủ định: いいえ、まだ 食(た)べません。\nNghi vấn: もう 晩(ばん)ご飯(はん)を 食(た)べましたか。",
       "example_meaning": "Khẳng định: Tôi đã ăn tối rồi.\nPhủ định: Không, tôi vẫn chưa ăn.\nNghi vấn: Bạn đã ăn tối chưa?",
       "notes": "",
       "created_at": "2026-06-14T16:17:06.088561+00:00",
@@ -27836,7 +35641,7 @@ module.exports = {
       "meaning": "Khẳng định: N thì...\nPhủ định: N thì không...",
       "structure": "Khẳng định: N + は + Adj[na] + です\nPhủ định: N + は + Adj[na] + じゃありません",
       "vietnamese_explanation": "Tính từ đuôi na khi dùng ở cuối câu sẽ bỏ [na] đi.",
-      "japanese_example": "Khẳng định: この町は にぎやかです。\nPhủ định: この町は 静かじゃありません。",
+      "japanese_example": "Khẳng định: この町(まち)は にぎやかです。\nPhủ định: この町(まち)は 静(しず)かじゃありません。",
       "example_meaning": "Khẳng định: Thị trấn này nhộn nhịp.\nPhủ định: Thị trấn này không yên tĩnh.",
       "notes": "Khong co",
       "created_at": "2026-06-14T16:17:06.219386+00:00",
@@ -27850,7 +35655,7 @@ module.exports = {
       "meaning": "Khẳng định: N thì...\nPhủ định: N thì không...",
       "structure": "Khẳng định: N + は + Adj[i] + です\nPhủ định: N + は + Adj[i] (bỏ i) + くないです",
       "vietnamese_explanation": "Phủ định tính từ đuôi i bằng cách đổi đuôi [i] thành [くない].",
-      "japanese_example": "Khẳng định: 日本のカメラは 高いです。\nPhủ định: 日本のカメラは 高くないです。",
+      "japanese_example": "Khẳng định: 日本(にほん)のカメラは 高(たか)いです。\nPhủ định: 日本(にほん)のカメラは 高(たか)くないです。",
       "example_meaning": "Khẳng định: Máy ảnh Nhật Bản đắt.\nPhủ định: Máy ảnh Nhật Bản không đắt.",
       "notes": "Nghe",
       "created_at": "2026-06-14T16:17:06.349408+00:00",
@@ -27864,7 +35669,7 @@ module.exports = {
       "meaning": "Khẳng định: Tính từ bổ nghĩa cho danh từ N",
       "structure": "Khẳng định: Adj[na] + な + N / Adj[i] + N",
       "vietnamese_explanation": "Đặt tính từ trước danh từ để làm rõ tính chất của danh từ.",
-      "japanese_example": "Khẳng định: 有名な人ですね。新しい車があります。",
+      "japanese_example": "Khẳng định: 有名(ゆうめい)な人(ひと)ですね。新(あたら)しい車(くるま)があります。",
       "example_meaning": "Khẳng định: Người nổi tiếng đấy nhỉ. Tôi có xe hơi mới.",
       "notes": "Nghe",
       "created_at": "2026-06-14T16:17:06.48409+00:00",
@@ -27878,7 +35683,7 @@ module.exports = {
       "meaning": "Khẳng định: Rất...\nPhủ định: Không... lắm",
       "structure": "Khẳng định: とても + Adj khẳng định\nPhủ định: あまり + Adj phủ định",
       "vietnamese_explanation": "Phó từ biểu thị mức độ của tính chất.",
-      "japanese_example": "Khẳng định: この料理は とても美味しいです。\nPhủ định: この料理は あまり辛くないです。",
+      "japanese_example": "Khẳng định: この料理(りょうり)は とても美味(おい)しいです。\nPhủ định: この料理(りょうり)は あまり辛(から)くないです。",
       "example_meaning": "Khẳng định: Món ăn này rất ngon.\nPhủ định: Món ăn này không cay lắm.",
       "notes": "Khong co",
       "created_at": "2026-06-14T16:17:06.609725+00:00",
@@ -27892,7 +35697,7 @@ module.exports = {
       "meaning": "Nghi vấn: N thế nào?",
       "structure": "Nghi vấn: Danh từ + は + どうですか",
       "vietnamese_explanation": "Dùng để hỏi về ấn tượng, ý kiến của đối phương về danh từ.",
-      "japanese_example": "Nghi vấn: 日本の生活は どうですか。とても楽しいです。",
+      "japanese_example": "Nghi vấn: 日本(にほん)の生活(せいかつ)は どうですか。とても楽(たの)しいです。",
       "example_meaning": "Nghi vấn: Cuộc sống ở Nhật thế nào? - Rất vui vẻ thoải mái.",
       "notes": "Khong co",
       "created_at": "2026-06-14T16:17:06.737548+00:00",
@@ -27906,7 +35711,7 @@ module.exports = {
       "meaning": "Khẳng định: Có sở hữu N / Hiểu rõ N\nPhủ định: Không có sở hữu N / Không hiểu rõ N\nNghi vấn: Có sở hữu N không? / Có hiểu rõ N không?",
       "structure": "Khẳng định: N + が + あります / わかります\nPhủ định: N + が + ありません / わかりません\nNghi vấn: N + が + ありますか / わかりますか",
       "vietnamese_explanation": "Trợ từ が được dùng để biểu thị đối tượng của năng lực hoặc sở hữu.",
-      "japanese_example": "Khẳng định: 私は パソコンが あります。\nPhủ định: 私は パソコンが ありません。\nNghi vấn: パソコンが ありますか。",
+      "japanese_example": "Khẳng định: 私(わたし)は パソコンが あります。\nPhủ định: 私(わたし)は パソコンが ありません。\nNghi vấn: パソコンが ありますか。",
       "example_meaning": "Khẳng định: Tôi có máy tính.\nPhủ định: Tôi không có máy tính.\nNghi vấn: Bạn có máy tính không?",
       "notes": "Trợ từ が biểu thị đối tượng của sở hữu hoặc năng lực",
       "created_at": "2026-06-14T16:17:06.867108+00:00",
@@ -27920,7 +35725,7 @@ module.exports = {
       "meaning": "Khẳng định: Thích N / Giỏi N\nPhủ định: Không thích N / Không giỏi N\nNghi vấn: Có thích N không? / Có giỏi N không?",
       "structure": "Khẳng định: N + が + すきです / じょうずです\nPhủ định: N + が + すきでは ありません / じょうずでは ありません\nNghi vấn: N + が + すきですか / じょうずですか",
       "vietnamese_explanation": "Trợ từ が dùng với các tính từ chỉ sở thích hoặc năng lực.",
-      "japanese_example": "Khẳng định: サントスさんは サッカーが 上手です。\nPhủ định: サントスさんは サッカーが 上手では ありません。\nNghi vấn: サントスさんは サッカーが 上手ですか。",
+      "japanese_example": "Khẳng định: サントスさんは サッカーが 上手(じょうず)です。\nPhủ định: サントスさんは サッカーが 上手(じょうず)では ありません。\nNghi vấn: サントスさんは サッカーが 上手(じょうず)ですか。",
       "example_meaning": "Khẳng định: Anh Santos chơi bóng đá giỏi.\nPhủ định: Anh Santos chơi bóng đá không giỏi.\nNghi vấn: Anh Santos chơi bóng đá giỏi không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:06.995666+00:00",
@@ -27932,9 +35737,9 @@ module.exports = {
       "lesson_id": 9,
       "title": "どんな N が すきですか",
       "meaning": "Khẳng định: Thích loại N như thế nào\nNghi vấn: Bạn thích loại N nào?",
-      "structure": "Khẳng định: どんな + Danh từ + が + 好きです\nNghi vấn: どんな + Danh từ + が + 好きですか",
+      "structure": "Khẳng định: どんな + Danh từ + が + 好(す)きです\nNghi vấn: どんな + Danh từ + が + 好(す)きですか",
       "vietnamese_explanation": "Dùng để hỏi cụ thể về sở thích trong một nhóm đối tượng.",
-      "japanese_example": "Khẳng định: どんな スポーツが 好きです。\nNghi vấn: どんな スポーツが 好きですか。",
+      "japanese_example": "Khẳng định: どんな スポーツが 好(す)きです。\nNghi vấn: どんな スポーツが 好(す)きですか。",
       "example_meaning": "Khẳng định: Thích môn thể thao nào.\nNghi vấn: Bạn thích môn thể thao nào?",
       "notes": "",
       "created_at": "2026-06-14T16:17:07.123344+00:00",
@@ -27948,7 +35753,7 @@ module.exports = {
       "meaning": "Khẳng định: Hiểu rõ / Hiểu đại khái / Hiểu một chút\nPhủ định: Hoàn toàn không hiểu / Không hiểu lắm\nNghi vấn: Có hiểu không?",
       "structure": "Khẳng định: Phó từ (よく/だいたい/すこし) + Động từ khẳng định\nPhủ định: Phó từ (あまり/ぜんぜん) + Động từ phủ định\nNghi vấn: よく + Động từ + ませんか",
       "vietnamese_explanation": "Phó từ đứng trước động từ để biểu thị tần suất/mức độ.",
-      "japanese_example": "Khẳng định: 英語が よく 分かります。\nPhủ định: 漢字が 全然 分かりません。\nNghi vấn: 英語が よく 分かりますか。",
+      "japanese_example": "Khẳng định: 英語(えいご)が よく 分(ふん)(わ)かります。\nPhủ định: 漢字(かんじ)が 全然(ぜんぜん) 分(ふん)(わ)かりません。\nNghi vấn: 英語(えいご)が よく 分(ふん)(わ)かりますか。",
       "example_meaning": "Khẳng định: Tiếng Anh thì hiểu rõ.\nPhủ định: Tôi hoàn toàn không hiểu chữ Hán.\nNghi vấn: Bạn có hiểu tiếng Anh không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:07.251008+00:00",
@@ -27962,7 +35767,7 @@ module.exports = {
       "meaning": "Khẳng định: Vì Câu 1 nên Câu 2\nNghi vấn: Tại sao Câu 2? - Vì Câu 1",
       "structure": "Khẳng định: Câu 1 + から + Câu 2\nNghi vấn: Doushite Câu 2? - Câu 1 + から",
       "vietnamese_explanation": "Từ nối から biểu thị lý do của hành động ở Câu 2.",
-      "japanese_example": "Khẳng định: 時間がないから、テレビを見ません。\nNghi vấn: どうして テレビを 見ませんか。ー時間がないからです。",
+      "japanese_example": "Khẳng định: 時間(じかん)がないから、テレビを見(み)ません。\nNghi vấn: どうして テレビを 見(み)ませんか。ー時間(じかん)がないからです。",
       "example_meaning": "Khẳng định: Vì không có thời gian nên tôi không xem tivi.\nNghi vấn: Tại sao không xem tivi? - Vì không có thời gian.",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:07.380144+00:00",
@@ -27976,7 +35781,7 @@ module.exports = {
       "meaning": "Khẳng định: Có vật/người N2 ở địa điểm N1\nPhủ định: Không có vật/người N2 ở địa điểm N1\nNghi vấn: Có vật/người N2 ở địa điểm N1 phải không?",
       "structure": "Khẳng định: N1 に N2 が あります/います\nPhủ định: N1 に N2 が ありません/いません\nNghi vấn: N1 に N2 が ありますか/いますか",
       "vietnamese_explanation": "Diễn tả sự hiện hữu, tồn tại của vật thể hoặc sinh vật tại một vị trí.",
-      "japanese_example": "Khẳng định: 机の上に 本があります。庭に 犬がいます。\nPhủ định: 机の上に 本ングありません。庭に 犬がいません。\nNghi vấn: 机の上に 本がありますか。庭に 犬がいますか。",
+      "japanese_example": "Khẳng định: 机(つくえ)の上(うえ)に 本(ほん)があります。庭(にわ)に 犬(いぬ)がいます。\nPhủ định: 机(つくえ)の上(うえ)に 本(ほん)ングありません。庭(にわ)に 犬(いぬ)がいません。\nNghi vấn: 机(つくえ)の上(うえ)に 本(ほん)がありますか。庭(にわ)に 犬(いぬ)がいますか。",
       "example_meaning": "Khẳng định: Có sách trên bàn. Có con chó trong sân.\nPhủ định: Không có sách trên bàn. Không có con chó trong sân.\nNghi vấn: Có sách trên bàn phải không? Có con chó trong sân phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:07.510861+00:00",
@@ -27990,7 +35795,7 @@ module.exports = {
       "meaning": "Khẳng định: N2 thì ở địa điểm N1\nPhủ định: N2 thì không ở địa điểm N1\nNghi vấn: N2 có ở địa điểm N1 không?",
       "structure": "Khẳng định: N2 は N1 に あります/います\nPhủ định: N2 は N1 に ありません/いません\nNghi vấn: N2 は N1 に ありますか/いますか",
       "vietnamese_explanation": "Dùng khi N2 đã được biết đến và ta muốn nhấn mạnh nơi chốn của nó.",
-      "japanese_example": "Khẳng định: ミラーさんは 事務所に います。本は 机の上に あります。\nPhủ định: ミラーさんは 事務所に いません。本は 机の上に ありません。\nNghi vấn: ミラーさんは 事務所に いますか。本は 机の上に ありますか。",
+      "japanese_example": "Khẳng định: ミラーさんは 事務所(じむしょ)に います。本(ほん)は 机(つくえ)の上(うえ)に あります。\nPhủ định: ミラーさんは 事務所(じむしょ)に いません。本(ほん)は 机(つくえ)の上(うえ)に ありません。\nNghi vấn: ミラーさんは 事務所(じむしょ)に いますか。本(ほん)は 机(つくえ)の上(うえ)に ありますか。",
       "example_meaning": "Khẳng định: Anh Miller ở trong văn phòng. Sách ở trên bàn học.\nPhủ định: Anh Miller không ở trong văn phòng. Sách không ở trên bàn học.\nNghi vấn: Anh Miller có ở trong văn phòng không? Sách có ở trên bàn học không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:07.638245+00:00",
@@ -28004,7 +35809,7 @@ module.exports = {
       "meaning": "Khẳng định: Vị trí N2 của N1 (trên/dưới/trước/sau...)\nPhủ định: Không phải vị trí N2 của N1\nNghi vấn: Có phải vị trí N2 của N1 không?",
       "structure": "Khẳng định: N1 の N2\nPhủ định: N1 の N2 ではありません\nNghi vấn: N1 の N2 ですか",
       "vietnamese_explanation": "Trợ từ の liên kết vật thể với danh từ chỉ phương hướng vị trí.",
-      "japanese_example": "Khẳng định: 箱の中に 猫がいます。駅の近くに スーパーがあります。\nPhủ định: 箱の中に 猫はいません。駅の近くに スーパーはありません。\nNghi vấn: 箱の中に 猫がいますか。駅の近くに スーパーがありますか。",
+      "japanese_example": "Khẳng định: 箱(はこ)の中(なか)に 猫(ねこ)がいます。駅(えき)の近(ちか)くに スーパーがあります。\nPhủ định: 箱(はこ)の中(なか)に 猫(ねこ)はいません。駅(えき)の近(ちか)くに スーパーはありません。\nNghi vấn: 箱(はこ)の中(なか)に 猫(ねこ)がいますか。駅(えき)の近(ちか)くに スーパーがありますか。",
       "example_meaning": "Khẳng định: Có mèo trong hộp. Có siêu thị ở gần nhà ga.\nPhủ định: Không có mèo trong hộp. Không có siêu thị ở gần nhà ga.\nNghi vấn: Có mèo trong hộp phải không? Có siêu thị ở gần nhà ga phải không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:07.765167+00:00",
@@ -28018,7 +35823,7 @@ module.exports = {
       "meaning": "Khẳng định: N1 và N2 (Liệt kê không đầy đủ)\nPhủ định: Không phải N1 và N2\nNghi vấn: Có phải N1 và N2 không?",
       "structure": "Khẳng định: N1 や N2 など が あります/います\nPhủ định: N1 や N2 など が ありません/いません\nNghi vấn: N1 や N2 など が ありますか/いますか",
       "vietnamese_explanation": "Trợ từ や dùng để liệt kê tượng trưng một vài danh từ, など có nghĩa là 'vân vân'.",
-      "japanese_example": "Khẳng định: 冷蔵庫の中に 肉や 野菜など があります。\nPhủ định: 冷蔵庫の中に 肉や 野菜など がありません。\nNghi vấn: 冷蔵庫の中に 肉や 野菜など がありますか。",
+      "japanese_example": "Khẳng định: 冷蔵庫(れいぞうこ)の中(なか)に 肉(にく)や 野菜(やさい)など があります。\nPhủ định: 冷蔵庫(れいぞうこ)の中(なか)に 肉(にく)や 野菜(やさい)など がありません。\nNghi vấn: 冷蔵庫(れいぞうこ)の中(なか)に 肉(にく)や 野菜(やさい)など がありますか。",
       "example_meaning": "Khẳng định: Trong tủ lạnh có thịt, rau, vân vân.\nPhủ định: Trong tủ lạnh không có thịt, rau, vân vân.\nNghi vấn: Trong tủ lạnh có thịt, rau, vân vân phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:07.891888+00:00",
@@ -28032,7 +35837,7 @@ module.exports = {
       "meaning": "Khẳng định: Vị trí đặt lượng từ chỉ số lượng khi thực hiện hành động\nPhủ định: Vị trí đặt lượng từ chỉ số lượng khi không thực hiện hành động\nNghi vấn: Vị trí đặt lượng từ chỉ số lượng khi hỏi về số lượng",
       "structure": "Khẳng định: Lượng từ + Động từ V\nPhủ định: Lượng từ + Động từ Vません\nNghi vấn: Lượng từ + Động từ Vますか",
       "vietnamese_explanation": "Khác với tiếng Việt, số lượng trong tiếng Nhật thường đặt trực tiếp trước động từ.",
-      "japanese_example": "Khẳng định: りんごを 四つ 買いました。\nPhủ định: りんごを 四つ 買いませんでした。\nNghi vấn: りんごを 四つ 買いましたか。",
+      "japanese_example": "Khẳng định: りんごを 四(よん)つ 買(か)いました。\nPhủ định: りんごを 四(よん)つ 買(か)いませんでした。\nNghi vấn: りんごを 四(よん)つ 買(か)いましたか。",
       "example_meaning": "Khẳng định: Tôi đã mua 4 quả táo.\nPhủ định: Tôi đã không mua 4 quả táo nào.\nNghi vấn: Bạn đã mua 4 quả táo phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:08.01949+00:00",
@@ -28046,7 +35851,7 @@ module.exports = {
       "meaning": "Khẳng định: Diễn tả tần suất thực hiện hành động trong khoảng thời gian\nPhủ định: Diễn tả tần suất không thực hiện hành động trong khoảng thời gian\nNghi vấn: Hỏi về tần suất thực hiện hành động trong khoảng thời gian",
       "structure": "Khẳng định: Thời gian + ni + Lượng từ tần suất (kai...) + V\nPhủ định: Thời gian + ni + Lượng từ tần suất (kai...) + Vません\nNghi vấn: Thời gian + ni + nan-kai + Vますか",
       "vietnamese_explanation": "Trợ từ に ở đây biểu thị phạm vi thời gian làm cột mốc đo tần suất.",
-      "japanese_example": "Khẳng định: 1か月に 2回 映画を 見ます。\nPhủ định: 1か月に 2回 映画を 見ません。\nNghi vấn: 1か月に 何回 映画を 見ますか。",
+      "japanese_example": "Khẳng định: 1か月(がつ)に 2回(かい) 映画(えいが)を 見(み)ます。\nPhủ định: 1か月(がつ)に 2回(かい) 映画(えいが)を 見(み)ません。\nNghi vấn: 1か月(がつ)に 何回(なんかい) 映画(えいが)を 見(み)ますか。",
       "example_meaning": "Khẳng định: Tôi xem phim 2 lần một tháng.\nPhủ định: Tôi không xem phim 2 lần một tháng.\nNghi vấn: Bạn xem phim mấy lần một tháng?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:08.154481+00:00",
@@ -28060,7 +35865,7 @@ module.exports = {
       "meaning": "Khẳng định: Biểu thị khoảng thời gian duy trì hành động\nPhủ định: Biểu thị khoảng thời gian không duy trì hành động\nNghi vấn: Hỏi về khoảng thời gian duy trì hành động",
       "structure": "Khẳng định: Khoảng thời gian + V\nPhủ định: Khoảng thời gian + Vません\nNghi vấn: Donokurai + Vますか",
       "vietnamese_explanation": "Để nói hành động kéo dài bao lâu, ta đặt khoảng thời gian không có trợ từ trước động từ.",
-      "japanese_example": "Khẳng định: 日本に 1年 います。\nPhủ định: 日本に 1年 いません。\nNghi vấn: 日本に どのくらい いますか。",
+      "japanese_example": "Khẳng định: 日本(にほん)に 1年(ねん) います。\nPhủ định: 日本(にほん)に 1年(ねん) いません。\nNghi vấn: 日本(にほん)に どのくらい いますか。",
       "example_meaning": "Khẳng định: Tôi ở Nhật Bản 1 năm.\nPhủ định: Tôi không ở Nhật Bản 1 năm.\nNghi vấn: Bạn ở Nhật Bản bao lâu?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:08.281335+00:00",
@@ -28074,7 +35879,7 @@ module.exports = {
       "meaning": "Khẳng định: Mất bao lâu để di chuyển từ N1 đến N2\nPhủ định: Không mất bao lâu để di chuyển từ N1 đến N2\nNghi vấn: Mất bao lâu để di chuyển từ N1 đến N2?",
       "structure": "Khẳng định: N1 kara N2 made + Thời gian + kakarimasu\nPhủ định: N1 kara N2 made + Thời gian + kakarimasen\nNghi vấn: N1 kara N2 made + dorekurai kakarimasu ka",
       "vietnamese_explanation": "Dùng để nói về thời gian cần thiết để đi từ điểm xuất phát đến đích.",
-      "japanese_example": "Khẳng định: 駅から うちまで 15分 かかります。\nPhủ định: 駅から うちまで 15分 かかりません。\nNghi vấn: 駅から うちまで どれくらい かかりますか。",
+      "japanese_example": "Khẳng định: 駅(えき)から うちまで 15分(ふん) かかります。\nPhủ định: 駅(えき)から うちまで 15分(ふん) かかりません。\nNghi vấn: 駅(えき)から うちまで どれくらい かかりますか。",
       "example_meaning": "Khẳng định: Mất 15 phút đi từ nhà ga về nhà.\nPhủ định: Không mất 15 phút đi từ nhà ga về nhà.\nNghi vấn: Mất bao lâu để đi từ nhà ga về nhà?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:08.40798+00:00",
@@ -28088,7 +35893,7 @@ module.exports = {
       "meaning": "Khẳng định: Chỉ (giới hạn số lượng ít)\nPhủ định: Không chỉ có chừng đó\nNghi vấn: Có phải chỉ có chừng đó không?",
       "structure": "Khẳng định: Lượng từ + だけ + です\nPhủ định: Lượng từ + だけ ではありません\nNghi vấn: Lượng từ + だけ ですか",
       "vietnamese_explanation": "Đứng sau lượng từ để nhấn mạnh sự ít ỏi hoặc giới hạn độc quyền.",
-      "japanese_example": "Khẳng định: 休みは 日曜日 だけ です。\nPhủ định: 休みは 日曜日 だけ では ありません。\nNghi vấn: 休みは 日曜日 だけ ですか。",
+      "japanese_example": "Khẳng định: 休(やす)みは 日曜日(にちようび) だけ です。\nPhủ định: 休(やす)みは 日曜日(にちようび) だけ では ありません。\nNghi vấn: 休(やす)みは 日曜日(にちようび) だけ ですか。",
       "example_meaning": "Khẳng định: Ngày nghỉ chỉ có chủ nhật thôi.\nPhủ định: Ngày nghỉ không chỉ có mỗi chủ nhật.\nNghi vấn: Ngày nghỉ chỉ có chủ nhật phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:08.534244+00:00",
@@ -28102,7 +35907,7 @@ module.exports = {
       "meaning": "Khẳng định: So sánh hơn: Danh từ 1 hơn Danh từ 2\nPhủ định: So sánh kém: Danh từ 1 không hơn Danh từ 2\nNghi vấn: So sánh hơn kém: Danh từ 1 có hơn Danh từ 2 không",
       "structure": "Khẳng định: N1 + は + N2 + より + Adj + です\nPhủ định: N1 + は + N2 + より + Adj + ではありません\nNghi vấn: N1 + は + N2 + より + Adj + ですか",
       "vietnamese_explanation": "Trợ từ より nghĩa là 'so với'. N2 đóng vai trò làm mốc so sánh.",
-      "japanese_example": "Khẳng định: この車は あの車より 速いです。\nPhủ định: この車は あの車より 速くありません。\nNghi vấn: この車は あの車より 速いですか。",
+      "japanese_example": "Khẳng định: この車(くるま)は あの車(くるま)より 速(はや)いです。\nPhủ định: この車(くるま)は あの車(くるま)より 速(はや)くありません。\nNghi vấn: この車(くるま)は あの車(くるま)より 速(はや)いですか。",
       "example_meaning": "Khẳng định: Chiếc xe này nhanh hơn chiếc xe kia.\nPhủ định: Chiếc xe này không nhanh bằng chiếc xe kia.\nNghi vấn: Chiếc xe này có nhanh hơn chiếc xe kia không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:08.661908+00:00",
@@ -28116,7 +35921,7 @@ module.exports = {
       "meaning": "Khẳng định: Trả lời lựa chọn đối tượng vượt trội hơn\nNghi vấn: Hỏi so sánh lựa chọn giữa hai danh từ",
       "structure": "Khẳng định: N1 のほうが + Adj + です\nNghi vấn: N1 + と + N2 + と + どちらが + Adj + ですか",
       "vietnamese_explanation": "Dùng để yêu cầu người nghe lựa chọn đối tượng vượt trội hơn giữa N1 và N2. Trả lời dùng 'N1 のほうが Adj です'.",
-      "japanese_example": "Khẳng định: 日本語のほうが 難しいです。\nNghi vấn: 日本語と 英語と どちらが 難しいですか。",
+      "japanese_example": "Khẳng định: 日本語(にほんご)のほうが 難(むずか)しいです。\nNghi vấn: 日本語(にほんご)と 英語(えいご)と どちらが 難(むずか)しいですか。",
       "example_meaning": "Khẳng định: Tiếng Nhật khó hơn.\nNghi vấn: Tiếng Nhật và tiếng Anh cái nào khó hơn?",
       "notes": "",
       "created_at": "2026-06-14T16:17:08.792488+00:00",
@@ -28126,11 +35931,11 @@ module.exports = {
     {
       "id": 62,
       "lesson_id": 12,
-      "title": "Danh từ 1 [phạm vi] で 何/どこ/誰/いつ が いちばん Tính từ ですか",
+      "title": "Danh từ 1 [phạm vi] で 何(なに)/どこ/誰(だれ)/いつ が いちばん Tính từ ですか",
       "meaning": "Khẳng định: Trả lời đối tượng vượt trội nhất trong phạm vi\nNghi vấn: So sánh nhất trong một phạm vi, tập hợp",
       "structure": "Khẳng định: [Đối tượng] + が + いちばん + Adj + です\nNghi vấn: N1 (phạm vi) + で + Từ nghi vấn + が + いちばん + Adj + ですか",
       "vietnamese_explanation": "Dùng để hỏi đối tượng vượt trội nhất trong một tập thể hoặc giới hạn địa điểm/thời gian.",
-      "japanese_example": "Khẳng định: 2月が いちばん 寒いです。\nNghi vấn: 1年で いつが いちばん 寒いですか。",
+      "japanese_example": "Khẳng định: 2月(がつ)が いちばん 寒(さむ)いです。\nNghi vấn: 1年(ねん)で いつが いちばん 寒(さむ)いですか。",
       "example_meaning": "Khẳng định: Tháng 2 là lạnh nhất.\nNghi vấn: Trong một năm khi nào lạnh nhất?",
       "notes": "",
       "created_at": "2026-06-14T16:17:08.941544+00:00",
@@ -28144,7 +35949,7 @@ module.exports = {
       "meaning": "Khẳng định: Thì quá khứ khẳng định của Danh từ và Tính từ đuôi na\nPhủ định: Thì quá khứ phủ định của Danh từ và Tính từ đuôi na",
       "structure": "Khẳng định: N/Adj[na] + でした\nPhủ định: N/Adj[na] + じゃありませんでした",
       "vietnamese_explanation": "Quá khứ của です là でした, phủ định quá khứ là じゃありませんでした.",
-      "japanese_example": "Khẳng định: 昨日の祭りは にぎやかでした。\nPhủ định: 昨日の祭りは 暇じゃありませんでした。",
+      "japanese_example": "Khẳng định: 昨日(きのう)の祭(まつり)りは にぎやかでした。\nPhủ định: 昨日(きのう)の祭(まつり)りは 暇(ひま)じゃありませんでした。",
       "example_meaning": "Khẳng định: Lễ hội hôm qua rất nhộn nhịp.\nPhủ định: Lễ hội hôm qua đã không rảnh rỗi.",
       "notes": "",
       "created_at": "2026-06-14T16:17:09.06964+00:00",
@@ -28158,7 +35963,7 @@ module.exports = {
       "meaning": "Khẳng định: Thì quá khứ khẳng định của Tính từ đuôi i\nPhủ định: Thì quá khứ phủ định của Tính từ đuôi i",
       "structure": "Khẳng định: Adj[i] bỏ [い] + かったです\nPhủ định: Adj[i] bỏ [い] + くなかったです",
       "vietnamese_explanation": "Biến đổi đuôi tính từ đuôi i để diễn tả trạng thái trong quá khứ.",
-      "japanese_example": "Khẳng định: 昨日の試験は 難しかったです。\nPhủ định: 昨日の試験は よくなかったです。",
+      "japanese_example": "Khẳng định: 昨日(きのう)の試験(しけん)は 難(むずか)しかったです。\nPhủ định: 昨日(きのう)の試験(しけん)は よくなかったです。",
       "example_meaning": "Khẳng định: Kỳ thi hôm qua đã rất khó.\nPhủ định: Kỳ thi hôm qua đã không tốt lắm.",
       "notes": "",
       "created_at": "2026-06-14T16:17:09.198545+00:00",
@@ -28170,9 +35975,9 @@ module.exports = {
       "lesson_id": 13,
       "title": "Noun が ほしいです",
       "meaning": "Khẳng định: Muốn có một đồ vật nào đó\nPhủ định: Không muốn có đồ vật nào đó\nNghi vấn: Có muốn có đồ vật nào đó không",
-      "structure": "Khẳng định: Chủ ngữ は + Danh từ + が + 欲しい です\nPhủ định: Chủ ngữ は + Danh từ + が + 欲しくない です\nNghi vấn: Chủ ngữ は + Danh từ + が + 欲しい ですか",
+      "structure": "Khẳng định: Chủ ngữ は + Danh từ + が + 欲(ほ)しい です\nPhủ định: Chủ ngữ は + Danh từ + が + 欲(ほ)しくない です\nNghi vấn: Chủ ngữ は + Danh từ + が + 欲(ほ)しい ですか",
       "vietnamese_explanation": "Diễn tả nguyện vọng muốn sở hữu đồ vật của người nói. Trợ từ đi kèm vật là が.",
-      "japanese_example": "Khẳng định: 私は カメラが 欲しいです。\nPhủ định: 私は カメラが 欲しくないです。\nNghi vấn: あなたは カメラが 欲しいですか。",
+      "japanese_example": "Khẳng định: 私(わたし)は カメラが 欲(ほ)しいです。\nPhủ định: 私(わたし)は カメラが 欲(ほ)しくないです。\nNghi vấn: あなたは カメラが 欲(ほ)しいですか。",
       "example_meaning": "Khẳng định: Tôi muốn có cái máy ảnh.\nPhủ định: Tôi không muốn có cái máy ảnh.\nNghi vấn: Bạn có muốn có cái máy ảnh không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:09.336294+00:00",
@@ -28186,7 +35991,7 @@ module.exports = {
       "meaning": "Khẳng định: Muốn thực hiện một hành động nào đó\nPhủ định: Không muốn thực hiện hành động nào đó\nNghi vấn: Có muốn thực hiện hành động nào đó không",
       "structure": "Khẳng định: Chủ ngữ は + Vます (bỏ ます) + たい です\nPhủ định: Chủ ngữ は + Vます (bỏ ます) + たくない です\nNghi vấn: Chủ ngữ は + Vます (bỏ ます) + たい ですか",
       "vietnamese_explanation": "Diễn tả ý muốn thực hiện hành động của người nói. Trợ từ を có thể đổi thành が.",
-      "japanese_example": "Khẳng định: 日本へ 行きたいです。\nPhủ định: 私は あまり 行きたくないです。\nNghi vấn: 何を 食べたいですか。",
+      "japanese_example": "Khẳng định: 日本(にほん)へ 行(い)きたいです。\nPhủ định: 私(わたし)は あまり 行(い)きたくないです。\nNghi vấn: 何(なに)を 食(た)べたいですか。",
       "example_meaning": "Khẳng định: Tôi muốn đi Nhật.\nPhủ định: Tôi không muốn đi lắm.\nNghi vấn: Bạn muốn ăn cái gì?",
       "notes": "Không có",
       "created_at": "2026-06-14T16:17:09.470596+00:00",
@@ -28198,9 +36003,9 @@ module.exports = {
       "lesson_id": 13,
       "title": "Danh từ (địa điểm) へ + V［ます-stem］/ Danh từ + に + いきます / きます / かえります",
       "meaning": "Khẳng định: Đi/Đến/Về đâu nhằm mục đích gì\nPhủ định: Không đi/đến/về đâu nhằm mục đích gì\nNghi vấn: Có đi/đến/về đâu nhằm mục đích gì không",
-      "structure": "Khẳng định: N (địa điểm) + へ + V (bỏ ます) + に + 行きます/来ます/帰ります\nPhủ định: N (địa điểm) + へ + V (bỏ ます) + に + 行きません/来ません/帰りません\nNghi vấn: N (địa điểm) + へ + V (bỏ ます) + に + 行きますか/来ますか/帰りますか",
+      "structure": "Khẳng định: N (địa điểm) + へ + V (bỏ ます) + に + 行(い)きます/来(き)ます/帰(かえ)ります\nPhủ định: N (địa điểm) + へ + V (bỏ ます) + に + 行(い)きません/来(き)ません/帰(かえ)りません\nNghi vấn: N (địa điểm) + へ + V (bỏ ます) + に + 行(い)きますか/来(き)ますか/帰(かえ)りますか",
       "vietnamese_explanation": "Biểu thị mục đích di chuyển của chủ thể hành động.",
-      "japanese_example": "Khẳng định: デパートへ 買い物に 行きます。\nPhủ định: どこへも 買い物に 行きません。\nNghi vấn: どこへ 買い物に 行きますか。",
+      "japanese_example": "Khẳng định: デパートへ 買(か)い物(もの)に 行(い)きます。\nPhủ định: どこへも 買(か)い物(もの)に 行(い)きません。\nNghi vấn: どこへ 買(か)い物(もの)に 行(い)きますか。",
       "example_meaning": "Khẳng định: Tôi đi bưu điện để mua sắm.\nPhủ định: Tôi không đi đâu mua sắm cả.\nNghi vấn: Bạn đi đâu mua sắm vậy?",
       "notes": "Không có",
       "created_at": "2026-06-14T16:17:09.602771+00:00",
@@ -28212,9 +36017,9 @@ module.exports = {
       "lesson_id": 13,
       "title": "なにか / どこか",
       "meaning": "Khẳng định: Cái gì đó / Nơi nào đó\nNghi vấn: Có cái gì đó / Có nơi nào đó không",
-      "structure": "Khẳng định: 何 + か / どこ + か\nNghi vấn: 何 + か + ましたか / どこ + か + へ 行きましたか",
+      "structure": "Khẳng định: 何(なに) + か / どこ + か\nNghi vấn: 何(なに) + か + ましたか / どこ + か + へ 行(い)きましたか",
       "vietnamese_explanation": "Trợ từ か biến từ hỏi thành đại từ bất định chỉ vật hoặc nơi chốn không xác định.",
-      "japanese_example": "Khẳng định: おなかがすきましたから、何か 食べたいです。\nNghi vấn: どこかへ 行きましたか。",
+      "japanese_example": "Khẳng định: おなかがすきましたから、何(なに)か 食(た)べたいです。\nNghi vấn: どこかへ 行(い)きましたか。",
       "example_meaning": "Khẳng định: Vì đói bụng nên tôi muốn ăn cái gì đó.\nNghi vấn: Bạn có đi đâu chơi không?",
       "notes": "Không có",
       "created_at": "2026-06-14T16:17:09.733518+00:00",
@@ -28228,7 +36033,7 @@ module.exports = {
       "meaning": "Khẳng định: Yêu cầu, đề nghị lịch sự: Xin vui lòng làm V\nPhủ định: Xin vui lòng không làm V\nNghi vấn: Bạn có thể làm V giúp tôi được không?",
       "structure": "Khẳng định: V-て + ください\nPhủ định: V-ない + でください (xem bài 17)\nNghi vấn: V-て + いただけませんか",
       "vietnamese_explanation": "Dùng để nhờ vả, yêu cầu người nghe thực hiện hành động một cách lịch sự.",
-      "japanese_example": "Khẳng định: ここに 住所を 書いてください。\nPhủ định: ここに 住所を 書かないでください。\nNghi vấn: すみません、ここに 住所を 書いていただけませんか。",
+      "japanese_example": "Khẳng định: ここに 住所(じゅうしょ)を 書(か)いてください。\nPhủ định: ここに 住所(じゅうしょ)を 書(か)かないでください。\nNghi vấn: すみません、ここに 住所(じゅうしょ)を 書(か)いていただけませんか。",
       "example_meaning": "Khẳng định: Xin vui lòng viết địa chỉ vào đây.\nPhủ định: Xin vui lòng không viết địa chỉ vào đây.\nNghi vấn: Xin lỗi, bạn có thể viết địa chỉ vào đây giúp tôi được không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:09.865857+00:00",
@@ -28242,7 +36047,7 @@ module.exports = {
       "meaning": "Khẳng định: Hành động đang diễn ra tại thời điểm nói\nPhủ định: Hành động hiện tại không đang diễn ra\nNghi vấn: Hỏi xem hành động có đang diễn ra hay không",
       "structure": "Khẳng định: Động từ thể て + います\nPhủ định: Động từ thể て + いません\nNghi vấn: Động từ thể て + いますか",
       "vietnamese_explanation": "Diễn tả hành động đang thực hiện ngay lúc nói chuyện.",
-      "japanese_example": "Khẳng định: 今 雨が 降っています。ミラーさんは 電話をかけています。\nPhủ định: 今 雨が 降っていません。ミラーさんは 電話をかけていません。\nNghi vấn: 今 雨が 降っていますか。ミラーさんは 電話をかけていますか。",
+      "japanese_example": "Khẳng định: 今(いま) 雨(あめ)が 降(ふ)っています。ミラーさんは 電話(でんわ)をかけています。\nPhủ định: 今(いま) 雨(あめ)が 降(ふ)っていません。ミラーさんは 電話(でんわ)をかけていません。\nNghi vấn: 今(いま) 雨(あめ)が 降(ふ)っていますか。ミラーさんは 電話(でんわ)をかけていますか。",
       "example_meaning": "Khẳng định: Bây giờ trời đang mưa. Anh Miller đang gọi điện thoại.\nPhủ định: Bây giờ trời không mưa. Anh Miller không đang gọi điện thoại.\nNghi vấn: Bây giờ trời có đang mưa không? Anh Miller có đang gọi điện thoại không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:10.001273+00:00",
@@ -28256,7 +36061,7 @@ module.exports = {
       "meaning": "Khẳng định: Lời đề nghị chủ động giúp đỡ người khác\nPhủ định: (Dạng đề nghị giúp đỡ không có thể phủ định trực tiếp)\nNghi vấn: (Bản thân mẫu câu này đã mang tính chất hỏi/đề nghị)",
       "structure": "Khẳng định: Vます (bỏ ます) + ましょうか\nPhủ định: Vましょうか (không dùng)\nNghi vấn: Vましょうか (chính là dạng nghi vấn đề nghị)",
       "vietnamese_explanation": "Người nói chủ động đề xuất làm gì đó giúp người nghe.",
-      "japanese_example": "Khẳng định: 重いですね。荷物を 持ちましょうか。\nPhủ định: (Không dùng dạng phủ định)\nNghi vấn: 重いですね。荷物を 持ちましょうか。",
+      "japanese_example": "Khẳng định: 重(おも)いですね。荷物(にもつ)を 持(も)ちましょうか。\nPhủ định: (Không dùng dạng phủ định)\nNghi vấn: 重(おも)いですね。荷物(にもつ)を 持(も)ちましょうか。",
       "example_meaning": "Khẳng định: Nặng quá nhỉ. Tôi xách hành lý giúp bạn nhé?\nPhủ định: (Không dùng dạng phủ định)\nNghi vấn: Nặng quá nhỉ. Tôi xách hành lý giúp bạn nhé?",
       "notes": "",
       "created_at": "2026-06-14T16:17:10.128762+00:00",
@@ -28270,7 +36075,7 @@ module.exports = {
       "meaning": "Khẳng định: Biểu thị sự cho phép thực hiện hành động: Có thể làm...\nNghi vấn: Biểu thị việc xin phép thực hiện hành động: Tôi làm... có được không?",
       "structure": "Khẳng định: Động từ thể て + もいいです\nNghi vấn: Động từ thể て + もいいですか",
       "vietnamese_explanation": "Dùng để cho phép hoặc xin phép đối phương làm gì đó. Nghi vấn: Vてもいいですか.",
-      "japanese_example": "Khẳng định: ここで 写真を 撮ってもいいです。\nNghi vấn: 写真を 撮ってもいいですか。ーええ、いいですよ。",
+      "japanese_example": "Khẳng định: ここで 写真(しゃしん)を 撮(と)ってもいいです。\nNghi vấn: 写真(しゃしん)を 撮(と)ってもいいですか。ーええ、いいですよ。",
       "example_meaning": "Khẳng định: Bạn được phép chụp ảnh ở đây.\nNghi vấn: Tôi chụp ảnh có được không? - Vâng, được chứ.",
       "notes": "Khong co ghi chu dac biet",
       "created_at": "2026-06-14T16:17:10.263052+00:00",
@@ -28284,7 +36089,7 @@ module.exports = {
       "meaning": "Phủ định: Biểu thị sự cấm đoán: Không được phép làm...",
       "structure": "Phủ định: Động từ thể て + はいけません",
       "vietnamese_explanation": "Dùng khi muốn cấm đoán đối phương thực hiện một hành động nào đó.",
-      "japanese_example": "Phủ định: ここで タバコを 吸ってはいけません。",
+      "japanese_example": "Phủ định: ここで タバコを 吸(す)ってはいけません。",
       "example_meaning": "Phủ định: Không được phép hút thuốc lá ở đây.",
       "notes": "Nghe",
       "created_at": "2026-06-14T16:17:10.392566+00:00",
@@ -28298,7 +36103,7 @@ module.exports = {
       "meaning": "Khẳng định: Diễn tả một trạng thái kéo dài là kết quả của hành động\nPhủ định: Diễn tả trạng thái chưa xảy ra hoặc không duy trì trạng thái đó\nNghi vấn: Hỏi về trạng thái hiện tại của đối tượng",
       "structure": "Khẳng định: Động từ thể て + います\nPhủ định: Động từ thể て + いません\nNghi vấn: Động từ thể て + いますか",
       "vietnamese_explanation": "Khác với thì tiếp diễn ở bài 14, cấu trúc này dùng cho các động từ chỉ sự thay đổi trạng thái (kết hôn, sống ở đâu, biết cái gì đó).",
-      "japanese_example": "Khẳng định: 私は 結婚しています。ハノイに 住んでいます。\nPhủ định: 私は まだ 結婚していません。\nNghi vấn: 先生は 結婚していますか。",
+      "japanese_example": "Khẳng định: 私(わたし)は 結婚(けっこん)しています。ハノイに 住(す)んでいます。\nPhủ định: 私(わたし)は まだ 結婚(けっこん)していません。\nNghi vấn: 先生(せんせい)は 結婚(けっこん)していますか。",
       "example_meaning": "Khẳng định: Tôi đã kết hôn. Tôi đang sống ở Hà Nội.\nPhủ định: Tôi vẫn chưa kết hôn.\nNghi vấn: Thầy/cô đã kết hôn chưa?",
       "notes": "Khong co ghi chu dac biet",
       "created_at": "2026-06-14T16:17:10.524023+00:00",
@@ -28312,7 +36117,7 @@ module.exports = {
       "meaning": "Khẳng định: Liên kết chuỗi hành động xảy ra liên tiếp theo trình tự thời gian\nPhủ định: Liên kết chuỗi hành động nhưng không thực hiện hành động cuối cùng\nNghi vấn: Hỏi về chuỗi hành động xảy ra liên tiếp theo trình tự thời gian",
       "structure": "Khẳng định: V1 thể て + V2 thể て + ... + Vn\nPhủ định: V1 thể て + V2 thể て + ... + Vn-たい ではありません\nNghi vấn: V1 thể て + V2 thể て + ... + Vn-ますか",
       "vietnamese_explanation": "Dùng để kể các hành động của chủ thể theo thứ tự trước sau rõ ràng.",
-      "japanese_example": "Khẳng định: 朝 起きて、顔を 洗って、ご飯を 食べます。\nPhủ định: 朝 起きて、顔を 洗って、ご飯を 食べません。\nNghi vấn: 毎朝 起きて、顔を 洗って、ご飯を 食べますか。",
+      "japanese_example": "Khẳng định: 朝(あさ) 起(お)きて、顔(やめます)を 洗(あら)って、ご飯(はん)を 食(た)べます。\nPhủ định: 朝(あさ) 起(お)きて、顔(やめます)を 洗(あら)って、ご飯(はん)を 食(た)べません。\nNghi vấn: 毎朝(まいあさ) 起(お)きて、顔(やめます)を 洗(あら)って、ご飯(はん)を 食(た)べますか。",
       "example_meaning": "Khẳng định: Buổi sáng tôi thức dậy, rửa mặt rồi ăn cơm.\nPhủ định: Buổi sáng tôi thức dậy, rửa mặt rồi không ăn cơm.\nNghi vấn: Mỗi sáng bạn thức dậy, rửa mặt rồi ăn cơm phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:10.65533+00:00",
@@ -28326,7 +36131,7 @@ module.exports = {
       "meaning": "Khẳng định: Liên kết các tính từ hoặc danh từ có tính chất song song trong một câu\nPhủ định: Liên kết các tính từ hoặc danh từ nhưng phủ định tính chất ở vế sau\nNghi vấn: Hỏi về tính chất song song của các đối tượng",
       "structure": "Khẳng định: Adj[i] → Bỏ [い] + くて / Adj[na]/N + で\nPhủ định: Adj[i] → Bỏ [い] + くて + Adj[i] / Adj[na]/N + で + ではありません\nNghi vấn: Adj[i] → Bỏ [い] + くて + Adj[i] ですか / Adj[na]/N + で + ですか",
       "vietnamese_explanation": "Dùng để nối các câu tả tính chất, đặc điểm song song của đối tượng.",
-      "japanese_example": "Khẳng định: ハノイは にぎやかで、面白い街です。この部屋は 狭くて,暗いです。\nPhủ định: ハノイは にぎやかで、面白い街ではありません。\nNghi vấn: ハノイは にぎやかで、面白い街ですか。",
+      "japanese_example": "Khẳng định: ハノイは にぎやかで、面白(おもしろ)い街(まち)です。この部屋(へや)は 狭(せま)くて,暗(くら)いです。\nPhủ định: ハノイは にぎやかで、面白(おもしろ)い街(まち)ではありません。\nNghi vấn: ハノイは にぎやかで、面白(おもしろ)い街(まち)ですか。",
       "example_meaning": "Khẳng định: Hà Nội là thành phố nhộn nhịp và thú vị. Căn phòng này chật hẹp và tối tăm.\nPhủ định: Hà Nội không phải là thành phố nhộn nhịp và thú vị.\nNghi vấn: Hà Nội là thành phố nhộn nhịp và thú vị phải không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:10.795769+00:00",
@@ -28340,7 +36145,7 @@ module.exports = {
       "meaning": "Khẳng định: Sau khi làm V1 thì thực hiện V2\nPhủ định: Sau khi làm V1 thì không thực hiện V2\nNghi vấn: Sau khi làm V1 thì có thực hiện V2 không",
       "structure": "Khẳng định: V1 thể て + から + V2\nPhủ định: V1 thể て + から + V2 (phủ định)\nNghi vấn: V1 thể て + から + V2 ですか",
       "vietnamese_explanation": "Nhấn mạnh hành động V2 chỉ được bắt đầu sau khi hành động V1 đã hoàn thành xong.",
-      "japanese_example": "Khẳng định: 仕事が 終わってから、飲みに行きます。\nPhủ định: 仕事が 終わってから、飲みに行きません。\nNghi vấn: 仕事が 終わってから、飲みに行きますか。",
+      "japanese_example": "Khẳng định: 仕事(しごと)が 終(お)わってから、飲(の)みに行(い)きます。\nPhủ định: 仕事(しごと)が 終(お)わってから、飲(の)みに行(い)きません。\nNghi vấn: 仕事(しごと)が 終(お)わってから、飲(の)みに行(い)きますか。",
       "example_meaning": "Khẳng định: Sau khi làm xong việc, tôi sẽ đi uống nước.\nPhủ định: Sau khi làm xong việc, tôi sẽ không đi uống nước.\nNghi vấn: Sau khi làm xong việc, bạn có đi uống nước không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:10.926387+00:00",
@@ -28354,7 +36159,7 @@ module.exports = {
       "meaning": "Xin vui lòng đừng làm V (Yêu cầu, nhắc nhở đối phương không làm gì)",
       "structure": "V-ない + でください",
       "vietnamese_explanation": "Yêu cầu, đề nghị lịch sự đối phương không thực hiện một hành động nào đó.",
-      "japanese_example": "ここで 写真を 撮らないでください。\n危ないですから、触らないでください。\n時間を 忘れないでください。",
+      "japanese_example": "ここで 写真(しゃしん)を 撮(と)らないでください。\n危(あぶ)ないですから、触(さわ)らないでください。\n時間(じかん)を 忘(わす)れないでください。",
       "example_meaning": "Xin vui lòng không chụp ảnh ở đây.\nVì nguy hiểm nên xin đừng chạm vào.\nXin đừng quên giờ giấc nhé.",
       "notes": "",
       "created_at": "2026-06-14T16:17:11.058073+00:00",
@@ -28368,7 +36173,7 @@ module.exports = {
       "meaning": "Khẳng định: Phải làm V (nghĩa vụ, bắt buộc)\nNghi vấn: Có phải làm V không?",
       "structure": "Khẳng định: V-ない (bỏ ない) + なければなりません\nNghi vấn: V-ない (bỏ ない) + なければなりませんか",
       "vietnamese_explanation": "Diễn tả hành động bắt buộc, không thể không làm (nghĩa vụ, luật lệ).",
-      "japanese_example": "毎日 薬を 飲まなければなりません。\n明日 レポートを 出さなければなりません。\nパスポートを 見せなければなりませんか。",
+      "japanese_example": "毎日(まいにち) 薬(くすり)を 飲(の)まなければなりません。\n明日(あした) レポートを 出(で)さなければなりません。\nパスポートを 見(み)せなければなりませんか。",
       "example_meaning": "Mỗi ngày tôi đều phải uống thuốc.\nNgày mai tôi phải nộp báo cáo.\nTôi có phải xuất trình hộ chiếu không?",
       "notes": "Nghe",
       "created_at": "2026-06-14T16:17:11.196731+00:00",
@@ -28382,7 +36187,7 @@ module.exports = {
       "meaning": "Không cần phải làm V cũng được",
       "structure": "V-ない (bỏ ない) + なくてもいいです",
       "vietnamese_explanation": "Diễn tả hành động không bắt buộc phải làm, làm hay không làm tùy ý chủ thể.",
-      "japanese_example": "明日は 休みですから、早く 起きなくてもいいです。\n靴を 脱がなくてもいいです。\n今日は お金を 払わなくてもいいです。",
+      "japanese_example": "明日(あした)は 休(やす)みですから、早(はや)く 起(お)きなくてもいいです。\n靴(くつ)を 脱(ぬ)がなくてもいいです。\n今日(きょう)は お金(かね)を 払(はら)わなくてもいいです。",
       "example_meaning": "Ngày mai là ngày nghỉ nên không cần dậy sớm cũng được.\nKhông cần cởi giày cũng được.\nHôm nay không cần trả tiền cũng được.",
       "notes": "",
       "created_at": "2026-06-14T16:17:11.335427+00:00",
@@ -28396,7 +36201,7 @@ module.exports = {
       "meaning": "Khẳng định: Có thể làm V\nPhủ định: Không thể làm V\nNghi vấn: Có thể làm V không?",
       "structure": "Khẳng định: V-る + こと + が + できます\nPhủ định: V-る + こと + が + できません\nNghi vấn: V-る + こと + が + できますか",
       "vietnamese_explanation": "Diễn tả năng lực, khả năng của bản thân hoặc khả năng thực hiện một hành động trong hoàn cảnh, điều kiện nhất định (có thể làm V). Động từ ở thể từ điển (V-る) kết hợp với \"こと\" để danh từ hóa hành động trước trợ từ が.",
-      "japanese_example": "ミラーさんは 日本語を 話すことが できます。\nここで カードで 払うことが できます。\n私は ピアノを 弾くことが できません。",
+      "japanese_example": "ミラーさんは 日本語(にほんご)を 話(はな)すことが できます。\nここで カードで 払(はら)うことが できます。\n私(わたし)は ピアノを 弾(ひ)くことが できません。",
       "example_meaning": "Anh Miller có thể nói tiếng Nhật.\nỞ đây có thể thanh toán bằng thẻ.\nTôi không thể chơi đàn piano.",
       "notes": "Không có ghi chú",
       "created_at": "2026-06-14T16:17:11.472234+00:00",
@@ -28406,11 +36211,11 @@ module.exports = {
     {
       "id": 82,
       "lesson_id": 18,
-      "title": "私の 趣味は V-ること です",
+      "title": "私(わたし)の 趣味(しゅみ)は V-ること です",
       "meaning": "Khẳng định: Sở thích của tôi là làm việc gì đó\nPhủ định: Sở thích của tôi không phải là làm việc gì đó\nNghi vấn: Sở thích của bạn có phải là làm việc gì đó không?",
-      "structure": "Khẳng định: 私の 趣味は + V từ điển + こと + です\nPhủ định: 私の 趣味は + V từ điển + こと + では ありません\nNghi vấn: 私の 趣味は + V từ điển + こと + ですか",
+      "structure": "Khẳng định: 私(わたし)の 趣味(しゅみ)は + V từ điển + こと + です\nPhủ định: 私(わたし)の 趣味(しゅみ)は + V từ điển + こと + では ありません\nNghi vấn: 私(わたし)の 趣味(しゅみ)は + V từ điển + こと + ですか",
       "vietnamese_explanation": "Dùng để giới thiệu cụ thể về sở thích hành động của bản thân.",
-      "japanese_example": "Khẳng định: 私の 趣味は 映画を見ることです。\nPhủ định: 私の 趣味は テレビを見ることでは ありません。\nNghi vấn: あなたの 趣味は 本を 読むことですか。",
+      "japanese_example": "Khẳng định: 私(わたし)の 趣味(しゅみ)は 映画(えいが)を見(み)ることです。\nPhủ định: 私(わたし)の 趣味(しゅみ)は テレビを見(み)ることでは ありません。\nNghi vấn: あなたの 趣味(しゅみ)は 本(ほん)を 読(よ)むことですか。",
       "example_meaning": "Khẳng định: Sở thích của tôi là xem phim.\nPhủ định: Sở thích của tôi không phải là xem tivi.\nNghi vấn: Sở thích của bạn có phải là đọc sách không?",
       "notes": "Không có ghi chú",
       "created_at": "2026-06-14T16:17:11.599629+00:00",
@@ -28424,7 +36229,7 @@ module.exports = {
       "meaning": "Khẳng định: Trước khi làm việc gì đó thì làm V2\nPhủ định: Không có dạng phủ định ở vế trước\nNghi vấn: Có dạng câu hỏi cho hành động V2 phía sau",
       "structure": "Khẳng định: V1 từ điển / N + の / Thời gian + まえに + V2\nPhủ định: V1 từ điển / N + の / Thời gian + まえに + V2 phủ định\nNghi vấn: V1 từ điển / N + の / Thời gian + まえに + V2 nghi vấn",
       "vietnamese_explanation": "Xác định trình tự hành động V2 xảy ra trước hành động V1.",
-      "japanese_example": "Khẳng định: ご飯を 食べる前に、手を 洗います。\nPhủ định: ご飯を 食べる前に、手を 洗いません。\nNghi vấn: ご飯を 食べる前に、手を 洗いますか。",
+      "japanese_example": "Khẳng định: ご飯(はん)を 食(た)べる前(まえ)に、手(からだ)を 洗(あら)います。\nPhủ định: ご飯(はん)を 食(た)べる前(まえ)に、手(からだ)を 洗(あら)いません。\nNghi vấn: ご飯(はん)を 食(た)べる前(まえ)に、手(からだ)を 洗(あら)いますか。",
       "example_meaning": "Khẳng định: Trước khi ăn cơm, tôi rửa tay.\nPhủ định: Trước khi ăn cơm, tôi không rửa tay.\nNghi vấn: Trước khi ăn cơm, bạn có rửa tay không?",
       "notes": "Không có ghi chú",
       "created_at": "2026-06-14T16:17:11.728019+00:00",
@@ -28438,7 +36243,7 @@ module.exports = {
       "meaning": "Khẳng định: Đã từng làm việc gì đó trong quá khứ\nPhủ định: Chưa từng làm việc gì đó trong quá khứ\nNghi vấn: Đã từng làm việc gì đó bao giờ chưa?",
       "structure": "Khẳng định: Vた (quá khứ ngắn) + こと + が + あります\nPhủ định: Vた (quá khứ ngắn) + こと + が + ありません\nNghi vấn: Vた (quá khứ ngắn) + こと + が + ありますか",
       "vietnamese_explanation": "Dùng để kể về trải nghiệm đã thực hiện trong quá khứ xa.",
-      "japanese_example": "Khẳng định: 富士山に 登ったことがあります。\nPhủ định: 富士山に 登ったことがありません。\nNghi vấn: 富士山に 登ったことがありますか。",
+      "japanese_example": "Khẳng định: 富士山(ふじさん)に 登(のぼ)ったことがあります。\nPhủ định: 富士山(ふじさん)に 登(のぼ)ったことがありません。\nNghi vấn: 富士山(ふじさん)に 登(のぼ)ったことがありますか。",
       "example_meaning": "Khẳng định: Tôi đã từng leo núi Phú Sĩ.\nPhủ định: Tôi chưa từng leo núi Phú Sĩ.\nNghi vấn: Bạn đã từng leo núi Phú Sĩ bao giờ chưa?",
       "notes": "",
       "created_at": "2026-06-14T16:17:11.85955+00:00",
@@ -28452,7 +36257,7 @@ module.exports = {
       "meaning": "Khẳng định: Liệt kê các hành động tiêu biểu (không quan tâm trình tự thời gian)\nPhủ định: Thỉnh thoảng làm việc này, thỉnh thoảng làm việc kia (dạng phủ định không dùng trực tiếp cấu trúc này mà diễn tả qua ngữ cảnh)\nNghi vấn: Bạn thường làm những gì (như là A, như là B...)?",
       "structure": "Khẳng định: V1 thể た + り + V2 thể た + り + します\nPhủ định: V1 thể た + り + V2 thể た + り + しません\nNghi vấn: V1 thể た + り + V2 thể た + り + しますか",
       "vietnamese_explanation": "Nêu ra một vài hành động tượng trưng trong số nhiều hành động.",
-      "japanese_example": "Khẳng định: 日曜日は 掃除したり、洗濯したり します。\nPhủ định: 日曜日は 掃除したり、洗濯したり しません。\nNghi vấn: 日曜日は 掃除したり、洗濯したり しますか。",
+      "japanese_example": "Khẳng định: 日曜日(にちようび)は 掃除(そうじ)したり、洗濯(せんたく)したり します。\nPhủ định: 日曜日(にちようび)は 掃除(そうじ)したり、洗濯(せんたく)したり しません。\nNghi vấn: 日曜日(にちようび)は 掃除(そうじ)したり、洗濯(せんたく)したり しますか。",
       "example_meaning": "Khẳng định: Chủ nhật tôi dọn dẹp phòng, giặt giũ quần áo (và làm các việc khác nữa).\nPhủ định: Chủ nhật tôi không làm mấy việc như dọn dẹp hay giặt giũ.\nNghi vấn: Chủ nhật bạn thường dọn dẹp hay giặt giũ phải không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:11.98847+00:00",
@@ -28466,7 +36271,7 @@ module.exports = {
       "meaning": "Khẳng định: Biểu thị sự biến đổi trạng thái: Trở nên, trở thành\nPhủ định: Trở nên không còn như trước / Không trở thành\nNghi vấn: Trở nên như thế nào / Trở thành cái gì?",
       "structure": "Khẳng định: Adj[i] → くなる / Adj[na]/N + に + なります\nPhủ định: Adj[i] → くありません / Adj[na]/N + に + なりません\nNghi vấn: Adj[i] → くなりますか / Adj[na]/N + に + なりますか",
       "vietnamese_explanation": "Diễn tả sự thay đổi của tính chất hoặc danh tính.",
-      "japanese_example": "Khẳng định: 寒くなります。医者に なります。\nPhủ định: 寒くありません。医者に なりません。\nNghi vấn: 寒くなりますか。医者に なりますか。",
+      "japanese_example": "Khẳng định: 寒(さむ)くなります。医者(いしゃ)に なります。\nPhủ định: 寒(さむ)くありません。医者(いしゃ)に なりません。\nNghi vấn: 寒(さむ)くなりますか。医者(いしゃ)に なりますか。",
       "example_meaning": "Khẳng định: Trời trở nên lạnh. Trở thành bác sĩ.\nPhủ định: Trời không lạnh. Không trở thành bác sĩ.\nNghi vấn: Trời có trở nên lạnh không? Có trở thành bác sĩ không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:12.115352+00:00",
@@ -28480,7 +36285,7 @@ module.exports = {
       "meaning": "Khẳng định: Cách nói thân mật khẳng định khi giao tiếp với người thân thiết.\nPhủ định: Cách nói thân mật phủ định khi giao tiếp với người thân thiết.\nNghi vấn: Cách hỏi thân mật khi giao tiếp với người thân thiết.",
       "structure": "Khẳng định: V-る / A-い / N-da\nPhủ định: V-ない / A-kunai / N-janai\nNghi vấn: V-る? / A-い? / N-da?",
       "vietnamese_explanation": "Dùng khi nói chuyện với bạn bè, người thân thiết, gia đình hoặc người dưới tuổi.",
-      "japanese_example": "Khẳng định: 12時だ。\nPhủ định: 12時じゃない。\nNghi vấn: 12時？",
+      "japanese_example": "Khẳng định: 12時(じ)だ。\nPhủ định: 12時(じ)じゃない。\nNghi vấn: 12時(じ)？",
       "example_meaning": "Khẳng định: Là 12 giờ rồi.\nPhủ định: Không phải 12 giờ.\nNghi vấn: 12 giờ à?",
       "notes": "Lưu ý khi chuyển từ thể lịch sự (Desu/Masu) sang thể thông thường.",
       "created_at": "2026-06-14T16:17:12.243992+00:00",
@@ -28490,11 +36295,11 @@ module.exports = {
     {
       "id": 88,
       "lesson_id": 21,
-      "title": "Thể thông thường + と 思います",
+      "title": "Thể thông thường + と 思(おも)います",
       "meaning": "Khẳng định: Tôi nghĩ là...\nPhủ định: Tôi nghĩ là không...\nNghi vấn: Bạn nghĩ là... có phải không?",
-      "structure": "Khẳng định: Plain Form + と + 思います\nPhủ định: Plain Form (bỏ da/desu → ja arimasen) + と + 思います\nNghi vấn: Plain Form + と + 思いますか",
+      "structure": "Khẳng định: Plain Form + と + 思(おも)います\nPhủ định: Plain Form (bỏ da/desu → ja arimasen) + と + 思(おも)います\nNghi vấn: Plain Form + と + 思(おも)いますか",
       "vietnamese_explanation": "Dùng để diễn đạt suy đoán hoặc ý kiến riêng của người nói về một sự việc.",
-      "japanese_example": "Khẳng định: 明日 いい天気になると思います。\nPhủ định: 明日は 雨が降らないと思います。\nNghi vấn: 明日は いい天気になると思いますか。",
+      "japanese_example": "Khẳng định: 明日(あした) いい天気(てんき)になると思(おも)います。\nPhủ định: 明日(あした)は 雨(あめ)が降(ふ)らないと思(おも)います。\nNghi vấn: 明日(あした)は いい天気(てんき)になると思(おも)いますか。",
       "example_meaning": "Khẳng định: Tôi nghĩ ngày mai thời tiết sẽ đẹp.\nPhủ định: Tôi nghĩ ngày mai trời sẽ không mưa.\nNghi vấn: Bạn có nghĩ ngày mai thời tiết sẽ đẹp không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:12.371528+00:00",
@@ -28504,11 +36309,11 @@ module.exports = {
     {
       "id": 89,
       "lesson_id": 21,
-      "title": "Thể thông thường / 「Câu nói」 + と 言いました",
+      "title": "Thể thông thường / 「Câu nói」 + と 言(い)いました",
       "meaning": "Khẳng định: Đã nói là...\nPhủ định: Đã nói là không...\nNghi vấn: Đã nói là... phải không?",
-      "structure": "Khẳng định: Plain Form / 「Câu trích dẫn」 + と + 言いました\nPhủ định: Plain Form (phủ định) / 「Câu trích dẫn phủ định」 + と + 言いました\nNghi vấn: Plain Form / 「Câu trích dẫn」 + と + 言いましたか",
+      "structure": "Khẳng định: Plain Form / 「Câu trích dẫn」 + と + 言(い)いました\nPhủ định: Plain Form (phủ định) / 「Câu trích dẫn phủ định」 + と + 言(い)いました\nNghi vấn: Plain Form / 「Câu trích dẫn」 + と + 言(い)いましたか",
       "vietnamese_explanation": "Dùng để truyền đạt lại lời phát biểu của người khác.",
-      "japanese_example": "Khẳng định: ナムさんは 来週 出張すると言いました。\nPhủ định: ナムさんは 来週 出張しないと言いました。\nNghi vấn: ナムさんは 来週 出張すると言いましたか。",
+      "japanese_example": "Khẳng định: ナムさんは 来週(らいしゅう) 出張(しゅっちょう)すると言(い)いました。\nPhủ định: ナムさんは 来週(らいしゅう) 出張(しゅっちょう)しないと言(い)いました。\nNghi vấn: ナムさんは 来週(らいしゅう) 出張(しゅっちょう)すると言(い)いましたか。",
       "example_meaning": "Khẳng định: Anh Nam đã nói tuần sau đi công tác.\nPhủ định: Anh Nam đã nói tuần sau không đi công tác.\nNghi vấn: Anh Nam đã nói tuần sau đi công tác phải không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:12.50351+00:00",
@@ -28522,7 +36327,7 @@ module.exports = {
       "meaning": "Khẳng định: Đúng không? / Có phải thế không?\nPhủ định: Không phải thế phải không?\nNghi vấn: Có lẽ là... phải không?",
       "structure": "Khẳng định: Plain Form (bỏ da của N/Adj-na) + でしょう\nPhủ định: Plain Form (phủ định) + でしょう\nNghi vấn: Plain Form + でしょうか",
       "vietnamese_explanation": "Dùng để tìm kiếm sự đồng thuận hoặc xác nhận từ người nghe về điều mình suy đoán.",
-      "japanese_example": "Khẳng định: 明日は 休みでしょう？\nPhủ định: 明日は 休みではないでしょう？\nNghi vấn: 明日は 休みでしょうか。",
+      "japanese_example": "Khẳng định: 明日(あした)は 休(やす)みでしょう？\nPhủ định: 明日(あした)は 休(やす)みではないでしょう？\nNghi vấn: 明日(あした)は 休(やす)みでしょうか。",
       "example_meaning": "Khẳng định: Ngày mai là ngày nghỉ đúng không?\nPhủ định: Ngày mai không phải là ngày nghỉ phải không?\nNghi vấn: Ngày mai có phải là ngày nghỉ không nhỉ?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:12.636233+00:00",
@@ -28536,7 +36341,7 @@ module.exports = {
       "meaning": "Khẳng định: Dùng câu ở thể thông thường để bổ nghĩa cho danh từ ở dạng khẳng định.\nPhủ định: Dùng câu ở thể thông thường để bổ nghĩa cho danh từ ở dạng phủ định.\nNghi vấn: Dùng câu ở thể thông thường kết hợp từ để hỏi để bổ nghĩa cho danh từ.",
       "structure": "Khẳng định: Mệnh đề (thể thông thường khẳng định) + Danh từ\nPhủ định: Mệnh đề (thể thông thường phủ định) + Danh từ\nNghi vấn: Mệnh đề (thể thông thường chứa từ nghi vấn) + Danh từ",
       "vietnamese_explanation": "Trong tiếng Nhật, mệnh đề định ngữ luôn đứng trước danh từ cần bổ nghĩa. Trợ từ chỉ chủ ngữ trong mệnh đề định ngữ dùng が thay cho は.",
-      "japanese_example": "Khẳng định: 私が住んでいるうちは狭いです。これは昨日の晩買った本です。\nPhủ định: 私が住んでいないうちから引っ越しの準備をします。これは昨日の晩買わなかった本です。\nNghi vấn: どこに住んでいる家が狭いですか。これは誰が買った本ですか。",
+      "japanese_example": "Khẳng định: 私(わたし)が住(す)んでいるうちは狭(せま)いです。これは昨日(きのう)の晩買(ばんかい)った本(ほん)です。\nPhủ định: 私(わたし)が住(す)んでいないうちから引(ひ)っ越(こ)しの準備(じゅんび)をします。これは昨日(きのう)の晩買(ばんかい)わなかった本(ほん)です。\nNghi vấn: どこに住(す)んでいる家(いえ)が狭(せま)いですか。これは誰(だれ)が買(か)った本(ほん)ですか。",
       "example_meaning": "Khẳng định: Ngôi nhà tôi đang sống rất chật hẹp. Đây là cuốn sách tôi đã mua tối hôm qua.\nPhủ định: Tôi chuẩn bị chuyển nhà từ trước khi không còn sống ở đó. Đây là cuốn sách mà tối hôm qua đã không mua.\nNghi vấn: Ngôi nhà ở đâu thì chật hẹp vậy? Đây là cuốn sách do ai mua vậy?",
       "notes": "Trong mệnh đề bổ ngữ cho danh từ, chủ ngữ của mệnh đề phụ (nếu được đánh dấu rõ) thường dùng trợ từ が thay vì は.",
       "created_at": "2026-06-14T16:17:12.76454+00:00",
@@ -28550,7 +36355,7 @@ module.exports = {
       "meaning": "Khẳng định: Khi làm việc gì đó / Khi ở trạng thái nào đó\nPhủ định: Khi không làm việc gì đó / Khi không ở trạng thái nào đó\nNghi vấn: Khi làm việc gì đó có... hay không? / Khi nào thì...?",
       "structure": "Khẳng định: V-る/V-ない/V-た + とき / Adj-i + とき / Adj-na + な とき / N + の とき\nPhủ định: V-ない + とき / A-くない + とき / Adj-na + ではない + とき / N + ではない + とき\nNghi vấn: V thể thông thường + とき, ...ka?",
       "vietnamese_explanation": "Diễn tả thời điểm xảy ra hành động ở mệnh đề chính.",
-      "japanese_example": "Khẳng định: 図書館で 本を 借りるとき、カードが 要ります。暇なとき,本を 読みます。\nPhủ định: 時間が ないとき、テレビを 見ません。\nNghi vấn: 困ったとき、どうしますか。",
+      "japanese_example": "Khẳng định: 図書館(としょかん)で 本(ほん)を 借(か)りるとき、カードが 要(い)ります。暇(ひま)なとき,本(ほん)を 読(よ)みます。\nPhủ định: 時間(じかん)が ないとき、テレビを 見(み)ません。\nNghi vấn: 困(こま)ったとき、どうしますか。",
       "example_meaning": "Khẳng định: Khi mượn sách ở thư viện, cần có thẻ. Khi rảnh rỗi, tôi đọc sách.\nPhủ định: Khi không có thời gian, tôi không xem TV.\nNghi vấn: Khi gặp rắc rối, bạn làm thế nào?",
       "notes": "Không có",
       "created_at": "2026-06-14T16:17:12.893642+00:00",
@@ -28564,7 +36369,7 @@ module.exports = {
       "meaning": "Khẳng định: Nếu... thì (Hệ quả tất yếu, tự nhiên hoặc hướng dẫn chỉ đường)\nPhủ định: Nếu không... thì (Hệ quả tự nhiên)",
       "structure": "Khẳng định: V từ điển + と + Mệnh đề hệ quả\nPhủ định: V-ない + と + Mệnh đề hệ quả",
       "vietnamese_explanation": "Diễn tả điều gì đó chắc chắn sẽ xảy ra như một kết quả tự nhiên hoặc chỉ dẫn kỹ thuật.",
-      "japanese_example": "Khẳng định: ボタンを 押すと、水が 出ます。この道を まっすぐ行くと、駅があります。\nPhủ định: 薬を 飲まないと、病気が 治りません。",
+      "japanese_example": "Khẳng định: ボタンを 押(お)すと、水(みず)が 出(で)ます。この道(みち)を まっすぐ行(い)くと、駅(えき)があります。\nPhủ định: 薬(くすり)を 飲(の)まないと、病気(びょうき)が 治(なお)りません。",
       "example_meaning": "Khẳng định: Nếu ấn nút này, nước sẽ chảy ra. Đi thẳng con đường này sẽ thấy nhà ga.\nPhủ định: Nếu không uống thuốc, bệnh sẽ không khỏi.",
       "notes": "Không có",
       "created_at": "2026-06-14T16:17:13.051452+00:00",
@@ -28578,7 +36383,7 @@ module.exports = {
       "meaning": "Khẳng định: Làm việc gì đó cho người khác (mang tính giúp đỡ)\nPhủ định: Không làm việc gì đó cho người khác\nNghi vấn: Có làm việc gì đó cho người khác không?",
       "structure": "Khẳng định: V thể て + あげます\nPhủ định: V thể て + あげません\nNghi vấn: V thể て + あげますか",
       "vietnamese_explanation": "Người nói thực hiện hành động mang lại lợi ích cho người nghe hoặc người khác.",
-      "japanese_example": "Khẳng định: 私は ミラーさんに 地図を 書いてあげました。\nPhủ định: 私は ミラーさんに 地図を 書いてあげませんでした。\nNghi vấn: ミラーさんに 地図を 書いてあげましたか。",
+      "japanese_example": "Khẳng định: 私(わたし)は ミラーさんに 地図(ちず)を 書(か)いてあげました。\nPhủ định: 私(わたし)は ミラーさんに 地図(ちず)を 書(か)いてあげませんでした。\nNghi vấn: ミラーさんに 地図(ちず)を 書(か)いてあげましたか。",
       "example_meaning": "Khẳng định: Tôi đã vẽ bản đồ giúp cho anh Miller.\nPhủ định: Tôi đã không vẽ bản đồ giúp cho anh Miller.\nNghi vấn: Bạn có vẽ bản đồ giúp cho anh Miller không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:13.1878+00:00",
@@ -28592,7 +36397,7 @@ module.exports = {
       "meaning": "Khẳng định: Được ai đó làm giúp việc gì\nPhủ định: Không được ai đó làm giúp việc gì\nNghi vấn: Có được ai đó làm giúp việc gì không?",
       "structure": "Khẳng định: Chủ ngữ は + Người làm giúp + に + V thể て + もらいます\nPhủ định: Chủ ngữ は + Người làm giúp + に + V thể て + もらいません\nNghi vấn: Chủ ngữ は + Người làm giúp + に + V thể て + もらいますか",
       "vietnamese_explanation": "Chủ ngữ nhận được hành động có ích từ người khác và thể hiện lòng biết ơn.",
-      "japanese_example": "Khẳng định: 私は 友達に 日本語を 教えてもらいました。\nPhủ định: 私は 友達に 日本語を 教えてもらいませんでした。\nNghi vấn: 友達に 日本語を 教えてもらいましたか。",
+      "japanese_example": "Khẳng định: 私(わたし)は 友達(ともだち)に 日本語(にほんご)を 教(おし)えてもらいました。\nPhủ định: 私(わたし)は 友達(ともだち)に 日本語(にほんご)を 教(おし)えてもらいませんでした。\nNghi vấn: 友達(ともだち)に 日本語(にほんご)を 教(おし)えてもらいましたか。",
       "example_meaning": "Khẳng định: Tôi được bạn dạy cho tiếng Nhật.\nPhủ định: Tôi không được bạn dạy cho tiếng Nhật.\nNghi vấn: Bạn có được bạn dạy cho tiếng Nhật không?",
       "notes": "🔊 Nghe",
       "created_at": "2026-06-14T16:17:13.317363+00:00",
@@ -28606,7 +36411,7 @@ module.exports = {
       "meaning": "Khẳng định: Ai đó làm giúp việc gì cho tôi (hoặc gia đình tôi)\nPhủ định: Ai đó không làm giúp việc gì cho tôi\nNghi vấn: Ai đó có làm giúp việc gì cho tôi không?",
       "structure": "Khẳng định: Người làm giúp + が + V thể て + くれます\nPhủ định: Người làm giúp + が + V thể て + くれおません\nNghi vấn: Người làm giúp + が + V thể て + くれますか",
       "vietnamese_explanation": "Hành động có ích được người khác tự nguyện làm hướng về phía người nói.",
-      "japanese_example": "Khẳng định: サントスさんは 私に コーヒーを 淹れてくれました。\nPhủ định: サントスさんは 私に コーヒーを 淹れてくれおませんでした。\nNghi vấn: サントスさんは 私に コーヒーを 淹れてくれましたか。",
+      "japanese_example": "Khẳng định: サントスさんは 私(わたし)に コーヒーを 淹(い)れてくれました。\nPhủ định: サントスさんは 私(わたし)に コーヒーを 淹(い)れてくれおませんでした。\nNghi vấn: サントスさんは 私(わたし)に コーヒーを 淹(い)れてくれましたか。",
       "example_meaning": "Khẳng định: Anh Santos đã pha cà phê cho tôi.\nPhủ định: Anh Santos đã không pha cà phê cho tôi.\nNghi vấn: Anh Santos có pha cà phê cho tôi không?",
       "notes": "",
       "created_at": "2026-06-14T16:17:13.447001+00:00",
@@ -28620,7 +36425,7 @@ module.exports = {
       "meaning": "Khẳng định: Nếu điều kiện được đáp ứng thì vế sau sẽ thực hiện hoặc xảy ra.\nPhủ định: Nếu điều kiện không được đáp ứng thì...\nNghi vấn: Nếu... thì có làm sao không?",
       "structure": "Khẳng định: V ta + ra / Adj-i → kattara / Adj-na/N → dattara\nPhủ định: V nakatta + ra / Adj-i → nakattara / Adj-na/N → dewa nakattara\nNghi vấn: V ta + ra, dou ですか?",
       "vietnamese_explanation": "Diễn tả giả định nếu một điều kiện được đáp ứng thì vế sau sẽ thực hiện, hoặc khi một việc xảy ra thì vế sau tiếp nối.",
-      "japanese_example": "Khẳng định: 雨が 降ったら、出かけません。\nPhủ định: 雨が 降らなかったら、出かけます。\nNghi vấn: 雨が 降ったら、行きますか。",
+      "japanese_example": "Khẳng định: 雨(あめ)が 降(ふ)ったら、出(で)かけません。\nPhủ định: 雨(あめ)が 降(ふ)らなかったら、出(で)かけます。\nNghi vấn: 雨(あめ)が 降(ふ)ったら、行(い)きますか。",
       "example_meaning": "Khẳng định: Nếu trời mưa, tôi sẽ không ra ngoài.\nPhủ định: Nếu trời không mưa, tôi sẽ ra ngoài.\nNghi vấn: Nếu trời mưa, bạn có đi không?",
       "notes": "Dùng để diễn tả điều kiện, giả định, hoặc thời gian.",
       "created_at": "2026-06-14T16:17:13.574493+00:00",
@@ -28634,7 +36439,7 @@ module.exports = {
       "meaning": "Khẳng định: Cho dù điều kiện xảy ra thì kết quả vẫn không đổi.\nPhủ định: Cho dù không xảy ra thì...\nNghi vấn: Cho dù... thì có sao không?",
       "structure": "Khẳng định: V te + mo / Adj-i → kute + mo / Adj-na/N → de + mo\nPhủ định: V nakute + mo / Adj-i → kunakute + mo / Adj-na/N → dewa nakute + mo\nNghi vấn: V te + mo ii ですか?",
       "vietnamese_explanation": "Diễn tả một điều kiện nghịch cảnh: Dẫu điều kiện ở vế trước có xảy ra thì vế sau vẫn diễn ra ngược lại suy nghĩ thông thường.",
-      "japanese_example": "Khẳng định: 雨が 降っても、出かけます。\nPhủ định: 雨が 降らなくても、出かけます。\nNghi vấn: 雨が 降っても、行きますか。",
+      "japanese_example": "Khẳng định: 雨(あめ)が 降(ふ)っても、出(で)かけます。\nPhủ định: 雨(あめ)が 降(ふ)らなくても、出(で)かけます。\nNghi vấn: 雨(あめ)が 降(ふ)っても、行(い)きますか。",
       "example_meaning": "Khẳng định: Cho dù trời mưa, tôi vẫn ra ngoài.\nPhủ định: Cho dù trời không mưa, tôi vẫn ra ngoài.\nNghi vấn: Cho dù trời mưa, tôi có đi được không?",
       "notes": "Dùng để diễn tả sự nhượng bộ, nghịch cảnh.",
       "created_at": "2026-06-14T16:17:13.702017+00:00",
@@ -28648,7 +36453,7 @@ module.exports = {
       "meaning": "Nhấn mạnh, giải thích lý do hoặc tò mò hỏi thăm",
       "structure": "Thể thông thường (thêm な cho tính từ đuôi na và danh từ) + んです",
       "vietnamese_explanation": "Dùng trong văn nói để biểu thị sự quan tâm, giải thích nguyên nhân, hoàn cảnh.",
-      "japanese_example": "頭が 痛いんです。\nバスが 来なかったんです。\n日本語を 勉強したいんです。",
+      "japanese_example": "頭(あたま)が 痛(いた)いんです。\nバスが 来(き)なかったんです。\n日本語(にほんご)を 勉強(べんきょう)したいんです。",
       "example_meaning": "Vì tôi bị đau đầu.\nVì xe buýt đã không đến.\nVì tôi muốn học tiếng Nhật.",
       "notes": "Tránh dùng quá nhiều làm câu nói nặng nề.",
       "created_at": "2026-06-14T16:17:13.829614+00:00",
@@ -28662,7 +36467,7 @@ module.exports = {
       "meaning": "Đề nghị, yêu cầu người khác làm gì giúp mình lịch sự",
       "structure": "Động từ chia thể て + いただけませんか",
       "vietnamese_explanation": "Lịch sự hơn cấu trúc V-てください.",
-      "japanese_example": "日本語を 教えて いただけませんか。",
+      "japanese_example": "日本語(にほんご)を 教(おし)えて いただけませんか。",
       "example_meaning": "Anh/chị có thể dạy tiếng Nhật cho tôi được không?",
       "notes": "Dùng với cấp trên hoặc người lạ.",
       "created_at": "2026-06-14T16:17:13.959612+00:00",
@@ -28674,9 +36479,9 @@ module.exports = {
       "lesson_id": 27,
       "title": "Thể Khả Năng",
       "meaning": "Biểu thị năng lực hoặc điều kiện thực hiện hành động",
-      "structure": "Nhóm 1: đuôi u → e + masu. Nhóm 2: る → られる. Nhóm 3: 来る → 来らreru, suru → dekiru.",
+      "structure": "Nhóm 1: đuôi u → e + masu. Nhóm 2: る → られる. Nhóm 3: 来(き)る → 来(き)らreru, suru → dekiru.",
       "vietnamese_explanation": "Thay trợ từ を bằng が khi chuyển sang thể khả năng.",
-      "japanese_example": "私は 日本語が 話せます。",
+      "japanese_example": "私(わたし)は 日本語(にほんご)が 話(はな)せます。",
       "example_meaning": "Tôi có thể nói được tiếng Nhật.",
       "notes": "Động từ như みえます, きこえます tự bản chất là khả năng tự nhiên, không chia tiếp.",
       "created_at": "2026-06-14T16:17:14.092772+00:00",
@@ -28690,7 +36495,7 @@ module.exports = {
       "meaning": "Chỉ (mang sắc thái tiếc nuối, chê ít)",
       "structure": "N + しか + Động từ chia phủ định",
       "vietnamese_explanation": "Nhấn mạnh giới hạn duy nhất, tương tự だけ nhưng động từ đi kèm luôn ở thể phủ định.",
-      "japanese_example": "１時間しか 寝られませんでした。",
+      "japanese_example": "１時間(じかん)しか 寝(ね)られませんでした。",
       "example_meaning": "Tôi chỉ có thể ngủ được 1 tiếng.",
       "notes": "Thay thế cho các trợ từ が, を.",
       "created_at": "2026-06-14T16:17:14.221166+00:00",
@@ -28704,7 +36509,7 @@ module.exports = {
       "meaning": "Vừa làm V1 vừa làm V2 (V2 là hành động chính)",
       "structure": "Bỏ ます của động từ 1 + ながら + Động từ 2",
       "vietnamese_explanation": "Diễn tả hai hành động diễn ra đồng thời do cùng một chủ thể thực hiện.",
-      "japanese_example": "音楽を 聞きながら 勉強します。",
+      "japanese_example": "音楽(おんがく)を 聞(き)きながら 勉強(べんきょう)します。",
       "example_meaning": "Tôi vừa nghe nhạc vừa học bài.",
       "notes": "Hành động chính đứng ở phía sau.",
       "created_at": "2026-06-14T16:17:14.347628+00:00",
@@ -28718,7 +36523,7 @@ module.exports = {
       "meaning": "Liệt kê nhiều lý do, tính chất cùng loại",
       "structure": "Thể thông thường + し、Thể thông thường + し",
       "vietnamese_explanation": "Dùng để nối các câu có cùng chung xu hướng khen hoặc chê.",
-      "japanese_example": "あの店は 安いし、おいしいし、いつも混んでいます。",
+      "japanese_example": "あの店(みせ)は 安(やす)いし、おいしいし、いつも混(こ)んでいます。",
       "example_meaning": "Cửa hàng kia vừa rẻ, lại ngon, nên lúc nào cũng đông khách.",
       "notes": "Thường dùng để kết luận một kết quả.",
       "created_at": "2026-06-14T16:17:14.482988+00:00",
@@ -28732,7 +36537,7 @@ module.exports = {
       "meaning": "Diễn tả trạng thái hiện tại của sự vật do hành động trước đó để lại",
       "structure": "Danh từ (sự vật) + が + Tự động từ chia thể ています",
       "vietnamese_explanation": "Trọng tâm là miêu tả trạng thái đập vào mắt người nói ngay lúc đó.",
-      "japanese_example": "窓が 割れています。",
+      "japanese_example": "窓(まど)が 割(わ)れています。",
       "example_meaning": "Cửa sổ đang bị vỡ.",
       "notes": "Khác với V-ています hành động đang diễn ra.",
       "created_at": "2026-06-14T16:17:14.615335+00:00",
@@ -28760,7 +36565,7 @@ module.exports = {
       "meaning": "Diễn tả trạng thái của sự vật là kết quả của hành động có chủ đích",
       "structure": "Địa điểm + に + Danh từ + が + Tha động từ chia thể てあります",
       "vietnamese_explanation": "Khác với V-ています (tự động từ), cấu trúc này ngầm ý có ai đó đã làm việc này nhằm mục đích nào đó.",
-      "japanese_example": "壁に カレンダーが 貼ってあります。",
+      "japanese_example": "壁(かべ)に カレンダーが 貼(は)ってあります。",
       "example_meaning": "Có tờ lịch đang được dán trên tường.",
       "notes": "Dùng với tha động từ.",
       "created_at": "2026-06-14T16:17:14.869626+00:00",
@@ -28774,7 +36579,7 @@ module.exports = {
       "meaning": "Làm sẵn một việc để chuẩn bị cho lần sau, hoặc giữ nguyên trạng thái",
       "structure": "Động từ thể て + おきます / おく",
       "vietnamese_explanation": "Diễn tả hành động chuẩn bị trước một việc, hoặc xử lý sau khi xong việc, hoặc giữ nguyên trạng thái hiện tại.",
-      "japanese_example": "旅行の前に 切符を買っておきます。",
+      "japanese_example": "旅行(りょこう)の前(まえ)に 切符(きっぷ)を買(か)っておきます。",
       "example_meaning": "Trước khi đi du lịch tôi sẽ mua vé sẵn.",
       "notes": "Trong hội thoại thường phát âm thành とく (toku).",
       "created_at": "2026-06-14T16:17:14.996949+00:00",
@@ -28786,9 +36591,9 @@ module.exports = {
       "lesson_id": 31,
       "title": "Thể Ý Chí (thể よう)",
       "meaning": "Cách nói thân mật của thể rủ rê ましょ",
-      "structure": "Nhóm I: Vần [い] → Vần [お] + う (例: 行こう, 話そう)\nNhóm II: V-bỏ ます + よう (例: 食べよう, 見よう)\nNhóm III: します → しよう | きます → こよう",
+      "structure": "Nhóm I: Vần [い] → Vần [お] + う (例(れい): 行(い)こう, 話(はな)そう)\nNhóm II: V-bỏ ます + よう (例(れい): 食(た)べよう, 見(み)よう)\nNhóm III: します → しよう | きます → こよう",
       "vietnamese_explanation": "Sử dụng khi nói chuyện với bạn bè thân thiết, hoặc tự nhủ bản thân.",
-      "japanese_example": "ちょっと 休みましょう → ちょっと 休もう。\n一緒に ご飯を 食べよう。\n明日 映画を 見に行こう。",
+      "japanese_example": "ちょっと 休(やす)みましょう → ちょっと 休(やす)もう。\n一緒(いっしょ)に ご飯(はん)を 食(た)べよう。\n明日(あした) 映画(えいが)を 見(み)に行(い)こう。",
       "example_meaning": "Nghỉ một chút nào.\nCùng ăn cơm nhé.\nNgày mai cùng đi xem phim nhé.",
       "notes": "Là dạng rút gọn của V-ましょう.",
       "created_at": "2026-06-14T16:17:15.130806+00:00",
@@ -28798,11 +36603,11 @@ module.exports = {
     {
       "id": 110,
       "lesson_id": 31,
-      "title": "V-よう + と思っています",
+      "title": "V-よう + と思(おも)っています",
       "meaning": "Dự định làm gì (đã quyết định từ trước và nay vẫn giữ ý định)",
-      "structure": "Động từ thể ý chí + と思っています / と思う",
+      "structure": "Động từ thể ý chí + と思(おも)っています / と思(おも)う",
       "vietnamese_explanation": "Bày tỏ dự định của bản thân cho người khác nghe.",
-      "japanese_example": "日本で 働こうと 思っています。",
+      "japanese_example": "日本(にほん)で 働(はたら)こうと 思(おも)っています。",
       "example_meaning": "Tôi đang định sẽ làm việc ở Nhật Bản.",
       "notes": "Nếu chỉ vừa mới nghĩ ra tại thời điểm nói thì dùng と思います.",
       "created_at": "2026-06-14T16:17:15.261703+00:00",
@@ -28816,7 +36621,7 @@ module.exports = {
       "meaning": "Nên / Không nên làm gì (khuyên nhủ trực tiếp)",
       "structure": "Động từ chia thể た (khuyên nên làm) / Động từ chia thể ない (khuyên không nên làm) + ほうがいいです",
       "vietnamese_explanation": "Đưa ra lời khuyên cụ thể cho người nghe trong một tình huống nhất định.",
-      "japanese_example": "毎日 運動した ほうがいいです。",
+      "japanese_example": "毎日(まいにち) 運動(うんどう)した ほうがいいです。",
       "example_meaning": "Cậu nên tập thể dục mỗi ngày.",
       "notes": "Có tính chất áp đặt mạnh nên cân nhắc khi khuyên cấp trên.",
       "created_at": "2026-06-14T16:17:15.391401+00:00",
@@ -28830,7 +36635,7 @@ module.exports = {
       "meaning": "Có lẽ, có thể xảy ra (độ chắc chắn khoảng 50%)",
       "structure": "Thể thông thường (tính từ đuôi na và danh từ bỏ だ) + かもしれません",
       "vietnamese_explanation": "Thể hiện sự phỏng đoán của người nói dựa trên một vài thông tin cảm tính.",
-      "japanese_example": "午後は 雨が 降るかもしれません。",
+      "japanese_example": "午後(ごご)は 雨(あめ)が 降(ふ)るかもしれません。",
       "example_meaning": "Buổi chiều có lẽ trời sẽ mưa.",
       "notes": "Độ tin cậy thấp hơn でしょう (deshou).",
       "created_at": "2026-06-14T16:17:15.522233+00:00",
@@ -28844,7 +36649,7 @@ module.exports = {
       "meaning": "Ra lệnh ép buộc hoặc cấm làm gì (mang sắc thái mạnh)",
       "structure": "Mệnh lệnh: Nhóm 1: đuôi u → e. Nhóm 2: ru → ro. Nhóm 3: kuru → koi, suru → shiro. Cấm đoán: Động từ nguyên dạng + な.",
       "vietnamese_explanation": "Dùng cho nam giới có vị thế cao, hoặc trong trường hợp khẩn cấp cổ vũ thể thao.",
-      "japanese_example": "早く 走れ！ 休むな！",
+      "japanese_example": "早(はや)く 走(はし)れ！ 休(やす)むな！",
       "example_meaning": "Chạy nhanh lên! Cấm nghỉ!",
       "notes": "Người thường không nên dùng vì rất bất lịch sự.",
       "created_at": "2026-06-14T16:17:15.651241+00:00",
@@ -28854,11 +36659,11 @@ module.exports = {
     {
       "id": 114,
       "lesson_id": 33,
-      "title": "～と書いてあります",
+      "title": "～と書(か)いてあります",
       "meaning": "Có viết là... (Trích dẫn nội dung hiển thị trên biển báo, thông báo)",
-      "structure": "[Biển báo / Thông báo] + と書いてあります",
+      "structure": "[Biển báo / Thông báo] + と書(か)いてあります",
       "vietnamese_explanation": "Dùng để truyền đạt lại nội dung văn bản, ký hiệu được viết trên biển báo, nhãn mác cho người khác.",
-      "japanese_example": "あそこに 「立入禁止」 と書いてあります。\nあそこに 「止まれ」 と書いてあります。\nチケットに 「10時開演」 と書いてあります。",
+      "japanese_example": "あそこに 「立入禁止(たちいりきんし)」 と書(か)いてあります。\nあそこに 「止(と)まれ」 と書(か)いてあります。\nチケットに 「10時開演(じかいえん)」 と書(か)いてあります。",
       "example_meaning": "Ở đằng kia có viết chữ \"Cấm vào\".\nỞ đằng kia có viết chữ \"Dừng lại\".\nTrên vé có viết chữ \"Mở màn lúc 10 giờ\".",
       "notes": "Hỏi ý nghĩa dùng どういう意味ですか.",
       "created_at": "2026-06-14T16:17:15.787909+00:00",
@@ -28872,7 +36677,7 @@ module.exports = {
       "meaning": "Làm hành động V2 theo như nội dung V1/N chỉ dẫn",
       "structure": "Động từ 1 chia thể từ điển hoặc thể quá khứ / Danh từ + の + とおりに + Động từ 2",
       "vietnamese_explanation": "Diễn tả việc thực hiện một việc đúng theo khuôn mẫu có sẵn.",
-      "japanese_example": "説明書の とおりに 組み立てます。",
+      "japanese_example": "説明書(せつめいしょ)の とおりに 組(く)み立(た)てます。",
       "example_meaning": "Lắp ráp đúng theo như sách hướng dẫn.",
       "notes": "Khi đi trực tiếp sau danh từ không có の thì đọc là どおり (doori).",
       "created_at": "2026-06-14T16:17:15.917484+00:00",
@@ -28886,7 +36691,7 @@ module.exports = {
       "meaning": "Làm hành động V2 sau khi hoàn thành V1/N",
       "structure": "Động từ 1 chia thể た / Danh từ + の + あとで + Động từ 2",
       "vietnamese_explanation": "Xác định rõ trình tự thời gian hành động 2 diễn ra sau hành động 1 kết thúc.",
-      "japanese_example": "仕事の あとで 飲みに行きます。",
+      "japanese_example": "仕事(しごと)の あとで 飲(の)みに行(い)きます。",
       "example_meaning": "Sau giờ làm việc chúng tôi đi uống bia.",
       "notes": "Khác với V-てから ở chỗ thời gian cách xa cũng dùng được.",
       "created_at": "2026-06-14T16:17:16.044598+00:00",
@@ -28900,7 +36705,7 @@ module.exports = {
       "meaning": "Nêu điều kiện cần thiết để dẫn đến kết quả tiếp theo",
       "structure": "Động từ: Nhóm 1: đuôi u → e + ba. Nhóm 2: ru → reba. Nhóm 3: kuru → kureba, suru → sureba. Tính từ đuôi i: bỏ i thêm kereba.",
       "vietnamese_explanation": "Thể hiện quan hệ giả định 'Nếu... thì...'.",
-      "japanese_example": "雨が 降れば 行きません。",
+      "japanese_example": "雨(あめ)が 降(ふ)れば 行(い)きません。",
       "example_meaning": "Nếu trời mưa thì tôi sẽ không đi.",
       "notes": "N-なら dùng để đưa ra lời khuyên dựa trên chủ đề người nói trước đề cập.",
       "created_at": "2026-06-14T16:17:16.181549+00:00",
@@ -28914,7 +36719,7 @@ module.exports = {
       "meaning": "Xin lời khuyên hoặc hướng dẫn từ người nghe",
       "structure": "Động từ chia thể điều kiện + いいですか / いいでしょうか",
       "vietnamese_explanation": "Hỏi xem nên làm gì trong một tình huống khó khăn, tương tự V-たra ii ですか.",
-      "japanese_example": "どこで カメラを買えば いいですか。",
+      "japanese_example": "どこで カメラを買(か)えば いいですか。",
       "example_meaning": "Tôi nên mua máy ảnh ở đâu thì tốt nhỉ?",
       "notes": "Cách hỏi lịch sự, tìm kiếm phương án tối ưu.",
       "created_at": "2026-06-14T16:17:16.309451+00:00",
@@ -28928,7 +36733,7 @@ module.exports = {
       "meaning": "Biến đổi năng lực/thói quen trở nên làm được V1",
       "structure": "Động từ 1 ở thể từ điển hoặc thể phủ định khả năng + ように + Động từ 2 (なり ます / し ます)",
       "vietnamese_explanation": "Diễn tả sự thay đổi trạng thái từ không thể sang có thể làm gì đó.",
-      "japanese_example": "日本語が 話せるように なりました。",
+      "japanese_example": "日本語(にほんご)が 話(はな)せるように なりました。",
       "example_meaning": "Tôi đã trở nên có thể nói được tiếng Nhật.",
       "notes": "Dùng với động từ khả năng.",
       "created_at": "2026-06-14T16:17:16.439963+00:00",
@@ -28942,7 +36747,7 @@ module.exports = {
       "meaning": "Cố gắng tạo thói quen làm / không làm việc gì đó",
       "structure": "Động từ thể từ điển hoặc phủ định + ようにします / ようにしてください",
       "vietnamese_explanation": "Thể hiện nỗ lực của bản thân để duy trì một thói quen tốt hoặc đưa ra yêu cầu nhẹ nhàng.",
-      "japanese_example": "毎日 野菜を食べるように しています。",
+      "japanese_example": "毎日(まいにち) 野菜(やさい)を食(た)べるように しています。",
       "example_meaning": "Tôi đang cố gắng ăn rau mỗi ngày.",
       "notes": "Yêu cầu khuyên nhủ lịch sự: ようにしてください.",
       "created_at": "2026-06-14T16:17:16.57813+00:00",
@@ -28954,9 +36759,9 @@ module.exports = {
       "lesson_id": 37,
       "title": "Thể Bị Động",
       "meaning": "Bị / Được ai đó tác động hành động lên bản thân",
-      "structure": "Nhóm 1: đuôi u → a + reru. Nhóm 2: る → られる. Nhóm 3: 来る → 来らreru, suru → sareru.",
+      "structure": "Nhóm 1: đuôi u → a + reru. Nhóm 2: る → られる. Nhóm 3: 来(き)る → 来(き)らreru, suru → sareru.",
       "vietnamese_explanation": "Chủ thể chịu tác động đứng trước が, tác nhân thực hiện đứng trước に.",
-      "japanese_example": "私は 先生に 褒められました。",
+      "japanese_example": "私(わたし)は 先生(せんせい)に 褒(ほ)められました。",
       "example_meaning": "Tôi được thầy giáo khen ngợi.",
       "notes": "Dùng để diễn tả sự phiền toái hoặc được lợi ích.",
       "created_at": "2026-06-14T16:17:16.710677+00:00",
@@ -28970,7 +36775,7 @@ module.exports = {
       "meaning": "Bị ai đó làm phiền, tác động xấu lên đồ vật sở hữu",
       "structure": "Chủ ngữ + は + Người thực hiện + に + Đồ vật + を + Động từ bị động",
       "vietnamese_explanation": "Bày tỏ cảm xúc bực bội, khó chịu khi bị người khác làm hỏng, lấy mất đồ vật thuộc sở hữu của mình.",
-      "japanese_example": "私は 泥棒に 財布を 盗まれました。",
+      "japanese_example": "私(わたし)は 泥棒(どろぼう)に 財布(さいふ)を 盗(ぬす)まれました。",
       "example_meaning": "Tôi bị tên trộm lấy mất ví tiền.",
       "notes": "Không dùng cấu trúc này với nghĩa tích cực.",
       "created_at": "2026-06-14T16:17:16.841722+00:00",
@@ -28984,7 +36789,7 @@ module.exports = {
       "meaning": "Danh từ hóa động từ làm chủ ngữ trong câu đánh giá",
       "structure": "Động từ thể từ điển + のは + Tính từ (thú vị, mệt mỏi, khó, dễ...)",
       "vietnamese_explanation": "Biến đổi hành động thành một danh từ để đánh giá tính chất.",
-      "japanese_example": "日本語を 勉強するのは 面白いです。",
+      "japanese_example": "日本語(にほんご)を 勉強(べんきょう)するのは 面白(おもしろ)いです。",
       "example_meaning": "Việc học tiếng Nhật rất thú vị.",
       "notes": "Sử dụng trợ từ は để làm rõ chủ đề chính.",
       "created_at": "2026-06-14T16:17:16.978617+00:00",
@@ -28994,11 +36799,11 @@ module.exports = {
     {
       "id": 124,
       "lesson_id": 38,
-      "title": "V-る + のが + A-です / V-る + のを + 忘れます",
+      "title": "V-る + のが + A-です / V-る + のを + 忘(わす)れます",
       "meaning": "Danh từ hóa động từ làm tân ngữ chỉ sở thích, năng lực hoặc quên làm gì",
-      "structure": "V-る + のが (好き/上手/下手...) / V-る + のを + 忘れます",
+      "structure": "V-る + のが (好(す)き/上手(じょうず)/下手(へた)...) / V-る + のを + 忘(わす)れます",
       "vietnamese_explanation": "Dùng để bổ nghĩa cho tính từ chỉ cảm xúc/khả năng, hoặc động từ quên.",
-      "japanese_example": "傘を 持って来るのを 忘れました。",
+      "japanese_example": "傘(かさ)を 持(も)って来(き)るのを 忘(わす)れました。",
       "example_meaning": "Tôi đã quên mang theo ô mất rồi.",
       "notes": "Dùng の để danh từ hóa cụm hành động.",
       "created_at": "2026-06-14T16:17:17.1134+00:00",
@@ -29012,7 +36817,7 @@ module.exports = {
       "meaning": "Chỉ nguyên nhân tự nhiên, ngoài ý muốn dẫn đến kết quả ở vế sau",
       "structure": "Động từ chia thể て / Tính từ đuôi i bỏ i thêm くて / Tính từ đuôi na và danh từ thêm で",
       "vietnamese_explanation": "Vế sau không dùng các cấu trúc thể hiện ý chí, mệnh lệnh, rủ rê của con người.",
-      "japanese_example": "ニュースを 聞いて、びっくりしました。",
+      "japanese_example": "ニュースを 聞(き)いて、びっくりしました。",
       "example_meaning": "Tôi đã rất ngạc nhiên khi nghe tin tức.",
       "notes": "Dùng cho cảm xúc tự nhiên, tai nạn thiên tai.",
       "created_at": "2026-06-14T16:17:17.245785+00:00",
@@ -29026,7 +36831,7 @@ module.exports = {
       "meaning": "Vì... nên... (chỉ nguyên nhân khách quan, lịch sự)",
       "structure": "Thể thông thường (tính từ đuôi na và danh từ thêm な) + ので + Vế kết quả",
       "vietnamese_explanation": "Lịch sự và nhẹ nhàng hơn から, thường dùng khi xin phép nghỉ hoặc giải thích lý do khách quan.",
-      "japanese_example": "用事が あるので、お先に失礼します。",
+      "japanese_example": "用事(ようじ)が あるので、お先(さき)に失礼(しつれい)します。",
       "example_meaning": "Vì có chút việc bận nên tôi xin phép về trước.",
       "notes": "Nói năng trang trọng trong công sở.",
       "created_at": "2026-06-14T16:17:17.379281+00:00",
@@ -29040,7 +36845,7 @@ module.exports = {
       "meaning": "Lồng câu hỏi có từ để hỏi vào trong câu khác",
       "structure": "Từ để hỏi + Thể thông thường (tính từ đuôi na và danh từ bỏ だ) + か + Vế sau",
       "vietnamese_explanation": "Dùng khi trích dẫn một câu hỏi gián tiếp.",
-      "japanese_example": "荷物が いつ届くか 教えてください。",
+      "japanese_example": "荷物(にもつ)が いつ届(とど)くか 教(おし)えてください。",
       "example_meaning": "Hãy cho tôi biết khi nào hành lý sẽ được gửi đến.",
       "notes": "Dùng để hỏi thông tin.",
       "created_at": "2026-06-14T16:17:17.508426+00:00",
@@ -29054,7 +36859,7 @@ module.exports = {
       "meaning": "Lồng câu hỏi Có/Không vào trong câu khác",
       "structure": "Thể thông thường (bỏ だ cho tính từ na và danh từ) + かどうか + Vế sau (xác nhận, kiểm tra, hỏi han)",
       "vietnamese_explanation": "Diễn tả ý nghĩa 'Có hay không việc gì đó'.",
-      "japanese_example": "間違いが ないかどうか 確かめます。",
+      "japanese_example": "間違(まちが)いが ないかどうか 確(たし)かめます。",
       "example_meaning": "Tôi sẽ kiểm tra xem có sai sót gì hay không.",
       "notes": "Hai vế đối lập rõ ràng.",
       "created_at": "2026-06-14T16:17:17.641995+00:00",
@@ -29064,11 +36869,11 @@ module.exports = {
     {
       "id": 129,
       "lesson_id": 41,
-      "title": "N1 (người bề trên) + が + 私に + N2 + を + くださいます",
+      "title": "N1 (người bề trên) + が + 私(わたし)に + N2 + を + くださいます",
       "meaning": "Bề trên cho/tặng tôi đồ vật (kính ngữ tôn kính)",
-      "structure": "Người bề trên + が + 私に + Đồ vật + を + くださいます (hoặc kính ngữ động từ てくださいます)",
+      "structure": "Người bề trên + が + 私(わたし)に + Đồ vật + を + くださいます (hoặc kính ngữ động từ てくださいます)",
       "vietnamese_explanation": "Thể hiện sự tôn kính cao đối với người cho.",
-      "japanese_example": "社長が 本を くださった。",
+      "japanese_example": "社長(しゃちょう)が 本(ほん)を くださった。",
       "example_meaning": "Giám đốc đã tặng sách cho tôi.",
       "notes": "Khi nhận từ bề trên.",
       "created_at": "2026-06-14T16:17:18.162541+00:00",
@@ -29082,7 +36887,7 @@ module.exports = {
       "meaning": "Hành động biếu tặng, hỗ trợ kính ngữ",
       "structure": "Động từ chia thể て + いただきます / くださいます / さしあげます",
       "vietnamese_explanation": "Dùng để diễn tả việc nhận được hành động giúp đỡ từ ai đó, hoặc làm gì cho người khác một cách lịch sự, kính cẩn.",
-      "japanese_example": "先生に 日本語を教えていただきました。",
+      "japanese_example": "先生(せんせい)に 日本語(にほんご)を教(おし)えていただきました。",
       "example_meaning": "Tôi đã được thầy giáo dạy tiếng Nhật cho.",
       "notes": "Biểu lộ lòng biết ơn sâu sắc.",
       "created_at": "2026-06-14T16:17:18.301773+00:00",
@@ -29096,7 +36901,7 @@ module.exports = {
       "meaning": "Vì mục đích / Lợi ích của hành động/sự vật",
       "structure": "Động từ thể từ điển / Danh từ + の + ために + Mệnh đề hành động",
       "vietnamese_explanation": "Chủ ngữ của hai vế phải đồng nhất và động từ vế đầu mang tính ý chí.",
-      "japanese_example": "留学の ために、日本語を 勉強しています。",
+      "japanese_example": "留学(りゅうがく)の ために、日本語(にほんご)を 勉強(べんきょう)しています。",
       "example_meaning": "Tôi học tiếng Nhật để đi du học.",
       "notes": "Khác với ように (dùng cho động từ khả năng, trạng thái).",
       "created_at": "2026-06-14T16:17:18.435639+00:00",
@@ -29108,9 +36913,9 @@ module.exports = {
       "lesson_id": 42,
       "title": "V-る / N + に (sử dụng cho, đánh giá)",
       "meaning": "Đánh giá sự tiện lợi, mục đích sử dụng công cụ",
-      "structure": "Động từ thể từ điển + に (hoặc のに) / Danh từ + に + (使う / 便利だ / 時間がかかる)",
+      "structure": "Động từ thể từ điển + に (hoặc のに) / Danh từ + に + (使(つか)う / 便利(べんり)だ / 時間(じかん)がかかる)",
       "vietnamese_explanation": "Diễn tả công dụng của một đồ vật hoặc đánh giá tính năng sử dụng.",
-      "japanese_example": "このハサミは 紙を 切るのに 使います。",
+      "japanese_example": "このハサミは 紙(かみ)を 切(き)るのに 使(つか)います。",
       "example_meaning": "Chiếc kéo này dùng để cắt giấy.",
       "notes": "Thường đi kèm các tính từ như 便利, 役に立つ.",
       "created_at": "2026-06-14T16:17:18.565407+00:00",
@@ -29124,7 +36929,7 @@ module.exports = {
       "meaning": "Trông có vẻ như vậy (phỏng đoán qua thị giác)",
       "structure": "Bỏ ます của động từ / Tính từ đuôi i bỏ i, tính từ đuôi na bỏ na + そうです",
       "vietnamese_explanation": "Phán đoán trạng thái của sự vật ngay trước mắt hoặc dự báo sắp xảy ra.",
-      "japanese_example": "雨が 降りそうです。",
+      "japanese_example": "雨(あめ)が 降(ふ)りそうです。",
       "example_meaning": "Trông trời có vẻ sắp mưa.",
       "notes": "Dạng phủ định là そうにない / そうもありません. Biệt lệ: よい -> よさそうです.",
       "created_at": "2026-06-14T16:17:18.697279+00:00",
@@ -29138,7 +36943,7 @@ module.exports = {
       "meaning": "Đi thực hiện hành động rồi quay trở lại địa điểm cũ",
       "structure": "Động từ thể て + きます / くる",
       "vietnamese_explanation": "Diễn tả hành động di chuyển đến một nơi làm việc gì rồi quay lại.",
-      "japanese_example": "ちょっと タバコを買ってきます。",
+      "japanese_example": "ちょっと タバコを買(か)ってきます。",
       "example_meaning": "Tôi đi mua bao thuốc một lát rồi quay lại ngay.",
       "notes": "Địa điểm quay lại ngầm hiểu là chỗ nói chuyện.",
       "created_at": "2026-06-14T16:17:18.833564+00:00",
@@ -29152,7 +36957,7 @@ module.exports = {
       "meaning": "Vượt quá giới hạn cho phép (mang nghĩa tiêu cực)",
       "structure": "Động từ bỏ ます / Tính từ đuôi i bỏ i / Tính từ đuôi na bỏ na + すぎます",
       "vietnamese_explanation": "Biểu thị hành động hoặc tính chất vượt ngưỡng bình thường.",
-      "japanese_example": "ご飯を 食べすぎました。",
+      "japanese_example": "ご飯(はん)を 食(た)べすぎました。",
       "example_meaning": "Tôi đã ăn quá nhiều cơm (quá no).",
       "notes": "Thường đi kèm hệ quả xấu cho sức khỏe.",
       "created_at": "2026-06-14T16:17:18.965624+00:00",
@@ -29166,7 +36971,7 @@ module.exports = {
       "meaning": "Dễ làm / Khó làm hành động gì đó",
       "structure": "Thân động từ (bỏ ます) + やすい (dễ) / にくい (khó)",
       "vietnamese_explanation": "Đánh giá tính chất khách quan hoặc chủ quan của việc thực hiện hành động.",
-      "japanese_example": "日本語は 勉強しやすいです。",
+      "japanese_example": "日本語(にほんご)は 勉強(べんきょう)しやすいです。",
       "example_meaning": "Tiếng Nhật rất dễ học.",
       "notes": "Cụm từ mới tạo thành hoạt động như một tính từ đuôi i.",
       "created_at": "2026-06-14T16:17:19.095883+00:00",
@@ -29176,11 +36981,11 @@ module.exports = {
     {
       "id": 137,
       "lesson_id": 45,
-      "title": "V/A/N (thông thường) + 場合（ばあい）は + kết quả",
+      "title": "V/A/N (thông thường) + 場合(ばあい)（ばあい）は + kết quả",
       "meaning": "Trong trường hợp giả định nào đó xảy ra",
-      "structure": "Thể thông thường (tính từ đuôi na + な, danh từ + の) + 場合は + mệnh đề xử lý",
+      "structure": "Thể thông thường (tính từ đuôi na + な, danh từ + の) + 場合(ばあい)は + mệnh đề xử lý",
       "vietnamese_explanation": "Định trước cách xử lý hoặc hậu quả nếu trường hợp giả định xuất hiện.",
-      "japanese_example": "地震の 場合は、エレベーターを 使わないでください。",
+      "japanese_example": "地震(じしん)の 場合(ばあい)は、エレベーターを 使(つか)わないでください。",
       "example_meaning": "Trong trường hợp có động đất, xin vui lòng không sử dụng thang máy.",
       "notes": "Dùng cho tình huống khẩn cấp, trang trọng.",
       "created_at": "2026-06-14T16:17:19.231813+00:00",
@@ -29194,7 +36999,7 @@ module.exports = {
       "meaning": "Dù... thế nhưng... (thể hiện sự bất mãn, ngạc nhiên ngoài dự tính)",
       "structure": "Thể thông thường (tính từ đuôi na và danh từ thêm な) + のに + Vế kết quả",
       "vietnamese_explanation": "Vế 2 trái ngược hoàn toàn với mong đợi hợp lý từ vế 1.",
-      "japanese_example": "薬を 飲んだのに、熱が 下がりません。",
+      "japanese_example": "薬(くすり)を 飲(の)んだのに、熱(あつ)が 下(した)がりません。",
       "example_meaning": "Dù đã uống thuốc rồi thế mà cơn sốt vẫn chưa hạ.",
       "notes": "Không dùng cho câu rủ rê, mệnh lệnh.",
       "created_at": "2026-06-14T16:17:19.361834+00:00",
@@ -29208,7 +37013,7 @@ module.exports = {
       "meaning": "Đúng vào thời điểm chuẩn bị / đang làm / vừa xong hành động",
       "structure": "Thể hành động tương ứng của động từ + ところです / ところを",
       "vietnamese_explanation": "Xác định chính xác lát cắt thời gian hành động diễn ra.",
-      "japanese_example": "今から 出かける ところです。",
+      "japanese_example": "今(いま)から 出(で)かける ところです。",
       "example_meaning": "Tôi đúng lúc chuẩn bị ra ngoài bây giờ đây.",
       "notes": "V-た tokoro thường đi kèm cụm từ たった今.",
       "created_at": "2026-06-14T16:17:19.491361+00:00",
@@ -29222,7 +37027,7 @@ module.exports = {
       "meaning": "Vừa mới làm xong hành động (cảm giác thời gian chủ quan rất ngắn)",
       "structure": "Động từ thể た + ばかりです / ばかりの",
       "vietnamese_explanation": "Dù thời gian thực tế đã lâu (vài tháng/1 năm), người nói vẫn cảm thấy mới diễn ra.",
-      "japanese_example": "このカメラは 先週 買ったばかりです。",
+      "japanese_example": "このカメラは 先週(せんしゅう) 買(か)ったばかりです。",
       "example_meaning": "Chiếc máy ảnh này tôi vừa mới mua tuần trước.",
       "notes": "Khác với V-た tokoro ở chỗ tokoro chỉ thời điểm cực ngắn thực tế.",
       "created_at": "2026-06-14T16:17:19.625539+00:00",
@@ -29232,11 +37037,11 @@ module.exports = {
     {
       "id": 141,
       "lesson_id": 47,
-      "title": "V/A/N (thông thường) + そうです（伝聞）",
+      "title": "V/A/N (thông thường) + そうです（伝聞(でんぶん)）",
       "meaning": "Nghe nói... (truyền đạt lại thông tin từ nguồn khác)",
       "structure": "Thể thông thường (giữ nguyên だ cho tính từ đuôi na và danh từ) + そうです",
       "vietnamese_explanation": "Thường đi kèm nguồn tin `～によると` (theo như).",
-      "japanese_example": "天気予報に よると、明日は 晴れるそうです。",
+      "japanese_example": "天気予報(てんきよほう)に よると、明日(あした)は 晴(は)れるそうです。",
       "example_meaning": "Theo dự báo thời tiết, nghe nói ngày mai trời sẽ nắng.",
       "notes": "Khác với そうです phỏng đoán (không đi với nguồn tin, bỏ i/na).",
       "created_at": "2026-06-14T16:17:19.755507+00:00",
@@ -29250,7 +37055,7 @@ module.exports = {
       "meaning": "Hình như là... (suy đoán dựa trên chứng cứ thực tế qua giác quan)",
       "structure": "Thể thông thường (tính từ đuôi na + な, danh từ + の) + ようです",
       "vietnamese_explanation": "Người nói nhìn, nghe hoặc ngửi thấy dấu hiệu rồi đưa ra phán đoán logic.",
-      "japanese_example": "誰かが 部屋に いるようです。電気がついています。",
+      "japanese_example": "誰(だれ)かが 部屋(へや)に いるようです。電気(でんき)がついています。",
       "example_meaning": "Hình như có ai đó ở trong phòng. Đèn đang sáng kìa.",
       "notes": "Độ chắc chắn cao vì có chứng cứ rõ ràng.",
       "created_at": "2026-06-14T16:17:19.896164+00:00",
@@ -29262,9 +37067,9 @@ module.exports = {
       "lesson_id": 48,
       "title": "Thể Sai Khiến",
       "meaning": "Bắt buộc hoặc cho phép ai đó thực hiện hành động",
-      "structure": "Nhóm 1: đuôi u → a + seru. Nhóm 2: ru → saseru. Nhóm 3: 来る → こさせる, suru → saseru.",
+      "structure": "Nhóm 1: đuôi u → a + seru. Nhóm 2: ru → saseru. Nhóm 3: 来(き)る → こさせる, suru → saseru.",
       "vietnamese_explanation": "Đối với tự động từ: N(người) + を + V-sai khiến. Đối với tha động từ: N(người) + に + N(vật) + を + V-sai khiến.",
-      "japanese_example": "先生は 学生に 作文を 書かせました。",
+      "japanese_example": "先生(せんせい)は 学生(がくせい)に 作文(さくぶん)を 書(か)かせました。",
       "example_meaning": "Thầy giáo bắt học sinh viết văn.",
       "notes": "Dùng thể hiện quyền lực chỉ đạo.",
       "created_at": "2026-06-14T16:17:20.032206+00:00",
@@ -29278,7 +37083,7 @@ module.exports = {
       "meaning": "Xin phép cho bản thân được làm một việc gì đó lịch sự",
       "structure": "Động từ chia thể sai khiến chuyển sang thể て + いただけませんか / もらえませんか",
       "vietnamese_explanation": "Mẫu câu cực kỳ lịch sự dùng để xin phép cấp trên cho mình nghỉ, làm việc gì.",
-      "japanese_example": "用事が あるので、早く帰らせていただけませんか。",
+      "japanese_example": "用事(ようじ)が あるので、早(はや)く帰(かえ)らせていただけませんか。",
       "example_meaning": "Vì có chút việc bận, xin phép cho tôi được về sớm được không ạ?",
       "notes": "Là kính ngữ rất phổ dụng trong công sở.",
       "created_at": "2026-06-14T16:17:20.1626+00:00",
@@ -29292,7 +37097,7 @@ module.exports = {
       "meaning": "Nâng cao hành động của người nghe/bề trên để thể hiện sự kính trọng",
       "structure": "Cách 1: Chia động từ sang thể bị động. Cách 2: お + V-bỏ ます + になります (áp dụng cho nhóm 1, 2 trừ động từ ngắn). Cách 3: Sử dụng động từ đặc biệt.",
       "vietnamese_explanation": "Chỉ dùng cho hành động của người khác, tuyệt đối không dùng cho hành động của bản thân.",
-      "japanese_example": "先生は もう お帰りになりました。",
+      "japanese_example": "先生(せんせい)は もう お帰(かえ)りになりました。",
       "example_meaning": "Thầy giáo đã về nhà rồi.",
       "notes": "Động từ đặc biệt: irasshaimasu, meshiagarimasu, osshaimasu, nasaimasu, goranninarimasu.",
       "created_at": "2026-06-14T16:17:20.294526+00:00",
@@ -29306,7 +37111,7 @@ module.exports = {
       "meaning": "Yêu cầu hành động lịch sự kính ngữ dành cho khách hàng/bề trên",
       "structure": "お / ご (với động từ nhóm 3 Hanzi) + Thân động từ bỏ ます + ください",
       "vietnamese_explanation": "Lịch sự hơn cấu trúc V-てください, dùng nhiều trong dịch vụ, khách sạn.",
-      "japanese_example": "どうぞ こちらに お掛けください。",
+      "japanese_example": "どうぞ こちらに お掛(か)けください。",
       "example_meaning": "Xin mời anh/chị ngồi ở bên này ạ.",
       "notes": "Cách nói tôn kính.",
       "created_at": "2026-06-14T16:17:20.428713+00:00",
@@ -29320,7 +37125,7 @@ module.exports = {
       "meaning": "Hạ thấp hành động của bản thân để gián tiếp tôn vinh người nghe/bề trên",
       "structure": "Cách 1: お / ご + V-bỏ ます + します / いたします. Cách 2: Sử dụng động từ khiêm nhường đặc biệt.",
       "vietnamese_explanation": "Tuyệt đối chỉ dùng cho hành động của bản thân hoặc người thuộc nhóm mình (in-group), không dùng cho người khác.",
-      "japanese_example": "重そうな荷物ですね。私が お持ちします。",
+      "japanese_example": "重(おも)そうな荷物(にもつ)ですね。私(わたし)が お持(も)ちします。",
       "example_meaning": "Hành lý trông nặng quá nhỉ. Để tôi xách giúp anh/chị nhé.",
       "notes": "Động từ đặc biệt: mairimasu, orimasu, moushimasu, itashimasu, haishaku-shimasu.",
       "created_at": "2026-06-14T16:17:20.56159+00:00",
@@ -29334,7 +37139,7 @@ module.exports = {
       "meaning": "Khiêm nhường ngữ cho động từ nhóm 3",
       "structure": "ご + Danh động từ nhóm 3 + します / いたします",
       "vietnamese_explanation": "Áp dụng cho các động từ có nguồn gốc chữ Hán ghép với します.",
-      "japanese_example": "今日のスケジュールを ご紹介いたします。",
+      "japanese_example": "今日(きょう)のスケジュールを ご紹介(しょうかい)いたします。",
       "example_meaning": "Tôi xin phép được giới thiệu lịch trình của ngày hôm nay.",
       "notes": "Dành cho đối tác, khách hàng.",
       "created_at": "2026-07-23T10:49:08.356191+00:00",
@@ -29348,7 +37153,7 @@ module.exports = {
       "meaning": "Quy tắc chia thể thông thường (thể ngắn) cho Động từ, Tính từ và Danh từ",
       "structure": "Động từ: V-る / V-ない / V-た / V-なかった\nTính từ đuôi-i: A-い / A-くない / A-かった / A-くなかった\nTính từ đuôi-na & Danh từ: だ / ではない / だった / ではなかった",
       "vietnamese_explanation": "Thể thông thường được dùng khi nói chuyện với người thân thiết, bạn bè, gia đình, người dưới hoặc trong các mệnh đề phụ/văn viết.",
-      "japanese_example": "明日は 東京へ 行く。",
+      "japanese_example": "明日(あした)は 東京(とうきょう)へ 行(い)く。",
       "example_meaning": "Ngày mai tôi đi Tokyo.",
       "notes": "Khác với thể lịch sự (ます/です), thể thông thường ngắn gọn và tự nhiên hơn trong giao tiếp hàng ngày.",
       "created_at": "2026-07-23T10:49:08.356191+00:00",
@@ -29362,7 +37167,7 @@ module.exports = {
       "meaning": "Hội thoại thân mật thể ngắn: Lược bỏ trợ từ và dùng ngữ điệu lên giọng để hỏi",
       "structure": "Câu hỏi: Thể thông thường (lên giọng ↗) hoặc thêm の ↗\nLược bỏ: Trợ từ は, が, を thường được bỏ trong khẩu ngữ nếu ngữ cảnh rõ ràng",
       "vietnamese_explanation": "Trong giao tiếp thân mật, trợ từ か ở cuối câu hỏi thường được bỏ (hoặc thay bằng の) kết hợp lên giọng ở cuối câu. Với tính từ na và danh từ ở câu hỏi hiện tại khẳng định, bỏ だ (ví dụ: ひま？ thay vì ひまだか？).",
-      "japanese_example": "ご飯、食べる？ うん、食べる。",
+      "japanese_example": "ご飯(はん)、食(た)べる？ うん、食(た)べる。",
       "example_meaning": "Ăn cơm không? Ừ, ăn chứ.",
       "notes": "Câu khẳng định đồng ý dùng うん, từ chối/phủ định dùng ううん.",
       "created_at": "2026-07-23T10:49:08.356191+00:00",
@@ -29372,11 +37177,11 @@ module.exports = {
     {
       "id": 152,
       "lesson_id": 22,
-      "title": "V-る + 時間 / 約束 / 用事 が あります",
+      "title": "V-る + 時間(じかん) / 約束(やくそく) / 用事(ようじ) が あります",
       "meaning": "Có thời gian / cuộc hẹn / việc bận để làm việc gì đó",
-      "structure": "V-る (thể từ điển) + 時間 / 約束 / 用事 + が あります",
+      "structure": "V-る (thể từ điển) + 時間(じかん) / 約束(やくそく) / 用事(ようじ) + が あります",
       "vietnamese_explanation": "Sử dụng động từ thể từ điển làm mệnh đề bổ nghĩa cho các danh từ 時間 (thời gian), 約束 (cuộc hẹn, lời hứa), 用事 (việc bận).",
-      "japanese_example": "明日は 友達と 会う 約束が あります。",
+      "japanese_example": "明日(あした)は 友達(ともだち)と 会(あ)う 約束(やくそく)が あります。",
       "example_meaning": "Ngày mai tôi có hẹn gặp bạn bè.",
       "notes": "Dùng V-る trước danh từ, không chia thể ます.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29409,7 +37214,7 @@ module.exports = {
       "meaning": "Khi... (V-る とき: trước/trong khi hành động; V-た とき: sau khi hành động đã hoàn thành)",
       "structure": "V-る + とき (Chưa xảy ra / Trước khi làm V)\nV-た + とき (Đã xong / Sau khi làm V xong)",
       "vietnamese_explanation": "Nếu hành động ở vế とき chưa diễn ra hoặc đang diễn ra tại thời điểm vế chính xảy ra thì dùng V-る. Nếu hành động ở vế とき đã hoàn tất trọn vẹn trước vế chính thì dùng V-た.",
-      "japanese_example": "国へ 帰る とき、かばんを 買いました。",
+      "japanese_example": "国(くに)へ 帰(かえ)る とき、かばんを 買(か)いました。",
       "example_meaning": "Khi (trước lúc) về nước, tôi đã mua một chiếc túi xách.",
       "notes": "So sánh: 国へ 帰った とき (Sau khi đã về đến nước rồi mới mua).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29436,7 +37241,7 @@ module.exports = {
       "meaning": "Sau khi làm xong A thì sẽ làm B (điều kiện tuần tự chắc chắn xảy ra)",
       "structure": "V-たら、Vế 2 (hành động tiếp theo)",
       "vietnamese_explanation": "Không chỉ là giả định \"nếu\", たら còn dùng khi vế 1 chắc chắn sẽ xảy ra trong tương lai, mang nghĩa \"sau khi A xong thì sẽ làm B ngay\".",
-      "japanese_example": "駅に 着いたら、電話して ください。",
+      "japanese_example": "駅(えき)に 着(き)いたら、電話(でんわ)して ください。",
       "example_meaning": "Sau khi đến ga thì hãy gọi điện thoại cho tôi nhé.",
       "notes": "Vế 2 có thể là lời mời, mệnh lệnh, yêu cầu (ください, ましょう).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29469,7 +37274,7 @@ module.exports = {
       "meaning": "Cho dù (tính từ/danh từ) thế nào đi nữa thì vế sau vẫn diễn ra",
       "structure": "Tính từ đuôi-i: Bỏ い + くても\nTính từ đuôi-na / Danh từ: + でも",
       "vietnamese_explanation": "Biểu thị điều kiện nghịch: cho dù tính chất hay hoàn cảnh ở vế trước có ra sao thì kết quả ở vế sau vẫn không thay đổi.",
-      "japanese_example": "日曜日でも、仕事を します。",
+      "japanese_example": "日曜日(にちようび)でも、仕事(しごと)を します。",
       "example_meaning": "Cho dù là ngày Chủ nhật, tôi vẫn làm việc.",
       "notes": "Tương phản với mẫu たら: たら là \"nếu có thì làm\", còn ても/でも là \"dù có thì vẫn không đổi\".",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29508,7 +37313,7 @@ module.exports = {
       "meaning": "Có phải là... không? (Hỏi xác nhận lý do, ngạc nhiên, tò mò)",
       "structure": "Thể thông thường (Na/N + な) + んですか",
       "vietnamese_explanation": "Dùng khi người nói nhìn thấy hoặc nghe thấy điều gì đó và muốn hỏi người nghe để xác nhận nguyên nhân, lý do hoặc thể hiện sự ngạc nhiên, tò mò.",
-      "japanese_example": "どこへ 行くんですか。",
+      "japanese_example": "どこへ 行(い)くんですか。",
       "example_meaning": "Bạn đang đi đâu thế?",
       "notes": "Không dùng với người mới gặp nếu không có dấu hiệu cụ thể vì có thể tạo cảm giác tọc mạch.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29547,7 +37352,7 @@ module.exports = {
       "meaning": "Em/tôi... nhưng mà (Mở đầu câu chuyện, ngập ngừng nhờ vả)",
       "structure": "Thể thông thường (Na/N + な) + んですが、[Yêu cầu/Nhờ vả/Hỏi]",
       "vietnamese_explanation": "Trợ từ が ở đây không mang nghĩa tương phản mà dùng để nối tiếp, giới thiệu chủ đề một cách nhẹ nhàng trước khi đưa ra lời yêu cầu, lời mời hoặc xin lời khuyên.",
-      "japanese_example": "日本語を 勉強したいんですが、いい先生を 教えていただけませんか。",
+      "japanese_example": "日本語(にほんご)を 勉強(べんきょう)したいんですが、いい先生(せんせい)を 教(おし)えていただけませんか。",
       "example_meaning": "Tôi muốn học tiếng Nhật, bạn có thể giới thiệu cho tôi giáo viên giỏi được không?",
       "notes": "Là mẫu câu tiêu chuẩn trong văn phong nhờ vả lịch sự của người Nhật.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29584,9 +37389,9 @@ module.exports = {
       "lesson_id": 26,
       "title": "Nghi vấn từ + V-たらいいですか",
       "meaning": "Nên làm thế nào thì tốt? (Hỏi xin lời khuyên, hướng dẫn)",
-      "structure": "Nghi vấn từ (どう / どこで / 何を...) + V-たらいいですか",
+      "structure": "Nghi vấn từ (どう / どこで / 何(なに)を...) + V-たらいいですか",
       "vietnamese_explanation": "Dùng khi người nói gặp khó khăn, bối rối và muốn người nghe đưa ra lời khuyên hoặc hướng dẫn cách xử lý.",
-      "japanese_example": "カメラを 買いたいんですが、どこで 買ったらいいですか。",
+      "japanese_example": "カメラを 買(か)いたいんですが、どこで 買(か)ったらいいですか。",
       "example_meaning": "Tôi muốn mua máy ảnh, nên mua ở đâu thì tốt ạ?",
       "notes": "Thường kết hợp với ～んですが ở vế trước để nêu lý do.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29617,9 +37422,9 @@ module.exports = {
       "lesson_id": 27,
       "title": "Trợ từ が đi với Động từ Thể Khả Năng",
       "meaning": "Biểu thị đối tượng của khả năng (Trợ từ が thay thế cho を)",
-      "structure": "N + が + Động từ thể khả năng (話せます / 読めます / 食べられます...)",
+      "structure": "N + が + Động từ thể khả năng (話(はな)せます / 読(よ)めます / 食(た)べられます...)",
       "vietnamese_explanation": "Khi động từ chuyển sang thể khả năng, tân ngữ trực tiếp vốn đi với trợ từ を sẽ chuyển sang đi với trợ từ が. Các trợ từ khác (に, へ, で...) vẫn giữ nguyên.",
-      "japanese_example": "私は 漢字が 読めます。",
+      "japanese_example": "私(わたし)は 漢字(かんじ)が 読(よ)めます。",
       "example_meaning": "Tôi có thể đọc được chữ Hán.",
       "notes": "Ví dụ: 漢字を読みます ➔ 漢字が読めます.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29648,11 +37453,11 @@ module.exports = {
     {
       "id": 161,
       "lesson_id": 27,
-      "title": "Phân biệt 見えます vs 見られます & 聞こえます vs 聞けます",
+      "title": "Phân biệt 見(み)えます vs 見(み)られます & 聞(き)こえます vs 聞(き)けます",
       "meaning": "Khả năng tự nhiên (見えます/聞こえます) vs Khả năng có điều kiện (見られます/聞けます)",
-      "structure": "N + が + 見えます / 聞こえます (Âm thanh/hình ảnh tự lọt vào mắt/tai không cần chủ đích)\nN + が + 見られます / 聞けます (Có cơ hội, điều kiện hoặc nỗ lực để xem/nghe)",
+      "structure": "N + が + 見(み)えます / 聞(き)こえます (Âm thanh/hình ảnh tự lọt vào mắt/tai không cần chủ đích)\nN + が + 見(み)られます / 聞(き)けます (Có cơ hội, điều kiện hoặc nỗ lực để xem/nghe)",
       "vietnamese_explanation": "見えます/聞こえます biểu thị khả năng thu nhận tự nhiên của giác quan (ví dụ: từ cửa sổ nhìn thấy núi Phú Sĩ). 見られます/聞けます là thể khả năng của 見る/聞く biểu thị có điều kiện/cơ hội để làm.",
-      "japanese_example": "窓から 富士山が 見えます。",
+      "japanese_example": "窓(まど)から 富士山(ふじさん)が 見(み)えます。",
       "example_meaning": "Từ cửa sổ có thể nhìn thấy núi Phú Sĩ.",
       "notes": "So sánh: 映画館で 面白い映画が 見られます (Ở rạp có thể xem được phim hay).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29685,7 +37490,7 @@ module.exports = {
       "meaning": "N được xây dựng xong / hoàn thành / khai trương",
       "structure": "N + が + できました / できます",
       "vietnamese_explanation": "Ngoài nghĩa \"có thể làm được\", できます còn mang nghĩa là một công trình, tòa nhà, cửa hàng hoặc vật gì đó đã được xây dựng/hoàn tất xong.",
-      "japanese_example": "駅の 前に 大きいスーパーが できました。",
+      "japanese_example": "駅(えき)の 前(まえ)に 大(おお)きいスーパーが できました。",
       "example_meaning": "Trước ga vừa mới xây xong một siêu thị lớn.",
       "notes": "Chủ ngữ luôn đi với trợ từ が.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29718,7 +37523,7 @@ module.exports = {
       "meaning": "Thói quen lặp đi lặp lại trong một khoảng thời gian dài",
       "structure": "V-ています / V-ていました",
       "vietnamese_explanation": "Dùng để diễn tả một thói quen hoặc hành động diễn ra đều đặn, lặp đi lặp lại trong một thời gian dài (như thói quen sinh hoạt, công việc nghề nghiệp).",
-      "japanese_example": "毎朝 ジョギングを しています。",
+      "japanese_example": "毎朝(まいあさ) ジョギングを しています。",
       "example_meaning": "Mỗi buổi sáng tôi đều chạy bộ.",
       "notes": "Khác với V-ます ở chỗ nhấn mạnh vào tính chất thói quen liên tục kéo dài.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29751,7 +37556,7 @@ module.exports = {
       "meaning": "Hơn nữa, vả lại (それに) / Vì vậy, thế nên (それで)",
       "structure": "Mệnh đề 1。それに、Mệnh đề 2。\nMệnh đề 1 (lý do)。それで、Mệnh đề 2 (kết quả)。",
       "vietnamese_explanation": "それに dùng để bổ sung thêm một lý do hoặc thông tin cùng chiều. それで dùng để nối câu chỉ mối quan hệ nhân quả (vế sau là kết quả tất yếu của vế trước).",
-      "japanese_example": "この店は 料理が おいしいです。それに、安いです。",
+      "japanese_example": "この店(みせ)は 料理(りょうり)が おいしいです。それに、安(やす)いです。",
       "example_meaning": "Quán này đồ ăn ngon. Hơn nữa lại còn rẻ.",
       "notes": "Thường dùng đi kèm khi nói về ưu điểm hoặc nhược điểm của sự vật.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29780,11 +37585,11 @@ module.exports = {
     {
       "id": 165,
       "lesson_id": 29,
-      "title": "Phân biệt Cặp Tự động từ (自動詞) vs Tha động từ (他動詞)",
+      "title": "Phân biệt Cặp Tự động từ (自動詞(じどうし)) vs Tha động từ (他動詞(たどうし))",
       "meaning": "N が Tự động từ (trạng thái tự thân) vs N を Tha động từ (có tác nhân con người)",
-      "structure": "N + が + Tự động từ (ドアが 開きます: Cửa mở)\nN + を + Tha động từ (ドアを 開けます: Ai đó mở cửa)",
+      "structure": "N + が + Tự động từ (ドアが 開(あ)きます: Cửa mở)\nN + を + Tha động từ (ドアを 開(あ)けます: Ai đó mở cửa)",
       "vietnamese_explanation": "Tự động từ mô tả hiện tượng, trạng thái tự diễn ra (chủ ngữ đi với が). Tha động từ mô tả hành động có chủ ý của con người tác động lên đối tượng (tân ngữ đi với を).",
-      "japanese_example": "電気が ついています。",
+      "japanese_example": "電気(でんき)が ついています。",
       "example_meaning": "Đèn đang bật.",
       "notes": "Cặp phổ biến: 開く/開ける, 閉まる/閉める, つく/つける, 消える/消す, 割れる/割る.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29817,7 +37622,7 @@ module.exports = {
       "meaning": "Về mặt N thì nó đang ở trạng thái...",
       "structure": "N + は + Tự động từ chia thể ています",
       "vietnamese_explanation": "Khi người nói muốn đưa vật đang ở trong một trạng thái cụ thể lên làm chủ đề của câu nói (người nghe đã biết về vật đó), trợ từ が sẽ đổi thành は.",
-      "japanese_example": "この皿は 割れています。",
+      "japanese_example": "この皿(さら)は 割(わ)れています。",
       "example_meaning": "Cái đĩa này bị vỡ rồi.",
       "notes": "Dùng khi muốn chỉ định một vật cụ thể trước mắt.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29850,7 +37655,7 @@ module.exports = {
       "meaning": "Về N2 thì đã được ai đó làm sẵn ở N1",
       "structure": "N2 (đối tượng) + は + N1 (địa điểm) + に + Tha động từ chia thể てあります",
       "vietnamese_explanation": "Khi muốn đưa đối tượng chịu tác động lên làm chủ đề của câu, ta dùng trợ từ は thay cho が.",
-      "japanese_example": "カレンダーは 壁に 掛けてあります。",
+      "japanese_example": "カレンダーは 壁(かべ)に 掛(か)けてあります。",
       "example_meaning": "Lịch thì đã được treo ở trên tường.",
       "notes": "Nhấn mạnh vào vật đang tồn tại ở trạng thái kết quả của một hành động có chủ đích.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29901,7 +37706,7 @@ module.exports = {
       "meaning": "Hành động hoặc trạng thái vẫn còn đang tiếp diễn, chưa kết thúc",
       "structure": "まだ + Động từ thể ています / Chưa xong: まだ + V-ていません",
       "vietnamese_explanation": "Biểu thị một hành động hoặc trạng thái từ quá khứ vẫn tiếp tục duy trì đến thời điểm hiện tại.",
-      "japanese_example": "まだ 雨が 降っています。",
+      "japanese_example": "まだ 雨(あめ)が 降(ふ)っています。",
       "example_meaning": "Trời vẫn còn đang mưa.",
       "notes": "Phủ định: まだ 書いていません (Vẫn chưa viết xong).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29934,7 +37739,7 @@ module.exports = {
       "meaning": "Dự định làm / Dự định không làm việc gì đó (ý định chắc chắn)",
       "structure": "V-る (thể từ điển) / V-ない + つもりです",
       "vietnamese_explanation": "Thể hiện ý định rõ ràng, chắc chắn của người nói về một việc sẽ làm hoặc không làm trong tương lai. Thường chắc chắn hơn V-ようと思っています.",
-      "japanese_example": "来年 国へ 帰る つもりです。",
+      "japanese_example": "来年(らいねん) 国(くに)へ 帰(かえ)る つもりです。",
       "example_meaning": "Năm sau tôi dự định sẽ về nước.",
       "notes": "Không dùng để hỏi trực tiếp người trên (dùng 予定ですか thay thế).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -29963,11 +37768,11 @@ module.exports = {
     {
       "id": 170,
       "lesson_id": 31,
-      "title": "V-る / N の + 予定です",
+      "title": "V-る / N の + 予定(よてい)です",
       "meaning": "Theo lịch trình / kế hoạch đã định sẵn",
-      "structure": "V-る / N + の + 予定（よてい）です",
+      "structure": "V-る / N + の + 予定(よてい)（よてい）です",
       "vietnamese_explanation": "Biểu thị một sự việc được lên kế hoạch, lịch trình từ trước bởi tổ chức, công ty hoặc hoàn cảnh bên ngoài, không mang tính chủ quan của người nói.",
-      "japanese_example": "出張は 1週間ぐらいの 予定です。",
+      "japanese_example": "出張(しゅっちょう)は 1週間(しゅうかん)ぐらいの 予定(よてい)です。",
       "example_meaning": "Chuyến đi công tác dự kiến kéo dài khoảng 1 tuần.",
       "notes": "Thích hợp dùng trong công việc và lịch trình công cộng.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30018,7 +37823,7 @@ module.exports = {
       "meaning": "Chắc là... / Có lẽ là... (xác suất cao ~70-80%)",
       "structure": "Thể thông thường (Na/N bỏ だ) + でしょう",
       "vietnamese_explanation": "Dùng khi người nói đưa ra phỏng đoán dựa trên dữ liệu, căn cứ rõ ràng (như dự báo thời tiết, thông tin chuyên môn). Lên giọng (でしょう↗) thì mang nghĩa tìm kiếm sự đồng tình.",
-      "japanese_example": "明日は 雨が 降るでしょう。",
+      "japanese_example": "明日(あした)は 雨(あめ)が 降(ふ)るでしょう。",
       "example_meaning": "Ngày mai chắc là trời sẽ mưa.",
       "notes": "Khác với かもしれません (chỉ ~50% xác suất).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30067,9 +37872,9 @@ module.exports = {
       "lesson_id": 32,
       "title": "Phó từ biểu thị phỏng đoán: たぶん & もしかしたら",
       "meaning": "Có lẽ (たぶん) / Biết đâu chừng, ngộ nhỡ (もしかしたら)",
-      "structure": "たぶん + V/A/N + でしょう / と思います\nもしかしたら + V/A/N + かもしれません",
+      "structure": "たぶん + V/A/N + でしょう / と思(おも)います\nもしかしたら + V/A/N + かもしれません",
       "vietnamese_explanation": "たぶん đi kèm với câu có độ chắc chắn khá cao (でしょう). もしかしたら đi kèm với câu có độ phỏng đoán dè dặt, không chắc chắn (かもしれません).",
-      "japanese_example": "もしかしたら 3月に 卒業できないかも しれません。",
+      "japanese_example": "もしかしたら 3月(がつ)に 卒業(そつぎょう)できないかも しれません。",
       "example_meaning": "Biết đâu chừng đến tháng 3 tôi không tốt nghiệp được cũng nên.",
       "notes": "Là cặp phó từ đặc trưng trong bài học phỏng đoán Minna 32.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30104,11 +37909,11 @@ module.exports = {
     {
       "id": 173,
       "lesson_id": 33,
-      "title": "～という意味です",
+      "title": "～という意味(いみ)です",
       "meaning": "X có nghĩa là... (Giải thích định nghĩa, ý nghĩa của từ ngữ, ký hiệu)",
-      "structure": "X は [Mệnh đề thể thông thường] + という 意味です",
+      "structure": "X は [Mệnh đề thể thông thường] + という 意味(いみ)です",
       "vietnamese_explanation": "Dùng khi muốn giải thích ý nghĩa của một từ vựng, biển báo hoặc hành vi cho người khác hiểu.",
-      "japanese_example": "「立入禁止」は 入るなと いう意味です。\n「ありがとう」は ベトナム語で 「Cảm ơn」と いう意味です。\nこのマークは 禁煙と いう意味です。",
+      "japanese_example": "「立入禁止(たちいりきんし)」は 入(はい)るなと いう意味(いみ)です。\n「ありがとう」は ベトナム語(かた)で 「Cảm ơn」と いう意味(いみ)です。\nこのマークは 禁煙(きんえん)と いう意味(いみ)です。",
       "example_meaning": "「立入禁止」có nghĩa là cấm vào.\n「ありがとう」trong tiếng Việt có nghĩa là \"Cảm ơn\".\nKý hiệu này có nghĩa là cấm hút thuốc.",
       "notes": "Câu hỏi: どういう意味ですか (Có nghĩa là gì vậy?).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30118,11 +37923,11 @@ module.exports = {
     {
       "id": 174,
       "lesson_id": 33,
-      "title": "～と言っていました & ～と伝えていただけませんか",
+      "title": "～と言(い)っていました & ～と伝(つた)えていただけませんか",
       "meaning": "Ai đó đã nói rằng... & Nhờ truyền đạt lời nhắn",
-      "structure": "Người nói + は + [Thể thông thường] + と 言っていました\n[Thể thông thường] + と 伝えて いただけませんか",
+      "structure": "Người nói + は + [Thể thông thường] + と 言(い)っていました\n[Thể thông thường] + と 伝(つた)えて いただけませんか",
       "vietnamese_explanation": "言っていました dùng để truyền đạt lại lời nhắn của người thứ 3 cho người nghe. 伝えていただけませんか dùng để nhờ vả đối phương chuyển lời giúp mình một cách lịch sự.",
-      "japanese_example": "田中さんは 明日 休むと 言っていました。",
+      "japanese_example": "田中(たなか)さんは 明日(あした) 休(やす)むと 言(い)っていました。",
       "example_meaning": "Anh Tanaka đã nói rằng ngày mai anh ấy sẽ nghỉ.",
       "notes": "Nội dung trích dẫn luôn chia ở thể thông thường.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30161,7 +37966,7 @@ module.exports = {
       "meaning": "Làm V2 trong trạng thái V1 / Làm V2 mà không làm V1",
       "structure": "V1-て + V2 (Có mang/làm V1 kèm theo)\nV1-ないで + V2 (Không làm/mang V1)",
       "vietnamese_explanation": "V1 mô tả tư thế, cách thức hoặc trạng thái phụ đi kèm khi thực hiện hành động chính V2.",
-      "japanese_example": "砂糖を 入れないで コーヒーを 飲みます。",
+      "japanese_example": "砂糖(さとう)を 入(はい)れないで コーヒーを 飲(の)みます。",
       "example_meaning": "Tôi uống cà phê mà không cho đường.",
       "notes": "Ví dụ: 傘を持って出かけます (Cầm theo ô ra ngoài).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30200,7 +38005,7 @@ module.exports = {
       "meaning": "Đưa ra lời khuyên, tư vấn hoặc giới hạn theo chủ đề N",
       "structure": "Danh từ + なら、[Lời khuyên / Đề xuất / Ý kiến]",
       "vietnamese_explanation": "Dùng khi tiếp nhận chủ đề mà người nghe vừa nhắc tới và đưa ra lời tư vấn hoặc thông tin tốt nhất liên quan đến chủ đề đó.",
-      "japanese_example": "日本の 映画なら、黒澤の 映画が おすすめです。",
+      "japanese_example": "日本(にほん)の 映画(えいが)なら、黒澤(くろさわ)の 映画(えいが)が おすすめです。",
       "example_meaning": "Nếu là phim Nhật Bản thì tôi gợi ý phim của Kurosawa.",
       "notes": "Danh từ gắn trực tiếp với なら, không cần trợ từ.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30233,7 +38038,7 @@ module.exports = {
       "meaning": "Mức độ ở vế sau tăng lên tương ứng với mức độ ở vế trước",
       "structure": "V-ば + V-るほど\nA-ければ + A-いほど\nA-なら + A-なほど",
       "vietnamese_explanation": "Diễn tả mối quan hệ tỷ lệ thuận: điều kiện càng tăng lên thì kết quả hoặc trạng thái càng biến đổi theo.",
-      "japanese_example": "日本語は 勉強すれば するほど 面白くなります。",
+      "japanese_example": "日本語(にほんご)は 勉強(べんきょう)すれば するほど 面白(おもしろ)くなります。",
       "example_meaning": "Tiếng Nhật càng học thì càng trở nên thú vị.",
       "notes": "Động từ/Tính từ được lặp lại 2 lần: lần đầu chia thể điều kiện, lần hai ở thể từ điển.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30266,7 +38071,7 @@ module.exports = {
       "meaning": "Biểu thị sự biến đổi trạng thái: từ không thể thành có thể làm được",
       "structure": "Động từ thể khả năng (V-る) + ようになります",
       "vietnamese_explanation": "Mô tả sự thay đổi năng lực hoặc thói quen theo thời gian (trước đây không làm được, nay đã làm được).",
-      "japanese_example": "毎日 練習して、泳げる ように なりました。",
+      "japanese_example": "毎日(まいにち) 練習(れんしゅう)して、泳(およ)げる ように なりました。",
       "example_meaning": "Nhờ luyện tập mỗi ngày, tôi đã biết bơi.",
       "notes": "Khác với なります (đi với danh từ/tính từ), ように なります đi với động từ.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30305,7 +38110,7 @@ module.exports = {
       "meaning": "Xin hãy cố gắng làm / không làm việc gì đó",
       "structure": "V-る / V-ない + ように して ください",
       "vietnamese_explanation": "Dùng để nhắc nhở, hướng dẫn hoặc yêu cầu ai đó tạo thói quen tốt hoặc tuân thủ quy tắc một cách gián tiếp và lịch sự hơn V-てください.",
-      "japanese_example": "必ず 時間を 守る ように してください。",
+      "japanese_example": "必(かなら)ず 時間(じかん)を 守(まも)る ように してください。",
       "example_meaning": "Xin hãy cố gắng đúng giờ nhé.",
       "notes": "Thích hợp dùng cho các chỉ dẫn của bác sĩ hoặc nội quy công ty.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30332,7 +38137,7 @@ module.exports = {
       "meaning": "N1 bị N2 làm hành động tác động lên N3 của mình (cảm thấy phiền toái, bực mình)",
       "structure": "N1 (nạn nhân) + は + N2 (kẻ gây ra) + に + N3 (vật sở hữu) + を + V-bị động",
       "vietnamese_explanation": "Đặc trưng trong tiếng Nhật: khi ai đó làm hỏng, dẫm lên hoặc tác động lên tài sản/bộ phận cơ thể của mình khiến mình khó chịu, ta dùng thể bị động này.",
-      "japanese_example": "電車で 誰かに 足を 踏まれました。",
+      "japanese_example": "電車(でんしゃ)で 誰(だれ)かに 足(あし)を 踏(ふ)まれました。",
       "example_meaning": "Ở trên tàu điện, tôi bị ai đó giẫm lên chân.",
       "notes": "Vật sở hữu vẫn giữ trợ từ を.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30371,7 +38176,7 @@ module.exports = {
       "meaning": "Sự vật N được phát minh / sáng tạo / xây dựng bởi N2",
       "structure": "N (công trình/phát minh) + は + N2 (tác giả/nhà khoa học) + によって + V-bị động",
       "vietnamese_explanation": "Khi chủ ngữ là công trình kiến trúc, tác phẩm nghệ thuật hoặc phát minh vĩ đại, tác nhân thực hiện sẽ đi kèm với によって thay vì に.",
-      "japanese_example": "電話は ベルに よって 発明されました。",
+      "japanese_example": "電話(でんわ)は ベルに よって 発明(はつめい)されました。",
       "example_meaning": "Điện thoại được phát minh bởi Bell.",
       "notes": "Thường dùng trong văn bản lịch sử, tin tức.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30400,11 +38205,11 @@ module.exports = {
     {
       "id": 182,
       "lesson_id": 38,
-      "title": "V-る のを 忘れました (Quên làm việc gì)",
+      "title": "V-る のを 忘(わす)れました (Quên làm việc gì)",
       "meaning": "Quên thực hiện một hành động cụ thể nào đó",
-      "structure": "V-る (thể từ điển) + のを + 忘れました",
+      "structure": "V-る (thể từ điển) + のを + 忘(わす)れました",
       "vietnamese_explanation": "Danh từ hóa hành động bằng trợ từ の rồi kết hợp với 忘れました để diễn đạt việc đã quên không làm hành động đó.",
-      "japanese_example": "鍵を 掛けるのを 忘れました。",
+      "japanese_example": "鍵(かぎ)を 掛(か)けるのを 忘(わす)れました。",
       "example_meaning": "Tôi đã quên khóa cửa.",
       "notes": "Khác với 鍵を忘れました (quên chìa khóa).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30427,11 +38232,11 @@ module.exports = {
     {
       "id": 183,
       "lesson_id": 38,
-      "title": "V-る のを 知っていますか (Bạn có biết việc... không?)",
+      "title": "V-る のを 知(し)っていますか (Bạn có biết việc... không?)",
       "meaning": "Hỏi đối phương có biết thông tin/sự việc nào đó hay không",
-      "structure": "Mệnh đề [V-thông thường] + のを + 知っていますか",
+      "structure": "Mệnh đề [V-thông thường] + のを + 知(し)っていますか",
       "vietnamese_explanation": "Dùng để hỏi xem người nghe đã biết về một sự việc, tin tức cụ thể nào đó chưa.",
-      "japanese_example": "木村さんが 結婚したのを 知っていますか。",
+      "japanese_example": "木村(きむら)さんが 結婚(けっこん)したのを 知(し)っていますか。",
       "example_meaning": "Bạn có biết chuyện anh Kimura đã kết hôn rồi không?",
       "notes": "Nếu chưa biết thì trả lời: いいえ、知りませんでした.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30464,7 +38269,7 @@ module.exports = {
       "meaning": "Bởi vì... (nguyên nhân khách quan do thiên tai, tai nạn)",
       "structure": "Danh từ (tai nạn, bão, động đất, hỏa hoạn, bệnh tật) + で、[Hệ quả]",
       "vietnamese_explanation": "Trợ từ で chỉ nguyên nhân của sự việc không mong muốn. Vế sau không dùng câu cầu khiến, mệnh lệnh hay ý chí.",
-      "japanese_example": "地震で ビルが 倒れました。",
+      "japanese_example": "地震(じしん)で ビルが 倒(たお)れました。",
       "example_meaning": "Do động đất, tòa nhà đã bị sập.",
       "notes": "Ví dụ: 事故で (do tai nạn), 台風で (do bão).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30493,11 +38298,11 @@ module.exports = {
     {
       "id": 185,
       "lesson_id": 39,
-      "title": "途中で (とちゅうで - Ở giữa chừng)",
+      "title": "途中(とちゅう)で (とちゅうで - Ở giữa chừng)",
       "meaning": "Ở giữa chừng, đang trên đường làm gì thì việc khác xảy ra",
-      "structure": "V-る / N の + 途中で",
+      "structure": "V-る / N の + 途中(とちゅう)で",
       "vietnamese_explanation": "Biểu thị một hành động hoặc biến cố bất ngờ xảy ra khi hành động chính đang được thực hiện nửa chừng.",
-      "japanese_example": "マラソンの 途中で 気分が 悪くなりました。",
+      "japanese_example": "マラソンの 途中(とちゅう)で 気分(きぶん)が 悪(わる)くなりました。",
       "example_meaning": "Giữa chừng cuộc chạy marathon, tôi cảm thấy trong người khó chịu.",
       "notes": "Rất hay dùng trong văn nói khi trễ hẹn hoặc gặp trục trặc.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30536,7 +38341,7 @@ module.exports = {
       "meaning": "Làm thử hành động nào đó xem kết quả ra sao",
       "structure": "Động từ thể て + みます / みて ください",
       "vietnamese_explanation": "Biểu thị việc người nói thực hiện một hành động với tâm thế thử nghiệm, trải nghiệm để biết kết quả hoặc hương vị.",
-      "japanese_example": "この靴を 履いて みても いいですか。",
+      "japanese_example": "この靴(くつ)を 履(は)いて みても いいですか。",
       "example_meaning": "Tôi có thể đi thử đôi giày này được không ạ?",
       "notes": "Thường dùng khi thử quần áo, ăn thử món ăn mới hoặc trải nghiệm văn hóa.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30585,9 +38390,9 @@ module.exports = {
       "lesson_id": 40,
       "title": "Tính từ đuôi-i bỏ い + さ (Danh từ hóa đo lường)",
       "meaning": "Độ... (biến đổi tính từ thành danh từ chỉ mức độ, kích thước)",
-      "structure": "Tính từ đuôi-i: Bỏ い + さ (高さ, 重さ, 長さ, 広さ...)",
+      "structure": "Tính từ đuôi-i: Bỏ い + さ (高(たか)さ, 重(おも)さ, 長(なが)さ, 広(ひろ)さ...)",
       "vietnamese_explanation": "Hậu tố さ gắn vào sau thân tính từ đuôi-i để tạo thành danh từ chỉ kích thước hoặc tính chất đo lường được.",
-      "japanese_example": "富士山の 高さは どのくらいですか。",
+      "japanese_example": "富士山(ふじさん)の 高(たか)さは どのくらいですか。",
       "example_meaning": "Độ cao của núi Phú Sĩ là khoảng bao nhiêu vậy?",
       "notes": "Ví dụ: 高い (cao) ➔ 高さ (độ cao), 重い (nặng) ➔ 重さ (trọng lượng).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30638,7 +38443,7 @@ module.exports = {
       "meaning": "Làm việc gì cho người dưới/động vật (やります) hoặc cho người trên (さしあげます)",
       "structure": "V-て + やります (cho con cái, động vật, cây cối)\nV-て + さしあげます (cho người bề trên - cần dùng khéo léo)",
       "vietnamese_explanation": "やります dùng khi người thực hiện hành động cho đối tượng kém tuổi, cấp dưới, động vật nuôi hoặc tưới cây. さしあげます thể hiện sự khiêm nhường nhưng dễ tạo cảm giác ban ơn nếu dùng không cẩn trọng.",
-      "japanese_example": "犬に えさを やりました。",
+      "japanese_example": "犬(いぬ)に えさを やりました。",
       "example_meaning": "Tôi đã cho chó ăn.",
       "notes": "Ví dụ: 花に水をやります (tưới nước cho hoa).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30689,7 +38494,7 @@ module.exports = {
       "meaning": "Làm ơn làm giúp tôi việc này được không ạ?",
       "structure": "Động từ thể て + くださいませんか",
       "vietnamese_explanation": "Mức độ lịch sự cao hơn V-てください, thường dùng khi nhờ vả đồng nghiệp, người quen hoặc người lớn tuổi hơn mình một chút.",
-      "japanese_example": "コピーの 使い方を 教えて くださいませんか。",
+      "japanese_example": "コピーの 使(つか)い方(かた)を 教(おし)えて くださいませんか。",
       "example_meaning": "Làm ơn chỉ cho tôi cách dùng máy photocopy được không ạ?",
       "notes": "Thứ tự lịch sự: てください < てくださいませんか < ていただけませんか.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30701,9 +38506,9 @@ module.exports = {
       "lesson_id": 42,
       "title": "V-る のに / N に + つかいます / べんりです",
       "meaning": "Dùng để làm gì / Tiện lợi cho việc gì",
-      "structure": "V-る + のに / N + に + (使います / 便利です / 役に立ちます)",
+      "structure": "V-る + のに / N + に + (使(つか)います / 便利(べんり)です / 役(やく)に立(た)ちます)",
       "vietnamese_explanation": "Biểu thị mục đích công năng hoặc công dụng cụ thể của một công cụ, đồ vật.",
-      "japanese_example": "このハサミは 花を 切るのに 使います。",
+      "japanese_example": "このハサミは 花(はな)を 切(き)るのに 使(つか)います。",
       "example_meaning": "Chiếc kéo này dùng để cắt tỉa hoa.",
       "notes": "Khác với ために (chỉ mục đích hành động của con người), のに thường đi kèm công năng của đồ vật.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30736,7 +38541,7 @@ module.exports = {
       "meaning": "Tốn bao nhiêu thời gian / tiền bạc để làm việc gì",
       "structure": "V-る + のに + [Khoảng thời gian / Tiền bạc] + が かかります",
       "vietnamese_explanation": "Biểu thị phí tổn thời gian hoặc chi phí cần thiết để hoàn thành một mục tiêu cụ thể.",
-      "japanese_example": "家を 建てるのに 3000万円 かかりました。",
+      "japanese_example": "家(いえ)を 建(た)てるのに 3000万円(まんえん) かかりました。",
       "example_meaning": "Để xây được ngôi nhà đã tốn mất 30 triệu Yên.",
       "notes": "Thường dùng のに sau động từ thể từ điển.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30769,7 +38574,7 @@ module.exports = {
       "meaning": "Vật có vẻ... (そうな N) / Làm việc gì một cách có vẻ... (そうに V)",
       "structure": "Tính từ bỏ い/な + そうな + Noun\nTính từ bỏ い/な + そうに + Verb",
       "vietnamese_explanation": "Dùng cấu trúc phỏng đoán thị giác そう để bổ nghĩa cho danh từ (thêm な) hoặc làm phó từ bổ nghĩa cho động từ (thêm に).",
-      "japanese_example": "子どもたちが 楽しそうに 遊んでいます。",
+      "japanese_example": "子(こ)どもたちが 楽(たの)しそうに 遊(あそ)んでいます。",
       "example_meaning": "Lũ trẻ đang chơi đùa trông có vẻ rất vui.",
       "notes": "Ví dụ: おいしそうなケーキ (Chiếc bánh trông có vẻ ngon).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30814,7 +38619,7 @@ module.exports = {
       "meaning": "Đi đâu đó một lát rồi trở về",
       "structure": "Địa điểm + へ + いってきます",
       "vietnamese_explanation": "Dùng khi người nói rời khỏi một địa điểm để đi giải quyết việc ngắn hạn ở nơi khác rồi sẽ quay lại vị trí ban đầu.",
-      "japanese_example": "ちょっと トイレへ 行ってきます。",
+      "japanese_example": "ちょっと トイレへ 行(い)ってきます。",
       "example_meaning": "Tôi đi vệ sinh một lát rồi quay lại ngay.",
       "notes": "Là biến thể ứng dụng phổ biến của cấu trúc V-てきます.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30841,7 +38646,7 @@ module.exports = {
       "meaning": "Tác động có chủ ý làm thay đổi tính chất của sự vật",
       "structure": "Tính từ đuôi-i: Bỏ い + く します\nTính từ đuôi-na / Danh từ: + に します",
       "vietnamese_explanation": "Người nói chủ động tác động lên đối tượng để biến đổi trạng thái của nó (khác với なります là tự biến đổi).",
-      "japanese_example": "部屋を きれいに します。",
+      "japanese_example": "部屋(へや)を きれいに します。",
       "example_meaning": "Tôi dọn dẹp cho căn phòng trở nên sạch sẽ.",
       "notes": "Ví dụ: 音を大きくします (Vặn tiếng to lên).",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30868,7 +38673,7 @@ module.exports = {
       "meaning": "Quyết định lựa chọn một phương án trong nhiều lựa chọn",
       "structure": "Danh từ + に します",
       "vietnamese_explanation": "Dùng khi gọi món ở nhà hàng hoặc đưa ra quyết định chọn mua một món đồ trong số nhiều món.",
-      "japanese_example": "私は コーヒーに します。",
+      "japanese_example": "私(わたし)は コーヒーに します。",
       "example_meaning": "Tôi chọn cà phê.",
       "notes": "Rất thông dụng trong giao tiếp gọi đồ ăn uống.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30895,7 +38700,7 @@ module.exports = {
       "meaning": "Cảm xúc bất mãn, thất vọng (のに) vs Điều kiện nghịch thông thường (ても)",
       "structure": "のに: Luôn chứa cảm xúc bất mãn, ngạc nhiên, nuối tiếc của người nói\nても: Chỉ nêu điều kiện giả định nghịch, không mang tính phàn nàn",
       "vietnamese_explanation": "のに nhấn mạnh việc kết quả trái ngược với kỳ vọng bình thường và bộc lộ sự bất bình. ても chỉ đơn thuần là giả thuyết \"cho dù... thì vẫn...\".",
-      "japanese_example": "一生懸命 勉強したのに、試験に 落ちました。",
+      "japanese_example": "一生懸命(いっしょうけんめい) 勉強(べんきょう)したのに、試験(しけん)に 落(お)ちました。",
       "example_meaning": "Đã học hành chăm chỉ đến thế mà vẫn thi trượt (tiếc nuối, cay đắng).",
       "notes": "Vế sau のに không bao giờ là câu mệnh lệnh, cầu khiến.",
       "created_at": "2026-07-05T00:26:56.981418+00:00",
@@ -30928,7 +38733,7 @@ module.exports = {
       "meaning": "Chắc chắn là... (phỏng đoán có căn cứ xác thực 90-99%)",
       "structure": "Thể thông thường (Tính từ na + な, Danh từ + の) + はずです",
       "vietnamese_explanation": "Dùng khi người nói tin chắc rằng một sự việc sẽ hoặc đang diễn ra dựa trên lý do, quy luật hoặc căn cứ xác thực.",
-      "japanese_example": "田中さんは 今日 来るはずです。昨日 約束しましたから。",
+      "japanese_example": "田中(たなか)さんは 今日(きょう) 来(き)るはずです。昨日(きのう) 約束(やくそく)しましたから。",
       "example_meaning": "Anh Tanaka chắc chắn hôm nay sẽ đến. Vì hôm qua anh ấy đã hứa rồi mà.",
       "notes": "Phủ định: はずがありません (Chắc chắn không có chuyện đó).",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -30942,7 +38747,7 @@ module.exports = {
       "meaning": "Dẫn xuất nguồn thông tin truyền đạt",
       "structure": "N (nguồn thông tin: tin tức, báo chí, đài truyền hình...) + によると、Mệnh đề + そうです",
       "vietnamese_explanation": "Chỉ rõ xuất xứ nguồn gốc của thông tin mà mình sắp truyền đạt lại cho người nghe.",
-      "japanese_example": "天気予報に よると、明日は 寒くなるそうです。",
+      "japanese_example": "天気予報(てんきよほう)に よると、明日(あした)は 寒(さむ)くなるそうです。",
       "example_meaning": "Theo dự báo thời tiết thì nghe nói ngày mai trời sẽ trở lạnh.",
       "notes": "Luôn đi kèm với mẫu truyền ngôn そうです ở cuối câu.",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -30956,7 +38761,7 @@ module.exports = {
       "meaning": "N1 bắt hoặc cho phép N2 thực hiện nội động từ",
       "structure": "N1 (người sai khiến) + は + N2 (người thực hiện) + を + Nội động từ thể sai khiến",
       "vietnamese_explanation": "Khi động từ là nội động từ (không có tân ngữ を, như 行く, 走る, 帰る), người thực hiện hành động sẽ đi với trợ từ を.",
-      "japanese_example": "部長は 田中さんを アメリカへ 出張させました。",
+      "japanese_example": "部長(ぶちょう)は 田中(たなか)さんを アメリカへ 出張(しゅっちょう)させました。",
       "example_meaning": "Trưởng phòng đã cử anh Tanaka đi công tác Mỹ.",
       "notes": "So sánh: Ngoại động từ thì người thực hiện đi với に (先生は 学生に 本を 読ませました).",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -30966,11 +38771,11 @@ module.exports = {
     {
       "id": 200,
       "lesson_id": 48,
-      "title": "Sai khiến biểu thị Cho phép / Tha thứ (容認・許可)",
+      "title": "Sai khiến biểu thị Cho phép / Tha thứ (容認(ようにん)・許可(きょか))",
       "meaning": "Cho phép ai đó làm việc theo ý muốn của họ",
       "structure": "N1 + は + N2 + に/を + V-sai khiến",
       "vietnamese_explanation": "Ngoài ý nghĩa ép buộc/ra lệnh, thể sai khiến còn dùng khi người bề trên đồng ý, cho phép người dưới tự do làm việc mà họ mong muốn.",
-      "japanese_example": "子どもに 好きなことを させます。",
+      "japanese_example": "子(こ)どもに 好(す)きなことを させます。",
       "example_meaning": "Tôi cho con tôi làm những điều mà cháu thích.",
       "notes": "Tùy ngữ cảnh để hiểu là \"bắt làm\" hay \"cho phép làm\".",
       "created_at": "2026-09-22T13:40:03.397937+00:00",
@@ -30982,9 +38787,9 @@ module.exports = {
       "lesson_id": 49,
       "title": "Động từ Tôn kính đặc biệt (いらっしゃいます, おっしゃいます...)",
       "meaning": "Các động từ tôn kính ngữ biến đổi đặc biệt",
-      "structure": "行く/来る/いる ➔ いらっしゃいます\n言う ➔ おっしゃいます\n食べる/飲む ➔ 召し上がります\n知っています ➔ ご存じです\n見ます ➔ ご覧になります",
+      "structure": "行(い)く/来(き)る/いる ➔ いらっしゃいます\n言(い)う ➔ おっしゃいます\n食(た)べる/飲(の)む ➔ 召(め)し上(うえ)がります\n知(し)っています ➔ ご存(ぞん)じです\n見(み)ます ➔ ご覧(らん)になります",
       "vietnamese_explanation": "Đây là các động từ bất quy tắc có mức độ tôn kính cao nhất trong tiếng Nhật, dùng để nói về hành động của khách hàng, cấp trên, người lớn tuổi.",
-      "japanese_example": "社長は もう 召し上がりました。",
+      "japanese_example": "社長(しゃちょう)は もう 召(め)し上(うえ)がりました。",
       "example_meaning": "Giám đốc đã dùng bữa rồi.",
       "notes": "Tuyệt đối không dùng cho hành động của bản thân.",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -30996,9 +38801,9 @@ module.exports = {
       "lesson_id": 49,
       "title": "Kính ngữ với Danh từ & Tính từ: お / ご",
       "meaning": "Tiền tố lịch sự và tôn kính gắn trước danh từ hoặc tính từ",
-      "structure": "お + Từ thuần Nhật (Yamato kotoba): お名前, お仕事, お元気, お忙しい\nご + Từ Hán tự (Kango): ご家族, ご意見, ご親切, ご連絡",
+      "structure": "お + Từ thuần Nhật (Yamato kotoba): お名前(なまえ), お仕事(しごと), お元気(げんき), お忙(いそが)しい\nご + Từ Hán tự (Kango): ご家族(かぞく), ご意見(いけん), ご親切(しんせつ), ご連絡(れんらく)",
       "vietnamese_explanation": "Thêm tiền tố お hoặc ご vào trước danh từ/tính từ của đối phương để thể hiện sự tôn trọng và lịch sự.",
-      "japanese_example": "お仕事は 何時までですか。",
+      "japanese_example": "お仕事(しごと)は 何時(なんじ)までですか。",
       "example_meaning": "Công việc của anh/chị kéo dài đến mấy giờ ạ?",
       "notes": "Ngoại lệ: お電話, お茶, お金 (đã trở thành từ vựng thông dụng).",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -31010,9 +38815,9 @@ module.exports = {
       "lesson_id": 50,
       "title": "Động từ Khiêm nhường đặc biệt (まいります, おります, もうします...)",
       "meaning": "Các động từ khiêm nhường ngữ biến đổi đặc biệt",
-      "structure": "行く/来る ➔ まいります\nいる ➔ おります\n言う ➔ もうします\n食べる/飲む/もらう ➔ いただきます\n知っています ➔ ぞんじております\nします ➔ いたします",
+      "structure": "行(い)く/来(き)る ➔ まいります\nいる ➔ おります\n言(い)う ➔ もうします\n食(た)べる/飲(の)む/もらう ➔ いただきます\n知(し)っています ➔ ぞんじております\nします ➔ いたします",
       "vietnamese_explanation": "Dùng cho hành động của chính bản thân mình hoặc người cùng nhóm (gia đình, công ty mình) khi nói chuyện với khách hàng, đối tác hoặc người bề trên để thể hiện sự khiêm nhường, hạ mình.",
-      "japanese_example": "私は ミラーと 申します。",
+      "japanese_example": "私(わたし)は ミラーと 申(もう)します。",
       "example_meaning": "Tôi tên là Miller.",
       "notes": "Tuyệt đối không dùng để nói về hành động của đối phương.",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -31022,11 +38827,11 @@ module.exports = {
     {
       "id": 204,
       "lesson_id": 50,
-      "title": "Trịnh trọng ngữ (丁重語): でございます & よろしいでしょうか",
+      "title": "Trịnh trọng ngữ (丁重語(ていちょうご)): でございます & よろしいでしょうか",
       "meaning": "Cách nói trang trọng, lịch thiệp đặc biệt trong môi trường kinh doanh/dịch vụ",
       "structure": "です ➔ でございます\nあります ➔ ございます\nいいですか ➔ よろしいでしょうか",
       "vietnamese_explanation": "Dùng để nâng cao tính trang trọng, nhã nhặn của lời nói trước người nghe, rất phổ biến trong giao tiếp thương mại, nhà hàng, khách sạn.",
-      "japanese_example": "受付は 2階で ございます。",
+      "japanese_example": "受付(うけつけ)は 2階(かい)で ございます。",
       "example_meaning": "Quầy tiếp tân ở tầng 2 ạ.",
       "notes": "Là mức độ lịch sự cao nhất của trợ động từ です.",
       "created_at": "2026-07-08T06:07:28.898228+00:00",
@@ -31040,7 +38845,7 @@ module.exports = {
       "meaning": "N1 ở N2 (địa điểm/tầng)",
       "structure": "N1 (vật/người/địa điểm) + は + N2 (địa điểm/tầng) + です",
       "vietnamese_explanation": "Dùng để diễn tả địa điểm, vị trí cụ thể hoặc số tầng mà một địa danh, vật thể hay một người đang ở đó.",
-      "japanese_example": "食堂は ２階 です。",
+      "japanese_example": "食堂(しょくどう)は ２階(かい) です。",
       "example_meaning": "Nhà ăn ở tầng 2.",
       "notes": "🔊 Nghe",
       "created_at": "2026-07-22T14:51:21.943376+00:00",
@@ -31054,7 +38859,7 @@ module.exports = {
       "meaning": "N bao nhiêu tiền?",
       "structure": "Danh từ + は + いくら + ですか",
       "vietnamese_explanation": "Dùng để hỏi giá tiền của sản phẩm, đồ vật hoặc dịch vụ.",
-      "japanese_example": "このカメラは いくら ですか。ー２万５千円 です。",
+      "japanese_example": "このカメラは いくら ですか。ー２万(まん)５千円(せんえん) です。",
       "example_meaning": "Chiếc máy ảnh này bao nhiêu tiền? - Là 25,000 yên.",
       "notes": "🔊 Nghe",
       "created_at": "2026-07-22T14:51:21.943376+00:00",
@@ -31066,9 +38871,9 @@ module.exports = {
       "lesson_id": 14,
       "title": "Bảng tổng hợp: Quy tắc chia Động từ thể て và thể た",
       "meaning": "Quy tắc chia động từ sang thể て (làm nền tảng cho thể た: て → た, で → だ)",
-      "structure": "Nhóm I: [い, ち, り] → って | [み, び, に] → んで | [き] → いて (行く → いって) | [ぎ] → いで | [し] → して\nNhóm II: V-bỏ ます + て / た (例: たべます → たべて)\nNhóm III: します → して / した | きます → きて / きた",
+      "structure": "Nhóm I: [い, ち, り] → って | [み, び, に] → んで | [き] → いて (行(い)く → いって) | [ぎ] → いで | [し] → して\nNhóm II: V-bỏ ます + て / た (例(れい): たべます → たべて)\nNhóm III: します → して / した | きます → きて / きた",
       "vietnamese_explanation": "Thể て là thể biến đổi quan trọng nhất ở sơ cấp tiếng Nhật, dùng để nối câu, chỉ hành động đang diễn ra (ています), yêu cầu lịch sự (てください), xin phép (てもいいです)... Thể た chia hoàn toàn tương tự (thay て bằng た, で bằng だ).",
-      "japanese_example": "Nhóm I: 書きます → 書いて、読みます → 読んで、行きます → 行って。\nNhóm II: 食べます → 食べて、見ます → 見て。\nNhóm III: 勉強します → 勉強して、来ます → 来て。",
+      "japanese_example": "Nhóm I: 書(か)きます → 書(か)いて、読(よ)みます → 読(よ)んで、行(い)きます → 行(い)って。\nNhóm II: 食(た)べます → 食(た)べて、見(み)ます → 見(み)て。\nNhóm III: 勉強(べんきょう)します → 勉強(べんきょう)して、来(き)ます → 来(き)て。",
       "example_meaning": "Nhóm I: Viết → Đang viết/Hãy viết; Đọc → Đang đọc; Đi → Đang đi.\nNhóm II: Ăn → Đang ăn; Xem → Đang xem.\nNhóm III: Học → Đang học; Đến → Hãy đến.",
       "notes": "Thể た chia giống hệt thể て: て → た, で → だ.",
       "created_at": "2026-10-27T10:46:32.447Z",
@@ -31080,9 +38885,9 @@ module.exports = {
       "lesson_id": 17,
       "title": "Bảng tổng hợp: Quy tắc chia Động từ thể ない",
       "meaning": "Quy tắc chia động từ sang thể Phủ định ngắn (thể ない - Thể thông thường)",
-      "structure": "Nhóm I: Vần [い] → Vần [あ] + ない (chú ý: [い] → [わ], 例: あいます → あわない)\nNhóm II: V-bỏ ます + ない (例: たべます → たべない, みます → みない)\nNhóm III: します → しない | きます → こない (đặc biệt: あります → ない)",
+      "structure": "Nhóm I: Vần [い] → Vần [あ] + ない (chú ý: [い] → [わ], 例(れい): あいます → あわない)\nNhóm II: V-bỏ ます + ない (例(れい): たべます → たべない, みます → みない)\nNhóm III: します → しない | きます → こない (đặc biệt: あります → ない)",
       "vietnamese_explanation": "Thể ない là dạng phủ định ngắn của động từ, dùng trong cách nói suồng sã thân mật hoặc làm thành phần kết hợp trong các mẫu câu ngữ pháp: ないでください, なければなりません, なくてもいいです...",
-      "japanese_example": "Nhóm I: 行きます → 行かない、買います → 買わない、話します → 話さない。\nNhóm II: 食べます → 食べない、起きます → 起きない。\nNhóm III: 勉強します → 勉強しない、来ます → 来ない。",
+      "japanese_example": "Nhóm I: 行(い)きます → 行(い)かない、買(か)います → 買(か)わない、話(はな)します → 話(はな)さない。\nNhóm II: 食(た)べます → 食(た)べない、起(お)きます → 起(お)きない。\nNhóm III: 勉強(べんきょう)します → 勉強(べんきょう)しない、来(き)ます → 来(き)ない。",
       "example_meaning": "Nhóm I: Đi → Không đi; Mua → Không mua; Nói chuyện → Không nói.\nNhóm II: Ăn → Không ăn; Thức dậy → Không thức dậy.\nNhóm III: Học → Không học; Đến → Không đến.",
       "notes": "Đặc biệt: あります chia thể ない là ない.",
       "created_at": "2026-10-27T10:46:32.448Z",
@@ -31094,9 +38899,9 @@ module.exports = {
       "lesson_id": 18,
       "title": "Bảng tổng hợp: Quy tắc chia Động từ thể Từ điển (thể る)",
       "meaning": "Quy tắc chia động từ sang thể Từ điển (thể る - Dạng nguyên mẫu / Khẳng định ngắn)",
-      "structure": "Nhóm I: Vần [い] → Vần [う] (例: 書きます → 書く, 飲みます → 飲む, 行きます → 行く)\nNhóm II: V-bỏ ます + る (例: 食べます → 食べる, 見ます → 見る)\nNhóm III: します → する | きます → くる",
+      "structure": "Nhóm I: Vần [い] → Vần [う] (例(れい): 書(か)きます → 書(か)く, 飲(の)みます → 飲(の)む, 行(い)きます → 行(い)く)\nNhóm II: V-bỏ ます + る (例(れい): 食(た)べます → 食(た)べる, 見(み)ます → 見(み)る)\nNhóm III: します → する | きます → くる",
       "vietnamese_explanation": "Thể từ điển (辞書形 - Jishokei) là dạng cơ bản nhất xuất hiện trong từ điển, biểu thị hành động ở hiện tại hoặc tương lai trong văn phong thông thường, dùng để danh từ hóa hành động (V-る ことができます) hoặc các mẫu nối câu.",
-      "japanese_example": "Nhóm I: 買います → 買う、待ちます → 待つ、話します → 話す。\nNhóm II: 食べます → 食べる、寝ます → 寝る。\nNhóm III: 運転します → 運転する、来ます → 来る。",
+      "japanese_example": "Nhóm I: 買(か)います → 買(か)う、待(ま)ちます → 待(ま)つ、話(はな)します → 話(はな)す。\nNhóm II: 食(た)べます → 食(た)べる、寝(ね)ます → 寝(ね)る。\nNhóm III: 運転(うんてん)します → 運転(うんてん)する、来(き)ます → 来(き)る。",
       "example_meaning": "Nhóm I: Mua → Mua; Chờ → Chờ; Nói chuyện → Nói chuyện.\nNhóm II: Ăn → Ăn; Ngủ → Ngủ.\nNhóm III: Lái xe → Lái xe; Đến → Đến.",
       "notes": "Dạng nguyên mẫu tra cứu trong từ điển.",
       "created_at": "2026-10-27T10:46:32.448Z",

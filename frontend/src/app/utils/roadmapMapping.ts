@@ -594,7 +594,7 @@ export function getSubstitutionTemplate(
   // --- DYNAMIC TEMPLATE ENGINE FOR LESSONS 3 TO 50 ---
   if (Array.isArray(grammarItems) && grammarItems[grammarIndex]) {
     const activeGrammar = grammarItems[grammarIndex];
-    const rawJa = activeGrammar.japanese_example || "";
+    const rawJa = (activeGrammar.japanese_example || "").replace(/\([^)]+\)/g, '').replace(/（[^）]+）/g, '');
     const rawVi = activeGrammar.example_meaning || "";
     const rawRomaji = activeGrammar.romaji_example || "";
     

@@ -4,9 +4,11 @@
  * Speaks text using the browser's built-in Text-to-Speech (TTS).
  */
 export function speakTTS(text: string) {
+  const cleanText = (text || '').replace(/\([^)]+\)/g, '').replace(/（[^）]+）/g, '').trim();
+  if (!cleanText) return;
   if (typeof window !== 'undefined' && window.speechSynthesis) {
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     
     // Attempt to locate a Japanese native voice
     const voices = window.speechSynthesis.getVoices();
