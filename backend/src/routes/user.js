@@ -9,6 +9,7 @@ const pushNotificationService = require('../services/pushNotificationService');
 const aiPlannerService = require('../services/aiPlannerService');
 const progressService = require('../services/progressService');
 const studyTimeService = require('../services/studyTimeService');
+const jlptLessonService = require('../services/jlptLessonService');
 
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
@@ -983,232 +984,112 @@ router.post('/progress/clear-wrong', async (req, res) => {
 });
 
 /**
- * GET /api/user/lessons/available-reviews
- * Dynamically scan highest available lesson with review data
+ * GET /api/user/jlpt/global/available
+ * Dynamically scan lessons 1..50 for available _global JLPT question banks.
  */
-router.get('/lessons/available-reviews', async (req, res) => {
+router.get('/jlpt/global/available', async (req, res) => {
   try {
-    let availableLessonIds = [];
-    
-    // Check mockDb
-    if (mockDb.lesson_reviews) {
-      availableLessonIds = Object.keys(mockDb.lesson_reviews).map(id => parseInt(id)).filter(id => !isNaN(id));
-    } else if (Array.isArray(mockDb.lessonReviews)) {
-      availableLessonIds = mockDb.lessonReviews.map(r => r.lesson_id);
-    }
-
-    // Check Supabase if connected
-    if (supabase && (!req.user || !req.user.isMock)) {
-      try {
-        const { data } = await supabase.from('lesson_reviews').select('lesson_id');
-        if (data && data.length > 0) {
-          const sbIds = data.map(d => d.lesson_id);
-          availableLessonIds = Array.from(new Set([...availableLessonIds, ...sbIds]));
-        }
-      } catch (e) {
-        // Fallback to mockDb IDs
-      }
-    }
-
-    const maxLessonId = availableLessonIds.length > 0 ? Math.max(...availableLessonIds) : 3;
-    res.json({ maxLessonId, availableLessonIds: availableLessonIds.sort((a, b) => a - b) });
+    const info = jlptLessonService.getAvailableGlobalJlptLessons();
+    res.set('Cache-Control', 'no-store');
+    res.json(info);
   } catch (error) {
-    res.json({ maxLessonId: 3, availableLessonIds: [1, 2, 3] });
+    console.error('Error scanning available global JLPT lessons:', error);
+    res.json({ availableLessonIds: [1], maxLessonId: 1, lessonStats: {} });
   }
 });
 
 /**
- * GET /api/user/lessons/:lessonId/review
- * Fetch shuffle review questions for a lesson
+ * GET /api/user/jlpt/global/test
+ * Fetch aggregated metadata or a freshly shuffled multi-lesson JLPT test set
+ * (Round-Robin Group-Aware Fisher-Yates) drawn strictly from _global banks of selected lessons.
  */
-router.get('/lessons/:lessonId/review', async (req, res) => {
+router.get('/jlpt/global/test', async (req, res) => {
   try {
-    const lessonId = parseInt(req.params.lessonId);
-    let reviewData = null;
+    res.set('Cache-Control', 'no-store');
+    const rawLessons = req.query.lessons || '';
+    const metaOnly = req.query.meta_only === '1';
 
-    // Local Mode
-    const getMockReview = (id) => {
-      if (mockDb.lesson_reviews && (mockDb.lesson_reviews[id] || mockDb.lesson_reviews[String(id)])) {
-        return mockDb.lesson_reviews[id] || mockDb.lesson_reviews[String(id)];
-      }
-      return (mockDb.lessonReviews || []).find(item => item.lesson_id === id);
-    };
-
-    if (req.user.isMock) {
-      reviewData = getMockReview(lessonId);
-    } else {
-      // Cloud Supabase Mode
-      const { data, error } = await supabase
-        .from('lesson_reviews')
-        .select('*')
-        .eq('lesson_id', lessonId)
-        .maybeSingle();
-
-      if (error) {
-        console.warn('lesson_reviews read error, falling back to mockDb:', error.message);
-      }
-      reviewData = data || getMockReview(lessonId);
-    }
-
-    if (!reviewData) {
-      return res.status(404).json({ error: 'Không tìm thấy dữ liệu ôn tập cho bài này.' });
-    }
-
-    // Thực hiện thuật toán Fisher-Yates shuffle (tráo ngẫu nhiên tuyệt đối) động ở backend
-    const shuffleArray = (arr) => {
-      if (!Array.isArray(arr)) return [];
-      const newArr = [...arr];
-      for (let i = newArr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-      }
-      return newArr;
-    };
-
-    // Dạng 1: Dịch câu hai chiều (Trả về toàn bộ 80 câu đã tráo ngẫu nhiên)
-    const translationsPool = reviewData.translations || [];
-    const jaToVi = shuffleArray(translationsPool.filter(t => t.direction === 'ja-to-vi'));
-    const viToJa = shuffleArray(translationsPool.filter(t => t.direction === 'vi-to-ja'));
-    const selectedTranslations = shuffleArray([...jaToVi, ...viToJa]);
-
-    // Dạng 2: Hoàn thiện hội thoại (Trả về toàn bộ 40 đoạn đã tráo ngẫu nhiên) và tráo ngẫu nhiên đáp án A, B, C, D
-    const selectedDialogues = shuffleArray(reviewData.dialogues || []);
-    const shuffledDialogues = selectedDialogues.map(d => {
-      if (!d.blanks) return d;
-      const shuffledBlanks = {};
-      Object.keys(d.blanks).forEach(bKey => {
-        const b = d.blanks[bKey];
-        shuffledBlanks[bKey] = {
-          ...b,
-          options: shuffleArray(b.options || [])
-        };
-      });
-      return { ...d, blanks: shuffledBlanks };
+    const payload = jlptLessonService.buildGlobalJlptTestSet(rawLessons, {
+      card: req.query.card || 'full_exam',
+      scope: req.query.scope || 'blueprint',
+      ids: req.query.ids || '',
+      metaOnly
     });
 
-    // Dạng 3: Nghe hiểu đoạn văn/đối thoại dài (Trả về toàn bộ 40 bài nghe đã tráo ngẫu nhiên) và tráo ngẫu nhiên đáp án
-    const selectedListenings = shuffleArray(reviewData.listenings || []);
-    const shuffledListenings = selectedListenings.map(l => {
-      if (!Array.isArray(l.questions)) return l;
-      const shuffledQuestions = l.questions.map(q => {
-        if (!Array.isArray(q.opts)) return q;
-        return {
-          ...q,
-          opts: shuffleArray(q.opts)
-        };
+    if (!payload) {
+      const availableInfo = jlptLessonService.getAvailableGlobalJlptLessons();
+      return res.json({
+        available: false,
+        ...availableInfo
       });
-      return { ...l, questions: shuffledQuestions };
-    });
-
-    // Dạng 4: Nghe viết chính tả (Trả về toàn bộ 40 câu đã tráo ngẫu nhiên)
-    const selectedDictations = shuffleArray(reviewData.dictations || []);
+    }
 
     res.json({
-      lesson_id: lessonId,
-      translations: selectedTranslations,
-      dialogues: shuffledDialogues,
-      listenings: shuffledListenings,
-      dictations: selectedDictations
+      available: true,
+      ...payload
     });
   } catch (error) {
-    console.error('Error fetching lesson reviews:', error);
-    res.status(500).json({ error: error.message || error, details: error });
+    console.error('Error fetching global JLPT test questions:', error);
+    res.status(500).json({ error: error.message || 'Lỗi tải ngân hàng đề JLPT tổng hợp.' });
+  }
+});
+
+router.get('/lessons/available-jlpt', async (req, res) => {
+  try {
+    const info = jlptLessonService.getAvailableJlptLessons();
+    res.set('Cache-Control', 'no-store');
+    res.json(info);
+  } catch (error) {
+    console.error('Error scanning available JLPT lessons:', error);
+    res.json({ availableLessonIds: [1], maxLessonId: 1 });
   }
 });
 
 /**
- * GET /api/user/reviews/combined
- * Fetch all available lesson reviews aggregated, filterable by level (N5: 1-25, N4: 26-50) and course (default 'minna')
+ * GET /api/user/lessons/:lessonId/jlpt
+ * Fetch JLPT metadata or a freshly shuffled test set (Fisher-Yates) for any of the 4 cards:
+ *   - card: 'moji_goi' | 'bunpou' | 'choukai' | 'full_exam' | 'custom_ids'
+ *   - scope: 'blueprint' (exact JLPT exam question counts per Mondai) | 'all' | '<mondai_key>'
+ *   - meta_only: '1' (returns bank structure & counts without drawing questions)
  */
-router.get('/reviews/combined', async (req, res) => {
+router.get('/lessons/:lessonId/jlpt', async (req, res) => {
   try {
-    const level = req.query.level || 'N5';
-    const course = req.query.course || 'minna';
-    let reviewData = null;
+    const lessonId = parseInt(req.params.lessonId, 10);
+    res.set('Cache-Control', 'no-store');
 
-    // Load independent combined review bank (tách biệt hoàn toàn khỏi ôn tập theo bài)
-    if (req.user.isMock) {
-      reviewData = (mockDb.combinedReviews && (mockDb.combinedReviews[`${course}_${level.toLowerCase()}`] || mockDb.combinedReviews.minna_n5)) || mockDb.combinedReviews;
-    } else {
-      const { data, error } = await supabase
-        .from('combined_reviews')
-        .select('*')
-        .eq('course', course)
-        .eq('level', level)
-        .maybeSingle();
-
-      if (error) {
-        console.warn('combined_reviews read error, falling back to mockDb:', error.message);
-      }
-      reviewData = data || (mockDb.combinedReviews && (mockDb.combinedReviews[`${course}_${level.toLowerCase()}`] || mockDb.combinedReviews.minna_n5)) || mockDb.combinedReviews;
+    const bankData = jlptLessonService.loadLessonBank(lessonId);
+    if (!bankData) {
+      const { availableLessonIds } = jlptLessonService.getAvailableJlptLessons();
+      return res.json({
+        available: false,
+        lesson_id: lessonId,
+        availableLessonIds
+      });
     }
 
-    if (!reviewData) {
-      return res.status(404).json({ error: 'Không tìm thấy dữ liệu ôn tập tổng hợp.' });
+    if (req.query.meta_only === '1') {
+      const meta = jlptLessonService.buildBankMetadata(bankData);
+      return res.json({
+        available: true,
+        ...meta
+      });
     }
 
-    // Extract independent arrays
-    const combinedTranslations = reviewData.translations || reviewData.type1_translation || [];
-    const combinedDialogues = reviewData.dialogues || reviewData.type2_fill_blank || [];
-    const combinedListenings = reviewData.listenings || reviewData.type3_listening || [];
-    const combinedDictations = reviewData.dictations || reviewData.type4_dictation || [];
-
-    // Fisher-Yates shuffle helper
-    const shuffleArray = (arr) => {
-      if (!Array.isArray(arr)) return [];
-      const newArr = [...arr];
-      for (let i = newArr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-      }
-      return newArr;
-    };
-
-    // Dạng 1 translations pool direction shuffle
-    const jaToVi = shuffleArray(combinedTranslations.filter(t => t.direction === 'ja-to-vi'));
-    const viToJa = shuffleArray(combinedTranslations.filter(t => t.direction === 'vi-to-ja'));
-    const selectedTranslations = shuffleArray([...jaToVi, ...viToJa]);
-
-    // Tráo ngẫu nhiên đáp án A, B, C, D cho Dialogues
-    const shuffledDialogues = shuffleArray(combinedDialogues).map(d => {
-      if (!d.blanks) return d;
-      const shuffledBlanks = {};
-      Object.keys(d.blanks).forEach(bKey => {
-        const b = d.blanks[bKey];
-        shuffledBlanks[bKey] = {
-          ...b,
-          options: shuffleArray(b.options || [])
-        };
-      });
-      return { ...d, blanks: shuffledBlanks };
-    });
-
-    // Tráo ngẫu nhiên đáp án cho Listenings
-    const shuffledListenings = shuffleArray(combinedListenings).map(l => {
-      if (!Array.isArray(l.questions)) return l;
-      const shuffledQuestions = l.questions.map(q => {
-        if (!Array.isArray(q.opts)) return q;
-        return {
-          ...q,
-          opts: shuffleArray(q.opts)
-        };
-      });
-      return { ...l, questions: shuffledQuestions };
+    const payload = jlptLessonService.buildJlptTestSet(lessonId, {
+      card: req.query.card || 'full_exam',
+      scope: req.query.scope || 'blueprint',
+      ids: req.query.ids || ''
     });
 
     res.json({
-      translations: selectedTranslations,
-      dialogues: shuffledDialogues,
-      listenings: shuffledListenings,
-      dictations: shuffleArray(combinedDictations)
+      available: true,
+      ...payload
     });
   } catch (error) {
-    console.error('Error fetching combined reviews:', error);
-    res.status(500).json({ error: error.message || error, details: error });
+    console.error('Error fetching JLPT lesson questions:', error);
+    res.status(500).json({ error: error.message || 'Lỗi tải ngân hàng đề JLPT.' });
   }
 });
-
-
 
 // --- HELPER FUNCTIONS FOR LOCAL MOCK CUSTOM ITEMS ---
 const customItemsPath = path.join(__dirname, '../db/custom_items.json');
@@ -1845,346 +1726,6 @@ router.delete('/knowledge-items/:type/:id', async (req, res) => {
   }
 });
 
-// ----------------------------------------------------
-// EXAM ENDPOINTS (JLPT MOCK EXAMS & HISTORY)
-// ----------------------------------------------------
-const examsFile = path.join(__dirname, '../db/exams.json');
-
-function readMockExams() {
-  try {
-    if (!fs.existsSync(examsFile)) {
-      fs.writeFileSync(examsFile, JSON.stringify({ exams: [] }, null, 2), 'utf8');
-      return { exams: [] };
-    }
-    const content = fs.readFileSync(examsFile, 'utf8');
-    return JSON.parse(content);
-  } catch (err) {
-    console.error("Error reading exams.json:", err);
-    return { exams: [] };
-  }
-}
-
-function writeMockExams(data) {
-  try {
-    fs.writeFileSync(examsFile, JSON.stringify(data, null, 2), 'utf8');
-  } catch (err) {
-    console.error("Error writing exams.json:", err);
-  }
-}
-
-/**
- * POST /api/user/exams
- * Save new JLPT mock exam results
- */
-router.post('/exams', async (req, res) => {
-  try {
-    const userId = req.user ? req.user.id : 'demo_user';
-    const { course, range_start, range_end, score, total_questions, time_spent, questions_data } = req.body || {};
-
-    if (!course || range_start === undefined || range_end === undefined || score === undefined || total_questions === undefined || time_spent === undefined || !questions_data) {
-      return res.status(400).json({ error: 'Missing required exam results fields' });
-    }
-
-    const saveMock = () => {
-      const data = readMockExams();
-      if (!data.exams) data.exams = [];
-      const newExam = {
-        id: require('crypto').randomUUID(),
-        user_id: userId,
-        course,
-        range_start: parseInt(range_start),
-        range_end: parseInt(range_end),
-        score: parseInt(score),
-        total_questions: parseInt(total_questions),
-        time_spent: parseInt(time_spent),
-        questions_data,
-        created_at: new Date().toISOString()
-      };
-      data.exams.push(newExam);
-      writeMockExams(data);
-      return newExam.id;
-    };
-
-    if (req.user && req.user.isMock) {
-      const examId = saveMock();
-      return res.json({ message: 'Exam results saved successfully (Mock)', examId });
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('user_exam_results')
-        .insert({
-          user_id: userId,
-          course,
-          range_start: parseInt(range_start),
-          range_end: parseInt(range_end),
-          score: parseInt(score),
-          total_questions: parseInt(total_questions),
-          time_spent: parseInt(time_spent),
-          questions_data
-        })
-        .select('id')
-        .single();
-
-      if (error) throw error;
-      return res.json({ message: 'Exam results saved successfully', examId: data.id });
-    } catch (sbErr) {
-      console.warn('Supabase insert user_exam_results failed, falling back to mock:', sbErr.message);
-      const examId = saveMock();
-      return res.json({ message: 'Exam results saved successfully (Fallback)', examId });
-    }
-  } catch (error) {
-    console.error('Error saving exam result:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-/**
- * GET /api/user/exams
- * Fetch list of user's past exams
- */
-router.get('/exams', async (req, res) => {
-  try {
-    const userId = req.user ? req.user.id : 'demo_user';
-    const { course } = req.query;
-
-    const getMockList = () => {
-      const data = readMockExams();
-      let list = data.exams || [];
-      list = list.filter(e => e.user_id === userId);
-      if (course) {
-        list = list.filter(e => e.course === course);
-      }
-      list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-      return list;
-    };
-
-    if (req.user && req.user.isMock) {
-      return res.json(getMockList());
-    }
-
-    try {
-      let query = supabase
-        .from('user_exam_results')
-        .select('id, course, range_start, range_end, score, total_questions, time_spent, created_at')
-        .eq('user_id', userId);
-
-      if (course) {
-        query = query.eq('course', course);
-      }
-
-      const { data, error } = await query.order('created_at', { ascending: false });
-      if (error) throw error;
-      return res.json(data || []);
-    } catch (sbErr) {
-      console.warn('Supabase fetch user_exam_results failed, falling back to mock:', sbErr.message);
-      return res.json(getMockList());
-    }
-  } catch (error) {
-    console.error('Error fetching exam history:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-/**
- * GET /api/user/exams/:id
- * Fetch detail of a specific past exam
- */
-router.get('/exams/:id', async (req, res) => {
-  try {
-    const userId = req.user ? req.user.id : 'demo_user';
-    const examId = req.params.id;
-
-    const getMockDetail = () => {
-      const data = readMockExams();
-      return (data.exams || []).find(e => e.id === examId && e.user_id === userId);
-    };
-
-    if (req.user && req.user.isMock) {
-      const exam = getMockDetail();
-      if (!exam) {
-        return res.status(404).json({ error: 'Exam not found' });
-      }
-      return res.json(exam);
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('user_exam_results')
-        .select('*')
-        .eq('id', examId)
-        .eq('user_id', userId)
-        .maybeSingle();
-
-      if (error) throw error;
-      if (data) return res.json(data);
-      const fallbackExam = getMockDetail();
-      if (fallbackExam) return res.json(fallbackExam);
-      return res.status(404).json({ error: 'Exam not found' });
-    } catch (sbErr) {
-      console.warn('Supabase fetch exam detail failed, falling back to mock:', sbErr.message);
-      const fallbackExam = getMockDetail();
-      if (fallbackExam) return res.json(fallbackExam);
-      return res.status(404).json({ error: 'Exam not found' });
-    }
-  } catch (error) {
-    console.error('Error fetching exam details:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-/**
- * DELETE /api/user/exams/:id
- * Delete a specific past exam
- */
-router.delete('/exams/:id', async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const examId = req.params.id;
-
-    if (req.user.isMock) {
-      const data = readMockExams();
-      const initialLength = (data.exams || []).length;
-      data.exams = (data.exams || []).filter(e => !(e.id === examId && e.user_id === userId));
-
-      if (data.exams.length === initialLength) {
-        return res.status(404).json({ error: 'Exam not found or unauthorized' });
-      }
-
-      writeMockExams(data);
-      return res.json({ message: 'Exam deleted successfully (Mock)' });
-    }
-
-    const { error } = await supabase
-      .from('user_exam_results')
-      .delete()
-      .eq('id', examId)
-      .eq('user_id', userId);
-
-    if (error) throw error;
-    res.json({ message: 'Exam deleted successfully' });
-  } catch (error) {
-    console.error('Error deleting exam:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// ----------------------------------------------------
-// WRONG EXAM QUESTIONS CLOUD SYNC ENDPOINTS
-// ----------------------------------------------------
-const wrongExamsFile = path.join(__dirname, '../db/wrong_exam_questions.json');
-
-function readMockWrongExamQuestions() {
-  try {
-    if (!fs.existsSync(wrongExamsFile)) {
-      fs.writeFileSync(wrongExamsFile, JSON.stringify({ wrong_questions: [] }, null, 2), 'utf8');
-      return { wrong_questions: [] };
-    }
-    const content = fs.readFileSync(wrongExamsFile, 'utf8');
-    return JSON.parse(content);
-  } catch (err) {
-    console.error("Error reading wrong_exam_questions.json:", err);
-    return { wrong_questions: [] };
-  }
-}
-
-function writeMockWrongExamQuestions(data) {
-  try {
-    fs.writeFileSync(wrongExamsFile, JSON.stringify(data, null, 2), 'utf8');
-  } catch (err) {
-    console.error("Error writing wrong_exam_questions.json:", err);
-  }
-}
-
-function getQuestionKey(q) {
-  if (!q) return 'unknown';
-  const lId = q.lesson_id || '0';
-  const type = q.item_type || 'unknown';
-  const idStr = q.id !== undefined && q.id !== null ? String(q.id) : (q.question_kana || q.question_kanji || q.audio_text_kana || q.context || q.question || '').slice(0, 40);
-  return `${lId}:${type}:${idStr}`;
-}
-
-/**
- * GET /api/user/exams/wrong-questions/list
- * Fetch list of user's wrong exam questions
- */
-router.get('/exams/wrong-questions/list', async (req, res) => {
-  try {
-    const userId = req.user ? req.user.id : 'demo_user';
-    const data = readMockWrongExamQuestions();
-    const list = (data.wrong_questions || []).filter(q => q.user_id === userId);
-    res.json(list);
-  } catch (error) {
-    console.error('Error fetching wrong exam questions:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-/**
- * POST /api/user/exams/wrong-questions/sync
- * Sync wrong exam questions (Add new wrong ones, remove corrected ones)
- */
-router.post('/exams/wrong-questions/sync', async (req, res) => {
-  try {
-    const userId = req.user ? req.user.id : 'demo_user';
-    const { newWrongQuestions = [], correctedQuestions = [] } = req.body || {};
-
-    const data = readMockWrongExamQuestions();
-    if (!data.wrong_questions) data.wrong_questions = [];
-
-    let userWrongList = data.wrong_questions.filter(q => q.user_id === userId);
-
-    // 1. Remove corrected questions
-    if (Array.isArray(correctedQuestions) && correctedQuestions.length > 0) {
-      const correctedKeys = new Set(correctedQuestions.map(getQuestionKey));
-      userWrongList = userWrongList.filter(q => !correctedKeys.has(getQuestionKey(q)));
-    }
-
-    // 2. Add new wrong questions (deduplicating by getQuestionKey)
-    if (Array.isArray(newWrongQuestions) && newWrongQuestions.length > 0) {
-      newWrongQuestions.forEach(nq => {
-        const key = getQuestionKey(nq);
-        const exists = userWrongList.some(q => getQuestionKey(q) === key);
-        if (!exists) {
-          userWrongList.unshift({
-            ...nq,
-            user_id: userId,
-            created_at: new Date().toISOString()
-          });
-        }
-      });
-    }
-
-    data.wrong_questions = [
-      ...data.wrong_questions.filter(q => q.user_id !== userId),
-      ...userWrongList
-    ];
-
-    writeMockWrongExamQuestions(data);
-    res.json({ message: 'Wrong exam questions synced successfully', wrong_questions: userWrongList });
-  } catch (error) {
-    console.error('Error syncing wrong exam questions:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-/**
- * DELETE /api/user/exams/wrong-questions/clear
- * Clear all wrong exam questions for user
- */
-router.delete('/exams/wrong-questions/clear', async (req, res) => {
-  try {
-    const userId = req.user ? req.user.id : 'demo_user';
-    const data = readMockWrongExamQuestions();
-    data.wrong_questions = (data.wrong_questions || []).filter(q => q.user_id !== userId);
-    writeMockWrongExamQuestions(data);
-    res.json({ message: 'Cleared wrong exam questions successfully' });
-  } catch (error) {
-    console.error('Error clearing wrong exam questions:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
 /**
  * GET /api/user/review-sessions?storage_key=...
  * Fetch user's review session state for a given storage_key
@@ -2232,12 +1773,27 @@ router.get('/review-sessions', async (req, res) => {
 /**
  * Helper to mark review session record completed in memory, disk, and Supabase
  */
+function isJlptSessionPracticed(sess) {
+  if (!sess || typeof sess !== 'object') return false;
+  if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
+  if (sess.score !== undefined || sess.results !== undefined || sess.correctAnswers !== undefined) return true;
+  if (Array.isArray(sess.examHistory) && sess.examHistory.length > 0) return true;
+  if (sess.cards && typeof sess.cards === 'object') {
+    for (const c of Object.values(sess.cards)) {
+      if (c && (c.step === 'summary' || (Array.isArray(c.checkedIds) && c.checkedIds.length > 0))) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 function markReviewSessionCompleted(userId, task, isMock) {
   if (!task || (task.itemType !== 'single_review' && task.itemType !== 'cumulative_review')) return;
   const lesson = task.lesson || task.lesson_id || 1;
   const storageKey = task.itemType === 'single_review'
-    ? `nihongo_review_state_lesson_${lesson}`
-    : `nihongo_review_state_combined`;
+    ? `nihongo_jlpt_lesson_${lesson}`
+    : `nihongo_jlpt_global_exam`;
   const sessionData = {
     completed: true,
     completed_at: getVietnamTimeStr(),
@@ -2306,14 +1862,14 @@ router.post('/review-sessions', async (req, res) => {
 
     // Auto-complete review task in active study plan if user practiced/completed:
     try {
-      const plan = await getUserPlanAsync(userId);
+      const plan = isJlptSessionPracticed(session_data) ? await getUserPlanAsync(userId) : null;
       if (plan && Array.isArray(plan.days)) {
         let lessonId = null;
         let isCumulative = false;
         if (storage_key.includes('lesson_')) {
           const match = storage_key.match(/lesson_(\d+)/);
           if (match) lessonId = parseInt(match[1], 10);
-        } else if (storage_key.includes('combined')) {
+        } else if (storage_key.includes('jlpt_global') || storage_key.includes('combined')) {
           isCumulative = true;
         }
 
@@ -2445,17 +2001,11 @@ function applyAutoTracking(plan, userId) {
       } else if (task.completed) {
         count = target;
       } else if (task.itemType === 'single_review') {
-        const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
-        const key2 = `${userId}:review_session_lesson_${lesson}`;
-        const sess = userReviewSessions[key1] || userReviewSessions[key2];
-        const isDone = !!(sess && (sess.completed || sess.isCompleted || sess.manualMarked || sess.score !== undefined || sess.results !== undefined || sess.currentQuestionIndex !== undefined));
-        count = isDone ? 1 : 0;
+        const sess = userReviewSessions[`${userId}:nihongo_jlpt_lesson_${lesson}`];
+        count = isJlptSessionPracticed(sess) ? 1 : 0;
       } else if (task.itemType === 'cumulative_review') {
-        const key1 = `${userId}:nihongo_review_state_combined`;
-        const key2 = `${userId}:combined_review_level_N5`;
-        const sess = userReviewSessions[key1] || userReviewSessions[key2];
-        const isDone = !!(sess && (sess.completed || sess.isCompleted || sess.manualMarked || sess.score !== undefined || sess.results !== undefined));
-        count = isDone ? 1 : 0;
+        const sess = userReviewSessions[`${userId}:nihongo_jlpt_global_exam`];
+        count = isJlptSessionPracticed(sess) ? 1 : 0;
       }
 
       const prevCount = task.currentCount || 0;

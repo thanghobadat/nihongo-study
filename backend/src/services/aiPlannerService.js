@@ -208,8 +208,8 @@ function generateSequentialLessonTasks(lessonId) {
     {
       step: 4,
       id: `task_L${lessonId}_single_review`,
-      title: `Minna Bài ${lessonId}: Ôn tập tổng hợp 4 dạng toàn bộ Bài ${lessonId}`,
-      scopeDetails: `Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm`,
+      title: `Minna Bài ${lessonId}: Luyện đề JLPT toàn bộ Bài ${lessonId}`,
+      scopeDetails: `Luyện đề chuẩn JLPT Bài ${lessonId} (Chữ – Từ vựng, Ngữ pháp – Đọc hiểu, Nghe hiểu & Đề thi tổng hợp)`,
       itemType: 'single_review',
       targetCount: 1,
       currentCount: 0,
@@ -217,14 +217,14 @@ function generateSequentialLessonTasks(lessonId) {
       lesson: lessonId,
       estimatedMinutes: 30,
       due_time: '21:00',
-      link: `/lessons/${lessonId}?tab=review`,
+      link: `/lessons/${lessonId}?tab=jlpt`,
       completed: false
     },
     {
       step: 5,
       id: `task_L${lessonId}_cumulative_review`,
-      title: `Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài ${lessonId}`,
-      scopeDetails: `Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${lessonId} (30 phút)`,
+      title: `Luyện đề JLPT tích lũy từ Bài 1 đến Bài ${lessonId}`,
+      scopeDetails: `Thi thử đề JLPT tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${lessonId} (30 phút)`,
       itemType: 'cumulative_review',
       targetCount: 1,
       currentCount: 0,
@@ -232,7 +232,7 @@ function generateSequentialLessonTasks(lessonId) {
       lesson: lessonId,
       estimatedMinutes: 30,
       due_time: '21:45',
-      link: `/knowledge?tab=review`,
+      link: `/knowledge?tab=jlpt_exam`,
       completed: false
     }
   ];
@@ -356,22 +356,27 @@ function getMasteredItemIds(userId, currentPlan = null) {
 /**
  * Check if user has already completed a single review session for a lesson
  */
+function isJlptSessionDone(sess) {
+  if (!sess || typeof sess !== 'object') return false;
+  if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
+  if (sess.score !== undefined || sess.results !== undefined || sess.correctAnswers !== undefined) return true;
+  if (Array.isArray(sess.examHistory) && sess.examHistory.length > 0) return true;
+  if (sess.cards && typeof sess.cards === 'object') {
+    for (const c of Object.values(sess.cards)) {
+      if (c && (c.step === 'summary' || (Array.isArray(c.checkedIds) && c.checkedIds.length > 0))) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 function isLessonReviewDone(userId, lesson) {
   if (!userId) return false;
   try {
     const mockDb = require('../db/mockDb');
     const userReviewSessions = mockDb.userReviewSessions || {};
-    const s1 = userReviewSessions[`${userId}:nihongo_review_state_lesson_${lesson}`];
-    const s2 = userReviewSessions[`${userId}:review_session_lesson_${lesson}`];
-    const sess = s1 || s2;
-    if (!sess) return false;
-    if (typeof sess === 'object') {
-      if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
-      if (sess.score !== undefined || sess.results !== undefined || sess.correctAnswers !== undefined) return true;
-      if (sess.answers && Object.keys(sess.answers).length > 0) return true;
-      if (sess.currentQuestionIndex !== undefined && sess.currentQuestionIndex > 0) return true;
-    }
-    return true;
+    return isJlptSessionDone(userReviewSessions[`${userId}:nihongo_jlpt_lesson_${lesson}`]);
   } catch {
     return false;
   }
@@ -380,21 +385,12 @@ function isLessonReviewDone(userId, lesson) {
 /**
  * Check if user has already completed cumulative review
  */
-function isCumulativeReviewDone(userId, lesson) {
+function isCumulativeReviewDone(userId) {
   if (!userId) return false;
   try {
     const mockDb = require('../db/mockDb');
     const userReviewSessions = mockDb.userReviewSessions || {};
-    const s1 = userReviewSessions[`${userId}:nihongo_review_state_combined`];
-    const s2 = userReviewSessions[`${userId}:combined_review_level_N5`];
-    const sess = s1 || s2;
-    if (!sess) return false;
-    if (typeof sess === 'object') {
-      if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
-      if (sess.score !== undefined || sess.results !== undefined) return true;
-      if (sess.answers && Object.keys(sess.answers).length > 0) return true;
-    }
-    return true;
+    return isJlptSessionDone(userReviewSessions[`${userId}:nihongo_jlpt_global_exam`]);
   } catch {
     return false;
   }
@@ -614,14 +610,14 @@ function generateAlgorithmicPlan({
         itemType: 'single_review',
         part: 1,
         totalParts: 1,
-        title: `Minna Bài ${lesson}: Ôn tập tổng hợp 4 dạng toàn bộ Bài ${lesson}`,
-        scopeDetails: `Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm`,
+        title: `Minna Bài ${lesson}: Luyện đề JLPT toàn bộ Bài ${lesson}`,
+        scopeDetails: `Luyện đề chuẩn JLPT Bài ${lesson} (Chữ – Từ vựng, Ngữ pháp – Đọc hiểu, Nghe hiểu & Đề thi tổng hợp)`,
         targetCount: 1,
         currentCount: 0,
         workloadPoints: 0,
         estimatedMinutes: 30,
         due_time: '20:45',
-        link: `/lessons/${lesson}?tab=review`,
+        link: `/lessons/${lesson}?tab=jlpt`,
         completed: false
       });
     }
@@ -633,14 +629,14 @@ function generateAlgorithmicPlan({
         itemType: 'cumulative_review',
         part: 1,
         totalParts: 1,
-        title: `Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài ${lesson}`,
-        scopeDetails: `Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${lesson} (30 phút)`,
+        title: `Luyện đề JLPT tích lũy từ Bài 1 đến Bài ${lesson}`,
+        scopeDetails: `Thi thử đề JLPT tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${lesson} (30 phút)`,
         targetCount: 1,
         currentCount: 0,
         workloadPoints: 0,
         estimatedMinutes: 30,
         due_time: '21:30',
-        link: `/knowledge?tab=review`,
+        link: `/knowledge?tab=jlpt_exam`,
         completed: false
       });
     }
@@ -967,13 +963,9 @@ function getUnfinishedDebt({ userId, plan, currentDate = null }) {
         return status === 'mastered';
       }).length;
     } else if (itemType === 'single_review') {
-      const key1 = `${userId}:nihongo_review_state_lesson_${lesson}`;
-      const key2 = `${userId}:review_session_lesson_${lesson}`;
-      actualMasteredCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+      actualMasteredCount = isJlptSessionDone(userReviewSessions[`${userId}:nihongo_jlpt_lesson_${lesson}`]) ? 1 : 0;
     } else if (itemType === 'cumulative_review') {
-      const key1 = `${userId}:nihongo_review_state_combined`;
-      const key2 = `${userId}:combined_review_level_N5`;
-      actualMasteredCount = (userReviewSessions[key1] || userReviewSessions[key2]) ? 1 : 0;
+      actualMasteredCount = isJlptSessionDone(userReviewSessions[`${userId}:nihongo_jlpt_global_exam`]) ? 1 : 0;
     }
 
     // If user has mastered enough for the whole group, mark all tasks in group completed

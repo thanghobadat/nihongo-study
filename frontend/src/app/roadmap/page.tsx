@@ -202,7 +202,7 @@ export default function RoadmapPage() {
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: false }
+    { name: 'Luyện đề JLPT', id: 'jlpt', icon: '🎓', active: false }
   ];
 
   const filteredLessons = lessons.filter(l => {

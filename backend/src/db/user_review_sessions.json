@@ -1,1 +1,1628 @@
-{}
+{
+  "user-1781344343083:nihongo_jlpt_lesson_1": {
+    "cards": {
+      "moji_goi": {
+        "card": "moji_goi",
+        "scope": "blueprint",
+        "step": "test",
+        "questions": [
+          {
+            "id": "L1-lesson-KY-018",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "木村さんの 【国】は 日本です。",
+            "stem_kana": "きむらさんの 【くに】は にほんです。",
+            "choices": [
+              "ぐに",
+              "こく",
+              "くに",
+              "くぬ"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "く không có âm đục.",
+              "こく là âm Hán, chỉ dùng trong từ ghép như 中国.",
+              null,
+              "Chữ thứ hai là に, không phải ぬ."
+            ],
+            "explanation": "国 = くに.",
+            "related": {
+              "vocab": [
+                3017
+              ],
+              "kanji": [
+                "国"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-KY-023",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "ワンさんは 【日本】の 人じゃありません。",
+            "stem_kana": "ワンさんは 【にほん】の ひとじゃありません。",
+            "choices": [
+              "にぼん",
+              "にほう",
+              "にほん",
+              "にほ"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "ほ không có âm đục.",
+              "本 đọc ほん, không phải ほう.",
+              null,
+              "本 đọc ほん, thiếu ん."
+            ],
+            "explanation": "日本 = にほん.",
+            "related": {
+              "vocab": [
+                37
+              ],
+              "kanji": [
+                "日",
+                "本"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-KY-015",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "【私】も 韓国人です。",
+            "stem_kana": "【わたし】も かんこくじんです。",
+            "choices": [
+              "あたし",
+              "わたし",
+              "わたち",
+              "わだし"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "あたし là cách nói thân mật, không phải cách đọc của 私 trong giáo trình.",
+              null,
+              "Chữ thứ ba là し, không phải ち.",
+              "た không có âm đục."
+            ],
+            "explanation": "私 = わたし.",
+            "related": {
+              "vocab": [
+                1
+              ],
+              "kanji": [
+                "私"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-KY-026",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "シュミットさんは 【先生】じゃありません。",
+            "stem_kana": "シュミットさんは 【せんせい】じゃありません。",
+            "choices": [
+              "せんぜい",
+              "せんせえ",
+              "せいせん",
+              "せんせい"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "生 đọc せい, không có âm đục.",
+              "Trường âm viết せい, không viết せえ.",
+              "Đảo ngược: 先 = せん đứng trước, 生 = せい đứng sau.",
+              null
+            ],
+            "explanation": "先生 = せんせい.",
+            "related": {
+              "vocab": [
+                5
+              ],
+              "kanji": [
+                "先",
+                "生"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-KY-009",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "【私】は ナムです。",
+            "stem_kana": "【わたし】は ナムです。",
+            "choices": [
+              "わたし",
+              "あたし",
+              "わだし",
+              "わたち"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "あたし là cách nói thân mật, không phải cách đọc của 私 trong giáo trình.",
+              "た không có âm đục.",
+              "Chữ thứ ba là し, không phải ち."
+            ],
+            "explanation": "私 = わたし.",
+            "related": {
+              "vocab": [
+                1
+              ],
+              "kanji": [
+                "私"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-KY-011",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "リンさんは 【日本】の 人じゃありません。",
+            "stem_kana": "リンさんは 【にほん】の ひとじゃありません。",
+            "choices": [
+              "にほう",
+              "にほん",
+              "にほ",
+              "にぼん"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "本 đọc ほん, không phải ほう.",
+              null,
+              "本 đọc ほん, thiếu ん.",
+              "ほ không có âm đục."
+            ],
+            "explanation": "日本 = にほん.",
+            "related": {
+              "vocab": [
+                37
+              ],
+              "kanji": [
+                "日",
+                "本"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-KY-019",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "グプタさんは 【会社員】ですか。",
+            "stem_kana": "グプタさんは 【かいしゃいん】ですか。",
+            "choices": [
+              "がいしゃいん",
+              "かいしゃいん",
+              "かいしゃいいん",
+              "かいしゃえん"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "会 đọc かい, không có âm đục.",
+              null,
+              "Thừa một い: しゃ + いん.",
+              "員 đọc いん, không phải えん."
+            ],
+            "explanation": "会社員 = かいしゃいん.",
+            "related": {
+              "vocab": [
+                8
+              ],
+              "kanji": [
+                "会",
+                "社",
+                "員"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-HK-024",
+            "mondai": "hyouki",
+            "stem_kanji": "松本さんは 【ちゅうごく】の 人じゃありません。",
+            "stem_kana": "まつもとさんは 【ちゅうごく】の ひとじゃありません。",
+            "choices": [
+              "虫国",
+              "中囯",
+              "中国",
+              "中園"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "虫 (sâu) nhìn giống 中 nhưng là chữ khác.",
+              "囯 là dạng viết khác, giáo trình dùng 国.",
+              null,
+              "園 (vườn) khác 国 (nước)."
+            ],
+            "explanation": "ちゅうごく viết là 中国.",
+            "related": {
+              "vocab": [
+                35
+              ],
+              "kanji": [
+                "中",
+                "国"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-HK-021",
+            "mondai": "hyouki",
+            "stem_kanji": "ナムさんは 【にほんじん】じゃありません。",
+            "stem_kana": "ナムさんは 【にほんじん】じゃありません。",
+            "choices": [
+              "日本人",
+              "日木人",
+              "目本人",
+              "日本入"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "木 (cây) thiếu nét ngang dưới so với 本.",
+              "目 (mắt) có 3 nét ngang, 日 chỉ có 2.",
+              "入 (vào) khác 人 (người)."
+            ],
+            "explanation": "にほんじん viết là 日本人.",
+            "related": {
+              "vocab": [
+                37,
+                44
+              ],
+              "kanji": [
+                "日",
+                "本",
+                "人"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-HK-006",
+            "mondai": "hyouki",
+            "stem_kanji": "リンさんは 【がくせい】じゃありません。",
+            "stem_kana": "リンさんは 【がくせい】じゃありません。",
+            "choices": [
+              "字生",
+              "学生",
+              "学先",
+              "学主"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "字 (chữ) nhìn giống 学 nhưng là chữ khác.",
+              null,
+              "先 là chữ trong 先生, không phải 学生.",
+              "Chữ thứ hai là 生, không phải 主."
+            ],
+            "explanation": "がくせい viết là 学生.",
+            "related": {
+              "vocab": [
+                7
+              ],
+              "kanji": [
+                "学",
+                "生"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-HK-012",
+            "mondai": "hyouki",
+            "stem_kanji": "あの【ひと】は インド人じゃありません。",
+            "stem_kana": "あの【ひと】は インドじんじゃありません。",
+            "choices": [
+              "八",
+              "人",
+              "入",
+              "大"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "八 (tám) hai nét tách rời, không chạm nhau.",
+              null,
+              "入 (vào) có nét trái ngắn hơn, khác 人.",
+              "大 (to) có thêm nét ngang."
+            ],
+            "explanation": "ひと viết là 人.",
+            "related": {
+              "vocab": [
+                3
+              ],
+              "kanji": [
+                "人"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-HK-014",
+            "mondai": "hyouki",
+            "stem_kanji": "タワポンさんは さくら大学の 【がくせい】です。",
+            "stem_kana": "タワポンさんは さくらだいがくの 【がくせい】です。",
+            "choices": [
+              "学主",
+              "学生",
+              "学先",
+              "字生"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "Chữ thứ hai là 生, không phải 主.",
+              null,
+              "先 là chữ trong 先生, không phải 学生.",
+              "字 (chữ) nhìn giống 学 nhưng là chữ khác."
+            ],
+            "explanation": "がくせい viết là 学生.",
+            "related": {
+              "vocab": [
+                7
+              ],
+              "kanji": [
+                "学",
+                "生"
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-lesson-BM-003",
+            "mondai": "bunmyaku",
+            "stem_kanji": "イーさんは 韓国から（　）。",
+            "stem_kana": "イーさんは かんこくから（　）。",
+            "choices": [
+              "きました",
+              "じゃありません",
+              "です",
+              "ですか"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "から (từ) cần động từ きました đi sau.",
+              "韓国から です không thành câu; cần động từ đến.",
+              "Thiếu động từ; đến từ đâu là から きました."
+            ],
+            "explanation": "～から きました = đến từ ～.",
+            "related": {
+              "vocab": [
+                24
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-lesson-BM-011",
+            "mondai": "bunmyaku",
+            "stem_kanji": "A：木村さんは 何歳ですか。 B：（　）です。",
+            "stem_kana": "A：きむらさんは なんさいですか。 B：（　）です。",
+            "choices": [
+              "日本人",
+              "学生",
+              "木村",
+              "21歳"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "何歳 hỏi tuổi, không hỏi quốc tịch.",
+              "何歳 hỏi tuổi, không hỏi nghề.",
+              "何歳 hỏi tuổi, không hỏi tên.",
+              null
+            ],
+            "explanation": "何歳 hỏi tuổi → trả lời số + 歳.",
+            "related": {
+              "vocab": [
+                20,
+                19
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-lesson-BM-026",
+            "mondai": "bunmyaku",
+            "stem_kanji": "山田さんは 38（　）です。",
+            "stem_kana": "やまださんは 38（　）です。",
+            "choices": [
+              "さい",
+              "くん",
+              "じん",
+              "さん"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "くん đi sau tên nam giới, không đi sau số.",
+              "じん đi sau tên nước, không đi sau số.",
+              "さん đi sau tên người."
+            ],
+            "explanation": "Số + さい = tuổi.",
+            "related": {
+              "vocab": [
+                19
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-lesson-BM-022",
+            "mondai": "bunmyaku",
+            "stem_kanji": "A：（　）、おなまえは？ B：ミラーです。",
+            "stem_kana": "A：（　）、おなまえは？ B：ミラーです。",
+            "choices": [
+              "はじめまして",
+              "しつれいですが",
+              "どうぞ よろしく",
+              "はい"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "はじめまして dùng khi mới gặp, không phải lời dạo trước khi hỏi tên.",
+              null,
+              "Câu này nói sau khi giới thiệu xong, không dùng để hỏi.",
+              "はい là câu trả lời, không mở đầu câu hỏi."
+            ],
+            "explanation": "しつれいですが mở đầu khi hỏi chuyện riêng như tên, tuổi.",
+            "related": {
+              "vocab": [
+                26,
+                27
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-lesson-BM-010",
+            "mondai": "bunmyaku",
+            "stem_kanji": "木村さんは 日本（　）です。",
+            "stem_kana": "きむらさんは にほん（　）です。",
+            "choices": [
+              "さい",
+              "じん",
+              "かた",
+              "さん"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "さい là tuổi, đi sau số đếm.",
+              null,
+              "かた (vị) là danh từ, không ghép với tên nước.",
+              "さん đi sau tên người, không đi sau tên nước."
+            ],
+            "explanation": "Tên nước + じん = người nước đó.",
+            "related": {
+              "vocab": [
+                44,
+                37
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-lesson-BM-001",
+            "mondai": "bunmyaku",
+            "stem_kanji": "サントスさんは 30（　）です。",
+            "stem_kana": "サントスさんは 30（　）です。",
+            "choices": [
+              "くん",
+              "さい",
+              "さん",
+              "じん"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "くん đi sau tên nam giới, không đi sau số.",
+              null,
+              "さん đi sau tên người.",
+              "じん đi sau tên nước, không đi sau số."
+            ],
+            "explanation": "Số + さい = tuổi.",
+            "related": {
+              "vocab": [
+                19
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-lesson-IK-010",
+            "mondai": "iikae",
+            "stem_kanji": "ミラーさんは アメリカから きました。",
+            "stem_kana": "ミラーさんは アメリカから きました。",
+            "choices_kanji": [
+              "ミラーさんは イギリス人です。",
+              "ミラーさんは アメリカの 学生です。",
+              "ミラーさんは アメリカじゃありません。",
+              "ミラーさんは アメリカ人です。"
+            ],
+            "choices_kana": [
+              "ミラーさんは イギリスじんです。",
+              "ミラーさんは アメリカの がくせいです。",
+              "ミラーさんは アメリカじゃありません。",
+              "ミラーさんは アメリカじんです。"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "イギリス không phải nước của ミラー.",
+              "Câu gốc không nói về nghề.",
+              "Câu này phủ định, ngược nghĩa.",
+              null
+            ],
+            "explanation": "Đến từ nước nào = là người nước đó.",
+            "related": {
+              "vocab": [
+                24,
+                44
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 4,
+            "mondai_ja": "言い換え類義",
+            "mondai_name": "Câu đồng nghĩa",
+            "mondai_instr": "Chọn câu có nghĩa gần nhất với câu đã cho."
+          },
+          {
+            "id": "L1-lesson-IK-005",
+            "mondai": "iikae",
+            "stem_kanji": "ワンさんも 医者です。",
+            "stem_kana": "ワンさんも いしゃです。",
+            "choices_kanji": [
+              "ワンさんは 学生です。",
+              "ワンさんは 医者じゃありません。",
+              "ワンさんは 医者ですか。",
+              "ワンさんは 医者です。"
+            ],
+            "choices_kana": [
+              "ワンさんは がくせいです。",
+              "ワンさんは いしゃじゃありません。",
+              "ワンさんは いしゃですか。",
+              "ワンさんは いしゃです。"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "Khác nghề với câu gốc.",
+              "Câu gốc khẳng định.",
+              "Câu gốc là câu kể.",
+              null
+            ],
+            "explanation": "も (cũng) → người đó là nghề đó.",
+            "related": {
+              "grammar": [
+                4,
+                1
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 4,
+            "mondai_ja": "言い換え類義",
+            "mondai_name": "Câu đồng nghĩa",
+            "mondai_instr": "Chọn câu có nghĩa gần nhất với câu đã cho."
+          },
+          {
+            "id": "L1-lesson-IK-001",
+            "mondai": "iikae",
+            "stem_kanji": "A：田中さんは 先生ですか。 B：はい、そうです。",
+            "stem_kana": "A：たなかさんは せんせいですか。 B：はい、そうです。",
+            "choices_kanji": [
+              "田中さんも 先生です。",
+              "田中さんは 先生じゃありません。",
+              "田中さんは 先生ですか。",
+              "田中さんは 先生です。"
+            ],
+            "choices_kana": [
+              "たなかさんも せんせいです。",
+              "たなかさんは せんせいじゃありません。",
+              "たなかさんは せんせいですか。",
+              "たなかさんは せんせいです。"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "Không có ý \"cũng\" trong hội thoại.",
+              "はい、そうです là khẳng định, không phải phủ định.",
+              "Đây chỉ lặp lại câu hỏi.",
+              null
+            ],
+            "explanation": "はい、そうです xác nhận nội dung câu hỏi.",
+            "related": {
+              "grammar": [
+                3,
+                1
+              ]
+            },
+            "status": "draft",
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 4,
+            "mondai_ja": "言い換え類義",
+            "mondai_name": "Câu đồng nghĩa",
+            "mondai_instr": "Chọn câu có nghĩa gần nhất với câu đã cho."
+          }
+        ],
+        "passages": {},
+        "currentIndex": 2,
+        "answers": {
+          "L1-lesson-KY-018": 2,
+          "L1-lesson-KY-023": 2
+        },
+        "graded": {
+          "L1-lesson-KY-018": true,
+          "L1-lesson-KY-023": true
+        },
+        "flagged": {},
+        "score": 2,
+        "updatedAt": "2026-10-28T12:42:05.526Z"
+      }
+    },
+    "cardScopes": {
+      "moji_goi": "blueprint",
+      "bunpou": "blueprint",
+      "choukai": "blueprint",
+      "full_exam": "blueprint"
+    },
+    "masteredIds": [
+      "L1-lesson-KY-018",
+      "L1-lesson-KY-023"
+    ],
+    "wrongIds": [],
+    "history": []
+  },
+  "user-1781344343083:nihongo_jlpt_global_exam": {
+    "selectedLessons": [
+      1
+    ],
+    "viewRange": "level",
+    "cards": {
+      "moji_goi": {
+        "card": "moji_goi",
+        "scope": "blueprint",
+        "lessonKey": "1",
+        "lessonIds": [
+          1
+        ],
+        "step": "test",
+        "questions": [
+          {
+            "id": "L1-global-KY-028",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "サントスさんは 【中国人】じゃありません。",
+            "stem_kana": "サントスさんは 【ちゅうごくじん】じゃありません。",
+            "choices": [
+              "ちゅうごくじん",
+              "ちゅうごくひと",
+              "ちゅうこくじん",
+              "ちゅごくじん"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "人 sau tên nước đọc じん.",
+              "国 sau 中 đọc ごく có âm đục.",
+              "中 đọc ちゅう có trường âm."
+            ],
+            "explanation": "中国人 = ちゅうごくじん.",
+            "related": {
+              "vocab": [
+                35,
+                44
+              ],
+              "kanji": [
+                "中",
+                "国",
+                "人"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-KY-013",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "グプタさんは 【学生】じゃありません。",
+            "stem_kana": "グプタさんは 【がくせい】じゃありません。",
+            "choices": [
+              "がくせい",
+              "かくせい",
+              "がっせい",
+              "がくせえ"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "学 đọc がく có âm đục.",
+              "学生 không có âm ngắt っ.",
+              "Trường âm viết せい, không viết せえ."
+            ],
+            "explanation": "学生 = がくせい.",
+            "related": {
+              "vocab": [
+                7
+              ],
+              "kanji": [
+                "学",
+                "生"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-KY-003",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "あの【人】は ドイツ人じゃありません。",
+            "stem_kana": "あの【ひと】は ドイツじんじゃありません。",
+            "choices": [
+              "にん",
+              "ひど",
+              "ひと",
+              "じん"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "にん dùng khi đếm người, không dùng cho 人 đứng một mình.",
+              "と không có âm đục.",
+              null,
+              "じん chỉ dùng khi ghép sau tên nước."
+            ],
+            "explanation": "人 = ひと.",
+            "related": {
+              "vocab": [
+                3
+              ],
+              "kanji": [
+                "人"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-KY-016",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "リンさんは 【中国人】じゃありません。",
+            "stem_kana": "リンさんは 【ちゅうごくじん】じゃありません。",
+            "choices": [
+              "ちゅうごくひと",
+              "ちゅごくじん",
+              "ちゅうこくじん",
+              "ちゅうごくじん"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "人 sau tên nước đọc じん.",
+              "中 đọc ちゅう có trường âm.",
+              "国 sau 中 đọc ごく có âm đục.",
+              null
+            ],
+            "explanation": "中国人 = ちゅうごくじん.",
+            "related": {
+              "vocab": [
+                35,
+                44
+              ],
+              "kanji": [
+                "中",
+                "国",
+                "人"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-KY-008",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "カリナさんは 【中国】の 人じゃありません。",
+            "stem_kana": "カリナさんは 【ちゅうごく】の ひとじゃありません。",
+            "choices": [
+              "ちゅうごく",
+              "ちゅうこく",
+              "ちゅごく",
+              "ちゅうごぐ"
+            ],
+            "answer": 0,
+            "wrong_notes": [
+              null,
+              "国 sau 中 đọc ごく có âm đục.",
+              "中 đọc ちゅう có trường âm, thiếu う.",
+              "Âm cuối く không đục."
+            ],
+            "explanation": "中国 = ちゅうごく.",
+            "related": {
+              "vocab": [
+                35
+              ],
+              "kanji": [
+                "中",
+                "国"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-KY-006",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "あの【方】は タワポンさんです。",
+            "stem_kana": "あの【かた】は タワポンさんです。",
+            "choices": [
+              "がた",
+              "かだ",
+              "かた",
+              "ほう"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "か không có âm đục khi đứng sau あの.",
+              "た không có âm đục.",
+              null,
+              "ほう là cách đọc khác, あの方 (vị kia) đọc かた."
+            ],
+            "explanation": "方 = かた.",
+            "related": {
+              "vocab": [
+                4
+              ],
+              "kanji": [
+                "方"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-KY-002",
+            "mondai": "kanji_yomi",
+            "stem_kanji": "田中さんは 【中国】の 人じゃありません。",
+            "stem_kana": "たなかさんは 【ちゅうごく】の ひとじゃありません。",
+            "choices": [
+              "ちゅうごぐ",
+              "ちゅうこく",
+              "ちゅごく",
+              "ちゅうごく"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "Âm cuối く không đục.",
+              "国 sau 中 đọc ごく có âm đục.",
+              "中 đọc ちゅう có trường âm, thiếu う.",
+              null
+            ],
+            "explanation": "中国 = ちゅうごく.",
+            "related": {
+              "vocab": [
+                35
+              ],
+              "kanji": [
+                "中",
+                "国"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 1,
+            "mondai_ja": "漢字読み",
+            "mondai_name": "Cách đọc kanji",
+            "mondai_instr": "Chọn cách đọc đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-HK-019",
+            "mondai": "hyouki",
+            "stem_kanji": "タワポンさんは 【ちゅうごく】の 人じゃありません。",
+            "stem_kana": "タワポンさんは 【ちゅうごく】の ひとじゃありません。",
+            "choices": [
+              "中囯",
+              "中園",
+              "中国",
+              "虫国"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "囯 là dạng viết khác, giáo trình dùng 国.",
+              "園 (vườn) khác 国 (nước).",
+              null,
+              "虫 (sâu) nhìn giống 中 nhưng là chữ khác."
+            ],
+            "explanation": "ちゅうごく viết là 中国.",
+            "related": {
+              "vocab": [
+                35
+              ],
+              "kanji": [
+                "中",
+                "国"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-HK-012",
+            "mondai": "hyouki",
+            "stem_kanji": "ワンさんは 【にほんじん】じゃありません。",
+            "stem_kana": "ワンさんは 【にほんじん】じゃありません。",
+            "choices": [
+              "目本人",
+              "日本入",
+              "日本人",
+              "日木人"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "目 (mắt) có 3 nét ngang, 日 chỉ có 2.",
+              "入 (vào) khác 人 (người).",
+              null,
+              "木 (cây) thiếu nét ngang dưới so với 本."
+            ],
+            "explanation": "にほんじん viết là 日本人.",
+            "related": {
+              "vocab": [
+                37,
+                44
+              ],
+              "kanji": [
+                "日",
+                "本",
+                "人"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-HK-002",
+            "mondai": "hyouki",
+            "stem_kanji": "イーさんは 【ちゅうごく】の 人じゃありません。",
+            "stem_kana": "イーさんは 【ちゅうごく】の ひとじゃありません。",
+            "choices": [
+              "虫国",
+              "中囯",
+              "中園",
+              "中国"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "虫 (sâu) nhìn giống 中 nhưng là chữ khác.",
+              "囯 là dạng viết khác, giáo trình dùng 国.",
+              "園 (vườn) khác 国 (nước).",
+              null
+            ],
+            "explanation": "ちゅうごく viết là 中国.",
+            "related": {
+              "vocab": [
+                35
+              ],
+              "kanji": [
+                "中",
+                "国"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-HK-025",
+            "mondai": "hyouki",
+            "stem_kanji": "ミラーさんは 【にほん】の 人じゃありません。",
+            "stem_kana": "ミラーさんは 【にほん】の ひとじゃありません。",
+            "choices": [
+              "目本",
+              "日木",
+              "日本",
+              "日大"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "目 (mắt) có 3 nét ngang.",
+              "木 (cây) thiếu nét ngang dưới so với 本.",
+              null,
+              "大 (to) không phải 本."
+            ],
+            "explanation": "にほん viết là 日本.",
+            "related": {
+              "vocab": [
+                37
+              ],
+              "kanji": [
+                "日",
+                "本"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-HK-010",
+            "mondai": "hyouki",
+            "stem_kanji": "あの【かた】は リンさんです。",
+            "stem_kana": "あの【かた】は リンさんです。",
+            "choices": [
+              "才",
+              "方",
+              "万",
+              "力"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "才 nhìn giống nhưng là chữ khác.",
+              null,
+              "万 (vạn) thiếu nét chấm trên.",
+              "力 (sức) thiếu nét chấm và nét ngang."
+            ],
+            "explanation": "かた viết là 方.",
+            "related": {
+              "vocab": [
+                4
+              ],
+              "kanji": [
+                "方"
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 2,
+            "mondai_ja": "表記",
+            "mondai_name": "Chọn kanji",
+            "mondai_instr": "Chọn cách viết đúng của từ trong 【 】."
+          },
+          {
+            "id": "L1-global-BM-004",
+            "mondai": "bunmyaku",
+            "stem_kanji": "タインさんは 20（　）です。",
+            "stem_kana": "タインさんは 20（　）です。",
+            "choices": [
+              "じん",
+              "さい",
+              "さん",
+              "くん"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "じん đi sau tên nước, không đi sau số.",
+              null,
+              "さん đi sau tên người.",
+              "くん đi sau tên nam giới, không đi sau số."
+            ],
+            "explanation": "Số + さい = tuổi.",
+            "related": {
+              "vocab": [
+                19
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-global-BM-020",
+            "mondai": "bunmyaku",
+            "stem_kanji": "A：田中さんは 日本人ですか。 B：（　）、日本人じゃありません。イギリス人です。",
+            "stem_kana": "A：たなかさんは にほんじんですか。 B：（　）、にほんじんじゃありません。イギリスじんです。",
+            "choices": [
+              "そうです",
+              "じゃあ",
+              "いいえ",
+              "はい"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "そうです đi với はい, không đi với phủ định.",
+              "じゃあ không phải câu trả lời.",
+              null,
+              "はい rồi phủ định là mâu thuẫn."
+            ],
+            "explanation": "Phủ định → いいえ、～じゃありません.",
+            "related": {
+              "vocab": [
+                22
+              ],
+              "grammar": [
+                2
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-global-BM-001",
+            "mondai": "bunmyaku",
+            "stem_kanji": "A：（　）、おなまえは？ B：佐藤です。",
+            "stem_kana": "A：（　）、おなまえは？ B：さとうです。",
+            "choices": [
+              "どうぞ よろしく",
+              "はじめまして",
+              "しつれいですが",
+              "はい"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "Câu này nói sau khi giới thiệu xong, không dùng để hỏi.",
+              "はじめまして dùng khi mới gặp, không phải lời dạo trước khi hỏi tên.",
+              null,
+              "はい là câu trả lời, không mở đầu câu hỏi."
+            ],
+            "explanation": "しつれいですが mở đầu khi hỏi chuyện riêng như tên, tuổi.",
+            "related": {
+              "vocab": [
+                26,
+                27
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-global-BM-015",
+            "mondai": "bunmyaku",
+            "stem_kanji": "A：（　）、おなまえは？ B：カリナです。",
+            "stem_kana": "A：（　）、おなまえは？ B：カリナです。",
+            "choices": [
+              "どうぞ よろしく",
+              "しつれいですが",
+              "はい",
+              "はじめまして"
+            ],
+            "answer": 1,
+            "wrong_notes": [
+              "Câu này nói sau khi giới thiệu xong, không dùng để hỏi.",
+              null,
+              "はい là câu trả lời, không mở đầu câu hỏi.",
+              "はじめまして dùng khi mới gặp, không phải lời dạo trước khi hỏi tên."
+            ],
+            "explanation": "しつれいですが mở đầu khi hỏi chuyện riêng như tên, tuổi.",
+            "related": {
+              "vocab": [
+                26,
+                27
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-global-BM-017",
+            "mondai": "bunmyaku",
+            "stem_kanji": "A：田中さんは 何歳ですか。 B：（　）です。",
+            "stem_kana": "A：たなかさんは なんさいですか。 B：（　）です。",
+            "choices": [
+              "先生",
+              "田中",
+              "50歳",
+              "日本人"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "何歳 hỏi tuổi, không hỏi nghề.",
+              "何歳 hỏi tuổi, không hỏi tên.",
+              null,
+              "何歳 hỏi tuổi, không hỏi quốc tịch."
+            ],
+            "explanation": "何歳 hỏi tuổi → trả lời số + 歳.",
+            "related": {
+              "vocab": [
+                20,
+                19
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-global-BM-021",
+            "mondai": "bunmyaku",
+            "stem_kanji": "（　）、ナムです。どうぞ よろしく。",
+            "stem_kana": "（　）、ナムです。どうぞ よろしく。",
+            "choices": [
+              "いいえ",
+              "しつれいですが",
+              "はじめまして",
+              "じゃあ"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "いいえ là câu trả lời phủ định.",
+              "しつれいですが mở đầu khi sắp hỏi chuyện riêng, không dùng để giới thiệu tên mình.",
+              null,
+              "じゃあ là từ nối \"vậy thì\", không phải lời chào."
+            ],
+            "explanation": "はじめまして nói khi gặp lần đầu, trước khi giới thiệu tên.",
+            "related": {
+              "vocab": [
+                23
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 3,
+            "mondai_ja": "文脈規定",
+            "mondai_name": "Điền từ theo ngữ cảnh",
+            "mondai_instr": "Chọn từ phù hợp nhất để điền vào（　）."
+          },
+          {
+            "id": "L1-global-IK-013",
+            "mondai": "iikae",
+            "stem_kanji": "山田さんは 日本から きました。",
+            "stem_kana": "やまださんは にほんから きました。",
+            "choices_kanji": [
+              "山田さんは 日本の 学生です。",
+              "山田さんは 日本じゃありません。",
+              "山田さんは ベトナム人です。",
+              "山田さんは 日本人です。"
+            ],
+            "choices_kana": [
+              "やまださんは にほんの がくせいです。",
+              "やまださんは にほんじゃありません。",
+              "やまださんは ベトナムじんです。",
+              "やまださんは にほんじんです。"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "Câu gốc không nói về nghề.",
+              "Câu này phủ định, ngược nghĩa.",
+              "ベトナム không phải nước của 山田.",
+              null
+            ],
+            "explanation": "Đến từ nước nào = là người nước đó.",
+            "related": {
+              "vocab": [
+                24,
+                44
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 4,
+            "mondai_ja": "言い換え類義",
+            "mondai_name": "Câu đồng nghĩa",
+            "mondai_instr": "Chọn câu có nghĩa gần nhất với câu đã cho."
+          },
+          {
+            "id": "L1-global-IK-009",
+            "mondai": "iikae",
+            "stem_kanji": "イーさんは 研究者じゃありません。",
+            "stem_kana": "イーさんは けんきゅうしゃじゃありません。",
+            "choices_kanji": [
+              "イーさんは 研究者ですか。",
+              "イーさんは 研究者です。",
+              "イーさんも 研究者です。",
+              "イーさんは 研究者ではありません。"
+            ],
+            "choices_kana": [
+              "イーさんは けんきゅうしゃですか。",
+              "イーさんは けんきゅうしゃです。",
+              "イーさんも けんきゅうしゃです。",
+              "イーさんは けんきゅうしゃではありません。"
+            ],
+            "answer": 3,
+            "wrong_notes": [
+              "Câu gốc là câu kể, câu này là câu hỏi.",
+              "Câu gốc phủ định, câu này khẳng định.",
+              "Vừa khẳng định vừa thêm も, khác nghĩa.",
+              null
+            ],
+            "explanation": "じゃありません = ではありません.",
+            "related": {
+              "grammar": [
+                2
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 4,
+            "mondai_ja": "言い換え類義",
+            "mondai_name": "Câu đồng nghĩa",
+            "mondai_instr": "Chọn câu có nghĩa gần nhất với câu đã cho."
+          },
+          {
+            "id": "L1-global-IK-002",
+            "mondai": "iikae",
+            "stem_kanji": "ジョンさんも 研究者です。",
+            "stem_kana": "ジョンさんも けんきゅうしゃです。",
+            "choices_kanji": [
+              "ジョンさんは 銀行員です。",
+              "ジョンさんは 研究者ですか。",
+              "ジョンさんは 研究者です。",
+              "ジョンさんは 研究者じゃありません。"
+            ],
+            "choices_kana": [
+              "ジョンさんは ぎんこういんです。",
+              "ジョンさんは けんきゅうしゃですか。",
+              "ジョンさんは けんきゅうしゃです。",
+              "ジョンさんは けんきゅうしゃじゃありません。"
+            ],
+            "answer": 2,
+            "wrong_notes": [
+              "Khác nghề với câu gốc.",
+              "Câu gốc là câu kể.",
+              null,
+              "Câu gốc khẳng định."
+            ],
+            "explanation": "も (cũng) → người đó là nghề đó.",
+            "related": {
+              "grammar": [
+                4,
+                1
+              ]
+            },
+            "status": "draft",
+            "lesson_id": 1,
+            "section": "moji_goi",
+            "section_ja": "文字・語彙",
+            "section_name": "Chữ – Từ vựng",
+            "mondai_no": 4,
+            "mondai_ja": "言い換え類義",
+            "mondai_name": "Câu đồng nghĩa",
+            "mondai_instr": "Chọn câu có nghĩa gần nhất với câu đã cho."
+          }
+        ],
+        "passages": {},
+        "currentIndex": 0,
+        "answers": {},
+        "graded": {},
+        "flagged": {},
+        "score": 0,
+        "updatedAt": "2026-10-28T14:05:44.900Z"
+      }
+    },
+    "cardScopes": {
+      "moji_goi": "blueprint",
+      "bunpou": "blueprint",
+      "choukai": "blueprint",
+      "full_exam": "blueprint"
+    },
+    "masteredIds": [],
+    "wrongIds": [],
+    "history": []
+  }
+}

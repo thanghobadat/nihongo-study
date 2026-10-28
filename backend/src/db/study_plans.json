@@ -49,7 +49,9 @@
             "targetCount": 27,
             "currentCount": 0,
             "scopeDetails": "Phần 1: 27 từ (Từ #1: わたし ➔ #27: おなまえは)",
+            "preDueNotified": true,
             "workloadPoints": 27,
+            "overdueNotified": true,
             "estimatedMinutes": 162
           },
           {
@@ -97,6 +99,7 @@
             "currentCount": 0,
             "scopeDetails": "Phần 2: 26 từ (Từ #28: こちら ➔ #53: じゃあ)",
             "workloadPoints": 26,
+            "overdueNotified": true,
             "estimatedMinutes": 156
           }
         ],
@@ -108,6 +111,7 @@
         "plannedCount": 2,
         "completedCount": 0,
         "workloadPoints": 53,
+        "streakAlertNotified": true,
         "totalEstimatedMinutes": 318,
         "isDedicatedPracticeDay": false
       },
@@ -189,11 +193,13 @@
             "lesson": 1,
             "due_time": "19:00",
             "itemType": "single_review",
-            "completed": false,
+            "completed": true,
             "lesson_id": 1,
             "totalParts": 1,
+            "progressPct": 100,
             "targetCount": 1,
-            "currentCount": 0,
+            "completed_at": "19:41",
+            "currentCount": 1,
             "scopeDetails": "Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm",
             "workloadPoints": 0,
             "estimatedMinutes": 30
@@ -224,7 +230,8 @@
         "isBufferDay": false,
         "dayRationale": "Hôm nay bạn học toàn bộ 18 chữ Hán (54 WP) và 5 mẫu câu (15 WP) của Bài 1. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 1.",
         "plannedCount": 4,
-        "completedCount": 0,
+        "completedCount": 1,
+        "completionRate": 25,
         "workloadPoints": 69,
         "totalEstimatedMinutes": 474,
         "isDedicatedPracticeDay": false
@@ -332,6 +339,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 50 từ vựng của Bài 2 (50 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 50,
         "totalEstimatedMinutes": 300,
         "isDedicatedPracticeDay": false
@@ -453,6 +461,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 20 chữ Hán (60 WP) và 6 mẫu câu (18 WP) của Bài 2. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 2.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 78,
         "totalEstimatedMinutes": 528,
         "isDedicatedPracticeDay": false
@@ -555,6 +564,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 45 từ vựng của Bài 3 (45 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 45,
         "totalEstimatedMinutes": 270,
         "isDedicatedPracticeDay": false
@@ -667,6 +677,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 9 chữ Hán (27 WP) và 8 mẫu câu (24 WP) của Bài 3. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 3.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 51,
         "totalEstimatedMinutes": 366,
         "isDedicatedPracticeDay": false
@@ -788,6 +799,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 64 từ vựng của Bài 4 (64 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 64,
         "totalEstimatedMinutes": 384,
         "isDedicatedPracticeDay": false
@@ -909,6 +921,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 20 chữ Hán (60 WP) và 6 mẫu câu (18 WP) của Bài 4. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 4.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 78,
         "totalEstimatedMinutes": 528,
         "isDedicatedPracticeDay": false
@@ -1029,6 +1042,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 63 từ vựng của Bài 5 (63 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 63,
         "totalEstimatedMinutes": 378,
         "isDedicatedPracticeDay": false
@@ -1143,6 +1157,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 14 chữ Hán (42 WP) và 5 mẫu câu (15 WP) của Bài 5. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 5.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 57,
         "totalEstimatedMinutes": 402,
         "isDedicatedPracticeDay": false
@@ -1266,6 +1281,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 66 từ vựng của Bài 6 (66 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 66,
         "totalEstimatedMinutes": 396,
         "isDedicatedPracticeDay": false
@@ -1383,6 +1399,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 16 chữ Hán (48 WP) và 6 mẫu câu (18 WP) của Bài 6. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 6.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 66,
         "totalEstimatedMinutes": 456,
         "isDedicatedPracticeDay": false
@@ -1480,6 +1497,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 40 từ vựng của Bài 7 (40 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 40,
         "totalEstimatedMinutes": 240,
         "isDedicatedPracticeDay": false
@@ -1590,6 +1608,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 10 chữ Hán (30 WP) và 5 mẫu câu (15 WP) của Bài 7. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 7.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 45,
         "totalEstimatedMinutes": 330,
         "isDedicatedPracticeDay": false
@@ -1713,6 +1732,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 66 từ vựng của Bài 8 (66 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 66,
         "totalEstimatedMinutes": 396,
         "isDedicatedPracticeDay": false
@@ -1829,6 +1849,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 16 chữ Hán (48 WP) và 5 mẫu câu (15 WP) của Bài 8. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 8.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 63,
         "totalEstimatedMinutes": 438,
         "isDedicatedPracticeDay": false
@@ -1934,6 +1955,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 48 từ vựng của Bài 9 (48 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 48,
         "totalEstimatedMinutes": 288,
         "isDedicatedPracticeDay": false
@@ -2048,6 +2070,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 14 chữ Hán (42 WP) và 5 mẫu câu (15 WP) của Bài 9. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 9.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 57,
         "totalEstimatedMinutes": 402,
         "isDedicatedPracticeDay": false
@@ -2156,6 +2179,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 51 từ vựng của Bài 10 (51 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 51,
         "totalEstimatedMinutes": 306,
         "isDedicatedPracticeDay": false
@@ -2263,6 +2287,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 8 chữ Hán (24 WP) và 4 mẫu câu (12 WP) của Bài 10. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 10.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 36,
         "totalEstimatedMinutes": 276,
         "isDedicatedPracticeDay": false
@@ -2387,6 +2412,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 67 từ vựng của Bài 11 (67 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 67,
         "totalEstimatedMinutes": 402,
         "isDedicatedPracticeDay": false
@@ -2500,6 +2526,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 13 chữ Hán (39 WP) và 5 mẫu câu (15 WP) của Bài 11. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 11.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 54,
         "totalEstimatedMinutes": 384,
         "isDedicatedPracticeDay": false
@@ -2600,6 +2627,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 43 từ vựng của Bài 12 (43 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 43,
         "totalEstimatedMinutes": 258,
         "isDedicatedPracticeDay": false
@@ -2709,6 +2737,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 9 chữ Hán (27 WP) và 5 mẫu câu (15 WP) của Bài 12. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 12.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 42,
         "totalEstimatedMinutes": 312,
         "isDedicatedPracticeDay": false
@@ -2806,6 +2835,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 40 từ vựng của Bài 13 (40 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 40,
         "totalEstimatedMinutes": 240,
         "isDedicatedPracticeDay": false
@@ -2912,6 +2942,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 7 chữ Hán (21 WP) và 4 mẫu câu (12 WP) của Bài 13. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 13.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 33,
         "totalEstimatedMinutes": 258,
         "isDedicatedPracticeDay": false
@@ -3009,6 +3040,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 40 từ vựng của Bài 14 (40 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 40,
         "totalEstimatedMinutes": 240,
         "isDedicatedPracticeDay": false
@@ -3117,6 +3149,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 9 chữ Hán (27 WP) và 4 mẫu câu (12 WP) của Bài 14. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 14.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 39,
         "totalEstimatedMinutes": 294,
         "isDedicatedPracticeDay": false
@@ -3270,6 +3303,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 15 gồm 27 từ vựng, 7 chữ Hán và 3 mẫu câu (57 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 57,
         "totalEstimatedMinutes": 402,
         "isDedicatedPracticeDay": false
@@ -3373,6 +3407,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 46 từ vựng của Bài 16 (46 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 46,
         "totalEstimatedMinutes": 276,
         "isDedicatedPracticeDay": false
@@ -3476,6 +3511,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 5 chữ Hán (15 WP) và 3 mẫu câu (9 WP) của Bài 16. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 16.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 24,
         "totalEstimatedMinutes": 204,
         "isDedicatedPracticeDay": false
@@ -3572,6 +3608,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 39 từ vựng của Bài 17 (39 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 39,
         "totalEstimatedMinutes": 234,
         "isDedicatedPracticeDay": false
@@ -3678,6 +3715,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 7 chữ Hán (21 WP) và 4 mẫu câu (12 WP) của Bài 17. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 17.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 33,
         "totalEstimatedMinutes": 258,
         "isDedicatedPracticeDay": false
@@ -3829,6 +3867,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 18 gồm 28 từ vựng, 3 chữ Hán và 4 mẫu câu (49 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 49,
         "totalEstimatedMinutes": 354,
         "isDedicatedPracticeDay": false
@@ -3978,6 +4017,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 19 gồm 30 từ vựng, 0 chữ Hán và 3 mẫu câu (39 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 39,
         "totalEstimatedMinutes": 294,
         "isDedicatedPracticeDay": false
@@ -4151,6 +4191,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 20 gồm 31 từ vựng, 2 chữ Hán và 3 mẫu câu (46 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 6,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 46,
         "totalEstimatedMinutes": 336,
         "isDedicatedPracticeDay": false
@@ -4331,6 +4372,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 21 gồm 36 từ vựng, 4 chữ Hán và 3 mẫu câu (57 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 6,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 57,
         "totalEstimatedMinutes": 402,
         "isDedicatedPracticeDay": false
@@ -4477,6 +4519,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 22 gồm 27 từ vựng, 1 chữ Hán và 2 mẫu câu (36 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 36,
         "totalEstimatedMinutes": 276,
         "isDedicatedPracticeDay": false
@@ -4625,6 +4668,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 23 gồm 26 từ vựng, 3 chữ Hán và 3 mẫu câu (44 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 44,
         "totalEstimatedMinutes": 324,
         "isDedicatedPracticeDay": false
@@ -4742,6 +4786,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 24 gồm 19 từ vựng, 0 chữ Hán và 3 mẫu câu (28 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 28,
         "totalEstimatedMinutes": 228,
         "isDedicatedPracticeDay": false
@@ -4883,6 +4928,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 25 gồm 17 từ vựng, 4 chữ Hán và 4 mẫu câu (41 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 41,
         "totalEstimatedMinutes": 306,
         "isDedicatedPracticeDay": false
@@ -4983,6 +5029,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 43 từ vựng của Bài 26 (43 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 43,
         "totalEstimatedMinutes": 258,
         "isDedicatedPracticeDay": false
@@ -5084,6 +5131,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 1 chữ Hán (3 WP) và 5 mẫu câu (15 WP) của Bài 26. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 26.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 18,
         "totalEstimatedMinutes": 168,
         "isDedicatedPracticeDay": false
@@ -5190,6 +5238,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 49 từ vựng của Bài 27 (49 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 49,
         "totalEstimatedMinutes": 294,
         "isDedicatedPracticeDay": false
@@ -5294,6 +5343,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 4 chữ Hán (12 WP) và 5 mẫu câu (15 WP) của Bài 27. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 27.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 27,
         "totalEstimatedMinutes": 222,
         "isDedicatedPracticeDay": false
@@ -5399,6 +5449,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 48 từ vựng của Bài 28 (48 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 48,
         "totalEstimatedMinutes": 288,
         "isDedicatedPracticeDay": false
@@ -5500,6 +5551,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 2 chữ Hán (6 WP) và 4 mẫu câu (12 WP) của Bài 28. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 28.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 18,
         "totalEstimatedMinutes": 168,
         "isDedicatedPracticeDay": false
@@ -5684,6 +5736,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 29 gồm 42 từ vựng, 1 chữ Hán và 4 mẫu câu (57 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 6,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 57,
         "totalEstimatedMinutes": 402,
         "isDedicatedPracticeDay": false
@@ -5793,6 +5846,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 52 từ vựng của Bài 30 (52 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 52,
         "totalEstimatedMinutes": 312,
         "isDedicatedPracticeDay": false
@@ -5871,6 +5925,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 30 gồm 0 từ vựng, 0 chữ Hán và 4 mẫu câu (12 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 3,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 12,
         "totalEstimatedMinutes": 132,
         "isDedicatedPracticeDay": false
@@ -6053,6 +6108,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 31 gồm 38 từ vựng, 3 chữ Hán và 4 mẫu câu (59 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 6,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 59,
         "totalEstimatedMinutes": 414,
         "isDedicatedPracticeDay": false
@@ -6167,6 +6223,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 57 từ vựng của Bài 32 (57 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 57,
         "totalEstimatedMinutes": 342,
         "isDedicatedPracticeDay": false
@@ -6269,6 +6326,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 3 chữ Hán (9 WP) và 4 mẫu câu (12 WP) của Bài 32. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 32.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 21,
         "totalEstimatedMinutes": 186,
         "isDedicatedPracticeDay": false
@@ -6375,6 +6433,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 49 từ vựng của Bài 33 (49 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 49,
         "totalEstimatedMinutes": 294,
         "isDedicatedPracticeDay": false
@@ -6477,6 +6536,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 3 chữ Hán (9 WP) và 4 mẫu câu (12 WP) của Bài 33. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 33.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 21,
         "totalEstimatedMinutes": 186,
         "isDedicatedPracticeDay": false
@@ -6582,6 +6642,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 48 từ vựng của Bài 34 (48 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 48,
         "totalEstimatedMinutes": 288,
         "isDedicatedPracticeDay": false
@@ -6682,6 +6743,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 2 chữ Hán (6 WP) và 3 mẫu câu (9 WP) của Bài 34. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 34.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 15,
         "totalEstimatedMinutes": 150,
         "isDedicatedPracticeDay": false
@@ -6841,6 +6903,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 35 gồm 39 từ vựng, 0 chữ Hán và 4 mẫu câu (51 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 51,
         "totalEstimatedMinutes": 366,
         "isDedicatedPracticeDay": false
@@ -7002,6 +7065,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 36 gồm 41 từ vựng, 0 chữ Hán và 4 mẫu câu (53 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 53,
         "totalEstimatedMinutes": 378,
         "isDedicatedPracticeDay": false
@@ -7164,6 +7228,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 37 gồm 42 từ vựng, 0 chữ Hán và 4 mẫu câu (54 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 54,
         "totalEstimatedMinutes": 384,
         "isDedicatedPracticeDay": false
@@ -7262,6 +7327,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 41 từ vựng của Bài 38 (41 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 41,
         "totalEstimatedMinutes": 246,
         "isDedicatedPracticeDay": false
@@ -7363,6 +7429,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 2 chữ Hán (6 WP) và 4 mẫu câu (12 WP) của Bài 38. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 38.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 18,
         "totalEstimatedMinutes": 168,
         "isDedicatedPracticeDay": false
@@ -7462,6 +7529,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 42 từ vựng của Bài 39 (42 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 42,
         "totalEstimatedMinutes": 252,
         "isDedicatedPracticeDay": false
@@ -7563,6 +7631,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 2 chữ Hán (6 WP) và 4 mẫu câu (12 WP) của Bài 39. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 39.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 18,
         "totalEstimatedMinutes": 168,
         "isDedicatedPracticeDay": false
@@ -7666,6 +7735,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 46 từ vựng của Bài 40 (46 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 46,
         "totalEstimatedMinutes": 276,
         "isDedicatedPracticeDay": false
@@ -7767,6 +7837,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ 2 chữ Hán (6 WP) và 4 mẫu câu (12 WP) của Bài 40. Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 40.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 18,
         "totalEstimatedMinutes": 168,
         "isDedicatedPracticeDay": false
@@ -7874,6 +7945,7 @@
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 50 từ vựng của Bài 41 (50 điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 50,
         "totalEstimatedMinutes": 300,
         "isDedicatedPracticeDay": false
@@ -7952,6 +8024,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 41 gồm 0 từ vựng, 0 chữ Hán và 4 mẫu câu (12 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 3,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 12,
         "totalEstimatedMinutes": 132,
         "isDedicatedPracticeDay": false
@@ -8110,6 +8183,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 42 gồm 38 từ vựng, 0 chữ Hán và 4 mẫu câu (50 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 50,
         "totalEstimatedMinutes": 360,
         "isDedicatedPracticeDay": false
@@ -8261,6 +8335,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 43 gồm 31 từ vựng, 0 chữ Hán và 4 mẫu câu (43 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 43,
         "totalEstimatedMinutes": 318,
         "isDedicatedPracticeDay": false
@@ -8422,6 +8497,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 44 gồm 41 từ vựng, 0 chữ Hán và 4 mẫu câu (53 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 53,
         "totalEstimatedMinutes": 378,
         "isDedicatedPracticeDay": false
@@ -8596,6 +8672,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 45 gồm 33 từ vựng, 1 chữ Hán và 3 mẫu câu (45 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 6,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 45,
         "totalEstimatedMinutes": 330,
         "isDedicatedPracticeDay": false
@@ -8746,6 +8823,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 46 gồm 31 từ vựng, 0 chữ Hán và 3 mẫu câu (40 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 40,
         "totalEstimatedMinutes": 300,
         "isDedicatedPracticeDay": false
@@ -8895,6 +8973,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 47 gồm 30 từ vựng, 0 chữ Hán và 3 mẫu câu (39 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 39,
         "totalEstimatedMinutes": 294,
         "isDedicatedPracticeDay": false
@@ -9019,6 +9098,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 48 gồm 25 từ vựng, 0 chữ Hán và 4 mẫu câu (37 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 4,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 37,
         "totalEstimatedMinutes": 282,
         "isDedicatedPracticeDay": false
@@ -9177,6 +9257,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 49 gồm 38 từ vựng, 0 chữ Hán và 4 mẫu câu (50 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 50,
         "totalEstimatedMinutes": 360,
         "isDedicatedPracticeDay": false
@@ -9334,6 +9415,7 @@
         "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 50 gồm 37 từ vựng, 0 chữ Hán và 4 mẫu câu (49 điểm tải), kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
+        "completionRate": 0,
         "workloadPoints": 49,
         "totalEstimatedMinutes": 354,
         "isDedicatedPracticeDay": false
@@ -9383,7 +9465,8 @@
     "isBalancedPacing": true,
     "originalStartDate": "2026-10-28",
     "workloadRationale": "Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Áp dụng thuật toán Cân bằng Tải trọng Động (Load-Balanced Dynamic Pacing): toàn bộ 50 bài học được cắt nhỏ thành từng phần vừa vặn, phân bổ đều khắp 77 ngày để mọi ngày có thời lượng học đồng đều (~307 phút/ngày), triệt tiêu hoàn toàn sự chênh lệch và dồn ép.",
-    "completedLessonsCount": 0
+    "completedLessonsCount": 0,
+    "lastOverdueNotifiedAt": "2026-10-28T14:05:33.713Z"
   },
   "ce21492c-06db-4d03-8590-4f5e7d6bac18": {
     "days": [
@@ -9435,7 +9518,9 @@
             "targetCount": 27,
             "currentCount": 0,
             "scopeDetails": "Phần 1: 27 từ (Từ #1: わたし ➔ #27: おなまえは)",
+            "preDueNotified": true,
             "workloadPoints": 27,
+            "overdueNotified": true,
             "estimatedMinutes": 162
           },
           {
@@ -9482,7 +9567,9 @@
             "targetCount": 26,
             "currentCount": 0,
             "scopeDetails": "Phần 2: 26 từ (Từ #28: こちら ➔ #53: じゃあ)",
+            "preDueNotified": true,
             "workloadPoints": 26,
+            "overdueNotified": true,
             "estimatedMinutes": 156
           }
         ],
@@ -18728,17 +18815,20 @@
         "startLesson": 38
       }
     ],
-    "updated_at": "2026-10-28T08:59:25.954Z",
+    "updated_at": "2026-10-28T09:50:52.724Z",
+    "replanCount": 14,
     "startLesson": 1,
     "targetLevel": "All",
     "targetLesson": 50,
     "totalLessons": 50,
-    "aiCoachingTip": "Hãy biến mỗi ngày thành một bước tiến vững chắc trên hành trình chinh phục tiếng Nhật. Sự kiên trì và phương pháp học thông minh sẽ là chìa khóa giúp bạn đạt được mục tiêu. Tin tưởng vào bản thân và tận hưởng quá trình học tập! Với 75 ngày để hoàn thành 50 bài, bạn cần học khoảng 2 bài mỗi 3 ngày. Hãy phân bổ linh hoạt: Ngày 1 tập trung 50% từ vựng nền tảng của bài mới, Ngày 2 dành cho 50% Kanji và ngữ pháp kết hợp của bài đó, và Ngày 3 là ngày thực hành chuyên biệt cho bài đã học. Đừng ngại học gối đầu bài mới khi bài cũ còn dở dang, vì ngày mai sẽ là ngày thực hành trọn vẹn để củng cố kiến thức.",
+    "aiCoachingTip": "Hãy biến mỗi ngày thành một bước tiến vững chắc trên hành trình chinh phục tiếng Nhật. Sự kiên trì và phương pháp học thông minh sẽ là chìa khóa giúp bạn đạt được mục tiêu. Tin tưởng vào bản thân và tận hưởng quá trình học tập! Với 75 ngày và mục tiêu hoàn thành 50 bài, bạn sẽ cần một lịch trình học tập rất tập trung. Phương pháp 50% từ vựng nền tảng (Ngày 1) và 50% Kanji + Ngữ pháp (Ngày 2) cùng 1 ngày thực hành chuyên biệt cho mỗi bài là một chiến lược tốt. Tuy nhiên, việc học gối đầu bài mới khi bài cũ còn dở dang đòi hỏi sự linh hoạt và khả năng tự đánh giá cao để đảm bảo kiến thức được củng cố vững chắc trước khi chuyển sang bài mới. Hãy luôn ưu tiên chất lượng hơn số lượng, và đừng ngần ngại điều chỉnh nếu cảm thấy quá tải.",
     "archivedPastDays": [],
     "isBalancedPacing": true,
     "originalStartDate": "2026-10-28",
     "workloadRationale": "Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Áp dụng thuật toán Cân bằng Tải trọng Động (Load-Balanced Dynamic Pacing): toàn bộ 50 bài học được cắt nhỏ thành từng phần vừa vặn, phân bổ đều khắp 75 ngày để mọi ngày có thời lượng học đồng đều (~316 phút/ngày), triệt tiêu hoàn toàn sự chênh lệch và dồn ép.",
-    "completedLessonsCount": 0
+    "completedLessonsCount": 0,
+    "lastOverdueNotifiedAt": "2026-10-28T12:20:42.058Z",
+    "lastNewDayNotifiedDate": "2026-10-28"
   },
   "e139bec8-56ab-42fc-97b7-98dc7649fad6": {
     "days": [

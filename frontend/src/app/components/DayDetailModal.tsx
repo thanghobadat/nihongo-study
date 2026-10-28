@@ -75,13 +75,19 @@ export default function DayDetailModal({
   };
 
   const getTaskLink = (task: TaskDetail) => {
-    if (task.link) return task.link;
+    if (task.link) {
+      if (task.link.startsWith('/knowledge') && (task.link.includes('tab=review') || task.link.includes('tab=exam'))) {
+        return '/knowledge?tab=jlpt_exam';
+      }
+      return task.link.replace('?tab=review', '?tab=jlpt');
+    }
     const lesson = task.lesson || 1;
     const type = ((task.itemType || task.type) || '').toLowerCase();
     if (type.includes('vocab')) return `/lessons/${lesson}?tab=vocab`;
     if (type.includes('grammar')) return `/lessons/${lesson}?tab=grammar`;
     if (type.includes('kanji')) return `/lessons/${lesson}?tab=kanji`;
-    if (type.includes('review') || type.includes('practice')) return `/lessons/${lesson}?tab=review`;
+    if (type.includes('cumulative_review')) return '/knowledge?tab=jlpt_exam';
+    if (type.includes('review') || type.includes('practice')) return `/lessons/${lesson}?tab=jlpt`;
     return `/lessons/${lesson}`;
   };
 

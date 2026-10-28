@@ -26,7 +26,7 @@ import MatchingGame from './components/MatchingGame';
 import FillInBlanks from './components/FillInBlanks';
 
 import DialogueReading from './components/DialogueReading';
-import ReviewTab from './ReviewTab';
+import JlptReviewTab from './components/JlptReviewTab';
 import KanjiPracticeTab from './components/KanjiPracticeTab';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../../utils/kanjiPracticeHelper';
 
@@ -424,8 +424,9 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const searchParams = useSearchParams();
 
-  let currentTab = searchParams.get('tab') || 'vocab';
-  if (!['vocab', 'kanji', 'practice', 'review'].includes(currentTab)) {
+  const rawUrlTab = searchParams.get('tab') || 'vocab';
+  let currentTab = rawUrlTab === 'review' ? 'jlpt' : rawUrlTab;
+  if (!['vocab', 'kanji', 'practice', 'jlpt'].includes(currentTab)) {
     currentTab = 'vocab';
   }
   const grammarIndexParam = searchParams.get('grammarIndex');
@@ -445,26 +446,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     }
   }, [searchParams]);
 
-  // States cho Phân hệ Ôn tập Tổng hợp (Pha 2)
-  const [reviewLoading, setReviewLoading] = useState<boolean>(false);
-  const [reviewData, setReviewData] = useState<{
-    translations: any[];
-    dialogues: any[];
-    listenings: any[];
-    dictations: any[];
-  } | null>(null);
-  const [reviewShowKanji, setReviewShowKanji] = useState<boolean>(false); // mặc định false (chỉ hiện Kana)
-  const [reviewStep, setReviewStep] = useState<'setup' | 'test' | 'result'>('setup');
-  const [reviewQuestions, setReviewQuestions] = useState<any[]>([]);
-  const [reviewSelectedType, setReviewSelectedType] = useState<string>('translation');
-  const [reviewScore, setReviewScore] = useState<number>(0);
-  const [reviewTotal, setReviewTotal] = useState<number>(0);
-  const [reviewIndex, setReviewIndex] = useState<number>(0);
-  const [reviewAnswers, setReviewAnswers] = useState<Record<string, string>>({});
-  const [reviewGraded, setReviewGraded] = useState<Record<string, boolean>>({});
-  const [reviewFeedback, setReviewFeedback] = useState<Record<string, string>>({});
-  const [reviewTTSPlaying, setReviewTTSPlaying] = useState<boolean>(false);
-
   useEffect(() => {
     if (selectedLessonId > 50 || selectedLessonId < 1 || isNaN(selectedLessonId)) {
       router.replace('/lessons/1?tab=vocab');
@@ -480,14 +461,16 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: currentTab === 'vocab' },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: currentTab === 'kanji' },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: currentTab === 'practice' },
-    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: currentTab === 'review' }
+    { name: 'Luyện đề JLPT', id: 'jlpt', icon: '🎓', active: currentTab === 'jlpt' }
   ];
 
   useEffect(() => {
-    if (currentTab === 'flashcards' || currentTab === 'kaiwa') {
+    if (rawUrlTab === 'review') {
+      router.replace(`/lessons/${selectedLessonId}?tab=jlpt`);
+    } else if (currentTab === 'flashcards' || currentTab === 'kaiwa') {
       router.push(`/lessons/${selectedLessonId}?tab=vocab`);
     }
-  }, [currentTab, selectedLessonId, router]);
+  }, [rawUrlTab, currentTab, selectedLessonId, router]);
 
   const level = selectedLessonId <= 25 ? 'N5' : 'N4';
 
@@ -853,59 +836,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [speedrunMaxTime, setSpeedrunMaxTime] = useState<number>(10);
 
-  const playDialogueAudio = async (linesInput: any) => {
-
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
-
-    window.speechSynthesis.cancel();
-
-    setReviewTTSPlaying(true);
-
-    let linesToPlay: { speaker: string; text: string }[] = [];
-
-    if (Array.isArray(linesInput)) {
-      linesToPlay = linesInput.map(l => ({
-        speaker: l.speaker || 'A',
-        text: (l.text || l.text_kana || l.text_kanji || '').replace(/^[AB][:\s：]\s*/i, '').trim()
-      }));
-    } else if (typeof linesInput === 'string') {
-      const parts = linesInput.split(/(?=[AB][:\s：])/i);
-      linesToPlay = parts.map(p => {
-        const m = p.match(/^([AB])[:\s：]\s*(.*)/i);
-        if (m) {
-          return { speaker: m[1].toUpperCase(), text: m[2].trim() };
-        }
-        return { speaker: 'A', text: p.replace(/^[AB][:\s：]\s*/i, '').trim() };
-      }).filter(l => l.text.length > 0);
-    }
-
-    const voices = window.speechSynthesis.getVoices();
-    const jaVoices = voices.filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
-    const voiceA = jaVoices[0] || null;
-    const voiceB = jaVoices[1] || jaVoices[0] || null;
-
-    for (let i = 0; i < linesToPlay.length; i++) {
-      const line = linesToPlay[i];
-      const cleanText = line.text.replace(/^[AB][:\s：]\s*/i, '').trim();
-      if (!cleanText) continue;
-
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.lang = 'ja-JP';
-      utterance.voice = line.speaker === 'A' ? voiceA : voiceB;
-
-      await new Promise((resolve) => {
-        utterance.onend = () => {
-          setTimeout(resolve, 800); // nghỉ 0.8s
-        };
-        utterance.onerror = () => {
-          resolve(null);
-        };
-        window.speechSynthesis.speak(utterance);
-      });
-    }
-    setReviewTTSPlaying(false);
-  };
-
   const [speedrunDirection, setSpeedrunDirection] = useState<'ja-to-vi' | 'vi-to-ja' | 'listen-to-select'>('ja-to-vi');
 
   const [speedrunStreak, setSpeedrunStreak] = useState<number>(0);
@@ -1156,167 +1086,6 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     }
 
   };
-
-  // Fetch review data for Review Tab
-  const loadReviewData = useCallback(async () => {
-    setReviewLoading(true);
-    try {
-      const data = await api.get(`/api/user/lessons/${selectedLessonId}/review?_t=${Date.now()}`);
-      if (data) {
-        setReviewData(data);
-      }
-    } catch (err) {
-      console.error('Failed to load review exercises:', err);
-    } finally {
-      setReviewLoading(false);
-    }
-  }, [selectedLessonId]);
-
-  const startReviewTest = () => {
-    if (reviewData) {
-      // Gather all items from the 4 lists
-      const pool: any[] = [];
-      if (reviewSelectedType === 'translation' && Array.isArray(reviewData.translations)) {
-        reviewData.translations.forEach((item: any) => {
-          pool.push({ type: 'translation', originalData: item, key: `trans_${item.id || Math.random()}` });
-        });
-      } else if (reviewSelectedType === 'dialogue' && Array.isArray(reviewData.dialogues)) {
-        reviewData.dialogues.forEach((item: any) => {
-          pool.push({ type: 'dialogue', originalData: item, key: `diag_${item.id || Math.random()}` });
-        });
-      } else if (reviewSelectedType === 'listening' && Array.isArray(reviewData.listenings)) {
-        reviewData.listenings.forEach((item: any) => {
-          pool.push({ type: 'listening', originalData: item, key: `list_${item.id || Math.random()}` });
-        });
-      } else if (reviewSelectedType === 'dictation' && Array.isArray(reviewData.dictations)) {
-        reviewData.dictations.forEach((item: any) => {
-          pool.push({ type: 'dictation', originalData: item, key: `dict_${item.id || Math.random()}` });
-        });
-      }
-
-      // Shuffle pool
-      const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
-
-      // Select up to 10 questions
-      const selected = shuffledPool.slice(0, 10);
-
-      // Calculate total points
-      let totalPoints = 0;
-      selected.forEach((q) => {
-        if (q.type === 'listening') {
-          totalPoints += q.originalData.questions?.length || 0;
-        } else {
-          totalPoints += 1;
-        }
-      });
-
-      setReviewQuestions(selected);
-      setReviewStep('test');
-      setReviewIndex(0);
-      setReviewAnswers({});
-      setReviewGraded({});
-      setReviewFeedback({});
-      setReviewScore(0);
-      setReviewTotal(totalPoints);
-    } else {
-      loadReviewData();
-    }
-  };
-
-  const gradeAllQuestions = () => {
-    let score = 0;
-    const graded: Record<string, boolean> = {};
-    const feedback: Record<string, string> = {};
-
-    reviewQuestions.forEach((q) => {
-      if (q.type === 'translation') {
-        const key = q.key;
-        const userAns = (reviewAnswers[key] || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？。、\s]/g, '');
-        let isCorrect = false;
-        const correctAnswersList = q.originalData.correct_answers || q.originalData.answers || [];
-        correctAnswersList.forEach((ans: string) => {
-          const cleanAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
-          if (userAns === cleanAns || (cleanAns.includes(userAns) && userAns.length > 3)) {
-            isCorrect = true;
-          }
-        });
-        graded[key] = isCorrect;
-        if (isCorrect) score += 1;
-        feedback[key] = `Đáp án đúng: ${correctAnswersList.join(' / ')}`;
-      }
-      
-      else if (q.type === 'dialogue') {
-        const key1 = `${q.key}_b1`;
-        const key2 = `${q.key}_b2`;
-        const b1Ans = reviewAnswers[key1];
-        const b2Ans = reviewAnswers[key2];
-
-        const b1Correct = q.originalData.blanks.blank1.correct === b1Ans;
-        const b2Correct = q.originalData.blanks.blank2 ? q.originalData.blanks.blank2.correct === b2Ans : true;
-
-        graded[key1] = b1Correct;
-        graded[key2] = b2Correct;
-
-        if (b1Correct && b2Correct) {
-          score += 1;
-        } else if (b1Correct || b2Correct) {
-          score += 0.5;
-        }
-        feedback[q.key] = q.originalData.blanks.blank2
-          ? `Đáp án đúng: [1] ${q.originalData.blanks.blank1.correct} | [2] ${q.originalData.blanks.blank2.correct}`
-          : `Đáp án đúng: ${q.originalData.blanks.blank1.correct}`;
-      }
-      
-      else if (q.type === 'listening') {
-        const keyPrefix = q.key;
-        q.originalData.questions.forEach((subQ: any, subIdx: number) => {
-          const ansKey = `${keyPrefix}_q${subIdx}`;
-          const isCorrect = reviewAnswers[ansKey] === (subQ.corr || subQ.correct);
-          graded[ansKey] = isCorrect;
-          if (isCorrect) score += 1;
-        });
-        graded[`${keyPrefix}_all`] = true;
-      }
-      
-      else if (q.type === 'dictation') {
-        const key = q.key;
-        const userAnsRaw = (reviewAnswers[key] || '').trim();
-        const cleanUserVn = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？。、\s]/g, '');
-        let isCorrect = false;
-        const correctJp = q.originalData.question_audio;
-        const cleanJp = correctJp.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
-        const cleanUserJp = userAnsRaw.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
-        if (cleanUserJp === cleanJp) {
-          isCorrect = true;
-        }
-
-        const vnAnswers = q.originalData.vietnamese_answers || [];
-        vnAnswers.forEach((ans: string) => {
-          const cleanVnAns = ans.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?？.、\s]/g, '');
-          if (cleanUserVn === cleanVnAns || calculateAccuracy(userAnsRaw, ans) >= 85) {
-            isCorrect = true;
-          }
-        });
-
-        graded[key] = isCorrect;
-        if (isCorrect) score += 1;
-        feedback[key] = `Đáp án đúng: ${correctJp} ${q.originalData.vietnamese_meaning ? `| Ý nghĩa: ${q.originalData.vietnamese_meaning}` : ''}`;
-      }
-    });
-
-    setReviewScore(score);
-    setReviewGraded(graded);
-    setReviewFeedback(feedback);
-    setReviewStep('result');
-  };
-
-
-  useEffect(() => {
-    if (currentTab === 'review') {
-      loadReviewData();
-      setReviewStep('setup');
-    }
-  }, [currentTab, loadReviewData]);
 
   // Fetch initial lessons
 
@@ -2088,8 +1857,10 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     } else if (currentTab === 'practice') {
       loadVocabData();
       loadKanjiData();
-    } else if (currentTab === 'review') {
-      setLoading(false);
+    } else if (currentTab === 'jlpt') {
+      loadVocabData();
+      loadKanjiData();
+      loadGrammarData();
     }
   }, [currentTab, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData]);
 
@@ -5772,7 +5543,7 @@ const renderInteractivePractice = () => {
               {currentTab === 'flashcards' && 'THẺ NHỚ'}
               {currentTab === 'kaiwa' && 'LUYỆN NÓI'}
               {currentTab === 'practice' && 'LUYỆN TẬP'}
-              {currentTab === 'review' && 'ÔN TẬP TỔNG HỢP'}
+              {currentTab === 'jlpt' && 'LUYỆN ĐỀ JLPT'}
               <span className="text-blue-600 dark:text-blue-400 ml-2">{lessonTitle}</span>
             </h1>
 
@@ -7136,35 +6907,15 @@ const renderInteractivePractice = () => {
 
             )}
 
-            {currentTab === 'review' && (
-              <ReviewTab
-                lessonTitle={lessonTitle}
-                reviewData={reviewData}
-                reviewLoading={reviewLoading}
-                reviewStep={reviewStep}
-                setReviewStep={setReviewStep}
-                reviewQuestions={reviewQuestions}
-                setReviewQuestions={setReviewQuestions}
-                reviewAnswers={reviewAnswers}
-                setReviewAnswers={setReviewAnswers}
-                reviewGraded={reviewGraded}
-                setReviewGraded={setReviewGraded}
-                reviewFeedback={reviewFeedback}
-                setReviewFeedback={setReviewFeedback}
-                reviewScore={reviewScore}
-                setReviewScore={setReviewScore}
-                reviewTotal={reviewTotal}
-                setReviewTotal={setReviewTotal}
-                reviewShowKanji={reviewShowKanji}
-                setReviewShowKanji={setReviewShowKanji}
-                loadReviewData={loadReviewData}
-                playAudio={playAudio}
-                playDialogueAudio={playDialogueAudio}
-                renderDiff={renderDiff}
+            {currentTab === 'jlpt' && (
+              <JlptReviewTab
                 selectedLessonId={selectedLessonId}
-                calculateAccuracy={calculateAccuracy}
+                lessonTitle={lessonTitle}
+                vocabItems={vocabItems}
+                kanjiItems={kanjiItems}
+                grammarItems={grammarItems}
               />
-            )}            {!['vocab', 'kanji', 'practice', 'review'].includes(currentTab) && (
+            )}            {!['vocab', 'kanji', 'practice', 'jlpt'].includes(currentTab) && (
 
               <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500 space-y-4 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
 
