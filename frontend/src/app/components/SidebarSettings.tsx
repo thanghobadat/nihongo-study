@@ -117,6 +117,13 @@ export default function SidebarSettings() {
               <span className="text-sm">📝</span>
               <span>Ôn tập tổng hợp</span>
             </button>
+            <button
+              onClick={() => handleNavigate('/files')}
+              className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
+            >
+              <span className="text-sm">📁</span>
+              <span>Quản lý Tệp tin (Files)</span>
+            </button>
           </div>
 
           <div className="border-t border-slate-100 dark:border-slate-900" />

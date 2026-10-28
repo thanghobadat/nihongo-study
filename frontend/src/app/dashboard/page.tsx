@@ -799,7 +799,8 @@ export default function UserDashboard() {
     { name: 'Từ vựng', id: 'vocab', icon: '📚', active: false },
     { name: 'Chữ Hán (Kanji)', id: 'kanji', icon: '🉐', active: false },
     { name: 'Ôn tập từ vựng', id: 'practice', icon: '✏️', active: false },
-    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: false }
+    { name: 'Ôn tập tổng hợp', id: 'review', icon: '📝', active: false },
+    { name: 'Quản lý tệp tin', id: 'files', icon: '📁', active: false }
   ];
 
   return (
@@ -846,6 +847,7 @@ export default function UserDashboard() {
                 onClick={() => {
                   setIsSidebarOpen(false);
                   if (item.id === 'roadmap') router.push('/roadmap');
+                  else if (item.id === 'files') router.push('/files');
                   else if (item.id !== 'dashboard') router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
                 }}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
