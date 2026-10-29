@@ -2,144 +2,243 @@ const fs = require('fs');
 const path = require('path');
 
 const BACKEND_LESSON_DATA_DIR = path.join(__dirname, '../data/jlpt_lessons');
-const BACKEND_GLOBAL_DATA_DIR = path.join(__dirname, '../data/jlpt_global');
 const WORKSPACE_DOCS_DIR = path.join(__dirname, '../../../../tai_lieu/bai_tap');
 
-// Lightweight mtime-aware cache so newly dropped/updated JSON files on disk apply immediately
+// LRU-bounded parsed bank cache (protects Render Free 512MB RAM when 25-50 lessons are active)
+const MAX_CACHED_BANKS = 15;
 const bankCache = new Map();
 
-/**
- * Pick the existing file with the most recent modification time (mtimeMs)
- * among candidate paths so dropping/updating 50 JSON files in tai_lieu/bai_tap/
- * takes effect immediately without manual copying or server restarts.
- */
-function pickNewestExistingPath(candidates) {
-  let bestPath = null;
-  let bestMtime = -1;
+// Ultra-lightweight summary cache (< 5 KB for all 50 lessons) for instant /available scans
+const metaSummaryCache = new Map();
 
-  for (const filePath of candidates) {
+/**
+ * Put parsed bank in LRU cache, evicting least-recently-used entry when exceeding MAX_CACHED_BANKS.
+ */
+function setBankCacheLRU(cacheKey, signature, data) {
+  if (bankCache.has(cacheKey)) {
+    bankCache.delete(cacheKey);
+  } else if (bankCache.size >= MAX_CACHED_BANKS) {
+    const oldestKey = bankCache.keys().next().value;
+    if (oldestKey !== undefined) {
+      bankCache.delete(oldestKey);
+    }
+  }
+  bankCache.set(cacheKey, { signature, data });
+}
+
+/**
+ * Resolve unified file path(s) for a lesson's single shared JLPT question bank (1..50).
+ * Used identically by BOTH per-lesson JLPT practice (/lessons/[id]?tab=jlpt)
+ * AND multi-lesson global JLPT practice (/knowledge?tab=jlpt_exam).
+ *
+ * Priority:
+ * 1. If workspace tai_lieu/bai_tap/ has file(s) for lessonId whose newest mtime >= backend lesson_{id}.json:
+ *    - If bo_cau_hoi_bai{id}.json is newest, use that single unified file.
+ *    - If legacy split files (_full_lesson / _full_global / _full) were newly pasted into tai_lieu/bai_tap/,
+ *      return all newer split files so loadUnifiedBank merges them seamlessly on the fly!
+ * 2. Otherwise use website/backend/src/data/jlpt_lessons/lesson_{id}.json (Cloud/Render deployment path).
+ */
+function resolveUnifiedBankPaths(lessonId) {
+  const id = parseInt(lessonId, 10);
+  if (isNaN(id) || id < 1 || id > 50) return [];
+
+  const canonicalDocPath = path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}.json`);
+  const backendPath = path.join(BACKEND_LESSON_DATA_DIR, `lesson_${id}.json`);
+
+  const legacyDocCandidates = [
+    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_full.json`),
+    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_full_lesson.json`),
+    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_lesson.json`),
+    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_full_global.json`),
+    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_global.json`)
+  ];
+
+  const getMtime = (p) => {
     try {
-      if (fs.existsSync(filePath)) {
-        const stat = fs.statSync(filePath);
-        if (stat.mtimeMs > bestMtime) {
-          bestMtime = stat.mtimeMs;
-          bestPath = filePath;
-        }
-      }
+      return fs.existsSync(p) ? fs.statSync(p).mtimeMs : -1;
     } catch {
-      // Ignore inaccessible candidate
+      return -1;
+    }
+  };
+
+  const canonicalDocMtime = getMtime(canonicalDocPath);
+  const backendMtime = getMtime(backendPath);
+
+  const existingLegacyDocs = [];
+  let newestLegacyMtime = -1;
+  for (const p of legacyDocCandidates) {
+    const mt = getMtime(p);
+    if (mt > 0) {
+      existingLegacyDocs.push({ path: p, mtimeMs: mt });
+      if (mt > newestLegacyMtime) newestLegacyMtime = mt;
     }
   }
 
-  return bestPath;
+  // If newly dropped split files in tai_lieu/bai_tap are newer than canonical & backend files, auto-merge them
+  if (newestLegacyMtime > canonicalDocMtime && newestLegacyMtime > backendMtime) {
+    return existingLegacyDocs.map((x) => x.path);
+  }
+
+  if (canonicalDocMtime >= backendMtime && canonicalDocMtime > 0) {
+    return [canonicalDocPath];
+  }
+
+  if (backendMtime > 0) {
+    return [backendPath];
+  }
+
+  if (existingLegacyDocs.length > 0) {
+    return existingLegacyDocs.map((x) => x.path);
+  }
+
+  return [];
 }
 
 /**
- * Resolve file path for a single lesson's IN-LESSON JLPT question bank (1..50).
- * Strictly excludes *_global.json files so lesson bank and global bank never mix.
+ * Merge 1 or more JSON bank objects of the same lesson into a single unified bank object.
  */
-function resolveLessonBankPath(lessonId) {
+function mergeParsedLessonBanks(lessonId, parsedBanks) {
+  if (!parsedBanks || parsedBanks.length === 0) return null;
+  if (parsedBanks.length === 1) {
+    const single = parsedBanks[0];
+    return {
+      ...single,
+      lesson_id: single.lesson_id || lessonId,
+      bank: 'unified'
+    };
+  }
+
+  const base = parsedBanks[0];
+  const mondaiMap = new Map();
+  const mergedBlueprint = {};
+  const passageMap = new Map();
+  const questionMap = new Map();
+
+  for (const data of parsedBanks) {
+    for (const m of data.mondai || []) {
+      if (!mondaiMap.has(m.key)) mondaiMap.set(m.key, m);
+    }
+    for (const [k, v] of Object.entries(data.blueprint || {})) {
+      if (typeof v === 'number') {
+        mergedBlueprint[k] = Math.max(mergedBlueprint[k] || 0, v);
+      }
+    }
+    for (const p of data.passages || []) {
+      if (!passageMap.has(p.id)) passageMap.set(p.id, p);
+    }
+    for (const q of data.questions || []) {
+      if (!questionMap.has(q.id)) questionMap.set(q.id, q);
+    }
+  }
+
+  return {
+    lesson_id: lessonId,
+    level: base.level || (lessonId <= 25 ? 'N5' : 'N4'),
+    bank: 'unified',
+    mode: base.mode || 'DAY_DU',
+    sections: base.sections || [],
+    mondai: Array.from(mondaiMap.values()),
+    blueprint: mergedBlueprint,
+    passages: Array.from(passageMap.values()),
+    questions: Array.from(questionMap.values())
+  };
+}
+
+/**
+ * Load and parse a lesson's UNIFIED JLPT bank JSON (shared single source of truth).
+ */
+function loadUnifiedBank(lessonId) {
   const id = parseInt(lessonId, 10);
   if (isNaN(id) || id < 1 || id > 50) return null;
 
-  const candidates = [
-    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_full_lesson.json`),
-    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_lesson.json`),
-    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_full.json`),
-    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}.json`),
-    path.join(BACKEND_LESSON_DATA_DIR, `lesson_${id}.json`)
-  ];
-
-  return pickNewestExistingPath(candidates);
-}
-
-/**
- * Resolve file path for a lesson's GLOBAL / CROSS-LESSON JLPT question bank (1..50),
- * used exclusively on the Global Review Hub (/knowledge).
- */
-function resolveGlobalBankPath(lessonId) {
-  const id = parseInt(lessonId, 10);
-  if (isNaN(id) || id < 1 || id > 50) return null;
-
-  const candidates = [
-    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_full_global.json`),
-    path.join(WORKSPACE_DOCS_DIR, `bo_cau_hoi_bai${id}_global.json`),
-    path.join(BACKEND_GLOBAL_DATA_DIR, `global_${id}.json`)
-  ];
-
-  return pickNewestExistingPath(candidates);
-}
-
-/**
- * Generic mtime-cached JSON loader.
- */
-function loadBankFromPath(filePath, expectedBankType) {
-  if (!filePath) return null;
+  const paths = resolveUnifiedBankPaths(id);
+  if (paths.length === 0) return null;
 
   try {
-    const stat = fs.statSync(filePath);
-    const cached = bankCache.get(filePath);
-    if (cached && cached.mtimeMs === stat.mtimeMs) {
+    const sigParts = [];
+    for (const p of paths) {
+      const st = fs.statSync(p);
+      sigParts.push(`${p}:${st.size}:${Math.floor(st.mtimeMs)}`);
+    }
+    const signature = sigParts.join('|');
+    const cacheKey = `lesson_${id}`;
+
+    const cached = bankCache.get(cacheKey);
+    if (cached && cached.signature === signature) {
+      // Refresh LRU position
+      setBankCacheLRU(cacheKey, signature, cached.data);
       return cached.data;
     }
 
-    const raw = fs.readFileSync(filePath, 'utf8');
-    const parsed = JSON.parse(raw);
+    const parsedBanks = paths.map((p) => JSON.parse(fs.readFileSync(p, 'utf8')));
+    const unified = mergeParsedLessonBanks(id, parsedBanks);
+    if (!unified) return null;
 
-    // Guard against accidental cross-bank file naming (e.g. bo_cau_hoi_baiX_full.json having bank: "global")
-    if (expectedBankType === 'lesson' && parsed && parsed.bank === 'global') {
-      return null;
-    }
-    if (expectedBankType === 'global' && parsed && parsed.bank === 'lesson') {
-      return null;
-    }
+    setBankCacheLRU(cacheKey, signature, unified);
+    metaSummaryCache.set(id, {
+      signature,
+      summary: {
+        lesson_id: id,
+        level: unified.level || (id <= 25 ? 'N5' : 'N4'),
+        totalQuestions: Array.isArray(unified.questions) ? unified.questions.length : 0,
+        totalPassages: Array.isArray(unified.passages) ? unified.passages.length : 0
+      }
+    });
 
-    bankCache.set(filePath, { mtimeMs: stat.mtimeMs, data: parsed });
-    return parsed;
+    return unified;
   } catch (err) {
-    console.error(`[JLPT Service] Failed to read JLPT bank at ${filePath}:`, err.message);
+    console.error(`[JLPT Service] Failed to read unified JLPT bank for lesson ${id}:`, err.message);
+    return null;
+  }
+}
+
+// Backward-compatible aliases pointing to the exact same unified loader
+const loadLessonBank = loadUnifiedBank;
+const loadGlobalBank = loadUnifiedBank;
+
+/**
+ * Get lightweight summary stat for a single lesson without evicting active LRU banks unnecessarily.
+ */
+function getLessonBankSummary(lessonId) {
+  const id = parseInt(lessonId, 10);
+  if (isNaN(id) || id < 1 || id > 50) return null;
+
+  const paths = resolveUnifiedBankPaths(id);
+  if (paths.length === 0) return null;
+
+  try {
+    const sigParts = [];
+    for (const p of paths) {
+      const st = fs.statSync(p);
+      sigParts.push(`${p}:${st.size}:${Math.floor(st.mtimeMs)}`);
+    }
+    const signature = sigParts.join('|');
+
+    const cachedSummary = metaSummaryCache.get(id);
+    if (cachedSummary && cachedSummary.signature === signature) {
+      return cachedSummary.summary;
+    }
+
+    const bank = loadUnifiedBank(id);
+    if (!bank) return null;
+    return metaSummaryCache.get(id)?.summary || {
+      lesson_id: id,
+      level: bank.level || (id <= 25 ? 'N5' : 'N4'),
+      totalQuestions: Array.isArray(bank.questions) ? bank.questions.length : 0,
+      totalPassages: Array.isArray(bank.passages) ? bank.passages.length : 0
+    };
+  } catch {
     return null;
   }
 }
 
 /**
- * Load and parse a single lesson's IN-LESSON JLPT bank JSON.
- */
-function loadLessonBank(lessonId) {
-  const filePath = resolveLessonBankPath(lessonId);
-  const parsed = loadBankFromPath(filePath, 'lesson');
-  if (parsed) return parsed;
-
-  // Fallback to backend lesson folder if a generic filename had mismatched bank tag
-  const fallbackPath = path.join(BACKEND_LESSON_DATA_DIR, `lesson_${parseInt(lessonId, 10)}.json`);
-  if (fallbackPath !== filePath && fs.existsSync(fallbackPath)) {
-    return loadBankFromPath(fallbackPath, 'lesson');
-  }
-  return null;
-}
-
-/**
- * Load and parse a single lesson's GLOBAL JLPT bank JSON.
- */
-function loadGlobalBank(lessonId) {
-  const filePath = resolveGlobalBankPath(lessonId);
-  const parsed = loadBankFromPath(filePath, 'global');
-  if (parsed) return parsed;
-
-  const fallbackPath = path.join(BACKEND_GLOBAL_DATA_DIR, `global_${parseInt(lessonId, 10)}.json`);
-  if (fallbackPath !== filePath && fs.existsSync(fallbackPath)) {
-    return loadBankFromPath(fallbackPath, 'global');
-  }
-  return null;
-}
-
-/**
- * Scan lessons 1..50 to discover all lessons that currently have an IN-LESSON JLPT bank JSON.
+ * Scan lessons 1..50 to discover all lessons that currently have a unified JLPT bank JSON.
  */
 function getAvailableJlptLessons() {
   const availableLessonIds = [];
   for (let id = 1; id <= 50; id++) {
-    if (loadLessonBank(id)) {
+    if (getLessonBankSummary(id)) {
       availableLessonIds.push(id);
     }
   }
@@ -148,24 +247,17 @@ function getAvailableJlptLessons() {
 }
 
 /**
- * Scan lessons 1..50 to discover all lessons that currently have a GLOBAL JLPT bank JSON.
- * Returns per-lesson question counts so the /knowledge lesson picker can display rich badges.
+ * Scan lessons 1..50 for the Global Review Hub (/knowledge?tab=jlpt_exam) from the SAME unified source.
  */
 function getAvailableGlobalJlptLessons() {
   const availableLessonIds = [];
   const lessonStats = {};
 
   for (let id = 1; id <= 50; id++) {
-    const bank = loadGlobalBank(id);
-    if (bank) {
+    const summary = getLessonBankSummary(id);
+    if (summary) {
       availableLessonIds.push(id);
-      const qCount = Array.isArray(bank.questions) ? bank.questions.length : 0;
-      lessonStats[id] = {
-        lesson_id: id,
-        level: bank.level || (id <= 25 ? 'N5' : 'N4'),
-        totalQuestions: qCount,
-        totalPassages: Array.isArray(bank.passages) ? bank.passages.length : 0
-      };
+      lessonStats[id] = summary;
     }
   }
 
@@ -440,7 +532,7 @@ function buildBankMetadata(bankData) {
 }
 
 /**
- * Compute aggregated structured metadata across MULTIPLE selected lessons' GLOBAL banks.
+ * Compute aggregated structured metadata across MULTIPLE selected lessons from the unified banks.
  */
 function buildGlobalBanksMetadata(loadedBanks) {
   if (!Array.isArray(loadedBanks) || loadedBanks.length === 0) return null;
@@ -532,10 +624,10 @@ function buildGlobalBanksMetadata(loadedBanks) {
 }
 
 /**
- * Build a shuffled IN-LESSON question set + passages dictionary for any of the 4 cards.
+ * Build a shuffled IN-LESSON question set + passages dictionary from the unified bank.
  */
 function buildJlptTestSet(lessonId, options = {}) {
-  const bankData = loadLessonBank(lessonId);
+  const bankData = loadUnifiedBank(lessonId);
   if (!bankData) return null;
 
   const parsedLessonId = parseInt(lessonId, 10) || bankData.lesson_id || 1;
@@ -652,7 +744,7 @@ function parseLessonIdList(rawLessons) {
 }
 
 /**
- * Build a multi-lesson GLOBAL JLPT question set + passages dictionary from _global banks
+ * Build a multi-lesson GLOBAL JLPT question set + passages dictionary from the SAME unified banks
  * across all user-selected lessons (1..50).
  */
 function buildGlobalJlptTestSet(rawLessons, options = {}) {
@@ -663,11 +755,12 @@ function buildGlobalJlptTestSet(rawLessons, options = {}) {
       ? options.ids.split(',').map((s) => s.trim()).filter(Boolean)
       : [];
 
-  // If retrying wrong question IDs (e.g. "L12-global-KY-003"), auto-include their source lessons
+  // If retrying wrong question IDs (e.g. "L12-lesson-KY-003", "L12-global-KY-003", "L12-KY-003"),
+  // automatically include their source lessons
   const targetLessonSet = new Set(requestedLessonIds);
   if (options.card === 'custom_ids' || requestedIds.length > 0) {
     for (const qId of requestedIds) {
-      const match = /^L(\d+)-global-/i.exec(qId);
+      const match = /^L(\d+)-/i.exec(qId);
       if (match) {
         const parsedId = parseInt(match[1], 10);
         if (parsedId >= 1 && parsedId <= 50) targetLessonSet.add(parsedId);
@@ -680,7 +773,7 @@ function buildGlobalJlptTestSet(rawLessons, options = {}) {
   const missingLessonIds = [];
 
   for (const id of candidateIds) {
-    const bankData = loadGlobalBank(id);
+    const bankData = loadUnifiedBank(id);
     if (bankData) {
       loadedBanks.push({ lessonId: id, bankData });
     } else {
@@ -804,6 +897,7 @@ function buildGlobalJlptTestSet(rawLessons, options = {}) {
 module.exports = {
   getAvailableJlptLessons,
   getAvailableGlobalJlptLessons,
+  loadUnifiedBank,
   loadLessonBank,
   loadGlobalBank,
   buildBankMetadata,

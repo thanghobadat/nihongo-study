@@ -1043,7 +1043,7 @@ export default function JlptReviewTab({
               Ngân hàng Luyện đề JLPT cho {lessonTitle} đang được cập nhật
             </h3>
             <p className="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
-              Khi tệp <code className="text-indigo-300 bg-slate-950 px-1.5 py-0.5 rounded">bo_cau_hoi_bai{selectedLessonId}_full_lesson.json</code> được bổ sung, hệ thống sẽ tự động kích hoạt đủ 3 phần thi và Đề tổng hợp chuẩn JLPT cho bài học này.
+              Khi tệp <code className="text-indigo-300 bg-slate-950 px-1.5 py-0.5 rounded">bo_cau_hoi_bai{selectedLessonId}.json</code> được bổ sung, hệ thống sẽ tự động kích hoạt đủ 3 phần thi và Đề tổng hợp chuẩn JLPT cho bài học này.
             </p>
           </div>
 

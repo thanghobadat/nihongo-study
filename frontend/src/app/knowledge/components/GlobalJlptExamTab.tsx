@@ -1264,11 +1264,11 @@ export default function GlobalJlptExamTab({
               <span>🏆 Luyện Đề Thi JLPT Tổng Hợp Liên Bài</span>
             </h2>
             <span className="px-2.5 py-0.5 text-[11px] font-black rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              Nguồn đề _global • Chấm ngay từng câu
+              Kho đề JLPT chung • Chấm ngay từng câu
             </span>
           </div>
           <p className="text-slate-400 text-xs">
-            Tích chọn các bài muốn ôn thi (Bài 1 – 50) • Hệ thống tự động rút câu hỏi cân bằng giữa các bài từ kho <code className="text-indigo-300">_global</code> đúng tỷ lệ đề thi JLPT thật
+            Tích chọn các bài muốn ôn thi (Bài 1 – 50) • Hệ thống tự động rút câu hỏi cân bằng giữa các bài từ kho đề JLPT thống nhất đúng tỷ lệ đề thi thật
           </p>
         </div>
 
@@ -1352,7 +1352,7 @@ export default function GlobalJlptExamTab({
                     1. Chọn bài học tham gia đề thi JLPT tổng hợp
                   </h3>
                   <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                    ✓ Đã có {availableLessonIds.length}/50 tệp _global ({totalGlobalQuestionsAvailable} câu)
+                    ✓ Đã có {availableLessonIds.length}/50 bài ({totalGlobalQuestionsAvailable.toLocaleString()} câu)
                   </span>
                 </div>
                 <p className="text-xs text-slate-400">
@@ -1404,7 +1404,7 @@ export default function GlobalJlptExamTab({
                   type="button"
                   onClick={refreshAvailableGlobalBanks}
                   disabled={availLoading}
-                  title="Quét lại thư mục tai_lieu/bai_tap để nhận ngay các file _global mới cập nhật"
+                  title="Quét lại thư mục tai_lieu/bai_tap để nhận ngay các file bộ đề JLPT mới cập nhật"
                   className="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-[11px] font-bold cursor-pointer flex items-center gap-1"
                 >
                   <span className={availLoading ? 'animate-spin' : ''}>🔄</span>
@@ -1485,8 +1485,8 @@ export default function GlobalJlptExamTab({
                         key={lId}
                         title={
                           hasGlobalBank
-                            ? `Bài ${lId} (${stat.level}): Đã sẵn sàng ${stat.totalQuestions} câu hỏi _global`
-                            : `Bài ${lId}: Đang chờ cập nhật tệp bo_cau_hoi_bai${lId}_full_global.json`
+                            ? `Bài ${lId} (${stat.level}): Đã sẵn sàng ${stat.totalQuestions} câu hỏi JLPT`
+                            : `Bài ${lId}: Đang chờ cập nhật tệp bo_cau_hoi_bai${lId}.json`
                         }
                         className={`flex items-center justify-between gap-1.5 px-2.5 py-2 rounded-xl border text-xs font-bold cursor-pointer transition-all select-none ${
                           isChecked
@@ -1529,10 +1529,10 @@ export default function GlobalJlptExamTab({
                       <strong className="text-emerald-300">
                         {formatLessonRangeLabel(effectiveLessonIds)}
                       </strong>{' '}
-                      (đã có tệp <code className="text-indigo-300">_global</code> với{' '}
-                      <strong>{bankStats.totalBankQuestions} câu</strong>).{' '}
+                      (đã có kho đề với{' '}
+                      <strong>{bankStats.totalBankQuestions.toLocaleString()} câu</strong>).{' '}
                       {missingSelectedIds.length} bài đang chờ cập nhật tệp{' '}
-                      <code>_full_global.json</code> sẽ tự động được gộp vào ngay khi bạn chép thêm tệp.
+                      <code>bo_cau_hoi_baiX.json</code> sẽ tự động được gộp vào ngay khi bạn chép thêm tệp.
                     </div>
                   </div>
                 )}
@@ -1545,9 +1545,9 @@ export default function GlobalJlptExamTab({
             <div className="flex-1 space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold text-slate-200 flex items-center gap-1.5 flex-wrap">
-                  <span>🏆 Độ phủ kho đề JLPT Tổng Hợp (_global):</span>
+                  <span>🏆 Độ phủ kho đề JLPT Tổng Hợp:</span>
                   <span className="text-emerald-400 font-black">
-                    {masteredIds.length} / {totalGlobalQuestionsAvailable} câu đã làm đúng ({masteryPercent}%)
+                    {masteredIds.length} / {totalGlobalQuestionsAvailable.toLocaleString()} câu đã làm đúng ({masteryPercent}%)
                   </span>
                 </span>
               </div>
@@ -1577,7 +1577,7 @@ export default function GlobalJlptExamTab({
               <span className="animate-spin text-base">⏳</span>
               <span>
                 {drawLoading
-                  ? 'Đang rút đề JLPT cân bằng từ kho _global của các bài đã chọn...'
+                  ? 'Đang rút đề JLPT cân bằng từ kho đề chung của các bài đã chọn...'
                   : 'Đang tổng hợp cấu trúc câu hỏi từ các bài đã chọn...'}
               </span>
             </div>
@@ -1588,10 +1588,10 @@ export default function GlobalJlptExamTab({
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center space-y-4 shadow-xl text-white">
               <div className="text-4xl">📚</div>
               <h4 className="text-lg font-black text-white">
-                Chưa có bài học nào có dữ liệu <code className="text-indigo-300">_global</code> trong danh sách đang tích chọn
+                Chưa có bài học nào có dữ liệu đề JLPT trong danh sách đang tích chọn
               </h4>
               <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">
-                Hãy tích chọn ít nhất 1 bài học có dấu <strong className="text-emerald-400">✓</strong> ở bảng trên để hệ thống tổng hợp đề thi JLPT. Hiện tại các bài đã sẵn sàng đề <code className="text-indigo-300">_global</code> gồm:{' '}
+                Hãy tích chọn ít nhất 1 bài học có dấu <strong className="text-emerald-400">✓</strong> ở bảng trên để hệ thống tổng hợp đề thi JLPT. Hiện tại các bài đã sẵn sàng kho đề gồm:{' '}
                 <strong className="text-white">
                   {availableLessonIds.length > 0
                     ? formatLessonRangeLabel(availableLessonIds)
@@ -1608,7 +1608,7 @@ export default function GlobalJlptExamTab({
                   }}
                   className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-500 hover:to-emerald-500 text-white text-xs font-black shadow-lg cursor-pointer active:scale-95"
                 >
-                  ⚡ Chọn ngay tất cả bài đã có đề _global ({availableLessonIds.length} bài)
+                  ⚡ Chọn ngay tất cả bài đã có đề ({availableLessonIds.length} bài)
                 </button>
               )}
             </div>
