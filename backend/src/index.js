@@ -42,9 +42,17 @@ const isProd = process.env.NODE_ENV === 'production';
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: isProd ? 1500 : 10000,
+  skip: (req) => Boolean(req.originalUrl && req.originalUrl.startsWith('/api/files')),
   message: { error: 'Too many requests from this IP, please try again after 15 minutes.' }
 });
 app.use('/api/', limiter);
+
+// Dedicated high-capacity rate limiter for chunked batch file uploads (/api/files)
+const filesLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20000,
+  message: { error: 'Too many file upload requests from this IP, please try again after a few minutes.' }
+});
 
 // Root Route
 app.get('/', (req, res) => {
@@ -70,7 +78,7 @@ app.use('/api/user', require('./routes/user'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/stash', require('./routes/stash'));
 app.use('/api/ai', require('./routes/ai'));
-app.use('/api/files', require('./routes/files'));
+app.use('/api/files', filesLimiter, require('./routes/files'));
 
 
 // Global Error Handler
@@ -81,7 +89,7 @@ app.use((err, req, res, next) => {
 
 // Avoid port binding issue during tests
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`Backend server is running on port ${PORT}`);
     
     // Tự động đồng bộ hóa dữ liệu lên Supabase khi khởi chạy
@@ -102,6 +110,11 @@ if (process.env.NODE_ENV !== 'test') {
       console.warn('⚠️ Failed to start notification scheduler:', schedErr.message || schedErr);
     }
   });
+
+  // Align Keep-Alive timeout above Cloudflare/Render 60s upstream socket pooling
+  // to prevent ECONNRESET ("Failed to fetch") on consecutive large uploads
+  server.keepAliveTimeout = 65000;
+  server.headersTimeout = 66000;
 }
 
 module.exports = app;
