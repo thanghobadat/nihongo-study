@@ -327,7 +327,7 @@ router.delete('/:id', async (req, res) => {
         .from('text_pastes')
         .delete()
         .eq('id', id)
-        .catch(() => {});
+        .then(() => {}, () => {});
     }
 
     return res.json({ success: true, message: 'Đã xóa tệp thành công.' });

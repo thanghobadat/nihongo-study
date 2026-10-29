@@ -1771,47 +1771,139 @@ router.get('/review-sessions', async (req, res) => {
 });
 
 /**
- * Helper to mark review session record completed in memory, disk, and Supabase
+ * Helper to check & synchronize review session completion in memory, disk, and Supabase
  */
-function isJlptSessionPracticed(sess) {
+function hasRealJlptPracticeData(sess) {
   if (!sess || typeof sess !== 'object') return false;
-  if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
   if (sess.score !== undefined || sess.results !== undefined || sess.correctAnswers !== undefined) return true;
   if (Array.isArray(sess.examHistory) && sess.examHistory.length > 0) return true;
+  if (Array.isArray(sess.history) && sess.history.length > 0) return true;
+  if (Array.isArray(sess.masteredIds) && sess.masteredIds.length > 0) return true;
+  if (Array.isArray(sess.wrongIds) && sess.wrongIds.length > 0) return true;
   if (sess.cards && typeof sess.cards === 'object') {
     for (const c of Object.values(sess.cards)) {
-      if (c && (c.step === 'summary' || (Array.isArray(c.checkedIds) && c.checkedIds.length > 0))) {
-        return true;
-      }
+      if (!c || typeof c !== 'object') continue;
+      if (c.step === 'summary' || c.step === 'result') return true;
+      if (Array.isArray(c.checkedIds) && c.checkedIds.length > 0) return true;
+      if (c.graded && typeof c.graded === 'object' && Object.values(c.graded).some(Boolean)) return true;
     }
   }
   return false;
 }
 
-function markReviewSessionCompleted(userId, task, isMock) {
+function isJlptSessionPracticed(sess) {
+  if (!sess || typeof sess !== 'object') return false;
+  if (sess.completed || sess.isCompleted || sess.manualMarked) return true;
+  return hasRealJlptPracticeData(sess);
+}
+
+async function syncManualReviewSession(userId, task, completed, isMock) {
   if (!task || (task.itemType !== 'single_review' && task.itemType !== 'cumulative_review')) return;
   const lesson = task.lesson || task.lesson_id || 1;
   const storageKey = task.itemType === 'single_review'
     ? `nihongo_jlpt_lesson_${lesson}`
     : `nihongo_jlpt_global_exam`;
-  const sessionData = {
-    completed: true,
-    completed_at: getVietnamTimeStr(),
-    manualMarked: true,
-    timestamp: Date.now()
-  };
   const key = `${userId}:${storageKey}`;
   if (!mockDb.userReviewSessions) mockDb.userReviewSessions = {};
-  mockDb.userReviewSessions[key] = sessionData;
-  progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
 
-  if (isSupabaseConfigured() && !isMock) {
-    supabase.from('user_review_sessions').upsert({
-      user_id: userId,
-      storage_key: storageKey,
-      session_data: sessionData,
-      updated_at: new Date().toISOString()
-    }, { onConflict: 'user_id,storage_key' }).catch(e => console.warn('[DailyTasks] Review session upsert error:', e.message));
+  let existing = (mockDb.userReviewSessions[key] && typeof mockDb.userReviewSessions[key] === 'object')
+    ? mockDb.userReviewSessions[key]
+    : null;
+
+  if (!existing && isSupabaseConfigured() && !isMock) {
+    try {
+      const { data: remoteRow } = await supabase
+        .from('user_review_sessions')
+        .select('session_data')
+        .eq('user_id', userId)
+        .eq('storage_key', storageKey)
+        .maybeSingle();
+      if (remoteRow && remoteRow.session_data && typeof remoteRow.session_data === 'object') {
+        existing = remoteRow.session_data;
+      }
+    } catch (_) {}
+  }
+
+  if (completed) {
+    const sessionData = {
+      ...(existing || {}),
+      completed: true,
+      completed_at: getVietnamTimeStr(),
+      manualMarked: true,
+      timestamp: Date.now()
+    };
+    mockDb.userReviewSessions[key] = sessionData;
+    progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+
+    if (isSupabaseConfigured() && !isMock) {
+      try {
+        const { error } = await supabase
+          .from('user_review_sessions')
+          .upsert({
+            user_id: userId,
+            storage_key: storageKey,
+            session_data: sessionData,
+            updated_at: new Date().toISOString()
+          }, { onConflict: 'user_id,storage_key' });
+        if (error) {
+          console.warn('[DailyTasks] Review session upsert warning:', error.message);
+        }
+      } catch (e) {
+        console.warn('[DailyTasks] Review session upsert error:', e.message);
+      }
+    }
+  } else if (existing) {
+    const manualOnlyKeys = new Set(['completed', 'completed_at', 'manualMarked', 'timestamp']);
+    const existingKeys = Object.keys(existing);
+    const isPureManualStub = existingKeys.length > 0 && existingKeys.every(k => manualOnlyKeys.has(k));
+
+    if (isPureManualStub) {
+      delete mockDb.userReviewSessions[key];
+      progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+
+      if (isSupabaseConfigured() && !isMock) {
+        try {
+          const { error } = await supabase
+            .from('user_review_sessions')
+            .delete()
+            .eq('user_id', userId)
+            .eq('storage_key', storageKey);
+          if (error) {
+            console.warn('[DailyTasks] Review session delete warning:', error.message);
+          }
+        } catch (e) {
+          console.warn('[DailyTasks] Review session delete error:', e.message);
+        }
+      }
+    } else {
+      const updatedSession = {
+        ...existing,
+        completed: false,
+        manualMarked: false,
+        timestamp: Date.now()
+      };
+      delete updatedSession.completed_at;
+      mockDb.userReviewSessions[key] = updatedSession;
+      progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+
+      if (isSupabaseConfigured() && !isMock) {
+        try {
+          const { error } = await supabase
+            .from('user_review_sessions')
+            .upsert({
+              user_id: userId,
+              storage_key: storageKey,
+              session_data: updatedSession,
+              updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,storage_key' });
+          if (error) {
+            console.warn('[DailyTasks] Review session unmark upsert warning:', error.message);
+          }
+        } catch (e) {
+          console.warn('[DailyTasks] Review session unmark upsert error:', e.message);
+        }
+      }
+    }
   }
 }
 
@@ -1880,26 +1972,31 @@ router.post('/review-sessions', async (req, res) => {
         ];
 
         for (const day of allPlanDays) {
+          let dayModified = false;
           for (const task of (day.tasks || [])) {
             if (isCumulative && task.itemType === 'cumulative_review') {
-              if (!task.completed) {
+              if (!task.completed || task.manualUnmarked) {
+                delete task.manualUnmarked;
                 task.completed = true;
                 task.completed_at = getVietnamTimeStr();
                 task.currentCount = task.targetCount || 1;
                 task.progressPct = 100;
                 planModified = true;
+                dayModified = true;
               }
             } else if (lessonId && task.itemType === 'single_review' && (task.lesson === lessonId || task.lesson_id === lessonId)) {
-              if (!task.completed) {
+              if (!task.completed || task.manualUnmarked) {
+                delete task.manualUnmarked;
                 task.completed = true;
                 task.completed_at = getVietnamTimeStr();
                 task.currentCount = task.targetCount || 1;
                 task.progressPct = 100;
                 planModified = true;
+                dayModified = true;
               }
             }
           }
-          if (planModified) {
+          if (dayModified) {
             day.completedCount = (day.tasks || []).filter(t => t.completed).length;
             day.completionRate = day.plannedCount > 0 ? Math.round((day.completedCount / day.plannedCount) * 100) : 100;
           }
@@ -2000,6 +2097,8 @@ function applyAutoTracking(plan, userId) {
         }
       } else if (task.completed) {
         count = target;
+      } else if (task.manualUnmarked) {
+        count = 0;
       } else if (task.itemType === 'single_review') {
         const sess = userReviewSessions[`${userId}:nihongo_jlpt_lesson_${lesson}`];
         count = isJlptSessionPracticed(sess) ? 1 : 0;
@@ -2323,6 +2422,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
               if (completed !== undefined) {
                 task.completed = completed;
                 if (completed) {
+                  delete task.manualUnmarked;
                   task.completed_at = getVietnamTimeStr();
                   task.currentCount = task.targetCount || 1;
                   task.progressPct = 100;
@@ -2335,7 +2435,7 @@ router.post('/daily-tasks/schedule', async (req, res) => {
 
                   // Synchronize review session record if this is a review task
                   if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
-                    markReviewSessionCompleted(userId, task, req.user && req.user.isMock);
+                    await syncManualReviewSession(userId, task, true, req.user && req.user.isMock);
                   }
 
                   const dayTasks = day.tasks || [];
@@ -2354,6 +2454,10 @@ router.post('/daily-tasks/schedule', async (req, res) => {
                   delete task.completed_at;
                   task.currentCount = 0;
                   task.progressPct = 0;
+                  if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
+                    task.manualUnmarked = true;
+                    await syncManualReviewSession(userId, task, false, req.user && req.user.isMock);
+                  }
                 }
               }
               day.completedCount = (day.tasks || []).filter(t => t.completed).length;

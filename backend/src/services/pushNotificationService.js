@@ -269,7 +269,7 @@ async function sendNotification(userId, payload) {
       delete mockDb.pushSubscriptions[userId];
       savePersistentSubscriptions(mockDb.pushSubscriptions);
       if (isSupabaseConfigured()) {
-        supabase.from('user_push_subscriptions').delete().eq('user_id', String(userId)).catch(() => {});
+        try { await supabase.from('user_push_subscriptions').delete().eq('user_id', String(userId)); } catch (_) {}
       }
     }
     throw err;
