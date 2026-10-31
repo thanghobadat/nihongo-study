@@ -1,17 +1,34 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
 import { playAudioWithFallback, speakTTS, playSpeedrunSound } from '../utils/audioHelper';
 import { getRadicalsString, getRadicalsForCharacter } from '../utils/kanjiRadicals';
-import KanjiStrokePlayer from '../components/KanjiStrokePlayer';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../utils/kanjiPracticeHelper';
-import QuickLookupModal from '../components/QuickLookupModal';
-import CombinedKanjiPractice from '../components/CombinedKanjiPractice';
 import { getGlobalKanjiForm, getRelatedVocabForKanji } from '../utils/kanjiFormLookup';
-import GlobalJlptExamTab from './components/GlobalJlptExamTab';
+
+const KanjiStrokePlayer = dynamic(() => import('../components/KanjiStrokePlayer'), { ssr: false });
+const QuickLookupModal = dynamic(() => import('../components/QuickLookupModal'), { ssr: false });
+const CombinedKanjiPractice = dynamic(() => import('../components/CombinedKanjiPractice'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex flex-col items-center justify-center py-16">
+      <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  ),
+});
+const GlobalJlptExamTab = dynamic(() => import('./components/GlobalJlptExamTab'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex flex-col items-center justify-center py-16">
+      <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+    </div>
+  ),
+});
 
 interface Lesson {
   id: number;
@@ -226,31 +243,45 @@ export default function KnowledgeHubPage() {
     }
   }, []);
 
-  // Fetch course summary (Lessons, Vocab, Kanji, Grammar) for minna
+  const applyCourseSummaryPayload = useCallback((res: any) => {
+    if (!res) return;
+    const rawKanji = res.kanji || [];
+    const rawVocab = res.vocabulary || [];
+    const enrichedVocab = rawVocab.map((v: any) => {
+      const kForm = v.kanji_word || getGlobalKanjiForm(v.hiragana, rawKanji, v.kanji_word);
+      return {
+        ...v,
+        kanji_form: kForm && kForm !== v.hiragana ? kForm : undefined
+      };
+    });
+    setLessons(res.lessons || []);
+    setKanjiList(rawKanji);
+    setVocabList(enrichedVocab);
+    setGrammarList(res.grammar || []);
+  }, []);
+
+  // Fetch course summary (Lessons, Vocab, Kanji, Grammar) for minna with 0ms Stale-While-Revalidate
   const loadData = useCallback(async () => {
-    setLoading(true);
+    const summaryPath = `/api/user/course-summary?course=minna`;
+    const cached = api.peekCache(summaryPath);
+    if (cached) {
+      applyCourseSummaryPayload(cached);
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     try {
-      const res = await api.get(`/api/user/course-summary?course=minna`);
-      const rawKanji = res.kanji || [];
-      const rawVocab = res.vocabulary || [];
-      const enrichedVocab = rawVocab.map((v: any) => {
-        const kForm = v.kanji_word || getGlobalKanjiForm(v.hiragana, rawKanji, v.kanji_word);
-        return {
-          ...v,
-          kanji_form: kForm && kForm !== v.hiragana ? kForm : undefined
-        };
-      });
-      setLessons(res.lessons || []);
-      setKanjiList(rawKanji);
-      setVocabList(enrichedVocab);
-      setGrammarList(res.grammar || []);
+      const res = await api.get(summaryPath);
+      applyCourseSummaryPayload(res);
     } catch (err) {
       console.error('Error loading course summary:', err);
-      showToast('Có lỗi xảy ra khi tải dữ liệu học tập.');
+      if (!cached) {
+        showToast('Có lỗi xảy ra khi tải dữ liệu học tập.');
+      }
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [applyCourseSummaryPayload]);
 
   useEffect(() => {
     loadData();
@@ -1342,27 +1373,28 @@ export default function KnowledgeHubPage() {
         </div>
 
         <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none px-4 py-4">
-          {menuItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setIsSidebarOpen(false);
-                if (item.id === 'dashboard') {
-                  router.push('/dashboard');
-                } else if (item.id === 'roadmap') {
-                  router.push('/roadmap');
-                } else if (item.id === 'kana') {
-                  router.push('/kana');
-                } else {
-                  router.push(`/lessons/1?tab=${item.id}`);
-                }
-              }}
-              className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium text-slate-400 dark:text-slate-505 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:shadow-none"
-            >
-              <span className="text-lg">{item.icon}</span>
-              <span className="text-sm">{item.name}</span>
-            </button>
-          ))}
+          {menuItems.map((item) => {
+            const targetHref =
+              item.id === 'dashboard'
+                ? '/dashboard'
+                : item.id === 'roadmap'
+                ? '/roadmap'
+                : item.id === 'kana'
+                ? '/kana'
+                : `/lessons/1?tab=${item.id}`;
+            return (
+              <Link
+                key={item.id}
+                href={targetHref}
+                prefetch
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium text-slate-400 dark:text-slate-505 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:shadow-none"
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm">{item.name}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         <SidebarSettings />
@@ -1806,11 +1838,13 @@ export default function KnowledgeHubPage() {
         )}
       </main>
 
-      <QuickLookupModal
-        isOpen={isQuickLookupOpen}
-        onClose={() => setIsQuickLookupOpen(false)}
-        initialTab={quickLookupTab}
-      />
+      {isQuickLookupOpen && (
+        <QuickLookupModal
+          isOpen={isQuickLookupOpen}
+          onClose={() => setIsQuickLookupOpen(false)}
+          initialTab={quickLookupTab}
+        />
+      )}
     </div>
   );
 }

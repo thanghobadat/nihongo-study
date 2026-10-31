@@ -7,8 +7,14 @@ const USER_PROGRESS_FILE = path.join(__dirname, '../db/user_progress.json');
 const USER_REVIEW_SESSIONS_FILE = path.join(__dirname, '../db/user_review_sessions.json');
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
+const PROGRESS_SYNC_TTL_MS = 5000;
+const progressSyncInFlight = new Map();
+const progressLastSyncAt = new Map();
+let saveProgressTimer = null;
+let saveReviewSessionsTimer = null;
+
 /**
- * Load user progress from local JSON file
+ * Load user progress from local JSON file (once at startup or fallback)
  */
 function loadPersistentProgress() {
   try {
@@ -23,14 +29,16 @@ function loadPersistentProgress() {
 }
 
 /**
- * Save user progress to local JSON file
+ * Save user progress to local JSON file asynchronously (debounced, non-blocking)
  */
 function savePersistentProgress(progress) {
-  try {
-    fs.writeFileSync(USER_PROGRESS_FILE, JSON.stringify(progress, null, 2), 'utf8');
-  } catch (err) {
-    console.error('[ProgressService] Error saving user_progress.json:', err.message);
-  }
+  if (saveProgressTimer) clearTimeout(saveProgressTimer);
+  saveProgressTimer = setTimeout(() => {
+    saveProgressTimer = null;
+    fs.promises.writeFile(USER_PROGRESS_FILE, JSON.stringify(progress || mockDb.userProgress || {}), 'utf8')
+      .catch(err => console.error('[ProgressService] Error saving user_progress.json:', err.message));
+  }, 500);
+  if (saveProgressTimer.unref) saveProgressTimer.unref();
 }
 
 /**
@@ -49,14 +57,16 @@ function loadPersistentReviewSessions() {
 }
 
 /**
- * Save user review sessions to local JSON file
+ * Save user review sessions to local JSON file asynchronously (debounced, non-blocking)
  */
 function savePersistentReviewSessions(sessions) {
-  try {
-    fs.writeFileSync(USER_REVIEW_SESSIONS_FILE, JSON.stringify(sessions, null, 2), 'utf8');
-  } catch (err) {
-    console.error('[ProgressService] Error saving user_review_sessions.json:', err.message);
-  }
+  if (saveReviewSessionsTimer) clearTimeout(saveReviewSessionsTimer);
+  saveReviewSessionsTimer = setTimeout(() => {
+    saveReviewSessionsTimer = null;
+    fs.promises.writeFile(USER_REVIEW_SESSIONS_FILE, JSON.stringify(sessions || mockDb.userReviewSessions || {}), 'utf8')
+      .catch(err => console.error('[ProgressService] Error saving user_review_sessions.json:', err.message));
+  }, 500);
+  if (saveReviewSessionsTimer.unref) saveReviewSessionsTimer.unref();
 }
 
 // Initialize mockDb.userProgress and mockDb.userReviewSessions on module load
@@ -85,39 +95,21 @@ function isSupabaseConfigured() {
 }
 
 /**
- * Synchronize user progress and review sessions from Supabase into memory and disk cache
+ * Immediately invalidate coalescing sync cache for a user after any write/mutation
  */
-async function syncUserProgressFromSupabase(userId) {
-  if (!userId || !isSupabaseConfigured()) {
+function invalidateUserSyncCache(userId) {
+  if (!userId) {
+    progressLastSyncAt.clear();
     return;
   }
-  try {
-    const { data, error } = await supabase
-      .from('user_progress')
-      .select('item_type, item_id, status')
-      .eq('user_id', userId);
-
-    if (error) {
-      console.warn('[ProgressService] Supabase sync warning:', error.message);
-    } else if (data && Array.isArray(data)) {
-      if (!mockDb.userProgress) mockDb.userProgress = {};
-      for (const row of data) {
-        mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
-      }
-      savePersistentProgress(mockDb.userProgress);
-    }
-  } catch (err) {
-    console.warn('[ProgressService] Error during Supabase sync:', err.message);
-  }
-
-  // Also sync user review sessions
-  await syncUserReviewSessionsFromSupabase(userId);
-
-  // Also sync user study time
+  const uid = String(userId);
+  progressLastSyncAt.delete(uid);
   try {
     const studyTimeService = require('./studyTimeService');
-    await studyTimeService.syncFromSupabase(userId);
-  } catch (stErr) {}
+    if (typeof studyTimeService.invalidateStudyTimeCache === 'function') {
+      studyTimeService.invalidateStudyTimeCache(uid);
+    }
+  } catch (_) {}
 }
 
 /**
@@ -151,6 +143,72 @@ async function syncUserReviewSessionsFromSupabase(userId) {
 }
 
 /**
+ * Synchronize user progress, review sessions, and study time from Supabase in parallel,
+ * coalescing concurrent requests for the same userId.
+ */
+async function syncUserProgressFromSupabase(userId, options = {}) {
+  if (!userId || !isSupabaseConfigured()) {
+    return;
+  }
+  const uid = String(userId);
+  const now = Date.now();
+  if (!options.force) {
+    const lastSync = progressLastSyncAt.get(uid) || 0;
+    if (now - lastSync < PROGRESS_SYNC_TTL_MS) {
+      return;
+    }
+  }
+
+  let inFlight = progressSyncInFlight.get(uid);
+  if (inFlight) {
+    return inFlight;
+  }
+
+  inFlight = (async () => {
+    const syncProgressTask = (async () => {
+      try {
+        const { data, error } = await supabase
+          .from('user_progress')
+          .select('item_type, item_id, status')
+          .eq('user_id', userId);
+
+        if (error) {
+          console.warn('[ProgressService] Supabase sync warning:', error.message);
+        } else if (data && Array.isArray(data)) {
+          if (!mockDb.userProgress) mockDb.userProgress = {};
+          for (const row of data) {
+            mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
+          }
+          savePersistentProgress(mockDb.userProgress);
+        }
+      } catch (err) {
+        console.warn('[ProgressService] Error during Supabase sync:', err.message);
+      }
+    })();
+
+    const syncStudyTimeTask = (async () => {
+      try {
+        const studyTimeService = require('./studyTimeService');
+        await studyTimeService.syncFromSupabase(userId);
+      } catch (_) {}
+    })();
+
+    await Promise.all([
+      syncProgressTask,
+      syncUserReviewSessionsFromSupabase(userId),
+      syncStudyTimeTask
+    ]);
+
+    progressLastSyncAt.set(uid, Date.now());
+  })().finally(() => {
+    progressSyncInFlight.delete(uid);
+  });
+
+  progressSyncInFlight.set(uid, inFlight);
+  return inFlight;
+}
+
+/**
  * Helper to extract mastered item IDs from completed tasks in a study plan
  */
 function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgressMap = null, userId = null) {
@@ -165,7 +223,6 @@ function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, 
         if (task.completed && !task.rescheduled && Array.isArray(task.itemIds) && task.itemIds.length > 0) {
           for (const id of task.itemIds) {
             const numId = Number(id);
-            // If userProgress exists for this user, do not falsely mark an item as mastered if it is NOT mastered in DB!
             if (userProgressMap && userId) {
               const status = userProgressMap[`${userId}:${task.itemType}:${numId}`];
               if (status !== 'mastered') {
@@ -184,12 +241,6 @@ function extractMasteredItemsFromPlan(plan, masteredVocabIds, masteredKanjiIds, 
 
 /**
  * Retrieve sets of mastered/learned item IDs for a user (DB-First with Local Cache Fallback)
- * Considers:
- * 1. Supabase user_progress table (if online) with status 'mastered'
- * 2. Supabase user_study_plans table (if online, completed tasks in cloud plan)
- * 3. Explicit currentPlan passed into function
- * 4. Local user_progress.json / mockDb.userProgress with status 'mastered'
- * 5. Completed tasks in study_plans.json / mockDb.studyPlans
  */
 async function getMasteredItemIds(userId, currentPlan = null) {
   const masteredVocabIds = new Set();
@@ -203,78 +254,77 @@ async function getMasteredItemIds(userId, currentPlan = null) {
     return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
   }
 
-  // 1. If Supabase is configured, fetch directly from Supabase user_progress DB
+  // 1. If Supabase is configured, fetch from Supabase in parallel
   if (isSupabaseConfigured()) {
-    try {
-      const { data, error } = await supabase
-        .from('user_progress')
-        .select('item_type, item_id, status')
-        .eq('user_id', userId)
-        .eq('status', 'mastered');
+    await Promise.all([
+      (async () => {
+        try {
+          const { data, error } = await supabase
+            .from('user_progress')
+            .select('item_type, item_id, status')
+            .eq('user_id', userId)
+            .eq('status', 'mastered');
 
-      if (!error && Array.isArray(data)) {
-        if (!mockDb.userProgress) mockDb.userProgress = {};
-        for (const row of data) {
-          const itemId = Number(row.item_id);
-          if (row.item_type === 'vocabulary') masteredVocabIds.add(itemId);
-          else if (row.item_type === 'kanji') masteredKanjiIds.add(itemId);
-          else if (row.item_type === 'grammar') masteredGrammarIds.add(itemId);
+          if (!error && Array.isArray(data)) {
+            if (!mockDb.userProgress) mockDb.userProgress = {};
+            for (const row of data) {
+              const itemId = Number(row.item_id);
+              if (row.item_type === 'vocabulary') masteredVocabIds.add(itemId);
+              else if (row.item_type === 'kanji') masteredKanjiIds.add(itemId);
+              else if (row.item_type === 'grammar') masteredGrammarIds.add(itemId);
 
-          mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
+              mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
+            }
+            savePersistentProgress(mockDb.userProgress);
+          }
+        } catch (dbErr) {
+          console.warn('[ProgressService] Supabase fetch warning, falling back to local cache:', dbErr.message);
         }
-        savePersistentProgress(mockDb.userProgress);
-      }
-    } catch (dbErr) {
-      console.warn('[ProgressService] Supabase fetch warning, falling back to local cache:', dbErr.message);
-    }
+      })(),
+      (async () => {
+        try {
+          const { data: sp, error: spErr } = await supabase
+            .from('user_study_plans')
+            .select('plan_data')
+            .eq('user_id', String(userId))
+            .maybeSingle();
 
-    // 1b. Also check Supabase user_study_plans for completed tasks (vital when Render was cold started)
-    try {
-      const { data: sp, error: spErr } = await supabase
-        .from('user_study_plans')
-        .select('plan_data')
-        .eq('user_id', String(userId))
-        .maybeSingle();
+          if (!spErr && sp && sp.plan_data) {
+            extractMasteredItemsFromPlan(sp.plan_data, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, mockDb.userProgress, userId);
+          }
+        } catch (spErr) {
+          console.warn('[ProgressService] Supabase user_study_plans fetch warning:', spErr.message);
+        }
+      })()
+    ]);
+  }
 
-      if (!spErr && sp && sp.plan_data) {
-        extractMasteredItemsFromPlan(sp.plan_data, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, mockDb.userProgress, userId);
-      }
-    } catch (spErr) {
-      console.warn('[ProgressService] Supabase user_study_plans fetch warning:', spErr.message);
+  // 2. Merge from in-memory userProgress (hydrated from disk at startup)
+  const userProgress = mockDb.userProgress || {};
+  const prefix = `${userId}:`;
+  for (const k of Object.keys(userProgress)) {
+    if (k.startsWith(prefix) && userProgress[k] === 'mastered') {
+      const parts = k.split(':');
+      const itemType = parts[1];
+      const itemId = parseInt(parts[2], 10);
+      if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
+      else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
+      else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
     }
   }
 
-  // 2. Fetch from local cache / file (covers local mock and offline)
-  const diskProgress = loadPersistentProgress();
-  const userProgress = { ...diskProgress, ...(mockDb.userProgress || {}) };
-  mockDb.userProgress = userProgress;
-
-  Object.keys(userProgress).forEach(k => {
-    if (k.startsWith(`${userId}:`)) {
-      const status = userProgress[k];
-      if (status === 'mastered') {
-        const parts = k.split(':');
-        const itemType = parts[1];
-        const itemId = parseInt(parts[2], 10);
-        if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
-        else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
-        else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
-      }
-    }
-  });
-
-  // 3. Extract from explicit currentPlan if provided by caller (guarded by userProgress)
+  // 3. Extract from explicit currentPlan if provided by caller
   if (currentPlan) {
     extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
   }
 
-  // 4. Inspect completed tasks in active study plans from disk / RAM (guarded by userProgress)
+  // 4. Inspect active study plan in memory (fallback to disk only if memory empty)
   try {
-    let plans = {};
-    if (fs.existsSync(STUDY_PLANS_FILE)) {
-      plans = JSON.parse(fs.readFileSync(STUDY_PLANS_FILE, 'utf8'));
+    let userPlan = mockDb.studyPlans && mockDb.studyPlans[userId];
+    if (!userPlan && fs.existsSync(STUDY_PLANS_FILE)) {
+      const plans = JSON.parse(fs.readFileSync(STUDY_PLANS_FILE, 'utf8'));
+      userPlan = plans[userId];
     }
-    const userPlan = plans[userId] || (mockDb.studyPlans && mockDb.studyPlans[userId]);
     if (userPlan) {
       extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
     }
@@ -292,6 +342,7 @@ async function setItemProgress(userId, itemType, itemId, status) {
   if (!mockDb.userProgress) mockDb.userProgress = {};
   const key = `${userId}:${itemType}:${itemId}`;
   mockDb.userProgress[key] = status;
+  invalidateUserSyncCache(userId);
   savePersistentProgress(mockDb.userProgress);
 
   if (isSupabaseConfigured()) {
@@ -324,6 +375,7 @@ async function setItemProgressBatch(userId, itemType, itemIds, status) {
       mockDb.userProgress[key] = status;
     }
   }
+  invalidateUserSyncCache(userId);
   savePersistentProgress(mockDb.userProgress);
 
   if (isSupabaseConfigured()) {
@@ -352,47 +404,36 @@ async function setItemProgressBatch(userId, itemType, itemIds, status) {
 }
 
 /**
- * Synchronous version of getMasteredItemIds using local cache, currentPlan, and study plans
+ * Synchronous version of getMasteredItemIds using in-memory cache and study plans
  */
 function getMasteredItemIdsSync(userId, currentPlan = null) {
   const masteredVocabIds = new Set();
   const masteredKanjiIds = new Set();
   const masteredGrammarIds = new Set();
 
-  const diskProgress = loadPersistentProgress();
-  const userProgress = { ...diskProgress, ...(mockDb.userProgress || {}) };
-  mockDb.userProgress = userProgress;
-
+  const userProgress = mockDb.userProgress || {};
   if (userId) {
-    Object.keys(userProgress).forEach(k => {
-      if (k.startsWith(`${userId}:`)) {
-        const status = userProgress[k];
-        if (status === 'mastered') {
-          const parts = k.split(':');
-          const itemType = parts[1];
-          const itemId = parseInt(parts[2], 10);
-          if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
-          else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
-          else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
-        }
+    const prefix = `${userId}:`;
+    for (const k of Object.keys(userProgress)) {
+      if (k.startsWith(prefix) && userProgress[k] === 'mastered') {
+        const parts = k.split(':');
+        const itemType = parts[1];
+        const itemId = parseInt(parts[2], 10);
+        if (itemType === 'vocabulary') masteredVocabIds.add(itemId);
+        else if (itemType === 'kanji') masteredKanjiIds.add(itemId);
+        else if (itemType === 'grammar') masteredGrammarIds.add(itemId);
       }
-    });
+    }
   }
 
   if (currentPlan) {
     extractMasteredItemsFromPlan(currentPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
   }
 
-  try {
-    let plans = {};
-    if (fs.existsSync(STUDY_PLANS_FILE)) {
-      plans = JSON.parse(fs.readFileSync(STUDY_PLANS_FILE, 'utf8'));
-    }
-    const userPlan = plans[userId] || (mockDb.studyPlans && mockDb.studyPlans[userId]);
-    if (userPlan) {
-      extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
-    }
-  } catch (e) {}
+  const userPlan = mockDb.studyPlans && mockDb.studyPlans[userId];
+  if (userPlan) {
+    extractMasteredItemsFromPlan(userPlan, masteredVocabIds, masteredKanjiIds, masteredGrammarIds, userProgress, userId);
+  }
 
   return { masteredVocabIds, masteredKanjiIds, masteredGrammarIds };
 }
@@ -403,6 +444,7 @@ module.exports = {
   loadPersistentReviewSessions,
   savePersistentReviewSessions,
   isSupabaseConfigured,
+  invalidateUserSyncCache,
   syncUserProgressFromSupabase,
   syncUserReviewSessionsFromSupabase,
   getMasteredItemIds,

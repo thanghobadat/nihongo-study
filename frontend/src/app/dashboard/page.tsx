@@ -3,16 +3,21 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
-import DailyReportModal from '../components/DailyReportModal';
 import { formatStudyTime, getVietnamDateString, evaluateStudyTime } from '../utils/studyTimeHelper';
-import VisualRoadmapModal from '../components/VisualRoadmapModal';
-import DayDetailModal, { DayHistoryItem } from '../components/DayDetailModal';
-import UnfinishedDebtModal, { DebtItem } from '../components/UnfinishedDebtModal';
-import RebatchTasksModal, { RebatchConfig } from '../components/RebatchTasksModal';
-import ReplanConfirmModal from '../components/ReplanConfirmModal';
-import StudyTimeHistoryModal from '../components/StudyTimeHistoryModal';
+import type { DayHistoryItem } from '../components/DayDetailModal';
+import type { DebtItem } from '../components/UnfinishedDebtModal';
+import type { RebatchConfig } from '../components/RebatchTasksModal';
+
+const DailyReportModal = dynamic(() => import('../components/DailyReportModal'), { ssr: false });
+const VisualRoadmapModal = dynamic(() => import('../components/VisualRoadmapModal'), { ssr: false });
+const DayDetailModal = dynamic(() => import('../components/DayDetailModal'), { ssr: false });
+const UnfinishedDebtModal = dynamic(() => import('../components/UnfinishedDebtModal'), { ssr: false });
+const RebatchTasksModal = dynamic(() => import('../components/RebatchTasksModal'), { ssr: false });
+const ReplanConfirmModal = dynamic(() => import('../components/ReplanConfirmModal'), { ssr: false });
+const StudyTimeHistoryModal = dynamic(() => import('../components/StudyTimeHistoryModal'), { ssr: false });
 
 // Helper for VAPID base64 conversion
 function urlBase64ToUint8Array(base64String: string) {
@@ -168,88 +173,112 @@ export default function UserDashboard() {
 
     const handleSync = (e: any) => {
       if (e.detail && e.detail.seconds !== undefined) {
-        setTodayStudyTimeSeconds(e.detail.seconds);
+        const nextSec = Number(e.detail.seconds) || 0;
+        setTodayStudyTimeSeconds((prevSec) => {
+          // Only trigger re-render when display bucket changes (0 -> >0 or minute boundary)
+          if ((prevSec === 0) !== (nextSec === 0) || Math.floor(prevSec / 60) !== Math.floor(nextSec / 60)) {
+            return nextSec;
+          }
+          return prevSec;
+        });
       }
     };
     window.addEventListener('study-time-sync', handleSync);
     return () => window.removeEventListener('study-time-sync', handleSync);
   }, []);
 
-  // Fetch Study Plan, Overview, Daily History and Unfinished Debt
-  const fetchDashboardData = useCallback(async () => {
-    try {
-      setLoading(true);
-      const currentDateStr = getVietnamDateString();
-      const [overviewRes, planRes, historyRes, debtRes] = await Promise.all([
-        api.get('/api/user/study-overview', { skipCache: true }).catch(() => null),
-        api.get('/api/user/study-plan', { skipCache: true }).catch(() => null),
-        api.get('/api/user/daily-history', { skipCache: true }).catch(() => null),
-        api.get(`/api/user/study-debt?date=${currentDateStr}`, { skipCache: true }).catch(() => null)
-      ]);
-
-      if (overviewRes && overviewRes.success) {
-        setStudyOverview(overviewRes);
-        if (overviewRes.todayStudyTime?.seconds) {
-          setTodayStudyTimeSeconds(overviewRes.todayStudyTime.seconds);
-        }
-        if (overviewRes.planMetadata) {
-          if (overviewRes.planMetadata.startDate) setStartDateStr(overviewRes.planMetadata.startDate);
-          if (overviewRes.planMetadata.endDate) setEndDateStr(overviewRes.planMetadata.endDate);
-        }
-        if (overviewRes.current_position?.lesson) {
-          setSelectedLessonId(overviewRes.current_position.lesson);
-          setLevel(overviewRes.current_position.lesson >= 26 ? 'N4' : 'N5');
-        }
+  const applyDashboardPayload = useCallback((overviewRes: any, planRes: any, historyRes: any, debtRes: any) => {
+    if (overviewRes && overviewRes.success) {
+      setStudyOverview(overviewRes);
+      if (overviewRes.todayStudyTime?.seconds) {
+        setTodayStudyTimeSeconds(overviewRes.todayStudyTime.seconds);
       }
+      if (overviewRes.planMetadata) {
+        if (overviewRes.planMetadata.startDate) setStartDateStr(overviewRes.planMetadata.startDate);
+        if (overviewRes.planMetadata.endDate) setEndDateStr(overviewRes.planMetadata.endDate);
+      }
+      if (overviewRes.current_position?.lesson) {
+        setSelectedLessonId(overviewRes.current_position.lesson);
+        setLevel(overviewRes.current_position.lesson >= 26 ? 'N4' : 'N5');
+      }
+    }
 
-      if (planRes && planRes.success && planRes.plan && Array.isArray(planRes.plan.days) && planRes.plan.days.length > 0) {
-        // Server is always the Authoritative Source of Truth when a valid plan is returned
-        const finalPlan = planRes.plan;
+    if (planRes && planRes.success && planRes.plan && Array.isArray(planRes.plan.days) && planRes.plan.days.length > 0) {
+      // Server is always the Authoritative Source of Truth when a valid plan is returned
+      const finalPlan = planRes.plan;
 
-        setStudyPlan(finalPlan);
+      setStudyPlan(finalPlan);
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.removeItem('nihongo_cached_study_plan');
+        } catch (e) {}
+      }
+      if (finalPlan.startDate) setStartDateStr(finalPlan.startDate);
+      if (finalPlan.endDate) setEndDateStr(finalPlan.endDate);
+      if (typeof finalPlan.replanCount === 'number') {
+        setReplanCount(prev => Math.max(prev, finalPlan.replanCount));
         if (typeof window !== 'undefined') {
-          try {
-            localStorage.removeItem('nihongo_cached_study_plan');
-          } catch (e) {}
-        }
-        if (finalPlan.startDate) setStartDateStr(finalPlan.startDate);
-        if (finalPlan.endDate) setEndDateStr(finalPlan.endDate);
-        if (typeof finalPlan.replanCount === 'number') {
-          setReplanCount(prev => Math.max(prev, finalPlan.replanCount));
-          if (typeof window !== 'undefined') {
-            const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
-            if (finalPlan.replanCount > cur) {
-              localStorage.setItem('nihongo_replan_count', String(finalPlan.replanCount));
-            }
+          const cur = parseInt(localStorage.getItem('nihongo_replan_count') || '0', 10);
+          if (finalPlan.replanCount > cur) {
+            localStorage.setItem('nihongo_replan_count', String(finalPlan.replanCount));
           }
         }
-      } else if (!planRes?.plan) {
-        setStudyPlan(null);
-        if (typeof window !== 'undefined') {
-          try {
-            localStorage.removeItem('nihongo_cached_study_plan');
-          } catch (e) {}
-        }
       }
-
-      if (historyRes && historyRes.success && Array.isArray(historyRes.history)) {
-        setDailyHistory(historyRes.history);
+    } else if (planRes && !planRes.plan) {
+      setStudyPlan(null);
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.removeItem('nihongo_cached_study_plan');
+        } catch (e) {}
       }
+    }
 
-      // Check yesterday's debt: Auto-open if debt exists, Auto-dismiss if debt is 0
-      if (debtRes && debtRes.hasDebt && debtRes.debtItems && debtRes.debtItems.length > 0) {
-        setDebtData(debtRes);
-        setIsDebtModalOpen(true);
+    if (historyRes && historyRes.success && Array.isArray(historyRes.history)) {
+      setDailyHistory(historyRes.history);
+    }
+
+    // Check yesterday's debt: Auto-open if debt exists, Auto-dismiss if debt is 0
+    if (debtRes && debtRes.hasDebt && debtRes.debtItems && debtRes.debtItems.length > 0) {
+      setDebtData(debtRes);
+      setIsDebtModalOpen(true);
+    } else if (debtRes) {
+      setDebtData(null);
+      setIsDebtModalOpen(false);
+    }
+  }, []);
+
+  // Fetch Study Plan, Overview, Daily History and Unfinished Debt (1 unified request + 0ms SWR instant paint)
+  const fetchDashboardData = useCallback(async () => {
+    const currentDateStr = getVietnamDateString();
+    const bundlePath = `/api/user/dashboard-bundle?date=${currentDateStr}`;
+
+    // Instant 0ms Stale-While-Revalidate render if memory cache already has recent dashboard state
+    const cachedBundle = api.peekCache(bundlePath);
+    if (cachedBundle && cachedBundle.success) {
+      applyDashboardPayload(cachedBundle.overview, cachedBundle.plan, cachedBundle.history, cachedBundle.debt);
+      setLoading(false);
+    }
+
+    try {
+      const bundleRes = await api.get(bundlePath, { skipCache: true }).catch(() => null);
+      if (bundleRes && bundleRes.success) {
+        applyDashboardPayload(bundleRes.overview, bundleRes.plan, bundleRes.history, bundleRes.debt);
       } else {
-        setDebtData(null);
-        setIsDebtModalOpen(false);
+        // Graceful fallback to individual endpoints if backend hasn't updated yet
+        const [overviewRes, planRes, historyRes, debtRes] = await Promise.all([
+          api.get('/api/user/study-overview', { skipCache: true }).catch(() => null),
+          api.get('/api/user/study-plan', { skipCache: true }).catch(() => null),
+          api.get('/api/user/daily-history', { skipCache: true }).catch(() => null),
+          api.get(`/api/user/study-debt?date=${currentDateStr}`, { skipCache: true }).catch(() => null)
+        ]);
+        applyDashboardPayload(overviewRes, planRes, historyRes, debtRes);
       }
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [applyDashboardPayload]);
 
   // Check daily notifications (New Day, Pre-due, Overdue, Streak alert)
   const triggerDailyNotificationCheck = useCallback(async () => {
@@ -841,25 +870,30 @@ export default function UserDashboard() {
           </div>
 
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none scrollbar-thin scrollbar-thumb-slate-800">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setIsSidebarOpen(false);
-                  if (item.id === 'roadmap') router.push('/roadmap');
-
-                  else if (item.id !== 'dashboard') router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
-                }}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
-                  item.active
-                    ? 'bg-gradient-to-r from-indigo-950/60 to-slate-900 border border-indigo-500/30 text-indigo-400 shadow-md'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-900/60 border border-slate-900/40'
-                }`}
-              >
-                <span className="text-lg">{item.icon}</span>
-                <span className="text-sm">{item.name}</span>
-              </button>
-            ))}
+            {menuItems.map((item) => {
+              const targetHref =
+                item.id === 'dashboard'
+                  ? '/dashboard'
+                  : item.id === 'roadmap'
+                  ? '/roadmap'
+                  : `/lessons/${selectedLessonId}?tab=${item.id}`;
+              return (
+                <Link
+                  key={item.id}
+                  href={targetHref}
+                  prefetch
+                  onClick={() => setIsSidebarOpen(false)}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
+                    item.active
+                      ? 'bg-gradient-to-r from-indigo-950/60 to-slate-900 border border-indigo-500/30 text-indigo-400 shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-900/60 border border-slate-900/40'
+                  }`}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-sm">{item.name}</span>
+                </Link>
+              );
+            })}
           </nav>
         </div>
         <SidebarSettings />
@@ -1846,97 +1880,111 @@ export default function UserDashboard() {
       </main>
 
       {/* Unfinished Debt Modal (Alerts on yesterday's unfinished items, auto-dismisses when caught up) */}
-      <UnfinishedDebtModal
-        isOpen={isDebtModalOpen}
-        onClose={() => setIsDebtModalOpen(false)}
-        yesterdayDate={debtData?.yesterdayDate || null}
-        debtItems={debtData?.debtItems || []}
-        onReplan={() => triggerReplanConfirm('debt')}
-        onCatchUpToday={() => setIsDebtModalOpen(false)}
-        isReplanning={isReplanningDebt}
-        onToggleTaskStatus={handleToggleTaskStatus}
-      />
+      {isDebtModalOpen && (
+        <UnfinishedDebtModal
+          isOpen={isDebtModalOpen}
+          onClose={() => setIsDebtModalOpen(false)}
+          yesterdayDate={debtData?.yesterdayDate || null}
+          debtItems={debtData?.debtItems || []}
+          onReplan={() => triggerReplanConfirm('debt')}
+          onCatchUpToday={() => setIsDebtModalOpen(false)}
+          isReplanning={isReplanningDebt}
+          onToggleTaskStatus={handleToggleTaskStatus}
+        />
+      )}
 
       {/* Replan Confirmation Modal with Counter & Pedagogical Guard */}
-      <ReplanConfirmModal
-        isOpen={isReplanConfirmOpen}
-        onClose={() => setIsReplanConfirmOpen(false)}
-        onConfirm={handleExecuteConfirmedReplan}
-        isLoading={isReplanningDebt || isGeneratingPlan}
-        replanType={pendingReplanType}
-        replanCount={replanCount}
-        targetEndDate={studyPlan?.endDate || endDateStr}
-      />
+      {isReplanConfirmOpen && (
+        <ReplanConfirmModal
+          isOpen={isReplanConfirmOpen}
+          onClose={() => setIsReplanConfirmOpen(false)}
+          onConfirm={handleExecuteConfirmedReplan}
+          isLoading={isReplanningDebt || isGeneratingPlan}
+          replanType={pendingReplanType}
+          replanCount={replanCount}
+          targetEndDate={studyPlan?.endDate || endDateStr}
+        />
+      )}
 
       {/* Visual Roadmap Modal */}
-      <VisualRoadmapModal
-        isOpen={isVisualRoadmapOpen}
-        onClose={() => setIsVisualRoadmapOpen(false)}
-        startDate={startDateStr}
-        endDate={endDateStr}
-        currentLesson={studyOverview?.current_position?.lesson || selectedLessonId}
-        overview={studyOverview?.overview}
-        pace={studyOverview?.pace}
-        milestones={studyOverview?.milestones}
-        studyPlan={studyPlan}
-        initialTab={roadmapInitialTab}
-      />
+      {isVisualRoadmapOpen && (
+        <VisualRoadmapModal
+          isOpen={isVisualRoadmapOpen}
+          onClose={() => setIsVisualRoadmapOpen(false)}
+          startDate={startDateStr}
+          endDate={endDateStr}
+          currentLesson={studyOverview?.current_position?.lesson || selectedLessonId}
+          overview={studyOverview?.overview}
+          pace={studyOverview?.pace}
+          milestones={studyOverview?.milestones}
+          studyPlan={studyPlan}
+          initialTab={roadmapInitialTab}
+        />
+      )}
 
       {/* Daily Detail Modal */}
-      <DayDetailModal
-        isOpen={!!selectedHistoryDay}
-        onClose={() => setSelectedHistoryDay(null)}
-        dayData={selectedHistoryDay}
-      />
+      {selectedHistoryDay && (
+        <DayDetailModal
+          isOpen={!!selectedHistoryDay}
+          onClose={() => setSelectedHistoryDay(null)}
+          dayData={selectedHistoryDay}
+        />
+      )}
 
       {/* Daily Report Modal */}
-      <DailyReportModal
-        isOpen={isDailyReportOpen}
-        onClose={() => setIsDailyReportOpen(false)}
-        userName={user?.display_name || 'Học viên'}
-        lessonTitle={`Bài ${selectedLessonId}`}
-        lessonId={selectedLessonId}
-        vocabTotal={studyOverview?.overview?.totalVocab || 40}
-        vocabMastered={studyOverview?.overview?.masteredVocab || 0}
-        kanjiTotal={studyOverview?.overview?.totalKanji || 11}
-        kanjiMastered={studyOverview?.overview?.masteredKanji || 0}
-        grammarTotal={studyOverview?.overview?.totalGrammar || 5}
-        grammarMastered={studyOverview?.overview?.masteredGrammar || 0}
-        startDateStr={startDateStr}
-        endDateStr={endDateStr}
-        totalDays={studyOverview?.pace?.totalDays || 30}
-        daysElapsed={studyOverview?.pace?.daysElapsed || 1}
-        daysRemaining={studyOverview?.pace?.daysRemaining || 29}
-        targetVocabToday={10}
-        vocabBehind={0}
-        calculatedVocabTargetPerDay={5}
-        studyTimeSeconds={todayStudyTimeSeconds}
-        onOpenHistoryTable={() => setIsStudyTimeHistoryOpen(true)}
-        onContinueStudy={() => {
-          setIsDailyReportOpen(false);
-          router.push(`/lessons/${selectedLessonId}`);
-        }}
-      />
+      {isDailyReportOpen && (
+        <DailyReportModal
+          isOpen={isDailyReportOpen}
+          onClose={() => setIsDailyReportOpen(false)}
+          userName={user?.display_name || 'Học viên'}
+          lessonTitle={`Bài ${selectedLessonId}`}
+          lessonId={selectedLessonId}
+          vocabTotal={studyOverview?.overview?.totalVocab || 40}
+          vocabMastered={studyOverview?.overview?.masteredVocab || 0}
+          kanjiTotal={studyOverview?.overview?.totalKanji || 11}
+          kanjiMastered={studyOverview?.overview?.masteredKanji || 0}
+          grammarTotal={studyOverview?.overview?.totalGrammar || 5}
+          grammarMastered={studyOverview?.overview?.masteredGrammar || 0}
+          startDateStr={startDateStr}
+          endDateStr={endDateStr}
+          totalDays={studyOverview?.pace?.totalDays || 30}
+          daysElapsed={studyOverview?.pace?.daysElapsed || 1}
+          daysRemaining={studyOverview?.pace?.daysRemaining || 29}
+          targetVocabToday={10}
+          vocabBehind={0}
+          calculatedVocabTargetPerDay={5}
+          studyTimeSeconds={todayStudyTimeSeconds}
+          onOpenHistoryTable={() => setIsStudyTimeHistoryOpen(true)}
+          onContinueStudy={() => {
+            setIsDailyReportOpen(false);
+            router.push(`/lessons/${selectedLessonId}`);
+          }}
+        />
+      )}
 
       {/* Rebatch Tasks Modal (Custom Daily Task Batching) */}
-      <RebatchTasksModal
-        isOpen={isRebatchModalOpen}
-        onClose={() => setIsRebatchModalOpen(false)}
-        date={rebatchTargetDate || todayStr}
-        dayTasks={(rebatchTargetDate || todayStr) === todayStr ? todayTasks : tomorrowTasks}
-        onApplyRebatch={(configs) => handleApplyRebatch(configs, rebatchTargetDate || todayStr)}
-        isRebatching={isRebatching}
-      />
+      {isRebatchModalOpen && (
+        <RebatchTasksModal
+          isOpen={isRebatchModalOpen}
+          onClose={() => setIsRebatchModalOpen(false)}
+          date={rebatchTargetDate || todayStr}
+          dayTasks={(rebatchTargetDate || todayStr) === todayStr ? todayTasks : tomorrowTasks}
+          onApplyRebatch={(configs) => handleApplyRebatch(configs, rebatchTargetDate || todayStr)}
+          isRebatching={isRebatching}
+        />
+      )}
 
       {/* Study Time History Modal (Lưu trữ & Đánh giá ngày X học Y tiếng) */}
-      <StudyTimeHistoryModal
-        isOpen={isStudyTimeHistoryOpen}
-        onClose={() => setIsStudyTimeHistoryOpen(false)}
-        onContinueStudy={() => {
-          setIsStudyTimeHistoryOpen(false);
-          router.push(`/lessons/${selectedLessonId}`);
-        }}
-      />
+      {isStudyTimeHistoryOpen && (
+        <StudyTimeHistoryModal
+          isOpen={isStudyTimeHistoryOpen}
+          onClose={() => setIsStudyTimeHistoryOpen(false)}
+          onContinueStudy={() => {
+            setIsStudyTimeHistoryOpen(false);
+            router.push(`/lessons/${selectedLessonId}`);
+          }}
+        />
+      )}
     </div>
   );
 }

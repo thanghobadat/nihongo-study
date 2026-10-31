@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import SidebarSettings from '../components/SidebarSettings';
@@ -154,11 +155,16 @@ export default function RoadmapPage() {
     }
   }, [selectedLessonId, isLoadedFromLocalStorage]);
 
-  // Fetch initial lessons
+  // Fetch initial lessons with 0ms cache hydration
   useEffect(() => {
     async function loadLessons() {
+      const lessonsPath = '/api/user/lessons?course=minna';
+      const cached = api.peekCache(lessonsPath);
+      if (Array.isArray(cached)) {
+        setLessons(cached);
+      }
       try {
-        const lessonData = await api.get('/api/user/lessons?course=minna');
+        const lessonData = await api.get(lessonsPath);
         if (Array.isArray(lessonData)) {
           setLessons(lessonData);
         }
@@ -171,12 +177,19 @@ export default function RoadmapPage() {
     }
   }, [isLoadedFromLocalStorage]);
 
-  // Fetch data for active lesson
+  // Fetch data for active lesson with 0ms Stale-While-Revalidate
   const loadLessonData = useCallback(async () => {
     if (!isLoadedFromLocalStorage) return;
-    setLoading(true);
+    const grammarPath = `/api/user/lessons/${selectedLessonId}/grammar`;
+    const cachedGrammar = api.peekCache(grammarPath);
+    if (Array.isArray(cachedGrammar)) {
+      setGrammarItems(cachedGrammar);
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     try {
-      const grammarData = await api.get(`/api/user/lessons/${selectedLessonId}/grammar`);
+      const grammarData = await api.get(grammarPath);
       if (Array.isArray(grammarData)) setGrammarItems(grammarData);
     } catch (error) {
       console.error('Failed to load lesson details:', error);
@@ -249,33 +262,45 @@ export default function RoadmapPage() {
           </div>
 
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setIsSidebarOpen(false);
-                  if (item.id === 'dashboard') {
-                    router.push('/dashboard');
-                  } else if (item.id === 'roadmap') {
-                    // Stay here
-                  } else if (item.id === 'kana') {
-                    router.push('/kana');
-                  } else if (item.id === 'knowledge') {
-                    router.push('/knowledge');
-                  } else {
-                    router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
-                  }
-                }}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
-                  item.active
-                    ? 'bg-indigo-50/80 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 border border-indigo-100/50 dark:border-blue-900/40 text-indigo-600 dark:text-blue-400 shadow-sm dark:shadow-[0_0_15px_rgba(29,78,216,0.15)]'
-                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
-                }`}
-              >
-                <span className="text-lg">{item.icon}</span>
-                <span className="text-sm">{item.name}</span>
-              </button>
-            ))}
+            {menuItems.map((item) => {
+              const targetHref =
+                item.id === 'dashboard'
+                  ? '/dashboard'
+                  : item.id === 'roadmap'
+                  ? '/roadmap'
+                  : item.id === 'kana'
+                  ? '/kana'
+                  : item.id === 'knowledge'
+                  ? '/knowledge'
+                  : `/lessons/${selectedLessonId}?tab=${item.id}`;
+              const itemClassName = `w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
+                item.active
+                  ? 'bg-indigo-50/80 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 border border-indigo-100/50 dark:border-blue-900/40 text-indigo-600 dark:text-blue-400 shadow-sm dark:shadow-[0_0_15px_rgba(29,78,216,0.15)]'
+                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
+              }`;
+              return item.active ? (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setIsSidebarOpen(false)}
+                  className={itemClassName}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-sm">{item.name}</span>
+                </button>
+              ) : (
+                <Link
+                  key={item.id}
+                  href={targetHref}
+                  prefetch
+                  onClick={() => setIsSidebarOpen(false)}
+                  className={itemClassName}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-sm">{item.name}</span>
+                </Link>
+              );
+            })}
           </nav>
         </div>
 

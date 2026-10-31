@@ -30,6 +30,9 @@ export interface RequestOptions {
 }
 
 const memoryCache = new Map<string, { data: any; timestamp: number }>();
+const inFlightGets = new Map<string, Promise<any>>();
+let refreshInFlight: Promise<string | null> | null = null;
+
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes cache
 
 export function clearApiCache(pathPrefix?: string) {
@@ -44,22 +47,134 @@ export function clearApiCache(pathPrefix?: string) {
   }
 }
 
-async function request(path: string, method: string, body: any = null, options: RequestOptions = {}) {
+function clearApiCacheMany(prefixes: string[]) {
+  for (const prefix of prefixes) {
+    clearApiCache(prefix);
+  }
+}
+
+/**
+ * Smart scoped cache invalidation so background heartbeats (e.g. every-30s study-time ping)
+ * do not wipe out static lesson/syllabus caches, while real data mutations immediately
+ * invalidate all affected views.
+ */
+function invalidateCacheForMutation(path: string) {
+  if (path.startsWith('/api/user/study-time')) {
+    clearApiCache('/api/user/study-time');
+    return;
+  }
+  if (
+    path.startsWith('/api/user/check-daily-notification') ||
+    path.startsWith('/api/user/push-subscription') ||
+    path.startsWith('/api/user/send-test-push') ||
+    path.startsWith('/api/user/send-study-plan-notification')
+  ) {
+    clearApiCache('/api/user/push-subscription-status');
+    return;
+  }
+  if (path.startsWith('/api/user/daily-report-ack')) {
+    clearApiCache('/api/user/daily-report-status');
+    return;
+  }
+  if (path.startsWith('/api/ai/')) {
+    clearApiCache('/api/ai/quota');
+    return;
+  }
+  if (path.startsWith('/api/user/custom/') || path.startsWith('/api/user/knowledge-items')) {
+    clearApiCacheMany([
+      '/api/user/custom/',
+      '/api/user/knowledge-items',
+      '/api/user/course-summary'
+    ]);
+    return;
+  }
+  if (
+    path.startsWith('/api/user/progress') ||
+    path.startsWith('/api/user/daily-tasks/') ||
+    path.startsWith('/api/user/review-sessions') ||
+    path.startsWith('/api/user/study-plan') ||
+    path.startsWith('/api/user/replan-debt') ||
+    path.startsWith('/api/user/target-plan')
+  ) {
+    clearApiCacheMany([
+      '/api/user/progress',
+      '/api/lessons/',
+      '/api/user/lessons/',
+      '/api/user/course-summary',
+      '/api/user/review-sessions',
+      '/api/user/dashboard-bundle',
+      '/api/user/study-overview',
+      '/api/user/study-plan',
+      '/api/user/daily-history',
+      '/api/user/study-debt',
+      '/api/user/target-plan'
+    ]);
+    return;
+  }
+  // Fallback for admin mutations, auth changes, or unknown write endpoints
+  clearApiCache();
+}
+
+/**
+ * Single-flight silent JWT refresh mutex so concurrent 401 responses share 1 refresh request
+ */
+async function refreshAccessTokenSingleFlight(baseUrl: string): Promise<string | null> {
+  if (typeof window === 'undefined') return null;
+  if (refreshInFlight) {
+    return refreshInFlight;
+  }
+
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (!refreshToken) return null;
+
+  refreshInFlight = (async () => {
+    try {
+      const refreshResponse = await fetch(`${baseUrl}/api/auth/refresh`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken })
+      });
+
+      if (refreshResponse.ok) {
+        const refreshData = await refreshResponse.json();
+        if (refreshData?.session?.access_token) {
+          localStorage.setItem('token', refreshData.session.access_token);
+          if (refreshData.session.refresh_token) {
+            localStorage.setItem('refreshToken', refreshData.session.refresh_token);
+          }
+          if (refreshData.user) {
+            localStorage.setItem('user', JSON.stringify(refreshData.user));
+          }
+          return refreshData.session.access_token as string;
+        }
+      }
+
+      // Refresh failed (refresh token expired too) -> force logout
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      clearApiCache();
+      window.location.href = '/login?expired=true';
+      return null;
+    } catch (e) {
+      console.error('Silent refresh token error:', e);
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      clearApiCache();
+      window.location.href = '/login?expired=true';
+      return null;
+    } finally {
+      refreshInFlight = null;
+    }
+  })();
+
+  return refreshInFlight;
+}
+
+async function executeRequest(path: string, method: string, body: any = null, options: RequestOptions = {}) {
   const isGet = method === 'GET';
   const cacheKey = `${path}`;
-
-  // Invalidate cache on mutations
-  if (!isGet) {
-    clearApiCache();
-  }
-
-  // Check cache for GET requests
-  if (isGet && !options.skipCache) {
-    const cached = memoryCache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
-      return cached.data;
-    }
-  }
 
   // When skipping cache, append timestamp query parameter to bust any browser/proxy cache
   let finalPath = path;
@@ -72,7 +187,7 @@ async function request(path: string, method: string, body: any = null, options: 
 
   const baseUrl = getBaseUrl();
   const url = `${baseUrl}${finalPath}`;
-  
+
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...options.headers,
@@ -105,47 +220,15 @@ async function request(path: string, method: string, body: any = null, options: 
   }
 
   let response = await fetch(url, fetchOptions);
-  
-  // Handle automatic silent refresh on 401 errors
+
+  // Handle automatic silent refresh on 401 errors with single-flight mutex
   if (response.status === 401 && path !== '/api/auth/refresh' && typeof window !== 'undefined') {
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (refreshToken) {
-      try {
-        const refreshResponse = await fetch(`${baseUrl}/api/auth/refresh`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ refreshToken })
-        });
-        
-        if (refreshResponse.ok) {
-          const refreshData = await refreshResponse.json();
-          if (refreshData?.session) {
-            localStorage.setItem('token', refreshData.session.access_token);
-            localStorage.setItem('refreshToken', refreshData.session.refresh_token);
-            if (refreshData.user) {
-              localStorage.setItem('user', JSON.stringify(refreshData.user));
-            }
-            
-            // Retry request with new token
-            headers['Authorization'] = `Bearer ${refreshData.session.access_token}`;
-            response = await fetch(url, fetchOptions);
-          }
-        } else {
-          // Refresh failed (refresh token expired too) -> force logout
-          localStorage.removeItem('token');
-          localStorage.removeItem('refreshToken');
-          localStorage.removeItem('user');
-          window.location.href = '/login?expired=true';
-          throw new Error('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
-        }
-      } catch (e) {
-        console.error('Silent refresh token error:', e);
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('user');
-        window.location.href = '/login?expired=true';
-        throw new Error('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
-      }
+    const newAccessToken = await refreshAccessTokenSingleFlight(baseUrl);
+    if (newAccessToken) {
+      headers['Authorization'] = `Bearer ${newAccessToken}`;
+      response = await fetch(url, { ...fetchOptions, headers });
+    } else if (localStorage.getItem('refreshToken') === null) {
+      throw new Error('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
     }
   }
 
@@ -161,12 +244,52 @@ async function request(path: string, method: string, body: any = null, options: 
     throw new Error(errorMsg);
   }
 
-  // Cache GET request result
+  // Cache GET request result (even when skipCache was used, update memoryCache for instant SWR peeks!)
   if (isGet && data) {
     memoryCache.set(cacheKey, { data, timestamp: Date.now() });
   }
 
   return data;
+}
+
+async function request(path: string, method: string, body: any = null, options: RequestOptions = {}) {
+  const isGet = method === 'GET';
+  const cacheKey = `${path}`;
+
+  // Scoped cache invalidation on mutations
+  if (!isGet) {
+    invalidateCacheForMutation(path);
+    return executeRequest(path, method, body, options);
+  }
+
+  // Check valid cache for GET requests
+  if (!options.skipCache) {
+    const cached = memoryCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+      return cached.data;
+    }
+  }
+
+  // Deduplicate concurrent identical GET requests (when using cache or fetching dashboard-bundle)
+  const canDeduplicate = !options.skipCache || path.startsWith('/api/user/dashboard-bundle');
+  if (canDeduplicate) {
+    const existingPromise = inFlightGets.get(cacheKey);
+    if (existingPromise) {
+      return existingPromise;
+    }
+  }
+
+  const reqPromise = executeRequest(path, method, body, options).finally(() => {
+    if (canDeduplicate) {
+      inFlightGets.delete(cacheKey);
+    }
+  });
+
+  if (canDeduplicate) {
+    inFlightGets.set(cacheKey, reqPromise);
+  }
+
+  return reqPromise;
 }
 
 export const api = {
@@ -175,7 +298,19 @@ export const api = {
   put: (path: string, body?: any, options?: RequestOptions) => request(path, 'PUT', body, options),
   delete: (path: string, options?: RequestOptions) => request(path, 'DELETE', null, options),
   clearCache: clearApiCache,
-  
+  /**
+   * Synchronously peek at the latest cached GET data (for 0ms Stale-While-Revalidate UI rendering)
+   */
+  peekCache: (path: string) => {
+    const entry = memoryCache.get(path);
+    return entry ? entry.data : null;
+  },
+  primeCache: (path: string, data: any) => {
+    if (data !== undefined && data !== null) {
+      memoryCache.set(path, { data, timestamp: Date.now() });
+    }
+  },
+
   // Auth state management helpers
   setToken: (token: string) => {
     if (typeof window !== 'undefined') {

@@ -1,13 +1,16 @@
 'use client';
 
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
 import SidebarSettings from '../components/SidebarSettings';
 import LessonSelector from './components/LessonSelector';
 import KnowledgeUnitCard from './components/KnowledgeUnitCard';
-import LessonPracticeModal from './components/LessonPracticeModal';
 import { KNOWLEDGE_UNITS, AVAILABLE_FUNDAMENTAL_LESSONS, FundamentalTopicId, KnowledgeUnit } from './data/knowledgeUnits';
 import { getLessonQuestionCount, hasLessonPractice } from './data/practice';
+
+const LessonPracticeModal = dynamic(() => import('./components/LessonPracticeModal'), { ssr: false });
 
 function FundamentalsContent() {
   const router = useRouter();
@@ -126,23 +129,28 @@ function FundamentalsContent() {
         </div>
 
         <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none px-4 py-4">
-          {menuItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => {
-                setIsSidebarOpen(false);
-                if (item.id === 'dashboard') router.push('/dashboard');
-                else if (item.id === 'roadmap') router.push('/roadmap');
-                else if (item.id === 'kana') router.push('/kana');
-                else router.push(`/lessons/1?tab=${item.id}`);
-              }}
-              className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-transparent cursor-pointer"
-            >
-              <span className="text-lg">{item.icon}</span>
-              <span className="text-sm font-semibold">{item.name}</span>
-            </button>
-          ))}
+          {menuItems.map((item) => {
+            const targetHref =
+              item.id === 'dashboard'
+                ? '/dashboard'
+                : item.id === 'roadmap'
+                ? '/roadmap'
+                : item.id === 'kana'
+                ? '/kana'
+                : `/lessons/1?tab=${item.id}`;
+            return (
+              <Link
+                key={item.id}
+                href={targetHref}
+                prefetch
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-transparent cursor-pointer"
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm font-semibold">{item.name}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         <SidebarSettings />
@@ -276,12 +284,14 @@ function FundamentalsContent() {
         </div>
 
         {/* Practice Modal */}
-        <LessonPracticeModal
-          lessonId={activeLesson}
-          initialUnitId={practiceTargetUnitId}
-          isOpen={isPracticeOpen}
-          onClose={() => setIsPracticeOpen(false)}
-        />
+        {isPracticeOpen && (
+          <LessonPracticeModal
+            lessonId={activeLesson}
+            initialUnitId={practiceTargetUnitId}
+            isOpen={isPracticeOpen}
+            onClose={() => setIsPracticeOpen(false)}
+          />
+        )}
       </main>
     </div>
   );

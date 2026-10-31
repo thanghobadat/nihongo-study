@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { useTheme } from './ThemeProvider';
-import QuickLookupModal from './QuickLookupModal';
 
 // SVG Helper to generate consistent animal avatars matching index.js
 function getAvatarSvg(userId: string) {
@@ -32,8 +32,6 @@ export default function SidebarSettings() {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
-  const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'radicals'>('radicals');
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const [user, setUser] = useState<any>(null);
 
@@ -62,13 +60,6 @@ export default function SidebarSettings() {
     router.replace('/login');
   };
 
-
-
-  const handleNavigate = (path: string) => {
-    setIsOpen(false);
-    router.push(path);
-  };
-
   return (
     <div className="relative w-full pt-4 border-t border-slate-200/60 dark:border-slate-900/80 shrink-0" ref={popoverRef}>
       {/* Popover Settings panel */}
@@ -90,33 +81,35 @@ export default function SidebarSettings() {
 
           <div className="border-t border-slate-100 dark:border-slate-900" />
 
-          {/* Navigation Shortcuts: 1. Bộ thủ -> 2. Kiến thức nền tảng -> 3. Ôn tổng hợp */}
+          {/* Navigation Shortcuts: 1. Ôn bảng chữ cái -> 2. Kiến thức nền tảng -> 3. Ôn tổng hợp */}
           <div className="space-y-1.5">
-            <button
-              onClick={() => {
-                setIsOpen(false);
-                setQuickLookupTab('radicals');
-                setIsQuickLookupOpen(true);
-              }}
+            <Link
+              href="/kana"
+              prefetch
+              onClick={() => setIsOpen(false)}
               className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
             >
-              <span className="text-sm">🉐</span>
-              <span>Tra cứu Bộ thủ Kanji</span>
-            </button>
-            <button
-              onClick={() => handleNavigate('/fundamentals')}
+              <span className="text-sm">🔤</span>
+              <span>Ôn bảng chữ cái</span>
+            </Link>
+            <Link
+              href="/fundamentals"
+              prefetch
+              onClick={() => setIsOpen(false)}
               className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
             >
               <span className="text-sm">📘</span>
               <span>Kiến thức nền tảng</span>
-            </button>
-            <button
-              onClick={() => handleNavigate('/knowledge')}
+            </Link>
+            <Link
+              href="/knowledge"
+              prefetch
+              onClick={() => setIsOpen(false)}
               className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
             >
               <span className="text-sm">📝</span>
               <span>Ôn tập tổng hợp</span>
-            </button>
+            </Link>
           </div>
 
           <div className="border-t border-slate-100 dark:border-slate-900" />
@@ -166,13 +159,6 @@ export default function SidebarSettings() {
           ▲
         </span>
       </button>
-
-      {/* Quick Lookup Modal (overlay on current page) */}
-      <QuickLookupModal
-        isOpen={isQuickLookupOpen}
-        onClose={() => setIsQuickLookupOpen(false)}
-        initialTab={quickLookupTab}
-      />
     </div>
   );
 }

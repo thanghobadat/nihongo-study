@@ -1,5 +1,39 @@
 const supabase = require('../db/supabase');
 
+// Short-lived in-memory cache + single-flight deduplication for verified JWTs
+const AUTH_CACHE_TTL_MS = 3 * 60 * 1000; // 3 minutes
+const MAX_AUTH_CACHE_SIZE = 500;
+const authCache = new Map();
+const authInFlight = new Map();
+
+function getJwtExpMs(token) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    const payloadJson = Buffer.from(parts[1], 'base64url').toString('utf8');
+    const payload = JSON.parse(payloadJson);
+    return typeof payload.exp === 'number' ? payload.exp * 1000 : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function invalidateAuthCache(userIdOrToken) {
+  if (!userIdOrToken) {
+    authCache.clear();
+    return;
+  }
+  if (authCache.has(userIdOrToken)) {
+    authCache.delete(userIdOrToken);
+    return;
+  }
+  for (const [tok, entry] of authCache.entries()) {
+    if (entry?.user?.id === userIdOrToken) {
+      authCache.delete(tok);
+    }
+  }
+}
+
 /**
  * Middleware to require authentication via Supabase JWT
  */
@@ -56,26 +90,62 @@ const requireAuth = async (req, res, next) => {
       return next();
     }
 
-    // Call Supabase Auth to get the user from JWT
-    const { data: { user }, error } = await supabase.auth.getUser(token);
-    if (error || !user) {
+    const now = Date.now();
+    const expMs = getJwtExpMs(token);
+    if (expMs !== null && now >= expMs) {
+      authCache.delete(token);
       return res.status(401).json({ error: 'Unauthorized: Invalid or expired token', code: 'TOKEN_EXPIRED' });
     }
 
-    // Query user profile to get the custom role ('admin' or 'user')
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('role, display_name')
-      .eq('id', user.id)
-      .single();
+    const cached = authCache.get(token);
+    if (cached && now < cached.expiresAt) {
+      req.user = { ...cached.user };
+      return next();
+    }
 
-    req.user = {
-      id: user.id,
-      email: user.email,
-      role: profile ? profile.role : 'user',
-      displayName: profile ? profile.display_name : null
-    };
+    let verifyPromise = authInFlight.get(token);
+    if (!verifyPromise) {
+      verifyPromise = (async () => {
+        const { data: { user }, error } = await supabase.auth.getUser(token);
+        if (error || !user) {
+          return null;
+        }
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role, display_name')
+          .eq('id', user.id)
+          .maybeSingle();
 
+        const resolvedUser = {
+          id: user.id,
+          email: user.email,
+          role: profile ? profile.role : 'user',
+          displayName: profile ? profile.display_name : null
+        };
+
+        const ttlExpiry = Date.now() + AUTH_CACHE_TTL_MS;
+        const expiresAt = expMs !== null ? Math.min(ttlExpiry, expMs - 1000) : ttlExpiry;
+        if (expiresAt > Date.now()) {
+          if (authCache.size >= MAX_AUTH_CACHE_SIZE) {
+            const oldestKey = authCache.keys().next().value;
+            if (oldestKey) authCache.delete(oldestKey);
+          }
+          authCache.set(token, { user: resolvedUser, expiresAt });
+        }
+        return resolvedUser;
+      })().finally(() => {
+        authInFlight.delete(token);
+      });
+      authInFlight.set(token, verifyPromise);
+    }
+
+    const verifiedUser = await verifyPromise;
+    if (!verifiedUser) {
+      authCache.delete(token);
+      return res.status(401).json({ error: 'Unauthorized: Invalid or expired token', code: 'TOKEN_EXPIRED' });
+    }
+
+    req.user = { ...verifiedUser };
     next();
   } catch (error) {
     console.error('Auth middleware error:', error);
@@ -95,5 +165,6 @@ const requireAdmin = (req, res, next) => {
 
 module.exports = {
   requireAuth,
-  requireAdmin
+  requireAdmin,
+  invalidateAuthCache
 };

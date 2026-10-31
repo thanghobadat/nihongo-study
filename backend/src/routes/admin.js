@@ -5,7 +5,20 @@ const { requireAuth, requireAdmin } = require('../middlewares/auth');
 const mockDb = require('../db/mockDb');
 
 // Protect all admin routes with auth and admin privilege middlewares
+const userRoutes = require('./user');
 router.use(requireAuth, requireAdmin);
+router.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD' && req.method !== 'OPTIONS') {
+    const origJson = res.json.bind(res);
+    res.json = (body) => {
+      if (res.statusCode < 400 && typeof userRoutes.clearSyllabusCache === 'function') {
+        userRoutes.clearSyllabusCache();
+      }
+      return origJson(body);
+    };
+  }
+  next();
+});
 
 /**
  * GET /api/admin/students

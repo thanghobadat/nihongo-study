@@ -13,6 +13,132 @@ const jlptLessonService = require('../services/jlptLessonService');
 
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
+const PLAN_SYNC_TTL_MS = 5000;
+const SYLLABUS_CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes for static curriculum tables
+let savePlansTimer = null;
+const planSyncInFlight = new Map();
+const planLastSyncAt = new Map();
+const syllabusCache = new Map();
+const syllabusInFlight = new Map();
+
+function clearSyllabusCache() {
+  syllabusCache.clear();
+  syllabusInFlight.clear();
+}
+router.clearSyllabusCache = clearSyllabusCache;
+
+function invalidateUserPlanCache(userId) {
+  if (!userId) {
+    planLastSyncAt.clear();
+    return;
+  }
+  planLastSyncAt.delete(String(userId));
+}
+router.invalidateUserPlanCache = invalidateUserPlanCache;
+
+async function getOrFetchSyllabusCache(cacheKey, fetcher) {
+  const now = Date.now();
+  const cached = syllabusCache.get(cacheKey);
+  if (cached && cached.expiresAt > now) {
+    return cached.data;
+  }
+  let inFlight = syllabusInFlight.get(cacheKey);
+  if (inFlight) {
+    return inFlight;
+  }
+  inFlight = (async () => {
+    try {
+      const data = await fetcher();
+      syllabusCache.set(cacheKey, {
+        data,
+        expiresAt: Date.now() + SYLLABUS_CACHE_TTL_MS
+      });
+      return data;
+    } finally {
+      syllabusInFlight.delete(cacheKey);
+    }
+  })();
+  syllabusInFlight.set(cacheKey, inFlight);
+  return inFlight;
+}
+
+// Helper to fetch all rows from Supabase bypassing the 1000-row default limit
+async function fetchAllTableRows(table, filterFn = null) {
+  let all = [];
+  let from = 0;
+  while (true) {
+    let q = supabase.from(table).select('*').order('id', { ascending: true });
+    if (filterFn) {
+      q = filterFn(q);
+    }
+    const { data, error } = await q.range(from, from + 999);
+    if (error) throw error;
+    if (!data || data.length === 0) break;
+    all = all.concat(data);
+    if (data.length < 1000) break;
+    from += 1000;
+  }
+  return all;
+}
+
+function getCachedLessonsByCourse(course) {
+  return getOrFetchSyllabusCache(`lessons:${course}`, async () => {
+    const { data, error } = await supabase
+      .from('lessons')
+      .select('*')
+      .eq('course', course)
+      .order('id', { ascending: true });
+    if (error) throw error;
+    return data || [];
+  });
+}
+
+function getCachedCourseCurriculum(course) {
+  return getOrFetchSyllabusCache(`curriculum:${course}`, async () => {
+    const lessons = await getCachedLessonsByCourse(course);
+    const lessonIds = lessons.map(l => l.id);
+    if (lessonIds.length === 0) {
+      return { lessons: [], lessonIds: [], allVocab: [], allKanji: [], allGrammar: [] };
+    }
+    const [allVocab, allKanji, allGrammar] = await Promise.all([
+      fetchAllTableRows('vocabulary', q => q.in('lesson_id', lessonIds)),
+      fetchAllTableRows('kanji', q => q.in('lesson_id', lessonIds)),
+      fetchAllTableRows('grammar', q => q.in('lesson_id', lessonIds))
+    ]);
+    return { lessons, lessonIds, allVocab, allKanji, allGrammar };
+  });
+}
+
+function getCachedLessonItems(table, lessonId, orderAscending = false) {
+  return getOrFetchSyllabusCache(`lesson_items:${table}:${lessonId}`, async () => {
+    let q = supabase.from(table).select('*').eq('lesson_id', lessonId);
+    if (orderAscending) {
+      q = q.order('id', { ascending: true });
+    }
+    const { data, error } = await q;
+    if (error) throw error;
+    return data || [];
+  });
+}
+
+function getCachedTableCounts() {
+  return getOrFetchSyllabusCache('syllabus_counts', async () => {
+    const [resV, resK, resG] = await Promise.all([
+      supabase.from('vocabulary').select('*', { count: 'exact', head: true }),
+      supabase.from('kanji').select('*', { count: 'exact', head: true }),
+      supabase.from('grammar').select('*', { count: 'exact', head: true })
+    ]);
+    if (resV.error || resK.error || resG.error) {
+      throw new Error(resV.error?.message || resK.error?.message || resG.error?.message);
+    }
+    return {
+      totalVocab: resV.count || 0,
+      totalKanji: resK.count || 0,
+      totalGrammar: resG.count || 0
+    };
+  });
+}
+
 function loadPersistentPlans() {
   try {
     if (fs.existsSync(STUDY_PLANS_FILE)) {
@@ -34,17 +160,21 @@ function isSupabaseConfigured() {
 }
 
 function savePersistentPlans(plans) {
-  try {
-    fs.writeFileSync(STUDY_PLANS_FILE, JSON.stringify(plans, null, 2), 'utf8');
-  } catch (e) {
-    console.error('[StudyPlan] Error writing study_plans.json:', e.message);
-  }
+  if (savePlansTimer) clearTimeout(savePlansTimer);
+  savePlansTimer = setTimeout(() => {
+    savePlansTimer = null;
+    fs.promises.writeFile(STUDY_PLANS_FILE, JSON.stringify(plans), 'utf8').catch((e) => {
+      console.error('[StudyPlan] Error writing study_plans.json:', e.message);
+    });
+  }, 500);
+  if (savePlansTimer.unref) savePlansTimer.unref();
 }
 
 /**
  * Persist full 130-day plan data directly to Supabase so it survives container restarts
  */
 async function persistPlanToSupabase(userId, plan) {
+  invalidateUserPlanCache(userId);
   if (!isSupabaseConfigured() || !userId || !plan) return false;
   try {
     if (!plan.updated_at) {
@@ -59,6 +189,7 @@ async function persistPlanToSupabase(userId, plan) {
       console.error('[StudyPlan] Supabase user_study_plans upsert error:', error.message);
       return false;
     }
+    planLastSyncAt.set(String(userId), Date.now());
     return true;
   } catch (err) {
     console.warn('[StudyPlan] Supabase user_study_plans sync warning:', err.message);
@@ -66,7 +197,7 @@ async function persistPlanToSupabase(userId, plan) {
   }
 }
 
-// Initialize mockDb.studyPlans from persistent disk storage
+// Initialize mockDb.studyPlans from persistent disk storage once at startup
 if (!mockDb.studyPlans) mockDb.studyPlans = {};
 try {
   const loaded = loadPersistentPlans();
@@ -74,60 +205,94 @@ try {
 } catch (e) {}
 
 /**
- * Safely get active user study plan from memory or persistent disk storage
+ * Safely get active user study plan from memory
  */
 function getUserPlan(userId) {
   if (!mockDb.studyPlans) mockDb.studyPlans = {};
-  if (!mockDb.studyPlans[userId]) {
-    const loaded = loadPersistentPlans();
-    if (loaded && loaded[userId]) {
-      mockDb.studyPlans[userId] = loaded[userId];
-    }
-  }
   return mockDb.studyPlans[userId] || null;
 }
 
 /**
  * Asynchronous helper to get active user study plan, checking memory, disk, and Supabase cloud
+ * Coalesces concurrent requests per userId and caches sync check for 5s (invalidated immediately on write)
  */
 async function getUserPlanAsync(userId, forceSync = false) {
   if (!userId) return null;
+  const uid = String(userId);
   const inMemory = getUserPlan(userId);
-  if (!forceSync && inMemory && inMemory.days && inMemory.days.length > 0 && !isSupabaseConfigured()) {
+  if (!isSupabaseConfigured()) {
     return inMemory;
   }
-  if (isSupabaseConfigured()) {
-    for (let attempt = 0; attempt < 2; attempt++) {
-      try {
-        const { data: sp, error: spErr } = await supabase
-          .from('user_study_plans')
-          .select('plan_data, updated_at')
-          .eq('user_id', String(userId))
-          .maybeSingle();
-        if (!spErr && sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
-          const inMemTime = inMemory?.updated_at ? new Date(inMemory.updated_at).getTime() : 0;
-          const spTime = sp.plan_data.updated_at ? new Date(sp.plan_data.updated_at).getTime() : (sp.updated_at ? new Date(sp.updated_at).getTime() : 0);
 
-          if (!inMemory || forceSync || spTime >= inMemTime) {
-            if (!sp.plan_data.updated_at && (sp.updated_at || spTime > 0)) {
-              sp.plan_data.updated_at = sp.updated_at || new Date(spTime).toISOString();
-            }
-            if (!mockDb.studyPlans) mockDb.studyPlans = {};
-            mockDb.studyPlans[userId] = sp.plan_data;
-            savePersistentPlans(mockDb.studyPlans);
-            return sp.plan_data;
-          }
-          return inMemory;
-        }
-        if (attempt === 0) {
-          await new Promise(r => setTimeout(r, 200));
-        }
-      } catch (e) {
-        console.warn(`[StudyPlan] Error fetching user_study_plans in getUserPlanAsync (attempt ${attempt + 1}):`, e.message);
-      }
+  const now = Date.now();
+  if (!forceSync) {
+    const lastSync = planLastSyncAt.get(uid) || 0;
+    if (now - lastSync < PLAN_SYNC_TTL_MS) {
+      return getUserPlan(userId);
     }
   }
-  return inMemory || null;
+
+  let inFlight = planSyncInFlight.get(uid);
+  if (inFlight) {
+    return inFlight;
+  }
+
+  inFlight = (async () => {
+    try {
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const { data: sp, error: spErr } = await supabase
+            .from('user_study_plans')
+            .select('plan_data, updated_at')
+            .eq('user_id', uid)
+            .maybeSingle();
+
+          if (spErr) {
+            if (attempt === 0) {
+              await new Promise(r => setTimeout(r, 150));
+              continue;
+            }
+            break;
+          }
+
+          planLastSyncAt.set(uid, Date.now());
+
+          if (sp && sp.plan_data && Array.isArray(sp.plan_data.days) && sp.plan_data.days.length > 0) {
+            const curMem = getUserPlan(userId);
+            const inMemTime = curMem?.updated_at ? new Date(curMem.updated_at).getTime() : 0;
+            const spTime = sp.plan_data.updated_at
+              ? new Date(sp.plan_data.updated_at).getTime()
+              : (sp.updated_at ? new Date(sp.updated_at).getTime() : 0);
+
+            if (!curMem || forceSync || spTime >= inMemTime) {
+              if (!sp.plan_data.updated_at && (sp.updated_at || spTime > 0)) {
+                sp.plan_data.updated_at = sp.updated_at || new Date(spTime).toISOString();
+              }
+              if (!mockDb.studyPlans) mockDb.studyPlans = {};
+              mockDb.studyPlans[userId] = sp.plan_data;
+              savePersistentPlans(mockDb.studyPlans);
+              return sp.plan_data;
+            }
+            return curMem;
+          }
+
+          // Supabase succeeded cleanly with no plan row — do not waste 200ms retrying
+          return getUserPlan(userId);
+        } catch (e) {
+          console.warn(`[StudyPlan] Error fetching user_study_plans in getUserPlanAsync (attempt ${attempt + 1}):`, e.message);
+          if (attempt === 0) {
+            await new Promise(r => setTimeout(r, 150));
+          }
+        }
+      }
+      return getUserPlan(userId);
+    } finally {
+      planSyncInFlight.delete(uid);
+    }
+  })();
+
+  planSyncInFlight.set(uid, inFlight);
+  return inFlight;
 }
 
 /**
@@ -184,29 +349,15 @@ router.get('/progress-summary', async (req, res) => {
       });
     }
 
-    // Get total vocabulary, kanji and grammar counts
-    const { count: totalVocab, error: errV } = await supabase
-      .from('vocabulary')
-      .select('*', { count: 'exact', head: true });
-
-    const { count: totalKanji, error: errK } = await supabase
-      .from('kanji')
-      .select('*', { count: 'exact', head: true });
-
-    const { count: totalGrammar, error: errG } = await supabase
-      .from('grammar')
-      .select('*', { count: 'exact', head: true });
-
-    if (errV || errK || errG) {
-      throw new Error(errV?.message || errK?.message || errG?.message);
-    }
-
-    // Get user's mastered counts
-    const { data: progressData, error: errP } = await supabase
-      .from('user_progress')
-      .select('item_type, status')
-      .eq('user_id', userId)
-      .eq('status', 'mastered');
+    // Get cached total counts + user's mastered counts in parallel
+    const [{ totalVocab, totalKanji, totalGrammar }, { data: progressData, error: errP }] = await Promise.all([
+      getCachedTableCounts(),
+      supabase
+        .from('user_progress')
+        .select('item_type, status')
+        .eq('user_id', userId)
+        .eq('status', 'mastered')
+    ]);
 
     if (errP) throw errP;
 
@@ -425,39 +576,13 @@ router.get('/course-summary', async (req, res) => {
     }
 
     // --- REAL DATABASE SUPABASE MODE ---
-    const { data: lessons, error: lErr } = await supabase
-      .from('lessons')
-      .select('*')
-      .eq('course', course)
-      .order('id', { ascending: true });
-    if (lErr) throw lErr;
-    const lessonIds = lessons.map(l => l.id);
-
-    // Helper to fetch all rows from Supabase bypassing the 1000-row default limit
-    async function fetchAllTableRows(table, filterFn = null) {
-      let all = [];
-      let from = 0;
-      while (true) {
-        let q = supabase.from(table).select('*').order('id', { ascending: true });
-        if (filterFn) {
-          q = filterFn(q);
-        }
-        const { data, error } = await q.range(from, from + 999);
-        if (error) throw error;
-        if (!data || data.length === 0) break;
-        all = all.concat(data);
-        if (data.length < 1000) break;
-        from += 1000;
-      }
-      return all;
-    }
-
-    const [allVocab, allKanji, allGrammar, allProgress] = await Promise.all([
-      fetchAllTableRows('vocabulary', q => q.in('lesson_id', lessonIds)),
-      fetchAllTableRows('kanji', q => q.in('lesson_id', lessonIds)),
-      fetchAllTableRows('grammar', q => q.in('lesson_id', lessonIds)),
+    // Static curriculum tables are served from 15-min RAM cache; user progress & custom items fetched in parallel
+    const [curriculum, allProgress] = await Promise.all([
+      getCachedCourseCurriculum(course),
       fetchAllTableRows('user_progress', q => q.eq('user_id', userId))
     ]);
+
+    const { lessons, lessonIds, allVocab, allKanji, allGrammar } = curriculum;
 
     const progressMap = new Map();
     allProgress.forEach(p => {
@@ -477,11 +602,13 @@ router.get('/course-summary', async (req, res) => {
       status: progressMap.get(`grammar:${g.id}`) || 'not_learned'
     }));
 
-    const [customVocabRes, customKanjiRes, customGrammarRes] = await Promise.all([
-      supabase.from('user_custom_vocabulary').select('*').eq('user_id', userId).in('lesson_id', lessonIds),
-      supabase.from('user_custom_kanji').select('*').eq('user_id', userId).in('lesson_id', lessonIds),
-      supabase.from('user_custom_grammar').select('*').eq('user_id', userId).in('lesson_id', lessonIds)
-    ]);
+    const [customVocabRes, customKanjiRes, customGrammarRes] = lessonIds.length > 0
+      ? await Promise.all([
+          supabase.from('user_custom_vocabulary').select('*').eq('user_id', userId).in('lesson_id', lessonIds),
+          supabase.from('user_custom_kanji').select('*').eq('user_id', userId).in('lesson_id', lessonIds),
+          supabase.from('user_custom_grammar').select('*').eq('user_id', userId).in('lesson_id', lessonIds)
+        ])
+      : [{ data: [], error: null }, { data: [], error: null }, { data: [], error: null }];
     if (customVocabRes.error) throw customVocabRes.error;
     if (customKanjiRes.error) throw customKanjiRes.error;
     if (customGrammarRes.error) throw customGrammarRes.error;
@@ -515,14 +642,7 @@ router.get('/lessons', async (req, res) => {
       return res.json(data);
     }
 
-    const { data, error } = await supabase
-      .from('lessons')
-      .select('*')
-      .eq('course', course)
-      .order('id', { ascending: true });
-
-    if (error) throw error;
-
+    const data = await getCachedLessonsByCourse(course);
     res.json(data);
   } catch (error) {
     console.error('Error fetching lessons:', error);
@@ -553,31 +673,32 @@ router.get('/lessons/:lessonId/vocabulary', async (req, res) => {
       return res.json(mergedList);
     }
 
-    // Fetch vocabulary
-    const { data: vocabList, error: vError } = await supabase
-      .from('vocabulary')
-      .select('*')
-      .eq('lesson_id', lessonId);
+    const vocabList = await getCachedLessonItems('vocabulary', lessonId);
+    if (!vocabList.length) {
+      return res.json([]);
+    }
 
-    if (vError) throw vError;
-
-    // Fetch user progress for this lesson's vocabularies
+    const itemIds = vocabList.map(item => item.id);
     const { data: userProgress, error: pError } = await supabase
       .from('user_progress')
-      .select('*')
+      .select('item_id, status')
       .eq('user_id', userId)
-      .eq('item_type', 'vocabulary');
+      .eq('item_type', 'vocabulary')
+      .in('item_id', itemIds);
 
     if (pError) throw pError;
 
-    // Merge progress into list
-    const mergedList = vocabList.map(item => {
-      const progress = userProgress.find(p => p.item_id === item.id);
-      return {
-        ...item,
-        status: progress ? progress.status : 'not_learned'
-      };
-    });
+    const progressMap = new Map();
+    if (Array.isArray(userProgress)) {
+      for (const p of userProgress) {
+        progressMap.set(p.item_id, p.status);
+      }
+    }
+
+    const mergedList = vocabList.map(item => ({
+      ...item,
+      status: progressMap.get(item.id) || 'not_learned'
+    }));
 
     res.json(mergedList);
   } catch (error) {
@@ -609,28 +730,32 @@ router.get('/lessons/:lessonId/kanji', async (req, res) => {
       return res.json(mergedList);
     }
 
-    const { data: kanjiList, error: kError } = await supabase
-      .from('kanji')
-      .select('*')
-      .eq('lesson_id', lessonId);
+    const kanjiList = await getCachedLessonItems('kanji', lessonId);
+    if (!kanjiList.length) {
+      return res.json([]);
+    }
 
-    if (kError) throw kError;
-
+    const itemIds = kanjiList.map(item => item.id);
     const { data: userProgress, error: pError } = await supabase
       .from('user_progress')
-      .select('*')
+      .select('item_id, status')
       .eq('user_id', userId)
-      .eq('item_type', 'kanji');
+      .eq('item_type', 'kanji')
+      .in('item_id', itemIds);
 
     if (pError) throw pError;
 
-    const mergedList = kanjiList.map(item => {
-      const progress = userProgress.find(p => p.item_id === item.id);
-      return {
-        ...item,
-        status: progress ? progress.status : 'not_learned'
-      };
-    });
+    const progressMap = new Map();
+    if (Array.isArray(userProgress)) {
+      for (const p of userProgress) {
+        progressMap.set(p.item_id, p.status);
+      }
+    }
+
+    const mergedList = kanjiList.map(item => ({
+      ...item,
+      status: progressMap.get(item.id) || 'not_learned'
+    }));
 
     res.json(mergedList);
   } catch (error) {
@@ -662,28 +787,32 @@ router.get('/lessons/:lessonId/grammar', async (req, res) => {
       return res.json(mergedList);
     }
 
-    const { data: grammarList, error: gError } = await supabase
-      .from('grammar')
-      .select('*')
-      .eq('lesson_id', lessonId);
+    const grammarList = await getCachedLessonItems('grammar', lessonId);
+    if (!grammarList.length) {
+      return res.json([]);
+    }
 
-    if (gError) throw gError;
-
+    const itemIds = grammarList.map(item => item.id);
     const { data: userProgress, error: pError } = await supabase
       .from('user_progress')
-      .select('*')
+      .select('item_id, status')
       .eq('user_id', userId)
-      .eq('item_type', 'grammar');
+      .eq('item_type', 'grammar')
+      .in('item_id', itemIds);
 
     if (pError) throw pError;
 
-    const mergedList = grammarList.map(item => {
-      const progress = userProgress.find(p => p.item_id === item.id);
-      return {
-        ...item,
-        status: progress ? progress.status : 'not_learned'
-      };
-    });
+    const progressMap = new Map();
+    if (Array.isArray(userProgress)) {
+      for (const p of userProgress) {
+        progressMap.set(p.item_id, p.status);
+      }
+    }
+
+    const mergedList = grammarList.map(item => ({
+      ...item,
+      status: progressMap.get(item.id) || 'not_learned'
+    }));
 
     res.json(mergedList);
   } catch (error) {
@@ -699,7 +828,6 @@ router.get('/lessons/:lessonId/grammar', async (req, res) => {
 router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
   try {
     const lessonId = req.params.lessonId;
-    const userId = req.user.id;
 
     // Return mock data for local testing
     if (req.user.isMock) {
@@ -714,15 +842,11 @@ router.get('/lessons/:lessonId/kaiwa', async (req, res) => {
       return res.json(dialogueList);
     }
 
-    // In case Supabase has kaiwa_dialog table
-    const { data: dialogueList, error: gError } = await supabase
-      .from('kaiwa_dialog')
-      .select('*')
-      .eq('lesson_id', lessonId)
-      .order('id', { ascending: true });
-
-    if (gError) {
-      // Fallback to mockDb
+    // Cached kaiwa_dialog read with fallback to mockDb
+    let dialogueList;
+    try {
+      dialogueList = await getCachedLessonItems('kaiwa_dialog', lessonId, true);
+    } catch (gError) {
       console.warn('kaiwa_dialog table read error, falling back to mockDb:', gError.message);
       const fallbackList = mockDb.kaiwaDialog
         .filter(item => item.lesson_id === parseInt(lessonId))
@@ -845,6 +969,7 @@ router.post('/progress', async (req, res) => {
       const key = `${userId}:${item_type}:${item_id}`;
       mockDb.userProgress[key] = status;
       progressService.savePersistentProgress(mockDb.userProgress);
+      progressService.invalidateUserSyncCache(userId);
       checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
       return res.json({
         message: 'Progress updated successfully (Mock Mode)',
@@ -902,6 +1027,7 @@ router.post('/progress', async (req, res) => {
     if (!mockDb.userProgress) mockDb.userProgress = {};
     mockDb.userProgress[`${userId}:${item_type}:${item_id}`] = status;
     progressService.savePersistentProgress(mockDb.userProgress);
+    progressService.invalidateUserSyncCache(userId);
     checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
 
     res.json({ message: 'Progress updated successfully', progress: data });
@@ -965,6 +1091,7 @@ router.post('/progress/clear-wrong', async (req, res) => {
           mockDb.userProgress[k] = 'learning';
         }
       });
+      progressService.invalidateUserSyncCache(userId);
       return res.json({ message: 'Cleared wrong items successfully (Mock Mode)' });
     }
 
@@ -976,6 +1103,16 @@ router.post('/progress/clear-wrong', async (req, res) => {
       .eq('status', 'wrong');
 
     if (error) throw error;
+    if (mockDb.userProgress) {
+      const prefix = `${userId}:${targetType}:`;
+      Object.keys(mockDb.userProgress).forEach(k => {
+        if (k.startsWith(prefix) && mockDb.userProgress[k] === 'wrong') {
+          mockDb.userProgress[k] = 'learning';
+        }
+      });
+      progressService.savePersistentProgress(mockDb.userProgress);
+    }
+    progressService.invalidateUserSyncCache(userId);
     res.json({ message: 'Cleared wrong items successfully' });
   } catch (error) {
     console.error('Error clearing wrong items:', error);
@@ -1905,6 +2042,7 @@ async function syncManualReviewSession(userId, task, completed, isMock) {
       }
     }
   }
+  progressService.invalidateUserSyncCache(userId);
 }
 
 /**
@@ -1928,6 +2066,7 @@ router.post('/review-sessions', async (req, res) => {
       mockDb.userReviewSessions[key] = session_data;
     }
     progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
+    progressService.invalidateUserSyncCache(userId);
 
     if (isSupabaseConfigured() && req.user && !req.user.isMock) {
       try {
@@ -2689,6 +2828,307 @@ router.post('/daily-tasks/auto-allocate-slots', async (req, res) => {
   }
 });
 
+function buildStudyOverviewPayload(userId, plan) {
+  const vocabList = mockDb.vocabulary || [];
+  const kanjiList = mockDb.kanji || [];
+  const grammarList = mockDb.grammar || [];
+  const userProgress = mockDb.userProgress || {};
+  const prefix = `${userId}:`;
+
+  let masteredVocab = 0;
+  let masteredKanji = 0;
+  let masteredGrammar = 0;
+  for (const k in userProgress) {
+    if (k.startsWith(prefix) && userProgress[k] === 'mastered') {
+      if (k.includes(':vocabulary:')) masteredVocab++;
+      else if (k.includes(':kanji:')) masteredKanji++;
+      else if (k.includes(':grammar:')) masteredGrammar++;
+    }
+  }
+
+  let currentLesson = 1;
+  let todayLessonsDetails = [];
+  if (plan && plan.days) {
+    const todayStr = getLocalDateStr();
+    const currentDay = plan.days.find(d => d.date === todayStr) || plan.days[0];
+    if (currentDay && currentDay.tasks && currentDay.tasks.length > 0) {
+      currentLesson = currentDay.tasks[0].lesson || 1;
+      const lessonIds = [...new Set(currentDay.tasks.map(t => t.lesson).filter(Boolean))];
+      todayLessonsDetails = lessonIds.map(lessonId => {
+        const counts = aiPlannerService.getLessonCounts(lessonId);
+        const tasksForLesson = currentDay.tasks.filter(t => t.lesson === lessonId);
+        const isPractice = currentDay.isPracticeDay || tasksForLesson.some(t => t.itemType === 'single_review' || t.itemType === 'cumulative_review' || t.type === 'practice');
+
+        return {
+          lesson: lessonId,
+          title: `Bài ${lessonId}: Minna no Nihongo`,
+          vocabCount: counts.vocabCount,
+          vocabScope: counts.vocabScope,
+          kanjiCount: counts.kanjiCount,
+          kanjiScope: counts.kanjiScope,
+          kanjiChars: counts.kanjiChars,
+          grammarCount: counts.grammarCount,
+          grammarScope: counts.grammarScope,
+          grammarTitlesList: counts.grammarTitlesList,
+          firstVocab: counts.firstVocab,
+          lastVocab: counts.lastVocab,
+          isPracticeDay: isPractice,
+          tasksToday: tasksForLesson.map(t => ({
+            id: t.id,
+            type: t.itemType || t.type,
+            title: t.title,
+            scopeDetails: t.scopeDetails || t.scope,
+            estimatedMinutes: t.estimatedMinutes,
+            due_time: t.due_time,
+            completed: t.completed
+          }))
+        };
+      });
+    }
+  }
+
+  if (todayLessonsDetails.length === 0) {
+    const counts = aiPlannerService.getLessonCounts(currentLesson);
+    todayLessonsDetails = [{
+      lesson: currentLesson,
+      title: `Bài ${currentLesson}: Minna no Nihongo`,
+      vocabCount: counts.vocabCount,
+      vocabScope: counts.vocabScope,
+      kanjiCount: counts.kanjiCount,
+      kanjiScope: counts.kanjiScope,
+      kanjiChars: counts.kanjiChars,
+      grammarCount: counts.grammarCount,
+      grammarScope: counts.grammarScope,
+      grammarTitlesList: counts.grammarTitlesList,
+      firstVocab: counts.firstVocab,
+      lastVocab: counts.lastVocab,
+      isPracticeDay: false,
+      tasksToday: []
+    }];
+  }
+
+  const startDate = plan?.originalStartDate || plan?.startDate || getLocalDateStr();
+  const defaultNextMonth = new Date();
+  defaultNextMonth.setDate(defaultNextMonth.getDate() + 30);
+  const endDate = plan?.endDate || getLocalDateStr(defaultNextMonth);
+
+  const completedLessonCount = Math.max(0, currentLesson - 1, plan?.completedLessonsCount || 0);
+
+  const pace = aiPlannerService.calculatePaceDeviation({
+    startDate,
+    endDate,
+    totalLessons: 50,
+    completedLessons: completedLessonCount,
+    currentProgress: { currentLesson, masteredVocab, masteredGrammar, masteredKanji }
+  });
+
+  const milestones = [
+    {
+      id: 'm1',
+      title: 'N5 Cơ bản',
+      lessons: 'Bài 1 - 10',
+      targetLessons: 10,
+      completedLessons: Math.min(10, Math.max(0, completedLessonCount)),
+      percentage: Math.min(100, Math.round((Math.min(10, Math.max(0, completedLessonCount)) / 10) * 100)),
+      status: completedLessonCount >= 10 ? 'completed' : (completedLessonCount >= 1 || currentLesson >= 1 ? 'in_progress' : 'locked')
+    },
+    {
+      id: 'm2',
+      title: 'N5 Nâng cao',
+      lessons: 'Bài 11 - 25',
+      targetLessons: 15,
+      completedLessons: Math.min(15, Math.max(0, completedLessonCount - 10)),
+      percentage: completedLessonCount < 10 ? 0 : Math.min(100, Math.round((Math.min(15, Math.max(0, completedLessonCount - 10)) / 15) * 100)),
+      status: completedLessonCount >= 25 ? 'completed' : (completedLessonCount >= 11 || currentLesson >= 11 ? 'in_progress' : 'locked')
+    },
+    {
+      id: 'm3',
+      title: 'N4 Khởi động',
+      lessons: 'Bài 26 - 37',
+      targetLessons: 12,
+      completedLessons: Math.min(12, Math.max(0, completedLessonCount - 25)),
+      percentage: completedLessonCount < 25 ? 0 : Math.min(100, Math.round((Math.min(12, Math.max(0, completedLessonCount - 25)) / 12) * 100)),
+      status: completedLessonCount >= 37 ? 'completed' : (completedLessonCount >= 26 || currentLesson >= 26 ? 'in_progress' : 'locked')
+    },
+    {
+      id: 'm4',
+      title: 'N4 Về đích',
+      lessons: 'Bài 38 - 50',
+      targetLessons: 13,
+      completedLessons: Math.min(13, Math.max(0, completedLessonCount - 37)),
+      percentage: completedLessonCount < 37 ? 0 : Math.min(100, Math.round((Math.min(13, Math.max(0, completedLessonCount - 37)) / 13) * 100)),
+      status: completedLessonCount >= 50 ? 'completed' : (completedLessonCount >= 38 || currentLesson >= 38 ? 'in_progress' : 'locked')
+    }
+  ];
+
+  const todayStudyTime = studyTimeService.getStudyTime(userId, getLocalDateStr());
+
+  return {
+    success: true,
+    overview: {
+      totalVocab: vocabList.length || 1500,
+      masteredVocab,
+      vocabPercentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0,
+      totalKanji: kanjiList.length || 255,
+      masteredKanji,
+      kanjiPercentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0,
+      totalGrammar: grammarList.length || 204,
+      masteredGrammar,
+      grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
+      totalLessons: 50,
+      currentLesson
+    },
+    todayStudyTime: {
+      seconds: todayStudyTime.totalSeconds,
+      formatted: todayStudyTime.formatted
+    },
+    current_position: {
+      lesson: currentLesson,
+      title: `Bài ${currentLesson}: Minna no Nihongo`,
+      progressRatio: parseFloat(((currentLesson / 50) * 100).toFixed(1))
+    },
+    pace,
+    milestones,
+    todayLessonsDetails,
+    planMetadata: {
+      startDate,
+      endDate,
+      totalDays: pace.totalDays,
+      daysRemaining: pace.daysRemaining
+    }
+  };
+}
+
+function buildDailyHistoryPayload(userId, plan) {
+  if (!plan || !plan.days || plan.days.length === 0) {
+    return { success: true, history: [] };
+  }
+
+  const todayStr = getLocalDateStr();
+  const studyTimeMap = studyTimeService.getUserStudyTimeMap(userId);
+
+  const allDays = [
+    ...(plan.archivedPastDays || []),
+    ...(plan.days || [])
+  ];
+
+  const history = allDays.map((day) => {
+    const planned = day.plannedCount || (day.tasks ? day.tasks.length : 0);
+    const completed = day.completedCount || (day.tasks ? day.tasks.filter(t => t.completed).length : 0);
+    const completionRate = planned > 0 ? Math.round((completed / planned) * 100) : 100;
+
+    let pace_status = 'on_track';
+    let pace_label = 'Đạt 100% 🟢';
+
+    const isPast = day.date < todayStr;
+    const isToday = day.date === todayStr;
+
+    if (isPast) {
+      if (completionRate >= 120) {
+        pace_status = 'ahead';
+        pace_label = `Vượt ${completionRate}% 🚀`;
+      } else if (completionRate >= 100) {
+        pace_status = 'on_track';
+        pace_label = 'Hoàn thành 100% 🟢';
+      } else if (completionRate >= 60) {
+        pace_status = 'behind';
+        pace_label = `Chậm nhẹ (${completionRate}%) ⚠️`;
+      } else {
+        pace_status = 'behind';
+        pace_label = `Chậm trễ (${completionRate}%) ⚠️`;
+      }
+    } else if (isToday) {
+      if (completionRate >= 100) {
+        pace_status = 'on_track';
+        pace_label = 'Đã hoàn thành hôm nay 🟢';
+      } else {
+        pace_status = 'on_track';
+        pace_label = `Đang học hôm nay (${completionRate}%) ⚡`;
+      }
+    } else {
+      pace_status = 'scheduled';
+      pace_label = 'Sắp tới 📅';
+    }
+
+    const dayStudySeconds = studyTimeMap[day.date] || 0;
+
+    return {
+      date: day.date,
+      dayIndex: day.dayIndex,
+      isBufferDay: day.isBufferDay,
+      isPracticeDay: day.isDedicatedPracticeDay,
+      planned_count: planned,
+      completed_count: completed,
+      completion_rate: completionRate,
+      pace_status,
+      pace_label,
+      dayRationale: day.dayRationale,
+      workloadPoints: day.workloadPoints,
+      tasks_detail: day.tasks || [],
+      studyTimeSeconds: dayStudySeconds,
+      studyTimeFormatted: studyTimeService.formatStudyTime(dayStudySeconds),
+      studyTimeHours: Number((dayStudySeconds / 3600).toFixed(1)),
+      studyTimeEvaluation: studyTimeService.evaluateStudyTime(dayStudySeconds)
+    };
+  });
+
+  return { success: true, history };
+}
+
+/**
+ * GET /api/user/dashboard-bundle
+ * Unified single-flight endpoint returning { overview, plan, history, debt } in 1 HTTP request
+ * with 1 shared parallel Supabase sync and 1 single auto-tracking pass.
+ */
+router.get('/dashboard-bundle', async (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  try {
+    const userId = req.user.id;
+    const clientDate = req.query.date;
+
+    // 1. Run progress/review/studyTime sync and study plan fetch concurrently
+    let [, plan] = await Promise.all([
+      syncUserProgressFromSupabase(userId),
+      getUserPlanAsync(userId)
+    ]);
+
+    // 2. Apply auto-tracking once across the entire plan
+    let planPayload;
+    if (!plan || !plan.days || plan.days.length === 0) {
+      planPayload = { success: true, plan: null, requiresClientRestore: true };
+    } else {
+      const prevUpdatedAt = plan.updated_at;
+      plan = applyAutoTracking(plan, userId);
+      if (plan.updated_at !== prevUpdatedAt) {
+        if (!mockDb.studyPlans) mockDb.studyPlans = {};
+        mockDb.studyPlans[userId] = plan;
+        savePersistentPlans(mockDb.studyPlans);
+        persistPlanToSupabase(userId, plan).catch(() => {});
+      }
+      planPayload = { success: true, plan };
+    }
+
+    // 3. Build all 4 dashboard payloads synchronously from the fresh synced state
+    const overviewPayload = buildStudyOverviewPayload(userId, plan);
+    const historyPayload = buildDailyHistoryPayload(userId, plan);
+    const debt = aiPlannerService.getUnfinishedDebt({ userId, plan, currentDate: clientDate });
+    const debtPayload = { success: true, ...debt };
+
+    return res.json({
+      success: true,
+      overview: overviewPayload,
+      plan: planPayload,
+      history: historyPayload,
+      debt: debtPayload
+    });
+  } catch (err) {
+    console.error('Error fetching dashboard bundle:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 /**
  * GET /api/user/study-overview
  * Overview of completed knowledge, current position, Pace status, and Milestones
@@ -2699,173 +3139,11 @@ router.get('/study-overview', async (req, res) => {
   res.set('Expires', '0');
   try {
     const userId = req.user.id;
-
-    // Sync Supabase progress before computing overview
-    await syncUserProgressFromSupabase(userId);
-
-    const plan = await getUserPlanAsync(userId);
-
-    const vocabList = mockDb.vocabulary || [];
-    const kanjiList = mockDb.kanji || [];
-    const grammarList = mockDb.grammar || [];
-    const progressKeys = Object.keys(mockDb.userProgress || {}).filter(k => k.startsWith(`${userId}:`));
-
-    const masteredVocab = progressKeys.filter(k => k.includes(':vocabulary:') && mockDb.userProgress[k] === 'mastered').length;
-    const masteredKanji = progressKeys.filter(k => k.includes(':kanji:') && mockDb.userProgress[k] === 'mastered').length;
-    const masteredGrammar = progressKeys.filter(k => k.includes(':grammar:') && mockDb.userProgress[k] === 'mastered').length;
-
-    let currentLesson = 1;
-    let todayLessonsDetails = [];
-    if (plan && plan.days) {
-      const todayStr = getLocalDateStr();
-      const currentDay = plan.days.find(d => d.date === todayStr) || plan.days[0];
-      if (currentDay && currentDay.tasks && currentDay.tasks.length > 0) {
-        currentLesson = currentDay.tasks[0].lesson || 1;
-        const lessonIds = [...new Set(currentDay.tasks.map(t => t.lesson).filter(Boolean))];
-        todayLessonsDetails = lessonIds.map(lessonId => {
-          const counts = aiPlannerService.getLessonCounts(lessonId);
-          const tasksForLesson = currentDay.tasks.filter(t => t.lesson === lessonId);
-          const isPractice = currentDay.isPracticeDay || tasksForLesson.some(t => t.itemType === 'single_review' || t.itemType === 'cumulative_review' || t.type === 'practice');
-
-          return {
-            lesson: lessonId,
-            title: `Bài ${lessonId}: Minna no Nihongo`,
-            vocabCount: counts.vocabCount,
-            vocabScope: counts.vocabScope,
-            kanjiCount: counts.kanjiCount,
-            kanjiScope: counts.kanjiScope,
-            kanjiChars: counts.kanjiChars,
-            grammarCount: counts.grammarCount,
-            grammarScope: counts.grammarScope,
-            grammarTitlesList: counts.grammarTitlesList,
-            firstVocab: counts.firstVocab,
-            lastVocab: counts.lastVocab,
-            isPracticeDay: isPractice,
-            tasksToday: tasksForLesson.map(t => ({
-              id: t.id,
-              type: t.itemType || t.type,
-              title: t.title,
-              scopeDetails: t.scopeDetails || t.scope,
-              estimatedMinutes: t.estimatedMinutes,
-              due_time: t.due_time,
-              completed: t.completed
-            }))
-          };
-        });
-      }
-    }
-
-    if (todayLessonsDetails.length === 0) {
-      const counts = aiPlannerService.getLessonCounts(currentLesson);
-      todayLessonsDetails = [{
-        lesson: currentLesson,
-        title: `Bài ${currentLesson}: Minna no Nihongo`,
-        vocabCount: counts.vocabCount,
-        vocabScope: counts.vocabScope,
-        kanjiCount: counts.kanjiCount,
-        kanjiScope: counts.kanjiScope,
-        kanjiChars: counts.kanjiChars,
-        grammarCount: counts.grammarCount,
-        grammarScope: counts.grammarScope,
-        grammarTitlesList: counts.grammarTitlesList,
-        firstVocab: counts.firstVocab,
-        lastVocab: counts.lastVocab,
-        isPracticeDay: false,
-        tasksToday: []
-      }];
-    }
-
-    const startDate = plan?.originalStartDate || plan?.startDate || getLocalDateStr();
-    const defaultNextMonth = new Date();
-    defaultNextMonth.setDate(defaultNextMonth.getDate() + 30);
-    const endDate = plan?.endDate || getLocalDateStr(defaultNextMonth);
-
-    const completedLessonCount = Math.max(0, currentLesson - 1, plan?.completedLessonsCount || 0);
-
-    const pace = aiPlannerService.calculatePaceDeviation({
-      startDate,
-      endDate,
-      totalLessons: 50,
-      completedLessons: completedLessonCount,
-      currentProgress: { currentLesson, masteredVocab, masteredGrammar, masteredKanji }
-    });
-
-    const milestones = [
-      {
-        id: 'm1',
-        title: 'N5 Cơ bản',
-        lessons: 'Bài 1 - 10',
-        targetLessons: 10,
-        completedLessons: Math.min(10, Math.max(0, completedLessonCount)),
-        percentage: Math.min(100, Math.round((Math.min(10, Math.max(0, completedLessonCount)) / 10) * 100)),
-        status: completedLessonCount >= 10 ? 'completed' : (completedLessonCount >= 1 || currentLesson >= 1 ? 'in_progress' : 'locked')
-      },
-      {
-        id: 'm2',
-        title: 'N5 Nâng cao',
-        lessons: 'Bài 11 - 25',
-        targetLessons: 15,
-        completedLessons: Math.min(15, Math.max(0, completedLessonCount - 10)),
-        percentage: completedLessonCount < 10 ? 0 : Math.min(100, Math.round((Math.min(15, Math.max(0, completedLessonCount - 10)) / 15) * 100)),
-        status: completedLessonCount >= 25 ? 'completed' : (completedLessonCount >= 11 || currentLesson >= 11 ? 'in_progress' : 'locked')
-      },
-      {
-        id: 'm3',
-        title: 'N4 Khởi động',
-        lessons: 'Bài 26 - 37',
-        targetLessons: 12,
-        completedLessons: Math.min(12, Math.max(0, completedLessonCount - 25)),
-        percentage: completedLessonCount < 25 ? 0 : Math.min(100, Math.round((Math.min(12, Math.max(0, completedLessonCount - 25)) / 12) * 100)),
-        status: completedLessonCount >= 37 ? 'completed' : (completedLessonCount >= 26 || currentLesson >= 26 ? 'in_progress' : 'locked')
-      },
-      {
-        id: 'm4',
-        title: 'N4 Về đích',
-        lessons: 'Bài 38 - 50',
-        targetLessons: 13,
-        completedLessons: Math.min(13, Math.max(0, completedLessonCount - 37)),
-        percentage: completedLessonCount < 37 ? 0 : Math.min(100, Math.round((Math.min(13, Math.max(0, completedLessonCount - 37)) / 13) * 100)),
-        status: completedLessonCount >= 50 ? 'completed' : (completedLessonCount >= 38 || currentLesson >= 38 ? 'in_progress' : 'locked')
-      }
-    ];
-
-    await studyTimeService.syncFromSupabase(userId).catch(() => {});
-    const todayStudyTime = studyTimeService.getStudyTime(userId, getLocalDateStr());
-
-    return res.json({
-      success: true,
-      overview: {
-        totalVocab: vocabList.length || 1500,
-        masteredVocab,
-        vocabPercentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0,
-        totalKanji: kanjiList.length || 255,
-        masteredKanji,
-        kanjiPercentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0,
-        totalGrammar: grammarList.length || 204,
-        masteredGrammar,
-        grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
-        totalLessons: 50,
-        currentLesson
-      },
-      todayStudyTime: {
-        seconds: todayStudyTime.totalSeconds,
-        formatted: todayStudyTime.formatted
-      },
-      current_position: {
-        lesson: currentLesson,
-        title: `Bài ${currentLesson}: Minna no Nihongo`,
-        progressRatio: parseFloat(((currentLesson / 50) * 100).toFixed(1))
-      },
-      pace,
-      milestones,
-      todayLessonsDetails,
-      planMetadata: {
-        startDate,
-        endDate,
-        totalDays: pace.totalDays,
-        daysRemaining: pace.daysRemaining
-      }
-    });
+    const [, plan] = await Promise.all([
+      syncUserProgressFromSupabase(userId),
+      getUserPlanAsync(userId)
+    ]);
+    return res.json(buildStudyOverviewPayload(userId, plan));
   } catch (err) {
     console.error('Error fetching study overview:', err);
     return res.status(500).json({ success: false, error: err.message });
@@ -2882,87 +3160,17 @@ router.get('/daily-history', async (req, res) => {
   res.set('Expires', '0');
   try {
     const userId = req.user.id;
-    await Promise.all([
-      progressService.syncUserProgressFromSupabase(userId).catch(() => {}),
-      studyTimeService.syncFromSupabase(userId).catch(() => {})
+    let [, plan] = await Promise.all([
+      syncUserProgressFromSupabase(userId),
+      getUserPlanAsync(userId)
     ]);
-    let plan = await getUserPlanAsync(userId);
 
     if (!plan || !plan.days || plan.days.length === 0) {
       return res.json({ success: true, history: [] });
     }
 
     plan = applyAutoTracking(plan, userId);
-
-    const todayStr = getLocalDateStr();
-    const studyTimeMap = studyTimeService.getUserStudyTimeMap(userId);
-
-    const allDays = [
-      ...(plan.archivedPastDays || []),
-      ...(plan.days || [])
-    ];
-
-    const history = allDays.map((day) => {
-      const planned = day.plannedCount || (day.tasks ? day.tasks.length : 0);
-      const completed = day.completedCount || (day.tasks ? day.tasks.filter(t => t.completed).length : 0);
-      const completionRate = planned > 0 ? Math.round((completed / planned) * 100) : 100;
-
-      let pace_status = 'on_track';
-      let pace_label = 'Đạt 100% 🟢';
-
-      const isPast = day.date < todayStr;
-      const isToday = day.date === todayStr;
-
-      if (isPast) {
-        if (completionRate >= 120) {
-          pace_status = 'ahead';
-          pace_label = `Vượt ${completionRate}% 🚀`;
-        } else if (completionRate >= 100) {
-          pace_status = 'on_track';
-          pace_label = 'Hoàn thành 100% 🟢';
-        } else if (completionRate >= 60) {
-          pace_status = 'behind';
-          pace_label = `Chậm nhẹ (${completionRate}%) ⚠️`;
-        } else {
-          pace_status = 'behind';
-          pace_label = `Chậm trễ (${completionRate}%) ⚠️`;
-        }
-      } else if (isToday) {
-        if (completionRate >= 100) {
-          pace_status = 'on_track';
-          pace_label = 'Đã hoàn thành hôm nay 🟢';
-        } else {
-          pace_status = 'on_track';
-          pace_label = `Đang học hôm nay (${completionRate}%) ⚡`;
-        }
-      } else {
-        pace_status = 'scheduled';
-        pace_label = 'Sắp tới 📅';
-      }
-
-      const dayStudySeconds = studyTimeMap[day.date] || 0;
-
-      return {
-        date: day.date,
-        dayIndex: day.dayIndex,
-        isBufferDay: day.isBufferDay,
-        isPracticeDay: day.isDedicatedPracticeDay,
-        planned_count: planned,
-        completed_count: completed,
-        completion_rate: completionRate,
-        pace_status,
-        pace_label,
-        dayRationale: day.dayRationale,
-        workloadPoints: day.workloadPoints,
-        tasks_detail: day.tasks || [],
-        studyTimeSeconds: dayStudySeconds,
-        studyTimeFormatted: studyTimeService.formatStudyTime(dayStudySeconds),
-        studyTimeHours: Number((dayStudySeconds / 3600).toFixed(1)),
-        studyTimeEvaluation: studyTimeService.evaluateStudyTime(dayStudySeconds)
-      };
-    });
-
-    return res.json({ success: true, history });
+    return res.json(buildDailyHistoryPayload(userId, plan));
   } catch (err) {
     console.error('Error fetching daily history:', err);
     return res.status(500).json({ success: false, error: err.message });

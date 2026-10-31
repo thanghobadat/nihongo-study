@@ -5,6 +5,12 @@ const { getVietnamDateStr } = require('../utils/vietnamTime');
 
 const DB_PATH = path.resolve(__dirname, '../db/user_study_time.json');
 
+const STUDY_TIME_SYNC_TTL_MS = 5000;
+let studyTimeMemoryStore = null;
+let saveStudyTimeTimer = null;
+const studyTimeSyncInFlight = new Map();
+const studyTimeLastSyncAt = new Map();
+
 function isSupabaseConfigured() {
   return (
     process.env.SUPABASE_URL &&
@@ -15,23 +21,40 @@ function isSupabaseConfigured() {
 }
 
 function loadStudyTime() {
+  if (studyTimeMemoryStore !== null) {
+    return studyTimeMemoryStore;
+  }
   try {
     if (fs.existsSync(DB_PATH)) {
       const content = fs.readFileSync(DB_PATH, 'utf8');
-      return JSON.parse(content) || {};
+      studyTimeMemoryStore = JSON.parse(content) || {};
+      return studyTimeMemoryStore;
     }
   } catch (err) {
     console.warn('[studyTimeService] Error reading database:', err.message);
   }
-  return {};
+  studyTimeMemoryStore = {};
+  return studyTimeMemoryStore;
 }
 
 function saveStudyTime(data) {
-  try {
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf8');
-  } catch (err) {
-    console.error('[studyTimeService] Error saving database:', err.message);
+  studyTimeMemoryStore = data;
+  if (saveStudyTimeTimer) clearTimeout(saveStudyTimeTimer);
+  saveStudyTimeTimer = setTimeout(() => {
+    saveStudyTimeTimer = null;
+    fs.promises.writeFile(DB_PATH, JSON.stringify(studyTimeMemoryStore), 'utf8').catch((err) => {
+      console.error('[studyTimeService] Error saving database:', err.message);
+    });
+  }, 500);
+  if (saveStudyTimeTimer.unref) saveStudyTimeTimer.unref();
+}
+
+function invalidateStudyTimeCache(userId) {
+  if (!userId) {
+    studyTimeLastSyncAt.clear();
+    return;
   }
+  studyTimeLastSyncAt.delete(String(userId));
 }
 
 /**
@@ -109,6 +132,9 @@ async function addStudyTime(userId, dateStr, deltaSeconds, clientTotalSeconds = 
     }
   }
 
+  // Làm mới dấu hiệu cache để lần đồng bộ kế tiếp luôn lấy dữ liệu mới nhất đa thiết bị
+  invalidateStudyTimeCache(userId);
+
   return {
     date: validDate,
     totalSeconds: newTotal,
@@ -154,41 +180,64 @@ function getUserStudyTimeMap(userId) {
 
 /**
  * Đồng bộ dữ liệu từ Supabase về (khi server khởi động hoặc user đăng nhập)
+ * Có gộp Promise in-flight và bộ đệm ngắn 5s để chống bão truy vấn đồng thời
  */
-async function syncFromSupabase(userId) {
+async function syncFromSupabase(userId, options = {}) {
   if (!isSupabaseConfigured() || !userId) return;
-  try {
-    const { data: rows, error } = await supabase
-      .from('user_study_time')
-      .select('date, total_seconds')
-      .eq('user_id', String(userId));
-
-    if (error) {
-      console.warn('[studyTimeService] Supabase select error:', error.message);
+  const uid = String(userId);
+  const now = Date.now();
+  if (!options.force) {
+    const lastSync = studyTimeLastSyncAt.get(uid) || 0;
+    if (now - lastSync < STUDY_TIME_SYNC_TTL_MS) {
       return;
     }
-
-    if (Array.isArray(rows)) {
-      const data = loadStudyTime();
-      if (!data[userId]) data[userId] = {};
-      let changed = false;
-
-      for (const row of rows) {
-        const rowSec = parseInt(row.total_seconds, 10) || 0;
-        const current = data[userId][row.date] || 0;
-        if (rowSec > current) {
-          data[userId][row.date] = rowSec;
-          changed = true;
-        }
-      }
-
-      if (changed) {
-        saveStudyTime(data);
-      }
-    }
-  } catch (e) {
-    console.warn('[studyTimeService] Supabase sync exception:', e.message);
   }
+
+  let inFlight = studyTimeSyncInFlight.get(uid);
+  if (inFlight) {
+    return inFlight;
+  }
+
+  inFlight = (async () => {
+    try {
+      const { data: rows, error } = await supabase
+        .from('user_study_time')
+        .select('date, total_seconds')
+        .eq('user_id', uid);
+
+      if (error) {
+        console.warn('[studyTimeService] Supabase select error:', error.message);
+        return;
+      }
+
+      if (Array.isArray(rows)) {
+        const data = loadStudyTime();
+        if (!data[userId]) data[userId] = {};
+        let changed = false;
+
+        for (const row of rows) {
+          const rowSec = parseInt(row.total_seconds, 10) || 0;
+          const current = data[userId][row.date] || 0;
+          if (rowSec > current) {
+            data[userId][row.date] = rowSec;
+            changed = true;
+          }
+        }
+
+        if (changed) {
+          saveStudyTime(data);
+        }
+        studyTimeLastSyncAt.set(uid, Date.now());
+      }
+    } catch (e) {
+      console.warn('[studyTimeService] Supabase sync exception:', e.message);
+    } finally {
+      studyTimeSyncInFlight.delete(uid);
+    }
+  })();
+
+  studyTimeSyncInFlight.set(uid, inFlight);
+  return inFlight;
 }
 
 /**
@@ -352,9 +401,11 @@ function getStudyTimeHistory(userId, plan = null) {
 module.exports = {
   addStudyTime,
   getStudyTime,
+  getStudyTimeAsync,
   getUserStudyTimeMap,
   formatStudyTime,
   evaluateStudyTime,
   getStudyTimeHistory,
-  syncFromSupabase
+  syncFromSupabase,
+  invalidateStudyTimeCache
 };

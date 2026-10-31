@@ -6,6 +6,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
+const zlib = require('zlib');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Global process error handlers to prevent crashes from unhandled promise rejections or exceptions
@@ -30,6 +31,35 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+// Built-in lightweight GZIP compression for JSON API payloads >= 1 KB
+app.use((req, res, next) => {
+  const acceptEncoding = req.headers['accept-encoding'] || '';
+  if (!acceptEncoding.includes('gzip')) {
+    return next();
+  }
+  const origJson = res.json.bind(res);
+  res.json = function gzipJson(body) {
+    if (res.headersSent || res.getHeader('Content-Encoding')) {
+      return origJson(body);
+    }
+    try {
+      const jsonStr = JSON.stringify(body);
+      if (!jsonStr || Buffer.byteLength(jsonStr, 'utf8') < 1024) {
+        return origJson(body);
+      }
+      const compressed = zlib.gzipSync(Buffer.from(jsonStr, 'utf8'), { level: 1 });
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.setHeader('Content-Encoding', 'gzip');
+      res.setHeader('Vary', 'Accept-Encoding');
+      res.setHeader('Content-Length', compressed.length);
+      return res.end(compressed);
+    } catch (_) {
+      return origJson(body);
+    }
+  };
+  next();
+});
 
 // Request logging middleware for debugging crashes
 app.use((req, res, next) => {

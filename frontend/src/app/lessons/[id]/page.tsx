@@ -1,34 +1,42 @@
 'use client';
 
 import { useState, useEffect, useCallback, use, useMemo, useRef } from 'react';
-
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import { api } from '../../utils/api';
-
 import { getGrammarVocabMapping, getGrammarKanjiMapping } from '../../utils/roadmapMapping';
-
 import { getKanjiForm, hasLessonKanji } from '../../utils/kanjiFormLookup';
 import SidebarSettings from '../../components/SidebarSettings';
-import QuickLookupModal from '../../components/QuickLookupModal';
-
 import { getRadicalsString, getRadicalsForCharacter } from '../../utils/kanjiRadicals';
-import KanjiStrokePlayer from '../../components/KanjiStrokePlayer';
-
 import PitchAccentDisplay from '../../components/PitchAccentDisplay';
-
 import { playAudioWithFallback } from '../../utils/audioHelper';
-
-import ListeningQuiz from './components/ListeningQuiz';
-
-import MatchingGame from './components/MatchingGame';
-
-import FillInBlanks from './components/FillInBlanks';
-
-import DialogueReading from './components/DialogueReading';
-import JlptReviewTab from './components/JlptReviewTab';
-import KanjiPracticeTab from './components/KanjiPracticeTab';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../../utils/kanjiPracticeHelper';
+
+const QuickLookupModal = dynamic(() => import('../../components/QuickLookupModal'), { ssr: false });
+const KanjiStrokePlayer = dynamic(() => import('../../components/KanjiStrokePlayer'), { ssr: false });
+const ListeningQuiz = dynamic(() => import('./components/ListeningQuiz'), { ssr: false });
+const MatchingGame = dynamic(() => import('./components/MatchingGame'), { ssr: false });
+const FillInBlanks = dynamic(() => import('./components/FillInBlanks'), { ssr: false });
+const DialogueReading = dynamic(() => import('./components/DialogueReading'), { ssr: false });
+const JlptReviewTab = dynamic(() => import('./components/JlptReviewTab'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center py-16 text-slate-400 text-xs gap-2">
+      <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+      <span>Đang mở phòng luyện đề JLPT...</span>
+    </div>
+  ),
+});
+const KanjiPracticeTab = dynamic(() => import('./components/KanjiPracticeTab'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center py-16 text-slate-400 text-xs gap-2">
+      <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+      <span>Đang mở bài luyện tập Chữ Hán...</span>
+    </div>
+  ),
+});
 
 // Defined types
 
@@ -425,19 +433,24 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const searchParams = useSearchParams();
 
   const rawUrlTab = searchParams.get('tab') || 'vocab';
-  let currentTab = rawUrlTab === 'review' ? 'jlpt' : rawUrlTab;
-  if (!['vocab', 'kanji', 'practice', 'jlpt'].includes(currentTab)) {
-    currentTab = 'vocab';
-  }
+  const normalizeLessonTab = (raw: string | null) => {
+    const mapped = (raw || 'vocab') === 'review' ? 'jlpt' : (raw || 'vocab');
+    return ['vocab', 'kanji', 'practice', 'jlpt'].includes(mapped) ? mapped : 'vocab';
+  };
+  const [currentTab, setCurrentTab] = useState<string>(() => normalizeLessonTab(rawUrlTab));
   const grammarIndexParam = searchParams.get('grammarIndex');
   const grammarIndex = grammarIndexParam !== null ? parseInt(grammarIndexParam) : null;
   const user = api.getUser();
 
-  const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>('vocab');
+  const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>(() =>
+    searchParams.get('category') === 'kanji' ? 'kanji' : 'vocab'
+  );
   const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
   const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'kanji' | 'grammar' | 'kana' | 'radicals'>('vocab');
 
+  // Sync local tab & category state when URL changes externally or via Browser Back/Forward
   useEffect(() => {
+    setCurrentTab(normalizeLessonTab(searchParams.get('tab')));
     const cat = searchParams.get('category');
     if (cat === 'kanji') {
       setPracticeCategory('kanji');
@@ -445,6 +458,41 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       setPracticeCategory('vocab');
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (typeof window === 'undefined') return;
+      const paramsObj = new URLSearchParams(window.location.search);
+      setCurrentTab(normalizeLessonTab(paramsObj.get('tab')));
+      const cat = paramsObj.get('category');
+      if (cat === 'kanji') setPracticeCategory('kanji');
+      else if (cat === 'vocab') setPracticeCategory('vocab');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // 0ms instant intra-lesson tab switching without waiting for Next.js RSC server round-trip
+  const switchLessonTab = useCallback((nextTab: string, nextCategory?: 'vocab' | 'kanji') => {
+    const normalized = normalizeLessonTab(nextTab);
+    setCurrentTab(normalized);
+    if (nextCategory) {
+      setPracticeCategory(nextCategory);
+    }
+    if (typeof window !== 'undefined') {
+      const paramsObj = new URLSearchParams(window.location.search);
+      paramsObj.set('tab', normalized);
+      if (nextCategory) {
+        paramsObj.set('category', nextCategory);
+      } else if (normalized !== 'practice') {
+        paramsObj.delete('category');
+      }
+      const nextUrl = `/lessons/${selectedLessonId}?${paramsObj.toString()}`;
+      if (`${window.location.pathname}${window.location.search}` !== nextUrl) {
+        window.history.pushState(null, '', nextUrl);
+      }
+    }
+  }, [selectedLessonId]);
 
   useEffect(() => {
     if (selectedLessonId > 50 || selectedLessonId < 1 || isNaN(selectedLessonId)) {
@@ -1087,149 +1135,76 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   };
 
-  // Fetch initial lessons
-
+  // Fetch initial lessons list once (with instant 0ms cache hydration if available)
   useEffect(() => {
-
-    async function loadLessons() {
-
-      try {
-
-        const course = 'minna';
-
-        const lessonData = await api.get(`/api/user/lessons?course=${course}`);
-
-        if (Array.isArray(lessonData)) {
-
-          setLessons(lessonData);
-
-        }
-
-      } catch (error) {
-
-        console.error('Failed to load lessons:', error);
-
+    const lessonsPath = '/api/user/lessons?course=minna';
+    const cachedLessons = api.peekCache(lessonsPath);
+    if (Array.isArray(cachedLessons)) {
+      setLessons(cachedLessons);
+    }
+    let cancelled = false;
+    api.get(lessonsPath).then((lessonData) => {
+      if (!cancelled && Array.isArray(lessonData)) {
+        setLessons(lessonData);
       }
+    }).catch((error) => {
+      console.error('Failed to load lessons:', error);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
+  // Parallel single-flight lesson bundle loader per selectedLessonId (0ms cache hit, zero re-fetch on intra-lesson tab switch)
+  const loadAllLessonData = useCallback(async (lessonId: number) => {
+    if (!lessonId || isNaN(lessonId) || lessonId < 1 || lessonId > 50) return;
+
+    const vocabPath = `/api/user/lessons/${lessonId}/vocabulary`;
+    const kanjiPath = `/api/user/lessons/${lessonId}/kanji`;
+    const grammarPath = `/api/user/lessons/${lessonId}/grammar`;
+
+    const cachedVocab = api.peekCache(vocabPath);
+    const cachedKanji = api.peekCache(kanjiPath);
+    const cachedGrammar = api.peekCache(grammarPath);
+
+    if (Array.isArray(cachedVocab) && Array.isArray(cachedKanji) && Array.isArray(cachedGrammar)) {
+      setVocabItems(cachedVocab);
+      setKanjiItems(cachedKanji);
+      setGrammarItems(cachedGrammar);
+      setLoading(false);
+    } else {
+      setLoading(true);
     }
 
-    loadLessons();
-
-  }, [selectedLessonId]);
-
-  // Fetch vocabulary data when lesson updates
-
-  const loadVocabData = useCallback(async () => {
-
-    setLoading(true);
-
     try {
-
-      const vocabData = await api.get(`/api/user/lessons/${selectedLessonId}/vocabulary`);
-
-      if (Array.isArray(vocabData)) {
-
-        setVocabItems(vocabData);
-
-      }
-
+      const [vocabData, kanjiData, grammarData] = await Promise.all([
+        api.get(vocabPath),
+        api.get(kanjiPath),
+        api.get(grammarPath)
+      ]);
+      if (Array.isArray(vocabData)) setVocabItems(vocabData);
+      if (Array.isArray(kanjiData)) setKanjiItems(kanjiData);
+      if (Array.isArray(grammarData)) setGrammarItems(grammarData);
     } catch (error) {
-
-      console.error('Failed to load vocabulary:', error);
+      console.error('Failed to load lesson data:', error);
       if (error && typeof error === 'object' && 'message' in error && (String((error as any).message).includes('hết hạn') || String((error as any).message).includes('Unauthorized'))) {
         setMessage('⚠️ Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục đồng bộ tiến trình học.');
       }
-
     } finally {
-
       setLoading(false);
-
     }
+  }, []);
 
-  }, [selectedLessonId]);
-
-  // Fetch kanji data when lesson updates
-
-  const loadKanjiData = useCallback(async () => {
-
-    setLoading(true);
-
-    try {
-
-      const kanjiData = await api.get(`/api/user/lessons/${selectedLessonId}/kanji`);
-
-      if (Array.isArray(kanjiData)) {
-
-        setKanjiItems(kanjiData);
-
-      }
-
-    } catch (error) {
-
-      console.error('Failed to load kanji:', error);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  }, [selectedLessonId]);
-
-  // Fetch grammar data when lesson updates
-
-  const loadGrammarData = useCallback(async () => {
-
-    setLoading(true);
-
-    try {
-
-      const grammarData = await api.get(`/api/user/lessons/${selectedLessonId}/grammar`);
-
-      if (Array.isArray(grammarData)) {
-
-        setGrammarItems(grammarData);
-
-      }
-
-    } catch (error) {
-
-      console.error('Failed to load grammar:', error);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  }, [selectedLessonId]);
-
-  // Fetch dialogue data when lesson updates
-
+  // Fetch dialogue data when needed
   const loadDialogueData = useCallback(async () => {
-
-    setLoading(true);
-
     try {
-
       const data = await api.get(`/api/user/lessons/${selectedLessonId}/kaiwa`);
-
       if (Array.isArray(data)) {
-
         setDialogueItems(data);
-
       }
-
     } catch (error) {
-
       console.error('Failed to load dialogue:', error);
-
-    } finally {
-
-      setLoading(false);
-
     }
-
   }, [selectedLessonId]);
 
   // Dynamic Dialogue Substitution Helper
@@ -1842,27 +1817,15 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   };
 
-    useEffect(() => {
-    if (currentTab === 'vocab') {
-      loadVocabData();
-      loadGrammarData();
-    } else if (currentTab === 'kanji') {
-      loadKanjiData();
-      loadGrammarData();
-    } else if (currentTab === 'flashcards') {
-      loadVocabData();
-      loadKanjiData();
-    } else if (currentTab === 'kaiwa') {
+  useEffect(() => {
+    loadAllLessonData(selectedLessonId);
+  }, [selectedLessonId, loadAllLessonData]);
+
+  useEffect(() => {
+    if (currentTab === 'kaiwa') {
       loadDialogueData();
-    } else if (currentTab === 'practice') {
-      loadVocabData();
-      loadKanjiData();
-    } else if (currentTab === 'jlpt') {
-      loadVocabData();
-      loadKanjiData();
-      loadGrammarData();
     }
-  }, [currentTab, loadVocabData, loadKanjiData, loadGrammarData, loadDialogueData]);
+  }, [currentTab, loadDialogueData]);
 
   // Load initial practice list once vocabulary or kanji is available
 
@@ -5455,53 +5418,43 @@ const renderInteractivePractice = () => {
 
           {/* Navigation Menu */}
           <nav className="space-y-1.5 overflow-y-auto pr-1 flex-1 min-h-0 select-none [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-100 hover:[&::-webkit-scrollbar-thumb]:bg-slate-450 dark:hover:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setIsSidebarOpen(false);
-                  if (item.id === 'dashboard') {
-                    router.push('/dashboard');
-                  } else if (item.id === 'roadmap') {
+            {menuItems.map((item) => {
+              const itemClass = `w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium cursor-pointer ${
+                item.active
+                  ? 'bg-indigo-50/80 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 border border-indigo-100/50 dark:border-blue-900/40 text-indigo-600 dark:text-blue-400 shadow-sm dark:shadow-[0_0_15px_rgba(29,78,216,0.15)]'
+                  : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
+              }`;
 
-                    router.push('/roadmap');
+              if (item.id === 'dashboard' || item.id === 'roadmap' || item.id === 'kana' || item.id === 'knowledge') {
+                return (
+                  <Link
+                    key={item.id}
+                    href={`/${item.id}`}
+                    prefetch
+                    onClick={() => setIsSidebarOpen(false)}
+                    className={itemClass}
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="text-sm">{item.name}</span>
+                  </Link>
+                );
+              }
 
-                  } else if (item.id === 'kana') {
-
-                    router.push('/kana');
-
-                  } else if (item.id === 'knowledge') {
-
-                    router.push('/knowledge');
-
-                  } else {
-
-                    router.push(`/lessons/${selectedLessonId}?tab=${item.id}`);
-
-                  }
-
-                }}
-
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 text-left font-medium ${
-
-                  item.active
-
-                    ? 'bg-indigo-50/80 dark:bg-gradient-to-r dark:from-blue-950/40 dark:to-slate-900 border border-indigo-100/50 dark:border-blue-900/40 text-indigo-600 dark:text-blue-400 shadow-sm dark:shadow-[0_0_15px_rgba(29,78,216,0.15)]'
-
-                    : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none'
-
-                }`}
-
-              >
-
-                <span className="text-lg">{item.icon}</span>
-
-                <span className="text-sm">{item.name}</span>
-
-              </button>
-
-            ))}
-
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => {
+                    setIsSidebarOpen(false);
+                    switchLessonTab(item.id);
+                  }}
+                  className={itemClass}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-sm">{item.name}</span>
+                </button>
+              );
+            })}
           </nav>
 
         </div>
@@ -5618,15 +5571,15 @@ const renderInteractivePractice = () => {
               <span className="hidden sm:inline">Tra cứu</span>
             </button>
 
-            <button
-              type="button"
-              onClick={() => router.push(`/fundamentals?lesson=${selectedLessonId}`)}
+            <Link
+              href={`/fundamentals?lesson=${selectedLessonId}`}
+              prefetch
               className="flex items-center gap-1.5 px-3 py-2 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm active:scale-95 cursor-pointer shrink-0"
               title={`Xem kiến thức nền tảng tương ứng Bài ${selectedLessonId}`}
             >
               <span>📘</span>
               <span className="hidden md:inline">Nền tảng</span>
-            </button>
+            </Link>
 
             <select
 
@@ -6089,8 +6042,7 @@ const renderInteractivePractice = () => {
                     {/* Nút chuyển nhanh sang Luyện tập Kanji */}
                     <button
                       onClick={() => {
-                        setPracticeCategory('kanji');
-                        router.push(`/lessons/${selectedLessonId}?tab=practice&category=kanji`);
+                        switchLessonTab('practice', 'kanji');
                       }}
                       className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white text-xs font-bold shadow-md shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer shrink-0"
                     >
@@ -6831,8 +6783,7 @@ const renderInteractivePractice = () => {
                           type="button"
                           onClick={() => {
                             setSelectedKanjiModal(null);
-                            setPracticeCategory('kanji');
-                            router.push(`/lessons/${selectedLessonId}?tab=practice&category=kanji`);
+                            switchLessonTab('practice', 'kanji');
                           }}
                           className="text-xs font-bold text-amber-500 hover:underline flex items-center gap-1 cursor-pointer"
                         >
@@ -6934,33 +6885,25 @@ const renderInteractivePractice = () => {
                 </div>
 
                 <button
-
-                  onClick={() => router.push(`/lessons/${selectedLessonId}?tab=vocab`)}
-
+                  onClick={() => switchLessonTab('vocab')}
                   className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-slate-900 dark:text-white font-bold text-xs rounded-xl transition-all duration-300"
-
                 >
-
                   Quay lại Học Từ vựng
-
                 </button>
-
               </div>
-
             )}
-
           </div>
-
         )}
-
             </main>
 
-      <QuickLookupModal
-        isOpen={isQuickLookupOpen}
-        onClose={() => setIsQuickLookupOpen(false)}
-        initialTab={quickLookupTab}
-        currentLessonId={selectedLessonId}
-      />
+      {isQuickLookupOpen && (
+        <QuickLookupModal
+          isOpen={isQuickLookupOpen}
+          onClose={() => setIsQuickLookupOpen(false)}
+          initialTab={quickLookupTab}
+          currentLessonId={selectedLessonId}
+        />
+      )}
 
     </div>
 
