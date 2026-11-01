@@ -809,12 +809,17 @@ export default function RadicalsPage() {
   };
 
   // Quick switch from Level Banner to Quiz
+  const n5RadicalCount = N5_RADICALS_SET.size;
+  const n4RadicalCount = N4_RADICALS_SET.size;
+  const beginnerRadicalCount = n5RadicalCount + n4RadicalCount;
+  const advancedRadicalCount = Math.max(0, radicalsList.length - beginnerRadicalCount);
+
   const handleQuickPracticeLevel = (level: RadicalLevel) => {
     setSelectedQuizLevel(level);
     let count = 15;
-    if (level === 'n5') count = 57;
-    else if (level === 'n4') count = 74;
-    else if (level === 'n5_n4') count = 131;
+    if (level === 'n5') count = n5RadicalCount;
+    else if (level === 'n4') count = n4RadicalCount;
+    else if (level === 'n5_n4') count = beginnerRadicalCount;
     else count = 30;
     setPracticeLimit(count);
     setActiveTab('quiz');
@@ -1112,12 +1117,12 @@ export default function RadicalsPage() {
             </span>
             <span className="text-[10px] font-bold text-teal-500">
               {selectedLevel === 'n5'
-                ? '🟢 Cấp độ N5 (57 bộ thủ)'
+                ? `🟢 Cấp độ N5 (${n5RadicalCount} bộ thủ)`
                 : selectedLevel === 'n4'
-                ? '🟡 Cấp độ N4 (74 bộ thủ)'
+                ? `🟡 Cấp độ N4 (${n4RadicalCount} bộ thủ)`
                 : selectedLevel === 'n5_n4'
-                ? '⚡ Trọn bộ N5 & N4 (131 bộ thủ)'
-                : '📚 Tất cả 201 bộ thủ'}
+                ? `⚡ Trọn bộ N5 & N4 (${beginnerRadicalCount} bộ thủ)`
+                : `📚 Tất cả ${radicalsList.length} bộ thủ`}
             </span>
           </div>
 
@@ -1135,7 +1140,7 @@ export default function RadicalsPage() {
               <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
                 selectedLevel === 'n5' ? 'bg-slate-900/30 text-white' : 'bg-emerald-500/10 text-emerald-400'
               }`}>
-                57
+                {n5RadicalCount}
               </span>
             </button>
 
@@ -1152,7 +1157,7 @@ export default function RadicalsPage() {
               <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
                 selectedLevel === 'n4' ? 'bg-slate-900/30 text-white' : 'bg-amber-500/10 text-amber-400'
               }`}>
-                74
+                {n4RadicalCount}
               </span>
             </button>
 
@@ -1169,7 +1174,7 @@ export default function RadicalsPage() {
               <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
                 selectedLevel === 'n5_n4' ? 'bg-slate-900/30 text-white' : 'bg-indigo-500/10 text-indigo-400'
               }`}>
-                131
+                {beginnerRadicalCount}
               </span>
             </button>
 
@@ -1203,18 +1208,18 @@ export default function RadicalsPage() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                        CẤP ĐỘ JLPT N5 • 57 BỘ THỦ NỀN TẢNG
+                        CẤP ĐỘ JLPT N5 • {n5RadicalCount} BỘ THỦ NỀN TẢNG
                       </span>
                     </div>
                     <h2 className="text-base sm:text-lg font-black text-white">
-                      57 Bộ thủ cốt lõi để làm chủ 100% Chữ Hán N5
+                      {n5RadicalCount} Bộ thủ cốt lõi để làm chủ 100% Chữ Hán N5
                     </h2>
                   </div>
                   <button
                     onClick={() => handleQuickPracticeLevel('n5')}
                     className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
                   >
-                    <span>⚡</span> Luyện tập 57 bộ thủ N5
+                    <span>⚡</span> Luyện tập {n5RadicalCount} bộ thủ N5
                   </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
@@ -1223,7 +1228,7 @@ export default function RadicalsPage() {
                       <span>🎯</span> Ý nghĩa đối với người học N5:
                     </div>
                     <p className="leading-relaxed">
-                      57 bộ thủ này xuất hiện xuyên suốt trong toàn bộ 205 chữ Hán của 25 bài học N5 (Minna no Nihongo Tập 1). Bao gồm các bộ thân thuộc: Nhân (人/亻), Nhật (日), Nguyệt (月), Mộc (木), Thủy (水), Hỏa (火), Thổ (土), Khẩu (口)...
+                      {n5RadicalCount} bộ thủ này xuất hiện xuyên suốt trong toàn bộ 174 chữ Hán của 25 bài học N5 (Minna no Nihongo Tập 1). Bao gồm các bộ thân thuộc: Nhân (人/亻), Nhật (日), Nguyệt (月), Mộc (木), Thủy (水), Hỏa (火), Thổ (土), Khẩu (口)...
                     </p>
                   </div>
                   <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2">
@@ -1231,7 +1236,7 @@ export default function RadicalsPage() {
                       <span>💡</span> Phương pháp học hiệu quả:
                     </div>
                     <p className="leading-relaxed">
-                      Chỉ cần nhớ vững 57 bộ này là bạn có thể dễ dàng chiết tự từng chữ Hán như ghép lego. Khi gặp chữ khó, hãy tìm bộ thủ quen thuộc để liên tưởng câu chuyện!
+                      Chỉ cần nhớ vững {n5RadicalCount} bộ này là bạn có thể dễ dàng chiết tự từng chữ Hán như ghép lego. Khi gặp chữ khó, hãy tìm bộ thủ quen thuộc để liên tưởng câu chuyện!
                     </p>
                   </div>
                 </div>
@@ -1244,18 +1249,18 @@ export default function RadicalsPage() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                        CẤP ĐỘ JLPT N4 • 74 BỘ THỦ MỞ RỘNG
+                        CẤP ĐỘ JLPT N4 • {n4RadicalCount} BỘ THỦ MỞ RỘNG
                       </span>
                     </div>
                     <h2 className="text-base sm:text-lg font-black text-white">
-                      74 Bộ thủ mới phát sinh ở trình độ N4
+                      {n4RadicalCount} Bộ thủ mới phát sinh ở trình độ N4
                     </h2>
                   </div>
                   <button
                     onClick={() => handleQuickPracticeLevel('n4')}
                     className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
                   >
-                    <span>⚡</span> Luyện tập 74 bộ thủ N4
+                    <span>⚡</span> Luyện tập {n4RadicalCount} bộ thủ N4
                   </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
@@ -1264,7 +1269,7 @@ export default function RadicalsPage() {
                       <span>🎯</span> Bước tiến quan trọng từ N5 lên N4:
                     </div>
                     <p className="leading-relaxed">
-                      Để học tốt 200 chữ Hán N4 (Bài 26 đến 50), bạn chỉ cần bổ sung thêm 74 bộ thủ mới này (như Y 衣, Thảo 艸, Chuy 隹, Cân 巾, Trùng 虫, Thạch 石, Thần 辰, Trảo 爪...).
+                      Để học tốt 111 chữ Hán N4 (Bài 26 đến 50), bạn chỉ cần bổ sung thêm {n4RadicalCount} bộ thủ mới này (như Y 衣, Trúc 竹, Thạch 石, Nhục 肉, Sắc 色, Xích 赤, Thanh 青, Phong 風, Điểu 鳥...).
                     </p>
                   </div>
                   <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2">
@@ -1272,7 +1277,7 @@ export default function RadicalsPage() {
                       <span>💡</span> Lời khuyên ôn luyện:
                     </div>
                     <p className="leading-relaxed">
-                      Kết hợp 57 bộ N5 đã biết với 74 bộ N4 này, bạn đã nắm trọn 131 bộ thủ quan trọng nhất trong tiếng Nhật, phủ kín 100% toàn bộ 50 bài Minna no Nihongo!
+                      Kết hợp {n5RadicalCount} bộ N5 đã biết với {n4RadicalCount} bộ N4 này, bạn đã nắm trọn {beginnerRadicalCount} bộ thủ quan trọng nhất trong tiếng Nhật, phủ kín 100% toàn bộ 50 bài Minna no Nihongo!
                     </p>
                   </div>
                 </div>
@@ -1285,22 +1290,22 @@ export default function RadicalsPage() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
-                        TRỌN BỘ SƠ CẤP • 131 BỘ THỦ KANJI N5 & N4
+                        TRỌN BỘ SƠ CẤP • {beginnerRadicalCount} BỘ THỦ KANJI N5 & N4
                       </span>
                     </div>
                     <h2 className="text-base sm:text-lg font-black text-white">
-                      Tổng hợp 131 bộ thủ chiết tự toàn bộ 405 Chữ Hán N5 & N4
+                      Tổng hợp {beginnerRadicalCount} bộ thủ chiết tự toàn bộ 285 Chữ Hán N5 & N4
                     </h2>
                   </div>
                   <button
                     onClick={() => handleQuickPracticeLevel('n5_n4')}
                     className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
                   >
-                    <span>⚡</span> Luyện tập 131 bộ thủ N5 & N4
+                    <span>⚡</span> Luyện tập {beginnerRadicalCount} bộ thủ N5 & N4
                   </button>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  131 bộ thủ này chiếm tới 65% từ điển 201 bộ thủ, cấu thành 100% chữ Hán sơ cấp. Nắm vững nhóm này giúp bạn hoàn toàn làm chủ Kanji trong các bài thi JLPT N5 và N4.
+                  {beginnerRadicalCount} bộ thủ này chiếm tới {Math.round((beginnerRadicalCount / Math.max(1, radicalsList.length)) * 100)}% từ điển {radicalsList.length} bộ thủ, cấu thành 100% chữ Hán sơ cấp (174 chữ N5 + 111 chữ N4). Nắm vững nhóm này giúp bạn hoàn toàn làm chủ Kanji trong các bài thi JLPT N5 và N4.
                 </p>
               </div>
             )}
@@ -1311,22 +1316,22 @@ export default function RadicalsPage() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                        TOÀN BỘ 201 BỘ THỦ CHUẨN
+                        TOÀN BỘ {radicalsList.length} BỘ THỦ CHUẨN
                       </span>
                     </div>
                     <h2 className="text-base sm:text-lg font-black text-white">
-                      Từ điển đầy đủ 201 Bộ thủ tiếng Nhật (N5, N4 & Nâng cao N3-N1)
+                      Từ điển đầy đủ {radicalsList.length} Bộ thủ tiếng Nhật (N5, N4 & Nâng cao N3-N1)
                     </h2>
                   </div>
                   <button
                     onClick={() => handleQuickPracticeLevel('all')}
                     className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-black transition-all shadow-md flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
                   >
-                    <span>⚡</span> Luyện tập tất cả 201 bộ thủ
+                    <span>⚡</span> Luyện tập tất cả {radicalsList.length} bộ thủ
                   </button>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Bao gồm 57 bộ N5, 74 bộ N4 và 70 bộ thủ Nâng cao (từ 8 đến 17 nét như Mãnh, Đỉnh, Xỉ, Dược...).
+                  Bao gồm {n5RadicalCount} bộ N5, {n4RadicalCount} bộ N4 và {advancedRadicalCount} bộ thủ Nâng cao (từ 8 đến 17 nét như Mãnh, Đỉnh, Xỉ, Dược...).
                 </p>
               </div>
             )}
@@ -1635,7 +1640,7 @@ export default function RadicalsPage() {
                             : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
                         }`}
                       >
-                        <span>🟢 N5 (57 bộ)</span>
+                        <span>🟢 N5 ({n5RadicalCount} bộ)</span>
                       </button>
                       <button
                         type="button"
@@ -1646,7 +1651,7 @@ export default function RadicalsPage() {
                             : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
                         }`}
                       >
-                        <span>🟡 N4 (74 bộ)</span>
+                        <span>🟡 N4 ({n4RadicalCount} bộ)</span>
                       </button>
                       <button
                         type="button"
@@ -1657,7 +1662,7 @@ export default function RadicalsPage() {
                             : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
                         }`}
                       >
-                        <span>⚡ N5+N4 (131 bộ)</span>
+                        <span>⚡ N5+N4 ({beginnerRadicalCount} bộ)</span>
                       </button>
                       <button
                         type="button"
@@ -1668,7 +1673,7 @@ export default function RadicalsPage() {
                             : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
                         }`}
                       >
-                        <span>📚 Tất cả (201)</span>
+                        <span>📚 Tất cả ({radicalsList.length})</span>
                       </button>
                     </div>
                   </div>

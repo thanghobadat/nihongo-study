@@ -43,13 +43,13 @@ const LESSON_2_VOCAB_GROUPS = [
   ["watashi", "anata", "no", "eigo", "nihongo", "go", "omiyage", "honno kimochi desu", "douzo", "doumo", "korekara osewani narimasu", "kochirakoso yoroshiku onegaishimasu"]
 ];
 
-// Map Kanji for Lesson 2
+// Map Kanji for Lesson 2 (11 Kanji: ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 const LESSON_2_KANJI_GROUPS = [
-  ["書", "紙", "車", "時", "傘"],
-  ["書", "紙", "車", "時", "傘", "机"],
+  ["?", "?", "?", "?", "?", "?", "?", "?"],
+  ["?", "?", "?", "?", "?", "?", "?", "?"],
   [],
-  ["何"],
-  ["本", "語", "英", "日", "私"]
+  ["?", "?", "?"],
+  ["?", "?", "?", "?"]
 ];
 
 // Map vocabulary by romaji/hiragana patterns for Lesson 1
@@ -62,13 +62,14 @@ const LESSON_1_VOCAB_GROUPS = [
   ["hajimemashite", "kara kimashita", "douzo yoroshiku", "shitsurei desuga", "onamae wa", "kochira", "amerika", "igirisu", "indo", "indoneshia", "kankoku", "tai", "chuugoku", "doitsu", "nihon", "betonamu", "brazil", "sakura daigaku", "fuji daigaku", "imc", "akc", "power denki"]
 ];
 
+// Map Kanji for Lesson 1 (13 Kanji: ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 const LESSON_1_KANJI_GROUPS = [
-  ["私", "生"],
-  ["私", "生"],
-  ["何", "歳"],
-  ["私", "生"],
-  ["大", "学", "病", "院", "電", "気"],
-  ["日", "本", "国", "名", "英"]
+  ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
+  ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
+  ["?"],
+  ["?", "?", "?", "?", "?", "?", "?", "?"],
+  ["?", "?", "?", "?", "?", "?"],
+  ["?", "?", "?", "?", "?", "?"]
 ];
 
 export function getGrammarVocabMapping(

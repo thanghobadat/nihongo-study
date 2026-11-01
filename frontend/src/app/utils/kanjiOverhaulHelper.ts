@@ -84,7 +84,37 @@ export const KANJI_COMPOUND_BREAKDOWN: Record<string, { chars: string[]; reading
   '家族': { chars: ['家', '族'], readings: ['か', 'ぞく'] },
   '一人': { chars: ['一', '人'], readings: ['ひと', 'り'] },
   '二人': { chars: ['二', '人'], readings: ['ふた', 'り'] },
-  '三人': { chars: ['三', '人'], readings: ['さん', 'にん'] }
+  '三人': { chars: ['三', '人'], readings: ['さん', 'にん'] },
+  '勉強': { chars: ['勉', '強'], readings: ['べん', 'きょう'] },
+  '野菜': { chars: ['野', '菜'], readings: ['や', 'さい'] },
+  '写真': { chars: ['写', '真'], readings: ['しゃ', 'しん'] },
+  '牛乳': { chars: ['牛', '乳'], readings: ['ぎゅう', 'にゅう'] },
+  '専門': { chars: ['専', '門'], readings: ['せん', 'もん'] },
+  '病気': { chars: ['病', '気'], readings: ['びょう', 'き'] },
+  '問題': { chars: ['問', '題'], readings: ['もん', 'だい'] },
+  '運転': { chars: ['運', '転'], readings: ['うん', 'てん'] },
+  '首相': { chars: ['首', '相'], readings: ['しゅ', 'しょう'] },
+  '説明': { chars: ['説', '明'], readings: ['せつ', 'めい'] },
+  '生産': { chars: ['生', '産'], readings: ['せい', 'さん'] },
+  '場所': { chars: ['場', '所'], readings: ['ば', 'しょ'] },
+  '到頭': { chars: ['到', '頭'], readings: ['とう', 'とう'] },
+  '主人公': { chars: ['主', '人', '公'], readings: ['しゅ', 'じん', 'こう'] },
+  '森林': { chars: ['森', '林'], readings: ['しん', 'りん'] },
+  '引き出し': { chars: ['引', 'き', '出', 'し'], readings: ['ひ', 'き', 'だ', 'し'] },
+  '電池': { chars: ['電', '池'], readings: ['でん', 'ち'] },
+  '都合': { chars: ['都', '合'], readings: ['つ', 'ごう'] },
+  '都会': { chars: ['都', '会'], readings: ['と', 'かい'] },
+  '乗り物': { chars: ['乗', 'り', '物'], readings: ['の', 'り', 'もの'] },
+  '研究室': { chars: ['研', '究', '室'], readings: ['けん', 'きゅう', 'しつ'] },
+  '市民': { chars: ['市', '民'], readings: ['し', 'みん'] },
+  '地区': { chars: ['地', '区'], readings: ['ち', 'く'] },
+  '格好': { chars: ['格', '好'], readings: ['かっ', 'こう'] },
+  '試験': { chars: ['試', '験'], readings: ['し', 'けん'] },
+  '遠慮': { chars: ['遠', '慮'], readings: ['えん', 'りょ'] },
+  '洗濯物': { chars: ['洗', '濯', '物'], readings: ['せん', 'たく', 'もの'] },
+  '宅配便': { chars: ['宅', '配', '便'], readings: ['たく', 'はい', 'びん'] },
+  '知り合う': { chars: ['知', 'り', '合', 'う'], readings: ['し', 'り', 'あ', 'う'] },
+  '世界': { chars: ['世', '界'], readings: ['せ', 'かい'] }
 };
 
 // Bảng ánh xạ Kana -> Romaji chuẩn Hepburn (offline)
@@ -159,172 +189,121 @@ export function kanaToRomaji(kana: string): string {
  * Khóa dạng: `${lessonId}_${character}`
  */
 export const LESSON_KANJI_ROMAJI_MAP: Record<string, string> = {
-  // Bài 1
-  '1_私': 'watashi',
-  '1_人': 'jin',     // 日本人, 社員, アメリカ人
-  '1_先': 'sen',     // 先生
-  '1_生': 'sei',     // 先生, 学生
-  '1_学': 'gaku',    // 学生, 大学, 学校
-  '1_校': 'kou',     // 学校
-  '1_日': 'nichi',   // 日本 (ni), 日曜日 (nichi)
-  '1_本': 'hon',     // 日本, 本
-  '1_会': 'kai',     // 会社, 会社員
-  '1_社': 'sha',     // 会社, 社員, 会社員
-  '1_員': 'in',      // 会社員, 社員, 銀行員
-  '1_一': 'ichi',
-  '1_二': 'ni',
-  '1_三': 'san',
-
-  // Bài 2
-  '2_本': 'hon',     // 本
-  '2_語': 'go',      // 日本語, 英語
-  '2_何': 'nan',     // 何
-  '2_時': 'ji',      // 時計, 何時
-  '2_計': 'kei',     // 時計
-  '2_車': 'sha',     // 自動車
-  '2_机': 'tsukue',  // 机
-  '2_傘': 'kasa',    // 傘
-  '2_鞄': 'kaban',   // 鞄
-  '2_新': 'shin',    // 新聞
-  '2_聞': 'bun',     // 新聞
-  '2_読': 'doku',    // 読書
-  '2_書': 'sho',     // 辞書
-  '2_辞': 'ji',      // 辞書
-  '2_雑': 'zatsu',   // 雑誌
-  '2_誌': 'shi',     // 雑誌
-  '2_鍵': 'kagi',    // 鍵
-  '2_英': 'ei',      // 英語
-
-  // Bài 3
-  '3_室': 'shitsu',  // 教室, 会議室
-  '3_食': 'shoku',   // 食堂
-  '3_堂': 'dou',     // 食堂
-  '3_所': 'sho',     // 事務所
-  '3_屋': 'ya',      // 部屋, 本屋
-  '3_国': 'koku',    // 外国, お国
-  '3_議': 'gi',      // 会議, 会議室
-  '3_駅': 'eki',     // 駅
-  '3_電': 'den',     // 電話
-  '3_靴': 'kutsu',   // 靴
-  '3_地': 'chi',     // 地下
-  '3_下': 'ka',      // 地下
-
-  // Bài 4
-  '4_分': 'fun',     // 何分 (pun/fun), 分
-  '4_半': 'han',     // 半
-  '4_午': 'go',      // 午前, 午後
-  '4_前': 'zen',     // 午前 (zen) / mae
-  '4_後': 'go',      // 午後 (go) / ushiro
-  '4_今': 'ima',     // 今 (ima), 今朝 (kesa), 今晩 (konban)
-  '4_朝': 'asa',     // 朝, 毎朝
-  '4_昼': 'hiru',    // 昼, 昼休み
-  '4_夜': 'yoru',    // 夜
-  '4_晩': 'ban',     // 晩, 毎晩
-  '4_毎': 'mai',     // 毎日, 毎朝, 毎晩
-  '4_休': 'yasu',    // 休み
-  '4_銀': 'gin',     // 銀行
-  '4_間': 'kan',     // 時間
-
-  // Bài 5
-  '5_行': 'i',       // 行きます (i), 銀行/飛行機 (kou)
-  '5_来': 'ki',      // 来ます (ki), 来週 (rai)
-  '5_帰': 'kae',     // 帰ります
-  '5_動': 'dou',     // 自動車
-  '5_自': 'ji',      // 自動車, 自転車
-  '5_転': 'ten',     // 自転車
-  '5_車': 'sha',     // 電車, 自転車
-  '5_駅': 'eki',     // 駅
-  '5_飛': 'hi',      // 飛行機
-  '5_機': 'ki',      // 飛行機
-  '5_船': 'fune',    // 船
-  '5_先': 'sen',     // 先週
-  '5_週': 'shuu',    // 今週, 来週, 先週
-  '5_誕': 'tan',     // 誕生日
-  '5_年': 'nen',     // 去年, 今年, 来年
-
-  // Bài 6
-  '6_食': 'ta',      // 食べます
-  '6_飲': 'no',      // 飲みます
-  '6_吸': 'su',      // 吸います
-  '6_見': 'mi',      // 見ます
-  '6_聞': 'ki',      // 聞きます
-  '6_読': 'yo',      // 読みます
-  '6_書': 'ka',      // 書きます
-  '6_買': 'ka',      // 買います
-  '6_撮': 'to',      // 撮ります
-  '6_友': 'tomo',    // 友達
-  '6_達': 'dachi',   // 友達
-  '6_酒': 'sake',    // お酒
-  '6_店': 'mise',    // 店
-
-  // Bài 7
-  '7_切': 'ki',      // 切ります
-  '7_送': 'oku',     // 送ります
-  '7_手': 'te',      // 手
-  '7_紙': 'kami',    // 手紙
-  '7_花': 'hana',    // 花
-  '7_荷': 'ni',      // 荷物
-  '7_物': 'motsu',   // 荷物
-  '7_父': 'chichi',  // 父
-  '7_母': 'haha',    // 母
-  '7_教': 'oshi',    // 教えます
-  '7_習': 'nara',    // 習います
-  '7_貸': 'ka',      // 貸します
-  '7_借': 'ka',      // 借ります
-
-  // Bài 8
-  '8_親': 'shin',    // 親切
-  '8_切': 'setsu',   // 親切
-  '8_便': 'ben',     // 便利
-  '8_利': 'ri',      // 便利
-  '8_有': 'yuu',     // 有名
-  '8_名': 'mei',     // 有名
-  '8_白': 'shiro',   // 白い
-  '8_黒': 'kuro',    // 黒い
-  '8_赤': 'aka',     // 赤い
-  '8_青': 'ao',      // 青い
-  '8_町': 'machi',   // 町
-  '8_山': 'yama',    // 山
-  '8_静': 'shizu',   // 静か
-  '8_高': 'taka',    // 高い
-  '8_安': 'yasu',    // 安い
-  '8_新': 'atara',   // 新しい
-  '8_古': 'furu',    // 古い
-
-  // Bài 9
-  '9_好': 'su',      // 好き
-  '9_嫌': 'kira',    // 嫌い
-  '9_上': 'jou',     // 上手
-  '9_手': 'zu',      // 上手
-  '9_下': 'he',      // 下手
-  '9_歌': 'uta',     // 歌
-  '9_絵': 'e',       // 絵
-  '9_字': 'ji',      // 漢字, 字
-  '9_肉': 'niku',    // 肉
-  '9_魚': 'sakana',  // 魚
-  '9_野': 'ya',      // 野菜
-  '9_菜': 'sai',     // 野菜
-  '9_音': 'on',      // 音楽
-  '9_楽': 'gaku',    // 音楽
-  '9_料': 'ryou',    // 料理
-  '9_理': 'ri',      // 料理
-
-  // Bài 10
-  '10_男': 'otoko',  // 男
-  '10_女': 'onna',   // 女
-  '10_子': 'ko',     // 子
-  '10_犬': 'inu',    // 犬
-  '10_猫': 'neko',   // 猫
-  '10_木': 'ki',     // 木
-  '10_家': 'ie',     // 家
-  '10_箱': 'bako',   // 箱
-  '10_棚': 'tana',   // 棚
-  '10_中': 'naka',   // 中
-  '10_外': 'soto',   // 外
-  '10_隣': 'tonari', // 隣
-  '10_近': 'chika',  // 近く
-  '10_間': 'aida',   // 間
-  '10_段': 'dan'     // 階段
+  // Bài 1 (13 chữ)
+  '1_私': 'watashi', '1_人': 'jin', '1_先': 'sen', '1_生': 'sei', '1_学': 'gaku',
+  '1_大': 'dai', '1_会': 'kai', '1_社': 'sha', '1_員': 'in', '1_日': 'nichi',
+  '1_本': 'hon', '1_国': 'kuni', '1_銀': 'gin',
+  // Bài 2 (11 chữ)
+  '2_何': 'nan', '2_名': 'mei', '2_時': 'ji', '2_計': 'kei', '2_書': 'sho',
+  '2_新': 'shin', '2_聞': 'bun', '2_語': 'go', '2_英': 'ei', '2_車': 'sha', '2_手': 'te',
+  // Bài 3 (9 chữ)
+  '3_一': 'ichi', '3_十': 'juu', '3_百': 'hyaku', '3_千': 'sen', '3_万': 'man',
+  '3_円': 'en', '3_電': 'den', '3_食': 'shoku', '3_下': 'ka',
+  // Bài 4 (16 chữ)
+  '4_今': 'ima', '4_分': 'fun', '4_半': 'han', '4_午': 'go', '4_毎': 'mai',
+  '4_休': 'yasu', '4_働': 'hatara', '4_勉': 'ben', '4_強': 'kyou', '4_曜': 'you',
+  '4_月': 'getsu', '4_火': 'ka', '4_水': 'sui', '4_木': 'moku', '4_金': 'kin', '4_土': 'do',
+  // Bài 5 (9 chữ)
+  '5_行': 'i', '5_来': 'ki', '5_帰': 'kae', '5_校': 'kou', '5_駅': 'eki',
+  '5_友': 'tomo', '5_週': 'shuu', '5_年': 'nen', '5_去': 'kyo',
+  // Bài 6 (12 chữ)
+  '6_飲': 'no', '6_見': 'mi', '6_読': 'yo', '6_買': 'ka', '6_写': 'sha', '6_真': 'shin',
+  '6_店': 'mise', '6_朝': 'asa', '6_牛': 'gyuu', '6_魚': 'sakana', '6_菜': 'sai', '6_花': 'hana',
+  // Bài 7 (5 chữ)
+  '7_父': 'chichi', '7_母': 'haha', '7_紙': 'kami', '7_貸': 'ka', '7_借': 'ka',
+  // Bài 8 (8 chữ)
+  '8_山': 'yama', '8_白': 'shiro', '8_安': 'yasu', '8_古': 'furu',
+  '8_小': 'chii', '8_低': 'hiku', '8_暑': 'atsu', '8_寒': 'samu',
+  // Bài 9 (5 chữ)
+  '9_上': 'jou', '9_少': 'suko', '9_漢': 'kan', '9_野': 'ya', '9_主': 'shu',
+  // Bài 10 (8 chữ)
+  '10_男': 'otoko', '10_女': 'onna', '10_犬': 'inu', '10_中': 'naka',
+  '10_後': 'ushi', '10_右': 'migi', '10_左': 'hidari', '10_県': 'ken',
+  // Bài 11 (12 chữ)
+  '11_二': 'ni', '11_三': 'san', '11_四': 'yon', '11_五': 'go',
+  '11_六': 'roku', '11_七': 'nana', '11_八': 'hachi', '11_九': 'kyuu',
+  '11_兄': 'ani', '11_姉': 'ane', '11_弟': 'otouto', '11_妹': 'imouto',
+  // Bài 12 (10 chữ)
+  '12_天': 'ten', '12_気': 'ki', '12_雨': 'ame', '12_空': 'sora', '12_京': 'kyou',
+  '12_春': 'haru', '12_夏': 'natsu', '12_秋': 'aki', '12_冬': 'fuyu', '12_軽': 'karu',
+  // Bài 13 (4 chữ)
+  '13_川': 'kawa', '13_入': 'hai', '13_歩': 'aru', '13_別': 'betsu',
+  // Bài 14 (4 chữ)
+  '14_前': 'mae', '14_待': 'ma', '14_住': 'su', '14_図': 'to',
+  // Bài 15 (5 chữ)
+  '15_出': 'da', '15_高': 'taka', '15_使': 'tsuka', '15_族': 'zoku', '15_門': 'mon',
+  // Bài 16 (6 chữ)
+  '16_長': 'naga', '16_目': 'me', '16_耳': 'mimi', '16_足': 'ashi', '16_顔': 'kao', '16_暗': 'kura',
+  // Bài 17 (5 chữ)
+  '17_病': 'byou', '17_院': 'in', '17_薬': 'kusuri', '17_問': 'mon', '17_題': 'dai',
+  // Bài 18 (4 chữ)
+  '18_歌': 'uta', '18_運': 'un', '18_転': 'ten', '18_集': 'atsu',
+  // Bài 19 (4 chữ)
+  '19_体': 'karada', '19_子': 'ko', '19_字': 'ji', '19_弱': 'yowa',
+  // Bài 20 (4 chữ)
+  '20_言': 'i', '20_話': 'wa', '20_始': 'haji', '20_終': 'o',
+  // Bài 21 (5 chữ)
+  '21_思': 'omo', '21_同': 'ona', '21_多': 'oo', '21_立': 'ta', '21_首': 'shu',
+  // Bài 22 (4 chữ)
+  '22_仕': 'shi', '22_室': 'shitsu', '22_間': 'kan', '22_広': 'hiro',
+  // Bài 23 (4 chữ)
+  '23_外': 'gai', '23_道': 'michi', '23_建': 'ta', '23_正': 'tada',
+  // Bài 24 (3 chữ)
+  '24_堂': 'dou', '24_説': 'setsu', '24_産': 'san',
+  // Bài 25 (4 chữ)
+  '25_考': 'kanga', '25_着': 'tsu', '25_田': 'da', '25_館': 'kan',
+  // Bài 26 (5 chữ)
+  '26_場': 'ba', '26_所': 'sho', '26_度': 'do', '26_悪': 'waru', '26_頭': 'atama',
+  // Bài 27 (7 chữ)
+  '27_公': 'kou', '27_昼': 'hiru', '27_走': 'hashi', '27_鳥': 'tori',
+  '27_声': 'koe', '27_林': 'hayashi', '27_森': 'mori',
+  // Bài 28 (4 chữ)
+  '28_売': 'u', '28_通': 'kayo', '28_品': 'shina', '28_色': 'iro',
+  // Bài 29 (5 chữ)
+  '29_開': 'a', '29_事': 'ji', '29_物': 'mono', '29_地': 'chi', '29_茶': 'cha',
+  // Bài 30 (4 chữ)
+  '30_習': 'nara', '30_業': 'gyou', '30_引': 'hi', '30_池': 'ike',
+  // Bài 31 (4 chữ)
+  '31_映': 'ei', '31_画': 'ga', '31_自': 'ji', '31_村': 'mura',
+  // Bài 32 (7 chữ)
+  '32_東': 'higashi', '32_西': 'nishi', '32_南': 'minami', '32_北': 'kita',
+  '32_夕': 'yuu', '32_方': 'kata', '32_飯': 'han',
+  // Bài 33 (4 chữ)
+  '33_口': 'kuchi', '33_急': 'iso', '33_明': 'mei', '33_短': 'mijika',
+  // Bài 34 (6 chữ)
+  '34_夜': 'yoru', '34_肉': 'niku', '34_赤': 'aka', '34_青': 'ao', '34_黒': 'kuro', '34_質': 'shitsu',
+  // Bài 35 (5 chữ)
+  '35_旅': 'ryo', '35_屋': 'ya', '35_海': 'umi', '35_近': 'chika', '35_都': 'tsu',
+  // Bài 36 (4 chữ)
+  '36_乗': 'no', '36_太': 'futo', '36_特': 'toku', '36_工': 'kou',
+  // Bài 37 (4 chữ)
+  '37_家': 'ie', '37_者': 'mono', '37_料': 'ryou', '37_起': 'o',
+  // Bài 38 (5 chữ)
+  '38_研': 'ken', '38_究': 'kyuu', '38_市': 'shi', '38_区': 'ku', '38_民': 'min',
+  // Bài 39 (6 chữ)
+  '39_早': 'haya', '39_好': 'su', '39_服': 'fuku', '39_台': 'tai', '39_風': 'kaze', '39_死': 'shi',
+  // Bài 40 (4 chữ)
+  '40_試': 'shi', '40_験': 'ken', '40_動': 'ugo', '40_重': 'omo',
+  // Bài 41 (4 chữ)
+  '41_楽': 'tano', '41_文': 'bun', '41_有': 'yuu', '41_町': 'machi',
+  // Bài 42 (3 chữ)
+  '42_教': 'oshi', '42_音': 'oto', '42_進': 'susu',
+  // Bài 43 (4 chữ)
+  '43_切': 'ki', '43_不': 'fu', '43_味': 'aji', '43_光': 'hikari',
+  // Bài 44 (4 chữ)
+  '44_洗': 'ara', '44_遠': 'too', '44_理': 'ri', '44_洋': 'you',
+  // Bài 45 (4 chữ)
+  '45_止': 'to', '45_答': 'kota', '45_用': 'you', '45_以': 'i',
+  // Bài 46 (4 chữ)
+  '46_知': 'shi', '46_注': 'chuu', '46_親': 'oya', '46_便': 'bin',
+  // Bài 47 (4 chữ)
+  '47_医': 'i', '47_発': 'hatsu', '47_回': 'mawa', '47_合': 'a',
+  // Bài 48 (3 chữ)
+  '48_元': 'gen', '48_代': 'ka', '48_意': 'i',
+  // Bài 49 (4 chữ)
+  '49_作': 'tsuku', '49_持': 'mo', '49_世': 'se', '49_界': 'kai',
+  // Bài 50 (3 chữ)
+  '50_送': 'oku', '50_心': 'kokoro', '50_力': 'chikara'
 };
 
 /**
@@ -494,11 +473,16 @@ export function getLessonCompoundCandidatesForKanji(
     parseCompoundsField(k.compounds);
   }
 
-  // 4. Từ bảng KANJI_COMPOUND_BREAKDOWN nếu vẫn chưa có từ đa ký tự
+  // 4. Từ bảng KANJI_COMPOUND_BREAKDOWN (chỉ lấy từ có các chữ Hán thuộc bài <= bài hiện tại)
   if (multiCharList.length === 0) {
+    const maxLid = targetKanji.lesson_id || 50;
     for (const [kWord, bd] of Object.entries(KANJI_COMPOUND_BREAKDOWN)) {
       if (kWord.length >= 2 && kWord.includes(targetChar)) {
-        pushCandidate(kWord, bd.readings.join(''), '');
+        const kanjiChars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
+        const withinScope = kanjiChars.every(c => (GLOBAL_KANJI_META[c]?.lesson || 999) <= maxLid);
+        if (withinScope) {
+          pushCandidate(kWord, bd.readings.join(''), '');
+        }
       }
     }
   }
@@ -532,116 +516,307 @@ export function getLessonCompoundCandidatesForKanji(
  * Bản đồ tra cứu chữ Hán: Âm Hán, Nghĩa tiếng Việt và Bài học giới thiệu.
  */
 export const GLOBAL_KANJI_META: Record<string, { sino: string; meaning: string; lesson: number }> = {
-  // Bài 1
-  '私': { sino: 'TƯ', meaning: 'Tôi, riêng tư', lesson: 1 },
   '人': { sino: 'NHÂN', meaning: 'Người', lesson: 1 },
   '先': { sino: 'TIÊN', meaning: 'Trước, đi đầu', lesson: 1 },
-  '生': { sino: 'SINH', meaning: 'Sống, sinh ra', lesson: 1 },
-  '学': { sino: 'HỌC', meaning: 'Học tập', lesson: 1 },
-  '校': { sino: 'HIỆU', meaning: 'Trường học', lesson: 1 },
-  '日': { sino: 'NHẬT', meaning: 'Mặt trời, ngày', lesson: 1 },
-  '本': { sino: 'BẢN', meaning: 'Sách, gốc rễ', lesson: 1 },
+  '国': { sino: 'QUỐC', meaning: 'Đất nước, quốc gia', lesson: 1 },
+  '大': { sino: 'ĐẠI', meaning: 'Lớn, to lớn', lesson: 1 },
+  '学': { sino: 'HỌC', meaning: 'Học, học vấn, trường học', lesson: 1 },
+  '日': { sino: 'NHẬT', meaning: 'Ngày, mặt trời, nước Nhật', lesson: 1 },
+  '本': { sino: 'BẢN', meaning: 'Sách, cội nguồn, bản chất', lesson: 1 },
+  '生': { sino: 'SINH', meaning: 'Sống, sinh ra, học sinh', lesson: 1 },
   '会': { sino: 'HỘI', meaning: 'Hội họp, gặp gỡ', lesson: 1 },
-  '社': { sino: 'XÃ', meaning: 'Công ty, đền thờ', lesson: 1 },
   '員': { sino: 'VIÊN', meaning: 'Thành viên, nhân viên', lesson: 1 },
-  '一': { sino: 'NHẤT', meaning: 'Một, số một', lesson: 1 },
-  '二': { sino: 'NHỊ', meaning: 'Hai, số hai', lesson: 1 },
-  '三': { sino: 'TAM', meaning: 'Ba, số ba', lesson: 1 },
-
-  // Bài 2
-  '語': { sino: 'NGỮ', meaning: 'Ngôn ngữ, tiếng', lesson: 2 },
+  '社': { sino: 'XÃ', meaning: 'Đền thờ, xã hội, công ty', lesson: 1 },
+  '私': { sino: 'TƯ', meaning: 'Tôi, riêng tư', lesson: 1 },
+  '銀': { sino: 'NGÂN', meaning: 'Bạc, ngân hàng', lesson: 1 },
   '何': { sino: 'HÀ', meaning: 'Cái gì', lesson: 2 },
-  '時': { sino: 'THỜI', meaning: 'Thời gian, giờ', lesson: 2 },
-  '計': { sino: 'KẾ', meaning: 'Kế hoạch, đo lường', lesson: 2 },
-  '車': { sino: 'XA', meaning: 'Xe cộ, ô tô', lesson: 2 },
+  '名': { sino: 'DANH', meaning: 'Tên, danh tiếng', lesson: 2 },
+  '時': { sino: 'THỜI', meaning: 'thời gian, giờ', lesson: 2 },
+  '書': { sino: 'THƯ', meaning: 'viết, sách', lesson: 2 },
+  '聞': { sino: 'VĂN', meaning: 'nghe, hỏi', lesson: 2 },
+  '語': { sino: 'NGỮ', meaning: 'ngôn ngữ, kể', lesson: 2 },
+  '車': { sino: 'XA', meaning: 'xe cộ, ô tô', lesson: 2 },
+  '手': { sino: 'THỦ', meaning: 'Bàn tay, thủ lĩnh', lesson: 2 },
+  '新': { sino: 'TÂN', meaning: 'mới', lesson: 2 },
+  '英': { sino: 'ANH', meaning: 'Anh quốc, xuất sắc', lesson: 2 },
+  '計': { sino: 'KẾ', meaning: 'kế hoạch, đo lường', lesson: 2 },
+  '一': { sino: 'NHẤT', meaning: 'Một, số một', lesson: 3 },
+  '万': { sino: 'VẠN', meaning: 'Vạn, mười nghìn', lesson: 3 },
+  '下': { sino: 'HẠ', meaning: 'Dưới, xuống', lesson: 3 },
+  '円': { sino: 'YÊN', meaning: 'Yên, hình tròn', lesson: 3 },
+  '十': { sino: 'THẬP', meaning: 'Mười, số mười', lesson: 3 },
+  '千': { sino: 'THIÊN', meaning: 'Nghìn, số nghìn', lesson: 3 },
+  '百': { sino: 'BÁCH', meaning: 'Trăm, số một trăm', lesson: 3 },
+  '電': { sino: 'ĐIỆN', meaning: 'Điện lực, sấm chớp', lesson: 3 },
+  '食': { sino: 'THỰC', meaning: 'Ăn, đồ ăn', lesson: 3 },
+  '今': { sino: 'KIM', meaning: 'Bây giờ, hiện tại', lesson: 4 },
+  '休': { sino: 'HƯU', meaning: 'Nghỉ ngơi', lesson: 4 },
+  '午': { sino: 'NGỌ', meaning: 'Buổi trưa', lesson: 4 },
+  '半': { sino: 'BÁN', meaning: 'Nửa, một nửa, rưỡi', lesson: 4 },
+  '土': { sino: 'THỔ', meaning: 'Đất, thổ nhưỡng, thứ bảy', lesson: 4 },
+  '月': { sino: 'NGUYỆT', meaning: 'Mặt trăng, tháng', lesson: 4 },
+  '木': { sino: 'MỘC', meaning: 'Cây, gỗ, thứ năm', lesson: 4 },
+  '毎': { sino: 'MỖI', meaning: 'Mỗi, hằng (ngày/tháng)', lesson: 4 },
+  '水': { sino: 'THỦY', meaning: 'Nước', lesson: 4 },
+  '火': { sino: 'HỎA', meaning: 'Lửa, thứ ba', lesson: 4 },
+  '金': { sino: 'KIM', meaning: 'Vàng, tiền, kim loại', lesson: 4 },
+  '勉': { sino: 'MIỄN', meaning: 'Cố gắng, chăm chỉ', lesson: 4 },
+  '強': { sino: 'CƯỜNG', meaning: 'Mạnh mẽ, cố chấp', lesson: 4 },
+  '曜': { sino: 'DIỆU', meaning: 'Thứ trong tuần, ánh sáng', lesson: 4 },
+  '分': { sino: 'PHÂN', meaning: 'Phút; chia, hiểu', lesson: 4 },
+  '働': { sino: 'ĐỘNG', meaning: 'Làm việc, lao động', lesson: 4 },
+  '友': { sino: 'HỮU', meaning: 'Bạn bè, hữu hảo', lesson: 5 },
+  '年': { sino: 'NIÊN', meaning: 'Năm, tuổi', lesson: 5 },
+  '来': { sino: 'LAI', meaning: 'Đến, tương lai', lesson: 5 },
+  '校': { sino: 'HIỆU', meaning: 'Trường học, hiệu đính', lesson: 5 },
+  '行': { sino: 'HÀNH', meaning: 'Đi, tiến hành', lesson: 5 },
+  '去': { sino: 'KHỨ', meaning: 'Quá khứ, rời đi', lesson: 5 },
+  '帰': { sino: 'QUY', meaning: 'Trở về, quy tụ', lesson: 5 },
+  '週': { sino: 'CHU', meaning: 'Tuần, vòng quanh', lesson: 5 },
+  '駅': { sino: 'DỊCH', meaning: 'Nhà ga', lesson: 5 },
+  '見': { sino: 'KIẾN', meaning: 'Nhìn, xem, ý kiến', lesson: 6 },
+  '読': { sino: 'ĐỘC', meaning: 'Đọc', lesson: 6 },
+  '写': { sino: 'TẢ', meaning: 'Chép lại, chụp (ảnh)', lesson: 6 },
+  '店': { sino: 'ĐIẾM', meaning: 'cửa hàng, tiệm', lesson: 6 },
+  '朝': { sino: 'TRIỀU', meaning: 'Buổi sáng, triều đại', lesson: 6 },
+  '牛': { sino: 'NGƯU', meaning: 'Con bò', lesson: 6 },
+  '真': { sino: 'CHÂN', meaning: 'Thật, chân thật', lesson: 6 },
+  '花': { sino: 'HOA', meaning: 'Bông hoa', lesson: 6 },
+  '買': { sino: 'MÃI', meaning: 'Mua', lesson: 6 },
+  '飲': { sino: 'ẨM', meaning: 'Uống, ẩm thực', lesson: 6 },
+  '魚': { sino: 'NGƯ', meaning: 'Con cá', lesson: 6 },
+  '菜': { sino: 'THÁI', meaning: 'Rau', lesson: 6 },
+  '母': { sino: 'MẪU', meaning: 'Mẹ', lesson: 7 },
+  '父': { sino: 'PHỤ', meaning: 'Bố, cha', lesson: 7 },
+  '借': { sino: 'TÁ', meaning: 'Mượn, vay', lesson: 7 },
+  '紙': { sino: 'CHỈ', meaning: 'Giấy', lesson: 7 },
+  '貸': { sino: 'THẢI', meaning: 'Cho mượn, cho vay', lesson: 7 },
+  '小': { sino: 'TIỂU', meaning: 'Nhỏ, bé', lesson: 8 },
+  '山': { sino: 'SƠN', meaning: 'Núi, ngọn núi', lesson: 8 },
+  '白': { sino: 'BẠCH', meaning: 'Màu trắng, sáng', lesson: 8 },
+  '古': { sino: 'CỔ', meaning: 'Cũ, cổ xưa', lesson: 8 },
+  '安': { sino: 'AN', meaning: 'Rẻ, an tâm, yên ổn', lesson: 8 },
+  '低': { sino: 'ĐÊ', meaning: 'Thấp', lesson: 8 },
+  '寒': { sino: 'HÀN', meaning: 'Lạnh (thời tiết)', lesson: 8 },
+  '暑': { sino: 'THỬ', meaning: 'Nóng (thời tiết)', lesson: 8 },
+  '上': { sino: 'THƯỢNG', meaning: 'Trên, lên trên', lesson: 9 },
+  '主': { sino: 'CHỦ', meaning: 'Chủ nhân, nhân vật chính', lesson: 9 },
+  '少': { sino: 'THIỂU', meaning: 'Ít', lesson: 9 },
+  '漢': { sino: 'HÁN', meaning: 'Hán, chữ Hán', lesson: 9 },
+  '野': { sino: 'DÃ', meaning: 'cánh đồng, hoang dã', lesson: 9 },
+  '中': { sino: 'TRUNG', meaning: 'Trong, ở giữa', lesson: 10 },
+  '右': { sino: 'HỮU', meaning: 'Bên phải, phía phải', lesson: 10 },
+  '女': { sino: 'NỮ', meaning: 'Phụ nữ, nữ giới', lesson: 10 },
+  '左': { sino: 'TẢ', meaning: 'Bên trái, phía trái', lesson: 10 },
+  '後': { sino: 'HẬU', meaning: 'Sau, phía sau', lesson: 10 },
+  '男': { sino: 'NAM', meaning: 'Đàn ông, nam giới', lesson: 10 },
+  '犬': { sino: 'KHUYỂN', meaning: 'Con chó', lesson: 10 },
+  '県': { sino: 'HUYỆN', meaning: 'Tỉnh (của Nhật)', lesson: 10 },
+  '七': { sino: 'THẤT', meaning: 'Bảy, số bảy', lesson: 11 },
+  '三': { sino: 'TAM', meaning: 'Ba, số ba', lesson: 11 },
+  '九': { sino: 'CỬU', meaning: 'Chín, số chín', lesson: 11 },
+  '二': { sino: 'NHỊ', meaning: 'Hai, số hai', lesson: 11 },
+  '五': { sino: 'NGŨ', meaning: 'Năm, số năm', lesson: 11 },
+  '八': { sino: 'BÁT', meaning: 'Tám, số tám', lesson: 11 },
+  '六': { sino: 'LỤC', meaning: 'Sáu, số sáu', lesson: 11 },
+  '四': { sino: 'TỨ', meaning: 'Bốn, số bốn', lesson: 11 },
+  '兄': { sino: 'HUYNH', meaning: 'Anh trai', lesson: 11 },
+  '妹': { sino: 'MUỘI', meaning: 'Em gái', lesson: 11 },
+  '姉': { sino: 'TỶ', meaning: 'Chị gái', lesson: 11 },
+  '弟': { sino: 'ĐỆ', meaning: 'Em trai', lesson: 11 },
+  '天': { sino: 'THIÊN', meaning: 'Trời, thiên nhiên', lesson: 12 },
+  '気': { sino: 'KHÍ', meaning: 'Không khí, khí chất, tinh thần', lesson: 12 },
+  '雨': { sino: 'VŨ', meaning: 'Mưa', lesson: 12 },
+  '京': { sino: 'KINH', meaning: 'kinh đô, to lớn', lesson: 12 },
+  '冬': { sino: 'ĐÔNG', meaning: 'Mùa đông', lesson: 12 },
+  '夏': { sino: 'HẠ', meaning: 'Mùa hè', lesson: 12 },
+  '春': { sino: 'XUÂN', meaning: 'Mùa xuân', lesson: 12 },
+  '秋': { sino: 'THU', meaning: 'Mùa thu', lesson: 12 },
+  '空': { sino: 'KHÔNG', meaning: 'Bầu trời, trống rỗng', lesson: 12 },
+  '軽': { sino: 'KHINH', meaning: 'Nhẹ', lesson: 12 },
+  '入': { sino: 'NHẬP', meaning: 'Vào, đi vào', lesson: 13 },
+  '川': { sino: 'XUYÊN', meaning: 'Sông, dòng sông', lesson: 13 },
+  '別': { sino: 'BIỆT', meaning: 'Chia ly, khác biệt, đặc biệt', lesson: 13 },
+  '歩': { sino: 'BỘ', meaning: 'Đi bộ, bước chân', lesson: 13 },
+  '前': { sino: 'TIỀN', meaning: 'Trước, phía trước', lesson: 14 },
+  '住': { sino: 'TRÚ', meaning: 'Sống, cư trú', lesson: 14 },
+  '図': { sino: 'ĐỒ', meaning: 'Bản đồ, đồ án', lesson: 14 },
+  '待': { sino: 'ĐÃI', meaning: 'Chờ đợi, đối đãi', lesson: 14 },
+  '出': { sino: 'XUẤT', meaning: 'Ra ngoài, xuất phát', lesson: 15 },
+  '高': { sino: 'CAO', meaning: 'Cao, đắt tiền', lesson: 15 },
+  '使': { sino: 'SỬ', meaning: 'Sử dụng, sứ giả', lesson: 15 },
+  '族': { sino: 'TỘC', meaning: 'Gia tộc, chủng tộc', lesson: 15 },
+  '門': { sino: 'MÔN', meaning: 'Cổng; chuyên môn', lesson: 15 },
+  '長': { sino: 'TRƯỜNG, TRƯỞNG', meaning: 'Dài, trưởng phòng', lesson: 16 },
+  '目': { sino: 'MỤC', meaning: 'Mắt, hạng mục', lesson: 16 },
+  '足': { sino: 'TÚC', meaning: 'Chân, đầy đủ', lesson: 16 },
+  '耳': { sino: 'NHĨ', meaning: 'Cái tai', lesson: 16 },
+  '顔': { sino: 'NHAN', meaning: 'Khuôn mặt', lesson: 16 },
+  '暗': { sino: 'ÁM', meaning: 'Tối', lesson: 16 },
+  '問': { sino: 'VẤN', meaning: 'Hỏi, câu hỏi', lesson: 17 },
+  '病': { sino: 'BỆNH', meaning: 'Bệnh tật, ốm đau', lesson: 17 },
+  '院': { sino: 'VIỆN', meaning: 'Tòa nhà, bệnh viện, học viện', lesson: 17 },
+  '題': { sino: 'ĐỀ', meaning: 'Đề tài, vấn đề', lesson: 17 },
+  '薬': { sino: 'DƯỢC', meaning: 'Thuốc', lesson: 17 },
+  '歌': { sino: 'CA', meaning: 'Hát, bài hát', lesson: 18 },
+  '転': { sino: 'CHUYỂN', meaning: 'Xoay tròn, ngã, chuyển đổi', lesson: 18 },
+  '運': { sino: 'VẬN', meaning: 'Vận chuyển, vận mệnh', lesson: 18 },
+  '集': { sino: 'TẬP', meaning: 'Tập hợp, thu thập', lesson: 18 },
+  '子': { sino: 'TỬ', meaning: 'Đứa con, em bé', lesson: 19 },
+  '体': { sino: 'THỂ', meaning: 'Cơ thể, thân thể', lesson: 19 },
+  '字': { sino: 'TỰ', meaning: 'Chữ viết, ký tự', lesson: 19 },
+  '弱': { sino: 'NHƯỢC', meaning: 'Yếu', lesson: 19 },
+  '話': { sino: 'THOẠI', meaning: 'Nói chuyện, hội thoại', lesson: 20 },
+  '始': { sino: 'THỦY', meaning: 'Bắt đầu, khởi đầu', lesson: 20 },
+  '終': { sino: 'CHUNG', meaning: 'Kết thúc, điểm cuối', lesson: 20 },
+  '言': { sino: 'NGÔN', meaning: 'Nói, ngôn ngữ', lesson: 20 },
+  '同': { sino: 'ĐỒNG', meaning: 'Giống nhau, cùng', lesson: 21 },
+  '多': { sino: 'ĐA', meaning: 'Nhiều', lesson: 21 },
+  '思': { sino: 'TƯ', meaning: 'Suy nghĩ, ý nghĩ, tư tưởng', lesson: 21 },
+  '立': { sino: 'LẬP', meaning: 'Đứng, thiết lập', lesson: 21 },
+  '首': { sino: 'THỦ', meaning: 'Cổ; người đứng đầu', lesson: 21 },
+  '間': { sino: 'GIAN', meaning: 'Ở giữa, khoảng gian', lesson: 22 },
+  '仕': { sino: 'SĨ', meaning: 'Làm việc, phục vụ', lesson: 22 },
+  '室': { sino: 'THẤT', meaning: 'Phòng, lớp học', lesson: 22 },
+  '広': { sino: 'QUẢNG', meaning: 'Rộng rãi, quảng cáo', lesson: 22 },
+  '外': { sino: 'NGOẠI', meaning: 'Ngoài, bên ngoài, ngoại quốc', lesson: 23 },
+  '建': { sino: 'KIẾN', meaning: 'Xây dựng, dựng nên', lesson: 23 },
+  '正': { sino: 'CHÍNH', meaning: 'đúng đắn, chính xác', lesson: 23 },
+  '道': { sino: 'ĐẠO', meaning: 'Con đường, đạo', lesson: 23 },
+  '堂': { sino: 'ĐƯỜNG', meaning: 'Nhà lớn, chính đường', lesson: 24 },
+  '説': { sino: 'THUYẾT', meaning: 'Giải thích', lesson: 24 },
+  '産': { sino: 'SẢN', meaning: 'Sản xuất, đặc sản', lesson: 24 },
+  '田': { sino: 'ĐIỀN', meaning: 'ruộng lúa', lesson: 25 },
+  '着': { sino: 'TRƯỚC', meaning: 'Mặc quần áo, đến nơi', lesson: 25 },
+  '考': { sino: 'KHẢO', meaning: 'Suy nghĩ, khảo sát', lesson: 25 },
+  '館': { sino: 'QUÁN', meaning: 'Tòa nhà, hội quán', lesson: 25 },
+  '場': { sino: 'TRƯỜNG', meaning: 'Nơi chốn, quảng trường', lesson: 26 },
+  '度': { sino: 'ĐỘ', meaning: 'Lần, mức độ, nhiệt độ', lesson: 26 },
+  '悪': { sino: 'ÁC', meaning: 'Xấu, ác, độc', lesson: 26 },
+  '所': { sino: 'SỞ', meaning: 'Nơi chốn, địa điểm', lesson: 26 },
+  '頭': { sino: 'ĐẦU', meaning: 'Cái đầu', lesson: 26 },
+  '公': { sino: 'CÔNG', meaning: 'công cộng, chung', lesson: 27 },
+  '昼': { sino: 'TRÚ', meaning: 'Buổi trưa', lesson: 27 },
+  '走': { sino: 'TẨU', meaning: 'Chạy', lesson: 27 },
+  '鳥': { sino: 'ĐIỂU', meaning: 'Con chim', lesson: 27 },
+  '声': { sino: 'THANH', meaning: 'Giọng nói', lesson: 27 },
+  '林': { sino: 'LÂM', meaning: 'Rừng cây thưa', lesson: 27 },
+  '森': { sino: 'SÂM', meaning: 'Rừng rậm', lesson: 27 },
+  '品': { sino: 'PHẨM', meaning: 'Sản phẩm, phẩm chất, hàng hóa', lesson: 28 },
+  '売': { sino: 'MẠI', meaning: 'Bán', lesson: 28 },
+  '色': { sino: 'SẮC', meaning: 'Màu sắc, sắc thái', lesson: 28 },
+  '通': { sino: 'THÔNG', meaning: 'Đi qua, đi lại, thông suốt', lesson: 28 },
+  '事': { sino: 'SỰ', meaning: 'Sự việc, công việc', lesson: 29 },
+  '地': { sino: 'ĐỊA', meaning: 'Đất đai, mặt đất', lesson: 29 },
+  '物': { sino: 'VẬT', meaning: 'Đồ vật, sự vật', lesson: 29 },
+  '茶': { sino: 'TRÀ', meaning: 'Trà, chè', lesson: 29 },
+  '開': { sino: 'KHAI', meaning: 'Mở ra, khai mạc', lesson: 29 },
+  '業': { sino: 'NGHIỆP', meaning: 'Công việc, nghề nghiệp', lesson: 30 },
+  '習': { sino: 'TẬP', meaning: 'Học tập, luyện tập', lesson: 30 },
+  '引': { sino: 'DẪN', meaning: 'Kéo, ngăn kéo', lesson: 30 },
+  '池': { sino: 'TRÌ', meaning: 'Cái ao; pin', lesson: 30 },
+  '映': { sino: 'ÁNH', meaning: 'phản chiếu, chiếu bóng', lesson: 31 },
+  '画': { sino: 'HỌA', meaning: 'bức tranh, kế hoạch', lesson: 31 },
+  '自': { sino: 'TỰ', meaning: 'Tự bản thân, tự động', lesson: 31 },
+  '村': { sino: 'THÔN', meaning: 'Ngôi làng', lesson: 31 },
+  '北': { sino: 'BẮC', meaning: 'Phía bắc', lesson: 32 },
+  '南': { sino: 'NAM', meaning: 'Phía nam, phương nam', lesson: 32 },
+  '東': { sino: 'ĐÔNG', meaning: 'Phía đông, phương đông', lesson: 32 },
+  '西': { sino: 'TÂY', meaning: 'Phía tây, phương tây', lesson: 32 },
+  '夕': { sino: 'TỊCH', meaning: 'chiều tối, hoàng hôn', lesson: 32 },
+  '方': { sino: 'PHƯƠNG', meaning: 'Phương hướng, cách thức', lesson: 32 },
+  '飯': { sino: 'PHẠN', meaning: 'cơm, bữa ăn', lesson: 32 },
+  '口': { sino: 'KHẨU', meaning: 'Miệng, cổng, lối vào', lesson: 33 },
+  '急': { sino: 'CẤP', meaning: 'Khẩn cấp, vội vã', lesson: 33 },
+  '明': { sino: 'MINH', meaning: 'Sáng sủa, thông minh', lesson: 33 },
+  '短': { sino: 'ĐOẢN', meaning: 'Ngắn', lesson: 33 },
+  '夜': { sino: 'DẠ', meaning: 'Buổi tối, ban đêm', lesson: 34 },
+  '肉': { sino: 'NHỤC', meaning: 'Thịt', lesson: 34 },
+  '質': { sino: 'CHẤT', meaning: 'chất lượng, chất vấn', lesson: 34 },
+  '赤': { sino: 'XÍCH', meaning: 'màu đỏ', lesson: 34 },
+  '青': { sino: 'THANH', meaning: 'màu xanh lam', lesson: 34 },
+  '黒': { sino: 'HẮC', meaning: 'màu đen', lesson: 34 },
+  '屋': { sino: 'ỐC', meaning: 'Căn nhà, hiệu buôn', lesson: 35 },
+  '旅': { sino: 'LỮ', meaning: 'Du lịch, lữ khách', lesson: 35 },
+  '海': { sino: 'HẢI', meaning: 'Biển, đại dương', lesson: 35 },
+  '近': { sino: 'CẬN', meaning: 'Gần', lesson: 35 },
+  '都': { sino: 'ĐÔ', meaning: 'Đô thị, kinh đô', lesson: 35 },
+  '工': { sino: 'CÔNG', meaning: 'thợ, công việc', lesson: 36 },
+  '特': { sino: 'ĐẶC', meaning: 'Đặc biệt', lesson: 36 },
+  '太': { sino: 'THÁI', meaning: 'To, béo; mặt trời', lesson: 36 },
+  '乗': { sino: 'THỪA', meaning: 'Lên xe, phương tiện', lesson: 36 },
+  '家': { sino: 'GIA', meaning: 'Nhà, gia đình', lesson: 37 },
+  '料': { sino: 'LIỆU', meaning: 'Nguyên liệu, chi phí', lesson: 37 },
+  '者': { sino: 'GIẢ', meaning: 'Người, học giả', lesson: 37 },
+  '起': { sino: 'KHỞI', meaning: 'Thức dậy, khởi hành', lesson: 37 },
+  '研': { sino: 'NGHIÊN', meaning: 'Mài, nghiên cứu', lesson: 38 },
+  '究': { sino: 'CỨU', meaning: 'Nghiên cứu, điều tra', lesson: 38 },
+  '市': { sino: 'THỊ', meaning: 'Thành phố', lesson: 38 },
+  '民': { sino: 'DÂN', meaning: 'Nhân dân', lesson: 38 },
+  '区': { sino: 'KHU', meaning: 'Quận, khu vực', lesson: 38 },
+  '台': { sino: 'ĐÀI', meaning: 'Cái bệ, xe/máy móc', lesson: 39 },
+  '早': { sino: 'TẢO', meaning: 'Sớm, nhanh chóng', lesson: 39 },
+  '服': { sino: 'PHỤC', meaning: 'Quần áo, y phục', lesson: 39 },
+  '死': { sino: 'TỬ', meaning: 'Chết, qua đời', lesson: 39 },
+  '風': { sino: 'PHONG', meaning: 'Gió, phong cảnh', lesson: 39 },
+  '好': { sino: 'HẢO', meaning: 'Thích, tốt', lesson: 39 },
+  '動': { sino: 'ĐỘNG', meaning: 'Di chuyển, hoạt động', lesson: 40 },
+  '試': { sino: 'THÍ', meaning: 'Thử nghiệm, thi cử', lesson: 40 },
+  '重': { sino: 'TRỌNG', meaning: 'Nặng, quan trọng, trùng lặp', lesson: 40 },
+  '験': { sino: 'NGHIỆM', meaning: 'Kiểm nghiệm, trải nghiệm', lesson: 40 },
+  '文': { sino: 'VĂN', meaning: 'Văn chương, câu văn', lesson: 41 },
+  '有': { sino: 'HỮU', meaning: 'Có, sở hữu', lesson: 41 },
+  '楽': { sino: 'LẠC, NHẠC', meaning: 'Vui vẻ, âm nhạc', lesson: 41 },
+  '町': { sino: 'ĐINH', meaning: 'Thị trấn, khu phố', lesson: 41 },
+  '教': { sino: 'GIÁO', meaning: 'Dạy học, tôn giáo', lesson: 42 },
+  '音': { sino: 'ÂM', meaning: 'Âm thanh, tiếng động', lesson: 42 },
+  '進': { sino: 'TIẾN', meaning: 'Tiến lên, phát triển', lesson: 42 },
+  '不': { sino: 'BẤT', meaning: 'chẳng, không', lesson: 43 },
+  '切': { sino: 'THIẾT', meaning: 'Cắt, khẩn thiết', lesson: 43 },
+  '味': { sino: 'VỊ', meaning: 'Mùi vị, ý vị', lesson: 43 },
+  '光': { sino: 'QUANG', meaning: 'Ánh sáng, lấp lánh', lesson: 43 },
+  '洋': { sino: 'DƯƠNG', meaning: 'Đại dương, phương Tây', lesson: 44 },
+  '理': { sino: 'LÝ', meaning: 'Lý do, vật lý, quản lý', lesson: 44 },
+  '遠': { sino: 'VIỄN', meaning: 'Xa; khách sáo', lesson: 44 },
+  '洗': { sino: 'TẨY', meaning: 'Rửa, giặt', lesson: 44 },
+  '以': { sino: 'DĨ', meaning: 'lấy, bằng, mốc', lesson: 45 },
+  '止': { sino: 'CHỈ', meaning: 'Dừng lại, đình chỉ', lesson: 45 },
+  '用': { sino: 'DỤNG', meaning: 'Sử dụng, công dụng', lesson: 45 },
+  '答': { sino: 'ĐÁP', meaning: 'Trả lời, đáp án', lesson: 45 },
+  '注': { sino: 'CHÚ', meaning: 'Rót, chú ý, tập trung', lesson: 46 },
+  '知': { sino: 'TRI', meaning: 'Biết, tri thức', lesson: 46 },
+  '親': { sino: 'THÂN', meaning: 'cha mẹ, thân thiết', lesson: 46 },
+  '便': { sino: 'TIỆN', meaning: 'Tiện lợi; chuyển phát', lesson: 46 },
+  '医': { sino: 'Y', meaning: 'Y học, thầy thuốc', lesson: 47 },
+  '発': { sino: 'PHÁT', meaning: 'Xuất phát, phát minh', lesson: 47 },
+  '回': { sino: 'HỒI', meaning: 'Xoay, quay; số lần', lesson: 47 },
+  '合': { sino: 'HỢP', meaning: 'Hợp lại, gặp gỡ', lesson: 47 },
+  '代': { sino: 'ĐẠI', meaning: 'Thay thế, thời đại', lesson: 48 },
+  '元': { sino: 'NGUYÊN', meaning: 'gốc, ban đầu', lesson: 48 },
+  '意': { sino: 'Ý', meaning: 'Ý kiến, ý nghĩa, ý chí', lesson: 48 },
+  '世': { sino: 'THẾ', meaning: 'Thế giới, thế hệ', lesson: 49 },
+  '作': { sino: 'TÁC', meaning: 'Chế tạo, sáng tác', lesson: 49 },
+  '持': { sino: 'TRÌ', meaning: 'Cầm, nắm, mang theo', lesson: 49 },
+  '界': { sino: 'GIỚI', meaning: 'Thế giới, giới hạn', lesson: 49 },
+  '力': { sino: 'LỰC', meaning: 'sức mạnh, năng lực', lesson: 50 },
+  '心': { sino: 'TÂM', meaning: 'Trái tim, tâm trí', lesson: 50 },
+  '送': { sino: 'TỐNG', meaning: 'Gửi, tiễn đưa', lesson: 50 },
+  '帳': { sino: 'TRƯỚNG', meaning: 'Sổ sách, sổ tay', lesson: 2 },
+  '刺': { sino: 'THÍCH', meaning: 'Danh thiếp, gai', lesson: 2 },
+  '辞': { sino: 'TỪ', meaning: 'Từ ngữ, từ điển', lesson: 2 },
+  '雑': { sino: 'TẠP', meaning: 'Tạp chí, pha trộn', lesson: 2 },
+  '誌': { sino: 'CHÍ', meaning: 'Tạp chí, ghi chép', lesson: 2 },
   '机': { sino: 'KỶ', meaning: 'Cái bàn', lesson: 2 },
   '傘': { sino: 'TẢN', meaning: 'Cái ô, cái dù', lesson: 2 },
-  '鞄': { sino: 'BẠC', meaning: 'Cặp sách, túi xách', lesson: 2 },
-  '新': { sino: 'TÂN', meaning: 'Mới', lesson: 2 },
-  '聞': { sino: 'VĂN', meaning: 'Nghe, hỏi', lesson: 2 },
-  '読': { sino: 'ĐỘC', meaning: 'Đọc', lesson: 2 },
-  '書': { sino: 'THƯ', meaning: 'Viết, cuốn sách', lesson: 2 },
-  '辞': { sino: 'TỪ', meaning: 'Từ ngữ, từ điển', lesson: 2 },
-  '雑': { sino: 'TẠP', meaning: 'Tạp nham, pha trộn', lesson: 2 },
-  '誌': { sino: 'CHÍ', meaning: 'Tạp chí, ghi chép', lesson: 2 },
   '鍵': { sino: 'KIỆN', meaning: 'Chìa khóa', lesson: 2 },
-  '英': { sino: 'ANH', meaning: 'Nước Anh, anh hùng', lesson: 2 },
-
-  // Bài 3
-  '室': { sino: 'THẤT', meaning: 'Phòng, lớp học', lesson: 3 },
-  '食': { sino: 'THỰC', meaning: 'Ăn, đồ ăn', lesson: 3 },
-  '堂': { sino: 'ĐƯỜNG', meaning: 'Nhà lớn, chính đường', lesson: 3 },
-  '所': { sino: 'SỞ', meaning: 'Nơi chốn, văn phòng', lesson: 3 },
-  '屋': { sino: 'ỐC', meaning: 'Căn nhà, hiệu buôn', lesson: 3 },
-  '国': { sino: 'QUỐC', meaning: 'Đất nước, quốc gia', lesson: 3 },
-  '議': { sino: 'NGHỊ', meaning: 'Nghị luận, bàn bạc', lesson: 3 },
-  '駅': { sino: 'DỊCH', meaning: 'Nhà ga', lesson: 3 },
-  '電': { sino: 'ĐIỆN', meaning: 'Điện lực, sấm chớp', lesson: 3 },
-
-  // Bài 4
-  '分': { sino: 'PHÂN', meaning: 'Phút, phân chia', lesson: 4 },
-  '半': { sino: 'BÁN', meaning: 'Nửa, một nửa', lesson: 4 },
-  '午': { sino: 'NGỌ', meaning: 'Buổi trưa', lesson: 4 },
-  '前': { sino: 'TIỀN', meaning: 'Trước, phía trước', lesson: 4 },
-  '後': { sino: 'HẬU', meaning: 'Sau, phía sau', lesson: 4 },
-  '今': { sino: 'KIM', meaning: 'Bây giờ, hiện tại', lesson: 4 },
-  '朝': { sino: 'TRIỀU', meaning: 'Buổi sáng', lesson: 4 },
-  '昼': { sino: 'TRÚ', meaning: 'Buổi trưa', lesson: 4 },
-  '夜': { sino: 'DẠ', meaning: 'Ban đêm', lesson: 4 },
-  '晩': { sino: 'VÃN', meaning: 'Buổi tối', lesson: 4 },
-  '毎': { sino: 'MỖI', meaning: 'Mỗi ngày, hàng ngày', lesson: 4 },
-  '休': { sino: 'HƯU', meaning: 'Nghỉ ngơi', lesson: 4 },
-  '銀': { sino: 'NGÂN', meaning: 'Bạc, tiền bạc', lesson: 4 },
-  '間': { sino: 'GIAN', meaning: 'Khoảng cách, thời gian', lesson: 4 },
-
-  // Bài 5 & các bài tiếp theo
-  '行': { sino: 'HÀNH', meaning: 'Đi', lesson: 5 },
-  '来': { sino: 'LAI', meaning: 'Đến', lesson: 5 },
-  '帰': { sino: 'QUY', meaning: 'Trở về', lesson: 5 },
-  '動': { sino: 'ĐỘNG', meaning: 'Chuyển động', lesson: 5 },
-  '自': { sino: 'TỰ', meaning: 'Bản thân, tự mình', lesson: 5 },
-  '転': { sino: 'CHUYỂN', meaning: 'Chuyển động, lăn', lesson: 5 },
-  '下': { sino: 'HẠ', meaning: 'Dưới, phía dưới', lesson: 6 },
-  '友': { sino: 'HỮU', meaning: 'Bạn bè', lesson: 6 },
-  '達': { sino: 'ĐẠT', meaning: 'Đạt được, bạn bè', lesson: 6 },
-  '教': { sino: 'GIÁO', meaning: 'Dạy học, tôn giáo', lesson: 7 },
-  '手': { sino: 'THỦ', meaning: 'Tay, bàn tay', lesson: 8 },
-  '帳': { sino: 'TRƯỚNG', meaning: 'Sổ sách, trướng', lesson: 8 },
-  '名': { sino: 'DANH', meaning: 'Tên, danh tiếng', lesson: 8 },
-  '刺': { sino: 'THÍCH', meaning: 'Đâm, danh thiếp', lesson: 8 },
-  '鉛': { sino: 'DUYÊN', meaning: 'Chì, than chì', lesson: 8 },
-  '筆': { sino: 'BÚT', meaning: 'Bút viết', lesson: 8 },
-  '家': { sino: 'GIA', meaning: 'Nhà, gia đình', lesson: 10 },
-  '族': { sino: 'TỘC', meaning: 'Gia tộc, dân tộc', lesson: 10 },
-  '外': { sino: 'NGOẠI', meaning: 'Bên ngoài, nước ngoài', lesson: 11 },
-  '郵': { sino: 'BƯU', meaning: 'Bưu điện, gửi thư', lesson: 11 },
-  '便': { sino: 'TIỆN', meaning: 'Thuận tiện, bưu kiện', lesson: 11 },
-  '局': { sino: 'CỤC', meaning: 'Cục, cơ quan', lesson: 11 },
-  '図': { sino: 'ĐỒ', meaning: 'Bản đồ, sơ đồ', lesson: 11 },
-  '館': { sino: 'QUÁN', meaning: 'Nhà lớn, hội quán', lesson: 11 },
-  '美': { sino: 'MỸ', meaning: 'Đẹp, mỹ thuật', lesson: 11 },
-  '術': { sino: 'THUẬT', meaning: 'Kỹ thuật, nghệ thuật', lesson: 11 },
-  '医': { sino: 'Y', meaning: 'Y học, bác sĩ', lesson: 12 },
-  '者': { sino: 'GIẢ', meaning: 'Người, học giả', lesson: 12 },
-  '地': { sino: 'ĐỊA', meaning: 'Đất, mặt đất', lesson: 13 },
-  '鉄': { sino: 'THIẾT', meaning: 'Sắt, đường sắt', lesson: 13 },
-  '幹': { sino: 'CÁN', meaning: 'Thân cây, cán bộ', lesson: 13 },
-  '線': { sino: 'TUYẾN', meaning: 'Đường dây, tuyến đường', lesson: 13 },
-  '飛': { sino: 'PHI', meaning: 'Bay', lesson: 13 },
-  '機': { sino: 'CƠ', meaning: 'Máy móc, cơ hội', lesson: 13 },
-  '船': { sino: 'THUYỀN', meaning: 'Thuyền, tàu thủy', lesson: 13 },
-  '誕': { sino: 'ĐẢN', meaning: 'Sinh ra, sinh nhật', lesson: 13 },
-  '話': { sino: 'THOẠI', meaning: 'Nói chuyện, đối thoại', lesson: 14 },
-  '研': { sino: 'NGHIÊN', meaning: 'Nghiên cứu, mài', lesson: 15 },
-  '究': { sino: 'CỨU', meaning: 'Nghiên cứu, tìm hiểu', lesson: 15 },
-  '階': { sino: 'GIAI', meaning: 'Cầu thang, giai cấp', lesson: 18 },
-  '段': { sino: 'ĐOẠN', meaning: 'Bậc thang, đoạn', lesson: 18 },
-  '靴': { sino: 'NGOA', meaning: 'Giày dép', lesson: 19 },
-  '事': { sino: 'SỰ', meaning: 'Sự việc, việc', lesson: 20 },
-  '部': { sino: 'BỘ', meaning: 'Bộ phận, phòng ban', lesson: 23 },
-  '務': { sino: 'VỤ', meaning: 'Nhiệm vụ, công việc', lesson: 24 },
-  '受': { sino: 'THỤ', meaning: 'Nhận, tiếp nhận', lesson: 37 },
-  '付': { sino: 'PHÓ', meaning: 'Gắn vào, đính kèm', lesson: 37 }
+  '議': { sino: 'NGHỊ', meaning: 'Hội nghị, bàn bạc', lesson: 3 },
+  '達': { sino: 'ĐẠT', meaning: 'Bạn bè, đạt được', lesson: 5 },
+  '郵': { sino: 'BƯU', meaning: 'Bưu điện', lesson: 4 },
+  '局': { sino: 'CỤC', meaning: 'Bưu cục, cơ quan', lesson: 4 },
+  '鉄': { sino: 'THIẾT', meaning: 'Sắt, đường sắt', lesson: 5 },
+  '飛': { sino: 'PHI', meaning: 'Bay', lesson: 5 },
+  '機': { sino: 'CƠ', meaning: 'Máy bay, máy móc', lesson: 5 },
+  '船': { sino: 'THUYỀN', meaning: 'Tàu thuyền', lesson: 5 },
 };
 
 /**
@@ -725,16 +900,16 @@ export interface GeneratePracticeParams {
  * Tra cứu metadata chữ Hán (Âm Hán, Nghĩa tiếng Việt, Bài học).
  */
 export function getKanjiInfo(char: string, allLessonKanji: KanjiItemData[] = []) {
-  const meta = GLOBAL_KANJI_META[char];
-  if (meta) return meta;
   const foundK = (allLessonKanji || []).find(k => k.character === char);
   if (foundK) {
     return {
-      sino: foundK.sino_vietnamese || '',
-      meaning: foundK.vietnamese_meaning || '',
-      lesson: foundK.lesson_id || 0
+      sino: foundK.sino_vietnamese || GLOBAL_KANJI_META[char]?.sino || '',
+      meaning: foundK.vietnamese_meaning || GLOBAL_KANJI_META[char]?.meaning || '',
+      lesson: foundK.lesson_id || GLOBAL_KANJI_META[char]?.lesson || 0
     };
   }
+  const meta = GLOBAL_KANJI_META[char];
+  if (meta) return meta;
   return { sino: '', meaning: '', lesson: 0 };
 }
 
@@ -952,22 +1127,33 @@ export function generatePracticeQuestions({
         ? currentVocab.meaning
         : `「${currentVocab.hiragana}」`;
 
-      // 3 đáp án sai: 100% từ vựng chữ Hán hoàn chỉnh, tuyệt đối KHÔNG chứa Hiragana
-      const otherVocabs = targetVocabs
-        .map(v => v.kanjiWord)
-        .filter(w => w !== correctWord);
-
-      const fallbackWrongs = [
-        '車', '時計', '本', '机', '電話', '教室', '食堂', '会社',
-        '部屋', '事務所', '会議', '受付', '外国', '駅', '時間', '毎日', '病院', '銀行'
-      ];
-
-      const uniqueWrongPool = Array.from(new Set([
-        ...otherVocabs,
-        ...fallbackWrongs
-      ])).filter(w => w !== correctWord && !/[\u3040-\u309F]/.test(w)); // Triệt tiêu mọi từ dính Hiragana
-
-      const wrongOpts = shuffleArray(uniqueWrongPool).slice(0, 3);
+      // 3 đáp án sai: ưu tiên tuyệt đối từ vựng trong chính bài học hiện tại trước;
+      // chỉ bổ sung từ các bài đã học (<= currentLessonId) khi bài hiện tại có dưới 3 phương án nhiễu.
+      const inLessonPureKanji = shuffleArray(
+        Array.from(new Set(targetVocabs.map(v => v.kanjiWord)))
+          .filter(w => w !== correctWord && !/[\u3040-\u309F]/.test(w))
+      );
+      const inLessonAnyKanji = shuffleArray(
+        Array.from(new Set(targetVocabs.map(v => v.kanjiWord)))
+          .filter(w => w !== correctWord && !inLessonPureKanji.includes(w))
+      );
+      const learnedCompoundFallbacks: string[] = [];
+      for (const k of shuffleArray((allLessonKanji || []).filter(x => (x.lesson_id || 0) <= currentLessonId))) {
+        if (!k?.compounds) continue;
+        for (const p of k.compounds.split(/[;\n]+/)) {
+          const m = p.trim().match(/^([^\(:\s]+)/);
+          if (m && m[1] !== correctWord && !/[\u3040-\u309F]/.test(m[1])) {
+            learnedCompoundFallbacks.push(m[1]);
+          }
+        }
+      }
+      const lesson1BasicWords = ['私', '人', '先生', '学生', '大学', '会社', '日本', '国'];
+      const wrongOpts = Array.from(new Set([
+        ...inLessonPureKanji,
+        ...inLessonAnyKanji,
+        ...learnedCompoundFallbacks,
+        ...lesson1BasicWords.filter(w => w !== correctWord)
+      ])).slice(0, 3);
 
       while (wrongOpts.length < 3) {
         wrongOpts.push(`字_${wrongOpts.length + 1}`);
@@ -1028,13 +1214,14 @@ export function generatePracticeQuestions({
         .filter(k => k.character !== targetChar)
         .map(k => k.character);
 
-      const fallbackSingles = ['本', '車', '食', '室', '会', '社', '時', '計', '国', '駅', '電', '所', '校', '店', '人', '先', '生', '学'];
-      const uniqueWrongPool = Array.from(new Set([
-        ...otherChars,
-        ...fallbackSingles
-      ])).filter(c => c !== targetChar && /[\u4E00-\u9FAF]/.test(c));
-
-      const wrongChars = shuffleArray(uniqueWrongPool).slice(0, 3);
+      const inLessonWrong = shuffleArray(Array.from(new Set(otherChars)).filter(c => c !== targetChar && /[\u4E00-\u9FAF]/.test(c)));
+      const learnedWrong = shuffleArray(
+        (allLessonKanji || [])
+          .filter(k => (k.lesson_id || 0) <= currentLessonId && k.character !== targetChar)
+          .map(k => k.character)
+      );
+      const lesson1Basics = shuffleArray(['私', '人', '先', '生', '学', '大', '会', '社', '日', '本', '国'].filter(c => c !== targetChar));
+      const wrongChars = Array.from(new Set([...inLessonWrong, ...learnedWrong, ...lesson1Basics])).slice(0, 3);
 
       while (wrongChars.length < 3) {
         wrongChars.push('人');
@@ -1116,13 +1303,14 @@ export function generatePracticeQuestions({
           .filter(k => k.character !== targetChar)
           .map(k => k.character);
 
-        const fallbackSingles = ['本', '車', '食', '室', '会', '社', '時', '計', '国', '駅', '電', '所', '校', '店', '人', '先', '生', '学'];
-        const uniqueWrongPool = Array.from(new Set([
-          ...otherChars,
-          ...fallbackSingles
-        ])).filter(c => c !== targetChar && /[\u4E00-\u9FAF]/.test(c));
-
-        const wrongChars = shuffleArray(uniqueWrongPool).slice(0, 3);
+        const inLessonWrong = shuffleArray(Array.from(new Set(otherChars)).filter(c => c !== targetChar && /[\u4E00-\u9FAF]/.test(c)));
+        const learnedWrong = shuffleArray(
+          (allLessonKanji || [])
+            .filter(k => (k.lesson_id || 0) <= currentLessonId && k.character !== targetChar)
+            .map(k => k.character)
+        );
+        const lesson1Basics = shuffleArray(['私', '人', '先', '生', '学', '大', '会', '社', '日', '本', '国'].filter(c => c !== targetChar));
+        const wrongChars = Array.from(new Set([...inLessonWrong, ...learnedWrong, ...lesson1Basics])).slice(0, 3);
 
         while (wrongChars.length < 3) {
           wrongChars.push('人');
@@ -1176,13 +1364,14 @@ export function generatePracticeQuestions({
           .filter(k => k.character !== targetChar)
           .map(k => k.character);
 
-        const fallbackSingles = ['本', '車', '食', '室', '会', '社', '時', '計', '国', '駅', '電', '所', '校', '店', '人', '先', '生', '学'];
-        const uniqueWrongPool = Array.from(new Set([
-          ...otherChars,
-          ...fallbackSingles
-        ])).filter(c => c !== targetChar && /[\u4E00-\u9FAF]/.test(c));
-
-        const wrongChars = shuffleArray(uniqueWrongPool).slice(0, 3);
+        const inLessonWrong = shuffleArray(Array.from(new Set(otherChars)).filter(c => c !== targetChar && /[\u4E00-\u9FAF]/.test(c)));
+        const learnedWrong = shuffleArray(
+          (allLessonKanji || [])
+            .filter(k => (k.lesson_id || 0) <= currentLessonId && k.character !== targetChar)
+            .map(k => k.character)
+        );
+        const lesson1Basics = shuffleArray(['私', '人', '先', '生', '学', '大', '会', '社', '日', '本', '国'].filter(c => c !== targetChar));
+        const wrongChars = Array.from(new Set([...inLessonWrong, ...learnedWrong, ...lesson1Basics])).slice(0, 3);
 
         while (wrongChars.length < 3) {
           wrongChars.push('人');

@@ -831,7 +831,7 @@ module.exports = {
       "mnemonic_tip": "Âm tương tự America.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "亜米利加",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -2091,7 +2091,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ú trị' ở trong nhà.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00",
-      "kanji_word": "内",
+      "kanji_word": "家",
       "pitch_accent": 2
     },
     {
@@ -3291,7 +3291,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Kỳ máy' - tàu xe đến kỳ bảo dưỡng máy móc.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "着る",
+      "kanji_word": "来ます",
       "pitch_accent": 0
     },
     {
@@ -3996,7 +3996,7 @@ module.exports = {
       "mnemonic_tip": "Itsu: \"Ít xui\" - Hỏi \"khi nào\" thì được đi chơi, mong là \"ít xui\" để đi được sớm.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "五",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -4206,7 +4206,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tô rỉ máy' - chụp ảnh cái máy rỉ sét.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "取る",
+      "kanji_word": "撮ります",
       "pitch_accent": 1
     },
     {
@@ -4221,7 +4221,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sĩ máy' - làm việc ra dáng sĩ tử công nghệ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "留守",
+      "kanji_word": "",
       "pitch_accent": 2
     },
     {
@@ -4971,7 +4971,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cả sĩ máy' - cho cả giới sĩ tử mượn máy.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "会話",
+      "kanji_word": "貸します",
       "pitch_accent": 0
     },
     {
@@ -5061,7 +5061,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Hạ sĩ' - chú hạ sĩ tập dùng đũa ăn cơm.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "橋",
+      "kanji_word": "箸",
       "pitch_accent": 1
     },
     {
@@ -5721,7 +5721,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ăn xôi' - ăn xôi nóng bức cả người.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:08.970138+00:00",
-      "kanji_word": "熱い",
+      "kanji_word": "暑い",
       "pitch_accent": 0
     },
     {
@@ -7686,7 +7686,7 @@ module.exports = {
       "mnemonic_tip": "Oku - Ốc: Con ốc lúc nào cũng trốn sâu trong vỏ.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.377371+00:00",
-      "kanji_word": "置く",
+      "kanji_word": "奥",
       "pitch_accent": 1
     },
     {
@@ -9741,7 +9741,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Sĩ vẽ máy' - đóng cửa để sĩ tử vẽ máy.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.574517+00:00",
-      "kanji_word": "締める",
+      "kanji_word": "閉めます",
       "pitch_accent": 4
     },
     {
@@ -11991,7 +11991,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Nô bơ máy' - leo núi gặp nô tỳ bơ vơ bên máy.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "上る",
+      "kanji_word": "登ります",
       "pitch_accent": 2
     },
     {
@@ -12006,7 +12006,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Tô mài máy' - ngủ lại nhà trọ để tô mài máy tính.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "止まる",
+      "kanji_word": "泊まります",
       "pitch_accent": 0
     },
     {
@@ -12201,7 +12201,7 @@ module.exports = {
       "mnemonic_tip": "Hi (hi) vọng: Hy vọng hôm nay là một ngày vui.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "火",
+      "kanji_word": "日",
       "pitch_accent": 1
     },
     {
@@ -13356,7 +13356,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Ủ chị' - nhà là nơi ủ ấm cho chị em.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "内",
+      "kanji_word": "家",
       "pitch_accent": 0
     },
     {
@@ -13851,7 +13851,7 @@ module.exports = {
       "mnemonic_tip": "Ya: Trong tiếng Nhật hậu tố 'ya' thường gắn với các cửa hàng buôn bán.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.748998+00:00",
-      "kanji_word": "嫌",
+      "kanji_word": "～屋",
       "pitch_accent": 0
     },
     {
@@ -13986,7 +13986,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Cụ rể máy' - cụ rể tặng cái máy cho tôi.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "暮れる",
+      "kanji_word": "",
       "pitch_accent": 1
     },
     {
@@ -14421,7 +14421,7 @@ module.exports = {
       "mnemonic_tip": "Ốc - Ốc mà đắt đến một trăm triệu thì chỉ có vàng.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "置く",
+      "kanji_word": "億",
       "pitch_accent": 4
     },
     {
@@ -14946,7 +14946,7 @@ module.exports = {
       "mnemonic_tip": "Gas: Ga trong bếp mà bị rò rỉ thì gay 'gasu' (căng) lắm đấy.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "瓦斯",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -16251,7 +16251,7 @@ module.exports = {
       "mnemonic_tip": "Đô - Đô (độ) người ta chỉ nghỉ vào thứ Bảy.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "度",
+      "kanji_word": "土",
       "pitch_accent": 0
     },
     {
@@ -16476,7 +16476,7 @@ module.exports = {
       "mnemonic_tip": "Fu-ki-ma-su: 'Phù! Kì mát' - Lau xong cái bàn, phù! Kì mát quá.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "服",
+      "kanji_word": "拭く",
       "pitch_accent": 0
     },
     {
@@ -16551,7 +16551,7 @@ module.exports = {
       "mnemonic_tip": "Koppu: 'Cốp' - Rót nước vào cái cốc nghe tiếng 'cốp'.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:09.995366+00:00",
-      "kanji_word": "洋杯",
+      "kanji_word": "",
       "pitch_accent": 3
     },
     {
@@ -16566,7 +16566,7 @@ module.exports = {
       "mnemonic_tip": "Ga-ra-su: 'Gà rát' - Thủy tinh vỡ làm chân con gà rát.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "硝子",
+      "kanji_word": "",
       "pitch_accent": 3
     },
     {
@@ -16701,7 +16701,7 @@ module.exports = {
       "mnemonic_tip": "Gà và - Phía bên này là gà, phía bên kia là vịt.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "川",
+      "kanji_word": "側",
       "pitch_accent": 0
     },
     {
@@ -16806,7 +16806,7 @@ module.exports = {
       "mnemonic_tip": "Sa sỉ mút - Sa (xa) sỉ mút (một) cái, kim đang chỉ giờ kìa.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "差す",
+      "kanji_word": "指す",
       "pitch_accent": 1
     },
     {
@@ -16866,7 +16866,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo: 'Hạ' tay dán tranh.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "春",
+      "kanji_word": "貼る",
       "pitch_accent": 0
     },
     {
@@ -17466,7 +17466,7 @@ module.exports = {
       "mnemonic_tip": "Chù kì: Mặt trăng mỗi chu kỳ lại tròn khuyết.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "机",
+      "kanji_word": "月",
       "pitch_accent": 0
     },
     {
@@ -18306,7 +18306,7 @@ module.exports = {
       "mnemonic_tip": "Sê ki (seki): Sê ki (xê ra) để tôi ho một cái.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "席",
+      "kanji_word": "咳",
       "pitch_accent": 0
     },
     {
@@ -18591,7 +18591,7 @@ module.exports = {
       "mnemonic_tip": "Y (i): Y (yếu) cái dạ dày thì ăn uống khổ lắm.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.170089+00:00",
-      "kanji_word": "五",
+      "kanji_word": "胃",
       "pitch_accent": 0
     },
     {
@@ -19281,7 +19281,7 @@ module.exports = {
       "mnemonic_tip": "Na-ku-na-ri-ma-su: 'Nào cũ nằm rời mất' (đã qua đời)",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "無くなる",
+      "kanji_word": "亡くなる",
       "pitch_accent": 0
     },
     {
@@ -19806,7 +19806,7 @@ module.exports = {
       "mnemonic_tip": "Gu-ra-mu: Gừ ra mu (muỗng) cân xem được mấy gam.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "瓦",
+      "kanji_word": "",
       "pitch_accent": 1
     },
     {
@@ -19866,7 +19866,7 @@ module.exports = {
       "mnemonic_tip": "Ni-ma-su: Nì (này) mà nấu (ninh) lâu quá.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "似る",
+      "kanji_word": "煮る",
       "pitch_accent": 3
     },
     {
@@ -20226,7 +20226,7 @@ module.exports = {
       "mnemonic_tip": "Fu ta - Phù ta (phụ ta) giữ cái nắp này nhé.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.355455+00:00",
-      "kanji_word": "二",
+      "kanji_word": "蓋",
       "pitch_accent": 0
     },
     {
@@ -22701,7 +22701,7 @@ module.exports = {
       "mnemonic_tip": "Zu-bon: Dù buồn nhưng vẫn phải đi mua cái quần mới.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "洋袴",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -23436,7 +23436,7 @@ module.exports = {
       "mnemonic_tip": "Ô-ji - 'Ô ji' (cái gì) chú gọi con đó?",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "祖父",
+      "kanji_word": "伯父",
       "pitch_accent": 0
     },
     {
@@ -23466,7 +23466,7 @@ module.exports = {
       "mnemonic_tip": "Ô ba: 'Ô ba' ơi, cô ơi, cho cháu miếng bánh.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "祖母",
+      "kanji_word": "伯母",
       "pitch_accent": 0
     },
     {
@@ -23601,7 +23601,7 @@ module.exports = {
       "mnemonic_tip": "A-ru: 'A', 'ru' con bằng một câu chuyện nào đó.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "有る",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -24126,7 +24126,7 @@ module.exports = {
       "mnemonic_tip": "A-ru: 'À rừ' - À rừ, có một người nào đó đang đứng đằng kia kìa.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.534552+00:00",
-      "kanji_word": "有る",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -24351,7 +24351,7 @@ module.exports = {
       "mnemonic_tip": "Hen nà: Hèn nà, nhìn lạ thế, hóa ra là người kỳ dị.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
-      "kanji_word": "辺",
+      "kanji_word": "変",
       "pitch_accent": 0
     },
     {
@@ -24621,7 +24621,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo: 'Dạ su' dễ ăn.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
-      "kanji_word": "安い",
+      "kanji_word": "",
       "pitch_accent": 0
     },
     {
@@ -24681,7 +24681,7 @@ module.exports = {
       "mnemonic_tip": "Nạ-ki-masu: 'Nạ' nghe như 'nát', khóc đến nỗi mắt nát ra.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.728994+00:00",
-      "kanji_word": "鳴く",
+      "kanji_word": "泣く",
       "pitch_accent": 0
     },
     {
@@ -26826,7 +26826,7 @@ module.exports = {
       "mnemonic_tip": "Yori - Yêu rồi - Vì yêu rồi nên ghé qua ngân hàng rút tiền mua quà.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
-      "kanji_word": "夜",
+      "kanji_word": "寄る",
       "pitch_accent": 0
     },
     {
@@ -27771,7 +27771,7 @@ module.exports = {
       "mnemonic_tip": "Ô sờ rô: Lâu đài cao quá, chạm vào chỉ biết kêu Ô sờ rô.",
       "image_url": "",
       "created_at": "2026-07-23T09:25:10.909622+00:00",
-      "kanji_word": "白",
+      "kanji_word": "城",
       "pitch_accent": 0
     },
     {
@@ -28401,7 +28401,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: 'Mao' (ke) - sợi lông tơ mềm mại phủ trên áo len giữ ấm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "燐寸",
+      "kanji_word": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
@@ -30711,7 +30711,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Africa' - vùng đất thiên nhiên kỳ vĩ chan hòa nắng ấm.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "阿弗利加",
+      "kanji_word": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
@@ -31011,7 +31011,7 @@ module.exports = {
       "mnemonic_tip": "Mẹo nhớ: Phiên âm từ 'Asia' - châu lục rộng lớn đông dân nhất hành tinh.",
       "image_url": "",
       "pitch_accent": 0,
-      "kanji_word": "亜細亜",
+      "kanji_word": "",
       "created_at": "2026-07-23T09:25:08.655773+00:00"
     },
     {
@@ -31798,7 +31798,7 @@ module.exports = {
   "kanji": [
     {
       "id": 1,
-      "lesson_id": 5,
+      "lesson_id": 3,
       "character": "一",
       "stroke_count": "1",
       "onyomi": "イチ (ichi), イツ (itsu)",
@@ -31806,12 +31806,12 @@ module.exports = {
       "sino_vietnamese": "NHẤT",
       "vietnamese_meaning": "Một, số một",
       "mnemonic_tip": "Chỉ một nét gạch ngang duy nhất tượng trưng cho số 1.",
-      "compounds": "一日 (ついたち): Ngày mồng một; 一緒 (いっしょ): Cùng nhau",
+      "compounds": "一階 (いっかい): Tầng một; 一つ (ひとつ): Một cái",
       "jlpt_level": "N5"
     },
     {
       "id": 2,
-      "lesson_id": 8,
+      "lesson_id": 11,
       "character": "七",
       "stroke_count": "2",
       "onyomi": "シチ (shichi)",
@@ -31819,12 +31819,12 @@ module.exports = {
       "sino_vietnamese": "THẤT",
       "vietnamese_meaning": "Bảy, số bảy",
       "mnemonic_tip": "Chữ Thất (七) trông như một cái lưỡi hái hoặc một cây thánh giá bị nghiêng, tượng trưng cho số 7.",
-      "compounds": "七月 (しちがつ): Tháng bảy; 七つ (ななつ): Bảy cái",
+      "compounds": "七つ (ななつ): Bảy cái; 七 (しち): Bảy",
       "jlpt_level": "N5"
     },
     {
       "id": 3,
-      "lesson_id": 22,
+      "lesson_id": 3,
       "character": "万",
       "stroke_count": "3",
       "onyomi": "マン (man), バン (ban)",
@@ -31832,7 +31832,7 @@ module.exports = {
       "sino_vietnamese": "VẠN",
       "vietnamese_meaning": "Vạn, mười nghìn",
       "mnemonic_tip": "Chữ Vạn (万) có hình dáng như một con bọ cạp với nhiều chân, tượng trưng cho số lượng rất lớn, vạn vật.",
-      "compounds": "一万円 (いちまんえん): Mười nghìn yên; 万年筆 (まんねんひつ): Bút máy",
+      "compounds": "万 (まん): Mười nghìn (vạn); 一万円 (いちまんえん): Mười nghìn yên",
       "jlpt_level": "N5"
     },
     {
@@ -31845,12 +31845,12 @@ module.exports = {
       "sino_vietnamese": "TAM",
       "vietnamese_meaning": "Ba, số ba",
       "mnemonic_tip": "Ba nét gạch ngang song song tượng trưng cho số 3.",
-      "compounds": "三月 (さんがつ): Tháng ba; 三つ (みっつ): Ba cái",
+      "compounds": "三つ (みっつ): Ba cái; 三月 (さんがつ): Tháng ba",
       "jlpt_level": "N5"
     },
     {
       "id": 5,
-      "lesson_id": 2,
+      "lesson_id": 9,
       "character": "上",
       "stroke_count": "3",
       "onyomi": "ジョウ (jou), ショウ (shou), シャン (shan)",
@@ -31858,7 +31858,7 @@ module.exports = {
       "sino_vietnamese": "THƯỢNG",
       "vietnamese_meaning": "Trên, lên trên",
       "mnemonic_tip": "Nét ngang dưới là mặt đất, nét ngang trên là vật ở phía trên, mũi tên chỉ lên.",
-      "compounds": "上 (うえ): Trên, phía trên; 上がる (あがる): Lên, tăng lên",
+      "compounds": "上手 (じょうず): Giỏi, khéo; 上げる (あげる): Cho, tặng",
       "jlpt_level": "N5"
     },
     {
@@ -31871,12 +31871,12 @@ module.exports = {
       "sino_vietnamese": "HẠ",
       "vietnamese_meaning": "Dưới, xuống",
       "mnemonic_tip": "Nét ngang trên là mặt đất, nét ngang dưới là vật ở phía dưới, mũi tên chỉ xuống.",
-      "compounds": "下 (した): Dưới, phía dưới; 下がる (さがる): Hạ xuống, giảm xuống",
+      "compounds": "地下 (ちか): Tầng hầm; 下 (した): Dưới, phía dưới",
       "jlpt_level": "N5"
     },
     {
       "id": 7,
-      "lesson_id": 1,
+      "lesson_id": 10,
       "character": "中",
       "stroke_count": "4",
       "onyomi": "チュウ (chuu)",
@@ -31884,12 +31884,12 @@ module.exports = {
       "sino_vietnamese": "TRUNG",
       "vietnamese_meaning": "Trong, ở giữa",
       "mnemonic_tip": "Một nét sổ dọc xuyên qua hình vuông, tượng trưng cho việc ở giữa hoặc bên trong.",
-      "compounds": "中 (なか): Trong, ở giữa; 中国 (ちゅうごく): Trung Quốc",
+      "compounds": "中 (なか): Bên trong; 途中 (とちゅう): Giữa đường, nửa chừng",
       "jlpt_level": "N5"
     },
     {
       "id": 8,
-      "lesson_id": 25,
+      "lesson_id": 11,
       "character": "九",
       "stroke_count": "2",
       "onyomi": "キュウ (kyuu), ク (ku)",
@@ -31897,12 +31897,12 @@ module.exports = {
       "sino_vietnamese": "CỬU",
       "vietnamese_meaning": "Chín, số chín",
       "mnemonic_tip": "Chữ Cửu (九) trông như một cánh tay đang co lại, tượng trưng cho số 9.",
-      "compounds": "九月 (くがつ): Tháng chín; 九つ (ここのつ): Chín cái",
+      "compounds": "九つ (ここのつ): Chín cái; 九月 (くがつ): Tháng chín",
       "jlpt_level": "N5"
     },
     {
       "id": 9,
-      "lesson_id": 9,
+      "lesson_id": 11,
       "character": "二",
       "stroke_count": "2",
       "onyomi": "ニ (ni), ジ (ji)",
@@ -31910,7 +31910,7 @@ module.exports = {
       "sino_vietnamese": "NHỊ",
       "vietnamese_meaning": "Hai, số hai",
       "mnemonic_tip": "Hai nét gạch ngang song song tượng trưng cho số 2.",
-      "compounds": "二月 (にがつ): Tháng hai; 二つ (ふたつ): Hai cái",
+      "compounds": "二つ (ふたつ): Hai cái; 二人 (ふたり): Hai người",
       "jlpt_level": "N5"
     },
     {
@@ -31923,7 +31923,7 @@ module.exports = {
       "sino_vietnamese": "NGŨ",
       "vietnamese_meaning": "Năm, số năm",
       "mnemonic_tip": "Chữ Ngũ (五) trông như một cái móc treo quần áo có 5 điểm, tượng trưng cho số 5.",
-      "compounds": "五月 (ごがつ): Tháng năm; 五つ (いつつ): Năm cái",
+      "compounds": "五つ (いつつ): Năm cái; 五月 (ごがつ): Tháng năm",
       "jlpt_level": "N5"
     },
     {
@@ -31936,7 +31936,7 @@ module.exports = {
       "sino_vietnamese": "NHÂN",
       "vietnamese_meaning": "Người",
       "mnemonic_tip": "Hình dáng hai chân đang bước đi, tượng trưng cho con người.",
-      "compounds": "人 (ひと): Người; 日本人 (にほんじん): Người Nhật",
+      "compounds": "～人 (～じん): Người nước...; あの人 (あのひと): Người kia",
       "jlpt_level": "N5"
     },
     {
@@ -31949,7 +31949,7 @@ module.exports = {
       "sino_vietnamese": "KIM",
       "vietnamese_meaning": "Bây giờ, hiện tại",
       "mnemonic_tip": "Chữ Kim (今) là sự kết hợp của bộ Nhân (人) và nét ngang, như một người đang đứng dưới mái nhà, chỉ thời điểm hiện tại.",
-      "compounds": "今日 (きょう): Hôm nay; 今週 (こんしゅう): Tuần này",
+      "compounds": "今 (いま): Bây giờ; 今日 (きょう): Hôm nay; 今朝 (けさ): Sáng nay",
       "jlpt_level": "N5"
     },
     {
@@ -31962,7 +31962,7 @@ module.exports = {
       "sino_vietnamese": "HƯU",
       "vietnamese_meaning": "Nghỉ ngơi",
       "mnemonic_tip": "Chữ Hưu (休) là hình ảnh một người (人) đang tựa vào gốc cây (木) để nghỉ ngơi.",
-      "compounds": "休み (やすみ): Nghỉ ngơi, ngày nghỉ; 休日 (きゅうじつ): Ngày nghỉ lễ",
+      "compounds": "休む (やすむ): Nghỉ, nghỉ ngơi; 休み (やすみ): Ngày nghỉ, sự nghỉ ngơi, ngày lễ; 昼休み (ひるやすみ): Giờ nghỉ trưa",
       "jlpt_level": "N5"
     },
     {
@@ -31975,7 +31975,7 @@ module.exports = {
       "sino_vietnamese": "HÀ",
       "vietnamese_meaning": "Cái gì",
       "mnemonic_tip": "Chữ Hà (何) gồm bộ Nhân (人) đứng cạnh chữ Khả (可 - có thể). Một người đang hỏi 'có thể là cái gì?'.",
-      "compounds": "何 (なに): Cái gì; 何時 (なんじ): Mấy giờ",
+      "compounds": "何 (なん): Cái gì; 何歳 (なんさい): Mấy tuổi",
       "jlpt_level": "N5"
     },
     {
@@ -31988,12 +31988,12 @@ module.exports = {
       "sino_vietnamese": "TIÊN",
       "vietnamese_meaning": "Trước, đi đầu",
       "mnemonic_tip": "Chữ Tiên (先) có hình dáng như một người đang đi trước, với mũi tên chỉ về phía trước.",
-      "compounds": "先生 (せんせい): Giáo viên; 先週 (せんしゅう): Tuần trước",
+      "compounds": "先 (さき): Trước, đi trước, phía trước; 先生 (せんせい): Giáo viên",
       "jlpt_level": "N5"
     },
     {
       "id": 16,
-      "lesson_id": 2,
+      "lesson_id": 13,
       "character": "入",
       "stroke_count": "2",
       "onyomi": "ニュウ (nyuu), ジュ (ju)",
@@ -32001,12 +32001,12 @@ module.exports = {
       "sino_vietnamese": "NHẬP",
       "vietnamese_meaning": "Vào, đi vào",
       "mnemonic_tip": "Hai nét gạch chéo giao nhau, tượng trưng cho việc đi vào một không gian nào đó.",
-      "compounds": "入る (はいる): Vào, đi vào; 入口 (いりぐち): Lối vào",
+      "compounds": "入る (はいる): Vào; 入学 (にゅうがく): Nhập học, vào trường",
       "jlpt_level": "N5"
     },
     {
       "id": 17,
-      "lesson_id": 25,
+      "lesson_id": 11,
       "character": "八",
       "stroke_count": "2",
       "onyomi": "ハチ (hachi), ハツ (hatsu)",
@@ -32014,12 +32014,12 @@ module.exports = {
       "sino_vietnamese": "BÁT",
       "vietnamese_meaning": "Tám, số tám",
       "mnemonic_tip": "Hai nét gạch mở rộng ra hai bên, tượng trưng cho sự phân chia hoặc số 8.",
-      "compounds": "八月 (はちがつ): Tháng tám; 八つ (やっつ): Tám cái",
+      "compounds": "八つ (やっつ): Tám cái; 八 (はち): Tám",
       "jlpt_level": "N5"
     },
     {
       "id": 18,
-      "lesson_id": 25,
+      "lesson_id": 11,
       "character": "六",
       "stroke_count": "4",
       "onyomi": "ロク (roku), リク (riku)",
@@ -32027,7 +32027,7 @@ module.exports = {
       "sino_vietnamese": "LỤC",
       "vietnamese_meaning": "Sáu, số sáu",
       "mnemonic_tip": "Chữ Lục (六) trông như một ngôi nhà nhỏ có mái và hai chân, tượng trưng cho số 6.",
-      "compounds": "六月 (ろくがつ): Tháng sáu; 六つ (むっつ): Sáu cái",
+      "compounds": "六つ (むっつ): Sáu cái; 六 (ろく): Sáu",
       "jlpt_level": "N5"
     },
     {
@@ -32040,12 +32040,12 @@ module.exports = {
       "sino_vietnamese": "YÊN",
       "vietnamese_meaning": "Yên, hình tròn",
       "mnemonic_tip": "Chữ Viên (円) có hình dáng như một đồng xu tròn, tượng trưng cho tiền tệ hoặc hình tròn.",
-      "compounds": "円 (えん): Tiền yên Nhật; 百円 (ひゃくえん): Một trăm yên",
+      "compounds": "～円 (えん): Yên Nhật; 百円 (ひゃくえん): Một trăm yên",
       "jlpt_level": "N5"
     },
     {
       "id": 20,
-      "lesson_id": 5,
+      "lesson_id": 15,
       "character": "出",
       "stroke_count": "5",
       "onyomi": "シュツ (shutsu), スイ (sui)",
@@ -32053,12 +32053,12 @@ module.exports = {
       "sino_vietnamese": "XUẤT",
       "vietnamese_meaning": "Ra ngoài, xuất phát",
       "mnemonic_tip": "Hai ngọn núi (山) chồng lên nhau, với một nét gạch ngang ở giữa, tượng trưng cho việc đi ra khỏi một nơi nào đó.",
-      "compounds": "出る (でる): Ra ngoài, xuất hiện; 出口 (でぐち): Lối ra",
+      "compounds": "思い出す (おもいだす): Nhớ ra, hồi tưởng lại; 出す (だす): Gửi",
       "jlpt_level": "N5"
     },
     {
       "id": 21,
-      "lesson_id": 4,
+      "lesson_id": 14,
       "character": "前",
       "stroke_count": "9",
       "onyomi": "ゼン (zen)",
@@ -32066,12 +32066,12 @@ module.exports = {
       "sino_vietnamese": "TIỀN",
       "vietnamese_meaning": "Trước, phía trước",
       "mnemonic_tip": "Chữ Tiền (前) có hình ảnh một con thuyền (舟) đang tiến về phía trước, với hai nét gạch ngang như mái chèo.",
-      "compounds": "前 (まえ): Trước, phía trước; 午前 (ごぜん): Buổi sáng",
+      "compounds": "名前 (なまえ): Tên; 前 (まえ): Trước, phía trước",
       "jlpt_level": "N5"
     },
     {
       "id": 22,
-      "lesson_id": 4,
+      "lesson_id": 32,
       "character": "北",
       "stroke_count": "5",
       "onyomi": "ホク (hoku)",
@@ -32079,12 +32079,12 @@ module.exports = {
       "sino_vietnamese": "BẮC",
       "vietnamese_meaning": "Phía bắc",
       "mnemonic_tip": "Chữ Bắc (北) trông như hai người (人) quay lưng vào nhau, tượng trưng cho hướng Bắc lạnh lẽo, đối lập.",
-      "compounds": "北 (きた): Phía bắc; 北海道 (ほっかいどう): Hokkaido",
+      "compounds": "北 (きた): Phía bắc",
       "jlpt_level": "N5"
     },
     {
       "id": 23,
-      "lesson_id": 32,
+      "lesson_id": 3,
       "character": "十",
       "stroke_count": "2",
       "onyomi": "ジュウ (juu), ジッ (ji'), ジュッ (ju')",
@@ -32092,12 +32092,12 @@ module.exports = {
       "sino_vietnamese": "THẬP",
       "vietnamese_meaning": "Mười, số mười",
       "mnemonic_tip": "Một nét ngang và một nét sổ dọc giao nhau, tượng trưng cho số 10.",
-      "compounds": "十月 (じゅうがつ): Tháng mười; 十 (とお): Mười cái",
+      "compounds": "十 (じゅう): Mười; 十円 (じゅうえん): Mười yên",
       "jlpt_level": "N5"
     },
     {
       "id": 24,
-      "lesson_id": 45,
+      "lesson_id": 3,
       "character": "千",
       "stroke_count": "3",
       "onyomi": "セン (sen)",
@@ -32105,7 +32105,7 @@ module.exports = {
       "sino_vietnamese": "THIÊN",
       "vietnamese_meaning": "Nghìn, số nghìn",
       "mnemonic_tip": "Chữ Thiên (千) trông như một cây kim lớn, hoặc một người đang giơ tay lên cao, tượng trưng cho số lượng lớn, nghìn.",
-      "compounds": "千円 (せんえん): Một nghìn yên; 三千 (さんぜん): Ba nghìn",
+      "compounds": "千 (せん): Một nghìn; 千円 (せんえん): Một nghìn yên",
       "jlpt_level": "N5"
     },
     {
@@ -32118,7 +32118,7 @@ module.exports = {
       "sino_vietnamese": "NGỌ",
       "vietnamese_meaning": "Buổi trưa",
       "mnemonic_tip": "Chữ Ngọ (午) có hình dáng như một cái cày, hoặc một con ngựa đang đứng thẳng, tượng trưng cho buổi trưa, thời điểm làm việc.",
-      "compounds": "午前 (ごぜん): Buổi sáng; 午後 (ごご): Buổi chiều",
+      "compounds": "午前 (ごぜん): Sáng, trước 12 giờ trưa; 午後 (ごご): Chiều, tối, sau 12 giờ trưa",
       "jlpt_level": "N5"
     },
     {
@@ -32131,7 +32131,7 @@ module.exports = {
       "sino_vietnamese": "BÁN",
       "vietnamese_meaning": "Nửa, một nửa, rưỡi",
       "mnemonic_tip": "Cắt đôi (Bát 八) con bò (Ngưu 牛) ra làm một nửa.",
-      "compounds": "半分 (はんぶん): Một nửa; 3時半 (さんじはん): 3 giờ rưỡi",
+      "compounds": "半 (はん): Rưỡi, một nửa; 一時半 (いちじはん): Một giờ rưỡi",
       "jlpt_level": "N5"
     },
     {
@@ -32144,12 +32144,12 @@ module.exports = {
       "sino_vietnamese": "NAM",
       "vietnamese_meaning": "Phía nam, phương nam",
       "mnemonic_tip": "Cây thánh giá cắm trên mái nhà ở phương Nam ấm áp.",
-      "compounds": "南 (みなみ): Phía nam; 南口 (みなみぐち): Cửa nam",
+      "compounds": "南 (みなみ): Phía nam",
       "jlpt_level": "N5"
     },
     {
       "id": 28,
-      "lesson_id": 11,
+      "lesson_id": 5,
       "character": "友",
       "stroke_count": "4",
       "onyomi": "ユウ (yuu)",
@@ -32157,7 +32157,7 @@ module.exports = {
       "sino_vietnamese": "HỮU",
       "vietnamese_meaning": "Bạn bè, hữu hảo",
       "mnemonic_tip": "Hai bàn tay (Hựu 又) cùng nắm lấy nhau hợp tác là Bạn bè.",
-      "compounds": "友達 (ともだち): Bạn bè; 友人 (ゆうじん): Bạn thân",
+      "compounds": "友達 (ともだち): Bạn, bạn bè; 友人 (ゆうじん): Bạn thân",
       "jlpt_level": "N5"
     },
     {
@@ -32170,12 +32170,12 @@ module.exports = {
       "sino_vietnamese": "HỮU",
       "vietnamese_meaning": "Bên phải, phía phải",
       "mnemonic_tip": "Bàn tay đưa thức ăn vào miệng (口) là tay phải.",
-      "compounds": "右手 (みぎて): Tay phải; 右側 (みぎがわ): Phía bên phải",
+      "compounds": "右 (みぎ): Phía bên phải; 右手 (みぎて): Tay phải",
       "jlpt_level": "N5"
     },
     {
       "id": 30,
-      "lesson_id": 9,
+      "lesson_id": 2,
       "character": "名",
       "stroke_count": "6",
       "onyomi": "メイ (mei), ミョウ (myou)",
@@ -32183,12 +32183,12 @@ module.exports = {
       "sino_vietnamese": "DANH",
       "vietnamese_meaning": "Tên, danh tiếng",
       "mnemonic_tip": "Buổi tối (Tịch 夕) dùng miệng (Khẩu 口) gọi Tên nhau.",
-      "compounds": "名前 (なまえ): Tên; 有名 (ゆうめい): Nổi tiếng",
+      "compounds": "名刺 (めいし): Danh thiếp",
       "jlpt_level": "N5"
     },
     {
       "id": 31,
-      "lesson_id": 34,
+      "lesson_id": 11,
       "character": "四",
       "stroke_count": "5",
       "onyomi": "シ (shi)",
@@ -32196,7 +32196,7 @@ module.exports = {
       "sino_vietnamese": "TỨ",
       "vietnamese_meaning": "Bốn, số bốn",
       "mnemonic_tip": "Chiếc hộp vuông mở 2 rèm vải bên trong chia làm 4 phần.",
-      "compounds": "四つ (よっつ): 4 cái; 四月 (しがつ): Tháng 4",
+      "compounds": "四つ (よっつ): Bốn cái; 十四日 (じゅうよっか): Ngày 14, 14 ngày",
       "jlpt_level": "N5"
     },
     {
@@ -32209,12 +32209,12 @@ module.exports = {
       "sino_vietnamese": "QUỐC",
       "vietnamese_meaning": "Đất nước, quốc gia",
       "mnemonic_tip": "Mẹo nhớ: Viên ngọc quý (玉) được bao quanh bảo vệ bởi bốn bức tường thành (囗) là đất nước.",
-      "compounds": "外国 (がいこく): Nước ngoài; 外国人 (がいこくじん): Người nước ngoài",
+      "compounds": "国 (くに): Đất nước, quốc gia, quê hương; 韓国 (かんこく): Nước Hàn Quốc; 中国 (ちゅうごく): Nước Trung Quốc",
       "jlpt_level": "N5"
     },
     {
       "id": 33,
-      "lesson_id": 2,
+      "lesson_id": 4,
       "character": "土",
       "stroke_count": "3",
       "onyomi": "ド (do), ト (to)",
@@ -32222,12 +32222,12 @@ module.exports = {
       "sino_vietnamese": "THỔ",
       "vietnamese_meaning": "Đất, thổ nhưỡng, thứ bảy",
       "mnemonic_tip": "Mầm cây mọc nhú lên từ lòng đất mẹ.",
-      "compounds": "土地 (とち): Đất đai; 土曜日 (どようび): Thứ bảy",
+      "compounds": "土曜日 (どようび): Thứ bảy",
       "jlpt_level": "N5"
     },
     {
       "id": 34,
-      "lesson_id": 9,
+      "lesson_id": 23,
       "character": "外",
       "stroke_count": "5",
       "onyomi": "ガイ (gai), ゲ (ge)",
@@ -32235,12 +32235,12 @@ module.exports = {
       "sino_vietnamese": "NGOẠI",
       "vietnamese_meaning": "Ngoài, bên ngoài, ngoại quốc",
       "mnemonic_tip": "Chiều tối (夕) dùng dao (卜) cắt chia phần ra bên ngoài.",
-      "compounds": "外国 (がいこく): Nước ngoài; 外 (そと): Bên ngoài",
+      "compounds": "外国人登録証 (がいこくじんとうろくしょう): Thẻ đăng ký người nước ngoài; 外国 (がいこく): Nước ngoài",
       "jlpt_level": "N5"
     },
     {
       "id": 35,
-      "lesson_id": 8,
+      "lesson_id": 1,
       "character": "大",
       "stroke_count": "3",
       "onyomi": "ダイ (dai), タイ (tai)",
@@ -32248,7 +32248,7 @@ module.exports = {
       "sino_vietnamese": "ĐẠI",
       "vietnamese_meaning": "Lớn, to lớn",
       "mnemonic_tip": "Hình vẽ một người dang rộng hai tay hai chân hết cỡ.",
-      "compounds": "大きい (おおきい): Lớn; 大学 (だいがく): Đại học",
+      "compounds": "大学 (だいがく): Trường đại học; 大きい (おおきい): Lớn",
       "jlpt_level": "N5"
     },
     {
@@ -32261,7 +32261,7 @@ module.exports = {
       "sino_vietnamese": "THIÊN",
       "vietnamese_meaning": "Trời, thiên nhiên",
       "mnemonic_tip": "Một người dang tay đứng chỉ lên bầu trời bao la rộng lớn.",
-      "compounds": "天気 (てんき): Thời tiết; 天才 (てんさい): Thiên tài",
+      "compounds": "天気 (てんき): Thời tiết",
       "jlpt_level": "N5"
     },
     {
@@ -32274,12 +32274,12 @@ module.exports = {
       "sino_vietnamese": "NỮ",
       "vietnamese_meaning": "Phụ nữ, nữ giới",
       "mnemonic_tip": "Hình vẽ một người phụ nữ đang quỳ gối khép nép khấn nguyện.",
-      "compounds": "女の人 (おんなのひと): Người phụ nữ; 女の子 (おんなのこ): Bé gái",
+      "compounds": "女 (おん): Phụ nữ, nữ; 女の人 (おんなのひと): Người phụ nữ; 女の子 (おんなのこ): Cô bé, bé gái",
       "jlpt_level": "N5"
     },
     {
       "id": 38,
-      "lesson_id": 10,
+      "lesson_id": 19,
       "character": "子",
       "stroke_count": "3",
       "onyomi": "シ (shi), ス (su), ツ (tsu)",
@@ -32287,7 +32287,7 @@ module.exports = {
       "sino_vietnamese": "TỬ",
       "vietnamese_meaning": "Đứa con, em bé",
       "mnemonic_tip": "Hình vẽ một đứa trẻ sơ sinh đang quấn tã hai tay xòe ra.",
-      "compounds": "男の子 (おとこのこ): Cậu bé; 子ども (こども): Trẻ em",
+      "compounds": "調子 (ちょうし): Trạng thái; 男の子 (おとこのこ): Cậu bé, bé trai",
       "jlpt_level": "N5"
     },
     {
@@ -32313,12 +32313,12 @@ module.exports = {
       "sino_vietnamese": "TIỂU",
       "vietnamese_meaning": "Nhỏ, bé",
       "mnemonic_tip": "Hình vẽ ba tia nước nhỏ bắn ra từ nguồn.",
-      "compounds": "小さい (ちいさい): Nhỏ; 小学校 (しょうがっこう): Trường tiểu học",
+      "compounds": "小さい (ちいさい): Nhỏ, bé; 小学校 (しょうがっこう): Trường tiểu học",
       "jlpt_level": "N5"
     },
     {
       "id": 41,
-      "lesson_id": 1,
+      "lesson_id": 8,
       "character": "山",
       "stroke_count": "3",
       "onyomi": "サン (san), セン (sen)",
@@ -32326,12 +32326,12 @@ module.exports = {
       "sino_vietnamese": "SƠN",
       "vietnamese_meaning": "Núi, ngọn núi",
       "mnemonic_tip": "Ba đỉnh núi nhấp nhô đứng cạnh nhau.",
-      "compounds": "山 (やま): Ngọn núi; 富士山 (ふじさん): Núi Phú Sĩ",
+      "compounds": "山 (やま): Núi",
       "jlpt_level": "N5"
     },
     {
       "id": 42,
-      "lesson_id": 1,
+      "lesson_id": 13,
       "character": "川",
       "stroke_count": "3",
       "onyomi": "セン (sen)",
@@ -32339,7 +32339,7 @@ module.exports = {
       "sino_vietnamese": "XUYÊN",
       "vietnamese_meaning": "Sông, dòng sông",
       "mnemonic_tip": "Ba dòng nước chảy song song uốn lượn thành con sông.",
-      "compounds": "川 (かわ): Con sông; 小川 (おがわ): Dòng suối nhỏ",
+      "compounds": "川 (かわ): Sông, dòng sông",
       "jlpt_level": "N5"
     },
     {
@@ -32352,7 +32352,7 @@ module.exports = {
       "sino_vietnamese": "TẢ",
       "vietnamese_meaning": "Bên trái, phía trái",
       "mnemonic_tip": "Tay cầm thước thợ (工) hỗ trợ bên tay trái.",
-      "compounds": "左手 (ひだりて): Tay trái; 左側 (ひだりがわ): Phía bên trái",
+      "compounds": "左 (ひだり): Phía bên trái; 左手 (ひだりて): Tay trái",
       "jlpt_level": "N5"
     },
     {
@@ -32365,12 +32365,12 @@ module.exports = {
       "sino_vietnamese": "NIÊN",
       "vietnamese_meaning": "Năm, tuổi",
       "mnemonic_tip": "Một năm thu hoạch lúa chín một lần.",
-      "compounds": "今年 (ことし): Năm nay; 毎年 (まいねん): Mỗi năm",
+      "compounds": "年 (とし): Năm, tuổi tác; 去年 (きょねん): Năm ngoái; 今年 (ことし): Năm nay",
       "jlpt_level": "N5"
     },
     {
       "id": 45,
-      "lesson_id": 4,
+      "lesson_id": 10,
       "character": "後",
       "stroke_count": "9",
       "onyomi": "ゴ (go), コウ (kou)",
@@ -32378,7 +32378,7 @@ module.exports = {
       "sino_vietnamese": "HẬU",
       "vietnamese_meaning": "Sau, phía sau",
       "mnemonic_tip": "Đi bộ (Xích 彳) chậm rãi bằng dây (Yêu 幺) đi sau cùng.",
-      "compounds": "午後 (ごご): Buổi chiều; 後ろ (うしろ): Phía sau",
+      "compounds": "後ろ (うしろ): Sau, phía sau; 午後 (ごご): Chiều, tối, sau 12 giờ trưa",
       "jlpt_level": "N5"
     },
     {
@@ -32391,7 +32391,7 @@ module.exports = {
       "sino_vietnamese": "NHẬT",
       "vietnamese_meaning": "Ngày, mặt trời, nước Nhật",
       "mnemonic_tip": "Mẹo nhớ: Hình vẽ mặt trời tròn trịa có một gạch ở giữa.",
-      "compounds": "日曜日 (にちようび): Chủ nhật; 日本 (にほん): Nhật Bản",
+      "compounds": "日本 (にほん): Nước Nhật Bản",
       "jlpt_level": "N5"
     },
     {
@@ -32404,7 +32404,7 @@ module.exports = {
       "sino_vietnamese": "THỜI",
       "vietnamese_meaning": "thời gian, giờ",
       "mnemonic_tip": "Mặt trời (日) chiếu bóng xuống ngôi chùa (寺) để đo thời gian.",
-      "compounds": "時間 (じかん): Thời gian; 時計 (とけい): Đồng hồ",
+      "compounds": "時計 (とけい): Đồng hồ",
       "jlpt_level": "N5"
     },
     {
@@ -32417,7 +32417,7 @@ module.exports = {
       "sino_vietnamese": "THƯ",
       "vietnamese_meaning": "viết, sách",
       "mnemonic_tip": "Bàn tay cầm bút viết chữ xuống trang giấy dưới ánh mặt trời.",
-      "compounds": "書く (かく): Viết; 図書館 (としょかん): Thư viện",
+      "compounds": "辞書 (じしょ): Từ điển; 書く (かく): Viết",
       "jlpt_level": "N5"
     },
     {
@@ -32443,7 +32443,7 @@ module.exports = {
       "sino_vietnamese": "MỘC",
       "vietnamese_meaning": "Cây, gỗ, thứ năm",
       "mnemonic_tip": "Cây có tán lá phía trên và rễ đâm sâu xuống đất.",
-      "compounds": "木 (き): Cái cây; 木曜日 (もくようび): Thứ năm",
+      "compounds": "木曜日 (もくようび): Thứ năm; 木 (き): Cái cây",
       "jlpt_level": "N5"
     },
     {
@@ -32456,7 +32456,7 @@ module.exports = {
       "sino_vietnamese": "BẢN",
       "vietnamese_meaning": "Sách, cội nguồn, bản chất",
       "mnemonic_tip": "Mẹo nhớ: Chữ Mộc (木 - cây) thêm một gạch ngang ở gốc chỉ cội nguồn gốc rễ.",
-      "compounds": "本 (ほん): Sách; 日本 (にほん): Nhật Bản",
+      "compounds": "日本 (にほん): Nước Nhật Bản; 本 (ほん): Sách",
       "jlpt_level": "N5"
     },
     {
@@ -32469,12 +32469,12 @@ module.exports = {
       "sino_vietnamese": "LAI",
       "vietnamese_meaning": "Đến, tương lai",
       "mnemonic_tip": "Hình vẽ cây lúa mì đang sinh trưởng từ nơi xa Đến.",
-      "compounds": "来る (くる): Đến; 来月 (らいげつ): Tháng sau",
+      "compounds": "来る (くる): Đến; 来週 (らいしゅう): Tuần sau; 来月 (らいげつ): Tháng sau",
       "jlpt_level": "N5"
     },
     {
       "id": 53,
-      "lesson_id": 5,
+      "lesson_id": 32,
       "character": "東",
       "stroke_count": "8",
       "onyomi": "トウ (tou)",
@@ -32495,12 +32495,12 @@ module.exports = {
       "sino_vietnamese": "HIỆU",
       "vietnamese_meaning": "Trường học, hiệu đính",
       "mnemonic_tip": "Cây gỗ (Mộc 木) dựng bên cạnh cái cổng giao nhau là trường học.",
-      "compounds": "学校 (がっこう): Trường học; 高校 (こうこう): Trường cấp 3",
+      "compounds": "学校 (がっこう): Trường học; 高等学校 (こうとうがっこう): Trường cấp 3, trường trung học phổ thông",
       "jlpt_level": "N5"
     },
     {
       "id": 55,
-      "lesson_id": 11,
+      "lesson_id": 7,
       "character": "母",
       "stroke_count": "5",
       "onyomi": "ボ (bo)",
@@ -32508,12 +32508,12 @@ module.exports = {
       "sino_vietnamese": "MẪU",
       "vietnamese_meaning": "Mẹ",
       "mnemonic_tip": "Hình vẽ người phụ nữ (Nữ 女) có thêm hai điểm ngực để cho con bú sữa mẹ.",
-      "compounds": "母 (はは): Mẹ của mình; お母さん (おかあさん): Mẹ của người khác",
+      "compounds": "母 (はは): Mẹ; お母さん (おかあさん): Mẹ, bà mẹ",
       "jlpt_level": "N5"
     },
     {
       "id": 56,
-      "lesson_id": 2,
+      "lesson_id": 4,
       "character": "毎",
       "stroke_count": "6",
       "onyomi": "マイ (mai)",
@@ -32521,7 +32521,7 @@ module.exports = {
       "sino_vietnamese": "MỖI",
       "vietnamese_meaning": "Mỗi, hằng (ngày/tháng)",
       "mnemonic_tip": "Người mẹ (母) mỗi ngày đều đội nón chăm sóc con.",
-      "compounds": "毎日 (まいにち): Mỗi ngày; 毎週 (まいしゅう): Mỗi tuần",
+      "compounds": "毎日 (まいにち): Mỗi ngày, hàng ngày; 毎朝 (まいあさ): Mỗi sáng, hàng sáng; 毎晩 (まいばん): Mỗi tối, hàng tối",
       "jlpt_level": "N5"
     },
     {
@@ -32534,7 +32534,7 @@ module.exports = {
       "sino_vietnamese": "KHÍ",
       "vietnamese_meaning": "Không khí, khí chất, tinh thần",
       "mnemonic_tip": "Hơi nước bốc lên từ nồi cơm đang sôi tạo thành luồng khí.",
-      "compounds": "元気 (げんき): Khỏe mạnh; 気分 (きぶん): Tâm trạng",
+      "compounds": "天気 (てんき): Thời tiết; 電気 (でんき): Điện",
       "jlpt_level": "N5"
     },
     {
@@ -32547,7 +32547,7 @@ module.exports = {
       "sino_vietnamese": "THỦY",
       "vietnamese_meaning": "Nước",
       "mnemonic_tip": "Dòng nước chảy chính giữa và các giọt nước bắn ra hai bên.",
-      "compounds": "水 (みず): Nước; 水曜日 (すいようび): Thứ tư",
+      "compounds": "水曜日 (すいようび): Thứ tư; 水 (みず): Nước",
       "jlpt_level": "N5"
     },
     {
@@ -32560,12 +32560,12 @@ module.exports = {
       "sino_vietnamese": "HỎA",
       "vietnamese_meaning": "Lửa, thứ ba",
       "mnemonic_tip": "Ngọn lửa bốc cháy với hai đốm lửa tóe ra hai bên.",
-      "compounds": "火 (ひ): Ngọn lửa; 火曜日 (かようび): Thứ ba",
+      "compounds": "火曜日 (かようび): Thứ ba; 火 (ひ): Ngọn lửa",
       "jlpt_level": "N5"
     },
     {
       "id": 60,
-      "lesson_id": 11,
+      "lesson_id": 7,
       "character": "父",
       "stroke_count": "4",
       "onyomi": "フ (fu)",
@@ -32573,7 +32573,7 @@ module.exports = {
       "sino_vietnamese": "PHỤ",
       "vietnamese_meaning": "Bố, cha",
       "mnemonic_tip": "Hình vẽ người đàn ông cầm hai chiếc roi thể hiện quyền lực của người Cha.",
-      "compounds": "父 (ちち): Bố của mình; お父さん (おとうさん): Bố của người khác",
+      "compounds": "父 (ちち): Bố; お父さん (おとうさん): Bố, ông bố",
       "jlpt_level": "N5"
     },
     {
@@ -32586,7 +32586,7 @@ module.exports = {
       "sino_vietnamese": "SINH",
       "vietnamese_meaning": "Sống, sinh ra, học sinh",
       "mnemonic_tip": "Mẹo nhớ: Hình ảnh một mầm cây nhỏ sinh trưởng trồi lên từ mặt đất.",
-      "compounds": "学生 (がくせい): Học sinh; 先生 (せんせい): Giáo viên",
+      "compounds": "先生 (せんせい): Giáo viên; 学生 (がくせい): Học sinh",
       "jlpt_level": "N5"
     },
     {
@@ -32599,12 +32599,12 @@ module.exports = {
       "sino_vietnamese": "NAM",
       "vietnamese_meaning": "Đàn ông, nam giới",
       "mnemonic_tip": "Người dùng lực (Lực 力) làm việc trên ruộng đồng (Điền 田) là Đàn ông.",
-      "compounds": "男の人 (おとこのひと): Người đàn ông; 男の子 (おとこのこ): Bé trai",
+      "compounds": "男の人 (おとこのひと): Người đàn ông; 男の子 (おとこのこ): Cậu bé, bé trai",
       "jlpt_level": "N5"
     },
     {
       "id": 63,
-      "lesson_id": 2,
+      "lesson_id": 8,
       "character": "白",
       "stroke_count": "5",
       "onyomi": "ハク (haku), ビャク (byaku)",
@@ -32612,12 +32612,12 @@ module.exports = {
       "sino_vietnamese": "BẠCH",
       "vietnamese_meaning": "Màu trắng, sáng",
       "mnemonic_tip": "Một (一) tia sáng mặt trời (日) rực rỡ có màu trắng.",
-      "compounds": "白い (しろい): Màu trắng; 白鳥 (はくちょう): Thiên nga",
+      "compounds": "白い (しろい): Trắng; 面白い (おもしろい): Thú vị, hay",
       "jlpt_level": "N5"
     },
     {
       "id": 64,
-      "lesson_id": 25,
+      "lesson_id": 3,
       "character": "百",
       "stroke_count": "6",
       "onyomi": "ヒャク (hyaku), ビャク (byaku)",
@@ -32625,7 +32625,7 @@ module.exports = {
       "sino_vietnamese": "BÁCH",
       "vietnamese_meaning": "Trăm, số một trăm",
       "mnemonic_tip": "Số 1 (一) đứng đầu bảng chữ Bạch (白) biểu thị con số 100.",
-      "compounds": "百 (ひゃく): Một trăm; 三百 (さんびゃく): Ba trăm",
+      "compounds": "百 (ひゃく): Một trăm; 百円 (ひゃくえん): Một trăm yên",
       "jlpt_level": "N5"
     },
     {
@@ -32638,7 +32638,7 @@ module.exports = {
       "sino_vietnamese": "VĂN",
       "vietnamese_meaning": "nghe, hỏi",
       "mnemonic_tip": "Ghép tai (耳) vào khe cửa (門) để lắng nghe âm thanh.",
-      "compounds": "聞く (きく): Nghe; 新聞 (しんぶん): Báo chí",
+      "compounds": "新聞 (しんぶん): Báo; 新聞社 (しんぶんしゃ): Tòa soạn báo, công ty báo chí",
       "jlpt_level": "N5"
     },
     {
@@ -32651,12 +32651,12 @@ module.exports = {
       "sino_vietnamese": "HÀNH",
       "vietnamese_meaning": "Đi, tiến hành",
       "mnemonic_tip": "Hình vẽ hai ngã tư đường chéo nhau tượng trưng cho đường Đi.",
-      "compounds": "行く (いく): Đi; 旅行 (りょこう): Du lịch",
+      "compounds": "行く (いく): Đi; 急行 (きゅうこう): Tàu tốc hành; 飛行機 (ひこうき): Máy bay",
       "jlpt_level": "N5"
     },
     {
       "id": 67,
-      "lesson_id": 27,
+      "lesson_id": 32,
       "character": "西",
       "stroke_count": "6",
       "onyomi": "セイ (sei), サイ (sai), ス (su)",
@@ -32664,7 +32664,7 @@ module.exports = {
       "sino_vietnamese": "TÂY",
       "vietnamese_meaning": "Phía tây, phương tây",
       "mnemonic_tip": "Tổ chim trên cành lúc hoàng hôn khi mặt trời lặn về hướng Tây.",
-      "compounds": "西 (にし): Phía tây; 西口 (にしぐち): Cửa tây",
+      "compounds": "西 (にし): Phía tây",
       "jlpt_level": "N5"
     },
     {
@@ -32677,12 +32677,12 @@ module.exports = {
       "sino_vietnamese": "KIẾN",
       "vietnamese_meaning": "Nhìn, xem, ý kiến",
       "mnemonic_tip": "Mắt (Mục 目) đặt trên đôi chân đi lại để Nhìn xung quanh.",
-      "compounds": "見る (みる): Nhìn/Xem; 意見 (いけん): Ý kiến",
+      "compounds": "見る (みる): Xem, nhìn, trông; 花見 (はなみ): Ngắm hoa anh đào; 見物 (けんぶつ): Tham quan, ngắm cảnh",
       "jlpt_level": "N5"
     },
     {
       "id": 69,
-      "lesson_id": 14,
+      "lesson_id": 20,
       "character": "話",
       "stroke_count": "13",
       "onyomi": "ワ (wa)",
@@ -32690,7 +32690,7 @@ module.exports = {
       "sino_vietnamese": "THOẠI",
       "vietnamese_meaning": "Nói chuyện, hội thoại",
       "mnemonic_tip": "Dùng ngôn từ (Ngôn 言) phát ra từ lưỡi (Thiệt 舌) để Nói chuyện.",
-      "compounds": "話す (はなす): Nói; 会話 (かいわ): Hội thoại",
+      "compounds": "電話 (でんわ): Gọi điện thoại; 話す (はなす): Nói chuyện, trò chuyện",
       "jlpt_level": "N5"
     },
     {
@@ -32703,7 +32703,7 @@ module.exports = {
       "sino_vietnamese": "NGỮ",
       "vietnamese_meaning": "ngôn ngữ, kể",
       "mnemonic_tip": "Ngôn từ (言) do năm (五) người trong miệng (口) nói ra thành ngôn ngữ.",
-      "compounds": "日本語 (にほんご): Tiếng Nhật; 英語 (えいご): Tiếng Anh",
+      "compounds": "英語 (えいご): Tiếng Anh; 日本語 (にほんご): Tiếng Nhật",
       "jlpt_level": "N5"
     },
     {
@@ -32729,7 +32729,7 @@ module.exports = {
       "sino_vietnamese": "XA",
       "vietnamese_meaning": "xe cộ, ô tô",
       "mnemonic_tip": "Hình dáng cỗ xe hai bánh nhìn từ trên xuống.",
-      "compounds": "車 (くるま): Xe ô tô; 電車 (でんしゃ): Tàu điện",
+      "compounds": "自動車 (じどうしゃ): Ô tô, xe hơi; 車 (くるま): Xe ô tô",
       "jlpt_level": "N5"
     },
     {
@@ -32742,7 +32742,7 @@ module.exports = {
       "sino_vietnamese": "KIM",
       "vietnamese_meaning": "Vàng, tiền, kim loại",
       "mnemonic_tip": "Mái nhà che chở cho những thỏi vàng kim loại chôn sâu trong lòng đất.",
-      "compounds": "お金 (おかね): Tiền; 金曜日 (きんようび): Thứ sáu",
+      "compounds": "金曜日 (きんようび): Thứ sáu; お金 (おかね): Tiền",
       "jlpt_level": "N5"
     },
     {
@@ -32755,12 +32755,12 @@ module.exports = {
       "sino_vietnamese": "TRƯỜNG, TRƯỞNG",
       "vietnamese_meaning": "Dài, trưởng phòng",
       "mnemonic_tip": "Hình vẽ người trưởng tộc cao tuổi có mái tóc dài bay trong gió.",
-      "compounds": "長い (ながい): Dài; 社長 (しゃちょう): Giám đốc",
+      "compounds": "長い (ながい): Dài; 校長 (こうちょう): Hiệu trưởng",
       "jlpt_level": "N5"
     },
     {
       "id": 75,
-      "lesson_id": 23,
+      "lesson_id": 22,
       "character": "間",
       "stroke_count": "12",
       "onyomi": "カン (kan), ケン (ken)",
@@ -32768,7 +32768,7 @@ module.exports = {
       "sino_vietnamese": "GIAN",
       "vietnamese_meaning": "Ở giữa, khoảng gian",
       "mnemonic_tip": "Ánh mặt trời (Nhật 日) lọt qua khe hai cánh cửa (Môn 門) thành khoảng thời gian.",
-      "compounds": "時間 (じかん): Thời gian; 隙間 (すきま): Khe hở",
+      "compounds": "時間 (じかん): Thời gian, thời giờ; この間 (このあいだ): Dạo này, gần đây",
       "jlpt_level": "N5"
     },
     {
@@ -32781,7 +32781,7 @@ module.exports = {
       "sino_vietnamese": "VŨ",
       "vietnamese_meaning": "Mưa",
       "mnemonic_tip": "Hình vẽ các giọt nước rơi từ những đám mây trên bầu trời xuống đất.",
-      "compounds": "大雨 (おおあめ): Mưa lớn; 雨期 (うき): Mùa mưa",
+      "compounds": "雨 (あめ): Mưa; 大雨 (おおあめ): Mưa lớn",
       "jlpt_level": "N5"
     },
     {
@@ -32794,7 +32794,7 @@ module.exports = {
       "sino_vietnamese": "ĐIỆN",
       "vietnamese_meaning": "Điện lực, sấm chớp",
       "mnemonic_tip": "Mưa Vũ 雨 rơi xuống ruộng Điền 田 tạo ra tia điện lấp lánh.",
-      "compounds": "電話 (でんわ): Điện thoại; 電車 (でんしゃ): Tàu điện",
+      "compounds": "電話 (でんわ): Điện thoại; 電気 (でんき): Điện",
       "jlpt_level": "N5"
     },
     {
@@ -32807,12 +32807,12 @@ module.exports = {
       "sino_vietnamese": "THỰC",
       "vietnamese_meaning": "Ăn, đồ ăn",
       "mnemonic_tip": "Người người 人 dưới mái nhà 良 ăn cơm thực phẩm tốt lành.",
-      "compounds": "食堂 (しょくどう): Nhà ăn; 食べる (たべる): Ăn",
+      "compounds": "食堂 (しょくどう): Nhà ăn, phòng ăn; 食べる (たべる): Ăn",
       "jlpt_level": "N5"
     },
     {
       "id": 79,
-      "lesson_id": 8,
+      "lesson_id": 15,
       "character": "高",
       "stroke_count": "10",
       "onyomi": "コウ (kou)",
@@ -32820,12 +32820,12 @@ module.exports = {
       "sino_vietnamese": "CAO",
       "vietnamese_meaning": "Cao, đắt tiền",
       "mnemonic_tip": "Hình vẽ một tòa tháp cao có mái ngói chòi cao tầng.",
-      "compounds": "高い (たかい): Cao/Đắt; 高校 (こうこう): Trường cấp 3",
+      "compounds": "高校 (こうこう): Trường cấp 3; 高い (たかい): Đắt, cao",
       "jlpt_level": "N5"
     },
     {
       "id": 80,
-      "lesson_id": 21,
+      "lesson_id": 43,
       "character": "不",
       "stroke_count": "4",
       "onyomi": "フ (fu), ブ (bu)",
@@ -32833,12 +32833,12 @@ module.exports = {
       "sino_vietnamese": "BẤT",
       "vietnamese_meaning": "chẳng, không",
       "mnemonic_tip": "Con chim bay lên trời mà không chịu hạ xuống đất.",
-      "compounds": "不安 (ふあん): Bất an; 不便 (ふべん): Bất tiện",
+      "compounds": "不味い (まずい): Dở, không ngon; 不思議 (ふしぎ): Bí ẩn, kỳ lạ",
       "jlpt_level": "N4"
     },
     {
       "id": 81,
-      "lesson_id": 2,
+      "lesson_id": 49,
       "character": "世",
       "stroke_count": "5",
       "onyomi": "セイ (sei), セ (se), ソウ (sou)",
@@ -32846,12 +32846,12 @@ module.exports = {
       "sino_vietnamese": "THẾ",
       "vietnamese_meaning": "Thế giới, thế hệ",
       "mnemonic_tip": "Ba chữ thập (mỗi chữ 10 năm) ghép lại thành một thế hệ 30 năm.",
-      "compounds": "世界 (せかい): Thế giới; 世話 (せわ): Chăm sóc",
+      "compounds": "世界的に (せかいてきに): Mang tính toàn cầu, đẳng cấp thế giới; 世界中 (せかいじゅう): Khắp thế giới",
       "jlpt_level": "N4"
     },
     {
       "id": 82,
-      "lesson_id": 10,
+      "lesson_id": 9,
       "character": "主",
       "stroke_count": "5",
       "onyomi": "シュ (shu), ス (su), シュウ (shuu)",
@@ -32859,12 +32859,12 @@ module.exports = {
       "sino_vietnamese": "CHỦ",
       "vietnamese_meaning": "Chủ nhân, nhân vật chính",
       "mnemonic_tip": "Ngọn lửa thắp sáng trên chiếc đèn dầu tượng trưng cho người làm Chủ.",
-      "compounds": "主人 (しゅじん): Chồng/Chủ nhân; 主要 (しゅよう): Chủ yếu",
+      "compounds": "ご主人 (ごしゅじん): Chồng; 夫 / 主人 (おっと): Chồng",
       "jlpt_level": "N4"
     },
     {
       "id": 83,
-      "lesson_id": 15,
+      "lesson_id": 29,
       "character": "事",
       "stroke_count": "8",
       "onyomi": "ジ (ji), ズ (zu)",
@@ -32872,12 +32872,12 @@ module.exports = {
       "sino_vietnamese": "SỰ",
       "vietnamese_meaning": "Sự việc, công việc",
       "mnemonic_tip": "Tay cầm bút ghi chép lại các Sự việc, công việc hành chính.",
-      "compounds": "仕事 (しごと): Công việc; 食事 (しょくじ): Dùng bữa",
+      "compounds": "返事 (へんじ): Sự trả lời, hồi âm; 仕事 (しごと): Công việc, việc làm",
       "jlpt_level": "N4"
     },
     {
       "id": 84,
-      "lesson_id": 4,
+      "lesson_id": 12,
       "character": "京",
       "stroke_count": "8",
       "onyomi": "キョウ (kyou), ケイ (kei), キン (kin)",
@@ -32885,12 +32885,12 @@ module.exports = {
       "sino_vietnamese": "KINH",
       "vietnamese_meaning": "kinh đô, to lớn",
       "mnemonic_tip": "Cổng thành cao ngất ở kinh đô hoa lệ.",
-      "compounds": "東京 (とうきょう): Tokyo; 京都 (きょうと): Kyoto",
+      "compounds": "京都 (きょうと): Cố đô Kyoto; 東京 (とうきょう): Thủ đô Tokyo",
       "jlpt_level": "N4"
     },
     {
       "id": 85,
-      "lesson_id": 4,
+      "lesson_id": 22,
       "character": "仕",
       "stroke_count": "5",
       "onyomi": "シ (shi), ジ (ji)",
@@ -32898,12 +32898,12 @@ module.exports = {
       "sino_vietnamese": "SĨ",
       "vietnamese_meaning": "Làm việc, phục vụ",
       "mnemonic_tip": "Người (亻) làm quan (士) phục vụ công việc quốc gia.",
-      "compounds": "仕事 (しごと): Công việc; 仕方 (しかた): Cách làm",
+      "compounds": "仕事 (しごと): Công việc, việc làm; 仕方 (しかた): Cách làm, phương pháp",
       "jlpt_level": "N4"
     },
     {
       "id": 86,
-      "lesson_id": 33,
+      "lesson_id": 48,
       "character": "代",
       "stroke_count": "5",
       "onyomi": "ダイ (dai), タイ (tai)",
@@ -32911,12 +32911,12 @@ module.exports = {
       "sino_vietnamese": "ĐẠI",
       "vietnamese_meaning": "Thay thế, thời đại",
       "mnemonic_tip": "Người (亻) cầm cọc đứng gác thay thế cho thế hệ trước.",
-      "compounds": "時代 (じだい): Thời đại; 代わり (かわり): Thay thế",
+      "compounds": "代わりをする (かわりをする): Thay thế; 電話代 (でんわだい): Tiền điện thoại",
       "jlpt_level": "N4"
     },
     {
       "id": 87,
-      "lesson_id": 33,
+      "lesson_id": 45,
       "character": "以",
       "stroke_count": "5",
       "onyomi": "イ (i)",
@@ -32924,7 +32924,7 @@ module.exports = {
       "sino_vietnamese": "DĨ",
       "vietnamese_meaning": "lấy, bằng, mốc",
       "mnemonic_tip": "Dùng cái cày làm mốc xuất phát để lấy điểm so sánh.",
-      "compounds": "以上 (いじょう): Trở lên; 以下 (いか): Trở xuống",
+      "compounds": "以上 (いじょうです): Xin hết; 以下 (いか): Trở xuống, dưới mức",
       "jlpt_level": "N4"
     },
     {
@@ -32937,12 +32937,12 @@ module.exports = {
       "sino_vietnamese": "HỘI",
       "vietnamese_meaning": "Hội họp, gặp gỡ",
       "mnemonic_tip": "Mẹo nhớ: 3 người (bộ nhân 人 và nhị 二) cùng gặp gỡ dưới một mái nhà.",
-      "compounds": "会う (あう): Gặp gỡ; 会社 (かいしゃ): Công ty",
-      "jlpt_level": "N4"
+      "compounds": "会社員 (かいしゃいん): Nhân viên công ty; 会う (あう): Gặp gỡ",
+      "jlpt_level": "N5"
     },
     {
       "id": 89,
-      "lesson_id": 15,
+      "lesson_id": 14,
       "character": "住",
       "stroke_count": "7",
       "onyomi": "ジュウ (juu), ヂュウ (juu), チュウ (chuu)",
@@ -32950,12 +32950,12 @@ module.exports = {
       "sino_vietnamese": "TRÚ",
       "vietnamese_meaning": "Sống, cư trú",
       "mnemonic_tip": "Người (Nhân 亻) đứng làm chủ (Chủ 主) cai quản đất đai cư Trú.",
-      "compounds": "住む (すむ): Sống; 住所 (じゅうしょ): Địa chỉ",
+      "compounds": "住所 (じゅうしょ): Địa chỉ; 住む (すむ): Sống",
       "jlpt_level": "N4"
     },
     {
       "id": 90,
-      "lesson_id": 16,
+      "lesson_id": 19,
       "character": "体",
       "stroke_count": "7",
       "onyomi": "タイ (tai), テイ (tei)",
@@ -32963,12 +32963,12 @@ module.exports = {
       "sino_vietnamese": "THỂ",
       "vietnamese_meaning": "Cơ thể, thân thể",
       "mnemonic_tip": "Người (Nhân 亻) đứng tựa vào gốc cây (Bản 本) thư giãn cơ thể.",
-      "compounds": "身体 (しんたい): Thân thể; 体温 (たいおん): Nhiệt độ cơ thể",
+      "compounds": "体に良い (からだにいい): Tốt cho sức khỏe; 体 (からだ): Cơ thể, người",
       "jlpt_level": "N4"
     },
     {
       "id": 91,
-      "lesson_id": 14,
+      "lesson_id": 49,
       "character": "作",
       "stroke_count": "7",
       "onyomi": "サク (saku), サ (sa)",
@@ -32976,12 +32976,12 @@ module.exports = {
       "sino_vietnamese": "TÁC",
       "vietnamese_meaning": "Chế tạo, sáng tác",
       "mnemonic_tip": "Người (Nhân 亻) dùng tay bắt đầu (Tạc) làm việc Chế tạo.",
-      "compounds": "作る (つくる): Làm/Chế tạo; 作文 (さくぶん): Tập làm văn",
+      "compounds": "作品 (さくひん): Tác phẩm; 作家 (さっか): Tác giả, nhà văn; 作曲 (さっきょく): Sáng tác nhạc",
       "jlpt_level": "N4"
     },
     {
       "id": 92,
-      "lesson_id": 14,
+      "lesson_id": 15,
       "character": "使",
       "stroke_count": "8",
       "onyomi": "シ (shi)",
@@ -32989,7 +32989,7 @@ module.exports = {
       "sino_vietnamese": "SỬ",
       "vietnamese_meaning": "Sử dụng, sứ giả",
       "mnemonic_tip": "Người (Nhân 亻) được giao phó quyền Sử dụng của quan lại.",
-      "compounds": "使う (つかう): Sử dụng; 大使館 (たいしかん): Đại sứ quan",
+      "compounds": "使う (つかう): Sử dụng, dùng",
       "jlpt_level": "N4"
     },
     {
@@ -33002,12 +33002,12 @@ module.exports = {
       "sino_vietnamese": "TÁ",
       "vietnamese_meaning": "Mượn, vay",
       "mnemonic_tip": "Người (Nhân 亻) đi mượn món đồ cũ tích lũy từ xưa 昔.",
-      "compounds": "借りる (かりる): Mượn; 借金 (しゃっきん): Tiền nợ",
+      "compounds": "借りる (かりる): Mượn, vay; 借金 (しゃっきん): Tiền nợ",
       "jlpt_level": "N4"
     },
     {
       "id": 94,
-      "lesson_id": 5,
+      "lesson_id": 48,
       "character": "元",
       "stroke_count": "4",
       "onyomi": "ゲン (gen), ガン (gan)",
@@ -33015,7 +33015,7 @@ module.exports = {
       "sino_vietnamese": "NGUYÊN",
       "vietnamese_meaning": "gốc, ban đầu",
       "mnemonic_tip": "Đầu người và hai chân vững chãi tượng trưng cho nguồn gốc, nguyên khí.",
-      "compounds": "元気 (げんき): Khỏe mạnh; 元日 (がんじつ): Ngày mồng một tết",
+      "compounds": "元々 (もともと): Vốn dĩ, nguyên là; 元気 (げんき): Khỏe mạnh",
       "jlpt_level": "N4"
     },
     {
@@ -33028,12 +33028,12 @@ module.exports = {
       "sino_vietnamese": "HUYNH",
       "vietnamese_meaning": "Anh trai",
       "mnemonic_tip": "Người có cái miệng (Khẩu 口) to đứng trên đôi chân đi làm kiếm tiền là Anh trai.",
-      "compounds": "兄 (あに): Anh trai của mình; お兄さん (おにいさん): Anh trai của người khác",
+      "compounds": "兄 (あに): Anh trai; 兄弟 (きょうだい): Anh chị em; お兄さん (おにいさん): Anh trai",
       "jlpt_level": "N4"
     },
     {
       "id": 96,
-      "lesson_id": 6,
+      "lesson_id": 27,
       "character": "公",
       "stroke_count": "4",
       "onyomi": "コウ (kou), ク (ku)",
@@ -33041,12 +33041,12 @@ module.exports = {
       "sino_vietnamese": "CÔNG",
       "vietnamese_meaning": "công cộng, chung",
       "mnemonic_tip": "Chia đều tám phần riêng tư cho cộng đồng công cộng.",
-      "compounds": "公園 (こうえん): Công viên; 公務員 (こうむいん): Công chức",
+      "compounds": "主人公 (しゅじんこう): Nhân vật chính; 公園 (こうえん): Công viên",
       "jlpt_level": "N4"
     },
     {
       "id": 97,
-      "lesson_id": 2,
+      "lesson_id": 6,
       "character": "写",
       "stroke_count": "5",
       "onyomi": "シャ (sha), ジャ (ja)",
@@ -33054,7 +33054,7 @@ module.exports = {
       "sino_vietnamese": "TẢ",
       "vietnamese_meaning": "Chép lại, chụp (ảnh)",
       "mnemonic_tip": "Dưới mái nhà, tay cầm bút sao chép trung thực.",
-      "compounds": "写真 (しゃしん): Bức ảnh; 写す (うつす): Chụp ảnh, chép lại",
+      "compounds": "写真 (しゃしん): Ảnh, bức ảnh; 写します (うつします): Chép lại, sao chụp, chụp ảnh",
       "jlpt_level": "N4"
     },
     {
@@ -33067,12 +33067,12 @@ module.exports = {
       "sino_vietnamese": "ĐÔNG",
       "vietnamese_meaning": "Mùa đông",
       "mnemonic_tip": "Đi bộ chậm rãi trên những tảng băng buốt giá mùa Đông.",
-      "compounds": "冬休み (ふゆやすみ): Nghỉ đông; 初冬 (しょとう): Đầu đông",
+      "compounds": "冬 (ふゆ): Mùa đông; 冬休み (ふゆやすみ): Nghỉ đông",
       "jlpt_level": "N4"
     },
     {
       "id": 99,
-      "lesson_id": 7,
+      "lesson_id": 43,
       "character": "切",
       "stroke_count": "4",
       "onyomi": "セツ (setsu), サイ (sai)",
@@ -33080,12 +33080,12 @@ module.exports = {
       "sino_vietnamese": "THIẾT",
       "vietnamese_meaning": "Cắt, khẩn thiết",
       "mnemonic_tip": "Dùng dao (Đao 刀) cắt bảy (Thất 七) nhát chia nhỏ vật.",
-      "compounds": "切る (きる): Cắt; 切手 (きって): Con tem",
+      "compounds": "切れる (きれる): Đứt; 大切 (たいせつ): Quan trọng, quý giá",
       "jlpt_level": "N4"
     },
     {
       "id": 100,
-      "lesson_id": 9,
+      "lesson_id": 13,
       "character": "別",
       "stroke_count": "7",
       "onyomi": "ベツ (betsu)",
@@ -33093,12 +33093,12 @@ module.exports = {
       "sino_vietnamese": "BIỆT",
       "vietnamese_meaning": "Chia ly, khác biệt, đặc biệt",
       "mnemonic_tip": "Dùng dao (Đao 刂) cắt đứt miệng để phân Biệt.",
-      "compounds": "特別 (とくべつ): Đặc biệt; 別れる (わかれる): Chia tay",
+      "compounds": "別々に (べつべつに): Riêng biệt, tách rời; 別 (べつ): Riêng biệt, khác nhau",
       "jlpt_level": "N4"
     },
     {
       "id": 101,
-      "lesson_id": 28,
+      "lesson_id": 50,
       "character": "力",
       "stroke_count": "2",
       "onyomi": "リョク (ryoku), リキ (riki), リイ (rii)",
@@ -33106,12 +33106,12 @@ module.exports = {
       "sino_vietnamese": "LỰC",
       "vietnamese_meaning": "sức mạnh, năng lực",
       "mnemonic_tip": "Hình dáng cánh tay gồng lên khoe bắp cơ thể hiện sức mạnh.",
-      "compounds": "力 (ちから): Sức lực; 体力 (たいりょく): Thể lực",
+      "compounds": "協力 (きょうりょく): Hợp tác, hiệp lực; 入力 (にゅうりょく): Nhập liệu",
       "jlpt_level": "N4"
     },
     {
       "id": 102,
-      "lesson_id": 2,
+      "lesson_id": 4,
       "character": "勉",
       "stroke_count": "10",
       "onyomi": "ベン (ben)",
@@ -33119,12 +33119,12 @@ module.exports = {
       "sino_vietnamese": "MIỄN",
       "vietnamese_meaning": "Cố gắng, chăm chỉ",
       "mnemonic_tip": "Dùng hết sức lực (力) chăm chỉ học hành.",
-      "compounds": "勉強 (べんきょう): Học tập; 勉学 (べんがく): Sự chăm học",
+      "compounds": "勉強 (べんきょう): Học, học tập",
       "jlpt_level": "N4"
     },
     {
       "id": 103,
-      "lesson_id": 18,
+      "lesson_id": 40,
       "character": "動",
       "stroke_count": "11",
       "onyomi": "ドウ (dou)",
@@ -33132,12 +33132,12 @@ module.exports = {
       "sino_vietnamese": "ĐỘNG",
       "vietnamese_meaning": "Di chuyển, hoạt động",
       "mnemonic_tip": "Dùng lực (Lực 力) khuân vác vật nặng (Trọng 重) di chuyển hoạt Động.",
-      "compounds": "運動 (うんどう): Vận động, thể thao; 動物 (どうぶつ): Động vật",
+      "compounds": "動かす (うごかす): Làm chuyển động, vận hành; 運動 (うんどう): Vận động, tập thể dục",
       "jlpt_level": "N4"
     },
     {
       "id": 104,
-      "lesson_id": 17,
+      "lesson_id": 47,
       "character": "医",
       "stroke_count": "7",
       "onyomi": "イ (i)",
@@ -33145,7 +33145,7 @@ module.exports = {
       "sino_vietnamese": "Y",
       "vietnamese_meaning": "Y học, thầy thuốc",
       "mnemonic_tip": "Mũi tên đặt trong cái hộp y tế để điều trị vết thương cho bệnh nhân.",
-      "compounds": "医者 (いしゃ): Bác sĩ; 医学 (いがく): Y học",
+      "compounds": "医学 (いがく): Y học; 医者 (いしゃ): Bác sĩ",
       "jlpt_level": "N4"
     },
     {
@@ -33158,7 +33158,7 @@ module.exports = {
       "sino_vietnamese": "KHỨ",
       "vietnamese_meaning": "Quá khứ, rời đi",
       "mnemonic_tip": "Thổ địa 土 ở dưới bao vây tư cách rời đi quá khứ.",
-      "compounds": "去年 (きょねん): Năm ngoái; 過去 (かこ): Quá khứ",
+      "compounds": "去年 (きょねん): Năm ngoái",
       "jlpt_level": "N4"
     },
     {
@@ -33171,8 +33171,8 @@ module.exports = {
       "sino_vietnamese": "KHẨU",
       "vietnamese_meaning": "Miệng, cổng, lối vào",
       "mnemonic_tip": "Hình vuông mở rộng tượng trưng cho cái miệng hoặc cửa vào.",
-      "compounds": "口 (くち): Miệng; 入口 (いりぐち): Lối vào",
-      "jlpt_level": "N4"
+      "compounds": "口 (くち): Cái miệng, cửa ngõ; 出口 (でぐち): Cửa ra; 入り口 (いりぐち): Cửa vào",
+      "jlpt_level": "N5"
     },
     {
       "id": 107,
@@ -33184,12 +33184,12 @@ module.exports = {
       "sino_vietnamese": "CỔ",
       "vietnamese_meaning": "Cũ, cổ xưa",
       "mnemonic_tip": "Lời nói qua mười (Thập 十) cái miệng (Khẩu 口) là chuyện Cổ xưa.",
-      "compounds": "古い (ふるい): Cũ; 古代 (こだい): Cổ đại",
-      "jlpt_level": "N4"
+      "compounds": "古い (ふるい): Cũ, cổ",
+      "jlpt_level": "N5"
     },
     {
       "id": 108,
-      "lesson_id": 11,
+      "lesson_id": 39,
       "character": "台",
       "stroke_count": "5",
       "onyomi": "ダイ (dai), タイ (tai)",
@@ -33197,7 +33197,7 @@ module.exports = {
       "sino_vietnamese": "ĐÀI",
       "vietnamese_meaning": "Cái bệ, xe/máy móc",
       "mnemonic_tip": "Cái miệng (口) đặt trên bệ đỡ vững chãi làm bục đài.",
-      "compounds": "台風 (たいふう): Cơn bão; 一台 (いちだい): Một chiếc xe, máy móc",
+      "compounds": "台風 (たいふう): Bão; 台所 (だいどころ): Nhà bếp",
       "jlpt_level": "N4"
     },
     {
@@ -33210,12 +33210,12 @@ module.exports = {
       "sino_vietnamese": "ĐỒNG",
       "vietnamese_meaning": "Giống nhau, cùng",
       "mnemonic_tip": "Nhiều người chung dưới một mái nhà cùng chung một tiếng nói.",
-      "compounds": "同じ (おなじ): Giống nhau; 同僚 (どうりょう): Đồng nghiệp",
+      "compounds": "同じ (おなじ): Giống nhau, tương đồng",
       "jlpt_level": "N4"
     },
     {
       "id": 110,
-      "lesson_id": 8,
+      "lesson_id": 43,
       "character": "味",
       "stroke_count": "8",
       "onyomi": "ミ (mi)",
@@ -33223,7 +33223,7 @@ module.exports = {
       "sino_vietnamese": "VỊ",
       "vietnamese_meaning": "Mùi vị, ý vị",
       "mnemonic_tip": "Dùng miệng (口) nếm thử ngọn cây non để cảm nhận mùi vị.",
-      "compounds": "意味 (いみ): Ý nghĩa; 趣味 (しゅみ): Sở thích",
+      "compounds": "不味い (まずい): Dở, không ngon; 味 (あじ): Vị",
       "jlpt_level": "N4"
     },
     {
@@ -33236,7 +33236,7 @@ module.exports = {
       "sino_vietnamese": "PHẨM",
       "vietnamese_meaning": "Sản phẩm, phẩm chất, hàng hóa",
       "mnemonic_tip": "Ba chiếc miệng (Khẩu 口) cùng nếm thử đánh giá phẩm chất đồ vật.",
-      "compounds": "品物 (しなもの): Hàng hóa; 作品 (さくひん): Tác phẩm; 商品 (しょうひん): Sản phẩm",
+      "compounds": "品物 (しなもの): Hàng hóa; 食料品 (しょくりょうひん): Thực phẩm, đồ ăn thức uống",
       "jlpt_level": "N4"
     },
     {
@@ -33249,12 +33249,12 @@ module.exports = {
       "sino_vietnamese": "VIÊN",
       "vietnamese_meaning": "Thành viên, nhân viên",
       "mnemonic_tip": "Mẹo nhớ: Miệng (口) của người làm việc quản lý tiền vỏ sò (貝 - bối) là nhân viên.",
-      "compounds": "会社員 (かいしゃいん): Nhân viên công ty; 銀行員 (ぎんこういん): Nhân viên ngân hàng",
+      "compounds": "社員 (しゃいん): Nhân viên; 会社員 (かいしゃいん): Nhân viên công ty; 銀行員 (ぎんこういん): Nhân viên ngân hàng",
       "jlpt_level": "N4"
     },
     {
       "id": 113,
-      "lesson_id": 4,
+      "lesson_id": 17,
       "character": "問",
       "stroke_count": "11",
       "onyomi": "モン (mon)",
@@ -33262,12 +33262,12 @@ module.exports = {
       "sino_vietnamese": "VẤN",
       "vietnamese_meaning": "Hỏi, câu hỏi",
       "mnemonic_tip": "Đứng trước cổng (門) mở miệng (口) cất tiếng hỏi thăm dò.",
-      "compounds": "問題 (もんだい): Vấn đề; 質問 (しつもん): Chất vấn, câu hỏi",
+      "compounds": "問題 (もんだい): Vấn đề, câu hỏi",
       "jlpt_level": "N4"
     },
     {
       "id": 114,
-      "lesson_id": 15,
+      "lesson_id": 14,
       "character": "図",
       "stroke_count": "7",
       "onyomi": "ズ (zu), ト (to)",
@@ -33275,12 +33275,12 @@ module.exports = {
       "sino_vietnamese": "ĐỒ",
       "vietnamese_meaning": "Bản đồ, đồ án",
       "mnemonic_tip": "Vẽ bản đồ kho báu được bao bọc cẩn thận bên trong vòng tròn kín.",
-      "compounds": "図書館 (としょかん): Thư viện; 地図 (ちず): Bản đồ",
+      "compounds": "地図 (ちず): Bản đồ; 図書館 (としょかん): Thư viện",
       "jlpt_level": "N4"
     },
     {
       "id": 115,
-      "lesson_id": 3,
+      "lesson_id": 29,
       "character": "地",
       "stroke_count": "6",
       "onyomi": "チ (chi), ジ (ji)",
@@ -33288,12 +33288,12 @@ module.exports = {
       "sino_vietnamese": "ĐỊA",
       "vietnamese_meaning": "Đất đai, mặt đất",
       "mnemonic_tip": "Mảnh đất (土) trườn dài như con rắn tạo thành địa cầu.",
-      "compounds": "地下鉄 (ちかてつ): Tàu điện ngầm; 地図 (ちず): Bản đồ",
+      "compounds": "地震 (じしん): Động đất; 地図 (ちず): Bản đồ",
       "jlpt_level": "N4"
     },
     {
       "id": 116,
-      "lesson_id": 3,
+      "lesson_id": 24,
       "character": "堂",
       "stroke_count": "11",
       "onyomi": "ドウ (dou)",
@@ -33301,12 +33301,12 @@ module.exports = {
       "sino_vietnamese": "ĐƯỜNG",
       "vietnamese_meaning": "Nhà lớn, chính đường",
       "mnemonic_tip": "Phía trên là mái nhà tranh, ở giữa là miệng khẩu 口, phía dưới là đất thổ 土. Nhà lớn trên đất.",
-      "compounds": "食堂 (しょくどう): Nhà ăn; 本堂 (ほんどう): Chính điện",
+      "compounds": "講堂 (こうどう): Giảng đường, hội trường lớn; 食堂 (しょくどう): Nhà ăn, phòng ăn",
       "jlpt_level": "N4"
     },
     {
       "id": 117,
-      "lesson_id": 13,
+      "lesson_id": 26,
       "character": "場",
       "stroke_count": "12",
       "onyomi": "ジョウ (jou), チョウ (chou)",
@@ -33314,12 +33314,12 @@ module.exports = {
       "sino_vietnamese": "TRƯỜNG",
       "vietnamese_meaning": "Nơi chốn, quảng trường",
       "mnemonic_tip": "Vùng đất (Thổ 土) có ánh mặt trời chiếu sáng chính là Nơi tụ họp.",
-      "compounds": "場所 (ばしょ): Địa điểm; 広場 (ひろば): Quảng trường",
+      "compounds": "場所 (ばしょ): Địa điểm, nơi chốn; 置き場 (おきば): Nơi để",
       "jlpt_level": "N4"
     },
     {
       "id": 118,
-      "lesson_id": 14,
+      "lesson_id": 28,
       "character": "売",
       "stroke_count": "7",
       "onyomi": "バイ (bai)",
@@ -33327,7 +33327,7 @@ module.exports = {
       "sino_vietnamese": "MẠI",
       "vietnamese_meaning": "Bán",
       "mnemonic_tip": "Sĩ tử sĩ (士) mang đồ vật đi bán lấy tiền vỏ sò.",
-      "compounds": "売る (うる): Bán; 売店 (ばいてん): Quầy bán hàng",
+      "compounds": "売れる (うれる): Bán chạy; 売る (うる): Bán",
       "jlpt_level": "N4"
     },
     {
@@ -33340,7 +33340,7 @@ module.exports = {
       "sino_vietnamese": "HẠ",
       "vietnamese_meaning": "Mùa hè",
       "mnemonic_tip": "Một người đội mũ đi chậm rãi dưới nắng hè oi bức.",
-      "compounds": "夏休み (なつやすみ): Nghỉ hè; 初夏 (しょか): Đầu hè",
+      "compounds": "夏 (なつ): Mùa hè; 夏休み (なつやすみ): Nghỉ hè, kỳ nghỉ hè",
       "jlpt_level": "N4"
     },
     {
@@ -33353,12 +33353,12 @@ module.exports = {
       "sino_vietnamese": "TỊCH",
       "vietnamese_meaning": "chiều tối, hoàng hôn",
       "mnemonic_tip": "Vầng trăng khuyết vừa ló rạng khi trời sập tối.",
-      "compounds": "夕方 (ゆうがた): Chiều tối; 夕食 (ゆうしょく): Bữa tối",
+      "compounds": "夕方 (ゆうがた): Chiều tối; 夕飯 (ゆうはん): Bữa cơm tối",
       "jlpt_level": "N4"
     },
     {
       "id": 121,
-      "lesson_id": 8,
+      "lesson_id": 21,
       "character": "多",
       "stroke_count": "6",
       "onyomi": "タ (ta)",
@@ -33366,12 +33366,12 @@ module.exports = {
       "sino_vietnamese": "ĐA",
       "vietnamese_meaning": "Nhiều",
       "mnemonic_tip": "Hai chữ tịch 夕 (buổi tối) xếp chồng lên nhau, đêm tối có Nhiều sao.",
-      "compounds": "多い (おおい): Nhiều; 多分 (たぶん): Có lẽ",
-      "jlpt_level": "N4"
+      "compounds": "多分 (たぶん): Có lẽ; 多い (おおい): Nhiều",
+      "jlpt_level": "N5"
     },
     {
       "id": 122,
-      "lesson_id": 4,
+      "lesson_id": 34,
       "character": "夜",
       "stroke_count": "8",
       "onyomi": "ヤ (ya)",
@@ -33379,7 +33379,7 @@ module.exports = {
       "sino_vietnamese": "DẠ",
       "vietnamese_meaning": "Buổi tối, ban đêm",
       "mnemonic_tip": "Người (Nhân) đứng dưới mái che ngắm trăng ban đêm.",
-      "compounds": "今夜 (こんや): Tối nay; 夜中 (よなか): Nửa đêm",
+      "compounds": "昨夜 (ゆうべ): Tối hôm qua; 今夜 (こんや): Tối nay",
       "jlpt_level": "N4"
     },
     {
@@ -33392,7 +33392,7 @@ module.exports = {
       "sino_vietnamese": "MUỘI",
       "vietnamese_meaning": "Em gái",
       "mnemonic_tip": "Người phụ nữ (Nữ 女) chưa trưởng thành (Vị 未) là Em gái nhỏ.",
-      "compounds": "妹 (いもうと): Em gái của mình; 妹さん (いもうとさん): Em gái của người khác",
+      "compounds": "妹 (いもうと): Em gái; 妹さん (いもうとさん): Em gái",
       "jlpt_level": "N4"
     },
     {
@@ -33405,12 +33405,12 @@ module.exports = {
       "sino_vietnamese": "TỶ",
       "vietnamese_meaning": "Chị gái",
       "mnemonic_tip": "Người phụ nữ (Nữ 女) đi chợ mua sắm cho thị trường (Thị 市) là Chị gái.",
-      "compounds": "姉 (あね): Chị gái của mình; お姉さん (おねえさん): Chị gái của người khác",
+      "compounds": "姉 (あね): Chị gái; お姉さん (おねえさん): Chị gái",
       "jlpt_level": "N4"
     },
     {
       "id": 125,
-      "lesson_id": 31,
+      "lesson_id": 20,
       "character": "始",
       "stroke_count": "8",
       "onyomi": "シ (shi)",
@@ -33418,12 +33418,12 @@ module.exports = {
       "sino_vietnamese": "THỦY",
       "vietnamese_meaning": "Bắt đầu, khởi đầu",
       "mnemonic_tip": "Người phụ nữ (Nữ 女) mở lời (Thai/Đài 台) bắt đầu sự sống.",
-      "compounds": "始まる (はじまる): Bắt đầu; 開始 (かいし): Khởi đầu; 始発 (しはつ): Chuyến tàu đầu",
+      "compounds": "始め (はじめ): Lúc đầu, sự bắt đầu; 始める (はじめる): Bắt đầu",
       "jlpt_level": "N4"
     },
     {
       "id": 126,
-      "lesson_id": 7,
+      "lesson_id": 19,
       "character": "字",
       "stroke_count": "6",
       "onyomi": "ジ (ji)",
@@ -33431,7 +33431,7 @@ module.exports = {
       "sino_vietnamese": "TỰ",
       "vietnamese_meaning": "Chữ viết, ký tự",
       "mnemonic_tip": "Đứa trẻ (Tử 子) dưới mái nhà (Miên 宀) tập viết Chữ.",
-      "compounds": "漢字 (かんじ): Chữ Hán; 文字 (もじ): Ký tự",
+      "compounds": "字引 (じびき): Từ điển, sách tra chữ; 漢字 (かんじ): Chữ Hán",
       "jlpt_level": "N4"
     },
     {
@@ -33444,12 +33444,12 @@ module.exports = {
       "sino_vietnamese": "AN",
       "vietnamese_meaning": "Rẻ, an tâm, yên ổn",
       "mnemonic_tip": "Người phụ nữ (Nữ 女) ở dưới mái nhà (Miên 宀) thì sẽ Yên ổn.",
-      "compounds": "安い (やすい): Rẻ; 安全 (あんぜん): An toàn",
-      "jlpt_level": "N4"
+      "compounds": "安い (やすい): Rẻ",
+      "jlpt_level": "N5"
     },
     {
       "id": 128,
-      "lesson_id": 3,
+      "lesson_id": 22,
       "character": "室",
       "stroke_count": "9",
       "onyomi": "シツ (shitsu)",
@@ -33457,12 +33457,12 @@ module.exports = {
       "sino_vietnamese": "THẤT",
       "vietnamese_meaning": "Phòng, lớp học",
       "mnemonic_tip": "Bộ miên 宀 (mái nhà) che chở cho đất đai cát bụi chí hướng 至. Căn phòng của chí hướng.",
-      "compounds": "教室 (きょうしつ): Lớp học; 和室 (わしつ): Phòng kiểu Nhật",
+      "compounds": "和室 (わしつ): Phòng kiểu Nhật; 教室 (きょうしつ): Lớp học, phòng học",
       "jlpt_level": "N4"
     },
     {
       "id": 129,
-      "lesson_id": 11,
+      "lesson_id": 37,
       "character": "家",
       "stroke_count": "10",
       "onyomi": "カ (ka), ケ (ke)",
@@ -33470,12 +33470,12 @@ module.exports = {
       "sino_vietnamese": "GIA",
       "vietnamese_meaning": "Nhà, gia đình",
       "mnemonic_tip": "Dưới mái nhà (Miên 宀) nuôi con lợn (Thỉ 豕) là tổ ấm Gia đình.",
-      "compounds": "家族 (かぞく): Gia đình; 家内 (かない): Vợ tôi",
+      "compounds": "建築家 (けんちくか): Kiến trúc sư; 小説家 (しょうせつか): Tiểu thuyết gia",
       "jlpt_level": "N4"
     },
     {
       "id": 130,
-      "lesson_id": 8,
+      "lesson_id": 9,
       "character": "少",
       "stroke_count": "4",
       "onyomi": "ショウ (shou)",
@@ -33483,12 +33483,12 @@ module.exports = {
       "sino_vietnamese": "THIỂU",
       "vietnamese_meaning": "Ít",
       "mnemonic_tip": "Chữ tiểu 小 thêm một nét phẩy chỉ việc bớt đi một Ít.",
-      "compounds": "少ない (すくない): Ít; 少し (すこし): Một chút",
-      "jlpt_level": "N4"
+      "compounds": "少し (すこし): Một chút, một ít; 少ない (すくない): Ít",
+      "jlpt_level": "N5"
     },
     {
       "id": 131,
-      "lesson_id": 3,
+      "lesson_id": 35,
       "character": "屋",
       "stroke_count": "9",
       "onyomi": "オク (oku)",
@@ -33496,12 +33496,12 @@ module.exports = {
       "sino_vietnamese": "ỐC",
       "vietnamese_meaning": "Căn nhà, hiệu buôn",
       "mnemonic_tip": "Bộ thi 尸 (xác chết/người nằm) dưới mái nhà có đất thổ 土 và miệng khẩu 口. Căn nhà kinh doanh buôn bán.",
-      "compounds": "部屋 (へや): Căn phòng; 本屋 (ほんや): Tiệm sách",
+      "compounds": "屋上 (おくじょう): Sân thượng; 電気屋 (でんきや): Cửa hàng đồ điện",
       "jlpt_level": "N4"
     },
     {
       "id": 132,
-      "lesson_id": 18,
+      "lesson_id": 36,
       "character": "工",
       "stroke_count": "3",
       "onyomi": "コウ (kou), ク (ku), グ (gu)",
@@ -33509,7 +33509,7 @@ module.exports = {
       "sino_vietnamese": "CÔNG",
       "vietnamese_meaning": "thợ, công việc",
       "mnemonic_tip": "Cây thước đo góc của người thợ mộc trong công việc.",
-      "compounds": "工場 (こうじょう): Nhà máy; 工事 (こうじ): Thi công",
+      "compounds": "工場 (こうじょう): Nhà máy; 工業 (こうぎょう): Công nghiệp",
       "jlpt_level": "N4"
     },
     {
@@ -33522,12 +33522,12 @@ module.exports = {
       "sino_vietnamese": "QUY",
       "vietnamese_meaning": "Trở về, quy tụ",
       "mnemonic_tip": "Cầm cái chổi quét dọn bàn thờ đón người Trở Về.",
-      "compounds": "帰る (かえる): Trở về; 帰国 (きこく): Về nước",
+      "compounds": "帰る (かえる): Trở về; 帰り (かえり): Chiều về, lúc trên đường về",
       "jlpt_level": "N4"
     },
     {
       "id": 134,
-      "lesson_id": 16,
+      "lesson_id": 22,
       "character": "広",
       "stroke_count": "5",
       "onyomi": "コウ (kou)",
@@ -33535,7 +33535,7 @@ module.exports = {
       "sino_vietnamese": "QUẢNG",
       "vietnamese_meaning": "Rộng rãi, quảng cáo",
       "mnemonic_tip": "Căn nhà lớn (Mái nhà 广) dựng trên khu đất rộng rãi (Tư 厶).",
-      "compounds": "広い (ひろい): Rộng; 広場 (ひろば): Quảng trường",
+      "compounds": "背広 (せびろ): Bộ áo com-lê, âu phục nam; 広い (ひろい): Rộng",
       "jlpt_level": "N4"
     },
     {
@@ -33548,12 +33548,12 @@ module.exports = {
       "sino_vietnamese": "ĐIẾM",
       "vietnamese_meaning": "cửa hàng, tiệm",
       "mnemonic_tip": "Dưới mái nhà, bói xem đất tốt để mở cửa tiệm.",
-      "compounds": "店 (みせ): Cửa hàng; 店員 (てんいん): Nhân viên bán hàng",
-      "jlpt_level": "N4"
+      "compounds": "店 (みせ): Cửa hàng, tiệm; 店員 (てんいん): Nhân viên bán hàng, nhân viên quán",
+      "jlpt_level": "N5"
     },
     {
       "id": 136,
-      "lesson_id": 13,
+      "lesson_id": 26,
       "character": "度",
       "stroke_count": "9",
       "onyomi": "ド (do), ト (to), タク (taku)",
@@ -33561,12 +33561,12 @@ module.exports = {
       "sino_vietnamese": "ĐỘ",
       "vietnamese_meaning": "Lần, mức độ, nhiệt độ",
       "mnemonic_tip": "Tay cầm thước đo đạc trong căn nhà rộng để tính toán góc độ.",
-      "compounds": "今度 (こんど): Lần tới; 温度 (おんど): Nhiệt độ",
+      "compounds": "今度 (こんど): Lần tới, lần này; 一度 (いちど): Một lần",
       "jlpt_level": "N4"
     },
     {
       "id": 137,
-      "lesson_id": 27,
+      "lesson_id": 23,
       "character": "建",
       "stroke_count": "9",
       "onyomi": "ケン (ken), コン (kon)",
@@ -33574,7 +33574,7 @@ module.exports = {
       "sino_vietnamese": "KIẾN",
       "vietnamese_meaning": "Xây dựng, dựng nên",
       "mnemonic_tip": "Cầm bút (Duật 聿) bước đi dài (Dẫn 廴) để vẽ bản thiết kế xây nhà.",
-      "compounds": "建てる (たてる): Xây dựng; 建物 (たてもの): Tòa nhà; 建設 (けんせつ): Kiến thiết, xây dựng",
+      "compounds": "建物 (たてもの): Tòa nhà; 建てる (たてる): Xây dựng",
       "jlpt_level": "N4"
     },
     {
@@ -33587,12 +33587,12 @@ module.exports = {
       "sino_vietnamese": "ĐỆ",
       "vietnamese_meaning": "Em trai",
       "mnemonic_tip": "Em trai cầm cây gỗ nhỏ quấn dây da làm cung tên bắn chim.",
-      "compounds": "兄弟 (きょうだい): Anh em; 弟子 (でし): Đệ tử",
+      "compounds": "弟 (おとうと): Em trai; 兄弟 (きょうだい): Anh chị em; 弟さん (おとうとさん): Em trai",
       "jlpt_level": "N4"
     },
     {
       "id": 139,
-      "lesson_id": 2,
+      "lesson_id": 4,
       "character": "強",
       "stroke_count": "11",
       "onyomi": "キョウ (kyou), ゴウ (gou)",
@@ -33600,7 +33600,7 @@ module.exports = {
       "sino_vietnamese": "CƯỜNG",
       "vietnamese_meaning": "Mạnh mẽ, cố chấp",
       "mnemonic_tip": "Cây cung cứng cáp và con sâu ngoan cường tạo nên sức mạnh.",
-      "compounds": "強い (つよい): Mạnh mẽ; 勉強 (べんきょう): Học tập",
+      "compounds": "勉強 (べんきょう): Học, học tập; 強い (つよい): Mạnh mẽ",
       "jlpt_level": "N4"
     },
     {
@@ -33613,12 +33613,12 @@ module.exports = {
       "sino_vietnamese": "ĐÃI",
       "vietnamese_meaning": "Chờ đợi, đối đãi",
       "mnemonic_tip": "Người đi bộ (Xước) dừng trước ngôi chùa (Tự 寺) để Chờ đợi.",
-      "compounds": "待つ (まつ): Chờ đợi; 期待 (きたい): Kỳ vọng",
+      "compounds": "待つ (まつ): Đợi, chờ đợi",
       "jlpt_level": "N4"
     },
     {
       "id": 141,
-      "lesson_id": 17,
+      "lesson_id": 50,
       "character": "心",
       "stroke_count": "4",
       "onyomi": "シン (shin)",
@@ -33626,12 +33626,12 @@ module.exports = {
       "sino_vietnamese": "TÂM",
       "vietnamese_meaning": "Trái tim, tâm trí",
       "mnemonic_tip": "Trái tim với các ngăn và những giọt máu tâm huyết bên trong.",
-      "compounds": "心 (こころ): Trái tim, tấm lòng; 安心 (あんしん): An tâm",
+      "compounds": "心から (こころから): Từ tận đáy lòng; 心 (こころ): Trái tim, tâm hồn",
       "jlpt_level": "N4"
     },
     {
       "id": 142,
-      "lesson_id": 20,
+      "lesson_id": 21,
       "character": "思",
       "stroke_count": "9",
       "onyomi": "シ (shi)",
@@ -33639,12 +33639,12 @@ module.exports = {
       "sino_vietnamese": "TƯ",
       "vietnamese_meaning": "Suy nghĩ, ý nghĩ, tư tưởng",
       "mnemonic_tip": "Dùng cái đầu suy nghĩ trên mảnh ruộng (Điền 田) bằng trái tim (Tâm 心).",
-      "compounds": "思う (おもう): Nghĩ; 意思 (いし): Ý chí",
+      "compounds": "思う (おもう): Nghĩ rằng; 思い出す (おもいだす): Nhớ ra, hồi tưởng lại",
       "jlpt_level": "N4"
     },
     {
       "id": 143,
-      "lesson_id": 14,
+      "lesson_id": 33,
       "character": "急",
       "stroke_count": "9",
       "onyomi": "キュウ (kyuu)",
@@ -33652,12 +33652,12 @@ module.exports = {
       "sino_vietnamese": "CẤP",
       "vietnamese_meaning": "Khẩn cấp, vội vã",
       "mnemonic_tip": "Khi có việc gấp trái tim (Tâm 心) co thắt vội vã bước đi.",
-      "compounds": "急ぐ (いそぐ): Vội vã; 急行 (きゅうこう): Tàu nhanh",
+      "compounds": "急用 (きゅうよう): Việc gấp; 急ぐ (いそぐ): Vội, vội vã, gấp rút",
       "jlpt_level": "N4"
     },
     {
       "id": 144,
-      "lesson_id": 8,
+      "lesson_id": 26,
       "character": "悪",
       "stroke_count": "11",
       "onyomi": "アク (aku), オ (o)",
@@ -33665,12 +33665,12 @@ module.exports = {
       "sino_vietnamese": "ÁC",
       "vietnamese_meaning": "Xấu, ác, độc",
       "mnemonic_tip": "Tâm (心) tà ác phát sinh từ suy nghĩ méo mó.",
-      "compounds": "悪い (わるい): Xấu, tồi; 悪人 (あくにん): Kẻ ác",
+      "compounds": "気分が悪い (きぶんがわるい): Tâm trạng xấu, mệt trong người; 悪い (わるい): Xấu, tồi",
       "jlpt_level": "N4"
     },
     {
       "id": 145,
-      "lesson_id": 21,
+      "lesson_id": 48,
       "character": "意",
       "stroke_count": "13",
       "onyomi": "イ (i)",
@@ -33678,12 +33678,12 @@ module.exports = {
       "sino_vietnamese": "Ý",
       "vietnamese_meaning": "Ý kiến, ý nghĩa, ý chí",
       "mnemonic_tip": "Ý kiến phát ra từ âm thanh (Âm 音) của trái tim (Tâm 心) suy nghĩ.",
-      "compounds": "意見 (いけん): Ý kiến; 意味 (いみ): Ý nghĩa",
+      "compounds": "意見 (いけん): Ý kiến; 用意 (ようい): Chuẩn bị sẵn",
       "jlpt_level": "N4"
     },
     {
       "id": 146,
-      "lesson_id": 7,
+      "lesson_id": 2,
       "character": "手",
       "stroke_count": "4",
       "onyomi": "シュ (shu), ズ (zu)",
@@ -33691,12 +33691,12 @@ module.exports = {
       "sino_vietnamese": "THỦ",
       "vietnamese_meaning": "Bàn tay, thủ lĩnh",
       "mnemonic_tip": "Hình vẽ năm ngón tay xòe ra của một Bàn tay.",
-      "compounds": "手紙 (てがみ): Thư; 歌手 (かしゅ): Ca sĩ",
-      "jlpt_level": "N4"
+      "compounds": "手帳 (てちょう): Sổ tay; 手 (て): Tay, bàn tay",
+      "jlpt_level": "N5"
     },
     {
       "id": 147,
-      "lesson_id": 9,
+      "lesson_id": 49,
       "character": "持",
       "stroke_count": "9",
       "onyomi": "ジ (ji)",
@@ -33704,12 +33704,12 @@ module.exports = {
       "sino_vietnamese": "TRÌ",
       "vietnamese_meaning": "Cầm, nắm, mang theo",
       "mnemonic_tip": "Tay (扌) cầm lễ vật dâng lên cổng chùa (寺).",
-      "compounds": "持つ (もつ): Cầm, mang; 気持ち (きもち): Tâm trạng",
+      "compounds": "お持ちです (おもちです): Có; 気持ち (きもち): Cảm giác, tâm trạng",
       "jlpt_level": "N4"
     },
     {
       "id": 148,
-      "lesson_id": 7,
+      "lesson_id": 42,
       "character": "教",
       "stroke_count": "11",
       "onyomi": "キョウ (kyou)",
@@ -33717,12 +33717,12 @@ module.exports = {
       "sino_vietnamese": "GIÁO",
       "vietnamese_meaning": "Dạy học, tôn giáo",
       "mnemonic_tip": "Đứa trẻ (Tử 子) hiếu thảo chịu sự đánh roi roi dạy bảo.",
-      "compounds": "教える (おしえる): Dạy; 教室 (きょうしつ): Lớp học",
+      "compounds": "教育 (きょういく): Giáo dục; 教会 (きょうかい): Nhà thờ",
       "jlpt_level": "N4"
     },
     {
       "id": 149,
-      "lesson_id": 7,
+      "lesson_id": 41,
       "character": "文",
       "stroke_count": "4",
       "onyomi": "ブン (bun), モン (mon)",
@@ -33730,12 +33730,12 @@ module.exports = {
       "sino_vietnamese": "VĂN",
       "vietnamese_meaning": "Văn chương, câu văn",
       "mnemonic_tip": "Hình xăm trên ngực người vẽ thành nét hoa văn chữ viết.",
-      "compounds": "作文 (さくぶん): Bài tập làm văn; 文学 (ぶんがく): Văn học",
+      "compounds": "文法 (ぶんぽう): Ngữ pháp; 文化 (ぶんか): Văn hóa",
       "jlpt_level": "N4"
     },
     {
       "id": 150,
-      "lesson_id": 9,
+      "lesson_id": 37,
       "character": "料",
       "stroke_count": "10",
       "onyomi": "リョウ (ryou)",
@@ -33743,7 +33743,7 @@ module.exports = {
       "sino_vietnamese": "LIỆU",
       "vietnamese_meaning": "Nguyên liệu, chi phí",
       "mnemonic_tip": "Đong đấu gạo (Mễ 米) cạnh cái đấu (Đấu 斗) để tính nguyên Liệu.",
-      "compounds": "料理 (りょうり): Món ăn; 料金 (りょうきん): Phí",
+      "compounds": "原料 (げんりょう): Nguyên liệu; 食料品 (しょくりょうひん): Thực phẩm, đồ ăn thức uống",
       "jlpt_level": "N4"
     },
     {
@@ -33756,12 +33756,12 @@ module.exports = {
       "sino_vietnamese": "TÂN",
       "vietnamese_meaning": "mới",
       "mnemonic_tip": "Cầm rìu (斤) đứng cạnh cây (木) để đốn củi mới.",
-      "compounds": "新しい (あたらしい): Mới; 新聞 (しんぶん): Báo chí",
-      "jlpt_level": "N4"
+      "compounds": "新聞 (しんぶん): Báo; 新聞社 (しんぶんしゃ): Tòa soạn báo, công ty báo chí",
+      "jlpt_level": "N5"
     },
     {
       "id": 152,
-      "lesson_id": 1,
+      "lesson_id": 32,
       "character": "方",
       "stroke_count": "4",
       "onyomi": "ホウ (hou)",
@@ -33769,12 +33769,12 @@ module.exports = {
       "sino_vietnamese": "PHƯƠNG",
       "vietnamese_meaning": "Phương hướng, cách thức",
       "mnemonic_tip": "Mũi tên có cờ bay chỉ về bốn phương tám hướng.",
-      "compounds": "方 (かた): Vị, ngài, cách; 読み方 (よみかた): Cách đọc",
+      "compounds": "夕方 (ゆうがた): Chiều tối; 読み方 (よみかた): Cách đọc",
       "jlpt_level": "N4"
     },
     {
       "id": 153,
-      "lesson_id": 13,
+      "lesson_id": 35,
       "character": "旅",
       "stroke_count": "10",
       "onyomi": "リョ (ryo)",
@@ -33782,12 +33782,12 @@ module.exports = {
       "sino_vietnamese": "LỮ",
       "vietnamese_meaning": "Du lịch, lữ khách",
       "mnemonic_tip": "Nhiều người đứng dưới lá cờ đi du lịch xa nhà.",
-      "compounds": "旅行 (りょこう): Du lịch; 旅人 (たびびと): Khách lữ hành",
+      "compounds": "旅行社 (りょこうしゃ): Công ty du lịch; 旅行 (りょこう): Du lịch, chuyến đi",
       "jlpt_level": "N4"
     },
     {
       "id": 154,
-      "lesson_id": 11,
+      "lesson_id": 15,
       "character": "族",
       "stroke_count": "11",
       "onyomi": "ゾク (zoku)",
@@ -33795,12 +33795,12 @@ module.exports = {
       "sino_vietnamese": "TỘC",
       "vietnamese_meaning": "Gia tộc, chủng tộc",
       "mnemonic_tip": "Cả bộ tộc tụ họp dưới cờ lệnh dùng cung tên săn bắn giữ đất đai.",
-      "compounds": "家族 (かぞく): Gia đình; 民族 (みんぞく): Dân tộc",
+      "compounds": "ご家族 (ごかぞく): Gia đình; 家族 (かぞく): Gia đình",
       "jlpt_level": "N4"
     },
     {
       "id": 155,
-      "lesson_id": 9,
+      "lesson_id": 39,
       "character": "早",
       "stroke_count": "6",
       "onyomi": "ソウ (sou), サッ (sa')",
@@ -33808,12 +33808,12 @@ module.exports = {
       "sino_vietnamese": "TẢO",
       "vietnamese_meaning": "Sớm, nhanh chóng",
       "mnemonic_tip": "Mặt trời (日) mọc trên ngọn cỏ từ sáng sớm tinh mơ.",
-      "compounds": "早い (はやい): Sớm, nhanh; 早起き (はやおき): Dậy sớm",
+      "compounds": "早退 (そうたい): Về sớm; 早い (はやい): Nhanh, sớm",
       "jlpt_level": "N4"
     },
     {
       "id": 156,
-      "lesson_id": 16,
+      "lesson_id": 33,
       "character": "明",
       "stroke_count": "8",
       "onyomi": "メイ (mei), ミョウ (myou), ミン (min)",
@@ -33821,12 +33821,12 @@ module.exports = {
       "sino_vietnamese": "MINH",
       "vietnamese_meaning": "Sáng sủa, thông minh",
       "mnemonic_tip": "Mặt trời (Nhật 日) cùng mặt trăng (Nguyệt 月) cùng tỏa sáng rực rỡ.",
-      "compounds": "明るい (あかるい): Sáng sủa; 明日 (あした): Ngày mai",
+      "compounds": "明日 (あす): Ngày mai; 説明 (せつめい): Giải thích, thuyết minh",
       "jlpt_level": "N4"
     },
     {
       "id": 157,
-      "lesson_id": 6,
+      "lesson_id": 31,
       "character": "映",
       "stroke_count": "9",
       "onyomi": "エイ (ei)",
@@ -33834,7 +33834,7 @@ module.exports = {
       "sino_vietnamese": "ÁNH",
       "vietnamese_meaning": "phản chiếu, chiếu bóng",
       "mnemonic_tip": "Ánh mặt trời (日) phản chiếu hình ảnh người ở trung tâm.",
-      "compounds": "映画 (えいが): Phim ảnh; 映画館 (えいがかん): Rạp chiếu phim",
+      "compounds": "映画館 (えいがかん): Rạp chiếu phim; 映画 (えいが): Phim, điện ảnh",
       "jlpt_level": "N4"
     },
     {
@@ -33847,12 +33847,12 @@ module.exports = {
       "sino_vietnamese": "XUÂN",
       "vietnamese_meaning": "Mùa xuân",
       "mnemonic_tip": "Mặt trời (Nhật 日) chiếu sáng ba người cùng trồng cây cỏ trong mùa Xuân.",
-      "compounds": "春休み (はるやすみ): Nghỉ xuân; 青春 (せいしゅん): Thanh xuân",
+      "compounds": "春 (はる): Mùa xuân; 春休み (はるやすみ): Nghỉ xuân",
       "jlpt_level": "N4"
     },
     {
       "id": 159,
-      "lesson_id": 4,
+      "lesson_id": 27,
       "character": "昼",
       "stroke_count": "9",
       "onyomi": "チュウ (chuu)",
@@ -33860,12 +33860,12 @@ module.exports = {
       "sino_vietnamese": "TRÚ",
       "vietnamese_meaning": "Buổi trưa",
       "mnemonic_tip": "Dưới mái nhà (Xích) mặt trời (Nhật 日) chiếu rọi giữa trưa.",
-      "compounds": "昼休み (ひるやすみ): Nghỉ trưa; 昼ご飯 (ひるごはん): Cơm trưa",
+      "compounds": "昼間 (ひるま): Ban ngày; 昼 (ひる): Buổi trưa, ban ngày",
       "jlpt_level": "N4"
     },
     {
       "id": 160,
-      "lesson_id": 26,
+      "lesson_id": 4,
       "character": "曜",
       "stroke_count": "18",
       "onyomi": "ヨウ (you)",
@@ -33873,12 +33873,12 @@ module.exports = {
       "sino_vietnamese": "DIỆU",
       "vietnamese_meaning": "Thứ trong tuần, ánh sáng",
       "mnemonic_tip": "Mặt trời (Nhật 日) soi rọi đôi cánh lông vũ (Vũ 羽) của chim chuy (隹) theo từng thứ trong tuần.",
-      "compounds": "曜日 (ようび): Thứ trong tuần; 月曜日 (げつようび): Thứ hai",
+      "compounds": "月曜日 (げつようび): Thứ hai; 火曜日 (かようび): Thứ ba; 水曜日 (すいようび): Thứ tư",
       "jlpt_level": "N4"
     },
     {
       "id": 161,
-      "lesson_id": 9,
+      "lesson_id": 41,
       "character": "有",
       "stroke_count": "6",
       "onyomi": "ユウ (yuu), ウ (u)",
@@ -33886,12 +33886,12 @@ module.exports = {
       "sino_vietnamese": "HỮU",
       "vietnamese_meaning": "Có, sở hữu",
       "mnemonic_tip": "Tay (Hựu) cầm miếng thịt (Nguyệt 月) là sở Hữu.",
-      "compounds": "有名 (ゆうめい): Nổi tiếng; 有料 (ゆうりょう): Có phí",
+      "compounds": "有る (ある): Có; 有名 (ゆうめい): Nổi tiếng",
       "jlpt_level": "N4"
     },
     {
       "id": 162,
-      "lesson_id": 15,
+      "lesson_id": 39,
       "character": "服",
       "stroke_count": "8",
       "onyomi": "フク (fuku)",
@@ -33899,12 +33899,12 @@ module.exports = {
       "sino_vietnamese": "PHỤC",
       "vietnamese_meaning": "Quần áo, y phục",
       "mnemonic_tip": "Người quỳ gối tay dâng trang Phục lên cho quan triều đình.",
-      "compounds": "衣服 (いふく): Y phục; 洋服 (ようふく): Quần áo tây",
+      "compounds": "洋服 (ようふく): Quần áo kiểu phương Tây; 服 (ふく): Quần áo",
       "jlpt_level": "N4"
     },
     {
       "id": 163,
-      "lesson_id": 4,
+      "lesson_id": 6,
       "character": "朝",
       "stroke_count": "12",
       "onyomi": "チョウ (chou)",
@@ -33912,12 +33912,12 @@ module.exports = {
       "sino_vietnamese": "TRIỀU",
       "vietnamese_meaning": "Buổi sáng, triều đại",
       "mnemonic_tip": "Thập (十) mặt trăng (Nguyệt 月) mọc trên cỏ buổi sáng.",
-      "compounds": "毎朝 (まいあさ): Mỗi sáng; 朝ご飯 (あさごはん): Cơm sáng",
+      "compounds": "朝ごはん (あさごはん): Cơm sáng; 朝 (あさ): Buổi sáng",
       "jlpt_level": "N4"
     },
     {
       "id": 164,
-      "lesson_id": 31,
+      "lesson_id": 30,
       "character": "業",
       "stroke_count": "13",
       "onyomi": "ギョウ (gyou), ゴウ (gou)",
@@ -33925,12 +33925,12 @@ module.exports = {
       "sino_vietnamese": "NGHIỆP",
       "vietnamese_meaning": "Công việc, nghề nghiệp",
       "mnemonic_tip": "Giàn treo chuông gỗ nhiều tầng trang trọng làm nghề sự nghiệp cả đời.",
-      "compounds": "授業 (じゅぎょう): Tiết học; 産業 (さんぎょう): Ngành công nghiệp; 職業 (しょくぎょう): Nghề nghiệp",
+      "compounds": "授業 (じゅぎょう): Tiết học; 残業 (ざんぎょう): Làm thêm giờ, tăng ca",
       "jlpt_level": "N4"
     },
     {
       "id": 165,
-      "lesson_id": 9,
+      "lesson_id": 41,
       "character": "楽",
       "stroke_count": "13",
       "onyomi": "ガク (gaku), ラク (raku), ゴウ (gou)",
@@ -33938,12 +33938,12 @@ module.exports = {
       "sino_vietnamese": "LẠC, NHẠC",
       "vietnamese_meaning": "Vui vẻ, âm nhạc",
       "mnemonic_tip": "Nhạc cụ làm bằng gỗ (木) gảy ra tiếng tơ nghe Vui vẻ.",
-      "compounds": "音楽 (おんがく): Âm nhạc; 楽しい (たのしい): Vui vẻ",
+      "compounds": "楽しく (たのしく): Vui vẻ; 楽 (らく): Nhàn nhã, dễ chịu",
       "jlpt_level": "N4"
     },
     {
       "id": 166,
-      "lesson_id": 9,
+      "lesson_id": 18,
       "character": "歌",
       "stroke_count": "14",
       "onyomi": "カ (ka)",
@@ -33951,12 +33951,12 @@ module.exports = {
       "sino_vietnamese": "CA",
       "vietnamese_meaning": "Hát, bài hát",
       "mnemonic_tip": "Hai chữ khả 可 đứng cạnh bộ khiếm 欠 (há miệng to để Hát ca).",
-      "compounds": "歌 (うた): Bài hát; 歌手 (かしゅ): Ca sĩ",
+      "compounds": "歌う (うたう): Hát; 歌 (うた): Bài hát",
       "jlpt_level": "N4"
     },
     {
       "id": 167,
-      "lesson_id": 14,
+      "lesson_id": 45,
       "character": "止",
       "stroke_count": "4",
       "onyomi": "シ (shi)",
@@ -33964,7 +33964,7 @@ module.exports = {
       "sino_vietnamese": "CHỈ",
       "vietnamese_meaning": "Dừng lại, đình chỉ",
       "mnemonic_tip": "Hình vẽ bàn chân đặt trên vạch giới hạn Dừng lại.",
-      "compounds": "止める (とめる): Dừng lại; 中止 (ちゅうし): Đình chỉ",
+      "compounds": "中止 (ちゅうし): Hủy bỏ, dừng lại; 止む (やむ): Tạnh, ngớt",
       "jlpt_level": "N4"
     },
     {
@@ -33977,7 +33977,7 @@ module.exports = {
       "sino_vietnamese": "CHÍNH",
       "vietnamese_meaning": "đúng đắn, chính xác",
       "mnemonic_tip": "Dừng lại (止) trước lằn ranh giới hạn (一) là hành vi đúng đắn.",
-      "compounds": "正しい (ただしい): Đúng đắn; 正月 (しょうがつ): Tết nguyên đán",
+      "compounds": "お正月 (おしょうがつ): Tết; 正しい (ただしい): Đúng đắn",
       "jlpt_level": "N4"
     },
     {
@@ -33990,7 +33990,7 @@ module.exports = {
       "sino_vietnamese": "BỘ",
       "vietnamese_meaning": "Đi bộ, bước chân",
       "mnemonic_tip": "Dừng lại (Chỉ 止) và bước đi từng bước ít (Thiểu 少) là Đi bộ.",
-      "compounds": "歩く (あるく): Đi bộ; 散歩 (さんぽ): Đi dạo",
+      "compounds": "散歩 (さんぽ): Đi dạo; 歩いて (あるいて): Đi bộ",
       "jlpt_level": "N4"
     },
     {
@@ -34003,12 +34003,12 @@ module.exports = {
       "sino_vietnamese": "TỬ",
       "vietnamese_meaning": "Chết, qua đời",
       "mnemonic_tip": "Xương tàn mục nát (Đãi 歹) bên cạnh bia mộ người ngồi quỳ (Chủy 匕).",
-      "compounds": "死ぬ (しぬ): Chết; 必死 (ひっし): Quyết tử, liều mạng; 死者 (ししゃ): Người chết",
+      "compounds": "死ぬ (しぬ): Chết; 死者 (ししゃ): Người chết",
       "jlpt_level": "N4"
     },
     {
       "id": 171,
-      "lesson_id": 11,
+      "lesson_id": 46,
       "character": "注",
       "stroke_count": "8",
       "onyomi": "チュウ (chuu)",
@@ -34016,12 +34016,12 @@ module.exports = {
       "sino_vietnamese": "CHÚ",
       "vietnamese_meaning": "Rót, chú ý, tập trung",
       "mnemonic_tip": "Rót nước (氵) vào chiếc đèn để giữ ngọn lửa cháy liên tục.",
-      "compounds": "注意 (ちゅうい): Chú ý; 注文 (ちゅうもん): Gọi món",
+      "compounds": "注射 (ちゅうしゃ): Tiêm thuốc; 注意 (ちゅうい): Chú ý",
       "jlpt_level": "N4"
     },
     {
       "id": 172,
-      "lesson_id": 39,
+      "lesson_id": 44,
       "character": "洋",
       "stroke_count": "9",
       "onyomi": "ヨウ (you)",
@@ -34029,12 +34029,12 @@ module.exports = {
       "sino_vietnamese": "DƯƠNG",
       "vietnamese_meaning": "Đại dương, phương Tây",
       "mnemonic_tip": "Nước (氵) biển rộng lớn mênh mông như đàn cừu (羊) chạy dài.",
-      "compounds": "西洋 (せいよう): Phương Tây; 洋服 (ようふく): Quần áo kiểu Tây",
+      "compounds": "洋食 (ようしょく): Món ăn Tây; 洋服 (ようふく): Quần áo kiểu phương Tây",
       "jlpt_level": "N4"
     },
     {
       "id": 173,
-      "lesson_id": 8,
+      "lesson_id": 35,
       "character": "海",
       "stroke_count": "9",
       "onyomi": "カイ (kai)",
@@ -34042,7 +34042,7 @@ module.exports = {
       "sino_vietnamese": "HẢI",
       "vietnamese_meaning": "Biển, đại dương",
       "mnemonic_tip": "Nước (氵) biển bao la nuôi dưỡng mọi người như tấm lòng người mẹ (母).",
-      "compounds": "海 (うみ): Biển; 海外 (かいがい): Nước ngoài",
+      "compounds": "海外 (かいがい): Nước ngoài, hải ngoại; 海 (うみ): Biển",
       "jlpt_level": "N4"
     },
     {
@@ -34055,7 +34055,7 @@ module.exports = {
       "sino_vietnamese": "HÁN",
       "vietnamese_meaning": "Hán, chữ Hán",
       "mnemonic_tip": "Dòng nước sông Hán (氵) nơi các anh hùng thời Hán tụ hội.",
-      "compounds": "漢字 (かんじ): Chữ Hán; 漢方薬 (かんぽうやく): Thuốc bắc",
+      "compounds": "漢字 (かんじ): Chữ Hán",
       "jlpt_level": "N4"
     },
     {
@@ -34068,12 +34068,12 @@ module.exports = {
       "sino_vietnamese": "NGƯU",
       "vietnamese_meaning": "Con bò",
       "mnemonic_tip": "Hình vẽ con bò với cặp sừng nhọn và chiếc đuôi dài.",
-      "compounds": "牛肉 (ぎゅうにく): Thịt bò; 牛乳 (ぎゅうにゅう): Sữa bò",
+      "compounds": "牛乳 (ぎゅうにゅう): Sữa bò; 牛肉 (ぎゅうにく): Thịt bò",
       "jlpt_level": "N4"
     },
     {
       "id": 176,
-      "lesson_id": 6,
+      "lesson_id": 29,
       "character": "物",
       "stroke_count": "8",
       "onyomi": "ブツ (butsu), モツ (motsu)",
@@ -34081,12 +34081,12 @@ module.exports = {
       "sino_vietnamese": "VẬT",
       "vietnamese_meaning": "Đồ vật, sự vật",
       "mnemonic_tip": "Con bò (Ngưu 牛) đứng cạnh bộ vật 勿 chỉ muôn loài vạn vật.",
-      "compounds": "買い物 (かいもの): Mua sắm; 荷物 (にもつ): Hành lý",
+      "compounds": "忘れ物 (わすれもの): Vật để quên, đồ bỏ quên; 品物 (しなもの): Hàng hóa",
       "jlpt_level": "N4"
     },
     {
       "id": 177,
-      "lesson_id": 9,
+      "lesson_id": 36,
       "character": "特",
       "stroke_count": "10",
       "onyomi": "トク (toku)",
@@ -34094,7 +34094,7 @@ module.exports = {
       "sino_vietnamese": "ĐẶC",
       "vietnamese_meaning": "Đặc biệt",
       "mnemonic_tip": "Con trâu (Ngưu 牛) đứng đợi ở cửa chùa (Tự 寺) rất Đặc biệt.",
-      "compounds": "特別 (とくべつ): Đặc biệt; 特急 (とっきゅう): Tàu tốc hành",
+      "compounds": "特別 (とくべつ): Đặc biệt; 特急 (とっきゅう): Tàu tốc hành đặc biệt",
       "jlpt_level": "N4"
     },
     {
@@ -34107,12 +34107,12 @@ module.exports = {
       "sino_vietnamese": "KHUYỂN",
       "vietnamese_meaning": "Con chó",
       "mnemonic_tip": "Chữ Đại 大 thêm một nét phẩy chỉ con chó có chiếc đuôi dài vẫy vẫy.",
-      "compounds": "犬 (いぬ): Con chó; 猟犬 (りょうけん): Chó săn",
+      "compounds": "犬 (いぬ): Con chó",
       "jlpt_level": "N4"
     },
     {
       "id": 179,
-      "lesson_id": 9,
+      "lesson_id": 44,
       "character": "理",
       "stroke_count": "11",
       "onyomi": "リ (ri)",
@@ -34120,12 +34120,12 @@ module.exports = {
       "sino_vietnamese": "LÝ",
       "vietnamese_meaning": "Lý do, vật lý, quản lý",
       "mnemonic_tip": "Vua (Vương 王) ngắm ngọc trong làng (Lý 里) hiểu ra Chân lý.",
-      "compounds": "料理 (りょうり): Nấu ăn; 理由 (りゆう): Lý do",
+      "compounds": "理由 (りゆう): Lý do; 料理 (りょうり): Món ăn, nấu ăn",
       "jlpt_level": "N4"
     },
     {
       "id": 180,
-      "lesson_id": 15,
+      "lesson_id": 45,
       "character": "用",
       "stroke_count": "5",
       "onyomi": "ヨウ (you)",
@@ -34133,12 +34133,12 @@ module.exports = {
       "sino_vietnamese": "DỤNG",
       "vietnamese_meaning": "Sử dụng, công dụng",
       "mnemonic_tip": "Hình vẽ cái gióng đúc chuông đồng sử dụng trong các dịp lễ hội.",
-      "compounds": "用意 (ようい): Chuẩn bị; 使用 (しよう): Sử dụng",
+      "compounds": "用意 (ようい): Chuẩn bị sẵn; 急用 (きゅうよう): Việc gấp",
       "jlpt_level": "N4"
     },
     {
       "id": 181,
-      "lesson_id": 2,
+      "lesson_id": 25,
       "character": "田",
       "stroke_count": "5",
       "onyomi": "デン (den)",
@@ -34146,12 +34146,12 @@ module.exports = {
       "sino_vietnamese": "ĐIỀN",
       "vietnamese_meaning": "ruộng lúa",
       "mnemonic_tip": "Mảnh đất vuông vức chia làm 4 bờ ruộng lúa nước.",
-      "compounds": "田んぼ (たんぼ): Ruộng lúa; 田舎 (いなか): Vùng quê",
+      "compounds": "田舎 (いなか): Quê hương, nông thôn, quê nhà",
       "jlpt_level": "N4"
     },
     {
       "id": 182,
-      "lesson_id": 13,
+      "lesson_id": 41,
       "character": "町",
       "stroke_count": "7",
       "onyomi": "チョウ (chou)",
@@ -34159,12 +34159,12 @@ module.exports = {
       "sino_vietnamese": "ĐINH",
       "vietnamese_meaning": "Thị trấn, khu phố",
       "mnemonic_tip": "Khu đất ruộng (Điền 田) đứng cạnh chữ đinh (丁) tạo thành thị trấn nhỏ.",
-      "compounds": "町民 (ちょうみん): Người dân thị trấn; 下町 (したまち): Khu phố cổ",
+      "compounds": "～町 (～ちょう): ~ khu phố, ~ phường; 町民 (ちょうみん): Người dân thị trấn",
       "jlpt_level": "N4"
     },
     {
       "id": 183,
-      "lesson_id": 6,
+      "lesson_id": 31,
       "character": "画",
       "stroke_count": "8",
       "onyomi": "ガ (ga), カク (kaku), エ (e), カイ (kai)",
@@ -34172,12 +34172,12 @@ module.exports = {
       "sino_vietnamese": "HỌA",
       "vietnamese_meaning": "bức tranh, kế hoạch",
       "mnemonic_tip": "Bàn tay cầm bút kẻ khung vẽ ranh giới cho các thửa ruộng.",
-      "compounds": "映画 (えいが): Phim ảnh; 計画 (けいかく): Kế hoạch",
+      "compounds": "映画館 (えいがかん): Rạp chiếu phim; 映画 (えいが): Phim, điện ảnh",
       "jlpt_level": "N4"
     },
     {
       "id": 184,
-      "lesson_id": 12,
+      "lesson_id": 49,
       "character": "界",
       "stroke_count": "9",
       "onyomi": "カイ (kai)",
@@ -34185,7 +34185,7 @@ module.exports = {
       "sino_vietnamese": "GIỚI",
       "vietnamese_meaning": "Thế giới, giới hạn",
       "mnemonic_tip": "Ranh giới các thửa ruộng (田) được phân chia bằng chiếc cọc (介).",
-      "compounds": "世界 (せかい): Thế giới; 業界 (ぎょうかい): Giới kinh doanh",
+      "compounds": "世界的に (せかいてきに): Mang tính toàn cầu, đẳng cấp thế giới; 世界中 (せかいじゅう): Khắp thế giới",
       "jlpt_level": "N4"
     },
     {
@@ -34198,12 +34198,12 @@ module.exports = {
       "sino_vietnamese": "BỆNH",
       "vietnamese_meaning": "Bệnh tật, ốm đau",
       "mnemonic_tip": "Người nằm trên giường trong nhà có bộ nạch chỉ Bệnh tật ốm đau.",
-      "compounds": "病院 (びょういん): Bệnh viện; 病気 (びょうき): Bệnh tật",
+      "compounds": "病気 (びょうき): Bệnh; 病院 (びょういん): Bệnh viện",
       "jlpt_level": "N4"
     },
     {
       "id": 186,
-      "lesson_id": 5,
+      "lesson_id": 47,
       "character": "発",
       "stroke_count": "9",
       "onyomi": "ハツ (hatsu), ホツ (hotsu)",
@@ -34211,12 +34211,12 @@ module.exports = {
       "sino_vietnamese": "PHÁT",
       "vietnamese_meaning": "Xuất phát, phát minh",
       "mnemonic_tip": "Đôi chân mở bước đạp bung chiếc cung tên để bắn đi.",
-      "compounds": "出発 (しゅっぱつ): Xuất phát; 発見 (はっけん): Phát hiện",
+      "compounds": "発表 (はっぴょう): Phát biểu, công bố; 発音 (はつおん): Phát âm",
       "jlpt_level": "N4"
     },
     {
       "id": 187,
-      "lesson_id": 17,
+      "lesson_id": 16,
       "character": "目",
       "stroke_count": "5",
       "onyomi": "モク (moku), ボク (boku)",
@@ -34224,12 +34224,12 @@ module.exports = {
       "sino_vietnamese": "MỤC",
       "vietnamese_meaning": "Mắt, hạng mục",
       "mnemonic_tip": "Hình vẽ con Mắt của con người xoay dọc lại.",
-      "compounds": "目薬 (めぐすり): Thuốc nhỏ mắt; 目的 (もくてき): Mục đích",
-      "jlpt_level": "N4"
+      "compounds": "目 (め): Mắt; ～段目 (～だんめ): Tầng thứ mấy",
+      "jlpt_level": "N5"
     },
     {
       "id": 188,
-      "lesson_id": 2,
+      "lesson_id": 6,
       "character": "真",
       "stroke_count": "10",
       "onyomi": "シン (shin)",
@@ -34237,12 +34237,12 @@ module.exports = {
       "sino_vietnamese": "CHÂN",
       "vietnamese_meaning": "Thật, chân thật",
       "mnemonic_tip": "Dưới chiếc nón, đôi mắt nhìn thẳng vào sự thật ngay ngắn.",
-      "compounds": "写真 (しゃしん): Bức ảnh; 真ん中 (まんなか): Ở chính giữa",
+      "compounds": "写真 (しゃしん): Ảnh, bức ảnh",
       "jlpt_level": "N4"
     },
     {
       "id": 189,
-      "lesson_id": 15,
+      "lesson_id": 25,
       "character": "着",
       "stroke_count": "12",
       "onyomi": "チャク (chaku), ジャク (jaku)",
@@ -34250,12 +34250,12 @@ module.exports = {
       "sino_vietnamese": "TRƯỚC",
       "vietnamese_meaning": "Mặc quần áo, đến nơi",
       "mnemonic_tip": "Dưới mắt ngắm nghía con dê lông trắng để Mặc áo ấm.",
-      "compounds": "着る (きる): Mặc; 到着 (とうちゃく): Đến nơi",
+      "compounds": "着く (つく): Đến; 上着 (うわぎ): Áo khoác",
       "jlpt_level": "N4"
     },
     {
       "id": 190,
-      "lesson_id": 15,
+      "lesson_id": 46,
       "character": "知",
       "stroke_count": "8",
       "onyomi": "チ (chi)",
@@ -34263,12 +34263,12 @@ module.exports = {
       "sino_vietnamese": "TRI",
       "vietnamese_meaning": "Biết, tri thức",
       "mnemonic_tip": "Lời nói thẳng thắn như mũi tên bắn trúng miệng là người hiểu Biết.",
-      "compounds": "知る (しる): Biết; 知人 (ちじん): Người quen",
+      "compounds": "知識 (ちしき): Kiến thức; 知らせる (しらせる): Thông báo",
       "jlpt_level": "N4"
     },
     {
       "id": 191,
-      "lesson_id": 1,
+      "lesson_id": 38,
       "character": "研",
       "stroke_count": "9",
       "onyomi": "ケン (ken)",
@@ -34276,7 +34276,7 @@ module.exports = {
       "sino_vietnamese": "NGHIÊN",
       "vietnamese_meaning": "Mài, nghiên cứu",
       "mnemonic_tip": "Dùng đá mài (石) cà đi cà lại 2 cái cọc để nghiên cứu mài dũa.",
-      "compounds": "研究 (けんきゅう): Nghiên cứu; 研修 (けんしゅう): Tu nghiệp",
+      "compounds": "研究室 (けんきゅうしつ): Phòng nghiên cứu; 研究 (けんきゅう): Nghiên cứu",
       "jlpt_level": "N4"
     },
     {
@@ -34289,8 +34289,8 @@ module.exports = {
       "sino_vietnamese": "XÃ",
       "vietnamese_meaning": "Đền thờ, xã hội, công ty",
       "mnemonic_tip": "Mẹo nhớ: Bộ thị (礻- thần linh) đứng cạnh bộ thổ (土 - đất đai) chỉ đền thờ đất đai công xã.",
-      "compounds": "会社 (かいしゃ): Công ty; 社長 (しゃちょう): Giám đốc",
-      "jlpt_level": "N4"
+      "compounds": "社員 (しゃいん): Nhân viên; 会社員 (かいしゃいん): Nhân viên công ty",
+      "jlpt_level": "N5"
     },
     {
       "id": 193,
@@ -34302,7 +34302,7 @@ module.exports = {
       "sino_vietnamese": "TƯ",
       "vietnamese_meaning": "Tôi, riêng tư",
       "mnemonic_tip": "Mẹo nhớ: Bên trái là cây lúa (禾), bên phải là bộ khư (厶 - riêng tư). Lúa của riêng tôi.",
-      "compounds": "私 (わたし): Tôi; 私立 (しりつ): Tư lập",
+      "compounds": "私 (わたし): Tôi; 私たち (わたしたち): Chúng tôi, chúng ta",
       "jlpt_level": "N4"
     },
     {
@@ -34315,12 +34315,12 @@ module.exports = {
       "sino_vietnamese": "THU",
       "vietnamese_meaning": "Mùa thu",
       "mnemonic_tip": "Lúa mì (Hòa 禾) chín vàng bên cạnh đống lửa (Hỏa 火) sưởi ấm mùa Thu.",
-      "compounds": "秋分 (しゅうぶん): Thu phân; 晩秋 (ばんしゅう): Cuối thu",
+      "compounds": "秋 (あき): Mùa thu; 秋分 (しゅうぶん): Thu phân",
       "jlpt_level": "N4"
     },
     {
       "id": 195,
-      "lesson_id": 1,
+      "lesson_id": 38,
       "character": "究",
       "stroke_count": "7",
       "onyomi": "キュウ (kyuu), ク (ku)",
@@ -34328,12 +34328,12 @@ module.exports = {
       "sino_vietnamese": "CỨU",
       "vietnamese_meaning": "Nghiên cứu, điều tra",
       "mnemonic_tip": "Dưới mái vòm hang sâu, người cúi gập lưng tìm tòi đến tận cùng.",
-      "compounds": "研究 (けんきゅう): Nghiên cứu; 研究所 (けんきゅうじょ): Viện nghiên cứu",
+      "compounds": "研究室 (けんきゅうしつ): Phòng nghiên cứu; 研究 (けんきゅう): Nghiên cứu",
       "jlpt_level": "N4"
     },
     {
       "id": 196,
-      "lesson_id": 5,
+      "lesson_id": 12,
       "character": "空",
       "stroke_count": "8",
       "onyomi": "クウ (kuu)",
@@ -34341,12 +34341,12 @@ module.exports = {
       "sino_vietnamese": "KHÔNG",
       "vietnamese_meaning": "Bầu trời, trống rỗng",
       "mnemonic_tip": "Đào một chiếc hang thợ xây rỗng tuếch không có gì bên trong.",
-      "compounds": "空気 (くうき): Không khí; 空 (そら): Bầu trời",
-      "jlpt_level": "N4"
+      "compounds": "空港 (くうこう): Sân bay; 空気 (くうき): Không khí",
+      "jlpt_level": "N5"
     },
     {
       "id": 197,
-      "lesson_id": 14,
+      "lesson_id": 21,
       "character": "立",
       "stroke_count": "5",
       "onyomi": "リツ (ritsu), リュウ (ryuu), リットル (rittoru)",
@@ -34354,12 +34354,12 @@ module.exports = {
       "sino_vietnamese": "LẬP",
       "vietnamese_meaning": "Đứng, thiết lập",
       "mnemonic_tip": "Một người đứng thẳng hai chân vững vàng trên mặt đất.",
-      "compounds": "立つ (たつ): Đứng; 国立 (こくりつ): Quốc lập/Công lập",
-      "jlpt_level": "N4"
+      "compounds": "役に立つ (やくにたつ): Có ích, giúp ích; 立つ (たつ): Đứng dậy",
+      "jlpt_level": "N5"
     },
     {
       "id": 198,
-      "lesson_id": 21,
+      "lesson_id": 45,
       "character": "答",
       "stroke_count": "12",
       "onyomi": "トウ (tou)",
@@ -34367,7 +34367,7 @@ module.exports = {
       "sino_vietnamese": "ĐÁP",
       "vietnamese_meaning": "Trả lời, đáp án",
       "mnemonic_tip": "Dưới bụi tre (Trúc ⺮) mọi người cùng mở miệng (Hợp 合) trả lời.",
-      "compounds": "答える (こたえる): Trả lời; 答え (こたえ): Câu trả lời",
+      "compounds": "回答 (かいとう): Trả lời; 答える (こたえる): Trả lời",
       "jlpt_level": "N4"
     },
     {
@@ -34380,12 +34380,12 @@ module.exports = {
       "sino_vietnamese": "CHỈ",
       "vietnamese_meaning": "Giấy",
       "mnemonic_tip": "Bộ mịch 糸 (sợi tơ) nằm cạnh họ thị 氏 tạo thành tờ Giấy mịn.",
-      "compounds": "手紙 (てがみ): Bức thư; 用紙 (ようし): Tờ mẫu",
+      "compounds": "紙 (かみ): Giấy; 手紙 (てがみ): Thư, lá thư",
       "jlpt_level": "N4"
     },
     {
       "id": 200,
-      "lesson_id": 31,
+      "lesson_id": 20,
       "character": "終",
       "stroke_count": "11",
       "onyomi": "シュウ (shuu)",
@@ -34393,12 +34393,12 @@ module.exports = {
       "sino_vietnamese": "CHUNG",
       "vietnamese_meaning": "Kết thúc, điểm cuối",
       "mnemonic_tip": "Cuộn sợi tơ (Mịch 糸) thắt nút vào mùa đông (Đông 冬) khép lại năm cũ.",
-      "compounds": "終わる (おわる): Kết thúc; 終電 (しゅうでん): Chuyến tàu cuối; 最終 (さいしゅう): Cuối cùng",
+      "compounds": "終わり (おわり): Kết thúc; 終わる (おわる): Hết, kết thúc",
       "jlpt_level": "N4"
     },
     {
       "id": 201,
-      "lesson_id": 7,
+      "lesson_id": 30,
       "character": "習",
       "stroke_count": "11",
       "onyomi": "シュウ (shuu), ジュ (ju)",
@@ -34406,12 +34406,12 @@ module.exports = {
       "sino_vietnamese": "TẬP",
       "vietnamese_meaning": "Học tập, luyện tập",
       "mnemonic_tip": "Chú chim non đập cánh (Vũ 羽) trắng (Bạch 白) luyện bay tập tành.",
-      "compounds": "習う (ならう): Học tập; 練習 (れんしゅう): Luyện tập",
+      "compounds": "予習 (よしゅう): Chuẩn bị bài mới; 復習 (ふくしゅう): Ôn tập",
       "jlpt_level": "N4"
     },
     {
       "id": 202,
-      "lesson_id": 20,
+      "lesson_id": 25,
       "character": "考",
       "stroke_count": "6",
       "onyomi": "コウ (kou)",
@@ -34419,12 +34419,12 @@ module.exports = {
       "sino_vietnamese": "KHẢO",
       "vietnamese_meaning": "Suy nghĩ, khảo sát",
       "mnemonic_tip": "Người già chống gậy suy nghĩ đăm chiêu tìm chân lý.",
-      "compounds": "考える (かんがえる): Suy nghĩ; 考古学 (こうこがく): Khảo cổ học",
+      "compounds": "考える (かんがえる): Suy nghĩ, cân nhắc; 考古学 (こうこがく): Khảo cổ học",
       "jlpt_level": "N4"
     },
     {
       "id": 203,
-      "lesson_id": 17,
+      "lesson_id": 37,
       "character": "者",
       "stroke_count": "8",
       "onyomi": "シャ (sha)",
@@ -34432,12 +34432,12 @@ module.exports = {
       "sino_vietnamese": "GIẢ",
       "vietnamese_meaning": "Người, học giả",
       "mnemonic_tip": "Người già chống gậy chỉ tay dạy bảo cho học Giả.",
-      "compounds": "医者 (いしゃ): Bác sĩ; 若者 (わかもの): Người trẻ tuổi",
+      "compounds": "科学者 (かがくしゃ): Nhà khoa học; 歯医者 (はいしゃ): Nha sĩ",
       "jlpt_level": "N4"
     },
     {
       "id": 204,
-      "lesson_id": 6,
+      "lesson_id": 34,
       "character": "肉",
       "stroke_count": "6",
       "onyomi": "ニク (niku)",
@@ -34445,12 +34445,12 @@ module.exports = {
       "sino_vietnamese": "NHỤC",
       "vietnamese_meaning": "Thịt",
       "mnemonic_tip": "Miếng thịt cắt ra thấy rõ những đường vân gân đan chéo bên trong.",
-      "compounds": "肉 (にく): Thịt; 牛肉 (ぎゅうにく): Thịt bò",
+      "compounds": "とり肉 (とりにく): Thịt gà; 肉 (にく): Thịt",
       "jlpt_level": "N4"
     },
     {
       "id": 205,
-      "lesson_id": 5,
+      "lesson_id": 31,
       "character": "自",
       "stroke_count": "6",
       "onyomi": "ジ (ji), シ (shi)",
@@ -34458,12 +34458,12 @@ module.exports = {
       "sino_vietnamese": "TỰ",
       "vietnamese_meaning": "Tự bản thân, tự động",
       "mnemonic_tip": "Hình vẽ chiếc mũi của mình tự chỉ vào bản thân.",
-      "compounds": "自分 (じぶん): Bản thân; 自動車 (じどうしゃ): Ô tô",
+      "compounds": "自然 (しぜん): Thiên nhiên; 自分 (じぶん): Bản thân",
       "jlpt_level": "N4"
     },
     {
       "id": 206,
-      "lesson_id": 27,
+      "lesson_id": 28,
       "character": "色",
       "stroke_count": "6",
       "onyomi": "ショク (shoku), シキ (shiki)",
@@ -34471,7 +34471,7 @@ module.exports = {
       "sino_vietnamese": "SẮC",
       "vietnamese_meaning": "Màu sắc, sắc thái",
       "mnemonic_tip": "Hình ảnh con người biểu lộ cảm xúc thay đổi màu sắc trên khuôn mặt.",
-      "compounds": "色 (いろ): Màu sắc; 茶色 (ちゃいろ): Màu nâu; 色々 (いろいろ): Đa dạng",
+      "compounds": "色 (いろ): Màu sắc; 色々 (いろいろ): Nhiều thứ, đa dạng",
       "jlpt_level": "N4"
     },
     {
@@ -34484,8 +34484,8 @@ module.exports = {
       "sino_vietnamese": "HOA",
       "vietnamese_meaning": "Bông hoa",
       "mnemonic_tip": "Cây cỏ (艹) biến hóa (化) trổ ra những bông hoa rực rỡ.",
-      "compounds": "花 (はな): Bông hoa; 花火 (はなび): Pháo hoa",
-      "jlpt_level": "N4"
+      "compounds": "花見 (はなみ): Ngắm hoa anh đào; 花 (はな): Bông hoa",
+      "jlpt_level": "N5"
     },
     {
       "id": 208,
@@ -34502,7 +34502,7 @@ module.exports = {
     },
     {
       "id": 209,
-      "lesson_id": 6,
+      "lesson_id": 29,
       "character": "茶",
       "stroke_count": "9",
       "onyomi": "チャ (cha), サ (sa)",
@@ -34510,12 +34510,12 @@ module.exports = {
       "sino_vietnamese": "TRÀ",
       "vietnamese_meaning": "Trà, chè",
       "mnemonic_tip": "Cây cỏ trên núi, dưới gốc cây có người ngồi thưởng trà.",
-      "compounds": "お茶 (おちゃ): Trà; 喫茶店 (きっさてん): Quán cà phê",
+      "compounds": "茶碗 (ちゃわん): Cái bát; お茶 (おちゃ): Trà, trà xanh",
       "jlpt_level": "N4"
     },
     {
       "id": 210,
-      "lesson_id": 8,
+      "lesson_id": 46,
       "character": "親",
       "stroke_count": "16",
       "onyomi": "シン (shin)",
@@ -34523,12 +34523,12 @@ module.exports = {
       "sino_vietnamese": "THÂN",
       "vietnamese_meaning": "cha mẹ, thân thiết",
       "mnemonic_tip": "Đứng (立) trên cây (木) ngóng mắt (見) nhìn theo con là cha mẹ.",
-      "compounds": "親 (おや): Cha mẹ; 両親 (りょうしん): Bố mẹ",
+      "compounds": "親切 (しんせつ): Thân thiện, tốt bụng; 親 (おや): Cha mẹ, phụ huynh",
       "jlpt_level": "N4"
     },
     {
       "id": 211,
-      "lesson_id": 14,
+      "lesson_id": 20,
       "character": "言",
       "stroke_count": "7",
       "onyomi": "ゲン (gen), ゴン (gon)",
@@ -34536,8 +34536,8 @@ module.exports = {
       "sino_vietnamese": "NGÔN",
       "vietnamese_meaning": "Nói, ngôn ngữ",
       "mnemonic_tip": "Hình vẽ cái miệng đang hé mở nói ra lời nói chỉ bảo.",
-      "compounds": "言う (いう): Nói; 言語 (げんご): Ngôn ngữ",
-      "jlpt_level": "N4"
+      "compounds": "言う (いう): Nói; 言葉 (ことば): Từ vựng, ngôn ngữ",
+      "jlpt_level": "N5"
     },
     {
       "id": 212,
@@ -34549,7 +34549,7 @@ module.exports = {
       "sino_vietnamese": "KẾ",
       "vietnamese_meaning": "kế hoạch, đo lường",
       "mnemonic_tip": "Lời nói (言) tính toán rõ ràng theo mười (十) đầu việc cụ thể.",
-      "compounds": "時計 (とけい): Đồng hồ; 計画 (けいかく): Kế hoạch",
+      "compounds": "時計 (とけい): Đồng hồ",
       "jlpt_level": "N4"
     },
     {
@@ -34562,7 +34562,7 @@ module.exports = {
       "sino_vietnamese": "THÍ",
       "vietnamese_meaning": "Thử nghiệm, thi cử",
       "mnemonic_tip": "Dùng lời nói (Ngôn 言) theo quy cách kiểu mẫu (Thức 式) để thi cử.",
-      "compounds": "試験 (しけん): Kỳ thi; 試す (ためす): Thử nghiệm; 試合 (しあい): Trận đấu",
+      "compounds": "試験 (しけん): Bài kiểm tra, kỳ thi; 試合 (しあい): Trận đấu, cuộc thi đấu",
       "jlpt_level": "N4"
     },
     {
@@ -34575,8 +34575,8 @@ module.exports = {
       "sino_vietnamese": "MÃI",
       "vietnamese_meaning": "Mua",
       "mnemonic_tip": "Dùng tiền vỏ sò (Bối 貝) dưới lưới (Võng 网) để Mua đồ.",
-      "compounds": "買う (かう): Mua; 買い物 (かいもの): Mua sắm",
-      "jlpt_level": "N4"
+      "compounds": "買う (かう): Mua",
+      "jlpt_level": "N5"
     },
     {
       "id": 215,
@@ -34588,7 +34588,7 @@ module.exports = {
       "sino_vietnamese": "THẢI",
       "vietnamese_meaning": "Cho mượn, cho vay",
       "mnemonic_tip": "Đại diện (Đại 代) cho người khác dùng tiền bối (貝) cho vay mượn.",
-      "compounds": "貸す (かす): Cho mượn; 貸出 (かしだし): Cho mượn ra ngoài",
+      "compounds": "貸す (かす): Cho mượn, cho vay",
       "jlpt_level": "N4"
     },
     {
@@ -34601,12 +34601,12 @@ module.exports = {
       "sino_vietnamese": "CHẤT",
       "vietnamese_meaning": "chất lượng, chất vấn",
       "mnemonic_tip": "Hai chiếc rìu băm nhỏ vỏ sò kiểm tra chất lượng thật giả.",
-      "compounds": "質問 (しつもん): Câu hỏi; 質屋 (しちや): Tiệm cầm đồ",
+      "compounds": "質問 (しつもん): Hỏi",
       "jlpt_level": "N4"
     },
     {
       "id": 217,
-      "lesson_id": 8,
+      "lesson_id": 34,
       "character": "赤",
       "stroke_count": "7",
       "onyomi": "セキ (seki), シャク (shaku)",
@@ -34614,12 +34614,12 @@ module.exports = {
       "sino_vietnamese": "XÍCH",
       "vietnamese_meaning": "màu đỏ",
       "mnemonic_tip": "Đất (土) nung qua ngọn lửa (灬) đỏ rực rỡ.",
-      "compounds": "赤い (あかい): Màu đỏ; 赤ちゃん (あかちゃん): Em bé",
+      "compounds": "赤 (あか): Màu đỏ; 赤い (あかい): Đỏ",
       "jlpt_level": "N4"
     },
     {
       "id": 218,
-      "lesson_id": 13,
+      "lesson_id": 27,
       "character": "走",
       "stroke_count": "7",
       "onyomi": "ソウ (sou)",
@@ -34627,12 +34627,12 @@ module.exports = {
       "sino_vietnamese": "TẨU",
       "vietnamese_meaning": "Chạy",
       "mnemonic_tip": "Người đứng trên mặt đất (Thổ 土) dang tay chân (Sơ) Chạy thật nhanh.",
-      "compounds": "走る (はしる): Chạy; 走行 (そうこう): Chạy xe",
+      "compounds": "走る (はしる): Chạy; ご馳走 (ごちそう): Bữa ăn ngon, chiêu đãi",
       "jlpt_level": "N4"
     },
     {
       "id": 219,
-      "lesson_id": 4,
+      "lesson_id": 37,
       "character": "起",
       "stroke_count": "10",
       "onyomi": "キ (ki)",
@@ -34640,12 +34640,12 @@ module.exports = {
       "sino_vietnamese": "KHỞI",
       "vietnamese_meaning": "Thức dậy, khởi hành",
       "mnemonic_tip": "Chạy (走) về phía trước cùng bản thân thức dậy đón ngày mới.",
-      "compounds": "起きる (おきる): Thức dậy; 早起き (はやおき): Dậy sớm",
+      "compounds": "起こす (おこす): Đánh thức ai dậy; 起きる (おきる): Thức dậy",
       "jlpt_level": "N4"
     },
     {
       "id": 220,
-      "lesson_id": 17,
+      "lesson_id": 16,
       "character": "足",
       "stroke_count": "7",
       "onyomi": "ソク (soku)",
@@ -34653,12 +34653,12 @@ module.exports = {
       "sino_vietnamese": "TÚC",
       "vietnamese_meaning": "Chân, đầy đủ",
       "mnemonic_tip": "Hình vẽ cái miệng trên đầu cái Chân đang đứng vững vàng.",
-      "compounds": "足 (あし): Bàn chân; 遠足 (えんそく): Dã ngoại",
-      "jlpt_level": "N4"
+      "compounds": "足 (あし): Chân",
+      "jlpt_level": "N5"
     },
     {
       "id": 221,
-      "lesson_id": 38,
+      "lesson_id": 18,
       "character": "転",
       "stroke_count": "11",
       "onyomi": "テン (ten)",
@@ -34666,12 +34666,12 @@ module.exports = {
       "sino_vietnamese": "CHUYỂN",
       "vietnamese_meaning": "Xoay tròn, ngã, chuyển đổi",
       "mnemonic_tip": "Bánh xe (Xa 車) quay tít trên mặt đất (Chuyên 専用) bị vấp ngã.",
-      "compounds": "転ぶ (ころぶ): Ngã té; 自転車 (じてんしゃ): Xe đạp; 転職 (てんしょく): Chuyển việc",
+      "compounds": "運転 (うんてん): Lái xe; 自転車 (じてんしゃ): Xe đạp",
       "jlpt_level": "N4"
     },
     {
       "id": 222,
-      "lesson_id": 8,
+      "lesson_id": 35,
       "character": "近",
       "stroke_count": "7",
       "onyomi": "キン (kin), コン (kon)",
@@ -34679,12 +34679,12 @@ module.exports = {
       "sino_vietnamese": "CẬN",
       "vietnamese_meaning": "Gần",
       "mnemonic_tip": "Đi bộ (Xước) bằng cái rìu cân (斤) đo khoảng cách Gần.",
-      "compounds": "近い (ちかい): Gần; 近所 (きんじょ): Hàng xóm",
+      "compounds": "近所 (きんじょ): Hàng xóm, khu vực lân cận; 近い (ちかい): Gần",
       "jlpt_level": "N4"
     },
     {
       "id": 223,
-      "lesson_id": 7,
+      "lesson_id": 50,
       "character": "送",
       "stroke_count": "9",
       "onyomi": "ソウ (sou)",
@@ -34692,12 +34692,12 @@ module.exports = {
       "sino_vietnamese": "TỐNG",
       "vietnamese_meaning": "Gửi, tiễn đưa",
       "mnemonic_tip": "Đi bộ (Xước) trên đường tiễn đưa, gửi quà tặng.",
-      "compounds": "送る (おくる): Gửi; 送信 (そうしん): Truyền dữ liệu",
+      "compounds": "放送 (ほうそう): Phát thanh; 送ります (おくります): Tiễn đưa, đưa về nhà",
       "jlpt_level": "N4"
     },
     {
       "id": 224,
-      "lesson_id": 23,
+      "lesson_id": 28,
       "character": "通",
       "stroke_count": "10",
       "onyomi": "ツウ (tsuu), ツ (tsu)",
@@ -34705,7 +34705,7 @@ module.exports = {
       "sino_vietnamese": "THÔNG",
       "vietnamese_meaning": "Đi qua, đi lại, thông suốt",
       "mnemonic_tip": "Đi trên con đường (Quai xước 辶) cầm ống dũng cảm (Dũng 甬) đi thông suốt.",
-      "compounds": "通る (とおる): Đi qua; 通う (かよう): Đi lại đều đặn",
+      "compounds": "通う (かよう): Đi học; 交通 (こうつう): Giao thông",
       "jlpt_level": "N4"
     },
     {
@@ -34718,12 +34718,12 @@ module.exports = {
       "sino_vietnamese": "CHU",
       "vietnamese_meaning": "Tuần, vòng quanh",
       "mnemonic_tip": "Đi bộ (Xước) vòng quanh vùng đất có cây lúa (Chu 周) trong một Tuần.",
-      "compounds": "今週 (こんしゅう): Tuần này; 毎週 (まいしゅう): Mỗi tuần",
-      "jlpt_level": "N4"
+      "compounds": "先週 (せんしゅう): Tuần trước; 今週 (こんしゅう): Tuần này; 来週 (らいしゅう): Tuần sau",
+      "jlpt_level": "N5"
     },
     {
       "id": 226,
-      "lesson_id": 38,
+      "lesson_id": 18,
       "character": "運",
       "stroke_count": "12",
       "onyomi": "ウン (un)",
@@ -34731,12 +34731,12 @@ module.exports = {
       "sino_vietnamese": "VẬN",
       "vietnamese_meaning": "Vận chuyển, vận mệnh",
       "mnemonic_tip": "Chiếc xe (Xa 車) chạy trên đường (Sước 辶) vận chuyển hàng hóa.",
-      "compounds": "運ぶ (はこぶ): Vận chuyển; 運転 (うんてん): Lái xe; 運動 (うんどう): Vận động",
+      "compounds": "運転 (うんてん): Lái xe; 運ぶ (はこぶ): Vận chuyển",
       "jlpt_level": "N4"
     },
     {
       "id": 227,
-      "lesson_id": 10,
+      "lesson_id": 23,
       "character": "道",
       "stroke_count": "12",
       "onyomi": "ドウ (dou), トウ (tou)",
@@ -34744,12 +34744,12 @@ module.exports = {
       "sino_vietnamese": "ĐẠO",
       "vietnamese_meaning": "Con đường, đạo",
       "mnemonic_tip": "Người cầm đầu vững bước chân tiến lên trên con đường đạo lý.",
-      "compounds": "道 (みち): Con đường; 水道 (すいどう): Đường nước",
-      "jlpt_level": "N4"
+      "compounds": "道 (みち): Con đường; 柔道 (じゅうどう): Môn võ Judo, Nhu đạo",
+      "jlpt_level": "N5"
     },
     {
       "id": 228,
-      "lesson_id": 16,
+      "lesson_id": 40,
       "character": "重",
       "stroke_count": "9",
       "onyomi": "ジュウ (juu), チョウ (chou)",
@@ -34757,12 +34757,12 @@ module.exports = {
       "sino_vietnamese": "TRỌNG",
       "vietnamese_meaning": "Nặng, quan trọng, trùng lặp",
       "mnemonic_tip": "Nhiều người đứng trên đống đất lớn nặng trĩu vai.",
-      "compounds": "重い (おもい): Nặng; 重要 (じゅうよう): Quan trọng",
+      "compounds": "重さ (おもさ): Trọng lượng; 重い (おもい): Nặng",
       "jlpt_level": "N4"
     },
     {
       "id": 229,
-      "lesson_id": 6,
+      "lesson_id": 9,
       "character": "野",
       "stroke_count": "11",
       "onyomi": "ヤ (ya), ショ (sho)",
@@ -34770,7 +34770,7 @@ module.exports = {
       "sino_vietnamese": "DÃ",
       "vietnamese_meaning": "cánh đồng, hoang dã",
       "mnemonic_tip": "Ngôi làng (里) mở rộng sang vùng đất thênh thang ngoài đồng nội.",
-      "compounds": "野菜 (やさい): Rau củ; 野球 (やきゅう): Bóng chày",
+      "compounds": "野球 (やきゅう): Bóng chày; 野菜 (やさい): Rau",
       "jlpt_level": "N4"
     },
     {
@@ -34783,7 +34783,7 @@ module.exports = {
       "sino_vietnamese": "NGÂN",
       "vietnamese_meaning": "Bạc, ngân hàng",
       "mnemonic_tip": "Kim loại (金) quý giá đứng sau vàng là bạc (cứng cỏi).",
-      "compounds": "銀行 (ぎんこう): Ngân hàng; 銀色 (ぎんいろ): Màu bạc",
+      "compounds": "銀行員 (ぎんこういん): Nhân viên ngân hàng",
       "jlpt_level": "N4"
     },
     {
@@ -34796,7 +34796,7 @@ module.exports = {
       "sino_vietnamese": "KHAI",
       "vietnamese_meaning": "Mở ra, khai mạc",
       "mnemonic_tip": "Hai cánh cửa (Môn 門) được gạt then cài sang hai bên để mở ra.",
-      "compounds": "開く (あく): Cửa mở; 開ける (あける): Mở cửa; 開店 (かいてん): Mở cửa hàng",
+      "compounds": "開く (あく): Mở; 開ける (あける): Mở",
       "jlpt_level": "N4"
     },
     {
@@ -34809,7 +34809,7 @@ module.exports = {
       "sino_vietnamese": "VIỆN",
       "vietnamese_meaning": "Tòa nhà, bệnh viện, học viện",
       "mnemonic_tip": "Dưới bức tường vách đá xây dựng tòa nhà lớn cho học sinh học tập.",
-      "compounds": "病院 (びょういん): Bệnh viện; 入院 (にゅういん): Nhập viện",
+      "compounds": "入院 (にゅういん): Việc nhập viện điều trị; 病院 (びょういん): Bệnh viện",
       "jlpt_level": "N4"
     },
     {
@@ -34822,12 +34822,12 @@ module.exports = {
       "sino_vietnamese": "TẬP",
       "vietnamese_meaning": "Tập hợp, thu thập",
       "mnemonic_tip": "Ba chú chim cùng đậu tập hợp lại trên một cành cây (木).",
-      "compounds": "集まる (あつまる): Tập trung; 集合 (しゅうごう): Tập hợp",
+      "compounds": "集める (あつめる): Thu thập, sưu tầm; 集まる (あつまる): Tập trung",
       "jlpt_level": "N4"
     },
     {
       "id": 234,
-      "lesson_id": 8,
+      "lesson_id": 34,
       "character": "青",
       "stroke_count": "8",
       "onyomi": "セイ (sei), ショウ (shou)",
@@ -34835,12 +34835,12 @@ module.exports = {
       "sino_vietnamese": "THANH",
       "vietnamese_meaning": "màu xanh lam",
       "mnemonic_tip": "Mầm cây non vươn lên dưới vầng trăng mang màu xanh tươi mát.",
-      "compounds": "青い (あおい): Màu xanh lam; 青年 (せいねん): Thanh niên",
+      "compounds": "青 (あお): Màu xanh dương; 青い (あおい): Xanh",
       "jlpt_level": "N4"
     },
     {
       "id": 235,
-      "lesson_id": 9,
+      "lesson_id": 42,
       "character": "音",
       "stroke_count": "9",
       "onyomi": "オン (on), イン (in), -ノン (-non)",
@@ -34848,12 +34848,12 @@ module.exports = {
       "sino_vietnamese": "ÂM",
       "vietnamese_meaning": "Âm thanh, tiếng động",
       "mnemonic_tip": "Đứng (Lập 立) trên mặt đất mở miệng (Nhật 日) phát ra Âm thanh.",
-      "compounds": "音楽 (おんがく): Âm nhạc; 発音 (はつおん): Phát âm",
+      "compounds": "音楽家 (おんがくか): Nhạc sĩ; 音 (おと): Âm thanh, tiếng động",
       "jlpt_level": "N4"
     },
     {
       "id": 236,
-      "lesson_id": 6,
+      "lesson_id": 17,
       "character": "題",
       "stroke_count": "18",
       "onyomi": "ダイ (dai)",
@@ -34861,12 +34861,12 @@ module.exports = {
       "sino_vietnamese": "ĐỀ",
       "vietnamese_meaning": "Đề tài, vấn đề",
       "mnemonic_tip": "Mặt trời mọc đúng giờ, hướng đầu tập trung làm bài đề thi.",
-      "compounds": "宿題 (しゅくだい): Bài tập về nhà; 問題 (もんだい): Vấn đề",
+      "compounds": "問題 (もんだい): Vấn đề, câu hỏi; 宿題 (しゅくだい): Bài tập về nhà",
       "jlpt_level": "N4"
     },
     {
       "id": 237,
-      "lesson_id": 12,
+      "lesson_id": 39,
       "character": "風",
       "stroke_count": "9",
       "onyomi": "フウ (fuu), フ (fu)",
@@ -34874,12 +34874,12 @@ module.exports = {
       "sino_vietnamese": "PHONG",
       "vietnamese_meaning": "Gió, phong cảnh",
       "mnemonic_tip": "Cánh buồm đón những luồng gió thổi cuốn côn trùng bay đi.",
-      "compounds": "台風 (たいふう): Bão; 風邪 (かぜ): Cảm cúm",
+      "compounds": "台風 (たいふう): Bão; お風呂 (おふろ): Bồn tắm",
       "jlpt_level": "N4"
     },
     {
       "id": 238,
-      "lesson_id": 4,
+      "lesson_id": 32,
       "character": "飯",
       "stroke_count": "12",
       "onyomi": "ハン (han)",
@@ -34887,7 +34887,7 @@ module.exports = {
       "sino_vietnamese": "PHẠN",
       "vietnamese_meaning": "cơm, bữa ăn",
       "mnemonic_tip": "Món ăn quay đi quay lại trong bữa cơm gia đình.",
-      "compounds": "ご飯 (ごはん): Cơm; 晩ご飯 (ばんごはん): Cơm tối",
+      "compounds": "夕飯 (ゆうはん): Bữa cơm tối; ご飯 (ごはん): Cơm, bữa ăn",
       "jlpt_level": "N4"
     },
     {
@@ -34900,12 +34900,12 @@ module.exports = {
       "sino_vietnamese": "ẨM",
       "vietnamese_meaning": "Uống, ẩm thực",
       "mnemonic_tip": "Bộ thực 食 (đồ ăn) đứng cạnh chữ khiếm 欠 (thiếu thốn). Thiếu nước thì phải Uống.",
-      "compounds": "飲み物 (のみもの): Đồ uống; 飲む (のむ): Uống",
-      "jlpt_level": "N4"
+      "compounds": "飲む (のむ): Uống",
+      "jlpt_level": "N5"
     },
     {
       "id": 240,
-      "lesson_id": 13,
+      "lesson_id": 25,
       "character": "館",
       "stroke_count": "16",
       "onyomi": "カン (kan)",
@@ -34913,12 +34913,12 @@ module.exports = {
       "sino_vietnamese": "QUÁN",
       "vietnamese_meaning": "Tòa nhà, hội quán",
       "mnemonic_tip": "Nơi cung cấp đồ ăn (Thực 食) cho quan lại trong dinh thự là Hội quán.",
-      "compounds": "図書館 (としょかん): Thư viện; 映画館 (えいがかん): Rạp phim",
+      "compounds": "大使館 (たいしかん): Đại sứ quán; 図書館 (としょかん): Thư viện",
       "jlpt_level": "N4"
     },
     {
       "id": 241,
-      "lesson_id": 3,
+      "lesson_id": 5,
       "character": "駅",
       "stroke_count": "14",
       "onyomi": "エキ (eki)",
@@ -34926,8 +34926,8 @@ module.exports = {
       "sino_vietnamese": "DỊCH",
       "vietnamese_meaning": "Nhà ga",
       "mnemonic_tip": "Ngựa Mã 馬 đứng đợi bên cạnh Xích Rích Rác Rưởi 尺 ở nhà ga.",
-      "compounds": "駅 (えき): Nhà ga; 駅長 (えきちょう): Trưởng ga",
-      "jlpt_level": "N4"
+      "compounds": "駅 (えき): Nhà ga",
+      "jlpt_level": "N5"
     },
     {
       "id": 242,
@@ -34939,7 +34939,7 @@ module.exports = {
       "sino_vietnamese": "NGHIỆM",
       "vietnamese_meaning": "Kiểm nghiệm, trải nghiệm",
       "mnemonic_tip": "Cưỡi ngựa (Mã 馬) vào đền bái lạy (Liễm 僉) để kiểm nghiệm sự thật.",
-      "compounds": "経験 (けいけん): Kinh nghiệm; 実験 (じっけん): Thí nghiệm",
+      "compounds": "試験 (しけん): Bài kiểm tra, kỳ thi; 経験 (けいけん): Kinh nghiệm",
       "jlpt_level": "N4"
     },
     {
@@ -34952,8 +34952,8 @@ module.exports = {
       "sino_vietnamese": "NGƯ",
       "vietnamese_meaning": "Con cá",
       "mnemonic_tip": "Hình vẽ con cá bơi dưới nước với vảy cá và 4 đốm lửa bơi lội.",
-      "compounds": "魚 (さかな): Con cá; 金魚 (きんぎょ): Cá vàng",
-      "jlpt_level": "N4"
+      "compounds": "魚 (さか): Cá; 金魚 (きんぎょ): Cá vàng",
+      "jlpt_level": "N5"
     },
     {
       "id": 244,
@@ -34965,12 +34965,12 @@ module.exports = {
       "sino_vietnamese": "ĐIỂU",
       "vietnamese_meaning": "Con chim",
       "mnemonic_tip": "Hình dáng chú chim có đầu, mỏ, mắt và đuôi lông dài.",
-      "compounds": "鳥 (とり): Con chim; 小鳥 (ことり): Chim non; 白鳥 (はくちょう): Thiên nga",
+      "compounds": "鳥 (とり): Con chim; 小鳥 (ことり): Chú chim nhỏ",
       "jlpt_level": "N4"
     },
     {
       "id": 245,
-      "lesson_id": 8,
+      "lesson_id": 34,
       "character": "黒",
       "stroke_count": "11",
       "onyomi": "コク (koku)",
@@ -34978,7 +34978,527 @@ module.exports = {
       "sino_vietnamese": "HẮC",
       "vietnamese_meaning": "màu đen",
       "mnemonic_tip": "Đất (里) bị lửa (灬) thiêu cháy biến thành muội than màu đen.",
-      "compounds": "黒い (くろい): Màu đen; 黒板 (こくばん): Bảng đen",
+      "compounds": "黒 (くろ): Màu đen; 黒い (くろい): Đen",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 246,
+      "lesson_id": 4,
+      "character": "分",
+      "stroke_count": "4",
+      "onyomi": "ブン (bun), フン (fun), ブ (bu)",
+      "kunyomi": "わ.ける (wa.keru), わ.かる (wa.karu), わ.かれる (wa.kareru)",
+      "sino_vietnamese": "PHÂN",
+      "vietnamese_meaning": "Phút; chia, hiểu",
+      "mnemonic_tip": "Dùng thanh đao (刀) ở dưới tách đôi hình bát (八) ở trên thành từng phần, từng phút (PHÂN).",
+      "compounds": "～分 (ふん): Phút; 五分 (ごふん): Năm phút; 何分 (なんぷん): Mấy phút",
+      "jlpt_level": "N5"
+    },
+    {
+      "id": 247,
+      "lesson_id": 16,
+      "character": "耳",
+      "stroke_count": "6",
+      "onyomi": "ジ (ji)",
+      "kunyomi": "みみ (mimi)",
+      "sino_vietnamese": "NHĨ",
+      "vietnamese_meaning": "Cái tai",
+      "mnemonic_tip": "Hình vẽ trực diện vành tai người với các nếp gấp thu nhận âm thanh (NHĨ).",
+      "compounds": "耳 (みみ): Tai",
+      "jlpt_level": "N5"
+    },
+    {
+      "id": 248,
+      "lesson_id": 36,
+      "character": "太",
+      "stroke_count": "4",
+      "onyomi": "タイ (tai), タ (ta)",
+      "kunyomi": "ふと.い (futo.i), ふと.る (futo.ru)",
+      "sino_vietnamese": "THÁI",
+      "vietnamese_meaning": "To, béo; mặt trời",
+      "mnemonic_tip": "Hình chữ Đại (大) dang rộng tay chân có thêm một dấu chấm (丶) ở dưới bụng chỉ sự to béo (THÁI).",
+      "compounds": "太る (ふとる): Béo lên, tăng cân; 太い (ふとい): Béo, to, dày",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 249,
+      "lesson_id": 30,
+      "character": "引",
+      "stroke_count": "4",
+      "onyomi": "イン (in)",
+      "kunyomi": "ひ.く (hi.ku), ひ.き (hi.ki), ひ.き- (hi.ki-)",
+      "sino_vietnamese": "DẪN",
+      "vietnamese_meaning": "Kéo, ngăn kéo",
+      "mnemonic_tip": "Dùng tay kéo căng dây của cây cung (弓) với một nét sổ thẳng (丨) như mũi tên (DẪN).",
+      "compounds": "引き出し (ひきだし): Ngăn kéo; 引く (ひく): Kéo",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 250,
+      "lesson_id": 38,
+      "character": "市",
+      "stroke_count": "5",
+      "onyomi": "シ (shi)",
+      "kunyomi": "いち (ichi)",
+      "sino_vietnamese": "THỊ",
+      "vietnamese_meaning": "Thành phố",
+      "mnemonic_tip": "Đội mũ (亠) quấn khăn vải (巾) đi họp chợ đông đúc ở trung tâm thành phố (THỊ).",
+      "compounds": "市民 (しみん): Công dân; 市役所 (しやくしょ): Văn phòng thị chính",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 251,
+      "lesson_id": 31,
+      "character": "村",
+      "stroke_count": "7",
+      "onyomi": "ソン (son)",
+      "kunyomi": "むら (mura)",
+      "sino_vietnamese": "THÔN",
+      "vietnamese_meaning": "Ngôi làng",
+      "mnemonic_tip": "Quanh những rặng cây (木) được đo đạc từng tấc đất (寸) để lập nên ngôi làng (THÔN).",
+      "compounds": "村 (むら): Ngôi làng; 村人 (むらびと): Dân làng",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 252,
+      "lesson_id": 43,
+      "character": "光",
+      "stroke_count": "6",
+      "onyomi": "コウ (kou)",
+      "kunyomi": "ひか.る (hika.ru), ひかり (hikari)",
+      "sino_vietnamese": "QUANG",
+      "vietnamese_meaning": "Ánh sáng, lấp lánh",
+      "mnemonic_tip": "Ngọn lửa nhỏ (⺌) tỏa sáng rực rỡ phía trên đôi chân người (儿) soi đường đi (QUANG).",
+      "compounds": "光 (ひかり): Ánh sáng, tia sáng; 光る (ひかる): Tỏa sáng, lấp lánh",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 253,
+      "lesson_id": 47,
+      "character": "回",
+      "stroke_count": "6",
+      "onyomi": "カイ (kai), エ (e)",
+      "kunyomi": "まわ.る (mawa.ru), -まわ.る (-mawa.ru), -まわ.り (-mawa.ri)",
+      "sino_vietnamese": "HỒI",
+      "vietnamese_meaning": "Xoay, quay; số lần",
+      "mnemonic_tip": "Một vòng vuông nhỏ (口) xoay tròn bên trong vòng vuông lớn (囗), chỉ sự quay vòng, số lần (HỒI).",
+      "compounds": "回る (まわる): Quay quanh, xoay tròn; 回答 (かいとう): Trả lời",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 254,
+      "lesson_id": 30,
+      "character": "池",
+      "stroke_count": "6",
+      "onyomi": "チ (chi)",
+      "kunyomi": "いけ (ike)",
+      "sino_vietnamese": "TRÌ",
+      "vietnamese_meaning": "Cái ao; pin",
+      "mnemonic_tip": "Nơi có dòng nước (氵) đọng lại trên mặt đất nhấp nhô (也) tạo thành cái ao hồ (TRÌ).",
+      "compounds": "池 (いけ): Cái ao; 電池 (でんち): Pin, cục pin",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 255,
+      "lesson_id": 27,
+      "character": "声",
+      "stroke_count": "7",
+      "onyomi": "セイ (sei), ショウ (shou)",
+      "kunyomi": "こえ (koe), こわ- (kowa-)",
+      "sino_vietnamese": "THANH",
+      "vietnamese_meaning": "Giọng nói",
+      "mnemonic_tip": "Người tráng sĩ (士) cất tiếng vang từ vòm họng truyền đi thành giọng nói, âm thanh (THANH).",
+      "compounds": "声 (こえ): Giọng nói; 大声 (おおごえ): Giọng nói lớn",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 256,
+      "lesson_id": 27,
+      "character": "林",
+      "stroke_count": "8",
+      "onyomi": "リン (rin)",
+      "kunyomi": "はやし (hayashi)",
+      "sino_vietnamese": "LÂM",
+      "vietnamese_meaning": "Rừng cây thưa",
+      "mnemonic_tip": "Hai cây gỗ (木) mọc sát cạnh nhau tạo thành rặng cây, khu rừng thưa (LÂM).",
+      "compounds": "林 (はやし): Rừng cây thưa",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 257,
+      "lesson_id": 21,
+      "character": "首",
+      "stroke_count": "9",
+      "onyomi": "シュ (shu)",
+      "kunyomi": "くび (kubi)",
+      "sino_vietnamese": "THỦ",
+      "vietnamese_meaning": "Cổ; người đứng đầu",
+      "mnemonic_tip": "Phía trên là chỏm tóc, phía dưới là khuôn mặt (自) nối với thân mình qua cái cổ; người đứng đầu (THỦ).",
+      "compounds": "首相 (しゅしょう): Thủ tướng; 首 (くび): Cái cổ",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 258,
+      "lesson_id": 38,
+      "character": "民",
+      "stroke_count": "5",
+      "onyomi": "ミン (min)",
+      "kunyomi": "たみ (tami)",
+      "sino_vietnamese": "DÂN",
+      "vietnamese_meaning": "Nhân dân",
+      "mnemonic_tip": "Hình ảnh mầm cây vươn lên từ gốc rễ bền bỉ, tượng trưng cho sức sống của nhân dân (DÂN).",
+      "compounds": "市民 (しみん): Công dân; 国民 (こくみん): Người dân, quốc dân",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 259,
+      "lesson_id": 19,
+      "character": "弱",
+      "stroke_count": "10",
+      "onyomi": "ジャク (jaku)",
+      "kunyomi": "よわ.い (yowa.i), よわ.る (yowa.ru), よわ.まる (yowa.maru)",
+      "sino_vietnamese": "NHƯỢC",
+      "vietnamese_meaning": "Yếu",
+      "mnemonic_tip": "Hai cánh cung (弓) mảnh mai có lông vũ (冫) mềm mại uốn cong, tượng trưng cho sự yếu ớt (NHƯỢC).",
+      "compounds": "弱い (よわい): Yếu ớt",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 260,
+      "lesson_id": 27,
+      "character": "森",
+      "stroke_count": "12",
+      "onyomi": "シン (shin)",
+      "kunyomi": "もり (mori)",
+      "sino_vietnamese": "SÂM",
+      "vietnamese_meaning": "Rừng rậm",
+      "mnemonic_tip": "Ba cây gỗ (木) tầng tầng lớp lớp chồng lên nhau tạo thành khu rừng già rậm rạp (SÂM).",
+      "compounds": "森 (もり): Khu rừng rậm; 森林 (しんりん): Rừng núi",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 261,
+      "lesson_id": 26,
+      "character": "所",
+      "stroke_count": "8",
+      "onyomi": "ショ (sho)",
+      "kunyomi": "ところ (tokoro), -ところ (-tokoro), どころ (dokoro)",
+      "sino_vietnamese": "SỞ",
+      "vietnamese_meaning": "Nơi chốn, địa điểm",
+      "mnemonic_tip": "Cầm rìu (斤) đẽo gỗ dựng cánh cửa (戸) đánh dấu nơi chốn, địa điểm sinh sống (SỞ).",
+      "compounds": "場所 (ばしょ): Địa điểm, nơi chốn; 住所 (じゅうしょ): Địa chỉ",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 262,
+      "lesson_id": 36,
+      "character": "乗",
+      "stroke_count": "9",
+      "onyomi": "ジョウ (jou), ショウ (shou)",
+      "kunyomi": "の.る (no.ru), -の.り (-no.ri), の.せる (no.seru)",
+      "sino_vietnamese": "THỪA",
+      "vietnamese_meaning": "Lên xe, phương tiện",
+      "mnemonic_tip": "Leo lên ngọn cây lúa (禾) đứng vững ở giữa để cưỡi gió hoặc bước lên xe tàu (THỪA).",
+      "compounds": "乗り物 (のりもの): Phương tiện giao thông; 乗る (のる): Lên",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 263,
+      "lesson_id": 10,
+      "character": "県",
+      "stroke_count": "9",
+      "onyomi": "ケン (ken)",
+      "kunyomi": "か.ける (ka.keru)",
+      "sino_vietnamese": "HUYỆN",
+      "vietnamese_meaning": "Tỉnh (của Nhật)",
+      "mnemonic_tip": "Con mắt (目) treo ngược nhìn xuống ba dòng suối nhỏ (小) phân chia địa giới của một tỉnh (HUYỆN).",
+      "compounds": "県 (けん): Tỉnh",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 264,
+      "lesson_id": 42,
+      "character": "進",
+      "stroke_count": "11",
+      "onyomi": "シン (shin)",
+      "kunyomi": "すす.む (susu.mu), すす.める (susu.meru)",
+      "sino_vietnamese": "TIẾN",
+      "vietnamese_meaning": "Tiến lên, phát triển",
+      "mnemonic_tip": "Con chim nhỏ (隹) sải bước liên tục trên con đường dài (辶) để tiến về phía trước (TIẾN).",
+      "compounds": "進む (すすむ): Tiến lên, phát triển",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 265,
+      "lesson_id": 12,
+      "character": "軽",
+      "stroke_count": "12",
+      "onyomi": "ケイ (kei), キョウ (kyou), キン (kin)",
+      "kunyomi": "かる.い (karu.i), かろ.やか (karo.yaka), かろ.んじる (karo.njiru)",
+      "sino_vietnamese": "KHINH",
+      "vietnamese_meaning": "Nhẹ",
+      "mnemonic_tip": "Chiếc xe (車) được cải tiến khung gầm gọn gàng (圣) nên lăn bánh rất nhẹ nhàng (KHINH).",
+      "compounds": "軽い (かるい): Nhẹ",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 266,
+      "lesson_id": 26,
+      "character": "頭",
+      "stroke_count": "16",
+      "onyomi": "トウ (tou), ズ (zu), ト (to)",
+      "kunyomi": "あたま (atama), かしら (kashira), -がしら (-gashira)",
+      "sino_vietnamese": "ĐẦU",
+      "vietnamese_meaning": "Cái đầu",
+      "mnemonic_tip": "Hạt đậu (豆) đặt cạnh bộ thủ chỉ phần đầu (頁), gợi hình cái đầu tròn trịa và trí óc con người (ĐẦU).",
+      "compounds": "到頭 (とうとう): Cuối cùng, rốt cuộc; 頭 (あたま): Đầu, trí óc",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 267,
+      "lesson_id": 16,
+      "character": "顔",
+      "stroke_count": "18",
+      "onyomi": "ガン (gan)",
+      "kunyomi": "かお (kao)",
+      "sino_vietnamese": "NHAN",
+      "vietnamese_meaning": "Khuôn mặt",
+      "mnemonic_tip": "Vầng trán thanh tú (彦) kết hợp với bộ trang/đầu (頁) tạo nên khuôn mặt, diện mạo (NHAN).",
+      "compounds": "顔 (かお): Khuôn mặt",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 268,
+      "lesson_id": 39,
+      "character": "好",
+      "stroke_count": "6",
+      "onyomi": "コウ (kou)",
+      "kunyomi": "この.む (kono.mu), す.く (su.ku), よ.い (yo.i)",
+      "sino_vietnamese": "HẢO",
+      "vietnamese_meaning": "Thích, tốt",
+      "mnemonic_tip": "Người phụ nữ (女) ôm đứa con nhỏ (子) trong lòng là hình ảnh đẹp đẽ, yêu thích nhất (HẢO).",
+      "compounds": "格好 (かっこう): Dáng vẻ, ngoại hình; 好き (すき): Thích, yêu thích",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 269,
+      "lesson_id": 8,
+      "character": "低",
+      "stroke_count": "7",
+      "onyomi": "テイ (tei)",
+      "kunyomi": "ひく.い (hiku.i), ひく.める (hiku.meru), ひく.まる (hiku.maru)",
+      "sino_vietnamese": "ĐÊ",
+      "vietnamese_meaning": "Thấp",
+      "mnemonic_tip": "Người (亻) cúi mình xuống tận nền đất (氐) dưới gạch ngang (一), biểu thị vị trí thấp (ĐÊ).",
+      "compounds": "低い (ひくい): Thấp",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 270,
+      "lesson_id": 46,
+      "character": "便",
+      "stroke_count": "9",
+      "onyomi": "ベン (ben), ビン (bin)",
+      "kunyomi": "たよ.り (tayo.ri)",
+      "sino_vietnamese": "TIỆN",
+      "vietnamese_meaning": "Tiện lợi; chuyển phát",
+      "mnemonic_tip": "Con người (亻) biết thay đổi, cải tiến (更) cách làm cho mọi việc trở nên thuận tiện (TIỆN).",
+      "compounds": "宅配便 (たくはいびん): Chuyển phát nhanh tại nhà; 便利 (べんり): Tiện lợi",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 271,
+      "lesson_id": 4,
+      "character": "働",
+      "stroke_count": "13",
+      "onyomi": "ドウ (dou)",
+      "kunyomi": "はたら.く (hatara.ku)",
+      "sino_vietnamese": "ĐỘNG",
+      "vietnamese_meaning": "Làm việc, lao động",
+      "mnemonic_tip": "Con người (亻) bỏ sức lực (力) gánh vác công việc nặng nhọc (重) chính là lao động, làm việc (ĐỘNG).",
+      "compounds": "働く (はたらく): Làm việc",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 272,
+      "lesson_id": 35,
+      "character": "都",
+      "stroke_count": "11",
+      "onyomi": "ト (to), ツ (tsu)",
+      "kunyomi": "みやこ (miyako)",
+      "sino_vietnamese": "ĐÔ",
+      "vietnamese_meaning": "Đô thị, kinh đô",
+      "mnemonic_tip": "Nơi đông đảo con người (者) tụ hội trong vùng ấp thành (阝) sầm uất chính là kinh đô, đô thị (ĐÔ).",
+      "compounds": "都合 (つごう): Điều kiện thuận tiện, sự thu xếp thời gian; 都会 (とかい): Đô thị, thành phố",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 273,
+      "lesson_id": 8,
+      "character": "寒",
+      "stroke_count": "12",
+      "onyomi": "カン (kan)",
+      "kunyomi": "さむ.い (samu.i)",
+      "sino_vietnamese": "HÀN",
+      "vietnamese_meaning": "Lạnh (thời tiết)",
+      "mnemonic_tip": "Dưới mái nhà (宀), đắp nhiều lớp cỏ rơm mà dưới chân vẫn đóng băng hai vệt (冫) vì trời rét lạnh (HÀN).",
+      "compounds": "寒い (さむい): Lạnh",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 274,
+      "lesson_id": 8,
+      "character": "暑",
+      "stroke_count": "12",
+      "onyomi": "ショ (sho)",
+      "kunyomi": "あつ.い (atsu.i)",
+      "sino_vietnamese": "THỬ",
+      "vietnamese_meaning": "Nóng (thời tiết)",
+      "mnemonic_tip": "Mặt trời (日) chiếu thẳng xuống người già/đất đai (者) khiến thời tiết oi bức, nắng nóng (THỬ).",
+      "compounds": "暑い (あつい): Nóng",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 275,
+      "lesson_id": 33,
+      "character": "短",
+      "stroke_count": "12",
+      "onyomi": "タン (tan)",
+      "kunyomi": "みじか.い (mijika.i)",
+      "sino_vietnamese": "ĐOẢN",
+      "vietnamese_meaning": "Ngắn",
+      "mnemonic_tip": "Cây tên (矢) đặt cạnh hạt đậu (豆) nhỏ bé để so sánh kích thước ngắn gọn (ĐOẢN).",
+      "compounds": "短く (みじかく): Ngắn gọn; 短い (みじかい): Ngắn",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 276,
+      "lesson_id": 47,
+      "character": "合",
+      "stroke_count": "6",
+      "onyomi": "ゴウ (gou), ガッ (ga), カッ (ka)",
+      "kunyomi": "あ.う (a.u), あ.わせる (a.waseru), あ.い (a.i)",
+      "sino_vietnamese": "HỢP",
+      "vietnamese_meaning": "Hợp lại, gặp gỡ",
+      "mnemonic_tip": "Dưới một mái nhà (亼) mọi cái miệng (口) đều đồng lòng nhất trí, hợp lại cùng nhau (HỢP).",
+      "compounds": "知り合う (しりあう): Làm quen, quen biết; 場合 (ばあい): Trường hợp",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 277,
+      "lesson_id": 16,
+      "character": "暗",
+      "stroke_count": "13",
+      "onyomi": "アン (an)",
+      "kunyomi": "くら.い (kura.i), くら.む (kura.mu), くれ.る (kure.ru)",
+      "sino_vietnamese": "ÁM",
+      "vietnamese_meaning": "Tối",
+      "mnemonic_tip": "Mặt trời (日) đã khuất, chỉ còn nghe âm thanh (音) vọng lại trong màn đêm tối tăm (ÁM).",
+      "compounds": "暗い (くらい): Tối tăm, u ám; 暗証番号 (あんしょうばんごう): Mã số bí mật",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 278,
+      "lesson_id": 38,
+      "character": "区",
+      "stroke_count": "4",
+      "onyomi": "ク (ku), オウ (ou), コウ (kou)",
+      "kunyomi": "",
+      "sino_vietnamese": "KHU",
+      "vietnamese_meaning": "Quận, khu vực",
+      "mnemonic_tip": "Vòng tường bao ba phía (匚) chia cắt ranh giới chéo (メ) ở giữa thành từng quận, khu vực (KHU).",
+      "compounds": "地区 (ちく): Khu vực; ～区 (く): Quận",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 279,
+      "lesson_id": 44,
+      "character": "遠",
+      "stroke_count": "13",
+      "onyomi": "エン (en), オン (on)",
+      "kunyomi": "とお.い (too.i)",
+      "sino_vietnamese": "VIỄN",
+      "vietnamese_meaning": "Xa; khách sáo",
+      "mnemonic_tip": "Khoác áo dài (袁) bước đi mãi trên con đường xa tắp (辶) chưa tới đích (VIỄN).",
+      "compounds": "遠慮 (えんりょ): Khách sáo, e dè; 遠い (とおい): Xa",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 280,
+      "lesson_id": 15,
+      "character": "門",
+      "stroke_count": "8",
+      "onyomi": "モン (mon)",
+      "kunyomi": "かど (kado), と (to)",
+      "sino_vietnamese": "MÔN",
+      "vietnamese_meaning": "Cổng; chuyên môn",
+      "mnemonic_tip": "Hình tượng hai cánh cổng gỗ mở đối xứng nhau ở lối ra vào lớn (MÔN).",
+      "compounds": "専門 (せんもん): Chuyên môn, chuyên ngành; 門 (もん): Cổng, cánh cổng lớn",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 281,
+      "lesson_id": 17,
+      "character": "薬",
+      "stroke_count": "16",
+      "onyomi": "ヤク (yaku)",
+      "kunyomi": "くすり (kusuri)",
+      "sino_vietnamese": "DƯỢC",
+      "vietnamese_meaning": "Thuốc",
+      "mnemonic_tip": "Loại thảo mộc (艹) uống vào giúp cơ thể khỏe lại, mang tới niềm vui (楽) chính là thuốc (DƯỢC).",
+      "compounds": "薬 (くすり): Thuốc, dược phẩm",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 282,
+      "lesson_id": 24,
+      "character": "説",
+      "stroke_count": "14",
+      "onyomi": "セツ (setsu), ゼイ (zei)",
+      "kunyomi": "と.く (to.ku)",
+      "sino_vietnamese": "THUYẾT",
+      "vietnamese_meaning": "Giải thích",
+      "mnemonic_tip": "Dùng lời nói (言) giảng giải thật gãy gọn khiến người nghe vui vẻ thông suốt (兌) là giải thích (THUYẾT).",
+      "compounds": "説明 (せつめい): Giải thích, thuyết minh; 小説 (しょうせつ): Tiểu thuyết",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 283,
+      "lesson_id": 44,
+      "character": "洗",
+      "stroke_count": "9",
+      "onyomi": "セン (sen)",
+      "kunyomi": "あら.う (ara.u)",
+      "sino_vietnamese": "TẨY",
+      "vietnamese_meaning": "Rửa, giặt",
+      "mnemonic_tip": "Dùng dòng nước sạch (氵) dội lên trước tiên (先) để tắm rửa, giặt giũ (TẨY).",
+      "compounds": "洗濯物 (せんたくもの): Đồ giặt; 洗う (あらう): Rửa, tắm rửa",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 284,
+      "lesson_id": 24,
+      "character": "産",
+      "stroke_count": "11",
+      "onyomi": "サン (san)",
+      "kunyomi": "う.む (u.mu), う.まれる (u.mareru), うぶ- (ubu-)",
+      "sino_vietnamese": "SẢN",
+      "vietnamese_meaning": "Sản xuất, đặc sản",
+      "mnemonic_tip": "Đứng (立) bên sườn núi (厂) chứng kiến sự sinh sôi (生) của con người và sản vật (SẢN).",
+      "compounds": "生産 (せいさん): Sản xuất, làm ra sản phẩm; お土産 (おみやげ): Quà lưu niệm, đặc sản làm quà",
+      "jlpt_level": "N4"
+    },
+    {
+      "id": 285,
+      "lesson_id": 6,
+      "character": "菜",
+      "stroke_count": "11",
+      "onyomi": "サイ (sai)",
+      "kunyomi": "な (na)",
+      "sino_vietnamese": "THÁI",
+      "vietnamese_meaning": "Rau",
+      "mnemonic_tip": "Bàn tay (爫) hái cỏ cây (艹) mọc trên gỗ (木) mang về nấu rau xanh (THÁI).",
+      "compounds": "野菜 (やさい): Rau",
       "jlpt_level": "N4"
     }
   ],
@@ -41978,9 +42498,9 @@ module.exports = {
     "user123:vocabulary:2": "mastered",
     "user123:vocabulary:5": "mastered",
     "user123:vocabulary:7": "learning",
-    "user123:kanji:1": "mastered",
-    "user123:kanji:2": "mastered",
-    "user123:kanji:3": "learning"
+    "user123:kanji:1": "not_learned",
+    "user123:kanji:2": "not_learned",
+    "user123:kanji:3": "not_learned"
   },
   "targetPlan": {
     "user123": {

@@ -44,21 +44,46 @@ export function extractLessonKanjiVocabs(
   if (!Array.isArray(kanjiItems) || kanjiItems.length === 0) return [];
 
   const lessonKanjiMap = new Map<string, any>();
+  let maxLessonId = 0;
   kanjiItems.forEach(k => {
     if (k && k.character) {
       lessonKanjiMap.set(k.character, k);
+      const kl = Number(k.lesson_id) || 0;
+      if (kl > maxLessonId) maxLessonId = kl;
     }
   });
 
+  // Set of Kanji characters taught up to and including this lesson
+  const taughtKanjiSet = new Set<string>();
+  lessonKanjiMap.forEach((_, ch) => taughtKanjiSet.add(ch));
+  if (Array.isArray(allKanjiList) && allKanjiList.length > 0) {
+    for (const k of allKanjiList) {
+      if (!k || !k.character) continue;
+      const kl = Number(k.lesson_id) || 0;
+      if (maxLessonId === 0 || (kl > 0 && kl <= maxLessonId)) {
+        taughtKanjiSet.add(k.character);
+      }
+    }
+  }
+
+  const hasOnlyTaughtKanji = (word: string) => {
+    const chars = word.match(/[\u4E00-\u9FAF]/g);
+    if (!chars || chars.length === 0) return false;
+    if (taughtKanjiSet.size === 0) return true;
+    return chars.every(c => taughtKanjiSet.has(c));
+  };
+
   const results: LessonKanjiVocabItem[] = [];
+  const fallbackCompoundResults: LessonKanjiVocabItem[] = [];
   const seenWords = new Set<string>();
 
-  // 1. Scan vocabulary items in the lesson
+  // 1. Scan vocabulary items in the lesson (strictly within taught Kanji scope <= current lesson)
   if (Array.isArray(vocabItems)) {
     for (const v of vocabItems) {
       if (!v || !v.hiragana) continue;
       const kForm = v.kanji_word || v.kanji_form || getGlobalKanjiForm(v.hiragana, allKanjiList.length > 0 ? allKanjiList : kanjiItems, v.kanji_word);
       if (!kForm || kForm === v.hiragana) continue;
+      if (!hasOnlyTaughtKanji(kForm)) continue;
 
       // Check if kForm contains any Kanji character from this lesson
       const matchingChars: string[] = [];
@@ -97,14 +122,31 @@ export function extractLessonKanjiVocabs(
       if (!p.word || !p.word.includes(k.character)) continue;
       if (seenWords.has(p.word)) continue;
 
-      seenWords.add(p.word);
-      results.push({
+      const entry: LessonKanjiVocabItem = {
         kanjiWord: p.word,
         hiragana: p.reading,
         meaning: p.meaning,
         sinoVietnamese: k.sino_vietnamese,
         kanjiChars: [k.character]
-      });
+      };
+
+      if (hasOnlyTaughtKanji(p.word)) {
+        seenWords.add(p.word);
+        results.push(entry);
+      } else {
+        fallbackCompoundResults.push(entry);
+      }
+    }
+  }
+
+  // Only top up from lesson compounds if strict <= lesson words are fewer than 4
+  if (results.length < 4) {
+    for (const fb of fallbackCompoundResults) {
+      if (results.length >= 4) break;
+      if (!seenWords.has(fb.kanjiWord)) {
+        seenWords.add(fb.kanjiWord);
+        results.push(fb);
+      }
     }
   }
 
@@ -200,13 +242,14 @@ export function generateKanjiVocabQuizQuestions(
       const otherWords = shuffleArray(allWordPool.filter(w => w.kanjiWord !== item.kanjiWord)).slice(0, 3);
       const wrongOptions: string[] = otherWords.map(w => w.kanjiWord);
 
-      // If we don't have enough words, create smart orthographic distractors by substituting a kanji character
+      // If we don't have enough words, create smart orthographic distractors prioritizing lesson Kanji first
       if (wrongOptions.length < 3 && item.kanjiChars.length > 0) {
         const targetChar = item.kanjiChars[0];
-        const distractorPool = shuffleArray(
-          allKanjiChars.filter(c => c !== targetChar)
-            .concat(COMMON_KANJI_DISTRACTORS.map(d => d.character).filter(c => c !== targetChar))
+        const primaryChars = shuffleArray(allKanjiChars.filter(c => c !== targetChar));
+        const fallbackChars = shuffleArray(
+          COMMON_KANJI_DISTRACTORS.map(d => d.character).filter(c => c !== targetChar && !primaryChars.includes(c))
         );
+        const distractorPool = [...primaryChars, ...fallbackChars];
         for (const distChar of distractorPool) {
           if (wrongOptions.length >= 3) break;
           const fakeWord = item.kanjiWord.replace(targetChar, distChar);
@@ -249,11 +292,12 @@ export function generateKanjiVocabQuizQuestions(
       const maskedSubject = item.kanjiWord.replace(charToMask, '【 ? 】');
       const correctOption = charToMask;
 
-      // Pick 3 distractor kanji characters
-      const candidateDistractors = shuffleArray(
-        allKanjiChars.filter(c => c !== charToMask)
-          .concat(COMMON_KANJI_DISTRACTORS.map(d => d.character).filter(c => c !== charToMask))
+      // Pick 3 distractor kanji characters prioritizing lesson Kanji first
+      const primaryChars = shuffleArray(allKanjiChars.filter(c => c !== charToMask));
+      const fallbackChars = shuffleArray(
+        COMMON_KANJI_DISTRACTORS.map(d => d.character).filter(c => c !== charToMask && !primaryChars.includes(c))
       );
+      const candidateDistractors = [...primaryChars, ...fallbackChars];
 
       const wrongOptions = candidateDistractors.slice(0, 3);
       const uniqueOptions = Array.from(new Set([correctOption, ...wrongOptions]));

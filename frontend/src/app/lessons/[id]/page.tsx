@@ -6605,7 +6605,7 @@ const renderInteractivePractice = () => {
                                 📚 Từ ghép ví dụ thực tế
                               </span>
                               <div className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-line font-medium space-y-1">
-                                {selectedKanjiModal.compounds.split('\n').filter(Boolean).map((line, idx) => (
+                                {selectedKanjiModal.compounds.split(/[;\n]+/).map(s => s.trim()).filter(Boolean).map((line, idx) => (
                                   <div key={idx} className="flex items-center justify-between py-1 border-b border-slate-100 dark:border-slate-800/60 last:border-0">
                                     <span>{line}</span>
                                     <button

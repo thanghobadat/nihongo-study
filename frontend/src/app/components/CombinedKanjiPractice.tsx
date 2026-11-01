@@ -82,7 +82,46 @@ export default function CombinedKanjiPractice({
     playAudioWithFallback(charOrWord, reading || charOrWord);
   }, []);
 
-  // 1. Lọc kho từ vựng CÓ CHỨA CHỮ HÁN theo phạm vi (N5 / N4 / Toàn bộ 50 bài / Bài cụ thể)
+  // Bản đồ bài học của từng chữ Hán trong chương trình 285 chữ (1..50)
+  const kanjiLessonMap = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const k of (kanjiList || [])) {
+      if (k && k.character) {
+        map.set(k.character, Number((k as any).lesson_id) || 1);
+      }
+    }
+    return map;
+  }, [kanjiList]);
+
+  // Kiểm tra từ vựng có tất cả chữ Hán thuộc phạm vi bài <= maxLesson (hoặc thuộc 285 chữ khi maxLesson = 50)
+  const isWordWithinKanjiScope = useCallback((kWord: string, maxLesson: number) => {
+    const chars = kWord.match(/[\u4E00-\u9FAF]/g);
+    if (!chars || chars.length === 0) return false;
+    if (kanjiLessonMap.size === 0) return true;
+    return chars.every(c => {
+      const kL = kanjiLessonMap.get(c);
+      return kL !== undefined && kL <= maxLesson;
+    });
+  }, [kanjiLessonMap]);
+
+  // Danh sách chữ Hán đơn trong phạm vi đang chọn (dùng làm phương án nhiễu đúng cấp độ/bài)
+  const scopedKanjiItems = useMemo(() => {
+    const all = kanjiList || [];
+    if (scopeFilter === 'all_50') return all;
+    if (scopeFilter === 'level') {
+      const maxL = currentLevel === 'N5' ? 25 : 50;
+      return all.filter(k => (Number((k as any).lesson_id) || 1) <= maxL);
+    }
+    const lId = parseInt(scopeFilter, 10);
+    if (!isNaN(lId)) {
+      const exact = all.filter(k => Number((k as any).lesson_id) === lId);
+      const cum = all.filter(k => (Number((k as any).lesson_id) || 1) <= lId);
+      return exact.length >= 4 ? exact : cum;
+    }
+    return all;
+  }, [kanjiList, scopeFilter, currentLevel]);
+
+  // 1. Lọc kho từ vựng CÓ CHỨA CHỮ HÁN đã học theo phạm vi (N5 / N4 / Toàn bộ 50 bài / Bài cụ thể)
   const scopedVocabs = useMemo(() => {
     const list = (vocabList || []).filter(v => {
       if (!v || !v.hiragana) return false;
@@ -90,18 +129,49 @@ export default function CombinedKanjiPractice({
       return kWord && kWord !== v.hiragana && /[\u4E00-\u9FAF]/.test(kWord);
     });
 
-    if (scopeFilter === 'all_50') return list;
+    if (scopeFilter === 'all_50') {
+      return list.filter(v => {
+        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
+        return isWordWithinKanjiScope(kWord, 50);
+      });
+    }
     if (scopeFilter === 'level') {
       const start = currentLevel === 'N5' ? 1 : 26;
       const end = currentLevel === 'N5' ? 25 : 50;
-      return list.filter(v => v.lesson_id >= start && v.lesson_id <= end);
+      const levelChars = new Set(
+        (kanjiList || [])
+          .filter(k => {
+            const kl = Number((k as any).lesson_id) || 1;
+            return kl >= start && kl <= end;
+          })
+          .map(k => k.character)
+      );
+      return list.filter(v => {
+        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
+        if (!isWordWithinKanjiScope(kWord, end)) return false;
+        if (v.lesson_id >= start && v.lesson_id <= end) return true;
+        const chars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
+        return v.lesson_id <= end && chars.some((c: string) => levelChars.has(c));
+      });
     }
     const lId = parseInt(scopeFilter, 10);
     if (!isNaN(lId)) {
-      return list.filter(v => v.lesson_id === lId);
+      const lessonChars = new Set(
+        (kanjiList || [])
+          .filter(k => Number((k as any).lesson_id) === lId)
+          .map(k => k.character)
+      );
+      return list.filter(v => {
+        if (v.lesson_id > lId) return false;
+        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
+        if (!isWordWithinKanjiScope(kWord, lId)) return false;
+        if (v.lesson_id === lId) return true;
+        const chars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
+        return chars.some((c: string) => lessonChars.has(c));
+      });
     }
     return list;
-  }, [vocabList, scopeFilter, currentLevel]);
+  }, [vocabList, kanjiList, scopeFilter, currentLevel, isWordWithinKanjiScope]);
 
   // 2. Lọc tiếp theo trạng thái học tập
   const eligibleVocabs = useMemo(() => {
@@ -116,14 +186,22 @@ export default function CombinedKanjiPractice({
   const notLearnedCount = scopedVocabs.filter(v => (v.status || 'not_learned') === 'not_learned').length;
   const scopedMasteredPercent = totalCount > 0 ? Math.round((masteredCount / totalCount) * 100) : 0;
 
-  // Thống kê ma trận tiến độ theo 50 bài học
+  // Thống kê ma trận tiến độ theo 50 bài học (khớp đúng phạm vi chữ Hán đã học tới bài i)
   const perLessonVocabStats = useMemo(() => {
     const stats: Record<number, { total: number; mastered: number; learning: number; notLearned: number; percent: number }> = {};
     for (let i = 1; i <= 50; i++) {
+      const lessonChars = new Set(
+        (kanjiList || [])
+          .filter(k => Number((k as any).lesson_id) === i)
+          .map(k => k.character)
+      );
       const inLesson = (vocabList || []).filter(v => {
-        if (!v || v.lesson_id !== i || !v.hiragana) return false;
+        if (!v || v.lesson_id > i || !v.hiragana) return false;
         const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
-        return kWord && kWord !== v.hiragana && /[\u4E00-\u9FAF]/.test(kWord);
+        if (!kWord || kWord === v.hiragana || !isWordWithinKanjiScope(kWord, i)) return false;
+        if (v.lesson_id === i) return true;
+        const chars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
+        return chars.some((c: string) => lessonChars.has(c));
       });
       const total = inLesson.length;
       const mastered = inLesson.filter(v => v.status === 'mastered').length;
@@ -133,7 +211,7 @@ export default function CombinedKanjiPractice({
       stats[i] = { total, mastered, learning, notLearned, percent };
     }
     return stats;
-  }, [vocabList]);
+  }, [vocabList, kanjiList, isWordWithinKanjiScope]);
 
   // Nạp kỷ lục High Score theo tổ hợp bộ lọc
   useEffect(() => {
@@ -261,8 +339,8 @@ export default function CombinedKanjiPractice({
       const distractorKanjis = new Set<string>();
 
       for (const ov of shuffleArray(otherVocabs)) {
-        const okw = (ov.kanji_form || ov.kanji || '').trim();
-        if (okw && okw !== correctAns && !/[\u3040-\u309F]/.test(okw)) {
+        const okw = (ov.kanji_word || ov.kanji_form || ov.kanji || '').trim();
+        if (okw && okw !== correctAns && /[\u4E00-\u9FAF]/.test(okw)) {
           distractorKanjis.add(okw);
         }
         if (distractorKanjis.size >= 3) break;
@@ -332,12 +410,20 @@ export default function CombinedKanjiPractice({
     // Thu thập 3 chữ Hán đơn lẻ gây nhiễu
     const distractorChars = new Set<string>();
 
-    // Ưu tiên lấy từ kanjiList
-    for (const k of shuffleArray(kanjiList)) {
+    // Ưu tiên lấy từ chữ Hán trong phạm vi đang chọn trước, rồi mới tới kanjiList toàn cục
+    for (const k of shuffleArray(scopedKanjiItems)) {
       if (k.character && k.character !== targetChar) {
         distractorChars.add(k.character);
       }
       if (distractorChars.size >= 3) break;
+    }
+    if (distractorChars.size < 3) {
+      for (const k of shuffleArray(kanjiList)) {
+        if (k.character && k.character !== targetChar) {
+          distractorChars.add(k.character);
+        }
+        if (distractorChars.size >= 3) break;
+      }
     }
 
     // Lấy từ COMMON_KANJI_DISTRACTORS nếu thiếu

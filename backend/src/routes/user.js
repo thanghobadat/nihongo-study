@@ -2158,6 +2158,190 @@ router.post('/review-sessions', async (req, res) => {
 });
 
 /**
+ * Curriculum Reconciler: Synchronizes a study plan's Kanji tasks (itemIds, targetCount, scopeDetails, WP, dayRationale)
+ * with the current 285-Kanji 50-lesson database so stale cached plans or lessons that previously lacked Kanji
+ * always match the live curriculum under Rule 7 (1V = 1 WP, 1K = 3 WP, 1G = 3 WP).
+ */
+function buildRationaleForDay(day) {
+  if (!day || day.isRestDay || !Array.isArray(day.tasks) || day.tasks.length === 0) {
+    return day?.dayRationale || '';
+  }
+  let vocabCount = 0;
+  let kanjiCount = 0;
+  let grammarCount = 0;
+  let dayWP = 0;
+  for (const t of day.tasks) {
+    if (t.itemType === 'vocabulary') {
+      vocabCount += (t.targetCount || 0);
+      dayWP += (t.workloadPoints || (t.targetCount || 0) * 1);
+    } else if (t.itemType === 'kanji') {
+      kanjiCount += (t.targetCount || 0);
+      dayWP += (t.workloadPoints || (t.targetCount || 0) * 3);
+    } else if (t.itemType === 'grammar') {
+      grammarCount += (t.targetCount || 0);
+      dayWP += (t.workloadPoints || (t.targetCount || 0) * 3);
+    } else if (t.workloadPoints) {
+      dayWP += t.workloadPoints;
+    }
+  }
+  const taskLessons = [...new Set(day.tasks.map(t => Number(t.lesson || t.lesson_id)).filter(Boolean))];
+  const primaryLesson = taskLessons[0] || 1;
+  if (vocabCount > 0 && kanjiCount === 0 && grammarCount === 0 && taskLessons.length <= 1) {
+    return `Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ ${vocabCount} từ vựng của Bài ${primaryLesson} (${dayWP} điểm tải). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.`;
+  }
+  if (kanjiCount > 0 && grammarCount > 0 && vocabCount === 0 && taskLessons.length <= 1) {
+    return `Hôm nay bạn học toàn bộ ${kanjiCount} chữ Hán (${kanjiCount * 3} WP) và ${grammarCount} mẫu câu (${grammarCount * 3} WP) của Bài ${primaryLesson} (${dayWP} WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài ${primaryLesson}.`;
+  }
+  if (taskLessons.length > 1) {
+    return `Hôm nay theo lộ trình cân bằng tải trọng hoàn thành 50 bài, bạn học các phần của ${taskLessons.map(l => `Bài ${l}`).join(' & ')} (${dayWP} điểm tải WP: ${vocabCount} từ vựng = ${vocabCount} WP, ${kanjiCount} chữ Hán = ${kanjiCount * 3} WP, ${grammarCount} mẫu câu = ${grammarCount * 3} WP).`;
+  }
+  return `Hôm nay bạn học toàn bộ lý thuyết Bài ${primaryLesson} gồm ${vocabCount} từ vựng (${vocabCount} WP), ${kanjiCount} chữ Hán (${kanjiCount * 3} WP) và ${grammarCount} mẫu câu (${grammarCount * 3} WP) — tổng ${dayWP} điểm tải, kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.`;
+}
+
+function reconcilePlanWithCurriculum(plan) {
+  if (!plan || !Array.isArray(plan.days)) return false;
+
+  const allDays = [
+    ...(Array.isArray(plan.archivedPastDays) ? plan.archivedPastDays : []),
+    ...plan.days
+  ];
+  if (allDays.length === 0) return false;
+
+  const kanjiByLesson = new Map();
+  for (let l = 1; l <= 50; l++) {
+    kanjiByLesson.set(
+      l,
+      (mockDb.kanji || [])
+        .filter(k => Number(k.lesson_id) === l)
+        .sort((a, b) => Number(a.id) - Number(b.id))
+    );
+  }
+
+  // Group kanji tasks and first grammar-day reference per lesson
+  const kanjiTasksByLesson = new Map();
+  const grammarDayByLesson = new Map();
+
+  for (const day of allDays) {
+    if (!Array.isArray(day.tasks)) continue;
+    for (const task of day.tasks) {
+      const lesson = Number(task.lesson || task.lesson_id);
+      if (!lesson || lesson < 1 || lesson > 50) continue;
+      if (task.itemType === 'kanji') {
+        if (!kanjiTasksByLesson.has(lesson)) kanjiTasksByLesson.set(lesson, []);
+        kanjiTasksByLesson.get(lesson).push({ day, task });
+      } else if (task.itemType === 'grammar' && !grammarDayByLesson.has(lesson)) {
+        grammarDayByLesson.set(lesson, day);
+      }
+    }
+  }
+
+  let modified = false;
+  const touchedDays = new Set();
+
+  for (let l = 1; l <= 50; l++) {
+    const dbKanjis = kanjiByLesson.get(l) || [];
+    const expectedIds = dbKanjis.map(k => Number(k.id));
+    const entries = kanjiTasksByLesson.get(l) || [];
+
+    if (entries.length > 0) {
+      const currentIds = [];
+      for (const { task } of entries) {
+        if (Array.isArray(task.itemIds)) {
+          for (const id of task.itemIds) currentIds.push(Number(id));
+        }
+      }
+      const sameLength = currentIds.length === expectedIds.length;
+      const sameSet = sameLength && expectedIds.every(id => currentIds.includes(id));
+      const totalTarget = entries.reduce((s, e) => s + (Number(e.task.targetCount) || 0), 0);
+
+      if (!sameSet || totalTarget !== dbKanjis.length) {
+        if (dbKanjis.length === 0) {
+          for (const { day, task } of entries) {
+            day.tasks = day.tasks.filter(t => t !== task);
+            touchedDays.add(day);
+          }
+          modified = true;
+        } else {
+          // Distribute dbKanjis across existing batch count (1 or N batches, capped at dbKanjis.length)
+          const activeCount = Math.min(entries.length, dbKanjis.length);
+          const extraEntries = entries.slice(activeCount);
+          for (const { day, task } of extraEntries) {
+            day.tasks = day.tasks.filter(t => t !== task);
+            touchedDays.add(day);
+          }
+          const baseSize = Math.floor(dbKanjis.length / activeCount);
+          const rem = dbKanjis.length % activeCount;
+          let offset = 0;
+          for (let i = 0; i < activeCount; i++) {
+            const sliceLen = baseSize + (i < rem ? 1 : 0);
+            const sub = dbKanjis.slice(offset, offset + sliceLen);
+            offset += sliceLen;
+            const { day, task } = entries[i];
+            const chars = sub.map(k => k.character || k.kanji).filter(Boolean).join(', ');
+            task.lesson = l;
+            task.lesson_id = l;
+            task.part = i + 1;
+            task.totalParts = activeCount;
+            task.itemIds = sub.map(k => Number(k.id));
+            task.targetCount = sub.length;
+            task.workloadPoints = sub.length * 3;
+            task.estimatedMinutes = sub.length * 18;
+            task.title = activeCount > 1
+              ? `Minna Bài ${l}: Nắm vững chữ Hán (Phần ${i + 1}/${activeCount}: ${sub.length} chữ)`
+              : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`;
+            task.scopeDetails = `Chữ Hán: ${chars}`;
+            task.link = `/lessons/${l}?tab=kanji`;
+            touchedDays.add(day);
+          }
+          modified = true;
+        }
+      }
+    } else if (dbKanjis.length > 0 && grammarDayByLesson.has(l)) {
+      // Lesson previously had 0 Kanji in old curriculum -> insert Kanji task right before Grammar task
+      const day = grammarDayByLesson.get(l);
+      const chars = dbKanjis.map(k => k.character || k.kanji).filter(Boolean).join(', ');
+      const gIdx = day.tasks.findIndex(t => Number(t.lesson || t.lesson_id) === l && t.itemType === 'grammar');
+      const newTask = {
+        id: `task_${day.date}_kanji_L${l}_p1`,
+        date: day.date,
+        lesson: l,
+        lesson_id: l,
+        itemType: 'kanji',
+        part: 1,
+        totalParts: 1,
+        itemIds: dbKanjis.map(k => Number(k.id)),
+        title: `Minna Bài ${l}: Nắm vững toàn bộ ${dbKanjis.length} chữ Hán`,
+        scopeDetails: `Chữ Hán: ${chars}`,
+        targetCount: dbKanjis.length,
+        currentCount: 0,
+        workloadPoints: dbKanjis.length * 3,
+        estimatedMinutes: dbKanjis.length * 18,
+        due_time: '14:30',
+        link: `/lessons/${l}?tab=kanji`,
+        completed: false
+      };
+      if (gIdx >= 0) {
+        day.tasks.splice(gIdx, 0, newTask);
+      } else {
+        day.tasks.push(newTask);
+      }
+      day.tasks.forEach((t, idx) => { t.step = idx + 1; });
+      touchedDays.add(day);
+      modified = true;
+    }
+  }
+
+  for (const day of touchedDays) {
+    day.plannedCount = Array.isArray(day.tasks) ? day.tasks.length : 0;
+    day.workloadPoints = (day.tasks || []).reduce((s, t) => s + (Number(t.workloadPoints) || 0), 0);
+    day.totalEstimatedMinutes = (day.tasks || []).reduce((s, t) => s + (Number(t.estimatedMinutes) || 0), 0);
+    day.dayRationale = buildRationaleForDay(day);
+  }
+
+  return modified;
+}
+
+/**
  * Auto-tracking Helper: Scans database for mastered status and automatically marks tasks as completed.
  * Uses Cumulative Lesson Pool tracking: Tasks are fulfilled based on the required learning volume of that lesson,
  * ensuring users are credited for achieving their target count regardless of internal item order.
@@ -2167,7 +2351,7 @@ function applyAutoTracking(plan, userId) {
 
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
-  let planModified = false;
+  let planModified = reconcilePlanWithCurriculum(plan);
 
   // 1. Cache learned items per (lesson, itemType)
   const learnedPool = {};
@@ -2497,6 +2681,7 @@ router.post('/study-plan', async (req, res) => {
       }
     }
 
+    reconcilePlanWithCurriculum(plan);
     plan.updated_at = new Date().toISOString();
     if (!mockDb.studyPlans) mockDb.studyPlans = {};
     mockDb.studyPlans[userId] = plan;
@@ -2510,8 +2695,8 @@ router.post('/study-plan', async (req, res) => {
           user_id: userId,
           start_date: plan.startDate,
           end_date: plan.endDate,
-          vocabulary_target: plan.totalLessons ? plan.totalLessons * 40 : 2000,
-          kanji_target: plan.totalLessons ? plan.totalLessons * 10 : 500,
+          vocabulary_target: (mockDb.vocabulary || []).length || 2093,
+          kanji_target: (mockDb.kanji || []).length || 285,
           updated_at: new Date().toISOString()
         }, { onConflict: 'user_id' });
       } catch (e) {
@@ -2966,13 +3151,13 @@ function buildStudyOverviewPayload(userId, plan) {
   return {
     success: true,
     overview: {
-      totalVocab: vocabList.length || 1500,
+      totalVocab: vocabList.length || 2093,
       masteredVocab,
       vocabPercentage: vocabList.length ? parseFloat(((masteredVocab / vocabList.length) * 100).toFixed(1)) : 0,
-      totalKanji: kanjiList.length || 255,
+      totalKanji: kanjiList.length || 285,
       masteredKanji,
       kanjiPercentage: kanjiList.length ? parseFloat(((masteredKanji / kanjiList.length) * 100).toFixed(1)) : 0,
-      totalGrammar: grammarList.length || 204,
+      totalGrammar: grammarList.length || 206,
       masteredGrammar,
       grammarPercentage: grammarList.length ? parseFloat(((masteredGrammar / grammarList.length) * 100).toFixed(1)) : 0,
       totalLessons: 50,

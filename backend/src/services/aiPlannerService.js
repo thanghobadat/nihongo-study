@@ -857,7 +857,7 @@ Học viên thiết lập lộ trình học tiếng Nhật:
 - Khung thời gian: ${basePlan.startDate} ➔ ${basePlan.endDate} (${basePlan.totalDays} ngày)
 - Mục tiêu: ${basePlan.targetLevel} (Từ Bài ${basePlan.startLesson} đến Bài ${basePlan.targetLesson})
 - Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 1 WP, 1K = 3 WP, 1G = 3 WP).
-- Phương pháp: Tuyệt đối không chia 3 phần bằng nhau; phân bổ cân bằng 50% từ vựng nền tảng (Ngày 1) và 50% Kanji + Ngữ pháp kết hợp (Ngày 2) + 1 Ngày Thực Hành Chuyên Biệt cho mỗi bài.
+- Phương pháp: Tuyệt đối không chia 3 phần bằng nhau; phân bổ cân bằng ~50% Từ vựng nền tảng (Ngày 1) và ~50% Kanji + Ngữ pháp kết hợp cùng 2 phần ôn tập (4 dạng bài tập của bài và ôn tập tích lũy JLPT) trực tiếp trong Ngày 2 (không tách ngày ôn tập riêng biệt).
 - Nguyên tắc: Học gối đầu bài mới khi hoàn thành dở dang bài cũ, và ngày mai mới là ngày thực hành trọn vẹn.
 
 Hãy đưa ra lời khuyên huấn luyện (coaching advice) ngắn gọn, truyền cảm hứng (khoảng 3 câu súc tích bằng tiếng Việt).

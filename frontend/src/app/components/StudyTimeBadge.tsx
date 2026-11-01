@@ -87,11 +87,11 @@ export default function StudyTimeBadge({
           userName={user?.display_name || user?.user_metadata?.display_name || 'Học viên'}
           lessonTitle={reportData?.current_position?.title || 'Minna no Nihongo'}
           lessonId={reportData?.current_position?.lesson || 1}
-          vocabTotal={reportData?.overview?.totalVocab || 1500}
+          vocabTotal={reportData?.overview?.totalVocab || 2093}
           vocabMastered={reportData?.overview?.masteredVocab || 0}
-          kanjiTotal={reportData?.overview?.totalKanji || 255}
+          kanjiTotal={reportData?.overview?.totalKanji || 285}
           kanjiMastered={reportData?.overview?.masteredKanji || 0}
-          grammarTotal={reportData?.overview?.totalGrammar || 204}
+          grammarTotal={reportData?.overview?.totalGrammar || 206}
           grammarMastered={reportData?.overview?.masteredGrammar || 0}
           startDateStr={reportData?.planMetadata?.startDate || ''}
           endDateStr={reportData?.planMetadata?.endDate || ''}

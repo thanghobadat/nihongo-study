@@ -158,8 +158,38 @@ export function generateKanjiPracticeQuestions(
 ): KanjiPracticeQuestion[] {
   if (!lessonKanji || lessonKanji.length === 0) return [];
 
-  // Gộp allKanjiPool và COMMON_KANJI_DISTRACTORS để luôn có kho đáp án nhiễu phong phú
-  const pool = [...lessonKanji, ...allKanjiPool, ...COMMON_KANJI_DISTRACTORS];
+  // Ưu tiên tuyệt đối phương án nhiễu trong chính bài đang học trước;
+  // chỉ mượn từ các bài đã học (<= lesson_id) hoặc kho cơ bản khi bài có dưới 4 chữ Kanji.
+  const pickDistractors = (current: KanjiItemData, formatOpt: (k: KanjiItemData) => string, correctText: string): string[] => {
+    const seenChars = new Set<string>([current.character]);
+    const seenOpts = new Set<string>([correctText]);
+    const result: string[] = [];
+
+    const tryPushFrom = (list: KanjiItemData[]) => {
+      for (const k of shuffleArray(list)) {
+        if (result.length >= 3) break;
+        if (!k || !k.character || seenChars.has(k.character)) continue;
+        const opt = formatOpt(k);
+        if (!opt || seenOpts.has(opt)) continue;
+        seenChars.add(k.character);
+        seenOpts.add(opt);
+        result.push(opt);
+      }
+    };
+
+    tryPushFrom(lessonKanji);
+    if (result.length < 3) {
+      const learnedPool = (allKanjiPool || []).filter(
+        k => !current.lesson_id || !k.lesson_id || k.lesson_id <= current.lesson_id
+      );
+      tryPushFrom(learnedPool);
+    }
+    if (result.length < 3) {
+      tryPushFrom(COMMON_KANJI_DISTRACTORS);
+    }
+    return result;
+  };
+
   const questions: KanjiPracticeQuestion[] = [];
   const shuffledItems = shuffleArray(lessonKanji);
 
@@ -187,11 +217,10 @@ export function generateKanjiPracticeQuestions(
     const chosenType = availableTypes[Math.floor(Math.random() * availableTypes.length)];
 
     if (chosenType === 'kanji_to_sino_meaning') {
-      const correct = `${current.sino_vietnamese || ''} • ${current.vietnamese_meaning}`.trim().replace(/^•\s*/, '');
-      // Lấy 3 đáp án sai từ pool
-      const otherItems = pool.filter(k => k.id !== current.id && k.character !== current.character);
-      const shuffledOthers = shuffleArray(otherItems);
-      const wrongOptions = shuffledOthers.slice(0, 3).map(k => `${k.sino_vietnamese || ''} • ${k.vietnamese_meaning}`.trim().replace(/^•\s*/, ''));
+      const formatSinoMeaning = (k: KanjiItemData) =>
+        `${k.sino_vietnamese || ''} • ${k.vietnamese_meaning}`.trim().replace(/^•\s*/, '');
+      const correct = formatSinoMeaning(current);
+      const wrongOptions = pickDistractors(current, formatSinoMeaning, correct);
       
       if (wrongOptions.length < 3) continue;
 
@@ -216,9 +245,7 @@ export function generateKanjiPracticeQuestions(
 
     } else if (chosenType === 'meaning_to_kanji') {
       const correct = current.character;
-      const otherItems = pool.filter(k => k.id !== current.id && k.character !== current.character);
-      const shuffledOthers = shuffleArray(otherItems);
-      const wrongOptions = shuffledOthers.slice(0, 3).map(k => k.character);
+      const wrongOptions = pickDistractors(current, k => k.character, correct);
 
       if (wrongOptions.length < 3) continue;
 
@@ -244,16 +271,13 @@ export function generateKanjiPracticeQuestions(
 
     } else if (chosenType === 'compound_fill') {
       const targetCompound = validCompounds[Math.floor(Math.random() * validCompounds.length)];
-      // Thay thế chữ Kanji trong từ ghép bằng '___'
       const maskedWord = targetCompound.word.replace(current.character, '【 ? 】');
       const subInfoText = targetCompound.reading 
         ? `Cách đọc: ${targetCompound.reading} • Ý nghĩa: ${targetCompound.meaning}`
         : `Ý nghĩa: ${targetCompound.meaning}`;
 
       const correct = current.character;
-      const otherItems = pool.filter(k => k.id !== current.id && k.character !== current.character);
-      const shuffledOthers = shuffleArray(otherItems);
-      const wrongOptions = shuffledOthers.slice(0, 3).map(k => k.character);
+      const wrongOptions = pickDistractors(current, k => k.character, correct);
 
       if (wrongOptions.length < 3) continue;
 

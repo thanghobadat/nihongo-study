@@ -284,11 +284,17 @@ export default function KanjiPracticeTab({
       else dir = 'complete-compound';
     }
 
-    // 3 phương án gây nhiễu cho Nghĩa và Chữ Hán
-    const pool = eligibleKanji.filter(k => k.id !== target.id);
-    const combinedPool = pool.length >= 3 ? pool : [...pool, ...COMMON_KANJI_DISTRACTORS.filter(d => d.character !== target.character)];
-    const shuffledPool = shuffleArray(combinedPool);
-    const distractors = shuffledPool.slice(0, 3);
+    // 3 phương án gây nhiễu cho Nghĩa và Chữ Hán (ưu tiên chữ trong bộ lọc -> chữ trong cùng bài -> COMMON_KANJI_DISTRACTORS)
+    const eligiblePool = shuffleArray(eligibleKanji.filter(k => k.id !== target.id));
+    const lessonRestPool = shuffleArray(
+      kanjiItems.filter(k => k.id !== target.id && !eligiblePool.some(ep => ep.id === k.id))
+    );
+    const fallbackPool = shuffleArray(
+      COMMON_KANJI_DISTRACTORS.filter(
+        d => d.character !== target.character && !kanjiItems.some(k => k.character === d.character)
+      )
+    );
+    const distractors = [...eligiblePool, ...lessonRestPool, ...fallbackPool].slice(0, 3);
 
     const compoundCandidates = getLessonCompoundCandidatesForKanji(target, vocabItems, kanjiItems);
     const sampleCompound = compoundCandidates[0];
