@@ -347,7 +347,7 @@ export function getLessonKanjiRomaji(
   if (vocabItems && vocabItems.length > 0) {
     for (const v of vocabItems) {
       if (!v) continue;
-      const kWord = v.kanji_form || v.kanji || '';
+      const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
       if (kWord && KANJI_COMPOUND_BREAKDOWN[kWord]) {
         const bd = KANJI_COMPOUND_BREAKDOWN[kWord];
         const idx = bd.chars.indexOf(kanji.character);
@@ -404,6 +404,128 @@ export function getLessonKanjiRomaji(
   if (onRom) return onRom;
 
   return '';
+}
+
+export interface KanjiCompoundCandidate {
+  word: string;
+  reading: string;
+  meaning: string;
+  isMultiChar: boolean;
+}
+
+/**
+ * Thu thập danh sách từ ghép / từ vựng chứa chữ Hán mục tiêu của bài học.
+ * Ưu tiên từ ghép đa ký tự (>= 2 ký tự không tính dấu ～/~) từ:
+ * 1. Danh sách từ vựng của bài học (vocabItems)
+ * 2. Trường compounds của chữ Hán mục tiêu & các chữ Hán cùng bài
+ * 3. Bảng phân rã KANJI_COMPOUND_BREAKDOWN
+ * 4. Fallback an toàn về từ đơn chứa chữ Hán nếu không có từ đa ký tự
+ */
+export function getLessonCompoundCandidatesForKanji(
+  targetKanji: KanjiItemData,
+  vocabItems: any[] = [],
+  allLessonKanji: KanjiItemData[] = []
+): KanjiCompoundCandidate[] {
+  if (!targetKanji || !targetKanji.character) return [];
+  const targetChar = targetKanji.character.trim();
+
+  const multiCharList: KanjiCompoundCandidate[] = [];
+  const singleCharList: KanjiCompoundCandidate[] = [];
+  const seenWords = new Set<string>();
+
+  const pushCandidate = (rawWord: string, rawReading: string, rawMeaning: string) => {
+    const word = (rawWord || '').trim();
+    if (!word || !word.includes(targetChar)) return;
+    if (seenWords.has(word)) return;
+    seenWords.add(word);
+
+    const coreWord = word.replace(/[～~・\s]/g, '');
+    const isMultiChar = coreWord.length >= 2;
+    const item: KanjiCompoundCandidate = {
+      word,
+      reading: (rawReading || '').trim(),
+      meaning: (rawMeaning || '').trim(),
+      isMultiChar
+    };
+
+    if (isMultiChar) {
+      multiCharList.push(item);
+    } else {
+      singleCharList.push(item);
+    }
+  };
+
+  // 1. Ưu tiên từ vựng trong chính bài học hiện tại
+  for (const v of vocabItems || []) {
+    if (!v) continue;
+    const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
+    const hira = (v.hiragana || '').trim();
+    if (!kWord || kWord === hira) continue;
+    if (kWord.includes(targetChar)) {
+      pushCandidate(kWord, hira, v.vietnamese_meaning || '');
+    }
+  }
+
+  // Helper tách trường compounds dạng "会社 (かいしゃ): Công ty; 社員 (しゃいん): Nhân viên"
+  const parseCompoundsField = (compoundsStr?: string) => {
+    if (!compoundsStr) return;
+    const parts = compoundsStr.split(/[;\n]/);
+    for (const part of parts) {
+      const trimmed = part.trim();
+      if (!trimmed) continue;
+      const m = trimmed.match(/^([^\(（:：\s]+)(?:\s*[\(（]([^\)）]+)[\)）])?\s*(?:[:：]\s*(.+))?$/);
+      if (m) {
+        const word = (m[1] || '').trim();
+        const reading = (m[2] || '').trim();
+        const meaning = (m[3] || '').trim();
+        if (word && word.includes(targetChar)) {
+          pushCandidate(word, reading, meaning);
+        }
+      }
+    }
+  };
+
+  // 2. Từ trường compounds của chính chữ Hán mục tiêu
+  parseCompoundsField(targetKanji.compounds);
+
+  // 3. Từ trường compounds của các chữ Hán khác trong cùng bài
+  for (const k of allLessonKanji || []) {
+    if (!k || k.character === targetChar) continue;
+    parseCompoundsField(k.compounds);
+  }
+
+  // 4. Từ bảng KANJI_COMPOUND_BREAKDOWN nếu vẫn chưa có từ đa ký tự
+  if (multiCharList.length === 0) {
+    for (const [kWord, bd] of Object.entries(KANJI_COMPOUND_BREAKDOWN)) {
+      if (kWord.length >= 2 && kWord.includes(targetChar)) {
+        pushCandidate(kWord, bd.readings.join(''), '');
+      }
+    }
+  }
+
+  if (multiCharList.length > 0) {
+    return multiCharList;
+  }
+
+  if (singleCharList.length > 0) {
+    return singleCharList;
+  }
+
+  // 5. Fallback an toàn tuyệt đối
+  const fallbackKana = (
+    (targetKanji.kunyomi || targetKanji.onyomi || '')
+      .split(/[\s,()（）.]+/)
+      .find(tok => /[\u3040-\u309F\u30A0-\u30FF]/.test(tok)) || ''
+  ).trim();
+
+  return [
+    {
+      word: targetChar,
+      reading: fallbackKana,
+      meaning: targetKanji.vietnamese_meaning || '',
+      isMultiChar: false
+    }
+  ];
 }
 
 /**
@@ -713,7 +835,7 @@ export function generatePracticeQuestions({
 
   (vocabItems || []).forEach(v => {
     if (!v || !v.hiragana) return;
-    const kWord = v.kanji_form || v.kanji;
+    const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
     if (!kWord || kWord === v.hiragana) return;
 
     // Tìm các chữ Hán trong từ này có thuộc bài hiện tại không

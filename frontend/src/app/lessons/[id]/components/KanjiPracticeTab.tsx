@@ -12,7 +12,8 @@ import {
   PracticeExerciseQuestion,
   PracticeCategory,
   generatePracticeQuestions,
-  getLessonKanjiRomaji
+  getLessonCompoundCandidatesForKanji,
+  buildVocabKanjiExplanation
 } from '../../../utils/kanjiOverhaulHelper';
 
 interface KanjiPracticeTabProps {
@@ -216,7 +217,7 @@ export default function KanjiPracticeTab({
   const [memorizeMaxStreak, setMemorizeMaxStreak] = useState<number>(0);
   const [memorizeTimeLeft, setMemorizeTimeLeft] = useState<number>(10);
   const [memorizeMaxTime, setMemorizeMaxTime] = useState<number>(10);
-  const [memorizeDirection, setMemorizeDirection] = useState<'jp-to-vn' | 'vn-to-jp' | 'jp-to-romaji' | 'both'>('both');
+  const [memorizeDirection, setMemorizeDirection] = useState<'jp-to-vn' | 'vn-to-jp' | 'complete-compound' | 'both'>('both');
   const [memorizeWrongList, setMemorizeWrongList] = useState<KanjiItemData[]>([]);
 
   interface MemorizeQ {
@@ -226,7 +227,10 @@ export default function KanjiPracticeTab({
     correctKanji: KanjiItemData;
     correctAnswerText: string;
     options: { text: string; isCorrect: boolean }[];
-    direction: 'jp-to-vn' | 'vn-to-jp' | 'jp-to-romaji';
+    direction: 'jp-to-vn' | 'vn-to-jp' | 'complete-compound';
+    explanation?: string;
+    compoundWord?: string;
+    compoundReading?: string;
   }
 
   const [currentMemorizeQ, setCurrentMemorizeQ] = useState<MemorizeQ | null>(null);
@@ -256,7 +260,7 @@ export default function KanjiPracticeTab({
     return Math.max(2, Math.round(10 * Math.pow(0.9, reductionCount) * 10) / 10);
   };
 
-  // Sinh câu hỏi Nhớ mặt chữ tiếp theo (100% Kanji độc lập <-> Nghĩa / Romaji)
+  // Sinh câu hỏi Nhớ mặt chữ tiếp theo (Chữ Hán <-> Nghĩa & Hoàn thiện từ ghép)
   const generateNextMemorizeQuestion = useCallback((): MemorizeQ | null => {
     if (eligibleKanji.length === 0) return null;
 
@@ -264,15 +268,15 @@ export default function KanjiPracticeTab({
     const target = eligibleKanji[Math.floor(Math.random() * eligibleKanji.length)];
 
     // Xác định chiều câu hỏi
-    let dir: 'jp-to-vn' | 'vn-to-jp' | 'jp-to-romaji' = 'jp-to-vn';
+    let dir: 'jp-to-vn' | 'vn-to-jp' | 'complete-compound' = 'jp-to-vn';
     if (memorizeDirection === 'jp-to-vn') dir = 'jp-to-vn';
     else if (memorizeDirection === 'vn-to-jp') dir = 'vn-to-jp';
-    else if (memorizeDirection === 'jp-to-romaji') dir = 'jp-to-romaji';
+    else if (memorizeDirection === 'complete-compound') dir = 'complete-compound';
     else {
       const rand = Math.random();
       if (rand < 0.34) dir = 'jp-to-vn';
       else if (rand < 0.67) dir = 'vn-to-jp';
-      else dir = 'jp-to-romaji';
+      else dir = 'complete-compound';
     }
 
     // 3 phương án gây nhiễu cho Nghĩa và Chữ Hán
@@ -280,6 +284,17 @@ export default function KanjiPracticeTab({
     const combinedPool = pool.length >= 3 ? pool : [...pool, ...COMMON_KANJI_DISTRACTORS.filter(d => d.character !== target.character)];
     const shuffledPool = shuffleArray(combinedPool);
     const distractors = shuffledPool.slice(0, 3);
+
+    const compoundCandidates = getLessonCompoundCandidatesForKanji(target, vocabItems, kanjiItems);
+    const sampleCompound = compoundCandidates[0];
+    const singleKanjiExplanation = [
+      `【Chữ Hán】: ${target.character} (${target.sino_vietnamese ? 'Âm Hán: ' + target.sino_vietnamese + ' - ' : ''}Nghĩa: ${target.vietnamese_meaning})`,
+      sampleCompound
+        ? `• Từ ghép tiêu biểu: ${sampleCompound.word}${sampleCompound.reading && sampleCompound.reading !== sampleCompound.word ? ' (' + sampleCompound.reading + ')' : ''}${sampleCompound.meaning ? ': ' + sampleCompound.meaning : ''}`
+        : ''
+    ]
+      .filter(Boolean)
+      .join('\n');
 
     // Chiều 1: 🈸 ➔ 🇻🇳 (Chữ Hán -> Chọn Nghĩa & Âm Hán)
     if (dir === 'jp-to-vn') {
@@ -298,7 +313,10 @@ export default function KanjiPracticeTab({
         correctKanji: target,
         correctAnswerText: targetAns,
         options,
-        direction: 'jp-to-vn'
+        direction: 'jp-to-vn',
+        explanation: singleKanjiExplanation,
+        compoundWord: sampleCompound?.word,
+        compoundReading: sampleCompound?.reading || sampleCompound?.word
       };
     }
 
@@ -321,59 +339,93 @@ export default function KanjiPracticeTab({
         correctKanji: target,
         correctAnswerText: targetAns,
         options,
-        direction: 'vn-to-jp'
+        direction: 'vn-to-jp',
+        explanation: singleKanjiExplanation,
+        compoundWord: sampleCompound?.word,
+        compoundReading: sampleCompound?.reading || sampleCompound?.word
       };
     }
 
-    // Chiều 3: 🈸 ➔ 🔤 Romaji (Chữ Hán -> Chọn Romaji tương ứng trong bài)
-    const targetRomaji = getLessonKanjiRomaji(target, selectedLessonId, vocabItems).toLowerCase().trim() ||
-      (target.onyomi || target.kunyomi || target.character).split(/[\s,()（）.]+/)[0].toLowerCase();
+    // Chiều 3: 🧩 Hoàn thiện từ ghép (Từ ghép khuyết 1 chữ Hán -> Chọn chữ Hán đơn điền vào 【 ? 】)
+    const chosenCompound = compoundCandidates[Math.floor(Math.random() * compoundCandidates.length)] || {
+      word: target.character,
+      reading: '',
+      meaning: target.vietnamese_meaning,
+      isMultiChar: false
+    };
 
-    // Thu thập kho Romaji gây nhiễu độc nhất
-    const distractorRomajis = new Set<string>();
-    for (const k of shuffleArray(pool)) {
-      const r = getLessonKanjiRomaji(k, selectedLessonId, vocabItems).toLowerCase().trim();
-      if (r && r !== targetRomaji) {
-        distractorRomajis.add(r);
+    const wordChars = chosenCompound.word.split('');
+    const matchingIndices: number[] = [];
+    wordChars.forEach((ch, idx) => {
+      if (ch === target.character) {
+        matchingIndices.push(idx);
       }
-      if (distractorRomajis.size >= 3) break;
+    });
+
+    const maskIdx = matchingIndices.length > 0
+      ? matchingIndices[Math.floor(Math.random() * matchingIndices.length)]
+      : 0;
+    const maskedWord = wordChars.map((ch, idx) => (idx === maskIdx ? '【 ? 】' : ch)).join('');
+
+    const hintParts: string[] = [];
+    if (chosenCompound.reading) hintParts.push(chosenCompound.reading);
+    if (chosenCompound.meaning) hintParts.push(chosenCompound.meaning);
+    const subText = hintParts.length > 0 ? `＝ ${hintParts.join(' • ')}` : undefined;
+
+    // Thu thập 3 chữ Hán đơn lẻ gây nhiễu không trùng lặp
+    const distractorChars = new Set<string>();
+    for (const k of shuffleArray(kanjiItems)) {
+      if (k.character && k.character !== target.character) {
+        distractorChars.add(k.character);
+      }
+      if (distractorChars.size >= 3) break;
     }
 
-    // Nếu kho chữ của bài ít hơn 4 chữ, lấy thêm từ COMMON_KANJI_DISTRACTORS
-    if (distractorRomajis.size < 3) {
+    if (distractorChars.size < 3) {
       for (const d of shuffleArray(COMMON_KANJI_DISTRACTORS)) {
-        const r = getLessonKanjiRomaji(d, 0, []).toLowerCase().trim();
-        if (r && r !== targetRomaji) {
-          distractorRomajis.add(r);
+        if (d.character && d.character !== target.character) {
+          distractorChars.add(d.character);
         }
-        if (distractorRomajis.size >= 3) break;
+        if (distractorChars.size >= 3) break;
       }
     }
 
-    // Fallback nếu vẫn thiếu
-    const FALLBACK_ROMAJIS = ['kai', 'sha', 'in', 'sen', 'sei', 'gaku', 'kou', 'hon', 'ji', 'sho', 'shin', 'bun', 'dou', 'eki'];
-    for (const fb of shuffleArray(FALLBACK_ROMAJIS)) {
-      if (distractorRomajis.size >= 3) break;
-      if (fb !== targetRomaji) {
-        distractorRomajis.add(fb);
+    const FALLBACK_SINGLES = ['会', '社', '電', '話', '教', '室', '食', '堂', '所', '時', '計', '校', '生', '先', '学', '員', '国', '駅'];
+    for (const fs of shuffleArray(FALLBACK_SINGLES)) {
+      if (distractorChars.size >= 3) break;
+      if (fs !== target.character) {
+        distractorChars.add(fs);
       }
     }
 
-    const chosenRomajiDistractors = Array.from(distractorRomajis).slice(0, 3);
     const options = shuffleArray([
-      { text: targetRomaji, isCorrect: true },
-      ...chosenRomajiDistractors.map(r => ({ text: r, isCorrect: false }))
+      { text: target.character, isCorrect: true },
+      ...Array.from(distractorChars).slice(0, 3).map(c => ({ text: c, isCorrect: false }))
     ]);
 
+    const compoundExplanation = buildVocabKanjiExplanation({
+      targetVocab: {
+        kanjiWord: chosenCompound.word,
+        hiragana: chosenCompound.reading || chosenCompound.word,
+        meaning: chosenCompound.meaning || target.vietnamese_meaning,
+        kanjiChars: [target.character]
+      },
+      allLessonKanji: kanjiItems
+    });
+
     return {
-      subject: target.character,
-      promptText: '👉 Chọn cách đọc Romaji tương ứng trong bài:',
+      subject: `「 ${maskedWord} 」`,
+      subText,
+      promptText: '👉 Chọn chữ Hán thích hợp điền vào 【 ? 】:',
       correctKanji: target,
-      correctAnswerText: targetRomaji,
+      correctAnswerText: target.character,
       options,
-      direction: 'jp-to-romaji'
+      direction: 'complete-compound',
+      explanation: compoundExplanation,
+      compoundWord: chosenCompound.word,
+      compoundReading: chosenCompound.reading || chosenCompound.word
     };
-  }, [eligibleKanji, memorizeDirection, selectedLessonId, vocabItems]);
+  }, [eligibleKanji, kanjiItems, memorizeDirection, vocabItems]);
 
   // Bắt đầu Speedrun Nhớ mặt chữ
   const startMemorizeGame = () => {
@@ -937,54 +989,58 @@ export default function KanjiPracticeTab({
               </div>
 
               {/* Chuyển đổi các chiều phản xạ + Tổng hợp */}
-              <div className="space-y-2 text-left bg-slate-50 dark:bg-slate-950 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="space-y-2.5 text-left bg-slate-50 dark:bg-slate-950 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
                   Chiều câu hỏi phản xạ:
                 </span>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <button
                     type="button"
                     onClick={() => setMemorizeDirection('jp-to-vn')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                    className={`p-3 rounded-xl text-xs font-bold transition-all cursor-pointer text-left ${
                       memorizeDirection === 'jp-to-vn'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
                     }`}
                   >
-                    🈸 ➔ 🇻🇳 Chữ Hán
+                    <div className="text-[13px] mb-0.5">🈸 ➔ 🇻🇳 Nhớ chữ Hán</div>
+                    <div className="text-[10px] opacity-75 font-normal">Cho chữ Hán ➔ Chọn Âm Hán & Nghĩa</div>
                   </button>
                   <button
                     type="button"
                     onClick={() => setMemorizeDirection('vn-to-jp')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                    className={`p-3 rounded-xl text-xs font-bold transition-all cursor-pointer text-left ${
                       memorizeDirection === 'vn-to-jp'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
                     }`}
                   >
-                    🇻🇳 ➔ 🈸 Nghĩa
+                    <div className="text-[13px] mb-0.5">🇻🇳 ➔ 🈸 Nhận diện Nghĩa</div>
+                    <div className="text-[10px] opacity-75 font-normal">Cho Nghĩa & Âm Hán ➔ Chọn chữ Hán</div>
                   </button>
                   <button
                     type="button"
-                    onClick={() => setMemorizeDirection('jp-to-romaji')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
-                      memorizeDirection === 'jp-to-romaji'
+                    onClick={() => setMemorizeDirection('complete-compound')}
+                    className={`p-3 rounded-xl text-xs font-bold transition-all cursor-pointer text-left ${
+                      memorizeDirection === 'complete-compound'
                         ? 'bg-blue-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
                     }`}
                   >
-                    🈸 ➔ 🔤 Romaji
+                    <div className="text-[13px] mb-0.5">🧩 Hoàn thiện từ ghép</div>
+                    <div className="text-[10px] opacity-75 font-normal">Điền chữ Hán vào từ khuyết 【 ? 】</div>
                   </button>
                   <button
                     type="button"
                     onClick={() => setMemorizeDirection('both')}
-                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                    className={`p-3 rounded-xl text-xs font-bold transition-all cursor-pointer text-left ${
                       memorizeDirection === 'both'
-                        ? 'bg-indigo-600 text-white shadow-sm font-extrabold'
+                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm font-extrabold'
                         : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
                     }`}
                   >
-                    🔀 Tổng hợp
+                    <div className="text-[13px] mb-0.5">🔀 Tổng hợp</div>
+                    <div className="text-[10px] opacity-75 font-normal">Trộn đều cả 3 dạng phản xạ trên</div>
                   </button>
                 </div>
               </div>
@@ -1036,22 +1092,32 @@ export default function KanjiPracticeTab({
               </div>
 
               {/* Question Box */}
-              <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border-2 border-slate-200 dark:border-slate-800 shadow-xl space-y-3">
+              <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border-2 border-slate-200 dark:border-slate-800 shadow-xl space-y-2.5">
                 <span className="text-xs font-black text-blue-600 dark:text-blue-400 block">
                   {currentMemorizeQ.promptText}
                 </span>
 
                 <div className={`font-['Noto_Sans_JP'] font-black text-slate-900 dark:text-white leading-relaxed ${
-                  currentMemorizeQ.direction === 'jp-to-vn' || currentMemorizeQ.direction === 'jp-to-romaji'
+                  currentMemorizeQ.direction === 'jp-to-vn'
                     ? 'text-6xl sm:text-7xl py-4'
-                    : 'text-2xl sm:text-3xl py-2'
+                    : currentMemorizeQ.direction === 'complete-compound'
+                      ? 'text-3xl sm:text-4xl py-2 tracking-wide'
+                      : 'text-2xl sm:text-3xl py-2'
                 }`}>
                   {currentMemorizeQ.subject}
                 </div>
+
+                {currentMemorizeQ.subText && (
+                  <div className="text-sm sm:text-base font-bold text-indigo-600 dark:text-indigo-400 font-['Noto_Sans_JP']">
+                    {currentMemorizeQ.subText}
+                  </div>
+                )}
               </div>
 
               {/* 4 Choices */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div className={`grid ${
+                currentMemorizeQ.direction === 'jp-to-vn' ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-2'
+              } gap-3 pt-1`}>
                 {currentMemorizeQ.options.map((opt, idx) => {
                   const letter = String.fromCharCode(65 + idx);
                   const isChosen = idx === memorizeSelectedIdx;
@@ -1085,11 +1151,9 @@ export default function KanjiPracticeTab({
                           {letter}
                         </span>
                         <span className={`font-['Noto_Sans_JP'] font-bold truncate ${
-                          currentMemorizeQ.direction === 'vn-to-jp'
+                          currentMemorizeQ.direction === 'vn-to-jp' || currentMemorizeQ.direction === 'complete-compound'
                             ? 'text-2xl sm:text-3xl font-black'
-                            : currentMemorizeQ.direction === 'jp-to-romaji'
-                              ? 'text-lg sm:text-xl font-mono font-black lowercase'
-                              : 'text-sm sm:text-base'
+                            : 'text-sm sm:text-base'
                         }`}>
                           {opt.text}
                         </span>
@@ -1137,6 +1201,42 @@ export default function KanjiPracticeTab({
                 </div>
               </div>
 
+              {/* Phân tích chi tiết câu hỏi vừa sai */}
+              {currentMemorizeQ && (
+                <div className="text-left p-4 rounded-2xl border border-indigo-500/30 bg-indigo-50/20 dark:bg-indigo-950/20 space-y-2.5">
+                  <div className="flex items-center justify-between gap-2 pb-2 border-b border-indigo-500/20">
+                    <span className="text-xs font-extrabold text-indigo-600 dark:text-indigo-400">
+                      💡 Phân tích câu hỏi vừa sai: {currentMemorizeQ.subject}
+                    </span>
+                    {currentMemorizeQ.compoundWord && (
+                      <button
+                        type="button"
+                        onClick={() => handlePlayAudio(
+                          currentMemorizeQ.compoundWord!,
+                          currentMemorizeQ.compoundReading || currentMemorizeQ.compoundWord
+                        )}
+                        className="p-1.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer shrink-0"
+                      >
+                        🔊 Nghe phát âm
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Đáp án chính xác:{' '}
+                    <span className="text-emerald-600 dark:text-emerald-400 font-extrabold font-['Noto_Sans_JP']">
+                      {currentMemorizeQ.correctAnswerText}
+                    </span>
+                  </div>
+
+                  {currentMemorizeQ.explanation && (
+                    <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-200 font-medium whitespace-pre-line leading-relaxed shadow-sm">
+                      {currentMemorizeQ.explanation}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Chữ Hán sai */}
               {memorizeWrongList.length > 0 && (
                 <div className="text-left space-y-2 bg-rose-500/5 p-4 rounded-2xl border border-rose-500/20">
@@ -1144,23 +1244,27 @@ export default function KanjiPracticeTab({
                     Chữ Hán cần chú ý ôn lại ({memorizeWrongList.length} chữ):
                   </span>
                   <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-1">
-                    {memorizeWrongList.map((k, i) => (
-                      <div key={i} className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-500/20 text-xs flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <span className="font-black text-rose-500 font-['Noto_Sans_JP'] text-xl shrink-0">
-                            {k.character}
-                          </span>
-                          <span className="font-bold text-slate-800 dark:text-slate-100">
-                            {k.sino_vietnamese ? `[${k.sino_vietnamese}] ` : ''}{k.vietnamese_meaning}
-                            {getLessonKanjiRomaji(k, selectedLessonId, vocabItems) && (
-                              <span className="ml-1.5 text-blue-500 font-mono font-bold">
-                                • Romaji: {getLessonKanjiRomaji(k, selectedLessonId, vocabItems)}
-                              </span>
-                            )}
-                          </span>
+                    {memorizeWrongList.map((k, i) => {
+                      const repCompound = getLessonCompoundCandidatesForKanji(k, vocabItems, kanjiItems)[0];
+                      return (
+                        <div key={i} className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-500/20 text-xs flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-rose-500 font-['Noto_Sans_JP'] text-xl shrink-0">
+                              {k.character}
+                            </span>
+                            <span className="font-bold text-slate-800 dark:text-slate-100">
+                              {k.sino_vietnamese ? `[${k.sino_vietnamese}] ` : ''}{k.vietnamese_meaning}
+                              {repCompound && (
+                                <span className="ml-1.5 text-indigo-600 dark:text-indigo-400 font-['Noto_Sans_JP'] font-bold">
+                                  • Từ ghép: {repCompound.word}
+                                  {repCompound.reading && repCompound.reading !== repCompound.word ? ` (${repCompound.reading})` : ''}
+                                </span>
+                              )}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
