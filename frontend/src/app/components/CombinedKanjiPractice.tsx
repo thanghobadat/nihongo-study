@@ -66,6 +66,12 @@ export default function CombinedKanjiPractice({
   const [failedQuestion, setFailedQuestion] = useState<VocabReflexQuestion | null>(null);
   const [wrongVocabList, setWrongVocabList] = useState<any[]>([]);
   const [expandedExplanationIds, setExpandedExplanationIds] = useState<Record<string, boolean>>({});
+  const [compoundQueue, setCompoundQueue] = useState<any[]>([]);
+  const [compoundIndex, setCompoundIndex] = useState<number>(0);
+  const [compoundAnsweredCount, setCompoundAnsweredCount] = useState<number>(0);
+  const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
+
+  const isCompoundRoundMode = direction === 'complete_compound';
 
   const timerRef = useRef<any>(null);
   const scoreRef = useRef<number>(0);
@@ -80,7 +86,7 @@ export default function CombinedKanjiPractice({
   const scopedVocabs = useMemo(() => {
     const list = (vocabList || []).filter(v => {
       if (!v || !v.hiragana) return false;
-      const kWord = (v.kanji_form || v.kanji || '').trim();
+      const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
       return kWord && kWord !== v.hiragana && /[\u4E00-\u9FAF]/.test(kWord);
     });
 
@@ -116,7 +122,7 @@ export default function CombinedKanjiPractice({
     for (let i = 1; i <= 50; i++) {
       const inLesson = (vocabList || []).filter(v => {
         if (!v || v.lesson_id !== i || !v.hiragana) return false;
-        const kWord = (v.kanji_form || v.kanji || '').trim();
+        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
         return kWord && kWord !== v.hiragana && /[\u4E00-\u9FAF]/.test(kWord);
       });
       const total = inLesson.length;
@@ -153,12 +159,12 @@ export default function CombinedKanjiPractice({
   // =========================================================================
   // TRÌNH SINH CÂU HỎI PHẢN XẠ TỪ VỰNG HÁN TỰ THỰC CHIẾN
   // =========================================================================
-  const generateNextQuestion = useCallback((): VocabReflexQuestion | null => {
-    if (eligibleVocabs.length === 0) return null;
+  const generateNextQuestion = useCallback((forcedTarget?: any): VocabReflexQuestion | null => {
+    if (!forcedTarget && eligibleVocabs.length === 0) return null;
 
-    // Chọn ngẫu nhiên từ vựng mục tiêu
-    const target = eligibleVocabs[Math.floor(Math.random() * eligibleVocabs.length)];
-    const kWord = (target.kanji_form || target.kanji || '').trim();
+    // Chọn từ vựng mục tiêu (theo lượt cố định nếu truyền forcedTarget, hoặc ngẫu nhiên cho Speedrun)
+    const target = forcedTarget || eligibleVocabs[Math.floor(Math.random() * eligibleVocabs.length)];
+    const kWord = (target.kanji_word || target.kanji_form || target.kanji || '').trim();
 
     // Xác định dạng câu hỏi
     let qType: 'kanji_to_hira' | 'hira_to_kanji' | 'complete_compound' = 'kanji_to_hira';
@@ -357,7 +363,7 @@ export default function CombinedKanjiPractice({
       id: `q_comp_${target.id}_${Date.now()}`,
       targetVocab: target,
       subject: `「 ${maskedWord} 」`,
-      subSubject: `＝ ${target.hiragana}`,
+      subSubject: `＝ ${target.hiragana}${target.vietnamese_meaning ? ' • ' + target.vietnamese_meaning : ''}`,
       promptText: '👉 Chọn chữ Hán thích hợp điền vào 【 ? 】:',
       correctAnswerText: targetChar,
       options,
@@ -366,9 +372,11 @@ export default function CombinedKanjiPractice({
     };
   }, [eligibleVocabs, direction, kanjiList]);
 
-  // Bắt đầu game Speedrun
-  const startGame = () => {
-    if (eligibleVocabs.length === 0) return;
+  // Bắt đầu game Speedrun hoặc Lượt Hoàn thiện từ ghép không đếm ngược
+  const startGame = (customPool?: any[]) => {
+    const poolToUse = Array.isArray(customPool) && customPool.length > 0 ? customPool : eligibleVocabs;
+    if (poolToUse.length === 0) return;
+
     setGameActive(true);
     setGameOver(false);
     setScore(0);
@@ -378,20 +386,31 @@ export default function CombinedKanjiPractice({
     setWrongVocabList([]);
     setFailedQuestion(null);
     setSelectedIdx(null);
+    setLastAnswerCorrect(null);
     setIsEvaluating(false);
 
-    const initialTime = 10;
-    setMaxTime(initialTime);
-    maxTimeRef.current = initialTime;
-    setTimeLeft(initialTime);
+    if (isCompoundRoundMode) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      const shuffledQueue = shuffleArray([...poolToUse]);
+      setCompoundQueue(shuffledQueue);
+      setCompoundIndex(0);
+      setCompoundAnsweredCount(0);
+      const firstQ = generateNextQuestion(shuffledQueue[0]);
+      setCurrentQ(firstQ);
+    } else {
+      const initialTime = 10;
+      setMaxTime(initialTime);
+      maxTimeRef.current = initialTime;
+      setTimeLeft(initialTime);
 
-    const q = generateNextQuestion();
-    setCurrentQ(q);
+      const q = generateNextQuestion();
+      setCurrentQ(q);
+    }
   };
 
-  // Đồng hồ đếm ngược
+  // Đồng hồ đếm ngược (chỉ kích hoạt cho các chế độ phản xạ 10s, tắt hoàn toàn ở Hoàn thiện từ ghép)
   useEffect(() => {
-    if (!gameActive || gameOver) {
+    if (!gameActive || gameOver || isCompoundRoundMode) {
       if (timerRef.current) clearInterval(timerRef.current);
       return;
     }
@@ -410,7 +429,7 @@ export default function CombinedKanjiPractice({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [gameActive, gameOver, currentQ]);
+  }, [gameActive, gameOver, currentQ, isCompoundRoundMode]);
 
   // Xử lý khi hết giờ
   const handleTimeout = () => {
@@ -438,6 +457,35 @@ export default function CombinedKanjiPractice({
     }
   };
 
+  // Chuyển sang câu tiếp theo trong chế độ Hoàn thiện từ ghép theo lượt
+  const handleNextCompoundQuestion = () => {
+    const nextIdx = compoundIndex + 1;
+    if (nextIdx < compoundQueue.length) {
+      setCompoundIndex(nextIdx);
+      setSelectedIdx(null);
+      setLastAnswerCorrect(null);
+      setIsEvaluating(false);
+      const nextQ = generateNextQuestion(compoundQueue[nextIdx]);
+      setCurrentQ(nextQ);
+    } else {
+      setGameActive(false);
+      setGameOver(true);
+      setSelectedIdx(null);
+      setLastAnswerCorrect(null);
+      setIsEvaluating(false);
+    }
+  };
+
+  // Kết thúc sớm lượt Hoàn thiện từ ghép để xem tổng kết
+  const handleFinishCompoundRoundEarly = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    setGameActive(false);
+    setGameOver(true);
+    setSelectedIdx(null);
+    setLastAnswerCorrect(null);
+    setIsEvaluating(false);
+  };
+
   // Người chơi chọn phương án
   const handleSelectAnswer = (idx: number) => {
     if (isEvaluating || !currentQ || gameOver) return;
@@ -446,6 +494,45 @@ export default function CombinedKanjiPractice({
 
     const chosenOpt = currentQ.options[idx];
     const isCorrect = chosenOpt.isCorrect;
+    setLastAnswerCorrect(isCorrect);
+
+    // Chế độ Hoàn thiện từ ghép: Không đếm ngược, không dừng ngang khi sai, luôn hiện giải thích chi tiết
+    if (isCompoundRoundMode) {
+      playSpeedrunSound(isCorrect ? 'correct' : 'wrong');
+      handlePlayAudio(
+        currentQ.targetVocab.kanji_word || currentQ.targetVocab.kanji_form || currentQ.targetVocab.kanji || currentQ.targetVocab.hiragana,
+        currentQ.targetVocab.hiragana
+      );
+      setCompoundAnsweredCount(c => c + 1);
+
+      if (isCorrect) {
+        const newScore = scoreRef.current + 1;
+        setScore(newScore);
+        scoreRef.current = newScore;
+
+        const newStreak = streak + 1;
+        setStreak(newStreak);
+        if (newStreak > maxStreak) {
+          setMaxStreak(newStreak);
+        }
+
+        if (newScore > highScore) {
+          setHighScore(newScore);
+          try {
+            localStorage.setItem(`vocab_kanji_high_${scopeFilter}_${statusFilter}_${direction}`, newScore.toString());
+          } catch (e) {
+            // ignore
+          }
+        }
+      } else {
+        setStreak(0);
+        setWrongVocabList(list => {
+          if (list.some(v => v.id === currentQ.targetVocab.id)) return list;
+          return [...list, currentQ.targetVocab];
+        });
+      }
+      return;
+    }
 
     if (isCorrect) {
       playSpeedrunSound('correct');
@@ -657,17 +744,30 @@ export default function CombinedKanjiPractice({
         {/* MÀN HÌNH 1: SẴN SÀNG & CẤU HÌNH CHIỀU CÂU HỎI */}
         {!gameActive && !gameOver && (
           <div className="p-6 sm:p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm max-w-xl mx-auto space-y-6">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-3xl sm:text-4xl shadow-lg shadow-amber-500/20 text-white animate-bounce">
-              ⚡
+            <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl flex items-center justify-center text-3xl sm:text-4xl shadow-lg text-white animate-bounce ${
+              isCompoundRoundMode
+                ? 'bg-gradient-to-tr from-indigo-600 to-purple-600 shadow-indigo-500/20'
+                : 'bg-gradient-to-tr from-amber-500 to-rose-500 shadow-amber-500/20'
+            }`}>
+              {isCompoundRoundMode ? '🧩' : '⚡'}
             </div>
 
             <div className="space-y-2">
               <h3 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-100">
-                Thử Thách Phản Xạ Từ Vựng Hán Tự Thi JLPT
+                {isCompoundRoundMode ? 'Luyện Hoàn Thiện Từ Ghép Hán Tự' : 'Thử Thách Phản Xạ Từ Vựng Hán Tự Thi JLPT'}
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md mx-auto">
-                Luyện phản xạ tốc độ cao giúp bạn nhận diện tức thời cách đọc và chữ viết của <b>{eligibleVocabs.length} từ vựng chữ Hán</b>.
-                Thời gian xuất phát từ 10s, mỗi chuỗi 3 câu đúng giảm 10%.
+                {isCompoundRoundMode ? (
+                  <>
+                    Luyện điền chữ Hán vào từ khuyết <b>không giới hạn thời gian</b> qua trọn bộ <b>{eligibleVocabs.length} từ vựng chữ Hán</b> trong phạm vi đang chọn.
+                    Mọi câu dù đúng hay sai đều kèm giải thích chi tiết cấu tạo Hán tự.
+                  </>
+                ) : (
+                  <>
+                    Luyện phản xạ tốc độ cao giúp bạn nhận diện tức thời cách đọc và chữ viết của <b>{eligibleVocabs.length} từ vựng chữ Hán</b>.
+                    Thời gian xuất phát từ 10s, mỗi chuỗi 3 câu đúng giảm 10%.
+                  </>
+                )}
               </p>
             </div>
 
@@ -713,7 +813,7 @@ export default function CombinedKanjiPractice({
                   }`}
                 >
                   <div className="text-[13px] mb-0.5">🧩 Hoàn thiện từ ghép</div>
-                  <div className="text-[10px] opacity-75 font-normal">Điền chữ Hán vào từ khuyết</div>
+                  <div className="text-[10px] opacity-75 font-normal">Không đếm ngược • Giải thích mọi câu</div>
                 </button>
 
                 <button
@@ -731,56 +831,114 @@ export default function CombinedKanjiPractice({
               </div>
             </div>
 
-            {/* Kỷ lục hiện tại */}
+            {/* Kỷ lục hiện tại / Số câu lượt học */}
             <div className="flex items-center justify-between px-2 text-xs">
-              <span className="text-slate-400 font-bold">Kỷ lục hiện tại:</span>
-              <span className="text-amber-500 font-black text-sm">{highScore} điểm</span>
+              {isCompoundRoundMode ? (
+                <>
+                  <span className="text-slate-400 font-bold">Số từ trong lượt luyện:</span>
+                  <span className="text-indigo-600 dark:text-indigo-400 font-black text-sm">
+                    {eligibleVocabs.length} câu (Không đếm ngược)
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-slate-400 font-bold">Kỷ lục hiện tại:</span>
+                  <span className="text-amber-500 font-black text-sm">{highScore} điểm</span>
+                </>
+              )}
             </div>
 
             {/* Nút Bắt đầu */}
             <button
               type="button"
               disabled={eligibleVocabs.length === 0}
-              onClick={startGame}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:from-amber-600 hover:to-purple-700 text-white font-black text-sm shadow-xl shadow-rose-500/20 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+              onClick={() => startGame()}
+              className={`w-full py-4 rounded-2xl text-white font-black text-sm shadow-xl transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50 ${
+                isCompoundRoundMode
+                  ? 'bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-indigo-500/20'
+                  : 'bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:from-amber-600 hover:to-purple-700 shadow-rose-500/20'
+              }`}
             >
-              {eligibleVocabs.length === 0 ? 'Chưa có từ vựng nào phù hợp bộ lọc' : '⚡ BẮT ĐẦU PHẢN XẠ NHANH (10S)'}
+              {eligibleVocabs.length === 0
+                ? 'Chưa có từ vựng nào phù hợp bộ lọc'
+                : isCompoundRoundMode
+                  ? `🧩 BẮT ĐẦU HOÀN THIỆN TỪ GHÉP (${eligibleVocabs.length} CÂU)`
+                  : '⚡ BẮT ĐẦU PHẢN XẠ NHANH (10S)'}
             </button>
           </div>
         )}
 
-        {/* MÀN HÌNH 2: ĐANG CHƠI GAME */}
+        {/* MÀN HÌNH 2: ĐANG CHƠI GAME / ĐANG LUYỆN TỪ GHÉP */}
         {gameActive && currentQ && (
           <div className="p-4 sm:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md max-w-xl mx-auto space-y-6">
-            {/* Header: Điểm, Streak & Đồng hồ đếm ngược */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-extrabold text-amber-500 bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20">
-                  Điểm: {score}
-                </span>
-                {streak > 1 && (
-                  <span className="text-xs font-extrabold text-rose-500 bg-rose-500/10 px-3 py-1.5 rounded-full border border-rose-500/20 animate-pulse">
-                    🔥 Chuỗi: {streak}
-                  </span>
-                )}
-              </div>
+            {/* Header: Điểm, Streak & Tiến độ / Đồng hồ */}
+            <div className="flex items-center justify-between gap-2">
+              {isCompoundRoundMode ? (
+                <>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xs font-extrabold text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-3 py-1.5 rounded-full border border-indigo-500/20">
+                      🧩 Câu {compoundIndex + 1} / {compoundQueue.length}
+                    </span>
+                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20">
+                      ✅ Đúng: {score}
+                    </span>
+                    {streak > 1 && (
+                      <span className="text-xs font-extrabold text-amber-500 bg-amber-500/10 px-2.5 py-1.5 rounded-full border border-amber-500/20">
+                        🔥 {streak}
+                      </span>
+                    )}
+                  </div>
 
-              <div className="flex items-center gap-1.5 font-mono text-sm font-black text-slate-700 dark:text-slate-200">
-                <span>⏱️</span>
-                <span className={timeLeft <= 3 ? 'text-rose-500 font-black animate-ping' : ''}>
-                  {timeLeft.toFixed(1)}s
-                </span>
-              </div>
+                  <button
+                    type="button"
+                    onClick={handleFinishCompoundRoundEarly}
+                    className="py-1.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold transition-colors cursor-pointer shrink-0"
+                  >
+                    🏁 Kết thúc
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-extrabold text-amber-500 bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20">
+                      Điểm: {score}
+                    </span>
+                    {streak > 1 && (
+                      <span className="text-xs font-extrabold text-rose-500 bg-rose-500/10 px-3 py-1.5 rounded-full border border-rose-500/20 animate-pulse">
+                        🔥 Chuỗi: {streak}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-1.5 font-mono text-sm font-black text-slate-700 dark:text-slate-200">
+                    <span>⏱️</span>
+                    <span className={timeLeft <= 3 ? 'text-rose-500 font-black animate-ping' : ''}>
+                      {timeLeft.toFixed(1)}s
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
 
-            {/* Thanh thời gian co lại */}
+            {/* Thanh tiến độ lượt học (cho Hoàn thiện từ ghép) hoặc Thanh thời gian co lại (cho Phản xạ 10s) */}
             <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-              <div
-                style={{ width: `${(timeLeft / maxTime) * 100}%` }}
-                className={`h-full transition-all duration-100 ${
-                  timeLeft <= 3 ? 'bg-rose-500' : 'bg-gradient-to-r from-amber-500 to-rose-500'
-                }`}
-              />
+              {isCompoundRoundMode ? (
+                <div
+                  style={{
+                    width: `${compoundQueue.length > 0
+                      ? Math.max(0, Math.min(100, ((compoundIndex + (selectedIdx !== null ? 1 : 0)) / compoundQueue.length) * 100))
+                      : 0}%`
+                  }}
+                  className="h-full bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-300 ease-out"
+                />
+              ) : (
+                <div
+                  style={{ width: `${(timeLeft / maxTime) * 100}%` }}
+                  className={`h-full transition-all duration-100 ${
+                    timeLeft <= 3 ? 'bg-rose-500' : 'bg-gradient-to-r from-amber-500 to-rose-500'
+                  }`}
+                />
+              )}
             </div>
 
             {/* Khung Câu hỏi */}
@@ -845,34 +1003,105 @@ export default function CombinedKanjiPractice({
                     {selectedIdx !== null && isCorrect && (
                       <span className="text-white text-base font-black shrink-0">✓</span>
                     )}
+                    {selectedIdx !== null && isChosen && !isCorrect && (
+                      <span className="text-white text-base font-black shrink-0">✗</span>
+                    )}
                   </button>
                 );
               })}
             </div>
+
+            {/* Thẻ Giải thích chi tiết ngay sau MỌI câu hỏi (Đúng hoặc Sai) cho Hoàn thiện từ ghép */}
+            {isCompoundRoundMode && selectedIdx !== null && (
+              <div className={`p-4 sm:p-5 rounded-2xl border bg-slate-50/70 dark:bg-slate-950/70 space-y-3 animate-in fade-in duration-150 ${
+                lastAnswerCorrect ? 'border-emerald-500/40' : 'border-rose-500/40'
+              }`}>
+                <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200/80 dark:border-slate-800">
+                  <span className={`text-sm font-black flex items-center gap-1.5 ${
+                    lastAnswerCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'
+                  }`}>
+                    {lastAnswerCorrect
+                      ? `✅ Chính xác! Đáp án: ${currentQ.correctAnswerText}`
+                      : `❌ Chưa chính xác — Đáp án đúng: ${currentQ.correctAnswerText}`}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => handlePlayAudio(
+                      currentQ.targetVocab.kanji_word || currentQ.targetVocab.kanji_form || currentQ.targetVocab.kanji || currentQ.targetVocab.hiragana,
+                      currentQ.targetVocab.hiragana
+                    )}
+                    className="py-1 px-2.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer shrink-0"
+                  >
+                    🔊 Nghe phát âm
+                  </button>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5 text-xs shadow-sm">
+                  <div className="font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
+                    <span>💡</span>
+                    <span>Giải thích chi tiết cấu tạo & ý nghĩa Hán tự:</span>
+                  </div>
+                  <div className="text-slate-700 dark:text-slate-200 font-medium whitespace-pre-line leading-relaxed text-xs sm:text-sm">
+                    {currentQ.explanation}
+                  </div>
+                </div>
+
+                <div className="flex justify-end pt-1">
+                  <button
+                    type="button"
+                    onClick={handleNextCompoundQuestion}
+                    className="w-full sm:w-auto py-2.5 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs sm:text-sm font-black shadow-md transition-all active:scale-95 cursor-pointer"
+                  >
+                    {compoundIndex + 1 < compoundQueue.length
+                      ? `Câu tiếp theo (${compoundIndex + 2}/${compoundQueue.length}) ➔`
+                      : '🏆 Hoàn thành & Xem tổng kết ➔'}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
-        {/* MÀN HÌNH 3: GAME OVER (KẾT THÚC & THẺ GIẢI THÍCH CHI TIẾT) */}
+        {/* MÀN HÌNH 3: TỔNG KẾT LƯỢT HỌC / GAME OVER */}
         {gameOver && (
           <div className="p-6 sm:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-2xl mx-auto space-y-6 animate-in zoom-in-95 duration-200">
             {/* Header kết thúc */}
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 mx-auto rounded-3xl bg-rose-500/10 text-rose-500 border border-rose-500/20 flex items-center justify-center text-3xl shadow-md">
-                💥
+              <div className={`w-16 h-16 mx-auto rounded-3xl flex items-center justify-center text-3xl shadow-md border ${
+                isCompoundRoundMode
+                  ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                  : 'bg-rose-500/10 text-rose-500 border-rose-500/20'
+              }`}>
+                {isCompoundRoundMode ? '🎉' : '💥'}
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
-                KẾT THÚC LƯỢT CHƠI!
+                {isCompoundRoundMode ? 'HOÀN THÀNH LƯỢT LUYỆN TỪ GHÉP!' : 'KẾT THÚC LƯỢT CHƠI!'}
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                {timeLeft <= 0 ? 'Đã hết thời gian phản xạ (10s)!' : 'Bạn đã chọn đáp án chưa chính xác.'}
+                {isCompoundRoundMode
+                  ? `Bạn đã trả lời đúng ${score} / ${compoundAnsweredCount || compoundQueue.length} câu hỏi (${
+                      (compoundAnsweredCount || compoundQueue.length) > 0
+                        ? Math.round((score / (compoundAnsweredCount || compoundQueue.length)) * 100)
+                        : 0
+                    }%).`
+                  : timeLeft <= 0
+                    ? 'Đã hết thời gian phản xạ (10s)!'
+                    : 'Bạn đã chọn đáp án chưa chính xác.'}
               </p>
             </div>
 
             {/* Bảng điểm */}
             <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center">
               <div>
-                <span className="text-[11px] font-bold text-slate-400 block">ĐIỂM ĐẠT ĐƯỢC</span>
-                <span className="text-2xl sm:text-3xl font-black text-amber-500">{score}</span>
+                <span className="text-[11px] font-bold text-slate-400 block">
+                  {isCompoundRoundMode ? 'SỐ CÂU ĐÚNG' : 'ĐIỂM ĐẠT ĐƯỢC'}
+                </span>
+                <span className="text-2xl sm:text-3xl font-black text-amber-500">
+                  {isCompoundRoundMode
+                    ? `${score}/${compoundAnsweredCount || compoundQueue.length}`
+                    : score}
+                </span>
               </div>
               <div>
                 <span className="text-[11px] font-bold text-slate-400 block">CHUỖI ĐÚNG DÀI NHẤT</span>
@@ -880,8 +1109,8 @@ export default function CombinedKanjiPractice({
               </div>
             </div>
 
-            {/* THẺ GIẢI THÍCH CHI TIẾT CỦA CÂU BỊ SAI (NỔI BẬT) */}
-            {failedQuestion && (
+            {/* THẺ GIẢI THÍCH CHI TIẾT CỦA CÂU BỊ SAI (NỔI BẬT CHO CHẾ ĐỘ PHẢN XẠ 10S) */}
+            {!isCompoundRoundMode && failedQuestion && (
               <div className="p-4 sm:p-5 rounded-2xl border border-indigo-500/30 bg-indigo-50/20 dark:bg-indigo-950/20 space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-indigo-500/20">
                   <span className="text-xs font-extrabold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
@@ -918,7 +1147,7 @@ export default function CombinedKanjiPractice({
                 </span>
                 <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
                   {wrongVocabList.map(v => {
-                    const kWord = v.kanji_form || v.kanji;
+                    const kWord = v.kanji_word || v.kanji_form || v.kanji;
                     const isExp = expandedExplanationIds[v.id];
                     const expText = buildVocabKanjiExplanation({
                       targetVocab: {
@@ -981,11 +1210,21 @@ export default function CombinedKanjiPractice({
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <button
                 type="button"
-                onClick={startGame}
+                onClick={() => startGame()}
                 className="py-3 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-600 hover:to-rose-600 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer"
               >
-                🔄 Chơi lại lượt mới
+                {isCompoundRoundMode ? `🔄 Luyện lại toàn bộ (${eligibleVocabs.length} câu)` : '🔄 Chơi lại lượt mới'}
               </button>
+
+              {isCompoundRoundMode && wrongVocabList.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => startGame([...wrongVocabList])}
+                  className="py-3 px-5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer"
+                >
+                  ↺ Ôn lại riêng từ sai ({wrongVocabList.length} từ)
+                </button>
+              )}
 
               <button
                 type="button"
