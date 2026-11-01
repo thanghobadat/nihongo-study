@@ -43,13 +43,13 @@ const LESSON_2_VOCAB_GROUPS = [
   ["watashi", "anata", "no", "eigo", "nihongo", "go", "omiyage", "honno kimochi desu", "douzo", "doumo", "korekara osewani narimasu", "kochirakoso yoroshiku onegaishimasu"]
 ];
 
-// Map Kanji for Lesson 2 (11 Kanji: ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+// Map Kanji for Lesson 2 (11 Kanji: 何, 名, 時, 計, 書, 新, 聞, 語, 英, 車, 手)
 const LESSON_2_KANJI_GROUPS = [
-  ["?", "?", "?", "?", "?", "?", "?", "?"],
-  ["?", "?", "?", "?", "?", "?", "?", "?"],
+  ["時", "計", "書", "新", "聞", "車", "手", "名"],
+  ["時", "計", "書", "新", "聞", "車", "手", "名"],
   [],
-  ["?", "?", "?"],
-  ["?", "?", "?", "?"]
+  ["何", "書", "時"],
+  ["語", "英", "名", "手"]
 ];
 
 // Map vocabulary by romaji/hiragana patterns for Lesson 1
@@ -62,14 +62,14 @@ const LESSON_1_VOCAB_GROUPS = [
   ["hajimemashite", "kara kimashita", "douzo yoroshiku", "shitsurei desuga", "onamae wa", "kochira", "amerika", "igirisu", "indo", "indoneshia", "kankoku", "tai", "chuugoku", "doitsu", "nihon", "betonamu", "brazil", "sakura daigaku", "fuji daigaku", "imc", "akc", "power denki"]
 ];
 
-// Map Kanji for Lesson 1 (13 Kanji: ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+// Map Kanji for Lesson 1 (13 Kanji: 私, 人, 先, 生, 学, 大, 会, 社, 員, 日, 本, 国, 銀)
 const LESSON_1_KANJI_GROUPS = [
-  ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
-  ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
-  ["?"],
-  ["?", "?", "?", "?", "?", "?", "?", "?"],
-  ["?", "?", "?", "?", "?", "?"],
-  ["?", "?", "?", "?", "?", "?"]
+  ["私", "人", "先", "生", "学", "会", "社", "員", "銀"],
+  ["私", "人", "先", "生", "学", "会", "社", "員", "銀"],
+  ["人"],
+  ["私", "人", "先", "生", "学", "会", "社", "員"],
+  ["大", "学", "会", "社", "員", "銀"],
+  ["日", "本", "国", "人", "先", "生"]
 ];
 
 export function getGrammarVocabMapping(

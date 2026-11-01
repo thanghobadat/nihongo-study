@@ -2331,6 +2331,71 @@ function reconcilePlanWithCurriculum(plan) {
     }
   }
 
+  // Auto-heal any '?' encoding corruption in task titles, scopeDetails, or dayRationale from stale client caches
+  const brokenEncodingRe = /B\?i |N\?m v\?ng|ch\? H\?n|H\?m nay|Ph\?n \d|t\? v\?ng|[A-Za-zÀ-ỹ]\?[A-Za-zÀ-ỹ]/;
+  const vocabById = new Map((mockDb.vocabulary || []).map(v => [Number(v.id), v]));
+  const kanjiById = new Map((mockDb.kanji || []).map(k => [Number(k.id), k]));
+  const grammarById = new Map((mockDb.grammar || []).map(g => [Number(g.id), g]));
+
+  for (const day of allDays) {
+    if (!Array.isArray(day.tasks)) continue;
+    for (const task of day.tasks) {
+      if (brokenEncodingRe.test(task.title || '') || brokenEncodingRe.test(task.scopeDetails || '')) {
+        const l = Number(task.lesson || task.lesson_id) || 1;
+        const part = Number(task.part) || 1;
+        const totalParts = Number(task.totalParts) || 1;
+        const ids = Array.isArray(task.itemIds) ? task.itemIds.map(Number) : [];
+        const cnt = Number(task.targetCount) || ids.length || 1;
+
+        if (task.itemType === 'vocabulary') {
+          const lessonVocabs = (mockDb.vocabulary || []).filter(v => Number(v.lesson_id) === l);
+          const sub = ids.map(id => vocabById.get(id)).filter(Boolean);
+          const firstV = sub[0] || lessonVocabs[0];
+          const lastV = sub[sub.length - 1] || lessonVocabs[lessonVocabs.length - 1];
+          const startIdx = firstV ? Math.max(1, lessonVocabs.findIndex(v => Number(v.id) === Number(firstV.id)) + 1) : 1;
+          const endIdx = lastV ? Math.max(startIdx, lessonVocabs.findIndex(v => Number(v.id) === Number(lastV.id)) + 1) : cnt;
+          const firstW = (firstV && (firstV.hiragana || firstV.kanji_word)) || '';
+          const lastW = (lastV && (lastV.hiragana || lastV.kanji_word)) || '';
+          task.title = totalParts > 1
+            ? `Minna Bài ${l}: Học từ vựng chưa thuộc (Phần ${part}/${totalParts}: ${cnt} từ)`
+            : `Minna Bài ${l}: Học trọn bộ ${cnt} từ vựng`;
+          task.scopeDetails = totalParts > 1
+            ? `Phần ${part}: ${cnt} từ (Từ #${startIdx}: ${firstW} ➔ #${endIdx}: ${lastW})`
+            : `Toàn bộ ${cnt} từ vựng Bài ${l} (Từ #1: ${firstW} ➔ #${cnt}: ${lastW})`;
+        } else if (task.itemType === 'kanji') {
+          const sub = (ids.length > 0 ? ids.map(id => kanjiById.get(id)).filter(Boolean) : (kanjiByLesson.get(l) || []));
+          const chars = sub.map(k => k.character || k.kanji).filter(Boolean).join(', ');
+          task.title = totalParts > 1
+            ? `Minna Bài ${l}: Nắm vững chữ Hán (Phần ${part}/${totalParts}: ${sub.length} chữ)`
+            : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`;
+          task.scopeDetails = `Chữ Hán: ${chars}`;
+        } else if (task.itemType === 'grammar') {
+          const lessonGrammars = (mockDb.grammar || []).filter(g => Number(g.lesson_id) === l);
+          const sub = (ids.length > 0 ? ids.map(id => grammarById.get(id)).filter(Boolean) : lessonGrammars);
+          const summary = sub.map((g, idx) => `${idx + 1}. ${g.title || g.structure}`).join(' • ');
+          task.title = totalParts > 1
+            ? `Minna Bài ${l}: Làm chủ ngữ pháp (Phần ${part}/${totalParts}: ${sub.length} mẫu)`
+            : `Minna Bài ${l}: Làm chủ ${sub.length} mẫu ngữ pháp cốt lõi`;
+          task.scopeDetails = totalParts > 1
+            ? `Phần ${part}: ${sub.length} mẫu câu (${sub.map(g => g.title || g.structure).join(' • ')})`
+            : `Chính xác ${sub.length} mẫu câu: ${summary}`;
+        } else if (task.itemType === 'single_review') {
+          task.title = `Minna Bài ${l}: Ôn tập tổng hợp 4 dạng toàn bộ Bài ${l}`;
+          task.scopeDetails = 'Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm';
+        } else if (task.itemType === 'cumulative_review') {
+          task.title = `Ôn tập tích lũy tổng hợp từ Bài 1 đến Bài ${l}`;
+          task.scopeDetails = `Luyện phản xạ tổng hợp trộn ngẫu nhiên câu hỏi từ Bài 1 đến Bài ${l} (30 phút)`;
+        }
+        touchedDays.add(day);
+        modified = true;
+      }
+    }
+    if (brokenEncodingRe.test(day.dayRationale || '')) {
+      touchedDays.add(day);
+      modified = true;
+    }
+  }
+
   for (const day of touchedDays) {
     day.plannedCount = Array.isArray(day.tasks) ? day.tasks.length : 0;
     day.workloadPoints = (day.tasks || []).reduce((s, t) => s + (Number(t.workloadPoints) || 0), 0);
