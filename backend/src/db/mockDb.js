@@ -32071,7 +32071,7 @@ module.exports = {
     },
     {
       "id": 22,
-      "lesson_id": 32,
+      "lesson_id": 10,
       "character": "北",
       "stroke_count": "5",
       "onyomi": "ホク (hoku)",
@@ -32136,7 +32136,7 @@ module.exports = {
     },
     {
       "id": 27,
-      "lesson_id": 32,
+      "lesson_id": 10,
       "character": "南",
       "stroke_count": "9",
       "onyomi": "ナン (nan), ナ (na)",
@@ -32474,7 +32474,7 @@ module.exports = {
     },
     {
       "id": 53,
-      "lesson_id": 32,
+      "lesson_id": 10,
       "character": "東",
       "stroke_count": "8",
       "onyomi": "トウ (tou)",
@@ -32656,7 +32656,7 @@ module.exports = {
     },
     {
       "id": 67,
-      "lesson_id": 32,
+      "lesson_id": 10,
       "character": "西",
       "stroke_count": "6",
       "onyomi": "セイ (sei), サイ (sai), ス (su)",
@@ -33163,7 +33163,7 @@ module.exports = {
     },
     {
       "id": 106,
-      "lesson_id": 33,
+      "lesson_id": 16,
       "character": "口",
       "stroke_count": "3",
       "onyomi": "コウ (kou), ク (ku)",

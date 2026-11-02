@@ -2196,15 +2196,19 @@
             "link": "/lessons/10?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 10: Nắm vững toàn bộ 8 chữ Hán",
+            "title": "Minna Bài 10: Nắm vững toàn bộ 12 chữ Hán",
             "lesson": 10,
             "itemIds": [
               7,
+              22,
+              27,
               29,
               37,
               43,
               45,
+              53,
               62,
+              67,
               178,
               263
             ],
@@ -2214,11 +2218,11 @@
             "lesson_id": 10,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 8,
+            "targetCount": 12,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 中, 右, 女, 左, 後, 男, 犬, 県",
-            "workloadPoints": 24,
-            "estimatedMinutes": 144
+            "scopeDetails": "Chữ Hán: 中, 北, 南, 右, 女, 左, 後, 東, 男, 西, 犬, 県",
+            "workloadPoints": 36,
+            "estimatedMinutes": 216
           },
           {
             "id": "task_2026-11-16_grammar_L10_p1",
@@ -2291,12 +2295,12 @@
         "dayOfWeek": 1,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 8 chữ Hán (24 WP) và 4 mẫu câu (12 WP) của Bài 10 (36 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 10.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 12 chữ Hán (36 WP) và 4 mẫu câu (12 WP) của Bài 10 (48 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 10.",
         "plannedCount": 4,
         "completedCount": 0,
         "completionRate": 0,
-        "workloadPoints": 36,
-        "totalEstimatedMinutes": 276,
+        "workloadPoints": 48,
+        "totalEstimatedMinutes": 348,
         "isDedicatedPracticeDay": false
       },
       {
@@ -3417,10 +3421,11 @@
             "link": "/lessons/16?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 16: Nắm vững toàn bộ 6 chữ Hán",
+            "title": "Minna Bài 16: Nắm vững toàn bộ 7 chữ Hán",
             "lesson": 16,
             "itemIds": [
               74,
+              106,
               187,
               220,
               247,
@@ -3433,11 +3438,11 @@
             "lesson_id": 16,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 6,
+            "targetCount": 7,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 長, 目, 足, 耳, 顔, 暗",
-            "workloadPoints": 18,
-            "estimatedMinutes": 108
+            "scopeDetails": "Chữ Hán: 長, 口, 目, 足, 耳, 顔, 暗",
+            "workloadPoints": 21,
+            "estimatedMinutes": 126
           },
           {
             "id": "task_2026-11-25_grammar_L16_p1",
@@ -3509,12 +3514,12 @@
         "dayOfWeek": 3,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 6 chữ Hán (18 WP) và 3 mẫu câu (9 WP) của Bài 16 (27 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 16.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 7 chữ Hán (21 WP) và 3 mẫu câu (9 WP) của Bài 16 (30 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 16.",
         "plannedCount": 4,
         "completedCount": 0,
         "completionRate": 0,
-        "workloadPoints": 27,
-        "totalEstimatedMinutes": 222,
+        "workloadPoints": 30,
+        "totalEstimatedMinutes": 240,
         "isDedicatedPracticeDay": false
       },
       {
@@ -6419,13 +6424,9 @@
             "link": "/lessons/32?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 32: Nắm vững toàn bộ 7 chữ Hán",
+            "title": "Minna Bài 32: Nắm vững toàn bộ 3 chữ Hán",
             "lesson": 32,
             "itemIds": [
-              22,
-              27,
-              53,
-              67,
               120,
               152,
               238
@@ -6436,11 +6437,11 @@
             "lesson_id": 32,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 7,
+            "targetCount": 3,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 北, 南, 東, 西, 夕, 方, 飯",
-            "workloadPoints": 21,
-            "estimatedMinutes": 126
+            "scopeDetails": "Chữ Hán: 夕, 方, 飯",
+            "workloadPoints": 9,
+            "estimatedMinutes": 54
           },
           {
             "id": "task_2026-12-17_grammar_L32_p1",
@@ -6513,12 +6514,12 @@
         "dayOfWeek": 4,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 7 chữ Hán (21 WP) và 4 mẫu câu (12 WP) của Bài 32 (33 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 32.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 3 chữ Hán (9 WP) và 4 mẫu câu (12 WP) của Bài 32 (21 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 32.",
         "plannedCount": 4,
         "completedCount": 0,
         "completionRate": 0,
-        "workloadPoints": 33,
-        "totalEstimatedMinutes": 258,
+        "workloadPoints": 21,
+        "totalEstimatedMinutes": 186,
         "isDedicatedPracticeDay": false
       },
       {
@@ -6639,10 +6640,9 @@
             "link": "/lessons/33?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 33: Nắm vững toàn bộ 4 chữ Hán",
+            "title": "Minna Bài 33: Nắm vững toàn bộ 3 chữ Hán",
             "lesson": 33,
             "itemIds": [
-              106,
               143,
               156,
               275
@@ -6653,11 +6653,11 @@
             "lesson_id": 33,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 4,
+            "targetCount": 3,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 口, 急, 明, 短",
-            "workloadPoints": 12,
-            "estimatedMinutes": 72
+            "scopeDetails": "Chữ Hán: 急, 明, 短",
+            "workloadPoints": 9,
+            "estimatedMinutes": 54
           },
           {
             "id": "task_2026-12-19_grammar_L33_p1",
@@ -6730,12 +6730,12 @@
         "dayOfWeek": 6,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 4 chữ Hán (12 WP) và 4 mẫu câu (12 WP) của Bài 33 (24 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 33.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 3 chữ Hán (9 WP) và 4 mẫu câu (12 WP) của Bài 33 (21 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 33.",
         "plannedCount": 4,
         "completedCount": 0,
         "completionRate": 0,
-        "workloadPoints": 24,
-        "totalEstimatedMinutes": 204,
+        "workloadPoints": 21,
+        "totalEstimatedMinutes": 186,
         "isDedicatedPracticeDay": false
       },
       {
@@ -10098,7 +10098,7 @@
         "startLesson": 38
       }
     ],
-    "updated_at": "2026-11-01T16:01:27.439Z",
+    "updated_at": "2026-11-02T13:19:09.252Z",
     "replanCount": 7,
     "startLesson": 1,
     "targetLevel": "All",
@@ -10405,12 +10405,13 @@
             ],
             "due_time": "17:00",
             "itemType": "vocabulary",
-            "completed": false,
+            "completed": true,
             "lesson_id": 2,
             "totalParts": 2,
-            "progressPct": 96,
+            "progressPct": 100,
             "targetCount": 25,
-            "currentCount": 24,
+            "completed_at": "✓ Tự động ghi nhận",
+            "currentCount": 25,
             "scopeDetails": "Phần 1: 25 từ (Từ #1: これ ➔ #25: カメラ)",
             "workloadPoints": 25,
             "overdueNotified": true,
@@ -10472,8 +10473,8 @@
         "isBufferDay": false,
         "dayRationale": "Hôm nay bạn tập trung hoàn thành dứt điểm toàn bộ 50 từ vựng của Bài 2 (50 điểm tải WP). Nắm vững trọn bộ từ vựng trước làm nền móng vững chắc để ngày mai học Kanji, Ngữ pháp và làm 2 phần ôn tập thực hành hiệu quả.",
         "plannedCount": 2,
-        "completedCount": 1,
-        "completionRate": 50,
+        "completedCount": 2,
+        "completionRate": 100,
         "workloadPoints": 50,
         "streakAlertNotified": true,
         "totalEstimatedMinutes": 300,
@@ -10734,12 +10735,13 @@
             ],
             "due_time": "17:00",
             "itemType": "kanji",
-            "completed": false,
+            "completed": true,
             "lesson_id": 3,
             "totalParts": 1,
-            "progressPct": 0,
+            "progressPct": 100,
             "targetCount": 9,
-            "currentCount": 0,
+            "completed_at": "✓ Tự động ghi nhận",
+            "currentCount": 9,
             "scopeDetails": "Chữ Hán: 一, 万, 下, 円, 十, 千, 百, 電, 食",
             "workloadPoints": 27,
             "estimatedMinutes": 162
@@ -10764,12 +10766,13 @@
             ],
             "due_time": "18:30",
             "itemType": "grammar",
-            "completed": false,
+            "completed": true,
             "lesson_id": 3,
             "totalParts": 1,
-            "progressPct": 0,
+            "progressPct": 100,
             "targetCount": 8,
-            "currentCount": 0,
+            "completed_at": "✓ Tự động ghi nhận",
+            "currentCount": 8,
             "scopeDetails": "Chính xác 8 mẫu câu: 1. ここ/そこ/あそこ は N です • 2. N は ここ/そこ/あそこ です • 3. こちら/そちら/あちら は N です • 4. N は どこ/どちら ですか • 5. お国(くに)は どちら ですか • 6. N を ください • 7. N1 は N2 (địa điểm/tầng) です • 8. N は いくら ですか",
             "workloadPoints": 24,
             "estimatedMinutes": 144
@@ -10784,12 +10787,13 @@
             "lesson": 3,
             "due_time": "19:00",
             "itemType": "single_review",
-            "completed": false,
+            "completed": true,
             "lesson_id": 3,
             "totalParts": 1,
-            "progressPct": 0,
+            "progressPct": 100,
             "targetCount": 1,
-            "currentCount": 0,
+            "completed_at": "11:34",
+            "currentCount": 1,
             "scopeDetails": "Luyện 4 dạng bài tập: 1. Trắc nghiệm Kanji/Từ vựng, 2. Điền khuyết hội thoại, 3. Nghe hiểu ngắn, 4. Trọng âm",
             "workloadPoints": 0,
             "estimatedMinutes": 30
@@ -10822,8 +10826,8 @@
         "isBufferDay": false,
         "dayRationale": "Hôm nay bạn học toàn bộ 9 chữ Hán (27 WP) và 8 mẫu câu (24 WP) của Bài 3 (51 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 3.",
         "plannedCount": 4,
-        "completedCount": 1,
-        "completionRate": 25,
+        "completedCount": 4,
+        "completionRate": 100,
         "workloadPoints": 51,
         "totalEstimatedMinutes": 366,
         "isDedicatedPracticeDay": false
@@ -12348,15 +12352,19 @@
             "link": "/lessons/10?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 10: Nắm vững toàn bộ 8 chữ Hán",
+            "title": "Minna Bài 10: Nắm vững toàn bộ 12 chữ Hán",
             "lesson": 10,
             "itemIds": [
               7,
+              22,
+              27,
               29,
               37,
               43,
               45,
+              53,
               62,
+              67,
               178,
               263
             ],
@@ -12366,11 +12374,11 @@
             "lesson_id": 10,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 8,
+            "targetCount": 12,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 中, 右, 女, 左, 後, 男, 犬, 県",
-            "workloadPoints": 24,
-            "estimatedMinutes": 144
+            "scopeDetails": "Chữ Hán: 中, 北, 南, 右, 女, 左, 後, 東, 男, 西, 犬, 県",
+            "workloadPoints": 36,
+            "estimatedMinutes": 216
           },
           {
             "id": "task_2026-11-16_grammar_L10_p1",
@@ -12444,12 +12452,12 @@
         "dayOfWeek": 1,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 8 chữ Hán (24 WP) và 4 mẫu câu (12 WP) của Bài 10 (36 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 10.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 12 chữ Hán (36 WP) và 4 mẫu câu (12 WP) của Bài 10 (48 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 10.",
         "plannedCount": 4,
         "completedCount": 1,
         "completionRate": 25,
-        "workloadPoints": 36,
-        "totalEstimatedMinutes": 276,
+        "workloadPoints": 48,
+        "totalEstimatedMinutes": 348,
         "isDedicatedPracticeDay": false
       },
       {
@@ -13575,10 +13583,11 @@
             "link": "/lessons/16?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 16: Nắm vững toàn bộ 6 chữ Hán",
+            "title": "Minna Bài 16: Nắm vững toàn bộ 7 chữ Hán",
             "lesson": 16,
             "itemIds": [
               74,
+              106,
               187,
               220,
               247,
@@ -13591,11 +13600,11 @@
             "lesson_id": 16,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 6,
+            "targetCount": 7,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 長, 目, 足, 耳, 顔, 暗",
-            "workloadPoints": 18,
-            "estimatedMinutes": 108
+            "scopeDetails": "Chữ Hán: 長, 口, 目, 足, 耳, 顔, 暗",
+            "workloadPoints": 21,
+            "estimatedMinutes": 126
           },
           {
             "id": "task_2026-11-25_grammar_L16_p1",
@@ -13668,12 +13677,12 @@
         "dayOfWeek": 3,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 6 chữ Hán (18 WP) và 3 mẫu câu (9 WP) của Bài 16 (27 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 16.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 7 chữ Hán (21 WP) và 3 mẫu câu (9 WP) của Bài 16 (30 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 16.",
         "plannedCount": 4,
         "completedCount": 1,
         "completionRate": 25,
-        "workloadPoints": 27,
-        "totalEstimatedMinutes": 222,
+        "workloadPoints": 30,
+        "totalEstimatedMinutes": 240,
         "isDedicatedPracticeDay": false
       },
       {
@@ -16593,13 +16602,9 @@
             "link": "/lessons/32?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 32: Nắm vững toàn bộ 7 chữ Hán",
+            "title": "Minna Bài 32: Nắm vững toàn bộ 3 chữ Hán",
             "lesson": 32,
             "itemIds": [
-              22,
-              27,
-              53,
-              67,
               120,
               152,
               238
@@ -16610,11 +16615,11 @@
             "lesson_id": 32,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 7,
+            "targetCount": 3,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 北, 南, 東, 西, 夕, 方, 飯",
-            "workloadPoints": 21,
-            "estimatedMinutes": 126
+            "scopeDetails": "Chữ Hán: 夕, 方, 飯",
+            "workloadPoints": 9,
+            "estimatedMinutes": 54
           },
           {
             "id": "task_2026-12-17_grammar_L32_p1",
@@ -16688,12 +16693,12 @@
         "dayOfWeek": 4,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 7 chữ Hán (21 WP) và 4 mẫu câu (12 WP) của Bài 32 (33 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 32.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 3 chữ Hán (9 WP) và 4 mẫu câu (12 WP) của Bài 32 (21 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 32.",
         "plannedCount": 4,
         "completedCount": 1,
         "completionRate": 25,
-        "workloadPoints": 33,
-        "totalEstimatedMinutes": 258,
+        "workloadPoints": 21,
+        "totalEstimatedMinutes": 186,
         "isDedicatedPracticeDay": false
       },
       {
@@ -16814,10 +16819,9 @@
             "link": "/lessons/33?tab=kanji",
             "part": 1,
             "step": 1,
-            "title": "Minna Bài 33: Nắm vững toàn bộ 4 chữ Hán",
+            "title": "Minna Bài 33: Nắm vững toàn bộ 3 chữ Hán",
             "lesson": 33,
             "itemIds": [
-              106,
               143,
               156,
               275
@@ -16828,11 +16832,11 @@
             "lesson_id": 33,
             "totalParts": 1,
             "progressPct": 0,
-            "targetCount": 4,
+            "targetCount": 3,
             "currentCount": 0,
-            "scopeDetails": "Chữ Hán: 口, 急, 明, 短",
-            "workloadPoints": 12,
-            "estimatedMinutes": 72
+            "scopeDetails": "Chữ Hán: 急, 明, 短",
+            "workloadPoints": 9,
+            "estimatedMinutes": 54
           },
           {
             "id": "task_2026-12-19_grammar_L33_p1",
@@ -16906,12 +16910,12 @@
         "dayOfWeek": 6,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay bạn học toàn bộ 4 chữ Hán (12 WP) và 4 mẫu câu (12 WP) của Bài 33 (24 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 33.",
+        "dayRationale": "Hôm nay bạn học toàn bộ 3 chữ Hán (9 WP) và 4 mẫu câu (12 WP) của Bài 33 (21 điểm tải WP). Ngay sau khi học mẫu câu ngữ pháp, bạn làm ngay 2 phần ôn tập (4 dạng bài tập và ôn tích lũy) để chuyển hóa lý thuyết thành phản xạ tự nhiên và hoàn tất trọn vẹn Bài 33.",
         "plannedCount": 4,
         "completedCount": 1,
         "completionRate": 25,
-        "workloadPoints": 24,
-        "totalEstimatedMinutes": 204,
+        "workloadPoints": 21,
+        "totalEstimatedMinutes": 186,
         "isDedicatedPracticeDay": false
       },
       {
@@ -20259,7 +20263,7 @@
         "startLesson": 38
       }
     ],
-    "updated_at": "2026-11-01T16:01:27.439Z",
+    "updated_at": "2026-11-02T13:19:09.253Z",
     "replanCount": 14,
     "startLesson": 1,
     "targetLevel": "All",
@@ -20272,7 +20276,7 @@
     "workloadRationale": "Quy chuẩn định lượng tải học tập: 1 chữ Kanji = 1 Mẫu câu ngữ pháp = 3 Từ vựng (1V = 6p, 1K = 18p, 1G = 18p). Áp dụng thuật toán Cân bằng Tải trọng Động (Load-Balanced Dynamic Pacing): toàn bộ 50 bài học được cắt nhỏ thành từng phần vừa vặn, phân bổ đều khắp 75 ngày để mọi ngày có thời lượng học đồng đều (~316 phút/ngày), triệt tiêu hoàn toàn sự chênh lệch và dồn ép.",
     "completedLessonsCount": 0,
     "lastOverdueNotifiedAt": "2026-10-31T13:05:49.684Z",
-    "lastNewDayNotifiedDate": "2026-11-01"
+    "lastNewDayNotifiedDate": "2026-11-02"
   },
   "e139bec8-56ab-42fc-97b7-98dc7649fad6": {
     "days": [
@@ -25905,7 +25909,7 @@
         "isRestDay": false,
         "isBufferDay": false,
         "isCompleted": false,
-        "dayRationale": "Hôm nay theo lộ trình cân bằng tải trọng hoàn thành 50 bài, bạn học các phần của Bài 18 & Bài 19 (35 điểm tải WP: 14 từ vựng = 14 WP, 4 chữ Hán = 12 WP, 3 mẫu câu = 9 WP).",
+        "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 18 gồm 14 từ vựng (14 WP), 4 chữ Hán (12 WP) và 3 mẫu câu (9 WP) — tổng 35 điểm tải WP, kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 4,
         "completedCount": 0,
         "completionRate": 0,
@@ -34803,7 +34807,7 @@
         "startLesson": 38
       }
     ],
-    "updated_at": "2026-11-01T16:01:27.439Z",
+    "updated_at": "2026-11-02T13:19:09.255Z",
     "replanCount": 2,
     "startLesson": 1,
     "targetLevel": "All",
@@ -39676,7 +39680,7 @@
         "dayOfWeek": 0,
         "isRestDay": false,
         "isBufferDay": false,
-        "dayRationale": "Hôm nay theo lộ trình cân bằng tải trọng hoàn thành 50 bài, bạn học các phần của Bài 17 & Bài 18 (45 điểm tải WP: 12 từ vựng = 12 WP, 4 chữ Hán = 12 WP, 3 mẫu câu = 9 WP).",
+        "dayRationale": "Hôm nay bạn học toàn bộ lý thuyết Bài 18 gồm 12 từ vựng (24 WP), 4 chữ Hán (12 WP) và 3 mẫu câu (9 WP) — tổng 45 điểm tải WP, kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.",
         "plannedCount": 5,
         "completedCount": 0,
         "completionRate": 0,
@@ -48190,7 +48194,7 @@
         "startLesson": 38
       }
     ],
-    "updated_at": "2026-11-01T16:01:27.439Z",
+    "updated_at": "2026-11-02T13:19:09.256Z",
     "replanCount": 7,
     "startLesson": 3,
     "targetLevel": "All",
