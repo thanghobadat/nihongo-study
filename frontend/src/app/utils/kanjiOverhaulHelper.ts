@@ -216,9 +216,10 @@ export const LESSON_KANJI_ROMAJI_MAP: Record<string, string> = {
   '8_小': 'chii', '8_低': 'hiku', '8_暑': 'atsu', '8_寒': 'samu',
   // Bài 9 (5 chữ)
   '9_上': 'jou', '9_少': 'suko', '9_漢': 'kan', '9_野': 'ya', '9_主': 'shu',
-  // Bài 10 (8 chữ)
+  // Bài 10 (12 chữ)
   '10_男': 'otoko', '10_女': 'onna', '10_犬': 'inu', '10_中': 'naka',
   '10_後': 'ushi', '10_右': 'migi', '10_左': 'hidari', '10_県': 'ken',
+  '10_東': 'higashi', '10_西': 'nishi', '10_南': 'minami', '10_北': 'kita',
   // Bài 11 (12 chữ)
   '11_二': 'ni', '11_三': 'san', '11_四': 'yon', '11_五': 'go',
   '11_六': 'roku', '11_七': 'nana', '11_八': 'hachi', '11_九': 'kyuu',
@@ -232,8 +233,8 @@ export const LESSON_KANJI_ROMAJI_MAP: Record<string, string> = {
   '14_前': 'mae', '14_待': 'ma', '14_住': 'su', '14_図': 'to',
   // Bài 15 (5 chữ)
   '15_出': 'da', '15_高': 'taka', '15_使': 'tsuka', '15_族': 'zoku', '15_門': 'mon',
-  // Bài 16 (6 chữ)
-  '16_長': 'naga', '16_目': 'me', '16_耳': 'mimi', '16_足': 'ashi', '16_顔': 'kao', '16_暗': 'kura',
+  // Bài 16 (7 chữ)
+  '16_長': 'naga', '16_目': 'me', '16_耳': 'mimi', '16_足': 'ashi', '16_顔': 'kao', '16_暗': 'kura', '16_口': 'kuchi',
   // Bài 17 (5 chữ)
   '17_病': 'byou', '17_院': 'in', '17_薬': 'kusuri', '17_問': 'mon', '17_題': 'dai',
   // Bài 18 (4 chữ)
@@ -265,11 +266,10 @@ export const LESSON_KANJI_ROMAJI_MAP: Record<string, string> = {
   '30_習': 'nara', '30_業': 'gyou', '30_引': 'hi', '30_池': 'ike',
   // Bài 31 (4 chữ)
   '31_映': 'ei', '31_画': 'ga', '31_自': 'ji', '31_村': 'mura',
-  // Bài 32 (7 chữ)
-  '32_東': 'higashi', '32_西': 'nishi', '32_南': 'minami', '32_北': 'kita',
+  // Bài 32 (3 chữ)
   '32_夕': 'yuu', '32_方': 'kata', '32_飯': 'han',
-  // Bài 33 (4 chữ)
-  '33_口': 'kuchi', '33_急': 'iso', '33_明': 'mei', '33_短': 'mijika',
+  // Bài 33 (3 chữ)
+  '33_急': 'iso', '33_明': 'mei', '33_短': 'mijika',
   // Bài 34 (6 chữ)
   '34_夜': 'yoru', '34_肉': 'niku', '34_赤': 'aka', '34_青': 'ao', '34_黒': 'kuro', '34_質': 'shitsu',
   // Bài 35 (5 chữ)
@@ -612,6 +612,10 @@ export const GLOBAL_KANJI_META: Record<string, { sino: string; meaning: string; 
   '男': { sino: 'NAM', meaning: 'Đàn ông, nam giới', lesson: 10 },
   '犬': { sino: 'KHUYỂN', meaning: 'Con chó', lesson: 10 },
   '県': { sino: 'HUYỆN', meaning: 'Tỉnh (của Nhật)', lesson: 10 },
+  '北': { sino: 'BẮC', meaning: 'Phía bắc', lesson: 10 },
+  '南': { sino: 'NAM', meaning: 'Phía nam, phương nam', lesson: 10 },
+  '東': { sino: 'ĐÔNG', meaning: 'Phía đông, phương đông', lesson: 10 },
+  '西': { sino: 'TÂY', meaning: 'Phía tây, phương tây', lesson: 10 },
   '七': { sino: 'THẤT', meaning: 'Bảy, số bảy', lesson: 11 },
   '三': { sino: 'TAM', meaning: 'Ba, số ba', lesson: 11 },
   '九': { sino: 'CỬU', meaning: 'Chín, số chín', lesson: 11 },
@@ -653,6 +657,7 @@ export const GLOBAL_KANJI_META: Record<string, { sino: string; meaning: string; 
   '耳': { sino: 'NHĨ', meaning: 'Cái tai', lesson: 16 },
   '顔': { sino: 'NHAN', meaning: 'Khuôn mặt', lesson: 16 },
   '暗': { sino: 'ÁM', meaning: 'Tối', lesson: 16 },
+  '口': { sino: 'KHẨU', meaning: 'Miệng, cổng, lối vào', lesson: 16 },
   '問': { sino: 'VẤN', meaning: 'Hỏi, câu hỏi', lesson: 17 },
   '病': { sino: 'BỆNH', meaning: 'Bệnh tật, ốm đau', lesson: 17 },
   '院': { sino: 'VIỆN', meaning: 'Tòa nhà, bệnh viện, học viện', lesson: 17 },
@@ -719,14 +724,9 @@ export const GLOBAL_KANJI_META: Record<string, { sino: string; meaning: string; 
   '画': { sino: 'HỌA', meaning: 'bức tranh, kế hoạch', lesson: 31 },
   '自': { sino: 'TỰ', meaning: 'Tự bản thân, tự động', lesson: 31 },
   '村': { sino: 'THÔN', meaning: 'Ngôi làng', lesson: 31 },
-  '北': { sino: 'BẮC', meaning: 'Phía bắc', lesson: 32 },
-  '南': { sino: 'NAM', meaning: 'Phía nam, phương nam', lesson: 32 },
-  '東': { sino: 'ĐÔNG', meaning: 'Phía đông, phương đông', lesson: 32 },
-  '西': { sino: 'TÂY', meaning: 'Phía tây, phương tây', lesson: 32 },
   '夕': { sino: 'TỊCH', meaning: 'chiều tối, hoàng hôn', lesson: 32 },
   '方': { sino: 'PHƯƠNG', meaning: 'Phương hướng, cách thức', lesson: 32 },
   '飯': { sino: 'PHẠN', meaning: 'cơm, bữa ăn', lesson: 32 },
-  '口': { sino: 'KHẨU', meaning: 'Miệng, cổng, lối vào', lesson: 33 },
   '急': { sino: 'CẤP', meaning: 'Khẩn cấp, vội vã', lesson: 33 },
   '明': { sino: 'MINH', meaning: 'Sáng sủa, thông minh', lesson: 33 },
   '短': { sino: 'ĐOẢN', meaning: 'Ngắn', lesson: 33 },
@@ -801,23 +801,191 @@ export const GLOBAL_KANJI_META: Record<string, { sino: string; meaning: string; 
   '力': { sino: 'LỰC', meaning: 'sức mạnh, năng lực', lesson: 50 },
   '心': { sino: 'TÂM', meaning: 'Trái tim, tâm trí', lesson: 50 },
   '送': { sino: 'TỐNG', meaning: 'Gửi, tiễn đưa', lesson: 50 },
-  '帳': { sino: 'TRƯỚNG', meaning: 'Sổ sách, sổ tay', lesson: 2 },
-  '刺': { sino: 'THÍCH', meaning: 'Danh thiếp, gai', lesson: 2 },
-  '辞': { sino: 'TỪ', meaning: 'Từ ngữ, từ điển', lesson: 2 },
-  '雑': { sino: 'TẠP', meaning: 'Tạp chí, pha trộn', lesson: 2 },
-  '誌': { sino: 'CHÍ', meaning: 'Tạp chí, ghi chép', lesson: 2 },
-  '机': { sino: 'KỶ', meaning: 'Cái bàn', lesson: 2 },
-  '傘': { sino: 'TẢN', meaning: 'Cái ô, cái dù', lesson: 2 },
-  '鍵': { sino: 'KIỆN', meaning: 'Chìa khóa', lesson: 2 },
-  '議': { sino: 'NGHỊ', meaning: 'Hội nghị, bàn bạc', lesson: 3 },
-  '達': { sino: 'ĐẠT', meaning: 'Bạn bè, đạt được', lesson: 5 },
-  '郵': { sino: 'BƯU', meaning: 'Bưu điện', lesson: 4 },
-  '局': { sino: 'CỤC', meaning: 'Bưu cục, cơ quan', lesson: 4 },
-  '鉄': { sino: 'THIẾT', meaning: 'Sắt, đường sắt', lesson: 5 },
-  '飛': { sino: 'PHI', meaning: 'Bay', lesson: 5 },
-  '機': { sino: 'CƠ', meaning: 'Máy bay, máy móc', lesson: 5 },
-  '船': { sino: 'THUYỀN', meaning: 'Tàu thuyền', lesson: 5 },
 };
+
+const KANJI_CHAR_REGEX = /[\u4E00-\u9FAF\u3400-\u4DBF]/;
+const KANJI_GLOBAL_REGEX = /[\u4E00-\u9FAF\u3400-\u4DBF]/g;
+
+/**
+ * Xác định giới hạn bài học Kanji tối đa theo phạm vi cấp độ hiện tại:
+ * - Khi học Bài 1..25 (N5): Phạm vi cho phép là Bài 1..25 (179 chữ Kanji).
+ * - Khi học Bài 26..50 (N4): Phạm vi cho phép là toàn bộ Bài 1..50 (285 chữ Kanji).
+ */
+export function getMaxKanjiLessonForScope(lessonId: number): number {
+  const id = Number(lessonId) || 1;
+  return id <= 25 ? 25 : 50;
+}
+
+/**
+ * Kiểm tra 1 chữ Hán đơn lẻ có nằm trong phạm vi cấp độ của bài học hiện tại không.
+ */
+export function isKanjiCharInScope(char: string, lessonId: number): boolean {
+  const meta = GLOBAL_KANJI_META[char];
+  if (!meta || !meta.lesson) return false;
+  return meta.lesson <= getMaxKanjiLessonForScope(lessonId);
+}
+
+/**
+ * Kiểm tra 1 từ hoặc cụm từ có toàn bộ chữ Hán nằm trong phạm vi cấp độ của bài học hiện tại không.
+ * Nếu chuỗi không chứa chữ Hán nào -> true.
+ */
+export function isWordInKanjiScope(word: string, lessonId: number): boolean {
+  if (!word) return true;
+  const chars = word.match(KANJI_GLOBAL_REGEX);
+  if (!chars || chars.length === 0) return true;
+  return chars.every((ch) => isKanjiCharInScope(ch, lessonId));
+}
+
+/**
+ * Từ điển đối chiếu nhanh các từ/tên riêng chứa chữ Hán ngoài phạm vi N5 (Bài 26-50)
+ * hoặc ngoài phạm vi 50 bài để chuyển đổi độc lập khi không có chuỗi kana song song.
+ */
+const STANDALONE_SCOPED_LEXICON: Array<{
+  kanji: string;
+  kana: string;
+  scopedN5: string;
+  scopedN4: string;
+}> = [
+  // Cụm kết hợp giữa địa danh ngoài 50 bài + danh từ trong N5 (病院 thuộc Bài 17)
+  { kanji: '神戸病院', kana: 'こうべびょういん', scopedN5: 'こうべ病院', scopedN4: 'こうべ病院' },
+  { kanji: '神戸', kana: 'こうべ', scopedN5: 'こうべ', scopedN4: 'こうべ' },
+  // Từ vựng có Kanji thuộc Bài 26..50 (Ngoài N5, nhưng Trong N4/50 bài)
+  { kanji: '研究者', kana: 'けんきゅうしゃ', scopedN5: 'けんきゅうしゃ', scopedN4: '研究者' },
+  { kanji: '医者', kana: 'いしゃ', scopedN5: 'いしゃ', scopedN4: '医者' },
+  { kanji: 'あの方', kana: 'あのかた', scopedN5: 'あのかた', scopedN4: 'あの方' },
+  { kanji: '木村', kana: 'きむら', scopedN5: 'きむら', scopedN4: '木村' },
+  { kanji: '太郎', kana: 'たろう', scopedN5: 'たろう', scopedN4: '太郎' },
+  { kanji: '方は', kana: 'かたは', scopedN5: 'かたは', scopedN4: '方は' },
+  { kanji: '方も', kana: 'かたも', scopedN5: 'かたも', scopedN4: '方も' },
+  { kanji: '方の', kana: 'かたの', scopedN5: 'かたの', scopedN4: '方の' },
+  { kanji: '方', kana: 'かた', scopedN5: 'かた', scopedN4: '方' },
+  // Từ vựng & tên riêng có chữ Hán nằm ngoài 50 bài (Chuyển sang Hiragana ở cả N5 và N4)
+  { kanji: '韓国人', kana: 'かんこくじん', scopedN5: 'かんこくじん', scopedN4: 'かんこくじん' },
+  { kanji: '韓国', kana: 'かんこく', scopedN5: 'かんこく', scopedN4: 'かんこく' },
+  { kanji: '教師', kana: 'きょうし', scopedN5: 'きょうし', scopedN4: 'きょうし' },
+  { kanji: '何歳', kana: 'なんさい', scopedN5: 'なんさい', scopedN4: 'なんさい' },
+  { kanji: '皆さん', kana: 'みなさん', scopedN5: 'みなさん', scopedN4: 'みなさん' },
+  { kanji: '佐藤', kana: 'さとう', scopedN5: 'さとう', scopedN4: 'さとう' },
+  { kanji: '鈴木', kana: 'すずき', scopedN5: 'すずき', scopedN4: 'すずき' },
+  { kanji: '松本', kana: 'まつもと', scopedN5: 'まつもと', scopedN4: 'まつもと' },
+  { kanji: '失礼', kana: 'しつれい', scopedN5: 'しつれい', scopedN4: 'しつれい' },
+  { kanji: '初めまして', kana: 'はじめまして', scopedN5: 'はじめまして', scopedN4: 'はじめまして' },
+  { kanji: 'よろしくお願いします', kana: 'よろしくおねがいします', scopedN5: 'よろしくおねがいします', scopedN4: 'よろしくおねがいします' },
+  { kanji: 'お巡りさん', kana: 'おまわりさん', scopedN5: 'おまわりさん', scopedN4: 'おまわりさん' },
+  { kanji: '警官', kana: 'けいかん', scopedN5: 'けいかん', scopedN4: 'けいかん' },
+  { kanji: '交番', kana: 'こうばん', scopedN5: 'こうばん', scopedN4: '交番' },
+  { kanji: '場所', kana: 'ばしょ', scopedN5: 'ばしょ', scopedN4: '場所' },
+  { kanji: '明日', kana: 'あした', scopedN5: 'あした', scopedN4: '明日' },
+  { kanji: 'お子さん', kana: 'おこさん', scopedN5: 'お子さん', scopedN4: 'お子さん' },
+  { kanji: '誰', kana: 'だれ', scopedN5: 'だれ', scopedN4: 'だれ' },
+  { kanji: '歳', kana: 'さい', scopedN5: 'さい', scopedN4: 'さい' },
+  { kanji: '皆', kana: 'みな', scopedN5: 'みな', scopedN4: 'みな' },
+  { kanji: '君', kana: 'くん', scopedN5: 'くん', scopedN4: 'くん' },
+];
+
+/**
+ * Áp dụng thay thế từ điển phạm vi lên một chuỗi đơn lẻ (ví dụ: choices, pieces, speaker, câu ví dụ).
+ */
+export function applyStandaloneScopedReplacements(text: string, lessonId: number): string {
+  if (!text || !KANJI_CHAR_REGEX.test(text)) return text;
+  const isN5 = getMaxKanjiLessonForScope(lessonId) <= 25;
+  let result = text;
+  for (const entry of STANDALONE_SCOPED_LEXICON) {
+    if (result.includes(entry.kanji)) {
+      const replacement = isN5 ? entry.scopedN5 : entry.scopedN4;
+      if (replacement !== entry.kanji) {
+        result = result.split(entry.kanji).join(replacement);
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ * Chuyển đổi 1 từ vựng đơn lẻ sang dạng hiển thị theo phạm vi Kanji (N5: Bài 1-25, N4: Bài 1-50).
+ */
+export function convertWordToScopedKanji(
+  kanjiWord?: string,
+  kanaFallback?: string,
+  lessonId: number = 1
+): string {
+  const kWord = (kanjiWord || '').trim();
+  const hWord = (kanaFallback || '').trim();
+  if (!kWord) return hWord;
+  if (!KANJI_CHAR_REGEX.test(kWord)) return kWord;
+
+  // Trường hợp từ ghép hỗn hợp đặc biệt như 神戸病院 -> こうべ病院 (giữ 病院 Bài 17)
+  if (kWord.includes('神戸病院')) {
+    return kWord.replace('神戸病院', 'こうべ病院');
+  }
+
+  if (isWordInKanjiScope(kWord, lessonId)) {
+    return kWord;
+  }
+
+  if (hWord) {
+    return hWord;
+  }
+
+  return applyStandaloneScopedReplacements(kWord, lessonId);
+}
+
+/**
+ * Chuyển đổi thông minh một câu văn / đoạn văn / phương án lựa chọn sang chế độ "🎯 Kanji trong phạm vi":
+ * - Giữ nguyên các từ có toàn bộ chữ Hán thuộc phạm vi (Bài 1..25 cho N5; Bài 1..50 cho N4).
+ * - Chuyển các từ có chữ Hán nằm ngoài phạm vi sang Hiragana tương ứng từ chuỗi kanaText (hoặc từ điển).
+ */
+export function convertTextToScopedKanji(
+  kanjiText?: string,
+  kanaText?: string,
+  lessonId: number = 1,
+  options?: { preserveBracketedTarget?: boolean }
+): string {
+  const kStr = kanjiText || kanaText || '';
+  const hStr = kanaText || kanjiText || '';
+  if (!kStr) return '';
+  if (!KANJI_CHAR_REGEX.test(kStr)) return kStr;
+
+  const splitRegex = /(\s+|、|。|「|」|（[^）]+）|【[^】]+】|：|\n)/;
+  const kTokens = kStr.split(splitRegex);
+  const hTokens = hStr.split(splitRegex);
+
+  if (kTokens.length === hTokens.length) {
+    const outTokens = kTokens.map((kTok, idx) => {
+      const hTok = hTokens[idx];
+      if (!kTok || !KANJI_CHAR_REGEX.test(kTok)) return kTok;
+
+      // Xử lý cụm trong ngoặc 【...】 (Mondai 1 kanji_yomi / Mondai 2 hyouki)
+      if (kTok.startsWith('【') && kTok.endsWith('】')) {
+        if (options?.preserveBracketedTarget) {
+          return kTok;
+        }
+        const innerK = kTok.slice(1, -1);
+        const innerH = hTok.startsWith('【') && hTok.endsWith('】') ? hTok.slice(1, -1) : innerK;
+        return `【${convertWordToScopedKanji(innerK, innerH, lessonId)}】`;
+      }
+
+      // Trường hợp 神戸病院 + trợ từ (ví dụ: 神戸病院の -> こうべ病院の)
+      if (kTok.includes('神戸病院')) {
+        return kTok.replace('神戸病院', 'こうべ病院');
+      }
+
+      // Nếu toàn bộ chữ Hán trong token đều thuộc phạm vi -> giữ nguyên Kanji!
+      if (isWordInKanjiScope(kTok, lessonId)) {
+        return kTok;
+      }
+
+      // Nếu token có chữ Hán ngoài phạm vi -> dùng token Hiragana tương ứng (hoặc fallback từ điển)
+      if (hTok && hTok !== kTok && !KANJI_CHAR_REGEX.test(hTok)) {
+        return hTok;
+      }
+      return applyStandaloneScopedReplacements(kTok, lessonId);
+    });
+    return outTokens.join('');
+  }
+
+  return applyStandaloneScopedReplacements(kStr, lessonId);
+}
 
 /**
  * Chuyển một từ vựng Hán tự sang dạng Bán Kanji lũy tiến (Progressive Kanji).
@@ -894,6 +1062,7 @@ export interface GeneratePracticeParams {
   selectedCategories?: PracticeCategory[];
   currentLessonId: number;
   limit?: number;
+  scopeMode?: 'scoped' | 'full';
 }
 
 /**
@@ -978,9 +1147,11 @@ export function generatePracticeQuestions({
   allLessonKanji = [],
   selectedCategories = ['type1_vocab', 'type2_partial', 'type3_sentence'],
   currentLessonId,
-  limit = 12
+  limit = 12,
+  scopeMode = 'scoped'
 }: GeneratePracticeParams): PracticeExerciseQuestion[] {
   if (!eligibleKanji || eligibleKanji.length === 0) return [];
+  const isScoped = scopeMode === 'scoped';
 
   // Tập hợp các chữ Kanji đã học thuộc (mastered)
   const masteredKanjiSet = new Set<string>();
@@ -1013,6 +1184,9 @@ export function generatePracticeQuestions({
     const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
     if (!kWord || kWord === v.hiragana) return;
 
+    // Khi bật chế độ Kanji trong phạm vi: loại bỏ các từ ghép chứa chữ Hán ngoài phạm vi cấp độ (VD: 韓国 có chữ 韓 ngoài 50 bài)
+    if (isScoped && !isWordInKanjiScope(kWord, currentLessonId)) return;
+
     // Tìm các chữ Hán trong từ này có thuộc bài hiện tại không
     const matchingChars: string[] = [];
     for (const char of kWord) {
@@ -1027,7 +1201,9 @@ export function generatePracticeQuestions({
         kanjiWord: kWord,
         hiragana: v.hiragana,
         meaning: v.vietnamese_meaning || '',
-        example: v.japanese_example,
+        example: isScoped && v.japanese_example
+          ? applyStandaloneScopedReplacements(v.japanese_example, currentLessonId)
+          : v.japanese_example,
         exampleMeaning: v.example_meaning,
         kanjiChars: matchingChars
       });
@@ -1044,6 +1220,7 @@ export function generatePracticeQuestions({
         const word = m[1].trim();
         const reading = m[2]?.trim() || '';
         const meaning = m[3]?.trim() || '';
+        if (isScoped && !isWordInKanjiScope(word, currentLessonId)) continue;
         if (word.includes(k.character) && !seenVocabWords.has(word)) {
           seenVocabWords.add(word);
           targetVocabs.push({

@@ -12,6 +12,7 @@ import { getRadicalsString, getRadicalsForCharacter } from '../../utils/kanjiRad
 import PitchAccentDisplay from '../../components/PitchAccentDisplay';
 import { playAudioWithFallback } from '../../utils/audioHelper';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../../utils/kanjiPracticeHelper';
+import { convertWordToScopedKanji } from '../../utils/kanjiOverhaulHelper';
 
 const QuickLookupModal = dynamic(() => import('../../components/QuickLookupModal'), { ssr: false });
 const KanjiStrokePlayer = dynamic(() => import('../../components/KanjiStrokePlayer'), { ssr: false });
@@ -706,7 +707,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const [practiceDirection, setPracticeDirection] = useState<'vi-to-ja' | 'ja-to-vi'>('vi-to-ja');
 
-  const [practiceScriptMode, setPracticeScriptMode] = useState<'hiragana' | 'kanji'>('hiragana');
+  const [practiceScriptMode, setPracticeScriptMode] = useState<'hiragana' | 'scoped' | 'kanji'>('scoped');
 
   const practiceResultsRef = useRef<HTMLDivElement | null>(null);
 
@@ -844,7 +845,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   useEffect(() => {
 
-    setPracticeScriptMode('hiragana');
+    setPracticeScriptMode('scoped');
 
   }, [selectedLessonId]);
 
@@ -4142,7 +4143,7 @@ const renderInteractivePractice = () => {
 
                       {practiceType === 'write' && practiceMode === 'vocab' && practiceDirection === 'ja-to-vi' && (
 
-                        <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex">
+                        <div className="bg-slate-50 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-wrap gap-0.5">
 
                           <button
 
@@ -4166,6 +4167,28 @@ const renderInteractivePractice = () => {
 
                           <button
 
+                            onClick={() => setPracticeScriptMode('scoped')}
+
+                            title={selectedLessonId <= 25 ? 'Chỉ hiện Kanji trong phạm vi N5 (Bài 1–25), từ ngoài phạm vi hiển thị Hiragana' : 'Chỉ hiện Kanji trong phạm vi 50 bài, từ ngoài phạm vi hiển thị Hiragana'}
+
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+
+                              practiceScriptMode === 'scoped'
+
+                                ? 'bg-emerald-600 text-white shadow-lg'
+
+                                : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 dark:text-slate-200'
+
+                            }`}
+
+                          >
+
+                            🎯 Kanji trong phạm vi ({selectedLessonId <= 25 ? 'N5: B1–25' : '50 bài'})
+
+                          </button>
+
+                          <button
+
                             onClick={() => setPracticeScriptMode('kanji')}
 
                             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
@@ -4180,7 +4203,7 @@ const renderInteractivePractice = () => {
 
                           >
 
-                            🉐 Kanji
+                            🉐 Tất cả Kanji
 
                           </button>
 
@@ -4292,7 +4315,13 @@ const renderInteractivePractice = () => {
 
                                 if (isVocab) {
 
-                                  questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (item.kanji_word || item.hiragana) : item.hiragana);
+                                  questionText = isViToJa
+                                    ? item.vietnamese_meaning
+                                    : practiceScriptMode === 'kanji'
+                                      ? (item.kanji_word || item.hiragana)
+                                      : practiceScriptMode === 'scoped'
+                                        ? convertWordToScopedKanji(item.kanji_word, item.hiragana, selectedLessonId)
+                                        : item.hiragana;
 
                                   placeholderText = isViToJa 
 
@@ -4492,7 +4521,13 @@ const renderInteractivePractice = () => {
 
                             if (isVocab) {
 
-                              questionText = isViToJa ? item.vietnamese_meaning : (practiceScriptMode === 'kanji' ? (item.kanji_word || item.hiragana) : item.hiragana);
+                              questionText = isViToJa
+                                ? item.vietnamese_meaning
+                                : practiceScriptMode === 'kanji'
+                                  ? (item.kanji_word || item.hiragana)
+                                  : practiceScriptMode === 'scoped'
+                                    ? convertWordToScopedKanji(item.kanji_word, item.hiragana, selectedLessonId)
+                                    : item.hiragana;
 
                               placeholderText = isViToJa 
 

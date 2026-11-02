@@ -4,6 +4,12 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { useRouter } from 'next/navigation';
 import { api } from '../../../utils/api';
 import { playAudioWithFallback, playSpeedrunSound } from '../../../utils/audioHelper';
+import {
+  isWordInKanjiScope,
+  convertTextToScopedKanji,
+  applyStandaloneScopedReplacements,
+  getMaxKanjiLessonForScope
+} from '../../../utils/kanjiOverhaulHelper';
 import QuickLookupModal from '../../../components/QuickLookupModal';
 
 interface JlptMondaiMeta {
@@ -46,6 +52,7 @@ interface JlptPassage {
 
 interface JlptQuestion {
   id: string;
+  lesson_id?: number;
   mondai: string;
   section: string;
   section_ja: string;
@@ -164,8 +171,8 @@ export default function JlptReviewTab({
     totalPassages: 0
   });
 
-  // UI & Display preferences
-  const [showKanji, setShowKanji] = useState<boolean>(true);
+  // UI & Display preferences ('scoped' = Kanji trong phạm vi N5/N4, 'full' = Chuẩn JLPT)
+  const [scriptMode, setScriptMode] = useState<'scoped' | 'full'>('scoped');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [showQuestionMap, setShowQuestionMap] = useState<boolean>(false);
   const [isQuickLookupOpen, setIsQuickLookupOpen] = useState<boolean>(false);
@@ -433,6 +440,26 @@ export default function JlptReviewTab({
     [sectionsMeta, bankLevel]
   );
 
+  // Kiểm tra câu hỏi Mondai 1 (kanji_yomi) / Mondai 2 (hyouki) có từ mục tiêu nằm trong phạm vi Kanji của cấp độ hiện tại không
+  const isDirectKanjiQuestionInScope = useCallback(
+    (q: JlptQuestion): boolean => {
+      const qLessonId = q.lesson_id || selectedLessonId;
+      if (q.mondai === 'kanji_yomi') {
+        const m = (q.stem_kanji || '').match(/【([^】]+)】/);
+        if (m && m[1]) {
+          return isWordInKanjiScope(m[1], qLessonId);
+        }
+      } else if (q.mondai === 'hyouki') {
+        const correctAns = q.choices?.[q.answer] || '';
+        if (correctAns) {
+          return isWordInKanjiScope(correctAns, qLessonId);
+        }
+      }
+      return true;
+    },
+    [selectedLessonId]
+  );
+
   // Start or Resume one of the 4 cards
   const handleStartOrResumeCard = async (card: CardId, overrideScope?: string, forceFresh = false) => {
     const targetScope = overrideScope || cardScopes[card] || 'blueprint';
@@ -472,9 +499,14 @@ export default function JlptReviewTab({
         { skipCache: true }
       );
       if (res && res.available && Array.isArray(res.questions) && res.questions.length > 0) {
+        const filteredQuestions =
+          scriptMode === 'scoped'
+            ? res.questions.filter((q: JlptQuestion) => isDirectKanjiQuestionInScope(q))
+            : res.questions;
+        const effectiveQuestions = filteredQuestions.length > 0 ? filteredQuestions : res.questions;
         setActiveCard(card);
         setActiveScope(targetScope);
-        setQuestions(res.questions);
+        setQuestions(effectiveQuestions);
         setPassages(res.passages || {});
         setCurrentIndex(0);
         setAnswers({});
@@ -650,6 +682,51 @@ export default function JlptReviewTab({
     historyList
   ]);
 
+  // Smart Kanji/Scoped Stem Builder (Protects kanji_yomi 【Kanji】 from leaking reading!)
+  const getSmartDisplayStem = useCallback(
+    (q: JlptQuestion, mode: 'scoped' | 'full'): string => {
+      const kanjiStem = q.stem_kanji || q.stem_kana || '';
+      const kanaStem = q.stem_kana || q.stem_kanji || '';
+      const qLessonId = q.lesson_id || selectedLessonId;
+
+      if (mode === 'full') return kanjiStem;
+
+      return convertTextToScopedKanji(kanjiStem, kanaStem, qLessonId, {
+        preserveBracketedTarget: q.mondai === 'kanji_yomi'
+      });
+    },
+    [selectedLessonId]
+  );
+
+  // Smart Choices Builder across 'scoped' | 'full'
+  const getSmartDisplayChoices = useCallback(
+    (q: JlptQuestion, mode: 'scoped' | 'full'): string[] => {
+      if (q.mondai === 'hyouki' || q.mondai === 'kanji_yomi') {
+        return q.choices || [];
+      }
+      const qLessonId = q.lesson_id || selectedLessonId;
+
+      if (mode === 'full') {
+        return q.choices_kanji || q.choices || q.choices_kana || [];
+      }
+
+      // mode === 'scoped': Giữ Kanji trong phạm vi (N5: L1-25, N4: L1-50), chuyển Kanji ngoài phạm vi sang Hiragana
+      if (
+        Array.isArray(q.choices_kanji) &&
+        Array.isArray(q.choices_kana) &&
+        q.choices_kanji.length === q.choices_kana.length
+      ) {
+        return q.choices_kanji.map((kChoice, idx) =>
+          convertTextToScopedKanji(kChoice, q.choices_kana![idx], qLessonId)
+        );
+      }
+
+      const raw = q.choices || q.choices_kanji || q.choices_kana || [];
+      return raw.map((c) => convertTextToScopedKanji(c, c, qLessonId));
+    },
+    [selectedLessonId]
+  );
+
   // Keyboard shortcuts (1..4 to pick choice, Left/Right arrows to navigate)
   useEffect(() => {
     if (step !== 'test' || questions.length === 0 || isQuickLookupOpen) return;
@@ -660,12 +737,7 @@ export default function JlptReviewTab({
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
 
-      const choiceList =
-        (showKanji ? currentQ.choices_kanji : currentQ.choices_kana) ||
-        currentQ.choices ||
-        currentQ.choices_kanji ||
-        currentQ.choices_kana ||
-        [];
+      const choiceList = getSmartDisplayChoices(currentQ, scriptMode);
 
       if (['1', '2', '3', '4'].includes(e.key)) {
         const idx = parseInt(e.key, 10) - 1;
@@ -688,38 +760,7 @@ export default function JlptReviewTab({
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [step, questions, currentIndex, showKanji, graded, isQuickLookupOpen, handleSelectAndGrade]);
-
-  // Smart Kanji/Kana Stem Builder (Protects kanji_yomi 【Kanji】 from leaking reading!)
-  const getSmartDisplayStem = useCallback((q: JlptQuestion, preferKanji: boolean): string => {
-    const kanjiStem = q.stem_kanji || q.stem_kana || '';
-    const kanaStem = q.stem_kana || q.stem_kanji || '';
-
-    if (preferKanji) return kanjiStem;
-
-    if (q.mondai === 'kanji_yomi') {
-      // Extract 【Kanji】 tokens from stem_kanji and preserve them inside stem_kana!
-      const kanjiTargets: string[] = [];
-      kanjiStem.replace(/【([^】]+)】/g, (_, inner) => {
-        kanjiTargets.push(inner);
-        return _;
-      });
-      if (kanjiTargets.length > 0) {
-        let tokenIdx = 0;
-        return kanaStem.replace(/【([^】]+)】/g, (fullMatch) => {
-          const target = kanjiTargets[tokenIdx++];
-          return target ? `【${target}】` : fullMatch;
-        });
-      }
-      return kanjiStem;
-    }
-
-    if (q.mondai === 'hyouki') {
-      return kanaStem;
-    }
-
-    return kanaStem;
-  }, []);
+  }, [step, questions, currentIndex, scriptMode, graded, isQuickLookupOpen, handleSelectAndGrade, getSmartDisplayChoices]);
 
   // Format stem text with visual highlights for 【target】, （blank）, and ★
   const renderFormattedStem = (text: string) => {
@@ -1161,25 +1202,33 @@ export default function JlptReviewTab({
             </button>
           )}
 
-          {/* Smart Kanji / Kana Switcher */}
-          <div className="flex items-center gap-1 bg-slate-950 border border-slate-800 p-1 rounded-xl">
+          {/* Scoped Kanji / Full Kanji Switcher */}
+          <div className="flex flex-wrap items-center gap-1 bg-slate-950 border border-slate-800 p-1 rounded-xl">
             <button
               type="button"
-              onClick={() => setShowKanji(false)}
-              title="Hỗ trợ hiển thị Kana cho các từ xung quanh (vẫn giữ nguyên chữ Hán mục tiêu ở Mondai 1 để không lộ đáp án)"
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                !showKanji
-                  ? 'bg-indigo-600 text-white shadow-md'
+              onClick={() => setScriptMode('scoped')}
+              title={
+                selectedLessonId <= 25
+                  ? 'Đang học N5 (Bài 1–25): Giữ chữ Kanji thuộc Bài 1–25, tự động chuyển chữ Kanji ngoài phạm vi (Bài 26–50 & ngoài 50 bài) sang Hiragana'
+                  : 'Đang học N4 (Bài 26–50): Giữ chữ Kanji của cả 50 bài, tự động chuyển chữ Kanji ngoài 50 bài sang Hiragana'
+              }
+              className={`px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1 ${
+                scriptMode === 'scoped'
+                  ? 'bg-emerald-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              かな Hỗ trợ Kana
+              <span>🎯</span>
+              <span>
+                Kanji trong phạm vi ({selectedLessonId <= 25 ? 'N5: B1–25' : '50 bài'})
+              </span>
             </button>
             <button
               type="button"
-              onClick={() => setShowKanji(true)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                showKanji
+              onClick={() => setScriptMode('full')}
+              title="Hiển thị đầy đủ 100% chữ Hán chuẩn đề thi JLPT gốc"
+              className={`px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                scriptMode === 'full'
                   ? 'bg-indigo-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
@@ -1578,14 +1627,8 @@ export default function JlptReviewTab({
           Boolean(linkedPassage) &&
           ['cloze', 'short', 'medium', 'info'].includes(linkedPassage?.kind || '');
 
-        const displayChoices =
-          q.mondai === 'hyouki' || q.mondai === 'kanji_yomi'
-            ? q.choices || []
-            : (showKanji ? q.choices_kanji : q.choices_kana) ||
-              q.choices ||
-              q.choices_kanji ||
-              q.choices_kana ||
-              [];
+        const qLessonId = q.lesson_id || selectedLessonId;
+        const displayChoices = getSmartDisplayChoices(q, scriptMode);
 
         const hideSpokenChoicesText =
           isChoukai &&
@@ -1593,8 +1636,13 @@ export default function JlptReviewTab({
           !isGraded &&
           !peekTranscript[q.id];
 
-        const displayStem = getSmartDisplayStem(q, showKanji);
+        const displayStem = getSmartDisplayStem(q, scriptMode);
         const relatedData = isGraded ? resolveRelatedKnowledge(q.related) : null;
+
+        const formatPieceLabel = (rawItem: string) => {
+          if (scriptMode === 'full') return rawItem;
+          return convertTextToScopedKanji(rawItem, rawItem, qLessonId);
+        };
 
         // Kumitate ★ interactive 4-slot helper state
         const currentSlots = kumitateSlots[q.id] || [null, null, null, null];
@@ -1806,18 +1854,40 @@ export default function JlptReviewTab({
                   {(linkedPassage.body_kanji || linkedPassage.body_kana) && (
                     <div className="text-sm sm:text-base text-slate-100 leading-8 whitespace-pre-line bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 font-medium">
                       {renderFormattedStem(
-                        showKanji
+                        scriptMode === 'full'
                           ? linkedPassage.body_kanji || linkedPassage.body_kana || ''
-                          : linkedPassage.body_kana || linkedPassage.body_kanji || ''
+                          : convertTextToScopedKanji(
+                              linkedPassage.body_kanji,
+                              linkedPassage.body_kana,
+                              qLessonId
+                            )
                       )}
                     </div>
                   )}
 
                   {/* Structured Table for jouhou_kensaku (Info Retrieval) */}
                   {(linkedPassage.table_kanji || linkedPassage.table_kana) && (() => {
-                    const tbl = showKanji
-                      ? linkedPassage.table_kanji || linkedPassage.table_kana
-                      : linkedPassage.table_kana || linkedPassage.table_kanji;
+                    const kTbl = linkedPassage.table_kanji || linkedPassage.table_kana;
+                    const hTbl = linkedPassage.table_kana || linkedPassage.table_kanji;
+                    const tbl =
+                      scriptMode === 'full'
+                        ? kTbl
+                        : kTbl && hTbl
+                          ? {
+                              headers: kTbl.headers.map((h, i) =>
+                                convertTextToScopedKanji(h, hTbl.headers[i] || h, qLessonId)
+                              ),
+                              rows: kTbl.rows.map((r, ri) =>
+                                r.map((cell, ci) =>
+                                  convertTextToScopedKanji(
+                                    cell,
+                                    hTbl.rows[ri]?.[ci] || cell,
+                                    qLessonId
+                                  )
+                                )
+                              )
+                            }
+                          : kTbl;
                     if (!tbl) return null;
                     return (
                       <div className="overflow-x-auto rounded-xl border border-slate-700 bg-slate-950/80">
@@ -1971,10 +2041,19 @@ export default function JlptReviewTab({
                             <div className="space-y-1.5">
                               {linkedPassage!.script!.map((turn, tIdx) => (
                                 <div key={tIdx} className="text-slate-200">
-                                  <strong className="text-cyan-300">{turn.speaker}:</strong>{' '}
-                                  {showKanji
+                                  <strong className="text-cyan-300">
+                                    {scriptMode === 'full'
+                                      ? turn.speaker
+                                      : convertTextToScopedKanji(turn.speaker, turn.speaker, qLessonId)}
+                                    :
+                                  </strong>{' '}
+                                  {scriptMode === 'full'
                                     ? turn.text_kanji || turn.text_kana
-                                    : turn.text_kana || turn.text_kanji}
+                                    : convertTextToScopedKanji(
+                                        turn.text_kanji,
+                                        turn.text_kana,
+                                        qLessonId
+                                      )}
                                 </div>
                               ))}
                             </div>
@@ -2052,7 +2131,7 @@ export default function JlptReviewTab({
                             : currentSlots[slotIdx];
                           const pieceLabel =
                             pieceIdx !== null && pieceIdx !== undefined
-                              ? q.pieces!.items[pieceIdx]
+                              ? formatPieceLabel(q.pieces!.items[pieceIdx])
                               : null;
 
                           return (
@@ -2094,7 +2173,7 @@ export default function JlptReviewTab({
                                     : 'bg-slate-900 border-slate-700 text-slate-200 hover:border-amber-400'
                                 }`}
                               >
-                                {pIdx + 1}. {itemText}
+                                {pIdx + 1}. {formatPieceLabel(itemText)}
                               </button>
                             );
                           })}
@@ -2105,7 +2184,7 @@ export default function JlptReviewTab({
                               onClick={() => handleSelectAndGrade(q, placedInStar)}
                               className="ml-auto px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black shadow cursor-pointer"
                             >
-                              ✔ Chốt đáp án ★ ({q.pieces.items[placedInStar]})
+                              ✔ Chốt đáp án ★ ({formatPieceLabel(q.pieces.items[placedInStar])})
                             </button>
                           )}
                         </div>

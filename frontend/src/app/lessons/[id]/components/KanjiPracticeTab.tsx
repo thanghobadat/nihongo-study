@@ -13,7 +13,8 @@ import {
   PracticeCategory,
   generatePracticeQuestions,
   getLessonCompoundCandidatesForKanji,
-  buildVocabKanjiExplanation
+  buildVocabKanjiExplanation,
+  isWordInKanjiScope
 } from '../../../utils/kanjiOverhaulHelper';
 
 interface KanjiPracticeTabProps {
@@ -40,6 +41,9 @@ export default function KanjiPracticeTab({
 
   // Status Filter: 'all' | 'not_learned' | 'learning' | 'mastered'
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
+
+  // Kanji Scope Filter: 'scoped' (Chỉ hiện Kanji trong phạm vi N5: Bài 1-25 / N4: Bài 1-50) | 'full' (Tất cả)
+  const [scopeMode, setScopeMode] = useState<'scoped' | 'full'>('scoped');
 
   // Eligible Kanji based on status filter
   const eligibleKanji = useMemo(() => {
@@ -84,7 +88,8 @@ export default function KanjiPracticeTab({
       allLessonKanji: kanjiItems,
       selectedCategories: selectedCategories.length > 0 ? selectedCategories : ['type1_vocab', 'type2_partial', 'type3_sentence'],
       currentLessonId: selectedLessonId,
-      limit: 12
+      limit: 12,
+      scopeMode
     });
     setPracticeQuestions(questions);
     setPracticeIndex(0);
@@ -94,14 +99,14 @@ export default function KanjiPracticeTab({
     setUserPracticeAnswers({});
     setIsPracticeFinished(false);
     setPracticeWrongList([]);
-  }, [eligibleKanji, vocabItems, grammarItems, kanjiItems, selectedCategories, selectedLessonId]);
+  }, [eligibleKanji, vocabItems, grammarItems, kanjiItems, selectedCategories, selectedLessonId, scopeMode]);
 
-  // Tự động sinh câu hỏi khi đổi bài học hoặc đổi bộ lọc trạng thái
+  // Tự động sinh câu hỏi khi đổi bài học hoặc đổi bộ lọc trạng thái / phạm vi
   useEffect(() => {
     if (activeTab === 'practice') {
       generateNewPracticeSet();
     }
-  }, [activeTab, selectedLessonId, eligibleKanji.length, statusFilter]);
+  }, [activeTab, selectedLessonId, eligibleKanji.length, statusFilter, scopeMode, generateNewPracticeSet]);
 
   // Bật/tắt 1 danh mục dạng bài tập
   const toggleCategory = (cat: PracticeCategory) => {
@@ -296,7 +301,12 @@ export default function KanjiPracticeTab({
     );
     const distractors = [...eligiblePool, ...lessonRestPool, ...fallbackPool].slice(0, 3);
 
-    const compoundCandidates = getLessonCompoundCandidatesForKanji(target, vocabItems, kanjiItems);
+    const rawCompoundCandidates = getLessonCompoundCandidatesForKanji(target, vocabItems, kanjiItems);
+    const scopedCandidates =
+      scopeMode === 'scoped'
+        ? rawCompoundCandidates.filter((c) => isWordInKanjiScope(c.word, selectedLessonId))
+        : rawCompoundCandidates;
+    const compoundCandidates = scopedCandidates.length > 0 ? scopedCandidates : rawCompoundCandidates;
     const sampleCompound = compoundCandidates[0];
     const singleKanjiExplanation = [
       `【Chữ Hán】: ${target.character} (${target.sino_vietnamese ? 'Âm Hán: ' + target.sino_vietnamese + ' - ' : ''}Nghĩa: ${target.vietnamese_meaning})`,
@@ -436,7 +446,7 @@ export default function KanjiPracticeTab({
       compoundWord: chosenCompound.word,
       compoundReading: chosenCompound.reading || chosenCompound.word
     };
-  }, [eligibleKanji, kanjiItems, memorizeDirection, vocabItems]);
+  }, [eligibleKanji, kanjiItems, memorizeDirection, vocabItems, scopeMode, selectedLessonId]);
 
   // Bắt đầu Nhớ mặt chữ / Lượt Hoàn thiện từ ghép không đếm ngược
   const startMemorizeGame = (customPool?: KanjiItemData[]) => {
@@ -697,8 +707,39 @@ export default function KanjiPracticeTab({
             </button>
           </div>
 
-          {/* Status Filter Dropdown */}
-          <div className="flex items-center gap-2">
+          {/* Scope Mode & Status Filter */}
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center bg-slate-100 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+              <button
+                type="button"
+                onClick={() => setScopeMode('scoped')}
+                title={
+                  selectedLessonId <= 25
+                    ? 'Chỉ dùng từ ghép & câu có Kanji trong phạm vi N5 (Bài 1–25), ẩn/chuyển Hiragana các chữ ngoài phạm vi'
+                    : 'Chỉ dùng từ ghép & câu có Kanji trong phạm vi 50 bài, ẩn/chuyển Hiragana các chữ ngoài 50 bài'
+                }
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  scopeMode === 'scoped'
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                🎯 Kanji trong phạm vi ({selectedLessonId <= 25 ? 'N5: B1–25' : '50 bài'})
+              </button>
+              <button
+                type="button"
+                onClick={() => setScopeMode('full')}
+                title="Hiển thị tất cả từ ghép và chữ Hán không giới hạn phạm vi"
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  scopeMode === 'full'
+                    ? 'bg-indigo-600 text-white shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                漢字 Tất cả
+              </button>
+            </div>
+
             <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Trạng thái:</span>
             <select
               value={statusFilter}
