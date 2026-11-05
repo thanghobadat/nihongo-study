@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { api, getBaseUrl } from '../utils/api';
 
 const PUBLIC_PATHS = ['/login', '/register', '/forgot-password', '/reset-password'];
-const CORE_PREFETCH_ROUTES = ['/dashboard', '/roadmap', '/knowledge', '/fundamentals', '/lessons/1'];
+const CORE_PREFETCH_ROUTES = ['/dashboard', '/roadmap', '/knowledge', '/notes', '/lessons/1'];
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();

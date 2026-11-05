@@ -81,7 +81,7 @@ export default function SidebarSettings() {
 
           <div className="border-t border-slate-100 dark:border-slate-900" />
 
-          {/* Navigation Shortcuts: 1. Ôn bảng chữ cái -> 2. Kiến thức nền tảng -> 3. Ôn tổng hợp */}
+          {/* Navigation Shortcuts: 1. Ôn bảng chữ cái -> 2. Kiến thức cần nhớ -> 3. Ôn tổng hợp */}
           <div className="space-y-1.5">
             <Link
               href="/kana"
@@ -93,13 +93,13 @@ export default function SidebarSettings() {
               <span>Ôn bảng chữ cái</span>
             </Link>
             <Link
-              href="/fundamentals"
+              href="/notes"
               prefetch
               onClick={() => setIsOpen(false)}
               className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100/60 dark:hover:bg-slate-900/65 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer border border-transparent"
             >
-              <span className="text-sm">📘</span>
-              <span>Kiến thức nền tảng</span>
+              <span className="text-sm">📌</span>
+              <span>Kiến thức cần nhớ</span>
             </Link>
             <Link
               href="/knowledge"
