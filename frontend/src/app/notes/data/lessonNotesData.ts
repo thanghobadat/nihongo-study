@@ -1,6 +1,7 @@
 import React from 'react';
 import Lesson1Notes from '../lessons/Lesson1Notes';
 import Lesson3Notes from '../lessons/Lesson3Notes';
+import Lesson4Notes from '../lessons/Lesson4Notes';
 
 export interface LessonNoteHighlight {
   id: string;
@@ -77,6 +78,24 @@ const CUSTOM_LESSON_NOTES: Partial<
       },
     ],
     Component: Lesson3Notes,
+  },
+  4: {
+    updatedAt: '06/11/2026',
+    highlights: [
+      {
+        id: 'l4-tense-table',
+        tag: 'Thì & Thể',
+        title: 'Bảng chia 3 Thì (Quá khứ • Hiện tại • Tương lai) & Thể động từ ～ます',
+        brief: 'Đối chiếu trực diện Khẳng định, Phủ định, Nghi vấn (ます・ません・ました・ませんでした).',
+      },
+      {
+        id: 'l4-reflex-practice',
+        tag: 'Bài tập 10s',
+        title: 'Bài tập phản xạ Chia Thì & Thể + Đáp câu hỏi (Hiragana & Kanji)',
+        brief: 'Rèn tốc độ chọn đuôi động từ đúng và chống bẫy ませんだった / そうです.',
+      },
+    ],
+    Component: Lesson4Notes,
   },
 };
 
