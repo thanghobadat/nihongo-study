@@ -31,7 +31,7 @@ const CUSTOM_LESSON_NOTES: Partial<
   Record<number, Omit<LessonNoteConfig, 'lessonId' | 'level'>>
 > = {
   1: {
-    updatedAt: '05/11/2026',
+    updatedAt: '06/11/2026',
     highlights: [
       {
         id: 'l1-numbers',
@@ -55,7 +55,7 @@ const CUSTOM_LESSON_NOTES: Partial<
     Component: Lesson1Notes,
   },
   3: {
-    updatedAt: '05/11/2026',
+    updatedAt: '06/11/2026',
     highlights: [
       {
         id: 'l3-money',

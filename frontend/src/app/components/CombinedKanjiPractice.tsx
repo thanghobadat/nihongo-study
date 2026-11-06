@@ -31,14 +31,24 @@ export interface VocabReflexQuestion {
   explanation: string;
 }
 
+const N5_LESSONS = Array.from({ length: 25 }, (_, i) => i + 1);
+const N4_LESSONS = Array.from({ length: 25 }, (_, i) => i + 26);
+const ALL_50_LESSONS = Array.from({ length: 50 }, (_, i) => i + 1);
+
 export default function CombinedKanjiPractice({
   kanjiList,
   vocabList = [],
   currentLevel = 'N5',
   onUpdateKanjiStatus
 }: CombinedKanjiPracticeProps) {
-  // Scope filter: 'level' (N5/N4) | 'all_50' (toàn bộ 50 bài) | mã bài cụ thể '1'..'50'
-  const [scopeFilter, setScopeFilter] = useState<'level' | 'all_50' | string>('level');
+  // Danh sách các bài học đang được tích chọn (hỗ trợ chọn nhiều bài tùy ý, ví dụ [1, 3, 5])
+  const [selectedLessons, setSelectedLessons] = useState<number[]>(() =>
+    currentLevel === 'N5' ? N5_LESSONS : N4_LESSONS
+  );
+  const [followGlobalLevel, setFollowGlobalLevel] = useState<boolean>(true);
+  const [isScopeDropdownOpen, setIsScopeDropdownOpen] = useState<boolean>(false);
+  const [pickerTab, setPickerTab] = useState<'all' | 'n5' | 'n4' | 'selected'>('all');
+  const scopePickerRef = useRef<HTMLDivElement | null>(null);
 
   // Status Filter: 'all' | 'not_learned' | 'learning' | 'mastered'
   const [statusFilter, setStatusFilter] = useState<'all' | 'not_learned' | 'learning' | 'mastered'>('all');
@@ -104,74 +114,179 @@ export default function CombinedKanjiPractice({
     });
   }, [kanjiLessonMap]);
 
-  // Danh sách chữ Hán đơn trong phạm vi đang chọn (dùng làm phương án nhiễu đúng cấp độ/bài)
-  const scopedKanjiItems = useMemo(() => {
-    const all = kanjiList || [];
-    if (scopeFilter === 'all_50') return all;
-    if (scopeFilter === 'level') {
-      const maxL = currentLevel === 'N5' ? 25 : 50;
-      return all.filter(k => (Number((k as any).lesson_id) || 1) <= maxL);
+  // Đồng bộ tự động khi đổi nút N5 / N4 ở đầu trang nếu người dùng chưa tùy chỉnh bài lẻ
+  const prevLevelRef = useRef(currentLevel);
+  useEffect(() => {
+    if (prevLevelRef.current !== currentLevel) {
+      prevLevelRef.current = currentLevel;
+      if (followGlobalLevel) {
+        setSelectedLessons(currentLevel === 'N5' ? N5_LESSONS : N4_LESSONS);
+      }
     }
-    const lId = parseInt(scopeFilter, 10);
-    if (!isNaN(lId)) {
-      const exact = all.filter(k => Number((k as any).lesson_id) === lId);
-      const cum = all.filter(k => (Number((k as any).lesson_id) || 1) <= lId);
-      return exact.length >= 4 ? exact : cum;
-    }
-    return all;
-  }, [kanjiList, scopeFilter, currentLevel]);
+  }, [currentLevel, followGlobalLevel]);
 
-  // 1. Lọc kho từ vựng CÓ CHỨA CHỮ HÁN đã học theo phạm vi (N5 / N4 / Toàn bộ 50 bài / Bài cụ thể)
-  const scopedVocabs = useMemo(() => {
-    const list = (vocabList || []).filter(v => {
+  // Đóng Popover chọn bài khi click ra ngoài (Desktop) hoặc bấm phím Escape
+  useEffect(() => {
+    if (!isScopeDropdownOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (scopePickerRef.current && !scopePickerRef.current.contains(e.target as Node)) {
+        setIsScopeDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsScopeDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isScopeDropdownOpen]);
+
+  // Dừng phiên chơi đang chạy nếu người dùng thay đổi phạm vi bài học
+  const resetActiveSessionIfNeeded = useCallback(() => {
+    if (gameActive || gameOver) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      setGameActive(false);
+      setGameOver(false);
+      setSelectedIdx(null);
+      setLastAnswerCorrect(null);
+      setIsEvaluating(false);
+    }
+  }, [gameActive, gameOver]);
+
+  const sortedSelectedLessons = useMemo(
+    () => [...selectedLessons].sort((a, b) => a - b),
+    [selectedLessons]
+  );
+
+  const selectedLessonSet = useMemo(
+    () => new Set(sortedSelectedLessons),
+    [sortedSelectedLessons]
+  );
+
+  const isExactN5 =
+    sortedSelectedLessons.length === 25 &&
+    sortedSelectedLessons[0] === 1 &&
+    sortedSelectedLessons[24] === 25;
+  const isExactN4 =
+    sortedSelectedLessons.length === 25 &&
+    sortedSelectedLessons[0] === 26 &&
+    sortedSelectedLessons[24] === 50;
+  const isExactAll50 = sortedSelectedLessons.length === 50;
+  const isCustomSelection =
+    !isExactN5 && !isExactN4 && !isExactAll50 && sortedSelectedLessons.length > 0;
+
+  const toggleLesson = useCallback(
+    (lessonId: number) => {
+      setFollowGlobalLevel(false);
+      resetActiveSessionIfNeeded();
+      setSelectedLessons(prev =>
+        prev.includes(lessonId)
+          ? prev.filter(id => id !== lessonId)
+          : [...prev, lessonId].sort((a, b) => a - b)
+      );
+    },
+    [resetActiveSessionIfNeeded]
+  );
+
+  const applyLessonPreset = useCallback(
+    (preset: 'n5' | 'n4' | 'all_50' | 'clear') => {
+      resetActiveSessionIfNeeded();
+      if (preset === 'n5') {
+        setSelectedLessons(N5_LESSONS);
+        setFollowGlobalLevel(currentLevel === 'N5');
+      } else if (preset === 'n4') {
+        setSelectedLessons(N4_LESSONS);
+        setFollowGlobalLevel(currentLevel === 'N4');
+      } else if (preset === 'all_50') {
+        setSelectedLessons(ALL_50_LESSONS);
+        setFollowGlobalLevel(false);
+      } else {
+        setSelectedLessons([]);
+        setFollowGlobalLevel(false);
+      }
+    },
+    [currentLevel, resetActiveSessionIfNeeded]
+  );
+
+  const scopeSummaryLabel = useMemo(() => {
+    if (sortedSelectedLessons.length === 0) return 'Chưa chọn bài nào (Bấm để chọn)';
+    if (isExactAll50) return 'Toàn bộ 50 bài (N5 + N4)';
+    if (isExactN5) return 'Cấp độ N5 (Bài 1–25)';
+    if (isExactN4) return 'Cấp độ N4 (Bài 26–50)';
+    if (sortedSelectedLessons.length === 1) return `Bài ${sortedSelectedLessons[0]} (1 bài)`;
+    if (sortedSelectedLessons.length <= 5) {
+      return `Đã chọn ${sortedSelectedLessons.length} bài: Bài ${sortedSelectedLessons.join(', ')}`;
+    }
+    return `Đã chọn ${sortedSelectedLessons.length} bài: Bài ${sortedSelectedLessons.slice(0, 4).join(', ')}...`;
+  }, [sortedSelectedLessons, isExactAll50, isExactN5, isExactN4]);
+
+  const visiblePickerLessons = useMemo(() => {
+    if (pickerTab === 'n5') return N5_LESSONS;
+    if (pickerTab === 'n4') return N4_LESSONS;
+    if (pickerTab === 'selected') return sortedSelectedLessons;
+    return ALL_50_LESSONS;
+  }, [pickerTab, sortedSelectedLessons]);
+
+  // Tiền tính toán danh sách từ vựng Hán tự hợp lệ của từng bài (1..50)
+  const perLessonVocabs = useMemo(() => {
+    const validVocabs = (vocabList || []).filter(v => {
       if (!v || !v.hiragana) return false;
       const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
       return kWord && kWord !== v.hiragana && /[\u4E00-\u9FAF]/.test(kWord);
     });
 
-    if (scopeFilter === 'all_50') {
-      return list.filter(v => {
-        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
-        return isWordWithinKanjiScope(kWord, 50);
-      });
-    }
-    if (scopeFilter === 'level') {
-      const start = currentLevel === 'N5' ? 1 : 26;
-      const end = currentLevel === 'N5' ? 25 : 50;
-      const levelChars = new Set(
-        (kanjiList || [])
-          .filter(k => {
-            const kl = Number((k as any).lesson_id) || 1;
-            return kl >= start && kl <= end;
-          })
-          .map(k => k.character)
-      );
-      return list.filter(v => {
-        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
-        if (!isWordWithinKanjiScope(kWord, end)) return false;
-        if (v.lesson_id >= start && v.lesson_id <= end) return true;
-        const chars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
-        return v.lesson_id <= end && chars.some((c: string) => levelChars.has(c));
-      });
-    }
-    const lId = parseInt(scopeFilter, 10);
-    if (!isNaN(lId)) {
+    const byLesson: Record<number, any[]> = {};
+    for (let i = 1; i <= 50; i++) {
       const lessonChars = new Set(
         (kanjiList || [])
-          .filter(k => Number((k as any).lesson_id) === lId)
+          .filter(k => (Number((k as any).lesson_id) || 1) === i)
           .map(k => k.character)
       );
-      return list.filter(v => {
-        if (v.lesson_id > lId) return false;
+      byLesson[i] = validVocabs.filter(v => {
+        if (v.lesson_id > i) return false;
         const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
-        if (!isWordWithinKanjiScope(kWord, lId)) return false;
-        if (v.lesson_id === lId) return true;
+        if (!isWordWithinKanjiScope(kWord, i)) return false;
+        if (v.lesson_id === i) return true;
         const chars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
         return chars.some((c: string) => lessonChars.has(c));
       });
     }
-    return list;
-  }, [vocabList, kanjiList, scopeFilter, currentLevel, isWordWithinKanjiScope]);
+    return byLesson;
+  }, [vocabList, kanjiList, isWordWithinKanjiScope]);
+
+  // Danh sách chữ Hán đơn trong phạm vi đang chọn (dùng làm phương án nhiễu đúng cấp độ/bài)
+  const scopedKanjiItems = useMemo(() => {
+    const all = kanjiList || [];
+    if (sortedSelectedLessons.length === 0) return [];
+    if (isExactAll50) return all;
+    const exact = all.filter(k => selectedLessonSet.has(Number((k as any).lesson_id) || 1));
+    if (exact.length >= 4) return exact;
+    const maxL = sortedSelectedLessons[sortedSelectedLessons.length - 1];
+    return all.filter(k => (Number((k as any).lesson_id) || 1) <= maxL);
+  }, [kanjiList, sortedSelectedLessons, selectedLessonSet, isExactAll50]);
+
+  // 1. Lọc kho từ vựng CÓ CHỨA CHỮ HÁN theo tập hợp các bài đã tích chọn (khử trùng lặp)
+  const scopedVocabs = useMemo(() => {
+    if (sortedSelectedLessons.length === 0) return [];
+    const seenIds = new Set<any>();
+    const combined: any[] = [];
+    for (const lId of sortedSelectedLessons) {
+      const items = perLessonVocabs[lId] || [];
+      for (const v of items) {
+        const key = v.id ?? `${v.lesson_id}_${v.hiragana}`;
+        if (!seenIds.has(key)) {
+          seenIds.add(key);
+          combined.push(v);
+        }
+      }
+    }
+    return combined;
+  }, [perLessonVocabs, sortedSelectedLessons]);
 
   // 2. Lọc tiếp theo trạng thái học tập
   const eligibleVocabs = useMemo(() => {
@@ -190,19 +305,7 @@ export default function CombinedKanjiPractice({
   const perLessonVocabStats = useMemo(() => {
     const stats: Record<number, { total: number; mastered: number; learning: number; notLearned: number; percent: number }> = {};
     for (let i = 1; i <= 50; i++) {
-      const lessonChars = new Set(
-        (kanjiList || [])
-          .filter(k => Number((k as any).lesson_id) === i)
-          .map(k => k.character)
-      );
-      const inLesson = (vocabList || []).filter(v => {
-        if (!v || v.lesson_id > i || !v.hiragana) return false;
-        const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
-        if (!kWord || kWord === v.hiragana || !isWordWithinKanjiScope(kWord, i)) return false;
-        if (v.lesson_id === i) return true;
-        const chars = kWord.match(/[\u4E00-\u9FAF]/g) || [];
-        return chars.some((c: string) => lessonChars.has(c));
-      });
+      const inLesson = perLessonVocabs[i] || [];
       const total = inLesson.length;
       const mastered = inLesson.filter(v => v.status === 'mastered').length;
       const learning = inLesson.filter(v => v.status === 'learning').length;
@@ -211,13 +314,26 @@ export default function CombinedKanjiPractice({
       stats[i] = { total, mastered, learning, notLearned, percent };
     }
     return stats;
-  }, [vocabList, kanjiList, isWordWithinKanjiScope]);
+  }, [perLessonVocabs]);
+
+  // Khóa lưu kỷ lục High Score tương thích ngược theo phạm vi đang tích chọn
+  const scopeStorageKey = useMemo(() => {
+    if (sortedSelectedLessons.length === 0) return 'none';
+    if (isExactAll50) return 'all_50';
+    if (isExactN5) return 'level_N5';
+    if (isExactN4) return 'level_N4';
+    if (sortedSelectedLessons.length === 1) return sortedSelectedLessons[0].toString();
+    return `lessons_${sortedSelectedLessons.join('-')}`;
+  }, [sortedSelectedLessons, isExactAll50, isExactN5, isExactN4]);
 
   // Nạp kỷ lục High Score theo tổ hợp bộ lọc
   useEffect(() => {
     try {
-      const key = `vocab_kanji_high_${scopeFilter}_${statusFilter}_${direction}`;
-      const saved = localStorage.getItem(key);
+      const primaryKey = `vocab_kanji_high_${scopeStorageKey}_${statusFilter}_${direction}`;
+      let saved = localStorage.getItem(primaryKey);
+      if (!saved && ((isExactN5 && currentLevel === 'N5') || (isExactN4 && currentLevel === 'N4'))) {
+        saved = localStorage.getItem(`vocab_kanji_high_level_${statusFilter}_${direction}`);
+      }
       if (saved) {
         setHighScore(parseInt(saved, 10) || 0);
       } else {
@@ -226,7 +342,7 @@ export default function CombinedKanjiPractice({
     } catch (e) {
       // ignore
     }
-  }, [scopeFilter, statusFilter, direction]);
+  }, [scopeStorageKey, statusFilter, direction, isExactN5, isExactN4, currentLevel]);
 
   // Thời gian động theo streak: bắt đầu 10s, giảm 10% mỗi 3 streak đúng, tối thiểu 2s
   const getDynamicTimeForStreak = (currentStreak: number): number => {
@@ -456,7 +572,7 @@ export default function CombinedKanjiPractice({
       type: 'complete_compound',
       explanation
     };
-  }, [eligibleVocabs, direction, kanjiList]);
+  }, [eligibleVocabs, direction, kanjiList, scopedKanjiItems]);
 
   // Bắt đầu game Speedrun hoặc Lượt Hoàn thiện từ ghép không đếm ngược
   const startGame = (customPool?: any[]) => {
@@ -536,7 +652,7 @@ export default function CombinedKanjiPractice({
     if (currentScore > highScore) {
       setHighScore(currentScore);
       try {
-        localStorage.setItem(`vocab_kanji_high_${scopeFilter}_${statusFilter}_${direction}`, currentScore.toString());
+        localStorage.setItem(`vocab_kanji_high_${scopeStorageKey}_${statusFilter}_${direction}`, currentScore.toString());
       } catch (e) {
         // ignore
       }
@@ -605,7 +721,7 @@ export default function CombinedKanjiPractice({
         if (newScore > highScore) {
           setHighScore(newScore);
           try {
-            localStorage.setItem(`vocab_kanji_high_${scopeFilter}_${statusFilter}_${direction}`, newScore.toString());
+            localStorage.setItem(`vocab_kanji_high_${scopeStorageKey}_${statusFilter}_${direction}`, newScore.toString());
           } catch (e) {
             // ignore
           }
@@ -638,7 +754,7 @@ export default function CombinedKanjiPractice({
       if (newScore > highScore) {
         setHighScore(newScore);
         try {
-          localStorage.setItem(`vocab_kanji_high_${scopeFilter}_${statusFilter}_${direction}`, newScore.toString());
+          localStorage.setItem(`vocab_kanji_high_${scopeStorageKey}_${statusFilter}_${direction}`, newScore.toString());
         } catch (e) {
           // ignore
         }
@@ -737,18 +853,18 @@ export default function CombinedKanjiPractice({
         {/* Ma trận tiến độ từng bài (nếu mở rộng) */}
         {showLessonMatrix && (
           <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-3 animate-in fade-in duration-200">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <span className="text-xs font-extrabold text-slate-700 dark:text-slate-300">
-                🎯 Nhấp vào bài học để chọn nhanh phạm vi luyện tập:
+                🎯 Nhấp vào các bài học để bật/tắt chọn nhiều bài cùng lúc:
               </span>
               <span className="text-[11px] text-slate-400">
                 (🟢 100% • 🟡 &gt;0% • ⚪ 0%)
               </span>
             </div>
             <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 max-h-48 overflow-y-auto pr-1">
-              {Array.from({ length: 50 }, (_, i) => i + 1).map(lId => {
+              {ALL_50_LESSONS.map(lId => {
                 const s = perLessonVocabStats[lId] || { total: 0, mastered: 0, percent: 0 };
-                const isSelected = scopeFilter === lId.toString();
+                const isSelected = selectedLessonSet.has(lId);
                 let statusColor = 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800';
                 if (s.percent === 100 && s.total > 0) {
                   statusColor = 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-300 dark:border-emerald-800';
@@ -763,14 +879,11 @@ export default function CombinedKanjiPractice({
                   <button
                     key={lId}
                     type="button"
-                    onClick={() => {
-                      setScopeFilter(lId.toString());
-                      setShowLessonMatrix(false);
-                    }}
-                    className={`p-1.5 rounded-xl border text-[11px] font-bold text-center transition-all cursor-pointer hover:scale-105 ${statusColor}`}
+                    onClick={() => toggleLesson(lId)}
+                    className={`p-1.5 rounded-xl border text-[11px] font-bold text-center transition-all cursor-pointer touch-manipulation active:scale-95 sm:hover:scale-105 ${statusColor}`}
                     title={`Bài ${lId}: ${s.mastered}/${s.total} từ thuộc (${s.percent}%)`}
                   >
-                    <div>B.{lId}</div>
+                    <div>{isSelected ? `✓ B.${lId}` : `B.${lId}`}</div>
                     <div className="text-[9px] opacity-75">{s.mastered}/{s.total}</div>
                   </button>
                 );
@@ -779,48 +892,288 @@ export default function CombinedKanjiPractice({
           </div>
         )}
 
-        {/* Hàng 3: Bộ chọn Phạm vi & Trạng thái */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-          {/* Bộ chọn Phạm vi */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-500 font-bold">Phạm vi:</span>
-            <select
-              value={scopeFilter}
-              onChange={e => setScopeFilter(e.target.value)}
-              className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold py-2 px-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-sm"
-            >
-              <optgroup label="Cấp độ chuẩn JLPT">
-                <option value="level">Cấp độ {currentLevel} ({currentLevel === 'N5' ? 'Bài 1-25' : 'Bài 26-50'})</option>
-                <option value="all_50">Toàn bộ 50 bài học (N5 + N4)</option>
-              </optgroup>
-              <optgroup label="Từng bài học cụ thể">
-                {Array.from({ length: 50 }, (_, i) => i + 1).map(lNum => {
-                  const st = perLessonVocabStats[lNum];
-                  return (
-                    <option key={lNum} value={lNum.toString()}>
-                      Bài {lNum} ({st ? `${st.mastered}/${st.total} từ thuộc` : '0 từ'})
-                    </option>
-                  );
-                })}
-              </optgroup>
-            </select>
+        {/* Hàng 3: Bộ chọn Phạm vi (Checkbox đa bài) & Trạng thái */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2">
+          {/* Bộ chọn Phạm vi đa bài bằng Checkbox */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 flex-1 min-w-0">
+            <span className="text-xs text-slate-500 font-bold shrink-0">Phạm vi:</span>
+            <div ref={scopePickerRef} className="relative flex-1 sm:flex-initial min-w-0">
+              <button
+                type="button"
+                onClick={() => setIsScopeDropdownOpen(prev => !prev)}
+                className={`w-full sm:w-auto sm:min-w-[260px] min-h-[42px] px-3.5 py-2 rounded-xl border text-xs font-bold flex items-center justify-between gap-2.5 shadow-sm transition-all cursor-pointer touch-manipulation active:scale-[0.99] ${
+                  sortedSelectedLessons.length === 0
+                    ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400'
+                    : isScopeDropdownOpen
+                      ? 'bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-500 text-indigo-700 dark:text-indigo-300 ring-2 ring-indigo-500/20'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:border-indigo-400'
+                }`}
+              >
+                <span className="flex items-center gap-2 min-w-0 truncate">
+                  <span className="shrink-0">☑️</span>
+                  <span className="truncate">{scopeSummaryLabel}</span>
+                </span>
+                <span className="text-[10px] opacity-70 shrink-0">
+                  {isScopeDropdownOpen ? '▲' : '▼'}
+                </span>
+              </button>
+
+              {/* Bảng Checkbox chọn nhiều bài (Bottom Sheet trên iPhone 15 Pro / Popover trên Desktop) */}
+              {isScopeDropdownOpen && (
+                <>
+                  {/* Lớp nền mờ trên điện thoại (< 640px) */}
+                  <div
+                    className="fixed inset-0 z-40 bg-slate-950/50 backdrop-blur-[1px] sm:hidden"
+                    onClick={() => setIsScopeDropdownOpen(false)}
+                  />
+
+                  <div className="fixed inset-x-0 bottom-0 z-50 rounded-t-3xl max-h-[82dvh] flex flex-col bg-white dark:bg-slate-900 border-t sm:border border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:absolute sm:inset-auto sm:left-0 sm:top-full sm:mt-2 sm:w-[540px] sm:max-w-[calc(100vw-3rem)] sm:max-h-[480px] sm:rounded-2xl animate-in fade-in duration-150">
+                    {/* Thanh gạt chỉ báo trên iPhone */}
+                    <div className="w-10 h-1 rounded-full bg-slate-300 dark:bg-slate-700 mx-auto mb-2.5 sm:hidden shrink-0" />
+
+                    {/* Tiêu đề bảng chọn */}
+                    <div className="shrink-0 flex items-center justify-between gap-2 pb-2.5 border-b border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="text-sm font-black text-slate-800 dark:text-slate-100 truncate">
+                          Chọn bài học muốn ôn
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 shrink-0">
+                          {sortedSelectedLessons.length}/50 bài
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsScopeDropdownOpen(false)}
+                        className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center text-xs font-black cursor-pointer touch-manipulation shrink-0"
+                        aria-label="Đóng bảng chọn bài"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    {/* Hàng nút chọn nhanh theo nhóm */}
+                    <div className="shrink-0 grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-2.5">
+                      <button
+                        type="button"
+                        onClick={() => applyLessonPreset('n5')}
+                        className={`min-h-[36px] px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold border transition-all cursor-pointer touch-manipulation active:scale-95 ${
+                          isExactN5
+                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                            : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-indigo-400'
+                        }`}
+                      >
+                        Chọn N5 (1–25)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => applyLessonPreset('n4')}
+                        className={`min-h-[36px] px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold border transition-all cursor-pointer touch-manipulation active:scale-95 ${
+                          isExactN4
+                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                            : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-indigo-400'
+                        }`}
+                      >
+                        Chọn N4 (26–50)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => applyLessonPreset('all_50')}
+                        className={`min-h-[36px] px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold border transition-all cursor-pointer touch-manipulation active:scale-95 ${
+                          isExactAll50
+                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                            : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-indigo-400'
+                        }`}
+                      >
+                        Tất cả 50 bài
+                      </button>
+                      <button
+                        type="button"
+                        disabled={sortedSelectedLessons.length === 0}
+                        onClick={() => applyLessonPreset('clear')}
+                        className="min-h-[36px] px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold border border-rose-200 dark:border-rose-900/60 bg-rose-50/70 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950/50 disabled:opacity-40 transition-all cursor-pointer touch-manipulation active:scale-95"
+                      >
+                        🗑️ Bỏ chọn hết
+                      </button>
+                    </div>
+
+                    {/* Thanh tab lọc danh sách hiển thị */}
+                    <div className="shrink-0 grid grid-cols-4 gap-1 p-1 mt-2.5 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200/70 dark:border-slate-800">
+                      {([
+                        { id: 'all', label: 'Tất cả' },
+                        { id: 'n5', label: 'N5 (1-25)' },
+                        { id: 'n4', label: 'N4 (26-50)' },
+                        { id: 'selected', label: `Đã tích (${sortedSelectedLessons.length})` }
+                      ] as const).map(t => (
+                        <button
+                          key={t.id}
+                          type="button"
+                          onClick={() => setPickerTab(t.id)}
+                          className={`py-1.5 px-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer touch-manipulation truncate ${
+                            pickerTab === t.id
+                              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-extrabold'
+                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                          }`}
+                        >
+                          {t.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Lưới Checkbox Bài 1..50 (2 cột trên iPhone 15 Pro, 3 cột trên Desktop) */}
+                    <div className="flex-1 overflow-y-auto overscroll-contain min-h-0 my-2.5 pr-0.5">
+                      {visiblePickerLessons.length === 0 ? (
+                        <div className="py-8 px-4 text-center space-y-2.5">
+                          <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                            Chưa có bài học nào được tích chọn.
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => setPickerTab('all')}
+                            className="py-2 px-4 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-extrabold border border-indigo-200 dark:border-indigo-800 cursor-pointer touch-manipulation"
+                          >
+                            Xem danh sách 50 bài để chọn
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                          {visiblePickerLessons.map(lNum => {
+                            const st = perLessonVocabStats[lNum];
+                            const isChecked = selectedLessonSet.has(lNum);
+                            const dot =
+                              !st || st.total === 0
+                                ? '⚪'
+                                : st.percent === 100
+                                  ? '🟢'
+                                  : st.percent > 0
+                                    ? '🟡'
+                                    : '⚪';
+
+                            return (
+                              <label
+                                key={lNum}
+                                className={`min-h-[48px] px-2.5 py-2 rounded-xl border flex items-center gap-2.5 cursor-pointer select-none touch-manipulation transition-all active:scale-[0.98] ${
+                                  isChecked
+                                    ? 'border-indigo-500 bg-indigo-50/80 dark:bg-indigo-950/50 ring-1 ring-indigo-500/30 shadow-xs'
+                                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 hover:border-slate-300 dark:hover:border-slate-700'
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  onChange={() => toggleLesson(lNum)}
+                                  className="w-4 h-4 rounded accent-indigo-600 cursor-pointer shrink-0"
+                                />
+                                <div className="min-w-0 flex-1 leading-tight">
+                                  <div className="flex items-center justify-between gap-1">
+                                    <span
+                                      className={`text-xs font-extrabold ${
+                                        isChecked
+                                          ? 'text-indigo-700 dark:text-indigo-300'
+                                          : 'text-slate-800 dark:text-slate-200'
+                                      }`}
+                                    >
+                                      Bài {lNum}
+                                    </span>
+                                    <span className="text-[10px] shrink-0">{dot}</span>
+                                  </div>
+                                  <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                                    {st ? `${st.mastered}/${st.total} từ thuộc` : '0 từ'}
+                                  </div>
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Chân bảng cố định */}
+                    <div className="shrink-0 pt-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:pb-0 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                      <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                        Tổng kho ôn:{' '}
+                        <strong className="text-indigo-600 dark:text-indigo-400 font-black">
+                          {scopedVocabs.length} từ Kanji
+                        </strong>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setIsScopeDropdownOpen(false)}
+                        className="min-h-[40px] py-2 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black shadow-md shadow-indigo-500/20 transition-all active:scale-95 cursor-pointer touch-manipulation shrink-0"
+                      >
+                        Xác nhận ({sortedSelectedLessons.length} bài)
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Bộ chọn Trạng thái */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 shrink-0">
             <span className="text-xs text-slate-500 font-bold">Trạng thái:</span>
             <select
               value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value as any)}
-              className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold py-2 px-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-sm"
+              onChange={e => {
+                resetActiveSessionIfNeeded();
+                setStatusFilter(e.target.value as any);
+              }}
+              className="w-full sm:w-auto min-h-[42px] bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold py-2 px-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-sm touch-manipulation"
             >
               <option value="all">Tất cả ({scopedVocabs.length})</option>
-              <option value="not_learned">🔴 Chưa học ({scopedVocabs.filter(v => (v.status || 'not_learned') === 'not_learned').length})</option>
-              <option value="learning">🟡 Đang học ({scopedVocabs.filter(v => v.status === 'learning').length})</option>
-              <option value="mastered">🟢 Đã thuộc ({scopedVocabs.filter(v => v.status === 'mastered').length})</option>
+              <option value="not_learned">🔴 Chưa học ({notLearnedCount})</option>
+              <option value="learning">🟡 Đang học ({learningCount})</option>
+              <option value="mastered">🟢 Đã thuộc ({masteredCount})</option>
             </select>
           </div>
         </div>
+
+        {/* Dải chip hiển thị trực quan các bài lẻ đang tích chọn (ví dụ Bài 1, Bài 3, Bài 5) */}
+        {isCustomSelection && (
+          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+            <span className="text-[11px] font-bold text-slate-400 mr-0.5">
+              Đang gộp ({sortedSelectedLessons.length}):
+            </span>
+            {sortedSelectedLessons.slice(0, 12).map(lId => (
+              <button
+                key={lId}
+                type="button"
+                onClick={() => toggleLesson(lId)}
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-indigo-700 dark:text-indigo-300 hover:text-rose-600 dark:hover:text-rose-400 border border-indigo-200/80 dark:border-indigo-800/70 text-[11px] font-extrabold transition-colors cursor-pointer touch-manipulation"
+                title={`Bấm để bỏ chọn Bài ${lId}`}
+              >
+                <span>Bài {lId}</span>
+                <span className="text-[10px] opacity-70">✕</span>
+              </button>
+            ))}
+            {sortedSelectedLessons.length > 12 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setPickerTab('selected');
+                  setIsScopeDropdownOpen(true);
+                }}
+                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] font-bold cursor-pointer touch-manipulation"
+              >
+                +{sortedSelectedLessons.length - 12} bài khác...
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setIsScopeDropdownOpen(true)}
+              className="px-2.5 py-1 rounded-lg border border-dashed border-indigo-300 dark:border-indigo-700 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 text-[11px] font-bold cursor-pointer touch-manipulation"
+            >
+              + Chọn thêm
+            </button>
+            <button
+              type="button"
+              onClick={() => applyLessonPreset('clear')}
+              className="px-2 py-1 text-[11px] font-bold text-rose-500 hover:underline cursor-pointer touch-manipulation ml-auto"
+            >
+              Bỏ chọn hết
+            </button>
+          </div>
+        )}
       </div>
 
       {/* ========================================================================= */}
@@ -945,11 +1298,13 @@ export default function CombinedKanjiPractice({
                   : 'bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 hover:from-amber-600 hover:to-purple-700 shadow-rose-500/20'
               }`}
             >
-              {eligibleVocabs.length === 0
-                ? 'Chưa có từ vựng nào phù hợp bộ lọc'
-                : isCompoundRoundMode
-                  ? `🧩 BẮT ĐẦU HOÀN THIỆN TỪ GHÉP (${eligibleVocabs.length} CÂU)`
-                  : '⚡ BẮT ĐẦU PHẢN XẠ NHANH (10S)'}
+              {sortedSelectedLessons.length === 0
+                ? '⚠️ Hãy tích chọn ít nhất 1 bài học ở mục Phạm vi'
+                : eligibleVocabs.length === 0
+                  ? 'Chưa có từ vựng nào phù hợp bộ lọc trạng thái'
+                  : isCompoundRoundMode
+                    ? `🧩 BẮT ĐẦU HOÀN THIỆN TỪ GHÉP (${eligibleVocabs.length} CÂU)`
+                    : '⚡ BẮT ĐẦU PHẢN XẠ NHANH (10S)'}
             </button>
           </div>
         )}

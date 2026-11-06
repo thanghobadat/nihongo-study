@@ -232,41 +232,58 @@ export default function Lesson1Notes() {
     }, 40);
   }, []);
 
+  // iOS Safari / iPhone 15 Pro WebKit-hardened Japanese TTS
   const speakJapanese = useCallback((text: string) => {
     if (!text || typeof window === 'undefined' || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ja-JP';
-    utterance.rate = 0.95;
+    utterance.rate = 0.92;
     const voices = window.speechSynthesis.getVoices();
     const jaVoice = voices.find((v) => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
     if (jaVoice) utterance.voice = jaVoice;
+
+    // Prevent iOS Safari WebKit garbage-collecting active utterance mid-speech
+    const win = window as unknown as { _activeUtterances?: SpeechSynthesisUtterance[] };
+    win._activeUtterances = win._activeUtterances || [];
+    win._activeUtterances.push(utterance);
+    const cleanup = () => {
+      if (!win._activeUtterances) return;
+      const idx = win._activeUtterances.indexOf(utterance);
+      if (idx > -1) win._activeUtterances.splice(idx, 1);
+    };
+    utterance.onend = cleanup;
+    utterance.onerror = cleanup;
+
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
     window.speechSynthesis.speak(utterance);
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5 sm:space-y-8">
       {/* ===================================================================== */}
       {/* PHẦN 1: SỐ ĐẾM CƠ BẢN (0 - 99)                                        */}
       {/* ===================================================================== */}
-      <section className="rounded-2xl bg-white dark:bg-slate-900/85 border border-slate-200 dark:border-slate-800 p-5 sm:p-7 shadow-sm space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+      <section className="rounded-2xl bg-white dark:bg-slate-900/85 border border-slate-200 dark:border-slate-800 p-3.5 sm:p-7 shadow-sm space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5 sm:pb-4">
           <div>
             <span className="inline-block px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-300 text-xs font-extrabold mb-1.5">
               Phần 1 • Nền tảng bắt buộc
             </span>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+            <h2 className="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
               1. Hệ thống số đếm cơ bản (0 – 99)
             </h2>
           </div>
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span className="text-xs text-slate-400 dark:text-slate-500">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2">
+            <span className="hidden sm:inline text-xs text-slate-400 dark:text-slate-500">
               Nhấn nút 🔊 để nghe phát âm
             </span>
             <button
               type="button"
               onClick={() => jumpToPractice('numbers')}
-              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold shadow-sm transition-colors cursor-pointer"
+              className="w-full sm:w-auto min-h-[42px] inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold shadow-sm transition-colors cursor-pointer touch-manipulation active:scale-[0.98]"
             >
               <span>⚡</span>
               <span>Luyện phản xạ Số đếm (1–99)</span>
@@ -274,9 +291,68 @@ export default function Lesson1Notes() {
           </div>
         </div>
 
-        {/* Bảng 0 - 10 */}
-        <div className="overflow-x-auto rounded-xl border border-slate-200/80 dark:border-slate-800">
-          <table className="w-full text-left border-collapse text-xs sm:text-sm">
+        {/* MOBILE VIEW (< md): Thẻ dòng gọn chuẩn iPhone 15 Pro (393px) — Không cần kéo ngang */}
+        <div className="md:hidden rounded-xl border border-slate-200/80 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800/80 overflow-hidden">
+          {BASE_NUMBERS.map((row) => {
+            const isHighlighted = Boolean(row.preferred);
+            const showFullNote = row.note !== 'Số đếm gốc chuẩn.';
+            return (
+              <div
+                key={row.num}
+                className={`p-3 ${
+                  isHighlighted
+                    ? 'bg-indigo-50/40 dark:bg-indigo-950/25'
+                    : 'bg-white dark:bg-slate-900/40'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center font-black text-sm text-slate-900 dark:text-white shrink-0">
+                      {row.num}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-sm font-bold text-slate-800 dark:text-slate-100">
+                          {row.kanji}
+                        </span>
+                        {row.preferred ? (
+                          <span className="px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/70 text-[10px] font-bold text-indigo-700 dark:text-indigo-200">
+                            Ưu tiên: {row.preferred}
+                          </span>
+                        ) : !showFullNote ? (
+                          <span className="text-[11px] text-slate-400 dark:text-slate-500">
+                            • Số gốc chuẩn
+                          </span>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => speakJapanese(row.tts)}
+                    className="min-h-[36px] px-3 py-1 rounded-xl bg-indigo-50/90 active:bg-indigo-100 dark:bg-slate-800 dark:active:bg-indigo-900/60 border border-indigo-200/70 dark:border-slate-700 inline-flex items-center gap-1.5 shrink-0 cursor-pointer touch-manipulation active:scale-95"
+                  >
+                    <span className="text-xs">🔊</span>
+                    <span className="text-xs font-extrabold text-indigo-700 dark:text-indigo-300">
+                      {row.reading}
+                    </span>
+                  </button>
+                </div>
+
+                {showFullNote && (
+                  <p className="mt-1.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {row.note}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* DESKTOP / TABLET VIEW (>= md): Bảng 4 cột đầy đủ */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-200/80 dark:border-slate-800">
+          <table className="w-full min-w-[620px] text-left border-collapse text-xs sm:text-sm">
             <thead>
               <tr className="bg-slate-50 dark:bg-slate-950/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800">
                 <th className="py-3 px-3.5 font-extrabold w-16">Số</th>
@@ -307,7 +383,7 @@ export default function Lesson1Notes() {
                         type="button"
                         onClick={() => speakJapanese(row.tts)}
                         title={`Nghe phát âm ${row.tts}`}
-                        className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 text-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                        className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 text-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
                       >
                         🔊
                       </button>
@@ -331,62 +407,62 @@ export default function Lesson1Notes() {
         </div>
 
         {/* Công thức ghép 11 - 99 */}
-        <div className="rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 p-4 sm:p-5 space-y-4">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
+        <div className="rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-5 space-y-3.5 sm:space-y-4">
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">
             📐 Công thức ghép số từ 11 đến 99 (Giống hệt tư duy tiếng Việt)
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 space-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 text-xs sm:text-sm">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 space-y-1">
               <p className="font-extrabold text-indigo-600 dark:text-indigo-400">
                 ① Từ 11 – 19
               </p>
               <p className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded font-bold">
                 じゅう + [hàng đơn vị]
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 VD: 11 = じゅういち • 14 = じゅうよん • 17 = じゅうなな
               </p>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 space-y-1">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 space-y-1">
               <p className="font-extrabold text-indigo-600 dark:text-indigo-400">
                 ② Tròn chục 20 – 90
               </p>
               <p className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded font-bold">
                 [hàng chục] + じゅう
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 40 = <strong>よんじゅう</strong>, 70 = <strong>ななじゅう</strong>, 90 = <strong>きゅうじゅう</strong>
               </p>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 space-y-1">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 space-y-1">
               <p className="font-extrabold text-indigo-600 dark:text-indigo-400">
                 ③ Số lẻ 2 chữ số bất kỳ
               </p>
               <p className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded font-bold">
                 [chục] + じゅう + [đơn vị]
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 VD: 25 = にじゅうご • 48 = よんじゅうはち
               </p>
             </div>
           </div>
 
-          {/* Mẫu nghe nhanh số 2 chữ số */}
-          <div className="flex flex-wrap gap-2 pt-1">
+          {/* Mẫu nghe nhanh số 2 chữ số — Lưới 2 cột cân đối trên iPhone 15 Pro */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 pt-0.5">
             {TWO_DIGIT_EXAMPLES.map((ex) => (
               <button
                 key={ex.num}
                 type="button"
                 onClick={() => speakJapanese(ex.reading)}
                 title={ex.desc}
-                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-50 dark:bg-slate-900 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-800 text-xs transition-colors cursor-pointer"
+                className="min-h-[38px] inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-50 active:bg-indigo-50 dark:bg-slate-900 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-800 text-xs transition-colors cursor-pointer touch-manipulation active:scale-95 min-w-0"
               >
-                <span>🔊</span>
-                <span className="font-black text-slate-900 dark:text-white">{ex.num}:</span>
-                <span className="font-bold text-indigo-600 dark:text-indigo-300">{ex.reading}</span>
+                <span className="shrink-0">🔊</span>
+                <span className="font-black text-slate-900 dark:text-white shrink-0">{ex.num}:</span>
+                <span className="font-bold text-indigo-600 dark:text-indigo-300 truncate">{ex.reading}</span>
               </button>
             ))}
           </div>
@@ -396,20 +472,20 @@ export default function Lesson1Notes() {
       {/* ===================================================================== */}
       {/* PHẦN 2: CÁCH ĐẾM TUỔI (～歳 / ～さい) & ĐỐI CHIẾU SỐ THỨ TỰ           */}
       {/* ===================================================================== */}
-      <section className="rounded-2xl bg-white dark:bg-slate-900/85 border border-slate-200 dark:border-slate-800 p-5 sm:p-7 shadow-sm space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+      <section className="rounded-2xl bg-white dark:bg-slate-900/85 border border-slate-200 dark:border-slate-800 p-3.5 sm:p-7 shadow-sm space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5 sm:pb-4">
           <div>
             <span className="inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-300 text-xs font-extrabold mb-1.5">
-              Phần 2 • Trọng tâm Bài 1 (Hậu tố ～歳 / viết giản lược ～才)
+              Phần 2 • Trọng tâm Bài 1 (～歳 / giản lược ～才)
             </span>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-              2. Cách đếm tuổi (～さい) &amp; Điểm khác biệt với số thứ tự (～ばん)
+            <h2 className="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
+              2. Cách đếm tuổi (～さい) &amp; Khác biệt với số thứ tự (～ばん)
             </h2>
           </div>
           <button
             type="button"
             onClick={() => jumpToPractice('age')}
-            className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-sm transition-colors cursor-pointer self-start sm:self-auto shrink-0"
+            className="w-full sm:w-auto min-h-[42px] inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-sm transition-colors cursor-pointer shrink-0 touch-manipulation active:scale-[0.98]"
           >
             <span>⚡</span>
             <span>Luyện phản xạ Đếm tuổi</span>
@@ -417,13 +493,13 @@ export default function Lesson1Notes() {
         </div>
 
         {/* 3 Quy tắc vàng */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-          <div className="rounded-2xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/80 dark:border-amber-800/60 p-4 space-y-1.5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3.5">
+          <div className="rounded-2xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/80 dark:border-amber-800/60 p-3.5 sm:p-4 space-y-1">
             <p className="text-xs font-extrabold uppercase tracking-wide text-amber-700 dark:text-amber-300">
               ⚠️ Quy tắc 1: Biến âm っ (1, 8, 10)
             </p>
             <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
-              Mọi số kết thúc bằng <strong>1, 8</strong> hoặc <strong>tròn chục (10, 30, 40...)</strong> đều biến âm thành <strong>っさい</strong>:{' '}
+              Số tận cùng bằng <strong>1, 8</strong> hoặc <strong>tròn chục (10, 30, 40...)</strong> đều biến âm thành <strong>っさい</strong>:{' '}
               <span className="font-bold text-amber-800 dark:text-amber-200">
                 いっさい (1), はっさい (8), じゅっさい (10)
               </span>
@@ -431,7 +507,7 @@ export default function Lesson1Notes() {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-rose-50/70 dark:bg-rose-950/25 border border-rose-200/80 dark:border-rose-800/60 p-4 space-y-1.5">
+          <div className="rounded-2xl bg-rose-50/70 dark:bg-rose-950/25 border border-rose-200/80 dark:border-rose-800/60 p-3.5 sm:p-4 space-y-1">
             <p className="text-xs font-extrabold uppercase tracking-wide text-rose-700 dark:text-rose-300">
               ⭐ Quy tắc 2: Ngoại lệ 20 tuổi
             </p>
@@ -441,27 +517,93 @@ export default function Lesson1Notes() {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/25 border border-indigo-200/80 dark:border-indigo-800/60 p-4 space-y-1.5">
+          <div className="rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/25 border border-indigo-200/80 dark:border-indigo-800/60 p-3.5 sm:p-4 space-y-1">
             <p className="text-xs font-extrabold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
               💡 Quy tắc 3: Chống nhầm lẫn
             </p>
             <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
               <strong>6 tuổi = ろくさい</strong> (giữ nguyên, không đọc ろっさい). Số 4, 7, 9 luôn dùng{' '}
-              <strong>よん・なな・きゅう</strong>. Còn số thứ tự (<strong>～ばん</strong>) thì <strong>không bao giờ biến âm</strong>.
+              <strong>よん・なな・きゅう</strong>. Còn số thứ tự (<strong>～ばん</strong>) <strong>không bao giờ biến âm</strong>.
             </p>
           </div>
         </div>
 
-        {/* Bảng tra cứu tuổi & đối chiếu */}
-        <div className="overflow-x-auto rounded-xl border border-slate-200/80 dark:border-slate-800">
-          <table className="w-full text-left border-collapse text-xs sm:text-sm">
+        {/* MOBILE VIEW (< md): Thẻ tra cứu tuổi gọn chuẩn iPhone 15 Pro (393px) */}
+        <div className="md:hidden rounded-xl border border-slate-200/80 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800/80 overflow-hidden">
+          {AGE_TABLE.map((row) => {
+            const cardBg =
+              row.type === 'special'
+                ? 'bg-rose-50/65 dark:bg-rose-950/25'
+                : row.type === 'geminate'
+                ? 'bg-amber-50/50 dark:bg-amber-950/15'
+                : row.type === 'question'
+                ? 'bg-indigo-50/55 dark:bg-indigo-950/25'
+                : 'bg-white dark:bg-slate-900/40';
+
+            return (
+              <div key={row.label} className={`p-3 space-y-1.5 ${cardBg}`}>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0 flex-wrap">
+                    <span className="min-w-[36px] h-8 px-2 rounded-lg bg-white/90 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 inline-flex items-center justify-center font-black text-xs text-slate-900 dark:text-white shrink-0">
+                      {row.label}
+                    </span>
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-200">
+                      {row.kanji}
+                    </span>
+                    {row.type === 'geminate' && (
+                      <span className="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-[10px] font-bold text-amber-800 dark:text-amber-200">
+                        Biến âm っ
+                      </span>
+                    )}
+                    {row.type === 'special' && (
+                      <span className="px-1.5 py-0.5 rounded bg-rose-100 dark:bg-rose-900/70 text-[10px] font-bold text-rose-700 dark:text-rose-200">
+                        Ngoại lệ
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => speakJapanese(row.tts)}
+                    className="min-h-[36px] px-2.5 py-1 rounded-xl bg-white/95 active:bg-indigo-50 dark:bg-slate-800 dark:active:bg-indigo-900/60 border border-slate-200 dark:border-slate-700 inline-flex items-center gap-1.5 shrink-0 cursor-pointer touch-manipulation active:scale-95"
+                  >
+                    <span className="text-xs">🔊</span>
+                    <span
+                      className={`text-xs font-extrabold ${
+                        row.type === 'special'
+                          ? 'text-rose-600 dark:text-rose-300'
+                          : row.type === 'geminate'
+                          ? 'text-amber-700 dark:text-amber-300'
+                          : 'text-slate-900 dark:text-slate-100'
+                      }`}
+                    >
+                      {row.ageReading}
+                    </span>
+                  </button>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                    Số thứ tự: <strong className="text-slate-700 dark:text-slate-200">{row.ordinalReading}</strong>
+                  </span>
+                  <span className="text-slate-300 dark:text-slate-700">•</span>
+                  <span>{row.note}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* DESKTOP / TABLET VIEW (>= md): Bảng 5 cột đầy đủ */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-200/80 dark:border-slate-800">
+          <table className="w-full min-w-[680px] text-left border-collapse text-xs sm:text-sm">
             <thead>
               <tr className="bg-slate-50 dark:bg-slate-950/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800">
                 <th className="py-3 px-3.5 font-extrabold w-16">Mốc</th>
                 <th className="py-3 px-3.5 font-extrabold w-32">Chữ Hán</th>
                 <th className="py-3 px-3.5 font-extrabold w-56">Đếm tuổi (～さい)</th>
                 <th className="py-3 px-3.5 font-extrabold w-40">Số thứ tự (～ばん)</th>
-                <th className="py-3 px-3.5 font-extrabold">Ghi chú & Khác biệt</th>
+                <th className="py-3 px-3.5 font-extrabold">Ghi chú &amp; Khác biệt</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80">
@@ -489,7 +631,7 @@ export default function Lesson1Notes() {
                           type="button"
                           onClick={() => speakJapanese(row.tts)}
                           title={`Nghe phát âm ${row.tts}`}
-                          className="w-6 h-6 rounded-lg bg-white/90 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 border border-slate-200/70 dark:border-slate-700 text-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                          className="w-7 h-7 rounded-lg bg-white/90 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 border border-slate-200/70 dark:border-slate-700 text-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
                         >
                           🔊
                         </button>
@@ -530,26 +672,26 @@ export default function Lesson1Notes() {
         </div>
 
         {/* Mẫu hội thoại Hỏi & Trả lời tuổi trong Bài 1 */}
-        <div className="rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 p-4 sm:p-5 space-y-3.5">
+        <div className="rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-5 space-y-3">
           <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
-            💬 Mẫu câu hỏi & trả lời tuổi trong Bài 1
+            💬 Mẫu câu hỏi &amp; trả lời tuổi trong Bài 1
           </h3>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 text-xs sm:text-sm">
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-4 space-y-1.5">
-              <div className="flex items-center justify-between">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 sm:gap-3 text-xs sm:text-sm">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-4 space-y-1.5">
+              <div className="flex items-center justify-between gap-2">
                 <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-300">
                   Hỏi thông thường
                 </span>
                 <button
                   type="button"
                   onClick={() => speakJapanese('たろうちゃんは なんさいですか。はっさいです。')}
-                  className="text-xs px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 cursor-pointer"
+                  className="min-h-[32px] text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 active:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 font-bold cursor-pointer touch-manipulation active:scale-95"
                 >
                   🔊 Nghe
                 </button>
               </div>
-              <p className="font-bold text-slate-900 dark:text-white pt-1">
+              <p className="font-bold text-slate-900 dark:text-white pt-0.5 leading-relaxed">
                 たろうちゃんは <span className="text-indigo-600 dark:text-indigo-400">なんさい</span>ですか。
               </p>
               <p className="font-semibold text-emerald-600 dark:text-emerald-400">
@@ -560,20 +702,20 @@ export default function Lesson1Notes() {
               </p>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-4 space-y-1.5">
-              <div className="flex items-center justify-between">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-4 space-y-1.5">
+              <div className="flex items-center justify-between gap-2">
                 <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/70 text-purple-600 dark:text-purple-300">
                   Hỏi lịch sự / kính trọng
                 </span>
                 <button
                   type="button"
                   onClick={() => speakJapanese('ミラーさんは おいくつですか。にじゅうはっさいです。')}
-                  className="text-xs px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 cursor-pointer"
+                  className="min-h-[32px] text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 active:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 font-bold cursor-pointer touch-manipulation active:scale-95"
                 >
                   🔊 Nghe
                 </button>
               </div>
-              <p className="font-bold text-slate-900 dark:text-white pt-1">
+              <p className="font-bold text-slate-900 dark:text-white pt-0.5 leading-relaxed">
                 ミラーさんは <span className="text-purple-600 dark:text-purple-400">おいくつ</span>ですか。
               </p>
               <p className="font-semibold text-emerald-600 dark:text-emerald-400">
@@ -584,20 +726,20 @@ export default function Lesson1Notes() {
               </p>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-rose-200/80 dark:border-rose-900/50 p-4 space-y-1.5">
-              <div className="flex items-center justify-between">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-rose-200/80 dark:border-rose-900/50 p-3.5 sm:p-4 space-y-1.5">
+              <div className="flex items-center justify-between gap-2">
                 <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-rose-50 dark:bg-rose-950/70 text-rose-600 dark:text-rose-300">
                   Trả lời mốc 20 tuổi
                 </span>
                 <button
                   type="button"
                   onClick={() => speakJapanese('わたしは はたちです。')}
-                  className="text-xs px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 cursor-pointer"
+                  className="min-h-[32px] text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 active:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 font-bold cursor-pointer touch-manipulation active:scale-95"
                 >
                   🔊 Nghe
                 </button>
               </div>
-              <p className="font-bold text-slate-900 dark:text-white pt-1">
+              <p className="font-bold text-slate-900 dark:text-white pt-0.5 leading-relaxed">
                 わたしは <span className="text-rose-600 dark:text-rose-400">はたち</span>です。
               </p>
               <p className="text-xs text-rose-600 dark:text-rose-400 font-semibold">
@@ -614,7 +756,7 @@ export default function Lesson1Notes() {
       {/* ===================================================================== */}
       {/* PHẦN 3: PHÒNG LUYỆN PHẢN XẠ CHỐNG BẪY (10S GIẢM DẦN)                 */}
       {/* ===================================================================== */}
-      <div ref={practiceRef} className="scroll-mt-6">
+      <div ref={practiceRef} className="scroll-mt-4">
         <Lesson1PracticeArena
           topic={practiceTopic}
           onTopicChange={setPracticeTopic}
@@ -623,4 +765,3 @@ export default function Lesson1Notes() {
     </div>
   );
 }
-
