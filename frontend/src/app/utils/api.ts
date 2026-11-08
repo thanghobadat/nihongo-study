@@ -1,8 +1,6 @@
+const RENDER_BACKEND_FALLBACK = 'https://nihongo-flow-backend.onrender.com';
+
 export function getBaseUrl(): string {
-  // If explicitly configured to a remote HTTPS domain
-  if (process.env.NEXT_PUBLIC_API_URL && !process.env.NEXT_PUBLIC_API_URL.includes('localhost')) {
-    return process.env.NEXT_PUBLIC_API_URL;
-  }
   // If running in browser
   if (typeof window !== 'undefined') {
     const host = window.location.hostname;
@@ -18,7 +16,20 @@ export function getBaseUrl(): string {
     ) {
       return `http://${host}:8080`;
     }
-    return 'https://nihongo-flow-backend.onrender.com';
+    // If a custom non-Render domain is explicitly configured, use it
+    if (
+      process.env.NEXT_PUBLIC_API_URL &&
+      !process.env.NEXT_PUBLIC_API_URL.includes('localhost') &&
+      !process.env.NEXT_PUBLIC_API_URL.includes('onrender.com')
+    ) {
+      return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '');
+    }
+    // On production (e.g. Vercel), return empty string '' so requests go to same-origin /api/...
+    // and are proxied server-to-server by Next.js rewrites(), bypassing ISP SNI blocks on *.onrender.com
+    return '';
+  }
+  if (process.env.NEXT_PUBLIC_API_URL && !process.env.NEXT_PUBLIC_API_URL.includes('localhost')) {
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '');
   }
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 }
@@ -219,7 +230,19 @@ async function executeRequest(path: string, method: string, body: any = null, op
     fetchOptions.body = JSON.stringify(body);
   }
 
-  let response = await fetch(url, fetchOptions);
+  let response: Response;
+  try {
+    response = await fetch(url, fetchOptions);
+    if (baseUrl === '' && (response.status === 502 || response.status === 504)) {
+      response = await fetch(`${RENDER_BACKEND_FALLBACK}${finalPath}`, fetchOptions);
+    }
+  } catch (fetchErr) {
+    if (baseUrl === '') {
+      response = await fetch(`${RENDER_BACKEND_FALLBACK}${finalPath}`, fetchOptions);
+    } else {
+      throw fetchErr;
+    }
+  }
 
   // Handle automatic silent refresh on 401 errors with single-flight mutex
   if (response.status === 401 && path !== '/api/auth/refresh' && typeof window !== 'undefined') {

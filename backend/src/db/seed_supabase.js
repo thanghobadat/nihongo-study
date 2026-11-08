@@ -34,6 +34,28 @@ async function runSeed() {
   }
 
   try {
+    if (process.env.FORCE_SEED !== 'true') {
+      const [resL, resV, resK, resG, resD] = await Promise.all([
+        supabase.from('lessons').select('*', { count: 'exact', head: true }).eq('course', 'minna'),
+        supabase.from('vocabulary').select('*', { count: 'exact', head: true }),
+        supabase.from('kanji').select('*', { count: 'exact', head: true }),
+        supabase.from('grammar').select('*', { count: 'exact', head: true }),
+        supabase.from('kaiwa_dialog').select('*', { count: 'exact', head: true })
+      ]);
+      const hasCountErr = resL.error || resV.error || resK.error || resG.error || resD.error;
+      if (
+        !hasCountErr &&
+        (resL.count || 0) >= mockDb.lessons.length &&
+        (resV.count || 0) >= mockDb.vocabulary.length &&
+        (resK.count || 0) >= mockDb.kanji.length &&
+        (resG.count || 0) >= mockDb.grammar.length &&
+        (resD.count || 0) >= mockDb.kaiwaDialog.length
+      ) {
+        console.log('✅ Supabase static curriculum already up-to-date (skipping cold-start bulk upsert).');
+        return;
+      }
+    }
+
     console.log('🏁 Starting Supabase database seeding process...');
 
     // 1. Seed lessons
