@@ -18,9 +18,15 @@ async function createZipArchive(options) {
   return fn('zip', options);
 }
 
-// Storage directories for uploaded text files & temporary upload chunks
-const UPLOAD_DIR = path.resolve(__dirname, '../../uploads/text_files');
-const CHUNKS_DIR = path.resolve(__dirname, '../../uploads/.chunks');
+const os = require('os');
+
+// Storage directories for uploaded text files & temporary upload chunks (uses writable /tmp on Vercel Serverless)
+const UPLOAD_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'nihongo_uploads/text_files')
+  : path.resolve(/*turbopackIgnore: true*/ __dirname, '../../uploads/text_files');
+const CHUNKS_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'nihongo_uploads/.chunks')
+  : path.resolve(/*turbopackIgnore: true*/ __dirname, '../../uploads/.chunks');
 const INDEX_PATH = path.join(UPLOAD_DIR, '.files_index.json');
 
 // In-memory metadata index & Supabase metadata cache

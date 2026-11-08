@@ -117,8 +117,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// Avoid port binding issue during tests
-if (process.env.NODE_ENV !== 'test') {
+// Avoid port binding issue during tests or Serverless/Next.js API route embedding
+if (
+  process.env.NODE_ENV !== 'test' &&
+  !process.env.VERCEL &&
+  !process.env.NEXT_RUNTIME &&
+  !process.env.DISABLE_EXPRESS_LISTEN
+) {
   const server = app.listen(PORT, () => {
     console.log(`Backend server is running on port ${PORT}`);
     

@@ -1,7 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 
-const BACKEND_LESSON_DATA_DIR = path.join(__dirname, '../data/jlpt_lessons');
+function resolveBackendLessonDataDir() {
+  const candidates = [
+    path.join(__dirname, '../data/jlpt_lessons'),
+    path.resolve(process.cwd(), '../backend/src/data/jlpt_lessons'),
+    path.resolve(process.cwd(), 'backend/src/data/jlpt_lessons')
+  ];
+  for (const dir of candidates) {
+    try {
+      if (fs.existsSync(dir)) return dir;
+    } catch (_) {}
+  }
+  return candidates[0];
+}
+
+const BACKEND_LESSON_DATA_DIR = resolveBackendLessonDataDir();
 const WORKSPACE_DOCS_DIR = path.join(__dirname, '../../../../tai_lieu/bai_tap');
 
 // LRU-bounded parsed bank cache (protects Render Free 512MB RAM when 25-50 lessons are active)

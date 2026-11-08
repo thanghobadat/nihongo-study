@@ -3,13 +3,18 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const os = require('os');
 const supabase = require('../db/supabase');
 
-// Local storage directory for file backup / fallback
-const LOCAL_STORAGE_DIR = path.join(__dirname, '../../data/pastes');
-if (!fs.existsSync(LOCAL_STORAGE_DIR)) {
-  fs.mkdirSync(LOCAL_STORAGE_DIR, { recursive: true });
-}
+// Local storage directory for file backup / fallback (uses writable /tmp on Vercel Serverless)
+const LOCAL_STORAGE_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'nihongo_pastes')
+  : path.join(__dirname, '../../data/pastes');
+try {
+  if (!fs.existsSync(LOCAL_STORAGE_DIR)) {
+    fs.mkdirSync(LOCAL_STORAGE_DIR, { recursive: true });
+  }
+} catch (_) {}
 
 const INDEX_FILE = path.join(LOCAL_STORAGE_DIR, 'stash_index.json');
 

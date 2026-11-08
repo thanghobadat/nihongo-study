@@ -1,24 +1,16 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  async rewrites() {
-    const rawEnvUrl =
-      process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "";
-    const backendUrl =
-      rawEnvUrl && !rawEnvUrl.includes("localhost")
-        ? rawEnvUrl.replace(/\/+$/, "")
-        : process.env.NODE_ENV === "production"
-        ? "https://nihongo-flow-backend.onrender.com"
-        : "http://localhost:8080";
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${backendUrl}/api/:path*`,
-      },
-    ];
+  outputFileTracingRoot: path.join(__dirname, ".."),
+  outputFileTracingIncludes: {
+    "/api/[...path]": [
+      "../backend/src/data/jlpt_lessons/**/*",
+      "../backend/src/db/**/*",
+    ],
   },
 };
 

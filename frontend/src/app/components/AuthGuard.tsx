@@ -48,7 +48,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     const token = api.getToken();
     const user = api.getUser();
 
-    const isPublicPath = PUBLIC_PATHS.some(path => pathname.startsWith(path));
+    const isPublicPath = PUBLIC_PATHS.some(path => (pathname || '').startsWith(path));
 
     // Default root path '/' redirects
     if (pathname === '/') {
@@ -80,7 +80,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
         router.replace(dest);
       } else {
         // Logged in, protected path -> check admin restriction
-        if (pathname.startsWith('/admin') && user.role !== 'admin') {
+        if ((pathname || '').startsWith('/admin') && user.role !== 'admin') {
           // Normal user trying to access admin -> redirect to student dashboard
           setAuthorized(false);
           setInitialChecking(false);

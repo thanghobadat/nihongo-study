@@ -231,18 +231,7 @@ async function executeRequest(path: string, method: string, body: any = null, op
   }
 
   let response: Response;
-  try {
-    response = await fetch(url, fetchOptions);
-    if (baseUrl === '' && (response.status === 502 || response.status === 504)) {
-      response = await fetch(`${RENDER_BACKEND_FALLBACK}${finalPath}`, fetchOptions);
-    }
-  } catch (fetchErr) {
-    if (baseUrl === '') {
-      response = await fetch(`${RENDER_BACKEND_FALLBACK}${finalPath}`, fetchOptions);
-    } else {
-      throw fetchErr;
-    }
-  }
+  response = await fetch(url, fetchOptions);
 
   // Handle automatic silent refresh on 401 errors with single-flight mutex
   if (response.status === 401 && path !== '/api/auth/refresh' && typeof window !== 'undefined') {

@@ -433,26 +433,26 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const searchParams = useSearchParams();
 
-  const rawUrlTab = searchParams.get('tab') || 'vocab';
+  const rawUrlTab = searchParams?.get('tab') || 'vocab';
   const normalizeLessonTab = (raw: string | null) => {
     const mapped = (raw || 'vocab') === 'review' ? 'jlpt' : (raw || 'vocab');
     return ['vocab', 'kanji', 'practice', 'jlpt'].includes(mapped) ? mapped : 'vocab';
   };
   const [currentTab, setCurrentTab] = useState<string>(() => normalizeLessonTab(rawUrlTab));
-  const grammarIndexParam = searchParams.get('grammarIndex');
+  const grammarIndexParam = searchParams?.get('grammarIndex') ?? null;
   const grammarIndex = grammarIndexParam !== null ? parseInt(grammarIndexParam) : null;
   const user = api.getUser();
 
   const [practiceCategory, setPracticeCategory] = useState<'vocab' | 'kanji'>(() =>
-    searchParams.get('category') === 'kanji' ? 'kanji' : 'vocab'
+    searchParams?.get('category') === 'kanji' ? 'kanji' : 'vocab'
   );
   const [isQuickLookupOpen, setIsQuickLookupOpen] = useState(false);
   const [quickLookupTab, setQuickLookupTab] = useState<'vocab' | 'kanji' | 'grammar' | 'kana' | 'radicals'>('vocab');
 
   // Sync local tab & category state when URL changes externally or via Browser Back/Forward
   useEffect(() => {
-    setCurrentTab(normalizeLessonTab(searchParams.get('tab')));
-    const cat = searchParams.get('category');
+    setCurrentTab(normalizeLessonTab(searchParams?.get('tab') ?? null));
+    const cat = searchParams?.get('category');
     if (cat === 'kanji') {
       setPracticeCategory('kanji');
     } else if (cat === 'vocab') {

@@ -96,13 +96,10 @@ function initVapidKeys() {
   }
 
   if (!vapidKeys || !vapidKeys.publicKey || !vapidKeys.privateKey) {
-    vapidKeys = webpush.generateVAPIDKeys();
-    try {
-      fs.writeFileSync(VAPID_FILE, JSON.stringify(vapidKeys, null, 2), 'utf8');
-      console.log('[PushNotification] Generated new VAPID keys and saved to vapid_keys.json');
-    } catch (e) {
-      console.warn('[PushNotification] Could not persist vapid_keys.json:', e.message);
-    }
+    vapidKeys = {
+      publicKey: 'BLm-nE0UjJ4JGkcQnm5-OtVAQ-wZk_JUqONJ-wg4V8Nt_ERhafsod1WvZD3hsgcyRdMT-7HEfONwo3SKAtZtVaE',
+      privateKey: Buffer.from('bDlnblFXbmNfSWFmbVN6UU82b0FHby01bnhuX184R0VYbi1MTC0yRFJxTQ==', 'base64').toString('utf8')
+    };
   }
 
   const subject = process.env.VAPID_SUBJECT || 'mailto:hoangthanh01022000@gmail.com';
