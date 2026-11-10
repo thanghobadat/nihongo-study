@@ -81,6 +81,15 @@ export default function CombinedKanjiPractice({
   const [compoundAnsweredCount, setCompoundAnsweredCount] = useState<number>(0);
   const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
 
+  // Modal xem danh sách từ vựng Hán tự đang chọn để ôn & tích chọn từ ra đề
+  const [isVocabListModalOpen, setIsVocabListModalOpen] = useState<boolean>(false);
+  const [vocabListSearchQuery, setVocabListSearchQuery] = useState<string>('');
+  const [excludedVocabKeys, setExcludedVocabKeys] = useState<Record<string, boolean>>({});
+
+  const getVocabSelectionKey = useCallback((v: any) => {
+    return String(v?.id ?? `${v?.lesson_id}_${v?.hiragana}`);
+  }, []);
+
   const isCompoundRoundMode = direction === 'complete_compound';
 
   const timerRef = useRef<any>(null);
@@ -92,12 +101,26 @@ export default function CombinedKanjiPractice({
     playAudioWithFallback(charOrWord, reading || charOrWord);
   }, []);
 
-  // Bản đồ bài học của từng chữ Hán trong chương trình 285 chữ (1..50)
+  // Bản đồ bài học & âm Hán Việt của từng chữ Hán trong chương trình 285 chữ (1..50)
   const kanjiLessonMap = useMemo(() => {
     const map = new Map<string, number>();
     for (const k of (kanjiList || [])) {
       if (k && k.character) {
         map.set(k.character, Number((k as any).lesson_id) || 1);
+      }
+    }
+    return map;
+  }, [kanjiList]);
+
+  const kanjiMetaMap = useMemo(() => {
+    const map = new Map<string, { lessonId: number; sino: string; meaning: string }>();
+    for (const k of (kanjiList || [])) {
+      if (k && k.character) {
+        map.set(k.character, {
+          lessonId: Number((k as any).lesson_id) || 1,
+          sino: ((k as any).sino_vietnamese || '').trim(),
+          meaning: ((k as any).vietnamese_meaning || '').trim()
+        });
       }
     }
     return map;
@@ -288,11 +311,87 @@ export default function CombinedKanjiPractice({
     return combined;
   }, [perLessonVocabs, sortedSelectedLessons]);
 
-  // 2. Lọc tiếp theo trạng thái học tập
-  const eligibleVocabs = useMemo(() => {
+  // 2. Lọc tiếp theo trạng thái học tập (Danh sách gốc hiển thị trong Modal)
+  const baseEligibleVocabs = useMemo(() => {
     if (statusFilter === 'all') return scopedVocabs;
     return scopedVocabs.filter(v => (v.status || 'not_learned') === statusFilter);
   }, [scopedVocabs, statusFilter]);
+
+  // 2b. Danh sách từ vựng thực tế được tích chọn Checkbox để ra đề
+  const eligibleVocabs = useMemo(() => {
+    return baseEligibleVocabs.filter(v => !excludedVocabKeys[getVocabSelectionKey(v)]);
+  }, [baseEligibleVocabs, excludedVocabKeys, getVocabSelectionKey]);
+
+  // 3. Lọc danh sách từ vựng trong Modal tra cứu nhanh (hiển thị cả từ đang tích & từ đã bỏ tích)
+  const filteredModalVocabs = useMemo(() => {
+    const q = vocabListSearchQuery.trim().toLowerCase();
+    if (!q) return baseEligibleVocabs;
+    return baseEligibleVocabs.filter(v => {
+      const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').toLowerCase();
+      const hira = (v.hiragana || '').toLowerCase();
+      const romaji = (v.romaji || '').toLowerCase();
+      const meaning = (v.vietnamese_meaning || '').toLowerCase();
+      const lessonStr = `bài ${v.lesson_id || ''}`;
+      return (
+        kWord.includes(q) ||
+        hira.includes(q) ||
+        romaji.includes(q) ||
+        meaning.includes(q) ||
+        lessonStr.includes(q)
+      );
+    });
+  }, [baseEligibleVocabs, vocabListSearchQuery]);
+
+  // Bật / tắt chọn 1 từ vựng ra đề trong Modal
+  const toggleVocabIncluded = useCallback((v: any) => {
+    resetActiveSessionIfNeeded();
+    const key = getVocabSelectionKey(v);
+    setExcludedVocabKeys(prev => {
+      const next = { ...prev };
+      if (next[key]) {
+        delete next[key];
+      } else {
+        next[key] = true;
+      }
+      return next;
+    });
+  }, [getVocabSelectionKey, resetActiveSessionIfNeeded]);
+
+  // Chọn tất cả các từ đang hiển thị trong Modal
+  const selectAllModalVocabs = useCallback(() => {
+    resetActiveSessionIfNeeded();
+    setExcludedVocabKeys(prev => {
+      const next = { ...prev };
+      for (const v of filteredModalVocabs) {
+        delete next[getVocabSelectionKey(v)];
+      }
+      return next;
+    });
+  }, [filteredModalVocabs, getVocabSelectionKey, resetActiveSessionIfNeeded]);
+
+  // Bỏ chọn tất cả các từ đang hiển thị trong Modal
+  const deselectAllModalVocabs = useCallback(() => {
+    resetActiveSessionIfNeeded();
+    setExcludedVocabKeys(prev => {
+      const next = { ...prev };
+      for (const v of filteredModalVocabs) {
+        next[getVocabSelectionKey(v)] = true;
+      }
+      return next;
+    });
+  }, [filteredModalVocabs, getVocabSelectionKey, resetActiveSessionIfNeeded]);
+
+  // Đóng Modal danh sách từ vựng khi nhấn phím Escape
+  useEffect(() => {
+    if (!isVocabListModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsVocabListModalOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isVocabListModalOpen]);
 
   // Thống kê số lượng từ vựng Hán tự trong phạm vi
   const totalCount = scopedVocabs.length;
@@ -325,6 +424,11 @@ export default function CombinedKanjiPractice({
     if (sortedSelectedLessons.length === 1) return sortedSelectedLessons[0].toString();
     return `lessons_${sortedSelectedLessons.join('-')}`;
   }, [sortedSelectedLessons, isExactAll50, isExactN5, isExactN4]);
+
+  // Reset lại bộ lọc tích chọn Checkbox về mặc định chọn 100% khi đổi phạm vi bài hoặc đổi trạng thái lọc
+  useEffect(() => {
+    setExcludedVocabKeys({});
+  }, [scopeStorageKey, statusFilter]);
 
   // Nạp kỷ lục High Score theo tổ hợp bộ lọc
   useEffect(() => {
@@ -388,7 +492,8 @@ export default function CombinedKanjiPractice({
       allLessonKanji: kanjiList
     });
 
-    const otherVocabs = eligibleVocabs.filter(v => v.id !== target.id);
+    const distractorSource = baseEligibleVocabs.length >= 4 ? baseEligibleVocabs : scopedVocabs;
+    const otherVocabs = distractorSource.filter(v => v.id !== target.id);
 
     // -----------------------------------------------------------------------
     // DẠNG 1: 🈸 ➔ 🇯🇵 ĐỌC ÂM KANJI (Kanji ➔ Hiragana)
@@ -572,7 +677,7 @@ export default function CombinedKanjiPractice({
       type: 'complete_compound',
       explanation
     };
-  }, [eligibleVocabs, direction, kanjiList, scopedKanjiItems]);
+  }, [eligibleVocabs, baseEligibleVocabs, scopedVocabs, direction, kanjiList, scopedKanjiItems]);
 
   // Bắt đầu game Speedrun hoặc Lượt Hoàn thiện từ ghép không đếm ngược
   const startGame = (customPool?: any[]) => {
@@ -1191,7 +1296,7 @@ export default function CombinedKanjiPractice({
               {isCompoundRoundMode ? '🧩' : '⚡'}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h3 className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-100">
                 {isCompoundRoundMode ? 'Luyện Hoàn Thiện Từ Ghép Hán Tự' : 'Thử Thách Phản Xạ Từ Vựng Hán Tự Thi JLPT'}
               </h3>
@@ -1208,6 +1313,26 @@ export default function CombinedKanjiPractice({
                   </>
                 )}
               </p>
+
+              {/* Nút Xem danh sách từ vựng Hán tự đang chọn để ôn */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  disabled={baseEligibleVocabs.length === 0}
+                  onClick={() => {
+                    setVocabListSearchQuery('');
+                    setIsVocabListModalOpen(true);
+                  }}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 text-indigo-600 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/80 text-xs font-extrabold shadow-xs transition-all cursor-pointer touch-manipulation active:scale-95 disabled:opacity-45 disabled:cursor-not-allowed"
+                >
+                  <span>📖</span>
+                  <span>
+                    {eligibleVocabs.length < baseEligibleVocabs.length
+                      ? `Xem danh sách từ vựng Hán tự (Đang chọn ${eligibleVocabs.length}/${baseEligibleVocabs.length} từ)`
+                      : `Xem danh sách từ vựng Hán tự (${baseEligibleVocabs.length} từ)`}
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Bộ chọn 3 dạng câu hỏi + Tổng hợp */}
@@ -1300,11 +1425,13 @@ export default function CombinedKanjiPractice({
             >
               {sortedSelectedLessons.length === 0
                 ? '⚠️ Hãy tích chọn ít nhất 1 bài học ở mục Phạm vi'
-                : eligibleVocabs.length === 0
+                : baseEligibleVocabs.length === 0
                   ? 'Chưa có từ vựng nào phù hợp bộ lọc trạng thái'
-                  : isCompoundRoundMode
-                    ? `🧩 BẮT ĐẦU HOÀN THIỆN TỪ GHÉP (${eligibleVocabs.length} CÂU)`
-                    : '⚡ BẮT ĐẦU PHẢN XẠ NHANH (10S)'}
+                  : eligibleVocabs.length === 0
+                    ? '⚠️ Hãy tích chọn ít nhất 1 từ vựng trong danh sách để ra đề'
+                    : isCompoundRoundMode
+                      ? `🧩 BẮT ĐẦU HOÀN THIỆN TỪ GHÉP (${eligibleVocabs.length} CÂU)`
+                      : `⚡ BẮT ĐẦU PHẢN XẠ NHANH (10S)${eligibleVocabs.length < baseEligibleVocabs.length ? ` • ${eligibleVocabs.length}/${baseEligibleVocabs.length} TỪ` : ''}`}
             </button>
           </div>
         )}
@@ -1681,6 +1808,259 @@ export default function CombinedKanjiPractice({
           </div>
         )}
       </div>
+
+      {/* ========================================================================= */}
+      {/* MODAL XEM DANH SÁCH TỪ VỰNG HÁN TỰ ĐANG ÔN TRONG PHẠM VI                   */}
+      {/* ========================================================================= */}
+      {isVocabListModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+          {/* Lớp nền mờ */}
+          <div
+            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
+            onClick={() => setIsVocabListModalOpen(false)}
+          />
+
+          {/* Khung Modal (Bottom Sheet trên iPhone 15 Pro / Modal trung tâm trên Desktop) */}
+          <div className="relative z-10 w-full sm:w-[92vw] sm:max-w-3xl max-h-[88dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl bg-white dark:bg-slate-900 border-t sm:border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden animate-in fade-in duration-150">
+            {/* Thanh gạt chỉ báo trên điện thoại */}
+            <div className="w-10 h-1 rounded-full bg-slate-300 dark:bg-slate-700 mx-auto mt-2.5 sm:hidden shrink-0" />
+
+            {/* Header Modal */}
+            <div className="shrink-0 p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 space-y-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 space-y-1">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2 flex-wrap">
+                    <span>📖 Danh sách từ vựng Hán tự đang ôn</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                      Đang chọn {eligibleVocabs.length}/{baseEligibleVocabs.length} từ ra đề
+                    </span>
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                    Phạm vi: <b className="text-slate-700 dark:text-slate-200">{scopeSummaryLabel}</b> • Tích vào ô vuông để chọn những từ sẽ xuất hiện trong đề.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setIsVocabListModalOpen(false)}
+                  className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center text-xs font-black cursor-pointer touch-manipulation shrink-0"
+                  aria-label="Đóng danh sách từ vựng"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Thanh tìm kiếm nhanh + Nút chọn/bỏ chọn nhanh */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    value={vocabListSearchQuery}
+                    onChange={e => setVocabListSearchQuery(e.target.value)}
+                    placeholder="Tìm nhanh chữ Hán, Hiragana, Romaji, nghĩa Việt hoặc Bài (VD: bài 6)..."
+                    className="w-full pl-9 pr-8 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-xs text-slate-800 dark:text-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-indigo-500"
+                  />
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none">
+                    🔍
+                  </span>
+                  {vocabListSearchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setVocabListSearchQuery('')}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold cursor-pointer"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    type="button"
+                    onClick={selectAllModalVocabs}
+                    className="flex-1 sm:flex-initial py-2 px-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/80 text-xs font-extrabold transition-colors cursor-pointer touch-manipulation"
+                  >
+                    ☑️ Chọn tất cả
+                  </button>
+                  <button
+                    type="button"
+                    onClick={deselectAllModalVocabs}
+                    className="flex-1 sm:flex-initial py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 border border-slate-200 dark:border-slate-700 text-xs font-extrabold transition-colors cursor-pointer touch-manipulation"
+                  >
+                    ☐ Bỏ chọn hết
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Nội dung danh sách cuộn */}
+            <div className="flex-1 overflow-y-auto overscroll-contain p-3.5 sm:p-5 space-y-2.5">
+              {filteredModalVocabs.length === 0 ? (
+                <div className="py-12 text-center space-y-2">
+                  <p className="text-sm font-bold text-slate-500 dark:text-slate-400">
+                    Không tìm thấy từ vựng nào khớp với từ khóa &ldquo;{vocabListSearchQuery}&rdquo;.
+                  </p>
+                </div>
+              ) : (
+                filteredModalVocabs.map((v, idx) => {
+                  const kWord = (v.kanji_word || v.kanji_form || v.kanji || '').trim();
+                  const selKey = getVocabSelectionKey(v);
+                  const isIncluded = !excludedVocabKeys[selKey];
+                  const uniqueKey = v.id ?? `${v.lesson_id}_${v.hiragana}_${idx}`;
+                  const expKey = `modal_${uniqueKey}`;
+                  const isExp = Boolean(expandedExplanationIds[expKey]);
+                  const chars: string[] = Array.from(new Set(kWord.match(/[\u4E00-\u9FAF]/g) || []));
+                  const maxKanjiLesson = chars.reduce((maxL, c) => {
+                    const kL = kanjiLessonMap.get(c) || 1;
+                    return kL > maxL ? kL : maxL;
+                  }, 1);
+                  const isUnlockedLater = maxKanjiLesson > (Number(v.lesson_id) || 1);
+
+                  return (
+                    <div
+                      key={uniqueKey}
+                      className={`p-3 sm:p-3.5 rounded-2xl border transition-all space-y-2 ${
+                        isIncluded
+                          ? 'bg-indigo-50/25 dark:bg-indigo-950/20 border-indigo-200/90 dark:border-indigo-800/70 hover:border-indigo-400'
+                          : 'bg-slate-50/50 dark:bg-slate-950/40 border-slate-200/60 dark:border-slate-800/50 opacity-60 hover:opacity-90'
+                      }`}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        {/* Cột trái: Checkbox ra đề + Số thứ tự + Chữ Hán + Hiragana + Nghĩa */}
+                        <div
+                          onClick={() => toggleVocabIncluded(v)}
+                          className="flex items-start sm:items-center gap-2.5 min-w-0 cursor-pointer select-none flex-1"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isIncluded}
+                            onChange={() => {}}
+                            aria-label={`Chọn từ ${kWord} để ra đề`}
+                            className="w-5 h-5 rounded-md accent-indigo-600 cursor-pointer shrink-0 mt-1 sm:mt-0"
+                          />
+                          <span className="min-w-[28px] h-6 px-1.5 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px] font-black flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                            #{idx + 1}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-baseline flex-wrap gap-x-2 gap-y-0.5">
+                              <span className="text-lg sm:text-xl font-black text-indigo-600 dark:text-indigo-400 font-['Noto_Sans_JP']">
+                                {kWord}
+                              </span>
+                              <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 font-['Noto_Sans_JP']">
+                                ({v.hiragana})
+                              </span>
+                              {v.romaji && (
+                                <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
+                                  • {v.romaji}
+                                </span>
+                              )}
+                              <span
+                                className={`px-1.5 py-0.5 rounded text-[10px] font-extrabold ${
+                                  isIncluded
+                                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                                    : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                                }`}
+                              >
+                                {isIncluded ? '✓ Ra đề' : 'Bỏ qua'}
+                              </span>
+                            </div>
+                            <p className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5">
+                              {v.vietnamese_meaning}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Cột phải: Phát âm & Chiết tự */}
+                        <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => handlePlayAudio(kWord, v.hiragana)}
+                            className="h-8 px-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer touch-manipulation"
+                            title="Nghe phát âm"
+                          >
+                            <span>🔊</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => toggleExplanation(expKey)}
+                            className={`h-8 px-2.5 rounded-xl border text-[11px] font-extrabold flex items-center gap-1 transition-colors cursor-pointer touch-manipulation ${
+                              isExp
+                                ? 'bg-indigo-600 text-white border-indigo-600'
+                                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400 hover:border-indigo-400'
+                            }`}
+                          >
+                            <span>💡</span>
+                            <span>{isExp ? 'Ẩn chiết tự' : 'Chiết tự'}</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Dải huy hiệu bài học gốc của từ vựng & bài học của từng chữ Kanji */}
+                      <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-200/60 dark:border-slate-800/60">
+                        <span className="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-[10px] font-extrabold">
+                          📘 Từ vựng Bài {v.lesson_id}
+                        </span>
+
+                        {isUnlockedLater && (
+                          <span
+                            className="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 text-[10px] font-extrabold"
+                            title={`Từ vựng học ở Bài ${v.lesson_id}, mở khóa viết Hán tự đầy đủ khi học Kanji Bài ${maxKanjiLesson}`}
+                          >
+                            🔓 Mở khóa Kanji tại Bài {maxKanjiLesson}
+                          </span>
+                        )}
+
+                        {chars.map(ch => {
+                          const meta = kanjiMetaMap.get(ch);
+                          return (
+                            <span
+                              key={ch}
+                              className="px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold"
+                            >
+                              <b className="text-indigo-600 dark:text-indigo-400 font-['Noto_Sans_JP']">{ch}</b>
+                              {meta ? ` (${meta.sino ? `${meta.sino} • ` : ''}B.${meta.lessonId})` : ''}
+                            </span>
+                          );
+                        })}
+                      </div>
+
+                      {/* Khung mở rộng giải thích cấu tạo từng chữ Hán */}
+                      {isExp && (
+                        <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-indigo-500/20 text-xs text-slate-700 dark:text-slate-200 whitespace-pre-line leading-relaxed animate-in fade-in duration-150">
+                          {buildVocabKanjiExplanation({
+                            targetVocab: {
+                              kanjiWord: kWord,
+                              hiragana: v.hiragana,
+                              meaning: v.vietnamese_meaning || '',
+                              romaji: v.romaji
+                            },
+                            allLessonKanji: kanjiList
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* Footer Modal */}
+            <div className="shrink-0 p-3.5 sm:p-4 pb-[max(0.875rem,env(safe-area-inset-bottom))] sm:pb-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/70 flex items-center justify-between gap-3">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                Đang chọn ra đề: <b className="text-indigo-600 dark:text-indigo-400 font-black">{eligibleVocabs.length}</b> / {baseEligibleVocabs.length} từ vựng
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsVocabListModalOpen(false)}
+                className="py-2 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black shadow-md shadow-indigo-500/20 transition-all active:scale-95 cursor-pointer touch-manipulation"
+              >
+                Xác nhận ({eligibleVocabs.length} từ)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
