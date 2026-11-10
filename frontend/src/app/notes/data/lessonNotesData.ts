@@ -2,6 +2,7 @@ import React from 'react';
 import Lesson1Notes from '../lessons/Lesson1Notes';
 import Lesson3Notes from '../lessons/Lesson3Notes';
 import Lesson4Notes from '../lessons/Lesson4Notes';
+import Lesson5Notes from '../lessons/Lesson5Notes';
 
 export interface LessonNoteHighlight {
   id: string;
@@ -90,12 +91,36 @@ const CUSTOM_LESSON_NOTES: Partial<
       },
       {
         id: 'l4-reflex-practice',
-        tag: 'Bài tập 10s',
-        title: 'Bài tập phản xạ Chia Thì & Thể + Đáp câu hỏi (Hiragana & Kanji)',
-        brief: 'Rèn tốc độ chọn đuôi động từ đúng và chống bẫy ませんだった / そうです.',
+        tag: 'Bài tập thực hành',
+        title: 'Bài tập thực hành Chia Thì & Thể + Đáp câu hỏi (Hiragana & Kanji)',
+        brief: 'Luyện chọn đuôi động từ đúng không giới hạn thời gian và chống bẫy ませんだった / そうです.',
       },
     ],
     Component: Lesson4Notes,
+  },
+  5: {
+    updatedAt: '10/11/2026',
+    highlights: [
+      {
+        id: 'l5-dates-combined',
+        tag: 'Ngày & Tháng',
+        title: 'Đếm Tháng (1月–12月), Ngày (1日–31日) & Công thức kết hợp Ngày–Tháng (～月～日)',
+        brief: '3 tháng đặc biệt (4月 しがつ, 7月 しちがつ, 9月 くがつ), Mùng 1–10 thuần Nhật & 14/20/24日.',
+      },
+      {
+        id: 'l5-particles',
+        tag: 'Trợ từ & Ngoại lệ',
+        title: 'Trợ từ di chuyển (へ・で・と・に) & 4 ngoại lệ gài bẫy (歩いて, 一人で, どこへも)',
+        brief: 'Đi bộ (歩いて) cấm dùng で; Đi một mình (一人で) cấm dùng と; thời gian tương đối cấm に.',
+      },
+      {
+        id: 'l5-practice',
+        tag: 'Bài tập thực hành',
+        title: 'Luyện tập Kết hợp Ngày–Tháng (2 chiều) & Trợ từ / Ngoại lệ (Không giới hạn giờ)',
+        brief: '36 tổ hợp Tháng + Ngày gài bẫy chéo và 24 câu thực chiến trợ từ へ・で・と・に.',
+      },
+    ],
+    Component: Lesson5Notes,
   },
 };
 

@@ -167,16 +167,39 @@ async function syncUserProgressFromSupabase(userId, options = {}) {
   inFlight = (async () => {
     const syncProgressTask = (async () => {
       try {
-        const { data, error } = await supabase
-          .from('user_progress')
-          .select('item_type, item_id, status')
-          .eq('user_id', userId);
+        const allRows = [];
+        let from = 0;
+        const pageSize = 1000;
+        let fetchErr = null;
 
-        if (error) {
-          console.warn('[ProgressService] Supabase sync warning:', error.message);
-        } else if (data && Array.isArray(data)) {
+        while (true) {
+          const { data, error } = await supabase
+            .from('user_progress')
+            .select('item_type, item_id, status')
+            .eq('user_id', userId)
+            .range(from, from + pageSize - 1);
+
+          if (error) {
+            fetchErr = error;
+            break;
+          }
+          if (!data || data.length === 0) break;
+          allRows.push(...data);
+          if (data.length < pageSize) break;
+          from += pageSize;
+        }
+
+        if (fetchErr) {
+          console.warn('[ProgressService] Supabase sync warning:', fetchErr.message);
+        } else {
           if (!mockDb.userProgress) mockDb.userProgress = {};
-          for (const row of data) {
+          const prefix = `${userId}:`;
+          for (const k of Object.keys(mockDb.userProgress)) {
+            if (k.startsWith(prefix)) {
+              delete mockDb.userProgress[k];
+            }
+          }
+          for (const row of allRows) {
             mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
           }
           savePersistentProgress(mockDb.userProgress);
@@ -259,15 +282,32 @@ async function getMasteredItemIds(userId, currentPlan = null) {
     await Promise.all([
       (async () => {
         try {
-          const { data, error } = await supabase
-            .from('user_progress')
-            .select('item_type, item_id, status')
-            .eq('user_id', userId)
-            .eq('status', 'mastered');
+          const allMasteredRows = [];
+          let from = 0;
+          const pageSize = 1000;
+          let fetchErr = null;
 
-          if (!error && Array.isArray(data)) {
+          while (true) {
+            const { data, error } = await supabase
+              .from('user_progress')
+              .select('item_type, item_id, status')
+              .eq('user_id', userId)
+              .eq('status', 'mastered')
+              .range(from, from + pageSize - 1);
+
+            if (error) {
+              fetchErr = error;
+              break;
+            }
+            if (!data || data.length === 0) break;
+            allMasteredRows.push(...data);
+            if (data.length < pageSize) break;
+            from += pageSize;
+          }
+
+          if (!fetchErr && Array.isArray(allMasteredRows)) {
             if (!mockDb.userProgress) mockDb.userProgress = {};
-            for (const row of data) {
+            for (const row of allMasteredRows) {
               const itemId = Number(row.item_id);
               if (row.item_type === 'vocabulary') masteredVocabIds.add(itemId);
               else if (row.item_type === 'kanji') masteredKanjiIds.add(itemId);

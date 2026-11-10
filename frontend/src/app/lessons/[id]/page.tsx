@@ -2442,7 +2442,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
                 // Đã ở mặt sau và hết giờ -> Tự động đánh giá trạng thái tuỳ chọn của người dùng
 
-                handleAutoCheck(autoExpiryLearned);
+                handleAutoCheck(autoExpiryLearned, true);
 
                 return 0;
 
@@ -2544,7 +2544,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   };
 
-  const handleAutoCheck = async (learned: boolean) => {
+  const handleAutoCheck = async (learned: boolean, isFromExpiry = false) => {
 
     const currentItem = autoSessionList[autoCurrentIndex];
 
@@ -2554,19 +2554,25 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
     setAutoResults((prev) => [...prev, { item: currentItem, learned }]);
 
-    // Update study status in database/mock database
+    // Update study status in database/mock database (do not downgrade already mastered items on passive timer expiry)
 
     try {
 
-      const newStatus = learned ? 'mastered' : 'learning';
+      const shouldSkipDowngrade = isFromExpiry && !learned && currentItem.status === 'mastered';
 
-      if (flashcardType === 'vocab') {
+      if (!shouldSkipDowngrade) {
 
-        await handleStatusChange(currentItem.id, newStatus);
+        const newStatus = learned ? 'mastered' : 'learning';
 
-      } else {
+        if (flashcardType === 'vocab') {
 
-        await handleKanjiStatusChange(currentItem.id, newStatus);
+          await handleStatusChange(currentItem.id, newStatus);
+
+        } else {
+
+          await handleKanjiStatusChange(currentItem.id, newStatus);
+
+        }
 
       }
 
@@ -3126,12 +3132,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
             </span>
 
             <select
-              value={item.status}
+              value={(item.status as string) === 'wrong' ? 'learning' : item.status}
               onChange={(e) => handleStatusChange(item.id, e.target.value as any)}
               className={`bg-white dark:bg-slate-900/60 border rounded-lg px-2 py-0.5 text-[11px] font-bold focus:outline-none cursor-pointer transition-colors duration-200 ${
                 item.status === 'mastered'
                   ? 'border-emerald-900 text-emerald-600 dark:text-emerald-400 bg-emerald-950/20'
-                  : item.status === 'learning'
+                  : item.status === 'learning' || (item.status as string) === 'wrong'
                   ? 'border-amber-900 text-amber-400 bg-amber-950/20'
                   : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900/60'
               }`}
@@ -3224,7 +3230,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const vocabMasteredCount = vocabItems.filter(v => v.status === 'mastered').length;
 
-  const vocabLearningCount = vocabItems.filter(v => v.status === 'learning').length;
+  const vocabLearningCount = vocabItems.filter(v => v.status === 'learning' || (v.status as string) === 'wrong').length;
 
   const progressPercent = vocabTotalCount ? Math.round((vocabMasteredCount / vocabTotalCount) * 100) : 0;
 
@@ -3235,7 +3241,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   const kanjiMasteredCount = kanjiItems.filter(k => k.status === 'mastered').length;
 
-  const kanjiLearningCount = kanjiItems.filter(k => k.status === 'learning').length;
+  const kanjiLearningCount = kanjiItems.filter(k => k.status === 'learning' || (k.status as string) === 'wrong').length;
 
   const kanjiProgressPercent = kanjiTotalCount ? Math.round((kanjiMasteredCount / kanjiTotalCount) * 100) : 0;
 

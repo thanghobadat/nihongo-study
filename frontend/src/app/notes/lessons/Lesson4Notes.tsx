@@ -487,7 +487,7 @@ export default function Lesson4Notes() {
       </section>
 
       {/* ===================================================================== */}
-      {/* PHẦN 2: BÀI TẬP PHẢN XẠ 10S (HIRAGANA & KANJI — ĐÃ BỎ BÀI NGHE)       */}
+      {/* PHẦN 2: BÀI TẬP THỰC HÀNH (HIRAGANA & KANJI — KHÔNG GIỚI HẠN GIỜ)     */}
       {/* ===================================================================== */}
       <div ref={practiceRef} className="scroll-mt-4">
         <Lesson4PracticeArena

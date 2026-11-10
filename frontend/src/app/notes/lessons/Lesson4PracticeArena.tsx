@@ -17,17 +17,6 @@ interface Lesson4PracticeArenaProps {
   onTopicChange: (next: Lesson4Topic) => void;
 }
 
-const INITIAL_TIME_SEC = 10;
-const MIN_TIME_SEC = 2.5;
-
-function getDynamicTimeLimit(streak: number): number {
-  const step = Math.floor(streak / 3);
-  return Math.max(
-    MIN_TIME_SEC,
-    Math.round(INITIAL_TIME_SEC * Math.pow(0.9, step) * 10) / 10
-  );
-}
-
 const MODE_CONFIG: {
   id: Lesson4Mode;
   badge: string;
@@ -67,16 +56,12 @@ export default function Lesson4PracticeArena({
   const [highScore, setHighScore] = useState<number>(0);
   const [isNewRecord, setIsNewRecord] = useState<boolean>(false);
 
-  const [maxTime, setMaxTime] = useState<number>(INITIAL_TIME_SEC);
-  const [timeLeft, setTimeLeft] = useState<number>(INITIAL_TIME_SEC);
   const [selectedWrongLabel, setSelectedWrongLabel] = useState<string | null>(null);
-  const [failReason, setFailReason] = useState<'wrong' | 'timeout'>('wrong');
   const [flashCorrectId, setFlashCorrectId] = useState<string | null>(null);
 
   const arenaRef = useRef<HTMLElement | null>(null);
   const conjugationDeckRef = useRef<number[]>([]);
   const qaDeckRef = useRef<number[]>([]);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isTransitioningRef = useRef<boolean>(false);
   const scoreRef = useRef<number>(0);
 
@@ -141,13 +126,8 @@ export default function Lesson4PracticeArena({
   );
 
   const finishGame = useCallback(
-    (reason: 'wrong' | 'timeout', wrongLabel: string | null) => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
+    (wrongLabel: string | null) => {
       isTransitioningRef.current = false;
-      setFailReason(reason);
       setSelectedWrongLabel(wrongLabel);
       setGameState('gameover');
 
@@ -169,7 +149,6 @@ export default function Lesson4PracticeArena({
   );
 
   const startGame = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
     isTransitioningRef.current = false;
     conjugationDeckRef.current = [];
     qaDeckRef.current = [];
@@ -181,10 +160,6 @@ export default function Lesson4PracticeArena({
     setSelectedWrongLabel(null);
     setFlashCorrectId(null);
 
-    const firstLimit = getDynamicTimeLimit(0);
-    setMaxTime(firstLimit);
-    setTimeLeft(firstLimit);
-
     const firstQ = drawNextQuestion(topic, mode);
     setCurrentQ(firstQ);
     setGameState('playing');
@@ -195,10 +170,6 @@ export default function Lesson4PracticeArena({
   }, [drawNextQuestion, mode, topic]);
 
   const stopToIdle = useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
     isTransitioningRef.current = false;
     setGameState('idle');
   }, []);
@@ -208,34 +179,6 @@ export default function Lesson4PracticeArena({
     stopToIdle();
     onTopicChange(nextTopic);
   };
-
-  useEffect(() => {
-    if (gameState !== 'playing' || !currentQ) {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-      return;
-    }
-
-    timerRef.current = setInterval(() => {
-      if (isTransitioningRef.current) return;
-      setTimeLeft((prev) => {
-        if (prev <= 0.1) {
-          finishGame('timeout', null);
-          return 0;
-        }
-        return Math.round((prev - 0.1) * 10) / 10;
-      });
-    }, 100);
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [gameState, currentQ, finishGame]);
 
   const handleAnswer = useCallback(
     (optionId: string, optionLabel: string) => {
@@ -248,7 +191,6 @@ export default function Lesson4PracticeArena({
         const nextScore = scoreRef.current + 1;
         scoreRef.current = nextScore;
         const nextStreak = streak + 1;
-        const nextLimit = getDynamicTimeLimit(nextStreak);
 
         setScore(nextScore);
         setStreak(nextStreak);
@@ -256,13 +198,11 @@ export default function Lesson4PracticeArena({
         setTimeout(() => {
           const nextQ = drawNextQuestion(topic, mode);
           setFlashCorrectId(null);
-          setMaxTime(nextLimit);
-          setTimeLeft(nextLimit);
           setCurrentQ(nextQ);
           isTransitioningRef.current = false;
         }, 160);
       } else {
-        finishGame('wrong', optionLabel);
+        finishGame(optionLabel);
       }
     },
     [currentQ, drawNextQuestion, finishGame, gameState, mode, streak, topic]
@@ -284,14 +224,6 @@ export default function Lesson4PracticeArena({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [gameState, currentQ, handleAnswer]);
 
-  const timePct = maxTime > 0 ? Math.max(0, Math.min(100, (timeLeft / maxTime) * 100)) : 0;
-  const barColor =
-    timePct > 50
-      ? 'bg-emerald-500'
-      : timePct > 25
-      ? 'bg-amber-500'
-      : 'bg-rose-500';
-
   return (
     <section
       ref={arenaRef}
@@ -302,7 +234,7 @@ export default function Lesson4PracticeArena({
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/60 border border-amber-200/70 dark:border-amber-800/60 text-amber-700 dark:text-amber-300 text-[11px] sm:text-xs font-extrabold mb-1.5">
             <span>⚡</span>
-            <span>Bài tập phản xạ • Giảm 10% giờ mỗi 3 câu đúng</span>
+            <span>Bài tập thực hành • Không giới hạn thời gian</span>
           </div>
           <h2 className="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
             2. Bài tập phản xạ Thì &amp; Thể Động từ (～ます)
@@ -393,7 +325,7 @@ export default function Lesson4PracticeArena({
               onClick={startGame}
               className="w-full sm:w-auto min-h-[48px] px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-indigo-600 hover:opacity-95 text-white text-xs sm:text-sm font-black tracking-wide shadow-md transition-all active:scale-[0.98] cursor-pointer touch-manipulation"
             >
-              ⚡ BẮT ĐẦU LÀM BÀI (10S)
+              ⚡ BẮT ĐẦU LÀM BÀI
             </button>
           </div>
         </div>
@@ -406,9 +338,6 @@ export default function Lesson4PracticeArena({
             <div className="flex items-center gap-1.5 min-w-0">
               <span className="px-2 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/70 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-[11px] sm:text-xs whitespace-nowrap">
                 {currentQ.promptType === 'hira' ? 'あ Hiragana' : '漢 Chữ Hán'}
-              </span>
-              <span className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold text-[11px] sm:text-xs whitespace-nowrap">
-                {maxTime.toFixed(1)}s/câu
               </span>
             </div>
 
@@ -429,27 +358,6 @@ export default function Lesson4PracticeArena({
               >
                 ✕ Dừng
               </button>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <div className="flex items-center justify-between text-xs font-bold">
-              <span className="text-slate-400 dark:text-slate-500">Thời gian còn lại</span>
-              <span
-                className={
-                  timePct <= 25
-                    ? 'text-rose-600 dark:text-rose-400 font-black tabular-nums'
-                    : 'text-slate-700 dark:text-slate-200 font-black tabular-nums'
-                }
-              >
-                {timeLeft.toFixed(1)}s
-              </span>
-            </div>
-            <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-              <div
-                className={`h-full ${barColor} transition-all duration-100 ease-linear`}
-                style={{ width: `${timePct}%` }}
-              />
             </div>
           </div>
 
@@ -511,12 +419,10 @@ export default function Lesson4PracticeArena({
           <div className="rounded-2xl bg-rose-50/70 dark:bg-rose-950/25 border border-rose-200 dark:border-rose-800/60 p-4 sm:p-6 space-y-3.5 sm:space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2.5">
               <div className="flex items-center space-x-2.5">
-                <span className="text-2xl shrink-0">{failReason === 'timeout' ? '⏰' : '💥'}</span>
+                <span className="text-2xl shrink-0">💥</span>
                 <div>
                   <h3 className="text-sm sm:text-lg font-extrabold text-rose-700 dark:text-rose-300 leading-snug">
-                    {failReason === 'timeout'
-                      ? 'Hết thời gian mất rồi!'
-                      : `Chọn nhầm 「${selectedWrongLabel}」 rồi!`}
+                    {`Chọn nhầm 「${selectedWrongLabel}」 rồi!`}
                   </h3>
                   <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
                     Điểm lượt này: <strong>{score} câu</strong> • Kỷ lục:{' '}

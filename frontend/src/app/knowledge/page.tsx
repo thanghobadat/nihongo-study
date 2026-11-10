@@ -870,14 +870,17 @@ export default function KnowledgeHubPage() {
       const pct = calculateAccuracy(userAnswer, correctAnswer);
 
       if (pct < 100) {
-        api.post('/api/user/progress', {
-          item_type: 'vocabulary',
-          item_id: item.id,
-          status: 'wrong'
-        }).catch(err => console.error('Failed to mark wrong:', err));
+        // Không tự động hạ cấp các từ đã thuộc ('mastered') xuống 'wrong' khi làm bài luyện tập
+        if (item.status !== 'mastered') {
+          api.post('/api/user/progress', {
+            item_type: 'vocabulary',
+            item_id: item.id,
+            status: 'wrong'
+          }).catch(err => console.error('Failed to mark wrong:', err));
 
-        setVocabList(prev => prev.map(v => v.id === item.id ? { ...v, status: 'wrong' } : v));
-      } else if (practiceOnlyWrong && pct === 100) {
+          setVocabList(prev => prev.map(v => v.id === item.id ? { ...v, status: 'wrong' } : v));
+        }
+      } else if ((practiceOnlyWrong || item.status === 'wrong') && pct === 100) {
         api.post('/api/user/progress', {
           item_type: 'vocabulary',
           item_id: item.id,
@@ -1260,6 +1263,22 @@ export default function KnowledgeHubPage() {
       setSpeedrunChoiceStatus('correct');
       playSpeedrunSound('correct');
 
+      if (speedrunTarget === 'vocab' && speedrunQuestion && speedrunQuestion.status === 'wrong') {
+        api.post('/api/user/progress', {
+          item_type: 'vocabulary',
+          item_id: speedrunQuestion.id,
+          status: 'mastered'
+        }).catch(err => console.error('Speedrun restore mastered error:', err));
+        setVocabList(prev => prev.map(v => v.id === speedrunQuestion.id ? { ...v, status: 'mastered' } : v));
+      } else if (speedrunTarget === 'kanji' && speedrunKanjiQuestion && speedrunKanjiQuestion.status === 'wrong') {
+        api.post('/api/user/progress', {
+          item_type: 'kanji',
+          item_id: speedrunKanjiQuestion.id,
+          status: 'mastered'
+        }).catch(err => console.error('Speedrun restore mastered kanji error:', err));
+        setKanjiList(prev => prev.map(k => k.id === speedrunKanjiQuestion.id ? { ...k, status: 'mastered' } : k));
+      }
+
       const newScore = speedrunScore + 1;
       setSpeedrunScore(newScore);
       speedrunScoreRef.current = newScore;
@@ -1279,14 +1298,15 @@ export default function KnowledgeHubPage() {
       setSpeedrunChoiceStatus('wrong');
       playSpeedrunSound('wrong');
 
-      if (speedrunTarget === 'vocab' && speedrunQuestion) {
+      // Tuyệt đối không hạ cấp từ vựng / chữ Hán đã thuộc ('mastered') xuống 'wrong' khi chơi Speedrun
+      if (speedrunTarget === 'vocab' && speedrunQuestion && speedrunQuestion.status !== 'mastered') {
         api.post('/api/user/progress', {
           item_type: 'vocabulary',
           item_id: speedrunQuestion.id,
           status: 'wrong'
         }).catch(err => console.error('Speedrun mark wrong error:', err));
         setVocabList(prev => prev.map(v => v.id === speedrunQuestion.id ? { ...v, status: 'wrong' } : v));
-      } else if (speedrunTarget === 'kanji' && speedrunKanjiQuestion) {
+      } else if (speedrunTarget === 'kanji' && speedrunKanjiQuestion && speedrunKanjiQuestion.status !== 'mastered') {
         api.post('/api/user/progress', {
           item_type: 'kanji',
           item_id: speedrunKanjiQuestion.id,

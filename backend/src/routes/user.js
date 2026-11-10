@@ -349,17 +349,11 @@ router.get('/progress-summary', async (req, res) => {
       });
     }
 
-    // Get cached total counts + user's mastered counts in parallel
-    const [{ totalVocab, totalKanji, totalGrammar }, { data: progressData, error: errP }] = await Promise.all([
+    // Get cached total counts + user's mastered counts in parallel (paginated to bypass 1000-row limit)
+    const [{ totalVocab, totalKanji, totalGrammar }, progressData] = await Promise.all([
       getCachedTableCounts(),
-      supabase
-        .from('user_progress')
-        .select('item_type, status')
-        .eq('user_id', userId)
-        .eq('status', 'mastered')
+      fetchAllTableRows('user_progress', q => q.eq('user_id', userId).eq('status', 'mastered'))
     ]);
-
-    if (errP) throw errP;
 
     const masteredVocab = progressData.filter(p => p.item_type === 'vocabulary').length;
     const masteredKanji = progressData.filter(p => p.item_type === 'kanji').length;
@@ -967,10 +961,23 @@ router.post('/progress', async (req, res) => {
       }
 
       const key = `${userId}:${item_type}:${item_id}`;
+      // Protect already mastered items from being downgraded to 'wrong' by practice/speedrun quizzes
+      if (status === 'wrong' && mockDb.userProgress[key] === 'mastered') {
+        return res.json({
+          message: 'Preserved mastered status (Mock Mode)',
+          progress: {
+            user_id: userId,
+            item_type,
+            item_id,
+            status: 'mastered',
+            updated_at: new Date().toISOString()
+          }
+        });
+      }
       mockDb.userProgress[key] = status;
       progressService.savePersistentProgress(mockDb.userProgress);
       progressService.invalidateUserSyncCache(userId);
-      checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
+      await checkAndNotifyNewlyCompletedTasks(userId);
       return res.json({
         message: 'Progress updated successfully (Mock Mode)',
         progress: {
@@ -981,6 +988,45 @@ router.post('/progress', async (req, res) => {
           updated_at: new Date().toISOString()
         }
       });
+    }
+
+    // Protect already mastered items from being downgraded to 'wrong' by practice/speedrun quizzes
+    if (status === 'wrong') {
+      const memKey = `${userId}:${item_type}:${item_id}`;
+      if (mockDb.userProgress && mockDb.userProgress[memKey] === 'mastered') {
+        return res.json({
+          message: 'Preserved mastered status',
+          progress: {
+            user_id: userId,
+            item_type,
+            item_id,
+            status: 'mastered',
+            updated_at: new Date().toISOString()
+          }
+        });
+      }
+      const { data: existingRow } = await supabase
+        .from('user_progress')
+        .select('status')
+        .eq('user_id', userId)
+        .eq('item_type', item_type)
+        .eq('item_id', item_id)
+        .maybeSingle();
+
+      if (existingRow && existingRow.status === 'mastered') {
+        if (!mockDb.userProgress) mockDb.userProgress = {};
+        mockDb.userProgress[memKey] = 'mastered';
+        return res.json({
+          message: 'Preserved mastered status',
+          progress: {
+            user_id: userId,
+            item_type,
+            item_id,
+            status: 'mastered',
+            updated_at: new Date().toISOString()
+          }
+        });
+      }
     }
 
     // If it's a high score, clean up existing high score records in that specific range first
@@ -1028,7 +1074,7 @@ router.post('/progress', async (req, res) => {
     mockDb.userProgress[`${userId}:${item_type}:${item_id}`] = status;
     progressService.savePersistentProgress(mockDb.userProgress);
     progressService.invalidateUserSyncCache(userId);
-    checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
+    await checkAndNotifyNewlyCompletedTasks(userId);
 
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
@@ -1059,7 +1105,7 @@ router.post('/progress/batch', async (req, res) => {
 
     const userId = req.user.id;
     await progressService.setItemProgressBatch(userId, item_type, item_ids, status);
-    checkAndNotifyNewlyCompletedTasks(userId).catch(() => {});
+    await checkAndNotifyNewlyCompletedTasks(userId);
 
     return res.json({
       success: true,
@@ -2544,25 +2590,29 @@ async function checkAndNotifyNewlyCompletedTasks(userId) {
 
     // Lấy ngày hôm nay theo múi giờ Việt Nam
     const todayStr = getVietnamDateStr();
-
     const todayDay = plan.days.find(d => d.date === todayStr);
-    if (!todayDay || !Array.isArray(todayDay.tasks)) return;
 
     // Ghi nhớ trạng thái hoàn thành trước khi tính toán
     const prevCompletedMap = new Map();
-    for (const t of todayDay.tasks) {
-      prevCompletedMap.set(t.id, !!t.completed);
+    if (todayDay && Array.isArray(todayDay.tasks)) {
+      for (const t of todayDay.tasks) {
+        prevCompletedMap.set(t.id, !!t.completed);
+      }
     }
 
-    // Chạy auto-tracking định lượng bài học
+    // Chạy auto-tracking định lượng bài học trên toàn bộ lộ trình
+    const prevUpdatedAt = plan.updated_at;
     plan = applyAutoTracking(plan, userId);
-    plan.updated_at = new Date().toISOString();
 
-    // Lưu ngay kế hoạch cập nhật vào RAM, file đĩa và Supabase
-    if (!mockDb.studyPlans) mockDb.studyPlans = {};
-    mockDb.studyPlans[userId] = plan;
-    savePersistentPlans(mockDb.studyPlans);
-    await persistPlanToSupabase(userId, plan);
+    // Lưu ngay kế hoạch cập nhật vào RAM, file đĩa và Supabase nếu có thay đổi
+    if (plan.updated_at !== prevUpdatedAt) {
+      if (!mockDb.studyPlans) mockDb.studyPlans = {};
+      mockDb.studyPlans[userId] = plan;
+      savePersistentPlans(mockDb.studyPlans);
+      await persistPlanToSupabase(userId, plan);
+    }
+
+    if (!todayDay || !Array.isArray(todayDay.tasks)) return;
 
     // Kiểm tra xem có task nào vừa mới đạt chỉ tiêu và hoàn thành không
     const dayTasks = todayDay.tasks || [];
@@ -2818,8 +2868,11 @@ router.post('/daily-tasks/schedule', async (req, res) => {
 
                   // Synchronize task items into user_progress table and disk cache
                   if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
-                    progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered')
-                      .catch(e => console.warn('[DailyTasks] Error auto-marking items mastered:', e.message));
+                    try {
+                      await progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered');
+                    } catch (e) {
+                      console.warn('[DailyTasks] Error auto-marking items mastered:', e.message);
+                    }
                   }
 
                   // Synchronize review session record if this is a review task
