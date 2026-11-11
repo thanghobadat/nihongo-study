@@ -29442,8 +29442,8 @@ module.exports = {
     {
       "id": 3118,
       "lesson_id": 7,
-      "hiragana": "おきます",
-      "romaji": "okimasu",
+      "hiragana": "おくります",
+      "romaji": "okurimasu",
       "vietnamese_meaning": "gửi (thư, quà); tiễn (ai đó)",
       "word_type": "verb",
       "japanese_example": "友達に手紙を送ります。",
