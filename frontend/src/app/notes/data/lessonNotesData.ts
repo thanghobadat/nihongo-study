@@ -3,6 +3,7 @@ import Lesson1Notes from '../lessons/Lesson1Notes';
 import Lesson3Notes from '../lessons/Lesson3Notes';
 import Lesson4Notes from '../lessons/Lesson4Notes';
 import Lesson5Notes from '../lessons/Lesson5Notes';
+import Lesson6Notes from '../lessons/Lesson6Notes';
 
 export interface LessonNoteHighlight {
   id: string;
@@ -121,6 +122,30 @@ const CUSTOM_LESSON_NOTES: Partial<
       },
     ],
     Component: Lesson5Notes,
+  },
+  6: {
+    updatedAt: '11/11/2026',
+    highlights: [
+      {
+        id: 'l6-particles',
+        tag: 'Trợ từ Bài 6',
+        title: 'Hệ thống Trợ từ hành động (を・で・に・も・と) & Bẫy phân biệt (で vs へ, に vs を)',
+        brief: 'Ngoại động từ dùng を (riêng 会います dùng に); nơi diễn ra hành động dùng で; 何も nuốt mất を.',
+      },
+      {
+        id: 'l6-nan-nani',
+        tag: 'Quy tắc 何',
+        title: 'Quy tắc đọc chữ 何: Khi nào đọc なん (nan), khi nào đọc なに (nani)?',
+        brief: 'Đọc なん trước âm hàng た・だ・な (T-D-N: です・で・の・と) & hậu tố đếm; đọc なに trước を・も・か.',
+      },
+      {
+        id: 'l6-practice',
+        tag: 'Bài tập thực hành',
+        title: 'Luyện tập Trợ từ Bài 6 & Phân biệt なん / なに (Không giới hạn thời gian)',
+        brief: '28 câu gài bẫy trợ từ (を・で・に・へ・も・と) và 24 câu phản xạ chọn cách đọc 何 (なん vs なに).',
+      },
+    ],
+    Component: Lesson6Notes,
   },
 };
 

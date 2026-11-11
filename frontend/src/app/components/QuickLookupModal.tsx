@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { api } from '../utils/api';
 import { playAudioWithFallback, speakTTS } from '../utils/audioHelper';
-import { hiraganaData, katakanaData, KanaItem } from '../kana/kanaData';
+import { hiraganaData, katakanaData } from '../kana/kanaData';
 import { getGlobalKanjiForm, getRelatedVocabForKanji } from '../utils/kanjiFormLookup';
 
 interface QuickLookupModalProps {
@@ -72,17 +72,32 @@ export default function QuickLookupModal({
   const normalizedInitialTab = initialTab === 'radicals' ? 'kanji' : initialTab;
   const [activeTab, setActiveTab] = useState<'vocab' | 'kanji' | 'grammar' | 'kana'>(normalizedInitialTab);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Sync initialTab when modal opens
+  // Sync initialTab when modal opens & clean up transient sub-states on close
   useEffect(() => {
     if (isOpen) {
       setActiveTab(initialTab === 'radicals' ? 'kanji' : initialTab);
+    } else {
+      setSelectedKanjiDetail(null);
+      setIsFullscreen(false);
     }
   }, [isOpen, initialTab]);
+
+  // Only auto-focus search input on Desktop (>= 768px) to avoid forced keyboard & viewport shift on Mobile
+  useEffect(() => {
+    if (!isOpen || typeof window === 'undefined') return;
+    if (window.innerWidth >= 768) {
+      const timer = setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, activeTab]);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -95,16 +110,22 @@ export default function QuickLookupModal({
     }
   }, [isOpen]);
 
-  // Close on Escape key
+  // Close on Escape key (close Kanji detail sub-modal first if open)
+  const [selectedKanjiDetail, setSelectedKanjiDetail] = useState<KanjiItem | null>(null);
+
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape' && isOpen) {
-        onClose();
+        if (selectedKanjiDetail) {
+          setSelectedKanjiDetail(null);
+        } else {
+          onClose();
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, selectedKanjiDetail]);
 
   // ==============================================================
   // DATA FETCHING: VOCABULARY & KANJI FROM COURSE SUMMARY
@@ -207,16 +228,13 @@ export default function QuickLookupModal({
   const [kanjiSearch, setKanjiSearch] = useState('');
   const [kanjiLessonFilter, setKanjiLessonFilter] = useState<string>('all');
   const [kanjiLevelFilter, setKanjiLevelFilter] = useState<'all' | 'n5' | 'n4'>('all');
-  const [selectedKanjiDetail, setSelectedKanjiDetail] = useState<KanjiItem | null>(null);
 
   const filteredKanji = useMemo(() => {
     const q = kanjiSearch.trim().toLowerCase();
     return kanjiList.filter((item) => {
-      // Filter by Lesson
       if (kanjiLessonFilter !== 'all' && item.lesson_id.toString() !== kanjiLessonFilter) {
         return false;
       }
-      // Filter by Level (N5: Lesson 1-25, N4: Lesson 26-50)
       if (kanjiLevelFilter === 'n5' && item.lesson_id > 25) return false;
       if (kanjiLevelFilter === 'n4' && item.lesson_id <= 25) return false;
 
@@ -271,11 +289,9 @@ export default function QuickLookupModal({
   const filteredGrammar = useMemo(() => {
     const q = grammarSearch.trim().toLowerCase();
     return grammarList.filter((item) => {
-      // Filter by Lesson
       if (grammarLessonFilter !== 'all' && item.lesson_id.toString() !== grammarLessonFilter) {
         return false;
       }
-      // Filter by Level (N5: Lesson 1-25, N4: Lesson 26-50)
       if (grammarLevelFilter === 'n5' && item.lesson_id > 25) return false;
       if (grammarLevelFilter === 'n4' && item.lesson_id <= 25) return false;
 
@@ -295,146 +311,215 @@ export default function QuickLookupModal({
   if (!isOpen || !mounted) return null;
 
   const modalContainerClass = isFullscreen
-    ? 'w-screen h-screen fixed inset-0 rounded-none border-0'
-    : 'w-full sm:w-[96vw] max-w-7xl h-full sm:h-[95vh] sm:rounded-3xl border-0 sm:border border-slate-200 dark:border-slate-800 shadow-2xl';
+    ? 'w-screen h-[100dvh] fixed inset-0 rounded-none border-0'
+    : 'w-full h-[92dvh] max-h-[92dvh] rounded-t-3xl sm:w-[96vw] max-w-7xl sm:h-[92dvh] sm:max-h-[92dvh] sm:rounded-3xl border-t sm:border border-slate-200 dark:border-slate-800 shadow-2xl';
 
   return createPortal(
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-2 md:p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in font-sans">
-      <div 
+    <div
+      className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center p-0 sm:p-2 md:p-4 bg-slate-950/75 backdrop-blur-md animate-fade-in font-sans [-webkit-tap-highlight-color:transparent]"
+      onClick={onClose}
+    >
+      <div
         className={`${modalContainerClass} bg-white dark:bg-[#0c1427] overflow-hidden flex flex-col transition-all duration-200`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header Bar */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-200/80 dark:border-slate-800/80 bg-slate-50/90 dark:bg-slate-900/80 shrink-0">
-          <div className="flex items-center space-x-3">
-            <span className="text-2xl shrink-0">🔍</span>
-            <div>
-              <h2 className="text-base sm:text-lg font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                <span>Tra Cứu Nhanh</span>
-                <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${
-                  activeTab === 'vocab'
-                    ? 'bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900'
-                    : activeTab === 'kanji'
-                    ? 'bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-900'
-                    : activeTab === 'grammar'
-                    ? 'bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-900'
-                    : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900'
-                }`}>
-                  {activeTab === 'vocab' ? 'Từ vựng Minna' : activeTab === 'kanji' ? 'Từ vựng Kanji' : activeTab === 'grammar' ? 'Mẫu câu ngữ pháp' : 'Bảng chữ cái'}
-                </span>
-              </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
-                Tra cứu tức thời không làm gián đoạn bài học hiện tại
-              </p>
+        {/* Header Bar (2-tier responsive layout on Mobile so Close button NEVER overflows) */}
+        <div className="border-b border-slate-200/80 dark:border-slate-800/80 bg-slate-50/95 dark:bg-slate-900/90 shrink-0">
+          {/* Mobile Bottom-Sheet Handle (Tap to close) */}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Đóng tra cứu nhanh"
+            className="sm:hidden w-full pt-2.5 pb-1 flex items-center justify-center cursor-pointer touch-manipulation"
+          >
+            <span className="w-11 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700" />
+          </button>
+
+          {/* Row 1: Title + Desktop Tab Switcher + Always-Visible Close Button */}
+          <div className="flex items-center justify-between gap-2 px-3.5 sm:px-6 py-2.5 sm:py-3.5">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <span className="text-xl sm:text-2xl shrink-0">🔍</span>
+              <div className="min-w-0">
+                <h2 className="text-sm sm:text-lg font-black text-slate-800 dark:text-slate-100 flex items-center gap-1.5 sm:gap-2 min-w-0">
+                  <span className="truncate">Tra Cứu Nhanh</span>
+                  <span className={`text-[11px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full font-bold border shrink-0 ${
+                    activeTab === 'vocab'
+                      ? 'bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900'
+                      : activeTab === 'kanji'
+                      ? 'bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-900'
+                      : activeTab === 'grammar'
+                      ? 'bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-900'
+                      : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900'
+                  }`}>
+                    {activeTab === 'vocab' ? 'Từ vựng' : activeTab === 'kanji' ? 'Kanji' : activeTab === 'grammar' ? 'Mẫu câu' : 'Chữ cái'}
+                  </span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block truncate">
+                  Tra cứu tức thời không làm gián đoạn bài học hiện tại
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              {/* Desktop Segmented Control Tab Switcher */}
+              <div className="hidden lg:flex items-center p-1 bg-slate-200/70 dark:bg-slate-800/70 rounded-xl">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('vocab')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    activeTab === 'vocab'
+                      ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  📚 Từ Vựng
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('kanji')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    activeTab === 'kanji'
+                      ? 'bg-white dark:bg-slate-900 text-purple-600 dark:text-purple-400 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  🉐 Từ Vựng Kanji
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('grammar')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    activeTab === 'grammar'
+                      ? 'bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  📖 Mẫu Câu
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('kana')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    activeTab === 'kana'
+                      ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  🔤 Bảng Chữ Cái
+                </button>
+              </div>
+
+              {/* Desktop Fullscreen Toggle Button */}
+              <button
+                type="button"
+                onClick={() => setIsFullscreen(!isFullscreen)}
+                className="hidden sm:flex w-9 h-9 rounded-xl items-center justify-center text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-all cursor-pointer"
+                title={isFullscreen ? 'Thu nhỏ' : 'Toàn màn hình'}
+              >
+                {isFullscreen ? '🗗' : '⛶'}
+              </button>
+
+              {/* Prominent Always-Visible Close Button */}
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Đóng cửa sổ tra cứu"
+                className="min-h-[38px] px-3 sm:px-3.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/70 dark:hover:bg-rose-900/80 border border-rose-200/80 dark:border-rose-800/70 text-rose-600 dark:text-rose-300 text-xs sm:text-sm font-extrabold flex items-center gap-1 transition-all active:scale-95 cursor-pointer touch-manipulation shrink-0"
+                title="Đóng (Esc)"
+              >
+                <span>✕</span>
+                <span>Đóng</span>
+              </button>
             </div>
           </div>
 
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            {/* Segmented control tab switcher */}
-            <div className="flex items-center p-1 bg-slate-200/70 dark:bg-slate-800/70 rounded-xl">
+          {/* Row 2 (Mobile & Tablet): 4-Column Tab Switcher (Zero horizontal clipping) */}
+          <div className="lg:hidden px-3.5 sm:px-6 pb-2.5">
+            <div className="grid grid-cols-4 gap-1 p-1 bg-slate-200/70 dark:bg-slate-800/70 rounded-xl">
               <button
                 type="button"
                 onClick={() => setActiveTab('vocab')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`min-h-[36px] px-1.5 py-1 rounded-lg text-[11px] sm:text-xs font-extrabold truncate transition-all cursor-pointer touch-manipulation ${
                   activeTab === 'vocab'
                     ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                📚 Từ Vựng
+                📚 Từ vựng
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('kanji')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`min-h-[36px] px-1.5 py-1 rounded-lg text-[11px] sm:text-xs font-extrabold truncate transition-all cursor-pointer touch-manipulation ${
                   activeTab === 'kanji'
                     ? 'bg-white dark:bg-slate-900 text-purple-600 dark:text-purple-400 shadow-sm'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                🉐 Từ Vựng Kanji
+                🉐 Kanji
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('grammar')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`min-h-[36px] px-1.5 py-1 rounded-lg text-[11px] sm:text-xs font-extrabold truncate transition-all cursor-pointer touch-manipulation ${
                   activeTab === 'grammar'
                     ? 'bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 shadow-sm'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                📖 Mẫu Câu
+                📖 Mẫu câu
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('kana')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`min-h-[36px] px-1.5 py-1 rounded-lg text-[11px] sm:text-xs font-extrabold truncate transition-all cursor-pointer touch-manipulation ${
                   activeTab === 'kana'
                     ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-sm'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                🔤 Bảng Chữ Cái
+                🔤 Chữ cái
               </button>
             </div>
-
-            {/* Fullscreen Toggle Button */}
-            <button
-              type="button"
-              onClick={() => setIsFullscreen(!isFullscreen)}
-              className="hidden sm:flex w-8 h-8 rounded-full items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-all cursor-pointer"
-              title={isFullscreen ? 'Thu nhỏ' : 'Toàn màn hình'}
-            >
-              {isFullscreen ? '🗗' : '⛶'}
-            </button>
-
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={onClose}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-all cursor-pointer"
-              title="Đóng (Esc)"
-            >
-              ✕
-            </button>
           </div>
         </div>
 
-        {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-3.5 sm:p-5 md:p-6 space-y-4">
+        {/* Modal Body (Pinned toolbar + Independent touch-friendly scroll area) */}
+        <div className="flex-1 min-h-0 overflow-hidden flex flex-col p-3 sm:p-5 md:p-6">
           {/* ======================================================== */}
           {/* TAB 1: TRA CỨU TỪ VỰNG                                   */}
           {/* ======================================================== */}
           {activeTab === 'vocab' && (
-            <div className="space-y-4 h-full flex flex-col">
+            <div className="flex-1 min-h-0 flex flex-col gap-3 sm:gap-4">
               {/* Toolbar Controls */}
-              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                <div className="relative flex-1">
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 shrink-0">
+                <div className="relative flex-1 min-w-0">
                   <input
+                    ref={searchInputRef}
                     type="text"
                     value={vocabSearch}
                     onChange={(e) => setVocabSearch(e.target.value)}
-                    placeholder="Nhập chữ Kanji, Hiragana, Romaji hoặc nghĩa tiếng Việt (ví dụ: watashi, học, 私)..."
-                    className="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                    autoFocus
+                    placeholder="Nhập Kanji, Hiragana, Romaji hoặc nghĩa..."
+                    className="w-full min-h-[42px] pl-9 pr-9 py-2 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                   />
-                  <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">🔍</span>
                   {vocabSearch && (
                     <button
                       type="button"
                       onClick={() => setVocabSearch('')}
-                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 text-xs"
+                      aria-label="Xóa từ khóa"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 text-xs font-bold cursor-pointer touch-manipulation"
                     >
                       ✕
                     </button>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 min-w-0">
                   <select
                     value={selectedLessonFilter}
                     onChange={(e) => setSelectedLessonFilter(e.target.value)}
-                    className="px-3 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
+                    className="flex-1 sm:flex-initial min-w-0 max-w-full min-h-[38px] truncate px-3 py-2 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
                   >
                     <option value="all">📚 Tất cả 50 bài học</option>
                     {lessons.length > 0 ? (
@@ -452,7 +537,7 @@ export default function QuickLookupModal({
                     )}
                   </select>
 
-                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-2">
+                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1.5 shrink-0">
                     {filteredVocab.length} từ
                   </span>
                 </div>
@@ -460,17 +545,17 @@ export default function QuickLookupModal({
 
               {/* Vocab List Grid */}
               {loadingData ? (
-                <div className="py-20 flex flex-col items-center justify-center space-y-3 text-slate-400">
+                <div className="py-16 flex flex-col items-center justify-center space-y-3 text-slate-400">
                   <div className="w-8 h-8 border-3 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                   <p className="text-xs">Đang tải toàn bộ kho từ vựng 50 bài...</p>
                 </div>
               ) : filteredVocab.length === 0 ? (
-                <div className="py-20 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
-                  📭 Không tìm thấy từ vựng nào phù hợp với từ khóa "{vocabSearch}".
+                <div className="py-16 px-4 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
+                  📭 Không tìm thấy từ vựng nào phù hợp với từ khóa &ldquo;{vocabSearch}&rdquo;.
                 </div>
               ) : (
-                <div className="flex-1 overflow-y-auto pr-1">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-0.5 sm:pr-1">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 pb-2">
                     {filteredVocab.map((item) => (
                       <div
                         key={item.id}
@@ -480,7 +565,7 @@ export default function QuickLookupModal({
                           <button
                             type="button"
                             onClick={() => playAudioWithFallback(item.kanji_form || item.hiragana, item.hiragana)}
-                            className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                            className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition-transform cursor-pointer touch-manipulation"
                             title="Phát âm"
                           >
                             🔊
@@ -524,7 +609,7 @@ export default function QuickLookupModal({
                               onClose();
                               router.push(`/lessons/${item.lesson_id}?tab=vocab`);
                             }}
-                            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold transition-all shrink-0 cursor-pointer"
+                            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold transition-all shrink-0 cursor-pointer touch-manipulation"
                             title="Mở bài học này"
                           >
                             Bài {item.lesson_id} ➔
@@ -539,39 +624,40 @@ export default function QuickLookupModal({
           )}
 
           {/* ======================================================== */}
-          {/* TAB 2: TRA CỨU TỪ VỰNG KANJI (THAY THẾ BỘ THỦ)           */}
+          {/* TAB 2: TRA CỨU TỪ VỰNG KANJI                             */}
           {/* ======================================================== */}
           {activeTab === 'kanji' && (
-            <div className="space-y-4 h-full flex flex-col">
+            <div className="flex-1 min-h-0 flex flex-col gap-3 sm:gap-4">
               {/* Toolbar Controls */}
-              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                <div className="relative flex-1">
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 shrink-0">
+                <div className="relative flex-1 min-w-0">
                   <input
+                    ref={searchInputRef}
                     type="text"
                     value={kanjiSearch}
                     onChange={(e) => setKanjiSearch(e.target.value)}
-                    placeholder="Tìm theo chữ Hán, âm Hán Việt (Nhật, Bản, Học...), On/Kun, nghĩa tiếng Việt..."
-                    className="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-                    autoFocus
+                    placeholder="Tìm theo chữ Hán, âm Hán Việt, On/Kun, nghĩa..."
+                    className="w-full min-h-[42px] pl-9 pr-9 py-2 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   />
-                  <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">🔍</span>
                   {kanjiSearch && (
                     <button
                       type="button"
                       onClick={() => setKanjiSearch('')}
-                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 text-xs"
+                      aria-label="Xóa từ khóa"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 text-xs font-bold cursor-pointer touch-manipulation"
                     >
                       ✕
                     </button>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 min-w-0">
                   {/* Lesson Filter */}
                   <select
                     value={kanjiLessonFilter}
                     onChange={(e) => setKanjiLessonFilter(e.target.value)}
-                    className="px-3 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
+                    className="flex-1 sm:flex-initial min-w-0 max-w-full min-h-[38px] truncate px-3 py-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-sm text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
                   >
                     <option value="all">📚 Tất cả bài</option>
                     {lessons.length > 0 ? (
@@ -590,11 +676,11 @@ export default function QuickLookupModal({
                   </select>
 
                   {/* Level Filter Buttons */}
-                  <div className="inline-flex rounded-xl p-1 bg-slate-200/70 dark:bg-slate-800/70">
+                  <div className="inline-flex rounded-xl p-1 bg-slate-200/70 dark:bg-slate-800/70 shrink-0">
                     <button
                       type="button"
                       onClick={() => setKanjiLevelFilter('all')}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         kanjiLevelFilter === 'all'
                           ? 'bg-purple-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -605,7 +691,7 @@ export default function QuickLookupModal({
                     <button
                       type="button"
                       onClick={() => setKanjiLevelFilter('n5')}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         kanjiLevelFilter === 'n5'
                           ? 'bg-emerald-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -616,7 +702,7 @@ export default function QuickLookupModal({
                     <button
                       type="button"
                       onClick={() => setKanjiLevelFilter('n4')}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         kanjiLevelFilter === 'n4'
                           ? 'bg-amber-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -626,7 +712,7 @@ export default function QuickLookupModal({
                     </button>
                   </div>
 
-                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1">
+                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1 shrink-0">
                     {filteredKanji.length} chữ
                   </span>
                 </div>
@@ -634,32 +720,32 @@ export default function QuickLookupModal({
 
               {/* Kanji Grid */}
               {loadingData ? (
-                <div className="py-20 flex flex-col items-center justify-center space-y-3 text-slate-400">
+                <div className="py-16 flex flex-col items-center justify-center space-y-3 text-slate-400">
                   <div className="w-8 h-8 border-3 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
                   <p className="text-xs">Đang tải toàn bộ kho chữ Kanji...</p>
                 </div>
               ) : filteredKanji.length === 0 ? (
-                <div className="py-20 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
-                  📭 Không tìm thấy chữ Kanji nào phù hợp với từ khóa "{kanjiSearch}".
+                <div className="py-16 px-4 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
+                  📭 Không tìm thấy chữ Kanji nào phù hợp với từ khóa &ldquo;{kanjiSearch}&rdquo;.
                 </div>
               ) : (
-                <div className="flex-1 overflow-y-auto pr-1">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-0.5 sm:pr-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3 pb-2">
                     {filteredKanji.map((kanji) => {
                       const isN5 = kanji.lesson_id <= 25;
                       return (
                         <div
                           key={kanji.id}
                           onClick={() => setSelectedKanjiDetail(kanji)}
-                          className="p-3.5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-purple-400/50 dark:hover:border-purple-500/50 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between gap-2.5 group"
+                          className="p-3.5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-purple-400/50 dark:hover:border-purple-500/50 hover:shadow-md transition-all cursor-pointer touch-manipulation flex flex-col justify-between gap-2.5 group"
                         >
                           <div className="flex items-start justify-between gap-2">
-                            <div className="flex items-center gap-2.5">
-                              <span className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white group-hover:scale-105 transition-transform">
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <span className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white group-hover:scale-105 transition-transform shrink-0">
                                 {kanji.character}
                               </span>
-                              <div>
-                                <span className="text-sm font-black text-purple-600 dark:text-purple-400 block">
+                              <div className="min-w-0">
+                                <span className="text-sm font-black text-purple-600 dark:text-purple-400 block truncate">
                                   {kanji.sino_vietnamese || 'HÁN TỰ'}
                                 </span>
                                 <span className="text-xs text-slate-600 dark:text-slate-300 font-semibold block line-clamp-1">
@@ -697,7 +783,7 @@ export default function QuickLookupModal({
                                 e.stopPropagation();
                                 playAudioWithFallback(kanji.character);
                               }}
-                              className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900 text-purple-600 dark:text-purple-400 flex items-center justify-center hover:scale-105 transition-transform text-xs cursor-pointer"
+                              className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900 text-purple-600 dark:text-purple-400 flex items-center justify-center hover:scale-105 transition-transform text-xs cursor-pointer touch-manipulation"
                               title="Phát âm"
                             >
                               🔊
@@ -710,7 +796,7 @@ export default function QuickLookupModal({
                                 onClose();
                                 router.push(`/lessons/${kanji.lesson_id}?tab=kanji`);
                               }}
-                              className="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-[11px] font-bold transition-all cursor-pointer"
+                              className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-[11px] font-bold transition-all cursor-pointer touch-manipulation"
                               title="Mở bài học này"
                             >
                               Bài {kanji.lesson_id} ➔
@@ -729,37 +815,38 @@ export default function QuickLookupModal({
           {/* TAB 3: TRA CỨU MẪU CÂU NGỮ PHÁP (GRAMMAR)                */}
           {/* ======================================================== */}
           {activeTab === 'grammar' && (
-            <div className="space-y-4 h-full flex flex-col">
+            <div className="flex-1 min-h-0 flex flex-col gap-3 sm:gap-4">
               {/* Toolbar Controls */}
-              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                <div className="relative flex-1">
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 shrink-0">
+                <div className="relative flex-1 min-w-0">
                   <input
+                    ref={searchInputRef}
                     type="text"
                     value={grammarSearch}
                     onChange={(e) => setGrammarSearch(e.target.value)}
-                    placeholder="Tìm theo mẫu câu (〜は〜です), ý nghĩa, cấu trúc, giải thích hoặc ví dụ..."
-                    className="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                    autoFocus
+                    placeholder="Tìm theo mẫu câu, ý nghĩa, cấu trúc hoặc ví dụ..."
+                    className="w-full min-h-[42px] pl-9 pr-9 py-2 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
                   />
-                  <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">🔍</span>
                   {grammarSearch && (
                     <button
                       type="button"
                       onClick={() => setGrammarSearch('')}
-                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 text-xs"
+                      aria-label="Xóa từ khóa"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 text-xs font-bold cursor-pointer touch-manipulation"
                     >
                       ✕
                     </button>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 min-w-0">
                   {/* Filter by JLPT Level */}
-                  <div className="inline-flex rounded-xl p-1 bg-slate-200/70 dark:bg-slate-800/70">
+                  <div className="inline-flex rounded-xl p-1 bg-slate-200/70 dark:bg-slate-800/70 shrink-0">
                     <button
                       type="button"
                       onClick={() => setGrammarLevelFilter('all')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         grammarLevelFilter === 'all'
                           ? 'bg-amber-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -770,24 +857,24 @@ export default function QuickLookupModal({
                     <button
                       type="button"
                       onClick={() => setGrammarLevelFilter('n5')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         grammarLevelFilter === 'n5'
                           ? 'bg-amber-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
-                      N5 (Bài 1-25)
+                      N5
                     </button>
                     <button
                       type="button"
                       onClick={() => setGrammarLevelFilter('n4')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         grammarLevelFilter === 'n4'
                           ? 'bg-amber-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
-                      N4 (Bài 26-50)
+                      N4
                     </button>
                   </div>
 
@@ -795,9 +882,9 @@ export default function QuickLookupModal({
                   <select
                     value={grammarLessonFilter}
                     onChange={(e) => setGrammarLessonFilter(e.target.value)}
-                    className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500/50 cursor-pointer"
+                    className="flex-1 sm:flex-initial min-w-0 max-w-full min-h-[38px] truncate px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500/50 cursor-pointer"
                   >
-                    <option value="all">Tất cả bài học (50 bài)</option>
+                    <option value="all">Tất cả 50 bài</option>
                     {lessons.map((lesson) => (
                       <option key={lesson.id} value={lesson.id.toString()}>
                         Bài {lesson.id}: {lesson.title}
@@ -805,7 +892,7 @@ export default function QuickLookupModal({
                     ))}
                   </select>
 
-                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1">
+                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1 shrink-0">
                     {filteredGrammar.length} mẫu
                   </span>
                 </div>
@@ -813,21 +900,21 @@ export default function QuickLookupModal({
 
               {/* Grammar Cards List */}
               {loadingData ? (
-                <div className="py-20 text-center text-slate-400 text-sm">
+                <div className="py-16 text-center text-slate-400 text-sm">
                   <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
                   Đang tải dữ liệu ngữ pháp...
                 </div>
               ) : filteredGrammar.length === 0 ? (
-                <div className="py-20 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
+                <div className="py-16 px-4 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
                   📭 Không tìm thấy mẫu câu nào phù hợp với bộ lọc hiện tại.
                 </div>
               ) : (
-                <div className="flex-1 overflow-y-auto pr-1 space-y-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-0.5 sm:pr-1">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-3.5 pb-2">
                     {filteredGrammar.map((item) => (
                       <div
                         key={item.id}
-                        className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-400/60 dark:hover:border-amber-500/60 hover:shadow-md transition-all flex flex-col justify-between gap-3 group"
+                        className="p-3.5 sm:p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-400/60 dark:hover:border-amber-500/60 hover:shadow-md transition-all flex flex-col justify-between gap-3 group"
                       >
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
@@ -840,7 +927,7 @@ export default function QuickLookupModal({
                                 onClose();
                                 router.push(`/lessons/${item.lesson_id}?tab=grammar`);
                               }}
-                              className="text-[11px] font-bold text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                              className="text-[11px] font-bold text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer touch-manipulation"
                               title="Đi đến bài học ngữ pháp này"
                             >
                               Bài {item.lesson_id} ➔
@@ -857,7 +944,7 @@ export default function QuickLookupModal({
                           </div>
 
                           {item.structure && (
-                            <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-900 dark:text-amber-200 leading-relaxed">
+                            <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-900 dark:text-amber-200 leading-relaxed whitespace-pre-line">
                               <span className="font-bold text-amber-600 dark:text-amber-400 mr-1.5">📐 Cấu trúc:</span>
                               {item.structure}
                             </div>
@@ -870,12 +957,11 @@ export default function QuickLookupModal({
                           )}
                         </div>
 
-                        {/* Example sentence with TTS */}
                         {item.japanese_example && (
                           <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800/80">
                             <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 flex items-start justify-between gap-2">
-                              <div className="space-y-1">
-                                <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">
+                              <div className="space-y-1 min-w-0">
+                                <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 break-words">
                                   {item.japanese_example}
                                 </p>
                                 {item.example_meaning && (
@@ -887,7 +973,7 @@ export default function QuickLookupModal({
                               <button
                                 type="button"
                                 onClick={() => speakTTS(item.japanese_example || '')}
-                                className="p-2 rounded-xl bg-amber-100 hover:bg-amber-200 dark:bg-amber-950 dark:hover:bg-amber-900 text-amber-700 dark:text-amber-300 transition-all text-xs cursor-pointer shrink-0"
+                                className="p-2 rounded-xl bg-amber-100 hover:bg-amber-200 dark:bg-amber-950 dark:hover:bg-amber-900 text-amber-700 dark:text-amber-300 transition-all text-xs cursor-pointer touch-manipulation shrink-0"
                                 title="Nghe câu ví dụ"
                               >
                                 🔊
@@ -913,37 +999,37 @@ export default function QuickLookupModal({
           {/* TAB 4: TRA CỨU BẢNG CHỮ CÁI (HIRAGANA & KATAKANA)        */}
           {/* ======================================================== */}
           {activeTab === 'kana' && (
-            <div className="space-y-4 h-full flex flex-col">
+            <div className="flex-1 min-h-0 flex flex-col gap-3 sm:gap-4">
               {/* Toolbar Controls */}
-              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                <div className="relative flex-1">
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 shrink-0">
+                <div className="relative flex-1 min-w-0">
                   <input
+                    ref={searchInputRef}
                     type="text"
                     value={kanaSearch}
                     onChange={(e) => setKanaSearch(e.target.value)}
-                    placeholder="Tìm theo ký tự (あ, ア), Romaji (a, ka, sa, tsu), hoặc mẹo nhớ..."
-                    className="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                    autoFocus
+                    placeholder="Tìm theo ký tự (あ, ア), Romaji (a, ka, tsu)..."
+                    className="w-full min-h-[42px] pl-9 pr-9 py-2 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[16px] sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
                   />
-                  <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">🔍</span>
                   {kanaSearch && (
                     <button
                       type="button"
                       onClick={() => setKanaSearch('')}
-                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 text-xs"
+                      aria-label="Xóa từ khóa"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 text-xs font-bold cursor-pointer touch-manipulation"
                     >
                       ✕
                     </button>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
-                  {/* Filter by Type */}
+                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-start gap-2 min-w-0">
                   <div className="inline-flex rounded-xl p-1 bg-slate-200/70 dark:bg-slate-800/70">
                     <button
                       type="button"
                       onClick={() => setKanaTypeFilter('all')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         kanaTypeFilter === 'all'
                           ? 'bg-emerald-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -954,28 +1040,28 @@ export default function QuickLookupModal({
                     <button
                       type="button"
                       onClick={() => setKanaTypeFilter('hiragana')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         kanaTypeFilter === 'hiragana'
                           ? 'bg-indigo-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
-                      Hiragana ({hiraganaData.length})
+                      Hira ({hiraganaData.length})
                     </button>
                     <button
                       type="button"
                       onClick={() => setKanaTypeFilter('katakana')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                         kanaTypeFilter === 'katakana'
                           ? 'bg-teal-600 text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
-                      Katakana ({katakanaData.length})
+                      Kata ({katakanaData.length})
                     </button>
                   </div>
 
-                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1">
+                  <span className="text-xs text-slate-400 font-bold whitespace-nowrap px-1 shrink-0">
                     {filteredKana.length} chữ
                   </span>
                 </div>
@@ -983,16 +1069,16 @@ export default function QuickLookupModal({
 
               {/* Kana Grid */}
               {filteredKana.length === 0 ? (
-                <div className="py-20 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
-                  📭 Không tìm thấy chữ cái nào phù hợp với từ khóa "{kanaSearch}".
+                <div className="py-16 px-4 text-center text-slate-400 text-sm border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/20">
+                  📭 Không tìm thấy chữ cái nào phù hợp với từ khóa &ldquo;{kanaSearch}&rdquo;.
                 </div>
               ) : (
-                <div className="flex-1 overflow-y-auto pr-1">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
+                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-0.5 sm:pr-1">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2.5 sm:gap-3 pb-2">
                     {filteredKana.map((item) => (
                       <div
                         key={`${item.type}_${item.id}`}
-                        className="p-3.5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-emerald-400/50 dark:hover:border-emerald-500/50 hover:shadow-md transition-all flex flex-col justify-between gap-2 group"
+                        className="p-3 sm:p-3.5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-emerald-400/50 dark:hover:border-emerald-500/50 hover:shadow-md transition-all flex flex-col justify-between gap-2 group"
                       >
                         <div className="flex items-start justify-between">
                           <span className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white group-hover:scale-110 transition-transform">
@@ -1001,7 +1087,7 @@ export default function QuickLookupModal({
                           <button
                             type="button"
                             onClick={() => playAudioWithFallback(item.char)}
-                            className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-600 dark:text-emerald-400 flex items-center justify-center hover:scale-105 transition-transform text-xs cursor-pointer"
+                            className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900 text-emerald-600 dark:text-emerald-400 flex items-center justify-center hover:scale-105 transition-transform text-xs cursor-pointer touch-manipulation"
                             title="Phát âm"
                           >
                             🔊
@@ -1013,7 +1099,7 @@ export default function QuickLookupModal({
                             <span className="text-sm font-black text-emerald-600 dark:text-emerald-400">
                               /{item.romaji}/
                             </span>
-                            <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded ${
+                            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${
                               item.type === 'hiragana'
                                 ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-400'
                                 : 'bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-400'
@@ -1034,11 +1120,11 @@ export default function QuickLookupModal({
           )}
         </div>
 
-        {/* Modal Footer with Quick Navigation Action */}
-        <div className="px-4 sm:px-6 py-3 border-t border-slate-200/80 dark:border-slate-800/80 bg-slate-50/90 dark:bg-slate-900/80 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
-          <span className="text-xs text-slate-400 dark:text-slate-500 text-center sm:text-left">
-            {activeTab === 'vocab' 
-              ? '💡 Nhấp vào bài học để chuyển ngay tới trang học từ vựng chi tiết' 
+        {/* Modal Footer with Thumb-Friendly Close + Quick Navigation Action */}
+        <div className="px-3.5 sm:px-6 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] border-t border-slate-200/80 dark:border-slate-800/80 bg-slate-50/95 dark:bg-slate-900/90 flex items-center justify-between gap-2.5 shrink-0">
+          <span className="hidden md:block text-xs text-slate-400 dark:text-slate-500 truncate">
+            {activeTab === 'vocab'
+              ? '💡 Nhấp vào bài học để chuyển ngay tới trang học từ vựng chi tiết'
               : activeTab === 'kanji'
               ? '💡 Bấm vào từng thẻ Kanji để xem chi tiết âm On/Kun, số nét & từ ghép'
               : activeTab === 'grammar'
@@ -1046,7 +1132,15 @@ export default function QuickLookupModal({
               : '💡 Bấm biểu tượng 🔊 để nghe phát âm từng chữ cái chuẩn giọng Nhật'}
           </span>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full md:w-auto">
+            <button
+              type="button"
+              onClick={onClose}
+              className="min-h-[40px] px-4 py-2 rounded-xl bg-slate-200/80 hover:bg-slate-300/80 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold transition-all active:scale-95 cursor-pointer touch-manipulation shrink-0"
+            >
+              ✕ Đóng
+            </button>
+
             {activeTab === 'kanji' ? (
               <button
                 type="button"
@@ -1054,9 +1148,9 @@ export default function QuickLookupModal({
                   onClose();
                   router.push(`/lessons/${currentLessonId || 1}?tab=kanji`);
                 }}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer"
+                className="flex-1 sm:flex-initial min-h-[40px] px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer touch-manipulation truncate"
               >
-                🉐 Đi đến trang học Kanji đầy đủ ➔
+                🉐 Trang học Kanji ➔
               </button>
             ) : activeTab === 'grammar' ? (
               <button
@@ -1066,9 +1160,9 @@ export default function QuickLookupModal({
                   const targetLesson = grammarLessonFilter !== 'all' ? grammarLessonFilter : (currentLessonId || 1);
                   router.push(`/lessons/${targetLesson}?tab=grammar`);
                 }}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer"
+                className="flex-1 sm:flex-initial min-h-[40px] px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer touch-manipulation truncate"
               >
-                📖 Đi đến trang học Ngữ pháp đầy đủ ➔
+                📖 Trang học Ngữ pháp ➔
               </button>
             ) : activeTab === 'kana' ? (
               <button
@@ -1077,9 +1171,9 @@ export default function QuickLookupModal({
                   onClose();
                   router.push('/kana');
                 }}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer"
+                className="flex-1 sm:flex-initial min-h-[40px] px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer touch-manipulation truncate"
               >
-                🔤 Đi đến Bảng Chữ Cái đầy đủ (Luyện viết & Flashcard) ➔
+                🔤 Bảng Chữ Cái đầy đủ ➔
               </button>
             ) : (
               <button
@@ -1089,35 +1183,39 @@ export default function QuickLookupModal({
                   const targetLesson = selectedLessonFilter !== 'all' ? selectedLessonFilter : (currentLessonId || 1);
                   router.push(`/lessons/${targetLesson}?tab=vocab`);
                 }}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer"
+                className="flex-1 sm:flex-initial min-h-[40px] px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black shadow-md transition-all active:scale-95 cursor-pointer touch-manipulation truncate"
               >
-                📖 Đi đến trang học Từ vựng đầy đủ ➔
+                📚 Trang học Từ vựng ➔
               </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* Kanji Detail Sub-modal */}
+      {/* Kanji Detail Sub-modal (Pinned Header & Footer + Safe-Area aware on Mobile) */}
       {selectedKanjiDetail && (
-        <div 
-          className="fixed inset-0 z-[100000] flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm"
-          onClick={() => setSelectedKanjiDetail(null)}
+        <div
+          className="fixed inset-0 z-[100000] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/85 backdrop-blur-sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedKanjiDetail(null);
+          }}
         >
-          <div 
-            className="w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto"
+          <div
+            className="w-full sm:max-w-lg max-h-[86dvh] bg-white dark:bg-slate-900 border-t sm:border border-slate-200 dark:border-slate-800 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <div className="flex items-center gap-3">
-                <span className="text-4xl font-black text-slate-900 dark:text-white">
+            {/* Sticky Header */}
+            <div className="flex items-center justify-between gap-2 px-4 sm:px-6 py-3.5 border-b border-slate-100 dark:border-slate-800 shrink-0">
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="text-4xl font-black text-slate-900 dark:text-white shrink-0">
                   {selectedKanjiDetail.character}
                 </span>
-                <div>
-                  <h3 className="text-lg font-black text-purple-600 dark:text-purple-400">
+                <div className="min-w-0">
+                  <h3 className="text-base sm:text-lg font-black text-purple-600 dark:text-purple-400 truncate">
                     {selectedKanjiDetail.sino_vietnamese || 'HÁN TỰ'}
                   </h3>
-                  <p className="text-xs text-slate-500 font-medium">
+                  <p className="text-xs text-slate-500 font-medium truncate">
                     {selectedKanjiDetail.vietnamese_meaning}
                   </p>
                 </div>
@@ -1125,25 +1223,28 @@ export default function QuickLookupModal({
               <button
                 type="button"
                 onClick={() => setSelectedKanjiDetail(null)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm"
+                aria-label="Đóng chi tiết Kanji"
+                className="min-h-[38px] px-3 rounded-xl bg-slate-100 hover:bg-rose-50 dark:bg-slate-800 dark:hover:bg-rose-950/60 text-slate-600 hover:text-rose-600 dark:text-slate-300 dark:hover:text-rose-300 text-xs font-extrabold flex items-center gap-1 cursor-pointer touch-manipulation shrink-0"
               >
-                ✕
+                <span>✕</span>
+                <span>Đóng</span>
               </button>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-700 dark:text-slate-300">
+            {/* Scrollable Detail Content */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6 space-y-3 text-xs text-slate-700 dark:text-slate-300">
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-3 bg-purple-50/50 dark:bg-purple-950/20 rounded-2xl border border-purple-100 dark:border-purple-900/40">
                   <span className="block font-black text-purple-700 dark:text-purple-300 mb-1">
                     📖 Âm Onyomi:
                   </span>
-                  <p className="font-semibold text-slate-800 dark:text-slate-200">{selectedKanjiDetail.onyomi || '—'}</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-200 break-words">{selectedKanjiDetail.onyomi || '—'}</p>
                 </div>
                 <div className="p-3 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-2xl border border-indigo-100 dark:border-indigo-900/40">
                   <span className="block font-black text-indigo-700 dark:text-indigo-300 mb-1">
                     🗣️ Âm Kunyomi:
                   </span>
-                  <p className="font-semibold text-slate-800 dark:text-slate-200">{selectedKanjiDetail.kunyomi || '—'}</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-200 break-words">{selectedKanjiDetail.kunyomi || '—'}</p>
                 </div>
               </div>
 
@@ -1177,7 +1278,7 @@ export default function QuickLookupModal({
                 const relatedVocabs = getRelatedVocabForKanji(selectedKanjiDetail.character, vocabList, kanjiList);
                 return (
                   <div className="p-3.5 bg-slate-100/70 dark:bg-slate-800/50 rounded-2xl space-y-2 border border-slate-200 dark:border-slate-700/60">
-                    <span className="block font-black text-purple-700 dark:text-purple-300 text-xs flex items-center gap-1.5">
+                    <span className="font-black text-purple-700 dark:text-purple-300 text-xs flex items-center gap-1.5">
                       <span>📚</span>
                       <span>Từ vựng bài học chứa chữ 【 {selectedKanjiDetail.character} 】 ({relatedVocabs.length} từ)</span>
                     </span>
@@ -1187,7 +1288,7 @@ export default function QuickLookupModal({
                         Chưa có từ vựng cụ thể nào trong bài học sử dụng trực tiếp chữ này.
                       </p>
                     ) : (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {relatedVocabs.map((v) => (
                           <div
                             key={v.id}
@@ -1199,7 +1300,7 @@ export default function QuickLookupModal({
                                   {v.kanji_form || v.hiragana}
                                 </span>
                                 {v.kanji_form && (
-                                  <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.2 rounded">
+                                  <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded">
                                     {v.hiragana}
                                   </span>
                                 )}
@@ -1218,7 +1319,7 @@ export default function QuickLookupModal({
                                 e.stopPropagation();
                                 playAudioWithFallback(v.kanji_form || v.hiragana, v.hiragana);
                               }}
-                              className="w-6 h-6 rounded-md bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 text-[11px] cursor-pointer"
+                              className="w-7 h-7 rounded-md bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 text-xs cursor-pointer touch-manipulation"
                               title="Nghe phát âm"
                             >
                               🔊
@@ -1232,11 +1333,12 @@ export default function QuickLookupModal({
               })()}
             </div>
 
-            <div className="pt-2 flex justify-between items-center">
+            {/* Sticky Footer */}
+            <div className="px-4 sm:px-6 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] border-t border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 flex justify-between items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => playAudioWithFallback(selectedKanjiDetail.character)}
-                className="px-3.5 py-2 rounded-xl bg-purple-100 hover:bg-purple-200 dark:bg-purple-950 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                className="min-h-[40px] px-3.5 py-2 rounded-xl bg-purple-100 hover:bg-purple-200 dark:bg-purple-950 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 text-xs font-bold flex items-center gap-1.5 cursor-pointer touch-manipulation"
               >
                 <span>🔊</span>
                 <span>Nghe phát âm</span>
@@ -1245,9 +1347,9 @@ export default function QuickLookupModal({
               <button
                 type="button"
                 onClick={() => setSelectedKanjiDetail(null)}
-                className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold cursor-pointer"
+                className="min-h-[40px] px-4 py-2 rounded-xl bg-slate-200/80 hover:bg-slate-300/80 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold cursor-pointer touch-manipulation"
               >
-                Đóng
+                ✕ Đóng chi tiết
               </button>
             </div>
           </div>
