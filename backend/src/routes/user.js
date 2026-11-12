@@ -160,6 +160,7 @@ function isSupabaseConfigured() {
 }
 
 function savePersistentPlans(plans) {
+  if (process.env.VERCEL) return;
   if (savePlansTimer) clearTimeout(savePlansTimer);
   savePlansTimer = setTimeout(() => {
     savePlansTimer = null;
@@ -974,10 +975,17 @@ router.post('/progress', async (req, res) => {
           }
         });
       }
-      mockDb.userProgress[key] = status;
-      progressService.savePersistentProgress(mockDb.userProgress);
-      progressService.invalidateUserSyncCache(userId);
-      await checkAndNotifyNewlyCompletedTasks(userId);
+      const prevMockStatus = mockDb.userProgress[key] || 'not_learned';
+      const doesMockMutationAffectPlan =
+        (item_type === 'vocabulary' || item_type === 'kanji' || item_type === 'grammar') &&
+        Number(item_id) < 100000 &&
+        (status === 'mastered' || prevMockStatus === 'mastered') &&
+        status !== prevMockStatus;
+
+      progressService.recordLocalProgressMutation(userId, item_type, [item_id], status);
+      if (doesMockMutationAffectPlan) {
+        await checkAndNotifyNewlyCompletedTasks(userId, { skipSync: true });
+      }
       return res.json({
         message: 'Progress updated successfully (Mock Mode)',
         progress: {
@@ -1055,7 +1063,20 @@ router.post('/progress', async (req, res) => {
       if (delError) throw delError;
     }
 
-    const { data, error } = await supabase
+    // Determine whether this item status change can possibly affect Study Plan 'mastered' task counts
+    const isPlanTrackedType =
+      (item_type === 'vocabulary' || item_type === 'kanji' || item_type === 'grammar') &&
+      Number(item_id) < 100000;
+    const prevKnownStatus = isPlanTrackedType
+      ? progressService.getKnownLocalItemStatus(userId, item_type, item_id)
+      : 'not_learned';
+    const doesMutationAffectPlan =
+      isPlanTrackedType &&
+      prevKnownStatus !== status &&
+      (status === 'mastered' || prevKnownStatus === 'mastered' || prevKnownStatus === undefined);
+
+    // Execute DB write in parallel with lightweight mastered-only sync & plan fetch (1 parallel wave instead of 5-7 sequential RTTs)
+    const upsertPromise = supabase
       .from('user_progress')
       .upsert({
         user_id: userId,
@@ -1067,14 +1088,19 @@ router.post('/progress', async (req, res) => {
       .select()
       .single();
 
+    const [{ data, error }] = await Promise.all([
+      upsertPromise,
+      doesMutationAffectPlan ? progressService.syncMasteredProgressForTracking(userId) : Promise.resolve(),
+      doesMutationAffectPlan ? getUserPlanAsync(userId) : Promise.resolve(null)
+    ]);
+
     if (error) throw error;
 
-    // Mirror to in-memory for instant auto-tracking reflection and disk persistence
-    if (!mockDb.userProgress) mockDb.userProgress = {};
-    mockDb.userProgress[`${userId}:${item_type}:${item_id}`] = status;
-    progressService.savePersistentProgress(mockDb.userProgress);
-    progressService.invalidateUserSyncCache(userId);
-    await checkAndNotifyNewlyCompletedTasks(userId);
+    // Update warm RAM cache in-place on top of synced state (never wiping our own fresh cache)
+    progressService.recordLocalProgressMutation(userId, item_type, [item_id], status);
+    if (doesMutationAffectPlan) {
+      await checkAndNotifyNewlyCompletedTasks(userId, { skipSync: true });
+    }
 
     res.json({ message: 'Progress updated successfully', progress: data });
   } catch (error) {
@@ -1104,8 +1130,20 @@ router.post('/progress/batch', async (req, res) => {
     }
 
     const userId = req.user.id;
-    await progressService.setItemProgressBatch(userId, item_type, item_ids, status);
-    await checkAndNotifyNewlyCompletedTasks(userId);
+    const doesBatchAffectPlan =
+      item_type === 'vocabulary' || item_type === 'kanji' || item_type === 'grammar';
+
+    await Promise.all([
+      progressService.setItemProgressBatch(userId, item_type, item_ids, status),
+      doesBatchAffectPlan ? progressService.syncMasteredProgressForTracking(userId) : Promise.resolve(),
+      doesBatchAffectPlan ? getUserPlanAsync(userId) : Promise.resolve(null)
+    ]);
+
+    // Ensure local mutation wins deterministically if parallel sync resolved after setItemProgressBatch
+    progressService.recordLocalProgressMutation(userId, item_type, item_ids, status);
+    if (doesBatchAffectPlan) {
+      await checkAndNotifyNewlyCompletedTasks(userId, { skipSync: true });
+    }
 
     return res.json({
       success: true,
@@ -2112,7 +2150,7 @@ router.post('/review-sessions', async (req, res) => {
       mockDb.userReviewSessions[key] = session_data;
     }
     progressService.savePersistentReviewSessions(mockDb.userReviewSessions);
-    progressService.invalidateUserSyncCache(userId);
+    progressService.invalidateReviewSessionsCache(userId);
 
     if (isSupabaseConfigured() && req.user && !req.user.isMock) {
       try {
@@ -2244,24 +2282,85 @@ function buildRationaleForDay(day) {
   return `Hôm nay bạn học toàn bộ lý thuyết Bài ${primaryLesson} gồm ${vocabCount} từ vựng (${vocabCount} WP), ${kanjiCount} chữ Hán (${kanjiCount * 3} WP) và ${grammarCount} mẫu câu (${grammarCount * 3} WP) — tổng ${dayWP} điểm tải, kết hợp làm ngay 2 phần ôn tập thực hành 4 dạng và ôn tích lũy để nắm vững toàn diện bài học.`;
 }
 
+// Pre-indexed Curriculum Maps & Reconciled Plan WeakMap to avoid 100k+ array iterations & regex scans on every click
+let _cachedCurriculumIndex = null;
+const _reconciledPlanSigs = new WeakMap();
+
+function getCurriculumIndex() {
+  const vocabArr = mockDb.vocabulary || [];
+  const kanjiArr = mockDb.kanji || [];
+  const grammarArr = mockDb.grammar || [];
+  const sig = `${vocabArr.length}:${kanjiArr.length}:${grammarArr.length}`;
+  if (_cachedCurriculumIndex && _cachedCurriculumIndex.sig === sig) {
+    return _cachedCurriculumIndex;
+  }
+
+  const vocabByLesson = new Map();
+  const kanjiByLesson = new Map();
+  const grammarByLesson = new Map();
+  for (let l = 1; l <= 50; l++) {
+    vocabByLesson.set(l, []);
+    kanjiByLesson.set(l, []);
+    grammarByLesson.set(l, []);
+  }
+
+  const vocabById = new Map();
+  for (const v of vocabArr) {
+    const id = Number(v.id);
+    const l = Number(v.lesson_id);
+    vocabById.set(id, v);
+    if (vocabByLesson.has(l)) vocabByLesson.get(l).push(v);
+  }
+
+  const kanjiById = new Map();
+  for (const k of kanjiArr) {
+    const id = Number(k.id);
+    const l = Number(k.lesson_id);
+    kanjiById.set(id, k);
+    if (kanjiByLesson.has(l)) kanjiByLesson.get(l).push(k);
+  }
+  for (let l = 1; l <= 50; l++) {
+    kanjiByLesson.get(l).sort((a, b) => Number(a.id) - Number(b.id));
+  }
+
+  const grammarById = new Map();
+  for (const g of grammarArr) {
+    const id = Number(g.id);
+    const l = Number(g.lesson_id);
+    grammarById.set(id, g);
+    if (grammarByLesson.has(l)) grammarByLesson.get(l).push(g);
+  }
+
+  _cachedCurriculumIndex = {
+    sig,
+    vocabByLesson,
+    kanjiByLesson,
+    grammarByLesson,
+    vocabById,
+    kanjiById,
+    grammarById
+  };
+  return _cachedCurriculumIndex;
+}
+
 function reconcilePlanWithCurriculum(plan) {
   if (!plan || !Array.isArray(plan.days)) return false;
+
+  const idx = getCurriculumIndex();
+  if (_reconciledPlanSigs.get(plan) === idx.sig) {
+    return false;
+  }
 
   const allDays = [
     ...(Array.isArray(plan.archivedPastDays) ? plan.archivedPastDays : []),
     ...plan.days
   ];
-  if (allDays.length === 0) return false;
-
-  const kanjiByLesson = new Map();
-  for (let l = 1; l <= 50; l++) {
-    kanjiByLesson.set(
-      l,
-      (mockDb.kanji || [])
-        .filter(k => Number(k.lesson_id) === l)
-        .sort((a, b) => Number(a.id) - Number(b.id))
-    );
+  if (allDays.length === 0) {
+    _reconciledPlanSigs.set(plan, idx.sig);
+    return false;
   }
+
+  const { kanjiByLesson, vocabByLesson, grammarByLesson, vocabById, kanjiById, grammarById } = idx;
 
   // Group kanji tasks and first grammar-day reference per lesson
   const kanjiTasksByLesson = new Map();
@@ -2379,9 +2478,6 @@ function reconcilePlanWithCurriculum(plan) {
 
   // Auto-heal any '?' encoding corruption in task titles, scopeDetails, or dayRationale from stale client caches
   const brokenEncodingRe = /B\?i |N\?m v\?ng|ch\? H\?n|H\?m nay|Ph\?n \d|t\? v\?ng|[A-Za-zÀ-ỹ]\?[A-Za-zÀ-ỹ]/;
-  const vocabById = new Map((mockDb.vocabulary || []).map(v => [Number(v.id), v]));
-  const kanjiById = new Map((mockDb.kanji || []).map(k => [Number(k.id), k]));
-  const grammarById = new Map((mockDb.grammar || []).map(g => [Number(g.id), g]));
 
   for (const day of allDays) {
     if (!Array.isArray(day.tasks)) continue;
@@ -2394,7 +2490,7 @@ function reconcilePlanWithCurriculum(plan) {
         const cnt = Number(task.targetCount) || ids.length || 1;
 
         if (task.itemType === 'vocabulary') {
-          const lessonVocabs = (mockDb.vocabulary || []).filter(v => Number(v.lesson_id) === l);
+          const lessonVocabs = vocabByLesson.get(l) || [];
           const sub = ids.map(id => vocabById.get(id)).filter(Boolean);
           const firstV = sub[0] || lessonVocabs[0];
           const lastV = sub[sub.length - 1] || lessonVocabs[lessonVocabs.length - 1];
@@ -2416,9 +2512,9 @@ function reconcilePlanWithCurriculum(plan) {
             : `Minna Bài ${l}: Nắm vững toàn bộ ${sub.length} chữ Hán`;
           task.scopeDetails = `Chữ Hán: ${chars}`;
         } else if (task.itemType === 'grammar') {
-          const lessonGrammars = (mockDb.grammar || []).filter(g => Number(g.lesson_id) === l);
+          const lessonGrammars = grammarByLesson.get(l) || [];
           const sub = (ids.length > 0 ? ids.map(id => grammarById.get(id)).filter(Boolean) : lessonGrammars);
-          const summary = sub.map((g, idx) => `${idx + 1}. ${g.title || g.structure}`).join(' • ');
+          const summary = sub.map((g, idx2) => `${idx2 + 1}. ${g.title || g.structure}`).join(' • ');
           task.title = totalParts > 1
             ? `Minna Bài ${l}: Làm chủ ngữ pháp (Phần ${part}/${totalParts}: ${sub.length} mẫu)`
             : `Minna Bài ${l}: Làm chủ ${sub.length} mẫu ngữ pháp cốt lõi`;
@@ -2449,6 +2545,7 @@ function reconcilePlanWithCurriculum(plan) {
     day.dayRationale = buildRationaleForDay(day);
   }
 
+  _reconciledPlanSigs.set(plan, idx.sig);
   return modified;
 }
 
@@ -2463,28 +2560,30 @@ function applyAutoTracking(plan, userId) {
   const userProgress = mockDb.userProgress || {};
   const userReviewSessions = mockDb.userReviewSessions || {};
   let planModified = reconcilePlanWithCurriculum(plan);
+  const idx = getCurriculumIndex();
 
-  // 1. Cache learned items per (lesson, itemType)
+  // 1. Cache learned items per (lesson, itemType) using O(1) pre-indexed Maps
   const learnedPool = {};
   const getLearnedInLesson = (lesson, itemType) => {
-    const key = `${lesson}:${itemType}`;
+    const lNum = Number(lesson);
+    const key = `${lNum}:${itemType}`;
     if (learnedPool[key] !== undefined) return learnedPool[key];
 
     let items = [];
     if (itemType === 'vocabulary') {
-      items = (mockDb.vocabulary || []).filter(v => Number(v.lesson_id) === Number(lesson));
+      items = idx.vocabByLesson.get(lNum) || [];
     } else if (itemType === 'kanji') {
-      items = (mockDb.kanji || []).filter(k => Number(k.lesson_id) === Number(lesson));
+      items = idx.kanjiByLesson.get(lNum) || [];
     } else if (itemType === 'grammar') {
-      items = (mockDb.grammar || []).filter(g => Number(g.lesson_id) === Number(lesson));
+      items = idx.grammarByLesson.get(lNum) || [];
     }
 
-    const learnedSet = new Set(
-      items.filter(it => {
-        const s = userProgress[`${userId}:${itemType}:${it.id}`];
-        return s === 'mastered';
-      }).map(it => Number(it.id))
-    );
+    const learnedSet = new Set();
+    for (const it of items) {
+      if (userProgress[`${userId}:${itemType}:${it.id}`] === 'mastered') {
+        learnedSet.add(Number(it.id));
+      }
+    }
 
     learnedPool[key] = {
       total: learnedSet.size,
@@ -2580,12 +2679,15 @@ function applyAutoTracking(plan, userId) {
 /**
  * Tự động kiểm tra hoàn thành nhiệm vụ theo tiến độ học tập thực tế và bắn chuông thông báo về điện thoại
  */
-async function checkAndNotifyNewlyCompletedTasks(userId) {
+async function checkAndNotifyNewlyCompletedTasks(userId, options = {}) {
   try {
-    // Synchronize latest Supabase user_progress before auto-tracking
-    await syncUserProgressFromSupabase(userId);
+    // Load mastered progress & active study plan in parallel (or skip sync if caller already synced in parallel)
+    const [, fetchedPlan] = await Promise.all([
+      options.skipSync ? Promise.resolve() : progressService.syncMasteredProgressForTracking(userId),
+      getUserPlanAsync(userId)
+    ]);
 
-    let plan = await getUserPlanAsync(userId);
+    let plan = fetchedPlan;
     if (!plan || !Array.isArray(plan.days)) return;
 
     // Lấy ngày hôm nay theo múi giờ Việt Nam
@@ -2843,20 +2945,21 @@ router.post('/daily-tasks/schedule', async (req, res) => {
       : (typeof taskId === 'string' && taskId.includes(',') ? taskId.split(',').map(s => s.trim()) : [taskId]);
 
     const plan = await getUserPlanAsync(userId);
+    let debt = { hasDebt: false, yesterdayDate: null, debtItems: [] };
+
     if (plan) {
       const allPlanDays = [
         ...(plan.days || []),
         ...(plan.archivedPastDays || [])
       ];
 
-      let anyTaskFound = false;
+      const sideEffectPromises = [];
 
       for (const targetId of targetIds) {
         for (const day of allPlanDays) {
           if (!date || day.date === date || targetIds.length > 1) {
             const task = day.tasks ? day.tasks.find(t => t.id === targetId) : null;
             if (task) {
-              anyTaskFound = true;
               if (due_time !== undefined) task.due_time = due_time;
               if (completed !== undefined) {
                 task.completed = completed;
@@ -2866,18 +2969,21 @@ router.post('/daily-tasks/schedule', async (req, res) => {
                   task.currentCount = task.targetCount || 1;
                   task.progressPct = 100;
 
-                  // Synchronize task items into user_progress table and disk cache
+                  // Synchronize task items into user_progress table and RAM cache in parallel
                   if (task.itemIds && Array.isArray(task.itemIds) && task.itemIds.length > 0 && task.itemType) {
-                    try {
-                      await progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered');
-                    } catch (e) {
-                      console.warn('[DailyTasks] Error auto-marking items mastered:', e.message);
-                    }
+                    progressService.recordLocalProgressMutation(userId, task.itemType, task.itemIds, 'mastered');
+                    sideEffectPromises.push(
+                      progressService.setItemProgressBatch(userId, task.itemType, task.itemIds, 'mastered').catch(e => {
+                        console.warn('[DailyTasks] Error auto-marking items mastered:', e.message);
+                      })
+                    );
                   }
 
-                  // Synchronize review session record if this is a review task
+                  // Synchronize review session record if this is a review task in parallel
                   if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
-                    await syncManualReviewSession(userId, task, true, req.user && req.user.isMock);
+                    sideEffectPromises.push(
+                      syncManualReviewSession(userId, task, true, req.user && req.user.isMock)
+                    );
                   }
 
                   const dayTasks = day.tasks || [];
@@ -2898,7 +3004,9 @@ router.post('/daily-tasks/schedule', async (req, res) => {
                   task.progressPct = 0;
                   if (task.itemType === 'single_review' || task.itemType === 'cumulative_review') {
                     task.manualUnmarked = true;
-                    await syncManualReviewSession(userId, task, false, req.user && req.user.isMock);
+                    sideEffectPromises.push(
+                      syncManualReviewSession(userId, task, false, req.user && req.user.isMock)
+                    );
                   }
                 }
               }
@@ -2914,10 +3022,28 @@ router.post('/daily-tasks/schedule', async (req, res) => {
       if (!mockDb.studyPlans) mockDb.studyPlans = {};
       mockDb.studyPlans[userId] = plan;
       savePersistentPlans(mockDb.studyPlans);
-      await persistPlanToSupabase(userId, plan);
+
+      // Run all Supabase writes (progress batch, review session, and updated study plan) concurrently in 1 wave
+      await Promise.all([
+        ...sideEffectPromises,
+        persistPlanToSupabase(userId, plan)
+      ]);
+
+      try {
+        debt = aiPlannerService.getUnfinishedDebt({
+          userId,
+          plan,
+          currentDate: getVietnamDateStr()
+        });
+      } catch (_) {}
     }
 
-    return res.json({ success: true, message: 'Đã cập nhật nhiệm vụ thành công', updatedPlan: plan });
+    return res.json({
+      success: true,
+      message: 'Đã cập nhật nhiệm vụ thành công',
+      updatedPlan: plan,
+      debt
+    });
   } catch (err) {
     console.error('Error scheduling daily task:', err);
     return res.status(500).json({ success: false, error: err.message });

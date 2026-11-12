@@ -451,25 +451,46 @@ export default function KnowledgeHubPage() {
     setPracticeList([]);
   };
 
-  // Sync state update of item status
+  // Sync state update of item status (Optimistic UI 0ms + automatic rollback on error)
   const handleItemStatusChange = async (itemId: number, itemType: 'vocabulary' | 'kanji' | 'grammar', newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    const prevStatus =
+      itemType === 'vocabulary'
+        ? (vocabList.find(item => item.id === itemId)?.status || 'not_learned')
+        : itemType === 'kanji'
+        ? (kanjiList.find(item => item.id === itemId)?.status || 'not_learned')
+        : (grammarList.find(item => item.id === itemId)?.status || 'not_learned');
+
+    // 1. Instant Optimistic UI update
+    if (itemType === 'vocabulary') {
+      setVocabList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+    } else if (itemType === 'kanji') {
+      setKanjiList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+      setSelectedKanjiModal(prev => (prev && prev.id === itemId ? { ...prev, status: newStatus } : prev));
+    } else if (itemType === 'grammar') {
+      setGrammarList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+    }
+    showToast('Cập nhật trạng thái thành công!');
+
+    // 2. Persist in background & rollback on error
     try {
       await api.post('/api/user/progress', {
         item_type: itemType,
         item_id: itemId,
         status: newStatus
       });
-      if (itemType === 'vocabulary') {
-        setVocabList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-      } else if (itemType === 'kanji') {
-        setKanjiList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-      } else if (itemType === 'grammar') {
-        setGrammarList(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-      }
-      showToast('Cập nhật trạng thái thành công!');
     } catch (err: any) {
       console.error('Failed to update status:', err);
-      showToast('Lỗi cập nhật trạng thái học tập.');
+      if (itemType === 'vocabulary') {
+        setVocabList(prev => prev.map(item => item.id === itemId ? { ...item, status: prevStatus } : item));
+      } else if (itemType === 'kanji') {
+        setKanjiList(prev => prev.map(item => item.id === itemId ? { ...item, status: prevStatus } : item));
+        setSelectedKanjiModal(prev => (prev && prev.id === itemId ? { ...prev, status: prevStatus } : prev));
+      } else if (itemType === 'grammar') {
+        const safeGrammarStatus: GrammarItem['status'] =
+          prevStatus === 'wrong' ? 'learning' : prevStatus;
+        setGrammarList(prev => prev.map(item => item.id === itemId ? { ...item, status: safeGrammarStatus } : item));
+      }
+      showToast('Lỗi cập nhật trạng thái học tập, đã hoàn tác.');
     }
   };
 

@@ -39,6 +39,7 @@ function loadStudyTime() {
 
 function saveStudyTime(data) {
   studyTimeMemoryStore = data;
+  if (process.env.VERCEL) return;
   if (saveStudyTimeTimer) clearTimeout(saveStudyTimeTimer);
   saveStudyTimeTimer = setTimeout(() => {
     saveStudyTimeTimer = null;

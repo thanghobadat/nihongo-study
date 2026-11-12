@@ -2010,76 +2010,66 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   };
 
-  // Update study status
+  // Update study status (Optimistic UI 0ms + automatic rollback on error)
 
   const handleStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    const prevStatus = vocabItems.find(item => item.id === itemId)?.status || 'not_learned';
 
-    try {
+    // 1. Instant Optimistic UI update (0ms perceived latency)
+    setVocabItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
 
-      await api.post('/api/user/progress', {
-
-        item_type: 'vocabulary',
-
-        item_id: itemId,
-
-        status: newStatus
-
-      });
-
-      setVocabItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-
-      if (newStatus === 'mastered') {
-        showNotification('Đã cập nhật: Đã thuộc 🟢 (Tự động ghi nhận hoàn thành vào Plan)');
-      } else if (newStatus === 'learning') {
-        showNotification('Đã cập nhật: Đang học 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)');
-      } else {
-        showNotification('Đã cập nhật: Chưa học ⚪');
-      }
-
-    } catch (error) {
-
-      console.error('Failed to update status:', error);
-
-      showNotification('Lỗi cập nhật trạng thái học tập.');
-
+    if (newStatus === 'mastered') {
+      showNotification('Đã cập nhật: Đã thuộc 🟢 (Tự động ghi nhận hoàn thành vào Plan)');
+    } else if (newStatus === 'learning') {
+      showNotification('Đã cập nhật: Đang học 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)');
+    } else {
+      showNotification('Đã cập nhật: Chưa học ⚪');
     }
 
+    // 2. Persist in background & rollback safely if server fails
+    try {
+      await api.post('/api/user/progress', {
+        item_type: 'vocabulary',
+        item_id: itemId,
+        status: newStatus
+      });
+    } catch (error) {
+      console.error('Failed to update status:', error);
+      setVocabItems(prev => prev.map(item => item.id === itemId ? { ...item, status: prevStatus } : item));
+      showNotification('Lỗi cập nhật trạng thái học tập, đã hoàn tác.');
+    }
   };
 
-  // Update kanji study status
+  // Update kanji study status (Optimistic UI 0ms + automatic rollback on error)
 
   const handleKanjiStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    const prevStatus = kanjiItems.find(item => item.id === itemId)?.status || 'not_learned';
 
-    try {
+    // 1. Instant Optimistic UI update (0ms perceived latency)
+    setKanjiItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+    setSelectedKanjiModal((prev: any) => (prev && prev.id === itemId ? { ...prev, status: newStatus } : prev));
 
-      await api.post('/api/user/progress', {
-
-        item_type: 'kanji',
-
-        item_id: itemId,
-
-        status: newStatus
-
-      });
-
-      setKanjiItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-
-      if (newStatus === 'mastered') {
-        showNotification('Đã cập nhật: Đã thuộc chữ Hán 🟢 (Tự động ghi nhận hoàn thành vào Plan)');
-      } else if (newStatus === 'learning') {
-        showNotification('Đã cập nhật: Đang học chữ Hán 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)');
-      } else {
-        showNotification('Đã cập nhật: Chưa học ⚪');
-      }
-
-    } catch (error) {
-
-      console.error('Failed to update kanji status:', error);
-
-      showNotification('Lỗi cập nhật trạng thái học tập.');
-
+    if (newStatus === 'mastered') {
+      showNotification('Đã cập nhật: Đã thuộc chữ Hán 🟢 (Tự động ghi nhận hoàn thành vào Plan)');
+    } else if (newStatus === 'learning') {
+      showNotification('Đã cập nhật: Đang học chữ Hán 🟡 (Cần chọn "Đã thuộc 🟢" để hoàn thành nhiệm vụ)');
+    } else {
+      showNotification('Đã cập nhật: Chưa học ⚪');
     }
 
+    // 2. Persist in background & rollback safely if server fails
+    try {
+      await api.post('/api/user/progress', {
+        item_type: 'kanji',
+        item_id: itemId,
+        status: newStatus
+      });
+    } catch (error) {
+      console.error('Failed to update kanji status:', error);
+      setKanjiItems(prev => prev.map(item => item.id === itemId ? { ...item, status: prevStatus } : item));
+      setSelectedKanjiModal((prev: any) => (prev && prev.id === itemId ? { ...prev, status: prevStatus } : prev));
+      showNotification('Lỗi cập nhật trạng thái học tập, đã hoàn tác.');
+    }
   };
 
   // ==================== KANJI MODAL DRAWING HANDLERS ====================
@@ -2343,50 +2333,46 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     }
   };
 
-  // Update grammar study status
+  // Update grammar study status (Optimistic UI 0ms + automatic rollback on error)
 
   const handleGrammarStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    const prevStatus = grammarItems.find(item => item.id === itemId)?.status || 'not_learned';
+
+    setGrammarItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+    showNotification('Đã cập nhật trạng thái học tập ngữ pháp!');
 
     try {
-
       await api.post('/api/user/progress', {
-
         item_type: 'grammar',
-
         item_id: itemId,
-
         status: newStatus
-
       });
-
-      setGrammarItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-
-      showNotification('Đã cập nhật trạng thái học tập ngữ pháp!');
-
     } catch (error) {
-
       console.error('Failed to update grammar status:', error);
-
-      showNotification('Lỗi cập nhật trạng thái học tập.');
-
+      setGrammarItems(prev => prev.map(item => item.id === itemId ? { ...item, status: prevStatus } : item));
+      showNotification('Lỗi cập nhật trạng thái học tập, đã hoàn tác.');
     }
-
   };
 
   const handleBatchVocabStatus = async (targetStatus: 'mastered' | 'not_learned') => {
     if (!vocabItems || vocabItems.length === 0) return;
+    const prevSnapshot = vocabItems.map(item => ({ ...item }));
+    const itemIds = vocabItems.map(v => v.id);
+
+    // Optimistic UI update immediately
+    setVocabItems(prev => prev.map(item => ({ ...item, status: targetStatus })));
+    showNotification(targetStatus === 'mastered' ? '🎉 Đã đánh dấu thuộc toàn bộ từ vựng bài này!' : 'Đã đặt lại trạng thái từ vựng về chưa học.');
+
     try {
-      const itemIds = vocabItems.map(v => v.id);
       await api.post('/api/user/progress/batch', {
         item_type: 'vocabulary',
         item_ids: itemIds,
         status: targetStatus
       });
-      setVocabItems(prev => prev.map(item => ({ ...item, status: targetStatus })));
-      showNotification(targetStatus === 'mastered' ? '🎉 Đã đánh dấu thuộc toàn bộ từ vựng bài này!' : 'Đã đặt lại trạng thái từ vựng về chưa học.');
     } catch (error) {
       console.error('Failed to batch update vocab status:', error);
-      showNotification('Lỗi cập nhật trạng thái từ vựng.');
+      setVocabItems(prevSnapshot);
+      showNotification('Lỗi cập nhật trạng thái từ vựng, đã hoàn tác.');
     }
   };
 
@@ -2554,32 +2540,15 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
     setAutoResults((prev) => [...prev, { item: currentItem, learned }]);
 
-    // Update study status in database/mock database (do not downgrade already mastered items on passive timer expiry)
-
-    try {
-
-      const shouldSkipDowngrade = isFromExpiry && !learned && currentItem.status === 'mastered';
-
-      if (!shouldSkipDowngrade) {
-
-        const newStatus = learned ? 'mastered' : 'learning';
-
-        if (flashcardType === 'vocab') {
-
-          await handleStatusChange(currentItem.id, newStatus);
-
-        } else {
-
-          await handleKanjiStatusChange(currentItem.id, newStatus);
-
-        }
-
+    // Update study status optimistically without blocking next-card transition (do not downgrade already mastered items on passive timer expiry)
+    const shouldSkipDowngrade = isFromExpiry && !learned && currentItem.status === 'mastered';
+    if (!shouldSkipDowngrade) {
+      const newStatus = learned ? 'mastered' : 'learning';
+      if (flashcardType === 'vocab') {
+        void handleStatusChange(currentItem.id, newStatus);
+      } else {
+        void handleKanjiStatusChange(currentItem.id, newStatus);
       }
-
-    } catch (err) {
-
-      console.error('Failed to update status in auto flashcard check:', err);
-
     }
 
     // Go to next card or show summary

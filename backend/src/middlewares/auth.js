@@ -6,15 +6,19 @@ const MAX_AUTH_CACHE_SIZE = 500;
 const authCache = new Map();
 const authInFlight = new Map();
 
-function getJwtExpMs(token) {
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function decodeJwtMetaUnsafe(token) {
   try {
     const parts = token.split('.');
-    if (parts.length !== 3) return null;
+    if (parts.length !== 3) return { expMs: null, sub: null };
     const payloadJson = Buffer.from(parts[1], 'base64url').toString('utf8');
     const payload = JSON.parse(payloadJson);
-    return typeof payload.exp === 'number' ? payload.exp * 1000 : null;
+    const expMs = typeof payload.exp === 'number' ? payload.exp * 1000 : null;
+    const sub = typeof payload.sub === 'string' && UUID_RE.test(payload.sub) ? payload.sub : null;
+    return { expMs, sub };
   } catch (_) {
-    return null;
+    return { expMs: null, sub: null };
   }
 }
 
@@ -91,7 +95,7 @@ const requireAuth = async (req, res, next) => {
     }
 
     const now = Date.now();
-    const expMs = getJwtExpMs(token);
+    const { expMs, sub: candidateSub } = decodeJwtMetaUnsafe(token);
     if (expMs !== null && now >= expMs) {
       authCache.delete(token);
       return res.status(401).json({ error: 'Unauthorized: Invalid or expired token', code: 'TOKEN_EXPIRED' });
@@ -106,15 +110,29 @@ const requireAuth = async (req, res, next) => {
     let verifyPromise = authInFlight.get(token);
     if (!verifyPromise) {
       verifyPromise = (async () => {
-        const { data: { user }, error } = await supabase.auth.getUser(token);
-        if (error || !user) {
+        // Run getUser(token) and speculative profile read in parallel (1 RTT instead of 2 RTTs).
+        // Security invariant: speculative profile is ONLY used after getUser(token) verifies user.id === candidateSub.
+        const [authRes, speculativeProfileRes] = await Promise.all([
+          supabase.auth.getUser(token),
+          candidateSub
+            ? supabase.from('profiles').select('role, display_name').eq('id', candidateSub).maybeSingle()
+            : Promise.resolve({ data: null })
+        ]);
+
+        const user = authRes?.data?.user;
+        if (authRes?.error || !user) {
           return null;
         }
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('role, display_name')
-          .eq('id', user.id)
-          .maybeSingle();
+
+        let profile = user.id === candidateSub ? speculativeProfileRes?.data : null;
+        if (user.id !== candidateSub) {
+          const { data: fallbackProfile } = await supabase
+            .from('profiles')
+            .select('role, display_name')
+            .eq('id', user.id)
+            .maybeSingle();
+          profile = fallbackProfile;
+        }
 
         const resolvedUser = {
           id: user.id,

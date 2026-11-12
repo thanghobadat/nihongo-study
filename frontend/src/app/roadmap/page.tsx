@@ -115,17 +115,22 @@ export default function RoadmapPage() {
   };
 
   const handleGrammarStatusChange = async (itemId: number, newStatus: 'not_learned' | 'learning' | 'mastered') => {
+    const prevStatus = grammarItems.find(item => item.id === itemId)?.status || 'not_learned';
+
+    // Optimistic UI update immediately (0ms delay)
+    setGrammarItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
+    showNotification('Đã cập nhật trạng thái học tập ngữ pháp!');
+
     try {
       await api.post('/api/user/progress', {
         item_type: 'grammar',
         item_id: itemId,
         status: newStatus
       });
-      setGrammarItems(prev => prev.map(item => item.id === itemId ? { ...item, status: newStatus } : item));
-      showNotification('Đã cập nhật trạng thái học tập ngữ pháp!');
     } catch (error) {
       console.error('Failed to update grammar status:', error);
-      showNotification('Lỗi cập nhật trạng thái học tập.');
+      setGrammarItems(prev => prev.map(item => item.id === itemId ? { ...item, status: prevStatus } : item));
+      showNotification('Lỗi cập nhật trạng thái học tập, đã hoàn tác.');
     }
   };
 

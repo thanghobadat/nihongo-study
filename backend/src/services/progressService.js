@@ -8,8 +8,13 @@ const USER_REVIEW_SESSIONS_FILE = path.join(__dirname, '../db/user_review_sessio
 const STUDY_PLANS_FILE = path.join(__dirname, '../db/study_plans.json');
 
 const PROGRESS_SYNC_TTL_MS = 5000;
+const REVIEW_SESSIONS_SYNC_TTL_MS = 30000;
 const progressSyncInFlight = new Map();
+const masteredSyncInFlight = new Map();
 const progressLastSyncAt = new Map();
+const masteredLastSyncAt = new Map();
+const reviewSessionsLastSyncAt = new Map();
+const progressHydratedUsers = new Set();
 let saveProgressTimer = null;
 let saveReviewSessionsTimer = null;
 
@@ -32,6 +37,7 @@ function loadPersistentProgress() {
  * Save user progress to local JSON file asynchronously (debounced, non-blocking)
  */
 function savePersistentProgress(progress) {
+  if (process.env.VERCEL) return;
   if (saveProgressTimer) clearTimeout(saveProgressTimer);
   saveProgressTimer = setTimeout(() => {
     saveProgressTimer = null;
@@ -60,6 +66,7 @@ function loadPersistentReviewSessions() {
  * Save user review sessions to local JSON file asynchronously (debounced, non-blocking)
  */
 function savePersistentReviewSessions(sessions) {
+  if (process.env.VERCEL) return;
   if (saveReviewSessionsTimer) clearTimeout(saveReviewSessionsTimer);
   saveReviewSessionsTimer = setTimeout(() => {
     saveReviewSessionsTimer = null;
@@ -95,15 +102,21 @@ function isSupabaseConfigured() {
 }
 
 /**
- * Immediately invalidate coalescing sync cache for a user after any write/mutation
+ * Immediately invalidate coalescing sync cache for a user after full reset / external bust
  */
 function invalidateUserSyncCache(userId) {
   if (!userId) {
     progressLastSyncAt.clear();
+    masteredLastSyncAt.clear();
+    reviewSessionsLastSyncAt.clear();
+    progressHydratedUsers.clear();
     return;
   }
   const uid = String(userId);
   progressLastSyncAt.delete(uid);
+  masteredLastSyncAt.delete(uid);
+  reviewSessionsLastSyncAt.delete(uid);
+  progressHydratedUsers.delete(uid);
   try {
     const studyTimeService = require('./studyTimeService');
     if (typeof studyTimeService.invalidateStudyTimeCache === 'function') {
@@ -113,11 +126,75 @@ function invalidateUserSyncCache(userId) {
 }
 
 /**
+ * Invalidate only review-sessions cache (without wiping vocabulary/kanji/grammar progress cache)
+ */
+function invalidateReviewSessionsCache(userId) {
+  if (!userId) {
+    reviewSessionsLastSyncAt.clear();
+    return;
+  }
+  reviewSessionsLastSyncAt.delete(String(userId));
+}
+
+/**
+ * Return known local item status if user's progress cache is hydrated in memory, or undefined if unknown (cold start)
+ */
+function getKnownLocalItemStatus(userId, itemType, itemId) {
+  if (!userId) return undefined;
+  const uid = String(userId);
+  if (isSupabaseConfigured() && !progressHydratedUsers.has(uid)) {
+    return undefined;
+  }
+  const val = mockDb.userProgress && mockDb.userProgress[`${uid}:${itemType}:${itemId}`];
+  return val || 'not_learned';
+}
+
+/**
+ * Record an already-validated progress mutation in RAM without wiping warm sync caches
+ */
+function recordLocalProgressMutation(userId, itemType, itemIds, status) {
+  if (!userId || !itemType) return;
+  const uid = String(userId);
+  const ids = Array.isArray(itemIds) ? itemIds : [itemIds];
+  if (!mockDb.userProgress) mockDb.userProgress = {};
+
+  for (const id of ids) {
+    const key = `${uid}:${itemType}:${id}`;
+    if (status === 'not_learned') {
+      delete mockDb.userProgress[key];
+    } else {
+      mockDb.userProgress[key] = status;
+    }
+  }
+
+  // If cache was already warm within TTL, keep it warm since RAM now reflects the latest write
+  const now = Date.now();
+  const lastFull = progressLastSyncAt.get(uid) || 0;
+  if (lastFull > 0 && now - lastFull < PROGRESS_SYNC_TTL_MS) {
+    progressLastSyncAt.set(uid, now);
+  }
+  const lastMastered = masteredLastSyncAt.get(uid) || 0;
+  if (lastMastered > 0 && now - lastMastered < PROGRESS_SYNC_TTL_MS) {
+    masteredLastSyncAt.set(uid, now);
+  }
+
+  savePersistentProgress(mockDb.userProgress);
+}
+
+/**
  * Synchronize user review sessions from Supabase into memory and disk cache
  */
-async function syncUserReviewSessionsFromSupabase(userId) {
+async function syncUserReviewSessionsFromSupabase(userId, options = {}) {
   if (!userId || !isSupabaseConfigured()) {
     return;
+  }
+  const uid = String(userId);
+  const now = Date.now();
+  if (!options.force) {
+    const lastSync = reviewSessionsLastSyncAt.get(uid) || 0;
+    if (now - lastSync < REVIEW_SESSIONS_SYNC_TTL_MS) {
+      return;
+    }
   }
   try {
     const { data, error } = await supabase
@@ -137,9 +214,99 @@ async function syncUserReviewSessionsFromSupabase(userId) {
       }
       savePersistentReviewSessions(mockDb.userReviewSessions);
     }
+    reviewSessionsLastSyncAt.set(uid, Date.now());
   } catch (err) {
     console.warn('[ProgressService] Error during Supabase review session sync:', err.message);
   }
+}
+
+/**
+ * Lightweight sync exclusively for Study Plan auto-tracking:
+ * Only fetches 'mastered' rows from user_progress (skips heavy JLPT review_sessions JSONB and study_time).
+ */
+async function syncMasteredProgressForTracking(userId, options = {}) {
+  if (!userId || !isSupabaseConfigured()) {
+    return;
+  }
+  const uid = String(userId);
+  const now = Date.now();
+  if (!options.force) {
+    const lastMastered = masteredLastSyncAt.get(uid) || 0;
+    const lastFull = progressLastSyncAt.get(uid) || 0;
+    if (now - Math.max(lastMastered, lastFull) < PROGRESS_SYNC_TTL_MS) {
+      return;
+    }
+  }
+
+  // If a full sync is already in flight, piggyback on it
+  const existingFull = progressSyncInFlight.get(uid);
+  if (existingFull) {
+    return existingFull;
+  }
+
+  let inFlight = masteredSyncInFlight.get(uid);
+  if (inFlight) {
+    return inFlight;
+  }
+
+  inFlight = (async () => {
+    try {
+      const allMasteredRows = [];
+      let from = 0;
+      const pageSize = 1000;
+      let fetchErr = null;
+
+      while (true) {
+        const { data, error } = await supabase
+          .from('user_progress')
+          .select('item_type, item_id')
+          .eq('user_id', userId)
+          .eq('status', 'mastered')
+          .range(from, from + pageSize - 1);
+
+        if (error) {
+          fetchErr = error;
+          break;
+        }
+        if (!data || data.length === 0) break;
+        allMasteredRows.push(...data);
+        if (data.length < pageSize) break;
+        from += pageSize;
+      }
+
+      if (fetchErr) {
+        console.warn('[ProgressService] Supabase mastered sync warning:', fetchErr.message);
+        return;
+      }
+
+      if (!mockDb.userProgress) mockDb.userProgress = {};
+      const prefix = `${uid}:`;
+      const remoteMasteredKeys = new Set(
+        allMasteredRows.map(row => `${uid}:${row.item_type}:${row.item_id}`)
+      );
+
+      // Clear any stale 'mastered' flags unmarked on another device while preserving 'learning'/'wrong' in RAM
+      for (const k of Object.keys(mockDb.userProgress)) {
+        if (k.startsWith(prefix) && mockDb.userProgress[k] === 'mastered' && !remoteMasteredKeys.has(k)) {
+          delete mockDb.userProgress[k];
+        }
+      }
+      for (const k of remoteMasteredKeys) {
+        mockDb.userProgress[k] = 'mastered';
+      }
+
+      progressHydratedUsers.add(uid);
+      masteredLastSyncAt.set(uid, Date.now());
+      savePersistentProgress(mockDb.userProgress);
+    } catch (err) {
+      console.warn('[ProgressService] Error during mastered progress sync:', err.message);
+    } finally {
+      masteredSyncInFlight.delete(uid);
+    }
+  })();
+
+  masteredSyncInFlight.set(uid, inFlight);
+  return inFlight;
 }
 
 /**
@@ -202,6 +369,7 @@ async function syncUserProgressFromSupabase(userId, options = {}) {
           for (const row of allRows) {
             mockDb.userProgress[`${userId}:${row.item_type}:${row.item_id}`] = row.status;
           }
+          progressHydratedUsers.add(uid);
           savePersistentProgress(mockDb.userProgress);
         }
       } catch (err) {
@@ -209,20 +377,28 @@ async function syncUserProgressFromSupabase(userId, options = {}) {
       }
     })();
 
-    const syncStudyTimeTask = (async () => {
-      try {
-        const studyTimeService = require('./studyTimeService');
-        await studyTimeService.syncFromSupabase(userId);
-      } catch (_) {}
-    })();
+    const syncStudyTimeTask = options.skipStudyTime
+      ? Promise.resolve()
+      : (async () => {
+          try {
+            const studyTimeService = require('./studyTimeService');
+            await studyTimeService.syncFromSupabase(userId);
+          } catch (_) {}
+        })();
+
+    const syncReviewTask = options.skipReviewSessions
+      ? Promise.resolve()
+      : syncUserReviewSessionsFromSupabase(userId, { force: !!options.force });
 
     await Promise.all([
       syncProgressTask,
-      syncUserReviewSessionsFromSupabase(userId),
+      syncReviewTask,
       syncStudyTimeTask
     ]);
 
-    progressLastSyncAt.set(uid, Date.now());
+    const completedAt = Date.now();
+    progressLastSyncAt.set(uid, completedAt);
+    masteredLastSyncAt.set(uid, completedAt);
   })().finally(() => {
     progressSyncInFlight.delete(uid);
   });
@@ -379,25 +555,29 @@ async function getMasteredItemIds(userId, currentPlan = null) {
  * Update single item progress in DB and local cache
  */
 async function setItemProgress(userId, itemType, itemId, status) {
-  if (!mockDb.userProgress) mockDb.userProgress = {};
-  const key = `${userId}:${itemType}:${itemId}`;
-  mockDb.userProgress[key] = status;
-  invalidateUserSyncCache(userId);
-  savePersistentProgress(mockDb.userProgress);
-
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('user_progress').upsert({
-        user_id: userId,
-        item_type: itemType,
-        item_id: Number(itemId),
-        status,
-        updated_at: new Date().toISOString()
-      }, { onConflict: 'user_id,item_type,item_id' });
+      if (status === 'not_learned') {
+        await supabase
+          .from('user_progress')
+          .delete()
+          .eq('user_id', userId)
+          .eq('item_type', itemType)
+          .eq('item_id', Number(itemId));
+      } else {
+        await supabase.from('user_progress').upsert({
+          user_id: userId,
+          item_type: itemType,
+          item_id: Number(itemId),
+          status,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id,item_type,item_id' });
+      }
     } catch (e) {
       console.warn('[ProgressService] Supabase upsert error:', e.message);
     }
   }
+  recordLocalProgressMutation(userId, itemType, [itemId], status);
 }
 
 /**
@@ -405,18 +585,6 @@ async function setItemProgress(userId, itemType, itemId, status) {
  */
 async function setItemProgressBatch(userId, itemType, itemIds, status) {
   if (!Array.isArray(itemIds) || itemIds.length === 0) return;
-
-  if (!mockDb.userProgress) mockDb.userProgress = {};
-  for (const id of itemIds) {
-    const key = `${userId}:${itemType}:${id}`;
-    if (status === 'not_learned') {
-      delete mockDb.userProgress[key];
-    } else {
-      mockDb.userProgress[key] = status;
-    }
-  }
-  invalidateUserSyncCache(userId);
-  savePersistentProgress(mockDb.userProgress);
 
   if (isSupabaseConfigured()) {
     try {
@@ -441,6 +609,8 @@ async function setItemProgressBatch(userId, itemType, itemIds, status) {
       console.warn('[ProgressService] Supabase batch upsert error:', e.message);
     }
   }
+
+  recordLocalProgressMutation(userId, itemType, itemIds, status);
 }
 
 /**
@@ -485,6 +655,10 @@ module.exports = {
   savePersistentReviewSessions,
   isSupabaseConfigured,
   invalidateUserSyncCache,
+  invalidateReviewSessionsCache,
+  getKnownLocalItemStatus,
+  recordLocalProgressMutation,
+  syncMasteredProgressForTracking,
   syncUserProgressFromSupabase,
   syncUserReviewSessionsFromSupabase,
   getMasteredItemIds,

@@ -572,21 +572,19 @@ export default function UserDashboard() {
       });
     }
 
-    // 4. Persist to backend silently
+    // 4. Show instant feedback & persist to backend in a single round-trip (eliminating extra GET /study-debt waterfall)
+    showNotification(completed ? '✅ Đã hoàn thành nhiệm vụ ôn luyện!' : '🔄 Đã chuyển nhiệm vụ về Chưa hoàn thành!');
+
     try {
-      await api.post('/api/user/daily-tasks/schedule', {
+      const res: any = await api.post('/api/user/daily-tasks/schedule', {
         taskId: Array.isArray(taskId) ? taskId.join(',') : taskId,
         taskIds: taskIdsList,
         completed,
         date: targetDate
       });
-      showNotification(completed ? '✅ Đã hoàn thành nhiệm vụ ôn luyện!' : '🔄 Đã chuyển nhiệm vụ về Chưa hoàn thành!');
-      // Silently sync debt with server to ensure accuracy
-      api.get(`/api/user/study-debt?date=${targetDate}`).then((res: any) => {
-        if (res && res.success) {
-          setDebtData(res);
-        }
-      }).catch(() => {});
+      if (res && res.debt) {
+        setDebtData(res.debt);
+      }
     } catch (err: any) {
       showNotification('Lỗi cập nhật trạng thái nhiệm vụ: ' + err.message);
       fetchDashboardData();
