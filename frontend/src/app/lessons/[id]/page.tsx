@@ -13,6 +13,7 @@ import PitchAccentDisplay from '../../components/PitchAccentDisplay';
 import { playAudioWithFallback } from '../../utils/audioHelper';
 import { gradeKanjiWithAI, KanjiGradingResult } from '../../utils/kanjiPracticeHelper';
 import { convertWordToScopedKanji } from '../../utils/kanjiOverhaulHelper';
+import SpeedrunFailedQuestionCard, { SpeedrunFailedQuestionInfo } from '../../components/SpeedrunFailedQuestionCard';
 
 const QuickLookupModal = dynamic(() => import('../../components/QuickLookupModal'), { ssr: false });
 const KanjiStrokePlayer = dynamic(() => import('../../components/KanjiStrokePlayer'), { ssr: false });
@@ -888,6 +889,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
   const [speedrunDirection, setSpeedrunDirection] = useState<'ja-to-vi' | 'vi-to-ja' | 'listen-to-select'>('ja-to-vi');
 
   const [speedrunStreak, setSpeedrunStreak] = useState<number>(0);
+
+  const [speedrunFailedQuestion, setSpeedrunFailedQuestion] = useState<SpeedrunFailedQuestionInfo | null>(null);
 
   
 
@@ -2633,6 +2636,82 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
   }, [selectedLessonId, speedrunDirection]);
 
+  const buildSpeedrunFailureInfo = useCallback(
+
+    (
+
+      reason: 'wrong' | 'timeout',
+
+      vocab: VocabItem,
+
+      selectedAnswer: string | null,
+
+      correctAnswer: string
+
+    ): SpeedrunFailedQuestionInfo => {
+
+      const rawKanji = vocab.kanji_word || getKanjiForm(vocab.hiragana, kanjiItems, vocab.kanji_word);
+
+      const kanjiText = rawKanji && rawKanji !== vocab.hiragana ? rawKanji : '';
+
+      const displayJap = kanjiText ? `${kanjiText} (${vocab.hiragana})` : vocab.hiragana;
+
+      const directionLabel =
+
+        speedrunDirection === 'ja-to-vi'
+
+          ? 'Nhật ➔ Việt'
+
+          : speedrunDirection === 'vi-to-ja'
+
+          ? 'Việt ➔ Nhật'
+
+          : 'Nghe ➔ Chọn đáp án';
+
+      const subParts =
+
+        speedrunDirection === 'vi-to-ja'
+
+          ? [kanjiText ? `Kanji: ${kanjiText}` : null, vocab.romaji ? `Romaji: ${vocab.romaji}` : null]
+
+          : [vocab.romaji ? `Romaji: ${vocab.romaji}` : null];
+
+      return {
+
+        reason,
+
+        questionLabel: `Phản xạ Từ vựng • ${directionLabel}`,
+
+        questionText: speedrunDirection === 'vi-to-ja' ? vocab.vietnamese_meaning : displayJap,
+
+        readingSub: subParts.filter(Boolean).join(' • ') || undefined,
+
+        selectedAnswer,
+
+        correctAnswer,
+
+        audio: {
+
+          kanji: kanjiText || vocab.hiragana,
+
+          kana: vocab.hiragana,
+
+        },
+
+        example: vocab.japanese_example
+
+          ? { japanese: vocab.japanese_example, vietnamese: vocab.example_meaning }
+
+          : undefined,
+
+      };
+
+    },
+
+    [speedrunDirection, kanjiItems]
+
+  );
+
   const nextSpeedrunQuestion = useCallback((currentScore: number, customMaxTime?: number) => {
 
     const randomQuestion = speedrunSourceList[Math.floor(Math.random() * speedrunSourceList.length)];
@@ -2685,6 +2764,12 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
         clearInterval(speedrunTimerRef.current);
 
+        setSpeedrunFailedQuestion(
+
+          buildSpeedrunFailureInfo('timeout', randomQuestion, null, correctOption)
+
+        );
+
         setSpeedrunGameOver(true);
 
         setSpeedrunActive(false);
@@ -2717,7 +2802,7 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
 
     }, 50);
 
-  }, [speedrunSourceList, selectedLessonId, speedrunDirection]);
+  }, [speedrunSourceList, selectedLessonId, speedrunDirection, buildSpeedrunFailureInfo]);
 
   const startSpeedrun = () => {
 
@@ -2732,6 +2817,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     setSpeedrunActive(true);
 
     setSpeedrunGameOver(false);
+
+    setSpeedrunFailedQuestion(null);
 
     setSpeedrunScore(0);
 
@@ -2756,6 +2843,8 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
     setSpeedrunActive(false);
 
     setSpeedrunGameOver(false);
+
+    setSpeedrunFailedQuestion(null);
 
     setSpeedrunSelectedOption(null);
 
@@ -2836,6 +2925,14 @@ export default function LessonDetailsPage({ params }: { params: Promise<{ id: st
       }, 250);
 
     } else {
+
+      const correctOption = speedrunDirection === 'vi-to-ja' ? speedrunQuestion.hiragana : speedrunQuestion.vietnamese_meaning;
+
+      setSpeedrunFailedQuestion(
+
+        buildSpeedrunFailureInfo('wrong', speedrunQuestion, selected, correctOption)
+
+      );
 
       setTimeout(() => {
 
@@ -5280,7 +5377,7 @@ const renderInteractivePractice = () => {
 
                     {!speedrunActive && speedrunGameOver && (
 
-                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 rounded-3xl text-center space-y-6 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
+                      <div className="bg-white border border-slate-200 dark:border-slate-800/80 dark:border-slate-800/80 shadow-sm dark:bg-slate-900/40 dark:border-slate-800 dark:shadow-none border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-3xl text-center space-y-5 max-w-lg mx-auto backdrop-blur-md shadow-2xl animate-fade-in">
 
                         <div className="space-y-2">
 
@@ -5290,11 +5387,25 @@ const renderInteractivePractice = () => {
 
                           <p className="text-xs text-slate-400 dark:text-slate-500">
 
-                            Bạn đã trả lời chưa chính xác hoặc hết thời gian. Hãy thử lại để vượt qua kỷ lục của chính mình!
+                            {speedrunFailedQuestion?.reason === 'timeout'
+
+                              ? 'Hết thời gian phản xạ suy nghĩ cho câu hỏi vừa rồi. Hãy thử lại để vượt qua kỷ lục của chính mình!'
+
+                              : speedrunFailedQuestion?.reason === 'wrong'
+
+                              ? 'Bạn đã chọn chưa chính xác câu hỏi vừa rồi. Xem lại đáp án đúng bên dưới nhé!'
+
+                              : 'Bạn đã trả lời chưa chính xác hoặc hết thời gian. Hãy thử lại để vượt qua kỷ lục của chính mình!'}
 
                           </p>
 
                         </div>
+
+                        {speedrunFailedQuestion && (
+
+                          <SpeedrunFailedQuestionCard info={speedrunFailedQuestion} />
+
+                        )}
 
                         <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-950/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-800/60 dark:border-slate-800/60">
 
@@ -5323,6 +5434,8 @@ const renderInteractivePractice = () => {
                             onClick={() => {
 
                               setSpeedrunGameOver(false);
+
+                              setSpeedrunFailedQuestion(null);
 
                             }}
 

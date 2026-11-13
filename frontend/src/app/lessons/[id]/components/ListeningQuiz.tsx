@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { playAudioWithFallback } from '../../../utils/audioHelper';
+import SpeedrunFailedQuestionCard, { SpeedrunFailedQuestionInfo } from '../../../components/SpeedrunFailedQuestionCard';
 
 interface VocabItem {
   id: number;
@@ -36,6 +37,7 @@ interface ListeningQuizProps {
 
 interface Question {
   audioText: string;
+  hiragana?: string;
   romaji: string;
   correctAnswer: string;
   options: string[];
@@ -52,6 +54,8 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
   const [score, setScore] = useState<number>(0);
   const [streak, setStreak] = useState<number>(0);
   const [quizFinished, setQuizFinished] = useState<boolean>(false);
+  const [gameEndReason, setGameEndReason] = useState<'wrong' | 'timeout' | 'completed' | 'manual' | null>(null);
+  const [failedQuestion, setFailedQuestion] = useState<SpeedrunFailedQuestionInfo | null>(null);
 
   // New States for Speedrun Mode
   const [gameStarted, setGameStarted] = useState<boolean>(false);
@@ -63,15 +67,17 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
 
   const timerRef = useRef<any>(null);
   const scoreRef = useRef<number>(0);
+  const currentQuestionRef = useRef<Question | null>(null);
 
   // Tạo câu hỏi từ danh sách từ vựng và câu ví dụ
   const generateQuestions = useCallback(() => {
-    const pool: { audioText: string; romaji: string; meaning: string }[] = [];
+    const pool: { audioText: string; hiragana?: string; romaji: string; meaning: string }[] = [];
 
     // 1. Thêm từ vựng vào pool
     vocabItems.forEach(v => {
       pool.push({
         audioText: v.kanji_word || v.hiragana,
+        hiragana: v.hiragana,
         romaji: v.romaji,
         meaning: v.vietnamese_meaning
       });
@@ -132,6 +138,7 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
 
       return {
         audioText: item.audioText,
+        hiragana: item.hiragana,
         romaji: item.romaji,
         correctAnswer: correct,
         options
@@ -146,6 +153,8 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
     scoreRef.current = 0;
     setStreak(0);
     setQuizFinished(false);
+    setGameEndReason(null);
+    setFailedQuestion(null);
 
     // Nạp highScore từ localStorage
     const savedHigh = localStorage.getItem(`listening_quiz_high_score_${lessonId}`);
@@ -178,6 +187,10 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
     }
   }, [currentIndex, questions, quizFinished, isAnswered, playCurrentAudio, gameStarted]);
 
+  useEffect(() => {
+    currentQuestionRef.current = questions[currentIndex] || null;
+  }, [questions, currentIndex]);
+
   // Bộ đếm ngược thời gian
   useEffect(() => {
     if (!gameStarted || quizFinished) return;
@@ -197,7 +210,7 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
 
       if (remaining <= 0) {
         clearInterval(timerRef.current);
-        handleGameOver();
+        handleGameOver('timeout', currentQuestionRef.current, null);
       }
     }, 50);
 
@@ -208,22 +221,61 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
     };
   }, [currentIndex, gameStarted, quizFinished, maxTime]);
 
-  const handleGameOver = useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-    setQuizFinished(true);
-    setGameStarted(false);
+  const buildListeningFailureInfo = useCallback(
+    (
+      reason: 'wrong' | 'timeout',
+      question: Question,
+      selectedAnswer: string | null
+    ): SpeedrunFailedQuestionInfo => {
+      const displayJap =
+        question.hiragana && question.hiragana !== question.audioText
+          ? `${question.audioText} (${question.hiragana})`
+          : question.audioText;
+      return {
+        reason,
+        questionLabel: 'Luyện Nghe Phản Xạ',
+        questionText: displayJap,
+        readingSub: question.romaji ? `Romaji: ${question.romaji}` : undefined,
+        selectedAnswer,
+        correctAnswer: question.correctAnswer,
+        audio: {
+          kanji: question.audioText,
+          kana: question.hiragana || question.audioText,
+        },
+      };
+    },
+    []
+  );
 
-    // Lưu kỷ lục mới nếu có
-    const finalScore = scoreRef.current;
-    const savedHigh = localStorage.getItem(`listening_quiz_high_score_${lessonId}`);
-    const currentHigh = savedHigh ? parseInt(savedHigh) || 0 : 0;
-    if (finalScore > currentHigh) {
-      setHighScore(finalScore);
-      localStorage.setItem(`listening_quiz_high_score_${lessonId}`, finalScore.toString());
-    }
-  }, [lessonId]);
+  const handleGameOver = useCallback(
+    (
+      reason: 'wrong' | 'timeout' | 'completed' | 'manual' = 'manual',
+      question?: Question | null,
+      selectedAnswer: string | null = null
+    ) => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+      setGameEndReason(reason);
+      if ((reason === 'wrong' || reason === 'timeout') && question) {
+        setFailedQuestion(buildListeningFailureInfo(reason, question, selectedAnswer));
+      } else {
+        setFailedQuestion(null);
+      }
+      setQuizFinished(true);
+      setGameStarted(false);
+
+      // Lưu kỷ lục mới nếu có
+      const finalScore = scoreRef.current;
+      const savedHigh = localStorage.getItem(`listening_quiz_high_score_${lessonId}`);
+      const currentHigh = savedHigh ? parseInt(savedHigh) || 0 : 0;
+      if (finalScore > currentHigh) {
+        setHighScore(finalScore);
+        localStorage.setItem(`listening_quiz_high_score_${lessonId}`, finalScore.toString());
+      }
+    },
+    [lessonId, buildListeningFailureInfo]
+  );
 
   const startGame = () => {
     if (onStartGame) {
@@ -231,6 +283,8 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
     }
     setGameStarted(true);
     setQuizFinished(false);
+    setGameEndReason(null);
+    setFailedQuestion(null);
     setScore(0);
     scoreRef.current = 0;
     setStreak(0);
@@ -274,13 +328,13 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
           setSelectedOption(null);
           setIsAnswered(false);
         } else {
-          handleGameOver();
+          handleGameOver('completed');
         }
       }, 1200);
     } else {
       setStreak(0);
       setTimeout(() => {
-        handleGameOver();
+        handleGameOver('wrong', q, option);
       }, 1200);
     }
   };
@@ -387,15 +441,40 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
 
   // 2. Màn hình Kết thúc (Game Over Screen)
   if (quizFinished) {
+    const endSubtitle =
+      gameEndReason === 'completed'
+        ? 'Bạn đã hoàn thành toàn bộ câu hỏi luyện nghe trong bài này!'
+        : gameEndReason === 'timeout'
+        ? 'Hết thời gian suy nghĩ cho câu hỏi vừa rồi. Hãy nghe lại và thử lại nhé!'
+        : gameEndReason === 'wrong'
+        ? 'Bạn đã chọn chưa chính xác câu hỏi vừa rồi. Xem lại đáp án đúng bên dưới nhé!'
+        : gameEndReason === 'manual'
+        ? 'Bạn đã dừng lượt chơi hiện tại.'
+        : 'Bạn đã trả lời chưa chính xác hoặc hết thời gian suy nghĩ. Hãy thử lại để thiết lập kỷ lục mới!';
+
     return (
-      <div className="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl text-center max-w-xl mx-auto shadow-sm animate-fade-in">
-        <div className="w-20 h-20 bg-rose-500/10 text-rose-500 rounded-full flex items-center justify-center text-4xl mb-6">
-          🏁
+      <div className="flex flex-col items-center justify-center p-6 sm:p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl text-center max-w-xl mx-auto shadow-sm animate-fade-in">
+        <div
+          className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-3xl sm:text-4xl mb-4 ${
+            gameEndReason === 'completed'
+              ? 'bg-emerald-500/10 text-emerald-500'
+              : 'bg-rose-500/10 text-rose-500'
+          }`}
+        >
+          {gameEndReason === 'completed' ? '🎉' : '🏁'}
         </div>
-        <h3 className="text-2xl font-bold mb-2 text-slate-800 dark:text-slate-100">Trò chơi kết thúc!</h3>
-        <p className="text-xs text-slate-400 dark:text-slate-500 max-w-sm mb-6 leading-relaxed">
-          Bạn đã trả lời chưa chính xác hoặc hết thời gian suy nghĩ. Hãy thử lại để thiết lập kỷ lục mới!
+        <h3 className="text-xl sm:text-2xl font-bold mb-2 text-slate-800 dark:text-slate-100">
+          {gameEndReason === 'completed' ? 'Hoàn thành xuất sắc!' : 'Trò chơi kết thúc!'}
+        </h3>
+        <p className="text-xs text-slate-400 dark:text-slate-500 max-w-sm mb-5 leading-relaxed">
+          {endSubtitle}
         </p>
+
+        {failedQuestion && (
+          <div className="w-full mb-5">
+            <SpeedrunFailedQuestionCard info={failedQuestion} />
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-950/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 w-full mb-6 max-w-sm">
           <div>
@@ -506,7 +585,7 @@ export default function ListeningQuiz({ vocabItems, grammarItems, onStartGame }:
       {/* Cancel Button */}
       <div className="text-center pt-6">
         <button
-          onClick={handleGameOver}
+          onClick={() => handleGameOver('manual')}
           className="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-300 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95"
         >
           Dừng trò chơi
