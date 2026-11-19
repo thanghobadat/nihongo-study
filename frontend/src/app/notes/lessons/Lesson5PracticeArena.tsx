@@ -270,7 +270,7 @@ export default function Lesson5PracticeArena({
       ref={arenaRef}
       className="rounded-2xl bg-white dark:bg-slate-900/90 border-2 border-indigo-200/80 dark:border-indigo-800/60 p-3.5 sm:p-7 shadow-md space-y-4 sm:space-y-6"
     >
-      {/* Header + Topic Switcher */}
+      {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 dark:border-slate-800 pb-3.5 sm:pb-5">
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/60 border border-amber-200/70 dark:border-amber-800/60 text-amber-700 dark:text-amber-300 text-[11px] sm:text-xs font-extrabold mb-1.5">
@@ -278,33 +278,8 @@ export default function Lesson5PracticeArena({
             <span>Bài tập thực hành • Không giới hạn thời gian</span>
           </div>
           <h2 className="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
-            3. Bài tập thực hành Kết hợp Ngày–Tháng &amp; Trợ từ Bài 5
+            2. Bài tập thực hành Kết hợp Ngày &amp; Tháng (～月～日)
           </h2>
-        </div>
-
-        <div className="grid grid-cols-2 lg:inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 w-full lg:w-auto">
-          <button
-            type="button"
-            onClick={() => handleSelectTopic('dates_combined')}
-            className={`min-h-[40px] px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-extrabold transition-all cursor-pointer touch-manipulation ${
-              topic === 'dates_combined'
-                ? 'bg-indigo-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            📅 Kết hợp Ngày &amp; Tháng
-          </button>
-          <button
-            type="button"
-            onClick={() => handleSelectTopic('particles')}
-            className={`min-h-[40px] px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-extrabold transition-all cursor-pointer touch-manipulation ${
-              topic === 'particles'
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            🎯 Trợ từ &amp; Ngoại lệ
-          </button>
         </div>
       </div>
 
