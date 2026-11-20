@@ -25,6 +25,8 @@ export default function LessonNoteRedirectPage() {
       router.replace('/notes?tab=tenses');
     } else if (id === 6) {
       router.replace('/notes?tab=forms');
+    } else if (id === 7) {
+      router.replace('/notes?tab=particles');
     } else {
       router.replace('/notes');
     }

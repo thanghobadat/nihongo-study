@@ -1,6 +1,14 @@
 'use client';
 
 import React, { useCallback, useRef, useState } from 'react';
+import {
+  AudioIconButton,
+  AudioReadingPill,
+  CalloutBar,
+  SheetHeader,
+  SheetSection,
+  StatusTag,
+} from '../components/NotesUI';
 import Lesson1PracticeArena from './Lesson1PracticeArena';
 import { PracticeTopic } from './lesson1PracticeGenerator';
 
@@ -30,7 +38,7 @@ const BASE_NUMBERS: BaseNumberRow[] = [
     reading: 'ゼロ / れい',
     tts: 'ゼロ',
     preferred: 'ゼロ',
-    note: 'Giao tiếp hằng ngày hay dùng ゼロ; れい hay gặp trong điểm số, nhiệt độ, thông báo.',
+    note: 'Giao tiếp dùng ゼロ; れい gặp trong điểm số, nhiệt độ, thông báo.',
   },
   { num: '1', kanji: '一', reading: 'いち', tts: 'いち', note: 'Số đếm gốc chuẩn.' },
   { num: '2', kanji: '二', reading: 'に', tts: 'に', note: 'Số đếm gốc chuẩn.' },
@@ -41,7 +49,7 @@ const BASE_NUMBERS: BaseNumberRow[] = [
     reading: 'よん / し',
     tts: 'よん',
     preferred: 'よん',
-    note: 'Luôn ưu tiên よん khi ghép lượng từ (tuổi, người, thứ tự...); し chủ yếu dùng trong tháng 4 (しがつ).',
+    note: 'Ưu tiên よん khi ghép lượng từ; し cố định trong tháng 4 (しがつ).',
   },
   { num: '5', kanji: '五', reading: 'ご', tts: 'ご', note: 'Số đếm gốc chuẩn.' },
   { num: '6', kanji: '六', reading: 'ろく', tts: 'ろく', note: 'Số đếm gốc chuẩn.' },
@@ -51,7 +59,7 @@ const BASE_NUMBERS: BaseNumberRow[] = [
     reading: 'なな / しち',
     tts: 'なな',
     preferred: 'なな',
-    note: 'Ưu tiên なな để tránh nghe nhầm với いち (1); しち dùng cố định trong tháng 7 (しちがつ), 7 giờ (しちじ).',
+    note: 'Ưu tiên なな để tránh nhầm với いち (1); しち dùng trong tháng 7, 7 giờ.',
   },
   { num: '8', kanji: '八', reading: 'はち', tts: 'はち', note: 'Số đếm gốc chuẩn.' },
   {
@@ -60,7 +68,7 @@ const BASE_NUMBERS: BaseNumberRow[] = [
     reading: 'きゅう / く',
     tts: 'きゅう',
     preferred: 'きゅう',
-    note: 'Ưu tiên きゅう trong hầu hết trường hợp; く dùng cố định trong tháng 9 (くがつ), 9 giờ (くじ).',
+    note: 'Ưu tiên きゅう; く dùng cố định trong tháng 9 (くがつ), 9 giờ (くじ).',
   },
   { num: '10', kanji: '十', reading: 'じゅう', tts: 'じゅう', note: 'Mốc tròn chục đầu tiên.' },
 ];
@@ -68,7 +76,7 @@ const BASE_NUMBERS: BaseNumberRow[] = [
 const AGE_TABLE: AgeRow[] = [
   {
     label: '1',
-    kanji: '一歳 (一才)',
+    kanji: '一歳',
     ageReading: 'いっさい',
     tts: 'いっさい',
     ordinalReading: 'いちばん',
@@ -77,7 +85,7 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '2',
-    kanji: '二歳 (二才)',
+    kanji: '二歳',
     ageReading: 'にさい',
     tts: 'にさい',
     ordinalReading: 'にばん',
@@ -86,7 +94,7 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '3',
-    kanji: '三歳 (三才)',
+    kanji: '三歳',
     ageReading: 'さんさい',
     tts: 'さんさい',
     ordinalReading: 'さんばん',
@@ -95,16 +103,16 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '4',
-    kanji: '四歳 (四才)',
+    kanji: '四歳',
     ageReading: 'よんさい',
     tts: 'よんさい',
     ordinalReading: 'よんばん',
     type: 'caution',
-    note: 'Chỉ dùng よんさい (tuyệt đối không đọc しさい).',
+    note: 'Chỉ dùng よんさい (không đọc しさい).',
   },
   {
     label: '5',
-    kanji: '五歳 (五才)',
+    kanji: '五歳',
     ageReading: 'ごさい',
     tts: 'ごさい',
     ordinalReading: 'ごばん',
@@ -113,16 +121,16 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '6',
-    kanji: '六歳 (六才)',
+    kanji: '六歳',
     ageReading: 'ろくさい',
     tts: 'ろくさい',
     ordinalReading: 'ろくばん',
     type: 'caution',
-    note: 'Giữ nguyên ろくさい — KHÔNG biến âm thành ろっさい.',
+    note: 'Giữ nguyên ろくさい — không biến âm thành ろっさい.',
   },
   {
     label: '7',
-    kanji: '七歳 (七才)',
+    kanji: '七歳',
     ageReading: 'ななさい',
     tts: 'ななさい',
     ordinalReading: 'ななばん',
@@ -131,7 +139,7 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '8',
-    kanji: '八歳 (八才)',
+    kanji: '八歳',
     ageReading: 'はっさい',
     tts: 'はっさい',
     ordinalReading: 'はちばん',
@@ -140,7 +148,7 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '9',
-    kanji: '九歳 (九才)',
+    kanji: '九歳',
     ageReading: 'きゅうさい',
     tts: 'きゅうさい',
     ordinalReading: 'きゅうばん',
@@ -149,8 +157,8 @@ const AGE_TABLE: AgeRow[] = [
   },
   {
     label: '10',
-    kanji: '十歳 (十才)',
-    ageReading: 'じゅっさい (じっさい)',
+    kanji: '十歳',
+    ageReading: 'じゅっさい',
     tts: 'じゅっさい',
     ordinalReading: 'じゅうばん',
     type: 'geminate',
@@ -181,7 +189,7 @@ const AGE_TABLE: AgeRow[] = [
     tts: 'はたち',
     ordinalReading: 'にじゅうばん',
     type: 'special',
-    note: 'Ngoại lệ duy nhất! Không đọc にじゅっさい và KHÔNG thêm さい sau はたち.',
+    note: 'Ngoại lệ duy nhất: không đọc にじゅっさい và không thêm さい sau はたち.',
   },
   {
     label: '21',
@@ -199,7 +207,7 @@ const AGE_TABLE: AgeRow[] = [
     tts: 'さんじゅっさい',
     ordinalReading: 'さんじゅうばん',
     type: 'geminate',
-    note: 'Các mốc tròn chục (30, 40, 50...) đều biến âm じゅう → じゅっさい.',
+    note: 'Các mốc tròn chục (30, 40, 50...) đều biến âm → じゅっさい.',
   },
   {
     label: 'Hỏi',
@@ -208,17 +216,17 @@ const AGE_TABLE: AgeRow[] = [
     tts: 'おいくつですか',
     ordinalReading: 'なんばん',
     type: 'question',
-    note: 'なんさい (thông thường) • おいくつ (lịch sự/kính trọng với người lớn, người mới quen).',
+    note: 'なんさい (thông thường) · おいくつ (lịch sự với người lớn, người mới quen).',
   },
 ];
 
 const TWO_DIGIT_EXAMPLES = [
-  { num: '14', reading: 'じゅうよん', desc: '10 (じゅう) + 4 (よん)' },
-  { num: '19', reading: 'じゅうきゅう', desc: '10 (じゅう) + 9 (きゅう)' },
-  { num: '20', reading: 'にじゅう', desc: '2 (に) × 10 (じゅう)' },
-  { num: '40', reading: 'よんじゅう', desc: 'Luôn dùng よん (không đọc しじゅう)' },
-  { num: '75', reading: 'ななじゅうご', desc: '70 (ななじゅう) + 5 (ご)' },
-  { num: '99', reading: 'きゅうじゅうきゅう', desc: '90 (きゅうじゅう) + 9 (きゅう)' },
+  { num: '14', reading: 'じゅうよん', desc: '10 + 4' },
+  { num: '19', reading: 'じゅうきゅう', desc: '10 + 9' },
+  { num: '20', reading: 'にじゅう', desc: '2 × 10' },
+  { num: '40', reading: 'よんじゅう', desc: 'Không đọc しじゅう' },
+  { num: '75', reading: 'ななじゅうご', desc: '70 + 5' },
+  { num: '99', reading: 'きゅうじゅうきゅう', desc: '90 + 9' },
 ];
 
 export default function Lesson1Notes() {
@@ -232,117 +240,63 @@ export default function Lesson1Notes() {
     }, 40);
   }, []);
 
-  // iOS Safari / iPhone 15 Pro WebKit-hardened Japanese TTS
-  const speakJapanese = useCallback((text: string) => {
-    if (!text || typeof window === 'undefined' || !window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
-    utterance.rate = 0.92;
-    const voices = window.speechSynthesis.getVoices();
-    const jaVoice = voices.find((v) => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
-    if (jaVoice) utterance.voice = jaVoice;
-
-    // Prevent iOS Safari WebKit garbage-collecting active utterance mid-speech
-    const win = window as unknown as { _activeUtterances?: SpeechSynthesisUtterance[] };
-    win._activeUtterances = win._activeUtterances || [];
-    win._activeUtterances.push(utterance);
-    const cleanup = () => {
-      if (!win._activeUtterances) return;
-      const idx = win._activeUtterances.indexOf(utterance);
-      if (idx > -1) win._activeUtterances.splice(idx, 1);
-    };
-    utterance.onend = cleanup;
-    utterance.onerror = cleanup;
-
-    if (window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
-    }
-    window.speechSynthesis.speak(utterance);
-  }, []);
-
   return (
-    <div className="space-y-5 sm:space-y-8">
-      {/* ===================================================================== */}
-      {/* PHẦN 1: SỐ ĐẾM CƠ BẢN (0 - 99)                                        */}
-      {/* ===================================================================== */}
-      <section className="rounded-2xl bg-white dark:bg-slate-900/85 border border-slate-200 dark:border-slate-800 p-3.5 sm:p-7 shadow-sm space-y-4 sm:space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5 sm:pb-4">
-          <div>
-            <span className="inline-block px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-300 text-xs font-extrabold mb-1.5">
-              Phần 1 • Nền tảng bắt buộc
-            </span>
-            <h2 className="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
-              1. Hệ thống số đếm cơ bản (0 – 99)
-            </h2>
-          </div>
-          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2">
-            <span className="hidden sm:inline text-xs text-slate-400 dark:text-slate-500">
-              Nhấn nút 🔊 để nghe phát âm
-            </span>
-            <button
-              type="button"
-              onClick={() => jumpToPractice('numbers')}
-              className="w-full sm:w-auto min-h-[42px] inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold shadow-sm transition-colors cursor-pointer touch-manipulation active:scale-[0.98]"
-            >
-              <span>⚡</span>
-              <span>Luyện phản xạ Số đếm (1–99)</span>
-            </button>
-          </div>
-        </div>
+    <div className="space-y-5 sm:space-y-6">
+      {/* 1. HỆ THỐNG SỐ ĐẾM CƠ BẢN (0 - 99) */}
+      <SheetSection>
+        <SheetHeader
+          title="Hệ thống số đếm cơ bản (0 – 99)"
+          subtitle="Thuộc các số 0–10 và ưu tiên よん (4), なな (7), きゅう (9) khi ghép số."
+          actionLabel="Luyện phản xạ Số đếm"
+          onAction={() => jumpToPractice('numbers')}
+        />
 
-        {/* MOBILE VIEW (< md): Thẻ dòng gọn chuẩn iPhone 15 Pro (393px) — Không cần kéo ngang */}
-        <div className="md:hidden rounded-xl border border-slate-200/80 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800/80 overflow-hidden">
+        {/* Bảng kẻ dòng phẳng 0 - 10 */}
+        <div className="divide-y divide-slate-200/80 dark:divide-slate-800 border-t border-b border-slate-200/80 dark:border-slate-800 tabular-nums">
           {BASE_NUMBERS.map((row) => {
-            const isHighlighted = Boolean(row.preferred);
-            const showFullNote = row.note !== 'Số đếm gốc chuẩn.';
+            const showNote = row.note !== 'Số đếm gốc chuẩn.';
             return (
               <div
                 key={row.num}
-                className={`p-3 ${
-                  isHighlighted
-                    ? 'bg-indigo-50/40 dark:bg-indigo-950/25'
-                    : 'bg-white dark:bg-slate-900/40'
-                }`}
+                className="py-2.5 grid grid-cols-1 md:grid-cols-12 gap-2 items-center"
               >
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center font-black text-sm text-slate-900 dark:text-white shrink-0">
+                <div className="md:col-span-4 flex items-center justify-between md:justify-start gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 font-mono text-sm font-bold text-slate-900 dark:text-white shrink-0">
                       {row.num}
                     </span>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-sm font-bold text-slate-800 dark:text-slate-100">
-                          {row.kanji}
-                        </span>
-                        {row.preferred ? (
-                          <span className="px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/70 text-[10px] font-bold text-indigo-700 dark:text-indigo-200">
-                            Ưu tiên: {row.preferred}
-                          </span>
-                        ) : !showFullNote ? (
-                          <span className="text-[11px] text-slate-400 dark:text-slate-500">
-                            • Số gốc chuẩn
-                          </span>
-                        ) : null}
-                      </div>
-                    </div>
+                    <span className="w-16 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                      {row.kanji}
+                    </span>
+                    {row.preferred && (
+                      <StatusTag label={`Ưu tiên ${row.preferred}`} tone="accent" />
+                    )}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => speakJapanese(row.tts)}
-                    className="min-h-[36px] px-3 py-1 rounded-xl bg-indigo-50/90 active:bg-indigo-100 dark:bg-slate-800 dark:active:bg-indigo-900/60 border border-indigo-200/70 dark:border-slate-700 inline-flex items-center gap-1.5 shrink-0 cursor-pointer touch-manipulation active:scale-95"
-                  >
-                    <span className="text-xs">🔊</span>
-                    <span className="text-xs font-extrabold text-indigo-700 dark:text-indigo-300">
-                      {row.reading}
-                    </span>
-                  </button>
+                  <div className="md:hidden">
+                    <AudioReadingPill
+                      reading={row.reading}
+                      tts={row.tts}
+                      tone={row.preferred ? 'accent' : 'default'}
+                    />
+                  </div>
                 </div>
 
-                {showFullNote && (
-                  <p className="mt-1.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                <div className="hidden md:flex md:col-span-3">
+                  <AudioReadingPill
+                    reading={row.reading}
+                    tts={row.tts}
+                    tone={row.preferred ? 'accent' : 'default'}
+                  />
+                </div>
+
+                {showNote ? (
+                  <p className="md:col-span-5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     {row.note}
+                  </p>
+                ) : (
+                  <p className="hidden md:block md:col-span-5 text-xs text-slate-400 dark:text-slate-500">
+                    Số gốc chuẩn
                   </p>
                 )}
               </div>
@@ -350,417 +304,191 @@ export default function Lesson1Notes() {
           })}
         </div>
 
-        {/* DESKTOP / TABLET VIEW (>= md): Bảng 4 cột đầy đủ */}
-        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-200/80 dark:border-slate-800">
-          <table className="w-full min-w-[620px] text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr className="bg-slate-50 dark:bg-slate-950/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800">
-                <th className="py-3 px-3.5 font-extrabold w-16">Số</th>
-                <th className="py-3 px-3.5 font-extrabold w-24">Chữ Hán</th>
-                <th className="py-3 px-3.5 font-extrabold w-48">Cách đọc (Hiragana)</th>
-                <th className="py-3 px-3.5 font-extrabold">Lưu ý sử dụng</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80">
-              {BASE_NUMBERS.map((row) => (
-                <tr
-                  key={row.num}
-                  className={
-                    row.preferred
-                      ? 'bg-indigo-50/35 dark:bg-indigo-950/20 hover:bg-indigo-50/70 dark:hover:bg-indigo-950/35 transition-colors'
-                      : 'hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors'
-                  }
-                >
-                  <td className="py-2.5 px-3.5 font-black text-slate-900 dark:text-white">
-                    {row.num}
-                  </td>
-                  <td className="py-2.5 px-3.5 font-bold text-slate-700 dark:text-slate-200">
-                    {row.kanji}
-                  </td>
-                  <td className="py-2.5 px-3.5">
-                    <div className="flex items-center space-x-2">
-                      <button
-                        type="button"
-                        onClick={() => speakJapanese(row.tts)}
-                        title={`Nghe phát âm ${row.tts}`}
-                        className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 text-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
-                      >
-                        🔊
-                      </button>
-                      <span className="font-bold text-indigo-700 dark:text-indigo-300">
-                        {row.reading}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="py-2.5 px-3.5 text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {row.preferred && (
-                      <span className="inline-block mr-1.5 px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/70 text-[10px] font-bold text-indigo-700 dark:text-indigo-200">
-                        Ưu tiên: {row.preferred}
-                      </span>
-                    )}
-                    {row.note}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
         {/* Công thức ghép 11 - 99 */}
-        <div className="rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-5 space-y-3.5 sm:space-y-4">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">
-            📐 Công thức ghép số từ 11 đến 99 (Giống hệt tư duy tiếng Việt)
+        <div className="space-y-3 pt-1">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            Công thức ghép số từ 11 đến 99
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 text-xs sm:text-sm">
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 space-y-1">
-              <p className="font-extrabold text-indigo-600 dark:text-indigo-400">
-                ① Từ 11 – 19
-              </p>
-              <p className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded font-bold">
-                じゅう + [hàng đơn vị]
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                VD: 11 = じゅういち • 14 = じゅうよん • 17 = じゅうなな
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800 grid grid-cols-1 md:grid-cols-3 text-xs sm:text-sm">
+            <div className="p-3.5 space-y-1">
+              <p className="font-semibold text-slate-900 dark:text-white">Từ 11 – 19</p>
+              <code className="block font-mono text-xs text-blue-600 dark:text-blue-400 font-semibold">
+                じゅう + [đơn vị]
+              </code>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                11 = じゅういち · 14 = じゅうよん
               </p>
             </div>
-
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 space-y-1">
-              <p className="font-extrabold text-indigo-600 dark:text-indigo-400">
-                ② Tròn chục 20 – 90
-              </p>
-              <p className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded font-bold">
-                [hàng chục] + じゅう
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                40 = <strong>よんじゅう</strong>, 70 = <strong>ななじゅう</strong>, 90 = <strong>きゅうじゅう</strong>
+            <div className="p-3.5 space-y-1">
+              <p className="font-semibold text-slate-900 dark:text-white">Tròn chục 20 – 90</p>
+              <code className="block font-mono text-xs text-blue-600 dark:text-blue-400 font-semibold">
+                [chục] + じゅう
+              </code>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                40 = よんじゅう · 70 = ななじゅう · 90 = きゅうじゅう
               </p>
             </div>
-
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 space-y-1">
-              <p className="font-extrabold text-indigo-600 dark:text-indigo-400">
-                ③ Số lẻ 2 chữ số bất kỳ
-              </p>
-              <p className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded font-bold">
+            <div className="p-3.5 space-y-1">
+              <p className="font-semibold text-slate-900 dark:text-white">Số lẻ 2 chữ số</p>
+              <code className="block font-mono text-xs text-blue-600 dark:text-blue-400 font-semibold">
                 [chục] + じゅう + [đơn vị]
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                VD: 25 = にじゅうご • 48 = よんじゅうはち
+              </code>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                25 = にじゅうご · 48 = よんじゅうはち
               </p>
             </div>
           </div>
 
-          {/* Mẫu nghe nhanh số 2 chữ số — Lưới 2 cột cân đối trên iPhone 15 Pro */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 pt-0.5">
+          <div className="flex flex-wrap gap-2">
             {TWO_DIGIT_EXAMPLES.map((ex) => (
-              <button
+              <AudioReadingPill
                 key={ex.num}
-                type="button"
-                onClick={() => speakJapanese(ex.reading)}
-                title={ex.desc}
-                className="min-h-[38px] inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-50 active:bg-indigo-50 dark:bg-slate-900 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-800 text-xs transition-colors cursor-pointer touch-manipulation active:scale-95 min-w-0"
-              >
-                <span className="shrink-0">🔊</span>
-                <span className="font-black text-slate-900 dark:text-white shrink-0">{ex.num}:</span>
-                <span className="font-bold text-indigo-600 dark:text-indigo-300 truncate">{ex.reading}</span>
-              </button>
+                reading={`${ex.num} · ${ex.reading}`}
+                tts={ex.reading}
+              />
             ))}
           </div>
         </div>
-      </section>
+      </SheetSection>
 
-      {/* ===================================================================== */}
-      {/* PHẦN 2: CÁCH ĐẾM TUỔI (～歳 / ～さい) & ĐỐI CHIẾU SỐ THỨ TỰ           */}
-      {/* ===================================================================== */}
-      <section className="rounded-2xl bg-white dark:bg-slate-900/85 border border-slate-200 dark:border-slate-800 p-3.5 sm:p-7 shadow-sm space-y-4 sm:space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5 sm:pb-4">
-          <div>
-            <span className="inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-300 text-xs font-extrabold mb-1.5">
-              Phần 2 • Trọng tâm Bài 1 (～歳 / giản lược ～才)
-            </span>
-            <h2 className="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
-              2. Cách đếm tuổi (～さい) &amp; Khác biệt với số thứ tự (～ばん)
-            </h2>
+      {/* 2. CÁCH ĐẾM TUỔI (～歳) */}
+      <SheetSection>
+        <SheetHeader
+          title="Cách đếm tuổi (～歳)"
+          subtitle="Biến âm っ ở đuôi 1, 8, 10; ngoại lệ 20 tuổi (はたち); số thứ tự (～ばん) giữ nguyên."
+          actionLabel="Luyện phản xạ Đếm tuổi"
+          onAction={() => jumpToPractice('age')}
+        />
+
+        <CalloutBar tone="blue">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+            <div>
+              <strong className="text-slate-900 dark:text-white">Biến âm っ (1, 8, 10):</strong>{' '}
+              いっさい (1), はっさい (8), じゅっさい (10).
+            </div>
+            <div>
+              <strong className="text-rose-700 dark:text-rose-300">Ngoại lệ 20 tuổi:</strong>{' '}
+              Đọc <strong>はたち</strong> (không thêm さい phía sau).
+            </div>
+            <div>
+              <strong className="text-slate-900 dark:text-white">Chống nhầm:</strong> 6 tuổi ={' '}
+              <strong>ろくさい</strong> (giữ nguyên); số 4, 7, 9 dùng よん・なな・きゅう.
+            </div>
           </div>
-          <button
-            type="button"
-            onClick={() => jumpToPractice('age')}
-            className="w-full sm:w-auto min-h-[42px] inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-sm transition-colors cursor-pointer shrink-0 touch-manipulation active:scale-[0.98]"
-          >
-            <span>⚡</span>
-            <span>Luyện phản xạ Đếm tuổi</span>
-          </button>
-        </div>
+        </CalloutBar>
 
-        {/* 3 Quy tắc vàng */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3.5">
-          <div className="rounded-2xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/80 dark:border-amber-800/60 p-3.5 sm:p-4 space-y-1">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-              ⚠️ Quy tắc 1: Biến âm っ (1, 8, 10)
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
-              Số tận cùng bằng <strong>1, 8</strong> hoặc <strong>tròn chục (10, 30, 40...)</strong> đều biến âm thành <strong>っさい</strong>:{' '}
-              <span className="font-bold text-amber-800 dark:text-amber-200">
-                いっさい (1), はっさい (8), じゅっさい (10)
-              </span>
-              .
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-rose-50/70 dark:bg-rose-950/25 border border-rose-200/80 dark:border-rose-800/60 p-3.5 sm:p-4 space-y-1">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-rose-700 dark:text-rose-300">
-              ⭐ Quy tắc 2: Ngoại lệ 20 tuổi
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
-              Riêng <strong>20 tuổi</strong> đọc đặc biệt là{' '}
-              <strong className="text-rose-700 dark:text-rose-300">はたち</strong> (không đọc にじゅっさい). Tuyệt đối <strong>không gắn thêm さい</strong> sau はたち!
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/25 border border-indigo-200/80 dark:border-indigo-800/60 p-3.5 sm:p-4 space-y-1">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
-              💡 Quy tắc 3: Chống nhầm lẫn
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
-              <strong>6 tuổi = ろくさい</strong> (giữ nguyên, không đọc ろっさい). Số 4, 7, 9 luôn dùng{' '}
-              <strong>よん・なな・きゅう</strong>. Còn số thứ tự (<strong>～ばん</strong>) <strong>không bao giờ biến âm</strong>.
-            </p>
-          </div>
-        </div>
-
-        {/* MOBILE VIEW (< md): Thẻ tra cứu tuổi gọn chuẩn iPhone 15 Pro (393px) */}
-        <div className="md:hidden rounded-xl border border-slate-200/80 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800/80 overflow-hidden">
+        {/* Danh sách kẻ dòng chuẩn thiết kế Sổ tay */}
+        <div className="divide-y divide-slate-200/80 dark:divide-slate-800 border-t border-b border-slate-200/80 dark:border-slate-800 tabular-nums">
           {AGE_TABLE.map((row) => {
-            const cardBg =
+            const pillTone =
               row.type === 'special'
-                ? 'bg-rose-50/65 dark:bg-rose-950/25'
+                ? 'exception'
                 : row.type === 'geminate'
-                ? 'bg-amber-50/50 dark:bg-amber-950/15'
+                ? 'mutation'
                 : row.type === 'question'
-                ? 'bg-indigo-50/55 dark:bg-indigo-950/25'
-                : 'bg-white dark:bg-slate-900/40';
+                ? 'accent'
+                : 'default';
 
             return (
-              <div key={row.label} className={`p-3 space-y-1.5 ${cardBg}`}>
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0 flex-wrap">
-                    <span className="min-w-[36px] h-8 px-2 rounded-lg bg-white/90 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 inline-flex items-center justify-center font-black text-xs text-slate-900 dark:text-white shrink-0">
+              <div
+                key={row.label}
+                className="py-2.5 grid grid-cols-1 md:grid-cols-12 gap-2 items-center"
+              >
+                <div className="md:col-span-5 flex items-center justify-between md:justify-start gap-2.5">
+                  <div className="flex items-center gap-2.5 min-w-0 flex-wrap">
+                    <span className="w-8 font-mono text-sm font-bold text-slate-900 dark:text-white shrink-0">
                       {row.label}
                     </span>
-                    <span className="text-xs font-bold text-slate-700 dark:text-slate-200">
+                    <span className="text-sm font-semibold text-slate-800 dark:text-slate-100">
                       {row.kanji}
                     </span>
-                    {row.type === 'geminate' && (
-                      <span className="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-[10px] font-bold text-amber-800 dark:text-amber-200">
-                        Biến âm っ
-                      </span>
-                    )}
-                    {row.type === 'special' && (
-                      <span className="px-1.5 py-0.5 rounded bg-rose-100 dark:bg-rose-900/70 text-[10px] font-bold text-rose-700 dark:text-rose-200">
-                        Ngoại lệ
-                      </span>
-                    )}
+                    {row.type === 'geminate' && <StatusTag label="Biến âm" tone="mutation" />}
+                    {row.type === 'special' && <StatusTag label="Ngoại lệ" tone="exception" />}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => speakJapanese(row.tts)}
-                    className="min-h-[36px] px-2.5 py-1 rounded-xl bg-white/95 active:bg-indigo-50 dark:bg-slate-800 dark:active:bg-indigo-900/60 border border-slate-200 dark:border-slate-700 inline-flex items-center gap-1.5 shrink-0 cursor-pointer touch-manipulation active:scale-95"
-                  >
-                    <span className="text-xs">🔊</span>
-                    <span
-                      className={`text-xs font-extrabold ${
-                        row.type === 'special'
-                          ? 'text-rose-600 dark:text-rose-300'
-                          : row.type === 'geminate'
-                          ? 'text-amber-700 dark:text-amber-300'
-                          : 'text-slate-900 dark:text-slate-100'
-                      }`}
-                    >
-                      {row.ageReading}
-                    </span>
-                  </button>
+                  <div className="md:hidden shrink-0">
+                    <AudioReadingPill
+                      reading={row.ageReading}
+                      tts={row.tts}
+                      tone={pillTone}
+                    />
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                    Số thứ tự: <strong className="text-slate-700 dark:text-slate-200">{row.ordinalReading}</strong>
+                <div className="hidden md:flex md:col-span-3">
+                  <AudioReadingPill reading={row.ageReading} tts={row.tts} tone={pillTone} />
+                </div>
+
+                <div className="md:col-span-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <span className="text-slate-400 dark:text-slate-500 mr-1.5">
+                    [{row.ordinalReading}]
                   </span>
-                  <span className="text-slate-300 dark:text-slate-700">•</span>
-                  <span>{row.note}</span>
+                  {row.note}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* DESKTOP / TABLET VIEW (>= md): Bảng 5 cột đầy đủ */}
-        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-200/80 dark:border-slate-800">
-          <table className="w-full min-w-[680px] text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr className="bg-slate-50 dark:bg-slate-950/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800">
-                <th className="py-3 px-3.5 font-extrabold w-16">Mốc</th>
-                <th className="py-3 px-3.5 font-extrabold w-32">Chữ Hán</th>
-                <th className="py-3 px-3.5 font-extrabold w-56">Đếm tuổi (～さい)</th>
-                <th className="py-3 px-3.5 font-extrabold w-40">Số thứ tự (～ばん)</th>
-                <th className="py-3 px-3.5 font-extrabold">Ghi chú &amp; Khác biệt</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80">
-              {AGE_TABLE.map((row) => {
-                const rowBg =
-                  row.type === 'special'
-                    ? 'bg-rose-50/60 dark:bg-rose-950/25'
-                    : row.type === 'geminate'
-                    ? 'bg-amber-50/45 dark:bg-amber-950/15'
-                    : row.type === 'question'
-                    ? 'bg-indigo-50/50 dark:bg-indigo-950/25'
-                    : 'hover:bg-slate-50/80 dark:hover:bg-slate-800/40';
-
-                return (
-                  <tr key={row.label} className={`${rowBg} transition-colors`}>
-                    <td className="py-2.5 px-3.5 font-black text-slate-900 dark:text-white">
-                      {row.label}
-                    </td>
-                    <td className="py-2.5 px-3.5 font-semibold text-slate-700 dark:text-slate-300">
-                      {row.kanji}
-                    </td>
-                    <td className="py-2.5 px-3.5">
-                      <div className="flex items-center space-x-2">
-                        <button
-                          type="button"
-                          onClick={() => speakJapanese(row.tts)}
-                          title={`Nghe phát âm ${row.tts}`}
-                          className="w-7 h-7 rounded-lg bg-white/90 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 border border-slate-200/70 dark:border-slate-700 text-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
-                        >
-                          🔊
-                        </button>
-                        <span
-                          className={`font-extrabold ${
-                            row.type === 'special'
-                              ? 'text-rose-600 dark:text-rose-300'
-                              : row.type === 'geminate'
-                              ? 'text-amber-700 dark:text-amber-300'
-                              : 'text-slate-900 dark:text-slate-100'
-                          }`}
-                        >
-                          {row.ageReading}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="py-2.5 px-3.5 font-medium text-slate-500 dark:text-slate-400">
-                      {row.ordinalReading}
-                    </td>
-                    <td className="py-2.5 px-3.5 text-slate-600 dark:text-slate-300 leading-relaxed">
-                      {row.type === 'geminate' && (
-                        <span className="inline-block mr-1.5 px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-[10px] font-bold text-amber-800 dark:text-amber-200">
-                          Biến âm っ
-                        </span>
-                      )}
-                      {row.type === 'special' && (
-                        <span className="inline-block mr-1.5 px-1.5 py-0.5 rounded bg-rose-100 dark:bg-rose-900/70 text-[10px] font-bold text-rose-700 dark:text-rose-200">
-                          Ngoại lệ
-                        </span>
-                      )}
-                      {row.note}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Mẫu hội thoại Hỏi & Trả lời tuổi trong Bài 1 */}
-        <div className="rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-5 space-y-3">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
-            💬 Mẫu câu hỏi &amp; trả lời tuổi trong Bài 1
-          </h3>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 sm:gap-3 text-xs sm:text-sm">
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-4 space-y-1.5">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-300">
-                  Hỏi thông thường
-                </span>
-                <button
-                  type="button"
-                  onClick={() => speakJapanese('たろうちゃんは なんさいですか。はっさいです。')}
-                  className="min-h-[32px] text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 active:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 font-bold cursor-pointer touch-manipulation active:scale-95"
-                >
-                  🔊 Nghe
-                </button>
-              </div>
-              <p className="font-bold text-slate-900 dark:text-white pt-0.5 leading-relaxed">
-                たろうちゃんは <span className="text-indigo-600 dark:text-indigo-400">なんさい</span>ですか。
+        {/* 3 Mẫu câu hỏi & trả lời tuổi */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 dark:divide-slate-800 grid grid-cols-1 lg:grid-cols-3 text-xs sm:text-sm">
+          <div className="p-3.5 flex items-start justify-between gap-2">
+            <div className="space-y-1">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                Hỏi thông thường
+              </span>
+              <p className="font-bold text-slate-900 dark:text-white">
+                たろうちゃんは なんさいですか。
               </p>
-              <p className="font-semibold text-emerald-600 dark:text-emerald-400">
-                → ８さい（はっさい）です。
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Bé Taro mấy tuổi? → Cháu 8 tuổi.
+              <p className="text-xs text-slate-600 dark:text-slate-300">
+                → 8さい（はっさい）です。
               </p>
             </div>
+            <AudioIconButton
+              tts="たろうちゃんは なんさいですか。はっさいです。"
+              label="Nghe câu hỏi tuổi thông thường"
+            />
+          </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-4 space-y-1.5">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/70 text-purple-600 dark:text-purple-300">
-                  Hỏi lịch sự / kính trọng
-                </span>
-                <button
-                  type="button"
-                  onClick={() => speakJapanese('ミラーさんは おいくつですか。にじゅうはっさいです。')}
-                  className="min-h-[32px] text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 active:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 font-bold cursor-pointer touch-manipulation active:scale-95"
-                >
-                  🔊 Nghe
-                </button>
-              </div>
-              <p className="font-bold text-slate-900 dark:text-white pt-0.5 leading-relaxed">
-                ミラーさんは <span className="text-purple-600 dark:text-purple-400">おいくつ</span>ですか。
+          <div className="p-3.5 flex items-start justify-between gap-2">
+            <div className="space-y-1">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                Hỏi lịch sự
+              </span>
+              <p className="font-bold text-slate-900 dark:text-white">
+                ミラーさんは おいくつですか。
               </p>
-              <p className="font-semibold text-emerald-600 dark:text-emerald-400">
-                → ２８さい（にじゅうはっさい）です。
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Anh Miller bao nhiêu tuổi ạ? → Tôi 28 tuổi.
+              <p className="text-xs text-slate-600 dark:text-slate-300">
+                → 28さい（にじゅうはっさい）です。
               </p>
             </div>
+            <AudioIconButton
+              tts="ミラーさんは おいくつですか。にじゅうはっさいです。"
+              label="Nghe câu hỏi tuổi lịch sự"
+            />
+          </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-rose-200/80 dark:border-rose-900/50 p-3.5 sm:p-4 space-y-1.5">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-rose-50 dark:bg-rose-950/70 text-rose-600 dark:text-rose-300">
-                  Trả lời mốc 20 tuổi
-                </span>
-                <button
-                  type="button"
-                  onClick={() => speakJapanese('わたしは はたちです。')}
-                  className="min-h-[32px] text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 active:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 font-bold cursor-pointer touch-manipulation active:scale-95"
-                >
-                  🔊 Nghe
-                </button>
-              </div>
-              <p className="font-bold text-slate-900 dark:text-white pt-0.5 leading-relaxed">
-                わたしは <span className="text-rose-600 dark:text-rose-400">はたち</span>です。
+          <div className="p-3.5 flex items-start justify-between gap-2">
+            <div className="space-y-1">
+              <span className="text-xs font-medium text-rose-700 dark:text-rose-300">
+                Mốc 20 tuổi
+              </span>
+              <p className="font-bold text-slate-900 dark:text-white">
+                わたしは はたちです。
               </p>
-              <p className="text-xs text-rose-600 dark:text-rose-400 font-semibold">
-                ✕ Sai: はたちさいです / にじゅっさいです
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Tôi 20 tuổi (từ はたち đã bao hàm nghĩa &ldquo;20 tuổi&rdquo;).
+              <p className="text-xs text-rose-600 dark:text-rose-400">
+                Sai: はたちさい / にじゅっさい
               </p>
             </div>
+            <AudioIconButton tts="わたしは はたちです。" label="Nghe câu 20 tuổi" />
           </div>
         </div>
-      </section>
+      </SheetSection>
 
-      {/* ===================================================================== */}
-      {/* PHẦN 3: PHÒNG LUYỆN PHẢN XẠ CHỐNG BẪY (10S GIẢM DẦN)                 */}
-      {/* ===================================================================== */}
+      {/* 3. PHÒNG LUYỆN PHẢN XẠ */}
       <div ref={practiceRef} className="scroll-mt-4">
-        <Lesson1PracticeArena
-          topic={practiceTopic}
-          onTopicChange={setPracticeTopic}
-        />
+        <Lesson1PracticeArena topic={practiceTopic} onTopicChange={setPracticeTopic} />
       </div>
     </div>
   );
